@@ -1,10 +1,43 @@
 # E01-WIN-BOUNDARY: selected Core boundary proof packet
 
-Date: 2026-10-16. Packet revision: **2; E01 execution incomplete and unaccepted**.
+Date: 2026-10-16. Packet revision: **3; E01-SLOW120 authorized, execution pending**.
 This packet refines Section 0 RQ03/RQ06/RQ08/RQ15/RQ17/RQ20/RQ23 of the
 [canonical plan](../unreal-migration-plan.md). It credits completed BOOT01 and
 defines the next bounded Windows proof. It does not claim full E01, M01,
 G-RESEARCH, G-IMPLEMENT, rendering, packaging or cross-platform acceptance.
+
+## Revision 3: separately labelled 120-second diagnostic
+
+**OWN14, 2026-10-16:** the owner instructed, “Please go ahead with the increased
+120 diagnostic,” after the coordinator explained the late Core response and
+unknown client-visible outcome. This authorizes a fresh **E01-SLOW120** run of
+this same public-protocol recipe, with a **120-second total HTTP request budget**
+and socket waits capped by its remaining time. Keep the three-second connect cap,
+30-second managed-host readiness budget, 30-minute process limits, request/response
+size caps, submission limits, credential isolation and owned cleanup unchanged.
+No Core edits, new host, private rules path, uncertain-session reuse or automatic
+new-ID retry is authorized. Freeze and independently review the affected source
+before execution; use a new RunId and verified reuse of the existing runtime.
+
+Revision 2 SHA256 was
+`DA568F9BFAE7666C1CECB549B2A05B7930F5341541E25FDB96A6F08CF27B7C1F`.
+Run `20261016T231112Z-f8ef82ca` remains **FAIL**, with its missing command receipt
+**UNKNOWN**. Its [result JSON](../evidence/2026-10-16-e01-boundary-result.json) and
+[NOT_ACCEPTED audit](2026-10-16-e01-boundary-acceptance-audit.md) are immutable
+evidence for that earlier candidate. A slow-host success must never be reported
+as satisfying the 30-second budget or resolving Core #590's latency concerns.
+
+Label the new Python reports and transport measurements **E01-SLOW120**. Record
+new outcomes separately in the execution journal, with any final machine-readable
+summary at `docs/plans/evidence/2026-10-16-e01-slow120-result.json` and a renewed
+independent audit at
+`docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md`. These two added
+documentation outputs extend the bounded file contract below; they do not permit
+rewriting old failed results. A successful Capture still needs independent
+viewer/privacy approval of the concrete non-admin original-byte wire fixtures
+before promotion and Native execution. Native/Audit retain their positive-count,
+frozen-source, actual-cache-path and settings-preservation requirements. Render,
+UE HTTP, packaging, Linux, RISK19 and robust live Windows exclusivity remain open.
 
 ## Revision 2 execution amendments
 
@@ -19,8 +52,8 @@ the current execution result; the journal governs actual results.
 Run `20261016T230019Z-9a9e3232` passed 34 Python unit tests but its movement group
 timed out at the 10-second socket-read limit. The development host later logged
 HTTP 200 and a disconnected-client write error; action completion was not proved
-by that failed request. The next fresh run raises the read cap to **30 seconds**,
-still bounded by the unchanged **30-second total request deadline** and 3-second
+by that failed request. Revision 2 raised the read cap to **30 seconds**,
+bounded by its **30-second total request deadline** and 3-second
 connect cap. It does not retry the uncertain action in the old session, change
 Core or relax size/submission limits. Review the changed source before execution.
 
@@ -252,8 +285,8 @@ cache or global preference edit is needed for this logical JSON test lane.
 Every install/build/test/owned-host process has a **30-minute maximum** measured
 by the coordinator. Use redirected live logs and periodic progress; do not block
 communication on one long uninterruptible wait. HTTP defaults for this proof:
-3-second connect, at most 30-second socket read capped by remaining time in the
-30-second total request deadline,
+3-second connect, at most 120-second socket read capped by remaining time in the
+120-second total request deadline for the separately labelled E01-SLOW120 diagnostic,
 16 MiB request and 64 MiB response ceilings, one authoritative command in flight,
 at most 256 setup/action submissions per scenario and eight event pages of at
 most 100 visible events each. Record actual largest bodies and latency; exceeding
