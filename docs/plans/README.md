@@ -22,3 +22,6 @@ the [acceptance audit](research/2026-10-16-e01-boundary-acceptance-audit.md) kee
 E01 unaccepted after the 30-second command timeout tracked in Core #590. Native,
 Audit and fixture promotion remain gated. The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md)
 is prepared conditionally and has not executed.
+The [E01 continuation PR](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2)
+is a draft with the failed result explicit; GitHub reported no checks, which is
+not a CI pass. The plan/BOOT01 PR remains merged.
