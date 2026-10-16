@@ -1,0 +1,30 @@
+# Unreal-generated output (authored Source, Config, Content and Plugins are tracked).
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+**/Binaries/
+**/Intermediate/
+**/Saved/
+**/DerivedDataCache/
+
+# Generated IDE files. Regenerate through the reviewed bootstrap workflow.
+.vs/
+.vscode/
+.ignore
+.vsconfig
+*.sln
+*.slnx
+*.suo
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.code-workspace
+*.VC.db
+*.VC.opendb
+*.opensdf
+*.sdf
+*.opendb
+
+# Isolated experiments, caches, build evidence and external runtime staging.
+.local/

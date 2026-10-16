@@ -1,0 +1,378 @@
+{
+  "Packet": "BOOT01",
+  "Status": "Passed",
+  "CapturedUtc": "2026-10-16T20:58:45.6414127Z",
+  "ProbeManifest": {
+    "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/manifest.json",
+    "SHA256": "E2DC6E856D493DE871448F8D5FA0AAC7BD21CF1B46AE1012B1CF90FDECE06C71"
+  },
+  "FinalManifest": {
+    "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/manifest.json",
+    "SHA256": "0D77CD84168621D6B88BA31CF2B863256431227E9FA30E202276B75ADEAC7B6A"
+  },
+  "SourceFiles": [
+    {
+      "Path": ".gitignore",
+      "SHA256": "A7427981837933C87DCFF2CD4E8B8DD9719509938544ED0BFAF3F83275D1D22E"
+    },
+    {
+      "Path": "Config/DefaultEditorSettings.ini",
+      "SHA256": "C389D3D384DC7E803E2863A46289F4A356506B2736FF36DE33B43E99766EAADD"
+    },
+    {
+      "Path": "Config/DefaultEngine.ini",
+      "SHA256": "F014E7439FC1CAF9156B4A33CAAEACD0B62CC5990A5A1B37671DB8C28A6100D0"
+    },
+    {
+      "Path": "Config/DefaultGame.ini",
+      "SHA256": "E56A0B154CD9B72086FBB52868CCFE7F769B8E18F3AA3302E3EF3A44A3A85313"
+    },
+    {
+      "Path": "scripts/New-UnrealCppProject.ps1",
+      "SHA256": "56344BD60720E8DBC3997D2F55249F76F4D2C11B2A0E2D471BD4C2E7B27C0B8E"
+    },
+    {
+      "Path": "Source/WarhammerClient.Target.cs",
+      "SHA256": "513F3AB5581EAE5C36BB7B9902D5FD27196A2F675B30BE60BD660AF4B44D253F"
+    },
+    {
+      "Path": "Source/WarhammerClient/Private/WarhammerClient.cpp",
+      "SHA256": "91C540E52EB768571B4B535C0D1F8C8ABC4A50EC852528159309FA96ABE1311D"
+    },
+    {
+      "Path": "Source/WarhammerClient/Private/WarhammerClientGameMode.cpp",
+      "SHA256": "4A722EB3137CDBC0018C760832278FC73C388E60870538A2310B840CFE3B3D8A"
+    },
+    {
+      "Path": "Source/WarhammerClient/Public/WarhammerClientGameMode.h",
+      "SHA256": "F0196DEBE41991E228F7770C52DB0727B0A2024C05590A5A4E5F918890BCCD03"
+    },
+    {
+      "Path": "Source/WarhammerClient/WarhammerClient.Build.cs",
+      "SHA256": "915975A4A1C18F338EA24F92EFBC53B47BEB6A085118C6470296EFC7A2E4A40D"
+    },
+    {
+      "Path": "Source/WarhammerClientEditor.Target.cs",
+      "SHA256": "B126CB1FA0824C02DA64C2BEC0048671A57D2CFD23B633BA8089BD455CC31DAD"
+    },
+    {
+      "Path": "WarhammerClient.uproject",
+      "SHA256": "FD2F9FDB7DC3058BE030621E107C85B984897AA872386A4306D9A1808D151A8E"
+    }
+  ],
+  "Toolchain": {
+    "Identity": {
+      "EngineRoot": "C:\\Program Files\\Epic Games\\UE_5.8",
+      "EngineFiles": [
+        {
+          "RelativePath": "Engine\\Build\\Build.version",
+          "Hash": "EAB58750E84719489F3EE0D42D05A533CEB357EB3EE511777E9408D27A85F43C"
+        },
+        {
+          "RelativePath": "Engine\\Config\\Windows\\Windows_SDK.json",
+          "Hash": "CB8A438DF72F7068256547A9A225908DEEDFBF3226D893FDDD1526AE686D74D3"
+        },
+        {
+          "RelativePath": "Engine\\Build\\BatchFiles\\Build.bat",
+          "Hash": "4F71B08EBC3FE2BA7918A5BE7A0B3F22CF7CE5530049873E9ECA8DF946BC1CB3"
+        },
+        {
+          "RelativePath": "Engine\\Build\\BatchFiles\\GetDotnetPath.bat",
+          "Hash": "6383A2535C0E551817289231E1755BDE58456785FE3B3DBC1D7BAA9134EB12CB"
+        },
+        {
+          "RelativePath": "Engine\\Binaries\\DotNET\\UnrealBuildTool\\UnrealBuildTool.dll",
+          "Hash": "3DF30F375AB113DC8048E55EBBE80776869B3E7F2B3B5AF39F686628F8D81927"
+        }
+      ],
+      "CompilerPath": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe",
+      "CompilerVersion": "14.44.35229.0",
+      "CompilerHash": "FE251EF50A1545B1B0835EE17B1E785459712B38D79E45B5C1D3D28970A36619",
+      "LinkerVersion": "14.44.35229.0",
+      "VisualStudioVersion": "17.14.37710.0",
+      "AvailableSDKs": [
+        "10.0.22621.0",
+        "10.0.26100.0"
+      ],
+      "DotNetSDK": "10.0.203",
+      "CodeCLI": "C:\\Users\\Rabid\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code.cmd"
+    },
+    "Fingerprint": "7DA042FBC84EAD67F55F83CA85F5B8DD82D5E81C9D13C717C5C023A5652D2F85",
+    "AvailableFreeBytes": 796324864000,
+    "Extensions": [
+      "ms-vscode.cpptools-1.33.8-win32-x64",
+      "ms-vscode.cpptools-1.34.4-win32-x64",
+      "ms-vscode.cpptools-extension-pack-1.5.1",
+      "ms-vscode.cpptools-themes-2.0.0"
+    ],
+    "DotNetRoot": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Binaries\\ThirdParty\\DotNet\\10.0\\win-x64",
+    "OriginalUseSystemDotNet": null,
+    "OS": "Microsoft Windows 10.0.26200"
+  },
+  "Steps": [
+    {
+      "Label": "probe-editor-build",
+      "Action": "Build",
+      "ExitCode": 0,
+      "UbtLog": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205636Z-44ae759d\\logs\\probe-editor-build.ubt.log",
+      "Stdout": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205636Z-44ae759d\\logs\\probe-editor-build.stdout.log",
+      "Stderr": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205636Z-44ae759d\\logs\\probe-editor-build.stderr.log",
+      "ToolchainLogLines": [
+        "Found Windows 10 SDK root at C:\\Program Files (x86)\\Windows Kits\\10 (1)",
+        "Found Windows 10 SDK root at C:\\Program Files (x86)\\Windows Kits\\10 (2)",
+        "Found Windows 10 SDK version 10.0.22621.0 at C:\\Program Files (x86)\\Windows Kits\\10",
+        "Found Windows 10 SDK version 10.0.26100.0 at C:\\Program Files (x86)\\Windows Kits\\10",
+        "Using Visual Studio 14.44.35229 toolchain (C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207) and Windows 10.0.22621.0 SDK (C:\\Program Files (x86)\\Windows Kits\\10)."
+      ]
+    },
+    {
+      "Label": "probe-ide-generation",
+      "Action": "Generate",
+      "ExitCode": 0,
+      "UbtLog": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205636Z-44ae759d\\logs\\probe-ide-generation.ubt.log",
+      "Stdout": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205636Z-44ae759d\\logs\\probe-ide-generation.stdout.log",
+      "Stderr": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205636Z-44ae759d\\logs\\probe-ide-generation.stderr.log",
+      "ToolchainLogLines": [
+        "Found Windows 10 SDK root at C:\\Program Files (x86)\\Windows Kits\\10 (1)",
+        "Found Windows 10 SDK root at C:\\Program Files (x86)\\Windows Kits\\10 (2)",
+        "Found Windows 10 SDK version 10.0.22621.0 at C:\\Program Files (x86)\\Windows Kits\\10",
+        "Found Windows 10 SDK version 10.0.26100.0 at C:\\Program Files (x86)\\Windows Kits\\10"
+      ]
+    },
+    {
+      "Label": "final-editor-build",
+      "Action": "Build",
+      "ExitCode": 0,
+      "UbtLog": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205735Z-0b942351\\logs\\final-editor-build.ubt.log",
+      "Stdout": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205735Z-0b942351\\logs\\final-editor-build.stdout.log",
+      "Stderr": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205735Z-0b942351\\logs\\final-editor-build.stderr.log",
+      "ToolchainLogLines": [
+        "Found Windows 10 SDK root at C:\\Program Files (x86)\\Windows Kits\\10 (1)",
+        "Found Windows 10 SDK root at C:\\Program Files (x86)\\Windows Kits\\10 (2)",
+        "Found Windows 10 SDK version 10.0.22621.0 at C:\\Program Files (x86)\\Windows Kits\\10",
+        "Found Windows 10 SDK version 10.0.26100.0 at C:\\Program Files (x86)\\Windows Kits\\10",
+        "Using Visual Studio 14.44.35229 toolchain (C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207) and Windows 10.0.22621.0 SDK (C:\\Program Files (x86)\\Windows Kits\\10)."
+      ]
+    },
+    {
+      "Label": "final-ide-generation",
+      "Action": "Generate",
+      "ExitCode": 0,
+      "UbtLog": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205735Z-0b942351\\logs\\final-ide-generation.ubt.log",
+      "Stdout": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205735Z-0b942351\\logs\\final-ide-generation.stdout.log",
+      "Stderr": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\BOOT01\\20261016T205735Z-0b942351\\logs\\final-ide-generation.stderr.log",
+      "ToolchainLogLines": [
+        "Found Windows 10 SDK root at C:\\Program Files (x86)\\Windows Kits\\10 (1)",
+        "Found Windows 10 SDK root at C:\\Program Files (x86)\\Windows Kits\\10 (2)",
+        "Found Windows 10 SDK version 10.0.22621.0 at C:\\Program Files (x86)\\Windows Kits\\10",
+        "Found Windows 10 SDK version 10.0.26100.0 at C:\\Program Files (x86)\\Windows Kits\\10"
+      ]
+    }
+  ],
+  "FinalOutputs": {
+    "Root": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal",
+    "RuntimeModuleDll": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Binaries\\Win64\\UnrealEditor-WarhammerClient.dll",
+    "UhtHeaders": 1,
+    "Workspace": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\WarhammerClient.code-workspace",
+    "BuildTasks": 24,
+    "DebugConfigurations": 9,
+    "IntelliSenseConfigurations": 2,
+    "Solution": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\WarhammerClient.sln",
+    "VisualStudioProjects": 2,
+    "FileHashes": [
+      {
+        "Path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Binaries\\Win64\\UnrealEditor-WarhammerClient.dll",
+        "Hash": "B1FF8D771A6AB699B1CA4CC6B3BD9E0E8911273FD5E4F4509B1601F249595F58"
+      },
+      {
+        "Path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\WarhammerClient.code-workspace",
+        "Hash": "8792D9C6948B2531E1912F69643690810FCF19B8AB660180E3E096A8D22240EF"
+      },
+      {
+        "Path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\WarhammerClient.sln",
+        "Hash": "AA8842370F5D0830B32DCC1F0F4304B33ABA91224147612FC225630DB68584B2"
+      },
+      {
+        "Path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.vscode\\c_cpp_properties.json",
+        "Hash": "D8A9220CB48DA1B14C036C6A9F65A11988B3E3745A551BA84F638BCA0015883C"
+      }
+    ]
+  },
+  "StaleProbePathCheck": {
+    "FilesChecked": 8,
+    "Matches": 0
+  },
+  "Siblings": [
+    {
+      "Repository": "Warhammer_40k_AI",
+      "Commit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+      "Clean": true
+    },
+    {
+      "Repository": "Warhammer_40k_UI_arcade",
+      "Commit": "5088c1c49dcaff29eb59fb64b3063d30214dde73",
+      "Clean": true
+    }
+  ],
+  "GlobalConfigBefore": [
+    {
+      "Path": "C:\\Users\\Rabid\\AppData\\Roaming\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+      "Exists": true,
+      "Hash": "1E7CD8512DEDF37D7B103C5592F5600433E7FE97DA23434E69990F8A3370508A"
+    },
+    {
+      "Path": "C:\\Users\\Rabid\\AppData\\Local\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+      "Exists": false,
+      "Hash": null
+    },
+    {
+      "Path": "C:\\Users\\Rabid\\OneDrive\\Documents\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+      "Exists": false,
+      "Hash": null
+    }
+  ],
+  "GlobalConfigAfter": [
+    {
+      "Path": "C:\\Users\\Rabid\\AppData\\Roaming\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+      "Exists": true,
+      "Hash": "1E7CD8512DEDF37D7B103C5592F5600433E7FE97DA23434E69990F8A3370508A"
+    },
+    {
+      "Path": "C:\\Users\\Rabid\\AppData\\Local\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+      "Exists": false,
+      "Hash": null
+    },
+    {
+      "Path": "C:\\Users\\Rabid\\OneDrive\\Documents\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+      "Exists": false,
+      "Hash": null
+    }
+  ],
+  "ObservedUserCacheFiles": [
+    {
+      "Path": "C:/Users/Rabid/AppData/Roaming/Unreal Engine/UnrealBuildTool/BuildConfiguration.xml",
+      "Exists": true,
+      "SHA256": "1E7CD8512DEDF37D7B103C5592F5600433E7FE97DA23434E69990F8A3370508A"
+    },
+    {
+      "Path": "C:/Users/Rabid/AppData/Local/UnrealEngine/Intermediate/Build/UnrealBuildTool.Env.BuildConfiguration.xml",
+      "Exists": true,
+      "SHA256": "D3BA6666338EBC598F9B191B867ED6F8DC6301947BD79FA4B5A25DDEDEDD59C8"
+    },
+    {
+      "Path": "C:/Users/Rabid/AppData/Local/UnrealBuildTool/Trace.uba",
+      "Exists": true,
+      "SHA256": "00F9AE6979530CC0865293E2CDCDF4AFCB4C7FC39EBE1A7FF9B984407881E5B7"
+    }
+  ],
+  "Logs": [
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/logs/probe-editor-build.stderr.log",
+      "Bytes": 0,
+      "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/logs/probe-editor-build.stdout.log",
+      "Bytes": 2532,
+      "SHA256": "35F7771A60F845379BD188393C05E3F930C93A0F0C87327D2C11F74F82D5F318"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/logs/probe-editor-build.ubt.json",
+      "Bytes": 35814,
+      "SHA256": "3837DF3884B723E381E542E1E1167D1FEBA545407FDBAFD857A498F0F6B81A31"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/logs/probe-editor-build.ubt.log",
+      "Bytes": 11117,
+      "SHA256": "0472177B27C15FBA6BE6B59C387B1BFE13FA6DC8B0832E8972EF62A914E53699"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/logs/probe-ide-generation.stderr.log",
+      "Bytes": 0,
+      "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/logs/probe-ide-generation.stdout.log",
+      "Bytes": 3299,
+      "SHA256": "28DD58FE710B5A8F5FAB54FB98ACD5DD705AFFCE826DEC7BFE79E20F1AE7B6CB"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/logs/probe-ide-generation.ubt.json",
+      "Bytes": 1090464,
+      "SHA256": "33D2D0B3C0B8688A437A5955889F5CE6944830007FD81E8F61281626E31D7F3A"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205636Z-44ae759d/logs/probe-ide-generation.ubt.log",
+      "Bytes": 313967,
+      "SHA256": "A959D7A4E0A59C658EFB43D1B765D7DC438EDA94AAF58F07A03817A05470B834"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/logs/final-editor-build.stderr.log",
+      "Bytes": 0,
+      "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/logs/final-editor-build.stdout.log",
+      "Bytes": 2578,
+      "SHA256": "5970DB9A473AB0F427FEA7F8002115A82EFC9FA7E03C7DF1FC467C5D4C0B8565"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/logs/final-editor-build.ubt.json",
+      "Bytes": 35807,
+      "SHA256": "AB2310C61FDEAEDF79D1D67D9438F5CF3E592619C8699713857474DE17A39730"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/logs/final-editor-build.ubt.log",
+      "Bytes": 10708,
+      "SHA256": "E11E864EA1C305D4302475BD495B804D2418AD5667089C68B6ACE710EFEA5A06"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/logs/final-ide-generation.stderr.log",
+      "Bytes": 0,
+      "SHA256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/logs/final-ide-generation.stdout.log",
+      "Bytes": 2901,
+      "SHA256": "C2FFC5FF50D1A1AE491256768C6807EF549BE45053601C814CAC80F6ABE8E2CD"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/logs/final-ide-generation.ubt.json",
+      "Bytes": 1091293,
+      "SHA256": "774F2CF7FBFC0F333A16C110867CFE510C0C5C45DEEA6AE507C221866DC2F2D8"
+    },
+    {
+      "Path": ".local/experiments/BOOT01/20261016T205735Z-0b942351/logs/final-ide-generation.ubt.log",
+      "Bytes": 313262,
+      "SHA256": "0874E9FA8D1117105F7E3209A61D4DA3DEA8BE7000E1AE6F206F59840CB7CBE6"
+    }
+  ],
+  "Limits": [
+    "No GUI launched",
+    "No install or sibling source edit",
+    "Linux/render/package/Core integration/debugger/active editor accessor NOT RUN",
+    "Known-cache and critical-file checks are not exhaustive filesystem tracing",
+    "First successful older-script probe used normal ProgramData UBA storage; preserved, not cleaned"
+  ],
+  "ExecutedScriptSHA256": "E9BCE00171326E29BDA4CB1D3725BFB78044EE073D830A21EE8A334FCE8CB260",
+  "PostRunScriptDelta": {
+    "SHA256": "56344BD60720E8DBC3997D2F55249F76F4D2C11B2A0E2D471BD4C2E7B27C0B8E",
+    "Change": "Only added Automation_WarhammerClient.sln and .slnx collision guard names",
+    "Review": "Independent read-only delta review PASS; in-memory reversal reproduces executed hash",
+    "BuildRepeated": false,
+    "Reason": "Preflight-only name list; emitted source/build/generator behavior unchanged"
+  },
+  "AdditionalAutomationOutputs": [
+    {
+      "Path": "Automation_WarhammerClient.sln",
+      "SHA256": "7D96B082A9D09B43E2B48A1A6864AE5643CC2E68B929C57A59E4BDAAC2CCF673",
+      "Readiness": "VS2026 C# automation solution emitted; opening/building NOT RUN"
+    },
+    {
+      "Path": "Automation_WarhammerClient.slnx",
+      "SHA256": "C874EB7DAB1506C2535282691479990EC78BF411B977888B7E3EC0CD2FC71543",
+      "Readiness": "VS2026 C# automation solution emitted; opening/building NOT RUN"
+    }
+  ],
+  "IDELimitation": "VS2022 omits .NET10 C# projects; C++ solution generation passed; separate automation solution emitted for VS2026, not opened/built"
+}
