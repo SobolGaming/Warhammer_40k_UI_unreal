@@ -13,10 +13,13 @@ Use README commands to rebuild/regenerate this existing project; the creation
 wrapper intentionally refuses it. Do not repeat bootstrap or broaden its scope.
 Normal per-user build caches and creation of the absent empty default UBT XML are
 covered; preserve existing settings. Linux execution stays UNTESTED. Dependency/tool
-installation, gameplay/transport features, new Python hosts, binary art and broader
-implementation remain outside this approval. The owner separately authorized one
-Core issue about HTTP diagnostic fidelity, using `gh`; other publication is not
-authorized. Record subsequent authority in the plan without asking again.
+installation, gameplay/transport features, new Python hosts and binary art were
+outside BOOT01. The owner subsequently authorized committing, pushing, opening and
+merging its PR, then continuing the migration plan (OWN13, 2026-10-16). Continue
+through the next bounded plan gate; record its files, runtime/output ownership and
+pass/fail before execution. Do not infer Core edits, new host implementation or
+broader feature acceptance from that continuation. The Core diagnostic issue is
+already filed. Record subsequent authority without asking again.
 
 Repository names are explicit:
 
@@ -129,9 +132,9 @@ nor independence. Resolve actionable findings before completion.
 Preserve unrelated work, assign parallel agents distinct files, and never share a
 mutable game session or binary asset between writers. Research may continue while
 owner questions are pending; stop only dependent work at the applicable gate.
-Do not install tools or move shared checkouts. Publication remains limited to the
-explicitly authorized Core diagnostic issue until the owner authorizes more.
-After publication is authorized, use a scoped branch and `gh` for GitHub actions;
+Do not move shared checkouts or silently install/upgrade tools. OWN13 authorizes
+publication and merge of the imported plan/BOOT01 PR. Use a scoped branch and `gh`
+for GitHub actions;
 read `../github-full-access` into `GH_TOKEN` without displaying it. Keep the separate
 `../github_token` credential unchanged. Never print, log, commit or place tokens in
 arguments, documentation, review packets or URLs. Wait for required PR checks and

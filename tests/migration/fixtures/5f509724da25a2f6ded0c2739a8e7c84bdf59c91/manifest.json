@@ -1,0 +1,770 @@
+{
+  "SchemaVersion": 1,
+  "Purpose": "E01 source inventory; no runtime sessions, schema validation or gameplay cases executed",
+  "CoreRepository": "SobolGaming/Warhammer_40k_AI",
+  "CoreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+  "ContractVersion": "44.3.33",
+  "RuntimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a",
+  "RuntimeResourceCount": 3116,
+  "SourceTreeClean": true,
+  "BuildIdentityCheck": {
+    "Status": "PASS",
+    "ExitCode": 0,
+    "Interpreter": "C:/Users/Rabid/AppData/Roaming/uv/python/cpython-3.14.5-windows-x86_64-none/python.exe",
+    "Arguments": [
+      "-I",
+      "-B",
+      "C:/SWDev/warhammer/Warhammer_40k_AI/scripts/build_engine_build_identity.py",
+      "--check"
+    ],
+    "Output": "Engine build identity is current: warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a",
+    "Warning": "Interpreter printed Failed to find real location; check executed and exited zero",
+    "Meaning": "Source runtime inventory matches committed build manifest; no installed package or native runtime proof"
+  },
+  "CanonicalInteractionCaseCount": 98,
+  "CanonicalInteractionCaseIds": [
+    "finite:discard_tactical_secondary_mission",
+    "finite:draw_tactical_secondary_missions",
+    "finite:replace_tactical_secondary_mission",
+    "finite:resolve_fight_interrupt",
+    "finite:resolve_reaction_window",
+    "finite:resolve_sequencing_order",
+    "finite:resolve_tactical_secondary_when_drawn",
+    "finite:score_tactical_secondary_mission",
+    "finite:select_allocation_order",
+    "finite:select_attack_weapon_group",
+    "finite:select_beacon_unit",
+    "finite:select_burden_of_trust_guard",
+    "finite:select_catalog_any_phase_once_per_battle_ability",
+    "finite:select_catalog_movement_end_target_effect",
+    "finite:select_catalog_movement_target_pair",
+    "finite:select_catalog_post_fight_hit_target_effect",
+    "finite:select_catalog_post_shoot_hit_target_effect",
+    "finite:select_catalog_post_shoot_hit_target_status",
+    "finite:select_catalog_setup_reactive_shoot_charge",
+    "finite:select_catalog_unit_move_completed_mortal_wounds_target",
+    "finite:select_charge_declaration_grant",
+    "finite:select_charge_targets",
+    "finite:select_charging_unit",
+    "finite:select_core_ability_instance",
+    "finite:select_cult_ambush_resurgence",
+    "finite:select_damage_allocation_model",
+    "finite:select_deployment_unit",
+    "finite:select_desperate_escape_model",
+    "finite:select_destruction_reaction",
+    "finite:select_dice_extremum",
+    "finite:select_dice_reroll",
+    "finite:select_dice_result_override",
+    "finite:select_embark_transport",
+    "finite:select_faction_rule_battle_round_option",
+    "finite:select_faction_rule_command_phase_start_option",
+    "finite:select_faction_rule_fight_phase_end_option",
+    "finite:select_faction_rule_fight_phase_start_option",
+    "finite:select_faction_rule_setup_option",
+    "finite:select_faction_rule_shooting_phase_start_option",
+    "finite:select_faction_rule_turn_end_option",
+    "finite:select_feel_no_pain",
+    "finite:select_fight_activation",
+    "finite:select_fight_activation_ability",
+    "finite:select_fight_unit_grant",
+    "finite:select_healing_model",
+    "finite:select_lethal_hit_wound",
+    "finite:select_melee_weapon",
+    "finite:select_modifier_ignores",
+    "finite:select_mortal_wound_model",
+    "finite:select_movement_action",
+    "finite:select_movement_action_grant",
+    "finite:select_movement_unit",
+    "finite:select_post_roll_attack_pool",
+    "finite:select_prebattle_action",
+    "finite:select_precision_allocation",
+    "finite:select_primary_mission_choice",
+    "finite:select_psychic_attack_modifier_ignores",
+    "finite:select_redeploy_unit",
+    "finite:select_reserve_declaration",
+    "finite:select_resolve_target_unit",
+    "finite:select_secondary_missions",
+    "finite:select_shooting_type",
+    "finite:select_shooting_unit",
+    "finite:select_shooting_unit_grant",
+    "finite:select_source_reposition",
+    "finite:select_stratagem_cost_modifier_option",
+    "finite:select_target_replacement",
+    "finite:select_tempting_target_objective",
+    "finite:select_tracked_target",
+    "finite:select_triggered_movement",
+    "finite:select_unit_split_membership",
+    "finite:start_mission_action",
+    "finite:use_stratagem",
+    "nested:select_weapon_ability_instance",
+    "parameterized:advance",
+    "parameterized:charge_move",
+    "parameterized:consolidate",
+    "parameterized:cult_ambush_marker_placement",
+    "parameterized:cult_ambush_no_marker",
+    "parameterized:cult_ambush_placement",
+    "parameterized:deep_strike_placement",
+    "parameterized:deployment_placement",
+    "parameterized:disembark_placement",
+    "parameterized:fall_back",
+    "parameterized:healing_revival_placement",
+    "parameterized:melee_declaration",
+    "parameterized:model_materialization_placement",
+    "parameterized:normal_move",
+    "parameterized:pile_in",
+    "parameterized:redeploy_placement",
+    "parameterized:reinforcement_placement",
+    "parameterized:scout_move",
+    "parameterized:scout_reserve_setup",
+    "parameterized:shooting_declaration",
+    "parameterized:stratagem_target_binding",
+    "parameterized:strategic_reserves_placement",
+    "parameterized:submit_return_on_death_placement",
+    "parameterized:surge_move"
+  ],
+  "SourceFiles": [
+    {
+      "Path": "contracts/examples/battlefield/geometry-conformance.json",
+      "SHA256": "74DE0022FF4A3BD6FCF1BCE6C8E74A207EAF785622CBC7D17F840EAFFD658CE5",
+      "GitBlob": "374f8e7bfd005cae039f34b715005d9fa1b8dc6b"
+    },
+    {
+      "Path": "contracts/examples/decisions/families/select_movement_action.json",
+      "SHA256": "B064C971E593E126D19F2E29887918A8434348E76494B101B9B7EC8BA9F7E204",
+      "GitBlob": "fbf11f2739cd408272da6a2b2e5fe4532a79cd4a"
+    },
+    {
+      "Path": "contracts/examples/decisions/families/select_movement_unit.json",
+      "SHA256": "8D8FF170020518EAE260806B8B08C9A71DA40E035F1780033B961A6F466B8A80",
+      "GitBlob": "76b95817ea7b8e81d0f9638af01bddd05275ffac"
+    },
+    {
+      "Path": "contracts/examples/decisions/families/select_secondary_missions.json",
+      "SHA256": "C8248E765C870E66C8B7A4D53831E2B8C33FAC69861668E867FF6DF4882C0172",
+      "GitBlob": "bd07c73cc7b42f8e63a4fada3a79ca7bdcd8da81"
+    },
+    {
+      "Path": "contracts/examples/decisions/families/submit_movement_proposal.json",
+      "SHA256": "3D59999D54DBBA2E660DA76329782F513872BE5703192FD72D4DFA71752CB62A",
+      "GitBlob": "2434147b31a3ab8fbffb733b37a84c96a9258362"
+    },
+    {
+      "Path": "contracts/examples/decisions/family-coverage.json",
+      "SHA256": "419BE9DBFE9035A6365F135BE88D34DD82771D0D7D96F3EE09C67A708CE41107",
+      "GitBlob": "ad7848163a0f7ea190c0e1f186629cd4c27783d9"
+    },
+    {
+      "Path": "contracts/examples/decisions/finite-submission.json",
+      "SHA256": "CB0128D11C813575420D702CA1FED019DDDCCCC4C973C0BC19A4881600DB8984",
+      "GitBlob": "828e52a6b00998de3a40998c4ac2c14407b19ba8"
+    },
+    {
+      "Path": "contracts/examples/decisions/interaction-conformance.json",
+      "SHA256": "F77C531FD8CF0BE39A088E8B83D0A7EAAE947820B112143D08F8B60778FD6B20",
+      "GitBlob": "7fe6a042493ce82422d3b69d4593fbd9b5f3e611"
+    },
+    {
+      "Path": "contracts/examples/decisions/opportunity_window.json",
+      "SHA256": "8F0D7C148CE866493B35CEDA8F5DACB48A634842A15A3E65D44E966E696EA545",
+      "GitBlob": "812b766269023831a46167731c21c5c8c61dd280"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/advance.json",
+      "SHA256": "80238FE75CED1CE1F48555492163422B67CD52B27BE71BB0D9B162A560ECE963",
+      "GitBlob": "c5433067a38e2b3467bc20e26d09c440a5535949"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/charge_move.json",
+      "SHA256": "5668C85A48E57CB11CA1BC1252053E0297E973D086F1B6E4466149425DD9E7D2",
+      "GitBlob": "685190171a78a9bc19bc722a378f2f8dc25cc098"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/consolidate.json",
+      "SHA256": "2CE90C80C54F2A9345DDEF3137872D8DB49C69465917992003A3D5ACB8FDA9E7",
+      "GitBlob": "ff5a66ac128bb87673c1f1ba0f24f3f70654c8ab"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/cult_ambush_marker_placement.json",
+      "SHA256": "B67037E6D00889B9B8BE6A0FB6F587DB18071F6526E316735665CCA43FD6D14E",
+      "GitBlob": "0433f91dc1778439db96957394d48db54d150ac1"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/cult_ambush_no_marker.json",
+      "SHA256": "320821AA6DFB095E62D8AF8CA9C0303715C25F03943808CF4495C147380FF2BB",
+      "GitBlob": "c96339dbbfa1788ca59876e1e4d3391ac9ade30c"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/cult_ambush_placement.json",
+      "SHA256": "78D783235AD50C3DEC076CA976768ADBA62E90ABB7D0CFB31714D98F6F2F26F8",
+      "GitBlob": "dfb3fec566e983dcf67e74ba2bd8768ef161d96a"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/deep_strike_placement.json",
+      "SHA256": "D9F3408569F32DA6E9702FC61B31016C21AF5ED9F0A5785EB9C382EBC4073435",
+      "GitBlob": "1ae29db32af7fe5fb05dd7895b336954cbb87029"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/deployment_placement.json",
+      "SHA256": "760BC8399218DE24ACD21E8516E7B5AF29D5505E2875D894D56A29B6FFAF2643",
+      "GitBlob": "91b576d3203b4a600b7d5b492045372f7a76f38a"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/disembark_placement.json",
+      "SHA256": "9DAE2EAA5462E130C3C7CBB4CE9248687DB3CC65689406586DA04AE8FA5BCD5F",
+      "GitBlob": "06c8af05e082b8b4741667d3a01cb67763a8165f"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/fall_back.json",
+      "SHA256": "5263DC16045838E8794BA53900DE5A699D13B0417D4A22A33E47259369F0E4FC",
+      "GitBlob": "f112e52fadb3ef07a3fcecab7e27de50e71dbbce"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/healing_revival_placement.json",
+      "SHA256": "9E9EFBF7B985BAE706138281102CE9ACBF8CA9221E7B45C4CF761112AEA891BD",
+      "GitBlob": "42189ed1d2a20c968c67c9b2a9937b6a47c1f6b6"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/melee_declaration.json",
+      "SHA256": "CBB2EBD540467453B925972D34966C3612CC813124495065B56FB25427589672",
+      "GitBlob": "9449455288d9b2ec7d8fc4024a4973f0d44a8ce0"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/model_materialization_placement.json",
+      "SHA256": "A315E7724F884A7E2424C9F901FA2B8504C012A9808BCFA031E7129C7AB01167",
+      "GitBlob": "e4636418bde2df7ee349b77add4e39a5efccf6e1"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/normal_move.json",
+      "SHA256": "82E67A3C3866FDFBB1870F7DDA2F0E667FD91EE6DB98361076D44F8E1B2FB347",
+      "GitBlob": "1e91a1e02bd07d7b99f740d25eee6c48c1834605"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/pile_in.json",
+      "SHA256": "9B717CFF6E70F14FB98D118D0978CB78DA507BEB4FA2CFEAB4A8DA249C454B8E",
+      "GitBlob": "74e71fa9caa6d7ed8f40439653dc12597fea8bc2"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/redeploy_placement.json",
+      "SHA256": "4398B4A914ABDB15C910512C76DBB55A7288DF7F5426D59A646F16D14BAB9C8C",
+      "GitBlob": "6f2ee263ec76d4eda7c5374ec64d54835f2a62bb"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/reinforcement_placement.json",
+      "SHA256": "4A9F1D096DF24B40A4F084CFCC0412851466C419F0ACAFD7D4F36234AAD64D51",
+      "GitBlob": "63db40c9c119920d10b6ae046797e09480925a5b"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/scout_move.json",
+      "SHA256": "EFC423173F1823845240167BDB8CBB1461D315D4DB292F9122F4CB97EBE90A93",
+      "GitBlob": "a151671fef394da9c19bdd2a7d01068ae1e8b69b"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/scout_reserve_setup.json",
+      "SHA256": "A9C2B4EE83BFC8D164BB96058E9F48F0CF11839F2C7548353C15EB81F7030CD4",
+      "GitBlob": "3c58915ff6037de46627d3cb236b08b5639e5f3d"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/shooting_declaration.json",
+      "SHA256": "E2235419C9B273F4C325DDB8A23E1A2EE5D7201D56613F873BF7D16D244013B4",
+      "GitBlob": "0ac9ca127784583e7819018da3b20539ce93e90c"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/stratagem_target_binding.json",
+      "SHA256": "CC2C894DBDB5BBD480116EF0546463E92728B3AD01F6462BEF05C8493960DC02",
+      "GitBlob": "da65c2b3dfa4d2fb4fef6ee3a3149f0a79b5a55f"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/strategic_reserves_placement.json",
+      "SHA256": "CE96E10D2DD945E5626BCBEC99C006FB56E8C727F42CAAC0A55E552C0114BF43",
+      "GitBlob": "1f1fb926f9e751a4de1bd65a301c1109e0e68625"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/submit_return_on_death_placement.json",
+      "SHA256": "D120F824DE221D7FF11B84215D30FE1A4E83F999211EAFE63D73B47DD2007831",
+      "GitBlob": "9662296665b6a9075d8779f3992b2f6fcddde12f"
+    },
+    {
+      "Path": "contracts/examples/decisions/parameterized/surge_move.json",
+      "SHA256": "0E7E38304754335161E797392EE0CBE7D005A24C30BCF6C93CE802AAB6241941",
+      "GitBlob": "abd5b16adc707cbbc2c5fb6ca3eed48540826905"
+    },
+    {
+      "Path": "contracts/examples/decisions/pending_movement_request.json",
+      "SHA256": "7E6EE58541DF553934ED2CBC4BC8D67FDA1E5F79323D4DBE4708EAD608BD613F",
+      "GitBlob": "356d499fe1f24f43818f40ad6e887aac2d3ff05d"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/advance.json",
+      "SHA256": "1DCDD8262C816228733AAD4BC8901776ED7FBEF39B4FED5F7F99941240CD9C12",
+      "GitBlob": "c48e01e9bf42bcb1992baeef7a8c88a8a52493c4"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/charge_move.json",
+      "SHA256": "F033489D52ACBAD87671BE953FD768B45451B7182FFC7B199575AF922ED17CB0",
+      "GitBlob": "969e43e61a7b1f3993e7d2d710706f5145a612ea"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/consolidate.json",
+      "SHA256": "CD000B45BD0A4F142C56F27D338B398F5EF8F880B73F2E99A515414A967A1576",
+      "GitBlob": "1f3c0cb67caefa5e31ff172579006dc20895483d"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/cult_ambush_marker_placement.json",
+      "SHA256": "8EFD7B10CF372C6930B31C80307818B518585DDA255D789D846A427AD645F4E3",
+      "GitBlob": "9f44d6a2375e2aeab3cd5568626b22ff14560da7"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/cult_ambush_no_marker.json",
+      "SHA256": "AF38447F2FA1BBD31EC9BD44567332DF5496E89558C4FD8895A19CC1EC220905",
+      "GitBlob": "499ffa13115bc03ed127e9fbc310e5032577f505"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/cult_ambush_placement.json",
+      "SHA256": "A565BFD613B633ACD005AEC14C146C7AEA18FA344A8E1A2AD798B54B98C55B7E",
+      "GitBlob": "29a911513c14920b0830a55194b1cc03631cc775"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/deep_strike_placement.json",
+      "SHA256": "7B35E0A040917DB5DF53CA7D40F6D56C3307AD3CA19444496B0E0CFFBFDBE95D",
+      "GitBlob": "0d584dbf82b81291d9f37e3dd699add733edd4e9"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/deployment_placement.json",
+      "SHA256": "28DCB42C87D471BC4161E4CC8A4AB843F098871DA91810003BCB39D2F7F8C08F",
+      "GitBlob": "ee17d32aaf10862af7c797f8c412327b8fdf70ad"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/disembark_placement.json",
+      "SHA256": "0B7B649BA6B28271B51292C9BE1DD2C9E534C672E07A744B2E05189DAF6439F4",
+      "GitBlob": "2ca9afcb07643d0f9e5c007ee69422719b263008"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/fall_back.json",
+      "SHA256": "62BCF27CE99BD5491356991FFACCABD8DDCE43EE993816BEBC78B9E8528CA74F",
+      "GitBlob": "45b9f586b9d3a05bfa0c230e81f666b3959239a9"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/healing_revival_placement.json",
+      "SHA256": "D4F9E146FA2E5ECBB0CA07D137F5C07EB0D28EB4D9EDC2A161820B17DDBEB314",
+      "GitBlob": "c6d83c70078c1c14a78cdeecc8e4a35b4081b58c"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/melee_declaration.json",
+      "SHA256": "99191AEF23D88815559FDA99905E6D67F28204DC84D8D15F1D9C7B11CE8822E8",
+      "GitBlob": "6ac4ae7c8220ee1d1ca43b07bb3c1ac78cbb6443"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/model_materialization_placement.json",
+      "SHA256": "E6E5288D8FF4D61949426FE6F73DD280A96AE005BA181FAD9467A9601C1F10C7",
+      "GitBlob": "0ff314a35bce3d9e6e4b1f8bc4beeb6acaa528a3"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/movement_path_witness.json",
+      "SHA256": "82037419FBCF0C07D76581628C52D76838A76DDD05084EDAB1785CF567A083E8",
+      "GitBlob": "4055dd2804026a5cdf5fc75a13d3e4f699f09568"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/pile_in.json",
+      "SHA256": "165353AE48EB4D85DC3D434C7BEDD5C62EFFE2E0D32D3C0D5E5061B3533C5EAB",
+      "GitBlob": "0df69ecff3786d35174788a04f0066528789fa7f"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/redeploy_placement.json",
+      "SHA256": "65EE0F6F384F5EF34620F528094EE64B03CB4F039556E7625BE04D98A8859228",
+      "GitBlob": "89a7f98879adafe7f59d5c95fe58ed941454f3a7"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/reinforcement_placement.json",
+      "SHA256": "B3A3F5684A8FD85A1C4B0B024D2F92301A628B0C51F6DC03D3651789B6F05C60",
+      "GitBlob": "fe2a78da08d8b3261c5ceede99b9819116ff661e"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/scout_move.json",
+      "SHA256": "C8B5C1706FEE045E1A676392BD7FB1847AD1E3956546732C2BBFE8C47D9D915A",
+      "GitBlob": "5e2774c514e6693475c406d60accd6b097de3fe6"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/scout_reserve_setup.json",
+      "SHA256": "8E181AD5612A63F7E0402A91386D49DD1D88AE378B1DD1B14D92C4854EB9390B",
+      "GitBlob": "cc2283b3baedc13624c14cfce233fc1356c59eb1"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/shooting_target_selection.json",
+      "SHA256": "791D9B2CA31605EB6B8940890DEEC8ED1C61E04A0BBCB44286560763840723F1",
+      "GitBlob": "ac1662fa5b9935178be53dddd8b08daf52baa0fa"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/stratagem_target_binding.json",
+      "SHA256": "978B32F9963FE8A6DAFA13A215BEE5948DA3187023D29EA73DF77CC65AC30710",
+      "GitBlob": "4617ee76c7175fa4569ec0bd3f1e320cb2d9113e"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/strategic_reserves_placement.json",
+      "SHA256": "D24B63C16380FA96193399C82D1CDE4769538967BC821589BA82E15A25130C35",
+      "GitBlob": "0c08b4e24b26f313e874de43b154ec67e16b4102"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/submit_return_on_death_placement.json",
+      "SHA256": "17FF7A4A39240F57684B4A6BC8C12720E2A7BBE6455572888BC08F486B500A04",
+      "GitBlob": "e0d82f1c4a92198da75658030fc2d5aa22720786"
+    },
+    {
+      "Path": "contracts/examples/decisions/proposals/surge_move.json",
+      "SHA256": "F4A7DB3A585086080C507A020384AE672C9B7486CFE49CDEDF5F2FC808081689",
+      "GitBlob": "fe4e440534e5c22e7529da8891baa6baacb80bf5"
+    },
+    {
+      "Path": "contracts/examples/errors/conflict.json",
+      "SHA256": "2F471D89A9BB63BB4304DC71BED5AF678D6ADEE844ED036898A6E498C303D4A7",
+      "GitBlob": "9d9dd9f07091198522daf42efc84aaec21e94e13"
+    },
+    {
+      "Path": "contracts/examples/errors/corruption.json",
+      "SHA256": "6476ED70220EDF43932A1F7BE4D660382C107E1E73C74D75FC50FDC68761C1CD",
+      "GitBlob": "1e019578ae10014be1595e70f6fd0fb7ffc28f2d"
+    },
+    {
+      "Path": "contracts/examples/errors/forbidden.json",
+      "SHA256": "4B8EAD7321A93BD261DE06853A397606EB7EB496955FFD6FD422F1DAD1576B70",
+      "GitBlob": "f55472a7a9f3f29509114a370daacaa79d686efd"
+    },
+    {
+      "Path": "contracts/examples/errors/invalid.json",
+      "SHA256": "4C1F3AA3AF665AF2C395535AC61CD38F129A4AA61B0B487855AF6A3F026703CB",
+      "GitBlob": "906065cea5f5007b15bc1df6ef89e8d74d7bf5db"
+    },
+    {
+      "Path": "contracts/examples/errors/malformed.json",
+      "SHA256": "BA5545A8AEE7816DFC3BCB613373065B9CCCD55BADD6F4B57C0F1EFA64E4DD5A",
+      "GitBlob": "06e6fd63ece63dcc79396eb00ce0badbdfe84bdf"
+    },
+    {
+      "Path": "contracts/examples/errors/stale.json",
+      "SHA256": "0573C8EB9FC796A60AB8867E8AEE3112A0703AC15722B4E96B457B3E28C8B357",
+      "GitBlob": "999a61aac2a012ee5ca0c18ac0712612ba3396d5"
+    },
+    {
+      "Path": "contracts/examples/errors/terminal.json",
+      "SHA256": "BFCDAFC698B84B8A4D76A56EEEE99905A5685BFEB202BF5B452F706D6186E7D3",
+      "GitBlob": "222e2474fe0c275a5f0d99c3a0d296e047cc23ae"
+    },
+    {
+      "Path": "contracts/examples/errors/unsupported.json",
+      "SHA256": "15DDDDE72DFB7B62C053166F4523674AC01112DE3E5E78401569A7F77021A866",
+      "GitBlob": "dccd0af5e845d9f632aa8707df0f3b2095c1481d"
+    },
+    {
+      "Path": "contracts/examples/events/initial-player-a.json",
+      "SHA256": "88CF11831F65E79CA275D48B447F846A54859B7B96392833D38EC0A97EF1F3F1",
+      "GitBlob": "b6a83051160c8e45f2bf388f5293c8dec0b8cb80"
+    },
+    {
+      "Path": "contracts/examples/events/initial-player-b.json",
+      "SHA256": "66A186A3FDA6306945261C41A9D158B3166BDEB21ADE33C5447A93DFFCE85871",
+      "GitBlob": "667c4b152caedcad8fba67daff7b94f397df92d1"
+    },
+    {
+      "Path": "contracts/examples/persistence/session-persistence.json",
+      "SHA256": "355A9FC20E53C1D675DB0D8EF38E9DA2B9FCAB608D9EE601DA7DC0D8B0FFACA7",
+      "GitBlob": "ee4f58d86f2e01ce0af70508c46e1f7c2c226f75"
+    },
+    {
+      "Path": "contracts/examples/projections/attached_charge_view.json",
+      "SHA256": "162872A3010D6B28F3931DF88CBA09BB2F0F6A83368DF5232524D91A37774C3B",
+      "GitBlob": "ffc0e1f3e5499cb712e0e09faa51eb9a7344d49e"
+    },
+    {
+      "Path": "contracts/examples/projections/hidden_secondary_redaction_view.json",
+      "SHA256": "F89C880F7D8589C8CF59B05FC03EA279D21901637561A45B382CF9EA80859C7E",
+      "GitBlob": "6a0e4f50f790df162c0a6a7fe397239920b3da35"
+    },
+    {
+      "Path": "contracts/examples/projections/initial_setup_view_player1.json",
+      "SHA256": "E08AE1A74D4DE5E06E454F1327022B3D3C821686A1B23B2ED7A589F6C2EF586F",
+      "GitBlob": "91e3168a9e1650b36c647a6221e19ec9a8a08e51"
+    },
+    {
+      "Path": "contracts/examples/projections/initial_setup_view_player2.json",
+      "SHA256": "B40EB4F84E758DF4BE43F6A0C8C54254DE7B032CD4A55D3CA6899960BD7F3005",
+      "GitBlob": "e5a7e1d9d313713f57470f0c121ebc8843b88171"
+    },
+    {
+      "Path": "contracts/examples/projections/post_deployment_view.json",
+      "SHA256": "7FA46CFA146F96E50D9C05C514B539DF9B3530BA9EB310078567D30A0DCA819B",
+      "GitBlob": "5820172dba6ea5546d9e38b641180723961d8f77"
+    },
+    {
+      "Path": "contracts/examples/projections/rules_catalog_view.json",
+      "SHA256": "4E879E76B7D4DB1C420A7FFF2CE372BD900EDA88687023BAC83F59B67DEE457C",
+      "GitBlob": "7b6d05145aa7e2766a9244f5497a56ba9e137fb3"
+    },
+    {
+      "Path": "contracts/examples/projections/terrain_snapshot_hidden_reserve_view_player_a.json",
+      "SHA256": "D5FDA401F933E9C0D48AAB15FCD70C13A1B81E1B76700635C1EC8DC69891F844",
+      "GitBlob": "794ea38fce282f98fe012c52a5a3756252cdfb96"
+    },
+    {
+      "Path": "contracts/examples/projections/terrain_snapshot_hidden_reserve_view_player_b.json",
+      "SHA256": "00E6B9F73059E0504EC8F54CDCBDE84C769BC44A1850F825F9A480C78908627A",
+      "GitBlob": "f495af1e911126b8b81de297524f5e41b6186d40"
+    },
+    {
+      "Path": "contracts/examples/projections/visible_modifier_datacard_view.json",
+      "SHA256": "64932AE6887492AB83AF08A21E982A7301D894BFE2DF96C631A0B06D592A4984",
+      "GitBlob": "bdd0c2362be0e4bedea9e3059b034bf0a18d3ee2"
+    },
+    {
+      "Path": "contracts/examples/replay-metadata.json",
+      "SHA256": "C3AE5AF4C0018B7CF3363AB02B588A3237CCD805A0839C40504F42379D7A2C0F",
+      "GitBlob": "7e0dbf40c21beab0f6beb76e0a8f0b956cb039cd"
+    },
+    {
+      "Path": "contracts/examples/sessions/create-session.json",
+      "SHA256": "21D94C5838E04233CAC9FC0D6FEE7CA46B7CE8E6E091DBADF5302CFEF6F9DEFC",
+      "GitBlob": "5a61735972b7d277d2f89215cd7641e8790e01cf"
+    },
+    {
+      "Path": "contracts/examples/sessions/session-command-envelope.json",
+      "SHA256": "75546AD79999F622F99C815215BFC15E37058B15CBAA9EBF8095BBEC0F8AFE53",
+      "GitBlob": "3960f299540732e4f80cc56c9b645a7406fe2860"
+    },
+    {
+      "Path": "contracts/examples/sessions/session-command-outcome.json",
+      "SHA256": "342AE97187046486C752CC04D42C0C4AFF866CA6575A014F6606019C9AA238CB",
+      "GitBlob": "4b36be8bab047b4fe517be9114af6f5e91463f42"
+    },
+    {
+      "Path": "contracts/examples/sessions/session-command-started.json",
+      "SHA256": "017F8429503C3F6FD11C9F747B8FF1F912DCEBC253D8BEBC26771DC3A9455A11",
+      "GitBlob": "c9e33f800c44a382ac666ffdf2838f67e417e5fb"
+    },
+    {
+      "Path": "contracts/examples/sessions/session-create.json",
+      "SHA256": "2B1DB622C7C09F8A982B515A8BE932AFA38AF8A9383CF491996C2CB26A9627B0",
+      "GitBlob": "64c926d0be627f07230b3fdf0de68c2ba378d6b4"
+    },
+    {
+      "Path": "contracts/examples/sessions/session-metadata-created.json",
+      "SHA256": "A8A644E288685CED32A004C9A0B38076B64419A7FD8AC2D620860FD4E41CDFD3",
+      "GitBlob": "9f35704235800931e878e2f9269999dbd71173c8"
+    },
+    {
+      "Path": "contracts/examples/statuses/advanced.json",
+      "SHA256": "05D14B7A9B4A517C10EB63FC16303DCAD0D36A06EB1CB2717E2B32007C645BE0",
+      "GitBlob": "ab037a921bed318f34a21e568ef815cb34bfabf9"
+    },
+    {
+      "Path": "contracts/examples/statuses/invalid.json",
+      "SHA256": "7A272DF71C258754B3BC7CB671F7C060381B546D64295B9C1A4CA342F0D40F5A",
+      "GitBlob": "3e11886e88c9227891ff04ba434aeba989c2e4d0"
+    },
+    {
+      "Path": "contracts/examples/statuses/terminal.json",
+      "SHA256": "FDC9A954410AD31684D26B686AC8E3010CD81E384FA523613B9955725AD704AE",
+      "GitBlob": "62b09a7217449062e4acd802bf072782c6c0f5b9"
+    },
+    {
+      "Path": "contracts/examples/statuses/unsupported.json",
+      "SHA256": "DF7D4FBD2CEEC4372C30D764283B5513B9DC1E46EE80589FB17398F2F1D46E0B",
+      "GitBlob": "a08fff506b789652b7ecb49a038bdb53090b2f04"
+    },
+    {
+      "Path": "contracts/examples/statuses/waiting-for-decision.json",
+      "SHA256": "AABC43084FF8EA4299575EE33346E8E979166EA5CBE440E35A7936BC800EA849",
+      "GitBlob": "34a3d1d8648f09b90cf0bc494aa28e5ad364cd78"
+    },
+    {
+      "Path": "contracts/examples/support-profile-player-a-redacted.json",
+      "SHA256": "BA77342ECC7B585C87FC1671874F7B5795BFC77CC4EF950FDD1F8BE181DAAFF6",
+      "GitBlob": "c58bea248a0b0d6ed7f58a862f0c3a7ff5c8615f"
+    },
+    {
+      "Path": "contracts/examples/support-profile-player-b-redacted.json",
+      "SHA256": "FD6AD8FA8C399F9D8B27FE53C3FB47F88D39870C016A07916CA4C795681ECF6D",
+      "GitBlob": "3c6500e9f15774e9ddd13adbc599c87a06e8ba74"
+    },
+    {
+      "Path": "contracts/examples/support-profile.json",
+      "SHA256": "F950B2D52C18390246725039632CA0766004EC3AD90F5A06F892684BCE4AC968",
+      "GitBlob": "e52fffa8afe9e14f1bbfe6b93132fc3445eac17d"
+    },
+    {
+      "Path": "contracts/manifest.json",
+      "SHA256": "3723E0BF79CC163C521F6C7636D903AEF987237431116CC128539366849D7E66",
+      "GitBlob": "4d4593a44610e9b4850565ec640abe0abdd9f83a"
+    },
+    {
+      "Path": "contracts/openapi.yaml",
+      "SHA256": "467BB8D40DF99FA0FF77D9615D3C9FCD45EC1AF7E6F419488CBEFAF7E363ECBC",
+      "GitBlob": "e8e73f9e3bad2fccba8a3ebb1b42edfe9e2eb11b"
+    },
+    {
+      "Path": "contracts/schemas/annotated-decision-request.schema.json",
+      "SHA256": "8669E8ABA998C5F2832848019FD4230CD6F8A705EADD94F4DA67E98527E53619",
+      "GitBlob": "7e0a5fa5ce77a0f6c18e7e015b34d8666a73a82e"
+    },
+    {
+      "Path": "contracts/schemas/battlefield-view.schema.json",
+      "SHA256": "FAECD553474A6396838C35541A3913247E1073E3C3E0938A9931E7DDB9243164",
+      "GitBlob": "a4bcac190aaeb13225593862bbed4686e60c9855"
+    },
+    {
+      "Path": "contracts/schemas/capability-manifest.schema.json",
+      "SHA256": "906AC27FFC6C6FA969DFA48B99B1D7B56FA514122CDE358F2A4BA4741C8A853D",
+      "GitBlob": "0929064f814b72af97bd1b283da80653ec5da7a5"
+    },
+    {
+      "Path": "contracts/schemas/create-session.schema.json",
+      "SHA256": "405BB4A554BA48C1948B88161703DA7A55CE430E4AF4463D00662C917087EDCD",
+      "GitBlob": "4a285a6b001370d9399a712f4e7976d344f4869e"
+    },
+    {
+      "Path": "contracts/schemas/decision-family-coverage.schema.json",
+      "SHA256": "016B0C8BCCD578AF1F0CD0BC5D59391D8A958AFC273AB6FC2335C007AB97DE1A",
+      "GitBlob": "e8214a4c33be8bf18f0dcffb30c5655279e9468e"
+    },
+    {
+      "Path": "contracts/schemas/decision-family-live.schema.json",
+      "SHA256": "C7C83B1469BF1C99AA04C03D0E949E5E56797ED30097E7081698C86A3B89ADE2",
+      "GitBlob": "c92cb9303e5868578c5341a1f45e33cb64256397"
+    },
+    {
+      "Path": "contracts/schemas/decision-request-view.schema.json",
+      "SHA256": "FC93E79432A7541D2F3F823EFFC1FC390F922EC36B116E0F65DD420AD840F51A",
+      "GitBlob": "442421ab656b447a892c2633df7c7ae778a998b0"
+    },
+    {
+      "Path": "contracts/schemas/error-envelope.schema.json",
+      "SHA256": "5F9C3A3BA566B09702964DDB7BEECA49BECB0E6BC3CF553FC2E589F87DD3AF65",
+      "GitBlob": "a39c7c2507e9006807607f78a501e62209ce4a31"
+    },
+    {
+      "Path": "contracts/schemas/event-delta.schema.json",
+      "SHA256": "DA946116CE974EB4EA682CFB60B4003EBF73CF3D48FB9D806121BA9758B002A5",
+      "GitBlob": "1caa4fc61abdc1f88d30b7bdb35374bf5dd4d326"
+    },
+    {
+      "Path": "contracts/schemas/finite-submission.schema.json",
+      "SHA256": "7E55BDFC75B80E2928B2A6E0F3D53555881F3300EB9FACAFF7E9A04EDF47A70F",
+      "GitBlob": "11a98a0733906b703fa8b84b602914d62041b0be"
+    },
+    {
+      "Path": "contracts/schemas/game-view.schema.json",
+      "SHA256": "0E6D0F2152873F4059C4DC05AFA461EC5A5C3FDC3F880577AB358A7BAAF735A7",
+      "GitBlob": "125c9dcf2cbe12125a7df1e82a622981a1b4c204"
+    },
+    {
+      "Path": "contracts/schemas/interaction-conformance.schema.json",
+      "SHA256": "21372C2258AC644F6B24B30C3CF324508B1CDD81271CF3948E65E0CE225856E1",
+      "GitBlob": "1dd23d1981aaa8a23a6051c32f7786f714585530"
+    },
+    {
+      "Path": "contracts/schemas/interaction-descriptor.schema.json",
+      "SHA256": "F728DF5D7911621A38C5BCEDC4F06F8157F87FED9C1F208C1348A476C1C1451A",
+      "GitBlob": "2f9f0d4f9fb76afcdead74940662eced34365034"
+    },
+    {
+      "Path": "contracts/schemas/lifecycle-status.schema.json",
+      "SHA256": "E4DF63DF0AE347A6F252E30C6096CA2C757DE2A9E8181499E624A346CE95DA6C",
+      "GitBlob": "118dbb65e6f8305308acaf0e54417f9202dc04ee"
+    },
+    {
+      "Path": "contracts/schemas/opportunity-window-example.schema.json",
+      "SHA256": "1B07306F030321ECDE68B69D013AEF409AFD3925D8F175C9692425F1C0484CC7",
+      "GitBlob": "99f34471dab5ee6fddd759e06964bb607039b17a"
+    },
+    {
+      "Path": "contracts/schemas/parameterized-submission.schema.json",
+      "SHA256": "78268FD4A0C37A3A987860BF1653F4D71F44E650653CBADC1B55C52ACFF6B2B9",
+      "GitBlob": "dac10847b916df63d869c08d7a07bad8b06d6d42"
+    },
+    {
+      "Path": "contracts/schemas/proposal-payload.schema.json",
+      "SHA256": "27AE0DA175D06B5A26E52C0CE2032BFA56F933F1EF65A7A7DE6878E802B29380",
+      "GitBlob": "67b57cb4699283f89fa6f801db0169d9030def68"
+    },
+    {
+      "Path": "contracts/schemas/replay-metadata.schema.json",
+      "SHA256": "DDBD5D74D0990C3C3AF19A56DD59D00F11C17FC99DA0DB7E0DF51AFA11465622",
+      "GitBlob": "126bae89132b7015e1b75998c34661cca1446c29"
+    },
+    {
+      "Path": "contracts/schemas/rules-catalog.schema.json",
+      "SHA256": "5FCB2CE83D6FC273F51C24B92264F526AE7E37C7F38497C5AD42C228CAF1C5AD",
+      "GitBlob": "50ae36c9d9e314a389383a5b86f49fbbbfca7223"
+    },
+    {
+      "Path": "contracts/schemas/session-command-envelope.schema.json",
+      "SHA256": "71213D34D360F72B81A58BF57DE39729AA8747E97ED98186D0122EED80F48606",
+      "GitBlob": "5fb1304a519242e2b108a4dd7622cbefb519d7c7"
+    },
+    {
+      "Path": "contracts/schemas/session-command-outcome.schema.json",
+      "SHA256": "677B46C2D6CD147152D71A5563FAB939C68523449584E7B3B72DCCE6859EA1CC",
+      "GitBlob": "a1cde1327db11984ecb823482c290b3963f1cf30"
+    },
+    {
+      "Path": "contracts/schemas/session-command-result.schema.json",
+      "SHA256": "0B24E9E11FA3AD8303C3271DE60B9B271C232875B776507FD143D23AA22422C5",
+      "GitBlob": "e01fe4e16832fe76d9e92dc4bfbfe625fab62884"
+    },
+    {
+      "Path": "contracts/schemas/session-create.schema.json",
+      "SHA256": "837E5A43A9A1EADA3216EB809A530A1B09C2C328DCA6A2001B5874F940FF4618",
+      "GitBlob": "c07d6ad44db15fbb26f67759991f69f93e8aaefc"
+    },
+    {
+      "Path": "contracts/schemas/session-metadata.schema.json",
+      "SHA256": "FEA4D3CAA1A23483C730BA6B4C85EEABCDD5A04E16C8C6BB5C7009B920EA05F3",
+      "GitBlob": "1c50232339e7ab91e677dfb861875ca79ad20a1a"
+    },
+    {
+      "Path": "contracts/schemas/session-persistence.schema.json",
+      "SHA256": "BA13007280A6A629A0CB4F29A5560E1E707523D5EA85D8B9F207820BD79DE79E",
+      "GitBlob": "940f55d03ef3a64679ed01857896d0ef7ab898d9"
+    },
+    {
+      "Path": "contracts/schemas/session-projection.schema.json",
+      "SHA256": "75BF8C44671AF5357105AD93F63A1E7F956656167F5F31C55515A3EAC2B95274",
+      "GitBlob": "f4e289f4845ea4bd6ecda4ac729b3f0d551d9363"
+    },
+    {
+      "Path": "contracts/schemas/support-profile.schema.json",
+      "SHA256": "61B21E8456CF27179BC4647E760D3A24FDCE2B036694F86B249BADD5642736E6",
+      "GitBlob": "b684cdddcae360ddfaaffe43d4379fc0ca9f0789"
+    },
+    {
+      "Path": "pyproject.toml",
+      "SHA256": "A842211B29E4094493F30D1FB653C040052AABC1014D309D1121CCA4A266B479",
+      "GitBlob": "37c24cfa69d36801c01f4856d86c5d97157a58a0"
+    },
+    {
+      "Path": "scripts/build_engine_build_identity.py",
+      "SHA256": "640008ADF1EB80F61A76D0D68F34B49892DB9231BAED2CE7CD91AC3318494592",
+      "GitBlob": "ad2af00ef69173708ab8cf8a9fab22a9934b33fe"
+    },
+    {
+      "Path": "scripts/run_phase18m_reference_server.py",
+      "SHA256": "F83F8F4CD5D55DA1B5A4A5A8E6F7CECA1666DABF400DD8C4A39B2ACE31FFAEF5",
+      "GitBlob": "4da965aa9cef439570629037ff377fca0102e692"
+    },
+    {
+      "Path": "src/warhammer40k_core/_engine_build_manifest.json",
+      "SHA256": "B3F45468657D97F8242ECFB4F49E5FA8BECFCA8B2F6957721228FB44D04A1F6F",
+      "GitBlob": "250d54671065190e6ea7dd62ffda77747df580b7"
+    },
+    {
+      "Path": "src/warhammer40k_core/adapters/external_contract.py",
+      "SHA256": "7D5CC2F8C992C686387F6EF295F5F61CD2FBA9C6B2F762979D00F5D96A46FE54",
+      "GitBlob": "acfc204408bace079b38dbd29a35f1d29c14db83"
+    }
+  ],
+  "HashPolicy": "SHA256 is actual checkout bytes, GitBlob identifies committed source independently of CRLF; do not treat checkout-byte hashes as a cross-platform normalization contract",
+  "RuntimeCasesExecuted": 0,
+  "Linux": "NOT RUN; owner-deferred host",
+  "Limits": [
+    "No fixture bodies copied or generated from live sessions",
+    "No schema validation, host launch, package/native-load proof, HTTP/local equivalence or UE parsing tests",
+    "No dependency installation or sibling source/bytecode writes"
+  ]
+}

@@ -4,7 +4,7 @@
 **Revision:** 4 — imported plan, Section 0 research and approved BOOT01 Windows bootstrap evidence.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
-**Execution authority:** The owner approved **BOOT01** on 2026-10-16: bounded minimal C++ scaffold, Windows Editor probe/final build and both IDE formats, with Linux-capable targets and normal documented cache/default-empty-UBT-config writes. The owner also authorized a Core HTTP diagnostic issue through `gh` and accepted showing actual HTTP errors with the fidelity gap noted. Broader implementation, installations, sibling source edits and other publication remain unauthorized.
+**Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of this work and continuation through the migration plan.** BOOT01 is complete; prepare the next bounded E01 file/runtime/output/pass-fail packet before execution. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
 **Canonical destination:** `Warhammer_40k_UI_unreal/docs/plans/unreal-migration-plan.md` (this file).
 **Review status:** Source/environment research and one existing static import-boundary check are recorded. BOOT01 probe/final Windows Editor builds, UHT and both IDE generators passed; separate frozen-source code review passed. [Execution evidence](evidence/2026-10-16-boot01.md) records acceptance audit disposition and limits. No Core integration, GUI, rendering, packaging or Linux execution passed; BOOT01 is not full M02 acceptance.
 
@@ -38,7 +38,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: record and audit the completed BOOT01 packet, then continue the research register.** Approval is limited to that bootstrap proof and the filed Core diagnostic issue; do not begin broad implementation milestones. Retaining the separate Python rules engine remains fixed scope.
+**Current assignment: publish and merge the audited plan/BOOT01 PR under OWN13, and continue the next bounded E01 gate.** Source-only identity/fixture preparation may continue while remote access is blocked. Prepare exact runtime/output/verification scope before live execution; do not begin broad implementation milestones. Retaining the separate Python rules engine remains fixed scope.
 
 ### 0.1 Fixed scope and authority
 
@@ -52,7 +52,7 @@ Genuine 3D from the first playable slice, C++-first client behavior, preservatio
 
 ### 0.2 Research procedure and evidence rules
 
-**OWN11 exception, 2026-10-16:** the research-only restrictions below still govern everything outside the approved BOOT01 file/output/process scope. BOOT01 may create its minimal source/check wrapper and run the specified build/generators. It may not install tools/dependencies or modify siblings. The separately requested Core issue is the only authorized remote write.
+**Authority amendments, 2026-10-16:** OWN11 permitted the completed BOOT01 packet, and OWN12 its focused Core issue. OWN13 additionally authorizes publication/merge of the audited work and continuation through the plan's next bounded gate. The research-only procedure below still applies outside a recorded execution packet. Preserve siblings; do not install/upgrade tools or broaden scope silently.
 
 Start with RQ01, then follow the dependencies in the register below. Inspect the exact local candidate, not only this plan's historical GitHub snapshot. Use concrete `repository@commit:path:symbol` references, relevant line ranges, and named test/fixture cases. For uncommitted source, record the base commit plus a patch/content hash; a branch name is not an immutable reference. Never place credentials, tokens, or private game state in the evidence packet.
 
@@ -80,7 +80,7 @@ A mixed source/owner item closes only when both parts are resolved. Keep per-sub
 
 **G-RESEARCH — research complete:** all RQ items have supported closure/disposition; architectural/product choices that do not depend on experiments are settled; no required capability silently disappears; the plan and milestone prerequisites agree. Where an empirical question cannot be resolved from existing evidence, keep that subquestion BLOCKED and identify the exact bounded experiment. Do not report all research closed in that case.
 
-**G-EXPERIMENT — BOOT01 authorized, other proofs not granted:** the owner explicitly approved BOOT01 after its bounded file/output/cache/timeout packet was reviewed. Other empirical blockers need their own permitted files, isolated environment, dependencies, pass/fail, stop/cleanup and authority record. Proof authorization permits only that work, not broad features. Documentation cannot close native/runtime risk.
+**G-EXPERIMENT — BOOT01 complete; continue the next bounded E01 gate under OWN13:** prepare and review its permitted files, isolated runtime/dependencies, outputs, pass/fail, stop/cleanup and authority record before execution. Reuse OWN13 for work within that recorded continuation; do not ask the same approval again. Material new commitments or scope changes still need clarification. Other proof scopes remain separately recorded; a bounded proof does not authorize broad features or close native/runtime risk by documentation.
 
 **G-IMPLEMENT — feature implementation authorization, not granted here:** requires G-RESEARCH, closure of the architecture-critical experimental blockers identified by RQ23, and explicit owner authorization of the refined implementation plan. Experiments already completed under separate approval are credited in M01/M02/E01–E04 rather than repeated automatically. Later behavioral, performance, packaged-build and release evidence remains mandatory at its milestone; it is not fictitiously required to exist before its implementation can be written.
 
@@ -412,7 +412,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ24 — Decision reconciliation and final research handoff
 
-**2026-10-16 finding:** Product answers/source-design packets are reconciled, with CLOSED_SOURCE/CLOSED_OWNER separate from empirical BLOCKED items. [Documentation review passed](research/2026-10-16-documentation-review.md); EXT06 owner answer and experiment authorization remain pending. Status remains RESEARCH_INCOMPLETE; no code milestone, experiment PASS, install, host or build is implied.
+**2026-10-16 finding:** Product answers/source-design packets are reconciled, with CLOSED_SOURCE/CLOSED_OWNER separate from empirical BLOCKED items. OWN10 resolves the HTTP fidelity policy; Core issue #588 is filed. BOOT01 compilation/generation and separate code/acceptance reviews passed. OWN13 authorizes publication/merge and continuation; the configured origin is inaccessible (404), and creation was rejected (403). Existing source-only Core build-identity verification passed; the next E01 packet and 127-file/98-case source manifest are preparation, not runtime or full milestone acceptance. Research remains RESEARCH_INCOMPLETE.
 
 **Status:** OPEN (2026-10-16). **Resolve with:** evidence/decision audit and owner answers. **Blocks:** G-RESEARCH / G-IMPLEMENT.
 
@@ -454,6 +454,8 @@ After checking for existing answers, the likely early owner questions are the ex
 
 ### 0.7 Pasteable Codex assignment
 
+The following is the historical research assignment. OWN11/OWN13 and Section0.8 supersede its restrictions for the specifically recorded bootstrap/publication/next-proof work; do not paste it as a new prohibition on already authorized continuation.
+
 > Continue this document in **research/planning-only mode**. The owner has approved a client-only Unreal migration with `Warhammer_40k_AI` retained as a separate authoritative Python codebase; D01 is closed and must not be asked again. Read the actual workspace instructions and source, then resolve RQ01–RQ24 with immutable code references, applicable primary documentation, permitted existing checks, or direct owner answers for product decisions. Update the canonical plan and record remaining external dependencies. Do not modify client/core application code, tests, assets, dependencies, repository history or remote state, install tools, or create new executable experiments. Where a question needs execution not available through an existing safe check, leave it explicitly blocked and prepare the bounded experiment/authorization packet in RQ23. Finish with the updated plan, evidence, remaining questions, actual review/test status and precise next authorization needed. Do not begin implementation merely because research or scope is approved.
 
 ### 0.8 Current execution record — 2026-10-16
@@ -475,7 +477,8 @@ This is the current authority and evidence record. It supersedes historical pres
 | OWN09 | **Use the currently checked-out development server** | Select `Warhammer_40k_AI@5f5097...:scripts/run_phase18m_reference_server.py` for initial managed/attach internal work. No new host/artifact is required to start this route. Fixed development registry, absent durable store and remote hardening remain explicit limits; later durable/standalone/remote release claims need new evidence |
 | OWN10 | **Show the explicit HTTP error and note the fidelity gap** | EXT06 initial disposition closed: display actual server code/message, never fabricate detailed engine violations. Preserve advisory completeness hints as advisory. Owner requests a Core issue for lost error detail |
 | OWN11 | **BOOT01 approved** | Minimal scaffold, Linux-capable targets, Windows Editor probe/final compile and VS Code/VS2022 generation, documented cache/empty default UBT file side effects. No GUI launch/install/broad feature work; Linux stays UNTESTED |
-| OWN12 | **File a Core issue using gh for the engine errors** | One focused diagnostic-fidelity ticket in `SobolGaming/Warhammer_40k_AI`; source checkout stays read-only. No other remote publication or Core fix is authorized |
+| OWN12 | **File a Core issue using gh for the engine errors** | One focused diagnostic-fidelity ticket in `SobolGaming/Warhammer_40k_AI`; source checkout stays read-only. That request covered no other publication/Core fix; OWN13 later adds the Unreal PR/merge scope |
+| OWN13 | **Commit, push, open and merge the PR, then continue the migration plan** | Publish the audited plan/BOOT01 work with `gh`, preserve required checks and advance the next bounded gate. Missing remote/access is an external publication blocker; continue nonblocked identity/fixture/packet preparation. Earlier no-publication wording is superseded for this PR; Core source and broader acceptance boundaries remain |
 
 The source baseline is Arcade `5088c1c49dcaff29eb59fb64b3063d30214dde73` with supported Core 44.1; the separately selected Unreal target is Core `5f5097...` / 44.3.33. Existing Arcade `.venv` provenance is `4ee7cc...`; none of these identities may be silently substituted. Both sibling source worktrees were clean. The Unreal repository initially had no commits or files besides `.git`. The owner-selected project destination supersedes the old shared-repository nesting.
 
@@ -490,6 +493,9 @@ Supporting evidence:
 - [Installed UE/toolchain, primary documentation and validation design](research/2026-10-16-toolchain-and-validation.md).
 - [BOOT01 output authority and immutable parser evaluation candidate](research/2026-10-16-bootstrap-and-native-parser.md).
 - [BOOT01 actual Windows probe/final builds, generators, reviews and side effects](evidence/2026-10-16-boot01.md), with [machine-readable hashes/results](evidence/2026-10-16-boot01-result.json).
+- [BOOT01 independent acceptance audit](evidence/2026-10-16-boot01-acceptance-audit.md), bound to the historical candidate preserved in commit `51cbc62`; subsequent authority/source-preparation edits are outside that snapshot.
+- [E01 selected-Core source manifest](../../tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/manifest.json): existing build-identity source check passed, 127 files frozen, 98 canonical cases inventoried, **zero runtime cases executed**. This does not prove installed/native/HTTP compatibility.
+- [Publication/access and E01 source-preparation record](evidence/2026-10-16-publication-and-e01-source.md) and [next bounded E01 packet](research/2026-10-16-e01-boundary-packet.md). OWN13 covers continuation; preserve the packet's runtime/output ownership and proof limits.
 
 **External dependencies and unblock conditions:**
 
@@ -501,6 +507,7 @@ Supporting evidence:
 | EXT04 | Linux x86-64 UE build and real rendered/packaged test host plus runtime | **Deferred by OWN08:** owner arranges later. Configure targets/platform-neutral plumbing now; record all Linux execution NOT RUN, with no implied PASS | Final Linux/platform acceptance when host arrives; Windows research/proof may proceed |
 | EXT05 | Army identity before placement when attaching without original creation input | Full Arcade support profile has no normative HTTP equivalent. Managed create can retain the public SessionCreate.config player/army pairs exactly as Core's HTTP conformance client does; placed attach can use placed_armies. Undeployed arbitrary attach needs an authorized original creation/session mapping or external API support. No inferred names/deprecated route/profile fabrication | Initial managed slice has a source-backed path; arbitrary pre-placement attach and full-profile parity remain bounded gaps. See session design |
 | EXT06 | Fine-grained uncommitted-proposal diagnostics over HTTP | Server returns generic `proposal_invalid` / `rule_path_unsupported` code/message and loses detailed in-process reasons. OWN10 accepts actual explicit HTTP errors with fidelity gap noted for initial client work. Filed and read back [Core issue #588](https://github.com/SobolGaming/Warhammer_40k_AI/issues/588) under OWN12; no fabricated legality/private route | Exact-detail improvement tracked externally; initial display policy selected; E01/E03 runtime proof still required |
+| EXT07 | Reachable Unreal GitHub repository and configured credential access | Origin returns404; GraphQL and REST private creation are rejected by GitHub with token-access errors/HTTP403. Owner creates a reachable empty repository or grants configured credential access/creation rights; async question pending. Local commits/source preparation can proceed | Push, PR, hosted checks and authorized merge; no remote success claimed |
 
 **Next bounded work and uncertainty map:** current source/design packets cover the target delta, selected roles/host/client matrix and CAP/profile/input/test mappings. OWN10 resolves the initial HTTP diagnostic policy; Core issue #588 tracks improved fidelity. OWN11 authorizes BOOT01 only. Broad feature implementation is not available: the following empirical evidence remains unverified unless an explicit execution result below closes it.
 
@@ -1138,7 +1145,7 @@ Every experiment produces a packet with exact source/engine/core revisions, envi
 
 **OWN08/OWN09 amendment:** an explicitly authorized **Windows internal-development subset** may use the current checkout command server with its fixed development registry and no durable store. Linux receives source/configuration plumbing and NOT RUN execution status until a later host. Record the subset by name; do not label full E03 or final cross-platform/clean-machine/durable acceptance PASS. Missing production hardening, portable artifacts or Linux access do not block this selected internal route. On development host restart, explicit session loss is the required outcome. Final standalone/remote/recovery acceptance below remains a later gate.
 
-**Do not execute these as part of the present research assignment.** Source inspection, existing permitted checks and experiment design belong to RQ01–RQ24. New test harnesses, Unreal assets, builds or prototypes require explicit bounded-experiment or implementation authorization. RQ23 classifies which unknowns are architecture-critical and prevents a source-only answer being labelled an experimental PASS.
+**Execute only the recorded bounded scope.** Source inspection, existing permitted checks and experiment design belong to RQ01–RQ24. OWN13 now authorizes continuation into the next E01 gate after its file/runtime/output/pass-fail packet is prepared and reviewed. Do not require a duplicate approval for that same scope. Other new harnesses, assets or prototypes need an applicable recorded authorization; RQ23 prevents source-only answers from becoming experimental PASS.
 
 **E03 has two checkpoints to avoid a circular gate.** E03A is a bounded early packaging/dependency/connection feasibility proof using the smallest approved client/host setup; E03B is the complete packaged real-core 3D workflow and failure/recovery proof required to accept M03. E03A can justify starting the remaining M03 work after authorization; E03B cannot be a prerequisite for writing the same M03 workflow it is meant to test. This split does not remove any E03 acceptance criterion.
 
@@ -1555,13 +1562,13 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Ready now:** continue Section 0 research and prepare the next bounded proof packet. M00/RQ01 and the approved BOOT01 foundation have evidence. The full design, capability matrix, experiments, milestones and cutover model remain a planning baseline, not an authorization to execute them.
 
-**Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The existing checkout command host is selected; Linux execution is deferred. BOOT01 passed under OWN11. Current evidence and remaining source/design or empirical gaps are in the register; broad implementation and E01–E08 execution remain unauthorized.
+**Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The existing checkout command host is selected; Linux execution is deferred. BOOT01 passed under OWN11. OWN13 authorizes publication/merge and the next bounded E01 continuation after packet review. Broad implementation and unrelated E02–E08 execution remain outside that immediate scope; empirical gaps stay open until tested.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation only. Target HTTP behavior, local runtime relocation/recovery, Unreal rendering/picking/HUD feasibility, packaged Windows/Linux workflow and performance remain unverified until their relevant proof executes. Its separate code/acceptance reviews do not close full milestone acceptance.
 
 **Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 characterization and selected44.3.33 source adaptation, profile/capability/design checklists, developer Core launch/install recipes, Core issue #588 and BOOT01 scaffold/probe/final builds/generation. No dependency install or Core host launch occurred. Prepare the next exact contract/architecture proof scope; deferred Linux and non-development hosting do not halt separately authorized Windows progress.
 
-**Next step after research:** report either `READY_FOR_BOUNDED_EXPERIMENT_AUTHORIZATION` with the exact RQ23 proof packet, or `READY_FOR_IMPLEMENTATION_AUTHORIZATION` when research and critical evidence are complete. Wait for the appropriate explicit owner authorization. Later M03 remains the first required packaged real-core 3D playable result; passing a scope discussion, parser or render-only fixture does not satisfy it.
+**Next step after research:** record the exact next RQ23 proof packet and its applicable authority. OWN13 already covers the bounded E01 continuation; do not ask that again. Use `READY_FOR_BOUNDED_EXPERIMENT_AUTHORIZATION` only for work genuinely lacking applicable authority, or `READY_FOR_IMPLEMENTATION_AUTHORIZATION` when research/critical evidence are complete and broader implementation needs approval. Later M03 remains the first required packaged real-core 3D playable result; a scope discussion, parser or render-only fixture does not satisfy it.
 
 ## 16. Sources and inspection index
 
