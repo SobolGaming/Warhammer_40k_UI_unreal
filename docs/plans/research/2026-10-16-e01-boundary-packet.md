@@ -1,20 +1,45 @@
 # E01-WIN-BOUNDARY: selected Core boundary proof packet
 
-Date: 2026-10-16. Disposition: **PREPARED; executable phases NOT RUN**.
+Date: 2026-10-16. Packet revision: **2; E01 execution incomplete and unaccepted**.
 This packet refines Section 0 RQ03/RQ06/RQ08/RQ15/RQ17/RQ20/RQ23 of the
 [canonical plan](../unreal-migration-plan.md). It credits completed BOOT01 and
 defines the next bounded Windows proof. It does not claim full E01, M01,
 G-RESEARCH, G-IMPLEMENT, rendering, packaging or cross-platform acceptance.
+
+## Revision 2 execution amendments
+
+The original reviewed packet SHA256 was
+`B263A3AE8567FBDE8E6CAB0F2A7C3024F1F0D4E7516DEAA875DAECB6681775C0`.
+Earlier runs retain that identity and their failures in the
+[execution journal](../evidence/2026-10-16-e01-boundary.md). The runtime is now
+installed and verified, PR1 is merged, and proposed source files exist. Initial
+preparation/future-tense descriptions below describe the experiment design, not
+the current execution result; the journal governs actual results.
+
+Run `20261016T230019Z-9a9e3232` passed 34 Python unit tests but its movement group
+timed out at the 10-second socket-read limit. The development host later logged
+HTTP 200 and a disconnected-client write error; action completion was not proved
+by that failed request. The next fresh run raises the read cap to **30 seconds**,
+still bounded by the unchanged **30-second total request deadline** and 3-second
+connect cap. It does not retry the uncertain action in the old session, change
+Core or relax size/submission limits. Review the changed source before execution.
+
+Independent [source review](2026-10-16-e01-boundary-review.md) also requires the
+Python classifier to preserve valid `accepted:false, committed:false` command
+outcomes and route their schema separately from error envelopes. Refuse any
+`.pyc` found in the owned runtime rather than omit loadable bytecode from its
+fingerprint. Preserve the existing zero-bytecode environment and its provenance.
+These repairs remain within this packet's protocol/runtime verification scope.
 
 The owner instructed: “open the PR, commit, push, and merge the PR, then continue
 with the migration plan.” **OWN13 covers this next bounded E01 continuation after
 the requested PR/merge sequence; do not request repeated approval for that recorded
 scope.** The coordinator owns publication and the dated authority record in the
 canonical plan/AGENTS. Review this packet and its implementation before execution.
-The current GitHub 403 blocks the requested publication sequence; source preparation
-and packet review may proceed meanwhile. Preparation of this packet is documentation
-work; its proposed scripts, native tests, environment and hosts do not yet exist
-as executed evidence. Do not ask again about settled target, user modes,
+The initial GitHub 403 was resolved by the owner's token update and PR1 merged;
+that historical access failure is not an execution failure. Initial preparation
+of this packet was documentation work; actual script/runtime/host evidence is now
+recorded separately in the journal. Do not ask again about settled target, user modes,
 topologies, diagnostic policy or deferred Linux hardware. A repository/permission
 failure is a publication blocker, not evidence of runtime failure.
 
@@ -227,7 +252,8 @@ cache or global preference edit is needed for this logical JSON test lane.
 Every install/build/test/owned-host process has a **30-minute maximum** measured
 by the coordinator. Use redirected live logs and periodic progress; do not block
 communication on one long uninterruptible wait. HTTP defaults for this proof:
-3-second connect, 10-second socket read, 30-second total request deadline,
+3-second connect, at most 30-second socket read capped by remaining time in the
+30-second total request deadline,
 16 MiB request and 64 MiB response ceilings, one authoritative command in flight,
 at most 256 setup/action submissions per scenario and eight event pages of at
 most 100 visible events each. Record actual largest bodies and latency; exceeding

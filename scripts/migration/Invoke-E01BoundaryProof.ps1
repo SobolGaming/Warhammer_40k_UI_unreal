@@ -464,7 +464,8 @@ function Get-RuntimeTree {
         foreach ($item in Get-ChildItem -LiteralPath $directory -Force) {
             if (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw 'Runtime tree contains an unsupported reparse point.' }
             if ($item.PSIsContainer) { $directories.Enqueue($item.FullName) }
-            elseif ($item.Name -ne '.e01-provenance.json' -and $item.Extension -ne '.pyc') {
+            elseif ($item.Extension -eq '.pyc') { throw 'Runtime tree contains loadable bytecode; bytecode is forbidden in the verified runtime.' }
+            elseif ($item.Name -ne '.e01-provenance.json') {
                 $records.Add([ordered]@{ path = [IO.Path]::GetRelativePath($runtimeRoot, $item.FullName).Replace('\', '/'); sha256 = Get-Hash $item.FullName })
             }
         }
