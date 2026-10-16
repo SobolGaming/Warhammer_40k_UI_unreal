@@ -112,6 +112,32 @@ class CanonicalEnvelopeTests(unittest.TestCase):
                                                   "option_id": "option-0009"})
         self.assertEqual(boundary.strict_json(boundary.json_bytes(command)), command)
 
+    def test_generated_command_matches_exact_frozen_schema_and_canonical_envelope(self):
+        schema = canonical("schemas/session-command-envelope.schema.json")
+        frozen = canonical("examples/sessions/session-command-envelope.json")
+        generated = boundary.envelope(frozen["session_id"], frozen["command_id"],
+                                      frozen["expected_session_revision"],
+                                      frozen["submission"]["submission_kind"])
+        self.assertEqual(generated["schema_version"], schema["properties"]["schema_version"]["const"])
+        self.assertEqual(generated, frozen)
+        self.assertEqual(set(generated), set(schema["required"]))
+
+    def test_pair_rejects_outgoing_schema_failure_before_any_transport_call(self):
+        # Pure client ordering check; no Core or transport result is simulated.
+        local, http = MagicMock(), MagicMock()
+        schemas = MagicMock()
+        schemas.validate.side_effect = boundary.BoundaryError("Outgoing schema mismatch")
+        pair = boundary.Pair(local, http, SimpleNamespace(schemas=schemas))
+        pair.session = "session-unit"
+        command = boundary.envelope(pair.session, "command-unit", 0, "start_session")
+        command["schema_version"] = "incorrect-test-discriminator"
+        with self.assertRaisesRegex(boundary.BoundaryError, "Outgoing schema mismatch"):
+            pair.submit(command, "admin")
+        schemas.validate.assert_called_once_with("session-command-envelope.schema.json", command)
+        local.request.assert_not_called()
+        http.request.assert_not_called()
+        self.assertEqual(pair.submissions, 0)
+
     def test_pure_candidate_uses_complete_ordered_public_inventory_and_three_poses(self):
         view = canonical("examples/projections/post_deployment_view.json")
         proposal = {"request_id": "pure-candidate-request", "proposal_kind": "normal_move",

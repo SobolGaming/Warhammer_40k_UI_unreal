@@ -506,7 +506,7 @@ def envelope(session: str, command: str, revision: int, kind: str, request: dict
         submission["option_id"] = option
     if kind == "parameterized_payload":
         submission["payload"] = payload
-    return {"schema_version": "session-command-envelope-v44-contract", "command_id": command, "session_id": session, "expected_session_revision": revision, "request_id": None if request is None else string_field(request, "request_id"), "result_id": None if request is None else command + "-result", "submission": submission}
+    return {"schema_version": "session-command-envelope-v2-weapon-instances", "command_id": command, "session_id": session, "expected_session_revision": revision, "request_id": None if request is None else string_field(request, "request_id"), "result_id": None if request is None else command + "-result", "submission": submission}
 
 
 def role_for_actor(request: dict) -> str:
@@ -572,6 +572,7 @@ class Pair:
         return local, http
 
     def submit(self, command: dict, role: str) -> tuple[Reply, Reply]:
+        self.captures.schemas.validate("session-command-envelope.schema.json", command)
         self.submissions += 1
         require(self.submissions <= 256, "Canonical scenario exceeded 256 submissions")
         return self.request("POST", f"/sessions/{self.session}/commands", role, command)
@@ -999,8 +1000,11 @@ def capture(args: argparse.Namespace, report: Report) -> None:
             left, right = pair.request("GET", f"/sessions/{pair.session}", role)
             pair.initial_cursors[role] = (string_field(left.body, "event_cursor"), string_field(right.body, "event_cursor"))
         _, started = pair.submit(envelope(pair.session, "e01-start", 0, "start_session"), "admin")
-        require(classify(started.status, started.body) == "accepted", "Canonical start not accepted")
-        captures.add("session_started", "admin", "http", started, "Selected frozen SessionCreate.config; unique owned game ID; explicit admin start", "accepted")
+        start_artifact = captures.add("session_start_response", "admin", "http", started, "Actual response to explicit admin start; preserve failure as well as acceptance before asserting outcome")
+        start_outcome = classify(started.status, started.body)
+        if start_outcome != "accepted":
+            start_code = string_field(object_field(started.body, "error"), "code") if "error" in started.body else string_field(started.body, "outcome_code")
+            raise BoundaryError(f"Canonical start not accepted: actual HTTP {started.status}, code {start_code}; privileged response retained at {start_artifact}")
         for ids, function in ((("AUTH-01", "VIEW-01"), lambda: auth_and_views(pair, report)), (("FINITE-01", "RETRY-01", "STALE-01"), lambda: finite_and_retry(pair, report)), (("MOVE-01", "MOVE-02", "FIDELITY-01"), lambda: movement_cases(pair, report)), (("ERROR-01",), lambda: error_cases(pair, report)), (("LIFETIME-01",), lambda: lifetime_cases(args, report, host, http, tokens, pair.session, config))):
             try:
                 function()
