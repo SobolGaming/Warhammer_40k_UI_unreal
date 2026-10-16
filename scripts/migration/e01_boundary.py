@@ -32,6 +32,8 @@ RESOURCE_COUNT = 3116
 REQUEST_LIMIT = 16 * 1024 * 1024
 RESPONSE_LIMIT = 64 * 1024 * 1024
 MAX_SECONDS = 30 * 60
+REQUEST_DEADLINE_SECONDS = 30
+SOCKET_READ_CAP_SECONDS = 30
 MAX_EXACT_INTEGER = 2**53 - 1
 CASE_IDS = ("SOURCE-01", "FINITE-01", "MOVE-01", "MOVE-02", "RETRY-01", "STALE-01", "AUTH-01", "VIEW-01", "ERROR-01", "FIDELITY-01", "SCOPE-01", "LIFETIME-01")
 SLUG = re.compile(r"^[A-Za-z0-9_-]+$")
@@ -252,7 +254,6 @@ def classify(status: int, body: object) -> str:
     if "accepted" in body or "committed" in body:
         require(type(body.get("accepted")) is bool and type(body.get("committed")) is bool, "Outcome flags missing/wrong type")
         require(not body["accepted"] or body["committed"], "Accepted uncommitted outcome is invalid")
-        require(body["committed"], "Uncommitted outcomes require error envelope")
         require(body.get("schema_version") == "session-command-outcome-v44-contract", "Outcome schema mismatch")
         string_field(body, "command_id")
         require(string_field(body, "operation") in ("start_session", "advance_session", "submit_finite_decision", "submit_parameterized_decision", "close_session"), "Unknown outcome operation")
@@ -271,8 +272,8 @@ def classify(status: int, body: object) -> str:
         if body["accepted"]:
             require(status == 200 and code == "command_committed", "Accepted status/code mismatch")
             return "accepted"
-        require(status == 422 and code in ("proposal_invalid", "rule_path_unsupported"), "Recorded rejection status/code mismatch")
-        return "recorded_invalid"
+        require(status == 422 and code in ("proposal_invalid", "rule_path_unsupported"), "Rejected outcome status/code mismatch")
+        return "recorded_invalid" if body["committed"] else "uncommitted_invalid"
     return "payload"
 
 
@@ -347,11 +348,16 @@ class Endpoint:
             try:
                 connection.connect()
                 transport_socket = connection.sock
-                transport_socket.settimeout(10)
+                remaining = REQUEST_DEADLINE_SECONDS - (time.monotonic() - start)
+                require(remaining > 0, "Request exceeded 30 second deadline; completion unknown")
+                transport_socket.settimeout(min(SOCKET_READ_CAP_SECONDS, remaining))
                 headers = {"Content-Type": "application/json"}
                 if authorization is not None:
                     headers["Authorization"] = authorization
                 connection.request(method, path + ("?" + urlencode(query) if query else ""), body=payload if payload else None, headers=headers)
+                remaining = REQUEST_DEADLINE_SECONDS - (time.monotonic() - start)
+                require(remaining > 0, "Request exceeded 30 second deadline; completion unknown")
+                transport_socket.settimeout(min(SOCKET_READ_CAP_SECONDS, remaining))
                 response = connection.getresponse()
                 length = response.getheader("Content-Length")
                 declared_length = None if length is None else int(length)
@@ -361,9 +367,9 @@ class Endpoint:
                 # an HTTP/1.0 socket) immediately at the declared body length.
                 # Do not update a closed socket's timeout on the next iteration.
                 while not response.isclosed():
-                    remaining = 30 - (time.monotonic() - start)
+                    remaining = REQUEST_DEADLINE_SECONDS - (time.monotonic() - start)
                     require(remaining > 0, "Request exceeded 30 second deadline; completion unknown")
-                    transport_socket.settimeout(min(10, remaining))
+                    transport_socket.settimeout(min(SOCKET_READ_CAP_SECONDS, remaining))
                     chunk = response.read1(min(65536, RESPONSE_LIMIT - total + 1))
                     if not chunk:
                         break
@@ -372,7 +378,7 @@ class Endpoint:
                     require(total <= RESPONSE_LIMIT, "Response exceeds 64 MiB; completion unknown")
                 require(declared_length is None or total == declared_length, "Truncated declared response body; completion unknown")
                 reply = Reply(response.status, b"".join(chunks), time.monotonic() - start, len(payload))
-                require(reply.elapsed <= 30, "Request exceeded 30 second total deadline")
+                require(reply.elapsed <= REQUEST_DEADLINE_SECONDS, "Request exceeded 30 second total deadline")
             finally:
                 connection.close()
         self.metrics["requests"] += 1
@@ -507,9 +513,9 @@ class Captures:
         outcome = classify(reply.status, reply.body)
         if expected is not None:
             require(outcome == expected, "Actual wire outcome differs: " + case_id)
-        if outcome == "error" or outcome == "uncommitted_invalid":
+        if "error" in reply.body:
             self.schemas.validate("error-envelope.schema.json", reply.body)
-        elif outcome in ("accepted", "recorded_invalid"):
+        elif outcome in ("accepted", "recorded_invalid", "uncommitted_invalid"):
             self.schemas.validate("session-command-outcome.schema.json", reply.body)
         relative = f"{slug}/{role}.json"
         require(not any(entry["path"] == relative for entry in self.entries), "Duplicate proposed capture")
@@ -864,18 +870,34 @@ def finite_and_retry(pair: Pair, report: Report) -> None:
     report.case("STALE-01", "PASS", "Wrong revision, consumed request and waiting advance typed errors", {"wrongRevision": rejected.body, "consumedRequest": stale_request.body, "waitingAdvance": blocked.body})
 
 
-def record_setup_rejection(pair: Pair, request: dict, view: dict, command: dict, reply: Reply, role: str) -> str:
-    """Retain the actual scoped candidate before leaving its unavailable lane."""
+def authorized_candidate_snapshot(request: dict, view: dict, command: dict, role: str) -> dict:
+    """Full candidate data is permitted only in its actor's authorized lane."""
     require(SLUG.fullmatch(role) is not None, "Unsafe rejection diagnostic role")
     require(role == role_for_actor(request), "Full rejection diagnostic requires the request actor's authenticated role")
     require(string_field(view, "viewer_player_id") == string_field(request, "actor_id"), "Full rejection diagnostic viewer does not own the request")
     visible = object_field(view, "pending_decision")
     require(string_field(visible, "request_id") == string_field(request, "request_id") and string_field(visible, "actor_id") == string_field(request, "actor_id") and command.get("request_id") == request["request_id"], "Full rejection diagnostic command/request is outside the authorized current view")
+    return {"schemaVersion": 1, "role": role, "commandEnvelope": copy.deepcopy(command), "requestBeforeSubmission": copy.deepcopy(request), "proposalBeforeSubmission": copy.deepcopy(view.get("pending_proposal")), "authorizedViewBeforeSubmission": copy.deepcopy(view)}
+
+
+def record_authorized_attempt(pair: Pair, request: dict, view: dict, command: dict, role: str) -> str:
+    """Freeze actor-scoped input before a request can finish with unknown outcome."""
+    snapshot = authorized_candidate_snapshot(request, view, command, role)
+    report = pair.captures.report
+    path = report.output / "private-attempts" / ("command_" + str(pair.submissions + 1)) / (role + ".json")
+    write_new(path, json_bytes({**snapshot, "observation": "Prepared candidate captured before submission; no completion outcome asserted"}), report.secrets)
+    report.artifact(path)
+    return str(path)
+
+
+def record_setup_rejection(pair: Pair, request: dict, view: dict, command: dict, reply: Reply, role: str) -> str:
+    """Retain the actual scoped candidate before leaving its unavailable lane."""
+    snapshot = authorized_candidate_snapshot(request, view, command, role)
     slug = "setup_rejected_" + str(pair.submissions)
     wire = pair.captures.add(slug, role, "http", reply, "Actual public response to reviewed fixed setup candidate; cause requires candidate/response inspection")
     report = pair.captures.report
     diagnostic = report.output / "private-rejections" / slug / (role + ".json")
-    payload = {"schemaVersion": 1, "role": role, "commandEnvelope": copy.deepcopy(command), "requestBeforeSubmission": copy.deepcopy(request), "proposalBeforeSubmission": copy.deepcopy(view.get("pending_proposal")), "authorizedViewBeforeSubmission": copy.deepcopy(view), "publicResponse": {"httpStatus": reply.status, "body": copy.deepcopy(reply.body), "rawSHA256": sha256(reply.raw), "wireArtifact": wire}, "disposition": "Reviewed candidate rejected; preserve observed input/output before assigning cause"}
+    payload = {**snapshot, "publicResponse": {"httpStatus": reply.status, "body": copy.deepcopy(reply.body), "rawSHA256": sha256(reply.raw), "wireArtifact": wire}, "disposition": "Reviewed candidate rejected; preserve observed input/output before assigning cause"}
     write_new(diagnostic, json_bytes(payload), report.secrets)
     report.artifact(diagnostic)
     return str(diagnostic)
@@ -927,6 +949,7 @@ def setup_to_move(pair: Pair) -> tuple[dict, dict]:
             else:
                 raise Blocked("No reviewed public setup recipe for current decision type: " + kind)
             command = pair.intent(request, option=selected, label="setup")
+        record_authorized_attempt(pair, request, view, command, role)
         _, reply = pair.submit(command, role)
         if classify(reply.status, reply.body) != "accepted":
             diagnostic = record_setup_rejection(pair, request, view, command, reply, role)
@@ -958,6 +981,7 @@ def movement_cases(pair: Pair, report: Report) -> None:
         else:
             paths[0]["model_id"] = "e01:unknown-physical-model"
         command = pair.intent(request, payload=invalid, label="inventory-" + label)
+        record_authorized_attempt(pair, request, view, command, role)
         _, reply = pair.submit(command, role)
         assert_error(reply, 422, "proposal_invalid")
         fidelity_artifacts.append(pair.captures.add("movement_inventory_" + label, role, "http", reply, "Current complete normal-move witness changed only by explicit negative inventory operation", "uncommitted_invalid"))
@@ -970,6 +994,7 @@ def movement_cases(pair: Pair, report: Report) -> None:
     report.case("FIDELITY-01", "PASS", "Exact wire status/code/message; Core issue #588 fidelity gap explicit", {"responses": fidelity_responses, "displayNotice": "Detailed engine reasons were not supplied by this HTTP response.", "issue": "https://github.com/SobolGaming/Warhammer_40k_AI/issues/588"}, fidelity_artifacts)
     invalid_geometry = movement_payload(proposal, view, 1000.0)
     command = pair.intent(request, payload=invalid_geometry, label="invalid-distance")
+    record_authorized_attempt(pair, request, view, command, role)
     _, reply = pair.submit(command, role)
     require(classify(reply.status, reply.body) == "recorded_invalid", "Well-formed geometric candidate did not exercise recorded-invalid branch")
     pair.captures.add("movement_recorded_invalid", role, "http", reply, "Well-formed ordered complete witness with 1000-inch candidate; only Core validates geometry", "recorded_invalid")
@@ -980,7 +1005,9 @@ def movement_cases(pair: Pair, report: Report) -> None:
     require(request2["request_id"] != request["request_id"] and request2["decision_type"] == request["decision_type"], "Recorded invalid did not expose fresh retry request")
     require(view2["battlefield_state"] == before_projection["battlefield_state"], "Invalid geometry changed authoritative positions")
     valid = movement_payload(view2["pending_proposal"], view2)
-    _, accepted = pair.submit(pair.intent(request2, payload=valid, label="move-one-inch"), role_for_actor(request2))
+    valid_command = pair.intent(request2, payload=valid, label="move-one-inch")
+    record_authorized_attempt(pair, request2, view2, valid_command, role_for_actor(request2))
+    _, accepted = pair.submit(valid_command, role_for_actor(request2))
     pair.captures.add("movement_accepted", role, "http", accepted, "Canonical complete ordered witness, every current placed physical model translated one inch +X", "accepted")
     after = pair.view(role)
     pose_evidence = verify_requested_model_poses(before_projection["battlefield_state"], after["battlefield_state"], valid["witness"])
@@ -1132,7 +1159,7 @@ def capture(args: argparse.Namespace, report: Report) -> None:
             start_code = string_field(object_field(started.body, "error"), "code") if "error" in started.body else string_field(started.body, "outcome_code")
             raise BoundaryError(f"Canonical start not accepted: actual HTTP {started.status}, code {start_code}; privileged response retained at {start_artifact}")
         run_case_groups(report, ((("AUTH-01", "VIEW-01"), lambda: auth_and_views(pair, report)), (("FINITE-01", "RETRY-01", "STALE-01"), lambda: finite_and_retry(pair, report)), (("MOVE-01", "MOVE-02", "FIDELITY-01"), lambda: movement_cases(pair, report)), (("ERROR-01",), lambda: error_cases(pair, report)), (("LIFETIME-01",), lambda: lifetime_cases(args, report, host, http, tokens, pair.session, config))))
-        report.details["transportMeasurements"] = {"local": pair.local.metrics, "http": pair.http.metrics, "bounds": {"connectSeconds": 3, "readSeconds": 10, "totalSeconds": 30, "requestBytes": REQUEST_LIMIT, "responseBytes": RESPONSE_LIMIT, "maxSubmissionsPerScenario": 256}}
+        report.details["transportMeasurements"] = {"local": pair.local.metrics, "http": pair.http.metrics, "bounds": {"connectSeconds": 3, "readSeconds": SOCKET_READ_CAP_SECONDS, "totalSeconds": REQUEST_DEADLINE_SECONDS, "requestBytes": REQUEST_LIMIT, "responseBytes": RESPONSE_LIMIT, "maxSubmissionsPerScenario": 256}}
         report.details["comparisonNormalization"] = "Only operational timestamps and authenticated opaque cursor tokens are ignored for equality; all original captures/hashes retained; IDs, revisions, projections and typed action payloads preserved"
         trace = args.output_root / "private-trace.json"
         write_new(trace, json_bytes(pair.trace), report.secrets)

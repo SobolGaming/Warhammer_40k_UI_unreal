@@ -246,6 +246,31 @@ class OutcomeTests(unittest.TestCase):
         self.assertEqual(uncommitted["error"]["message"], "Submitted proposal was invalid.")
         self.assertNotIn("violations", uncommitted["error"])
 
+    def test_uncommitted_command_outcome_accepts_only_422_supported_negative_codes(self):
+        # Public outcome schema permits facade pre-validator results with both
+        # flags false; these remain distinct from recorded invalid attempts.
+        for code in ("proposal_invalid", "rule_path_unsupported"):
+            outcome = copy.deepcopy(self.accepted)
+            outcome.update(accepted=False, committed=False, outcome_code=code)
+            with self.subTest(code=code):
+                self.assertEqual(boundary.classify(422, outcome), "uncommitted_invalid")
+                with self.assertRaises(boundary.BoundaryError):
+                    boundary.classify(200, outcome)
+
+    def test_uncommitted_outcome_capture_routes_through_command_outcome_schema(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            report, schemas = boundary.Report("capture", root), MagicMock()
+            captures = boundary.Captures(SimpleNamespace(output_root=root), report, schemas)
+            outcome = copy.deepcopy(self.accepted)
+            outcome.update(accepted=False, committed=False, outcome_code="proposal_invalid")
+            reply = boundary.Reply(422, boundary.json_bytes(outcome), 0.01, 0)
+            path = captures.add("unit_uncommitted_outcome", "admin", "synthetic_negative", reply,
+                                "Pure schema-routing unit; not live HTTP evidence", "uncommitted_invalid")
+            schemas.validate.assert_called_once_with("session-command-outcome.schema.json", outcome)
+            self.assertEqual(Path(path).read_bytes(), reply.raw)
+            self.assertEqual(captures.entries, [])
+
     def test_fidelity_observation_retains_actual_response_message_and_bytes(self):
         wire = boundary.json_bytes({"schema_version": "error-envelope-v1", "error": {
             "code": "proposal_invalid", "message": "Actual supplied wire message for parser test."}})
@@ -409,11 +434,42 @@ class EvidenceSafetyTests(unittest.TestCase):
             self.assertEqual(diagnostic["publicResponse"]["httpStatus"], 422)
             self.assertEqual(diagnostic["publicResponse"]["body"], reply.body)
             self.assertEqual(diagnostic["publicResponse"]["rawSHA256"], boundary.sha256(reply.raw))
-            self.assertEqual(report.artifacts[0]["path"], str(path))
-            self.assertEqual(report.artifacts[0]["sha256"], boundary.sha256(path.read_bytes()))
+            artifact = next(row for row in report.artifacts if row["path"] == str(path))
+            self.assertEqual(artifact["sha256"], boundary.sha256(path.read_bytes()))
             with self.assertRaisesRegex(boundary.BoundaryError, "authenticated role"):
                 boundary.record_setup_rejection(client, request, view, command, reply, "playerB")
-            self.assertEqual(len(report.artifacts), 1)
+            self.assertEqual(len(report.artifacts), 2)
+
+    def test_authorized_candidate_is_retained_before_timed_out_submission(self):
+        # Pure client-control timeout; no engine or HTTP result is fabricated.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            report = boundary.Report("capture", root)
+            request = {"request_id": "unit-timeout-request", "actor_id": "player-a",
+                       "decision_type": "select_secondary_missions", "options": [
+                           {"option_id": "fixed:assassination:bring_it_down"}]}
+            view = {"viewer_player_id": "player-a", "pending_decision": request,
+                    "pending_proposal": None}
+            command = boundary.envelope("unit-session", "unit-timeout-command", 2, "finite_option",
+                                        request, option="fixed:assassination:bring_it_down")
+            captures = SimpleNamespace(report=report, add=MagicMock())
+            client = MagicMock()
+            client.captures, client.submissions = captures, 7
+            client.pending.return_value = (request, view)
+            client.intent.return_value = command
+            client.submit.side_effect = TimeoutError("Synthetic completion unknown")
+            boundary.run_case_groups(report, ((("UNIT-TIMEOUT",), lambda: boundary.setup_to_move(client)),))
+            snapshot = boundary.strict_json((root / "private-attempts/command_8/playerA.json").read_bytes())
+            self.assertEqual(snapshot["commandEnvelope"], command)
+            self.assertEqual(snapshot["authorizedViewBeforeSubmission"], view)
+            self.assertNotIn("publicResponse", snapshot)
+            self.assertIn("no completion outcome asserted", snapshot["observation"])
+            self.assertEqual(report.cases[0]["status"], "FAIL")
+            client.submit.assert_called_once_with(command, "playerA")
+            captures.add.assert_not_called()
+            with self.assertRaisesRegex(boundary.BoundaryError, "authenticated role"):
+                boundary.record_authorized_attempt(client, request, view, command, "playerB")
+            self.assertFalse((root / "private-attempts/command_8/playerB.json").exists())
 
     def test_http10_body_completion_never_updates_a_closed_socket(self):
         # Real HTTPResponse.read1() closes the file on Content-Length completion
@@ -428,7 +484,19 @@ class EvidenceSafetyTests(unittest.TestCase):
                 self.assertEqual(reply.status, 200)
                 self.assertEqual(reply.raw, body)
                 self.assertTrue(transport.closed)
-                self.assertTrue(all(0 < timeout <= 10 for timeout in transport.timeouts))
+                self.assertTrue(all(0 < timeout <= 30 for timeout in transport.timeouts))
+
+    def test_socket_read_timeouts_are_capped_by_remaining_total_deadline(self):
+        body = b'{"transport":"remaining-deadline"}'
+        wire = b"HTTP/1.0 200 OK\r\nContent-Length: " + str(len(body)).encode() + b"\r\n\r\n" + body
+        connection, transport = http10_connection(wire)
+        clock = iter(range(0, 100, 5))
+        with patch.object(boundary.http_client, "HTTPConnection", return_value=connection), \
+             patch.object(boundary.time, "monotonic", side_effect=lambda: next(clock)):
+            reply = boundary.Endpoint({"playerA": None}, base_url="http://127.0.0.1:12345").request("GET", "/transport-unit", "playerA")
+        self.assertEqual(reply.raw, body)
+        self.assertEqual(transport.timeouts, [25, 20, 15])
+        self.assertLessEqual(reply.elapsed, 30)
 
     def test_http10_truncated_declared_body_fails_before_json_classification(self):
         body = b'{"transport":"truncated"}'
