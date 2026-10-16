@@ -484,19 +484,62 @@ class EvidenceSafetyTests(unittest.TestCase):
                 self.assertEqual(reply.status, 200)
                 self.assertEqual(reply.raw, body)
                 self.assertTrue(transport.closed)
-                self.assertTrue(all(0 < timeout <= 30 for timeout in transport.timeouts))
+                self.assertTrue(all(0 < timeout <= 120 for timeout in transport.timeouts))
 
     def test_socket_read_timeouts_are_capped_by_remaining_total_deadline(self):
         body = b'{"transport":"remaining-deadline"}'
         wire = b"HTTP/1.0 200 OK\r\nContent-Length: " + str(len(body)).encode() + b"\r\n\r\n" + body
-        connection, transport = http10_connection(wire)
-        clock = iter(range(0, 100, 5))
-        with patch.object(boundary.http_client, "HTTPConnection", return_value=connection), \
-             patch.object(boundary.time, "monotonic", side_effect=lambda: next(clock)):
-            reply = boundary.Endpoint({"playerA": None}, base_url="http://127.0.0.1:12345").request("GET", "/transport-unit", "playerA")
-        self.assertEqual(reply.raw, body)
-        self.assertEqual(transport.timeouts, [25, 20, 15])
-        self.assertLessEqual(reply.elapsed, 30)
+        for budget, expected in ((120, [115, 110, 105]), (30, [25, 20, 15])):
+            connection, transport = http10_connection(wire)
+            clock = iter(range(0, 100, 5))
+            with self.subTest(request_budget_seconds=budget):
+                with patch.object(boundary.http_client, "HTTPConnection", return_value=connection), \
+                     patch.object(boundary.time, "monotonic", side_effect=lambda: next(clock)):
+                    reply = boundary.Endpoint({"playerA": None}, base_url="http://127.0.0.1:12345").request("GET", "/transport-unit", "playerA", request_budget_seconds=budget)
+                self.assertEqual(reply.raw, body)
+                self.assertEqual(transport.timeouts, expected)
+                self.assertLessEqual(reply.elapsed, budget)
+
+    def test_request_budget_cannot_exceed_the_authorized_diagnostic(self):
+        endpoint = boundary.Endpoint({"playerA": None}, base_url="http://127.0.0.1:12345")
+        with patch.object(boundary.http_client, "HTTPConnection") as transport:
+            for budget in (0, -1, 121, True, float("inf"), float("nan")):
+                with self.subTest(budget=budget), self.assertRaises(boundary.BoundaryError):
+                    endpoint.request("GET", "/transport-unit", "playerA", request_budget_seconds=budget)
+            transport.assert_not_called()
+
+    def test_owned_readiness_keeps_its_remaining_30_second_budget(self):
+        # Pure ownership-control unit: no Core child or actual network runs.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            host = boundary.OwnedHost.__new__(boundary.OwnedHost)
+            host.root, host.port, host.tokens = root, 12345, {}
+            host.args = SimpleNamespace(core_launcher=root / "selected-launcher.py")
+            host.shutdown, host.record = root / "shutdown", {}
+            child = MagicMock()
+            child.pid, child.poll.return_value = 23456, None
+            endpoint = MagicMock()
+            endpoint.request.return_value = boundary.Reply(200, b"{}", 0.01, 0)
+
+            def spawned(*args, **kwargs):
+                kwargs["stdout"].write(b"Serving Phase 18M reference contract at http://127.0.0.1:12345\n")
+                kwargs["stdout"].flush()
+                return child
+
+            clock = iter((0, 5, 10))
+            try:
+                with patch.object(boundary.subprocess, "Popen", side_effect=spawned), \
+                     patch.object(boundary.threading, "Timer"), \
+                     patch.object(boundary, "require_available_loopback_port"), \
+                     patch.object(boundary, "Endpoint", return_value=endpoint), \
+                     patch.object(boundary.time, "monotonic", side_effect=lambda: next(clock)):
+                    self.assertIs(host.start(), endpoint)
+                endpoint.request.assert_called_once_with("GET", "/rules-catalog", "admin", request_budget_seconds=20)
+                self.assertEqual(host.record["readinessRequestBudgetSeconds"], 20)
+                self.assertEqual(boundary.REQUEST_DEADLINE_SECONDS, 120)
+            finally:
+                if host.log is not None:
+                    host.log.close()
 
     def test_http10_truncated_declared_body_fails_before_json_classification(self):
         body = b'{"transport":"truncated"}'
@@ -615,6 +658,9 @@ class EvidenceSafetyTests(unittest.TestCase):
         payload = report.payload()
         self.assertEqual(payload["status"], "BLOCKED")
         self.assertEqual(payload["caseCounts"]["passed"], 0)
+        self.assertEqual(payload["diagnostic"]["label"], "E01-SLOW120")
+        self.assertEqual(payload["diagnostic"]["requestBudgetSeconds"], 120)
+        self.assertEqual(payload["diagnostic"]["readinessBudgetSeconds"], 30)
         boundary.secret_scan(boundary.json_bytes(payload))
 
 

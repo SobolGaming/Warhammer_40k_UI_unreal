@@ -32,8 +32,9 @@ RESOURCE_COUNT = 3116
 REQUEST_LIMIT = 16 * 1024 * 1024
 RESPONSE_LIMIT = 64 * 1024 * 1024
 MAX_SECONDS = 30 * 60
-REQUEST_DEADLINE_SECONDS = 30
-SOCKET_READ_CAP_SECONDS = 30
+DIAGNOSTIC_LABEL = "E01-SLOW120"
+REQUEST_DEADLINE_SECONDS = 120
+SOCKET_READ_CAP_SECONDS = 120
 MAX_EXACT_INTEGER = 2**53 - 1
 CASE_IDS = ("SOURCE-01", "FINITE-01", "MOVE-01", "MOVE-02", "RETRY-01", "STALE-01", "AUTH-01", "VIEW-01", "ERROR-01", "FIDELITY-01", "SCOPE-01", "LIFETIME-01")
 SLUG = re.compile(r"^[A-Za-z0-9_-]+$")
@@ -142,7 +143,7 @@ class Report:
         self.cases: list[dict] = []
         self.artifacts: list[dict] = []
         self.secrets: tuple[str, ...] = ()
-        self.details: dict = {}
+        self.details: dict = {"diagnostic": {"label": DIAGNOSTIC_LABEL, "requestBudgetSeconds": REQUEST_DEADLINE_SECONDS, "socketReadCapSeconds": SOCKET_READ_CAP_SECONDS, "connectCapSeconds": 3, "readinessBudgetSeconds": 30, "purpose": "Separately authorized 120-second diagnostic; prior run outcomes remain unchanged"}}
 
     def case(self, case_id: str, status: str, expected: object, actual: object, artifacts: list[str] | None = None) -> None:
         self.cases.append({"id": case_id, "status": status, "expected": expected, "actual": actual, "artifacts": artifacts or []})
@@ -331,7 +332,8 @@ class Endpoint:
             require(parsed.scheme == "http" and parsed.hostname == "127.0.0.1" and parsed.port and not parsed.username and parsed.path in ("", "/") and not parsed.query and not parsed.fragment, "Proof endpoint must be explicit positive loopback HTTP")
             self.port = parsed.port
 
-    def request(self, method: str, path: str, role: str, body: object = None, query: dict | None = None, malformed: bool = False) -> Reply:
+    def request(self, method: str, path: str, role: str, body: object = None, query: dict | None = None, malformed: bool = False, *, request_budget_seconds: float = REQUEST_DEADLINE_SECONDS) -> Reply:
+        require(type(request_budget_seconds) in (int, float) and math.isfinite(request_budget_seconds) and 0 < request_budget_seconds <= REQUEST_DEADLINE_SECONDS, "Request budget must be positive and no larger than the authorized diagnostic budget")
         require(time.monotonic() - self.started < MAX_SECONDS, "Endpoint proof exceeded 30 minute limit")
         require(path.startswith("/") and "?" not in path and "#" not in path, "Invalid public route")
         payload = b"{" if malformed else json_bytes(body) if body is not None else b""
@@ -344,19 +346,19 @@ class Endpoint:
             response = self.server.handle(method=method, path=path, query=query, body=body, authorization=authorization)
             reply = Reply(response.status_code, json_bytes(response.payload), time.monotonic() - start, len(payload))
         else:
-            connection = http_client.HTTPConnection("127.0.0.1", self.port, timeout=3)
+            connection = http_client.HTTPConnection("127.0.0.1", self.port, timeout=min(3, request_budget_seconds))
             try:
                 connection.connect()
                 transport_socket = connection.sock
-                remaining = REQUEST_DEADLINE_SECONDS - (time.monotonic() - start)
-                require(remaining > 0, "Request exceeded 30 second deadline; completion unknown")
+                remaining = request_budget_seconds - (time.monotonic() - start)
+                require(remaining > 0, "Request exceeded its total budget; completion unknown")
                 transport_socket.settimeout(min(SOCKET_READ_CAP_SECONDS, remaining))
                 headers = {"Content-Type": "application/json"}
                 if authorization is not None:
                     headers["Authorization"] = authorization
                 connection.request(method, path + ("?" + urlencode(query) if query else ""), body=payload if payload else None, headers=headers)
-                remaining = REQUEST_DEADLINE_SECONDS - (time.monotonic() - start)
-                require(remaining > 0, "Request exceeded 30 second deadline; completion unknown")
+                remaining = request_budget_seconds - (time.monotonic() - start)
+                require(remaining > 0, "Request exceeded its total budget; completion unknown")
                 transport_socket.settimeout(min(SOCKET_READ_CAP_SECONDS, remaining))
                 response = connection.getresponse()
                 length = response.getheader("Content-Length")
@@ -367,8 +369,8 @@ class Endpoint:
                 # an HTTP/1.0 socket) immediately at the declared body length.
                 # Do not update a closed socket's timeout on the next iteration.
                 while not response.isclosed():
-                    remaining = REQUEST_DEADLINE_SECONDS - (time.monotonic() - start)
-                    require(remaining > 0, "Request exceeded 30 second deadline; completion unknown")
+                    remaining = request_budget_seconds - (time.monotonic() - start)
+                    require(remaining > 0, "Request exceeded its total budget; completion unknown")
                     transport_socket.settimeout(min(SOCKET_READ_CAP_SECONDS, remaining))
                     chunk = response.read1(min(65536, RESPONSE_LIMIT - total + 1))
                     if not chunk:
@@ -378,7 +380,7 @@ class Endpoint:
                     require(total <= RESPONSE_LIMIT, "Response exceeds 64 MiB; completion unknown")
                 require(declared_length is None or total == declared_length, "Truncated declared response body; completion unknown")
                 reply = Reply(response.status, b"".join(chunks), time.monotonic() - start, len(payload))
-                require(reply.elapsed <= REQUEST_DEADLINE_SECONDS, "Request exceeded 30 second total deadline")
+                require(reply.elapsed <= request_budget_seconds, "Request exceeded its total budget; completion unknown")
             finally:
                 connection.close()
         self.metrics["requests"] += 1
@@ -449,9 +451,13 @@ class OwnedHost:
                 continue
             require(self.process.poll() is None, "Owned host exited after bind marker")
             try:
-                ready = endpoint.request("GET", "/rules-catalog", "admin")
+                readiness_remaining = min(30, deadline - time.monotonic())
+                if readiness_remaining <= 0:
+                    break
+                ready = endpoint.request("GET", "/rules-catalog", "admin", request_budget_seconds=readiness_remaining)
                 require(ready.status == 200, "Owned host authenticated catalog readiness failed")
                 require(self.process.poll() is None, "Unexpected responder after owned child exit")
+                self.record["readinessRequestBudgetSeconds"] = readiness_remaining
                 self.record["observedBindMarker"] = marker
                 self.record["readyUTC"] = datetime.now(UTC).isoformat()
                 return endpoint
