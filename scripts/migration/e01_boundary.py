@@ -9,10 +9,11 @@ from __future__ import annotations
 import argparse
 import copy
 import hashlib
-import http.client
+import http.client as http_client
 import importlib
 import importlib.metadata
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -338,7 +339,7 @@ class Endpoint:
             response = self.server.handle(method=method, path=path, query=query, body=body, authorization=authorization)
             reply = Reply(response.status_code, json_bytes(response.payload), time.monotonic() - start, len(payload))
         else:
-            connection = http.client.HTTPConnection("127.0.0.1", self.port, timeout=3)
+            connection = http_client.HTTPConnection("127.0.0.1", self.port, timeout=3)
             try:
                 connection.connect()
                 transport_socket = connection.sock
@@ -421,7 +422,7 @@ class OwnedHost:
                 self.record["observedBindMarker"] = marker
                 self.record["readyUTC"] = datetime.now(UTC).isoformat()
                 return endpoint
-            except (ConnectionError, TimeoutError, OSError, http.client.HTTPException):
+            except (ConnectionError, TimeoutError, OSError, http_client.HTTPException):
                 time.sleep(0.1)
         raise Blocked("Owned host readiness exceeded 30 seconds")
 
@@ -632,8 +633,20 @@ def scout_payload(proposal: dict, view: dict) -> dict:
         paths.append({"model_id": model_id, "poses": poses})
     require(bool(paths), "Empty Scout inventory")
     result = {key: copy.deepcopy(proposal[key]) for key in ("proposal_kind", "game_id", "ruleset_descriptor_hash", "setup_step", "player_id", "unit_instance_id", "action_kind", "source_rule_id", "scout_distance_inches", "context")}
-    result.update({"proposal_request_id": proposal["request_id"], "witness": {"model_paths": paths}})
+    result.update({"proposal_request_id": proposal["request_id"], "witness": {"model_paths": leading_first_translation_candidate(paths, dx=1.0)}})
     return result
+
+
+def leading_first_translation_candidate(paths: list[dict], *, dx: float, dy: float = 0.0) -> list[dict]:
+    """Construct this proof's fixed uniform-translation fixture candidate.
+
+    Selected Core 5f509724 tests/sequential_translation_helpers.py:12-20 uses
+    this explicit leading-first order in its three-pose Scout/movement recipes.
+    This is candidate construction, not a legality solver or an automatic
+    production witness reorder. Core alone accepts/rejects the submitted order.
+    Neither the original inventory list nor any path/pose is modified.
+    """
+    return sorted(paths, key=lambda row: (-(row["poses"][0]["position"]["x"] * dx + row["poses"][0]["position"]["y"] * dy), row["model_id"]))
 
 
 def movement_payload(proposal: dict, view: dict, dx: float = 1.0) -> dict:
@@ -651,7 +664,48 @@ def movement_payload(proposal: dict, view: dict, dx: float = 1.0) -> dict:
         final["position"]["x"] += dx
         paths.append({"model_id": model["model_instance_id"], "poses": [initial, middle, final]})
     require(bool(paths), "Empty canonical movement inventory")
-    return {"proposal_request_id": proposal["request_id"], "proposal_kind": proposal["proposal_kind"], "unit_instance_id": unit_id, "movement_phase_action": "normal_move", "movement_mode": "normal", "witness": {"model_paths": paths}}
+    return {"proposal_request_id": proposal["request_id"], "proposal_kind": proposal["proposal_kind"], "unit_instance_id": unit_id, "movement_phase_action": "normal_move", "movement_mode": "normal", "witness": {"model_paths": leading_first_translation_candidate(paths, dx=dx)}}
+
+
+def verify_requested_model_poses(before: dict, after: dict, witness: dict) -> dict:
+    """Compare observed authoritative poses with submitted endpoints, not legality."""
+    def indexed_poses(state: dict) -> dict:
+        result = {}
+        for army in state["placed_armies"]:
+            for unit in army["unit_placements"]:
+                for model in unit["model_placements"]:
+                    model_id = string_field(model, "model_instance_id")
+                    require(model_id not in result, "Duplicate authoritative physical model ID")
+                    result[model_id] = object_field(model, "pose")
+        return result
+
+    def components(pose: dict) -> tuple:
+        position, facing = object_field(pose, "position"), object_field(pose, "facing")
+        values = (position["x"], position["y"], position["z"], facing["degrees"])
+        require(all(type(value) in (int, float) and math.isfinite(value) for value in values), "Authoritative/requested pose has invalid numeric components")
+        return values
+
+    def equal(left: tuple, right: tuple) -> bool:
+        return all(math.isclose(a, b, rel_tol=0.0, abs_tol=1e-9) for a, b in zip(left, right, strict=True))
+
+    before_by_id, after_by_id = indexed_poses(before), indexed_poses(after)
+    paths = witness["model_paths"]
+    require(type(paths) is list and bool(paths), "Pose evidence requires a nonempty requested model inventory")
+    seen, evidence, moved_count = set(), [], 0
+    for path in paths:
+        model_id = string_field(path, "model_id")
+        require(model_id not in seen and model_id in before_by_id and model_id in after_by_id, "Requested physical model is duplicated or missing from authoritative before/after state")
+        seen.add(model_id)
+        require(type(path["poses"]) is list and len(path["poses"]) >= 2, "Pose evidence requires ordered initial/final endpoints")
+        initial, final = path["poses"][0], path["poses"][-1]
+        before_values, after_values = components(before_by_id[model_id]), components(after_by_id[model_id])
+        require(equal(components(initial), before_values), "Requested initial pose differs from authoritative before pose")
+        require(equal(components(final), after_values), "Requested final pose differs from authoritative after pose (including facing/Z)")
+        xyz_changed = not equal(before_values[:3], after_values[:3])
+        moved_count += int(xyz_changed)
+        evidence.append({"modelId": model_id, "beforePose": copy.deepcopy(before_by_id[model_id]), "requestedInitialPose": copy.deepcopy(initial), "requestedFinalPose": copy.deepcopy(final), "afterPose": copy.deepcopy(after_by_id[model_id]), "xyzChanged": xyz_changed})
+    require(moved_count > 0, "No authoritative requested-model XYZ position changed")
+    return {"requestedModelCount": len(paths), "movedModelCount": moved_count, "positionChange": moved_count > 0, "numericAbsoluteTolerance": 1e-9, "poseEvidence": evidence}
 
 
 def scope_case(report: Report) -> None:
@@ -783,6 +837,23 @@ def finite_and_retry(pair: Pair, report: Report) -> None:
     report.case("STALE-01", "PASS", "Wrong revision, consumed request and waiting advance typed errors", {"wrongRevision": rejected.body, "consumedRequest": stale_request.body, "waitingAdvance": blocked.body})
 
 
+def record_setup_rejection(pair: Pair, request: dict, view: dict, command: dict, reply: Reply, role: str) -> str:
+    """Retain the actual scoped candidate before leaving its unavailable lane."""
+    require(SLUG.fullmatch(role) is not None, "Unsafe rejection diagnostic role")
+    require(role == role_for_actor(request), "Full rejection diagnostic requires the request actor's authenticated role")
+    require(string_field(view, "viewer_player_id") == string_field(request, "actor_id"), "Full rejection diagnostic viewer does not own the request")
+    visible = object_field(view, "pending_decision")
+    require(string_field(visible, "request_id") == string_field(request, "request_id") and string_field(visible, "actor_id") == string_field(request, "actor_id") and command.get("request_id") == request["request_id"], "Full rejection diagnostic command/request is outside the authorized current view")
+    slug = "setup_rejected_" + str(pair.submissions)
+    wire = pair.captures.add(slug, role, "http", reply, "Actual public response to reviewed fixed setup candidate; cause requires candidate/response inspection")
+    report = pair.captures.report
+    diagnostic = report.output / "private-rejections" / slug / (role + ".json")
+    payload = {"schemaVersion": 1, "role": role, "commandEnvelope": copy.deepcopy(command), "requestBeforeSubmission": copy.deepcopy(request), "proposalBeforeSubmission": copy.deepcopy(view.get("pending_proposal")), "authorizedViewBeforeSubmission": copy.deepcopy(view), "publicResponse": {"httpStatus": reply.status, "body": copy.deepcopy(reply.body), "rawSHA256": sha256(reply.raw), "wireArtifact": wire}, "disposition": "Reviewed candidate rejected; preserve observed input/output before assigning cause"}
+    write_new(diagnostic, json_bytes(payload), report.secrets)
+    report.artifact(diagnostic)
+    return str(diagnostic)
+
+
 def setup_to_move(pair: Pair) -> tuple[dict, dict]:
     for _ in range(256):
         request, view = pair.pending()
@@ -819,8 +890,8 @@ def setup_to_move(pair: Pair) -> tuple[dict, dict]:
             command = pair.intent(request, option=selected, label="setup")
         _, reply = pair.submit(command, role)
         if classify(reply.status, reply.body) != "accepted":
-            pair.captures.add("setup_rejected_" + str(pair.submissions), role, "http", reply, "Actual canonical fixed deployment/setup candidate; rejection is an external proof blocker")
-            raise Blocked("Core rejected reviewed public setup candidate; no legality rewrite/private state fallback")
+            diagnostic = record_setup_rejection(pair, request, view, command, reply, role)
+            raise Blocked("Reviewed public setup candidate was rejected; inspect actual candidate/response before assigning cause: " + diagnostic)
     raise BoundaryError("Canonical setup exceeded 256 offered submissions")
 
 
@@ -873,9 +944,9 @@ def movement_cases(pair: Pair, report: Report) -> None:
     _, accepted = pair.submit(pair.intent(request2, payload=valid, label="move-one-inch"), role_for_actor(request2))
     pair.captures.add("movement_accepted", role, "http", accepted, "Canonical complete ordered witness, every current placed physical model translated one inch +X", "accepted")
     after = pair.view(role)
-    require(after["battlefield_state"] != before_projection["battlefield_state"], "Accepted move was stationary/no authoritative projected position change")
+    pose_evidence = verify_requested_model_poses(before_projection["battlefield_state"], after["battlefield_state"], valid["witness"])
     pair.captures.add("movement_after", role, "http", pair.request("GET", f"/sessions/{pair.session}/projection", role)[1], "Post-action authorized refresh shows authoritative position change", "payload")
-    report.case("MOVE-01", "PASS", "Meaningful one-inch normal move accepted; local/HTTP traces and authorized state agree", {"modelCount": len(valid["witness"]["model_paths"]), "positionChange": True, "requestId": request2["request_id"]})
+    report.case("MOVE-01", "PASS", "Meaningful one-inch normal move accepted; each actual model pose matches its requested endpoints", {"requestId": request2["request_id"], **pose_evidence})
     report.case("MOVE-02", "PASS", "Wrong/missing/duplicate inventories uncommitted; invalid geometry committed; fresh valid retry accepted", {"revisionBefore": before["session_revision"], "revisionAfter": pair.metadata(role)["session_revision"], "historyUnchangedForInventory": True, "historyAdvancedOnceForGeometry": True})
 
 
@@ -967,6 +1038,20 @@ def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, ht
         restart.stop()
 
 
+def run_case_groups(report: Report, groups: tuple) -> None:
+    for ids, function in groups:
+        try:
+            function()
+        except (Blocked, BoundaryError, OSError, TimeoutError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
+            recorded_failure = False
+            for case_id in ids:
+                if not any(row["id"] == case_id for row in report.cases):
+                    report.case(case_id, "BLOCKED" if isinstance(exc, Blocked) else "FAIL", "Packet meaningful case matrix", str(exc))
+                    recorded_failure = True
+            if not recorded_failure:
+                report.case("GROUP-" + "-".join(ids) + "-POST-RESULT-ERROR", "BLOCKED" if isinstance(exc, Blocked) else "FAIL", "Case group and its cleanup complete without an unreported exception", {"caseIds": list(ids), "exceptionType": type(exc).__name__, "message": str(exc), "priorCaseResultsRetained": True})
+
+
 def capture(args: argparse.Namespace, report: Report) -> None:
     verify_runtime(args, report)
     schemas = Schemas(args.fixture_root)
@@ -1005,13 +1090,7 @@ def capture(args: argparse.Namespace, report: Report) -> None:
         if start_outcome != "accepted":
             start_code = string_field(object_field(started.body, "error"), "code") if "error" in started.body else string_field(started.body, "outcome_code")
             raise BoundaryError(f"Canonical start not accepted: actual HTTP {started.status}, code {start_code}; privileged response retained at {start_artifact}")
-        for ids, function in ((("AUTH-01", "VIEW-01"), lambda: auth_and_views(pair, report)), (("FINITE-01", "RETRY-01", "STALE-01"), lambda: finite_and_retry(pair, report)), (("MOVE-01", "MOVE-02", "FIDELITY-01"), lambda: movement_cases(pair, report)), (("ERROR-01",), lambda: error_cases(pair, report)), (("LIFETIME-01",), lambda: lifetime_cases(args, report, host, http, tokens, pair.session, config))):
-            try:
-                function()
-            except (Blocked, BoundaryError, OSError, TimeoutError, http.client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
-                for case_id in ids:
-                    if not any(row["id"] == case_id for row in report.cases):
-                        report.case(case_id, "BLOCKED" if isinstance(exc, Blocked) else "FAIL", "Packet meaningful case matrix", str(exc))
+        run_case_groups(report, ((("AUTH-01", "VIEW-01"), lambda: auth_and_views(pair, report)), (("FINITE-01", "RETRY-01", "STALE-01"), lambda: finite_and_retry(pair, report)), (("MOVE-01", "MOVE-02", "FIDELITY-01"), lambda: movement_cases(pair, report)), (("ERROR-01",), lambda: error_cases(pair, report)), (("LIFETIME-01",), lambda: lifetime_cases(args, report, host, http, tokens, pair.session, config))))
         report.details["transportMeasurements"] = {"local": pair.local.metrics, "http": pair.http.metrics, "bounds": {"connectSeconds": 3, "readSeconds": 10, "totalSeconds": 30, "requestBytes": REQUEST_LIMIT, "responseBytes": RESPONSE_LIMIT, "maxSubmissionsPerScenario": 256}}
         report.details["comparisonNormalization"] = "Only operational timestamps and authenticated opaque cursor tokens are ignored for equality; all original captures/hashes retained; IDs, revisions, projections and typed action payloads preserved"
         trace = args.output_root / "private-trace.json"
@@ -1079,7 +1158,7 @@ def main(argv: list[str] | None = None) -> int:
     report = Report(args.phase, args.output_root)
     try:
         {"preflight": preflight, "verify-runtime": verify_runtime, "capture": capture, "audit": audit}[args.phase](args, report)
-    except (Blocked, BoundaryError, OSError, TimeoutError, subprocess.SubprocessError, http.client.HTTPException, ImportError, KeyError, IndexError, TypeError, ValueError) as exc:
+    except (Blocked, BoundaryError, OSError, TimeoutError, subprocess.SubprocessError, http_client.HTTPException, ImportError, KeyError, IndexError, TypeError, ValueError) as exc:
         report.case("PHASE", "BLOCKED" if isinstance(exc, (Blocked, ImportError)) else "FAIL", "All phase prerequisites and cases", str(exc))
     payload = report.payload()
     write_new(args.report_file, json_bytes(payload), report.secrets)

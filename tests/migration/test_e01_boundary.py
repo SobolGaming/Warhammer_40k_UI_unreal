@@ -56,7 +56,7 @@ def http10_connection(wire: bytes):
     transport = TrackedSocket()
     connection = MagicMock()
     connection.sock = transport
-    response = boundary.http.client.HTTPResponse(transport)
+    response = boundary.http_client.HTTPResponse(transport)
     response.begin()
     connection.getresponse.return_value = response
     connection.close.side_effect = lambda: setattr(transport, "closed", True)
@@ -145,6 +145,7 @@ class CanonicalEnvelopeTests(unittest.TestCase):
         candidate = boundary.movement_payload(proposal, view)
         paths = candidate["witness"]["model_paths"]
         expected = view["battlefield_state"]["placed_armies"][0]["unit_placements"][0]["model_placements"]
+        expected = sorted(expected, key=lambda row: (-row["pose"]["position"]["x"], row["model_instance_id"]))
         self.assertEqual([row["model_id"] for row in paths],
                          [row["model_instance_id"] for row in expected])
         for row, placement in zip(paths, expected, strict=True):
@@ -153,6 +154,61 @@ class CanonicalEnvelopeTests(unittest.TestCase):
             self.assertEqual(row["poses"][2]["position"]["x"], placement["pose"]["position"]["x"] + 1)
             self.assertEqual(row["poses"][2]["position"]["z"], placement["pose"]["position"]["z"])
             self.assertEqual(row["poses"][2]["facing"], placement["pose"]["facing"])
+
+    def test_fixed_translation_recipe_leads_in_direction_without_mutating_inventory(self):
+        # Source-backed fixture recipe only; no geometry acceptance is inferred.
+        # Canonical setup has rear/front rows at x4/x5.8, with ID tie-breaks.
+        paths = []
+        for model_id, x in (("rear", 4.0), ("front-z", 5.8), ("front-a", 5.8)):
+            paths.append({"model_id": model_id, "poses": [
+                {"position": {"x": x + step, "y": 51.0, "z": 2.25},
+                 "facing": {"degrees": 37.0}} for step in (0.0, 0.5, 1.0)]})
+        original = copy.deepcopy(paths)
+        forward = boundary.leading_first_translation_candidate(paths, dx=1.0)
+        invalid_distance = boundary.leading_first_translation_candidate(paths, dx=1000.0)
+        reverse = boundary.leading_first_translation_candidate(paths, dx=-1.0)
+        self.assertEqual([row["model_id"] for row in forward], ["front-a", "front-z", "rear"])
+        self.assertEqual([row["model_id"] for row in invalid_distance], ["front-a", "front-z", "rear"])
+        self.assertEqual([row["model_id"] for row in reverse], ["rear", "front-a", "front-z"])
+        self.assertEqual(paths, original)
+        self.assertEqual({row["model_id"]: row["poses"] for row in forward},
+                         {row["model_id"]: row["poses"] for row in original})
+
+    def test_observed_one_inch_model_endpoints_pass_with_actual_moved_count(self):
+        view = canonical("examples/projections/post_deployment_view.json")
+        candidate = boundary.movement_payload({"request_id": "unit-pose-request", "proposal_kind": "normal_move",
+            "unit_instance_id": "army-alpha:intercessor-unit-1"}, view)
+        before = view["battlefield_state"]
+        after = copy.deepcopy(before)
+        finals = {row["model_id"]: row["poses"][-1] for row in candidate["witness"]["model_paths"]}
+        for army in after["placed_armies"]:
+            for unit in army["unit_placements"]:
+                for model in unit["model_placements"]:
+                    if model["model_instance_id"] in finals:
+                        model["pose"] = copy.deepcopy(finals[model["model_instance_id"]])
+        observed = boundary.verify_requested_model_poses(before, after, candidate["witness"])
+        self.assertEqual(observed["movedModelCount"], len(finals))
+        self.assertEqual(observed["requestedModelCount"], len(finals))
+        self.assertTrue(observed["positionChange"])
+        self.assertTrue(all(row["xyzChanged"] for row in observed["poseEvidence"]))
+        self.assertTrue(all(row["afterPose"] == row["requestedFinalPose"] for row in observed["poseEvidence"]))
+
+    def test_metadata_change_without_requested_model_motion_cannot_pass_pose_proof(self):
+        view = canonical("examples/projections/post_deployment_view.json")
+        candidate = boundary.movement_payload({"request_id": "unit-pose-request", "proposal_kind": "normal_move",
+            "unit_instance_id": "army-alpha:intercessor-unit-1"}, view)
+        before = view["battlefield_state"]
+        metadata_only = copy.deepcopy(before)
+        metadata_only["removed_model_ids"] = ["unit-unrelated-metadata-change"]
+        metadata_only["terrain_features"] = []
+        self.assertNotEqual(before, metadata_only)
+        with self.assertRaisesRegex(boundary.BoundaryError, "final pose differs"):
+            boundary.verify_requested_model_poses(before, metadata_only, candidate["witness"])
+        stationary = copy.deepcopy(candidate["witness"])
+        for path in stationary["model_paths"]:
+            path["poses"] = [copy.deepcopy(path["poses"][0]), copy.deepcopy(path["poses"][0])]
+        with self.assertRaisesRegex(boundary.BoundaryError, "No authoritative requested-model XYZ"):
+            boundary.verify_requested_model_poses(before, metadata_only, stationary)
 
 
 class OutcomeTests(unittest.TestCase):
@@ -238,6 +294,87 @@ class OutcomeTests(unittest.TestCase):
 
 
 class EvidenceSafetyTests(unittest.TestCase):
+    def test_cross_scope_denial_trace_keeps_only_hashes_of_hidden_command_fields(self):
+        # Deliberate injected actor inputs may be sent under denied scopes, but
+        # they must never be exported as that submitted scope's visible data.
+        local, http = MagicMock(), MagicMock()
+        pair = boundary.Pair(local, http, SimpleNamespace())
+        command = boundary.envelope("known-session", "actor-hidden-command", 2, "finite_option",
+                                    {"request_id": "actor-hidden-request"}, option="actor-hidden-option")
+        for role in ("playerB", "delayed", "replay", "missing", "invalid"):
+            status = 401 if role in ("missing", "invalid") else 403
+            denied = boundary.Reply(status, boundary.json_bytes({"schema_version": "error-envelope-v1",
+                "error": {"code": "access_denied", "message": "Access denied."}}), 0.01, 0)
+            local.request.return_value = http.request.return_value = denied
+            pair.request("POST", "/sessions/known-session/commands", role, command)
+        serialized = boundary.json_bytes(pair.trace).decode()
+        for hidden in ("actor-hidden-command", "actor-hidden-request", "actor-hidden-option", "commandEnvelope"):
+            self.assertNotIn(hidden, serialized)
+        self.assertEqual(len(pair.trace), 5)
+        for row in pair.trace:
+            self.assertEqual(set(row), {"method", "path", "role", "status", "requestSHA256", "responseSHA256"})
+            self.assertEqual(row["requestSHA256"], boundary.sha256(boundary.json_bytes(command)))
+
+    def test_exception_after_case_pass_keeps_actual_result_and_fails_group(self):
+        for error in (boundary.BoundaryError("Synthetic cleanup failure."),
+                      boundary.Blocked("Synthetic post-result blocker.")):
+            report = boundary.Report("capture", REPO)
+
+            def pass_then_fail():
+                report.case("UNIT-LIFETIME", "PASS", "Pure client control check", {"observed": "retained"})
+                raise error
+
+            boundary.run_case_groups(report, ((("UNIT-LIFETIME",), pass_then_fail),))
+            self.assertEqual(report.cases[0]["status"], "PASS")
+            self.assertEqual(report.cases[0]["actual"], {"observed": "retained"})
+            self.assertEqual(len(report.cases), 2)
+            self.assertIn(report.cases[1]["status"], ("FAIL", "BLOCKED"))
+            self.assertEqual(report.cases[1]["actual"]["message"], str(error))
+            self.assertTrue(report.cases[1]["actual"]["priorCaseResultsRetained"])
+            self.assertIn(report.payload()["status"], ("FAIL", "BLOCKED"))
+
+    def test_rejected_setup_saves_scoped_candidate_and_later_case_group_runs(self):
+        # Pure client-control regression: a mocked adapter reply is never counted
+        # as a real Core/HTTP result or written into the proposed-wire index.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            report = boundary.Report("capture", root)
+            request = {"request_id": "unit-request", "actor_id": "player-a",
+                       "decision_type": "select_secondary_missions", "options": [
+                           {"option_id": "fixed:assassination:bring_it_down"}]}
+            view = {"viewer_player_id": "player-a", "pending_decision": request,
+                    "pending_proposal": None}
+            command = boundary.envelope("unit-session", "unit-command", 2, "finite_option",
+                                        request, option="fixed:assassination:bring_it_down")
+            reply = boundary.Reply(422, boundary.json_bytes({"schema_version": "error-envelope-v1",
+                "error": {"code": "proposal_invalid", "message": "Synthetic unit rejection."}}), 0.01, 0)
+            captures = SimpleNamespace(report=report, add=MagicMock(return_value=str(root / "unit-only-wire.json")))
+            client = MagicMock()
+            client.captures, client.submissions = captures, 24
+            client.pending.return_value = (request, view)
+            client.intent.return_value = command
+            client.submit.return_value = (reply, reply)
+            boundary.run_case_groups(report, (
+                (("UNIT-SETUP",), lambda: boundary.setup_to_move(client)),
+                (("UNIT-NEXT",), lambda: report.case("UNIT-NEXT", "PASS", "Pure client continuation", "Invoked")),
+            ))
+            self.assertEqual([(case["id"], case["status"]) for case in report.cases],
+                             [("UNIT-SETUP", "BLOCKED"), ("UNIT-NEXT", "PASS")])
+            path = root / "private-rejections/setup_rejected_24/playerA.json"
+            diagnostic = boundary.strict_json(path.read_bytes())
+            self.assertEqual(diagnostic["role"], "playerA")
+            self.assertEqual(diagnostic["commandEnvelope"], command)
+            self.assertEqual(diagnostic["requestBeforeSubmission"], request)
+            self.assertEqual(diagnostic["authorizedViewBeforeSubmission"], view)
+            self.assertEqual(diagnostic["publicResponse"]["httpStatus"], 422)
+            self.assertEqual(diagnostic["publicResponse"]["body"], reply.body)
+            self.assertEqual(diagnostic["publicResponse"]["rawSHA256"], boundary.sha256(reply.raw))
+            self.assertEqual(report.artifacts[0]["path"], str(path))
+            self.assertEqual(report.artifacts[0]["sha256"], boundary.sha256(path.read_bytes()))
+            with self.assertRaisesRegex(boundary.BoundaryError, "authenticated role"):
+                boundary.record_setup_rejection(client, request, view, command, reply, "playerB")
+            self.assertEqual(len(report.artifacts), 1)
+
     def test_http10_body_completion_never_updates_a_closed_socket(self):
         # Real HTTPResponse.read1() closes the file on Content-Length completion
         # or EOF; this exercises the original closed-socket failure directly.
@@ -246,7 +383,7 @@ class EvidenceSafetyTests(unittest.TestCase):
             headers = b"Content-Length: " + str(len(body)).encode() + b"\r\n" if with_length else b""
             connection, transport = http10_connection(b"HTTP/1.0 200 OK\r\n" + headers + b"\r\n" + body)
             with self.subTest(content_length=with_length):
-                with patch.object(boundary.http.client, "HTTPConnection", return_value=connection):
+                with patch.object(boundary.http_client, "HTTPConnection", return_value=connection):
                     reply = boundary.Endpoint({"playerA": None}, base_url="http://127.0.0.1:12345").request("GET", "/transport-unit", "playerA")
                 self.assertEqual(reply.status, 200)
                 self.assertEqual(reply.raw, body)
@@ -257,7 +394,7 @@ class EvidenceSafetyTests(unittest.TestCase):
         body = b'{"transport":"truncated"}'
         wire = b"HTTP/1.0 200 OK\r\nContent-Length: " + str(len(body) + 7).encode() + b"\r\n\r\n" + body
         connection, transport = http10_connection(wire)
-        with patch.object(boundary.http.client, "HTTPConnection", return_value=connection):
+        with patch.object(boundary.http_client, "HTTPConnection", return_value=connection):
             with self.assertRaisesRegex(boundary.BoundaryError, "Truncated declared response body"):
                 boundary.Endpoint({"playerA": None}, base_url="http://127.0.0.1:12345").request("GET", "/transport-unit", "playerA")
         self.assertTrue(transport.closed)
