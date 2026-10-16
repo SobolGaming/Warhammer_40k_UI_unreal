@@ -4,6 +4,10 @@ Date: 2026-10-16. Authority: OWN13, the owner's instruction to commit, push, ope
 and merge the PR, then continue the migration plan. **Local commit/source-check
 work completed; remote publication currently BLOCKED. E01 runtime NOT RUN.**
 
+This is the historical pre-access record preserved in `d68a5af`. The owner then
+updated token permissions; [publication resumed and PR1 merged](2026-10-16-bootstrap-publication.md).
+The earlier failures below remain evidence of those attempts, not the current blocker.
+
 ## Publication state
 
 The audited BOOT01 candidate was verified unchanged, scanned against both local

@@ -20,7 +20,7 @@ and acceptance criteria; engine presence alone does not establish a successful b
 ## Current development selections
 
 The owner selected Core commit `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, external
-contract **44.3.33**, subject to adaptation review. Arcade remains the separate
+contract **44.3.33**; its source adaptation review is recorded in the plan. Arcade remains the separate
 44.1 characterization baseline. Windows x64 and Linux x86-64 are planned for the
 client. The owner will arrange the Linux machine later: plumb Linux targets and
 portable seams now, and explicitly mark Linux build/render/package results
@@ -31,8 +31,14 @@ Development starts as personal/internal use. Preserve supported profiles; sessio
 data remains paired to its exact Core. Midgame switching back to Arcade is not required.
 
 There is no playable client executable or Core launch switch yet. The procedures below prepare or
-run the existing Python rules Core for development; they are documented candidates,
-not commands executed during migration research. Unreal project creation/build is
+run the existing Python rules Core for development. The separate
+[E01 developer proof](docs/plans/evidence/2026-10-16-e01-boundary.md) records an
+actual isolated, locked Windows installation and its boundary checks. The latest
+run passed 38 Python tests and 11 boundary checks, but the invalid-geometry command
+exceeded the 30-second request budget ([Core #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590)).
+Its completion remains unknown; E01 is unaccepted and the Native and wrapper
+Audit phases did not run. Independent source review and acceptance audit are recorded.
+The manual installation alternatives below are not its executed commands. Unreal project creation/build is
 specified in [plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).
 
 ## Build the Unreal project on Windows
@@ -87,6 +93,41 @@ Game/Editor targets permit Linux and configuration selects Vulkan SM6. A native
 Linux UE5.8/toolchain host still needs to be arranged: Linux compilation, rendering
 and packaging are **UNTESTED**. No Linux success follows from Windows generation.
 
+## Launch using the prepared Windows development runtime
+
+E01 prepared `.local/core-44.3.33` in this repository. From the Unreal repository
+root, launch the checked-out development server with that existing environment:
+
+```powershell
+$taskCore = [IO.Path]::GetFullPath('..\Warhammer_40k_AI')
+$taskCorePython = [IO.Path]::GetFullPath('.local\core-44.3.33\Scripts\python.exe')
+if (-not (Test-Path -LiteralPath $taskCorePython -PathType Leaf)) { throw 'Prepare the approved isolated runtime first' }
+$taskCoreRevision = git -C $taskCore rev-parse HEAD
+if ($LASTEXITCODE -ne 0 -or $taskCoreRevision -ne '5f509724da25a2f6ded0c2739a8e7c84bdf59c91') { throw 'Core checkout differs from the selected revision' }
+$taskCoreChanges = git -C $taskCore status --porcelain=v1 --untracked-files=all
+if ($LASTEXITCODE -ne 0 -or $taskCoreChanges) { throw 'Core checkout must be readable and clean' }
+& $taskCorePython -I -B -c 'from warhammer40k_core.build_identity import verified_engine_build_identity; i=verified_engine_build_identity(); assert i.build_id == "warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a" and i.resource_count == 3116; print(i.build_id)'
+if ($LASTEXITCODE -ne 0) { throw 'Installed Core identity failed' }
+& $taskCorePython -I -B -c 'import socket; s=socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.settimeout(3); s.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1); s.bind(("127.0.0.1", 8765)); s.close()'
+if ($LASTEXITCODE -ne 0) { throw 'Port 8765 is unavailable; no host launched' }
+& $taskCorePython -I -B (Join-Path $taskCore 'scripts\run_phase18m_reference_server.py') --host 127.0.0.1 --port 8765
+if ($LASTEXITCODE -ne 0) { throw 'Core development host failed' }
+```
+
+Keep it on loopback and stop it with Ctrl+C. This starts the Python service;
+the Unreal shell has no connection controls yet. The experiment wrapper's
+`Preflight` and `PrepareRuntime` phases verify an existing environment in more
+detail before reuse; they refuse drift. On a fresh machine, use an approved
+installation recipe below rather than copying this environment directory.
+
+On Windows the current Core host can share an occupied port with another process
+([Core #589](https://github.com/SobolGaming/Warhammer_40k_AI/issues/589)). The
+exclusive bind probe above rejects an already occupied port before launch; it
+closes before the host binds, so it cannot prevent a race or a later second
+listener. Use a dedicated local port and wait for this process's own
+`Serving Phase 18M reference contract at http://127.0.0.1:8765` message. An HTTP response alone does not prove
+which process answered. Robust managed-host exclusivity remains an external gap.
+
 ## Run the Python rules Core from its checkout
 
 Use `../Warhammer_40k_AI` as read-only source. Do not reset it, run dependency sync
@@ -97,10 +138,12 @@ or source artifact rather than changing the shared checkout.
 Core supports installation as the Python package `warhammer40k-core-v2`. Its
 metadata requires Python **>=3.14,<3.15**; this workspace's documented interpreter
 target is **3.14.5**. It uses a Hatchling build and native dependencies including
-`z3-solver==4.15.4.0`. Metadata supports these install recipes; native loading and
-relocation have not been tested. Use an isolated environment outside either source
-checkout. These optional installation commands require a separately authorized
-execution step; they were not run as part of the planning task.
+`z3-solver==4.15.4.0`. E01 verified the selected installed build, all 3,116 runtime
+resources and eight dependency imports on Windows. Relocation, Linux and packaged
+delivery remain untested. Use an isolated environment outside either source
+checkout. The manual recipes below require an approved execution scope; the
+approved E01 route instead uses a disposable committed-source archive and Core's
+lockfile, preserving both shared checkouts.
 
 Windows PowerShell, using an already installed Python 3.14:
 
@@ -113,11 +156,18 @@ $taskDirty = git -C $taskCore status --porcelain=v1 --untracked-files=all
 if ($LASTEXITCODE -ne 0 -or $taskDirty) { throw 'Core source must match the reviewed clean candidate' }
 
 $taskCoreVenv = 'C:\SWDev\warhammer\.venvs\core-44.3.33'
+$taskCoreArchive = 'C:\SWDev\warhammer\.venvs\core-44.3.33-source.zip'
+$taskCoreSource = 'C:\SWDev\warhammer\.venvs\core-44.3.33-source'
 if (Test-Path -LiteralPath $taskCoreVenv) { throw 'Choose a fresh isolated environment or inspect the existing one first' }
-py -3.14 -m venv $taskCoreVenv
+if ((Test-Path -LiteralPath $taskCoreArchive) -or (Test-Path -LiteralPath $taskCoreSource)) { throw 'Choose fresh source-copy paths' }
+$taskPython = 'C:\Users\Rabid\AppData\Roaming\uv\python\cpython-3.14.5-windows-x86_64-none\python.exe'
+& $taskPython -I -B -m venv $taskCoreVenv
 if ($LASTEXITCODE -ne 0) { throw 'Environment creation failed' }
+git -C $taskCore -c core.autocrlf=false -c core.eol=lf archive --format=zip "--output=$taskCoreArchive" $taskExpected
+if ($LASTEXITCODE -ne 0) { throw 'Committed source archive failed' }
+Expand-Archive -LiteralPath $taskCoreArchive -DestinationPath $taskCoreSource -ErrorAction Stop
 $taskCorePython = Join-Path $taskCoreVenv 'Scripts\python.exe'
-& $taskCorePython -m pip install $taskCore
+& $taskCorePython -I -B -m pip install $taskCoreSource
 if ($LASTEXITCODE -ne 0) { throw 'Core package installation failed' }
 ```
 
@@ -129,27 +179,34 @@ task_expected=5f509724da25a2f6ded0c2739a8e7c84bdf59c91
 test "$(git -C "$task_core" rev-parse HEAD)" = "$task_expected" || exit 1
 test -z "$(git -C "$task_core" status --porcelain=v1 --untracked-files=all)" || exit 1
 task_core_venv="$PWD/.venvs/core-44.3.33"
+task_core_archive="$PWD/.venvs/core-44.3.33-source.tar"
+task_core_source="$PWD/.venvs/core-44.3.33-source"
 test ! -e "$task_core_venv" || exit 1
+test ! -e "$task_core_archive" && test ! -e "$task_core_source" || exit 1
 python3.14 -m venv "$task_core_venv" || exit 1
+git -C "$task_core" -c core.autocrlf=false -c core.eol=lf archive --format=tar --output="$task_core_archive" "$task_expected" || exit 1
+mkdir "$task_core_source" || exit 1
+tar -xf "$task_core_archive" -C "$task_core_source" || exit 1
 task_core_python="$task_core_venv/bin/python"
-"$task_core_python" -m pip install "$task_core" || exit 1
+"$task_core_python" -I -B -m pip install "$task_core_source" || exit 1
 ```
 
-The commands install a non-editable local-source package, leaving Core code unchanged.
-Package builds may create temporary/build metadata; account for those writes in the
-execution packet and use an approved source copy if the build backend writes into
-the source tree. Never assume `pip install <directory>` is strictly read-only.
+These commands build a non-editable package from a disposable committed-source
+copy. Build metadata stays outside the shared Core checkout. On another Windows
+host, set `$taskPython` to its installed Python 3.14 interpreter. The manual pip
+and Linux recipes remain unexecuted alternatives; E01 used the reviewed locked
+`uv sync` route. Preserve failed source copies rather than overwriting them.
 
 Alternatively, install directly from the exact Git revision into the same fresh
 environment **instead of** the local-source install above:
 
 ```powershell
-& $taskCorePython -m pip install 'git+https://github.com/SobolGaming/Warhammer_40k_AI.git@5f509724da25a2f6ded0c2739a8e7c84bdf59c91'
+& $taskCorePython -I -B -m pip install 'git+https://github.com/SobolGaming/Warhammer_40k_AI.git@5f509724da25a2f6ded0c2739a8e7c84bdf59c91'
 if ($LASTEXITCODE -ne 0) { throw 'Pinned Core installation failed' }
 ```
 
 ```bash
-"$task_core_python" -m pip install 'git+https://github.com/SobolGaming/Warhammer_40k_AI.git@5f509724da25a2f6ded0c2739a8e7c84bdf59c91' || exit 1
+"$task_core_python" -I -B -m pip install 'git+https://github.com/SobolGaming/Warhammer_40k_AI.git@5f509724da25a2f6ded0c2739a8e7c84bdf59c91' || exit 1
 ```
 
 Git and repository access are needed for the Git recipe; use normal credential
@@ -168,22 +225,22 @@ imports the installed `warhammer40k_core` package, so run the exact checked-out
 script with the isolated interpreter above. From Windows PowerShell:
 
 ```powershell
-Push-Location $taskCore
-try {
-    & $taskCorePython scripts\run_phase18m_reference_server.py --host 127.0.0.1 --port 8765
-    if ($LASTEXITCODE -ne 0) { throw "Core development host failed: $LASTEXITCODE" }
-} finally {
-    Pop-Location
-}
+& $taskCorePython -I -B -c 'import socket; s=socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.settimeout(3); s.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1); s.bind(("127.0.0.1", 8765)); s.close()'
+if ($LASTEXITCODE -ne 0) { throw 'Port 8765 is unavailable; no host launched' }
+& $taskCorePython -I -B (Join-Path $taskCore 'scripts\run_phase18m_reference_server.py') --host 127.0.0.1 --port 8765
+if ($LASTEXITCODE -ne 0) { throw "Core development host failed: $LASTEXITCODE" }
 ```
 
 Linux, using the variables from above:
 
 ```bash
-(cd "$task_core" && "$task_core_python" scripts/run_phase18m_reference_server.py --host 127.0.0.1 --port 8765)
+"$task_core_python" -I -B "$task_core/scripts/run_phase18m_reference_server.py" --host 127.0.0.1 --port 8765
 ```
 
-Keep this server in a dedicated terminal and stop it with Ctrl+C when finished.
+Keep the working directory outside the Core checkout. Keep this server in a
+dedicated terminal and stop it with Ctrl+C when finished.
+The Windows probe has the same race and late-listener limitation described above;
+the Linux command remains untested on the deferred Linux host.
 It also accepts `--shutdown-file <absolute-path>` for a supervised development
 process; the path must be isolated and absent at startup. Its source uses the
 development principal registry and does not expose credential or persistence-store
@@ -199,7 +256,7 @@ script, `run_local_session_dev_server.py`, is a read-only fixture server with cu
 routes; it cannot accept the normative gameplay command protocol.
 
 For an already prepared and provenance-verified Core environment, the repository's
-existing runner can also start the command host with `uv run --no-sync python
+existing runner can also start the command host with `uv run --no-sync python -I -B
 scripts/run_phase18m_reference_server.py --host 127.0.0.1 --port 8765` from the Core
 root. `--no-sync` avoids dependency synchronization; it does not verify the installed
 runtime identity. The new migration must never silently fall back to that environment.
@@ -230,5 +287,6 @@ implementation using the existing script.
 
 See the [selected contract adaptation](docs/plans/research/2026-10-16-contract-44-3-33-adaptation.md)
 and [baseline API/delivery evidence](docs/plans/research/2026-10-16-contract-integration.md)
-for source references, gaps and validation limits. No service, package installation,
-Unreal generator or graphical app was launched during this documentation work.
+for source references, gaps and validation limits. Actual BOOT01 and E01 commands,
+results and failed attempts are recorded in their execution evidence. Graphical
+interaction and packaged gameplay remain separate verification gates.

@@ -1,12 +1,12 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-16
-**Revision:** 4 — imported plan, Section 0 research and approved BOOT01 Windows bootstrap evidence.
+**Revision:** 5 — imported plan, BOOT01 publication and bounded E01 latency blocker.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of this work and continuation through the migration plan.** BOOT01 is complete; prepare the next bounded E01 file/runtime/output/pass-fail packet before execution. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
 **Canonical destination:** `Warhammer_40k_UI_unreal/docs/plans/unreal-migration-plan.md` (this file).
-**Review status:** Source/environment research and one existing static import-boundary check are recorded. BOOT01 probe/final Windows Editor builds, UHT and both IDE generators passed; separate frozen-source code review passed. [Execution evidence](evidence/2026-10-16-boot01.md) records acceptance audit disposition and limits. No Core integration, GUI, rendering, packaging or Linux execution passed; BOOT01 is not full M02 acceptance.
+**Review status:** BOOT01 probe/final Windows Editor builds, UHT and both IDE generators passed with separate source review and acceptance evidence. [E01 execution](evidence/2026-10-16-e01-boundary.md) records the verified isolated Windows Core runtime, 38 passing Python tests and the final capture's 11 PASS / 2 FAIL / 1 BLOCKED checks. The invalid-geometry command exceeded the 30-second request budget; its completion is unknown. [Independent source review](research/2026-10-16-e01-boundary-review.md) passed, but [acceptance audit](research/2026-10-16-e01-boundary-acceptance-audit.md) does not accept E01. Native/Audit phases and wire promotion did not run. GUI, rendering, packaging and Linux remain unverified; BOOT01 is not full M02 acceptance.
 
 ### Repository routes and provenance
 
@@ -17,6 +17,16 @@
 | Core / `Warhammer_40k_AI` | `C:\SWDev\warhammer\Warhammer_40k_AI` — external authoritative Python engine; reference only | [AGENTS](../../../Warhammer_40k_AI/AGENTS.md), [adapter contract](../../../Warhammer_40k_AI/docs/ADAPTER_DECISION_CONTRACT.md), [manifest](../../../Warhammer_40k_AI/contracts/manifest.json), [schemas](../../../Warhammer_40k_AI/contracts/schemas/), [examples](../../../Warhammer_40k_AI/contracts/examples/) |
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
+
+### Revision 5 changes
+
+[PR1 merged](evidence/2026-10-16-bootstrap-publication.md) after the owner updated
+token permissions. OWN13 continuation produced a reviewed E01 driver, frozen
+contract copies and native evidence tests. Source and installed-runtime checks
+passed; the execution journal preserves failed attempts and subsequent repairs.
+Unreal's case-insensitive JSON object storage requires an explicit unsupported
+case-colliding-key result in this bounded reader. RISK19 keeps production JSON
+preservation open. Source review, actual execution and acceptance remain distinct.
 
 ### Revision 4 changes
 
@@ -38,7 +48,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: publish and merge the audited plan/BOOT01 PR under OWN13, and continue the next bounded E01 gate.** Source-only identity/fixture preparation may continue while remote access is blocked. Prepare exact runtime/output/verification scope before live execution; do not begin broad implementation milestones. Retaining the separate Python rules engine remains fixed scope.
+**Current assignment: resolve the bounded E01 latency/budget gate under OWN13.** [Plan/BOOT01 PR1](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/1) merged as `0467ee63fe6d4c775f429afae2233d7292787c31` after access was restored. The reviewed capture reached normal movement and proved actual inventory-error fidelity, but timed out on the invalid-geometry command. EXT09 / RQ18 require a disposition before a separately labelled slow-host diagnostic; the 30-second result remains failed. Native execution needs a successful capture and reviewed wire promotion. Do not begin broad implementation milestones. Retaining the separate Python rules engine remains fixed scope.
 
 ### 0.1 Fixed scope and authority
 
@@ -118,7 +128,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ03 — Complete client-facing API and command lifecycle
 
-**2026-10-16 finding:** Selected44.3.33 operations, envelope/schema/nullability/identity/authorization and lifecycle are in [API evidence](research/2026-10-16-contract-integration.md), [target comparison](research/2026-10-16-contract-44-3-33-adaptation.md) and [session design](research/2026-10-16-session-closure-design.md). Missing support-profile, pre-create version negotiation, create idempotency and detailed uncommitted errors are explicit gaps, never invented routes. E01 runtime proof remains BLOCKED; exact-diagnostic product disposition is EXT06.
+**2026-10-16 finding:** Selected44.3.33 operations, envelope/schema/nullability/identity/authorization and lifecycle are in [API evidence](research/2026-10-16-contract-integration.md), [target comparison](research/2026-10-16-contract-44-3-33-adaptation.md) and [session design](research/2026-10-16-session-closure-design.md). Missing normative `/sessions` support-profile, pre-create version negotiation, create idempotency and detailed uncommitted errors are explicit gaps. A deprecated public `/games/{game_id}/support-profile` exists; E01 probes it separately without adopting it as the new client's normative interface. E01 acceptance remains BLOCKED; exact-diagnostic product disposition is EXT06.
 
 **Status:** CLOSED_SOURCE (2026-10-16). **Resolve with:** exact source/contract tracing. **Blocks:** M01, M03–M05; E01, D05.
 
@@ -188,7 +198,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ08 — First real-core playable scenario and meaningful action
 
-**2026-10-16 finding:** [Source setup/+1-inch movement recipe](research/2026-10-16-contract-integration.md) is characterized at44.1; [target adaptation](research/2026-10-16-contract-44-3-33-adaptation.md) requires ordered/current-inventory witnesses at44.3.33. Exact target accepted/invalid HTTP command/principal/pose trace needs E01/E03B. Shooting now exists in baseline source; Charge/Fight smoke reachability is not claimed. No scenario ran.
+**2026-10-16 finding:** [Source setup/+1-inch movement recipe](research/2026-10-16-contract-integration.md) is characterized at44.1; [target adaptation](research/2026-10-16-contract-44-3-33-adaptation.md) requires ordered/current-inventory witnesses at44.3.33. E01's corrected canonical reserve recipe completed deployment/redeploy and both Scout moves, then reached normal-move request000019/revision19. Three inventory negatives returned actual generic HTTP422 and preserved revision/positions/history. The complete 1,000-inch invalid-geometry candidate timed out under the 30-second budget; its late server status log does not establish a received outcome or committed flags. No subsequent valid one-inch move was submitted. The [execution journal](evidence/2026-10-16-e01-boundary.md) preserves earlier deployment failures and the final timeout input. Accepted/recorded-invalid normal-move command/principal/pose proof remains blocked by EXT09 for E01/E03B. Shooting exists in baseline source; Charge/Fight smoke reachability is not claimed.
 
 **Status:** BLOCKED (2026-10-16). **Resolve with:** canonical fixtures, supported public setup and existing check evidence. **Blocks:** M03; E01/E03.
 
@@ -328,7 +338,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ18 — Performance baseline, workloads and acceptance budgets
 
-**2026-10-16 finding:** [Workstation/measurement design](research/2026-10-16-toolchain-and-validation.md), Section9 W0/W1/W2 and proposed budgets are explicit. Existing mismatched Core environment prevents a meaningful same-build baseline; RAM/active RHI remain unverified. BOOT01/E01 enable later E05 measurement on the recorded workstation; Linux is deferred. Targets are proposed engineering budgets, not approved minimum hardware or performance results.
+**2026-10-16 finding:** [Workstation/measurement design](research/2026-10-16-toolchain-and-validation.md), Section9 W0/W1/W2 and proposed budgets are explicit. E01 now has a verified exact Core runtime, while the legacy installed environment remains mismatched. The canonical invalid-geometry command exceeded E01's 30-second HTTP budget; [Core issue #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590) records the observed development blocker and source investigation pointers without claiming a measured bottleneck or Core SLA violation. A separately labelled 120-second diagnostic versus retaining 30 seconds pending Core investigation is an unanswered owner budget choice. The failed 30-second result stays failed either way. No W0/W1/W2, warm-up/statistical performance baseline or active RHI proof exists; Linux is deferred. Targets remain proposed engineering budgets.
 
 **Status:** BLOCKED (2026-10-16). **Resolve with:** existing measurement paths, hardware inventory and owner priorities. **Blocks:** performance claims and final test design; M02/M03 instrumentation, M07 acceptance; E05.
 
@@ -356,7 +366,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ20 — Test architecture, safe execution, CI and independent review
 
-**2026-10-16 finding:** [Capability/test sources](research/2026-10-16-capability-checklist.md), [E08 capture manifest](research/2026-10-16-parity-closure-design.md) and [layer/host/output responsibilities](research/2026-10-16-toolchain-and-validation.md) map existing and future checks. One existing AST audit passed; no integration/UE suite ran. Linux deferred; no invented Warhammer.Migration suite. Separate documentation review and later frozen-code acceptance are distinct.
+**2026-10-16 finding:** [Capability/test sources](research/2026-10-16-capability-checklist.md), [E08 capture manifest](research/2026-10-16-parity-closure-design.md) and [layer/host/output responsibilities](research/2026-10-16-toolchain-and-validation.md) map checks. BOOT01 builds passed. E01 added an independently reviewed Python harness and real native `Warhammer.Migration.E01Boundary` source; actual Python results and failed HTTP attempts are in its journal. Native execution remains pending. Linux is deferred. Separate source-review and acceptance sessions were invoked; a source PASS does not supply runtime acceptance. RISK19 records the bounded native JSON limitation.
 
 **Status:** CLOSED_SOURCE (2026-10-16). **Resolve with:** actual tests/CI/agent facilities and version-matched test documentation. **Blocks:** M01 and each evidence gate; RQ23/RQ24.
 
@@ -412,13 +422,13 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ24 — Decision reconciliation and final research handoff
 
-**2026-10-16 finding:** Product answers/source-design packets are reconciled, with CLOSED_SOURCE/CLOSED_OWNER separate from empirical BLOCKED items. OWN10 resolves the HTTP fidelity policy; Core issue #588 is filed. BOOT01 compilation/generation and separate code/acceptance reviews passed. OWN13 authorizes publication/merge and continuation; the configured origin is inaccessible (404), and creation was rejected (403). Existing source-only Core build-identity verification passed; the next E01 packet and 127-file/98-case source manifest are preparation, not runtime or full milestone acceptance. Research remains RESEARCH_INCOMPLETE.
+**2026-10-16 finding:** Product answers/source-design packets are reconciled, with CLOSED_SOURCE/CLOSED_OWNER separate from empirical BLOCKED items. OWN10 resolves HTTP fidelity; Core issue #588 is filed. BOOT01 compilation/generation and separate reviews passed. After the owner's credential update, private origin access succeeded and PR1 merged under OWN13. The source-only Core identity check and 127-file/98-case inventory remain distinct from live proof. E01 implementation now proceeds within its reviewed packet, with execution/review results recorded separately. Research remains RESEARCH_INCOMPLETE.
 
 **Status:** OPEN (2026-10-16). **Resolve with:** evidence/decision audit and owner answers. **Blocks:** G-RESEARCH / G-IMPLEMENT.
 
 **Question:** Does one self-contained plan now describe the actual baseline, selected design, remaining experimental/release gates and a safe first authorized step without contradictory “proposed” versus “approved” claims?
 
-**Inspect:** all RQ states, D01–D14, CAP01–CAP36, G01–G10, E01–E08, RISK01–RISK18, source index, owner responses and milestone prerequisites. Verify that each discovered new gap has an ID and owner; do not hide new blockers in prose.
+**Inspect:** all RQ states, D01–D14, CAP01–CAP36, G01–G10, E01–E08, RISK01–RISK19, source index, owner responses and milestone prerequisites. Verify that each discovered new gap has an ID and owner; do not hide new blockers in prose.
 
 **Close when:** update the canonical plan and decision log; link every resolution to exact evidence or dated owner choice; resolve cross-references/ordering; report tests passed/failed/not run and review performed/not performed separately. Record the remaining empirical subquestions and release-only obligations, and supply the precise next bounded work packet.
 
@@ -460,7 +470,7 @@ The following is the historical research assignment. OWN11/OWN13 and Section0.8 
 
 ### 0.8 Current execution record — 2026-10-16
 
-This is the current authority and evidence record. It supersedes historical present-tense assumptions elsewhere; the RQ register remains the single status authority. Research is **RESEARCH_INCOMPLETE**. **BOOT01 Windows CLI bootstrap passed** under OWN11; [hashed results and limits](evidence/2026-10-16-boot01.md). E01–E08 have not run. BOOT01 does not close full M02, rendering, packaging, Core integration or Linux acceptance.
+This is the current authority and evidence record. It supersedes historical present-tense assumptions elsewhere; the RQ register remains the single status authority. Research is **RESEARCH_INCOMPLETE**. **BOOT01 Windows CLI bootstrap passed** under OWN11. E01 is unaccepted and blocked on the recorded latency/budget disposition under OWN13: [actual runtime checks and failed attempts](evidence/2026-10-16-e01-boundary.md) remain distinct from acceptance. E02–E08 have not run; the [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md) is conditional planning only. BOOT01 does not close full M02, rendering, packaging, Core integration or Linux acceptance.
 
 **Owner decisions recorded in this chat on 2026-10-16:**
 
@@ -507,7 +517,9 @@ Supporting evidence:
 | EXT04 | Linux x86-64 UE build and real rendered/packaged test host plus runtime | **Deferred by OWN08:** owner arranges later. Configure targets/platform-neutral plumbing now; record all Linux execution NOT RUN, with no implied PASS | Final Linux/platform acceptance when host arrives; Windows research/proof may proceed |
 | EXT05 | Army identity before placement when attaching without original creation input | Full Arcade support profile has no normative HTTP equivalent. Managed create can retain the public SessionCreate.config player/army pairs exactly as Core's HTTP conformance client does; placed attach can use placed_armies. Undeployed arbitrary attach needs an authorized original creation/session mapping or external API support. No inferred names/deprecated route/profile fabrication | Initial managed slice has a source-backed path; arbitrary pre-placement attach and full-profile parity remain bounded gaps. See session design |
 | EXT06 | Fine-grained uncommitted-proposal diagnostics over HTTP | Server returns generic `proposal_invalid` / `rule_path_unsupported` code/message and loses detailed in-process reasons. OWN10 accepts actual explicit HTTP errors with fidelity gap noted for initial client work. Filed and read back [Core issue #588](https://github.com/SobolGaming/Warhammer_40k_AI/issues/588) under OWN12; no fabricated legality/private route | Exact-detail improvement tracked externally; initial display policy selected; E01/E03 runtime proof still required |
-| EXT07 | Reachable Unreal GitHub repository and configured credential access | Origin returns404; GraphQL and REST private creation are rejected by GitHub with token-access errors/HTTP403. Owner creates a reachable empty repository or grants configured credential access/creation rights; async question pending. Local commits/source preparation can proceed | Push, PR, hosted checks and authorized merge; no remote success claimed |
+| EXT07 | Reachable Unreal GitHub repository and configured credential access | **RESOLVED 2026-10-16:** after owner token update, existing private empty origin was accessible. Main/task branches pushed, [PR1](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/1) created/attached and normally merged as `0467ee63...`; no hosted checks reported. REST Checks permission remains unavailable; never label that CI PASS | Publication blocker closed; [publication evidence](evidence/2026-10-16-bootstrap-publication.md) records limits. E01 continuation can proceed |
+| EXT08 | Exclusive Windows listening in the selected development host | E01 observed two owned instances print post-bind markers on the same occupied port; the second stayed alive beyond 30 seconds. Filed and read back [Core issue #589](https://github.com/SobolGaming/Warhammer_40k_AI/issues/589). Client-side exclusive prelaunch probing can reject an already occupied port; it cannot prevent a different process co-binding after Core starts. Core host owner must provide exclusive live listener behavior and a Windows regression test | Full robust Windows managed-host ownership/security claims remain open. Internal E01 may separately prove the bounded client prelaunch check; no production service acceptance |
+| EXT09 | Canonical development-host command latency versus proof budget | E01 run231112 reached normal movement, but the actor's complete invalid-geometry command exceeded the 30-second total HTTP budget. A late HTTP422 log does not supply the missing body/commit receipt. Filed and read back [Core issue #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590). Core profiling/latency expectations remain separate work; no Core edits are authorized | RQ08/RQ18/E01/E03 remain blocked. Owner must choose a separately labelled 120-second diagnostic or retaining 30 seconds pending Core investigation; neither retroactively passes this run. Native/Audit need their successful predecessor and reviewed fixtures |
 
 **Next bounded work and uncertainty map:** current source/design packets cover the target delta, selected roles/host/client matrix and CAP/profile/input/test mappings. OWN10 resolves the initial HTTP diagnostic policy; Core issue #588 tracks improved fidelity. OWN11 authorizes BOOT01 only. Broad feature implementation is not available: the following empirical evidence remains unverified unless an explicit execution result below closes it.
 
@@ -1503,6 +1515,7 @@ Retire obsolete Arcade UI packages, ad hoc transition clients, dual-version clie
 | RISK16 | Licensing/platform commitment blocks distribution | Provenance and appropriate rights review; no unsupported platform promises | Owner/release, M07 |
 | RISK17 | Missing GPU/UE toolchain prevents real evidence | M00 host inventory; designate native rendering hosts; BLOCKED not headless PASS | Coordinator, M00/M02 |
 | RISK18 | Development HTTP defaults/bounds unsuitable for shipping | Loopback-only managed host; credential separation; limits and failure tests; no public-server claim | Adapter/security, E03 |
+| RISK19 | Unreal JSON object storage silently folds keys that differ only in case | E01 reader rejects these valid JSON objects with `unsupported_key_case_collision`; preserve exact known field/value casing. Production needs a reviewed representation that round-trips distinct keys and opaque payloads before adoption | Client adapter/configuration, RQ11/RQ20, M01/M02; open |
 
 ### 14.2 Decisions
 

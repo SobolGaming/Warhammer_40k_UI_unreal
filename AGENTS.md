@@ -21,6 +21,24 @@ pass/fail before execution. Do not infer Core edits, new host implementation or
 broader feature acceptance from that continuation. The Core diagnostic issue is
 already filed. Record subsequent authority without asking again.
 
+The bounded E01 packet is `docs/plans/research/2026-10-16-e01-boundary-packet.md`;
+actual results and preserved failed attempts belong in
+`docs/plans/evidence/2026-10-16-e01-boundary.md`. It permits the exact locked Core
+installation in owned `.local/` paths and the existing loopback development host.
+Review each changed candidate before its affected phase; use fresh RunIds after
+failure and preserve earlier results. Native tests are a protocol evidence suite,
+not a production transport or playable scene. Its JSON reader visibly rejects
+case-colliding keys; RISK19 must be resolved before production adoption. Keep
+arbitrary submitted movement order intact. The fixture-only uniform-translation
+recipe chooses leading-first paths from the selected Core's published examples;
+that construction is not a client legality test or a general reorder policy.
+The latest capture passed 38 Python tests and 11 boundary checks but timed out
+on a normal-move invalid-geometry command. EXT09 / Core #590 records the latency
+gap. Preserve its unknown outcome and failed 30-second result. A larger diagnostic
+budget is awaiting the owner's RQ18 disposition; do not change it silently.
+Native/Audit and public wire promotion remain gated on successful predecessors
+and independent privacy review. Refuse any bytecode cache in the owned runtime.
+
 Repository names are explicit:
 
 - `Warhammer_40k_UI_unreal` (this repository): new Unreal client and migration evidence.
@@ -109,7 +127,7 @@ Use immutable `repository@commit:path:symbol` references and relevant line range
 hash relevant dirty source. Never mark a blocked or unexecuted check PASS.
 
 For documentation, check whitespace, local links, IDs, source identities and command
-paths. In this initially uncommitted repository, `git diff --check` alone does not
+paths. For newly added untracked files, `git diff --check` alone does not
 inspect untracked files; inspect added content directly or use a no-index check.
 Run Git/checks from the repository they concern. Python/Arcade checks belong in
 `../Warhammer_40k_UI_arcade`; they are not Unreal build gates.
