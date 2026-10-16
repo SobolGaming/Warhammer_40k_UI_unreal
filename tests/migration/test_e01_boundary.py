@@ -13,7 +13,7 @@ from pathlib import Path
 import tempfile
 from types import SimpleNamespace
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, call, patch
 
 
 REPO = Path(__file__).resolve().parents[2]
@@ -64,6 +64,23 @@ def http10_connection(wire: bytes):
 
 
 class CanonicalEnvelopeTests(unittest.TestCase):
+    def test_canonical_reserve_recipe_prioritizes_only_currently_offered_choices(self):
+        complete = "complete_reserve_declarations"
+        deep = "declare_deep_strike:army-alpha:deep-strike-unit"
+        strategic = "declare_strategic_reserves:army-alpha:strategic-reserve-unit"
+        request = {"decision_type": "select_reserve_declaration",
+                   "options": [{"option_id": item} for item in (complete, deep, strategic)]}
+        original = copy.deepcopy(request)
+        self.assertEqual(boundary.canonical_reserve_option(request), strategic)
+        self.assertEqual(request, original)
+        request["options"].pop()
+        self.assertEqual(boundary.canonical_reserve_option(request), deep)
+        request["options"].pop()
+        self.assertEqual(boundary.canonical_reserve_option(request), complete)
+        request["options"] = [{"option_id": "unreviewed-choice"}]
+        with self.assertRaisesRegex(boundary.Blocked, "currently offered"):
+            boundary.canonical_reserve_option(request)
+
     def test_all_98_canonical_envelopes_round_trip_with_types_and_order(self):
         corpus = canonical("examples/decisions/interaction-conformance.json")
         manifest = boundary.strict_json((FIXTURE / "manifest.json").read_bytes())
@@ -294,6 +311,29 @@ class OutcomeTests(unittest.TestCase):
 
 
 class EvidenceSafetyTests(unittest.TestCase):
+    def test_windows_exclusive_prelaunch_probe_rejects_busy_port_without_spawning(self):
+        # Socket and child process are mocked; no network or Core host runs.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            host = boundary.OwnedHost.__new__(boundary.OwnedHost)
+            host.root, host.port, host.record = root, 12345, {}
+            probe = MagicMock()
+            probe.__enter__.return_value = probe
+            probe.bind.side_effect = OSError("Synthetic occupied exclusive address")
+            with patch.object(boundary.socket, "socket", return_value=probe), \
+                 patch.object(boundary.socket, "SO_EXCLUSIVEADDRUSE", 123, create=True), \
+                 patch.object(boundary.sys, "platform", "win32"), \
+                 patch.object(boundary.subprocess, "Popen") as spawn:
+                with self.assertRaises(boundary.PortUnavailable):
+                    host.start()
+            probe.setsockopt.assert_called_once_with(boundary.socket.SOL_SOCKET, 123, 1)
+            probe.bind.assert_called_once_with(("127.0.0.1", 12345))
+            self.assertLess(probe.method_calls.index(call.setsockopt(boundary.socket.SOL_SOCKET, 123, 1)),
+                            probe.method_calls.index(call.bind(("127.0.0.1", 12345))))
+            probe.__exit__.assert_called_once()
+            spawn.assert_not_called()
+            self.assertFalse((root / "host.log").exists())
+
     def test_cross_scope_denial_trace_keeps_only_hashes_of_hidden_command_fields(self):
         # Deliberate injected actor inputs may be sent under denied scopes, but
         # they must never be exported as that submitted scope's visible data.
@@ -416,6 +456,7 @@ class EvidenceSafetyTests(unittest.TestCase):
             try:
                 with patch.object(boundary.subprocess, "Popen", return_value=child), \
                      patch.object(boundary.threading, "Timer"), \
+                     patch.object(boundary, "require_available_loopback_port"), \
                      patch.object(boundary, "Endpoint", return_value=unrelated), \
                      patch.object(boundary.time, "sleep"):
                     with self.assertRaises(boundary.BoundaryError):

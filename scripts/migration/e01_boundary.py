@@ -45,6 +45,10 @@ class Blocked(BoundaryError):
     """An actual external prerequisite or canonical procedure is unavailable."""
 
 
+class PortUnavailable(Blocked):
+    """The client prelaunch bind probe cannot exclusively claim its loopback port."""
+
+
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise BoundaryError(message)
@@ -378,6 +382,27 @@ class Endpoint:
         return reply
 
 
+def require_available_loopback_port(port: int) -> None:
+    """Probe before launch; never attach to or alter an existing listener.
+
+    Windows SO_REUSEADDR allows a second development host to co-bind. Set
+    SO_EXCLUSIVEADDRUSE before this probe's bind, as Microsoft documents at
+    https://learn.microsoft.com/en-us/windows/win32/winsock/using-so-reuseaddr-and-so-exclusiveaddruse
+    The probe closes before launching the unchanged Core host; it does not
+    establish exclusive ownership against a later co-bind to that host.
+    """
+    require(type(port) is int and 0 < port <= 65535, "Prelaunch probe requires an explicit positive port")
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+        probe.settimeout(3)
+        if sys.platform == "win32":
+            require(hasattr(socket, "SO_EXCLUSIVEADDRUSE"), "Windows exclusive-address socket option unavailable")
+            probe.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        try:
+            probe.bind(("127.0.0.1", port))
+        except OSError as exc:
+            raise PortUnavailable("Loopback port unavailable to client prelaunch bind probe; no host was launched") from exc
+
+
 class OwnedHost:
     """Own one selected development-host child and its shutdown marker/handle."""
     def __init__(self, args: argparse.Namespace, report: Report, tokens: dict, name: str):
@@ -391,10 +416,12 @@ class OwnedHost:
         self.process = None
         self.log = None
         self.timer = None
-        self.record = {"owner": name, "port": self.port, "maximumSeconds": MAX_SECONDS, "launcherSHA256": sha256(args.core_launcher.read_bytes()), "executable": sys.executable}
+        self.record = {"owner": name, "port": self.port, "maximumSeconds": MAX_SECONDS, "launcherSHA256": sha256(args.core_launcher.read_bytes()), "executable": sys.executable, "portSafetyLimit": "Client prelaunch availability probe only; selected Core development host does not ensure Windows late co-bind exclusivity"}
         self.lock = threading.Lock()
 
     def start(self) -> Endpoint:
+        require_available_loopback_port(self.port)
+        self.record["prelaunchPortProbe"] = "PASS: Windows exclusive-address bind" if sys.platform == "win32" else "PASS: loopback bind"
         self.log = (self.root / "host.log").open("xb")
         command = [sys.executable, "-I", "-B", str(self.args.core_launcher), "--host", "127.0.0.1", "--port", str(self.port), "--shutdown-file", str(self.shutdown)]
         self.record.update({"command": command, "startUTC": datetime.now(UTC).isoformat()})
@@ -854,6 +881,18 @@ def record_setup_rejection(pair: Pair, request: dict, view: dict, command: dict,
     return str(diagnostic)
 
 
+def canonical_reserve_option(request: dict) -> str:
+    """Selected Core setup-smoke fixture choices, only when actually offered."""
+    require(request["decision_type"] == "select_reserve_declaration", "Reserve recipe received another decision type")
+    offered = [string_field(row, "option_id") for row in request["options"]]
+    # Core 5f509724 tests/integration/test_setup_prebattle_ui_smoke.py:80-109
+    # declares these reserves before deploying the two Scout infantry units.
+    for option in ("declare_strategic_reserves:army-alpha:strategic-reserve-unit", "declare_deep_strike:army-alpha:deep-strike-unit", "complete_reserve_declarations"):
+        if option in offered:
+            return option
+    raise Blocked("No reviewed canonical reserve choice is currently offered")
+
+
 def setup_to_move(pair: Pair) -> tuple[dict, dict]:
     for _ in range(256):
         request, view = pair.pending()
@@ -873,7 +912,7 @@ def setup_to_move(pair: Pair) -> tuple[dict, dict]:
             elif kind == "select_movement_action":
                 selected = "normal_move"
             elif kind == "select_reserve_declaration":
-                selected = "complete_reserve_declarations"
+                selected = canonical_reserve_option(request)
             elif kind == "select_deployment_unit":
                 candidates = ("deploy:army-beta:scout-redeploy-unit", "deploy:army-alpha:deep-strike-unit", "deploy:army-alpha:scout-redeploy-unit", "deploy:army-alpha:strategic-reserve-unit")
                 selected = next((item for item in candidates if item in options), "")
@@ -1011,18 +1050,20 @@ def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, ht
     require(code == 0 and result_file.exists(), "Attach worker failed; inspect owned ignored log")
     report.artifact(result_file)
     require(host.process.poll() is None and http.request("GET", f"/sessions/{main_session}", "playerA").status == 200, "Attach disconnect stopped host or other owned session")
-    # Busy positive port: existing owned responder remains intact. Child must fail, never attach.
-    busy_root = args.output_root / "busy-port"
-    busy_root.mkdir()
-    with (busy_root / "host.log").open("xb") as log:
-        busy = subprocess.Popen([sys.executable, "-I", "-B", str(args.core_launcher), "--host", "127.0.0.1", "--port", str(host.port), "--shutdown-file", str(busy_root / "shutdown")], cwd=busy_root, env=child_environment(), stdout=log, stderr=subprocess.STDOUT, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
-        try:
-            busy_code = busy.wait(timeout=30)
-        except subprocess.TimeoutExpired:
-            busy.terminate()
-            busy.wait(timeout=10)
-            raise BoundaryError("Busy-port child did not exit within readiness bound")
-    require(busy_code != 0 and host.process.poll() is None, "Busy-port failure affected existing owned host")
+    # Exercise the client guard against this owned listener, without starting a
+    # second Core server: Windows development-host co-bind is a known limit.
+    other_before = http.request("GET", f"/sessions/{main_session}", "playerA")
+    require(other_before.status == 200, "Owned comparison session unavailable before client busy-port check")
+    busy_check = None
+    try:
+        require_available_loopback_port(host.port)
+    except PortUnavailable as exc:
+        busy_check = {"port": host.port, "blockedBeforeHostLaunch": True, "diagnostic": str(exc)}
+    require(busy_check is not None, "Client prelaunch probe failed to reject the owned occupied port")
+    other_after = http.request("GET", f"/sessions/{main_session}", "playerA")
+    require(host.process.poll() is None and other_after.status == 200, "Client busy-port check affected existing owned host/session")
+    require(all(other_before.body[key] == other_after.body[key] for key in ("session_id", "session_revision", "projection_state_hash")), "Client busy-port check changed the other owned session")
+    busy_check["otherSessionUnchanged"] = True
     # Only explicit supervisor admin closes disposable attach session.
     metadata = http.request("GET", f"/sessions/{session}", "admin").body
     closed = http.request("POST", f"/sessions/{session}/commands", "admin", envelope(session, "e01-attach-close", metadata["session_revision"], "close_session"))
@@ -1033,7 +1074,7 @@ def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, ht
         endpoint = restart.start()
         lost = endpoint.request("GET", f"/sessions/{main_session}", "playerA")
         assert_error(lost, 404)
-        report.case("LIFETIME-01", "PASS", "Owned busy-port failure, scoped attach disconnect, managed stop, explicit restart SessionLost", {"attach": strict_json(result_file.read_bytes()), "busyPortExitCode": busy_code, "restart": "SessionLost", "oldSessionRecreated": False, "ownership": "Original Popen process handles only; shutdown markers unique"})
+        report.case("LIFETIME-01", "PASS", "Client busy-port rejection before host launch, scoped attach disconnect, managed stop, explicit restart SessionLost", {"attach": strict_json(result_file.read_bytes()), "clientBusyPortCheck": busy_check, "restart": "SessionLost", "oldSessionRecreated": False, "ownership": "Original Popen process handles only; shutdown markers unique", "lateCoBindProtection": "NOT_PROVEN: prelaunch probe closes before Core binds; Windows development-host exclusivity limitation remains external"})
     finally:
         restart.stop()
 
