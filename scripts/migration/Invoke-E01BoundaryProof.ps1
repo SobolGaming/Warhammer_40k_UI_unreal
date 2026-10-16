@@ -633,7 +633,10 @@ try {
         if (Test-Path -LiteralPath $runtimeRoot) { throw 'PrepareRuntime refuses a preexisting environment; preserve it and use its verified originating run.' }
         $archivePath = Join-Path $runRoot 'core-source.zip'
         if (Test-Path -LiteralPath $archivePath) { throw 'Source archive collision.' }
-        $null = Invoke-Git 'archive-core' $coreRoot @('archive', '--format=zip', "--output=$archivePath", $expectedCommit)
+        # Archive conversion otherwise inherits checkout autocrlf settings even
+        # though extraction must retain the exact committed Git blob bytes.
+        $null = Invoke-Git 'archive-core' $coreRoot @('-c', 'core.autocrlf=false', '-c', 'core.eol=lf',
+            'archive', '--format=zip', "--output=$archivePath", $expectedCommit)
         $sourceRoot = Join-Path $runRoot 'source'
         $phaseResult.archive = Expand-OwnedArchive $archivePath $sourceRoot
         $manifest = Read-Json $sourceManifestPath
