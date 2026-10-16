@@ -97,6 +97,10 @@ Generated/install outputs are limited to:
 - A fresh `.local/core-44.3.33/` environment and provenance record. Refuse a
   preexisting unverified environment; a subsequent phase may reuse only the same
   verified one with unchanged installed identity/lock/source hashes.
+- `.local/core-44.3.33.e01-reservation.json`: atomic first-install ownership and
+  interruption record beside that runtime; refuse conflicting reservations and
+  preserve failed ownership evidence. It never grants ownership of a preexisting
+  unrelated environment.
 - `.local/experiments/E01-target/<UTC-yyyyMMddTHHmmssZ>-<8-hex>/`: source archive
   and extracted source copy, package/build/HTTP/native logs, temporary files,
   private role-separated raw responses, shutdown markers, cache, result manifest
@@ -132,6 +136,15 @@ Each phase checks its predecessor's explicit success, source/candidate/fixture
 hashes and environment provenance. A failure does not start subsequent phases.
 `Audit` gathers and verifies evidence; it does not substitute for independent
 human/agent code review or acceptance audit.
+
+Implementation sequencing clarification after PR1 merged: the wrapper's complete
+source/inventory checks may establish `SOURCE_INVENTORY_PASS` before the Python
+harness is finished. Missing Python preflight is explicitly `NOT_RUN` at that
+point; it is mandatory before Capture. This permits independently reviewed runtime
+preparation while Python/native code is authored. Freeze wrapper/packet/source
+inventory for preparation, Python code for Capture and native code/accepted fixture
+outputs for Native; authorized fixture outputs do not silently alter an earlier
+authored-source freeze. No phase gains an unexecuted test result from this split.
 
 1. **Preflight:** verify clean selected Core HEAD and frozen inventory; preserve
    Arcade status without changing it; inspect actual Python/uv/UE/compiler paths,
@@ -189,7 +202,7 @@ failure; never fall back to a mismatched installed Core or private source import
 
 ```text
 <UE>/Engine/Build/BatchFiles/Build.bat WarhammerClientEditor Win64 Development -Project=<Unreal>/WarhammerClient.uproject -WaitMutex -NoUBA -UBARootDir=<run>/uba -Log=<run>/native-build.log
-<UE>/Engine/Binaries/Win64/UnrealEditor-Cmd.exe <Unreal>/WarhammerClient.uproject -unattended -nop4 -NullRHI -nosplash -ExecCmds="Automation RunTests Warhammer.Migration.E01Boundary" -TestExit="Automation Test Queue Empty" -ReportExportPath=<run>/automation -log=<run>/native-automation.log
+<UE>/Engine/Binaries/Win64/UnrealEditor-Cmd.exe <Unreal>/WarhammerClient.uproject -unattended -nop4 -NullRHI -nosplash -ExecCmds="Automation RunTests Warhammer.Migration.E01Boundary" -TestExit="Automation Test Queue Empty" -ReportExportPath=<run>/automation -log=<run>/native-automation.log -UserDir=<run>/ue-user -DDC=(EnginePak=InstalledEnginePak,Local) -DDC-NoDefaultGraph -LocalDataCachePath=<run>/ddc
 ```
 
 The installed UE5.8 AutomationCommandline.cpp accepts `RunTests`/`RunTest`
@@ -201,6 +214,13 @@ protocol proof and cannot establish rendered behavior. Pass the evidence fixture
 root through one documented test argument/config field; no hardcoded sibling
 dependency in normal application startup. Native test entry points remain behind
 the applicable development automation guard.
+
+Installed UE5.8 `Paths.cpp:1940–1963` supports the supplied user directory, and
+`DerivedDataBackends.cpp:698–725` accepts an inline DDC graph with default fallback
+suppressed. `BaseEngine.ini:2770–2776,2866–2878` supplies the read-only installed
+engine pak and filesystem Local store with `LocalDataCachePath` override. Record
+these actual flags and owned cache paths; no default Zen service, shared/cloud
+cache or global preference edit is needed for this logical JSON test lane.
 
 ## Sessions, ownership and bounded execution
 

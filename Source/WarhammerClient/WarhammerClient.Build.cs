@@ -6,5 +6,6 @@ public class WarhammerClient : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicDependencyModuleNames.AddRange(new[] { "Core", "CoreUObject", "Engine" });
+        PrivateDependencyModuleNames.Add("Json");
     }
 }
