@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import io
 import json
 from pathlib import Path
 import tempfile
@@ -28,6 +29,38 @@ FIXTURE = REPO / "tests/migration/fixtures" / boundary.CORE_COMMIT
 
 def canonical(member: str) -> object:
     return boundary.strict_json((FIXTURE / "contracts" / member).read_bytes())
+
+
+def http10_connection(wire: bytes):
+    """Use real stdlib HTTPResponse with a tracked, in-memory socket file."""
+    class SocketFile(io.BytesIO):
+        def close(self):
+            transport.closed = True
+            super().close()
+
+    class TrackedSocket:
+        def __init__(self):
+            self.closed = False
+            self.timeouts = []
+
+        def settimeout(self, value):
+            if self.closed:
+                raise OSError("timeout update on closed HTTP/1.0 transport")
+            self.timeouts.append(value)
+
+        def makefile(self, mode):
+            if mode != "rb":
+                raise AssertionError("HTTP response requested unexpected file mode")
+            return SocketFile(wire)
+
+    transport = TrackedSocket()
+    connection = MagicMock()
+    connection.sock = transport
+    response = boundary.http.client.HTTPResponse(transport)
+    response.begin()
+    connection.getresponse.return_value = response
+    connection.close.side_effect = lambda: setattr(transport, "closed", True)
+    return connection, transport
 
 
 class CanonicalEnvelopeTests(unittest.TestCase):
@@ -179,6 +212,30 @@ class OutcomeTests(unittest.TestCase):
 
 
 class EvidenceSafetyTests(unittest.TestCase):
+    def test_http10_body_completion_never_updates_a_closed_socket(self):
+        # Real HTTPResponse.read1() closes the file on Content-Length completion
+        # or EOF; this exercises the original closed-socket failure directly.
+        body = b'{"transport":"http10"}'
+        for with_length in (True, False):
+            headers = b"Content-Length: " + str(len(body)).encode() + b"\r\n" if with_length else b""
+            connection, transport = http10_connection(b"HTTP/1.0 200 OK\r\n" + headers + b"\r\n" + body)
+            with self.subTest(content_length=with_length):
+                with patch.object(boundary.http.client, "HTTPConnection", return_value=connection):
+                    reply = boundary.Endpoint({"playerA": None}, base_url="http://127.0.0.1:12345").request("GET", "/transport-unit", "playerA")
+                self.assertEqual(reply.status, 200)
+                self.assertEqual(reply.raw, body)
+                self.assertTrue(transport.closed)
+                self.assertTrue(all(0 < timeout <= 10 for timeout in transport.timeouts))
+
+    def test_http10_truncated_declared_body_fails_before_json_classification(self):
+        body = b'{"transport":"truncated"}'
+        wire = b"HTTP/1.0 200 OK\r\nContent-Length: " + str(len(body) + 7).encode() + b"\r\n\r\n" + body
+        connection, transport = http10_connection(wire)
+        with patch.object(boundary.http.client, "HTTPConnection", return_value=connection):
+            with self.assertRaisesRegex(boundary.BoundaryError, "Truncated declared response body"):
+                boundary.Endpoint({"playerA": None}, base_url="http://127.0.0.1:12345").request("GET", "/transport-unit", "playerA")
+        self.assertTrue(transport.closed)
+
     def test_unrelated_catalog_responder_cannot_authorize_owned_readiness(self):
         # Pure process-supervision control test: no child or HTTP server runs.
         # The owned child appears alive once, then reports a bind-failure exit.

@@ -349,9 +349,13 @@ class Endpoint:
                 connection.request(method, path + ("?" + urlencode(query) if query else ""), body=payload if payload else None, headers=headers)
                 response = connection.getresponse()
                 length = response.getheader("Content-Length")
-                require(length is None or int(length) <= RESPONSE_LIMIT, "Response exceeds 64 MiB")
+                declared_length = None if length is None else int(length)
+                require(declared_length is None or 0 <= declared_length <= RESPONSE_LIMIT, "Invalid response length or response exceeds 64 MiB")
                 chunks, total = [], 0
-                while True:
+                # HTTPResponse.read1 closes its file (and the last reference to
+                # an HTTP/1.0 socket) immediately at the declared body length.
+                # Do not update a closed socket's timeout on the next iteration.
+                while not response.isclosed():
                     remaining = 30 - (time.monotonic() - start)
                     require(remaining > 0, "Request exceeded 30 second deadline; completion unknown")
                     transport_socket.settimeout(min(10, remaining))
@@ -361,6 +365,7 @@ class Endpoint:
                     chunks.append(chunk)
                     total += len(chunk)
                     require(total <= RESPONSE_LIMIT, "Response exceeds 64 MiB; completion unknown")
+                require(declared_length is None or total == declared_length, "Truncated declared response body; completion unknown")
                 reply = Reply(response.status, b"".join(chunks), time.monotonic() - start, len(payload))
                 require(reply.elapsed <= 30, "Request exceeded 30 second total deadline")
             finally:
