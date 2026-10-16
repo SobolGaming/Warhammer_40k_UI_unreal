@@ -149,7 +149,7 @@ class Report:
         statuses = [case["status"] for case in self.cases]
         success = {"preflight": "SOURCE_INVENTORY_PASS", "verify-runtime": "INSTALLED_RUNTIME_PASS", "capture": "LOCAL_HTTP_BOUNDARY_PASS", "audit": "EVIDENCE_AUDIT_PASS"}[self.phase]
         status = "FAIL" if "FAIL" in statuses else "BLOCKED" if "BLOCKED" in statuses else "NOT_RUN" if not statuses or "NOT_RUN" in statuses else success
-        return {"schemaVersion": 1, "phase": self.phase, "status": status, "utc": datetime.now(UTC).isoformat(), "caseCounts": {"discovered": len(statuses), "executed": statuses.count("PASS") + statuses.count("FAIL"), "passed": statuses.count("PASS"), "failed": statuses.count("FAIL"), "blocked": statuses.count("BLOCKED"), "notRun": statuses.count("NOT_RUN")}, "cases": self.cases, "artifacts": self.artifacts, "redaction": {"status": "PASS", "policy": "credential values/fields and bearer patterns rejected before export; roles separated"}, **self.details}
+        return {"schemaVersion": 1, "phase": self.phase, "status": status, "utc": datetime.now(UTC).isoformat(), "caseCounts": {"discovered": len(statuses), "executed": statuses.count("PASS") + statuses.count("FAIL"), "passed": statuses.count("PASS"), "failed": statuses.count("FAIL"), "blocked": statuses.count("BLOCKED"), "notRun": statuses.count("NOT_RUN")}, "cases": self.cases, "artifacts": self.artifacts, "redaction": {"status": "PASS", "policy": "credential values/fields and authorization-header patterns rejected before export; roles separated"}, **self.details}
 
 
 def git(core: Path, *args: str) -> str:
