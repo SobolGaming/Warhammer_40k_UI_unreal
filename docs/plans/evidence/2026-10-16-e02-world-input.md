@@ -292,3 +292,39 @@ three supervisor groups. Checkpoint the corrected source and obtain a fresh
 affected SOURCE assessment before any E02 phase. All controls, builds, discovery,
 native cases, rendering and GUI execution remain **NOT RUN**; neither this SOURCE
 report nor the operator audit supplies final OWN15 CODE/REQ acceptance.
+
+## Fourth candidate preparation — source only
+
+The repaired source clears both `UE_ADDITIONAL_PLUGIN_PATHS` and
+`UE-CmdLineArgs` in the actual native child environment. It rejects nonempty
+caller overrides and checks native logs for inherited-command-line insertion.
+The plugin freeze must name both empty overrides; the parent's raw argument
+value is neither recorded nor assumed safe.
+
+The existing PanDollyFrame case now checks middle-button pan, wheel, individual
+keyboard orbits and reset separately. Each gesture has a fresh actual-camera
+baseline, independent fixture arithmetic and assertions before the next action.
+The16 case identities, fixture defaults and phase budgets remain unchanged.
+
+Successful phase publication now binds an immutable required-artifact manifest,
+the four geometry/state JSONs and direct-root process receipt/stdout/stderr.
+Later phases rehash these descriptors alongside the prior result and completion
+chain. Raw native outcomes are retained before evidence annotations; an evidence
+failure cannot publish a successful completion record.
+
+The fresh-stage Build route rejects preexisting Intermediate/Binaries and project
+InitSteps/PreBuildSteps/PostBuildSteps. Explicit VS2022/compiler/SDK selectors
+precede Build.bat. The staged module constructor compares resolved UBT compiler
+and SDK directories, complete cl/rc paths, byte lengths and hashes against the
+frozen caller contract before native actions. It holds read handles through UBT
+exit and publishes a deterministic receipt under the module-derived owned run.
+The wrapper then validates and binds that receipt. This guards direct compiler
+and resource-compiler executables; compiler DLLs, linker tools and unrelated rule
+side effects are outside that specific attestation.
+
+These are authored mechanisms and assertions, with zero PowerShell parser errors
+and a clean whitespace check. No E02 function, build, control, native case or GUI
+has executed. Compilation and actual locking compatibility remain unverified.
+Checkpoint and freeze this complete candidate, including the added installed
+startup/UBT primary sources, for a new independent SOURCE assessment. No earlier
+review approves the repaired candidate, and final OWN15 CODE/REQ gates remain.

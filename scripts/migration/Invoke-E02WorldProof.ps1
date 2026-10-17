@@ -23,6 +23,13 @@ before Build.bat, using frozen where.exe and dotnet --version output. The child
 clears inherited UE .NET bypass variables and uses PATHEXT=.EXE on actual X64.
 Raw selections are logs/build-dotnet-path.txt and logs/build-dotnet-sdk.txt;
 the successful Build result binds both and the actual selected executable/SDK.
+Build also requires absent staged Intermediate/Binaries and no project
+InitSteps/PreBuildSteps/PostBuildSteps. Explicit compiler/SDK selectors and the
+E02_NATIVE_TOOLCHAIN_REQUIRED caller contract activate the module-constructor
+guard before native actions. logs/build-toolchain-selection.json records actual
+resolved cl/rc paths, byte counts/hashes and selection directories; the wrapper
+validates/binds it. Read handles deny changes to those EXEs through UBT exit.
+This direct-EXE attestation does not cover compiler DLLs or linker tools.
 pluginClosure is a frozen
 review-input descriptor (also listed in files). Its schemaVersion1 object binds
 sourceHead, canonical project descriptor, platform='Win64',
@@ -32,8 +39,8 @@ catalogRoots is the complete raw .uplugin catalog under exactly Engine/Plugins
 and Engine/Platforms: [{path,descriptors:[{relativePath,bytes,sha256}]}]. Relative
 paths use '/'; hidden descriptors are included. requiredAbsentPaths binds the
 exact10 additional discovery paths checked below. emptyEnvironmentVariables is
-['UE_ADDITIONAL_PLUGIN_PATHS']; the child override is explicitly empty regardless
-of the parent's value. targetReceiptPolicy binds relativePath
+['UE_ADDITIONAL_PLUGIN_PATHS','UE-CmdLineArgs']; both child overrides are explicitly
+empty regardless of the parent's values. targetReceiptPolicy binds relativePath
 'Binaries/Win64/WarhammerClientEditor.target', pluginOverrides:[{Name,Enabled}],
 and allowEnginePluginsEnabledByDefault:boolean. The actual newly built staged
 receipt is checked before native launch; BuildPlugins is an optional allowlist,
@@ -59,6 +66,10 @@ requires its phase's completion.json, published last after all required outputs.
 Audit completion binds both audit/result.json and the top-level result.json.
 Missing/invalid completion blocks dependents even if a raw result says success.
 No published raw result is overwritten after a later finalization failure.
+Successful phase results also bind required-artifacts.json and its complete
+descriptor array for owned logs/reports/artifacts, raw process outputs/receipts
+and explicitly bound run outputs. Each dependent phase rehashes that manifest
+and every bound file; generated caches remain outside that evidence inventory.
 completion.json schema1: runId, phase, state='COMPLETE', executionPassed=true,
 completedUtc, sourceHead, freezeManifest descriptor, phaseResult descriptor,
 requiredArtifacts:[phaseResult, plus top-level result for Audit]. A failed
@@ -531,10 +542,17 @@ public static class Supervisor {
             var vars=new SortedDictionary<string,string>(StringComparer.OrdinalIgnoreCase);
             foreach(System.Collections.DictionaryEntry entry in Environment.GetEnvironmentVariables()) {
                 string key=(string)entry.Key;
-                if(key.IndexOfAny(new[]{'\0','='})>=0 || key.Equals("UE_ADDITIONAL_PLUGIN_PATHS",StringComparison.OrdinalIgnoreCase) || System.Text.RegularExpressions.Regex.IsMatch(key,"TOKEN|PASSWORD|SECRET|API_KEY|CREDENTIAL",System.Text.RegularExpressions.RegexOptions.IgnoreCase)) continue;
+                if(key.IndexOfAny(new[]{'\0','='})>=0 || key.Equals("UE_ADDITIONAL_PLUGIN_PATHS",StringComparison.OrdinalIgnoreCase) || key.Equals("UE-CmdLineArgs",StringComparison.OrdinalIgnoreCase) || System.Text.RegularExpressions.Regex.IsMatch(key,"TOKEN|PASSWORD|SECRET|API_KEY|CREDENTIAL",System.Text.RegularExpressions.RegexOptions.IgnoreCase)) continue;
                 vars[key]=(string)entry.Value;
             }
-            foreach(var pair in environment) { if(pair.Key.IndexOfAny(new[]{'\0','='})>=0 || pair.Value.IndexOf('\0')>=0) throw new ArgumentException("Environment NUL/key"); vars[pair.Key]=pair.Value; }
+            foreach(var pair in environment) {
+                if(pair.Key.IndexOfAny(new[]{'\0','='})>=0 || pair.Value.IndexOf('\0')>=0) throw new ArgumentException("Environment NUL/key");
+                if((pair.Key.Equals("UE_ADDITIONAL_PLUGIN_PATHS",StringComparison.OrdinalIgnoreCase) || pair.Key.Equals("UE-CmdLineArgs",StringComparison.OrdinalIgnoreCase)) && pair.Value.Length!=0) throw new ArgumentException("E02 reserved startup environment must be empty");
+                vars[pair.Key]=pair.Value;
+            }
+            // The effective block also clears these channels if a caller omits
+            // an override. UE appends UE-CmdLineArgs before selecting plugins.
+            vars["UE_ADDITIONAL_PLUGIN_PATHS"]=""; vars["UE-CmdLineArgs"]="";
             var block=new StringBuilder(); foreach(var pair in vars) block.Append(pair.Key).Append('=').Append(pair.Value).Append('\0'); block.Append('\0');
             env=Marshal.StringToHGlobalUni(block.ToString());
             WinCheck(CreateProcessW(exe,command,IntPtr.Zero,IntPtr.Zero,true,CREATE_SUSPENDED|UNICODE_ENV|EXTENDED|(visible?0:NO_WINDOW),env,cwd,ref startup,out process),"CreateProcess(suspended)");
@@ -748,6 +766,7 @@ function Child-Environment([hashtable] $Extra=@{}) {
     $envs.Add('DOTNET_CLI_TELEMETRY_OPTOUT','1'); $envs.Add('DOTNET_SKIP_FIRST_TIME_EXPERIENCE','1')
     $envs.Add('DOTNET_NOLOGO','1'); $envs.Add('UE-SharedDataCachePath','None')
     $envs.Add('UE_ADDITIONAL_PLUGIN_PATHS','')
+    $envs.Add('UE-CmdLineArgs','')
     foreach($name in @('UE_USE_SYSTEM_DOTNET','UE_DOTNET_VERSION','UE_DOTNET_DIR','UE_DOTNET_ARCH','ProgramFiles(Arm)')){$envs.Add($name,'')}
     $envs.Add('PROCESSOR_ARCHITECTURE','AMD64');$envs.Add('PATHEXT','.EXE')
     $dotnetRoot=[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.dotnet)
@@ -765,9 +784,16 @@ function Invoke-Root([string] $Label,[string] $Executable,[string[]] $Arguments,
     $script:Result.processes.Add($record)
     # The raw receipt is preserved even when the phase later fails. No mutation of
     # validated root outcomes follows evidence inspection failure.
-    Write-JsonNew (Join-Path $script:PhaseRoot "$Label.process.json") $record
-    foreach($path in @($stdout,$stderr)) {
-        if ([IO.File]::Exists($path)) { Safe-Text $script:Utf8.GetString([IO.File]::ReadAllBytes($path)) }
+    $receiptPath=Join-Path $script:PhaseRoot "$Label.process.json"
+    Write-JsonNew $receiptPath $record
+    # Phase annotations bind the unchanged raw receipt and closed output files;
+    # they do not rewrite that receipt or change its native execution outcome.
+    $record['receiptArtifact']=Descriptor $receiptPath
+    foreach($entry in @(@('stdoutArtifact',$stdout),@('stderrArtifact',$stderr))) {
+        if ([IO.File]::Exists($entry[1])) {
+            $record[$entry[0]]=Descriptor $entry[1]
+            Safe-Text $script:Utf8.GetString([IO.File]::ReadAllBytes($entry[1]))
+        } elseif($record['status'] -ceq 'PASS') { throw 'E02_SUCCESSFUL_ROOT_OUTPUT_MISSING' }
     }
     return ,$record
 }
@@ -775,6 +801,56 @@ function Require-RootPass($Record) {
     if($Record['technicalBlocked']){throw 'BLOCKED_E02_PRIVATE_JOB_OR_PROCESS_SETUP_UNSUPPORTED'}
     if ($Record['status'] -cne 'PASS' -or $Record['exitConfirmed'] -isnot [bool] -or -not $Record['exitConfirmed'] -or
         $Record['cleanupConfirmed'] -isnot [bool] -or -not $Record['cleanupConfirmed'] -or $Record['timedOut']) { throw 'E02_OWNED_PROCESS_FAILED_OR_CLEANUP_UNVERIFIED' }
+}
+function Build-ToolchainContract {
+    # A cached UBT makefile can skip module-rule construction. Require the fresh
+    # stage, and reject project steps that UBT could execute before that guard.
+    foreach($name in @('Intermediate','Binaries')) {
+        $path=Under (Join-Path $script:Stage $name) $script:Stage
+        if([IO.File]::Exists($path) -or [IO.Directory]::Exists($path)){throw 'E02_BUILD_REQUIRES_FRESH_STAGE_WITHOUT_CACHED_RULES_OR_MAKEFILE'}
+    }
+    $projectPath=Join-Path $script:Stage 'WarhammerClient.uproject'
+    $project=Read-Json $projectPath
+    foreach($name in @('InitSteps','PreBuildSteps','PostBuildSteps')) {
+        if($project.Contains($name)){throw 'E02_PROJECT_BUILD_STEPS_OUTSIDE_REVIEWED_ROUTE'}
+    }
+    $inputs=[ordered]@{}
+    foreach($entry in @(@('compiler','compiler'),@('resourceCompiler','sdkRc'))) {
+        $path=$script:Freeze.toolPaths[$entry[1]]
+        $bound=@($script:Freeze.files|Where-Object {$_.path -ieq $path})
+        if($bound.Count -ne 1){throw 'E02_NATIVE_TOOLCHAIN_EXECUTABLE_NOT_UNIQUELY_FROZEN'}
+        $inputs[$entry[0]]=Check-Descriptor $bound[0]
+    }
+    $receipt=Owned 'logs/build-toolchain-selection.json'
+    if([IO.File]::Exists($receipt) -or [IO.Directory]::Exists($receipt)){throw 'E02_TOOLCHAIN_RECEIPT_ALREADY_EXISTS'}
+    return @{compiler=$inputs.compiler;resourceCompiler=$inputs.resourceCompiler;receiptPath=$receipt;projectPath=$projectPath;
+        freshStageChecked=$true;projectBuildStepsAbsent=$true}
+}
+function Check-BuildToolchainReceipt($Contract) {
+    $receipt=Read-Json $Contract.receiptPath
+    if($receipt.schemaVersion -ne 1 -or $receipt.runId -cne $RunId -or $receipt.sourceHead -cne $script:Freeze.sourceHead -or
+        (Assert-Path $receipt.sourceRoot) -ine $script:Repo -or $receipt.sourceRootBinding -cne 'CALLER_INPUT_MATCHES_MODULE_DERIVED_REPOSITORY' -or
+        (Assert-Path $receipt.project) -ine $Contract.projectPath -or $receipt.target -cne 'WarhammerClientEditor' -or
+        $receipt.configuration -cne 'Development' -or $receipt.platform -cne 'Win64' -or $receipt.architecture -cne 'x64' -or
+        $receipt.hostArchitecture -cne 'X64' -or $receipt.validationPhase -cne 'MODULE_RULES_CONSTRUCTOR_BEFORE_NATIVE_ACTIONS' -or
+        $receipt.scope -cne 'DIRECT_COMPILER_AND_RESOURCE_COMPILER_EXECUTABLES_ONLY' -or
+        $receipt.directExecutableReadLocksHeldThroughUbtExit -isnot [bool] -or -not $receipt.directExecutableReadLocksHeldThroughUbtExit){throw 'E02_TOOLCHAIN_RECEIPT_IDENTITY_OR_PHASE_MISMATCH'}
+    foreach($name in @('compiler','resourceCompiler')) {
+        $actual=Check-Descriptor $receipt[$name];$expected=$Contract[$name]
+        if($actual.path -ine $expected.path -or $actual.bytes -ne $expected.bytes -or $actual.sha256 -ine $expected.sha256){throw 'E02_ACTUAL_NATIVE_EXECUTABLE_NOT_FROZEN_INPUT'}
+    }
+    $compilerDirectory=$Contract.compiler.path;$sdkDirectory=$Contract.resourceCompiler.path
+    for($i=0;$i -lt 4;$i++){$compilerDirectory=[IO.Path]::GetDirectoryName($compilerDirectory);$sdkDirectory=[IO.Path]::GetDirectoryName($sdkDirectory)}
+    $selection=$receipt.compilerSelection
+    if($selection.name -cne 'VisualStudio2022' -or $selection.version -cne '14.44.35229' -or
+        $selection.toolChain -cne 'VisualStudio2022' -or $selection.toolChainVersion -cne '14.44.35229' -or
+        (Assert-Path $selection.directory) -ine $compilerDirectory -or (Assert-Path $selection.toolChainDirectory) -ine $compilerDirectory -or
+        $receipt.windowsSdk.version -cne '10.0.22621.0' -or (Assert-Path $receipt.windowsSdk.directory) -ine $sdkDirectory){throw 'E02_RESOLVED_NATIVE_TOOLCHAIN_DIRECTORY_OR_VERSION_MISMATCH'}
+    return @{artifact=(Descriptor $Contract.receiptPath);compiler=$Contract.compiler;resourceCompiler=$Contract.resourceCompiler;
+        compilerSelection=$selection;windowsSdk=$receipt.windowsSdk;validationPhase=$receipt.validationPhase;
+        directExecutableReadLocksHeldThroughUbtExit=$receipt.directExecutableReadLocksHeldThroughUbtExit;
+        freshStageChecked=$Contract.freshStageChecked;projectBuildStepsAbsent=$Contract.projectBuildStepsAbsent;
+        limits='The module constructor checks resolved paths and EXE bytes before native actions and holds read handles through UBT exit. This does not attest compiler DLLs, linker tools or unrelated rule side effects.'}
 }
 function Supervisor-Controls {
     $pwsh=Need-File ([Environment]::ProcessPath)
@@ -862,9 +938,10 @@ function Check-PluginDiscoveryCatalog($Closure) {
         if(-not $knownAbsent){throw 'BLOCKED_E02_EXTRA_PLUGIN_DISCOVERY_PATH_PRESENT'}
         $observations.Add(@{path=$path;exists=$false;inspection='PASS';observedUtc=[DateTime]::UtcNow.ToString('o')})
     }
-    if(@($Closure.emptyEnvironmentVariables).Count -ne 1 -or $Closure.emptyEnvironmentVariables[0] -cne 'UE_ADDITIONAL_PLUGIN_PATHS'){throw 'E02_PLUGIN_DISCOVERY_ENVIRONMENT_CONTRACT'}
-    return @{catalogRoots=@($summaries);requiredAbsences=@($observations);subprocessEnvironmentOverrides=@{UE_ADDITIONAL_PLUGIN_PATHS=''};
+    if(@($Closure.emptyEnvironmentVariables).Count -ne 2 -or $Closure.emptyEnvironmentVariables[0] -cne 'UE_ADDITIONAL_PLUGIN_PATHS' -or $Closure.emptyEnvironmentVariables[1] -cne 'UE-CmdLineArgs'){throw 'E02_PLUGIN_DISCOVERY_ENVIRONMENT_CONTRACT'}
+    return @{catalogRoots=@($summaries);requiredAbsences=@($observations);subprocessEnvironmentOverrides=@{UE_ADDITIONAL_PLUGIN_PATHS='';'UE-CmdLineArgs'=''};
         parentAdditionalPluginPathsNonempty=(-not [string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable('UE_ADDITIONAL_PLUGIN_PATHS')));
+        parentEngineCommandLineNonempty=(-not [string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable('UE-CmdLineArgs')));
         limits='Raw frozen descriptor superset and explicit discovery-root observations; not a universal plugin/dependency analyzer or whole-process network-isolation proof.'}
 }
 function Resolve-ReceiptPath([string] $Value,[string] $Directory,[switch] $EngineToken) {
@@ -982,6 +1059,7 @@ function Inspect-NativeLog([string] $Kind) {
     if ($text -match '(?im)^.*(?:LogWindows:\s+Error:\s+(?:Fatal error|Unhandled Exception)|LogOutputDevice:\s+Error:\s+=== Critical error|LogCore:\s+Error:\s+Fatal error|Fatal error:|Assertion failed:)') { throw 'E02_NATIVE_FATAL_DIAGNOSTIC' }
     $transport=@($text -split "`n" | Where-Object { $_ -match '(?i)(LogPluginManager:.*Mounting.*(?:UdpMessaging|TcpMessaging|QuicMessaging|WebSocketMessaging|DiscoveryBeaconReceiver|NetworkServiceDiscovery)|Log(?:Udp|Tcp|Quic|WebSocket)Messaging:.*(?:Initializing|Started|Listening|Connecting|bridge|tunnel))' })
     if ($transport.Count) { throw 'E02_FORBIDDEN_TRANSPORT_STARTUP' }
+    if ($text -match 'Inserting commandline from UE-CmdLineArgs:|\s-EnvAfterHere(?:\s|$)') { throw 'E02_UNEXPECTED_INHERITED_ENGINE_ARGUMENTS' }
     $ddc=@($text -split "`n" | Where-Object { $_ -match '\bLogDerivedDataCache:' })
     $ownedDdc=(Owned 'ddc').Replace('\','/')
     $selected=@($ddc | Where-Object { $_.Replace('\','/').Contains($ownedDdc,[StringComparison]::OrdinalIgnoreCase) -and $_ -match '(?i)E02|Writable|Using' })
@@ -1078,6 +1156,15 @@ function World-Artifacts($Process) {
         if ($case.case -cne $suffix) {throw 'E02_CASE_ARTIFACT_IDENTITY'};Check-Scene $case
         Check-Utc $case.observedUtc $Process;$caseDescriptors.Add((Descriptor $path))
     }
+    $stateDescriptors=[Collections.Generic.List[object]]::new()
+    $requiredStates=[ordered]@{'five-forms-geometry.json'='Rendered.FiveForms';'raised-picking-state.json'='Rendered.RaisedPicking';'mesh-before-state.json'='Rendered.MeshSubstitution';'mesh-after-state.json'='Rendered.MeshSubstitution'}
+    foreach($entry in $requiredStates.GetEnumerator()) {
+        $path=Owned ('artifacts/world-input/'+$entry.Key);$state=Read-Json $path
+        if($state.case -cne $entry.Value){throw 'E02_STATE_ARTIFACT_CASE_MISMATCH'}
+        Check-Scene $state -Baseline;Check-Utc $state.observedUtc $Process
+        if($entry.Key -ceq 'five-forms-geometry.json' -and @($state.actualDisplayGeometry).Count -ne 5){throw 'E02_DISPLAY_GEOMETRY_ARTIFACT_MISSING'}
+        $stateDescriptors.Add((Descriptor $path))
+    }
     $inputPath=Owned 'artifacts/world-input/input.jsonl';$lines=[IO.File]::ReadAllLines((Need-File $inputPath),$script:Utf8)
     if ($lines.Length -eq 0 -or $lines.Length -gt 100000) {throw 'E02_INPUT_TRACE_COUNT'}
     $cases=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal);$last=0L;$startup=0
@@ -1118,13 +1205,72 @@ function World-Artifacts($Process) {
         if ($decoded['width'] -ne 1280 -or $decoded['height'] -ne 720 -or $record[0].width -ne $decoded['width'] -or $record[0].height -ne $decoded['height']) {throw 'E02_SCREENSHOT_DIMENSIONS'}
         $images.Add(@{case=$entry.Value;artifact=(Descriptor $path);actualDecode=$decoded;nativeCompletion=$record[0]})
     }
-    return @{scene=Descriptor $scenePath;caseSnapshots=@($caseDescriptors);inputTrace=Descriptor $inputPath;inputEvents=$lines.Length;startupEvents=$startup;inputCaseNames=@($cases|Sort-Object -CaseSensitive);rayTrace=Descriptor $rayPath;rayCount=$rays.Length;screenshotManifest=Descriptor $imagesPath;requiredImages=@($images);additionalImageRecords=@($records|Where-Object {-not $expected.Contains($_.filename)});visualInspection='PENDING_SEPARATE_ACTUAL_IMAGE_INSPECTION';fixture=Descriptor (Owned 'fixture/world-input-v1.json')}
+    return @{scene=Descriptor $scenePath;caseSnapshots=@($caseDescriptors);geometryAndStateSnapshots=@($stateDescriptors);inputTrace=Descriptor $inputPath;inputEvents=$lines.Length;startupEvents=$startup;inputCaseNames=@($cases|Sort-Object -CaseSensitive);rayTrace=Descriptor $rayPath;rayCount=$rays.Length;screenshotManifest=Descriptor $imagesPath;requiredImages=@($images);additionalImageRecords=@($records|Where-Object {-not $expected.Contains($_.filename)});visualInspection='PENDING_SEPARATE_ACTUAL_IMAGE_INSPECTION';fixture=Descriptor (Owned 'fixture/world-input-v1.json')}
 }
 function Output-Inventory {
     return @(foreach($item in Get-ChildItem -LiteralPath $script:RunRoot -Force -Recurse|Sort-Object FullName) {
         [void](Assert-Path $item.FullName)
         @{path=[IO.Path]::GetRelativePath($script:RunRoot,$item.FullName).Replace('\','/');kind=$(if($item.PSIsContainer){'directory'}else{'file'});bytes=$(if($item.PSIsContainer){$null}else{$item.Length})}
     })
+}
+function Add-RequiredArtifact($Index,[string] $Path) {
+    $path=Under $Path $script:RunRoot
+    $d=Descriptor $path
+    if(-not $Index.ContainsKey($d.path)){$Index.Add($d.path,$d)}
+}
+function Collect-RequiredDescriptors($Node,$Index,[int] $Depth=0) {
+    if($Depth -gt 80){throw 'E02_REQUIRED_ARTIFACT_DEPTH'}
+    if($Node -is [Collections.IDictionary]) {
+        if($Node.Contains('path') -and $Node.Contains('bytes') -and $Node.Contains('sha256') -and
+            $Node.path -is [string] -and [IO.Path]::IsPathFullyQualified($Node.path)) {
+            $prefix=$script:RunRoot.TrimEnd('\','/')+[IO.Path]::DirectorySeparatorChar
+            if([IO.Path]::GetFullPath($Node.path).StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase)) {
+                [void](Check-Descriptor $Node);Add-RequiredArtifact $Index $Node.path
+            }
+        }
+        foreach($entry in $Node.GetEnumerator()){Collect-RequiredDescriptors $entry.Value $Index ($Depth+1)}
+    } elseif($Node -is [Collections.IList]) {foreach($entry in $Node){Collect-RequiredDescriptors $entry $Index ($Depth+1)}}
+}
+function Publish-RequiredArtifacts {
+    $index=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::OrdinalIgnoreCase)
+    Add-RequiredArtifact $index (Owned 'manifest.json')
+    Add-RequiredArtifact $index (Owned 'fixture/world-input-v1.json')
+    Collect-RequiredDescriptors $script:Result $index
+    # These directories contain evidence, not the staged object's/DDC caches.
+    # Include optional report attachments too, so every observed evidence file
+    # has a hash before successful phase completion can be published.
+    foreach($root in @((Owned 'logs'),(Owned 'reports'),(Owned 'artifacts'),$script:PhaseRoot)) {
+        foreach($item in Get-ChildItem -LiteralPath $root -Force -Recurse) {
+            [void](Assert-Path $item.FullName)
+            if(-not $item.PSIsContainer){Add-RequiredArtifact $index $item.FullName}
+        }
+    }
+    $artifacts=@($index.Values|Sort-Object { $_.path } -CaseSensitive)
+    if($artifacts.Count -lt 2){throw 'E02_REQUIRED_ARTIFACTS_INCOMPLETE'}
+    $path=Join-Path $script:PhaseRoot 'required-artifacts.json'
+    Write-JsonNew $path @{schemaVersion=1;runId=$RunId;phase=$Phase;sourceHead=$script:Freeze.sourceHead;
+        freezeManifest=(Descriptor $FreezeManifestPath);artifactCount=$artifacts.Count;artifacts=$artifacts;
+        coverage='Owned evidence directories, process receipts/stdout/stderr and explicit bound run outputs; caches excluded. Result/completion bind this manifest afterward.'}
+    $script:Result.requiredArtifacts=$artifacts
+    $script:Result.requiredArtifactManifest=Descriptor $path
+}
+function Check-RequiredArtifactManifest($Result) {
+    if(-not $Result.Contains('requiredArtifactManifest') -or -not $Result.Contains('requiredArtifacts')){throw 'E02_REQUIRED_ARTIFACT_MANIFEST_MISSING'}
+    $descriptor=Check-Descriptor $Result.requiredArtifactManifest
+    $expectedPath=Owned ($Result.phase.ToLowerInvariant()+'/required-artifacts.json')
+    if($descriptor.path -ine $expectedPath){throw 'E02_REQUIRED_ARTIFACT_MANIFEST_PATH'}
+    $manifest=Read-Json $descriptor.path
+    if($manifest.schemaVersion -ne 1 -or $manifest.runId -cne $RunId -or $manifest.phase -cne $Result.phase -or
+        $manifest.sourceHead -cne $script:Freeze.sourceHead -or $manifest.freezeManifest.sha256 -cne (Digest $FreezeManifestPath) -or
+        $manifest.artifactCount -lt 2 -or @($manifest.artifacts).Count -ne $manifest.artifactCount -or
+        @($Result.requiredArtifacts).Count -ne $manifest.artifactCount){throw 'E02_REQUIRED_ARTIFACT_MANIFEST_IDENTITY'}
+    [void](Check-Descriptor $manifest.freezeManifest)
+    $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    for($i=0;$i -lt $manifest.artifactCount;$i++) {
+        $actual=Check-Descriptor $manifest.artifacts[$i];[void](Under $actual.path $script:RunRoot)
+        $bound=$Result.requiredArtifacts[$i]
+        if(-not $seen.Add($actual.path) -or $actual.path -ine $bound.path -or $actual.bytes -ne $bound.bytes -or $actual.sha256 -cne $bound.sha256){throw 'E02_REQUIRED_ARTIFACT_MANIFEST_BINDING'}
+    }
 }
 function Check-BoundDescriptors($Node,[int] $Depth=0) {
     if($Depth -gt 80){throw 'E02_BOUND_DESCRIPTOR_DEPTH'}
@@ -1156,6 +1302,7 @@ function Check-Previous {
         # Every earlier result records its own full predecessor set; a later
         # invocation checks those references against the still-original bytes.
         Check-BoundDescriptors $r
+        Check-RequiredArtifactManifest $r
         $desc['completion']=Descriptor $completionPath
         $links.Add($desc)
     }
@@ -1209,6 +1356,7 @@ try {
         switch($Phase) {
             'SupervisorControls' {$script:Result.controls=Supervisor-Controls;$script:Result.controlReport=Descriptor (Owned 'reports/supervisor-controls/index.json');$script:Result.status='SUPERVISOR_CONTROLS_PASS'}
             'Build' {
+                $nativeContract=Build-ToolchainContract
                 # Selection receipts and Build.bat execute in one cmd environment
                 # and the same Engine/Source CWD. GetDotnetPath initializes the
                 # bundled path; its later Build.bat call reuses that exact setup.
@@ -1228,7 +1376,7 @@ $batch=@(
     'if not "!E02_SELECTED_SDK!"=="%E02_DOTNET_VERSION%" (exit /b 98)',
     'echo E02_DOTNET_SELECTED_PATH=!E02_SELECTED_DOTNET!',
     'echo E02_DOTNET_SELECTED_SDK=!E02_SELECTED_SDK!',
-    'call "%E02_BUILD_BAT%" WarhammerClientEditor Win64 Development "-Project=%E02_PROJECT%" -WaitMutex -NoUBA "-UBARootDir=%E02_UBA%" "-Log=%E02_BUILD_LOG%"'
+    'call "%E02_BUILD_BAT%" WarhammerClientEditor Win64 Development "-Project=%E02_PROJECT%" -WaitMutex -NoUBA -Compiler=VisualStudio2022 -CompilerVersion=14.44.35229 -WindowsSDKVersion=10.0.22621.0 "-UBARootDir=%E02_UBA%" "-Log=%E02_BUILD_LOG%"'
 ) -join ' && '
 & $env:E02_CMD /d /v:on /s /c $batch
 if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE
@@ -1238,10 +1386,15 @@ if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE
                 $extra=@{E02_BUILD_BAT=$script:Freeze.toolPaths.buildBat;E02_PROJECT=(Join-Path $script:Stage 'WarhammerClient.uproject');E02_UBA=(Owned 'uba');E02_BUILD_LOG=(Owned 'logs/build.log');
                     E02_CMD=$script:Freeze.toolPaths.cmd;E02_WHERE=$script:Freeze.toolPaths.where;E02_GET_DOTNET_BAT=$script:Freeze.toolPaths.getDotnetPath;
                     E02_ENGINE_SOURCE=(Join-Path $EngineRoot 'Engine/Source');E02_DOTNET_EXE=$script:Freeze.toolPaths.dotnet;E02_DOTNET_VERSION=$script:Freeze.dotnetSdk.version;
-                    E02_DOTNET_WHERE_LOG=$pathReceipt;E02_DOTNET_SDK_LOG=$sdkReceipt}
+                    E02_DOTNET_WHERE_LOG=$pathReceipt;E02_DOTNET_SDK_LOG=$sdkReceipt;
+                    E02_NATIVE_TOOLCHAIN_REQUIRED='1';E02_BUILD_RUN_ID=$RunId;E02_SOURCE_HEAD=$script:Freeze.sourceHead;E02_SOURCE_ROOT=$script:Repo;
+                    E02_STAGED_PROJECT=$nativeContract.projectPath;E02_TOOLCHAIN_RECEIPT=$nativeContract.receiptPath;
+                    E02_COMPILER_PATH=$nativeContract.compiler.path;E02_COMPILER_BYTES=[string]$nativeContract.compiler.bytes;E02_COMPILER_SHA256=$nativeContract.compiler.sha256;
+                    E02_RESOURCE_COMPILER_PATH=$nativeContract.resourceCompiler.path;E02_RESOURCE_COMPILER_BYTES=[string]$nativeContract.resourceCompiler.bytes;E02_RESOURCE_COMPILER_SHA256=$nativeContract.resourceCompiler.sha256}
                 foreach($value in $extra.Values){if($value -match '[%!^&|<>\r\n\x00]'){throw 'E02_AMBIGUOUS_BUILD_BATCH_VALUE'}}
                 $r=Invoke-Root 'build' ([Environment]::ProcessPath) @('-NoProfile','-NonInteractive','-Command',$worker) 1800 $false '' $extra
                 Require-RootPass $r
+                $nativeSelection=Check-BuildToolchainReceipt $nativeContract
                 $resolved=[IO.File]::ReadAllLines((Need-File $pathReceipt));$actualSdk=[IO.File]::ReadAllLines((Need-File $sdkReceipt))
                 if($resolved.Length -lt 1 -or (Assert-Path ([IO.Path]::GetFullPath($resolved[0]))) -ine $script:Freeze.toolPaths.dotnet -or
                     $actualSdk.Length -ne 1 -or $actualSdk[0] -cne $script:Freeze.dotnetSdk.version){throw 'E02_ACTUAL_DOTNET_SELECTION_MISMATCH'}
@@ -1251,7 +1404,7 @@ if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE
                 $dll=Descriptor (Join-Path $script:Stage 'Binaries\Win64\UnrealEditor-WarhammerClient.dll')
                 $generated=@(Get-ChildItem -LiteralPath (Join-Path $script:Stage 'Intermediate') -Recurse -Filter 'E02WorldProofGameMode.generated.h' -File)
                 if ($generated.Count -ne 1 -or $dll.bytes -le 0) {throw 'E02_UHT_OR_EDITOR_BINARY_MISSING'}
-                $script:Result.build=@{log=Descriptor $buildLog;editorBinary=$dll;generatedHeader=Descriptor $generated[0].FullName;packaging='NOT_RUN';
+                $script:Result.build=@{log=Descriptor $buildLog;editorBinary=$dll;generatedHeader=Descriptor $generated[0].FullName;packaging='NOT_RUN';nativeToolchainSelection=$nativeSelection;
                     dotnetSelection=@{executable=(Descriptor ([IO.Path]::GetFullPath($resolved[0])));sdkVersion=$actualSdk[0];sdk=$script:Freeze.dotnetSdk;
                         pathReceipt=(Descriptor $pathReceipt);sdkReceipt=(Descriptor $sdkReceipt);workingDirectory=$extra.E02_ENGINE_SOURCE;
                         sameCmdEnvironmentAsBuild=$true;pathext='.EXE';initialBypassVariablesCleared=@('UE_USE_SYSTEM_DOTNET','UE_DOTNET_VERSION','UE_DOTNET_DIR','UE_DOTNET_ARCH','ProgramFiles(Arm)')}}
@@ -1283,7 +1436,7 @@ if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE
                     numericActualAssertions=$numeric.automation.actualAssertionTotal;renderedInputActualAssertions=$world.automation.actualAssertionTotal;
                     totalActualAssertions=([long]$numeric.automation.actualAssertionTotal+[long]$world.automation.actualAssertionTotal);supervisorGroups=3;supervisorSubcases=6;supervisorProcessRoots=5}
                 if($script:Result.nativeExecutionCounts.numericCases -ne 4 -or $script:Result.nativeExecutionCounts.renderedInputCases -ne 12 -or $script:Result.nativeExecutionCounts.totalCases -ne 16){throw 'E02_AUDIT_NATIVE_COUNTS'}
-                foreach($item in @($world.worldArtifacts.scene,$world.worldArtifacts.inputTrace,$world.worldArtifacts.rayTrace,$world.worldArtifacts.screenshotManifest)+@($world.worldArtifacts.caseSnapshots)) {[void](Check-Descriptor $item)}
+                foreach($item in @($world.worldArtifacts.scene,$world.worldArtifacts.inputTrace,$world.worldArtifacts.rayTrace,$world.worldArtifacts.screenshotManifest)+@($world.worldArtifacts.caseSnapshots)+@($world.worldArtifacts.geometryAndStateSnapshots)) {[void](Check-Descriptor $item)}
                 foreach($image in $world.worldArtifacts.requiredImages) {[void](Check-Descriptor $image.artifact)}
                 foreach($previous in $script:Result.predecessors) {
                     $record=Read-Json $previous.path
@@ -1340,6 +1493,7 @@ if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE
         }}
         if($script:Errors.Count -gt 0){$script:Result.executionPassed=$false;$script:Result.status='FAIL'}
         try {
+            if($script:Result.executionPassed){Publish-RequiredArtifacts}
             $phaseResultPath=Join-Path $script:PhaseRoot 'result.json'
             Write-JsonNew $phaseResultPath $script:Result
             $requiredArtifacts=@((Descriptor $phaseResultPath))

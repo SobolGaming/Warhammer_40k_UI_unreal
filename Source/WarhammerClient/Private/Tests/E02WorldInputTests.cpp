@@ -69,6 +69,26 @@ FVector4d JsonRect4(const TSharedPtr<FJsonObject>& Object, const TCHAR* Field)
     return FVector4d(Values[0]->AsNumber(), Values[1]->AsNumber(), Values[2]->AsNumber(), Values[3]->AsNumber());
 }
 
+FVector3d IndependentCameraPosition(const FVector3d& Target, double Azimuth, double Elevation, double Distance)
+{
+    // Explicit immutable-fixture arithmetic; do not call the camera/coordinate adapter.
+    const double Placement = FMath::DegreesToRadians(23.0), C = FMath::Cos(Placement), S = FMath::Sin(Placement);
+    const double A = FMath::DegreesToRadians(Azimuth), E = FMath::DegreesToRadians(Elevation);
+    const FVector3d Q(2.54 * (Target.X - 24), -2.54 * (Target.Y - 31), 2.54 * (Target.Z + 2));
+    const FVector3d Offset(FMath::Cos(E) * FMath::Cos(A) * Distance,
+        FMath::Cos(E) * FMath::Sin(A) * Distance, FMath::Sin(E) * Distance);
+    return FVector3d(137 + C * (Q.X + Offset.X) - S * (Q.Y + Offset.Y),
+        -83 + S * (Q.X + Offset.X) + C * (Q.Y + Offset.Y), 41 + Q.Z + Offset.Z);
+}
+
+struct FCameraGestureObservation
+{
+    FVector3d Target, Position, Rotation, ViewForward;
+    double Azimuth = 0, Elevation = 0, Distance = 0;
+    uint64 Mutations = 0, Events = 0, HudActivations = 0, ConfirmAttempts = 0;
+    ELocalReview Review = ELocalReview::Editing;
+};
+
 /** Each Update returns to the engine loop. No driver future is synchronously waited on. */
 class FE02CaseCommand final : public IAutomationLatentCommand
 {
@@ -364,6 +384,131 @@ private:
         return FVector3d::Distance(ViewPosition, ActorPosition) <= 1e-3 && FVector3d::Distance(Data.ViewOrigin, ActorPosition) <= 1e-3 &&
             ViewRotation.Equals(FRotator(ActorRotation.X, ActorRotation.Y, ActorRotation.Z), 1e-3) && ViewRotation.Vector().Equals(ExpectedForward, 1e-5);
     }
+    bool ObserveCameraGesture()
+    {
+        const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+        GestureBefore.Target = JsonVector3(Camera, TEXT("targetDomainInches"));
+        GestureBefore.Position = JsonVector3(Camera, TEXT("positionWorldCm"));
+        GestureBefore.Rotation = JsonVector3(Camera, TEXT("rotationDegrees"));
+        GestureBefore.Azimuth = Camera->GetNumberField(TEXT("azimuthDegrees"));
+        GestureBefore.Elevation = Camera->GetNumberField(TEXT("elevationDegrees"));
+        GestureBefore.Distance = Camera->GetNumberField(TEXT("distanceCm"));
+        GestureBefore.Mutations = World->CameraMutationCount(); GestureBefore.Events = World->EventCount();
+        const auto& State = World->GetPolicy().Snapshot();
+        GestureBefore.Review = State.LocalReview; GestureBefore.HudActivations = State.HudActivationCount;
+        GestureBefore.ConfirmAttempts = State.ConfirmAttempts;
+        APlayerController* Controller = World->GetWorld()->GetFirstPlayerController();
+        if (!Check(Controller && !State.Capture.IsSet() && ActualViewMatches(GestureBefore.Azimuth, GestureBefore.Elevation),
+            TEXT("Fresh gesture baseline has no capture and actual actor/player/projection views agree"))) { return false; }
+        FVector ViewPosition; FRotator ViewRotation; Controller->GetPlayerViewPoint(ViewPosition, ViewRotation);
+        GestureBefore.ViewForward = ViewRotation.Vector();
+        return Check(GestureBefore.Position.Equals(IndependentCameraPosition(GestureBefore.Target, GestureBefore.Azimuth,
+            GestureBefore.Elevation, GestureBefore.Distance), 1e-3), TEXT("Pre-gesture actual actor matches independently calculated fixture camera position"));
+    }
+    void AssertCameraGesture(const FVector3d& ExpectedTarget, double ExpectedAzimuth, double ExpectedElevation,
+        double ExpectedDistance, const FVector3d& ExpectedPosition, bool bExactlyOneMutation)
+    {
+        const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+        Check(JsonVector3(Camera, TEXT("targetDomainInches")).Equals(ExpectedTarget, 1e-6) &&
+            FMath::Abs(Camera->GetNumberField(TEXT("azimuthDegrees")) - ExpectedAzimuth) <= 1e-6 &&
+            FMath::Abs(Camera->GetNumberField(TEXT("elevationDegrees")) - ExpectedElevation) <= 1e-6 &&
+            FMath::Abs(Camera->GetNumberField(TEXT("distanceCm")) - ExpectedDistance) <= 1e-6,
+            TEXT("This isolated Driver gesture has its exact expected target, angles and distance"));
+        const FVector3d ActualPosition = JsonVector3(Camera, TEXT("positionWorldCm"));
+        Check(ActualPosition.Equals(ExpectedPosition, 1e-3) && !ActualPosition.Equals(GestureBefore.Position, 1e-3),
+            TEXT("This gesture changes the actual camera actor by the independently expected displacement"));
+        if (ExpectedAzimuth == GestureBefore.Azimuth && ExpectedElevation == GestureBefore.Elevation)
+        { Check(JsonVector3(Camera, TEXT("rotationDegrees")).Equals(GestureBefore.Rotation, 1e-5), TEXT("Pan/dolly preserve actual actor rotation")); }
+        Check((bExactlyOneMutation ? World->CameraMutationCount() == GestureBefore.Mutations + 1 : World->CameraMutationCount() > GestureBefore.Mutations) &&
+            World->EventCount() > GestureBefore.Events, TEXT("Fresh per-gesture camera mutation and actual Slate event are required"));
+        const auto& State = World->GetPolicy().Snapshot();
+        AssertIntent();
+        Check(State.LocalReview == GestureBefore.Review && State.HudActivationCount == GestureBefore.HudActivations && State.ConfirmAttempts == GestureBefore.ConfirmAttempts,
+            TEXT("Each camera gesture preserves local review, HUD activation and Confirm counters"));
+        Check(FInputPolicy::CoreTransportCreations() == 0 && FInputPolicy::GameCommands() == 0 && FInputPolicy::AcceptedResults() == 0,
+            TEXT("Each isolated camera gesture has zero transport/game-command/accepted-result counters"));
+    }
+    void AddPanDollyProbe()
+    {
+        Wait(TEXT("initial actual camera cache settles before isolated gestures"), [this]()
+        {
+            const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+            return ActualViewMatches(Camera->GetNumberField(TEXT("azimuthDegrees")), Camera->GetNumberField(TEXT("elevationDegrees")));
+        });
+        Do(TEXT("measure quantized physical pan endpoints and fresh actual camera baseline"), [this]()
+        {
+            if (!IndependentCircleScreen(PanStart) || !ObserveCameraGesture()) { return; }
+            const FVector2D StartLogical = SurfaceBasis.ToLocal(PanStart);
+            PanEnd = QuantizedPhysical(SurfaceBasis.ToScreen(StartLogical + FVector2D(20, 10)));
+            PanLogicalDelta = SurfaceBasis.ToLocal(PanEnd) - StartLogical;
+            const FVector2D EndLogical = SurfaceBasis.ToLocal(PanEnd);
+            Check(PanLogicalDelta.Size() > 4 && EndLogical.X > World->GetFixture().Presentation.HudBoundsLogical.Max.X &&
+                EndLogical.Y >= World->GetFixture().Presentation.HeaderHeightLogical && EndLogical.X < SurfaceBasis.LocalSize.X && EndLogical.Y < SurfaceBasis.LocalSize.Y,
+                TEXT("Quantized physical samples produce an above-threshold logical drag and leave wheel over visible world"));
+            Check(World->GetFixture().Camera.PanCmPerLogicalUnit == 0.15 && World->GetFixture().Camera.DollyStepCm == 20,
+                TEXT("Independent effects use frozen 0.15 cm/logical-unit pan and 20 cm wheel step"));
+            const double HorizontalLength = FVector2D(GestureBefore.ViewForward.X, GestureBefore.ViewForward.Y).Size();
+            if (!Check(HorizontalLength > 1e-6, TEXT("Measured actual view has a nonzero horizontal forward direction"))) { return; }
+            const FVector3d Forward(GestureBefore.ViewForward.X / HorizontalLength, GestureBefore.ViewForward.Y / HorizontalLength, 0);
+            const FVector3d Right(-Forward.Y, Forward.X, 0);
+            PanWorldDelta = (Right * PanLogicalDelta.X + Forward * PanLogicalDelta.Y) * 0.15;
+            const double Placement = FMath::DegreesToRadians(23.0), C = FMath::Cos(Placement), S = FMath::Sin(Placement);
+            PanExpectedTarget = GestureBefore.Target + FVector3d((C * PanWorldDelta.X + S * PanWorldDelta.Y) / 2.54,
+                (S * PanWorldDelta.X - C * PanWorldDelta.Y) / 2.54, 0);
+        });
+        Input(TEXT("Driver moves to measured sample and presses middle alone"), [this](IAsyncActionSequence& S) { S.MoveToPosition(PanStart).Press(EMouseButtons::Middle); });
+        Do(TEXT("middle press owns pan without a camera effect"), [this]()
+        {
+            const auto& Capture = World->GetPolicy().Snapshot().Capture;
+            if (!Check(Capture.IsSet() && Capture->Owner == EInputOwner::Pan && Capture->Button == EPointerButton::Middle && !Capture->bDragged,
+                TEXT("Actual middle press owns the un-dragged pan capture"))) { return; }
+            PanCaptureGeneration = Capture->Generation;
+            Check(Capture->Start.ScreenPhysical.Equals(PanStart, 1e-4) && Capture->Start.Logical.Equals(SurfaceBasis.ToLocal(PanStart), 1e-3) &&
+                World->CameraMutationCount() == GestureBefore.Mutations && JsonVector3(World->Snapshot()->GetObjectField(TEXT("camera")), TEXT("positionWorldCm")).Equals(GestureBefore.Position, 1e-3),
+                TEXT("Real middle press agrees with independently measured coordinates and leaves camera fixed"));
+        });
+        Input(TEXT("Driver middle-pan moves to quantized logical endpoint"), [this](IAsyncActionSequence& S) { S.MoveToPosition(PanEnd); });
+        Do(TEXT("isolated middle-pan exact target and actor displacement"), [this]()
+        {
+            const auto& Capture = World->GetPolicy().Snapshot().Capture;
+            Check(Capture.IsSet() && Capture->Owner == EInputOwner::Pan && Capture->Button == EPointerButton::Middle && Capture->Generation == PanCaptureGeneration && Capture->bDragged &&
+                Capture->Last.ScreenPhysical.Equals(PanEnd, 1e-4) && (Capture->Last.Logical - Capture->Start.Logical).Equals(PanLogicalDelta, 1e-3),
+                TEXT("Same actual pan capture observes independently measured physical/logical displacement"));
+            AssertCameraGesture(PanExpectedTarget, GestureBefore.Azimuth, GestureBefore.Elevation, GestureBefore.Distance, GestureBefore.Position + PanWorldDelta, false);
+        });
+        Wait(TEXT("actual player/projection cache observes isolated pan"), [this]() { return ActualViewMatches(GestureBefore.Azimuth, GestureBefore.Elevation); });
+        Do(TEXT("retain completed pan mutation count before release"), [this]() { PanCompletedMutations = World->CameraMutationCount(); });
+        Input(TEXT("Driver middle release alone"), [](IAsyncActionSequence& S) { S.Release(EMouseButtons::Middle); });
+        Do(TEXT("middle release ends capture without masking pan with another camera action"), [this]()
+        {
+            Check(!World->GetPolicy().Snapshot().Capture.IsSet() && World->CameraMutationCount() == PanCompletedMutations, TEXT("Middle release clears capture and causes no camera mutation"));
+            AssertCameraGesture(PanExpectedTarget, GestureBefore.Azimuth, GestureBefore.Elevation, GestureBefore.Distance, GestureBefore.Position + PanWorldDelta, false);
+        });
+        Do(TEXT("fresh baseline immediately before wheel alone"), [this]() { ObserveCameraGesture(); });
+        Input(TEXT("Driver viewport wheel one notch alone"), [](IAsyncActionSequence& S) { S.ScrollBy(1); });
+        Do(TEXT("isolated wheel exact distance and actor displacement"), [this]()
+        {
+            Check(!World->GetPolicy().Snapshot().Capture.IsSet() && GestureBefore.Distance - 20 > World->GetFixture().Camera.MinimumDistanceCm,
+                TEXT("Wheel has no capture and its expected step is strictly inside frozen distance bounds"));
+            AssertCameraGesture(GestureBefore.Target, GestureBefore.Azimuth, GestureBefore.Elevation, GestureBefore.Distance - 20,
+                GestureBefore.Position + GestureBefore.ViewForward * 20, true);
+        });
+        Wait(TEXT("actual player/projection cache observes isolated wheel"), [this]() { return ActualViewMatches(GestureBefore.Azimuth, GestureBefore.Elevation); });
+    }
+    void AddKeyboardOrbitProbe(bool bUp)
+    {
+        Do(TEXT("fresh camera baseline before one keyboard orbit action"), [this]() { ObserveCameraGesture(); });
+        Input(bUp ? TEXT("Driver Up key alone") : TEXT("Driver Left key alone"), [bUp](IAsyncActionSequence& S) { S.Type(bUp ? EKeys::Up : EKeys::Left); });
+        Do(TEXT("isolated keyboard orbit exact angles and actual actor"), [this, bUp]()
+        {
+            Check(World->GetFixture().Camera.KeyboardOrbitStepDegrees == 5, TEXT("Frozen five-degree keyboard orbit step"));
+            const double Azimuth = GestureBefore.Azimuth - (bUp ? 0 : 5), Elevation = GestureBefore.Elevation + (bUp ? 5 : 0);
+            AssertCameraGesture(GestureBefore.Target, Azimuth, Elevation, GestureBefore.Distance,
+                IndependentCameraPosition(GestureBefore.Target, Azimuth, Elevation, GestureBefore.Distance), true);
+        });
+        Wait(TEXT("actual player/projection cache observes this keyboard action"), [this, bUp]()
+        { return ActualViewMatches(GestureBefore.Azimuth - (bUp ? 0 : 5), GestureBefore.Elevation + (bUp ? 5 : 0)); });
+    }
     void AddFrameCommand(bool bSelection)
     {
         Input(TEXT("Driver establishes changed azimuth0 elevation85 before framing"), [](IAsyncActionSequence& S)
@@ -550,17 +695,18 @@ private:
         else if (Name == TEXT("Input.PanDollyFrame"))
         {
             ClickModel(TEXT("e02-circle")); RetainIntent();
-            Input(TEXT("middle pan"), [this](IAsyncActionSequence& S) { S.Press(EMouseButtons::Middle).MoveToPosition(A + FVector2D(20, 10)).Release(EMouseButtons::Middle); });
-            Input(TEXT("viewport wheel then camera keys"), [](IAsyncActionSequence& S)
-            { S.ScrollBy(1).Type(EKeys::Left).Type(EKeys::Up); });
+            AddPanDollyProbe(); AddKeyboardOrbitProbe(false); AddKeyboardOrbitProbe(true);
             AddFrameCommand(false); AddFrameCommand(true);
+            Do(TEXT("fresh camera baseline before reset alone"), [this]() { ObserveCameraGesture(); });
             Input(TEXT("Driver reset after independently checked frame commands"), [](IAsyncActionSequence& S) { S.Type(EKeys::R); });
-            Do(TEXT("camera-only operations preserve domain"), [this]()
+            Do(TEXT("isolated reset restores full frozen camera defaults"), [this]()
             {
-                AssertIntent(); Check(World->CameraMutationCount() >= Cameras + 7, TEXT("Pan/dolly/frame-board/frame-selection/keyboard/reset actual effects"));
-                const auto C = World->Snapshot()->GetObjectField(TEXT("camera"));
-                Check(C->GetNumberField(TEXT("azimuthDegrees")) == World->GetFixture().Camera.DefaultAzimuthDegrees && C->GetNumberField(TEXT("distanceCm")) == World->GetFixture().Camera.DefaultDistanceCm, TEXT("Reset restored frozen focus and camera defaults"));
+                const auto& Camera = World->GetFixture().Camera;
+                AssertCameraGesture(Camera.TargetDomainInches, Camera.DefaultAzimuthDegrees, Camera.DefaultElevationDegrees, Camera.DefaultDistanceCm,
+                    IndependentCameraPosition(Camera.TargetDomainInches, Camera.DefaultAzimuthDegrees, Camera.DefaultElevationDegrees, Camera.DefaultDistanceCm), true);
             });
+            Wait(TEXT("actual player/projection cache observes isolated reset"), [this]()
+            { return ActualViewMatches(World->GetFixture().Camera.DefaultAzimuthDegrees, World->GetFixture().Camera.DefaultElevationDegrees); });
         }
         else if (Name == TEXT("Input.HudExclusion"))
         {
@@ -768,6 +914,9 @@ private:
     FVector2D A, B;
     FObservedSlateBasis ViewBasis, SurfaceBasis;
     FVector2D ProbeStart, ProbeBelow, ProbeAbove;
+    FVector2D PanStart, PanEnd, PanLogicalDelta;
+    FVector3d PanWorldDelta, PanExpectedTarget;
+    FCameraGestureObservation GestureBefore;
     FVector3d FrameBeforeActorPosition, FrameBeforeActorRotation;
     FAdvisoryHit HitBefore;
     double Started, StepStarted = 0.0, CleanupStarted = 0.0;
@@ -775,6 +924,7 @@ private:
     uint64 ProbePicks = 0, ProbeCameras = 0, ProbeHudActivations = 0, ProbeCaptureGeneration = 0, ClickPicks = 0, ClickEvents = 0;
     uint64 ResizeCaptureGeneration = 0, ResizeCancelGeneration = 0, ResizeHeldEvents = 0, ResizeCameras = 0;
     uint64 FrameBeforeGeneration = 0, FrameBeforePaint = 0, FrameBeforeEvents = 0;
+    uint64 PanCaptureGeneration = 0, PanCompletedMutations = 0;
     double ProbeAzimuth = 0, ProbeElevation = 0;
     double BoardFrameDistance = 0;
     int32 Index = 0, Assertions = 0;
