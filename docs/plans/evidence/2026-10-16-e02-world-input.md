@@ -177,3 +177,48 @@ frozen circle-top intersection. These statements describe source changes only.
 Static parsing, whitespace/link/security inspection are checkpoint checks; no
 E02 control, compiler invocation, native case or visible window has run. A fresh
 frozen independent source assessment is still required before execution.
+
+## Second independent source assessment — 2026-10-17 UTC
+
+The fresh initial SOURCE assessment of checkpoint
+`b638022b94c5e2c82aa891b22b17fab301a96afd` against `bd801233cc9989e0ae146a3be7b136d26dc73183`
+returned **CHANGES_REQUESTED**. Its unchanged
+[raw report](../../../.local/reviews/E02-source-review/review-b638-20261017T072722Z-6ba9c31e/last-message.txt)
+is10,391bytes, SHA256 `704567799CB118CAF7AB08D4CD32D2BC42B22A252702BD507AE650DC33FBB62A`.
+The CLI completed at `2026-10-17T07:43:02.0209637Z`, exit0; that is review
+completion, not source approval. The
+[operator seal](../../../.local/reviews/E02-source-review/review-b638-20261017T072722Z-6ba9c31e/orchestrator-seal.json),
+SHA256 `A2F7BA7E56F3F0F892931393ECB425348D3D72622276CED91DC7C2F461184DA1`,
+was sealed at `2026-10-17T07:46:06.5352280Z` before root released the freeze.
+
+The new session was `01a148c2-6d98-7f03-864d-a82abc991442`; selected actual runtime
+metadata records CLI0.162.0-alpha.17.2, configured default `gpt-6.1-sol`/`ultra`,
+workspace-root CWD, read-only/never and disabled session memory. The raw report's
+self-unverified properties remain unchanged and separate. Lower-level memory,
+app/feature and OS-process-association guarantees remain UNVERIFIED. The approved
+launch file was6,723bytes/SHA256 `095336DE832CA3DEB8EC369F5066FD255FCCC2D6D187F8AF81190C759A5DDBB5`;
+the observed message was6,725UTF-8bytes/SHA256
+`94F0D381239CE6568E94DEEBA66269D81086C6CFCFD4C603AEDC75017F31C99C`.
+Native stdin transport added trailing whitespace only; no byte-identical stdin
+claim or additional context is inferred.
+
+All49 literal commands and their complete outputs were audited. No prohibited
+peer/author/Git-message/private body, execution, network or app/collaboration use
+was observed. Three corrected command errors remain preserved. All1,295 frozen
+file bindings,16 packet inputs,28 source-membership entries,167 reference DLLs,
+both plugin catalogs, ten discovery absences and normative/runtime bindings
+matched. HEAD and Git status were unchanged. No E02 run directory or process
+existed; all control/build/native/GUI gates remain NOT RUN.
+
+Three further P2 source findings require remediation within the existing scope:
+
+1. A second button over the text HUD can replace an outstanding camera capture.
+2. Frame-board/selection use fixed views without proving projected/HUD-aware fit.
+3. The resize assertion checks capture after button release, masking a missing
+   resize cancellation.
+
+Root will preserve the16 cases and fixture defaults, checkpoint the repairs and
+obtain another fresh frozen SOURCE assessment. Camera fitting must honor actual
+viewport/HUD geometry and preserve the full-window ray adapter. These source
+findings do not establish an observed rendered failure; no E02 execution or final
+OWN15 CODE/REQ acceptance is supplied by either source report.
