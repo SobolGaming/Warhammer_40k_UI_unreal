@@ -222,3 +222,15 @@ obtain another fresh frozen SOURCE assessment. Camera fitting must honor actual
 viewport/HUD geometry and preserve the full-window ray adapter. These source
 findings do not establish an observed rendered failure; no E02 execution or final
 OWN15 CODE/REQ acceptance is supplied by either source report.
+
+The capture/chord and pre-release resize fixes were saved at
+`f71dd04008f16569ed96407143a012b78fc073dc`. The following framing increment fits
+conservative descriptor-box corners against actual constrained perspective data
+and the painted HUD/header boundary, with a16-physical-pixel inset. It computes
+and validates the proposed camera state before committing it; unsupported or
+over-limit fitting fails visibly. Initial/reset defaults and the320/85cm hints
+remain unchanged. Existing cases now observe changed angles and fresh actual
+camera/projection state before checking projected containment, center and closer
+selection framing at all three prescribed viewport/scale variants. These are
+uncompiled source assertions, not rendering or interaction results. The complete
+repaired candidate still requires another frozen independent SOURCE assessment.

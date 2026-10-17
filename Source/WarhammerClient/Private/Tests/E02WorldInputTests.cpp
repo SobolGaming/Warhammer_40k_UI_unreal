@@ -8,6 +8,7 @@
 #include "DriverConfiguration.h"
 #include "Engine/Engine.h"
 #include "Engine/GameViewportClient.h"
+#include "Engine/LocalPlayer.h"
 #include "Engine/World.h"
 #include "Framework/Application/SlateApplication.h"
 #include "HAL/PlatformTime.h"
@@ -16,6 +17,8 @@
 #include "IAutomationDriverModule.h"
 #include "IDriverSequence.h"
 #include "InputCoreTypes.h"
+#include "SceneView.h"
+#include "UnrealClient.h"
 #include "Widgets/SViewport.h"
 #include "Widgets/SWidget.h"
 
@@ -54,6 +57,16 @@ FVector2D QuantizedPhysical(const FVector2D& P)
 {
     // The installed AutomationDriver cursor uses integer physical screen coordinates.
     return FVector2D(FMath::RoundToInt(P.X), FMath::RoundToInt(P.Y));
+}
+FVector3d JsonVector3(const TSharedPtr<FJsonObject>& Object, const TCHAR* Field)
+{
+    const auto& Values = Object->GetArrayField(Field);
+    return FVector3d(Values[0]->AsNumber(), Values[1]->AsNumber(), Values[2]->AsNumber());
+}
+FVector4d JsonRect4(const TSharedPtr<FJsonObject>& Object, const TCHAR* Field)
+{
+    const auto& Values = Object->GetArrayField(Field);
+    return FVector4d(Values[0]->AsNumber(), Values[1]->AsNumber(), Values[2]->AsNumber(), Values[3]->AsNumber());
 }
 
 /** Each Update returns to the engine loop. No driver future is synchronously waited on. */
@@ -332,6 +345,128 @@ private:
             SurfaceBasis.X.X, SurfaceBasis.X.Y, SurfaceBasis.Y.X, SurfaceBasis.Y.Y,
             Camera->GetNumberField(TEXT("azimuthDegrees")), ExpectedAzimuth));
     }
+    bool ActualViewMatches(double ExpectedAzimuth, double ExpectedElevation) const
+    {
+        APlayerController* Controller = World->GetWorld()->GetFirstPlayerController();
+        UGameViewportClient* Client = World->GetWorld()->GetGameViewport();
+        if (!Controller || !Controller->GetLocalPlayer() || !Client || !Client->Viewport) { return false; }
+        FSceneViewProjectionData Data;
+        if (!Controller->GetLocalPlayer()->GetProjectionData(Client->Viewport, Data)) { return false; }
+        const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+        const FVector3d ActorPosition = JsonVector3(Camera, TEXT("positionWorldCm"));
+        const FVector3d ActorRotation = JsonVector3(Camera, TEXT("rotationDegrees"));
+        FVector ViewPosition; FRotator ViewRotation;
+        Controller->GetPlayerViewPoint(ViewPosition, ViewRotation);
+        const double A = FMath::DegreesToRadians(ExpectedAzimuth), E = FMath::DegreesToRadians(ExpectedElevation), Placement = FMath::DegreesToRadians(23.0);
+        const FVector3d Back(FMath::Cos(E) * FMath::Cos(A), FMath::Cos(E) * FMath::Sin(A), FMath::Sin(E));
+        const FVector3d ExpectedForward(-(FMath::Cos(Placement) * Back.X - FMath::Sin(Placement) * Back.Y),
+            -(FMath::Sin(Placement) * Back.X + FMath::Cos(Placement) * Back.Y), -Back.Z);
+        return FVector3d::Distance(ViewPosition, ActorPosition) <= 1e-3 && FVector3d::Distance(Data.ViewOrigin, ActorPosition) <= 1e-3 &&
+            ViewRotation.Equals(FRotator(ActorRotation.X, ActorRotation.Y, ActorRotation.Z), 1e-3) && ViewRotation.Vector().Equals(ExpectedForward, 1e-5);
+    }
+    void AddFrameCommand(bool bSelection)
+    {
+        Input(TEXT("Driver establishes changed azimuth0 elevation85 before framing"), [](IAsyncActionSequence& S)
+        {
+            S.Type(EKeys::R);
+            for (int32 I = 0; I != 18; ++I) { S.Type(EKeys::Right); }
+            for (int32 I = 0; I != 8; ++I) { S.Type(EKeys::Up); }
+        });
+        Wait(TEXT("actual changed actor/projection view before frame command"), [this]()
+        {
+            const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+            return Camera->GetNumberField(TEXT("azimuthDegrees")) == 0 && Camera->GetNumberField(TEXT("elevationDegrees")) == 85 && ActualViewMatches(0, 85);
+        });
+        Do(TEXT("retain pre-frame event/generation and actual actor view"), [this]()
+        {
+            const auto Snapshot = World->Snapshot(); const auto Camera = Snapshot->GetObjectField(TEXT("camera"));
+            FrameBeforeGeneration = static_cast<uint64>(Camera->GetNumberField(TEXT("frameGeneration")));
+            FrameBeforePaint = static_cast<uint64>(Snapshot->GetObjectField(TEXT("paint"))->GetNumberField(TEXT("generation")));
+            FrameBeforeEvents = World->EventCount();
+            FrameBeforeActorPosition = JsonVector3(Camera, TEXT("positionWorldCm")); FrameBeforeActorRotation = JsonVector3(Camera, TEXT("rotationDegrees"));
+            Check(ActualViewMatches(0, 85), TEXT("Independent actual player/projection observes changed orbit before real F/G"));
+        });
+        Input(bSelection ? TEXT("real Driver G frame-selection command") : TEXT("real Driver F frame-board command"), [bSelection](IAsyncActionSequence& S)
+        { S.Type(bSelection ? EKeys::G : EKeys::F); });
+        Wait(TEXT("fresh frame event and actual projected default-angle view"), [this, bSelection]()
+        {
+            const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+            const bool bActorChanged = !JsonVector3(Camera, TEXT("positionWorldCm")).Equals(FrameBeforeActorPosition, 1e-3) ||
+                !JsonVector3(Camera, TEXT("rotationDegrees")).Equals(FrameBeforeActorRotation, 1e-3);
+            return Camera->GetNumberField(TEXT("frameGeneration")) > FrameBeforeGeneration && Camera->GetNumberField(TEXT("frameEventSequence")) > FrameBeforeEvents &&
+                Camera->GetStringField(TEXT("frameKind")) == (bSelection ? TEXT("selection") : TEXT("board")) && bActorChanged &&
+                Camera->GetNumberField(TEXT("azimuthDegrees")) == World->GetFixture().Camera.DefaultAzimuthDegrees &&
+                Camera->GetNumberField(TEXT("elevationDegrees")) == World->GetFixture().Camera.DefaultElevationDegrees &&
+                ActualViewMatches(World->GetFixture().Camera.DefaultAzimuthDegrees, World->GetFixture().Camera.DefaultElevationDegrees);
+        });
+        Do(TEXT("independent projected descriptor-box framing assertions"), [this, bSelection]() { AssertFramedBounds(bSelection); });
+    }
+    void AssertFramedBounds(bool bSelection)
+    {
+        if (!ObserveGeometry()) { return; }
+        const auto Snapshot = World->Snapshot(), Paint = Snapshot->GetObjectField(TEXT("paint")), Camera = Snapshot->GetObjectField(TEXT("camera"));
+        const auto& Presentation = World->GetFixture().Presentation;
+        const FVector2D HudMin = SurfaceBasis.ToScreen(Presentation.HudBoundsLogical.Min), HudMax = SurfaceBasis.ToScreen(Presentation.HudBoundsLogical.Max);
+        const FVector2D HeaderMin = SurfaceBasis.ToScreen(FVector2D::ZeroVector);
+        const FVector2D HeaderMax = SurfaceBasis.ToScreen(FVector2D(SurfaceBasis.LocalSize.X, Presentation.HeaderHeightLogical));
+        const FVector4d PaintedHud = JsonRect4(Paint, TEXT("hudScreenPhysical")), PaintedHeader = JsonRect4(Paint, TEXT("headerScreenPhysical"));
+        Check(FVector2D(PaintedHud.X, PaintedHud.Y).Equals(HudMin, 1e-3) && FVector2D(PaintedHud.Z, PaintedHud.W).Equals(HudMax, 1e-3) &&
+            FVector2D(PaintedHeader.X, PaintedHeader.Y).Equals(HeaderMin, 1e-3) && FVector2D(PaintedHeader.Z, PaintedHeader.W).Equals(HeaderMax, 1e-3),
+            TEXT("Actually painted HUD/header agree with independently measured Slate basis and frozen logical rectangles"));
+        Check(Paint->GetBoolField(TEXT("axisAligned")) && Paint->GetNumberField(TEXT("viewportWidth")) == World->GetProofViewportSize().X &&
+            Paint->GetNumberField(TEXT("viewportHeight")) == World->GetProofViewportSize().Y && Paint->GetNumberField(TEXT("uiScale")) == World->GetProofUiScale(),
+            TEXT("Framing uses actual matching painted viewport and scale"));
+        Check(Camera->GetNumberField(TEXT("frameGeneration")) == FrameBeforeGeneration + 1 && Camera->GetNumberField(TEXT("framePaintGeneration")) >= FrameBeforePaint &&
+            Camera->GetNumberField(TEXT("framePaintGeneration")) <= Paint->GetNumberField(TEXT("generation")) &&
+            Camera->GetNumberField(TEXT("frameEventSequence")) > FrameBeforeEvents && Camera->GetNumberField(TEXT("frameEventSequence")) <= World->EventCount(),
+            TEXT("This real frame command owns a fresh generation/event bound to actual paint"));
+        APlayerController* Controller = World->GetWorld()->GetFirstPlayerController();
+        UGameViewportClient* Client = World->GetWorld()->GetGameViewport();
+        FSceneViewProjectionData Data;
+        if (!Check(Controller && Controller->GetLocalPlayer() && Client && Client->Viewport &&
+            Controller->GetLocalPlayer()->GetProjectionData(Client->Viewport, Data) && Data.IsValidViewRectangle(), TEXT("Actual constrained view data exists for independent bounds projection"))) { return; }
+        const FIntRect Rect = Data.GetConstrainedViewRect();
+        const FVector2D HudPixelMax = IndependentViewportPixel(HudMax), HeaderPixelMax = IndependentViewportPixel(HeaderMax);
+        const FVector4d Free(FMath::Max(static_cast<double>(Rect.Min.X), HudPixelMax.X) + 16,
+            FMath::Max(static_cast<double>(Rect.Min.Y), HeaderPixelMax.Y) + 16, Rect.Max.X - 16, Rect.Max.Y - 16);
+        Check(Free.Z > Free.X && Free.W > Free.Y, TEXT("Independent physical16pixel-inset unobscured rectangle has positive area"));
+        // These are independent expected boxes for the immutable fixture, not production fitting output.
+        const FVector3d Min = bSelection ? FVector3d(7, 17, -2) : FVector3d(-12, 7, -2.3);
+        const FVector3d Max = bSelection ? FVector3d(9, 19, -0.8) : FVector3d(60, 55, 3.5);
+        const double Angle = FMath::DegreesToRadians(23.0), C = FMath::Cos(Angle), S = FMath::Sin(Angle);
+        auto IndependentWorld = [C, S](const FVector3d& P)
+        {
+            const FVector3d Q(2.54 * (P.X - 24), -2.54 * (P.Y - 31), 2.54 * (P.Z + 2));
+            return FVector3d(137 + C * Q.X - S * Q.Y, -83 + S * Q.X + C * Q.Y, 41 + Q.Z);
+        };
+        FVector ViewPosition; FRotator ViewRotation; Controller->GetPlayerViewPoint(ViewPosition, ViewRotation);
+        const double Near = Data.GetNearPlaneFromProjectionMatrix();
+        Check(Near > 0 && FMath::IsFinite(Near), TEXT("Independent corner depths use actual positive near plane"));
+        for (int32 Bits = 0; Bits != 8; ++Bits)
+        {
+            const FVector3d P = IndependentWorld(FVector3d(Bits & 1 ? Max.X : Min.X, Bits & 2 ? Max.Y : Min.Y, Bits & 4 ? Max.Z : Min.Z));
+            const double Depth = FVector3d::DotProduct(P - ViewPosition, ViewRotation.Vector());
+            FVector2D Pixel; const bool bProjected = Controller->ProjectWorldLocationToScreen(P, Pixel);
+            Check(Depth > Near && bProjected && Pixel.X >= Free.X - 1e-2 && Pixel.X <= Free.Z + 1e-2 && Pixel.Y >= Free.Y - 1e-2 && Pixel.Y <= Free.W + 1e-2,
+                FString::Printf(TEXT("Descriptor box corner%d lies beyond near plane and inside independently derived unobscured physical region"), Bits));
+        }
+        FVector2D CenterPixel;
+        const bool bCenterProjected = Controller->ProjectWorldLocationToScreen(IndependentWorld((Min + Max) * 0.5), CenterPixel);
+        const double CenterError = FVector2D::Distance(CenterPixel, FVector2D((Free.X + Free.Z) * 0.5, (Free.Y + Free.W) * 0.5));
+        Check(bCenterProjected && CenterError <= 1, TEXT("Independent descriptor-box center lands within one physical pixel of unobscured region center"));
+        const double Distance = Camera->GetNumberField(TEXT("distanceCm"));
+        if (bSelection)
+        {
+            Check(World->GetPolicy().Snapshot().SelectedIntent.IsSet() && World->GetPolicy().Snapshot().SelectedIntent->ModelId == TEXT("e02-circle") &&
+                Distance == World->GetFixture().Camera.FrameSelectionDistanceCm && Distance == 85 && Distance < BoardFrameDistance,
+                TEXT("G fits the selected circle at unchanged85cm hint and is closer than board framing"));
+        }
+        else { BoardFrameDistance = Distance; Check(Distance >= 320 && Distance <= 550, TEXT("F respects unchanged board hint and distance bound")); }
+        Check(SerializeLocalIntent(World->GetPolicy().Snapshot()) == Intent, TEXT("F/G preserve exact raw local advisory intent"));
+        Test->AddInfo(FString::Printf(TEXT("%s: frame=%s extent=%dx%d uiScale=%.3f distanceCm=%.9f centerErrorPhysicalPixels=%.9g freeRect=(%.6f,%.6f,%.6f,%.6f)"),
+            *Name, bSelection ? TEXT("selection") : TEXT("board"), World->GetProofViewportSize().X, World->GetProofViewportSize().Y,
+            World->GetProofUiScale(), Distance, CenterError, Free.X, Free.Y, Free.Z, Free.W));
+    }
     void BuildSteps()
     {
         if (Name == TEXT("Rendered.FiveForms"))
@@ -417,7 +552,9 @@ private:
             ClickModel(TEXT("e02-circle")); RetainIntent();
             Input(TEXT("middle pan"), [this](IAsyncActionSequence& S) { S.Press(EMouseButtons::Middle).MoveToPosition(A + FVector2D(20, 10)).Release(EMouseButtons::Middle); });
             Input(TEXT("viewport wheel then camera keys"), [](IAsyncActionSequence& S)
-            { S.ScrollBy(1).Type(EKeys::G).Type(EKeys::F).Type(EKeys::Left).Type(EKeys::Up).Type(EKeys::R); });
+            { S.ScrollBy(1).Type(EKeys::Left).Type(EKeys::Up); });
+            AddFrameCommand(false); AddFrameCommand(true);
+            Input(TEXT("Driver reset after independently checked frame commands"), [](IAsyncActionSequence& S) { S.Type(EKeys::R); });
             Do(TEXT("camera-only operations preserve domain"), [this]()
             {
                 AssertIntent(); Check(World->CameraMutationCount() >= Cameras + 7, TEXT("Pan/dolly/frame-board/frame-selection/keyboard/reset actual effects"));
@@ -541,6 +678,7 @@ private:
         Control(TEXT("blank")); Input(TEXT("variant HUD wheel/click exclusion"), [](IAsyncActionSequence& S) { S.Click().ScrollBy(1); });
         Do(TEXT("HUD remains excluded at variant"), [this]() { Check(World->CameraMutationCount() == Cameras && SerializeLocalIntent(World->GetPolicy().Snapshot()) == Intent, TEXT("Logical HUD geometry excludes world at actual scale")); });
         AddLogicalOrbitProbe();
+        AddFrameCommand(false); AddFrameCommand(true);
         Do(TEXT("variant camera gesture preserves local intent"), [this]()
         { Check(SerializeLocalIntent(World->GetPolicy().Snapshot()) == Intent && World->WorldPickCount() == ClickPicks + 1, TEXT("Exact local intent and one completed pick survive variant orbit/reset")); });
     }
@@ -630,12 +768,15 @@ private:
     FVector2D A, B;
     FObservedSlateBasis ViewBasis, SurfaceBasis;
     FVector2D ProbeStart, ProbeBelow, ProbeAbove;
+    FVector3d FrameBeforeActorPosition, FrameBeforeActorRotation;
     FAdvisoryHit HitBefore;
     double Started, StepStarted = 0.0, CleanupStarted = 0.0;
     uint64 Picks = 0, Cameras = 0, EventBaseline = 0;
     uint64 ProbePicks = 0, ProbeCameras = 0, ProbeHudActivations = 0, ProbeCaptureGeneration = 0, ClickPicks = 0, ClickEvents = 0;
     uint64 ResizeCaptureGeneration = 0, ResizeCancelGeneration = 0, ResizeHeldEvents = 0, ResizeCameras = 0;
+    uint64 FrameBeforeGeneration = 0, FrameBeforePaint = 0, FrameBeforeEvents = 0;
     double ProbeAzimuth = 0, ProbeElevation = 0;
+    double BoardFrameDistance = 0;
     int32 Index = 0, Assertions = 0;
     bool bProbeTextEditing = false;
     bool bInitialized = false, bOwnsDriver = false, bFailed = false, bCleanupQueued = false;

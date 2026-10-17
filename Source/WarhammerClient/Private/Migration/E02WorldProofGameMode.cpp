@@ -48,6 +48,37 @@ TArray<TSharedPtr<FJsonValue>> PointJson(const FVector2d& V)
 {
     return {MakeShared<FJsonValueNumber>(V.X), MakeShared<FJsonValueNumber>(V.Y)};
 }
+TArray<TSharedPtr<FJsonValue>> RectJson(const FVector4d& R)
+{
+    return {MakeShared<FJsonValueNumber>(R.X), MakeShared<FJsonValueNumber>(R.Y),
+        MakeShared<FJsonValueNumber>(R.Z), MakeShared<FJsonValueNumber>(R.W)};
+}
+bool AnalyticLocalBounds(const FFootprint& M, double Thickness, FVector3d& Min, FVector3d& Max)
+{
+    FDiagnostic Diagnostic;
+    if (!ValidateFootprint(M, Diagnostic)) { return false; }
+    FVector2d XYMin, XYMax;
+    if (M.Kind == EShapeKind::Polygon)
+    {
+        XYMin = XYMax = M.VerticesInches[0];
+        for (const FVector2d& V : M.VerticesInches)
+        { XYMin.X = FMath::Min(XYMin.X, V.X); XYMin.Y = FMath::Min(XYMin.Y, V.Y); XYMax.X = FMath::Max(XYMax.X, V.X); XYMax.Y = FMath::Max(XYMax.Y, V.Y); }
+    }
+    else
+    {
+        const double X = M.Kind == EShapeKind::Circle ? M.RadiusInches.GetValue() : M.LengthInches.GetValue() * 0.5;
+        const double Y = M.Kind == EShapeKind::Circle ? X : M.WidthInches.GetValue() * 0.5;
+        XYMin = FVector2d(-X, -Y); XYMax = FVector2d(X, Y);
+    }
+    Min = FVector3d(XYMin.X, XYMin.Y, 0);
+    Max = FVector3d(XYMax.X, XYMax.Y, FMath::Max(M.QueryHeightInches, Thickness));
+    return true;
+}
+FVector3d PoseBoundsPoint(const FDomainPose& Pose, const FVector3d& Local)
+{
+    const double A = FMath::DegreesToRadians(Pose.FacingDegrees), C = FMath::Cos(A), S = FMath::Sin(A);
+    return Pose.PositionInches + FVector3d(C * Local.X - S * Local.Y, S * Local.X + C * Local.Y, Local.Z);
+}
 FString JsonText(const TSharedPtr<FJsonObject>& Object)
 {
     FString Text;
@@ -93,12 +124,35 @@ struct FE02ProofState
     FRay LastPickRay;
     TOptional<FAdvisoryHit> LastPickHit;
     uint64 LastPickGeneration = 0, LastPickEventSequence = 0;
+    FVector4d PaintedHudScreen = FVector4d(0, 0, 0, 0), PaintedHeaderScreen = FVector4d(0, 0, 0, 0);
+    FIntPoint PaintedExtent = FIntPoint::ZeroValue;
+    double PaintedScale = 0;
+    uint64 PaintGeneration = 0, FrameGeneration = 0, FramePaintGeneration = 0, FrameEventSequence = 0;
+    bool bPaintAxisAligned = false;
+    FString FrameKind;
     FIntPoint LastExtent = FIntPoint::ZeroValue;
     double LastScale = 0.0;
     FDelegateHandle ActivationHandle, ScreenshotHandle;
     FString PendingScreenshot;
     TSet<FString> CompletedScreenshots;
     TArray<TSharedPtr<FJsonValue>> ScreenshotRecords;
+
+    bool FrameBounds(bool bSelection); // Defined after the complete Slate surface type.
+    void RecordPaint(const FGeometry& G, FVector2D HeaderSize, FVector2D HudPosition, FVector2D HudSize)
+    {
+        bPaintAxisAligned = true;
+        auto ObserveRect = [&](FVector2D Position, FVector2D Size)
+        {
+            const FVector2D TL = G.LocalToAbsolute(Position), TR = G.LocalToAbsolute(Position + FVector2D(Size.X, 0));
+            const FVector2D BL = G.LocalToAbsolute(Position + FVector2D(0, Size.Y)), BR = G.LocalToAbsolute(Position + Size);
+            bPaintAxisAligned &= FMath::Abs(TR.Y - TL.Y) <= 1e-3 && FMath::Abs(BL.X - TL.X) <= 1e-3 &&
+                FMath::Abs(BR.X - TR.X) <= 1e-3 && FMath::Abs(BR.Y - BL.Y) <= 1e-3 && TR.X > TL.X && BL.Y > TL.Y;
+            return FVector4d(TL.X, TL.Y, BR.X, BR.Y);
+        };
+        PaintedHeaderScreen = ObserveRect(FVector2D::ZeroVector, HeaderSize);
+        PaintedHudScreen = ObserveRect(HudPosition, HudSize);
+        PaintedExtent = Extent(); PaintedScale = FSlateApplication::Get().GetApplicationScale(); ++PaintGeneration;
+    }
 
     void Fail(const FString& Message)
     {
@@ -202,6 +256,10 @@ struct FE02ProofState
         Result->SetNumberField(TEXT("elevationDegrees"), Elevation);
         Result->SetNumberField(TEXT("distanceCm"), Distance);
         Result->SetNumberField(TEXT("fovDegrees"), Fixture.Camera.FovDegrees);
+        Result->SetNumberField(TEXT("frameGeneration"), static_cast<double>(FrameGeneration));
+        Result->SetNumberField(TEXT("framePaintGeneration"), static_cast<double>(FramePaintGeneration));
+        Result->SetNumberField(TEXT("frameEventSequence"), static_cast<double>(FrameEventSequence));
+        Result->SetStringField(TEXT("frameKind"), FrameKind);
         if (Camera.IsValid())
         {
             Result->SetArrayField(TEXT("positionWorldCm"), VectorJson(Camera->GetActorLocation()));
@@ -305,6 +363,13 @@ struct FE02ProofState
         View->SetNumberField(TEXT("width"), Size.X); View->SetNumberField(TEXT("height"), Size.Y);
         Result->SetObjectField(TEXT("viewport"), View);
         Result->SetNumberField(TEXT("uiScale"), FSlateApplication::IsInitialized() ? FSlateApplication::Get().GetApplicationScale() : 0.0);
+        const auto Paint = MakeShared<FJsonObject>();
+        Paint->SetNumberField(TEXT("generation"), static_cast<double>(PaintGeneration));
+        Paint->SetNumberField(TEXT("viewportWidth"), PaintedExtent.X); Paint->SetNumberField(TEXT("viewportHeight"), PaintedExtent.Y);
+        Paint->SetNumberField(TEXT("uiScale"), PaintedScale); Paint->SetBoolField(TEXT("axisAligned"), bPaintAxisAligned);
+        Paint->SetArrayField(TEXT("hudScreenPhysical"), RectJson(PaintedHudScreen));
+        Paint->SetArrayField(TEXT("headerScreenPhysical"), RectJson(PaintedHeaderScreen));
+        Result->SetObjectField(TEXT("paint"), Paint);
         Result->SetObjectField(TEXT("camera"), CameraJson());
         Result->SetStringField(TEXT("localIntent"), SerializeLocalIntent(Input));
         Result->SetStringField(TEXT("review"), LocalReviewName(Input.LocalReview));
@@ -433,11 +498,8 @@ struct FE02ProofState
             break;
         }
         case ECameraAction::Dolly: Distance = FMath::Clamp(Distance - Effect.DollyDelta * C.DollyStepCm, C.MinimumDistanceCm, C.MaximumDistanceCm); break;
-        case ECameraAction::FrameBoard: CameraTarget = C.TargetDomainInches; Distance = C.DefaultDistanceCm; break;
-        case ECameraAction::FrameSelection:
-            if (Policy.Snapshot().SelectedIntent.IsSet()) { CameraTarget = Policy.Snapshot().SelectedIntent->Pose.PositionInches; Distance = C.FrameSelectionDistanceCm; }
-            else { bChange = false; }
-            break;
+        case ECameraAction::FrameBoard: bChange = FrameBounds(false); break;
+        case ECameraAction::FrameSelection: bChange = FrameBounds(true); break;
         case ECameraAction::Reset: CameraTarget = C.TargetDomainInches; Azimuth = C.DefaultAzimuthDegrees; Elevation = C.DefaultElevationDegrees; Distance = C.DefaultDistanceCm; break;
         case ECameraAction::OrbitLeft: Azimuth -= C.KeyboardOrbitStepDegrees; break;
         case ECameraAction::OrbitRight: Azimuth += C.KeyboardOrbitStepDegrees; break;
@@ -505,6 +567,8 @@ struct FE02ProofState
     {
         ++Events;
         if (Effect.bRequestWorldPick) { LastPickEventSequence = Events; }
+        if ((Effect.CameraAction == ECameraAction::FrameBoard || Effect.CameraAction == ECameraAction::FrameSelection) && FrameEventSequence == 0 && !FrameKind.IsEmpty())
+        { FrameEventSequence = Events; }
         const auto Data = MakeShared<FJsonObject>();
         Data->SetNumberField(TEXT("sequence"), static_cast<double>(Events)); Data->SetStringField(TEXT("observedUtc"), FDateTime::UtcNow().ToIso8601());
         Data->SetStringField(TEXT("case"), CaseName); Data->SetStringField(TEXT("route"), TEXT("PlatformMessageHandler -> Slate -> SE02ProofSurface -> FInputPolicy"));
@@ -664,10 +728,14 @@ public:
         auto Text = [&](FVector2D Pos, const FString& Value, int32 Size, FLinearColor Color = FLinearColor::White)
         { FSlateDrawElement::MakeText(Elements, Layer + 1, G.ToPaintGeometry(FVector2D(1000, 40), FSlateLayoutTransform(Pos)), Value, FCoreStyle::GetDefaultFontStyle(TEXT("Regular"), Size), ESlateDrawEffect::None, Color); };
         const FVector2D Size = G.GetLocalSize();
-        Rect(FVector2D::ZeroVector, FVector2D(Size.X, 64), FLinearColor(0.015f, 0.025f, 0.04f, 0.98f));
+        const FVector2D HeaderSize(Size.X, Proof->Fixture.Presentation.HeaderHeightLogical);
+        const FVector2D HudPosition = Proof->Fixture.Presentation.HudBoundsLogical.Min;
+        const FVector2D HudSize = Proof->Fixture.Presentation.HudBoundsLogical.Max - HudPosition;
+        Rect(FVector2D::ZeroVector, HeaderSize, FLinearColor(0.015f, 0.025f, 0.04f, 0.98f));
         Text(FVector2D(18, 8), ProofLabel, 18, FLinearColor(1, 0.8f, 0.25f));
         Text(FVector2D(18, 34), Proof->Status, 12);
-        Rect(FVector2D(16, 76), FVector2D(230, 404), FLinearColor(0.025f, 0.04f, 0.06f, 0.95f));
+        Rect(HudPosition, HudSize, FLinearColor(0.025f, 0.04f, 0.06f, 0.95f));
+        Proof->RecordPaint(G, HeaderSize, HudPosition, HudSize);
         Rect(FVector2D(30, 96), FVector2D(200, 36), FLinearColor(0.12f, 0.25f, 0.38f)); Text(FVector2D(40, 104), TEXT("Local HUD button"), 13);
         Rect(FVector2D(30, 144), FVector2D(200, 36), FLinearColor(0.08f, 0.09f, 0.10f)); Text(FVector2D(40, 152), TEXT("Disabled control"), 13, FLinearColor(0.4f, 0.4f, 0.4f));
         Text(FVector2D(40, 204), TEXT("Blank HUD consumes input"), 11);
@@ -800,6 +868,121 @@ public:
 private:
     FE02ProofState* Proof = nullptr;
 };
+
+bool FE02ProofState::FrameBounds(bool bSelection)
+{
+    if (!Camera.IsValid() || !Controller.IsValid() || !Controller->GetLocalPlayer() || !ViewportClient() || !ViewportClient()->Viewport)
+    { Fail(TEXT("FrameProjectionUnavailable: actual camera/local player/viewport required")); return false; }
+    if (PaintGeneration == 0 || !Surface.IsValid() || !bPaintAxisAligned)
+    { Fail(TEXT("FramePaintUnavailable: an actually painted axis-aligned HUD/header is required")); return false; }
+    if (PaintedExtent != Extent() || PaintedScale != FSlateApplication::Get().GetApplicationScale())
+    { Fail(TEXT("FramePaintStale: painted extent/scale differs from actual viewport")); return false; }
+    FSceneViewProjectionData Data;
+    if (!Controller->GetLocalPlayer()->GetProjectionData(ViewportClient()->Viewport, Data) || !Data.IsValidViewRectangle())
+    { Fail(TEXT("FrameProjectionUnavailable: actual constrained projection data required")); return false; }
+    const FIntRect View = Data.GetConstrainedViewRect();
+    const FMatrix& M = Data.ProjectionMatrix;
+    bool bSupported = View.Max.X <= Extent().X && View.Max.Y <= Extent().Y;
+    for (int32 Row = 0; Row != 4; ++Row)
+        for (int32 Col = 0; Col != 4; ++Col) { bSupported &= FMath::IsFinite(M.M[Row][Col]); }
+    bSupported &= M.M[0][0] > 0 && M.M[1][1] > 0 && M.M[3][2] > 0;
+    // The installed perspective path uses reversed-Z infinite projection. Off-center X/Y is supported.
+    for (const FIntPoint Zero : {FIntPoint(0,1), FIntPoint(0,2), FIntPoint(0,3), FIntPoint(1,0), FIntPoint(1,2),
+        FIntPoint(1,3), FIntPoint(2,2), FIntPoint(3,0), FIntPoint(3,1), FIntPoint(3,3)})
+    { bSupported &= FMath::Abs(M.M[Zero.X][Zero.Y]) <= 1e-6; }
+    bSupported &= FMath::Abs(M.M[2][3] - 1) <= 1e-6;
+    if (!bSupported) { Fail(TEXT("FrameProjectionUnsupported: finite conventional perspective projection required")); return false; }
+    const FGeometry& G = Surface->GetCachedGeometry();
+    const FVector2D CurrentHudMax = G.LocalToAbsolute(Fixture.Presentation.HudBoundsLogical.Max);
+    const FVector2D CurrentHeaderMax = G.LocalToAbsolute(FVector2D(G.GetLocalSize().X, Fixture.Presentation.HeaderHeightLogical));
+    if (!CurrentHudMax.Equals(FVector2D(PaintedHudScreen.Z, PaintedHudScreen.W), 1e-3) ||
+        !CurrentHeaderMax.Equals(FVector2D(PaintedHeaderScreen.Z, PaintedHeaderScreen.W), 1e-3))
+    { Fail(TEXT("FramePaintStale: current layout differs from actually painted rectangles")); return false; }
+    const FVector2d HudMax = Sample(G, FVector2D(PaintedHudScreen.Z, PaintedHudScreen.W)).ViewportPhysical;
+    const FVector2d HeaderMax = Sample(G, FVector2D(PaintedHeaderScreen.Z, PaintedHeaderScreen.W)).ViewportPhysical;
+    // This inset is physical pixels; it does not scale again with Slate or application DPI.
+    const double X0 = FMath::Max(static_cast<double>(View.Min.X), HudMax.X) + 16.0;
+    const double Y0 = FMath::Max(static_cast<double>(View.Min.Y), HeaderMax.Y) + 16.0;
+    const double X1 = View.Max.X - 16.0, Y1 = View.Max.Y - 16.0;
+    if (!FMath::IsFinite(X0) || !FMath::IsFinite(Y0) || X1 <= X0 || Y1 <= Y0)
+    { Fail(TEXT("FrameFitUnavailable: painted HUD/header leave no inset viewport region")); return false; }
+    const double L = (2 * (X0 - View.Min.X) / View.Width() - 1 - M.M[2][0]) / M.M[0][0];
+    const double R = (2 * (X1 - View.Min.X) / View.Width() - 1 - M.M[2][0]) / M.M[0][0];
+    const double B = (1 - 2 * (Y1 - View.Min.Y) / View.Height() - M.M[2][1]) / M.M[1][1];
+    const double T = (1 - 2 * (Y0 - View.Min.Y) / View.Height() - M.M[2][1]) / M.M[1][1];
+    const double CX = (L + R) * 0.5, CY = (B + T) * 0.5;
+    if (!FMath::IsFinite(CX) || !FMath::IsFinite(CY) || R <= L || T <= B)
+    { Fail(TEXT("FrameProjectionUnsupported: invalid perspective side slopes")); return false; }
+
+    FVector3d Min(Fixture.BoardBoundsInches.Min.X, Fixture.BoardBoundsInches.Min.Y, Fixture.Frame.DatumInches);
+    FVector3d Max(Fixture.BoardBoundsInches.Max.X, Fixture.BoardBoundsInches.Max.Y, Fixture.Frame.DatumInches);
+    TArray<FVector3d> DomainCorners;
+    FVector3d CenterDomain;
+    auto Include = [&](const FVector3d& P)
+    { for (int32 I = 0; I != 3; ++I) { Min[I] = FMath::Min(Min[I], P[I]); Max[I] = FMath::Max(Max[I], P[I]); } };
+    auto Corner = [](const FVector3d& A, const FVector3d& Z, int32 Bits)
+    { return FVector3d(Bits & 1 ? Z.X : A.X, Bits & 2 ? Z.Y : A.Y, Bits & 4 ? Z.Z : A.Z); };
+    if (bSelection)
+    {
+        if (!Policy.Snapshot().SelectedIntent.IsSet()) { return false; }
+        const FFootprint* Selected = Model(Policy.Snapshot().SelectedIntent->ModelId);
+        if (!Selected || !AnalyticLocalBounds(*Selected, Fixture.VisualThicknessInches, Min, Max))
+        { Fail(TEXT("FrameGeometryUnsupported: selected analytic bounds unavailable")); return false; }
+        CenterDomain = PoseBoundsPoint(Selected->Pose.GetValue(), (Min + Max) * 0.5);
+        for (int32 Bits = 0; Bits != 8; ++Bits) { DomainCorners.Add(PoseBoundsPoint(Selected->Pose.GetValue(), Corner(Min, Max, Bits))); }
+    }
+    else
+    {
+        for (const FSupportSurface& S : Fixture.Supports)
+        {
+            const double Depth = S.ZInches > Fixture.Frame.DatumInches ? S.ZInches - Fixture.Frame.DatumInches : 0.3;
+            Include(FVector3d(S.BoundsInches.Min.X, S.BoundsInches.Min.Y, S.ZInches - Depth));
+            Include(FVector3d(S.BoundsInches.Max.X, S.BoundsInches.Max.Y, S.ZInches));
+        }
+        for (const FFootprint& ModelValue : Fixture.Models)
+        {
+            FVector3d LocalMin, LocalMax;
+            if (!AnalyticLocalBounds(ModelValue, Fixture.VisualThicknessInches, LocalMin, LocalMax))
+            { Fail(TEXT("FrameGeometryUnsupported: board analytic bounds unavailable")); return false; }
+            for (int32 Bits = 0; Bits != 8; ++Bits) { Include(PoseBoundsPoint(ModelValue.Pose.GetValue(), Corner(LocalMin, LocalMax, Bits))); }
+        }
+        CenterDomain = (Min + Max) * 0.5;
+        for (int32 Bits = 0; Bits != 8; ++Bits) { DomainCorners.Add(Corner(Min, Max, Bits)); }
+    }
+    // Form the box before presentation placement. A world AABB would inflate a rotated table.
+    const FVector3d Center = DomainToWorld(Fixture.Frame, CenterDomain);
+    const auto& C = Fixture.Camera;
+    const double A = FMath::DegreesToRadians(C.DefaultAzimuthDegrees), E = FMath::DegreesToRadians(C.DefaultElevationDegrees);
+    const FVector3d Forward = -Fixture.Frame.WorldFromTableCm.TransformVectorNoScale(FVector3d(FMath::Cos(E) * FMath::Cos(A), FMath::Cos(E) * FMath::Sin(A), FMath::Sin(E))).GetSafeNormal();
+    const FVector3d Right = FVector3d::CrossProduct(FVector3d::UpVector, Forward).GetSafeNormal();
+    const FVector3d Up = FVector3d::CrossProduct(Forward, Right).GetSafeNormal();
+    const double Near = Data.GetNearPlaneFromProjectionMatrix();
+    if (!FMath::IsFinite(Near) || Near <= 0 || Right.IsNearlyZero() || Up.IsNearlyZero())
+    { Fail(TEXT("FrameProjectionUnsupported: near plane or default orientation unavailable")); return false; }
+    double GeometricDistance = 0;
+    for (const FVector3d& P : DomainCorners)
+    {
+        const FVector3d V = DomainToWorld(Fixture.Frame, P) - Center;
+        const double VF = FVector3d::DotProduct(V, Forward), VR = FVector3d::DotProduct(V, Right), VU = FVector3d::DotProduct(V, Up);
+        for (const double Bound : {(L * VF - VR) / (CX - L), (VR - R * VF) / (R - CX),
+            (B * VF - VU) / (CY - B), (VU - T * VF) / (T - CY), Near - VF})
+        {
+            if (!FMath::IsFinite(Bound)) { Fail(TEXT("FrameFitUnavailable: nonfinite conservative corner bound")); return false; }
+            GeometricDistance = FMath::Max(GeometricDistance, Bound);
+        }
+    }
+    // Numerical slack belongs to the geometric bound, preserving an already sufficient 320/85 hint exactly.
+    const double NewDistance = FMath::Max(FMath::Max(C.MinimumDistanceCm,
+        bSelection ? C.FrameSelectionDistanceCm : C.DefaultDistanceCm), GeometricDistance + 0.01);
+    const FVector3d NewTarget = WorldToDomain(Fixture.Frame, Center - Right * CX * NewDistance - Up * CY * NewDistance);
+    if (!FMath::IsFinite(NewDistance) || NewDistance > C.MaximumDistanceCm || NewTarget.ContainsNaN())
+    { Fail(TEXT("FrameFitUnavailable: conservative bounds cannot fit within camera distance limit")); return false; }
+    // Commit only after layout, projection and every geometric bound have passed.
+    CameraTarget = NewTarget; Distance = NewDistance; Azimuth = C.DefaultAzimuthDegrees; Elevation = C.DefaultElevationDegrees;
+    FrameKind = bSelection ? TEXT("selection") : TEXT("board"); ++FrameGeneration;
+    FramePaintGeneration = PaintGeneration; FrameEventSequence = 0;
+    return true;
+}
 
 AE02ProofPlayerController::AE02ProofPlayerController()
 {
