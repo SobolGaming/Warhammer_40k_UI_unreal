@@ -537,8 +537,13 @@ function Get-UBTSettings {
     $documents = [Environment]::GetFolderPath('MyDocuments')
     if ($documents) { $paths += Join-Path $documents 'Unreal Engine\UnrealBuildTool\BuildConfiguration.xml' }
     return @(foreach ($path in $paths | Sort-Object -Unique) {
-        Assert-NoReparsePoint $path
-        @{ path = $path; exists = [IO.File]::Exists($path); sha256 = $(if ([IO.File]::Exists($path)) { Get-Hash $path } else { $null }) }
+        # This is a read-only absence snapshot, never an owned output path. An
+        # absent XML may live below Windows' OneDrive Documents cloud reparse
+        # point. Existing XML still requires the full strict path/hash guard;
+        # appearance after the build therefore fails the preservation check.
+        $exists = [IO.File]::Exists($path)
+        if ($exists) { Assert-NoReparsePoint $path }
+        @{ path = $path; exists = $exists; sha256 = $(if ($exists) { Get-Hash $path } else { $null }) }
     })
 }
 

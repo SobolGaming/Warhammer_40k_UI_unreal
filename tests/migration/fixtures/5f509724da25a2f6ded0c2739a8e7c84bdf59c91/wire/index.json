@@ -1,0 +1,305 @@
+{
+  "cases": [
+    {
+      "case_id": "auth_missing",
+      "expected_outcome": "error",
+      "http_status": 401,
+      "kind": "http",
+      "path": "auth_missing/missing.json",
+      "recipe": "Current public offered finite envelope submitted with distinct denied credential scope",
+      "role": "missing",
+      "sha256": "41c066bbdeaa65123f696250d5077c1c954ccfa147364d5e235479889fd24f13"
+    },
+    {
+      "case_id": "auth_invalid",
+      "expected_outcome": "error",
+      "http_status": 401,
+      "kind": "http",
+      "path": "auth_invalid/invalid.json",
+      "recipe": "Current public offered finite envelope submitted with distinct denied credential scope",
+      "role": "invalid",
+      "sha256": "41c066bbdeaa65123f696250d5077c1c954ccfa147364d5e235479889fd24f13"
+    },
+    {
+      "case_id": "auth_coach",
+      "expected_outcome": "error",
+      "http_status": 403,
+      "kind": "http",
+      "path": "auth_coach/coach.json",
+      "recipe": "Current public offered finite envelope submitted with distinct denied credential scope",
+      "role": "coach",
+      "sha256": "f6fcdaf1a11cb339e8e6dde1a22cf1e741bd8bb581de74dd08a520e28dc43de9"
+    },
+    {
+      "case_id": "auth_delayed",
+      "expected_outcome": "error",
+      "http_status": 403,
+      "kind": "http",
+      "path": "auth_delayed/delayed.json",
+      "recipe": "Current public offered finite envelope submitted with distinct denied credential scope",
+      "role": "delayed",
+      "sha256": "f6fcdaf1a11cb339e8e6dde1a22cf1e741bd8bb581de74dd08a520e28dc43de9"
+    },
+    {
+      "case_id": "auth_replay",
+      "expected_outcome": "error",
+      "http_status": 403,
+      "kind": "http",
+      "path": "auth_replay/replay.json",
+      "recipe": "Current public offered finite envelope submitted with distinct denied credential scope",
+      "role": "replay",
+      "sha256": "f6fcdaf1a11cb339e8e6dde1a22cf1e741bd8bb581de74dd08a520e28dc43de9"
+    },
+    {
+      "case_id": "auth_playerB",
+      "expected_outcome": "error",
+      "http_status": 403,
+      "kind": "http",
+      "path": "auth_playerb/playerB.json",
+      "recipe": "Current public offered finite envelope submitted with distinct denied credential scope",
+      "role": "playerB",
+      "sha256": "f6fcdaf1a11cb339e8e6dde1a22cf1e741bd8bb581de74dd08a520e28dc43de9"
+    },
+    {
+      "case_id": "auth_forged_viewer",
+      "expected_outcome": "error",
+      "http_status": 403,
+      "kind": "http",
+      "path": "auth_forged_viewer/playerA.json",
+      "recipe": "Forged viewer_player_id under bound-player credential",
+      "role": "playerA",
+      "sha256": "f6fcdaf1a11cb339e8e6dde1a22cf1e741bd8bb581de74dd08a520e28dc43de9"
+    },
+    {
+      "case_id": "view_initial",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "view_initial/playerA.json",
+      "recipe": "Explicit role-scoped projection; admin fixture remains privileged",
+      "role": "playerA",
+      "sha256": "18a50615f62d10d0697940734f0c6144f6927698383b6a81ae612179707099d7"
+    },
+    {
+      "case_id": "view_initial",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "view_initial/playerB.json",
+      "recipe": "Explicit role-scoped projection; admin fixture remains privileged",
+      "role": "playerB",
+      "sha256": "19e087462f9f9982594501fa017f8852514bb7a4b457029cb8af3d33f7f7abc5"
+    },
+    {
+      "case_id": "view_initial",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "view_initial/coach.json",
+      "recipe": "Explicit role-scoped projection; admin fixture remains privileged",
+      "role": "coach",
+      "sha256": "92384d688be3ac891b638e0d1b717bdd202389931deafd78fa543ddfcba7cf58"
+    },
+    {
+      "case_id": "view_initial",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "view_initial/delayed.json",
+      "recipe": "Explicit role-scoped projection; admin fixture remains privileged",
+      "role": "delayed",
+      "sha256": "9258302965af22f37c9c16872e712d9a164f7787a56db1214f1dff91315918ac"
+    },
+    {
+      "case_id": "view_replay_live_denied",
+      "expected_outcome": "error",
+      "http_status": 403,
+      "kind": "http",
+      "path": "view_replay_live_denied/replay.json",
+      "recipe": "Replay viewer forbidden live projection",
+      "role": "replay",
+      "sha256": "f6fcdaf1a11cb339e8e6dde1a22cf1e741bd8bb581de74dd08a520e28dc43de9"
+    },
+    {
+      "case_id": "events_0",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "events_0/playerA.json",
+      "recipe": "Server-scoped event cursor, at most eight pages of 100",
+      "role": "playerA",
+      "sha256": "58c20efa12f42c19a2b5e1b9c1c6adbe91c264094d41549e4afb1e7d9b275827"
+    },
+    {
+      "case_id": "events_0",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "events_0/playerB.json",
+      "recipe": "Server-scoped event cursor, at most eight pages of 100",
+      "role": "playerB",
+      "sha256": "3f24b68dcb9c71a9e6d4ed8c1e55c95426bee86a9832a47f10024d49988eb335"
+    },
+    {
+      "case_id": "events_0",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "events_0/coach.json",
+      "recipe": "Server-scoped event cursor, at most eight pages of 100",
+      "role": "coach",
+      "sha256": "d31047e806bc59b2292327c2a60a51af9c8d867648a23963cce83c330c7d7fd8"
+    },
+    {
+      "case_id": "events_0",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "events_0/delayed.json",
+      "recipe": "Server-scoped event cursor, at most eight pages of 100",
+      "role": "delayed",
+      "sha256": "fb3dae302822166e73d658982a1b91954052e422364ad49786d95237fcaddbc4"
+    },
+    {
+      "case_id": "events_wrong_viewer_cursor",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "events_wrong_viewer_cursor/playerB.json",
+      "recipe": "PlayerA cursor rejected by server under PlayerB credential",
+      "role": "playerB",
+      "sha256": "03f5130028c1e60c6ca07a8ec187356cea4b3cc9687afdfc397cf053cb2c1ed0"
+    },
+    {
+      "case_id": "stale_wrong_revision",
+      "expected_outcome": "error",
+      "http_status": 409,
+      "kind": "http",
+      "path": "stale_wrong_revision/playerA.json",
+      "recipe": "Wrong expected revision preserves complete envelope",
+      "role": "playerA",
+      "sha256": "faa116eb0430015089627e67791263766ef7d585d9670bd8ed616668d1663420"
+    },
+    {
+      "case_id": "finite_accepted",
+      "expected_outcome": "accepted",
+      "http_status": 200,
+      "kind": "http",
+      "path": "finite_accepted/playerA.json",
+      "recipe": "Canonical visible finite request; exact offered option under bound player",
+      "role": "playerA",
+      "sha256": "e1f1d42fe12d0db6e914b3a8865c9d063bef102f31b6055512697cd5c00f9933"
+    },
+    {
+      "case_id": "retry_changed_envelope",
+      "expected_outcome": "error",
+      "http_status": 409,
+      "kind": "http",
+      "path": "retry_changed_envelope/playerA.json",
+      "recipe": "Same ID with changed result identity conflicts",
+      "role": "playerA",
+      "sha256": "c0412d37b22c5adbdc2660370bef9f0dd7fd589073a7870b634e4fffe03ed3c0"
+    },
+    {
+      "case_id": "stale_consumed_request",
+      "expected_outcome": "error",
+      "http_status": 403,
+      "kind": "http",
+      "path": "stale_consumed_request/playerA.json",
+      "recipe": "Consumed request with new ID and refreshed expected revision",
+      "role": "playerA",
+      "sha256": "f6fcdaf1a11cb339e8e6dde1a22cf1e741bd8bb581de74dd08a520e28dc43de9"
+    },
+    {
+      "case_id": "movement_before",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "movement_before/playerA.json",
+      "recipe": "Authorized current complete movement projection before any negative/positive submissions",
+      "role": "playerA",
+      "sha256": "ddaf031d930a532e92de55af20a99a8f4b8524c03f2fff0d7c80192878f2796e"
+    },
+    {
+      "case_id": "movement_inventory_missing",
+      "expected_outcome": "uncommitted_invalid",
+      "http_status": 422,
+      "kind": "http",
+      "path": "movement_inventory_missing/playerA.json",
+      "recipe": "Current complete normal-move witness changed only by explicit negative inventory operation",
+      "role": "playerA",
+      "sha256": "d7e7e71324b3758af840fe7046f1b914c3e0edb70d815f1054238485c06320b0"
+    },
+    {
+      "case_id": "movement_inventory_duplicate",
+      "expected_outcome": "uncommitted_invalid",
+      "http_status": 422,
+      "kind": "http",
+      "path": "movement_inventory_duplicate/playerA.json",
+      "recipe": "Current complete normal-move witness changed only by explicit negative inventory operation",
+      "role": "playerA",
+      "sha256": "d7e7e71324b3758af840fe7046f1b914c3e0edb70d815f1054238485c06320b0"
+    },
+    {
+      "case_id": "movement_inventory_wrong",
+      "expected_outcome": "uncommitted_invalid",
+      "http_status": 422,
+      "kind": "http",
+      "path": "movement_inventory_wrong/playerA.json",
+      "recipe": "Current complete normal-move witness changed only by explicit negative inventory operation",
+      "role": "playerA",
+      "sha256": "d7e7e71324b3758af840fe7046f1b914c3e0edb70d815f1054238485c06320b0"
+    },
+    {
+      "case_id": "movement_recorded_invalid",
+      "expected_outcome": "recorded_invalid",
+      "http_status": 422,
+      "kind": "http",
+      "path": "movement_recorded_invalid/playerA.json",
+      "recipe": "Well-formed ordered complete witness with 1000-inch candidate; only Core validates geometry",
+      "role": "playerA",
+      "sha256": "f41bd1eed939131ac4bda0051a97a49f1711486e971ecad9942c9681094ec4f5"
+    },
+    {
+      "case_id": "movement_accepted",
+      "expected_outcome": "accepted",
+      "http_status": 200,
+      "kind": "http",
+      "path": "movement_accepted/playerA.json",
+      "recipe": "Canonical complete ordered witness, every current placed physical model translated one inch +X",
+      "role": "playerA",
+      "sha256": "786ac7d69292d20bc877e6e7c052d136ce8a2f6522bd222155cc9143975c1d98"
+    },
+    {
+      "case_id": "movement_after",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "movement_after/playerA.json",
+      "recipe": "Post-action authorized refresh shows authoritative position change",
+      "role": "playerA",
+      "sha256": "98c0d5eac5eb45b2cc9bdc857e1dc1ea1f6bfdb69f984026680f3f76ec455cd6"
+    },
+    {
+      "case_id": "error_unavailable_route",
+      "expected_outcome": "error",
+      "http_status": 404,
+      "kind": "http",
+      "path": "error_unavailable_route/playerA.json",
+      "recipe": "Unavailable path; no invented support-profile route",
+      "role": "playerA",
+      "sha256": "8eb2e815316892a50f17ae7a99eae88072dcfd119420e244370fb5dc3ca09e6b"
+    },
+    {
+      "case_id": "support_profile",
+      "expected_outcome": "payload",
+      "http_status": 200,
+      "kind": "http",
+      "path": "support_profile/playerA.json",
+      "recipe": "Existing public /games/{game_id}/support-profile",
+      "role": "playerA",
+      "sha256": "ec03e0868c23e87018f9a9e1944e2a0a51065210904d987c133ae77702dd6996"
+    }
+  ],
+  "format_version": 1
+}
