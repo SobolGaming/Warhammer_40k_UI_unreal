@@ -62,6 +62,11 @@ These controls cover paired, attach-worker and supervisor lifecycle commands.
 An unusable worker terminal result is UNKNOWN unless a complete validated receipt
 already establishes a known outcome; retain known receipts through later evidence
 failures. Preserve absent wire flags as null and explicit booleans exactly.
+Validate receipt session/checkpoint revision, hash and cursor coherence, and bind
+the operation and identities to the retained submission in every command lane.
+Matching unusable paired replies still mean UNKNOWN. Preserve validated worker
+outcomes through missing, partially written or unreadable evidence artifacts;
+keep the evidence failure visible. Python/native error classification must agree.
 Keep a complete owned-process inventory including the attach worker. Normal
 Native/Audit must bind every promoted wire byte to the same run's successful
 Capture artifacts before execution and revalidate the binding afterward.

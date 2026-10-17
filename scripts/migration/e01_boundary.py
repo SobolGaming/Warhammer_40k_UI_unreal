@@ -256,8 +256,9 @@ def classify(status: int, body: object) -> str:
         string_field(error, "code")
         string_field(error, "message")
         require(status >= 400 and "accepted" not in body and "committed" not in body, "Mixed error/outcome envelope")
-        return "uncommitted_invalid" if status == 422 and error["code"] == "proposal_invalid" else "error"
+        return "uncommitted_invalid" if status == 422 and error["code"] in ("proposal_invalid", "rule_path_unsupported") else "error"
     if "accepted" in body or "committed" in body:
+        require(set(body) == {"schema_version", "command_id", "outcome_code", "operation", "committed", "accepted", "session", "checkpoint", "event_range"}, "Outcome fields missing or unexpected")
         require(type(body.get("accepted")) is bool and type(body.get("committed")) is bool, "Outcome flags missing/wrong type")
         require(not body["accepted"] or body["committed"], "Accepted uncommitted outcome is invalid")
         require(body.get("schema_version") == "session-command-outcome-v44-contract", "Outcome schema mismatch")
@@ -266,21 +267,46 @@ def classify(status: int, body: object) -> str:
         code = string_field(body, "outcome_code")
         session = object_field(body, "session")
         checkpoint = object_field(body, "checkpoint")
-        int_field(session, "session_revision")
-        int_field(checkpoint, "session_revision")
+        require(set(checkpoint) == {"visibility_role", "viewer_player_id", "session_revision", "projection_state_hash", "event_cursor"}, "Checkpoint fields missing or unexpected")
+        require(int_field(session, "session_revision") == int_field(checkpoint, "session_revision"), "Session/checkpoint revisions differ")
         string_field(session, "session_id")
         require(re.fullmatch(r"[0-9a-f]{64}", string_field(checkpoint, "projection_state_hash")) is not None, "Invalid checkpoint hash")
-        string_field(checkpoint, "event_cursor")
+        require(string_field(checkpoint, "projection_state_hash") == string_field(session, "projection_state_hash") and string_field(checkpoint, "event_cursor") == string_field(session, "event_cursor"), "Session/checkpoint hash or cursor differs")
         require(checkpoint.get("visibility_role") in ("player", "coach", "delayed_spectator", "administrator"), "Invalid checkpoint role")
         require("viewer_player_id" in checkpoint and (checkpoint["viewer_player_id"] is None or type(checkpoint["viewer_player_id"]) is str), "Invalid checkpoint viewer")
-        for key in ("from_cursor", "to_cursor"):
-            string_field(object_field(body, "event_range"), key)
+        visibility = object_field(session, "visibility")
+        require(visibility.get("role") == checkpoint["visibility_role"] and "player_id" in visibility and visibility["player_id"] == checkpoint["viewer_player_id"], "Session/checkpoint viewer scope differs")
+        event_range = object_field(body, "event_range")
+        require(set(event_range) == {"from_cursor", "to_cursor"}, "Event range fields missing or unexpected")
+        string_field(event_range, "from_cursor")
+        require(string_field(event_range, "to_cursor") == checkpoint["event_cursor"], "Event range does not end at its checkpoint")
         if body["accepted"]:
             require(status == 200 and code == "command_committed", "Accepted status/code mismatch")
             return "accepted"
         require(status == 422 and code in ("proposal_invalid", "rule_path_unsupported"), "Rejected outcome status/code mismatch")
         return "recorded_invalid" if body["committed"] else "uncommitted_invalid"
     return "payload"
+
+
+def validate_command_receipt(status: int, body: object, command: dict, schemas: Schemas, role: str) -> str:
+    """One coherent public receipt, bound to the exact submitted envelope.
+
+    Selected Core session_protocol.py validates these same revision, checkpoint,
+    cursor, viewer and operation bindings during journal recovery. Its public
+    contract specifies one revision increment for a committed command.
+    """
+    outcome = classify(status, body)
+    require(outcome in ("accepted", "recorded_invalid", "uncommitted_invalid", "error"), "Command response is not a recognized receipt")
+    schemas.validate("error-envelope.schema.json" if "error" in body else "session-command-outcome.schema.json", body)
+    if "error" not in body:
+        operation = {"start_session": "start_session", "advance_session": "advance_session", "close_session": "close_session", "finite_option": "submit_finite_decision", "parameterized_payload": "submit_parameterized_decision"}.get(string_field(object_field(command, "submission"), "submission_kind"))
+        require(operation is not None and body["operation"] == operation and body["command_id"] == command.get("command_id") and body["session"]["session_id"] == command.get("session_id"), "Command receipt identity or operation differs from its envelope")
+        expected_revision = int_field(command, "expected_session_revision") + (1 if body["committed"] else 0)
+        require(body["session"]["session_revision"] == expected_revision, "Command receipt revision differs from its committed envelope")
+        expected_viewer = {"admin": ("administrator", None), "playerA": ("player", "player-a"), "playerB": ("player", "player-b"), "coach": ("coach", "player-a"), "delayed": ("delayed_spectator", None)}.get(role)
+        checkpoint = body["checkpoint"]
+        require(expected_viewer is not None and (checkpoint["visibility_role"], checkpoint["viewer_player_id"]) == expected_viewer, "Command receipt viewer differs from its submitted credential scope")
+    return outcome
 
 
 class ScopeReducer:
@@ -667,11 +693,7 @@ class HttpCommandLane:
         self.last_reply = None
         try:
             reply = self.endpoint.request("POST", f"/sessions/{self.session}/commands", role, command)
-            outcome = classify(reply.status, reply.body)
-            require(outcome in ("accepted", "recorded_invalid", "uncommitted_invalid", "error"), "Command response is not a recognized receipt")
-            self.schemas.validate("error-envelope.schema.json" if "error" in reply.body else "session-command-outcome.schema.json", reply.body)
-            if "error" not in reply.body:
-                require(reply.body["command_id"] == command["command_id"] and reply.body["session"]["session_id"] == self.session, "Command receipt identity differs from its retained submission")
+            validate_command_receipt(reply.status, reply.body, command, self.schemas, role)
         except (BoundaryError, OSError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
             self.submission_unknown = True
             raise CompletionUnknown("Command completion UNKNOWN; abandon this session without further submissions") from exc
@@ -763,7 +785,10 @@ class Pair:
         # admin start and negative commands that have no full actor-view snapshot.
         record_submission_attempt(self.captures.report, self.session, command, role, self.submissions)
         try:
-            return self.request("POST", f"/sessions/{self.session}/commands", role, command)
+            local, http = self.request("POST", f"/sessions/{self.session}/commands", role, command)
+            for reply in (local, http):
+                validate_command_receipt(reply.status, reply.body, command, self.captures.schemas, role)
+            return local, http
         except (BoundaryError, OSError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
             # Validation above happens before either adapter is called. Once a
             # paired submission begins, neither timeout nor comparison failure
@@ -1226,6 +1251,7 @@ def attach_worker(args: argparse.Namespace) -> int:
         # Error envelopes carry no acceptance/commit flags. Preserve that absence
         # rather than turn a received error (including 500) into a rollback claim.
         output.update({"commandCompletion": "RECEIVED", "accepted": reply.body.get("accepted"), "committed": reply.body.get("committed"), "httpStatus": reply.status, "outcome": classify(reply.status, reply.body)})
+        output["receivedReceipt"] = {"httpStatus": reply.status, "body": copy.deepcopy(reply.body), "rawSHA256": sha256(reply.raw)}
         output["status"] = "ACCEPTED" if output["accepted"] else "REJECTED"
     except CompletionUnknown as exc:
         output.update({"status": "UNKNOWN", "commandCompletion": "UNKNOWN", "sessionDisposition": "ABANDONED", "causeType": None if exc.__cause__ is None else type(exc.__cause__).__name__})
@@ -1233,13 +1259,14 @@ def attach_worker(args: argparse.Namespace) -> int:
         if lane is not None and lane.last_reply is not None:
             received = lane.last_reply
             output.update({"commandCompletion": "RECEIVED", "accepted": received.body.get("accepted"), "committed": received.body.get("committed"), "httpStatus": received.status, "outcome": classify(received.status, received.body)})
+            output["receivedReceipt"] = {"httpStatus": received.status, "body": copy.deepcopy(received.body), "rawSHA256": sha256(received.raw)}
         output.update({"status": "FAILED_PREPARATION" if output["commandCompletion"] == "NOT_SUBMITTED" else "FAILED_EVIDENCE", "causeType": type(exc).__name__})
     output["artifacts"] = report.artifacts
     write_new(args.report_file, json_bytes(output), report.secrets)
     return 0 if output["status"] == "ACCEPTED" else 2
 
 
-def validate_worker_terminal(args: argparse.Namespace, report: Report, session: str, code: int, record: dict) -> dict:
+def validate_worker_terminal(args: argparse.Namespace, report: Report, session: str, code: int, record: dict, schemas: Schemas) -> dict:
     """Unknown until a complete scoped terminal result can be trusted.
 
     Preserve a validated received outcome if only later evidence checks fail.
@@ -1278,7 +1305,7 @@ def validate_worker_terminal(args: argparse.Namespace, report: Report, session: 
         require(type(status) is str and status in ("ACCEPTED", "REJECTED", "UNKNOWN", "FAILED_PREPARATION", "FAILED_EVIDENCE"), "Worker terminal status unsupported")
         base = {"schemaVersion", "role", "session", "accepted", "committed", "commandCompletion", "ownership", "status", "artifacts"}
         identities = {"offeredRequestId", "commandId", "envelopeBytesSHA256"}
-        received = {"httpStatus", "outcome"}
+        received = {"httpStatus", "outcome", "receivedReceipt"}
         expected = base | (set() if status == "FAILED_PREPARATION" else identities)
         if status in ("ACCEPTED", "REJECTED", "FAILED_EVIDENCE"):
             expected |= received
@@ -1323,17 +1350,24 @@ def validate_worker_terminal(args: argparse.Namespace, report: Report, session: 
             require(sha256(json_bytes(command)) == ledger.get("envelopeBytesSHA256") == result["envelopeBytesSHA256"] and snapshot.get("commandEnvelope") == command, "Worker retained envelope hash differs")
             authorized_candidate_snapshot(object_field(snapshot, "requestBeforeSubmission"), object_field(snapshot, "authorizedViewBeforeSubmission"), command, "playerA")
         if result["commandCompletion"] == "RECEIVED":
+            representation = object_field(result, "receivedReceipt")
+            require(set(representation) == {"httpStatus", "body", "rawSHA256"} and type(representation["httpStatus"]) is int and representation["httpStatus"] == result["httpStatus"] and type(representation["rawSHA256"]) is str and re.fullmatch(r"[0-9a-f]{64}", representation["rawSHA256"]) is not None, "Worker complete receipt representation invalid")
+            body = object_field(representation, "body")
+            require(validate_command_receipt(result["httpStatus"], body, command, schemas, "playerA") == result["outcome"] and body.get("accepted") is result["accepted"] and body.get("committed") is result["committed"], "Worker complete receipt contradicts terminal outcome")
+            # The worker records this complete typed receipt only after the
+            # public schema/coherence/envelope guard succeeds. Revalidate it
+            # before touching a raw artifact that may have failed mid-write.
+            known_received = True
+            terminal["knownCompletion"] = {key: result[key] for key in ("status", "commandCompletion", "accepted", "committed", "httpStatus", "outcome")}
+            terminal["receiptRepresentationSHA256"] = sha256(json_bytes(representation))
             if receipt_path.is_file():
-                body = strict_json(read_owned(receipt_path))
-                require(classify(result["httpStatus"], body) == result["outcome"] and body.get("accepted") is result["accepted"] and body.get("committed") is result["committed"], "Worker saved receipt differs from terminal flags/outcome")
-                if "error" not in body:
-                    require(body["command_id"] == result["commandId"] and body["session"]["session_id"] == session and body["operation"] == "submit_finite_decision", "Worker saved receipt command/session/operation differs")
+                receipt_raw = read_owned(receipt_path)
+                require(sha256(receipt_raw) == representation["rawSHA256"] and strict_json(receipt_raw) == body, "Worker saved receipt differs from complete validated representation")
                 terminal["receiptEvidence"] = "Validated retained raw receipt and command identity"
             else:
                 require(status == "FAILED_EVIDENCE", "Worker received result has no retained receipt")
-                terminal["receiptEvidence"] = "Complete typed FAILED_EVIDENCE; raw receipt unavailable"
-            known_received = True
-            terminal["knownCompletion"] = {key: result[key] for key in ("status", "commandCompletion", "accepted", "committed", "httpStatus", "outcome")}
+                terminal["receiptEvidence"] = "Validated complete private receipt; raw artifact unavailable"
+                terminal["evidenceStatus"] = "FAIL"
         seen = set()
         for artifact in result["artifacts"]:
             require(type(artifact) is dict and set(artifact) == {"path", "sha256", "bytes"}, "Worker artifact descriptor invalid")
@@ -1356,11 +1390,12 @@ def validate_worker_terminal(args: argparse.Namespace, report: Report, session: 
     except (BoundaryError, OSError, KeyError, IndexError, TypeError, ValueError) as exc:
         terminal.update({"validation": "FAIL", "causeType": type(exc).__name__})
         if known_received:
+            terminal["evidenceStatus"] = "FAIL"
             raise BoundaryError("Attach worker received outcome retained; later terminal evidence validation failed; no further submissions") from exc
         raise CompletionUnknown("Attach worker command completion UNKNOWN; terminal result unusable; no further submissions") from exc
 
 
-def run_attach_worker(args: argparse.Namespace, report: Report, http: Endpoint, session: str) -> dict:
+def run_attach_worker(args: argparse.Namespace, report: Report, http: Endpoint, session: str, schemas: Schemas) -> dict:
     """Record the one owned worker, including failure and handle-based cleanup."""
     result_file, log_file = args.output_root / "attach-worker.json", args.output_root / "attach-worker.log"
     script = Path(__file__).resolve()
@@ -1400,11 +1435,13 @@ def run_attach_worker(args: argparse.Namespace, report: Report, http: Endpoint, 
                 code = child.wait(timeout=10)
         record["exitCode"] = code if code is not None else None if child is None else child.poll()
         record["exitUTC"] = datetime.now(UTC).isoformat()
-    result = validate_worker_terminal(args, report, session, code, record)
+    result = validate_worker_terminal(args, report, session, code, record, schemas)
     if result["status"] == "UNKNOWN":
         raise CompletionUnknown("Attach worker command completion UNKNOWN; session abandoned without further submissions")
     require(code == 0 and result["status"] == "ACCEPTED" and result.get("accepted") is True and result.get("commandCompletion") == "RECEIVED", "Attach worker did not complete an accepted action; inspect typed terminal result")
-    return result
+    # The complete receipt remains private and hash-bound; the public case
+    # summary carries only typed terminal metadata and artifact descriptors.
+    return {key: value for key, value in result.items() if key != "receivedReceipt"}
 
 
 def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, http: Endpoint, tokens: dict, main_session: str, config: dict) -> None:
@@ -1417,7 +1454,7 @@ def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, ht
     supervisor = HttpCommandLane(http, report, schemas, session, "supervisor")
     start = supervisor.submit(envelope(session, "e01-attach-start", 0, "start_session"), "admin")
     require(classify(start.status, start.body) == "accepted", "Supervisor attach start failed")
-    worker_result = run_attach_worker(args, report, http, session)
+    worker_result = run_attach_worker(args, report, http, session, schemas)
     require(host.process.poll() is None and http.request("GET", f"/sessions/{main_session}", "playerA").status == 200, "Attach disconnect stopped host or other owned session")
     # Exercise the client guard against this owned listener, without starting a
     # second Core server: Windows development-host co-bind is a known limit.

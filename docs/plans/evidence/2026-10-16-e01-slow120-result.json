@@ -1424,58 +1424,79 @@
           "sourceSnapshotCount": 37,
           "allSourceSnapshotsUnchanged": true,
           "result": {
-            "path": ".local/tests/e01-wire-binding-20261017T014849Z-4c9b5e50/guard-unit-result.json",
-            "sha256": "2c226b534724b3076f1c40191d3598ddd4463590d24dcc6e4bfdfbea8ad3129c"
+            "path": ".local/tests/e01-wire-binding-20261017T020817Z-c6ad709e/guard-unit-result.json",
+            "sha256": "f1e54a404d37cbfee677b2c1cee4ff7beb96e1b04cd41dc1e94798e48eef7454"
           },
           "rawLog": {
-            "path": ".local/tests/e01-wire-binding-20261017T014849Z-4c9b5e50.raw.log",
+            "path": ".local/tests/e01-wire-binding-20261017T020817Z-c6ad709e.raw.log",
             "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
           },
           "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
           "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
           "coreOrNativePhaseExecuted": false
         },
-        "fullRuntimeCaptureBuildAutomation": "NOT_RUN_FOR_THIS_REPLACEMENT_CANDIDATE"
+        "fullRuntimeCaptureBuildAutomation": "NOT_RUN_FOR_THIS_REPLACEMENT_CANDIDATE",
+        "guardVerificationHistory": [
+          {
+            "status": "PASS",
+            "executed": 19,
+            "passed": 19,
+            "failed": 0,
+            "sourceSnapshotCount": 37,
+            "allSourceSnapshotsUnchanged": true,
+            "result": {
+              "path": ".local/tests/e01-wire-binding-20261017T014849Z-4c9b5e50/guard-unit-result.json",
+              "sha256": "2c226b534724b3076f1c40191d3598ddd4463590d24dcc6e4bfdfbea8ad3129c"
+            },
+            "rawLog": {
+              "path": ".local/tests/e01-wire-binding-20261017T014849Z-4c9b5e50.raw.log",
+              "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+            },
+            "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
+            "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+            "coreOrNativePhaseExecuted": false
+          }
+        ]
       },
       "revision6PythonUnits": {
         "status": "PASS",
-        "executed": 65,
-        "durationSeconds": 5.44,
+        "executed": 72,
+        "durationSeconds": 6.507,
         "exitCode": 0,
         "invocation": {
-          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/invocation.json",
-          "sha256": "d8e5db2fc81f427726196e9abbfa89260159cb39f95bddef1c8bcdacc92b667e"
-        },
-        "stderr": {
-          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/stderr.txt",
-          "sha256": "3903dfcccce7f635ababb0df9a47b71ea66d245e6e8cadebba9153d327913eb1"
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T020746Z-f12129a1/invocation.json",
+          "sha256": "92b8008410762eb2d1edb46e62958157746b30d112f7d222b7e3545b1460f88a"
         },
         "stdout": {
-          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/stdout.txt",
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T020746Z-f12129a1/stdout.txt",
           "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T020746Z-f12129a1/stderr.txt",
+          "sha256": "fd22bd40382af97bbc7f2bddc17198b34adc197fc30bb06cfa535a1a5a91f3da"
         },
         "sourceBefore": [
           {
             "path": "scripts/migration/e01_boundary.py",
-            "sha256": "981C22D4B102AFEBE812EA71B667DCE44E578B73A227F3EBB1DCE14935DC0EC9"
+            "sha256": "551C379C4DD2DF102AC9AB9A68FCF2B1EBD21BB070152A2963076F2783813BB0"
           },
           {
             "path": "tests/migration/test_e01_boundary.py",
-            "sha256": "63C57194AB5F739A2EC8024AB6C861D5B1B2993666B4710D1DA94A78E087DA92"
+            "sha256": "38D0E21136821F5A0B3A6ECB744C764EE1BA3F70A052DD2A54F9C0F018013A68"
           }
         ],
         "sourceAfter": [
           {
             "path": "scripts/migration/e01_boundary.py",
-            "sha256": "981C22D4B102AFEBE812EA71B667DCE44E578B73A227F3EBB1DCE14935DC0EC9"
+            "sha256": "551C379C4DD2DF102AC9AB9A68FCF2B1EBD21BB070152A2963076F2783813BB0"
           },
           {
             "path": "tests/migration/test_e01_boundary.py",
-            "sha256": "63C57194AB5F739A2EC8024AB6C861D5B1B2993666B4710D1DA94A78E087DA92"
+            "sha256": "38D0E21136821F5A0B3A6ECB744C764EE1BA3F70A052DD2A54F9C0F018013A68"
           }
         ],
         "sourceBeforeAfterMatched": true,
-        "scope": "Complete terminal trust boundary, known outcome preservation and malformed receipt matrices; source units only",
+        "scope": "Coherent envelope-bound receipts in every command guard, private validated receipt retained through damaged artifacts and supported HTTP422 parity; unit verification only",
         "coreCaptureBuildOrInstallExecuted": false,
         "independentSourceReviewPass": false
       },
@@ -1573,8 +1594,60 @@
           "scope": "Lifecycle/create guards, complete worker inventory and exact absent/false/true wire flags; unit verification only",
           "coreCaptureBuildOrInstallExecuted": false,
           "independentSourceReviewPass": false
+        },
+        {
+          "status": "PASS",
+          "executed": 65,
+          "durationSeconds": 5.44,
+          "exitCode": 0,
+          "invocation": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/invocation.json",
+            "sha256": "d8e5db2fc81f427726196e9abbfa89260159cb39f95bddef1c8bcdacc92b667e"
+          },
+          "stderr": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/stderr.txt",
+            "sha256": "3903dfcccce7f635ababb0df9a47b71ea66d245e6e8cadebba9153d327913eb1"
+          },
+          "stdout": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "sourceBefore": [
+            {
+              "path": "scripts/migration/e01_boundary.py",
+              "sha256": "981C22D4B102AFEBE812EA71B667DCE44E578B73A227F3EBB1DCE14935DC0EC9"
+            },
+            {
+              "path": "tests/migration/test_e01_boundary.py",
+              "sha256": "63C57194AB5F739A2EC8024AB6C861D5B1B2993666B4710D1DA94A78E087DA92"
+            }
+          ],
+          "sourceAfter": [
+            {
+              "path": "scripts/migration/e01_boundary.py",
+              "sha256": "981C22D4B102AFEBE812EA71B667DCE44E578B73A227F3EBB1DCE14935DC0EC9"
+            },
+            {
+              "path": "tests/migration/test_e01_boundary.py",
+              "sha256": "63C57194AB5F739A2EC8024AB6C861D5B1B2993666B4710D1DA94A78E087DA92"
+            }
+          ],
+          "sourceBeforeAfterMatched": true,
+          "scope": "Complete terminal trust boundary, known outcome preservation and malformed receipt matrices; source units only",
+          "coreCaptureBuildOrInstallExecuted": false,
+          "independentSourceReviewPass": false
         }
-      ]
+      ],
+      "nativeClassifierRegression": {
+        "status": "SOURCE_ONLY_NOT_EXECUTED",
+        "testFile": {
+          "path": "Source/WarhammerClient/Private/Tests/CoreBoundaryEvidenceTests.cpp",
+          "sha256": "208ec4402ab87beed977dcf26dab2d8cf122a71124936186e85227a9d15c14ff"
+        },
+        "caseCountChanged": false,
+        "newSyntheticControl": "HTTP422 rule_path_unsupported error envelope; exact status/code/message/absence and fidelity gap",
+        "newBuildOrNativeRun": false
+      }
     },
     "subsequentOwn15CodeReports": [
       {
@@ -1642,6 +1715,27 @@
         ],
         "all174CandidateAndTwoExternalInstructionsUnchanged": true,
         "coreOrNativeExecution": false
+      },
+      {
+        "round": 4,
+        "role": "Independent code quality; pre-execution source gate",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r4.md",
+          "sha256": "a20d77fd07a45b16caa0041006a3cfa9b5e528bf688fd6c227b884d164ceaef4"
+        },
+        "verdict": "CHANGES_REQUESTED",
+        "sessionId": "01a14791-e087-7922-9ed9-06e7a3729db8",
+        "frozenHead": "7d56685b39c15df220937584999cc36c1d729e2a",
+        "completedUtc": "2026-10-17T02:01:39.0516964Z",
+        "exitCode": 0,
+        "completedStaticCommands": 33,
+        "all174CandidateHashesUnchanged": true,
+        "coreOrNativeExecution": false,
+        "findings": [
+          "P1 complete coherent envelope-bound receipts in all submission guards; invalid matching paired replies remain UNKNOWN",
+          "P2 preserve validated worker outcomes through damaged/unreadable receipt artifacts",
+          "P2 align Python/native HTTP422 rule_path_unsupported error-envelope classification"
+        ]
       }
     ]
   },
@@ -1659,10 +1753,9 @@
     "Durable restart/recovery and real production role controls remain unproved",
     "Full E01/M01, G-RESEARCH and G-IMPLEMENT are not accepted",
     "Original Capture002136 has no actual attach-worker process record; its missing PID must not be invented",
-    "r2 attach/lifecycle command-lane and fresh-Capture wire-link findings require remediation and a new blind code review",
-    "Revision6 59-unit PASS is focused helper evidence, not fresh Core Capture/build/Automation or acceptance"
+    "Changed revision6 source passes72 Python/19 simulated guard tests but still requires fresh blind code review and full current-source Core/native chain; no approval inferred"
   ],
-  "updatedUtc": "2026-10-17T01:50:17.108131+00:00",
+  "updatedUtc": "2026-10-17T02:09:35.214393+00:00",
   "preRemediationSnapshots": {
     "provenance": {
       "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0130137420423Z.json",
@@ -1739,6 +1832,11 @@
       "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-e1a122a35edc2b9e4bc92064a9682ccf7e75880063294d8059be3ee5a1fb78d1.json",
       "sha256": "e1a122a35edc2b9e4bc92064a9682ccf7e75880063294d8059be3ee5a1fb78d1",
       "reason": "Preserved factual60-unit record before65-unit terminal-trust verification/r3 source-gate addendum"
+    },
+    {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-26a9fceb2577a08d4153d53acdf56dcabb6e073bbf2d417cea9fdfe3a8ee10c2.json",
+      "sha256": "26a9fceb2577a08d4153d53acdf56dcabb6e073bbf2d417cea9fdfe3a8ee10c2",
+      "reason": "Preserved65-unit factual record before appending round4 source review; prior runtime records unchanged"
     }
   ]
 }

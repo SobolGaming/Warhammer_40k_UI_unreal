@@ -36,6 +36,16 @@ failure; an artifact-write failure does not erase an already validated receipt.
 Test malformed syntax, wrong identities/statuses/flags, artifact failures paired
 with UNKNOWN and valid known outcomes, with zero downstream submissions.
 
+A complete command receipt must have coherent session/checkpoint revision,
+projection hash and cursor and match the retained command/session/operation.
+Perform this validation inside every submission guard; identical unusable
+local/HTTP responses do not establish completion. Preserve a validated worker
+outcome when later receipt-file persistence leaves an absent, partially written
+or unreadable artifact, while reporting the evidence failure and stopping.
+Keep Python/native classification aligned for both proposal_invalid and
+rule_path_unsupported HTTP422 error envelopes. Add focused negative/known controls
+and corresponding native classifier assertions within the existing test case.
+
 Apply the same receipt discipline to the two existing session-create calls:
 retain their exact generated configuration and submitted administrator scope
 privately before send, mark possible response loss UNKNOWN, and stop without

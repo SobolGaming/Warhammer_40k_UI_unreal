@@ -725,6 +725,27 @@ bool FE01StrictNegatives::RunTest(const FString& Parameters)
     TestTrue(TEXT("Uncommitted error-envelope 422 shape"), ReadOutcome(422, ErrorBody, Outcome, ReadError));
     TestTrue(TEXT("Exact wire message"), Exact(Outcome.Message, TEXT("Submitted proposal was invalid.")));
     TestTrue(TEXT("Fidelity gap is explicit"), Outcome.FidelityGap.Contains(TEXT("not supplied")));
+    // Synthetic branch control, not a live capture. The selected Core's
+    // adapters/server.py maps its uncommitted unsupported outcome to this body.
+    const FString UnsupportedErrorBody = TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"rule_path_unsupported\",\"message\":\"Submitted command reached an unsupported rule path.\"}}");
+    TestTrue(TEXT("Seed a command receipt before unsupported error"), ReadOutcome(200, OutcomeText, Outcome, ReadError));
+    TestTrue(TEXT("Synthetic unsupported error-envelope 422 shape"), ReadOutcome(422, UnsupportedErrorBody, Outcome, ReadError));
+    TestEqual(TEXT("Unsupported HTTP status retained"), Outcome.HttpStatus, 422);
+    TestTrue(TEXT("Exact unsupported wire code"), Exact(Outcome.Code, TEXT("rule_path_unsupported")));
+    TestTrue(TEXT("Exact unsupported wire message"), Exact(Outcome.Message, TEXT("Submitted command reached an unsupported rule path.")));
+    TestTrue(TEXT("Unsupported error is uncommitted-invalid"), Exact(OutcomeName(Outcome.Kind), TEXT("uncommitted_invalid")));
+    TestFalse(TEXT("Unsupported error does not invent a command receipt"), Outcome.bCommandOutcome);
+    TestFalse(TEXT("Unsupported error discards prior acceptance"), Outcome.bAccepted);
+    TestFalse(TEXT("Unsupported error discards prior commitment"), Outcome.bCommitted);
+    TestTrue(TEXT("Unsupported error has no invented command ID"), Outcome.CommandId.IsEmpty());
+    TestFalse(TEXT("Unsupported error has no invented session revision"), Outcome.SessionRevision.IsSet());
+    for (const TCHAR* Key : {TEXT("command_id"), TEXT("accepted"), TEXT("committed"), TEXT("session"), TEXT("checkpoint"), TEXT("event_range")})
+    {
+        TestFalse(TEXT("Unsupported error retains absent receipt fields"), Field(Outcome.Json, Key).IsValid());
+    }
+    TestTrue(TEXT("Unsupported missing-detail notice is explicit"), Exact(Outcome.FidelityGap,
+        TEXT("Detailed engine reasons were not supplied by this HTTP response. Core issue #588.")));
+    TestFalse(TEXT("Unsupported error cannot pass as HTTP success"), ReadOutcome(200, UnsupportedErrorBody, Outcome, ReadError));
     TestFalse(TEXT("Error body cannot pass as HTTP success"), ReadOutcome(200, ErrorBody, Outcome, ReadError));
     TestFalse(TEXT("Error missing message rejected"), ReadOutcome(422, TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"proposal_invalid\"}}"), Outcome, ReadError));
     TestFalse(TEXT("Error wrong message type rejected"), ReadOutcome(422, ErrorBody.Replace(TEXT("\"Submitted proposal was invalid.\""), TEXT("false")), Outcome, ReadError));

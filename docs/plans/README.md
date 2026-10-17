@@ -48,3 +48,5 @@ OWN14 covers the separate `E01-SLOW120` diagnostic, historical revision4 supplem
 and revision6 repairs/fresh proof under the same bounds.
 The earlier 30-second failure and its acceptance record remain unchanged; new
 diagnostic results and any renewed audit are recorded separately.
+
+Round4 [source review](research/2026-10-17-e01-slow120-code-review-r4.md) requests receipt-coherence, damaged-artifact outcome retention and classifier-parity repairs before a fresh reviewed full chain. Prior65/19 results remain source checks only.

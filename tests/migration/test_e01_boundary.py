@@ -1,7 +1,8 @@
-"""Standard-library checks of E01 evidence code, never fake engine integration.
+"""Focused checks of E01 evidence code, never fake engine integration.
 
 Run directly with the reviewed Python 3.14.5 interpreter and ``-I -B``. Canonical
 contract examples below are parser fixtures; they do not count as live workflows.
+The complete-receipt regression uses the installed local JSON Schema validator.
 """
 from __future__ import annotations
 
@@ -298,6 +299,35 @@ class OutcomeTests(unittest.TestCase):
         self.assertEqual(uncommitted["error"]["message"], "Submitted proposal was invalid.")
         self.assertNotIn("violations", uncommitted["error"])
 
+    def test_422_error_envelope_variants_match_native_uncommitted_classification(self):
+        # These are the same two selected-Core error codes covered by native
+        # ReadOutcome's synthetic controls, not fabricated live captures.
+        for code in ("proposal_invalid", "rule_path_unsupported"):
+            body = {"schema_version": "error-envelope-v1", "error": {"code": code, "message": "Synthetic public error."}}
+            with self.subTest(code=code):
+                self.assertEqual(boundary.classify(422, body), "uncommitted_invalid")
+                self.assertEqual(boundary.classify(500, body), "error")
+                self.assertNotIn("accepted", body)
+                self.assertNotIn("committed", body)
+
+    def test_outcome_requires_coherent_session_checkpoint_and_event_range(self):
+        mutations = {
+            "revision": lambda body: body["checkpoint"].update(session_revision=body["session"]["session_revision"] + 1),
+            "hash": lambda body: body["checkpoint"].update(projection_state_hash="0" * 64),
+            "cursor": lambda body: body["checkpoint"].update(event_cursor="different-checkpoint-cursor"),
+            "range_end": lambda body: body["event_range"].update(to_cursor="different-event-range-end"),
+            "role": lambda body: body["checkpoint"].update(visibility_role="player"),
+            "viewer": lambda body: body["checkpoint"].update(viewer_player_id="player-b"),
+            "extra_checkpoint": lambda body: body["checkpoint"].update(extra=1),
+            "extra_range": lambda body: body["event_range"].update(extra=1),
+            "extra_outcome": lambda body: body.update(extra=1),
+        }
+        for label, mutate in mutations.items():
+            body = copy.deepcopy(self.accepted)
+            mutate(body)
+            with self.subTest(field=label), self.assertRaises(boundary.BoundaryError):
+                boundary.classify(200, body)
+
     def test_uncommitted_command_outcome_accepts_only_422_supported_negative_codes(self):
         # Public outcome schema permits facade pre-validator results with both
         # flags false; these remain distinct from recorded invalid attempts.
@@ -370,6 +400,7 @@ class OutcomeTests(unittest.TestCase):
                 boundary.classify(200, outcome)
         outcome = copy.deepcopy(self.accepted)
         outcome["session"]["session_revision"] = 2**53 - 1
+        outcome["checkpoint"]["session_revision"] = 2**53 - 1
         self.assertEqual(boundary.classify(200, outcome), "accepted")
 
     def test_error_missing_wrong_type_or_extra_detail_fails(self):
@@ -917,20 +948,26 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
     def accepted(command, session, operation):
         body = canonical("examples/sessions/session-command-outcome.json")
         body["command_id"], body["session"]["session_id"], body["operation"] = command, session, operation
+        revision = 1 if operation == "start_session" else 4 if operation == "submit_finite_decision" else 2
+        body["session"]["session_revision"] = body["checkpoint"]["session_revision"] = revision
+        if operation == "submit_finite_decision":
+            body["checkpoint"].update(visibility_role="player", viewer_player_id="player-a")
+            body["session"]["visibility"].update(role="player", player_id="player-a", may_mutate_lifecycle=False, may_submit_decision=True, omniscient=False)
         return boundary.Reply(200, boundary.json_bytes(body), 0, 0)
 
-    def terminal_fixture(self, root, status, *, error_status=403, committed=None):
+    def terminal_fixture(self, root, status, *, error_status=403, committed=None, received_accepted=False, receipt_damage="missing"):
         """Create a real driver-format terminal using a mocked scoped adapter."""
         args, endpoint = self.args(root), MagicMock()
         request = {"request_id": "unit-terminal-request", "actor_id": "player-a", "options": [{"option_id": "unit-option"}]}
         view = {"viewer_player_id": "player-a", "pending_decision": request}
-        if status == "ACCEPTED":
+        if status == "ACCEPTED" or (status == "FAILED_EVIDENCE" and received_accepted):
             final = self.accepted("e01-attach-unit-terminal-request", args.attach_session, "submit_finite_decision")
         elif status == "UNKNOWN":
             final = TimeoutError("private untrusted transport detail")
         elif committed is not None:
             body = self.accepted("e01-attach-unit-terminal-request", args.attach_session, "submit_finite_decision").body
             body.update({"accepted": False, "committed": committed, "outcome_code": "proposal_invalid"})
+            body["session"]["session_revision"] = body["checkpoint"]["session_revision"] = 4 if committed else 3
             final = boundary.Reply(422, boundary.json_bytes(body), 0, 0)
         else:
             final = boundary.Reply(error_status, boundary.json_bytes({"schema_version": "error-envelope-v1",
@@ -944,6 +981,10 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
 
         def write_or_fail(path, data, secrets=()):
             if status == "FAILED_EVIDENCE" and path.name.endswith(".response.json"):
+                if receipt_damage == "partial":
+                    path.write_bytes(data[:max(1, len(data) // 2)])
+                elif receipt_damage == "unreadable":
+                    path.write_bytes(data)
                 raise PermissionError("Unit evidence save failure")
             return original_write(path, data, secrets)
 
@@ -989,6 +1030,83 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                 self.assertIs(lane.submit(command, "admin"), reply)
                 self.assertFalse(lane.submission_unknown)
                 self.assertEqual((root / "privileged-submission-attempts/supervisor/command_1.response.json").read_bytes(), reply.raw)
+
+    def test_both_submission_guards_reject_unusable_or_unbound_receipts_as_unknown(self):
+        mutations = {
+            "empty_matching_payload": lambda body: body.clear(),
+            "checkpoint_revision": lambda body: body["checkpoint"].update(session_revision=99),
+            "checkpoint_hash": lambda body: body["checkpoint"].update(projection_state_hash="0" * 64),
+            "checkpoint_cursor": lambda body: body["checkpoint"].update(event_cursor="wrong-cursor"),
+            "event_range_end": lambda body: body["event_range"].update(to_cursor="wrong-range"),
+            "command_id": lambda body: body.update(command_id="wrong-command"),
+            "session_id": lambda body: body["session"].update(session_id="wrong-session"),
+            "operation": lambda body: body.update(operation="close_session"),
+            "coherent_wrong_revision": lambda body: (body["session"].update(session_revision=5), body["checkpoint"].update(session_revision=5)),
+            "invalid_flags": lambda body: body.update(committed=False),
+            "wrong_credential_viewer": lambda body: (body["session"]["visibility"].update(player_id="player-b"), body["checkpoint"].update(viewer_player_id="player-b")),
+        }
+        for transport in ("http", "paired"):
+            for label, mutate in mutations.items():
+                with self.subTest(transport=transport, field=label), tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    report, schemas, local, http = boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+                    command = boundary.envelope("unit-session", "unit-command", 3, "finite_option", {"request_id": "unit-request"}, option="unit-option")
+                    body = self.accepted("unit-command", "unit-session", "submit_finite_decision").body
+                    mutate(body)
+                    local.request.return_value = http.request.return_value = boundary.Reply(200, boundary.json_bytes(body), 0, 0)
+                    lane = boundary.HttpCommandLane(http, report, schemas, "unit-session", "unit") if transport == "http" else boundary.Pair(local, http, SimpleNamespace(report=report, schemas=schemas))
+                    lane.session = "unit-session"
+                    later = MagicMock()
+                    boundary.run_case_groups(report, (
+                        (("UNIT-COMMAND",), lambda: lane.submit(command, "playerA")),
+                        (("UNIT-LATER",), later),
+                    ))
+                    self.assertTrue(lane.submission_unknown)
+                    self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
+                    self.assertEqual(lane.submissions, 1)
+                    with self.assertRaisesRegex(boundary.BoundaryError, "Session abandoned"):
+                        lane.submit(command, "playerA")
+                    later.assert_not_called()
+                    self.assertEqual(http.request.call_count, 1)
+                    self.assertEqual(local.request.call_count, 1 if transport == "paired" else 0)
+
+    def test_both_submission_guards_validate_complete_received_controls(self):
+        for transport in ("http", "paired"):
+            for accepted, committed in ((True, True), (False, True), (False, False)):
+                with self.subTest(transport=transport, accepted=accepted, committed=committed), tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    report, schemas, local, http = boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+                    command = boundary.envelope("unit-session", "unit-command", 3, "finite_option", {"request_id": "unit-request"}, option="unit-option")
+                    body = self.accepted("unit-command", "unit-session", "submit_finite_decision").body
+                    body.update(accepted=accepted, committed=committed, outcome_code="command_committed" if accepted else "proposal_invalid")
+                    body["session"]["session_revision"] = body["checkpoint"]["session_revision"] = 4 if committed else 3
+                    reply = boundary.Reply(200 if accepted else 422, boundary.json_bytes(body), 0, 0)
+                    local.request.return_value = http.request.return_value = reply
+                    lane = boundary.HttpCommandLane(http, report, schemas, "unit-session", "unit") if transport == "http" else boundary.Pair(local, http, SimpleNamespace(report=report, schemas=schemas))
+                    lane.session = "unit-session"
+                    result = lane.submit(command, "playerA")
+                    self.assertIs(result if transport == "http" else result[1], reply)
+                    self.assertFalse(lane.submission_unknown)
+                    self.assertIn(call("session-command-outcome.schema.json", body), schemas.validate.call_args_list)
+
+    def test_both_submission_guards_apply_real_frozen_schema_to_complete_receipts(self):
+        schemas = boundary.Schemas(FIXTURE)
+        for transport in ("http", "paired"):
+            with self.subTest(transport=transport), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                report, local, http = boundary.Report("capture", root), MagicMock(), MagicMock()
+                command = boundary.envelope("unit-session", "unit-command", 3, "finite_option", {"request_id": "unit-request"}, option="unit-option")
+                body = self.accepted("unit-command", "unit-session", "submit_finite_decision").body
+                # Coherence alone passes; this required metadata field is
+                # checked by the exact selected public schema inside the guard.
+                del body["session"]["catalog_id"]
+                self.assertEqual(boundary.classify(200, body), "accepted")
+                local.request.return_value = http.request.return_value = boundary.Reply(200, boundary.json_bytes(body), 0, 0)
+                lane = boundary.HttpCommandLane(http, report, schemas, "unit-session", "unit") if transport == "http" else boundary.Pair(local, http, SimpleNamespace(report=report, schemas=schemas))
+                lane.session = "unit-session"
+                with self.assertRaises(boundary.CompletionUnknown):
+                    lane.submit(command, "playerA")
+                self.assertTrue(lane.submission_unknown)
 
     def test_create_commit_before_timeout_retains_exact_config_and_stops_downstream(self):
         for paired in (False, True):
@@ -1136,6 +1254,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                 else:
                     body = self.accepted("e01-attach-unit-flags-request", args.attach_session, "submit_finite_decision").body
                     body.update({"accepted": False, "committed": committed, "outcome_code": "proposal_invalid"})
+                    body["session"]["session_revision"] = body["checkpoint"]["session_revision"] = 4 if committed else 3
                 endpoint.request.side_effect = [boundary.Reply(200, boundary.json_bytes({"projection": view}), 0, 0),
                     boundary.Reply(200, b'{"session_revision":3}', 0, 0), boundary.Reply(status, boundary.json_bytes(body), 0, 0)]
                 with patch.object(boundary.importlib, "import_module", return_value=SimpleNamespace(DEV_PLAYER_A_TOKEN="unit-credential")), \
@@ -1178,6 +1297,59 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             self.assertIsNone(result["committed"])
             self.assertEqual(result["httpStatus"], 403)
 
+    def test_failed_evidence_preserves_validated_accepted_and_rejected_receipts_when_raw_damaged(self):
+        for accepted in (True, False):
+            for damage in ("missing", "partial", "unreadable"):
+                with self.subTest(accepted=accepted, damage=damage), tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    args, code, result = self.terminal_fixture(root, "FAILED_EVIDENCE", received_accepted=accepted, receipt_damage=damage)
+                    self.assertEqual(result["commandCompletion"], "RECEIVED")
+                    self.assertIs(result["accepted"], True if accepted else None)
+                    self.assertEqual(set(result["receivedReceipt"]), {"httpStatus", "body", "rawSHA256"})
+                    report, endpoint, child, later = boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+                    endpoint.base_url = args.attach_endpoint
+                    child.pid, child.wait.return_value = 56796, code
+                    receipt = root / "attach-worker-private/privileged-submission-attempts/worker/command_1.response.json"
+                    original_open = Path.open
+
+                    def read_or_deny(path, *args, **kwargs):
+                        if damage == "unreadable" and path == receipt:
+                            raise PermissionError("private untrusted artifact error")
+                        return original_open(path, *args, **kwargs)
+
+                    with patch.object(boundary.subprocess, "Popen", return_value=child), patch.object(Path, "open", new=read_or_deny):
+                        with self.assertRaises(boundary.BoundaryError) as observed:
+                            boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
+                    self.assertNotIsInstance(observed.exception, boundary.CompletionUnknown)
+                    terminal = report.details["processes"][0]["terminalResult"]
+                    self.assertEqual(terminal["evidenceStatus"], "FAIL")
+                    self.assertIs(terminal["knownCompletion"]["accepted"], True if accepted else None)
+                    self.assertIs(terminal["knownCompletion"]["committed"], True if accepted else None)
+                    self.assertNotIn(b"private untrusted artifact error", boundary.json_bytes(report.payload()))
+                    later.assert_not_called()
+                    endpoint.request.assert_not_called()
+
+    def test_worker_incoherent_receipt_never_emits_received_or_accepted(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, endpoint = self.args(root), MagicMock()
+            request = {"request_id": "unit-bad-checkpoint", "actor_id": "player-a", "options": [{"option_id": "unit-option"}]}
+            view = {"viewer_player_id": "player-a", "pending_decision": request}
+            body = self.accepted("e01-attach-unit-bad-checkpoint", args.attach_session, "submit_finite_decision").body
+            body["checkpoint"]["session_revision"] += 1
+            endpoint.request.side_effect = [boundary.Reply(200, boundary.json_bytes({"projection": view}), 0, 0),
+                boundary.Reply(200, b'{"session_revision":3}', 0, 0), boundary.Reply(200, boundary.json_bytes(body), 0, 0)]
+            with patch.object(boundary.importlib, "import_module", return_value=SimpleNamespace(DEV_PLAYER_A_TOKEN="unit-credential")), \
+                 patch.object(boundary, "Endpoint", return_value=endpoint), \
+                 patch.object(boundary, "Schemas", return_value=MagicMock()):
+                self.assertEqual(boundary.attach_worker(args), 2)
+            result = boundary.strict_json(args.report_file.read_bytes())
+            self.assertEqual(result["status"], "UNKNOWN")
+            self.assertEqual(result["commandCompletion"], "UNKNOWN")
+            self.assertIsNone(result["accepted"])
+            self.assertNotIn("receivedReceipt", result)
+            self.assertEqual(endpoint.request.call_count, 3)
+
     def test_parent_records_exited_unknown_worker_and_performs_no_more_commands(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -1188,7 +1360,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             child.pid, child.wait.return_value = 34567, 2
             with patch.object(boundary.subprocess, "Popen", return_value=child):
                 with self.assertRaisesRegex(boundary.CompletionUnknown, "UNKNOWN"):
-                    boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
             self.assertEqual(len(report.details["processes"]), 1)
             process = report.details["processes"][0]
             self.assertEqual((process["owner"], process["pid"], process["exitCode"]), ("attach-worker", 34567, 2))
@@ -1216,7 +1388,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                 child.pid, child.wait.return_value = 56789, 2
                 with patch.object(boundary.subprocess, "Popen", return_value=child):
                     boundary.run_case_groups(report, (
-                        (("UNIT-WORKER",), lambda: boundary.run_attach_worker(args, report, endpoint, args.attach_session)),
+                        (("UNIT-WORKER",), lambda: boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())),
                         (("UNIT-LATER",), later),
                     ))
                 self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
@@ -1270,7 +1442,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                 child.pid, child.wait.return_value = 56790, code
                 with patch.object(boundary.subprocess, "Popen", return_value=child):
                     boundary.run_case_groups(report, (
-                        (("UNIT-WORKER",), lambda: boundary.run_attach_worker(args, report, endpoint, args.attach_session)),
+                        (("UNIT-WORKER",), lambda: boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())),
                         (("UNIT-LATER",), later),
                     ))
                 self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
@@ -1293,10 +1465,10 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                 child.pid, child.wait.return_value = 56791, code
                 with patch.object(boundary.subprocess, "Popen", return_value=child):
                     if status == "ACCEPTED":
-                        self.assertEqual(boundary.run_attach_worker(args, report, endpoint, args.attach_session), result)
+                        self.assertEqual(boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock()), {key: value for key, value in result.items() if key != "receivedReceipt"})
                     else:
                         with self.assertRaises(boundary.BoundaryError) as observed:
-                            boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                            boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
                         self.assertEqual(isinstance(observed.exception, boundary.CompletionUnknown), status == "UNKNOWN")
                 terminal = report.details["processes"][0]["terminalResult"]
                 self.assertEqual(terminal["validation"], "PASS")
@@ -1325,7 +1497,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
 
             with patch.object(boundary.subprocess, "Popen", return_value=child), patch.object(Path, "open", new=forbid_foreign):
                 with self.assertRaises(boundary.BoundaryError) as observed:
-                    boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
             self.assertNotIsInstance(observed.exception, boundary.CompletionUnknown)
             terminal = report.details["processes"][0]["terminalResult"]
             self.assertEqual(terminal["validation"], "FAIL")
@@ -1344,6 +1516,14 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             "wrong_outcome": lambda row: row.update(outcome="error"),
             "absent_committed": lambda row: row.update(committed=None),
             "wrong_exit_status": lambda row: row.update(status="REJECTED"),
+            "missing_representation": lambda row: row.pop("receivedReceipt"),
+            "representation_scalar": lambda row: row.update(receivedReceipt=None),
+            "representation_http": lambda row: row["receivedReceipt"].update(httpStatus=422),
+            "representation_body": lambda row: row["receivedReceipt"].update(body={}),
+            "representation_revision": lambda row: row["receivedReceipt"]["body"]["checkpoint"].update(session_revision=99),
+            "representation_operation": lambda row: row["receivedReceipt"]["body"].update(operation="close_session"),
+            "representation_command": lambda row: row["receivedReceipt"]["body"].update(command_id="other-command"),
+            "representation_hash": lambda row: row["receivedReceipt"].update(rawSHA256="bad-hash"),
         }
         for label, mutate in mutations.items():
             with self.subTest(field=label), tempfile.TemporaryDirectory() as temporary:
@@ -1356,7 +1536,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                 child.pid, child.wait.return_value = 56793, code
                 with patch.object(boundary.subprocess, "Popen", return_value=child):
                     with self.assertRaises(boundary.CompletionUnknown):
-                        boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                        boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
                 endpoint.request.assert_not_called()
         for raw in (b"{", b'{"accepted":true}', b"null"):
             with self.subTest(receipt=raw), tempfile.TemporaryDirectory() as temporary:
@@ -1368,8 +1548,11 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                 endpoint.base_url = args.attach_endpoint
                 child.pid, child.wait.return_value = 56794, code
                 with patch.object(boundary.subprocess, "Popen", return_value=child):
-                    with self.assertRaises(boundary.CompletionUnknown):
-                        boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                    with self.assertRaises(boundary.BoundaryError) as observed:
+                        boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
+                self.assertNotIsInstance(observed.exception, boundary.CompletionUnknown)
+                self.assertTrue(report.details["processes"][0]["terminalResult"]["knownCompletion"]["accepted"])
+                self.assertEqual(report.details["processes"][0]["terminalResult"]["evidenceStatus"], "FAIL")
                 endpoint.request.assert_not_called()
         for artifact in ("snapshot", "ledger"):
             for raw in (b"null", b"[]", b"{", b"\xff"):
@@ -1384,7 +1567,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                     child.pid, child.wait.return_value = 56795, code
                     with patch.object(boundary.subprocess, "Popen", return_value=child):
                         with self.assertRaises(boundary.CompletionUnknown):
-                            boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                            boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
                     endpoint.request.assert_not_called()
 
     def test_parent_worker_timeout_records_owned_termination_and_unknown(self):
@@ -1397,7 +1580,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             child.wait.side_effect = [boundary.subprocess.TimeoutExpired("unit-worker", 1800), 1]
             with patch.object(boundary.subprocess, "Popen", return_value=child):
                 with self.assertRaisesRegex(boundary.CompletionUnknown, "UNKNOWN"):
-                    boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
             child.terminate.assert_called_once()
             child.kill.assert_not_called()
             process = report.details["processes"][0]
@@ -1416,7 +1599,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             child.wait.side_effect = [OSError("Unit failed wait"), 1]
             with patch.object(boundary.subprocess, "Popen", return_value=child):
                 with self.assertRaises(boundary.CompletionUnknown):
-                    boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
             child.terminate.assert_called_once()
             process = report.details["processes"][0]
             self.assertEqual(process["exitCode"], 1)

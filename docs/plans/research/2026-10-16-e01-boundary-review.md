@@ -626,3 +626,29 @@ base-delta whitespace check reported632 CRLF diagnostics solely in the immutable
 original-byte OpenAPI copy; those bytes were preserved. The new terminal-trust
 repair still requires re-freeze/fresh source review and the full execution chain.
 This coordinator record neither supplies a verdict nor accepts the diagnostic.
+
+## OWN15 round-4 pre-execution source review
+
+Fresh CLI session `01a14791-e087-7922-9ed9-06e7a3729db8` assessed clean HEAD
+`7d56685b39c15df220937584999cc36c1d729e2a` against0467ee63... base. The
+[byte-exact report](2026-10-17-e01-slow120-code-review-r4.md), SHA256
+`A20D77FD07A45B16CAA0041006A3CFA9B5E528BF688FD6C227B884D164CEAEF4`,
+is CHANGES_REQUESTED: P1 complete coherent envelope-bound receipts in all lanes,
+P2 known worker outcomes surviving partially written/unreadable receipt artifacts,
+and P2 Python/native parity for HTTP422 rule_path_unsupported error envelopes.
+Its test-hash transcription error and immediate correction remain byte-exact.
+
+The review completed `2026-10-17T02:01:39.0516964Z`, exit0,33 static commands.
+All174 candidate hashes remained unchanged and the tree clean. Initial context
+received clean normative criteria and source-bound65-unit/19-simulated-guard raw
+evidence; no author notes or peer reports. Actual runtime metadata separately
+records gpt-6.1-sol/ultra, read-only/never and memory_mode disabled. Lower-level
+memory injection internals remain unverified. An interpreter syntax-check launch
+was sandbox denied, with no escalation/workaround; no fault reproductions ran.
+
+Ignored code-c4-20261017T015447Z-9dce9519 retains runtime evidence SHA256
+A2592F758D54272C610573913B937FCD20B360DC5D2254CDD24FF6B630AC79F2,
+command manifest1C6996AC3B0DC306AC7A561E6B03C82FE2234436AB3D8BAC68063B361DE79F4E
+and artifact manifest466497E1E702973B60584B11CB8DC9E9EACD322D3912CF5E664F060070CDBF65.
+Repairs remain within revision6; no new Core Capture/build/native run occurred.
+This factual record supplies no independent acceptance or waiver of findings.
