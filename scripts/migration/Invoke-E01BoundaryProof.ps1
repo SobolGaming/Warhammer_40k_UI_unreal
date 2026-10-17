@@ -20,7 +20,8 @@ param(
     [Parameter(Mandatory)]
     [ValidatePattern('^[0-9]{8}T[0-9]{6}Z-[0-9a-f]{8}$')]
     [string] $RunId,
-    [string] $EngineRoot = 'C:\Program Files\Epic Games\UE_5.8'
+    [string] $EngineRoot = 'C:\Program Files\Epic Games\UE_5.8',
+    [string] $CaptureRunId = ''
 )
 
 Set-StrictMode -Version Latest
@@ -51,6 +52,7 @@ $runLock = $null
 $runtimeLock = $null
 $failure = $null
 $before = $null
+$linkedCapture = $null
 $script:secretValues = @([Environment]::GetEnvironmentVariables().GetEnumerator() |
     Where-Object { $_.Key -match '(?i)(TOKEN|PASSWORD|SECRET|API_KEY|CREDENTIAL)' -and ([string]$_.Value).Length -ge 8 } |
     ForEach-Object { [string]$_.Value })
@@ -369,6 +371,99 @@ function Assert-Candidate($Candidate) {
     foreach ($file in $Candidate.files) { if ((Get-Hash $file.path) -ne $file.sha256) { throw "Frozen authored candidate changed: $($file.path)" } }
 }
 
+function Get-LinkedCapture {
+    # This is the one reviewed log-only supplement, not a general resume path.
+    # Its original Capture and failed Native results are immutable evidence.
+    $captureRoot = Assert-ChildPath (Join-Path $runParent $CaptureRunId) $runParent
+    $capturePath = Assert-ChildPath (Join-Path $captureRoot 'capture\result.json') $captureRoot
+    $captureHash = '137ceaaa5a3b85f3a49193525eeb198aedaf28a113b7f760da66081d5983e699'
+    if ((Get-Hash $capturePath) -ne $captureHash) { throw 'Pinned original Capture result changed.' }
+    $capture = Read-Json $capturePath
+    if ($capture.schemaVersion -ne 1 -or $capture.phase -ne 'Capture' -or $capture.runId -ne $CaptureRunId -or
+        $capture.runRoot -ne $captureRoot -or $capture.status -ne 'LOCAL_HTTP_BOUNDARY_PASS' -or
+        $capture.redaction.status -ne 'PASS' -or $capture.unitTests.status -ne 'PASS' -or $capture.unitTests.executed -ne 40) {
+        throw 'Pinned original Capture identity, status or unit count mismatch.'
+    }
+    $expectedFiles = @{
+        $PSCommandPath = 'f3b2a938a1f314ee5ff6d39b77fadb73cb3d5e1d5e92a562957305759acba2dc'
+        $packetPath = 'd540cf96f8513833c4c708a7104f520554e8244b4502ed7a49d5f695ebe90c76'
+        $harnessPath = '0384abc244b1a40d55043d830aabc334fd32d0457fa7810e2d1a0901d552bc2f'
+        $unitTestsPath = '316ff378b54566b3052ead3aa13aa660cd1adbf542cef0a9cdf670f03edd6cff'
+        $sourceManifestPath = 'bf861b2ec555c81e85a31e4b37e756c5e6b04d343522a95f3235700c2aec43f2'
+    }
+    if ($capture.candidate.files.Count -ne $expectedFiles.Count) { throw 'Pinned original Capture candidate must contain exactly five files.' }
+    $seen = @{}
+    foreach ($file in $capture.candidate.files) {
+        if ($seen.ContainsKey($file.path) -or -not $expectedFiles.ContainsKey($file.path) -or $file.sha256 -ne $expectedFiles[$file.path]) {
+            throw 'Pinned original Capture candidate path/hash mismatch.'
+        }
+        $seen[$file.path] = $true
+        if ($file.path -notin @($PSCommandPath, $packetPath) -and (Get-Hash $file.path) -ne $file.sha256) {
+            throw 'Capture Python, tests or source inventory changed before the native supplement.'
+        }
+    }
+    $reports = @{
+        preflight = @{ relative = 'python-preflight'; sha256 = 'e5736d5135817f3fda8324a45f5443795888d32364857a14601aa3af2d5dfc9f'; status = 'SOURCE_INVENTORY_PASS'; count = 1 }
+        'verify-runtime' = @{ relative = 'python-runtime'; sha256 = '4de2b91c7fdc46a8a184070c0c9c8e38a8dc23be6ceaaf919c320806132d5f55'; status = 'INSTALLED_RUNTIME_PASS'; count = 2 }
+        capture = @{ relative = 'python-capture'; sha256 = 'c99109764c6708889f2dc365696d03a9fd987465dd6e5d71f108a794223530a0'; status = 'LOCAL_HTTP_BOUNDARY_PASS'; count = 14 }
+    }
+    if ($capture.childReports.Count -ne 3) { throw 'Pinned original Capture child report count mismatch.' }
+    $seenReports = @{}
+    foreach ($child in $capture.childReports) {
+        if ($seenReports.ContainsKey($child.phase) -or -not $reports.ContainsKey($child.phase)) { throw 'Pinned original Capture child identity mismatch.' }
+        $seenReports[$child.phase] = $true
+        $expected = $reports[$child.phase]
+        $reportRoot = Assert-ChildPath (Join-Path $captureRoot ("capture\" + $expected.relative)) $captureRoot
+        $reportPath = Join-Path $reportRoot 'report.json'
+        if ($child.path -ne $reportPath -or $child.sha256 -ne $expected.sha256 -or (Get-Hash $reportPath) -ne $expected.sha256 -or $child.status -ne $expected.status) {
+            throw 'Pinned original Capture child path/hash/status mismatch.'
+        }
+        $report = Read-Json $reportPath
+        if ($report.schemaVersion -ne 1 -or $report.phase -ne $child.phase -or $report.status -ne $expected.status -or $report.redaction.status -ne 'PASS' -or
+            $report.caseCounts.discovered -ne $expected.count -or $report.caseCounts.executed -ne $expected.count -or $report.caseCounts.passed -ne $expected.count -or
+            $report.caseCounts.failed -ne 0 -or $report.caseCounts.blocked -ne 0 -or $report.caseCounts.notRun -ne 0 -or
+            $report.cases.Count -ne $expected.count -or @($report.cases | Where-Object { $_.status -ne 'PASS' }).Count -ne 0) {
+            throw 'Pinned original Capture child cases did not all pass.'
+        }
+        foreach ($artifact in $report.artifacts) {
+            $path = if ([IO.Path]::IsPathRooted($artifact.path)) { $artifact.path } else { Join-Path $reportRoot $artifact.path }
+            $path = Assert-ChildPath $path $reportRoot
+            if ((Get-Hash $path) -ne $artifact.sha256.ToLowerInvariant()) { throw 'Pinned original Capture artifact changed.' }
+        }
+    }
+    $wireHash = 'e1658b116e6ed53f84cee84b3d8a5c1adfd3ded3fa225db61d80d21d9953df0a'
+    $proposedIndex = Join-Path $captureRoot 'capture\python-capture\proposed-wire\index.json'
+    if ((Get-Hash $proposedIndex) -ne $wireHash -or (Get-Hash (Join-Path $fixtureRoot 'wire\index.json')) -ne $wireHash -or
+        (Read-Json $proposedIndex).cases.Count -ne 30) { throw 'Pinned reviewed wire index changed.' }
+    foreach ($state in @($capture.siblingsBefore, $capture.siblingsAfter)) {
+        Assert-SelectedCore $state
+        if ($state.arcade.head -ne '5088c1c49dcaff29eb59fb64b3063d30214dde73' -or $state.arcade.status) { throw 'Pinned original Arcade state must be exact and clean.' }
+    }
+    $preparePath = Join-Path $runRoot 'prepareruntime\result.json'
+    $prepare = Read-Json $preparePath
+    if ($prepare.runId -ne $RunId -or $prepare.phase -ne 'PrepareRuntime' -or $prepare.status -ne 'INSTALLED_RUNTIME_PASS' -or $prepare.redaction.status -ne 'PASS') {
+        throw 'Current supplement requires its own successful PrepareRuntime.'
+    }
+    $preflightPath = Join-Path $runRoot 'preflight\result.json'
+    if ($prepare.predecessor.path -ne $preflightPath -or $prepare.predecessor.sha256 -ne (Get-Hash $preflightPath)) {
+        throw 'Current prepared runtime does not link the successful Preflight for this run.'
+    }
+    $provenanceHash = '39c485c33e482b158edb157a0ffaa69224c09e15de5655277b64289887f7cf7c'
+    $runtimeHash = 'b01989fc595730d8ea6f1a10c7a5004510fca877a9b69aad9f3285cab357a897'
+    foreach ($runtime in @($capture.runtime, $prepare.runtime)) {
+        if ($runtime.provenance -ne $provenancePath -or $runtime.provenanceSha256 -ne $provenanceHash -or $runtime.runtimeTreeSha256 -ne $runtimeHash) {
+            throw 'Pinned Capture and current prepared runtime identities differ.'
+        }
+    }
+    if ((Get-Hash $provenancePath) -ne $provenanceHash) { throw 'Pinned runtime provenance changed.' }
+    $phaseResult.captureSupplement = @{ captureRunId = $CaptureRunId; capturePath = $capturePath; captureSha256 = $captureHash
+        childReports = $capture.childReports; historicalCandidate = $capture.candidate; wireIndexSha256 = $wireHash
+        currentPrepareRuntime = @{ path = $preparePath; sha256 = Get-Hash $preparePath }
+        runtimeProvenanceSha256 = $provenanceHash; runtimeTreeSha256 = $runtimeHash
+        reuse = 'Read-only approved Capture evidence; this supplement launches no Core host and submits no commands. The original failed Native remains unchanged.' }
+    return $capture
+}
+
 function Get-Toolchain {
     foreach ($path in @($selectedPython, $uvPath, (Join-Path $EngineRoot 'Engine\Build\BatchFiles\Build.bat'),
             (Join-Path $EngineRoot 'Engine\Binaries\Win64\UnrealEditor-Cmd.exe'))) { Require-File $path }
@@ -398,11 +493,35 @@ function Get-Toolchain {
 
 function Invoke-Harness([string] $HarnessPhase, [string] $Interpreter, [string] $Label, [string] $ExistingOutput = '') {
     Require-File $harnessPath
-    $output = if ($ExistingOutput) { Assert-ChildPath $ExistingOutput $runRoot } else { New-OwnedDirectory (Join-Path $phaseRoot $Label) $phaseRoot }
-    $report = Join-Path $output $(if ($ExistingOutput) { 'audit-report.json' } else { 'report.json' })
-    $arguments = @('-I', '-B', $harnessPath, $HarnessPhase, '--core-root', $coreRoot,
-        '--fixture-root', $fixtureRoot, '--output-root', $output, '--report-file', $report,
-        '--core-launcher', (Join-Path $coreRoot 'scripts\run_phase18m_reference_server.py'))
+    if ($HarnessPhase -eq 'audit' -and $CaptureRunId) {
+        $expectedInput = Join-Path $runParent "$CaptureRunId\capture\python-capture"
+        if ($ExistingOutput -ne $expectedInput) { throw 'Supplement audit input must be the exact pinned original Capture.' }
+        $output = Assert-ChildPath $ExistingOutput (Join-Path $runParent $CaptureRunId)
+        $report = Join-Path (New-OwnedDirectory (Join-Path $phaseRoot $Label) $phaseRoot) 'report.json'
+        # The frozen CLI requires output/report co-location. Call its unchanged
+        # read-only audit function directly so this supplement never writes into
+        # the original capture. Both input and new report paths are guarded here.
+        $worker = @'
+import argparse, pathlib, runpy, sys
+module = runpy.run_path(sys.argv[1])
+args = argparse.Namespace(core_root=pathlib.Path(sys.argv[2]), fixture_root=pathlib.Path(sys.argv[3]), output_root=pathlib.Path(sys.argv[4]), report_file=pathlib.Path(sys.argv[5]), core_launcher=pathlib.Path(sys.argv[6]))
+report = module['Report']('audit', args.report_file.parent)
+module['audit'](args, report)
+report.details['captureSupplement'] = {'captureRunId': sys.argv[7], 'readOnlyInput': str(args.output_root), 'newReport': str(args.report_file), 'launchesCoreHost': False, 'submitsCommands': False}
+payload = report.payload()
+module['write_new'](args.report_file, module['json_bytes'](payload), report.secrets)
+print(module['json'].dumps({'phase': 'audit', 'status': payload['status'], 'caseCounts': payload['caseCounts'], 'reportFile': str(args.report_file)}))
+raise SystemExit(0 if payload['status'] == 'EVIDENCE_AUDIT_PASS' else 2)
+'@
+        $arguments = @('-I', '-B', '-c', $worker, $harnessPath, $coreRoot, $fixtureRoot, $output, $report,
+            (Join-Path $coreRoot 'scripts\run_phase18m_reference_server.py'), $CaptureRunId)
+    } else {
+        $output = if ($ExistingOutput) { Assert-ChildPath $ExistingOutput $runRoot } else { New-OwnedDirectory (Join-Path $phaseRoot $Label) $phaseRoot }
+        $report = Join-Path $output $(if ($ExistingOutput) { 'audit-report.json' } else { 'report.json' })
+        $arguments = @('-I', '-B', $harnessPath, $HarnessPhase, '--core-root', $coreRoot,
+            '--fixture-root', $fixtureRoot, '--output-root', $output, '--report-file', $report,
+            '--core-launcher', (Join-Path $coreRoot 'scripts\run_phase18m_reference_server.py'))
+    }
     $null = Invoke-OwnedProcess $Label $Interpreter $arguments $runRoot
     $result = Read-Json $report
     foreach ($key in @('schemaVersion', 'phase', 'status', 'caseCounts', 'cases', 'artifacts', 'redaction')) {
@@ -554,6 +673,32 @@ function Assert-UBTSettings($Before, $After) {
     }
 }
 
+function Get-ConfigState {
+    $configRoot = Join-Path $projectRoot 'Config'
+    Assert-NoReparsePoint $configRoot
+    if (-not [IO.Directory]::Exists($configRoot)) { throw 'Authored Config directory is absent.' }
+    $records = [Collections.Generic.List[object]]::new()
+    $directories = [Collections.Generic.Queue[string]]::new(); $directories.Enqueue($configRoot)
+    while ($directories.Count -gt 0) {
+        foreach ($item in Get-ChildItem -LiteralPath $directories.Dequeue() -Force) {
+            Assert-NoReparsePoint $item.FullName
+            $records.Add(@{ path = $item.FullName; kind = $(if ($item.PSIsContainer) { 'directory' } else { 'file' })
+                sha256 = $(if ($item.PSIsContainer) { $null } else { Get-Hash $item.FullName }) })
+            if ($item.PSIsContainer) { $directories.Enqueue($item.FullName) }
+        }
+    }
+    return @($records | Sort-Object { $_.path })
+}
+
+function Assert-ConfigState($Before, $After) {
+    if ($Before.Count -ne $After.Count) { throw 'Native execution changed the authored Config directory/file set.' }
+    for ($index = 0; $index -lt $Before.Count; $index++) {
+        if ($Before[$index].path -ne $After[$index].path -or $Before[$index].kind -ne $After[$index].kind -or $Before[$index].sha256 -ne $After[$index].sha256) {
+            throw 'Native execution changed an authored Config path or file hash.'
+        }
+    }
+}
+
 function Get-SafeArtifact([string] $Path) {
     Require-File $Path
     $reader = [IO.StreamReader]::new($Path, $utf8)
@@ -563,9 +708,13 @@ function Get-SafeArtifact([string] $Path) {
 
 function Get-AutomationEvidence([string] $ReportPath) {
     $report = Read-Json $ReportPath
-    $tests = @($report.tests | Where-Object { $_.fullTestPath -like 'Warhammer.Migration.E01Boundary*' })
-    if ($tests.Count -eq 0) { throw 'Native suite exported zero matching cases.' }
+    $tests = @($report.tests | Where-Object { $_.fullTestPath -is [string] -and $_.fullTestPath.StartsWith('Warhammer.Migration.E01Boundary.', [StringComparison]::Ordinal) })
+    if ($tests.Count -ne 132 -or $report.tests.Count -ne 132 -or $report.succeeded -ne 132) {
+        throw 'Frozen native suite must export exactly 132 matching successful cases and no unrelated tests.'
+    }
+    $names = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     foreach ($test in $tests) {
+        if (-not $names.Add($test.fullTestPath)) { throw 'Native suite exported a duplicate case path.' }
         if ($test.state -ne 'Success') { throw "Native case did not pass: $($test.fullTestPath) ($($test.state))" }
     }
     if ($report.failed -ne 0 -or $report.notRun -ne 0 -or $report.inProcess -ne 0) { throw 'Native report contains failed/incomplete cases.' }
@@ -574,6 +723,9 @@ function Get-AutomationEvidence([string] $ReportPath) {
 
 try {
     if (-not $IsWindows -or -not [Environment]::Is64BitOperatingSystem -or [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture -ne 'X64') { throw 'E01 requires native x64 Windows and PowerShell7.2+.' }
+    if ($CaptureRunId -and ($Phase -notin @('Native', 'Audit') -or $CaptureRunId -ne '20261017T002136Z-8dad7f29' -or $CaptureRunId -eq $RunId)) {
+        throw 'CaptureRunId is permitted only for the reviewed Native/Audit supplement of 20261017T002136Z-8dad7f29 in a different fresh run.'
+    }
     foreach ($path in @($projectRoot, $coreRoot, $arcadeRoot, $EngineRoot, $runRoot, $runtimeRoot, $fixtureRoot)) {
         Assert-NoReparsePoint $path
         if ($path -match '["\r\n%!^&|<>]') { throw 'Bounded Windows proof paths cannot contain shell metacharacters.' }
@@ -598,19 +750,32 @@ try {
         Assert-Candidate $preflight.candidate
         if ($EngineRoot -ne $preflight.toolchain.engineRoot -or (Get-Hash $selectedPython) -ne $preflight.toolchain.selectedPythonSha256 -or
             (Get-Hash $uvPath) -ne $preflight.toolchain.uvSha256) { throw 'Selected tool paths/bytes changed after Preflight.' }
-        $predecessors = @{ PrepareRuntime = 'preflight'; Capture = 'prepareruntime'; Native = 'capture'; Audit = 'native' }
+        if ($CaptureRunId -and (Test-Path -LiteralPath (Join-Path $runRoot 'capture'))) { throw 'Native/Audit supplement must not contain a copied or newly executed Capture phase.' }
+        $predecessors = @{ PrepareRuntime = 'preflight'; Capture = 'prepareruntime'; Native = $(if ($CaptureRunId) { 'prepareruntime' } else { 'capture' }); Audit = 'native' }
         $previous = Read-Json (Join-Path $runRoot ($predecessors[$Phase] + '\result.json'))
-        $expectedStatuses = @{ PrepareRuntime = 'SOURCE_INVENTORY_PASS'; Capture = 'INSTALLED_RUNTIME_PASS'; Native = 'LOCAL_HTTP_BOUNDARY_PASS'; Audit = 'NATIVE_FIXTURE_PASS' }
+        $expectedStatuses = @{ PrepareRuntime = 'SOURCE_INVENTORY_PASS'; Capture = 'INSTALLED_RUNTIME_PASS'; Native = $(if ($CaptureRunId) { 'INSTALLED_RUNTIME_PASS' } else { 'LOCAL_HTTP_BOUNDARY_PASS' }); Audit = 'NATIVE_FIXTURE_PASS' }
         if ($previous.status -ne $expectedStatuses[$Phase] -or $previous.runId -ne $RunId) { throw 'Explicit predecessor phase did not pass for this run.' }
         $phaseResult.predecessor = @{ path = Join-Path $runRoot ($predecessors[$Phase] + '\result.json'); sha256 = Get-Hash (Join-Path $runRoot ($predecessors[$Phase] + '\result.json')) }
+        if ($CaptureRunId) { $linkedCapture = Get-LinkedCapture }
         if ($Phase -eq 'Audit') {
             Assert-Candidate $previous.candidate
-            $capture = Read-Json (Join-Path $runRoot 'capture\result.json'); Assert-Candidate $capture.candidate
+            if ($CaptureRunId) {
+                if (-not $previous.ContainsKey('captureSupplement')) { throw 'Native predecessor did not use the same explicit Capture supplement.' }
+                foreach ($key in @('captureRunId', 'capturePath', 'captureSha256', 'wireIndexSha256', 'runtimeProvenanceSha256', 'runtimeTreeSha256')) {
+                    if ($previous.captureSupplement[$key] -ne $phaseResult.captureSupplement[$key]) { throw 'Native/Audit Capture supplement linkage differs.' }
+                }
+                if ($previous.captureSupplement.currentPrepareRuntime.path -ne $phaseResult.captureSupplement.currentPrepareRuntime.path -or
+                    $previous.captureSupplement.currentPrepareRuntime.sha256 -ne $phaseResult.captureSupplement.currentPrepareRuntime.sha256) { throw 'Native/Audit prepared-runtime linkage differs.' }
+            } else {
+                if ($previous.ContainsKey('captureSupplement')) { throw 'Audit must explicitly repeat Native CaptureRunId; no silent fallback.' }
+                $capture = Read-Json (Join-Path $runRoot 'capture\result.json'); Assert-Candidate $capture.candidate
+            }
         }
     }
     $before = Get-SiblingState 'before'
     $phaseResult.siblingsBefore = $before
     Assert-SelectedCore $before
+    if ($null -ne $linkedCapture) { Assert-SameSiblings $linkedCapture.siblingsBefore $before }
     $phaseResult.source = Get-SourceEvidence
     if ($Phase -eq 'Preflight') {
         $phaseResult.candidate = Get-Candidate @($PSCommandPath, $packetPath, $sourceManifestPath)
@@ -691,17 +856,19 @@ try {
         $phaseResult.status = 'LOCAL_HTTP_BOUNDARY_PASS'
     } elseif ($Phase -eq 'Native') {
         Assert-Runtime
-        Assert-Candidate $previous.candidate
+        if (-not $CaptureRunId) { Assert-Candidate $previous.candidate }
         $phaseResult.toolchain = Get-Toolchain
         foreach ($key in @('engineVersionSha256', 'compilerSha256', 'selectedPythonSha256', 'uvSha256')) {
             if ($phaseResult.toolchain[$key] -ne $preflight.toolchain[$key]) { throw 'Native toolchain bytes changed after Preflight.' }
         }
         $phaseResult.ubtSettingsBefore = Get-UBTSettings
+        $phaseResult.configBefore = Get-ConfigState
         $nativePaths = @('Source/WarhammerClient/Private/Migration/CoreBoundaryEvidence.h',
             'Source/WarhammerClient/Private/Migration/CoreBoundaryEvidence.cpp',
             'Source/WarhammerClient/Private/Tests/CoreBoundaryEvidenceTests.cpp', 'Source/WarhammerClient/WarhammerClient.Build.cs',
             'Source/WarhammerClient.Target.cs', 'Source/WarhammerClientEditor.Target.cs', 'WarhammerClient.uproject')
-        $phaseResult.candidate = Get-Candidate (@($nativePaths | ForEach-Object { Join-Path $projectRoot $_ }) + @($PSCommandPath, $sourceManifestPath, $packetPath))
+        $configPaths = @($phaseResult.configBefore | Where-Object { $_.kind -eq 'file' -and [IO.Path]::GetExtension($_.path) -eq '.ini' } | ForEach-Object { $_.path })
+        $phaseResult.candidate = Get-Candidate (@($nativePaths | ForEach-Object { Join-Path $projectRoot $_ }) + @($PSCommandPath, $sourceManifestPath, $packetPath) + $configPaths)
         $wireIndex = Join-Path $fixtureRoot 'wire\index.json'
         $index = Read-Json $wireIndex
         if ($index.format_version -ne 1 -or $index.cases.Count -eq 0) { throw 'Reviewed nonempty wire fixture index is required.' }
@@ -724,22 +891,29 @@ try {
         $automationRoot = Join-Path $runRoot 'automation'
         $userRoot = New-OwnedDirectory (Join-Path $runRoot 'ue-user') $runRoot
         $ddcRoot = New-OwnedDirectory (Join-Path $runRoot 'ddc') $runRoot
-        $null = Invoke-OwnedProcess 'native-automation' $editor @($project, '-unattended', '-nop4', '-NullRHI', '-nosplash',
+        $null = Invoke-OwnedProcess 'native-automation' $editor @($project, '-unattended', '-nop4', '-NullRHI', '-nosplash', '-nowrite',
             '-ExecCmds=Automation RunTests Warhammer.Migration.E01Boundary', '-TestExit=Automation Test Queue Empty',
-            "-ReportExportPath=$automationRoot", "-log=$(Join-Path $runRoot 'native-automation.log')", "-E01FixtureRoot=$fixtureRoot",
+            "-ReportExportPath=$automationRoot", "-ABSLOG=$(Join-Path $runRoot 'native-automation.log')", "-E01FixtureRoot=$fixtureRoot",
             "-UserDir=$userRoot", '-DDC=(EnginePak=InstalledEnginePak,Local)', '-DDC-NoDefaultGraph', "-LocalDataCachePath=$ddcRoot") $runRoot
         $phaseResult.automation = Get-AutomationEvidence (Join-Path $automationRoot 'index.json')
         $phaseResult.nativeArtifacts = @((Get-SafeArtifact $buildLog), (Get-SafeArtifact (Join-Path $runRoot 'native-automation.log')),
             (Get-SafeArtifact (Join-Path $automationRoot 'index.json')))
         $phaseResult.ubtSettingsAfter = Get-UBTSettings
         Assert-UBTSettings $phaseResult.ubtSettingsBefore $phaseResult.ubtSettingsAfter
+        $phaseResult.configAfter = Get-ConfigState
+        Assert-ConfigState $phaseResult.configBefore $phaseResult.configAfter
         foreach ($file in $phaseResult.fixtureFiles) { if ((Get-Hash $file.path) -ne $file.sha256) { throw 'Native fixture changed during execution.' } }
         Assert-Candidate $phaseResult.candidate
         $phaseResult.status = 'NATIVE_FIXTURE_PASS'
     } else {
         Assert-Runtime
+        $phaseResult.configBefore = Get-ConfigState
+        Assert-ConfigState $previous.configAfter $phaseResult.configBefore
         foreach ($file in $previous.fixtureFiles) { if ((Get-Hash $file.path) -ne $file.sha256) { throw 'Accepted native fixture changed before audit.' } }
-        $null = Invoke-Harness 'audit' $runtimePython 'python-audit' (Join-Path $runRoot 'capture\python-capture')
+        $auditInput = if ($CaptureRunId) { Join-Path $runParent "$CaptureRunId\capture\python-capture" } else { Join-Path $runRoot 'capture\python-capture' }
+        $null = Invoke-Harness 'audit' $runtimePython 'python-audit' $auditInput
+        $phaseResult.configAfter = Get-ConfigState
+        Assert-ConfigState $phaseResult.configBefore $phaseResult.configAfter
         $phaseResult.status = 'EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT'
     }
     $after = Get-SiblingState 'after'
@@ -749,6 +923,11 @@ try {
     if ($Phase -ne 'Preflight') {
         Assert-SameSiblings $preflight.siblingsBefore $before
         Assert-Candidate $preflight.candidate
+    }
+    if ($null -ne $linkedCapture) {
+        $null = Get-LinkedCapture
+        if ($phaseResult.runtime.provenanceSha256 -ne $phaseResult.captureSupplement.runtimeProvenanceSha256 -or
+            $phaseResult.runtime.runtimeTreeSha256 -ne $phaseResult.captureSupplement.runtimeTreeSha256) { throw 'Verified current runtime differs from the reused Capture.' }
     }
     $phaseResult.redaction.status = 'PASS'
 } catch {
@@ -763,6 +942,10 @@ try {
         if ($phaseResult.Contains('ubtSettingsBefore')) {
             try { $phaseResult.ubtSettingsAfterFailure = Get-UBTSettings; Assert-UBTSettings $phaseResult.ubtSettingsBefore $phaseResult.ubtSettingsAfterFailure }
             catch { $phaseResult.ubtSettingsFailure = 'Global UBT guard changed or could not be inspected.' }
+        }
+        if ($phaseResult.Contains('configBefore')) {
+            try { $phaseResult.configAfterFailure = Get-ConfigState; Assert-ConfigState $phaseResult.configBefore $phaseResult.configAfterFailure }
+            catch { $phaseResult.configFailure = 'Authored Config contents or directory/file set changed or could not be inspected.' }
         }
     }
 } finally {

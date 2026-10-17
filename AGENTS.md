@@ -32,10 +32,14 @@ case-colliding keys; RISK19 must be resolved before production adoption. Keep
 arbitrary submitted movement order intact. The fixture-only uniform-translation
 recipe chooses leading-first paths from the selected Core's published examples;
 that construction is not a client legality test or a general reorder policy.
-The latest capture passed 38 Python tests and 11 boundary checks but timed out
+The prior 30-second capture passed 38 Python tests and 11 boundary checks but timed out
 on a normal-move invalid-geometry command. EXT09 / Core #590 records the latency
-gap. Preserve its unknown outcome and failed 30-second result. A larger diagnostic
-budget is awaiting the owner's RQ18 disposition; do not change it silently.
+gap. Preserve its unknown outcome, result JSON and NOT_ACCEPTED audit. OWN14
+(2026-10-16) explicitly approves a separate E01-SLOW120 diagnostic with a
+120-second total request budget. Follow packet revision 3; freeze/review the
+changed candidate and use a fresh run. Keep connect at three seconds, managed
+readiness at 30 seconds and process limits at 30 minutes. A slow-host success
+does not pass the old 30-second budget or establish production responsiveness.
 Native/Audit and public wire promotion remain gated on successful predecessors
 and independent privacy review. Refuse any bytecode cache in the owned runtime.
 
@@ -144,6 +148,41 @@ Before accepting a code milestone, freeze the candidate and obtain separate code
 review and acceptance audit against plan criteria. Report actual session isolation
 and evidence limits; reviewer configuration files alone prove neither invocation
 nor independence. Resolve actionable findings before completion.
+
+## Standing three-role review protocol
+
+OWN15 (2026-10-17 UTC, owner's progress chat) requires the legacy review discipline
+for this migration. Keep three distinct roles: an implementer who owns changes
+and remediation, an independent code reviewer, and a different independent
+requirements/acceptance auditor. Neither reviewer may have authored the candidate,
+edit implementation, merge, or substitute the other role's verdict.
+
+For each initial assessment, launch a new context with no resume, fork or inherited
+implementation transcript. Prefer fresh `codex exec` sessions with enforced
+read-only sandbox and approval policy `never`; request
+`memories.use_memories=false`. Record session/invocation IDs, CLI/model/settings,
+actual runtime permission evidence, and requested versus verified memory behavior.
+An equivalent mechanism must demonstrate the same isolation. If a property is
+unavailable, record BLOCKED or UNVERIFIED rather than asserting equivalence.
+
+Supply original owner requirements, necessary repository instructions and normative
+plan criteria, exact base/head plus dirty-file hashes, dependency/fixture identities,
+relevant source/callers/tests and trustworthy raw execution artifacts. Do not prime
+an initial assessment with author working notes/chats or other reviewers' verdicts.
+Use clean normative extracts when a planning document mixes criteria with review
+history; record their provenance. A contaminated approval is invalid and needs a
+fresh assessment. Ordinary diagnostic/helper reviews remain useful but do not
+silently satisfy this final gate.
+
+Save separate PASS, CHANGES_REQUESTED or BLOCKED reports with exact candidate,
+role/isolation evidence, checks run versus results inspected, limitations and
+actionable findings. The auditor maps criteria to evidence. The implementer fixes
+findings, re-freezes and obtains fresh affected reviews; material changes invalidate
+their affected approvals. Final acceptance, publication and merge of the affected
+candidate need both current reports and no unresolved acceptance blockers. Preserve
+all failures/unknowns, including the original 30-second failure and separate SLOW120
+diagnostic. Historical records retain their actual evidence and limitations; do not
+retroactively claim enforced read-only/no-memory isolation from agent names or config.
 
 ## Collaboration and GitHub
 

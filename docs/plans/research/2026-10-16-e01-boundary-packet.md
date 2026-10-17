@@ -1,10 +1,99 @@
 # E01-WIN-BOUNDARY: selected Core boundary proof packet
 
-Date: 2026-10-16. Packet revision: **3; E01-SLOW120 authorized, execution pending**.
+Date: 2026-10-16. Packet revision: **4; E01-SLOW120 native evidence supplement**.
 This packet refines Section 0 RQ03/RQ06/RQ08/RQ15/RQ17/RQ20/RQ23 of the
 [canonical plan](../unreal-migration-plan.md). It credits completed BOOT01 and
 defines the next bounded Windows proof. It does not claim full E01, M01,
 G-RESEARCH, G-IMPLEMENT, rendering, packaging or cross-platform acceptance.
+
+## Revision 4: native-only supplement linked to immutable Capture
+
+OWN14 covers completing this same diagnostic. Run
+`20261017T002136Z-8dad7f29` passed Capture (40 Python tests and all14 boundary
+cases). Native then built successfully and actually exported132 successful
+Automation cases, with zero failed/incomplete cases and child exits0. Its
+wrapper result remains **FAIL** because `-LOG=<absolute>` did not create the
+expected main log. Do not rewrite that result or infer direct DDC log evidence.
+
+The separately reviewed correction permits a **fresh Native/Audit supplement**
+with its own RunId, Preflight and verified-runtime preparation, and optional
+`-CaptureRunId 20261017T002136Z-8dad7f29` on Native and Audit only. This mode reads
+the successful old Capture as immutable evidence. It creates no replacement
+Capture result, launches no Core host and submits no game commands. It is not a
+general resume mechanism or a reuse of the stopped mutable session. Retain the
+normal full phase chain when this explicit parameter is absent.
+
+The link is restricted to these exact inputs:
+
+| Input | Required SHA256 |
+| --- | --- |
+| Successful Capture `capture/result.json` | `137CEAAA5A3B85F3A49193525EEB198AEDAF28A113B7F760DA66081D5983E699` |
+| Python Capture `report.json` | `C99109764C6708889F2DC365696D03A9FD987465DD6E5D71F108A794223530A0` |
+| Independently approved original-byte wire index | `E1658B116E6ED53F84CEE84B3D8A5C1ADFD3DED3FA225DB61D80D21D9953DF0A` |
+| Historical revision3 packet recorded by Capture | `D540CF96F8513833C4C708A7104F520554E8244B4502ED7A49D5F695EBE90C76` |
+| Historical wrapper recorded by Capture | `F3B2A938A1F314EE5FF6D39B77FADB73CB3D5E1D5E92A562957305759ACBA2DC` |
+
+Validate the linked result/status/run identity,40-unit and14-case PASS counts,
+child-report hashes, reviewed index and bodies, exact clean siblings and installed
+runtime provenance/tree. The linked candidate contains exactly the historical
+wrapper/packet plus the unchanged harness, tests and source manifest. Only the
+two explicitly historical wrapper/packet hashes may differ from current files;
+the other three must still match. Freeze and independently review the current
+packet/wrapper before the new Preflight. Native freezes current C++/descriptor/
+target/fixture bytes and rechecks all ordinary toolchain, runtime, ownership,
+positive-count and post-execution guards. Audit revalidates the same explicit
+Capture link and writes its new report only beneath the new run. It must not
+silently fall back to a different input or overwrite an earlier report.
+
+Use `-ABSLOG=<new-run>/native-automation.log` and `-nowrite` for Native. In the
+installed UE5.8.3/CL58210709 source, `GenericPlatformOutputDevices.cpp:75–129`
+concatenates `LOG=` to ProjectLogDir but clears that prefix for `ABSLOG=`;
+`ConfigCacheIni.cpp:1320–1332,2682` suppresses configuration saves for `nowrite`.
+Raw source SHA256 respectively:
+`AB8D8B6B5145A76AD8420BA6744A4395001E3F281E795162FC7B08345358D2DF`
+and `7F4871539400DB4CF9F60CD08D8B3515E3F077D75D255305A2700799FD622DBF`.
+These flags do not confine all settings reads or build/cache writes. Inspect the
+actual new main log for the owned Local DDC path and reject fallback. Keep all
+existing process/body/output bounds and nonempty132-case expectations.
+
+The failed Native attempt created previously absent
+`C:/Users/Rabid/AppData/Local/UnrealEngine/5.8/Saved/Config/WindowsEditor/EditorSettings.ini`,
+SHA256 `B7E47645C8169E0C05AB6AD43F99F4529D33CD12EF019432FA56BD9F994B464E`.
+It records the recent project and empty DDC overrides. Preserve it; do not delete
+it to hide the side effect. `EditorEngine.cpp:5861–5893` updates recent projects
+and invokes PostEditChange; source SHA256
+`89BD1C17FA9DA8463F0039BE8F3E483238C025E726C4274221D6FF51DCD6EF6A`.
+The other five observed editor configurations were unchanged. Before the new
+Native run, freeze all six current existence/hash observations, including this
+new file, and require them unchanged afterward. Preserve existing UBT settings
+and verify the ordinary before/after guard too. No global setting edit is an
+authorized repair.
+
+The same first Editor startup also added default Android file-server settings
+with a generated credential to `Config/DefaultEngine.ini` and created
+`Config/DefaultInput.ini`. Their original bytes are quarantined only under the
+failed run's ignored `native-generated-config/`; exclude their contents from
+public evidence and commits. After verifying those copies, restore only the
+attempt's changes: tracked DefaultEngine from HEAD and the previously absent
+DefaultInput to absence. Record that recovery without removing failure evidence.
+For the supplement, freeze every authored Config INI and its exact file set,
+then require all bytes and membership unchanged after execution. `-nowrite`
+must be checked in actual execution, rather than assumed from source support.
+
+Example from the repository root, after freezing/reviewing the supplement:
+
+```powershell
+$taskNativeRunId = (Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssZ') + '-' + [guid]::NewGuid().ToString('N').Substring(0, 8)
+& ./scripts/migration/Invoke-E01BoundaryProof.ps1 -Phase Preflight -RunId $taskNativeRunId
+& ./scripts/migration/Invoke-E01BoundaryProof.ps1 -Phase PrepareRuntime -RunId $taskNativeRunId
+& ./scripts/migration/Invoke-E01BoundaryProof.ps1 -Phase Native -RunId $taskNativeRunId -CaptureRunId 20261017T002136Z-8dad7f29
+& ./scripts/migration/Invoke-E01BoundaryProof.ps1 -Phase Audit -RunId $taskNativeRunId -CaptureRunId 20261017T002136Z-8dad7f29
+```
+
+Record actual command/status/counts and explicit linked provenance in the new
+result/audit. Prior Native FAIL, original30-second FAIL/UNKNOWN and first
+SLOW120 attempt remain unchanged. This supplement does not grant production
+transport, rendering, packaging, Linux or broader implementation acceptance.
 
 ## Revision 3: separately labelled 120-second diagnostic
 
@@ -260,7 +349,7 @@ failure; never fall back to a mismatched installed Core or private source import
 
 ```text
 <UE>/Engine/Build/BatchFiles/Build.bat WarhammerClientEditor Win64 Development -Project=<Unreal>/WarhammerClient.uproject -WaitMutex -NoUBA -UBARootDir=<run>/uba -Log=<run>/native-build.log
-<UE>/Engine/Binaries/Win64/UnrealEditor-Cmd.exe <Unreal>/WarhammerClient.uproject -unattended -nop4 -NullRHI -nosplash -ExecCmds="Automation RunTests Warhammer.Migration.E01Boundary" -TestExit="Automation Test Queue Empty" -ReportExportPath=<run>/automation -log=<run>/native-automation.log -UserDir=<run>/ue-user -DDC=(EnginePak=InstalledEnginePak,Local) -DDC-NoDefaultGraph -LocalDataCachePath=<run>/ddc
+<UE>/Engine/Binaries/Win64/UnrealEditor-Cmd.exe <Unreal>/WarhammerClient.uproject -unattended -nop4 -NullRHI -nosplash -ExecCmds="Automation RunTests Warhammer.Migration.E01Boundary" -TestExit="Automation Test Queue Empty" -ReportExportPath=<run>/automation -ABSLOG=<run>/native-automation.log -nowrite -UserDir=<run>/ue-user -DDC=(EnginePak=InstalledEnginePak,Local) -DDC-NoDefaultGraph -LocalDataCachePath=<run>/ddc
 ```
 
 The installed UE5.8 AutomationCommandline.cpp accepts `RunTests`/`RunTest`

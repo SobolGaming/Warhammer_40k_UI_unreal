@@ -1,12 +1,12 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-16
-**Revision:** 5 — imported plan, BOOT01 publication and bounded E01 latency blocker.
+**Revision:** 6 — E01-SLOW120 Capture passed; native continuation in progress; prior failure preserved.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
-**Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of this work and continuation through the migration plan.** BOOT01 is complete; prepare the next bounded E01 file/runtime/output/pass-fail packet before execution. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
+**Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of this work and continuation through the migration plan.** BOOT01 is complete; OWN14 now approves the separately labelled 120-second diagnostic under reviewed packet revision 3. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
 **Canonical destination:** `Warhammer_40k_UI_unreal/docs/plans/unreal-migration-plan.md` (this file).
-**Review status:** BOOT01 probe/final Windows Editor builds, UHT and both IDE generators passed with separate source review and acceptance evidence. [E01 execution](evidence/2026-10-16-e01-boundary.md) records the verified isolated Windows Core runtime, 38 passing Python tests and the final capture's 11 PASS / 2 FAIL / 1 BLOCKED checks. The invalid-geometry command exceeded the 30-second request budget; its completion is unknown. [Independent source review](research/2026-10-16-e01-boundary-review.md) passed, but [acceptance audit](research/2026-10-16-e01-boundary-acceptance-audit.md) does not accept E01. Native/Audit phases and wire promotion did not run. GUI, rendering, packaging and Linux remain unverified; BOOT01 is not full M02 acceptance.
+**Review status:** BOOT01 Windows builds/UHT/IDE generators passed. [E01 execution](evidence/2026-10-16-e01-boundary.md) records the verified isolated Core runtime and the original 30-second failure, whose missing receipt remains unknown and whose [NOT_ACCEPTED audit](research/2026-10-16-e01-boundary-acceptance-audit.md) is unchanged. The separate E01-SLOW120 capture passed 40 Python tests and all 14 boundary checks, including recorded-invalid and accepted one-inch movement for five models. Independent privacy review approved 30 original-byte non-admin wire fixtures, now versioned. Native's first precheck failed on an absent OneDrive configuration path. After repair, the fresh run built successfully and exported132 successful Automation cases, but the phase remained FAIL because the requested main log was absent. Editor startup also created global settings and generated project Config entries; private copies preserve those outputs, and only the attempt's generated project changes were restored. [Packet revision4](research/2026-10-16-e01-boundary-packet.md) defines a fresh native-only supplement with ABSLOG, disabled INI writes and exact Config guards, linked to immutable successful Capture. OWN15 requires fresh blind final code/requirements reviews before acceptance/publication. [Renewed diagnostic acceptance](research/2026-10-16-e01-slow120-acceptance-audit.md) remains pending. GUI, UE HTTP, rendering, packaging and Linux remain unverified; full E01/M01/M02 acceptance is not implied.
 
 ### Repository routes and provenance
 
@@ -48,7 +48,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: resolve the bounded E01 latency/budget gate under OWN13.** [Plan/BOOT01 PR1](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/1) merged as `0467ee63fe6d4c775f429afae2233d7292787c31` after access was restored. The reviewed capture reached normal movement and proved actual inventory-error fidelity, but timed out on the invalid-geometry command. EXT09 / RQ18 require a disposition before a separately labelled slow-host diagnostic; the 30-second result remains failed. Native execution needs a successful capture and reviewed wire promotion. Do not begin broad implementation milestones. Retaining the separate Python rules engine remains fixed scope.
+**Current assignment: finish the E01-SLOW120 native evidence supplement under OWN14 and renewed OWN15 review gates.** Capture002136 passed40 Python tests and14 boundary cases. Native built and exported132 Success results but its phase failed to gather the missing main log; preserve that failure and its observed settings side effects. Follow [packet revision4](research/2026-10-16-e01-boundary-packet.md) in a fresh Native/Audit run explicitly linked to the immutable successful Capture, with no repeated Core commands. Then obtain fresh blind read-only code-quality and requirements audits before final acceptance/publication. Original30-second FAIL/UNKNOWN and full E01/production/render/package/Linux gaps remain unchanged. Do not begin broad implementation.
 
 ### 0.1 Fixed scope and authority
 
@@ -61,6 +61,40 @@ Client-side connection handling, DTO parsing, presentation, input, configuration
 Genuine 3D from the first playable slice, C++-first client behavior, preservation of intended existing capabilities, and the bounded tabletop-presentation reuse demonstration remain requirements. Do not ask again whether these or Python-core retention are desired. Your next owner questions concern unresolved product choices, not settled scope.
 
 ### 0.2 Research procedure and evidence rules
+
+**Standing review amendment, OWN15 (2026-10-17 UTC):** the owner requested the
+same three-role discipline as the legacy UI: implementer, independent code-quality
+reviewer, and a different independent requirements/acceptance auditor. This
+amendment changes review gates, not game scope, budgets or prior approvals.
+
+Freeze exact base/head, dirty-file content hashes, dependency/fixture identities
+and raw execution evidence. Each reviewer starts a new context with no resume,
+fork or inherited implementation transcript, enforced read-only permissions,
+approval policy never, and requested `memories.use_memories=false`. Prefer fresh
+`codex exec` invocations. Record session IDs, actual model/settings/permissions and
+requested versus independently established memory behavior; unavailable properties
+remain BLOCKED/UNVERIFIED, never silently equivalent. The current
+[official configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
+documents those controls; runtime invocation evidence is still required.
+
+Initial review packets contain original requirements, necessary AGENTS/normative
+plan criteria, frozen source/callers/tests and trustworthy raw results. They exclude
+author notes/chats and other reviewers' conclusions. Use provenance-bound clean
+criteria extracts where a plan mixes requirements with historical verdicts.
+Contaminated approvals are invalid. Reviewers do not author fixes, merge, or approve
+one another's work. Code review covers correctness, regressions, concurrency,
+security and coverage; the separate auditor maps every acceptance criterion to
+evidence and remaining limits. Both save PASS/CHANGES_REQUESTED/BLOCKED reports.
+
+The implementer remediates findings, re-freezes and requests fresh affected reviews.
+Material changes invalidate affected conclusions. Accept/publish/merge the affected
+final candidate only with both current reports and no unresolved acceptance
+blockers. Configuration files and sending instructions are not proof of invocation.
+Prior BOOT01/E01 reviews, F01/F02 repairs and failed/unknown results remain recorded
+as performed. Some later helper invocations inherited context or did not attest
+enforced read-only/no-memory settings; the preliminary SLOW120 audit also read prior
+verdicts. Those records are useful diagnostics, but do not satisfy this renewed
+blind final gate. Fresh sessions must close that gap for the final candidate.
 
 **Authority amendments, 2026-10-16:** OWN11 permitted the completed BOOT01 packet, and OWN12 its focused Core issue. OWN13 additionally authorizes publication/merge of the audited work and continuation through the plan's next bounded gate. The research-only procedure below still applies outside a recorded execution packet. Preserve siblings; do not install/upgrade tools or broaden scope silently.
 
@@ -198,7 +232,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ08 — First real-core playable scenario and meaningful action
 
-**2026-10-16 finding:** [Source setup/+1-inch movement recipe](research/2026-10-16-contract-integration.md) is characterized at44.1; [target adaptation](research/2026-10-16-contract-44-3-33-adaptation.md) requires ordered/current-inventory witnesses at44.3.33. E01's corrected canonical reserve recipe completed deployment/redeploy and both Scout moves, then reached normal-move request000019/revision19. Three inventory negatives returned actual generic HTTP422 and preserved revision/positions/history. The complete 1,000-inch invalid-geometry candidate timed out under the 30-second budget; its late server status log does not establish a received outcome or committed flags. No subsequent valid one-inch move was submitted. The [execution journal](evidence/2026-10-16-e01-boundary.md) preserves earlier deployment failures and the final timeout input. Accepted/recorded-invalid normal-move command/principal/pose proof remains blocked by EXT09 for E01/E03B. Shooting exists in baseline source; Charge/Fight smoke reachability is not claimed.
+**2026-10-16 finding:** [Source setup/+1-inch movement recipe](research/2026-10-16-contract-integration.md) and [44.3.33 adaptation](research/2026-10-16-contract-44-3-33-adaptation.md) now have actual E01-SLOW120 Capture evidence. Canonical reserves/deployment/redeploy/Scout actions reached normal movement. Three inventory negatives preserved revision/poses/history and returned actual generic HTTP422. The complete invalid-distance command returned `accepted:false, committed:true, outcome_code:proposal_invalid` at revision 20 with a fresh request; the corrected one-inch move was accepted at revision 21, and all five models reached their requested XYZ/facing endpoints. The [journal](evidence/2026-10-16-e01-boundary.md) preserves the earlier 30-second timeout with unknown receipt separately. Native/independent acceptance is pending; a rendered/packaged Unreal action remains E03B work. Shooting exists in baseline source; Charge/Fight smoke reachability is not claimed.
 
 **Status:** BLOCKED (2026-10-16). **Resolve with:** canonical fixtures, supported public setup and existing check evidence. **Blocks:** M03; E01/E03.
 
@@ -324,7 +358,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ17 — External runtime artifacts and reproducible client packaging
 
-**2026-10-16 finding:** Initial development consumption is source/package install plus exact checkout reference script, with selected build/source identities and [launch recipe](research/2026-10-16-contract-44-3-33-adaptation.md). Actual package/native loading and managed/attach proof require E01/E03 execution. Portable artifacts/native closure are later EXT02; Linux execution is deferred EXT04. No installed package or distributable runtime was produced.
+**2026-10-16 finding:** Initial development consumption is source/package install plus exact checkout reference script, with selected identities and [launch recipe](research/2026-10-16-contract-44-3-33-adaptation.md). E01 verified the isolated locked non-editable Windows package, all 3,116 runtime resources and eight dependency imports. The SLOW120 Capture passed Python managed/attach/owned-stop/restart-loss checks. Actual Unreal supervision/transport and portable runtime closure remain E03/EXT02 work; Linux remains deferred EXT04. The installed development environment is not a distributable runtime.
 
 **Status:** BLOCKED (2026-10-16). **Resolve with:** owner-supplied delivery contracts/artifacts, build metadata and platform documentation. **Blocks:** M03/M07; E03; depends on RQ04/RQ05.
 
@@ -338,7 +372,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 #### RQ18 — Performance baseline, workloads and acceptance budgets
 
-**2026-10-16 finding:** [Workstation/measurement design](research/2026-10-16-toolchain-and-validation.md), Section9 W0/W1/W2 and proposed budgets are explicit. E01 now has a verified exact Core runtime, while the legacy installed environment remains mismatched. The canonical invalid-geometry command exceeded E01's 30-second HTTP budget; [Core issue #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590) records the observed development blocker and source investigation pointers without claiming a measured bottleneck or Core SLA violation. A separately labelled 120-second diagnostic versus retaining 30 seconds pending Core investigation is an unanswered owner budget choice. The failed 30-second result stays failed either way. No W0/W1/W2, warm-up/statistical performance baseline or active RHI proof exists; Linux is deferred. Targets remain proposed engineering budgets.
+**2026-10-16 finding:** [Workstation/measurement design](research/2026-10-16-toolchain-and-validation.md), Section9 W0/W1/W2 and proposed budgets are explicit. E01 verified the exact runtime; the legacy installed environment remains mismatched. The original invalid-geometry command exceeded 30 seconds and its receipt remains unknown. OWN14's separate SLOW120 Capture passed all 14 checks, with 139 completed HTTP requests and maximum 38.0938 seconds; these aggregates do not profile a specific command or prove a production SLA. [Core issue #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590) now records both results and remains open. Production responsiveness and the 30-second target remain unresolved. No W0/W1/W2 statistical baseline or active RHI proof exists; Linux is deferred.
 
 **Status:** BLOCKED (2026-10-16). **Resolve with:** existing measurement paths, hardware inventory and owner priorities. **Blocks:** performance claims and final test design; M02/M03 instrumentation, M07 acceptance; E05.
 
@@ -470,7 +504,7 @@ The following is the historical research assignment. OWN11/OWN13 and Section0.8 
 
 ### 0.8 Current execution record — 2026-10-16
 
-This is the current authority and evidence record. It supersedes historical present-tense assumptions elsewhere; the RQ register remains the single status authority. Research is **RESEARCH_INCOMPLETE**. **BOOT01 Windows CLI bootstrap passed** under OWN11. E01 is unaccepted and blocked on the recorded latency/budget disposition under OWN13: [actual runtime checks and failed attempts](evidence/2026-10-16-e01-boundary.md) remain distinct from acceptance. E02–E08 have not run; the [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md) is conditional planning only. BOOT01 does not close full M02, rendering, packaging, Core integration or Linux acceptance.
+This is the current authority and evidence record. It supersedes historical present-tense assumptions elsewhere; the RQ register remains the single status authority. Research is **RESEARCH_INCOMPLETE**. **BOOT01 Windows CLI bootstrap passed** under OWN11. E01 remains unaccepted; OWN14 authorizes the separate E01-SLOW120 diagnostic under the revised reviewed packet: [actual runtime checks and failed attempts](evidence/2026-10-16-e01-boundary.md) remain distinct from acceptance. E02–E08 have not run; the [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md) is conditional planning only. BOOT01 does not close full M02, rendering, packaging, Core integration or Linux acceptance.
 
 **Owner decisions recorded in this chat on 2026-10-16:**
 
@@ -489,6 +523,8 @@ This is the current authority and evidence record. It supersedes historical pres
 | OWN11 | **BOOT01 approved** | Minimal scaffold, Linux-capable targets, Windows Editor probe/final compile and VS Code/VS2022 generation, documented cache/empty default UBT file side effects. No GUI launch/install/broad feature work; Linux stays UNTESTED |
 | OWN12 | **File a Core issue using gh for the engine errors** | One focused diagnostic-fidelity ticket in `SobolGaming/Warhammer_40k_AI`; source checkout stays read-only. That request covered no other publication/Core fix; OWN13 later adds the Unreal PR/merge scope |
 | OWN13 | **Commit, push, open and merge the PR, then continue the migration plan** | Publish the audited plan/BOOT01 work with `gh`, preserve required checks and advance the next bounded gate. Missing remote/access is an external publication blocker; continue nonblocked identity/fixture/packet preparation. Earlier no-publication wording is superseded for this PR; Core source and broader acceptance boundaries remain |
+| OWN14 | **“Please go ahead with the increased 120 diagnostic”**, 2026-10-16 | After the late-response explanation, authorize a separate E01-SLOW120 run with a 120-second total HTTP request budget and remaining-time-capped reads. Preserve three-second connect, 30-second managed readiness, 30-minute process bounds and prior FAIL/UNKNOWN evidence. Freeze/review before a fresh run; no production-latency acceptance, Core edits or new host authority |
+| OWN15 | **Apply the legacy implementer / independent code reviewer / independent requirements auditor protocol**, owner's progress chat, 2026-10-17 UTC | New unprimed contexts, enforced read-only/approval-never, requested memory suppression with honest runtime limits, frozen candidate and raw evidence, separate findings/remediation/re-freeze/fresh reviews. Update this plan and AGENTS. Existing diagnostic evidence stays intact; affected final acceptance/publication waits for the renewed gate |
 
 The source baseline is Arcade `5088c1c49dcaff29eb59fb64b3063d30214dde73` with supported Core 44.1; the separately selected Unreal target is Core `5f5097...` / 44.3.33. Existing Arcade `.venv` provenance is `4ee7cc...`; none of these identities may be silently substituted. Both sibling source worktrees were clean. The Unreal repository initially had no commits or files besides `.git`. The owner-selected project destination supersedes the old shared-repository nesting.
 
@@ -519,7 +555,7 @@ Supporting evidence:
 | EXT06 | Fine-grained uncommitted-proposal diagnostics over HTTP | Server returns generic `proposal_invalid` / `rule_path_unsupported` code/message and loses detailed in-process reasons. OWN10 accepts actual explicit HTTP errors with fidelity gap noted for initial client work. Filed and read back [Core issue #588](https://github.com/SobolGaming/Warhammer_40k_AI/issues/588) under OWN12; no fabricated legality/private route | Exact-detail improvement tracked externally; initial display policy selected; E01/E03 runtime proof still required |
 | EXT07 | Reachable Unreal GitHub repository and configured credential access | **RESOLVED 2026-10-16:** after owner token update, existing private empty origin was accessible. Main/task branches pushed, [PR1](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/1) created/attached and normally merged as `0467ee63...`; no hosted checks reported. REST Checks permission remains unavailable; never label that CI PASS | Publication blocker closed; [publication evidence](evidence/2026-10-16-bootstrap-publication.md) records limits. E01 continuation can proceed |
 | EXT08 | Exclusive Windows listening in the selected development host | E01 observed two owned instances print post-bind markers on the same occupied port; the second stayed alive beyond 30 seconds. Filed and read back [Core issue #589](https://github.com/SobolGaming/Warhammer_40k_AI/issues/589). Client-side exclusive prelaunch probing can reject an already occupied port; it cannot prevent a different process co-binding after Core starts. Core host owner must provide exclusive live listener behavior and a Windows regression test | Full robust Windows managed-host ownership/security claims remain open. Internal E01 may separately prove the bounded client prelaunch check; no production service acceptance |
-| EXT09 | Canonical development-host command latency versus proof budget | E01 run231112 reached normal movement, but the actor's complete invalid-geometry command exceeded the 30-second total HTTP budget. A late HTTP422 log does not supply the missing body/commit receipt. Filed and read back [Core issue #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590). Core profiling/latency expectations remain separate work; no Core edits are authorized | RQ08/RQ18/E01/E03 remain blocked. Owner must choose a separately labelled 120-second diagnostic or retaining 30 seconds pending Core investigation; neither retroactively passes this run. Native/Audit need their successful predecessor and reviewed fixtures |
+| EXT09 | Canonical development-host command latency versus proof budget | Original run231112 exceeded 30 seconds and its receipt remains unknown. OWN14's separate SLOW120 Capture235710 passed 14/14 checks, including explicit recorded-invalid receipt and accepted five-model one-inch movement; maximum completed HTTP latency38.0938seconds. Updated and read back [Core issue #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590), still OPEN. No measured bottleneck attribution or Core edits | The slow-host protocol path is demonstrated; Native/independent acceptance remains pending. Production responsiveness/RQ18 and any 30-second target stay open; the original failure cannot become PASS. Unreal transport/render/package/E03 claims need their own evidence |
 
 **Next bounded work and uncertainty map:** current source/design packets cover the target delta, selected roles/host/client matrix and CAP/profile/input/test mappings. OWN10 resolves the initial HTTP diagnostic policy; Core issue #588 tracks improved fidelity. OWN11 authorizes BOOT01 only. Broad feature implementation is not available: the following empirical evidence remains unverified unless an explicit execution result below closes it.
 
