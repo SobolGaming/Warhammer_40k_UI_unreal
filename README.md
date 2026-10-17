@@ -2,8 +2,9 @@
 
 This repository develops a C++ first, genuinely 3D Unreal client for the separate
 authoritative Python rules engine. `WarhammerClient.uproject` is the minimal C++
-foundation. The migration plan records bootstrap evidence and remaining gates;
-the shell does not yet contain a playable scene or a Core connection.
+foundation. Source now includes an opt-in synthetic 3D proof scene; its compilation
+and rendered behavior remain unverified. A playable Core-connected client remains
+future migration work. The plan records bootstrap evidence and remaining gates.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -72,7 +73,9 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open. The [E02 packet](docs/plans/research/2026-10-16-e02-world-input-packet.md) is now
 adopted for bounded source authoring; its [authority journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
-records the gates. No E02 build/native/input/render result exists yet.
+records the gates. The bounded geometry/input/world/supervisor source is authored
+and awaits its frozen source/tool/asset review. No E02 build/native/input/render
+result exists yet.
 
 The historical `030835` run retains its missing
 six-path editor-settings comparison as **UNVERIFIED** in its

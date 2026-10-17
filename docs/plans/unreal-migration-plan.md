@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-17 UTC
-**Revision:** 19 — E02 packet/predecessor/OWN13 review recorded for source authoring; executable review and real rendering/input remain future gates.
+**Revision:** 20 — bounded E02 source authored; exact source/tool/asset/plugin-closure freeze and independent pre-execution review are pending.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,17 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 19 changes
+### Revision 20 changes
+
+The bounded E02 geometry, input policy, synthetic world, test declarations and
+supervisor are authored. This records source preparation only. Compilation,
+controls, discovery, rendering, input and all E02 acceptance results remain
+unrun. The next gate is the exact candidate/source/tool/asset/plugin-closure
+freeze and independent source review, followed by separately authorized
+execution. Explicit visible-window approval remains pending. E01 records and
+all original failures/unknowns remain unchanged.
+
+### Revision 19 history — E02 packet adoption
 
 The E02 packet now binds the accepted bounded predecessor and records root's
 OWN13 applicability review for the exact source-authoring scope. Its14 paths,
@@ -134,7 +144,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: author only the adopted bounded E02 source packet.** Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) record predecessor binding, root packet review, OWN13 applicability and named writers. No E02 process has run. Freeze the exact executable candidate and obtain independent source review before controls/build/native execution; obtain explicit visible-window approval before graphical execution. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
+**Current assignment: freeze and independently review the authored bounded E02 source.** Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) record predecessor binding, root packet review, OWN13 applicability and named writers. No E02 process has run. Bind exact source/tool/asset/plugin-closure identities and obtain independent source review before controls/build/native execution; obtain explicit visible-window approval before graphical execution. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
 
 ### 0.1 Fixed scope and authority
 
@@ -799,8 +809,9 @@ The [authority/execution journal](evidence/2026-10-16-e02-world-input.md) record
 root's packet review, predecessor identities, OWN13 applicability,14 authored
 paths,named writers,owned staging/process/cache side effects and fixed pass/fail
 rules. Packet whole-file SHA256 is `7EFF2E47A55000D3012759DEEEACEEF46153024BF1CB713A920363A44A8FB2E3`.
-Source authoring is the only current advance; no E02 control/build/native process
-or result exists. Independent executable review precedes the first process;
+The bounded source is authored; its frozen source/tool/asset/plugin-closure review
+is pending. No E02 control/build/native process or result exists. Independent
+executable review precedes the first process;
 fresh final CODE/REQ assessments follow actual execution/evidence freeze.
 One visible interactive proof-window approval is pending under the desktop rule
 before graphical execution. Hidden controls/build/numeric work can proceed after
@@ -1850,7 +1861,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** author only the adopted E02 packet under Section0.9/root OWN13 applicability. Freeze/review executable code before any control/build/native process; obtain explicit visible-window approval before graphical execution. E01-SLOW120 acceptance/history is unchanged. No E02 result exists.
+**Ready now:** freeze and independently review the authored E02 source under Section 0.9. No control/build/native process may precede that review; graphical execution also requires explicit visible-window approval. E01-SLOW120 acceptance/history is unchanged. No E02 result exists.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 
@@ -1858,7 +1869,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 source characterization and selected44.3.33 adaptation, profile/capability/design checklists, developer Core launch/install recipes, recorded Core issues and BOOT01 scaffold/probe/final builds/generation. Normal `044903` now records 87 Python units in 15.167 seconds, 14 Capture checks, auxiliary privacy/exact-byte promotion, 132 unique native successes, two automated evidence checks and matching settings/DDC/process evidence. Separate pre-execution controls are 135 pure PowerShell checks with 39 stable inputs. Earlier failures, unknowns, settings history and source assessments remain preserved.
 
-**Next concrete step:** implement and checkpoint only the E02 packet's14 allowed authored paths, freeze exact fixture/default/toolchain/source identities, then obtain independent pre-execution source review. Later16 native cases/6 PNGs and final CODE/REQ gates remain unrun. Full E01/M01/M02, research/implementation, production, packaging and Linux remain open.
+**Next concrete step:** bind the actual frozen source, fixture, defaults, toolchain, assets and complete declared plugin closure; obtain independent pre-execution source review and resolve actionable findings before execution. The 16 native cases, six PNGs and final CODE/REQ gates remain unrun. Full E01/M01/M02, research/implementation, production, packaging and Linux remain open.
 
 ## 16. Sources and inspection index
 

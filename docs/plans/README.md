@@ -1,6 +1,6 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 19, is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 20, is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
@@ -44,8 +44,9 @@ records retain their actual isolation limits and do not supply final review role
 
 The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md) is
 adopted for bounded source authoring. Its [authority journal](evidence/2026-10-16-e02-world-input.md)
-records named writers and pre-execution review/visible-window gates. E02 has not
-executed.
+records named writers and pre-execution review/visible-window gates. The bounded
+source is authored; its frozen source/tool/asset/plugin-closure review is pending.
+E02 has not executed.
 
 The [E01 continuation PR](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2)
 was updated and marked ready at `bd801233cc9989e0ae146a3be7b136d26dc73183`.

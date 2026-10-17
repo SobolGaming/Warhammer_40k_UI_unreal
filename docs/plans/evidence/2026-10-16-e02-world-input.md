@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **PACKET_ADOPTED_FOR_SOURCE_AUTHORING; E02 NOT RUN**.
+Status: **SOURCE_AUTHORED_SOURCE_REVIEW_PENDING; E02 NOT RUN**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -23,6 +23,8 @@ not broad feature work or Core changes. Work stays on `codex/e02-world-input-pro
 
 - Root implementer/coordinator owns descriptor/Build.cs deltas, the one supervisor
   wrapper, evidence files, packet/routing, source freeze/review and later execution.
+- `e02_scope_minimality` implements that wrapper within the implementer role;
+  this source author cannot supply independent CODE or REQ approval.
 - `e02_geometry_author` owns E02Geometry.h/.cpp, E02InputPolicy.h/.cpp, the four
   numeric tests and the synthetic JSON fixture; coordinate frozen defaults with
   the world author before executable review.
@@ -60,7 +62,8 @@ prepare concrete source first. No offscreen substitute or human input is claimed
 | Gate | Actual status |
 |---|---|
 | Bounded predecessor, packet review and OWN13 applicability | RECORDED for source authoring only |
-| Executable source/fixture/default/toolchain/asset freeze and independent source review | NOT YET AVAILABLE; required before the first SUP control/build/native process |
+| Executable source and fixture/defaults | AUTHORED; compilation and behavior unverified |
+| Complete source/toolchain/asset/plugin-closure freeze and independent source review | PENDING; required before the first SUP control/build/native process |
 | SUP01–SUP03 and owned-tree cleanup | NOT RUN |
 | Build/discovery/4 numeric/4 rendered/8 input | NOT RUN |
 | Six PNGs and real driver→Slate→world traces | NOT RUN |
@@ -72,3 +75,33 @@ No E02 result JSON is created with this packet adoption. Add real attempts and
 actual results only after the preceding gates. Freeze reviewed/executing bytes,
 use fresh RunIds after repairs, preserve failed/unknown results and regular
 coherent local checkpoint commits with actual test/review status under OWN16.
+
+## Source preparation checkpoint — 2026-10-17 UTC
+
+The geometry/input/fixture foundation is saved at
+`f9441517b7c70dfdc55f3a937e775d5a6dfa3f6d`; the containing later checkpoint adds
+the world, twelve rendered/input case declarations and supervisor. Source declares
+four numeric, four rendered and eight input cases. None has been discovered or
+executed by Unreal. No E02 wrapper, Add-Type compilation, control, build, native
+test or visible window has run. Independent source review remains pending.
+
+The fixture freezes reversible camera/key/light defaults before execution,
+including camera distance 320 cm, limits 60–550 cm, selection framing 85 cm,
+FOV 50 degrees and the packet's 45/25/85-degree proof views. The Slate leaf owns
+painted semantic controls for this fixture; it supplies no production HUD or
+physical input acceptance. Material compilation and the framebuffer still need
+actual rendered evidence and visual inspection.
+
+The wrapper's public header documents the external freeze/authority schemas.
+Its freeze includes a separately bound plugin-closure artifact; explicit project
+references alone do not establish that closure. Source review must assess the
+actual required/default activation paths. Actual startup diagnostics remain a
+separate check. There are three supervisor groups with six subcases: five owned
+process roots and one evidence-writer seam. These are distinct from 16 native
+cases and their dynamically counted assertions.
+
+Keep each freeze, review report and authority file immutable after binding.
+A later visible-window approval uses a new authority path. Strict phase order is
+Preflight, SupervisorControls, Build, Discovery, Numeric, WorldInput, Audit;
+Discovery must establish the exact 16-name set before either test filter.
+Only hidden controls/build can advance while visible-window approval is pending.
