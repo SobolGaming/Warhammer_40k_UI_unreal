@@ -52,11 +52,9 @@ Native proof uses ABSLOG, disables INI writes and checks authored Config members
 bytes plus observed editor/UBT settings. Preserve quarantined generated startup
 configuration privately and the documented new global EditorSettings file. Final
 acceptance/publication still needs the fresh three-role gate below; test execution
-or auxiliary helper inspection alone does not supply those approvals. Initial
-fresh code review requested finite-envelope/session-abandonment and absolute
-header-deadline repairs. The initial auditor requires raw process-ledger evidence
-and consistent plan line endings. Preserve both reports and prior execution.
-Repaired harness/tests require a fresh full phase chain; the historical revision4
+or auxiliary helper inspection alone does not supply those approvals.
+Retain raw process-ledger evidence and consistent plan line endings. Changed
+harness/tests require a fresh full phase chain; the historical revision4
 Capture link cannot substitute for proof of changed Python bytes. Block all
 dependent groups after a failed/uncertain session, retain the original authorized
 envelope and completion UNKNOWN, and enforce remaining time on each socket read.
