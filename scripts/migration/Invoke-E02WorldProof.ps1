@@ -237,7 +237,7 @@ function Snapshot-Authored([string] $Root) {
             else { $d=Descriptor $entry.FullName; $items.Add([ordered]@{path=$rel;kind='file';bytes=$d.bytes;sha256=$d.sha256}) }
         }
     }
-    return @($items | Sort-Object path)
+    return @($items | Sort-Object { $_.path })
 }
 function Same-Snapshot($Before,$After) {
     if ((ConvertTo-Json -InputObject @($Before) -Depth 12 -Compress) -cne (ConvertTo-Json -InputObject @($After) -Depth 12 -Compress)) { throw 'E02_AUTHORED_MEMBERSHIP_OR_BYTES_CHANGED' }
@@ -255,7 +255,7 @@ function Check-Freeze {
         if (-not $seen.Contains([IO.Path]::GetFullPath($required))) { throw 'E02_FROZEN_INPUT_OMITTED' }
     }
     $actualSource=@(Snapshot-Authored $script:Repo)
-    $membership=@($manifest.sourceMembership | Sort-Object path)
+    $membership=@($manifest.sourceMembership | Sort-Object { $_.path })
     if ($membership.Count -ne $actualSource.Count) { throw 'E02_SOURCE_MEMBERSHIP_COUNT' }
     for($i=0;$i -lt $actualSource.Count;$i++) {
         if ($membership[$i].path -cne $actualSource[$i].path -or $membership[$i].kind -cne $actualSource[$i].kind) { throw 'E02_SOURCE_MEMBERSHIP_MISMATCH' }
@@ -751,7 +751,7 @@ function Catalog-Descriptors([string] $Root) {
             }
         }
     }
-    return @($found|Sort-Object relativePath -CaseSensitive)
+    return @($found|Sort-Object { $_.relativePath } -CaseSensitive)
 }
 function Check-PluginDiscoveryCatalog($Closure) {
     $expectedRoots=@((Join-Path $EngineRoot 'Engine\Plugins'),(Join-Path $EngineRoot 'Engine\Platforms'))
@@ -761,7 +761,7 @@ function Check-PluginDiscoveryCatalog($Closure) {
     foreach($path in $expectedRoots){
         $entry=@($roots|Where-Object {$_.path -ieq $path})
         if($entry.Count -ne 1){throw 'E02_PLUGIN_CATALOG_ROOT_MISSING_OR_DUPLICATED'}
-        $actual=@(Catalog-Descriptors $path);$frozen=@($entry[0].descriptors|Sort-Object relativePath -CaseSensitive)
+        $actual=@(Catalog-Descriptors $path);$frozen=@($entry[0].descriptors|Sort-Object { $_.relativePath } -CaseSensitive)
         if($actual.Count -ne $frozen.Count){throw 'E02_PLUGIN_CATALOG_MEMBERSHIP_CHANGED'}
         for($i=0;$i -lt $actual.Count;$i++){
             if($frozen[$i].relativePath -isnot [string] -or $frozen[$i].sha256 -isnot [string] -or $frozen[$i].sha256 -cnotmatch '^[a-fA-F0-9]{64}$' -or
@@ -819,7 +819,7 @@ function Check-TargetReceipt($Closure) {
             $item.Enabled -isnot [bool] -or -not $seen.Add($item.Name)){throw 'E02_TARGET_RECEIPT_PLUGIN_OVERRIDE_SHAPE'}
         if($item.Enabled -and $item.Name -iin $script:Disabled){throw 'BLOCKED_E02_TARGET_RECEIPT_FORBIDDEN_PLUGIN_ENABLE'}
     }
-    $expected=@($policy.pluginOverrides|Sort-Object Name -CaseSensitive);$actual=@($plugins|Sort-Object Name -CaseSensitive)
+    $expected=@($policy.pluginOverrides|Sort-Object { $_.Name } -CaseSensitive);$actual=@($plugins|Sort-Object { $_.Name } -CaseSensitive)
     if($expected.Count -ne $actual.Count){throw 'E02_TARGET_RECEIPT_PLUGIN_OVERRIDES_CHANGED'}
     for($i=0;$i -lt $actual.Count;$i++){
         if($expected[$i].Enabled -isnot [bool] -or $expected[$i].Name -cne $actual[$i].Name -or $expected[$i].Enabled -cne $actual[$i].Enabled){throw 'E02_TARGET_RECEIPT_PLUGIN_OVERRIDES_CHANGED'}
