@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "label": "SYNTHETIC / ADVISORY - NO GAME SESSION",
+  "frame": {
+    "center_inches": [24, 31],
+    "datum_inches": -2,
+    "translation_cm": [137, -83, 41],
+    "rotation_degrees": [0, 23, 0]
+  },
+  "board_bounds_inches": {"min": [-12, 7], "max": [60, 55]},
+  "visual_thickness_inches": 0.12,
+  "models": [
+    {"id": "e02-circle", "kind": "circle", "radius_inches": 1, "length_inches": null, "width_inches": null, "vertices_inches": [], "pose": {"position_inches": [8, 18, -2], "facing_degrees": 0}, "query_height_inches": 1.2, "synthetic_capsule": false},
+    {"id": "e02-ellipse", "kind": "ellipse", "radius_inches": null, "length_inches": 5, "width_inches": 2, "vertices_inches": [], "pose": {"position_inches": [42, 23, 2], "facing_degrees": 90}, "query_height_inches": 1, "synthetic_capsule": false},
+    {"id": "e02-rectangle", "kind": "rectangle", "radius_inches": null, "length_inches": 4, "width_inches": 2, "vertices_inches": [], "pose": {"position_inches": [30, 20, 2], "facing_degrees": 37}, "query_height_inches": 1.5, "synthetic_capsule": false},
+    {"id": "e02-capsule", "kind": "capsule", "radius_inches": null, "length_inches": 6, "width_inches": 2, "vertices_inches": [], "pose": {"position_inches": [18, 38, -2], "facing_degrees": 0}, "query_height_inches": 1.2, "synthetic_capsule": true},
+    {"id": "e02-polygon", "kind": "polygon", "radius_inches": null, "length_inches": null, "width_inches": null, "vertices_inches": [[0, 0], [3, 0], [2, 1], [0, 2]], "pose": {"position_inches": [43, 39, -2], "facing_degrees": 30}, "query_height_inches": 1.2, "synthetic_capsule": false}
+  ],
+  "supports": [
+    {"id": "e02-ground", "bounds_inches": {"min": [-12, 7], "max": [60, 55]}, "z_inches": -2, "holes_inches": []},
+    {"id": "e02-platform", "bounds_inches": {"min": [25, 15], "max": [48, 29]}, "z_inches": 2, "holes_inches": [{"min": [34, 22], "max": [36, 24]}]}
+  ],
+  "camera": {
+    "offset_convention": "pre-placement table cm: distance*(cos(elevation)*cos(azimuth),cos(elevation)*sin(azimuth),sin(elevation)); look at mapped domain target",
+    "target_domain_inches": [24, 31, -2],
+    "default_azimuth_degrees": -90,
+    "default_elevation_degrees": 45,
+    "default_distance_cm": 320,
+    "fov_degrees": 50,
+    "orbit_degrees_per_logical_unit": 0.25,
+    "pan_cm_per_logical_unit": 0.15,
+    "dolly_step_cm": 20,
+    "minimum_distance_cm": 60,
+    "maximum_distance_cm": 550,
+    "minimum_elevation_degrees": 10,
+    "maximum_elevation_degrees": 88,
+    "frame_selection_distance_cm": 85,
+    "keyboard_orbit_step_degrees": 5,
+    "drag_threshold_logical_units": 4,
+    "oblique_elevation_degrees": 25,
+    "near_top_elevation_degrees": 85
+  },
+  "presentation": {
+    "light_rotation_degrees": [-55, -35, 0],
+    "light_color": [1, 0.96, 0.9],
+    "light_intensity_lux": 6,
+    "light_cast_shadows": false,
+    "exposure_method": "Manual",
+    "exposure_bias": 0,
+    "exposure_min_brightness": 1,
+    "exposure_max_brightness": 1,
+    "physical_camera_exposure": false,
+    "hud_bounds_logical": {"min": [16, 76], "max": [246, 480]},
+    "header_height_logical": 64,
+    "modal_size_logical": [420, 180],
+    "hud_controls_logical": {
+      "button": {"min": [30, 96], "max": [230, 132]},
+      "disabled": {"min": [30, 144], "max": [230, 180]},
+      "blank": {"min": [30, 192], "max": [230, 228]},
+      "scroll": {"min": [30, 240], "max": [230, 304]},
+      "editable": {"min": [30, 316], "max": [230, 352]},
+      "modal_button": {"min": [30, 364], "max": [230, 400]}
+    }
+  },
+  "key_bindings": {"orbit_left": "Left", "orbit_right": "Right", "orbit_up": "Up", "orbit_down": "Down", "frame_board": "F", "frame_selection": "G", "reset": "R", "confirm": "Enter", "cancel": "Escape", "modal": "M"},
+  "input_sequences": {
+    "CompletedClick": ["reset", "move to projected e02-circle", "primary press", "assert no selection", "primary release", "assert one local selection", "move to e02-capsule and primary-drag 12 logical units", "assert no second selection"],
+    "CameraCapture": ["reset", "move to visible viewport", "secondary press", "move 3 logical units", "assert no camera delta", "move to total 8 logical units", "assert orbit", "cross into HUD button", "release", "assert no selection or HUD activation"],
+    "PanDollyFrame": ["reset", "select e02-circle by completed click", "middle press and drag 20 logical units", "middle release", "viewport wheel one notch", "G", "F", "Left", "Up", "R", "assert intent unchanged and zero commands"],
+    "HudExclusion": ["button primary press and release outside", "disabled primary click", "blank primary click", "scroll wheel beyond content limit", "blank wheel", "assert no world selection or camera dolly"],
+    "ModalText": ["M", "focus modal editable", "type E02", "Enter", "assert no ready transition", "Escape", "assert focused edit canceled and modal open", "Escape", "assert modal closed and no world shortcut"],
+    "CancelActivation": ["select e02-circle", "Enter", "secondary press and drag 12 logical units", "Escape", "assert capture canceled and intent retained", "release canceled secondary button", "secondary press and drag", "inject application deactivate", "inject activate", "release", "assert no click and renewed review required", "secondary press and drag", "inject actual Slate capture loss", "assert capture canceled", "release canceled secondary button"],
+    "ResizeScale": ["reset", "select e02-circle", "secondary press", "resize crossing gesture to1600x900 scale1", "release", "assert canceled", "project and completed-click e02-circle at1280x720 scale1", "repeat at1280x720 scale1.5", "repeat at1600x900 scale1", "assert same intended ID and domain ray; HUD excludes under each scale"],
+    "RepeatedConfirm": ["reset", "select e02-circle", "Enter", "assert local Ready", "Enter", "Enter", "assert visible ProofHasNoGameSession", "Escape", "Enter", "Enter", "assert no transport/game/accepted result"]
+  },
+  "expected_test_names": [
+    "Warhammer.Migration.E02.Numeric.RoundTrip",
+    "Warhammer.Migration.E02.Numeric.HeadingAxes",
+    "Warhammer.Migration.E02.Numeric.ShapesWinding",
+    "Warhammer.Migration.E02.Numeric.UnsupportedGeometry",
+    "Warhammer.Migration.E02.Rendered.FiveForms",
+    "Warhammer.Migration.E02.Rendered.RaisedPicking",
+    "Warhammer.Migration.E02.Rendered.MeshSubstitution",
+    "Warhammer.Migration.E02.Rendered.ObliqueNormals",
+    "Warhammer.Migration.E02.Input.CompletedClick",
+    "Warhammer.Migration.E02.Input.CameraCapture",
+    "Warhammer.Migration.E02.Input.PanDollyFrame",
+    "Warhammer.Migration.E02.Input.HudExclusion",
+    "Warhammer.Migration.E02.Input.ModalText",
+    "Warhammer.Migration.E02.Input.CancelActivation",
+    "Warhammer.Migration.E02.Input.ResizeScale",
+    "Warhammer.Migration.E02.Input.RepeatedConfirm"
+  ]
+}

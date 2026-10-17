@@ -3,5 +3,6 @@
     "EngineAssociation": "5.8",
     "Category": "Games",
     "Description": "Warhammer client BOOT01 C++ foundation; external core remains authoritative.",
-    "Modules": [{ "Name": "WarhammerClient", "Type": "Runtime", "LoadingPhase": "Default" }]
+    "Modules": [{ "Name": "WarhammerClient", "Type": "Runtime", "LoadingPhase": "Default" }],
+    "Plugins": [{ "Name": "ProceduralMeshComponent", "Enabled": true }]
 }
