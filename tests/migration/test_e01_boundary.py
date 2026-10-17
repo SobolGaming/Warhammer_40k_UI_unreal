@@ -6,11 +6,15 @@ contract examples below are parser fixtures; they do not count as live workflows
 from __future__ import annotations
 
 import copy
+from contextlib import contextmanager
 import importlib.util
 import io
 import json
 from pathlib import Path
+import socket
 import tempfile
+import threading
+import time
 from types import SimpleNamespace
 import unittest
 from unittest.mock import MagicMock, call, patch
@@ -61,6 +65,54 @@ def http10_connection(wire: bytes):
     connection.getresponse.return_value = response
     connection.close.side_effect = lambda: setattr(transport, "closed", True)
     return connection, transport
+
+
+@contextmanager
+def loopback_response(parts: tuple[bytes, ...], *, interval: float = 0):
+    """Own one test-only listener; send fragments until stopped or disconnected."""
+    stop = threading.Event()
+    listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    listener.bind(("127.0.0.1", 0))
+    listener.listen(1)
+    listener.settimeout(2)
+    port = listener.getsockname()[1]
+    failures = []
+
+    def serve():
+        try:
+            with listener.accept()[0] as connection:
+                connection.settimeout(2)
+                request = b""
+                while b"\r\n\r\n" not in request:
+                    fragment = connection.recv(4096)
+                    if not fragment:
+                        return
+                    request += fragment
+                    if len(request) > 65536:
+                        raise AssertionError("Unit HTTP request unexpectedly large")
+                for index, part in enumerate(parts):
+                    if index and stop.wait(interval):
+                        return
+                    connection.sendall(part)
+        except OSError as exc:
+            # Closing after a bounded client timeout is the expected test path.
+            if not stop.is_set() and not isinstance(exc, (BrokenPipeError, ConnectionResetError, ConnectionAbortedError)):
+                failures.append(exc)
+        except BaseException as exc:
+            failures.append(exc)
+
+    worker = threading.Thread(target=serve, daemon=True)
+    worker.start()
+    try:
+        yield f"http://127.0.0.1:{port}"
+    finally:
+        stop.set()
+        listener.close()
+        worker.join(timeout=3)
+        if worker.is_alive():
+            raise AssertionError("Owned unit HTTP responder failed to stop")
+        if failures:
+            raise failures[0]
 
 
 class CanonicalEnvelopeTests(unittest.TestCase):
@@ -398,7 +450,7 @@ class EvidenceSafetyTests(unittest.TestCase):
             self.assertTrue(report.cases[1]["actual"]["priorCaseResultsRetained"])
             self.assertIn(report.payload()["status"], ("FAIL", "BLOCKED"))
 
-    def test_rejected_setup_saves_scoped_candidate_and_later_case_group_runs(self):
+    def test_rejected_setup_saves_scoped_candidate_and_abandons_later_groups(self):
         # Pure client-control regression: a mocked adapter reply is never counted
         # as a real Core/HTTP result or written into the proposed-wire index.
         with tempfile.TemporaryDirectory() as temporary:
@@ -424,7 +476,8 @@ class EvidenceSafetyTests(unittest.TestCase):
                 (("UNIT-NEXT",), lambda: report.case("UNIT-NEXT", "PASS", "Pure client continuation", "Invoked")),
             ))
             self.assertEqual([(case["id"], case["status"]) for case in report.cases],
-                             [("UNIT-SETUP", "BLOCKED"), ("UNIT-NEXT", "PASS")])
+                             [("UNIT-SETUP", "BLOCKED"), ("UNIT-NEXT", "BLOCKED")])
+            self.assertEqual(report.cases[1]["actual"]["sessionDisposition"], "ABANDONED")
             path = root / "private-rejections/setup_rejected_24/playerA.json"
             diagnostic = boundary.strict_json(path.read_bytes())
             self.assertEqual(diagnostic["role"], "playerA")
@@ -470,6 +523,194 @@ class EvidenceSafetyTests(unittest.TestCase):
             with self.assertRaisesRegex(boundary.BoundaryError, "authenticated role"):
                 boundary.record_authorized_attempt(client, request, view, command, "playerB")
             self.assertFalse((root / "private-attempts/command_8/playerB.json").exists())
+
+    def test_committed_but_unreceived_finite_command_retains_scope_and_stops_submissions(self):
+        # Mocked commitment is a failure-control unit, never live Core evidence.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            report = boundary.Report("capture", root)
+            request = {"request_id": "finite-unknown-request", "actor_id": "player-a",
+                       "options": [{"option_id": "finite-offered-option"}]}
+            view = {"viewer_player_id": "player-a", "pending_decision": request,
+                    "pending_proposal": None}
+            captures = SimpleNamespace(report=report, add=MagicMock(), schemas=MagicMock())
+            local, http = MagicMock(), MagicMock()
+            pair = boundary.Pair(local, http, captures)
+            pair.session = "unit-unknown-session"
+            pair.pending = MagicMock(return_value=(request, view))
+            pair.metadata = MagicMock(return_value={"session_revision": 3})
+            committed = []
+
+            def response(method, path, role, command, query):
+                kind = command["submission"]["submission_kind"]
+                if kind == "advance_session" or command["command_id"].endswith("-stale"):
+                    code = "advance_not_required" if kind == "advance_session" else "session_revision_conflict"
+                    return boundary.Reply(409, boundary.json_bytes({"schema_version": "error-envelope-v1",
+                        "error": {"code": code, "message": "Synthetic expected conflict."}}), 0, 0)
+                committed.append(copy.deepcopy(command))
+                return boundary.Reply(200, b"{}", 0, 0)
+
+            def received(method, path, role, command, query):
+                if command["command_id"] == "e01-finite-finite-unknown-request":
+                    raise TimeoutError("private transport detail: Authorization unit-only-secret")
+                return response(method, path, role, command, query)
+
+            local.request.side_effect, http.request.side_effect = response, received
+            later = MagicMock(side_effect=lambda: pair.submit({"new": "command"}, "playerA"))
+            report.case("UNIT-EARLIER", "PASS", "Previous actual observation", "Retained")
+            boundary.run_case_groups(report, (
+                (("FINITE-01", "RETRY-01", "STALE-01"), lambda: boundary.finite_and_retry(pair, report)),
+                (("UNIT-LATER-MOVE",), later),
+            ))
+            self.assertEqual(len(committed), 1)
+            self.assertEqual(pair.submissions, 3)
+            later.assert_not_called()
+            self.assertEqual(local.request.call_count, 3)
+            self.assertEqual(http.request.call_count, 3)
+            snapshot = boundary.strict_json((root / "private-attempts/command_3/playerA.json").read_bytes())
+            self.assertEqual(snapshot["commandEnvelope"], committed[0])
+            self.assertEqual(snapshot["requestBeforeSubmission"], request)
+            self.assertEqual(snapshot["authorizedViewBeforeSubmission"], view)
+            self.assertNotIn("publicResponse", snapshot)
+            ledger = boundary.strict_json((root / "privileged-submission-attempts/command_3.json").read_bytes())
+            self.assertEqual(ledger["commandEnvelope"], committed[0])
+            self.assertEqual(ledger["submittedRole"], "playerA")
+            self.assertEqual(ledger["sessionId"], pair.session)
+            self.assertEqual(ledger["envelopeBytesSHA256"], boundary.sha256(boundary.json_bytes(committed[0])))
+            self.assertNotIn("authorizedViewBeforeSubmission", ledger)
+            self.assertEqual(report.cases[0]["status"], "PASS")
+            self.assertEqual(report.cases[-1]["status"], "BLOCKED")
+            self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
+            self.assertEqual(report.details["sessionAbandonment"]["causeType"], "TimeoutError")
+            rendered = boundary.json_bytes(report.payload())
+            self.assertIn(b"Command completion UNKNOWN", rendered)
+            self.assertNotIn(b"unit-only-secret", rendered)
+            self.assertNotIn(b"private transport detail", rendered)
+            self.assertFalse((root / "private-attempts/command_3/playerB.json").exists())
+            self.assertTrue(pair.submission_unknown)
+            before_artifacts = copy.deepcopy(report.artifacts)
+            for retry_command in (committed[0], {**committed[0], "command_id": "must-not-retry-new-id"}):
+                with self.assertRaisesRegex(boundary.BoundaryError, "Session abandoned after UNKNOWN"):
+                    pair.submit(retry_command, "playerA")
+            self.assertEqual(report.artifacts, before_artifacts)
+            self.assertEqual(pair.submissions, 3)
+            self.assertEqual(local.request.call_count, 3)
+            self.assertEqual(http.request.call_count, 3)
+            self.assertFalse((root / "privileged-submission-attempts/command_4.json").exists())
+
+    def test_pre_submission_schema_failure_is_not_completion_unknown(self):
+        schemas = MagicMock()
+        schemas.validate.side_effect = boundary.BoundaryError("Synthetic local schema failure")
+        local, http = MagicMock(), MagicMock()
+        pair = boundary.Pair(local, http, SimpleNamespace(schemas=schemas))
+        with self.assertRaisesRegex(boundary.BoundaryError, "Synthetic local schema failure") as observed:
+            pair.submit({}, "playerA")
+        self.assertNotIsInstance(observed.exception, boundary.CompletionUnknown)
+        self.assertEqual(pair.submissions, 0)
+        local.request.assert_not_called()
+        http.request.assert_not_called()
+
+    def test_all_submission_roles_keep_exact_private_control_envelope_before_unknown(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for role in ("admin", "missing", "invalid", "playerB", "coach", "delayed", "replay"):
+                # Each unknown result abandons its independent unit session.
+                report = boundary.Report("capture", root / role)
+                local, http = MagicMock(), MagicMock()
+                pair = boundary.Pair(local, http, SimpleNamespace(schemas=MagicMock(), report=report))
+                pair.session = "unit-ledger-session-" + role
+                local.request.side_effect = TimeoutError("private transport detail")
+                request = {"request_id": "actor-private-request"}
+                command = boundary.envelope(pair.session, "unit-ledger-" + role, 0,
+                    "start_session" if role == "admin" else "finite_option",
+                    None if role == "admin" else request,
+                    option=None if role == "admin" else "actor-private-option")
+                with self.assertRaises(boundary.CompletionUnknown) as observed:
+                    pair.submit(command, role)
+                self.assertIsInstance(observed.exception.__cause__, TimeoutError)
+                ledger = boundary.strict_json((report.output / "privileged-submission-attempts/command_1.json").read_bytes())
+                self.assertEqual(ledger["commandEnvelope"], command)
+                self.assertEqual(ledger["submittedRole"], role)
+                self.assertEqual(ledger["sessionId"], pair.session)
+                self.assertNotIn("authorizedViewBeforeSubmission", ledger)
+                self.assertIn("never publish", ledger["recordScope"])
+                self.assertFalse((report.output / "proposed-wire").exists())
+                self.assertFalse((report.output / "private-attempts").exists())
+                self.assertEqual(pair.trace, [])
+                http.request.assert_not_called()
+
+    def test_real_http_status_headers_and_continue_share_short_absolute_deadline(self):
+        body = b'{"transport":"short-deadline"}'
+        final = b"HTTP/1.0 200 OK\r\nContent-Length: " + str(len(body)).encode() + b"\r\n\r\n" + body
+        cases = {
+            "partial_status": tuple(bytes((value,)) for value in final),
+            "header_trickle": (b"HTTP/1.0 200 OK\r\nX-Slow: ", *(b"x" for _ in range(32)), b"\r\n\r\n" + body),
+            "many_headers": (b"HTTP/1.0 200 OK\r\n", *(b"X-Slow: x\r\n" for _ in range(32)), b"\r\n" + body),
+            "informational_continue": (*(b"HTTP/1.1 100 Continue\r\nX-Slow: x\r\n\r\n" for _ in range(32)), final),
+        }
+        for name, parts in cases.items():
+            with self.subTest(case=name), loopback_response(parts, interval=0.025) as url:
+                endpoint = boundary.Endpoint({"playerA": None}, base_url=url)
+                started = time.monotonic()
+                # A remaining readiness budget must override the 120s default,
+                # even when each individual fragment arrives well within it.
+                with self.assertRaises((TimeoutError, boundary.BoundaryError)):
+                    endpoint.request("GET", "/unit-short-readiness", "playerA", request_budget_seconds=0.18)
+                self.assertLess(time.monotonic() - started, 0.55)
+                self.assertEqual(endpoint.metrics["requests"], 0)
+                self.assertEqual(boundary.REQUEST_DEADLINE_SECONDS, 120)
+
+    def test_real_http10_normal_close_length_and_chunked_bodies(self):
+        body = b'{"transport":"real-http10"}'
+        for framing in ("length", "eof", "chunked"):
+            if framing == "length":
+                headers, encoded = b"Content-Length: " + str(len(body)).encode() + b"\r\n", body
+            elif framing == "chunked":
+                headers = b"Transfer-Encoding: chunked\r\n"
+                encoded = format(len(body), "x").encode() + b"\r\n" + body + b"\r\n0\r\n\r\n"
+            else:
+                headers, encoded = b"", body
+            with self.subTest(framing=framing), loopback_response((b"HTTP/1.0 200 OK\r\n" + headers + b"\r\n" + encoded,)) as url:
+                reply = boundary.Endpoint({"playerA": None}, base_url=url).request("GET", "/unit-real-http10", "playerA", request_budget_seconds=1)
+                self.assertEqual(reply.status, 200)
+                self.assertEqual(reply.raw, body)
+
+    def test_real_http10_body_failures_close_detached_response_socket(self):
+        body = b'{"transport":"must-close"}'
+        cases = {
+            "invalid_length": ((b"HTTP/1.0 200 OK\r\nContent-Length: invalid\r\n\r\n" + body,), 0),
+            "truncated_body": ((b"HTTP/1.0 200 OK\r\nContent-Length: 999\r\n\r\n" + body,), 0),
+            "invalid_json": ((b"HTTP/1.0 200 OK\r\nContent-Length: 1\r\n\r\n{",), 0),
+            "slow_body": ((b"HTTP/1.0 200 OK\r\nContent-Length: 999\r\n\r\n{", *(b"x" for _ in range(32))), 0.025),
+        }
+        for name, (parts, interval) in cases.items():
+            with self.subTest(case=name), loopback_response(parts, interval=interval) as url:
+                connection = boundary.http_client.HTTPConnection("127.0.0.1", int(url.rsplit(":", 1)[1]), timeout=1)
+                original_connect = connection.connect
+                sockets = []
+
+                def observe_connect():
+                    original_connect()
+                    sockets.append(connection.sock)
+
+                with patch.object(connection, "connect", side_effect=observe_connect), \
+                     patch.object(boundary.http_client, "HTTPConnection", return_value=connection):
+                    with self.assertRaises((TimeoutError, boundary.BoundaryError, ValueError)):
+                        boundary.Endpoint({"playerA": None}, base_url=url).request("GET", "/unit-detached-close", "playerA", request_budget_seconds=0.18)
+                self.assertEqual(len(sockets), 1)
+                self.assertEqual(sockets[0].fileno(), -1)
+                self.assertIsNone(connection.sock)
+
+    def test_deadline_socket_caps_each_separate_send_without_resetting_budget(self):
+        transport = MagicMock()
+        guarded = boundary.DeadlineSocket(transport, 10)
+        with patch.object(boundary.time, "monotonic", side_effect=(2, 7, 11)):
+            guarded.sendall(b"headers")
+            guarded.sendall(b"body")
+            with self.assertRaisesRegex(boundary.BoundaryError, "total budget"):
+                guarded.sendall(b"must-not-send")
+        self.assertEqual(transport.settimeout.call_args_list, [call(8), call(3)])
+        self.assertEqual(transport.sendall.call_args_list, [call(b"headers"), call(b"body")])
 
     def test_http10_body_completion_never_updates_a_closed_socket(self):
         # Real HTTPResponse.read1() closes the file on Content-Length completion

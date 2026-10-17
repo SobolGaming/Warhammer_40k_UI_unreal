@@ -1,8 +1,11 @@
 # E01 frozen candidate source review
 
 Date: 2026-10-16. Reviewer invocation: `/root/e01_frozen_review_record`.
-Disposition: **SOURCE REVIEW PASS for the final candidate below; F01/F02 repaired
-in source. Execution and independent acceptance remain pending.** This is a separate
+Current disposition: **revision 3 / E01-SLOW120 frozen candidate source PASS,
+including the 120-second Python delta below.** F01/F02
+were repaired in the earlier reviewed candidate. Earlier PASS dispositions below
+apply only to their frozen hashes. Execution and independent acceptance remain
+separate. This is a separate
 source review, not execution evidence or milestone acceptance.
 
 The coordinator delegated read-only review of the E01 wrapper, Python driver and
@@ -258,3 +261,312 @@ F02 stays CLOSED_SOURCE; all earlier findings and their repairs remain in this
 record rather than being overwritten as if the first candidate had passed.
 Core #589 / EXT08, RISK19, DDC verification and independent acceptance remain open
 as specified above.
+
+## OWN14 / revision 3: slow diagnostic preparation source review
+
+Invocation: `/root/e01_frozen_review_record`, independent follow-up on
+2026-10-16; post-check UTC `2026-10-16T23:56:21Z`. Reviewed HEAD is
+`875e2711cd89f6f04237afb7b6b206aa0fcafdb8`; the base remains
+`0467ee63fe6d4c775f429afae2233d7292787c31`. The packet delta is identified by
+raw bytes rather than the branch name. Before/after SHA256 matched:
+
+| Reviewed path | Before = after raw SHA256 |
+| --- | --- |
+| `scripts/migration/Invoke-E01BoundaryProof.ps1` (unchanged) | `5250D25BDA372AF0D8D6F8B77CDA6ACD63DBD678C0A35FAF268A2C9F8B6A5FEA` |
+| `docs/plans/research/2026-10-16-e01-boundary-packet.md` (revision 3) | `D540CF96F8513833C4C708A7104F520554E8244B4502ED7A49D5F695EBE90C76` |
+
+**Disposition: source PASS for fresh Preflight and PrepareRuntime under OWN14.**
+The owner explicitly authorized the increased 120-second diagnostic. Revision 3
+restricts that amendment to a separately labelled **E01-SLOW120** public-protocol
+run, requires a fresh RunId and frozen source review, and retains exact source
+and runtime identity, verified runtime reuse, three-second connect timeout,
+30-second managed-host readiness, 30-minute process bounds, body/submission caps,
+credential isolation and owned cleanup. It permits no Core edit, private rules
+path, new host, uncertain-session reuse or automatic new-command retry.
+
+The new budget cannot retrospectively pass the earlier 30-second budget.
+Revision 2's packet hash and the failed run
+`20261016T231112Z-f8ef82ca`, missing receipt/UNKNOWN outcome and NOT_ACCEPTED audit
+remain explicit. Read-only file hashes observed for the earlier result and audit
+are `A90E132B530FB64A53031158857F59712F0677A2186C3828066AC1B09125702D`
+and `3071FCB50F67625E0CFCBD01BBD4C2A18376A0B545ACC28FF1DBFE022451B4AE`,
+respectively. This reviewer did not modify either. The audit's actual disposition
+is NOT_ACCEPTED; no old test result or unknown receipt is promoted by this review.
+
+The packet explicitly adds two separate permitted documentation outputs,
+`docs/plans/evidence/2026-10-16-e01-slow120-result.json` and
+`docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md`. It retains
+independent privacy approval of actual non-admin original-byte fixtures before
+promotion and Native, positive native counts, frozen inputs, actual owned cache
+path and settings-preservation requirements. A slow diagnostic success cannot
+close Core #590's latency concern, RISK19, robust Windows exclusivity, UE HTTP,
+rendering, packaging, Linux or full migration acceptance.
+
+The wrapper is byte-identical to its prior approved source, including its
+`.pyc` refusal. Its preparation phases do not execute the not-yet-reviewed
+Python diagnostic change. **Python 120-second budget/readiness implementation
+is excluded from this approval**; its separate frozen review is required before
+Capture. No Preflight, install/reuse, host, test or native phase was executed by
+this reviewer. Final diagnostic outcomes and a renewed independent acceptance
+audit remain pending.
+
+## OWN14: frozen 120-second Python candidate review
+
+Actual reviewing invocation: `/root/e01_frozen_review_record`, focused independent
+source inspection on 2026-10-16; post-check UTC `2026-10-16T23:58:19Z`. The
+coordinator separately confirmed that `/root/e01_python_review` was invoked for
+this same candidate and returned source PASS with no actionable findings,
+unchanged before/after hashes and no execution. That reported review is distinct
+from this invocation's direct inspection; neither invocation establishes an
+independent machine or isolated runtime environment.
+
+Reviewed base remains `0467ee63fe6d4c775f429afae2233d7292787c31`; current HEAD is
+`fd7c28f94cc0877bff33fe3cabbc94e75621c8a2` plus dirty Python candidate bytes.
+This review directly checked the complete Python delta from the earlier reviewed
+candidate and its tests. Before/after raw SHA256 matched:
+
+| Reviewed path | Before = after raw SHA256 |
+| --- | --- |
+| `scripts/migration/e01_boundary.py` | `0384ABC244B1A40D55043D830AABC334FD32D0457FA7810E2D1A0901D552BC2F` |
+| `tests/migration/test_e01_boundary.py` | `316FF378B54566B3052EAD3AA13AA660CD1ADBF542CEF0A9CDF670F03EDD6CFF` |
+| `scripts/migration/Invoke-E01BoundaryProof.ps1` (unchanged) | `5250D25BDA372AF0D8D6F8B77CDA6ACD63DBD678C0A35FAF268A2C9F8B6A5FEA` |
+| `docs/plans/research/2026-10-16-e01-boundary-packet.md` (revision 3) | `D540CF96F8513833C4C708A7104F520554E8244B4502ED7A49D5F695EBE90C76` |
+
+**Disposition: source PASS for the bounded E01-SLOW120 candidate; no new
+actionable finding in this delta.** The Python request and socket caps are now
+120 seconds. An explicit `request_budget_seconds` override must be finite,
+positive, numeric, and no larger than 120; booleans and invalid budgets fail
+before a connection is created. The connect timeout remains at most three
+seconds, further reduced when a smaller request budget applies. Socket waits
+before headers and each body chunk use the remaining total budget; the final
+elapsed, response-size and truncation checks remain. This is source approval of
+the owned-loopback diagnostic, not proof of production transport availability or
+hard real-time scheduling.
+
+Managed readiness retains its own 30-second deadline and passes only that
+deadline's remaining time to the catalogue request. It does not inherit a new
+120-second readiness wait. Readiness still requires the original owned process
+alive and its exact post-bind marker. The owner/probe/shutdown, 30-minute process,
+body/submission, credential, fixture and sibling boundaries are unchanged.
+
+Every Python report now contains `diagnostic.label: E01-SLOW120`, its request/read
+caps, three-second connect cap and 30-second readiness budget. Transport
+measurements belong to that labelled report and use the new constants. Focused
+source regressions cover both 120- and 30-second remaining-time calculations,
+invalid/oversized budgets, the retained readiness deadline and diagnostic report
+labelling. Read-only enumeration found **40 Python test methods**; no 40-test
+PASS is asserted and no suite, host or phase was executed by this reviewer.
+
+Fresh Preflight `20261016T235710Z-fcfefb29` had started under the packet commit at
+assignment; its preparation-stage freeze defers the Python candidate until
+Capture. Its actual status is not audited here. Before and after this review,
+the old failed 30-second result JSON remained
+`A90E132B530FB64A53031158857F59712F0677A2186C3828066AC1B09125702D` and its
+NOT_ACCEPTED audit remained
+`3071FCB50F67625E0CFCBD01BBD4C2A18376A0B545ACC28FF1DBFE022451B4AE`.
+They remain immutable; the distinct slow diagnostic summary/audit paths from
+revision 3 must receive any new results. A possible slow diagnostic PASS is not
+a 30-second performance PASS, does not resolve Core #590, and cannot infer the
+earlier command receipt. F01/F02 source repairs, prior native review scope,
+mandatory final fixture privacy review and all acceptance limits above remain.
+
+## Native gate repair: read-only UBT settings absence snapshot
+
+Actual independent reviewing invocation: `/root/e01_native_gate_diagnosis`,
+2026-10-17 UTC. This addendum records that invocation's results supplied by the
+coordinator; `/root/e01_doc_final_review` compiled this documentation entry and
+independently confirmed the wrapper hash, limited diff and zero PowerShell AST
+errors. Neither documentation compilation nor this source review is a native
+build, complete wrapper execution or acceptance result.
+
+| Reviewed path | Reviewer's before = after raw SHA256 |
+| --- | --- |
+| `scripts/migration/Invoke-E01BoundaryProof.ps1` | `F3B2A938A1F314EE5FF6D39B77FADB73CB3D5E1D5E92A562957305759ACBA2DC` |
+
+**Disposition: source PASS for this bounded wrapper delta.** The actual diff is
+limited to `Get-UBTSettings`: an absent settings XML is recorded as a read-only
+absence snapshot without requiring ownership of its ancestor directories. The
+known absent OneDrive Documents XML can therefore be observed below the cloud
+folder's reparse point. This exception creates no output there and grants no
+general permission to traverse that folder for owned outputs. Existing XML
+still passes the unchanged strict reparse/path guard and raw file-hash check.
+`Assert-UBTSettings` still rejects an absent-to-present transition or a changed
+existing hash; the post-phase and failure-path preservation checks remain.
+General reparse, output containment, runtime and candidate guards are unchanged.
+
+The independent reviewer parsed the complete wrapper with **zero AST errors**
+and evaluated only its isolated settings/guard functions, twice obtaining the
+same three settings observations:
+
+| Settings candidate | Both read-only observations |
+| --- | --- |
+| Roaming `Unreal Engine/UnrealBuildTool/BuildConfiguration.xml` | Exists; SHA256 `1E7CD8512DEDF37D7B103C5592F5600433E7FE97DA23434E69990F8A3370508A` |
+| OneDrive Documents `Unreal Engine/UnrealBuildTool/BuildConfiguration.xml` | Absent |
+| Review sandbox LocalAppData `UnrealBuildTool/BuildConfiguration.xml` | Absent |
+
+A synthetic absent-to-present snapshot comparison was rejected. Calling the
+general `Assert-NoReparsePoint` on the cloud folder still rejected it, confirming
+that the general ownership guard was not relaxed. The reviewer ran no complete
+wrapper phase, Core host, installation, native build or Automation suite.
+
+The prior Native result for `20261016T235710Z-fcfefb29` remains **FAIL**, SHA256
+`C91BE7E9692EC7CB2DA23076E3AAB6E36926E780EED1ADAB4ED30D87B48B80B1`.
+It failed on the OneDrive Documents reparse guard before the build was invoked;
+this source repair does not relabel that result. The same run's actual Capture
+remains `LOCAL_HTTP_BOUNDARY_PASS`, **14 discovered / 14 executed / 14 passed**,
+with zero failed or blocked cases. This change rewrites none of those results.
+
+Because the wrapper freeze changed, the coordinator planned a complete fresh
+run, `20261017T002136Z-8dad7f29`, with its own preparation, Capture and subsequent
+gates. Do not borrow the earlier Capture result as this new run's predecessor.
+Actual new phase results, fixture privacy approval, positive native counts,
+settings/cache evidence and renewed independent acceptance must be recorded
+separately. This source PASS supplies none of those execution results and does
+not close the retained Core, JSON, rendering, packaging or Linux limitations.
+
+## Native log recovery supplement: auxiliary source inspection
+
+Inspection invocation: `/root/e01_native_log_recovery`, 2026-10-17 UTC.
+Reviewed code HEAD: `8955112131c8be4c26499325bddbe1d24eaf0260`.
+The coordinator supplied this invocation's actual read-only inspection results;
+`/root/e01_doc_final_review` compiled this addendum and independently confirmed
+the current hashes and PowerShell parse/function counts.
+
+| Inspected input | Raw SHA256 |
+| --- | --- |
+| `scripts/migration/Invoke-E01BoundaryProof.ps1` | `095EBF4359665E05AFCFD864EB33E2D6FA9CB7FD9CFD19BE5AFCC78DB92AAB52` |
+| `docs/plans/research/2026-10-16-e01-boundary-packet.md` (revision 4) | `40CE909D2B4A36638BDC922D9093DF8650747B9F0A2DEEBE09846A86C6205249` |
+
+**Disposition: AUXILIARY SOURCE INSPECTION PASS for these bytes. This is not
+the fresh blind final code-review gate required by OWN15.** The helper inherited
+implementation history and did not attest enforced read-only permissions or
+no-memory behavior. Its useful source findings therefore supply neither that
+renewed gate nor a final independent code-quality verdict. Earlier review records
+remain historical evidence of their actual invocations and findings; this entry
+makes no retroactive equivalence claim for them.
+
+The inspection reported zero PowerShell AST errors and **37 functions**. The
+embedded Python audit worker parsed as **ten top-level statements**. After its
+finding was repaired, the Automation guard requires exactly **132** matching
+suite tests, exactly 132 report tests and 132 successful results; the existing
+successful-state and incomplete/failure checks remain. It cannot accept a
+nonempty subset or unrelated extra tests as this frozen suite.
+
+The explicit Native/Audit supplement pins the immutable successful Capture,
+its child reports, reviewed original-byte fixtures and runtime identities. Only
+the historical wrapper and packet entries may differ from current source;
+the Python harness, regression tests and source manifest must still match.
+There is no general resume, silent input substitution, copied Capture result or
+new Core command path. Current native source/descriptor/targets are independently
+frozen for the new phase. Authored Config directory membership and file hashes
+are guarded before and after Native/Audit and on failure.
+
+The source uses `-ABSLOG` for the new run's main native log and `-nowrite` to
+suppress INI saves. Those flags do not prove global settings preservation or
+the actual selected DDC path: the new execution must supply its log, ordinary
+settings guards and exact Config before/after evidence. Output, runtime,
+process, credential and sibling boundaries remain required. The inspection
+invocation executed no wrapper phase, host, installation, build or Automation
+suite; AST/source inspection is not runtime verification.
+
+The original Native result for `20261017T002136Z-8dad7f29` remains **FAIL**,
+SHA256 `CD9DE29ECB41A68E9482B6E4AB1BA951C2413BEAB9C79C65496776D29379405A`.
+That attempt built and exported **132 successful Automation cases** but lacked
+the required main log. Those successful tests do not repair the failed phase or
+provide missing direct DDC log evidence. The fresh linked supplement
+`20261017T004553Z-ba9995c1` was at Preflight when this addendum was requested;
+new Native/Audit outcomes remain separate evidence.
+
+Under OWN15, the coordinator is separately orchestrating two new `codex exec`
+sessions for final code-quality review and a different requirements/acceptance
+audit, with fresh contexts, read-only sandboxing, approval policy `never` and
+requested `memories.use_memories=false`. Their actual session/configuration
+attestations and independently established limits must be recorded. This
+auxiliary helper is neither of those sessions. **No final code-review verdict
+or renewed acceptance is asserted here.**
+
+## OWN15 fresh CLI reviews, round 1: findings and provenance
+
+This is a factual history entry compiled by `/root/e01_doc_final_review` from
+the original reviewer reports and retained invocation/runtime records. It is
+not this documentation writer's independent verdict or an author's approval.
+The round-1 freeze has been released for remediation; neither report accepts
+the affected final candidate.
+
+Both reviewers assessed base `0467ee63fe6d4c775f429afae2233d7292787c31` and
+source/fixture HEAD `8955112131c8be4c26499325bddbe1d24eaf0260`. The original
+CLI reports were copied without rewriting their conclusions:
+
+| Role / actual report disposition | Preserved report | Raw SHA256 |
+| --- | --- | --- |
+| Code quality: **CHANGES_REQUESTED** | [Round-1 code review](2026-10-17-e01-slow120-code-review-r1.md) | `9C8587B1877A21E14FA1FA33DA2C2663F06B63C2A5AFCBEB08B3A5ED97F5D9E3` |
+| Separate requirements/evidence audit: **BLOCKED** | [Round-1 requirements report](2026-10-17-e01-slow120-requirements-r1.md) | `CEE6907DA5A5AE30D1BADDE62144912B52BA4CE11503C12213487CE2EA18CC0A` |
+
+The retained evidence directories, relative to the repository root, are
+`.local/reviews/E01-SLOW120-final/code-20261017T005624Z-511f61f4` and
+`.local/reviews/E01-SLOW120-final/audit-20261017T010141Z-a7a5a8f5`.
+Each contains its invocation, selected runtime evidence, executed-command
+manifest, completion record and original last message. These are actual new
+`codex exec` invocations, not configuration-file-only review claims:
+
+| Role | Actual session ID | Recorded commands | Reviewing process completion |
+| --- | --- | ---: | --- |
+| Code reviewer | `01a1475c-2876-78b0-b114-f7a39f291ad1` | 32 | Exit 0, `2026-10-17T01:03:18.7896381Z` |
+| Requirements auditor | `01a14761-3d69-7733-bc95-14c5a9afc69e` | 34 | Exit 0, `2026-10-17T01:09:12.4616831Z` |
+
+Exit 0 denotes completion of the reviewing process, not a PASS verdict or a
+claim that every attempted static command succeeded. Both reports record that
+the protected Python interpreter launch was denied and no escalation or suite
+execution followed. Their reported checks were static evidence inspections;
+the inspected runtime test outcomes were not rerun by either reviewer.
+
+CLI version was `0.162.0-alpha.17.2`. Invocation records retain normal user
+configuration (`ignoreUserConfig:false`), no resume or fork, `--strict-config`,
+`--sandbox read-only`, `approval_policy=never`, both memory-use/generation flags
+false, apps disabled and multi-agent disabled. Selected authoritative runtime
+metadata independently identifies both sessions as `source:exec`, model
+`gpt-6.1-sol`, read-only filesystem policy, approval policy `never`, restricted
+network and `memory_mode:disabled`. These observations distinguish actual
+runtime metadata from requested flags. **Independent low-level attestation of
+every possible backend memory-injection path remains UNVERIFIED.** The original
+reports' statements about what each reviewer could personally observe remain
+unchanged; this supplementary provenance does not rewrite them.
+
+The code report records zero final mismatches among 171 source/configuration/
+target/descriptor/fixture entries, but observed later changes to AGENTS and the
+mixed migration plan and did not read their changed contents. Its verdict is
+bound to the frozen code and supplied normative extracts. The separate auditor
+bound a later documentation overlay and verified all 182 manifest entries with
+no final drift. The reports preserve these different input scopes; no shared
+overlay or reviewer-verdict inheritance is inferred.
+
+The code reviewer reported two actionable findings:
+
+- **P1:** preserve the complete finite-command envelope and scope before
+  submission, record a possibly submitted timeout as UNKNOWN, and stop dependent
+  mutations on that uncertain session until explicit same-envelope reconciliation
+  or abandonment. Continuing later groups with the same `Pair` can otherwise
+  submit new command IDs after an unknown finite result.
+- **P2:** enforce the absolute request deadline throughout status/header parsing.
+  A single socket timeout before `getresponse()` does not bound multiple partial
+  header reads or informational responses. Add short-budget slow-header coverage,
+  including UNKNOWN handling for a possibly submitted mutation.
+
+The requirements auditor reported missing provenance-bound selections of the
+raw wrapper and owned-host process ledgers: executable/script identities,
+sanitized arguments, PID/start/exit, timeout, readiness and shutdown records.
+The compiled factual summary was insufficient to independently establish the
+complete executed-process inventory. It also reported mixed CR line endings
+in the frozen migration-plan overlay causing `git diff --check` failures;
+corrected documentation must receive new transparent hashes. These are the
+auditor's stated blockers, not a claim that the omitted processes never ran.
+Other bounded protocol, movement, native fixture, privacy and configuration
+criteria were corroborated within the report's stated evidence limits.
+
+Repairs are being authored separately under packet revision 5. Source repairs
+require a new frozen candidate, a complete fresh affected execution chain and
+new separate blind reviews under OWN15; the round-1 findings are not waived by
+the successful subsets of earlier execution. This entry closes no finding,
+supplies no fresh verdict and accepts neither E01 nor the whole migration.
+Earlier failed/unknown outcomes, helper-review limitations and immutable review
+reports remain preserved.

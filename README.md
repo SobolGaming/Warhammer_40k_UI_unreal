@@ -33,11 +33,25 @@ data remains paired to its exact Core. Midgame switching back to Arcade is not r
 There is no playable client executable or Core launch switch yet. The procedures below prepare or
 run the existing Python rules Core for development. The separate
 [E01 developer proof](docs/plans/evidence/2026-10-16-e01-boundary.md) records an
-actual isolated, locked Windows installation and its boundary checks. The latest
-run passed 38 Python tests and 11 boundary checks, but the invalid-geometry command
-exceeded the 30-second request budget ([Core #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590)).
-Its completion remains unknown; E01 is unaccepted and the Native and wrapper
-Audit phases did not run. Independent source review and acceptance audit are recorded.
+actual isolated, locked Windows installation and its boundary checks. The original
+30-second run passed 38 Python tests and 11 boundary checks, but timed out on the
+invalid-geometry command; that run remains failed with completion unknown.
+The owner-approved `E01-SLOW120` capture subsequently passed all 40 Python tests
+and 14 boundary checks. It received the recorded-invalid outcome and accepted a
+corrected move that moved all five models one inch to their requested endpoints.
+The longest completed HTTP request took 37.0 seconds in the final Capture
+(38.1 seconds in its predecessor); this does not pass the old
+30-second budget ([Core #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590)).
+Independent privacy review approved 30 original-byte non-admin wire fixtures.
+The linked native supplement passed all 132 Automation cases and two automated
+evidence-audit checks. Its main log confirms the owned writable DDC path;
+editor settings and authored Config files remained unchanged with INI writes
+disabled. The journal preserves earlier guard/log failures and generated startup
+configuration outputs. Initial fresh code review requested repairs to uncertain
+command handling and absolute header deadlines; the separate requirements audit
+needs raw process-ledger extracts and consistent plan line endings. Packet
+revision5 requires those fixes, fresh review and a new full diagnostic chain.
+Prior execution remains evidence for its recorded source. Full E01 is unaccepted.
 The manual installation alternatives below are not its executed commands. Unreal project creation/build is
 specified in [plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).
 

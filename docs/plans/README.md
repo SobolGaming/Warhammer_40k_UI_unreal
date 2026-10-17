@@ -17,11 +17,27 @@ preserves the original access failure and source-only preparation.
 Current work follows the frozen [bounded E01 packet](research/2026-10-16-e01-boundary-packet.md).
 Its [execution journal](evidence/2026-10-16-e01-boundary.md) records the installed
 runtime, failed attempts and actual checks separately from pending acceptance.
-The [independent source review](research/2026-10-16-e01-boundary-review.md) passed;
+The [source/helper review history](research/2026-10-16-e01-boundary-review.md) is preserved;
 the [acceptance audit](research/2026-10-16-e01-boundary-acceptance-audit.md) keeps
-E01 unaccepted after the 30-second command timeout tracked in Core #590. Native,
-Audit and fixture promotion remain gated. The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md)
+E01 unaccepted after the original 30-second timeout tracked in Core #590.
+The separately approved `E01-SLOW120` capture passed 40 Python tests and all 14
+boundary checks, including recorded-invalid and accepted one-inch movement.
+Privacy review approved 30 unchanged wire bodies, now versioned. Packet revision4's
+linked native supplement passed 132 Automation cases and two evidence-audit checks,
+with the owned DDC path logged and configuration unchanged. Earlier failures and
+startup side effects remain recorded. The [preliminary evidence audit](research/2026-10-16-e01-slow120-acceptance-audit.md)
+does not satisfy OWN15's fresh blind code/requirements gate. The initial code
+review requested finite-envelope/session-abandonment and header-deadline fixes;
+the initial auditor requires raw process provenance and consistent plan line
+endings. Packet revision5 binds repairs, fresh review and a new full chain.
+The [factual result JSON](evidence/2026-10-16-e01-slow120-result.json) binds the
+Capture and native supplement without asserting independent acceptance.
+The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md)
 is prepared conditionally and has not executed.
 The [E01 continuation PR](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2)
 is a draft with the failed result explicit; GitHub reported no checks, which is
 not a CI pass. The plan/BOOT01 PR remains merged.
+OWN14 covers the separate `E01-SLOW120` diagnostic, historical revision4 supplement
+and revision5 repairs/fresh proof under the same bounds.
+The earlier 30-second failure and its acceptance record remain unchanged; new
+diagnostic results and any renewed audit are recorded separately.

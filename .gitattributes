@@ -1,0 +1,5 @@
+# Keep the canonical plan consistent and preserve exact CLI evidence bytes.
+docs/plans/unreal-migration-plan.md text eol=lf
+# Original reviewer Markdown includes intentional two-space hard line breaks.
+docs/plans/research/2026-10-17-e01-slow120-code-review-r*.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-17-e01-slow120-requirements-r*.md -text

@@ -12,6 +12,7 @@ import hashlib
 import http.client as http_client
 import importlib
 import importlib.metadata
+import io
 import json
 import math
 import os
@@ -46,6 +47,10 @@ class BoundaryError(RuntimeError):
 
 class Blocked(BoundaryError):
     """An actual external prerequisite or canonical procedure is unavailable."""
+
+
+class CompletionUnknown(BoundaryError):
+    """A submission began, but its complete paired outcome was not received."""
 
 
 class PortUnavailable(Blocked):
@@ -319,6 +324,54 @@ class Reply:
         self.body = strict_json(raw)
 
 
+class DeadlineReader(io.RawIOBase):
+    """Apply the absolute request budget to every underlying socket receive.
+
+    HTTPResponse status, header and informational-response loops can perform
+    many reads inside getresponse(). Wrapping the unbuffered SocketIO retains
+    its socket ownership while preventing each recv from resetting the budget.
+    """
+    def __init__(self, transport: DeadlineSocket, raw: io.RawIOBase):
+        super().__init__()
+        self.transport, self.raw = transport, raw
+
+    def readable(self) -> bool:
+        return True
+
+    def readinto(self, buffer) -> int | None:
+        self.transport.remaining_timeout()
+        return self.raw.readinto(buffer)
+
+    def close(self) -> None:
+        try:
+            self.raw.close()
+        finally:
+            super().close()
+
+
+class DeadlineSocket:
+    """Minimal HTTPConnection socket facade with one absolute I/O deadline."""
+    def __init__(self, transport: socket.socket, deadline: float):
+        self.transport, self.deadline = transport, deadline
+
+    def remaining_timeout(self) -> None:
+        remaining = self.deadline - time.monotonic()
+        require(remaining > 0, "Request exceeded its total budget; completion unknown")
+        self.transport.settimeout(min(SOCKET_READ_CAP_SECONDS, remaining))
+
+    def sendall(self, data) -> None:
+        self.remaining_timeout()
+        self.transport.sendall(data)
+
+    def makefile(self, mode: str):
+        require(mode == "rb", "Unexpected HTTP response file mode")
+        raw = self.transport.makefile(mode, buffering=0)
+        return io.BufferedReader(DeadlineReader(self, raw))
+
+    def close(self) -> None:
+        self.transport.close()
+
+
 class Endpoint:
     def __init__(self, tokens: dict[str, str | None], *, base_url: str | None = None):
         self.tokens, self.base_url = tokens, base_url
@@ -347,9 +400,14 @@ class Endpoint:
             reply = Reply(response.status_code, json_bytes(response.payload), time.monotonic() - start, len(payload))
         else:
             connection = http_client.HTTPConnection("127.0.0.1", self.port, timeout=min(3, request_budget_seconds))
+            response = None
             try:
                 connection.connect()
                 transport_socket = connection.sock
+                # HTTPConnection emits headers and body with separate sendall
+                # calls; HTTPResponse may receive many status/header fragments.
+                # Both share the same deadline, including HTTP/1.0 file lifetime.
+                connection.sock = DeadlineSocket(transport_socket, start + request_budget_seconds)
                 remaining = request_budget_seconds - (time.monotonic() - start)
                 require(remaining > 0, "Request exceeded its total budget; completion unknown")
                 transport_socket.settimeout(min(SOCKET_READ_CAP_SECONDS, remaining))
@@ -382,7 +440,14 @@ class Endpoint:
                 reply = Reply(response.status, b"".join(chunks), time.monotonic() - start, len(payload))
                 require(reply.elapsed <= request_budget_seconds, "Request exceeded its total budget; completion unknown")
             finally:
-                connection.close()
+                # HTTP/1.0 detaches the connection socket once headers arrive.
+                # Close its response file explicitly on every body/parse error;
+                # connection.close alone cannot release that detached reference.
+                try:
+                    if response is not None:
+                        response.close()
+                finally:
+                    connection.close()
         self.metrics["requests"] += 1
         self.metrics["largestRequestBytes"] = max(self.metrics["largestRequestBytes"], reply.sent)
         self.metrics["largestResponseBytes"] = max(self.metrics["largestResponseBytes"], len(reply.raw))
@@ -574,6 +639,7 @@ class Pair:
         self.local, self.http, self.captures = local, http, captures
         self.session = ""
         self.submissions = 0
+        self.submission_unknown = False
         self.trace: list[dict] = []
         self.initial_cursors: dict[str, tuple[str, str]] = {}
         self.army_by_player: dict[str, str] = {}
@@ -612,10 +678,27 @@ class Pair:
         return local, http
 
     def submit(self, command: dict, role: str) -> tuple[Reply, Reply]:
+        require(not self.submission_unknown, "Session abandoned after UNKNOWN completion; no further submissions or automatic retries")
         self.captures.schemas.validate("session-command-envelope.schema.json", command)
         self.submissions += 1
         require(self.submissions <= 256, "Canonical scenario exceeded 256 submissions")
-        return self.request("POST", f"/sessions/{self.session}/commands", role, command)
+        # This is privileged control evidence, never a submitted role's visible
+        # projection: denied-role negative cases intentionally reuse actor input.
+        # Keep exact envelopes for every potentially uncertain submission, even
+        # admin start and negative commands that have no full actor-view snapshot.
+        report = self.captures.report
+        attempt = report.output / "privileged-submission-attempts" / ("command_" + str(self.submissions) + ".json")
+        write_new(attempt, json_bytes({"schemaVersion": 1, "recordScope": "Privileged submission control; never publish as a viewer fixture", "submittedRole": role, "sessionId": self.session, "commandEnvelope": command, "envelopeBytesSHA256": sha256(json_bytes(command)), "observation": "Prepared before paired submission; no completion outcome asserted"}), report.secrets)
+        report.artifact(attempt)
+        try:
+            return self.request("POST", f"/sessions/{self.session}/commands", role, command)
+        except (BoundaryError, OSError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
+            # Validation above happens before either adapter is called. Once a
+            # paired submission begins, neither timeout nor comparison failure
+            # proves rollback. Keep the cause chained without exporting an
+            # arbitrary transport message, header or credential.
+            self.submission_unknown = True
+            raise CompletionUnknown("Command completion UNKNOWN; abandon this session without further submissions") from exc
 
     def intent(self, request: dict, *, option: str | None = None, payload: object = None, label: str = "choice") -> dict:
         if option is not None:
@@ -834,7 +917,7 @@ def auth_and_views(pair: Pair, report: Report) -> None:
 
 
 def finite_and_retry(pair: Pair, report: Report) -> None:
-    request, _ = pair.pending()
+    request, view = pair.pending()
     role = role_for_actor(request)
     options = [row["option_id"] for row in request["options"]]
     selected = "fixed:assassination:bring_it_down" if "fixed:assassination:bring_it_down" in options else options[0]
@@ -850,6 +933,7 @@ def finite_and_retry(pair: Pair, report: Report) -> None:
     assert_error(blocked, 409, "advance_not_required")
     pair.captures.add("stale_waiting_advance", "admin", "http", blocked, "Admin advance while waiting for offered player choice", "error")
     before = pair.metadata(role)
+    record_authorized_attempt(pair, request, view, command, role)
     _, first = pair.submit(command, role)
     require(classify(first.status, first.body) == "accepted", "Finite offered choice was not accepted")
     pair.captures.add("finite_accepted", role, "http", first, "Canonical visible finite request; exact offered option under bound player", "accepted")
@@ -1113,10 +1197,18 @@ def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, ht
 
 
 def run_case_groups(report: Report, groups: tuple) -> None:
+    abandonment = None
     for ids, function in groups:
+        if abandonment is not None:
+            for case_id in ids:
+                if not any(row["id"] == case_id for row in report.cases):
+                    report.case(case_id, "BLOCKED", "Packet meaningful case matrix", {**abandonment, "disposition": "Dependent group not invoked; no further game submissions"})
+            continue
         try:
             function()
         except (Blocked, BoundaryError, OSError, TimeoutError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
+            abandonment = {"predecessorCaseIds": list(ids), "sessionDisposition": "ABANDONED", "completionOutcome": "UNKNOWN" if isinstance(exc, CompletionUnknown) else "NOT_ASSERTED", "exceptionType": type(exc).__name__, "causeType": None if exc.__cause__ is None else type(exc.__cause__).__name__}
+            report.details["sessionAbandonment"] = abandonment
             recorded_failure = False
             for case_id in ids:
                 if not any(row["id"] == case_id for row in report.cases):

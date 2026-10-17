@@ -1,10 +1,78 @@
 # E01-WIN-BOUNDARY: selected Core boundary proof packet
 
-Date: 2026-10-16. Packet revision: **4; E01-SLOW120 native evidence supplement**.
+Date: 2026-10-16. Packet revision: **5; E01-SLOW120 failure-path remediation**.
 This packet refines Section 0 RQ03/RQ06/RQ08/RQ15/RQ17/RQ20/RQ23 of the
 [canonical plan](../unreal-migration-plan.md). It credits completed BOOT01 and
 defines the next bounded Windows proof. It does not claim full E01, M01,
 G-RESEARCH, G-IMPLEMENT, rendering, packaging or cross-platform acceptance.
+
+## Revision 5: bounded failure-path repairs and fresh full proof
+
+OWN14's 120-second diagnostic and OWN15's independent reviews remain the
+authority. The initial independent code review requested two repairs: retain the
+finite command's complete actor-scoped envelope before submission and abandon a
+failed/uncertain session before any dependent group runs; enforce the absolute
+HTTP deadline on every underlying status/header/body receive and send operation.
+Do not infer that a lost receipt means rollback. Mark command completion UNKNOWN
+when submission may have reached a transport, retain its original command identity
+and authorized scope, and mark subsequent groups BLOCKED without invoking them.
+There is no automatic new-ID retry or private reconciliation path.
+Retain a credential-free pre-send control ledger for every schema-valid submitted
+envelope, including lifecycle/denied/stale lanes, under the run's ignored private
+output. It records only the envelope, submitted role and session; it grants no
+viewer access and cannot enter public wire fixtures. Full projection snapshots
+remain restricted to the bound authorized actor. Explicitly close the acquired
+HTTP response and connection on success or failure, including detached HTTP/1.0
+response-file ownership.
+
+The permitted implementation paths remain the existing Python harness and unit
+tests. Add short-budget loopback transport tests for partial/trickled headers,
+informational responses, HTTP/1.0 bodies, chunks and the readiness override, plus a
+commit-before-timeout regression proving zero later group callbacks/submissions.
+These test-only responders exercise HTTP transport; they are not a new Core host
+or live-Core integration evidence. Keep production request/connect/readiness,
+body/submission/process limits and credential/path/cleanup guards unchanged.
+Local isolated unit verification may run during remediation; review the frozen
+changed source before a new Core Capture or native phase.
+
+Changing harness/test bytes invalidates their affected Capture binding. After
+review, use a **fresh full Preflight → PrepareRuntime → Capture → Native → Audit
+chain**, with a new RunId and verified reuse of the same owned runtime. Do not use
+`-CaptureRunId` for this candidate. Revision4's historical supplement remains
+immutable evidence for its old source; its unchanged-harness guard must reject
+reuse against the repaired source. Preserve all earlier failed and successful
+records, including the original30-second FAIL/UNKNOWN. Independently review the
+new non-admin original-byte wire set before promotion and Native execution.
+
+The initial requirements auditor independently corroborated the earlier bounded
+protocol/native/configuration evidence but lacked the raw process ledgers in its
+selected review packet. Supply provenance-bound, credential-free extracts of the
+original wrapper and owned-host process records: executable/script identities,
+argument arrays, PID, start/exit, exit code, timeout, readiness and shutdown facts.
+Record the source path/SHA and selection method; derived extracts are not original
+bytes. Include complete phase process inventories. Never expose credentials,
+privileged bodies or quarantined generated configuration. Correct the canonical
+plan's mixed line endings and bind the new hash. This evidence correction alone
+does not require runtime reruns; the source repairs above require the new chain.
+
+Save the initial CHANGES_REQUESTED and BLOCKED reports unchanged. Obtain fresh
+independent code and requirements reviews of the repaired final candidate under
+OWN15; neither prior runtime success nor auxiliary inspection supplies acceptance.
+The additional documentation outputs `2026-10-17-e01-slow120-code-review-rN.md`
+and `2026-10-17-e01-slow120-requirements-rN.md` in this research directory preserve
+the respective original CLI report bytes for each review round, with invocation/
+runtime provenance recorded separately. Copying a report is not a recorder's
+independent verdict. Do not supply earlier reports to a new initial assessment.
+The root `.gitattributes` may bind only these review report patterns to `-text`
+so Git preserves their original bytes, and the canonical plan to `text eol=lf`
+so the audited line-ending correction stays consistent. No broader storage or
+asset policy change is permitted by this amendment.
+The original code-review report includes intentional Markdown two-space hard
+breaks. Preserve those bytes with a `whitespace=-blank-at-eol` attribute limited
+to that report pattern; implementation and other documentation checks retain
+their ordinary whitespace checks.
+The result remains a bounded slow-host diagnostic, with production responsiveness,
+UE transport, rendering, packaging, Linux and full E01 explicitly unaccepted.
 
 ## Revision 4: native-only supplement linked to immutable Capture
 
