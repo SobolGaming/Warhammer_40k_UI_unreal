@@ -1,7 +1,7 @@
 # Source-unit guard checks only. This does not execute an E01 wrapper phase.
 # Requires only PowerShell and the tracked reviewed wire corpus; it creates
 # explicitly simulated metadata and copies in a new ignored private directory.
-param([string] $OutputRoot = '', [string] $ActualUnitLogPath = '', [int] $ActualUnitCount = 0)
+param([string] $OutputRoot = '', [string] $ActualUnitLogPath = '', [int] $ActualUnitCount = 0, [string] $ActualPhaseResultPath = '')
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
@@ -22,7 +22,9 @@ $names = @('Assert-NoReparsePoint', 'Assert-ChildPath', 'Get-MemberPath', 'Requi
     'New-EditorSettingsPaths', 'Get-EditorSettingsPaths', 'Get-PreservationFileAttributes', 'Get-EditorSettingsState',
     'Assert-EditorSettingsState', 'Save-EditorSettingsFailureEvidence', 'Get-SafeFailureEvidence', 'Get-UBTSettings',
     'New-ChildEnvironment', 'New-OwnedProcessHandle', 'New-OwnedLogWriter', 'Get-OwnedProcessIdentity',
-    'Add-OwnedProcessSecondaryFailure', 'Stop-OwnedProcess', 'Invoke-OwnedProcess')
+    'Add-OwnedProcessSecondaryFailure', 'Stop-OwnedProcess', 'Invoke-OwnedProcess', 'Assert-SafeStructuredNode',
+    'Assert-SafeStructuredValue', 'Assert-SafeJsonElement', 'Assert-SafeDecodedJson', 'New-JsonOutputStream', 'Write-NewJson',
+    'Get-PhaseFailureEnvelope', 'Write-PhaseFailureDiagnostic', 'Complete-PhaseFinalization')
 foreach ($definition in $ast.FindAll({ param($node) $node -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $false)) {
     if ($definition.Name -in $names) {
         # Extracted function definitions lose their automatic source-file binding.
@@ -48,6 +50,11 @@ if ($ActualUnitLogPath) {
     if ($ActualUnitCount -le 0) { throw 'Actual unit-log evidence requires its expected positive case count.' }
     $sourcePaths += $ActualUnitLogPath
 } elseif ($ActualUnitCount -ne 0) { throw 'Actual unit count requires an explicit preserved unit-log path.' }
+if ($ActualPhaseResultPath) {
+    $ActualPhaseResultPath = Assert-ChildPath ([IO.Path]::GetFullPath($ActualPhaseResultPath)) (Join-Path $projectRoot '.local\experiments\E01-target')
+    Require-File $ActualPhaseResultPath
+    $sourcePaths += $ActualPhaseResultPath
+}
 $sourceBefore = @(foreach ($path in $sourcePaths) { @{ path = $path; sha256 = Get-Hash $path } })
 $checks = [Collections.Generic.List[object]]::new()
 $CaptureRunId = ''
@@ -455,6 +462,7 @@ function Check-ProcessCaller([string] $Name, [hashtable] $Configuration, [string
         IdentityDisposeCalls = 0; StdoutDisposeCalls = 0; StderrDisposeCalls = 0; HandleDisposeCalls = 0
         IdFaultMode = 'none'; TimeFaultMode = 'none'; IdReads = 0; TimeReads = 0; IdentityMismatch = $false
         ExpectRefusal = $false; ExpectedRecovery = $null
+        FactoryFault = ''; ConfigureFault = ''; StartCalls = 0
         CleanupDetails = 'SIMULATED_CLEANUP_KILL_FAILURE'; ExpectRedactedCleanup = $false
         StartTime = [datetime]::new(2026, 1, 1, 0, 0, 0, [DateTimeKind]::Utc) }
     foreach ($entry in $Configuration.GetEnumerator()) { $state[$entry.Key] = $entry.Value }
@@ -478,7 +486,7 @@ function Check-ProcessCaller([string] $Name, [hashtable] $Configuration, [string
         return $this.State.Exited
     }
     $fakeProcess | Add-Member ScriptMethod get_ExitCode { if ($this.State.ExitCodeFault) { throw 'SIMULATED_EXIT_CODE_FAILURE' }; return 0 }
-    $fakeProcess | Add-Member ScriptMethod Start { return $true }
+    $fakeProcess | Add-Member ScriptMethod Start { $this.State.StartCalls++; return $true }
     $fakeProcess | Add-Member ScriptMethod Kill {
         param($Tree)
         $this.State.KillCalls++
@@ -501,7 +509,9 @@ function Check-ProcessCaller([string] $Name, [hashtable] $Configuration, [string
     function Get-OwnedProcessIdentity([int] $ProcessId) { return $fakeIdentity }
     function New-OwnedLogWriter([string] $Path) {
         $lane = if ($Path.EndsWith('.stdout.log')) { 'Stdout' } else { 'Stderr' }
+        if ($state.FactoryFault -ceq $lane) { throw ('SIMULATED_' + $lane.ToUpperInvariant() + '_FACTORY_FAILURE') }
         $writer = [pscustomobject]@{ State = $state; Lane = $lane }
+        $writer | Add-Member ScriptMethod set_AutoFlush { param($Enabled); if ($this.State.ConfigureFault -ceq $this.Lane) { throw ('SIMULATED_' + $this.Lane.ToUpperInvariant() + '_CONFIGURE_FAILURE') } }
         $writer | Add-Member ScriptMethod WriteLine { param($Line) }
         $writer | Add-Member ScriptMethod Dispose {
             $this.State[$this.Lane + 'DisposeCalls']++
@@ -522,15 +532,21 @@ function Check-ProcessCaller([string] $Name, [hashtable] $Configuration, [string
     catch { $failure = $_.Exception.Message; $phaseResult.failure = $failure; Save-EditorSettingsFailureEvidence $phaseResult }
     $record = $phaseResult.processes[0]
     $pass = if ($ExpectedFailure) { $null -ne $failure -and $failure -like ('*' + $ExpectedFailure + '*') } else { $null -eq $failure }
+    $stdoutCount = if ($state.FactoryFault -ceq 'Stdout') { 0 } else { 1 }
+    $stderrCount = if ($state.FactoryFault -or $state.ConfigureFault -ceq 'Stdout') { 0 } else { 1 }
     $pass = $pass -and $phaseResult.processes.Count -eq 1 -and $null -ne $record.endedUtc -and
-        $state.StdoutDisposeCalls -eq 1 -and $state.StderrDisposeCalls -eq 1 -and $state.HandleDisposeCalls -eq 1
+        $state.StdoutDisposeCalls -eq $stdoutCount -and $state.StderrDisposeCalls -eq $stderrCount -and $state.HandleDisposeCalls -eq 1
     foreach ($stage in $ExpectedSecondaryStages) { $pass = $pass -and @($record.secondaryErrors | Where-Object { $_.stage -ceq $stage }).Count -ge 1 }
     if ($ExpectedFailure) {
         $pass = $pass -and $record.primaryFailure.details -like ('*' + $ExpectedFailure + '*') -and
             $phaseResult.failure -ceq $failure -and @($phaseResult.editorSettingsAfterFailure).Count -eq 6
     }
     if ($state.WaitFault) { $pass = $pass -and $state.WaitMilliseconds -eq 10000 }
-    if ($state.Exited) { $pass = $pass -and $record.exitConfirmed -eq $true -and $null -ne $record.exitedUtc }
+    if ($state.FactoryFault -or $state.ConfigureFault) {
+        $pass = $pass -and $state.StartCalls -eq 0 -and -not $record.startConfirmed -and
+            $null -eq $record.exitConfirmed -and $null -eq $record.exitedUtc -and $record.cleanupStatus -ceq 'NOT_STARTED'
+    }
+    elseif ($state.Exited) { $pass = $pass -and $record.exitConfirmed -eq $true -and $null -ne $record.exitedUtc }
     else {
         $expectedCleanup = if ($state.ExpectRefusal) { 'REFUSED_UNVERIFIED_IDENTITY' } else { 'EXIT_UNCONFIRMED' }
         $pass = $pass -and $null -eq $record.exitConfirmed -and $null -eq $record.exitedUtc -and $record.cleanupStatus -ceq $expectedCleanup
@@ -561,6 +577,10 @@ Check-ProcessCaller 'caller-successful-exit-handle-cleanup-fails' @{ Primary = '
 Check-ProcessCaller 'caller-exit-code-unavailable-is-failure' @{ Primary = 'none'; ExitCodeFault = $true } 'SIMULATED_EXIT_CODE_FAILURE' @('finalize-exit-code')
 Check-ProcessCaller 'caller-has-exited-unavailable-keeps-primary' @{ HasExitedAlwaysFault = $true } 'SIMULATED_HAS_EXITED_FAILURE' @('cleanup-stop-process', 'finalize-exit-inspection')
 Check-ProcessCaller 'caller-success-control' @{ Primary = 'none' }
+Check-ProcessCaller 'caller-stdout-factory-fails-before-start' @{ FactoryFault = 'Stdout' } 'SIMULATED_STDOUT_FACTORY_FAILURE'
+Check-ProcessCaller 'caller-stderr-factory-fails-before-start' @{ FactoryFault = 'Stderr' } 'SIMULATED_STDERR_FACTORY_FAILURE'
+Check-ProcessCaller 'caller-stdout-configuration-finalizes-writer' @{ ConfigureFault = 'Stdout' } 'SIMULATED_STDOUT_CONFIGURE_FAILURE'
+Check-ProcessCaller 'caller-stderr-configuration-finalizes-writers' @{ ConfigureFault = 'Stderr' } 'SIMULATED_STDERR_CONFIGURE_FAILURE'
 Check-ProcessCaller 'caller-start-id-transient-recovers-cleanup' @{ IdFaultMode = 'transient'; ExpectedRecovery = $true } 'SIMULATED_START_ID_FAILURE'
 Check-ProcessCaller 'caller-start-time-transient-recovers-cleanup' @{ TimeFaultMode = 'transient'; ExpectedRecovery = $true } 'SIMULATED_START_TIME_FAILURE'
 Check-ProcessCaller 'caller-start-id-unavailable-refuses-unverified-kill' @{ IdFaultMode = 'permanent'; ExpectedRecovery = $false; ExpectRefusal = $true } 'SIMULATED_START_ID_FAILURE' @('cleanup-recover-start-identity')
@@ -577,10 +597,227 @@ function Check-CallerDiagnosticRedaction {
 }
 Check-CallerDiagnosticRedaction
 
+function Get-TestDecodedStrings($Value) {
+    if ($Value -is [string]) { $Value }
+    elseif ($Value -is [Collections.IDictionary]) { foreach ($entry in $Value.GetEnumerator()) { [string]$entry.Key; Get-TestDecodedStrings $entry.Value } }
+    elseif ($Value -is [Collections.IList]) { foreach ($member in $Value) { Get-TestDecodedStrings $member } }
+}
+
+function Check-EscapedSecret([string] $Name, [string] $Character) {
+    $marker = 'SIMULATED_RAW_' + $Character + 'PRIVATE_VALUE'
+    $priorSecrets = $script:secretValues; $script:secretValues = @($marker)
+    $directory = Join-Path $OutputRoot ('escaped-secret-' + $Name); $null = [IO.Directory]::CreateDirectory($directory)
+    try {
+        try { throw [IO.IOException]::new('safe outer context', [UnauthorizedAccessException]::new($marker)) }
+        catch { $diagnostic = Get-SafeFailureEvidence $_ 'synthetic-raw-secret' }
+        try { throw 'safe details' } catch { $stageDiagnostic = Get-SafeFailureEvidence $_ $marker }
+        $decoded = (@{ direct = $diagnostic; stage = $stageDiagnostic } | ConvertTo-Json -Depth 12) | ConvertFrom-Json -AsHashtable
+        $leaked = @((Get-TestDecodedStrings $decoded) | Where-Object { $_.Contains($marker, [StringComparison]::Ordinal) }).Count
+        $rejected = 0
+        $value = @{ nested = @('safe', @{ details = $marker }) }
+        $keyValue = @{}; $keyValue[$marker] = 'safe'
+        foreach ($item in @(@{ name = 'value'; value = $value }, @{ name = 'key'; value = $keyValue })) {
+            try { Write-NewJson (Join-Path $directory ($item.name + '.json')) $item.value }
+            catch { if ($_.Exception.Message -like 'Credential scan*') { $rejected++ } }
+        }
+        # This is intentionally unsafe synthetic INPUT, never an exported result.
+        $inputPath = Join-Path $directory 'SIMULATED-input.json'
+        [IO.File]::WriteAllText($inputPath, ($value | ConvertTo-Json -Depth 8), $utf8)
+        $readRejected = $false
+        try { $null = Read-Json $inputPath } catch { $readRejected = $_.Exception.Message -like 'Credential scan*' }
+        $pass = $diagnostic.redaction -ceq 'REJECTED_NOT_RETAINED' -and $stageDiagnostic.redaction -ceq 'REJECTED_NOT_RETAINED' -and
+            $leaked -eq 0 -and $rejected -eq 2 -and $readRejected -and
+            -not (Test-Path -LiteralPath (Join-Path $directory 'value.json')) -and -not (Test-Path -LiteralPath (Join-Path $directory 'key.json'))
+        $checks.Add(@{ name = ('raw-secret-' + $Name); kind = 'decoded-secret-validation'; simulation = $true
+            status = $(if ($pass) { 'PASS' } else { 'FAIL' }); decodedLeakCount = $leaked; rejectedExports = $rejected; decodedReadRejected = $readRejected })
+        Write-Output ("raw-secret-{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+    } finally { $script:secretValues = $priorSecrets }
+}
+Check-EscapedSecret 'backslash' '\'
+Check-EscapedSecret 'quote' '"'
+Check-EscapedSecret 'tab' "`t"
+Check-EscapedSecret 'newline' "`n"
+Check-EscapedSecret 'carriage-return' "`r"
+Check-EscapedSecret 'nul' ([string][char]0)
+
+function Check-StructuredRejection([string] $Name, $Value, [string] $ExpectedFailure) {
+    $failure = $null
+    try { Assert-SafeStructuredValue $Value } catch { $failure = $_.Exception.Message }
+    $pass = $null -ne $failure -and $failure -like ('*' + $ExpectedFailure + '*')
+    $checks.Add(@{ name = $Name; kind = 'structured-evidence-bounds'; simulation = $true; observedFailure = $failure; status = $(if ($pass) { 'PASS' } else { 'FAIL' }) })
+    Write-Output ("{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+$cycle = @{}; $cycle.loop = $cycle
+Check-StructuredRejection 'structured-cycle-stops-at-depth-bound' $cycle 'depth or node bound'
+Check-StructuredRejection 'structured-nonfinite-rejected' ([double]::NaN) 'non-finite number'
+Check-StructuredRejection 'structured-unsupported-object-rejected' ([object]::new()) 'unsupported value type'
+$script:syntheticGetterInvoked = $false
+$unsafeProperty = [pscustomobject]@{}
+$unsafeProperty | Add-Member ScriptProperty unsafe { $script:syntheticGetterInvoked = $true; throw 'SIMULATED_UNSAFE_GETTER' }
+Check-StructuredRejection 'structured-custom-getter-never-invoked' $unsafeProperty 'custom property getters'
+if ($script:syntheticGetterInvoked) { throw 'Synthetic custom property was incorrectly invoked.' }
+
+function Check-AtomicJsonExport([string] $Name, [string] $Mode) {
+    $directory = Join-Path $OutputRoot ('atomic-json-' + $Name); $null = [IO.Directory]::CreateDirectory($directory)
+    $target = Join-Path $directory 'result.json'
+    function New-JsonOutputStream([string] $Path) {
+        if ($Mode -eq 'create') { throw [IO.IOException]::new('SIMULATED_JSON_CREATE_FAILURE') }
+        $inner = [IO.File]::Open($Path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::Read)
+        $stream = [pscustomobject]@{ Inner = $inner; Mode = $Mode; Target = $target }
+        $stream | Add-Member ScriptMethod Write {
+            param([byte[]] $Bytes, [int] $Offset, [int] $Count)
+            if ($this.Mode -in @('write', 'write-and-dispose')) { $this.Inner.Write($Bytes, $Offset, [Math]::Min(5, $Count)); throw 'SIMULATED_JSON_WRITE_FAILURE' }
+            $this.Inner.Write($Bytes, $Offset, $Count)
+        }
+        $stream | Add-Member ScriptMethod Flush { if ($this.Mode -eq 'flush') { throw 'SIMULATED_JSON_FLUSH_FAILURE' }; $this.Inner.Flush() }
+        $stream | Add-Member ScriptMethod Dispose {
+            $this.Inner.Dispose()
+            if ($this.Mode -in @('dispose', 'write-and-dispose')) { throw 'SIMULATED_JSON_DISPOSE_FAILURE' }
+            if ($this.Mode -eq 'collision') { [IO.File]::WriteAllText($this.Target, 'SIMULATED_IMMUTABLE_EXISTING_RESULT') }
+        }
+        return $stream
+    }
+    $errors = [Collections.Generic.List[object]]::new(); $failure = $null
+    try { Write-NewJson $target @{ status = 'SIMULATED_PASS'; safe = "path\value`nquoted`"value" } $errors }
+    catch { $failure = Get-SafeFailureEvidence $_ 'synthetic-json-export' }
+    $partials = @(Get-ChildItem -LiteralPath $directory -File -Filter '*.partial-*')
+    $pass = if ($Mode -eq 'none') {
+        $null -eq $failure -and (Read-Json $target).status -ceq 'SIMULATED_PASS' -and $partials.Count -eq 0
+    } elseif ($Mode -eq 'collision') {
+        $null -ne $failure -and [IO.File]::ReadAllText($target) -ceq 'SIMULATED_IMMUTABLE_EXISTING_RESULT' -and $partials.Count -eq 1
+    } else { $null -ne $failure -and -not (Test-Path -LiteralPath $target) -and $partials.Count -eq $(if ($Mode -eq 'create') { 0 } else { 1 }) }
+    if ($Mode -eq 'write-and-dispose') { $pass = $pass -and $failure.details -like '*SIMULATED_JSON_WRITE_FAILURE*' -and $errors.Count -eq 1 -and $errors[0].details -like '*SIMULATED_JSON_DISPOSE_FAILURE*' }
+    $checks.Add(@{ name = ('atomic-json-' + $Name); kind = 'atomic-json-publication'; simulation = $true; status = $(if ($pass) { 'PASS' } else { 'FAIL' })
+        finalExists = (Test-Path -LiteralPath $target); partialCount = $partials.Count; observedFailure = $failure; secondaryErrors = @($errors) })
+    Write-Output ("atomic-json-{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+Check-AtomicJsonExport 'success' 'none'
+Check-AtomicJsonExport 'create-failure' 'create'
+Check-AtomicJsonExport 'partial-write-failure' 'write'
+Check-AtomicJsonExport 'flush-failure' 'flush'
+Check-AtomicJsonExport 'close-failure-full-bytes-unpublished' 'dispose'
+Check-AtomicJsonExport 'write-primary-close-secondary' 'write-and-dispose'
+Check-AtomicJsonExport 'existing-result-never-overwritten' 'collision'
+
+function Check-StructuredPositive([string] $Name, $Value) {
+    $directory = Join-Path $OutputRoot ('structured-positive-' + $Name); $null = [IO.Directory]::CreateDirectory($directory)
+    $path = Join-Path $directory 'result.json'; $failure = $null; $roundTrip = $false
+    try {
+        Write-NewJson $path $Value
+        $decoded = Read-Json $path
+        $expected = (ConvertTo-Json -InputObject $Value -Depth 80 -Compress) | ConvertFrom-Json -Depth 80 -AsHashtable -NoEnumerate
+        $roundTrip = (ConvertTo-Json -InputObject $expected -Depth 80 -Compress) -ceq (ConvertTo-Json -InputObject $decoded -Depth 80 -Compress)
+    } catch { $failure = Get-SafeFailureEvidence $_ 'synthetic-positive-export' }
+    $pass = $null -eq $failure -and $roundTrip
+    $checks.Add(@{ name = ('structured-positive-' + $Name); kind = 'production-shaped-export'; simulation = $true
+        status = $(if ($pass) { 'PASS' } else { 'FAIL' }); decodedRoundTrip = $roundTrip; observedFailure = $failure })
+    Write-Output ("structured-positive-{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+$syntheticList = [Collections.Generic.List[object]]::new()
+$syntheticList.Add(@{ label = 'SIMULATED_PROCESS'; pid = 1; startedUtc = '2026-10-17T00:00:00.0000000Z'; exitCode = 0; exitConfirmed = $true; cleanupErrors = @() })
+$syntheticDictionary = [Collections.Generic.Dictionary[string, object]]::new(); $syntheticDictionary.Add('safe', @('one', 'two'))
+$syntheticShape = [ordered]@{ status = 'SIMULATED_PASS'; processes = $syntheticList; nested = $syntheticDictionary
+    before = @(@{ exists = $false; sha256 = $null }); object = [pscustomobject]@{ enabled = $true; count = 2; finite = 0.25 } }
+Check-StructuredPositive 'ordered-list-dictionary-processes' $syntheticShape
+Check-StructuredPositive 'single-root-list-preserved' @('SIMULATED_SINGLE_VALUE')
+Check-StructuredPositive 'empty-root-list-preserved' @()
+Check-StructuredPositive 'multiple-root-list-preserved' @('SIMULATED_FIRST_VALUE', 'SIMULATED_SECOND_VALUE')
+if ($ActualPhaseResultPath) { Check-StructuredPositive 'preserved-phase-result-metadata' (Read-Json $ActualPhaseResultPath) }
+
+function Check-PhaseFinalization([string] $Name, [hashtable] $Options) {
+    $state = @{ RuntimeFault = $false; RunFault = $false; ExportFault = $false; ExportCloseFault = $false
+        DiagnosticFileFault = $false; StderrFault = $false; Primary = $false; SecretEvidence = $false; RuntimeCalls = 0; RunCalls = 0 }
+    foreach ($entry in $Options.GetEnumerator()) { $state[$entry.Key] = $entry.Value }
+    $directory = Join-Path $OutputRoot ('SIMULATED-finalization-' + $Name); $null = [IO.Directory]::CreateDirectory($directory)
+    $runtime = [pscustomobject]@{ State = $state; Name = 'Runtime' }; $run = [pscustomobject]@{ State = $state; Name = 'Run' }
+    foreach ($handle in @($runtime, $run)) {
+        $handle | Add-Member ScriptMethod Dispose { $this.State[$this.Name + 'Calls']++; if ($this.State[$this.Name + 'Fault']) { throw ('SIMULATED_' + $this.Name.ToUpperInvariant() + '_LOCK_FAILURE') } }
+    }
+    function New-JsonOutputStream([string] $Path) {
+        $leaf = [IO.Path]::GetFileName($Path)
+        if ($leaf.StartsWith('result.json.partial-', [StringComparison]::Ordinal)) {
+            if ($state.RuntimeCalls -ne 1 -or $state.RunCalls -ne 1) { throw 'SIMULATED_PUBLICATION_BEFORE_LOCK_FINALIZERS' }
+            if ($state.ExportFault) { throw [IO.IOException]::new('SIMULATED_PHASE_RESULT_EXPORT_FAILURE') }
+        } elseif ($state.DiagnosticFileFault) { throw [IO.IOException]::new('SIMULATED_DIAGNOSTIC_FILE_FAILURE') }
+        $inner = [IO.File]::Open($Path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::Read)
+        if (-not $state.ExportCloseFault -or -not $leaf.StartsWith('result.json.partial-', [StringComparison]::Ordinal)) { return $inner }
+        $stream = [pscustomobject]@{ Inner = $inner }
+        $stream | Add-Member ScriptMethod Write { param([byte[]] $Bytes, [int] $Offset, [int] $Count); $this.Inner.Write($Bytes, $Offset, $Count) }
+        $stream | Add-Member ScriptMethod Flush { $this.Inner.Flush() }
+        $stream | Add-Member ScriptMethod Dispose { $this.Inner.Dispose(); throw 'SIMULATED_PHASE_EXPORT_CLOSE_FAILURE' }
+        return $stream
+    }
+    $channels = [Collections.Generic.List[object]]::new()
+    function Write-PhaseFailureDiagnostic($Envelope, [string] $Channel = 'stderr') {
+        Assert-SafeStructuredValue $Envelope
+        if ($Channel -eq 'stderr' -and $state.StderrFault) { throw [IO.IOException]::new('SIMULATED_STDERR_FAILURE') }
+        $decoded = ($Envelope | ConvertTo-Json -Depth 80) | ConvertFrom-Json -AsHashtable
+        $channels.Add(@{ channel = $Channel; decoded = $decoded })
+    }
+    $result = [ordered]@{ status = 'SIMULATED_PASS'; completedUtc = $null
+        processes = @(@{ identity = 'SIMULATED_OWNED_PROCESS'; exitConfirmed = $false })
+        editorSettingsAfterFailure = @(@{ role = 'SIMULATED_SETTINGS'; inspection = 'UNAVAILABLE' }) }
+    $primary = if ($state.Primary) { 'SIMULATED_PRIMARY_TIMEOUT' } else { $null }
+    $priorSecrets = $script:secretValues
+    $marker = 'SIMULATED_' + '\"' + "`t" + 'PRIVATE_PHASE_INPUT'
+    if ($state.SecretEvidence) { $script:secretValues = @($marker); $result.unsafeInput = $marker }
+    try {
+        $outcome = Complete-PhaseFinalization $result $primary $runtime $run $directory
+        $resultPath = Join-Path $directory 'result.json'; $resultExists = Test-Path -LiteralPath $resultPath
+        $published = if ($resultExists) { Read-Json $resultPath } else { $null }
+        $expectedFailure = $state.Primary -or $state.RuntimeFault -or $state.RunFault -or $state.ExportFault -or $state.ExportCloseFault -or $state.SecretEvidence
+        $pass = $state.RuntimeCalls -eq 1 -and $state.RunCalls -eq 1
+        if ($state.Primary) { $pass = $pass -and $outcome.failure -ceq 'SIMULATED_PRIMARY_TIMEOUT' }
+        if ($expectedFailure) { $pass = $pass -and -not [string]::IsNullOrEmpty($outcome.failure) -and $result.status -ceq 'FAIL' }
+        else { $pass = $pass -and $null -eq $outcome.failure -and $resultExists -and $published.status -ceq 'SIMULATED_PASS' -and $channels.Count -eq 0 }
+        if ($state.ExportFault -or $state.ExportCloseFault -or $state.SecretEvidence) { $pass = $pass -and -not $resultExists }
+        elseif ($expectedFailure) { $pass = $pass -and $resultExists -and $published.status -ceq 'FAIL' }
+        foreach ($fault in @(@{ flag = 'RuntimeFault'; stage = 'phase-runtime-lock-dispose'; detail = 'SIMULATED_RUNTIME_LOCK_FAILURE' },
+                @{ flag = 'RunFault'; stage = 'phase-run-lock-dispose'; detail = 'SIMULATED_RUN_LOCK_FAILURE' },
+                @{ flag = 'ExportFault'; stage = 'phase-result-export'; detail = 'SIMULATED_PHASE_RESULT_EXPORT_FAILURE' },
+                @{ flag = 'ExportCloseFault'; stage = 'phase-result-export'; detail = 'SIMULATED_PHASE_EXPORT_CLOSE_FAILURE' })) {
+            if ($state[$fault.flag]) { $pass = $pass -and @($outcome.secondaryErrors | Where-Object { $_.stage -ceq $fault.stage -and $_.details -like ('*' + $fault.detail + '*') }).Count -ge 1 }
+        }
+        $decodedStrings = @($channels | ForEach-Object { Get-TestDecodedStrings $_.decoded })
+        $leaked = @($decodedStrings | Where-Object { $_.Contains($marker, [StringComparison]::Ordinal) }).Count
+        $pass = $pass -and $leaked -eq 0
+        if ($outcome.secondaryErrors.Count) {
+            $pass = $pass -and $channels.Count -ge 1 -and @($channels | Where-Object { $_.decoded.evidence.processes.Count -eq 1 -and $_.decoded.evidence.editorSettingsAfterFailure.Count -eq 1 }).Count -ge 1
+        }
+        if ($state.DiagnosticFileFault) { $pass = $pass -and @($outcome.secondaryErrors | Where-Object { $_.stage -ceq 'phase-diagnostic-file-export' }).Count -eq 1 }
+        if ($state.StderrFault) { $pass = $pass -and @($outcome.secondaryErrors | Where-Object { $_.stage -ceq 'phase-diagnostic-stderr' }).Count -eq 1 -and @($channels | Where-Object { $_.channel -ceq 'stdout' }).Count -eq 1 }
+        if ($state.StderrFault -and -not $state.DiagnosticFileFault) {
+            $fileEvidence = Read-Json (Join-Path $directory 'finalization-channel-failure.json')
+            $pass = $pass -and @($fileEvidence.secondaryErrors | Where-Object { $_.details -like '*SIMULATED_STDERR_FAILURE*' }).Count -eq 1
+        }
+        if ($state.ExportCloseFault) {
+            $partial = @(Get-ChildItem -LiteralPath $directory -File -Filter 'result.json.partial-*')
+            $pass = $pass -and $partial.Count -eq 1 -and (Read-Json $partial[0].FullName).status -ceq 'SIMULATED_PASS'
+        }
+        $checks.Add(@{ name = ('phase-finalization-' + $Name); kind = 'phase-finalization-caller'; simulation = $true; status = $(if ($pass) { 'PASS' } else { 'FAIL' })
+            primaryPreserved = $(if ($state.Primary) { $outcome.failure -ceq $primary } else { $null }); resultPublished = $resultExists
+            publishedStatus = $(if ($null -ne $published) { $published.status } else { $null }); secondaryErrors = @($outcome.secondaryErrors)
+            survivingChannels = @($channels | ForEach-Object { $_.channel }); decodedLeakCount = $leaked; runtimeDisposeCalls = $state.RuntimeCalls; runDisposeCalls = $state.RunCalls })
+        Write-Output ("phase-finalization-{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+    } finally { $script:secretValues = $priorSecrets }
+}
+Check-PhaseFinalization 'success-published-after-both-locks' @{}
+Check-PhaseFinalization 'primary-timeout-export-failure' @{ Primary = $true; ExportFault = $true }
+Check-PhaseFinalization 'secondary-only-export-fails-phase' @{ ExportFault = $true }
+Check-PhaseFinalization 'primary-and-both-locks-and-export-fail' @{ Primary = $true; RuntimeFault = $true; RunFault = $true; ExportFault = $true }
+Check-PhaseFinalization 'secondary-runtime-lock-blocks-pass' @{ RuntimeFault = $true }
+Check-PhaseFinalization 'diagnostic-file-fails-stderr-survives' @{ Primary = $true; ExportFault = $true; DiagnosticFileFault = $true }
+Check-PhaseFinalization 'stderr-fails-new-file-and-stdout-survive' @{ Primary = $true; ExportFault = $true; StderrFault = $true }
+Check-PhaseFinalization 'file-and-stderr-fail-stdout-survives' @{ Primary = $true; ExportFault = $true; DiagnosticFileFault = $true; StderrFault = $true }
+Check-PhaseFinalization 'unsafe-field-omitted-safe-evidence-retained' @{ Primary = $true; SecretEvidence = $true }
+Check-PhaseFinalization 'primary-only-failed-result-preserved' @{ Primary = $true }
+Check-PhaseFinalization 'complete-pass-bytes-stay-partial-on-close-failure' @{ ExportCloseFault = $true }
+
 $sourceAfter = @(foreach ($record in $sourceBefore) { @{ path = $record.path; sha256 = Get-Hash $record.path; unchanged = ((Get-Hash $record.path) -ceq $record.sha256) } })
 $passed = @($checks | Where-Object { $_.status -eq 'PASS' }).Count
 $invocation = @('pwsh', '-NoProfile', '-File', $PSCommandPath, '-OutputRoot', $OutputRoot)
 if ($ActualUnitLogPath) { $invocation += @('-ActualUnitLogPath', $ActualUnitLogPath, '-ActualUnitCount', $ActualUnitCount) }
+if ($ActualPhaseResultPath) { $invocation += @('-ActualPhaseResultPath', $ActualPhaseResultPath) }
 $result = @{ purpose = 'Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation'
     invocation = $invocation; wrapperSha256 = Get-Hash $guardWrapperPath
     unitScriptSha256 = Get-Hash $PSCommandPath; sourceBefore = $sourceBefore; sourceAfter = $sourceAfter; checks = @($checks)

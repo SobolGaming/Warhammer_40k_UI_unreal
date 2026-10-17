@@ -36,22 +36,22 @@ run the existing Python rules Core for development. The separate
 actual isolated, locked Windows installation and its boundary checks. The original
 30-second run passed 38 Python tests and 11 boundary checks, but timed out on the
 invalid-geometry command; that run remains failed with completion unknown.
-The owner-approved `E01-SLOW120` capture subsequently passed all 40 Python tests
-and 14 boundary checks. It received the recorded-invalid outcome and accepted a
-corrected move that moved all five models one inch to their requested endpoints.
-The longest completed HTTP request took 37.0 seconds in the final Capture
-(38.1 seconds in its predecessor); this does not pass the old
-30-second budget ([Core #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590)).
-Independent privacy review approved30 original-byte non-admin wire fixtures for
-that historical capture. Its linked native supplement passed132 Automation cases
-and two automated evidence checks, with owned DDC and unchanged observed settings/Config.
-After failure-path repairs, a fresh static source review passed. Replacement run
-20261017T025237Z-da446128 passed Preflight and verified runtime reuse and ran87
-unit tests successfully. Capture then failed before Core launch because the
-wrapper matched FAILED within a successful test name. The summary parser is being
-repaired before a newly reviewed full run. No new host/live/wire/native proof
-is credited by that failed attempt; the journal preserves every predecessor.
-Prior execution remains evidence for its recorded source. Full E01 is unaccepted.
+The owner-approved `E01-SLOW120` diagnostic has since completed normal run
+`20261017T030835Z-0d4af4e2`: 87 Python unit tests, 14 Capture checks, 132 unique
+native Automation successes and two automated evidence checks passed. The 14
+include source/runtime/schema checks alongside live HTTP checks. Capture retained
+the recorded-invalid outcome and an accepted corrected move that moved all five
+models to their requested endpoints. Its longest completed HTTP request took
+46.57 seconds; this does not pass the old 30-second budget or establish production
+responsiveness ([Core #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590)).
+Auxiliary privacy inspection and exact-byte promotion preceded Native execution
+for its 30 non-admin HTTP bodies. Current six-path editor-settings before/after
+observations were omitted, so that preservation criterion remains **UNVERIFIED**.
+Authored Config and UBT comparisons do not fill the gap. The maintained wrapper
+is being repaired and tested before affected source review and a fresh full
+normal chain. Final independent code and requirements acceptance remains pending.
+The journal preserves every earlier failure, including the pre-Core summary-parser
+failure and original 30-second failure. Full E01 remains unaccepted.
 The manual installation alternatives below are not its executed commands. Unreal project creation/build is
 specified in [plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).
 

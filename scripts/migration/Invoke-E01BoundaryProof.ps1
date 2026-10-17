@@ -142,6 +142,77 @@ function Assert-SafeText([string] $Text) {
     }
 }
 
+function Assert-SafeStructuredNode($Value, [int] $Depth, [ref] $Nodes) {
+    $Nodes.Value++
+    if ($Depth -gt 80 -or $Nodes.Value -gt 1000000) { throw 'Structured evidence exceeds its depth or node bound.' }
+    if ($null -eq $Value) { return }
+    if ($Value -is [string]) {
+        if ($Value.Length -gt 64MB) { throw 'Structured evidence string exceeds its size bound.' }
+        Assert-SafeText $Value
+        return
+    }
+    if ($Value -is [bool] -or $Value -is [byte] -or $Value -is [sbyte] -or $Value -is [int16] -or $Value -is [uint16] -or
+        $Value -is [int32] -or $Value -is [uint32] -or $Value -is [int64] -or $Value -is [uint64] -or $Value -is [decimal]) { return }
+    if ($Value -is [datetime] -or $Value -is [datetimeoffset]) { Assert-SafeText $Value.ToString('o'); return }
+    if ($Value -is [double] -or $Value -is [single]) {
+        if (-not [double]::IsFinite([double]$Value)) { throw 'Structured evidence contains a non-finite number.' }
+        return
+    }
+    if ($Value -is [Collections.IDictionary]) {
+        $type = $Value.GetType()
+        $knownDictionary = ($type.FullName -in @('System.Collections.Hashtable', 'System.Collections.Specialized.OrderedDictionary', 'System.Management.Automation.OrderedHashtable') -and
+            $type.Assembly -in @([hashtable].Assembly, [Collections.Specialized.OrderedDictionary].Assembly, [Management.Automation.PSObject].Assembly)) -or
+            ($type.IsGenericType -and $type.GetGenericTypeDefinition() -eq [Collections.Generic.Dictionary[string, object]].GetGenericTypeDefinition())
+        if (-not $knownDictionary) { throw 'Structured evidence contains an unsupported dictionary implementation.' }
+        foreach ($entry in $Value.GetEnumerator()) {
+            if ($entry.Key -isnot [string]) { throw 'Structured evidence requires string dictionary keys.' }
+            Assert-SafeStructuredNode $entry.Key ($Depth + 1) $Nodes
+            Assert-SafeStructuredNode $entry.Value ($Depth + 1) $Nodes
+        }
+        return
+    }
+    if ($Value -is [Collections.IList]) {
+        $type = $Value.GetType()
+        if (-not ($type.IsArray -or $type -eq [Collections.ArrayList] -or
+            ($type.IsGenericType -and $type.GetGenericTypeDefinition() -eq [Collections.Generic.List[object]].GetGenericTypeDefinition()))) {
+            throw 'Structured evidence contains an unsupported list implementation.'
+        }
+        foreach ($member in $Value) { Assert-SafeStructuredNode $member ($Depth + 1) $Nodes }
+        return
+    }
+    if ($Value -is [pscustomobject]) {
+        foreach ($property in $Value.PSObject.Properties) {
+            if ($property.MemberType -ne [Management.Automation.PSMemberTypes]::NoteProperty) { throw 'Structured evidence cannot invoke custom property getters.' }
+            Assert-SafeStructuredNode $property.Name ($Depth + 1) $Nodes
+            Assert-SafeStructuredNode $property.Value ($Depth + 1) $Nodes
+        }
+        return
+    }
+    throw 'Structured evidence contains an unsupported value type.'
+}
+
+function Assert-SafeStructuredValue($Value) {
+    $nodes = 0
+    Assert-SafeStructuredNode $Value 0 ([ref]$nodes)
+}
+
+function Assert-SafeJsonElement($Element, [ref] $Nodes) {
+    $Nodes.Value++
+    if ($Nodes.Value -gt 1000000) { throw 'Decoded JSON exceeds its node bound.' }
+    switch ($Element.ValueKind.ToString()) {
+        'String' { Assert-SafeText $Element.GetString() }
+        'Object' { foreach ($property in $Element.EnumerateObject()) { Assert-SafeText $property.Name; Assert-SafeJsonElement $property.Value $Nodes } }
+        'Array' { foreach ($member in $Element.EnumerateArray()) { Assert-SafeJsonElement $member $Nodes } }
+    }
+}
+
+function Assert-SafeDecodedJson([string] $Text) {
+    $options = [Text.Json.JsonDocumentOptions]::new(); $options.MaxDepth = 80
+    $document = [Text.Json.JsonDocument]::Parse($Text, $options)
+    try { $nodes = 0; Assert-SafeJsonElement $document.RootElement ([ref]$nodes) }
+    finally { $document.Dispose() }
+}
+
 function Get-SafeFailureEvidence([Management.Automation.ErrorRecord] $ErrorRecord, [string] $Stage) {
     $exception = $ErrorRecord.Exception
     $record = @{ stage = $Stage; type = $exception.GetType().FullName; details = $exception.Message; redaction = 'PASS' }
@@ -153,7 +224,7 @@ function Get-SafeFailureEvidence([Management.Automation.ErrorRecord] $ErrorRecor
     }
     $record.causes = @($causes)
     $record.causesTruncated = $null -ne $inner
-    try { Assert-SafeText ($record | ConvertTo-Json -Depth 8 -Compress) }
+    try { Assert-SafeStructuredValue $record }
     catch {
         # Retain no rejected value, message fragment or hash of secret material.
         $safeStage = $Stage; $safeType = $exception.GetType().FullName
@@ -165,19 +236,46 @@ function Get-SafeFailureEvidence([Management.Automation.ErrorRecord] $ErrorRecor
     return $record
 }
 
-function Write-NewJson([string] $Path, $Value) {
+function New-JsonOutputStream([string] $Path) {
+    return [IO.File]::Open($Path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::Read)
+}
+
+function Write-NewJson([string] $Path, $Value, [Collections.Generic.List[object]] $SecondaryErrors = $null) {
     $absolute = Assert-ChildPath $Path $projectRoot
-    $json = ($Value | ConvertTo-Json -Depth 80) + "`n"
+    if (Test-Path -LiteralPath $absolute) { throw 'Refusing an existing JSON output collision.' }
+    Assert-SafeStructuredValue $Value
+    $json = (ConvertTo-Json -InputObject $Value -Depth 80 -WarningAction Stop) + "`n"
     Assert-SafeText $json
-    $stream = [IO.File]::Open($absolute, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::Read)
-    try { $bytes = $utf8.GetBytes($json); $stream.Write($bytes, 0, $bytes.Length) } finally { $stream.Dispose() }
+    $bytes = $utf8.GetBytes($json)
+    if ($bytes.Length -gt 64MB) { throw 'Structured JSON output exceeds its size bound.' }
+    $partial = $absolute + '.partial-' + [guid]::NewGuid().ToString('N')
+    $stream = $null; $exportFailure = $null
+    try { $stream = New-JsonOutputStream $partial; $stream.Write($bytes, 0, $bytes.Length); $stream.Flush() }
+    catch { $exportFailure = $_ }
+    finally {
+        if ($null -ne $stream) {
+            try { $stream.Dispose() }
+            catch {
+                if ($null -eq $exportFailure) { $exportFailure = $_ }
+                elseif ($null -ne $SecondaryErrors) { $SecondaryErrors.Add((Get-SafeFailureEvidence $_ 'json-stream-dispose')) }
+            }
+        }
+    }
+    if ($null -ne $exportFailure) { throw $exportFailure }
+    # The final pathname is published only after every stream finalizer succeeds.
+    # Partial bytes remain immutable evidence on failure; never replace a result.
+    [IO.File]::Move($partial, $absolute, $false)
 }
 
 function Read-Json([string] $Path) {
     Require-File $Path
+    if ([IO.FileInfo]::new($Path).Length -gt 64MB) { throw 'JSON evidence input exceeds its size bound.' }
     $text = [IO.File]::ReadAllText($Path, $utf8)
     Assert-SafeText $text
-    return $text | ConvertFrom-Json -AsHashtable
+    Assert-SafeDecodedJson $text
+    $value = $text | ConvertFrom-Json -AsHashtable -Depth 80 -NoEnumerate
+    Assert-SafeStructuredValue $value
+    return ,$value
 }
 
 function New-OwnedDirectory([string] $Path, [string] $Parent) {
@@ -216,9 +314,7 @@ function New-OwnedProcessHandle([Diagnostics.ProcessStartInfo] $StartInfo) {
 }
 
 function New-OwnedLogWriter([string] $Path) {
-    $writer = [IO.StreamWriter]::new($Path, $false, $utf8)
-    $writer.AutoFlush = $true
-    return $writer
+    return [IO.StreamWriter]::new($Path, $false, $utf8)
 }
 
 function Get-OwnedProcessIdentity([int] $ProcessId) {
@@ -304,7 +400,9 @@ function Invoke-OwnedProcess([string] $Label, [string] $Executable, [string[]] $
     try {
         $process = New-OwnedProcessHandle $start
         $processStage = 'create-stdout-log'; $stdoutWriter = New-OwnedLogWriter $stdoutPath
+        $processStage = 'configure-stdout-log'; $stdoutWriter.set_AutoFlush($true)
         $processStage = 'create-stderr-log'; $stderrWriter = New-OwnedLogWriter $stderrPath
+        $processStage = 'configure-stderr-log'; $stderrWriter.set_AutoFlush($true)
         $processStage = 'start-process'; $record.startAttempted = $true
         if (-not $process.Start()) { throw 'Child process did not start.' }
         $record.startConfirmed = $true
@@ -1141,6 +1239,77 @@ function Get-AutomationEvidence([string] $ReportPath) {
     return @{ matchingCount = $tests.Count; tests = @($tests | ForEach-Object { @{ name = $_.fullTestPath; state = $_.state } }); reportSha256 = Get-Hash $ReportPath }
 }
 
+function Get-PhaseFailureEnvelope($Result, [string] $Failure, $Errors) {
+    $evidence = [ordered]@{}; $omitted = 0
+    if ($null -ne $Result) {
+        foreach ($key in $Result.Keys) {
+            try {
+                Assert-SafeStructuredValue $key
+                Assert-SafeStructuredValue $Result[$key]
+                $evidence[$key] = $Result[$key]
+            } catch { $omitted++ }
+        }
+    }
+    return @{ status = 'FAIL'; failure = $Failure; secondaryErrors = $Errors; evidence = $evidence; omittedUnsafeOrUnsupportedFields = $omitted }
+}
+
+function Write-PhaseFailureDiagnostic($Envelope, [string] $Channel = 'stderr') {
+    Assert-SafeStructuredValue $Envelope
+    $json = $Envelope | ConvertTo-Json -Depth 80 -Compress -WarningAction Stop
+    if ($Channel -eq 'stderr') { [Console]::Error.WriteLine($json) }
+    elseif ($Channel -eq 'stdout') { [Console]::Out.WriteLine($json) }
+    else { throw 'Unsupported phase diagnostic channel.' }
+}
+
+function Complete-PhaseFinalization($Result, [string] $PrimaryFailure, $RuntimeHandle, $RunHandle, [string] $Directory) {
+    $errors = [Collections.Generic.List[object]]::new()
+    $failure = $PrimaryFailure
+    if ($failure) { try { Assert-SafeText $failure } catch { $failure = 'Credential scan rejected primary failure details; original details were not retained.' } }
+    $lockStates = [ordered]@{}
+    # All critical resource finalizers precede final result publication. A lock
+    # failure therefore cannot leave a newly published successful predecessor.
+    foreach ($entry in @(@{ name = 'runtime'; handle = $RuntimeHandle }, @{ name = 'run'; handle = $RunHandle })) {
+        $lockStates[$entry.name] = 'NOT_ACQUIRED'
+        if ($null -ne $entry.handle) {
+            try { $entry.handle.Dispose(); $lockStates[$entry.name] = 'DISPOSED' }
+            catch {
+                $lockStates[$entry.name] = 'UNCONFIRMED'
+                $diagnostic = Get-SafeFailureEvidence $_ ('phase-' + $entry.name + '-lock-dispose')
+                $errors.Add($diagnostic)
+                if (-not $failure) { $failure = $diagnostic.details }
+            }
+        }
+    }
+    if ($null -ne $Result) {
+        if ($failure) { $Result.status = 'FAIL'; $Result.failure = $failure }
+        $Result.completedUtc = [datetime]::UtcNow.ToString('o')
+        $Result.finalization = @{ locks = $lockStates; secondaryErrors = $errors }
+        try { Write-NewJson (Join-Path $Directory 'result.json') $Result $errors }
+        catch {
+            $diagnostic = Get-SafeFailureEvidence $_ 'phase-result-export'
+            $errors.Add($diagnostic)
+            if (-not $failure) { $failure = $diagnostic.details }
+            $Result.status = 'FAIL'; $Result.failure = $failure
+        }
+    }
+    if ($errors.Count) {
+        $envelope = Get-PhaseFailureEnvelope $Result $failure $errors
+        try { Write-NewJson (Join-Path $Directory 'finalization-failure.json') $envelope $errors }
+        catch { $errors.Add((Get-SafeFailureEvidence $_ 'phase-diagnostic-file-export')) }
+        try { Write-PhaseFailureDiagnostic $envelope 'stderr' }
+        catch {
+            $errors.Add((Get-SafeFailureEvidence $_ 'phase-diagnostic-stderr'))
+            # Never rewrite a prior artifact. A second immutable file can retain
+            # the stderr failure when the file channel is the surviving one.
+            try { Write-NewJson (Join-Path $Directory 'finalization-channel-failure.json') $envelope $errors }
+            catch { $errors.Add((Get-SafeFailureEvidence $_ 'phase-secondary-diagnostic-file-export')) }
+            try { Write-PhaseFailureDiagnostic $envelope 'stdout' }
+            catch { $errors.Add((Get-SafeFailureEvidence $_ 'phase-diagnostic-stdout')) }
+        }
+    }
+    return @{ failure = $(if ($failure) { $failure } else { $null }); secondaryErrors = $errors; locks = $lockStates }
+}
+
 try {
     if (-not $IsWindows -or -not [Environment]::Is64BitOperatingSystem -or [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture -ne 'X64') { throw 'E01 requires native x64 Windows and PowerShell7.2+.' }
     if ($CaptureRunId -and ($Phase -notin @('Native', 'Audit') -or $CaptureRunId -ne '20261017T002136Z-8dad7f29' -or $CaptureRunId -eq $RunId)) {
@@ -1363,11 +1532,13 @@ try {
     }
     $phaseResult.redaction.status = 'PASS'
 } catch {
+    $phaseError = $_
     $failure = $_.Exception.Message
     try { Assert-SafeText $failure } catch { $failure = 'Credential scan rejected failure details; original output was not exported.' }
     if ($null -ne $phaseResult) {
         $phaseResult.status = 'FAIL'
         $phaseResult.failure = $failure
+        $phaseResult.primaryFailure = Get-SafeFailureEvidence $phaseError 'phase-execution'
         $phaseResult.redaction.status = if ($failure -like '*Credential scan*') { 'REJECTED_QUARANTINED' } else { 'SCANNED_PARTIAL' }
         try { $phaseResult.siblingsAfterFailure = Get-SiblingState 'failed-after' }
         catch { $phaseResult.siblingAfterFailureCheck = 'UNAVAILABLE; inspect preserved sanitized process logs' }
@@ -1382,13 +1553,8 @@ try {
         if ($phaseResult.Contains('editorSettingsBefore')) { Save-EditorSettingsFailureEvidence $phaseResult }
     }
 } finally {
-    if ($null -ne $phaseResult) {
-        $phaseResult.completedUtc = [datetime]::UtcNow.ToString('o')
-        try { Write-NewJson (Join-Path $phaseRoot 'result.json') $phaseResult }
-        catch { if ($null -eq $failure) { $failure = 'Could not safely export the phase result; preserve the run for inspection.' } }
-    }
-    if ($null -ne $runtimeLock) { $runtimeLock.Dispose() }
-    if ($null -ne $runLock) { $runLock.Dispose() }
+    $finalized = Complete-PhaseFinalization $phaseResult $failure $runtimeLock $runLock $phaseRoot
+    $failure = $finalized.failure
 }
 if ($null -ne $failure) { Write-Error $failure; exit 1 }
 Write-Host "E01 $RunId/${Phase}: $($phaseResult.status). Result: $(Join-Path $phaseRoot 'result.json')"

@@ -32,6 +32,16 @@ termination, waiting and finalization faults, recording those secondary failures
 separately. Final process records must distinguish confirmed exit from unavailable
 exit evidence. Test the caller-level failure path with synthetic owned handles;
 do not start a real host, compiler or editor for these guard controls.
+Check raw diagnostic and export string values before JSON escaping, including
+nested values and keys. Escaped representation alone cannot establish that an
+exact known credential is absent. Include quote, backslash and control-character
+secret controls and inspect decoded retained values.
+Outer result export and each lock finalizer must also be independent: preserve
+the primary disposition and safe secondary context through a surviving channel
+when export fails. Retain partial/failed artifacts, and prevent a failed
+finalization from leaving a PASS artifact usable as a successful predecessor.
+Synthetic export, lock and log-factory faults must verify these paths without
+invoking the real phase dispatcher or altering global settings.
 
 Extend only the maintained pure PowerShell guard tests with synthetic unchanged,
 changed, appeared/disappeared, missing/duplicate and substituted-path controls.
