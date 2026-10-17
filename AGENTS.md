@@ -235,6 +235,13 @@ retroactively claim enforced read-only/no-memory isolation from agent names or c
 
 ## Collaboration and GitHub
 
+OWN16 (2026-10-17 UTC) requires regular local checkpoint commits of coherent
+increments, before risky changes and after fixes. Record actual test and independent
+review status in the checkpoint message/body. Exclude secrets, private sessions and
+generated build outputs. A checkpoint is a recoverable save point, not acceptance
+or additional push/merge authority. Keep a reviewed/executing candidate frozen;
+commit queued changes after that operation ends rather than changing its inputs.
+
 Preserve unrelated work, assign parallel agents distinct files, and never share a
 mutable game session or binary asset between writers. Research may continue while
 owner questions are pending; stop only dependent work at the applicable gate.

@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-17 UTC
-**Revision:** 15 — normal E01-SLOW120 results preserved; editor-settings guard verified; source review and a new full chain pending.
+**Revision:** 16 — regular local checkpoints required; normal E01-SLOW120 results preserved; source remediation and a new full chain pending.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of this work and continuation through the migration plan.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -17,6 +17,16 @@
 | Core / `Warhammer_40k_AI` | `C:\SWDev\warhammer\Warhammer_40k_AI` — external authoritative Python engine; reference only | [AGENTS](../../../Warhammer_40k_AI/AGENTS.md), [adapter contract](../../../Warhammer_40k_AI/docs/ADAPTER_DECISION_CONTRACT.md), [manifest](../../../Warhammer_40k_AI/contracts/manifest.json), [schemas](../../../Warhammer_40k_AI/contracts/schemas/), [examples](../../../Warhammer_40k_AI/contracts/examples/) |
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
+
+### Revision 16 changes
+
+OWN16 requires periodic coherent local checkpoint commits, before risky changes
+and after fixes, with honest test/review status and no additional publication
+authority. Section 0.2 and repository instructions preserve that workflow. Round11
+source review requests retaining secondary JSON-close diagnostics at every real
+writer caller; the current130-control result remains source evidence for its
+exact earlier candidate. Complete the bounded repair, fresh affected review and
+new full normal chain before final acceptance review.
 
 ### Revision 15 changes
 
@@ -90,6 +100,14 @@ Genuine 3D from the first playable slice, C++-first client behavior, preservatio
 same three-role discipline as the legacy UI: implementer, independent code-quality
 reviewer, and a different independent requirements/acceptance auditor. This
 amendment changes review gates, not game scope, budgets or prior approvals.
+
+**Local checkpoint amendment, OWN16 (2026-10-17 UTC):** make local checkpoint
+commits of coherent increments regularly, before risky changes and after fixes,
+so work has recoverable save points. Record actual tests and independent-review
+status in the commit message/body. Exclude credentials, private sessions and
+generated build artifacts. Checkpoints do not establish acceptance or expand push
+or merge permission. Keep each review/execution candidate frozen; checkpoint
+queued edits after that operation ends rather than invalidating its inputs.
 
 Freeze exact base/head, dirty-file content hashes, dependency/fixture identities
 and raw execution evidence. Each reviewer starts a new context with no resume,
@@ -1811,3 +1829,8 @@ Before implementing a milestone, re-read its affected source at the exact approv
 Current source-gate update: [round9](research/2026-10-17-e01-slow120-code-review-r9.md) and [round10](research/2026-10-17-e01-slow120-code-review-r10.md) remain historical source assessments. The diagnostic/export/finalization repairs now pass 130 pure PowerShell controls; a fresh affected review and the required new full chain remain pending.
 
 Current remediation source verification: 130/130 pure PowerShell controls passed with39 unchanged inputs, separate from the87 Python units. The earlier93/93,87/87 and68/68 source results and failed83/87 and127/128 runs remain preserved. A new affected source review and full normal chain remain required;030835 still lacks its current editor-settings evidence.
+
+[Round11 source review](research/2026-10-17-e01-slow120-code-review-r11.md) requests
+retaining secondary close diagnostics at the started.json and runtime-provenance
+callers. Complete this bounded repair and new pure verification before fresh
+affected review and execution. No actual new phase has begun.

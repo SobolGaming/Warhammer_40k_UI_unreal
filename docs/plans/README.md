@@ -17,7 +17,7 @@ preserves the original access failure and source-only preparation.
 Current work follows the frozen [bounded E01 packet](research/2026-10-16-e01-boundary-packet.md).
 Its [execution journal](evidence/2026-10-16-e01-boundary.md) records the installed
 runtime, failed attempts and actual checks separately from pending acceptance.
-Canonical plan revision 15 records normal full-chain run
+Canonical plan revision 16 records normal full-chain run
 `20261017T030835Z-0d4af4e2` on source
 `c2614b2484a66bd8465b855e59b184d49b2b926d`: Preflight, PrepareRuntime, Capture,
 auxiliary privacy inspection, exact-byte wire promotion, Native and Audit completed
@@ -108,3 +108,10 @@ missing observations for030835 or replace actual native execution.
 Current source-gate update: [round9](research/2026-10-17-e01-slow120-code-review-r9.md) and [round10](research/2026-10-17-e01-slow120-code-review-r10.md) remain historical source assessments. The maintained diagnostic/export/finalization repairs now pass 130/130 pure PowerShell controls, separate from the87 Python units. A fresh affected source review and a new full normal chain remain required.
 
 The earlier93/93,87/87 and68/68 pure-source results remain preserved, alongside failed83/87 and127/128 runs. The new run binds39 unchanged inputs, including an actual retained Native-result serialization control. Simulated controls supply no live Core or Unreal execution. Run030835 still lacks its current six-editor-settings evidence.
+
+[Round11](research/2026-10-17-e01-slow120-code-review-r11.md) requested retaining
+secondary close diagnostics at two real JSON writer callers. Complete that
+bounded repair and fresh source verification/review before execution. OWN16's
+regular local checkpoint workflow is recorded in [plan Section 0.2](unreal-migration-plan.md#02-research-procedure-and-evidence-rules)
+and repository instructions; checkpoint commits do not confer acceptance or new
+publication permission.

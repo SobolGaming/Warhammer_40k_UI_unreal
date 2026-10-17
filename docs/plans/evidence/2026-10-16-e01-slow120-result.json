@@ -1058,6 +1058,22 @@
           "commandManifestSha256": "96AA50C841FC026C7EFD81D087E1C26C9EA8DE5CE9479C57837B0C24326E168B",
           "artifactManifestSha256": "3D68C3D0BC4FB1573B59ED8892779645FF553A27920344E727BB0263B09A82E4",
           "bodyExcludedFromInitialFinalReviewPackets": true
+        },
+        {
+          "role": "AFFECTED_SOURCE_CODE_GATE",
+          "base": "ef7702e139d9c3cb45bd778b2f733ee791a874d4",
+          "head": "b86cb1dc9544b5d40b4ad2f50295164af949ecd7",
+          "sessionId": "01a14825-25fe-7873-be63-41ea5078ff12",
+          "completedUtc": "2026-10-17T04:39:18.6914256Z",
+          "report": "docs/plans/research/2026-10-17-e01-slow120-code-review-r11.md",
+          "sha256": "A3FA164E4FC46E0D565442877D346CFB3AEEED56AB0128CEF4C8A898793F9D5A",
+          "exitCode": 0,
+          "commandCount": 18,
+          "runtimeEvidenceSha256": "B973870F711F867A4166A2BE71BA3201F0ECBBF3193C32BEA0F1BE7A3E381A30",
+          "commandManifestSha256": "57F6E7E04DFEE112DD46871CCF1907F3B93B5359DB89001E406A4FAAD27703DE",
+          "postSourceManifestSha256": "C53C31EBE69B9A407D96ABCFE66C0A7B744F3ED293B7FB0EF974785FC8C875C4",
+          "artifactManifestSha256": "4C3D3140C661B0FC864CF7369979B5749055FAB6802AA292C360D0AE66FD8BFD",
+          "bodyExcludedFromInitialFinalReviewPackets": true
         }
       ],
       "failedSerializationControlRun": {
@@ -1257,7 +1273,7 @@
     ],
     "initialPacketPolicy": "Clean normative criteria and factual execution evidence; exclude author notes, mixed peer history, prior reviewer bodies and schema1 archive body; include complete raw process selections.",
     "finalRoleLaunchReadiness": "BLOCKED_UNTIL_GUARD_REPAIR_AFFECTED_REVIEW_NEW_FULL_CHAIN_AND_FINAL_FACTUAL_FREEZE",
-    "nextWork": "Fresh affected source review of current 130 pure PowerShell controls and fixed wrapper, then a new normal full chain; 030835 preservation evidence remains missing and unwaived.",
+    "nextWork": "Complete bounded JSON writer caller repair, new pure verification and fresh affected source review, then new full normal chain;030835 preservation evidence remains missing and unwaived.",
     "prospectiveRemediationPacket": {
       "revision": 7,
       "path": "docs/plans/research/2026-10-16-e01-boundary-packet.md",
