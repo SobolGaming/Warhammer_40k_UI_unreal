@@ -27,6 +27,15 @@ record (executable/script identities, arguments, PID, start/exit, exit/timeout,
 limits and cleanup) to the actual owned-process inventory. Earlier captures lack
 that structured worker record; do not invent a historical PID or retrofit them.
 
+The terminal-result trust boundary includes missing, unreadable, truncated,
+invalidly typed or inconsistent JSON, identity/status/receipt fields and artifact
+descriptors. Preserve a safe raw-file descriptor/hash where possible and classify
+unusable terminal evidence UNKNOWN unless a complete validated receipt already
+establishes a known outcome. Retain that known outcome through a later evidence
+failure; an artifact-write failure does not erase an already validated receipt.
+Test malformed syntax, wrong identities/statuses/flags, artifact failures paired
+with UNKNOWN and valid known outcomes, with zero downstream submissions.
+
 Apply the same receipt discipline to the two existing session-create calls:
 retain their exact generated configuration and submitted administrator scope
 privately before send, mark possible response loss UNKNOWN, and stop without

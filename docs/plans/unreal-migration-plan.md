@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-16
-**Revision:** 9 — SLOW120 evidence preserved; command-lane and fixture binding repairs.
+**Revision:** 10 — SLOW120 evidence preserved; worker terminal trust-boundary repair.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of this work and continuation through the migration plan.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -48,7 +48,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: complete packet revision6's guarded attach/lifecycle commands, actual worker process inventory and same-run Capture→Native wire binding, then re-freeze/review before a fresh full E01-SLOW120 chain.** The pre-execution [round-2 code review](research/2026-10-17-e01-slow120-code-review-r2.md) requested these two command/fixture fixes while corroborating the deadline repair and inspected47-unit result. Earlier Capture002136 and supplement004553 remain evidence for their exact old source, with40/14 and132+2 passing checks respectively. Preserve every CHANGES_REQUESTED/BLOCKED report and the original30-second FAIL/UNKNOWN. Final affected code/requirements gates and full E01/production/render/package/Linux gaps remain. Do not begin broad implementation.
+**Current assignment: freeze/review packet revision6's repaired worker terminal-result trust boundary, then run a fresh full E01-SLOW120 chain after source approval.** The [round-3 source review](research/2026-10-17-e01-slow120-code-review-r3.md) found one P2: malformed/inconsistent terminal evidence can lose UNKNOWN classification. It found no other actionable defect in the inspected bounded implementation. The repair passes65 Python/19 guard checks; these are source-unit evidence only and fresh affected review remains pending. Earlier command/fixture fixes and actual worker inventory are present. Capture002136 and supplement004553 remain evidence for their exact old source, with40/14 and132+2 passing checks. Preserve all prior reports and original30-second FAIL/UNKNOWN. Final affected code/requirements gates and full E01/production/render/package/Linux gaps remain. Do not begin broad implementation.
 
 ### 0.1 Fixed scope and authority
 

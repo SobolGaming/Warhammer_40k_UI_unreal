@@ -919,6 +919,41 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
         body["command_id"], body["session"]["session_id"], body["operation"] = command, session, operation
         return boundary.Reply(200, boundary.json_bytes(body), 0, 0)
 
+    def terminal_fixture(self, root, status, *, error_status=403, committed=None):
+        """Create a real driver-format terminal using a mocked scoped adapter."""
+        args, endpoint = self.args(root), MagicMock()
+        request = {"request_id": "unit-terminal-request", "actor_id": "player-a", "options": [{"option_id": "unit-option"}]}
+        view = {"viewer_player_id": "player-a", "pending_decision": request}
+        if status == "ACCEPTED":
+            final = self.accepted("e01-attach-unit-terminal-request", args.attach_session, "submit_finite_decision")
+        elif status == "UNKNOWN":
+            final = TimeoutError("private untrusted transport detail")
+        elif committed is not None:
+            body = self.accepted("e01-attach-unit-terminal-request", args.attach_session, "submit_finite_decision").body
+            body.update({"accepted": False, "committed": committed, "outcome_code": "proposal_invalid"})
+            final = boundary.Reply(422, boundary.json_bytes(body), 0, 0)
+        else:
+            final = boundary.Reply(error_status, boundary.json_bytes({"schema_version": "error-envelope-v1",
+                "error": {"code": "access_denied" if error_status == 403 else "proposal_invalid" if error_status == 422 else "internal_error",
+                          "message": "Synthetic received error."}}), 0, 0)
+        endpoint.request.side_effect = [boundary.Reply(200, boundary.json_bytes({"projection": view}), 0, 0),
+            boundary.Reply(200, b'{"session_revision":3}', 0, 0), final]
+        if status == "FAILED_PREPARATION":
+            endpoint.request.side_effect = TimeoutError("private preparation error")
+        original_write = boundary.write_new
+
+        def write_or_fail(path, data, secrets=()):
+            if status == "FAILED_EVIDENCE" and path.name.endswith(".response.json"):
+                raise PermissionError("Unit evidence save failure")
+            return original_write(path, data, secrets)
+
+        with patch.object(boundary.importlib, "import_module", return_value=SimpleNamespace(DEV_PLAYER_A_TOKEN="unit-credential")), \
+             patch.object(boundary, "Endpoint", return_value=endpoint), \
+             patch.object(boundary, "Schemas", return_value=MagicMock()), \
+             patch.object(boundary, "write_new", side_effect=write_or_fail):
+            code = boundary.attach_worker(args)
+        return args, code, boundary.strict_json(args.report_file.read_bytes())
+
     def test_http_lifecycle_unknown_keeps_exact_input_and_refuses_all_reuse(self):
         for operation in ("start_session", "close_session"):
             with self.subTest(operation=operation), tempfile.TemporaryDirectory() as temporary:
@@ -1148,9 +1183,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             root = Path(temporary)
             args, report, endpoint = self.args(root), boundary.Report("capture", root), MagicMock()
             endpoint.base_url = args.attach_endpoint
-            boundary.write_new(args.report_file, boundary.json_bytes({"schemaVersion": 1, "role": "playerA",
-                "session": args.attach_session, "status": "UNKNOWN", "commandCompletion": "UNKNOWN",
-                "accepted": None, "artifacts": []}))
+            self.terminal_fixture(root, "UNKNOWN")
             child = MagicMock()
             child.pid, child.wait.return_value = 34567, 2
             with patch.object(boundary.subprocess, "Popen", return_value=child):
@@ -1166,7 +1199,193 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             self.assertIn("startUTC", process)
             self.assertIn("exitUTC", process)
             self.assertTrue(process["executableSHA256"])
+            self.assertEqual(process["terminalResult"]["validation"], "PASS")
             endpoint.request.assert_not_called()
+
+    def test_parent_unreadable_terminal_forms_are_unknown_with_safe_raw_descriptor(self):
+        forms = {"absent": None, "empty": b"", "truncated": b'{"status":"ACCEPTED",',
+            "invalid_utf8": b'\xffprivate-untrusted-message', "null": b"null", "array": b"[]", "scalar": b"23"}
+        for label, raw in forms.items():
+            with self.subTest(form=label), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                args = self.args(root)
+                if raw is not None:
+                    args.report_file.write_bytes(raw)
+                report, endpoint, child, later = boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+                endpoint.base_url = args.attach_endpoint
+                child.pid, child.wait.return_value = 56789, 2
+                with patch.object(boundary.subprocess, "Popen", return_value=child):
+                    boundary.run_case_groups(report, (
+                        (("UNIT-WORKER",), lambda: boundary.run_attach_worker(args, report, endpoint, args.attach_session)),
+                        (("UNIT-LATER",), later),
+                    ))
+                self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
+                process = report.details["processes"][0]
+                self.assertEqual(process["exitCode"], 2)
+                self.assertIn("exitUTC", process)
+                self.assertEqual(process["terminalResult"]["validation"], "FAIL")
+                if raw is not None:
+                    self.assertEqual(process["terminalResult"]["sha256"], boundary.sha256(raw))
+                    self.assertEqual(args.report_file.read_bytes(), raw)
+                self.assertNotIn(b"private-untrusted-message", boundary.json_bytes(report.payload()))
+                later.assert_not_called()
+                endpoint.request.assert_not_called()
+
+    def test_parent_inconsistent_terminal_matrix_is_unknown_without_later_submissions(self):
+        mutations = {
+            "schema_bool": lambda row: row.update(schemaVersion=True),
+            "schema_version": lambda row: row.update(schemaVersion=2),
+            "role": lambda row: row.update(role="playerB"),
+            "session": lambda row: row.update(session="other-session"),
+            "missing_status": lambda row: row.pop("status"),
+            "status_type": lambda row: row.update(status=[]),
+            "status_value": lambda row: row.update(status="untrusted-status"),
+            "accepted_flag": lambda row: row.update(accepted=True),
+            "committed_flag": lambda row: row.update(committed=False),
+            "missing_flag": lambda row: row.pop("committed"),
+            "completion": lambda row: row.update(commandCompletion="RECEIVED"),
+            "ownership": lambda row: row.update(ownership="other-owner"),
+            "cause_message": lambda row: row.update(causeType="private-untrusted-message with spaces"),
+            "missing_artifacts": lambda row: row.pop("artifacts"),
+            "artifact_type": lambda row: row.update(artifacts=None),
+            "artifact_scalar": lambda row: row["artifacts"].append("not-a-descriptor"),
+            "artifact_missing_bytes": lambda row: row["artifacts"][0].pop("bytes"),
+            "artifact_bool_bytes": lambda row: row["artifacts"][0].update(bytes=True),
+            "artifact_bad_hash": lambda row: row["artifacts"][0].update(sha256="g" * 64),
+            "artifact_hash_drift": lambda row: row["artifacts"][0].update(sha256="0" * 64),
+            "artifact_duplicate": lambda row: row["artifacts"].append(copy.deepcopy(row["artifacts"][0])),
+            "artifact_foreign_path": lambda row: row["artifacts"][0].update(path=str(REPO / "AGENTS.md")),
+            "missing_command": lambda row: row.pop("commandId"),
+            "envelope_hash": lambda row: row.update(envelopeBytesSHA256="0" * 64),
+        }
+        for label, mutate in mutations.items():
+            with self.subTest(field=label), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                args, code, result = self.terminal_fixture(root, "UNKNOWN")
+                mutate(result)
+                raw = boundary.json_bytes(result)
+                args.report_file.write_bytes(raw)
+                report, endpoint, child, later = boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+                endpoint.base_url = args.attach_endpoint
+                child.pid, child.wait.return_value = 56790, code
+                with patch.object(boundary.subprocess, "Popen", return_value=child):
+                    boundary.run_case_groups(report, (
+                        (("UNIT-WORKER",), lambda: boundary.run_attach_worker(args, report, endpoint, args.attach_session)),
+                        (("UNIT-LATER",), later),
+                    ))
+                self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
+                self.assertEqual(report.details["processes"][0]["terminalResult"]["sha256"], boundary.sha256(raw))
+                self.assertEqual(report.details["processes"][0]["exitCode"], code)
+                self.assertNotIn(b"private-untrusted-message", boundary.json_bytes(report.payload()))
+                later.assert_not_called()
+                endpoint.request.assert_not_called()
+
+    def test_parent_valid_typed_statuses_keep_exact_known_or_unknown_disposition(self):
+        variants = (("ACCEPTED", 403, None), ("UNKNOWN", 403, None), ("FAILED_PREPARATION", 403, None),
+            ("FAILED_EVIDENCE", 403, None), ("REJECTED", 403, None), ("REJECTED", 422, None),
+            ("REJECTED", 500, None), ("REJECTED", 422, True), ("REJECTED", 422, False))
+        for status, http_status, committed in variants:
+            with self.subTest(status=status, http_status=http_status, committed=committed), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                args, code, result = self.terminal_fixture(root, status, error_status=http_status, committed=committed)
+                report, endpoint, child = boundary.Report("capture", root), MagicMock(), MagicMock()
+                endpoint.base_url = args.attach_endpoint
+                child.pid, child.wait.return_value = 56791, code
+                with patch.object(boundary.subprocess, "Popen", return_value=child):
+                    if status == "ACCEPTED":
+                        self.assertEqual(boundary.run_attach_worker(args, report, endpoint, args.attach_session), result)
+                    else:
+                        with self.assertRaises(boundary.BoundaryError) as observed:
+                            boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                        self.assertEqual(isinstance(observed.exception, boundary.CompletionUnknown), status == "UNKNOWN")
+                terminal = report.details["processes"][0]["terminalResult"]
+                self.assertEqual(terminal["validation"], "PASS")
+                if result["commandCompletion"] == "RECEIVED":
+                    self.assertIs(terminal["knownCompletion"]["accepted"], result["accepted"])
+                    self.assertIs(terminal["knownCompletion"]["committed"], result["committed"])
+                endpoint.request.assert_not_called()
+
+    def test_parent_validated_receipt_survives_later_manifest_failure_without_unknown(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, code, result = self.terminal_fixture(root, "ACCEPTED")
+            foreign = root / "unrelated-private-data.json"
+            foreign.write_bytes(b"private-unrelated-data-must-not-be-read")
+            result["artifacts"][0]["path"] = str(foreign)
+            args.report_file.write_bytes(boundary.json_bytes(result))
+            report, endpoint, child, later = boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+            endpoint.base_url = args.attach_endpoint
+            child.pid, child.wait.return_value = 56792, code
+            original_open = Path.open
+
+            def forbid_foreign(path, *args, **kwargs):
+                if path == foreign:
+                    raise AssertionError("Unvalidated artifact path was read")
+                return original_open(path, *args, **kwargs)
+
+            with patch.object(boundary.subprocess, "Popen", return_value=child), patch.object(Path, "open", new=forbid_foreign):
+                with self.assertRaises(boundary.BoundaryError) as observed:
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+            self.assertNotIsInstance(observed.exception, boundary.CompletionUnknown)
+            terminal = report.details["processes"][0]["terminalResult"]
+            self.assertEqual(terminal["validation"], "FAIL")
+            self.assertIs(terminal["knownCompletion"]["accepted"], True)
+            self.assertIs(terminal["knownCompletion"]["committed"], True)
+            self.assertIn("Validated retained raw receipt", terminal["receiptEvidence"])
+            self.assertNotIn(b"private-unrelated-data", boundary.json_bytes(report.payload()))
+            later.assert_not_called()
+            endpoint.request.assert_not_called()
+
+    def test_parent_received_core_or_receipt_inconsistency_is_unknown_before_trust(self):
+        mutations = {
+            "missing_http": lambda row: row.pop("httpStatus"),
+            "boolean_http": lambda row: row.update(httpStatus=True),
+            "wrong_http": lambda row: row.update(httpStatus=500),
+            "wrong_outcome": lambda row: row.update(outcome="error"),
+            "absent_committed": lambda row: row.update(committed=None),
+            "wrong_exit_status": lambda row: row.update(status="REJECTED"),
+        }
+        for label, mutate in mutations.items():
+            with self.subTest(field=label), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                args, code, result = self.terminal_fixture(root, "ACCEPTED")
+                mutate(result)
+                args.report_file.write_bytes(boundary.json_bytes(result))
+                report, endpoint, child = boundary.Report("capture", root), MagicMock(), MagicMock()
+                endpoint.base_url = args.attach_endpoint
+                child.pid, child.wait.return_value = 56793, code
+                with patch.object(boundary.subprocess, "Popen", return_value=child):
+                    with self.assertRaises(boundary.CompletionUnknown):
+                        boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                endpoint.request.assert_not_called()
+        for raw in (b"{", b'{"accepted":true}', b"null"):
+            with self.subTest(receipt=raw), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                args, code, _ = self.terminal_fixture(root, "ACCEPTED")
+                receipt = root / "attach-worker-private/privileged-submission-attempts/worker/command_1.response.json"
+                receipt.write_bytes(raw)
+                report, endpoint, child = boundary.Report("capture", root), MagicMock(), MagicMock()
+                endpoint.base_url = args.attach_endpoint
+                child.pid, child.wait.return_value = 56794, code
+                with patch.object(boundary.subprocess, "Popen", return_value=child):
+                    with self.assertRaises(boundary.CompletionUnknown):
+                        boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                endpoint.request.assert_not_called()
+        for artifact in ("snapshot", "ledger"):
+            for raw in (b"null", b"[]", b"{", b"\xff"):
+                with self.subTest(artifact=artifact, raw=raw), tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    args, code, _ = self.terminal_fixture(root, "ACCEPTED")
+                    target = root / ("attach-worker-private/private-attempts/command_1/playerA.json" if artifact == "snapshot"
+                        else "attach-worker-private/privileged-submission-attempts/worker/command_1.json")
+                    target.write_bytes(raw)
+                    report, endpoint, child = boundary.Report("capture", root), MagicMock(), MagicMock()
+                    endpoint.base_url = args.attach_endpoint
+                    child.pid, child.wait.return_value = 56795, code
+                    with patch.object(boundary.subprocess, "Popen", return_value=child):
+                        with self.assertRaises(boundary.CompletionUnknown):
+                            boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+                    endpoint.request.assert_not_called()
 
     def test_parent_worker_timeout_records_owned_termination_and_unknown(self):
         with tempfile.TemporaryDirectory() as temporary:

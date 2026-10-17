@@ -602,3 +602,27 @@ Revision6 covers focused repairs and a complete worker process inventory. No new
 Core Capture/build/native phase ran. Fresh source review precedes the full chain;
 final code/requirements contexts cover final promoted fixtures/results. This
 factual entry supplies no independent verdict or waiver of either P1 finding.
+
+## OWN15 round-3 pre-execution source review
+
+Fresh exec `01a14781-3073-7d73-b62c-6525f77095f9` assessed clean frozen HEAD
+`6fcd51410b5668ac5a17affb1ed1fbf41c760873` against the same0467ee63... base.
+The [byte-exact original report](2026-10-17-e01-slow120-code-review-r3.md), SHA256
+`3B07AFD91D399BCD50A2793C5B9F981A93C97E8932C3C1BA8BDABFF995AA0F9C`,
+is **CHANGES_REQUESTED** for one P2: unusable existing worker terminal JSON,
+identity/status or artifact evidence can lose UNKNOWN classification. It requires
+UNKNOWN until a complete validated receipt establishes a known outcome, and
+preservation of known receipts through later evidence failures.
+
+The CLI completed `2026-10-17T01:42:10.6841217Z`, exit0,35 static commands;
+all174 candidate and two external instruction entries remained unchanged.
+Actual runtime metadata separately confirms gpt-6.1-sol/ultra, read-only/never
+and memory_mode disabled; low-level memory internals remain unverified. No peer
+reports, author notes or mixed status prose entered the initial context.
+
+The reviewer found no other actionable defect in its inspected bounded source.
+It inspected60-unit and19-guard results, not a new Core or native run. Its plain
+base-delta whitespace check reported632 CRLF diagnostics solely in the immutable
+original-byte OpenAPI copy; those bytes were preserved. The new terminal-trust
+repair still requires re-freeze/fresh source review and the full execution chain.
+This coordinator record neither supplies a verdict nor accepts the diagnostic.

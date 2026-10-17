@@ -33,6 +33,10 @@ endings. The [round-2 code review](research/2026-10-17-e01-slow120-code-review-r
 additionally requires guarded attach/lifecycle commands and same-run Capture/native
 fixture binding. Packet revision6 binds these repairs and the actual worker
 process inventory, fresh review and a new full chain.
+The [round-3 code review](research/2026-10-17-e01-slow120-code-review-r3.md)
+found one remaining terminal-result UNKNOWN classification edge. Its repair and
+fresh source review precede execution; current60-unit/19-guard results are source
+verification only.
 The [factual result JSON](evidence/2026-10-16-e01-slow120-result.json) binds the
 Capture and native supplement without asserting independent acceptance.
 The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md)

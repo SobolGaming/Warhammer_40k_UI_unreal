@@ -1239,6 +1239,127 @@ def attach_worker(args: argparse.Namespace) -> int:
     return 0 if output["status"] == "ACCEPTED" else 2
 
 
+def validate_worker_terminal(args: argparse.Namespace, report: Report, session: str, code: int, record: dict) -> dict:
+    """Unknown until a complete scoped terminal result can be trusted.
+
+    Preserve a validated received outcome if only later evidence checks fail.
+    Read only the worker's three fixed private artifact paths, never a path
+    supplied by an unvalidated terminal descriptor.
+    """
+    result_file = args.output_root / "attach-worker.json"
+    private = args.output_root / "attach-worker-private"
+    snapshot_path = private / "private-attempts/command_1/playerA.json"
+    ledger_path = private / "privileged-submission-attempts/worker/command_1.json"
+    receipt_path = ledger_path.with_suffix(".response.json")
+    allowed = {snapshot_path, ledger_path, receipt_path}
+    terminal = {"path": str(result_file), "validation": "PENDING"}
+    record["terminalResult"] = terminal
+    known_received = False
+
+    def read_owned(path: Path) -> bytes:
+        no_reparse(path)
+        with path.open("rb") as stream:
+            data = stream.read(RESPONSE_LIMIT + 1)
+        require(len(data) <= RESPONSE_LIMIT, "Worker evidence exceeds the existing response-size bound")
+        secret_scan(data, report.secrets)
+        return data
+
+    try:
+        no_reparse(result_file)
+        with result_file.open("rb") as stream:
+            raw = stream.read(RESPONSE_LIMIT + 1)
+        terminal.update({"bytesRead": len(raw), "sha256": sha256(raw), "hashScope": "complete-file" if len(raw) <= RESPONSE_LIMIT else "bounded-prefix"})
+        require(len(raw) <= RESPONSE_LIMIT, "Worker terminal exceeds the existing response-size bound")
+        secret_scan(raw, report.secrets)
+        result = strict_json(raw)
+        require(type(result) is dict, "Worker terminal must be an object")
+        require(type(result.get("schemaVersion")) is int and result["schemaVersion"] == 1 and result.get("role") == "playerA" and result.get("session") == session, "Worker terminal identity mismatch")
+        status = result.get("status")
+        require(type(status) is str and status in ("ACCEPTED", "REJECTED", "UNKNOWN", "FAILED_PREPARATION", "FAILED_EVIDENCE"), "Worker terminal status unsupported")
+        base = {"schemaVersion", "role", "session", "accepted", "committed", "commandCompletion", "ownership", "status", "artifacts"}
+        identities = {"offeredRequestId", "commandId", "envelopeBytesSHA256"}
+        received = {"httpStatus", "outcome"}
+        expected = base | (set() if status == "FAILED_PREPARATION" else identities)
+        if status in ("ACCEPTED", "REJECTED", "FAILED_EVIDENCE"):
+            expected |= received
+        if status in ("UNKNOWN", "FAILED_PREPARATION", "FAILED_EVIDENCE"):
+            expected.add("causeType")
+        if status == "UNKNOWN":
+            expected.add("sessionDisposition")
+        if status == "FAILED_PREPARATION" and identities & set(result):
+            expected |= identities
+        require(set(result) == expected, "Worker terminal fields missing or unexpected")
+        require(result["ownership"] == "endpoint/session/scoped credential only; no create/close/shutdown capability", "Worker terminal ownership differs")
+        require(all(value is None or type(value) is bool for value in (result["accepted"], result["committed"])), "Worker terminal flags must be exact booleans or absent/null")
+        require(type(result["artifacts"]) is list, "Worker terminal artifact inventory is not a list")
+        if "causeType" in result:
+            cause = result["causeType"]
+            require((status == "UNKNOWN" and cause is None) or (type(cause) is str and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", cause) is not None), "Worker terminal cause type invalid")
+        if identities <= set(result):
+            require(all(type(result[key]) is str and bool(result[key]) for key in identities), "Worker terminal command identities invalid")
+            require(re.fullmatch(r"[0-9a-f]{64}", result["envelopeBytesSHA256"]) is not None and result["commandId"] == "e01-attach-" + result["offeredRequestId"], "Worker terminal command/hash identity differs")
+        if status in ("UNKNOWN", "FAILED_PREPARATION"):
+            require(code == 2 and result["accepted"] is None and result["committed"] is None, "Worker non-received terminal exit/flags differ")
+            require(result["commandCompletion"] == ("UNKNOWN" if status == "UNKNOWN" else "NOT_SUBMITTED"), "Worker non-received completion differs")
+            if status == "UNKNOWN":
+                require(result["sessionDisposition"] == "ABANDONED", "Worker unknown session was not abandoned")
+        else:
+            require(code == (0 if status == "ACCEPTED" else 2) and result["commandCompletion"] == "RECEIVED", "Worker received terminal exit/completion differs")
+            http_status, outcome = result["httpStatus"], result["outcome"]
+            require(type(http_status) is int and 100 <= http_status <= 599 and type(outcome) is str, "Worker received status/outcome invalid")
+            flags = (result["accepted"], result["committed"])
+            compatible = ((outcome == "accepted" and http_status == 200 and flags == (True, True))
+                or (outcome == "recorded_invalid" and http_status == 422 and flags == (False, True))
+                or (outcome == "uncommitted_invalid" and http_status == 422 and flags in ((None, None), (False, False)))
+                or (outcome == "error" and http_status >= 400 and flags == (None, None)))
+            require(compatible and (status != "ACCEPTED" or outcome == "accepted") and (status != "REJECTED" or outcome != "accepted"), "Worker received flags contradict its status/outcome")
+        if status != "FAILED_PREPARATION":
+            ledger = strict_json(read_owned(ledger_path))
+            snapshot = strict_json(read_owned(snapshot_path))
+            require(type(snapshot) is dict, "Worker retained actor snapshot is not an object")
+            command = object_field(ledger, "commandEnvelope")
+            require(ledger.get("submittedRole") == "playerA" and ledger.get("sessionId") == session and command.get("session_id") == session and command.get("command_id") == result["commandId"] and command.get("request_id") == result["offeredRequestId"], "Worker retained command scope differs")
+            require(object_field(command, "submission").get("submission_kind") == "finite_option", "Worker retained command is not the offered finite submission")
+            require(sha256(json_bytes(command)) == ledger.get("envelopeBytesSHA256") == result["envelopeBytesSHA256"] and snapshot.get("commandEnvelope") == command, "Worker retained envelope hash differs")
+            authorized_candidate_snapshot(object_field(snapshot, "requestBeforeSubmission"), object_field(snapshot, "authorizedViewBeforeSubmission"), command, "playerA")
+        if result["commandCompletion"] == "RECEIVED":
+            if receipt_path.is_file():
+                body = strict_json(read_owned(receipt_path))
+                require(classify(result["httpStatus"], body) == result["outcome"] and body.get("accepted") is result["accepted"] and body.get("committed") is result["committed"], "Worker saved receipt differs from terminal flags/outcome")
+                if "error" not in body:
+                    require(body["command_id"] == result["commandId"] and body["session"]["session_id"] == session and body["operation"] == "submit_finite_decision", "Worker saved receipt command/session/operation differs")
+                terminal["receiptEvidence"] = "Validated retained raw receipt and command identity"
+            else:
+                require(status == "FAILED_EVIDENCE", "Worker received result has no retained receipt")
+                terminal["receiptEvidence"] = "Complete typed FAILED_EVIDENCE; raw receipt unavailable"
+            known_received = True
+            terminal["knownCompletion"] = {key: result[key] for key in ("status", "commandCompletion", "accepted", "committed", "httpStatus", "outcome")}
+        seen = set()
+        for artifact in result["artifacts"]:
+            require(type(artifact) is dict and set(artifact) == {"path", "sha256", "bytes"}, "Worker artifact descriptor invalid")
+            require(type(artifact["path"]) is str and type(artifact["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", artifact["sha256"]) is not None and type(artifact["bytes"]) is int and 0 <= artifact["bytes"] <= RESPONSE_LIMIT, "Worker artifact identity types invalid")
+            path = absolute_path(artifact["path"])
+            require(path in allowed and path not in seen, "Worker artifact path unexpected or duplicated")
+            data = read_owned(path)
+            require(len(data) == artifact["bytes"] and sha256(data) == artifact["sha256"], "Worker artifact bytes/hash differ")
+            seen.add(path)
+            report.artifact(path)
+        required = set() if status == "FAILED_PREPARATION" else {snapshot_path, ledger_path}
+        if status in ("ACCEPTED", "REJECTED"):
+            required.add(receipt_path)
+        require(required <= seen and (status not in ("UNKNOWN", "FAILED_PREPARATION") or receipt_path not in seen), "Worker terminal artifact set incomplete or contradictory")
+        require(result_file.read_bytes() == raw, "Worker terminal changed during validation")
+        report.artifact(result_file)
+        terminal["validation"] = "PASS"
+        terminal["status"] = status
+        return result
+    except (BoundaryError, OSError, KeyError, IndexError, TypeError, ValueError) as exc:
+        terminal.update({"validation": "FAIL", "causeType": type(exc).__name__})
+        if known_received:
+            raise BoundaryError("Attach worker received outcome retained; later terminal evidence validation failed; no further submissions") from exc
+        raise CompletionUnknown("Attach worker command completion UNKNOWN; terminal result unusable; no further submissions") from exc
+
+
 def run_attach_worker(args: argparse.Namespace, report: Report, http: Endpoint, session: str) -> dict:
     """Record the one owned worker, including failure and handle-based cleanup."""
     result_file, log_file = args.output_root / "attach-worker.json", args.output_root / "attach-worker.log"
@@ -1279,18 +1400,8 @@ def run_attach_worker(args: argparse.Namespace, report: Report, http: Endpoint, 
                 code = child.wait(timeout=10)
         record["exitCode"] = code if code is not None else None if child is None else child.poll()
         record["exitUTC"] = datetime.now(UTC).isoformat()
-    if not result_file.is_file():
-        raise CompletionUnknown("Attach worker command completion UNKNOWN; terminal receipt absent; no further submissions")
-    report.artifact(result_file)
-    result = strict_json(result_file.read_bytes())
-    require(result.get("schemaVersion") == 1 and result.get("role") == "playerA" and result.get("session") == session, "Attach worker terminal identity mismatch")
-    require(result.get("status") in ("ACCEPTED", "REJECTED", "UNKNOWN", "FAILED_PREPARATION", "FAILED_EVIDENCE"), "Attach worker terminal status unsupported")
-    for artifact in result.get("artifacts", []):
-        path = absolute_path(artifact["path"])
-        require(beneath(path, args.output_root / "attach-worker-private") and sha256(path.read_bytes()) == artifact["sha256"], "Attach worker private artifact identity mismatch")
-        report.artifact(path)
+    result = validate_worker_terminal(args, report, session, code, record)
     if result["status"] == "UNKNOWN":
-        require(result.get("commandCompletion") == "UNKNOWN" and result.get("accepted") is None, "Attach worker UNKNOWN receipt claimed acceptance")
         raise CompletionUnknown("Attach worker command completion UNKNOWN; session abandoned without further submissions")
     require(code == 0 and result["status"] == "ACCEPTED" and result.get("accepted") is True and result.get("commandCompletion") == "RECEIVED", "Attach worker did not complete an accepted action; inspect typed terminal result")
     return result

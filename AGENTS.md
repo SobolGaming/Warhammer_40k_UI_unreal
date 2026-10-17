@@ -59,6 +59,9 @@ Capture link cannot substitute for proof of changed Python bytes. Block all
 dependent groups after a failed/uncertain session, retain the original authorized
 envelope and completion UNKNOWN, and enforce remaining time on each socket read.
 These controls cover paired, attach-worker and supervisor lifecycle commands.
+An unusable worker terminal result is UNKNOWN unless a complete validated receipt
+already establishes a known outcome; retain known receipts through later evidence
+failures. Preserve absent wire flags as null and explicit booleans exactly.
 Keep a complete owned-process inventory including the attach worker. Normal
 Native/Audit must bind every promoted wire byte to the same run's successful
 Capture artifacts before execution and revalidate the binding afterward.

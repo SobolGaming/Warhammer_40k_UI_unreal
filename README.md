@@ -54,6 +54,8 @@ revision6 requires guarded commands in every launch/attach lane, a complete work
 process record and native fixtures bound to the same fresh Capture. The separate
 round-2 source review found the attach/fixture gaps before a new Core run.
 Fresh review and a new full diagnostic chain remain required.
+The later round-3 review isolated a remaining malformed worker-result UNKNOWN
+classification edge, which is being repaired before that chain.
 Prior execution remains evidence for its recorded source. Full E01 is unaccepted.
 The manual installation alternatives below are not its executed commands. Unreal project creation/build is
 specified in [plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).
