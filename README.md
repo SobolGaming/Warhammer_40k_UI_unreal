@@ -73,7 +73,19 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-E02 candidate `2efd348b20bbf4adcd014dba9d50e178cad5c71c` received affected
+The latest E02 candidate `58bad7984ef336dfbb486d75bcd51fd241b3b529` received
+**SOURCE CHANGES_REQUESTED** for two supervisor-control gaps: a real launch error
+could satisfy an injected-failure check, and a root-only timeout could pass without
+proof that its intended child started. Planned RunId `20261017T210320Z-3fa544f1`
+is **UNUSED_DO_NOT_EXECUTE**; no E02 phase ran on that candidate. Bounded remediation
+requires exact seam diagnostics/states and a child readiness/identity/alive proof
+using the original Process handle. The existing cmd grouping correction stays in
+place. Repairs remain **UNEXECUTED** pending checkpoint/freeze, fresh affected
+SOURCE review and a new RunId. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+binds the raw review and closure. Visible-window approval and final independent
+CODE/REQ acceptance are separate gates.
+
+Historical E02 candidate `2efd348b20bbf4adcd014dba9d50e178cad5c71c` received affected
 **SOURCE PASS**. Root combined it with the historical 338 assessment only for
 demonstrated unchanged scope; this is no new whole-C++/plugin verdict. Run
 `20261017T202655Z-2b75d9a6` completed Preflight with matching nine-before/nine-after
@@ -85,9 +97,8 @@ receipt, build.log, staged Binaries/Intermediate or Build completion exists;
 no UBT/C++/UHT/native/GUI proof ran. All nine Build settings pairs also match
 Preflight.after. The run and hidden authority are closed; do not resume/reuse them.
 
-Root has authored only a bounded cmd FOR/IF grouping correction to the Build
-launcher. It remains **UNEXECUTED** and needs a checkpoint/freeze, fresh affected
-SOURCE review and new RunId. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+The subsequent bounded cmd FOR/IF grouping correction to the Build launcher
+remains **UNEXECUTED**. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
 preserves the actual primary error, receipts, source gates and historical failures.
 
 Historical E02 candidate `338735e737c6892736b03c884b475c66ae0f69f8` received a sealed

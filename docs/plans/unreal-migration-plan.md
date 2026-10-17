@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-17 UTC
-**Revision:** 24 — E02 affected source 2efd passed the composite gate; Preflight and SupervisorControls completed, then Build failed on a missing toolchain receipt. Hidden authority is closed; only bounded launcher repair is released.
+**Revision:** 25 — E02 source 58bad received CHANGES_REQUESTED for supervisor-control evidence gaps. Its unused run is closed; bounded child-identity/liveness and exact injected-seam repairs need fresh affected source review before execution.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,23 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 24 changes
+### Revision 25 changes
+
+Frozen source `58bad7984ef336dfbb486d75bcd51fd241b3b529` received SOURCE
+CHANGES_REQUESTED for two pre-existing gaps: SUP03 accepted insufficient proof
+that the intended injected seam was reached, and SUP02 could pass a root-only
+timeout without proving its child started. No E02 phase ran on 58bad; planned
+RunId `20261017T210320Z-3fa544f1` is UNUSED_DO_NOT_EXECUTE. Root sealed the raw
+assessment, closed that run and released bounded supervisor remediation/docs.
+The shared SUP01/SUP02 fixture now requires a real child readiness/identity match
+and original-handle liveness observations. SUP03 requires exact typed diagnostics,
+resume/exit states and actual final job-zero evidence. The existing cmd grouping
+correction is retained. All repairs remain unexecuted pending checkpoint/freeze,
+fresh affected SOURCE review and a new RunId. The three groups/six subcases/five
+roots, 16 native cases and budgets remain unchanged. Historical results remain
+unaltered; known control gaps prevent prospective reuse of affected approval.
+
+### Revision 24 history
 
 Affected source `2efd348` received SOURCE PASS; root combined it with the 338
 assessment only for demonstrated unchanged scope. Run
@@ -61,7 +77,7 @@ The bounded E02 candidate `c10c021` passed its pre-execution SOURCE assessment.
 The first run completed Preflight and its supervisor control assertions, then
 failed required-artifact publication; no dependent build/native/GUI phase ran.
 Its redirected LocalAppData observations also omitted the real desktop settings
-and a persisted before baseline. Section0.9 records these separate dispositions
+and a persisted before baseline. Section 0.9 records these separate dispositions
 and the next candidate's review/run gate. E01 acceptance and historical failures
 remain unchanged; no E02 runtime or final milestone acceptance is established.
 
@@ -82,7 +98,7 @@ OWN13 applicability review for the exact source-authoring scope. Its14 paths,
 16 tests,6 PNGs, existing budgets and later source/final-review gates are explicit.
 One visible interactive game-window approval is still needed before graphical
 execution. No E02 source/build/native/result acceptance is claimed by this packet
-checkpoint. See Section0.9 and the E02 authority journal.
+checkpoint. See Section 0.9 and the E02 authority journal.
 
 ### Revision 18 history — bounded E01 publication
 
@@ -191,7 +207,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: finish only the bounded E02 Build-launcher correction and documentation, checkpoint/freeze and obtain fresh affected SOURCE review before a new RunId.** Affected source 2efd passed root's composite gate; Run 202655 completed Preflight and SupervisorControls, then Build failed on a missing toolchain receipt despite worker exit 0/confirmed cleanup. Its hidden authority/run are closed and must not be reused. The authored cmd grouping repair remains unexecuted. Section 0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) preserve exact bindings and earlier 338/73f/c10c failures. No UBT/C++/UHT/native/GUI proof ran; graphical execution still needs explicit visible-window approval. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
+**Current assignment: checkpoint/freeze the bounded supervisor-control repairs and obtain fresh affected SOURCE review before a new RunId.** Source 58bad received CHANGES_REQUESTED for insufficient child-start/alive proof and injected-seam validation. Its planned 210320 run is UNUSED_DO_NOT_EXECUTE; no E02 phase ran. The repairs retain the cmd grouping correction and existing counts/budgets, and remain unexecuted. Section 0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) preserve exact bindings and historical 2efd/338/73f/c10c results/failures. No UBT/C++/UHT/native/GUI proof ran; graphical execution still needs explicit visible-window approval. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
 
 ### 0.1 Fixed scope and authority
 
@@ -865,13 +881,32 @@ paths,named writers,owned staging/process/cache side effects and fixed pass/fail
 rules. The packet reviewed with 338 has whole-file SHA256 `48BF6A0E4EF42E930AF65FE27D76F61B224BCFA7685C19D5A00B21C9D4CB7EE8`.
 Its 2026-10-17 clarification corrects the outward-face/oracle and exact bare-key
 requirements within the same scope, 14 paths, 16 cases and budgets.
-The source-only revision 23 adds the exact Known Documents observation policy;
-its current whole-file SHA256 is `1CE4B98948DBA9F875983DAA6FEF9ACAB3DCEF27279C27BCB76927A074882109`
+The historical source-only revision 23 added the Known Documents observation policy;
+its whole-file SHA256 was `1CE4B98948DBA9F875983DAA6FEF9ACAB3DCEF27279C27BCB76927A074882109`
 and preceding planning-prefix SHA256 is `4F09F6E58627CD258A39C6375365ACD888A8DAA7A0D6D44F8DFE70CB558BA60D`.
-Those inputs were covered by the affected 2efd assessment below; the later
-Build-launcher change requires a new affected assessment before execution.
+Those inputs were covered by the historical affected 2efd assessment below.
+The revision25 packet adds child-start/alive evidence and exact seam validation;
+its current hashes are recorded in the journal. Changed source requires a fresh
+affected assessment before execution.
 
-**Current source/run disposition:** The affected static assessment of
+**Current source/run disposition:** The static assessment of
+`58bad7984ef336dfbb486d75bcd51fd241b3b529` is **CHANGES_REQUESTED**. Its raw
+6397-byte report SHA256 is `7C4C916D9C9841CEF6AF562A7522C343A0AFE4C6573824F118CAC6DC808F34DF`.
+The journal binds its sealed source/trace evidence, original approval rejection,
+accepted unchanged retry and source-scoped standing-consent limits. Both P2
+findings are accepted for bounded remediation: actual child-start/alive proof and
+exact intended synthetic-seam validation. Planned RunId
+`20261017T210320Z-3fa544f1` is **UNUSED_DO_NOT_EXECUTE**, with no phase/RunRoot.
+Root disposition SHA256 is `37B6DAE8E96945D14830DF1C5DC8F3E951F01347F124ED3BBF63BBE59AEE67A2`.
+Only those supervisor repairs and related documentation are released. The common
+fixture also fails fast for SUP01 child startup/identity loss. The retained cmd
+grouping fix and supervisor repairs remain **UNEXECUTED**. Checkpoint/freeze,
+fresh affected SOURCE review and a new RunId must precede any wrapper/control/
+Build execution. These findings do not rewrite the historical completed controls;
+they prevent carrying affected approval forward. Visible-window approval and
+final separate OWN15 CODE/REQ remain unsupplied.
+
+**Historical 2efd source/run disposition:** The affected static assessment of
 `2efd348b20bbf4adcd014dba9d50e178cad5c71c` is **PASS**. Root's composite gate
 uses the historical 338 full-source assessment only for demonstrated unchanged
 scope; this is no fresh whole-C++/plugin verdict from the affected reviewer.
@@ -2015,7 +2050,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** finish only the bounded E02 Build-launcher correction/docs, checkpoint/freeze and obtain fresh affected SOURCE review before a new RunId under Section 0.9. Affected 2efd passed the composite gate; Run 202655 completed Preflight and SupervisorControls, then Build failed on the missing toolchain receipt. Its hidden authority/run are closed/DO_NOT_REUSE. The authored cmd grouping repair remains unexecuted. Earlier 338/73f/c10c dispositions, publication failure and settings gaps remain intact. No UBT/C++/UHT/native/GUI proof ran; graphical execution still requires explicit visible-window approval. Scoped standing review-transmission consent adds no runtime/merge authority. E01-SLOW120 acceptance/history is unchanged.
+**Ready now:** checkpoint/freeze the bounded E02 child-start/alive and exact synthetic-seam repairs, then obtain fresh affected SOURCE review before a new RunId under Section 0.9. Source 58bad is CHANGES_REQUESTED; planned 210320 is UNUSED_DO_NOT_EXECUTE with no RunRoot/phase. Repairs plus the existing cmd grouping correction remain unexecuted. Historical 2efd Preflight/controls completion and Build failure,338/73f/c10c dispositions and settings gaps remain intact. No UBT/C++/UHT/native/GUI proof ran; graphical execution still requires explicit visible-window approval. Scoped standing review-transmission consent adds no runtime/merge authority. E01-SLOW120 acceptance/history is unchanged.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 

@@ -437,14 +437,61 @@ native E02 cases and four proof-phase bounds do not change.
 | Group | Required behavior and evidence |
 |---|---|
 | `SUP01` normal root plus lingering descendant | A benign known child remains active after its root exits; root evidence is complete and the genuine private-job query must still report active membership. The supervisor waits for the owned child to finish and records actual zero-active before cleanup completion. A root-only completion path must fail this control. Child observations support this fixture only, not a universal descendant ledger. |
-| `SUP02` timeout cleanup | A benign owned root/descendant remains active. The short test deadline produces the expected typed timeout, private-job termination and actual exit/zero-active observations; successful cleanup never changes the attempted proof's timeout to PASS. No unrelated process is targeted. |
-| `SUP03` setup/query/finalization failure | Controlled seams exercise failed assignment before resume, failed accounting query and failed evidence/handle finalization. Primary and secondary errors remain visible; setup fails closed, cleanup stays bounded and no dependent phase starts. Label injected checks separately from actual API observations; do not claim that injection proves every OS failure path. |
+| `SUP02` timeout cleanup | Prove the actual owned child started and remained alive shortly before private-job termination, using the original returned Process object and a bounded child readiness acknowledgment. The short test deadline produces the exact expected typed timeout, private-job termination and actual exit/zero-active observations; successful cleanup never changes the attempted proof's timeout to PASS. A sleeping root or aggregate member count alone cannot satisfy this control. No unrelated process is targeted. |
+| `SUP03` setup/query/finalization failure | Controlled seams exercise failed assignment before resume, failed accounting query and failed evidence/handle finalization. Require each exact injected diagnostic and expected resume/exit/accounting state; reject real technical blockers, unrelated primary/secondary errors and missing evidence. Primary and secondary errors remain visible; setup fails closed, cleanup stays bounded and no dependent phase starts. Label injected checks separately from actual API observations; do not claim that injection proves every OS failure path. |
 
 Freeze exact benign fixture commands, subcase/assertion counts, injection seams
 and output contracts before source review. Require all three groups complete with
 their expected outcomes, recording actual versus injected observations separately.
 A missing/failed control blocks build. No fast-child timestamp acquisition or
 arbitrary complete child-inventory control is added. All controls remain **NOT RUN**.
+
+The SUP01/SUP02 fixture must stop on child Start failure, a null returned Process,
+early child exit, invalid readiness text or loss of the child. Keep the original
+returned Process object until the fixture exits; never reopen a PID. Redirect
+only the child's stdout for one fixed, bounded readiness exchange. A child
+self-report of PID/creation FILETIME must match the parent's original Process
+Id/StartTime observation, with HasExited=false. The readiness deadline is two
+seconds inside the existing root budget, without retries. A post-read text-size
+check on ReadLineAsync is validation, not an allocation cap; the command text is
+the frozen, trusted fixture. Preserve the acknowledgment and parent observations
+as JSON lines in the existing owned root stdout and bind its unchanged descriptor.
+
+For SUP01 require that identity/alive observation immediately before the normal
+root exits, alongside the existing actual root-exit/active-members and eventual
+zero-active observations. For SUP02 retain and poll the original child Process,
+record periodic HasExited=false observations spanning at least 250 milliseconds
+on the fixture's monotonic clock, and require a final observation within one
+second before the successful private-job TerminateJobObject request.
+Require the expected forced root exit `0xE0200001`, exact non-synthetic timeout
+diagnostic, no technical blocker or unexpected secondary failure, and final
+actual zero-active accounting. Missing, stale or inconsistent child evidence
+fails the control even when the root alone times out. These are finite fixture
+observations plus the non-breakaway inheritance mechanism, not a direct
+per-descendant job query or universal child-lifecycle ledger.
+
+For SUP03 require typed booleans/integers, real root PID/creation/exit evidence,
+hidden launch identity/budget and final actual successful zero-active query.
+Assignment must remain unassigned/unresumed with the exact synthetic primary
+`E02_INJECTED_ASSIGN_FAILURE_BEFORE_RESUME`, forced exit `0xE0200002`, no secondary
+errors and a zero-total private job. Query must be assigned/resumed with the exact
+synthetic primary `E02_INJECTED_ACCOUNTING_QUERY_FAILURE`, no secondary errors,
+and exit either zero (natural exit observed before injection) or `0xE0200002`.
+Close must be assigned/resumed, exit zero, have no primary and exactly the one
+synthetic secondary `E02_INJECTED_HANDLE_FINALIZATION_FAILURE` at
+`close-control-seam`. Assign/query primary stage is `owned-root`; all three
+diagnostics are `System.InvalidOperationException`, syntheticFault=true and
+win32Error=null. Any real setup error, wrong seam or unrelated error fails.
+Retain each raw FAIL receipt; enclosing case PASS describes only that expected
+synthetic shape. The existing evidence-writer seam is unchanged.
+
+Supporting API provenance includes the loaded System.Diagnostics.Process runtime
+DLL and [public .NET v10.0.11 Process.Windows source](https://github.com/dotnet/runtime/blob/v10.0.11/src/libraries/System.Diagnostics.Process/src/System/Diagnostics/Process.Windows.cs).
+The source's retained handle path supports the fixture's original-Process
+observations; freeze the exact local source bytes/ranges and runtime binary.
+The public tag does not establish exact source-to-installed-binary correspondence.
+No extra process roots, groups, subcases, native cases or budgets are introduced:
+three groups, six subcases and five roots remain required.
 
 The future reviewed wrapper must build with `Build.bat WarhammerClientEditor
 Win64 Development -Project=<RunRoot/project/WarhammerClient.uproject> -WaitMutex
@@ -753,14 +800,16 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-17 UTC / plan revision 23**.
+Packet clarification revision: **2026-10-17 UTC / plan revision 25**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
-`4F09F6E58627CD258A39C6375365ACD888A8DAA7A0D6D44F8DFE70CB558BA60D`.
+`33339BAFEFC69F71EE8450857666223B6C802B0CC6592A5E758F7FF56479A713`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
 checkpoint; historical adoption/status-label-only hashes remain in that journal.
-The adoption derived from ignored proposal EC29BBB1. This dated revision clarifies
-the read-only Known Documents ancestor-route policy while retaining plain-file
-leaves, all nine observations and strict owned/source/tool/output path checks.
+The adoption derived from ignored proposal EC29BBB1. This dated revision adds
+explicit child-start/alive evidence and exact injected-seam validation within
+the existing supervisor controls. It retains the read-only Known Documents
+ancestor-route policy, plain-file leaves, all nine observations and strict
+owned/source/tool/output path checks.
 The outward-face winding/oracle and exact bare-key chord requirements remain.
 The geometric/input scope,16 cases,6 PNGs,14 authored paths, private-job mechanism
 and existing budgets remain the specified proof.

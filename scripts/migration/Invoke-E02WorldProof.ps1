@@ -894,27 +894,374 @@ function Check-BuildToolchainReceipt($Contract) {
         freshStageChecked=$Contract.freshStageChecked;projectBuildStepsAbsent=$Contract.projectBuildStepsAbsent;
         limits='The module constructor checks resolved paths and EXE bytes before native actions and holds read handles through UBT exit. This does not attest compiler DLLs, linker tools or unrelated rule side effects.'}
 }
+function Control-UInt($Value, [uint64] $Maximum=[uint64]::MaxValue) {
+    $allowed=@([byte],[sbyte],[int16],[uint16],[int32],[uint32],[int64],[uint64])
+    if ($null -eq $Value -or $Value.GetType() -notin $allowed -or
+        [decimal]$Value -lt 0 -or [decimal]$Value -gt [decimal]$Maximum) {
+        throw 'E02_CONTROL_INTEGER_EVIDENCE_INVALID'
+    }
+    return [uint64]$Value
+}
+
+function Control-Utc($Value) {
+    if ($Value -isnot [string] -or
+        $Value -cnotmatch '\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?(?:Z|\+00:00)\z') {
+        throw 'E02_CONTROL_UTC_EVIDENCE_INVALID'
+    }
+    $utc=[DateTimeOffset]::MinValue
+    if (-not [DateTimeOffset]::TryParse($Value,[Globalization.CultureInfo]::InvariantCulture,
+        [Globalization.DateTimeStyles]::None,[ref]$utc) -or $utc.Offset -ne [TimeSpan]::Zero) {
+        throw 'E02_CONTROL_UTC_EVIDENCE_INVALID'
+    }
+    return $utc
+}
+
+function Sup03-Diagnostic($Diagnostic,[string] $Stage,[string] $Message,$Started,$Completed) {
+    $keys=@('stage','type','message','win32Error','syntheticFault','observedUtc')
+    if ($Diagnostic -isnot [Collections.IDictionary] -or $Diagnostic.get_Count() -ne $keys.Count) {
+        throw 'E02_SUP03_DIAGNOSTIC_SCHEMA_INVALID'
+    }
+    foreach($key in $keys) {
+        if ($key -cnotin $Diagnostic.get_Keys()) { throw 'E02_SUP03_DIAGNOSTIC_SCHEMA_INVALID' }
+    }
+    if ($Diagnostic['stage'] -isnot [string] -or $Diagnostic['stage'] -cne $Stage -or
+        $Diagnostic['type'] -isnot [string] -or $Diagnostic['type'] -cne 'System.InvalidOperationException' -or
+        $Diagnostic['message'] -isnot [string] -or $Diagnostic['message'] -cne $Message -or
+        $Diagnostic['syntheticFault'] -isnot [bool] -or -not $Diagnostic['syntheticFault'] -or
+        $null -ne $Diagnostic['win32Error']) { throw 'E02_SUP03_EXPECTED_DIAGNOSTIC_NOT_OBSERVED' }
+    $observed=Control-Utc ($Diagnostic['observedUtc'])
+    if ($observed -lt $Started -or $observed -gt $Completed) {
+        throw 'E02_SUP03_DIAGNOSTIC_TIME_INVALID'
+    }
+}
+
+function Check-Sup03ExpectedFailure($Record,
+    [ValidateSet('assign','query','close')][string] $Fault,
+    [string] $ExpectedExecutable,[string] $ExpectedWorkingDirectory) {
+    # Key membership uses the actual key collection for native generic dictionaries,
+    # Hashtable and OrderedDictionary; no Contains overload or adapted .Keys property.
+    $required=@('schemaVersion','syntheticFault','status','technicalBlocked','timedOut',
+        'cleanupConfirmed','exitConfirmed','assignedBeforeResume','resumed','visibleWindowRequested',
+        'pid','creationFileTime','creationUtc','exitFileTime','exitUtc','exitCode','exitObservedUtc',
+        'startedObservationUtc','completedObservationUtc','elapsedSeconds','budgetSeconds',
+        'executable','arguments','workingDirectory','primaryFailure','secondaryErrors','jobAccounting')
+    if ($Record -isnot [Collections.IDictionary]) { throw 'E02_SUP03_RECEIPT_SCHEMA_INVALID' }
+    foreach($key in $required) {
+        if ($key -cnotin $Record.get_Keys()) { throw 'E02_SUP03_RECEIPT_SCHEMA_INVALID' }
+    }
+    if ($Record['technicalBlocked'] -isnot [bool]) { throw 'E02_SUP03_RECEIPT_STATE_INVALID' }
+    if ($Record['technicalBlocked']) { throw 'BLOCKED_E02_PRIVATE_JOB_OR_PROCESS_SETUP_UNSUPPORTED' }
+    if ((Control-UInt ($Record['schemaVersion']) 1) -ne 1 -or
+        $Record['syntheticFault'] -isnot [string] -or $Record['syntheticFault'] -cne $Fault -or
+        $Record['status'] -isnot [string] -or $Record['status'] -cne 'FAIL') {
+        throw 'E02_SUP03_SYNTHETIC_FAILURE_NOT_FAIL_CLOSED'
+    }
+    $shouldResume=$Fault -cne 'assign'
+    foreach($state in @(@('timedOut',$false),@('cleanupConfirmed',$true),@('exitConfirmed',$true),
+        @('assignedBeforeResume',$shouldResume),@('resumed',$shouldResume),@('visibleWindowRequested',$false))) {
+        if ($Record[$state[0]] -isnot [bool] -or $Record[$state[0]] -ne $state[1]) {
+            throw 'E02_SUP03_RECEIPT_STATE_INVALID'
+        }
+    }
+    if ((Control-UInt ($Record['budgetSeconds']) 15) -ne 15 -or
+        $Record['executable'] -isnot [string] -or $Record['executable'] -cne $ExpectedExecutable -or
+        $Record['workingDirectory'] -isnot [string] -or $Record['workingDirectory'] -cne $ExpectedWorkingDirectory) {
+        throw 'E02_SUP03_FIXTURE_IDENTITY_INVALID'
+    }
+    $expectedArguments=@('-NoProfile','-NonInteractive','-Command','exit 0')
+    if ($Record['arguments'] -isnot [Collections.IList] -or $Record['arguments'].Count -ne 4) {
+        throw 'E02_SUP03_FIXTURE_IDENTITY_INVALID'
+    }
+    for($i=0;$i -lt $expectedArguments.Count;$i++) {
+        if ($Record['arguments'][$i] -isnot [string] -or $Record['arguments'][$i] -cne $expectedArguments[$i]) {
+            throw 'E02_SUP03_FIXTURE_IDENTITY_INVALID'
+        }
+    }
+    if ((Control-UInt ($Record['pid']) ([uint32]::MaxValue)) -eq 0) { throw 'E02_SUP03_PID_UNVERIFIED' }
+    $creation=Control-UInt ($Record['creationFileTime']) ([long]::MaxValue)
+    $exit=Control-UInt ($Record['exitFileTime']) ([long]::MaxValue)
+    if ($creation -eq 0 -or $exit -lt $creation) { throw 'E02_SUP03_KERNEL_TIMES_UNVERIFIED' }
+    try { $kernelCreation=[DateTime]::FromFileTimeUtc([long]$creation);$kernelExit=[DateTime]::FromFileTimeUtc([long]$exit) }
+    catch [ArgumentOutOfRangeException] { throw 'E02_SUP03_KERNEL_TIMES_UNVERIFIED' }
+    $created=Control-Utc ($Record['creationUtc']);$exited=Control-Utc ($Record['exitUtc'])
+    $started=Control-Utc ($Record['startedObservationUtc']);$completed=Control-Utc ($Record['completedObservationUtc'])
+    $exitObserved=Control-Utc ($Record['exitObservedUtc'])
+    if ($created.UtcDateTime -ne $kernelCreation -or $exited.UtcDateTime -ne $kernelExit -or
+        $started -gt $created -or $exited -gt $exitObserved -or $exitObserved -gt $completed) {
+        throw 'E02_SUP03_PROCESS_TIME_EVIDENCE_INVALID'
+    }
+    $numeric=@([byte],[sbyte],[int16],[uint16],[int32],[uint32],[int64],[uint64],[single],[double],[decimal])
+    $elapsed=$Record['elapsedSeconds']
+    if ($null -eq $elapsed -or $elapsed.GetType() -notin $numeric -or
+        [double]::IsNaN([double]$elapsed) -or [double]::IsInfinity([double]$elapsed) -or [double]$elapsed -le 0) {
+        throw 'E02_SUP03_ELAPSED_EVIDENCE_INVALID'
+    }
+    $hasResume='resumedObservationUtc' -cin $Record.get_Keys()
+    if ($shouldResume) {
+        if (-not $hasResume) { throw 'E02_SUP03_RESUME_EVIDENCE_INVALID' }
+        $resumed=Control-Utc ($Record['resumedObservationUtc'])
+        if ($resumed -lt $created -or $resumed -gt $exitObserved) { throw 'E02_SUP03_RESUME_EVIDENCE_INVALID' }
+    } elseif ($hasResume) { throw 'E02_SUP03_RESUME_EVIDENCE_INVALID' }
+    $exitCode=Control-UInt ($Record['exitCode']) ([uint32]::MaxValue)
+    $secondary=$Record['secondaryErrors']
+    if ($secondary -isnot [Collections.IList]) { throw 'E02_SUP03_SECONDARY_ERRORS_INVALID' }
+    if ($Fault -ceq 'close') {
+        if ($null -ne $Record['primaryFailure'] -or $secondary.Count -ne 1 -or $exitCode -ne 0) {
+            throw 'E02_SUP03_CLOSE_DIAGNOSTIC_MISSING_OR_UNEXPECTED_FAILURE'
+        }
+        Sup03-Diagnostic $secondary[0] 'close-control-seam' 'E02_INJECTED_HANDLE_FINALIZATION_FAILURE' $started $completed
+    } else {
+        if ($secondary.Count -ne 0 -or
+            ($Fault -ceq 'assign' -and $exitCode -ne [uint64]3760193538) -or
+            ($Fault -ceq 'query' -and $exitCode -notin @([uint64]0,[uint64]3760193538))) {
+            throw 'E02_SUP03_UNEXPECTED_FAILURE_OR_EXIT'
+        }
+        $message=if($Fault -ceq 'assign'){'E02_INJECTED_ASSIGN_FAILURE_BEFORE_RESUME'}else{'E02_INJECTED_ACCOUNTING_QUERY_FAILURE'}
+        Sup03-Diagnostic ($Record['primaryFailure']) 'owned-root' $message $started $completed
+    }
+    $samples=$Record['jobAccounting']
+    if ($samples -isnot [Collections.IList] -or $samples.Count -eq 0) { throw 'E02_SUP03_JOB_ZERO_UNVERIFIED' }
+    $last=$samples[$samples.Count-1]
+    $sampleKeys=@('stage','observedUtc','querySucceeded','totalProcesses','activeProcesses',
+        'totalTerminatedProcesses','totalUserTime100ns','totalKernelTime100ns',
+        'thisPeriodUserTime100ns','thisPeriodKernelTime100ns','totalPageFaultCount')
+    if ($last -isnot [Collections.IDictionary]) { throw 'E02_SUP03_JOB_ZERO_UNVERIFIED' }
+    foreach($key in $sampleKeys) {
+        if ($key -cnotin $last.get_Keys()) { throw 'E02_SUP03_JOB_ZERO_UNVERIFIED' }
+    }
+    $expectedStage=if($Fault -ceq 'close'){'progress'}else{'failure-cleanup'}
+    if ($last['stage'] -isnot [string] -or $last['stage'] -cne $expectedStage -or
+        $last['querySucceeded'] -isnot [bool] -or -not $last['querySucceeded'] -or
+        (Control-UInt ($last['activeProcesses']) ([uint32]::MaxValue)) -ne 0) {
+        throw 'E02_SUP03_JOB_ZERO_UNVERIFIED'
+    }
+    $total=Control-UInt ($last['totalProcesses']) ([uint32]::MaxValue)
+    if (($Fault -ceq 'assign' -and $total -ne 0) -or ($Fault -cne 'assign' -and $total -lt 1)) {
+        throw 'E02_SUP03_JOB_MEMBERSHIP_EVIDENCE_INVALID'
+    }
+    foreach($key in $sampleKeys[5..10]) { [void](Control-UInt ($last[$key])) }
+    $sampleObserved=Control-Utc ($last['observedUtc'])
+    if ($sampleObserved -lt $exitObserved -or $sampleObserved -gt $completed) {
+        throw 'E02_SUP03_JOB_SAMPLE_TIME_INVALID'
+    }
+    # Success emits nothing and changes no field. Invoke-Root already preserved
+    # the raw native FAIL receipt before this enclosing-case assertion runs.
+}
+
+function Check-ControlChildEvidence($Record,[bool] $Timeout,[string] $Executable,[string] $Command) {
+    # This reads only the closed, descriptor-bound stdout of the fixed fixture.
+    # Parent observations retain the original Process handle; aggregate job
+    # accounting is separate evidence, not a per-child identity query.
+    if ($Record['technicalBlocked'] -isnot [bool]) { throw 'E02_CHILD_CONTROL_STATE_INVALID' }
+    if ($Record['technicalBlocked']) { throw 'BLOCKED_E02_PRIVATE_JOB_OR_PROCESS_SETUP_UNSUPPORTED' }
+    foreach($state in @(@('timedOut',$Timeout),@('cleanupConfirmed',$true),@('exitConfirmed',$true),
+        @('assignedBeforeResume',$true),@('resumed',$true),@('visibleWindowRequested',$false))) {
+        if ($Record[$state[0]] -isnot [bool] -or $Record[$state[0]] -ne $state[1]) { throw 'E02_CHILD_CONTROL_STATE_INVALID' }
+    }
+    $budget=if($Timeout){8}else{20};$status=if($Timeout){'FAIL'}else{'PASS'}
+    if ((Control-UInt ($Record['schemaVersion']) 1) -ne 1 -or
+        (Control-UInt ($Record['budgetSeconds']) 20) -ne $budget -or $Record['status'] -cne $status -or
+        $null -ne $Record['syntheticFault'] -or $Record['executable'] -cne $Executable -or
+        $Record['workingDirectory'] -cne $script:Stage) { throw 'E02_CHILD_CONTROL_FIXTURE_IDENTITY_INVALID' }
+    $arguments=$Record['arguments'];$expected=@('-NoProfile','-NonInteractive','-Command',$Command)
+    if ($arguments -isnot [Collections.IList] -or $arguments.Count -ne 4) { throw 'E02_CHILD_CONTROL_ARGUMENTS_INVALID' }
+    for($i=0;$i -lt 4;$i++) { if($arguments[$i] -isnot [string] -or $arguments[$i] -cne $expected[$i]) { throw 'E02_CHILD_CONTROL_ARGUMENTS_INVALID' } }
+    if ($Record['secondaryErrors'] -isnot [Collections.IList] -or $Record['secondaryErrors'].Count -ne 0) { throw 'E02_CHILD_CONTROL_UNEXPECTED_SECONDARY_ERROR' }
+    $rootPid=Control-UInt ($Record['pid']) ([uint32]::MaxValue)
+    $rootCreation=Control-UInt ($Record['creationFileTime']) ([long]::MaxValue)
+    $rootExit=Control-UInt ($Record['exitFileTime']) ([long]::MaxValue)
+    if ($rootPid -eq 0 -or $rootCreation -eq 0 -or $rootExit -lt $rootCreation) { throw 'E02_CHILD_CONTROL_ROOT_IDENTITY_INVALID' }
+    $created=Control-Utc ($Record['creationUtc']);$exited=Control-Utc ($Record['exitUtc'])
+    $started=Control-Utc ($Record['startedObservationUtc']);$completed=Control-Utc ($Record['completedObservationUtc'])
+    $exitObserved=Control-Utc ($Record['exitObservedUtc']);$resumed=Control-Utc ($Record['resumedObservationUtc'])
+    if ($created.UtcDateTime -ne [DateTime]::FromFileTimeUtc([long]$rootCreation) -or
+        $exited.UtcDateTime -ne [DateTime]::FromFileTimeUtc([long]$rootExit) -or
+        $started -gt $created -or $created -gt $resumed -or $resumed -gt $exitObserved -or
+        $exited -gt $exitObserved -or $exitObserved -gt $completed) { throw 'E02_CHILD_CONTROL_ROOT_TIMES_INVALID' }
+    $exitCode=Control-UInt ($Record['exitCode']) ([uint32]::MaxValue)
+    if ($Timeout) {
+        $timeoutError=$Record['primaryFailure'];$keys=@('stage','type','message','win32Error','syntheticFault','observedUtc')
+        if ($timeoutError -isnot [Collections.IDictionary] -or $timeoutError.get_Count() -ne $keys.Count) { throw 'E02_SUP02_TIMEOUT_DIAGNOSTIC_INVALID' }
+        foreach($key in $keys) { if($key -cnotin $timeoutError.get_Keys()) { throw 'E02_SUP02_TIMEOUT_DIAGNOSTIC_INVALID' } }
+        if ($timeoutError['stage'] -cne 'owned-root' -or $timeoutError['type'] -cne 'System.TimeoutException' -or
+            $timeoutError['message'] -cne 'Owned execution exceeded its reserved running budget' -or
+            $timeoutError['syntheticFault'] -isnot [bool] -or $timeoutError['syntheticFault'] -or $null -ne $timeoutError['win32Error'] -or
+            $exitCode -ne [uint64]3760193537) { throw 'E02_SUP02_EXPECTED_TIMEOUT_NOT_OBSERVED' }
+        $timeoutErrorTime=Control-Utc ($timeoutError['observedUtc'])
+        if($timeoutErrorTime -lt $started -or $timeoutErrorTime -gt $completed) { throw 'E02_SUP02_TIMEOUT_DIAGNOSTIC_TIME_INVALID' }
+    } elseif ($null -ne $Record['primaryFailure'] -or $exitCode -ne 0 -or
+        $Record['rootExitWhileMembersActive'] -isnot [bool] -or -not $Record['rootExitWhileMembersActive']) {
+        throw 'E02_SUP01_LINGERING_CHILD_NOT_OBSERVED'
+    }
+    $samples=$Record['jobAccounting']
+    if($samples -isnot [Collections.IList] -or $samples.Count -eq 0) { throw 'E02_CHILD_CONTROL_JOB_ZERO_UNVERIFIED' }
+    $last=$samples[$samples.Count-1]
+    if($last['querySucceeded'] -isnot [bool] -or -not $last['querySucceeded'] -or
+        (Control-UInt ($last['activeProcesses']) ([uint32]::MaxValue)) -ne 0 -or
+        (Control-UInt ($last['totalProcesses']) ([uint32]::MaxValue)) -lt 2) { throw 'E02_CHILD_CONTROL_JOB_ZERO_UNVERIFIED' }
+    $sampleTime=Control-Utc ($last['observedUtc'])
+    if($sampleTime -lt $exitObserved -or $sampleTime -gt $completed) { throw 'E02_CHILD_CONTROL_JOB_SAMPLE_TIME_INVALID' }
+    $stdout=Check-Descriptor ($Record['stdoutArtifact'])
+    if($stdout.bytes -le 0 -or $stdout.bytes -gt 65536 -or $Record['stderrArtifact'].bytes -ne 0) { throw 'E02_CHILD_CONTROL_OUTPUT_INVALID' }
+    $lines=[IO.File]::ReadAllLines($stdout.path,$script:Utf8)
+    if($lines.Count -lt 2 -or (-not $Timeout -and $lines.Count -ne 2)) { throw 'E02_CHILD_CONTROL_OBSERVATIONS_MISSING' }
+    $observations=[Collections.Generic.List[object]]::new();$previousTime=$created;$previousMs=[uint64]0
+    $childPid=[uint64]0;$childCreation=[uint64]0;$lastAlive=$null;$firstAliveMs=$null
+    for($i=0;$i -lt $lines.Count;$i++) {
+        $item=Parse-JsonLine $lines[$i]
+        $keys=@('schemaVersion','kind','rootPid','childPid','childCreationFileTime','hasExited','observedUtc','elapsedMs')
+        if($i -eq 0){$keys+=@('ackRaw','ackReadElapsedMs')}else{$keys+=@('sequence')}
+        if($item -isnot [Collections.IDictionary] -or $item.get_Count() -ne $keys.Count) { throw 'E02_CHILD_CONTROL_OBSERVATION_SCHEMA_INVALID' }
+        foreach($key in $keys) { if($key -cnotin $item.get_Keys()) { throw 'E02_CHILD_CONTROL_OBSERVATION_SCHEMA_INVALID' } }
+        $kind=if($i -eq 0){'E02_SUP_CHILD_BOUND_V1'}else{'E02_SUP_CHILD_ALIVE_V1'}
+        if((Control-UInt ($item['schemaVersion']) 1) -ne 1 -or $item['kind'] -cne $kind -or
+            (Control-UInt ($item['rootPid']) ([uint32]::MaxValue)) -ne $rootPid -or
+            $item['hasExited'] -isnot [bool] -or $item['hasExited']) { throw 'E02_CHILD_CONTROL_OBSERVATION_INVALID' }
+        $observed=Control-Utc ($item['observedUtc']);$ms=Control-UInt ($item['elapsedMs']) ([long]::MaxValue)
+        if($observed -lt $previousTime -or $observed -gt $exited -or $ms -lt $previousMs) { throw 'E02_CHILD_CONTROL_OBSERVATION_TIME_INVALID' }
+        if($i -eq 0) {
+            $childPid=Control-UInt ($item['childPid']) ([int]::MaxValue)
+            $childCreation=Control-UInt ($item['childCreationFileTime']) ([long]::MaxValue)
+            $ackMs=Control-UInt ($item['ackReadElapsedMs']) 1999
+            if($childPid -eq 0 -or $childPid -eq $rootPid -or $childCreation -lt $rootCreation -or
+                [DateTime]::FromFileTimeUtc([long]$childCreation) -gt $observed.UtcDateTime -or $ackMs -gt $ms) { throw 'E02_CHILD_CONTROL_BOUND_IDENTITY_INVALID' }
+            $expectedAck=([ordered]@{schemaVersion=1;kind='E02_SUP_CHILD_READY_V1';childPid=[int]$childPid;childCreationFileTime=[long]$childCreation}|ConvertTo-Json -Compress -Depth 3)
+            if($item['ackRaw'] -isnot [string] -or $item['ackRaw'].Length -gt 256 -or
+                -not [string]::Equals($item['ackRaw'],$expectedAck,[StringComparison]::Ordinal)) { throw 'E02_CHILD_CONTROL_SELF_ACK_INVALID' }
+        } else {
+            if((Control-UInt ($item['childPid']) ([int]::MaxValue)) -ne $childPid -or
+                (Control-UInt ($item['childCreationFileTime']) ([long]::MaxValue)) -ne $childCreation -or
+                (Control-UInt ($item['sequence']) ([int]::MaxValue)) -ne $i) { throw 'E02_CHILD_CONTROL_ALIVE_IDENTITY_INVALID' }
+            if($i -eq 1){$firstAliveMs=$ms}
+            $lastAlive=$observed
+        }
+        $previousTime=$observed;$previousMs=$ms;$observations.Add($item)
+    }
+    $termination=$null
+    if($Timeout) {
+        if($lines.Count -lt 3 -or ($previousMs - $firstAliveMs) -lt 250 -or
+            $Record['shutdownRequests'] -isnot [Collections.IList]) { throw 'E02_SUP02_CHILD_ALIVE_PROOF_MISSING' }
+        $termination=@($Record['shutdownRequests']|Where-Object {$_['operation'] -ceq 'TerminateJobObject'})
+        if($termination.Count -ne 1 -or $termination[0]['succeeded'] -isnot [bool] -or -not $termination[0]['succeeded']) { throw 'E02_SUP02_PRIVATE_JOB_TERMINATION_UNVERIFIED' }
+        $termination=Control-Utc ($termination[0]['observedUtc'])
+        if($termination -lt $lastAlive -or ($termination-$lastAlive).TotalSeconds -gt 1 -or $termination -gt $completed) { throw 'E02_SUP02_CHILD_ALIVE_PROOF_STALE' }
+    }
+    # Return annotations only; never change the already-published native receipt.
+    return @{stdoutArtifact=$stdout;childPid=$childPid;childCreationFileTime=$childCreation;observations=@($observations);
+        lastAliveUtc=$lastAlive.ToString('o');terminationObservationUtc=$(if($null -ne $termination){$termination.ToString('o')}else{$null});
+        basis='FIXED_CHILD_SELF_ACK_MATCHED_TO_ORIGINAL_PROCESS_HANDLE_AND_FINITE_HAS_EXITED_OBSERVATIONS';
+        limits='Not a direct per-child job query or complete descendant inventory. Job accounting independently establishes final zero active members.'}
+}
+
 function Supervisor-Controls {
     $pwsh=Need-File ([Environment]::ProcessPath)
     $clock=[Diagnostics.Stopwatch]::StartNew()
     $results=[Collections.Generic.List[object]]::new()
-    # Child fixture command text is constant; executable is passed through a
-    # single-quoted PowerShell literal with escaped quotes, never interpolated
-    # shell syntax or user-provided program text.
-    $literal=$pwsh.Replace("'","''")
-    $normal='$p=[Diagnostics.ProcessStartInfo]::new();$p.FileName='''+$literal+''';$p.UseShellExecute=$false;$p.CreateNoWindow=$true;foreach($a in @(''-NoProfile'',''-NonInteractive'',''-Command'',''Start-Sleep -Seconds 2; exit 0'')){$p.ArgumentList.Add($a)};$c=[Diagnostics.Process]::Start($p);$c.Dispose();exit 0'
+    # Fixed trusted child/parent programs; no caller-supplied shell program text.
+    # Keep the original child Process until fixture exit; no PID reopening.
+$fixtureChildTemplate=@'
+$ErrorActionPreference='Stop'
+try {
+    $self=[Diagnostics.Process]::GetCurrentProcess()
+    try {
+        $selfPid=[int]$self.Id
+        $selfCreation=[long]$self.StartTime.ToFileTimeUtc()
+    } finally { $self.Dispose() }
+    if($selfPid -le 0 -or $selfCreation -le 0){throw 'E02_SUP_CHILD_SELF_IDENTITY'}
+    $ack=[ordered]@{schemaVersion=1;kind='E02_SUP_CHILD_READY_V1';childPid=$selfPid;childCreationFileTime=$selfCreation}
+    [Console]::Out.WriteLine(($ack|ConvertTo-Json -Compress -Depth 3))
+    [Console]::Out.Flush()
+    Start-Sleep -Seconds __HOLD_SECONDS__
+    exit 0
+} catch {
+    [Console]::Error.WriteLine($_.Exception.Message)
+    [Console]::Error.Flush()
+    exit 1
+}
+'@
+
+$fixtureParentTemplate=@'
+$ErrorActionPreference='Stop'
+$childCommand=__CHILD_LITERAL__
+$childExecutable=__EXECUTABLE_LITERAL__
+$timeoutMode=__TIMEOUT_LITERAL__
+$c=$null
+$failureCode='START'
+$emit={param($value)
+    [Console]::Out.WriteLine(($value|ConvertTo-Json -Compress -Depth 5))
+    [Console]::Out.Flush()
+}
+try {
+    $si=[Diagnostics.ProcessStartInfo]::new()
+    $si.FileName=$childExecutable
+    $si.UseShellExecute=$false
+    $si.CreateNoWindow=$true
+    $si.RedirectStandardOutput=$true
+    foreach($a in @('-NoProfile','-NonInteractive','-Command',$childCommand)){$si.ArgumentList.Add($a)}
+    $clock=[Diagnostics.Stopwatch]::StartNew()
+    $c=[Diagnostics.Process]::Start($si)
+    if($null -eq $c){throw 'E02_SUP_CHILD_START_NULL'}
+    if($c.HasExited){throw 'E02_SUP_CHILD_EXITED_BEFORE_ACK'}
+    $childPid=[int]$c.Id
+    $childCreation=[long]$c.StartTime.ToFileTimeUtc()
+    if($childPid -le 0 -or $childCreation -le 0){throw 'E02_SUP_CHILD_ORIGINAL_IDENTITY'}
+    $failureCode='ACK'
+    $read=$c.StandardOutput.ReadLineAsync()
+    while(-not $read.IsCompleted){
+        if($c.HasExited){throw 'E02_SUP_CHILD_EXITED_DURING_ACK'}
+        if($clock.ElapsedMilliseconds -ge 2000){throw 'E02_SUP_CHILD_ACK_TIMEOUT'}
+        Start-Sleep -Milliseconds 20
+    }
+    if($clock.ElapsedMilliseconds -ge 2000){throw 'E02_SUP_CHILD_ACK_TIMEOUT'}
+    $ackReadElapsedMs=[long]$clock.ElapsedMilliseconds
+    $rawAck=$read.GetAwaiter().GetResult()
+    if($null -eq $rawAck -or $rawAck.Length -gt 256){throw 'E02_SUP_CHILD_ACK_LENGTH'}
+    $expectedAck=([ordered]@{schemaVersion=1;kind='E02_SUP_CHILD_READY_V1';childPid=$childPid;childCreationFileTime=$childCreation}|ConvertTo-Json -Compress -Depth 3)
+    if(-not [string]::Equals($rawAck,$expectedAck,[StringComparison]::Ordinal)){throw 'E02_SUP_CHILD_ACK_IDENTITY_OR_FORMAT'}
+    if($c.HasExited){throw 'E02_SUP_CHILD_EXITED_AFTER_ACK'}
+    & $emit ([ordered]@{schemaVersion=1;kind='E02_SUP_CHILD_BOUND_V1';rootPid=[int]$PID;childPid=$childPid;childCreationFileTime=$childCreation;ackRaw=$rawAck;ackReadElapsedMs=$ackReadElapsedMs;hasExited=$false;observedUtc=[DateTime]::UtcNow.ToString('o');elapsedMs=[long]$clock.ElapsedMilliseconds})
+    $sequence=0
+    $lastAliveMs=-250L
+    $failureCode='OBSERVATION'
+    while($clock.ElapsedMilliseconds -lt 60000){
+        if($c.HasExited){$failureCode='CHILD_EXIT';throw 'E02_SUP_CHILD_EXITED_WHILE_ROOT_HELD'}
+        $now=[long]$clock.ElapsedMilliseconds
+        if($sequence -eq 0 -or $now-$lastAliveMs -ge 250){
+            $sequence++
+            & $emit ([ordered]@{schemaVersion=1;kind='E02_SUP_CHILD_ALIVE_V1';rootPid=[int]$PID;childPid=$childPid;childCreationFileTime=$childCreation;sequence=$sequence;hasExited=$false;observedUtc=[DateTime]::UtcNow.ToString('o');elapsedMs=$now})
+            $lastAliveMs=$now
+        }
+        if(-not $timeoutMode){exit 0}
+        Start-Sleep -Milliseconds 100
+    }
+    throw 'E02_SUP_CHILD_ROOT_HOLD_EXHAUSTED'
+} catch {
+    & $emit ([ordered]@{schemaVersion=1;kind='E02_SUP_FIXTURE_FAILURE_V1';rootPid=[int]$PID;code=$failureCode;observedUtc=[DateTime]::UtcNow.ToString('o')})
+    [Console]::Error.WriteLine($_.Exception.Message)
+    [Console]::Error.Flush()
+    exit 1
+} finally {
+    # Dispose only the original Process wrapper; no PID reopen or child kill.
+    # An outstanding read is not synchronously awaited here.
+    if($null -ne $c){$c.Dispose()}
+}
+'@
+
+$fixtureExecutableLiteral="'"+$pwsh.Replace("'","''")+"'"
+$normalChild=$fixtureChildTemplate.Replace('__HOLD_SECONDS__','2')
+$timeoutChild=$fixtureChildTemplate.Replace('__HOLD_SECONDS__','60')
+$normal=$fixtureParentTemplate.Replace('__CHILD_LITERAL__',("'"+$normalChild.Replace("'","''")+"'")).Replace('__EXECUTABLE_LITERAL__',$fixtureExecutableLiteral).Replace('__TIMEOUT_LITERAL__','$false')
+$long=$fixtureParentTemplate.Replace('__CHILD_LITERAL__',("'"+$timeoutChild.Replace("'","''")+"'")).Replace('__EXECUTABLE_LITERAL__',$fixtureExecutableLiteral).Replace('__TIMEOUT_LITERAL__','$true')
     $r=Invoke-Root 'sup01-normal-lingering' $pwsh @('-NoProfile','-NonInteractive','-Command',$normal) 20
     Require-RootPass $r
-    if ($r['rootExitWhileMembersActive'] -isnot [bool] -or -not $r['rootExitWhileMembersActive']) { throw 'E02_SUP01_LINGERING_CHILD_NOT_OBSERVED' }
-    $results.Add(@{group='SUP01';subcase='normal-root-lingering-child';status='PASS';process=Descriptor (Join-Path $script:PhaseRoot 'sup01-normal-lingering.process.json')})
-    $long=$normal.Replace('Start-Sleep -Seconds 2; exit 0','Start-Sleep -Seconds 60; exit 0').Replace('$c.Dispose();exit 0','$c.Dispose();Start-Sleep -Seconds 60;exit 0')
+    $childProof=Check-ControlChildEvidence $r $false $pwsh $normal
+    $results.Add(@{group='SUP01';subcase='normal-root-lingering-child';status='PASS';childProof=$childProof;process=Descriptor (Join-Path $script:PhaseRoot 'sup01-normal-lingering.process.json')})
     $r=Invoke-Root 'sup02-timeout' $pwsh @('-NoProfile','-NonInteractive','-Command',$long) 8
-    if (-not $r['timedOut'] -or -not $r['exitConfirmed'] -or -not $r['cleanupConfirmed'] -or $r['status'] -cne 'FAIL' -or $null -eq $r['primaryFailure']) { throw 'E02_SUP02_TIMEOUT_NOT_PRESERVED_OR_CLEANUP_UNVERIFIED' }
-    $results.Add(@{group='SUP02';subcase='timeout-root-child';status='PASS';attemptStatus='FAIL';process=Descriptor (Join-Path $script:PhaseRoot 'sup02-timeout.process.json')})
+    $childProof=Check-ControlChildEvidence $r $true $pwsh $long
+    $results.Add(@{group='SUP02';subcase='timeout-root-child';status='PASS';attemptStatus='FAIL';childProof=$childProof;process=Descriptor (Join-Path $script:PhaseRoot 'sup02-timeout.process.json')})
     foreach($fault in @('assign','query','close')) {
         $r=Invoke-Root "sup03-$fault" $pwsh @('-NoProfile','-NonInteractive','-Command','exit 0') 15 $false $fault
-        if ($r['status'] -cne 'FAIL' -or -not $r['cleanupConfirmed'] -or ($fault -eq 'assign' -and $r['resumed'])) { throw 'E02_SUP03_SYNTHETIC_FAILURE_NOT_FAIL_CLOSED' }
-        if ($fault -eq 'close' -and @($r['secondaryErrors']).Count -ne 1) { throw 'E02_SUP03_CLOSE_DIAGNOSTIC_MISSING' }
+        Check-Sup03ExpectedFailure $r $fault $pwsh $script:Stage
         $results.Add(@{group='SUP03';subcase=$fault;status='PASS';synthetic=$true;attemptStatus='FAIL';process=Descriptor (Join-Path $script:PhaseRoot "sup03-$fault.process.json")})
     }
     $caught=$null;$pendingEvidence=@{primaryFailure=@{code='EXPECTED_PRIMARY'};secondaryErrors=@()}

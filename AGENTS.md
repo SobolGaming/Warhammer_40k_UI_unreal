@@ -78,8 +78,24 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The affected E02 SOURCE assessment of `2efd348b20bbf4adcd014dba9d50e178cad5c71c`
-is PASS. Root's composite gate applies the historical 338 full-source assessment
+The latest E02 SOURCE assessment of `58bad7984ef336dfbb486d75bcd51fd241b3b529`
+is **CHANGES_REQUESTED**. It found two pre-existing supervisor-control gaps:
+SUP03 could accept a real launch failure as an injected seam, and SUP02 could
+time out the root without proving the intended child started. Root preserved
+the raw report and sealed evidence, closed planned RunId
+`20261017T210320Z-3fa544f1` as **UNUSED_DO_NOT_EXECUTE**, and released only bounded
+supervisor fixture/validation remediation plus necessary documentation.
+Require exact typed seam diagnostics/states and real child-start/alive evidence
+as specified in packet revision25. The common SUP01/SUP02 fixture fails fast
+on child startup/identity/liveness failure. Preserve raw FAIL receipts and all
+historical phase results; the new findings prevent carrying forward affected
+control approval. The prior cmd grouping correction remains unexecuted.
+Checkpoint/freeze and obtain fresh affected SOURCE review with a new RunId before
+any repaired-wrapper/control/Build execution. Visible-window approval and final
+separate OWN15 CODE/REQ remain required. See the E02 journal for exact bindings.
+
+The historical affected E02 SOURCE assessment of `2efd348b20bbf4adcd014dba9d50e178cad5c71c`
+is PASS. Root's historical composite gate applies the 338 full-source assessment
 only to demonstrated unchanged scope; the affected review is no fresh whole-C++/
 plugin verdict. Run `20261017T202655Z-2b75d9a6` completed Preflight with nine
 normal-desktop settings observations before and after. SupervisorControls completed

@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **AFFECTED_SOURCE_PASS_2EFD_COMPOSITE_338; PREFLIGHT_SUPERVISOR_COMPLETE; BUILD_FAILED; HIDDEN_AUTHORITY_CLOSED; BOUNDED_LAUNCHER_REPAIR_ONLY**.
+Status: **SOURCE_58BAD_CHANGES_REQUESTED; UNUSED_RUN_CLOSED; BOUNDED_SUPERVISOR_REPAIR_AUTHORED_UNEXECUTED; FRESH_SOURCE_REVIEW_REQUIRED**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -8,13 +8,15 @@ Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
 
-The affected 2efd SOURCE assessment is PASS, combined by root with the 338 review
-only for demonstrated unchanged scope. Run 202655 completed Preflight and
-SupervisorControls, then Build FAILED on the missing native-toolchain receipt.
-Hidden authority/run are closed and must not be resumed/reused. Only bounded
-launcher correction is released; changed-source review/new RunId remain required.
-No UBT/C++/UHT/native/GUI proof ran. Historical 338/181128, 73f/unused 174203 and
-c10c/171627 failures, settings gaps and original review dispositions remain below.
+The latest 58bad SOURCE assessment is CHANGES_REQUESTED for two pre-existing
+supervisor-control evidence gaps. Its planned 210320 run is unused/closed and
+must not execute. Root released bounded fixture/validator remediation and docs;
+repairs remain unexecuted pending checkpoint/freeze, fresh affected SOURCE review
+and a new RunId. Historical 2efd SOURCE PASS/composite 338, completed Preflight/
+controls and failed Build remain unchanged. Known control gaps prevent prospective
+reuse of affected approval. No UBT/C++/UHT/native/GUI proof ran. Historical
+338/181128, 73f/unused 174203 and c10c/171627 failures, settings gaps and original
+review dispositions remain below.
 
 The predecessor table binds accepted E01-SLOW120 run044903, executed d118,
 reviewed b97, original report verdicts and separate publication bd80123.
@@ -666,3 +668,109 @@ whitespace checks passed; the repaired wrapper/build remains **UNEXECUTED**.
 Checkpoint, fresh freeze/affected SOURCE review and a new RunId must precede
 repair execution. Visible-window approval, final separate OWN15 CODE/REQ and
 merge authority remain unsupplied; all prior history is unchanged.
+
+## Source 58bad CHANGES_REQUESTED; unused run closed — 2026-10-17 UTC
+
+Checkpoint `58bad7984ef336dfbb486d75bcd51fd241b3b529` retained the bounded cmd
+FOR/IF grouping repair. A fresh affected SOURCE assessment against
+`2efd348b20bbf4adcd014dba9d50e178cad5c71c` returned **CHANGES_REQUESTED**.
+Both P2 findings concern pre-existing supervisor checks, rather than that batch
+grouping change: SUP03 could accept a real pre-resume launch error as its expected
+synthetic failure; SUP02 could accept a root-only timeout without establishing
+that the intended descendant started. Root accepted both findings for bounded
+remediation. No E02 phase/RunRoot exists for this candidate.
+
+| Immutable record | Bytes | SHA256 |
+|---|---:|---|
+| [Unchanged raw SOURCE report](../../../.local/reviews/E02-source-review/review-58bad-20261017T211239Z-6d476cc9/last-message.txt) | 6397 | `7C4C916D9C9841CEF6AF562A7522C343A0AFE4C6573824F118CAC6DC808F34DF` |
+| [Operator seal](../../../.local/reviews/E02-source-review/review-58bad-20261017T211239Z-6d476cc9/orchestrator-seal.json) | 7255 | `CBF5E598AB369F3F099A988243A7CDD2BAADADACA5030D25E5531033BBF29691` |
+| [Literal command/output audit](../../../.local/reviews/E02-source-review/review-58bad-20261017T211239Z-6d476cc9/operator-command-output-audit.json) | 46355 | `C529FC748A1605FE7FFA8D868C8FB347BB52CE2426875AA55911278CAF21DA94` |
+| [Review artifact manifest](../../../.local/reviews/E02-source-review/review-58bad-20261017T211239Z-6d476cc9/artifacts.manifest.json) | 9863 | `DB247CE9EEC1520FF43ADB4F85DC442FE7CEC42C39A7557E9C1EBCDE80B47816` |
+| [Root CHANGES disposition/unused-run closure](../../../.local/reviews/E02-source-review/root-58bad-20261017T210320Z-3fa544f1/source-changes-and-unused-run-closure.json) | 2001 | `37B6DAE8E96945D14830DF1C5DC8F3E951F01347F124ED3BBF63BBE59AEE67A2` |
+| [Original automatic approval rejection](../../../.local/reviews/E02-source-review/root-58bad-20261017T210320Z-3fa544f1/source-review-launch-blocked.json) | 1641 | `2F0E01CC9753B2F1F3500D2E81DA99C4DFF096A48E83A59BC20AD869D7724D04` |
+| [Once-only unchanged-call reconsideration](../../../.local/reviews/E02-source-review/root-58bad-20261017T210320Z-3fa544f1/standing-consent-reconsideration-once.json) | 2859 | `CD1AA4A857C32895B9ACA2669AF2972260E487B43CE84AFF674561BB559CE53B` |
+
+Root read the report and seal, rehashed all 33 manifest artifacts with zero
+mismatches, and confirmed clean 58bad plus absence of the planned RunRoot.
+Planned RunId `20261017T210320Z-3fa544f1` is **UNUSED_DO_NOT_EXECUTE**. The
+source-review launch GO grants no E02 execution authority. Final OWN15 CODE/REQ
+and visible-window/merge authority remain separate.
+
+The first source-review launch was blocked before process creation by automatic
+approval review, which requested exact-candidate transmission consent. A trusted
+app relay then authorized presenting the previously recorded standing human
+consent once against the same call through the normal approval route. That
+unchanged retry was accepted and launched the first actual review process for
+this packet. Neither the original rejection nor the relay's literal-message
+retrieval limits are rewritten; no new direct exact-58bad human reply is claimed.
+Credentials/private sessions remained excluded from transmission.
+
+Actual session `01a14c1c-07d5-7803-a5e5-f13933ee8bf2` used `codex exec`, observed
+`gpt-6.1-sol`/ultra, read-only sandbox, approval never and memory_mode disabled.
+Invocation was `23:04:27.3048699Z`; session_meta was `23:04:27.864Z`; completion
+was `23:13:12.4298989Z`, exit 0. Folder allocation at 21:12 preceded the rejection.
+These are distinct metadata observations, not CLI OS PID/start-time attestations.
+The 7059-byte prompt and 7061-byte actual user payload differ only by two trailing
+CRLF bytes; they are not byte-identical. Backend memory, lower-level isolation
+and requested feature enforcement remain UNVERIFIED as recorded in the raw report.
+
+The frozen inputs contain 1317 files, 28 source members, 16 input descriptors,
+167 compiler references and two Roslyn assemblies; postchecks match. All 70
+literal tool inputs, native commands and captured shell/model outputs were audited.
+Model-visible required coverage is 1309 whole-line rows: 1208 original L-prefixed
+normative lines, 13 owner lines, 59 Build lines and 29 diff lines. The 44 extract
+header/metadata rows yield a separate full-prepared metric of 1353 rows. Across
+57 numbered chunks, all 3487 displayed source rows match their bound files/diff.
+Actual wrapper coverage is 1–393, 397–708, 710–1075 and 1252–1581; the unnumbered
+empty line 709 and other gaps remain explicit, without a whole-wrapper claim.
+ConfigCacheIni/XmlConfig were prebound this time. C++ test bodies were not a
+fresh quality review; unchanged-scope historical correspondence is not new proof.
+Command 28's empty exit-1 capture, metadata outputs 2/24 exceeding 8 KB without
+truncation, command 69's partial model delivery and command 70's delivered catalog
+tail followed by an outer serialization error remain in the audit. Appearance
+of text is not an attestation of comprehension.
+
+## Bounded supervisor remediation authored; execution pending — revision25
+
+The existing wrapper now uses one fixed SUP01/SUP02 parent/child template. The
+parent retains the original returned Process, waits at most two seconds for the
+child's canonical self-acknowledgment and matches its PID/creation FILETIME to
+the original Process Id/StartTime. It fails fast on startup, readiness, identity
+or liveness failure. SUP01 records that child alive immediately before normal
+root exit; SUP02 keeps polling HasExited and emits periodic alive observations.
+The validator binds unchanged closed stdout, all identity/sequence/timestamp
+observations, exact native timeout/root exit and final job-zero evidence. A
+missing or stale final alive observation fails even when the root times out.
+The ReadLineAsync size check is post-read validation, not an allocation cap.
+These are finite fixture observations plus non-breakaway inheritance; there is
+no direct child-specific job query or complete descendant inventory.
+
+SUP03 now requires actual typed states, real root identity/times, exact per-seam
+synthetic diagnostic, allowed resume/exit shape, no unexpected errors and the
+actual final zero-active sample. A real technical blocker cannot pass as an
+injection. Query permits natural exit 0 or forced `0xE0200002`, because the first
+wait may observe natural exit before injection. Assignment remains unresumed;
+close requires no primary and exactly its intended secondary. Raw FAIL receipts
+are preserved; case PASS means only the intended synthetic outcome was observed.
+The existing writer seam and cmd grouping correction remain intact.
+
+Packet revision25 has planning prefix **65124 bytes**, SHA256
+`33339BAFEFC69F71EE8450857666223B6C802B0CC6592A5E758F7FF56479A713`,
+and whole file **67196 bytes**, SHA256
+`A9310BFC12241512837BBF961EE0861686BE4A044B4B075A03EA240E746CA60A`.
+It changes no roots/groups/subcases/native cases or budgets. The support freeze
+will include loaded Process DLL **329512 bytes**, SHA256
+`2B4871E02B366113C6CCF3B1436FADDE5E69FC0A3E3AC421E2FA0F7AF8C2BC3B`,
+and [public v10.0.11 Process.Windows source](https://github.com/dotnet/runtime/blob/v10.0.11/src/libraries/System.Diagnostics.Process/src/System/Diagnostics/Process.Windows.cs),
+**41903 bytes**, SHA256
+`49620FB20FEFFB84E36D587A381C0CF161E3EC8C114F6FF1E7FA2D7672B518CF`.
+Local raw source ranges cover retained launch handles, HasExited/StartTime,
+redirected stdout and retained-handle reuse; the public tag is supporting source,
+not established source-to-installed-binary provenance.
+
+Wrapper and both embedded fixture templates pass static parsing. No repaired
+wrapper, validator, fixture, supervisor control or Build has executed. Historical
+control completion/failures remain unchanged, and do not approve the repaired
+controls. Save a coherent checkpoint, freeze/review the affected candidate and
+choose a new RunId before execution; then verify each sequential phase. Explicit
+visible-window approval and fresh final independent CODE/REQ remain future gates.
