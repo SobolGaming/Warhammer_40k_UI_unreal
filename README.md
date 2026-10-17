@@ -71,11 +71,22 @@ and the unchanged `044903` execution on source `d1189592a5f99bdee58cea25ae8546e5
 The later publication commit is a separate metadata overlay; the reports did not
 review that later commit. Execution is stopped. The narrow diagnostic is accepted;
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
-UE HTTP, rendering, packaging and Linux remain open. The [E02 packet](docs/plans/research/2026-10-16-e02-world-input-packet.md) is now
-adopted for bounded source authoring; its [authority journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
-records the gates. The bounded geometry/input/world/supervisor source is authored
-and awaits its frozen source/tool/asset review. No E02 build/native/input/render
-result exists yet.
+UE HTTP, rendering, packaging and Linux remain open. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+records pre-execution SOURCE PASS for `c10c021` and the attempted run
+`20261017T171627Z-6e96cd42`. Preflight completed; three supervisor groups recorded
+six successful control subcases and confirmed cleanup of all five process roots
+in 9.5589701 seconds. Artifact publication then failed on a dictionary `Contains`
+overload, so SupervisorControls has no result/completion record and the run stops.
+Build, native cases and visible game windows remain **NOT RUN**.
+
+The old Preflight used redirected LocalAppData and omitted the real desktop
+EditorSettings file and a persisted before-settings baseline; preservation of
+those real settings remains **UNVERIFIED**. The next candidate repairs descriptor
+traversal and requires a normal desktop context with a persisted baseline. It
+needs a fresh frozen SOURCE assessment and new RunId before execution; the repairs
+are not yet proven. The [E02 packet](docs/plans/research/2026-10-16-e02-world-input-packet.md)
+keeps its existing scope, cases and budgets. Visible-window approval and final
+separate CODE/REQ acceptance remain later gates.
 
 The historical `030835` run retains its missing
 six-path editor-settings comparison as **UNVERIFIED** in its

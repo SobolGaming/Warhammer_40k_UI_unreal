@@ -1,7 +1,7 @@
 # E02 Windows world/input architecture proof — adopted packet
 
 Date: 2026-10-16; readiness/operational/minimal-supervision proposal: 2026-10-17 UTC.
-Status: **PACKET_ADOPTED_FOR_SOURCE_AUTHORING; E02 NOT RUN**.
+Status at adoption: **PACKET_ADOPTED_FOR_SOURCE_AUTHORING; E02 NOT RUN**.
 Coordinator adoption: `2026-10-17T06:14:17.416085+00:00`; source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
 This is the next reviewable subset of E02 after acceptance of the specifically
 bounded E01-SLOW120 diagnostic identified below. It does not require or imply

@@ -78,14 +78,26 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The E02 packet's bounded source is authored and awaits its frozen independent
-source review; see
-`docs/plans/evidence/2026-10-16-e02-world-input.md` for root's packet/OWN13 review
-and named writers. No E02 control/build/native process has run. Freeze and
-independently review executable source before the first such process. A visible
-game window needs separate explicit owner approval under the desktop rule;
-authoring is not blocked. E01 reviewed/executed/publication identities and all
-historical limits remain unchanged.
+The bounded E02 source at `c10c02173b2d40b4f80d9bdb2dfa1d37c52079ed` received
+independent pre-execution SOURCE PASS; see
+`docs/plans/evidence/2026-10-16-e02-world-input.md` for the unchanged report,
+operator seal, separately corrected manifest transcription and root's gate.
+This is not final OWN15 CODE/REQ acceptance. Run `20261017T171627Z-6e96cd42`
+completed Preflight. Its three supervisor groups recorded six successful control
+subcases in 9.5589701 seconds, with all five process roots' exit/cleanup confirmed
+and final zero-active job accounting. The phase then failed artifact publication
+on a dictionary `Contains` overload: no SupervisorControls result or completion
+record exists, and no dependent phase may start. Build/native/GUI remain NOT RUN.
+
+That Preflight recorded nine after-settings paths but used redirected LocalAppData
+and persisted no before-settings baseline; the real desktop EditorSettings file
+was omitted. Preservation of real settings for this run is UNVERIFIED. Root has
+authored repairs to both recursive descriptor walkers, the normal desktop
+execution-context guard and persisted baseline checks. Freeze the changed
+candidate, obtain fresh affected SOURCE review, then use a new RunId;
+neither the repairs nor their execution is
+proven yet. A visible game window still needs separate explicit owner approval.
+E01 reviewed/executed/publication identities and historical limits are unchanged.
 
 
 Historical normal run `20261017T030835Z-0d4af4e2`, source

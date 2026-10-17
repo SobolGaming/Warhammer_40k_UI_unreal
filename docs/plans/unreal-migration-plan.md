@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-17 UTC
-**Revision:** 20 — bounded E02 source authored; exact source/tool/asset/plugin-closure freeze and independent pre-execution review are pending.
+**Revision:** 21 — E02 c10c source review passed; first supervisor run failed publication and exposed a desktop-settings observation gap. Repairs require a fresh review and new RunId.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,17 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 20 changes
+### Revision 21 changes
+
+The bounded E02 candidate `c10c021` passed its pre-execution SOURCE assessment.
+The first run completed Preflight and its supervisor control assertions, then
+failed required-artifact publication; no dependent build/native/GUI phase ran.
+Its redirected LocalAppData observations also omitted the real desktop settings
+and a persisted before baseline. Section0.9 records these separate dispositions
+and the next candidate's review/run gate. E01 acceptance and historical failures
+remain unchanged; no E02 runtime or final milestone acceptance is established.
+
+### Revision 20 history — source authored
 
 The bounded E02 geometry, input policy, synthetic world, test declarations and
 supervisor are authored. This records source preparation only. Compilation,
@@ -144,7 +154,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: freeze and independently review the authored bounded E02 source.** Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) record predecessor binding, root packet review, OWN13 applicability and named writers. No E02 process has run. Bind exact source/tool/asset/plugin-closure identities and obtain independent source review before controls/build/native execution; obtain explicit visible-window approval before graphical execution. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
+**Current assignment: freeze and independently review the repaired E02 publication and desktop-settings guards before a new run.** Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) distinguish c10c SOURCE PASS, completed Preflight/control assertions, failed phase publication and the settings-observation gap. Build/native/GUI remain NOT RUN. Obtain fresh affected source review and a new RunId, with separate explicit visible-window approval before graphical execution. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
 
 ### 0.1 Fixed scope and authority
 
@@ -801,21 +811,51 @@ Supporting evidence:
 
 The [BOOT01 packet](research/2026-10-16-bootstrap-and-native-parser.md) specifies its files, 30-minute process timeout, staging/log/output roots, cleanup and standard per-user cache/default-empty-UBT-config side effect. OWN11 is its execution authorization; results must be recorded separately. Other packets finalize exact outputs before authorization. Cleanup touches only resolved packet-owned generated paths; never shared caches/user data/engine/siblings. A failed runtime proof returns to client staging or its external supplier, never Core edits here. E03B/E05–E08 remain later acceptance except a named architecture subset. A proposed packet alone is never a passing result or execution authorization.
 
-### 0.9 Current E02 packet gate — 2026-10-17T06:14:17.416085+00:00
+### 0.9 Current E02 packet gate — 2026-10-17 UTC
+
+**Normative gate:** Freeze the exact executable candidate, tools, assets and
+plugin closure and obtain independent SOURCE PASS before each affected phase.
+After a failed run, preserve its evidence and use a fresh RunId. Graphical
+execution requires separate explicit visible-window approval. Final OWN15 CODE
+and a different REQ assessment follow the execution/evidence freeze; neither
+source review nor execution alone supplies final acceptance.
 
 The [bounded Windows world/input packet](research/2026-10-16-e02-world-input-packet.md)
-is **PACKET_ADOPTED_FOR_SOURCE_AUTHORING** at source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
+was adopted at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
 The [authority/execution journal](evidence/2026-10-16-e02-world-input.md) records
 root's packet review, predecessor identities, OWN13 applicability,14 authored
 paths,named writers,owned staging/process/cache side effects and fixed pass/fail
-rules. Packet whole-file SHA256 is `7EFF2E47A55000D3012759DEEEACEEF46153024BF1CB713A920363A44A8FB2E3`.
-The bounded source is authored; its frozen source/tool/asset/plugin-closure review
-is pending. No E02 control/build/native process or result exists. Independent
-executable review precedes the first process;
-fresh final CODE/REQ assessments follow actual execution/evidence freeze.
-One visible interactive proof-window approval is pending under the desktop rule
-before graphical execution. Hidden controls/build/numeric work can proceed after
-their source gate. Do not infer a physical-input or Linux result.
+rules. Current packet whole-file SHA256 is `52E0E70ACD3854649329A7F533F3322D1FD0201FF653C98B35E239B0D82520C2`;
+only the status label now says "at adoption"; criteria, scope and budgets are unchanged.
+
+**Dated source evidence:** Candidate `c10c02173b2d40b4f80d9bdb2dfa1d37c52079ed`
+received pre-execution SOURCE PASS. The journal binds the unchanged raw report
+SHA256 `0FBA3AE9618DF542B41C1947CA645214EFFFDA7FC6E4201C90A926A990ED9D4A`
+and operator seal `26BFE6700AA3C1A81CF9BDFE91519880E78537F0932383238DF28D63F3D6E952`.
+A raw-table transcription error remains unchanged and is corrected separately;
+the actual bound input-manifest SHA256 is
+`B6527957D38E96EB6CC89E496493B50EC991905A6E40D6373FF0D9F1FD861904`.
+That review supplies no approval of the next changed candidate or final OWN15 verdict.
+
+**Dated run evidence:** `20261017T171627Z-6e96cd42` completed Preflight. Its
+three supervisor groups recorded six successful control subcases in 9.5589701
+seconds; all five owned process roots have confirmed exit/cleanup and final
+zero-active job accounting. SupervisorControls then ended
+**FINALIZATION_FAILED** with `Cannot find an overload for "Contains" and the argument count: "1".`
+That phase published no result, required-artifact manifest or completion record.
+Build, discovery, native cases, rendered/input proof and GUI remain **NOT RUN**.
+
+The old Preflight's nine after-settings observations used redirected LocalAppData
+and had no persisted before baseline. The genuine desktop EditorSettings file
+(461 bytes, SHA256 `B7E47645C8169E0C05AB6AD43F99F4529D33CD12EF019432FA56BD9F994B464E`)
+was omitted; real-settings preservation for that run is **UNVERIFIED**. A separate
+normal-context read-only KnownFolder probe identified the genuine LocalAppData,
+Roaming, profile and OneDrive/Documents locations on the same PowerShell 7 / X64
+host. It does not reconstruct a before observation. The next candidate repairs
+both recursive dictionary walkers and requires normal desktop execution plus a
+persisted preflight before-settings baseline. Those repairs require fresh review
+and a new run; no fix is yet proven. Scope,14 paths,16 cases and budgets are unchanged.
+Visible-window approval remains pending; physical-input and Linux results are not supplied.
 
 E01 publication `bd801233cc9989e0ae146a3be7b136d26dc73183` is on ready [PR2](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2);
 its merge approval has been requested separately. No remote CI is configured.
@@ -1861,7 +1901,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** freeze and independently review the authored E02 source under Section 0.9. No control/build/native process may precede that review; graphical execution also requires explicit visible-window approval. E01-SLOW120 acceptance/history is unchanged. No E02 result exists.
+**Ready now:** freeze the bounded E02 publication/settings-guard repairs and obtain fresh affected SOURCE review before a new RunId under Section0.9. The c10c attempt retains completed Preflight/control assertions, failed SupervisorControls publication and an UNVERIFIED real-settings criterion. Build/native/GUI remain NOT RUN; graphical execution also requires explicit visible-window approval. E01-SLOW120 acceptance/history is unchanged.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 

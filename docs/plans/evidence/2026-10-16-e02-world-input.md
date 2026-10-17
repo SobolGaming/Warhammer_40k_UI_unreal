@@ -328,3 +328,86 @@ has executed. Compilation and actual locking compatibility remain unverified.
 Checkpoint and freeze this complete candidate, including the added installed
 startup/UBT primary sources, for a new independent SOURCE assessment. No earlier
 review approves the repaired candidate, and final OWN15 CODE/REQ gates remain.
+
+## Fourth SOURCE PASS and first execution attempt — 2026-10-17 UTC
+
+Fresh independent session `01a14ae0-0e97-7b03-87db-5256ffa2ccb9` assessed clean
+`c10c02173b2d40b4f80d9bdb2dfa1d37c52079ed` against the unchanged `bd801233...`
+base. Its unchanged [raw report](../../../.local/reviews/E02-source-review/review-c10c-20261017T171912Z-d22b794f/last-message.txt)
+is **PASS**, SHA256
+`0FBA3AE9618DF542B41C1947CA645214EFFFDA7FC6E4201C90A926A990ED9D4A`.
+The [operator seal](../../../.local/reviews/E02-source-review/review-c10c-20261017T171912Z-d22b794f/orchestrator-seal.json),
+SHA256 `26BFE6700AA3C1A81CF9BDFE91519880E78537F0932383238DF28D63F3D6E952`,
+completed at `2026-10-17T17:28:36.9966997Z`. It audits all46 literal commands and
+48 tool inputs, with no prohibited execution or contamination observed. All1,304
+frozen files,16 inputs,28 source members,167 references plus both Roslyn binaries,
+both plugin catalogs and the required absences remained unchanged.
+
+The raw report's input-manifest table contains a65-character transcription typo.
+Its actual initial command12 and final command46 both output the correct hash
+`B6527957D38E96EB6CC89E496493B50EC991905A6E40D6373FF0D9F1FD861904`.
+Root independently inspected those complete outputs and current bytes. The
+[separate discrepancy record](../../../.local/reviews/E02-source-review/review-c10c-20261017T171912Z-d22b794f/report-transcription-discrepancy.json)
+retains that distinction; the report was not edited or resumed. Actual selected
+runtime metadata records configured `gpt-6.1-sol`/`ultra`, CLI0.163.0-alpha.10.2,
+workspace CWD, read-only/never and disabled session memory. Lower-level memory,
+feature enforcement and OS-process association remain UNVERIFIED. The supplied
+payload was7,046bytes; actual stdin was7,048bytes with trailing CRLF, not identical
+transport bytes. This is a static SOURCE disposition, not final CODE/REQ acceptance.
+
+After full inspection and rehashing, root issued the [hidden-phase authority](../../../.local/reviews/E02-source-review/root-c10c-20261017T171627Z-6e96cd42/hidden-execution-authority.json),
+SHA256 `65BFA248C24A0A5B8910188640DADF0E8805F80E99813BE8A6F9237DADF06374`,
+for Preflight, SupervisorControls and Build in that order. Actual run
+`20261017T171627Z-6e96cd42` completed [Preflight](../../../.local/experiments/E02/20261017T171627Z-6e96cd42/preflight/completion.json).
+Its result/completion and two required-artifact bindings remain unchanged.
+
+The raw supervisor index records three groups and six control assertions passing
+in9.5589701seconds. Five directly owned roots have confirmed exit/cleanup and
+retained-job terminal accounting at zero active processes. SUP01 observed a
+lingering descendant after its normal root exited. SUP02 preserved the expected
+timeout. SUP03 retained assignment-before-resume, accounting-query, handle-close
+and evidence-writer injected failures as failures. These are five actual roots
+plus one synthetic writer seam, not16 native cases or a descendant ledger.
+
+**SupervisorControls phase publication FAILED.** Recursive artifact collection
+called `.Contains(...)` on a native generic Dictionary, which PowerShell could
+not bind. The unchanged [finalization-failure record](../../../.local/experiments/E02/20261017T171627Z-6e96cd42/supervisorcontrols/finalization-failure.json)
+retains the known outcomes and MethodException. No phase result, required-artifact
+manifest or completion was published. The [closed-evidence inspection](../../../.local/reviews/E02-execution-helper/20261017-failed-controls/closed-evidence-inspection.json)
+checked62 descriptor bindings with no mismatch. This attempt is not accepted and
+must never resume. Build, discovery, native tests, rendering and GUI remain NOT RUN.
+
+The failed attempt also exposed a preservation limit: Preflight recorded nine
+after-observations but no persisted before baseline, and its restricted process
+resolved LocalAppData to a package sandbox. Its observed versioned settings path
+was absent while the actual desktop EditorSettings file existed outside that set
+(461bytes, SHA256 `B7E47645C8169E0C05AB6AD43F99F4529D33CD12EF019432FA56BD9F994B464E`).
+No Unreal build/editor ran; this is a coverage gap, not evidence of a mutation or
+proof of preservation for the omitted path. A separate read-only normal-context
+folder query confirmed the existing desktop LocalAppData/Roaming/profile and
+OneDrive Documents roots with the same x64 PowerShell executable.
+
+## Corrected traversal and desktop-context preparation — source only
+
+Both recursive descriptor walkers now obtain actual dictionary keys through
+`get_Keys()` and require exact descriptor-key names. This supports Hashtable,
+OrderedDictionary/OrderedHashtable and native generic dictionaries, including a
+data key named `Keys`. An auxiliary ten-case standard-library language probe
+covered positive map types and negative lookalikes; it executed no E02 function
+and is not an E02 control/native result. Existing control publication will again
+exercise actual native generic records in the fresh complete phase chain.
+
+The wrapper now refuses a redirected LocalAppData context before run allocation
+or child execution, records the four resolved user roots and requires them to
+match every predecessor. Preflight persists a nine-path baseline after owned
+source staging and compares it at finalization; build/native phases retain their
+own before/after intervals. This bounded workstation proof requires the approved
+normal desktop route; it does not establish arbitrary redirected-profile support.
+The packet's status label is explicitly historical at adoption; its criteria,
+14 authored paths,16 native cases, six PNGs, three supervisor groups and budgets
+are unchanged. Updated hashes and clean normative extracts must bind the new bytes.
+
+The corrected source is unexecuted. Obtain a fresh independent affected SOURCE
+assessment and a new RunId before any further E02 phase. Preserve the old SOURCE
+PASS for c10c and the failed run as historical evidence. No final OWN15 CODE/REQ,
+graphical, packaging, Linux, full-E02 or broader milestone acceptance is supplied.

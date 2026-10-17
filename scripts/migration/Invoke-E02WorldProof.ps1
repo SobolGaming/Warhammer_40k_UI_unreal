@@ -5,6 +5,12 @@ Single-use phases of the adopted synthetic E02 proof; never a Core/game client.
 .DESCRIPTION
 Do not execute this new source before independent source review. Preflight only
 reads/stages frozen inputs; it cannot grant review or execution authority.
+Every phase requires the normal desktop LocalAppData profile route. Redirected
+package/sandbox known-folder contexts are refused before run allocation, since
+they can omit existing desktop EditorSettings. The four resolved user roots are
+recorded and must match every predecessor. Preflight persists its nine settings
+observations before/after the interval after owned source staging; build/native
+phases persist their own before/after observations before supervised execution.
 
 Freeze schemaVersion=1: sourceHead (40 hex), packet descriptor, files descriptor
 array, sourceMembership array {path,kind:'file'|'directory'}. Descriptor fields
@@ -121,7 +127,7 @@ foreach ($name in @('github-full-access','github_token')) {
         if ($value.Length -ge 8) { $script:Secrets.Add($value) }
     }
 }
-$script:Result = $null; $script:Freeze = $null; $script:Lock = $null
+$script:Result = $null; $script:Freeze = $null; $script:Lock = $null; $script:E02UserContext = $null
 $script:PhaseRoot = Join-Path $script:RunRoot $Phase.ToLowerInvariant()
 $script:Errors = [Collections.Generic.List[object]]::new()
 
@@ -712,10 +718,23 @@ function Observed-File([string] $Role,[string] $Path) {
     } catch { $r.error=Failure $_ 'settings-observation' }
     return $r
 }
-function Settings {
+function Execution-UserContext {
     $local=[Environment]::GetFolderPath('LocalApplicationData'); $roaming=[Environment]::GetFolderPath('ApplicationData')
     $profile=[Environment]::GetFolderPath('UserProfile'); $documents=[Environment]::GetFolderPath('MyDocuments')
     foreach($root in @($local,$roaming,$profile,$documents)) { if (-not [IO.Path]::IsPathFullyQualified($root)) { throw 'E02_SETTINGS_ROOT_UNAVAILABLE' } }
+    # This desktop proof must observe the workstation's existing LocalAppData
+    # settings. A restricted package context can redirect this known folder to
+    # Packages/sandbox.../AC and report the real EditorSettings file absent.
+    # Refuse that execution context before allocating a run or starting a child.
+    $expectedLocal=Assert-Path (Join-Path $profile 'AppData/Local')
+    if((Assert-Path $local) -ine $expectedLocal){throw 'BLOCKED_E02_REDIRECTED_LOCAL_SETTINGS_CONTEXT_USE_APPROVED_NORMAL_DESKTOP_ROUTE'}
+    return [ordered]@{localApplicationData=(Assert-Path $local);applicationData=(Assert-Path $roaming);
+        userProfile=(Assert-Path $profile);myDocuments=(Assert-Path $documents);policy='NORMAL_DESKTOP_LOCAL_APPDATA_PROFILE_ROUTE'}
+}
+function Settings {
+    $context=Execution-UserContext
+    if($null -eq $script:E02UserContext -or ($context|ConvertTo-Json -Compress) -cne ($script:E02UserContext|ConvertTo-Json -Compress)){throw 'E02_EXECUTION_USER_CONTEXT_CHANGED'}
+    $local=$context.localApplicationData;$roaming=$context.applicationData;$profile=$context.userProfile;$documents=$context.myDocuments
     return @(
         Observed-File 'editor-engine-base' (Join-Path $EngineRoot 'Engine\Config\BaseEditorSettings.ini')
         Observed-File 'editor-local-user' (Join-Path $local 'Unreal Engine\Engine\Config\UserEditorSettings.ini')
@@ -1221,7 +1240,8 @@ function Add-RequiredArtifact($Index,[string] $Path) {
 function Collect-RequiredDescriptors($Node,$Index,[int] $Depth=0) {
     if($Depth -gt 80){throw 'E02_REQUIRED_ARTIFACT_DEPTH'}
     if($Node -is [Collections.IDictionary]) {
-        if($Node.Contains('path') -and $Node.Contains('bytes') -and $Node.Contains('sha256') -and
+        $keys=@($Node.get_Keys())
+        if(($keys -ccontains 'path') -and ($keys -ccontains 'bytes') -and ($keys -ccontains 'sha256') -and
             $Node.path -is [string] -and [IO.Path]::IsPathFullyQualified($Node.path)) {
             $prefix=$script:RunRoot.TrimEnd('\','/')+[IO.Path]::DirectorySeparatorChar
             if([IO.Path]::GetFullPath($Node.path).StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase)) {
@@ -1275,7 +1295,8 @@ function Check-RequiredArtifactManifest($Result) {
 function Check-BoundDescriptors($Node,[int] $Depth=0) {
     if($Depth -gt 80){throw 'E02_BOUND_DESCRIPTOR_DEPTH'}
     if($Node -is [Collections.IDictionary]) {
-        if($Node.Contains('path') -and $Node.Contains('bytes') -and $Node.Contains('sha256') -and
+        $keys=@($Node.get_Keys())
+        if(($keys -ccontains 'path') -and ($keys -ccontains 'bytes') -and ($keys -ccontains 'sha256') -and
             $Node.path -is [string] -and [IO.Path]::IsPathFullyQualified($Node.path)) {[void](Check-Descriptor $Node)}
         foreach($entry in $Node.GetEnumerator()){Check-BoundDescriptors $entry.Value ($Depth+1)}
     } elseif($Node -is [Collections.IList]) {foreach($entry in $Node){Check-BoundDescriptors $entry ($Depth+1)}}
@@ -1285,6 +1306,7 @@ function Check-Previous {
     for($i=0;$i -lt $index;$i++) {
         $prior=$script:Order[$i];$path=Owned ($prior.ToLowerInvariant()+'/result.json');$r=Read-Json $path
         if ($r.runId -cne $RunId -or $r.phase -cne $prior -or $r.executionPassed -isnot [bool] -or -not $r.executionPassed -or $null -ne $r.primaryFailure -or @($r.secondaryErrors).Count -ne 0) {throw 'E02_PREDECESSOR_NOT_SUCCESSFUL'}
+        if(-not $r.Contains('userContext') -or ($r.userContext|ConvertTo-Json -Compress) -cne ($script:E02UserContext|ConvertTo-Json -Compress)){throw 'E02_PREDECESSOR_USER_CONTEXT_MISMATCH'}
         if ($r.frozenInputs.manifest.sha256 -cne (Digest $FreezeManifestPath) -or $r.frozenInputs.sourceHead -cne $script:Freeze.sourceHead) {throw 'E02_PREDECESSOR_CANDIDATE_MISMATCH'}
         $desc=Descriptor $path
         $completionPath=Owned ($prior.ToLowerInvariant()+'/completion.json')
@@ -1320,6 +1342,7 @@ try {
     if (-not $IsWindows -or [IntPtr]::Size -ne 8 -or
         [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString() -cne 'X64') {throw 'BLOCKED_E02_WINDOWS_X64_ONLY_LINUX_NOT_RUN'}
     $EngineRoot=Assert-Path $EngineRoot
+    $script:E02UserContext=Execution-UserContext
     # These strings enter both UE's custom DDC expression and Windows command
     # arguments. Refuse ambiguous path metacharacters rather than changing them.
     if ($script:RunRoot -match '["()\r\n\x00]' -or $EngineRoot -match '["\r\n\x00]') {throw 'E02_AMBIGUOUS_COMMAND_PATH'}
@@ -1332,13 +1355,16 @@ try {
     New-Directory $script:PhaseRoot
     $script:Result=[ordered]@{schemaVersion=1;runId=$RunId;phase=$Phase;startedUtc=[DateTime]::UtcNow.ToString('o');completedUtc=$null;
         status='RUNNING';executionPassed=$false;primaryFailure=$null;secondaryErrors=$script:Errors;predecessors=@();processes=[Collections.Generic.List[object]]::new();
-        frozenInputs=$null;authority=$null;completionRequired=$true;publicationState='PROVISIONAL_REQUIRES_COMPLETION_RECORD';completionPath=(Join-Path $script:PhaseRoot 'completion.json');
+        frozenInputs=$null;authority=$null;userContext=$script:E02UserContext;completionRequired=$true;publicationState='PROVISIONAL_REQUIRES_COMPLETION_RECORD';completionPath=(Join-Path $script:PhaseRoot 'completion.json');
         limits=@{buildSeconds=1800;nativeSeconds=600;supervisorGroupSeconds=600;shutdownGraceMaximumSeconds=15;linux='NOT_RUN';humanInput='NOT_RUN';packaging='NOT_RUN';finalAcceptance='REQUIRES_FRESH_CODE_AND_REQ';descendantLedger='NOT_COLLECTED'}}
     $script:Result.frozenInputs=Check-Freeze
     $script:Result.predecessors=@(Check-Previous)
     $beforeAuthored=@(Snapshot-Authored $script:Repo)
     if ($Phase -eq 'Preflight') {
         Copy-FrozenProject $beforeAuthored
+        # The staged default now exists. Persist the actual nine-path baseline
+        # after owned source staging and before any supervised child/UE build.
+        $baselineSettings=@(Settings);$script:Result.settingsBefore=$baselineSettings;Check-Settings $baselineSettings $baselineSettings
         foreach($dir in @('logs','reports','artifacts','ddc','ue-user','temp','dotnet-home','nuget','uba')) {New-Directory (Owned $dir)}
         foreach($dir in @('reports/supervisor-controls','reports/discovery','reports/numeric','reports/world-input','artifacts/discovery','artifacts/numeric','artifacts/world-input')) {New-Directory (Owned $dir)}
         Write-JsonNew (Owned 'manifest.json') @{schemaVersion=1;runId=$RunId;frozenInputs=$script:Result.frozenInputs;createdUtc=[DateTime]::UtcNow.ToString('o');scope='SYNTHETIC_ADVISORY_NO_CORE';nativeNames=$script:Names}
