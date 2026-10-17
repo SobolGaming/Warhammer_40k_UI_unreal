@@ -699,6 +699,73 @@ Check-AtomicJsonExport 'close-failure-full-bytes-unpublished' 'dispose'
 Check-AtomicJsonExport 'write-primary-close-secondary' 'write-and-dispose'
 Check-AtomicJsonExport 'existing-result-never-overwritten' 'collision'
 
+# Inspect every real writer call, then execute only the original initializer and
+# two original export commands against synthetic paths and fault-injected streams.
+# This exercises the dispatcher callers' conventions without invoking a phase.
+$productionJsonCalls = @($ast.FindAll({ param($node)
+    $node -is [Management.Automation.Language.CommandAst] -and $node.GetCommandName() -ceq 'Write-NewJson'
+}, $true))
+$phaseInitializers = @($ast.FindAll({ param($node)
+    $node -is [Management.Automation.Language.AssignmentStatementAst] -and $node.Left.Extent.Text -ceq '$phaseResult' -and
+        $node.Right.Extent.Text.StartsWith('[ordered]@{', [StringComparison]::Ordinal)
+}, $true))
+$explicitCollectors = $productionJsonCalls.Count -ge 5 -and @($productionJsonCalls | Where-Object { $_.CommandElements.Count -ne 4 }).Count -eq 0
+$checks.Add(@{ name = 'json-production-callers-explicit-secondary-collectors'; kind = 'production-caller-convention'; simulation = $true
+    status = $(if ($explicitCollectors) { 'PASS' } else { 'FAIL' }); productionCallerCount = $productionJsonCalls.Count })
+Write-Output ('json-production-callers-explicit-secondary-collectors: ' + $(if ($explicitCollectors) { 'PASS' } else { 'FAIL' }))
+if ($phaseInitializers.Count -ne 1) { throw 'Expected one original phase result initializer for the synthetic caller controls.' }
+
+function Check-PhaseJsonCallerFault([string] $Name, [string] $Mode) {
+    $directory = Join-Path $OutputRoot ('SIMULATED-json-caller-' + $Name + '-' + $Mode)
+    $null = [IO.Directory]::CreateDirectory($directory)
+    $runRoot = $directory; $phaseRoot = $directory; $RunId = 'SIMULATED-JSON-CALLER'; $Phase = 'SIMULATED_ONLY'
+    Invoke-Expression $phaseInitializers[0].Extent.Text
+    $provenancePath = Join-Path $directory 'SIMULATED-runtime-provenance.json'
+    $provenance = @{ schemaVersion = 1; status = 'SIMULATED_RUNTIME'; source = 'NO_CORE_OR_RUNTIME_EXECUTION' }
+    $target = if ($Name -eq 'started') { Join-Path $directory 'started.json' } else { $provenancePath }
+    $field = if ($Name -eq 'started') { 'startedJsonExportErrors' } else { 'runtimeProvenanceExportErrors' }
+    $command = @($productionJsonCalls | Where-Object {
+        if ($Name -eq 'started') { $_.CommandElements[1].Extent.Text -like '*started.json*' }
+        else { $_.CommandElements[1].Extent.Text -ceq '$provenancePath' }
+    })
+    if ($command.Count -ne 1) { throw 'Expected exactly one original export command for the synthetic caller control.' }
+    function New-JsonOutputStream([string] $Path) {
+        $inner = [IO.File]::Open($Path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::Read)
+        if (-not $Path.StartsWith(($target + '.partial-'), [StringComparison]::OrdinalIgnoreCase)) { return $inner }
+        $stream = [pscustomobject]@{ Inner = $inner; Mode = $Mode }
+        $stream | Add-Member ScriptMethod Write {
+            param([byte[]] $Bytes, [int] $Offset, [int] $Count)
+            if ($this.Mode -eq 'write') { $this.Inner.Write($Bytes, $Offset, [Math]::Min(5, $Count)); throw 'SIMULATED_CALLER_WRITE_FAILURE' }
+            $this.Inner.Write($Bytes, $Offset, $Count)
+        }
+        $stream | Add-Member ScriptMethod Flush { throw 'SIMULATED_CALLER_FLUSH_FAILURE' }
+        $stream | Add-Member ScriptMethod Dispose { $this.Inner.Dispose(); throw 'SIMULATED_CALLER_CLOSE_FAILURE' }
+        return $stream
+    }
+    $primary = $null
+    try { Invoke-Expression $command[0].Extent.Text.Replace('$PSCommandPath', '$guardWrapperPath') }
+    catch { $primary = Get-SafeFailureEvidence $_ 'synthetic-original-export-caller' }
+    $expected = if ($Mode -eq 'write') { 'SIMULATED_CALLER_WRITE_FAILURE' } else { 'SIMULATED_CALLER_FLUSH_FAILURE' }
+    $collector = $phaseResult[$field]
+    $outcome = Complete-PhaseFinalization $phaseResult $primary.details $null $null $directory
+    $retained = Read-Json (Join-Path $directory 'result.json')
+    $partials = @(Get-ChildItem -LiteralPath $directory -File -Filter (([IO.Path]::GetFileName($target)) + '.partial-*'))
+    $pass = $primary.details -like ('*' + $expected + '*') -and $outcome.failure -ceq $primary.details -and
+        $retained.status -ceq 'FAIL' -and $retained.failure -ceq $primary.details -and
+        $collector.Count -eq 1 -and $collector[0].stage -ceq 'json-stream-dispose' -and
+        $collector[0].details -like '*SIMULATED_CALLER_CLOSE_FAILURE*' -and $retained[$field].Count -eq 1 -and
+        $retained[$field][0].details -like '*SIMULATED_CALLER_CLOSE_FAILURE*' -and
+        -not (Test-Path -LiteralPath $target) -and $partials.Count -eq 1
+    $checks.Add(@{ name = ('json-original-' + $Name + '-' + $Mode + '-and-close'); kind = 'original-production-export-caller'; simulation = $true
+        status = $(if ($pass) { 'PASS' } else { 'FAIL' }); primaryFailure = $primary; retainedSecondaryErrors = @($retained[$field])
+        unpublishedPartialCount = $partials.Count; publishedStatus = $retained.status })
+    Write-Output ("json-original-{0}-{1}-and-close: {2}" -f $Name, $Mode, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+Check-PhaseJsonCallerFault 'started' 'write'
+Check-PhaseJsonCallerFault 'started' 'flush'
+Check-PhaseJsonCallerFault 'runtime-provenance' 'write'
+Check-PhaseJsonCallerFault 'runtime-provenance' 'flush'
+
 function Check-StructuredPositive([string] $Name, $Value) {
     $directory = Join-Path $OutputRoot ('structured-positive-' + $Name); $null = [IO.Directory]::CreateDirectory($directory)
     $path = Join-Path $directory 'result.json'; $failure = $null; $roundTrip = $false

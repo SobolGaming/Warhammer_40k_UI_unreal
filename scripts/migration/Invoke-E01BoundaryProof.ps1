@@ -1330,9 +1330,10 @@ try {
     $phaseResult = [ordered]@{ schemaVersion = 1; packet = 'E01-WIN-BOUNDARY'; runId = $RunId; phase = $Phase
         status = 'RUNNING'; startedUtc = [datetime]::UtcNow.ToString('o'); completedUtc = $null
         runRoot = $runRoot; processes = [Collections.Generic.List[object]]::new(); childReports = [Collections.Generic.List[object]]::new()
+        startedJsonExportErrors = [Collections.Generic.List[object]]::new(); runtimeProvenanceExportErrors = [Collections.Generic.List[object]]::new()
         checks = [Collections.Generic.List[object]]::new(); redaction = @{ status = 'PENDING'; scope = 'wrapper outputs; harness scans role/private artifacts separately' }
         linux = 'NOT_RUN'; independentCodeReview = 'EXTERNAL_REQUIRED'; independentAcceptanceAudit = 'EXTERNAL_REQUIRED' }
-    Write-NewJson (Join-Path $phaseRoot 'started.json') @{ runId = $RunId; phase = $Phase; startedUtc = $phaseResult.startedUtc; wrapperSha256 = Get-Hash $PSCommandPath }
+    Write-NewJson (Join-Path $phaseRoot 'started.json') @{ runId = $RunId; phase = $Phase; startedUtc = $phaseResult.startedUtc; wrapperSha256 = Get-Hash $PSCommandPath } $phaseResult.startedJsonExportErrors
     if ($Phase -ne 'Preflight') {
         $preflight = Read-Json (Join-Path $runRoot 'preflight\result.json')
         if ($preflight.status -ne 'SOURCE_INVENTORY_PASS' -or $preflight.runId -ne $RunId) { throw 'Preflight did not pass for this run.' }
@@ -1425,7 +1426,7 @@ try {
             uvSha256 = Get-Hash $uvPath; selectedPythonSha256 = Get-Hash $selectedPython; installed = $installed
             runtimeTree = $tree; runtimeTreeSha256 = Get-RuntimeTreeHash $tree
             createdUtc = [datetime]::UtcNow.ToString('o') }
-        Write-NewJson $provenancePath $provenance
+        Write-NewJson $provenancePath $provenance $phaseResult.runtimeProvenanceExportErrors
         $phaseResult.runtime = @{ provenance = $provenancePath; provenanceSha256 = Get-Hash $provenancePath
             runtimeTreeSha256 = $provenance.runtimeTreeSha256; installed = $installed; sourceHashes = $sourceHashes }
         $phaseResult.status = 'INSTALLED_RUNTIME_PASS'

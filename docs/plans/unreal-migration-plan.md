@@ -6,7 +6,7 @@
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of this work and continuation through the migration plan.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
 **Canonical destination:** `Warhammer_40k_UI_unreal/docs/plans/unreal-migration-plan.md` (this file).
-**Review status:** Normal full-chain run `20261017T030835Z-0d4af4e2`, source candidate `c2614b2484a66bd8465b855e59b184d49b2b926d`, completed Preflight, PrepareRuntime, Capture, auxiliary privacy inspection, exact-byte promotion, Native and Audit. Actual results remain 87 Python unit tests, 14 Capture checks, 132 unique native successes and two automated evidence checks. The 14 include SOURCE/RUNTIME/SCHEMA checks alongside live checks. The six-path global editor-settings before/after record is absent, so editor preservation is **UNVERIFIED** and current status is **REMEDIATION_AND_FRESH_RUN_PENDING**. [Factual results](evidence/2026-10-16-e01-slow120-result.json) and Section 0.8 preserve the completed results. The maintained wrapper/PowerShell guard now passes 130 pure PowerShell checks; obtain fresh affected source review and execute a new normal full chain. Final blind CODE/REQ launch readiness is blocked until that work and the final documentation freeze complete; acceptance remains pending. Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, production responsiveness, the 30-second budget, UE HTTP, rendering, packaging and Linux remain open.
+**Review status:** Normal full-chain run `20261017T030835Z-0d4af4e2`, source candidate `c2614b2484a66bd8465b855e59b184d49b2b926d`, completed Preflight, PrepareRuntime, Capture, auxiliary privacy inspection, exact-byte promotion, Native and Audit. Actual results remain 87 Python unit tests, 14 Capture checks, 132 unique native successes and two automated evidence checks. The 14 include SOURCE/RUNTIME/SCHEMA checks alongside live checks. The six-path global editor-settings before/after record is absent, so editor preservation is **UNVERIFIED** and current status is **REMEDIATION_AND_FRESH_RUN_PENDING**. [Factual results](evidence/2026-10-16-e01-slow120-result.json) and Section 0.8 preserve the completed results. The maintained wrapper/PowerShell guard now passes 135 pure PowerShell checks; obtain fresh affected source review and execute a new normal full chain. Final blind CODE/REQ launch readiness is blocked until that work and the final documentation freeze complete; acceptance remains pending. Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, production responsiveness, the 30-second budget, UE HTTP, rendering, packaging and Linux remain open.
 
 ### Repository routes and provenance
 
@@ -24,15 +24,16 @@ OWN16 requires periodic coherent local checkpoint commits, before risky changes
 and after fixes, with honest test/review status and no additional publication
 authority. Section 0.2 and repository instructions preserve that workflow. Round11
 source review requests retaining secondary JSON-close diagnostics at every real
-writer caller; the current130-control result remains source evidence for its
-exact earlier candidate. Complete the bounded repair, fresh affected review and
-new full normal chain before final acceptance review.
+writer caller; the130-control result remains source evidence for its
+exact earlier candidate. The repair now has135 passing pure controls; fresh
+affected review and a new full normal chain remain required before final
+acceptance review.
 
 ### Revision 15 changes
 
 The current status preserves the completed normal `030835` results and same-run
 wire provenance, while recording the missing six-path global editor-settings
-before/after evidence. The wrapper and PowerShell guard now pass 130 pure PowerShell checks and require fresh
+before/after evidence. The wrapper and PowerShell guard now pass 135 pure PowerShell checks and require fresh
 affected source review and a new normal full chain under unchanged criteria.
 Final OWN15 code/requirements review readiness remains blocked until then and the
 final documentation freeze. Prior failures, unknown outcomes and source-review
@@ -82,7 +83,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: freeze and review the packet-revision-7 six-path editor-settings guard candidate, verified by 130 pure PowerShell checks, then execute a new normal E01-SLOW120 full chain.** The revision-7 source candidate is pending freeze/review. Root authorized this bounded remediation under unchanged criteria, budgets and scope; no waiver or Capture-link exception applies. Normal run `20261017T030835Z-0d4af4e2` on source `c2614b2484a66bd8465b855e59b184d49b2b926d` retains its executed revision-6 packet identity, actual 87/14/132/2 results and same-run wire binding, but its editor-preservation criterion is UNVERIFIED. Final blind CODE/REQ contexts cannot launch until the repair, reviewed new chain and final documentation freeze are complete. Preserve earlier reports/results and the original 30-second FAIL/UNKNOWN; do not borrow the historical `004553` settings comparison. Do not begin broad implementation or infer acceptance from completed execution.
+**Current assignment: freeze and review the packet-revision-7 six-path editor-settings guard candidate, verified by 135 pure PowerShell checks, then execute a new normal E01-SLOW120 full chain.** The revision-7 source candidate is pending freeze/review. Root authorized this bounded remediation under unchanged criteria, budgets and scope; no waiver or Capture-link exception applies. Normal run `20261017T030835Z-0d4af4e2` on source `c2614b2484a66bd8465b855e59b184d49b2b926d` retains its executed revision-6 packet identity, actual 87/14/132/2 results and same-run wire binding, but its editor-preservation criterion is UNVERIFIED. Final blind CODE/REQ contexts cannot launch until the repair, reviewed new chain and final documentation freeze are complete. Preserve earlier reports/results and the original 30-second FAIL/UNKNOWN; do not borrow the historical `004553` settings comparison. Do not begin broad implementation or infer acceptance from completed execution.
 
 ### 0.1 Fixed scope and authority
 
@@ -1826,11 +1827,11 @@ Before implementing a milestone, re-read its affected source at the exact approv
 [U26]: https://docs.opencv.org/3.4.5/d9/dab/tutorial_homography.html
 [U27]: https://docs.opencv.org/4.13.0/d4/d94/tutorial_camera_calibration.html
 
-Current source-gate update: [round9](research/2026-10-17-e01-slow120-code-review-r9.md) and [round10](research/2026-10-17-e01-slow120-code-review-r10.md) remain historical source assessments. The diagnostic/export/finalization repairs now pass 130 pure PowerShell controls; a fresh affected review and the required new full chain remain pending.
+Current source-gate update: [round9](research/2026-10-17-e01-slow120-code-review-r9.md) and [round10](research/2026-10-17-e01-slow120-code-review-r10.md) remain historical source assessments. The diagnostic/export/finalization repairs now pass 135 pure PowerShell controls; a fresh affected review and the required new full chain remain pending.
 
-Current remediation source verification: 130/130 pure PowerShell controls passed with39 unchanged inputs, separate from the87 Python units. The earlier93/93,87/87 and68/68 source results and failed83/87 and127/128 runs remain preserved. A new affected source review and full normal chain remain required;030835 still lacks its current editor-settings evidence.
+Current remediation source verification: 135/135 pure PowerShell controls passed with39 unchanged inputs, separate from the87 Python units. The earlier93/93,87/87 and68/68 source results and failed83/87 and127/128 runs remain preserved. A new affected source review and full normal chain remain required;030835 still lacks its current editor-settings evidence.
 
-[Round11 source review](research/2026-10-17-e01-slow120-code-review-r11.md) requests
+[Round11 source review](research/2026-10-17-e01-slow120-code-review-r11.md) requested
 retaining secondary close diagnostics at the started.json and runtime-provenance
-callers. Complete this bounded repair and new pure verification before fresh
-affected review and execution. No actual new phase has begun.
+callers. The repair now passes135 pure controls. Fresh affected review and
+execution remain pending. No actual new phase has begun.

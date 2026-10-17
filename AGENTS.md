@@ -56,7 +56,7 @@ raw passing test results and this gap. Review the maintained guard candidate and
 run a fresh full chain; do not substitute historical
 snapshots or reconstruct a before observation. Final three-role acceptance is
 still pending.
-The later revision7 repair now passes 130 pure PowerShell controls; its fresh
+The later revision7 repair now passes 135 pure PowerShell controls; its fresh
 affected source review and new full normal phase chain remain required.
 Historical revision4 permits only its recorded Native/Audit supplement linked to
 the one pinned immutable historical Capture, with no new Core process or game

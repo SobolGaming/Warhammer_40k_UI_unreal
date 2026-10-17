@@ -105,13 +105,13 @@ PowerShell checks with genuine process/exit provenance. Fresh affected source
 review and a new normal full chain remain pending. These controls do not supply
 missing observations for030835 or replace actual native execution.
 
-Current source-gate update: [round9](research/2026-10-17-e01-slow120-code-review-r9.md) and [round10](research/2026-10-17-e01-slow120-code-review-r10.md) remain historical source assessments. The maintained diagnostic/export/finalization repairs now pass 130/130 pure PowerShell controls, separate from the87 Python units. A fresh affected source review and a new full normal chain remain required.
+Current source-gate update: [round9](research/2026-10-17-e01-slow120-code-review-r9.md) and [round10](research/2026-10-17-e01-slow120-code-review-r10.md) remain historical source assessments. The maintained diagnostic/export/finalization repairs now pass 135/135 pure PowerShell controls, separate from the87 Python units. A fresh affected source review and a new full normal chain remain required.
 
-The earlier93/93,87/87 and68/68 pure-source results remain preserved, alongside failed83/87 and127/128 runs. The new run binds39 unchanged inputs, including an actual retained Native-result serialization control. Simulated controls supply no live Core or Unreal execution. Run030835 still lacks its current six-editor-settings evidence.
+The earlier93/93,87/87 and68/68 pure-source results remain preserved, alongside failed83/87 and127/128 runs. The latest run binds39 unchanged inputs, including an actual retained Native-result serialization control. Simulated controls supply no live Core or Unreal execution. Run030835 still lacks its current six-editor-settings evidence.
 
 [Round11](research/2026-10-17-e01-slow120-code-review-r11.md) requested retaining
-secondary close diagnostics at two real JSON writer callers. Complete that
-bounded repair and fresh source verification/review before execution. OWN16's
+secondary close diagnostics at two real JSON writer callers. The repair now has
+135 passing pure controls; fresh affected source review remains pending. OWN16's
 regular local checkpoint workflow is recorded in [plan Section 0.2](unreal-migration-plan.md#02-research-procedure-and-evidence-rules)
 and repository instructions; checkpoint commits do not confer acceptance or new
 publication permission.
