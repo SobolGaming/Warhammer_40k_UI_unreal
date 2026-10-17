@@ -1,7 +1,7 @@
 # Source-unit guard checks only. This does not execute an E01 wrapper phase.
 # Requires only PowerShell and the tracked reviewed wire corpus; it creates
 # explicitly simulated metadata and copies in a new ignored private directory.
-param([string] $OutputRoot = '')
+param([string] $OutputRoot = '', [string] $ActualUnitLogPath = '', [int] $ActualUnitCount = 0)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
@@ -18,7 +18,7 @@ $tokens = $null; $parseErrors = $null
 $ast = [System.Management.Automation.Language.Parser]::ParseFile($guardWrapperPath, [ref]$tokens, [ref]$parseErrors)
 if ($parseErrors.Count) { throw 'Wrapper AST failed.' }
 $names = @('Assert-NoReparsePoint', 'Assert-ChildPath', 'Get-MemberPath', 'Require-File', 'Get-Hash', 'Assert-SafeText',
-    'Read-Json', 'Assert-Candidate', 'Get-CurrentCaptureWireEvidence', 'Assert-CaptureWireBinding')
+    'Read-Json', 'Assert-Candidate', 'Get-PythonUnitEvidence', 'Get-CurrentCaptureWireEvidence', 'Assert-CaptureWireBinding')
 foreach ($definition in $ast.FindAll({ param($node) $node -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $false)) {
     if ($definition.Name -in $names) {
         # Extracted function definitions lose their automatic source-file binding.
@@ -38,6 +38,12 @@ $simulatedRuntime = Join-Path $OutputRoot 'SIMULATED-runtime-provenance.json'
 $runtime = @{ provenance = $simulatedRuntime; provenanceSha256 = Get-Hash $simulatedRuntime; runtimeTreeSha256 = 'b' * 64 }
 $sourcePaths = @($guardWrapperPath, $harnessPath, $unitTestsPath, $sourceManifestPath, $packetPath, $PSCommandPath,
     (Join-Path $actualRoot 'index.json')) + @($indexTemplate.cases | ForEach-Object { Get-MemberPath $actualRoot $_.path })
+if ($ActualUnitLogPath) {
+    $ActualUnitLogPath = Assert-ChildPath ([IO.Path]::GetFullPath($ActualUnitLogPath)) (Join-Path $projectRoot '.local\experiments\E01-target')
+    Require-File $ActualUnitLogPath
+    if ($ActualUnitCount -le 0) { throw 'Actual unit-log evidence requires its expected positive case count.' }
+    $sourcePaths += $ActualUnitLogPath
+} elseif ($ActualUnitCount -ne 0) { throw 'Actual unit count requires an explicit preserved unit-log path.' }
 $sourceBefore = @(foreach ($path in $sourcePaths) { @{ path = $path; sha256 = Get-Hash $path } })
 $checks = [Collections.Generic.List[object]]::new()
 $CaptureRunId = ''
@@ -181,10 +187,48 @@ foreach ($mode in @('capture-substitution-after-native', 'index-metadata-substit
     $checks.Add(@{ name = $mode; status = $(if ($pass) { 'PASS' } else { 'FAIL' }); observedFailure = $failure; simulation = $true })
     Write-Output ("{0}: {1}" -f $mode, $(if ($pass) { 'PASS' } else { 'FAIL' }))
 }
+
+function Check-PythonUnitLog([string] $Name, [string] $Text, [int] $ExpectedCount = 0, [string] $ExpectedFailure = '') {
+    $failure = $null; $evidence = $null
+    try { $evidence = Get-PythonUnitEvidence $Text } catch { $failure = $_.Exception.Message }
+    $pass = if ($ExpectedFailure) { $null -ne $failure -and $failure -like ('*' + $ExpectedFailure + '*') } else {
+        $null -eq $failure -and $evidence.executed -eq $ExpectedCount -and $evidence.status -ceq 'PASS' -and $evidence.footer -ceq 'OK'
+    }
+    $checks.Add(@{ name = $Name; status = $(if ($pass) { 'PASS' } else { 'FAIL' }); kind = 'unittest-summary-parser'
+        expectedCount = $ExpectedCount; expectedFailure = $ExpectedFailure; observedFailure = $failure; evidence = $evidence })
+    Write-Output ("{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+
+$summary = "Ran 2 tests in 0.125s`n`n"
+$verbose = "test_failed_evidence_preserves_validated_accepted_and_rejected_receipts_when_raw_damaged (EvidenceTests) ... ok`n" +
+    "test_FAILED_skipped_expected_failures_unexpected_successes_are_ordinary_name_words (EvidenceTests) ... ok`n`n" +
+    "----------------------------------------------------------------------`n" + $summary
+Check-PythonUnitLog 'unit-verbose-name-words-are-not-footers' ($verbose + "OK`n") 2
+Check-PythonUnitLog 'unit-single-test-summary' "Ran 1 test in 0.000s`n`nOK`n" 1
+Check-PythonUnitLog 'unit-crlf-summary' "Ran 2 tests in 0.125s`r`n`r`nOK`r`n" 2
+Check-PythonUnitLog 'unit-failed-footer' ($verbose + "FAILED (failures=1)`n") 0 'final footer must be exactly OK'
+Check-PythonUnitLog 'unit-skipped-footer' ($verbose + "OK (skipped=1)`n") 0 'final footer must be exactly OK'
+Check-PythonUnitLog 'unit-expected-failure-footer' ($verbose + "OK (expected failures=1)`n") 0 'final footer must be exactly OK'
+Check-PythonUnitLog 'unit-unexpected-success-footer' ($verbose + "FAILED (unexpected successes=1)`n") 0 'final footer must be exactly OK'
+Check-PythonUnitLog 'unit-annotated-unexpected-success-footer' ($verbose + "OK (unexpected successes=1)`n") 0 'final footer must be exactly OK'
+Check-PythonUnitLog 'unit-missing-summary' "OK`n" 0 'exactly one standard anchored unittest summary'
+Check-PythonUnitLog 'unit-missing-footer' $summary 0 'final footer must be exactly OK'
+Check-PythonUnitLog 'unit-duplicate-summary' ($summary + $summary + "OK`n") 0 'exactly one standard anchored unittest summary'
+Check-PythonUnitLog 'unit-zero-summary' "Ran 0 tests in 0.000s`n`nOK`n" 0 'positive count and finite duration'
+Check-PythonUnitLog 'unit-zero-and-positive-summaries' ("Ran 0 tests in 0.000s`n`n" + $summary + "OK`n") 0 'exactly one standard anchored unittest summary'
+Check-PythonUnitLog 'unit-extra-trailing-output' ($verbose + "OK`nextra output`n") 0 'final footer must be exactly OK'
+Check-PythonUnitLog 'unit-duplicate-footer' ($verbose + "OK`nOK`n") 0 'final footer must be exactly OK'
+Check-PythonUnitLog 'unit-malformed-duration' "Ran 2 tests in NaNs`n`nOK`n" 0 'exactly one standard anchored unittest summary'
+Check-PythonUnitLog 'unit-wrong-singular-summary' "Ran 2 test in 0.125s`n`nOK`n" 0 'positive count and finite duration'
+if ($ActualUnitLogPath) {
+    Check-PythonUnitLog 'unit-preserved-full-verbose-log' ([IO.File]::ReadAllText($ActualUnitLogPath, $utf8)) $ActualUnitCount
+}
 $sourceAfter = @(foreach ($record in $sourceBefore) { @{ path = $record.path; sha256 = Get-Hash $record.path; unchanged = ((Get-Hash $record.path) -ceq $record.sha256) } })
 $passed = @($checks | Where-Object { $_.status -eq 'PASS' }).Count
+$invocation = @('pwsh', '-NoProfile', '-File', $PSCommandPath, '-OutputRoot', $OutputRoot)
+if ($ActualUnitLogPath) { $invocation += @('-ActualUnitLogPath', $ActualUnitLogPath, '-ActualUnitCount', $ActualUnitCount) }
 $result = @{ purpose = 'Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation'
-    invocation = @('pwsh', '-NoProfile', '-File', $PSCommandPath, '-OutputRoot', $OutputRoot); wrapperSha256 = Get-Hash $guardWrapperPath
+    invocation = $invocation; wrapperSha256 = Get-Hash $guardWrapperPath
     unitScriptSha256 = Get-Hash $PSCommandPath; sourceBefore = $sourceBefore; sourceAfter = $sourceAfter; checks = @($checks)
     executed = $checks.Count; passed = $passed; failed = $checks.Count - $passed; scriptPathBinding = 'Only automatic PSCommandPath adapted to the reviewed wrapper path in extracted function definitions' }
 Write-PrivateJson (Join-Path $OutputRoot 'guard-unit-result.json') $result

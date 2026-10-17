@@ -497,6 +497,9 @@ failure; never fall back to a mismatched installed Core or private source import
    fixture/output/core-launcher paths, not the process working directory. Validate
    JSON Schema references through the frozen local registry, with no network
    schema resolution. Do not execute/import Core tests or fixture generators.
+   Establish positive unit execution from the successful child exit and complete
+   anchored final Ran/OK summary, rejecting skips/failure annotations, absent or
+   ambiguous summaries. Words inside successful verbose test names are not results.
 7. **Native:** build once after native source is frozen, using the existing README
    Build.bat command and packet-local log/UBA paths. The equivalent automation
    invocation is below; the suite must first exist and enumerate a positive count.

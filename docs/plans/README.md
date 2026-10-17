@@ -54,3 +54,5 @@ Round4 [source review](research/2026-10-17-e01-slow120-code-review-r4.md) reques
 Round5 [source review](research/2026-10-17-e01-slow120-code-review-r5.md) requests four failure-path/coherence fixes before the fresh reviewed full chain.72 Python/19 simulated guard results remain source evidence only.
 
 Round6 [source review](research/2026-10-17-e01-slow120-code-review-r6.md) requests worker cleanup UNKNOWN/ledger retention and submitted descriptor-hash binding before the fresh reviewed full chain.83 Python/19 simulated guard results remain source evidence only.
+
+[Round7 source review](research/2026-10-17-e01-slow120-code-review-r7.md) PASS precedes replacement run20261017T025237Z-da446128. Its Preflight/runtime reuse and87 unit tests passed, but Capture FAIL falsely matched a test name before any Core/live execution. Summary-parser repair and fresh affected review/full chain are next.

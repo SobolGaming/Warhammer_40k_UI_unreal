@@ -42,21 +42,15 @@ corrected move that moved all five models one inch to their requested endpoints.
 The longest completed HTTP request took 37.0 seconds in the final Capture
 (38.1 seconds in its predecessor); this does not pass the old
 30-second budget ([Core #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590)).
-Independent privacy review approved 30 original-byte non-admin wire fixtures.
-The linked native supplement passed all 132 Automation cases and two automated
-evidence-audit checks. Its main log confirms the owned writable DDC path;
-editor settings and authored Config files remained unchanged with INI writes
-disabled. The journal preserves earlier guard/log failures and generated startup
-configuration outputs. Initial fresh code review requested repairs to uncertain
-command handling and absolute header deadlines; the separate requirements audit
-needs raw process-ledger extracts and consistent plan line endings. Packet
-revision6 requires guarded commands in every launch/attach lane, a complete worker
-process record and native fixtures bound to the same fresh Capture. The separate
-round-2 source review found the attach/fixture gaps before a new Core run.
-Fresh review and a new full diagnostic chain remain required.
-The latest source review requires worker cleanup failures to retain UNKNOWN and
-complete process records, and creation receipts to match the submitted ruleset
-descriptor hash. Focused repairs precede the new chain.
+Independent privacy review approved30 original-byte non-admin wire fixtures for
+that historical capture. Its linked native supplement passed132 Automation cases
+and two automated evidence checks, with owned DDC and unchanged observed settings/Config.
+After failure-path repairs, a fresh static source review passed. Replacement run
+20261017T025237Z-da446128 passed Preflight and verified runtime reuse and ran87
+unit tests successfully. Capture then failed before Core launch because the
+wrapper matched FAILED within a successful test name. The summary parser is being
+repaired before a newly reviewed full run. No new host/live/wire/native proof
+is credited by that failed attempt; the journal preserves every predecessor.
 Prior execution remains evidence for its recorded source. Full E01 is unaccepted.
 The manual installation alternatives below are not its executed commands. Unreal project creation/build is
 specified in [plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).

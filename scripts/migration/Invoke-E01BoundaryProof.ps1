@@ -371,6 +371,26 @@ function Assert-Candidate($Candidate) {
     foreach ($file in $Candidate.files) { if ((Get-Hash $file.path) -ne $file.sha256) { throw "Frozen authored candidate changed: $($file.path)" } }
 }
 
+function Get-PythonUnitEvidence([string] $LogText) {
+    $normalized = $LogText.Replace("`r`n", "`n").Replace("`r", "`n")
+    $summaries = [regex]::Matches($normalized, '(?m)^Ran ([0-9]+) (test|tests) in ([0-9]+(?:\.[0-9]+)?)s$')
+    if ($summaries.Count -ne 1) { throw 'Python unit log requires exactly one standard anchored unittest summary.' }
+    $summary = $summaries[0]
+    $count = 0
+    $seconds = 0.0
+    if (-not [int]::TryParse($summary.Groups[1].Value, [ref]$count) -or $count -le 0 -or
+        $summary.Groups[2].Value -cne $(if ($count -eq 1) { 'test' } else { 'tests' }) -or
+        -not [double]::TryParse($summary.Groups[3].Value, [Globalization.NumberStyles]::AllowDecimalPoint,
+            [Globalization.CultureInfo]::InvariantCulture, [ref]$seconds) -or -not [double]::IsFinite($seconds)) {
+        throw 'Python unittest summary requires a positive count and finite duration.'
+    }
+    $footer = $normalized.Substring($summary.Index + $summary.Length)
+    if ($footer -cnotmatch '\A\n+OK\n*\z') {
+        throw 'Python unittest final footer must be exactly OK without annotations or trailing output.'
+    }
+    return @{ executed = $count; status = 'PASS'; durationSeconds = $seconds; summary = $summary.Value; footer = 'OK' }
+}
+
 function Get-CurrentCaptureWireEvidence {
     if ($CaptureRunId) { throw 'Current-run wire binding cannot replace the historical Capture supplement.' }
     $capturePath = Assert-ChildPath (Join-Path $runRoot 'capture\result.json') $runRoot
@@ -996,9 +1016,7 @@ try {
         $null = Invoke-Harness 'verify-runtime' $runtimePython 'python-runtime'
         $null = Invoke-OwnedProcess 'python-unittest' $runtimePython @('-I', '-B', $unitTestsPath) $runRoot
         $unitLog = [IO.File]::ReadAllText((Join-Path $phaseRoot 'python-unittest.stdout.log')) + [IO.File]::ReadAllText((Join-Path $phaseRoot 'python-unittest.stderr.log'))
-        $unitCount = [regex]::Match($unitLog, 'Ran ([1-9][0-9]*) tests? in ')
-        if (-not $unitCount.Success -or $unitLog -match '(?i)skipped=|FAILED|expected failures=|unexpected successes=') { throw 'Python unit suite must run a positive count without skipped/failed cases.' }
-        $phaseResult.unitTests = @{ executed = [int]$unitCount.Groups[1].Value; status = 'PASS' }
+        $phaseResult.unitTests = Get-PythonUnitEvidence $unitLog
         $null = Invoke-Harness 'capture' $runtimePython 'python-capture'
         Assert-Candidate $phaseResult.candidate
         $phaseResult.status = 'LOCAL_HTTP_BOUNDARY_PASS'

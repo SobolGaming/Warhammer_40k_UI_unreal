@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "diagnostic": "E01-SLOW120",
-  "executionStatus": "REMEDIATION_AND_FRESH_RUN_PENDING",
+  "executionStatus": "FRESH_CHAIN_WRAPPER_FAILURE_BEFORE_CORE",
   "recordKind": "FACTUAL_EXECUTION_SUMMARY_NOT_INDEPENDENT_ACCEPTANCE_VERDICT",
   "recordedUtc": "2026-10-17T00:57:59.5131564Z",
   "recordedBy": "/root/e01_slow120_acceptance",
@@ -1415,24 +1415,29 @@
         "actualWorkerProcessInventoryRequired": true,
         "bindFreshCapturePromotedWireNativeAuditExactHashes": true,
         "privacyReviewBeforePromotionRequired": true,
-        "wrapperFinalSha256": "e5fb8305e22398eacc7dfa263373e6c480d7152b0b47dabc7cfdfee18d7ea86e",
+        "wrapperFinalSha256": "a510527ab0300d0514c61b0a2b9477cd9b06b924ad1a2e748f873a8bae436cdd",
         "wrapperAndGuardRegressionResult": {
           "status": "PASS",
-          "executed": 19,
-          "passed": 19,
+          "executed": 37,
+          "passed": 37,
           "failed": 0,
-          "sourceSnapshotCount": 37,
+          "composition": {
+            "priorBindingGuards": 19,
+            "syntheticUnitSummaryControls": 17,
+            "preservedActual87TestLog": 1
+          },
+          "sourceSnapshotCount": 38,
           "allSourceSnapshotsUnchanged": true,
           "result": {
-            "path": ".local/tests/e01-wire-binding-20261017T024247Z-5be68abb/guard-unit-result.json",
-            "sha256": "9bd59775e7de11bdb650c77d0d3cc8c1af3ef3aeb0ca12071a89208a6a808d26"
+            "path": ".local/tests/e01-wire-binding-20261017T025951Z-9cc6f684/guard-unit-result.json",
+            "sha256": "79ee5f156a7baeec013ceeecac2d954cc0de8c429e5face9e927b3505c6bbe9b"
           },
           "rawLog": {
-            "path": ".local/tests/e01-wire-binding-20261017T024247Z-5be68abb.raw.log",
-            "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+            "path": ".local/tests/e01-wire-binding-20261017T025951Z-9cc6f684.raw.log",
+            "sha256": "fd6004bb35677f65d7dd2193d0e45531a57c5964f5f3ac8ce12f89bba3c8c7da"
           },
-          "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
-          "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+          "unitScriptSha256": "0bc3679ef637627a692eb7ba125b8f619797f9e5237ec19c0e8f2b8ac923c8da",
+          "scope": "Pure read-only wrapper guard functions;19 binding controls,17 synthetic summary controls and exact87-unit producer log. No actual E01 phase/Core/Native/build/install/global setting mutation",
           "coreOrNativePhaseExecuted": false
         },
         "fullRuntimeCaptureBuildAutomation": "NOT_RUN_FOR_THIS_REPLACEMENT_CANDIDATE",
@@ -1493,8 +1498,28 @@
             "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
             "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
             "coreOrNativePhaseExecuted": false
+          },
+          {
+            "status": "PASS",
+            "executed": 19,
+            "passed": 19,
+            "failed": 0,
+            "sourceSnapshotCount": 37,
+            "allSourceSnapshotsUnchanged": true,
+            "result": {
+              "path": ".local/tests/e01-wire-binding-20261017T024247Z-5be68abb/guard-unit-result.json",
+              "sha256": "9bd59775e7de11bdb650c77d0d3cc8c1af3ef3aeb0ca12071a89208a6a808d26"
+            },
+            "rawLog": {
+              "path": ".local/tests/e01-wire-binding-20261017T024247Z-5be68abb.raw.log",
+              "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+            },
+            "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
+            "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+            "coreOrNativePhaseExecuted": false
           }
-        ]
+        ],
+        "previousWrapperSha256": "e5fb8305e22398eacc7dfa263373e6c480d7152b0b47dabc7cfdfee18d7ea86e"
       },
       "revision6PythonUnits": {
         "status": "PASS",
@@ -1808,6 +1833,15 @@
         "caseCountChanged": false,
         "newSyntheticControls": "Event range endpoint, exact viewer role and nullable ID coherence; mismatches, null/type/case negatives and coherent controls",
         "newBuildOrNativeRun": false
+      },
+      "wrapperUnitSummaryRepair": {
+        "status": "SOURCE_AND_PURE_GUARD_CHECKS_ONLY",
+        "pythonAndNativeSourcesChanged": false,
+        "retainedActual87LogParsedAsPass": true,
+        "actualProducerSourceHead": "5456065951fb68d1eb7331d699a38a61529de149",
+        "actualStderrSha256": "760bb490ce33f126e8dbb91cf098a294c3189ea884c5fe223255ec9d71da3d6b",
+        "newAffectedSourceReview": "PENDING",
+        "newFullCoreChain": "NOT_RUN"
       }
     },
     "subsequentOwn15CodeReports": [
@@ -1939,6 +1973,23 @@
           "P2 worker cleanup faults retain primary UNKNOWN and finalized process ledger",
           "P2 creation receipt ruleset descriptor hash matches retained request"
         ]
+      },
+      {
+        "round": 7,
+        "role": "Independent code quality; pre-execution source gate",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r7.md",
+          "sha256": "dbcf912b88123fce2d1c7c3407ee18dea3e9a9e71f0bb8c8f274cb64e0577499"
+        },
+        "verdict": "PASS",
+        "sessionId": "01a147bf-e323-76a0-b1f3-100ccba9d9f1",
+        "frozenHead": "5456065951fb68d1eb7331d699a38a61529de149",
+        "completedUtc": "2026-10-17T02:51:53.2638020Z",
+        "exitCode": 0,
+        "completedStaticCommands": 34,
+        "all174CandidateHashesUnchanged": true,
+        "coreOrNativeExecution": false,
+        "findings": []
       }
     ]
   },
@@ -1956,9 +2007,9 @@
     "Durable restart/recovery and real production role controls remain unproved",
     "Full E01/M01, G-RESEARCH and G-IMPLEMENT are not accepted",
     "Original Capture002136 has no actual attach-worker process record; its missing PID must not be invented",
-    "Changed revision6 source passes87 Python/19 simulated guard tests but still requires fresh blind source review and full current-source Core/native chain; no approval inferred"
+    "Current source has87 Python tests passing and37 pure PowerShell guard checks; wrapper repair still requires fresh affected review/new full Core/native chain; failed pre-Core replacement attempt remains FAIL"
   ],
-  "updatedUtc": "2026-10-17T02:44:06.349549+00:00",
+  "updatedUtc": "2026-10-17T03:02:03.987874+00:00",
   "preRemediationSnapshots": {
     "provenance": {
       "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0130137420423Z.json",
@@ -2050,6 +2101,47 @@
       "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-ee7165273a59f2c4bd0d1e47de6b6053f211caa97f3d4d3bd87d49d87e3737a5.json",
       "sha256": "ee7165273a59f2c4bd0d1e47de6b6053f211caa97f3d4d3bd87d49d87e3737a5",
       "reason": "Preserved83-unit factual record before round6 source review addendum"
+    }
+  ],
+  "freshFullChainAttempts": [
+    {
+      "runId": "20261017T025237Z-da446128",
+      "head": "5456065951fb68d1eb7331d699a38a61529de149",
+      "normalChain": true,
+      "captureRunIdUsed": false,
+      "preflight": {
+        "status": "PASS",
+        "sha256": "247f71d3eac788e98aba629b5c6bfd8b0526bac1f2d2bfd8eda25e984ff337f7"
+      },
+      "prepareRuntime": {
+        "status": "PASS_VERIFIED_REUSE",
+        "sha256": "3a397e2988c6309faa9b31e187cded8d7e35e92b4f5819d6eff0dbaa9cd141a3",
+        "installed": false
+      },
+      "capture": {
+        "status": "FAIL",
+        "exitCode": 1,
+        "sha256": "476872f1b049b23a73ae4db6d419078948dae1840e56758da47a1b5615de93ea",
+        "startedUtc": "2026-10-17T02:55:00.0274515Z",
+        "completedUtc": "2026-10-17T02:55:53.2571968Z",
+        "reason": "Unanchored case-insensitive FAILED pattern matched successful verbose test name before actual Core scenario",
+        "actualWrapperChildren": 14,
+        "allWrapperChildrenExit0": true,
+        "coreHostOrAttachWorkerStarted": false,
+        "liveCasesOrProposedWireCreated": false
+      },
+      "observedUnitProcess": {
+        "reportedBy": "Original child exit and saved stderr, distinct from failed wrapper phase",
+        "pid": 724,
+        "exitCode": 0,
+        "tests": 87,
+        "seconds": 20.829,
+        "stderrSha256": "760bb490ce33f126e8dbb91cf098a294c3189ea884c5fe223255ec9d71da3d6b",
+        "summary": "Ran87 tests / OK"
+      },
+      "nativeOrAuditStarted": false,
+      "sourceOrSiblingChanged": false,
+      "countedAsRuntimePass": false
     }
   ]
 }

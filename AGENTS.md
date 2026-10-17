@@ -176,6 +176,8 @@ commands, executed test counts and artifacts. NullRHI does not prove rendering,
 an Editor target build does not prove packaging, and an empty automation suite is
 failure. Do not invent an existing `Warhammer.Migration` suite. Do not repeat costly
 checks without a relevant change or unresolved concern.
+Use the successful child exit and complete final unittest summary to establish
+positive execution without skips/failures. Test names are not failure summaries.
 
 Before accepting a code milestone, freeze the candidate and obtain separate code
 review and acceptance audit against plan criteria. Report actual session isolation
