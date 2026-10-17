@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **SOURCE_CHANGES_REQUESTED_73F; BOUNDED_REMEDIATION_ONLY; NO_NEW_EXECUTION_AUTHORITY**.
+Status: **SOURCE_PASS_338; PREFLIGHT_FAILED_BEFORE_PHASE_CREATION; HIDDEN_AUTHORITY_CLOSED; BOUNDED_KNOWN_DOCUMENTS_REPAIR_ONLY**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -8,10 +8,12 @@ Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
 
-The latest frozen 73f SOURCE assessment is CHANGES_REQUESTED; its two findings
-are released for bounded remediation only. The planned 174203 RunId is unused
-and has no execution authority. The earlier 171627 Preflight/control observations
-and publication failure remain recorded below. No build/native/GUI result exists.
+The frozen 338 SOURCE assessment is PASS. Its attempted 181128 Preflight failed
+on `E02_REPARSE_PATH` before RunRoot/phase creation; hidden authority is closed
+and the RunId must not be reused. Root released only the bounded Known Documents
+observation repair, with a new freeze/fresh SOURCE/new RunId required. No
+build/native/GUI result exists. The earlier 73f CHANGES_REQUESTED, unused174203
+RunId and 171627 Preflight/control/publication/settings history remain below.
 
 The predecessor table binds accepted E01-SLOW120 run044903, executed d118,
 reviewed b97, original report verdicts and separate publication bd80123.
@@ -491,5 +493,97 @@ The prior status-label-only whole-file SHA256 was
 It retained the earlier printed planning hash `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`;
 that printed value was not a fresh binding of its changed preceding bytes.
 The dated revision 22 footer now binds the exact preceding UTF-8 bytes:
-`ECA8ECFB90615807D8207A5B1DCFE1928ADBEFA4482A160419D7978FC2DA807E`. Current whole-file SHA256:
+`ECA8ECFB90615807D8207A5B1DCFE1928ADBEFA4482A160419D7978FC2DA807E`. Revision22 whole-file SHA256:
 `48BF6A0E4EF42E930AF65FE27D76F61B224BCFA7685C19D5A00B21C9D4CB7EE8`. Historical adoption/hash values above remain intact.
+
+## SOURCE PASS for 338 and failed Preflight — 2026-10-17 UTC
+
+The fresh static assessment of `338735e737c6892736b03c884b475c66ae0f69f8`
+against `bd801233cc9989e0ae146a3be7b136d26dc73183` returned **PASS**.
+Root recorded the bounded source gate at `2026-10-17T20:19:10.1514563Z`.
+Immutable records are:
+
+| Record | Bytes | SHA256 |
+|---|---:|---|
+| [Unchanged raw SOURCE report](../../../.local/reviews/E02-source-review/review-338-owner-approved-20261017T200316Z-35488ba5/last-message.txt) | 7656 | `F92C63048C25E968999DE7A5614B7657C381BF5D43110130B74598603BA5194C` |
+| [Operator seal](../../../.local/reviews/E02-source-review/review-338-owner-approved-20261017T200316Z-35488ba5/orchestrator-seal.json) | 7789 | `51F8A9342969F684DCCA73B9C0CB060F5DBAF109045B97094472A9DEEC685278` |
+| [Complete command/output audit](../../../.local/reviews/E02-source-review/review-338-owner-approved-20261017T200316Z-35488ba5/operator-command-output-audit.json) | 37489 | `8F730CCA5D82EB21A706727E9A013F1DF07902F938F6D88418E477C420470807` |
+| [Review artifact manifest](../../../.local/reviews/E02-source-review/review-338-owner-approved-20261017T200316Z-35488ba5/artifacts.manifest.json) | 12228 | `E8ECF8BC2E717136CFBBE947A3387235C2E35F9ECE7983E1067B2225C00A1E6F` |
+| [Root source-gate disposition](../../../.local/reviews/E02-source-review/root-338-20261017T181128Z-06d66926/source-gate-disposition.json) | 4908 | `E93F082F136760CBD1CBECA1D18B61A5D0DD9E12A5E1A22690B65A128DC785EB` |
+| [Historical hidden execution authority](../../../.local/reviews/E02-source-review/root-338-20261017T181128Z-06d66926/hidden-execution-authority.json) | 3540 | `D9D5E2E1491CDED7BEDF2C4195D6490D3CB44CCBD36D3833644C5E20D2F44208` |
+| [Failed Preflight and authority closure](../../../.local/reviews/E02-source-review/root-338-20261017T181128Z-06d66926/preflight-failure-and-hidden-authority-closure.json) | 1966 | `E90FE4B648458FF2B7D0891B6C820137E717503D103E142C70ADD914FF916146` |
+
+The independent session was `01a14b76-afbd-7341-b0a3-17d7ad442acb`, configured
+CLI 0.163.0-alpha.10.2, `gpt-6.1-sol`/`ultra`, workspace-root CWD. Selected actual
+runtime evidence records read-only/never and disabled session memory; deeper
+memory/isolation, OS PID linkage and requested app/multi-agent disabling remain
+UNVERIFIED. Actual payload 7079 bytes differs from approved 7077 by trailing CRLF;
+byte-identical transport is not claimed. All 47 literal inputs, 50 nested commands
+and complete captured outputs were audited. Five query diagnostics, five truncated
+model outputs and an empty interim graph output remain unchanged. The separate
+v2 visibility receipt finds all 6540 required numbered normative/source lines in
+the actual relevant model-facing text; visibility does not attest comprehension.
+Two Core reference reads match pre-existing normative hashes/current post-read
+identities but lack enumeration in the 1315-file/205-primary sets and actual own
+pre-read observations. These limits remain in the unchanged report/seal/root gate.
+
+The historical hidden authority allowed Preflight, SupervisorControls and Build
+for RunId `20261017T181128Z-06d66926`. Actual Preflight exited 1 with
+`FAIL_BEFORE_PHASE_CREATION` / `E02_REPARSE_PATH`. The normal MyDocuments route
+was `C:/Users/Rabid/OneDrive/Documents`; that folder and its OneDrive parent
+carried ReparsePoint attributes, with LinkType/Target absent and exact tags
+unclassified. `Execution-UserContext` applied the generic no-reparse path guard
+before run allocation. Root recorded closure at `2026-10-17T20:20:46.0852316Z`:
+RunRoot remained absent, no phase result/completion or supervised child exists,
+and SupervisorControls/Build/native/GUI did not run. This is a failed attempted
+RunId, **DO_NOT_REUSE**; hidden authority is **CLOSED_DO_NOT_EXECUTE_FURTHER_PHASES**.
+The static SOURCE PASS remains historical for 338 and supplies no runtime result.
+
+Root released only a bounded observation-route repair and related checks/docs/
+checkpoint. The proposed exception covers exactly `editor-known-documents-user`
+and `ubt-known-documents`: the actual absolute OS Known Documents root plus,
+respectively, `Unreal Engine/Engine/Config/UserEditorSettings.ini` and
+`Unreal Engine/UnrealBuildTool/BuildConfiguration.xml`. These are read-only
+logical settings observations through unclassified ancestor reparse points;
+the leaf remains a plain non-reparse file. Retain all six Editor/three UBT roles,
+explicit not-found versus UNAVAILABLE, and exact path/existence/hash comparisons.
+Keep strict owned/source/tool/engine and Local/Profile/Roaming guards; do not
+substitute profile/Documents, omit roles, change KnownFolder settings or repair
+external XML. Resolved target identity remains **UNVERIFIED**. No repair execution
+or successful test is claimed. The changed source/packet needs a checkpoint,
+new freeze, fresh affected SOURCE assessment and new RunId before another phase.
+Visible-window approval and final distinct OWN15 CODE/REQ remain separate gates.
+
+Root's separate normal-desktop metadata diagnosis (tool chunk `8176b0`) observed
+explicit not-found at both exact Known Documents settings leaves, without a
+body read or write. This is no future-run baseline. A later Preflight may
+exercise those absence branches; hashing a present Known Documents file remains
+unexecuted/UNVERIFIED. Do not create global settings to manufacture that proof.
+
+The source-only packet revision 23 now makes this two-route policy explicit.
+Its exact preceding UTF-8 prefix is 61250 bytes/SHA256
+`4F09F6E58627CD258A39C6375365ACD888A8DAA7A0D6D44F8DFE70CB558BA60D`;
+the whole packet is 63217 bytes/SHA256
+`1CE4B98948DBA9F875983DAA6FEF9ACAB3DCEF27279C27BCB76927A074882109`.
+It changes no case count, authored-path scope or budget. Fresh source review and
+execution of the changed candidate remain pending; these hashes are no approval.
+
+## Scoped standing E02 review-transmission consent — 2026-10-17 UTC
+
+The [standing consent record](../../../.local/reviews/E02-source-review/root-338-owner-approved-20261017T200218Z-d47cd4ea/standing-e02-review-transmission-approval.json)
+is 2282 bytes/SHA256 `403EE89080E9BAE297E3E2A28BBDD8C9069D95DE3986318ADC73313089BCB1C5`.
+Trusted Codex-app delegation relayed the progress-chat question and exact human
+reply: “I have authorized that review packet.  I further authorize all further review packets.”
+Its source is chat `01a148e0-3675-7040-94b5-a1185b5a60d1`, question message
+`Sentinel_df2ccab0e4d08191be6dc172a73c8f7a` and answer message
+`Sentinel_7daaf35dda308191a64fdb57cd6faf97`. Independent retrieval of those
+literal user messages was not established: the later read returned summaries.
+Direct exact 338 approval in this migration chat is separately bound.
+
+This authorizes current and subsequent revised **E02** independent-review packets
+to the same OpenAI ChatGPT/Codex service using the existing sign-in, covering
+project source, supporting Unreal/API excerpts, requirements and file metadata.
+Credentials and private sessions remain excluded; initial reviewer inputs also
+exclude author notes and peer verdicts. Source freezes, independent initial
+assessments and final acceptance gates remain required. This grants no visible
+window, merge or unrelated authority and authorizes no duplicate review launch.

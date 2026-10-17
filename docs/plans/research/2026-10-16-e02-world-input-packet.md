@@ -549,6 +549,24 @@ hash-race failures remain UNAVAILABLE and fail the gate. Reject files that are
 directories/reparse points and any missing/duplicate/substituted observation,
 changed existence, bytes, path or membership.
 
+Treat only the two exact `actual-known-Documents` settings paths in this table
+and the UBT list below as read-only logical-path observations. Require the actual
+absolute OS Known Documents path, retain it in the same-run user context and bind
+each role to its exact expected path. An ancestor may have an unclassified reparse
+point; this observation route is not an owned-output containment root and supplies
+no resolved-target identity proof. Record a distinct path policy for these two
+roles. Keep rejecting a present directory or reparse-point leaf, and preserve
+typed absence versus UNAVAILABLE plus exact before/after role/path/existence/hash
+comparisons for all nine observations. This exception cannot enter `Digest`,
+artifact descriptors or any owned/source/tool/Engine path. Strict reparse rejection
+continues for those paths and LocalApplicationData/ApplicationData/UserProfile.
+Do not substitute `<UserProfile>/Documents`, omit either Documents role, change
+Known Folder settings, create missing settings/XML/directories, or repair global
+configuration. There is no explicit hydration request or write; provider activity
+caused by a read is not established absent. A reparse attribute or null link target
+does not classify the tag or establish a physical target. See Microsoft's
+[reparse-point tag definitions](https://learn.microsoft.com/en-us/windows/win32/fileio/reparse-point-tags).
+
 Observe the three UBT BuildConfiguration.xml locations under
 `<ApplicationData>/Unreal Engine/UnrealBuildTool/`,
 `<LocalApplicationData>/Unreal Engine/UnrealBuildTool/` and
@@ -735,13 +753,15 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-17 UTC / plan revision 22**.
+Packet clarification revision: **2026-10-17 UTC / plan revision 23**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
-`ECA8ECFB90615807D8207A5B1DCFE1928ADBEFA4482A160419D7978FC2DA807E`.
+`4F09F6E58627CD258A39C6375365ACD888A8DAA7A0D6D44F8DFE70CB558BA60D`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
 checkpoint; historical adoption/status-label-only hashes remain in that journal.
 The adoption derived from ignored proposal EC29BBB1. This dated revision clarifies
-the existing outward-face winding/oracle and exact bare-key chord requirements.
+the read-only Known Documents ancestor-route policy while retaining plain-file
+leaves, all nine observations and strict owned/source/tool/output path checks.
+The outward-face winding/oracle and exact bare-key chord requirements remain.
 The geometric/input scope,16 cases,6 PNGs,14 authored paths, private-job mechanism
 and existing budgets remain the specified proof.
 

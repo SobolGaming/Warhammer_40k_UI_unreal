@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-17 UTC
-**Revision:** 22 — latest E02 SOURCE assessment requests winding/oracle and exact modifier-chord repairs; no new execution is authorized. Preserve the earlier publication failure and settings gap.
+**Revision:** 23 — E02 source 338 passed static review, then Preflight failed before phase creation on the Known Documents reparse route; hidden authority is closed and only bounded observation repair is released.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,20 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 22 changes
+### Revision 23 changes
+
+Frozen source `338735e` received SOURCE PASS. Attempted RunId
+`20261017T181128Z-06d66926` then failed Preflight before RunRoot creation with
+`E02_REPARSE_PATH`; no supervised child, Build/native/GUI or phase completion
+exists. Its hidden authority is closed and the RunId must not be reused. Only
+the two exact Known Documents settings-observation routes are released for
+bounded repair; leaves remain plain non-reparse files and owned/source/tool/
+engine plus Local/Profile/Roaming guards remain strict. Re-freeze and obtain
+fresh SOURCE review/new RunId before execution. Scoped standing E02 packet
+transmission consent is recorded with its relayed-source verification limits;
+it adds no graphical/merge authority. Earlier 73f/c10c and E01 history is retained.
+
+### Revision 22 history
 
 The latest frozen E02 candidate `73f73b5` received SOURCE CHANGES_REQUESTED for
 procedural outward-face winding/the numeric oracle and unbound modified keyboard
@@ -165,7 +178,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: finish the bounded E02 winding/oracle and exact modifier-chord repairs, checkpoint, freeze and obtain fresh affected SOURCE review before a new run.** Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) distinguish latest 73f CHANGES_REQUESTED from earlier c10c SOURCE PASS, completed Preflight/control assertions, failed publication and the settings gap. The 73f planned RunId remains unused and unauthorized; Build/native/GUI remain NOT RUN. A new reviewed candidate and RunId are required, with separate explicit visible-window approval before graphical execution. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
+**Current assignment: finish only the bounded E02 Known Documents observation repair, checkpoint/freeze and obtain fresh affected SOURCE review before a fresh RunId.** Source 338 received sealed SOURCE PASS, but attempted 181128 Preflight failed before RunRoot/phase creation with `E02_REPARSE_PATH`; its hidden authority is closed and must not be reused. Section 0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) preserve the source verdict, failure/closure and earlier 73f/c10c/settings/publication history. Build/native/GUI remain NOT RUN; graphical execution still needs explicit visible-window approval. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
 
 ### 0.1 Fixed scope and authority
 
@@ -836,11 +849,46 @@ was adopted at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0
 The [authority/execution journal](evidence/2026-10-16-e02-world-input.md) records
 root's packet review, predecessor identities, OWN13 applicability,14 authored
 paths,named writers,owned staging/process/cache side effects and fixed pass/fail
-rules. Current packet whole-file SHA256 is `48BF6A0E4EF42E930AF65FE27D76F61B224BCFA7685C19D5A00B21C9D4CB7EE8`.
+rules. The packet reviewed with 338 has whole-file SHA256 `48BF6A0E4EF42E930AF65FE27D76F61B224BCFA7685C19D5A00B21C9D4CB7EE8`.
 Its 2026-10-17 clarification corrects the outward-face/oracle and exact bare-key
 requirements within the same scope, 14 paths, 16 cases and budgets.
+The source-only revision 23 adds the exact Known Documents observation policy;
+its current whole-file SHA256 is `1CE4B98948DBA9F875983DAA6FEF9ACAB3DCEF27279C27BCB76927A074882109`
+and preceding planning-prefix SHA256 is `4F09F6E58627CD258A39C6375365ACD888A8DAA7A0D6D44F8DFE70CB558BA60D`.
+Those changed inputs still require a fresh SOURCE assessment before execution.
 
-**Current source disposition:** The fresh assessment of
+**Current source/run disposition:** The sealed static assessment of
+`338735e737c6892736b03c884b475c66ae0f69f8` against base `bd801233cc9989e0ae146a3be7b136d26dc73183`
+is **PASS**. The journal binds its unchanged 7656-byte report
+SHA256 `F92C63048C25E968999DE7A5614B7657C381BF5D43110130B74598603BA5194C`,
+operator seal/audit/manifest and root gate. Run `20261017T181128Z-06d66926`
+then failed Preflight with `FAIL_BEFORE_PHASE_CREATION` / `E02_REPARSE_PATH`
+when the generic guard rejected the normal OneDrive/Documents reparse ancestors.
+RunRoot, phase result/completion and supervised children are absent. Hidden
+authority is **CLOSED**; the attempted RunId is **DO_NOT_REUSE**. Build/native/GUI
+remain NOT RUN. Only bounded Known Documents repair/checks/docs are released;
+the changed candidate needs a new freeze, fresh SOURCE review and new RunId.
+
+The repair treats only the actual absolute KnownFolder paths for
+`editor-known-documents-user` and `ubt-known-documents` as read-only logical
+settings observations through unclassified reparse ancestors. Leaves must remain
+plain non-reparse files, all nine role/path/existence/hash comparisons remain
+required, and strict owned/source/tool/engine plus Local/Profile/Roaming guards
+remain unchanged. Resolved target identity is UNVERIFIED. No repair execution
+or test PASS is supplied. The journal records the exact two suffixes and limits.
+
+**Scoped transmission authority:** The owner's exact reply, “I have authorized
+that review packet.  I further authorize all further review packets.”, is bound
+in the journal's 2282-byte [standing consent record](../../.local/reviews/E02-source-review/root-338-owner-approved-20261017T200218Z-d47cd4ea/standing-e02-review-transmission-approval.json),
+SHA256 `403EE89080E9BAE297E3E2A28BBDD8C9069D95DE3986318ADC73313089BCB1C5`.
+It was relayed from the identified progress chat through trusted Codex-app
+delegation; independent retrieval of the literal messages is not claimed.
+Current and subsequent E02 source/API/requirements/metadata packets may use the
+same OpenAI ChatGPT/Codex destination and existing sign-in. Credentials/private
+sessions and initial-input author notes/peer verdicts remain excluded. Freeze,
+review and acceptance gates remain; no GUI/merge authority is added.
+
+**Historical source disposition:** The fresh assessment of
 `73f73b5994456b008cc104e05f7a915a5976f49b` is **CHANGES_REQUESTED**: P1 procedural
 winding/outward normals and the matching numeric oracle; P2 unbound modified
 keyboard shortcuts. The journal binds the unchanged report, full operator audit,
@@ -873,10 +921,12 @@ and had no persisted before baseline. The genuine desktop EditorSettings file
 was omitted; real-settings preservation for that run is **UNVERIFIED**. A separate
 normal-context read-only KnownFolder probe identified the genuine LocalAppData,
 Roaming, profile and OneDrive/Documents locations on the same PowerShell 7 / X64
-host. It does not reconstruct a before observation. The next candidate repairs
+host. It does not reconstruct a before observation. The later candidate repairs
 both recursive dictionary walkers and requires normal desktop execution plus a
-persisted preflight before-settings baseline. Those repairs require fresh review
-and a new run; no fix is yet proven. Scope,14 paths,16 cases and budgets are unchanged.
+persisted preflight before-settings baseline. The 338 static PASS above reviewed
+those repairs; its failed Preflight supplies no runtime proof. The bounded Known
+Documents correction still requires fresh review/new run. Scope,14 paths,16 cases
+and budgets are unchanged.
 Visible-window approval remains pending; physical-input and Linux results are not supplied.
 
 E01 publication `bd801233cc9989e0ae146a3be7b136d26dc73183` is on ready [PR2](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2);
@@ -1923,7 +1973,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** finish the bounded E02 outward-face/oracle and exact modifier-chord repairs, checkpoint and obtain fresh affected SOURCE review before a new RunId under Section0.9. Latest 73f is CHANGES_REQUESTED; its planned RunId is unused and unauthorized. Earlier c10c retains completed Preflight/control assertions, failed SupervisorControls publication and an UNVERIFIED real-settings criterion. Build/native/GUI remain NOT RUN; graphical execution also requires explicit visible-window approval. E01-SLOW120 acceptance/history is unchanged.
+**Ready now:** finish only the bounded E02 Known Documents observation repair, checkpoint/freeze and obtain fresh affected SOURCE review before a fresh RunId under Section 0.9. Source 338 passed static review; attempted 181128 Preflight failed before RunRoot/phase creation, and its hidden authority is closed/DO_NOT_REUSE. Earlier 73f/c10c source dispositions, failed publication and settings gaps remain intact. Build/native/GUI remain NOT RUN; graphical execution still requires explicit visible-window approval. Scoped standing review-transmission consent adds no runtime/merge authority. E01-SLOW120 acceptance/history is unchanged.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 

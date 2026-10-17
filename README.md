@@ -71,10 +71,31 @@ and the unchanged `044903` execution on source `d1189592a5f99bdee58cea25ae8546e5
 The later publication commit is a separate metadata overlay; the reports did not
 review that later commit. Execution is stopped. The narrow diagnostic is accepted;
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
-UE HTTP, rendering, packaging and Linux remain open. The latest E02 SOURCE
-assessment of `73f73b5` is **CHANGES_REQUESTED** for procedural face winding/the
-numeric oracle and unbound modifier shortcuts. Source-only repairs must receive
-a new frozen review before execution. Planned RunId `20261017T174203Z-7dbe90d1`
+UE HTTP, rendering, packaging and Linux remain open.
+
+E02 candidate `338735e737c6892736b03c884b475c66ae0f69f8` received a sealed
+pre-execution **SOURCE PASS**. Run `20261017T181128Z-06d66926` then failed
+Preflight with `E02_REPARSE_PATH` / `FAIL_BEFORE_PHASE_CREATION` before RunRoot
+allocation: the normal Known Documents route has OneDrive reparse ancestors.
+No phase result/completion or supervised child exists; Build/native/GUI remain
+**NOT RUN**. Its hidden authority is **CLOSED** and the attempted RunId must
+not be reused. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+binds the unchanged source report, operator seal/audit, root gate and closure.
+
+The bounded repair permits only the two exact Known Documents settings paths
+as absolute read-only logical observations through unclassified reparse
+ancestors. Leaves remain plain non-reparse files, all nine snapshots remain
+required, and owned/source/tool/engine plus Local/Profile/Roaming guards remain
+strict. Resolved target identity stays UNVERIFIED. Checkpoint/freeze the changed
+candidate, obtain fresh SOURCE review and use a fresh RunId before execution;
+no repair or runtime success is claimed. The owner separately authorized current
+and subsequent E02 review-packet transmission to the same OpenAI service, within
+the journal's recorded data exclusions and relayed-consent limits. This adds
+neither visible-window nor merge authority; final CODE/REQ gates remain separate.
+
+The earlier E02 SOURCE assessment of `73f73b5` is **CHANGES_REQUESTED** for procedural face winding/the
+numeric oracle and unbound modifier shortcuts. At that disposition source-only
+repairs required a new frozen review before execution. Planned RunId `20261017T174203Z-7dbe90d1`
 is unused and has no execution authority. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
 also records the earlier pre-execution SOURCE PASS for `c10c021` and attempted run
 `20261017T171627Z-6e96cd42`. Preflight completed; three supervisor groups recorded
@@ -85,10 +106,10 @@ Build, native cases and visible game windows remain **NOT RUN**.
 
 The old Preflight used redirected LocalAppData and omitted the real desktop
 EditorSettings file and a persisted before-settings baseline; preservation of
-those real settings remains **UNVERIFIED**. The next candidate repairs descriptor
+those real settings remains **UNVERIFIED**. The later candidate repairs descriptor
 traversal and requires a normal desktop context with a persisted baseline. It
-needs a fresh frozen SOURCE assessment and new RunId before execution; those
-repairs and the winding/chord corrections are not yet proven. The [E02 packet](docs/plans/research/2026-10-16-e02-world-input-packet.md)
+received the 338 source assessment above; the failed Preflight supplies no
+runtime proof of those repairs or the winding/chord corrections. The [E02 packet](docs/plans/research/2026-10-16-e02-world-input-packet.md)
 clarifies outward-face and exact bare-key checks within its existing scope,
 cases and budgets. Visible-window approval and final
 separate CODE/REQ acceptance remain later gates.

@@ -11,6 +11,10 @@ they can omit existing desktop EditorSettings. The four resolved user roots are
 recorded and must match every predecessor. Preflight persists its nine settings
 observations before/after the interval after owned source staging; build/native
 phases persist their own before/after observations before supervised execution.
+Actual Known Documents supplies only two read-only settings observations. Its
+ancestor reparse points are unclassified observation routes, not owned-output
+containment roots. Present leaves must still be plain files; strict path checks
+remain in force for source, tools, Engine, owned outputs and the other roots.
 
 Freeze schemaVersion=1: sourceHead (40 hex), packet descriptor, files descriptor
 array, sourceMembership array {path,kind:'file'|'directory'}. Descriptor fields
@@ -703,16 +707,32 @@ function Enable-NativeHelper {
     if ($null -eq ('Warhammer.E02.Supervisor' -as [type])) { Add-Type -TypeDefinition $script:NativeSource -Language CSharp -ErrorAction Stop }
 }
 
-function Observed-File([string] $Role,[string] $Path) {
-    $r=[ordered]@{role=$Role;path=[IO.Path]::GetFullPath($Path);observedUtc=[DateTime]::UtcNow.ToString('o');inspection='UNAVAILABLE';exists=$null;sha256=$null}
+function Observed-File([string] $Role,[string] $Path,[switch] $KnownDocumentsObservation) {
+    $r=[ordered]@{role=$Role;path=[IO.Path]::GetFullPath($Path);observedUtc=[DateTime]::UtcNow.ToString('o');inspection='UNAVAILABLE';exists=$null;sha256=$null;
+        pathPolicy=$(if($KnownDocumentsObservation){'READ_ONLY_ACTUAL_KNOWN_DOCUMENTS_LOGICAL_PATH'}else{'STRICT_NO_REPARSE_PATH'})}
     try {
+        if($KnownDocumentsObservation) {
+            # This exception cannot authorize arbitrary reads or enter an owned
+            # output/descriptor path. Bind the two exact OS-known-folder roles.
+            $documents=[Environment]::GetFolderPath('MyDocuments')
+            if(-not [IO.Path]::IsPathFullyQualified($documents)){throw 'E02_SETTINGS_ROOT_UNAVAILABLE'}
+            $relative=switch -CaseSensitive ($Role) {
+                'editor-known-documents-user' {'Unreal Engine/Engine/Config/UserEditorSettings.ini'}
+                'ubt-known-documents' {'Unreal Engine/UnrealBuildTool/BuildConfiguration.xml'}
+                default {throw 'E02_INVALID_KNOWN_DOCUMENTS_OBSERVATION_ROLE'}
+            }
+            if($r.path -cne [IO.Path]::GetFullPath((Join-Path $documents $relative))){throw 'E02_INVALID_KNOWN_DOCUMENTS_OBSERVATION_PATH'}
+        } else {[void](Assert-Path $r.path)}
         $absent=$false
         try { $attributes=[IO.File]::GetAttributes($r.path) }
         catch [IO.FileNotFoundException] { $absent=$true } catch [IO.DirectoryNotFoundException] { $absent=$true }
         $r.exists=-not $absent
         if (-not $absent) {
             if (($attributes -band ([IO.FileAttributes]::Directory -bor [IO.FileAttributes]::ReparsePoint)) -ne 0) { throw 'E02_SETTINGS_NOT_PLAIN_FILE' }
-            $r.sha256=Digest $r.path
+            # A cloud-backed ancestor is not a claim about resolved target
+            # identity. Hash only an observed plain leaf, through the exact
+            # external logical path; never use this route for run artifacts.
+            $r.sha256=if($KnownDocumentsObservation){(Get-FileHash -Algorithm SHA256 -LiteralPath $r.path -ErrorAction Stop).Hash.ToLowerInvariant()}else{Digest $r.path}
         }
         $r.inspection='PASS'
     } catch { $r.error=Failure $_ 'settings-observation' }
@@ -729,7 +749,8 @@ function Execution-UserContext {
     $expectedLocal=Assert-Path (Join-Path $profile 'AppData/Local')
     if((Assert-Path $local) -ine $expectedLocal){throw 'BLOCKED_E02_REDIRECTED_LOCAL_SETTINGS_CONTEXT_USE_APPROVED_NORMAL_DESKTOP_ROUTE'}
     return [ordered]@{localApplicationData=(Assert-Path $local);applicationData=(Assert-Path $roaming);
-        userProfile=(Assert-Path $profile);myDocuments=(Assert-Path $documents);policy='NORMAL_DESKTOP_LOCAL_APPDATA_PROFILE_ROUTE'}
+        userProfile=(Assert-Path $profile);myDocuments=([IO.Path]::GetFullPath($documents));policy='NORMAL_DESKTOP_LOCAL_APPDATA_PROFILE_ROUTE';
+        myDocumentsUsage='TWO_READ_ONLY_LOGICAL_SETTINGS_PATHS_ANCESTOR_TAGS_AND_TARGET_IDENTITY_UNVERIFIED'}
 }
 function Settings {
     $context=Execution-UserContext
@@ -741,10 +762,10 @@ function Settings {
         Observed-File 'editor-local-versioned' (Join-Path $local 'UnrealEngine\5.8\Saved\Config\WindowsEditor\EditorSettings.ini')
         Observed-File 'editor-profile-documents-user' (Join-Path $profile 'Documents\Unreal Engine\Engine\Config\UserEditorSettings.ini')
         Observed-File 'editor-project-default' (Join-Path $script:Stage 'Config\DefaultEditorSettings.ini')
-        Observed-File 'editor-known-documents-user' (Join-Path $documents 'Unreal Engine\Engine\Config\UserEditorSettings.ini')
+        Observed-File 'editor-known-documents-user' (Join-Path $documents 'Unreal Engine\Engine\Config\UserEditorSettings.ini') -KnownDocumentsObservation
         Observed-File 'ubt-roaming' (Join-Path $roaming 'Unreal Engine\UnrealBuildTool\BuildConfiguration.xml')
         Observed-File 'ubt-local' (Join-Path $local 'Unreal Engine\UnrealBuildTool\BuildConfiguration.xml')
-        Observed-File 'ubt-known-documents' (Join-Path $documents 'Unreal Engine\UnrealBuildTool\BuildConfiguration.xml')
+        Observed-File 'ubt-known-documents' (Join-Path $documents 'Unreal Engine\UnrealBuildTool\BuildConfiguration.xml') -KnownDocumentsObservation
     )
 }
 function Check-Settings($Before,$After) {
@@ -755,6 +776,8 @@ function Check-Settings($Before,$After) {
         $current=@($After | Where-Object { $_.role -ceq $prior.role })
         if ($current.Count -ne 1) { throw 'E02_SETTINGS_ROLE_MISMATCH' }
         foreach($s in @($prior,$current[0])) {
+            $expectedPolicy=if($s.role -cin @('editor-known-documents-user','ubt-known-documents')){'READ_ONLY_ACTUAL_KNOWN_DOCUMENTS_LOGICAL_PATH'}else{'STRICT_NO_REPARSE_PATH'}
+            if($s.pathPolicy -cne $expectedPolicy){throw 'E02_SETTINGS_OBSERVATION_PATH_POLICY'}
             if ($s.inspection -cne 'PASS' -or $s.exists -isnot [bool] -or ($s.exists -and $s.sha256 -cnotmatch '^[0-9a-f]{64}$') -or (-not $s.exists -and $null -ne $s.sha256)) { throw 'E02_SETTINGS_UNAVAILABLE' }
         }
         if ($prior.path -cne $current[0].path -or $prior.exists -cne $current[0].exists -or $prior.sha256 -cne $current[0].sha256) { throw 'E02_SETTINGS_CHANGED' }

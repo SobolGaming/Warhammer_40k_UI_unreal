@@ -78,14 +78,33 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The latest E02 SOURCE assessment of `73f73b5994456b008cc104e05f7a915a5976f49b`
+The E02 SOURCE assessment of `338735e737c6892736b03c884b475c66ae0f69f8`
+is PASS for that frozen source only. Run `20261017T181128Z-06d66926` then failed
+Preflight with `E02_REPARSE_PATH` / `FAIL_BEFORE_PHASE_CREATION`: the normal
+Known Documents route is `C:/Users/Rabid/OneDrive/Documents`, whose unclassified
+reparse-point ancestors were rejected before RunRoot allocation. No RunRoot,
+phase result, completion or supervised child was created; Build/native/GUI
+remain NOT RUN. Its hidden authority is CLOSED and its attempted RunId must
+not be reused. The E02 journal binds the unchanged report, seal, root gate,
+hidden authority and separate closure; this supplies no final OWN15 acceptance.
+
+Root released only the bounded Known Documents observation repair and related
+checks/docs/checkpoint. Only the two exact Known Documents settings paths may
+use an absolute, actual-KnownFolder, read-only logical route with unclassified
+reparse ancestors. The leaf must remain a plain non-reparse file; retain all
+nine role/path/existence/hash comparisons and typed unavailable observations.
+Keep strict owned/source/tool/engine and Local/Profile/Roaming guards. Resolved
+target identity remains UNVERIFIED. The changed candidate needs a new freeze,
+fresh affected SOURCE review and fresh RunId; no repair execution is proven.
+
+The earlier E02 SOURCE assessment of `73f73b5994456b008cc104e05f7a915a5976f49b`
 is CHANGES_REQUESTED: P1 procedural outward-face winding and its numeric oracle,
 and P2 shortcut dispatch accepting unbound modifier chords. These are static
-findings, not observed rendered/input failures. Root released only bounded
+findings, not observed rendered/input failures. At that disposition root released only bounded
 source/test/documentation remediation. Planned RunId `20261017T174203Z-7dbe90d1`
-is UNUSED, has no execution authority and must not be executed. Checkpoint the
-repairs, freeze all affected source/API/packet inputs, obtain fresh SOURCE review
-and use a new RunId before any further phase. Final OWN15 CODE/REQ and visible
+is UNUSED, has no execution authority and must not be executed. That release
+required a checkpoint/freeze, fresh SOURCE review and new RunId before execution.
+The later 338 source/run disposition above preserves that history. Final OWN15 CODE/REQ and visible
 window gates remain separate; see the E02 journal below for immutable reports.
 
 The earlier bounded E02 source at `c10c02173b2d40b4f80d9bdb2dfa1d37c52079ed` received
@@ -103,10 +122,9 @@ That Preflight recorded nine after-settings paths but used redirected LocalAppDa
 and persisted no before-settings baseline; the real desktop EditorSettings file
 was omitted. Preservation of real settings for this run is UNVERIFIED. Root has
 authored repairs to both recursive descriptor walkers, the normal desktop
-execution-context guard and persisted baseline checks. Freeze the changed
-candidate, obtain fresh affected SOURCE review, then use a new RunId;
-neither the repairs nor their execution is
-proven yet. A visible game window still needs separate explicit owner approval.
+execution-context guard and persisted baseline checks. Those changes received
+the 338 static SOURCE PASS above; its failed Preflight supplies no runtime proof.
+A visible game window still needs separate explicit owner approval.
 E01 reviewed/executed/publication identities and historical limits are unchanged.
 
 
@@ -259,6 +277,17 @@ and evidence limits; reviewer configuration files alone prove neither invocation
 nor independence. Resolve actionable findings before completion.
 
 ## Standing three-role review protocol
+
+The owner authorized transmission of current and subsequent revised E02 review
+packets to OpenAI's ChatGPT/Codex service using the existing sign-in: project
+source, supporting Unreal/API excerpts, requirements and file metadata only.
+The [standing consent record](.local/reviews/E02-source-review/root-338-owner-approved-20261017T200218Z-d47cd4ea/standing-e02-review-transmission-approval.json)
+preserves the exact human reply relayed from the progress chat and its trusted
+source/message identifiers; independent retrieval of those literal messages was
+not established. Credentials/private sessions remain excluded; initial reviewer
+inputs also exclude author notes and peer verdicts. This scoped transmission
+approval retains freeze/source/final-review gates and grants no visible-window,
+merge or unrelated authority. The E02 journal records the exact binding/limits.
 
 OWN15 (2026-10-17 UTC, owner's progress chat) requires the legacy review discipline
 for this migration. Keep three distinct roles: an implementer who owns changes
