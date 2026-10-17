@@ -76,8 +76,16 @@ review, and received no final CODE verdict. The later publication commit is a
 separate metadata overlay; those reports did not review that later commit.
 Execution is stopped. Full E01/M01/M02, research/implementation gates, the original
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
-Linux remain open. Advance only to the next E02 packet gate. Its tracked packet
-is unchanged and planning only; this record supplies no E02 execution result.
+Linux remain open. This E01 record supplies no E02 execution result.
+
+The E02 packet is now adopted for bounded source authoring; see
+`docs/plans/evidence/2026-10-16-e02-world-input.md` for root's packet/OWN13 review
+and named writers. No E02 control/build/native process has run. Freeze and
+independently review executable source before the first such process. A visible
+game window needs separate explicit owner approval under the desktop rule;
+authoring is not blocked. E01 reviewed/executed/publication identities and all
+historical limits remain unchanged.
+
 
 Historical normal run `20261017T030835Z-0d4af4e2`, source
 `c2614b2484a66bd8465b855e59b184d49b2b926d` and packet revision 6, retains its
@@ -248,7 +256,12 @@ plan criteria, exact base/head plus dirty-file hashes, dependency/fixture identi
 relevant source/callers/tests and trustworthy raw execution artifacts. Do not prime
 an initial assessment with author working notes/chats or other reviewers' verdicts.
 Use clean normative extracts when a planning document mixes criteria with review
-history; record their provenance. A contaminated approval is invalid and needs a
+history; record their provenance. Launch initial reviewers from the workspace root
+or another clean instruction context so this file's current-status review history
+is not automatically supplied. Bind and supply the necessary normative instruction
+extracts explicitly; exclude peer conclusions and Git message bodies from an initial
+assessment. This preserves the existing isolation requirement without discarding
+administrative evidence needed later. A contaminated approval is invalid and needs a
 fresh assessment. Ordinary diagnostic/helper reviews remain useful but do not
 silently satisfy this final gate.
 

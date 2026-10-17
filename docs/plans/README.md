@@ -1,6 +1,6 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 18, is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 19, is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
@@ -42,12 +42,15 @@ production responsiveness, UE HTTP, rendering, packaging, Linux, Core
 #588/#589/#590 and RISK19 remain open or unaccepted. Auxiliary privacy and source-only
 records retain their actual isolation limits and do not supply final review roles.
 
-Advance only to the [E02 architecture packet gate](research/2026-10-16-e02-world-input-packet.md).
-The tracked packet is unchanged and planning only; E02 has not executed.
+The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md) is
+adopted for bounded source authoring. Its [authority journal](evidence/2026-10-16-e02-world-input.md)
+records named writers and pre-execution review/visible-window gates. E02 has not
+executed.
 
 The [E01 continuation PR](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2)
-is recorded as a draft. Its last recorded GitHub result reported no checks, which
-is not a CI pass; this update makes no current remote-state claim. OWN16's
+was updated and marked ready at `bd801233cc9989e0ae146a3be7b136d26dc73183`.
+GitHub observation on 2026-10-17 UTC reported OPEN/MERGEABLE/CLEAN and no checks;
+this is not a CI pass. Applicable merge approval has been requested separately. OWN16's
 [local checkpoint workflow](unreal-migration-plan.md#02-research-procedure-and-evidence-rules)
 adds no publication or merge authority.
 

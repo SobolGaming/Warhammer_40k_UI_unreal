@@ -1,19 +1,83 @@
-# E02 Windows world/input architecture proof — proposed packet
+# E02 Windows world/input architecture proof — adopted packet
 
-Date: 2026-10-16. Status: **PLANNING ONLY; E02 NOT RUN**. This is the next
-reviewable subset of E02, conditional on accepted E01 evidence and a recorded
-review of the applicable execution authority. OWN13 permits continuation through
-the next bounded gate; it is not blanket permission for new scaffolding or every
-E02–E08 experiment. This packet itself grants no execution authority.
+Date: 2026-10-16; readiness/operational/minimal-supervision proposal: 2026-10-17 UTC.
+Status: **PACKET_ADOPTED_FOR_SOURCE_AUTHORING; E02 NOT RUN**.
+Coordinator adoption: `2026-10-17T06:14:17.416085+00:00`; source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
+This is the next reviewable subset of E02 after acceptance of the specifically
+bounded E01-SLOW120 diagnostic identified below. It does not require or imply
+acceptance of full E01, M01/M02, the old 30-second budget or production latency.
+
+OWN13 continuation applies to this exact bounded Windows architecture proof:
+the 14 authored paths below, owned background process trees, immutable project
+staging, owned runtime/cache outputs and the documented ordinary per-user build/
+driver-cache side effects. Root records that applicability against this frozen
+packet in the [E02 authority/execution journal](../evidence/2026-10-16-e02-world-input.md).
+Authoring is allowed; build/control/native execution waits for source review.
+The desktop execution rule separately requires explicit owner authorization for
+one visible interactive game window before graphical discovery/rendered input.
+Prepare the concrete source first; do not infer that visible-launch approval from
+OWN13 or silently substitute hidden/offscreen graphics. Do not ask the same broad approval
+again. A material new commitment or scope change needs an explicit owner decision;
+this packet supplies no broader E02–E08, feature, Core or new-host authority.
 
 Read with [canonical Section 0/RQ05/RQ09/RQ10/RQ12/RQ20/RQ23 and E02](../unreal-migration-plan.md),
 [BOOT01 results](../evidence/2026-10-16-boot01.md),
 [geometry contract](2026-10-16-contract-integration.md#rq09--open-mapping-source-established-asymmetric-axis-discrepancyproof-remains),
 [selected target adaptation](2026-10-16-contract-44-3-33-adaptation.md), and
 [input ownership table](2026-10-16-parity-closure-design.md#complete-event-ownership-focus-cancellation-and-retry-policy).
-The coordinator owns acceptance/authority reconciliation; the eventual proof
-implementer owns source, wrapper and one isolated process tree. Separate read-only
-source review and acceptance audit are required against frozen hashes.
+The coordinator owns predecessor binding, authority reconciliation and plan status.
+The eventual proof implementer owns source, wrapper and one isolated process tree.
+The independent CODE reviewer and a different independent REQ/acceptance auditor
+own their separate OWN15 reports; neither authors fixes or substitutes the other.
+
+## Bounded predecessor and staged gates
+
+The prerequisite is the accepted bounded E01-SLOW120 diagnostic, never a passing
+source review, test-count summary, historical run or full-E01 claim by implication.
+The coordinator must bind the following fields only after the actual fresh run,
+final CODE and final REQ reports establish acceptance for the same frozen candidate:
+
+| Binding | Current value / required identity |
+|---|---|
+| Predecessor status | `BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED`; root at `2026-10-17T06:00:32.004673+00:00` |
+| Accepted diagnostic run | `20261017T044903Z-b0169768`; [factual result](../evidence/2026-10-16-e01-slow120-result.json) SHA256 `F6EDE1DD23F403FB03C9F3B8BBB5D6A1B7EDD964709F7E95C9ACDEF7C88024E6`; exact raw phase/report/manifest descriptors under `/primaryRun` |
+| Frozen source and packet | Executed `d1189592a5f99bdee58cea25ae8546e5ee2e3623`; reviewed `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37`; cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`; E01 packet revision7 SHA256 `9AE3C7B236EF7897F033163062899B4F0BA8B9A7E622D79E06D5746FA3236367`; Core fixture manifest SHA256 `BF861B2EC555C81E85A31E4B37E756C5E6B04D343522A95F3235700C2AEC43F2` |
+| Runtime/source manifests | Core `5f509724da25a2f6ded0c2739a8e7c84bdf59c91` /44.3.33; owned runtime provenance SHA256 `39C485C33E482B158EDB157A0FFAA69224C09E15DE5655277B64289887F7CF7C`, tree `B01989FC595730D8EA6F1A10C7A5004510FCA877A9B69AAD9F3285CAB357A897`; source Preflight result SHA256 `44CB8FE0FEA3B050E96289F198AA484361C1DA54CFF7702DE3A17AF6B480FA23`; paths and exact build ID in the bound factual result `/dependencyIdentity` and `/primaryRun/runtimeAndSourceEvidence`. E02 launches no Core runtime. |
+| Final CODE report | [r13](2026-10-17-e01-slow120-code-review-r13.md), SHA256 `5C8F3E8B7E80A92472B658849CB03333708BEEA892C6057D2A632860D8B3A0E7`, PASS for reviewed b97; session `01a14858-1a8d-7340-b113-a658bfad52c9` |
+| Final REQ role | [Valid initial r3](2026-10-17-e01-slow120-requirements-r3.md), SHA256 `6F232432B983EBB65F6CEE39B95F8F0A0ACD6B03539122AE0DB40E2817E8A301`, raw BLOCKED on administrative A1/A2, session `01a14861-6670-7f43-be6f-a5e3d1cc487f`; [separate administrative supplement](2026-10-17-e01-slow120-requirements-r3-administrative-supplement.md), SHA256 `C382B8A36ED9D033B892220ADA9FDF265119948A7D9A2455F6C8CD22B197855E`, SUPPLEMENTAL_ADMINISTRATIVE_PASS and combined REQ-role PASS, new post-initial session `01a1486d-9c0f-7362-96cb-7e47b3a05b58`. Raw initial status stays BLOCKED; invalid original r2 contributes no approval. |
+| Acceptance/publication record | [Public provenance](../evidence/2026-10-17-e01-slow120-final-review-provenance.json), SHA256 `0AE6B378642921F47C8D48F4AF49FCEEA1EB1DCAFE2CAB599D4F296F910F5CFC`; root acceptance date above; separate report/metadata publication commit `bd801233cc9989e0ae146a3be7b136d26dc73183`. These reports reviewed b97, not the publication commit. |
+
+Passing execution or source-only approval cannot fill these fields. Preserve the
+original 30-second FAIL/UNKNOWN and every failed attempt. Accepted SLOW120 remains
+a bounded protocol diagnostic; full E01/M01/M02, UE HTTP, responsiveness, rendering,
+packaging, Linux and G-RESEARCH/G-IMPLEMENT retain their separate open criteria.
+
+1. Before authoring E02, require this accepted predecessor binding and coordinator
+   review/freeze of the exact packet, OWN13 applicability, files, owners, outputs,
+   GUI/cache side effects, budgets and pass/fail rules. Executable source need not
+   exist at this stage. Root recorded this gate in the linked E02 journal;
+   this permits source authoring only, with the later gates unchanged.
+2. Before any E02 build or native process, author only the permitted scope, freeze
+   the executable source/wrapper/fixture/toolchain/config manifests, and obtain
+   independent review of that exact executable candidate. Recheck those bytes
+   before each affected process; a changed candidate needs fresh affected review.
+3. After execution and the final documentation/evidence freeze, obtain separate
+   fresh final CODE and REQ assessments under OWN15. Each initial assessment uses
+   a new unprimed context with no resume/fork/inherited implementation transcript,
+   enforced read-only permissions, approval policy never, and requested
+   `memories.use_memories=false`. Record actual invocation/session/model/settings/
+   permissions and requested versus verified memory behavior; unavailable
+   properties remain BLOCKED/UNVERIFIED. Supply original requirements, clean
+   normative criteria, exact frozen identities and raw results, without author
+   notes or peer verdicts. Auxiliary/source-only reviews do not satisfy this gate.
+   Both current reports and no unresolved acceptance blockers are required.
+
+OWN16 requires regular coherent local checkpoint commits, before risky changes
+and after fixes, recording actual tests and independent-review status. Exclude
+secrets, private sessions and generated outputs. Checkpoints provide recoverable
+save points, not acceptance or added publication/merge authority. Keep every
+reviewed/executing candidate frozen; queue edits and checkpoint them only after
+that operation ends. Do not change the active E01 candidate while preparing E02.
 
 ## Bound and intended result
 
@@ -109,12 +173,21 @@ every local intent record; cosmetic anti-Z-fighting offsets never return through
 the inverse. No snapping or out-of-board clamping is introduced.
 
 Create an actual runtime perspective camera (initial vertical angle `45°`, FOV
-`50°`), plus `25°` oblique and near-top proof views. Implement orbit, table-plane
+`50°`), plus `25°` oblique and `85°` near-top proof views. Implement orbit, table-plane
 pan, bounded dolly, frame-board/selection and reset with explicit focus. Record
 projection matrix, camera pose, viewport pixels and UI scale for each capture.
 Cube substitution changes only the visual branch: IDs, support/measurement
 descriptors, query result and serialized **local advisory intent** stay identical.
 There is no submitted command whose semantics this fixture can prove.
+
+Freeze the exact camera target/distance, orbit/pan/dolly increments and bounds,
+frame/reset focus, key bindings, light/exposure values and per-case input sequence
+in the existing fixture/source before executable review. These are reversible
+proof defaults, not new product requirements. Keep the specified angles/FOV,
+domain values, scale matrix and tolerances fixed. Derive driver screen positions
+from the actual owned viewport/widget geometry and stable target IDs; retain
+physical/logical coordinates and camera matrices in the trace. Never tune a test
+or fixture to match an already captured failure without a new reviewed candidate.
 
 ## Actual input route and its limits
 
@@ -166,7 +239,7 @@ Log assertion counts separately from test counts. Prefix: `Warhammer.Migration.E
 | `Numeric.UnsupportedGeometry` | 1 | Nonfinite/missing dimensions, unknown kind, null pose and invalid polygon fail with exact typed diagnostic; no generated substitute. |
 | `Rendered.FiveForms` | 1 | Genuine perspective, all five forms/local axes distinguishable, correct silhouettes/extents; `five-forms.png`, scene/geometry dump. |
 | `Rendered.RaisedPicking` | 1 | Project → deproject → nearest raised/ground/support-hole/edge/query hits; domain hit ≤`1e-4` inch, projected round trip ≤1 physical pixel; `raised-pick.png`, ray dump. |
-| `Rendered.MeshSubstitution` | 1 | Same-ID cube replacement preserves descriptors, selection and local intent bytes; before/after PNGs and identity/query diff. |
+| `Rendered.MeshSubstitution` | 1 | Same-ID cube replacement preserves descriptors, selection and local intent bytes; `mesh-before.png`, `mesh-after.png` and identity/query diff. |
 | `Rendered.ObliqueNormals` | 1 | 25° and near-top views expose winding, height, orientation/occlusion; `oblique.png`, `near-top.png`; no flat-camera substitute. |
 | `Input.CompletedClick` | 1 | Release commits local selection once; press/hover/drag does not; actual ray/ID trace. |
 | `Input.CameraCapture` | 1 | Right movement below/above 4 logical units, orbit crossing HUD and release; capture retained, no selection or leaked widget activation. |
@@ -193,6 +266,26 @@ assertions and visual inspection must both pass. Record screenshot inspection
 findings against the fixture/axes/raised-surface expectations. No unreviewed image
 becomes a golden baseline; visual inspection is distinct from pixel comparison.
 
+All six minimum PNGs use absolute capture paths under
+`<RunRoot/artifacts/world-input>/`, the baseline actual `1280×720` physical
+viewport and the same synthetic fixture identity:
+
+| Case / view | Exact basename |
+|---|---|
+| `Rendered.FiveForms` | `five-forms.png` |
+| `Rendered.RaisedPicking` | `raised-pick.png` |
+| `Rendered.MeshSubstitution` before | `mesh-before.png` |
+| `Rendered.MeshSubstitution` after | `mesh-after.png` |
+| `Rendered.ObliqueNormals` oblique | `oblique.png` |
+| `Rendered.ObliqueNormals` near-top | `near-top.png` |
+
+Each manifest entry binds case, filename, dimensions, SHA256, capture completion
+and camera/viewport/RHI/fixture snapshot. Before/after share camera, selection,
+support/query descriptors and local intent; only the visual branch changes.
+Capture the visible synthetic/advisory label and required shape/axis evidence.
+Additional resize-scale images are optional and separately identify actual
+extent/scale; they cannot replace one of the six minimum artifacts.
+
 ## Toolchain, processes, paths and future commands
 
 Reuse BOOT01's UE **5.8.3 / CL58210709**, bundled .NET **10.0.203**, VS2022
@@ -213,43 +306,182 @@ manifest to the frozen candidate. Copy the synthetic fixture to `RunRoot/fixture
 Never copy `.git`, credentials, sibling data, existing Binaries/Saved or E01 runtime.
 This stages the existing project; do not call the bootstrap creation wrapper.
 
+Record complete canonical and staged descriptor/`Source/`/`Config/` directory/file
+membership and byte manifests before the build and compare them after every
+affected phase, including failure paths. Generated outputs must not alter either
+authored snapshot. Hash and bind the separate wrapper and fixture as well; verify
+the frozen input identities before each process and retain the actual after
+observations rather than assuming the copied project is immutable.
+
 | Owned output | Writer / retention |
 |---|---|
-| `project/Binaries/`, `project/Intermediate/` | Staged UBT/UHT/build; no canonical-project build output changes. |
+| `project/Binaries/`, `project/Intermediate/`, any `project/Saved/` | Staged UBT/UHT/build/native generated outputs; no canonical-project build output changes. |
 | `ue-user/`, `ddc/`, `temp/`, `dotnet-home/`, `nuget/`, `uba/` | Subprocess-only UserDir/DDC/TEMP/TMP/.NET/NuGet/UBA settings; keep parent environment unchanged. |
-| `logs/`, `reports/discovery/`, `reports/numeric/`, `reports/world-input/` | One supervisor/process at a time; exact command arrays, PIDs, start/end/exit and counts. |
+| `logs/`, `reports/supervisor-controls/`, `reports/discovery/`, `reports/numeric/`, `reports/world-input/` | One supervised root tree at a time; phase-owned logs, complete directly launched root records, actual job counters and observed cleanup. |
 | `artifacts/`, `manifest.json`, `result.json` | Proof/supervisor; screenshots, structured traces, hashes and explicit status for every case. |
+
+Build, discovery, numeric and rendered/input are four sequential supervised root
+trees, not four processes total. Record every directly launched root's absolute
+executable/hash, working directory, exact argument array and effective declared
+subprocess environment overrides; never dump inherited secrets. Retain the
+original process handle's actual PID and kernel creation FILETIME, actual kernel
+exit FILETIME/code after confirmed exit, launch/exit observation UTC separately,
+deadline/timeout and cleanup results, stdout/stderr and phase main-log paths.
+Never substitute a phase bound or poll time for a process's kernel time.
+Optional observed descendant metadata is explicitly incomplete and identifies
+its observation method; unknown fields remain null/UNVERIFIED. No full historical
+descendant PID/time/exit ledger is required or claimed. The original E01 host/
+attach-worker inventory requirement remains unchanged. The canonical project's
+`Binaries/`, `Intermediate/`, `Saved/` and both siblings are not output roots.
+Inventory actual generated RunRoot paths, including unexpected staged
+`project/Saved/`; flags alone cannot establish output containment or cleanup.
+
+| Root tree / bound | stdout / stderr under `RunRoot/logs/` | Main log / report under RunRoot |
+|---|---|---|
+| Build / 30 minutes | `build.stdout.log`, `build.stderr.log` | `logs/build.log`; no Automation result claimed |
+| Discovery / 10 minutes | `discovery.stdout.log`, `discovery.stderr.log` | `logs/native-discovery.log`; `reports/discovery/` plus selected-name manifest |
+| Numeric / 10 minutes | `numeric.stdout.log`, `numeric.stderr.log` | `logs/native-numeric.log`; `reports/numeric/` |
+| Rendered/input / 10 minutes | `world-input.stdout.log`, `world-input.stderr.log` | `logs/native-world-input.log`; `reports/world-input/` and `artifacts/world-input/` |
+
+Use the staged project directory as each subprocess working directory. Resolve
+tool paths and every output path absolutely; record the effective subprocess
+environment without dumping inherited environment variables or credentials.
+The wrapper owns manifests/results, while each phase owns only its named logs,
+reports and artifact subdirectory. Finalization preserves a primary failure and
+typed secondary inspection/cleanup/write/close errors, including partial outputs.
+
+### Minimal private-job ownership and cleanup
+
+Use a fresh private unnamed, non-inheritable Windows Job Object for each root tree.
+Set `JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE`, neither `BREAKAWAY_OK` nor
+`SILENT_BREAKAWAY_OK`, and no new UI/resource limits. Keep the original private job
+handle in the supervisor; do not pass/duplicate it to a child. Create the exact
+root suspended, retain its original process/thread handles, assign it to this job,
+verify membership and effective job limits, then resume. No root code may run
+before successful assignment. On setup/assignment failure, do not resume; finalize
+only this original owned suspended process/handles and preserve the actual error.
+Nested-job/security incompatibility is a technical **BLOCKED** result, never
+permission to change the host job, enable privileges or launch outside the job.
+
+Keep the Win32 interop in the one permitted wrapper (inline C# using the existing
+PowerShell/.NET runtime is allowed); freeze its exact helper, loaded runtime and
+SDK/API identities before executable review. No extra authored helper, package,
+service, debugger, IOCP collector, trace/audit session or global setting is needed.
+Any compilation temporaries stay under declared RunRoot paths. This is proposed
+source support, not proof of actual compilation or nested-UBT/UE compatibility.
+
+Query `JobObjectBasicAccountingInformation` through the explicit retained private
+job handle, never NULL. Record genuine query UTC, success/error and all returned
+counters including `TotalProcesses`, `ActiveProcesses`, `TotalTerminatedProcesses`
+and raw accounting values. They aggregate job members, including nested child
+jobs; they do not supply missing child identities/times. Preserve failed setup,
+association and limit diagnostics. Do not equate `TotalProcesses` to an optional
+observed-child list or `TotalTerminatedProcesses`, or subtract failed associations.
+
+After normal root exit, capture its actual times/exit code and drain/close its
+owned output/process references safely before terminal accounting. Preserve the
+record before releasing handles. Optional retained completed-child references
+also need safe finalization. Keep the job queryable and boundedly observe an
+actual `ActiveProcesses=0` before declaring group cleanup complete. A root exiting
+or `Kill(true)`/`WaitForExit` succeeding cannot establish descendant cleanup.
+Limits and creation flags by themselves cannot establish runtime containment.
+
+On timeout/failure, retain the primary failure, request the existing graceful
+shutdown when possible, then use `TerminateJobObject` only on this private job if
+needed. Confirm the root's actual exit and an actual terminal zero-active query
+while the job handle is still open; afterward close owned handles and record
+results/typed secondary errors. Kill-on-close is a backstop, not observed cleanup.
+Use the existing 30/10-minute phase deadlines; the at-most-15-second graceful
+period and finalization must not extend them. If any exit/query/close/evidence
+step is unavailable, fails or exceeds its bound, retain FAIL/UNVERIFIED and stop
+dependent phases; never claim cleanup PASS from an attempted termination.
+
+Job membership covers the reviewed inherited tool group, not arbitrary outside
+brokers. Inspect the actual selected launch paths and retain relevant startup/
+worker diagnostics. A tool requiring an escaped/brokered process or unsupported
+nested job is **BLOCKED** for this packet, with no containment PASS or broader
+kill/search fallback. Preserve evidence; review a packet repair before a fresh
+RunId. This does not claim a hostile-process sandbox, whole-machine containment,
+or successful individual descendant exit codes from aggregate zero-active.
+
+### Focused wrapper supervisor controls
+
+After executable source review and before build, run three meaningful wrapper
+control groups using benign owned fixtures and the same private-job mechanism.
+Keep source in the permitted wrapper, outputs under
+`RunRoot/reports/supervisor-controls/` with their own logs/manifests, and all control
+work inside one ten-minute bound. They are separate supervisor evidence; the 16
+native E02 cases and four proof-phase bounds do not change.
+
+| Group | Required behavior and evidence |
+|---|---|
+| `SUP01` normal root plus lingering descendant | A benign known child remains active after its root exits; root evidence is complete and the genuine private-job query must still report active membership. The supervisor waits for the owned child to finish and records actual zero-active before cleanup completion. A root-only completion path must fail this control. Child observations support this fixture only, not a universal descendant ledger. |
+| `SUP02` timeout cleanup | A benign owned root/descendant remains active. The short test deadline produces the expected typed timeout, private-job termination and actual exit/zero-active observations; successful cleanup never changes the attempted proof's timeout to PASS. No unrelated process is targeted. |
+| `SUP03` setup/query/finalization failure | Controlled seams exercise failed assignment before resume, failed accounting query and failed evidence/handle finalization. Primary and secondary errors remain visible; setup fails closed, cleanup stays bounded and no dependent phase starts. Label injected checks separately from actual API observations; do not claim that injection proves every OS failure path. |
+
+Freeze exact benign fixture commands, subcase/assertion counts, injection seams
+and output contracts before source review. Require all three groups complete with
+their expected outcomes, recording actual versus injected observations separately.
+A missing/failed control blocks build. No fast-child timestamp acquisition or
+arbitrary complete child-inventory control is added. All controls remain **NOT RUN**.
 
 The future reviewed wrapper must build with `Build.bat WarhammerClientEditor
 Win64 Development -Project=<RunRoot/project/WarhammerClient.uproject> -WaitMutex
 -NoUBA -UBARootDir=<RunRoot/uba> -Log=<RunRoot/logs/build.log>` and subprocess
 `UBA_ROOT=<RunRoot/uba>`. It supervises the process tree with a 30-minute build
-timeout and 10-minute limit per automation process. Use `Start-Process
--WindowStyle Hidden` for background supervision; do not attempt hidden/offscreen
-rendering if it prevents the actual viewport/input evidence. Missing window/RHI
-is a recorded blocker, not a reason to manufacture screenshots.
+timeout and 10-minute limit per automation process. The reviewed suspended
+native launch replaces a racing Start-Process-then-assign sequence; preserve
+hidden background supervision and exact argument/environment handling. Keep
+the real proof viewport visible/reachable when needed; hidden/offscreen behavior
+cannot prevent the actual viewport/input evidence. Missing window/RHI is a
+recorded blocker, not a reason to manufacture screenshots.
 
 Future native invocations (all values absolute, arguments supplied as individual
 process arguments by that wrapper):
 
 ```text
+UnrealEditor.exe <staged-uproject>
+  /Engine/Maps/Entry?game=/Script/WarhammerClient.E02WorldProofGameMode
+  -game -E02Proof -unattended -d3d12 -windowed -ResX=1280 -ResY=720 -nosound
+  -ExecCmds="Automation List;Quit"
+  -ReportExportPath=<RunRoot/reports/discovery>
+  -DisablePlugins=UdpMessaging,TcpMessaging,QuicMessaging,WebSocketMessaging,DiscoveryBeaconReceiver,NetworkServiceDiscovery
+  <isolation-args with ABSLOG=<RunRoot/logs/native-discovery.log>>
+
 UnrealEditor-Cmd.exe <staged-uproject> -unattended -NullRHI -nosound
   -ExecCmds="Automation RunTest StartsWith:Warhammer.Migration.E02.Numeric;Quit"
-  -ReportExportPath=<RunRoot/reports/numeric> <isolation-args>
+  -ReportExportPath=<RunRoot/reports/numeric>
+  -DisablePlugins=UdpMessaging,TcpMessaging,QuicMessaging,WebSocketMessaging,DiscoveryBeaconReceiver,NetworkServiceDiscovery
+  <isolation-args with ABSLOG=<RunRoot/logs/native-numeric.log>>
 
 UnrealEditor.exe <staged-uproject>
   /Engine/Maps/Entry?game=/Script/WarhammerClient.E02WorldProofGameMode
   -game -E02Proof -unattended -d3d12 -windowed -ResX=1280 -ResY=720 -nosound
   -ExecCmds="Automation RunTest StartsWith:Warhammer.Migration.E02.Rendered+StartsWith:Warhammer.Migration.E02.Input;Quit"
-  -ReportExportPath=<RunRoot/reports/world-input> <isolation-args>
+  -ReportExportPath=<RunRoot/reports/world-input>
+  -DisablePlugins=UdpMessaging,TcpMessaging,QuicMessaging,WebSocketMessaging,DiscoveryBeaconReceiver,NetworkServiceDiscovery
+  <isolation-args with ABSLOG=<RunRoot/logs/native-world-input.log>>
 ```
 
-Before running filters, use a separate bounded `Automation List;Quit`
-discovery invocation and require all 16 names. Installed
+The discovery process lists tests without running them in the same hardware-RHI
+game context as rendered/input. Record the entire eligible engine-list count
+separately, select exact names beginning `Warhammer.Migration.E02.`, and require
+unique set equality with the 16 names in this packet. Other engine/E01 names do
+not count and are not extra E02 cases. Freeze the selected-name manifest before
+running either test filter. Installed
 `AutomationCommandline.cpp:129–163` splits filters on `+` and supports `StartsWith:`;
 the frozen wrapper must still validate the exact 4 numeric / 12 rendered-input
 results. No claim that those suites already exist or commands have been exercised
 is made here.
+
+Register numeric cases with `EditorContext | ClientContext | EngineFilter` so
+they are discoverable in `-game` and executable in the separate NullRHI Editor
+process. Register rendered/input with `ClientContext | NonNullRHI | EngineFilter`;
+the injected automated route does not require a human, so omit `RequiresUser`.
+Installed `AutomationTest.cpp:805–871` applies the actual application/feature
+filters: NullRHI cannot supply the rendered discovery set, and unattended mode
+cannot establish physical-user evidence. Runtime hardware/window assertions still
+apply; registration flags alone do not prove a valid graphics environment.
 
 Use one `Automation` prefix for each semicolon command group. Installed
 `ParseExecCommands.cpp:11–54` splits top-level `ExecCmds` only on commas;
@@ -257,8 +489,10 @@ Use one `Automation` prefix for each semicolon command group. Installed
 its remainder on semicolons. Its queued-quit branch at `726–734` expects `Quit`,
 so `;Automation Quit` does not queue the required automation-aware exit.
 
-`isolation-args` must include explicit `-UserDir=<RunRoot/ue-user>`,
-`-abslog=<RunRoot/logs/unique-phase.log>`,
+`isolation-args` must include explicit `-UserDir=<RunRoot/ue-user>`, `-nowrite`,
+`-ABSLOG=<RunRoot/logs/unique-phase.log>` for every discovery/numeric/rendered-input
+process. Require the actual phase main log at that exact owned path; neither an
+exit code nor stdout alone proves ABSLOG or DDC selection. Also include
 `-E02Fixture=<RunRoot/fixture/world-input-v1.json>`,
 `-E02Artifacts=<RunRoot/artifacts/phase>`, `-DDC-NoDefaultGraph` and a complete
 custom cache replacement argument:
@@ -269,17 +503,55 @@ override keys and no Zen/shared/cloud nodes. Source supports the syntax; executi
 must still confirm its selected graph/path and stop if a fallback occurs.
 
 `-UserDir` redirects project user Saved/Intermediate, not every engine/user path.
-Specifically, normal installed-engine EditorSettings remain under the per-user
-engine settings directory: on this host,
-`C:/Users/Rabid/AppData/Local/UnrealEngine/5.8/Saved/Config/WindowsEditor/EditorSettings.ini`
-(absent at inspection). Also inspect user EditorSettings hierarchy layers before
-execution; do not assume absent generated settings imply absent inherited values.
-A plain `Local` DDC node has an EditorOverrideSetting
-which is parsed after its command-line path; fresh project UserDir alone does not
-prove it cannot override that path. The complete custom node avoids that inherited
-key. Guard/hash existing settings before/after; never rewrite them. BOOT01's known
-normal UBT environment XML/Trace.uba/config reads/writes must be declared in the
-authority review: specifically UBT's existing
+Carry forward the accepted E01 preservation discipline using actual current E02
+observations. Derive absolute engine/project/user/version roots, then record
+these six role-identified Editor-settings observations before the build and after
+native work, including failure paths. Retain all six even if Documents paths
+coincide; use the staged project root for the project-default role:
+
+| Role | Observed path |
+|---|---|
+| `engine-base` | `<EngineRoot>/Engine/Config/BaseEditorSettings.ini` |
+| `local-user` | `<LocalApplicationData>/Unreal Engine/Engine/Config/UserEditorSettings.ini` |
+| `local-versioned` | `<LocalApplicationData>/UnrealEngine/<engine-major.minor>/Saved/Config/WindowsEditor/EditorSettings.ini` |
+| `profile-documents-user` | `<UserProfile>/Documents/Unreal Engine/Engine/Config/UserEditorSettings.ini` |
+| `project-default` | `<staged-project>/Config/DefaultEditorSettings.ini` |
+| `known-documents-user` | `<actual-known-Documents>/Unreal Engine/Engine/Config/UserEditorSettings.ini` |
+
+The old absent observation is historical: E01 subsequently recorded creation of
+the normal versioned EditorSettings file. Preserve its actual current state.
+Never delete/restore it, assume absence, borrow E01's snapshots or reconstruct a
+missing before observation. Each record includes role, absolute path, observation
+time, typed inspection status, exact boolean existence and file SHA256 (null only
+for established absence). Only explicit not-found establishes absence; access/IO/
+hash-race failures remain UNAVAILABLE and fail the gate. Reject files that are
+directories/reparse points and any missing/duplicate/substituted observation,
+changed existence, bytes, path or membership.
+
+Observe the three UBT BuildConfiguration.xml locations under
+`<ApplicationData>/Unreal Engine/UnrealBuildTool/`,
+`<LocalApplicationData>/Unreal Engine/UnrealBuildTool/` and
+`<actual-known-Documents>/Unreal Engine/UnrealBuildTool/`.
+Preserve current existence and exact bytes at every configured location;
+unavailable roots/observations block execution, and no absent XML may be created
+as an E02 repair. Freeze canonical authored Config and its staged copy as complete
+directory/file membership and byte manifests, then require both unchanged after
+build/native work. Observe before the build, collect after-observations on
+failure as well as success, and retain primary failures plus safe typed secondary
+inspection/cleanup/finalization diagnostics. Missing evidence cannot produce PASS.
+
+Pass `-nowrite` to every native process and verify its actual arguments and the
+resulting unchanged Config/settings evidence. Flags alone do not prove
+preservation. A plain `Local` DDC node has an EditorOverrideSetting parsed after
+its command-line path; fresh project UserDir alone cannot prevent that override.
+Keep the complete custom E02 node above with `-DDC-NoDefaultGraph`; check the
+actual new ABSLOG for its selected graph and exact RunRoot/ddc path and stop on
+fallback, nonowned write-store selection, or a Zen/shared/cloud node. This does
+not authorize deleting ordinary driver caches or promise whole-filesystem
+isolation.
+
+BOOT01's known normal UBT environment XML/Trace.uba/cache reads/writes must be
+declared in the coordinator's OWN13 applicability record: specifically UBT's existing
 `C:/Users/Rabid/AppData/Local/UnrealEngine/Intermediate/Build/` and
 `C:/Users/Rabid/AppData/Local/UnrealBuildTool/Trace.uba`, and its existing Roaming
 `Unreal Engine/UnrealBuildTool/BuildConfiguration.xml`. Real rendering may write
@@ -290,10 +562,43 @@ bounded normal side effect in the execution-authority record; do not promise ful
 filesystem isolation or delete shared caches. Report known-path observations as
 such. No new Zen/Core/web service, crash upload or external host is requested.
 
+### Local Automation and external messaging boundary
+
+Every native invocation above includes this exact subprocess-only argument:
+`-DisablePlugins=UdpMessaging,TcpMessaging,QuicMessaging,WebSocketMessaging,DiscoveryBeaconReceiver,NetworkServiceDiscovery`.
+Keep the engine `Messaging` module's default in-process bus for local Automation;
+do not add `-Messaging`, TCP listen/connect arguments, remote workers or transport
+plugin dependencies. Before launch validate the frozen descriptor/dependency
+closure does not re-enable a forbidden plugin. At startup record actual enabled
+plugin/module selection and bridge/listener/discovery diagnostics; stop if a
+forbidden transport or service starts. Do not repair global settings or silently
+permit an external connection to make discovery work.
+
+Installed UDP/TCP descriptors enable those plugins by default; UDP supports
+`-UDPMESSAGING_TRANSPORT_ENABLE=false`, but that alone does not disable an
+inherited tunnel. No equivalent TCP boolean argument was established. The common
+`DisablePlugins=` comma-list route is source-supported for this installed engine;
+its actual E02 behavior is **NOT RUN**, and network egress remains **UNVERIFIED**.
+QuicMessaging and NetworkServiceDiscovery default false; WebSocketMessaging and
+DiscoveryBeaconReceiver have no explicit default enable in their inspected engine
+descriptors. Their explicit disable prevents optional inherited activation. The
+default MsQuic runtime library is not itself evidence of a QUIC listener.
+
+The AutomationController publishes its find-workers message with internal
+`EMessageScope::Network`; that scope by itself is not a socket, external connection
+or Core submission. Distinguish local bus events from forbidden external
+transports. The proof's zero Core-transport/session/game-command counters cover
+its own integration boundary; flags, counters and a negative log search do not
+prove all engine/OS network activity is isolated. No whole-process no-egress
+claim is made without actual separate observation. This clarification adds no
+new service and does not reinterpret historical E01 default transport behavior.
+
 ## Installed-source support, not runtime proof
 
 Paths below are relative to `C:/Program Files/Epic Games/UE_5.8/Engine/`;
 identity is Launcher 5.8.3/CL58210709, not an Epic Git SHA. Inspected 2026-10-16.
+Operational discovery/messaging additions were source-inspected on 2026-10-17 UTC;
+their hashes below identify those installed bytes, without runtime verification.
 
 | Source / lines | Supported future mechanism |
 |---|---|
@@ -308,6 +613,10 @@ identity is Launcher 5.8.3/CL58210709, not an Epic Git SHA. Inspected 2026-10-16
 | `Config/BaseEngine.ini:2752–2776,2863–2868`; `Source/Developer/DerivedDataCache/Private/DerivedDataConfig.cpp:351–414,448–514`; `DerivedDataBackends.cpp:695–720`; `FileSystemCacheStore.cpp:3014–3057` | Full custom node syntax, suppressing default fallback and path-override precedence. |
 | `Source/Developer/AutomationController/Private/AutomationCommandline.cpp:129–163,610–626,726–734,784`; `Source/Developer/AutomationController/Private/AutomationControllerManager.cpp:233–247` | Run/list/queued quit and report export; still verify discovered/executed counts. |
 | `Source/Runtime/Engine/Private/ParseExecCommands.cpp:11–54`; `Source/Developer/AutomationController/Private/AutomationCommandline.cpp:565–586,726–734` | Comma-delimited top-level commands; one `Automation` prefix followed by semicolon subcommands such as `RunTest ...;Quit`. |
+| `Source/Runtime/Core/Private/Misc/AutomationTest.cpp:805–871`; `Source/Developer/AutomationController/Private/AutomationCommandline.cpp:331–337` | Editor/Client/NullRHI/unattended eligibility and listing all eligible tests; select the exact E02 prefix set separately. |
+| `Source/Runtime/Projects/Private/PluginManager.cpp:1473–1479,1585–1598,2030–2061,2551–2597` | Subprocess comma-list plugin disabling before target selection; required dependencies still need complete frozen-closure inspection and actual startup verification. |
+| `Source/Runtime/Messaging/Private/MessagingModule.cpp:132–136`; `Source/Developer/AutomationController/Private/AutomationControllerManager.cpp:295` | Default local message bus and Network-scope find-workers message; scope does not establish an external socket. |
+| `Plugins/Messaging/UdpMessaging/Source/UdpMessaging/Private/UdpMessagingModule.cpp:344–360,628`; `Plugins/Messaging/TcpMessaging/Source/TcpMessaging/Private/TcpMessagingModule.cpp:285–292,340–350`; `Config/BaseEngine.ini:3640–3643` | UDP transport/tunnel are separate; TCP's inherited enable/endpoints and optional command-line endpoints; plugin-level disable avoids claiming an unverified universal transport boolean. |
 
 Source SHA256: `Build/Build.version` =
 `EAB58750E84719489F3EE0D42D05A533CEB357EB3EE511777E9408D27A85F43C`;
@@ -321,26 +630,61 @@ Source SHA256: `Build/Build.version` =
 `04BBB301BE5C344F5387F15C1B543778A8DE5F13F36F8F77273528F49AF0E36D`.
 `Source/Runtime/Engine/Private/ParseExecCommands.cpp` =
 `9B8D2D78D61FD4E0EE32DE30564582EF5CE9844C692E6768F325F789640070D9`.
+Additional operational source SHA256:
+`Source/Runtime/Core/Private/Misc/AutomationTest.cpp` =
+`3F8E6F595469173CCF87FF07CD2A78B732AF8900F4C8EB7A17E07DEC72A471A6`;
+`Source/Developer/AutomationController/Private/AutomationCommandline.cpp` =
+`A040ADEE46CDECDCBE5C8148C6203211FD59559EA0A73CE748D5725399B899B3`;
+`Source/Runtime/Projects/Private/PluginManager.cpp` =
+`B2AA3A2C551FCBD86A3DE72103030331591F619CA2C66AFF8B6EAE7E662BD2DF`;
+`Source/Runtime/Messaging/Private/MessagingModule.cpp` =
+`E61351E36926FC6086B82F6CA576F1AE3A02D87721493437CE27A0BBFFEDBE32`.
 The executed candidate must expand this to every used engine source/tool/asset and
 all proposed client files; these six hashes are an inspection anchor, not that
 future full manifest. Selected Core projection/base file SHA256 are respectively
 `C809481F48DA22F9321B8A1ABA1681587AF8B84105EF6F662700DAF573AE1C95` /
 `2878F07F85E22E4B95A15EFE47B81D43275BF8A8F06FC500D4968B40FE1CEF4F`.
 
+### Immutable Microsoft source support for the proposed supervisor
+
+Inspected 2026-10-17 UTC. These are documentation/source mechanisms, not E02
+execution or confirmation that this host's nested-job launch succeeds:
+
+- [Job Objects](https://github.com/MicrosoftDocs/win32/blob/ca8274decead49403d70ceeed4af8d4ca74eaf11/desktop-src/ProcThread/job-objects.md): inherited CreateProcess membership, kill-on-close and the broker caveat: "Child processes created using Win32_Process.Create are not associated with the job."
+- [Nested Jobs](https://github.com/MicrosoftDocs/win32/blob/ca8274decead49403d70ceeed4af8d4ca74eaf11/desktop-src/ProcThread/nested-jobs.md): ancestor accounting includes child jobs; a non-breakaway ancestor retains inherited descendants.
+- [Creation flags](https://github.com/MicrosoftDocs/win32/blob/ca8274decead49403d70ceeed4af8d4ca74eaf11/desktop-src/ProcThread/process-creation-flags.md) and [assignment](https://github.com/MicrosoftDocs/sdk-api/blob/656e9656bfaef34dd29cd7ee9e1146aec17e924c/sdk-api-src/content/jobapi2/nf-jobapi2-assignprocesstojobobject.md): suspended creation permits assignment before root execution; nested/security restrictions can make assignment fail.
+- [Explicit-job query](https://github.com/MicrosoftDocs/sdk-api/blob/656e9656bfaef34dd29cd7ee9e1146aec17e924c/sdk-api-src/content/jobapi2/nf-jobapi2-queryinformationjobobject.md): a NULL handle queries the caller's immediate job, so it cannot identify this private group.
+- [Basic accounting](https://github.com/MicrosoftDocs/sdk-api/blob/656e9656bfaef34dd29cd7ee9e1146aec17e924c/sdk-api-src/content/winnt/ns-winnt-jobobject_basic_accounting_information.md): TotalProcesses includes some failed limit associations; TotalTerminatedProcesses counts limit-caused terminations. Active accounting falls after exit when "all references to the process are released"; safely finalize references before the terminal check.
+- [Process times](https://github.com/MicrosoftDocs/sdk-api/blob/656e9656bfaef34dd29cd7ee9e1146aec17e924c/sdk-api-src/content/processthreadsapi/nf-processthreadsapi-getprocesstimes.md): actual creation/exit FILETIME comes from the retained process handle; exit-time contents are undefined before exit.
+- [Job termination](https://github.com/MicrosoftDocs/sdk-api/blob/656e9656bfaef34dd29cd7ee9e1146aec17e924c/sdk-api-src/content/jobapi2/nf-jobapi2-terminatejobobject.md): termination applies to the owned job and child jobs; retain a later genuine cleanup observation rather than inferring completion from the call.
+
+Freeze inspected documentation/SDK/runtime/helper identities with the executable
+candidate. No debugger/IOCP delivery or complete per-grandchild kernel-time ledger
+is required. All actual supervisor behavior and cleanup remain **NOT RUN**.
+
 ## Stop, cleanup and acceptance boundary
 
-Stop before implementation/execution if E01 is unaccepted, authority does not
-cover this exact scope/GUI/cache side effects, or independent source review is
-missing. At runtime stop on missing tool/asset/window, source/hash drift,
-unexpected module/install/config change, DDC fallback/nonowned cache selection,
+Stop before authoring if the bounded E01-SLOW120 predecessor remains unbound or
+unaccepted, or the coordinator-reviewed frozen packet/OWN13 applicability record
+is missing. Stop before build/native execution if the frozen executable candidate
+lacks current independent source review, preservation observations or exact
+owned-output/process prerequisites, or the three supervisor controls are failed/
+incomplete. These are sequential gates; source review of
+not-yet-authored executable code is not an authoring prerequisite.
+At runtime stop on missing tool/asset/window, source/hash drift,
+unexpected module/install/config change, forbidden external transport/discovery
+startup, failed/unconfirmed private-job ownership or cleanup, DDC fallback/
+nonowned cache selection,
 nonhardware/NullRHI for rendered cases, zero/incomplete tests, screenshot/trace
-failure, process timeout/crash or any attempted Core/network/game submission.
+failure, process timeout/crash or any attempted Core/external/game submission.
 Use a fresh RunId for every corrected attempt; preserve failed logs and results.
 
 On exit cancel actions, release simulated buttons/capture, remove delegates and
-restore AutomationDriver; request queued automation quit, allow 15 seconds, then
-terminate only recorded owned PID/process-tree identities if required. Do not
-kill unrelated Unreal/ShaderCompileWorker/UBA processes by name. No concurrent
+restore AutomationDriver; request queued automation quit, allow at most 15 seconds
+within the existing phase deadline, then terminate only the recorded private job/
+original owned process identities if required. Confirm actual root exit and
+zero-active membership as specified above. Do not kill unrelated Unreal/
+ShaderCompileWorker/UBA processes by name. No concurrent
 Unreal proof uses this run. Never launch an interactive IDE or change global
 settings to repair a failure.
 
@@ -352,22 +696,42 @@ manifests first. No recursive cleanup of engine, sibling, canonical project,
 parent `.local`, AppData/global caches or another run. If evidence cannot be
 preserved, do not clean it.
 
-Accept only a frozen source review plus a separate acceptance audit that checks
-build/tool/RHI identity, exact 4+4+8 executed cases, PNG inspection and actual
-driver-to-Slate-to-world traces. Report numeric, rendered and input results
-separately. Manual/physical interaction, OS focus switching, Linux, packaging,
-full profile/HUD behavior and real-Core legality stay explicitly unverified.
+Accept only the final frozen candidate with both current fresh independent CODE
+and separate REQ reports under OWN15 and no unresolved acceptance blockers.
+The acceptance audit checks predecessor binding, source/packet/toolchain identity,
+all six Editor/three UBT observations and complete authored Config preservation,
+canonical/staged source membership/byte preservation, actual owned ABSLOG/DDC
+selection, verified plugin/transport selection, build/RHI identity, exact E02
+discovery set and 4+4+8 executed cases, three separate supervisor-control groups,
+complete directly launched root records, actual explicit-job aggregate counters/
+zero-active cleanup, six inspected PNGs and actual
+driver-to-Slate-to-world traces. Report numeric,
+rendered and input results separately. Manual/physical interaction, OS focus
+switching, Linux, packaging, full profile/HUD behavior and real-Core legality stay
+explicitly unverified. No Core connection/new-host work is introduced; rendered
+Windows evidence is still an actual future execution gate, and packaging is later.
 
 ## Freeze and remaining blockers
 
 Planning-body SHA256 (UTF-8 bytes preceding this heading):
-`FE5B906AC2A90E08E552375F2F4508935FE25E8797CD5C21AC21F9423137E7A2`.
-The whole-file SHA256 is recorded in the coordinator handoff after the final edit.
+`294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
+The whole-file SHA256 is recorded in the coordinator authority journal and the
+checkpoint. The adopted body derives from ignored proposal EC29BBB1; only actual
+predecessor binding, adoption status and the visible-window launch restriction
+were added. The geometric/input scope,16 cases,6 PNGs,14 authored paths, private-job
+mechanism and existing budgets remain the specified proof.
 
-Remaining authority/evidence blockers: accepted E01 manifest/audit is not yet bound
-here; applicable authority for these exact new files, GUI/process and normal cache
-side effects still needs recorded review; executable candidate/source review,
-16 registered/executed results, real hardware RHI, six inspected PNGs and separate
-acceptance audit do not yet exist. Human/physical input and Linux remain NOT RUN.
-No E02 process, implementation, test, asset or runtime output was created by this
-planning task. This packet is ready for review only; research remains incomplete.
+The bounded predecessor is bound and the coordinator has reviewed the packet,
+OWN13 continuation, named source writers, staged project/process/output ownership,
+ordinary cache side effects and pass/fail rules. Source authoring may proceed.
+This is neither executable source approval nor acceptance of future results.
+
+The executable candidate/source review, three supervisor controls and actual
+private-job cleanup evidence, current E02 preservation snapshots,16 discovered/
+executed results, hardware RHI,six inspected PNGs and fresh final CODE/REQ reports
+do not yet exist. Explicit owner authorization for one visible interactive proof
+window remains required before graphical execution under the desktop rule;
+authoring and independently reviewed hidden controls/build/numeric work can
+proceed separately. Human/physical input and Linux remain NOT RUN.
+No E02 process or result is claimed by this adoption record. Research remains
+incomplete; full E01/M01/M02 and G-IMPLEMENT remain open.

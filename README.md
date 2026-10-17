@@ -70,8 +70,9 @@ and the unchanged `044903` execution on source `d1189592a5f99bdee58cea25ae8546e5
 The later publication commit is a separate metadata overlay; the reports did not
 review that later commit. Execution is stopped. The narrow diagnostic is accepted;
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
-UE HTTP, rendering, packaging and Linux remain open. Next is only the E02 packet
-gate; its tracked packet is unchanged and planning only.
+UE HTTP, rendering, packaging and Linux remain open. The [E02 packet](docs/plans/research/2026-10-16-e02-world-input-packet.md) is now
+adopted for bounded source authoring; its [authority journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+records the gates. No E02 build/native/input/render result exists yet.
 
 The historical `030835` run retains its missing
 six-path editor-settings comparison as **UNVERIFIED** in its
