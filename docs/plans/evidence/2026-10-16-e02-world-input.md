@@ -234,3 +234,61 @@ camera/projection state before checking projected containment, center and closer
 selection framing at all three prescribed viewport/scale variants. These are
 uncompiled source assertions, not rendering or interaction results. The complete
 repaired candidate still requires another frozen independent SOURCE assessment.
+
+## Third source assessment and owner-approved launch — 2026-10-17 UTC
+
+The owner answered “Yes. Please review and continue with the migration plan” to
+the explicit request to send the frozen E02 source and selected engine/API
+excerpts through the configured Codex service. The earlier automatic-approval
+rejection occurred before process creation and remains preserved. The first
+approved prelaunch then detected replaced Codex and Windows command executables;
+no review or E02 process started with those stale bindings. Root retained that
+attempt and froze the current tools against the same clean source candidate.
+
+The fresh SOURCE assessment reviewed `b3915a9dd016e158b0eba3e5b733178eb610a671`
+against `bd801233cc9989e0ae146a3be7b136d26dc73183`, using input manifest SHA256
+`40004CDA933DB83DF00A4B7733D847AA33066BF92DE0E661786303795F17B5C6`
+and freeze manifest SHA256
+`0F153BE43EB6832EC04B55DD697AD386524B0B056888423EBC53EA3560E505DD`.
+Its unchanged [raw report](../../../.local/reviews/E02-source-review/review-b391-current-tools-20261017T165205Z-10aae012/last-message.txt)
+is **CHANGES_REQUESTED**, SHA256
+`487A02854B12E404E478F0B03E5ADB0566DEEF96683E7477EBF13FECDBD34EFD`.
+The [operator seal](../../../.local/reviews/E02-source-review/review-b391-current-tools-20261017T165205Z-10aae012/orchestrator-seal.json),
+SHA256 `C293414C84E49BAE7D985AB34DB182036CE188F032E418A667940E13C2B9B731`,
+was completed at `2026-10-17T17:03:41.8254727Z` before root released the source.
+
+Session `01a14ac7-3e5b-7952-bab9-8ad9fb0eea85` used the configured default
+`gpt-6.1-sol`/`ultra` through CLI0.163.0-alpha.10.2. Selected actual runtime
+metadata records workspace-root CWD, read-only/never and disabled session memory.
+The raw report's self-unverified fields remain unchanged. Lower-level memory,
+feature enforcement and OS-process association remain UNVERIFIED. The launch
+file was6,952bytes/SHA256
+`C17F72270623FABAACA1A0E0AE635436B4B013A2C8125665C9073C9CB32DB6A7`;
+the actual message was6,954UTF-8bytes/SHA256
+`909FE378832B2D6BE32144BE92212C27BAF940495D57C4799CE59B4512FB5136`.
+The two-byte difference is trailing CRLF, not byte-identical stdin transport.
+
+All54 literal commands from50 CLI tool calls and their complete outputs were
+audited. No prohibited execution or peer/author/Git-message/private-body exposure
+was observed. All1,299 frozen files,16 packet inputs,28 source-membership entries,
+167 reference DLLs, both catalogs and ten discovery absences remained unchanged.
+Additional installed-source reads are identified separately in the audit; their
+later inspection does not retroactively add them to that freeze.
+
+Four source findings require repairs:
+
+1. **P1:** inherited `UE-CmdLineArgs` can append plugin paths or enable a transport
+   before the disable list takes effect.
+2. **P2:** aggregate camera-change counts can mask absent pan or dolly effects.
+3. **P2:** four required geometry/state JSON files and direct-root stdout/stderr
+   are not yet covered by immutable artifact bindings.
+4. **P2:** declared compiler/resource-compiler hashes do not constrain UBT's
+   effective paths before compilation; version strings checked afterward do not
+   establish that binding.
+
+Root verified the sealed report/audit identities and clean candidate before
+releasing source for these repairs. Preserve the16 cases, fixture, budgets and
+three supervisor groups. Checkpoint the corrected source and obtain a fresh
+affected SOURCE assessment before any E02 phase. All controls, builds, discovery,
+native cases, rendering and GUI execution remain **NOT RUN**; neither this SOURCE
+report nor the operator audit supplies final OWN15 CODE/REQ acceptance.
