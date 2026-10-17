@@ -19,8 +19,10 @@ $ast = [System.Management.Automation.Language.Parser]::ParseFile($guardWrapperPa
 if ($parseErrors.Count) { throw 'Wrapper AST failed.' }
 $names = @('Assert-NoReparsePoint', 'Assert-ChildPath', 'Get-MemberPath', 'Require-File', 'Get-Hash', 'Assert-SafeText',
     'Read-Json', 'Assert-Candidate', 'Get-PythonUnitEvidence', 'Get-CurrentCaptureWireEvidence', 'Assert-CaptureWireBinding',
-    'New-EditorSettingsPaths', 'Get-EditorSettingsPaths', 'Get-EditorSettingsAttributes', 'Get-EditorSettingsState',
-    'Assert-EditorSettingsState', 'Save-EditorSettingsFailureEvidence')
+    'New-EditorSettingsPaths', 'Get-EditorSettingsPaths', 'Get-PreservationFileAttributes', 'Get-EditorSettingsState',
+    'Assert-EditorSettingsState', 'Save-EditorSettingsFailureEvidence', 'Get-SafeFailureEvidence', 'Get-UBTSettings',
+    'New-ChildEnvironment', 'New-OwnedProcessHandle', 'New-OwnedLogWriter', 'Get-OwnedProcessIdentity',
+    'Add-OwnedProcessSecondaryFailure', 'Stop-OwnedProcess', 'Invoke-OwnedProcess')
 foreach ($definition in $ast.FindAll({ param($node) $node -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $false)) {
     if ($definition.Name -in $names) {
         # Extracted function definitions lose their automatic source-file binding.
@@ -292,7 +294,7 @@ function Check-EditorInspection([string] $Name, [string] $Mode, [string] $Expect
     $hashCalls = [Collections.Generic.List[string]]::new()
     # Supply only invented attributes/errors/hash bytes to the maintained sampler.
     # No settings file or directory is queried or changed by these controls.
-    function Get-EditorSettingsAttributes([string] $Path) {
+    function Get-PreservationFileAttributes([string] $Path) {
         switch ($Mode) {
             'missing-file' { throw [IO.FileNotFoundException]::new('SIMULATED_NOT_FOUND') }
             'missing-parent' { throw [IO.DirectoryNotFoundException]::new('SIMULATED_PARENT_NOT_FOUND') }
@@ -315,6 +317,18 @@ function Check-EditorInspection([string] $Name, [string] $Mode, [string] $Expect
     }).Count -eq 0
     $expectedHashCalls = if ($Mode -in @('present', 'hash-race')) { 6 } else { 0 }
     $pass = $pass -and $hashCalls.Count -eq $expectedHashCalls
+    if ($ExpectedInspection -eq 'UNAVAILABLE') {
+        $expectedDetails = switch ($Mode) {
+            'denied' { 'SIMULATED_ACCESS_DENIED' }; 'io-error' { 'SIMULATED_IO_ERROR' }; 'security-error' { 'SIMULATED_SECURITY_ERROR' }
+            'broken-link' { 'Editor-settings file is a reparse point.' }; 'directory' { 'Expected an editor-settings file, not a directory.' }
+            'hash-race' { 'SIMULATED_DISAPPEARED_AFTER_ATTRIBUTES' }
+        }
+        $expectedStage = switch ($Mode) { 'broken-link' { 'editor-reparse-check' }; 'directory' { 'editor-file-kind-check' }; 'hash-race' { 'editor-hash' }; default { 'editor-attributes' } }
+        $pass = $pass -and @($snapshot | Where-Object {
+            $_.error.details -notlike ('*' + $expectedDetails + '*') -or $_.error.stage -cne $expectedStage -or
+            [string]::IsNullOrEmpty($_.error.type) -or $_.error.redaction -cne 'PASS'
+        }).Count -eq 0
+    }
     $checks.Add(@{ name = $Name; kind = 'editor-settings-sampler'; simulation = $true; status = $(if ($pass) { 'PASS' } else { 'FAIL' })
         expectedInspection = $ExpectedInspection; expectedExists = $ExpectedExists; hashCalls = $hashCalls.Count; retained = $snapshot })
     Write-Output ("{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
@@ -339,9 +353,19 @@ function Check-EditorFailureEvidence([string] $Name, [string] $Mode) {
     function Get-EditorSettingsState { if ($Mode -eq 'provider-failed') { throw 'SIMULATED_METADATA_PROVIDER_FAILURE' }; return $simulatedAfter }
     Save-EditorSettingsFailureEvidence $record
     $pass = $record.failure -ceq 'SIMULATED_PRIMARY_BUILD_FAILURE' -and $record.Contains('editorSettingsAfterFailureUtc')
-    if ($Mode -eq 'provider-failed') { $pass = $pass -and $record.Contains('editorSettingsFailure') }
+    if ($Mode -eq 'provider-failed') {
+        $pass = $pass -and $record.Contains('editorSettingsFailure') -and
+            $record.editorSettingsFailure.details -like '*SIMULATED_METADATA_PROVIDER_FAILURE*' -and
+            $record.editorSettingsFailure.stage -ceq 'editor-after-observation-provider' -and
+            -not [string]::IsNullOrEmpty($record.editorSettingsFailure.type)
+    }
     else { $pass = $pass -and @($record.editorSettingsAfterFailure).Count -eq 6 }
-    if ($Mode -in @('changed', 'unavailable')) { $pass = $pass -and $record.Contains('editorSettingsFailure') }
+    if ($Mode -in @('changed', 'unavailable')) {
+        $expectedDetail = if ($Mode -eq 'changed') { 'existence or hash changed' } else { 'unavailable or has invalid' }
+        $pass = $pass -and $record.Contains('editorSettingsFailure') -and
+            $record.editorSettingsFailure.details -like ('*' + $expectedDetail + '*') -and
+            $record.editorSettingsFailure.stage -ceq 'editor-after-assertion'
+    }
     if ($Mode -eq 'unchanged') { $pass = $pass -and -not $record.Contains('editorSettingsFailure') }
     $checks.Add(@{ name = $Name; kind = 'editor-settings-post-failure'; simulation = $true; status = $(if ($pass) { 'PASS' } else { 'FAIL' })
         primaryFailurePreserved = ($record.failure -ceq 'SIMULATED_PRIMARY_BUILD_FAILURE'); retained = $record })
@@ -351,6 +375,207 @@ Check-EditorFailureEvidence 'editor-primary-failure-unchanged-after' 'unchanged'
 Check-EditorFailureEvidence 'editor-primary-failure-retains-changed-after' 'changed'
 Check-EditorFailureEvidence 'editor-primary-failure-retains-unavailable-after' 'unavailable'
 Check-EditorFailureEvidence 'editor-primary-failure-provider-also-fails' 'provider-failed'
+
+function Check-UBTInspection([string] $Name, [string] $Mode, [string] $ExpectedFailure = '') {
+    function Get-PreservationFileAttributes([string] $Path) {
+        switch ($Mode) {
+            'missing-file' { throw [IO.FileNotFoundException]::new('SIMULATED_UBT_NOT_FOUND') }
+            'missing-parent' { throw [IO.DirectoryNotFoundException]::new('SIMULATED_UBT_PARENT_NOT_FOUND') }
+            'denied' { throw [UnauthorizedAccessException]::new('SIMULATED_UBT_ACCESS_DENIED') }
+            'io-error' { throw [IO.IOException]::new('SIMULATED_UBT_IO_ERROR') }
+            'broken-link' { return [IO.FileAttributes]::ReparsePoint }
+            'directory' { return [IO.FileAttributes]::Directory }
+            default { return [IO.FileAttributes]::Normal }
+        }
+    }
+    function Assert-NoReparsePoint([string] $Path) { }
+    function Get-Hash([string] $Path) {
+        if ($Mode -eq 'hash-race') { throw [IO.FileNotFoundException]::new('SIMULATED_UBT_HASH_RACE') }
+        return 'a' * 64
+    }
+    $failure = $null; $observations = @()
+    try { $observations = @(Get-UBTSettings) } catch { $failure = Get-SafeFailureEvidence $_ 'ubt-synthetic-query' }
+    $pass = if ($ExpectedFailure) { $null -ne $failure -and $failure.details -like ('*' + $ExpectedFailure + '*') -and $failure.redaction -ceq 'PASS' } else {
+        $expectedExists = $Mode -eq 'present'
+        $observations.Count -ge 2 -and @($observations | Where-Object { $_.exists -ne $expectedExists }).Count -eq 0
+    }
+    $checks.Add(@{ name = $Name; kind = 'ubt-settings-query'; simulation = $true; status = $(if ($pass) { 'PASS' } else { 'FAIL' })
+        observedFailure = $failure; observations = $observations })
+    Write-Output ("{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+Check-UBTInspection 'ubt-present-file' 'present'
+Check-UBTInspection 'ubt-explicit-missing-file' 'missing-file'
+Check-UBTInspection 'ubt-explicit-missing-parent' 'missing-parent'
+Check-UBTInspection 'ubt-denied-is-not-absence' 'denied' 'SIMULATED_UBT_ACCESS_DENIED'
+Check-UBTInspection 'ubt-io-error-is-not-absence' 'io-error' 'SIMULATED_UBT_IO_ERROR'
+Check-UBTInspection 'ubt-broken-link-rejected' 'broken-link' 'Global UBT settings file is a reparse point.'
+Check-UBTInspection 'ubt-directory-rejected' 'directory' 'Global UBT settings path is a directory.'
+Check-UBTInspection 'ubt-hash-race-is-not-absence' 'hash-race' 'SIMULATED_UBT_HASH_RACE'
+
+function Check-DiagnosticRedaction {
+    $marker = 'SIMULATED_' + 'PRIVATE_DIAGNOSTIC'
+    $priorSecrets = $script:secretValues
+    $script:secretValues = @($marker)
+    try {
+        try { throw [IO.IOException]::new('safe outer', [UnauthorizedAccessException]::new($marker)) }
+        catch { $redacted = Get-SafeFailureEvidence $_ 'synthetic-diagnostic' }
+        $editorSnapshot = @(New-SimulatedEditorState)
+        function Get-EditorSettingsState { throw $marker }
+        $record = [ordered]@{ failure = 'SIMULATED_PRIMARY'; editorSettingsBefore = $editorSnapshot }
+        Save-EditorSettingsFailureEvidence $record
+        $json = @{ direct = $redacted; provider = $record } | ConvertTo-Json -Depth 12 -Compress
+        $pass = $redacted.redaction -ceq 'REJECTED_NOT_RETAINED' -and
+            $record.editorSettingsFailure.redaction -ceq 'REJECTED_NOT_RETAINED' -and
+            $record.failure -ceq 'SIMULATED_PRIMARY' -and -not $json.Contains($marker, [StringComparison]::Ordinal) -and
+            $redacted.stage -ceq 'synthetic-diagnostic' -and -not [string]::IsNullOrEmpty($redacted.type)
+        $checks.Add(@{ name = 'diagnostic-secret-details-and-causes-not-retained'; kind = 'failure-diagnostic-redaction'; simulation = $true
+            status = $(if ($pass) { 'PASS' } else { 'FAIL' }); retained = @{ direct = $redacted; provider = $record } })
+        Write-Output ("diagnostic-secret-details-and-causes-not-retained: {0}" -f $(if ($pass) { 'PASS' } else { 'FAIL' }))
+    } finally { $script:secretValues = $priorSecrets }
+}
+Check-DiagnosticRedaction
+
+function New-SimulatedReadTask([string] $Mode) {
+    $task = [pscustomobject]@{ Mode = $Mode; IsCompleted = $Mode -ne 'timeout' }
+    $task | Add-Member ScriptMethod GetAwaiter { return $this }
+    $task | Add-Member ScriptMethod GetResult { if ($this.Mode -eq 'read') { throw 'SIMULATED_PRIMARY_READ_FAILURE' }; return $null }
+    return $task
+}
+
+function New-SimulatedProcessReader([string] $Mode) {
+    $reader = [pscustomobject]@{ Mode = $Mode }
+    $reader | Add-Member ScriptMethod ReadLineAsync { return New-SimulatedReadTask $this.Mode }
+    return $reader
+}
+
+function Check-ProcessCaller([string] $Name, [hashtable] $Configuration, [string] $ExpectedFailure = '', [string[]] $ExpectedSecondaryStages = @()) {
+    $state = @{ Primary = 'read'; Exited = $false; KillFault = $false; WaitFault = $false; IdentityDisposeFault = $false
+        HasExitedAlwaysFault = $false; HasExitedFinalFault = $false; ExitCodeFault = $false; StdoutDisposeFault = $false
+        StderrDisposeFault = $false; HandleDisposeFault = $false; HasExitedCalls = 0; KillCalls = 0; WaitMilliseconds = $null
+        IdentityDisposeCalls = 0; StdoutDisposeCalls = 0; StderrDisposeCalls = 0; HandleDisposeCalls = 0
+        IdFaultMode = 'none'; TimeFaultMode = 'none'; IdReads = 0; TimeReads = 0; IdentityMismatch = $false
+        ExpectRefusal = $false; ExpectedRecovery = $null
+        CleanupDetails = 'SIMULATED_CLEANUP_KILL_FAILURE'; ExpectRedactedCleanup = $false
+        StartTime = [datetime]::new(2026, 1, 1, 0, 0, 0, [DateTimeKind]::Utc) }
+    foreach ($entry in $Configuration.GetEnumerator()) { $state[$entry.Key] = $entry.Value }
+    $state.Exited = $state.Primary -eq 'none'
+    $fakeProcess = [pscustomobject]@{ State = $state; Id = 424242; StartTime = $state.StartTime
+        StandardOutput = New-SimulatedProcessReader $state.Primary; StandardError = New-SimulatedProcessReader 'none' }
+    $fakeProcess | Add-Member ScriptMethod get_Id {
+        $this.State.IdReads++
+        if ($this.State.IdFaultMode -eq 'permanent' -or ($this.State.IdFaultMode -eq 'transient' -and $this.State.IdReads -eq 1)) { throw 'SIMULATED_START_ID_FAILURE' }
+        if ($this.State.IdFaultMode -eq 'changed-on-recovery' -and $this.State.IdReads -ge 2) { return 424243 }
+        return 424242
+    }
+    $fakeProcess | Add-Member ScriptMethod get_StartTime {
+        $this.State.TimeReads++
+        if ($this.State.TimeFaultMode -eq 'permanent' -or ($this.State.TimeFaultMode -eq 'transient' -and $this.State.TimeReads -eq 1)) { throw 'SIMULATED_START_TIME_FAILURE' }
+        return $this.State.StartTime
+    }
+    $fakeProcess | Add-Member ScriptMethod get_HasExited {
+        $this.State.HasExitedCalls++
+        if ($this.State.HasExitedAlwaysFault -or ($this.State.HasExitedFinalFault -and $this.State.HasExitedCalls -ge 3)) { throw 'SIMULATED_HAS_EXITED_FAILURE' }
+        return $this.State.Exited
+    }
+    $fakeProcess | Add-Member ScriptMethod get_ExitCode { if ($this.State.ExitCodeFault) { throw 'SIMULATED_EXIT_CODE_FAILURE' }; return 0 }
+    $fakeProcess | Add-Member ScriptMethod Start { return $true }
+    $fakeProcess | Add-Member ScriptMethod Kill {
+        param($Tree)
+        $this.State.KillCalls++
+        if ($this.State.KillFault) { throw $this.State.CleanupDetails }
+        if (-not $this.State.WaitFault) { $this.State.Exited = $true }
+    }
+    $fakeProcess | Add-Member ScriptMethod WaitForExit {
+        param($Milliseconds)
+        if ($null -eq $Milliseconds) { return }
+        $this.State.WaitMilliseconds = $Milliseconds
+        if ($this.State.WaitFault) { throw 'SIMULATED_CLEANUP_WAIT_FAILURE' }
+        $this.State.Exited = $true
+        return $true
+    }
+    $fakeProcess | Add-Member ScriptMethod Dispose { $this.State.HandleDisposeCalls++; if ($this.State.HandleDisposeFault) { throw 'SIMULATED_HANDLE_DISPOSE_FAILURE' } }
+    $fakeIdentity = [pscustomobject]@{ State = $state; StartTime = $state.StartTime }
+    $fakeIdentity | Add-Member ScriptMethod get_StartTime { if ($this.State.IdentityMismatch) { return $this.State.StartTime.AddSeconds(1) }; return $this.State.StartTime }
+    $fakeIdentity | Add-Member ScriptMethod Dispose { $this.State.IdentityDisposeCalls++; if ($this.State.IdentityDisposeFault) { throw 'SIMULATED_IDENTITY_DISPOSE_FAILURE' } }
+    function New-OwnedProcessHandle($StartInfo) { return $fakeProcess }
+    function Get-OwnedProcessIdentity([int] $ProcessId) { return $fakeIdentity }
+    function New-OwnedLogWriter([string] $Path) {
+        $lane = if ($Path.EndsWith('.stdout.log')) { 'Stdout' } else { 'Stderr' }
+        $writer = [pscustomobject]@{ State = $state; Lane = $lane }
+        $writer | Add-Member ScriptMethod WriteLine { param($Line) }
+        $writer | Add-Member ScriptMethod Dispose {
+            $this.State[$this.Lane + 'DisposeCalls']++
+            if ($this.State[$this.Lane + 'DisposeFault']) { throw ('SIMULATED_' + $this.Lane.ToUpperInvariant() + '_DISPOSE_FAILURE') }
+        }
+        return $writer
+    }
+    $script:runRoot = Join-Path $OutputRoot ('SIMULATED-caller-' + $Name)
+    $script:phaseRoot = Join-Path $runRoot 'fake-owned-logs'
+    $null = [IO.Directory]::CreateDirectory($phaseRoot)
+    $script:phaseResult = @{ processes = [Collections.Generic.List[object]]::new(); toolchain = @{ engineVersion = @{ MajorVersion = 5; MinorVersion = 8 } } }
+    $editorSnapshot = @(New-SimulatedEditorState)
+    function Get-EditorSettingsState { return $editorSnapshot }
+    $phaseResult.editorSettingsBefore = $editorSnapshot
+    $maximum = if ($state.Primary -eq 'timeout') { 0 } else { 1000 }
+    $failure = $null
+    try { $null = Invoke-OwnedProcess $Name $guardWrapperPath @('SIMULATED_NO_EXECUTION') $runRoot @{} $maximum }
+    catch { $failure = $_.Exception.Message; $phaseResult.failure = $failure; Save-EditorSettingsFailureEvidence $phaseResult }
+    $record = $phaseResult.processes[0]
+    $pass = if ($ExpectedFailure) { $null -ne $failure -and $failure -like ('*' + $ExpectedFailure + '*') } else { $null -eq $failure }
+    $pass = $pass -and $phaseResult.processes.Count -eq 1 -and $null -ne $record.endedUtc -and
+        $state.StdoutDisposeCalls -eq 1 -and $state.StderrDisposeCalls -eq 1 -and $state.HandleDisposeCalls -eq 1
+    foreach ($stage in $ExpectedSecondaryStages) { $pass = $pass -and @($record.secondaryErrors | Where-Object { $_.stage -ceq $stage }).Count -ge 1 }
+    if ($ExpectedFailure) {
+        $pass = $pass -and $record.primaryFailure.details -like ('*' + $ExpectedFailure + '*') -and
+            $phaseResult.failure -ceq $failure -and @($phaseResult.editorSettingsAfterFailure).Count -eq 6
+    }
+    if ($state.WaitFault) { $pass = $pass -and $state.WaitMilliseconds -eq 10000 }
+    if ($state.Exited) { $pass = $pass -and $record.exitConfirmed -eq $true -and $null -ne $record.exitedUtc }
+    else {
+        $expectedCleanup = if ($state.ExpectRefusal) { 'REFUSED_UNVERIFIED_IDENTITY' } else { 'EXIT_UNCONFIRMED' }
+        $pass = $pass -and $null -eq $record.exitConfirmed -and $null -eq $record.exitedUtc -and $record.cleanupStatus -ceq $expectedCleanup
+    }
+    if ($state.ExpectRefusal) { $pass = $pass -and $record.terminationRefused -and $state.KillCalls -eq 0 -and -not [string]::IsNullOrEmpty($record.terminationRefusalReason) }
+    if ($null -ne $state.ExpectedRecovery) {
+        $pass = $pass -and $record.identityRecoveryAttempted -and $record.identityRecoveredForCleanup -eq $state.ExpectedRecovery
+        if ($state.ExpectedRecovery) { $pass = $pass -and $record.startIdentityComplete -and $state.KillCalls -eq 1 -and $state.WaitMilliseconds -eq 10000 }
+    }
+    if ($state.Primary -eq 'none' -and -not $state.ExitCodeFault) { $pass = $pass -and $record.exitCode -eq 0 }
+    if ($state.ExpectRedactedCleanup) {
+        $pass = $pass -and @($record.secondaryErrors | Where-Object { $_.redaction -ceq 'REJECTED_NOT_RETAINED' }).Count -ge 1 -and
+            -not (($record | ConvertTo-Json -Depth 16 -Compress).Contains($state.CleanupDetails, [StringComparison]::Ordinal))
+    }
+    $checks.Add(@{ name = $Name; kind = 'owned-process-caller'; simulation = $true; status = $(if ($pass) { 'PASS' } else { 'FAIL' })
+        observedFailure = $failure; expectedFailure = $ExpectedFailure; retainedProcess = $record
+        finalizationCalls = @{ stdout = $state.StdoutDisposeCalls; stderr = $state.StderrDisposeCalls; process = $state.HandleDisposeCalls } })
+    Write-Output ("{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+Check-ProcessCaller 'caller-timeout-retains-all-cleanup-faults' @{ Primary = 'timeout'; KillFault = $true; HasExitedFinalFault = $true
+    IdentityDisposeFault = $true; StdoutDisposeFault = $true; StderrDisposeFault = $true; HandleDisposeFault = $true } 'Process deadline exceeded' @(
+    'cleanup-stop-process', 'cleanup-identity-handle-dispose', 'finalize-exit-inspection', 'finalize-stdout-log', 'finalize-stderr-log', 'finalize-process-handle')
+Check-ProcessCaller 'caller-read-failure-keeps-bounded-wait-error' @{ WaitFault = $true; IdentityDisposeFault = $true } 'SIMULATED_PRIMARY_READ_FAILURE' @('cleanup-stop-process', 'cleanup-identity-handle-dispose')
+Check-ProcessCaller 'caller-read-failure-keeps-exit-code-error' @{ ExitCodeFault = $true } 'SIMULATED_PRIMARY_READ_FAILURE' @('finalize-exit-code')
+Check-ProcessCaller 'caller-successful-exit-stdout-cleanup-fails' @{ Primary = 'none'; StdoutDisposeFault = $true } 'SIMULATED_STDOUT_DISPOSE_FAILURE' @('finalize-stdout-log')
+Check-ProcessCaller 'caller-successful-exit-stderr-cleanup-fails' @{ Primary = 'none'; StderrDisposeFault = $true } 'SIMULATED_STDERR_DISPOSE_FAILURE' @('finalize-stderr-log')
+Check-ProcessCaller 'caller-successful-exit-handle-cleanup-fails' @{ Primary = 'none'; HandleDisposeFault = $true } 'SIMULATED_HANDLE_DISPOSE_FAILURE' @('finalize-process-handle')
+Check-ProcessCaller 'caller-exit-code-unavailable-is-failure' @{ Primary = 'none'; ExitCodeFault = $true } 'SIMULATED_EXIT_CODE_FAILURE' @('finalize-exit-code')
+Check-ProcessCaller 'caller-has-exited-unavailable-keeps-primary' @{ HasExitedAlwaysFault = $true } 'SIMULATED_HAS_EXITED_FAILURE' @('cleanup-stop-process', 'finalize-exit-inspection')
+Check-ProcessCaller 'caller-success-control' @{ Primary = 'none' }
+Check-ProcessCaller 'caller-start-id-transient-recovers-cleanup' @{ IdFaultMode = 'transient'; ExpectedRecovery = $true } 'SIMULATED_START_ID_FAILURE'
+Check-ProcessCaller 'caller-start-time-transient-recovers-cleanup' @{ TimeFaultMode = 'transient'; ExpectedRecovery = $true } 'SIMULATED_START_TIME_FAILURE'
+Check-ProcessCaller 'caller-start-id-unavailable-refuses-unverified-kill' @{ IdFaultMode = 'permanent'; ExpectedRecovery = $false; ExpectRefusal = $true } 'SIMULATED_START_ID_FAILURE' @('cleanup-recover-start-identity')
+Check-ProcessCaller 'caller-start-time-unavailable-refuses-unverified-kill' @{ TimeFaultMode = 'permanent'; ExpectedRecovery = $false; ExpectRefusal = $true } 'SIMULATED_START_TIME_FAILURE' @('cleanup-recover-start-identity')
+Check-ProcessCaller 'caller-start-recovery-pid-substitution-refused' @{ IdFaultMode = 'changed-on-recovery'; TimeFaultMode = 'transient'; ExpectedRecovery = $false; ExpectRefusal = $true } 'SIMULATED_START_TIME_FAILURE' @('cleanup-recover-start-identity')
+Check-ProcessCaller 'caller-cleanup-start-time-mismatch-refused' @{ IdentityMismatch = $true; ExpectRefusal = $true } 'SIMULATED_PRIMARY_READ_FAILURE' @('cleanup-stop-process')
+function Check-CallerDiagnosticRedaction {
+    $marker = 'SIMULATED_' + 'PRIVATE_CLEANUP'
+    $priorSecrets = $script:secretValues; $script:secretValues = @($marker)
+    try {
+        Check-ProcessCaller 'caller-secondary-error-details-redacted' @{ KillFault = $true; CleanupDetails = $marker; ExpectRedactedCleanup = $true } `
+            'SIMULATED_PRIMARY_READ_FAILURE' @('cleanup-stop-process')
+    } finally { $script:secretValues = $priorSecrets }
+}
+Check-CallerDiagnosticRedaction
 
 $sourceAfter = @(foreach ($record in $sourceBefore) { @{ path = $record.path; sha256 = Get-Hash $record.path; unchanged = ((Get-Hash $record.path) -ceq $record.sha256) } })
 $passed = @($checks | Where-Object { $_.status -eq 'PASS' }).Count

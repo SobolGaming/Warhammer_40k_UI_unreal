@@ -100,7 +100,11 @@ Core/live execution. The parser repair and round-8 source review preceded the
 separate completed `030835` chain; neither source review is a final review of its
 execution evidence.
 
-The revision-7 maintained editor-settings guard is implemented and passed 68 pure
+The initial revision-7 maintained editor-settings guard passed 68 pure
 PowerShell checks with genuine process/exit provenance. Fresh affected source
 review and a new normal full chain remain pending. These controls do not supply
 missing observations for030835 or replace actual native execution.
+
+Current source-gate update: [round9](research/2026-10-17-e01-slow120-code-review-r9.md) requested retaining safe specific secondary diagnostics and preserving the original owned-process failure through cleanup. Those fixes now have93 passing pure PowerShell controls; a fresh affected review and the required new full chain remain pending. The68-control record remains preserved source evidence for its exact candidate.
+
+Current remediation source verification: the updated wrapper and guard now pass93/93 pure PowerShell controls, separate from the87 Python units. The earlier87/87 pure source result and its exact two source files remain preserved. The failed83/87 expanded run is preserved. A new affected source review and new full normal chain remain required;030835 still lacks its current editor-settings evidence.

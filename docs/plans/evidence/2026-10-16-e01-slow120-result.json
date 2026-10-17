@@ -918,9 +918,53 @@
     ],
     "editorSettingsGuardRemediation": {
       "scope": "Pure synthetic metadata controls only; no actual Core/Unreal/native/global settings execution",
-      "wrapperSha256": "5D0C3D98A47E75796BF44DCA3F8C46140FD79E66A15F538D3A63D1B38DE9DB11",
-      "testsSha256": "755DBE7EA8F4512DCFDED8B33C34E16FDEEA3B873115E7D408A0AD0444B49893",
+      "wrapperSha256": "BDE40D5A58BD76C87508D8455980B772E81039CEC1DF3FF103369EC3478088F4",
+      "testsSha256": "1359E086A82640E7FF25BED250B8FAAB01F5D44F1ADE839693449D1D1822DE20",
       "current": {
+        "kind": "PURE_POWERSHELL_SYNTHETIC_GUARD_CHECKS_DISTINCT_FROM_PYTHON_UNITS",
+        "count": 93,
+        "passed": 93,
+        "failed": 0,
+        "pid": 31604,
+        "exitCode": 0,
+        "timedOut": false,
+        "maximumSeconds": 180,
+        "startUtc": "2026-10-17T04:08:27.7114772Z",
+        "endUtc": "2026-10-17T04:09:04.3568365Z",
+        "unchangedInputs": 38,
+        "invocation": ".local/reviews/E01-SLOW120-editor-guard/20261017T040827Z-4fe9b7f7/invocation.json",
+        "invocationSha256": "945928FF6B05E36A1764F3739C6681FD791333ED89C33B0A1E2B9F32718A9DE0",
+        "result": ".local/tests/e01-wire-binding-20261017T040827Z-4fe9b7f7/guard-unit-result.json",
+        "resultSha256": "94693648915B7E30B503ADDDF73177CD53F3015A7A90342211CA264C228FC0F2",
+        "stdoutSha256": "BE62DBE7563EAF0A8ABEB14FD44A2A67AC6EA9009BAF903B2B6814E43AECF996",
+        "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      },
+      "interim": {
+        "count": 59,
+        "passed": 59,
+        "invocation": ".local/reviews/E01-SLOW120-editor-guard/20261017T034410Z-79f4f0d3/invocation.json",
+        "invocationSha256": "53142FFDDB47E8052ED992AF87C6E3A92F335290A9442263FDE4B12DAC75A4CD",
+        "resultSha256": "39767523F8461F953A4F9C257C38C3595C628821DD64F4667617F52463391FCB",
+        "limitation": "Interim getter error/absence ambiguity subsequently repaired; superseded source evidence"
+      },
+      "affectedSourceReview": "PENDING",
+      "freshFullChain": "NOT_RUN",
+      "subsequentSourceAssessment": {
+        "role": "AFFECTED_SOURCE_CODE_GATE",
+        "base": "c2614b2484a66bd8465b855e59b184d49b2b926d",
+        "head": "d910672a568ab0223328d75bda6790fd5a0cce9b",
+        "sessionId": "01a147fb-c63b-7ca0-aa71-709e80658e82",
+        "completedUtc": "2026-10-17T03:54:00.4660326Z",
+        "report": "docs/plans/research/2026-10-17-e01-slow120-code-review-r9.md",
+        "sha256": "B4BC3B2A6C3E62313DFF26627FFBA5204E89EC4851C05D237FD61DE4701B128E",
+        "exitCode": 0,
+        "commandCount": 19,
+        "runtimeEvidenceSha256": "11AD3CC8BC64BFD6CABC3E691A2CFBA031B2471FB504364A7E6EC7CA33FE596E",
+        "commandManifestSha256": "8801A16813488E4B18744A4843D8252171D29AC00D815802AF0E8E2ADF3B9268",
+        "artifactManifestSha256": "CA257C0A3EDE2393FEEBF71D97AF21226DD505D27C29DA618ACE55E318E8B19F",
+        "bodyExcludedFromInitialFinalReviewPackets": true
+      },
+      "earlier68": {
         "count": 68,
         "passed": 68,
         "pid": 36876,
@@ -936,16 +980,47 @@
         "stdoutSha256": "2831107D8184E5C72D9796600BD2B0CE4B002B6ABB68AF177C2F0B7077DE8C0D",
         "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
       },
-      "interim": {
-        "count": 59,
-        "passed": 59,
-        "invocation": ".local/reviews/E01-SLOW120-editor-guard/20261017T034410Z-79f4f0d3/invocation.json",
-        "invocationSha256": "53142FFDDB47E8052ED992AF87C6E3A92F335290A9442263FDE4B12DAC75A4CD",
-        "resultSha256": "39767523F8461F953A4F9C257C38C3595C628821DD64F4667617F52463391FCB",
-        "limitation": "Interim getter error/absence ambiguity subsequently repaired; superseded source evidence"
+      "failedExpandedRun": {
+        "count": 87,
+        "passed": 83,
+        "failed": 4,
+        "pid": 42232,
+        "exitCode": 1,
+        "startUtc": "2026-10-17T04:01:20.2668545Z",
+        "endUtc": "2026-10-17T04:01:57.7527070Z",
+        "unchangedInputs": 38,
+        "invocation": ".local/reviews/E01-SLOW120-editor-guard/20261017T040120Z-e19788e8/invocation.json",
+        "invocationSha256": "D199D8A5ECC1A520CD219C7C1D928BC4862057EB3DA237D4D14EF7BE6AC9BCFE",
+        "resultSha256": "6528117E600006751A4D5BA35C67CE2B45DB32F09B962B2252F35AC76781C542",
+        "wrapperSha256": "9102488F350A90ADB9CD90D926A3736170856FFB32DC0D359FAAD061C4897598",
+        "testsSha256": "034E2C24FC6EAEBAB25FDB5C8954BFD36970A339C03EF4BEA81241EFE458B649",
+        "scope": "Four simulated getter-fault controls failed; preserved verbatim. Explicit accessor-method boundary subsequently verified; no real Core/Unreal phase.",
+        "sourceSnapshot": "No complete failing-source snapshot claimed; exact source hashes and raw execution records retained."
       },
-      "affectedSourceReview": "PENDING",
-      "freshFullChain": "NOT_RUN"
+      "earlier87": {
+        "kind": "PURE_POWERSHELL_SYNTHETIC_GUARD_CHECKS_DISTINCT_FROM_PYTHON_UNITS",
+        "count": 87,
+        "passed": 87,
+        "failed": 0,
+        "pid": 28284,
+        "exitCode": 0,
+        "timedOut": false,
+        "maximumSeconds": 180,
+        "startUtc": "2026-10-17T04:03:22.0535655Z",
+        "endUtc": "2026-10-17T04:03:59.5670074Z",
+        "unchangedInputs": 38,
+        "invocation": ".local/reviews/E01-SLOW120-editor-guard/20261017T040321Z-b223144d/invocation.json",
+        "invocationSha256": "EF21CA9D522BE921EC69FE503FDBF4F95454CCA6E2A664B56AFEB672EF39C396",
+        "result": ".local/tests/e01-wire-binding-20261017T040321Z-b223144d/guard-unit-result.json",
+        "resultSha256": "B087EF71C1C51B06A30F3B3911E09046F5A9A906DB3B081506B5E0F33604987D",
+        "stdoutSha256": "596914345566549EA9344578E57E0FAEB7178628CC4DCFAD70B6290C68207A0E",
+        "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      },
+      "prior87SourceSnapshot": {
+        "path": ".local/reviews/E01-SLOW120-editor-guard/20261017T040321Z-b223144d-source-snapshot/manifest.json",
+        "sha256": "F783DA3FFAA50E17F3F67F8CC0225D36BE2161E28D71E0B65E06201CFDEA7F3A",
+        "verifiedCopies": 2
+      }
     }
   },
   "historicalExecution": {
@@ -1118,7 +1193,7 @@
     ],
     "initialPacketPolicy": "Clean normative criteria and factual execution evidence; exclude author notes, mixed peer history, prior reviewer bodies and schema1 archive body; include complete raw process selections.",
     "finalRoleLaunchReadiness": "BLOCKED_UNTIL_GUARD_REPAIR_AFFECTED_REVIEW_NEW_FULL_CHAIN_AND_FINAL_FACTUAL_FREEZE",
-    "nextWork": "Fresh affected source review of the maintained guard verified by68 pure controls, then a new normal full chain; preserve030835 raw results and unchanged criterion.",
+    "nextWork": "Fresh affected source review of current93 pure PowerShell controls and fixed wrapper, then a new normal full chain;030835 preservation evidence remains missing and unwaived.",
     "prospectiveRemediationPacket": {
       "revision": 7,
       "path": "docs/plans/research/2026-10-16-e01-boundary-packet.md",

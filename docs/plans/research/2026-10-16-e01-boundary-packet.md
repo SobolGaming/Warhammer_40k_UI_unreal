@@ -24,6 +24,15 @@ observed global path. Keep the existing authored Config and UBT guards, ABSLOG,
 nowrite, owned DDC and process limits. Preserve the primary phase failure and
 available after-observations if native execution fails.
 
+Retain credential-safe error type, inspection stage and specific secondary
+details for unavailable observations and failed after-observation providers or
+comparisons. A generic replacement alone is insufficient evidence. The adjacent
+owned-process caller must preserve its original timeout/read/phase error through
+termination, waiting and finalization faults, recording those secondary failures
+separately. Final process records must distinguish confirmed exit from unavailable
+exit evidence. Test the caller-level failure path with synthetic owned handles;
+do not start a real host, compiler or editor for these guard controls.
+
 Extend only the maintained pure PowerShell guard tests with synthetic unchanged,
 changed, appeared/disappeared, missing/duplicate and substituted-path controls.
 They must not mutate actual settings or invoke the phase dispatcher/Core/Unreal.

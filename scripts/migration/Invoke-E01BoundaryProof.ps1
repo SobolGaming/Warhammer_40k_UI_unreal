@@ -142,6 +142,29 @@ function Assert-SafeText([string] $Text) {
     }
 }
 
+function Get-SafeFailureEvidence([Management.Automation.ErrorRecord] $ErrorRecord, [string] $Stage) {
+    $exception = $ErrorRecord.Exception
+    $record = @{ stage = $Stage; type = $exception.GetType().FullName; details = $exception.Message; redaction = 'PASS' }
+    $causes = [Collections.Generic.List[object]]::new()
+    $inner = $exception.InnerException
+    for ($depth = 0; $null -ne $inner -and $depth -lt 8; $depth++) {
+        $causes.Add(@{ type = $inner.GetType().FullName; details = $inner.Message })
+        $inner = $inner.InnerException
+    }
+    $record.causes = @($causes)
+    $record.causesTruncated = $null -ne $inner
+    try { Assert-SafeText ($record | ConvertTo-Json -Depth 8 -Compress) }
+    catch {
+        # Retain no rejected value, message fragment or hash of secret material.
+        $safeStage = $Stage; $safeType = $exception.GetType().FullName
+        try { Assert-SafeText ($safeStage + "`n" + $safeType) }
+        catch { $safeStage = 'redacted-diagnostic'; $safeType = 'REDACTED' }
+        $record = @{ stage = $safeStage; type = $safeType
+            details = 'Credential scan rejected diagnostic details; original details were not retained.'; redaction = 'REJECTED_NOT_RETAINED' }
+    }
+    return $record
+}
+
 function Write-NewJson([string] $Path, $Value) {
     $absolute = Assert-ChildPath $Path $projectRoot
     $json = ($Value | ConvertTo-Json -Depth 80) + "`n"
@@ -186,15 +209,59 @@ function New-ChildEnvironment([hashtable] $Extra = @{}) {
     return $environment
 }
 
-function Stop-OwnedProcess($Process, [datetime] $StartedUtc) {
-    if (-not $Process.HasExited) {
-        $current = [Diagnostics.Process]::GetProcessById($Process.Id)
-        try {
-            if ($current.StartTime.ToUniversalTime().Ticks -ne $StartedUtc.Ticks) { throw 'Owned PID identity changed; refusing termination.' }
+function New-OwnedProcessHandle([Diagnostics.ProcessStartInfo] $StartInfo) {
+    $process = [Diagnostics.Process]::new()
+    $process.StartInfo = $StartInfo
+    return $process
+}
+
+function New-OwnedLogWriter([string] $Path) {
+    $writer = [IO.StreamWriter]::new($Path, $false, $utf8)
+    $writer.AutoFlush = $true
+    return $writer
+}
+
+function Get-OwnedProcessIdentity([int] $ProcessId) {
+    return [Diagnostics.Process]::GetProcessById($ProcessId)
+}
+
+function Add-OwnedProcessSecondaryFailure([Collections.IDictionary] $Record,
+    [Management.Automation.ErrorRecord] $ErrorRecord, [string] $Stage) {
+    $Record.secondaryErrors.Add((Get-SafeFailureEvidence $ErrorRecord $Stage))
+}
+
+function Stop-OwnedProcess($Process, [datetime] $StartedUtc, [Collections.IDictionary] $Record) {
+    $current = $null; $stopFailure = $null
+    try {
+        if (-not $Process.get_HasExited()) {
+            $processId = $Process.get_Id()
+            if ($processId -ne $Record.pid) {
+                $Record.terminationRefused = $true
+                $Record.terminationRefusalReason = 'Original process handle PID differs from the retained identity; no PID was terminated.'
+                throw 'Owned PID identity changed; refusing termination.'
+            }
+            $current = Get-OwnedProcessIdentity $processId
+            if ($current.get_StartTime().ToUniversalTime().Ticks -ne $StartedUtc.Ticks) {
+                $Record.terminationRefused = $true
+                $Record.terminationRefusalReason = 'PID/start-time identity check failed; no PID was terminated.'
+                throw 'Owned PID identity changed; refusing termination.'
+            }
             $Process.Kill($true)
             if (-not $Process.WaitForExit(10000)) { throw 'Owned process tree did not stop within ten seconds.' }
-        } finally { $current.Dispose() }
+        }
+        $Record.exitConfirmed = $true
+        $Record.exitedUtc = [datetime]::UtcNow.ToString('o')
+    } catch { $stopFailure = $_ }
+    finally {
+        if ($null -ne $current) {
+            try { $current.Dispose() }
+            catch {
+                Add-OwnedProcessSecondaryFailure $Record $_ 'cleanup-identity-handle-dispose'
+                if ($null -eq $stopFailure) { $stopFailure = $_ }
+            }
+        }
     }
+    if ($null -ne $stopFailure) { throw $stopFailure }
 }
 
 function Invoke-OwnedProcess([string] $Label, [string] $Executable, [string[]] $Arguments,
@@ -217,29 +284,41 @@ function Invoke-OwnedProcess([string] $Label, [string] $Executable, [string[]] $
     foreach ($argument in $Arguments) { $start.ArgumentList.Add($argument) }
     $start.Environment.Clear()
     foreach ($entry in (New-ChildEnvironment $ExtraEnvironment).GetEnumerator()) { $start.Environment[$entry.Key] = $entry.Value }
-    $process = [Diagnostics.Process]::new()
-    $process.StartInfo = $start
     $record = [ordered]@{ label = $Label; executable = $Executable; executableSha256 = Get-Hash $Executable
         arguments = $Arguments; workingDirectory = $WorkingDirectory; timeoutSeconds = $MaximumMilliseconds / 1000
-        pid = $null; startedUtc = $null; exitedUtc = $null; exitCode = $null; timedOut = $false
+        pid = $null; startedUtc = $null; exitedUtc = $null; endedUtc = $null; exitCode = $null; timedOut = $false
+        startAttempted = $false; startConfirmed = $false; exitConfirmed = $null; exitInspection = 'NOT_STARTED'
+        startIdentityComplete = $false; identityRecoveryAttempted = $false; identityRecoveredForCleanup = $false; terminationRefused = $false
+        cleanupStatus = 'NOT_STARTED'; stdoutClosed = $false; stderrClosed = $false; handleDisposed = $false
+        ownership = 'Original process handle; termination requires matching PID/start time'
+        secondaryErrors = [Collections.Generic.List[object]]::new()
         redaction = 'PENDING'; stdout = $stdoutPath; stderr = $stderrPath }
     $phaseResult.processes.Add($record)
-    $stdoutWriter = [IO.StreamWriter]::new($stdoutPath, $false, $utf8)
-    $stderrWriter = [IO.StreamWriter]::new($stderrPath, $false, $utf8)
-    $stdoutWriter.AutoFlush = $true; $stderrWriter.AutoFlush = $true
+    $process = $null; $stdoutWriter = $null; $stderrWriter = $null; $primaryError = $null; $capturedText = $null
     $captured = [Text.StringBuilder]::new()
     $watch = [Diagnostics.Stopwatch]::StartNew()
     $lastProgress = 0L
     $startedUtc = $null
     $logBytes = 0L
+    $processStage = 'create-process-handle'
     try {
+        $process = New-OwnedProcessHandle $start
+        $processStage = 'create-stdout-log'; $stdoutWriter = New-OwnedLogWriter $stdoutPath
+        $processStage = 'create-stderr-log'; $stderrWriter = New-OwnedLogWriter $stderrPath
+        $processStage = 'start-process'; $record.startAttempted = $true
         if (-not $process.Start()) { throw 'Child process did not start.' }
-        $startedUtc = $process.StartTime.ToUniversalTime()
-        $record.pid = $process.Id; $record.startedUtc = $startedUtc.ToString('o')
+        $record.startConfirmed = $true
+        $processStage = 'read-start-process-id'
+        $record.pid = $process.get_Id()
+        $processStage = 'read-start-process-time'
+        $startedUtc = $process.get_StartTime().ToUniversalTime()
+        $record.startedUtc = $startedUtc.ToString('o')
+        $record.startIdentityComplete = $true
+        $processStage = 'read-process-output'
         $outTask = $process.StandardOutput.ReadLineAsync()
         $errTask = $process.StandardError.ReadLineAsync()
         $outDone = $false; $errDone = $false
-        while (-not ($process.HasExited -and $outDone -and $errDone)) {
+        while (-not ($process.get_HasExited() -and $outDone -and $errDone)) {
             if ($watch.ElapsedMilliseconds -ge $MaximumMilliseconds) { $record.timedOut = $true; throw "Process deadline exceeded: $Label" }
             $drainedAny = $false
             foreach ($lane in @('out', 'err')) {
@@ -273,21 +352,85 @@ function Invoke-OwnedProcess([string] $Label, [string] $Executable, [string[]] $
             }
             if (-not $drainedAny) { Start-Sleep -Milliseconds 50 }
         }
+        $processStage = 'wait-process-exit'
         $process.WaitForExit()
-        $record.exitCode = $process.ExitCode
+        $record.exitConfirmed = $true; $record.exitedUtc = [datetime]::UtcNow.ToString('o')
+        $processStage = 'read-process-exit-code'
+        $record.exitCode = $process.get_ExitCode()
         $record.redaction = 'PASS'
-        if ($process.ExitCode -ne 0) { throw "Child process failed: $Label (exit $($process.ExitCode)); inspect its sanitized logs." }
-        return $captured.ToString().TrimEnd()
+        if ($record.exitCode -ne 0) { throw "Child process failed: $Label (exit $($record.exitCode)); inspect its sanitized logs." }
+        $capturedText = $captured.ToString().TrimEnd()
     } catch {
+        $primaryError = $_
+        $record.primaryFailure = Get-SafeFailureEvidence $primaryError $processStage
         $record.redaction = if ($_.Exception.Message -like 'Credential scan*') { 'REJECTED_QUARANTINED' } else { 'SCANNED_PARTIAL' }
-        if ($null -ne $startedUtc) { Stop-OwnedProcess $process $startedUtc }
-        throw
+        if ($record.startConfirmed -and $null -eq $startedUtc) {
+            # Start succeeded, but identity inspection did not. Recover only
+            # through this original handle; never substitute an unverified PID.
+            $record.identityRecoveryAttempted = $true
+            $record.identityRecoveryUtc = [datetime]::UtcNow.ToString('o')
+            try {
+                $cleanupId = $process.get_Id()
+                if ($null -ne $record.pid -and $cleanupId -ne $record.pid) { throw 'Original process handle PID changed during start-identity recovery.' }
+                $cleanupStartUtc = $process.get_StartTime().ToUniversalTime()
+                $record.pid = $cleanupId; $startedUtc = $cleanupStartUtc
+                $record.startedUtc = $startedUtc.ToString('o'); $record.startIdentityComplete = $true
+                $record.identityRecoveredForCleanup = $true
+            } catch {
+                Add-OwnedProcessSecondaryFailure $record $_ 'cleanup-recover-start-identity'
+                $record.terminationRefused = $true
+                $record.terminationRefusalReason = 'PID/start-time identity could not be established from the original handle; no PID was terminated.'
+            }
+        }
+        if ($null -ne $startedUtc) {
+            try { Stop-OwnedProcess $process $startedUtc $record }
+            catch { Add-OwnedProcessSecondaryFailure $record $_ 'cleanup-stop-process' }
+        }
     } finally {
-        $record.exitedUtc = [datetime]::UtcNow.ToString('o')
-        $stdoutWriter.Dispose(); $stderrWriter.Dispose()
-        if ($null -ne $startedUtc -and $process.HasExited) { $record.exitCode = $process.ExitCode }
-        $process.Dispose()
+        if ($null -ne $process -and $record.startConfirmed) {
+            try {
+                # Invoke getters as methods so PowerShell cannot turn a throwing
+                # property getter into a null value and conceal inspection loss.
+                $hasExited = $process.get_HasExited()
+                $record.exitInspection = if ($hasExited) { 'CONFIRMED_EXIT' } else { 'STILL_RUNNING' }
+                if ($hasExited) {
+                    $record.exitConfirmed = $true
+                    if ($null -eq $record.exitedUtc) { $record.exitedUtc = [datetime]::UtcNow.ToString('o') }
+                    try { $record.exitCode = $process.get_ExitCode() }
+                    catch { Add-OwnedProcessSecondaryFailure $record $_ 'finalize-exit-code'; if ($null -eq $primaryError) { $primaryError = $_ } }
+                }
+            } catch {
+                $record.exitInspection = 'UNAVAILABLE'
+                Add-OwnedProcessSecondaryFailure $record $_ 'finalize-exit-inspection'
+                if ($null -eq $primaryError) { $primaryError = $_ }
+            }
+        }
+        foreach ($lane in @('stdout', 'stderr')) {
+            $writer = if ($lane -eq 'stdout') { $stdoutWriter } else { $stderrWriter }
+            if ($null -ne $writer) {
+                try { $writer.Dispose(); $record[$lane + 'Closed'] = $true }
+                catch {
+                    Add-OwnedProcessSecondaryFailure $record $_ ('finalize-' + $lane + '-log')
+                    if ($null -eq $primaryError) { $primaryError = $_ }
+                }
+            }
+        }
+        if ($null -ne $process) {
+            try { $process.Dispose(); $record.handleDisposed = $true }
+            catch { Add-OwnedProcessSecondaryFailure $record $_ 'finalize-process-handle'; if ($null -eq $primaryError) { $primaryError = $_ } }
+        }
+        $record.cleanupStatus = if ($record.exitConfirmed -eq $true) {
+            if ($record.secondaryErrors.Count) { 'STOPPED_WITH_ERRORS' } else { 'STOPPED' }
+        } elseif ($record.terminationRefused) { 'REFUSED_UNVERIFIED_IDENTITY' }
+        elseif ($record.startAttempted) { 'EXIT_UNCONFIRMED' } else { 'NOT_STARTED' }
+        $record.endedUtc = [datetime]::UtcNow.ToString('o')
     }
+    if ($null -ne $primaryError) {
+        if (-not $record.Contains('primaryFailure')) { $record.primaryFailure = Get-SafeFailureEvidence $primaryError 'process-finalization' }
+        if ($record.redaction -eq 'PASS') { $record.redaction = 'SCANNED_PARTIAL' }
+        throw $primaryError
+    }
+    return $capturedText
 }
 
 function Invoke-Git([string] $Label, [string] $Root, [string[]] $Arguments) {
@@ -828,8 +971,15 @@ function Get-UBTSettings {
         # absent XML may live below Windows' OneDrive Documents cloud reparse
         # point. Existing XML still requires the full strict path/hash guard;
         # appearance after the build therefore fails the preservation check.
-        $exists = [IO.File]::Exists($path)
-        if ($exists) { Assert-NoReparsePoint $path }
+        $exists = $true
+        try { $attributes = Get-PreservationFileAttributes $path }
+        catch [IO.FileNotFoundException] { $exists = $false }
+        catch [IO.DirectoryNotFoundException] { $exists = $false }
+        if ($exists) {
+            if (($attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw 'Global UBT settings file is a reparse point.' }
+            if (($attributes -band [IO.FileAttributes]::Directory) -ne 0) { throw 'Global UBT settings path is a directory.' }
+            Assert-NoReparsePoint $path
+        }
         @{ path = $path; exists = $exists; sha256 = $(if ($exists) { Get-Hash $path } else { $null }) }
     })
 }
@@ -869,35 +1019,39 @@ function Get-EditorSettingsPaths {
         $phaseResult.toolchain.engineVersion.MajorVersion $phaseResult.toolchain.engineVersion.MinorVersion
 }
 
-function Get-EditorSettingsAttributes([string] $Path) {
+function Get-PreservationFileAttributes([string] $Path) {
     return [IO.File]::GetAttributes($Path)
 }
 
 function Get-EditorSettingsState {
     return @(foreach ($setting in Get-EditorSettingsPaths) {
         $record = @{ role = $setting.role; path = $setting.path; exists = $null; sha256 = $null; inspection = 'UNAVAILABLE' }
+        $inspectionStage = 'editor-attributes'
         try {
             # Absence below a cloud/reparse Documents ancestor is a read-only
             # observation. Only explicit not-found errors establish absence:
             # File.Exists also returns false for access/IO errors and is unsafe
             # for this preservation record. Hash/read races remain UNAVAILABLE.
             $knownAbsent = $false
-            try { $attributes = Get-EditorSettingsAttributes $setting.path }
+            try { $attributes = Get-PreservationFileAttributes $setting.path }
             catch [IO.FileNotFoundException] { $knownAbsent = $true }
             catch [IO.DirectoryNotFoundException] { $knownAbsent = $true }
             $record.exists = -not $knownAbsent
             if (-not $knownAbsent) {
                 # Check returned attributes directly: a broken link may not pass
                 # File.Exists, but available reparse metadata must be rejected.
+                $inspectionStage = 'editor-reparse-check'
                 if (($attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw 'Editor-settings file is a reparse point.' }
+                $inspectionStage = 'editor-file-kind-check'
                 if (($attributes -band [IO.FileAttributes]::Directory) -ne 0) { throw 'Expected an editor-settings file, not a directory.' }
+                $inspectionStage = 'editor-hash'
                 $record.sha256 = Get-Hash $setting.path
             }
             $record.inspection = 'PASS'
         } catch {
             # Retain all available observations even if one file cannot be read.
             # The assertion rejects UNAVAILABLE; this is not an absence fallback.
-            $record.diagnostic = 'Editor-settings path could not be safely inspected.'
+            $record.error = Get-SafeFailureEvidence $_ $inspectionStage
         }
         $record
     })
@@ -928,12 +1082,14 @@ function Assert-EditorSettingsState($Before, $After) {
 
 function Save-EditorSettingsFailureEvidence([Collections.IDictionary] $Result) {
     $Result.editorSettingsAfterFailureUtc = [datetime]::UtcNow.ToString('o')
+    $inspectionStage = 'editor-after-observation-provider'
     try {
         $Result.editorSettingsAfterFailure = Get-EditorSettingsState
+        $inspectionStage = 'editor-after-assertion'
         Assert-EditorSettingsState $Result.editorSettingsBefore $Result.editorSettingsAfterFailure
     } catch {
         # Do not replace the original build/automation/phase failure.
-        $Result.editorSettingsFailure = 'Editor-settings preservation changed or could not be established; inspect retained observations.'
+        $Result.editorSettingsFailure = Get-SafeFailureEvidence $_ $inspectionStage
     }
 }
 
@@ -1217,11 +1373,11 @@ try {
         catch { $phaseResult.siblingAfterFailureCheck = 'UNAVAILABLE; inspect preserved sanitized process logs' }
         if ($phaseResult.Contains('ubtSettingsBefore')) {
             try { $phaseResult.ubtSettingsAfterFailure = Get-UBTSettings; Assert-UBTSettings $phaseResult.ubtSettingsBefore $phaseResult.ubtSettingsAfterFailure }
-            catch { $phaseResult.ubtSettingsFailure = 'Global UBT guard changed or could not be inspected.' }
+            catch { $phaseResult.ubtSettingsFailure = Get-SafeFailureEvidence $_ 'ubt-after-failure-inspection' }
         }
         if ($phaseResult.Contains('configBefore')) {
             try { $phaseResult.configAfterFailure = Get-ConfigState; Assert-ConfigState $phaseResult.configBefore $phaseResult.configAfterFailure }
-            catch { $phaseResult.configFailure = 'Authored Config contents or directory/file set changed or could not be inspected.' }
+            catch { $phaseResult.configFailure = Get-SafeFailureEvidence $_ 'config-after-failure-inspection' }
         }
         if ($phaseResult.Contains('editorSettingsBefore')) { Save-EditorSettingsFailureEvidence $phaseResult }
     }

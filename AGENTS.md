@@ -46,16 +46,18 @@ and independent privacy review. Refuse any bytecode cache in the owned runtime.
 Fresh normal run `20261017T030835Z-0d4af4e2`, on source candidate
 `c2614b2484a66bd8465b855e59b184d49b2b926d`, passed 87 Python tests,
 14 Capture checks, 132 unique native Automation cases and two automated evidence
-checks. The 14 include source/runtime/schema checks alongside live HTTP checks;
-37 pure PowerShell guard checks are separate pre-execution evidence. Capture,
+checks. The 14 include source/runtime/schema checks alongside live HTTP checks.
+That run's 37 pure PowerShell guard checks are separate pre-execution evidence. Capture,
 independent auxiliary privacy inspection, exact-byte fixture promotion, Native
 and Audit completed in order. That run omitted the required current six-path
 editor-settings snapshots: its authored Config and UBT comparisons are recorded,
 but the editor-settings preservation criterion remains UNVERIFIED. Preserve the
-raw passing test results and this gap. Add the missing maintained guard, review
-the changed candidate and run a fresh full chain; do not substitute historical
+raw passing test results and this gap. Review the maintained guard candidate and
+run a fresh full chain; do not substitute historical
 snapshots or reconstruct a before observation. Final three-role acceptance is
 still pending.
+The later revision7 repair now passes 93 pure PowerShell controls; its fresh
+affected source review and new full normal phase chain remain required.
 Historical revision4 permits only its recorded Native/Audit supplement linked to
 the one pinned immutable historical Capture, with no new Core process or game
 submissions. Use its exact hashes and guards; do not invent a general resume path.
