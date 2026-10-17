@@ -1424,11 +1424,11 @@
           "sourceSnapshotCount": 37,
           "allSourceSnapshotsUnchanged": true,
           "result": {
-            "path": ".local/tests/e01-wire-binding-20261017T022936Z-f13a3145/guard-unit-result.json",
-            "sha256": "9d7b33cda03abaf5002739f1fb4c1f4e1f79790940201066678455ef1450eba7"
+            "path": ".local/tests/e01-wire-binding-20261017T024247Z-5be68abb/guard-unit-result.json",
+            "sha256": "9bd59775e7de11bdb650c77d0d3cc8c1af3ef3aeb0ca12071a89208a6a808d26"
           },
           "rawLog": {
-            "path": ".local/tests/e01-wire-binding-20261017T022936Z-f13a3145.raw.log",
+            "path": ".local/tests/e01-wire-binding-20261017T024247Z-5be68abb.raw.log",
             "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
           },
           "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
@@ -1474,48 +1474,67 @@
             "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
             "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
             "coreOrNativePhaseExecuted": false
+          },
+          {
+            "status": "PASS",
+            "executed": 19,
+            "passed": 19,
+            "failed": 0,
+            "sourceSnapshotCount": 37,
+            "allSourceSnapshotsUnchanged": true,
+            "result": {
+              "path": ".local/tests/e01-wire-binding-20261017T022936Z-f13a3145/guard-unit-result.json",
+              "sha256": "9d7b33cda03abaf5002739f1fb4c1f4e1f79790940201066678455ef1450eba7"
+            },
+            "rawLog": {
+              "path": ".local/tests/e01-wire-binding-20261017T022936Z-f13a3145.raw.log",
+              "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+            },
+            "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
+            "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+            "coreOrNativePhaseExecuted": false
           }
         ]
       },
       "revision6PythonUnits": {
         "status": "PASS",
-        "executed": 83,
-        "durationSeconds": 20.161,
+        "executed": 87,
+        "durationSeconds": 22.269,
         "exitCode": 0,
         "invocation": {
-          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/invocation.json",
-          "sha256": "222bb7f2fc5b84fa2ddbe62744eaa8fdb460812f097055b39a35b28c2e75493e"
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T024150Z-a4e080c9/invocation.json",
+          "sha256": "6ce806c2f69c27dd19ab9be79a45a98550df75d64df0201337589044f968e8dd"
         },
         "stdout": {
-          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/stdout.txt",
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T024150Z-a4e080c9/stdout.txt",
           "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         },
         "stderr": {
-          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/stderr.txt",
-          "sha256": "81745cae881883d044af5ca20d3ce69977feb22cee77198dafe0b11d22f22795"
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T024150Z-a4e080c9/stderr.txt",
+          "sha256": "03ea2e3b1892226b007fc2c817883d9aaa1e7240d232a41fad727c93ded933e1"
         },
         "sourceBefore": [
           {
-            "sha256": "F0590617E9E30B551B9F7DE58F1B5C22031A0A87ECABB31AFEF8B4A7A27C7B77",
+            "sha256": "853B241DE93139DB2C665C83ECC503A1F01F6B130F0FC0B78BAB48B83588DC71",
             "path": "scripts/migration/e01_boundary.py"
           },
           {
-            "sha256": "E778B29607B5FC05492D08A5A629E2D6B38D6F20A88B6190ABFA1C387B325EAF",
+            "sha256": "876DF3D105F7525922A2E1DECF80DEABA42607ABC631A6F0BD4C3A91EE7D33DD",
             "path": "tests/migration/test_e01_boundary.py"
           }
         ],
         "sourceAfter": [
           {
-            "sha256": "F0590617E9E30B551B9F7DE58F1B5C22031A0A87ECABB31AFEF8B4A7A27C7B77",
+            "sha256": "853B241DE93139DB2C665C83ECC503A1F01F6B130F0FC0B78BAB48B83588DC71",
             "path": "scripts/migration/e01_boundary.py"
           },
           {
-            "sha256": "E778B29607B5FC05492D08A5A629E2D6B38D6F20A88B6190ABFA1C387B325EAF",
+            "sha256": "876DF3D105F7525922A2E1DECF80DEABA42607ABC631A6F0BD4C3A91EE7D33DD",
             "path": "tests/migration/test_e01_boundary.py"
           }
         ],
         "sourceBeforeAfterMatched": true,
-        "scope": "Complete creation metadata with opaque session ID; owned cleanup/watchdog/log/process evidence; native-compatible depth and typed recursion; original UNKNOWN survives cleanup failure. Unit verification only",
+        "scope": "All attach-worker cleanup handle/log faults preserve primary UNKNOWN and final ledger; validated known receipts retained; descriptor hash bound in both creation lanes; restart primary failure preserved. Unit verification only",
         "coreCaptureBuildOrInstallExecuted": false,
         "independentSourceReviewPass": false
       },
@@ -1697,6 +1716,48 @@
           "scope": "Coherent envelope-bound receipts in every command guard, private validated receipt retained through damaged artifacts and supported HTTP422 parity; unit verification only",
           "coreCaptureBuildOrInstallExecuted": false,
           "independentSourceReviewPass": false
+        },
+        {
+          "status": "PASS",
+          "executed": 83,
+          "durationSeconds": 20.161,
+          "exitCode": 0,
+          "invocation": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/invocation.json",
+            "sha256": "222bb7f2fc5b84fa2ddbe62744eaa8fdb460812f097055b39a35b28c2e75493e"
+          },
+          "stdout": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/stderr.txt",
+            "sha256": "81745cae881883d044af5ca20d3ce69977feb22cee77198dafe0b11d22f22795"
+          },
+          "sourceBefore": [
+            {
+              "sha256": "F0590617E9E30B551B9F7DE58F1B5C22031A0A87ECABB31AFEF8B4A7A27C7B77",
+              "path": "scripts/migration/e01_boundary.py"
+            },
+            {
+              "sha256": "E778B29607B5FC05492D08A5A629E2D6B38D6F20A88B6190ABFA1C387B325EAF",
+              "path": "tests/migration/test_e01_boundary.py"
+            }
+          ],
+          "sourceAfter": [
+            {
+              "sha256": "F0590617E9E30B551B9F7DE58F1B5C22031A0A87ECABB31AFEF8B4A7A27C7B77",
+              "path": "scripts/migration/e01_boundary.py"
+            },
+            {
+              "sha256": "E778B29607B5FC05492D08A5A629E2D6B38D6F20A88B6190ABFA1C387B325EAF",
+              "path": "tests/migration/test_e01_boundary.py"
+            }
+          ],
+          "sourceBeforeAfterMatched": true,
+          "scope": "Complete creation metadata with opaque session ID; owned cleanup/watchdog/log/process evidence; native-compatible depth and typed recursion; original UNKNOWN survives cleanup failure. Unit verification only",
+          "coreCaptureBuildOrInstallExecuted": false,
+          "independentSourceReviewPass": false
         }
       ],
       "nativeClassifierRegression": {
@@ -1858,6 +1919,26 @@
           "P2 host cleanup/log/ledger survive marker-write failure",
           "P2 deep terminal parser recursion retains typed UNKNOWN and owned evidence"
         ]
+      },
+      {
+        "round": 6,
+        "role": "Independent code quality; pre-execution source gate",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r6.md",
+          "sha256": "f6e8c298303782d0c665652fb54541b53dfb0b5211af844cfd9c5fac7ee9a6a0"
+        },
+        "verdict": "CHANGES_REQUESTED",
+        "sessionId": "01a147b3-ca18-7310-9872-30199dc0b507",
+        "frozenHead": "db725a786329b01f174820dc1e94d538581db1cc",
+        "completedUtc": "2026-10-17T02:37:36.8225299Z",
+        "exitCode": 0,
+        "completedStaticCommands": 34,
+        "all174CandidateHashesUnchanged": true,
+        "coreOrNativeExecution": false,
+        "findings": [
+          "P2 worker cleanup faults retain primary UNKNOWN and finalized process ledger",
+          "P2 creation receipt ruleset descriptor hash matches retained request"
+        ]
       }
     ]
   },
@@ -1875,9 +1956,9 @@
     "Durable restart/recovery and real production role controls remain unproved",
     "Full E01/M01, G-RESEARCH and G-IMPLEMENT are not accepted",
     "Original Capture002136 has no actual attach-worker process record; its missing PID must not be invented",
-    "Changed revision6 source passes83 Python/19 simulated guard tests but still requires fresh blind source review and full current-source Core/native chain; no approval inferred"
+    "Changed revision6 source passes87 Python/19 simulated guard tests but still requires fresh blind source review and full current-source Core/native chain; no approval inferred"
   ],
-  "updatedUtc": "2026-10-17T02:30:59.416036+00:00",
+  "updatedUtc": "2026-10-17T02:44:06.349549+00:00",
   "preRemediationSnapshots": {
     "provenance": {
       "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0130137420423Z.json",
@@ -1964,6 +2045,11 @@
       "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-41e1f8d7c40a27c9a0d069cb62ce4fe155633d619656bac37e7183ec3ee3b59c.json",
       "sha256": "41e1f8d7c40a27c9a0d069cb62ce4fe155633d619656bac37e7183ec3ee3b59c",
       "reason": "Preserved72-unit factual record before round5 source review addendum"
+    },
+    {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-ee7165273a59f2c4bd0d1e47de6b6053f211caa97f3d4d3bd87d49d87e3737a5.json",
+      "sha256": "ee7165273a59f2c4bd0d1e47de6b6053f211caa97f3d4d3bd87d49d87e3737a5",
+      "reason": "Preserved83-unit factual record before round6 source review addendum"
     }
   ]
 }

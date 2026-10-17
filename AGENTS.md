@@ -67,8 +67,10 @@ the operation and identities to the retained submission in every command lane.
 Matching unusable paired replies still mean UNKNOWN. Preserve validated worker
 outcomes through missing, partially written or unreadable evidence artifacts;
 keep the evidence failure visible. Python/native error classification must agree.
-Validate complete pinned creation metadata before further commands. Owned host
-cleanup and process records must survive shutdown-marker errors. Unusable deeply
+Validate complete pinned creation metadata, including the submitted ruleset
+descriptor hash, before further commands. Owned host and worker cleanup must
+preserve primary UNKNOWN and finalize process records through cleanup errors.
+Host cleanup must survive shutdown-marker errors. Unusable deeply
 nested terminal JSON must retain typed UNKNOWN and the owned-process evidence.
 Keep a complete owned-process inventory including the attach worker. Normal
 Native/Audit must bind every promoted wire byte to the same run's successful

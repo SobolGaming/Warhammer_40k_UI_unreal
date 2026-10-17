@@ -54,9 +54,9 @@ revision6 requires guarded commands in every launch/attach lane, a complete work
 process record and native fixtures bound to the same fresh Capture. The separate
 round-2 source review found the attach/fixture gaps before a new Core run.
 Fresh review and a new full diagnostic chain remain required.
-The latest source review requires native viewer/event-range consistency, complete
-session-creation receipts, host cleanup even when its shutdown marker fails, and
-typed handling of deeply nested terminal JSON. Focused repairs precede the new chain.
+The latest source review requires worker cleanup failures to retain UNKNOWN and
+complete process records, and creation receipts to match the submitted ruleset
+descriptor hash. Focused repairs precede the new chain.
 Prior execution remains evidence for its recorded source. Full E01 is unaccepted.
 The manual installation alternatives below are not its executed commands. Unreal project creation/build is
 specified in [plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).

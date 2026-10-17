@@ -1397,6 +1397,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             "wrong_scope": lambda body: {**body, "visibility": {**body["visibility"], "role": "player", "player_id": "player-a"}},
             "wrong_admin_policy": lambda body: {**body, "visibility": {**body["visibility"], "may_submit_decision": True}},
             "wrong_ruleset": lambda body: {**body, "ruleset_id": {"different": "ruleset"}},
+            "wrong_descriptor_hash": lambda body: {**body, "ruleset_descriptor_hash": "f" * 64},
             "wrong_overlays": lambda body: {**body, "rules_overlay_ids": ["other-overlay"]},
             "wrong_catalog": lambda body: {**body, "catalog_id": "other-catalog"},
             "wrong_source_package": lambda body: {**body, "source_package_id": "other-package"},
@@ -1409,6 +1410,9 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                     config = canonical("examples/sessions/session-create.json")
                     config["config"]["game_id"] = "unit-retained-create-game"
                     body = mutate(self.created(config).body)
+                    if label == "wrong_descriptor_hash":
+                        schemas.validate("session-metadata.schema.json", body)
+                        self.assertNotEqual(body["ruleset_descriptor_hash"], config["config"]["ruleset_descriptor"]["descriptor_hash"])
                     local.request.return_value = http.request.return_value = boundary.Reply(201, boundary.json_bytes(body), 0, 0)
                     client = boundary.Pair(local, http, SimpleNamespace(report=report, schemas=schemas)) if paired else http
                     boundary.run_case_groups(report, (
@@ -1432,6 +1436,7 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
                 config = canonical("examples/sessions/session-create.json")
                 config["config"]["game_id"] = "unit-created-game"
                 reply = self.created(config, "opaque:unrelated-session-42")
+                self.assertEqual(reply.body["ruleset_descriptor_hash"], config["config"]["ruleset_descriptor"]["descriptor_hash"])
                 local.request.return_value = http.request.return_value = reply
                 client = boundary.Pair(local, http, SimpleNamespace(report=report, schemas=schemas)) if paired else http
                 result = boundary.create_session_attempt(client, config, report, schemas, "unit", paired=paired)
@@ -1885,8 +1890,151 @@ class LifecycleCommandSafetyTests(unittest.TestCase):
             child.terminate.assert_called_once()
             process = report.details["processes"][0]
             self.assertEqual(process["exitCode"], 1)
-            self.assertEqual(process["cleanup"], "owned-process-handle-finally-terminate")
+            self.assertEqual(process["cleanup"], "owned-process-handle-terminate")
             endpoint.request.assert_not_called()
+
+    def test_worker_cleanup_fault_matrix_preserves_primary_unknown_and_complete_ledger(self):
+        faults = ("poll", "terminate", "terminate_wait_oserror", "terminate_wait_timeout", "kill", "kill_wait_oserror", "kill_wait_timeout", "all_handles")
+        for initial in ("wait_error", "timeout"):
+            for fault in faults:
+                with self.subTest(initial=initial, fault=fault), tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    args, report, endpoint, child, later = self.args(root), boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+                    endpoint.base_url, child.pid, child.poll.return_value = args.attach_endpoint, 45680, None
+                    primary = OSError("private initial wait detail") if initial == "wait_error" else boundary.subprocess.TimeoutExpired("private initial timeout detail", 1800)
+                    second = boundary.subprocess.TimeoutExpired("private terminate wait detail", 10) if fault in ("terminate_wait_timeout", "kill", "kill_wait_oserror", "kill_wait_timeout") else OSError("private terminate wait detail")
+                    waits = [primary, 1] if fault in ("poll", "terminate") else [primary, second, 1]
+                    unconfirmed = fault in ("kill_wait_oserror", "kill_wait_timeout", "all_handles")
+                    if unconfirmed:
+                        waits[-1] = boundary.subprocess.TimeoutExpired("private kill wait detail", 10) if fault == "kill_wait_timeout" else OSError("private kill wait detail")
+                    child.wait.side_effect = waits
+                    if fault in ("poll", "all_handles"):
+                        child.poll.side_effect = OSError("private poll detail")
+                    if fault in ("terminate", "all_handles"):
+                        child.terminate.side_effect = OSError("private terminate detail")
+                    if fault in ("kill", "all_handles"):
+                        child.kill.side_effect = OSError("private kill detail")
+                    with patch.object(boundary.subprocess, "Popen", return_value=child) as spawn, \
+                         patch.object(boundary, "validate_worker_terminal") as validate:
+                        boundary.run_case_groups(report, (
+                            (("UNIT-WORKER",), lambda: boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())),
+                            (("UNIT-LATER",), later),
+                        ))
+                    self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
+                    self.assertEqual(report.details["sessionAbandonment"]["causeType"], type(primary).__name__)
+                    self.assertEqual(len(report.details["processes"]), 1)
+                    process = report.details["processes"][0]
+                    self.assertEqual(process["completionOutcome"], "UNKNOWN")
+                    self.assertEqual(process["primaryFailure"], {"exceptionType": "CompletionUnknown", "causeType": type(primary).__name__})
+                    self.assertEqual(process["ownership"], "Original Popen process handle only")
+                    self.assertIn("endedUTC", process)
+                    self.assertIs(process["timedOut"], initial == "timeout")
+                    self.assertIs(process["exitConfirmed"], not unconfirmed)
+                    self.assertEqual(process["exitCode"], None if unconfirmed else 1)
+                    self.assertEqual("exitUTC" in process, not unconfirmed)
+                    self.assertEqual(process["cleanupStatus"], "EXIT_UNCONFIRMED" if unconfirmed else "STOPPED_WITH_ERRORS")
+                    self.assertTrue(process["cleanupErrors"])
+                    self.assertTrue(process["logClosed"])
+                    self.assertTrue(spawn.call_args.kwargs["stdout"].closed)
+                    self.assertEqual(child.wait.call_args_list, [call(timeout=1800)] + [call(timeout=10)] * (len(waits) - 1))
+                    child.terminate.assert_called_once()
+                    self.assertEqual(child.kill.call_count, int(fault not in ("poll", "terminate")))
+                    validate.assert_not_called()
+                    endpoint.request.assert_not_called()
+                    later.assert_not_called()
+                    self.assertNotIn(b"private", boundary.json_bytes(report.payload()))
+
+    def test_worker_log_close_failure_preserves_validated_known_terminal(self):
+        for status in ("ACCEPTED", "REJECTED"):
+            with self.subTest(status=status), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                args, code, result = self.terminal_fixture(root, status)
+                report, endpoint, child, later = boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+                endpoint.base_url, child.pid, child.wait.return_value = args.attach_endpoint, 45681, code
+                original_open, owned_log = Path.open, []
+
+                def open_or_fail_close(path, *args, **kwargs):
+                    stream = original_open(path, *args, **kwargs)
+                    if path == root / "attach-worker.log":
+                        wrapped = MagicMock(wraps=stream)
+                        attempts = []
+
+                        def close():
+                            attempts.append(True)
+                            if len(attempts) == 1:
+                                raise OSError("private log close detail")
+                            stream.close()
+
+                        wrapped.close.side_effect = close
+                        owned_log.append(stream)
+                        return wrapped
+                    return stream
+
+                with patch.object(boundary.subprocess, "Popen", return_value=child), patch.object(Path, "open", new=open_or_fail_close):
+                    boundary.run_case_groups(report, (
+                        (("UNIT-WORKER",), lambda: boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())),
+                        (("UNIT-LATER",), later),
+                    ))
+                process = report.details["processes"][0]
+                self.assertEqual(process["terminalResult"]["validation"], "PASS")
+                self.assertEqual(process["terminalResult"]["knownCompletion"]["commandCompletion"], "RECEIVED")
+                self.assertIs(process["terminalResult"]["knownCompletion"]["accepted"], result["accepted"])
+                self.assertIs(process["terminalResult"]["knownCompletion"]["committed"], result["committed"])
+                self.assertEqual(process["cleanupStatus"], "STOPPED_WITH_ERRORS")
+                self.assertTrue(process["exitConfirmed"])
+                self.assertTrue(owned_log[0].closed)
+                self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "NOT_ASSERTED")
+                self.assertNotIn(b"private log close detail", boundary.json_bytes(report.payload()))
+                child.poll.assert_not_called()
+                child.terminate.assert_not_called()
+                child.kill.assert_not_called()
+                endpoint.request.assert_not_called()
+                later.assert_not_called()
+
+    def test_worker_prelaunch_failure_keeps_finalized_no_child_record(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, report, endpoint = self.args(root), boundary.Report("capture", root), MagicMock()
+            endpoint.base_url = args.attach_endpoint
+            with patch.object(boundary.subprocess, "Popen", side_effect=OSError("Unit owned worker not created")) as spawn:
+                with self.assertRaises(OSError):
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session, MagicMock())
+            process = report.details["processes"][0]
+            self.assertEqual(process["ownership"], "No child created")
+            self.assertEqual(process["cleanupStatus"], "NOT_STARTED")
+            self.assertIsNone(process["exitCode"])
+            self.assertFalse(process["exitConfirmed"])
+            self.assertIn("endedUTC", process)
+            self.assertNotIn("exitUTC", process)
+            self.assertNotIn("completionOutcome", process)
+            self.assertTrue(spawn.call_args.kwargs["stdout"].closed)
+            endpoint.request.assert_not_called()
+
+    def test_lifetime_restart_cleanup_preserves_earlier_failure(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, report, endpoint, host, restart = self.args(root), boundary.Report("capture", root), MagicMock(), MagicMock(), MagicMock()
+            config = canonical("examples/sessions/session-create.json")
+            main_metadata = boundary.Reply(200, boundary.json_bytes({"session_id": "main", "session_revision": 1, "projection_state_hash": "a" * 64}), 0, 0)
+            endpoint.request.side_effect = [main_metadata, main_metadata, main_metadata, main_metadata]
+            host.process.poll.return_value, host.port = None, 12345
+            primary = boundary.Blocked("Unit original restart readiness failure")
+            restart.start.side_effect = primary
+            restart.stop.side_effect = boundary.BoundaryError("private restart cleanup failure")
+            start, closed = self.accepted("e01-attach-start", args.attach_session, "start_session"), self.accepted("e01-attach-close", args.attach_session, "close_session")
+            supervisor = MagicMock()
+            supervisor.submit.side_effect = [start, closed]
+            with patch.object(boundary, "Schemas"), patch.object(boundary, "create_session_attempt", return_value=self.created(config, args.attach_session)), \
+                 patch.object(boundary, "HttpCommandLane", return_value=supervisor), patch.object(boundary, "run_attach_worker", return_value={}), \
+                 patch.object(boundary, "require_available_loopback_port", side_effect=boundary.PortUnavailable("Unit occupied port")), \
+                 patch.object(boundary, "OwnedHost", return_value=restart):
+                with self.assertRaises(boundary.Blocked) as observed:
+                    boundary.lifetime_cases(args, report, host, endpoint, {}, "main", config)
+            self.assertIs(observed.exception, primary)
+            self.assertEqual(report.details["restartCleanupFailures"], [{"exceptionType": "BoundaryError", "causeType": None}])
+            self.assertNotIn(b"private restart cleanup failure", boundary.json_bytes(report.payload()))
+            restart.stop.assert_called_once()
+            self.assertEqual(supervisor.submit.call_count, 2)
 
     def test_lifetime_worker_unknown_stops_before_close_restart_or_further_reads(self):
         with tempfile.TemporaryDirectory() as temporary:

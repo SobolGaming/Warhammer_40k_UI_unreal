@@ -677,3 +677,24 @@ command manifest74440440AEAF9E527BEF6B88CB8B2C8863C2DFA229C97BED198A64BDCAEE0FC0
 artifact manifest1F7903E3423B5F48F041BF6A692781C19E62052C880BBC5883CE00855190BCC1.
 The repairs stay within revision6; no Core phase, native build or acceptance
 is credited. This coordinator entry does not supply an independent verdict.
+
+## OWN15 round-6 pre-execution source review
+
+Fresh exec01a147b3-ca18-7310-9872-30199dc0b507 assessed cleandb725a786329b01f174820dc1e94d538581db1cc.
+The [byte-exact report](2026-10-17-e01-slow120-code-review-r6.md), SHA256
+F6E8C298303782D0C665652FB54541B53DFB0B5211AF844CFD9C5FAC7EE9A6A0,
+is CHANGES_REQUESTED for two P2s: worker poll/terminate/kill/wait cleanup faults
+can mask primary UNKNOWN and skip final ledger fields; creation metadata must bind
+ruleset_descriptor_hash to the actual retained descriptor_hash. Static findings,
+no reproductions executed. The CLI completed2026-10-17T02:37:36.8225299Z exit0,
+34 read-only commands; all174 hashes and clean tree unchanged. It inspected83/19
+source-bound raw results, not Core/native execution. Python syntax launch remained
+sandbox denied; no bypass. No peer/author-history contamination occurred.
+
+Separate runtime evidence records actualgpt-6.1-sol/ultra, read-only/never and
+memory_mode disabled; lower-level memory internals remain unverified. Original
+personal observability limits remain untouched. Ignored code-c6-20261017T023155Z-a8abae89
+retains runtime13E6CB0B3D437F837955FFFD8949D2C5E0281667B588EA1649867EC72C56BB82,
+command manifest66311AD69DA8C1B97AD12E2356A8F9D6B20644FB159C955D79CD34C23703CEC5,
+artifact manifest19B128E2BF99FE43B4F1734AF057CDE60050D5D806460FE706513A6BA2295CA8.
+No additional Core/build/native phase or acceptance is credited by this entry.

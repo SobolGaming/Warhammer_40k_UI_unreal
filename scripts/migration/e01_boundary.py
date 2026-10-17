@@ -839,7 +839,7 @@ def create_session_attempt(client, config: dict, report: Report, schemas: Schema
                 require(int_field(metadata, "session_revision") == 0 and metadata.get("session_state") == "created" and metadata.get("terminal_reason") is None, "Created session is not the initial revision/state")
                 require(object_field(metadata, "visibility") == {"role": "administrator", "player_id": None, "delay_revisions": 0, "may_mutate_lifecycle": True, "may_submit_decision": False, "omniscient": True}, "Created session administrator scope differs")
                 descriptor, catalog = object_field(submitted, "ruleset_descriptor"), object_field(submitted, "army_catalog")
-                require(metadata.get("ruleset_id") == descriptor.get("ruleset_id") and metadata.get("rules_overlay_ids") == descriptor.get("rules_overlay_ids") and metadata.get("catalog_id") == string_field(catalog, "catalog_id") and metadata.get("source_package_id") == string_field(catalog, "source_package_id"), "Created session rules/catalog identities differ from its submitted config")
+                require(metadata.get("ruleset_id") == descriptor.get("ruleset_id") and metadata.get("ruleset_descriptor_hash") == string_field(descriptor, "descriptor_hash") and metadata.get("rules_overlay_ids") == descriptor.get("rules_overlay_ids") and metadata.get("catalog_id") == string_field(catalog, "catalog_id") and metadata.get("source_package_id") == string_field(catalog, "source_package_id"), "Created session rules/catalog identities differ from its submitted config")
             else:
                 require(classify(received.status, received.body) == "error", "Session create response is not a recognized receipt")
                 schemas.validate("error-envelope.schema.json", received.body)
@@ -1525,42 +1525,94 @@ def run_attach_worker(args: argparse.Namespace, report: Report, http: Endpoint, 
     command = [sys.executable, "-I", "-B", str(script), "capture", "--core-root", str(args.core_root), "--fixture-root", str(args.fixture_root), "--output-root", str(args.output_root), "--report-file", str(result_file), "--attach-worker", "--attach-endpoint", http.base_url, "--attach-session", session, "--attach-role", "playerA"]
     record = {"owner": "attach-worker", "executable": sys.executable, "executableSHA256": sha256(Path(sys.executable).read_bytes()), "script": str(script), "scriptSHA256": sha256(script.read_bytes()), "command": command, "workingDirectory": str(args.output_root), "logPath": str(log_file), "maximumSeconds": MAX_SECONDS, "readiness": "NOT_APPLICABLE: finite scoped worker, not a host", "pid": None, "exitCode": None, "timedOut": False, "cleanup": "NOT_STARTED", "startUTC": datetime.now(UTC).isoformat()}
     report.details.setdefault("processes", []).append(record)
-    child, code = None, None
+    child, code, log, primary_failure = None, None, None, None
+    cleanup_errors = []
+
+    def failed(stage: str, exc: Exception) -> None:
+        cleanup_errors.append(exc)
+        errno, winerror = getattr(exc, "errno", None), getattr(exc, "winerror", None)
+        record.setdefault("cleanupErrors", []).append({"stage": stage, "exceptionType": type(exc).__name__, "errno": errno if type(errno) is int else None, "winerror": winerror if type(winerror) is int else None})
+
+    def poll_owned():
+        try:
+            observed = child.poll()
+            require(observed is None or type(observed) is int, "Owned worker poll returned no usable exit code")
+            return observed
+        except Exception as exc:
+            failed("poll-owned-worker", exc)
+            return None
+
+    def wait_owned(stage: str) -> None:
+        nonlocal code
+        try:
+            observed = child.wait(timeout=10)
+            require(type(observed) is int, "Owned worker wait returned no usable exit code")
+            code = observed
+        except Exception as exc:
+            failed(stage, exc)
+
     try:
-        with log_file.open("xb") as log:
-            child = subprocess.Popen(command, cwd=args.output_root, env=child_environment(), stdout=log, stderr=subprocess.STDOUT, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
-            record.update({"pid": child.pid, "cleanup": "owned-process-handle"})
-            try:
-                code = child.wait(timeout=MAX_SECONDS)
-                record["cleanup"] = "normal-exit"
-            except subprocess.TimeoutExpired as exc:
-                record.update({"timedOut": True, "cleanup": "owned-process-handle-terminate"})
-                child.terminate()
-                try:
-                    code = child.wait(timeout=10)
-                except subprocess.TimeoutExpired:
-                    record["cleanup"] = "owned-process-handle-kill"
-                    child.kill()
-                    code = child.wait(timeout=10)
-                raise CompletionUnknown("Attach worker command completion UNKNOWN after owned worker timeout; no further submissions") from exc
-            except OSError as exc:
-                raise CompletionUnknown("Attach worker command completion UNKNOWN after process wait failure; no further submissions") from exc
+        log = log_file.open("xb")
+        child = subprocess.Popen(command, cwd=args.output_root, env=child_environment(), stdout=log, stderr=subprocess.STDOUT, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        record.update({"pid": child.pid, "cleanup": "owned-process-handle"})
+        try:
+            code = child.wait(timeout=MAX_SECONDS)
+            require(type(code) is int, "Owned worker wait returned no usable exit code")
+            record["cleanup"] = "normal-exit"
+        except subprocess.TimeoutExpired as exc:
+            record["timedOut"] = True
+            raise CompletionUnknown("Attach worker command completion UNKNOWN after owned worker timeout; no further submissions") from exc
+        except Exception as exc:
+            raise CompletionUnknown("Attach worker command completion UNKNOWN after process wait failure; no further submissions") from exc
+    except BaseException as exc:
+        primary_failure = exc
+        raise
     finally:
-        if child is not None and code is None and child.poll() is None:
-            # An unexpected wait failure must not leave this owned child alive.
-            record["cleanup"] = "owned-process-handle-finally-terminate"
-            child.terminate()
-            try:
-                code = child.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                record["cleanup"] = "owned-process-handle-finally-kill"
-                child.kill()
-                code = child.wait(timeout=10)
-        record["exitCode"] = code if code is not None else None if child is None else child.poll()
-        record["exitUTC"] = datetime.now(UTC).isoformat()
+        # Cleanup is independent of the original submission disposition. Every
+        # handle operation can fail; retain UNKNOWN and attempt the next bounded
+        # fallback through this exact Popen handle without replacing that cause.
+        if child is not None and type(code) is not int:
+            code = poll_owned()
+            if code is None:
+                record["cleanup"] = "owned-process-handle-terminate"
+                try:
+                    child.terminate()
+                except Exception as exc:
+                    failed("terminate-owned-worker", exc)
+                wait_owned("wait-owned-worker-terminate")
+                if code is None:
+                    code = poll_owned()
+                if code is None:
+                    record["cleanup"] = "owned-process-handle-kill"
+                    try:
+                        child.kill()
+                    except Exception as exc:
+                        failed("kill-owned-worker", exc)
+                    wait_owned("wait-owned-worker-kill")
+        if log is not None:
+            record["logClosed"] = False
+            for _ in range(2):
+                try:
+                    log.close()
+                    record["logClosed"] = True
+                    break
+                except Exception as exc:
+                    failed("close-owned-worker-log", exc)
+        if child is not None and code is None:
+            code = poll_owned()
+        record.update({"exitCode": code, "exitConfirmed": type(code) is int, "endedUTC": datetime.now(UTC).isoformat(), "ownership": "Original Popen process handle only" if child is not None else "No child created", "cleanupStatus": "NOT_STARTED" if child is None else "EXIT_UNCONFIRMED" if code is None else "STOPPED_WITH_ERRORS" if cleanup_errors else "STOPPED"})
+        if type(code) is int:
+            record["exitUTC"] = record["endedUTC"]
+        if isinstance(primary_failure, CompletionUnknown):
+            record["completionOutcome"] = "UNKNOWN"
+            record["primaryFailure"] = {"exceptionType": type(primary_failure).__name__, "causeType": None if primary_failure.__cause__ is None else type(primary_failure.__cause__).__name__}
+    if not record["exitConfirmed"]:
+        raise CompletionUnknown("Attach worker command completion UNKNOWN; owned worker exit unconfirmed; no further submissions")
     result = validate_worker_terminal(args, report, session, code, record, schemas)
     if result["status"] == "UNKNOWN":
         raise CompletionUnknown("Attach worker command completion UNKNOWN; session abandoned without further submissions")
+    if cleanup_errors:
+        raise BoundaryError("Attach worker known terminal retained; owned worker cleanup failed; no further submissions") from cleanup_errors[0]
     require(code == 0 and result["status"] == "ACCEPTED" and result.get("accepted") is True and result.get("commandCompletion") == "RECEIVED", "Attach worker did not complete an accepted action; inspect typed terminal result")
     # The complete receipt remains private and hash-bound; the public case
     # summary carries only typed terminal metadata and artifact descriptors.
@@ -1599,13 +1651,22 @@ def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, ht
     require(classify(closed.status, closed.body) == "accepted", "Supervisor attach session close failed")
     host.stop()
     restart = OwnedHost(args, report, tokens, "managed-restart")
+    restart_failure = None
     try:
         endpoint = restart.start()
         lost = endpoint.request("GET", f"/sessions/{main_session}", "playerA")
         assert_error(lost, 404)
         report.case("LIFETIME-01", "PASS", "Client busy-port rejection before host launch, scoped attach disconnect, managed stop, explicit restart SessionLost", {"attach": worker_result, "clientBusyPortCheck": busy_check, "restart": "SessionLost", "oldSessionRecreated": False, "ownership": "Original Popen process handles only; shutdown markers unique", "lateCoBindProtection": "NOT_PROVEN: prelaunch probe closes before Core binds; Windows development-host exclusivity limitation remains external"})
+    except BaseException as exc:
+        restart_failure = exc
+        raise
     finally:
-        restart.stop()
+        try:
+            restart.stop()
+        except Exception as exc:
+            report.details.setdefault("restartCleanupFailures", []).append({"exceptionType": type(exc).__name__, "causeType": None if exc.__cause__ is None else type(exc.__cause__).__name__})
+            if restart_failure is None:
+                raise
 
 
 def run_case_groups(report: Report, groups: tuple) -> None:
