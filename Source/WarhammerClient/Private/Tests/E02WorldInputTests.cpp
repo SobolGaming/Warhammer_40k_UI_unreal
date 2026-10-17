@@ -428,6 +428,68 @@ private:
         Check(FInputPolicy::CoreTransportCreations() == 0 && FInputPolicy::GameCommands() == 0 && FInputPolicy::AcceptedResults() == 0,
             TEXT("Each isolated camera gesture has zero transport/game-command/accepted-result counters"));
     }
+    void AddUnboundChordProbe(const FString& ExpectedChord, FKey Key, TArray<FKey> Modifiers)
+    {
+        Wait(TEXT("actual camera settles before ") + ExpectedChord, [this]()
+        {
+            const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+            return ActualViewMatches(Camera->GetNumberField(TEXT("azimuthDegrees")), Camera->GetNumberField(TEXT("elevationDegrees")));
+        });
+        Do(TEXT("fresh unchanged-state baseline for ") + ExpectedChord, [this]()
+        {
+            ChordBefore = World->Snapshot();
+            Check(!ChordBefore->GetBoolField(TEXT("textEditing")) && !ChordBefore->GetBoolField(TEXT("modalOpen")) &&
+                !ChordBefore->GetBoolField(TEXT("captured")), TEXT("Chord regression is outside text/modal/capture owners"));
+        });
+        Input(TEXT("real Driver unbound chord ") + ExpectedChord, [Key, Modifiers](IAsyncActionSequence& S)
+        {
+            for (FKey Modifier : Modifiers) { S.Press(Modifier); }
+            S.Type(Key);
+            for (int32 I = Modifiers.Num() - 1; I >= 0; --I) { S.Release(Modifiers[I]); }
+        });
+        Do(TEXT("exact modifiers and no effect for ") + ExpectedChord, [this, ExpectedChord, Key, Modifiers]()
+        {
+            const auto After = World->Snapshot();
+            const auto Event = After->GetObjectField(TEXT("lastKeyEvent"));
+            const bool bControl = Modifiers.Contains(EKeys::LeftControl) || Modifiers.Contains(EKeys::RightControl);
+            const bool bAlt = Modifiers.Contains(EKeys::LeftAlt) || Modifiers.Contains(EKeys::RightAlt);
+            const bool bShift = Modifiers.Contains(EKeys::LeftShift) || Modifiers.Contains(EKeys::RightShift);
+            const bool bCommand = Modifiers.Contains(EKeys::LeftCommand) || Modifiers.Contains(EKeys::RightCommand);
+            Check(Event->GetStringField(TEXT("key")) == Key.ToString() && Event->GetStringField(TEXT("normalizedChord")) == ExpectedChord &&
+                Event->GetBoolField(TEXT("controlDown")) == bControl && Event->GetBoolField(TEXT("altDown")) == bAlt &&
+                Event->GetBoolField(TEXT("shiftDown")) == bShift && Event->GetBoolField(TEXT("commandDown")) == bCommand &&
+                Event->GetStringField(TEXT("matchedBinding")).IsEmpty() &&
+                Event->GetNumberField(TEXT("eventSequence")) > ChordBefore->GetNumberField(TEXT("eventCount")) &&
+                Event->GetNumberField(TEXT("eventSequence")) <= After->GetNumberField(TEXT("eventCount")),
+                TEXT("Actual Slate key event retained this unbound key/modifier chord with fresh provenance"));
+            const auto BeforeCamera = ChordBefore->GetObjectField(TEXT("camera"));
+            const auto AfterCamera = After->GetObjectField(TEXT("camera"));
+            for (const TCHAR* Field : {TEXT("targetDomainInches"), TEXT("positionWorldCm"), TEXT("rotationDegrees")})
+            {
+                Check(JsonVector3(AfterCamera, Field).Equals(JsonVector3(BeforeCamera, Field), 1e-9),
+                    ExpectedChord + TEXT(" preserves camera ") + Field);
+            }
+            for (const TCHAR* Field : {TEXT("azimuthDegrees"), TEXT("elevationDegrees"), TEXT("distanceCm"), TEXT("frameGeneration")})
+            {
+                Check(AfterCamera->GetNumberField(Field) == BeforeCamera->GetNumberField(Field),
+                    ExpectedChord + TEXT(" preserves camera ") + Field);
+            }
+            for (const TCHAR* Field : {TEXT("review"), TEXT("localIntent"), TEXT("owner"), TEXT("visibleStatus"), TEXT("editedText")})
+            {
+                Check(After->GetStringField(Field) == ChordBefore->GetStringField(Field), ExpectedChord + TEXT(" preserves ") + Field);
+            }
+            for (const TCHAR* Field : {TEXT("textEditing"), TEXT("modalOpen"), TEXT("captured")})
+            {
+                Check(After->GetBoolField(Field) == ChordBefore->GetBoolField(Field), ExpectedChord + TEXT(" preserves ") + Field);
+            }
+            for (const TCHAR* Field : {TEXT("confirmAttempts"), TEXT("hudActivationCount"), TEXT("worldPickCount"), TEXT("cameraMutationCount"),
+                TEXT("cancelGeneration"), TEXT("captureGeneration"), TEXT("focusGeneration"), TEXT("coreTransportCreations"), TEXT("gameCommands"), TEXT("acceptedResults")})
+            {
+                Check(After->GetNumberField(Field) == ChordBefore->GetNumberField(Field), ExpectedChord + TEXT(" preserves counter ") + Field);
+            }
+            AssertIntent();
+        });
+    }
     void AddPanDollyProbe()
     {
         Wait(TEXT("initial actual camera cache settles before isolated gestures"), [this]()
@@ -619,8 +681,31 @@ private:
             Do(TEXT("five real scene identities and rays"), [this]()
             {
                 Check(World->GetFixture().Models.Num() == 5, TEXT("Five immutable fixture models"));
+                const auto Culling = World->Snapshot()->GetArrayField(TEXT("actualDisplayCulling"));
+                Check(Culling.Num() == 5, TEXT("Five actual procedural components expose culling observations"));
+                TSet<FString> ObservedIds;
+                for (const auto& Value : Culling)
+                {
+                    const auto Component = Value->AsObject();
+                    const FString Id = Component->GetStringField(TEXT("id"));
+                    Check(!ObservedIds.Contains(Id), TEXT("Actual culling component identity is unique: ") + Id); ObservedIds.Add(Id);
+                    const double Determinant = Component->GetNumberField(TEXT("componentTransformDeterminant"));
+                    Check(Component->GetBoolField(TEXT("visible")) && FMath::IsFinite(Determinant) &&
+                        Determinant > 0 && FMath::Abs(Determinant - 1.0) <= 1e-12,
+                        TEXT("Actual visible component has unit positive determinant; negative scale cannot mask winding"));
+                    const auto Sections = Component->GetArrayField(TEXT("sections"));
+                    Check(Sections.Num() == 4, TEXT("Four actual procedural material sections observed"));
+                    for (const auto& SectionValue : Sections)
+                    {
+                        const auto Section = SectionValue->AsObject();
+                        if (!Check(Section->GetBoolField(TEXT("materialPresent")), TEXT("Actual section material required; RequiredMaterialMissing is failure"))) { return; }
+                        Check(!Section->GetBoolField(TEXT("materialIsTwoSided")) && Section->GetBoolField(TEXT("materialOpaque")),
+                            TEXT("Actual UMaterialInterface is opaque and single-sided; material cannot mask winding"));
+                    }
+                }
                 for (const auto& M : World->GetFixture().Models)
                 {
+                    Check(ObservedIds.Contains(M.Id), TEXT("Culling observation retains actual fixture identity: ") + M.Id);
                     FVector2D Screen; FAdvisoryHit Hit; FString Diagnostic;
                     Check(World->ModelScreenPoint(M.Id, Screen), TEXT("Projected ") + M.Id);
                     Check(World->QueryScreenPoint(Screen, Hit, Diagnostic) && Hit.Id == M.Id && Hit.Kind == EHitKind::Model, TEXT("Actual world ray hits ") + M.Id);
@@ -695,6 +780,13 @@ private:
         else if (Name == TEXT("Input.PanDollyFrame"))
         {
             ClickModel(TEXT("e02-circle")); RetainIntent();
+            AddUnboundChordProbe(TEXT("Ctrl+F"), EKeys::F, {EKeys::LeftControl});
+            AddUnboundChordProbe(TEXT("Ctrl+Alt+G"), EKeys::G, {EKeys::RightControl, EKeys::LeftAlt});
+            AddUnboundChordProbe(TEXT("Shift+R"), EKeys::R, {EKeys::LeftShift});
+            AddUnboundChordProbe(TEXT("Shift+Left"), EKeys::Left, {EKeys::RightShift});
+            AddUnboundChordProbe(TEXT("Command+Right"), EKeys::Right, {EKeys::LeftCommand});
+            AddUnboundChordProbe(TEXT("Alt+Up"), EKeys::Up, {EKeys::RightAlt});
+            AddUnboundChordProbe(TEXT("Ctrl+Shift+Down"), EKeys::Down, {EKeys::LeftControl, EKeys::LeftShift});
             AddPanDollyProbe(); AddKeyboardOrbitProbe(false); AddKeyboardOrbitProbe(true);
             AddFrameCommand(false); AddFrameCommand(true);
             Do(TEXT("fresh camera baseline before reset alone"), [this]() { ObserveCameraGesture(); });
@@ -790,8 +882,19 @@ private:
         else if (Name == TEXT("Input.RepeatedConfirm"))
         {
             ClickModel(TEXT("e02-circle")); RetainIntent();
+            AddUnboundChordProbe(TEXT("Ctrl+Enter"), EKeys::Enter, {EKeys::LeftControl});
             Input(TEXT("first Confirm local Ready"), [](IAsyncActionSequence& S) { S.Type(EKeys::Enter); });
-            Do(TEXT("Ready is local only"), [this]() { Check(World->GetPolicy().Snapshot().LocalReview == ELocalReview::Ready, TEXT("Local Ready transition")); });
+            Do(TEXT("Ready is local only"), [this]()
+            {
+                const auto Event = World->Snapshot()->GetObjectField(TEXT("lastKeyEvent"));
+                Check(World->GetPolicy().Snapshot().LocalReview == ELocalReview::Ready && World->GetPolicy().Snapshot().ConfirmAttempts == 1 &&
+                    Event->GetStringField(TEXT("normalizedChord")) == TEXT("Enter") && Event->GetStringField(TEXT("matchedBinding")) == TEXT("confirm"),
+                    TEXT("Bare Enter still performs exactly one local Ready transition after the unbound chord"));
+            });
+            AddUnboundChordProbe(TEXT("Ctrl+Escape"), EKeys::Escape, {EKeys::RightControl});
+            AddUnboundChordProbe(TEXT("Alt+M"), EKeys::M, {EKeys::LeftAlt});
+            AddUnboundChordProbe(TEXT("Ctrl+Alt+Shift+Command+Enter"), EKeys::Enter,
+                {EKeys::LeftControl, EKeys::LeftAlt, EKeys::LeftShift, EKeys::RightCommand});
             Input(TEXT("repeated Confirm never submits"), [](IAsyncActionSequence& S) { S.Type(EKeys::Enter).Type(EKeys::Enter); });
             Do(TEXT("visible no-session diagnostic"), [this]() { Check(World->VisibleStatus().Contains(TEXT("ProofHasNoGameSession")), TEXT("Visible precise refusal")); });
             Input(TEXT("Escape and another review cycle"), [](IAsyncActionSequence& S) { S.Type(EKeys::Escape).Type(EKeys::Enter).Type(EKeys::Enter); });
@@ -888,7 +991,10 @@ private:
             bCleanupQueued = true;
             Sequence = Driver->CreateSequence();
             Sequence->Actions().Release(EMouseButtons::Left).Release(EMouseButtons::Right).Release(EMouseButtons::Middle)
-                .Release(EKeys::Left).Release(EKeys::Right).Release(EKeys::Up).Release(EKeys::Down).Release(EKeys::Enter).Release(EKeys::Escape);
+                .Release(EKeys::Left).Release(EKeys::Right).Release(EKeys::Up).Release(EKeys::Down).Release(EKeys::Enter).Release(EKeys::Escape)
+                .Release(EKeys::F).Release(EKeys::G).Release(EKeys::R).Release(EKeys::M)
+                .Release(EKeys::LeftControl).Release(EKeys::RightControl).Release(EKeys::LeftAlt).Release(EKeys::RightAlt)
+                .Release(EKeys::LeftShift).Release(EKeys::RightShift).Release(EKeys::LeftCommand).Release(EKeys::RightCommand);
             Future = MakeUnique<TAsyncResult<bool>>(Sequence->Perform()); CleanupStarted = FPlatformTime::Seconds();
             return false;
         }
@@ -917,6 +1023,7 @@ private:
     FVector2D PanStart, PanEnd, PanLogicalDelta;
     FVector3d PanWorldDelta, PanExpectedTarget;
     FCameraGestureObservation GestureBefore;
+    TSharedPtr<FJsonObject> ChordBefore;
     FVector3d FrameBeforeActorPosition, FrameBeforeActorRotation;
     FAdvisoryHit HitBefore;
     double Started, StepStarted = 0.0, CleanupStarted = 0.0;

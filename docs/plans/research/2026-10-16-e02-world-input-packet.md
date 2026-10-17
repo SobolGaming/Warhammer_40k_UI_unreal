@@ -148,8 +148,17 @@ Core `5f509724da25a2f6ded0c2739a8e7c84bdf59c91:src/warhammer40k_core/`
 `adapters/battlefield_projection.py:_footprint_part_shape:491–531` and
 `geometry/base.py:OvalBase/RectangularBase:73–142` establish length on local X,
 width on local Y. `_normalized_polygon:698–708` normalizes positive domain area.
-The existing Arcade axes mismatch must not be copied. Reflection flips winding;
-reverse generated triangle order and validate upward normals/visible top faces.
+The existing Arcade axes mismatch must not be copied. The domain-to-world
+reflection reverses orientation; treat that transform and UE's triangle
+front-face convention separately. For submitted indices `(A,B,C)`, the installed
+`UKismetProceduralMeshLibrary::GenerateBoxMesh` and normal calculator establish
+the outward-normal relationship `normalize((C-A) × (B-A))`. Thus an outward `+Z`
+top has an ordinary `(B-A) × (C-A)` pointing toward `-Z`; supplied normals still
+point outward. Preserve outward top, bottom and side faces after reflection and
+rigid placement. Do not use the same generator's cross-product assumption as
+its test oracle. Within `Numeric.ShapesWinding`, compare the real installed
+`GenerateBoxMesh` output and independently check outward faces, including a
+rotated rigid frame. Preserve later oblique/near-top visual inspection.
 
 Use transient `UProceduralMeshComponent` shallow opaque footprint meshes with
 labelled local +X/+Y marks and asymmetric color sectors; no texture import is
@@ -158,7 +167,11 @@ world and `/Engine/BasicShapes/Cube.Cube` for board/platform and ordinary-mesh
 substitution; the installed BasicShapeMaterial may supply a transient tinted
 material instance. Add a transient fixed directional light and locked exposure;
 record their settings so the blank Entry world is not dependent on editor lighting.
-Record engine asset path/hash provenance. No `.umap`/`.uasset`
+Record engine asset path/hash provenance and the actual material two-sided state
+and component-transform determinant in the geometry dump. One-sided front-face
+visibility must agree with the numeric outward-face checks; two-sided material
+or a reflected component transform cannot conceal incorrect submitted winding.
+No `.umap`/`.uasset`
 is authored or saved. Fail missing asset loads visibly.
 
 Separate immutable support/measurement descriptors, selection query, and visual
@@ -199,6 +212,14 @@ that route with screen positions/keys; directly calling the reducer, camera
 method or selection setter cannot pass an input case. Numeric tests may call the
 pure policy helpers and are reported separately.
 
+Resolve text/modal/capture ownership before shortcut dispatch. Match the complete
+normalized key and Shift/Ctrl/Alt/Cmd modifier state against the frozen bindings.
+The fixture's arrows, `F/G/R`, `Enter`, `Escape` and `M` are bare-key bindings;
+none implicitly matches a modified chord. Unbound modified shortcuts, including
+`Ctrl+F` and `Ctrl+Enter`, must not change camera, selection, local review or
+Confirm counters. Exercise those exclusions through AutomationDriver within the
+existing input cases, then verify the corresponding bare keys still work.
+
 Use one full-window pixel-to-viewport adapter for `APlayerController` projection/
 deprojection, and Slate logical hit geometry/scale for HUD exclusion and the
 four-logical-unit drag threshold. Never subtract sidebar width from deprojection
@@ -235,7 +256,7 @@ Log assertion counts separately from test counts. Prefix: `Warhammer.Migration.E
 |---|---:|---|
 | `Numeric.RoundTrip` | 1 | Units, nonzero center/datum and rigid placements; points both sides of origin; ≤`1e-8` inch double round trip. |
 | `Numeric.HeadingAxes` | 1 | `0/90/37°`, length-X/width-Y, handed basis, inverse heading modulo 360; ≤`1e-8` degree. |
-| `Numeric.ShapesWinding` | 1 | Five dimensions, polygon signed area/reversed triangles/up normals, independent analytic query boundary cases; explicit synthetic capsule label. |
+| `Numeric.ShapesWinding` | 1 | Five dimensions, reflected polygon area and UE outward-face index/normal relationship; real installed GenerateBoxMesh reference plus independent top/bottom/side checks in a rotated frame; analytic query boundary cases and explicit synthetic capsule label. |
 | `Numeric.UnsupportedGeometry` | 1 | Nonfinite/missing dimensions, unknown kind, null pose and invalid polygon fail with exact typed diagnostic; no generated substitute. |
 | `Rendered.FiveForms` | 1 | Genuine perspective, all five forms/local axes distinguishable, correct silhouettes/extents; `five-forms.png`, scene/geometry dump. |
 | `Rendered.RaisedPicking` | 1 | Project → deproject → nearest raised/ground/support-hole/edge/query hits; domain hit ≤`1e-4` inch, projected round trip ≤1 physical pixel; `raised-pick.png`, ray dump. |
@@ -243,12 +264,12 @@ Log assertion counts separately from test counts. Prefix: `Warhammer.Migration.E
 | `Rendered.ObliqueNormals` | 1 | 25° and near-top views expose winding, height, orientation/occlusion; `oblique.png`, `near-top.png`; no flat-camera substitute. |
 | `Input.CompletedClick` | 1 | Release commits local selection once; press/hover/drag does not; actual ray/ID trace. |
 | `Input.CameraCapture` | 1 | Right movement below/above 4 logical units, orbit crossing HUD and release; capture retained, no selection or leaked widget activation. |
-| `Input.PanDollyFrame` | 1 | Middle-pan, viewport wheel, frame/reset and keyboard orbit alternative change camera only; retain draft/domain values and zero submissions. |
+| `Input.PanDollyFrame` | 1 | Middle-pan, viewport wheel, frame/reset and exact bare-key keyboard orbit change camera only; unbound modified shortcuts have no effect; retain draft/domain values and zero submissions. |
 | `Input.HudExclusion` | 1 | HUD button release outside cancels; disabled/blank/scroll-at-limit consumes; no world pick/dolly underneath. |
 | `Input.ModalText` | 1 | Text consumes characters/Enter; first Escape cancels focused edit, later closes modal; no world shortcut leakage. |
 | `Input.CancelActivation` | 1 | Escape/capture loss and injected deactivate during drag cancel candidate; reactivate never synthesizes click; renewed review required, coordinates retained. |
 | `Input.ResizeScale` | 1 | Crossing gesture cancels; physical viewport extent updates; UI scales `1.0/1.5` at `1280×720`, plus `1600×900` at `1.0`; same intended ray/hit and HUD exclusion without double DPI. |
-| `Input.RepeatedConfirm` | 1 | Repeated Confirm/Escape and local Ready transitions never submit; visible `ProofHasNoGameSession`, no success/acceptance record. |
+| `Input.RepeatedConfirm` | 1 | Exact bare Confirm/Escape bindings and local Ready transitions never submit; unbound modified Enter leaves review/Confirm counters unchanged; visible `ProofHasNoGameSession`, no success/acceptance record. |
 
 Rendered/input baseline is `1280×720`, UI scale `1.0`; the resize test alone adds
 the named variants. This is a bounded input-adapter check, not the E04/E08 full
@@ -615,6 +636,7 @@ their hashes below identify those installed bytes, without runtime verification.
 | `Source/Runtime/Engine/Private/ParseExecCommands.cpp:11–54`; `Source/Developer/AutomationController/Private/AutomationCommandline.cpp:565–586,726–734` | Comma-delimited top-level commands; one `Automation` prefix followed by semicolon subcommands such as `RunTest ...;Quit`. |
 | `Source/Runtime/Core/Private/Misc/AutomationTest.cpp:805–871`; `Source/Developer/AutomationController/Private/AutomationCommandline.cpp:331–337` | Editor/Client/NullRHI/unattended eligibility and listing all eligible tests; select the exact E02 prefix set separately. |
 | `Source/Runtime/Projects/Private/PluginManager.cpp:1473–1479,1585–1598,2030–2061,2551–2597` | Subprocess comma-list plugin disabling before target selection; required dependencies still need complete frozen-closure inspection and actual startup verification. |
+| `Plugins/Runtime/ProceduralMeshComponent/Source/ProceduralMeshComponent/Private/KismetProceduralMeshLibrary.cpp:23–31,148–224,319–322` | Actual GenerateBoxMesh triangle/normal convention and opposite-cross-order normal calculation; independent reference for the existing winding proof. |
 | `Source/Runtime/Messaging/Private/MessagingModule.cpp:132–136`; `Source/Developer/AutomationController/Private/AutomationControllerManager.cpp:295` | Default local message bus and Network-scope find-workers message; scope does not establish an external socket. |
 | `Plugins/Messaging/UdpMessaging/Source/UdpMessaging/Private/UdpMessagingModule.cpp:344–360,628`; `Plugins/Messaging/TcpMessaging/Source/TcpMessaging/Private/TcpMessagingModule.cpp:285–292,340–350`; `Config/BaseEngine.ini:3640–3643` | UDP transport/tunnel are separate; TCP's inherited enable/endpoints and optional command-line endpoints; plugin-level disable avoids claiming an unverified universal transport boolean. |
 
@@ -713,25 +735,28 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Planning-body SHA256 (UTF-8 bytes preceding this heading):
-`294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
+Packet clarification revision: **2026-10-17 UTC / plan revision 22**.
+Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
+`ECA8ECFB90615807D8207A5B1DCFE1928ADBEFA4482A160419D7978FC2DA807E`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
-checkpoint. The adopted body derives from ignored proposal EC29BBB1; only actual
-predecessor binding, adoption status and the visible-window launch restriction
-were added. The geometric/input scope,16 cases,6 PNGs,14 authored paths, private-job
-mechanism and existing budgets remain the specified proof.
+checkpoint; historical adoption/status-label-only hashes remain in that journal.
+The adoption derived from ignored proposal EC29BBB1. This dated revision clarifies
+the existing outward-face winding/oracle and exact bare-key chord requirements.
+The geometric/input scope,16 cases,6 PNGs,14 authored paths, private-job mechanism
+and existing budgets remain the specified proof.
 
 The bounded predecessor is bound and the coordinator has reviewed the packet,
 OWN13 continuation, named source writers, staged project/process/output ownership,
 ordinary cache side effects and pass/fail rules. Source authoring may proceed.
 This is neither executable source approval nor acceptance of future results.
 
-The executable candidate/source review, three supervisor controls and actual
+At adoption, the executable candidate/source review, three supervisor controls and actual
 private-job cleanup evidence, current E02 preservation snapshots,16 discovered/
 executed results, hardware RHI,six inspected PNGs and fresh final CODE/REQ reports
-do not yet exist. Explicit owner authorization for one visible interactive proof
+did not yet exist. Explicit owner authorization for one visible interactive proof
 window remains required before graphical execution under the desktop rule;
 authoring and independently reviewed hidden controls/build/numeric work can
 proceed separately. Human/physical input and Linux remain NOT RUN.
-No E02 process or result is claimed by this adoption record. Research remains
+Current source/run dispositions are recorded separately in the authority journal;
+no E02 process or result is claimed by this adoption record. Research remains
 incomplete; full E01/M01/M02 and G-IMPLEMENT remain open.

@@ -71,8 +71,12 @@ and the unchanged `044903` execution on source `d1189592a5f99bdee58cea25ae8546e5
 The later publication commit is a separate metadata overlay; the reports did not
 review that later commit. Execution is stopped. The narrow diagnostic is accepted;
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
-UE HTTP, rendering, packaging and Linux remain open. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
-records pre-execution SOURCE PASS for `c10c021` and the attempted run
+UE HTTP, rendering, packaging and Linux remain open. The latest E02 SOURCE
+assessment of `73f73b5` is **CHANGES_REQUESTED** for procedural face winding/the
+numeric oracle and unbound modifier shortcuts. Source-only repairs must receive
+a new frozen review before execution. Planned RunId `20261017T174203Z-7dbe90d1`
+is unused and has no execution authority. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+also records the earlier pre-execution SOURCE PASS for `c10c021` and attempted run
 `20261017T171627Z-6e96cd42`. Preflight completed; three supervisor groups recorded
 six successful control subcases and confirmed cleanup of all five process roots
 in 9.5589701 seconds. Artifact publication then failed on a dictionary `Contains`
@@ -83,9 +87,10 @@ The old Preflight used redirected LocalAppData and omitted the real desktop
 EditorSettings file and a persisted before-settings baseline; preservation of
 those real settings remains **UNVERIFIED**. The next candidate repairs descriptor
 traversal and requires a normal desktop context with a persisted baseline. It
-needs a fresh frozen SOURCE assessment and new RunId before execution; the repairs
-are not yet proven. The [E02 packet](docs/plans/research/2026-10-16-e02-world-input-packet.md)
-keeps its existing scope, cases and budgets. Visible-window approval and final
+needs a fresh frozen SOURCE assessment and new RunId before execution; those
+repairs and the winding/chord corrections are not yet proven. The [E02 packet](docs/plans/research/2026-10-16-e02-world-input-packet.md)
+clarifies outward-face and exact bare-key checks within its existing scope,
+cases and budgets. Visible-window approval and final
 separate CODE/REQ acceptance remain later gates.
 
 The historical `030835` run retains its missing

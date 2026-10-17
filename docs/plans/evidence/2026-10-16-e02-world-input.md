@@ -1,12 +1,17 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **SOURCE_REMEDIATION_REQUIRED_FRESH_SOURCE_REVIEW_PENDING; E02 NOT RUN**.
+Status: **SOURCE_CHANGES_REQUESTED_73F; BOUNDED_REMEDIATION_ONLY; NO_NEW_EXECUTION_AUTHORITY**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
-Packet whole-file SHA256: `7EFF2E47A55000D3012759DEEEACEEF46153024BF1CB713A920363A44A8FB2E3`.
-Planning body SHA256: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
+Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF1CB713A920363A44A8FB2E3`.
+Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
+
+The latest frozen 73f SOURCE assessment is CHANGES_REQUESTED; its two findings
+are released for bounded remediation only. The planned 174203 RunId is unused
+and has no execution authority. The earlier 171627 Preflight/control observations
+and publication failure remain recorded below. No build/native/GUI result exists.
 
 The predecessor table binds accepted E01-SLOW120 run044903, executed d118,
 reviewed b97, original report verdicts and separate publication bd80123.
@@ -411,3 +416,80 @@ The corrected source is unexecuted. Obtain a fresh independent affected SOURCE
 assessment and a new RunId before any further E02 phase. Preserve the old SOURCE
 PASS for c10c and the failed run as historical evidence. No final OWN15 CODE/REQ,
 graphical, packaging, Linux, full-E02 or broader milestone acceptance is supplied.
+
+## Fifth SOURCE assessment and bounded remediation — 2026-10-17 UTC
+
+The fresh assessment of `73f73b5994456b008cc104e05f7a915a5976f49b` against
+`bd801233cc9989e0ae146a3be7b136d26dc73183` returned **CHANGES_REQUESTED**.
+Preserved immutable records are:
+
+| Record | Bytes | SHA256 |
+|---|---:|---|
+| [Unchanged raw report](../../../.local/reviews/E02-source-review/review-73f-20261017T174536Z-8e5a3402/last-message.txt) | 8548 | `2770320460A3FCE53CBBAE53535EE71D99CE58B7FE35BFEA30A8AE4CB22CDF21` |
+| [Operator seal](../../../.local/reviews/E02-source-review/review-73f-20261017T174536Z-8e5a3402/orchestrator-seal.json) | 5681 | `7AF6A357C0737BA6E54078332EFEE350751F9299F388397226DC2AB439202494` |
+| [Full command/output audit](../../../.local/reviews/E02-source-review/review-73f-20261017T174536Z-8e5a3402/operator-command-output-audit.json) | 43678 | `9FD0DA67D9EA454A1EC6BF8E07FA8B0245E58950CE39526753D684B2E9CEE5EB` |
+| [Root disposition](../../../.local/reviews/E02-source-review/root-73f-20261017T174203Z-7dbe90d1/source-gate-disposition.json) | 2658 | `C5DFB3CA44DE1D94A03720DF2C6816390BE52053E5E9F271A07997EE3C9A5EE0` |
+
+The seal completed at `2026-10-17T17:59:07.9419028Z`; root inspected the full
+report/audit/seal, independently checked 42 review descriptors and all 1304 frozen
+files without mismatch, then recorded the bounded release at
+`2026-10-17T17:59:39.3592151Z`. Planned RunId `20261017T174203Z-7dbe90d1` remained
+absent: **UNUSED_NO_AUTHORITY_DO_NOT_EXECUTE**. No E02 function or process was
+started for that candidate, and no hidden/visible execution authority exists.
+
+Session `01a14af7-cc62-7ad1-b6eb-01d907a09040` used CLI0.163.0-alpha.10.2.
+Separate selected runtime metadata records the configured `gpt-6.1-sol`/`ultra`,
+workspace-root CWD, read-only/never and disabled session memory. The raw report's
+self-unverified properties remain unchanged. Lower-level memory, requested
+app/multi-agent enforcement and OS-process/start association remain UNVERIFIED;
+exposed app/collaboration capabilities were unused. The approved payload file
+was 7044 bytes/SHA256 `5A4624773F6B86A423405CA200F183763D19E9FAC647B535E7BBCD5422CE81DC`;
+actual user text was 7046 UTF-8 bytes/SHA256
+`931A999A695C9B87951CDBAD253BAF687013421ACC442A8523FE6D186F6307AC`.
+The added two bytes are trailing CRLF; byte-identical transport is not claimed.
+Session metadata time is not an OS process-start attestation.
+
+The operator audited all 59 literal commands from 51 tool inputs and complete
+captured outputs, with no prohibited execution or contamination observed.
+Preserved nonzero queries include the wrong D3D12 source path, corrected metadata
+ParserError and a final no-match modifier search; ordinal 2 also retained a
+nonterminating null-GetType metadata diagnostic. These were not rewritten as
+error-free commands. Four permitted additional primary reads lacked pre-read
+freeze bindings: `KismetProceduralMeshLibrary.cpp`, `MeshPassProcessor.cpp`,
+`D3D12State.cpp` and `Vector.h`. Their separate post-read descriptors do not
+reconstruct a prior identity guarantee; retained references must be bound afresh.
+
+The actionable source findings are:
+
+1. **P1:** emitted procedural indices and the numeric oracle use the opposite
+   relationship from UE's outward-facing convention. Repair both against actual
+   installed `GenerateBoxMesh` output and independent outward top/bottom/side
+   checks, including rotated placement. Record actual material two-sided state
+   and component-transform determinant; keep the later visual proof.
+2. **P2:** shortcut dispatch matches the key without its modifiers, accepting
+   unbound chords such as Ctrl+F and Ctrl+Enter. Require the exact frozen bare-key
+   chord and Driver-route exclusions in existing cases, preserving ownership.
+
+These are static findings, not observed rendered/input failures. Root released
+only the bounded source/test/evidence/documentation repairs. No code/test fix is
+proven by this record. Checkpoint the complete repaired candidate, freeze its
+new source/primary/packet inputs and obtain fresh affected SOURCE review before
+a new RunId. The earlier c10c PASS, 171627 publication failure/settings gap and
+all E01 records remain unchanged. Final OWN15 CODE/REQ, graphical, packaging,
+Linux and full milestone acceptance remain open.
+
+## Packet clarification revision 22 — 2026-10-17 UTC
+
+The packet now specifies UE's outward-normal/index relationship separately from
+the domain reflection, an independent real-GenerateBoxMesh/rotated-frame oracle,
+actual material/transform observations and exact bare-key modifier matching.
+These strengthen existing assertions within the same 14 paths, 16 native cases,
+six PNGs, three supervisor groups and budgets; no new execution scope is added.
+
+The prior status-label-only whole-file SHA256 was
+`52E0E70ACD3854649329A7F533F3322D1FD0201FF653C98B35E239B0D82520C2`.
+It retained the earlier printed planning hash `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`;
+that printed value was not a fresh binding of its changed preceding bytes.
+The dated revision 22 footer now binds the exact preceding UTF-8 bytes:
+`ECA8ECFB90615807D8207A5B1DCFE1928ADBEFA4482A160419D7978FC2DA807E`. Current whole-file SHA256:
+`48BF6A0E4EF42E930AF65FE27D76F61B224BCFA7685C19D5A00B21C9D4CB7EE8`. Historical adoption/hash values above remain intact.

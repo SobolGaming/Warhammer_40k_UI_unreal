@@ -78,7 +78,17 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The bounded E02 source at `c10c02173b2d40b4f80d9bdb2dfa1d37c52079ed` received
+The latest E02 SOURCE assessment of `73f73b5994456b008cc104e05f7a915a5976f49b`
+is CHANGES_REQUESTED: P1 procedural outward-face winding and its numeric oracle,
+and P2 shortcut dispatch accepting unbound modifier chords. These are static
+findings, not observed rendered/input failures. Root released only bounded
+source/test/documentation remediation. Planned RunId `20261017T174203Z-7dbe90d1`
+is UNUSED, has no execution authority and must not be executed. Checkpoint the
+repairs, freeze all affected source/API/packet inputs, obtain fresh SOURCE review
+and use a new RunId before any further phase. Final OWN15 CODE/REQ and visible
+window gates remain separate; see the E02 journal below for immutable reports.
+
+The earlier bounded E02 source at `c10c02173b2d40b4f80d9bdb2dfa1d37c52079ed` received
 independent pre-execution SOURCE PASS; see
 `docs/plans/evidence/2026-10-16-e02-world-input.md` for the unchanged report,
 operator seal, separately corrected manifest transcription and root's gate.

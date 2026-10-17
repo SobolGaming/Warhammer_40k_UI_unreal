@@ -8,6 +8,7 @@
 #include "Misc/Parse.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonSerializer.h"
+#include "KismetProceduralMeshLibrary.h"
 #include <limits>
 
 using namespace Warhammer::Migration::E02;
@@ -64,6 +65,69 @@ bool NearVector(FCaseAssertions& Test, const TCHAR* What, const FVector3d& Actua
 FRay DownRay(const FTableFrame& Frame, const FVector3d& OriginDomain)
 {
     return { DomainToWorld(Frame, OriginDomain), Frame.WorldFromTableCm.TransformVectorNoScale(FVector3d(0.0, 0.0, -1.0)) };
+}
+
+void AssertOutwardDisplayFaces(FCaseAssertions& Assertions, const FTableFrame& Frame,
+    const FFootprint& Model, const FDisplayMesh& Mesh, double Thickness)
+{
+    if (!Assertions.TestTrue(TEXT("Display has complete triangles and vertex normals"),
+        !Mesh.Triangles.IsEmpty() && Mesh.Triangles.Num() % 3 == 0 && Mesh.NormalsWorld.Num() == Mesh.VerticesWorldCm.Num())) return;
+    const FVector3d Up = Frame.WorldFromTableCm.TransformVectorNoScale(FVector3d::UpVector);
+    FVector2d Interior = FVector2d::ZeroVector;
+    // A positive average of a strictly convex polygon's vertices is interior;
+    // the other four symmetric descriptors have the local origin as interior.
+    if (Model.Kind == EShapeKind::Polygon)
+    {
+        for (const FVector2d& V : Model.VerticesInches) { Interior += V; }
+        Interior /= Model.VerticesInches.Num();
+    }
+    const double Facing = FMath::DegreesToRadians(Model.Pose->FacingDegrees);
+    const FVector3d InteriorDomain = Model.Pose->PositionInches + FVector3d(
+        FMath::Cos(Facing) * Interior.X - FMath::Sin(Facing) * Interior.Y,
+        FMath::Sin(Facing) * Interior.X + FMath::Cos(Facing) * Interior.Y, 0);
+    const FVector3d InteriorWorld = DomainToWorld(Frame, InteriorDomain);
+    bool bTop = false, bBottom = false, bSide = false;
+    for (int32 T = 0; T < Mesh.Triangles.Num(); T += 3)
+    {
+        const int32 IA = Mesh.Triangles[T], IB = Mesh.Triangles[T + 1], IC = Mesh.Triangles[T + 2];
+        if (!Assertions.TestTrue(TEXT("Every triangle index addresses an actual vertex"),
+            Mesh.VerticesWorldCm.IsValidIndex(IA) && Mesh.VerticesWorldCm.IsValidIndex(IB) && Mesh.VerticesWorldCm.IsValidIndex(IC))) return;
+        const FVector3d& A = Mesh.VerticesWorldCm[IA];
+        const FVector3d& B = Mesh.VerticesWorldCm[IB];
+        const FVector3d& C = Mesh.VerticesWorldCm[IC];
+        const FVector3d Cross = FVector3d::CrossProduct(B - A, C - A);
+        if (!Assertions.TestTrue(TEXT("No degenerate generated triangle"), Cross.SizeSquared() > 1.e-16)) return;
+        const FVector3d& Normal = Mesh.NormalsWorld[IA];
+        for (const int32 Index : { IA, IB, IC })
+        {
+            const FVector3d& VertexNormal = Mesh.NormalsWorld[Index];
+            Assertions.TestTrue(TEXT("Every face vertex has the same finite outward unit shading normal"),
+                !VertexNormal.ContainsNaN() && FMath::Abs(VertexNormal.SizeSquared() - 1.0) < 1.e-9 && VertexNormal.Equals(Normal, 1.e-9));
+            Assertions.TestTrue(TEXT("Indexed cross opposes shading normal as in installed UE GenerateBoxMesh"),
+                FVector3d::DotProduct(Cross.GetSafeNormal(), VertexNormal) < -0.999999);
+        }
+        const double ZA = WorldToDomain(Frame, A).Z - Model.Pose->PositionInches.Z;
+        const double ZB = WorldToDomain(Frame, B).Z - Model.Pose->PositionInches.Z;
+        const double ZC = WorldToDomain(Frame, C).Z - Model.Pose->PositionInches.Z;
+        if (FMath::Abs(ZA - Thickness) < 1.e-9 && FMath::Abs(ZB - Thickness) < 1.e-9 && FMath::Abs(ZC - Thickness) < 1.e-9)
+        {
+            bTop = true;
+            Assertions.TestTrue(TEXT("Physical top shading normal points up independently of index convention"), FVector3d::DotProduct(Normal, Up) > 0.999999);
+        }
+        else if (FMath::Abs(ZA) < 1.e-9 && FMath::Abs(ZB) < 1.e-9 && FMath::Abs(ZC) < 1.e-9)
+        {
+            bBottom = true;
+            Assertions.TestTrue(TEXT("Physical bottom shading normal points down"), FVector3d::DotProduct(Normal, Up) < -0.999999);
+        }
+        else
+        {
+            bSide = true;
+            Assertions.TestTrue(TEXT("Side shading normal is horizontal and points away from a known interior point"),
+                FMath::Abs(FVector3d::DotProduct(Normal, Up)) < 1.e-9 &&
+                FVector3d::DotProduct(Normal, (A + B + C) / 3.0 - InteriorWorld) > 1.e-9);
+        }
+    }
+    Assertions.TestTrue(TEXT("Closed shallow display includes top, bottom and outward sides"), bTop && bBottom && bSide);
 }
 }
 
@@ -149,7 +213,30 @@ bool FE02ShapesWinding::RunTest(const FString& Parameters)
     const double Heights[] = { 1.2, 1.0, 1.5, 1.2, 1.2 };
     const FVector2d ExpectedMin[] = {{-1,-1},{-2.5,-1},{-2,-1},{-3,-1},{0,0}};
     const FVector2d ExpectedMax[] = {{1,1},{2.5,1},{2,1},{3,1},{3,2}};
-    const FVector3d Up = F.Frame.WorldFromTableCm.TransformVectorNoScale(FVector3d::UpVector);
+    // The independent engine helper supplies the actual installed convention.
+    // Its +Z face starts (-2,+3,+4),(+2,+3,+4),(-2,-3,+4), whose indexed
+    // conventional cross is -Z while its outward shading normal is +Z.
+    TArray<FVector> BoxVertices, BoxNormals;
+    TArray<int32> BoxTriangles;
+    TArray<FVector2D> BoxUVs;
+    TArray<FProcMeshTangent> BoxTangents;
+    UKismetProceduralMeshLibrary::GenerateBoxMesh(FVector(2, 3, 4), BoxVertices, BoxTriangles, BoxNormals, BoxUVs, BoxTangents);
+    if (!Assertions.TestTrue(TEXT("Installed procedural box supplies six complete faces"),
+        BoxVertices.Num() == 24 && BoxNormals.Num() == 24 && BoxTriangles.Num() == 36)) return false;
+    Assertions.TestTrue(TEXT("Installed upward face agrees with independent integer-coordinate anchor"),
+        BoxTriangles[0] == 0 && BoxTriangles[1] == 1 && BoxTriangles[2] == 3 &&
+        BoxVertices[0] == FVector(-2, 3, 4) && BoxVertices[1] == FVector(2, 3, 4) && BoxVertices[3] == FVector(-2, -3, 4) &&
+        BoxNormals[0] == FVector::UpVector);
+    for (int32 T = 0; T < BoxTriangles.Num(); T += 3)
+    {
+        const int32 IA = BoxTriangles[T], IB = BoxTriangles[T + 1], IC = BoxTriangles[T + 2];
+        if (!Assertions.TestTrue(TEXT("Installed box indices address its actual vertices and normals"),
+            BoxVertices.IsValidIndex(IA) && BoxVertices.IsValidIndex(IB) && BoxVertices.IsValidIndex(IC))) return false;
+        const FVector Cross = FVector::CrossProduct(BoxVertices[IB] - BoxVertices[IA], BoxVertices[IC] - BoxVertices[IA]);
+        Assertions.TestTrue(TEXT("Every actual UE box face uses an indexed cross opposite its outward normal"),
+            FVector::DotProduct(Cross.GetSafeNormal(), BoxNormals[IA]) < -0.999999 &&
+            FVector::DotProduct(BoxNormals[IA], (BoxVertices[IA] + BoxVertices[IB] + BoxVertices[IC]) / 3.0) > 0);
+    }
     for (int32 I = 0; I < 5; ++I)
     {
         const FFootprint& Model = F.Models[I];
@@ -171,23 +258,13 @@ bool FE02ShapesWinding::RunTest(const FString& Parameters)
         }
         NearVector(Assertions, TEXT("Display local minima preserve independent expected dimensions"), Min, FVector3d(ExpectedMin[I].X,ExpectedMin[I].Y,0));
         NearVector(Assertions, TEXT("Display local maxima preserve lengthX/widthY/thickness"), Max, FVector3d(ExpectedMax[I].X,ExpectedMax[I].Y,0.12));
-        bool bTop = false, bBottom = false;
-        for (int32 T = 0; T < Mesh.Triangles.Num(); T += 3)
-        {
-            const FVector3d& A = Mesh.VerticesWorldCm[Mesh.Triangles[T]];
-            const FVector3d& B = Mesh.VerticesWorldCm[Mesh.Triangles[T + 1]];
-            const FVector3d& C = Mesh.VerticesWorldCm[Mesh.Triangles[T + 2]];
-            const FVector3d Cross = FVector3d::CrossProduct(B - A, C - A);
-            Assertions.TestTrue(TEXT("No degenerate generated triangle"), Cross.SizeSquared() > 1.e-16);
-            const double ZA = WorldToDomain(F.Frame, A).Z - Model.Pose->PositionInches.Z;
-            const double ZB = WorldToDomain(F.Frame, B).Z - Model.Pose->PositionInches.Z;
-            const double ZC = WorldToDomain(F.Frame, C).Z - Model.Pose->PositionInches.Z;
-            if (FMath::Abs(ZA - 0.12) < 1.e-9 && FMath::Abs(ZB - 0.12) < 1.e-9 && FMath::Abs(ZC - 0.12) < 1.e-9)
-            { bTop = true; Assertions.TestTrue(TEXT("Reversed reflected top triangle faces up"), FVector3d::DotProduct(Cross.GetSafeNormal(), Up) > 0.999999); }
-            if (FMath::Abs(ZA) < 1.e-9 && FMath::Abs(ZB) < 1.e-9 && FMath::Abs(ZC) < 1.e-9)
-            { bBottom = true; Assertions.TestTrue(TEXT("Bottom faces down"), FVector3d::DotProduct(Cross.GetSafeNormal(), Up) < -0.999999); }
-        }
-        Assertions.TestTrue(TEXT("Opaque shallow mesh has both top/bottom"), bTop && bBottom);
+        AssertOutwardDisplayFaces(Assertions, F.Frame, Model, Mesh, 0.12);
+        FTableFrame TiltedFrame = F.Frame;
+        TiltedFrame.WorldFromTableCm.SetRotation(FQuat4d(FRotator3d(17, 23, -11)));
+        FDisplayMesh TiltedMesh;
+        if (!Assertions.TestTrue(TEXT("All five forms build in a pitched and rolled rigid placement"),
+            BuildDisplayMesh(TiltedFrame, Model, 0.12, TiltedMesh, Error))) return false;
+        AssertOutwardDisplayFaces(Assertions, TiltedFrame, Model, TiltedMesh, 0.12);
         FVector3d Origin = Model.Pose->PositionInches + FVector3d(0,0,20);
         // Polygon origin is a boundary vertex; choose a known interior point.
         if (I == 4) Origin += FVector3d(0.1830127018922193, 0.6830127018922193, 0);
@@ -208,6 +285,7 @@ bool FE02ShapesWinding::RunTest(const FString& Parameters)
     CircularCapsule.LengthInches = 2.0;
     FDisplayMesh CircleLimitMesh;
     Assertions.TestTrue(TEXT("Equal length/width capsule has exact circular limit"), BuildDisplayMesh(F.Frame, CircularCapsule, 0.12, CircleLimitMesh, Error));
+    AssertOutwardDisplayFaces(Assertions, F.Frame, CircularCapsule, CircleLimitMesh, 0.12);
     for (int32 T = 0; T < CircleLimitMesh.Triangles.Num(); T += 3)
     {
         const FVector3d& A = CircleLimitMesh.VerticesWorldCm[CircleLimitMesh.Triangles[T]];

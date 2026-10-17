@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-17 UTC
-**Revision:** 21 — E02 c10c source review passed; first supervisor run failed publication and exposed a desktop-settings observation gap. Repairs require a fresh review and new RunId.
+**Revision:** 22 — latest E02 SOURCE assessment requests winding/oracle and exact modifier-chord repairs; no new execution is authorized. Preserve the earlier publication failure and settings gap.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,18 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 21 changes
+### Revision 22 changes
+
+The latest frozen E02 candidate `73f73b5` received SOURCE CHANGES_REQUESTED for
+procedural outward-face winding/the numeric oracle and unbound modified keyboard
+shortcuts. Root released bounded source/test/documentation remediation only.
+The unused planned RunId has no execution authority. The packet clarifies UE's
+actual index/normal convention, independent face checks and exact bare-key
+bindings within the same 16 cases, 14 paths and budgets. Checkpoint and obtain a
+fresh affected SOURCE assessment and new RunId before execution. Earlier c10c
+SOURCE PASS, its failed publication/settings coverage and all E01 history remain.
+
+### Revision 21 history — first E02 attempt
 
 The bounded E02 candidate `c10c021` passed its pre-execution SOURCE assessment.
 The first run completed Preflight and its supervisor control assertions, then
@@ -154,7 +165,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: freeze and independently review the repaired E02 publication and desktop-settings guards before a new run.** Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) distinguish c10c SOURCE PASS, completed Preflight/control assertions, failed phase publication and the settings-observation gap. Build/native/GUI remain NOT RUN. Obtain fresh affected source review and a new RunId, with separate explicit visible-window approval before graphical execution. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
+**Current assignment: finish the bounded E02 winding/oracle and exact modifier-chord repairs, checkpoint, freeze and obtain fresh affected SOURCE review before a new run.** Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) distinguish latest 73f CHANGES_REQUESTED from earlier c10c SOURCE PASS, completed Preflight/control assertions, failed publication and the settings gap. The 73f planned RunId remains unused and unauthorized; Build/native/GUI remain NOT RUN. A new reviewed candidate and RunId are required, with separate explicit visible-window approval before graphical execution. Preserve E01 acceptance and all previous failures/unknowns. Full research/implementation/milestone gates remain open.
 
 ### 0.1 Fixed scope and authority
 
@@ -825,8 +836,19 @@ was adopted at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0
 The [authority/execution journal](evidence/2026-10-16-e02-world-input.md) records
 root's packet review, predecessor identities, OWN13 applicability,14 authored
 paths,named writers,owned staging/process/cache side effects and fixed pass/fail
-rules. Current packet whole-file SHA256 is `52E0E70ACD3854649329A7F533F3322D1FD0201FF653C98B35E239B0D82520C2`;
-only the status label now says "at adoption"; criteria, scope and budgets are unchanged.
+rules. Current packet whole-file SHA256 is `48BF6A0E4EF42E930AF65FE27D76F61B224BCFA7685C19D5A00B21C9D4CB7EE8`.
+Its 2026-10-17 clarification corrects the outward-face/oracle and exact bare-key
+requirements within the same scope, 14 paths, 16 cases and budgets.
+
+**Current source disposition:** The fresh assessment of
+`73f73b5994456b008cc104e05f7a915a5976f49b` is **CHANGES_REQUESTED**: P1 procedural
+winding/outward normals and the matching numeric oracle; P2 unbound modified
+keyboard shortcuts. The journal binds the unchanged report, full operator audit,
+seal and root disposition. These are source findings, without observed rendered
+pixels. Planned RunId `20261017T174203Z-7dbe90d1` is **UNUSED_NO_AUTHORITY_DO_NOT_EXECUTE**.
+Only bounded source/test/documentation repairs are released; checkpoint/freeze,
+fresh affected SOURCE review and a new RunId must precede any further phase.
+No final OWN15 CODE/REQ acceptance or visible-window approval is supplied.
 
 **Dated source evidence:** Candidate `c10c02173b2d40b4f80d9bdb2dfa1d37c52079ed`
 received pre-execution SOURCE PASS. The journal binds the unchanged raw report
@@ -1901,7 +1923,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** freeze the bounded E02 publication/settings-guard repairs and obtain fresh affected SOURCE review before a new RunId under Section0.9. The c10c attempt retains completed Preflight/control assertions, failed SupervisorControls publication and an UNVERIFIED real-settings criterion. Build/native/GUI remain NOT RUN; graphical execution also requires explicit visible-window approval. E01-SLOW120 acceptance/history is unchanged.
+**Ready now:** finish the bounded E02 outward-face/oracle and exact modifier-chord repairs, checkpoint and obtain fresh affected SOURCE review before a new RunId under Section0.9. Latest 73f is CHANGES_REQUESTED; its planned RunId is unused and unauthorized. Earlier c10c retains completed Preflight/control assertions, failed SupervisorControls publication and an UNVERIFIED real-settings criterion. Build/native/GUI remain NOT RUN; graphical execution also requires explicit visible-window approval. E01-SLOW120 acceptance/history is unchanged.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 
@@ -1909,7 +1931,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 source characterization and selected44.3.33 adaptation, profile/capability/design checklists, developer Core launch/install recipes, recorded Core issues and BOOT01 scaffold/probe/final builds/generation. Normal `044903` now records 87 Python units in 15.167 seconds, 14 Capture checks, auxiliary privacy/exact-byte promotion, 132 unique native successes, two automated evidence checks and matching settings/DDC/process evidence. Separate pre-execution controls are 135 pure PowerShell checks with 39 stable inputs. Earlier failures, unknowns, settings history and source assessments remain preserved.
 
-**Next concrete step:** bind the actual frozen source, fixture, defaults, toolchain, assets and complete declared plugin closure; obtain independent pre-execution source review and resolve actionable findings before execution. The 16 native cases, six PNGs and final CODE/REQ gates remain unrun. Full E01/M01/M02, research/implementation, production, packaging and Linux remain open.
+**Next concrete step:** complete the two latest source findings, then bind the new frozen source, fixture, defaults, toolchain, assets, retained primary references and complete declared plugin closure for fresh independent SOURCE review. The 16 native cases, six PNGs and final CODE/REQ gates remain unrun. Full E01/M01/M02, research/implementation, production, packaging and Linux remain open.
 
 ## 16. Sources and inspection index
 

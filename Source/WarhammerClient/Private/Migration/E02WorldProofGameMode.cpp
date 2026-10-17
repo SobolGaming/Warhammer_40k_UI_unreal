@@ -14,6 +14,7 @@
 #include "Framework/Application/SlateApplication.h"
 #include "HAL/FileManager.h"
 #include "HAL/PlatformMisc.h"
+#include "Input/Events.h"
 #include "Input/Reply.h"
 #include "InputCoreTypes.h"
 #include "Materials/MaterialInstanceDynamic.h"
@@ -123,6 +124,7 @@ struct FE02ProofState
     FPointerSample LastPickPointer;
     FRay LastPickRay;
     TOptional<FAdvisoryHit> LastPickHit;
+    TSharedPtr<FJsonObject> LastKeyEvent;
     uint64 LastPickGeneration = 0, LastPickEventSequence = 0;
     FVector4d PaintedHudScreen = FVector4d(0, 0, 0, 0), PaintedHeaderScreen = FVector4d(0, 0, 0, 0);
     FIntPoint PaintedExtent = FIntPoint::ZeroValue;
@@ -288,7 +290,7 @@ struct FE02ProofState
         }
         return Result;
     }
-    TArray<TSharedPtr<FJsonValue>> ActualDisplayGeometry() const
+    TArray<TSharedPtr<FJsonValue>> ActualDisplayGeometry(bool bIncludeGeometry = true) const
     {
         TArray<TSharedPtr<FJsonValue>> Result;
         for (const auto& Pair : ModelMeshes)
@@ -296,6 +298,8 @@ struct FE02ProofState
             if (!Pair.Value.IsValid()) { continue; }
             const auto ModelRecord = MakeShared<FJsonObject>(); ModelRecord->SetStringField(TEXT("id"), Pair.Key);
             ModelRecord->SetStringField(TEXT("componentTransform"), Pair.Value->GetComponentTransform().ToString());
+            ModelRecord->SetNumberField(TEXT("componentTransformDeterminant"), Pair.Value->GetComponentTransform().GetDeterminant());
+            ModelRecord->SetBoolField(TEXT("visible"), Pair.Value->IsVisible());
             ModelRecord->SetBoolField(TEXT("collisionEnabled"), Pair.Value->GetCollisionEnabled() != ECollisionEnabled::NoCollision);
             TArray<TSharedPtr<FJsonValue>> Sections;
             for (int32 I = 0; I < Pair.Value->GetNumSections(); ++I)
@@ -303,12 +307,25 @@ struct FE02ProofState
                 const FProcMeshSection* Section = Pair.Value->GetProcMeshSection(I);
                 if (!Section) { continue; }
                 const auto SectionRecord = MakeShared<FJsonObject>(); SectionRecord->SetNumberField(TEXT("section"), I);
-                TArray<TSharedPtr<FJsonValue>> Vertices, Normals, Indices;
-                for (const FProcMeshVertex& V : Section->ProcVertexBuffer)
-                { Vertices.Add(MakeShared<FJsonValueArray>(VectorJson(V.Position))); Normals.Add(MakeShared<FJsonValueArray>(VectorJson(V.Normal))); }
-                for (uint32 Index : Section->ProcIndexBuffer) { Indices.Add(MakeShared<FJsonValueNumber>(Index)); }
-                SectionRecord->SetArrayField(TEXT("verticesWorldCm"), Vertices); SectionRecord->SetArrayField(TEXT("normalsWorld"), Normals);
-                SectionRecord->SetArrayField(TEXT("indices"), Indices); Sections.Add(MakeShared<FJsonValueObject>(SectionRecord));
+                UMaterialInterface* Material = Pair.Value->GetMaterial(I);
+                SectionRecord->SetBoolField(TEXT("materialPresent"), Material != nullptr);
+                if (Material)
+                {
+                    SectionRecord->SetStringField(TEXT("material"), Material->GetPathName());
+                    SectionRecord->SetBoolField(TEXT("materialIsTwoSided"), Material->IsTwoSided());
+                    SectionRecord->SetBoolField(TEXT("materialOpaque"), Material->GetBlendMode() == BLEND_Opaque);
+                }
+                else { SectionRecord->SetStringField(TEXT("materialDiagnostic"), TEXT("RequiredMaterialMissing")); }
+                if (bIncludeGeometry)
+                {
+                    TArray<TSharedPtr<FJsonValue>> Vertices, Normals, Indices;
+                    for (const FProcMeshVertex& V : Section->ProcVertexBuffer)
+                    { Vertices.Add(MakeShared<FJsonValueArray>(VectorJson(V.Position))); Normals.Add(MakeShared<FJsonValueArray>(VectorJson(V.Normal))); }
+                    for (uint32 Index : Section->ProcIndexBuffer) { Indices.Add(MakeShared<FJsonValueNumber>(Index)); }
+                    SectionRecord->SetArrayField(TEXT("verticesWorldCm"), Vertices); SectionRecord->SetArrayField(TEXT("normalsWorld"), Normals);
+                    SectionRecord->SetArrayField(TEXT("indices"), Indices);
+                }
+                Sections.Add(MakeShared<FJsonValueObject>(SectionRecord));
             }
             ModelRecord->SetArrayField(TEXT("sections"), Sections); Result.Add(MakeShared<FJsonValueObject>(ModelRecord));
         }
@@ -385,6 +402,7 @@ struct FE02ProofState
         Result->SetNumberField(TEXT("worldPickCount"), static_cast<double>(Picks));
         Result->SetNumberField(TEXT("cameraMutationCount"), static_cast<double>(CameraChanges));
         Result->SetNumberField(TEXT("eventCount"), static_cast<double>(Events));
+        if (LastKeyEvent.IsValid()) { Result->SetObjectField(TEXT("lastKeyEvent"), LastKeyEvent); }
         if (LastPickHit.IsSet())
         {
             const auto Pick = MakeShared<FJsonObject>();
@@ -563,13 +581,33 @@ struct FE02ProofState
         { Status = TEXT("Local Ready — advisory only; no game session"); }
     }
     void Trace(const FString& Event, const FPointerSample& Pointer, const FHitTarget& Hit,
-        const TSharedPtr<FJsonObject>& Before, const FInputEffects& Effect)
+        const TSharedPtr<FJsonObject>& Before, const FInputEffects& Effect,
+        const FKeyEvent* KeyEvent = nullptr, const FString& MatchedBinding = FString())
     {
         ++Events;
         if (Effect.bRequestWorldPick) { LastPickEventSequence = Events; }
         if ((Effect.CameraAction == ECameraAction::FrameBoard || Effect.CameraAction == ECameraAction::FrameSelection) && FrameEventSequence == 0 && !FrameKind.IsEmpty())
         { FrameEventSequence = Events; }
         const auto Data = MakeShared<FJsonObject>();
+        if (KeyEvent)
+        {
+            LastKeyEvent = MakeShared<FJsonObject>();
+            LastKeyEvent->SetStringField(TEXT("key"), KeyEvent->GetKey().ToString());
+            LastKeyEvent->SetBoolField(TEXT("controlDown"), KeyEvent->IsControlDown());
+            LastKeyEvent->SetBoolField(TEXT("altDown"), KeyEvent->IsAltDown());
+            LastKeyEvent->SetBoolField(TEXT("shiftDown"), KeyEvent->IsShiftDown());
+            LastKeyEvent->SetBoolField(TEXT("commandDown"), KeyEvent->IsCommandDown());
+            LastKeyEvent->SetBoolField(TEXT("isRepeat"), KeyEvent->IsRepeat());
+            FString Chord;
+            if (KeyEvent->IsControlDown()) { Chord += TEXT("Ctrl+"); }
+            if (KeyEvent->IsAltDown()) { Chord += TEXT("Alt+"); }
+            if (KeyEvent->IsShiftDown()) { Chord += TEXT("Shift+"); }
+            if (KeyEvent->IsCommandDown()) { Chord += TEXT("Command+"); }
+            LastKeyEvent->SetStringField(TEXT("normalizedChord"), Chord + KeyEvent->GetKey().ToString());
+            LastKeyEvent->SetStringField(TEXT("matchedBinding"), MatchedBinding);
+            LastKeyEvent->SetNumberField(TEXT("eventSequence"), static_cast<double>(Events));
+            Data->SetObjectField(TEXT("keyEvent"), LastKeyEvent);
+        }
         Data->SetNumberField(TEXT("sequence"), static_cast<double>(Events)); Data->SetStringField(TEXT("observedUtc"), FDateTime::UtcNow().ToIso8601());
         Data->SetStringField(TEXT("case"), CaseName); Data->SetStringField(TEXT("route"), TEXT("PlatformMessageHandler -> Slate -> SE02ProofSurface -> FInputPolicy"));
         Data->SetStringField(TEXT("event"), Event); Data->SetArrayField(TEXT("screenPhysical"), PointJson(Pointer.ScreenPhysical));
@@ -811,28 +849,40 @@ public:
     virtual FReply OnKeyDown(const FGeometry& G, const FKeyEvent& E) override
     {
         const auto Before = Proof->Snapshot(); FInputEffects Effect; const FKey K = E.GetKey();
-        if (K == EKeys::Escape) { Effect = Proof->Policy.Escape(); }
+        const bool bBare = !E.IsControlDown() && !E.IsAltDown() && !E.IsShiftDown() && !E.IsCommandDown();
+        FString MatchedBinding;
+        auto Matches = [&](const TCHAR* Name)
+        {
+            const FString* Bound = Proof->Fixture.KeyBindings.Find(Name);
+            if (!bBare || !Bound || K != FKey(FName(**Bound))) { return false; }
+            MatchedBinding = Name; return true;
+        };
+        // Text/modal owners retain their existing Escape behavior. Outside them,
+        // all ten frozen bindings require their exact normalized bare key chord.
+        if (K == EKeys::Escape && (Proof->Policy.Snapshot().bTextEditing || Proof->Policy.Snapshot().bModalOpen)) { Effect = Proof->Policy.Escape(); }
         else if (Proof->Policy.Snapshot().bTextEditing)
         {
             Effect.bConsumed = true;
             if (K == EKeys::BackSpace && !Proof->EditedText.IsEmpty()) { Proof->EditedText.LeftChopInline(1); }
         }
-        else if (K == EKeys::Enter) { Effect = Proof->Policy.Confirm(); }
-        else if (K == EKeys::M) { Effect = Proof->Policy.SetModalOpen(true); }
+        else if (Matches(TEXT("cancel"))) { Effect = Proof->Policy.Escape(); }
+        else if (Matches(TEXT("confirm"))) { Effect = Proof->Policy.Confirm(); }
+        else if (Matches(TEXT("modal"))) { Effect = Proof->Policy.SetModalOpen(true); }
         else
         {
             ECameraAction Action = ECameraAction::None;
-            if (K == EKeys::Left) { Action = ECameraAction::OrbitLeft; }
-            else if (K == EKeys::Right) { Action = ECameraAction::OrbitRight; }
-            else if (K == EKeys::Up) { Action = ECameraAction::OrbitUp; }
-            else if (K == EKeys::Down) { Action = ECameraAction::OrbitDown; }
-            else if (K == EKeys::F) { Action = ECameraAction::FrameBoard; }
-            else if (K == EKeys::G) { Action = ECameraAction::FrameSelection; }
-            else if (K == EKeys::R) { Action = ECameraAction::Reset; }
-            Effect = Proof->Policy.KeyCamera(Action);
+            if (Matches(TEXT("orbit_left"))) { Action = ECameraAction::OrbitLeft; }
+            else if (Matches(TEXT("orbit_right"))) { Action = ECameraAction::OrbitRight; }
+            else if (Matches(TEXT("orbit_up"))) { Action = ECameraAction::OrbitUp; }
+            else if (Matches(TEXT("orbit_down"))) { Action = ECameraAction::OrbitDown; }
+            else if (Matches(TEXT("frame_board"))) { Action = ECameraAction::FrameBoard; }
+            else if (Matches(TEXT("frame_selection"))) { Action = ECameraAction::FrameSelection; }
+            else if (Matches(TEXT("reset"))) { Action = ECameraAction::Reset; }
+            if (Action != ECameraAction::None) { Effect = Proof->Policy.KeyCamera(Action); }
+            else { Effect.bConsumed = true; }
         }
         const auto P = Proof->Sample(G, FSlateApplication::Get().GetCursorPos()); Proof->Apply(Effect, P);
-        Proof->Trace(TEXT("KeyDown:") + K.ToString(), P, Proof->HitTarget(P.Logical, G.GetLocalSize()), Before, Effect);
+        Proof->Trace(TEXT("KeyDown:") + K.ToString(), P, Proof->HitTarget(P.Logical, G.GetLocalSize()), Before, Effect, &E, MatchedBinding);
         FReply Reply = FReply::Handled(); if (Effect.bReleaseCapture) { Reply.ReleaseMouseCapture(); } return Reply;
     }
     virtual FReply OnKeyChar(const FGeometry& G, const FCharacterEvent& E) override
@@ -1094,7 +1144,12 @@ const FFixture& AE02WorldProofGameMode::GetFixture() const { return Proof->Fixtu
 const FInputPolicy& AE02WorldProofGameMode::GetPolicy() const { return Proof->Policy; }
 FIntPoint AE02WorldProofGameMode::GetProofViewportSize() const { return Proof->Extent(); }
 double AE02WorldProofGameMode::GetProofUiScale() const { return FSlateApplication::IsInitialized() ? FSlateApplication::Get().GetApplicationScale() : 0.0; }
-TSharedPtr<FJsonObject> AE02WorldProofGameMode::Snapshot() const { return Proof->Snapshot(); }
+TSharedPtr<FJsonObject> AE02WorldProofGameMode::Snapshot() const
+{
+    const auto Record = Proof->Snapshot();
+    Record->SetArrayField(TEXT("actualDisplayCulling"), Proof->ActualDisplayGeometry(false));
+    return Record;
+}
 bool AE02WorldProofGameMode::WriteSnapshot(const FString& Basename)
 {
     const auto Record = Snapshot();
@@ -1112,6 +1167,7 @@ bool AE02WorldProofGameMode::ResetCase()
     FSlateApplication::Get().ReleaseAllPointerCapture();
     Proof->Policy = FInputPolicy(Proof->Fixture.Camera.DragThresholdLogicalUnits);
     Proof->LastPickHit.Reset(); Proof->LastPickGeneration = 0; Proof->LastPickEventSequence = 0;
+    Proof->LastKeyEvent.Reset();
     Proof->Policy.ViewportChanged(Proof->Extent(), 1.0);
     FSlateApplication::Get().SetApplicationScale(1.0);
     FSlateApplication::Get().SetKeyboardFocus(Proof->Surface);

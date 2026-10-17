@@ -322,18 +322,23 @@ bool BuildDisplayMesh(const FTableFrame& Frame, const FFootprint& Model, double 
             DomainToWorld(Frame, PosePoint(Pose, B, ZB)), DomainToWorld(Frame, PosePoint(Pose, C, ZC)) };
         const FVector3d Normal = FVector3d::CrossProduct(Points[1] - Points[0], Points[2] - Points[0]).GetSafeNormal();
         const FVector2d Locals[3] = { A, B, C };
+        const int32 BaseVertex = Mesh.VerticesWorldCm.Num();
         for (int32 I = 0; I < 3; ++I)
         {
-            Mesh.Triangles.Add(Mesh.VerticesWorldCm.Num());
             Mesh.VerticesWorldCm.Add(Points[I]);
             Mesh.NormalsWorld.Add(Normal);
             Mesh.UV0.Add(FVector2D(Locals[I].X, Locals[I].Y));
             Mesh.VertexColors.Add(Locals[I].X > 0.0 ? FLinearColor(0.9f,0.35f,0.12f) : FLinearColor(0.1f,0.55f,0.9f));
         }
+        // UE GenerateBoxMesh pairs an outward normal with the opposite indexed
+        // cross product. Reverse render indices once for every face, retaining
+        // each vertex's position, outward shading normal, UV and color.
+        Mesh.Triangles.Append({ BaseVertex, BaseVertex + 2, BaseVertex + 1 });
     };
     for (int32 I = 1; I < Outline.Num() - 1; ++I)
     {
-        // Domain CCW becomes CW under the explicit Y reflection; reverse top.
+        // Orient the physical cross product outward after the Y reflection.
+        // AddTriangle separately supplies UE's front-face render index order.
         AddTriangle(Outline[0], Thickness, Outline[I + 1], Thickness, Outline[I], Thickness);
         AddTriangle(Outline[0], 0.0, Outline[I], 0.0, Outline[I + 1], 0.0);
     }
