@@ -1,12 +1,12 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-17 UTC
-**Revision:** 17 — fresh normal E01-SLOW120 execution recorded; factual/documentation freeze and final independent CODE/REQ reviews pending.
+**Revision:** 18 — bounded E01-SLOW120 acceptance recorded from CODE PASS plus valid initial REQ BLOCKED and administrative supplement PASS; next is the E02 packet gate.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of this work and continuation through the migration plan.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
 **Canonical destination:** `Warhammer_40k_UI_unreal/docs/plans/unreal-migration-plan.md` (this file).
-**Review status:** Normal full-chain run `20261017T044903Z-b0169768` completed on executed source `d1189592a5f99bdee58cea25ae8546e5ee2e3623` and packet revision 7. Preflight, verified runtime reuse, Capture, auxiliary privacy inspection, exact-byte promotion, Native and Audit completed in order. Actual results are 87 Python units in 15.167 seconds, 14 Capture checks including source/runtime/schema checks, 132 unique native successes and two automated evidence checks. The 135 pure PowerShell controls with 39 stable inputs are separate pre-execution evidence. All six real editor-settings before/after observations matched, alongside UBT/Config and same-run wire checks. Status is **EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**; finalize the factual/documentation freeze before launching the separate fresh final CODE and REQ contexts under OWN15. Neither final context has launched. Execution is stopped. Historical `030835` retains its omitted six-path comparison as UNVERIFIED. Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, production responsiveness, the original 30-second budget, UE HTTP, rendering, packaging and Linux remain open. [Factual result](evidence/2026-10-16-e01-slow120-result.json); current and historical detail in Section 0.8.
+**Review status:** **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED**, recorded by root at `2026-10-17T06:00:32.004673+00:00` for reviewed head `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`. CODE r13 is PASS. Valid initial REQ r3 remains BLOCKED on administrative A1/A2; its separate supplement is PASS and closes those items. Root combined those dispositions for this narrow diagnostic; the raw initial REQ verdict remains BLOCKED. Contaminated original REQ r2 is invalid and supplies no approval. Normal execution remains `20261017T044903Z-b0169768` on source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`, with unchanged 87/14/132/2 counts, separate 135 pure PowerShell controls/39 inputs and actual settings/wire/process evidence. Publication is a separate metadata overlay outside the reports' reviewed head. Full E01/M01/M02, research/implementation gates, the original 30-second budget, production responsiveness, UE HTTP, rendering, packaging and Linux remain open. [Final review provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json); current and historical detail in Section 0.8.
 
 ### Repository routes and provenance
 
@@ -18,7 +18,27 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 17 changes
+### Revision 18 changes
+
+Root recorded bounded E01-SLOW120 acceptance at `2026-10-17T06:00:32.004673+00:00` by combining actual
+CODE r13 PASS with valid initial REQ r3 BLOCKED and its separate administrative
+supplement PASS closing A1/A2. The original contaminated REQ r2 remains invalid.
+The frozen reviewed candidate is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37`; the executed source remains
+`d1189592a5f99bdee58cea25ae8546e5ee2e3623` and every execution fact/history is unchanged. The later publication
+commit records a separate metadata overlay and is outside the reports' reviewed
+head. Advance only to the unchanged E02 packet gate; E02 remains planning only.
+This does not close full E01, milestones, research, production or platform gates.
+
+### Revision 17 history — 2026-10-17 UTC before final assessments
+
+The following preserves the dated pending state before the final assessments.
+Later review attempts and their validity are distinguished in Section 0.8; this
+historical routing does not describe the current acceptance disposition.
+
+**Review status:** Normal full-chain run `20261017T044903Z-b0169768` completed on executed source `d1189592a5f99bdee58cea25ae8546e5ee2e3623` and packet revision 7. Preflight, verified runtime reuse, Capture, auxiliary privacy inspection, exact-byte promotion, Native and Audit completed in order. Actual results are 87 Python units in 15.167 seconds, 14 Capture checks including source/runtime/schema checks, 132 unique native successes and two automated evidence checks. The 135 pure PowerShell controls with 39 stable inputs are separate pre-execution evidence. All six real editor-settings before/after observations matched, alongside UBT/Config and same-run wire checks. Status is **EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**; finalize the factual/documentation freeze before launching the separate fresh final CODE and REQ contexts under OWN15. Neither final context has launched. Execution is stopped. Historical `030835` retains its omitted six-path comparison as UNVERIFIED. Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, production responsiveness, the original 30-second budget, UE HTTP, rendering, packaging and Linux remain open. [Factual result](evidence/2026-10-16-e01-slow120-result.json); current and historical detail in Section 0.8.
+
+**Current assignment: finalize and freeze the factual record and current documentation for completed normal run `20261017T044903Z-b0169768`, then launch separate fresh cumulative CODE and REQ assessments under OWN15.** Executed source `d1189592a5f99bdee58cea25ae8546e5ee2e3623` and packet revision 7 have a completed same-run chain and real six-path settings observations; no further phase is currently running. The current status is EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING. Final review launch waits for the factual/documentation freeze; neither final context has launched. Keep all raw evidence, process receipts, earlier reports, historical `030835` UNVERIFIED settings criterion and the original 30-second FAIL/UNKNOWN. Final acceptance requires both current independent reports with no unresolved acceptance blockers. After acceptance of this bounded prerequisite, advance to the next E02 packet gate under the existing plan; do not infer broader E01/M01/M02 or implementation acceptance. E02 is unchanged planning only.
+
 
 The fresh normal `044903` run supplies its own real six-path editor-settings
 before/after comparison and completed same-run source/runtime/Capture/privacy/
@@ -105,7 +125,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: finalize and freeze the factual record and current documentation for completed normal run `20261017T044903Z-b0169768`, then launch separate fresh cumulative CODE and REQ assessments under OWN15.** Executed source `d1189592a5f99bdee58cea25ae8546e5ee2e3623` and packet revision 7 have a completed same-run chain and real six-path settings observations; no further phase is currently running. The current status is EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING. Final review launch waits for the factual/documentation freeze; neither final context has launched. Keep all raw evidence, process receipts, earlier reports, historical `030835` UNVERIFIED settings criterion and the original 30-second FAIL/UNKNOWN. Final acceptance requires both current independent reports with no unresolved acceptance blockers. After acceptance of this bounded prerequisite, advance to the next E02 packet gate under the existing plan; do not infer broader E01/M01/M02 or implementation acceptance. E02 is unchanged planning only.
+**Current assignment: advance only to the next E02 packet gate following recorded bounded E01-SLOW120 acceptance.** Current status is BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED, recorded at `2026-10-17T06:00:32.004673+00:00`. The reviewed candidate is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`; execution remains `044903` on source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. CODE r13 PASS and valid initial REQ r3 BLOCKED plus administrative supplement PASS were combined by root; the initial REQ verdict stays BLOCKED and contaminated original REQ r2 is invalid. E02's tracked packet is unchanged and planning only. No E02 proposal, implementation, criteria change or broader acceptance is included. Execution is stopped; preserve prior failures, unknowns and historical unwaived settings gaps.
 
 ### 0.1 Fixed scope and authority
 
@@ -569,25 +589,51 @@ The following is the historical research assignment. OWN11/OWN13 and Section0.8 
 
 ### 0.8 Current execution record — 2026-10-17 UTC
 
-This is the current authority and evidence record; it supersedes historical
-present-tense routing elsewhere. The RQ register remains the research-status
-authority and **RESEARCH_INCOMPLETE**. **BOOT01 Windows CLI bootstrap passed** under
-OWN11. Normal E01-SLOW120 run `20261017T044903Z-b0169768` completed on executed
-source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`: Preflight → PrepareRuntime →
-Capture → auxiliary privacy inspection → exact-byte promotion → Native → Audit.
-This is the new normal same-run chain. The [revision-7 packet](research/2026-10-16-e01-boundary-packet.md)
-SHA256 is `9AE3C7B236EF7897F033163062899B4F0BA8B9A7E622D79E06D5746FA3236367`.
+This is the current bounded acceptance and evidence record. Research remains
+**RESEARCH_INCOMPLETE** and the RQ register remains unchanged. At `2026-10-17T06:00:32.004673+00:00`,
+root recorded **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for frozen reviewed head
+`b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`.
+Normal execution is still `20261017T044903Z-b0169768` on source
+`d1189592a5f99bdee58cea25ae8546e5ee2e3623` and packet revision 7, SHA256
+`9AE3C7B236EF7897F033163062899B4F0BA8B9A7E622D79E06D5746FA3236367`.
+Counts, settings observations, runtime and source identities, wire bytes, raw
+process ledgers and earlier failures/unknowns remain unchanged. Execution is stopped.
 
-The [factual result](evidence/2026-10-16-e01-slow120-result.json) records
-**EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**. All execution is stopped.
-Finalize the factual/documentation freeze, then obtain separate fresh cumulative
-CODE and REQ reports under OWN15; neither final context has launched. The
-[C12 source-only descriptor](research/2026-10-17-e01-slow120-code-review-r12.md),
-SHA256 `CC53E8630C0C88BD1977C2F74927E9F2DF0DF33190D3F9F21C036F96788885B5`,
-preceded execution and supplies no final cumulative verdict. The local execution
-checkpoint `234867b03150be99c797e33c67749ce656f9c08c` preserves the completed
-run/evidence increment without establishing acceptance. After accepted bounded
-E01 proof, advance to the next E02 packet gate; E02 remains planning only.
+| Review or root disposition | Actual recorded outcome | Public report SHA256 |
+|---|---|---|
+| [CODE r13](research/2026-10-17-e01-slow120-code-review-r13.md) | PASS for the reviewed cumulative candidate | `5C8F3E8B7E80A92472B658849CB03333708BEEA892C6057D2A632860D8B3A0E7` |
+| [Original REQ r2](research/2026-10-17-e01-slow120-requirements-r2.md) | BLOCKED; contaminated/invalid initial assessment; excluded from acceptance | `1FADEBA1CD1A3B17E237D4BF790F123B2CC279CC916B1A731855F536E95A4E62` |
+| [Valid initial REQ r3](research/2026-10-17-e01-slow120-requirements-r3.md) | BLOCKED only on administrative A1 privacy approval / A2 checkpoint contents; original verdict unchanged | `6F232432B983EBB65F6CEE39B95F8F0A0ACD6B03539122AE0DB40E2817E8A301` |
+| [REQ r3 administrative supplement](research/2026-10-17-e01-slow120-requirements-r3-administrative-supplement.md) | PASS closing A1/A2; separate new context after the initial assessment was sealed | `C382B8A36ED9D033B892220ADA9FDF265119948A7D9A2455F6C8CD22B197855E` |
+| Root combination | CODE PASS + valid initial REQ BLOCKED with supplement PASS establishes narrow diagnostic acceptance | [Public provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json) |
+
+The initial CODE and valid initial REQ contexts had runtime-enforced read-only,
+approval `never` and disabled `memory_mode`; lower-level memory/feature limits
+remain UNVERIFIED. The administrative supplement used a new context after the
+valid initial assessment was sealed. It was not a resumed or new blind initial
+assessment, and no final CODE verdict was delivered there. Keep each report's
+actual verdict and scope; do not relabel the raw initial REQ report PASS or use
+the invalid r2 assessment as an approval.
+
+The publication commit is a separate metadata overlay that records root's
+combination and public report identities. Those reports did not review that later
+commit. The provenance file binds the overlay files without a self-hash; its
+containing Git commit and separate after-commit receipt are publication evidence,
+not a newly reviewed implementation candidate. The executed source, reviewed
+head and later publication commit must remain distinct identities.
+
+Only this bounded E01-SLOW120 diagnostic is accepted. Full E01/M01/M02,
+G-RESEARCH/G-IMPLEMENT, the original 30-second budget, production responsiveness,
+UE HTTP, rendering, packaging, Linux, Core #588/#589/#590 and RISK19 stay open or
+unaccepted. Advance only to the next E02 packet gate. The tracked E02 packet is
+unchanged and planning only; no E02 proposal or execution result is included.
+
+The revision-17 pending state remains dated history above. It preceded the actual
+final reviews and is separate from the invalid r2 and valid administrative-only
+r3 BLOCKED assessments recorded here. The historical `030835` settings criterion
+remains UNVERIFIED/unwaived. C12 source-only metadata and auxiliary privacy records
+retain their actual scopes and do not supply these final roles. BOOT01 and the
+current run's raw execution facts below are unchanged.
 
 Raw phase records under `.local/experiments/E01-target/20261017T044903Z-b0169768/`
 retain timestamps, predecessor hashes, process ledgers, redaction and sibling state:
@@ -1775,15 +1821,15 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** finalize and freeze the factual record/current documentation for completed normal run `20261017T044903Z-b0169768`, then launch separate fresh cumulative CODE and REQ assessments under OWN15. Neither final context has launched. M00/RQ01 and BOOT01 have evidence. The new revision-7 run has its own six-path editor-settings observations; historical `030835` retains its omitted comparison as UNVERIFIED. Execution is stopped. The full design, capability matrix, experiments, milestones and cutover model retain their separate gates.
+**Ready now:** advance only to the next E02 packet gate following root's recorded bounded E01-SLOW120 acceptance at `2026-10-17T06:00:32.004673+00:00`. CODE r13 PASS and valid initial REQ r3 BLOCKED plus administrative supplement PASS were combined for reviewed head `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`; the raw initial REQ verdict remains BLOCKED. E02's tracked packet remains unchanged and planning only. Execution is stopped; broader criteria and historical gaps remain unchanged.
 
-**Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
+**Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. It does not establish production Unreal HTTP transport, rendering/picking/HUD feasibility, packaged Windows/Linux workflow, durable recovery or production performance. The current run's six editor-settings comparisons are real same-run observations; they do not change historical `030835`'s missing record. Core #588/#589/#590 and RISK19 remain open; the original 30-second FAIL/UNKNOWN remains unchanged. Execution, C12 source-only metadata and auxiliary privacy inspection do not supply final milestone acceptance.
 
 **Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 source characterization and selected44.3.33 adaptation, profile/capability/design checklists, developer Core launch/install recipes, recorded Core issues and BOOT01 scaffold/probe/final builds/generation. Normal `044903` now records 87 Python units in 15.167 seconds, 14 Capture checks, auxiliary privacy/exact-byte promotion, 132 unique native successes, two automated evidence checks and matching settings/DDC/process evidence. Separate pre-execution controls are 135 pure PowerShell checks with 39 stable inputs. Earlier failures, unknowns, settings history and source assessments remain preserved.
 
-**Next concrete step:** complete the factual/documentation freeze and obtain both fresh final OWN15 reports on the frozen cumulative candidate. Resolve actionable findings, re-freeze and obtain fresh affected reviews before accepting or publishing the affected candidate. After acceptance of this bounded E01 prerequisite, advance to the next E02 packet gate under the existing plan; the E02 packet remains unchanged planning only. Preserve the `030835` revision-6 source/result and all earlier failures/unknowns without waiver. Use `READY_FOR_BOUNDED_EXPERIMENT_AUTHORIZATION` only for work genuinely lacking applicable authority, or `READY_FOR_IMPLEMENTATION_AUTHORIZATION` when research/critical evidence are complete and broader implementation needs approval. Later M03 remains the first required packaged real-core 3D playable result; this diagnostic does not satisfy it.
+**Next concrete step:** follow the next E02 packet gate under the existing plan. The tracked E02 packet remains unchanged planning only; no E02 proposal, execution or new broad implementation is included in this acceptance/publication overlay. Preserve reviewed head `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37`, cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`, execution source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`, the original verdicts and the separate metadata publication identity. Historical `030835` revision-6 results and its unwaived settings gap remain unchanged, as do all earlier failures/unknowns. Full E01/M01/M02 and research/production/platform gates remain open. Later M03 still requires its packaged real-core 3D playable result; this narrow diagnostic acceptance does not satisfy it.
 
 ## 16. Sources and inspection index
 

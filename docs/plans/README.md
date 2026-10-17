@@ -1,6 +1,6 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 17, is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 18, is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
@@ -12,7 +12,8 @@ scaffold, probe/final builds, IDE generation and limits. The
 retains the original access failure and source-only preparation.
 
 Current E01-SLOW120 status is
-**EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**. Normal run
+**BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED**, recorded by root at
+`2026-10-17T06:00:32.004673+00:00` for the narrow diagnostic. Normal run
 `20261017T044903Z-b0169768` completed the [revision-7 packet](research/2026-10-16-e01-boundary-packet.md)
 on executed source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. The
 [factual result](evidence/2026-10-16-e01-slow120-result.json) and
@@ -24,18 +25,26 @@ Auxiliary privacy inspection and exact-byte promotion preceded Native. All six
 real editor-settings before/after observations matched, alongside UBT/Config and
 same-run wire checks. Owned execution is stopped.
 
-Finalize the factual/documentation freeze, then launch separate fresh final CODE
-and REQ contexts under OWN15; neither has launched. The
-[C12 source-only descriptor](research/2026-10-17-e01-slow120-code-review-r12.md)
-and auxiliary privacy inspection do not supply final acceptance roles. Actual
-context/model/memory/read-only enforcement limits remain UNVERIFIED for the
-auxiliary inspection. Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, the original
-30-second budget, production responsiveness, UE HTTP, rendering, packaging,
-Linux, Core #588/#589/#590 and RISK19 remain open or unaccepted.
+[CODE r13](research/2026-10-17-e01-slow120-code-review-r13.md) is PASS for candidate
+`b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`.
+Valid [initial REQ r3](research/2026-10-17-e01-slow120-requirements-r3.md) remains BLOCKED on administrative A1/A2;
+its separate [administrative supplement](research/2026-10-17-e01-slow120-requirements-r3-administrative-supplement.md) is PASS and closes
+those items. Root combined those dispositions for bounded acceptance. The
+contaminated [original REQ r2](research/2026-10-17-e01-slow120-requirements-r2.md) is invalid and supplies no
+approval. The [public provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json) records exact identities and
+review limits. The supplement is a new context after the initial assessment was
+sealed, not a resumed or new blind initial assessment; it received no final CODE
+verdict. The later publication commit is a separate metadata overlay outside the
+reviewed head.
 
-After acceptance of the bounded E01 prerequisite, advance to the
-[E02 architecture packet gate](research/2026-10-16-e02-world-input-packet.md).
-That packet remains unchanged and planning only; E02 has not executed.
+Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, the original 30-second budget,
+production responsiveness, UE HTTP, rendering, packaging, Linux, Core
+#588/#589/#590 and RISK19 remain open or unaccepted. Auxiliary privacy and source-only
+records retain their actual isolation limits and do not supply final review roles.
+
+Advance only to the [E02 architecture packet gate](research/2026-10-16-e02-world-input-packet.md).
+The tracked packet is unchanged and planning only; E02 has not executed.
+
 The [E01 continuation PR](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2)
 is recorded as a draft. Its last recorded GitHub result reported no checks, which
 is not a CI pass; this update makes no current remote-state claim. OWN16's
@@ -55,6 +64,9 @@ adds no publication or merge authority.
 - The [source/helper review history](research/2026-10-16-e01-boundary-review.md),
   [original acceptance audit](research/2026-10-16-e01-boundary-acceptance-audit.md)
   and [preliminary SLOW120 audit](research/2026-10-16-e01-slow120-acceptance-audit.md)
-  retain their actual scope and limitations. They do not satisfy the pending final
+  retain their actual scope and limitations. They did not supply the final
   cumulative OWN15 roles. Detailed rounds 2–12 remain linked from the journal and
   canonical plan; their historical results are unchanged.
+
+The revision-17 pending state and subsequent blocked review attempts are preserved
+as dated history in the canonical plan and execution journal.

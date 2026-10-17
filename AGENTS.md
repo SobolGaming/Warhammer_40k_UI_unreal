@@ -55,15 +55,29 @@ before/after observations matched: three present hashes and three established
 absences, alongside all three UBT paths and Native/Audit authored Config checks.
 Keep the completed raw evidence, process receipts and same-run wire binding.
 
-Current status is **EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**. Finalize
-the factual record and documentation freeze, then obtain separate fresh cumulative
-CODE and REQ assessments under OWN15. Neither final context has launched. The C12
-source-only descriptor and auxiliary privacy inspection do not supply those roles;
-their actual isolation limits remain recorded. Execution is stopped. The local
-execution checkpoint `234867b03150be99c797e33c67749ce656f9c08c` preserves the
-completed run without establishing acceptance. Full E01/M01/M02 and the research/
-implementation gates remain open. After acceptance of this bounded prerequisite,
-advance to the next E02 packet gate; the existing E02 packet is planning only.
+Current status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED**, recorded by root at
+`2026-10-17T06:00:32.004673+00:00` for the narrow E01-SLOW120 diagnostic. The reviewed candidate is
+`b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base
+`0467ee63fe6d4c775f429afae2233d7292787c31`; its execution evidence is the unchanged
+`044903` run on source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`.
+CODE r13 is PASS. Valid initial REQ r3 remains BLOCKED on administrative A1/A2;
+the separate administrative supplement is PASS and closes those items. Root
+combined those dispositions for bounded acceptance; do not rewrite the initial
+REQ verdict as PASS. The contaminated original REQ r2 is invalid and contributes
+no approval. See `docs/plans/evidence/2026-10-17-e01-slow120-final-review-provenance.json` and the
+separate public reports linked from plan Section 0.8. Supplement SHA256 is
+`C382B8A36ED9D033B892220ADA9FDF265119948A7D9A2455F6C8CD22B197855E`.
+
+The initial CODE and valid initial REQ contexts had runtime-enforced read-only,
+approval `never` and disabled `memory_mode`; lower-level memory/feature limits
+remain UNVERIFIED. The supplement used a new context after the valid initial
+assessment was sealed; it was neither a resumed assessment nor a new blind initial
+review, and received no final CODE verdict. The later publication commit is a
+separate metadata overlay; those reports did not review that later commit.
+Execution is stopped. Full E01/M01/M02, research/implementation gates, the original
+30-second budget, production responsiveness, UE HTTP, rendering, packaging and
+Linux remain open. Advance only to the next E02 packet gate. Its tracked packet
+is unchanged and planning only; this record supplies no E02 execution result.
 
 Historical normal run `20261017T030835Z-0d4af4e2`, source
 `c2614b2484a66bd8465b855e59b184d49b2b926d` and packet revision 6, retains its

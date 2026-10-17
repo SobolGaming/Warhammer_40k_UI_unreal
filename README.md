@@ -57,16 +57,28 @@ Aggregate transport observations were 139 HTTP requests with maximum 31.1409296
 seconds, and 129 local requests with maximum 32.0962418 seconds. These maxima do
 not establish per-command attribution, the old 30-second budget or production
 responsiveness ([Core #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590)).
-The [factual result](docs/plans/evidence/2026-10-16-e01-slow120-result.json) is
-**EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**: factual/documentation freeze
-and separate fresh final CODE/REQ assessments remain pending. Execution is stopped;
-auxiliary inspection and source-only review do not supply final OWN15 acceptance.
-Full E01 remains unaccepted. The historical `030835` run retains its missing
+The [factual result](docs/plans/evidence/2026-10-16-e01-slow120-result.json) records
+**BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** at `2026-10-17T06:00:32.004673+00:00`.
+Root combined [CODE r13 PASS](docs/plans/research/2026-10-17-e01-slow120-code-review-r13.md) with the valid
+[initial REQ r3 BLOCKED](docs/plans/research/2026-10-17-e01-slow120-requirements-r3.md) and its separate
+[administrative supplement PASS](docs/plans/research/2026-10-17-e01-slow120-requirements-r3-administrative-supplement.md),
+which closed A1/A2. The initial REQ verdict remains BLOCKED. The contaminated
+[original REQ r2](docs/plans/research/2026-10-17-e01-slow120-requirements-r2.md) is invalid and supplies no approval.
+The [final review provenance](docs/plans/evidence/2026-10-17-e01-slow120-final-review-provenance.json) binds reviewed
+candidate `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37`, cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`
+and the unchanged `044903` execution on source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`.
+The later publication commit is a separate metadata overlay; the reports did not
+review that later commit. Execution is stopped. The narrow diagnostic is accepted;
+full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
+UE HTTP, rendering, packaging and Linux remain open. Next is only the E02 packet
+gate; its tracked packet is unchanged and planning only.
+
+The historical `030835` run retains its missing
 six-path editor-settings comparison as **UNVERIFIED** in its
 [byte-exact archive](docs/plans/evidence/2026-10-17-e01-slow120-result-030835-schema2-history.json);
 the new run does not retroactively fill that gap. The journal preserves all earlier
-failures and unknown outcomes. After acceptance of the bounded E01 prerequisite,
-the next step is the E02 packet gate; E02 remains planning only.
+failures and unknown outcomes. The prior revision-17 pending state is retained
+as dated history in the canonical plan and journal.
 
 The manual installation alternatives below are not E01's executed commands. Unreal
 project creation/build is specified in
