@@ -147,6 +147,14 @@ void FillHit(const FRay& Ray, const FVector3d& Origin,
 {
     Out = { Kind, Id, Origin + Direction * Distance, Ray.OriginWorldCm + Ray.DirectionWorldUnit * Distance, Distance };
 }
+bool HitPrecedes(double Distance, const FString& Id, double BestDistance, const FString& BestId)
+{
+    // Depth is the computed double ray distance in world centimetres. Only exact
+    // equality uses the case-sensitive ordinal ID order: a tolerance must never
+    // allow a representably farther hit to win because of its identity.
+    return Distance < BestDistance ||
+        (Distance == BestDistance && Id.Compare(BestId, ESearchCase::CaseSensitive) < 0);
+}
 }
 
 const TCHAR* DiagnosticCodeName(EDiagnosticCode Code)
@@ -356,7 +364,7 @@ bool RaycastSupport(const FTableFrame& Frame, const TArray<FSupportSurface>& Sup
         if (FMath::Abs(D.Z) < Epsilon) continue;
         const double T = (Surface.ZInches - O.Z) / D.Z;
         const FVector2d P(O.X + D.X * T, O.Y + D.Y * T);
-        if (T <= Epsilon || T >= Best || !InBounds(Surface.BoundsInches, P)) continue;
+        if (T <= Epsilon || !HitPrecedes(T, Surface.Id, Best, BestId) || !InBounds(Surface.BoundsInches, P)) continue;
         bool bHole = false;
         // Hole edges are excluded too: never bridge a visible hole with a hit.
         for (const FBounds2d& Hole : Surface.HolesInches) bHole |= InBounds(Hole, P);
@@ -426,7 +434,7 @@ bool RaycastModels(const FTableFrame& Frame, const TArray<FFootprint>& Models,
             }
         }
         for (const double T : Candidates)
-            if (FMath::IsFinite(T) && T > Epsilon && T < Best && Z + D.Z * T >= -Epsilon &&
+            if (FMath::IsFinite(T) && T > Epsilon && HitPrecedes(T, Model.Id, Best, BestId) && Z + D.Z * T >= -Epsilon &&
                 Z + D.Z * T <= Model.QueryHeightInches + Epsilon && ContainsLocalPoint(Model, XY + V * T))
             { Best = T; BestId = Model.Id; }
     }
@@ -445,7 +453,7 @@ bool RaycastAdvisory(const FTableFrame& Frame, const TArray<FFootprint>& Models,
     const bool bSupport = RaycastSupport(Frame, Supports, Ray, Support, SupportError);
     if (!bSupport && SupportError.Code != EDiagnosticCode::NoHit) { Error = SupportError; return false; }
     if (!bModel && !bSupport) return Fail(Error, EDiagnosticCode::NoHit, TEXT("scene"), TEXT("Ray misses advisory model and support descriptors."));
-    OutHit = bModel && (!bSupport || Model.DistanceWorldCm <= Support.DistanceWorldCm) ? Model : Support;
+    OutHit = bModel && (!bSupport || HitPrecedes(Model.DistanceWorldCm, Model.Id, Support.DistanceWorldCm, Support.Id)) ? Model : Support;
     Error = {};
     return true;
 }

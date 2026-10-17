@@ -232,6 +232,104 @@ bool FE02ShapesWinding::RunTest(const FString& Parameters)
     Assertions.TestTrue(TEXT("Through-hole ray can reach ground"), RaycastSupport(F.Frame, F.Supports, DownRay(F.Frame, FVector3d(35,23,10)), Hit, Error));
     Assertions.TestEqual(TEXT("Hole reaches ground identity"), Hit.Id, FString(TEXT("e02-ground")));
     Assertions.TestFalse(TEXT("Outside support edge is not clamped"), RaycastSupport(F.Frame, {F.Supports[1]}, DownRay(F.Frame, FVector3d(48.0001,27,10)), Hit, Error));
+
+    // Coincident analytic descriptors exercise depth/identity ordering without
+    // altering the frozen five-pose scene or consuming display geometry. IDs
+    // differ only in case so an accidental case-insensitive comparison fails.
+    const FTableFrame PickingFrame;
+    const FRay PickingRay = DownRay(PickingFrame, FVector3d(0,0,10));
+    FFootprint ModelA = F.Models[0];
+    ModelA.Id = TEXT("e02-A-model");
+    ModelA.Pose = FDomainPose { FVector3d::ZeroVector, 0.0 };
+    ModelA.QueryHeightInches = 1.0;
+    FFootprint ModelZ = ModelA;
+    ModelZ.Id = TEXT("e02-a-model");
+    FSupportSurface SupportA;
+    SupportA.Id = TEXT("e02-A-support");
+    SupportA.BoundsInches = { FVector2d(-1,-1), FVector2d(1,1) };
+    SupportA.ZInches = 1.0;
+    FSupportSurface SupportZ = SupportA;
+    SupportZ.Id = TEXT("e02-a-support");
+    FAdvisoryHit BaselineModel, BaselineSupport;
+    if (!Assertions.TestTrue(TEXT("Independent coincident model baseline hits"),
+        RaycastModels(PickingFrame, {ModelA}, PickingRay, BaselineModel, Error))) return false;
+    if (!Assertions.TestTrue(TEXT("Independent coincident support baseline hits"),
+        RaycastSupport(PickingFrame, {SupportA}, PickingRay, BaselineSupport, Error))) return false;
+    Assertions.TestEqual(TEXT("Mixed tie has exactly equal computed double depth"),
+        BaselineModel.DistanceWorldCm, BaselineSupport.DistanceWorldCm);
+    for (const bool bReverse : { false, true })
+    {
+        const TArray<FFootprint> Models = bReverse ? TArray<FFootprint>{ModelZ,ModelA} : TArray<FFootprint>{ModelA,ModelZ};
+        if (Assertions.TestTrue(TEXT("Coincident models hit in either descriptor order"),
+            RaycastModels(PickingFrame, Models, PickingRay, Hit, Error)))
+        {
+            Assertions.TestEqual(TEXT("Exact model depth tie chooses earlier stable ID in either order"), Hit.Id, ModelA.Id);
+            Assertions.TestEqual(TEXT("Model tie preserves the actual depth"), Hit.DistanceWorldCm, BaselineModel.DistanceWorldCm);
+        }
+        const TArray<FSupportSurface> Supports = bReverse ? TArray<FSupportSurface>{SupportZ,SupportA} : TArray<FSupportSurface>{SupportA,SupportZ};
+        if (Assertions.TestTrue(TEXT("Coincident supports hit in either descriptor order"),
+            RaycastSupport(PickingFrame, Supports, PickingRay, Hit, Error)))
+        {
+            Assertions.TestEqual(TEXT("Exact support depth tie chooses earlier stable ID in either order"), Hit.Id, SupportA.Id);
+            Assertions.TestEqual(TEXT("Support tie preserves the actual depth"), Hit.DistanceWorldCm, BaselineSupport.DistanceWorldCm);
+        }
+    }
+    if (Assertions.TestTrue(TEXT("Mixed exact tie with earlier model identity hits"),
+        RaycastAdvisory(PickingFrame, {ModelA}, {SupportZ}, PickingRay, Hit, Error)))
+    {
+        Assertions.TestEqual(TEXT("Global ID order can choose model over coincident support"), Hit.Id, ModelA.Id);
+        Assertions.TestTrue(TEXT("Earlier model identity retains model kind"), Hit.Kind == EHitKind::Model);
+    }
+    if (Assertions.TestTrue(TEXT("Mixed exact tie with earlier support identity hits"),
+        RaycastAdvisory(PickingFrame, {ModelZ}, {SupportA}, PickingRay, Hit, Error)))
+    {
+        Assertions.TestEqual(TEXT("Global ID order can choose support over coincident model"), Hit.Id, SupportA.Id);
+        Assertions.TestTrue(TEXT("Earlier support identity retains support kind"), Hit.Kind == EHitKind::Support);
+    }
+
+    // The difference is representable but smaller than the geometry boundary
+    // tolerance. It must remain a depth difference, never an ID tie group.
+    FFootprint NearModelZ = ModelZ;
+    NearModelZ.QueryHeightInches += 1.e-12;
+    FSupportSurface NearSupportZ = SupportZ;
+    NearSupportZ.ZInches += 1.e-12;
+    Assertions.TestTrue(TEXT("Near-depth control uses a positive sub-tolerance separation"),
+        NearModelZ.QueryHeightInches > ModelA.QueryHeightInches &&
+        NearModelZ.QueryHeightInches - ModelA.QueryHeightInches < 1.e-10);
+    auto StrictlyNearer = [&Assertions](const FAdvisoryHit& Near, const FAdvisoryHit& Far)
+    {
+        const double DifferenceCm = Far.DistanceWorldCm - Near.DistanceWorldCm;
+        Assertions.TestTrue(TEXT("Representably nearer hit wins even below1e-10cm"), DifferenceCm > 0.0 && DifferenceCm < 1.e-10);
+    };
+    for (const bool bReverse : { false, true })
+    {
+        const TArray<FFootprint> Models = bReverse ? TArray<FFootprint>{NearModelZ,ModelA} : TArray<FFootprint>{ModelA,NearModelZ};
+        if (Assertions.TestTrue(TEXT("Unequal-depth models hit in either descriptor order"),
+            RaycastModels(PickingFrame, Models, PickingRay, Hit, Error)))
+        {
+            Assertions.TestEqual(TEXT("Nearer model wins despite lexically later ID in either order"), Hit.Id, NearModelZ.Id);
+            StrictlyNearer(Hit, BaselineModel);
+        }
+        const TArray<FSupportSurface> Supports = bReverse ? TArray<FSupportSurface>{NearSupportZ,SupportA} : TArray<FSupportSurface>{SupportA,NearSupportZ};
+        if (Assertions.TestTrue(TEXT("Unequal-depth supports hit in either descriptor order"),
+            RaycastSupport(PickingFrame, Supports, PickingRay, Hit, Error)))
+        {
+            Assertions.TestEqual(TEXT("Nearer support wins despite lexically later ID in either order"), Hit.Id, NearSupportZ.Id);
+            StrictlyNearer(Hit, BaselineSupport);
+        }
+    }
+    if (Assertions.TestTrue(TEXT("Nearer model competes with lexically earlier support"),
+        RaycastAdvisory(PickingFrame, {NearModelZ}, {SupportA}, PickingRay, Hit, Error)))
+    {
+        Assertions.TestEqual(TEXT("Depth precedes global ID when the model is nearer"), Hit.Id, NearModelZ.Id);
+        StrictlyNearer(Hit, BaselineSupport);
+    }
+    if (Assertions.TestTrue(TEXT("Nearer support competes with lexically earlier model"),
+        RaycastAdvisory(PickingFrame, {ModelA}, {NearSupportZ}, PickingRay, Hit, Error)))
+    {
+        Assertions.TestEqual(TEXT("Depth precedes global ID when the support is nearer"), Hit.Id, NearSupportZ.Id);
+        StrictlyNearer(Hit, BaselineModel);
+    }
     return !Assertions.HasAnyErrors();
 }
 

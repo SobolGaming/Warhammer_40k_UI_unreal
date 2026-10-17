@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **SOURCE_AUTHORED_SOURCE_REVIEW_PENDING; E02 NOT RUN**.
+Status: **SOURCE_REMEDIATION_REQUIRED_FRESH_SOURCE_REVIEW_PENDING; E02 NOT RUN**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -62,8 +62,8 @@ prepare concrete source first. No offscreen substitute or human input is claimed
 | Gate | Actual status |
 |---|---|
 | Bounded predecessor, packet review and OWN13 applicability | RECORDED for source authoring only |
-| Executable source and fixture/defaults | AUTHORED; compilation and behavior unverified |
-| Complete source/toolchain/asset/plugin-closure freeze and independent source review | PENDING; required before the first SUP control/build/native process |
+| Executable source and fixture/defaults | AUTHORED; source remediation in progress; compilation and behavior unverified |
+| Complete source/toolchain/asset/plugin-closure freeze and independent source review | Reviewed `0716ac9`: CHANGES_REQUESTED; remediate, checkpoint and obtain fresh affected source review before the first SUP control/build/native process |
 | SUP01–SUP03 and owned-tree cleanup | NOT RUN |
 | Build/discovery/4 numeric/4 rendered/8 input | NOT RUN |
 | Six PNGs and real driver→Slate→world traces | NOT RUN |
@@ -105,3 +105,62 @@ A later visible-window approval uses a new authority path. Strict phase order is
 Preflight, SupervisorControls, Build, Discovery, Numeric, WorldInput, Audit;
 Discovery must establish the exact 16-name set before either test filter.
 Only hidden controls/build can advance while visible-window approval is pending.
+
+## First independent source assessment — 2026-10-17 UTC
+
+The first pre-execution SOURCE assessment reviewed exact candidate
+`0716ac917a272c0c6587b1ff075fcb594adde5c1` against
+`bd801233cc9989e0ae146a3be7b136d26dc73183`. Its unchanged
+[raw report](../../../.local/reviews/E02-source-review/source-0716-20261017T065013Z-a2f540c0/last-message.txt)
+is **CHANGES_REQUESTED**, 11,434 bytes, SHA256
+`67B5BDAFD41A18A4C3CA05CA127FF3D50F05A5780EFB0CC50C8FC0A206D8B8D9`.
+The report's sealed observation is `2026-10-17T07:03:06.5311319Z`; the CLI
+completed at `2026-10-17T07:04:48.8110512Z` with exit0. That exit records review
+completion, not approval of the candidate or any E02 execution.
+
+The [separate operator seal](../../../.local/reviews/E02-source-review/source-0716-20261017T065013Z-a2f540c0/orchestrator-seal.json),
+SHA256 `C7492C6CF50F80E1AF11CC577B76C6E87E32E4AA6FA07B10B3C810926DF460E9`,
+records inspection of all44 command items and the complete output audit. No
+author/peer-history body exposure, Git messages, prohibited execution, network,
+app/collaboration use or policy bypass was observed. All1,120 frozen file
+descriptors,28 source-membership entries,16 packet inputs, five normative
+originals and five runtime-host files matched after review; HEAD and Git status
+were unchanged. Two reviewer command errors and the corrected operator metadata
+attempts remain preserved. No E02 wrapper, authored function, Add-Type compiler,
+control, build, test, Unreal/Core process or GUI ran.
+
+The new session was `01a148a2-0047-76e2-8195-5f90bfbd6ba1`, launched from the
+workspace root with CLI `0.162.0-alpha.17.2`, configured default `gpt-6.1-sol` /
+`ultra` and no model override. Selected actual runtime metadata records read-only
+permissions, approval `never` and session `memory_mode=disabled`. Keep these
+operator observations separate from the raw report's self-unverified properties;
+do not edit that report. Requested app/multi-agent disabling was not verified:
+tools were exposed, with no use observed. Lower-level memory/feature/OS guarantees
+and the child OS PID association remain UNVERIFIED; the latter's CIM lookup was
+denied, with no policy weakening or escalation retry.
+
+The actionable findings are:
+
+1. P1: the assertion-summary parser rejects the elapsed/status suffix emitted by
+   all twelve rendered/input cases.
+2. P2: the Add-Type compiler's two Roslyn binaries and complete167-assembly
+   reference set are outside the input freeze.
+3. P2: inherited .NET selection variables can bypass the declared bundled SDK.
+4. P2: final artifact publication failure can leave contradictory success output.
+5. P2: equal-depth model/support picking follows descriptor order rather than
+   stable identity.
+
+Root released the completed `0716ac9` freeze only after the post-review seal.
+`e02_scope_minimality` owns the four supervisor fixes;
+`e02_geometry_remediation` owns deterministic depth/identity ordering and
+assertions within the existing numeric case. `e02_world_author` strengthens the
+existing logical-displacement and resize domain-hit assertions noted as weaker
+coverage in the report. These are implementer roles, not independent approvals.
+No new test cases, fixture defaults, dependencies or authored paths are authorized.
+
+Checkpoint the completed fixes, freeze their actual source/compiler/tool/asset
+inputs and obtain a fresh independent affected SOURCE assessment. Its initial
+context must exclude this report, remediation notes, peer conclusions and Git
+message bodies. This failed source gate supplies no execution permission and
+neither final OWN15 role. Actual execution, visible-window approval, rendered
+evidence and final CODE/REQ acceptance remain separate pending gates.
