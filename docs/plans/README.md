@@ -29,7 +29,10 @@ startup side effects remain recorded. The [preliminary evidence audit](research/
 does not satisfy OWN15's fresh blind code/requirements gate. The initial code
 review requested finite-envelope/session-abandonment and header-deadline fixes;
 the initial auditor requires raw process provenance and consistent plan line
-endings. Packet revision5 binds repairs, fresh review and a new full chain.
+endings. The [round-2 code review](research/2026-10-17-e01-slow120-code-review-r2.md)
+additionally requires guarded attach/lifecycle commands and same-run Capture/native
+fixture binding. Packet revision6 binds these repairs and the actual worker
+process inventory, fresh review and a new full chain.
 The [factual result JSON](evidence/2026-10-16-e01-slow120-result.json) binds the
 Capture and native supplement without asserting independent acceptance.
 The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md)
@@ -38,6 +41,6 @@ The [E01 continuation PR](https://github.com/SobolGaming/Warhammer_40k_UI_unreal
 is a draft with the failed result explicit; GitHub reported no checks, which is
 not a CI pass. The plan/BOOT01 PR remains merged.
 OWN14 covers the separate `E01-SLOW120` diagnostic, historical revision4 supplement
-and revision5 repairs/fresh proof under the same bounds.
+and revision6 repairs/fresh proof under the same bounds.
 The earlier 30-second failure and its acceptance record remain unchanged; new
 diagnostic results and any renewed audit are recorded separately.

@@ -50,7 +50,10 @@ disabled. The journal preserves earlier guard/log failures and generated startup
 configuration outputs. Initial fresh code review requested repairs to uncertain
 command handling and absolute header deadlines; the separate requirements audit
 needs raw process-ledger extracts and consistent plan line endings. Packet
-revision5 requires those fixes, fresh review and a new full diagnostic chain.
+revision6 requires guarded commands in every launch/attach lane, a complete worker
+process record and native fixtures bound to the same fresh Capture. The separate
+round-2 source review found the attach/fixture gaps before a new Core run.
+Fresh review and a new full diagnostic chain remain required.
 Prior execution remains evidence for its recorded source. Full E01 is unaccepted.
 The manual installation alternatives below are not its executed commands. Unreal project creation/build is
 specified in [plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).

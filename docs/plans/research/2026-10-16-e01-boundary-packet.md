@@ -1,10 +1,62 @@
 # E01-WIN-BOUNDARY: selected Core boundary proof packet
 
-Date: 2026-10-16. Packet revision: **5; E01-SLOW120 failure-path remediation**.
+Date: 2026-10-16. Packet revision: **6; E01-SLOW120 command and fixture provenance**.
 This packet refines Section 0 RQ03/RQ06/RQ08/RQ15/RQ17/RQ20/RQ23 of the
 [canonical plan](../unreal-migration-plan.md). It credits completed BOOT01 and
 defines the next bounded Windows proof. It does not claim full E01, M01,
 G-RESEARCH, G-IMPLEMENT, rendering, packaging or cross-platform acceptance.
+
+## Revision 6: all command lanes and current-Capture native binding
+
+The same OWN14/OWN15 scope and budgets apply. Route the HTTP-only attach-worker
+finite action and supervisor lifecycle start/close through guarded submissions,
+as well as the paired main scenario. Validate before send and retain exact
+credential-free envelope, submitted role and session in ignored private control
+evidence. For the attach worker, retain the authorized actor's actual request/view
+before submission. Never export that view under a denied principal or as public
+wire. A possibly submitted command without a complete receipt is UNKNOWN; latch
+the lane abandoned and do not send another command or automatic retry.
+
+The worker must communicate a typed terminal result distinguishing accepted,
+known rejected/preparation failure and unknown completion. Preserve actual
+received outcomes privately; the parent's result must propagate UNKNOWN rather
+than treating a possibly committed action as an ordinary known failure. A killed
+worker or absent terminal receipt cannot establish rollback. Abandon the session
+and retain ownership/cleanup evidence. Add a complete safe attach-worker process
+record (executable/script identities, arguments, PID, start/exit, exit/timeout,
+limits and cleanup) to the actual owned-process inventory. Earlier captures lack
+that structured worker record; do not invent a historical PID or retrofit them.
+
+Apply the same receipt discipline to the two existing session-create calls:
+retain their exact generated configuration and submitted administrator scope
+privately before send, mark possible response loss UNKNOWN, and stop without
+downstream start/action/retry. This API has no supported creation idempotency;
+do not invent a command ID/key or recreate the session to conceal uncertainty.
+This adjacent failure-control repair changes no Core API or hosting capability.
+
+For the normal fresh chain, Native must bind its reviewed versioned wire index
+and every body to **this run's** successful Capture report/artifact hashes before
+building. Verify exact predecessor, child-report, runtime/source identities,
+nonempty required case counts, safe paths and complete case/role/metadata/body
+membership. Matching a versioned index only against itself is insufficient.
+Persist the Capture→promotion→Native binding, recheck it after Native, and require
+Audit to revalidate that same binding before/after its work. Reject a stale index,
+substituted body or changed Capture artifact even when its own index is coherent.
+Retain independent privacy approval before promotion and Native execution.
+
+The historical explicit revision4 link remains restricted to its original inputs
+and cannot bypass current-source guards. The current candidate must use a fresh
+full chain without `-CaptureRunId`. Add focused response-loss worker/lifecycle
+tests and matching/stale/mutated fixture-binding regressions using owned isolated
+test fixtures only. No new Core host, production transport or broader gameplay
+work is authorized. Re-freeze and obtain fresh source review before execution;
+final code/requirements reviews cover the final promoted fixtures and evidence.
+`tests/migration/Test-E01CaptureWireBinding.ps1` extends the bounded file contract
+only for maintained standard-PowerShell guard regressions. It may use immutable
+versioned wire and isolated synthetic metadata/copies, execute read-only guard
+functions and write a unique ignored test receipt. It must not invoke the actual
+phase dispatcher, Core host, compiler, Unreal or global-setting/cache mutation.
+Label its counts as guard tests, never real-Core or native Automation cases.
 
 ## Revision 5: bounded failure-path repairs and fresh full proof
 

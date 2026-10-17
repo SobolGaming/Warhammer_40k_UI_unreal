@@ -570,3 +570,35 @@ the successful subsets of earlier execution. This entry closes no finding,
 supplies no fresh verdict and accepts neither E01 nor the whole migration.
 Earlier failed/unknown outcomes, helper-review limitations and immutable review
 reports remain preserved.
+
+## OWN15 round-2 pre-execution source review
+
+Fresh CLI session `01a1476f-83f2-7160-b47b-50634d75e095` assessed clean HEAD
+`f318dc2a78da478867f79af5cb80159408fd5369` against base
+`0467ee63fe6d4c775f429afae2233d7292787c31`. Its byte-exact
+[original report](2026-10-17-e01-slow120-code-review-r2.md), SHA256
+`800B48EAB7C605C61A8F772D0F27AF0312E70665077403D4E9E57D427CCF8EBA`,
+is **CHANGES_REQUESTED**. The reviewing CLI completed at
+`2026-10-17T01:23:55.681524Z`, exit0, with29 completed read-only commands.
+All173 declared candidate hashes and the clean tree remained unchanged.
+
+The context received clean normative criteria and source-bound47-unit logs,
+not earlier reviews, author notes or mixed status prose. Automatically loaded
+AGENTS had prior findings removed before launch; no context launched against
+the preceding instruction draft. Invocation/runtime records under ignored
+`code-r2-20261017T011712Z-0d44782b` retain CLI0.162.0-alpha.17.2, actual
+modelgpt-6.1-sol, read-only/approval-never, memory_mode disabled and no resume/fork.
+Low-level memory internals remain unverified. These supplementary observations
+do not rewrite the original reviewer's personal-observability statements.
+
+The report found attach-worker finite and supervisor start/close commands bypassed
+the paired guard, losing pre-send envelopes and explicit UNKNOWN on response loss.
+It also found normal Native checked promoted wire only against itself, allowing
+stale bytes unrelated to current Capture. It requires guarded command lanes and
+Capture index/body binding through Audit. The deadline repair and inspected47-unit
+evidence were supported, not current-candidate runtime acceptance.
+
+Revision6 covers focused repairs and a complete worker process inventory. No new
+Core Capture/build/native phase ran. Fresh source review precedes the full chain;
+final code/requirements contexts cover final promoted fixtures/results. This
+factual entry supplies no independent verdict or waiver of either P1 finding.

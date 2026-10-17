@@ -634,6 +634,81 @@ def operational_normalize(value: object) -> object:
     return value
 
 
+def record_submission_attempt(report: Report, session: str, command: dict, role: str, ordinal: int, *, namespace: str | None = None) -> Path:
+    """Private control input, never a role's authorized projection or fixture."""
+    root = report.output / "privileged-submission-attempts"
+    if namespace is not None:
+        require(SLUG.fullmatch(namespace) is not None, "Unsafe submission-control namespace")
+        root /= namespace
+    path = root / ("command_" + str(ordinal) + ".json")
+    write_new(path, json_bytes({"schemaVersion": 1, "recordScope": "Privileged submission control; never publish as a viewer fixture", "submittedRole": role, "sessionId": session, "commandEnvelope": command, "envelopeBytesSHA256": sha256(json_bytes(command)), "observation": "Prepared before submission; no completion outcome asserted"}), report.secrets)
+    report.artifact(path)
+    return path
+
+
+class HttpCommandLane:
+    """Single-transport lifecycle commands with retained input and no unknown reuse."""
+    def __init__(self, endpoint: Endpoint, report: Report, schemas: Schemas, session: str, namespace: str):
+        self.endpoint, self.report, self.schemas = endpoint, report, schemas
+        self.session, self.namespace = session, namespace
+        self.submissions = 0
+        self.submission_unknown = False
+        self.last_attempt: Path | None = None
+        self.last_reply: Reply | None = None
+
+    def submit(self, command: dict, role: str) -> Reply:
+        require(getattr(self.endpoint, "creation_unknown", False) is not True, "Session creation UNKNOWN; no commands or automatic recreation")
+        require(not self.submission_unknown, "Session abandoned after UNKNOWN completion; no further submissions or automatic retries")
+        self.schemas.validate("session-command-envelope.schema.json", command)
+        require(command.get("session_id") == self.session, "HTTP command session does not match its guarded lane")
+        self.submissions += 1
+        require(self.submissions <= 256, "Canonical scenario exceeded 256 submissions")
+        self.last_attempt = record_submission_attempt(self.report, self.session, command, role, self.submissions, namespace=self.namespace)
+        self.last_reply = None
+        try:
+            reply = self.endpoint.request("POST", f"/sessions/{self.session}/commands", role, command)
+            outcome = classify(reply.status, reply.body)
+            require(outcome in ("accepted", "recorded_invalid", "uncommitted_invalid", "error"), "Command response is not a recognized receipt")
+            self.schemas.validate("error-envelope.schema.json" if "error" in reply.body else "session-command-outcome.schema.json", reply.body)
+            if "error" not in reply.body:
+                require(reply.body["command_id"] == command["command_id"] and reply.body["session"]["session_id"] == self.session, "Command receipt identity differs from its retained submission")
+        except (BoundaryError, OSError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
+            self.submission_unknown = True
+            raise CompletionUnknown("Command completion UNKNOWN; abandon this session without further submissions") from exc
+        self.last_reply = reply
+        response_path = self.last_attempt.with_suffix(".response.json")
+        write_new(response_path, reply.raw, self.report.secrets)
+        self.report.artifact(response_path)
+        return reply
+
+
+def create_session_attempt(client, config: dict, report: Report, schemas: Schemas, namespace: str, *, paired: bool = False):
+    """Preserve creation input; the selected Core has no creation retry identity."""
+    require(getattr(client, "creation_unknown", False) is not True, "Session creation UNKNOWN; no automatic retry or recreation")
+    schemas.validate("session-create.schema.json", config)
+    require(SLUG.fullmatch(namespace) is not None, "Unsafe session-create control namespace")
+    path = report.output / "privileged-session-create-attempts" / (namespace + ".json")
+    write_new(path, json_bytes({"schemaVersion": 1, "recordScope": "Privileged session creation control; never publish as a viewer fixture", "submittedRole": "admin", "requestBody": config, "requestBytesSHA256": sha256(json_bytes(config)), "observation": "Prepared before creation; no completion outcome asserted", "retryPolicy": "No creation idempotency API or retry identity; abandon on UNKNOWN, do not recreate"}), report.secrets)
+    report.artifact(path)
+    try:
+        response = client.request("POST", "/sessions", "admin", config)
+        reply = response[1] if paired else response
+        if reply.status == 201:
+            string_field(reply.body, "session_id")
+        else:
+            require(classify(reply.status, reply.body) == "error", "Session create response is not a recognized receipt")
+            schemas.validate("error-envelope.schema.json", reply.body)
+    except (BoundaryError, OSError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
+        client.creation_unknown = True
+        if paired:
+            client.submission_unknown = True
+        raise CompletionUnknown("Session creation completion UNKNOWN; abandon without retry, recreation or further commands") from exc
+    response_path = path.with_suffix(".response.json")
+    write_new(response_path, reply.raw, report.secrets)
+    report.artifact(response_path)
+    return response
+
+
 class Pair:
     def __init__(self, local: Endpoint, http: Endpoint, captures: Captures):
         self.local, self.http, self.captures = local, http, captures
@@ -686,10 +761,7 @@ class Pair:
         # projection: denied-role negative cases intentionally reuse actor input.
         # Keep exact envelopes for every potentially uncertain submission, even
         # admin start and negative commands that have no full actor-view snapshot.
-        report = self.captures.report
-        attempt = report.output / "privileged-submission-attempts" / ("command_" + str(self.submissions) + ".json")
-        write_new(attempt, json_bytes({"schemaVersion": 1, "recordScope": "Privileged submission control; never publish as a viewer fixture", "submittedRole": role, "sessionId": self.session, "commandEnvelope": command, "envelopeBytesSHA256": sha256(json_bytes(command)), "observation": "Prepared before paired submission; no completion outcome asserted"}), report.secrets)
-        report.artifact(attempt)
+        record_submission_attempt(self.captures.report, self.session, command, role, self.submissions)
         try:
             return self.request("POST", f"/sessions/{self.session}/commands", role, command)
         except (BoundaryError, OSError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
@@ -972,9 +1044,12 @@ def authorized_candidate_snapshot(request: dict, view: dict, command: dict, role
 
 def record_authorized_attempt(pair: Pair, request: dict, view: dict, command: dict, role: str) -> str:
     """Freeze actor-scoped input before a request can finish with unknown outcome."""
+    return record_scoped_attempt(pair.captures.report, pair.submissions + 1, request, view, command, role)
+
+
+def record_scoped_attempt(report: Report, ordinal: int, request: dict, view: dict, command: dict, role: str) -> str:
     snapshot = authorized_candidate_snapshot(request, view, command, role)
-    report = pair.captures.report
-    path = report.output / "private-attempts" / ("command_" + str(pair.submissions + 1)) / (role + ".json")
+    path = report.output / "private-attempts" / ("command_" + str(ordinal)) / (role + ".json")
     write_new(path, json_bytes({**snapshot, "observation": "Prepared candidate captured before submission; no completion outcome asserted"}), report.secrets)
     report.artifact(path)
     return str(path)
@@ -1128,44 +1203,110 @@ def error_cases(pair: Pair, report: Report) -> None:
 
 def attach_worker(args: argparse.Namespace) -> int:
     # Worker gets endpoint/session/scope only, never a shutdown path/process handle/admin credential.
-    access = importlib.import_module("warhammer40k_core.adapters.access_control")
-    token = getattr(access, "DEV_PLAYER_A_TOKEN" if args.attach_role == "playerA" else "DEV_PLAYER_B_TOKEN")
-    supplied = {args.attach_role: token}
-    endpoint = Endpoint(supplied, base_url=args.attach_endpoint)
-    view = projection_body(endpoint.request("GET", f"/sessions/{args.attach_session}/projection", args.attach_role))
-    request = view.get("pending_decision")
-    require(type(request) is dict and role_for_actor(request) == args.attach_role, "Attach worker has no offered authorized finite action")
-    revision = int_field(endpoint.request("GET", f"/sessions/{args.attach_session}", args.attach_role).body, "session_revision")
-    options = [row["option_id"] for row in request["options"]]
-    option = "fixed:assassination:bring_it_down" if "fixed:assassination:bring_it_down" in options else options[0]
-    command = envelope(args.attach_session, "e01-attach-" + request["request_id"], revision, "finite_option", request, option=option)
-    reply = endpoint.request("POST", f"/sessions/{args.attach_session}/commands", args.attach_role, command)
-    require(classify(reply.status, reply.body) == "accepted", "Attach worker offered action not accepted")
-    output = {"role": args.attach_role, "session": args.attach_session, "offeredRequestId": request["request_id"], "accepted": True, "ownership": "endpoint/session/scoped credential only; no create/close/shutdown capability"}
-    write_new(args.report_file, json_bytes(output), (token,))
-    return 0
+    report = Report("capture", args.output_root / "attach-worker-private")
+    output = {"schemaVersion": 1, "role": args.attach_role, "session": args.attach_session, "accepted": None, "committed": None, "commandCompletion": "NOT_SUBMITTED", "ownership": "endpoint/session/scoped credential only; no create/close/shutdown capability"}
+    lane = None
+    try:
+        access = importlib.import_module("warhammer40k_core.adapters.access_control")
+        token = getattr(access, "DEV_PLAYER_A_TOKEN" if args.attach_role == "playerA" else "DEV_PLAYER_B_TOKEN")
+        report.secrets = (token,)
+        endpoint = Endpoint({args.attach_role: token}, base_url=args.attach_endpoint)
+        schemas = Schemas(args.fixture_root)
+        view = projection_body(endpoint.request("GET", f"/sessions/{args.attach_session}/projection", args.attach_role))
+        request = view.get("pending_decision")
+        require(type(request) is dict and role_for_actor(request) == args.attach_role, "Attach worker has no offered authorized finite action")
+        revision = int_field(endpoint.request("GET", f"/sessions/{args.attach_session}", args.attach_role).body, "session_revision")
+        options = [row["option_id"] for row in request["options"]]
+        option = "fixed:assassination:bring_it_down" if "fixed:assassination:bring_it_down" in options else options[0]
+        command = envelope(args.attach_session, "e01-attach-" + request["request_id"], revision, "finite_option", request, option=option)
+        output.update({"offeredRequestId": request["request_id"], "commandId": command["command_id"], "envelopeBytesSHA256": sha256(json_bytes(command))})
+        record_scoped_attempt(report, 1, request, view, command, args.attach_role)
+        lane = HttpCommandLane(endpoint, report, schemas, args.attach_session, "worker")
+        reply = lane.submit(command, args.attach_role)
+        # Error envelopes carry no acceptance/commit flags. Preserve that absence
+        # rather than turn a received error (including 500) into a rollback claim.
+        output.update({"commandCompletion": "RECEIVED", "accepted": reply.body.get("accepted"), "committed": reply.body.get("committed"), "httpStatus": reply.status, "outcome": classify(reply.status, reply.body)})
+        output["status"] = "ACCEPTED" if output["accepted"] else "REJECTED"
+    except CompletionUnknown as exc:
+        output.update({"status": "UNKNOWN", "commandCompletion": "UNKNOWN", "sessionDisposition": "ABANDONED", "causeType": None if exc.__cause__ is None else type(exc.__cause__).__name__})
+    except (BoundaryError, OSError, http_client.HTTPException, ImportError, KeyError, IndexError, TypeError, ValueError) as exc:
+        if lane is not None and lane.last_reply is not None:
+            received = lane.last_reply
+            output.update({"commandCompletion": "RECEIVED", "accepted": received.body.get("accepted"), "committed": received.body.get("committed"), "httpStatus": received.status, "outcome": classify(received.status, received.body)})
+        output.update({"status": "FAILED_PREPARATION" if output["commandCompletion"] == "NOT_SUBMITTED" else "FAILED_EVIDENCE", "causeType": type(exc).__name__})
+    output["artifacts"] = report.artifacts
+    write_new(args.report_file, json_bytes(output), report.secrets)
+    return 0 if output["status"] == "ACCEPTED" else 2
+
+
+def run_attach_worker(args: argparse.Namespace, report: Report, http: Endpoint, session: str) -> dict:
+    """Record the one owned worker, including failure and handle-based cleanup."""
+    result_file, log_file = args.output_root / "attach-worker.json", args.output_root / "attach-worker.log"
+    script = Path(__file__).resolve()
+    command = [sys.executable, "-I", "-B", str(script), "capture", "--core-root", str(args.core_root), "--fixture-root", str(args.fixture_root), "--output-root", str(args.output_root), "--report-file", str(result_file), "--attach-worker", "--attach-endpoint", http.base_url, "--attach-session", session, "--attach-role", "playerA"]
+    record = {"owner": "attach-worker", "executable": sys.executable, "executableSHA256": sha256(Path(sys.executable).read_bytes()), "script": str(script), "scriptSHA256": sha256(script.read_bytes()), "command": command, "workingDirectory": str(args.output_root), "logPath": str(log_file), "maximumSeconds": MAX_SECONDS, "readiness": "NOT_APPLICABLE: finite scoped worker, not a host", "pid": None, "exitCode": None, "timedOut": False, "cleanup": "NOT_STARTED", "startUTC": datetime.now(UTC).isoformat()}
+    report.details.setdefault("processes", []).append(record)
+    child, code = None, None
+    try:
+        with log_file.open("xb") as log:
+            child = subprocess.Popen(command, cwd=args.output_root, env=child_environment(), stdout=log, stderr=subprocess.STDOUT, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+            record.update({"pid": child.pid, "cleanup": "owned-process-handle"})
+            try:
+                code = child.wait(timeout=MAX_SECONDS)
+                record["cleanup"] = "normal-exit"
+            except subprocess.TimeoutExpired as exc:
+                record.update({"timedOut": True, "cleanup": "owned-process-handle-terminate"})
+                child.terminate()
+                try:
+                    code = child.wait(timeout=10)
+                except subprocess.TimeoutExpired:
+                    record["cleanup"] = "owned-process-handle-kill"
+                    child.kill()
+                    code = child.wait(timeout=10)
+                raise CompletionUnknown("Attach worker command completion UNKNOWN after owned worker timeout; no further submissions") from exc
+            except OSError as exc:
+                raise CompletionUnknown("Attach worker command completion UNKNOWN after process wait failure; no further submissions") from exc
+    finally:
+        if child is not None and code is None and child.poll() is None:
+            # An unexpected wait failure must not leave this owned child alive.
+            record["cleanup"] = "owned-process-handle-finally-terminate"
+            child.terminate()
+            try:
+                code = child.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                record["cleanup"] = "owned-process-handle-finally-kill"
+                child.kill()
+                code = child.wait(timeout=10)
+        record["exitCode"] = code if code is not None else None if child is None else child.poll()
+        record["exitUTC"] = datetime.now(UTC).isoformat()
+    if not result_file.is_file():
+        raise CompletionUnknown("Attach worker command completion UNKNOWN; terminal receipt absent; no further submissions")
+    report.artifact(result_file)
+    result = strict_json(result_file.read_bytes())
+    require(result.get("schemaVersion") == 1 and result.get("role") == "playerA" and result.get("session") == session, "Attach worker terminal identity mismatch")
+    require(result.get("status") in ("ACCEPTED", "REJECTED", "UNKNOWN", "FAILED_PREPARATION", "FAILED_EVIDENCE"), "Attach worker terminal status unsupported")
+    for artifact in result.get("artifacts", []):
+        path = absolute_path(artifact["path"])
+        require(beneath(path, args.output_root / "attach-worker-private") and sha256(path.read_bytes()) == artifact["sha256"], "Attach worker private artifact identity mismatch")
+        report.artifact(path)
+    if result["status"] == "UNKNOWN":
+        require(result.get("commandCompletion") == "UNKNOWN" and result.get("accepted") is None, "Attach worker UNKNOWN receipt claimed acceptance")
+        raise CompletionUnknown("Attach worker command completion UNKNOWN; session abandoned without further submissions")
+    require(code == 0 and result["status"] == "ACCEPTED" and result.get("accepted") is True and result.get("commandCompletion") == "RECEIVED", "Attach worker did not complete an accepted action; inspect typed terminal result")
+    return result
 
 
 def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, http: Endpoint, tokens: dict, main_session: str, config: dict) -> None:
     attach_config = copy.deepcopy(config)
     attach_config["config"]["game_id"] += "-attach"
-    created = http.request("POST", "/sessions", "admin", attach_config)
+    schemas = Schemas(args.fixture_root)
+    created = create_session_attempt(http, attach_config, report, schemas, "attach")
     require(created.status == 201, "Supervisor attach session create failed")
     session = string_field(created.body, "session_id")
-    start = http.request("POST", f"/sessions/{session}/commands", "admin", envelope(session, "e01-attach-start", 0, "start_session"))
+    supervisor = HttpCommandLane(http, report, schemas, session, "supervisor")
+    start = supervisor.submit(envelope(session, "e01-attach-start", 0, "start_session"), "admin")
     require(classify(start.status, start.body) == "accepted", "Supervisor attach start failed")
-    result_file = args.output_root / "attach-worker.json"
-    command = [sys.executable, "-I", "-B", str(Path(__file__).resolve()), "capture", "--core-root", str(args.core_root), "--fixture-root", str(args.fixture_root), "--output-root", str(args.output_root), "--report-file", str(result_file), "--attach-worker", "--attach-endpoint", http.base_url, "--attach-session", session, "--attach-role", "playerA"]
-    with (args.output_root / "attach-worker.log").open("xb") as log:
-        child = subprocess.Popen(command, cwd=args.output_root, env=child_environment(), stdout=log, stderr=subprocess.STDOUT, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
-        try:
-            code = child.wait(timeout=MAX_SECONDS)
-        except subprocess.TimeoutExpired:
-            child.terminate()
-            child.wait(timeout=10)
-            raise BoundaryError("Owned attach worker exceeded 30 minute bound")
-    require(code == 0 and result_file.exists(), "Attach worker failed; inspect owned ignored log")
-    report.artifact(result_file)
+    worker_result = run_attach_worker(args, report, http, session)
     require(host.process.poll() is None and http.request("GET", f"/sessions/{main_session}", "playerA").status == 200, "Attach disconnect stopped host or other owned session")
     # Exercise the client guard against this owned listener, without starting a
     # second Core server: Windows development-host co-bind is a known limit.
@@ -1183,7 +1324,7 @@ def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, ht
     busy_check["otherSessionUnchanged"] = True
     # Only explicit supervisor admin closes disposable attach session.
     metadata = http.request("GET", f"/sessions/{session}", "admin").body
-    closed = http.request("POST", f"/sessions/{session}/commands", "admin", envelope(session, "e01-attach-close", metadata["session_revision"], "close_session"))
+    closed = supervisor.submit(envelope(session, "e01-attach-close", metadata["session_revision"], "close_session"), "admin")
     require(classify(closed.status, closed.body) == "accepted", "Supervisor attach session close failed")
     host.stop()
     restart = OwnedHost(args, report, tokens, "managed-restart")
@@ -1191,7 +1332,7 @@ def lifetime_cases(args: argparse.Namespace, report: Report, host: OwnedHost, ht
         endpoint = restart.start()
         lost = endpoint.request("GET", f"/sessions/{main_session}", "playerA")
         assert_error(lost, 404)
-        report.case("LIFETIME-01", "PASS", "Client busy-port rejection before host launch, scoped attach disconnect, managed stop, explicit restart SessionLost", {"attach": strict_json(result_file.read_bytes()), "clientBusyPortCheck": busy_check, "restart": "SessionLost", "oldSessionRecreated": False, "ownership": "Original Popen process handles only; shutdown markers unique", "lateCoBindProtection": "NOT_PROVEN: prelaunch probe closes before Core binds; Windows development-host exclusivity limitation remains external"})
+        report.case("LIFETIME-01", "PASS", "Client busy-port rejection before host launch, scoped attach disconnect, managed stop, explicit restart SessionLost", {"attach": worker_result, "clientBusyPortCheck": busy_check, "restart": "SessionLost", "oldSessionRecreated": False, "ownership": "Original Popen process handles only; shutdown markers unique", "lateCoBindProtection": "NOT_PROVEN: prelaunch probe closes before Core binds; Windows development-host exclusivity limitation remains external"})
     finally:
         restart.stop()
 
@@ -1244,7 +1385,7 @@ def capture(args: argparse.Namespace, report: Report) -> None:
         for muster in config["config"]["army_muster_requests"]:
             require(muster["player_id"] not in pair.army_by_player, "Canonical config has ambiguous player/army mapping")
             pair.army_by_player[muster["player_id"]] = muster["army_id"]
-        _, created = pair.request("POST", "/sessions", "admin", config)
+        _, created = create_session_attempt(pair, config, report, schemas, "main", paired=True)
         require(created.status == 201 and created.body["engine_build_id"] == BUILD_ID and created.body["server_contract_version"] == CONTRACT_VERSION, "Created session returned incompatible exact build/contract")
         pair.session = string_field(created.body, "session_id")
         for role in ("playerA", "playerB", "coach", "delayed"):

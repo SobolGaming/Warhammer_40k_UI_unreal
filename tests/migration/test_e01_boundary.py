@@ -905,5 +905,326 @@ class EvidenceSafetyTests(unittest.TestCase):
         boundary.secret_scan(boundary.json_bytes(payload))
 
 
+class LifecycleCommandSafetyTests(unittest.TestCase):
+    @staticmethod
+    def args(root):
+        return SimpleNamespace(output_root=root, report_file=root / "attach-worker.json",
+            fixture_root=FIXTURE, core_root=REPO.parent / "Warhammer_40k_AI",
+            attach_role="playerA", attach_session="unit-attach-session",
+            attach_endpoint="http://127.0.0.1:12345")
+
+    @staticmethod
+    def accepted(command, session, operation):
+        body = canonical("examples/sessions/session-command-outcome.json")
+        body["command_id"], body["session"]["session_id"], body["operation"] = command, session, operation
+        return boundary.Reply(200, boundary.json_bytes(body), 0, 0)
+
+    def test_http_lifecycle_unknown_keeps_exact_input_and_refuses_all_reuse(self):
+        for operation in ("start_session", "close_session"):
+            with self.subTest(operation=operation), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                report, endpoint = boundary.Report("capture", root), MagicMock()
+                endpoint.request.side_effect = TimeoutError("private transport detail Authorization unit-only-secret")
+                lane = boundary.HttpCommandLane(endpoint, report, MagicMock(), "unit-session", "supervisor")
+                command = boundary.envelope("unit-session", "unit-" + operation, 0, operation)
+                with self.assertRaises(boundary.CompletionUnknown) as observed:
+                    lane.submit(command, "admin")
+                self.assertIsInstance(observed.exception.__cause__, TimeoutError)
+                self.assertNotIn("unit-only-secret", str(observed.exception))
+                ledger = boundary.strict_json((root / "privileged-submission-attempts/supervisor/command_1.json").read_bytes())
+                self.assertEqual(ledger["commandEnvelope"], command)
+                self.assertEqual(ledger["submittedRole"], "admin")
+                for retry in (command, {**command, "command_id": "new-id-forbidden"}):
+                    with self.assertRaisesRegex(boundary.BoundaryError, "Session abandoned"):
+                        lane.submit(retry, "admin")
+                self.assertEqual(lane.submissions, 1)
+                self.assertEqual(len(report.artifacts), 1)
+                endpoint.request.assert_called_once()
+
+    def test_http_lifecycle_known_rejection_preserves_receipt_without_unknown(self):
+        for status, code in ((403, "access_denied"), (422, "proposal_invalid")):
+            with self.subTest(status=status), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                report, endpoint = boundary.Report("capture", root), MagicMock()
+                reply = boundary.Reply(status, boundary.json_bytes({"schema_version": "error-envelope-v1",
+                    "error": {"code": code, "message": "Synthetic known rejection."}}), 0, 0)
+                endpoint.request.return_value = reply
+                lane = boundary.HttpCommandLane(endpoint, report, MagicMock(), "unit-session", "supervisor")
+                command = boundary.envelope("unit-session", "unit-known-rejection", 0, "start_session")
+                self.assertIs(lane.submit(command, "admin"), reply)
+                self.assertFalse(lane.submission_unknown)
+                self.assertEqual((root / "privileged-submission-attempts/supervisor/command_1.response.json").read_bytes(), reply.raw)
+
+    def test_create_commit_before_timeout_retains_exact_config_and_stops_downstream(self):
+        for paired in (False, True):
+            with self.subTest(paired=paired), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                report, schemas = boundary.Report("capture", root), MagicMock()
+                config = canonical("examples/sessions/session-create.json")
+                config["config"]["game_id"] = "unit-exact-create"
+                local, http = MagicMock(), MagicMock()
+                committed = []
+
+                def commit(method, path, role, body, query=None):
+                    committed.append(copy.deepcopy(body))
+                    return boundary.Reply(201, b'{"session_id":"unit-created"}', 0, 0)
+
+                if paired:
+                    local.request.side_effect = commit
+                    http.request.side_effect = TimeoutError("private create receipt lost")
+                    client = boundary.Pair(local, http, SimpleNamespace(report=report, schemas=schemas))
+                else:
+                    def lost_receipt(*args, **kwargs):
+                        commit(*args, **kwargs)
+                        raise TimeoutError("private create receipt lost")
+                    http.request.side_effect = lost_receipt
+                    client = http
+                downstream = MagicMock()
+                boundary.run_case_groups(report, (
+                    (("UNIT-CREATE",), lambda: boundary.create_session_attempt(client, config, report, schemas, "unit", paired=paired)),
+                    (("UNIT-START", "UNIT-ACTION"), downstream),
+                ))
+                self.assertEqual(committed, [config])
+                ledger_path = root / "privileged-session-create-attempts/unit.json"
+                ledger = boundary.strict_json(ledger_path.read_bytes())
+                self.assertEqual(ledger["requestBody"], config)
+                self.assertEqual(ledger["requestBytesSHA256"], boundary.sha256(boundary.json_bytes(config)))
+                self.assertEqual(ledger["submittedRole"], "admin")
+                self.assertIn("No creation idempotency", ledger["retryPolicy"])
+                self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
+                self.assertIs(client.creation_unknown, True)
+                if paired:
+                    self.assertTrue(client.submission_unknown)
+                    self.assertEqual(client.submissions, 0)
+                before = ledger_path.read_bytes()
+                with self.assertRaisesRegex(boundary.BoundaryError, "creation UNKNOWN"):
+                    boundary.create_session_attempt(client, config, report, schemas, "must-not-recreate", paired=paired)
+                self.assertEqual(ledger_path.read_bytes(), before)
+                self.assertFalse((root / "privileged-session-create-attempts/must-not-recreate.json").exists())
+                downstream.assert_not_called()
+                self.assertEqual(http.request.call_count, 1)
+                if not paired:
+                    lane = boundary.HttpCommandLane(http, report, schemas, "unknown-session", "blocked")
+                    with self.assertRaisesRegex(boundary.BoundaryError, "creation UNKNOWN"):
+                        lane.submit(boundary.envelope("unknown-session", "no-start", 0, "start_session"), "admin")
+                    self.assertEqual(lane.submissions, 0)
+
+    def test_create_preflight_schema_failure_is_not_unknown_and_sends_nothing(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            report, schemas, endpoint = boundary.Report("capture", root), MagicMock(), MagicMock()
+            schemas.validate.side_effect = boundary.BoundaryError("Unit local create schema failure")
+            with self.assertRaisesRegex(boundary.BoundaryError, "local create schema") as observed:
+                boundary.create_session_attempt(endpoint, {}, report, schemas, "unit")
+            self.assertNotIsInstance(observed.exception, boundary.CompletionUnknown)
+            self.assertEqual(report.artifacts, [])
+            endpoint.request.assert_not_called()
+
+    def test_lifetime_create_unknown_stops_before_start_or_worker(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, report, endpoint = self.args(root), boundary.Report("capture", root), MagicMock()
+            endpoint.request.side_effect = TimeoutError("Unit created but receipt lost")
+            with patch.object(boundary, "Schemas", return_value=MagicMock()), \
+                 patch.object(boundary, "run_attach_worker") as worker:
+                with self.assertRaises(boundary.CompletionUnknown):
+                    boundary.lifetime_cases(args, report, MagicMock(), endpoint, {}, "main", {"config": {"game_id": "unit"}})
+            endpoint.request.assert_called_once()
+            worker.assert_not_called()
+
+    def test_attach_worker_retains_scoped_attempt_and_types_received_or_unknown(self):
+        for outcome in ("ACCEPTED", "REJECTED", "UNKNOWN"):
+            with self.subTest(outcome=outcome), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                args, endpoint = self.args(root), MagicMock()
+                request = {"request_id": "unit-actor-request", "actor_id": "player-a",
+                    "options": [{"option_id": "unit-offered-option"}]}
+                view = {"viewer_player_id": "player-a", "pending_decision": request, "pending_proposal": None}
+                projection = boundary.Reply(200, boundary.json_bytes({"projection": view}), 0, 0)
+                metadata = boundary.Reply(200, b'{"session_revision":3}', 0, 0)
+                if outcome == "ACCEPTED":
+                    terminal = self.accepted("e01-attach-unit-actor-request", args.attach_session, "submit_finite_decision")
+                elif outcome == "REJECTED":
+                    terminal = boundary.Reply(403, boundary.json_bytes({"schema_version": "error-envelope-v1",
+                        "error": {"code": "access_denied", "message": "Synthetic known rejection."}}), 0, 0)
+                else:
+                    terminal = TimeoutError("private transport detail Authorization unit-only-secret")
+                endpoint.request.side_effect = [projection, metadata, terminal]
+                access = SimpleNamespace(DEV_PLAYER_A_TOKEN="unit-worker-credential")
+                with patch.object(boundary.importlib, "import_module", return_value=access), \
+                     patch.object(boundary, "Endpoint", return_value=endpoint), \
+                     patch.object(boundary, "Schemas", return_value=MagicMock()):
+                    exit_code = boundary.attach_worker(args)
+                result = boundary.strict_json(args.report_file.read_bytes())
+                self.assertEqual(result["status"], outcome)
+                self.assertEqual(exit_code, 0 if outcome == "ACCEPTED" else 2)
+                self.assertEqual(result["commandCompletion"], "UNKNOWN" if outcome == "UNKNOWN" else "RECEIVED")
+                self.assertEqual(result["accepted"], True if outcome == "ACCEPTED" else None)
+                self.assertEqual(result["committed"], True if outcome == "ACCEPTED" else None)
+                snapshot = boundary.strict_json((root / "attach-worker-private/private-attempts/command_1/playerA.json").read_bytes())
+                ledger = boundary.strict_json((root / "attach-worker-private/privileged-submission-attempts/worker/command_1.json").read_bytes())
+                self.assertEqual(snapshot["authorizedViewBeforeSubmission"], view)
+                self.assertEqual(snapshot["commandEnvelope"], ledger["commandEnvelope"])
+                self.assertEqual(ledger["commandEnvelope"], endpoint.request.call_args.args[3])
+                self.assertFalse((root / "attach-worker-private/private-attempts/command_1/playerB.json").exists())
+                self.assertEqual(endpoint.request.call_count, 3)
+                self.assertNotIn(b"unit-only-secret", args.report_file.read_bytes())
+                self.assertNotIn(b"unit-worker-credential", args.report_file.read_bytes())
+
+    def test_attach_preparation_failure_never_claims_unknown_or_submits(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, endpoint = self.args(root), MagicMock()
+            endpoint.request.side_effect = TimeoutError("private preparation error")
+            with patch.object(boundary.importlib, "import_module", return_value=SimpleNamespace(DEV_PLAYER_A_TOKEN="unit-credential")), \
+                 patch.object(boundary, "Endpoint", return_value=endpoint), \
+                 patch.object(boundary, "Schemas", return_value=MagicMock()):
+                self.assertEqual(boundary.attach_worker(args), 2)
+            result = boundary.strict_json(args.report_file.read_bytes())
+            self.assertEqual(result["status"], "FAILED_PREPARATION")
+            self.assertEqual(result["commandCompletion"], "NOT_SUBMITTED")
+            self.assertEqual(result["artifacts"], [])
+            endpoint.request.assert_called_once()
+
+    def test_attach_error_envelopes_preserve_absent_flags_and_outcomes_keep_exact_flags(self):
+        cases = ((403, None), (422, None), (500, None), (422, True), (422, False))
+        for status, committed in cases:
+            with self.subTest(status=status, committed=committed), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                args, endpoint = self.args(root), MagicMock()
+                request = {"request_id": "unit-flags-request", "actor_id": "player-a", "options": [{"option_id": "unit-option"}]}
+                view = {"viewer_player_id": "player-a", "pending_decision": request}
+                if committed is None:
+                    body = {"schema_version": "error-envelope-v1", "error": {
+                        "code": "access_denied" if status == 403 else "proposal_invalid" if status == 422 else "internal_error",
+                        "message": "Synthetic received error without flags."}}
+                else:
+                    body = self.accepted("e01-attach-unit-flags-request", args.attach_session, "submit_finite_decision").body
+                    body.update({"accepted": False, "committed": committed, "outcome_code": "proposal_invalid"})
+                endpoint.request.side_effect = [boundary.Reply(200, boundary.json_bytes({"projection": view}), 0, 0),
+                    boundary.Reply(200, b'{"session_revision":3}', 0, 0), boundary.Reply(status, boundary.json_bytes(body), 0, 0)]
+                with patch.object(boundary.importlib, "import_module", return_value=SimpleNamespace(DEV_PLAYER_A_TOKEN="unit-credential")), \
+                     patch.object(boundary, "Endpoint", return_value=endpoint), \
+                     patch.object(boundary, "Schemas", return_value=MagicMock()):
+                    self.assertEqual(boundary.attach_worker(args), 2)
+                result = boundary.strict_json(args.report_file.read_bytes())
+                self.assertEqual(result["status"], "REJECTED")
+                self.assertEqual(result["commandCompletion"], "RECEIVED")
+                self.assertIs(result["committed"], committed)
+                self.assertIs(result["accepted"], None if committed is None else False)
+                self.assertEqual(endpoint.request.call_count, 3)
+
+    def test_attach_known_rejection_stays_received_when_evidence_write_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, endpoint = self.args(root), MagicMock()
+            request = {"request_id": "unit-known-request", "actor_id": "player-a", "options": [{"option_id": "unit-option"}]}
+            view = {"viewer_player_id": "player-a", "pending_decision": request}
+            endpoint.request.side_effect = [boundary.Reply(200, boundary.json_bytes({"projection": view}), 0, 0),
+                boundary.Reply(200, b'{"session_revision":3}', 0, 0),
+                boundary.Reply(403, boundary.json_bytes({"schema_version": "error-envelope-v1",
+                    "error": {"code": "access_denied", "message": "Synthetic known rejection."}}), 0, 0)]
+            original_write = boundary.write_new
+
+            def fail_response_write(path, data, secrets=()):
+                if path.name.endswith(".response.json"):
+                    raise PermissionError("Unit response evidence write failure")
+                return original_write(path, data, secrets)
+
+            with patch.object(boundary.importlib, "import_module", return_value=SimpleNamespace(DEV_PLAYER_A_TOKEN="unit-credential")), \
+                 patch.object(boundary, "Endpoint", return_value=endpoint), \
+                 patch.object(boundary, "Schemas", return_value=MagicMock()), \
+                 patch.object(boundary, "write_new", side_effect=fail_response_write):
+                self.assertEqual(boundary.attach_worker(args), 2)
+            result = boundary.strict_json(args.report_file.read_bytes())
+            self.assertEqual(result["status"], "FAILED_EVIDENCE")
+            self.assertEqual(result["commandCompletion"], "RECEIVED")
+            self.assertIsNone(result["accepted"])
+            self.assertIsNone(result["committed"])
+            self.assertEqual(result["httpStatus"], 403)
+
+    def test_parent_records_exited_unknown_worker_and_performs_no_more_commands(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, report, endpoint = self.args(root), boundary.Report("capture", root), MagicMock()
+            endpoint.base_url = args.attach_endpoint
+            boundary.write_new(args.report_file, boundary.json_bytes({"schemaVersion": 1, "role": "playerA",
+                "session": args.attach_session, "status": "UNKNOWN", "commandCompletion": "UNKNOWN",
+                "accepted": None, "artifacts": []}))
+            child = MagicMock()
+            child.pid, child.wait.return_value = 34567, 2
+            with patch.object(boundary.subprocess, "Popen", return_value=child):
+                with self.assertRaisesRegex(boundary.CompletionUnknown, "UNKNOWN"):
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+            self.assertEqual(len(report.details["processes"]), 1)
+            process = report.details["processes"][0]
+            self.assertEqual((process["owner"], process["pid"], process["exitCode"]), ("attach-worker", 34567, 2))
+            self.assertEqual(process["maximumSeconds"], 1800)
+            self.assertFalse(process["timedOut"])
+            self.assertEqual(process["cleanup"], "normal-exit")
+            self.assertEqual(process["scriptSHA256"], boundary.sha256(Path(boundary.__file__).read_bytes()))
+            self.assertIn("startUTC", process)
+            self.assertIn("exitUTC", process)
+            self.assertTrue(process["executableSHA256"])
+            endpoint.request.assert_not_called()
+
+    def test_parent_worker_timeout_records_owned_termination_and_unknown(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, report, endpoint = self.args(root), boundary.Report("capture", root), MagicMock()
+            endpoint.base_url = args.attach_endpoint
+            child = MagicMock()
+            child.pid = 45678
+            child.wait.side_effect = [boundary.subprocess.TimeoutExpired("unit-worker", 1800), 1]
+            with patch.object(boundary.subprocess, "Popen", return_value=child):
+                with self.assertRaisesRegex(boundary.CompletionUnknown, "UNKNOWN"):
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+            child.terminate.assert_called_once()
+            child.kill.assert_not_called()
+            process = report.details["processes"][0]
+            self.assertTrue(process["timedOut"])
+            self.assertEqual(process["exitCode"], 1)
+            self.assertEqual(process["cleanup"], "owned-process-handle-terminate")
+            endpoint.request.assert_not_called()
+
+    def test_parent_wait_failure_cleans_up_owned_worker_and_records_unknown(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, report, endpoint = self.args(root), boundary.Report("capture", root), MagicMock()
+            endpoint.base_url = args.attach_endpoint
+            child = MagicMock()
+            child.pid, child.poll.return_value = 45679, None
+            child.wait.side_effect = [OSError("Unit failed wait"), 1]
+            with patch.object(boundary.subprocess, "Popen", return_value=child):
+                with self.assertRaises(boundary.CompletionUnknown):
+                    boundary.run_attach_worker(args, report, endpoint, args.attach_session)
+            child.terminate.assert_called_once()
+            process = report.details["processes"][0]
+            self.assertEqual(process["exitCode"], 1)
+            self.assertEqual(process["cleanup"], "owned-process-handle-finally-terminate")
+            endpoint.request.assert_not_called()
+
+    def test_lifetime_worker_unknown_stops_before_close_restart_or_further_reads(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args, report, endpoint, host = self.args(root), boundary.Report("capture", root), MagicMock(), MagicMock()
+            endpoint.request.side_effect = [boundary.Reply(201, boundary.json_bytes({"session_id": args.attach_session}), 0, 0),
+                self.accepted("e01-attach-start", args.attach_session, "start_session")]
+            later = MagicMock()
+            with patch.object(boundary, "Schemas", return_value=MagicMock()), \
+                 patch.object(boundary, "run_attach_worker", side_effect=boundary.CompletionUnknown("Unit worker UNKNOWN")), \
+                 patch.object(boundary, "OwnedHost") as restart:
+                boundary.run_case_groups(report, (
+                    (("LIFETIME-01",), lambda: boundary.lifetime_cases(args, report, host, endpoint, {}, "main-session", {"config": {"game_id": "unit-game"}})),
+                    (("UNIT-LATER",), later),
+                ))
+            self.assertEqual(endpoint.request.call_count, 2)
+            self.assertEqual(report.details["sessionAbandonment"]["completionOutcome"], "UNKNOWN")
+            self.assertEqual(report.cases[-1]["status"], "BLOCKED")
+            host.stop.assert_not_called()
+            restart.assert_not_called()
+            later.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

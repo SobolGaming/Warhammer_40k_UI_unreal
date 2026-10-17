@@ -8,8 +8,8 @@ not an OWN15 fresh final approval.** Historical snapshots below preserve actual
 checks and partial results. Native002136 exported 132 successful tests but its
 phase failed, and an editor-settings after-guard found a new global file. The
 separate native-only supplement has now gathered passing runtime evidence;
-its historical runtime evidence remains preserved. Initial OWN15 code review
-returned CHANGES_REQUESTED and requirements assessment returned BLOCKED. Fresh
+its historical runtime evidence remains preserved. Both initial and r2 OWN15 code
+reviews returned CHANGES_REQUESTED; the initial requirements assessment returned BLOCKED. Fresh
 blind final
 code-quality and requirements reviews must make the final decision in their own
 reports; this persistent preliminary invocation does not author their verdicts.
@@ -566,3 +566,98 @@ recorded for their exact old candidates. Both old Native FAILs, configuration
 side-effect/recovery history and original30-second FAIL/UNKNOWN remain unchanged.
 No remediated source result, new run result, renewed final approval or publication
 acceptance is asserted by this update.
+
+## r2 code findings and revision6 focused unit evidence
+
+The r2 independent code review is **CHANGES_REQUESTED**. Its public report
+`docs/plans/research/2026-10-17-e01-slow120-code-review-r2.md` has independently
+read SHA256
+`800B48EAB7C605C61A8F772D0F27AF0312E70665077403D4E9E57D427CCF8EBA`.
+It reviewed HEAD **`f318dc2a78da478867f79af5cb80159408fd5369`** against base
+`0467ee63fe6d4c775f429afae2233d7292787c31`; all 173 manifest files matched before
+and after, HEAD unchanged and working tree clean. Manifest SHA256 is
+`D06FBEEF136F107285510986DA941A641A9291CC0327F073AAE20E35A16507D6`.
+Its session is `01a1476f-83f2-7160-b47b-50634d75e095`; the coordinator reports
+CLI exit0 at **2026-10-17T01:23:55.681524Z**, with 29 executed commands. This is
+review invocation evidence, not an acceptance PASS.
+
+The reviewer found two P1 gaps in that frozen candidate:
+
+- Attach-worker finite submission and supervisor start/close commands bypass the
+  guarded submission path, so response loss can omit the exact persisted
+  envelope/scope and UNKNOWN outcome. Every command lane needs typed validation,
+  pre-send retention and uncertainty handling, with worker/lifecycle regressions.
+- Normal Native verifies a self-consistent promoted wire index but does not bind
+  it and every body to the current Capture. Audit can inspect current Capture
+  separately while Native consumed stale historical bodies. Fresh Capture,
+  privacy-reviewed promoted bytes and Native/Audit need exact hash linkage,
+  with stale-current mismatch rejection before build/Automation.
+
+The helper also directly re-read only the old Capture002136 report's process
+metadata: **two records, managed-primary and managed-restart, zero attach-worker
+records**. An actual attach-worker PID is absent. This missing historical record
+cannot be supplied by copying a claimed value or reconstructing an invented PID.
+The replacement executed Capture must record its actual worker process inventory.
+
+Before this status update, the current factual JSON and preliminary audit were
+again preserved as new read-only, full-hash-named snapshots under the assigned
+`pre-remediation-records/` directory, without overwriting the earlier snapshots:
+
+| Snapshot source | Preserved raw SHA256 |
+| --- | --- |
+| Factual result JSON | `0849A26AC09405966ABC423FA75E7DE3CDC3B73CF8DD9C0D11056F0A2C77A3E3` |
+| Preliminary audit | `E36459F42F142D2C11FD150792CDC5DB18F348137E367BC18779515559250F2C` |
+
+New provenance `provenance-20261017T0130137420423Z.json` has SHA256
+`C0BAD127EC68C245197EAED3A1A0FC41E19C3293CEB93E33B8961565BC4A921F`.
+All prior snapshot/provenance records remain intact. The factual JSON retains
+both snapshot generations and all earlier reviewer findings and execution facts.
+
+The revision6 replacement must guard all command lanes and both existing
+session-create configuration paths. A lost create response retains its existing
+configuration and UNKNOWN outcome; no Core create idempotency, invented request
+keys or automatic retry is claimed. Actual worker inventory and exact fresh
+Capture→promoted-wire→Native/Audit linkage are required. Complete wrapper/guard
+validation and the final candidate freeze remain pending.
+
+The separate focused unit invocation actually records **59 tests in 1.353s, OK**,
+PID32100, exit0, **01:29:06.1779736Z–01:29:08.0942831Z**. This helper read its
+raw invocation/log; it did not run the suite. Invocation SHA256 is
+`81BB72ACEE097F1174F688F74103F7BF3A28B9AC00B1F46F7190C15440B77ED4`,
+at `.local/reviews/E01-SLOW120-remediation-units/20261017T012906Z-b798f3ab/invocation.json`.
+Raw stderr SHA256 is
+`3A03C2A40F6F5516E0A100AA6ACCDC37D7E4F5D3BA5B8535E14709B7C853C4C3`.
+Before/after hashes match and were independently read back:
+
+| Unit-tested replacement source | Raw SHA256 |
+| --- | --- |
+| Python harness | `8E6B79D7A3D158665E105F5D92653E05BFE53AF63D32D5957263470AD21EB080` |
+| Python tests | `A3C970E098E345E652616C0882EEB3B1C67527114F63BA220820AFEEFC1BC191` |
+
+The unit record identifies test-only ephemeral responders and mocked Core/Popen
+for lifecycle cases: **no new Core Capture, host, build, install or Automation**.
+Those 59 units do not supply fresh source approval or runtime acceptance. The
+wrapper final hash and parallel guard-rerun outcome are **PENDING**, not inferred
+here. Status stays **REMEDIATION_AND_FRESH_RUN_PENDING**; the code gate remains
+CHANGES_REQUESTED until a new blind source review. Historical 40/14/132/2 successes
+remain facts for the old exact candidates, and original30-second A90E132B... /
+3071FCB5... FAIL/UNKNOWN evidence remains immutable. This is still a factual
+recorder/preliminary helper update, never a final review verdict.
+
+## Coordinator factual source-unit addendum
+
+The later wire-flag fidelity repair preserves absent accepted/committed fields as
+null and explicit booleans exactly. Its source-bound invocation
+`20261017T013240Z-f8c75f8c` reports **60 units PASS in1.523s**, exit0, unchanged
+harness5E1F3988.../testsB13604B4...; invocation SHA256
+`526EA9C87E9301807371A4BA1729D7112E1AA484F35F2D4728DCBF7DE186770F`.
+The final maintained PowerShell guard run `20261017T013324Z-8cc21e3b` reports
+**19/19 PASS**, exit0, all37 source snapshots unchanged; result SHA256
+`3E08897879F059292579AF7FB89B19BC53DCE2AD8E961FA867A6EA4B7125A1A7`.
+Wrapper E5FB8305... and maintained test3DEE1F97... are unchanged. Full paths,
+raw-log hashes and preceding failures are retained in the execution journal
+and factual JSON. These latest records supersede the earlier pending wrapper/
+guard fields as source-unit facts only. The earlier factual record/preliminary
+bytes were privately snapshotted before this addendum. Fresh source approval,
+real full-chain execution and final independent requirements acceptance remain
+pending. This coordinator entry supplies no independent verdict.

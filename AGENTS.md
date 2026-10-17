@@ -36,7 +36,7 @@ The prior 30-second capture passed 38 Python tests and 11 boundary checks but ti
 on a normal-move invalid-geometry command. EXT09 / Core #590 records the latency
 gap. Preserve its unknown outcome, result JSON and NOT_ACCEPTED audit. OWN14
 (2026-10-16) explicitly approves a separate E01-SLOW120 diagnostic with a
-120-second total request budget. Follow packet revision 5; freeze/review the
+120-second total request budget. Follow packet revision 6; freeze/review the
 changed candidate and use a fresh run. Keep connect at three seconds, managed
 readiness at 30 seconds and process limits at 30 minutes. A slow-host success
 does not pass the old 30-second budget or establish production responsiveness.
@@ -58,6 +58,10 @@ harness/tests require a fresh full phase chain; the historical revision4
 Capture link cannot substitute for proof of changed Python bytes. Block all
 dependent groups after a failed/uncertain session, retain the original authorized
 envelope and completion UNKNOWN, and enforce remaining time on each socket read.
+These controls cover paired, attach-worker and supervisor lifecycle commands.
+Keep a complete owned-process inventory including the attach worker. Normal
+Native/Audit must bind every promoted wire byte to the same run's successful
+Capture artifacts before execution and revalidate the binding afterward.
 
 Repository names are explicit:
 

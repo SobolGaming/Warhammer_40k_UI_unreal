@@ -371,6 +371,154 @@ function Assert-Candidate($Candidate) {
     foreach ($file in $Candidate.files) { if ((Get-Hash $file.path) -ne $file.sha256) { throw "Frozen authored candidate changed: $($file.path)" } }
 }
 
+function Get-CurrentCaptureWireEvidence {
+    if ($CaptureRunId) { throw 'Current-run wire binding cannot replace the historical Capture supplement.' }
+    $capturePath = Assert-ChildPath (Join-Path $runRoot 'capture\result.json') $runRoot
+    $captureHash = Get-Hash $capturePath
+    $capture = Read-Json $capturePath
+    if ($capture.schemaVersion -ne 1 -or $capture.packet -cne 'E01-WIN-BOUNDARY' -or $capture.phase -cne 'Capture' -or
+        $capture.runId -cne $RunId -or $capture.runRoot -cne $runRoot -or $capture.status -cne 'LOCAL_HTTP_BOUNDARY_PASS' -or
+        $capture.redaction.status -cne 'PASS' -or $capture.unitTests.status -cne 'PASS' -or
+        ($capture.unitTests.executed -isnot [long] -and $capture.unitTests.executed -isnot [int]) -or $capture.unitTests.executed -le 0) {
+        throw 'Current Capture identity, status or positive unit-test count failed.'
+    }
+    $candidatePaths = @($PSCommandPath, $packetPath, $harnessPath, $unitTestsPath, $sourceManifestPath)
+    $seenCandidates = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    if ($capture.candidate.files.Count -ne $candidatePaths.Count) { throw 'Current Capture candidate must contain exactly five reviewed files.' }
+    foreach ($file in $capture.candidate.files) {
+        if ($file.path -notin $candidatePaths -or -not $seenCandidates.Add($file.path)) { throw 'Current Capture candidate path set differs.' }
+    }
+    Assert-Candidate $capture.candidate
+    if ($capture.source.coreCommit -cne $expectedCommit -or $capture.source.contractVersion -cne '44.3.33' -or
+        $capture.source.runtimeBuildId -cne $expectedBuild -or $capture.source.sourceManifestSha256 -cne (Get-Hash $sourceManifestPath)) {
+        throw 'Current Capture source identity differs from the reviewed fixture inventory.'
+    }
+    $preparePath = Join-Path $runRoot 'prepareruntime\result.json'
+    $prepare = Read-Json $preparePath
+    if ($prepare.phase -cne 'PrepareRuntime' -or $prepare.runId -cne $RunId -or $prepare.status -cne 'INSTALLED_RUNTIME_PASS' -or
+        $capture.predecessor.path -cne $preparePath -or $capture.predecessor.sha256 -cne (Get-Hash $preparePath)) {
+        throw 'Current Capture does not link the same run prepared runtime.'
+    }
+    foreach ($runtime in @($capture.runtime, $prepare.runtime)) {
+        foreach ($key in @('provenance', 'provenanceSha256', 'runtimeTreeSha256')) {
+            if ($runtime[$key] -cne $phaseResult.runtime[$key]) { throw 'Current Capture and verified native runtime identities differ.' }
+        }
+    }
+    $requirements = @{
+        preflight = @{ relative = 'python-preflight'; status = 'SOURCE_INVENTORY_PASS'; ids = @('SOURCE-01') }
+        'verify-runtime' = @{ relative = 'python-runtime'; status = 'INSTALLED_RUNTIME_PASS'; ids = @('SOURCE-01', 'RUNTIME-01') }
+        capture = @{ relative = 'python-capture'; status = 'LOCAL_HTTP_BOUNDARY_PASS'; ids = @('SOURCE-01', 'RUNTIME-01', 'SCHEMA-01', 'SCOPE-01', 'AUTH-01', 'VIEW-01', 'FINITE-01', 'RETRY-01', 'STALE-01', 'FIDELITY-01', 'MOVE-01', 'MOVE-02', 'ERROR-01', 'LIFETIME-01') }
+    }
+    if ($capture.childReports.Count -ne 3) { throw 'Current Capture child report count differs.' }
+    $seenReports = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $captureReport = $null; $captureReportPath = $null; $captureArtifacts = $null
+    foreach ($child in $capture.childReports) {
+        if (-not $seenReports.Add($child.phase) -or $child.phase -cnotin @('preflight', 'verify-runtime', 'capture')) { throw 'Current Capture child report identity differs.' }
+        $required = $requirements[$child.phase]
+        $reportRoot = Assert-ChildPath (Join-Path $runRoot ("capture\" + $required.relative)) $runRoot
+        $reportPath = Join-Path $reportRoot 'report.json'
+        if ($child.path -cne $reportPath -or $child.sha256 -cnotmatch '^[0-9a-f]{64}$' -or
+            $child.sha256 -cne (Get-Hash $reportPath) -or $child.status -cne $required.status) { throw 'Current Capture child path/hash/status differs.' }
+        $report = Read-Json $reportPath
+        if ($report.schemaVersion -ne 1 -or $report.phase -cne $child.phase -or $report.status -cne $required.status -or $report.redaction.status -cne 'PASS') {
+            throw 'Current Capture child report identity or redaction failed.'
+        }
+        foreach ($counts in @($child.caseCounts, $report.caseCounts)) {
+            if ($counts.discovered -ne $required.ids.Count -or $counts.executed -ne $required.ids.Count -or $counts.passed -ne $required.ids.Count -or
+                $counts.failed -ne 0 -or $counts.blocked -ne 0 -or $counts.notRun -ne 0) { throw 'Current Capture child case counts did not all pass.' }
+        }
+        $seenCases = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+        if ($report.cases.Count -ne $required.ids.Count) { throw 'Current Capture child case set differs.' }
+        foreach ($case in $report.cases) {
+            if ($case.id -cnotin $required.ids -or -not $seenCases.Add($case.id) -or $case.status -cne 'PASS') { throw 'Current Capture child case ID/status differs.' }
+        }
+        $artifacts = [Collections.Generic.Dictionary[string,object]]::new([StringComparer]::OrdinalIgnoreCase)
+        foreach ($artifact in $report.artifacts) {
+            $path = if ([IO.Path]::IsPathRooted($artifact.path)) { $artifact.path } else { Join-Path $reportRoot $artifact.path }
+            $path = Assert-ChildPath $path $reportRoot
+            if ($artifacts.ContainsKey($path) -or $artifact.sha256 -cnotmatch '^[0-9a-f]{64}$' -or
+                (Get-Hash $path) -cne $artifact.sha256 -or [IO.FileInfo]::new($path).Length -ne $artifact.bytes) {
+                throw 'Current Capture child artifact path/hash/length differs.'
+            }
+            $artifacts.Add($path, $artifact)
+        }
+        if ($child.phase -ceq 'capture') { $captureReport = $report; $captureReportPath = $reportPath; $captureArtifacts = $artifacts }
+    }
+    $sourceRoot = Assert-ChildPath (Join-Path $runRoot 'capture\python-capture\proposed-wire') $runRoot
+    $wireRoot = Assert-ChildPath (Join-Path $fixtureRoot 'wire') $fixtureRoot
+    $sourceIndex = Join-Path $sourceRoot 'index.json'; $wireIndex = Join-Path $wireRoot 'index.json'
+    if ($null -eq $captureReport -or -not $captureArtifacts.ContainsKey($sourceIndex)) { throw 'Current Capture report must list its proposed wire index.' }
+    $indexHash = Get-Hash $sourceIndex
+    if ($captureArtifacts[$sourceIndex].sha256 -cne $indexHash -or (Get-Hash $wireIndex) -cne $indexHash -or
+        [IO.FileInfo]::new($sourceIndex).Length -ne [IO.FileInfo]::new($wireIndex).Length) {
+        throw 'Versioned wire index is not byte-identical to this run reported Capture index.'
+    }
+    $index = Read-Json $sourceIndex
+    if ($index.format_version -ne 1 -or $index.cases.Count -ne 30) { throw 'Current Capture must contain exactly 30 indexed wire bodies.' }
+    $paths = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $caseRoles = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $bodies = [Collections.Generic.List[object]]::new()
+    foreach ($case in $index.cases) {
+        if ($case.case_id -isnot [string] -or $case.case_id -cnotmatch '^[A-Za-z0-9_.:-]+$' -or
+            $case.role -cnotin @('playerA', 'playerB', 'coach', 'delayed', 'replay', 'missing', 'invalid') -or $case.kind -cne 'http' -or
+            $case.sha256 -cnotmatch '^[0-9a-f]{64}$' -or $case.expected_outcome -cnotin @('payload', 'accepted', 'recorded_invalid', 'uncommitted_invalid', 'error') -or
+            ($case.http_status -isnot [long] -and $case.http_status -isnot [int]) -or $case.http_status -lt 100 -or $case.http_status -gt 599) {
+            throw 'Current Capture wire row identity/role/outcome metadata is invalid.'
+        }
+        $expectedPath = $case.case_id.ToLowerInvariant().Replace(':', '_').Replace('.', '_') + '/' + $case.role + '.json'
+        if ($case.path -cne $expectedPath -or -not $paths.Add($case.path) -or -not $caseRoles.Add($case.case_id + "`t" + $case.role)) {
+            throw 'Current Capture wire row path/role identity is duplicate or inconsistent.'
+        }
+        if (($case.expected_outcome -cin @('accepted', 'payload') -and $case.http_status -ne 200) -or
+            ($case.expected_outcome -cin @('recorded_invalid', 'uncommitted_invalid') -and $case.http_status -ne 422) -or
+            ($case.expected_outcome -ceq 'error' -and $case.http_status -lt 400)) { throw 'Current Capture outcome/status metadata is inconsistent.' }
+        $source = Get-MemberPath $sourceRoot $case.path; $target = Get-MemberPath $wireRoot $case.path
+        if (-not $captureArtifacts.ContainsKey($source) -or $captureArtifacts[$source].sha256 -cne $case.sha256 -or
+            (Get-Hash $source) -cne $case.sha256 -or (Get-Hash $target) -cne $case.sha256 -or
+            [IO.FileInfo]::new($source).Length -ne [IO.FileInfo]::new($target).Length) {
+            throw 'Versioned wire body is not byte-identical to this run reported Capture body.'
+        }
+        $bodies.Add([ordered]@{ path = $case.path; caseId = $case.case_id; role = $case.role; kind = $case.kind
+            httpStatus = $case.http_status; expectedOutcome = $case.expected_outcome; source = $source; target = $target; sha256 = $case.sha256 })
+    }
+    foreach ($root in @($sourceRoot, $wireRoot)) {
+        $expectedPaths = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        $null = $expectedPaths.Add((Join-Path $root 'index.json'))
+        foreach ($body in $bodies) { $null = $expectedPaths.Add((Get-MemberPath $root $body.path)) }
+        $actualPaths = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        $directories = [Collections.Generic.Queue[string]]::new(); $directories.Enqueue($root)
+        while ($directories.Count -gt 0) {
+            foreach ($item in Get-ChildItem -LiteralPath $directories.Dequeue() -Force) {
+                Assert-NoReparsePoint $item.FullName
+                if ($item.PSIsContainer) { $directories.Enqueue($item.FullName) }
+                elseif (-not $actualPaths.Add($item.FullName) -or -not $expectedPaths.Contains($item.FullName)) { throw 'Unindexed or duplicate wire file is present.' }
+            }
+        }
+        if ($actualPaths.Count -ne 31) { throw 'Wire file set must contain its index and exactly 30 bodies.' }
+    }
+    $publicPrefix = $sourceRoot + [IO.Path]::DirectorySeparatorChar
+    if (@($captureArtifacts.Keys | Where-Object { $_.StartsWith($publicPrefix, [StringComparison]::OrdinalIgnoreCase) }).Count -ne 31) {
+        throw 'Current Capture report public wire artifact set differs from its index.'
+    }
+    return [ordered]@{ captureRunId = $RunId; capturePath = $capturePath; captureSha256 = $captureHash
+        captureReportPath = $captureReportPath; captureReportSha256 = Get-Hash $captureReportPath
+        sourceIndexPath = $sourceIndex; sourceIndexSha256 = $indexHash; fixtureIndexPath = $wireIndex; fixtureIndexSha256 = Get-Hash $wireIndex
+        bodyCount = $bodies.Count; bodies = @($bodies) }
+}
+
+function Assert-CaptureWireBinding($Expected, $Current) {
+    foreach ($key in @('captureRunId', 'capturePath', 'captureSha256', 'captureReportPath', 'captureReportSha256',
+            'sourceIndexPath', 'sourceIndexSha256', 'fixtureIndexPath', 'fixtureIndexSha256', 'bodyCount')) {
+        if ($Expected[$key] -cne $Current[$key]) { throw 'Current Capture wire linkage changed after native acceptance.' }
+    }
+    if ($Expected.bodies.Count -ne $Current.bodies.Count) { throw 'Current Capture wire body binding count changed.' }
+    for ($index = 0; $index -lt $Expected.bodies.Count; $index++) {
+        foreach ($key in @('path', 'caseId', 'role', 'kind', 'httpStatus', 'expectedOutcome', 'source', 'target', 'sha256')) {
+            if ($Expected.bodies[$index][$key] -cne $Current.bodies[$index][$key]) { throw 'Current Capture wire body linkage changed after native acceptance.' }
+        }
+    }
+}
+
 function Get-LinkedCapture {
     # This is the one reviewed log-only supplement, not a general resume path.
     # Its original Capture and failed Native results are immutable evidence.
@@ -877,6 +1025,7 @@ try {
             if ((Get-Hash $path) -ne $case.sha256.ToLowerInvariant()) { throw 'Reviewed wire fixture changed.' }
             @{ path = $path; sha256 = Get-Hash $path }
         })
+        if (-not $CaptureRunId) { $phaseResult.captureWireBinding = Get-CurrentCaptureWireEvidence }
         $project = Join-Path $projectRoot 'WarhammerClient.uproject'
         $build = Join-Path $EngineRoot 'Engine\Build\BatchFiles\Build.bat'
         $buildLog = Join-Path $runRoot 'native-build.log'
@@ -903,15 +1052,22 @@ try {
         $phaseResult.configAfter = Get-ConfigState
         Assert-ConfigState $phaseResult.configBefore $phaseResult.configAfter
         foreach ($file in $phaseResult.fixtureFiles) { if ((Get-Hash $file.path) -ne $file.sha256) { throw 'Native fixture changed during execution.' } }
+        if (-not $CaptureRunId) { Assert-CaptureWireBinding $phaseResult.captureWireBinding (Get-CurrentCaptureWireEvidence) }
         Assert-Candidate $phaseResult.candidate
         $phaseResult.status = 'NATIVE_FIXTURE_PASS'
     } else {
         Assert-Runtime
+        if (-not $CaptureRunId) {
+            if (-not $previous.ContainsKey('captureWireBinding')) { throw 'Native predecessor lacks the current Capture wire binding.' }
+            $phaseResult.captureWireBinding = Get-CurrentCaptureWireEvidence
+            Assert-CaptureWireBinding $previous.captureWireBinding $phaseResult.captureWireBinding
+        }
         $phaseResult.configBefore = Get-ConfigState
         Assert-ConfigState $previous.configAfter $phaseResult.configBefore
         foreach ($file in $previous.fixtureFiles) { if ((Get-Hash $file.path) -ne $file.sha256) { throw 'Accepted native fixture changed before audit.' } }
         $auditInput = if ($CaptureRunId) { Join-Path $runParent "$CaptureRunId\capture\python-capture" } else { Join-Path $runRoot 'capture\python-capture' }
         $null = Invoke-Harness 'audit' $runtimePython 'python-audit' $auditInput
+        if (-not $CaptureRunId) { Assert-CaptureWireBinding $phaseResult.captureWireBinding (Get-CurrentCaptureWireEvidence) }
         $phaseResult.configAfter = Get-ConfigState
         Assert-ConfigState $phaseResult.configBefore $phaseResult.configAfter
         $phaseResult.status = 'EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT'

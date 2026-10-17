@@ -121,7 +121,8 @@
           "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\test_e01_boundary.py"
         }
       ]
-    }
+    },
+    "identityScope": "Historical candidate identities for the recorded executed Capture/native evidence; not the unexecuted revision6 replacement candidate."
   },
   "dependencyIdentity": {
     "coreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
@@ -341,7 +342,7 @@
       "caseStatus": "PASS",
       "actual": {
         "movedModelCount": 5,
-        "numericAbsoluteTolerance": 1E-09,
+        "numericAbsoluteTolerance": 1e-09,
         "poseEvidence": [
           {
             "afterPose": {
@@ -661,6 +662,18 @@
     "redaction": {
       "policy": "credential values/fields and authorization-header patterns rejected before export; roles separated",
       "status": "PASS"
+    },
+    "processProvenanceLimits": {
+      "originalRawReportProcessRecords": 2,
+      "recordedOwners": [
+        "managed-primary",
+        "managed-restart"
+      ],
+      "attachWorkerProcessRecordPresent": false,
+      "attachWorkerPid": null,
+      "scope": "Original Capture002136 raw Python process ledger contains only the two owned hosts; no attach-worker PID can be recovered from that ledger.",
+      "missingActualRecordMustNotBeInvented": true,
+      "replacementExecutedProcessInventory": "REQUIRED_IN_FRESH_CAPTURE"
     }
   },
   "wirePrivacyAndPromotion": {
@@ -1304,7 +1317,7 @@
       "Persistent helper context",
       "No enforced read-only/approval-never/no-memory attestation"
     ],
-    "coordinatorReportedCliProgress": "Both initial OWN15 CLI reports are complete. Code requested source repairs; requirements assessment is blocked by omitted raw process selections and mixed documentation line endings. Source remediation, fresh complete execution and fresh affected reviews are pending.",
+    "coordinatorReportedCliProgress": "The r2 fresh code review again requested changes. Revision6 Python candidate passed 59 focused units; wrapper/guard final validation, complete candidate freeze, fresh blind code review and a fresh complete runtime chain remain pending.",
     "freshFinalReports": [],
     "initialOwn15Reports": [
       {
@@ -1384,18 +1397,190 @@
       }
     ],
     "remediation": {
-      "sourceRepairs": "PENDING",
+      "sourceRepairs": "REVISION6_SOURCE_UNIT_VERIFIED_PENDING_FRESH_CODE_REVIEW_AND_FULL_CHAIN",
       "replacementCandidate": null,
-      "freshCompleteRun": "PENDING_AFTER_SOURCE_REPAIR_FREEZE_AND_REVIEW",
-      "rawProcessEvidenceSelections": "PENDING",
-      "documentationLineEndingCorrection": "PENDING",
+      "freshCompleteRun": "PENDING_AFTER_COMPLETE_FREEZE_AND_FRESH_SOURCE_REVIEW",
+      "rawProcessEvidenceSelections": "FRESH_PACKET_AND_ACTUAL_WORKER_LEDGER_PENDING; ORIGINAL002136_WORKER_RECORD_ABSENT",
+      "documentationLineEndingCorrection": "PLAIN_AND_CRLF_AWARE_DIFF_CHECKS_PASSED; FINAL_FREEZE_RECHECK_REQUIRED",
       "freshAffectedCodeReview": "PENDING",
       "freshAffectedRequirementsReview": "PENDING",
       "sourceChangesInvalidateAffectedOldApprovals": true,
       "historicalRuntimeSuccessesRetained": true,
       "originalThirtySecondFailureRetained": true,
-      "thisRecorderIsFinalReviewer": false
-    }
+      "thisRecorderIsFinalReviewer": false,
+      "revision6Requirements": {
+        "typedGuardEveryCommandLane": true,
+        "existingSessionCreateConfigurationPaths": 2,
+        "sessionCreateUncertainty": "Persist the existing create configuration and record UNKNOWN; no invented Core create idempotency, new request keys or retry.",
+        "actualWorkerProcessInventoryRequired": true,
+        "bindFreshCapturePromotedWireNativeAuditExactHashes": true,
+        "privacyReviewBeforePromotionRequired": true,
+        "wrapperFinalSha256": "e5fb8305e22398eacc7dfa263373e6c480d7152b0b47dabc7cfdfee18d7ea86e",
+        "wrapperAndGuardRegressionResult": {
+          "status": "PASS",
+          "executed": 19,
+          "passed": 19,
+          "failed": 0,
+          "sourceSnapshotCount": 37,
+          "allSourceSnapshotsUnchanged": true,
+          "result": {
+            "path": ".local/tests/e01-wire-binding-20261017T013324Z-8cc21e3b/guard-unit-result.json",
+            "sha256": "3e08897879f059292579af7fb89b19bc53dce2ad8e961fa867a6ea4b7125a1a7"
+          },
+          "rawLog": {
+            "path": ".local/tests/e01-wire-binding-20261017T013324Z-8cc21e3b.raw.log",
+            "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+          },
+          "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
+          "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+          "coreOrNativePhaseExecuted": false
+        },
+        "fullRuntimeCaptureBuildAutomation": "NOT_RUN_FOR_THIS_REPLACEMENT_CANDIDATE"
+      },
+      "revision6PythonUnits": {
+        "status": "PASS",
+        "executed": 60,
+        "durationSeconds": 1.523,
+        "exitCode": 0,
+        "invocation": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T013240Z-f8c75f8c/invocation.json",
+          "sha256": "526ea9c87e9301807371a4ba1729d7112e1aa484f35f2d4728dcbf7de186770f"
+        },
+        "stderr": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T013240Z-f8c75f8c/stderr.txt",
+          "sha256": "fa803acbc8e9bd50fa716cbb15219d75120e6366b0b2bb7582c0329f2b6b1d78"
+        },
+        "stdout": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T013240Z-f8c75f8c/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "sourceBefore": [
+          {
+            "path": "scripts/migration/e01_boundary.py",
+            "sha256": "5E1F398892D70074A456C689FD23B44F645F5B9AB05C7E4291F02EBA35C020B9"
+          },
+          {
+            "path": "tests/migration/test_e01_boundary.py",
+            "sha256": "B13604B426BF4ADB7225FC35B987F3CA495DAEAD3CD01F43BE85D2A1261DC520"
+          }
+        ],
+        "sourceAfter": [
+          {
+            "path": "scripts/migration/e01_boundary.py",
+            "sha256": "5E1F398892D70074A456C689FD23B44F645F5B9AB05C7E4291F02EBA35C020B9"
+          },
+          {
+            "path": "tests/migration/test_e01_boundary.py",
+            "sha256": "B13604B426BF4ADB7225FC35B987F3CA495DAEAD3CD01F43BE85D2A1261DC520"
+          }
+        ],
+        "sourceBeforeAfterMatched": true,
+        "scope": "Lifecycle/create guards, complete worker inventory and exact absent/false/true wire flags; unit verification only",
+        "coreCaptureBuildOrInstallExecuted": false,
+        "independentSourceReviewPass": false
+      },
+      "previousRevision6PythonUnits": {
+        "status": "PASS",
+        "executed": 59,
+        "durationSeconds": 1.353,
+        "invocation": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T012906Z-b798f3ab/invocation.json",
+          "sha256": "81bb72acee097f1174f688f74103f7bf3a28b9ac00b1f46f7190c15440b77ed4"
+        },
+        "stderr": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T012906Z-b798f3ab/stderr.txt",
+          "sha256": "3a03c2a40f6f5516e0a100aa6accdc37d7e4f5d3ba5b8535e14709b7c853c4c3"
+        },
+        "stdout": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T012906Z-b798f3ab/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "executable": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\core-44.3.33\\Scripts\\python.exe",
+        "arguments": [
+          "-I",
+          "-B",
+          "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\test_e01_boundary.py"
+        ],
+        "pid": 32100,
+        "startedUtc": "2026-10-17T01:29:06.1779736Z",
+        "completedUtc": "2026-10-17T01:29:08.0942831Z",
+        "exitCode": 0,
+        "sourceBefore": [
+          {
+            "path": "scripts/migration/e01_boundary.py",
+            "sha256": "8E6B79D7A3D158665E105F5D92653E05BFE53AF63D32D5957263470AD21EB080"
+          },
+          {
+            "path": "tests/migration/test_e01_boundary.py",
+            "sha256": "A3C970E098E345E652616C0882EEB3B1C67527114F63BA220820AFEEFC1BC191"
+          }
+        ],
+        "sourceAfter": [
+          {
+            "path": "scripts/migration/e01_boundary.py",
+            "sha256": "8E6B79D7A3D158665E105F5D92653E05BFE53AF63D32D5957263470AD21EB080"
+          },
+          {
+            "path": "tests/migration/test_e01_boundary.py",
+            "sha256": "A3C970E098E345E652616C0882EEB3B1C67527114F63BA220820AFEEFC1BC191"
+          }
+        ],
+        "sourceBeforeAfterMatched": true,
+        "scope": "r2 direct lifecycle/attach UNKNOWN fixes plus root-origin create retention and worker process inventory",
+        "ownedLoopback": "Test-only ephemeral responders; Core and Popen mocked in lifecycle units; no Core host/capture/build/install",
+        "coreCaptureBuildOrInstallExecuted": false,
+        "independentSourceReviewPass": false
+      }
+    },
+    "subsequentOwn15CodeReports": [
+      {
+        "revision": "r2",
+        "role": "CODE_QUALITY",
+        "disposition": "CHANGES_REQUESTED",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r2.md",
+          "sha256": "800b48eab7c605c61a8f772d0f27af0312e70665077403d4e9e57d427ccf8eba"
+        },
+        "reviewedBase": "0467ee63fe6d4c775f429afae2233d7292787c31",
+        "reviewedHead": "f318dc2a78da478867f79af5cb80159408fd5369",
+        "inputManifestSha256": "d06fbeef136f107285510986da941a641a9291cc0327f073aae20e35a16507d6",
+        "allManifestFilesMatchedBeforeAfter": 173,
+        "headAndWorkingTreeClean": true,
+        "reviewedPythonSha256": "3c9a1f57009e070968be82a58f3e839bfcc1ca556d7899cd4585209581248e3b",
+        "reviewedPythonTestsSha256": "c8c8453ffdf01b71e7e7fc2734542271bb3732372843ae8d0e738ad6b8aeeb7e",
+        "reviewedWrapperSha256": "095ebf4359665e05afcfd864eb33e2d6fa9cb7fd9cfd19be5afcc78db92aab52",
+        "sessionId": "01a1476f-83f2-7160-b47b-50634d75e095",
+        "coordinatorReportedCliCompletion": {
+          "exitCode": 0,
+          "completedUtc": "2026-10-17T01:23:55.681524Z",
+          "execCommandCount": 29
+        },
+        "findings": [
+          {
+            "id": "R2-CODE-P1-COMMAND-LANES",
+            "priority": 1,
+            "sources": [
+              "scripts/migration/e01_boundary.py:1142",
+              "scripts/migration/e01_boundary.py:1155",
+              "scripts/migration/e01_boundary.py:1186"
+            ],
+            "summary": "Attach worker decision and supervisor lifecycle commands bypass Pair.submit envelope/schema/UNKNOWN guards, so response loss lacks persisted exact scope and completion uncertainty.",
+            "requiredAction": "Guard all command lanes before send, retain credential-free envelope and scope, record UNKNOWN and abandon affected session; add worker and supervisor commit-before-response-loss regressions."
+          },
+          {
+            "id": "R2-CODE-P1-WIRE-LINK",
+            "priority": 1,
+            "sources": [
+              "scripts/migration/Invoke-E01BoundaryProof.ps1:859",
+              "scripts/migration/Invoke-E01BoundaryProof.ps1:875",
+              "scripts/migration/Invoke-E01BoundaryProof.ps1:913"
+            ],
+            "summary": "Normal Native verifies a self-consistent promoted index without binding it and every body to the current successful Capture artifacts; Audit can separately inspect a different current corpus.",
+            "requiredAction": "Bind privacy-reviewed promoted index and every native-consumed body to exact fresh Capture artifact hashes before build/Automation and through Audit; reject stale-current mismatches."
+          }
+        ]
+      }
+    ]
   },
   "remainingLimits": [
     "Prior 30-second failure and expired-command UNKNOWN remain unchanged",
@@ -1409,29 +1594,83 @@
     "Native fixture tests do not prove Unreal HTTP/callback scheduling",
     "Rendering, genuine 3D/input, packaging, clean-machine/offline delivery and Linux execution remain unverified",
     "Durable restart/recovery and real production role controls remain unproved",
-    "Full E01/M01, G-RESEARCH and G-IMPLEMENT are not accepted"
+    "Full E01/M01, G-RESEARCH and G-IMPLEMENT are not accepted",
+    "Original Capture002136 has no actual attach-worker process record; its missing PID must not be invented",
+    "r2 attach/lifecycle command-lane and fresh-Capture wire-link findings require remediation and a new blind code review",
+    "Revision6 59-unit PASS is focused helper evidence, not fresh Core Capture/build/Automation or acceptance"
   ],
-  "updatedUtc": "2026-10-17T01:10:28.4600431Z",
+  "updatedUtc": "2026-10-17T01:34:50.311807+00:00",
   "preRemediationSnapshots": {
     "provenance": {
-      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0109494764325Z.json",
-      "sha256": "22e4da4f8e1e049ae569015f65317a6fa354020c4d0e23a5f5e8f89c0f0673cb"
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0130137420423Z.json",
+      "sha256": "c0bad127ec68c245197eaed3a1a0fc41e19c3293ceb93e33b8961565bc4a921f"
     },
     "files": [
       {
         "source": "docs/plans/evidence/2026-10-16-e01-slow120-result.json",
-        "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-result.648af28b6c1aa88aa5ce265e7b5a86dedeb5686d113f3bac5d02d4a542f9e1f2.json",
-        "sha256": "648af28b6c1aa88aa5ce265e7b5a86dedeb5686d113f3bac5d02d4a542f9e1f2",
-        "bytes": 51188
+        "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-result.0849a26ac09405966abc423fa75e7de3cdc3b73cf8dd9c0d11056f0a2c77a3e3.json",
+        "sha256": "0849a26ac09405966abc423fa75e7de3cdc3b73cf8dd9c0d11056f0a2c77a3e3",
+        "bytes": 57346
       },
       {
         "source": "docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md",
-        "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-acceptance-audit.476f057248e556b7b776bb17eed998602cc7c182acb0d46dab4903eb5d58b3a7.md",
-        "sha256": "476f057248e556b7b776bb17eed998602cc7c182acb0d46dab4903eb5d58b3a7",
-        "bytes": 33838
+        "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-acceptance-audit.e36459f42f142d2c11fd150792cdc5db18f348137e367bc18779515559250f2c.md",
+        "sha256": "e36459f42f142d2c11fd150792cdc5db18f348137e367bc18779515559250f2c",
+        "bytes": 38940
       }
     ],
     "overwriteExisting": false,
-    "purpose": "Preserve exact factual records supplied to initial OWN15 reviews before recording their findings"
-  }
+    "purpose": "Preserve exact prior records before recording r2 code review and revision6 remediation evidence"
+  },
+  "preRemediationSnapshotHistory": [
+    {
+      "provenance": {
+        "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0109494764325Z.json",
+        "sha256": "22e4da4f8e1e049ae569015f65317a6fa354020c4d0e23a5f5e8f89c0f0673cb"
+      },
+      "files": [
+        {
+          "source": "docs/plans/evidence/2026-10-16-e01-slow120-result.json",
+          "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-result.648af28b6c1aa88aa5ce265e7b5a86dedeb5686d113f3bac5d02d4a542f9e1f2.json",
+          "sha256": "648af28b6c1aa88aa5ce265e7b5a86dedeb5686d113f3bac5d02d4a542f9e1f2",
+          "bytes": 51188
+        },
+        {
+          "source": "docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md",
+          "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-acceptance-audit.476f057248e556b7b776bb17eed998602cc7c182acb0d46dab4903eb5d58b3a7.md",
+          "sha256": "476f057248e556b7b776bb17eed998602cc7c182acb0d46dab4903eb5d58b3a7",
+          "bytes": 33838
+        }
+      ],
+      "overwriteExisting": false,
+      "purpose": "Preserve exact factual records supplied to initial OWN15 reviews before recording their findings"
+    },
+    {
+      "provenance": {
+        "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0130137420423Z.json",
+        "sha256": "c0bad127ec68c245197eaed3a1a0fc41e19c3293ceb93e33b8961565bc4a921f"
+      },
+      "files": [
+        {
+          "source": "docs/plans/evidence/2026-10-16-e01-slow120-result.json",
+          "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-result.0849a26ac09405966abc423fa75e7de3cdc3b73cf8dd9c0d11056f0a2c77a3e3.json",
+          "sha256": "0849a26ac09405966abc423fa75e7de3cdc3b73cf8dd9c0d11056f0a2c77a3e3",
+          "bytes": 57346
+        },
+        {
+          "source": "docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md",
+          "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-acceptance-audit.e36459f42f142d2c11fd150792cdc5db18f348137e367bc18779515559250f2c.md",
+          "sha256": "e36459f42f142d2c11fd150792cdc5db18f348137e367bc18779515559250f2c",
+          "bytes": 38940
+        }
+      ],
+      "overwriteExisting": false,
+      "purpose": "Preserve exact prior records before recording r2 code review and revision6 remediation evidence"
+    },
+    {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-f0333a70c2dba5e3247bd481f247fea1388f21651d3a24acc72a21bbd3fee339.json",
+      "sha256": "f0333a70c2dba5e3247bd481f247fea1388f21651d3a24acc72a21bbd3fee339",
+      "reason": "Coordinator preserved factual record before appending final60-unit/19-guard verification; prior runtime and review history unchanged"
+    }
+  ]
 }
