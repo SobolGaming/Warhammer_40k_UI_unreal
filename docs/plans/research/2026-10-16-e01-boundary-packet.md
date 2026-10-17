@@ -1,10 +1,38 @@
 # E01-WIN-BOUNDARY: selected Core boundary proof packet
 
-Date: 2026-10-16. Packet revision: **6; E01-SLOW120 command and fixture provenance**.
+Date: 2026-10-16. Packet revision: **7; complete current editor-settings preservation evidence**.
 This packet refines Section 0 RQ03/RQ06/RQ08/RQ15/RQ17/RQ20/RQ23 of the
 [canonical plan](../unreal-migration-plan.md). It credits completed BOOT01 and
 defines the next bounded Windows proof. It does not claim full E01, M01,
 G-RESEARCH, G-IMPLEMENT, rendering, packaging or cross-platform acceptance.
+
+## Revision 7: required current editor-settings observations
+
+The same OWN14/OWN15 scope, budgets and file contract apply. Normal run
+`20261017T030835Z-0d4af4e2` passed its actual tests but omitted the six-path
+editor-settings before/after observations required below. Its raw Native PASS
+does not establish that missing preservation criterion. Keep that result and gap
+unchanged; historical snapshots cannot substitute for current observations.
+
+Complete the maintained Native guard in `Invoke-E01BoundaryProof.ps1`: record
+all six editor-setting existence/hash observations before the build and after
+Native work. Derive the configured engine, project and user roots; retain both
+profile Documents and the actual known Documents observations. Give observations
+stable identities so coincident paths do not discard a required observation.
+Reject changed path, existence, hash or membership. Do not create or modify any
+observed global path. Keep the existing authored Config and UBT guards, ABSLOG,
+nowrite, owned DDC and process limits. Preserve the primary phase failure and
+available after-observations if native execution fails.
+
+Extend only the maintained pure PowerShell guard tests with synthetic unchanged,
+changed, appeared/disappeared, missing/duplicate and substituted-path controls.
+They must not mutate actual settings or invoke the phase dispatcher/Core/Unreal.
+Retain genuine process/exit/log provenance for their new execution. Freeze and
+obtain a fresh affected code review before a **new full normal phase chain**;
+do not add a Capture-link exception or rerun over an existing phase. Independent
+privacy inspection/promotion and final separate CODE/REQ reviews remain required.
+This completes an existing preservation requirement; it changes no Core behavior,
+runtime ownership, budgets, platform scope or production acceptance criteria.
 
 ## Revision 6: all command lanes and current-Capture native binding
 

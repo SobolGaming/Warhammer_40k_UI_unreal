@@ -36,18 +36,30 @@ The prior 30-second capture passed 38 Python tests and 11 boundary checks but ti
 on a normal-move invalid-geometry command. EXT09 / Core #590 records the latency
 gap. Preserve its unknown outcome, result JSON and NOT_ACCEPTED audit. OWN14
 (2026-10-16) explicitly approves a separate E01-SLOW120 diagnostic with a
-120-second total request budget. Follow packet revision 6; freeze/review the
+120-second total request budget. Follow packet revision 7; freeze/review the
 changed candidate and use a fresh run. Keep connect at three seconds, managed
 readiness at 30 seconds and process limits at 30 minutes. A slow-host success
 does not pass the old 30-second budget or establish production responsiveness.
 Native/Audit and public wire promotion remain gated on successful predecessors
 and independent privacy review. Refuse any bytecode cache in the owned runtime.
 
-SLOW120 execution now has 40 Python tests, 14 live boundary checks, 132 native
-Automation cases and two automated evidence checks passing. Revision4 explicitly
-permits a fresh Native/Audit run linked to the one pinned immutable successful
-Capture, with no new Core process or game submissions. Use its exact hashes and
-guards; do not invent a general resume path. Earlier failures remain failures.
+Fresh normal run `20261017T030835Z-0d4af4e2`, on source candidate
+`c2614b2484a66bd8465b855e59b184d49b2b926d`, passed 87 Python tests,
+14 Capture checks, 132 unique native Automation cases and two automated evidence
+checks. The 14 include source/runtime/schema checks alongside live HTTP checks;
+37 pure PowerShell guard checks are separate pre-execution evidence. Capture,
+independent auxiliary privacy inspection, exact-byte fixture promotion, Native
+and Audit completed in order. That run omitted the required current six-path
+editor-settings snapshots: its authored Config and UBT comparisons are recorded,
+but the editor-settings preservation criterion remains UNVERIFIED. Preserve the
+raw passing test results and this gap. Add the missing maintained guard, review
+the changed candidate and run a fresh full chain; do not substitute historical
+snapshots or reconstruct a before observation. Final three-role acceptance is
+still pending.
+Historical revision4 permits only its recorded Native/Audit supplement linked to
+the one pinned immutable historical Capture, with no new Core process or game
+submissions. Use its exact hashes and guards; do not invent a general resume path.
+Earlier failures remain failures.
 Native proof uses ABSLOG, disables INI writes and checks authored Config membership/
 bytes plus observed editor/UBT settings. Preserve quarantined generated startup
 configuration privately and the documented new global EditorSettings file. Final

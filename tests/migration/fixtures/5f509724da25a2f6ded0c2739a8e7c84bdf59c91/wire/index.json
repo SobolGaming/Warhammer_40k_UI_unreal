@@ -78,7 +78,7 @@
       "path": "view_initial/playerA.json",
       "recipe": "Explicit role-scoped projection; admin fixture remains privileged",
       "role": "playerA",
-      "sha256": "25fd7ea080b41efb16d80462ad7e8ea5bc1bdff9e024df4a824c424d27358966"
+      "sha256": "d799a8df73c35b523d6ae682e207d5cda65c481891af7f2ee4bd55ea967d4809"
     },
     {
       "case_id": "view_initial",
@@ -88,7 +88,7 @@
       "path": "view_initial/playerB.json",
       "recipe": "Explicit role-scoped projection; admin fixture remains privileged",
       "role": "playerB",
-      "sha256": "ecf71d2b9632c53cc108ea134b66bb8fd5ff1b288ade9107a7258cafec057121"
+      "sha256": "756b1f1e283af5bfd9bcf9a11bd8744851f7ed80dfd87d500a5d9b6710a26717"
     },
     {
       "case_id": "view_initial",
@@ -98,7 +98,7 @@
       "path": "view_initial/coach.json",
       "recipe": "Explicit role-scoped projection; admin fixture remains privileged",
       "role": "coach",
-      "sha256": "2d1a265f9d86a136ef1edee923403140b0836b49cb1bfe8d400c81676b51dfdf"
+      "sha256": "0d039cf9eb8596c74497094946de3cccab08f49ae2fc18ba9e0c12af432ecd7d"
     },
     {
       "case_id": "view_initial",
@@ -108,7 +108,7 @@
       "path": "view_initial/delayed.json",
       "recipe": "Explicit role-scoped projection; admin fixture remains privileged",
       "role": "delayed",
-      "sha256": "15f972f051c08754f20b2612adf97908a034173b2f7565161c7e85e47652dde1"
+      "sha256": "997f8bec7e9ca4dd9fedd8314689becc9e196db83b0e47718e4e44d2ac8775a0"
     },
     {
       "case_id": "view_replay_live_denied",
@@ -128,7 +128,7 @@
       "path": "events_0/playerA.json",
       "recipe": "Server-scoped event cursor, at most eight pages of 100",
       "role": "playerA",
-      "sha256": "130c7e880c3b8e7e177a97c1d2aae1763371b37c27aedc00bda0b7b64e89818b"
+      "sha256": "409c007251d4f5cb3fcc33eea1884abbd4f80350d1f050bfecc72b9588e0e6d0"
     },
     {
       "case_id": "events_0",
@@ -138,7 +138,7 @@
       "path": "events_0/playerB.json",
       "recipe": "Server-scoped event cursor, at most eight pages of 100",
       "role": "playerB",
-      "sha256": "b99f3e7e4b479c9b2eab311ab9493b9c1cf8146b7c7865f2b2d0a11112df1bb8"
+      "sha256": "2e845640702dbe48b648ebae521ba9f047fddeb054fd7da83aa2a842bc41b75e"
     },
     {
       "case_id": "events_0",
@@ -148,7 +148,7 @@
       "path": "events_0/coach.json",
       "recipe": "Server-scoped event cursor, at most eight pages of 100",
       "role": "coach",
-      "sha256": "a978383d281b4207c8590fbcb63c30c1ba45964c5853d42901e221cad7060411"
+      "sha256": "6d4f4f8288807220cbe78be02d3e68efa538b30894b49c64156f440fa07327d2"
     },
     {
       "case_id": "events_0",
@@ -158,7 +158,7 @@
       "path": "events_0/delayed.json",
       "recipe": "Server-scoped event cursor, at most eight pages of 100",
       "role": "delayed",
-      "sha256": "c17203c5098b00ce64999f8c4e50bd7b5b9262ccabe6db055c0a5276b47b4df4"
+      "sha256": "9f29eb90e4087883aff216f59656958502084262a1d2aef78ae5f76730e6d8e1"
     },
     {
       "case_id": "events_wrong_viewer_cursor",
@@ -168,7 +168,7 @@
       "path": "events_wrong_viewer_cursor/playerB.json",
       "recipe": "PlayerA cursor rejected by server under PlayerB credential",
       "role": "playerB",
-      "sha256": "f8d8651d5252798809f8e5c639ad274108c4221c83e4d83f5fe5cec118a59069"
+      "sha256": "3d9948baa61d5f7ad16823b331bc3c6d13aa7d76af39c7b2ce6bdf9f552b5b66"
     },
     {
       "case_id": "stale_wrong_revision",
@@ -188,7 +188,7 @@
       "path": "finite_accepted/playerA.json",
       "recipe": "Canonical visible finite request; exact offered option under bound player",
       "role": "playerA",
-      "sha256": "847c180f6e29731795a9c36a3351009599d8598de63b185513f6bebdb164a82f"
+      "sha256": "42e57cc60447c6a9eb66a4162d435cbadc8a6be51ae67905ab5c046a5fa05018"
     },
     {
       "case_id": "retry_changed_envelope",
@@ -218,7 +218,7 @@
       "path": "movement_before/playerA.json",
       "recipe": "Authorized current complete movement projection before any negative/positive submissions",
       "role": "playerA",
-      "sha256": "cad5b2d2988e5d395ff6b16aba9ec22bd6e2802454b0de14d8e9f9de9923f8a4"
+      "sha256": "f227e8d3e4e9a40ba1475b5184a8e52ff1fbf478f8e613470c335fc75cfd8c67"
     },
     {
       "case_id": "movement_inventory_missing",
@@ -258,7 +258,7 @@
       "path": "movement_recorded_invalid/playerA.json",
       "recipe": "Well-formed ordered complete witness with 1000-inch candidate; only Core validates geometry",
       "role": "playerA",
-      "sha256": "45dcaa265814f014d42d9e5218147204bb084b6f93467908e209bebc2a522c73"
+      "sha256": "441313b6ccb0a4b4fef51e0d00c8690d12a311373d92a529406a79bae6892c50"
     },
     {
       "case_id": "movement_accepted",
@@ -268,7 +268,7 @@
       "path": "movement_accepted/playerA.json",
       "recipe": "Canonical complete ordered witness, every current placed physical model translated one inch +X",
       "role": "playerA",
-      "sha256": "eac7c68dea398737d706a2ff94f50563f82de6ba7a01813c37fa14b4e4a1021c"
+      "sha256": "627ca5f423cf6f3446ba356ce256e6d21bf8004eb26f8de5ed39a7ad002102b3"
     },
     {
       "case_id": "movement_after",
@@ -278,7 +278,7 @@
       "path": "movement_after/playerA.json",
       "recipe": "Post-action authorized refresh shows authoritative position change",
       "role": "playerA",
-      "sha256": "8287a7802ec8208e824620637a1feb83ea30114e68c1febed00a94bebcd07f08"
+      "sha256": "b04a9ac2bb2b562dad1205b03b66eb2ca7bb8e288cab61829d0f46f7c6220f8d"
     },
     {
       "case_id": "error_unavailable_route",
@@ -298,7 +298,7 @@
       "path": "support_profile/playerA.json",
       "recipe": "Existing public /games/{game_id}/support-profile",
       "role": "playerA",
-      "sha256": "2c4dfec9330e2ccd6c0f9d5b4b189097e894f9c42a5904fde0793412767f6240"
+      "sha256": "6f3153606c99de7f9a2d19c1399575d131b586690f5693683288e827306c4a52"
     }
   ],
   "format_version": 1

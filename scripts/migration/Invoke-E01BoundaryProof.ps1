@@ -841,6 +841,102 @@ function Assert-UBTSettings($Before, $After) {
     }
 }
 
+function New-EditorSettingsPaths([string] $EngineDirectory, [string] $ProjectDirectory,
+    [string] $LocalDataDirectory, [string] $ProfileDirectory, [string] $DocumentsDirectory,
+    [int] $MajorVersion, [int] $MinorVersion) {
+    foreach ($root in @($EngineDirectory, $ProjectDirectory, $LocalDataDirectory, $ProfileDirectory, $DocumentsDirectory)) {
+        if ([string]::IsNullOrWhiteSpace($root) -or -not [IO.Path]::IsPathFullyQualified($root)) {
+            throw 'All editor-settings observation roots must be available absolute paths.'
+        }
+    }
+    if ($MajorVersion -le 0 -or $MinorVersion -lt 0) { throw 'Editor-settings engine version is unavailable.' }
+    $version = '{0}.{1}' -f $MajorVersion, $MinorVersion
+    # Keep the two Documents observations even when their paths coincide. Roles,
+    # rather than unique filenames, identify the six required observations.
+    return @(
+        @{ role = 'engine-base'; path = [IO.Path]::GetFullPath((Join-Path $EngineDirectory 'Engine\Config\BaseEditorSettings.ini')) },
+        @{ role = 'local-user'; path = [IO.Path]::GetFullPath((Join-Path $LocalDataDirectory 'Unreal Engine\Engine\Config\UserEditorSettings.ini')) },
+        @{ role = 'local-versioned'; path = [IO.Path]::GetFullPath((Join-Path $LocalDataDirectory "UnrealEngine\$version\Saved\Config\WindowsEditor\EditorSettings.ini")) },
+        @{ role = 'profile-documents-user'; path = [IO.Path]::GetFullPath((Join-Path $ProfileDirectory 'Documents\Unreal Engine\Engine\Config\UserEditorSettings.ini')) },
+        @{ role = 'project-default'; path = [IO.Path]::GetFullPath((Join-Path $ProjectDirectory 'Config\DefaultEditorSettings.ini')) },
+        @{ role = 'known-documents-user'; path = [IO.Path]::GetFullPath((Join-Path $DocumentsDirectory 'Unreal Engine\Engine\Config\UserEditorSettings.ini')) }
+    )
+}
+
+function Get-EditorSettingsPaths {
+    return New-EditorSettingsPaths $EngineRoot $projectRoot ([Environment]::GetFolderPath('LocalApplicationData')) `
+        ([Environment]::GetFolderPath('UserProfile')) ([Environment]::GetFolderPath('MyDocuments')) `
+        $phaseResult.toolchain.engineVersion.MajorVersion $phaseResult.toolchain.engineVersion.MinorVersion
+}
+
+function Get-EditorSettingsAttributes([string] $Path) {
+    return [IO.File]::GetAttributes($Path)
+}
+
+function Get-EditorSettingsState {
+    return @(foreach ($setting in Get-EditorSettingsPaths) {
+        $record = @{ role = $setting.role; path = $setting.path; exists = $null; sha256 = $null; inspection = 'UNAVAILABLE' }
+        try {
+            # Absence below a cloud/reparse Documents ancestor is a read-only
+            # observation. Only explicit not-found errors establish absence:
+            # File.Exists also returns false for access/IO errors and is unsafe
+            # for this preservation record. Hash/read races remain UNAVAILABLE.
+            $knownAbsent = $false
+            try { $attributes = Get-EditorSettingsAttributes $setting.path }
+            catch [IO.FileNotFoundException] { $knownAbsent = $true }
+            catch [IO.DirectoryNotFoundException] { $knownAbsent = $true }
+            $record.exists = -not $knownAbsent
+            if (-not $knownAbsent) {
+                # Check returned attributes directly: a broken link may not pass
+                # File.Exists, but available reparse metadata must be rejected.
+                if (($attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw 'Editor-settings file is a reparse point.' }
+                if (($attributes -band [IO.FileAttributes]::Directory) -ne 0) { throw 'Expected an editor-settings file, not a directory.' }
+                $record.sha256 = Get-Hash $setting.path
+            }
+            $record.inspection = 'PASS'
+        } catch {
+            # Retain all available observations even if one file cannot be read.
+            # The assertion rejects UNAVAILABLE; this is not an absence fallback.
+            $record.diagnostic = 'Editor-settings path could not be safely inspected.'
+        }
+        $record
+    })
+}
+
+function Assert-EditorSettingsState($Before, $After) {
+    $expected = @(Get-EditorSettingsPaths)
+    if ($expected.Count -ne 6 -or @($Before).Count -ne 6 -or @($After).Count -ne 6) {
+        throw 'Editor-settings preservation requires all six observations before and after native work.'
+    }
+    foreach ($setting in $expected) {
+        $prior = @($Before | Where-Object { $_.role -ceq $setting.role })
+        $current = @($After | Where-Object { $_.role -ceq $setting.role })
+        if ($prior.Count -ne 1 -or $current.Count -ne 1) { throw 'Editor-settings observation membership is missing or duplicated.' }
+        foreach ($observation in @($prior[0], $current[0])) {
+            if ($observation.path -cne $setting.path) { throw 'Editor-settings observation path changed or was substituted.' }
+            if ($observation.inspection -cne 'PASS' -or $observation.exists -isnot [bool] -or
+                ($observation.exists -and ($observation.sha256 -isnot [string] -or $observation.sha256 -cnotmatch '^[0-9a-f]{64}$')) -or
+                (-not $observation.exists -and $null -ne $observation.sha256)) {
+                throw 'Editor-settings observation is unavailable or has invalid existence/hash metadata.'
+            }
+        }
+        if ($prior[0].exists -cne $current[0].exists -or $prior[0].sha256 -cne $current[0].sha256) {
+            throw 'Editor-settings existence or hash changed during native work.'
+        }
+    }
+}
+
+function Save-EditorSettingsFailureEvidence([Collections.IDictionary] $Result) {
+    $Result.editorSettingsAfterFailureUtc = [datetime]::UtcNow.ToString('o')
+    try {
+        $Result.editorSettingsAfterFailure = Get-EditorSettingsState
+        Assert-EditorSettingsState $Result.editorSettingsBefore $Result.editorSettingsAfterFailure
+    } catch {
+        # Do not replace the original build/automation/phase failure.
+        $Result.editorSettingsFailure = 'Editor-settings preservation changed or could not be established; inspect retained observations.'
+    }
+}
+
 function Get-ConfigState {
     $configRoot = Join-Path $projectRoot 'Config'
     Assert-NoReparsePoint $configRoot
@@ -1029,6 +1125,9 @@ try {
         }
         $phaseResult.ubtSettingsBefore = Get-UBTSettings
         $phaseResult.configBefore = Get-ConfigState
+        $phaseResult.editorSettingsBeforeUtc = [datetime]::UtcNow.ToString('o')
+        $phaseResult.editorSettingsBefore = Get-EditorSettingsState
+        Assert-EditorSettingsState $phaseResult.editorSettingsBefore $phaseResult.editorSettingsBefore
         $nativePaths = @('Source/WarhammerClient/Private/Migration/CoreBoundaryEvidence.h',
             'Source/WarhammerClient/Private/Migration/CoreBoundaryEvidence.cpp',
             'Source/WarhammerClient/Private/Tests/CoreBoundaryEvidenceTests.cpp', 'Source/WarhammerClient/WarhammerClient.Build.cs',
@@ -1065,6 +1164,9 @@ try {
         $phaseResult.automation = Get-AutomationEvidence (Join-Path $automationRoot 'index.json')
         $phaseResult.nativeArtifacts = @((Get-SafeArtifact $buildLog), (Get-SafeArtifact (Join-Path $runRoot 'native-automation.log')),
             (Get-SafeArtifact (Join-Path $automationRoot 'index.json')))
+        $phaseResult.editorSettingsAfterUtc = [datetime]::UtcNow.ToString('o')
+        $phaseResult.editorSettingsAfter = Get-EditorSettingsState
+        Assert-EditorSettingsState $phaseResult.editorSettingsBefore $phaseResult.editorSettingsAfter
         $phaseResult.ubtSettingsAfter = Get-UBTSettings
         Assert-UBTSettings $phaseResult.ubtSettingsBefore $phaseResult.ubtSettingsAfter
         $phaseResult.configAfter = Get-ConfigState
@@ -1121,6 +1223,7 @@ try {
             try { $phaseResult.configAfterFailure = Get-ConfigState; Assert-ConfigState $phaseResult.configBefore $phaseResult.configAfterFailure }
             catch { $phaseResult.configFailure = 'Authored Config contents or directory/file set changed or could not be inspected.' }
         }
+        if ($phaseResult.Contains('editorSettingsBefore')) { Save-EditorSettingsFailureEvidence $phaseResult }
     }
 } finally {
     if ($null -ne $phaseResult) {

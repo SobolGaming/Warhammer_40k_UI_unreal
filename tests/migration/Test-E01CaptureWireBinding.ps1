@@ -18,7 +18,9 @@ $tokens = $null; $parseErrors = $null
 $ast = [System.Management.Automation.Language.Parser]::ParseFile($guardWrapperPath, [ref]$tokens, [ref]$parseErrors)
 if ($parseErrors.Count) { throw 'Wrapper AST failed.' }
 $names = @('Assert-NoReparsePoint', 'Assert-ChildPath', 'Get-MemberPath', 'Require-File', 'Get-Hash', 'Assert-SafeText',
-    'Read-Json', 'Assert-Candidate', 'Get-PythonUnitEvidence', 'Get-CurrentCaptureWireEvidence', 'Assert-CaptureWireBinding')
+    'Read-Json', 'Assert-Candidate', 'Get-PythonUnitEvidence', 'Get-CurrentCaptureWireEvidence', 'Assert-CaptureWireBinding',
+    'New-EditorSettingsPaths', 'Get-EditorSettingsPaths', 'Get-EditorSettingsAttributes', 'Get-EditorSettingsState',
+    'Assert-EditorSettingsState', 'Save-EditorSettingsFailureEvidence')
 foreach ($definition in $ast.FindAll({ param($node) $node -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $false)) {
     if ($definition.Name -in $names) {
         # Extracted function definitions lose their automatic source-file binding.
@@ -223,6 +225,133 @@ Check-PythonUnitLog 'unit-wrong-singular-summary' "Ran 2 test in 0.125s`n`nOK`n"
 if ($ActualUnitLogPath) {
     Check-PythonUnitLog 'unit-preserved-full-verbose-log' ([IO.File]::ReadAllText($ActualUnitLogPath, $utf8)) $ActualUnitCount
 }
+
+# Editor preservation controls use invented metadata only. No editor settings
+# file is written, and the Native dispatcher/build/editor are never invoked.
+$EngineRoot = Join-Path $OutputRoot 'SIMULATED-engine'
+$phaseResult.toolchain = @{ engineVersion = @{ MajorVersion = 5; MinorVersion = 8 } }
+function New-SimulatedEditorState {
+    $index = 0
+    return @(foreach ($setting in Get-EditorSettingsPaths) {
+        $present = $index -in @(0, 2, 4); $index++
+        @{ role = $setting.role; path = $setting.path; exists = $present; inspection = 'PASS'
+            sha256 = $(if ($present) { 'a' * 64 } else { $null }) }
+    })
+}
+
+function Check-EditorGuard([string] $Name, [scriptblock] $Mutation, [string] $ExpectedFailure = '') {
+    $editorBefore = @(New-SimulatedEditorState)
+    $editorAfter = @((ConvertTo-Json -InputObject $editorBefore -Depth 8) | ConvertFrom-Json -AsHashtable)
+    . $Mutation
+    $failure = $null
+    try { Assert-EditorSettingsState $editorBefore $editorAfter } catch { $failure = $_.Exception.Message }
+    $pass = if ($ExpectedFailure) { $null -ne $failure -and $failure -like ('*' + $ExpectedFailure + '*') } else { $null -eq $failure }
+    $checks.Add(@{ name = $Name; status = $(if ($pass) { 'PASS' } else { 'FAIL' }); kind = 'editor-settings-metadata'
+        simulation = $true; beforeCount = $editorBefore.Count; afterCount = $editorAfter.Count; expectedFailure = $ExpectedFailure; observedFailure = $failure })
+    Write-Output ("{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+
+Check-EditorGuard 'editor-six-unchanged' {}
+Check-EditorGuard 'editor-reordered-roles-unchanged' { [array]::Reverse($editorAfter) }
+Check-EditorGuard 'editor-changed-hash' { $editorAfter[0].sha256 = 'b' * 64 } 'existence or hash changed'
+Check-EditorGuard 'editor-file-appeared' { $editorAfter[1].exists = $true; $editorAfter[1].sha256 = 'b' * 64 } 'existence or hash changed'
+Check-EditorGuard 'editor-file-disappeared' { $editorAfter[0].exists = $false; $editorAfter[0].sha256 = $null } 'existence or hash changed'
+Check-EditorGuard 'editor-missing-after-role' { $editorAfter = @($editorAfter | Select-Object -First 5) } 'all six observations'
+Check-EditorGuard 'editor-missing-before-role' { $editorBefore = @($editorBefore | Select-Object -First 5) } 'all six observations'
+Check-EditorGuard 'editor-duplicate-role' { $editorAfter[5] = $editorAfter[4] } 'membership is missing or duplicated'
+Check-EditorGuard 'editor-unknown-role' { $editorAfter[5].role = 'invented-role' } 'membership is missing or duplicated'
+Check-EditorGuard 'editor-extra-role' { $editorAfter += $editorAfter[0] } 'all six observations'
+Check-EditorGuard 'editor-path-substitution' { $editorAfter[0].path += '.substituted' } 'path changed or was substituted'
+Check-EditorGuard 'editor-matching-path-substitution' { $editorAfter[0].path += '.substituted'; $editorBefore[0].path = $editorAfter[0].path } 'path changed or was substituted'
+Check-EditorGuard 'editor-present-without-hash' { $editorAfter[0].sha256 = $null } 'invalid existence/hash metadata'
+Check-EditorGuard 'editor-absent-with-hash' { $editorAfter[1].sha256 = 'a' * 64 } 'invalid existence/hash metadata'
+Check-EditorGuard 'editor-nonboolean-existence' { $editorAfter[0].exists = 'true' } 'invalid existence/hash metadata'
+Check-EditorGuard 'editor-unavailable-inspection' { $editorAfter[0].inspection = 'UNAVAILABLE' } 'unavailable or has invalid'
+
+$coincident = @(New-EditorSettingsPaths (Join-Path $OutputRoot 'engine') (Join-Path $OutputRoot 'project') `
+    (Join-Path $OutputRoot 'local') (Join-Path $OutputRoot 'profile') (Join-Path $OutputRoot 'profile\Documents') 5 8)
+$coincidentPass = $coincident.Count -eq 6 -and @($coincident.role | Sort-Object -Unique).Count -eq 6 -and
+    @($coincident | Where-Object { $_.role -in @('profile-documents-user', 'known-documents-user') } | Select-Object -ExpandProperty path -Unique).Count -eq 1
+$checks.Add(@{ name = 'editor-coincident-documents-retain-six-roles'; kind = 'editor-settings-paths'; simulation = $true
+    status = $(if ($coincidentPass) { 'PASS' } else { 'FAIL' }); observations = $coincident.Count })
+Write-Output ("editor-coincident-documents-retain-six-roles: {0}" -f $(if ($coincidentPass) { 'PASS' } else { 'FAIL' }))
+
+function Check-CoincidentEditorComparison {
+    function Get-EditorSettingsPaths { return $coincident }
+    $snapshot = @(New-SimulatedEditorState)
+    $failure = $null
+    try { Assert-EditorSettingsState $snapshot $snapshot } catch { $failure = $_.Exception.Message }
+    $pass = $null -eq $failure -and $snapshot.Count -eq 6
+    $checks.Add(@{ name = 'editor-coincident-documents-compare-by-role'; kind = 'editor-settings-metadata'; simulation = $true
+        status = $(if ($pass) { 'PASS' } else { 'FAIL' }); observations = $snapshot.Count; observedFailure = $failure })
+    Write-Output ("editor-coincident-documents-compare-by-role: {0}" -f $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+Check-CoincidentEditorComparison
+
+function Check-EditorInspection([string] $Name, [string] $Mode, [string] $ExpectedInspection, $ExpectedExists) {
+    $hashCalls = [Collections.Generic.List[string]]::new()
+    # Supply only invented attributes/errors/hash bytes to the maintained sampler.
+    # No settings file or directory is queried or changed by these controls.
+    function Get-EditorSettingsAttributes([string] $Path) {
+        switch ($Mode) {
+            'missing-file' { throw [IO.FileNotFoundException]::new('SIMULATED_NOT_FOUND') }
+            'missing-parent' { throw [IO.DirectoryNotFoundException]::new('SIMULATED_PARENT_NOT_FOUND') }
+            'denied' { throw [UnauthorizedAccessException]::new('SIMULATED_ACCESS_DENIED') }
+            'io-error' { throw [IO.IOException]::new('SIMULATED_IO_ERROR') }
+            'security-error' { throw [Security.SecurityException]::new('SIMULATED_SECURITY_ERROR') }
+            'broken-link' { return [IO.FileAttributes]::ReparsePoint }
+            'directory' { return [IO.FileAttributes]::Directory }
+            default { return [IO.FileAttributes]::Normal }
+        }
+    }
+    function Get-Hash([string] $Path) {
+        $hashCalls.Add($Path)
+        if ($Mode -eq 'hash-race') { throw [IO.FileNotFoundException]::new('SIMULATED_DISAPPEARED_AFTER_ATTRIBUTES') }
+        return 'a' * 64
+    }
+    $snapshot = @(Get-EditorSettingsState)
+    $pass = $snapshot.Count -eq 6 -and @($snapshot | Where-Object {
+        $_.inspection -cne $ExpectedInspection -or $_.exists -cne $ExpectedExists
+    }).Count -eq 0
+    $expectedHashCalls = if ($Mode -in @('present', 'hash-race')) { 6 } else { 0 }
+    $pass = $pass -and $hashCalls.Count -eq $expectedHashCalls
+    $checks.Add(@{ name = $Name; kind = 'editor-settings-sampler'; simulation = $true; status = $(if ($pass) { 'PASS' } else { 'FAIL' })
+        expectedInspection = $ExpectedInspection; expectedExists = $ExpectedExists; hashCalls = $hashCalls.Count; retained = $snapshot })
+    Write-Output ("{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+Check-EditorInspection 'editor-inspection-present-file' 'present' 'PASS' $true
+Check-EditorInspection 'editor-inspection-explicit-missing-file' 'missing-file' 'PASS' $false
+Check-EditorInspection 'editor-inspection-explicit-missing-parent' 'missing-parent' 'PASS' $false
+Check-EditorInspection 'editor-inspection-access-denied-is-unknown' 'denied' 'UNAVAILABLE' $null
+Check-EditorInspection 'editor-inspection-io-error-is-unknown' 'io-error' 'UNAVAILABLE' $null
+Check-EditorInspection 'editor-inspection-security-error-is-unknown' 'security-error' 'UNAVAILABLE' $null
+Check-EditorInspection 'editor-inspection-broken-link-is-unavailable' 'broken-link' 'UNAVAILABLE' $true
+Check-EditorInspection 'editor-inspection-directory-is-unavailable' 'directory' 'UNAVAILABLE' $true
+Check-EditorInspection 'editor-inspection-hash-race-is-not-absence' 'hash-race' 'UNAVAILABLE' $true
+
+function Check-EditorFailureEvidence([string] $Name, [string] $Mode) {
+    $simulatedAfter = @(New-SimulatedEditorState)
+    $record = [ordered]@{ failure = 'SIMULATED_PRIMARY_BUILD_FAILURE'; editorSettingsBefore = @(New-SimulatedEditorState) }
+    if ($Mode -eq 'changed') { $simulatedAfter[0].sha256 = 'b' * 64 }
+    if ($Mode -eq 'unavailable') { $simulatedAfter[0].inspection = 'UNAVAILABLE'; $simulatedAfter[0].sha256 = $null }
+    # This local metadata provider shadows only filesystem sampling. The actual
+    # maintained failure recorder and membership/hash assertion run unchanged.
+    function Get-EditorSettingsState { if ($Mode -eq 'provider-failed') { throw 'SIMULATED_METADATA_PROVIDER_FAILURE' }; return $simulatedAfter }
+    Save-EditorSettingsFailureEvidence $record
+    $pass = $record.failure -ceq 'SIMULATED_PRIMARY_BUILD_FAILURE' -and $record.Contains('editorSettingsAfterFailureUtc')
+    if ($Mode -eq 'provider-failed') { $pass = $pass -and $record.Contains('editorSettingsFailure') }
+    else { $pass = $pass -and @($record.editorSettingsAfterFailure).Count -eq 6 }
+    if ($Mode -in @('changed', 'unavailable')) { $pass = $pass -and $record.Contains('editorSettingsFailure') }
+    if ($Mode -eq 'unchanged') { $pass = $pass -and -not $record.Contains('editorSettingsFailure') }
+    $checks.Add(@{ name = $Name; kind = 'editor-settings-post-failure'; simulation = $true; status = $(if ($pass) { 'PASS' } else { 'FAIL' })
+        primaryFailurePreserved = ($record.failure -ceq 'SIMULATED_PRIMARY_BUILD_FAILURE'); retained = $record })
+    Write-Output ("{0}: {1}" -f $Name, $(if ($pass) { 'PASS' } else { 'FAIL' }))
+}
+Check-EditorFailureEvidence 'editor-primary-failure-unchanged-after' 'unchanged'
+Check-EditorFailureEvidence 'editor-primary-failure-retains-changed-after' 'changed'
+Check-EditorFailureEvidence 'editor-primary-failure-retains-unavailable-after' 'unavailable'
+Check-EditorFailureEvidence 'editor-primary-failure-provider-also-fails' 'provider-failed'
+
 $sourceAfter = @(foreach ($record in $sourceBefore) { @{ path = $record.path; sha256 = Get-Hash $record.path; unchanged = ((Get-Hash $record.path) -ceq $record.sha256) } })
 $passed = @($checks | Where-Object { $_.status -eq 'PASS' }).Count
 $invocation = @('pwsh', '-NoProfile', '-File', $PSCommandPath, '-OutputRoot', $OutputRoot)
