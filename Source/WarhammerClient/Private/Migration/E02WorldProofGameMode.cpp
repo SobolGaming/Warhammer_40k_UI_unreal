@@ -710,7 +710,8 @@ public:
         else if (E.GetEffectingButton() == EKeys::RightMouseButton) { Button = EPointerButton::Secondary; }
         else if (E.GetEffectingButton() == EKeys::MiddleMouseButton) { Button = EPointerButton::Middle; }
         else { return FReply::Handled(); }
-        if (Hit.Owner == EInputOwner::Text) { Proof->Policy.SetTextEditing(true); }
+        // An additional button cannot replace the owner selected by the held gesture.
+        if (Hit.Owner == EInputOwner::Text && !Proof->Policy.Snapshot().Capture.IsSet()) { Proof->Policy.SetTextEditing(true); }
         const FInputEffects Effect = Proof->Policy.Press(P, Button, Hit); Proof->Apply(Effect, P);
         Proof->Trace(TEXT("PointerDown"), P, Hit, Before, Effect);
         FReply Reply = FReply::Handled().SetKeyboardFocus(SharedThis(this));

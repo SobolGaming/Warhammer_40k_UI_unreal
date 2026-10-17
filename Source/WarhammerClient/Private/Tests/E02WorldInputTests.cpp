@@ -234,7 +234,7 @@ private:
             Pixel.Y * ViewBasis.LocalSize.Y / Extent.Y)));
         return true;
     }
-    void AddLogicalOrbitProbe()
+    void AddLogicalOrbitProbe(bool bTextChord = false)
     {
         Do(TEXT("measure real Slate basis and quantized logical drag probes"), [this]()
         {
@@ -249,6 +249,7 @@ private:
             Check(Below.Size() > 0 && Below.Size() < 4 && Above.Size() >= 4, TEXT("Quantized physical samples straddle the strict logical threshold"));
             ProbeCameras = World->CameraMutationCount(); ProbePicks = World->WorldPickCount();
             ProbeHudActivations = World->GetPolicy().Snapshot().HudActivationCount;
+            bProbeTextEditing = World->GetPolicy().Snapshot().bTextEditing;
             const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
             ProbeAzimuth = Camera->GetNumberField(TEXT("azimuthDegrees")); ProbeElevation = Camera->GetNumberField(TEXT("elevationDegrees"));
         });
@@ -256,7 +257,7 @@ private:
         Do(TEXT("real press sample agrees with independent geometry"), [this]()
         {
             const auto& Capture = World->GetPolicy().Snapshot().Capture;
-            if (!Check(Capture.IsSet() && Capture->Owner == EInputOwner::Orbit, TEXT("Real Slate press owns orbit capture"))) { return; }
+            if (!Check(Capture.IsSet() && Capture->Owner == EInputOwner::Orbit && Capture->Button == EPointerButton::Secondary, TEXT("Real Slate secondary press owns orbit capture"))) { return; }
             ProbeCaptureGeneration = Capture->Generation;
             Check(Capture->Start.ScreenPhysical.Equals(ProbeStart, 1e-4) && Capture->Start.Logical.Equals(SurfaceBasis.ToLocal(ProbeStart), 1e-3),
                 TEXT("Physical press and independently inverted logical press agree"));
@@ -264,18 +265,25 @@ private:
         Input(TEXT("driver moves below four logical units"), [this](IAsyncActionSequence& S) { S.MoveToPosition(ProbeBelow); });
         Do(TEXT("below-threshold displacement is logical and camera stays fixed"), [this]() { AssertOrbitProbe(false); });
         Input(TEXT("driver moves above four logical units"), [this](IAsyncActionSequence& S) { S.MoveToPosition(ProbeAbove); });
-        Do(TEXT("above-threshold exact logical displacement changes orbit"), [this]()
+        Do(TEXT("above-threshold exact logical displacement changes orbit"), [this, bTextChord]()
         {
-            AssertOrbitProbe(true); Check(World->ControlScreenPoint(TEXT("button"), B), TEXT("HUD crossing position")); B = QuantizedPhysical(B);
+            AssertOrbitProbe(true); Check(World->ControlScreenPoint(bTextChord ? TEXT("text") : TEXT("button"), B), TEXT("HUD crossing position")); B = QuantizedPhysical(B);
         });
         Input(TEXT("captured orbit crosses HUD"), [this](IAsyncActionSequence& S) { S.MoveToPosition(B); });
         Do(TEXT("HUD crossing retains original capture owner"), [this]()
         {
             const auto& Capture = World->GetPolicy().Snapshot().Capture;
-            Check(Capture.IsSet() && Capture->Generation == ProbeCaptureGeneration && Capture->Owner == EInputOwner::Orbit && Capture->Last.ScreenPhysical.Equals(B, 1e-4) &&
+            Check(Capture.IsSet() && Capture->Generation == ProbeCaptureGeneration && Capture->Owner == EInputOwner::Orbit && Capture->Button == EPointerButton::Secondary && Capture->Last.ScreenPhysical.Equals(B, 1e-4) &&
                 World->GetPolicy().Snapshot().HudActivationCount == ProbeHudActivations && World->WorldPickCount() == ProbePicks,
                 TEXT("Actual pointer over HUD retains press generation and orbit owner"));
         });
+        if (bTextChord)
+        {
+            Input(TEXT("press primary over text while secondary remains held"), [](IAsyncActionSequence& S) { S.Press(EMouseButtons::Left); });
+            Do(TEXT("additional primary press retains secondary gesture"), [this]() { AssertTextChordCapture(); });
+            Input(TEXT("release only primary over text"), [](IAsyncActionSequence& S) { S.Release(EMouseButtons::Left); });
+            Do(TEXT("primary release cannot end secondary gesture or enter text"), [this]() { AssertTextChordCapture(); });
+        }
         Input(TEXT("captured orbit releases over HUD"), [](IAsyncActionSequence& S) { S.Release(EMouseButtons::Right); });
         Do(TEXT("orbit retains owner through HUD and ends without selection"), [this]()
         {
@@ -289,6 +297,16 @@ private:
             Check(C->GetNumberField(TEXT("azimuthDegrees")) == World->GetFixture().Camera.DefaultAzimuthDegrees &&
                 C->GetNumberField(TEXT("elevationDegrees")) == World->GetFixture().Camera.DefaultElevationDegrees, TEXT("Driver reset restored azimuth and elevation"));
         });
+    }
+    void AssertTextChordCapture()
+    {
+        const auto& State = World->GetPolicy().Snapshot();
+        Check(State.Capture.IsSet() && State.Capture->Owner == EInputOwner::Orbit && State.Capture->Button == EPointerButton::Secondary &&
+            State.Capture->Generation == ProbeCaptureGeneration && State.CaptureGeneration == ProbeCaptureGeneration &&
+            State.bTextEditing == bProbeTextEditing && State.Capture->Last.ScreenPhysical.Equals(B, 1e-4),
+            TEXT("Real Driver chord preserves original owner/button/generation and text state"));
+        Check(World->WorldPickCount() == ProbePicks && State.HudActivationCount == ProbeHudActivations,
+            TEXT("Additional button activity over text cannot select or activate HUD"));
     }
     void AssertOrbitProbe(bool bAbove)
     {
@@ -392,7 +410,7 @@ private:
         }
         else if (Name == TEXT("Input.CameraCapture"))
         {
-            AddLogicalOrbitProbe();
+            AddLogicalOrbitProbe(true);
         }
         else if (Name == TEXT("Input.PanDollyFrame"))
         {
@@ -445,11 +463,41 @@ private:
         else if (Name == TEXT("Input.ResizeScale"))
         {
             ClickModel(TEXT("e02-circle")); RetainIntent();
-            Input(TEXT("gesture crossing resize"), [](IAsyncActionSequence& S) { S.Press(EMouseButtons::Right); });
+            Input(TEXT("Ready gesture crossing resize"), [](IAsyncActionSequence& S) { S.Type(EKeys::Enter).Press(EMouseButtons::Right); });
+            Do(TEXT("retain held capture and review generation before resize"), [this]()
+            {
+                const auto& State = World->GetPolicy().Snapshot();
+                if (!Check(State.LocalReview == ELocalReview::Ready && State.Capture.IsSet() && State.Capture->Button == EPointerButton::Secondary,
+                    TEXT("Real Ready secondary gesture is outstanding before resize"))) { return; }
+                ResizeCaptureGeneration = State.CaptureGeneration; ResizeCancelGeneration = State.CancelGeneration;
+                ResizeCameras = World->CameraMutationCount();
+            });
             Do(TEXT("programmatic resize during capture"), [this]() { Check(World->ProgrammaticResize(FIntPoint(1600, 900)), TEXT("Owned SWindow resize")); });
-            Wait(TEXT("actual1600x900 viewport"), [this]() { return World->GetProofViewportSize() == FIntPoint(1600, 900); });
+            Wait(TEXT("actual1600x900 viewport observed by policy"), [this]()
+            { return World->GetProofViewportSize() == FIntPoint(1600, 900) && World->GetPolicy().Snapshot().ViewportExtent == FIntPoint(1600, 900); });
+            Do(TEXT("resize invalidates gesture before physical button release"), [this]()
+            {
+                const auto& State = World->GetPolicy().Snapshot();
+                Check(!State.Capture.IsSet() && State.CaptureGeneration > ResizeCaptureGeneration && State.CancelGeneration > ResizeCancelGeneration,
+                    TEXT("Resize itself cancels capture and invalidates capture/cancel generations while RMB stays held"));
+                Check(State.LocalReview == ELocalReview::Editing && World->CameraMutationCount() == ResizeCameras,
+                    TEXT("Resize invalidates Ready without a stale camera effect")); AssertIntent();
+                Check(World->ModelScreenPoint(TEXT("e02-circle"), B), TEXT("Resolve real world screen point after resize"));
+                B = QuantizedPhysical(B + FVector2D(48, 32)); ResizeHeldEvents = World->EventCount();
+            });
+            Input(TEXT("move physical secondary button still held after resize"), [this](IAsyncActionSequence& S) { S.MoveToPosition(B); });
+            Do(TEXT("held movement cannot revive canceled resize gesture"), [this]()
+            {
+                const auto& State = World->GetPolicy().Snapshot();
+                Check(World->EventCount() > ResizeHeldEvents && !State.Capture.IsSet() && State.CaptureGeneration > ResizeCaptureGeneration &&
+                    State.CancelGeneration > ResizeCancelGeneration && World->CameraMutationCount() == ResizeCameras,
+                    TEXT("Actual post-resize held movement is traced with no stale capture/camera effect"));
+                Check(State.LocalReview == ELocalReview::Editing, TEXT("Held movement preserves required renewed-review state")); AssertIntent();
+            });
             Input(TEXT("release after resize"), [](IAsyncActionSequence& S) { S.Release(EMouseButtons::Right); });
-            Do(TEXT("resize cancels crossing gesture"), [this]() { Check(!World->GetPolicy().Snapshot().Capture.IsSet(), TEXT("Resize cancellation")); AssertIntent(); });
+            Do(TEXT("release cannot revive canceled resize gesture"), [this]()
+            { Check(!World->GetPolicy().Snapshot().Capture.IsSet() && World->GetPolicy().Snapshot().LocalReview == ELocalReview::Editing &&
+                World->CameraMutationCount() == ResizeCameras, TEXT("Physical release remains harmless after proven cancellation")); AssertIntent(); });
             AddResizeVariant(FIntPoint(1280, 720), 1.0);
             AddResizeVariant(FIntPoint(1280, 720), 1.5);
             AddResizeVariant(FIntPoint(1600, 900), 1.0);
@@ -586,8 +634,10 @@ private:
     double Started, StepStarted = 0.0, CleanupStarted = 0.0;
     uint64 Picks = 0, Cameras = 0, EventBaseline = 0;
     uint64 ProbePicks = 0, ProbeCameras = 0, ProbeHudActivations = 0, ProbeCaptureGeneration = 0, ClickPicks = 0, ClickEvents = 0;
+    uint64 ResizeCaptureGeneration = 0, ResizeCancelGeneration = 0, ResizeHeldEvents = 0, ResizeCameras = 0;
     double ProbeAzimuth = 0, ProbeElevation = 0;
     int32 Index = 0, Assertions = 0;
+    bool bProbeTextEditing = false;
     bool bInitialized = false, bOwnsDriver = false, bFailed = false, bCleanupQueued = false;
 };
 

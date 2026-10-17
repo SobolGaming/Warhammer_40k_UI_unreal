@@ -63,7 +63,7 @@ prepare concrete source first. No offscreen substitute or human input is claimed
 |---|---|
 | Bounded predecessor, packet review and OWN13 applicability | RECORDED for source authoring only |
 | Executable source and fixture/defaults | AUTHORED; source remediation in progress; compilation and behavior unverified |
-| Complete source/toolchain/asset/plugin-closure freeze and independent source review | Reviewed `0716ac9`: CHANGES_REQUESTED; remediate, checkpoint and obtain fresh affected source review before the first SUP control/build/native process |
+| Complete source/toolchain/asset/plugin-closure freeze and independent source review | Reviewed `0716ac9` and `b638022`: CHANGES_REQUESTED; remediate, checkpoint and obtain fresh affected source review before the first SUP control/build/native process |
 | SUP01–SUP03 and owned-tree cleanup | NOT RUN |
 | Build/discovery/4 numeric/4 rendered/8 input | NOT RUN |
 | Six PNGs and real driver→Slate→world traces | NOT RUN |
