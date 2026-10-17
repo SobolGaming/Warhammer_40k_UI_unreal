@@ -43,21 +43,36 @@ does not pass the old 30-second budget or establish production responsiveness.
 Native/Audit and public wire promotion remain gated on successful predecessors
 and independent privacy review. Refuse any bytecode cache in the owned runtime.
 
-Fresh normal run `20261017T030835Z-0d4af4e2`, on source candidate
-`c2614b2484a66bd8465b855e59b184d49b2b926d`, passed 87 Python tests,
-14 Capture checks, 132 unique native Automation cases and two automated evidence
-checks. The 14 include source/runtime/schema checks alongside live HTTP checks.
-That run's 37 pure PowerShell guard checks are separate pre-execution evidence. Capture,
-independent auxiliary privacy inspection, exact-byte fixture promotion, Native
-and Audit completed in order. That run omitted the required current six-path
-editor-settings snapshots: its authored Config and UBT comparisons are recorded,
-but the editor-settings preservation criterion remains UNVERIFIED. Preserve the
-raw passing test results and this gap. Review the maintained guard candidate and
-run a fresh full chain; do not substitute historical
-snapshots or reconstruct a before observation. Final three-role acceptance is
-still pending.
-The later revision7 repair now passes 135 pure PowerShell controls; its fresh
-affected source review and new full normal phase chain remain required.
+Fresh normal run `20261017T044903Z-b0169768`, on executed source
+`d1189592a5f99bdee58cea25ae8546e5ee2e3623` and packet revision 7, completed
+Preflight, verified runtime reuse, Capture, auxiliary privacy inspection,
+exact-byte promotion, Native and Audit in order. Actual results are 87 Python
+unit tests in 15.167 seconds, 14 Capture checks, 132 unique native Automation
+successes and two automated evidence checks. The 14 include source/runtime/schema
+checks alongside live HTTP checks. The 135 pure PowerShell controls with 39 stable
+inputs are separate pre-execution evidence. All six current editor-settings
+before/after observations matched: three present hashes and three established
+absences, alongside all three UBT paths and Native/Audit authored Config checks.
+Keep the completed raw evidence, process receipts and same-run wire binding.
+
+Current status is **EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**. Finalize
+the factual record and documentation freeze, then obtain separate fresh cumulative
+CODE and REQ assessments under OWN15. Neither final context has launched. The C12
+source-only descriptor and auxiliary privacy inspection do not supply those roles;
+their actual isolation limits remain recorded. Execution is stopped. The local
+execution checkpoint `234867b03150be99c797e33c67749ce656f9c08c` preserves the
+completed run without establishing acceptance. Full E01/M01/M02 and the research/
+implementation gates remain open. After acceptance of this bounded prerequisite,
+advance to the next E02 packet gate; the existing E02 packet is planning only.
+
+Historical normal run `20261017T030835Z-0d4af4e2`, source
+`c2614b2484a66bd8465b855e59b184d49b2b926d` and packet revision 6, retains its
+87/14/132/2 raw results and 37 separate pure PowerShell guards. It omitted the
+required same-run six-path editor-settings snapshots, so that run's criterion
+remains **UNVERIFIED**, without waiver or a reconstructed before observation.
+The new run supplies its own real observations and does not retroactively change
+the historical result. Preserve the byte-exact historical result and journal.
+
 Historical revision4 permits only its recorded Native/Audit supplement linked to
 the one pinned immutable historical Capture, with no new Core process or game
 submissions. Use its exact hashes and guards; do not invent a general resume path.

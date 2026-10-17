@@ -1,117 +1,60 @@
 # Plans
 
-- [Unreal migration plan](unreal-migration-plan.md) — canonical owner-requested import
-  from the Arcade repository, with Section 0 research in progress. It preserves the
-  client-only scope, genuine 3D and parity requirements, and separate execution gates.
+The [Unreal migration plan](unreal-migration-plan.md), revision 17, is canonical.
+Section 0 holds research status, owner decisions and the next bounded gate. It
+preserves the client-only scope, genuine 3D/parity requirements and separate
+execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Supporting source, environment and contract findings live under [research](research/).
-Research question status and owner decisions belong in the canonical plan.
+[BOOT01 Windows evidence](evidence/2026-10-16-boot01.md) records the approved C++
+scaffold, probe/final builds, IDE generation and limits. The
+[plan/BOOT01 PR was merged](evidence/2026-10-16-bootstrap-publication.md); the
+[earlier publication/source record](evidence/2026-10-16-publication-and-e01-source.md)
+retains the original access failure and source-only preparation.
 
-[BOOT01 Windows execution evidence](evidence/2026-10-16-boot01.md) records the
-approved C++ scaffold, probe/final builds, IDE generation and review limits.
+Current E01-SLOW120 status is
+**EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**. Normal run
+`20261017T044903Z-b0169768` completed the [revision-7 packet](research/2026-10-16-e01-boundary-packet.md)
+on executed source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. The
+[factual result](evidence/2026-10-16-e01-slow120-result.json) and
+[execution journal](evidence/2026-10-16-e01-boundary.md) record 87 Python units
+in 15.167 seconds, 14 Capture checks including source/runtime/schema checks,
+132 unique native successes and two automated evidence checks. The 135 pure
+PowerShell controls with 39 stable inputs are separate pre-execution evidence.
+Auxiliary privacy inspection and exact-byte promotion preceded Native. All six
+real editor-settings before/after observations matched, alongside UBT/Config and
+same-run wire checks. Owned execution is stopped.
 
-The [plan/BOOT01 PR was merged](evidence/2026-10-16-bootstrap-publication.md).
-The earlier [publication/source-preparation record](evidence/2026-10-16-publication-and-e01-source.md)
-preserves the original access failure and source-only preparation.
+Finalize the factual/documentation freeze, then launch separate fresh final CODE
+and REQ contexts under OWN15; neither has launched. The
+[C12 source-only descriptor](research/2026-10-17-e01-slow120-code-review-r12.md)
+and auxiliary privacy inspection do not supply final acceptance roles. Actual
+context/model/memory/read-only enforcement limits remain UNVERIFIED for the
+auxiliary inspection. Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, the original
+30-second budget, production responsiveness, UE HTTP, rendering, packaging,
+Linux, Core #588/#589/#590 and RISK19 remain open or unaccepted.
 
-Current work follows the frozen [bounded E01 packet](research/2026-10-16-e01-boundary-packet.md).
-Its [execution journal](evidence/2026-10-16-e01-boundary.md) records the installed
-runtime, failed attempts and actual checks separately from pending acceptance.
-Canonical plan revision 16 records normal full-chain run
-`20261017T030835Z-0d4af4e2` on source
-`c2614b2484a66bd8465b855e59b184d49b2b926d`: Preflight, PrepareRuntime, Capture,
-auxiliary privacy inspection, exact-byte wire promotion, Native and Audit completed
-in order. Actual counts are 87 unit tests in 18.120 seconds, 14 Capture checks,
-132 unique native successes and two automated evidence checks. Capture includes
-SOURCE/RUNTIME/SCHEMA checks alongside live checks. The separate 37 pure PowerShell
-guard checks and [round-8 source review metadata](research/2026-10-17-e01-slow120-code-review-r8.md)
-are pre-execution evidence.
-
-The [factual result JSON](evidence/2026-10-16-e01-slow120-result.json) binds the
-completed same-run phases and 30 original-byte promoted bodies. The auxiliary
-privacy report records read-only conduct without tool enforcement; fresh-session
-isolation, model settings and memory suppression are UNVERIFIED. It does not fill
-a final review role.
-Current Native and Audit records each compare three authored Config files; Native
-also compares three UBT settings paths. Run `030835` has neither a six-path global
-editor-settings BEFORE record nor an AFTER record. The B7 observation at
-`2026-10-17T03:35:33.4443653Z` is after-only. Editor preservation is **UNVERIFIED**;
-historical `004553` comparisons cannot fill this gap.
-
-Current status is **REMEDIATION_AND_FRESH_RUN_PENDING**. Prospective packet
-revision 7 completes the existing six-path editor-settings preservation requirement;
-its source candidate is pending freeze/review. Root authorized repair of the
-maintained wrapper/PowerShell guard, fresh affected source review and a new normal
-full chain under unchanged criteria, budgets and scope, without a Capture-link
-exception. The completed `030835`/`c261` run retains its actual revision-6 packet
-identity, SHA256 `B92639E9C83BF16710C6E3FA6F54AF360830C0A360BEA0F52A8477CD9348F45B`.
-Final blind CODE/REQ launch readiness
-is blocked until that work and the final documentation freeze complete. Acceptance
-remains pending; this index supplies no acceptance verdict.
-Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, the original 30-second budget, production
-responsiveness, UE HTTP, rendering, packaging, Linux, Core #588/#589/#590 and RISK19
-remain open or unaccepted.
-
-The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md)
-is prepared conditionally and has not executed.
+After acceptance of the bounded E01 prerequisite, advance to the
+[E02 architecture packet gate](research/2026-10-16-e02-world-input-packet.md).
+That packet remains unchanged and planning only; E02 has not executed.
 The [E01 continuation PR](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2)
-is recorded as a draft; its last recorded GitHub result reported no checks, which
-is not a CI pass. This index update makes no current remote-state claim.
-OWN14 covers the separate `E01-SLOW120` diagnostic, historical revision-4 supplement
-and revision-6 repairs/fresh proof under the same bounds.
+is recorded as a draft. Its last recorded GitHub result reported no checks, which
+is not a CI pass; this update makes no current remote-state claim. OWN16's
+[local checkpoint workflow](unreal-migration-plan.md#02-research-procedure-and-evidence-rules)
+adds no publication or merge authority.
 
-## Historical diagnostic and source records
+## Historical records
 
-The [preserved schema-1 result](evidence/2026-10-17-e01-slow120-result-schema1-history.json)
-retains the prior result bytes with SHA256
-`7A0718455FE72F1DC18CC3665DA875144782599434AB4B7C30CC00A0144C4D0F`.
-The [source/helper review history](research/2026-10-16-e01-boundary-review.md) is preserved;
-the [acceptance audit](research/2026-10-16-e01-boundary-acceptance-audit.md) keeps
-E01 unaccepted after the original 30-second timeout tracked in Core #590.
-The earlier separately approved `E01-SLOW120` Capture passed 40 Python tests and
-all 14 checks, including recorded-invalid and accepted one-inch movement.
-Its privacy review approved 30 unchanged wire bodies. Packet revision4's
-linked native supplement passed 132 Automation cases and two evidence-audit checks,
-with the owned DDC path logged and configuration unchanged. Earlier failures and
-startup side effects remain recorded. The [preliminary evidence audit](research/2026-10-16-e01-slow120-acceptance-audit.md)
-did not satisfy OWN15's fresh blind code/requirements gate. The initial code
-review requested finite-envelope/session-abandonment and header-deadline fixes;
-the initial auditor requires raw process provenance and consistent plan line
-endings. The [round-2 code review](research/2026-10-17-e01-slow120-code-review-r2.md)
-additionally requires guarded attach/lifecycle commands and same-run Capture/native
-fixture binding. Packet revision6 binds these repairs and the actual worker
-process inventory, fresh review and a new full chain.
-The [round-3 code review](research/2026-10-17-e01-slow120-code-review-r3.md)
-found one remaining terminal-result UNKNOWN classification edge. Its historical
-60-unit/19-guard results are source verification only.
-The earlier 30-second failure and its acceptance record remain unchanged; new
-diagnostic results and any renewed audit are recorded separately.
-
-Round4 [source review](research/2026-10-17-e01-slow120-code-review-r4.md) requested receipt-coherence, damaged-artifact outcome retention and classifier-parity repairs. Its 65/19 results remain source checks only.
-
-Round5 [source review](research/2026-10-17-e01-slow120-code-review-r5.md) requested four failure-path/coherence fixes. Its 72 Python/19 simulated guard results remain source evidence only.
-
-Round6 [source review](research/2026-10-17-e01-slow120-code-review-r6.md) requested worker cleanup UNKNOWN/ledger retention and submitted descriptor-hash binding. Its 83 Python/19 simulated guard results remain source evidence only.
-
-[Round7 source review](research/2026-10-17-e01-slow120-code-review-r7.md) PASS
-preceded replacement run `20261017T025237Z-da446128`. Its Preflight/runtime reuse
-and 87 unit tests passed, but Capture FAIL falsely matched a test name before any
-Core/live execution. The parser repair and round-8 source review preceded the
-separate completed `030835` chain; neither source review is a final review of its
-execution evidence.
-
-The initial revision-7 maintained editor-settings guard passed 68 pure
-PowerShell checks with genuine process/exit provenance. Fresh affected source
-review and a new normal full chain remain pending. These controls do not supply
-missing observations for030835 or replace actual native execution.
-
-Current source-gate update: [round9](research/2026-10-17-e01-slow120-code-review-r9.md) and [round10](research/2026-10-17-e01-slow120-code-review-r10.md) remain historical source assessments. The maintained diagnostic/export/finalization repairs now pass 135/135 pure PowerShell controls, separate from the87 Python units. A fresh affected source review and a new full normal chain remain required.
-
-The earlier93/93,87/87 and68/68 pure-source results remain preserved, alongside failed83/87 and127/128 runs. The latest run binds39 unchanged inputs, including an actual retained Native-result serialization control. Simulated controls supply no live Core or Unreal execution. Run030835 still lacks its current six-editor-settings evidence.
-
-[Round11](research/2026-10-17-e01-slow120-code-review-r11.md) requested retaining
-secondary close diagnostics at two real JSON writer callers. The repair now has
-135 passing pure controls; fresh affected source review remains pending. OWN16's
-regular local checkpoint workflow is recorded in [plan Section 0.2](unreal-migration-plan.md#02-research-procedure-and-evidence-rules)
-and repository instructions; checkpoint commits do not confer acceptance or new
-publication permission.
+- The [byte-exact 030835 schema-2 archive](evidence/2026-10-17-e01-slow120-result-030835-schema2-history.json)
+  retains source `c2614b2484a66bd8465b855e59b184d49b2b926d`, packet revision 6,
+  87/14/132/2 results and the omitted six-editor-settings criterion as UNVERIFIED.
+  Run `044903` has its own observations and does not retroactively pass `030835`.
+- The [schema-1 archive](evidence/2026-10-17-e01-slow120-result-schema1-history.json)
+  preserves the earlier diagnostic result, including the historical revision-4
+  Native/Audit supplement. The journal retains every failed attempt, original
+  30-second FAIL/UNKNOWN and all source/guard repair results.
+- The [source/helper review history](research/2026-10-16-e01-boundary-review.md),
+  [original acceptance audit](research/2026-10-16-e01-boundary-acceptance-audit.md)
+  and [preliminary SLOW120 audit](research/2026-10-16-e01-slow120-acceptance-audit.md)
+  retain their actual scope and limitations. They do not satisfy the pending final
+  cumulative OWN15 roles. Detailed rounds 2–12 remain linked from the journal and
+  canonical plan; their historical results are unchanged.

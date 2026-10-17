@@ -5,3 +5,4 @@ docs/plans/research/2026-10-17-e01-slow120-code-review-r*.md -text whitespace=-b
 docs/plans/research/2026-10-17-e01-slow120-requirements-r*.md -text
 # Preserve the previous factual record as exact historical bytes.
 docs/plans/evidence/2026-10-17-e01-slow120-result-schema1-history.json -text
+docs/plans/evidence/2026-10-17-e01-slow120-result-030835-schema2-history.json -text

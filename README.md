@@ -36,24 +36,41 @@ run the existing Python rules Core for development. The separate
 actual isolated, locked Windows installation and its boundary checks. The original
 30-second run passed 38 Python tests and 11 boundary checks, but timed out on the
 invalid-geometry command; that run remains failed with completion unknown.
-The owner-approved `E01-SLOW120` diagnostic has since completed normal run
-`20261017T030835Z-0d4af4e2`: 87 Python unit tests, 14 Capture checks, 132 unique
-native Automation successes and two automated evidence checks passed. The 14
-include source/runtime/schema checks alongside live HTTP checks. Capture retained
-the recorded-invalid outcome and an accepted corrected move that moved all five
-models to their requested endpoints. Its longest completed HTTP request took
-46.57 seconds; this does not pass the old 30-second budget or establish production
+
+The owner-approved `E01-SLOW120` diagnostic completed normal run
+`20261017T044903Z-b0169768` on source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`:
+87 Python unit tests in 15.167 seconds, 14 Capture checks, 132 unique native
+Automation successes and two automated evidence checks passed. The 14 include
+source/runtime/schema checks alongside live HTTP checks; 135 pure PowerShell
+controls with 39 stable inputs are separate pre-execution evidence. Auxiliary
+privacy inspection and exact-byte promotion preceded Native. All six real
+editor-settings before/after observations matched, alongside UBT and authored
+Config checks. Capture retained distinct recorded-invalid and accepted movement
+outcomes; all five accepted model XYZ endpoints matched within `1e-9`.
+
+The three uncommitted inventory rejections returned HTTP 422, `proposal_invalid`,
+and `"Submitted proposal was invalid."` The diagnostic preserves that response and
+the notice `"Detailed engine reasons were not supplied by this HTTP response."`
+([Core #588](https://github.com/SobolGaming/Warhammer_40k_AI/issues/588)).
+
+Aggregate transport observations were 139 HTTP requests with maximum 31.1409296
+seconds, and 129 local requests with maximum 32.0962418 seconds. These maxima do
+not establish per-command attribution, the old 30-second budget or production
 responsiveness ([Core #590](https://github.com/SobolGaming/Warhammer_40k_AI/issues/590)).
-Auxiliary privacy inspection and exact-byte promotion preceded Native execution
-for its 30 non-admin HTTP bodies. Current six-path editor-settings before/after
-observations were omitted, so that preservation criterion remains **UNVERIFIED**.
-Authored Config and UBT comparisons do not fill the gap. The maintained wrapper
-is being repaired and tested before affected source review and a fresh full
-normal chain. Final independent code and requirements acceptance remains pending.
-The journal preserves every earlier failure, including the pre-Core summary-parser
-failure and original 30-second failure. Full E01 remains unaccepted.
-The manual installation alternatives below are not its executed commands. Unreal project creation/build is
-specified in [plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).
+The [factual result](docs/plans/evidence/2026-10-16-e01-slow120-result.json) is
+**EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**: factual/documentation freeze
+and separate fresh final CODE/REQ assessments remain pending. Execution is stopped;
+auxiliary inspection and source-only review do not supply final OWN15 acceptance.
+Full E01 remains unaccepted. The historical `030835` run retains its missing
+six-path editor-settings comparison as **UNVERIFIED** in its
+[byte-exact archive](docs/plans/evidence/2026-10-17-e01-slow120-result-030835-schema2-history.json);
+the new run does not retroactively fill that gap. The journal preserves all earlier
+failures and unknown outcomes. After acceptance of the bounded E01 prerequisite,
+the next step is the E02 packet gate; E02 remains planning only.
+
+The manual installation alternatives below are not E01's executed commands. Unreal
+project creation/build is specified in
+[plan Section 8.4](docs/plans/unreal-migration-plan.md#84-basic-unreal-project-bootstrap--boot01).
 
 ## Build the Unreal project on Windows
 
