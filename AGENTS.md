@@ -78,7 +78,28 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The E02 SOURCE assessment of `338735e737c6892736b03c884b475c66ae0f69f8`
+The affected E02 SOURCE assessment of `2efd348b20bbf4adcd014dba9d50e178cad5c71c`
+is PASS. Root's composite gate applies the historical 338 full-source assessment
+only to demonstrated unchanged scope; the affected review is no fresh whole-C++/
+plugin verdict. Run `20261017T202655Z-2b75d9a6` completed Preflight with nine
+normal-desktop settings observations before and after. SupervisorControls completed
+three groups/six subcases/five roots in 9.2460989 seconds with 20 bound artifacts
+and confirmed exit/cleanup/final zero-active jobs. It records no same-phase
+settings pair. Build then FAILED on the missing `logs/build-toolchain-selection.json`.
+Worker PID 4472 exited 0 with cleanup/job-zero confirmed; that process success is
+not build success. SDK-selection receipt, build.log, staged Binaries/Intermediate
+and Build completion are absent; no UBT/C++/UHT/native/GUI proof ran. All nine
+Build before/after settings states match each other and Preflight.after.
+
+Hidden authority/run are CLOSED; preserve the failure and do not resume, retry
+or reuse its RunId. Root released only a bounded Build-launcher correction and
+related documentation. Source now groups the cmd FOR/IF bodies so their tails
+cannot capture later continuations; repaired-wrapper execution remains NOT RUN.
+Checkpoint/freeze, fresh affected SOURCE review and a new RunId are required.
+The E02 journal binds the raw reports, composite gate, phases and closure.
+Final OWN15 CODE/REQ, visible-window and merge authority remain separate.
+
+The historical E02 SOURCE assessment of `338735e737c6892736b03c884b475c66ae0f69f8`
 is PASS for that frozen source only. Run `20261017T181128Z-06d66926` then failed
 Preflight with `E02_REPARSE_PATH` / `FAIL_BEFORE_PHASE_CREATION`: the normal
 Known Documents route is `C:/Users/Rabid/OneDrive/Documents`, whose unclassified
@@ -88,14 +109,13 @@ remain NOT RUN. Its hidden authority is CLOSED and its attempted RunId must
 not be reused. The E02 journal binds the unchanged report, seal, root gate,
 hidden authority and separate closure; this supplies no final OWN15 acceptance.
 
-Root released only the bounded Known Documents observation repair and related
-checks/docs/checkpoint. Only the two exact Known Documents settings paths may
-use an absolute, actual-KnownFolder, read-only logical route with unclassified
+The later Known Documents observation repair permits only the two exact settings
+paths to use an absolute, actual-KnownFolder, read-only logical route with unclassified
 reparse ancestors. The leaf must remain a plain non-reparse file; retain all
 nine role/path/existence/hash comparisons and typed unavailable observations.
 Keep strict owned/source/tool/engine and Local/Profile/Roaming guards. Resolved
-target identity remains UNVERIFIED. The changed candidate needs a new freeze,
-fresh affected SOURCE review and fresh RunId; no repair execution is proven.
+target identity remains UNVERIFIED. The 202655 run exercised both absence routes;
+hashing a present Known Documents file remains unexecuted/UNVERIFIED.
 
 The earlier E02 SOURCE assessment of `73f73b5994456b008cc104e05f7a915a5976f49b`
 is CHANGES_REQUESTED: P1 procedural outward-face winding and its numeric oracle,

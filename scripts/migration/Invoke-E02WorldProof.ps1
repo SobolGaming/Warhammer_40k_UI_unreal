@@ -1409,6 +1409,8 @@ try {
                 # Selection receipts and Build.bat execute in one cmd environment
                 # and the same Engine/Source CWD. GetDotnetPath initializes the
                 # bundled path; its later Build.bat call reuses that exact setup.
+                # Group whole FOR/IF commands so cmd does not consume the later
+                # && chain as their body, skipping it on a successful IF check.
                 $worker=@'
 $ErrorActionPreference='Stop'
 $batch=@(
@@ -1417,12 +1419,12 @@ $batch=@(
     '"%E02_WHERE%" dotnet >"%E02_DOTNET_WHERE_LOG%"',
     'set "E02_SELECTED_DOTNET="',
     'set /p E02_SELECTED_DOTNET=<"%E02_DOTNET_WHERE_LOG%"',
-    'for %I in ("!E02_SELECTED_DOTNET!") do @set "E02_SELECTED_DOTNET=%~fI"',
-    'if /i not "!E02_SELECTED_DOTNET!"=="%E02_DOTNET_EXE%" (exit /b 97)',
+    '(for %I in ("!E02_SELECTED_DOTNET!") do @set "E02_SELECTED_DOTNET=%~fI")',
+    '(if /i not "!E02_SELECTED_DOTNET!"=="%E02_DOTNET_EXE%" (exit /b 97))',
     'dotnet --version >"%E02_DOTNET_SDK_LOG%"',
     'set "E02_SELECTED_SDK="',
     'set /p E02_SELECTED_SDK=<"%E02_DOTNET_SDK_LOG%"',
-    'if not "!E02_SELECTED_SDK!"=="%E02_DOTNET_VERSION%" (exit /b 98)',
+    '(if not "!E02_SELECTED_SDK!"=="%E02_DOTNET_VERSION%" (exit /b 98))',
     'echo E02_DOTNET_SELECTED_PATH=!E02_SELECTED_DOTNET!',
     'echo E02_DOTNET_SELECTED_SDK=!E02_SELECTED_SDK!',
     'call "%E02_BUILD_BAT%" WarhammerClientEditor Win64 Development "-Project=%E02_PROJECT%" -WaitMutex -NoUBA -Compiler=VisualStudio2022 -CompilerVersion=14.44.35229 -WindowsSDKVersion=10.0.22621.0 "-UBARootDir=%E02_UBA%" "-Log=%E02_BUILD_LOG%"'

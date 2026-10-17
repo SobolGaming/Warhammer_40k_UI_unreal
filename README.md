@@ -73,7 +73,24 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-E02 candidate `338735e737c6892736b03c884b475c66ae0f69f8` received a sealed
+E02 candidate `2efd348b20bbf4adcd014dba9d50e178cad5c71c` received affected
+**SOURCE PASS**. Root combined it with the historical 338 assessment only for
+demonstrated unchanged scope; this is no new whole-C++/plugin verdict. Run
+`20261017T202655Z-2b75d9a6` completed Preflight with matching nine-before/nine-after
+normal-desktop settings snapshots. SupervisorControls completed three groups,
+six subcases and five roots in 9.2460989 seconds, with 20 bound artifacts and
+confirmed cleanup/final zero-active jobs. Build then **FAILED** on a missing
+native-toolchain receipt. Worker PID 4472 exited 0 and cleaned up, but no SDK-selection
+receipt, build.log, staged Binaries/Intermediate or Build completion exists;
+no UBT/C++/UHT/native/GUI proof ran. All nine Build settings pairs also match
+Preflight.after. The run and hidden authority are closed; do not resume/reuse them.
+
+Root has authored only a bounded cmd FOR/IF grouping correction to the Build
+launcher. It remains **UNEXECUTED** and needs a checkpoint/freeze, fresh affected
+SOURCE review and new RunId. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+preserves the actual primary error, receipts, source gates and historical failures.
+
+Historical E02 candidate `338735e737c6892736b03c884b475c66ae0f69f8` received a sealed
 pre-execution **SOURCE PASS**. Run `20261017T181128Z-06d66926` then failed
 Preflight with `E02_REPARSE_PATH` / `FAIL_BEFORE_PHASE_CREATION` before RunRoot
 allocation: the normal Known Documents route has OneDrive reparse ancestors.
@@ -86,9 +103,9 @@ The bounded repair permits only the two exact Known Documents settings paths
 as absolute read-only logical observations through unclassified reparse
 ancestors. Leaves remain plain non-reparse files, all nine snapshots remain
 required, and owned/source/tool/engine plus Local/Profile/Roaming guards remain
-strict. Resolved target identity stays UNVERIFIED. Checkpoint/freeze the changed
-candidate, obtain fresh SOURCE review and use a fresh RunId before execution;
-no repair or runtime success is claimed. The owner separately authorized current
+strict. Resolved target identity stays UNVERIFIED. The 202655 snapshots exercised
+both absent-file routes; present-file hashing remains unexecuted/UNVERIFIED.
+The owner separately authorized current
 and subsequent E02 review-packet transmission to the same OpenAI service, within
 the journal's recorded data exclusions and relayed-consent limits. This adds
 neither visible-window nor merge authority; final CODE/REQ gates remain separate.

@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **SOURCE_PASS_338; PREFLIGHT_FAILED_BEFORE_PHASE_CREATION; HIDDEN_AUTHORITY_CLOSED; BOUNDED_KNOWN_DOCUMENTS_REPAIR_ONLY**.
+Status: **AFFECTED_SOURCE_PASS_2EFD_COMPOSITE_338; PREFLIGHT_SUPERVISOR_COMPLETE; BUILD_FAILED; HIDDEN_AUTHORITY_CLOSED; BOUNDED_LAUNCHER_REPAIR_ONLY**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -8,12 +8,13 @@ Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
 
-The frozen 338 SOURCE assessment is PASS. Its attempted 181128 Preflight failed
-on `E02_REPARSE_PATH` before RunRoot/phase creation; hidden authority is closed
-and the RunId must not be reused. Root released only the bounded Known Documents
-observation repair, with a new freeze/fresh SOURCE/new RunId required. No
-build/native/GUI result exists. The earlier 73f CHANGES_REQUESTED, unused174203
-RunId and 171627 Preflight/control/publication/settings history remain below.
+The affected 2efd SOURCE assessment is PASS, combined by root with the 338 review
+only for demonstrated unchanged scope. Run 202655 completed Preflight and
+SupervisorControls, then Build FAILED on the missing native-toolchain receipt.
+Hidden authority/run are closed and must not be resumed/reused. Only bounded
+launcher correction is released; changed-source review/new RunId remain required.
+No UBT/C++/UHT/native/GUI proof ran. Historical 338/181128, 73f/unused 174203 and
+c10c/171627 failures, settings gaps and original review dispositions remain below.
 
 The predecessor table binds accepted E01-SLOW120 run044903, executed d118,
 reviewed b97, original report verdicts and separate publication bd80123.
@@ -587,3 +588,81 @@ Credentials and private sessions remain excluded; initial reviewer inputs also
 exclude author notes and peer verdicts. Source freezes, independent initial
 assessments and final acceptance gates remain required. This grants no visible
 window, merge or unrelated authority and authorizes no duplicate review launch.
+
+## Affected 2efd SOURCE PASS; completed controls; failed Build — 2026-10-17 UTC
+
+The affected static assessment of `2efd348b20bbf4adcd014dba9d50e178cad5c71c`
+against `338735e737c6892736b03c884b475c66ae0f69f8` is **PASS**. At
+`2026-10-17T20:55:33.2068320Z`, root recorded a composite bounded source gate:
+the affected assessment covers the changed wrapper and five clean normative
+extracts; the historical 338 assessment applies only to demonstrated unchanged
+source/plugin scope. It is no fresh whole-C++/plugin verdict from the affected
+reviewer. Immutable bindings are:
+
+| Record | Bytes | SHA256 |
+|---|---:|---|
+| [Unchanged affected SOURCE report](../../../.local/reviews/E02-source-review/review-2efd-20261017T203801Z-2517286a/last-message.txt) | 6429 | `0BE4299C8BA66C48200B322E5F6A584BCB718E45B4FA9A3F31B1A9780E4421F7` |
+| [Operator seal](../../../.local/reviews/E02-source-review/review-2efd-20261017T203801Z-2517286a/orchestrator-seal.json) | 7248 | `05FD727BF297942B5D0492B6BDDA1EE044FED67E911AC24C6D2A06BDA8636E43` |
+| [Complete command/output audit](../../../.local/reviews/E02-source-review/review-2efd-20261017T203801Z-2517286a/operator-command-output-audit.json) | 54324 | `4AB85549F4BD82D60067C9ECA1B2842297715B6377ABDAF0F4C37E1B0B482862` |
+| [Review artifact manifest](../../../.local/reviews/E02-source-review/review-2efd-20261017T203801Z-2517286a/artifacts.manifest.json) | 9569 | `CC203FBED6CAE56170E9D5E15C26662094D150CB60CAB14B98B752E4F1C3CC55` |
+| [Root composite gate](../../../.local/reviews/E02-source-review/root-2efd-20261017T202655Z-2b75d9a6/source-gate-disposition.json) | 6044 | `D1241E3D34965BF8DDDD87437923FEE7643FC1B93BCA2041868C9F55BA907AA3` |
+| [Historical hidden authority](../../../.local/reviews/E02-source-review/root-2efd-20261017T202655Z-2b75d9a6/hidden-execution-authority.json) | 4026 | `B93B3361B5B42CCCAF0B102F8EE09BEFE39E4BC8FD2A636DEFCB1BA4597CA098` |
+| [Build failure and authority closure](../../../.local/reviews/E02-source-review/root-2efd-20261017T202655Z-2b75d9a6/build-failure-and-hidden-authority-closure.json) | 3082 | `192A96C1D5B8E0C705FF454BE8C4253422F57521347508D6822C3D602EDF35AC` |
+
+All 86 literal tool inputs, 86 complete outputs and 86 static nested commands
+were audited. Required model-visible coverage records all 1579 wrapper lines
+and 1208 clean normative lines, without observed truncation. Oversize guards,
+header-only/empty intermediate output and query diagnostics remain preserved
+with their later bounded rereads. Two supporting API reads (`ConfigCacheIni.cpp`
+and `XmlConfig.cs`) were outside the 1315-file/205-primary freeze and first body
+reads preceded their own hashes; later hashes do not establish pre-read identity.
+The unchanged report/seal/root gate retain these scope/isolation limits.
+
+Run `20261017T202655Z-2b75d9a6` then completed Preflight and SupervisorControls.
+Preflight persisted nine normal-desktop before and nine after settings
+observations, all matching; both exact Known Documents leaves were explicitly
+absent. SupervisorControls completed three groups/six control subcases/five
+roots in **9.2460989 seconds**, with **20 bound artifacts**, confirmed process
+exit/cleanup and final zero-active jobs. Expected timeout/injected-failure raw
+receipts retain their failure statuses alongside successful phase assertions.
+SupervisorControls records no own settings pair; it inherits the validated
+Preflight pair. These are controls, not additional native cases.
+
+| Actual phase record | Bytes | SHA256 |
+|---|---:|---|
+| [Preflight result](../../../.local/experiments/E02/20261017T202655Z-2b75d9a6/preflight/result.json) | 103290 | `13AEBED567DC27E33361D9F0E45FF22266339FA25577CB5BB4976BBB0C3D52C7` |
+| [Preflight completion](../../../.local/experiments/E02/20261017T202655Z-2b75d9a6/preflight/completion.json) | 1113 | `EB403E7E9787A36C20E0188C189F5D40A4EC36755CB3327DFF582DC2AD3F4896` |
+| [SupervisorControls result](../../../.local/experiments/E02/20261017T202655Z-2b75d9a6/supervisorcontrols/result.json) | 178119 | `085E8344C0D5AEC79922E6AF17C4480FD0CD01480EC107721DB72E69A8F22416` |
+| [SupervisorControls completion](../../../.local/experiments/E02/20261017T202655Z-2b75d9a6/supervisorcontrols/completion.json) | 1140 | `5F2D66C7AFB4351440254BB3E25B6534A5A4C14EE8D1774B678C7F28DCB27637` |
+| [SupervisorControls required artifacts](../../../.local/experiments/E02/20261017T202655Z-2b75d9a6/supervisorcontrols/required-artifacts.json) | 6121 | `7FB296929662A9BC013B4701C7F309333B9AE8C30309D6E45AC75548A30665FB` |
+| [Failed Build result](../../../.local/experiments/E02/20261017T202655Z-2b75d9a6/build/result.json) | 138702 | `D6EC63D6D28A6C8A50E953D907A18E680EA5A6644DA93A14EC4C07E921A90E69` |
+| [Build worker receipt](../../../.local/experiments/E02/20261017T202655Z-2b75d9a6/build/build.process.json) | 7960 | `57868A7277E8C47B4B9BFF33AC9D187BF42752B2BBC154457A69EAA1D0B7CD01` |
+
+Build **FAILED** with wrapper exit 1. Its actual primary exception is
+`System.Management.Automation.MethodInvocationException`:
+
+```text
+Exception calling "GetAttributes" with "1" argument(s): "Could not find file 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal\.local\experiments\E02\20261017T202655Z-2b75d9a6\logs\build-toolchain-selection.json'."
+```
+
+Worker PID **4472** exited **0**, with exit/cleanup confirmed and final job
+active count zero; root records **PASS_PROCESS_ONLY_NOT_BUILD_PASS**. It left
+no SDK-selection receipt (`logs/build-dotnet-sdk.txt`), native-toolchain receipt,
+`logs/build.log`, staged `project/Binaries`/`project/Intermediate`, Build completion
+or required-artifact manifest. No UBT/C++/UHT/native/GUI proof ran. All nine
+Build before/after settings states match each other and Preflight.after. These
+new observations do not reconstruct any earlier run's missing baseline; present
+Known Documents hashing and resolved target identity remain UNVERIFIED.
+
+At `2026-10-17T20:58:52.8533450Z`, root closed hidden authority as
+**CLOSED_DO_NOT_EXECUTE_FURTHER_PHASES** and the run as
+**FAILED_PRESERVE_DO_NOT_RESUME_RETRY_OR_REUSE_RUN_ID**. Root released only
+bounded Build-launcher correction and documentation. The authored repair groups
+the whole cmd FOR and both IF commands, so conditional/loop bodies cannot capture
+the later `&&` continuation. Seven isolated literal echo/IF/FOR grammar probes
+observed the original skip and corrected continuation/mismatch exits; they are
+separate diagnostics and add no E02 control/native count. Static parsing and
+whitespace checks passed; the repaired wrapper/build remains **UNEXECUTED**.
+Checkpoint, fresh freeze/affected SOURCE review and a new RunId must precede
+repair execution. Visible-window approval, final separate OWN15 CODE/REQ and
+merge authority remain unsupplied; all prior history is unchanged.
