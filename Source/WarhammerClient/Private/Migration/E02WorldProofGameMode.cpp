@@ -89,6 +89,10 @@ struct FE02ProofState
     double OriginalApplicationScale = 1.0;
     bool bReady = false, bSceneBuilt = false, bEnding = false, bInitialSceneWritten = false, bInjectingActivation = false;
     uint64 Events = 0, Picks = 0, CameraChanges = 0;
+    FPointerSample LastPickPointer;
+    FRay LastPickRay;
+    TOptional<FAdvisoryHit> LastPickHit;
+    uint64 LastPickGeneration = 0, LastPickEventSequence = 0;
     FIntPoint LastExtent = FIntPoint::ZeroValue;
     double LastScale = 0.0;
     FDelegateHandle ActivationHandle, ScreenshotHandle;
@@ -316,6 +320,24 @@ struct FE02ProofState
         Result->SetNumberField(TEXT("worldPickCount"), static_cast<double>(Picks));
         Result->SetNumberField(TEXT("cameraMutationCount"), static_cast<double>(CameraChanges));
         Result->SetNumberField(TEXT("eventCount"), static_cast<double>(Events));
+        if (LastPickHit.IsSet())
+        {
+            const auto Pick = MakeShared<FJsonObject>();
+            Pick->SetNumberField(TEXT("pickGeneration"), static_cast<double>(LastPickGeneration));
+            Pick->SetNumberField(TEXT("eventSequence"), static_cast<double>(LastPickEventSequence));
+            Pick->SetArrayField(TEXT("screenPhysical"), PointJson(LastPickPointer.ScreenPhysical));
+            Pick->SetArrayField(TEXT("viewportPhysical"), PointJson(LastPickPointer.ViewportPhysical));
+            Pick->SetArrayField(TEXT("logical"), PointJson(LastPickPointer.Logical));
+            Pick->SetBoolField(TEXT("insideViewport"), LastPickPointer.bInsideViewport);
+            Pick->SetArrayField(TEXT("originWorldCm"), VectorJson(LastPickRay.OriginWorldCm));
+            Pick->SetArrayField(TEXT("directionWorld"), VectorJson(LastPickRay.DirectionWorldUnit));
+            Pick->SetStringField(TEXT("id"), LastPickHit->Id);
+            Pick->SetNumberField(TEXT("kind"), static_cast<int32>(LastPickHit->Kind));
+            Pick->SetNumberField(TEXT("distanceWorldCm"), LastPickHit->DistanceWorldCm);
+            Pick->SetArrayField(TEXT("domainHitInches"), VectorJson(LastPickHit->DomainPosition));
+            Pick->SetArrayField(TEXT("worldHitCm"), VectorJson(LastPickHit->WorldPosition));
+            Result->SetObjectField(TEXT("lastWorldPick"), Pick);
+        }
         Result->SetNumberField(TEXT("confirmAttempts"), static_cast<double>(Input.ConfirmAttempts));
         Result->SetNumberField(TEXT("hudActivationCount"), static_cast<double>(Input.HudActivationCount));
         Result->SetNumberField(TEXT("coreTransportCreations"), FInputPolicy::CoreTransportCreations());
@@ -430,13 +452,15 @@ struct FE02ProofState
             ++CameraChanges; UpdateCamera();
         }
     }
-    bool Query(const FPointerSample& Pointer, FAdvisoryHit& Hit, FString& Diagnostic)
+    bool Query(const FPointerSample& Pointer, FAdvisoryHit& Hit, FString& Diagnostic, FRay* ActualRay = nullptr)
     {
         FVector Origin, Direction;
         FDiagnostic Detail;
         const bool bDeprojected = Controller.IsValid() && Pointer.bInsideViewport &&
             Controller->DeprojectScreenPositionToWorld(static_cast<float>(Pointer.ViewportPhysical.X), static_cast<float>(Pointer.ViewportPhysical.Y), Origin, Direction);
-        const bool bHit = bDeprojected && RaycastAdvisory(Fixture.Frame, Fixture.Models, Fixture.Supports, {Origin, Direction.GetSafeNormal()}, Hit, Detail);
+        const FRay RayValue = bDeprojected ? FRay{Origin, Direction.GetSafeNormal()} : FRay{};
+        if (ActualRay) { *ActualRay = RayValue; }
+        const bool bHit = bDeprojected && RaycastAdvisory(Fixture.Frame, Fixture.Models, Fixture.Supports, RayValue, Hit, Detail);
         Diagnostic = bDeprojected ? DiagnosticCodeName(Detail.Code) : TEXT("DeprojectionUnavailable");
         const auto Ray = MakeShared<FJsonObject>();
         Ray->SetStringField(TEXT("case"), CaseName); Ray->SetStringField(TEXT("observedUtc"), FDateTime::UtcNow().ToIso8601());
@@ -453,11 +477,17 @@ struct FE02ProofState
         if (Effect.bRequestWorldPick)
         {
             ++Picks;
+            LastPickHit.Reset(); LastPickPointer = Pointer;
+            LastPickGeneration = Picks; LastPickEventSequence = 0;
             FAdvisoryHit Hit; FString Detail;
-            if (Query(Pointer, Hit, Detail) && Hit.Kind == EHitKind::Model)
+            if (Query(Pointer, Hit, Detail, &LastPickRay))
             {
-                const FFootprint* M = Model(Hit.Id);
-                if (M && M->Pose.IsSet()) { Policy.ApplyAdvisoryPick(M->Id, M->Pose.GetValue()); Status = TEXT("Local advisory selection: ") + M->Id; }
+                LastPickHit = Hit;
+                if (Hit.Kind == EHitKind::Model)
+                {
+                    const FFootprint* M = Model(Hit.Id);
+                    if (M && M->Pose.IsSet()) { Policy.ApplyAdvisoryPick(M->Id, M->Pose.GetValue()); Status = TEXT("Local advisory selection: ") + M->Id; }
+                }
             }
         }
         if (Effect.bActivateHud)
@@ -474,6 +504,7 @@ struct FE02ProofState
         const TSharedPtr<FJsonObject>& Before, const FInputEffects& Effect)
     {
         ++Events;
+        if (Effect.bRequestWorldPick) { LastPickEventSequence = Events; }
         const auto Data = MakeShared<FJsonObject>();
         Data->SetNumberField(TEXT("sequence"), static_cast<double>(Events)); Data->SetStringField(TEXT("observedUtc"), FDateTime::UtcNow().ToIso8601());
         Data->SetStringField(TEXT("case"), CaseName); Data->SetStringField(TEXT("route"), TEXT("PlatformMessageHandler -> Slate -> SE02ProofSurface -> FInputPolicy"));
@@ -896,6 +927,7 @@ bool AE02WorldProofGameMode::ResetCase()
     if (!IsProofReady() || !Proof->PendingScreenshot.IsEmpty()) { return false; }
     FSlateApplication::Get().ReleaseAllPointerCapture();
     Proof->Policy = FInputPolicy(Proof->Fixture.Camera.DragThresholdLogicalUnits);
+    Proof->LastPickHit.Reset(); Proof->LastPickGeneration = 0; Proof->LastPickEventSequence = 0;
     Proof->Policy.ViewportChanged(Proof->Extent(), 1.0);
     FSlateApplication::Get().SetApplicationScale(1.0);
     FSlateApplication::Get().SetKeyboardFocus(Proof->Surface);
@@ -942,6 +974,14 @@ bool AE02WorldProofGameMode::ControlScreenPoint(const FString& Id, FVector2D& Ab
 bool AE02WorldProofGameMode::QueryScreenPoint(const FVector2D& Absolute, FAdvisoryHit& Hit, FString& Diagnostic)
 {
     return IsProofReady() && Proof->Surface.IsValid() && Proof->Query(Proof->Sample(Proof->Surface->GetCachedGeometry(), Absolute), Hit, Diagnostic);
+}
+bool AE02WorldProofGameMode::GetLastWorldPick(FPointerSample& Pointer, FRay& Ray,
+    FAdvisoryHit& Hit, uint64& PickGeneration, uint64& EventSequence) const
+{
+    if (!Proof->LastPickHit.IsSet() || Proof->LastPickEventSequence == 0) { return false; }
+    Pointer = Proof->LastPickPointer; Ray = Proof->LastPickRay; Hit = Proof->LastPickHit.GetValue();
+    PickGeneration = Proof->LastPickGeneration; EventSequence = Proof->LastPickEventSequence;
+    return true;
 }
 bool AE02WorldProofGameMode::ProjectRayRoundTrip(const FVector3d& Domain, double& DomainError, double& PixelError, FString& Id)
 {

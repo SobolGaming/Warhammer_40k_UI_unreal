@@ -47,6 +47,10 @@ public:
     bool ControlScreenPoint(const FString& ControlId, FVector2D& AbsoluteScreen) const;
     bool QueryScreenPoint(const FVector2D& AbsoluteScreen,
         Warhammer::Migration::E02::FAdvisoryHit& Hit, FString& Diagnostic);
+    /** Only a completed world-pick input event supplies this observation. Direct queries do not. */
+    bool GetLastWorldPick(Warhammer::Migration::E02::FPointerSample& Pointer,
+        Warhammer::Migration::E02::FRay& Ray, Warhammer::Migration::E02::FAdvisoryHit& Hit,
+        uint64& PickGeneration, uint64& EventSequence) const;
     bool ProjectRayRoundTrip(const FVector3d& Domain, double& DomainErrorInches,
         double& PhysicalPixelError, FString& HitId);
 

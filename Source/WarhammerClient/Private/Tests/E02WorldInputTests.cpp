@@ -7,6 +7,7 @@
 #include "Dom/JsonObject.h"
 #include "DriverConfiguration.h"
 #include "Engine/Engine.h"
+#include "Engine/GameViewportClient.h"
 #include "Engine/World.h"
 #include "Framework/Application/SlateApplication.h"
 #include "HAL/PlatformTime.h"
@@ -15,12 +16,45 @@
 #include "IAutomationDriverModule.h"
 #include "IDriverSequence.h"
 #include "InputCoreTypes.h"
+#include "Widgets/SViewport.h"
+#include "Widgets/SWidget.h"
 
 using namespace Warhammer::Migration::E02;
 
 namespace
 {
 enum class EStepResult : uint8 { Wait, Done };
+
+/** Independent measured basis: deliberately does not use AbsoluteToLocal or the proof adapter. */
+struct FObservedSlateBasis
+{
+    FVector2D Origin, X, Y, LocalSize;
+    double Determinant = 0;
+    bool Read(const FGeometry& Geometry)
+    {
+        LocalSize = Geometry.GetLocalSize();
+        if (LocalSize.X <= 0 || LocalSize.Y <= 0) { return false; }
+        Origin = Geometry.LocalToAbsolute(FVector2D::ZeroVector);
+        X = (FVector2D(Geometry.LocalToAbsolute(FVector2D(LocalSize.X, 0))) - Origin) / LocalSize.X;
+        Y = (FVector2D(Geometry.LocalToAbsolute(FVector2D(0, LocalSize.Y))) - Origin) / LocalSize.Y;
+        Determinant = X.X * Y.Y - X.Y * Y.X;
+        return !Origin.ContainsNaN() && !X.ContainsNaN() && !Y.ContainsNaN() &&
+            FMath::IsFinite(Determinant) && FMath::Abs(Determinant) > 1e-8;
+    }
+    FVector2D ToLocal(const FVector2D& Screen) const
+    {
+        const FVector2D D = Screen - Origin;
+        return FVector2D((D.X * Y.Y - D.Y * Y.X) / Determinant,
+            (X.X * D.Y - X.Y * D.X) / Determinant);
+    }
+    FVector2D ToScreen(const FVector2D& Local) const { return Origin + X * Local.X + Y * Local.Y; }
+};
+
+FVector2D QuantizedPhysical(const FVector2D& P)
+{
+    // The installed AutomationDriver cursor uses integer physical screen coordinates.
+    return FVector2D(FMath::RoundToInt(P.X), FMath::RoundToInt(P.Y));
+}
 
 /** Each Update returns to the engine loop. No driver future is synchronously waited on. */
 class FE02CaseCommand final : public IAutomationLatentCommand
@@ -163,6 +197,123 @@ private:
         Check(SerializeLocalIntent(World->GetPolicy().Snapshot()) == Intent, TEXT("Raw ID/domainXYZ/facing intent bytes unchanged"));
         Check(World->WorldPickCount() == Picks, TEXT("No extra world selection"));
     }
+    bool ObserveGeometry()
+    {
+        const UGameViewportClient* Client = World->GetWorld()->GetGameViewport();
+        const TSharedPtr<SViewport> Viewport = Client ? Client->GetGameViewportWidget() : nullptr;
+        const TSharedPtr<SWidget> Focus = FSlateApplication::Get().GetKeyboardFocusedWidget();
+        if (!Check(Viewport.IsValid() && Focus.IsValid(), TEXT("Actual viewport and keyboard-focused Slate widgets exist"))) { return false; }
+        if (!Check(Focus->GetTypeAsString() == TEXT("SE02ProofSurface") && Focus->HasKeyboardFocus(), TEXT("Measure actual focused proof surface"))) { return false; }
+        return Check(ViewBasis.Read(Viewport->GetCachedGeometry()) && SurfaceBasis.Read(Focus->GetCachedGeometry()),
+            TEXT("Actual full viewport and logical surface have invertible measured screen bases"));
+    }
+    FVector2D IndependentViewportPixel(const FVector2D& Screen) const
+    {
+        const FVector2D Local = ViewBasis.ToLocal(Screen);
+        const FIntPoint Extent = World->GetProofViewportSize();
+        return FVector2D(Local.X * Extent.X / ViewBasis.LocalSize.X, Local.Y * Extent.Y / ViewBasis.LocalSize.Y);
+    }
+    bool IndependentCircleScreen(FVector2D& Screen)
+    {
+        if (!ObserveGeometry()) { return false; }
+        const FFixture& Fixture = World->GetFixture();
+        const FFootprint* Circle = Fixture.Models.FindByPredicate([](const FFootprint& M) { return M.Id == TEXT("e02-circle"); });
+        if (!Check(Circle && Circle->Kind == EShapeKind::Circle && Circle->Pose.IsSet() && Circle->RadiusInches.IsSet(), TEXT("Frozen circle is defined"))) { return false; }
+        if (!Check(Circle->Pose->PositionInches.Equals(FVector3d(8, 18, -2), 1e-10) && Circle->RadiusInches.GetValue() == 1 &&
+            Circle->QueryHeightInches == 1.2 && Fixture.Frame.CenterInches.Equals(FVector2d(24, 31), 1e-10) && Fixture.Frame.DatumInches == -2,
+            TEXT("Independent ray expectation uses exact frozen circle and table datum"))) { return false; }
+        // Explicit fixture arithmetic, independent of DomainToWorld/ModelScreenPoint.
+        const double Angle = FMath::DegreesToRadians(23.0), C = FMath::Cos(Angle), S = FMath::Sin(Angle);
+        const double X = 2.54 * (8.0 - 24.0), Y = -2.54 * (18.0 - 31.0), Z = 2.54 * (-0.8 + 2.0);
+        const FVector WorldTop(137.0 + C * X - S * Y, -83.0 + S * X + C * Y, 41.0 + Z);
+        APlayerController* Controller = World->GetWorld()->GetFirstPlayerController();
+        FVector2D Pixel;
+        if (!Check(Controller && Controller->ProjectWorldLocationToScreen(WorldTop, Pixel), TEXT("Actual camera projects independently constructed circle top"))) { return false; }
+        const FIntPoint Extent = World->GetProofViewportSize();
+        Screen = QuantizedPhysical(ViewBasis.ToScreen(FVector2D(Pixel.X * ViewBasis.LocalSize.X / Extent.X,
+            Pixel.Y * ViewBasis.LocalSize.Y / Extent.Y)));
+        return true;
+    }
+    void AddLogicalOrbitProbe()
+    {
+        Do(TEXT("measure real Slate basis and quantized logical drag probes"), [this]()
+        {
+            if (!IndependentCircleScreen(ProbeStart)) { return; }
+            const FVector2D StartLogical = SurfaceBasis.ToLocal(ProbeStart);
+            ProbeBelow = QuantizedPhysical(SurfaceBasis.ToScreen(StartLogical + FVector2D(3, 0)));
+            ProbeAbove = QuantizedPhysical(SurfaceBasis.ToScreen(StartLogical + FVector2D(8, 0)));
+            const FVector2D Below = SurfaceBasis.ToLocal(ProbeBelow) - StartLogical;
+            const FVector2D Above = SurfaceBasis.ToLocal(ProbeAbove) - StartLogical;
+            Check(World->GetFixture().Camera.DragThresholdLogicalUnits == 4 && World->GetFixture().Camera.OrbitDegreesPerLogicalUnit == 0.25,
+                TEXT("Frozen four-logical-unit threshold and quarter-degree orbit increment"));
+            Check(Below.Size() > 0 && Below.Size() < 4 && Above.Size() >= 4, TEXT("Quantized physical samples straddle the strict logical threshold"));
+            ProbeCameras = World->CameraMutationCount(); ProbePicks = World->WorldPickCount();
+            ProbeHudActivations = World->GetPolicy().Snapshot().HudActivationCount;
+            const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+            ProbeAzimuth = Camera->GetNumberField(TEXT("azimuthDegrees")); ProbeElevation = Camera->GetNumberField(TEXT("elevationDegrees"));
+        });
+        Input(TEXT("driver starts quantized orbit gesture"), [this](IAsyncActionSequence& S) { S.MoveToPosition(ProbeStart).Press(EMouseButtons::Right); });
+        Do(TEXT("real press sample agrees with independent geometry"), [this]()
+        {
+            const auto& Capture = World->GetPolicy().Snapshot().Capture;
+            if (!Check(Capture.IsSet() && Capture->Owner == EInputOwner::Orbit, TEXT("Real Slate press owns orbit capture"))) { return; }
+            ProbeCaptureGeneration = Capture->Generation;
+            Check(Capture->Start.ScreenPhysical.Equals(ProbeStart, 1e-4) && Capture->Start.Logical.Equals(SurfaceBasis.ToLocal(ProbeStart), 1e-3),
+                TEXT("Physical press and independently inverted logical press agree"));
+        });
+        Input(TEXT("driver moves below four logical units"), [this](IAsyncActionSequence& S) { S.MoveToPosition(ProbeBelow); });
+        Do(TEXT("below-threshold displacement is logical and camera stays fixed"), [this]() { AssertOrbitProbe(false); });
+        Input(TEXT("driver moves above four logical units"), [this](IAsyncActionSequence& S) { S.MoveToPosition(ProbeAbove); });
+        Do(TEXT("above-threshold exact logical displacement changes orbit"), [this]()
+        {
+            AssertOrbitProbe(true); Check(World->ControlScreenPoint(TEXT("button"), B), TEXT("HUD crossing position")); B = QuantizedPhysical(B);
+        });
+        Input(TEXT("captured orbit crosses HUD"), [this](IAsyncActionSequence& S) { S.MoveToPosition(B); });
+        Do(TEXT("HUD crossing retains original capture owner"), [this]()
+        {
+            const auto& Capture = World->GetPolicy().Snapshot().Capture;
+            Check(Capture.IsSet() && Capture->Generation == ProbeCaptureGeneration && Capture->Owner == EInputOwner::Orbit && Capture->Last.ScreenPhysical.Equals(B, 1e-4) &&
+                World->GetPolicy().Snapshot().HudActivationCount == ProbeHudActivations && World->WorldPickCount() == ProbePicks,
+                TEXT("Actual pointer over HUD retains press generation and orbit owner"));
+        });
+        Input(TEXT("captured orbit releases over HUD"), [](IAsyncActionSequence& S) { S.Release(EMouseButtons::Right); });
+        Do(TEXT("orbit retains owner through HUD and ends without selection"), [this]()
+        {
+            Check(!World->GetPolicy().Snapshot().Capture.IsSet() && World->GetPolicy().Snapshot().HudActivationCount == ProbeHudActivations &&
+                World->WorldPickCount() == ProbePicks, TEXT("Captured HUD crossing cannot leak activation or world pick"));
+        });
+        Input(TEXT("reset orbit through real key route"), [](IAsyncActionSequence& S) { S.Type(EKeys::R); });
+        Do(TEXT("reset leaves frozen camera defaults"), [this]()
+        {
+            const auto C = World->Snapshot()->GetObjectField(TEXT("camera"));
+            Check(C->GetNumberField(TEXT("azimuthDegrees")) == World->GetFixture().Camera.DefaultAzimuthDegrees &&
+                C->GetNumberField(TEXT("elevationDegrees")) == World->GetFixture().Camera.DefaultElevationDegrees, TEXT("Driver reset restored azimuth and elevation"));
+        });
+    }
+    void AssertOrbitProbe(bool bAbove)
+    {
+        const auto& Capture = World->GetPolicy().Snapshot().Capture;
+        if (!Check(Capture.IsSet() && Capture->Generation == ProbeCaptureGeneration && Capture->Owner == EInputOwner::Orbit,
+            TEXT("Same real press generation retains orbit ownership"))) { return; }
+        const FVector2D Screen = bAbove ? ProbeAbove : ProbeBelow;
+        const FVector2D Expected = SurfaceBasis.ToLocal(Screen) - SurfaceBasis.ToLocal(ProbeStart);
+        const FVector2D Actual = Capture->Last.Logical - Capture->Start.Logical;
+        Check(Capture->Last.ScreenPhysical.Equals(Screen, 1e-4) && Actual.Equals(Expected, 1e-3), TEXT("Actual logical displacement matches independently measured physical-to-logical basis"));
+        Check(bAbove ? (Actual.Size() >= 4 && Capture->bDragged) : (Actual.Size() > 0 && Actual.Size() < 4 && !Capture->bDragged),
+            TEXT("Actual capture obeys strict four-logical-unit threshold"));
+        const auto Camera = World->Snapshot()->GetObjectField(TEXT("camera"));
+        const double ExpectedAzimuth = ProbeAzimuth - (bAbove ? Expected.X * 0.25 : 0);
+        const double ExpectedElevation = ProbeElevation + (bAbove ? Expected.Y * 0.25 : 0);
+        Check(FMath::Abs(Camera->GetNumberField(TEXT("azimuthDegrees")) - ExpectedAzimuth) <= 1e-3 &&
+            FMath::Abs(Camera->GetNumberField(TEXT("elevationDegrees")) - ExpectedElevation) <= 1e-3,
+            TEXT("Actual camera follows independent logical delta at frozen orbit increment without double DPI"));
+        Check(bAbove ? World->CameraMutationCount() > ProbeCameras : World->CameraMutationCount() == ProbeCameras,
+            TEXT("Camera mutation occurs only above threshold"));
+        Test->AddInfo(FString::Printf(TEXT("%s: extent=%dx%d uiScale=%.3f logicalDelta=(%.9f,%.9f) independentDelta=(%.9f,%.9f) basisX=(%.9f,%.9f) basisY=(%.9f,%.9f) azimuth=%.9f expected=%.9f"),
+            *Name, World->GetProofViewportSize().X, World->GetProofViewportSize().Y, World->GetProofUiScale(), Actual.X, Actual.Y, Expected.X, Expected.Y,
+            SurfaceBasis.X.X, SurfaceBasis.X.Y, SurfaceBasis.Y.X, SurfaceBasis.Y.Y,
+            Camera->GetNumberField(TEXT("azimuthDegrees")), ExpectedAzimuth));
+    }
     void BuildSteps()
     {
         if (Name == TEXT("Rendered.FiveForms"))
@@ -241,14 +392,7 @@ private:
         }
         else if (Name == TEXT("Input.CameraCapture"))
         {
-            Do(TEXT("initial counters"), [this]() { Picks = World->WorldPickCount(); Cameras = World->CameraMutationCount(); });
-            MoveToModel(TEXT("e02-circle"));
-            Input(TEXT("right below drag threshold"), [this](IAsyncActionSequence& S) { S.Press(EMouseButtons::Right).MoveToPosition(A + FVector2D(3, 0)); });
-            Do(TEXT("below4logical no orbit"), [this]() { Check(World->CameraMutationCount() == Cameras && World->GetPolicy().Snapshot().Capture.IsSet(), TEXT("Capture exists; no below-threshold camera mutation")); });
-            Input(TEXT("right above drag threshold"), [this](IAsyncActionSequence& S) { S.MoveToPosition(A + FVector2D(8, 0)); });
-            Do(TEXT("orbit retains press owner"), [this]() { Check(World->CameraMutationCount() > Cameras && World->GetPolicy().Snapshot().Capture.IsSet() && World->GetPolicy().Snapshot().Capture->Owner == EInputOwner::Orbit, TEXT("Actual orbit through Slate capture")); Check(World->ControlScreenPoint(TEXT("button"), B), TEXT("HUD crossing position")); });
-            Input(TEXT("captured orbit crosses HUD and releases"), [this](IAsyncActionSequence& S) { S.MoveToPosition(B).Release(EMouseButtons::Right); });
-            Do(TEXT("no leaked activation or selection"), [this]() { Check(!World->GetPolicy().Snapshot().Capture.IsSet() && World->GetPolicy().Snapshot().HudActivationCount == 0 && World->WorldPickCount() == Picks, TEXT("Capture released; HUD/world did not receive click")); });
+            AddLogicalOrbitProbe();
         }
         else if (Name == TEXT("Input.PanDollyFrame"))
         {
@@ -334,16 +478,62 @@ private:
     {
         Do(TEXT("request resize/scale variant"), [this, Extent, Scale]() { Check(World->SetProofUiScale(Scale) && World->ProgrammaticResize(Extent), TEXT("Owned viewport variant request")); });
         Wait(TEXT("actual viewport and logical scale variant"), [this, Extent, Scale]() { return World->GetProofViewportSize() == Extent && World->GetProofUiScale() == Scale && World->GetPolicy().Snapshot().UiScale == Scale; });
-        ClickModel(TEXT("e02-circle"));
-        Do(TEXT("same intended ray under resize/scale"), [this]()
+        Do(TEXT("independent circle-top projection at actual viewport geometry"), [this]()
+        {
+            Check(IndependentCircleScreen(A), TEXT("Prepare independent quantized physical click"));
+            ClickPicks = World->WorldPickCount(); ClickEvents = World->EventCount();
+        });
+        Input(TEXT("driver actual variant completed click"), [this](IAsyncActionSequence& S) { S.MoveToPosition(A).Click(EMouseButtons::Left); });
+        Do(TEXT("fresh actual click ray and precise independent hit under resize/scale"), [this]()
         {
             Check(SerializeLocalIntent(World->GetPolicy().Snapshot()) == Intent, TEXT("Identical intended ID/XYZ/facing under variant"));
-            FAdvisoryHit Hit; FString Diagnostic;
-            Check(World->QueryScreenPoint(A, Hit, Diagnostic) && Hit.Id == TEXT("e02-circle"), TEXT("No sidebar subtraction or doubleDPI in world ray"));
+            AssertFreshCirclePick();
             Cameras = World->CameraMutationCount();
         });
         Control(TEXT("blank")); Input(TEXT("variant HUD wheel/click exclusion"), [](IAsyncActionSequence& S) { S.Click().ScrollBy(1); });
         Do(TEXT("HUD remains excluded at variant"), [this]() { Check(World->CameraMutationCount() == Cameras && SerializeLocalIntent(World->GetPolicy().Snapshot()) == Intent, TEXT("Logical HUD geometry excludes world at actual scale")); });
+        AddLogicalOrbitProbe();
+        Do(TEXT("variant camera gesture preserves local intent"), [this]()
+        { Check(SerializeLocalIntent(World->GetPolicy().Snapshot()) == Intent && World->WorldPickCount() == ClickPicks + 1, TEXT("Exact local intent and one completed pick survive variant orbit/reset")); });
+    }
+    void AssertFreshCirclePick()
+    {
+        FPointerSample Pointer; FRay Ray; FAdvisoryHit Hit; uint64 Generation = 0, SequenceNumber = 0;
+        if (!Check(World->GetLastWorldPick(Pointer, Ray, Hit, Generation, SequenceNumber), TEXT("Completed input event exposes its own actual ray/hit"))) { return; }
+        Check(World->WorldPickCount() == ClickPicks + 1 && Generation == ClickPicks + 1 &&
+            SequenceNumber > ClickEvents && SequenceNumber <= World->EventCount(), TEXT("Fresh ray is bound to this completed click generation and traced event sequence"));
+        Check(Pointer.ScreenPhysical.Equals(A, 1e-4) && Pointer.bInsideViewport && Hit.Kind == EHitKind::Model && Hit.Id == TEXT("e02-circle"),
+            TEXT("Actual completed click used prescribed quantized screen point and circle identity"));
+        const FVector2D ExpectedPixel = IndependentViewportPixel(Pointer.ScreenPhysical);
+        Check(Pointer.ViewportPhysical.Equals(ExpectedPixel, 1e-3), TEXT("Actual ray pixel agrees with independent full viewport basis without sidebar subtraction or double DPI"));
+        const double Angle = FMath::DegreesToRadians(23.0), C = FMath::Cos(Angle), S = FMath::Sin(Angle);
+        const FVector3d O = Ray.OriginWorldCm - FVector3d(137, -83, 41);
+        const FVector3d D = Ray.DirectionWorldUnit;
+        const FVector3d DomainOrigin(24.0 + (C * O.X + S * O.Y) / 2.54,
+            31.0 - (-S * O.X + C * O.Y) / 2.54, -2.0 + O.Z / 2.54);
+        const FVector3d DomainDirection((C * D.X + S * D.Y) / 2.54,
+            -(-S * D.X + C * D.Y) / 2.54, D.Z / 2.54);
+        if (!Check(!DomainOrigin.ContainsNaN() && !DomainDirection.ContainsNaN() && FMath::Abs(D.Size() - 1) <= 1e-6 &&
+            FMath::Abs(DomainDirection.Z) > 1e-8, TEXT("Actual completed-click ray has finite unit direction crossing frozen top plane"))) { return; }
+        const double DistanceCm = (-0.8 - DomainOrigin.Z) / DomainDirection.Z;
+        const FVector3d ExpectedDomain = DomainOrigin + DomainDirection * DistanceCm;
+        Check(DistanceCm > 0 && FMath::Square(ExpectedDomain.X - 8) + FMath::Square(ExpectedDomain.Y - 18) < 1,
+            TEXT("Independent forward ray-plane intersection falls inside circle top"));
+        const double DomainError = FVector3d::Distance(ExpectedDomain, Hit.DomainPosition);
+        Check(DomainError <= 1e-4 && FMath::Abs(Hit.DistanceWorldCm - DistanceCm) <= 2.54e-4,
+            TEXT("Actual domain hit and ray distance agree with independent top-plane solution within1e-4inch"));
+        const FVector3d Q(2.54 * (ExpectedDomain.X - 24), -2.54 * (ExpectedDomain.Y - 31), 2.54 * (ExpectedDomain.Z + 2));
+        const FVector3d ExpectedWorld(137 + C * Q.X - S * Q.Y, -83 + S * Q.X + C * Q.Y, 41 + Q.Z);
+        Check(FVector3d::Distance(ExpectedWorld, Hit.WorldPosition) <= 2.54e-4, TEXT("Actual world hit agrees with independent fixed-frame intersection"));
+        APlayerController* Controller = World->GetWorld()->GetFirstPlayerController();
+        FVector2D Reprojected;
+        if (!Check(Controller && Controller->ProjectWorldLocationToScreen(Hit.WorldPosition, Reprojected), TEXT("Actual camera reprojects this completed click hit"))) { return; }
+        const double PixelError = FVector2D::Distance(Reprojected, ExpectedPixel);
+        Check(PixelError <= 1.0, TEXT("Actual completed click hit projects back within one physical pixel at actual viewport/scale"));
+        Test->AddInfo(FString::Printf(TEXT("%s: extent=%dx%d uiScale=%.3f pick=%llu event=%llu screen=(%.3f,%.3f) rayPixel=(%.6f,%.6f) domainErrorInches=%.12g roundTripPhysicalPixels=%.12g"),
+            *Name, World->GetProofViewportSize().X, World->GetProofViewportSize().Y, World->GetProofUiScale(),
+            static_cast<unsigned long long>(Generation), static_cast<unsigned long long>(SequenceNumber),
+            Pointer.ScreenPhysical.X, Pointer.ScreenPhysical.Y, Pointer.ViewportPhysical.X, Pointer.ViewportPhysical.Y, DomainError, PixelError));
     }
     bool Finish()
     {
@@ -390,9 +580,13 @@ private:
     TUniquePtr<TAsyncResult<bool>> Future;
     TArray<TFunction<EStepResult()>> Steps;
     FVector2D A, B;
+    FObservedSlateBasis ViewBasis, SurfaceBasis;
+    FVector2D ProbeStart, ProbeBelow, ProbeAbove;
     FAdvisoryHit HitBefore;
     double Started, StepStarted = 0.0, CleanupStarted = 0.0;
     uint64 Picks = 0, Cameras = 0, EventBaseline = 0;
+    uint64 ProbePicks = 0, ProbeCameras = 0, ProbeHudActivations = 0, ProbeCaptureGeneration = 0, ClickPicks = 0, ClickEvents = 0;
+    double ProbeAzimuth = 0, ProbeElevation = 0;
     int32 Index = 0, Assertions = 0;
     bool bInitialized = false, bOwnsDriver = false, bFailed = false, bCleanupQueued = false;
 };

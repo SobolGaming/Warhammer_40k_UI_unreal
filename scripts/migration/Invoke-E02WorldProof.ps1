@@ -12,7 +12,18 @@ are absolute path, bytes (integer), sha256. Membership is relative slash paths
 for WarhammerClient.uproject and every Source/Config file/directory, including
 empty directories. files also covers this wrapper, fixture, AGENTS/instructions,
 and every engine/tool/source/SDK/asset used. toolPaths supplies absolute named
-paths: buildBat,editor,editorCmd,compiler,dotnet,sdkRc. pluginClosure is a frozen
+paths: buildBat,editor,editorCmd,compiler,dotnet,sdkRc,cmd,where,getDotnetPath.
+compilerInputs binds powerShellHome, roslyn:[the two absolute descriptors for
+Microsoft.CodeAnalysis.dll and Microsoft.CodeAnalysis.CSharp.dll], referenceRoot,
+and references:[{relativePath,bytes,sha256}] for the complete top-level ref/*.dll
+set. All compiler DLLs must also occur in files. dotnetSdk binds version,
+directory and versionFile (the bundled sdk/<version>/.version descriptor, also
+in files). Actual Build selection is checked in the same cmd environment/CWD
+before Build.bat, using frozen where.exe and dotnet --version output. The child
+clears inherited UE .NET bypass variables and uses PATHEXT=.EXE on actual X64.
+Raw selections are logs/build-dotnet-path.txt and logs/build-dotnet-sdk.txt;
+the successful Build result binds both and the actual selected executable/SDK.
+pluginClosure is a frozen
 review-input descriptor (also listed in files). Its schemaVersion1 object binds
 sourceHead, canonical project descriptor, platform='Win64',
 targets=['WarhammerClientEditor'], disabledPlugins (the exact6), enabledPlugins
@@ -43,7 +54,16 @@ this wrapper does not generate it or infer permission from a switch.
 
 Order: Preflight -> SupervisorControls -> Build -> Discovery -> Numeric ->
 WorldInput -> Audit. A failed/uncertain phase blocks every dependent phase.
-No resume/retry/overwrite within a RunId. Budgets: build1800s; native600s;
+No resume/retry/overwrite within a RunId. Every result.json is provisional and
+requires its phase's completion.json, published last after all required outputs.
+Audit completion binds both audit/result.json and the top-level result.json.
+Missing/invalid completion blocks dependents even if a raw result says success.
+No published raw result is overwritten after a later finalization failure.
+completion.json schema1: runId, phase, state='COMPLETE', executionPassed=true,
+completedUtc, sourceHead, freezeManifest descriptor, phaseResult descriptor,
+requiredArtifacts:[phaseResult, plus top-level result for Audit]. A failed
+publication is reported FAIL and, when writable, finalization-failure.json.
+Budgets: build1800s; native600s;
 SUP01-03 together600s. Graceful shutdown<=15s is reserved inside the bound.
 
 SUP01: one actual normal-root/lingering-child case (child sleeps2s); root exit
@@ -242,6 +262,52 @@ function Snapshot-Authored([string] $Root) {
 function Same-Snapshot($Before,$After) {
     if ((ConvertTo-Json -InputObject @($Before) -Depth 12 -Compress) -cne (ConvertTo-Json -InputObject @($After) -Depth 12 -Compress)) { throw 'E02_AUTHORED_MEMBERSHIP_OR_BYTES_CHANGED' }
 }
+function Check-CompilerInputs($Manifest) {
+    $inputSet=$Manifest.compilerInputs
+    $entry=[Reflection.Assembly]::GetEntryAssembly()
+    $referenceAnchor=if($null -ne $entry){$entry.Location}else{[Management.Automation.PSObject].Assembly.Location}
+    $actualReferenceRoot=Join-Path ([IO.Path]::GetDirectoryName($referenceAnchor)) 'ref'
+    if($null -eq $inputSet -or $inputSet.powerShellHome -ine $PSHOME -or
+        $inputSet.referenceRoot -ine (Join-Path $PSHOME 'ref') -or $inputSet.referenceRoot -ine $actualReferenceRoot){throw 'E02_COMPILER_INPUT_ROOTS'}
+    $expectedRoslyn=@((Join-Path $PSHOME 'Microsoft.CodeAnalysis.dll'),(Join-Path $PSHOME 'Microsoft.CodeAnalysis.CSharp.dll'))
+    $roslyn=@($inputSet.roslyn)
+    if($roslyn.Count -ne 2){throw 'E02_ROSLYN_INPUT_SET'}
+    foreach($path in $expectedRoslyn){
+        $match=@($roslyn|Where-Object {$_.path -ieq $path})
+        if($match.Count -ne 1){throw 'E02_ROSLYN_INPUT_MISSING_OR_DUPLICATED'}
+        $actual=Check-Descriptor $match[0]
+        if(@($Manifest.files|Where-Object {$_.path -ieq $actual.path -and $_.sha256 -ieq $actual.sha256 -and $_.bytes -eq $actual.bytes}).Count -ne 1){throw 'E02_ROSLYN_INPUT_NOT_FROZEN'}
+        $assemblyName=[IO.Path]::GetFileNameWithoutExtension($path)
+        foreach($assembly in [AppDomain]::CurrentDomain.GetAssemblies()){
+            if($assembly.GetName().Name -ceq $assemblyName -and $assembly.Location -ine $path){throw 'E02_ROSLYN_LOADED_FROM_OTHER_PATH'}
+        }
+    }
+    $referenceRoot=Assert-Path $inputSet.referenceRoot
+    $actualReferences=@([IO.Directory]::EnumerateFiles($referenceRoot,'*.dll',[IO.SearchOption]::TopDirectoryOnly)|ForEach-Object {
+        $d=Descriptor $_
+        [ordered]@{relativePath=[IO.Path]::GetFileName($d.path);path=$d.path;bytes=$d.bytes;sha256=$d.sha256}
+    }|Sort-Object { $_.relativePath } -CaseSensitive)
+    $frozenReferences=@($inputSet.references|Sort-Object { $_.relativePath } -CaseSensitive)
+    if($actualReferences.Count -eq 0 -or $actualReferences.Count -ne $frozenReferences.Count){throw 'E02_REFERENCE_ASSEMBLY_MEMBERSHIP_CHANGED'}
+    for($i=0;$i -lt $actualReferences.Count;$i++){
+        $a=$actualReferences[$i];$f=$frozenReferences[$i]
+        if($f.relativePath -isnot [string] -or $f.relativePath -cne $a.relativePath -or $f.bytes -ne $a.bytes -or $f.sha256 -ine $a.sha256){throw 'E02_REFERENCE_ASSEMBLY_MEMBERSHIP_OR_BYTES_CHANGED'}
+        if(@($Manifest.files|Where-Object {$_.path -ieq $a.path -and $_.sha256 -ieq $a.sha256 -and $_.bytes -eq $a.bytes}).Count -ne 1){throw 'E02_REFERENCE_ASSEMBLY_NOT_FROZEN'}
+    }
+    return [ordered]@{powerShellHome=$PSHOME;roslyn=$roslyn;referenceRoot=$referenceRoot;referenceCount=$actualReferences.Count;references=$frozenReferences}
+}
+function Check-DotnetSdk($Manifest) {
+    $sdk=$Manifest.dotnetSdk
+    if($null -eq $sdk -or $sdk.version -isnot [string] -or $sdk.version -cnotmatch '^10\.0\.[0-9]+$'){throw 'E02_DOTNET_SDK_SHAPE'}
+    $root=[IO.Path]::GetDirectoryName($Manifest.toolPaths.dotnet)
+    if($sdk.directory -ine (Join-Path $root ('sdk/'+$sdk.version))){throw 'E02_DOTNET_SDK_DIRECTORY'}
+    $version=Check-Descriptor $sdk.versionFile
+    if($version.path -ine (Join-Path $sdk.directory '.version') -or
+        @($Manifest.files|Where-Object {$_.path -ieq $version.path -and $_.sha256 -ieq $version.sha256 -and $_.bytes -eq $version.bytes}).Count -ne 1){throw 'E02_DOTNET_SDK_VERSION_FILE_NOT_FROZEN'}
+    $lines=[IO.File]::ReadAllLines($version.path)
+    if($lines.Length -lt 2 -or $lines[1] -cne $sdk.version){throw 'E02_DOTNET_SDK_VERSION_FILE_MISMATCH'}
+    return [ordered]@{version=$sdk.version;directory=$sdk.directory;versionFile=$version}
+}
 function Check-Freeze {
     if (-not $FreezeManifestPath) { throw 'BLOCKED_E02_FREEZE_MANIFEST_REQUIRED' }
     [void](Review-Input $FreezeManifestPath)
@@ -261,7 +327,7 @@ function Check-Freeze {
         if ($membership[$i].path -cne $actualSource[$i].path -or $membership[$i].kind -cne $actualSource[$i].kind) { throw 'E02_SOURCE_MEMBERSHIP_MISMATCH' }
         if ($actualSource[$i].kind -eq 'file' -and -not $seen.Contains([IO.Path]::GetFullPath((Join-Path $script:Repo $actualSource[$i].path)))) { throw 'E02_AUTHORED_FILE_NOT_FROZEN' }
     }
-    foreach ($name in @('buildBat','editor','editorCmd','compiler','dotnet','sdkRc')) {
+    foreach ($name in @('buildBat','editor','editorCmd','compiler','dotnet','sdkRc','cmd','where','getDotnetPath')) {
         $tool=Need-File $manifest.toolPaths[$name]
         if (-not $seen.Contains($tool)) { throw 'E02_TOOL_NOT_FROZEN' }
     }
@@ -278,10 +344,15 @@ function Check-Freeze {
     if ($manifest.toolPaths.buildBat -ine (Join-Path $EngineRoot 'Engine\Build\BatchFiles\Build.bat') -or
         $manifest.toolPaths.editor -ine (Join-Path $EngineRoot 'Engine\Binaries\Win64\UnrealEditor.exe') -or
         $manifest.toolPaths.editorCmd -ine (Join-Path $EngineRoot 'Engine\Binaries\Win64\UnrealEditor-Cmd.exe') -or
-        $manifest.toolPaths.dotnet -ine (Join-Path $EngineRoot 'Engine\Binaries\ThirdParty\DotNet\10.0\win-x64\dotnet.exe')) { throw 'E02_ENGINE_TOOL_PATH' }
+        $manifest.toolPaths.dotnet -ine (Join-Path $EngineRoot 'Engine\Binaries\ThirdParty\DotNet\10.0\win-x64\dotnet.exe') -or
+        $manifest.toolPaths.getDotnetPath -ine (Join-Path $EngineRoot 'Engine\Build\BatchFiles\GetDotnetPath.bat') -or
+        $manifest.toolPaths.cmd -ine (Join-Path ([Environment]::SystemDirectory) 'cmd.exe') -or
+        $manifest.toolPaths.where -ine (Join-Path ([Environment]::SystemDirectory) 'where.exe')) { throw 'E02_ENGINE_TOOL_PATH' }
     if ((Get-Item -LiteralPath $manifest.toolPaths.compiler).VersionInfo.ProductVersion -ne '14.44.35229.0' -or $manifest.toolPaths.sdkRc -notmatch '10\.0\.22621\.0[\\/]x64[\\/]rc\.exe$') { throw 'E02_COMPILER_OR_SDK' }
+    $compilerInputs=Check-CompilerInputs $manifest
+    $dotnetSdk=Check-DotnetSdk $manifest
     $script:Freeze=$manifest
-    return [ordered]@{manifest=(Descriptor $FreezeManifestPath);sourceHead=$manifest.sourceHead;packet=$packet;authored=$actualSource;fileCount=$seen.Count;toolPaths=$manifest.toolPaths;engineVersion=$version}
+    return [ordered]@{manifest=(Descriptor $FreezeManifestPath);sourceHead=$manifest.sourceHead;packet=$packet;authored=$actualSource;fileCount=$seen.Count;toolPaths=$manifest.toolPaths;engineVersion=$version;compilerInputs=$compilerInputs;dotnetSdk=$dotnetSdk}
 }
 function Check-Authority {
     if (-not $AuthorityPath) { throw 'BLOCKED_E02_EXECUTION_AUTHORITY_REQUIRED' }
@@ -604,6 +675,7 @@ public static class Supervisor {
 '@
 
 function Enable-NativeHelper {
+    [void](Check-CompilerInputs $script:Freeze)
     if ($null -eq ('Warhammer.E02.Supervisor' -as [type])) { Add-Type -TypeDefinition $script:NativeSource -Language CSharp -ErrorAction Stop }
 }
 
@@ -676,6 +748,11 @@ function Child-Environment([hashtable] $Extra=@{}) {
     $envs.Add('DOTNET_CLI_TELEMETRY_OPTOUT','1'); $envs.Add('DOTNET_SKIP_FIRST_TIME_EXPERIENCE','1')
     $envs.Add('DOTNET_NOLOGO','1'); $envs.Add('UE-SharedDataCachePath','None')
     $envs.Add('UE_ADDITIONAL_PLUGIN_PATHS','')
+    foreach($name in @('UE_USE_SYSTEM_DOTNET','UE_DOTNET_VERSION','UE_DOTNET_DIR','UE_DOTNET_ARCH','ProgramFiles(Arm)')){$envs.Add($name,'')}
+    $envs.Add('PROCESSOR_ARCHITECTURE','AMD64');$envs.Add('PATHEXT','.EXE')
+    $dotnetRoot=[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.dotnet)
+    $envs.Add('DOTNET_ROOT',$dotnetRoot);$envs.Add('DOTNET_ROOT_X64',$dotnetRoot)
+    $envs.Add('DOTNET_MULTILEVEL_LOOKUP','0')
     foreach($entry in $Extra.GetEnumerator()) { $envs.Add($entry.Key,[string]$entry.Value) }
     return ,$envs
 }
@@ -938,7 +1015,9 @@ function Check-Automation([string] $Kind) {
     foreach($case in $tests) {
         if($case.state -cne 'Success'){throw 'E02_AUTOMATION_CASE_NOT_SUCCESS'}
         $suffix=$case.fullTestPath.Substring('Warhammer.Migration.E02.'.Length)
-        $pattern='^'+[regex]::Escape($suffix)+': actual assertions=([1-9][0-9]*)$'
+        $pattern='^'+[regex]::Escape($suffix)+': actual assertions=([1-9][0-9]*)'
+        if($Kind -eq 'Numeric'){$pattern+='$'}
+        else{$pattern+='; elapsed=([0-9]+\.[0-9]{3})s; status=PASS$'}
         $summaries=@($case.entries|Where-Object{$_.event.type -ceq 'Info' -and $_.event.message -cmatch $pattern})
         if($summaries.Count -ne 1){throw 'E02_ACTUAL_ASSERTION_SUMMARY_MISSING_OR_DUPLICATED'}
         $match=[regex]::Match($summaries[0].event.message,$pattern)
@@ -1062,9 +1141,22 @@ function Check-Previous {
         if ($r.runId -cne $RunId -or $r.phase -cne $prior -or $r.executionPassed -isnot [bool] -or -not $r.executionPassed -or $null -ne $r.primaryFailure -or @($r.secondaryErrors).Count -ne 0) {throw 'E02_PREDECESSOR_NOT_SUCCESSFUL'}
         if ($r.frozenInputs.manifest.sha256 -cne (Digest $FreezeManifestPath) -or $r.frozenInputs.sourceHead -cne $script:Freeze.sourceHead) {throw 'E02_PREDECESSOR_CANDIDATE_MISMATCH'}
         $desc=Descriptor $path
+        $completionPath=Owned ($prior.ToLowerInvariant()+'/completion.json')
+        $completion=Read-Json $completionPath
+        if($completion.schemaVersion -ne 1 -or $completion.runId -cne $RunId -or $completion.phase -cne $prior -or
+            $completion.state -cne 'COMPLETE' -or $completion.executionPassed -isnot [bool] -or -not $completion.executionPassed -or
+            $r.completionRequired -isnot [bool] -or -not $r.completionRequired -or $r.completionPath -ine $completionPath -or
+            $r.publicationState -cne 'PROVISIONAL_REQUIRES_COMPLETION_RECORD' -or @($completion.requiredArtifacts).Count -ne 1){throw 'E02_PREDECESSOR_COMPLETION_REQUIRED'}
+        $bound=Check-Descriptor $completion.phaseResult
+        $required=Check-Descriptor $completion.requiredArtifacts[0]
+        if($bound.path -ine $desc.path -or $bound.sha256 -cne $desc.sha256 -or $bound.bytes -ne $desc.bytes -or
+            $required.path -ine $desc.path -or $required.sha256 -cne $desc.sha256 -or $required.bytes -ne $desc.bytes -or
+            $completion.freezeManifest.sha256 -cne (Digest $FreezeManifestPath) -or $completion.sourceHead -cne $script:Freeze.sourceHead){throw 'E02_PREDECESSOR_COMPLETION_BINDING'}
+        Check-BoundDescriptors $completion
         # Every earlier result records its own full predecessor set; a later
         # invocation checks those references against the still-original bytes.
         Check-BoundDescriptors $r
+        $desc['completion']=Descriptor $completionPath
         $links.Add($desc)
     }
     if ($Phase -in @('Numeric','WorldInput','Audit')) {
@@ -1076,9 +1168,10 @@ function Check-Previous {
     return @($links)
 }
 
-$primary=$null;$exitCode=1;$baselineSettings=$null;$beforeAuthored=$null;$beforeStaged=$null
+$primary=$null;$exitCode=1;$baselineSettings=$null;$beforeAuthored=$null;$beforeStaged=$null;$publicationComplete=$false
 try {
-    if (-not $IsWindows -or [IntPtr]::Size -ne 8) {throw 'BLOCKED_E02_WINDOWS_X64_ONLY_LINUX_NOT_RUN'}
+    if (-not $IsWindows -or [IntPtr]::Size -ne 8 -or
+        [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString() -cne 'X64') {throw 'BLOCKED_E02_WINDOWS_X64_ONLY_LINUX_NOT_RUN'}
     $EngineRoot=Assert-Path $EngineRoot
     # These strings enter both UE's custom DDC expression and Windows command
     # arguments. Refuse ambiguous path metacharacters rather than changing them.
@@ -1092,7 +1185,8 @@ try {
     New-Directory $script:PhaseRoot
     $script:Result=[ordered]@{schemaVersion=1;runId=$RunId;phase=$Phase;startedUtc=[DateTime]::UtcNow.ToString('o');completedUtc=$null;
         status='RUNNING';executionPassed=$false;primaryFailure=$null;secondaryErrors=$script:Errors;predecessors=@();processes=[Collections.Generic.List[object]]::new();
-        frozenInputs=$null;authority=$null;limits=@{buildSeconds=1800;nativeSeconds=600;supervisorGroupSeconds=600;shutdownGraceMaximumSeconds=15;linux='NOT_RUN';humanInput='NOT_RUN';packaging='NOT_RUN';finalAcceptance='REQUIRES_FRESH_CODE_AND_REQ';descendantLedger='NOT_COLLECTED'}}
+        frozenInputs=$null;authority=$null;completionRequired=$true;publicationState='PROVISIONAL_REQUIRES_COMPLETION_RECORD';completionPath=(Join-Path $script:PhaseRoot 'completion.json');
+        limits=@{buildSeconds=1800;nativeSeconds=600;supervisorGroupSeconds=600;shutdownGraceMaximumSeconds=15;linux='NOT_RUN';humanInput='NOT_RUN';packaging='NOT_RUN';finalAcceptance='REQUIRES_FRESH_CODE_AND_REQ';descendantLedger='NOT_COLLECTED'}}
     $script:Result.frozenInputs=Check-Freeze
     $script:Result.predecessors=@(Check-Previous)
     $beforeAuthored=@(Snapshot-Authored $script:Repo)
@@ -1115,17 +1209,52 @@ try {
         switch($Phase) {
             'SupervisorControls' {$script:Result.controls=Supervisor-Controls;$script:Result.controlReport=Descriptor (Owned 'reports/supervisor-controls/index.json');$script:Result.status='SUPERVISOR_CONTROLS_PASS'}
             'Build' {
-                $worker='& $env:E02_BUILD_BAT @("WarhammerClientEditor","Win64","Development",("-Project="+$env:E02_PROJECT),"-WaitMutex","-NoUBA",("-UBARootDir="+$env:E02_UBA),("-Log="+$env:E02_BUILD_LOG));if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE'
-                $extra=@{E02_BUILD_BAT=$script:Freeze.toolPaths.buildBat;E02_PROJECT=(Join-Path $script:Stage 'WarhammerClient.uproject');E02_UBA=(Owned 'uba');E02_BUILD_LOG=(Owned 'logs/build.log')}
+                # Selection receipts and Build.bat execute in one cmd environment
+                # and the same Engine/Source CWD. GetDotnetPath initializes the
+                # bundled path; its later Build.bat call reuses that exact setup.
+                $worker=@'
+$ErrorActionPreference='Stop'
+$batch=@(
+    'cd /d "%E02_ENGINE_SOURCE%"',
+    'call "%E02_GET_DOTNET_BAT%"',
+    '"%E02_WHERE%" dotnet >"%E02_DOTNET_WHERE_LOG%"',
+    'set "E02_SELECTED_DOTNET="',
+    'set /p E02_SELECTED_DOTNET=<"%E02_DOTNET_WHERE_LOG%"',
+    'for %I in ("!E02_SELECTED_DOTNET!") do @set "E02_SELECTED_DOTNET=%~fI"',
+    'if /i not "!E02_SELECTED_DOTNET!"=="%E02_DOTNET_EXE%" (exit /b 97)',
+    'dotnet --version >"%E02_DOTNET_SDK_LOG%"',
+    'set "E02_SELECTED_SDK="',
+    'set /p E02_SELECTED_SDK=<"%E02_DOTNET_SDK_LOG%"',
+    'if not "!E02_SELECTED_SDK!"=="%E02_DOTNET_VERSION%" (exit /b 98)',
+    'echo E02_DOTNET_SELECTED_PATH=!E02_SELECTED_DOTNET!',
+    'echo E02_DOTNET_SELECTED_SDK=!E02_SELECTED_SDK!',
+    'call "%E02_BUILD_BAT%" WarhammerClientEditor Win64 Development "-Project=%E02_PROJECT%" -WaitMutex -NoUBA "-UBARootDir=%E02_UBA%" "-Log=%E02_BUILD_LOG%"'
+) -join ' && '
+& $env:E02_CMD /d /v:on /s /c $batch
+if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE
+'@
+                $pathReceipt=Owned 'logs/build-dotnet-path.txt';$sdkReceipt=Owned 'logs/build-dotnet-sdk.txt'
+                foreach($path in @($pathReceipt,$sdkReceipt)){if([IO.File]::Exists($path) -or [IO.Directory]::Exists($path)){throw 'E02_DOTNET_RECEIPT_ALREADY_EXISTS'}}
+                $extra=@{E02_BUILD_BAT=$script:Freeze.toolPaths.buildBat;E02_PROJECT=(Join-Path $script:Stage 'WarhammerClient.uproject');E02_UBA=(Owned 'uba');E02_BUILD_LOG=(Owned 'logs/build.log');
+                    E02_CMD=$script:Freeze.toolPaths.cmd;E02_WHERE=$script:Freeze.toolPaths.where;E02_GET_DOTNET_BAT=$script:Freeze.toolPaths.getDotnetPath;
+                    E02_ENGINE_SOURCE=(Join-Path $EngineRoot 'Engine/Source');E02_DOTNET_EXE=$script:Freeze.toolPaths.dotnet;E02_DOTNET_VERSION=$script:Freeze.dotnetSdk.version;
+                    E02_DOTNET_WHERE_LOG=$pathReceipt;E02_DOTNET_SDK_LOG=$sdkReceipt}
+                foreach($value in $extra.Values){if($value -match '[%!^&|<>\r\n\x00]'){throw 'E02_AMBIGUOUS_BUILD_BATCH_VALUE'}}
                 $r=Invoke-Root 'build' ([Environment]::ProcessPath) @('-NoProfile','-NonInteractive','-Command',$worker) 1800 $false '' $extra
                 Require-RootPass $r
+                $resolved=[IO.File]::ReadAllLines((Need-File $pathReceipt));$actualSdk=[IO.File]::ReadAllLines((Need-File $sdkReceipt))
+                if($resolved.Length -lt 1 -or (Assert-Path ([IO.Path]::GetFullPath($resolved[0]))) -ine $script:Freeze.toolPaths.dotnet -or
+                    $actualSdk.Length -ne 1 -or $actualSdk[0] -cne $script:Freeze.dotnetSdk.version){throw 'E02_ACTUAL_DOTNET_SELECTION_MISMATCH'}
                 $buildLog=Owned 'logs/build.log';$log=$script:Utf8.GetString([IO.File]::ReadAllBytes((Need-File $buildLog)));Safe-Text $log
                 if($log -match '(?im)\b(?:Win32_Process\.Create|external process broker|using (?:XGE|FASTBuild|Incredibuild|remote executor))\b'){throw 'BLOCKED_E02_BROKERED_OR_REMOTE_BUILD_ROUTE'}
                 if ($log -notmatch '(?m)^Result: Succeeded\s*$' -or $log -notmatch '14\.44\.35229' -or $log -notmatch '10\.0\.22621\.0') {throw 'E02_BUILD_SUCCESS_OR_SELECTED_TOOLCHAIN_UNVERIFIED'}
                 $dll=Descriptor (Join-Path $script:Stage 'Binaries\Win64\UnrealEditor-WarhammerClient.dll')
                 $generated=@(Get-ChildItem -LiteralPath (Join-Path $script:Stage 'Intermediate') -Recurse -Filter 'E02WorldProofGameMode.generated.h' -File)
                 if ($generated.Count -ne 1 -or $dll.bytes -le 0) {throw 'E02_UHT_OR_EDITOR_BINARY_MISSING'}
-                $script:Result.build=@{log=Descriptor $buildLog;editorBinary=$dll;generatedHeader=Descriptor $generated[0].FullName;packaging='NOT_RUN'}
+                $script:Result.build=@{log=Descriptor $buildLog;editorBinary=$dll;generatedHeader=Descriptor $generated[0].FullName;packaging='NOT_RUN';
+                    dotnetSelection=@{executable=(Descriptor ([IO.Path]::GetFullPath($resolved[0])));sdkVersion=$actualSdk[0];sdk=$script:Freeze.dotnetSdk;
+                        pathReceipt=(Descriptor $pathReceipt);sdkReceipt=(Descriptor $sdkReceipt);workingDirectory=$extra.E02_ENGINE_SOURCE;
+                        sameCmdEnvironmentAsBuild=$true;pathext='.EXE';initialBypassVariablesCleared=@('UE_USE_SYSTEM_DOTNET','UE_DOTNET_VERSION','UE_DOTNET_DIR','UE_DOTNET_ARCH','ProgramFiles(Arm)')}}
                 Check-StagedPluginClosure -RequireTargetReceipt
                 $script:Result.build.targetReceipt=$script:Result.pluginClosure.targetReceipt.artifact
                 $script:Result.status='BUILD_PASS'
@@ -1204,14 +1333,37 @@ try {
         }
         $script:Result.completedUtc=[DateTime]::UtcNow.ToString('o')
         # Dispose the run lock before final serialization, retaining close errors.
-        if($null -ne $script:Lock){try{$script:Lock.Dispose();$script:Lock=$null}catch{$script:Errors.Add((Failure $_ 'run-lock-close'));$script:Result.executionPassed=$false;$script:Result.status='FAIL'}}
+        if($null -ne $script:Lock){try{$script:Lock.Dispose();$script:Lock=$null}catch{
+            $diagnostic=Failure $_ 'run-lock-close';$script:Errors.Add($diagnostic)
+            if($null -eq $script:Result.primaryFailure){$script:Result.primaryFailure=$diagnostic}
+            $script:Result.executionPassed=$false;$script:Result.status='FAIL'
+        }}
         if($script:Errors.Count -gt 0){$script:Result.executionPassed=$false;$script:Result.status='FAIL'}
         try {
-            Write-JsonNew (Join-Path $script:PhaseRoot 'result.json') $script:Result
-            if($Phase -eq 'Audit') {Write-JsonNew (Owned 'result.json') @{schemaVersion=1;runId=$RunId;status=$script:Result.status;executionPassed=$script:Result.executionPassed;finalAcceptance='NOT_ESTABLISHED';phaseResults=$script:Result.predecessors;auditResult=Descriptor (Join-Path $script:PhaseRoot 'result.json')}}
-            if($script:Result.executionPassed){$exitCode=0}
+            $phaseResultPath=Join-Path $script:PhaseRoot 'result.json'
+            Write-JsonNew $phaseResultPath $script:Result
+            $requiredArtifacts=@((Descriptor $phaseResultPath))
+            if($Phase -eq 'Audit') {
+                Write-JsonNew (Owned 'result.json') @{schemaVersion=1;runId=$RunId;status=$script:Result.status;executionPassed=$script:Result.executionPassed;
+                    completionRequired=$true;publicationState='PROVISIONAL_REQUIRES_AUDIT_COMPLETION_RECORD';completionPath=$script:Result.completionPath;
+                    finalAcceptance='NOT_ESTABLISHED';phaseResults=$script:Result.predecessors;auditResult=$requiredArtifacts[0]}
+                $requiredArtifacts+=Descriptor (Owned 'result.json')
+            }
+            # This last atomic publication is the authoritative success record.
+            # Earlier immutable raw results remain provisional if any step fails.
+            if($script:Result.executionPassed){
+                Write-JsonNew $script:Result.completionPath @{schemaVersion=1;runId=$RunId;phase=$Phase;state='COMPLETE';executionPassed=$true;
+                    completedUtc=[DateTime]::UtcNow.ToString('o');sourceHead=$script:Freeze.sourceHead;freezeManifest=(Descriptor $FreezeManifestPath);
+                    phaseResult=$requiredArtifacts[0];requiredArtifacts=$requiredArtifacts}
+                $publicationComplete=$true;$exitCode=0
+            }
         } catch {
             $diagnostic=Failure $_ 'result-finalization'
+            $script:Errors.Add($diagnostic)
+            if($null -eq $script:Result.primaryFailure){$script:Result.primaryFailure=$diagnostic}
+            $script:Result.executionPassed=$false;$script:Result.status='FAIL';$script:Result.publicationState='FINALIZATION_FAILED';$publicationComplete=$false;$exitCode=1
+            try{Write-JsonNew (Join-Path $script:PhaseRoot 'finalization-failure.json') $script:Result}
+            catch{$script:Errors.Add((Failure $_ 'finalization-failure-record'))}
             [Console]::Error.WriteLine((ConvertTo-Json -InputObject @{runId=$RunId;phase=$Phase;status='FAIL';primaryFailure=$script:Result.primaryFailure;finalizationFailure=$diagnostic;secondaryErrors=@($script:Errors)} -Depth 20 -Compress))
         }
     }
@@ -1219,5 +1371,6 @@ try {
 }
 if($null -eq $script:Result){
     [Console]::Error.WriteLine((ConvertTo-Json -InputObject @{runId=$RunId;phase=$Phase;status='FAIL_BEFORE_PHASE_CREATION';failure=$primary} -Compress -Depth 10))
-} else {[Console]::Out.WriteLine((ConvertTo-Json -InputObject @{runId=$RunId;phase=$Phase;status=$script:Result.status;executionPassed=$script:Result.executionPassed;result=(Join-Path $script:PhaseRoot 'result.json')} -Compress))}
+} else {[Console]::Out.WriteLine((ConvertTo-Json -InputObject @{runId=$RunId;phase=$Phase;status=$script:Result.status;executionPassed=($script:Result.executionPassed -and $publicationComplete);
+    publicationComplete=$publicationComplete;completion=$(if($publicationComplete){$script:Result.completionPath}else{$null});result=(Join-Path $script:PhaseRoot 'result.json')} -Compress))}
 exit $exitCode

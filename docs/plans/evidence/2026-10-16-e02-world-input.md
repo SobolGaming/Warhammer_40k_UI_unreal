@@ -164,3 +164,16 @@ context must exclude this report, remediation notes, peer conclusions and Git
 message bodies. This failed source gate supplies no execution permission and
 neither final OWN15 role. Actual execution, visible-window approval, rendered
 evidence and final CODE/REQ acceptance remain separate pending gates.
+
+The completed remediation preserves the exact16 case names and fixture defaults.
+The wrapper accepts the specified graphical summary suffix, binds both Roslyn
+binaries and the complete compiler-reference membership, checks the bundled .NET
+selection in the actual build environment, and requires a completion record
+published after every required phase artifact. Geometry uses nearest depth then
+case-sensitive stable identity for exactly tied depths. Existing input cases now
+compare actual logical displacement against independently measured Slate bases;
+resized clicks bind the fresh input event's ray/hit and independently solve the
+frozen circle-top intersection. These statements describe source changes only.
+Static parsing, whitespace/link/security inspection are checkpoint checks; no
+E02 control, compiler invocation, native case or visible window has run. A fresh
+frozen independent source assessment is still required before execution.
