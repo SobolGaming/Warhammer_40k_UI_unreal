@@ -650,6 +650,18 @@ bool ReadOutcome(int32 HttpStatus, const FString& Text, FOutcome& OutOutcome, FR
         }
         return false;
     }
+    const TSharedPtr<FJsonObject> Visibility = ObjectField(Metadata, TEXT("visibility"));
+    TOptional<FString> SessionViewer;
+    FString SessionRole;
+    if (!StringField(Visibility, TEXT("role"), SessionRole) ||
+        !NullableString(Field(Visibility, TEXT("player_id")), SessionViewer) ||
+        !Role.Equals(SessionRole, ESearchCase::CaseSensitive) || Viewer.IsSet() != SessionViewer.IsSet() ||
+        (Viewer.IsSet() && !Viewer.GetValue().Equals(SessionViewer.GetValue(), ESearchCase::CaseSensitive)) ||
+        !RangeCursor.Equals(Cursor, ESearchCase::CaseSensitive))
+    {
+        return Fail(OutError, TEXT("invalid_outcome_context"),
+            TEXT("Outcome checkpoint viewer scope and event-range endpoint must match its session metadata."));
+    }
     Candidate.bCommandOutcome = true;
     Candidate.SessionRevision = Revision;
     OutOutcome = MoveTemp(Candidate);

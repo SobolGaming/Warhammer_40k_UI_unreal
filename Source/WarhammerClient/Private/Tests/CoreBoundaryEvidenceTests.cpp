@@ -646,6 +646,72 @@ bool FE01StrictNegatives::RunTest(const FString& Parameters)
     }
     FOutcome Outcome;
     TestTrue(TEXT("Canonical accepted outcome"), ReadOutcome(200, OutcomeText, Outcome, ReadError));
+    {
+        // Synthetic context controls derived from the canonical source fixture;
+        // these are not additional live captures or authorization evidence.
+        const auto RejectContext = [this, &Outcome, &ReadError](const FString& Label, const FString& ChangedText)
+        {
+            TestFalse(Label, ReadOutcome(200, ChangedText, Outcome, ReadError));
+            TestTrue(Label + TEXT(" has an explicit context diagnostic"), Exact(ReadError.Code, TEXT("invalid_outcome_context")));
+            TestFalse(Label + TEXT(" clears prior receipt JSON"), Outcome.Json.IsValid());
+        };
+        TSharedPtr<FJsonObject> Context;
+        FString ContextText;
+        ParseObject(OutcomeText, Context, ReadError);
+        const TSharedPtr<FJsonObject> Range = Context->GetObjectField(TEXT("event_range"));
+        const FString OriginalEnd = Field(Range, TEXT("to_cursor"))->AsString();
+        FString ChangedEnd = OriginalEnd;
+        ChangedEnd[0] = FChar::IsUpper(OriginalEnd[0]) ? FChar::ToLower(OriginalEnd[0]) : FChar::ToUpper(OriginalEnd[0]);
+        TestFalse(TEXT("Range-end control changes actual cursor case"), Exact(OriginalEnd, ChangedEnd));
+        Range->SetStringField(TEXT("to_cursor"), ChangedEnd);
+        Serialize(Context, ContextText);
+        RejectContext(TEXT("Mismatched event-range endpoint rejected"), ContextText);
+        ParseObject(OutcomeText, Context, ReadError);
+        Context->GetObjectField(TEXT("checkpoint"))->SetStringField(TEXT("visibility_role"), TEXT("player"));
+        Serialize(Context, ContextText);
+        RejectContext(TEXT("Mismatched checkpoint role rejected"), ContextText);
+        for (const TCHAR* Key : {TEXT("from_cursor"), TEXT("to_cursor")})
+        {
+            ParseObject(OutcomeText, Context, ReadError);
+            Context->GetObjectField(TEXT("event_range"))->SetField(Key, MakeShared<FJsonValueNull>());
+            Serialize(Context, ContextText);
+            RejectContext(TEXT("Null event-range cursor rejected"), ContextText);
+        }
+        ParseObject(OutcomeText, Context, ReadError);
+        const TSharedPtr<FJsonObject> PlayerVisibility = Context->GetObjectField(TEXT("session"))->GetObjectField(TEXT("visibility"));
+        PlayerVisibility->SetStringField(TEXT("role"), TEXT("player"));
+        PlayerVisibility->SetStringField(TEXT("player_id"), TEXT("player-a"));
+        PlayerVisibility->SetBoolField(TEXT("may_mutate_lifecycle"), false);
+        PlayerVisibility->SetBoolField(TEXT("may_submit_decision"), true);
+        PlayerVisibility->SetBoolField(TEXT("omniscient"), false);
+        Context->GetObjectField(TEXT("checkpoint"))->SetStringField(TEXT("visibility_role"), TEXT("player"));
+        Context->GetObjectField(TEXT("checkpoint"))->SetStringField(TEXT("viewer_player_id"), TEXT("player-a"));
+        FString PlayerText;
+        Serialize(Context, PlayerText);
+        TestTrue(TEXT("Matching non-null player scope remains valid"), ReadOutcome(200, PlayerText, Outcome, ReadError));
+        TestTrue(TEXT("Matching null administrator scope remains valid"), ReadOutcome(200, OutcomeText, Outcome, ReadError));
+        for (const bool bCheckpoint : {false, true})
+        {
+            ParseObject(PlayerText, Context, ReadError);
+            const TSharedPtr<FJsonObject> Scope = bCheckpoint ? Context->GetObjectField(TEXT("checkpoint")) :
+                Context->GetObjectField(TEXT("session"))->GetObjectField(TEXT("visibility"));
+            const TCHAR* ViewerKey = bCheckpoint ? TEXT("viewer_player_id") : TEXT("player_id");
+            Scope->SetField(ViewerKey, MakeShared<FJsonValueNull>());
+            Serialize(Context, ContextText);
+            RejectContext(TEXT("One-sided null viewer rejected"), ContextText);
+            Scope->SetBoolField(ViewerKey, false);
+            Serialize(Context, ContextText);
+            RejectContext(TEXT("Boolean viewer cannot replace null or string"), ContextText);
+        }
+        ParseObject(PlayerText, Context, ReadError);
+        Context->GetObjectField(TEXT("checkpoint"))->SetStringField(TEXT("viewer_player_id"), TEXT("Player-a"));
+        Serialize(Context, ContextText);
+        RejectContext(TEXT("Case-changed checkpoint viewer rejected"), ContextText);
+        ParseObject(PlayerText, Context, ReadError);
+        Context->GetObjectField(TEXT("session"))->GetObjectField(TEXT("visibility"))->SetField(TEXT("role"), MakeShared<FJsonValueNull>());
+        Serialize(Context, ContextText);
+        RejectContext(TEXT("Null session visibility role rejected"), ContextText);
+    }
     for (const TCHAR* Key : {TEXT("schema_version"), TEXT("outcome_code"), TEXT("operation")})
     {
         TSharedPtr<FJsonObject> Changed;

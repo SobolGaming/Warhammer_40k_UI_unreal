@@ -37,6 +37,7 @@ DIAGNOSTIC_LABEL = "E01-SLOW120"
 REQUEST_DEADLINE_SECONDS = 120
 SOCKET_READ_CAP_SECONDS = 120
 MAX_EXACT_INTEGER = 2**53 - 1
+MAX_JSON_DEPTH = 128  # Same bounded evidence-reader limit as the native parser.
 CASE_IDS = ("SOURCE-01", "FINITE-01", "MOVE-01", "MOVE-02", "RETRY-01", "STALE-01", "AUTH-01", "VIEW-01", "ERROR-01", "FIDELITY-01", "SCOPE-01", "LIFETIME-01")
 SLUG = re.compile(r"^[A-Za-z0-9_-]+$")
 
@@ -67,10 +68,46 @@ def sha256(data: bytes) -> str:
 
 
 def json_bytes(value: object) -> bytes:
-    return (json.dumps(value, sort_keys=True, indent=2, ensure_ascii=True, allow_nan=False) + "\n").encode("utf-8")
+    try:
+        data = (json.dumps(value, sort_keys=True, indent=2, ensure_ascii=True, allow_nan=False) + "\n").encode("utf-8")
+    except RecursionError as exc:
+        raise BoundaryError("JSON exceeds supported encoder nesting") from exc
+    check_json_nesting(data)
+    return data
+
+
+def check_json_nesting(data: bytes) -> None:
+    """Bound value depth like native Value(0), leaving syntax to strict_json."""
+    depth, quoted_depth, quoted, escaped = 0, 0, False, False
+    for index, value in enumerate(data):
+        if quoted:
+            if escaped:
+                escaped = False
+            elif value == 92:  # backslash
+                escaped = True
+            elif value == 34:  # quote
+                quoted = False
+                following = index + 1
+                while following < len(data) and data[following] in b" \t\r\n":
+                    following += 1
+                # Object keys are not values. Empty containers at depth 128
+                # are allowed; their child values would be at depth 129.
+                if following == len(data) or data[following] != 58:
+                    require(quoted_depth <= MAX_JSON_DEPTH, "JSON exceeds supported value nesting")
+        elif value == 34:
+            quoted = True
+            quoted_depth = depth
+        elif value in (91, 123):  # array/object start
+            require(depth <= MAX_JSON_DEPTH, "JSON exceeds supported value nesting")
+            depth += 1
+        elif value in (93, 125):
+            depth = max(0, depth - 1)
+        elif value not in b" \t\r\n,:":
+            require(depth <= MAX_JSON_DEPTH, "JSON exceeds supported value nesting")
 
 
 def strict_json(data: bytes) -> object:
+    check_json_nesting(data)
     def reject_constant(value: str) -> None:
         raise BoundaryError("Non-finite JSON number")
 
@@ -81,7 +118,10 @@ def strict_json(data: bytes) -> object:
             result[key] = value
         return result
 
-    return json.loads(data.decode("utf-8"), parse_constant=reject_constant, object_pairs_hook=unique_pairs)
+    try:
+        return json.loads(data.decode("utf-8"), parse_constant=reject_constant, object_pairs_hook=unique_pairs)
+    except RecursionError as exc:
+        raise BoundaryError("JSON exceeds supported decoder nesting") from exc
 
 
 def object_field(value: object, key: str) -> dict:
@@ -243,7 +283,10 @@ class Schemas:
 
     def validate(self, name: str, payload: object) -> None:
         require(name in self.schemas, "Frozen local schema missing: " + name)
-        errors = list(self.validator_type(self.schemas[name], registry=self.registry).iter_errors(payload))
+        try:
+            errors = list(self.validator_type(self.schemas[name], registry=self.registry).iter_errors(payload))
+        except RecursionError as exc:
+            raise BoundaryError("JSON exceeds supported schema-validator nesting") from exc
         require(not errors, "JSON schema rejected payload: " + name)
 
 
@@ -558,33 +601,101 @@ class OwnedHost:
 
     def stop(self, *, timed_out: bool = False) -> None:
         with self.lock:
+            first_error = None
+
+            def failed(stage: str, exc: BaseException) -> None:
+                nonlocal first_error
+                if first_error is None:
+                    first_error = (stage, exc)
+                errno, winerror = getattr(exc, "errno", None), getattr(exc, "winerror", None)
+                self.record.setdefault("cleanupErrors", []).append({"stage": stage, "exceptionType": type(exc).__name__, "errno": errno if type(errno) is int else None, "winerror": winerror if type(winerror) is int else None})
+
+            def poll_owned():
+                try:
+                    return self.process.poll()
+                except OSError as exc:
+                    failed("poll-owned-process", exc)
+                    return None  # Unconfirmed means cleanup must still proceed.
+
             if timed_out:
                 self.record["timedOut"] = True
-            if self.timer is not None:
-                self.timer.cancel()
-            if self.process is not None and self.process.poll() is None:
-                self.shutdown.touch(exist_ok=False)
-                try:
-                    self.process.wait(timeout=10)
-                    self.record["shutdown"] = "owned-marker"
-                except subprocess.TimeoutExpired:
-                    # Popen retains the original process handle; no PID/port/name lookup.
-                    self.process.terminate()
+            try:
+                if self.process is not None and poll_owned() is None:
+                    fallback = False
                     try:
-                        self.process.wait(timeout=10)
-                    except subprocess.TimeoutExpired:
-                        self.process.kill()
-                        self.process.wait(timeout=10)
-                    self.record["shutdown"] = "owned-process-handle-fallback"
-            if self.process is not None:
-                self.record["exitCode"] = self.process.returncode
-                self.record["exitUTC"] = datetime.now(UTC).isoformat()
-            if self.log is not None:
-                self.log.close()
-                self.log = None
-            self.report.details.setdefault("processes", [])
-            if self.record not in self.report.details["processes"]:
-                self.report.details["processes"].append(self.record)
+                        self.shutdown.touch(exist_ok=False)
+                    except OSError as exc:
+                        failed("write-owned-shutdown-marker", exc)
+                        fallback = True
+                    if not fallback:
+                        try:
+                            self.process.wait(timeout=10)
+                            self.record["shutdown"] = "owned-marker"
+                        except subprocess.TimeoutExpired:
+                            fallback = True
+                        except OSError as exc:
+                            failed("wait-owned-marker-exit", exc)
+                            fallback = True
+                    if fallback and poll_owned() is None:
+                        # Marker I/O can fail. The original Popen handle still
+                        # owns this exact child; never discover/kill by PID/name.
+                        self.record["shutdown"] = "owned-process-handle-fallback"
+                        try:
+                            self.process.terminate()
+                            self.process.wait(timeout=10)
+                        except (OSError, subprocess.TimeoutExpired) as exc:
+                            if not isinstance(exc, subprocess.TimeoutExpired):
+                                failed("terminate-owned-process", exc)
+                            if poll_owned() is None:
+                                self.record["shutdown"] = "owned-process-handle-kill"
+                                try:
+                                    self.process.kill()
+                                    self.process.wait(timeout=10)
+                                except (OSError, subprocess.TimeoutExpired) as kill_error:
+                                    failed("kill-owned-process", kill_error)
+            finally:
+                # Preserve cleanup evidence even if marker, wait, or log I/O
+                # fails. A subsequent stop can retry an unclosed owned log.
+                try:
+                    if self.log is not None:
+                        for _ in range(2):
+                            try:
+                                self.log.close()
+                                self.log = None
+                                self.record["logClosed"] = True
+                                break
+                            except (OSError, ValueError) as exc:
+                                failed("close-owned-log", exc)
+                                self.record["logClosed"] = False
+                finally:
+                    try:
+                        exited = self.process is None
+                        if self.process is not None:
+                            self.record["exitCode"] = poll_owned()
+                            exited = self.record["exitCode"] is not None
+                            if exited:
+                                self.record.setdefault("exitUTC", datetime.now(UTC).isoformat())
+                            else:
+                                failed("confirm-owned-exit", BoundaryError("Owned host exit unconfirmed"))
+                        # Keep the original absolute-deadline watchdog if a
+                        # bounded cleanup cannot confirm this child's exit.
+                        if self.timer is not None:
+                            if exited:
+                                try:
+                                    self.timer.cancel()
+                                    self.record["watchdog"] = "cancelled-after-confirmed-exit"
+                                except (OSError, RuntimeError) as exc:
+                                    failed("cancel-owned-timer", exc)
+                            else:
+                                self.record["watchdog"] = "deadline-fired-exit-unconfirmed" if timed_out else "retained-for-unconfirmed-exit"
+                        self.record["cleanupStatus"] = "EXIT_UNCONFIRMED" if not exited else "STOPPED_WITH_ERRORS" if self.record.get("cleanupErrors") else "STOPPED"
+                    finally:
+                        self.report.details.setdefault("processes", [])
+                        if self.record not in self.report.details["processes"]:
+                            self.report.details["processes"].append(self.record)
+            if first_error is not None:
+                stage, cause = first_error
+                raise BoundaryError("Owned host cleanup failed at " + stage + "; ownership and fallback results retained") from cause
 
 
 def owned_bind_marker(log_path: Path, port: int) -> str | None:
@@ -715,11 +826,23 @@ def create_session_attempt(client, config: dict, report: Report, schemas: Schema
     try:
         response = client.request("POST", "/sessions", "admin", config)
         reply = response[1] if paired else response
-        if reply.status == 201:
-            string_field(reply.body, "session_id")
-        else:
-            require(classify(reply.status, reply.body) == "error", "Session create response is not a recognized receipt")
-            schemas.validate("error-envelope.schema.json", reply.body)
+        receipts = response if paired else (response,)
+        for received in receipts:
+            if received.status == 201:
+                metadata, submitted = received.body, object_field(config, "config")
+                schemas.validate("session-metadata.schema.json", metadata)
+                # The session ID remains opaque. Bind its complete returned
+                # metadata to the submitted game, selected runtime and admin
+                # creation scope before using that ID for any command.
+                string_field(metadata, "session_id")
+                require(string_field(metadata, "game_id") == string_field(submitted, "game_id") and metadata.get("engine_build_id") == BUILD_ID and metadata.get("server_contract_version") == CONTRACT_VERSION, "Created session game/build/contract identity differs")
+                require(int_field(metadata, "session_revision") == 0 and metadata.get("session_state") == "created" and metadata.get("terminal_reason") is None, "Created session is not the initial revision/state")
+                require(object_field(metadata, "visibility") == {"role": "administrator", "player_id": None, "delay_revisions": 0, "may_mutate_lifecycle": True, "may_submit_decision": False, "omniscient": True}, "Created session administrator scope differs")
+                descriptor, catalog = object_field(submitted, "ruleset_descriptor"), object_field(submitted, "army_catalog")
+                require(metadata.get("ruleset_id") == descriptor.get("ruleset_id") and metadata.get("rules_overlay_ids") == descriptor.get("rules_overlay_ids") and metadata.get("catalog_id") == string_field(catalog, "catalog_id") and metadata.get("source_package_id") == string_field(catalog, "source_package_id"), "Created session rules/catalog identities differ from its submitted config")
+            else:
+                require(classify(received.status, received.body) == "error", "Session create response is not a recognized receipt")
+                schemas.validate("error-envelope.schema.json", received.body)
     except (BoundaryError, OSError, http_client.HTTPException, KeyError, IndexError, TypeError, ValueError) as exc:
         client.creation_unknown = True
         if paired:
@@ -1507,6 +1630,28 @@ def run_case_groups(report: Report, groups: tuple) -> None:
                 report.case("GROUP-" + "-".join(ids) + "-POST-RESULT-ERROR", "BLOCKED" if isinstance(exc, Blocked) else "FAIL", "Case group and its cleanup complete without an unreported exception", {"caseIds": list(ids), "exceptionType": type(exc).__name__, "message": str(exc), "priorCaseResultsRetained": True})
 
 
+def finish_capture(host: OwnedHost, captures: Captures, report: Report, primary_failure: BaseException | None = None) -> None:
+    """Cleanup failure cannot omit already-owned artifacts or case dispositions."""
+    cleanup_errors = []
+    for stage, action in (("stop-owned-host", host.stop), ("finish-owned-captures", captures.finish)):
+        try:
+            action()
+        except Exception as exc:
+            cleanup_errors.append((stage, exc))
+    if cleanup_errors:
+        report.details["captureCleanupFailures"] = [{"stage": stage, "exceptionType": type(exc).__name__, "causeType": None if exc.__cause__ is None else type(exc.__cause__).__name__} for stage, exc in cleanup_errors]
+    failure = {"completionOutcome": "UNKNOWN" if isinstance(primary_failure, CompletionUnknown) else "NOT_ASSERTED", "exceptionType": None if primary_failure is None else type(primary_failure).__name__, "disposition": "Predecessor failed or canonical public scenario unavailable"}
+    if primary_failure is not None:
+        report.details["captureFailure"] = failure
+    for case_id in CASE_IDS:
+        if not any(case["id"] == case_id for case in report.cases):
+            report.case(case_id, "BLOCKED", "Packet meaningful case matrix", failure)
+    # Preserve an in-flight failure, especially UNKNOWN, through later cleanup
+    # failure. Both safe classifications remain in the exported phase evidence.
+    if cleanup_errors and primary_failure is None:
+        raise cleanup_errors[0][1]
+
+
 def capture(args: argparse.Namespace, report: Report) -> None:
     verify_runtime(args, report)
     schemas = Schemas(args.fixture_root)
@@ -1525,6 +1670,7 @@ def capture(args: argparse.Namespace, report: Report) -> None:
     captures = Captures(args, report, schemas)
     host = OwnedHost(args, report, tokens, "managed-primary")
     pair = None
+    primary_failure = None
     try:
         http = host.start()
         pair = Pair(Endpoint(tokens), http, captures)
@@ -1551,12 +1697,11 @@ def capture(args: argparse.Namespace, report: Report) -> None:
         trace = args.output_root / "private-trace.json"
         write_new(trace, json_bytes(pair.trace), report.secrets)
         report.artifact(trace)
+    except BaseException as exc:
+        primary_failure = exc
+        raise
     finally:
-        host.stop()
-        captures.finish()
-        for case_id in CASE_IDS:
-            if not any(case["id"] == case_id for case in report.cases):
-                report.case(case_id, "BLOCKED", "Packet meaningful case matrix", "Predecessor failed or canonical public scenario unavailable")
+        finish_capture(host, captures, report, primary_failure)
 
 
 def audit(args: argparse.Namespace, report: Report) -> None:
@@ -1614,7 +1759,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         {"preflight": preflight, "verify-runtime": verify_runtime, "capture": capture, "audit": audit}[args.phase](args, report)
     except (Blocked, BoundaryError, OSError, TimeoutError, subprocess.SubprocessError, http_client.HTTPException, ImportError, KeyError, IndexError, TypeError, ValueError) as exc:
-        report.case("PHASE", "BLOCKED" if isinstance(exc, (Blocked, ImportError)) else "FAIL", "All phase prerequisites and cases", str(exc))
+        detail = {"completionOutcome": "UNKNOWN", "sessionDisposition": "ABANDONED", "exceptionType": type(exc).__name__, "causeType": None if exc.__cause__ is None else type(exc.__cause__).__name__} if isinstance(exc, CompletionUnknown) else str(exc)
+        report.case("PHASE", "BLOCKED" if isinstance(exc, (Blocked, ImportError)) else "FAIL", "All phase prerequisites and cases", detail)
     payload = report.payload()
     write_new(args.report_file, json_bytes(payload), report.secrets)
     print(json.dumps({"phase": args.phase, "status": payload["status"], "caseCounts": payload["caseCounts"], "reportFile": str(args.report_file)}))

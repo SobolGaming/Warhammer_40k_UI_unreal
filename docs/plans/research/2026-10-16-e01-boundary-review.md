@@ -652,3 +652,28 @@ command manifest1C6996AC3B0DC306AC7A561E6B03C82FE2234436AB3D8BAC68063B361DE79F4E
 and artifact manifest466497E1E702973B60584B11CB8DC9E9EACD322D3912CF5E664F060070CDBF65.
 Repairs remain within revision6; no new Core Capture/build/native run occurred.
 This factual record supplies no independent acceptance or waiver of findings.
+
+## OWN15 round-5 pre-execution source review
+
+Fresh exec01a147a0-809c-7033-987b-4bcf4c3b4b3a assessed clean83815a4a12b049d7ecd537328fd47d201e4e34e2.
+The [byte-exact report](2026-10-17-e01-slow120-code-review-r5.md), SHA256
+6747105F88422C6654DCE5B9FB43E9C54EC70780158EBDBD78D78C9D10AE3F70,
+is CHANGES_REQUESTED for four P2s: native event-range-end/viewer consistency,
+complete pinned creation metadata before commands, owned-host cleanup/log/ledger
+finalization after shutdown-marker failure, and typed UNKNOWN for deeply nested
+unusable terminal JSON. Static findings; no fault reproductions ran.
+
+The CLI completed2026-10-17T02:17:07.3701896Z exit0,30 static commands; all174
+source hashes remained unchanged and the tree clean. It inspected72-unit and19
+simulated guard raw evidence, not a current Core/native run. Its Python syntax
+launch was sandbox denied with no bypass. No author notes or peer reports entered
+the initial context. Actual runtime independently records gpt-6.1-sol/ultra,
+read-only/never and memory_mode disabled. Lower-level memory internals remain
+unverified; the original report's narrower personal visibility is unchanged.
+
+Ignored code-c5-20261017T021049Z-5171b09b retains runtime evidence
+BDE60083F4F79079DE8A6E28D410102B21D570AC457FA9E1E79D26975A619FFA,
+command manifest74440440AEAF9E527BEF6B88CB8B2C8863C2DFA229C97BED198A64BDCAEE0FC0,
+artifact manifest1F7903E3423B5F48F041BF6A692781C19E62052C880BBC5883CE00855190BCC1.
+The repairs stay within revision6; no Core phase, native build or acceptance
+is credited. This coordinator entry does not supply an independent verdict.

@@ -51,7 +51,17 @@ retain their exact generated configuration and submitted administrator scope
 privately before send, mark possible response loss UNKNOWN, and stop without
 downstream start/action/retry. This API has no supported creation idempotency;
 do not invent a command ID/key or recreate the session to conceal uncertainty.
+Validate the complete actual creation metadata against the frozen schema,
+configured game and pinned build/contract/admin scope before any later command.
 This adjacent failure-control repair changes no Core API or hosting capability.
+
+Native receipt consistency includes event-range end and session/checkpoint viewer
+scope, matching the Python guard. Keep known valid controls and reject mismatches.
+Owned host stop must retain handle-based cleanup, closed logs and a finalized
+process ledger even if writing its shutdown marker fails. Test marker failure
+without a real host. Deeply nested unusable terminal JSON must become a typed
+UNKNOWN with process evidence retained and no dependent submission; use a real
+parser failure control. These repairs add no host or game capabilities.
 
 For the normal fresh chain, Native must bind its reviewed versioned wire index
 and every body to **this run's** successful Capture report/artifact hashes before
