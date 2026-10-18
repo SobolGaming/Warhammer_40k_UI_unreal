@@ -122,7 +122,7 @@ struct FE02ProofState
     bool bReady = false, bSceneBuilt = false, bEnding = false, bInitialSceneWritten = false, bInjectingActivation = false;
     uint64 Events = 0, Picks = 0, CameraChanges = 0;
     FPointerSample LastPickPointer;
-    FRay LastPickRay;
+    Warhammer::Migration::E02::FRay LastPickRay;
     TOptional<FAdvisoryHit> LastPickHit;
     TSharedPtr<FJsonObject> LastKeyEvent;
     uint64 LastPickGeneration = 0, LastPickEventSequence = 0;
@@ -532,13 +532,15 @@ struct FE02ProofState
             ++CameraChanges; UpdateCamera();
         }
     }
-    bool Query(const FPointerSample& Pointer, FAdvisoryHit& Hit, FString& Diagnostic, FRay* ActualRay = nullptr)
+    bool Query(const FPointerSample& Pointer, FAdvisoryHit& Hit, FString& Diagnostic,
+        Warhammer::Migration::E02::FRay* ActualRay = nullptr)
     {
         FVector Origin, Direction;
         FDiagnostic Detail;
         const bool bDeprojected = Controller.IsValid() && Pointer.bInsideViewport &&
             Controller->DeprojectScreenPositionToWorld(static_cast<float>(Pointer.ViewportPhysical.X), static_cast<float>(Pointer.ViewportPhysical.Y), Origin, Direction);
-        const FRay RayValue = bDeprojected ? FRay{Origin, Direction.GetSafeNormal()} : FRay{};
+        const Warhammer::Migration::E02::FRay RayValue = bDeprojected
+            ? Warhammer::Migration::E02::FRay{Origin, Direction.GetSafeNormal()} : Warhammer::Migration::E02::FRay{};
         if (ActualRay) { *ActualRay = RayValue; }
         const bool bHit = bDeprojected && RaycastAdvisory(Fixture.Frame, Fixture.Models, Fixture.Supports, RayValue, Hit, Detail);
         Diagnostic = bDeprojected ? DiagnosticCodeName(Detail.Code) : TEXT("DeprojectionUnavailable");
@@ -820,7 +822,7 @@ public:
         if (Hit.Owner == EInputOwner::Text && !Proof->Policy.Snapshot().Capture.IsSet()) { Proof->Policy.SetTextEditing(true); }
         const FInputEffects Effect = Proof->Policy.Press(P, Button, Hit); Proof->Apply(Effect, P);
         Proof->Trace(TEXT("PointerDown"), P, Hit, Before, Effect);
-        FReply Reply = FReply::Handled().SetKeyboardFocus(SharedThis(this));
+        FReply Reply = FReply::Handled().SetUserFocus(SharedThis(this));
         if (Effect.bAcquireCapture) { Reply.CaptureMouse(SharedThis(this)); }
         return Reply;
     }
@@ -1044,6 +1046,8 @@ AE02WorldProofGameMode::AE02WorldProofGameMode()
     PrimaryActorTick.bCanEverTick = true; PlayerControllerClass = AE02ProofPlayerController::StaticClass();
     DefaultPawnClass = nullptr; HUDClass = nullptr; Proof = MakeUnique<FE02ProofState>();
 }
+// Keep the hot-reload helper constructor where the private state is complete.
+AE02WorldProofGameMode::AE02WorldProofGameMode(FVTableHelper& Helper) : Super(Helper) {}
 AE02WorldProofGameMode::~AE02WorldProofGameMode() = default;
 void AE02WorldProofGameMode::BeginPlay()
 {
@@ -1215,7 +1219,7 @@ bool AE02WorldProofGameMode::QueryScreenPoint(const FVector2D& Absolute, FAdviso
 {
     return IsProofReady() && Proof->Surface.IsValid() && Proof->Query(Proof->Sample(Proof->Surface->GetCachedGeometry(), Absolute), Hit, Diagnostic);
 }
-bool AE02WorldProofGameMode::GetLastWorldPick(FPointerSample& Pointer, FRay& Ray,
+bool AE02WorldProofGameMode::GetLastWorldPick(FPointerSample& Pointer, Warhammer::Migration::E02::FRay& Ray,
     FAdvisoryHit& Hit, uint64& PickGeneration, uint64& EventSequence) const
 {
     if (!Proof->LastPickHit.IsSet() || Proof->LastPickEventSequence == 0) { return false; }

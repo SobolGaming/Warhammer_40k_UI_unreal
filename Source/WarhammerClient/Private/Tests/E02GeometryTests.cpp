@@ -62,7 +62,7 @@ bool NearVector(FCaseAssertions& Test, const TCHAR* What, const FVector3d& Actua
 {
     return Test.TestTrue(What, (Actual - Expected).GetAbsMax() <= Tolerance);
 }
-FRay DownRay(const FTableFrame& Frame, const FVector3d& OriginDomain)
+Warhammer::Migration::E02::FRay DownRay(const FTableFrame& Frame, const FVector3d& OriginDomain)
 {
     return { DomainToWorld(Frame, OriginDomain), Frame.WorldFromTableCm.TransformVectorNoScale(FVector3d(0.0, 0.0, -1.0)) };
 }
@@ -191,7 +191,7 @@ bool FE02HeadingAxes::RunTest(const FString& Parameters)
     Assertions.TestTrue(TEXT("Rectangle length4/width2 boundary"), ContainsLocalPoint(Rectangle, FVector2d(2, 1)));
     Assertions.TestFalse(TEXT("Rectangle length stops beyond2"), ContainsLocalPoint(Rectangle, FVector2d(2.0001, 0)));
     Assertions.TestFalse(TEXT("Rectangle width is not accidentally4"), ContainsLocalPoint(Rectangle, FVector2d(0, 1.0001)));
-    FRay Ray = DownRay(F.Frame, FVector3d(42,25.4,10));
+    Warhammer::Migration::E02::FRay Ray = DownRay(F.Frame, FVector3d(42,25.4,10));
     FAdvisoryHit Hit;
     FDiagnostic Error;
     Assertions.TestTrue(TEXT("Rotated ellipse long axis lies along domainY"), RaycastModels(F.Frame, { Ellipse }, Ray, Hit, Error));
@@ -315,7 +315,7 @@ bool FE02ShapesWinding::RunTest(const FString& Parameters)
     // altering the frozen five-pose scene or consuming display geometry. IDs
     // differ only in case so an accidental case-insensitive comparison fails.
     const FTableFrame PickingFrame;
-    const FRay PickingRay = DownRay(PickingFrame, FVector3d(0,0,10));
+    const Warhammer::Migration::E02::FRay PickingRay = DownRay(PickingFrame, FVector3d(0,0,10));
     FFootprint ModelA = F.Models[0];
     ModelA.Id = TEXT("e02-A-model");
     ModelA.Pose = FDomainPose { FVector3d::ZeroVector, 0.0 };

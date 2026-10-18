@@ -377,8 +377,8 @@ private:
         const FVector3d ActorRotation = JsonVector3(Camera, TEXT("rotationDegrees"));
         FVector ViewPosition; FRotator ViewRotation;
         Controller->GetPlayerViewPoint(ViewPosition, ViewRotation);
-        const double A = FMath::DegreesToRadians(ExpectedAzimuth), E = FMath::DegreesToRadians(ExpectedElevation), Placement = FMath::DegreesToRadians(23.0);
-        const FVector3d Back(FMath::Cos(E) * FMath::Cos(A), FMath::Cos(E) * FMath::Sin(A), FMath::Sin(E));
+        const double AzimuthRadians = FMath::DegreesToRadians(ExpectedAzimuth), E = FMath::DegreesToRadians(ExpectedElevation), Placement = FMath::DegreesToRadians(23.0);
+        const FVector3d Back(FMath::Cos(E) * FMath::Cos(AzimuthRadians), FMath::Cos(E) * FMath::Sin(AzimuthRadians), FMath::Sin(E));
         const FVector3d ExpectedForward(-(FMath::Cos(Placement) * Back.X - FMath::Sin(Placement) * Back.Y),
             -(FMath::Sin(Placement) * Back.X + FMath::Cos(Placement) * Back.Y), -Back.Z);
         return FVector3d::Distance(ViewPosition, ActorPosition) <= 1e-3 && FVector3d::Distance(Data.ViewOrigin, ActorPosition) <= 1e-3 &&
@@ -933,7 +933,7 @@ private:
     }
     void AssertFreshCirclePick()
     {
-        FPointerSample Pointer; FRay Ray; FAdvisoryHit Hit; uint64 Generation = 0, SequenceNumber = 0;
+        FPointerSample Pointer; Warhammer::Migration::E02::FRay Ray; FAdvisoryHit Hit; uint64 Generation = 0, SequenceNumber = 0;
         if (!Check(World->GetLastWorldPick(Pointer, Ray, Hit, Generation, SequenceNumber), TEXT("Completed input event exposes its own actual ray/hit"))) { return; }
         Check(World->WorldPickCount() == ClickPicks + 1 && Generation == ClickPicks + 1 &&
             SequenceNumber > ClickEvents && SequenceNumber <= World->EventCount(), TEXT("Fresh ray is bound to this completed click generation and traced event sequence"));

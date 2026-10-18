@@ -73,7 +73,23 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-E02 candidate `8e048fc369536a76891031aa4883c888bf762aa8` received affected
+E02 candidate `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4` received affected
+**SOURCE PASS**. Run `20261018T002310Z-d6305fba` completed Preflight and all six
+supervisor controls in three groups/five roots, including child-start and
+expected timeout/injected failures. Each root confirms cleanup/final job active0.
+The first C++ build reached UBT/UHT and native compilation, then **FAILED** on
+UE API/type integration errors. Its root exited6 with cleanup confirmed and
+final job active0/total35. Nine Build settings states match before/after and
+Preflight.after; SupervisorControls has no separate snapshot pair.
+
+The run and hidden authority are **CLOSED_DO_NOT_REUSE**. Bounded compile fixes
+require checkpoint/freeze, fresh affected review and a new RunId before execution.
+Discovery, numeric/rendered/input Automation and GUI remain NOT RUN. The
+[E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) preserves the
+source PASS, actual completed controls, failed compiler output and closure.
+Visible-window approval, final CODE/REQ, packaging and Linux remain pending.
+
+Historical E02 candidate `8e048fc369536a76891031aa4883c888bf762aa8` received affected
 **SOURCE PASS**. Run `20261017T233109Z-85e7c8a2` completed Preflight with matching
 nine-before/nine-after normal-desktop settings snapshots, then SupervisorControls
 **FAILED** with `E02_CHILD_CONTROL_FIXTURE_IDENTITY_INVALID` in 11.7401221 seconds.

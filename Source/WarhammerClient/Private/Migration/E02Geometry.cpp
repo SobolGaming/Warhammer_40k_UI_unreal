@@ -629,22 +629,24 @@ bool ParseFixtureJson(const FString& Text, FFixture& OutFixture, FDiagnostic& Er
     if (!ReadObject(Root, TEXT("key_bindings"), Object, Error)) return false;
     for (const auto& Pair : Object->Values)
     {
+        const FString Key(Pair.Key.ToView());
         if (!Pair.Value.IsValid() || Pair.Value->Type != EJson::String || Pair.Value->AsString().IsEmpty())
-            return Fail(Error, EDiagnosticCode::InvalidFixture, Pair.Key, TEXT("Key binding must be a nonempty string."));
-        F.KeyBindings.Add(Pair.Key, Pair.Value->AsString());
+            return Fail(Error, EDiagnosticCode::InvalidFixture, Key, TEXT("Key binding must be a nonempty string."));
+        F.KeyBindings.Add(Key, Pair.Value->AsString());
     }
     if (!ReadObject(Root, TEXT("input_sequences"), Object, Error)) return false;
     for (const auto& Pair : Object->Values)
     {
+        const FString Key(Pair.Key.ToView());
         if (!Pair.Value.IsValid() || Pair.Value->Type != EJson::Array || Pair.Value->AsArray().IsEmpty())
-            return Fail(Error, EDiagnosticCode::InvalidFixture, Pair.Key, TEXT("Every frozen input sequence must be nonempty."));
+            return Fail(Error, EDiagnosticCode::InvalidFixture, Key, TEXT("Every frozen input sequence must be nonempty."));
         TArray<FString> Steps;
         for (const auto& Step : Pair.Value->AsArray())
         {
-            if (!Step.IsValid() || Step->Type != EJson::String) return Fail(Error, EDiagnosticCode::InvalidFixture, Pair.Key, TEXT("Sequence step must be a string."));
+            if (!Step.IsValid() || Step->Type != EJson::String) return Fail(Error, EDiagnosticCode::InvalidFixture, Key, TEXT("Sequence step must be a string."));
             Steps.Add(Step->AsString());
         }
-        F.InputSequences.Add(Pair.Key, MoveTemp(Steps));
+        F.InputSequences.Add(Key, MoveTemp(Steps));
     }
     if (!ReadArray(Root, TEXT("expected_test_names"), Values, Error)) return false;
     TSet<FString> TestNames;

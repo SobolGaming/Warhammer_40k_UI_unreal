@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **AFFECTED_SOURCE_8E048_PASS; PREFLIGHT_COMPLETE; SUPERVISOR_FAILED; HIDDEN_AUTHORITY_CLOSED; BOUNDED_NO_FAULT_STRING_REPAIR_UNEXECUTED**.
+Status: **AFFECTED_SOURCE_4EE4_PASS; PREFLIGHT_AND_SUPERVISOR_COMPLETE; FIRST_CPP_BUILD_FAILED; HIDDEN_AUTHORITY_CLOSED; BOUNDED_COMPILE_REPAIRS_REQUIRE_FRESH_REVIEW**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -8,14 +8,15 @@ Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
 
-The affected 8e048 SOURCE assessment is PASS. Run 233109 completed Preflight,
-then SupervisorControls FAILED on the no-fault null-versus-empty-string
-predicate after one native supervisor root. No control case was accepted;
-SUP02/SUP03/Build/Unreal Automation/GUI did not run. Hidden authority/run are
-closed/DO_NOT_REUSE. Only the strict no-fault string repair, related inspector
-adaptation and docs are released; repaired execution remains unrun pending
-checkpoint/freeze, fresh affected SOURCE review and a new RunId. All earlier
-58bad/2efd/338/73f/c10c source and run dispositions remain unchanged below.
+The affected 4ee4 SOURCE assessment is PASS. Run002310 completed Preflight and
+all six supervisor controls, then the first C++ build FAILED. Its root exited6
+with cleanup confirmed and final job active0/total35; all nine Build settings
+states match before/after and Preflight.after. Hidden authority/run are
+CLOSED_DO_NOT_REUSE. Only bounded compile repairs and necessary docs are
+released, requiring checkpoint/freeze, fresh affected SOURCE review and a new
+RunId before execution. Discovery, numeric/rendered/input Automation and GUI
+did not run. The latest appendix binds these records; all earlier source and
+run dispositions remain unchanged below.
 
 The predecessor table binds accepted E01-SLOW120 run044903, executed d118,
 reviewed b97, original report verdicts and separate publication bd80123.
@@ -869,3 +870,112 @@ No roots/groups/subcases/native cases or budgets change. Checkpoint, fresh
 freeze/affected SOURCE review and a new RunId must precede any repaired
 execution. Visible-window approval, final independent CODE/REQ, Linux and
 packaging remain pending; all older records remain unchanged.
+
+## 2026-10-18: 4ee4 source PASS, completed controls and first C++ compile failure
+
+Fresh affected candidate `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4`, compared with
+`8e048fc369536a76891031aa4883c888bf762aa8`, received **SOURCE PASS**. The raw
+report is unchanged. The root composite carries prior assessment only for
+explicitly demonstrated unchanged scope: 58/59 wrapper functions, complete
+NativeSource and Build clause, all22 project/fixture files,28 authored members
+and stable plugin closure. The fresh assessment covers the complete changed
+child-evidence validator and mandatory native-record/caller/control spans.
+It is not fresh whole-C++/plugin quality approval or final OWN15 CODE/REQ.
+
+| Immutable review/gate record | Bytes | SHA256 |
+|---|---:|---|
+| [Raw affected SOURCE report](../../../.local/reviews/E02-source-review/review-4ee4-20261018T003221Z-8bacb3ec/last-message.txt) | 4832 | `25E6EB15B259A3C1B3D200964EE3C169C1DE423DDC80879A52581F2A154BCAAC` |
+| [Root closed-review artifact manifest](../../../.local/reviews/E02-source-review/root-4ee4-20261018T002310Z-d6305fba/closed-source-review-artifacts.manifest.json) | 14687 | `5C23928986DA51E02805C0CB051B2DF8E60ACF2B6F210C5552B23FA51CBB2661` |
+| [Actual visible-body coverage](../../../.local/reviews/E02-source-review/review-4ee4-20261018T003221Z-8bacb3ec/actual-model-visible-body-coverage.v2.json) | 330116 | `632998A6828BC56E13174F7B47874A44AE154405049931083E2F3F1A12654091` |
+| [Independent trace-only audit](../../../.local/reviews/E02-source-review/review-4ee4-20261018T003221Z-8bacb3ec/auxiliary-trace-only-audit-camera-20261018T004536Z-3f1143ac.json) | 57914 | `5F6E373BFD78DDBF0A0AB3A63D7B6D4FB68589766067EF23353FCAD185C3B817` |
+| [Root composite SOURCE gate](../../../.local/reviews/E02-source-review/root-4ee4-20261018T002310Z-d6305fba/source-gate-disposition.json) | 7420 | `0440F0C3F555E36B422EE76BC65B5A81E8BF38233B30905145D4F46E2A076EF7` |
+| [Historical hidden authority](../../../.local/reviews/E02-source-review/root-4ee4-20261018T002310Z-d6305fba/hidden-execution-authority.json) | 4158 | `5FACECDCE3398B872132F87E3548833E426AA5176F6D8EC59B22F45A44138642` |
+| [Failed Build/run/authority closure](../../../.local/reviews/E02-source-review/root-4ee4-20261018T002310Z-d6305fba/build-failure-and-hidden-authority-closure.json) | 28515 | `881D57FF5EBB4986D3F55827ECF69712BF3F4A9F55BB65A8071B568C17C2FB66` |
+
+Actual review session `01a14c6d-9bf1-7a82-b698-040f0a26d846` ran fresh exec,
+read-only/never, `gpt-6.1-sol`/ultra with recorded memory_mode disabled. Requested
+memory/app/multi-agent settings and lower-level OS/backend enforcement retain
+their stated limits. Actual input differs by two trailing CRLF bytes; normalized
+trailing-whitespace equality is not byte-identical transport. Its54 inputs,
+54 terminal command items and54 actual outputs contain **1544/1544 required
+rows in11 groups**, with no missing/truncated reviewer output. This includes
+1260 original normative rows,13 owner rows,258 mandatory source rows and13 exact
+diff rows. The actual ordered diff was unnumbered; its entire canonicalLF1147
+bytes match SHA256 `150B483D8388EF6BCB7F7A109FEBC1F5144DEDB4FC4F70555490EB7D9E125B11`.
+Appearance does not attest comprehension. Keep call6's failed extract lookup and
+call33's caught bad reference-path comparisons, followed by corrected reads7–10
+and35. The operator's initial guessed UTCday18 selector failed before session-body
+access; a metadata-only exact-ID lookup found localday17 and reviewed variants
+selected only that session. No reviewer rerun or resumed assessment occurred.
+Generic postchecks plus the independent trace-only audit and root manifest seal
+supply metadata closure; no additional verdict-specific executable sealer ran.
+Postchecks cover1319 direct files,28 authored members,167 references and901 catalog
+descriptors with zero mismatches. A separate read-only check rehashed1375 descriptor
+occurrences/1364 distinct paths without mismatches before execution.
+
+Run `20261018T002310Z-d6305fba` executed in the normal desktop environment with
+unchanged packet revision26/wrapper bytes. **Preflight completed** with nine
+matching before/after settings observations, four present/five absent.
+**SupervisorControls completed** three groups/six subcases/five roots in
+**9.3007388 seconds**, binding20 required artifacts. SUP01 normal root/lingering
+child passes. SUP02 passes only as an enclosing expected timeout; its raw record
+remains FAIL/timedOut. SUP03 assign/query/close injected raw failures and the
+processless evidence-writer seam retain their original fields. All five roots
+have confirmed exit/cleanup and final querySucceeded=true/activeProcesses0.
+Their respective totalProcesses are4,4,0,2,2; these are job counters, not a complete
+per-descendant ledger. SUP01/SUP02 child ACK/ALIVE observations match the accepted
+child proof. SupervisorControls has no own settings pair; Preflight times remain.
+
+| Actual execution record | Bytes | SHA256 |
+|---|---:|---|
+| [Preflight result](../../../.local/experiments/E02/20261018T002310Z-d6305fba/preflight/result.json) | 103290 | `1F087228A1DA3E8E693AE5CB206D0849B4AA15730DF90CB84FADB58E2B5A92C9` |
+| [Preflight completion](../../../.local/experiments/E02/20261018T002310Z-d6305fba/preflight/completion.json) | 1113 | `FED22098434510146B5AA5A49FF7E61157E967D33A75A38E90921CDE5F2B3270` |
+| [SupervisorControls result](../../../.local/experiments/E02/20261018T002310Z-d6305fba/supervisorcontrols/result.json) | 191960 | `02BC2F1A0D911FCAE8559F1198AA57F7AE3112040C9DEAC54824E8BE99583455` |
+| [SupervisorControls completion](../../../.local/experiments/E02/20261018T002310Z-d6305fba/supervisorcontrols/completion.json) | 1140 | `CC477BC828824048E2FBDFF08E882541BF304743ECE98760F417DF0FC3617D37` |
+| [Failed Build result](../../../.local/experiments/E02/20261018T002310Z-d6305fba/build/result.json) | 169805 | `FE7243D0D1ECA56E964739D07EB7322BFE68B553C876C3E2973B62A9DEC491E9` |
+| [Build process receipt](../../../.local/experiments/E02/20261018T002310Z-d6305fba/build/build.process.json) | 13450 | `5B43FC092C92CB69CFF00211FD361480807A93FCC71B35364AE762EA730AA0C0` |
+| [Unchanged compiler log](../../../.local/experiments/E02/20261018T002310Z-d6305fba/logs/build.log) | 108808 | `F1C4C1CD3B6476D076F92EEAC28137CF2AA02EFB8EDDC9824776115C9DD4120C` |
+| [Toolchain-selection receipt](../../../.local/experiments/E02/20261018T002310Z-d6305fba/logs/build-toolchain-selection.json) | 1571 | `3ABB4417EC9DD3E5095DD60AEE1FBD117A2E0CB8AFECC5B7054A6BEC2D77B63E` |
+
+Build **FAILED** with generic phase diagnostic
+`E02_OWNED_PROCESS_FAILED_OR_CLEANUP_UNVERIFIED`. The actual evidence resolves
+that ambiguity: rootPID17736 exited6, timedOut=false/technicalBlocked=false,
+exit/cleanup confirmed, final job query successful with active0/total35.
+The worker took60.8528857 seconds; phase time was97.7762259 seconds. The compiler
+log reports `OtherCompilationError`, UBT60.06 seconds and UHT success in1.3037425
+seconds with six generated files. The receipt records MSVC14.44.35229
+(directory14.44.35207), WindowsSDK10.0.22621.0 and direct compiler/RC locks held
+through UBT exit; selected bundled .NETSDK is10.0.203. This is failed Build
+evidence, not a completed accepted toolchain/Build proof.
+
+There are51 MSVC diagnostics/11 codes, including cascades, across four authored
+translation units and the generated module. Causes are UE5.8 shared-string JSON
+keys needing explicit FString ownership, ambiguous domain versus Unreal FRay,
+unsupported FReply::SetKeyboardFocus, a test-local A hiding its class member,
+and TUniquePtr of incomplete FE02ProofState instantiated by the generated
+FVTableHelper constructor. No Core/transport or runtime geometry failure was
+observed. Staged Binaries/Intermediate and UHT manifest exist; Binaries/Win64
+is empty. Client DLL, target receipt, UnrealEditor.modules, Build completion and
+required-artifact manifest are absent. Discovery/Numeric/WorldInput/Audit did
+not run. All nine Build before/after states match each other and Preflight.after;
+the two KnownDocuments leaves are absent, leaving present-file hashing and
+provider/target identity unverified.
+
+Root closed this run/hidden authority as **CLOSED_DO_NOT_REUSE**, with no remaining
+execution authority for it. Only the five existing C++ files' bounded compile
+repairs and necessary documentation are released. Preserve the wrapper, fixture,
+all assertions/case counts/budgets and every raw result. A coherent checkpoint,
+fresh freeze/affected SOURCE review and new RunId precede repaired execution.
+Visible-window approval, final separate CODE/REQ, packaging and Linux remain
+pending; all historical failures/unknowns and E01 acceptance stay unchanged.
+
+The authored compile-only repair preserves the scene, fixture, assertions,
+16 native cases, six PNG obligations and wrapper/control/budget bytes. It owns
+JSON map keys via `FString(Pair.Key.ToView())`, explicitly qualifies the domain
+ray type, uses `FReply::SetUserFocus`, moves the generated helper constructor
+out of line as installed `UniquePtr.h` prescribes, and renames the shadowing
+test-local angle. These repaired C++ bytes remain **UNEXECUTED**. Packet revision27
+is68085 bytes/SHA256 `603BEB12A79BB9F47AAF76FF39568AA18A4E73D595A1C13696324C6627873558`.
+Its preceding physical planning-prefix is65481 bytes/SHA256
+`BB57769112956FD4963B8CFD617A0E540728BB0087557C643ACC4F41D060F04C`;
+the prefix changed only line endings, with identical decoded normative rows.

@@ -805,13 +805,20 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-18 UTC / plan revision 26**.
+Packet clarification revision: **2026-10-18 UTC / plan revision 27**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
-`633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
+`BB57769112956FD4963B8CFD617A0E540728BB0087557C643ACC4F41D060F04C`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
 checkpoint; historical adoption/status-label-only hashes remain in that journal.
-The adoption derived from ignored proposal EC29BBB1. This dated revision makes
-the existing native no-fault string representation explicit for SUP01/SUP02.
+The adoption derived from ignored proposal EC29BBB1. Revision26 made the
+existing native no-fault string representation explicit for SUP01/SUP02.
+Run002310 exercised that predicate and completed all six controls, then failed
+the first C++ compilation. Revision27 records only bounded fixes inside the
+five already permitted C++ files for JSON key ownership, explicit domain-ray
+types, the installed Slate focus API, out-of-line UObject helper construction
+and a test-local variable name. No fixture, assertion, case count, wrapper or
+budget change is authorized by those compile fixes. A new checkpoint/freeze,
+affected SOURCE review and new RunId are required before repaired execution.
 It retains child-start/alive evidence, exact injected-seam validation and the read-only Known Documents
 ancestor-route policy, plain-file leaves, all nine observations and strict
 owned/source/tool/output path checks.

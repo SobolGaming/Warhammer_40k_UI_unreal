@@ -26,6 +26,7 @@ class WARHAMMERCLIENT_API AE02WorldProofGameMode : public AGameModeBase
     GENERATED_BODY()
 public:
     AE02WorldProofGameMode();
+    AE02WorldProofGameMode(FVTableHelper& Helper);
     virtual ~AE02WorldProofGameMode() override;
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
