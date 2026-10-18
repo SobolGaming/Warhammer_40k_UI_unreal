@@ -807,7 +807,7 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 Packet clarification revision: **2026-10-18 UTC / plan revision 27**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
-`BB57769112956FD4963B8CFD617A0E540728BB0087557C643ACC4F41D060F04C`.
+`633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
 checkpoint; historical adoption/status-label-only hashes remain in that journal.
 The adoption derived from ignored proposal EC29BBB1. Revision26 made the

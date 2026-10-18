@@ -921,11 +921,11 @@ separate from boolean diagnostic.syntheticFault. Its whole-file SHA256 is
 planning-prefix SHA256 is `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
 Revision27 records the compile-only remediation without changing the normative
 fixture, assertions, counts or budgets. Its whole-file SHA256 is
-`603BEB12A79BB9F47AAF76FF39568AA18A4E73D595A1C13696324C6627873558`;
-the current physical planning-prefix SHA256 is
-`BB57769112956FD4963B8CFD617A0E540728BB0087557C643ACC4F41D060F04C`.
-The raw prefix differs from revision26 only by line-ending normalization;
-its decoded normative rows are unchanged.
+`69D69401DC00498E7FDB3E021CACCA92B343027BBBD0644CDD7F9C323CEB8098`;
+the established raw planning-prefix before `## Freeze and remaining blockers`
+remains65445 bytes/SHA256
+`633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`,
+unchanged from revision26.
 The changed source requires a fresh affected assessment before execution.
 
 **Current source/run disposition:** Source `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4`

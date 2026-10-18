@@ -975,7 +975,11 @@ JSON map keys via `FString(Pair.Key.ToView())`, explicitly qualifies the domain
 ray type, uses `FReply::SetUserFocus`, moves the generated helper constructor
 out of line as installed `UniquePtr.h` prescribes, and renames the shadowing
 test-local angle. These repaired C++ bytes remain **UNEXECUTED**. Packet revision27
-is68085 bytes/SHA256 `603BEB12A79BB9F47AAF76FF39568AA18A4E73D595A1C13696324C6627873558`.
-Its preceding physical planning-prefix is65481 bytes/SHA256
-`BB57769112956FD4963B8CFD617A0E540728BB0087557C643ACC4F41D060F04C`;
-the prefix changed only line endings, with identical decoded normative rows.
+is68085 bytes/SHA256 `69D69401DC00498E7FDB3E021CACCA92B343027BBBD0644CDD7F9C323CEB8098`.
+Its established physical planning-prefix before `## Freeze and remaining blockers`
+remains65445 bytes/SHA256
+`633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`,
+byte-identical to revision26. Checkpoint7b679 briefly mislabeled a boundary that
+included the36-byte heading as this prefix and incorrectly described a line-ending
+change. The separate metadata correction preserves that checkpoint/history;
+no review launch or execution used the incorrect label.
