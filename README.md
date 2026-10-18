@@ -73,7 +73,24 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-The latest E02 candidate `58bad7984ef336dfbb486d75bcd51fd241b3b529` received
+E02 candidate `8e048fc369536a76891031aa4883c888bf762aa8` received affected
+**SOURCE PASS**. Run `20261017T233109Z-85e7c8a2` completed Preflight with matching
+nine-before/nine-after normal-desktop settings snapshots, then SupervisorControls
+**FAILED** with `E02_CHILD_CONTROL_FIXTURE_IDENTITY_INVALID` in 11.7401221 seconds.
+Its one native supervisor root, PID 33344, exited 0/PASS with cleanup confirmed
+and final job active 0/total 4. That is no accepted SUP01 control result: the
+validator required null where the native no-fault field was an empty string.
+Matching child ACK/ALIVE stdout records remain preserved. No controls index or
+phase completion exists; SUP02/SUP03, Build, Unreal Automation and GUI did not run.
+
+The run and hidden authority are **CLOSED_DO_NOT_REUSE**. Root's strict typed
+empty-string repair and related inspector work remain **UNEXECUTED**; checkpoint,
+fresh freeze/affected SOURCE review and a new RunId are required. The
+[E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) binds the unchanged
+static review, failed run and closure. Visible-window approval, final CODE/REQ
+and Linux proof remain pending; all earlier records retain their actual results.
+
+Historical E02 candidate `58bad7984ef336dfbb486d75bcd51fd241b3b529` received
 **SOURCE CHANGES_REQUESTED** for two supervisor-control gaps: a real launch error
 could satisfy an injected-failure check, and a root-only timeout could pass without
 proof that its intended child started. Planned RunId `20261017T210320Z-3fa544f1`

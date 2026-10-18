@@ -1061,7 +1061,7 @@ function Check-ControlChildEvidence($Record,[bool] $Timeout,[string] $Executable
     $budget=if($Timeout){8}else{20};$status=if($Timeout){'FAIL'}else{'PASS'}
     if ((Control-UInt ($Record['schemaVersion']) 1) -ne 1 -or
         (Control-UInt ($Record['budgetSeconds']) 20) -ne $budget -or $Record['status'] -cne $status -or
-        $null -ne $Record['syntheticFault'] -or $Record['executable'] -cne $Executable -or
+        $Record['syntheticFault'] -isnot [string] -or $Record['syntheticFault'].Length -ne 0 -or $Record['executable'] -cne $Executable -or
         $Record['workingDirectory'] -cne $script:Stage) { throw 'E02_CHILD_CONTROL_FIXTURE_IDENTITY_INVALID' }
     $arguments=$Record['arguments'];$expected=@('-NoProfile','-NonInteractive','-Command',$Command)
     if ($arguments -isnot [Collections.IList] -or $arguments.Count -ne 4) { throw 'E02_CHILD_CONTROL_ARGUMENTS_INVALID' }

@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **SOURCE_58BAD_CHANGES_REQUESTED; UNUSED_RUN_CLOSED; BOUNDED_SUPERVISOR_REPAIR_AUTHORED_UNEXECUTED; FRESH_SOURCE_REVIEW_REQUIRED**.
+Status: **AFFECTED_SOURCE_8E048_PASS; PREFLIGHT_COMPLETE; SUPERVISOR_FAILED; HIDDEN_AUTHORITY_CLOSED; BOUNDED_NO_FAULT_STRING_REPAIR_UNEXECUTED**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -8,15 +8,14 @@ Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
 
-The latest 58bad SOURCE assessment is CHANGES_REQUESTED for two pre-existing
-supervisor-control evidence gaps. Its planned 210320 run is unused/closed and
-must not execute. Root released bounded fixture/validator remediation and docs;
-repairs remain unexecuted pending checkpoint/freeze, fresh affected SOURCE review
-and a new RunId. Historical 2efd SOURCE PASS/composite 338, completed Preflight/
-controls and failed Build remain unchanged. Known control gaps prevent prospective
-reuse of affected approval. No UBT/C++/UHT/native/GUI proof ran. Historical
-338/181128, 73f/unused 174203 and c10c/171627 failures, settings gaps and original
-review dispositions remain below.
+The affected 8e048 SOURCE assessment is PASS. Run 233109 completed Preflight,
+then SupervisorControls FAILED on the no-fault null-versus-empty-string
+predicate after one native supervisor root. No control case was accepted;
+SUP02/SUP03/Build/Unreal Automation/GUI did not run. Hidden authority/run are
+closed/DO_NOT_REUSE. Only the strict no-fault string repair, related inspector
+adaptation and docs are released; repaired execution remains unrun pending
+checkpoint/freeze, fresh affected SOURCE review and a new RunId. All earlier
+58bad/2efd/338/73f/c10c source and run dispositions remain unchanged below.
 
 The predecessor table binds accepted E01-SLOW120 run044903, executed d118,
 reviewed b97, original report verdicts and separate publication bd80123.
@@ -774,3 +773,99 @@ control completion/failures remain unchanged, and do not approve the repaired
 controls. Save a coherent checkpoint, freeze/review the affected candidate and
 choose a new RunId before execution; then verify each sequential phase. Explicit
 visible-window approval and fresh final independent CODE/REQ remain future gates.
+
+## Source 8e048 PASS; failed supervisor run closed — revision26, 2026-10-18 UTC
+
+The fresh affected SOURCE assessment of `8e048fc369536a76891031aa4883c888bf762aa8`
+against `58bad7984ef336dfbb486d75bcd51fd241b3b529` is **PASS**. Root recorded
+the bounded composite gate at `2026-10-18T00:18:11.4576078Z`: the current
+supervisor repair/Build/caller scope was freshly inspected, while historical
+338/2efd assessments apply only to demonstrated unchanged project/guard/plugin
+scope. No affected supervisor-control approval is carried from historical
+assessments or runs. Preserve this static PASS and the later actual failure as
+separate records; it is no fresh whole-project or final OWN15 verdict.
+
+| Immutable review/authority record | Bytes | SHA256 |
+|---|---:|---|
+| [Unchanged affected SOURCE report](../../../.local/reviews/E02-source-review/review-8e048-20261017T234201Z-3bd5ff10/last-message.txt) | 6244 | `095E0AA85A1B93350A73A328BC3857FB47326E398DCF1E91418BDB089373AE4D` |
+| [Operator seal](../../../.local/reviews/E02-source-review/review-8e048-20261017T234201Z-3bd5ff10/orchestrator-seal.json) | 7657 | `12E31753D1484D3C2901E59601DE350580CBCCC5C1039910AEAB1C16EB9204E9` |
+| [Command/output audit](../../../.local/reviews/E02-source-review/review-8e048-20261017T234201Z-3bd5ff10/operator-command-output-audit.json) | 180295 | `C2080BC73AFCDC4961280718DCC316E6A703445DD866B01F64B9939C632A6E6B` |
+| [Review artifact manifest](../../../.local/reviews/E02-source-review/review-8e048-20261017T234201Z-3bd5ff10/artifacts.manifest.json) | 14907 | `AC084C96EF521EA9281C4249963FA148936112E7A1B71DC02DAC75D237D8970A` |
+| [Required actual visibility receipt](../../../.local/reviews/E02-source-review/review-8e048-20261017T234201Z-3bd5ff10/actual-model-visible-body-coverage.v2.json) | 614774 | `3E2A2AE25DAAF71CBA1EF0A14945FA1B90BB36F2CA7504BDDD4470FFF55A66A6` |
+| [Root composite source gate](../../../.local/reviews/E02-source-review/root-8e048-20261017T233109Z-85e7c8a2/source-gate-disposition.json) | 8306 | `4CC4ECEB5C0B3AF86676EA1BC5C1C928B87A071C3FACE1784EED6071E13BFDB6` |
+| [Historical hidden execution authority](../../../.local/reviews/E02-source-review/root-8e048-20261017T233109Z-85e7c8a2/hidden-execution-authority.json) | 5238 | `20870E0E422D12B2E17C0294564C6724409D122C5D84745108684996B3D16FC3` |
+| [Supervisor failure and authority closure](../../../.local/reviews/E02-source-review/root-8e048-20261017T233109Z-85e7c8a2/supervisor-failure-and-hidden-authority-closure.json) | 6263 | `CF1E7A6A2935524089BA5B15833027A624F4DD569508A8A67EEEAFD53B90F864` |
+
+The sealed trace contains 85 literal inputs/85 actual outputs and 84 native
+command items; one shell continued and was awaited. Required visibility is
+**2891/2891 whole-line rows in 17 groups**, with no missing rows: 1255 original
+normative L-prefixed rows, 13 owner rows, 1232 mandatory wrapper rows and 391
+wrapper-only diff rows. The 44 preparation rows are a separate metric. All
+actual responses were below 8000 UTF8 bytes: maximum 6920 when text blocks are
+joined with one LF, or 6919 when their byte lengths are summed without separators.
+No actual review output was truncated. Actual wrapper body coverage is
+100–1474, 1526–1532 and 1599–1928; this is no whole-wrapper/C++ quality claim.
+Call52's 167 bad reference-path comparisons, call58's parser error and call78's
+byref-like Span error remain, followed by corrected queries59/60/79. Call80's
+empty interim output/session23063 is distinct from call81's actual completed
+delivery. Postchecks covered 1319 direct files, 28 authored members, 167 compiler
+references and 901 catalog descriptors, with zero mismatches.
+
+Actual own session `01a14c4e-7bf5-72f1-9bd1-51e5f37a833a` records read-only,
+approval never, `gpt-6.1-sol`/ultra and memory_mode disabled. OS CLI PID linkage,
+backend memory internals and requested feature enforcement remain UNVERIFIED.
+The actual payload has two extra trailing CRLF bytes relative to the approved
+8661-byte prompt; equality after trailing removal is not byte-identical transport.
+Public v10.0.11 Process source remains supporting evidence, with exact
+source-to-loaded-DLL correspondence NOT_ESTABLISHED. These limits are preserved
+in the unchanged report/seal/root gate.
+
+Run `20261017T233109Z-85e7c8a2` then completed Preflight: the normal-desktop
+launch exited 0 and the separate metadata inspector confirmed completion and
+nine matching actual settings observations before/after. Those snapshots retain
+their own times. SupervisorControls **FAILED** in **11.7401221 seconds**, with
+primary `System.Management.Automation.RuntimeException` /
+`E02_CHILD_CONTROL_FIXTURE_IDENTITY_INVALID` and no secondary errors.
+
+| Actual execution record | Bytes | SHA256 |
+|---|---:|---|
+| [Preflight result](../../../.local/experiments/E02/20261017T233109Z-85e7c8a2/preflight/result.json) | 103292 | `BC2EF3156DFE7188CC644A9AC389BBB9D60BE5979EBFF2BB2B75D61C735A4DE0` |
+| [Preflight completion](../../../.local/experiments/E02/20261017T233109Z-85e7c8a2/preflight/completion.json) | 1114 | `160D93397AFD34C86522BE0CB6678BCE96D982748C5EF7C877C069541BB79B59` |
+| [Preflight required artifacts](../../../.local/experiments/E02/20261017T233109Z-85e7c8a2/preflight/required-artifacts.json) | 1189 | `7482DD48B722005A4B5943B1AF9428F55B264E5F857A5222D2466A4AC0A9D156` |
+| [Failed SupervisorControls result](../../../.local/experiments/E02/20261017T233109Z-85e7c8a2/supervisorcontrols/result.json) | 145866 | `7D94FAFE5E44B8B09BCCD623363E2C06A06D41EE632536055B67DC52E4640889` |
+| [One raw native supervisor root](../../../.local/experiments/E02/20261017T233109Z-85e7c8a2/supervisorcontrols/sup01-normal-lingering.process.json) | 35092 | `4D5304C7C74D3D6ADE274AD1C6DD9E66969C638EBD41E0920ADE8D994A541C56` |
+| [Closed SUP01 stdout](../../../.local/experiments/E02/20261017T233109Z-85e7c8a2/logs/sup01-normal-lingering.stdout.log) | 585 | `1ED06C20B0F82F529506B2BAC378B1F04FC74CCB865C1A34C38365DB08F30EC5` |
+| [Closed SUP01 stderr](../../../.local/experiments/E02/20261017T233109Z-85e7c8a2/logs/sup01-normal-lingering.stderr.log) | 0 | `E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855` |
+
+The one raw native supervisor root, PID **33344**, has exit **0**, native
+status **PASS**, confirmed exit/cleanup and actual final progress accounting
+with **activeProcesses 0 / totalProcesses 4**. This is one owned root record,
+not four recorded roots or a complete descendant ledger. Its closed stdout has
+matching child ACK and ALIVE records. The validator nevertheless accepted no
+control case, so **SUP01 control PASS is not established**. The native no-fault
+`syntheticFault` was `""` of type `System.String`; the new validator at source
+line1064 required null and rejected that representation before accepting child
+evidence. Retain the native outcome and original phase failure unchanged.
+
+No controls index, SupervisorControls required-artifact manifest or completion
+exists. SUP02/SUP03, Build, discovery, numeric/rendered/input Automation and GUI
+did not run. SupervisorControls has no own settings pair by design; Preflight
+does not supply a later SUP pair or reconstruct any earlier missing baseline.
+Present Known Documents hashing and resolved target identity remain UNVERIFIED.
+
+Root closed this run and hidden authority at `2026-10-18T00:19:52.5193523Z` as
+**CLOSED_DO_NOT_REUSE**, with **NONE_FOR_THIS_RUN** remaining authority. Preserve
+all results; no resume, retry or RunId reuse is authorized. Only strict typed
+empty-string no-fault validation repair, related inspector adaptation and docs
+are released. The root-authored predicate repair is **UNEXECUTED**; it preserves
+the native receipt and distinguishes the string request field from boolean
+diagnostic.syntheticFault. The changed wrapper is 154424 bytes/SHA256
+`632963008306107E17023DA8F5CDDC9D738597ECB4E63823F33CC66F3AD7E94C`.
+Packet revision26 is 67546 bytes/SHA256
+`7FD7CF457E6C1199831BC32CF9DABC84868EDFE71BDD8F460553871797D0E24B`,
+with preceding planning-prefix SHA256
+`633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
+No roots/groups/subcases/native cases or budgets change. Checkpoint, fresh
+freeze/affected SOURCE review and a new RunId must precede any repaired
+execution. Visible-window approval, final independent CODE/REQ, Linux and
+packaging remain pending; all older records remain unchanged.

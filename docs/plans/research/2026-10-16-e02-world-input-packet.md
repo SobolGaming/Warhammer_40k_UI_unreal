@@ -457,6 +457,11 @@ check on ReadLineAsync is validation, not an allocation cap; the command text is
 the frozen, trusted fixture. Preserve the acknowledgment and parent observations
 as JSON lines in the existing owned root stdout and bind its unchanged descriptor.
 
+The native root receipt's `syntheticFault` is a string selector. SUP01/SUP02
+require exactly the empty string for no injected seam; null, nonstrings and
+nonempty strings fail. The diagnostic object's `syntheticFault` is separately a
+boolean. Preserve the native receipt representation and all earlier raw receipts.
+
 For SUP01 require that identity/alive observation immediately before the normal
 root exits, alongside the existing actual root-exit/active-members and eventual
 zero-active observations. For SUP02 retain and poll the original child Process,
@@ -800,14 +805,14 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-17 UTC / plan revision 25**.
+Packet clarification revision: **2026-10-18 UTC / plan revision 26**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
-`33339BAFEFC69F71EE8450857666223B6C802B0CC6592A5E758F7FF56479A713`.
+`633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
 checkpoint; historical adoption/status-label-only hashes remain in that journal.
-The adoption derived from ignored proposal EC29BBB1. This dated revision adds
-explicit child-start/alive evidence and exact injected-seam validation within
-the existing supervisor controls. It retains the read-only Known Documents
+The adoption derived from ignored proposal EC29BBB1. This dated revision makes
+the existing native no-fault string representation explicit for SUP01/SUP02.
+It retains child-start/alive evidence, exact injected-seam validation and the read-only Known Documents
 ancestor-route policy, plain-file leaves, all nine observations and strict
 owned/source/tool/output path checks.
 The outward-face winding/oracle and exact bare-key chord requirements remain.

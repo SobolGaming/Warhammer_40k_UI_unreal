@@ -78,7 +78,28 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The latest E02 SOURCE assessment of `58bad7984ef336dfbb486d75bcd51fd241b3b529`
+The affected E02 SOURCE assessment of `8e048fc369536a76891031aa4883c888bf762aa8`
+is PASS; retain that static report and root's bounded composite gate. Actual run
+`20261017T233109Z-85e7c8a2` completed Preflight with nine matching normal-desktop
+settings observations before/after. SupervisorControls then FAILED after one
+native supervisor root (PID 33344): exit 0/PASS, confirmed cleanup and final job
+active count 0/total count 4. The phase took 11.7401221 seconds and raised
+`E02_CHILD_CONTROL_FIXTURE_IDENTITY_INVALID`. Its no-fault `syntheticFault` was
+an empty System.String, while the validator required null. Closed stdout has
+matching child ACK/ALIVE records, but the validator accepted no control case;
+do not mark SUP01 control PASS. No controls index/phase completion exists;
+SUP02/SUP03, Build, Unreal Automation and GUI did not run. SupervisorControls
+has no own settings pair; preserve Preflight's actual observation times.
+
+Hidden authority/run are CLOSED_DO_NOT_REUSE. Root released only the strict
+no-fault string predicate repair, related inspector adaptation and documentation.
+The authored repair accepts the typed empty string; it remains UNEXECUTED.
+Checkpoint, fresh freeze/affected SOURCE review and a new RunId must precede
+repair execution. Preserve all raw receipts and earlier source/run dispositions.
+The E02 journal binds review/trace/coverage, actual phases and closure. Explicit
+visible-window approval, final separate OWN15 CODE/REQ and Linux remain pending.
+
+The historical E02 SOURCE assessment of `58bad7984ef336dfbb486d75bcd51fd241b3b529`
 is **CHANGES_REQUESTED**. It found two pre-existing supervisor-control gaps:
 SUP03 could accept a real launch failure as an injected seam, and SUP02 could
 time out the root without proving the intended child started. Root preserved
