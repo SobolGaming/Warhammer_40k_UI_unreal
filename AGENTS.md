@@ -78,7 +78,50 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The affected E02 SOURCE assessment of `ba05821a8255fca334ddd1fe04a1b4e23bf6af16`
+The affected E02 SOURCE assessment of `e8f1837e7083f6db03ae7a3909eae76769e1692b`
+is PASS (4589-byte raw report, SHA256
+`E720D499E2ECC4E0C95E21A5AF1133DBFDFAC77CB6215000C705DBE0E1F5CF66`).
+Run `20261018T061145Z-1afc8afb` passed Preflight, all six supervisor subcases
+in three groups/five roots, and the Win64 Development Editor Build. Build phase
+duration was 97.9442252 seconds; native PID 2576 exited 0 with confirmed cleanup.
+
+Its first visible Discovery, under direct owner approval, FAILED with
+`E02_DISCOVERY_COMPLETE_LIST_MISSING`. Native PID 27432 exited 0 in 221.4102112
+seconds within 600 seconds, with confirmed exit/cleanup and final job active0/total25.
+The engine listed 2211 unique quoted names; the parser accepted 2210 because it
+excluded the interior apostrophe in log line 2246,
+`System.AI.Gameplay Tasks.Component's basic behavior`. All 16 E02 names were present;
+Discovery remains FAIL. Nine Discovery settings states match before/after and
+Preflight.after. No Discovery completion/required-artifact manifest exists.
+Scene JSON exists, but Check-Scene was not reached. Numeric/WorldInput/Audit did
+not run; the six required screenshot captures were not requested.
+
+This run and all its hidden/visible execution authorities are CLOSED_DO_NOT_REUSE.
+Only the bounded quoted-name regex repair and relevant docs are released; that
+repair is UNEXECUTED. Preserve complete-list reconciliation, exact 16 names, all
+C++/fixture/input semantics, criteria and budgets. Require checkpoint, fresh freeze,
+affected SOURCE review and a new RunId before repaired execution. This approval
+does not authorize a fresh candidate's graphical launch. Final OWN15 still needs
+a fresh independent CODE reviewer and a different fresh REQ auditor after the
+execution/evidence freeze; SOURCE PASS is not final acceptance. Linux/packaging
+remain pending. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+binds the actual results, raw failure and closure.
+
+The [direct visible approval record](.local/reviews/E02-source-review/root-e8f1837-20261018T061145Z-1afc8afb/direct-visible-window-owner-approval.json)
+is 1613 bytes, SHA256
+`279D35F265599F4EBD77326E78C560584550BAE4D7CFBD7E7C1D44CF8AEC2498`.
+It preserves this exact question and direct human reply for e8f1837/061145 only:
+
+> The frozen E02 candidate e8f1837 passed source review, Preflight, all six supervisor cases and the Windows Editor build. Do you approve graphical discovery and rendered/input testing on this desktop: two sequential visible proof launches, one window at a time, each limited to 10 minutes, with scripted focus, camera/UI input, resizing from 1280×720 to 1600×900, six viewport screenshots, logs and normal graphics-cache writes? The E02 packet explicitly requires this separate window approval. Tests use the synthetic advisory fixture.
+
+> Approve the bounded visible E02 tests
+
+The earlier relayed approval is preserved separately (3485 bytes, SHA256
+`24B1E088B5E29E3A36DD4335C7837A9C2EF920032D8F2E837B1B7AE74C636C51`).
+Neither approval supplies final CODE/REQ runtime-evidence transmission, acceptance
+or merge authority; the run's execution authority is now closed.
+
+The historical affected E02 SOURCE assessment of `ba05821a8255fca334ddd1fe04a1b4e23bf6af16`
 is PASS; its 5656-byte raw report has SHA256
 `4D50A3E104653965431EF940AB7314D828FCC08DBECFBA0504DB34EF8F5CC19A`.
 Run `20261018T005629Z-05cac877` completed Preflight (PASS) and all six supervisor

@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-18 UTC
-**Revision:** 28 — E02 source ba058 passed affected review; fresh Preflight and all six supervisor controls completed. Build failed on one missing defining header in the numeric test. The failed run/authority are closed; the one-include repair needs a fresh checkpoint, affected review and RunId.
+**Revision:** 29 — E02 source e8f1837 passed affected review and the hidden chain, including the Windows Editor build. Directly approved graphical Discovery then failed its complete-list parser on an apostrophe in one engine test name. The run and all execution authorities are closed; the one-character parser repair requires a fresh checkpoint/review/RunId.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,31 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 28 changes
+### Revision 29 changes
+
+Source `e8f1837e7083f6db03ae7a3909eae76769e1692b` received affected SOURCE PASS.
+Run `20261018T061145Z-1afc8afb` completed Preflight, all six supervisor subcases
+and the Windows Development Editor build. Build phase duration was97.9442252s;
+worker PID2576 exited0 after44.1052157s, with cleanup and final job0/42 confirmed.
+The owner then directly approved the bounded two sequential visible E02 launches.
+Graphical Discovery ran once: native PID27432 exited0 after221.4102112s within
+its600s budget, cleanup/final job0/25 confirmed. The phase nevertheless FAILED
+`E02_DISCOVERY_COMPLETE_LIST_MISSING`: Unreal emitted2211 unique eligible names,
+but the client regex accepted2210 because it excluded an internal apostrophe.
+All16 expected E02 names are present; that observation does not pass Discovery.
+Nine recorded settings match before/after and Preflight.after. SceneJSON exists,
+but scene validation was not reached; no Discovery completion/required manifest
+or downstream Numeric/WorldInput/Audit exists. Root closed the run/authorities.
+Only quoted-name parsing plus relevant regression checks/docs are released.
+The one-character repair is authored but UNEXECUTED by a wrapper/native phase.
+Checkpoint/freeze, fresh affected SOURCE review and a new RunId precede execution.
+The existing OWN15 three-role gate remains mandatory: implementer, a fresh
+independent CODE reviewer and a different fresh REQ auditor after evidence freeze.
+Current SOURCE PASS and successful build do not supply those final assessments.
+The exact e8 visible approval adds no authority for a different frozen candidate,
+final review transmission or merge. See Section0.9 and the authority journal.
+
+### Revision 28 history
 
 Source `ba05821a8255fca334ddd1fe04a1b4e23bf6af16` received affected SOURCE PASS.
 Run `20261018T005629Z-05cac877` completed Preflight and all six supervisor
@@ -250,7 +274,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the bounded E02 defining-header repair, freeze it and obtain fresh affected SOURCE review before another execution under a fresh RunId.** Source ba058 passed static review; run005629 completed Preflight and all six supervisor controls, then failed Build on an incomplete tangent type in the numeric test. Its hidden authority/run are CLOSED_DO_NOT_REUSE. Preserve that failure and all earlier results. Section 0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) bind the review, execution and closure. Discovery, numeric/rendered/input Automation and GUI did not run. Visible-window approval, final independent CODE/REQ, packaging, Linux and full research/implementation/milestone gates remain open; E01 acceptance/history is unchanged.
+**Current assignment: checkpoint the bounded E02 quoted-name parser repair, freeze it and obtain fresh affected SOURCE review before another execution under a fresh RunId.** Source e8f1837 passed affected review; run061145 completed Preflight, six supervisor cases and the Windows Editor build. Its directly approved visible Discovery then FAILED complete-list validation: one legitimate engine test name contains an apostrophe. Root closed the run and all execution authorities. Preserve its successful predecessors and failed Discovery separately; do not promote the16 logged E02 names or engine exit0 to a passing phase. Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) bind the exact evidence and repair. Numeric/rendered/input Automation and six-image inspection did not run. Fresh-candidate visible approval and final separate OWN15 CODE/REQ remain required; packaging, Linux and broader research/implementation gates remain open.
 
 ### 0.1 Fixed scope and authority
 
@@ -945,7 +969,26 @@ planning prefix or normative proof. Its whole-file SHA256 is
 `3F02CE1FC169CAD0111ADC6D8CC09EAB6D4CBE1E2F8ED9936BB4F939FDC1A9DE`. The changed source requires a fresh affected
 assessment before execution.
 
-**Current source/run disposition:** Source `ba05821a8255fca334ddd1fe04a1b4e23bf6af16`
+**Current e8f1837 source/run disposition:** The affected SOURCE report is PASS
+(4589 bytes/SHA256 `E720D499E2ECC4E0C95E21A5AF1133DBFDFAC77CB6215000C705DBE0E1F5CF66`).
+Its73-call trace has1836/1836 required visible rows across10 groups, with no failed
+or truncated command. Run061145 completed Preflight/SUP6/Editor Build, then
+FAILED graphical Discovery at the complete eligible-list check. The engine
+reported2211 unique list rows; the parser accepted2210, omitting log2246,
+`System.AI.Gameplay Tasks.Component's basic behavior`. All16 E02 names match;
+no current test/scene/visual acceptance is inferred. Native PID27432 exited0,
+measured221.4102112s, cleanup confirmed, final job0/25; all nine settings match.
+Closure v2 is5868 bytes/SHA256
+`0A66B8AADB223CF01BFBB7C96ADD9583BC8006435275425F005CE5C99F09D4F9`.
+All run execution authorities are CLOSED_DO_NOT_REUSE. Only the single capture-
+class apostrophe exclusion is removed; count/set guards and proof scope stay.
+Repair execution requires checkpoint/freeze/fresh affected SOURCE/new RunId.
+The direct e8 approval and trusted prior relay are retained in the journal with
+exact source/message IDs and limits. No future-candidate GUI or final CODE/REQ
+acceptance/transmission/merge authority is inferred. OWN15 already requires the
+owner-requested separate implementer/CODE/REQ roles; final reports remain pending.
+
+**Historical ba058 source/run disposition:** Source `ba05821a8255fca334ddd1fe04a1b4e23bf6af16`
 received affected SOURCE PASS (5656 bytes/SHA256
 `4D50A3E104653965431EF940AB7314D828FCC08DBECFBA0504DB34EF8F5CC19A`).
 All21 required groups/2427 visible rows and the145-call trace are bound in the

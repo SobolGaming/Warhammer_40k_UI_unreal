@@ -805,7 +805,7 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-18 UTC / plan revision 28**.
+Packet clarification revision: **2026-10-18 UTC / plan revision 29**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
 `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
@@ -826,6 +826,21 @@ and factual documentation are released. The failed run/authority are closed;
 the one-include repair is unexecuted and needs its own checkpoint/freeze,
 fresh affected SOURCE assessment and new RunId. All normative proof scope stays
 unchanged, including the exact raw planning prefix preceding this heading.
+Revision29 records e8f1837 affected SOURCE PASS and completed Preflight/SUP6/
+Windows Editor Build. Under direct owner approval, graphical Discovery ran once;
+its engine exited0 but the phase FAILED complete-list validation. One engine
+eligible name contains an internal apostrophe, rejected by the current capture
+class:2211 actual unique rows versus2210 parsed. All16 E02 names being logged is
+not a successful Discovery result. The run and all execution authorities are
+CLOSED_DO_NOT_REUSE. Only the capture-class repair and relevant regression/docs
+are released; the authored one-character change remains UNEXECUTED by the wrapper.
+Checkpoint/freeze, fresh affected SOURCE and newRunId precede execution. Keep
+reported-count reconciliation, exact16set, fixture/assertions/14paths/6PNGs and
+all budgets/ownership checks unchanged. The existing OWN15 implementer/newCODE/
+differentnewREQ discipline remains mandatory; current source/build results supply
+no final acceptance. The direct visible approval applies to the frozen e8 scope,
+not future candidates or final review transmission/merge. No downstream phase or
+six-image proof exists for run061145. The normative raw prefix remains unchanged.
 It retains child-start/alive evidence, exact injected-seam validation and the read-only Known Documents
 ancestor-route policy, plain-file leaves, all nine observations and strict
 owned/source/tool/output path checks.

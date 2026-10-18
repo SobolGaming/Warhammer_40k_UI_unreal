@@ -1,12 +1,26 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **AFFECTED_SOURCE_BA058_PASS; PREFLIGHT_AND_SUPERVISOR_COMPLETE; BUILD_FAILED_MISSING_DEFINING_HEADER; HIDDEN_AUTHORITY_CLOSED; ONE_INCLUDE_REPAIR_REQUIRES_FRESH_REVIEW**.
+Status: **E8F1837_AFFECTED_SOURCE_PASS; HIDDEN_CHAIN_AND_EDITOR_BUILD_PASS; VISIBLE_DISCOVERY_FAILED_QUOTED_NAME_PARSER; ALL_EXECUTION_AUTHORITY_CLOSED; PARSER_REPAIR_REQUIRES_FRESH_REVIEW**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
 Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF1CB713A920363A44A8FB2E3`.
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
+
+Current e8f1837 SOURCE is PASS; run061145 completed Preflight/SUP6/Editor Build,
+then its directly approved graphical Discovery FAILED complete-list validation.
+The engine exited0 with cleanup/final job0/25;2211 unique engine rows versus2210
+parsed rows differ by one legitimate name containing an apostrophe. All16 E02
+names are present, but Discovery remains FAIL. Nine settings states match.
+The run and all execution authorities are CLOSED_DO_NOT_REUSE. Only bounded
+quoted-name parsing/regression/docs are released; the authored repair remains
+UNEXECUTED by the wrapper until checkpoint/freeze/fresh SOURCE/newRunId.
+Numeric/WorldInput/Audit and six-image proof did not run; scene validation was
+not reached. The final appendix binds source review, approval, native process
+and failure evidence. OWN15's implementer/CODE/differentREQ roles remain required.
+
+### Previous ba058 summary — historical
 
 The affected ba058 SOURCE assessment is PASS. Run005629 completed Preflight and
 all six supervisor controls, then Build FAILED on four cascading diagnostics for
@@ -1025,3 +1039,123 @@ All nine Build settings states match before/after and Preflight.after: four pres
 Root sets run/hidden authority **CLOSED_DO_NOT_REUSE**, with no remaining phase authority. Only one `ProceduralMeshComponent.h` include in E02GeometryTests.cpp and necessary factual docs are released. The authored include is **UNEXECUTED**; preserve every assertion, registration, fixture, dependency, wrapper and budget. Checkpoint/freeze, a new RunId and fresh affected SOURCE review precede repaired execution. Discovery, numeric/rendered/input Automation and GUI did not run. Explicit window approval, final separate CODE/REQ, packaging, Linux and broader research/implementation gates remain open.
 
 Packet revision28 whole-file SHA256: `3F02CE1FC169CAD0111ADC6D8CC09EAB6D4CBE1E2F8ED9936BB4F939FDC1A9DE`. The established raw planning prefix remains65445 bytes/SHA256 `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
+
+
+## e8f1837 SOURCE PASS, successful hidden chain and closed Discovery failure — 2026-10-18 UTC
+
+The frozen candidate was `e8f1837e7083f6db03ae7a3909eae76769e1692b`, compared
+with `ba05821a8255fca334ddd1fe04a1b4e23bf6af16`. Fresh independent SOURCE
+session `01a14db4-6eaf-7122-b92f-ded3eb145ede` completed at
+`2026-10-18T06:38:02.0074165Z`, exit0, with PASS/no actionable finding.
+The raw report remains unchanged. Root separately observed gpt-6.1-sol/ultra,
+read-only/never and disabled memory_mode; backend memory internals, OS PID
+linkage and app/multi-agent enforcement remain UNVERIFIED. Actual9057-byte
+payload differs from9055-byte file by two trailing CRLF bytes only.
+
+All73 inputs/outputs/native command items were audited:1836/1836 required rows
+across10 groups, no failed/truncated command, maximum compact actual output6684
+UTF8 bytes. Required rows were1275 normative,13 owner,500 current C++,36 API and12
+ordered diff rows. Source/input/reference/catalog postchecks had zero mismatches.
+This is affected pre-execution review; final OWN15 CODE/REQ acceptance is absent.
+
+| Immutable record | Bytes | SHA256 |
+|---|---:|---|
+| [Raw SOURCE report](../../../.local/reviews/E02-source-review/review-e8f1837-20261018T062806Z-1afc8afb/last-message.txt) | 4589 | `E720D499E2ECC4E0C95E21A5AF1133DBFDFAC77CB6215000C705DBE0E1F5CF66` |
+| [Exact visible-body coverage](../../../.local/reviews/E02-source-review/review-e8f1837-20261018T062806Z-1afc8afb/actual-model-visible-body-coverage.v2.json) | 390058 | `997C78B4A65B39B538F5AAB30E125560B6D7F2AA9CBCBF28D93EECA8B11D8A14` |
+| [Separate literal trace audit](../../../.local/reviews/E02-source-review/review-e8f1837-20261018T062806Z-1afc8afb/auxiliary-trace-only-audit-camera-20261018T064219Z-4519e3bd.json) | 24270 | `7024EC2F5DA4C86C55391E7CD0679CE275440FC0CD71100F630FA91ED4EA1BC8` |
+| [Root composite source gate](../../../.local/reviews/E02-source-review/root-e8f1837-20261018T061145Z-1afc8afb/source-gate-disposition.json) | 7682 | `AE5C903E7214AE688C65F3567F40DC0BB9F2F0A907185D2229207043A69277C6` |
+| [Actual hidden-phase observations](../../../.local/reviews/E02-source-review/root-e8f1837-20261018T061145Z-1afc8afb/hidden-phases-complete-awaiting-visible-approval.json) | 17465 | `15D11F823DA502327BC26E20A1499AE65E577DB62CCD99A26CE270FCE73B50B1` |
+| [Separate closed Build metadata](../../../.local/planning/E02/closed-build-metadata-e8f1837-20261018T065011Z-e35174d4/closed-hidden-phase-metadata.json) | 18109 | `DD83690987958F5DE68CF58C881A4FE8BB134E86A7FFEBD035C32A10547DD795` |
+| [Direct visible-test approval](../../../.local/reviews/E02-source-review/root-e8f1837-20261018T061145Z-1afc8afb/direct-visible-window-owner-approval.json) | 1613 | `279D35F265599F4EBD77326E78C560584550BAE4D7CFBD7E7C1D44CF8AEC2498` |
+| [Earlier trusted approval relay](../../../.local/reviews/E02-source-review/root-e8f1837-20261018T061145Z-1afc8afb/relayed-visible-window-owner-approval.json) | 3485 | `24B1E088B5E29E3A36DD4335C7837A9C2EF920032D8F2E837B1B7AE74C636C51` |
+| [First launch approval timeout](../../../.local/reviews/E02-source-review/root-e8f1837-20261018T061145Z-1afc8afb/discovery-first-launch-approval-timeout.json) | 1072 | `74AC47A0B5C75BEBE0F89005B8AB0B3D38FA1EF4A7EE264AEFCFBAD00BCD2DE8` |
+| [Discovery raw result](../../../.local/experiments/E02/20261018T061145Z-1afc8afb/discovery/result.json) | 2214694 | `E59D816AD1F64D5B862EC132CA6568E0AEF4DE8172FCAD1E6653C4267ADB754A` |
+| [Actual native process receipt](../../../.local/experiments/E02/20261018T061145Z-1afc8afb/discovery/discovery.process.json) | 72493 | `B4A59C214DFB9A64F8A3C81D24354CB04A67EB4651B2B801609110506BAB97EC` |
+| [Actual discovery log](../../../.local/experiments/E02/20261018T061145Z-1afc8afb/logs/native-discovery.log) | 512061 | `E89F9E75C38B37E88DD7279B28BF57092C3B237208240DD8ED8207D99C729DA0` |
+| [Closed failure metadata](../../../.local/planning/E02/closed-discovery-failure-e8f1837-20261018T155614Z-5f669137/discovery-failure-metadata.json) | 7701 | `319309C3F95A6F21420B5592148074248425878DD0DAF87365C3785C97DFD365` |
+| [List-format diagnosis](../../../.local/planning/E02/20261018T155507Z-discovery-list-diagnosis-87214648/diagnosis.json) | 12956 | `E872DD896D97C476D08E96368DE0E0E7468923D25281FAB9D4BD8F3D0BB21B9E` |
+| [Root failed-run/all-authority closure v2](../../../.local/reviews/E02-source-review/root-e8f1837-20261018T061145Z-1afc8afb/discovery-failure-and-all-authority-closure.v2.json) | 5868 | `0A66B8AADB223CF01BFBB7C96ADD9583BC8006435275425F005CE5C99F09D4F9` |
+
+### Actual build and directly approved graphical attempt
+
+Run061145 Preflight7.3803186s and controls18.5500978s passed. All six control
+subcases in three groups/five roots passed with cleanup/final zero-active jobs.
+Build phase97.9442252s passed; PID2576 worker44.1052157s, kernel44.0670652s,
+exit0/final job0 active42 total. It produced the961024-byte Editor DLL and target
+receipt using MSVC14.44.35229, Windows SDK10.0.22621.0 and bundled .NET10.0.203.
+Two C4701 warnings, Pixel266 and Origin543, remain recorded. The target receipt's
+245 BuildPlugins are an optional allowlist, not runtime activation. Frozen
+conservative selection is244; normalized override[]/defaulttrue values are not
+literal receipt fields. See the closed metadata receipt and root clarification.
+
+The prior trusted relay preserved source chat `01a14be5-eb57-7678-b353-a20b50cd002b`
+and question/answer message IDs `Sentinel_8cd5145293a081919a6096edcc3a4c7d` /
+`Sentinel_a4071b0b83e881919fc01357470a1a7b`; independent retrieval of those literal
+messages was not established. The owner then directly answered question
+`call_b655a07fa72c478aa49a4383dab22542`: **"Approve the bounded visible E02 tests"**.
+That exact question scoped frozen e8f1837, two sequential visible synthetic
+launches, one window at a time,600s each, scripted input/resize,six screenshots/
+logs and normal graphics-cache writes. The first automatic approval review timed
+out before execution; its tool expressly permitted one retry. No phase directory
+or process existed then. The one permitted retry used direct approval and actually
+ran Discovery. No second Discovery or WorldInput launch occurred.
+
+Discovery phase spans `2026-10-18T15:48:29.3011189Z` to
+`2026-10-18T15:53:02.3044222Z` (273.0033033s). Native PID27432 exited0,
+measured221.4102112s/kernel216.9464263s, within600s, no timeout/technical blocker,
+exit/cleanup confirmed and final job active0/total25. Primary phase failure is
+`E02_DISCOVERY_COMPLETE_LIST_MISSING`; secondary errors are empty. Nine stored
+settings match before/after, Build.after and Preflight.after. Authored/staged
+28 entries (21 files/seven directories) and frozen inputs are preserved.
+
+The engine printed2211 unique eligible rows1643–3853; the regex parsed2210.
+It omitted only log2246: `System.AI.Gameplay Tasks.Component's basic behavior`.
+All16 E02 names are present at3812–3827, but no Discovery PASS/completion/required
+manifest exists. Installed `AutomationCommandline.cpp:333–336` prints the count
+and raw outer-quoted names from the same array, without escaping apostrophes.
+Its29813-byte descriptor/SHA256 is
+`A040ADEE46CDECDCBE5C8148C6203211FD59559EA0A73CE748D5725399B899B3`.
+Only the capture class's apostrophe exclusion is removed; complete-count and
+exact16-name guards remain. The corrected predicate has not run in a new wrapper
+phase. Current FAIL is immutable; closure v1's incorrect log-line field1764 was
+corrected in separate v2 to actual2246, without changing failure/closure facts.
+
+Startup logs establish D3D12/SM5, RTX4090 adapter0 and owned writable E02 DDC.
+They contain no matched startup diagnostic for the six disabled transports.
+Other EOSSDK/WebSockets/telemetry/MsQuicRuntime/ConcertTransport module/session
+and Python3.11.8/IKRig/ControlRig startup observations are retained in the metadata
+receipt; these facts prove neither an external connection nor universal process
+isolation. SceneJSON exists, but Check-Scene was not reached; there is no current
+scene/visual/input acceptance. Numeric/WorldInput/Audit did not run; six required
+PNGs were not requested. Known Documents provider/target identity and present-
+file hashing for absent leaves remain UNVERIFIED. Linux/packaging remain NOT RUN.
+
+All current execution authorities/run are CLOSED_DO_NOT_REUSE. Only bounded
+parsing repair/regression/docs are released. Require a checkpoint, new freeze,
+fresh affected SOURCE and new RunId before execution. Exact e8 approval supplies
+no fresh-candidate GUI authority. Existing OWN15 already enforces the owner's
+three-role request: implementer, fresh independent CODE reviewer, different fresh
+REQ auditor after evidence freeze; auxiliary diagnostics/source review/build
+success do not substitute either final report or confer merge authority.
+
+### Offline predicate regression — bounded parser repair
+
+The exact current list/count regex literals and static16-name definition were
+selected through the PowerShell AST without importing, dot-sourcing or invoking
+the wrapper. A pure .NET Regex check against the immutable actual log and nine
+synthetic rows completed17 checks, zero failures. It reconciles2211 actual unique
+names/count, preserves the old2210 observation and sole apostrophe difference,
+and retains the exact16 E02 names. Synthetic rows cover embedded apostrophes,
+ordinary names, empty/missing quotes, wrong category and CR/LF inside a name.
+This does not add stricter cross-line-prefix rules or execute Check-Discovery,
+any wrapper/native phase, scene validation or a repaired run. Current FAIL stays.
+
+The [offline test source](../../../.local/planning/E02/20261018T155854Z-discovery-regex-proposal-a5a76d76/Test-DiscoveryRegexOffline.proposed.ps1)
+is10817 bytes/SHA256 `548C5FCCD2D144004B0A21DDADE32B8294D4CE9C414E90434AD505720CDCC8E5`;
+its [immutable result](../../../.local/planning/E02/20261018T155854Z-discovery-regex-proposal-a5a76d76/results/offline-regex-results.json)
+is11186 bytes/SHA256 `9817B56CF677F5B73A14F6A2CEF5F37C753687143F99B06504E8941F695D6C6F`.
+The wrapper is154423 bytes/SHA256
+`EBBE4FF06E80BBCF8CC124E24807FBC85C7BE17D3E0B2EEEA4B014F61505E6F8`;
+reversing its one-character delta restores the exact prior154424-byte source.
+Its nonexecuting parser reports zero syntax errors. Fresh affected SOURCE review
+and a new frozen RunId still precede execution. The failed Discovery is retained.

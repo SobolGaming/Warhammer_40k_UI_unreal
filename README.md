@@ -73,7 +73,32 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-E02 candidate `ba05821a8255fca334ddd1fe04a1b4e23bf6af16` received affected
+E02 candidate `e8f1837e7083f6db03ae7a3909eae76769e1692b` received affected
+**SOURCE PASS** (4589-byte raw report, SHA256
+`E720D499E2ECC4E0C95E21A5AF1133DBFDFAC77CB6215000C705DBE0E1F5CF66`).
+Run `20261018T061145Z-1afc8afb` passed Preflight, six supervisor subcases in
+three groups/five roots, and the Win64 Development Editor Build. Build phase
+duration was 97.9442252 seconds; native PID 2576 exited 0 with cleanup confirmed.
+
+The first visible Discovery ran under [direct owner approval](.local/reviews/E02-source-review/root-e8f1837-20261018T061145Z-1afc8afb/direct-visible-window-owner-approval.json)
+and **FAILED** with `E02_DISCOVERY_COMPLETE_LIST_MISSING`. Native PID 27432 exited 0
+in 221.4102112 seconds within its 600-second budget, with confirmed exit/cleanup
+and final job active0/total25. The engine listed 2211 unique names, while the
+parser accepted 2210: an interior apostrophe in log line 2246 was excluded.
+All 16 E02 names were present; Discovery remains FAIL. Nine settings states match
+before/after and Preflight.after. No Discovery completion/required manifest exists;
+scene JSON exists but its validation was not reached. Numeric, WorldInput and Audit
+remain NOT RUN; this phase requested none of the six required screenshot captures.
+
+The run and all hidden/visible execution authorities are **CLOSED_DO_NOT_REUSE**.
+The bounded quoted-name regex repair is **UNEXECUTED**, with C++/fixture/input,
+criteria and budgets unchanged. Require checkpoint/freeze, fresh affected SOURCE
+review and a new RunId before repaired execution; the visible approval covers only
+the closed e8f1837/061145 scope. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+preserves actual results and failure. SOURCE PASS is not final acceptance: fresh
+independent CODE and different REQ reviews remain required. Linux/packaging remain pending.
+
+Historical E02 candidate `ba05821a8255fca334ddd1fe04a1b4e23bf6af16` received affected
 **SOURCE PASS** (5656-byte raw report, SHA256
 `4D50A3E104653965431EF940AB7314D828FCC08DBECFBA0504DB34EF8F5CC19A`).
 Run `20261018T005629Z-05cac877` completed Preflight (PASS) and all six supervisor

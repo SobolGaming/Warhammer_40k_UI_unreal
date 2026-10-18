@@ -1462,7 +1462,7 @@ function Inspect-NativeLog([string] $Kind) {
 }
 function Check-Discovery {
     $text=$script:Utf8.GetString([IO.File]::ReadAllBytes((Owned 'logs/native-discovery.log')))
-    $listed=@([regex]::Matches($text,"(?m)^.*\bLogAutomationCommandLine: Display:\s*'([^'\r\n]+)'\s*$") | ForEach-Object {$_.Groups[1].Value})
+    $listed=@([regex]::Matches($text,"(?m)^.*\bLogAutomationCommandLine: Display:\s*'([^\r\n]+)'\s*$") | ForEach-Object {$_.Groups[1].Value})
     $counts=@([regex]::Matches($text,'\bLogAutomationCommandLine: Display: Found ([0-9]+) Automation Tests') | ForEach-Object {[int]$_.Groups[1].Value})
     if ($counts.Count -ne 1 -or $listed.Count -ne $counts[0]) { throw 'E02_DISCOVERY_COMPLETE_LIST_MISSING' }
     $selected=@($listed | Where-Object {$_.StartsWith('Warhammer.Migration.E02.',[StringComparison]::Ordinal)} | Sort-Object -CaseSensitive)
