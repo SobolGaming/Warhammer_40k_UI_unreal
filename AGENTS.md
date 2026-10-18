@@ -78,7 +78,27 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The affected E02 SOURCE assessment of `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4`
+The affected E02 SOURCE assessment of `ba05821a8255fca334ddd1fe04a1b4e23bf6af16`
+is PASS; its 5656-byte raw report has SHA256
+`4D50A3E104653965431EF940AB7314D828FCC08DBECFBA0504DB34EF8F5CC19A`.
+Run `20261018T005629Z-05cac877` completed Preflight (PASS) and all six supervisor
+subcases in three groups/five roots (PASS). Build then FAILED with four cascading
+compiler diagnostics from incomplete `FProcMeshTangent` in
+`E02GeometryTests.cpp:222`. PID28452 exited6 in 51.4887138 seconds, with
+confirmed exit/cleanup and final job active0/total35. All nine Build settings
+before/after states match Preflight.after; SupervisorControls has no separate pair.
+
+The run and hidden authority are CLOSED_DO_NOT_REUSE. Only the defining-header
+include in E02GeometryTests.cpp and necessary docs are released. That authored
+repair is UNEXECUTED; require checkpoint, fresh freeze/affected SOURCE review and
+a new RunId before execution. Preserve test assertions/counts, fixture/input
+semantics, dependencies and budgets. No Build completion was published; downstream
+Discovery/numeric/rendered/input Automation and GUI did not run. Visible-window approval,
+final separate OWN15 CODE/REQ, packaging and Linux remain pending.
+The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) binds the
+static PASS, failed Build and closed authority.
+
+The historical affected E02 SOURCE assessment of `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4`
 is PASS. Run `20261018T002310Z-d6305fba` completed Preflight and all six supervisor
 subcases in three groups/five roots; cleanup and final zero-active jobs are
 confirmed. This actually exercises the strict no-fault empty-string repair.
@@ -353,7 +373,22 @@ nor independence. Resolve actionable findings before completion.
 
 ## Standing three-role review protocol
 
-The owner authorized transmission of current and subsequent revised E02 review
+The owner directly approved current and future E02 SOURCE review transmission.
+The [direct human consent record](.local/reviews/E02-source-review/root-ba058-20261018T005629Z-05cac877/direct-human-current-and-future-source-review-consent.json)
+is 2766 bytes, SHA256
+`9238AFF6A1F47B10C6CA0128C6AF009BFE31D3FC237A8D36A77B9316DEBE5D4B`,
+and records a direct user-message question reply in this chat:
+
+> Do you authorize sending the frozen E02 packet for ba05821—private Unreal client C++ source, installed UE/API excerpts, requirements and file metadata—to the configured OpenAI Codex service for a fresh read-only source review? Credentials, private sessions, author notes and peer verdicts are excluded. The launch prompt is saved for inspection; automatic approval requires direct consent for this revision.
+
+> Approve this and future E02 source reviews within the same data scope and destination
+
+This covers the current ba05821 and future E02 SOURCE reviews within that exact
+data scope and configured OpenAI Codex destination. It adds no candidate/runtime
+execution, final CODE/REQ transmission or acceptance, visible-window, merge or
+unrelated authority. Freeze, affected-review and final separate OWN15 gates remain.
+
+The historical relayed approval authorized transmission of current and subsequent revised E02 review
 packets to OpenAI's ChatGPT/Codex service using the existing sign-in: project
 source, supporting Unreal/API excerpts, requirements and file metadata only.
 The [standing consent record](.local/reviews/E02-source-review/root-338-owner-approved-20261017T200218Z-d47cd4ea/standing-e02-review-transmission-approval.json)

@@ -9,6 +9,7 @@
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonSerializer.h"
 #include "KismetProceduralMeshLibrary.h"
+#include "ProceduralMeshComponent.h"
 #include <limits>
 
 using namespace Warhammer::Migration::E02;

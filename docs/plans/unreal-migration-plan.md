@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-18 UTC
-**Revision:** 27 — E02 source 4ee4 passed affected review; Preflight and all six supervisor controls completed. The first C++ build failed on UE API/type integration errors. Hidden authority/run are closed; bounded compile repairs require a fresh checkpoint, affected review and RunId.
+**Revision:** 28 — E02 source ba058 passed affected review; fresh Preflight and all six supervisor controls completed. Build failed on one missing defining header in the numeric test. The failed run/authority are closed; the one-include repair needs a fresh checkpoint, affected review and RunId.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,21 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 27 changes
+### Revision 28 changes
+
+Source `ba05821a8255fca334ddd1fe04a1b4e23bf6af16` received affected SOURCE PASS.
+Run `20261018T005629Z-05cac877` completed Preflight and all six supervisor
+subcases, then failed Build with four cascading FProcMeshTangent completeness
+diagnostics in E02GeometryTests.cpp. The prior 51 diagnostics did not recur.
+Native root PID28452 exited6 after51.4887138 seconds; cleanup and final job
+active0/total35 are confirmed. Nine Build settings states match before/after
+and Preflight.after. Root closed the run/authority and released only the defining
+header include plus factual docs. The repair is UNEXECUTED until a checkpoint,
+new freeze/affected SOURCE review and new RunId. Direct owner consent now covers
+current/future E02 SOURCE packets within the same data scope and Codex destination;
+it adds no graphical, runtime-evidence transmission or final CODE/REQ authority.
+
+### Revision 27 history
 
 Affected source `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4` received SOURCE PASS.
 Run `20261018T002310Z-d6305fba` completed Preflight and three supervisor groups /
@@ -236,7 +250,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: finish/checkpoint the bounded E02 compile repairs, freeze the candidate and obtain fresh affected SOURCE review before a new RunId.** Source 4ee4 passed static review; actual 002310 Preflight and all six supervisor controls completed, then the first C++ build failed. Its hidden authority/run are CLOSED_DO_NOT_REUSE. Preserve the successful controls, failed compiler output and all earlier results. Section 0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) bind the review, failure and closure. Discovery, numeric/rendered/input Automation and GUI did not run. Visible-window approval, final independent CODE/REQ, packaging, Linux and full research/implementation/milestone gates remain open; E01 acceptance/history is unchanged.
+**Current assignment: checkpoint the bounded E02 defining-header repair, freeze it and obtain fresh affected SOURCE review before another execution under a fresh RunId.** Source ba058 passed static review; run005629 completed Preflight and all six supervisor controls, then failed Build on an incomplete tangent type in the numeric test. Its hidden authority/run are CLOSED_DO_NOT_REUSE. Preserve that failure and all earlier results. Section 0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) bind the review, execution and closure. Discovery, numeric/rendered/input Automation and GUI did not run. Visible-window approval, final independent CODE/REQ, packaging, Linux and full research/implementation/milestone gates remain open; E01 acceptance/history is unchanged.
 
 ### 0.1 Fixed scope and authority
 
@@ -926,9 +940,25 @@ the established raw planning-prefix before `## Freeze and remaining blockers`
 remains65445 bytes/SHA256
 `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`,
 unchanged from revision26.
-The changed source requires a fresh affected assessment before execution.
+Revision28 records the additional defining-header repair without changing this
+planning prefix or normative proof. Its whole-file SHA256 is
+`3F02CE1FC169CAD0111ADC6D8CC09EAB6D4CBE1E2F8ED9936BB4F939FDC1A9DE`. The changed source requires a fresh affected
+assessment before execution.
 
-**Current source/run disposition:** Source `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4`
+**Current source/run disposition:** Source `ba05821a8255fca334ddd1fe04a1b4e23bf6af16`
+received affected SOURCE PASS (5656 bytes/SHA256
+`4D50A3E104653965431EF940AB7314D828FCC08DBECFBA0504DB34EF8F5CC19A`).
+All21 required groups/2427 visible rows and the145-call trace are bound in the
+journal. Run `20261018T005629Z-05cac877` completed Preflight and all six controls,
+then Build FAILED on four cascading completeness diagnostics for FProcMeshTangent
+in the numeric test. Root PID28452 exited6, cleanup confirmed, final job active0/
+total35; all nine Build settings states match before/after and Preflight.after.
+Closure SHA256 `307B527A5F02B830A0AA84C7D29D6CA67E2BB03A679A364B9EE90840E9F2536B`
+sets the failed run/authority CLOSED_DO_NOT_REUSE. The one defining-header include
+is authored but UNEXECUTED; checkpoint/freeze/fresh affected SOURCE/new RunId
+are required. No downstream, graphical or final OWN15 result exists.
+
+**Historical 4ee4 source/run disposition:** Source `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4`
 received affected SOURCE PASS (4832 bytes/SHA256
 `25E6EB15B259A3C1B3D200964EE3C169C1DE423DDC80879A52581F2A154BCAAC`).
 The journal binds its actual runtime/trace, 1544 required visible rows, root

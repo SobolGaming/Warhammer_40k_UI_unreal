@@ -73,7 +73,25 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-E02 candidate `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4` received affected
+E02 candidate `ba05821a8255fca334ddd1fe04a1b4e23bf6af16` received affected
+**SOURCE PASS** (5656-byte raw report, SHA256
+`4D50A3E104653965431EF940AB7314D828FCC08DBECFBA0504DB34EF8F5CC19A`).
+Run `20261018T005629Z-05cac877` completed Preflight (PASS) and all six supervisor
+subcases in three groups/five roots (PASS). Build **FAILED** with four cascading
+diagnostics from incomplete `FProcMeshTangent` in `E02GeometryTests.cpp:222`.
+PID28452 exited6 in 51.4887138 seconds, with confirmed cleanup and final job
+active0/total35. Nine Build settings states match before/after and Preflight.after;
+SupervisorControls has no separate settings pair.
+
+The run and hidden authority are **CLOSED_DO_NOT_REUSE**. The single defining-header
+include repair is **UNEXECUTED** and requires checkpoint/freeze, fresh affected
+SOURCE review and a new RunId before execution. No Build completion exists;
+Discovery, numeric/rendered/input Automation and GUI remain NOT RUN.
+The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) preserves
+the static PASS, failed compiler output and closure. Visible-window approval,
+final CODE/REQ, packaging and Linux remain pending.
+
+Historical E02 candidate `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4` received affected
 **SOURCE PASS**. Run `20261018T002310Z-d6305fba` completed Preflight and all six
 supervisor controls in three groups/five roots, including child-start and
 expected timeout/injected failures. Each root confirms cleanup/final job active0.

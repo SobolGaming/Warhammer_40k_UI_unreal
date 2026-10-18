@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **AFFECTED_SOURCE_4EE4_PASS; PREFLIGHT_AND_SUPERVISOR_COMPLETE; FIRST_CPP_BUILD_FAILED; HIDDEN_AUTHORITY_CLOSED; BOUNDED_COMPILE_REPAIRS_REQUIRE_FRESH_REVIEW**.
+Status: **AFFECTED_SOURCE_BA058_PASS; PREFLIGHT_AND_SUPERVISOR_COMPLETE; BUILD_FAILED_MISSING_DEFINING_HEADER; HIDDEN_AUTHORITY_CLOSED; ONE_INCLUDE_REPAIR_REQUIRES_FRESH_REVIEW**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -8,15 +8,16 @@ Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
 
-The affected 4ee4 SOURCE assessment is PASS. Run002310 completed Preflight and
-all six supervisor controls, then the first C++ build FAILED. Its root exited6
-with cleanup confirmed and final job active0/total35; all nine Build settings
-states match before/after and Preflight.after. Hidden authority/run are
-CLOSED_DO_NOT_REUSE. Only bounded compile repairs and necessary docs are
-released, requiring checkpoint/freeze, fresh affected SOURCE review and a new
-RunId before execution. Discovery, numeric/rendered/input Automation and GUI
-did not run. The latest appendix binds these records; all earlier source and
-run dispositions remain unchanged below.
+The affected ba058 SOURCE assessment is PASS. Run005629 completed Preflight and
+all six supervisor controls, then Build FAILED on four cascading diagnostics for
+an incomplete FProcMeshTangent in the numeric test. Native root PID28452 exited6
+after51.4887138 seconds; cleanup/final job active0/total35 are confirmed. All nine
+Build settings states match before/after and Preflight.after. Hidden authority/run
+are CLOSED_DO_NOT_REUSE. Only the defining header include and necessary docs are
+released; the authored repair is UNEXECUTED until checkpoint/freeze, fresh affected
+SOURCE review and a new RunId. Discovery, numeric/rendered/input Automation and GUI
+did not run. The latest appendix binds these records; all earlier source/run
+dispositions remain unchanged below.
 
 The predecessor table binds accepted E01-SLOW120 run044903, executed d118,
 reviewed b97, original report verdicts and separate publication bd80123.
@@ -983,3 +984,44 @@ byte-identical to revision26. Checkpoint7b679 briefly mislabeled a boundary that
 included the36-byte heading as this prefix and incorrectly described a line-ending
 change. The separate metadata correction preserves that checkpoint/history;
 no review launch or execution used the incorrect label.
+
+## 2026-10-18: ba058 source PASS, completed controls and tangent-header compile failure
+
+Candidate `ba05821a8255fca334ddd1fe04a1b4e23bf6af16`, compared with `4ee4a3a54c3877d46f1fe2cdc82d282b1fc484b4`, received a fresh affected SOURCE **PASS**, with no actionable findings. The root composite carries prior approval only for the byte-identical wrapper,17 unchanged project/fixture files and unchanged plugin-selection semantics; the five changed C++ files have the new assessment. All28 authored members match, alongside13 stable closure fields,901 catalog descriptors and244 selected plugins.
+
+| Immutable record | Bytes | SHA256 |
+|---|---:|---|
+| [Raw affected SOURCE report](../../../.local/reviews/E02-source-review/review-ba058-20261018T011351Z-0611571c/last-message.txt) | 5656 | `4D50A3E104653965431EF940AB7314D828FCC08DBECFBA0504DB34EF8F5CC19A` |
+| [Root closed-review artifact manifest](../../../.local/reviews/E02-source-review/root-ba058-20261018T005629Z-05cac877/closed-source-review-artifacts.manifest.json) | 14108 | `03DC2BEB77819C7DA94EA913F04B3B64C405554A9EC0397A9B2A70A090D1AC82` |
+| [Actual visible-body coverage](../../../.local/reviews/E02-source-review/review-ba058-20261018T011351Z-0611571c/actual-model-visible-body-coverage.v2.json) | 519905 | `FBBF91250326C29C4EB349ADF391A80B9B40CCDED8BFD15EC525877A97989705` |
+| [Independent trace-only audit](../../../.local/reviews/E02-source-review/review-ba058-20261018T011351Z-0611571c/auxiliary-trace-only-audit-camera-20261018T060314Z-3b76795c.json) | 16679 | `479AE03C9AB001875A412BCD444B5848793575E590912C5436E3EF96BAE9E65E` |
+| [Root composite SOURCE gate](../../../.local/reviews/E02-source-review/root-ba058-20261018T005629Z-05cac877/source-gate-disposition.json) | 7212 | `54596327190BC0D5765E2C750F8B2F76B264CF194240875ED1510CDF2AC2752D` |
+| [Historical hidden authority](../../../.local/reviews/E02-source-review/root-ba058-20261018T005629Z-05cac877/hidden-execution-authority.json) | 4085 | `D3AD468CC6CFE514B17A920DCC96CBD7006BE595D4D12A1E79C1E1FC7A4D0B01` |
+| [Failed Build/run/authority closure](../../../.local/reviews/E02-source-review/root-ba058-20261018T005629Z-05cac877/build-failure-and-hidden-authority-closure.json) | 17484 | `307B527A5F02B830A0AA84C7D29D6CA67E2BB03A679A364B9EE90840E9F2536B` |
+| [Separate stored-failure metadata observation](../../../.local/reviews/E02-source-review/root-ba058-20261018T005629Z-05cac877/failure-metadata-observation-20261018T060900Z-770ae827.json) | 27106 | `29825B67344DBD04F2083EA4E0128B8EF04CBEC2A8266A8A1A79F3F370B856F9` |
+
+Actual reviewer session `01a14d84-50a9-7ac2-b886-9f1eb77a3eab` is fresh exec, gpt-6.1-sol/ultra, read-only/never, memory_mode disabled. The CLI exited0 at `2026-10-18T05:57:39.3750110Z`. Selected runtime evidence supplements the raw report's own UNVERIFIED model/runtime statement; the raw report is unchanged. Backend memory internals, OS PID linkage and requested apps/multi-agent enforcement remain UNVERIFIED. The actual9015-byte prompt differs from the9013-byte source by two trailing CRLF bytes only; transport is not byte-identical.
+
+The145 calls/145 outputs/145 native command items were independently checked. All complete captured bodies equal the actual model-facing bodies. All21 required groups/2427 rows are visible:1260 normative original rows,13 owner rows,995 mandatory C++ rows and159 ordered diff rows. The44 extract metadata rows are separate. The complete five-path diff is11124 bytes/SHA256 `68B4503D3B83A25645E71C97B6B269F2904D6A1CCFD90348BA7E44CC375C1A52`. Source/norm numbering uses width5; diff numbering width4. Maximum actual compact output is7888 bytes, with no truncation or continuing shell. This is recorded text/provenance coverage, not comprehension or runtime proof.
+
+Retain failed reviewer commands2/5 (oversized metadata suppressed; smaller reads3–7) and74 (oversized graph suppressed; scoped reads75–76). Relative-path diagnostic117 reported13 mismatches and was corrected118 with repository-root resolution. Call34's VoidTaskResult/noisy binding was corrected by the complete numbered diff35–38. No prohibited execution/write/excluded-body/network/delegation/message/Git-message read was observed. Root postchecks found zero mismatches across1354 observations,28 authored members,167 compiler references, catalog membership and all absent discovery routes. Startup stderr contains icon-path and unsupported PowerShell snapshot warnings; it is preserved.
+
+### Direct current and future SOURCE transmission consent
+
+The first launch and one relay-based retry were automatically rejected before any reviewer process. Their denial records remain unchanged. The owner then replied directly in this chat to question `call_4aca9972c78349bb8c9841861cb1d9bf`: **"Approve this and future E02 source reviews within the same data scope and destination"**. The [direct human record](../../../.local/reviews/E02-source-review/root-ba058-20261018T005629Z-05cac877/direct-human-current-and-future-source-review-consent.json) is2766 bytes/SHA256 `9238AFF6A1F47B10C6CA0128C6AF009BFE31D3FC237A8D36A77B9316DEBE5D4B`.
+
+It covers private client source, installed UE/API excerpts, requirements and file metadata sent to the configured OpenAI Codex service; credentials, private sessions, author notes and peer verdicts remain excluded. The unchanged launch then succeeded. This direct evidence replaces dependence on the older relay for the current and future same-scope SOURCE launches. It adds no graphical, merge, runtime-evidence transmission or final CODE/REQ consent; those retain their applicable gates.
+
+### Actual run005629 and closed Build failure
+
+Run `20261018T005629Z-05cac877` completed Preflight and SupervisorControls in order under the exact hidden authority above. Preflight has nine matching before/after settings observations. Controls have three groups/six subcases/five roots,20 required artifacts and confirmed exit/cleanup/final zero-active jobs. SUP has no own settings pair; retain the actual Preflight observations.
+
+Build **FAILED**. The phase spans `2026-10-18T06:05:14.9952016Z` to `2026-10-18T06:06:43.888202Z` (88.8930004 seconds). Native root PID28452 exited6 after51.4887138 seconds against the1800-second budget; no timeout or technical blocker occurred. Exit/cleanup are confirmed; final job query succeeded with active0/total35. The generic phase diagnostic `E02_OWNED_PROCESS_FAILED_OR_CLEANUP_UNVERIFIED` reflects compilation failure here; cleanup is established. No secondary errors exist.
+
+The four MSVC diagnostics C2027/C2338/C2139/C2672 cascade from `E02GeometryTests.cpp:222`, whose local `TArray<FProcMeshTangent>` requires a complete type. Installed `KismetProceduralMeshLibrary.h:12` only forward-declares it; `ProceduralMeshComponent.h:19–47` defines it. Both headers are already frozen primaries. The defining header is17557 bytes/SHA256 `2C3E7252A1010CEFA761644DA60231E608C8C13A115086D761D4F41A92FF3C0A`; its module is already a dependency. E02Geometry.cpp compiled; the prior51 diagnostics did not recur. Two C4701 warnings remain for Pixel/Origin. Source investigation found success guards and installed API assignments before use, so no substitute-zero or assertion change is included; this is not executed input proof.
+
+All nine Build settings states match before/after and Preflight.after: four present hashes/five established absences. All21 authored files/seven directories match staging. Known Documents logical leaves remain absent; provider/tag/target identity and present-leaf hashing stay UNVERIFIED. The selected compiler/resource-compiler receipt exists, but the failed Build supplies no accepted build/toolchain proof. Build completion/required-artifacts, client DLL/target receipt/modules and all downstream phase directories are absent. The closure binds the exact raw result/process/log/toolchain/predecessor artifacts.
+
+Root sets run/hidden authority **CLOSED_DO_NOT_REUSE**, with no remaining phase authority. Only one `ProceduralMeshComponent.h` include in E02GeometryTests.cpp and necessary factual docs are released. The authored include is **UNEXECUTED**; preserve every assertion, registration, fixture, dependency, wrapper and budget. Checkpoint/freeze, a new RunId and fresh affected SOURCE review precede repaired execution. Discovery, numeric/rendered/input Automation and GUI did not run. Explicit window approval, final separate CODE/REQ, packaging, Linux and broader research/implementation gates remain open.
+
+Packet revision28 whole-file SHA256: `3F02CE1FC169CAD0111ADC6D8CC09EAB6D4CBE1E2F8ED9936BB4F939FDC1A9DE`. The established raw planning prefix remains65445 bytes/SHA256 `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.

@@ -805,7 +805,7 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-18 UTC / plan revision 27**.
+Packet clarification revision: **2026-10-18 UTC / plan revision 28**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
 `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
@@ -819,6 +819,13 @@ types, the installed Slate focus API, out-of-line UObject helper construction
 and a test-local variable name. No fixture, assertion, case count, wrapper or
 budget change is authorized by those compile fixes. A new checkpoint/freeze,
 affected SOURCE review and new RunId are required before repaired execution.
+Revision28 records ba058 SOURCE PASS and run005629's completed Preflight/controls,
+followed by four cascading compiler diagnostics from the test translation unit's
+incomplete FProcMeshTangent. Only the defining ProceduralMeshComponent.h include
+and factual documentation are released. The failed run/authority are closed;
+the one-include repair is unexecuted and needs its own checkpoint/freeze,
+fresh affected SOURCE assessment and new RunId. All normative proof scope stays
+unchanged, including the exact raw planning prefix preceding this heading.
 It retains child-start/alive evidence, exact injected-seam validation and the read-only Known Documents
 ancestor-route policy, plain-file leaves, all nine observations and strict
 owned/source/tool/output path checks.
