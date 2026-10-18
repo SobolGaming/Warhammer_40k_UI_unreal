@@ -78,7 +78,45 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-The affected E02 SOURCE assessment of `e8f1837e7083f6db03ae7a3909eae76769e1692b`
+Current E02 candidate `fff05fc2b7e663bd345ddae22c68058f849f7029` received affected
+SOURCE PASS (5241-byte raw report, SHA256
+`583663C9E698BBC40F89AB28CFDE7760E4FD195D07848A28A6CA75F13963107A`).
+Run `20261018T160124Z-dcf2685f` completed Preflight, six supervisor subcases
+in three groups/five roots, Win64 Editor Build and visible Discovery. Discovery
+reconciled 2211 eligible engine names and the exact 16 E02 names. Its D3D12 scene
+used the RTX 4090, driver 610.88; PID11088 exited0 in 255.7679178 seconds, with
+confirmed exit/cleanup and final job active0/total40.
+
+Numeric FAILED because the JSON reader rejected the report's leading UTF-8 BOM
+(`0xEF` at byte0). PID32692 exited0 in 20.3899516 seconds, with confirmed
+exit/cleanup and final job active0/total11. Separate strict BOM-aware decoding
+observes four exported Success cases/17041 assertions; Numeric remains FAIL.
+All nine Numeric settings pairs match Preflight.after: four present/five absent.
+No Numeric completion exists. WorldInput/Audit remain NOT RUN; six PNG captures
+were NOT REQUESTED.
+
+All run/hidden/visible authorities are CLOSED_DO_NOT_REUSE. The exact-run
+[owner relay](.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/relayed-visible-window-owner-approval.json)
+covered two sequential visible windows; one was used and the remaining window is
+closed/nontransferable. Only strict single-leading-UTF8-BOM reader repair, focused
+offline controls and factual docs are released. The repair candidate is UNEXECUTED
+and needs checkpoint, fresh freeze/affected SOURCE review and a new RunId.
+Default Trace Server/control1985 and CrashReportClient startup were observed;
+no attributed activation diagnostic for the six forbidden messaging plugins was
+found. Descendant second-hop
+behavior/network egress remain UNVERIFIED; no actual job escape is established.
+Startup mitigation remains separate pending research, with no startup flag change
+authorized here and no acceptance waiver.
+The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) and
+[closure](.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/numeric-failure-and-authority-closure.json)
+(6758 bytes/SHA256
+`E6C5B79EED91C1D4B923D590117A4094F3DC1B18C9B61AA6A9973DA0C9E7ECFA`)
+bind actual results and limits. Standing SOURCE consent supplies no fresh-candidate
+GUI/final CODE/REQ/acceptance/merge authority. Final OWN15 CODE by a fresh reviewer
+and REQ by a different fresh auditor follow the execution/evidence freeze.
+Linux/packaging and visual acceptance remain pending.
+
+The historical affected E02 SOURCE assessment of `e8f1837e7083f6db03ae7a3909eae76769e1692b`
 is PASS (4589-byte raw report, SHA256
 `E720D499E2ECC4E0C95E21A5AF1133DBFDFAC77CB6215000C705DBE0E1F5CF66`).
 Run `20261018T061145Z-1afc8afb` passed Preflight, all six supervisor subcases

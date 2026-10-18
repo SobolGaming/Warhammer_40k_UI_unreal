@@ -805,7 +805,7 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-18 UTC / plan revision 29**.
+Packet clarification revision: **2026-10-18 UTC / plan revision 30**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
 `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
@@ -841,6 +841,26 @@ differentnewREQ discipline remains mandatory; current source/build results suppl
 no final acceptance. The direct visible approval applies to the frozen e8 scope,
 not future candidates or final review transmission/merge. No downstream phase or
 six-image proof exists for run061145. The normative raw prefix remains unchanged.
+Revision30 records fff05fc affected SOURCE PASS and run160124's completed
+Preflight/SUP6/Windows Editor Build/visible Discovery. Discovery reconciled2211
+engine names and exact16 E02 names on D3D12/RTX4090 driver610.88; PID11088
+exited0 in255.7679178s with cleanup/final job0/40. Numeric then FAILED when
+the JSON reader rejected the original report's single leading UTF8BOM.
+PID32692 exited0 in20.3899516s with cleanup/final job0/11. Four exported Success
+cases/17041 assertions are separate BOM-aware diagnostic observations, not a
+phase PASS. All9 Numeric settings pairs match Preflight.after (4present/5absent).
+No Numeric completion exists; WorldInput/Audit did not run and6PNGs were not
+requested. All run/execution authorities are CLOSED_DO_NOT_REUSE; oneof2 exact-run
+visible windows was used and the remaining window is closed/nontransferable.
+Only strict single-leading-BOM reader repair, focused offline controls and docs
+are released. The repair candidate is UNEXECUTED pending checkpoint/freeze/fresh
+affected SOURCE/newRunId. Trace Server/control1985 and CrashReportClient startup
+were observed; no attributed activation diagnostic for the six forbidden plugins
+was found. Secondary startup/
+egress remain UNVERIFIED; no actual job escape is established. No startup flag
+change or acceptance waiver is authorized here. Normative prefix/counts/paths/
+ownership/budgets remain unchanged; the journal binds actual evidence and limits.
+Final OWN15 CODE/differentREQ, visual acceptance, packaging and Linux remain open.
 It retains child-start/alive evidence, exact injected-seam validation and the read-only Known Documents
 ancestor-route policy, plain-file leaves, all nine observations and strict
 owned/source/tool/output path checks.

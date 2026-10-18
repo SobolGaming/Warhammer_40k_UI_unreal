@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-18 UTC
-**Revision:** 29 — E02 source e8f1837 passed affected review and the hidden chain, including the Windows Editor build. Directly approved graphical Discovery then failed its complete-list parser on an apostrophe in one engine test name. The run and all execution authorities are closed; the one-character parser repair requires a fresh checkpoint/review/RunId.
+**Revision:** 30 — E02 source fff05fc passed affected review, the hidden chain and visible Discovery. Numeric failed on the exported report's leading UTF-8 BOM despite native exit0 and four exported successes. All run/execution authority is closed; strict BOM-reader repair needs a fresh checkpoint/freeze/affected SOURCE review and RunId.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,17 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 29 changes
+### Revision 30 changes
+
+Source fff05fc/run160124 completed the hidden chain and graphical Discovery,
+then Numeric failed while reading Unreal's BOM-prefixed JSON report. Its four
+exported successes are retained as separate diagnostics. The run and all
+execution authorities are closed; no second window or PNG capture was requested.
+The strict reader repair passed27 offline source-unit controls; checkpoint,
+fresh affected SOURCE review and a new RunId precede wrapper/native execution.
+Section0.9 and the E02 journal bind the results, closure and startup limits.
+
+### Revision 29 history
 
 Source `e8f1837e7083f6db03ae7a3909eae76769e1692b` received affected SOURCE PASS.
 Run `20261018T061145Z-1afc8afb` completed Preflight, all six supervisor subcases
@@ -969,7 +979,42 @@ planning prefix or normative proof. Its whole-file SHA256 is
 `3F02CE1FC169CAD0111ADC6D8CC09EAB6D4CBE1E2F8ED9936BB4F939FDC1A9DE`. The changed source requires a fresh affected
 assessment before execution.
 
-**Current e8f1837 source/run disposition:** The affected SOURCE report is PASS
+**Current fff05fc source/run disposition (revision30):** Affected SOURCE PASS
+binds `fff05fc2b7e663bd345ddae22c68058f849f7029` (5241-byte raw report/SHA256
+`583663C9E698BBC40F89AB28CFDE7760E4FD195D07848A28A6CA75F13963107A`).
+Its65-call trace binds1338/1338 required visible rows across10 groups; two empty
+nonzero commands and recoveries remain preserved. Run
+`20261018T160124Z-dcf2685f` completed Preflight/SUP6/Win64 Editor Build and
+visible Discovery. Discovery reconciled2211 eligible engine names and exact16
+E02 names on D3D12/RTX4090 driver610.88. PID11088 exited0 in255.7679178s,
+with confirmed exit/cleanup and final job active0/total40.
+
+Numeric FAILED at the JSON reader: the original3476-byte report begins EF-BB-BF,
+and JsonDocument.Parse rejected0xEF at byte0. PID32692 exited0 in20.3899516s,
+with confirmed exit/cleanup and final job active0/total11. Separate strict
+BOM-aware decoding observes four exported Success cases/17041 assertions;
+these are diagnostic observations, not Numeric PASS. All nine Numeric settings
+pairs match Preflight.after:4present/5absent. No Numeric completion exists.
+WorldInput/Audit did not run; six PNG captures were not requested.
+
+The [6758-byte closure](../../.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/numeric-failure-and-authority-closure.json)
+has SHA256 `E6C5B79EED91C1D4B923D590117A4094F3DC1B18C9B61AA6A9973DA0C9E7ECFA`.
+It sets the run and all hidden/visible execution authorities CLOSED_DO_NOT_REUSE.
+The exact-run owner relay covered two sequential visible windows; one was used
+and the remaining window is closed/nontransferable. Only strict single-leading-
+UTF8-BOM reader repair, focused offline controls and factual docs are released.
+The repair candidate is UNEXECUTED: checkpoint, fresh freeze/affected SOURCE
+review and a new RunId precede execution. Default Trace Server/control1985 and
+CrashReportClient startup were observed; no attributed activation diagnostic for
+the six forbidden messaging plugins was found. Descendant second-hop behavior/network egress remain
+UNVERIFIED; no actual job escape is established. Startup mitigation remains
+separate pending research; no startup flag change or waiver is authorized here.
+Standing SOURCE consent supplies no fresh-candidate GUI/final CODE/REQ/
+acceptance/merge authority. The journal binds actual evidence, relay and limits.
+Packet revision30 whole-file SHA256 is `04FA9B06177B89F8FB3A775F58B9EE16A6255B9E6E39DE699233C888AB3F8AB1`;
+its65445-byte normative prefix is unchanged.
+
+**Historical e8f1837 source/run disposition:** The affected SOURCE report is PASS
 (4589 bytes/SHA256 `E720D499E2ECC4E0C95E21A5AF1133DBFDFAC77CB6215000C705DBE0E1F5CF66`).
 Its73-call trace has1836/1836 required visible rows across10 groups, with no failed
 or truncated command. Run061145 completed Preflight/SUP6/Editor Build, then
@@ -2173,6 +2218,8 @@ During the current research task, choose and log reversible **planning** details
 
 ### 15.1 Actual review record
 
+**2026-10-18 E02 revision30:** fff05fc received affected SOURCE PASS; run160124 completed Preflight/SUP6/Editor Build/visible Discovery, then FAILED Numeric on the report BOM. Four exported numeric Success cases/17041 assertions are diagnostic observations only. All execution authority is closed; strict BOM-reader repair is UNEXECUTED pending a fresh affected gate. Section0.9 and the [E02 journal](evidence/2026-10-16-e02-world-input.md) preserve exact identities, failure, startup limits and owner-relay scope. Final OWN15 CODE/different REQ remain pending.
+
 **Pre-BOOT01 history:** the original plan received a single-session planning self-review; revision 3 added source/toolchain/contract research, owner answers and document checks. One existing static AST boundary check passed at that stage; no application/integration/Unreal/render/package/performance test had run. This historical documentation review was not a code/experiment acceptance audit.
 
 **2026-10-16 separate documentation review: PASS, no actionable findings (pre-BOOT01).** A fresh-context reviewer verified frozen manifest `80f5dbc970c6a041b9b5c7a210fb4ff7c190265dedc60d240bb60d1f6c2bd1e6` and all 13 member hashes before/after review, 93 relative links, source/provenance and gate/owner-answer consistency. [Full review record and limits](research/2026-10-16-documentation-review.md). Subsequent metadata and execution changes are outside that historical frozen file list; it did not review code or prove Unreal behavior.
@@ -2200,7 +2247,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** checkpoint/freeze the bounded E02 compile repairs, then obtain fresh affected SOURCE review before a new RunId under Section 0.9. Source 4ee4 received static PASS; actual 002310 completed Preflight and all six supervisor controls, then C++ Build failed. The run/hidden authority are CLOSED_DO_NOT_REUSE. Discovery, numeric/rendered/input Automation and GUI did not run. All historical dispositions/settings gaps remain intact. Explicit visible-window approval, final CODE/REQ, packaging and Linux remain pending; scoped transmission consent adds no runtime/merge authority. E01-SLOW120 acceptance/history is unchanged.
+**Ready now:** checkpoint/freeze the released strict single-leading-UTF8-BOM reader repair, focused offline controls and factual docs, then obtain fresh affected SOURCE review before a new RunId under Section0.9. Actual fff05fc/run160124 passed the hidden chain and visible Discovery; Numeric FAILED on report encoding. Its four exported successes do not pass the phase. All run/hidden/visible authorities are CLOSED_DO_NOT_REUSE, including the unused second visible window. WorldInput/Audit/six PNGs remain unrun. Startup mitigation requires separate source-supported disposition; no flag change or waiver is authorized here. Final OWN15 CODE/different REQ, acceptance, packaging and Linux remain pending. Standing SOURCE consent adds no runtime/final-review/merge authority; all E01 and earlier E02 history remains intact.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 
@@ -2208,7 +2255,7 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 source characterization and selected44.3.33 adaptation, profile/capability/design checklists, developer Core launch/install recipes, recorded Core issues and BOOT01 scaffold/probe/final builds/generation. Normal `044903` now records 87 Python units in 15.167 seconds, 14 Capture checks, auxiliary privacy/exact-byte promotion, 132 unique native successes, two automated evidence checks and matching settings/DDC/process evidence. Separate pre-execution controls are 135 pure PowerShell checks with 39 stable inputs. Earlier failures, unknowns, settings history and source assessments remain preserved.
 
-**Next concrete step:** checkpoint the UE compile repairs and factual documentation, then bind the new frozen source, fixture, defaults, toolchain, assets, relevant installed API references and declared plugin closure for fresh affected independent SOURCE review and a new RunId. The 16 native cases, six PNGs and final CODE/REQ gates remain unrun. Full E01/M01/M02, research/implementation, production, packaging and Linux remain open.
+**Next concrete step:** checkpoint the strict BOM-reader repair/offline controls and factual documentation, then bind new frozen source, fixture, defaults, toolchain, assets, relevant installed API references and declared plugin closure for fresh affected independent SOURCE review and a new RunId. Preserve failed Numeric report bytes, all nine matching settings pairs and prior authority closures. The four raw numeric successes are separate from phase acceptance; twelve WorldInput cases, six PNGs, Audit and final CODE/REQ remain unrun. Full E01/M01/M02, research/implementation, production, packaging and Linux remain open.
 
 ## 16. Sources and inspection index
 

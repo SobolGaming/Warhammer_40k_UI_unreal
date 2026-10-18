@@ -73,7 +73,38 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-E02 candidate `e8f1837e7083f6db03ae7a3909eae76769e1692b` received affected
+E02 candidate `fff05fc2b7e663bd345ddae22c68058f849f7029` received affected
+**SOURCE PASS**. Run `20261018T160124Z-dcf2685f` passed Preflight, six supervisor
+subcases in three groups/five roots, Win64 Editor Build and visible Discovery.
+Discovery reconciled 2211 engine names and the exact 16 E02 set on D3D12/
+RTX 4090 driver 610.88. PID11088 exited0 in 255.7679178 seconds, with confirmed
+exit/cleanup and final job active0/total40.
+
+Numeric **FAILED** because the JSON reader rejected the report's leading UTF-8
+BOM. PID32692 exited0 in 20.3899516 seconds, with confirmed exit/cleanup and
+final job active0/total11. The raw report separately exports four Success cases/
+17041 assertions after strict BOM-aware diagnostic decoding; Numeric remains FAIL.
+All nine settings pairs match Preflight.after (four present/five absent). No
+Numeric completion exists; WorldInput/Audit are **NOT RUN** and six PNG captures
+were **NOT REQUESTED**.
+
+All execution authorities and this run are **CLOSED_DO_NOT_REUSE**. The exact-run
+[owner relay](.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/relayed-visible-window-owner-approval.json)
+covered two sequential visible windows; one was used and the remaining window
+is closed/nontransferable. Only strict single-leading-BOM reader repair, focused
+offline controls and docs are released. The repair candidate is **UNEXECUTED**:
+checkpoint/freeze, fresh affected SOURCE review and a new RunId precede execution.
+The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) and
+[closed-run record](.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/numeric-failure-and-authority-closure.json)
+preserve the evidence. Default Trace Server/control1985 and CrashReportClient
+startup were observed; no attributed activation diagnostic for the six forbidden
+messaging plugins was found. Secondary
+startup behavior/network egress remain UNVERIFIED; no actual job escape is
+established and no startup flag change is authorized here. Standing SOURCE consent,
+final independent CODE/different REQ, acceptance and merge remain separate.
+Linux/packaging and visual acceptance remain pending.
+
+Historical E02 candidate `e8f1837e7083f6db03ae7a3909eae76769e1692b` received affected
 **SOURCE PASS** (4589-byte raw report, SHA256
 `E720D499E2ECC4E0C95E21A5AF1133DBFDFAC77CB6215000C705DBE0E1F5CF66`).
 Run `20261018T061145Z-1afc8afb` passed Preflight, six supervisor subcases in

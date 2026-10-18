@@ -199,7 +199,10 @@ function Read-Json([string] $Path) {
     if(([IO.FileInfo]::new($plain)).Length -gt 64MB){throw 'E02_JSON_SIZE'}
     $bytes = [IO.File]::ReadAllBytes($plain)
     if ($bytes.Length -gt 64MB) { throw 'E02_JSON_SIZE' }
-    $text = $script:Utf8.GetString($bytes); Safe-Text $text
+    # Unreal Automation may prefix its JSON export with one UTF-8 byte-order mark.
+    $offset=0
+    if ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) { $offset=3 }
+    $text = $script:Utf8.GetString($bytes,$offset,$bytes.Length-$offset); Safe-Text $text
     $options = [Text.Json.JsonDocumentOptions]::new(); $options.MaxDepth=80
     $doc = [Text.Json.JsonDocument]::Parse($text,$options)
     try { Check-JsonElement $doc.RootElement 0 } finally { $doc.Dispose() }

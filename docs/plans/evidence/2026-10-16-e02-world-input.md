@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **E8F1837_AFFECTED_SOURCE_PASS; HIDDEN_CHAIN_AND_EDITOR_BUILD_PASS; VISIBLE_DISCOVERY_FAILED_QUOTED_NAME_PARSER; ALL_EXECUTION_AUTHORITY_CLOSED; PARSER_REPAIR_REQUIRES_FRESH_REVIEW**.
+Status: **FFF05FC_AFFECTED_SOURCE_PASS; HIDDEN_CHAIN_AND_GRAPHICAL_DISCOVERY_PASS; NUMERIC_REPORT_READER_FAIL; ALL_EXECUTION_AUTHORITY_CLOSED; UTF8_BOM_REPAIR_REQUIRES_FRESH_REVIEW**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -8,7 +8,25 @@ Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
 
-Current e8f1837 SOURCE is PASS; run061145 completed Preflight/SUP6/Editor Build,
+Source `fff05fc2b7e663bd345ddae22c68058f849f7029` received affected SOURCE PASS.
+Run `20261018T160124Z-dcf2685f` completed Preflight, all six supervisor cases,
+the Windows Editor build and owner-approved graphical Discovery. The repaired
+name parser reconciled all2211 engine names and the exact16 E02 names. Numeric
+then FAILED because its JSON reader retained a leading UTF-8 byte-order mark
+from Unreal's report. Its native process exited0 with confirmed cleanup and
+final job0/11. Diagnostic inspection finds four exported Success cases/17041
+assertions, but the actual Numeric phase remains FAIL without completion.
+Nine settings before/after values match Preflight.after. WorldInput/Audit did
+not run and six PNGs were not requested. Root closed this run and every hidden/
+visible execution authority; remaining window permission does not transfer.
+Only a strict single-leading-BOM reader repair and offline controls/docs are
+released. Its27 offline controls pass; wrapper/native execution of the repair
+still requires checkpoint/freeze, fresh affected SOURCE review and a new RunId.
+The latest appendix binds these facts and the separate startup-diagnostic limits.
+
+### Previous e8f1837 summary — historical
+
+Historical e8f1837 SOURCE is PASS; run061145 completed Preflight/SUP6/Editor Build,
 then its directly approved graphical Discovery FAILED complete-list validation.
 The engine exited0 with cleanup/final job0/25;2211 unique engine rows versus2210
 parsed rows differ by one legitimate name containing an apostrophe. All16 E02
@@ -58,7 +76,7 @@ not broad feature work or Core changes. Work stays on `codex/e02-world-input-pro
 - Different fresh independent CODE and REQ reviewers will assess the final frozen
   result under OWN15. None of these source authors can supply those roles.
 
-## Reviewed execution envelope — not yet execution approval
+## Reviewed execution envelope — original packet-adoption snapshot
 
 Use existing UE5.8.3/toolchain only. Stage only reviewed descriptor/Source/Config
 and synthetic fixture under a fresh owned `.local/experiments/E02/<RunId>/`;
@@ -82,7 +100,7 @@ rule requires explicit owner approval for one visible/reachable interactive game
 window before graphical discovery/rendered input. That approval is pending;
 prepare concrete source first. No offscreen substitute or human input is claimed.
 
-## Gates and actual status
+## Gates and actual status — original packet-adoption snapshot
 
 | Gate | Actual status |
 |---|---|
@@ -1159,3 +1177,148 @@ The wrapper is154423 bytes/SHA256
 reversing its one-character delta restores the exact prior154424-byte source.
 Its nonexecuting parser reports zero syntax errors. Fresh affected SOURCE review
 and a new frozen RunId still precede execution. The failed Discovery is retained.
+
+## fff05fc SOURCE, graphical Discovery and failed Numeric — 2026-10-18 UTC
+
+Checkpoint `fff05fc2b7e663bd345ddae22c68058f849f7029` changes only the quoted-name
+predicate plus factual docs. The new freeze/run are distinct from the failed
+e8 attempt: `source-fff05fc-20261018T161000Z-dcf2685f` and
+`20261018T160124Z-dcf2685f`. The freeze is372707 bytes/SHA256
+`B4F9300F70A16585654980F6B235DF6289E4A20354F98A09E8D68DC0FA6258A4`.
+The affected SOURCE [raw report](../../../.local/reviews/E02-source-review/review-fff05fc-20261018T161000Z-dcf2685f/last-message.txt)
+is PASS,5241 bytes/SHA256
+`583663C9E698BBC40F89AB28CFDE7760E4FD195D07848A28A6CA75F13963107A`.
+Root's separate [source gate](../../../.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/source-gate-disposition.json)
+is8085 bytes/SHA256 `ABE0FA1FE48B42CA164872DAB01EF28AF4E42E443371CAE240FC4D4BAEC986C6`.
+It carries earlier assessment only for demonstrated unchanged scope; this is
+not a fresh whole-client CODE/REQ verdict.
+
+The actual fresh SOURCE context is `01a14fc9-1d62-7c12-9f28-24c954fa8e32`.
+Its selected runtime records read-only/approval-never/disabled memory_mode and
+gpt-6.1-sol/ultra. Root separately observed those settings; lower backend memory,
+feature enforcement and OS PID remain unverified. The65 trace inputs/outputs
+match; commands49 and52 failed with exit1/empty output, followed by explicit
+narrow successful recovery. Do not describe all65 commands as successful.
+Required1338 source/normative rows have no coverage gap. These source/trace
+facts add no native execution or final OWN15 acceptance.
+
+### Current-run owner relay and actual phases
+
+The trusted owner relay from thread `01a14ffe-4b20-7627-8b84-049ecd8c502e`
+preserves the exact approval, “It may continue. Approved.”, for the new pair
+after the parser repair. It identifies source chat
+`01a11844-54b2-778d-90e7-7f9253e0c00f`, assistant message
+`Sentinel_c3fd543d75cc819198ff3e0c1e70c1bf` and owner message
+`Sentinel_efd20f2b442c8191bcdda1b5f9dd6c23`. Root did not independently retrieve
+those literal original messages. The [relay record](../../../.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/relayed-visible-window-owner-approval.json)
+is3576 bytes/SHA256 `49A3CF7E50007E58B4821643946B6317ADAA1436358D4E82C16337625C54BFF0`.
+The separate [execution authority](../../../.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/visible-execution-authority.relay.json)
+is7002 bytes/SHA256 `58A75F948CC6CB734F19D1BE8B203583B77299A57334A534EA950063BAD8D047`.
+It authorized this exact frozen run, two sequential visible launches of at most
+600s, own scripted focus/input/resize and six captures, with phase gates and
+stop/preserve on failure. It supplies no final CODE/REQ transmission or merge.
+
+| Actual phase | Closed result |
+|---|---|
+| Preflight | PASS;7.5972051s;2 required artifacts;9 matching settings before/after |
+| SupervisorControls | PASS;18.7803036s phase;three groups/six subcases/five roots;20 artifacts; expected injected/timeout process failures preserved |
+| Windows Development Editor Build | PASS;110.4005696s phase;PID12708 elapsed55.3744577s/exit0;cleanup/final job0/42;28 artifacts |
+| Graphical Discovery | PASS;PID11088 elapsed255.7679178s/exit0 within600s;cleanup/final job0/40;34 artifacts;2211 eligible names/exact16 E02 |
+| Numeric | FAIL in report reader;PID32692 elapsed20.3899516s/exit0 within600s;cleanup/final job0/11;no phase completion |
+| WorldInput / Audit | NOT RUN;the second visible launch and six PNG captures were not requested |
+
+Discovery's [completion](../../../.local/experiments/E02/20261018T160124Z-dcf2685f/discovery/completion.json)
+is1118 bytes/SHA256 `56B9260C0582FA44DDA2A88592F11B301871CF0D7ADD788BAFD9BE61F9465B49`;
+its bound result is2205036 bytes/SHA256
+`37019457370DD83E9DC0A8522739FCBA26A775DFDA4C59D6E40DA88D61EAC876`.
+The actual scene reports D3D12/RTX4090, driver610.88/internal32.0.16.1088,
+SM5, visible1280x720, perspective, five expected model IDs/two supports and
+zero own Core transport/game-command/accepted-result counters. Discovery is not
+rendered-case execution, six-image inspection or physical-input acceptance.
+Root's read-only closed-chain inspector passed through Discovery before Numeric
+started; it rehashed required artifacts and checked source/stage/settings,
+process receipts/budgets/cleanup, names, scene and native diagnostics.
+
+### Numeric failure and immutable disposition
+
+Numeric's actual [failed result](../../../.local/experiments/E02/20261018T160124Z-dcf2685f/numeric/result.json)
+is2250514 bytes/SHA256 `8BF89D9FAA3A2A2730D26FB6DE0397909000CD89387C7D9127DC2AB1DC01BF7B`.
+Its primary failure is a MethodInvocationException calling JsonDocument.Parse:
+`'0xEF' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.`
+There are no secondary phase errors. The native [receipt](../../../.local/experiments/E02/20261018T160124Z-dcf2685f/numeric/numeric.process.json)
+is65870 bytes/SHA256 `B6861F421708D111B606FD955FA2504CF8F88D33BDF03261B874DFEAD56FB0B9`.
+All9 before/after settings role/path/inspection/existence/hash/policy values
+match the actual Preflight.after baseline:4 present/5 absent, observation UTCs
+inside the phase. An initial root metadata command automatically converted ISO
+strings to DateTime; the explicit DateKindString rerun corrected only that
+inspection, with no evidence mutation.
+
+The unchanged [raw export](../../../.local/experiments/E02/20261018T160124Z-dcf2685f/reports/numeric/index.json)
+is3476 bytes/SHA256 `8C96A0AEF18F6C091FD48A8942F49D9169B0097D466562FEAA1CE5898A31407B`.
+It starts EF-BB-BF-7B. A separate strict offset3 decode/JSON inspection found
+exactly four Success cases: HeadingAxes27, RoundTrip24, ShapesWinding16875 and
+UnsupportedGeometry115 assertions, total17041. Aggregates succeeded4,
+succeededWithWarnings0, failed0/notRun0/inProcess0. The
+[diagnosis](../../../.local/planning/E02/20261018T173218Z-numeric-utf8bom-diagnosis-c7676d4a/numeric-utf8bom-diagnosis.json)
+is8009 bytes/SHA256 `3C54E2F415DEA3DF9A3CA0FD74C94E7E8D424A583583221B7298988C7C018C4B`.
+These are diagnostic observations of raw bytes. They do not retroactively make
+the failed Numeric phase PASS or authorize its dependent phases.
+
+Root preserved the failure and [closed the run and all authorities](../../../.local/reviews/E02-source-review/root-fff05fc-20261018T160124Z-dcf2685f/numeric-failure-and-authority-closure.json):
+6758 bytes/SHA256 `E6C5B79EED91C1D4B923D590117A4094F3DC1B18C9B61AA6A9973DA0C9E7ECFA`.
+One visible launch was used. The unused second launch is closed and cannot be
+transferred to another candidate/run. No Numeric completion, WorldInput/Audit
+phase or six-image evidence exists. Do not rerun or resume this RunId.
+
+### Bounded reader repair and offline controls
+
+The released repair skips exactly one EF-BB-BF triplet at byte0, then uses the
+existing strict UTF8 decoder, size/path/privacy checks, duplicate/case-collision
+walk, depth80 parser and typed DateKindString conversion. It neither trims
+arbitrary leading characters nor changes raw export bytes/hashes. Literal
+U+FEFF inside a valid JSON string remains ordinary data. Double/misplaced markers
+outside strings and malformed encodings remain rejected by the decoder/grammar.
+No C++/fixture/test-count/input/budget/native-argument change is included.
+
+The [offline source-unit helper](../../../.local/planning/E02/20261018-utf8bom-reader-controls-a86d13ee/Test-E02JsonReader.proposed.ps1)
+is6429 bytes/SHA256 `F62389BFB41972B7B8903DE2C8057F83C45E805FF6F7A236AEACE6317FF44638`.
+It extracts only five raw source function definitions and runs27 synthetic
+encoding/grammar/duplicate/depth/typed-data/privacy controls; all27 passed.
+The [result](../../../.local/tests/e02-json-reader-57f5d8fc76b54258915ede91fa451e17/reader-controls.json)
+is7610 bytes/SHA256 `D1382884619720EF03EF55AAA2A7EFC6E46332E2005A3413CE588E90EC75DC9E`.
+No wrapper initialization/phase/native/GUI/network or credential-file read occurs.
+The repair wrapper SHA256 is
+`3047BA75D8E293A616FE0039928A315A979CA312B814ADCB8B3AD588B8151C30`.
+Offline controls do not supply fresh SOURCE approval or actual new-run proof.
+
+### Actual engine startup observations and limits
+
+The [closed startup-log observations](../../../.local/planning/E02/discovery-startup-fff05fc-20261018T172946Z-44342e1a/closed-discovery-startup-log.json)
+are6112 bytes/SHA256 `A255D59A11867ED07B28B4215C494A3C57C035F8EE2493C9921C0321FBAF4F22`.
+The six explicitly disabled plugin names occur only in argv, with no attributed
+mount/start/listener diagnostic found. Other actual diagnostics include
+CrashReportClient startup, Unreal Trace Server startup and trace control
+listening on port1985. Library/thread loading is not proof of external requests.
+There are23 Warning rows and no matched Error/Fatal/ensure/assert row; this is
+not a comprehensive correctness proof or a claim that each warning is benign.
+
+The corrected [installed-source/process supplement v2](../../../.local/planning/E02/discovery-process-mechanisms-v2-fff05fc-20261018T173430Z-131833d7/installed-launch-mechanisms-and-closed-discovery-job.v2.json)
+is23781 bytes/SHA256 `EFB90337C2D02624DC8D0E2F254CADE5E281604F633D94A2E027816851C99845`.
+It preserves the original report and corrects six flattened range pairs; all12
+whole-file descriptors and33 explicit ranges were verified. Available installed
+source uses direct first-hop process creation. DETACHED_PROCESS/new process
+groups do not themselves establish Windows Job escape. The actual private job
+records kill-on-close8192, no allowed/silent-breakaway bit, and final active0.
+The UTS daemon/CRC respawn implementations are absent from installed source;
+their individual membership/lifetime remains UNVERIFIED. No actual brokered or
+escaped process was established, and aggregate job0 cannot attest processes
+outside that job. Trace listener exposure and whole-process network egress remain
+UNVERIFIED. No engine/global configuration change, extra kill/search fallback
+or startup-flag repair is included in the BOM-only candidate.
+
+Next: checkpoint/freeze this bounded repair, obtain fresh affected SOURCE review
+under standing source/API/requirements/metadata consent and allocate a fresh
+RunId before execution. Visible launch approval remains specific to the next
+concrete candidate. Final OWN15 CODE and different REQ assessments, their
+applicable runtime-evidence transmission authority, actual six-image inspection,
+Linux/packaging/full E02 and broader migration gates remain open.
