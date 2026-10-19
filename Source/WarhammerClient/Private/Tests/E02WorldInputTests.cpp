@@ -910,7 +910,7 @@ private:
             Do(TEXT("refusal survives actual pointer movement"), [this]()
             {
                 Check(World->EventCount() > RefusalEventBaseline &&
-                    FSlateApplication::Get().GetCursorPos().Equals(QuantizedPhysical(A + FVector2D(8, 6)), 0.6) &&
+                    FVector2D(FSlateApplication::Get().GetCursorPos()).Equals(QuantizedPhysical(A + FVector2D(8, 6)), 0.6) &&
                     World->VisibleStatus().Contains(TEXT("ProofHasNoGameSession")),
                     TEXT("Precise no-session refusal remains visible after pointer movement"));
                 Check(World->GetPolicy().Snapshot().LocalReview == ELocalReview::Ready && World->GetPolicy().Snapshot().ConfirmAttempts == 3,
