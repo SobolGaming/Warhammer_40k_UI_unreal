@@ -1,9 +1,11 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 33, is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 34, is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
+
+Revision 34 makes the [M03 project-owned startup level](unreal-migration-plan.md#116-project-owned-startup-level-and-m03-entry-path) explicit through ENTRY01–ENTRY08: intentional editor/game defaults, reproducible launch, cook references, Core/session lifetime and meaningful slice/error evidence. A single minimal entry level is sufficient; full configuration/army-building UI and one level per battlefield are not prerequisites. This is a planning-only follow-up to 56ab55b; no asset or runtime implementation was performed.
 
 Revision 33 adds prospective [RQ25 / reproducible start points](unreal-migration-plan.md#115-reproducible-setup-and-game-state-start-points), START01–START10 and E09, supported by the [pinned lifecycle investigation](research/2026-10-19-game-state-bootstrap.md). The development-only selector and fresh-instance reset/relaunch are required future deliveries; they do not exist yet. E09 is NOT RUN. This planning checkpoint is isolated from the frozen E02 checkout and supplies no new execution or acceptance authority.
 

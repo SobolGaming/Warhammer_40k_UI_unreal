@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-19 UTC
-**Revision:** 33 — Prospective reproducible setup/game-state bootstrap catalogue: RQ25, START01–START10 and E09. Exact game_id/RNG/history provenance, public decision recipes, observable-boundary precision, fixture fidelity and viewer privacy are explicit. Existing frozen E02 criteria and results are unchanged.
+**Revision:** 34 — Prospective M03 project-owned startup level and launch/cook/lifetime obligations: ENTRY01–ENTRY08. One minimal entry level may serve the selected canonical Core-linked slice; a full setup/army-builder UI, multiple worlds and one map asset per battlefield are not prerequisites. Frozen E02 criteria/source/run remain unchanged.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,26 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 33 changes
+### Revision 34 changes
+
+The owner retained the current route to M03 and requested an explicit
+project-owned startup level. Section 11.6 adds ENTRY01–ENTRY08 to M03/E03B:
+authored map ownership, intentional editor/game defaults, reproducible Open/Play/
+direct-game/package entry, cook references, Core session lifetime, startup/slice/
+error evidence and the minimal scope boundary. The [startup design note](research/2026-10-19-project-owned-startup-level.md)
+separates optional FrontEnd/Gameplay organization from Core-driven battlefield
+data. A single small project-owned level may satisfy the initial slice.
+
+This planning-only follow-up to 56ab55bf7f16b81b74e81b5f4c1124a621683207 stays on
+codex/phase-bootstrap-plan in the isolated planning worktree. No level asset,
+configuration, implementation, E02 input or runtime evidence was changed. No build,
+test, game, Editor or Core host was launched. ENTRY01–ENTRY08 are NOT IMPLEMENTED /
+NOT RUN. RQ25/START/E09 remain separate prospective start-profile obligations.
+The current c987863 / run 20261019T130651Z-04449a62 freeze, pending visible approval,
+independent CODE/different REQ gates, checkpoint policy and other manual approvals
+are unchanged; this revision grants no execution, publication or merge authority.
+
+### Revision 33 history
 
 This revision adds prospective reproducible start-point requirements for setup,
 formal battle entry, named battle rounds, player turns and phases. It defines
@@ -329,7 +348,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## Contents
 
-[Codex research gate](#0-codex-handoff-finish-research-before-implementation) · [Recommendation](#1-executive-recommendation) · [Baseline](#2-evidence-baseline-and-access-boundaries) · [Existing workflows](#3-existing-behavior-and-representative-execution-paths) · [Capability matrix](#4-scope-and-behavioral-contract) · [Architecture](#5-target-architecture-and-consequential-alternatives) · [3D design](#6-first-class-3d-design) · [HUD and reuse](#7-hud-architecture-percentage-sizing-and-reuse) · [Platforms](#8-platforms-enginetoolchain-and-delivery) · [Performance](#9-performance-assessment-and-proposed-budgets) · [Experiments](#10-feasibility-experimentsplanned-not-executed) · [Validation](#11-validation-strategy) · [Reproducible start points](#115-reproducible-setup-and-game-state-start-points) · [Milestones](#12-ordered-implementation-milestones) · [Cutover](#13-coexistence-cutover-rollback-and-retirement) · [Risks and decisions](#14-risk-register-and-decision-appendix) · [Readiness](#15-review-readiness-and-first-bounded-work) · [Sources](#16-sources-and-inspection-index)
+[Codex research gate](#0-codex-handoff-finish-research-before-implementation) · [Recommendation](#1-executive-recommendation) · [Baseline](#2-evidence-baseline-and-access-boundaries) · [Existing workflows](#3-existing-behavior-and-representative-execution-paths) · [Capability matrix](#4-scope-and-behavioral-contract) · [Architecture](#5-target-architecture-and-consequential-alternatives) · [3D design](#6-first-class-3d-design) · [HUD and reuse](#7-hud-architecture-percentage-sizing-and-reuse) · [Platforms](#8-platforms-enginetoolchain-and-delivery) · [Performance](#9-performance-assessment-and-proposed-budgets) · [Experiments](#10-feasibility-experimentsplanned-not-executed) · [Validation](#11-validation-strategy) · [Reproducible start points](#115-reproducible-setup-and-game-state-start-points) · [M03 startup level](#116-project-owned-startup-level-and-m03-entry-path) · [Milestones](#12-ordered-implementation-milestones) · [Cutover](#13-coexistence-cutover-rollback-and-retirement) · [Risks and decisions](#14-risk-register-and-decision-appendix) · [Readiness](#15-review-readiness-and-first-bounded-work) · [Sources](#16-sources-and-inspection-index)
 
 ## 0. Codex handoff: finish research before implementation
 
@@ -605,7 +624,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **Inspect:** `render/primitives.py`, render hints, resource loaders, `resources/`, icon/font registries, guidance documents, package inclusion rules and tests. Follow actual use sites; do not infer absence from an incomplete directory sample.
 
-**Close when:** an asset manifest records source/provenance, usage, visual mapping, import/UV/filter/pivot settings where applicable, cooked retention, missing-art diagnostics and unchanged identity/query/measurement contracts. All five visual footprint forms and a normal-mesh substitution have a bounded proof design. Distinguish harmless missing art from missing required geometry.
+**Close when:** an asset manifest records source/provenance, usage, visual mapping, import/UV/filter/pivot settings where applicable, cooked retention, missing-art diagnostics and unchanged identity/query/measurement contracts. All five visual footprint forms and a normal-mesh substitution have a bounded proof design. Distinguish harmless missing art from missing required geometry. **Prospective M03 addition:** include ENTRY01/ENTRY07 startup/default-map assets, semantic authoring records and actual cooked reference closure under Section 11.6. No level is authored by this amendment.
 
 **Ask:** only about necessary visual substitutions or unlicensed/missing required resources. Detailed miniatures, paid artwork, animation and a full replacement art library are not prerequisites.
 
@@ -619,7 +638,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **Inspect:** current repository/instruction hierarchy, CI conventions, existing `.gitattributes`/LFS arrangements, any destination Unreal scaffold and available generation/commandlet tooling. The module names and `unreal/WarhammerClient/` path in this plan are proposals unless found in source.
 
-**Close when:** a file/module ownership and dependency map names the approved destination, C++/editor-authoring seam, textual generation inputs, semantic rebuild validation, cook dependencies, binary single-writer policy, and isolated outputs. No runtime module depends on an editor-only module or future vision SDK.
+**Close when:** a file/module ownership and dependency map names the approved destination, C++/editor-authoring seam, textual generation inputs, semantic rebuild validation, cook dependencies, binary single-writer policy, and isolated outputs. No runtime module depends on an editor-only module or future vision SDK. **Prospective M03 addition:** name the project-owned entry asset and intentional EditorStartupMap/GameDefaultMap configuration, binary writer, application/world lifetime and ENTRY01–ENTRY08 evidence route. The current text-only bootstrap does not satisfy this later content/startup obligation.
 
 **Ask:** before selecting a separate repository, changing remote storage/LFS or introducing other durable organizational commitments. Do not create the project, import content or change source-control settings in the research phase.
 
@@ -1963,7 +1982,7 @@ Every experiment produces a packet with exact source/engine/core revisions, envi
 
 **E03A minimum evidence:** the approved minimal client package launches on each required target, identifies/connects to the approved external release, submits one canonical decision through a small packaged automation/control path, and reports expected connection/version failures. For managed-local delivery, prove native runtime/data relocation, offline availability, credentials and owned-process startup/exit. For attach-only delivery, prove endpoint/authentication requirements and no interference with the separately owned service. Record artifact hashes and exact test commands. This does not prove the 3D interaction workflow or complete recovery matrix.
 
-**E03B completion evidence:** the actual M03 camera/selection/meaningful-action/world/HUD workflow runs packaged on the required targets, and all remaining E03 failure/uncertain-commit/persistence/recovery criteria pass. No E03 overall PASS exists until both checkpoints and all relevant deployment modes pass.
+**E03B completion evidence:** include ENTRY01–ENTRY08 and the Section 11.6 Open/Play/direct-game/package/error/lifetime matrix for the selected M03 route; a project-owned startup level and effective defaults/cook evidence are required. The actual M03 camera/selection/meaningful-action/world/HUD workflow runs packaged on the required targets, and all remaining E03 failure/uncertain-commit/persistence/recovery criteria pass. No E03 overall PASS exists until both checkpoints and all relevant deployment modes pass.
 
 RQ23 may similarly identify narrow **architecture-proof subsets** of E02/E04 before broader implementation; full fixture, layout/profile and usability acceptance remains with M02/M05. Record subset results by name rather than claiming the entire experiment passed. Later E05/E06/E07 acceptance is not a prerequisite for writing the code those experiments validate. If a data or reuse question changes the architecture, RQ23 must pull only the necessary bounded proof forward.
 
@@ -2156,6 +2175,72 @@ No new game, server, test, checkpoint, native build or rendered proof was execut
 for this amendment. RQ25 remains OPEN and every E09 subproof remains NOT RUN;
 the inspected test bodies are source support only.
 
+### 11.6 Project-owned startup level and M03 entry path
+
+M03 must deliver a project-owned startup level asset and a documented path from
+opening the project to playing the selected real-Core slice. The existing E02
+proof deliberately uses the installed Engine Entry map and synthetic scene;
+that proof and the owner manual preview remain unchanged and cannot close this
+M03 obligation. All ENTRY requirements below are prospective, NOT IMPLEMENTED /
+NOT RUN. The source/design basis is the [startup design note](research/2026-10-19-project-owned-startup-level.md).
+
+**Minimal design recommendation:** use one small entry/gameplay level for M03,
+with the existing C++ application boundary, a connection/status surface and the
+approved canonical scenario/attachment recipe. A candidate name such as
+Content/Maps/M03Entry.umap (/Game/Maps/M03Entry) is illustrative until the bounded
+implementation packet fixes the exact path. A full game-configuration/army-loading
+or army-building UI is not a prerequisite of this slice. Preserve those later
+parity obligations where required by the capability ledger.
+
+An optional later FrontEnd level may host configuration/army selection and a
+Gameplay level may host the board. They can instead be screens within one world.
+The owner need not choose that subdivision before the minimal slice. A Warhammer
+battlefield is Core-owned game data, not inherently a separate Unreal map asset:
+the gameplay world can build/replace its presented terrain, board and models from
+authorized versioned projections and approved visual definitions. Dedicated
+authored map assets or streamed sublevels can later serve distinct lighting,
+scenery or authoring needs; they are not required per battlefield. World
+Partition, streaming architecture and multiple travel destinations are not M03
+prerequisites. A fresh match may reopen the same board level; arbitrary in-place
+battlefield hot-swapping is not required or demonstrated by E02. Changing
+presentation geometry never changes Core rules, phase,
+legal positions, randomness or hidden-information policy.
+
+| Requirement | M03 delivery and acceptance obligation |
+|---|---|
+| ENTRY01: owned level | Commit the named project-owned .umap under Content, with textual creation/import inputs or reproducible authoring procedure, semantic metadata, exact UE version, asset hash/dependencies and one binary writer. Record intended World Settings, runtime GameMode, camera/player/input and UI bootstrap. A minimal persistent scene with Core-driven runtime presenters is sufficient. A launch relying only on an engine-shipped Entry/template map or URL-only proof GameMode does not supply the owned startup asset; authoring from an approved template remains possible. Retain existing storage/provenance approval rules; no asset or LFS change is authorized by this planning text. |
+| ENTRY02: intentional defaults | Set and record project-owned EditorStartupMap and GameDefaultMap choices in project configuration; they may reference the same minimal level. If they differ, explain the editor workflow and identify both assets. Bind effective World Settings/GameMode/class and configuration overrides. Under documented isolated editor startup settings, opening the project must load the declared editor level without a hidden test URL, guessed map fallback, Core mutation or automatic host/session creation. Record the editor startup mode and last-opened-map precedence; preserve existing personal preferences and document intentional user overrides. Entry into play uses the documented application flow. |
+| ENTRY03: reproducible launch | Supply verified README steps/commands and working directories for project Open, Play in the declared PIE mode, direct uncooked game launch and packaged executable launch. Cover default selection without a forced map/GameMode/test URL, plus any supported explicit map override, recording the actual loaded package/class. Package launch must not rely on editor state, Saved configuration, proof flags, developer Content paths or an engine-only fallback. Freeze the exact commands in the future execution packet; none is claimed working here. |
+| ENTRY04: real slice entry | From the owned entry level, expose the minimal documented route to configure/connect the approved local development host or attach endpoint and create/attach the selected authorized exact-Core session. Approved startup parameters or the canonical recipe may supply scenario inputs; a full configuration/army builder is not required. Show disconnected, connecting/pending, ready/current-decision and typed error/session-loss states, with no synthetic-ready substitution. Bind the selected START/E09 profile, viewer and fidelity; exercise the existing M03 meaningful accepted action and authoritative world/HUD refresh. |
+| ENTRY05: application/world lifetime | Retain Section 5.5 game-instance scope for the C++ application/session coordinator, Core connection/session identity, pending command reconciliation and owned-host policy. A GameInstance-owned object or subsystem is an implementation choice within that existing contract, not a new module or architecture prerequisite. World Actors, UI, input capture and subscriptions have world/viewer lifetimes. A world change, PIE teardown/restart or level reload cannot silently create/restart/close a Core session, change phase or duplicate a command. Invalidate world/viewer generation callbacks and stale references, release capture/subscriptions, and rebind only authorized current data. Each PIE GameInstance/session context is isolated; no process-global session singleton. Stop only a host/session explicitly owned and authorized for that close policy. |
+| ENTRY06: battlefield data and travel | Populate the selected board/terrain/model scene and refresh accepted state from the current public Core projection/catalog and whitelisted visual resources, preserving stable IDs, coordinates, support/query geometry and visibility. A different Core battlefield may reuse the same .umap; opening it for a fresh match is sufficient, and arbitrary live battlefield hot-swap is not an M03 requirement. Presentation geometry is not authoritative Core state. If travel is selected, specify application/session survival, actor/widget rebuild, input/focus restoration and rejection of late old-world/viewer callbacks. Travel itself is no Core game effect. A requested new game or session switch still follows explicit public operations/authorization and unknown-outcome policy. |
+| ENTRY07: cook/reference closure | Explicitly retain the startup/default maps and their required classes, materials, widgets, meshes and dynamically/soft-referenced resources in the reviewed cook/reference manifest. Prove that the effective defaults resolve inside the produced package, including any optional direct launch/travel target actually advertised. Record exact cooked package paths/dependencies and hashes; editor-only availability or an unchecked soft path is insufficient. Preserve the selected internal host limitation and later standalone delivery gate rather than claiming the development Core host is portable. |
+| ENTRY08: evidence and failure | Execute the launch and failure matrix below only under its reviewed bounded packet and applicable manual window/runtime approvals. Record source/asset/config/recipe/build/package identities, actual map/GameMode, host/OS, commands, runtime/log/input/outcome evidence and counts; inspect required rendered images. Missing map/cook/reference, connection/version/auth failure, lost session and uncertain command completion fail visibly without a replacement game, Engine Entry/synthetic-ready fallback or a false accepted state. Existing independent CODE and different REQ roles must map each ENTRY criterion to actual evidence; helper/source review or an Editor build alone cannot close it. |
+
+The launch/acceptance matrix belongs to E03B and its selected M03 internal subset;
+it does not create an additional experiment or a full FrontEnd prerequisite.
+Record Windows internal execution separately, maintain Linux-compatible content/
+configuration/process seams and keep Linux execution NOT RUN until its host is
+arranged under OWN08. Final platform/package acceptance still requires its
+existing evidence.
+
+| Case | Required observation and evidence |
+|---|---|
+| Open | Open the project with the documented editor command/UI path, recorded isolated startup-mode precondition and no forced test map; observe the declared project-owned EditorStartupMap and intended editor scene. Inspect effective configuration, last-opened/user override precedence and loaded package; do not modify existing personal startup preferences. No Core host/session or mutation is caused merely by opening the editor. |
+| Play | From that saved level use the declared PIE mode; standalone editor play may be documented additionally, but does not replace PIE. Prove runtime GameMode, perspective camera/HUD/input, selected authorized Core workflow and clean stop. Bind the actual session/current decision/action outcome, not just a rendered board. Editor Open and Play are different observations. |
+| Direct game | Use the installed Editor runtime as a game through the declared default path without proof/map/GameMode overrides, then any separately advertised explicit project-map route. Verify the same approved application/session contract; capture actual package/class, input and startup diagnostics. This is uncooked proof, not packaging. |
+| Package | Launch the produced executable through its default entry path on the applicable approved host/subset, without an Editor or developer Content dependency. Verify startup asset/cook presence, approved Core connection, real decision/action/world/HUD refresh and bounded exit/owned-host behavior. A forced-map launch alone cannot pass the default route. |
+| Errors | Exercise missing/unavailable required map/dependency in an isolated permitted test artifact, and selected unreachable/incompatible/unauthorized Core/session-loss/uncertain-command cases. Preserve actual diagnostics, stopped/unknown state, absence of false Ready/accepted display and absence of unintended creation/submission. Never corrupt or delete authored assets or a live game for a negative test. Reuse existing matching evidence where valid. |
+| Lifetime | Exercise the selected single-world lifecycle: start/stop/re-entry and world/viewer invalidation, no duplicated submissions/subscriptions/host starts, stale callback refusal and explicit pending-command disposition. If multiple-level travel is implemented, also prove the declared travel/rebind semantics; otherwise mark cross-level travel NOT IMPLEMENTED rather than constructing a second level solely for this test. |
+
+The level is a presentation/application entry point. Session creation, setup,
+formal battle entry, turn/phase advancement and legality remain Core-owned public
+decision paths. ENTRY does not replace START/E09's development selector or fresh
+isolated test-instance workflow, require production reset or prove those profiles.
+This planning revision leaves the frozen c987 E02 surface and synthetic manual
+preview unchanged. Preserve the reviewed-candidate freeze, coherent checkpoints,
+fresh affected review, independent final roles and applicable manual approvals.
+
 ## 12. Ordered implementation milestones
 
 ### 12.1 Ordering and gates
@@ -2254,17 +2339,17 @@ Later source changes reopen affected research items. A resolved item does not ne
 
 **Objective:** first functional end-to-end migration result.
 **Prerequisites:** G-IMPLEMENT, D02 frozen, deployment/platform choices closed, relevant E01/E02/E04 proofs passed, and E03A approved external-runtime/service delivery feasibility. D01 is already approved. E03B is an acceptance gate of M03, not a prerequisite for writing M03.
-**Scope/exclusions:** one representative core-owned scenario and validated action; not all editors or a complete game.
+**Scope/exclusions:** one representative Core-owned scenario and validated action through a minimal project-owned startup level (ENTRY01–ENTRY08). Full setup/army-builder UI, multiple worlds, streaming and one .umap per Warhammer battlefield are not prerequisites; preserve their later capability obligations.
 
-**Files/modules:** `WarhammerClient`, `WarhammerCoreClient`, client staging/connection/process-supervision configuration for the approved external artifact/service, existing `TabletopHUD`/`WarhammerBattlefield`, proposed platform smoke scripts and release manifest. No Python-core or external-host source edits.
+**Files/modules:** `WarhammerClient`, `WarhammerCoreClient`, client staging/connection/process-supervision configuration for the approved external artifact/service, existing `TabletopHUD`/`WarhammerBattlefield`, proposed platform smoke scripts and release manifest; the named project-owned Content/Maps/*.umap, its authoring/semantic/dependency manifest, Config/DefaultEngine.ini default-map choices and approved cook/reference configuration. No Python-core or external-host source edits.
 
-**Tasks:** create/attach an authorized exact-core session; display board/models/terrain/HUD; select from top-down/oblique views; submit a meaningful action with actual witness ordering/inventory; refresh accepted world/HUD/events; implement pending/error/retry/session-loss states. Initial Windows route uses the selected checkout command server. Plumb Linux targets now and record execution NOT RUN under OWN08; repeat package/render/core proof when the host exists. Later standalone/durable packaging remains a stated gate. Name the selected E09 start profile and fidelity class in the packaged work packet; run the real public-Core recipe or attach only after a separately supported operator-provisioning procedure. Bind the actual current request and viewer-safe UI state before the meaningful action. The profile's game_id/RNG identity is independent of the artifact run_id. Preserve required later-round/turn/phase catalogue gaps for M04/M05 instead of claiming the first slice covers them.
+**Tasks:** deliver ENTRY01–ENTRY08 and the Section 11.6 launch matrix with the minimum owned entry level/defaults/cook/session-lifetime path; create/attach an authorized exact-core session; display board/models/terrain/HUD; select from top-down/oblique views; submit a meaningful action with actual witness ordering/inventory; refresh accepted world/HUD/events; implement pending/error/retry/session-loss states. Initial Windows route uses the selected checkout command server. Plumb Linux targets now and record execution NOT RUN under OWN08; repeat package/render/core proof when the host exists. Later standalone/durable packaging remains a stated gate. Name the selected E09 start profile and fidelity class in the packaged work packet; run the real public-Core recipe or attach only after a separately supported operator-provisioning procedure. Bind the actual current request and viewer-safe UI state before the meaningful action. The profile's game_id/RNG identity is independent of the artifact run_id. Preserve required later-round/turn/phase catalogue gaps for M04/M05 instead of claiming the first slice covers them.
 
-**Runnable result:** a **packaged 3D application** that reaches a real decision, accepts user intent through the real core, and displays the authoritative change. The ordinary mesh and token share contracts; the raised fixture remains separately accessible as presentation evidence.
+**Runnable result:** a **packaged 3D application** opening through its own declared startup level that reaches a real decision, accepts user intent through the real core, and displays the authoritative change. The ordinary mesh and token share contracts; the raised fixture remains separately accessible as presentation evidence.
 
-**Acceptance:** scenario loads from a documented core recipe; same intended world action produces equivalent command intent across views; camera-only actions produce no authoritative change; UI submit/cancel does not touch world input; invalid/stale action remains core-rejected; approved deployment-mode startup (including offline launch when required) and uncertain-result recovery pass; existing supported data is mapped without overwriting originals. Each owner-approved initial OS package is exercised, not merely compiled. The selected reproducible start point and its exact/nearest-observable precision, fidelity, identities and UI workflow are evidenced under START01–START10/E09. A real Core-smoke scenario with altered content may establish only its explicitly approved internal smoke workflow; it does not establish production-complete armies or rule coverage. Missing required profiles remain named blockers; this addition does not replace E03B's real accepted action, ownership, recovery or package/OS requirements.
+**Acceptance:** ENTRY01–ENTRY08 pass for the applicable selected route with actual Open/Play/direct-game/default-package, cook, lifetime and failure evidence; scenario loads from a documented core recipe; same intended world action produces equivalent command intent across views; camera-only actions produce no authoritative change; UI submit/cancel does not touch world input; invalid/stale action remains core-rejected; approved deployment-mode startup (including offline launch when required) and uncertain-result recovery pass; existing supported data is mapped without overwriting originals. Each owner-approved initial OS package is exercised, not merely compiled. The selected reproducible start point and its exact/nearest-observable precision, fidelity, identities and UI workflow are evidenced under START01–START10/E09. A real Core-smoke scenario with altered content may establish only its explicitly approved internal smoke workflow; it does not establish production-complete armies or rule coverage. Missing required profiles remain named blockers; this addition does not replace E03B's real accepted action, ownership, recovery or package/OS requirements.
 
-**Validation:** E03B complete clean-machine test; packaged semantic interaction trace, core outcome evidence, before/after IDs/poses/HUD values, input ownership trace and exact package hashes. A screenshot, fake client, empty suite, no-op-only action or editor-only run cannot close M03.
+**Validation:** Section 11.6 matrix with exact map/class/config/cook/startup and typed-error evidence; E03B complete clean-machine test; packaged semantic interaction trace, core outcome evidence, before/after IDs/poses/HUD values, input ownership trace and exact package hashes. A screenshot, fake client, empty suite, no-op-only action or editor-only run cannot close M03.
 **Risks:** unavailable or incompatible externally supplied native runtime, missing target API, unreproducible real action, hidden-information leakage. External defects return to their separate owner.
 **Rollback:** legacy remains default and uses its own runtime/data; delete only the isolated candidate bundle.
 **Temporary/removal:** ad hoc host setup and test credentials are replaced by the validated RQ04 launch/attachment workflow before acceptance. An intentionally supported attach-only service remains externally managed; do not absorb it into the client.
