@@ -1,9 +1,9 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-19 UTC
-**Revision:** 32 — E02 source 0ed4d7c passed affected SOURCE review, Preflight/SUP6/Editor Build/Discovery/Numeric. WorldInput failed before final reporting during RepeatedConfirm; six partial Input successes/491 assertions include the exercised paint repair. All execution authority is closed; bounded status-persistence/failure-logging repair needs a fresh affected gate.
+**Revision:** 33 — Prospective reproducible setup/game-state bootstrap catalogue: RQ25, START01–START10 and E09. Exact game_id/RNG/history provenance, public decision recipes, observable-boundary precision, fixture fidelity and viewer privacy are explicit. Existing frozen E02 criteria and results are unchanged.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
-**Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
+**Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
 **Canonical destination:** `Warhammer_40k_UI_unreal/docs/plans/unreal-migration-plan.md` (this file).
 **Review status:** **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED**, recorded by root at `2026-10-17T06:00:32.004673+00:00` for reviewed head `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`. CODE r13 is PASS. Valid initial REQ r3 remains BLOCKED on administrative A1/A2; its separate supplement is PASS and closes those items. Root combined those dispositions for this narrow diagnostic; the raw initial REQ verdict remains BLOCKED. Contaminated original REQ r2 is invalid and supplies no approval. Normal execution remains `20261017T044903Z-b0169768` on source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`, with unchanged 87/14/132/2 counts, separate 135 pure PowerShell controls/39 inputs and actual settings/wire/process evidence. Publication is a separate metadata overlay outside the reports' reviewed head. Full E01/M01/M02, research/implementation gates, the original 30-second budget, production responsiveness, UE HTTP, rendering, packaging and Linux remain open. [Final review provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json); current and historical detail in Section 0.8.
@@ -18,7 +18,27 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 32 changes
+### Revision 33 changes
+
+This revision adds prospective reproducible start-point requirements for setup,
+formal battle entry, named battle rounds, player turns and phases. It defines
+manifest identities, fresh-request selection, exact versus nearest observable
+boundaries, smoke-versus-real-rule fidelity, operator-only state/RNG/history
+evidence and separately authorized viewer fixtures. RQ25/E09 remain OPEN/NOT RUN.
+[The pinned lifecycle investigation](research/2026-10-19-game-state-bootstrap.md)
+distinguishes source support from unexecuted recipes and missing HTTP controls.
+
+This is a planning-only local checkpoint on codex/phase-bootstrap-plan in the
+separate Warhammer_40k_UI_unreal_phase_bootstrap_plan worktree, based on c987863.
+The primary checkout, frozen E02 candidate/run 20261019T130651Z-04449a62,
+requirements, raw evidence and pending visible approval remain unchanged.
+The revision-32 E02 account below is the retained earlier failure history.
+This amendment neither rewrites that evidence nor supplies execution, Core-edit,
+publication or final acceptance authority. New start-point obligations apply
+prospectively to their selected workflows; they do not add conditions to the
+already frozen E02 experiment.
+
+### Revision 32 history
 
 Source 0ed4d7c/run 052432 executed on 2026-10-19 UTC after fresh affected SOURCE,
 hidden checks and direct approval of two bounded visible launches. Preflight,
@@ -309,7 +329,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## Contents
 
-[Codex research gate](#0-codex-handoff-finish-research-before-implementation) · [Recommendation](#1-executive-recommendation) · [Baseline](#2-evidence-baseline-and-access-boundaries) · [Existing workflows](#3-existing-behavior-and-representative-execution-paths) · [Capability matrix](#4-scope-and-behavioral-contract) · [Architecture](#5-target-architecture-and-consequential-alternatives) · [3D design](#6-first-class-3d-design) · [HUD and reuse](#7-hud-architecture-percentage-sizing-and-reuse) · [Platforms](#8-platforms-enginetoolchain-and-delivery) · [Performance](#9-performance-assessment-and-proposed-budgets) · [Experiments](#10-feasibility-experimentsplanned-not-executed) · [Validation](#11-validation-strategy) · [Milestones](#12-ordered-implementation-milestones) · [Cutover](#13-coexistence-cutover-rollback-and-retirement) · [Risks and decisions](#14-risk-register-and-decision-appendix) · [Readiness](#15-review-readiness-and-first-bounded-work) · [Sources](#16-sources-and-inspection-index)
+[Codex research gate](#0-codex-handoff-finish-research-before-implementation) · [Recommendation](#1-executive-recommendation) · [Baseline](#2-evidence-baseline-and-access-boundaries) · [Existing workflows](#3-existing-behavior-and-representative-execution-paths) · [Capability matrix](#4-scope-and-behavioral-contract) · [Architecture](#5-target-architecture-and-consequential-alternatives) · [3D design](#6-first-class-3d-design) · [HUD and reuse](#7-hud-architecture-percentage-sizing-and-reuse) · [Platforms](#8-platforms-enginetoolchain-and-delivery) · [Performance](#9-performance-assessment-and-proposed-budgets) · [Experiments](#10-feasibility-experimentsplanned-not-executed) · [Validation](#11-validation-strategy) · [Reproducible start points](#115-reproducible-setup-and-game-state-start-points) · [Milestones](#12-ordered-implementation-milestones) · [Cutover](#13-coexistence-cutover-rollback-and-retirement) · [Risks and decisions](#14-risk-register-and-decision-appendix) · [Readiness](#15-review-readiness-and-first-bounded-work) · [Sources](#16-sources-and-inspection-index)
 
 ## 0. Codex handoff: finish research before implementation
 
@@ -387,7 +407,7 @@ Use these states for **research items**, not for test results:
 
 | State | Meaning |
 |---|---|
-| `OPEN` | The question or its evidence/decision is incomplete. This is the initial state of RQ01–RQ24. |
+| `OPEN` | The question or its evidence/decision is incomplete. This is the initial state of RQ01–RQ25. |
 | `CLOSED_SOURCE` | Exact source, installed metadata, or applicable primary documentation answers the question; remaining execution obligations are separately identified. |
 | `CLOSED_OWNER` | A product/authority choice is explicitly answered by the owner, with date and wording recorded; any technical assertions also have evidence. |
 | `NOT_APPLICABLE` | Evidence and an approved scope decision establish that the item does not apply. This cannot be used to drop required parity or 3D scope. |
@@ -514,6 +534,8 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 **Inspect:** UI `core_client/live_smoke.py:build_live_core_smoke_startup`, launch/smoke documentation and existing integration tests; selected Core canonical setup fixtures and public example sequences. Do not treat named late-phase checkpoint options as reachable without evidence.
 
 **Close when:** a version-bound recipe names initial data, viewer, ordered setup decisions, action payload source, expected accepted/invalid outcomes, relevant Z/geometry data, and planned packaged test procedure. Record whether the recipe was exercised using an existing authorized check. Keep synthetic geometry evidence separate from legal game-state evidence.
+
+**Prospective reproducible-start obligation (RQ25/START01–START08/E09):** bind the selected real-core slice's start profile to its exact supported setup/decision recipe, actual session/current-request identities, randomness evidence and viewer-safe expected UI state. Record exact versus nearest-observable boundary precision. Existing setup-to-movement evidence does not establish arbitrary round/turn/phase reachability; a missing recipe or exact boundary remains explicit without erasing accepted earlier proof.
 
 **Escalate:** unavailable fixtures or unsupported actions to the core owner. Obtain an external fixture or revise the proposed slice explicitly; do not author private core mutations or accept a no-op screenshot as proof.
 
@@ -683,6 +705,8 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **Close when:** each capability and experiment maps to a test layer, source/fixture, execution host, expected test count/result artifacts and future command where not yet implemented. Define no-install research checks, private-data isolation, fake-versus-real core boundaries and exact review packets. Never invent a working `Warhammer.Migration` suite.
 
+**Prospective fixture/test obligation (RQ25/START01–START10):** maintain a versioned start-profile catalogue and capability-to-UI-workflow ledger. A missing or wrong-version profile fails the affected check rather than skipping it. Distinguish canonical envelope/schema fixtures, Core-only recipe execution, real HTTP/UI interaction and packaged evidence; they are separate test layers. Preserve implementer, independent requirements auditor and a different independent code reviewer, with fresh frozen inputs and coherent checkpoint commits. Earlier source-design closure does not assert E09 execution.
+
 **Ask:** for missing CI/render-host access or review/campaign policy choices. Record an unavailable review as BLOCKED/not performed rather than role-playing independence.
 
 #### RQ21 — Distribution intent, provenance and commitment boundaries
@@ -721,9 +745,11 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **Question:** Which answers are now established, which require a new experiment, and which experiment must pass before committing to the affected architecture or milestone?
 
-**Inspect:** E01–E08, their actual setup dependencies, available existing evidence and proposed M01–M08 sequence. Split source-inspection portions from new harness/prototype work. Reuse existing proof only when exact versions, environment and acceptance match.
+**Inspect:** E01–E09, their actual setup dependencies, available existing evidence and proposed M01–M08 sequence. Split source-inspection portions from new harness/prototype work. Reuse existing proof only when exact versions, environment and acceptance match.
 
 **Close when:** each empirical gap names the bounded experiment, prerequisite artifacts, allowed write scope, owner/access needed, pass/fail evidence, blocked decision/milestone and failure alternative within the fixed client scope. Critical transport, target-platform/runtime, 3D-picking or HUD-architecture uncertainty is resolved before broad dependent implementation. Later acceptance tests are not incorrectly treated as preexisting research evidence.
+
+**Prospective E09 mapping:** each required setup/game/round/turn/phase profile names its supported public recipe or externally supplied operator artifact, target precision, actual identity/RNG proof, dependent CAP/E08/UI workflow and missing-fixture/API dependency. Declare which profiles are prerequisites of the selected slice and which remain later parity obligations. E09 is not a replacement for existing E01/E02/E03/E08 proof and does not become an unrecorded new condition on frozen E02 acceptance.
 
 **Ask:** for bounded experimental authorization when necessary. Keep the empirical subquestion BLOCKED until actually tested; authorization is not a passing result. Failed external-core feasibility is not permission to add core changes.
 
@@ -735,11 +761,27 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **Question:** Does one self-contained plan now describe the actual baseline, selected design, remaining experimental/release gates and a safe first authorized step without contradictory “proposed” versus “approved” claims?
 
-**Inspect:** all RQ states, D01–D14, CAP01–CAP36, G01–G10, E01–E08, RISK01–RISK19, source index, owner responses and milestone prerequisites. Verify that each discovered new gap has an ID and owner; do not hide new blockers in prose.
+**Inspect:** RQ01–RQ25, START01–START10, D01–D14, CAP01–CAP36, G01–G10, E01–E09, RISK01–RISK20, source index, owner responses and milestone prerequisites. Verify that each discovered new gap has an ID and owner; do not hide new blockers in prose.
 
 **Close when:** update the canonical plan and decision log; link every resolution to exact evidence or dated owner choice; resolve cross-references/ordering; report tests passed/failed/not run and review performed/not performed separately. Record the remaining empirical subquestions and release-only obligations, and supply the precise next bounded work packet.
 
+Include RQ25, START01–START10, E09 and its profile-specific dependency/coverage ledger in current reconciliation. Preserve original dated register ranges and all earlier raw results; report source support, proposed recipes and actual executed start profiles separately.
+
 **Ask:** only remaining material owner decisions, then request the appropriate next authorization. Do not ask again about retaining the Python rules engine. Scope approval and a research-ready plan do not authorize feature implementation.
+
+#### RQ25 — Reproducible setup and game-state start points
+
+**Status:** OPEN (2026-10-19). Resolve with pinned public Core setup/lifecycle/decision/replay and operator-persistence surfaces, existing canonical smoke recipes, the capability ledger and bounded E09 proof. Depends on RQ02/RQ03/RQ06–RQ08/RQ15/RQ16/RQ20; blocks fixture-completeness claims and the affected M01/M03–M05 workflow acceptance.
+
+**Question:** Which supported, repeatable recipes reach setup, formal game/battle entry, a named battle round, a named player's turn and a named phase, at what observable precision, with what actual authoritative/current-request evidence and viewer-safe UI expectations?
+
+**Inspect:** the selected Core contract/build and public lifecycle/setup completion routes; the exact Arcade source checkout and its separately pinned supported Core; existing E01 setup-to-move path and fixture/suite routing; supported replay/operator artifacts. Establish whether any requested boundary can be stopped at or restored at all. A public advance may drain across phase/event boundaries; naming a target phase does not make an exact pre-phase checkpoint available.
+
+**Close when:** every requested start profile has START01–START10 provenance and a supported/reachable, source-only, NOT RUN, BLOCKED or explicitly nearest-observable disposition. Required exact boundaries cannot be relabelled as an equivalent later pending decision. Identify per-capability fixtures and the UI workflow they unblock. Current bounded E01 movement proof supplies only its demonstrated route.
+
+**Escalate:** a missing exact seed/state control, operator artifact, public transition or observable boundary to the external Core owner with the exact source/contract and affected profiles. Continue separately provable start points. Do not change Core, write a new host, mutate private game state, invent a restore endpoint or silently drop required coverage.
+
+**Source finding:** the selected Core already has formal engine-owned battle entry through its setup-completion gate. Session creation/transport start and battle entry are distinct. Public phase/round jumps and HTTP checkpoint/replay import are absent in the inspected dispatch; Python operator recovery is a separate surface. Canonical smoke data deliberately alters content. See the [pinned source investigation](research/2026-10-19-game-state-bootstrap.md) for exact symbols, identities and remaining gaps; no E09 runtime was executed.
 
 ### 0.5 Required closure record
 
@@ -1915,7 +1957,7 @@ Every experiment produces a packet with exact source/engine/core revisions, envi
 
 **OWN08/OWN09 amendment:** an explicitly authorized **Windows internal-development subset** may use the current checkout command server with its fixed development registry and no durable store. Linux receives source/configuration plumbing and NOT RUN execution status until a later host. Record the subset by name; do not label full E03 or final cross-platform/clean-machine/durable acceptance PASS. Missing production hardening, portable artifacts or Linux access do not block this selected internal route. On development host restart, explicit session loss is the required outcome. Final standalone/remote/recovery acceptance below remains a later gate.
 
-**Execute only the recorded bounded scope.** Source inspection, existing permitted checks and experiment design belong to RQ01–RQ24. OWN13 now authorizes continuation into the next E01 gate after its file/runtime/output/pass-fail packet is prepared and reviewed. Do not require a duplicate approval for that same scope. Other new harnesses, assets or prototypes need an applicable recorded authorization; RQ23 prevents source-only answers from becoming experimental PASS.
+**Execute only the recorded bounded scope.** Source inspection, existing permitted checks and experiment design belong to RQ01–RQ25. OWN13 now authorizes continuation into the next E01 gate after its file/runtime/output/pass-fail packet is prepared and reviewed. Do not require a duplicate approval for that same scope. Other new harnesses, assets or prototypes need an applicable recorded authorization; RQ23 prevents source-only answers from becoming experimental PASS.
 
 **E03 has two checkpoints to avoid a circular gate.** E03A is a bounded early packaging/dependency/connection feasibility proof using the smallest approved client/host setup; E03B is the complete packaged real-core 3D workflow and failure/recovery proof required to accept M03. E03A can justify starting the remaining M03 work after authorization; E03B cannot be a prerequisite for writing the same M03 workflow it is meant to test. This split does not remove any E03 acceptance criterion.
 
@@ -1935,6 +1977,9 @@ RQ23 may similarly identify narrow **architecture-proof subsets** of E02/E04 bef
 | **E06: Can data survive coexistence and rollback?** | Representative current profiles, core checkpoints/replays where supported, interrupted writes, both application bundles | Legacy originals unchanged; exact-core new restart succeeds; unsupported cross-version data rejected; old-client resume is proven or explicitly disallowed without discarding new progress | Byte hashes, mapping report, recovery logs, demonstrated launcher choices; decides cutover eligibility |
 | **E07: Can shared HUD/presentation run without the simulated battlefield?** | Separate demo host with recorded observations, same presentation plugin and selected profile, no concrete battlefield-camera dependency | Registration/stale/lost/reacquisition/manual correction work; no observation directly mutates core; known synthetic plane mapping stays invariant under virtual-camera changes | Dependency/build report, event trace, synthetic transform assertions; proves reuse boundary, not hardware calibration |
 | **E08: Is behavioral parity evidence strong enough to migrate incrementally?** | Enumerated implemented editor variants and semantic interaction traces, including failures and cancellation | Each preserved capability has source + fixture + test/procedure; planned/unsupported functions remain labelled; no test silently skips for a missing contract fixture | Parity ledger, fixture manifest, unimplemented/gap list; controls milestone scope and final audit |
+| E09: Can required UI workflows start reproducibly at supported real game landmarks? | Exact-Core canonical config plus bounded public decision recipe, or an explicitly supported Core-owned operator artifact followed by ordinary client attachment; five named start levels with declared boundary precision | Repeated fresh instances reproduce the declared Core-supported observable semantics and randomness evidence, stop at the declared supported landmark/current decision, preserve authorization, and drive a meaningful UI workflow. Missing controls/hidden decisions/unsupported exact boundaries remain explicit gaps; no private state mutation or fabricated legal option | Versioned operator manifest and separate viewer-safe fixture manifests, ordered commands/outcomes, actual session/request identities, declared deterministic selectors, reachability/coverage ledger, positive and failure evidence. Applies to M01 and selected M03–M05 workflows; independent REQ and separate CODE gates remain |
+
+E09 supplies versioned reproducible entry points and their precision/provenance. E08-F/M/P/A/U/C still proves the complete preserved workflow variants. Link each E08 case to its profile and actual layer/artifacts; fixture availability alone does not pass parity.
 
 ## 11. Validation strategy
 
@@ -2013,6 +2058,104 @@ Epic documents the `Automation RunTest` and report-export command patterns. The 
 
 Packaging uses the engine's version-pinned Automation Tool/BuildCookRun workflow or its equivalent project CI wrapper. Record the exact working command after E03; this plan does not assert an untested universal command line for every platform. Build/cook/stage/package are distinct steps; editor builds do not establish a valid packaged artifact. [U16] [U25]
 
+### 11.5 Reproducible setup and game-state start points
+
+A fixture catalogue must make it practical to develop and test the UI from representative real positions without turning the client into a rules simulator. Each profile names a Core-owned scenario and an exact supported landmark, not a command that assigns the game's phase or current player.
+
+The client-owned catalogue is an index of versioned recipes, not a claimed scenario/preset registry in the server's /rules-catalog display/content dictionaries. The five levels are: setup (formal session creation initializes SETUP at revision0/started:false, then the supported start_session command drains to actual setup work and started:true); formal game/battle entry after Core-owned setup completion; a named battle round; a named player's turn within that round; and a named phase/entry decision within that turn. Turn owner and current request actor are separate: an opponent's reaction can be the current decision during another player's turn. No synthetic “start battle” option is assumed. Coincident landmarks may share a proven capture only when each declared predicate is satisfied; they are not counted as independent executions.
+
+For every profile record requested landmark, actual reached landmark and precision: EXACT_SUPPORTED_BOUNDARY or NEAREST_OBSERVABLE_PENDING_DECISION. Specify before/after mandatory entry triggers and the actual pending decision boundary. If advance drains past a requested boundary, label the later observation explicitly and keep the requested exact-boundary gap OPEN/BLOCKED. Delivery of the development-only selector and fresh-instance workflow below is a prospective milestone exit obligation. It is not implemented or proved by this planning amendment.
+
+| Requirement | Required behavior and evidence |
+|---|---|
+| START01: versioned catalogue | Stable profile ID/revision and start level; Core-owned scenario provenance; requested round/turn owner/phase/entry-trigger predicate; exact versus nearest-observable precision; supported/source-only/NOT RUN/BLOCKED status and dependent CAP/E08/UI cases. Deliver a discoverable, explicitly labelled development-only CLI or UI selector over the reviewed catalogue and document fresh-instance reset/relaunch. Do not silently skip an absent profile. |
+| START02: complete provenance | Exact Core commit, runtime build/tree and contract/schema/catalog/rules/data identities; host/runtime/dependency provenance; recipe and fixture hashes; client source/build; platform, transport and applicable test procedure. Classify fidelity as synthetic advisory/UI-only, canonical Core-smoke, or real-rule supported, recording altered content/roster allowances and their limits. Record the stable fixture game_id and actual reported RNG seed/state, history, draw count and hashes from supported Core/operator/replay surfaces. GameConfig has no independent rng_seed input; do not invent one or advertise a nonexistent CLI seed. |
+| START03: public reachability | Create/start/advance/submit only through supported public operations and legal current decisions, with explicit administrative versus participant roles. Each step records its actual envelope, outcome, returned authority and request/result/revision/command identities where supplied by that operation. Explicitly record absent or null identities; never invent a command ID for creation or request/result IDs for lifecycle-only operations. Use offered options, approved payload recipes and a fixed selection policy. Unrecognized, ambiguous, rejected or missing decisions stop the recipe visibly. Preserve bounded step/time/request budgets and unknown outcomes. |
+| START04: actual state/request binding | At the reached point bind the actual session/game, lifecycle, revision, available Core-owned state/replay/RNG evidence, current request/frontier and relevant projection/spatial/catalog identities. Record the raw request/schema identity and actual request/option/actor/result IDs in the scope permitted by Core. A viewer with no visible decision has an explicit no-visible-decision expectation, without disclosing hidden actor IDs, counts or seeds. A viewer projection hash is not substituted for a trusted authoritative state hash. |
+| START05: fresh deterministic selection | A recipe defines unambiguous selectors over each newly returned request/options and validates cardinality/context before submission. Resolve fresh session/request/option/revision/cursor identities; never replay old opaque IDs or invent an option. Keep per-instance raw hashes/identities unchanged. Across instances, compare explicitly declared stable public semantics and Core-supported correspondence; do not normalize away gameplay differences or recompute opaque Core hashes in C++. |
+| START06: coverage to workflows | Map each profile and request/interaction variant to CAP01–CAP36, the selected 98-case catalogue where applicable, E08-F/M/P/A/U/C obligations and a concrete UI path. Record opening/selection/edit/review/cancel/submit/accepted refresh, and relevant invalid/stale/retry/unsupported/viewer-switch branches. A schema sample, parser success, static screenshot or Core-only decision walk cannot claim the UI workflow was exercised. |
+| START07: repeated proof and layers | For each claimed reproducible profile, demonstrate at least two independent fresh instances through its supported mechanism under the same frozen inputs, stable fixture game_id and declared comparison policy. Keep unique artifact run_id/transport identity separate from game_id, which seeds standard Core behavior. Use explicitly owned, lawfully isolated sessions/hosts/work roots; never delete/reset an existing game automatically to reuse its ID. Record actual RNG seed/state, draw history/count/hashes or an explicit unavailable disposition. Separate source-supported, headless recipe, actual HTTP, rendered UI and packaged/OS evidence. Use existing proof only when identity/procedure/expectations match; do not rerun automatically. |
+| START08: failure and dependencies | Wrong Core/runtime/data/schema, unavailable landmark, wrong viewer, absent/ambiguous option, request drift, nondeterministic branch, unsupported state/replay route and unknown creation/command completion fail closed with actual diagnostics. Record the profile-specific external dependency, owner and unblock condition. An unsupported exact start point cannot pass using a private state edit or an unlabelled later point. |
+| START09: fixture/production separation and privacy | Production client code uses only its approved public adapter/coordinator. Test factories, private engine assignments, arbitrary turn/phase setters and in-process Core test helpers never become production dependencies or alternate rules paths. Privileged exact-state, RNG and full-request/history artifacts stay in an operator-only lane; derive separately authorized viewer fixtures through reviewed extraction. No omniscient state, hidden frontier metadata, credentials or private replay is placed in normal HUD/test screenshots or public fixture bodies. |
+| START10: review and change control | Freeze requirements, profile catalogue, exact inputs, code and proposed checks before execution; keep implementer, independent requirements auditor and a different independent code reviewer. Fresh blind initial contexts receive applicable criteria and trustworthy allowed artifacts, excluding author narratives and peer conclusions. Regular coherent local checkpoints preserve recoverability; material changes require a new freeze/affected review. Final acceptance needs both current independent roles and no unresolved blockers. Existing publication, payload-transmission and visible-execution permissions retain their exact scope. |
+
+The development harness must provide a discoverable, explicitly labelled
+development-only scenario/profile and target selector through a CLI or UI.
+The selected-capability M01 exit packet must include the implemented selector,
+documented invocation and fresh-instance reset/relaunch workflow; selected M03–M05
+workflows must demonstrate it under E09. It lists profile/version, requested and
+actual supported landmarks, fidelity, required viewer/role and source-only,
+NOT RUN, available or BLOCKED status. Selection resolves a reviewed manifest and
+public recipe, validates exact identities/permissions, and reports unsupported
+targets before claiming readiness. It must not silently substitute a later phase
+or enter normal play with a test profile. No working selector command exists yet.
+
+Reset/relaunch means leaving the local development view and provisioning a fresh,
+explicitly owned isolated instance through its supported route, with new artifact
+paths and recorded provenance. It does not set a phase, mutate a live session,
+delete an existing game, reuse stale request IDs or create a normal-play reset
+operation. If stable game_id repetition requires a fresh isolated development host
+or supported operator restore, use only the separately authorized existing-host
+procedure/artifact; absent isolation or restore support leaves that profile
+BLOCKED. Retain earlier outputs. Reconcile unknown creation/command outcomes before
+any replacement attempt, and close only explicitly owned sessions through an
+authorized public operation. Document attachment versus managed-host behavior,
+normal owner approval requirements, expected current decision/view and how the
+owner can stop a run. The synthetic c987 manual preview is a separate inspection
+convenience and supplies no E09 selector, real-Core or automated acceptance proof.
+
+The manifest has two distinct lanes. The operator manifest records exact Core/state/RNG/history provenance and privileged validation when a supported Core-owned surface supplies it. The viewer fixture manifest contains only that role's authorized state, currently visible request(s), expected UI behavior and allowed artifact references. A spectator or inactive player may legitimately see no decision. Neither lane stores credentials; use private external credential handles. Never leak hidden request presence/counts as a substitute for redacted content.
+
+Minimum manifest fields (proposed schema, not existing wire fields or a working command): profile_id/profile_revision; Core/runtime/contract/schema/catalog/rules/data descriptors; start_level and requested/actual landmark predicates; boundary_precision; approved create/setup/decision recipe and selection policy; supported randomness source and artifact hashes or explicit unavailable disposition; supported replay/checkpoint mechanism and provenance; per-instance actual session/game/revision/request/option/result and projection/spatial identities; clock/timeout policy; actor/turn-owner versus viewer scope; reference public semantics and allowed cross-instance comparison policy; capability/UI case mapping; source-only versus executed status/counts; failure/dependency records; output/retention/privacy policy; code/requirements review bindings. Manifest-local names must not be mistaken for new Core config/HTTP fields.
+
+Session creation lacks the later command journal's retry identity. Unknown creation must stop automatic recreation and require operator reconciliation. Later uncertain commands retain the exact envelope/identity and follow the existing supported reconciliation policy; they do not become a new seed/session or a new command that pretends the prior attempt did not occur. Session restart on the selected nonpersistent development host remains visible SessionLost.
+
+A seed alone does not prove equivalent execution. Standard selected Core derives randomness from game_id; local reconstruction uses game_id plus event history, and AdapterHistory.rng_seed is output rather than a config input. Keep stable fixture game_id separate from unique artifact run_id, transport IDs and output directories. Changing game_id and claiming the same seed is invalid. Bind actual supported Core RNG seed/state/history/draw_count/hashes together with configuration, decision order and version identities when available; otherwise mark the affected random-branch reproducibility criterion unavailable. Replay export does not imply replay import or HTTP restore. The selected operator-only persistence examples do not grant a client restore endpoint. The UI must not deserialize internal checkpoint objects or mutate the Core to simulate a requested start state.
+
+| E09 subproof | Exact proposed obligation |
+|---|---|
+| E09-SETUP | Start an approved exact-Core scenario through the real lifecycle, bind the SETUP request(s) and viewer-safe UI entry state. |
+| E09-GAME | Follow the complete supported setup/prebattle decision path to Core-owned formal battle entry or explicitly report the nearest supported observable boundary and its gap. |
+| E09-ROUND | Reach the named battle-round landmark through supported decisions or a separately supplied supported operator artifact; prove the actual round and outstanding entry work. |
+| E09-TURN | Reach the named player's turn, distinguishing turn owner from any pending reaction actor and verifying allowed player/spectator views. |
+| E09-PHASE | Reach each required named phase/entry-decision profile at its proved precision; retain gaps for unreachable exact pre-phase boundaries and Charge/Fight paths not yet proved. |
+| E09-REPLAY | Prove only an actually supported exact-Core replay/operator-artifact mechanism and its identity/privacy limits. Missing import/restore stays BLOCKED; a read-only exported replay is not a mutable live session. |
+| E09-NEG | Wrong identities, absent/ambiguous selectors, hidden/no-visible requests, unauthorized actor, changed context and unknown outcomes fail without unauthorized submission, invented choices or private mutation. |
+
+Maintain a capability/start-point ledger with one row per required UI workflow variant and scope, profile/recipe identity, current request family, selected public path, expected positive/negative/cancel behavior, actual layer/host/artifact evidence and remaining gap. A profile can support several workflows; a required variant without a profile stays visible as a missing fixture. E09 supplies reproducible entry points; E08 still proves complete behavior and E03B still proves the selected packaged real-core action.
+
+If a late target is not publicly reachable, first try the existing bounded public canonical prefix. A Core maintainer may separately supply a supported exact-Core operator checkpoint/session fixture and its restore/provisioning procedure; the client can attach through its ordinary public API after that operation. That is an external fixture dependency, not authorization to implement a new Core host, add a private HTTP route, call a test factory in production or patch the read-only sibling. While blocked, an immutable viewer-safe DTO fixture can exercise parser/layout/input work, clearly labelled fixture-only; it cannot close real-session reachability or live gameplay acceptance.
+
+#### Pinned support and outstanding profile gaps
+
+The [source investigation](research/2026-10-19-game-state-bootstrap.md) binds these
+findings to Core 5f509724da25a2f6ded0c2739a8e7c84bdf59c91 / contract 44.3.33,
+Arcade source 5088c1c49dcaff29eb59fb64b3063d30214dde73 and Unreal c987863.
+Arcade's separately supported Core remains fc12fa214642f1b1f2a31b56be7323b7d76dbebc /
+44.1.0; these are separate identities, not interchangeable baselines.
+
+The existing Unreal E01 recipe resolves offered setup/deployment/redeploy/Scout
+decisions and reaches normal_move under a 256-submission bound. It uses formal
+POST /sessions plus start_session; /games is only a support-profile probe.
+Its game_id derives from its output root, so the existing movement evidence does
+not establish cross-run fixed-game_id/RNG reproducibility. Arcade's bounded
+200-decision smoke has setup, secondary/reserves/deployment/redeploy/prebattle,
+Scout/movement/shooting source routes; arbitrary round/player-turn/Charge/Fight
+selection is not proved. The original 98-case manifest is a source inventory with
+RuntimeCasesExecuted=0, not 98 reachable real start positions. Later E01 wire
+artifacts remain separate evidence.
+
+| Gap | Source-supported finding | Remaining obligation / owner |
+|---|---|---|
+| START-GAP01 | Standard Core seeds from game_id and reconstructs using event history; GameConfig has no independent rng_seed. History rng_seed is output. | Fixture/integration coordinator must prove lawful isolated fixed-game_id repeats and actual supported RNG/history evidence per profile; unprovided evidence stays unavailable. |
+| START-GAP02 | Python fork/persistence/replay and operator-store recovery exist; selected development CLI is in-memory and exposes no restore/scenario/seed flags. No HTTP checkpoint/replay import was found. | External Core owner supplies any supported operator artifact/provisioning procedure; client integration proves ordinary authorized attachment. No new host or route is authorized. |
+| START-GAP03 | Formal battle entry is implemented behind setup completion; accepted HTTP decisions auto-drain to the next observable boundary. | Fixture/integration coordinator proves each exact or nearest-observable round/turn/phase recipe. A missing UI recipe does not itself prove a missing Core capability. |
+| START-GAP04 | Projection/request access is viewer scoped; authoritative replay/persistence/RNG may require privileged operator access. | Fixture/integration coordinator and external Core owner establish separate authorized operator validation and viewer fixtures, including legitimate no-visible-decision states. |
+
+No new game, server, test, checkpoint, native build or rendered proof was executed
+for this amendment. RQ25 remains OPEN and every E09 subproof remains NOT RUN;
+the inspected test bodies are source support only.
+
 ## 12. Ordered implementation milestones
 
 ### 12.1 Ordering and gates
@@ -2020,7 +2163,7 @@ Packaging uses the engine's version-pinned Automation Tool/BuildCookRun workflow
 The implementation milestones below are **prospective**, not the immediate Codex assignment. Complete section 0 first. Source discovery formerly described in M01 moves into the RQ research closures; M01 retains the later executable characterization and fixture/harness work. Preserve all acceptance criteria rather than declaring that research alone completed M01.
 
 ```text
-NOW: M00 read-only baseline + RQ01–RQ24 research / owner decisions
+NOW: M00 read-only baseline + RQ01–RQ25 research / owner decisions
   -> report source-backed answers, remaining empirical blockers, external dependencies
   -> explicit owner authorization for bounded experiments, where required
        -> approved proof-only portions of M01/M02 and E01/E02/E03A/E04
@@ -2046,11 +2189,11 @@ Every code milestone uses a frozen base/head pair, records its dependency/fixtur
 | Milestone | Research prerequisites to cite in its work packet | Empirical/approval gate |
 |---|---|---|
 | M00 | RQ01; initial RQ02/RQ04/RQ05/RQ06 owner questions; D01 already closed | Planning-only metadata and documentation; no implementation authorization needed for permitted reads |
-| M01 | All applicable RQ closure records, especially RQ02/RQ03/RQ07/RQ08/RQ09/RQ11/RQ20 | New harness/fixture/code generation only under explicit bounded-experiment or implementation authorization; E01/E08 as specified |
+| M01 | All applicable RQ closure records, especially RQ02/RQ03/RQ07/RQ08/RQ09/RQ11/RQ20/RQ25 | New harness/fixture/code generation only under explicit bounded-experiment or implementation authorization; E01/E08 and selected prospective E09 profiles as specified |
 | M02 | RQ05/RQ09–RQ14/RQ18–RQ20 | Authorized E02/E04 proof scope or G-IMPLEMENT; unexecuted visual tests remain unverified |
-| M03 | RQ02–RQ06/RQ08/RQ15–RQ17/RQ20/RQ23 | G-IMPLEMENT; E01/E02/E04 relevant proofs; E03A delivery feasibility; E03B required for completion |
-| M04 | RQ03/RQ06–RQ10/RQ15/RQ20/RQ22 | M03 and source-characterized variant checklist; review actual candidate drift |
-| M05 | RQ07/RQ10–RQ14/RQ16/RQ20 | Required prior implementation; complete approved variant/profile matrix |
+| M03 | RQ02–RQ06/RQ08/RQ15–RQ17/RQ20/RQ23/RQ25 | G-IMPLEMENT; E01/E02/E04 relevant proofs; E03A delivery feasibility; E03B required for completion |
+| M04 | RQ03/RQ06–RQ10/RQ15/RQ20/RQ22/RQ25 | M03 and source-characterized variant checklist; review actual candidate drift |
+| M05 | RQ07/RQ10–RQ14/RQ16/RQ20/RQ25 | Required prior implementation; complete approved variant/profile matrix |
 | M06 | RQ16/RQ19/RQ22 | E06/E07 actual recovery/reuse evidence; owner approval for any material data change |
 | M07 | RQ05/RQ13/RQ15/RQ17/RQ18/RQ20/RQ21 | E05, required packages/test hosts, release-specific provenance and reliability gates |
 | M08 | RQ16/RQ21/RQ22 and completed audits | Explicit release/cutover approval; legacy retirement separately approved |
@@ -2081,10 +2224,10 @@ Later source changes reopen affected research items. A resolved item does not ne
 
 **Files/modules:** proposed `Plugins/TabletopPresentation/Source/TabletopModel/`; `tests/migration/fixtures/<core-sha>/`; `tests/migration/manifest.json`; `scripts/migration/`; legacy client `state`, `core_client`, `render`, `preferences`, `hud`, resource and test paths in `../Warhammer_40k_UI_arcade/`.
 
-**Tasks:** consume the source/gesture/resource/variant inventory resolved in RQ07–RQ13; implement the authorized client harness and immutable fixtures from the selected external canonical recipes; execute E01 and E08's executable portions; realize the resolved typed coordinate/ID/revision/intent boundaries; capture permitted viewer-safe failure traces and profile/save interface fixtures; preserve the approved target-contract difference ledger. Do not postpone missing requirements discovery until this code milestone.
+**Tasks:** consume the source/gesture/resource/variant inventory resolved in RQ07–RQ13; implement the authorized client harness and immutable fixtures from the selected external canonical recipes; execute E01 and E08's executable portions; realize the resolved typed coordinate/ID/revision/intent boundaries; capture permitted viewer-safe failure traces and profile/save interface fixtures; preserve the approved target-contract difference ledger. Do not postpone missing requirements discovery until this code milestone. Build the reviewed START01–START10 catalogue for the milestone's selected capabilities, retaining each profile's exact Core/runtime/data/configuration, stable fixture game_id and actual RNG/history identities. Resolve every step against freshly returned public requests/options, record supported boundary precision and fidelity, and link CAP/E08 cases to concrete UI workflows. New harness/fixture production follows its own authorized packet; source inventory counts do not establish live profile reachability. Deliver the labelled development-only selector and documented fresh-isolated-instance reset/relaunch workflow in Section 11.5; source-only catalogue text does not satisfy this delivery obligation.
 
 **Runnable result:** headless contract/fixture tests and a complete capability ledger; no claims of 3D playability yet.
-**Acceptance:** fixtures fail closed when missing/wrong-version; sample finite and parameterized requests compare through the same exact core; negative viewer/retry/stale tests pass; every CAP row has its research disposition and executable evidence status; blockers cannot be labelled complete. D02 was frozen in RQ02 and is checked for drift, not selected after adapter implementation.
+**Acceptance:** fixtures fail closed when missing/wrong-version; sample finite and parameterized requests compare through the same exact core; negative viewer/retry/stale tests pass; every CAP row has its research disposition and executable evidence status; blockers cannot be labelled complete. D02 was frozen in RQ02 and is checked for drift, not selected after adapter implementation. Every selected start profile has an exact supported recipe/operator-artifact route and an explicit source-only/NOT RUN/proven/BLOCKED disposition. Missing, ambiguous, unauthorized or wrong-version fixtures fail visibly; unavailable exact boundaries and random-branch evidence are not passed using unlabelled approximations, invented config fields, private mutation or skipped tests. The selected-capability selector and documented fresh-instance workflow are implemented and evidenced under E09 at the claimed test layer; unavailable target recipes remain visibly BLOCKED.
 **Validation:** run existing affected tests in prepared environment; run new protocol/normalization suites and record exact commands/test counts.
 **Risks:** weak baseline corpus, opaque hash mismatch, target drift, unsupported editor ambiguity.
 **Rollback:** keep fixtures append-only/versioned; disable new harness without changing old tests.
@@ -2115,11 +2258,11 @@ Later source changes reopen affected research items. A resolved item does not ne
 
 **Files/modules:** `WarhammerClient`, `WarhammerCoreClient`, client staging/connection/process-supervision configuration for the approved external artifact/service, existing `TabletopHUD`/`WarhammerBattlefield`, proposed platform smoke scripts and release manifest. No Python-core or external-host source edits.
 
-**Tasks:** create/attach an authorized exact-core session; display board/models/terrain/HUD; select from top-down/oblique views; submit a meaningful action with actual witness ordering/inventory; refresh accepted world/HUD/events; implement pending/error/retry/session-loss states. Initial Windows route uses the selected checkout command server. Plumb Linux targets now and record execution NOT RUN under OWN08; repeat package/render/core proof when the host exists. Later standalone/durable packaging remains a stated gate.
+**Tasks:** create/attach an authorized exact-core session; display board/models/terrain/HUD; select from top-down/oblique views; submit a meaningful action with actual witness ordering/inventory; refresh accepted world/HUD/events; implement pending/error/retry/session-loss states. Initial Windows route uses the selected checkout command server. Plumb Linux targets now and record execution NOT RUN under OWN08; repeat package/render/core proof when the host exists. Later standalone/durable packaging remains a stated gate. Name the selected E09 start profile and fidelity class in the packaged work packet; run the real public-Core recipe or attach only after a separately supported operator-provisioning procedure. Bind the actual current request and viewer-safe UI state before the meaningful action. The profile's game_id/RNG identity is independent of the artifact run_id. Preserve required later-round/turn/phase catalogue gaps for M04/M05 instead of claiming the first slice covers them.
 
 **Runnable result:** a **packaged 3D application** that reaches a real decision, accepts user intent through the real core, and displays the authoritative change. The ordinary mesh and token share contracts; the raised fixture remains separately accessible as presentation evidence.
 
-**Acceptance:** scenario loads from a documented core recipe; same intended world action produces equivalent command intent across views; camera-only actions produce no authoritative change; UI submit/cancel does not touch world input; invalid/stale action remains core-rejected; approved deployment-mode startup (including offline launch when required) and uncertain-result recovery pass; existing supported data is mapped without overwriting originals. Each owner-approved initial OS package is exercised, not merely compiled.
+**Acceptance:** scenario loads from a documented core recipe; same intended world action produces equivalent command intent across views; camera-only actions produce no authoritative change; UI submit/cancel does not touch world input; invalid/stale action remains core-rejected; approved deployment-mode startup (including offline launch when required) and uncertain-result recovery pass; existing supported data is mapped without overwriting originals. Each owner-approved initial OS package is exercised, not merely compiled. The selected reproducible start point and its exact/nearest-observable precision, fidelity, identities and UI workflow are evidenced under START01–START10/E09. A real Core-smoke scenario with altered content may establish only its explicitly approved internal smoke workflow; it does not establish production-complete armies or rule coverage. Missing required profiles remain named blockers; this addition does not replace E03B's real accepted action, ownership, recovery or package/OS requirements.
 
 **Validation:** E03B complete clean-machine test; packaged semantic interaction trace, core outcome evidence, before/after IDs/poses/HUD values, input ownership trace and exact package hashes. A screenshot, fake client, empty suite, no-op-only action or editor-only run cannot close M03.
 **Risks:** unavailable or incompatible externally supplied native runtime, missing target API, unreproducible real action, hidden-information leakage. External defects return to their separate owner.
@@ -2134,10 +2277,10 @@ Later source changes reopen affected research items. A resolved item does not ne
 
 **Files/modules:** C++ application state machines/editor controllers, `TabletopModel`, world annotations, HUD widgets and parity tests; source references include `state/movement_submission.py`, interaction dispatch and the corresponding characterized legacy flows.
 
-**Tasks:** migrate variant by variant; preserve pending-request identity and draft invalidation; handle cancellation/modal focus; preserve alias-based entity selection and visibility; show core diagnostic reasons; update geometry and labels from accepted projections; incorporate approved target-version semantics.
+**Tasks:** migrate variant by variant; preserve pending-request identity and draft invalidation; handle cancellation/modal focus; preserve alias-based entity selection and visibility; show core diagnostic reasons; update geometry and labels from accepted projections; incorporate approved target-version semantics. Carry RQ25/START01–START10/E09 into each interaction packet: deliver the required phase/round/turn start profiles and development selector/reset workflow, retaining unsupported landmarks as named dependencies.
 
 **Runnable result:** the Unreal client packages for each approved initial platform can perform the enumerated implemented finite/placement/movement workflows.
-**Acceptance:** each migrated variant has positive, negative and cancellation traces; path witnesses remain contract-correct; no stale draft submits; hidden/collapsed panels do not break selection synchronization; camera rotation changes neither intent nor legality.
+**Acceptance:** each migrated variant has positive, negative and cancellation traces; path witnesses remain contract-correct; no stale draft submits; hidden/collapsed panels do not break selection synchronization; camera rotation changes neither intent nor legality. Each selected workflow has its E09 profile, exact or declared nearest-observable precision, fidelity and actual UI evidence; missing required start profiles cannot be skipped.
 **Validation:** differential/semantic corpus and packaged route tests; geometry/label tests at multiple camera angles.
 **Risks:** family-specific payloads generalized incorrectly, source plans mistaken for shipped features, new-frame reply races.
 **Rollback:** leave legacy default; revert an isolated editor feature only with its capability status updated.
@@ -2151,10 +2294,10 @@ Later source changes reopen affected research items. A resolved item does not ne
 
 **Files/modules:** `WarhammerClient`, `TabletopHUD`, preference/composition adapters, packaged resources, diagnostics and source-specific variant tests.
 
-**Tasks:** finish every characterized remaining variant; preserve active/unsupported/recognized-inactive distinctions and extension payloads; import/export representative profiles; implement preview/component/headless artifact parity; preserve long-text/overflow/high-contrast controls; preserve safe diagnostic categories; verify actual roster import/edit/save surfaces found in M01.
+**Tasks:** finish every characterized remaining variant; preserve active/unsupported/recognized-inactive distinctions and extension payloads; import/export representative profiles; implement preview/component/headless artifact parity; preserve long-text/overflow/high-contrast controls; preserve safe diagnostic categories; verify actual roster import/edit/save surfaces found in M01. Complete the RQ25/START01–START10/E09 profile-to-variant ledger and discoverable development selector/reset coverage for the remaining supported UI, including later round/turn/phase profiles where required.
 
 **Runnable result:** complete approved existing-behavior capability matrix in packaged form.
-**Acceptance:** no silent widget/binding/profile removal; all default resource paths work outside the checkout; unsupported actions remain explicit; normal users cannot access raw hidden payloads; advanced trace options do not leak secrets; no CAP row disappears into a generic “done.”
+**Acceptance:** no silent widget/binding/profile removal; all default resource paths work outside the checkout; unsupported actions remain explicit; normal users cannot access raw hidden payloads; advanced trace options do not leak secrets; no CAP row disappears into a generic “done.” Every required UI variant maps to its proven E09 start profile and E08 workflow evidence, with unsupported exact boundaries and external fixture dependencies reported explicitly.
 **Validation:** profile golden corpus, UI layout matrix, keyboard/mouse semantic tests, viewer-switch tests and current-source comparison.
 **Risks:** YAML coercion drift, inaccessible narrow layouts, new prerequisite from uncharacterized behavior.
 **Rollback:** isolated preference files and conversion copies; original legacy profiles preserved.
@@ -2274,6 +2417,7 @@ Retire obsolete Arcade UI packages, ad hoc transition clients, dual-version clie
 | RISK17 | Missing GPU/UE toolchain prevents real evidence | M00 host inventory; designate native rendering hosts; BLOCKED not headless PASS | Coordinator, M00/M02 |
 | RISK18 | Development HTTP defaults/bounds unsuitable for shipping | Loopback-only managed host; credential separation; limits and failure tests; no public-server claim | Adapter/security, E03 |
 | RISK19 | Unreal JSON object storage silently folds keys that differ only in case | E01 reader rejects these valid JSON objects with `unsupported_key_case_collision`; preserve exact known field/value casing. Production needs a reviewed representation that round-trips distinct keys and opaque payloads before adoption | Client adapter/configuration, RQ11/RQ20, M01/M02; open |
+| RISK20 | Fabricated/unreachable start positions, game_id/RNG drift, smoke-content overclaim or privileged fixture leakage creates false UI parity | START01–START10 manifests; public current-decision recipes; exact/nearest boundary labels; smoke fidelity classification; lawful fixed-game_id isolation; segregated operator and viewer fixtures; E09 plus E08 workflow evidence | Fixture/integration coordinator and external Core owner for missing supported artifacts; RQ25/E09/M01/M03–M05 |
 
 ### 14.2 Decisions
 

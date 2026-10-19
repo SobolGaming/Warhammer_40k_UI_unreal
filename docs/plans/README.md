@@ -1,9 +1,11 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 20, is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 33, is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
+
+Revision 33 adds prospective [RQ25 / reproducible start points](unreal-migration-plan.md#115-reproducible-setup-and-game-state-start-points), START01–START10 and E09, supported by the [pinned lifecycle investigation](research/2026-10-19-game-state-bootstrap.md). The development-only selector and fresh-instance reset/relaunch are required future deliveries; they do not exist yet. E09 is NOT RUN. This planning checkpoint is isolated from the frozen E02 checkout and supplies no new execution or acceptance authority.
 
 [BOOT01 Windows evidence](evidence/2026-10-16-boot01.md) records the approved C++
 scaffold, probe/final builds, IDE generation and limits. The
@@ -44,9 +46,11 @@ records retain their actual isolation limits and do not supply final review role
 
 The [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md) is
 adopted for bounded source authoring. Its [authority journal](evidence/2026-10-16-e02-world-input.md)
-records named writers and pre-execution review/visible-window gates. The bounded
-source is authored; its frozen source/tool/asset/plugin-closure review is pending.
-E02 has not executed.
+records named writers and pre-execution review/visible-window gates. At revision 20 the bounded
+source was authored, its frozen source/tool/asset/plugin-closure review was pending,
+and E02 had not executed. Later attempted runs and failures are retained in
+canonical plan Section 0.9 and the journal; this isolated planning amendment does
+not revise the current frozen E02 execution record.
 
 The [E01 continuation PR](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/2)
 was updated and marked ready at `bd801233cc9989e0ae146a3be7b136d26dc73183`.
