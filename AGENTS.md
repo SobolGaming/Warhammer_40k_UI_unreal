@@ -520,6 +520,31 @@ nor independence. Resolve actionable findings before completion.
 
 ## Standing three-role review protocol
 
+### Standing migration review-packet consent — 2026-10-19
+
+The owner directly stated in this chat:
+
+> I approve all review packets.
+
+Treat this as standing transmission consent for current and subsequent review
+packets for this Unreal migration to the existing configured OpenAI Codex review
+service. It covers affected SOURCE and the independent final CODE and different
+REQ/acceptance packets, including relevant client source, installed UE/API
+excerpts, requirements, file/dependency identities and necessary factual evidence,
+redacted logs/traces and rendered screenshots. Retain credentials, secrets and
+unrelated private sessions/data outside every packet. Initial reviewer inputs
+still exclude author narratives and peer verdicts under the blind-review rules.
+
+This extends the earlier E02 source-only transmission scope to the migration's
+necessary review packets; preserve the earlier exact consent/history records.
+Review invocation remains bounded and read-only under its applicable packet.
+Consent does not establish a passing review, waive an exact-candidate freeze or
+role isolation, or authorize native/GUI/test/build/Core-host execution, additional
+visible windows, publication, merge, unrelated work or a different destination.
+The c987863 visible-test approval request is separate and remains pending.
+
+### Earlier SOURCE consent and unchanged review discipline
+
 The owner directly approved current and future E02 SOURCE review transmission.
 The [direct human consent record](.local/reviews/E02-source-review/root-ba058-20261018T005629Z-05cac877/direct-human-current-and-future-source-review-consent.json)
 is 2766 bytes, SHA256
