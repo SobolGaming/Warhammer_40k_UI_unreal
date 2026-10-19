@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_E02_C987_FAILED_WORLDINPUT_FACTS_NOT_ACCEPTANCE",
+  "recordedUtc": "2026-10-19T19:38:03.9969935Z",
+  "sourceHead": "c9878630c586fc2641c08da8171ce1b969150fd1",
+  "runId": "20261019T130651Z-04449a62",
+  "closure": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-source-review\\root-c987863-20261019T130651Z-04449a62\\worldinput-failure-and-authority-closure.json",
+    "bytes": 8669,
+    "sha256": "e7e7fe9c218fe200fa36214ba900feed87defe7121dc1b8aa6a6913356489f22"
+  },
+  "status": "WORLDINPUT_FAIL_ALL_EXECUTION_AUTHORITY_CLOSED",
+  "phaseDisposition": {
+    "Discovery": "PASS_METADATA_INSPECTED",
+    "Numeric": "PASS_METADATA_INSPECTED",
+    "WorldInput": "FAIL_INCOMPLETE_EXPORT",
+    "Audit": "NOT_RUN_AUTHORITY_CLOSED",
+    "FinalCODE": "NOT_RUN",
+    "FinalREQ": "NOT_RUN"
+  },
+  "failedCheck": "Rendered.RaisedPicking step2: Domain <=1e-4in and projected <=1physicalpixel",
+  "partialDiagnostics": {
+    "logCompletedCases": 11,
+    "inputCases": 8,
+    "inputAssertions": 975,
+    "renderedCases": 3,
+    "renderedAssertions": 131,
+    "totalAssertions": 1106,
+    "RepeatedConfirmAssertions": 148,
+    "NumericIndependentCases": 4,
+    "NumericAssertions": 17041,
+    "fullWorldInputReport": "ABSENT",
+    "worldInputCompletion": "ABSENT",
+    "imagesProduced": 5,
+    "requiredImages": 6,
+    "missingImage": "raised-pick.png",
+    "imageAcceptance": "NOT_ESTABLISHED"
+  },
+  "nativeProcess": {
+    "pid": 37836,
+    "exitCode": 0,
+    "elapsedSeconds": 70.4981013,
+    "budgetSeconds": 600,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "finalJobActive": 0,
+    "finalJobTotal": 13
+  },
+  "primaryWrapperFailure": {
+    "stage": "WorldInput",
+    "type": "System.Management.Automation.MethodInvocationException",
+    "message": "Exception calling \"GetAttributes\" with \"1\" argument(s): \"Could not find file 'C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E02\\20261019T130651Z-04449a62\\reports\\world-input\\index.json'.\""
+  },
+  "normalDesktopProcessObservation": {
+    "tool": "dccfc4",
+    "observedUtc": "2026-10-19T19:32:51.5403013Z",
+    "nativeOrBuildProcesses": 0,
+    "failedNativePidAbsent": true,
+    "limit": "Read-only process observation and assigned-job cleanup, not universal descendant/egress attestation"
+  },
+  "settingsComparison": {
+    "count": 9,
+    "comparison": "Preflight.after == WorldInput.before == WorldInput.after by role/path/existence/hash/inspection/policy; observation timestamps excluded",
+    "rows": [
+      {
+        "role": "editor-engine-base",
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Config\\BaseEditorSettings.ini",
+        "exists": true,
+        "sha256": "5272509e0b672e5bf9930a8162af9707c47dd913e8149627d48eac086c092c26",
+        "threeStatesMatch": true
+      },
+      {
+        "role": "editor-local-user",
+        "path": "C:\\Users\\Rabid\\AppData\\Local\\Unreal Engine\\Engine\\Config\\UserEditorSettings.ini",
+        "exists": false,
+        "sha256": null,
+        "threeStatesMatch": true
+      },
+      {
+        "role": "editor-local-versioned",
+        "path": "C:\\Users\\Rabid\\AppData\\Local\\UnrealEngine\\5.8\\Saved\\Config\\WindowsEditor\\EditorSettings.ini",
+        "exists": true,
+        "sha256": "b7e47645c8169e0c05ab6ad43f99f4529d33cd12ef019432fa56bd9f994b464e",
+        "threeStatesMatch": true
+      },
+      {
+        "role": "editor-profile-documents-user",
+        "path": "C:\\Users\\Rabid\\Documents\\Unreal Engine\\Engine\\Config\\UserEditorSettings.ini",
+        "exists": false,
+        "sha256": null,
+        "threeStatesMatch": true
+      },
+      {
+        "role": "editor-project-default",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E02\\20261019T130651Z-04449a62\\project\\Config\\DefaultEditorSettings.ini",
+        "exists": true,
+        "sha256": "52e28525a0b283949e94652e2c60353c55337ec15cc125f5fa2089d1c509a07d",
+        "threeStatesMatch": true
+      },
+      {
+        "role": "editor-known-documents-user",
+        "path": "C:\\Users\\Rabid\\OneDrive\\Documents\\Unreal Engine\\Engine\\Config\\UserEditorSettings.ini",
+        "exists": false,
+        "sha256": null,
+        "threeStatesMatch": true
+      },
+      {
+        "role": "ubt-roaming",
+        "path": "C:\\Users\\Rabid\\AppData\\Roaming\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+        "exists": true,
+        "sha256": "1e7cd8512dedf37d7b103c5592f5600433e7fe97da23434e69990f8a3370508a",
+        "threeStatesMatch": true
+      },
+      {
+        "role": "ubt-local",
+        "path": "C:\\Users\\Rabid\\AppData\\Local\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+        "exists": false,
+        "sha256": null,
+        "threeStatesMatch": true
+      },
+      {
+        "role": "ubt-known-documents",
+        "path": "C:\\Users\\Rabid\\OneDrive\\Documents\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+        "exists": false,
+        "sha256": null,
+        "threeStatesMatch": true
+      }
+    ]
+  },
+  "partialPNGs": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E02\\20261019T130651Z-04449a62\\artifacts\\world-input\\five-forms.png",
+      "bytes": 374032,
+      "sha256": "45810b7853a4371b5bffa71fc1b03df0b54951df451a2941e1ccdfeb744e58fa"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E02\\20261019T130651Z-04449a62\\artifacts\\world-input\\mesh-after.png",
+      "bytes": 375618,
+      "sha256": "5a7d5cf8d8e3bb618796c797dfb4d0851fe000d82ca4b859d4e4238353756198"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E02\\20261019T130651Z-04449a62\\artifacts\\world-input\\mesh-before.png",
+      "bytes": 373685,
+      "sha256": "45fbceb770160ba752e465f3abb8f09ba36fde72d0565fcb4150041653eb432e"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E02\\20261019T130651Z-04449a62\\artifacts\\world-input\\near-top.png",
+      "bytes": 482452,
+      "sha256": "f4ae0acaf14df5d11dbce962dd0ae271bce50f557e1654bb5b6198fece6eacee"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E02\\20261019T130651Z-04449a62\\artifacts\\world-input\\oblique.png",
+      "bytes": 251875,
+      "sha256": "46a6c04990b259f5dc0b3dd801261f5ffcfcd50dec3453be446422776ce5c67e"
+    }
+  ],
+  "visibleWindowsConsumed": 2,
+  "remainingExecutionAuthority": 0,
+  "next": "Prepare and checkpoint the focused effective-viewport-pixel proof-oracle/metric repair, preserving the runtime query, fixture, 1e-4in/1px thresholds, cases and input route. c987/run130651 is closed FAIL after 11 partial successes; no full report/six-image acceptance/Audit/final CODE-REQ exists. A changed candidate requires fresh freeze/affected SOURCE/new RunId/SUP/build and new applicable visible approval. No execution is currently released.",
+  "sourceAnalysis": "Separate author-side recorded-ray/matrix reconstruction, not a test verdict or independent initial review; original c987 FAIL is preserved",
+  "publication": "LOCAL_CHECKPOINT_ONLY",
+  "linux": "NOT_RUN",
+  "packaging": "NOT_RUN"
+}

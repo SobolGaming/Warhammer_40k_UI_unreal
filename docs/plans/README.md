@@ -1,9 +1,11 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 34, is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 35, is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
+
+Revision 35 records the failed c987 RaisedPicking phase, preserved 11-case partial diagnostics, consumed windows and focused oracle-repair gate. [Current facts](evidence/2026-10-19-e02-c987-result.json) and [journal](evidence/2026-10-16-e02-world-input.md) distinguish the failure from the passed predecessors. All native execution is closed; no repaired candidate or final independent acceptance is claimed.
 
 Revision 34 makes the [M03 project-owned startup level](unreal-migration-plan.md#116-project-owned-startup-level-and-m03-entry-path) explicit through ENTRY01–ENTRY08: intentional editor/game defaults, reproducible launch, cook references, Core/session lifetime and meaningful slice/error evidence. A single minimal entry level is sufficient; full configuration/army-building UI and one level per battlefield are not prerequisites. This is a planning-only follow-up to 56ab55b; no asset or runtime implementation was performed.
 

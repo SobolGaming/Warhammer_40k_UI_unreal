@@ -2,12 +2,12 @@
 
 This repository develops a C++ first, genuinely 3D Unreal client for the separate
 authoritative Python rules engine. `WarhammerClient.uproject` is the minimal C++
-foundation. Source includes an opt-in synthetic 3D proof scene. Recorded candidate
-0ed4d7c passed Windows Editor compilation and Numeric; its rendered/input proof
-stopped during RepeatedConfirm after six partial Input log successes. The bounded
-diagnostic-status/logging repair remains unexecuted and awaits fresh review/build.
-A playable Core-connected client remains future migration
-work. The plan records actual evidence and remaining gates.
+foundation. Source includes an opt-in synthetic 3D proof scene. Executed candidate
+c987863 passed source review, Windows Editor compilation, Discovery and Numeric.
+WorldInput stopped on Rendered.RaisedPicking after eleven partial log successes;
+its accuracy oracle is under focused repair. No complete rendered/input or visual
+acceptance is established. A playable Core-connected client remains future work.
+The plan records actual evidence and remaining gates.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +76,21 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Current E02 source `0ed4d7c5b95148724af362c02380167b33cc0660` received affected
+Current E02 source `c9878630c586fc2641c08da8171ce1b969150fd1` received affected SOURCE PASS. Run `20261019T130651Z-04449a62` passed Preflight, all six supervisor cases in three groups/five roots, Win64 Editor Build, Discovery (2211 eligible engine names/exact 16 E02 names) and Numeric (four cases/17041 assertions). Discovery PID 33448 exited 0 in 250.774827s with confirmed cleanup/final job active 0/total 37; Numeric PID 20804 exited 0 in 15.5452976s with confirmed cleanup/final job active 0/total 11.
+
+WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1 physical pixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
+
+WorldInput native PID 37836 exited 0 in 70.4981013s with confirmed assigned-job cleanup and final job active 0/total 13. Its nine recorded settings pairs match before/after and Preflight.after (four present/five absent). Discovery/Numeric likewise have nine matching pairs; SupervisorControls has no same-phase pair. Known Documents evidence remains limited to the logical route; resolved provider/target identity and the absent-leaf present-file branch remain UNVERIFIED. Job aggregates do not prove universal descendant identity, second-hop behavior or network isolation.
+
+The exact-pair approval came from a trusted source-progress-chat relay: the owner's exact **Yes!** at `2026-10-19T19:18:09Z` to question `call_2a9e639c445040319e6a71082cb02a25`. The original message was not independently retrieved. Both approved visible launches have now been consumed; the run and all hidden/visible execution authority are **CLOSED_DO_NOT_REUSE**. No retry, RunId reuse or approval transfer remains.
+
+A bounded ray/projection/quantization diagnosis and repair must preserve the existing scene/domain values, actual projection/input route, nearest-hit/NoHit semantics, geometry and pixel tolerances, cases, screenshots, zero Core counters, ownership/cleanup, timing budgets and startup controls. No repaired candidate has executed. Require a coherent checkpoint, fresh source/tool/API/fixture freeze, affected SOURCE review, new RunId, preservation/SUP/build checks and new applicable visible approval before native repaired graphical work. Fresh final independent CODE and different REQ assessments still follow a completed final execution/documentation/evidence freeze. Acceptance, publication/merge, full E02/M02, production Core-connected play, packaging and Linux remain open. Preserve every earlier failure/unknown.
+
+See [current E02 facts](docs/plans/evidence/2026-10-19-e02-c987-result.json) and the [journal](docs/plans/evidence/2026-10-16-e02-world-input.md).
+
+The following 0ed4d7c disposition is historical.
+
+Historical E02 source `0ed4d7c5b95148724af362c02380167b33cc0660` received affected
 **SOURCE PASS**. Run `20261019T052432Z-c29cc04d` passed Preflight, all six supervisor
 subcases, Win64 Editor Build, Discovery (2211 engine names/exact 16 E02) and four
 Numeric cases/17041 assertions on 2026-10-19 UTC.

@@ -1,6 +1,6 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **5ABE18C_AFFECTED_SOURCE_PASS; PREFLIGHT_SUP6_BUILD_DISCOVERY_NUMERIC_PASS; WORLDINPUT_FRAMEPAINTSTALE_FAIL; ALL_EXECUTION_AUTHORITY_CLOSED; PAINT_COORDINATE_REPAIR_REQUIRES_FRESH_REVIEW**.
+Status: **C987863_AFFECTED_SOURCE_PASS; PREFLIGHT_SUP6_BUILD_DISCOVERY_NUMERIC_PASS; WORLDINPUT_RAISEDPICKING_FAIL; ALL_EXECUTION_AUTHORITY_CLOSED; FOCUSED_ORACLE_REPAIR_REQUIRES_FRESH_REVIEW**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
@@ -8,7 +8,19 @@ Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
 
-Current source `5abe18cbd020ea97676ad87283735e17822fc462` received affected SOURCE
+Current E02 source `c9878630c586fc2641c08da8171ce1b969150fd1` received affected SOURCE PASS. Run `20261019T130651Z-04449a62` passed Preflight, all six supervisor cases in three groups/five roots, Win64 Editor Build, Discovery (2211 eligible engine names/exact 16 E02 names) and Numeric (four cases/17041 assertions). Discovery PID 33448 exited 0 in 250.774827s with confirmed cleanup/final job active 0/total 37; Numeric PID 20804 exited 0 in 15.5452976s with confirmed cleanup/final job active 0/total 11.
+
+WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1 physical pixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
+
+WorldInput native PID 37836 exited 0 in 70.4981013s with confirmed assigned-job cleanup and final job active 0/total 13. Its nine recorded settings pairs match before/after and Preflight.after (four present/five absent). Discovery/Numeric likewise have nine matching pairs; SupervisorControls has no same-phase pair. Known Documents evidence remains limited to the logical route; resolved provider/target identity and the absent-leaf present-file branch remain UNVERIFIED. Job aggregates do not prove universal descendant identity, second-hop behavior or network isolation.
+
+The exact-pair approval came from a trusted source-progress-chat relay: the owner's exact **Yes!** at `2026-10-19T19:18:09Z` to question `call_2a9e639c445040319e6a71082cb02a25`. The original message was not independently retrieved. Both approved visible launches have now been consumed; the run and all hidden/visible execution authority are **CLOSED_DO_NOT_REUSE**. No retry, RunId reuse or approval transfer remains.
+
+A bounded ray/projection/quantization diagnosis and repair must preserve the existing scene/domain values, actual projection/input route, nearest-hit/NoHit semantics, geometry and pixel tolerances, cases, screenshots, zero Core counters, ownership/cleanup, timing budgets and startup controls. No repaired candidate has executed. Require a coherent checkpoint, fresh source/tool/API/fixture freeze, affected SOURCE review, new RunId, preservation/SUP/build checks and new applicable visible approval before native repaired graphical work. Fresh final independent CODE and different REQ assessments still follow a completed final execution/documentation/evidence freeze. Acceptance, publication/merge, full E02/M02, production Core-connected play, packaging and Linux remain open. Preserve every earlier failure/unknown.
+
+The [current factual summary](2026-10-19-e02-c987-result.json) binds the original closure and partial evidence. The following 5abe18c summary is historical.
+
+Historical source `5abe18cbd020ea97676ad87283735e17822fc462` received affected SOURCE
 PASS. Run `20261018T173740Z-647fb0c4` actually executed on 2026-10-19 UTC, after the
 owner directly resumed work and conditionally approved two bounded visible tests.
 Preflight/SUP6/Win64 Editor Build/Discovery/Numeric passed. WorldInput FAILED on
@@ -1550,3 +1562,38 @@ publication or merge are supplied by this repair release. Final separate OWN15
 CODE/different REQ, applicable runtime-evidence transmission, acceptance, Linux,
 packaging and broader research/implementation gates remain pending. All original
 failures, unknowns and E01 acceptance limits remain unchanged.
+
+## c987863 status repair exercised; RaisedPicking failure and authority closure — 2026-10-19 UTC
+
+Current E02 source `c9878630c586fc2641c08da8171ce1b969150fd1` received affected SOURCE PASS. Run `20261019T130651Z-04449a62` passed Preflight, all six supervisor cases in three groups/five roots, Win64 Editor Build, Discovery (2211 eligible engine names/exact 16 E02 names) and Numeric (four cases/17041 assertions). Discovery PID 33448 exited 0 in 250.774827s with confirmed cleanup/final job active 0/total 37; Numeric PID 20804 exited 0 in 15.5452976s with confirmed cleanup/final job active 0/total 11.
+
+WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1 physical pixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
+
+WorldInput native PID 37836 exited 0 in 70.4981013s with confirmed assigned-job cleanup and final job active 0/total 13. Its nine recorded settings pairs match before/after and Preflight.after (four present/five absent). Discovery/Numeric likewise have nine matching pairs; SupervisorControls has no same-phase pair. Known Documents evidence remains limited to the logical route; resolved provider/target identity and the absent-leaf present-file branch remain UNVERIFIED. Job aggregates do not prove universal descendant identity, second-hop behavior or network isolation.
+
+The exact-pair approval came from a trusted source-progress-chat relay: the owner's exact **Yes!** at `2026-10-19T19:18:09Z` to question `call_2a9e639c445040319e6a71082cb02a25`. The original message was not independently retrieved. Both approved visible launches have now been consumed; the run and all hidden/visible execution authority are **CLOSED_DO_NOT_REUSE**. No retry, RunId reuse or approval transfer remains.
+
+A bounded ray/projection/quantization diagnosis and repair must preserve the existing scene/domain values, actual projection/input route, nearest-hit/NoHit semantics, geometry and pixel tolerances, cases, screenshots, zero Core counters, ownership/cleanup, timing budgets and startup controls. No repaired candidate has executed. Require a coherent checkpoint, fresh source/tool/API/fixture freeze, affected SOURCE review, new RunId, preservation/SUP/build checks and new applicable visible approval before native repaired graphical work. Fresh final independent CODE and different REQ assessments still follow a completed final execution/documentation/evidence freeze. Acceptance, publication/merge, full E02/M02, production Core-connected play, packaging and Linux remain open. Preserve every earlier failure/unknown.
+
+### Operator-only prelaunch and observation limits
+
+Before any native phase, an operator-only guard falsely rejected equal hashes because uppercase Get-FileHash output was compared case-sensitively with a lowercase 64-hex descriptor. Validated 64-hex/OrdinalIgnoreCase comparison corrected the check; evidence bytes were unchanged, no native phase was attempted and zero visible windows were consumed at that point. This is not an engine/native test failure.
+
+Default-sandbox Get-Process did not expose the elevated desktop native process. A separate read-only normal-desktop observation identified Discovery PID 33448 / start 19:21:51.4117692Z. Responding=true/empty window title did not then establish viewport readiness. Record the visibility limit rather than inferring process absence; actual owned-handle exit/job receipts are the cleanup evidence.
+
+### Closed WorldInput evidence
+
+| Artifact | Bytes | SHA256 |
+|---|---:|---|
+| `.local/experiments/E02/20261019T130651Z-04449a62/worldinput/result.json` | 2233187 | `74928E3B8AEFAC06A5C4ACD158835DC41974FC7CCF9784CDFEEF8677AE329594` |
+| `.local/experiments/E02/20261019T130651Z-04449a62/logs/native-world-input.log` | 232029 | `240CCC9A3C28E52822255F73A461DF4B962AEECC5C191B0FE9113172BAEAD0DA` |
+| `.local/experiments/E02/20261019T130651Z-04449a62/artifacts/world-input/five-forms.png` | 374032 | `45810B7853A4371B5BFFA71FC1B03DF0B54951DF451A2941E1CCDFEB744E58FA` |
+| `.local/experiments/E02/20261019T130651Z-04449a62/artifacts/world-input/mesh-after.png` | 375618 | `5A7D5CF8D8E3BB618796C797DFB4D0851FE000D82CA4B859D4E4238353756198` |
+| `.local/experiments/E02/20261019T130651Z-04449a62/artifacts/world-input/mesh-before.png` | 373685 | `45FBCEB770160BA752E465F3ABB8F09BA36FDE72D0565FCB4150041653EB432E` |
+| `.local/experiments/E02/20261019T130651Z-04449a62/artifacts/world-input/near-top.png` | 482452 | `F4AE0ACAF14DF5D11DBCE962DD0AE271BCE50F557E1654BB5B6198FECE6EACEE` |
+| `.local/experiments/E02/20261019T130651Z-04449a62/artifacts/world-input/oblique.png` | 251875 | `46A6C04990B259F5DC0B3DD801261F5FFCFCD50DEC3453BE446422776CE5C67E` |
+
+The [current factual record](2026-10-19-e02-c987-result.json) binds root's immutable closure: 8669 bytes/SHA256 E7E7FE9C218FE200FA36214BA900FEED87DEFE7121DC1B8AA6A6913356489F22. Earlier closed-phase descriptors, exact-pair approval and operator records remain in the run-specific private evidence. No PNG pixel decode or visual acceptance is claimed here. Metadata inspection supplies neither independent code quality nor final acceptance.
+
+
+Root closed the run and all native/hidden/visible/Audit authority in the immutable closure above. The later focused test-oracle diagnosis is author-side reconstruction: UE deprojection truncates float viewport coordinates before inverse projection; an independent plane solve on captured matrices matches actual hits within 1.66e-6 inches. This is not an executed repair or a reinterpretation of c987 as PASS. Preserve the original continuous-point failure. The proposed repair distinguishes requested fractional pixel, actual effective query pixel and independent expected support-plane point without changing the runtime picker, fixture, tolerances, cases or driver paths.
