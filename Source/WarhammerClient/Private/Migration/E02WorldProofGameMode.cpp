@@ -1240,11 +1240,104 @@ bool AE02WorldProofGameMode::GetLastWorldPick(FPointerSample& Pointer, Warhammer
 }
 bool AE02WorldProofGameMode::ProjectRayRoundTrip(const FVector3d& Domain, double& DomainError, double& PixelError, FString& Id)
 {
-    FVector2D Screen; FAdvisoryHit Hit; FString Detail;
-    if (!DomainScreenPoint(Domain, Screen) || !QueryScreenPoint(Screen, Hit, Detail)) { return false; }
-    FVector2D Again;
-    if (!DomainScreenPoint(Hit.DomainPosition, Again)) { return false; }
-    DomainError = FVector3d::Distance(Domain, Hit.DomainPosition); PixelError = FVector2D::Distance(Screen, Again); Id = Hit.Id;
+    DomainError = PixelError = TNumericLimits<double>::Max(); Id.Reset();
+    auto Unavailable = [&Domain](const TCHAR* Reason)
+    {
+        UE_LOG(LogTemp, Error, TEXT("E02RaisedPickingOracleUnavailable reason=%s requestedDomain=(%.17g,%.17g,%.17g)"),
+            Reason, Domain.X, Domain.Y, Domain.Z);
+        return false;
+    };
+    if (!IsProofReady() || !Proof->Surface.IsValid() || !Proof->Controller.IsValid() || Domain.ContainsNaN())
+    { return Unavailable(TEXT("InvalidProofOrDomain")); }
+    FDiagnostic FrameDetail;
+    const FTableFrame& Frame = Proof->Fixture.Frame;
+    if (!ValidateFrame(Frame, FrameDetail)) { return Unavailable(TEXT("InvalidRigidFrame")); }
+    UGameViewportClient* Client = Proof->ViewportClient();
+    ULocalPlayer* Player = Proof->Controller->GetLocalPlayer();
+    FSceneViewProjectionData Projection;
+    if (!Client || !Client->Viewport || !Player || !Player->GetProjectionData(Client->Viewport, Projection) ||
+        !Projection.IsValidViewRectangle() || !Projection.IsPerspectiveProjection())
+    { return Unavailable(TEXT("ProjectionUnavailable")); }
+    const FIntRect Rect = Projection.GetConstrainedViewRect();
+    const FMatrix Matrix = Projection.ComputeViewProjectionMatrix();
+    for (int32 Row = 0; Row != 4; ++Row)
+    {
+        for (int32 Col = 0; Col != 4; ++Col)
+        { if (!FMath::IsFinite(Matrix.M[Row][Col])) { return Unavailable(TEXT("NonfiniteProjection")); } }
+    }
+    FVector2D Screen;
+    if (!DomainScreenPoint(Domain, Screen) || Screen.ContainsNaN()) { return Unavailable(TEXT("ProjectionFailed")); }
+    const FPointerSample Pointer = Proof->Sample(Proof->Surface->GetCachedGeometry(), Screen);
+    const float InputX = static_cast<float>(Pointer.ViewportPhysical.X), InputY = static_cast<float>(Pointer.ViewportPhysical.Y);
+    if (!Pointer.bInsideViewport || !FMath::IsFinite(InputX) || !FMath::IsFinite(InputY))
+    { return Unavailable(TEXT("ViewportSampleUnavailable")); }
+    // Match the installed deprojection's float cast, viewport truncation and float
+    // normalization. Desktop AutomationDriver rounding is a different operation.
+    const float PixelX = FMath::TruncToFloat(InputX), PixelY = FMath::TruncToFloat(InputY);
+    const FVector2D EffectivePixel(PixelX, PixelY);
+    if (PixelX < Rect.Min.X || PixelY < Rect.Min.Y || PixelX >= Rect.Max.X || PixelY >= Rect.Max.Y)
+    { return Unavailable(TEXT("EffectivePixelOutsideProjection")); }
+    const float NormalizedX = (PixelX - Rect.Min.X) / static_cast<float>(Rect.Width());
+    const float NormalizedY = (PixelY - Rect.Min.Y) / static_cast<float>(Rect.Height());
+    const double NX = (NormalizedX - 0.5f) * 2.0f, NY = ((1.0f - NormalizedY) - 0.5f) * 2.0f;
+
+    // Independently intersect the two homogeneous projection planes with the
+    // requested fixture-Z plane. No returned hit or production raycaster defines
+    // this expectation; the frame may rotate that plane away from world Z.
+    FVector3d Rows[] = {
+        FVector3d(Matrix.M[0][0] - NX * Matrix.M[0][3], Matrix.M[1][0] - NX * Matrix.M[1][3], Matrix.M[2][0] - NX * Matrix.M[2][3]),
+        FVector3d(Matrix.M[0][1] - NY * Matrix.M[0][3], Matrix.M[1][1] - NY * Matrix.M[1][3], Matrix.M[2][1] - NY * Matrix.M[2][3]),
+        Frame.WorldFromTableCm.TransformVectorNoScale(FVector3d(0, 0, 1))};
+    const FVector3d PlanePoint = Frame.WorldFromTableCm.TransformPosition(
+        FVector3d(0, 0, (Domain.Z - Frame.DatumInches) * CentimetresPerInch));
+    double Right[] = {NX * Matrix.M[3][3] - Matrix.M[3][0], NY * Matrix.M[3][3] - Matrix.M[3][1],
+        FVector3d::DotProduct(Rows[2], PlanePoint)};
+    for (int32 Row = 0; Row != 3; ++Row)
+    {
+        const double Length = Rows[Row].Size();
+        if (!FMath::IsFinite(Length) || Length <= 1e-12 || !FMath::IsFinite(Right[Row]))
+        { return Unavailable(TEXT("InvalidOraclePlane")); }
+        Rows[Row] /= Length; Right[Row] /= Length;
+    }
+    const FVector3d CrossYZ = FVector3d::CrossProduct(Rows[1], Rows[2]);
+    const double Determinant = FVector3d::DotProduct(Rows[0], CrossYZ);
+    if (!FMath::IsFinite(Determinant) || FMath::Abs(Determinant) <= 1e-10)
+    { return Unavailable(TEXT("SingularOraclePlanes")); }
+    const FVector3d ExpectedWorld = (Right[0] * CrossYZ + Right[1] * FVector3d::CrossProduct(Rows[2], Rows[0]) +
+        Right[2] * FVector3d::CrossProduct(Rows[0], Rows[1])) / Determinant;
+    if (ExpectedWorld.ContainsNaN()) { return Unavailable(TEXT("NonfiniteOracleIntersection")); }
+    const FVector3d TableCm = Frame.WorldFromTableCm.InverseTransformPosition(ExpectedWorld);
+    const FVector3d ExpectedDomain(Frame.CenterInches.X + TableCm.X / CentimetresPerInch,
+        Frame.CenterInches.Y - TableCm.Y / CentimetresPerInch, Frame.DatumInches + TableCm.Z / CentimetresPerInch);
+    if (ExpectedDomain.ContainsNaN()) { return Unavailable(TEXT("NonfiniteOracleIntersection")); }
+
+    FAdvisoryHit Hit; FString Detail;
+    if (!QueryScreenPoint(Screen, Hit, Detail)) { return Unavailable(TEXT("QueryFailed")); }
+    FVector2D ActualPixel;
+    if (Hit.DomainPosition.ContainsNaN() || Hit.WorldPosition.ContainsNaN() ||
+        !Proof->Controller->ProjectWorldLocationToScreen(Hit.WorldPosition, ActualPixel) || ActualPixel.ContainsNaN())
+    { return Unavailable(TEXT("HitReprojectionFailed")); }
+    DomainError = FVector3d::Distance(ExpectedDomain, Hit.DomainPosition);
+    PixelError = FVector2D::Distance(EffectivePixel, ActualPixel);
+    const double NominalExpectedDomain = FVector3d::Distance(Domain, ExpectedDomain);
+    const double NominalActualDomain = FVector3d::Distance(Domain, Hit.DomainPosition);
+    const double NominalActualPixel = FVector2D::Distance(FVector2D(Pointer.ViewportPhysical), ActualPixel);
+    const double QuantizationPixels = FVector2D::Distance(FVector2D(Pointer.ViewportPhysical), EffectivePixel);
+    if (!FMath::IsFinite(DomainError) || !FMath::IsFinite(PixelError) || !FMath::IsFinite(NominalExpectedDomain) ||
+        !FMath::IsFinite(NominalActualDomain) || !FMath::IsFinite(NominalActualPixel) || !FMath::IsFinite(QuantizationPixels))
+    { DomainError = PixelError = TNumericLimits<double>::Max(); return Unavailable(TEXT("NonfiniteOracleMetric")); }
+    Id = Hit.Id;
+    UE_LOG(LogTemp, Display, TEXT("E02RaisedPickingOracleProjection viewRect=(%d,%d,%d,%d) matrixRow0=(%.17g,%.17g,%.17g,%.17g) matrixRow1=(%.17g,%.17g,%.17g,%.17g) matrixRow2=(%.17g,%.17g,%.17g,%.17g) matrixRow3=(%.17g,%.17g,%.17g,%.17g)"),
+        Rect.Min.X, Rect.Min.Y, Rect.Max.X, Rect.Max.Y,
+        Matrix.M[0][0], Matrix.M[0][1], Matrix.M[0][2], Matrix.M[0][3],
+        Matrix.M[1][0], Matrix.M[1][1], Matrix.M[1][2], Matrix.M[1][3],
+        Matrix.M[2][0], Matrix.M[2][1], Matrix.M[2][2], Matrix.M[2][3],
+        Matrix.M[3][0], Matrix.M[3][1], Matrix.M[3][2], Matrix.M[3][3]);
+    UE_LOG(LogTemp, Display, TEXT("E02RaisedPickingOracle requestedDomain=(%.17g,%.17g,%.17g) fractionalViewportPixel=(%.17g,%.17g) effectiveViewportPixel=(%.17g,%.17g) expectedDomain=(%.17g,%.17g,%.17g) actualDomain=(%.17g,%.17g,%.17g) reprojectedActualPixel=(%.17g,%.17g) domainErrorInches=%.17g pixelError=%.17g nominalExpectedDomainDeviationInches=%.17g nominalActualDomainDeviationInches=%.17g nominalActualPixelDeviation=%.17g quantizationPixelOffset=%.17g support=%s"),
+        Domain.X, Domain.Y, Domain.Z, Pointer.ViewportPhysical.X, Pointer.ViewportPhysical.Y, EffectivePixel.X, EffectivePixel.Y,
+        ExpectedDomain.X, ExpectedDomain.Y, ExpectedDomain.Z, Hit.DomainPosition.X, Hit.DomainPosition.Y, Hit.DomainPosition.Z,
+        ActualPixel.X, ActualPixel.Y, DomainError, PixelError, NominalExpectedDomain, NominalActualDomain, NominalActualPixel,
+        QuantizationPixels, *Id);
     return true;
 }
 bool AE02WorldProofGameMode::SetProofViewElevation(double Degrees)

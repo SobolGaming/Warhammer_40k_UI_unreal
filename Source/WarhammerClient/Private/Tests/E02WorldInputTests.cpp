@@ -734,7 +734,7 @@ private:
                     double DomainError = 0, PixelError = 0; FString Id;
                     Check(World->ProjectRayRoundTrip(Points[I], DomainError, PixelError, Id), TEXT("Completed actual ray round trip"));
                     Check(Id == Expected[I], TEXT("Nearest support has expected identity"));
-                    Check(DomainError <= 1e-4 && PixelError <= 1.0, TEXT("Domain <=1e-4in and projected <=1physicalpixel"));
+                    Check(DomainError <= 1e-4 && PixelError <= 1.0, TEXT("Domain <=1e-4in and projected <=1physicalpixel against independent effective-pixel reference"));
                 }
                 FVector2D Outside; FAdvisoryHit Miss; FString Diagnostic;
                 Check(World->DomainScreenPoint(FVector3d(60.5, 31, -2), Outside), TEXT("Project board-edge miss"));

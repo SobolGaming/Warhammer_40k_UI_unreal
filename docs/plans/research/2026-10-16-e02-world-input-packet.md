@@ -271,6 +271,28 @@ Log assertion counts separately from test counts. Prefix: `Warhammer.Migration.E
 | `Input.ResizeScale` | 1 | Crossing gesture cancels; physical viewport extent updates; UI scales `1.0/1.5` at `1280×720`, plus `1600×900` at `1.0`; same intended ray/hit and HUD exclusion without double DPI. |
 | `Input.RepeatedConfirm` | 1 | Exact bare Confirm/Escape bindings and local Ready transitions never submit; unbound modified Enter leaves review/Confirm counters unchanged; visible `ProofHasNoGameSession`, no success/acceptance record. |
 
+**RaisedPicking effective-pixel oracle:** retain the three fixed nominal domain
+points, expected nearest-support identities and outside-edge NoHit check. The
+version-frozen public deprojection route first casts viewport coordinates to float
+and truncates each toward zero. Distinguish the original continuous projection
+from that effective viewport pixel. Derive the expected support-plane point
+independently from the actual captured view-projection matrix, constrained view
+rectangle and the fixed fixture/requested plane/frame, without using the returned
+hit or production raycaster as the expected value. Measure actual-hit domain error
+against that independent point and actual-hit reprojection error against the
+effective query pixel in physical viewport coordinates. Keep the 1e-4 inch and
+1 physical pixel limits, fixture values, cases and existing assertions unchanged.
+
+Record requested domain/fractional viewport coordinates, actual effective pixel,
+expected/actual point, projection context, numeric errors and original-point
+quantization deviations separately. Never conceal the nominal offset, snap/clamp
+a hit, fit the camera/fixture, use returned-hit Z/position to construct expectation,
+or waive an unsupported/nonfinite/singular context. A changed deprojection API
+requires a version-matched re-review. These Rendered API probes do not replace
+actual AutomationDriver-to-Slate-to-world input evidence in the Input cases.
+The failed c987 continuous-point comparison remains a failed historical result;
+this clarified oracle is unexecuted until a fresh candidate passes its own gates.
+
 Rendered/input baseline is `1280×720`, UI scale `1.0`; the resize test alone adds
 the named variants. This is a bounded input-adapter check, not the E04/E08 full
 responsive-layout/DPI matrix. Require per-event JSONL with sequence/time, screen
@@ -804,6 +826,15 @@ explicitly unverified. No Core connection/new-host work is introduced; rendered
 Windows evidence is still an actual future execution gate, and packaging is later.
 
 ## Freeze and remaining blockers
+
+Revision36 clarifies the effective-viewport-pixel oracle above and records its
+focused source-only implementation and numeric diagnostics as UNEXECUTED.
+The c987863/run130651 RaisedPicking failure and consumed visible pair remain
+historical failures/closed authority in the journal. Runtime picking, fixture,
+three points/IDs, NoHit, assertions/counts/tolerances and all preservation/startup
+controls remain fixed. Require a fresh checkpoint/freeze/affected SOURCE review,
+new RunId and hidden checks, then new applicable visible approval. Final CODE
+and a different REQ still follow completed final execution/evidence freeze.
 
 Packet clarification revision: **2026-10-19 UTC / plan revision 32**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):

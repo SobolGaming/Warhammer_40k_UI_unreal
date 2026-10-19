@@ -80,7 +80,7 @@ Linux remain open. This E01 record supplies no E02 execution result.
 
 Current E02 source `c9878630c586fc2641c08da8171ce1b969150fd1` received affected SOURCE PASS. Run `20261019T130651Z-04449a62` passed Preflight, all six supervisor cases in three groups/five roots, Win64 Editor Build, Discovery (2211 eligible engine names/exact 16 E02 names) and Numeric (four cases/17041 assertions). Discovery PID 33448 exited 0 in 250.774827s with confirmed cleanup/final job active 0/total 37; Numeric PID 20804 exited 0 in 15.5452976s with confirmed cleanup/final job active 0/total 11.
 
-WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1 physical pixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
+WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1physicalpixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
 
 WorldInput native PID 37836 exited 0 in 70.4981013s with confirmed assigned-job cleanup and final job active 0/total 13. Its nine recorded settings pairs match before/after and Preflight.after (four present/five absent). Discovery/Numeric likewise have nine matching pairs; SupervisorControls has no same-phase pair. Known Documents evidence remains limited to the logical route; resolved provider/target identity and the absent-leaf present-file branch remain UNVERIFIED. Job aggregates do not prove universal descendant identity, second-hop behavior or network isolation.
 
@@ -89,6 +89,15 @@ The exact-pair approval came from a trusted source-progress-chat relay: the owne
 A bounded ray/projection/quantization diagnosis and repair must preserve the existing scene/domain values, actual projection/input route, nearest-hit/NoHit semantics, geometry and pixel tolerances, cases, screenshots, zero Core counters, ownership/cleanup, timing budgets and startup controls. No repaired candidate has executed. Require a coherent checkpoint, fresh source/tool/API/fixture freeze, affected SOURCE review, new RunId, preservation/SUP/build checks and new applicable visible approval before native repaired graphical work. Fresh final independent CODE and different REQ assessments still follow a completed final execution/documentation/evidence freeze. Acceptance, publication/merge, full E02/M02, production Core-connected play, packaging and Linux remain open. Preserve every earlier failure/unknown.
 
 The [formal c987 closure](.local/reviews/E02-source-review/root-c987863-20261019T130651Z-04449a62/worldinput-failure-and-authority-closure.json) is 8669 bytes/SHA256 E7E7FE9C218FE200FA36214BA900FEED87DEFE7121DC1B8AA6A6913356489F22. Current public facts are in docs/plans/evidence/2026-10-19-e02-c987-result.json. Only focused proof-oracle/diagnostic authoring and factual documentation proceed; no native or graphical execution is released.
+
+The focused repair is authored and UNEXECUTED: ProjectRayRoundTrip uses an
+independent projection-plane/requested-Z-plane intersection at the effective
+float-cast/truncated viewport pixel and logs exact projection/point/error metrics.
+Runtime Query, fixture, nominal points/IDs, NoHit, cases/counts/tolerances and
+ownership/startup controls are unchanged. Packet revision36 clarifies that oracle;
+the assertion text identifies its reference. A fresh freeze/affected SOURCE review
+and new run are required before hidden checks; exact-candidate visible approval
+remains separate. This authoring record supplies no repaired execution result.
 
 The following 0ed4d7c disposition is historical, before the c987 diagnostic-status repair.
 

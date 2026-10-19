@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-19 UTC
-**Revision:** 35 — E02 c987863/run130651 passed SOURCE/Preflight/SUP6/Build/Discovery/Numeric, then failed RaisedPicking step 2. Eleven partial successes/1106 assertions and five PNG files are diagnostic evidence only. Both visible launches and all execution authority are closed; focused proof-oracle repair is UNEXECUTED.
+**Revision:** 36 — Focused RaisedPicking effective-pixel oracle and numeric diagnostics authored, UNEXECUTED. Historical c987863/run130651 WorldInput remains FAILED; both visible launches and all old execution authority are closed.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,21 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 35 changes
+### Revision 36 changes
+
+The proof-only RaisedPicking helper now derives an independent support-plane
+expectation at Unreal's effective viewport pixel from public projection data and
+the fixed requested-Z plane/frame. It reports continuous/effective coordinates,
+the projection matrix/rectangle, expected/actual points and nominal deviations.
+The [E02 packet](research/2026-10-16-e02-world-input-packet.md#proposed-suite-and-acceptance-artifacts)
+states this oracle explicitly. Runtime picking, fixture, three nominal points,
+expected IDs, NoHit check, cases, assertions and tolerances remain unchanged.
+The assertion label identifies the reference used. This is source authoring only:
+fresh checkpoint/freeze, affected SOURCE review, new RunId and hidden checks
+precede a new exact-candidate visible-window approval. Final CODE/different REQ
+and E02 acceptance remain pending. Historical c987 results are unchanged.
+
+### Revision 35 history
 
 The approved c987863 pair executed on 2026-10-19 UTC. Discovery reconciled2211
 engine names/exact16 E02 tests; Numeric passed4/17041. WorldInput failed

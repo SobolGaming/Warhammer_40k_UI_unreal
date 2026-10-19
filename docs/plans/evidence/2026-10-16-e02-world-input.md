@@ -10,7 +10,7 @@ This is coordinator packet/authority review, not independent CODE/REQ approval.
 
 Current E02 source `c9878630c586fc2641c08da8171ce1b969150fd1` received affected SOURCE PASS. Run `20261019T130651Z-04449a62` passed Preflight, all six supervisor cases in three groups/five roots, Win64 Editor Build, Discovery (2211 eligible engine names/exact 16 E02 names) and Numeric (four cases/17041 assertions). Discovery PID 33448 exited 0 in 250.774827s with confirmed cleanup/final job active 0/total 37; Numeric PID 20804 exited 0 in 15.5452976s with confirmed cleanup/final job active 0/total 11.
 
-WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1 physical pixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
+WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1physicalpixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
 
 WorldInput native PID 37836 exited 0 in 70.4981013s with confirmed assigned-job cleanup and final job active 0/total 13. Its nine recorded settings pairs match before/after and Preflight.after (four present/five absent). Discovery/Numeric likewise have nine matching pairs; SupervisorControls has no same-phase pair. Known Documents evidence remains limited to the logical route; resolved provider/target identity and the absent-leaf present-file branch remain UNVERIFIED. Job aggregates do not prove universal descendant identity, second-hop behavior or network isolation.
 
@@ -1567,7 +1567,7 @@ failures, unknowns and E01 acceptance limits remain unchanged.
 
 Current E02 source `c9878630c586fc2641c08da8171ce1b969150fd1` received affected SOURCE PASS. Run `20261019T130651Z-04449a62` passed Preflight, all six supervisor cases in three groups/five roots, Win64 Editor Build, Discovery (2211 eligible engine names/exact 16 E02 names) and Numeric (four cases/17041 assertions). Discovery PID 33448 exited 0 in 250.774827s with confirmed cleanup/final job active 0/total 37; Numeric PID 20804 exited 0 in 15.5452976s with confirmed cleanup/final job active 0/total 11.
 
-WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1 physical pixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
+WorldInput **FAILED** before final report publication. The native log contains 11 completed Success cases / 1106 assertions: all eight Input cases / 975 assertions and three Rendered cases / 131 assertions. Input.RepeatedConfirm completed 148 assertions, exercising the status-persistence regression; these are partial log observations, not a twelve-case phase PASS. Rendered.RaisedPicking step 2 logged the exact failing combined assertion `Domain <=1e-4in and projected <=1physicalpixel` three times at 19:30:46.921/.962/.963Z. The log does not publish individual DomainError/PixelError values or identify which conjunct failed. Five other named PNGs exist; `raised-pick.png`, complete `reports/world-input/index.json` and phase completion do not. The wrapper's missing-index exception is consequential. No Audit or final CODE/REQ review ran.
 
 WorldInput native PID 37836 exited 0 in 70.4981013s with confirmed assigned-job cleanup and final job active 0/total 13. Its nine recorded settings pairs match before/after and Preflight.after (four present/five absent). Discovery/Numeric likewise have nine matching pairs; SupervisorControls has no same-phase pair. Known Documents evidence remains limited to the logical route; resolved provider/target identity and the absent-leaf present-file branch remain UNVERIFIED. Job aggregates do not prove universal descendant identity, second-hop behavior or network isolation.
 
@@ -1577,7 +1577,7 @@ A bounded ray/projection/quantization diagnosis and repair must preserve the exi
 
 ### Operator-only prelaunch and observation limits
 
-Before any native phase, an operator-only guard falsely rejected equal hashes because uppercase Get-FileHash output was compared case-sensitively with a lowercase 64-hex descriptor. Validated 64-hex/OrdinalIgnoreCase comparison corrected the check; evidence bytes were unchanged, no native phase was attempted and zero visible windows were consumed at that point. This is not an engine/native test failure.
+Before the first graphical launch, an operator-only prelaunch guard falsely rejected equal hashes because uppercase Get-FileHash output was compared case-sensitively with a lowercase 64-hex descriptor. Validated 64-hex/OrdinalIgnoreCase comparison corrected the check; evidence bytes were unchanged, that guard launched no native process and consumed no visible window; SUP/Build had already completed. This is not an engine/native test failure.
 
 Default-sandbox Get-Process did not expose the elevated desktop native process. A separate read-only normal-desktop observation identified Discovery PID 33448 / start 19:21:51.4117692Z. Responding=true/empty window title did not then establish viewport readiness. Record the visibility limit rather than inferring process absence; actual owned-handle exit/job receipts are the cleanup evidence.
 
@@ -1597,3 +1597,25 @@ The [current factual record](2026-10-19-e02-c987-result.json) binds root's immut
 
 
 Root closed the run and all native/hidden/visible/Audit authority in the immutable closure above. The later focused test-oracle diagnosis is author-side reconstruction: UE deprojection truncates float viewport coordinates before inverse projection; an independent plane solve on captured matrices matches actual hits within 1.66e-6 inches. This is not an executed repair or a reinterpretation of c987 as PASS. Preserve the original continuous-point failure. The proposed repair distinguishes requested fractional pixel, actual effective query pixel and independent expected support-plane point without changing the runtime picker, fixture, tolerances, cases or driver paths.
+
+## 2026-10-19 — RaisedPicking effective-pixel repair authored; UNEXECUTED
+
+The failed c987 run remains closed. ProjectRayRoundTrip now independently solves
+projection-plane/requested-Z-plane intersection at the actual float-cast and
+truncated viewport pixel, using fresh public projection data and the rigid fixture
+frame. It compares actual hit domain error and reprojection error to that reference.
+Exact projection matrix/rectangle, requested/fractional/effective coordinates,
+expected/actual points, both errors and nominal quantization deviations are logged.
+Invalid/nonfinite/singular contexts fail closed. The runtime Query path, fixture,
+three nominal points/IDs, NoHit, cases/assertions/counts/tolerances, screenshots,
+zero Core counters and ownership/startup controls are unchanged. Only the assertion
+label explains the effective-pixel reference. The packet and plan revision36 state
+this proof oracle explicitly; the historical continuous-point failure is retained.
+
+Static installed-API/type inspection and scoped whitespace checks were performed;
+no repaired C++ build, test, native process or GUI has run. No independent review
+of this repaired candidate is yet claimed. A coherent checkpoint and fresh source/
+API/tool/fixture freeze with affected SOURCE review precede a new RunId's hidden
+checks. New exact-candidate approval is required for the two graphical launches.
+Final CODE and different REQ remain separate pending gates. The owner's standing
+review-packet consent applies to the necessary configured-service transmission.
