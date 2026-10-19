@@ -1,12 +1,27 @@
 # E02 bounded Windows world/input proof — authority and execution journal
 
-Status: **FFF05FC_AFFECTED_SOURCE_PASS; HIDDEN_CHAIN_AND_GRAPHICAL_DISCOVERY_PASS; NUMERIC_REPORT_READER_FAIL; ALL_EXECUTION_AUTHORITY_CLOSED; UTF8_BOM_REPAIR_REQUIRES_FRESH_REVIEW**.
+Status: **5ABE18C_AFFECTED_SOURCE_PASS; PREFLIGHT_SUP6_BUILD_DISCOVERY_NUMERIC_PASS; WORLDINPUT_FRAMEPAINTSTALE_FAIL; ALL_EXECUTION_AUTHORITY_CLOSED; PAINT_COORDINATE_REPAIR_REQUIRES_FRESH_REVIEW**.
 
 Root coordinator reviewed/adopted the [packet](../research/2026-10-16-e02-world-input-packet.md)
 at `2026-10-17T06:14:17.416085+00:00`, source base `bd801233cc9989e0ae146a3be7b136d26dc73183`.
 Packet whole-file SHA256 at adoption: `7EFF2E47A55000D3012759DEEEACEEF46153024BF1CB713A920363A44A8FB2E3`.
 Planning body SHA256 at adoption: `294AF59C951185E28EDB66BB819B4231B8868CA99120EE5F6E7780E1B57A00CE`.
 This is coordinator packet/authority review, not independent CODE/REQ approval.
+
+Current source `5abe18cbd020ea97676ad87283735e17822fc462` received affected SOURCE
+PASS. Run `20261018T173740Z-647fb0c4` actually executed on 2026-10-19 UTC, after the
+owner directly resumed work and conditionally approved two bounded visible tests.
+Preflight/SUP6/Win64 Editor Build/Discovery/Numeric passed. WorldInput FAILED on
+`FramePaintStale` during `Input.PanDollyFrame`, before report finalization; missing
+`reports/world-input/index.json` is consequential. Five earlier Input log successes/
+141 assertions are partial observations, not twelve-case acceptance. No PNG was
+created; Audit did not run. All execution authority is CLOSED_DO_NOT_REUSE after
+both visible launches. Only bounded paint-coordinate repair, focused controls and
+factual docs are released; the repair is UNEXECUTED pending checkpoint/fresh freeze/
+affected SOURCE/new RunId/build and new applicable visible approval. The latest
+appendix binds actual phases, exact closure and remaining limits.
+
+### Previous fff05fc summary — historical before the BOM-reader repair
 
 Source `fff05fc2b7e663bd345ddae22c68058f849f7029` received affected SOURCE PASS.
 Run `20261018T160124Z-dcf2685f` completed Preflight, all six supervisor cases,
@@ -1322,3 +1337,103 @@ RunId before execution. Visible launch approval remains specific to the next
 concrete candidate. Final OWN15 CODE and different REQ assessments, their
 applicable runtime-evidence transmission authority, actual six-image inspection,
 Linux/packaging/full E02 and broader migration gates remain open.
+
+## 5abe18c SOURCE, successful Numeric and closed WorldInput failure — 2026-10-19 UTC
+
+Checkpoint `5abe18cbd020ea97676ad87283735e17822fc462` contains the strict single-
+leading-UTF8-BOM reader repair and its factual docs; 27 focused offline reader
+controls passed separately. The new frozen run is `20261018T173740Z-647fb0c4`.
+Its identifier was allocated on October 18; all current execution occurred on
+October 19 UTC. Earlier fff05fc Numeric remains FAIL; none of its authority was reused.
+
+The [affected SOURCE raw report](../../../.local/reviews/E02-source-review/review-5abe18c-20261018T173740Z-647fb0c4/last-message.txt)
+is PASS, 4270 bytes/SHA256
+`347EA5D65BEF3666143769016B5E408E5DF7EB6600BD3E74C1C0DA6577EA3318`.
+The separate [root source gate](../../../.local/reviews/E02-source-review/root-5abe18c-20261018T173740Z-647fb0c4/source-gate-disposition.json)
+is 6480 bytes/SHA256 `77852C751B3B4BAA3BD15EED7AC5167A1C966A95F3C062E6C02A6341A217EB20`.
+It binds the current 372957-byte freeze/SHA256
+`AA960427626637FF26B28BB6A15A2CF8F7D81ACA4D907D8B873CF23F7DD6EB49`,
+390935-byte input manifest/SHA256
+`2CE327B78AB2A5F1980780E9CC4491B9C070F8A9DEE183ECAF34EC9A56B9C461`
+and 17222-byte closed-review artifact seal/SHA256
+`A27C7B036B9AFD5F4AEABE75A82D8BF00FFCEA82D620306A94633D6099099712`.
+The fresh affected review covers the changed reader/direct consumers; the root
+composite carries earlier conclusions only for demonstrated unchanged source and
+plugin scope. It is not final OWN15 CODE/REQ or runtime acceptance.
+
+Actual selected runtime observations establish a new exec context, read-only/
+never and disabled memory_mode, with configured gpt-6.1-sol/ultra. Backend/feature/
+OS attestation and CLI PID linkage remain UNVERIFIED, separately from the raw
+report's own conservative runtime fields. The actual user payload adds two trailing
+CRLF bytes; preserve distinct hashes. All 71 traced model-text outputs are within
+8000 bytes, none empty/truncated. Required visible coverage is 1955/1955 rows across
+35 groups; text presence does not establish comprehension. Preserve call 3's
+noncompact descriptor list, call 6's rejected oversized metadata attempt/recovery
+and call 70's relative-path query corrected by 71. The source gate binds the actual
+trace/coverage, root literal-command audit and auxiliary metadata-only audit;
+no runtime was supplied to that SOURCE reviewer.
+
+### Direct resumption and actual closed phase chain
+
+The owner paused desktop work on October 18, then directly stated on October 19:
+
+> Please resume the migration plan. I approve the bounded visible E02 tests for the current repaired candidate once the required source review and build checks pass.
+
+The [direct record](../../../.local/reviews/E02-source-review/root-5abe18c-20261018T173740Z-647fb0c4/direct-resume-and-conditional-visible-approval.json)
+is 1520 bytes/SHA256 `70B4C1A234C254E4295B2D31E0785224EA2FF9D321B60603B4025800639856CD`.
+Current SOURCE/hidden checks passed before the two sequential visible launches.
+Their [execution authority](../../../.local/reviews/E02-source-review/root-5abe18c-20261018T173740Z-647fb0c4/visible-execution-authority.direct.json)
+is 6382 bytes/SHA256 `BB0E7C61050493702F8BA3E7EEA3915A6662ABCAC3EB02A9875C5E8B26F01EF6`.
+The scope retained one window at a time/600 seconds each, synthetic advisory
+fixture, scripted focus/camera/UI/resize and six intended captures; it supplied
+no broader final review, acceptance or materially changed candidate approval.
+
+| Phase | Actual outcome |
+|---|---|
+| Preflight | PASS; normal desktop identity and nine settings before/after states |
+| SupervisorControls | PASS; three groups/six subcases/five roots; exit/cleanup and final zero-active jobs confirmed; no separate same-phase settings pair |
+| Win64 Editor Build | PASS; PID 21140 exit 0/56.9864074s; confirmed cleanup/final job active 0/total 42 |
+| Discovery, first visible launch | PASS; PID 21812 exit 0/220.7766678s; confirmed cleanup/final job active 0/total 39; 2211 eligible engine names/exact 16 E02 names |
+| Numeric, hidden | PASS; four unique Success cases/17041 assertions; PID 1152 exit 0/20.4332164s; confirmed cleanup/final job active 0/total 11 |
+| WorldInput, second visible launch | FAIL; FramePaintStale before report finalization; PID 16900 exit 0/25.4134518s; confirmed cleanup/final job active 0/total 9 |
+| Audit / six PNGs | NOT RUN / NOT CREATED (zero PNGs); no complete WorldInput index/completion |
+
+### Failed WorldInput and released repair
+
+The [closed failure/authority record](../../../.local/reviews/E02-source-review/root-5abe18c-20261018T173740Z-647fb0c4/worldinput-failure-and-authority-closure.json)
+is 11316 bytes/SHA256 `E993BB0AABD78A430E20765B94FA9F81511A43E96AFFB89B8AC4FF4B20971AD0`.
+It binds each successful predecessor result/completion, the 2264358-byte failed
+WorldInput result/SHA256 `CF8D349FE33260F69D04FFA0E1D01B8BBB2B6F3075EFA719892740EF2CDC83CB`,
+67838-byte native process receipt/SHA256
+`D7ABF5EB036D4C257BBF581AE983ED3282FE6C16C605B9B56C7F73EFB4481B9C`
+and 204938-byte original log/SHA256
+`20AC12DD50892D057891C44C916A9F1FF998646300B70E03449ED80055DB3EC5`.
+The wrapper's missing `reports/world-input/index.json` error follows the native
+line 1607 abort: `E02 proof: FramePaintStale: current layout differs from actually painted rectangles`,
+during `Input.PanDollyFrame`. Native exit 0 is not phase success; no twelve-case
+Automation index/completion exists. Five completed Input log successes contain 141
+assertions: CameraCapture 47, CancelActivation 28, CompletedClick 21, HudExclusion 25
+and ModalText 20. The remaining seven cases are incomplete/not executed; these
+partial log observations do not replace the missing report or screenshot proof.
+
+All nine WorldInput settings pairs match before/after and Preflight.after:
+four present/five absent. Known Documents observations use logical routes only;
+provider/reparse-target identity and present-leaf hashing remain UNVERIFIED.
+SupervisorControls has no separate same-phase pair. The assigned-job aggregate
+cleanup does not establish universal descendant identity or network-egress facts.
+C4701 warnings remain retained; the separate bounded source-flow observation is
+neither a warning waiver nor a whole-source/native-equivalence guarantee.
+
+Root sets the run and every hidden/visible authority **CLOSED_DO_NOT_REUSE**.
+Both approved visible launches were consumed; no retry/resume/RunId reuse remains.
+Only bounded paint-coordinate remediation, focused controls and factual docs are
+released. The repair aligns OnPaint window-relative geometry with desktop input
+and the projected-label inverse, keeping original draw geometry, strict `1e-3`
+stale checks, native assertions, fixture/cases/screenshot requirements and budgets.
+Installed `SWidget.cpp:1163-1175,1494-1495,1545-1546,1650` supports the coordinate
+diagnosis; source support is not repaired execution proof. The repair is
+**UNEXECUTED** pending checkpoint/fresh freeze/affected SOURCE/new RunId/build
+and new applicable visible approval. No startup flag change is authorized.
+Final OWN15 CODE/different REQ, applicable runtime-evidence transmission, acceptance,
+packaging, Linux and broader research/implementation remain pending. All earlier
+failures, unknowns, source assessments and E01 acceptance limits remain unchanged.

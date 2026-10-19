@@ -805,7 +805,7 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-18 UTC / plan revision 30**.
+Packet clarification revision: **2026-10-19 UTC / plan revision 31**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
 `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
@@ -861,6 +861,24 @@ egress remain UNVERIFIED; no actual job escape is established. No startup flag
 change or acceptance waiver is authorized here. Normative prefix/counts/paths/
 ownership/budgets remain unchanged; the journal binds actual evidence and limits.
 Final OWN15 CODE/differentREQ, visual acceptance, packaging and Linux remain open.
+
+Revision31 records source 5abe18c affected SOURCE PASS and run 173740, actually
+executed on 2026-10-19 UTC after direct owner resumption/conditional visible approval.
+Preflight/SUP6/Editor Build/Discovery/Numeric passed; Numeric has four cases/17041
+assertions. WorldInput FAILED on FramePaintStale during Input.PanDollyFrame before
+report finalization; the missing world-input/index.json is consequential. Five
+earlier Input successes/141 assertions are partial diagnostics only. Native
+PID 16900 exited 0 in 25.4134518s with cleanup/final job active 0/total 9; all nine settings pairs
+match Preflight.after (four present/five absent). No complete twelve-case result,
+six PNGs or Audit exists. Both visible launches were consumed; all execution
+authorities are CLOSED_DO_NOT_REUSE. Only bounded window-to-desktop paint-coordinate
+remediation, focused controls and factual docs are released. Preserve draw geometry,
+strict 1e-3 stale checks, native assertions, fixture/cases/screenshots and budgets.
+The repair is UNEXECUTED and requires checkpoint/fresh freeze/affected SOURCE/
+new RunId/build and new applicable visible approval. Final OWN15 CODE/differentREQ,
+acceptance, Linux and packaging remain open. No startup flag change is authorized;
+the journal binds exact evidence/closure. The normative raw prefix is unchanged.
+
 It retains child-start/alive evidence, exact injected-seam validation and the read-only Known Documents
 ancestor-route policy, plain-file leaves, all nine observations and strict
 owned/source/tool/output path checks.

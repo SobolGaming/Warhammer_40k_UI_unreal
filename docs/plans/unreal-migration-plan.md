@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
-**Planning date / revision date:** 2026-10-02 / 2026-10-18 UTC
-**Revision:** 30 — E02 source fff05fc passed affected review, the hidden chain and visible Discovery. Numeric failed on the exported report's leading UTF-8 BOM despite native exit0 and four exported successes. All run/execution authority is closed; strict BOM-reader repair needs a fresh checkpoint/freeze/affected SOURCE review and RunId.
+**Planning date / revision date:** 2026-10-02 / 2026-10-19 UTC
+**Revision:** 31 — E02 source 5abe18c passed affected SOURCE review, Preflight/SUP6/Editor Build/Discovery/Numeric. WorldInput failed closed on stale painted coordinates during PanDollyFrame; no complete report/six PNGs/Audit. All execution authority is closed; bounded paint-coordinate repair requires a fresh affected gate.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ24 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,19 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 30 changes
+### Revision 31 changes
+
+Source 5abe18c/run 173740 actually executed on 2026-10-19 UTC after direct owner
+resumption and conditional bounded visible approval. The BOM-reader repair passed
+Numeric (four cases/17041 assertions). WorldInput stopped on `FramePaintStale`
+during `Input.PanDollyFrame`, before Automation report finalization. Five earlier
+Input successes/141 assertions are partial diagnostics, not a twelve-case PASS.
+No PNG was created; Audit did not run. Both visible launches were consumed and
+all run/execution authorities are closed. Only bounded paint-coordinate repair,
+focused controls and factual docs are released; preserve strict stale checks,
+native assertions and proof scope. Section0.9/journal bind the exact evidence.
+
+### Revision 30 history
 
 Source fff05fc/run160124 completed the hidden chain and graphical Discovery,
 then Numeric failed while reading Unreal's BOM-prefixed JSON report. Its four
@@ -284,7 +296,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the bounded E02 quoted-name parser repair, freeze it and obtain fresh affected SOURCE review before another execution under a fresh RunId.** Source e8f1837 passed affected review; run061145 completed Preflight, six supervisor cases and the Windows Editor build. Its directly approved visible Discovery then FAILED complete-list validation: one legitimate engine test name contains an apostrophe. Root closed the run and all execution authorities. Preserve its successful predecessors and failed Discovery separately; do not promote the16 logged E02 names or engine exit0 to a passing phase. Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) bind the exact evidence and repair. Numeric/rendered/input Automation and six-image inspection did not run. Fresh-candidate visible approval and final separate OWN15 CODE/REQ remain required; packaging, Linux and broader research/implementation gates remain open.
+**Current assignment: checkpoint/freeze the bounded E02 paint-coordinate repair and obtain fresh affected SOURCE review before a new RunId/build and new applicable visible approval.** Source `5abe18cbd020ea97676ad87283735e17822fc462` passed affected review; run `20261018T173740Z-647fb0c4` actually executed on 2026-10-19 UTC and passed Preflight/SUP6/Editor Build/Discovery/Numeric (four cases/17041 assertions). WorldInput FAILED on `FramePaintStale` during `Input.PanDollyFrame`; its missing report is consequential. Five completed Input log successes/141 assertions do not establish twelve-case acceptance. No PNG was created; Audit did not run. Both approved visible launches were consumed; all run/execution authorities are CLOSED_DO_NOT_REUSE. Preserve strict stale-layout checks, native assertions, fixture/cases/budgets and all historical failures. Section0.9 and the [E02 authority journal](evidence/2026-10-16-e02-world-input.md) bind exact evidence. Final OWN15 CODE/different REQ, acceptance, packaging, Linux and broader research/implementation gates remain open.
 
 ### 0.1 Fixed scope and authority
 
@@ -941,7 +953,7 @@ Supporting evidence:
 
 The [BOOT01 packet](research/2026-10-16-bootstrap-and-native-parser.md) specifies its files, 30-minute process timeout, staging/log/output roots, cleanup and standard per-user cache/default-empty-UBT-config side effect. OWN11 is its execution authorization; results must be recorded separately. Other packets finalize exact outputs before authorization. Cleanup touches only resolved packet-owned generated paths; never shared caches/user data/engine/siblings. A failed runtime proof returns to client staging or its external supplier, never Core edits here. E03B/E05–E08 remain later acceptance except a named architecture subset. A proposed packet alone is never a passing result or execution authorization.
 
-### 0.9 Current E02 packet gate — 2026-10-18 UTC
+### 0.9 Current E02 packet gate — 2026-10-19 UTC
 
 **Normative gate:** Freeze the exact executable candidate, tools, assets and
 plugin closure and obtain independent SOURCE PASS before each affected phase.
@@ -979,7 +991,33 @@ planning prefix or normative proof. Its whole-file SHA256 is
 `3F02CE1FC169CAD0111ADC6D8CC09EAB6D4CBE1E2F8ED9936BB4F939FDC1A9DE`. The changed source requires a fresh affected
 assessment before execution.
 
-**Current fff05fc source/run disposition (revision30):** Affected SOURCE PASS
+**Current 5abe18c source/run disposition (revision31):** Affected SOURCE PASS
+binds `5abe18cbd020ea97676ad87283735e17822fc462` (4270 bytes/SHA256
+`347EA5D65BEF3666143769016B5E408E5DF7EB6600BD3E74C1C0DA6577EA3318`).
+Run `20261018T173740Z-647fb0c4` actually executed on 2026-10-19 UTC after the
+owner directly resumed work and conditionally approved two bounded visible tests.
+Preflight/SUP6/Win64 Editor Build/Discovery/Numeric passed. Discovery reconciled
+2211 engine names/exact 16 E02; Numeric passed four cases/17041 assertions.
+WorldInput FAILED on `FramePaintStale` during `Input.PanDollyFrame`, before its
+Automation index was written; the missing-index wrapper error is consequential.
+Five completed Input log successes/141 assertions are partial observations only.
+PID 16900 exited 0 in 25.4134518s with exit/cleanup/final job active 0/total 9 confirmed. All nine
+WorldInput settings pairs match Preflight.after (four present/five absent).
+No complete twelve-case result, six PNGs or Audit exists.
+
+The [11316-byte closure](../../.local/reviews/E02-source-review/root-5abe18c-20261018T173740Z-647fb0c4/worldinput-failure-and-authority-closure.json)
+has SHA256 `E993BB0AABD78A430E20765B94FA9F81511A43E96AFFB89B8AC4FF4B20971AD0`.
+All run/hidden/visible authorities are CLOSED_DO_NOT_REUSE; both visible launches
+were consumed. Only bounded window-to-desktop paint-coordinate remediation,
+focused controls and factual docs are released. Preserve actual draw geometry,
+the strict `1e-3` stale-layout guard, native assertions, fixture/cases/screenshots
+and budgets. The repair remains UNEXECUTED until checkpoint/fresh freeze/affected
+SOURCE review/new RunId/build and new applicable visible approval. No startup flag
+change or owner-approval transfer to a materially changed candidate is implied.
+Fresh final OWN15 CODE/different REQ, acceptance, packaging and Linux remain open.
+The journal binds review/provenance, closed actual phase evidence and limits.
+
+**Historical fff05fc source/run disposition (revision30):** Affected SOURCE PASS
 binds `fff05fc2b7e663bd345ddae22c68058f849f7029` (5241-byte raw report/SHA256
 `583663C9E698BBC40F89AB28CFDE7760E4FD195D07848A28A6CA75F13963107A`).
 Its65-call trace binds1338/1338 required visible rows across10 groups; two empty
@@ -2218,6 +2256,8 @@ During the current research task, choose and log reversible **planning** details
 
 ### 15.1 Actual review record
 
+**2026-10-19 E02 revision31:** 5abe18c received affected SOURCE PASS; run 173740 passed Preflight/SUP6/Editor Build/Discovery/Numeric, then FAILED WorldInput on `FramePaintStale` during PanDollyFrame. Five preceding Input successes/141 assertions are partial diagnostics only; no complete report/six PNGs/Audit exists. All execution authority is closed after two visible launches. Bounded paint-coordinate repair remains UNEXECUTED; fresh affected SOURCE and final separate OWN15 CODE/REQ gates remain. Section0.9 and the [E02 journal](evidence/2026-10-16-e02-world-input.md) bind exact evidence.
+
 **2026-10-18 E02 revision30:** fff05fc received affected SOURCE PASS; run160124 completed Preflight/SUP6/Editor Build/visible Discovery, then FAILED Numeric on the report BOM. Four exported numeric Success cases/17041 assertions are diagnostic observations only. All execution authority is closed; strict BOM-reader repair is UNEXECUTED pending a fresh affected gate. Section0.9 and the [E02 journal](evidence/2026-10-16-e02-world-input.md) preserve exact identities, failure, startup limits and owner-relay scope. Final OWN15 CODE/different REQ remain pending.
 
 **Pre-BOOT01 history:** the original plan received a single-session planning self-review; revision 3 added source/toolchain/contract research, owner answers and document checks. One existing static AST boundary check passed at that stage; no application/integration/Unreal/render/package/performance test had run. This historical documentation review was not a code/experiment acceptance audit.
@@ -2247,15 +2287,15 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** checkpoint/freeze the released strict single-leading-UTF8-BOM reader repair, focused offline controls and factual docs, then obtain fresh affected SOURCE review before a new RunId under Section0.9. Actual fff05fc/run160124 passed the hidden chain and visible Discovery; Numeric FAILED on report encoding. Its four exported successes do not pass the phase. All run/hidden/visible authorities are CLOSED_DO_NOT_REUSE, including the unused second visible window. WorldInput/Audit/six PNGs remain unrun. Startup mitigation requires separate source-supported disposition; no flag change or waiver is authorized here. Final OWN15 CODE/different REQ, acceptance, packaging and Linux remain pending. Standing SOURCE consent adds no runtime/final-review/merge authority; all E01 and earlier E02 history remains intact.
+**Ready now:** checkpoint/freeze the bounded paint-coordinate repair, focused controls and factual docs, then obtain fresh affected SOURCE review before a new RunId/build and new applicable visible approval. Source 5abe18c/run 173740 passed Preflight/SUP6/Editor Build/Discovery/Numeric on 2026-10-19; WorldInput FAILED on stale painted coordinates during PanDollyFrame. Five completed Input log successes/141 assertions are partial diagnostics. No complete twelve-case result/six PNGs/Audit exists. All run/execution authority is CLOSED_DO_NOT_REUSE and both visible launches were consumed. Preserve strict stale-layout/native assertions and all earlier failures. No startup flag change, final acceptance or merge is authorized here; final OWN15 CODE/different REQ, packaging and Linux remain pending.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 
-**Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. It does not establish production Unreal HTTP transport, rendering/picking/HUD feasibility, packaged Windows/Linux workflow, durable recovery or production performance. The current run's six editor-settings comparisons are real same-run observations; they do not change historical `030835`'s missing record. Core #588/#589/#590 and RISK19 remain open; the original 30-second FAIL/UNKNOWN remains unchanged. Execution, C12 source-only metadata and auxiliary privacy inspection do not supply final milestone acceptance.
+**Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 proves its closed Preflight/SUP6/Windows Editor Build/Discovery/Numeric predecessors; failed WorldInput supplies no complete rendered/input or visual acceptance. It does not establish production Unreal HTTP transport, full HUD feasibility, packaged Windows/Linux workflow, durable recovery or production performance. E02 has nine real before/after settings states per observed phase (SUP uses its predecessor only); E01 had six. These records do not repair historical `030835` or earlier E02 observation gaps. Core #588/#589/#590 and RISK19 remain open; the original 30-second FAIL/UNKNOWN remains unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 source characterization and selected44.3.33 adaptation, profile/capability/design checklists, developer Core launch/install recipes, recorded Core issues and BOOT01 scaffold/probe/final builds/generation. Normal `044903` now records 87 Python units in 15.167 seconds, 14 Capture checks, auxiliary privacy/exact-byte promotion, 132 unique native successes, two automated evidence checks and matching settings/DDC/process evidence. Separate pre-execution controls are 135 pure PowerShell checks with 39 stable inputs. Earlier failures, unknowns, settings history and source assessments remain preserved.
+**Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 source characterization and selected44.3.33 adaptation, profile/capability/design checklists, developer Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units/14 Capture checks/132 native successes/two evidence checks plus separate 135 PowerShell controls/39 inputs. E02 `173740` on 5abe18c records fresh affected SOURCE, Preflight/SUP6/Editor Build/Discovery and four Numeric cases/17041 assertions; WorldInput failed before final report/six PNGs/Audit. All original failures, unknowns, settings history and source assessments remain preserved.
 
-**Next concrete step:** checkpoint the strict BOM-reader repair/offline controls and factual documentation, then bind new frozen source, fixture, defaults, toolchain, assets, relevant installed API references and declared plugin closure for fresh affected independent SOURCE review and a new RunId. Preserve failed Numeric report bytes, all nine matching settings pairs and prior authority closures. The four raw numeric successes are separate from phase acceptance; twelve WorldInput cases, six PNGs, Audit and final CODE/REQ remain unrun. Full E01/M01/M02, research/implementation, production, packaging and Linux remain open.
+**Next concrete step:** checkpoint the bounded paint-coordinate correction and factual docs, freeze the changed source and obtain fresh affected SOURCE review/new RunId/build before a new applicable visible approval. Preserve actual draw geometry, the strict `1e-3` stale-layout guard, native assertions, fixture/cases/screenshots and budgets. The prior WorldInput native exit 0 does not pass its failed phase; five logged successes do not replace the missing twelve-case report. Final OWN15 CODE/different REQ and applicable runtime-evidence transmission, acceptance, packaging, Linux and broader research/implementation remain open.
 
 ## 16. Sources and inspection index
 

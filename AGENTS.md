@@ -78,7 +78,39 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current E02 candidate `fff05fc2b7e663bd345ddae22c68058f849f7029` received affected
+Current E02 source `5abe18cbd020ea97676ad87283735e17822fc462` received affected
+SOURCE PASS (4270 bytes/SHA256
+`347EA5D65BEF3666143769016B5E408E5DF7EB6600BD3E74C1C0DA6577EA3318`).
+Run `20261018T173740Z-647fb0c4` actually executed on 2026-10-19 UTC, after the
+owner directly resumed work and conditionally approved two bounded visible tests.
+Preflight, SUP6 (three groups/five roots), Win64 Editor Build, Discovery and Numeric
+passed. Discovery reconciled 2211 engine names/exact 16 E02 names; Numeric passed
+four cases/17041 assertions through the repaired BOM-aware reader.
+
+WorldInput FAILED: `FramePaintStale` aborted `Input.PanDollyFrame` before report
+finalization; the wrapper then reported missing `reports/world-input/index.json`.
+Five earlier Input log successes/141 assertions are partial diagnostics only.
+PID 16900 exited 0 in 25.4134518 seconds with confirmed exit/cleanup and final job
+active 0/total 9. Nine settings pairs match before/after and Preflight.after (four
+present/five absent). No complete twelve-case result, six PNGs or Audit exists.
+Both visible launches were consumed; all current run/hidden/visible authorities
+are CLOSED_DO_NOT_REUSE. The [closure](.local/reviews/E02-source-review/root-5abe18c-20261018T173740Z-647fb0c4/worldinput-failure-and-authority-closure.json)
+is 11316 bytes/SHA256
+`E993BB0AABD78A430E20765B94FA9F81511A43E96AFFB89B8AC4FF4B20971AD0`.
+
+Only bounded paint-coordinate remediation, focused controls and factual docs are
+released: align actually painted window-relative geometry with desktop input,
+preserving draw geometry, the strict `1e-3` stale-layout guard, native assertions,
+fixture, cases, screenshot requirements and budgets. The repair is UNEXECUTED;
+checkpoint/fresh freeze/affected SOURCE/new RunId/build and new applicable visible
+approval precede repaired graphical execution. Current owner approval does not
+transfer to materially changed candidates. No startup flag change is authorized.
+Fresh final OWN15 CODE/different REQ, acceptance, packaging and Linux remain pending.
+The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) binds exact evidence.
+
+The following fff05fc disposition is historical, as recorded before the later repair.
+
+Historical E02 candidate `fff05fc2b7e663bd345ddae22c68058f849f7029` received affected
 SOURCE PASS (5241-byte raw report, SHA256
 `583663C9E698BBC40F89AB28CFDE7760E4FD195D07848A28A6CA75F13963107A`).
 Run `20261018T160124Z-dcf2685f` completed Preflight, six supervisor subcases

@@ -31,6 +31,7 @@
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
 #include "Styling/CoreStyle.h"
+#include "Types/PaintArgs.h"
 #include "UnrealClient.h"
 #include "Widgets/SLeafWidget.h"
 #include "Widgets/SViewport.h"
@@ -760,9 +761,13 @@ public:
     void Construct(const FArguments&, FE02ProofState* InProof) { Proof = InProof; }
     virtual bool SupportsKeyboardFocus() const override { return true; }
     virtual FVector2D ComputeDesiredSize(float) const override { return FVector2D(1280, 720); }
-    virtual int32 OnPaint(const FPaintArgs&, const FGeometry& G, const FSlateRect&,
+    virtual int32 OnPaint(const FPaintArgs& Args, const FGeometry& G, const FSlateRect&,
         FSlateWindowElementList& Elements, int32 Layer, const FWidgetStyle&, bool) const override
     {
+        // Slate passes window-space paint geometry, while cached/input geometry is desktop-space.
+        // Match SWidget::Paint's conversion; keep G for drawing in the window's paint space.
+        FGeometry DesktopGeometry = G;
+        DesktopGeometry.AppendTransform(FSlateLayoutTransform(Args.GetWindowToDesktopTransform()));
         auto Rect = [&](FVector2D Pos, FVector2D Size, FLinearColor Color)
         { FSlateDrawElement::MakeBox(Elements, Layer, G.ToPaintGeometry(Size, FSlateLayoutTransform(Pos)), FCoreStyle::Get().GetBrush(TEXT("WhiteBrush")), ESlateDrawEffect::None, Color); };
         auto Text = [&](FVector2D Pos, const FString& Value, int32 Size, FLinearColor Color = FLinearColor::White)
@@ -775,7 +780,7 @@ public:
         Text(FVector2D(18, 8), ProofLabel, 18, FLinearColor(1, 0.8f, 0.25f));
         Text(FVector2D(18, 34), Proof->Status, 12);
         Rect(HudPosition, HudSize, FLinearColor(0.025f, 0.04f, 0.06f, 0.95f));
-        Proof->RecordPaint(G, HeaderSize, HudPosition, HudSize);
+        Proof->RecordPaint(DesktopGeometry, HeaderSize, HudPosition, HudSize);
         Rect(FVector2D(30, 96), FVector2D(200, 36), FLinearColor(0.12f, 0.25f, 0.38f)); Text(FVector2D(40, 104), TEXT("Local HUD button"), 13);
         Rect(FVector2D(30, 144), FVector2D(200, 36), FLinearColor(0.08f, 0.09f, 0.10f)); Text(FVector2D(40, 152), TEXT("Disabled control"), 13, FLinearColor(0.4f, 0.4f, 0.4f));
         Text(FVector2D(40, 204), TEXT("Blank HUD consumes input"), 11);
@@ -790,7 +795,7 @@ public:
             {
                 FVector2D Pixel, Absolute;
                 if (Proof->Controller->ProjectWorldLocationToScreen(DomainToWorld(Proof->Fixture.Frame, Domain), Pixel) && Proof->AbsoluteFromPixels(Pixel, Absolute))
-                { Text(G.AbsoluteToLocal(Absolute), Value, 10, Color); }
+                { Text(DesktopGeometry.AbsoluteToLocal(Absolute), Value, 10, Color); }
             };
             Label(M.Pose->PositionInches + FVector3d(0, 0, 0.5), M.Id, FLinearColor::White);
             const double A = FMath::DegreesToRadians(M.Pose->FacingDegrees);

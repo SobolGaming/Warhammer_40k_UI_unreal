@@ -2,9 +2,11 @@
 
 This repository develops a C++ first, genuinely 3D Unreal client for the separate
 authoritative Python rules engine. `WarhammerClient.uproject` is the minimal C++
-foundation. Source now includes an opt-in synthetic 3D proof scene; its compilation
-and rendered behavior remain unverified. A playable Core-connected client remains
-future migration work. The plan records bootstrap evidence and remaining gates.
+foundation. Source includes an opt-in synthetic 3D proof scene. Recorded candidate
+5abe18c passed Windows Editor compilation; the latest paint-coordinate repair
+awaits a fresh build. Its rendered/input proof remains incomplete after a fail-closed
+layout/paint mismatch. A playable Core-connected client remains future migration
+work. The plan records actual evidence and remaining gates.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -73,7 +75,31 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-E02 candidate `fff05fc2b7e663bd345ddae22c68058f849f7029` received affected
+Current E02 source `5abe18cbd020ea97676ad87283735e17822fc462` received affected
+**SOURCE PASS**. Run `20261018T173740Z-647fb0c4` actually executed on 2026-10-19 UTC
+after the owner's direct resumption/conditional approval. Preflight, six supervisor
+subcases (three groups/five roots), Win64 Editor Build, Discovery and four Numeric
+cases/17041 assertions passed. Discovery reconciled 2211 engine names/exact 16 E02.
+
+WorldInput **FAILED** on `FramePaintStale` during `Input.PanDollyFrame`, before
+report finalization. Missing `reports/world-input/index.json` is the consequential
+wrapper error. Five preceding Input log successes/141 assertions are partial
+diagnostics; twelve-case acceptance, six PNGs and Audit do not exist. PID 16900
+exited 0 in 25.4134518 seconds with confirmed cleanup/final job active 0/total 9; all nine settings
+pairs match (four present/five absent). Both visible launches were consumed and
+all run/execution authorities are **CLOSED_DO_NOT_REUSE**.
+
+The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) and
+[closure](.local/reviews/E02-source-review/root-5abe18c-20261018T173740Z-647fb0c4/worldinput-failure-and-authority-closure.json)
+bind actual outcomes. Only bounded window-to-desktop paint-coordinate remediation
+plus focused controls/docs is released; the strict stale-layout guard and native
+assertions remain. The repair is **UNEXECUTED** and needs checkpoint/fresh freeze,
+affected SOURCE review, a new RunId/build and new applicable visible approval.
+Final independent CODE/different REQ, acceptance, Linux and packaging remain pending.
+
+The following fff05fc disposition is historical, before the later BOM-reader repair.
+
+Historical E02 candidate `fff05fc2b7e663bd345ddae22c68058f849f7029` received affected
 **SOURCE PASS**. Run `20261018T160124Z-dcf2685f` passed Preflight, six supervisor
 subcases in three groups/five roots, Win64 Editor Build and visible Discovery.
 Discovery reconciled 2211 engine names and the exact 16 E02 set on D3D12/
