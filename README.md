@@ -2,10 +2,12 @@
 
 This repository develops a C++ first, genuinely 3D Unreal client for the separate
 authoritative Python rules engine. `WarhammerClient.uproject` is the minimal C++
-foundation. Source includes an opt-in synthetic 3D proof scene. The latest c9a5ac5
-SOURCE review requested a full projection-invertibility guard; that repair is
-authored and UNEXECUTED. Its planned run is closed without native execution.
-Historical c987863 WorldInput remains FAILED. A playable Core-connected client
+foundation. Source includes an opt-in synthetic 3D proof scene. The latest 3483f79
+SOURCE review stopped BLOCKED because its actual prompt omitted explicit launch
+authority; source merits remain UNASSESSED. The projection-invertibility guard is
+authored and UNEXECUTED; that planned run is closed without native execution.
+Historical c9a5ac5 CHANGES_REQUESTED and c987863 WorldInput FAILED remain preserved.
+A playable Core-connected client
 and complete rendered/input acceptance remain future work. The plan records
 actual evidence and remaining gates.
 
@@ -76,13 +78,9 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Current E02 candidate `c9a5ac5e82974d84f4cf12910a3fc67651d66b5d` received **SOURCE CHANGES_REQUESTED**, not execution approval. Its one fresh source-review context closed at `2026-10-19T20:11:55.1072824Z`; planned run `20261019T194405Z-a96441c6` and all associated authority are **CLOSED_DO_NOT_REUSE**. No E02 RunRoot, Preflight, controls, build, native or visible launch was started for that candidate.
+Latest reviewed E02 checkpoint `3483f79031d8a7840a574b1f78974970cfe4e6e5` received **SOURCE BLOCKED** before source/requirements body reads: the matching root launch GO existed on disk but was omitted from the actual initial prompt. Source merits are **UNASSESSED**; this is an authority/protocol failure with no C++ finding. Planned run `20261019T201705Z-77706340` and all associated authority are **CLOSED_DO_NOT_REUSE**.
 
-The P2 finding requires a full captured 4x4 view-projection invertibility guard before public deprojection: finite entries and an independent three-plane determinant do not establish full-matrix invertibility. A focused guard is now authored, **UNEXECUTED**: refuse a nonfinite/zero full determinant, an unavailable checked inverse or nonfinite inverse coefficients before projection/query, and include the determinant in the existing projection log. The checked inverse is a validity probe and does not define the independent expected ray/point. The separate plane guard, runtime picker, fixture, cases, assertions and tolerances remain unchanged. No singular runtime context or false pass was observed.
-
-Closed postchecks recorded a clean reviewed head, zero hash drift and 28-member equality; selected runtime metadata records gpt-6.1-sol/ultra, read-only/never and memory_mode disabled. Lower-level internals remain UNVERIFIED. The 31-artifact seal and 166 input/output/command records preserve one bounded object-shape error and array-specific recovery. Actual body-row coverage and literal command-boundary audits are **NOT_ROOT_COMPLETED**; these metadata checks and the raw report supply no PASS, acceptance or execution approval. Require a fresh checkpoint/freeze, affected SOURCE review, new RunId, hidden checks and new applicable visible approval; final independent CODE/different REQ follow the completed execution/evidence freeze. Standing review-packet consent remains in force and adds no native/GUI/merge authority.
-
-See [current source-review facts](docs/plans/evidence/2026-10-19-e02-c9a5-source-result.json) and the [journal](docs/plans/evidence/2026-10-16-e02-world-input.md).
+The full-matrix invertibility/finite-inverse guard remains authored and **UNEXECUTED**. No E02 RunRoot, Preflight, supervisor controls, build, native/GUI or Audit ran for this checkpoint; zero visible windows were consumed. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and c987 WorldInput FAIL remain unchanged. Fresh affected SOURCE review with explicit actual launch authority, a new run, hidden checks and applicable visible approval remain gates. See [current facts](docs/plans/evidence/2026-10-19-e02-3483-source-result.json), the [prior c9 result](docs/plans/evidence/2026-10-19-e02-c9a5-source-result.json) and the [journal](docs/plans/evidence/2026-10-16-e02-world-input.md).
 
 The following c987 runtime disposition is historical.
 

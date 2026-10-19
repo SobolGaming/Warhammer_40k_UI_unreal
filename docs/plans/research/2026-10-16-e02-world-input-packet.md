@@ -830,6 +830,15 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
+Revision 38 preserves 3483f79's administrative SOURCE BLOCKED result: the separate
+root launch GO existed on disk but was omitted from the received prompt. The
+reviewer read only manifest/session metadata and assessed no source merits. No
+E02 phase started; the review context and unused planned-run authority are closed.
+The full-matrix guard remains UNEXECUTED. Require a fresh coherent checkpoint,
+frozen packet/new RunId and new source-review context that explicitly receives
+the separate root launch GO before substantive assessment. Existing hidden,
+visible and final CODE/different REQ gates and prior failed results are unchanged.
+
 Revision37 records c9a5ac5's initial SOURCE CHANGES_REQUESTED and closes its
 planned run's unused execution authority. No E02 phase started. A focused full
 projection determinant/checked-inverse/finite-inverse refusal is now authored
