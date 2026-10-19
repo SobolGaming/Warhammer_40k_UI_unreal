@@ -157,7 +157,14 @@ private:
     bool Check(bool Value, const FString& Message)
     {
         ++Assertions;
-        if (!Value) { Test->AddError(Name + TEXT(": ") + Message); bFailed = true; }
+        if (!Value)
+        {
+            const FString Error = Name + TEXT(": ") + Message;
+            // Automation can buffer AddError until after our fail-closed exit.
+            // Preserve the actual assertion in the native log immediately.
+            UE_LOG(LogTemp, Error, TEXT("E02 assertion failed at step %d: %s"), Index, *Error);
+            Test->AddError(Error); bFailed = true;
+        }
         return Value;
     }
     void Do(const FString& Label, TFunction<void()> Action)
@@ -897,6 +904,19 @@ private:
                 {EKeys::LeftControl, EKeys::LeftAlt, EKeys::LeftShift, EKeys::RightCommand});
             Input(TEXT("repeated Confirm never submits"), [](IAsyncActionSequence& S) { S.Type(EKeys::Enter).Type(EKeys::Enter); });
             Do(TEXT("visible no-session diagnostic"), [this]() { Check(World->VisibleStatus().Contains(TEXT("ProofHasNoGameSession")), TEXT("Visible precise refusal")); });
+            Do(TEXT("retain refusal movement baseline"), [this]() { RefusalEventBaseline = World->EventCount(); });
+            Input(TEXT("pointer movement after refusal"), [this](IAsyncActionSequence& S)
+            { S.MoveToPosition(QuantizedPhysical(A + FVector2D(8, 6))).Wait(FTimespan::FromSeconds(0.2)); });
+            Do(TEXT("refusal survives actual pointer movement"), [this]()
+            {
+                Check(World->EventCount() > RefusalEventBaseline &&
+                    FSlateApplication::Get().GetCursorPos().Equals(QuantizedPhysical(A + FVector2D(8, 6)), 0.6) &&
+                    World->VisibleStatus().Contains(TEXT("ProofHasNoGameSession")),
+                    TEXT("Precise no-session refusal remains visible after pointer movement"));
+                Check(World->GetPolicy().Snapshot().LocalReview == ELocalReview::Ready && World->GetPolicy().Snapshot().ConfirmAttempts == 3,
+                    TEXT("Pointer movement preserves Ready and the three actual Confirm attempts"));
+                AssertIntent();
+            });
             Input(TEXT("Escape and another review cycle"), [](IAsyncActionSequence& S) { S.Type(EKeys::Escape).Type(EKeys::Enter).Type(EKeys::Enter); });
             Do(TEXT("raw local intent retained"), [this]() { AssertIntent(); Check(World->GetPolicy().Snapshot().ConfirmAttempts == 5 && World->VisibleStatus().Contains(TEXT("ProofHasNoGameSession")), TEXT("Five actual Confirm events; no fabricated acceptance")); });
         }
@@ -978,7 +998,7 @@ private:
             // claim cleanup while it is executing; wait a short genuine bound.
             if (CleanupStarted == 0) { CleanupStarted = FPlatformTime::Seconds(); }
             if (FPlatformTime::Seconds() - CleanupStarted < 5) { return false; }
-            Test->AddError(Name + TEXT(": driver did not quiesce; stop this owned proof process"));
+            Check(false, TEXT("driver did not quiesce; stop this owned proof process"));
             FPlatformMisc::RequestExit(false); return false;
         }
         if (Future.IsValid())
@@ -1027,7 +1047,7 @@ private:
     FVector3d FrameBeforeActorPosition, FrameBeforeActorRotation;
     FAdvisoryHit HitBefore;
     double Started, StepStarted = 0.0, CleanupStarted = 0.0;
-    uint64 Picks = 0, Cameras = 0, EventBaseline = 0;
+    uint64 Picks = 0, Cameras = 0, EventBaseline = 0, RefusalEventBaseline = 0;
     uint64 ProbePicks = 0, ProbeCameras = 0, ProbeHudActivations = 0, ProbeCaptureGeneration = 0, ClickPicks = 0, ClickEvents = 0;
     uint64 ResizeCaptureGeneration = 0, ResizeCancelGeneration = 0, ResizeHeldEvents = 0, ResizeCameras = 0;
     uint64 FrameBeforeGeneration = 0, FrameBeforePaint = 0, FrameBeforeEvents = 0;

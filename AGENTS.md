@@ -78,7 +78,41 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current E02 source `5abe18cbd020ea97676ad87283735e17822fc462` received affected
+Current E02 source `0ed4d7c5b95148724af362c02380167b33cc0660` received affected
+SOURCE PASS (6466 bytes/SHA256
+`85DA457D8922F45DBF30456FDFF2E040F570FED9611E3E5EDD05D7CE3FB51457`).
+Run `20261019T052432Z-c29cc04d` passed Preflight, SUP6 (three groups/five roots),
+Win64 Editor Build, Discovery (2211 engine names/exact 16 E02) and Numeric
+(four cases/17041 assertions) on 2026-10-19 UTC.
+
+WorldInput FAILED before a complete report: six completed Input log successes/491
+assertions are partial diagnostics, including PanDollyFrame's 350 assertions that
+exercised the paint-coordinate repair. During RepeatedConfirm, trace row 1836
+sets `ProofHasNoGameSession`; PointerMove row 1837 replaces it with generic Local
+Ready text. Source and trace support this explanation; the original log does not
+publish the exact failed Check/call stack. The missing `reports/world-input/index.json`
+wrapper error is consequential. Native PID 10544 exited 0 in 25.4225494s with
+confirmed exit/assigned-job cleanup and final job active 0/total 9. Nine settings
+pairs match before/after and Preflight.after (four present/five absent). No complete
+twelve-case result, six PNGs or Audit exists.
+
+Both directly approved visible launches were consumed; all run/hidden/visible
+authority is `CLOSED_DO_NOT_REUSE`. The [closure](.local/reviews/E02-source-review/root-0ed4d7c-20261019T052432Z-c29cc04d/worldinput-failure-and-authority-closure.json)
+is 12734 bytes/SHA256
+`681ED353278C2E78F4501190D6287ECD7753A8C3623E7AA8F0D8A273C3F0C7E1`.
+Only bounded diagnostic-status persistence, immediate test-failure logging,
+focused regression assertions and factual docs are released. The repair is
+UNEXECUTED; checkpoint/fresh freeze/affected SOURCE/new RunId/build and new
+applicable visible approval precede repaired graphical execution. Preserve cases,
+existing assertions, input ownership/cleanup, zero Core counters, screenshots,
+timing budgets and startup controls. No retry or transfer of approval to a changed
+candidate is implied. Final OWN15 CODE/different REQ, acceptance, packaging and
+Linux remain pending. The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md)
+binds exact evidence and the original failure.
+
+The following 5abe18c disposition is historical, before the paint-coordinate repair.
+
+Historical E02 source `5abe18cbd020ea97676ad87283735e17822fc462` received affected
 SOURCE PASS (4270 bytes/SHA256
 `347EA5D65BEF3666143769016B5E408E5DF7EB6600BD3E74C1C0DA6577EA3318`).
 Run `20261018T173740Z-647fb0c4` actually executed on 2026-10-19 UTC, after the

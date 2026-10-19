@@ -580,8 +580,6 @@ struct FE02ProofState
         }
         if (Effect.Diagnostic.Code != EDiagnosticCode::None)
         { Status = FString(DiagnosticCodeName(Effect.Diagnostic.Code)) + TEXT(": ") + Effect.Diagnostic.Message; }
-        else if (Policy.Snapshot().LocalReview == ELocalReview::Ready)
-        { Status = TEXT("Local Ready — advisory only; no game session"); }
     }
     void Trace(const FString& Event, const FPointerSample& Pointer, const FHitTarget& Hit,
         const TSharedPtr<FJsonObject>& Before, const FInputEffects& Effect,
@@ -873,7 +871,15 @@ public:
             if (K == EKeys::BackSpace && !Proof->EditedText.IsEmpty()) { Proof->EditedText.LeftChopInline(1); }
         }
         else if (Matches(TEXT("cancel"))) { Effect = Proof->Policy.Escape(); }
-        else if (Matches(TEXT("confirm"))) { Effect = Proof->Policy.Confirm(); }
+        else if (Matches(TEXT("confirm")))
+        {
+            const ELocalReview ReviewBefore = Proof->Policy.Snapshot().LocalReview;
+            Effect = Proof->Policy.Confirm();
+            // Publish Ready only for its actual transition. Pointer movement,
+            // camera input and unbound keys must not erase a later refusal.
+            if (ReviewBefore == ELocalReview::Editing && Proof->Policy.Snapshot().LocalReview == ELocalReview::Ready)
+            { Proof->Status = TEXT("Local Ready — advisory only; no game session"); }
+        }
         else if (Matches(TEXT("modal"))) { Effect = Proof->Policy.SetModalOpen(true); }
         else
         {

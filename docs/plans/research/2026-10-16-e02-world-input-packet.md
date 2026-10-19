@@ -805,7 +805,7 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
-Packet clarification revision: **2026-10-19 UTC / plan revision 31**.
+Packet clarification revision: **2026-10-19 UTC / plan revision 32**.
 Planning-body SHA256 (exact UTF-8 bytes preceding this heading):
 `633CE70BDE8058F958BB5B6AC7785BC5FBFF9A44C356C9AD85CF4444D11DF1E4`.
 The whole-file SHA256 is recorded in the coordinator authority journal and the
@@ -878,6 +878,27 @@ The repair is UNEXECUTED and requires checkpoint/fresh freeze/affected SOURCE/
 new RunId/build and new applicable visible approval. Final OWN15 CODE/differentREQ,
 acceptance, Linux and packaging remain open. No startup flag change is authorized;
 the journal binds exact evidence/closure. The normative raw prefix is unchanged.
+
+Revision32 records source 0ed4d7c affected SOURCE PASS and run 052432's passed
+Preflight/SUP6/Editor Build/Discovery/Numeric on 2026-10-19 UTC. Discovery reconciled
+2211 engine names/exact 16 E02; Numeric passed four cases/17041 assertions.
+WorldInput FAILED before final reporting during RepeatedConfirm. Six completed
+Input log successes/491 assertions include PanDollyFrame's 350 assertions that
+exercised the paint-coordinate repair. Trace row 1836 records ProofHasNoGameSession;
+PointerMove row 1837 replaces it with generic Ready text. Source/trace support
+this explanation; the original log does not identify the exact failed Check.
+Missing reports/world-input/index.json is consequential. PID 10544 exited 0 in
+25.4225494s with confirmed exit/assigned-job cleanup and final job active 0/total 9.
+All nine settings pairs match before/after and Preflight.after (four present/five
+absent). No complete twelve-case report/six PNGs/Audit exists. Both directly
+approved visible launches were consumed; all authority is CLOSED_DO_NOT_REUSE.
+Only bounded diagnostic-status persistence, immediate failure logging, focused
+regression assertions and factual docs are released. The repair is UNEXECUTED
+pending checkpoint/fresh freeze/affected SOURCE/new RunId/build and new applicable
+visible approval. Existing assertions, cases, input ownership/cleanup, zero Core
+counters, screenshots, timing budgets and startup controls remain unchanged.
+Final OWN15 CODE/differentREQ, acceptance, Linux and packaging remain pending.
+The journal binds exact closure/evidence; this normative raw prefix is unchanged.
 
 It retains child-start/alive evidence, exact injected-seam validation and the read-only Known Documents
 ancestor-route policy, plain-file leaves, all nine observations and strict

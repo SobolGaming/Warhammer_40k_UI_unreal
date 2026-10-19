@@ -1437,3 +1437,116 @@ and new applicable visible approval. No startup flag change is authorized.
 Final OWN15 CODE/different REQ, applicable runtime-evidence transmission, acceptance,
 packaging, Linux and broader research/implementation remain pending. All earlier
 failures, unknowns, source assessments and E01 acceptance limits remain unchanged.
+
+
+## 0ed4d7c SOURCE, exercised paint repair and closed WorldInput failure — 2026-10-19 UTC
+
+Checkpoint `0ed4d7c5b95148724af362c02380167b33cc0660` contains the bounded
+window-to-desktop paint-coordinate repair and factual documentation. The frozen
+run is `20261019T052432Z-c29cc04d`; earlier run 173740 remains failed and closed.
+
+The [affected SOURCE raw report](../../../.local/reviews/E02-source-review/review-0ed4d7c-20261019T052432Z-c29cc04d/last-message.txt)
+is PASS, 6466 bytes/SHA256
+`85DA457D8922F45DBF30456FDFF2E040F570FED9611E3E5EDD05D7CE3FB51457`.
+The separate [root source gate](../../../.local/reviews/E02-source-review/root-0ed4d7c-20261019T052432Z-c29cc04d/source-gate-disposition.json)
+is 6483 bytes/SHA256 `A2B220A2BC46A89BAE4AE3254D07819ABF2A3EF7CC82180F1202BE32C10AB37A`.
+Its affected assessment does not supply final OWN15 CODE/REQ or runtime acceptance.
+The frozen source remains the identity of the executed proof, even after the
+later remediation is authored. No original raw verdict is rewritten by that failure.
+
+### Direct two-window approval and closed execution
+
+After SOURCE, Preflight, all six supervisor cases and Editor Build passed, the
+owner directly answered:
+
+> Approve these two visible launches
+
+The [direct approval record](../../../.local/reviews/E02-source-review/root-0ed4d7c-20261019T052432Z-c29cc04d/direct-visible-window-owner-approval.json)
+is 2266 bytes/SHA256 `3617FD2AFB25949FAC3F67EAEBB0845061CBF9A507CE579D2EE0FCFB15FA6F81`.
+Its exact question binds repaired candidate 0ed4d7c/run 052432, two sequential
+visible launches, one window at a time, up to 600 seconds each, scripted focus/
+camera/UI/resize, six intended captures, logs/ordinary graphics-cache writes and
+the synthetic advisory fixture. The [visible execution authority](../../../.local/reviews/E02-source-review/root-0ed4d7c-20261019T052432Z-c29cc04d/visible-execution-authority.direct.json)
+is 6001 bytes/SHA256 `C09027BFADB76A826957556C910CE9F97A74956028069B335AB9179D2A437E81`.
+It requires ordered predecessors and stopping at the first failure. It supplies no
+retry, changed-candidate window approval, final review-evidence transmission,
+acceptance or merge authority.
+
+| Phase | Actual closed outcome |
+|---|---|
+| Preflight | PASS; normal desktop identity and nine settings states |
+| SupervisorControls | PASS; three groups/six subcases/five roots; assigned cleanup/final zero-active jobs confirmed; no separate same-phase settings pair |
+| Win64 Editor Build | PASS; PID 10252 exit 0/47.3739468s; confirmed assigned cleanup/final job active 0/total 42 |
+| Discovery, first visible launch | PASS; PID 35596 exit 0/210.7332783s; confirmed assigned cleanup/final job active 0/total 38; 2211 eligible engine names/exact 16 E02 names |
+| Numeric, hidden | PASS; four unique Success cases/17041 assertions; PID 29612 exit 0/16.0851418s; confirmed assigned cleanup/final job active 0/total 11 |
+| WorldInput, second visible launch | FAIL before final report; PID 10544 exit 0/25.4225494s; confirmed assigned cleanup/final job active 0/total 9 |
+| Audit / six PNGs | NOT RUN / NOT CREATED (zero PNGs); no complete WorldInput index/completion |
+
+### Original WorldInput failure and bounded explanation
+
+The [closed failure/authority record](../../../.local/reviews/E02-source-review/root-0ed4d7c-20261019T052432Z-c29cc04d/worldinput-failure-and-authority-closure.json)
+is 12734 bytes/SHA256 `681ED353278C2E78F4501190D6287ECD7753A8C3623E7AA8F0D8A273C3F0C7E1`,
+recorded at `2026-10-19T12:29:01.5566895+00:00`. It binds the five successful
+predecessor result/completion pairs, failed WorldInput result (2237261 bytes/
+SHA256 `0D696569266DF4718DA03F6871D564919446EA342C0E90D8F12FE20798B249A0`),
+native process receipt (43536 bytes/SHA256
+`60D14F53FDAEA95C4C57B56D474A949F03A7A69A412467683290B616367C4232`)
+and original native log (210707 bytes/SHA256
+`D20AF5EAE8E5215A076110BAD6C2CBA18E8F0214802F383A6462E53D97A059E8`).
+WorldInput phase time was `2026-10-19T12:21:13.9305276Z` through
+`2026-10-19T12:22:41.6301665Z`. Its wrapper reported
+`System.Management.Automation.MethodInvocationException` from GetAttributes:
+missing `reports/world-input/index.json`. That is the reporting consequence;
+native exit 0 does not establish phase success. No secondary error was recorded.
+
+Six completed Input log successes contain 491 assertions: CameraCapture 47,
+CancelActivation 28, CompletedClick 21, HudExclusion 25, ModalText 20 and
+PanDollyFrame 350. These partial diagnostics do not replace a complete twelve-case
+Automation result or screenshot proof. PanDollyFrame exercised the paint-coordinate
+repair successfully; the earlier 5abe18c failure remains preserved.
+
+The immutable [input trace](../../../.local/experiments/E02/20261019T052432Z-c29cc04d/artifacts/world-input/input.jsonl)
+is 18954386 bytes/SHA256 `C96ED9998B22832A57BBBE41578AFA9917301A45BC4916875B6F791FF58ADFC0`.
+During `Input.RepeatedConfirm`, physical row 1836 at `12:22:09.593Z` records
+the `ProofHasNoGameSession` refusal after Confirm attempt 3. PointerMove row 1837
+at `12:22:09.594Z` replaces it with `Local Ready — advisory only; no game session`;
+that status remains through final row 1929. Frozen source
+`Warhammer_40k_UI_unreal@0ed4d7c:Source/WarhammerClient/Private/Migration/E02WorldProofGameMode.cpp:581-584`
+assigns generic Ready status on a diagnostic-free effect, while
+`E02WorldInputTests.cpp:899` requires the visible precise refusal before the next
+Escape action. Check sets bFailed, the update calls Finish, and Finish requests
+normal exit; native log line 1652 records RequestExit(0) at `12:22:09.894Z`.
+This is a source/trace-supported explanation. The original log does not directly
+publish the failing Check/call stack. It establishes no engine/OS shortcut interception.
+
+All nine WorldInput settings pairs match before/after and Preflight.after:
+four present/five absent. Known Documents observations remain logical-route
+evidence; provider/reparse-target identity and present-leaf hashing remain
+UNVERIFIED. SupervisorControls has no separate same-phase pair. Assigned-job
+aggregate cleanup does not prove universal descendant identity, second-hop behavior
+or network-egress isolation. Existing C4701 observations remain recorded without
+a warning waiver or source-to-binary equivalence claim.
+
+### Released status/logging repair — UNEXECUTED
+
+Root closes the run and every hidden/visible authority **CLOSED_DO_NOT_REUSE**.
+Both approved visible launches were consumed; no retry/resume/RunId reuse remains.
+Only bounded diagnostic-status persistence and explicit immediate test-failure
+logging, focused regression assertions and factual documentation are released.
+The authored repair publishes generic Ready text only on the actual Editing-to-Ready
+Confirm transition and logs the first failing Check immediately before AddError,
+including the driver-quiescence failure path. Added regression assertions use actual
+driver pointer movement, verify a fresh event/current cursor, retain the refusal and
+Ready/three-Confirm state, and preserve raw local intent. These additions have not
+executed. The repair must retain the precise refusal through benign pointer effects and
+make a future first failing assertion visible immediately without weakening
+stop-on-first-failure behavior. It remains **UNEXECUTED**: checkpoint/fresh freeze,
+affected SOURCE review, new RunId/build and new applicable visible approval precede
+repaired graphical execution. Preserve existing assertions/cases, input ownership/
+cleanup, zero Core counters, screenshots, timing budgets and startup controls.
+
+No sibling/Core edits, startup flag changes, broad features, final acceptance,
+publication or merge are supplied by this repair release. Final separate OWN15
+CODE/different REQ, applicable runtime-evidence transmission, acceptance, Linux,
+packaging and broader research/implementation gates remain pending. All original
+failures, unknowns and E01 acceptance limits remain unchanged.

@@ -3,9 +3,10 @@
 This repository develops a C++ first, genuinely 3D Unreal client for the separate
 authoritative Python rules engine. `WarhammerClient.uproject` is the minimal C++
 foundation. Source includes an opt-in synthetic 3D proof scene. Recorded candidate
-5abe18c passed Windows Editor compilation; the latest paint-coordinate repair
-awaits a fresh build. Its rendered/input proof remains incomplete after a fail-closed
-layout/paint mismatch. A playable Core-connected client remains future migration
+0ed4d7c passed Windows Editor compilation and Numeric; its rendered/input proof
+stopped during RepeatedConfirm after six partial Input log successes. The bounded
+diagnostic-status/logging repair remains unexecuted and awaits fresh review/build.
+A playable Core-connected client remains future migration
 work. The plan records actual evidence and remaining gates.
 
 - Read [AGENTS.md](AGENTS.md) before work.
@@ -75,7 +76,33 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Current E02 source `5abe18cbd020ea97676ad87283735e17822fc462` received affected
+Current E02 source `0ed4d7c5b95148724af362c02380167b33cc0660` received affected
+**SOURCE PASS**. Run `20261019T052432Z-c29cc04d` passed Preflight, all six supervisor
+subcases, Win64 Editor Build, Discovery (2211 engine names/exact 16 E02) and four
+Numeric cases/17041 assertions on 2026-10-19 UTC.
+
+WorldInput **FAILED** before final reporting. Six completed Input log successes/491
+assertions are partial diagnostics; PanDollyFrame's 350 assertions exercised the
+paint-coordinate repair. Trace/source show a precise no-session refusal replaced
+by generic Ready text on pointer movement during RepeatedConfirm. The original
+log does not identify the exact failed Check; the missing report is consequential.
+PID 10544 exited 0 in 25.4225494s with confirmed assigned-job cleanup/final job
+active 0/total 9. All nine settings pairs match (four present/five absent).
+No complete twelve-case result, six PNGs or Audit exists. Both visible launches
+were consumed; all execution authority is **CLOSED_DO_NOT_REUSE**.
+
+The [E02 journal](docs/plans/evidence/2026-10-16-e02-world-input.md) and
+[closure](.local/reviews/E02-source-review/root-0ed4d7c-20261019T052432Z-c29cc04d/worldinput-failure-and-authority-closure.json)
+bind the original failure. Bounded diagnostic-status persistence, immediate failure
+logging, focused regression assertions and docs are released; the repair is
+**UNEXECUTED** pending checkpoint/fresh freeze/affected SOURCE/new RunId/build and
+new applicable visible approval. Existing assertions, cases, screenshots, ownership,
+zero Core counters, budgets and startup controls stay fixed. Final independent
+CODE/different REQ, acceptance, Linux and packaging remain pending.
+
+The following 5abe18c disposition is historical, before the paint-coordinate repair.
+
+Historical E02 source `5abe18cbd020ea97676ad87283735e17822fc462` received affected
 **SOURCE PASS**. Run `20261018T173740Z-647fb0c4` actually executed on 2026-10-19 UTC
 after the owner's direct resumption/conditional approval. Preflight, six supervisor
 subcases (three groups/five roots), Win64 Editor Build, Discovery and four Numeric
