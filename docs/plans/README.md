@@ -1,11 +1,13 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 38, is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 39, is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 38 records 3483f79 SOURCE BLOCKED before body reads because the actual prompt omitted explicit root launch GO. Source merits are UNASSESSED; all planned-run authority is closed with no E02 execution. [Current source-review facts](evidence/2026-10-19-e02-3483-source-result.json) preserve the closure and fresh gates. The full-matrix guard remains UNEXECUTED. Historical [c9a5ac5 SOURCE CHANGES_REQUESTED](evidence/2026-10-19-e02-c9a5-source-result.json) and c987 WorldInput FAIL remain unchanged; no final CODE/REQ acceptance is established.
+Revision 39 records **EXECUTION_PASS_FINAL_ACCEPTANCE_NOT_ESTABLISHED** for source `5e92ba336da0570cb4b57def390ad3c58921e625`, run `20261019T202805Z-5ff8cb61`. Affected SOURCE and all seven producer phases completed successfully: 16 native cases / 18174 assertions, plus six separate supervisor cases, six PNGs, 4562 input events and 20 ray records. The [current factual result](evidence/2026-10-19-e02-5e92-result.json) and [journal](evidence/2026-10-16-e02-world-input.md) bind closed evidence, preservation and exact approval-relay limits. Both visible windows are consumed; all execution authority is closed. Root's six-image observations are implementer evidence. Effective-pixel round-trip accuracy does not establish arbitrary fractional-point precision. Fresh final independent cumulative CODE and different REQ remain pending; full E02/M02, Linux, packaging, real-Core play and full HUD/profile behavior remain open.
+
+Historical revision 38 records 3483f79 SOURCE BLOCKED before body reads because the actual prompt omitted explicit root launch GO. Source merits are UNASSESSED; all planned-run authority is closed with no E02 execution. [Historical source-review facts](evidence/2026-10-19-e02-3483-source-result.json) preserve that closure. The full-matrix guard was then UNEXECUTED. Historical [c9a5ac5 SOURCE CHANGES_REQUESTED](evidence/2026-10-19-e02-c9a5-source-result.json) and c987 WorldInput FAIL remain unchanged; those records supply no final CODE/REQ acceptance.
 
 Historical revision 36 records the authored, UNEXECUTED RaisedPicking effective-pixel oracle and numeric diagnostics. Revision 35 preserves the failed c987 phase, 11-case partial diagnostics and consumed windows. [Current facts](evidence/2026-10-19-e02-c987-result.json) and [journal](evidence/2026-10-16-e02-world-input.md) distinguish the failure from the passed predecessors. Old execution authority is closed; the repair needs its own freeze/review/hidden checks and new applicable visible approval. Final independent acceptance remains pending.
 

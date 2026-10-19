@@ -830,6 +830,29 @@ Windows evidence is still an actual future execution gate, and packaging is late
 
 ## Freeze and remaining blockers
 
+Revision39 factual overlay: executed source
+`5e92ba336da0570cb4b57def390ad3c58921e625`, run
+`20261019T202805Z-5ff8cb61`, has **EXECUTION_PASS_FINAL_ACCEPTANCE_NOT_ESTABLISHED**.
+Fresh affected SOURCE and all seven producer phases completed. Numeric4/17041
+plus WorldInput12/1133 (Input8/975, Rendered4/158) total16 native cases/18174
+assertions. The six supervisor cases in three groups/five roots are separate.
+Six PNGs,4562 input events and20 ray records exist. Nine settings pairs match
+in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit have predecessor
+evidence only. Audit retains `EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT`.
+Root actually viewed all six images and recorded bounded implementer observations;
+fresh final independent CODE and different REQ remain NOT RUN after this execution.
+The same-effective-pixel oracle passed with runtime quantization unchanged;
+the nominal fractional-point deviations are a separate fidelity limit, not a
+claim of arbitrary `1e-4` inch pointing precision. [Current facts](../evidence/2026-10-19-e02-5e92-result.json)
+bind exact descriptors, approval relay, raw labels, preservation and limits.
+Both approved windows completed; all execution authority is CLOSED_DO_NOT_REUSE,
+zero windows remain and no retry/merge is authorized. Freeze final cumulative
+source/evidence/docs against `bd801233cc9989e0ae146a3be7b136d26dc73183`
+for the separate final assessments. Full E02/M02, Linux, packaging, real-Core and
+full HUD/profile proof remain open. This overlay changes no normative criterion.
+
+The following revision38 and earlier freeze dispositions are historical.
+
 Revision 38 preserves 3483f79's administrative SOURCE BLOCKED result: the separate
 root launch GO existed on disk but was omitted from the received prompt. The
 reviewer read only manifest/session metadata and assessed no source merits. No

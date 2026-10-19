@@ -1651,3 +1651,119 @@ The unchanged [raw SOURCE report](../../../.local/reviews/E02-source-review/revi
 Closed metadata checks recorded a clean reviewed head, zero descriptor drift and 28-member equality. Selected runtime metadata records gpt-6.1-sol/ultra, read-only/never and memory_mode disabled; lower-level internals remain UNVERIFIED. The two actual inputs, outputs and commands have zero recorded hash mismatches, sensitive/peer-pattern hits or model truncation markers. Root inspected these literal metadata commands; there were no source-body reads or full source-coverage result. These mechanical observations supply no source merits, test result, acceptance or execution approval.
 
 Checkpoint these facts and freeze a fresh neutral packet that conveys the matching root launch GO explicitly in the actual prompt. Use a new review context and RunId; affected SOURCE approval precedes approved hidden checks and new applicable exact-candidate visible approval. Final independent CODE and different REQ follow a completed execution/documentation/evidence freeze. Standing review-packet transmission consent remains unchanged and adds no execution or merge authority. The [public factual record](2026-10-19-e02-3483-source-result.json) centralizes artifact identities and limits. All earlier reports, c9 P2 finding, c987 runtime failure, E01 acceptance limits, Linux and packaging status remain unchanged.
+
+## 5e92ba3 completed bounded execution; final acceptance pending — revision39
+
+This is the latest factual entry. Every preceding entry, including the historical
+3483f79 BLOCKED summary at the top, retains its original status and scope.
+Executed source `5e92ba336da0570cb4b57def390ad3c58921e625`, run
+`20261019T202805Z-5ff8cb61`, now has status
+**EXECUTION_PASS_FINAL_ACCEPTANCE_NOT_ESTABLISHED**. The [structured factual result](2026-10-19-e02-5e92-result.json)
+binds raw reports, closure, approval provenance and preservation seals.
+This documentation overlay changes no executed source, fixture, runtime picker,
+case, assertion, tolerance, driver route or normative acceptance criterion.
+
+### Actual source and seven producer results
+
+Fresh affected SOURCE PASS closed at `2026-10-19T20:47:13.3066854Z`.
+The unchanged report is6450 bytes/SHA256
+`5E5EDD0F4417F077806D85910B5431F8E9959626C5ED1BD48B517DC8CB287462`.
+Root's literal/body audit records151 paired actual calls:127 ordinary body readers,
+one exact35-row diff guard and23 metadata calls, covering4032 mandatory rows in86
+groups with no missing rows. This is display-text/literal-command evidence;
+OS argv/PID lower linkage and lower memory/feature internals remain UNVERIFIED.
+The historical copied plugin-selection original retains its0ed head label;
+the regenerated current closure binds5e92. Original operator metadata-helper
+failures remain preserved. Affected SOURCE PASS is not final cumulative CODE/REQ.
+
+| Phase | Actual closed producer result | Bounded observations |
+|---|---|---|
+| Preflight | `PREFLIGHT_PASS_SOURCE_REVIEW_STILL_REQUIRED` | Separate current SOURCE gate supplies review PASS; zero process roots. |
+| SupervisorControls | `SUPERVISOR_CONTROLS_PASS` | Six cases/three groups/five roots;9.4050472 seconds. Separate from native counts. |
+| Build | `BUILD_PASS` | Win64 Editor PID37360, exit0,52.2828036 seconds; UBT51.57 seconds; owned-job active0/total42. |
+| Discovery | `DISCOVERY_PASS` | PID39544, exit0,245.7615121 seconds;2211 eligible engine names/exact16 E02 names; owned-job0/37. |
+| Numeric | `NUMERIC_PASS` | Four cases/17041 assertions; PID9688, exit0,15.4347621 seconds; owned-job0/11. |
+| WorldInput | `WORLD_INPUT_EXECUTION_PASS_VISUAL_INSPECTION_REQUIRED` | Twelve cases/1133 assertions: Input8/975 and Rendered4/158 (RaisedPicking27). PID25088, exit0,70.4697691 seconds; owned-job0/13. |
+| Audit | `EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT` | Producer execution passed; no final independent acceptance is supplied by this label. |
+
+All launched native roots have recorded exit/assigned-job cleanup confirmation.
+Native total is16 cases/18174 assertions; SUP6 is separate. Six required PNGs,
+4562 input events and20 ray records exist. Recorded rendering is D3D12/RTX4090/SM5.
+Build records VS2022 selector14.44.35229, SDK10.0.22621.0 and dotnet10.0.203.
+Nine settings before/after pairs match in Preflight, Build, Discovery, Numeric and
+WorldInput. SupervisorControls/Audit have predecessor evidence only, no same-phase
+pair. Closed-through-Audit metadata inspection is PASS. Its generic visual-pending
+limit is supplemented by root's separate actual six-image observation record;
+the inspector itself performed PNG signature/IHDR/framing/hash checks only.
+
+### Exact approval relay, observations and closed authority
+
+The owner question at `2026-10-19T21:39:00Z` asked for two sequential visible
+launches for this candidate/run, one window at a time, up to600 seconds each,
+scripted focus/camera/UI input,1280×720 to1600×900 resize, six PNGs, logs and normal
+graphics-cache writes with the synthetic advisory fixture. A trusted transcript
+relay identified source chat `01a1560e-512e-7409-ab54-88975d61a006` and parent
+chat `01a11844-54b2-778d-90e7-7f9253e0c00f` and supplied the exact owner answer
+**Yes.  Go ahead.** at `2026-10-19T21:42:57Z`. The original message was not
+independently retrieved. The record preserves both message IDs and the matching
+question; it is2319 bytes/SHA256
+`B368463791E2569D8C26E9034158730A35598B3DD82F0CA57F2B89D175F7A77B`.
+Both visible launches completed and were consumed. Root closed all execution at
+`2026-10-19T22:00:44.9846603Z`: **CLOSED_DO_NOT_REUSE**, zero windows remaining,
+no retry, further native execution or merge authority.
+
+At `2026-10-19T22:04:48.7037181Z`, after run closure, root observed the direct
+human reply **Approve these two visible launches** to matching question
+`call_84a44cd95c8e4421ae0f445a7fe5b066`/item0. The same-pair confirmation record
+is1214 bytes/SHA256
+`A8EE0CE762F5ECA042C06F0C0F415D17EF0D29260B53B7C49F75B47C5F5CEEAA`.
+It confirms the already-approved/consumed pair; it adds zero launches and does
+not rewrite the prior relay as independently retrieved original messages.
+All execution authority remains CLOSED_DO_NOT_REUSE.
+
+Root actually decoded/viewed the six original1280×720 PNGs (five-forms,
+raised-pick, mesh-before, mesh-after, oblique and near-top). Its scoped implementer
+observations record visible labeled forms, raised support thickness/hole,
+circle-to-cube same-ID selection presentation, two camera elevations and the
+synthetic/advisory header. This is not independent final CODE/REQ or production
+visual acceptance. Final REQ must inspect the original images independently;
+the author observation conclusions do not enter its initial blind merits packet.
+
+### Effective-pixel fidelity, preserved failures and final gates
+
+Closed `logs/native-world-input.log` lines1803–1808 (233057 bytes/SHA256
+`88AF24E5A3C65DC0FC5E86E7FC01FAE5B66A765F881552022DDDA9984FC86836`)
+record a full projection determinant of `-81.758431713836657` and these three
+RaisedPicking checks:
+
+| Support | Domain error at same effective pixel (inches) | Reprojection error (physical pixels) | Nominal-point domain deviation (inches) | Quantization pixel offset |
+|---|---:|---:|---:|---:|
+| e02-platform | 5.3290705182007514e-15 | 0 | 0.046625402225914755 | 0.52047448829916332 |
+| e02-ground | 1.1374233532693354e-14 | 0 | 0.086866552384850165 | 0.9594374710892114 |
+| e02-ground | 4.5775667985222376e-15 | 0 | 0.098008755054313765 | 1.0540228003013039 |
+
+The `1e-4` inch/one physical pixel criteria compare an independent support-plane
+expectation and actual hit at the same effective viewport pixel. Runtime
+float-cast/toward-zero quantization remains unchanged. This does not prove
+`1e-4` inch pointing precision at arbitrary fractional viewport points.
+These new-run values must not be assigned to c987: its three original combined
+`Domain <=1e-4in and projected <=1physicalpixel` failures do not identify the
+failed conjunct. c987 FAIL, c9 SOURCE CHANGES_REQUESTED,3483 administrative
+BLOCKED and every earlier failure/unknown remain unchanged.
+
+| Closed record under `.local/reviews/E02-source-review/root-5e92ba3-20261019T202805Z-5ff8cb61/` | Bytes | SHA256 |
+|---|---:|---|
+| `execution-closure-and-final-review-gate.json` | 2361 | `65D44761D69E669DFDB4569C3BC44DE233462493276F676F38D047D3BAD02FFB` |
+| `closed-runtime-evidence.manifest.json` | 32087 | `F60479106649A6DE2F06751E5CF134241AB31A65F63CCBC9E807DA28199E8411` |
+| `closed-execution-relevant-source.manifest.json` | 11652 | `DD3694B202002785DB606288D3DAAE965A1A37E9A10A5319AEB4713F93AA602F` |
+| `six-images-root-visual-observations.json` | 4743 | `A1BB9673916E6E9BFC22DB4074B250DC7247A19E9E558BCA87D546FEA7732B9E` |
+
+The96 runtime files and23 execution-source files match their closed seals.
+The source seal preserves executed bytes; it does not rebind later documentation
+to the execution freeze. Next is a factual checkpoint/final freeze followed by
+fresh independent cumulative CODE against `bd801233cc9989e0ae146a3be7b136d26dc73183`
+and a different independent REQ under OWN15. Full E02/M02, Linux execution,
+packaging, real-Core play, full HUD/profile behavior, physical input/OS-focus
+switching, KnownDocuments provider/target/present-file branch and lower
+process/network internals remain open/unverified. Standing packet-transmission
+consent adds no native or merge authority. No final acceptance is claimed.
