@@ -287,7 +287,10 @@ Record requested domain/fractional viewport coordinates, actual effective pixel,
 expected/actual point, projection context, numeric errors and original-point
 quantization deviations separately. Never conceal the nominal offset, snap/clamp
 a hit, fit the camera/fixture, use returned-hit Z/position to construct expectation,
-or waive an unsupported/nonfinite/singular context. A changed deprojection API
+or waive an unsupported/nonfinite/singular context. Reject a noninvertible full
+captured view-projection matrix before public deprojection; the separate
+three-plane intersection determinant does not establish that matrix's invertibility.
+A changed deprojection API
 requires a version-matched re-review. These Rendered API probes do not replace
 actual AutomationDriver-to-Slate-to-world input evidence in the Input cases.
 The failed c987 continuous-point comparison remains a failed historical result;
@@ -826,6 +829,16 @@ explicitly unverified. No Core connection/new-host work is introduced; rendered
 Windows evidence is still an actual future execution gate, and packaging is later.
 
 ## Freeze and remaining blockers
+
+Revision37 records c9a5ac5's initial SOURCE CHANGES_REQUESTED and closes its
+planned run's unused execution authority. No E02 phase started. A focused full
+projection determinant/checked-inverse/finite-inverse refusal is now authored
+before public deprojection, while the independent expected-point construction
+and separate three-plane guard remain unchanged. This repair is UNEXECUTED and
+has no new SOURCE verdict. The journal preserves the original report and closure;
+require a new checkpoint/freeze/affected SOURCE/new RunId and the existing hidden,
+visible and final CODE/different REQ gates. No runtime picking, fixture, cases,
+assertions, tolerances or prior failed results are changed by this status record.
 
 Revision36 clarifies the effective-viewport-pixel oracle above and records its
 focused source-only implementation and numeric diagnostics as UNEXECUTED.

@@ -1265,6 +1265,19 @@ bool AE02WorldProofGameMode::ProjectRayRoundTrip(const FVector3d& Domain, double
         for (int32 Col = 0; Col != 4; ++Col)
         { if (!FMath::IsFinite(Matrix.M[Row][Col])) { return Unavailable(TEXT("NonfiniteProjection")); } }
     }
+    // Full-matrix invertibility is separate from the oracle-plane determinant.
+    // Refuse the installed inverse's zero/nonfinite determinant before querying.
+    const double ProjectionDeterminant = Matrix.Determinant();
+    if (!FMath::IsFinite(ProjectionDeterminant)) { return Unavailable(TEXT("NonfiniteProjectionDeterminant")); }
+    if (ProjectionDeterminant == 0.0) { return Unavailable(TEXT("SingularProjection")); }
+    // Use the checked inverse only as a validity probe, never as the expected ray/point.
+    FMatrix CheckedInverse;
+    if (!VectorMatrixInverse(&CheckedInverse, &Matrix)) { return Unavailable(TEXT("SingularProjection")); }
+    for (int32 Row = 0; Row != 4; ++Row)
+    {
+        for (int32 Col = 0; Col != 4; ++Col)
+        { if (!FMath::IsFinite(CheckedInverse.M[Row][Col])) { return Unavailable(TEXT("NonfiniteProjectionInverse")); } }
+    }
     FVector2D Screen;
     if (!DomainScreenPoint(Domain, Screen) || Screen.ContainsNaN()) { return Unavailable(TEXT("ProjectionFailed")); }
     const FPointerSample Pointer = Proof->Sample(Proof->Surface->GetCachedGeometry(), Screen);
@@ -1327,8 +1340,8 @@ bool AE02WorldProofGameMode::ProjectRayRoundTrip(const FVector3d& Domain, double
         !FMath::IsFinite(NominalActualDomain) || !FMath::IsFinite(NominalActualPixel) || !FMath::IsFinite(QuantizationPixels))
     { DomainError = PixelError = TNumericLimits<double>::Max(); return Unavailable(TEXT("NonfiniteOracleMetric")); }
     Id = Hit.Id;
-    UE_LOG(LogTemp, Display, TEXT("E02RaisedPickingOracleProjection viewRect=(%d,%d,%d,%d) matrixRow0=(%.17g,%.17g,%.17g,%.17g) matrixRow1=(%.17g,%.17g,%.17g,%.17g) matrixRow2=(%.17g,%.17g,%.17g,%.17g) matrixRow3=(%.17g,%.17g,%.17g,%.17g)"),
-        Rect.Min.X, Rect.Min.Y, Rect.Max.X, Rect.Max.Y,
+    UE_LOG(LogTemp, Display, TEXT("E02RaisedPickingOracleProjection viewRect=(%d,%d,%d,%d) determinant=%.17g matrixRow0=(%.17g,%.17g,%.17g,%.17g) matrixRow1=(%.17g,%.17g,%.17g,%.17g) matrixRow2=(%.17g,%.17g,%.17g,%.17g) matrixRow3=(%.17g,%.17g,%.17g,%.17g)"),
+        Rect.Min.X, Rect.Min.Y, Rect.Max.X, Rect.Max.Y, ProjectionDeterminant,
         Matrix.M[0][0], Matrix.M[0][1], Matrix.M[0][2], Matrix.M[0][3],
         Matrix.M[1][0], Matrix.M[1][1], Matrix.M[1][2], Matrix.M[1][3],
         Matrix.M[2][0], Matrix.M[2][1], Matrix.M[2][2], Matrix.M[2][3],
