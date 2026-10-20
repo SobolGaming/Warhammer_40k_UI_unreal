@@ -78,7 +78,23 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 47 (2026-10-20 UTC) is
+Current A1E status at plan revision 48 (2026-10-20 UTC) is
+**SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**. The sixth [E04-A1E SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r6.md)
+is raw **BLOCKED** for `0ed4221` / run `20261020T035315Z-1e4656b7`.
+It inspected 48 of 81 BODY files; the 13-record/902-row metadata assessment is
+incomplete. Existing staged client/test/settings files lack positive BODY grants.
+This is unresolved review scope, with no implementation defect asserted. The
+[factual record](docs/plans/evidence/2026-10-20-e04a-source-r6-result.json)
+preserves the limitations. All eight phases for this candidate remain NOT RUN;
+there is no native RunRoot. Root has authored the staged-source BODY-grant
+inventory proposal, without implementation changes. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. The path repair and 21 passing pure
+PowerShell cases are unchanged and were not rerun. A new complete source
+inventory, neutral packet/freeze/RunId and fresh SOURCE precede any phase;
+future BODY counts must come from that inventory. Old c500f21 Preflight/SUP PASS
+and Configure FAIL remain historical. Final CODE/different REQ, A1G, A2 and
+broader gates remain open. Standing review consent persists until revoked.
+
+Historical A1E status at plan revision 47 (2026-10-20 UTC) is
 **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. The fifth
 [SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r5.md) is raw
 SOURCE_PASS only for `c500f21` / run `20261020T024733Z-0781e386`; its bounded

@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "recordKind": "CLOSED_SIXTH_SOURCE_BLOCKED_NOT_EXECUTION_OR_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T04:03:42.2203455Z",
+  "sourceHead": "0ed4221749657b8b8fba2cc22e461b470ce7d156",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T035315Z-1e4656b7",
+  "review": {
+    "role": "SOURCE",
+    "status": "BLOCKED",
+    "sessionId": "01a15774-1438-7a22-945d-94eca3a7d884",
+    "report": {
+      "path": "docs/plans/research/2026-10-20-e04a-source-review-r6.md",
+      "bytes": 3129,
+      "sha256": "21D58E978F9FF3B37A4432D78AA3F3BBE82D12B35C37FC3AB11E491DCC20CFB3"
+    },
+    "rawReportCopiedByteExact": true,
+    "finding": "Compiled staged existing client/test/settings routes lack source BODY grants; source uncertainty, not an asserted implementation defect.",
+    "newImplementationDefectAsserted": false,
+    "requiredBodyFiles": 81,
+    "requiredPhysicalRows": 26554,
+    "reviewerReportedCompleteBodyFiles": 48,
+    "assessedBodyIds": [
+      "001-036",
+      "042-045",
+      "073-075",
+      "077-081"
+    ],
+    "unassessedBodyIds": [
+      "037-041",
+      "046-072",
+      "076"
+    ],
+    "completeCoverage": false,
+    "selectedMetadataRecords": 13,
+    "descriptorRows": 902,
+    "selectedMetadataComplete": false,
+    "toolInputCount": 39,
+    "toolOutputCount": 39,
+    "pairingAnomalies": 0,
+    "scopeAudit": "CLOSED_ORDINARY_SUPPORT_AUDIT_BLOCKED_UNCHANGED",
+    "rawReportLinkQualification": "Original /C:/... Markdown link spelling is preserved byte-exact. Physical original paths and clean-body bindings provide navigation; malformed link spelling is not rewritten into the raw report.",
+    "completeLiteralPhysicalRows": 8545
+  },
+  "sourceClosure": {
+    "schemaVersion": 1,
+    "kind": "ROOT_SOURCE_BLOCKED_CLOSED_NO_PHASE_AUTHORITY",
+    "utc": "2026-10-20T04:03:18.9705501Z",
+    "sourceHead": "0ed4221749657b8b8fba2cc22e461b470ce7d156",
+    "runId": "20261020T035315Z-1e4656b7",
+    "sessionId": "01a15774-1438-7a22-945d-94eca3a7d884",
+    "state": "CLOSED_BLOCKED_DO_NOT_REUSE",
+    "rawVerdict": "BLOCKED_UNCHANGED",
+    "rawReport": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-0ed4221-20261020T035315Z-1e4656b7\\last-message.txt",
+      "bytes": 3129,
+      "sha256": "21D58E978F9FF3B37A4432D78AA3F3BBE82D12B35C37FC3AB11E491DCC20CFB3"
+    },
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-0ed4221-20261020T035315Z-1e4656b7\\root-raw-report-seal.original.json",
+      "bytes": 943,
+      "sha256": "F93E352FEB05FDFFFE83551431B183E8620D835B1E0AF71779A104414D36FCE4"
+    },
+    "finalRuntime": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-0ed4221-20261020T035315Z-1e4656b7\\runtime-evidence.final.selected.json",
+      "bytes": 8463,
+      "sha256": "BFB1C1C76289DB768AD798F622AAD789C4DDBB5FCBCB4936AE6DB686B9144453"
+    },
+    "inputCapture": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-0ed4221-20261020T035315Z-1e4656b7\\actual-tool-input-ledger.json",
+      "bytes": 39436,
+      "sha256": "01E3960BC082F462CD3FECDC2C7BBC15B44306344DAA298DEBDEBD665B47FA93"
+    },
+    "completeToolCapture": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-0ed4221-20261020T035315Z-1e4656b7\\actual-complete-tool-input-output-ledger.json",
+      "bytes": 886652,
+      "sha256": "28EE6FC5EEDD37D429BF7E96980D3212DD5D06FB6EBD395F83524F0C5B3C96FC"
+    },
+    "completion": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-0ed4221-20261020T035315Z-1e4656b7\\completion.json",
+      "bytes": 2601,
+      "sha256": "E919F33BCCF27919F86B32BF19BF5C5F8940D5A4B571571A39F4F1BD9A120555"
+    },
+    "processReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-0ed4221-20261020T035315Z-1e4656b7\\owned-job-receipt.json",
+      "bytes": 86917,
+      "sha256": "FB0BE97BDE129DCD6F1B448DE6554125E8CEC80763B06282979432F071F2DF39"
+    },
+    "process": {
+      "pid": 38992,
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedSeconds": 289.0409442,
+      "budgetSeconds": 1800,
+      "assignedBeforeResume": true,
+      "resumed": true,
+      "timedOut": false,
+      "exitConfirmed": true,
+      "cleanupConfirmed": true,
+      "primaryFailure": null,
+      "secondaryErrors": [],
+      "lastJobAccounting": {
+        "stage": "progress",
+        "observedUtc": "2026-10-20T04:01:15.829603Z",
+        "querySucceeded": true,
+        "totalProcesses": 285,
+        "activeProcesses": 0,
+        "totalTerminatedProcesses": 0,
+        "totalUserTime100ns": 155625000,
+        "totalKernelTime100ns": 253906250,
+        "thisPeriodUserTime100ns": 155625000,
+        "thisPeriodKernelTime100ns": 253906250,
+        "totalPageFaultCount": 1939060
+      }
+    },
+    "runtime": {
+      "freshExec": true,
+      "provider": "openai",
+      "contexts": 1,
+      "allObservedReadOnlyNever": true,
+      "memoryMetadata": "disabled",
+      "model": "gpt-6.1-sol",
+      "effort": "ultra",
+      "fullActualGoObserved": true,
+      "byteIdenticalPrompt": false,
+      "extraTrailingCrLfBytes": 2,
+      "equalAfterTrailingCrLfRemoval": true,
+      "lowerAppMemoryOsPidIsolation": "UNVERIFIED"
+    },
+    "postCloseFrozenHashes": {
+      "files": 1906,
+      "mismatches": []
+    },
+    "nativeRunRootCreated": false,
+    "allEightPhases": "NOT_RUN",
+    "reviewerReportedBodyCoverage": "48/81",
+    "reviewerUnassessedBodyIds": [
+      "037-041",
+      "046-072",
+      "076"
+    ],
+    "reviewerCompleteMetadataAnd902": "INCOMPLETE",
+    "materialFinding": "Compiled staged existing client/test/settings routes lack source BODY grants; source uncertainty, not an asserted implementation defect.",
+    "sourceScopeAudit": "PENDING_ORDINARY_COMPLETE_39_CALL_SUPPORT_AUDIT",
+    "noReviewRetry": true,
+    "newCandidateRunFreezeAndAffectedSourceRequired": true,
+    "sourceOrNativeApproval": false,
+    "visibleWindows": 0,
+    "publicationOrMergeAuthority": false
+  },
+  "authorityState": "CLOSED_DO_NOT_REUSE",
+  "remainingReviewLaunches": 0,
+  "nativeRunRootCreated": false,
+  "allEightPhases": "NOT_RUN",
+  "nativeSuiteCount": null,
+  "nativeInputCount": null,
+  "nativeAttemptCount": null,
+  "plannedCounts": {
+    "suites": 8,
+    "uniqueInputs": 38,
+    "attempts": 45
+  },
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "a2ScenariosRequired": 727,
+  "fullA1Acceptance": false,
+  "remediation": {
+    "status": "STAGED_SOURCE_BODY_GRANT_REPAIR_AUTHORED",
+    "implementationChanged": false,
+    "wrapper": {
+      "path": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "bytes": 158769,
+      "sha256": "642FD17AE0E46F179C694CBF593365446F989E7754F01D37BD7CB4942EB08E14"
+    },
+    "pathRepairControls": {
+      "status": "PASS_UNCHANGED_NOT_RERUN",
+      "cases": 21,
+      "failedCases": 0,
+      "nativeProof": false,
+      "report": {
+        "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/configure-path-repair-20261020/offline-control-runs/20261020T035045Z-1d7a592f/pure-cmake-guard-controls.result.json",
+        "bytes": 8636,
+        "sha256": "C0C5B8B030513981292B11D394A9DAF9CFCECCE4843B56879824AAD726A25051"
+      }
+    },
+    "required": "Retain all81 existing BODY grants; append12 missing staged source/config bodies (5906 current-byte rows), covering all33 staged project members. Current-byte scope93/32460; derive fresh actual totals after new freeze. All13 selected metadata/902 descriptor relationship obligations remain.",
+    "criterionWaiver": false,
+    "newCandidateRunAndAffectedSourceRequired": true,
+    "metadataOnlyProposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\staged-project-body-augmentation-0ed4221-20261020\\Add-E04StagedProjectBodyCoverage.v2.PROPOSED.ps1",
+      "bytes": 8689,
+      "sha256": "69A2F0491FE9CCB606AC8E27EA2C2703C99DF3BD549570DE5DFD1B871E424077"
+    },
+    "rootSourceAdoption": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\staged-project-body-augmentation-0ed4221-20261020\\root-source-adoption.original.json",
+      "bytes": 1267,
+      "sha256": "3E7692CFFB20FECC18C0396F02A8DB7037EA8FCDAD8D3766984784FFBD9E33C3"
+    },
+    "frozenSourceMembers": 33,
+    "previouslyBodyCoveredMembers": 21,
+    "addedSourceMembers": 12,
+    "addedPhysicalRows": 5906,
+    "expectedCurrentByteBodyFiles": 93,
+    "expectedCurrentBytePhysicalRows": 32460,
+    "futureCountsDerived": true
+  },
+  "priorExecution": {
+    "sourceHead": "c500f210e59e2db193a76e0339d8ca30a31aa1ec",
+    "runId": "20261020T024733Z-0781e386",
+    "facts": "docs/plans/evidence/2026-10-20-e04a-source-r5-result.json",
+    "status": "CLOSED_FAILED_CONFIGURE_DO_NOT_REUSE",
+    "preflight": "PASS",
+    "supervisorControls": "PASS_6_CASES_3_GROUPS_5_ROOTS_EXPECTED_RAW_FAILURES_RETAINED",
+    "configure": "FAIL",
+    "laterFivePhases": "NOT_RUN",
+    "originalFailureAndLimitsUnchanged": true
+  },
+  "reviewTransmission": "Perpetually approved by direct owner message until explicit revocation; same necessary scope and configured OpenAI Codex destination",
+  "finalCodeAndDifferentReq": "NOT_RUN",
+  "visibleWindows": 0,
+  "publicationOrMergeAuthority": false,
+  "limits": [
+    "Raw SOURCE is BLOCKED and33 BODY files remain unassessed; no formal merits approval is inferred.",
+    "Runtime read-only/never and disabled memory metadata are observed; lower app/multi-agent/memory internals/OS PID isolation remain UNVERIFIED.",
+    "A1G/A2/shared HUD/render/input/Linux/packages and broader gates remain open.",
+    "No repaired-candidate native phase ran. Original failed Configure and all earlier raw reports remain unchanged."
+  ],
+  "ordinaryScopeAudit": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\closed-0ed4221-ordinary-audit-20261020\\ordinary-scope-output-audit.PROPOSED.OPERATOR_ONLY.json",
+      "bytes": 58023,
+      "sha256": "86001186A706FEA792E3BFC8F7ABE2D9BCDB0AE8A75CF02E0DEA3599E197C37E"
+    },
+    "summary": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\closed-0ed4221-ordinary-audit-20261020\\ordinary-scope-output-audit.summary.PROPOSED.OPERATOR_ONLY.md",
+      "bytes": 3891,
+      "sha256": "3EF50671EE416F8EFF78E464FA6948369DA51FCD915E63170E9F1658482C10ED"
+    },
+    "status": "SUPPORT_ONLY_NOT_MERITS_OR_APPROVAL",
+    "inputsAndOutputs": 39,
+    "allCommandExitsZero": true,
+    "pairingAnomalies": 0,
+    "actualOutputTruncations": 0,
+    "numberedBodyMismatches": 0,
+    "completeLiteralFiles": 48,
+    "requiredFiles": 81,
+    "completeLiteralRows": 8545,
+    "requiredRows": 26554,
+    "remainingSelectedRecords": 12,
+    "selectedMetadataAnd902Complete": false,
+    "ungrantedBodyDisclosureObserved": false,
+    "originalSourceClosurePendingFieldPreservedAsSnapshot": true
+  }
+}

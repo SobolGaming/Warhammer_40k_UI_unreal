@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. SOURCE r5 passed only the old `c500f21` candidate; Preflight and supervisor controls passed, then Configure failed on generated SDK RC-path serialization. The authored repair passed 21 pure PowerShell cases with zero failures; checkpoint, a new candidate/freeze/run and fresh affected SOURCE are next. No native parser suite ran.
+The bounded E04-A1E proof is **SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**. SOURCE r6 is BLOCKED on incomplete 48/81 BODY coverage, incomplete 13-record/902-row metadata assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. All eight phases for `0ed4221` / run `20261020T035315Z-1e4656b7` remain NOT RUN. The staged BODY-grant inventory proposal is authored: 12 missing files/5,906 rows, estimated 93 BODY files/32,460 rows with all 33 staged members at current bytes; actual frozen counts remain derived. A complete fresh SOURCE packet is next.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +76,23 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 47 records **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. The fifth
+Plan revision 48 records **SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**.
+The sixth [E04-A1E SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r6.md)
+is raw **BLOCKED** for `0ed4221` / run `20261020T035315Z-1e4656b7`.
+It inspected 48 of 81 BODY files; the 13-record/902-row metadata assessment is
+incomplete. Existing staged client/test/settings files lack positive BODY grants.
+This is unresolved review scope, with no implementation defect asserted. The
+[factual record](docs/plans/evidence/2026-10-20-e04a-source-r6-result.json)
+preserves the limitations. All eight phases for this candidate remain NOT RUN;
+there is no native RunRoot. Root has authored the staged-source BODY-grant
+inventory proposal, without implementation changes. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. The path repair and 21 passing pure
+PowerShell cases are unchanged and were not rerun. A new complete source
+inventory, neutral packet/freeze/RunId and fresh SOURCE precede any phase;
+future BODY counts must come from that inventory. Old c500f21 Preflight/SUP PASS
+and Configure FAIL remain historical. Final CODE/different REQ, A1G, A2 and
+broader gates remain open. Standing review consent persists until revoked.
+
+Historical plan revision 47 records **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. The fifth
 [SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r5.md) is raw
 SOURCE_PASS for `c500f21` / run `20261020T024733Z-0781e386` only, with the
 [factual record's](docs/plans/evidence/2026-10-20-e04a-source-r5-result.json)

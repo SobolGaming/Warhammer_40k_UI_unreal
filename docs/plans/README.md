@@ -1,11 +1,27 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 47 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 48 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 47 records **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. The fifth
+Revision 48 records **SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**.
+The sixth [E04-A1E SOURCE report](research/2026-10-20-e04a-source-review-r6.md)
+is raw **BLOCKED** for `0ed4221` / run `20261020T035315Z-1e4656b7`.
+It inspected 48 of 81 BODY files; the 13-record/902-row metadata assessment is
+incomplete. Existing staged client/test/settings files lack positive BODY grants.
+This is unresolved review scope, with no implementation defect asserted. The
+[factual record](evidence/2026-10-20-e04a-source-r6-result.json)
+preserves the limitations. All eight phases for this candidate remain NOT RUN;
+there is no native RunRoot. Root has authored the staged-source BODY-grant
+inventory proposal, without implementation changes. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. The path repair and 21 passing pure
+PowerShell cases are unchanged and were not rerun. A new complete source
+inventory, neutral packet/freeze/RunId and fresh SOURCE precede any phase;
+future BODY counts must come from that inventory. Old c500f21 Preflight/SUP PASS
+and Configure FAIL remain historical. Final CODE/different REQ, A1G, A2 and
+broader gates remain open. Standing review consent persists until revoked.
+
+Historical revision 47 records **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. The fifth
 [SOURCE report](research/2026-10-20-e04a-source-review-r5.md) is raw SOURCE_PASS
 only for `c500f21` / run `20261020T024733Z-0781e386`. The
 [factual record](evidence/2026-10-20-e04a-source-r5-result.json) retains its bounded
