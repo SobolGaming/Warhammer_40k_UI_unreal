@@ -92,6 +92,27 @@ coverage, both finite witnesses and raw seams. All eight native phases NOT_RUN,
 no native RunRoot/visible0; A1G/A2/plain-DEL/full fidelity and final CODE/different
 REQ/later gates remain open. Standing perpetual source/API consent persists.
 
+OWN17 (2026-10-20 23:36 UTC) adds a **conditional**, currently untriggered scope
+policy for the custom E04-A1E assurance harness/response-closure tooling. If the
+upcoming review requires nontrivial special third-layer tool-assurance fixes,
+remove that work from the critical path and record it as the plan's
+[optional end-of-migration follow-up](docs/plans/unreal-migration-plan.md#17-optional-end-of-migration-follow-up),
+which may become obsolete. Judge nontriviality by owner time cost and avoid
+expensive repeated hardening. Use relevant actual build/functional tests as proof
+for this small component; fix real component defects. Preserve all old failures
+and incompleteness; deferred never means passed. Normal UBT prerequisites,
+unrelated review/safety/manual-execution gates and final CODE/different REQ remain
+unchanged. This policy grants no execution approval and changes no frozen packet
+or technical input by itself.
+
+OWN18 (2026-10-20 23:39 UTC) requires remote backup at each next checkpoint:
+push the current migration branch to the verified existing project remote and
+verify that its remote ref contains the checkpoint commit. Use the workspace's
+github-full-access credential through gh without exposing it. No force push,
+history rewrite, unrelated branches, new remote or ignored/private evidence.
+Report the actual branch, remote and verified hash; local commits alone are not
+a remote backup. This adds no merge or execution authority.
+
 Historical revision 74: the [closed round](docs/plans/research/2026-10-20-e04a-value-build-source-closure.md)
 preserves five raw reports/437 pairs/zero admissions and five unlaunched jobs.
 

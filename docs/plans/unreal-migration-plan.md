@@ -8,6 +8,19 @@
 **Canonical destination:** `Warhammer_40k_UI_unreal/docs/plans/unreal-migration-plan.md` (this file).
 **Review status:** **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED**, recorded by root at `2026-10-17T06:00:32.004673+00:00` for reviewed head `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`. CODE r13 is PASS. Valid initial REQ r3 remains BLOCKED on administrative A1/A2; its separate supplement is PASS and closes those items. Root combined those dispositions for this narrow diagnostic; the raw initial REQ verdict remains BLOCKED. Contaminated original REQ r2 is invalid and supplies no approval. Normal execution remains `20261017T044903Z-b0169768` on source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`, with unchanged 87/14/132/2 counts, separate 135 pure PowerShell controls/39 inputs and actual settings/wire/process evidence. Publication is a separate metadata overlay outside the reports' reviewed head. Full E01/M01/M02, research/implementation gates, the original 30-second budget, production responsiveness, UE HTTP, rendering, packaging and Linux remain open. [Final review provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json); current and historical detail in Section 0.8.
 
+**Prospective owner policy — OWN17 (2026-10-20 23:36 UTC):** If the upcoming
+review requires nontrivial assurance fixes to the custom E04-A1E harness/response-
+closure tooling (the special third-layer validation tool), remove that tool-
+assurance work from the critical path and carry it as an optional
+[end-of-migration follow-up](#17-optional-end-of-migration-follow-up), possibly
+obsolete by then. Judge nontriviality by owner time cost and avoid another costly
+hardening loop. Relevant actual builds and functional tests provide proof for
+this small component; real component defects still require fixes. This condition
+has **not been triggered**. Preserve all old failures/incompleteness; deferred
+work is never a PASS. Normal UBT prerequisites, unrelated review/safety/manual-
+execution gates and final CODE/different REQ remain unchanged. This policy grants
+no execution approval.
+
 ### Repository routes and provenance
 
 | Name used in this plan | Actual project and responsibility | Start here |
@@ -2086,7 +2099,7 @@ All 67 wrapper process records have exit 0, no timeout and redaction PASS. Captu
 
 **Historical evidence:** the separately approved earlier SLOW120 Capture and revision-4 supplement retain their 40 Python tests, 14 Capture checks, 132 native successes and two automated checks for their recorded inputs. The [preserved schema-1 result](evidence/2026-10-17-e01-slow120-result-schema1-history.json), SHA256 `7A0718455FE72F1DC18CC3665DA875144782599434AB4B7C30CC00A0144C4D0F`, and [execution journal](evidence/2026-10-16-e01-boundary.md) preserve past attempts, source-review history and the original 30-second FAIL/UNKNOWN. Prior source/helper reviews are pre-execution or historical records, not final reviews of this completed chain. E02–E08 have not run; the [E02 architecture packet](research/2026-10-16-e02-world-input-packet.md) is conditional planning only. Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, the original 30-second budget, production responsiveness, UE HTTP, rendering, packaging, Linux, Core #588/#589/#590 and RISK19 remain open or unaccepted.
 
-**Owner decisions recorded in this chat on 2026-10-16:**
+**Owner decisions (initial decisions 2026-10-16; later dates shown per row):**
 
 | Record | Decision | Affected work / remaining limits |
 |---|---|---|
@@ -2106,6 +2119,8 @@ All 67 wrapper process records have exit 0, no timeout and redaction PASS. Captu
 | OWN14 | **“Please go ahead with the increased 120 diagnostic”**, 2026-10-16 | After the late-response explanation, authorize a separate E01-SLOW120 run with a 120-second total HTTP request budget and remaining-time-capped reads. Preserve three-second connect, 30-second managed readiness, 30-minute process bounds and prior FAIL/UNKNOWN evidence. Freeze/review before a fresh run; no production-latency acceptance, Core edits or new host authority |
 | OWN15 | **Apply the legacy implementer / independent code reviewer / independent requirements auditor protocol**, owner's progress chat, 2026-10-17 UTC | New unprimed contexts, enforced read-only/approval-never, requested memory suppression with honest runtime limits, frozen candidate and raw evidence, separate findings/remediation/re-freeze/fresh reviews. Update this plan and AGENTS. Existing diagnostic evidence stays intact; affected final acceptance/publication waits for the renewed gate |
 | OWN16 | **Regular local checkpoint commits of coherent increments**, owner's progress chat, 2026-10-17 UTC | Save recoverable work regularly, before risky changes and after fixes; record actual tests and independent-review status, exclude private/generated artifacts, and keep reviewing/executing candidates frozen. This adds no acceptance or push/merge authority |
+| OWN17 | **Conditional deferral of costly special third-layer tooling assurance**, owner's progress chat, 2026-10-20 23:36 UTC | If the upcoming review needs nontrivial custom E04-A1E harness/response-closure assurance fixes, move that work to the optional end-of-migration follow-up; it may become obsolete. Use owner time cost to avoid expensive hardening loops and relevant actual builds/functional tests as component proof. Real component defects remain must-fix; old failures stay; deferral is not PASS. Condition untriggered; unrelated gates and execution approval unchanged |
+| OWN18 | **Push the branch at the next checkpoint for remote backup**, owner's progress chat, 2026-10-20 23:39 UTC | Push the current migration branch to its verified existing project remote and verify the remote ref contains the checkpoint commit. No force push, history rewrite, unrelated branches, new remote or ignored/private evidence upload. Report branch, remote and actual hash verification; local commits alone are not remote backup. No new merge or execution authority |
 
 The source baseline is Arcade `5088c1c49dcaff29eb59fb64b3063d30214dde73` with supported Core 44.1; the separately selected Unreal target is Core `5f5097...` / 44.3.33. Existing Arcade `.venv` provenance is `4ee7cc...`; none of these identities may be silently substituted. Both sibling source worktrees were clean. The Unreal repository initially had no commits or files besides `.git`. The owner-selected project destination supersedes the old shared-repository nesting.
 
@@ -4042,3 +4057,15 @@ Before implementing a milestone, re-read its affected source at the exact approv
 [U25]: https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-automation-tool-overview-for-unreal-engine
 [U26]: https://docs.opencv.org/3.4.5/d9/dab/tutorial_homography.html
 [U27]: https://docs.opencv.org/4.13.0/d4/d94/tutorial_camera_calibration.html
+
+## 17. Optional end-of-migration follow-up
+
+**OWN17 — conditional, not yet triggered:** If the upcoming review requires
+nontrivial fixes to the special custom E04-A1E assurance harness/response-closure
+tooling, revisit that deferred assurance work only as an optional task after the
+migration. It may be obsolete by then; avoid another expensive hardening loop.
+Record the deferred scope and preserved failures without claiming that the tool
+passed. Relevant actual builds and functional tests remain the small component's
+proof; actual component defects still require fixes. This does not defer normal
+UBT prerequisites or unrelated review, safety, manual-execution and final
+CODE/different REQ gates, and grants no execution approval.
