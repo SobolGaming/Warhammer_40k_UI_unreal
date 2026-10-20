@@ -105,9 +105,12 @@ const FGeneratedSpec Generated[] = {
     {TEXT("A1-L.aliases.above"), TEXT("aliases"), 10001, nullptr, EParseCode::AliasLimit},
     {TEXT("A1-L.scalar.below"), TEXT("scalar"), 65535, nullptr, EParseCode::Success},
     {TEXT("A1-L.scalar.at"), TEXT("scalar"), 65536, nullptr, EParseCode::Success},
-    {TEXT("A1-L.scalar.above"), TEXT("scalar"), 65537, nullptr, EParseCode::ScalarLimit}
+    {TEXT("A1-L.scalar.above"), TEXT("scalar"), 65537, nullptr, EParseCode::ScalarLimit},
+    {TEXT("A1-F11"), TEXT("LiteralUtf8"), 0, TEXT("[null, x]\n"), EParseCode::NullPropertiesUnavailable},
+    {TEXT("A1-F12"), TEXT("LiteralUtf8"), 0, TEXT("[null, a: [unterminated\n"), EParseCode::MalformedYaml},
+    {TEXT("A1-F13"), TEXT("LiteralUtf8"), 0, TEXT("[null,[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[x]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]], [unterminated\n"), EParseCode::NullPropertiesUnavailable},
 };
-static_assert(UE_ARRAY_COUNT(Generated) == 30);
+static_assert(UE_ARRAY_COUNT(Generated) == 33);
 
 FString LiteralText(const FGeneratedSpec& Spec)
 {
@@ -237,8 +240,8 @@ public:
             !Check(TEXT("Create owned suite inputs"), IFileManager::Get().MakeDirectory(*FPaths::Combine(SuiteRoot, TEXT("inputs")), true))) { return false; }
         TSharedPtr<FJsonObject> Corpus, Cases;
         if (!ReadManifest(TEXT("corpus-manifest.json"), Corpus) || !ReadManifest(TEXT("generated-cases.json"), Cases)) { return false; }
-        if (!IndexManifest(Corpus, TEXT("canonical"), 10) || !IndexManifest(Cases, TEXT("generated"), 30)) { return false; }
-        return Check(TEXT("Exactly40 distinct frozen input IDs"), Descriptors.Num() == 40);
+        if (!IndexManifest(Corpus, TEXT("canonical"), 10) || !IndexManifest(Cases, TEXT("generated"), 33)) { return false; }
+        return Check(TEXT("Exactly43 distinct frozen input IDs"), Descriptors.Num() == 43);
     }
 
     FParseResult Run(const FString& Id, int32 Attempt = 1)
@@ -388,7 +391,7 @@ private:
             bool bCanonical = false;
             for (int32 I = 1; I <= 10; ++I) { bCanonical |= Id == FString::Printf(TEXT("A1-C%02d"), I); }
             if (!Check(TEXT("Unique known ID in correct manifest"), !Descriptors.Contains(Id) &&
-                ((Count == 10 && bCanonical) || (Count == 30 && FindSpec(Id) != nullptr)))) { return false; }
+                ((Count == 10 && bCanonical) || (Count == 33 && FindSpec(Id) != nullptr)))) { return false; }
             Descriptors.Add(Id, Entry);
         }
         return true;
@@ -579,6 +582,27 @@ bool FE04A1Lexical::RunTest(const FString&)
                 !R.Diagnostic.Mark.bAvailable && R.Diagnostic.Observed == 0 && R.Diagnostic.Limit == 0);
         }
     }
+    const TCHAR* NullProbeIds[] = {TEXT("A1-F11"), TEXT("A1-F12"), TEXT("A1-F13")};
+    for (const TCHAR* Id : NullProbeIds)
+    {
+        const FGeneratedSpec* Spec = FindSpec(Id);
+        if (!P.Check(TEXT("Null-only syntax regression has exact fixed spec"), Spec != nullptr)) { continue; }
+        const FParseResult R = P.Run(Id);
+        P.Check(TEXT("Null-only syntax probe keeps exact independent refusal type"),
+            R.Code == Spec->Code && R.Diagnostic.Code == Spec->Code && !R.IsSuccess());
+        P.Check(TEXT("Null-only syntax probe never publishes a partial document"),
+            R.Document.Nodes.IsEmpty() && R.Document.OriginalBytes.IsEmpty() &&
+            R.Document.Root == INDEX_NONE && R.Document.ObservedMaximumCollectionDepth == 0 &&
+            R.Document.ObservedAliasOccurrences == 0);
+        if (Spec->Code == EParseCode::NullPropertiesUnavailable)
+        {
+            P.Check(TEXT("Original null diagnostic survives completed or bounded probe"),
+                R.Diagnostic.Code == EParseCode::NullPropertiesUnavailable &&
+                R.Diagnostic.Mark.bAvailable && R.Diagnostic.Mark.Position == 1 &&
+                R.Diagnostic.Mark.Line == 0 && R.Diagnostic.Mark.Column == 1 &&
+                R.Diagnostic.Observed == 2 && R.Diagnostic.Limit == 0);
+        }
+    }
     return P.Finish();
 }
 
@@ -587,7 +611,7 @@ bool FE04A1Limits::RunTest(const FString&)
 {
     FProbe P(*this, TEXT("Parser.ResourceBounds"), TEXT("parser-resource-bounds"));
     if (!P.Initialize()) { return false; }
-    for (int32 I = 15; I < static_cast<int32>(UE_ARRAY_COUNT(Generated)); ++I)
+    for (int32 I = 15; I < 30; ++I)
     {
         const FGeneratedSpec& S = Generated[I];
         const FParseResult R = P.Run(S.Id);

@@ -7,16 +7,16 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**.
-Revision 74 records five closed SOURCE jobs/437 tool pairs and zero admissions.
-Five other jobs never received GO or launch. Confirmed source findings require
-repair; all eight native phases remain NOT_RUN and visible count zero.
+The bounded E04-A1E proof is **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
+Revision 75 records applied null/response/environment repairs and 14 matching
+PS-only controls. Exact successor bindings and affected SOURCE remain pending;
+C#4/Rules86/whole18 and all eight native phases are NOT_RUN, visible count zero.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision74 SOURCE closure](docs/plans/research/2026-10-20-e04a-value-build-source-closure.md)
-  for current findings, exact evidence, bounded repair work and open gates.
+- Use the [revision75 repair checkpoint](docs/plans/research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
+  for current source changes, bounded control evidence and open gates.
 - `../Warhammer_40k_UI_arcade` is the legacy client, also called `Warhammer_40k_UI`
   in the owner's request. It supplies behavior and configuration references.
 - `../Warhammer_40k_AI` is the reference-only authoritative core. This migration
@@ -80,6 +80,9 @@ The later publication commit is a separate metadata overlay; the reports did not
 review that later commit. Execution is stopped. The narrow diagnostic is accepted;
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
+
+Historical revision 74: the [SOURCE closure](docs/plans/research/2026-10-20-e04a-value-build-source-closure.md)
+preserves five raw reports/437 pairs, zero admissions and five never-launched jobs.
 
 Historical A1E checkpoint at plan revision 73:
 

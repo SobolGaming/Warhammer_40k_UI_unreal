@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 74 — VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED. Five actual SOURCE jobs closed for beef566/run220644 with 437 captured tool pairs, zero admissions and five source-supported findings requiring repair. Five other assignments never received GO or launch. Post-close 2,476 listed inputs match; all eight native phases remain NOT_RUN.
+**Revision:** 75 — NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING. Applied null, response-file and environment repairs follow closure b7c7ce1. Fourteen selected PowerShell controls matched; C#4/Rules86/whole18 and all eight native phases remain NOT_RUN. Exact successor bindings and affected SOURCE are pending.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,25 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 74 changes
+### Revision 75 changes
+
+Status is **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The
+[repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
+and [factual record](evidence/2026-10-20-e04a-null-response-env-repairs.json) bind
+applied null-only first-document, response-file validation and UBT_EXTRA_ARGS
+repairs after `b7c7ce1`. All preceding 40 inputs/30 recipes remain; F11-F13 give
+43 inputs/33 recipes/50 attempts/eight suites. The strengthened 151-byte F13
+addresses a test-observability weakness, not a new parser implementation defect.
+
+One bounded PowerShell host matched all 14 selected response/child-environment
+controls in 1.1780307 internal seconds/1.5770549 outer seconds, zero proof/native
+roots and no timeout. The four C# checks, current Rules 86 controls and whole
+18-case control remain NOT_RUN. No SOURCE or native approval follows. New exact
+source/run/input bindings and affected independent SOURCE duties remain pending;
+all eight native phases NOT_RUN/no native RunRoot/visible0. A1G/A2/plain-DEL/full
+fidelity, final CODE/different REQ and later gates remain open; consent persists.
+
+### Revision 74 history
 
 Status is **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**. The
 [closed value/build SOURCE round](research/2026-10-20-e04a-value-build-source-closure.md)
@@ -1330,27 +1348,25 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the closed value/build SOURCE round, then repair
-the confirmed source defects before successor bindings or native release.**
-Status is **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**. The
-[closed value/build SOURCE round](research/2026-10-20-e04a-value-build-source-closure.md)
-and [factual record](evidence/2026-10-20-e04a-value-build-source-closure-result.json)
-bind publication/technical `beef5663687c92e8773e2596f4beaa5de3d9ae8e`, base
-`03d28af` and run `20261020T220644Z-1f48b199`. All five actual jobs closed:
-D CHANGES_REQUESTED/77 pairs, W_A PASS/97, W_B CHANGES_REQUESTED/120,
-P PASS/80 and I CHANGES_REQUESTED/63; total 437, zero admissions. The five
-remaining assignments received no GO or launch. Post-close 2,476 listed files
-match with zero differences/conflicts; this is a point-in-time observation.
+**Current assignment: checkpoint the applied null/response/environment repairs,
+then refresh exact affected source/input bindings before SOURCE/native release.**
+Status is **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The
+[repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
+and [factual record](evidence/2026-10-20-e04a-null-response-env-repairs.json) bind
+applied null-only first-document, response-file validation and UBT_EXTRA_ARGS
+repairs after `b7c7ce1`. All preceding 40 inputs/30 recipes remain; F11-F13 give
+43 inputs/33 recipes/50 attempts/eight suites. The strengthened 151-byte F13
+addresses a test-observability weakness, not a new parser implementation defect.
 
-F01 diagnostic ordering, the generated-input count label, inherited UBT_EXTRA_ARGS
-and two response-file validation cases require bounded repair. Preserve the
-original 38 expectations/current 40 inputs/30 recipes/47 attempts/eight suites.
-P's mandatory delivery was confirmed, but its raw PASS missed F01; raw reports
-remain unchanged and no favorable completeness is inferred from ordinary audits.
-All eight native phases remain NOT_RUN/no native RunRoot/visible count zero.
-Plain-DEL/context-sensitive lexical/A2 production risk and final CODE/different
-REQ after execution/evidence freeze, A1G/HUD/Linux/package/full acceptance remain
-open. Standing perpetual source/API consent is unchanged.
+One bounded PowerShell host matched all 14 selected response/child-environment
+controls in 1.1780307 internal seconds/1.5770549 outer seconds, zero proof/native
+roots and no timeout. The four C# checks, current Rules 86 controls and whole
+18-case control remain NOT_RUN. No SOURCE or native approval follows. New exact
+source/run/input bindings and affected independent SOURCE duties remain pending;
+all eight native phases NOT_RUN/no native RunRoot/visible0. A1G/A2/plain-DEL/full
+fidelity, final CODE/different REQ and later gates remain open; consent persists.
+
+**Historical revision 74 closure:** The [closed round](research/2026-10-20-e04a-value-build-source-closure.md) preserves five raw reports/437 pairs and zero admissions; five other jobs never launched.
 
 **Historical assignment (revision 73): checkpoint the applied value/build guards, then refresh exact
 source/input bindings and fresh affected SOURCE coverage before native release.**
@@ -1647,7 +1663,7 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **2026-10-16 finding:** [Complete field/diagnostic/YAML inventory](research/2026-10-16-capability-checklist.md) and [total active/inactive/reject normalization](research/2026-10-16-parity-closure-design.md) finish source/design mapping. Immutable yaml-cpp0.9.0 evaluation candidate is56e3bb550c91fd7005566f19c079cb7a503223cf. E04 compiler/ABI/private-exception/corpus/render proof remains BLOCKED. No library adoption, compatibility PASS, silent dropped fields or new supported editor is implied.
 
-**Current source status (revision 74):** **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**. The [closure checkpoint](research/2026-10-20-e04a-value-build-source-closure.md) preserves five closed jobs/437 pairs, zero admissions and five source-supported findings. Five other jobs never launched; all native/final/later gates and plain-DEL/context-sensitive lexical/A2 production risk remain open.
+**Current repair status (revision 75):** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md) records applied source changes and 14 matching PS-only controls, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings, affected SOURCE, A1G/A2/full fidelity and final/later gates remain open.
 
 **Historical repair status (revision 73):** **VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-value-build-repair-checkpoint.md) records applied bounded guards and seven passing offline helper controls; fresh affected SOURCE and actual native/final/later gates remain open. Plain-DEL/context-sensitive lexical/A2 production risk remains unclosed.
 
@@ -3024,7 +3040,7 @@ Retain separate preferences and composition files. Use a whitelist registry of w
 
 **Historical source finding (2026-10-16):** Candidate parser: **yaml-cpp 0.9.0**, evaluation pin `56e3bb550c91fd7005566f19c079cb7a503223cf` / tag `yaml-cpp-0.9.0`, MIT license. [Primary-source/ABI refresh](research/2026-10-16-bootstrap-and-native-parser.md) retrieved 2026-10-16. E04 must still verify Unreal compiler/runtime, private exception boundary and actual PyYAML6.0.3 corpus behavior; [normalization design](research/2026-10-16-parity-closure-design.md) specifies the mapping. No library was adopted, downloaded, built or installed. No third-party Unreal wrapper is required. Resolver/alias/duplicate/merge compatibility cannot be inferred from YAML branding.
 
-**Current source status (revision 74):** **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**. The [closure checkpoint](research/2026-10-20-e04a-value-build-source-closure.md) preserves five closed jobs/437 pairs, zero admissions and five source-supported findings. Five other jobs never launched; all native/final/later gates and plain-DEL/context-sensitive lexical/A2 production risk remain open.
+**Current repair status (revision 75):** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md) records applied source changes and 14 matching PS-only controls, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings, affected SOURCE, A1G/A2/full fidelity and final/later gates remain open.
 
 **Historical repair status (revision 73):** **VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-value-build-repair-checkpoint.md) records applied bounded guards and seven passing offline helper controls; fresh affected SOURCE and actual native/final/later gates remain open. Plain-DEL/context-sensitive lexical/A2 production risk remains unclosed.
 
@@ -3810,11 +3826,11 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**. Checkpoint the
-[closed SOURCE round](research/2026-10-20-e04a-value-build-source-closure.md), then
-repair F01 diagnostic ordering, count labelling, inherited UBT_EXTRA_ARGS and
-response-file validation. Five other assignments remain unlaunched; no native
-release or admission follows.
+**Ready now:** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
+Checkpoint the [applied repairs](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md), then derive new exact
+source/run/common/index/assignment/unit/data bindings and affected SOURCE coverage.
+Fourteen selected PS controls matched; no whole phase, C# or native pass follows.
+
 
 **Historical readiness (revision 73):** **VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. Checkpoint
 applied parser/fixture, generated-build-input and early-target guards using the
@@ -3836,7 +3852,7 @@ approval, no successor GO exists and all eight native phases remain NOT_RUN.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Current progress (revision 74):** VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED. Five closed jobs/437 pairs, two raw PASS and three CHANGES_REQUESTED, zero admissions. Five other jobs never received GO or launch. Post-close 2,476-file rehash matched; five source-supported repairs remain, all eight native phases NOT_RUN and final/later gates open.
+**Current progress (revision 75):** NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING. Null/response/environment source repairs applied; 43 inputs/33 recipes/50 attempts/eight suites. Actual PS14 matched, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings/SOURCE, A1G/A2/final/later gates remain open; prior closed reports/admissions unchanged.
 
 **Historical progress (revision 73):** VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING. Three bounded repairs are applied after `b553631`; exact successor source/run/input refresh is pending. Seven offline helper controls passed/zero external roots. Forty inputs/47 planned attempts/eight suites; no native phase, admission or final acceptance. Plain-DEL/A2 production risk and all later gates remain open.
 
@@ -3876,7 +3892,7 @@ separate acceptance gates remain open.
 
 **Work completed so far (historical through revision 49):** imported plan/strong instructions, M00 metadata, legacy 44.1 source characterization and selected 44.3.33 adaptation, profile/capability/design checklists, Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units / 14 Capture checks / 132 native successes / two evidence checks, plus separate 135 PowerShell controls / 39 inputs. E02 `202805` on `5e92ba3` completed affected SOURCE and all seven producer phases, 16 native cases / 18174 assertions, separate SUP6 and six images. Root recorded bounded Windows synthetic acceptance after separate administrative recovery; original CODE r3, REQ r2 and v4 raw BLOCKED reports and their limits are unchanged. The exact 18 E04-A1E source paths are now canonical, with eight planned suites / 38 unique IDs / 45 attempts and pinned yaml-cpp acquisition verified (394 files / 5156535 bytes). The first SOURCE assessment remains BLOCKED; the second remains CHANGES_REQUESTED for the now-restored strict Parse-JsonLine (15 offline cases / 38 checks passed). The third is BLOCKED with incomplete coverage and a DDC observation gap. Its guard repair passed 21 offline cases/63 checks. The fourth assessment remains BLOCKED with 19/78 coverage and unselected metadata exposure. The fifth raw SOURCE_PASS applies only to c500f21/run024733 with bounded Editor qualifications. That run passed Preflight (zero roots) and six supervisor controls/three groups/five roots, then Configure failed on generated SDK RC-path escaping. Root CMake exited 1 in about 0.859 seconds; one unidentified member lingered until confirmed timeout cleanup/final zero, and producer preservation missed its deadline. Separate manual checks matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings pairs without passing the failed phase. The authored path repair passed 21 pure PowerShell cases with zero failures; at revision 47 checkpoint/new candidate/freeze/RunId/fresh affected SOURCE were pending. The subsequent sixth SOURCE review on 0ed4221/run035315 is raw BLOCKED after 48/81 BODY files, with incomplete 13-record/902-row assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. The full staged-source BODY-grant inventory proposal is authored without implementation changes or rerunning the controls; a neutral complete SOURCE packet is next. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. All eight phases for 0ed4221 remain NOT RUN/no native RunRoot. Subsequent r7 on e505b21/run041347 is raw BLOCKED after 55/93 BODY files, with all 33 staged members granted, incomplete 13/902 assessment and no confirmed implementation defect/binding/access denial. A prospective blind scoped SOURCE plus fresh independent integration design is being prepared, not adopted; full current 93-file union/all selected data/material relationships and unchanged criteria remain required. All eight e505b21 phases are NOT RUN/no native RunRoot; future frozen descriptors/counts remain derived. The five later phases remain NOT RUN; no native parser suite ran and final CODE/different REQ are pending. A1G, all 727 A2 compatibility scenarios, shared HUD/render/input, RQ23/RQ24, full E02/M02/E04, Linux, packages and real-Core play remain open. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
 
-**Next concrete step:** Checkpoint this closure before integrating bounded source repairs; preserve F01 and all original expectations. Then rebind affected source/data and complete required independent SOURCE duties, both whole finite witnesses and raw seams under unchanged v7.3 before native release. Do not launch the remaining-five proposal on this rejected candidate or transfer old GO/PASS. Final CODE/different REQ follows actual execution/evidence freeze; lexical/A2 and later gates remain open.
+**Next concrete step:** Checkpoint these repairs and bounded PS14 evidence, derive fresh exact source/run/common/index/assignment/unit/data bindings, and obtain required affected independent SOURCE coverage, both complete finite witnesses and raw seams under unchanged v7.3 before native release. No old GO/PASS transfers; C#4/Rules86/whole18 remain NOT_RUN. Final CODE/different REQ follows actual execution/evidence freeze; A1G/A2/plain-DEL and later gates stay open.
 
 **Historical next step (revision 73):** Checkpoint the applied repairs, derive fresh exact publication/run/common/index/assignment/source/data bindings and obtain affected independent SOURCE coverage under unchanged v7.3, including both complete finite witnesses, before native release. Preserve revision72 closure, unresolved lexical/A2 limits and final CODE/different-REQ/later gates; no old PASS/GO transfers.
 

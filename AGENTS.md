@@ -78,26 +78,22 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 74 (2026-10-20 UTC) is
-**VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**. The
-[closed value/build SOURCE round](docs/plans/research/2026-10-20-e04a-value-build-source-closure.md)
-and [factual record](docs/plans/evidence/2026-10-20-e04a-value-build-source-closure-result.json)
-bind publication/technical `beef566`, base `03d28af` and run
-`20261020T220644Z-1f48b199`. Five jobs closed with 437 complete tool pairs:
-D/W_B/I CHANGES_REQUESTED, W_A/P raw PASS, zero admissions. C_CLIENT_STAGE,
-P_HARNESS_PROCESS, G_BUILD_SELECTION, G_RUNTIME_STARTUP and I_GRAPH_CROSS
-received no GO or launch. P mandatory delivery was confirmed, but its no-defect
-conclusion missed F01; ordinary closure checks do not certify full semantics.
+Current A1E status at plan revision 75 (2026-10-20 UTC) is
+**NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The
+[repair checkpoint](docs/plans/research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
+and [factual record](docs/plans/evidence/2026-10-20-e04a-null-response-env-repairs.json)
+bind applied null-only first-document, response-file validation and effective
+UBT_EXTRA_ARGS source repairs after `b7c7ce1`. Original 40 inputs/30 recipes remain;
+F11-F13 give 43 inputs/33 recipes/50 attempts/eight suites. Fourteen selected
+PowerShell controls matched, zero proof/native roots; C#4/Rules86/whole18 remain
+NOT_RUN. This is no SOURCE approval or native-phase pass. Checkpoint/refreeze
+exact changed source/run/unit/data bindings and affected independent SOURCE
+coverage, both finite witnesses and raw seams. All eight native phases NOT_RUN,
+no native RunRoot/visible0; A1G/A2/plain-DEL/full fidelity and final CODE/different
+REQ/later gates remain open. Standing perpetual source/API consent persists.
 
-Checkpoint first, then repair F01 diagnostic ordering, generated-input count
-labelling, inherited UBT_EXTRA_ARGS and response-file validation. Preserve F01's
-original MalformedYaml expectation and original 38/current 40 inputs, 30 recipes,
-47 attempts/eight suites. Post-close 2,476 listed files match, zero differences/
-conflicts; no continuous-immutability claim. All eight native phases remain NOT_RUN,
-no native RunRoot, visible count zero. Plain-DEL/context-sensitive lexical/A2 risk
-remains open without waiving applicable A1 criteria. Final independent CODE and a
-different REQ after actual execution/evidence freeze, A1G/HUD/Linux/package/full
-acceptance remain open. Standing perpetual source/API consent persists.
+Historical revision 74: the [closed round](docs/plans/research/2026-10-20-e04a-value-build-source-closure.md)
+preserves five raw reports/437 pairs/zero admissions and five unlaunched jobs.
 
 Historical A1E status at plan revision 73 (2026-10-20 UTC) is
 **VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. The

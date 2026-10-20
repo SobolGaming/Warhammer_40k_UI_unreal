@@ -10,7 +10,7 @@
 // Source-bound to acquired 56e3bb550c91fd7005566f19c079cb7a503223cf:
 // parser.h/parser.cpp confirm stream lifetime and complete HandleNextDocument
 // driving; callback/mark/anchor/style/exception declarations match below.
-// Source inspection is not compilation/ABI/runtime evidence. All OnNull events
+// Source inspection is not compilation/ABI/runtime evidence. Graph OnNull events
 // refuse; pinned scalar escapes producing invalid UTF8 refuse before copying.
 
 namespace Warhammer::E04A1::Private
@@ -57,6 +57,105 @@ struct FFrame
 {
     int32 Node = INDEX_NONE;
     int32 PendingKey = INDEX_NONE;
+};
+
+// Private control signal: an incomplete probe restores the original null refusal.
+struct FNullSyntaxProbeStopped {};
+
+// This sink never creates a graph, a null placeholder or an owned vendor value.
+// Bounds apply to the fresh first-document probe only; its completion is not
+// published as a successful parse or a whole-stream syntax-valid assertion.
+class FNullSyntaxProbe final : public YAML::EventHandler
+{
+public:
+    void OnDocumentStart(const YAML::Mark&) override
+    {
+        if (bDocumentStarted || bDocumentOpen) { Stop(); }
+        bDocumentStarted = true;
+        bDocumentOpen = true;
+    }
+
+    void OnDocumentEnd() override
+    {
+        if (!bDocumentOpen || Depth != 0 || !bRootSeen) { Stop(); }
+        bDocumentOpen = false;
+        bDocumentComplete = true;
+    }
+
+    void OnNull(const YAML::Mark&, YAML::anchor_t) override { CountNode(); }
+
+    void OnAlias(const YAML::Mark&, YAML::anchor_t) override
+    {
+        if (Aliases >= FLimits::MaxAliasOccurrences) { Stop(); }
+        CountNode();
+        ++Aliases;
+    }
+
+    void OnScalar(const YAML::Mark&, const std::string&, YAML::anchor_t,
+        const std::string& Value) override
+    {
+        if (Value.size() > static_cast<size_t>(FLimits::MaxScalarUtf8Bytes)) { Stop(); }
+        CountNode();
+    }
+
+    void OnSequenceStart(const YAML::Mark&, const std::string&,
+        YAML::anchor_t, YAML::EmitterStyle::value) override
+    { BeginCollection(ECollection::Sequence); }
+
+    void OnSequenceEnd() override { EndCollection(ECollection::Sequence); }
+
+    void OnMapStart(const YAML::Mark&, const std::string&,
+        YAML::anchor_t, YAML::EmitterStyle::value) override
+    { BeginCollection(ECollection::Mapping); }
+
+    void OnMapEnd() override { EndCollection(ECollection::Mapping); }
+
+    // No anchor/tag/value semantic interpretation or storage in this probe.
+    void OnAnchor(const YAML::Mark&, const std::string&) override {}
+
+    void RequireComplete(bool bHandled) const
+    {
+        if (!bHandled || !bDocumentComplete || bDocumentOpen || Depth != 0) { Stop(); }
+    }
+
+private:
+    enum class ECollection : uint8 { Sequence, Mapping };
+
+    [[noreturn]] static void Stop() { throw FNullSyntaxProbeStopped{}; }
+
+    void CountNode()
+    {
+        // Check BEFORE increment: exactly the inclusive maximum is allowed.
+        if (!bDocumentOpen || RawNodes >= FLimits::MaxRawNodes) { Stop(); }
+        if (Depth == 0)
+        {
+            if (bRootSeen) { Stop(); }
+            bRootSeen = true;
+        }
+        ++RawNodes;
+    }
+
+    void BeginCollection(ECollection Kind)
+    {
+        if (Depth >= FLimits::MaxCollectionDepth) { Stop(); }
+        CountNode();
+        Collections[Depth++] = Kind;
+    }
+
+    void EndCollection(ECollection Kind)
+    {
+        if (!bDocumentOpen || Depth == 0 || Collections[Depth - 1] != Kind) { Stop(); }
+        --Depth;
+    }
+
+    ECollection Collections[FLimits::MaxCollectionDepth];
+    int32 Depth = 0;
+    int64 RawNodes = 0;
+    int32 Aliases = 0;
+    bool bDocumentStarted = false;
+    bool bDocumentOpen = false;
+    bool bDocumentComplete = false;
+    bool bRootSeen = false;
 };
 
 class FEventGraph final : public YAML::EventHandler
@@ -260,13 +359,38 @@ FDocument ReadYamlDocument(TConstArrayView<uint8> Input)
     // Binary/length-delimited input; no strlen, ANSI conversion or borrowed data.
     const std::string Bytes(reinterpret_cast<const char*>(Input.GetData()),
         static_cast<size_t>(Input.Num()));
-    std::istringstream Stream(Bytes, std::ios::in | std::ios::binary);
     try
     {
+        std::istringstream Stream(Bytes, std::ios::in | std::ios::binary);
         YAML::Parser Parser(Stream);
         FEventGraph Graph(Input.Num());
         while (Parser.HandleNextDocument(Graph)) {}
         return Graph.TakeComplete();
+    }
+    catch (const FRefusal& Error)
+    {
+        if (Error.Diagnostic.Code != EParseCode::NullPropertiesUnavailable) { throw; }
+        // The first graph/parser/stream have unwound. Retain only this value.
+        const FDiagnostic OriginalNull = Error.Diagnostic;
+        try
+        {
+            // Bytes is the SAME immutable owned input, still bounded by the
+            // exported entry's 1MiB/raw-C0/UTF8 checks. No buffered-parser reuse.
+            std::istringstream ProbeStream(Bytes, std::ios::in | std::ios::binary);
+            YAML::Parser ProbeParser(ProbeStream);
+            FNullSyntaxProbe Probe;
+            const bool bHandled = ProbeParser.HandleNextDocument(Probe);
+            Probe.RequireComplete(bHandled); // FIRST document only, exactly once.
+        }
+        catch (const FNullSyntaxProbeStopped&)
+        {
+            // Bound/balance stop is NOT syntax completion or a new quota code.
+        }
+        catch (const YAML::ParserException& SyntaxError)
+        {
+            Refuse(EParseCode::MalformedYaml, Observe(SyntaxError.mark));
+        }
+        throw FRefusal{OriginalNull};
     }
     catch (const YAML::ParserException& Error)
     {

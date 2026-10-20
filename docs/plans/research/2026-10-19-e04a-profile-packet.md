@@ -53,11 +53,16 @@ The exact new source allowlist is:
 - `Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/E04ProfileProbeModule.cpp`
 - `Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/Tests/E04ProfileAbiTests.cpp`
 - `scripts/migration/Invoke-E04AProfileProof.ps1`
+- `tests/migration/Test-E04RulesWitness.ps1`
 - `tests/migration/fixtures/e04a/corpus-manifest.json`
 - `tests/migration/fixtures/e04a/generated-cases.json`
 - `docs/plans/research/2026-10-19-e04a-profile-packet.md`
 - `docs/plans/evidence/2026-10-19-e04a-profile.md`
 - `docs/plans/evidence/2026-10-19-e04a-profile-result.json`
+
+This 19-path authoring allowlist includes the separate Rules-witness proof
+control. It does not add that PowerShell control to the unchanged 33 staged UE
+authored-source members.
 
 Existing targets, project descriptor, Config, E02 code and both sibling checkouts
 remain outside that source-authoring scope. Canonical plan/instruction status
@@ -87,9 +92,28 @@ equivalence is claimed. Marks remain vendor observations, with unavailable
 fields explicit; exact quote spelling, end spans and original-byte coordinates
 are not supplied by the event API.
 
-Every `OnNull` is refused as `NullPropertiesUnavailable`: the pinned parser can
-discard an explicit tag on its post-properties EOF route. Ordinary null,
-omitted values and empty documents therefore remain unsupported in A1. Only
+Every graph `OnNull` starts a `NullPropertiesUnavailable` refusal: the pinned
+parser can discard an explicit tag on its post-properties EOF route. Only that
+private refusal triggers a fresh, nonpublishing syntax probe over the same owned
+immutable input bytes, after the partial graph/parser/stream have unwound. Drive
+exactly one fresh `HandleNextDocument` call. If that first document completes,
+restore the exact original null diagnostic; an internal work/balance stop also
+restores it without claiming syntax completion. Only a `ParserException` actually
+reached during this bounded first-document probe becomes `MalformedYaml`, using
+its observed mark. Other original refusals retain their existing ordering.
+
+The probe uses a fixed 64-entry private collection-kind stack and inclusive
+100,000 raw-node-event, 10,000 alias-event and 65,536 decoded-scalar-byte bounds,
+after the unchanged 1 MiB entry guard. Count scalar/null/alias/collection-start
+events once each, aliases separately, and stop before exceeding a bound. It
+stores no graph, null placeholder, tag/anchor ownership or returned vendor value.
+These fresh per-pass bounds do not claim one-pass aggregate work, scanner peak
+memory, complete-stream syntax or lexical fidelity. Preserve narrow exception
+handling and intentional termination for uncaught allocation/unknown exceptions.
+
+Ordinary null, omitted values and empty documents therefore remain unsupported
+in A1; valid/completed syntax or a probe bound stop never makes null a supported
+value. Only
 implicit `?`/`!` and the finite standard str/bool/int/float/seq/map tag set is
 accepted as raw data; other tags fail before copying their expanded text.
 Canonical inputs must actually pass this restricted subset; never rewrite
@@ -130,16 +154,20 @@ Exactly eight names use prefix `Warhammer.Migration.E04A1.`:
 | `Abi.ValueLifetime` | Independent copies/moves/destruction after vendor temporaries die |
 | `Parser.CanonicalSyntax` | Ten source-bound profiles: exact root-key order, literal profile identity, selected map/sequence fields and scalar tag provenance |
 | `Parser.OrderedCaseValues` | Unicode/case-distinct and equal duplicate keys; anchor rebinding/alias targets; raw scalar tags and full decoded NUL bytes; K05 escaped C0 and legal quoted DEL/C1 with exact decoded bytes |
-| `Parser.LexicalFailures` | Ten exact typed negatives, including property-loss, source C0 and invalid vendor UTF-8 regressions; F10 is raw quoted U+0001 refused at entry |
+| `Parser.LexicalFailures` | Thirteen finite typed-refusal inputs, including property-loss, source C0, invalid vendor UTF-8 and bounded null-only syntax regressions; F10 is raw quoted U+0001 refused at entry |
 | `Parser.ResourceBounds` | Below/at/above inputs for all five inclusive limits |
 | `Integration.RepeatIsolation` | Fresh good/bad/good parses without stale anchors, counters or diagnostics |
 
-Freeze **40 unique inputs / 47 attempts**: ten canonical C01-C10, five K01-K05,
-ten F01-F10 and fifteen L records: 30 generated inputs and the same eight suites.
-The earlier 34-input proposal and subsequent 38-input/45-attempt set remain
-historical. Preserve all 38 original inputs and all 28 original generated records,
-recipes, expectations and relative order; K05/F10 add one attempt each to
-OrderedCaseValues/LexicalFailures. Manifests bind deterministic recipes, exact
+Freeze **43 unique inputs / 50 attempts**: ten canonical C01-C10, five K01-K05,
+thirteen F01-F13 and fifteen L records: 33 generated inputs and the same eight
+suites. The earlier 34-input proposal, 38-input/45-attempt set and subsequent
+40-input/47-attempt set remain historical. Preserve all 38 original inputs and
+28 original generated records, and all 40 preceding inputs and 30 generated
+records, with their exact bytes, recipes, expectations and relative order.
+K05/F10 remain unchanged. Append F11-F13 after the old 30 JSON/native records;
+the existing LexicalFailures F01-F10 loop remains, followed by F11-F13 by ID.
+Keep ResourceBounds on original indices 15-29 so the appended F cases do not
+enter its fifteen L checks. Manifests bind deterministic recipes, exact
 bytes and independent expected structures/refusals. K05 is 32 input bytes with
 SHA256 `454EAAE473C179254F4404459416DCC017A06265330AA297EF33F1FFD38FF6EA`;
 its two mapping values have decoded UTF8 hex `01` and `7FC280C29F`, five raw nodes,
@@ -150,6 +178,22 @@ unavailable mark/observed 0/limit 0. Hashes/metrics are independent expectations
 not observed parser results. Primary source/staging identities use SHA256. Native UE Core
 FSHA1 is an auxiliary observation of bytes actually passed to the parser; it is
 not SHA256 or a Core protocol identity.
+
+| Added input | Exact recipe and required refusal |
+|---|---|
+| F11 | 10 bytes: `[null, x]` plus LF; completed valid first-document syntax retains `NullPropertiesUnavailable` and empty output |
+| F12 | 24 bytes: `[null, a: [unterminated` plus LF; a reached first-document syntax error yields `MalformedYaml` and empty output |
+| F13 | 151 bytes: `[null,` + 64 `[` + `x` + 64 `]` + `, [unterminated` + LF; depth 65 must stop the probe before the later malformed tail in the SAME first document, retaining the original null refusal rather than reaching `MalformedYaml`; no syntax-completion claim |
+
+F13 is deliberately discriminating: a probe that continued through the deep
+child would reach the later malformed tail; a completed balanced remainder
+alone would not distinguish completion from a bound stop.
+
+F11/F13 retain the original null diagnostic (available mark position 1/line 0/
+column 1, observed 2/limit 0), with no document, original bytes, root or graph
+observations returned. F01 remains `MalformedYaml`; tag-only F05 remains
+`NullPropertiesUnavailable`. All native observations remain **NOT_RUN**; these
+source-defined expectations are not parser or resource-stop execution results.
 
 | Limit | Inclusive boundary and independent recipe |
 |---|---|
@@ -168,7 +212,7 @@ Each suite writes its actual input ledger under
 `RunRoot/artifacts/native/<suite-slug>/input-ledger.json` and retained original
 input bytes under its `inputs/` directory. Derive paths from exact staged project
 ancestry; no user-default fallback. The wrapper independently seals physical
-no-reparse ownership. Require eight unique suites, a 40-ID union and 47 exact attempts; preserve
+no-reparse ownership. Require eight unique suites, a 43-ID union and 50 exact attempts; preserve
 repeated attempt labels. Custom evaluated check counts and UE report assertions
 remain distinct, actual observations. No totals are prefilled.
 Each native suite also records actual compiler-guarded Editor exception mode:
@@ -189,9 +233,10 @@ The proposed phases remain Preflight 300s (no external root), SupervisorControls
 600s, Configure 600s, DependencyBuild 1200s, EditorBuild 1800s, hidden Discovery 600s,
 hidden Native 600s and Audit 300s, in that exact eight-phase order. SupervisorControls
 retains its original six supervisor cases/three groups/five roots unchanged, adds
-seven pure generated-input preparation controls with zero external roots, and one
+seven pure generated-input preparation controls and 18 pure build-boundary
+controls with zero external roots, and one
 separate target-refusal control with one 60-second root: total six roots. Keep
-all three result families distinct; the target failure is not an additional native
+all four result families distinct; the target failure is not an additional native
 suite or a seventh existing supervisor case. Configure/build/Discovery/Native each get one owned root. There is no
 Python/oracle phase, visible window, Core host or package execution.
 
@@ -211,6 +256,57 @@ compiler/SDK/tool selection. Producer lineage records do not replace inspection
 of actual compile/link flags and module-load evidence.
 Actual Editor `/EHsc` and `PLATFORM_EXCEPTIONS_DISABLED=0` must be demonstrated
 for both parser and probe. This observation does not prove the required A1G mode.
+
+### Response closure and inherited build arguments
+
+`Response-Chain` retains the existing breadth-first file/text order and binds
+every edge, including duplicate references and edges to an already visited file.
+Validate the complete directed graph for cycles independently of file deduplication;
+cross-branch cycles must fail as `E04A1_RESPONSE_CYCLE`. References remain literal,
+absolute, stage-owned `.rsp` paths with the existing file-kind/size/NUL checks.
+Only complete standalone `@path` or `@"path with spaces"` lines are supported.
+Refuse every remaining `@` occurrence, including inline or quoted data/argument
+forms, as `E04A1_UNSUPPORTED_RESPONSE_REFERENCE_SYNTAX`. A quoted whole-line
+reference may contain a literal `@` inside its bound filename. This conservative
+grammar is not a general command-line or response-file interpreter.
+
+The actual native supervisor must construct its effective child environment
+with `UBT_EXTRA_ARGS` present and empty, even when inherited values are nonempty
+or use another key spelling. Reject nonempty explicit overrides. `Child-Environment`
+also reserves the key as an empty string, and `Invoke-Root` checks that override
+before the root count or process call. Both the normal EditorBuild and separate
+ObjSrcMap control supply the explicit empty value. The Rules consumer requires
+one exact, string-empty `UBT_EXTRA_ARGS` binding in both expected and recorded
+child overrides. Literal OS argv alone cannot establish this condition: installed
+UBT appends this environment channel internally before parsing its arguments.
+
+After the unchanged seven generated-input controls and before the one ObjSrcMap
+root, `Build-BoundaryControls` runs 18 pure cases: ten response graphs/forms,
+four real `Child-Environment` cases and four cases through the same pure C#
+environment-block constructor used by the actual supervisor. Include shared DAGs
+in both orders, duplicate edges, cross-branch cycles in both orders, self-cycles,
+inline/quoted residual references, conservative quoted-data refusal and a valid
+quoted filename containing spaces/`@`. Environment cases use synthetic hostile
+inherited values and conflicting overrides; never mutate the parent environment.
+The tests create owned inert files, require intended refusals and unchanged
+inputs, restore the stage and preserve the root count. They launch no process.
+Keep their separate report and 18-case count distinct from the original six
+supervisor cases, seven generated-input controls, target refusal and native suites.
+The existing 600-second phase and six-root total remain unchanged.
+
+The source-only `tests/migration/Test-E04RulesWitness.ps1` controls bind the real
+hash-selected validator over synthetic data. Its six added cases reject missing,
+nonempty, null or wrongly typed UBT bindings in the applicable expected/root
+records. These are pure validator controls, not a real UBT witness. Read/adopt the
+exact script and helper source before a separate bounded offline invocation; use
+a fresh owned control directory, at most 120 seconds and zero external roots.
+Do not dot-source the wrapper, enter its dispatcher, load PE metadata or invoke
+C#/native/compiler/engine code through that offline route. The four C# block
+checks belong to the later source-approved SupervisorControls phase.
+
+Preflight reports 43 materialized inputs, ten canonical inputs and 33 generated
+inputs in separately named fields. The planned native union and attempts remain
+43 and 50; no value is an observed native result until execution.
 
 ### Generated Configure instructions and dependency handoff
 

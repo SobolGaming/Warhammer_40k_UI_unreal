@@ -828,7 +828,7 @@ function ObjSrcMap-TargetRefusalControl {
         if($hostInput.path -ine (Need-File $script:Freeze.toolPaths.dotnet)){throw 'E04A1_OBJ_SRC_MAP_FROZEN_HOST_MISMATCH'}
         $cwd=Assert-Path (Join-Path $EngineRoot 'Engine/Source')
         $extra=@{TEMP=(Join-Path $root 'temp');TMP=(Join-Path $root 'temp');DOTNET_CLI_HOME=(Join-Path $root 'dotnet-home');NUGET_PACKAGES=(Join-Path $root 'nuget');UBA_ROOT=(Join-Path $root 'uba');
-            DOTNET_ROLL_FORWARD='LatestPatch';DOTNET_MULTILEVEL_LOOKUP='0';DOTNET_STARTUP_HOOKS='';DOTNET_ADDITIONAL_DEPS='';DOTNET_SHARED_STORE='';DOTNET_EnableDiagnostics='0';CORECLR_ENABLE_PROFILING='0';COR_ENABLE_PROFILING='0';COMPlus_EnableDiagnostics='0'}
+            DOTNET_ROLL_FORWARD='LatestPatch';DOTNET_MULTILEVEL_LOOKUP='0';DOTNET_STARTUP_HOOKS='';DOTNET_ADDITIONAL_DEPS='';DOTNET_SHARED_STORE='';DOTNET_EnableDiagnostics='0';CORECLR_ENABLE_PROFILING='0';COR_ENABLE_PROFILING='0';COMPlus_EnableDiagnostics='0';UBT_EXTRA_ARGS=''}
         $argv=@($ubtInput.path,'WarhammerClientE04AEditor','Win64','Development',('-Project='+(Join-Path $project 'WarhammerClient.uproject')),'-WaitMutex','-NoUBA','-NoVFS','-NoUBTMakefiles','-Compiler=VisualStudio2022','-CompilerVersion=14.44.35229','-WindowsSDKVersion=10.0.22621.0',('-UBARootDir='+(Join-Path $root 'uba')),('-Log='+$ubtLog),('-ObjSrcMap='+$canary))
         if(@($argv|Where-Object {$_.StartsWith('-ObjSrcMap=',[StringComparison]::Ordinal)}).Count -ne 1){throw 'E04A1_OBJ_SRC_MAP_EXACT_SINGLE_SELECTOR_ARG_REQUIRED'}
         $expectedEnvironment=Child-Environment $extra
@@ -982,6 +982,29 @@ public static class Supervisor {
         EnumWindows(callback,IntPtr.Zero); GC.KeepAlive(callback);
     }
 
+    // Pure string construction; Run uses this same path for the actual child block.
+    public static string BuildEnvironmentBlock(System.Collections.IDictionary inherited, Dictionary<string,string> environment) {
+        var vars=new SortedDictionary<string,string>(StringComparer.OrdinalIgnoreCase);
+        foreach(System.Collections.DictionaryEntry entry in inherited) {
+            string key=(string)entry.Key;
+            if(key.IndexOfAny(new[]{'\0','='})>=0 || key.Equals("UE_ADDITIONAL_PLUGIN_PATHS",StringComparison.OrdinalIgnoreCase) || key.Equals("UE-CmdLineArgs",StringComparison.OrdinalIgnoreCase) || key.Equals("UBT_EXTRA_ARGS",StringComparison.OrdinalIgnoreCase) || System.Text.RegularExpressions.Regex.IsMatch(key,"TOKEN|PASSWORD|SECRET|API_KEY|CREDENTIAL",System.Text.RegularExpressions.RegexOptions.IgnoreCase)) continue;
+            vars[key]=(string)entry.Value;
+        }
+        foreach(var pair in environment) {
+            if(pair.Key.IndexOfAny(new[]{'\0','='})>=0 || pair.Value.IndexOf('\0')>=0) throw new ArgumentException("Environment NUL/key");
+            if((pair.Key.Equals("UE_ADDITIONAL_PLUGIN_PATHS",StringComparison.OrdinalIgnoreCase) || pair.Key.Equals("UE-CmdLineArgs",StringComparison.OrdinalIgnoreCase)) && pair.Value.Length!=0) throw new ArgumentException("E02 reserved startup environment must be empty");
+            if(pair.Key.Equals("UBT_EXTRA_ARGS",StringComparison.OrdinalIgnoreCase)) {
+                if(pair.Value.Length!=0) throw new ArgumentException("E04 reserved UBT_EXTRA_ARGS must be empty");
+                continue;
+            }
+            vars[pair.Key]=pair.Value;
+        }
+        // UE and UBT append these channels internally, after literal OS argv capture.
+        vars["UE_ADDITIONAL_PLUGIN_PATHS"]=""; vars["UE-CmdLineArgs"]=""; vars["UBT_EXTRA_ARGS"]="";
+        var block=new StringBuilder(); foreach(var pair in vars) block.Append(pair.Key).Append('=').Append(pair.Value).Append('\0'); block.Append('\0');
+        return block.ToString();
+    }
+
     public static Dictionary<string,object> Run(string exe,string[] arguments,string cwd,
         Dictionary<string,string> environment,string stdout,string stderr,int seconds,bool visible,string syntheticFault) {
         if(seconds<3 || seconds>1800) throw new ArgumentOutOfRangeException("seconds");
@@ -1019,22 +1042,8 @@ public static class Supervisor {
             WinCheck(UpdateProcThreadAttribute(attr,0,new IntPtr(0x20002),handles,new IntPtr(IntPtr.Size*3),IntPtr.Zero,IntPtr.Zero),"UpdateProcThreadAttribute(HANDLE_LIST)");
             var startup=new SIX { info=new SI{cb=Marshal.SizeOf<SIX>(),flags=0x100|1,show=(short)(visible?5:0),input=input,output=outFile,error=errFile}, attributes=attr };
             var command=new StringBuilder(Quote(exe)); foreach(string argument in arguments) command.Append(' ').Append(Quote(argument));
-            var vars=new SortedDictionary<string,string>(StringComparer.OrdinalIgnoreCase);
-            foreach(System.Collections.DictionaryEntry entry in Environment.GetEnvironmentVariables()) {
-                string key=(string)entry.Key;
-                if(key.IndexOfAny(new[]{'\0','='})>=0 || key.Equals("UE_ADDITIONAL_PLUGIN_PATHS",StringComparison.OrdinalIgnoreCase) || key.Equals("UE-CmdLineArgs",StringComparison.OrdinalIgnoreCase) || System.Text.RegularExpressions.Regex.IsMatch(key,"TOKEN|PASSWORD|SECRET|API_KEY|CREDENTIAL",System.Text.RegularExpressions.RegexOptions.IgnoreCase)) continue;
-                vars[key]=(string)entry.Value;
-            }
-            foreach(var pair in environment) {
-                if(pair.Key.IndexOfAny(new[]{'\0','='})>=0 || pair.Value.IndexOf('\0')>=0) throw new ArgumentException("Environment NUL/key");
-                if((pair.Key.Equals("UE_ADDITIONAL_PLUGIN_PATHS",StringComparison.OrdinalIgnoreCase) || pair.Key.Equals("UE-CmdLineArgs",StringComparison.OrdinalIgnoreCase)) && pair.Value.Length!=0) throw new ArgumentException("E02 reserved startup environment must be empty");
-                vars[pair.Key]=pair.Value;
-            }
-            // The effective block also clears these channels if a caller omits
-            // an override. UE appends UE-CmdLineArgs before selecting plugins.
-            vars["UE_ADDITIONAL_PLUGIN_PATHS"]=""; vars["UE-CmdLineArgs"]="";
-            var block=new StringBuilder(); foreach(var pair in vars) block.Append(pair.Key).Append('=').Append(pair.Value).Append('\0'); block.Append('\0');
-            env=Marshal.StringToHGlobalUni(block.ToString());
+            var block=BuildEnvironmentBlock(Environment.GetEnvironmentVariables(),environment);
+            env=Marshal.StringToHGlobalUni(block);
             WinCheck(CreateProcessW(exe,command,IntPtr.Zero,IntPtr.Zero,true,CREATE_SUSPENDED|UNICODE_ENV|EXTENDED|(visible?0:NO_WINDOW),env,cwd,ref startup,out process),"CreateProcess(suspended)");
             r["pid"]=process.pid;
             long creation,exit,kernel,user; WinCheck(GetProcessTimes(process.process,out creation,out exit,out kernel,out user),"GetProcessTimes(creation)");
@@ -1299,7 +1308,7 @@ function Expand-Recipe($Recipe) {
 }
 function Prepare-Fixtures {
     $c=Read-Json (Join-Path $script:FixtureRoot 'corpus-manifest.json');$g=Read-Json (Join-Path $script:FixtureRoot 'generated-cases.json')
-    if($c.schemaVersion -ne 1 -or $g.schemaVersion -ne 1 -or @($c.canonical).Count -ne 10 -or @($g.generated).Count -ne 30 -or $g.totalWithCanonical -ne 40 -or $c.arcadeCommit -cne '5088c1c49dcaff29eb59fb64b3063d30214dde73'){throw 'E04A1_FIXTURE_EXACT_40_REQUIRED'}
+    if($c.schemaVersion -ne 1 -or $g.schemaVersion -ne 1 -or @($c.canonical).Count -ne 10 -or @($g.generated).Count -ne 33 -or $g.totalWithCanonical -ne 43 -or $c.arcadeCommit -cne '5088c1c49dcaff29eb59fb64b3063d30214dde73'){throw 'E04A1_FIXTURE_EXACT_43_REQUIRED'}
     foreach($name in @('corpus-manifest.json','generated-cases.json')){[IO.File]::Copy((Need-File (Join-Path $script:FixtureRoot $name)),(Owned "fixtures/$name"),$false)}
     $definitions=[Collections.Generic.List[object]]::new();$seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     foreach($e in @($c.canonical)+@($g.generated)){
@@ -1313,14 +1322,14 @@ function Prepare-Fixtures {
         $definitions.Add(@{id=$e.id;bytes=$bytes.Length;sha256=(Bytes-Hash $bytes);inputSha1=$e.inputSha1;expectedCode=$e.expectedCode;source=$(if($canonical){'Canonical'}else{'Generated'});recipeKind=$(if($canonical){'StagedFile'}else{$e.recipe.kind});expectedInput=Descriptor $expected})
     }
     $expectedIds=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal);foreach($ids in (Expected-Attempts).Values){foreach($id in $ids){[void]$expectedIds.Add($id)}}
-    if($seen.Count -ne 40 -or -not $seen.SetEquals($expectedIds)){throw 'E04A1_EXACT_INPUT_UNION_NOT_40'}
+    if($seen.Count -ne 43 -or -not $seen.SetEquals($expectedIds)){throw 'E04A1_EXACT_INPUT_UNION_NOT_43'}
     Write-JsonNew (Owned 'fixtures/input-definitions.json') @{schemaVersion=1;runId=$RunId;sourceHead=$script:Freeze.sourceHead;inputs=@($definitions);primaryHash='SHA256';nativeSha1='AUXILIARY_ONLY'}
 }
 function Fixture-Snapshot {return @(Plain-Files (Owned 'fixtures')|ForEach-Object {Descriptor $_})}
 function Child-Environment([hashtable]$Extra=@{}) {
     $envs=[Collections.Generic.Dictionary[string,string]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach($pair in @(@('TEMP','temp'),@('TMP','temp'),@('DOTNET_CLI_HOME','dotnet-home'),@('NUGET_PACKAGES','nuget'),@('UBA_ROOT','uba'))){$envs[$pair[0]]=Owned $pair[1]}
-    foreach($pair in @(@('DOTNET_CLI_TELEMETRY_OPTOUT','1'),@('DOTNET_SKIP_FIRST_TIME_EXPERIENCE','1'),@('DOTNET_NOLOGO','1'),@('UE-SharedDataCachePath','None'),@('UE_ADDITIONAL_PLUGIN_PATHS',''),@('UE-CmdLineArgs',''),@('UE_USE_SYSTEM_DOTNET',''),@('UE_DOTNET_VERSION',''),@('UE_DOTNET_DIR',''),@('UE_DOTNET_ARCH',''),@('ProgramFiles(Arm)',''),@('PROCESSOR_ARCHITECTURE','AMD64'),@('PATHEXT','.EXE'),@('DOTNET_MULTILEVEL_LOOKUP','0'))){$envs[$pair[0]]=$pair[1]}
+    foreach($pair in @(@('DOTNET_CLI_TELEMETRY_OPTOUT','1'),@('DOTNET_SKIP_FIRST_TIME_EXPERIENCE','1'),@('DOTNET_NOLOGO','1'),@('UE-SharedDataCachePath','None'),@('UE_ADDITIONAL_PLUGIN_PATHS',''),@('UE-CmdLineArgs',''),@('UBT_EXTRA_ARGS',''),@('UE_USE_SYSTEM_DOTNET',''),@('UE_DOTNET_VERSION',''),@('UE_DOTNET_DIR',''),@('UE_DOTNET_ARCH',''),@('ProgramFiles(Arm)',''),@('PROCESSOR_ARCHITECTURE','AMD64'),@('PATHEXT','.EXE'),@('DOTNET_MULTILEVEL_LOOKUP','0'))){$envs[$pair[0]]=$pair[1]}
     $w=$script:Freeze.windows;$vc=Assert-Path $w.compilerDir;$sdk=Assert-Path $w.sdkDir;$v=$w.sdkVersion
     $include=@((Join-Path $vc 'include'),(Join-Path $sdk "include/$v/ucrt"),(Join-Path $sdk "include/$v/shared"),(Join-Path $sdk "include/$v/um"),(Join-Path $sdk "include/$v/winrt"),(Join-Path $sdk "include/$v/cppwinrt"))
     $lib=@((Join-Path $vc 'lib/x64'),(Join-Path $sdk "lib/$v/ucrt/x64"),(Join-Path $sdk "lib/$v/um/x64"))
@@ -1328,7 +1337,12 @@ function Child-Environment([hashtable]$Extra=@{}) {
     $dotnet=[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.dotnet);$envs['DOTNET_ROOT']=$dotnet;$envs['DOTNET_ROOT_X64']=$dotnet
     $envs['INCLUDE']=$include -join ';';$envs['LIB']=$lib -join ';';$envs['LIBPATH']=$lib -join ';'
     $envs['PATH']=(@([IO.Path]::GetDirectoryName($script:Freeze.toolPaths.compiler),[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.sdkRc),[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.cmake),[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.ninja),$dotnet,[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.cmd)) -join ';')
-    foreach($e in $Extra.GetEnumerator()){if($e.Key -clike 'E02_*'){throw 'E04A1_E02_CHILD_ENVIRONMENT_FORBIDDEN'};$envs[$e.Key]=[string]$e.Value};return ,$envs
+    foreach($e in $Extra.GetEnumerator()){
+        if($e.Key -clike 'E02_*'){throw 'E04A1_E02_CHILD_ENVIRONMENT_FORBIDDEN'}
+        if([StringComparer]::OrdinalIgnoreCase.Equals([string]$e.Key,'UBT_EXTRA_ARGS') -and ($e.Value -isnot [string] -or $e.Value -cne '')){throw 'E04A1_UBT_EXTRA_ARGS_RESERVED_EMPTY'}
+        $envs[$e.Key]=[string]$e.Value
+    }
+    $envs['UBT_EXTRA_ARGS']='';return ,$envs
 }
 function Invoke-Root([string]$Label,[string]$Executable,[string[]]$Arguments,[int]$Budget,[bool]$Visible=$false,[string]$Fault='',[hashtable]$Extra=@{},[string]$WorkingDirectory='') {
     if($Visible){throw 'E04A1_VISIBLE_LAUNCH_FORBIDDEN'}
@@ -1345,6 +1359,7 @@ function Invoke-Root([string]$Label,[string]$Executable,[string[]]$Arguments,[in
     foreach($key in $saved.Keys){[Environment]::SetEnvironmentVariable($key,$null,'Process')}
     try{
         $childEnvironment=Child-Environment $Extra
+        if(-not $childEnvironment.ContainsKey('UBT_EXTRA_ARGS') -or $childEnvironment['UBT_EXTRA_ARGS'] -isnot [string] -or $childEnvironment['UBT_EXTRA_ARGS'] -cne ''){throw 'E04A1_UBT_EXTRA_ARGS_CHILD_OVERRIDE_REQUIRED'}
         if($Phase -ceq 'DependencyBuild'){
             $script:Result.configuredBuildInputPrelaunch=Confirm-ConfiguredBuildInputs
             $seconds=[Math]::Min($Budget,(Phase-Budget));if($seconds -lt 3 -or $seconds -gt 1800){throw 'E04A1_ROOT_BUDGET_INVALID'}
@@ -2159,7 +2174,12 @@ function Check-RulesWitnessData($Challenge,$Topology,$Witness,$Root,$Actual,$Met
     Assert-RulesValue $Root.arguments $process.actualArgv 'literalManagedArgv'
     Assert-RulesDescriptor $Challenge.processHost $process.hostDescriptor;Assert-RulesDescriptor $Challenge.ubtAssembly $process.ubtAssemblyDescriptor;Assert-RulesDescriptor $Challenge.buildAssembly $process.buildAssemblyDescriptor;Assert-RulesDescriptor $Challenge.rulesCacheLockAssembly $process.rulesCacheLockAssemblyDescriptor
     foreach($key in @('runtimeFramework','runtimeVersion','processArchitecture')){Assert-RulesValue $Challenge.expectedRuntime[$key] $process[$key] ('actualCLR.'+$key)}
-    foreach($key in @('DOTNET_ROLL_FORWARD','DOTNET_MULTILEVEL_LOOKUP','DOTNET_STARTUP_HOOKS','DOTNET_ADDITIONAL_DEPS','DOTNET_SHARED_STORE','DOTNET_EnableDiagnostics','CORECLR_ENABLE_PROFILING','COR_ENABLE_PROFILING','COMPlus_EnableDiagnostics')){Assert-RulesValue $Actual.expectedChildEnvironment[$key] $Root.environmentOverrides[$key] ('explicitChildEnvironment.'+$key)}
+    foreach($environment in @($Actual.expectedChildEnvironment,$Root.environmentOverrides)){
+        if($environment -isnot [Collections.IDictionary]){throw 'E04A1_RULES_UBT_EXTRA_ARGS_MUST_BE_EMPTY'}
+        $keys=@($environment.Keys|Where-Object {[StringComparer]::OrdinalIgnoreCase.Equals([string]$_,'UBT_EXTRA_ARGS')})
+        if($keys.Count -ne 1 -or $keys[0] -cne 'UBT_EXTRA_ARGS' -or $environment['UBT_EXTRA_ARGS'] -isnot [string] -or $environment['UBT_EXTRA_ARGS'] -cne ''){throw 'E04A1_RULES_UBT_EXTRA_ARGS_MUST_BE_EMPTY'}
+    }
+    foreach($key in @('DOTNET_ROLL_FORWARD','DOTNET_MULTILEVEL_LOOKUP','DOTNET_STARTUP_HOOKS','DOTNET_ADDITIONAL_DEPS','DOTNET_SHARED_STORE','DOTNET_EnableDiagnostics','CORECLR_ENABLE_PROFILING','COR_ENABLE_PROFILING','COMPlus_EnableDiagnostics','UBT_EXTRA_ARGS')){Assert-RulesValue $Actual.expectedChildEnvironment[$key] $Root.environmentOverrides[$key] ('explicitChildEnvironment.'+$key)}
     Assert-RulesValue $Challenge.expectedSelectors $Witness.effectiveSelectors 'effectiveSelectors'
     if($Witness.effectiveSelectors.bBuildAllModules -ne $false -or $Witness.selectedTarget.constructorBuildAllModules -ne $false -or $Witness.selectedTarget.exactClrType -cne 'WarhammerClientE04AEditorTarget' -or $Witness.module.actualClrType -cne 'YamlCpp' -or $Witness.module.sameAssemblyReference -ne $true){throw 'E04A1_RULES_SELECTED_TYPE_OR_FINAL_SELECTOR_UNSUPPORTED'}
     Assert-RulesValue $false $Witness.selectedTarget.constructorBuildAllModules 'constructorBuildAllModules';Assert-RulesValue $true $Witness.module.sameAssemblyReference 'sameAssemblyReference'
@@ -2278,7 +2298,7 @@ function Editor-Build {
         $challenge=Prepare-RulesChallenge;$receipt=Descriptor (Owned 'logs/yaml-artifact-receipt.json')
         $challengeDescriptor=Descriptor (Owned 'logs/rules-witness-input.json')
         $extra=@{E04A1_NATIVE_BOUNDARY_REQUIRED='1';E04A1_RUN_ID=$RunId;E04A1_SOURCE_HEAD=$script:Freeze.sourceHead;E04A1_SOURCE_ROOT=$script:Repo;E04A1_STAGED_PROJECT=$challenge.stagedProject;E04A1_ARTIFACT_RECEIPT=$receipt.path;E04A1_ARTIFACT_RECEIPT_SHA256=$receipt.sha256;E04A1_RULES_WITNESS_INPUT=$challengeDescriptor.path;E04A1_RULES_WITNESS_INPUT_SHA256=$challengeDescriptor.sha256;E04A1_RULES_WITNESS_NONCE=$challenge.attemptNonce;
-            DOTNET_ROLL_FORWARD='LatestPatch';DOTNET_MULTILEVEL_LOOKUP='0';DOTNET_STARTUP_HOOKS='';DOTNET_ADDITIONAL_DEPS='';DOTNET_SHARED_STORE='';DOTNET_EnableDiagnostics='0';CORECLR_ENABLE_PROFILING='0';COR_ENABLE_PROFILING='0';COMPlus_EnableDiagnostics='0'}
+            DOTNET_ROLL_FORWARD='LatestPatch';DOTNET_MULTILEVEL_LOOKUP='0';DOTNET_STARTUP_HOOKS='';DOTNET_ADDITIONAL_DEPS='';DOTNET_SHARED_STORE='';DOTNET_EnableDiagnostics='0';CORECLR_ENABLE_PROFILING='0';COR_ENABLE_PROFILING='0';COMPlus_EnableDiagnostics='0';UBT_EXTRA_ARGS=''}
         # Direct frozen host: no Build.bat/SDK --version/UBT rebuild fallback.
         $arguments=@($challenge.ubtAssembly.path,'WarhammerClientE04AEditor','Win64','Development',('-Project='+$challenge.stagedProject),'-WaitMutex','-NoUBA','-NoVFS','-NoUBTMakefiles','-Compiler=VisualStudio2022','-CompilerVersion=14.44.35229','-WindowsSDKVersion=10.0.22621.0',('-UBARootDir='+(Owned 'uba')),('-Log='+(Owned 'logs/build.log')))
         Confirm-RulesPrelaunchInputs $challenge.rulesSourceFiles (Rules-Topology)
@@ -2325,20 +2345,81 @@ function Editor-Build {
     }
 }
 function Response-Chain([string]$Path) {
-    # Literal data only. UBT emits @shared.rsp (VCToolChain.cs:258-261,3184-3204).
-    # Resolve no shell syntax, environment variables, response macros or relative paths.
-    $queue=[Collections.Generic.Queue[object]]::new();$queue.Enqueue(@{path=(Under $Path $script:Stage);parents=@()})
+    # Preserve BFS file/text ordering; complete edge validation is independent of node deduplication.
+    $queue=[Collections.Generic.Queue[string]]::new();$queue.Enqueue((Under $Path $script:Stage))
     $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase);$parts=[Collections.Generic.List[object]]::new()
-    while($queue.Count){$next=$queue.Dequeue();$p=Need-File $next.path
-        if($p -iin @($next.parents)){throw 'E04A1_RESPONSE_CYCLE'};if(-not $seen.Add($p)){continue}
+    $graph=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::OrdinalIgnoreCase)
+    $pattern='(?m)^\s*@(?:"(?<path>[^"\r\n]+)"|(?<path>[^\s"\r\n]+))\s*$'
+    while($queue.Count){$p=Need-File $queue.Dequeue();if(-not $seen.Add($p)){continue}
         if([IO.Path]::GetExtension($p) -ine '.rsp' -or ([IO.FileInfo]::new($p)).Length -gt 64MB){throw 'E04A1_RESPONSE_KIND_OR_SIZE'}
         $text=$script:Utf8.GetString([IO.File]::ReadAllBytes($p));Safe-Text $text;if($text.Contains([char]0)){throw 'E04A1_RESPONSE_NUL'}
-        $references=@([regex]::Matches($text,'(?m)^\s*@(?:"(?<path>[^"\r\n]+)"|(?<path>[^\s"\r\n]+))\s*$'))
-        if(@([regex]::Matches($text,'(?m)^\s*@')).Count -ne $references.Count){throw 'E04A1_UNSUPPORTED_RESPONSE_REFERENCE_SYNTAX'}
-        foreach($reference in $references){$q=Under $reference.Groups['path'].Value $script:Stage;$queue.Enqueue(@{path=$q;parents=@($next.parents)+@($p)})}
-        $parts.Add(@{file=Descriptor $p;text=$text})
+        $references=@([regex]::Matches($text,$pattern))
+        # Only complete standalone references are supported. Quoted/inline residual @ is refused too.
+        if(([regex]::Replace($text,$pattern,'')).Contains('@')){throw 'E04A1_UNSUPPORTED_RESPONSE_REFERENCE_SYNTAX'}
+        $edges=[Collections.Generic.List[string]]::new()
+        foreach($reference in $references){$q=Under $reference.Groups['path'].Value $script:Stage;$edges.Add($q);$queue.Enqueue($q)}
+        $graph.Add($p,@($edges));$parts.Add(@{file=Descriptor $p;text=$text})
     }
+    # Kahn's linear validation counts every edge, including duplicates and edges to seen nodes.
+    $degree=[Collections.Generic.Dictionary[string,int]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($part in $parts){$degree.Add($part.file.path,0)}
+    foreach($edges in $graph.Values){foreach($q in $edges){if(-not $degree.ContainsKey($q)){throw 'E04A1_RESPONSE_TARGET_NOT_IN_GRAPH'};$degree[$q]++}}
+    $ready=[Collections.Generic.Queue[string]]::new();foreach($part in $parts){if($degree[$part.file.path] -eq 0){$ready.Enqueue($part.file.path)}}
+    $visited=0
+    while($ready.Count){$p=$ready.Dequeue();$visited++;foreach($q in $graph[$p]){$degree[$q]--;if($degree[$q] -eq 0){$ready.Enqueue($q)}}}
+    if($visited -ne $graph.Count){throw 'E04A1_RESPONSE_CYCLE'}
     return @{files=@($parts);text=(@($parts|ForEach-Object {$_.text})-join "`n")}
+}
+function Build-BoundaryControls {
+    $parent=Owned 'logs/build-boundary-controls';New-Directory $parent
+    $originalStage=$script:Stage;$originalRoots=$script:RootCount;$cases=[Collections.Generic.List[object]]::new()
+    # The PS response/Child-Environment sections are separable from the final pure C# block checks.
+    try{
+        foreach($spec in @(
+            @{name='shared-dag';edges=@{A=@('B','C');B=@('C');C=@()};error=''},
+            @{name='shared-dag-reversed';edges=@{A=@('C','B');B=@('C');C=@()};error=''},
+            @{name='duplicate-edge';edges=@{A=@('B','B');B=@()};error=''},
+            @{name='cross-branch-cycle';edges=@{A=@('B','C');B=@('C');C=@('B')};error='E04A1_RESPONSE_CYCLE'},
+            @{name='cross-branch-cycle-reversed';edges=@{A=@('C','B');B=@('C');C=@('B')};error='E04A1_RESPONSE_CYCLE'},
+            @{name='self-cycle';edges=@{A=@('A')};error='E04A1_RESPONSE_CYCLE'},
+            @{name='inline-reference';edges=@{A=@();B=@()};literal='inline';error='E04A1_UNSUPPORTED_RESPONSE_REFERENCE_SYNTAX'},
+            @{name='quoted-at-argument';edges=@{A=@();B=@()};literal='quoted';error='E04A1_UNSUPPORTED_RESPONSE_REFERENCE_SYNTAX'},
+            @{name='quoted-data-at-refused';edges=@{A=@()};literal='data';error='E04A1_UNSUPPORTED_RESPONSE_REFERENCE_SYNTAX'},
+            @{name='standalone-space-at-path';edges=@{A=@('B @ leaf');'B @ leaf'=@()};error=''})){
+            $root=Under (Join-Path $parent $spec.name) $parent;[void][IO.Directory]::CreateDirectory($root);$script:Stage=$root
+            $inputs=[Collections.Generic.List[object]]::new()
+            foreach($name in $spec.edges.Keys){$lines=[Collections.Generic.List[string]]::new();$lines.Add('/NOLOGO');foreach($child in $spec.edges[$name]){$lines.Add('@"'+(Join-Path $root ($child+'.rsp'))+'"')};$path=Under (Join-Path $root ($name+'.rsp')) $root;[IO.File]::WriteAllText($path,($lines -join "`n")+"`n",$script:Utf8)}
+            if($spec.ContainsKey('literal')){
+                $b=Join-Path $root 'B.rsp';$value=switch -CaseSensitive ($spec.literal){'inline'{'/NOLOGO @"'+$b+'"'};'quoted'{'"@'+$b+'"'};'data'{'/DNAME="mail@host"'}}
+                [IO.File]::WriteAllText((Join-Path $root 'A.rsp'),$value+"`n",$script:Utf8)
+            }
+            foreach($name in $spec.edges.Keys){$inputs.Add((Descriptor (Join-Path $root ($name+'.rsp'))))}
+            $caught=$null;$chain=$null;$sentinel=0
+            try{$chain=Response-Chain (Join-Path $root 'A.rsp');$sentinel++}catch{$caught=$_.Exception.GetBaseException().Message}
+            $stable=$true;try{foreach($d in $inputs){Assert-RulesDescriptor $d (Descriptor $d.path)}}catch{$stable=$false}
+            $matched=if($spec.error -ceq ''){$sentinel -eq 1 -and $null -eq $caught -and @($chain.files).Count -eq $spec.edges.Count}else{$sentinel -eq 0 -and $caught -ceq $spec.error}
+            $cases.Add(@{family='response';name=$spec.name;matched=($matched -and $stable);reachedReturn=$sentinel;diagnostic=$caught;expectedDiagnostic=$spec.error;inputs=@($inputs);inputsUnchanged=$stable})
+        }
+    }finally{$script:Stage=$originalStage}
+    foreach($spec in @(@{name='default-empty';extra=@{};error=''},@{name='explicit-empty';extra=@{UBT_EXTRA_ARGS=''};error=''},@{name='mixed-case-empty';extra=@{ubt_extra_args=''};error=''},@{name='nonempty-extra-refused';extra=@{UBT_EXTRA_ARGS='-NoMutex'};error='E04A1_UBT_EXTRA_ARGS_RESERVED_EMPTY'})){
+        $caught=$null;$child=$null;$sentinel=0
+        try{$child=Child-Environment $spec.extra;$sentinel++}catch{$caught=$_.Exception.GetBaseException().Message}
+        $matched=if($spec.error -ceq ''){$sentinel -eq 1 -and $null -eq $caught -and $child.ContainsKey('UBT_EXTRA_ARGS') -and $child['UBT_EXTRA_ARGS'] -is [string] -and $child['UBT_EXTRA_ARGS'] -ceq ''}else{$sentinel -eq 0 -and $caught -ceq $spec.error}
+        $cases.Add(@{family='child-environment';name=$spec.name;matched=$matched;reachedReturn=$sentinel;diagnostic=$caught;expectedDiagnostic=$spec.error;parentProcessEnvironmentMutated=$false})
+    }
+    foreach($spec in @(@{name='inherited-hostile-empty-overrides';inherited=@{UBT_EXTRA_ARGS='-NoMutex'};useChild=$false},@{name='inherited-hostile-real-child';inherited=@{UBT_EXTRA_ARGS='-NoMutex -Mode=Query'};useChild=$true},@{name='mixed-case-inherited-hostile';inherited=@{ubt_extra_args='-NoMutex'};useChild=$true})){
+        $before=($spec.inherited|ConvertTo-Json -Compress);$overrides=if($spec.useChild){Child-Environment}else{[Collections.Generic.Dictionary[string,string]]::new([StringComparer]::OrdinalIgnoreCase)}
+        $block=[Warhammer.E02.Supervisor]::BuildEnvironmentBlock($spec.inherited,$overrides)
+        $entries=@($block.Split([char]0)|Where-Object {$_ -match '^(?i:UBT_EXTRA_ARGS)='});$matched=($entries.Count -eq 1 -and $entries[0] -ceq 'UBT_EXTRA_ARGS=' -and ($spec.inherited|ConvertTo-Json -Compress) -ceq $before)
+        $cases.Add(@{family='effective-environment-block';name=$spec.name;matched=$matched;ubtExtraArgsEntryCount=$entries.Count;ubtExtraArgsEmpty=$matched;syntheticInheritedUnchanged=(($spec.inherited|ConvertTo-Json -Compress) -ceq $before);parentProcessEnvironmentMutated=$false})
+    }
+    $badOverrides=[Collections.Generic.Dictionary[string,string]]::new([StringComparer]::OrdinalIgnoreCase);$badOverrides['UBT_EXTRA_ARGS']='-NoMutex';$caught=$null
+    try{[void][Warhammer.E02.Supervisor]::BuildEnvironmentBlock(@{},$badOverrides)}catch{$caught=$_.Exception.GetBaseException().Message}
+    $cases.Add(@{family='effective-environment-block';name='nonempty-direct-override-refused';matched=($caught -ceq 'E04 reserved UBT_EXTRA_ARGS must be empty');diagnostic=$caught;parentProcessEnvironmentMutated=$false})
+    if($script:Stage -ine $originalStage -or $script:RootCount -ne $originalRoots){throw 'E04A1_BUILD_BOUNDARY_CONTROL_STATE_CHANGED'}
+    $report=Owned 'logs/build-boundary-controls/report.json';Write-JsonNew $report @{kind='PURE_BUILD_BOUNDARY_CONTROLS_NOT_NATIVE';caseCount=$cases.Count;matchedCount=@($cases|Where-Object matched).Count;externalRoots=0;cases=@($cases);limits='Real PS helpers and native supervisor pure string-construction method over owned/synthetic data; no UBT/compiler/process launch, parent environment mutation, full command-parser or atomic-filesystem claim.'}
+    if($cases.Count -ne 18 -or @($cases|Where-Object {-not $_.matched}).Count){throw 'E04A1_BUILD_BOUNDARY_CONTROL_FAILED'}
+    return @{report=Descriptor $report;caseCount=$cases.Count;externalRoots=0}
 }
 function Forced-DefinitionHeaders([string]$Text,[string]$Module) {
     # UEBuildModuleCPP.cs:2322-2340 writes definitions then inserts /FI;
@@ -2429,7 +2510,7 @@ function Check-Discovery {
     return @{engineEligibleCount=$listed.Count;selectedCount=8;selectedNames=$selected;log=Descriptor (Owned 'logs/native-discovery.log')}
 }
 function Expected-Attempts {
-    $m=[ordered]@{'Abi.LoadAndBoundary'=@('A1-K04');'Abi.TypedRefusal'=@('A1-F01','A1-K04');'Abi.ValueLifetime'=@('A1-K03');'Parser.CanonicalSyntax'=@(1..10|ForEach-Object {'A1-C{0:D2}' -f $_});'Parser.OrderedCaseValues'=@(1..5|ForEach-Object {'A1-K{0:D2}' -f $_});'Parser.LexicalFailures'=@(1..10|ForEach-Object {'A1-F{0:D2}' -f $_});'Parser.ResourceBounds'=@(foreach($kind in @('file','depth','nodes','aliases','scalar')){foreach($level in @('below','at','above')){"A1-L.$kind.$level"}});'Integration.RepeatIsolation'=@('A1-K03','A1-F02','A1-K03')};return $m
+    $m=[ordered]@{'Abi.LoadAndBoundary'=@('A1-K04');'Abi.TypedRefusal'=@('A1-F01','A1-K04');'Abi.ValueLifetime'=@('A1-K03');'Parser.CanonicalSyntax'=@(1..10|ForEach-Object {'A1-C{0:D2}' -f $_});'Parser.OrderedCaseValues'=@(1..5|ForEach-Object {'A1-K{0:D2}' -f $_});'Parser.LexicalFailures'=@(1..13|ForEach-Object {'A1-F{0:D2}' -f $_});'Parser.ResourceBounds'=@(foreach($kind in @('file','depth','nodes','aliases','scalar')){foreach($level in @('below','at','above')){"A1-L.$kind.$level"}});'Integration.RepeatIsolation'=@('A1-K03','A1-F02','A1-K03')};return $m
 }
 function Check-Native {
     $reportPath=Owned 'reports/native/index.json';$report=Read-Json $reportPath;$tests=@($report.tests)
@@ -2454,7 +2535,7 @@ function Check-Native {
         if($rowChecks -gt [long]$ledger.checkCount){throw 'E04A1_ROW_CHECK_TOTAL_EXCEEDS_ACTUAL_SUITE_CHECKS'}
         $totalChecks+=[long]$ledger.checkCount;$totalAttempts+=@($ledger.inputs).Count;$observed.Add(@{suite=$ledger.suiteName;subset=$ledger.subset;runtimeCallerProof=$ledger.runtimeCallerProof;callerExceptionsEnabled=$ledger.callerExceptionsEnabled;platformExceptionsDisabled=$ledger.platformExceptionsDisabled;ledger=Descriptor $ledgerPath;actualCustomCheckCount=$ledger.checkCount;rowChecks=$rowChecks;inputs=@($rows)})
     }
-    $files=@(Plain-Files (Owned 'artifacts/native'));if($files.Count -ne $artifacts.Count -or @($files|Where-Object {-not $artifacts.Contains($_)}).Count -or $union.Count -ne 40 -or $totalAttempts -ne 47){throw 'E04A1_EXACT_ARTIFACT_MEMBERSHIP_OR_40_ID_UNION_MISMATCH'}
+    $files=@(Plain-Files (Owned 'artifacts/native'));if($files.Count -ne $artifacts.Count -or @($files|Where-Object {-not $artifacts.Contains($_)}).Count -or $union.Count -ne 43 -or $totalAttempts -ne 50){throw 'E04A1_EXACT_ARTIFACT_MEMBERSHIP_OR_43_ID_UNION_MISMATCH'}
     [void](Need-File (Owned 'reports/native/index.html'))
     return @{subset=$script:Subset;runtimeCallerProof=$script:RuntimeCallerProof;fullA1Acceptance='NOT_ESTABLISHED_REQUIRES_A1G_AND_OTHER_OPEN_GATES';automationReport=Descriptor $reportPath;html=Descriptor (Owned 'reports/native/index.html');suiteCount=8;attemptCount=$totalAttempts;distinctInputCount=$union.Count;actualCustomCheckTotal=$totalChecks;ueAssertionTotal='NOT_ESTABLISHED_BY_EXPORT_DO_NOT_EQUATE_WITH_CUSTOM_CHECK_COUNT';actualCustomCountQualification='Evaluated native P.Check calls before ledger publication, not a prefilled assertion total.';suites=@($observed);linux='NOT_RUN_UNTESTED'}
 }
@@ -2505,8 +2586,8 @@ try {
     Check-StagedPluginClosure -RequireTargetReceipt:($Phase -in @('Discovery','Native','Audit'))
     if($Phase -notin @('Preflight','Audit')){Enable-NativeHelper}
     switch($Phase){
-        'Preflight'{$script:Result.status='PREFLIGHT_PASS_NO_NATIVE_ROOT';$script:Result.generatedInputCount=40}
-        'SupervisorControls'{$script:Result.controls=Supervisor-Controls;$script:Result.generatedBuildInputControls=Generated-BuildInputControls;$script:Result.objSrcMapTargetRefusal=ObjSrcMap-TargetRefusalControl;$script:Result.status='SUPERVISOR_CONTROLS_PASS_6_AND_OBJ_SRC_MAP_TARGET_REFUSAL_PASS'}
+        'Preflight'{$script:Result.status='PREFLIGHT_PASS_NO_NATIVE_ROOT';$script:Result.materializedInputCount=43;$script:Result.canonicalInputCount=10;$script:Result.generatedInputCount=33}
+        'SupervisorControls'{$script:Result.controls=Supervisor-Controls;$script:Result.generatedBuildInputControls=Generated-BuildInputControls;$script:Result.buildBoundaryControls=Build-BoundaryControls;$script:Result.objSrcMapTargetRefusal=ObjSrcMap-TargetRefusalControl;$script:Result.status='SUPERVISOR_CONTROLS_PASS_6_AND_OBJ_SRC_MAP_TARGET_REFUSAL_PASS'}
         'Configure'{$build=Build-Root;New-Directory $build;$p=Invoke-Root 'configure' $script:Freeze.toolPaths.cmake (@('-S',(CMake-Path $script:VendorRoot),'-B',(CMake-Path $build))+(CMake-Options)) 600;Require-RootPass $p;$script:Result.configure=Check-CMake;$script:Result.configure.generatedBuildInputs=Capture-ConfiguredBuildInputs $script:Result.configure $p.receiptArtifact;$script:Result.status='CONFIGURE_PASS_NO_INSTALL'}
         'DependencyBuild'{$p=Invoke-Root 'dependency-build' $script:Freeze.toolPaths.cmake @('--build',(CMake-Path (Build-Root)),'--target','yaml-cpp','--parallel','2','--verbose') 1200;Require-RootPass $p;$script:Result.configuredBuildInputPostbuild=Confirm-ConfiguredBuildInputs -AfterBuild;$script:Result.vendorArtifact=Publish-VendorArtifact $p;$script:Result.status='DEPENDENCY_BUILD_AND_EXPLICIT_COPY_PASS'}
         'EditorBuild'{$script:Result.editorBuild=Editor-Build;$script:Result.status='EDITOR_BUILD_PASS_SELECTED_NATIVE_FLAGS_OBSERVED'}

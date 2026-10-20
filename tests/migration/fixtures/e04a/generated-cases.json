@@ -533,10 +533,71 @@
         "maximumDecodedScalarUtf8Bytes": 65537
       },
       "inputSha1": "3EAD2AED704DC0B1A8D3B8B91A769A71B2BBCF40"
+    },
+    {
+      "id": "A1-F11",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "[null, x]\n"
+      },
+      "inputBytes": 10,
+      "inputSha256": "76E738B0B19E4ED1AD8B809B0F5BB26619A568B50449317B23BFD28FC7D0D061",
+      "expectedCode": "NullPropertiesUnavailable",
+      "expected": {
+        "refusedDocumentEmpty": true,
+        "diagnosticMark": {
+          "available": true,
+          "position": 1,
+          "line": 0,
+          "column": 1
+        },
+        "diagnosticObserved": 2,
+        "diagnosticLimit": 0
+      },
+      "inputSha1": "CBB917091BBCA5C842CCF66C9BBF15847C63D18C"
+    },
+    {
+      "id": "A1-F12",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "[null, a: [unterminated\n"
+      },
+      "inputBytes": 24,
+      "inputSha256": "9B8535A5B6636DE06F3B4F7517EBBA0A48FF46C1140231DA6C549743FD7533D9",
+      "expectedCode": "MalformedYaml",
+      "expected": {
+        "refusedDocumentEmpty": true
+      },
+      "inputSha1": "E348E753C700C43D9B1C4CF8791BB993A89AFC64"
+    },
+    {
+      "id": "A1-F13",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "[null,[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[x]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]], [unterminated\n"
+      },
+      "inputBytes": 151,
+      "inputSha256": "D59EFB83D1A70F15B58DF2A4CA1FA7B7AE0BD4BF8869EAA61BE5B8F20DC96E7D",
+      "expectedCode": "NullPropertiesUnavailable",
+      "expected": {
+        "refusedDocumentEmpty": true,
+        "diagnosticMark": {
+          "available": true,
+          "position": 1,
+          "line": 0,
+          "column": 1
+        },
+        "diagnosticObserved": 2,
+        "diagnosticLimit": 0,
+        "syntaxCompletionClaimed": false,
+        "fullInputCollectionDepth": 65,
+        "requiredProbeBoundStopBeforeMalformedTail": true
+      },
+      "inputSha1": "B10B24A5944CCAC497396734D29F5979F8A03934"
     }
   ],
-  "expectedCount": 30,
-  "totalWithCanonical": 40,
+  "expectedCount": 33,
+  "totalWithCanonical": 43,
   "recipeEncoding": "UTF-8 without BOM; exact LF and literal text as authored",
   "recipeDefinitions": {
     "file": "a: x + LF + # + p repeated(count-7) + LF",
@@ -548,5 +609,8 @@
   "qualification": "Deterministic input identities were computed during inert fixture-data authoring using built-in UTF8/SHA256, independently of the future parser. No parser, test, candidate source generator, vendor code or native tool was run. The successor additionally used an independently authored inert Python byte/text comparison; no candidate function was invoked. Expected full-input metrics are not claims that a refused parser returned partial nodes.",
   "nativeHashQualification": "Auxiliary inputSha1 is the native Core FSHA1 observation; primary fixture/source/run SHA256 bindings remain required before/after native execution. No production cryptography or protocol identity is implemented.",
   "rawC0BoundaryAmendment": "Two focused prospective regressions: K05 preserves escaped C0 and legal quoted DEL/C1 bytes; F10 rejects raw quoted U+0001. Original28 generated records and10 canonical inputs remain unchanged;30 generated/40 unique inputs/47 attempts/same8 native suites. No parser/native result is claimed.",
-  "authoringAmendment": "Four focused source-derived regressions added before any SOURCE/build/test freeze: raw literal NUL/EOT refusal and invalid vendor UTF8 from valid YAML backslash-N/backslash-underscore. Existing K04 now proves embedded and terminal decoded NUL bytes via full hex. Same8native suites/5quotas/18source paths; older34input proposal retained as history."
+  "authoringAmendment": "Four focused source-derived regressions added before any SOURCE/build/test freeze: raw literal NUL/EOT refusal and invalid vendor UTF8 from valid YAML backslash-N/backslash-underscore. Existing K04 now proves embedded and terminal decoded NUL bytes via full hex. Same8native suites/5quotas/18source paths; older34input proposal retained as history.",
+  "expectedAttemptCount": 50,
+  "nativeSuiteCount": 8,
+  "nullSyntaxProbeAmendment": "Append-only F11/F12/F13 exercise valid null refusal, later first-document syntax error, and restoration of the original null refusal when a local probe work bound stops reading. Original30 generated records/order/expectations and all40 prior input bytes remain unchanged. Current totals are33 generated/43 unique inputs/50 planned attempts/same8 native suites. The rawC0BoundaryAmendment and authoringAmendment strings retain historical earlier-authoring counts, not the current counts stated here. No parser/native result or whole-stream syntax completion is claimed."
 }

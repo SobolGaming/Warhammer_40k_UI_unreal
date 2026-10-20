@@ -1,18 +1,20 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 74 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 75 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at revision 74 is **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**.
-The [closed SOURCE round](research/2026-10-20-e04a-value-build-source-closure.md)
-and [factual record](evidence/2026-10-20-e04a-value-build-source-closure-result.json)
-preserve five raw reports/437 captured tool pairs, zero admissions and five
-source-supported findings. Five other jobs never received GO or launch. Post-close
-2,476 listed inputs match; all eight native phases NOT_RUN/no native RunRoot/
-visible0. Checkpoint then repair; applicable SOURCE/final/later gates and standing
-source/API consent remain unchanged.
+Current A1E status at revision 75 is **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
+The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
+and [factual record](evidence/2026-10-20-e04a-null-response-env-repairs.json) bind
+applied source repairs, 43 inputs/33 recipes/50 attempts/eight suites and 14
+matching PS-only controls. Exact successor bindings and affected SOURCE remain
+pending; C#4/Rules86/whole18 and all native phases NOT_RUN. A1G/A2/final/later
+gates and standing source/API consent remain unchanged.
+
+Historical revision 74: the [closed round](research/2026-10-20-e04a-value-build-source-closure.md)
+preserves five raw reports/437 pairs, zero admissions and five never-launched jobs.
 
 Historical A1E status at revision 71 is **TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**.
 Technical commit `3b5447e777da76b555215c135977c92a1706282b` adds 14 lines/zero
