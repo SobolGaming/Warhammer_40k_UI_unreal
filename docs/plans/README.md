@@ -1,11 +1,19 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 66 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 69 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at revision 66 is **SCOPED_SOURCE_R6_CLOSED_FOLLOWUP_REQUIRED**.
+Current A1E status at revision 69 is **SOURCE_V72_CLOSED_PRACTICAL_METHOD_ADOPTED_BINDINGS_PENDING**.
+The [v7.2 closure](research/2026-10-20-e04a-v7.2-source-closure.md) and
+[factual record](evidence/2026-10-20-e04a-v7.2-source-result.json) preserve four
+BLOCKED source reports/162 tool pairs and zero admissions. Missing primary
+JSON/localization contracts are located. The [practical v7.3 method](research/2026-10-20-e04a-practical-source-method-v7.3.md)
+is prospectively adopted; actual successor assignments/index/transport/run/GO
+remain pending. Native phases are NOT_RUN and all later gates remain open.
+
+Historical A1E status at revision 66 is **SCOPED_SOURCE_R6_CLOSED_FOLLOWUP_REQUIRED**.
 The [R6 summary](research/2026-10-20-e04a-scoped-r6-summary.md) and
 [factual record](evidence/2026-10-20-e04a-scoped-r6-result.json) preserve eight
 closed initial reports: five SOURCE_PASS, three BLOCKED and 479 tool pairs.

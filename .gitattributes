@@ -57,3 +57,5 @@ docs/plans/evidence/2026-10-20-e04a-v7.2-*.json -text whitespace=cr-at-eol
 docs/plans/research/2026-10-20-e04a-source-composition-packet-v7.2.md -text
 docs/plans/research/2026-10-20-e04a-v7.2-method-audit.md -text
 docs/plans/research/2026-10-20-e04a-v7.2-projector-repair-recheck.md -text
+# Revision69 practical-method adoption is an exact copy of the root record.
+docs/plans/evidence/2026-10-20-e04a-practical-method-adoption.json -text whitespace=cr-at-eol

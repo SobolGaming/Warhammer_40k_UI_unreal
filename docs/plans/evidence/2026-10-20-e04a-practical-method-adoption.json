@@ -1,0 +1,82 @@
+{
+  "recordKind": "ROOT_PROSPECTIVE_PRACTICAL_SOURCE_METHOD_ADOPTION_NOT_SOURCE_APPROVAL",
+  "adoptedUtc": "2026-10-20T19:08:29.6606497Z",
+  "publicationSubjectBeforeDocumentation": "8e38541a5d78731ec7565ecc1f21d0564e975970",
+  "technicalSourceUnchangedSince": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+  "methodVersion": "7.3",
+  "proposal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\practical-source-composition-repair-PROPOSED\\practical-source-review-repair.PROPOSED.md",
+    "bytes": 15380,
+    "sha256": "824F4344DC15F6694606D809CEBF14BDC4132C62CAA4EDD3AB5EADF8BB29DD22"
+  },
+  "proposalSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\practical-source-composition-repair-PROPOSED\\seal.PROPOSED.json",
+    "bytes": 2983,
+    "sha256": "7EC9C1387979A416432CF6B80FDC399B709655FB58EE53F2A6B0CBCCBCE1900A"
+  },
+  "literalDutyMap": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\practical-source-composition-repair-PROPOSED\\substantive-duty-coverage-map.PROPOSED.json",
+    "bytes": 123305,
+    "sha256": "25022152CAB3E0A9A0A5F5F836E850D965107C0AA7936CBB5DD6F1445345CC60"
+  },
+  "unitMap": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\practical-source-composition-repair-PROPOSED\\current-burden-and-complete-unit-proposal.PROPOSED.json",
+    "bytes": 65204,
+    "sha256": "DACD42DFAE920BE27710545138FCA5EF9F78F167419C544E484008A232F37168"
+  },
+  "rootFullProposalAndLimitsRead": true,
+  "rootExactBaselineComparison": {
+    "globalJoinObjects": 7,
+    "wholeAtomicTexts": 16,
+    "oldLocalDutyObjects": 29,
+    "mismatches": 0
+  },
+  "all45WrapperUnitBindingsPreserved": true,
+  "closedCurrentReviews": 4,
+  "rawVerdicts": [
+    "BLOCKED",
+    "BLOCKED",
+    "BLOCKED",
+    "BLOCKED"
+  ],
+  "actualToolPairs": 162,
+  "currentSourceAdmissions": 0,
+  "postCloseRehash": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-root-source-review-journal\\post-close-input-rehash.original.json",
+    "bytes": 2857,
+    "sha256": "E2A1BF867112157083DF89C0C4F3215C7136A25D763F3B5A97AACA28B2BEA072"
+  },
+  "explicitSupersessions": [
+    "Replace blanket full013/all45/full099/full14 and conservative full-record promotion in every context with complete material units and global semantic ownership.",
+    "Consolidate repeated whole-domain primary replicas into accountable semantic owners plus independent raw-interface scrutiny; preserve two complete independent finite-witness assessments.",
+    "Replace compulsory P/F/constructor/schema projection and repeated audits with one exact shared source index, concise assignment, actual GO and root completeness decision.",
+    "Permit materially relevant inert installed Engine/Source and existing frozen BODY primary reads with complete ranges and before/after whole-file identities; bind unchanged actual additions before admission.",
+    "Permit full reading of own exact clean control metadata; retain selected-origin field/privacy boundaries.",
+    "Use independent exhaustive inert literal identity comparisons and total case/row/edge mappings; semantic graph assessment remains separate and direct."
+  ],
+  "preserved": [
+    "Core authority and both siblings read-only",
+    "All substantive seven joins/sixteen atoms/twenty-nine old duty texts",
+    "All45 complete wrapper units collectively, with complete actual local interfaces",
+    "902 rows/49 selected names/1561 occurrences and both ordered duplicate tokens",
+    "Two complete independent finite witness assessments",
+    "Fresh independent read-only/never contexts, no resume/fork/retry/model override, actual runtime/prompt/complete tools/closure/seals",
+    "Immutable raw failures and unresolved findings",
+    "Final independent CODE plus different REQ and unchanged native/visible/acceptance/publication gates"
+  ],
+  "notYetBound": [
+    "successor publication/run",
+    "actual review IDs/count/complete unit closures and workloads",
+    "shared source index and clean own assignments",
+    "minimal transport implementation/bindings",
+    "new review GO"
+  ],
+  "oldFAndReportsRemainImmutable": true,
+  "oldIncompleteApprovalsTransferred": 0,
+  "newSourceGo": 0,
+  "newSourceApproval": false,
+  "native": false,
+  "visible": 0,
+  "standingPerpetualConsentUnchanged": true,
+  "immutable": true
+}

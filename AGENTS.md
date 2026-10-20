@@ -78,35 +78,32 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 68 (2026-10-20 UTC) is
-**COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING**. Read the
-[compatibility closure/v7.2 checkpoint](docs/plans/research/2026-10-20-e04a-compat-closed-v7.2-checkpoint.md)
-and [factual record](docs/plans/evidence/2026-10-20-e04a-compat-closed-result.json).
-All three nonblind C jobs for `93659c5` / `20261020T145014Z-0c80c9c7` are CLOSED
-with literal INCOMPLETE and 238 captured pairs (VALUE_CLIENT 154/SELECTORS 26/
-BUILD 58). Root read all sealed reports and completed bounded ordinary closure
-audits. Six immutable negative E decisions make the retained candidates
-ineligible in that planned set. All 2,687 unique frozen inputs matched after closure.
+Current A1E status at plan revision 69 (2026-10-20 UTC) is
+**SOURCE_V72_CLOSED_PRACTICAL_METHOD_ADOPTED_BINDINGS_PENDING**. Read the
+[v7.2 closure](docs/plans/research/2026-10-20-e04a-v7.2-source-closure.md),
+[factual record](docs/plans/evidence/2026-10-20-e04a-v7.2-source-result.json)
+and [adopted practical v7.3 method](docs/plans/research/2026-10-20-e04a-practical-source-method-v7.3.md).
+All four launched v7.2 SOURCE jobs closed BLOCKED/162 pairs, zero admissions.
+Eight other primary panels stayed unused; no integration was allocated. Root
+sealed and fully read reports; bounded ordinary closure audits preserve incomplete
+reading, missing consumer inputs and access/evidence qualifications. All 2,576
+unique frozen inputs matched after closure and before documentation edits.
 
-Root adopted v7.2 and selected 17 fresh contexts: 12 primaries plus five independent
-integrations, with no retention or new C job. Preserve all seven joins/16 atoms/
-29 duties, original whole-BODY/unit/data obligations and both witness assessments.
-The exact repaired `B12F0893...` projector, schema, new launcher/selector and four
-unchanged generic transport sources are adopted source choices. F01 is statically
-closed; dynamic checks are NOT_RUN and successor helpers are uninvoked.
-Eight raw definitions are prepared with adoption pending; nine existing
-templates are preserved. Update/adopt the common assembler owner registry and
-transport pins before emission. Derive/adopt exact successor common/freeze/own/source/
-API/typed-data/count/NORM/grant bindings and the neutral 12-predecessor policy,
-then seal new P/F before fresh panels/GO. Keep P/F HASH_ONLY and exclude old
-C/E conclusions from fresh blind inputs. Actual complete child/runtime/duty/
-finding/integration audits and root aggregate closure precede any native phase.
+V7.3 explicitly supersedes blanket whole013/all45/full099/full14 in every
+context, repeated whole-domain primary replicas and compulsory P/F/constructor
+machinery. Preserve complete material source/global45 units, all substantive
+seven joins/16 atoms/29 duty texts,902/49/1561 coverage, two complete independent
+finite witnesses and independent raw seams. Use a shared exact index, concise
+own assignments and verified unchanged additional relevant primary-source reads.
+Own exact clean controls are fully readable; privacy, selected-origin and blind
+review exclusions remain. Old incomplete reports never transfer approval.
 
-No F, fresh SOURCE GO or admission exists; all eight native phases are NOT_RUN
-and visible authority zero. R6 raw five PASS/three BLOCKED/479 pairs, its failed
-old v6 gate and both unused old integrations remain unchanged. Final fresh
-CODE/different REQ and later gates remain open. Standing perpetual private-source/
-API consent persists until revoked. This is a metadata checkpoint, not acceptance.
+Actual successor assignments/workloads/index/transport/publication/run/GO are
+pending. The missing JSON/localization implementations are located; conditional
+source expectations do not establish native parsing or plugin activation. All
+eight native phases remain NOT_RUN, no native RunRoot and visible authority zero.
+Final independent CODE/different REQ and A1G/A2/HUD/Linux/package/acceptance gates
+remain open. Standing perpetual source/API consent persists until explicitly revoked.
 
 Historical A1E status at plan revision 67 (2026-10-20 UTC) is
 **AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING**. Read the
