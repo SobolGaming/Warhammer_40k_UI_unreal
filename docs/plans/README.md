@@ -1,11 +1,21 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 44 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 45 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 44 records **SOURCE_CHANGES_REQUESTED_JSON_LINE_REPAIR_AUTHORED**.
+Revision 45 records **SOURCE_BLOCKED_DDC_REPAIR_AUTHORED**. The third
+[SOURCE report](research/2026-10-20-e04a-source-review-r3.md) is raw BLOCKED:
+52 of 78 required BODY files were inspected and the DDC guard lacked an owned
+writable active-store requirement. The guard now requires the exact owned store
+and rejects installed graph-switch diagnostics. Twenty-one offline cases / 63
+checks passed. The [factual record](evidence/2026-10-20-e04a-source-r3-result.json)
+retains the incomplete review and closed authority. A new checkpoint/freeze/RunId
+and complete fresh affected SOURCE precede any phase. All eight phases remain
+NOT RUN; the three old assessments remain unchanged.
+
+Historical revision 44 records **SOURCE_CHANGES_REQUESTED_JSON_LINE_REPAIR_AUTHORED**.
 The second [SOURCE report](research/2026-10-20-e04a-source-review-r2.md) found an
 undefined Parse-JsonLine call; its exact strict E02 implementation is restored.
 The [factual record](evidence/2026-10-20-e04a-source-r2-result.json) preserves

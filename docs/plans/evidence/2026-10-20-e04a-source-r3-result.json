@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "recordKind": "CLOSED_THIRD_SOURCE_ASSESSMENT_NOT_EXECUTION_OR_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T02:28:41.2867283Z",
+  "sourceHead": "745517014f1efbc7625ff88592543200337424b2",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T020719Z-20adc2c5",
+  "review": {
+    "role": "SOURCE",
+    "status": "BLOCKED",
+    "sessionId": "01a15717-a620-7c01-8842-be6137d2d688",
+    "report": {
+      "sha256": "e21cf3008d98a4fb27322826bd9abfade50d3014590c07b5ff2ddd3e010b541d",
+      "bytes": 4175,
+      "path": "docs/plans/research/2026-10-20-e04a-source-review-r3.md"
+    },
+    "finding": "F01: incidental owned DDC path mention and missing installed graph-switch rejection do not establish owned writable active store",
+    "rootIndependentlyConfirmed": true,
+    "requiredBodyFiles": 78,
+    "requiredPhysicalRows": 26417,
+    "reviewerReportedCompleteBodyFiles": 52,
+    "unassessedBodyIds": [
+      "040",
+      "046",
+      "049-072"
+    ],
+    "completeCoverage": false,
+    "descriptorSelectorRows": 902,
+    "mechanicalDescriptorComparisons": "902 unique selected origins and literal presence/value comparisons; no discrepancies reported; not complete semantic assessment",
+    "selectedMetadataComplete": false,
+    "rootMechanicalBodyExposure": "NOT_CERTIFIED: current auditor does not recognize FILE=<path> RANGE= headers; zero candidates does not establish zero actual exposure",
+    "actualReadOnly": true,
+    "actualApprovalPolicy": "never",
+    "actualMemoryMode": "disabled",
+    "actualModel": "gpt-6.1-sol",
+    "actualEffort": "ultra",
+    "freshExec": true,
+    "actualFullGoObserved": true,
+    "byteIdenticalPromptTransport": false,
+    "promptDifference": "Two extra trailing CR/LF bytes; equal after trailing CR/LF removal",
+    "toolInputCount": 52,
+    "toolOutputCount": 52,
+    "pairingAnomalies": 0,
+    "scopeAudit": "Ordinary helper read all52 literal inputs; no apparent implementation execution, private-context body access, mutations or network invocation. Output truncations remain. This supplies no SOURCE approval or comprehension certification.",
+    "retainedTruncationCalls": [
+      1,
+      3,
+      5,
+      36,
+      38
+    ],
+    "limits": [
+      "Actual app/multi-agent enforcement, memory internals, OS PID linkage and lower isolation UNVERIFIED",
+      "Physical visibility and hash checks are not comprehension or approval",
+      "26 BODY files remain formally UNASSESSED"
+    ]
+  },
+  "reviewProcess": {
+    "pid": 34592,
+    "exitCode": 0,
+    "status": "PASS",
+    "exitConfirmed": true,
+    "cliExitIsNotSourceApproval": true,
+    "elapsedSeconds": 388.660562,
+    "cleanupConfirmed": true,
+    "completedUtc": "2026-10-20T02:21:58.0829661Z",
+    "finalActiveProcesses": 0,
+    "timedOut": false
+  },
+  "authorityState": "CLOSED_DO_NOT_REUSE",
+  "remainingReviewLaunches": 0,
+  "nativeRunRootCreated": false,
+  "phases": [
+    {
+      "status": "NOT_RUN",
+      "phase": "Preflight"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "SupervisorControls"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Configure"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "DependencyBuild"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "EditorBuild"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Discovery"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Native"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Audit"
+    }
+  ],
+  "nativeSuiteCount": null,
+  "nativeInputCount": null,
+  "nativeAttemptCount": null,
+  "plannedCounts": {
+    "attempts": 45,
+    "suites": 8,
+    "uniqueInputs": 38
+  },
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "a2ScenariosRequired": 727,
+  "fullA1Acceptance": false,
+  "remediation": {
+    "status": "AUTHORED_OFFLINE_CONTROLS_PASS_PENDING_COMPLETE_FRESH_SOURCE",
+    "wrapper": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+      "bytes": 158436,
+      "sha256": "CE1501D2D944D8958B074B6116016215DACA691004BFACFFDD7A22573B41E4D8"
+    },
+    "change": "Require exact owned E04A1 active Writable filesystem-store observation and reject both installed graph-switch diagnostics; retain prior fatal/plugin/environment/fallback checks",
+    "packetCriteriaChanged": false,
+    "offlineControls": {
+      "rootReadCompleteHarnessAndReport": true,
+      "status": "PASS",
+      "nativeBuildOrPhaseRun": false,
+      "harness": {
+        "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/ddc-log-remediation-20261020/log-controls/Invoke-PureDdcLogControls.ps1",
+        "bytes": 9386,
+        "sha256": "39e8c68be7861ba4090afb6aae177a74d9b5e10e24d2eca783ce074d97a72453"
+      },
+      "report": {
+        "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/ddc-log-remediation-20261020/log-controls/pure-controls.actual.json",
+        "bytes": 14039,
+        "sha256": "df1d3e6d5ed8edd6e0b7e62456777fb8b2fa37da94728674c40a18e06ec0f7e3"
+      },
+      "cases": 21,
+      "failedCases": 0,
+      "limits": [
+        "Only one AST-selected pure DDC text validator was imported; the wrapper top-level, Inspect-NativeLog file access and startup checks were not invoked.",
+        "Synthetic literal formats test active-store log selection/refusals, not an actually running cache, filesystem permissions, provider identity or OS isolation.",
+        "Slash direction and at most one trailing slash are the only accepted path spelling differences; no prefix, dot-segment, duplicate-slash or whitespace canonicalization.",
+        "Fatal/plugin/environment guards are preserved by separate exact source comparison, not by these DDC-only controls.",
+        "All eight phases remain NOT_RUN; new candidate/freeze/run and fresh complete affected SOURCE are required."
+      ],
+      "fullWrapperInvoked": false,
+      "checks": 63
+    },
+    "staticChecks": {
+      "wrapperAstErrors": 0,
+      "functionDefinitions": 69,
+      "unchangedOldFunctionBodies": 67,
+      "exactCompleteOldSourceReconstruction": true,
+      "undefinedLiteralCustomCalls": 0,
+      "gitDiffCheck": "PASS",
+      "gitDiffStat": "1 file changed, 20 insertions(+), 3 deletions(-)",
+      "gitWarning": "LF will be replaced by CRLF the next time Git touches it; no line-ending-only remediation performed."
+    },
+    "exactSourceAndPrimaryProvenance": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/ddc-log-remediation-20261020/log-controls/exact-source-change-and-primary-provenance.actual.OPERATOR_ONLY.json",
+      "bytes": 14241,
+      "sha256": "d4866428da96cd84790698aaeb5ac562f4971ae356bd91750ffe73d7b4645028"
+    }
+  },
+  "standingTransmissionConsent": {
+    "repeatQuestionRequired": false,
+    "expires": "Only on explicit owner revocation",
+    "scope": "Necessary current and future private source/API migration review packets to configured OpenAI Codex service",
+    "credentialsAndUnrelatedSessionsExcluded": true
+  },
+  "privateEvidence": [
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-7455170-20261020T020719Z-20adc2c5/root-raw-source-report-seal.original.json",
+      "bytes": 903,
+      "sha256": "2a4444996b3903b3724e8c47e50d71750139631286002180dd3b597a36c3c3ad"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-7455170-20261020T020719Z-20adc2c5/runtime-evidence.final.selected.json",
+      "bytes": 8463,
+      "sha256": "da7d42e64a99dac9cae4f40549d62165c89eff2b19ffe89c9fd9cd213cbd2835"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-7455170-20261020T020719Z-20adc2c5/completion.json",
+      "bytes": 2603,
+      "sha256": "905669a83a2cba69a3a48e4673487f205416c7baf1bcc9881cf69af84c12049a"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-7455170-20261020T020719Z-20adc2c5/owned-job-receipt.json",
+      "bytes": 118388,
+      "sha256": "3e7425f7fb1e2d8984a2de2ab2d3505733d381c27063f50500aac2ad10b1ae0a"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-7455170-20261020T020719Z-20adc2c5/actual-tool-input-ledger.json",
+      "bytes": 57288,
+      "sha256": "f81954ffeef578746e9c823ab4053d470631fc7c8cac31f8b67730f29bbde9f1"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-7455170-20261020T020719Z-20adc2c5/actual-complete-tool-input-output-ledger.json",
+      "bytes": 1196457,
+      "sha256": "b1eeb87f5896359ad79d2887e66bf1ff17ab4572a86ae98bb1230345652e953f"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-7455170-20261020T020719Z-20adc2c5/root-source-blocked-authority-closure.original.json",
+      "bytes": 1042,
+      "sha256": "41cbb3c93b5925c0720abc1c23022bb9eb9cbc432be77461e05e8777b8379aa5"
+    }
+  ],
+  "closedScopeAudit": {
+    "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/postclose-audit-proposal-7455170-20261020T020719Z-20adc2c5-PROPOSED/closed-745-literal-output-facts.OPERATOR_ONLY.json",
+    "bytes": 49397,
+    "sha256": "e2b738ea40a6e22a8f085b3dbba2c3d34f95798bda065462b96e5b3506686055"
+  },
+  "nextStep": "Checkpoint repair and factual metadata; new candidate, new RunId/freeze and complete fresh affected SOURCE before any E04 phase",
+  "checkpointValidation": {
+    "rawReportExactSha256": "e21cf3008d98a4fb27322826bd9abfade50d3014590c07b5ff2ddd3e010b541d",
+    "factualJson": "PASS",
+    "independentReviewOfRepair": "NOT_RUN",
+    "whitespace": "Standard staged diff check flags only raw byte-exact report lines3/4 intentional two-space Markdown hard breaks; all other staged files pass",
+    "nativeBuildTests": "NOT_RUN_PENDING_COMPLETE_FRESH_SOURCE",
+    "wrapperAstErrors": 0,
+    "localLinks": "330 local targets and 3 line references verified; 13 JSON descriptors verified; external URLs and fragment semantics not fetched/verified",
+    "jsonStructuralChecks": 28
+  }
+}

@@ -1550,14 +1550,31 @@ function Native-Arguments {
         "-ExecCmds=$commands",'-TestExit=Automation Test Queue Empty',"-ReportExportPath=$((Owned "reports/$name").Replace('\','/'))","-abslog=$((Owned "logs/native-$name.log").Replace('\','/'))",
         "-UserDir=$((Owned 'ue-user').Replace('\','/'))",'-DDC-NoDefaultGraph',"-DDC=(E04A1=(Type=FileSystem,Path=$ddc,DeleteUnused=false))",'-EnablePlugins=E04ProfileProof',('-DisablePlugins='+($script:Disabled -join ',')))
 }
+function Check-OwnedDdcLog([string]$Text,[string]$OwnedPath) {
+    $ddc=@($Text -split "`n"|Where-Object {$_ -match '\bLogDerivedDataCache:'})
+    $path=$OwnedPath.Replace('\','/');$ownedWritable=$false
+    # Installed FileSystemCacheStore.cpp logs this only after StoreOwner.Add.
+    # Compare the complete parsed path; slash direction and one trailing slash
+    # are the only spelling differences accepted for this Windows-only proof.
+    foreach($line in $ddc){
+        if($line -match '(?i)(falling back|fallback.*(?:enabled|using)|(?:Zen|Cloud|Shared).*\b(?:using|connected|enabled|running)\b|Failed to create graph\b|Attempting to create graph\b)'){throw 'E04A1_OWNED_DDC_SELECTION_UNVERIFIED_OR_FALLBACK'}
+        $store=[regex]::Match($line,'\bLogDerivedDataCache:\s+(?<store>[^:\r\n]+): Using data cache path (?<path>[^\r\n]+): (?<access>Writable|ReadOnly|DeleteOnly)\r?$')
+        if($line -match '(?i)\bWritable\b'){
+            if(-not $store.Success -or $store.Groups['access'].Value -cne 'Writable'){throw 'E04A1_NONOWNED_DDC_WRITER'}
+            $observed=$store.Groups['path'].Value.Replace('\','/')
+            if(-not $observed.Equals($path,[StringComparison]::OrdinalIgnoreCase) -and -not $observed.Equals(($path+'/'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_NONOWNED_DDC_WRITER'}
+            if($store.Groups['store'].Value -ceq 'E04A1'){$ownedWritable=$true}
+        }
+    }
+    if(-not $ownedWritable){throw 'E04A1_OWNED_DDC_SELECTION_UNVERIFIED_OR_FALLBACK'}
+    return $ddc
+}
 function Inspect-NativeLog {
     $p=Owned ('logs/native-'+$Phase.ToLowerInvariant()+'.log');if(([IO.FileInfo]::new((Need-File $p))).Length -gt 64MB){throw 'E04A1_NATIVE_LOG_CAP'};$text=$script:Utf8.GetString([IO.File]::ReadAllBytes($p));Safe-Text $text
     if($text -match '(?im)^.*(?:LogWindows:\s+Error:\s+(?:Fatal error|Unhandled Exception)|LogOutputDevice:\s+Error:\s+=== Critical error|LogCore:\s+Error:\s+Fatal error|Fatal error:|Assertion failed:)'){throw 'E04A1_FATAL_NATIVE_DIAGNOSTIC'}
     if($text -match '(?i)(LogPluginManager:.*Mounting.*(?:UdpMessaging|TcpMessaging|QuicMessaging|WebSocketMessaging|DiscoveryBeaconReceiver|NetworkServiceDiscovery)|Log(?:Udp|Tcp|Quic|WebSocket)Messaging:.*(?:Initializing|Started|Listening|Connecting|bridge|tunnel))' -or $text -match 'Inserting commandline from UE-CmdLineArgs:|\s-EnvAfterHere(?:\s|$)'){throw 'E04A1_FORBIDDEN_STARTUP_OR_ENVIRONMENT_ROUTE'}
     if($text -notmatch '(?i)LogPluginManager:.*Mounting.*\bE04ProfileProof\b'){throw 'E04A1_PROOF_PLUGIN_STARTUP_NOT_OBSERVED'}
-    $ddc=@($text -split "`n"|Where-Object {$_ -match '\bLogDerivedDataCache:'});$path=(Owned 'ddc').Replace('\','/')
-    if(-not @($ddc|Where-Object {$_.Replace('\','/').Contains($path,[StringComparison]::OrdinalIgnoreCase)}).Count -or @($ddc|Where-Object {$_ -match '(?i)(falling back|fallback.*(?:enabled|using)|(?:Zen|Cloud|Shared).*\b(?:using|connected|enabled|running)\b)'}).Count){throw 'E04A1_OWNED_DDC_SELECTION_UNVERIFIED_OR_FALLBACK'}
-    foreach($line in $ddc){if($line -match '(?i)\bWritable\b' -and -not $line.Replace('\','/').Contains($path,[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_NONOWNED_DDC_WRITER'}}
+    $ddc=@(Check-OwnedDdcLog $text (Owned 'ddc'))
     return @{log=Descriptor $p;ddcLines=$ddc;startupQualification='Specific observed startup/log routes, not complete network/filesystem isolation.';visibleWindowRequested=$false;rendering='NULLRHI_HEADLESS_NO_RENDERED_PROOF'}
 }
 function Check-Discovery {

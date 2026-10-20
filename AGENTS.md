@@ -78,7 +78,22 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 44 (2026-10-20 UTC) is
+Current A1E status at plan revision 45 (2026-10-20 UTC) is
+**SOURCE_BLOCKED_DDC_REPAIR_AUTHORED**. The third independent
+[SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r3.md) is raw
+BLOCKED for `7455170`/run `020719`: required inspection is incomplete (52 of
+78 BODY files) and the DDC guard could accept a path mention without proving
+the owned writable active store. Root confirmed the installed graph-switch
+diagnostics and repaired the guard. The [factual record](docs/plans/evidence/2026-10-20-e04a-source-r3-result.json)
+preserves that report, runtime, limited coverage and closed authority. Twenty-one
+pure offline cases / 63 checks passed; no native phase ran. Checkpoint/refreeze
+the repair with a new RunId and obtain a complete fresh affected SOURCE review
+before any phase. All eight phases remain NOT RUN; all three old attempts are
+CLOSED_DO_NOT_REUSE. Standing private-source/API review consent persists until
+explicit revocation. A1G, A2, shared HUD/render/input, Linux, packages and broader
+gates remain open. The following revision 44 record is historical.
+
+Historical A1E status at plan revision 44 (2026-10-20 UTC) is
 **SOURCE_CHANGES_REQUESTED_JSON_LINE_REPAIR_AUTHORED**. The second independent
 [SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r2.md) is raw
 CHANGES_REQUESTED for `3791b43`/run `013901`: the supervisor validator calls an
