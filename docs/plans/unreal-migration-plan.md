@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 61 — RULES_WITNESS_CONTROLS_PASSED_PACKETS_PENDING. The current seven-source static check returns zero diagnostics against 31 normal UBT references; all 51 pure wrapper controls and six actual metadata-reader controls on synthetic PE/PDB fixtures passed. The earlier reader setup failure remains preserved. No candidate Rules assembly was emitted/loaded and no Rules construction or UBT/native build ran. Complete the concrete freeze, clean source/test/API grants and exact count/unit bindings before fresh scoped SOURCE/integrations. No previous admission or GO transfers. All eight native phases remain NOT_RUN/no RunRoot.
+**Revision:** 62 — RULES_WITNESS_AMENDMENT_ADOPTED_BINDINGS_PENDING. Root adopted the finite-witness SOURCE criteria and source-inspected metadata constructors. The reference is 98 BODY files / 49,749 prospective physical rows, with the full witness selected in record 1, 318 flat input descriptors and the new source-only test as BODY098; staged membership remains 33. Derive actual clean norm/body/unit counts from the fresh freeze before review. Seven-source static diagnostics are zero; 51 pure wrapper controls and six synthetic binary-reader controls passed. Failures remain preserved. No candidate Rules/UBT/native execution or current SOURCE admission exists. Fresh scoped SOURCE, both integrations, root audits and the labelled aggregate precede phases; no old GO transfers.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,36 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 61 changes
+### Revision 62 changes
+
+Root adopted the [finite-witness SOURCE amendment](research/2026-10-20-e04a-source-composition-packet-v5.md)
+and its [exact source/input bindings](evidence/2026-10-20-e04a-rules-witness-amendment-adoption.json).
+BODY095 now includes complete material observer/API and six missing emitted-enum
+declarations: 5,751 physical / 5,551 installed literal rows, 50 ranges, 21 origins.
+Root read each addition and reconstructed all literal rows against installed
+source. BODY098 supplies the complete 154-row source-only validator test; the
+33 staged project members remain unchanged. Both integrations require the full
+module-side observer in BODY003. All earlier source, data and graph duties remain.
+
+The constructors bind the complete 17-key witness and 32 typed selectors, all
+318 distinct source/runtime descriptors, exact literal AST/control-flow units
+and all 13 selected records. Ordinary inspection found and repaired array-shape
+loss in a metadata comparison and unchecked Git status failures in the binder.
+Their prior drafts and six earlier unit-hash preparation failures remain preserved;
+the current 34 literal unit hashes match. These checks establish no independent
+SOURCE approval or native result.
+
+Use a clean new candidate/run/freeze/common manifest and ten fresh bound panels.
+Actual counts must be rederived after clean norm refresh. The prospective review
+budget is 5,400 seconds for BUILD, TARGET, PLUGIN and both integrations; other
+scopes retain 1,800 seconds. This extends no closed attempt and permits no retry.
+Every actual launch still requires exact root verification and its own GO.
+All ten valid complete PASS reports, root runtime/input/completeness audits and
+the labelled aggregate precede any native phase. Final CODE/different REQ,
+A1G/A2/HUD, Linux, packaging and broader acceptance remain open. Standing direct
+review-packet consent persists until explicitly revoked.
+
+### Revision 61 history
 
 The [metadata-reader checks](evidence/2026-10-20-e04a-rules-metadata-reader-result.json)
 exercise the actual wrapper decoder against two trusted synthetic DLL/PDB pairs.

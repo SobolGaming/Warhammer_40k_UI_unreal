@@ -78,7 +78,27 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 61 (2026-10-20 UTC) is
+Current A1E status at plan revision 62 (2026-10-20 UTC) is
+**RULES_WITNESS_AMENDMENT_ADOPTED_BINDINGS_PENDING**. Root adopted the
+[finite-witness SOURCE criteria](docs/plans/research/2026-10-20-e04a-source-composition-packet-v5.md)
+and [metadata source/input bindings](docs/plans/evidence/2026-10-20-e04a-rules-witness-amendment-adoption.json).
+Reference inventory is 98 BODY / 49,749 prospective physical rows; derive actual
+counts after clean norm refresh. Entire BODY095 is 5,751 rows; source-only test
+BODY098 adds no staged member. Both integrations require full BODY003. Record 1
+positively selects the entire 17-key witness; all 318 descriptors must be flat
+frozen. Preserve 13 records, 32 typed selectors and 33 staged members.
+
+Source-inspected constructors may create fresh owned metadata with exact new
+candidate/run bindings; no review launch or phase follows automatically. Bind
+the selected scope budgets: 5,400 seconds for BUILD/TARGET/PLUGIN/both integrations,
+1,800 for the other five scopes. Do not extend/retry a closed attempt. Require
+all ten fresh valid complete PASS assessments, root runtime/input/completeness
+audits and a labelled aggregate before phases. No old report/admission/GO transfers.
+Current static/pure/synthetic checks establish no actual Rules/private API/UBT
+or native result. All native/final and later gates remain open. Standing private
+source/API review consent persists until explicitly revoked.
+
+Historical A1E status at plan revision 61 (2026-10-20 UTC) is
 **RULES_WITNESS_CONTROLS_PASSED_PACKETS_PENDING**. The current seven-source
 static check has zero diagnostics; all 51 pure wrapper controls and six actual
 metadata-reader cases on trusted synthetic DLL/PDB fixtures passed. Preserve
