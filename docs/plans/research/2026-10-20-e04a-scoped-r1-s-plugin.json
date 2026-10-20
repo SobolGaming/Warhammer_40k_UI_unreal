@@ -1,0 +1,189 @@
+{
+  "recordKind": "INDEPENDENT_SCOPED_SOURCE_ASSESSMENT",
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "campaignId": "E04A1E-SCOPED-f7f77eb-20261020T044205Z-14143fc0",
+  "scopeId": "S_PLUGIN",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "subject": {
+    "sourceHead": "f7f77eb281c0629fba12fa5a352e5301bf43e738",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T044205Z-14143fc0",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF"
+  },
+  "bindingVerification": {
+    "actualHeadAndBase": "Verified using read-only Git object-identity queries.",
+    "inputManifestSHA256": "82c670db67200c83e05b9a88b7d9a16a2dc96bd73e2cdb935a42440c4c03f3a0",
+    "runtimeFreezeSHA256": "a0a5375cd24f72aeb8a8c14fd89bbd9b541507d693fabe0686c0f186fb2551e2",
+    "scopeContractSHA256": "3f7b477a836e770cd7a8df90c1fe31ce53ab2bdc6438112c48519d694d470edb",
+    "bootstrapSHA256": "a2e9f4c02dec75b12853b830d682b2f841bc66dd6063f408bc25560df5101c97",
+    "coveragePlanSHA256": "c90354a0267ee6b594c107959351d8feeb5d4d68717319e4f7e47a2c89088e3f",
+    "launchPermissionSHA256": "36b0a7eeb01d07cf2643c66721fd456d89b15e5d3a0bdd7fa4e06af5c5500a6b",
+    "rootLaunchGoSHA256": "ae344810d57da225d1f7972fe1eb50c09a8edc53207824c130f25446b4cd5d89",
+    "actualPromptFileSHA256": "2e185af738975da139fee689b7eaf2ce4027c7c240561be4a458135b4c1d387b",
+    "result": "Descriptors, byte lengths and hashes match. The actual prompt's subject, local duties, access, ownership and common requirements match the pure contract. Its two material joins exactly match the contract joins assigning S_PLUGIN. Template actualGo=false and null report fields were not treated as authority or results."
+  },
+  "independenceAndRuntime": {
+    "sessionId": "01a157a7-503d-7e33-8eea-bc11f7e88dd2",
+    "turnId": "01a157a7-51c3-7e93-aab6-3e1576013bb8",
+    "selectedRuntimeEvidenceSHA256": "488eb3ea8f131e2827bfb86f06b685eb9e63e9baf472e31ef5fff503a1ab096f",
+    "observed": {
+      "model": "gpt-6.1-sol",
+      "effort": "ultra",
+      "sandbox": "read-only",
+      "approvalPolicy": "never",
+      "memoryMode": "disabled",
+      "matchingInitialPayloadCount": 1
+    },
+    "transport": {
+      "actualUserPayloadBytes": 22094,
+      "actualUserPayloadSHA256": "89a031fcada734dcf6751856adf594fc78d98a184329eae3c8df29444d35c503",
+      "originalPromptFileBytes": 22092,
+      "byteIdentical": false,
+      "equalAfterTrailingCrLfRemoval": true,
+      "normalizedPayloadSHA256": "19066b9129f202fdeb05652c1c53c7a4968a9bde79ad4fa889c7aeb717bc707e"
+    },
+    "conduct": "No delegation, resume, fork, memory access, peer reports, previous verdicts, author notes, credentials or private rollout bodies were used. No files were saved or modified.",
+    "limits": "Runtime observations come from the selected own-session evidence. Lower-level isolation, memory internals, app/multi-agent enforcement, OS PID linkage and the closed-session audit remain UNVERIFIED; requested settings are not substituted for those properties."
+  },
+  "actualCoverage": {
+    "mandatoryEntireFilesComplete": 34,
+    "mandatoryEntirePhysicalRowsComplete": 8482,
+    "completePhysicalRanges": {
+      "SOURCE-BODY-001": [1, 15],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-016": [1, 8],
+      "SOURCE-BODY-019": [1, 288],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-059": [1, 407],
+      "SOURCE-BODY-060": [1, 67],
+      "SOURCE-BODY-061": [1, 292],
+      "SOURCE-BODY-062": [1, 151],
+      "SOURCE-BODY-063": [1, 144],
+      "SOURCE-BODY-064": [1, 271],
+      "SOURCE-BODY-065": [1, 567],
+      "SOURCE-BODY-066": [1, 40],
+      "SOURCE-BODY-067": [1, 63],
+      "SOURCE-BODY-068": [1, 267],
+      "SOURCE-BODY-069": [1, 445],
+      "SOURCE-BODY-070": [1, 51],
+      "SOURCE-BODY-071": [1, 54],
+      "SOURCE-BODY-072": [1, 407],
+      "SOURCE-BODY-073": [1, 545],
+      "SOURCE-BODY-074": [1, 585],
+      "SOURCE-BODY-075": [1, 166],
+      "SOURCE-BODY-076": [1, 621],
+      "SOURCE-BODY-077": [1, 134],
+      "SOURCE-BODY-078": [1, 211],
+      "SOURCE-BODY-079": [1, 212],
+      "SOURCE-BODY-080": [1, 245],
+      "SOURCE-BODY-083": [1, 971],
+      "SOURCE-BODY-084": [1, 454],
+      "SOURCE-BODY-092": [1, 50],
+      "SOURCE-BODY-093": [1, 88]
+    },
+    "mandatoryInterface": {
+      "body": "SOURCE-BODY-013",
+      "sha256": "642FD17AE0E46F179C694CBF593365446F989E7754F01D37BD7CB4942EB08E14",
+      "completePhysicalRanges": [[1236, 1390], [1548, 1554]],
+      "physicalRows": 162,
+      "completeUnits": {
+        "Catalog-Descriptors": [1236, 1256],
+        "Check-PluginDiscoveryCatalog": [1259, 1297],
+        "Resolve-ReceiptPath": [1300, 1308],
+        "Check-TargetReceipt": [1311, 1350],
+        "Check-StagedPluginClosure": [1353, 1390],
+        "Native-Arguments": [1548, 1554]
+      },
+      "verification": "Complete bodies read; inert PowerShell syntax parsing confirmed boundaries with zero parse errors. Implementation was not invoked."
+    },
+    "additionalEntireBodies": [
+      "SOURCE-BODY-004",
+      "SOURCE-BODY-010",
+      "SOURCE-BODY-011",
+      "SOURCE-BODY-017",
+      "SOURCE-BODY-018",
+      "SOURCE-BODY-023",
+      "SOURCE-BODY-024",
+      "SOURCE-BODY-025"
+    ],
+    "additionalSource": "Relevant BODY013 build/caller sections and BODY058 startup/environment/receipt routes, including complete AppInit and editor-executable helper units. Additional searches of BODY047/081/082 do not constitute complete-file review.",
+    "metadata": {
+      "fullAssignedRecordsComplete": [9, 10],
+      "additionalFullSelectedRecordRead": 11,
+      "relationshipRecordsAssessed": [1, 2, 4, 5, 7, 8, 11, 12],
+      "descriptorRowsAssessed": 902,
+      "pluginReferenceOccurrencesAssessed": 1561,
+      "moduleOccurrencesAssessed": 1774,
+      "moduleSelectorClassesAssessed": 310,
+      "selectedMembershipDescriptorsJoined": 245
+    },
+    "inventoryVerification": "All 93 BODY descriptors match the global grants, own manifest and actual files; recalculated global physical rows are 32460. All 13 selected metadata descriptor identities verify. This is not a claim of substantive review of all 93 bodies or all 13 records.",
+    "unreadScope": "Nonmandatory bodies outside the additional reads, unselected metadata fields, unrelated provenance details and installed plugin implementation bodies remain unread. No mandatory local body, declared unit or material runtime graph duty remains incomplete. Record8 origin-by-origin literal certification remains assigned to the three D_SELECTORS scopes."
+  },
+  "assessment": [
+    {
+      "conclusion": "Descriptor discovery is a broader input set than runtime enablement.",
+      "evidence": [
+        "BODY074 physical 28-311: root enumeration, project/mod/external roots and child merging",
+        "BODY074 physical 375-485: Content exclusion and stopping descent at a discovered descriptor",
+        "BODY073 physical 424-450: absent versus explicit EnabledByDefault behavior",
+        "BODY013 physical 1236-1297: frozen raw superset and extra-root/environment checks",
+        "Metadata records9/10 and all902 record8 rows"
+      ],
+      "detail": "The 901 engine catalog members plus the project descriptor form the 902-row input. Names are unique. Five bIsPluginExtension descriptors contain no module/dependency additions. The supported-platform, explicit-platform, program, default, extension and explicit-loading values were interpreted against the runtime readers rather than treated as derived enablement."
+    },
+    {
+      "conclusion": "The selected245 membership is supported as the bounded runtime closure.",
+      "evidence": [
+        "BODY076 physical 139-297: receipt/project/default selection",
+        "BODY072 physical 168-407: dependency traversal and filters",
+        "BODY078 physical 35-184: reference defaults, required fields and filter semantics",
+        "Metadata records7/8/11/12"
+      ],
+      "detail": "Independent traversal with target-platform plugin loading enabled yields exactly the selected245 names. Disabling that setting yields a 241-name subset, excluding LowLevelNetTrace, OnlineSubsystemGooglePlay, OnlineSubsystemIOS and XCodeSourceCodeAccess. Both optional-reference bounds produce the same active closure. Neither route reaches UdpMessaging, TcpMessaging, QuicMessaging, WebSocketMessaging, DiscoveryBeaconReceiver or NetworkServiceDiscovery. Dormant incoming references to disabled plugins were inspected and were not dismissed merely because those names occur in the disabled list."
+    },
+    {
+      "conclusion": "Module eligibility and automatic loading remain distinct from plugin membership.",
+      "evidence": [
+        "BODY065 physical 281-567: compilation/runtime filters and loading-phase calls",
+        "BODY075 physical 70-166: enabled-plugin loading and ExplicitlyLoaded exclusion",
+        "BODY076 physical 410-563: processing/mounting exclusions",
+        "Record8 complete module data"
+      ],
+      "detail": "All1774 entries were evaluated through their literal selector combinations. Under the stated Win64 x64 Development Editor, developer-tools, uncooked and non-commandlet conditions, selected245 contains482 module entries and459 candidates for automatic phase loading. Platform exclusions, explicit empty platform lists and LoadingPhase=None explain the remainder. The six ExplicitlyLoaded=true plugins are outside the active closure. Program-only rules and differently spelled program properties were retained without inventing Editor restrictions."
+    },
+    {
+      "conclusion": "Project, target, receipt and wrapper relationships agree within this subset.",
+      "evidence": [
+        "BODY001 physical 1-15",
+        "BODY002 physical 1-17",
+        "BODY016 physical 1-8",
+        "BODY059 physical 1-93",
+        "BODY060 physical 21-61",
+        "BODY061 physical 180-208",
+        "BODY083 physical 131-150 and 846-862",
+        "BODY084 physical 38-166",
+        "BODY013 physical 1311-1390 and 1548-1554"
+      ],
+      "detail": "The dedicated target enables E04ProfileProof; ordinary targets do not. The project explicitly enables ProceduralMeshComponent. Receipt overrides and BuildPlugins are consumed for different purposes. The wrapper requires the unique staged receipt, exact project/launch identities and reviewed override policy. Record12's older provenance head/run was not treated as current authority: its complete ordered245 descriptor identities were independently joined to the current closure and record8, with no discrepancies."
+    }
+  ],
+  "findings": [],
+  "errorsAndRecoveries": [
+    "Several oversized combined source/metadata outputs were truncated. Mandatory source omissions were reread using positive physical ranges; omitted graph/module-class portions were recovered in smaller reads. Truncated unrelated provenance output was not credited as complete review.",
+    "An initial flattened PowerShell query counted absent-array null placeholders, producing1871/1800. Presence-aware iteration corrected the actual counts to1561 references and1774 modules; neither array has explicit-null occurrences.",
+    "A whole-contract comparison initially flagged materialJoins because the global contract contains six joins. Substantive selection of the two joins assigning S_PLUGIN established exact local equality.",
+    "No EOF, JSON parser or mandatory-file hash errors remained. No stored command, implementation helper, YAML parser, build, test, engine, GUI, network or GitHub operation was executed."
+  ],
+  "materialUncertaintyAndLimits": [
+    "The traversal and module totals are conditional source calculations, not observed installed-binary enablement, module loading or native execution.",
+    "Actual compiler definitions, receipt production/selection, startup diagnostics and module/function-call evidence remain later phase obligations.",
+    "The raw descriptor superset and disabled-plugin closure do not establish universal plugin side-effect or whole-process network isolation.",
+    "The own-session transport line-ending difference and lower-level isolation limits remain disclosed for root's administrative validation."
+  ],
+  "disposition": "Local S_PLUGIN SOURCE_PASS only. This is not the aggregate SOURCE gate, a phase/native GO, final CODE/REQ acceptance, or production adoption. Required E04-A1G, A2 compatibility, Linux, rendering/HUD, packaging and other gates remain open."
+}

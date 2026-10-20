@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY**. Root prospectively adopted five primary SOURCE, three descriptor-data and two fresh blind integration contexts. All ten complete valid PASS assessments, root audits and an explicitly labelled aggregate are required; exact bound packets are not ready and no review/native/phase GO, acceptance or merge is granted. The full 93-BODY/13-record/902-row/reference relationships remain required; raw r7/all earlier records and all eight NOT RUN phases are unchanged.
+The bounded E04-A1E proof is **SCOPED_SOURCE_BLOCKED_TARGET_RULES_INPUTS**. Eight initial scoped reviews are closed: seven raw local passes and one target/receipt BLOCKED for missing inherited target-rule primary inputs. The reports are preserved; integrations and all native phases are NOT RUN. Complete amended inputs and fresh affected reviews remain required before a build.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +76,22 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 50 records **SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY**.
+Plan revision 51 records **SCOPED_SOURCE_BLOCKED_TARGET_RULES_INPUTS**.
+Eight fresh initial scoped SOURCE reviews are closed for `f7f77eb` / run
+`20261020T044205Z-14143fc0`: seven raw local SOURCE_PASS reports and one
+BLOCKED target/receipt report. `TARGET-RECEIPT-B01` identifies missing complete
+inherited plugin-dependency hook and target-selector defaults/initialization
+primary inputs, without asserting an implementation defect. All eight raw
+reports were sealed before body reads and preserved unchanged; both integrations
+remain NOT LAUNCHED. No local pass is admitted to an aggregate. The
+[factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r1-result.json) binds closure and limitations. Amend/refreeze the necessary
+primary inputs and exact access guidance, then obtain fresh affected SOURCE
+and blind integrations. All eight phases remain NOT RUN/no native RunRoot;
+implementation and historical path controls are unchanged/not rerun. Final
+CODE/different REQ, A1G/A2, Linux and broader gates remain open. Standing
+private-source/API review consent persists until explicit revocation.
+
+Historical plan revision 50 records **SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY**.
 Root has prospectively adopted the [ten-context SOURCE composition packet](docs/plans/research/2026-10-20-e04a-source-composition-packet.md):
 five fresh blind primary SOURCE scopes, three complete descriptor-data partitions
 and two fresh blind integrations after the eight primary/data reports are sealed.

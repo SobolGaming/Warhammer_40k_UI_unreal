@@ -1,11 +1,26 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 50 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 51 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 50 records **SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY**.
+Revision 51 records **SCOPED_SOURCE_BLOCKED_TARGET_RULES_INPUTS**.
+Eight fresh initial scoped SOURCE reviews are closed for `f7f77eb` / run
+`20261020T044205Z-14143fc0`: seven raw local SOURCE_PASS reports and one
+BLOCKED target/receipt report. `TARGET-RECEIPT-B01` identifies missing complete
+inherited plugin-dependency hook and target-selector defaults/initialization
+primary inputs, without asserting an implementation defect. All eight raw
+reports were sealed before body reads and preserved unchanged; both integrations
+remain NOT LAUNCHED. No local pass is admitted to an aggregate. The
+[factual record](evidence/2026-10-20-e04a-scoped-r1-result.json) binds closure and limitations. Amend/refreeze the necessary
+primary inputs and exact access guidance, then obtain fresh affected SOURCE
+and blind integrations. All eight phases remain NOT RUN/no native RunRoot;
+implementation and historical path controls are unchanged/not rerun. Final
+CODE/different REQ, A1G/A2, Linux and broader gates remain open. Standing
+private-source/API review consent persists until explicit revocation.
+
+Historical revision 50 records **SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY**.
 Root has prospectively adopted the [ten-context SOURCE composition packet](research/2026-10-20-e04a-source-composition-packet.md):
 five fresh blind primary SOURCE scopes, three complete descriptor-data partitions
 and two fresh blind integrations after the eight primary/data reports are sealed.

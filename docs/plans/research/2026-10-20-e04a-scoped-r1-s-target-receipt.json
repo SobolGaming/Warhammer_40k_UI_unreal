@@ -1,0 +1,224 @@
+{
+  "verdict": "BLOCKED",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-f7f77eb-20261020T044205Z-14143fc0",
+  "scopeId": "S_TARGET_RECEIPT",
+  "subject": {
+    "sourceHead": "f7f77eb281c0629fba12fa5a352e5301bf43e738",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T044205Z-14143fc0",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+    "requiredLaterSubset": "E04-A1G"
+  },
+  "disposition": "All mandatory source bodies were read completely. Exact build-selection relationship approval is blocked by missing positively granted primary implementations. No implementation defect is asserted from that evidence gap.",
+  "bindings": {
+    "scopeContractPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-f7f77eb-20261020T044205Z-14143fc0-S_TARGET_RECEIPT\\scope-contract.original.json",
+    "scopeContractSha256": "3f7b477a836e770cd7a8df90c1fe31ce53ab2bdc6438112c48519d694d470edb",
+    "bootstrapSha256": "99c18d953155f27e9097c4f0f5e36b1d7134754e3bb4b7975d57e3a781435997",
+    "coverageSha256": "142814f905345555f66ba759aed27c16832fe6b40e9789d84ca04ecb4fbff614",
+    "inputManifestSha256": "b03a70373ab64737c71e859a2d1edc89293c6d28c13ed4c5e42574d17d9a65df",
+    "runtimeFreezeSha256": "a0a5375cd24f72aeb8a8c14fd89bbd9b541507d693fabe0686c0f186fb2551e2",
+    "launchPermissionSha256": "66c1e9a1454e8ee71fa7227c334bf9ad73783fcf31b09a006a7646ac4e1a336f",
+    "preparedPromptSha256": "b26dea704da540817a943444bb840ad14483181fe3c9b7415dd83b6f35b91a8c",
+    "actualPromptSha256": "599e2d08de280fff957fa9102ff9f578d6da16053cf7d8c6046a5cd91c857469",
+    "rootLaunchGoSha256": "13e8712f98b9bb32e0facfd29e4717cfaf27ac1390e92b4dd23f033c74f4769e",
+    "ownBodyPolicySha256": "23a3975bc98d1a90cee5edad6cba960ed56b5900d09741add1b194070838a8c7",
+    "ownMetadataPolicySha256": "4066e523345d19e669b486663d5a574f7f762a55d208aefd4455b79432b021a5",
+    "globalBodyPolicySha256": "7008d21165ff2d657c98daf31646375cedc7dc1c302bcf2710e1dfd3c8ab75bc",
+    "globalMetadataPolicySha256": "cb808ca909ef0b7176d1a323f12e402295f1d9c6946ec8b6db8a111055e0433a",
+    "globalCoverageSha256": "abc393c499be3558333feb002f18059eb7acf01794c9308013a86caeea6c2744",
+    "primaryCatalogSha256": "0e677eef666ac98d9dae453ad53b973cb6fc94c8db4fb63d3bafb115f926d35d",
+    "commonInputManifestSha256": "999a4decffc4f3a95f42de057f21ad63fff5e00b1d5486bef442096910b8e4b2",
+    "checks": [
+      "Listed artifact byte counts and SHA256 identities matched.",
+      "Own selected subject and scope exactly matched the corresponding contract objects.",
+      "The manifest scopeContract descriptor has exactly path, bytes and sha256.",
+      "The actual-prompt artifact begins with the complete prepared-prompt artifact using ordinal comparison; its remaining tail matches the supplied actual GO.",
+      "Contract actualGo=false and reviewLaunchAuthority=false were preserved as descriptor limitations; the separate actual GO supplies review authority.",
+      "Own BODY grant descriptors exactly matched the bound global BODY grants."
+    ],
+    "qualification": "These checks bind the supplied identities and stored prompt artifacts. They do not independently attest the model-context byte stream, Git ancestry, current clean HEAD/base, or external launch history."
+  },
+  "blockingFindings": [
+    {
+      "id": "TARGET-RECEIPT-B01",
+      "kind": "MATERIAL_PRIMARY_SOURCE_GAP",
+      "finding": "The granted UBT selection body invokes Rules.ShouldIgnorePluginDependency, but the hook implementation is absent from all 93 granted bodies. Relevant target selector definitions/defaults are also absent. The dedicated target's lack of an override does not establish the inherited hook's behavior.",
+      "sourceCitations": [
+        "SOURCE-BODY-084 physical line 247: UEBuildTarget.cs:5816, dependency filtering during existing-instance promotion.",
+        "SOURCE-BODY-084 physical line 400: UEBuildTarget.cs:5969, dependency filtering during new-instance traversal.",
+        "SOURCE-BODY-084 physical lines 278 and 322: UEBuildTarget.cs:5847 and 5891, bIncludePluginsForTargetPlatforms branches.",
+        "SOURCE-BODY-084 physical line 375: UEBuildTarget.cs:5944, module selection using target developer-tools/cooked-data settings.",
+        "Complete granted-BODY text search found ShouldIgnorePluginDependency only at its two call sites."
+      ],
+      "requirementCitations": [
+        "scope.scopeId=S_TARGET_RECEIPT, duties[2]: complete build-selection relationships across every 902 descriptors and all 1561 Plugin-reference occurrences.",
+        "materialJoins.SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH.completeDuty.",
+        "reviewDiscipline.materialGap: a necessary ungranted primary requires amendment/refreeze or precise BLOCKED."
+      ],
+      "materiality": "Exact edge/filter dispositions cannot be certified by substituting a conservative name closure. For example, selected rows 134, 599 and 602 explicitly default-enable plugins with SupportedTargetPlatforms excluding Win64; their build disposition depends on the actual target-selection settings.",
+      "requiredResolution": "Amend/refreeze with positively granted complete TargetRules.ShouldIgnorePluginDependency implementation units and applicable selector definitions/defaults and initialization/configuration routes, including bIncludePluginsForTargetPlatforms, bAllowEnginePluginsEnabledByDefault, bBuildDeveloperTools and bBuildRequiresCookedData. Reassess affected build relationships.",
+      "missingOrigin": {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Programs\\UnrealBuildTool\\Configuration\\Rules\\TargetRules.cs",
+        "boundWholeFileSha256": "E1B31E6D329AE730B37C48A0DE3A5D3F60D52FE6CE1665682E0362925133041D",
+        "accessObserved": "Selected excerpts and whole-file identity; no additional origin BODY grant inferred."
+      }
+    }
+  ],
+  "sourceObservations": [
+    {
+      "observation": "The dedicated Editor target explicitly enables E04ProfileProof. Ordinary targets leave the plugin disabled by default.",
+      "citations": [
+        "SOURCE-BODY-001:1-15",
+        "SOURCE-BODY-002:8-15",
+        "SOURCE-BODY-017:1-12",
+        "SOURCE-BODY-018:1-12"
+      ]
+    },
+    {
+      "observation": "Receipt construction separates target overrides from BuildPlugins. Runtime consumes BuildPlugins as an optional-dependency allowlist; it is not itself a runtime enable-root list.",
+      "citations": [
+        "SOURCE-BODY-083:131-150",
+        "SOURCE-BODY-083:695-718",
+        "SOURCE-BODY-059:58-93",
+        "SOURCE-BODY-084:147-162"
+      ]
+    },
+    {
+      "observation": "Startup inserts UE-CmdLineArgs before plugin selection. The wrapper clears that channel and UE_ADDITIONAL_PLUGIN_PATHS, supplies explicit runtime plugin switches, and checks staged receipt identity and overrides.",
+      "citations": [
+        "SOURCE-BODY-058:82-102",
+        "SOURCE-BODY-013:901-915",
+        "SOURCE-BODY-013:1311-1349",
+        "SOURCE-BODY-013:1548-1553",
+        "SOURCE-BODY-059:265-278"
+      ]
+    },
+    {
+      "observation": "Editor exception inheritance is explicitly distinguished from the required later exception-disabled caller proof.",
+      "citations": [
+        "SOURCE-BODY-004:8-13",
+        "SOURCE-BODY-010:8-16",
+        "SOURCE-BODY-047:30-64",
+        "SOURCE-BODY-057:12-17",
+        "SOURCE-BODY-092:26-49"
+      ]
+    }
+  ],
+  "coverage": {
+    "mandatoryEntireBodies": {
+      "required": 31,
+      "completelyRead": 31,
+      "physicalLines": 10543,
+      "unreadMandatoryBodyRanges": [],
+      "completePhysicalRanges": {
+        "SOURCE-BODY-001": "1-15",
+        "SOURCE-BODY-002": "1-17",
+        "SOURCE-BODY-003": "1-326",
+        "SOURCE-BODY-004": "1-15",
+        "SOURCE-BODY-010": "1-18",
+        "SOURCE-BODY-013": "1-1696",
+        "SOURCE-BODY-016": "1-8",
+        "SOURCE-BODY-017": "1-12",
+        "SOURCE-BODY-018": "1-12",
+        "SOURCE-BODY-019": "1-288",
+        "SOURCE-BODY-020": "1-3",
+        "SOURCE-BODY-021": "1-12",
+        "SOURCE-BODY-022": "1-1",
+        "SOURCE-BODY-023": "1-8",
+        "SOURCE-BODY-024": "1-4",
+        "SOURCE-BODY-025": "1-2",
+        "SOURCE-BODY-054": "1-294",
+        "SOURCE-BODY-055": "1-142",
+        "SOURCE-BODY-056": "1-14",
+        "SOURCE-BODY-057": "1-196",
+        "SOURCE-BODY-058": "1-2257",
+        "SOURCE-BODY-059": "1-407",
+        "SOURCE-BODY-060": "1-67",
+        "SOURCE-BODY-061": "1-292",
+        "SOURCE-BODY-062": "1-151",
+        "SOURCE-BODY-081": "1-1725",
+        "SOURCE-BODY-082": "1-998",
+        "SOURCE-BODY-083": "1-971",
+        "SOURCE-BODY-084": "1-454",
+        "SOURCE-BODY-092": "1-50",
+        "SOURCE-BODY-093": "1-88"
+      },
+      "declaredCompleteUnitRanges": []
+    },
+    "additionalBodies": {
+      "completelyRead": {
+        "SOURCE-BODY-047": "1-398"
+      },
+      "partialTextSearchReads": {
+        "SOURCE-BODY-064": [109, 239],
+        "SOURCE-BODY-065": [281, 369, 371, 375]
+      },
+      "qualification": "Other granted bodies were not substantively read. Whole-file hashing and text searches are not claimed as complete source assessment."
+    },
+    "inventoryVerification": {
+      "bodyFiles": 93,
+      "physicalLines": 32460,
+      "bodyIdentityOrLineCountErrors": [],
+      "selectedMetadataRecords": 13,
+      "all13SelectedArtifactHashesMatched": true
+    },
+    "selectedMetadataInspection": {
+      "record4": "All 45 groups inspected; all 113 unique source descriptors joined to group sources and freeze descriptors.",
+      "record5": "All 27 bindings inspected completely.",
+      "record7": "Scalars, receipt policy, roots, absences, environment channels and enabled names inspected. All 901 root-catalog identities joined to selected rows; all 245 descriptor identities joined to record12; all 81 source bindings compared against records5/6 with ordered symbols and ranges.",
+      "record11": "Complete literal project object inspected.",
+      "record12": "All 245 descriptor identities joined uniquely to selected rows and the current closure. Its historical head/run/originClosure descriptor were retained as historical metadata, not current approval.",
+      "records9And10": "Complete selected catalog and field-policy records inspected.",
+      "remainingRelationshipCoverage": "Record1 compilerInputs was not fully expanded; record2 structured relationships were only partially inspected; record3 selected contents were not inspected; record13 acquisition scalars were inspected, but its complete file/tree/license relationships were not assessed."
+    },
+    "descriptorAndGraphInspection": {
+      "indexedRows": 902,
+      "originIdentitiesCompared": 902,
+      "namedFieldsCheckedForPresenceAndAbsencePerRow": 49,
+      "presentSelectedValuesComparedIncludingNestedArrayOrder": 7154,
+      "literalProjectionErrors": [],
+      "pluginReferenceOccurrences": 1561,
+      "duplicateDescriptorNamesIgnoringCase": [],
+      "conservativeClosureEnabledNames": 245,
+      "conservativeClosureDescriptors": 245,
+      "enabledNamesWithoutMatchingDescriptor": [],
+      "enabledParentTrueReferencesOutsideConservativeClosure": [],
+      "qualification": "All rows and reference occurrences participated in literal/structural queries. Complete semantic build-edge dispositions, target defaults, filtered reachability and related module selection remain BLOCKED; no complete graph approval is claimed."
+    }
+  },
+  "errorsAndRecoveries": [
+    "Several oversized combined policy/metadata outputs were truncated. Applicable scope, policy, coverage and metadata portions were recovered through smaller named reads and complete identity/value comparisons. Mandatory source-body reads subsequently covered their complete positive physical ranges without truncation.",
+    "A PowerShell pipeline parser error and a Select-Object null-field-list error were corrected and rerun successfully.",
+    "An initial reference-count query counted absent-property null pipeline outputs. The corrected presence-aware traversal counted exactly 1561 occurrences.",
+    "An initial SupportedTargetPlatforms query treated absent null values incorrectly. The corrected presence-aware query identified only rows134,599,602 for the stated condition.",
+    "Coarse source-binding equality was false. Field comparisons established zero identity/symbol/range errors after explicitly accounting for162 hexadecimal-case and121 Windows path separator/case representation differences. The records were not represented as literally identical.",
+    "No EOF read errors remained."
+  ],
+  "independenceAndRuntime": {
+    "visibleContext": "No implementation transcript, peer reports, peer graphs or previous verdicts were supplied or read.",
+    "enforcedPermissionsObserved": {
+      "filesystem": "read-only",
+      "approvalPolicy": "never"
+    },
+    "actions": "Read-only PowerShell data reads, JSON parsing, hashing, comparisons and granted-text searches only. No files saved; no delegation, memory tools, stored-command evaluation, implementation helper execution, YAML parsing, builds, tests, engine/GUI launch, network or GitHub actions.",
+    "memory": "Disabled by request; no memory was used by this reviewer. Backend memory configuration was not independently observable.",
+    "readShell": {
+      "path": "C:\\Users\\Rabid\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "version": "7.6.5",
+      "architecture": "X64",
+      "bytes": 301368,
+      "sha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139"
+    },
+    "runtimeUncertainty": "The data-read shell identity is not evidence of the model review CLI invocation. Exact review session/invocation/model identifiers and external no-resume/no-retry history were not independently established here; root must retain their actual launch evidence."
+  },
+  "authority": {
+    "localAssessmentOnly": true,
+    "aggregateSourceGateEstablished": false,
+    "phaseAuthority": false,
+    "nativeAcceptanceEstablished": false,
+    "finalAcceptanceEstablished": false,
+    "remainingGates": "A1G, A2 compatibility, Linux, rendering/HUD, packaging and independent final CODE/different REQ remain open."
+  }
+}

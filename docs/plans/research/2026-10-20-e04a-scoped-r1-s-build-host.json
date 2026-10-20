@@ -1,0 +1,255 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-f7f77eb-20261020T044205Z-14143fc0",
+  "scopeId": "S_BUILD_HOST",
+  "subject": {
+    "sourceHead": "f7f77eb281c0629fba12fa5a352e5301bf43e738",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T044205Z-14143fc0",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+    "runtimeFreezeManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-f7f77eb-20261020T044205Z-14143fc0\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+      "bytes": 548601,
+      "sha256": "a0a5375cd24f72aeb8a8c14fd89bbd9b541507d693fabe0686c0f186fb2551e2"
+    },
+    "inputManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-f7f77eb-20261020T044205Z-14143fc0-S_BUILD_HOST\\source-review-input-manifest.json",
+      "bytes": 554826,
+      "sha256": "eec44c491b1d5de654cc81f4d311236be27c6c75b61025634715faa21ee1e8a0"
+    }
+  },
+  "bindingAssessment": {
+    "result": "MATCH",
+    "scopeContractSha256": "3f7b477a836e770cd7a8df90c1fe31ce53ab2bdc6438112c48519d694d470edb",
+    "bootstrapSha256": "bd3ad1e3f5cafad30687f1d08839cebbb8f30a80ea1e730339d608272859bffa",
+    "coverageSha256": "511aa8cc1db6b52d38e7862816fb33f3ad5ba7c0bd3cdb529732cf6b19ba30de",
+    "launchPermissionSha256": "e1b2c3f5186605713254f5564cc5627abcb2591e5c522d34aba421e2b8ee9187",
+    "rootLaunchGoSha256": "fad9a9a88b38ccca92c3a9e8240b41e74fa1013827581cf7a88bf722ea49b36c",
+    "preparedPromptSha256": "df950132fe411bc59b8931d14d7cc465f752f007cb8444913319ec2ff66a092a",
+    "actualPromptSha256": "051a24a2439b64ef7b2446748e8d9e3fcaed34ece07ce9114477ab2018498177",
+    "otherBoundDescriptors": {
+      "globalBodyAccessPolicy": "7008d21165ff2d657c98daf31646375cedc7dc1c302bcf2710e1dfd3c8ab75bc",
+      "globalSelectedMetadataPolicy": "cb808ca909ef0b7176d1a323f12e402295f1d9c6946ec8b6db8a111055e0433a",
+      "globalCoverageInventory": "abc393c499be3558333feb002f18059eb7acf01794c9308013a86caeea6c2744",
+      "primaryCatalog": "0e677eef666ac98d9dae453ad53b973cb6fc94c8db4fb63d3bafb115f926d35d",
+      "commonSourceInputManifest": "999a4decffc4f3a95f42de057f21ad63fff5e00b1d5486bef442096910b8e4b2"
+    },
+    "observations": [
+      "Verified descriptor bytes and hashes before substantive source conclusions.",
+      "Seven own identity/policy/coverage/GO records match the exact role, head, base, run, campaign, scope and assessment kind.",
+      "Actual prompt file contains the complete prepared prompt followed by the matching ROOT ACTUAL GO tail.",
+      "Extracted prompt criteria match the bound pure contract and exact own scope. Its five material joins equal the contract joins assigned to S_BUILD_HOST; the additional global selector-graph join is outside this scope.",
+      "Contract launch authority and actualGo remain false. The separately bound current ROOT GO authorizes this review only.",
+      "Head/base are root-supplied identities; Git commit membership was not independently verified."
+    ]
+  },
+  "coverage": {
+    "recalculatedAvailableBodyFiles": 93,
+    "recalculatedAvailablePhysicalRows": 32460,
+    "availableSelectedMetadataRecords": 13,
+    "mandatoryCompleteBodyFiles": 35,
+    "mandatoryCompletePhysicalRows": 8463,
+    "mandatoryUnreadBodies": [],
+    "requiredCompleteUnitRanges": [],
+    "metadataRowPartitions": [],
+    "completeMandatoryPhysicalRanges": {
+      "SOURCE-BODY-001": "1-15",
+      "SOURCE-BODY-002": "1-17",
+      "SOURCE-BODY-003": "1-326",
+      "SOURCE-BODY-004": "1-15",
+      "SOURCE-BODY-005": "1-50",
+      "SOURCE-BODY-006": "1-58",
+      "SOURCE-BODY-010": "1-18",
+      "SOURCE-BODY-011": "1-3",
+      "SOURCE-BODY-012": "1-608",
+      "SOURCE-BODY-013": "1-1696",
+      "SOURCE-BODY-014": "1-260",
+      "SOURCE-BODY-015": "1-510",
+      "SOURCE-BODY-016": "1-8",
+      "SOURCE-BODY-017": "1-12",
+      "SOURCE-BODY-018": "1-12",
+      "SOURCE-BODY-019": "1-288",
+      "SOURCE-BODY-047": "1-398",
+      "SOURCE-BODY-048": "1-564",
+      "SOURCE-BODY-053": "1-293",
+      "SOURCE-BODY-054": "1-294",
+      "SOURCE-BODY-055": "1-142",
+      "SOURCE-BODY-056": "1-14",
+      "SOURCE-BODY-057": "1-196",
+      "SOURCE-BODY-060": "1-67",
+      "SOURCE-BODY-061": "1-292",
+      "SOURCE-BODY-062": "1-151",
+      "SOURCE-BODY-085": "1-24",
+      "SOURCE-BODY-086": "1-675",
+      "SOURCE-BODY-087": "1-680",
+      "SOURCE-BODY-088": "1-521",
+      "SOURCE-BODY-089": "1-63",
+      "SOURCE-BODY-090": "1-9",
+      "SOURCE-BODY-091": "1-46",
+      "SOURCE-BODY-092": "1-50",
+      "SOURCE-BODY-093": "1-88"
+    },
+    "additionalCompletePhysicalRanges": {
+      "SOURCE-BODY-007": "1-52",
+      "SOURCE-BODY-008": "1-48",
+      "SOURCE-BODY-009": "1-276",
+      "SOURCE-BODY-020": "1-3",
+      "SOURCE-BODY-021": "1-12",
+      "SOURCE-BODY-022": "1-1",
+      "SOURCE-BODY-023": "1-8",
+      "SOURCE-BODY-024": "1-4",
+      "SOURCE-BODY-025": "1-2",
+      "SOURCE-BODY-037": "1-109",
+      "SOURCE-BODY-038": "1-116",
+      "SOURCE-BODY-039": "1-118",
+      "SOURCE-BODY-040": "1-109",
+      "SOURCE-BODY-041": "1-103",
+      "SOURCE-BODY-042": "1-96",
+      "SOURCE-BODY-043": "1-40",
+      "SOURCE-BODY-044": "1-83",
+      "SOURCE-BODY-045": "1-78",
+      "SOURCE-BODY-046": "1-150",
+      "SOURCE-BODY-050": "1-367",
+      "SOURCE-BODY-059": "1-407"
+    },
+    "totalCompleteBodies": 56,
+    "totalCompletePhysicalRows": 10645,
+    "unreadGlobalBodyGroups": [
+      "SOURCE-BODY-026 through SOURCE-BODY-036",
+      "SOURCE-BODY-049",
+      "SOURCE-BODY-051 through SOURCE-BODY-052",
+      "SOURCE-BODY-058",
+      "SOURCE-BODY-063 through SOURCE-BODY-084"
+    ],
+    "metadata": {
+      "completeAssignedSelectedRecords": [1, 3, 6],
+      "relationshipRecordsAssessed": [2, 4, 5, 7, 13],
+      "evidence": [
+        "All 1892 freeze file descriptors have one exact matching panel frozen descriptor.",
+        "All 33 live staged-source members match recorded bytes, digests and freeze membership.",
+        "All 167 reference-assembly rows resolve through referenceRoot/relativePath and match actual bytes, digests and freeze membership.",
+        "Record 3 contains 42 groups, 161 source occurrences and 110 unique origin descriptors; origin bytes/digests and group BODY routes match.",
+        "Record 6 contains four groups and 33 source bindings; ranges, symbols and bound source implementations were assessed.",
+        "Integrated record 4 contains 45 groups and 113 origins, including the three RC/compiler normalization additions; route and origin checks match.",
+        "All 81 record 7 source bindings uniquely match the selected binding catalogs.",
+        "All 394 acquired dependency file descriptors match actual bytes/digests; the recipe selects 30 direct src/*.cpp files and copies 38 include members."
+      ],
+      "cardinalityOnly": "Independently counted 902 indexed physical rows and 1561 literal Plugins-array occurrences. This supplies no selector-row or complete-graph semantic review credit."
+    }
+  },
+  "substantiveAssessment": [
+    {
+      "requirement": "scope.selected.json#/scope/duties/0; PROCESS_PRESERVATION",
+      "disposition": "SUPPORTED",
+      "assessment": "The wrapper requires exact single-phase authority and successful same-subset, same-run predecessors. Reviewed all six supervisor controls, five control roots, phase budgets, suspended assignment, retained root identity, restricted handle inheritance, stdout/stderr files, timeout shutdown, final job-zero accounting and cleanup failures. Process receipts are published before receiptArtifact is attached to the enclosing result; build consumers bind that durable receipt.",
+      "citations": [
+        "SOURCE-BODY-013:363-742",
+        "SOURCE-BODY-013:744-994",
+        "SOURCE-BODY-013:1141-1147",
+        "SOURCE-BODY-013:1210-1228",
+        "SOURCE-BODY-013:1621-1696"
+      ]
+    },
+    {
+      "requirement": "scope.selected.json#/scope/duties/1; STAGED_CLIENT; PROCESS_PRESERVATION",
+      "disposition": "SUPPORTED",
+      "assessment": "Reviewed all nine settings roles, the two restricted Known Documents observations, source/stage/fixture snapshots, project-plugin directory and descriptor preservation, owned environment/output/DDC routes, retained partial failures and refusal of uncertain cleanup. The 20 GiB prerequisite, phase deadlines, root counts and post-operation stream/data/report caps are represented honestly; instantaneous disk or vendor allocation ceilings are not claimed. The staged-client assessment covers host copying, entry/configuration routes and preservation, without claiming a new complete review of unread legacy client implementations.",
+      "citations": [
+        "SOURCE-BODY-013:283-361",
+        "SOURCE-BODY-013:1052-1115",
+        "SOURCE-BODY-013:1177-1228",
+        "SOURCE-BODY-013:1548-1580",
+        "SOURCE-BODY-013:1629-1696",
+        "SOURCE-BODY-048:1-564",
+        "SOURCE-BODY-020:1-3",
+        "SOURCE-BODY-023:1-8",
+        "SOURCE-BODY-057:147-196"
+      ]
+    },
+    {
+      "requirement": "scope.selected.json#/scope/duties/2; DEPENDENCY_COMPILER_ABI",
+      "disposition": "SUPPORTED",
+      "assessment": "The selected dependency recipe binds the acquired pin, static Release library, C++20, /MD, compiler/toolchain/SDK selection, generated compile commands, explicit verified header/library copies and retained MIT notice. RC paths use forward slashes before CMake serialization. ModuleRules validates same-run ancestry and receipts and retains read locks through UBT exit. Vendor definitions/includes/linkage remain private to the parser dependency route. NoPCHs and -NoVFS support the strict stage-owned response and forced-definition checks.",
+      "citations": [
+        "SOURCE-BODY-003:22-192",
+        "SOURCE-BODY-003:208-326",
+        "SOURCE-BODY-013:1391-1546",
+        "SOURCE-BODY-050:1-367",
+        "SOURCE-BODY-053:1-293",
+        "SOURCE-BODY-086:298-497",
+        "SOURCE-BODY-087:1-680",
+        "SOURCE-BODY-088:1-521",
+        "SOURCE-BODY-089:1-63",
+        "SOURCE-BODY-090:1-9",
+        "SOURCE-BODY-091:1-46"
+      ]
+    },
+    {
+      "requirement": "VALUE_FIXTURE; actual Editor exception-mode measurement",
+      "disposition": "SUPPORTED",
+      "assessment": "Traced all 38 input IDs, 45 planned attempts and eight suites between manifests, native callers and wrapper validation. Reviewed typed/noexcept refusal, UE-owned input/output lifetime, five inclusive quotas, retained input bytes, primary SHA256 versus auxiliary SHA1 and evaluated check-count contracts. Editor globally enables exceptions and module settings combine using OR; both modules are therefore correctly treated as exception-enabled. Compiler guards, response-chain checks, forced definitions and ledger fields support measurement without claiming A1G.",
+      "citations": [
+        "SOURCE-BODY-005:1-50",
+        "SOURCE-BODY-006:1-58",
+        "SOURCE-BODY-007:1-52",
+        "SOURCE-BODY-008:1-48",
+        "SOURCE-BODY-009:1-276",
+        "SOURCE-BODY-012:1-608",
+        "SOURCE-BODY-013:1591-1619",
+        "SOURCE-BODY-014:1-260",
+        "SOURCE-BODY-015:1-510",
+        "SOURCE-BODY-047:30-64",
+        "SOURCE-BODY-057:56-145"
+      ]
+    },
+    {
+      "requirement": "BUILD_RECEIPT_STARTUP",
+      "disposition": "SUPPORTED_WITH_STATED_EXECUTION_LIMITS",
+      "assessment": "The dedicated target, disabled-by-default proof plugin, staged project and receipt policy agree. Reviewed receipt parsing and matching, rules overrides, defaults, optional BuildPlugins membership and module-loading consumption. The wrapper requires the unique staged receipt before startup phases and separately checks actual startup diagnostics; selected descriptor membership is not treated as runtime enablement.",
+      "citations": [
+        "SOURCE-BODY-001:1-15",
+        "SOURCE-BODY-002:1-17",
+        "SOURCE-BODY-013:1258-1389",
+        "SOURCE-BODY-013:1548-1580",
+        "SOURCE-BODY-059:1-407",
+        "SOURCE-BODY-060:1-67",
+        "SOURCE-BODY-061:1-292",
+        "SOURCE-BODY-062:1-151"
+      ]
+    }
+  ],
+  "findings": [],
+  "errorsAndRecoveries": [
+    "Several combined outputs were truncated. Recovered affected mandatory text and metadata using smaller complete partitions and complete identity queries; no mandatory BODY range remains unread.",
+    "An initial compiler-reference query incorrectly expected a path field. Recovered using the actual relativePath schema and validated every one of the 167 rows.",
+    "An initial case-sensitive digest-display comparison flagged 39 uppercase/lowercase spelling differences. Rechecked digest identity separately from retained literal spelling; no byte or digest mismatch remained.",
+    "Initial broad contract comparisons included fields absent from scope.selected.json and the unassigned global selector-graph join. Resolved against the complete prompt contract and exact five locally assigned joins.",
+    "No EOF or unrecovered parser/query error remains."
+  ],
+  "independenceAndRuntime": {
+    "observedContext": "Scoped initial inputs and current own identity/consent/GO records; no peer reports, previous verdicts, author/operator notes, private sessions/configuration or credentials were used.",
+    "permissions": "Runtime instructions specify read-only filesystem access and approval policy never; review actions were reads, hashes and independently authored inert data queries.",
+    "mutations": false,
+    "delegation": false,
+    "resumeOrForkPerformed": false,
+    "storedCommandsExecuted": false,
+    "helpersBuildsTestsEngineGuiNetworkGitHubExecuted": false,
+    "filesSaved": false,
+    "memory": {
+      "requested": "disabled",
+      "reviewerMemoryUse": "No memory facility used",
+      "actualRuntimeSetting": "UNVERIFIED"
+    },
+    "externalInvocationEvidence": "Exact CLI/model selector, session/invocation identifiers, memory enforcement and launcher-to-message transport are not independently exposed here. Bound prompt/GO files establish their identities, not proof of actual launcher invocation. Root must validate its captured runtime/isolation evidence before aggregate admission."
+  },
+  "limitations": [
+    "This is a local S_BUILD_HOST SOURCE_PASS, not the aggregate SOURCE gate.",
+    "No build, control, discovery, native test, module-load or preservation result was executed or credited.",
+    "Unread global bodies, selector semantics and complete activation/dependency graphs receive no review credit from this assessment.",
+    "Acquisition metadata and matching checkout digests do not independently establish Git provenance or compiled artifact lineage.",
+    "A1G exception-disabled caller proof, A2 compatibility, Linux, rendering/HUD, packaging, final independent CODE and different REQ gates remain open.",
+    "No phase, native, final-acceptance, publication or merge authority is supplied."
+  ]
+}

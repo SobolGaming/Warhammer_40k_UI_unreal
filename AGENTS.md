@@ -78,7 +78,23 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 50 (2026-10-20 UTC) is
+Current A1E status at plan revision 51 (2026-10-20 UTC) is
+**SCOPED_SOURCE_BLOCKED_TARGET_RULES_INPUTS**.
+Eight fresh initial scoped SOURCE reviews are closed for `f7f77eb` / run
+`20261020T044205Z-14143fc0`: seven raw local SOURCE_PASS reports and one
+BLOCKED target/receipt report. `TARGET-RECEIPT-B01` identifies missing complete
+inherited plugin-dependency hook and target-selector defaults/initialization
+primary inputs, without asserting an implementation defect. All eight raw
+reports were sealed before body reads and preserved unchanged; both integrations
+remain NOT LAUNCHED. No local pass is admitted to an aggregate. The
+[factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r1-result.json) binds closure and limitations. Amend/refreeze the necessary
+primary inputs and exact access guidance, then obtain fresh affected SOURCE
+and blind integrations. All eight phases remain NOT RUN/no native RunRoot;
+implementation and historical path controls are unchanged/not rerun. Final
+CODE/different REQ, A1G/A2, Linux and broader gates remain open. Standing
+private-source/API review consent persists until explicit revocation.
+
+Historical A1E status at plan revision 50 (2026-10-20 UTC) is
 **SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY**.
 Root has prospectively adopted the [ten-context SOURCE composition packet](docs/plans/research/2026-10-20-e04a-source-composition-packet.md):
 five fresh blind primary SOURCE scopes, three complete descriptor-data partitions
