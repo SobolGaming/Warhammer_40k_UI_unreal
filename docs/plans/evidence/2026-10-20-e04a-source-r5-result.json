@@ -394,7 +394,7 @@
         "bytes": 2341,
         "sha256": "17F144A94B07F6340A6A382F0762F3118A3902DFBA73D2F563B671131DEE9056",
         "ranges": [
-          "1-61"
+          "1-60"
         ]
       },
       {
@@ -402,7 +402,7 @@
         "bytes": 276,
         "sha256": "0E19BC399558A8C69A9495BD493A80E3B29FDD3837A1CEA8185EBDD8D40557AF",
         "ranges": [
-          "1-7"
+          "1-6"
         ]
       },
       {
@@ -434,7 +434,8 @@
       "selectedExactFunctions": 13,
       "nativeProof": false,
       "qualification": "Full Check-CMake exercised on explicitly synthetic owned cache/commands/ninja fixtures, using unchanged real path/read/hash helpers and the five actual frozen tool hashes. No CMake/compiler/build/phase/native execution; successful-root lingering behavior remains unproved."
-    }
+    },
+    "apiExtractionCorrection": "Before the next packet was frozen or launched, root checked physical ReadAllLines counts60/6 and removed proposed split-created phantom terminal rows61/7 from the two new CMake RC excerpts. The old inert proposal is retained; corrected artifacts must be separately bound. Normalization source115-157 is unchanged; actual new excerpt membership/rows derive at assembly."
   },
   "nativeSuiteCount": null,
   "nativeInputCount": null,
