@@ -19,3 +19,6 @@ docs/plans/research/2026-10-20-e04a-source-composition-packet*.md text eol=lf
 # Preserve the previous factual record as exact historical bytes.
 docs/plans/evidence/2026-10-17-e01-slow120-result-schema1-history.json -text
 docs/plans/evidence/2026-10-17-e01-slow120-result-030835-schema2-history.json -text
+
+# R4 sealed Markdown reports preserve exact raw bytes and intentional hard breaks.
+docs/plans/research/2026-10-20-e04a-scoped-r4-*.md -text whitespace=-blank-at-eol

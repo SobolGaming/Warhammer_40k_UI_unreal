@@ -1,0 +1,140 @@
+{
+  "verdict": "SOURCE_PASS",
+  "qualification": "Local scoped SOURCE assessment only. This is not the aggregate SOURCE gate, phase authority, native evidence, or final acceptance.",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+  "campaignId": "E04A1E-SCOPED-f3f4895-20261020T083618Z-ddce956e",
+  "scopeId": "D_SELECTORS_302_602",
+  "subject": {
+    "sourceHead": "f3f48957fd80019908e21f02309c21339aadfd21",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T083618Z-ddce956e",
+    "inputManifestSHA256": "765932fe728328bb2bd8ae3984836ff643d9087270088a569350cec9ab35e5ea",
+    "runtimeFreezeSHA256": "fdee1b7bd6122da20caef4fb1c01b421eb89267b76ca8677843eae2cf93cf082",
+    "scopeContractSHA256": "b2961c67df0b3abfdc87bd0f5a46eb2e1208068f4db6de61548f02942dffb9d7",
+    "bootstrapSHA256": "d2ba50b519fa33411486d9565bfdbc0e3d4358c7ad5fe50b6b5c4fdb1fd05443",
+    "ownCoverageSHA256": "0359e97d60c3e3954a8dbbd96d3158643acb85be3ee486da365d2e5e06ed170e",
+    "actualGoSHA256": "ac7e7e6d4e0d06f7d6ec879d1a3a7d7b809467f1d24aca8005785a9eb1d08045",
+    "preparedPromptSHA256": "a59fc409a631e523a18833a0634bcd68adab4e81dc2da7fd6595d7a73cd63035",
+    "observedActualPromptFileSHA256": "550663C1F1A5CF9A2022CBF194B8A5EFE8A0AE5CDE6E9E12DBEFC7DE6CDB9A2D"
+  },
+  "bindingAssessment": {
+    "result": "MATCH",
+    "details": [
+      "Verified supplied byte counts and hashes for the bootstrap, pure contract, own scope, policies, coverage, manifest, GO and prepared prompt.",
+      "Parsed the three common criteria records only at their exact bound paths after byte/hash verification. Each occurs exactly once in both panel inputFiles and frozenFiles.",
+      "Own scope matches its contract entry. The actual prompt file has the exact prepared-prompt prefix and matching ROOT ACTUAL GO tail. Its complete local criteria object matches the bound applicable contract and scope fields, including the singleton materialJoins array.",
+      "The GO JSON has campaignId, scopeId and assessmentKind absent. These identities are bound through the received scoped prompt and exact GO-bound input manifest; no absent GO property was inferred.",
+      "Independently compared common and own policies/inventories. All 97 BODY identities match the bound inventories, manifest and freeze. Actual bytes, hashes and physical row counts verify 97 files and 47,410 rows. All 13 selected metadata descriptors verify."
+    ],
+    "limits": "Head/base are root-supplied candidate identities, not independently Git-verified. The own prompt file does not independently establish received-input provenance."
+  },
+  "completeCoverage": {
+    "mandatoryBodies": [
+      "SOURCE-BODY-054 physical 1–294",
+      "SOURCE-BODY-055 physical 1–142",
+      "SOURCE-BODY-056 physical 1–14",
+      "SOURCE-BODY-057 physical 1–196",
+      "SOURCE-BODY-096 physical 1–50",
+      "SOURCE-BODY-097 physical 1–88"
+    ],
+    "mandatoryBodyFiles": 6,
+    "mandatoryBodyPhysicalRows": 784,
+    "mandatoryCompleteUnitRanges": [],
+    "metadata": [
+      "Records 9 and 10: every positively selected field.",
+      "Record 8: every complete assigned physical row 302–602, in bound original order, including origin, selectorValues, absentSelectorFields and otherPresentTopLevelFieldNames.",
+      "Records 7, 11 and 12: material descriptor, project, catalog-root, membership and receipt-policy relationships.",
+      "Record 8 globally: all Plugins arrays for incident-reference identification and all 902 origin identities for endpoint correspondence."
+    ],
+    "additionalEntireBodies": [
+      "SOURCE-BODY-001 physical 1–16",
+      "SOURCE-BODY-002 physical 1–17",
+      "SOURCE-BODY-016 physical 1–8",
+      "SOURCE-BODY-064 physical 1–271",
+      "SOURCE-BODY-065 physical 1–567",
+      "SOURCE-BODY-068 physical 1–267",
+      "SOURCE-BODY-069 physical 1–445",
+      "SOURCE-BODY-078 physical 1–211"
+    ],
+    "additionalPartialBodies": [
+      "SOURCE-BODY-013 physical 1230–1396",
+      "SOURCE-BODY-073 physical 1–65, 144–209 and 380–442",
+      "SOURCE-BODY-081 physical 283–579, 712–852 and 1112–1272",
+      "SOURCE-BODY-082 physical 65–146 and 280–320"
+    ],
+    "unreadMandatoryScope": "None.",
+    "otherUnreadScope": "Other globally granted implementation bodies were not completely assessed. Search results in BODY072/076/084 are not complete-body coverage. Record 7 sourceBindings was not fully assessed. Global hash/row enumeration is not a claim of global substantive source review."
+  },
+  "substantiveAssessment": [
+    {
+      "requirement": "Scope duties 1–3; records 9/10 literal projection and absence contracts.",
+      "conclusion": "All 301 assigned rows match unique original descriptor paths, exact original byte counts and full SHA256 strings. Independently compared 14,749 selected-field presence states and 2,488 complete present values, including nested objects, array order and complete opaque strings: zero discrepancies. Ordered absentSelectorFields also match. All other-present name arrays were inspected and fit the granted name schema; unselected origin values were not queried."
+    },
+    {
+      "requirement": "Substantive selector/default/filter interpretation.",
+      "conclusion": "EnabledByDefault has 41 true, 197 false and 63 absent occurrences. Absence remains distinct: engine/project default behavior is conditional. Explicit-platform empty lists are restrictive: LowLevelNetTrace row321 has HasExplicitPlatforms=true and SupportedTargetPlatforms=[]. Modules has 13 absent rows, three present empty arrays and 587 entries; all 140 complete module-property groups were assessed with occurrence indices retained. Missing LoadingPhase retains the constructor Default; None excludes automatic phase loading. RuntimeNoCommandlet, Editor, DeveloperTool, target/configuration, architecture and program gates remain conditional.",
+      "sources": [
+        "BODY069 physical 83–100, 364–381 and 433–443",
+        "BODY073 physical 424–438",
+        "BODY064 physical 207–212",
+        "BODY065 physical 165–256 and 281–566",
+        "BODY081 physical 1115–1269",
+        "BODY082 physical 118–135"
+      ]
+    },
+    {
+      "requirement": "Exact case, empty values and source-field correspondence.",
+      "conclusion": "Preserved empty EngineVersion at row580, numeric zero/fractional Version values, empty Modules/Plugins arrays and all singleton arrays. No assigned top-level selected value is explicit null. Preserved alternate/custom names without treating them as recognized aliases: IsHidden versus Hidden, bRequiresBuildPlatform versus RequiresBuildPlatform, IsExperimental versus IsExperimentalVersion, and row328 AllowlistPrograms versus ProgramAllowList. PythonRequirements on rows314/315/334/389/390/420 retain complete literal equality, platform order, URLs and hash-bearing strings; they were not executed or treated as observed installations.",
+      "sources": [
+        "Record8 physical rows302–602",
+        "BODY069 physical 262–418",
+        "BODY065 physical 199–217",
+        "BODY081 physical 283–437 and 1232–1269"
+      ]
+    },
+    {
+      "requirement": "Scope duty 4; SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH.",
+      "conclusion": "Enumerated all 1,561 catalog Plugin-reference occurrences. The project contributes one additional reference, with no assigned-row incident. Applying the source-supported UBT case-insensitive name lookup identifies 770 distinct incident occurrences: 607 outgoing, 489 incoming and 326 internal; 281 outgoing and 163 incoming cross the partition boundary. No incident endpoint remains unmatched under that lookup. Disabled/optional references and all 29 literal qualifier groups were retained.",
+      "caseVariantsPreserved": [
+        "row207 Plugins[6] Name=TensorBoard -> row420 filename Tensorboard.uplugin",
+        "row310 Plugins[1] Name=InterchangeAxFAssets -> row309 filename InterchangeAxfAssets.uplugin"
+      ],
+      "sources": [
+        "Record8 complete globally granted Plugins data",
+        "BODY082 physical 283–315",
+        "BODY078 physical 35–185",
+        "BODY081 physical 712–848"
+      ],
+      "limit": "These are source/data relationships, not proof that references passed every runtime/build gate or activated. Complete runtime/build/cross-system graph acceptance remains separately owned."
+    },
+    {
+      "requirement": "Records 7/11/12 membership correspondence and prospective preservation.",
+      "conclusion": "All 245 record7 and record12 descriptor identities match the catalog and each other in order; 52 belong to this partition. Record12 retains sourceHead c6a9410a524649147f157c3c17a2b838c7e0fc81 and runId 20261020T010406Z-a7dec142 as its actual older provenance. Its identities were compared rather than relabelled current. Catalog-root order maps exactly to JSONL rows7–901 followed by1–6; assigned JSONL order was preserved. Selected membership is a raw superset, not observed enablement.",
+      "sources": [
+        "Records7, 11 and12 selected fields",
+        "BODY013 physical 1236–1297 and 1311–1390",
+        "BODY001 physical 8–14",
+        "BODY002 physical 8–15",
+        "BODY016 physical 1–8"
+      ],
+      "observationDesign": "The inspected wrapper prospectively rejects changed catalog membership/bytes, reparse paths, unexpected discovery roots/environment contracts and changed receipt identity/overrides. These checks were read, not run. The concrete bBuildAllModules=false assignment is source-visible; effective configuration and target discovery/finalization were not established by this scope."
+    }
+  ],
+  "blockingFindings": [],
+  "errorsAndRecoveries": [
+    "Truncated displays affected the contract, grant listing, catalog-root listing, PythonRequirements and initial module grouping. Recovered applicable criteria, exact inventory/identity comparisons, complete opaque-value comparisons and all 140 module-property groups. Truncated displays were not treated as complete reads.",
+    "Python was unavailable; the attempted data-query process did not execute. Comparisons were completed with independently authored PowerShell JSON queries.",
+    "A range-rendering error omitted an optional BODY064 display; recovered its complete physical1–271 read.",
+    "One PythonRequirements summary rendered absent ExtraIndexUrls as synthesized null and flattened singleton URL arrays. Those outputs were query errors, not source values. Reread with presence witnesses, omitted absent values and preserved arrays. The earlier erroneous output remains disclosed.",
+    "A prompt JSON extraction included trailing prose and failed parsing; recovered the exact JSON boundary.",
+    "A singleton-array comparison initially flattened expected materialJoins. Direct complete-array comparison recovered an exact match.",
+    "Initial ordinal-name matching missed the two case variants above. Source-supported UBT lookup corrected the incident accounting from769 to770."
+  ],
+  "independenceAndUncertainty": {
+    "observedConduct": "Read-only review; no implementation edits, saved files, delegation, stored-command execution, implementation imports, YAML parsing, build/test/engine/GUI/network/GitHub actions, peer reports or memory retrieval.",
+    "rootAttestationRequired": "Actual session/runtime/model/settings, enforced fresh isolation, configured memory behavior and received-input provenance remain independently unverified here. Generated runtime/invocation/session/output bodies were not inspected.",
+    "remainingGates": "Root alone aggregates ten valid scoped assessments. Actual staged topology, effective configuration, cache/process lineage, loaded assemblies/types, compiler outputs and activation remain future observations. A1G, A2, Linux, HUD/rendering, packaging and final independent CODE/different REQ gates remain open.",
+    "requirements": "Scope contract reviewDiscipline, launchBinding, scopeReportRequirements and separateGates; BODY054 physical 89–125 and149–186; BODY057 physical 1–17 and178–195; BODY096 physical 26–49."
+  }
+}

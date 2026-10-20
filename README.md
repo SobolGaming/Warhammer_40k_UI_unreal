@@ -7,10 +7,10 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
-The complete bounded normal target-discovery producer and SOURCE/native-stage
-criteria are prospectively adopted; fresh exact packets and all ten complete
-passing SOURCE assessments remain pending. All eight native phases remain NOT RUN.
+The bounded E04-A1E proof is **SCOPED_SOURCE_CHANGES_REQUESTED_RULES_OBSERVATION**.
+The latest source review requires concrete loaded-rules/discovery evidence.
+All initial review processes are closed; all eight native phases remain NOT_RUN.
+The plan records the required repair and preserved reports.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -79,7 +79,33 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Current A1E status at plan revision 56 (2026-10-20 UTC) is
+Current A1E status at plan revision 57 (2026-10-20 UTC) is
+**SCOPED_SOURCE_CHANGES_REQUESTED_RULES_OBSERVATION**. The closed
+[R4 summary](docs/plans/research/2026-10-20-e04a-scoped-r4-summary.md) and
+[factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r4-result.json)
+preserve eight initial invocations, seven unchanged reports (six local
+SOURCE_PASS/one CHANGES_REQUESTED), one plugin timeout without a report and
+416 captured tool pairs from the seven report contexts. All eight process groups
+cleaned up. Only S_VALUE has a current bounded local admission; no aggregate or
+future approval follows. Other audits remain incomplete or not admitted.
+
+S_TARGET_RECEIPT-01 requires a concrete observation/preservation mechanism for
+actual discovery/cache/process/source-order lineage, the loaded rules assembly,
+selected target CLR type and applicable finalized selectors, plus retained
+BuildRules artifacts/source manifest. Root confirmed the prospective harness
+gap. D001's case-insensitive projection conceals ProgramAllowlist versus
+ProgramAllowList; raw PASS remains unchanged. Plugin final runtime/tool capture
+failed on an unterminated stdout JSON line and remains unverified.
+
+Neither integration launched. All eight native phases are NOT_RUN/no native
+RunRoot. Preserve original failures and partial ordinary audits. Checkpoint,
+repair the concrete observation design and review-fidelity/capacity preparation,
+rederive changed complete units/counts, refreeze and obtain fresh affected SOURCE
+and independent integrations. No old GO or local admission transfers to repaired
+source. Final CODE/different REQ, A1G/A2/HUD, Linux, packaging and broader gates
+remain open. Standing private-source/API review consent persists until revoked.
+
+Historical A1E status at plan revision 56 (2026-10-20 UTC) is
 **NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. Root prospectively
 adopted the [normal rules discovery SOURCE amendment](docs/plans/research/2026-10-20-e04a-source-composition-packet-v4.md)
 and its [adoption record](docs/plans/evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json).

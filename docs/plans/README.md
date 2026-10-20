@@ -1,11 +1,37 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 56 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 57 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at plan revision 56 (2026-10-20 UTC) is
+Current A1E status at plan revision 57 (2026-10-20 UTC) is
+**SCOPED_SOURCE_CHANGES_REQUESTED_RULES_OBSERVATION**. The closed
+[R4 summary](research/2026-10-20-e04a-scoped-r4-summary.md) and
+[factual record](evidence/2026-10-20-e04a-scoped-r4-result.json)
+preserve eight initial invocations, seven unchanged reports (six local
+SOURCE_PASS/one CHANGES_REQUESTED), one plugin timeout without a report and
+416 captured tool pairs from the seven report contexts. All eight process groups
+cleaned up. Only S_VALUE has a current bounded local admission; no aggregate or
+future approval follows. Other audits remain incomplete or not admitted.
+
+S_TARGET_RECEIPT-01 requires a concrete observation/preservation mechanism for
+actual discovery/cache/process/source-order lineage, the loaded rules assembly,
+selected target CLR type and applicable finalized selectors, plus retained
+BuildRules artifacts/source manifest. Root confirmed the prospective harness
+gap. D001's case-insensitive projection conceals ProgramAllowlist versus
+ProgramAllowList; raw PASS remains unchanged. Plugin final runtime/tool capture
+failed on an unterminated stdout JSON line and remains unverified.
+
+Neither integration launched. All eight native phases are NOT_RUN/no native
+RunRoot. Preserve original failures and partial ordinary audits. Checkpoint,
+repair the concrete observation design and review-fidelity/capacity preparation,
+rederive changed complete units/counts, refreeze and obtain fresh affected SOURCE
+and independent integrations. No old GO or local admission transfers to repaired
+source. Final CODE/different REQ, A1G/A2/HUD, Linux, packaging and broader gates
+remain open. Standing private-source/API review consent persists until revoked.
+
+Historical A1E status at plan revision 56 (2026-10-20 UTC) is
 **NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. Root prospectively
 adopted the [normal rules discovery SOURCE amendment](research/2026-10-20-e04a-source-composition-packet-v4.md)
 and its [adoption record](evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json).
