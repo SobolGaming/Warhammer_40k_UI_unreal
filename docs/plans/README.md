@@ -1,11 +1,28 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 48 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 49 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 48 records **SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**.
+Revision 49 records **SOURCE_BLOCKED_INCOMPLETE_REVIEW_DECOMPOSITION_PREPARING**.
+The seventh [E04-A1E SOURCE report](research/2026-10-20-e04a-source-review-r7.md)
+is raw **BLOCKED** for `e505b21` / run `20261020T041347Z-5175df78`.
+It completed 55 of 93 BODY files; all 33 staged members now have BODY grants.
+The 13-record/902-row metadata assessment remains incomplete. No confirmed
+implementation defect or binding/access denial was established. The
+[factual record](evidence/2026-10-20-e04a-source-r7-result.json)
+preserves this uncertainty. The review is closed; all eight phases remain NOT RUN
+and no native RunRoot exists. A prospective blind scoped SOURCE design plus a
+fresh independent integration assessment is being prepared, **not yet adopted**.
+It must retain complete current 93-file coverage across the scopes, all 13/902
+selected metadata and material relationships, with no waived criterion before
+any phase. Separate final CODE/different REQ remain required. The existing path
+repair and 21 passing pure PowerShell controls are unchanged/not rerun; historical
+r6/r5 reports and c500f21 phase results remain unchanged. Standing review consent
+persists until explicit revocation; A1G, A2 and broader gates remain open.
+
+Historical revision 48 records **SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**.
 The sixth [E04-A1E SOURCE report](research/2026-10-20-e04a-source-review-r6.md)
 is raw **BLOCKED** for `0ed4221` / run `20261020T035315Z-1e4656b7`.
 It inspected 48 of 81 BODY files; the 13-record/902-row metadata assessment is

@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**. SOURCE r6 is BLOCKED on incomplete 48/81 BODY coverage, incomplete 13-record/902-row metadata assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. All eight phases for `0ed4221` / run `20261020T035315Z-1e4656b7` remain NOT RUN. The staged BODY-grant inventory proposal is authored: 12 missing files/5,906 rows, estimated 93 BODY files/32,460 rows with all 33 staged members at current bytes; actual frozen counts remain derived. A complete fresh SOURCE packet is next.
+The bounded E04-A1E proof is **SOURCE_BLOCKED_INCOMPLETE_REVIEW_DECOMPOSITION_PREPARING**. SOURCE r7 is raw BLOCKED after 55/93 complete BODY files; all 33 staged members are granted, but the 13-record/902-row metadata assessment remains incomplete. No confirmed implementation defect or binding/access denial was established. The review is closed, all eight phases remain NOT RUN/no native RunRoot, and a blind scoped SOURCE plus fresh independent integration design is being prepared but is not yet adopted.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +76,24 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 48 records **SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**.
+Plan revision 49 records **SOURCE_BLOCKED_INCOMPLETE_REVIEW_DECOMPOSITION_PREPARING**.
+The seventh [E04-A1E SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r7.md)
+is raw **BLOCKED** for `e505b21` / run `20261020T041347Z-5175df78`.
+It completed 55 of 93 BODY files; all 33 staged members now have BODY grants.
+The 13-record/902-row metadata assessment remains incomplete. No confirmed
+implementation defect or binding/access denial was established. The
+[factual record](docs/plans/evidence/2026-10-20-e04a-source-r7-result.json)
+preserves this uncertainty. The review is closed; all eight phases remain NOT RUN
+and no native RunRoot exists. A prospective blind scoped SOURCE design plus a
+fresh independent integration assessment is being prepared, **not yet adopted**.
+It must retain complete current 93-file coverage across the scopes, all 13/902
+selected metadata and material relationships, with no waived criterion before
+any phase. Separate final CODE/different REQ remain required. The existing path
+repair and 21 passing pure PowerShell controls are unchanged/not rerun; historical
+r6/r5 reports and c500f21 phase results remain unchanged. Standing review consent
+persists until explicit revocation; A1G, A2 and broader gates remain open.
+
+Historical plan revision 48 records **SOURCE_BLOCKED_STAGED_BODY_GRANTS_REPAIR_AUTHORED**.
 The sixth [E04-A1E SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r6.md)
 is raw **BLOCKED** for `0ed4221` / run `20261020T035315Z-1e4656b7`.
 It inspected 48 of 81 BODY files; the 13-record/902-row metadata assessment is
