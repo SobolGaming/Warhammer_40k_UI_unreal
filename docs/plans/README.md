@@ -1,11 +1,40 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 55 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 56 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at plan revision 55 (2026-10-20 UTC) is
+Current A1E status at plan revision 56 (2026-10-20 UTC) is
+**NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. Root prospectively
+adopted the [normal rules discovery SOURCE amendment](research/2026-10-20-e04a-source-composition-packet-v4.md)
+and its [adoption record](evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json).
+The reference inventory is 97 BODY files / 47,410 physical rows; actual counts
+and identities must be derived from the new freeze after normative inputs are
+final. BODY095 adds 4,424 physical rows / 4,332 literal rows from 23 ranges in
+16 installed origins. BUILD, TARGET and both integrations require complete
+BODY081/082/092/093/095. All previous body/unit/data/graph duties remain,
+including 13 selected records / 902 descriptor rows / 1,561 reference occurrences;
+conditional/framework leaves remain explicit rather than universal UBT closure.
+
+SOURCE assesses frozen source, textual invocation/selection/membership and the
+prospective observation/preservation design. Actual staging/cache lineage,
+loaded assembly/type, effective configuration/compiler outputs and activation
+remain native-phase/final observations. Their absence before authorized native
+execution alone does not fail SOURCE; concrete source/input/design gaps do.
+Prospective SOURCE budgets are 2,700 seconds for BUILD, TARGET and both
+integrations, and 1,800 seconds for the other six scopes. Each launch requires
+one fresh context, one review launch maximum per assessment, no retry, no model change and exact
+consistent packet/runtime/supervisor/GO bindings.
+
+No new exact head/run/campaign/freeze/panel/GO, helper invocation, review or native
+result exists yet. All ten fresh independently valid complete PASS assessments,
+root admission audits and a labelled aggregate precede any phase. All eight
+native phases remain NOT RUN/no native RunRoot. No R3 admission transfers to
+the amended source. Final CODE/different REQ, A1G/A2, HUD/render/input, Linux,
+packaging and broader gates remain open; standing review consent persists.
+
+Historical A1E status at plan revision 55 (2026-10-20 UTC) is
 **SCOPED_SOURCE_BLOCKED_RULES_ASSEMBLY_DISCOVERY**. The
 [R3 summary](research/2026-10-20-e04a-scoped-r3-summary.md) and
 [factual record](evidence/2026-10-20-e04a-scoped-r3-result.json)
@@ -15,8 +44,8 @@ leaving six old-scope admissions. The complete ten-scope SOURCE gate remains fal
 I_ACTIVATION-B01 requires the normal discovery/assembly producer. ABI exited 1
 after a service-capacity error and produced no report or verdict; all processes
 confirmed cleanup and no timeout. The unused ABI replacement is superseded
-without GO/launch. Prospectively amend/refreeze the missing source and obtain
-current complete SOURCE/integrations before any phase. All eight native phases
+without GO/launch. Amending/refreezing the missing source and obtaining current
+complete SOURCE/integrations were pending at that checkpoint. All eight native phases
 remain NOT RUN/no native RunRoot. Final CODE/different REQ, A1G/A2, Linux,
 packaging and broader gates remain open. Standing review consent persists.
 

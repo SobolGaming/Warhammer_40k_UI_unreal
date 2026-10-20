@@ -7,7 +7,10 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **SCOPED_SOURCE_BLOCKED_RULES_ASSEMBLY_DISCOVERY**. R3 closed eleven review invocations with eight raw passes, two BLOCKED reports and one ABI service failure without a verdict. Root withdrew the earlier TARGET/BUILD admissions after the discovery gap; six old-scope admissions remain and the complete SOURCE gate is false. The missing normal target-discovery producer is being added to a fresh packet; all eight native phases remain NOT RUN.
+The bounded E04-A1E proof is **NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
+The complete bounded normal target-discovery producer and SOURCE/native-stage
+criteria are prospectively adopted; fresh exact packets and all ten complete
+passing SOURCE assessments remain pending. All eight native phases remain NOT RUN.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +79,37 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Current A1E status at plan revision 55 (2026-10-20 UTC) is
+Current A1E status at plan revision 56 (2026-10-20 UTC) is
+**NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. Root prospectively
+adopted the [normal rules discovery SOURCE amendment](docs/plans/research/2026-10-20-e04a-source-composition-packet-v4.md)
+and its [adoption record](docs/plans/evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json).
+The reference inventory is 97 BODY files / 47,410 physical rows, to be derived
+again from the actual new freeze after normative inputs are final. BODY095 adds
+4,424 physical rows / 4,332 literal rows from 23 ranges in 16 installed origins.
+BUILD, TARGET and both integrations require complete BODY081/082/092/093/095.
+Earlier body/unit/data/graph duties and all 13 selected records / 902 descriptor
+rows / 1,561 Plugin-reference occurrences remain required. Conditional and
+framework leaves stay explicit; this is not a universal UBT closure claim.
+
+SOURCE assesses frozen source, textual invocation/selection/membership and the
+prospective observation/preservation design. Actual staging/cache lineage,
+loaded assembly/type, effective configuration/compiler outputs and activation
+remain later native-phase/final observations. Absence of unlaunched native
+proof alone does not fail SOURCE; concrete source/input/design gaps still do.
+Prospective SOURCE budgets are 2,700 seconds for BUILD, TARGET and both
+integrations and 1,800 seconds for the other six scopes, with one fresh context,
+one review launch maximum per assessment, no retry and no model change. Exact packet/runtime/
+supervisor/GO bindings remain required before any launch.
+
+No new exact head/run/campaign/freeze/panel/GO, helper invocation, review or native
+result exists yet. All ten fresh independently valid complete PASS assessments,
+root admission audits and a labelled aggregate precede any phase. All eight
+native phases remain NOT RUN/no native RunRoot. R3's unchanged reports and
+withdrawn admissions remain historical; none transfers to the amended source.
+Final CODE/different REQ, A1G/A2, HUD/render/input, Linux, packaging and broader
+gates remain open. Standing review consent persists until explicitly revoked.
+
+Historical A1E status at plan revision 55 (2026-10-20 UTC) is
 **SCOPED_SOURCE_BLOCKED_RULES_ASSEMBLY_DISCOVERY**. The
 [R3 summary](docs/plans/research/2026-10-20-e04a-scoped-r3-summary.md) and
 [factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r3-result.json)
@@ -86,8 +119,8 @@ after the discovery gap, leaving six old-scope admissions. The complete SOURCE
 gate remains false. I_ACTIVATION-B01 requires the normal rules-discovery/assembly
 producer; ABI failed at service capacity and produced no report or verdict.
 All processes confirmed cleanup with no timeout. The unused ABI replacement
-is closed without GO/launch. Prepare and prospectively adopt the missing source,
-then refreeze and obtain current complete reviews before any native phase.
+is closed without GO/launch. Preparing/adopting the missing source, refreezing
+and obtaining current complete reviews were the next steps at that checkpoint.
 All eight phases remain NOT RUN/no native RunRoot. Final CODE/different REQ,
 A1G/A2, HUD/render/input, Linux and packaging remain open. Standing private-source/
 API review consent persists until explicitly revoked.

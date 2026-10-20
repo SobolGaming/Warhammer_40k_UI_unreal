@@ -78,7 +78,39 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 55 (2026-10-20 UTC) is
+Current A1E status at plan revision 56 (2026-10-20 UTC) is
+**NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. Root prospectively
+adopted the [normal rules discovery SOURCE amendment](docs/plans/research/2026-10-20-e04a-source-composition-packet-v4.md)
+and its [adoption record](docs/plans/evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json).
+The reference inventory is 97 BODY files / 47,410 physical rows; derive actual
+identities and counts from the new freeze after normative inputs are final.
+BODY095 adds the complete bounded normal discovery/cache/assembly producer:
+4,424 physical rows / 4,332 literal rows / 23 ranges / 16 installed origins.
+BUILD, TARGET and both integrations must inspect complete BODY081/082/092/093/095.
+All previous body/unit/data/graph duties remain, including 13 selected records,
+902 descriptor rows and 1,561 Plugin-reference occurrences. This is finite
+source closure with explicit conditional/framework leaves, not every UBT dependency.
+
+SOURCE assesses frozen source, textual invocation/selection/membership and the
+prospective observation/preservation design. Actual staged topology and timing,
+cache/process lineage, loaded assembly/type, effective configuration/compiler
+outputs and activation remain native-phase/final-acceptance observations. Their
+absence before an authorized native run is not itself SOURCE failure; concrete
+source/input/design gaps still block it. Preserve every later runtime obligation.
+
+Prospective SOURCE launch budgets are 2,700 seconds for BUILD, TARGET and both
+integrations, and 1,800 seconds for the other six scopes. Each launch uses one
+fresh context and one review launch maximum per assessment, no retry and no model change. Bind the
+selected budget consistently in the exact packet/runtime/supervisor/GO before use.
+No new exact head/run/campaign/freeze/panel/GO, helper invocation, review or native
+result exists yet. All ten fresh independently valid complete PASS assessments,
+root admission audits and a labelled aggregate precede any phase. All eight
+native phases remain NOT RUN/no native RunRoot. No old admission transfers to
+the amended source; preserve the R3 closure below. Final CODE/different REQ,
+A1G/A2, HUD/render/input, Linux, packaging and broader gates remain open.
+Standing private-source/API review consent persists until explicitly revoked.
+
+Historical A1E status at plan revision 55 (2026-10-20 UTC) is
 **SCOPED_SOURCE_BLOCKED_RULES_ASSEMBLY_DISCOVERY**. The
 [R3 summary](docs/plans/research/2026-10-20-e04a-scoped-r3-summary.md) and
 [factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r3-result.json)
@@ -97,9 +129,9 @@ six remain limited to their old scopes. No admission transfers to amended source
 The original incomplete plugin BLOCKED report remains separate from the fresh
 complete plugin PASS. The unused ABI replacement is superseded without GO/launch.
 
-All eight native phases remain NOT RUN/no native RunRoot. Inspect and
-prospectively adopt the necessary source-input amendment, derive/refreeze new
-exact bindings, and obtain current affected SOURCE and fresh integrations.
+All eight native phases remained NOT RUN/no native RunRoot. Inspection and
+prospective adoption of the necessary source-input amendment, new exact bindings
+and current affected SOURCE/fresh integrations were pending at that checkpoint.
 Do not launch a closed or superseded packet. All ten valid complete passing
 assessments, root admission and the labelled aggregate precede any phase.
 Final CODE/different REQ, A1G/A2, Linux, packaging and broader gates remain open.

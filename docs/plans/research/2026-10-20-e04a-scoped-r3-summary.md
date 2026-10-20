@@ -92,7 +92,7 @@ this later decision separately. The complete SOURCE gate remains false.
 
 All 743 captured pairs have no pairing fault. Process success, output exposure,
 descriptor correspondence, semantic completeness and root approval remain
-distinct. The eight local admissions retain ordinary output/access/recovery
+distinct. The initial eight local admission records retain ordinary output/access/recovery
 audits and qualifications: selected record 13's original positive grant versus
 its flat input-array absence; full opaque digests and literal hash-text case;
 D001's permission-file versus actual ROOT-GO wording; BUILD's group-34
