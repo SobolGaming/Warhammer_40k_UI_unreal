@@ -78,7 +78,23 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 63 (2026-10-20 UTC) is
+Current A1E status at plan revision 64 (2026-10-20 UTC) is
+**RULES_REPAIR_CONTROLS_PASSED_BINDINGS_PENDING**. Root adopted the repaired
+wrapper and validator controls. The [repair record](docs/plans/research/2026-10-20-e04a-rules-repair-checkpoint.md)
+and [exact bindings](docs/plans/evidence/2026-10-20-e04a-rules-source-preservation-result.json)
+record 80/80 actual pure controls, zero failures, a 31.391131-second host exit0
+and the separate historical 72-case tuple. Canonical sources are the 2,100-row
+wrapper and 308-row test. Hold and hash all 66 member streams before accepting
+bytes; recheck full membership/topology before the root. Validate each map's own
+path set/suffix/name and preserve observed order. Explicit missing-manifest cases
+passed. These checks run selected PowerShell functions with synthetic files and
+a throwing no-process seam; they establish no UBT/private API/native result.
+Recompute complete BODY/unit/norm/count/freeze bindings, then obtain fresh
+affected SOURCE and independent integrations/root audits/aggregate before phases.
+Prior C# and six binary-reader results are unchanged and not rerun. All eight
+native phases remain NOT_RUN; zero visible windows remain. No old GO transfers.
+
+Historical A1E status at plan revision 63 (2026-10-20 UTC) is
 **SCOPED_SOURCE_REPAIRS_REQUIRED**. All eight R5 initial reviews for `4c99318`
 / `20261020T104640Z-54a3b913` are closed. The [summary](docs/plans/research/2026-10-20-e04a-scoped-r5-summary.md)
 and [factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r5-result.json)

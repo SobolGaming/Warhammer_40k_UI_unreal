@@ -28,3 +28,6 @@ docs/plans/research/2026-10-20-e04a-scoped-r5-s-value.md -text whitespace=-blank
 docs/plans/evidence/2026-10-20-e04a-rules-static-check-*.json -text whitespace=cr-at-eol
 docs/plans/evidence/2026-10-20-e04a-rules-wrapper-*.json -text whitespace=cr-at-eol
 docs/plans/evidence/2026-10-20-e04a-rules-metadata-reader-*.json -text whitespace=cr-at-eol
+# Completed source-preservation controls and their separate history retain raw bytes.
+docs/plans/evidence/2026-10-20-e04a-rules-source-preservation-*.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-rules-held-source-*-72-history.json -text whitespace=cr-at-eol

@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 63 — SCOPED_SOURCE_REPAIRS_REQUIRED. All eight R5 initial reviews are closed: four raw SOURCE_PASS, three BLOCKED and one CHANGES_REQUESTED; 490 captured tool pairs and zero root admissions. Root confirmed the source-lock race, wrong-category rules name-map validation and missing explicit manifest controls. Both integrations remain unused; all eight native phases are NOT_RUN with no native RunRoot. Preserve the reports and incomplete audit/runtime qualifications. Repair, focused controls, new bindings and fresh affected SOURCE plus independent integrations precede phases. Standing source/API review consent persists until explicitly revoked.
+**Revision:** 64 — RULES_REPAIR_CONTROLS_PASSED_BINDINGS_PENDING. Root adopted the source-lock, map-category and manifest-control repairs. All 80 focused pure controls passed in 31.391131 seconds; exact source and raw evidence are retained alongside the separate earlier 72-case tuple. The wrapper is 2,100 rows and source-only test 308 rows. No current formal SOURCE admission, UBT/native build or visible test follows. Derive fresh source/unit/norm/count/freeze bindings and obtain fresh affected SOURCE plus independent integrations/root audits/aggregate before phases. All eight native phases remain NOT_RUN; standing source/API review consent persists until revoked.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,27 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 63 changes
+### Revision 64 changes
+
+Root adopted the [source-preservation repair](research/2026-10-20-e04a-rules-repair-checkpoint.md)
+and its [exact source/control bindings](evidence/2026-10-20-e04a-rules-source-preservation-result.json).
+All 80 controls passed with zero failures; the owned PowerShell host exited0
+without timeout in 31.391131 seconds. The real preparation route checks 33 pairs
+through 66 held streams, then rechecks full bytes/membership/topology before the
+root. Category maps require their exact path subset, suffix and name without
+sorting the observed order. Explicit absent-manifest data, retained-role and
+live/copy preservation cases passed, including exact restoration of owned files.
+
+This executes selected PowerShell functions over synthetic data, including
+Editor-Build through a throwing no-process seam. No full wrapper CLI, supervisor,
+PEReader, actual Rules/private API/UBT, build, Core or GUI result is established.
+Preserve the separate earlier 72-case source tuple and preparation corrections;
+its passes were not transferred. C# sources and their prior static/reader results
+are unchanged and not rerun. Derive current bindings and explicit local duties,
+then complete fresh affected SOURCE and both independent integrations before
+phases. No old report, admission or GO transfers; later gates remain open.
+
+### Revision 63 history
 
 The closed [R5 summary](research/2026-10-20-e04a-scoped-r5-summary.md) and
 [factual record](evidence/2026-10-20-e04a-scoped-r5-result.json) preserve all eight

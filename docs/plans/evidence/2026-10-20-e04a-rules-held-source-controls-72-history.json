@@ -1,0 +1,853 @@
+{
+  "caseCount": 72,
+  "limits": [
+    "Synthetic validator/owned-file rejection controls, not a real UBT witness or compiled PE/PDB/native proof.",
+    "Metadata-reader APIs and actual CLR/cache/toolchain/selector observations remain unexecuted.",
+    "No full wrapper initialization, phase entry, Add-Type, process launch, credentials, network, engine or sibling mutation."
+  ],
+  "nativeOrImplementationProcessInvoked": false,
+  "kind": "PURE_SYNTHETIC_RULES_VALIDATOR_CONTROLS_NOT_NATIVE_PROOF",
+  "functionBindings": [
+    {
+      "firstLine": 1454,
+      "name": "Require-RulesKeys",
+      "lastLineInclusive": 1459,
+      "sha256": "0FB40C26F2FE319E20BCF24752937658EDF2E5FDFB80DBF3F5DFA9818476F183"
+    },
+    {
+      "firstLine": 1460,
+      "name": "Assert-RulesValue",
+      "lastLineInclusive": 1474,
+      "sha256": "C2C3BBF13BE8E16472041034812C462D3751CC8C25F5E1760BC1C88C2EA47392"
+    },
+    {
+      "firstLine": 1475,
+      "name": "Assert-RulesDescriptor",
+      "lastLineInclusive": 1482,
+      "sha256": "B17063F02955AFA30048D1A519B89561916D7BE7704F063B877811CAF4682153"
+    },
+    {
+      "firstLine": 1672,
+      "name": "Collect-RulesCacheSources",
+      "lastLineInclusive": 1687,
+      "sha256": "49C1510611D5A88E2E2763F1A06FA5CD793A83DD94B918E8808B531EE53CB85E"
+    },
+    {
+      "firstLine": 1688,
+      "name": "Check-RulesWitnessData",
+      "lastLineInclusive": 1776,
+      "sha256": "3C6E2FC72C5DFCBCB03A6B3F38B828530F3BBE6E6BAA01C49E8D895ADE3B8994"
+    },
+    {
+      "firstLine": 1792,
+      "name": "Check-RulesRetentionData",
+      "lastLineInclusive": 1805,
+      "sha256": "3C9DD089F7C8C56F21B1E9C686DB548552829DC588A37B2F663C39BCC0C05D97"
+    },
+    {
+      "firstLine": 137,
+      "name": "Safe-Text",
+      "lastLineInclusive": 140,
+      "sha256": "C37FF40CE1AAD536A737E2E6EDFAF16DD6E53FF0C2CF5B36C63B87D9B47AE078"
+    },
+    {
+      "firstLine": 142,
+      "name": "Check-JsonElement",
+      "lastLineInclusive": 155,
+      "sha256": "D35616DEACA2D0A7560120C407D3BC5920885530559B6C6A8D53654D5BC3E454"
+    },
+    {
+      "firstLine": 172,
+      "name": "Parse-JsonLine",
+      "lastLineInclusive": 178,
+      "sha256": "8BCD14006DB0EB5D4C2AAF9E06AF86F1D78373C298A0BBC2366E7AB526128725"
+    },
+    {
+      "firstLine": 89,
+      "name": "Assert-Path",
+      "lastLineInclusive": 102,
+      "sha256": "93A9B93B0F8FB8F820A1BA0263661E991D088347A811AC1AA40EF8036C731E0B"
+    },
+    {
+      "firstLine": 104,
+      "name": "Under",
+      "lastLineInclusive": 109,
+      "sha256": "58D77B2E28DDA4A175B0AA9BBE70BF88F0F18EF61C3F6E4C88C65642FE7972AD"
+    },
+    {
+      "firstLine": 111,
+      "name": "Owned",
+      "lastLineInclusive": 114,
+      "sha256": "0DF4EE43A173B67447C55CD0F0C5F4E3C640F5F7CBBB77CFDF0B4404116ECDF9"
+    },
+    {
+      "firstLine": 116,
+      "name": "Need-File",
+      "lastLineInclusive": 123,
+      "sha256": "E7A4C4AC8A77B0BD7DDA9F1F9716EA1CFFBA4211DA4456C2D7F8042BC59FA7D2"
+    },
+    {
+      "firstLine": 125,
+      "name": "Digest",
+      "lastLineInclusive": 125,
+      "sha256": "8B187B58E6DC4219967EACEDD23C15CF3EFD77BA1671DE659A955FA605A901F2"
+    },
+    {
+      "firstLine": 127,
+      "name": "Descriptor",
+      "lastLineInclusive": 127,
+      "sha256": "C1E8E2472A2DE317ADB51A15AB28E4E45FCB09B7BE19FC3E1E1CC98E2DC99178"
+    },
+    {
+      "firstLine": 129,
+      "name": "Check-Descriptor",
+      "lastLineInclusive": 135,
+      "sha256": "4B5572B9FA05319F360F5B92763261095D2972CE9D7B16E39F8BB1357F49D705"
+    },
+    {
+      "firstLine": 1513,
+      "name": "Rules-GeneratedPaths",
+      "lastLineInclusive": 1516,
+      "sha256": "4E894AD7072F1BC531E76F2FAB21B0E5344666D9016B75DBAABB477A238919E5"
+    },
+    {
+      "firstLine": 1806,
+      "name": "Check-RulesPreservation",
+      "lastLineInclusive": 1815,
+      "sha256": "65DB2C95A434CFC905BC64A34B8EABBC2790DDB65ED64FB80FEE17CDCFE9C81F"
+    },
+    {
+      "firstLine": 1816,
+      "name": "Editor-Build",
+      "lastLineInclusive": 1869,
+      "sha256": "E0E36C52849B3A39DFB03543BEE52CD1ED3DBDAD08EA5EB66AF12F0001266925"
+    },
+    {
+      "firstLine": 1517,
+      "name": "Read-RulesHeldDescriptor",
+      "lastLineInclusive": 1533,
+      "sha256": "9F110824789DB78CA97BF909CC088C5578B76591D94AB9F4DFB5C7DBEA0C01A0"
+    },
+    {
+      "firstLine": 1534,
+      "name": "Confirm-RulesHeldSources",
+      "lastLineInclusive": 1541,
+      "sha256": "CCBCDACC2CACE120D464AED07ED8E5294C55AEB6D00452487FB05988119D6E84"
+    },
+    {
+      "firstLine": 1542,
+      "name": "Rules-SourceFiles",
+      "lastLineInclusive": 1580,
+      "sha256": "8E7BC3B4E52A65CE81DC204CD10505CC9DE727DA7BBD8752FACDA48CBB9716C0"
+    },
+    {
+      "firstLine": 1581,
+      "name": "Confirm-RulesPrelaunchInputs",
+      "lastLineInclusive": 1611,
+      "sha256": "152F5EABF92EEC829AC19FFE7B93C06EA7C3E8D4989BB756CADDCEAF15C098D1"
+    },
+    {
+      "firstLine": 1612,
+      "name": "Rules-Topology",
+      "lastLineInclusive": 1629,
+      "sha256": "DA5F1E9C45C8EA6D07133E7ADDBC06C7795EA37B163435FF94103435EF7C2F91"
+    },
+    {
+      "firstLine": 1630,
+      "name": "Prepare-RulesChallenge",
+      "lastLineInclusive": 1643,
+      "sha256": "4D5AE44E243F719098AE8CE31E86507283AE25E82CA1EBFC279A3D7322AB0A24"
+    },
+    {
+      "firstLine": 157,
+      "name": "Read-Json",
+      "lastLineInclusive": 170,
+      "sha256": "E2EA572F532FC3E12CD586AA061128DFBAF59299CB5F9295D9D4A0511E137A41"
+    },
+    {
+      "firstLine": 186,
+      "name": "Write-JsonNew",
+      "lastLineInclusive": 212,
+      "sha256": "D8D03DA8E514FBC2AAD355B680C42DDDDAB1309DCB2FA48736368167703C71F3"
+    },
+    {
+      "firstLine": 1057,
+      "name": "Plain-Files",
+      "lastLineInclusive": 1065,
+      "sha256": "260B30DB2B264AC92B17F7DBBF6C8E44A58FA4FF870553D5E4845967C708998C"
+    },
+    {
+      "firstLine": 1066,
+      "name": "Snapshot-Source",
+      "lastLineInclusive": 1079,
+      "sha256": "7EC4865404AEE41CF05D9B5E4E77A43FE2E135FD5C5555ABDF857A9569459AAE"
+    },
+    {
+      "firstLine": 180,
+      "name": "Failure",
+      "lastLineInclusive": 184,
+      "sha256": "5AE70D84E23304E182266085CD524CDBBE6014489D9B4B3D5420A75083EA89DF"
+    }
+  ],
+  "failedCount": 0,
+  "wrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-repair-PROPOSED\\Invoke-E04AProfileProof.HeldSources.PROPOSED.ps1",
+    "sha256": "8B543B5984790D8A6828EA57F5BA692D00E293DDACB1AD6125B74783B10D8D5E"
+  },
+  "matchedCount": 72,
+  "cases": [
+    {
+      "matched": true,
+      "diagnostic": null,
+      "name": "complete-synthetic-seven-source-join",
+      "expectedPass": true,
+      "observedPass": true
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_ROOT_PID_CREATION_IDENTITY_MISMATCH",
+      "name": "same-pid-wrong-creation-filetime",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_ROOT_PID_CREATION_IDENTITY_MISMATCH",
+      "name": "different-ubt-pid",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_ROOT_PATH_OR_CWD_MISMATCH",
+      "name": "wrong-cwd",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_ROOT_PATH_OR_CWD_MISMATCH",
+      "name": "wrong-host-path",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: literalManagedArgv",
+      "name": "managed-argv-reordered",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: exactDirectRootArgv",
+      "name": "both-root-and-managed-wrong-argv",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_OWNED_ROOT_NOT_COMPLETE",
+      "name": "cleanup-unverified",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_OWNED_ROOT_NOT_COMPLETE",
+      "name": "timeout",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_BOOL_MISMATCH: ownedRoot.exitConfirmed",
+      "name": "boolean-string-rejected",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: attemptNonce",
+      "name": "wrong-challenge",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: runId",
+      "name": "wrong-run",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: sourceHead",
+      "name": "wrong-source-head",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "name": "wrong-freeze",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_EXACT_KEYS_REQUIRED",
+      "name": "case-different-required-key",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: actualCLR.runtimeVersion",
+      "name": "wrong-runtime-vs-sdk",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: explicitChildEnvironment.DOTNET_STARTUP_HOOKS",
+      "name": "startup-hook-channel",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_BOOL_MISMATCH: effectiveSelectors.bBuildAllModules",
+      "name": "constructor-false-finalized-true",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_SELECTED_TYPE_OR_FINAL_SELECTOR_UNSUPPORTED",
+      "name": "unsupported-specialized-type",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_NULL_MISMATCH: effectiveSelectors.optedInModulePlatforms",
+      "name": "selector-null-not-empty",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_EXACT_KEYS_REQUIRED",
+      "name": "selector-key-absent",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: effectiveSelectors.enablePlugins[0]",
+      "name": "plugin-selector-array-order",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "name": "wrong-target-source",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_RETAINED_MVID_OR_PDB_MISMATCH",
+      "name": "wrong-loaded-mvid",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_RETAINED_MVID_OR_PDB_MISMATCH",
+      "name": "missing-pdb-debug-pair",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: rawManifestSourceOrder[0]",
+      "name": "manifest-order-diverges",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_COMPILED_SOURCE_COUNT",
+      "name": "extra-source",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "name": "source-byte-identity-drift",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "name": "pdb-source-association-drift",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_NAME_MAP_SOURCE_OR_CASE",
+      "name": "target-name-map-wrong-case",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_COMPLETED_PROJECT_CACHE_MISMATCH",
+      "name": "uncreated-project-lazy",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_PROJECT_CACHE_ENTRY_REQUIRED",
+      "name": "extra-project-cache-entry",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_PARENT_MVID_OR_ORDER",
+      "name": "parent-order-swap",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_PARENT_MVID_OR_ORDER",
+      "name": "parent-mvid-drift",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_RAW_TRANSFORMED_PARENT_MISMATCH",
+      "name": "raw-parent-mismatch",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_CACHE_ROOT_UNSCANNED",
+      "name": "cache-root-absent",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_CACHE_ROOT_UNSCANNED",
+      "name": "cache-root-unscanned",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_CACHE_SOURCE_SET_MISMATCH",
+      "name": "cache-source-extra",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: optionalDiscoveryAbsences[0]",
+      "name": "optional-absence-order-or-value-drift",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "diagnostic": "E04A1_RULES_BOOL_MISMATCH: lineageQualification.chronologicalScanEventsObserved",
+      "name": "chronological-cache-claim-forbidden",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "nested-case-key-collision",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "nested-duplicate-key",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "malformed-json",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": true,
+      "expectedDiagnosticPrefix": "SYNTHETIC_LAUNCH_BOUNDARY_REACHED_NO_PROCESS",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": true,
+      "name": "held-all33-positive-reaches-launch-seam",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 66,
+      "diagnostic": "SYNTHETIC_LAUNCH_BOUNDARY_REACHED_NO_PROCESS",
+      "observedLaunches": 1,
+      "expectedLaunches": 1
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "same-length-frozen-A-locks-B",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "canonical-only-byte-mismatch",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "staged-only-byte-mismatch",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "",
+      "retainedHandleCount": 65,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "missing-last-stage-file-partial-lock-cleanup",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "Exception calling \"GetAttributes\" with \"1\" argument(s): \"Could not find file 'C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-controls-01\\prelaunch-missing-last-stage-file-partial-lock-cleanup\\run\\project\\WarhammerClient.uproject'.\"",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "retainedHandleCount": 64,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "full33-flat-freeze-descriptor-conflict",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "unexpected-CSharp-before-challenge",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-controls-01\\prelaunch-unexpected-CSharp-before-challenge\\run\\project",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "late-extra-CSharp",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-controls-01\\prelaunch-late-extra-CSharp\\run\\project",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_PRUNING_MARKER_UNSUPPORTED",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "late-pruning-marker",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_PRUNING_MARKER_UNSUPPORTED",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_PRUNING_MARKER_UNSUPPORTED",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "late-project-pruning-input",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_PRUNING_MARKER_UNSUPPORTED",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "late-config-boundary-file",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-controls-01\\prelaunch-late-config-boundary-file\\run\\project",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "late-plugin-boundary-file",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-controls-01\\prelaunch-late-plugin-boundary-file\\run\\project",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_ARRAY_MISMATCH: prelaunchApprovedDiscoveryTopology.entries",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "late-empty-discovery-directory",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: prelaunchApprovedDiscoveryTopology.entries",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_EXCLUDED_DISCOVERY_ROOT_PRESENT: Mods",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "late-excluded-discovery-root",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_EXCLUDED_DISCOVERY_ROOT_PRESENT: Mods",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "staged-project-boundary-drift",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "staged-plugin-boundary-drift",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "canonical-config-boundary-drift",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": true,
+      "expectedDiagnosticPrefix": "SYNTHETIC_LAUNCH_BOUNDARY_REACHED_NO_PROCESS",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": true,
+      "name": "both-copies-boundary-handles-deny-late-write",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 66,
+      "diagnostic": "SYNTHETIC_LAUNCH_BOUNDARY_REACHED_NO_PROCESS",
+      "observedLaunches": 1,
+      "expectedLaunches": 1
+    },
+    {
+      "fixtureKind": "REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM",
+      "expectedPass": false,
+      "expectedDiagnosticPrefix": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "retainedHandleCount": 66,
+      "challengePublicationRequirementMet": true,
+      "matched": true,
+      "observedPass": false,
+      "name": "prelaunch-primary-preserved-with-retention-failure",
+      "allAcquiredHandlesClosed": true,
+      "launchHandleCount": 0,
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "observedLaunches": 0,
+      "expectedLaunches": 0
+    },
+    {
+      "matched": true,
+      "diagnostic": null,
+      "name": "held-stream-full-content-and-offset-reset",
+      "expectedPass": true,
+      "observedPass": true
+    },
+    {
+      "matched": true,
+      "name": "disposed-held-stream-refused",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "actual-synthetic-live-retained-positive",
+      "expectedPass": true,
+      "observedPass": true
+    },
+    {
+      "matched": true,
+      "name": "copy-mismatch",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "missing-role",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "partial-retention",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "wrong-original-path",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "wrong-retained-path",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "matched": true,
+      "name": "later-live-dll-byte-drift",
+      "expectedPass": false,
+      "observedPass": false
+    },
+    {
+      "primary": "SYNTHETIC_PRIMARY_BUILD_FAILURE",
+      "observedPass": true,
+      "expectedPass": true,
+      "matched": true,
+      "name": "primary-failure-preserved-secondary-retention-and-lock-close",
+      "secondary": [
+        {
+          "message": "SYNTHETIC_SECONDARY_RETENTION_FAILURE",
+          "stage": "rules-failure-retention"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 1,
+  "peReaderInvoked": false
+}

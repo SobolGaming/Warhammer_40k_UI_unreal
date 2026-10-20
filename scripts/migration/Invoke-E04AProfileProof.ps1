@@ -57,7 +57,7 @@ $script:Secrets=[Collections.Generic.List[string]]::new()
 foreach($entry in [Environment]::GetEnvironmentVariables().GetEnumerator()) {if($entry.Key -match '(?i)TOKEN|PASSWORD|SECRET|API_KEY|CREDENTIAL' -and ([string]$entry.Value).Length -ge 8){$script:Secrets.Add([string]$entry.Value)}}
 $script:Errors=[Collections.Generic.List[object]]::new()
 $script:Result=$null;$script:Freeze=$null;$script:E02UserContext=$null;$script:RunLock=$null
-$script:RulesSourceLocks=$null;$script:RulesTopologyBefore=$null
+$script:RulesSourceLocks=$null;$script:RulesSourceBindings=$null;$script:RulesTopologyBefore=$null
 $script:Clock=[Diagnostics.Stopwatch]::StartNew();$script:RootCount=0
 # exact reused function Assert-Path; original rows 138-151; UTF8 SHA256 93A9B93B0F8FB8F820A1BA0263661E991D088347A811AC1AA40EF8036C731E0B
 # exact reused function Under; original rows 152-157; UTF8 SHA256 58D77B2E28DDA4A175B0AA9BBE70BF88F0F18EF61C3F6E4C88C65642FE7972AD
@@ -1514,17 +1514,100 @@ function Rules-GeneratedPaths {
     $root=Under (Join-Path $script:Stage 'Intermediate/Build/BuildRules') $script:Stage
     return [ordered]@{dll=(Join-Path $root 'WarhammerClientModuleRules.dll');pdb=(Join-Path $root 'WarhammerClientModuleRules.pdb');manifest=(Join-Path $root 'WarhammerClientModuleRulesManifest.json')}
 }
-function Rules-SourceFiles {
-    $files=[Collections.Generic.List[object]]::new();$seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-    foreach($entry in $script:Freeze.sourceMembership){
-        if($entry.path -notmatch '(?i)\.cs$'){continue}
-        if($entry.path -cnotmatch '\.(Build|Target)\.cs$'){throw 'E04A1_RULES_UNSUPPORTED_CSHARP_SOURCE'}
-        $source=Descriptor (Join-Path $script:Repo $entry.path);[void](Rules-FrozenInput $source)
-        $stage=Descriptor (Under (Join-Path $script:Stage $entry.path) $script:Stage)
-        if(-not $seen.Add($stage.path) -or $source.bytes -ne $stage.bytes -or $source.sha256 -ine $stage.sha256){throw 'E04A1_RULES_SOURCE_MEMBERSHIP_OR_BYTES'}
-        $files.Add($stage)
+function Read-RulesHeldDescriptor([string]$Path,[IO.FileStream]$Stream) {
+    $plain=Need-File $Path
+    if($null -eq $Stream -or -not $Stream.CanRead -or -not $Stream.CanSeek -or
+        [IO.Path]::GetFullPath($Stream.Name) -ine $plain){throw 'E04A1_RULES_HELD_SOURCE_STREAM_REQUIRED'}
+    $position=$Stream.Position;$primary=$null;$algorithm=$null
+    try{
+        $Stream.Position=0;$length=$Stream.Length
+        $algorithm=[Security.Cryptography.SHA256]::Create()
+        $hash=[Convert]::ToHexString($algorithm.ComputeHash($Stream)).ToLowerInvariant()
+        if($Stream.Length -ne $length -or $Stream.Position -ne $length){throw 'E04A1_RULES_HELD_SOURCE_LENGTH_CHANGED'}
+        return [ordered]@{path=$plain;bytes=$length;sha256=$hash}
+    }catch{$primary=$_;throw}
+    finally{
+        try{if($null -ne $algorithm){$algorithm.Dispose()}}catch{if($null -eq $primary){$primary=$_;throw}else{$script:Errors.Add((Failure $_ 'rules-source-hash-close'))}}
+        finally{try{$Stream.Position=$position}catch{if($null -eq $primary){throw}else{$script:Errors.Add((Failure $_ 'rules-source-stream-reset'))}}}
     }
-    if(-not $files.Count){throw 'E04A1_RULES_SOURCE_LIST_EMPTY'};return @($files)
+}
+function Confirm-RulesHeldSources {
+    if($null -eq $script:RulesSourceBindings -or $script:RulesSourceBindings.Count -ne 33 -or
+        $null -eq $script:RulesSourceLocks -or $script:RulesSourceLocks.Count -ne 66){throw 'E04A1_RULES_ALL_AUTHORED_SOURCE_LOCKS_REQUIRED'}
+    foreach($binding in $script:RulesSourceBindings){
+        Assert-RulesDescriptor $binding.canonical (Read-RulesHeldDescriptor $binding.canonical.path $binding.canonicalStream)
+        Assert-RulesDescriptor $binding.staged (Read-RulesHeldDescriptor $binding.staged.path $binding.stagedStream)
+    }
+}
+function Rules-SourceFiles {
+    if($null -ne $script:RulesSourceLocks -or $null -ne $script:RulesSourceBindings){throw 'E04A1_RULES_SOURCE_LOCKS_ALREADY_EXIST'}
+    $script:RulesSourceLocks=[Collections.Generic.List[IDisposable]]::new()
+    $script:RulesSourceBindings=[Collections.Generic.List[object]]::new()
+    if($script:Freeze.sourceMembership -isnot [Collections.IList] -or $script:Freeze.sourceMembership.Count -ne 33){throw 'E04A1_RULES_FINITE_AUTHORED_MEMBERSHIP_REQUIRED'}
+    $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($entry in $script:Freeze.sourceMembership){
+        Require-RulesKeys $entry @('path','bytes','sha256')
+        if($entry.path -isnot [string] -or [string]::IsNullOrWhiteSpace($entry.path) -or
+            ($entry.bytes -isnot [int] -and $entry.bytes -isnot [long]) -or $entry.bytes -lt 1 -or
+            $entry.sha256 -isnot [string] -or $entry.sha256 -cnotmatch '^[0-9A-Fa-f]{64}$' -or -not $seen.Add($entry.path)){throw 'E04A1_RULES_INVALID_AUTHORED_MEMBER'}
+        $canonicalPath=Under (Join-Path $script:Repo $entry.path) $script:Repo
+        $stagedPath=Under (Join-Path $script:Stage $entry.path) $script:Stage
+        if([IO.Path]::GetRelativePath($script:Repo,$canonicalPath).Replace('\','/') -cne $entry.path){throw 'E04A1_RULES_NONCANONICAL_RELATIVE_MEMBER'}
+        $canonical=[ordered]@{path=$canonicalPath;bytes=$entry.bytes;sha256=$entry.sha256}
+        $staged=[ordered]@{path=$stagedPath;bytes=$entry.bytes;sha256=$entry.sha256}
+        $approved=@($script:Freeze.files|Where-Object {$_.path -ieq $canonicalPath})
+        if($approved.Count -ne 1){throw 'E04A1_RULES_INPUT_NOT_UNIQUELY_FROZEN'}
+        Assert-RulesDescriptor $approved[0] $canonical
+        # Retain every successful open immediately, including an incomplete pair.
+        # No pathname hash is accepted as a substitute for the held stream below.
+        $canonicalStream=[IO.File]::Open((Need-File $canonicalPath),[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read)
+        $script:RulesSourceLocks.Add($canonicalStream)
+        $stagedStream=[IO.File]::Open((Need-File $stagedPath),[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read)
+        $script:RulesSourceLocks.Add($stagedStream)
+        $script:RulesSourceBindings.Add(@{canonical=$canonical;staged=$staged;canonicalStream=$canonicalStream;stagedStream=$stagedStream})
+    }
+    # Validate all 66 held streams only after all 33 pairs have been acquired.
+    Confirm-RulesHeldSources
+    $files=[Collections.Generic.List[object]]::new()
+    foreach($binding in $script:RulesSourceBindings){
+        if($binding.staged.path.EndsWith('.cs',[StringComparison]::OrdinalIgnoreCase)){
+            if($binding.staged.path -cnotmatch '\.(Build|Target)\.cs$'){throw 'E04A1_RULES_UNSUPPORTED_CSHARP_SOURCE'}
+            $files.Add($binding.staged)
+        }
+    }
+    if($files.Count -ne 7){throw 'E04A1_RULES_EXACT_SEVEN_SOURCE_MEMBERS_REQUIRED'}
+    return @($files)
+}
+function Confirm-RulesPrelaunchInputs($Files,$Topology) {
+    Confirm-RulesHeldSources
+    $expectedSource=@($script:Freeze.sourceMembership|Sort-Object {$_.path} -CaseSensitive)
+    foreach($root in @($script:Repo,$script:Stage)){
+        Assert-RulesValue $expectedSource @(Snapshot-Source $root) ('prelaunchAuthoredMembership:'+ $root)
+    }
+    $expectedFiles=@($script:RulesSourceBindings|Where-Object {$_.staged.path.EndsWith('.cs',[StringComparison]::OrdinalIgnoreCase)}|ForEach-Object {$_.staged})
+    Assert-RulesValue $expectedFiles $Files 'prelaunchSevenRulesSources'
+    $entries=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($binding in $script:RulesSourceBindings){
+        foreach($relativeRoot in @('Source','Plugins/E04ProfileProof/Source')){
+            $root=Under (Join-Path $script:Stage $relativeRoot) $script:Stage
+            if(-not $binding.staged.path.StartsWith($root+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){continue}
+            if($entries.ContainsKey($binding.staged.path)){throw 'E04A1_RULES_EXPECTED_TOPOLOGY_COLLISION'}
+            $entries.Add($binding.staged.path,@{path=$binding.staged.path;directory=$false;file=$binding.staged})
+            $parent=[IO.Path]::GetDirectoryName($binding.staged.path)
+            while($parent -ine $root){
+                [void](Under $parent $root)
+                if(-not $entries.ContainsKey($parent)){$entries.Add($parent,@{path=$parent;directory=$true;file=$null})}
+                elseif(-not $entries[$parent].directory){throw 'E04A1_RULES_EXPECTED_TOPOLOGY_COLLISION'}
+                $parent=[IO.Path]::GetDirectoryName($parent)
+            }
+        }
+    }
+    $project=@($script:RulesSourceBindings|Where-Object {$_.canonical.path -ieq (Join-Path $script:Repo 'WarhammerClient.uproject')})
+    if($project.Count -ne 1){throw 'E04A1_RULES_PROJECT_BOUNDARY_REQUIRED'}
+    $expected=@{project=$project[0].staged;absence=@(foreach($relative in $script:Freeze.rulesWitness.optionalDiscoveryAbsenceRelativePaths){@{path=(Under (Join-Path $script:Stage $relative) $script:Stage);exists=$false}});entries=@($entries.Values|Sort-Object {$_.path} -CaseSensitive);qualification='Finite authored discovery topology, not a continuous directory monitor.'}
+    Assert-RulesValue $expected $Topology 'prelaunchApprovedDiscoveryTopology'
+    # Locks bind existing approved files. These finite snapshots do not provide a
+    # continuous directory monitor or prevent insertion after the final check.
 }
 function Rules-Topology([switch]$ObserveOnly) {
     $project=Read-Json (Join-Path $script:Stage 'WarhammerClient.uproject')
@@ -1548,12 +1631,9 @@ function Prepare-RulesChallenge {
     Check-RulesFreeze;$paths=Rules-GeneratedPaths
     foreach($path in @($paths.Values)+(Join-Path $script:Stage 'Intermediate/Build/BuildRules')){if(Test-Path -LiteralPath $path){throw 'E04A1_RULES_FRESH_BUILD_RULES_REQUIRED'}}
     foreach($relative in @('logs/rules-runtime-witness.json','logs/rules-witness-input.json','logs/rules-prelaunch-topology.json','logs/rules-validation.json','artifacts/rules')){if(Test-Path -LiteralPath (Owned $relative)){throw 'E04A1_RULES_NO_RETRY_OR_OUTPUT_REUSE'}}
-    $files=@(Rules-SourceFiles);$script:RulesSourceLocks=[Collections.Generic.List[IDisposable]]::new()
-    foreach($d in $files){
-        $relative=[IO.Path]::GetRelativePath($script:Stage,$d.path)
-        foreach($p in @((Join-Path $script:Repo $relative),$d.path)){$script:RulesSourceLocks.Add([IO.File]::Open((Need-File $p),[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read))}
-    }
-    $script:RulesTopologyBefore=Rules-Topology;Write-JsonNew (Owned 'logs/rules-source-before.json') $script:RulesTopologyBefore
+    $files=@(Rules-SourceFiles)
+    $topology=Rules-Topology;Confirm-RulesPrelaunchInputs $files $topology
+    $script:RulesTopologyBefore=$topology;Write-JsonNew (Owned 'logs/rules-source-before.json') $script:RulesTopologyBefore
     $nonce=[Guid]::NewGuid().ToString('D');$f=Descriptor $FreezeManifestPath;$r=$script:Freeze.rulesWitness
     $identity=[ordered]@{schemaVersion=1;kind='E04A1_RULES_PRELAUNCH_TOPOLOGY';runId=$RunId;sourceHead=$script:Freeze.sourceHead;sourceRoot=$script:Repo;stagedProject=(Join-Path $script:Stage 'WarhammerClient.uproject');attemptNonce=$nonce;phase='EditorBuild';freezeManifest=$f;freshProjectDirectory=$true;projectBuildRulesAbsent=$true;projectIntermediateSourceAbsent=$true;sourceMembershipLockedBeforeLaunch=$true;rulesSourceFiles=$files;optionalDiscoveryAbsences=@($script:RulesTopologyBefore.absence|ForEach-Object {$_.path})}
     # Freshness attests the same-run Preflight-created stage and checked preabsence.
@@ -1646,6 +1726,9 @@ function Check-RulesWitnessData($Challenge,$Topology,$Witness,$Root,$Actual,$Met
     Assert-RulesDescriptor $Challenge.targetSource $Witness.selectedTarget.sourceDescriptor;Assert-RulesDescriptor $Challenge.moduleSource $Witness.module.sourceDescriptor
     Assert-RulesDescriptor $Actual.dll $Witness.selectedTarget.assemblyDescriptor
     if($Witness.selectedTarget.loadedMvid -ine $Metadata.mvid -or $Metadata.simpleName -cne 'WarhammerClientModuleRules' -or $null -eq $Metadata.pdbIdentity){throw 'E04A1_RULES_RETAINED_MVID_OR_PDB_MISMATCH'}
+    if($Actual -isnot [Collections.IDictionary] -or -not $Actual.Contains('manifestBody') -or $Actual['manifestBody'] -isnot [Collections.IDictionary]){throw 'E04A1_RULES_MANIFEST_DATA_REQUIRED'}
+    Require-RulesKeys $Actual.manifestBody @('SourceFiles','EngineVersion')
+    if($Actual.manifestBody.SourceFiles -isnot [Collections.IList] -or $Actual.manifestBody.EngineVersion -isnot [string] -or [string]::IsNullOrWhiteSpace($Actual.manifestBody.EngineVersion)){throw 'E04A1_RULES_MANIFEST_DATA_REQUIRED'}
     foreach($key in @('dll','pdb','manifest')){Assert-RulesDescriptor $Actual[$key] $Witness.generatedRules[$key]}
     if($Witness.generatedRules.engineVersion -cne $Actual.manifestBody.EngineVersion -or $Witness.generatedRules.engineVersion -cne $Policy.expectedManifestEngineVersion -or $Witness.generatedRules.manifestSequenceEqualsAssemblySourceFiles -ne $true){throw 'E04A1_RULES_MANIFEST_ENGINE_OR_SEQUENCE_REQUIRED'}
     $cache=$Witness.actualProjectRules
@@ -1669,9 +1752,22 @@ function Check-RulesWitnessData($Challenge,$Topology,$Witness,$Root,$Actual,$Met
     $docSeen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach($d in $Metadata.documents){if(-not $expected.ContainsKey($d.path) -or -not $docSeen.Add($d.path)){throw 'E04A1_RULES_PDB_DOCUMENT_MEMBERSHIP'};Assert-RulesDescriptor $expected[$d.path] $d.sourceDescriptor}
     foreach($pair in @(@('targetNameMapSequence','.Target.cs'),@('moduleNameMapSequence','.Build.cs'))){
-        $map=@($cache[$pair[0]]);$wanted=@($Challenge.rulesSourceFiles|Where-Object {$_.path.EndsWith($pair[1],[StringComparison]::Ordinal)});$names=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-        if($map.Count -ne $wanted.Count){throw 'E04A1_RULES_NAME_MAP_MEMBERSHIP'}
-        foreach($entry in $map){Require-RulesKeys $entry @('name','path');$stem=[IO.Path]::GetFileName($entry.path);$stem=$stem.Substring(0,$stem.Length-$pair[1].Length);if(-not $expected.ContainsKey($entry.path) -or $entry.name -cne $stem -or -not $names.Add($entry.name)){throw 'E04A1_RULES_NAME_MAP_SOURCE_OR_CASE'}}
+        if($cache[$pair[0]] -isnot [Collections.IList]){throw 'E04A1_RULES_NAME_MAP_ORDERED_ARRAY_REQUIRED'}
+        $map=$cache[$pair[0]];$wanted=@($Challenge.rulesSourceFiles|Where-Object {$_.path.EndsWith($pair[1],[StringComparison]::Ordinal)})
+        $wantedPaths=[Collections.Generic.HashSet[string]]::new([string[]]@($wanted|ForEach-Object {$_.path}),[StringComparer]::Ordinal)
+        $seenPaths=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal);$names=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        if($map.Count -ne $wanted.Count -or $wantedPaths.Count -ne $wanted.Count){throw 'E04A1_RULES_NAME_MAP_MEMBERSHIP'}
+        # Validate the exact category set without sorting or replacing the actual
+        # map enumeration order with assembly-source, manifest or PDB order.
+        foreach($entry in $map){
+            Require-RulesKeys $entry @('name','path')
+            if($entry.path -isnot [string] -or $entry.name -isnot [string] -or
+                -not $entry.path.EndsWith($pair[1],[StringComparison]::Ordinal) -or
+                -not $wantedPaths.Contains($entry.path) -or -not $seenPaths.Add($entry.path)){throw 'E04A1_RULES_NAME_MAP_CATEGORY_OR_SOURCE'}
+            $stem=[IO.Path]::GetFileName($entry.path);$stem=$stem.Substring(0,$stem.Length-$pair[1].Length)
+            if($entry.name -cne $stem -or -not $names.Add($entry.name)){throw 'E04A1_RULES_NAME_MAP_SOURCE_OR_CASE'}
+        }
+        if(-not $seenPaths.SetEquals($wantedPaths)){throw 'E04A1_RULES_NAME_MAP_MEMBERSHIP'}
     }
     $projectEntries=@($cache.loadedProjectCacheEntryMetadata|Where-Object {$_.project -ieq $Challenge.stagedProject})
     if($projectEntries.Count -ne 1 -or @($cache.loadedProjectCacheEntryMetadata).Count -ne 1 -or $projectEntries[0].isValueCreated -ne $true){throw 'E04A1_RULES_PROJECT_CACHE_ENTRY_REQUIRED'}
@@ -1744,6 +1840,7 @@ function Editor-Build {
             DOTNET_ROLL_FORWARD='LatestPatch';DOTNET_MULTILEVEL_LOOKUP='0';DOTNET_STARTUP_HOOKS='';DOTNET_ADDITIONAL_DEPS='';DOTNET_SHARED_STORE='';DOTNET_EnableDiagnostics='0';CORECLR_ENABLE_PROFILING='0';COR_ENABLE_PROFILING='0';COMPlus_EnableDiagnostics='0'}
         # Direct frozen host: no Build.bat/SDK --version/UBT rebuild fallback.
         $arguments=@($challenge.ubtAssembly.path,'WarhammerClientE04AEditor','Win64','Development',('-Project='+$challenge.stagedProject),'-WaitMutex','-NoUBA','-NoVFS','-NoUBTMakefiles','-Compiler=VisualStudio2022','-CompilerVersion=14.44.35229','-WindowsSDKVersion=10.0.22621.0',('-UBARootDir='+(Owned 'uba')),('-Log='+(Owned 'logs/build.log')))
+        Confirm-RulesPrelaunchInputs $challenge.rulesSourceFiles (Rules-Topology)
         $p=Invoke-Root 'editor-build' $script:Freeze.toolPaths.dotnet $arguments 1800 $false '' $extra $challenge.expectedWorkingDirectory
         Require-RootPass $p
         $after=Rules-Topology -ObserveOnly;Write-JsonNew (Owned 'logs/rules-source-after.json') $after
@@ -1782,6 +1879,7 @@ function Editor-Build {
             foreach($lock in $script:RulesSourceLocks){try{$lock.Dispose()}catch{$script:Errors.Add((Failure $_ 'rules-source-lock-close'));if($null -eq $lateFailure){$lateFailure=$_}}}
             $script:RulesSourceLocks=$null
         }
+        $script:RulesSourceBindings=$null
         if($null -eq $localFailure -and $null -ne $lateFailure){throw $lateFailure}
     }
 }

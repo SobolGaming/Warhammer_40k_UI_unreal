@@ -23,11 +23,13 @@ while($cursor){try{if(([IO.File]::GetAttributes($cursor)-band[IO.FileAttributes]
 $wrapper=[IO.Path]::GetFullPath($WrapperPath)
 $canonicalWrapper=[IO.Path]::GetFullPath((Join-Path $repository 'scripts/migration/Invoke-E04AProfileProof.ps1'))
 $proposalWrapper=[IO.Path]::GetFullPath((Join-Path $repository '.local/planning/E04/rules-witness-wrapper-repair-PROPOSED/Invoke-E04AProfileProof.RulesWitness.PROPOSED.ps1'))
-if(($wrapper -ine $canonicalWrapper -and $wrapper -ine $proposalWrapper) -or
+$heldStreamProposalWrapper=[IO.Path]::GetFullPath((Join-Path $repository '.local/planning/E04/rules-source-held-stream-repair-PROPOSED/Invoke-E04AProfileProof.HeldSources.PROPOSED.ps1'))
+$targetMapManifestProposalWrapper=[IO.Path]::GetFullPath((Join-Path $repository '.local/planning/E04/rules-target-map-manifest-repair-v3-PROPOSED/Invoke-E04AProfileProof.TargetMapManifest.v3.PROPOSED.ps1'))
+if(($wrapper -ine $canonicalWrapper -and $wrapper -ine $proposalWrapper -and $wrapper -ine $heldStreamProposalWrapper -and $wrapper -ine $targetMapManifestProposalWrapper) -or
  (Get-FileHash -LiteralPath $wrapper -Algorithm SHA256).Hash -ine $ExpectedWrapperSha256){throw 'EXACT_LOCAL_WRAPPER_SOURCE_REQUIRED'}
 $tokens=$null;$parseErrors=$null;$tree=[Management.Automation.Language.Parser]::ParseFile($wrapper,[ref]$tokens,[ref]$parseErrors)
 if($parseErrors.Count){throw 'WRAPPER_AST_PARSE_FAILED'}
-$selected=@('Require-RulesKeys','Assert-RulesValue','Assert-RulesDescriptor','Collect-RulesCacheSources','Check-RulesWitnessData','Check-RulesRetentionData','Safe-Text','Check-JsonElement','Parse-JsonLine','Assert-Path','Under','Owned','Need-File','Digest','Descriptor','Check-Descriptor','Rules-GeneratedPaths','Check-RulesPreservation','Editor-Build')
+$selected=@('Require-RulesKeys','Assert-RulesValue','Assert-RulesDescriptor','Collect-RulesCacheSources','Check-RulesWitnessData','Check-RulesRetentionData','Safe-Text','Check-JsonElement','Parse-JsonLine','Assert-Path','Under','Owned','Need-File','Digest','Descriptor','Check-Descriptor','Rules-GeneratedPaths','Check-RulesPreservation','Editor-Build','Read-RulesHeldDescriptor','Confirm-RulesHeldSources','Rules-SourceFiles','Confirm-RulesPrelaunchInputs','Rules-Topology','Prepare-RulesChallenge','Read-Json','Write-JsonNew','Plain-Files','Snapshot-Source','Failure')
 $functionBindings=@()
 foreach($name in $selected){
  $nodes=@($tree.FindAll({param($n)$n-is[Management.Automation.Language.FunctionDefinitionAst]-and$n.Name-ceq$name},$true))
@@ -73,12 +75,31 @@ function New-RulesFixture {
  $metadata=@{mvid=$mvid;simpleName='WarhammerClientModuleRules';assemblyVersion='0.0.0.0';pdbIdentity=@{guid='66666666-6666-6666-6666-666666666666';stamp=123;age=1};documents=@($sourceDescriptors|ForEach-Object{@{path=$_.path;sourceDescriptor=$_;checksumAlgorithm='SHA256';checksum=('A'*64)}})}
  Copy-Fixture @{Challenge=$challenge;Topology=$topology;Witness=$witness;Root=$receipt;Actual=$actual;Metadata=$metadata;Policy=@{expectedPreprocessorDefines=$cache.actualPreprocessorDefines;expectedManifestEngineVersion='SYNTHETIC_ENGINE'}}
 }
-function Run-JoinControl([string]$Name,[scriptblock]$Mutate,[bool]$ExpectedPass=$false){
+function Run-JoinControl([string]$Name,[scriptblock]$Mutate,[bool]$ExpectedPass=$false,[string]$ExpectedDiagnostic=''){
  $fixture=New-RulesFixture;& $Mutate $fixture;$observedPass=$false;$errorText=$null
  try{$null=Check-RulesWitnessData $fixture.Challenge $fixture.Topology $fixture.Witness $fixture.Root $fixture.Actual $fixture.Metadata $fixture.Policy;$observedPass=$true}catch{$errorText=$_.Exception.Message}
- $cases.Add(@{name=$Name;expectedPass=$ExpectedPass;observedPass=$observedPass;matched=($ExpectedPass-eq$observedPass);diagnostic=$errorText})
+ $cases.Add(@{name=$Name;expectedPass=$ExpectedPass;observedPass=$observedPass;matched=($ExpectedPass-eq$observedPass-and($ExpectedDiagnostic-ceq''-or$errorText-ceq$ExpectedDiagnostic));diagnostic=$errorText;expectedDiagnostic=$ExpectedDiagnostic})
 }
 Run-JoinControl 'complete-synthetic-seven-source-join' {} $true
+# Reproduce both old combined-dictionary category escapes with the same truncated
+# stem that the old validator accepted. Other complete fixture joins stay intact.
+Run-JoinControl 'target-map-rejects-approved-module-source' {
+ $f=$args[0];$path=$f.Challenge.moduleSource.path;$name=[IO.Path]::GetFileName($path);$name=$name.Substring(0,$name.Length-'.Target.cs'.Length)
+ $f.Witness.actualProjectRules.targetNameMapSequence[0]=@{name=$name;path=$path}
+} $false 'E04A1_RULES_NAME_MAP_CATEGORY_OR_SOURCE'
+Run-JoinControl 'module-map-rejects-approved-target-source' {
+ $f=$args[0];$path=$f.Witness.actualProjectRules.targetNameMapSequence[0].path;$name=[IO.Path]::GetFileName($path);$name=$name.Substring(0,$name.Length-'.Build.cs'.Length)
+ $f.Witness.actualProjectRules.moduleNameMapSequence[0]=@{name=$name;path=$path}
+} $false 'E04A1_RULES_NAME_MAP_CATEGORY_OR_SOURCE'
+Run-JoinControl 'absent-raw-manifest-data' {$args[0].Actual.Remove('manifestBody')} $false 'E04A1_RULES_MANIFEST_DATA_REQUIRED'
+Run-JoinControl 'absent-generated-manifest-descriptor' {$args[0].Witness.generatedRules.manifest=$null} $false 'E04A1_RULES_OBJECT_REQUIRED'
+# Valid map order is preserved as observed; it need not equal source-union order.
+$orderFixture=New-RulesFixture
+foreach($key in @('targetNameMapSequence','moduleNameMapSequence')){$rows=@($orderFixture.Witness.actualProjectRules[$key]);[Array]::Reverse($rows);$orderFixture.Witness.actualProjectRules[$key]=$rows}
+$beforeMapOrder=Copy-Fixture @{target=$orderFixture.Witness.actualProjectRules.targetNameMapSequence;module=$orderFixture.Witness.actualProjectRules.moduleNameMapSequence}
+$mapOrderOk=$false;$mapOrderDiagnostic=$null
+try{$null=Check-RulesWitnessData $orderFixture.Challenge $orderFixture.Topology $orderFixture.Witness $orderFixture.Root $orderFixture.Actual $orderFixture.Metadata $orderFixture.Policy;Assert-RulesValue $beforeMapOrder.target $orderFixture.Witness.actualProjectRules.targetNameMapSequence 'targetObservedOrderUnchanged';Assert-RulesValue $beforeMapOrder.module $orderFixture.Witness.actualProjectRules.moduleNameMapSequence 'moduleObservedOrderUnchanged';$mapOrderOk=$true}catch{$mapOrderDiagnostic=$_.Exception.Message}
+$cases.Add(@{name='valid-category-maps-retain-observed-order';expectedPass=$true;observedPass=$mapOrderOk;matched=$mapOrderOk;diagnostic=$mapOrderDiagnostic})
 Run-JoinControl 'same-pid-wrong-creation-filetime' {$args[0].Witness.process.startFileTimeUtc++}
 Run-JoinControl 'different-ubt-pid' {$args[0].Witness.process.pid++}
 Run-JoinControl 'wrong-cwd' {$args[0].Witness.process.workingDirectory+='-foreign'}
@@ -121,6 +142,111 @@ Run-JoinControl 'chronological-cache-claim-forbidden' {$args[0].Witness.lineageQ
 foreach($sample in @(@{name='nested-case-key-collision';text='{"outer":{"pid":1,"PID":2}}'},@{name='nested-duplicate-key';text='{"outer":{"pid":1,"pid":2}}'},@{name='malformed-json';text='{"outer":'})){
  $refused=$false;try{$null=Parse-JsonLine $sample.text}catch{$refused=$true};$cases.Add(@{name=$sample.name;expectedPass=$false;observedPass=(-not$refused);matched=$refused})
 }
+# Real source acquisition/preparation/Editor-Build control flow over owned text
+# fixtures. Only the installed-runtime prerequisite and native-launch/retention
+# seams are replaced; Rules-SourceFiles/Topology/Prepare are never replaced here.
+$script:RealRulesNeedFile=${function:Need-File}
+function Need-File([string]$Path){
+ if($null -ne $script:PreparationHook -and [IO.Path]::GetFullPath($Path) -ieq $script:PreparationHookPath){$hook=$script:PreparationHook;$script:PreparationHook=$null;& $hook}
+ & $script:RealRulesNeedFile $Path
+}
+function Phase-Budget {1800}
+function Check-RulesFreeze {$script:SyntheticRuntimePrerequisiteCalls++}
+function Invoke-Root {
+ $script:SyntheticLaunchCounter++
+ $script:LocksAtLaunch=@($script:RulesSourceLocks)
+ $script:AllLocksReadableAtLaunch=($script:LocksAtLaunch.Count-eq66-and@($script:LocksAtLaunch|Where-Object{-not$_.CanRead}).Count-eq0)
+ throw 'SYNTHETIC_LAUNCH_BOUNDARY_REACHED_NO_PROCESS'
+}
+function Retain-RulesArtifacts {
+ $script:LocksAtRetention=@($script:RulesSourceLocks)
+ if($script:InjectSyntheticRetentionFailure){throw 'SYNTHETIC_SECONDARY_RETENTION_FAILURE'}
+ @{status='SYNTHETIC_NO_NATIVE_ARTIFACTS';items=@();missing=@();failures=@()}
+}
+function New-PrelaunchFixture([string]$Name){
+ $root=Join-Path $controlRoot ('prelaunch-'+$Name)
+ $script:Repo=Join-Path $root 'canonical';$script:RunRoot=Join-Path $root 'run';$script:Stage=Join-Path $script:RunRoot 'project'
+ $script:EngineRoot=Join-Path $root 'engine';$script:FreezeManifestPath=Join-Path $script:RunRoot 'freeze.json'
+ foreach($directory in @($script:Repo,$script:Stage,(Join-Path $script:RunRoot 'logs'),(Join-Path $script:EngineRoot 'Engine/Source'))){[void][IO.Directory]::CreateDirectory($directory)}
+ $paths=@('WarhammerClient.uproject','Config/DefaultEditorSettings.ini','Config/DefaultEngine.ini','Config/DefaultGame.ini','Plugins/E04ProfileProof/E04ProfileProof.uplugin','Source/WarhammerClient.Target.cs','Source/WarhammerClientEditor.Target.cs','Source/WarhammerClientE04AEditor.Target.cs','Source/WarhammerClient/WarhammerClient.Build.cs','Plugins/E04ProfileProof/Source/E04ProfileParser/E04ProfileParser.Build.cs','Plugins/E04ProfileProof/Source/E04ProfileProbe/E04ProfileProbe.Build.cs','Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs')
+ for($i=0;$i -lt 21;$i++){$paths+=('Source/WarhammerClient/Private/Synthetic'+$i.ToString('D2')+'.h')}
+ foreach($relative in $paths){foreach($base in @($script:Repo,$script:Stage)){$p=Join-Path $base $relative;[void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($p));$text=if($relative.EndsWith('.uproject')-or$relative.EndsWith('.uplugin')){'{}'}else{'SYNTHETIC_APPROVED_A'};[IO.File]::WriteAllText($p,$text,$script:Utf8)}}
+ $script:PreparationHook=$null;$script:PreparationHookPath='';$script:SyntheticLaunchCounter=0;$script:SyntheticRuntimePrerequisiteCalls=0;$script:LocksAtLaunch=@();$script:LocksAtRetention=@();$script:AllLocksReadableAtLaunch=$false;$script:InjectSyntheticRetentionFailure=$false
+ $script:RulesSourceLocks=$null;$script:RulesSourceBindings=$null;$script:RulesTopologyBefore=$null;$script:Errors=[Collections.Generic.List[object]]::new();$script:Result=@{primaryFailure=$null}
+ $membership=@(Snapshot-Source $script:Repo)
+ $hostPath=Join-Path $root 'dotnet-NOT-EXECUTABLE.txt';[IO.File]::WriteAllText($hostPath,'SYNTHETIC_HOST_NEVER_EXECUTED',$script:Utf8);$hostDescriptor=Descriptor $hostPath
+ $r=@{expectedRuntime=@{runtimeFramework='SYNTHETIC';runtimeVersion='SYNTHETIC';processArchitecture='X64'};parentAssemblies=@($hostDescriptor);expectedSelectors=@{name='SYNTHETIC'};optionalDiscoveryAbsenceRelativePaths=@('Tests','Mods','Platforms','Restricted','Intermediate/Source','Plugins/E04ProfileProof/Tests','Plugins/E04ProfileProof/Platforms','Plugins/E04ProfileProof/Restricted')}
+ foreach($key in @('ubtAssembly','buildAssembly','rulesCacheLockAssembly','rulesCompilerSource','rulesAssemblySource','rulesCacheSource','dynamicCompilationSource')){$r[$key]=$hostDescriptor}
+ $script:Freeze=@{sourceHead=('1'*40);sourceMembership=$membership;files=@(foreach($relative in $paths){Descriptor (Join-Path $script:Repo $relative)});toolPaths=@{dotnet=$hostPath};rulesWitness=$r;windows=@{platform='Win64'}}
+ [IO.File]::WriteAllText($script:FreezeManifestPath,'SYNTHETIC_FREEZE_NOT_NATIVE_AUTHORITY',$script:Utf8)
+ [IO.File]::WriteAllText((Owned 'logs/yaml-artifact-receipt.json'),'SYNTHETIC_NO_LIBRARY',$script:Utf8)
+ $script:RunId='20990101T000000Z-12345678'
+ return @{root=$root;canonical=$script:Repo;stage=$script:Stage;first=(Join-Path $script:Repo 'Config/DefaultEditorSettings.ini');last=(Join-Path $script:Stage 'WarhammerClient.uproject');target='Source/WarhammerClientE04AEditor.Target.cs'}
+}
+function Set-PrelaunchMutation([string]$Path,[scriptblock]$Action){$script:PreparationHookPath=[IO.Path]::GetFullPath($Path);$script:PreparationHook=$Action}
+function Run-PrelaunchControl([string]$Name,[scriptblock]$Setup,[int]$ExpectedLaunches,[string]$DiagnosticPrefix,[bool]$RequireNoChallenge=$false){
+ $fixture=New-PrelaunchFixture $Name;& $Setup $fixture;$caught=$null
+ try{$null=Editor-Build}catch{$caught=$_.Exception.Message}
+ $closed=($null -eq $script:RulesSourceLocks -and $null -eq $script:RulesSourceBindings -and @($script:LocksAtRetention|Where-Object {$_.CanRead}).Count -eq 0)
+ $launchLocks=($ExpectedLaunches -eq 0 -or ($script:AllLocksReadableAtLaunch -and $script:LocksAtLaunch.Count -eq 66 -and @($script:LocksAtLaunch|Where-Object {$_.CanRead}).Count -eq 0))
+ $unpublished=(-not $RequireNoChallenge -or -not [IO.File]::Exists((Owned 'logs/rules-witness-input.json')))
+ $matched=($script:SyntheticLaunchCounter -eq $ExpectedLaunches -and $null -ne $caught -and $caught.StartsWith($DiagnosticPrefix,[StringComparison]::Ordinal) -and $closed -and $launchLocks -and $unpublished -and $script:SyntheticRuntimePrerequisiteCalls -eq 1)
+ $cases.Add(@{name=$Name;expectedPass=($ExpectedLaunches-eq1);observedPass=($script:SyntheticLaunchCounter-eq1);expectedLaunches=$ExpectedLaunches;observedLaunches=$script:SyntheticLaunchCounter;diagnostic=$caught;expectedDiagnosticPrefix=$DiagnosticPrefix;allAcquiredHandlesClosed=$closed;retainedHandleCount=$script:LocksAtRetention.Count;launchHandleCount=$script:LocksAtLaunch.Count;challengePublicationRequirementMet=$unpublished;matched=$matched;fixtureKind='REAL_PREPARATION_AND_EDITOR_BUILD_WITH_NO_PROCESS_SEAM'})
+}
+Run-PrelaunchControl 'held-all33-positive-reaches-launch-seam' {} 1 'SYNTHETIC_LAUNCH_BOUNDARY_REACHED_NO_PROCESS'
+Run-PrelaunchControl 'same-length-frozen-A-locks-B' {
+ $f=$args[0];$script:MutationFixture=$f
+ Set-PrelaunchMutation $f.first {foreach($root in @($script:MutationFixture.canonical,$script:MutationFixture.stage)){[IO.File]::WriteAllText((Join-Path $root $script:MutationFixture.target),'SYNTHETIC_APPROVED_B',$script:Utf8)}}
+} 0 'E04A1_RULES_DESCRIPTOR_MISMATCH' $true
+Run-PrelaunchControl 'canonical-only-byte-mismatch' {[IO.File]::WriteAllText((Join-Path $args[0].canonical $args[0].target),'SYNTHETIC_APPROVED_B',$script:Utf8)} 0 'E04A1_RULES_DESCRIPTOR_MISMATCH' $true
+Run-PrelaunchControl 'staged-only-byte-mismatch' {[IO.File]::WriteAllText((Join-Path $args[0].stage $args[0].target),'SYNTHETIC_APPROVED_B',$script:Utf8)} 0 'E04A1_RULES_DESCRIPTOR_MISMATCH' $true
+Run-PrelaunchControl 'missing-last-stage-file-partial-lock-cleanup' {[IO.File]::Delete($args[0].last)} 0 '' $true
+$lastCase=$cases[$cases.Count-1];$lastCase.matched=($lastCase.matched -and $lastCase.retainedHandleCount -eq 65)
+Run-PrelaunchControl 'full33-flat-freeze-descriptor-conflict' {$script:Freeze.files[0].sha256=('B'*64)} 0 'E04A1_RULES_DESCRIPTOR_MISMATCH' $true
+Run-PrelaunchControl 'unexpected-CSharp-before-challenge' {
+ $f=$args[0];$script:MutationFixture=$f
+ Set-PrelaunchMutation $f.last {[IO.File]::WriteAllText((Join-Path $script:MutationFixture.stage 'Source/Unexpected.Target.cs'),'SYNTHETIC_EXTRA',$script:Utf8)}
+} 0 'E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:' $true
+foreach($sample in @(@{name='late-extra-CSharp';relative='Source/Late.Target.cs';diagnostic='E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:'},@{name='late-pruning-marker';relative='Source/.ubtignore';diagnostic='E04A1_RULES_PRUNING_MARKER_UNSUPPORTED'},@{name='late-project-pruning-input';relative='Source/Late.csproj';diagnostic='E04A1_RULES_PRUNING_MARKER_UNSUPPORTED'},@{name='late-config-boundary-file';relative='Config/Unexpected.ini';diagnostic='E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:'},@{name='late-plugin-boundary-file';relative='Plugins/Unexpected.uplugin';diagnostic='E04A1_RULES_ARRAY_MISMATCH: prelaunchAuthoredMembership:'})){
+ $script:LateRelative=$sample.relative
+ Run-PrelaunchControl $sample.name {
+  $script:LateStage=$args[0].stage
+  Set-PrelaunchMutation (Owned 'logs/yaml-artifact-receipt.json') {[IO.File]::WriteAllText((Join-Path $script:LateStage $script:LateRelative),'SYNTHETIC_EXTRA',$script:Utf8)}
+ } 0 $sample.diagnostic
+}
+Run-PrelaunchControl 'late-empty-discovery-directory' {
+ $script:LateStage=$args[0].stage
+ Set-PrelaunchMutation (Owned 'logs/yaml-artifact-receipt.json') {[void][IO.Directory]::CreateDirectory((Join-Path $script:LateStage 'Source/UnexpectedEmpty'))}
+} 0 'E04A1_RULES_ARRAY_MISMATCH: prelaunchApprovedDiscoveryTopology.entries'
+Run-PrelaunchControl 'late-excluded-discovery-root' {
+ $script:LateStage=$args[0].stage
+ Set-PrelaunchMutation (Owned 'logs/yaml-artifact-receipt.json') {[void][IO.Directory]::CreateDirectory((Join-Path $script:LateStage 'Mods'))}
+} 0 'E04A1_RULES_EXCLUDED_DISCOVERY_ROOT_PRESENT: Mods'
+Run-PrelaunchControl 'staged-project-boundary-drift' {[IO.File]::WriteAllText((Join-Path $args[0].stage 'WarhammerClient.uproject'),'{"AdditionalRootDirectories":["foreign"]}',$script:Utf8)} 0 'E04A1_RULES_DESCRIPTOR_MISMATCH' $true
+Run-PrelaunchControl 'staged-plugin-boundary-drift' {[IO.File]::WriteAllText((Join-Path $args[0].stage 'Plugins/E04ProfileProof/E04ProfileProof.uplugin'),'{"EnabledByDefault":true}',$script:Utf8)} 0 'E04A1_RULES_DESCRIPTOR_MISMATCH' $true
+Run-PrelaunchControl 'canonical-config-boundary-drift' {[IO.File]::WriteAllText((Join-Path $args[0].canonical 'Config/DefaultEngine.ini'),'SYNTHETIC_APPROVED_B',$script:Utf8)} 0 'E04A1_RULES_DESCRIPTOR_MISMATCH' $true
+Run-PrelaunchControl 'both-copies-boundary-handles-deny-late-write' {
+ $script:MutationFixture=$args[0];$script:BoundaryWritesDenied=0
+ Set-PrelaunchMutation (Owned 'logs/yaml-artifact-receipt.json') {
+  foreach($p in @((Join-Path $script:MutationFixture.stage 'WarhammerClient.uproject'),(Join-Path $script:MutationFixture.canonical 'Config/DefaultEngine.ini'),(Join-Path $script:MutationFixture.stage 'Plugins/E04ProfileProof/E04ProfileProof.uplugin'))){try{[IO.File]::WriteAllText($p,'FOREIGN_BOUNDARY',$script:Utf8)}catch [IO.IOException]{$script:BoundaryWritesDenied++}}
+ }
+} 1 'SYNTHETIC_LAUNCH_BOUNDARY_REACHED_NO_PROCESS'
+$lastCase=$cases[$cases.Count-1];$lastCase.matched=($lastCase.matched -and $script:BoundaryWritesDenied -eq 3)
+Run-PrelaunchControl 'prelaunch-primary-preserved-with-retention-failure' {
+ [IO.File]::WriteAllText((Join-Path $args[0].stage $args[0].target),'SYNTHETIC_APPROVED_B',$script:Utf8);$script:InjectSyntheticRetentionFailure=$true
+} 0 'E04A1_RULES_DESCRIPTOR_MISMATCH' $true
+$lastCase=$cases[$cases.Count-1];$lastCase.matched=($lastCase.matched -and @($script:Errors|Where-Object {$_.stage -ceq 'rules-failure-retention' -and $_.message -ceq 'SYNTHETIC_SECONDARY_RETENTION_FAILURE'}).Count -eq 1)
+# Direct real held-stream hashing checks full content and restores caller offset.
+$offsetFile=Join-Path $controlRoot 'held-offset.bin';[IO.File]::WriteAllText($offsetFile,'SYNTHETIC_OFFSET_HASH',$script:Utf8);$offsetExpected=Descriptor $offsetFile
+$offsetStream=[IO.File]::Open($offsetFile,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read)
+$offsetOk=$false;$offsetError=$null
+try{$offsetStream.Position=3;$offsetActual=Read-RulesHeldDescriptor $offsetFile $offsetStream;Assert-RulesDescriptor $offsetExpected $offsetActual;$offsetOk=($offsetStream.Position-eq3)}catch{$offsetError=$_.Exception.Message}finally{$offsetStream.Dispose()}
+$cases.Add(@{name='held-stream-full-content-and-offset-reset';expectedPass=$true;observedPass=$offsetOk;matched=$offsetOk;diagnostic=$offsetError})
+$disposedRefused=$false;try{$null=Read-RulesHeldDescriptor $offsetFile $offsetStream}catch{$disposedRefused=$_.Exception.Message-ceq'E04A1_RULES_HELD_SOURCE_STREAM_REQUIRED'}
+$cases.Add(@{name='disposed-held-stream-refused';expectedPass=$false;observedPass=(-not$disposedRefused);matched=$disposedRefused})
+# Restore real path helper and original owned-root scope before legacy controls.
+Set-Item -LiteralPath Function:Need-File -Value $script:RealRulesNeedFile
+$script:Repo=$repository;$script:RunRoot=$controlRoot;$script:Stage=Join-Path $controlRoot 'project';$script:RulesSourceLocks=$null;$script:RulesSourceBindings=$null;$script:RulesTopologyBefore=$null
 # Actual retained/live hashing under owned synthetic files; no real PE is loaded.
 $roles=@('dll','pdb','manifest','witness','input','topology','before','after');$items=@()
 $generated=Rules-GeneratedPaths
@@ -131,14 +257,42 @@ $editor=@{rulesWitness=@{status='VALIDATED_FINITE_OWNED_PROCESS_RULES_POSTSTATE'
 function Plain-Files([string]$Root){[IO.Directory]::EnumerateFiles($Root,'*',[IO.SearchOption]::AllDirectories)}
 $ok=$false;try{$null=Check-RulesPreservation $editor;$ok=$true}catch{};$cases.Add(@{name='actual-synthetic-live-retained-positive';expectedPass=$true;observedPass=$ok;matched=$ok})
 foreach($sample in @('copy-mismatch','missing-role','partial-retention','wrong-original-path','wrong-retained-path')){$bad=Copy-Fixture $editor;switch($sample){'copy-mismatch'{$bad.rulesRetention.items[0].retainedCopy.sha256=('B'*64)};'missing-role'{$bad.rulesRetention.items=@($bad.rulesRetention.items[1..7])};'partial-retention'{$bad.rulesRetention.status='PARTIAL_PRESERVED'};'wrong-original-path'{$bad.rulesRetention.items[0].original.path+='-foreign'};'wrong-retained-path'{$bad.rulesRetention.items[0].retainedCopy.path+='-foreign'}};$refused=$false;try{Check-RulesRetentionData $bad.rulesRetention}catch{$refused=$true};$cases.Add(@{name=$sample;expectedPass=$false;observedPass=(-not$refused);matched=$refused})}
+# Explicit manifest-role omission: the DLL and six other roles remain present.
+$missingManifestRole=Copy-Fixture $editor
+$missingManifestRole.rulesRetention.items=@($missingManifestRole.rulesRetention.items|Where-Object {$_.role -cne 'manifest'})
+$manifestRoleTargeted=($editor.rulesRetention.items.Count-eq8-and$missingManifestRole.rulesRetention.items.Count-eq7-and@($missingManifestRole.rulesRetention.items|Where-Object {$_.role-ceq'dll'}).Count-eq1-and@($missingManifestRole.rulesRetention.items|Where-Object {$_.role-ceq'manifest'}).Count-eq0)
+$manifestRoleRefused=$false;$manifestRoleDiagnostic=$null
+try{Check-RulesRetentionData $missingManifestRole.rulesRetention}catch{$manifestRoleDiagnostic=$_.Exception.Message;$manifestRoleRefused=$manifestRoleDiagnostic-ceq'E04A1_RULES_RETENTION_REQUIRED_ROLE_SET'}
+$cases.Add(@{name='missing-retained-manifest-role';expectedPass=$false;observedPass=(-not$manifestRoleRefused);matched=($manifestRoleTargeted-and$manifestRoleRefused);diagnostic=$manifestRoleDiagnostic;manifestOmittedDllPreserved=$manifestRoleTargeted})
+# Exercise actual preservation reads after deleting only an owned manifest path.
+# The known-good complete set must pass before deletion and after exact restore.
+foreach($roleToDelete in @('original','retainedCopy')){
+ $manifestEntries=@($editor.rulesRetention.items|Where-Object {$_.role -ceq 'manifest'});if($manifestEntries.Count-ne1){throw 'PURE_MANIFEST_FIXTURE_NOT_UNIQUE'}
+ $manifestEntry=$manifestEntries[0];$deleteDescriptor=$manifestEntry[$roleToDelete];$otherKey=if($roleToDelete-ceq'original'){'retainedCopy'}else{'original'}
+ $deletePath=Under $deleteDescriptor.path $script:RunRoot;$restorePath=Under $manifestEntry[$otherKey].path $script:RunRoot
+ $beforeDeletionPassed=$false;$targetedDeletion=$false;$missingManifestRefused=$false;$restoredAndPassed=$false;$missingManifestDiagnostic=$null
+ try{
+  $null=Check-RulesPreservation $editor;$beforeDeletionPassed=$true
+  [IO.File]::Delete($deletePath);$targetedDeletion=(-not[IO.File]::Exists($deletePath)-and[IO.File]::Exists($restorePath))
+  try{$null=Check-RulesPreservation $editor}catch{$missingManifestDiagnostic=$_.Exception.Message;$missingManifestRefused=($missingManifestDiagnostic.IndexOf($deletePath,[StringComparison]::OrdinalIgnoreCase)-ge0)}
+ }finally{
+  if(-not[IO.File]::Exists($deletePath)){[IO.File]::Copy($restorePath,$deletePath,$false)}
+  [void](Check-Descriptor $deleteDescriptor);$null=Check-RulesPreservation $editor;$restoredAndPassed=$true
+ }
+ $caseName=if($roleToDelete-ceq'original'){'missing-live-manifest-preservation'}else{'missing-retained-manifest-copy-preservation'}
+ $cases.Add(@{name=$caseName;expectedPass=$false;observedPass=(-not$missingManifestRefused);matched=($beforeDeletionPassed-and$targetedDeletion-and$missingManifestRefused-and$restoredAndPassed);diagnostic=$missingManifestDiagnostic;knownGoodBeforeDeletion=$beforeDeletionPassed;onlyOwnedManifestPathDeleted=$targetedDeletion;exactRestorationAndCompletePreservationPassed=$restoredAndPassed})
+}
 [IO.File]::AppendAllText($generated.dll,'DRIFT');$refused=$false;try{$null=Check-RulesPreservation $editor}catch{$refused=$true};$cases.Add(@{name='later-live-dll-byte-drift';expectedPass=$false;observedPass=(-not$refused);matched=$refused})
 # Run the real Editor-Build failure/finally path with process/setup/retention stubs.
 # No direct child/native call is possible through this explicitly replaced seam.
 $script:Freeze=@{windows=@{platform='Win64'};sourceHead=('1'*40);toolPaths=@{dotnet='C:/SYNTHETIC/dotnet.exe'}}
 $script:Stage=Join-Path $controlRoot 'clean-failure-stage'
-$script:Result=@{primaryFailure=$null};$script:Errors=[Collections.Generic.List[object]]::new();$script:RulesSourceLocks=$null;$script:RulesTopologyBefore=$null
-function Prepare-RulesChallenge {$script:TestLock=[IO.MemoryStream]::new();$script:RulesSourceLocks=@($script:TestLock);@{stagedProject='C:/SYNTHETIC/project.uproject';attemptNonce='11111111-1111-1111-1111-111111111111';ubtAssembly=@{path='C:/SYNTHETIC/UBT.dll'};expectedWorkingDirectory='C:/SYNTHETIC/Engine/Source'}}
+$script:Result=@{primaryFailure=$null};$script:Errors=[Collections.Generic.List[object]]::new();$script:RulesSourceLocks=$null;$script:RulesSourceBindings=$null;$script:RulesTopologyBefore=$null
+function Prepare-RulesChallenge {$script:TestLock=[IO.MemoryStream]::new();$script:RulesSourceLocks=@($script:TestLock);@{rulesSourceFiles=@();stagedProject='C:/SYNTHETIC/project.uproject';attemptNonce='11111111-1111-1111-1111-111111111111';ubtAssembly=@{path='C:/SYNTHETIC/UBT.dll'};expectedWorkingDirectory='C:/SYNTHETIC/Engine/Source'}}
 function Descriptor([string]$Path){Fake-Descriptor $Path}
+# This legacy failure-isolation control follows the real prelaunch controls above.
+function Confirm-RulesPrelaunchInputs {}
+function Rules-Topology {}
 function Invoke-Root {throw 'SYNTHETIC_PRIMARY_BUILD_FAILURE'}
 function Retain-RulesArtifacts {throw 'SYNTHETIC_SECONDARY_RETENTION_FAILURE'}
 function Failure($Record,[string]$Stage){@{stage=$Stage;message=$Record.Exception.Message}}
