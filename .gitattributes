@@ -10,6 +10,8 @@ docs/plans/research/2026-10-20-e04a-source-review-r*.md -text whitespace=-blank-
 # E04 scoped raw JSON reports also retain sealed original bytes.
 docs/plans/research/2026-10-20-e04a-scoped-r*-s-*.json -text
 docs/plans/research/2026-10-20-e04a-scoped-r*-d-selectors-*.json -text
+# Pure composition criteria are SHA-bound by their adoption records.
+docs/plans/research/2026-10-20-e04a-source-composition-packet*.md text eol=lf
 # Preserve the previous factual record as exact historical bytes.
 docs/plans/evidence/2026-10-17-e01-slow120-result-schema1-history.json -text
 docs/plans/evidence/2026-10-17-e01-slow120-result-030835-schema2-history.json -text

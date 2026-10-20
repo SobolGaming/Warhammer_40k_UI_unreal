@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_TARGET_RULE_SOURCE_AND_SCOPED_ACCESS_AMENDMENT_ADOPTION_NOT_GO",
+  "recordedUtc": "2026-10-20T05:25:24.2481917Z",
+  "state": "TARGET_RULE_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY",
+  "rootAdoption": true,
+  "criteria": {
+    "path": "docs/plans/research/2026-10-20-e04a-source-composition-packet-v2.md",
+    "bytes": 15440,
+    "sha256": "367D1BC859E842E30247267EC52B2ADEF2BAD85A4417E1822F29EE6D14DD790C"
+  },
+  "contractTemplate": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-scope-contract-v5-target-selector-20261020-PROPOSED\\source-scope-contract.v5.TEMPLATE.json",
+    "bytes": 45658,
+    "sha256": "9DCE4788A4A2A678B1E5C96F5794022E86C9BF7C6F2576A505700FF7C7E6C931"
+  },
+  "independentTemplateValidation": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-scope-contract-v5-target-selector-20261020-PROPOSED\\root-independent-v5-template-validation.original.json",
+    "bytes": 2289,
+    "sha256": "2FEC751307F049E68B29CB4887E6F71E6BAA48F0B0CB8EBAE07279079CE07E2C"
+  },
+  "primaryInputAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\target-selector-primary-repair-b01-20261020-v2-PROPOSED\\root-future-primary-input-adoption.original.json",
+    "bytes": 3042,
+    "sha256": "755972AB0AB155500EC58F90D3BDDF612FA85499401699AF0FCB1024A2CEB9EB"
+  },
+  "primaryCatalog": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\target-selector-primary-repair-b01-20261020-v2-PROPOSED\\primary-catalog.PROPOSED.json",
+    "bytes": 14182,
+    "sha256": "517C0F4933ECEEA312AB5B8E832BCE6D7FA425ED6F42349E9DBD6D22B383BE79"
+  },
+  "primaryArtifact": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\target-selector-primary-repair-b01-20261020-v2-PROPOSED\\target-rule-selector-defaults-and-initialization.primary.txt",
+    "bytes": 135325,
+    "sha256": "E434FCF0FDEAFF2DC250369DB4E9C18BBC680636312C61EDBBBFD9A60153C35D"
+  },
+  "rootLiteralReconstruction": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\target-selector-primary-repair-b01-20261020-v2-PROPOSED\\root-independent-reconstruction.original.json",
+    "bytes": 1253,
+    "sha256": "91C5FDB9447AC7D534572F36C072AA2738F3912BF5D3A810129BF0DCF35D100B"
+  },
+  "assemblerPipelineSourceAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\target-selector-packet-integration-20261020-PROPOSED\\root-source-inspection-adoption.original.json",
+    "bytes": 2877,
+    "sha256": "0BFFA13FE8DE5C88337CDFA48F1A0F5ECCA6358A0A1BF73CA0AD01F19D2EB617"
+  },
+  "constructorAndGoSourceAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\scoped-access-policy-repair-20261020-PROPOSED\\root-source-inspection-adoption.original.json",
+    "bytes": 4260,
+    "sha256": "56CA017F11C67DDC2BDC1724A7BCD81F00CC2A0064CED7D2076166AE1DAEC6E2"
+  },
+  "ordinaryPreinvokeAudit": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\target-selector-packet-integration-20261020-PROPOSED\\ordinary-preinvoke-audit.OPERATOR_ONLY.json",
+    "bytes": 5665,
+    "sha256": "E7BF5FB98DD079D82CE803F7580227FA5BC837EC1F831A762B1D079A5413CEE0"
+  },
+  "referenceInventory": {
+    "bodyFiles": 94,
+    "physicalRows": 35428,
+    "newApiPhysicalRows": 2968,
+    "newApiLiteralSourceRows": 2883,
+    "newApiRanges": 42,
+    "newApiOrigins": 13,
+    "primaryDomainFiles": 88,
+    "commonFiles": 6,
+    "selectedMetadataRecords": 13,
+    "descriptorRows": 902,
+    "pluginReferenceOccurrences": 1561,
+    "stagedMembers": 33,
+    "authoredPaths": 18,
+    "deriveActualFreeze": true
+  },
+  "newApiOwnership": [
+    "S_TARGET_RECEIPT",
+    "I_ABI_BUILD",
+    "I_ACTIVATION"
+  ],
+  "scopeCounts": [
+    {
+      "scopeId": "S_VALUE",
+      "wholeFiles": 34,
+      "wholeRows": 8887,
+      "unitRows": 65,
+      "uniqueMandatoryRows": 8952
+    },
+    {
+      "scopeId": "S_BUILD_HOST",
+      "wholeFiles": 35,
+      "wholeRows": 8463,
+      "unitRows": 0,
+      "uniqueMandatoryRows": 8463
+    },
+    {
+      "scopeId": "S_TARGET_RECEIPT",
+      "wholeFiles": 32,
+      "wholeRows": 13511,
+      "unitRows": 0,
+      "uniqueMandatoryRows": 13511
+    },
+    {
+      "scopeId": "S_PLUGIN",
+      "wholeFiles": 34,
+      "wholeRows": 8482,
+      "unitRows": 162,
+      "uniqueMandatoryRows": 8644
+    },
+    {
+      "scopeId": "S_CLIENT",
+      "wholeFiles": 32,
+      "wholeRows": 7106,
+      "unitRows": 164,
+      "uniqueMandatoryRows": 7270
+    },
+    {
+      "scopeId": "I_ABI_BUILD",
+      "wholeFiles": 41,
+      "wholeRows": 13573,
+      "unitRows": 0,
+      "uniqueMandatoryRows": 13573
+    },
+    {
+      "scopeId": "I_ACTIVATION",
+      "wholeFiles": 40,
+      "wholeRows": 12733,
+      "unitRows": 0,
+      "uniqueMandatoryRows": 12733
+    },
+    {
+      "scopeId": "D_SELECTORS_001_301",
+      "wholeFiles": 6,
+      "wholeRows": 784,
+      "unitRows": 0,
+      "uniqueMandatoryRows": 784
+    },
+    {
+      "scopeId": "D_SELECTORS_302_602",
+      "wholeFiles": 6,
+      "wholeRows": 784,
+      "unitRows": 0,
+      "uniqueMandatoryRows": 784
+    },
+    {
+      "scopeId": "D_SELECTORS_603_902",
+      "wholeFiles": 6,
+      "wholeRows": 784,
+      "unitRows": 0,
+      "uniqueMandatoryRows": 784
+    }
+  ],
+  "preserved": "All earlier source/unit/data ownership duties, ten fresh blind contexts and complete graph responsibilities. Original first campaign7localpasses/1BLOCKED and access deviations remain unchanged; no report admitted or retroactive grant.",
+  "criteriaAdminAccess": "Exactly three subject-bound immutable common policy/coverage JSON records in child exactCriteriaMetadataRecords, each exact path/bytes/SHA in input/frozen arrays; separate from94BODY/13data records, no descriptor-following/body/directory grant.",
+  "metadataFieldFidelity": "Common record3 adds only two present typed-false authority scalar fields; per-record exact-case presence queries retain absent/null/false/arrays/order/opaque values. Generated own runtime/invocation/output bodies remain ungranted; root independently attests actual provenance.",
+  "sourceReviewedMapping": "Future labelled ROOT_AGGREGATED_SCOPED_SOURCE_DISPOSITION binding all ten complete validPASS reports and root admission audits. Generic transport/wrapper unchanged; root explicitly enforces aggregate before any phase.",
+  "currentBindingsReady": false,
+  "sourceHead": null,
+  "plannedRunId": null,
+  "reviewLaunchAuthority": false,
+  "actualGo": false,
+  "phaseAuthority": false,
+  "nativeExecutionAuthority": false,
+  "aggregateSourceApproval": false,
+  "finalAcceptance": false,
+  "publicationOrMergeAuthority": false,
+  "canonicalImplementationChanged": false,
+  "helperProposalsInvoked": false,
+  "nativeChecksRun": false,
+  "priorPurePathControls": "21 PASS/0 failures, unchanged and not rerun",
+  "remaining": [
+    "Checkpoint adopted criteria, construct new unused common freeze and bind v5contract/campaign/scope packets",
+    "Root prelaunch full prompt/grant/isolation checks and explicit one-contextGO",
+    "Eight fresh primary/data, then two fresh blind integrations after8rawseals; root actual coverage/access/error recovery admission",
+    "All eight bounded A1E phases and final independent CODE/differentREQ",
+    "A1G/A2/HUD/input/rendering/Linux/Core-connectedplay/packages"
+  ],
+  "standingConsent": "All private source/API reviews approved in perpetuity unless explicitly revoked; same necessary scope and configured OpenAI Codex destination, credentials/unrelated private sessions excluded."
+}

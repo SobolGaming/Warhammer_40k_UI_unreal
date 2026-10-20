@@ -1,11 +1,29 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 51 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 52 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 51 records **SCOPED_SOURCE_BLOCKED_TARGET_RULES_INPUTS**.
+Revision 52 records
+**TARGET_RULE_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
+Root prospectively adopted the [target-rule SOURCE amendment](research/2026-10-20-e04a-source-composition-packet-v2.md).
+Its reference inventory is 94 BODY files / 35,428 rows, including the new
+2,968-row literal target-rule/default/initialization input, with all earlier
+source/data/unit duties retained. Exactly three immutable common criteria
+records receive explicit metadata grants; generated runtime/invocation bodies
+remain ungranted, and field queries must preserve actual presence and values.
+The [adoption record](evidence/2026-10-20-e04a-target-rule-amendment-adoption.json) binds the unbound v5 template, independent
+literal/coverage checks and root-inspected metadata-helper proposals.
+Exact candidate/run/campaign/panel bindings are not ready; helpers are
+uninvoked. All ten fresh complete valid PASS assessments and root admission
+audits remain required before any phase. The first campaign's seven raw local
+passes/one BLOCKED and observed deviations remain unchanged. No aggregate,
+native/phase GO, acceptance or merge follows. Implementation and historical
+path controls are unchanged/not rerun; A1G/A2/final CODE/different REQ/Linux
+and broader gates remain open. Standing review consent persists until revoked.
+
+Historical revision 51 records **SCOPED_SOURCE_BLOCKED_TARGET_RULES_INPUTS**.
 Eight fresh initial scoped SOURCE reviews are closed for `f7f77eb` / run
 `20261020T044205Z-14143fc0`: seven raw local SOURCE_PASS reports and one
 BLOCKED target/receipt report. `TARGET-RECEIPT-B01` identifies missing complete
