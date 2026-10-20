@@ -78,7 +78,32 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 53 (2026-10-20 UTC) is
+Current A1E status at plan revision 54 (2026-10-20 UTC) is
+**STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
+Root prospectively adopted the [startup and target-selection SOURCE amendment](docs/plans/research/2026-10-20-e04a-source-composition-packet-v3.md)
+and its [adoption record](docs/plans/evidence/2026-10-20-e04a-startup-target-amendment-adoption.json). The reference inventory is
+96 BODY files / 42,986 physical rows, with all 13 selected records, 902 descriptor
+rows, 1,561 reference occurrences and earlier full-body/unit/data duties retained.
+The new literal inputs cover complete target creation/configuration/finalization
+and alternate all-modules selection, plus Default startup and explicit load/mount
+implementations, defaults and finite material callers.
+
+The dedicated Editor target now explicitly assigns `bBuildAllModules=false`
+(593 bytes / 16 rows). This source change is unexecuted; it establishes no actual
+effective-target, build, startup or runtime result. The metadata-helper sources
+are prospectively adopted, but no new helper operation, subject/freeze/campaign,
+review GO, review or native result exists. Exact fresh packets and bindings
+remain pending. All ten fresh complete valid SOURCE assessments and root
+admission must precede any phase.
+
+R2's six raw local SOURCE_PASS and two BLOCKED reports remain unchanged, with
+zero aggregate-admitted passes. Its two integration metadata directories are
+unused without GO/launch; all eight phases remain NOT RUN and no native RunRoot
+exists. Final CODE/different REQ, A1G, A2's 727 scenarios, shared HUD/render/input,
+Linux, packaging and broader gates remain open. Standing private-source/API
+review consent persists until explicitly revoked.
+
+Historical A1E status at plan revision 53 (2026-10-20 UTC) is
 **SCOPED_SOURCE_BLOCKED_STARTUP_AND_ALL_MODULES**.
 Eight fresh scoped SOURCE reviews closed for `7ef9358d836ed75b9d8ebc40b26c1b8f74af6ac4`
 / run `20261020T052654Z-6fe9feeb`, against base

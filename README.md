@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **TARGET_RULE_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. The missing target-rule source and explicit metadata-access amendment are adopted for a fresh packet. Exact bindings/reviews remain pending; no new build/native phase ran. The first campaign remains closed with seven raw local passes and one BLOCKED.
+The bounded E04-A1E proof is **STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. The startup/target-selection primary inputs and fresh scoped-review criteria are adopted prospectively. The dedicated target explicitly pins all-modules selection false; fresh packets, effective configuration and execution remain unproved. R2 retains six raw local passes/two BLOCKED and zero aggregate-admitted passes.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +76,32 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 53 records
+Current A1E status at plan revision 54 (2026-10-20 UTC) is
+**STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
+Root prospectively adopted the [startup and target-selection SOURCE amendment](docs/plans/research/2026-10-20-e04a-source-composition-packet-v3.md)
+and its [adoption record](docs/plans/evidence/2026-10-20-e04a-startup-target-amendment-adoption.json). The reference inventory is
+96 BODY files / 42,986 physical rows, with all 13 selected records, 902 descriptor
+rows, 1,561 reference occurrences and earlier full-body/unit/data duties retained.
+The new literal inputs cover complete target creation/configuration/finalization
+and alternate all-modules selection, plus Default startup and explicit load/mount
+implementations, defaults and finite material callers.
+
+The dedicated Editor target now explicitly assigns `bBuildAllModules=false`
+(593 bytes / 16 rows). This source change is unexecuted; it establishes no actual
+effective-target, build, startup or runtime result. The metadata-helper sources
+are prospectively adopted, but no new helper operation, subject/freeze/campaign,
+review GO, review or native result exists. Exact fresh packets and bindings
+remain pending. All ten fresh complete valid SOURCE assessments and root
+admission must precede any phase.
+
+R2's six raw local SOURCE_PASS and two BLOCKED reports remain unchanged, with
+zero aggregate-admitted passes. Its two integration metadata directories are
+unused without GO/launch; all eight phases remain NOT RUN and no native RunRoot
+exists. Final CODE/different REQ, A1G, A2's 727 scenarios, shared HUD/render/input,
+Linux, packaging and broader gates remain open. Standing private-source/API
+review consent persists until explicitly revoked.
+
+Historical plan revision 53 records
 **SCOPED_SOURCE_BLOCKED_STARTUP_AND_ALL_MODULES**.
 Eight fresh scoped SOURCE reviews closed for `7ef9358d836ed75b9d8ebc40b26c1b8f74af6ac4`
 / run `20261020T052654Z-6fe9feeb`, against base

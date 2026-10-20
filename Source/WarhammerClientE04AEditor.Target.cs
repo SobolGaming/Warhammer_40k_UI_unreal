@@ -6,6 +6,7 @@ public class WarhammerClientE04AEditorTarget : TargetRules
     public WarhammerClientE04AEditorTarget(TargetInfo Target) : base(Target)
     {
         Type = TargetType.Editor;
+        bBuildAllModules = false;
         DefaultBuildSettings = BuildSettingsVersion.V7;
         IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_8;
         CppStandard = CppStandardVersion.Cpp20;

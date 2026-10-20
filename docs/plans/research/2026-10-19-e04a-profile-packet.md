@@ -198,3 +198,31 @@ authority; repair/refreeze/review rather than weakening limits or changing the
 legacy corpus. Closed execution/evidence then requires fresh independent CODE
 and a different REQ under OWN15. No bounded result closes full E04, Linux,
 packaging, production profiles, HUD rendering or broader implementation gates.
+
+## Revision 54: prospective SOURCE amendment and current state
+
+Current status is **STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
+The [adopted composition criteria](2026-10-20-e04a-source-composition-packet-v3.md)
+and [adoption record](../evidence/2026-10-20-e04a-startup-target-amendment-adoption.json)
+add complete applicable target creation/configuration/finalization/normal
+non-test discovery/all-modules setup and Default startup/explicit load/mount
+implementations, exact default arguments and finite material callers.
+The reference inventory is 96 BODY files / 42,986 physical rows; actual future
+frozen identities/counts remain derived. Preserve all earlier source/full-unit,
+13-record/902-row/1,561-reference responsibilities and the ten-context gate.
+
+The dedicated target explicitly assigns `bBuildAllModules=false`; its current
+source is 593 bytes / 16 rows, SHA256
+`1FE8F99EC560DD6C592C5DAB3434092E0A7AE313B2597BE6126C5212C25C1991`.
+It remains unexecuted. No effective configuration, target discovery, startup,
+library/build/native PASS or universal all-plugins execution claim follows.
+No fresh subject/run/freeze/GO, metadata-helper invocation, review or phase result
+has been created by the prospective adoption.
+
+R2's six raw local SOURCE_PASS/two BLOCKED reports stay unchanged, with zero
+aggregate-admitted passes and both integration metadata directories unused.
+All eight experiment phases remain NOT RUN/no native RunRoot. New exact packets,
+all ten fresh complete valid SOURCE assessments and root admission precede any
+phase. Original packet criteria, quota/corpus/ABI contracts, standing review
+consent and separate final CODE/different REQ, A1G/A2, HUD, Linux and packaging
+obligations remain unchanged.
