@@ -51,7 +51,10 @@ public sealed class E04RulesObservation
             || Actual.Name != view.Name || Actual.Platform != view.Platform
             || Actual.Configuration != view.Configuration
             || Actual.bBuildAllModules != view.bBuildAllModules
-            || view.bBuildAllModules)
+            || view.bBuildAllModules
+            || view.CppStandard != CppStandardVersion.Cpp20
+            || view.DefaultBuildSettings != BuildSettingsVersion.V7
+            || view.IncludeOrderVersion != EngineIncludeOrderVersion.Unreal5_8)
             throw new BuildException("E04_RULES_TARGET_WITNESS_OR_FINAL_SELECTOR_MISMATCH");
         return new Dictionary<string, object?>(StringComparer.Ordinal)
         {
@@ -60,9 +63,9 @@ public sealed class E04RulesObservation
             ["configuration"] = view.Configuration.ToString(),
             ["architectures"] = view.Architectures.ToString(),
             ["isMultiArch"] = view.Architectures.bIsMultiArch, ["architecture"] = view.Architecture.ToString(),
-            ["cppStandard"] = view.CppStandard.ToString(),
-            ["defaultBuildSettings"] = view.DefaultBuildSettings.ToString(),
-            ["includeOrderVersion"] = view.IncludeOrderVersion.ToString(),
+            ["cppStandard"] = nameof(CppStandardVersion.Cpp20),
+            ["defaultBuildSettings"] = nameof(BuildSettingsVersion.V7),
+            ["includeOrderVersion"] = nameof(EngineIncludeOrderVersion.Unreal5_8),
             ["bBuildAllModules"] = view.bBuildAllModules,
             ["bCompileWithPluginSupport"] = view.bCompileWithPluginSupport,
             ["bCompileAgainstEngine"] = view.bCompileAgainstEngine,

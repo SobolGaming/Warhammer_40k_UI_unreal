@@ -56,6 +56,19 @@ UBT/native build executed. The driver ran on .NET 10.0.11 against the intended
 The [binding record](../evidence/2026-10-20-e04a-rules-static-check-result.json)
 identifies the exact checked source and retained originals.
 
+The later [enum-tag repair](../evidence/2026-10-20-e04a-rules-enum-tag-result.json)
+guards the actual Cpp20/V7/Unreal5_8 enum values before emitting their canonical
+`nameof` tags. Build settings and include order contain `Latest` aliases;
+alias-dependent formatting must not cause a false mismatch. The 32-key schema
+and expected tag values are unchanged. The current seven-source
+[static diagnostic](../evidence/2026-10-20-e04a-rules-static-check-03b.json)
+again returned zero diagnostics; its
+[process receipt](../evidence/2026-10-20-e04a-rules-static-check-03b-process.json)
+records 3,501 ms, exit 0 and confirmed cleanup. An earlier malformed edit draft
+was caught in diff inspection before invocation or promotion and is retained
+as invalid/unused preparation. Wrapper/control source and its 51 results are
+unchanged. The newer check supplies no actual UBT/native result.
+
 The prospective expanded installed API input preserves the previous 191,150-byte
 BODY095 prefix exactly and appends 1,005 physical rows. Root read every appended
 row and independently compared all 5,257 literal rows, 43 ranges and 19 whole

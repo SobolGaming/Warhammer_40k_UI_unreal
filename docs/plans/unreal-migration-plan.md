@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 59 — RULES_WITNESS_SOURCE_CHECKED_PACKETS_NOT_READY. Target/YamlCpp producer, wrapper and pure control source are canonical. The repaired seven-source C# set returns zero diagnostics against 31 normal UBT references; all 51 pure wrapper controls passed. Initial five CS0012 errors remain preserved. No binary PE/PDB decoder test, candidate emit/load, Rules construction or UBT/native build ran. Concrete freeze metadata, full source/test/API grants, complete-unit/count rebinding and fresh scoped SOURCE/integrations remain pending. No previous admission or GO transfers. All eight native phases remain NOT_RUN/no RunRoot.
+**Revision:** 60 — RULES_WITNESS_SOURCE_CHECKED_PACKETS_NOT_READY. The target now checks actual enum values before emitting canonical version tags, avoiding Latest-alias ambiguity. The current seven-source static check returns zero diagnostics against 31 normal UBT references; the unchanged wrapper's 51 pure controls passed. Initial five CS0012 errors and unused authoring drafts remain preserved. No binary PE/PDB decoder test, candidate emit/load, Rules construction or UBT/native build ran. Concrete freeze metadata, full source/test/API grants, complete-unit/count rebinding and fresh scoped SOURCE/integrations remain pending. No previous admission or GO transfers. All eight native phases remain NOT_RUN/no RunRoot.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,17 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 59 changes
+### Revision 60 changes
+
+The [enum-tag repair](evidence/2026-10-20-e04a-rules-enum-tag-result.json)
+requires actual Cpp20/V7/Unreal5_8 values before recording their canonical tags.
+It preserves the 32-key vector while avoiding ambiguous Latest aliases. The
+current seven-source check returns zero diagnostics; wrapper/control bytes
+and their 51 results are unchanged. Rebind the target's current source identity,
+88 physical rows and affected criteria/counts in the new freeze. No source
+review, runtime/private API observation or phase result follows this check.
+
+### Revision 59 history
 
 The [wrapper repair](research/2026-10-20-e04a-rules-witness-repair.md) is canonical
 with a maintained pure control script. All 51 synthetic/data/owned-file controls

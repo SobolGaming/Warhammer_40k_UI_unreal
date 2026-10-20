@@ -1,0 +1,87 @@
+{
+  "change": "Check actual Cpp20/V7/Unreal5_8 values before emitting canonical nameof tags. Avoid ambiguous Latest aliases; still32selector keys.",
+  "targetCheckedProposal": {
+    "bytes": 4725,
+    "sha256": "F2FDB5F36BCAE08FFCCF5A2B74C65A9F26062BE31626F0869C83714EF504D23C",
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-enum-tag-repair-PROPOSED\\WarhammerClientE04AEditor.Target.v3b.canonical-enum-tags.PROPOSED.cs"
+  },
+  "previousHead": "139fe29efaa0b37633d4ee283bb01c1be239cf42",
+  "limits": "Static compiler check only; actual UBT/privatecache/selector/PE-PDB/native observations and fresh full SOURCE/integration/final gates remain pending.",
+  "createdUtc": "2026-10-20T10:20:31.2053222Z",
+  "recordKind": "E04A1E_CANONICAL_ENUM_TAG_SOURCE_REPAIR",
+  "wrapperAnd51PureControlSourcesUnchanged": true,
+  "rulesConstructed": false,
+  "status": "SOURCE_CHECKED_PACKETS_NOT_READY",
+  "reviewOrNativeAuthority": false,
+  "allEightPhases": "NOT_RUN",
+  "actualStaticResult": {
+    "diagnostics": 0,
+    "cleanupConfirmed": true,
+    "sourceCount": 7,
+    "metadataReferences": 31,
+    "exitCode": 0,
+    "timedOut": false,
+    "elapsedMilliseconds": 3501
+  },
+  "candidateEmitted": false,
+  "rootSourceAdoption": {
+    "bytes": 1361,
+    "sha256": "87C8959D73DF6D27FDE1E7D043CD7AD54B522AF1326A4F4D9A636E49D5E0DE72",
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-enum-tag-repair-PROPOSED\\root-source-adoption.check03b.original.json"
+  },
+  "nativeBuild": false,
+  "schemaVersion": 1,
+  "manifest": {
+    "bytes": 73097,
+    "sha256": "CA31AFF210E504D3FFFDA3A0F34DE747A311010C416D542B53256DD20F40A88E",
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\source-and-reference-manifest.check03b.target-v3b.PROPOSED.json"
+  },
+  "ubtExecuted": false,
+  "unusedPreparation": {
+    "source": {
+      "bytes": 4517,
+      "sha256": "30238B55CE934526AE7191F400B356C3CF61989737EDF3072E71AE6140CFF7BE",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-enum-tag-repair-PROPOSED\\WarhammerClientE04AEditor.Target.v3.canonical-enum-tags.PROPOSED.cs"
+    },
+    "status": "INVALID_UNINVOKED_AUTHORING_DRAFT",
+    "reason": "Array-concatenation edit omitted the three guard lines. Diff inspection caught it before invocation/promotion. Corrected source uses explicit joined guard lines; no test/execution failure or permission inferred.",
+    "adoption": {
+      "bytes": 1116,
+      "sha256": "EE909B7C678CFDEECAA6F117379A079E596B045D0A7798F59899E51576037403",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-enum-tag-repair-PROPOSED\\root-source-adoption.check03.original.json"
+    }
+  },
+  "sourceAggregate": false,
+  "candidateLoaded": false,
+  "targetCanonical": {
+    "bytes": 4725,
+    "sha256": "F2FDB5F36BCAE08FFCCF5A2B74C65A9F26062BE31626F0869C83714EF504D23C",
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClientE04AEditor.Target.cs"
+  },
+  "rawCopies": [
+    {
+      "published": {
+        "bytes": 2788,
+        "sha256": "56B3D5EFFBAB1D400FBDA477942D2E9A3CAECC60A0C6D5F5150FADE4731A056D",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-static-check-03b.json"
+      },
+      "original": {
+        "bytes": 2788,
+        "sha256": "56B3D5EFFBAB1D400FBDA477942D2E9A3CAECC60A0C6D5F5150FADE4731A056D",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\after-root-adoption-check-03b\\static-semantic-diagnostics.json"
+      }
+    },
+    {
+      "published": {
+        "bytes": 557,
+        "sha256": "94789B29784D23B414A83053C55B808F13133C4507189CEC64DDA84A98EE44DB",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-static-check-03b-process.json"
+      },
+      "original": {
+        "bytes": 557,
+        "sha256": "94789B29784D23B414A83053C55B808F13133C4507189CEC64DDA84A98EE44DB",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\after-root-adoption-check-03b\\driver-completion.json"
+      }
+    }
+  ]
+}

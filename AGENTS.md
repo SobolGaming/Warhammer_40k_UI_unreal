@@ -78,7 +78,15 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 59 (2026-10-20 UTC) is
+Current A1E status at plan revision 60 (2026-10-20 UTC) remains
+**RULES_WITNESS_SOURCE_CHECKED_PACKETS_NOT_READY**. The target's
+[enum-tag repair](docs/plans/evidence/2026-10-20-e04a-rules-enum-tag-result.json)
+checks actual Cpp20/V7/Unreal5_8 values before emitting canonical tags. Current
+seven-source static diagnostics are zero; the unchanged wrapper's 51 pure
+controls passed. Use the current 88-row target and fresh source/count bindings.
+Concrete freeze/review packets and all native/final gates remain pending.
+
+Historical A1E status at plan revision 59 (2026-10-20 UTC) is
 **RULES_WITNESS_SOURCE_CHECKED_PACKETS_NOT_READY**. Target/YamlCpp, wrapper and
 the maintained pure test source are canonical. All
 [51 pure controls](docs/plans/evidence/2026-10-20-e04a-rules-wrapper-controls.json)
