@@ -78,7 +78,28 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current E02 status at plan revision 41 (2026-10-20 UTC) is
+Current A1E status at plan revision 42 (2026-10-20 UTC) is
+**CANONICAL_SOURCE_AUTHORED_PENDING_INDEPENDENT_SOURCE**. The exact 18-path
+Editor/raw-document proof is now in this repository; the
+[promotion record](docs/plans/evidence/2026-10-20-e04a-source-promotion.json)
+binds its unchanged source-preparation bytes. Read the actual
+[packet](docs/plans/research/2026-10-19-e04a-profile-packet.md) and
+[journal](docs/plans/evidence/2026-10-19-e04a-profile.md).
+
+The next gate is a coherent candidate checkpoint/freeze and fresh affected SOURCE
+review. All eight phases—Preflight, SupervisorControls, Configure,
+DependencyBuild, EditorBuild, Discovery, Native and Audit—are NOT RUN. Eight
+suites, 38 unique input IDs and 45 attempts are planned counts. Installed Editor
+policy enables exceptions; genuinely exception-disabled A1G remains required
+before full A1/RQ11/production adoption. A2 retains all 727 compatibility scenarios;
+shared HUD/render/input, Linux and packaging remain open. Source promotion grants
+no phase, native, GUI, publication or merge authority.
+
+Bounded E02 Windows acceptance remains recorded under the
+[combined disposition](docs/plans/evidence/2026-10-20-e02-bounded-acceptance.json).
+Its original reports, limits and closed, fully consumed window authority remain
+unchanged. The following revision 41 and earlier records are historical.
+Historical E02 status at plan revision 41 (2026-10-20 UTC) is
 **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**. Root combined the closed
 CODE/REQ assessments with separate administrative prerequisite verification and
 the new postsealed [approval-recovery supplement](docs/plans/research/2026-10-20-e02-final-requirements-approval-recovery.md)

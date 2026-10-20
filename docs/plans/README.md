@@ -1,11 +1,23 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 41 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 42 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 41 records **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**.
+Revision 42 records **CANONICAL_SOURCE_AUTHORED_PENDING_INDEPENDENT_SOURCE**
+for the 18-path E04-A1E Editor/raw-document proof. Read its actual
+[packet](research/2026-10-19-e04a-profile-packet.md),
+[journal](evidence/2026-10-19-e04a-profile.md) and
+[source promotion record](evidence/2026-10-20-e04a-source-promotion.json).
+The candidate checkpoint/freeze and fresh affected SOURCE review are next; all
+eight phases are NOT RUN. Eight suites, 38 unique input IDs and 45 attempts are
+planned. Editor exceptions are enabled by target policy; genuinely disabled A1G
+runtime-caller proof remains mandatory before full A1 adoption. A2 keeps all
+727 compatibility scenarios, and shared HUD/render/input, Linux and packaging
+remain open. Promotion grants no execution or acceptance authority. Bounded E02
+acceptance and its closed, consumed window authority remain unchanged.
+Historical revision 41 records **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**.
 The [combined root disposition](evidence/2026-10-20-e02-bounded-acceptance.json)
 combines the unchanged technical assessments with the new
 [administrative recovery supplement](research/2026-10-20-e02-final-requirements-approval-recovery.md)
@@ -20,7 +32,7 @@ Historical revision 40 recorded **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN*
 
 The unchanged [execution result](evidence/2026-10-19-e02-5e92-result.json) and [journal](evidence/2026-10-16-e02-world-input.md) retain 16 native cases / 18174 assertions, separate SUP6, six PNGs, 4562 input events and 20 ray records. Both visible windows are consumed; native authority is closed with zero launches remaining. Root's six-image observations are implementer evidence. Same-effective-pixel accuracy does not establish arbitrary fractional-point precision. RQ23/RQ24, full E02/M02/E04, Linux, packaging, real-Core play and full HUD/profile behavior remain open.
 
-A separate isolated E04-A1 source-only draft covers 18 paths, eight proposed native cases and 38 input IDs. Pinned yaml-cpp source `56e3bb550c91fd7005566f19c079cb7a503223cf` was acquired and byte-verified (394 files / 5156535 bytes). No canonical promotion, library configure/build, native execution or acceptance has occurred.
+Historical source preparation before canonical promotion: a separate isolated E04-A1 source-only draft covered 18 paths, eight proposed native cases and 38 input IDs. Pinned yaml-cpp source `56e3bb550c91fd7005566f19c079cb7a503223cf` was acquired and byte-verified (394 files / 5156535 bytes). No canonical promotion, library configure/build, native execution or acceptance has occurred.
 
 Historical revision 38 records 3483f79 SOURCE BLOCKED before body reads because the actual prompt omitted explicit root launch GO. Source merits are UNASSESSED; all planned-run authority is closed with no E02 execution. [Historical source-review facts](evidence/2026-10-19-e02-3483-source-result.json) preserve that closure. The full-matrix guard was then UNEXECUTED. Historical [c9a5ac5 SOURCE CHANGES_REQUESTED](evidence/2026-10-19-e02-c9a5-source-result.json) and c987 WorldInput FAIL remain unchanged; those records supply no final CODE/REQ acceptance.
 

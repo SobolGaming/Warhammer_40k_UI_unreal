@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The plan records actual evidence and the next bounded source-review gate.
+The bounded E04-A1E parser proof now has canonical authored source; its fresh SOURCE review and all execution phases are pending. The plan records the evidence and next gate.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +76,20 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 41 records **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**.
+Plan revision 42 records 18 canonical authored paths for the bounded E04-A1E
+Editor/raw-document proof. The [promotion record](docs/plans/evidence/2026-10-20-e04a-source-promotion.json)
+binds the source bytes; the [packet](docs/plans/research/2026-10-19-e04a-profile-packet.md)
+and [journal](docs/plans/evidence/2026-10-19-e04a-profile.md) define the subset.
+The candidate checkpoint/freeze and fresh affected SOURCE review are pending.
+All eight phases are NOT RUN; eight suites, 38 unique IDs and 45 attempts are
+planned. Editor exceptions are enabled by target policy, while A1G's genuinely
+exception-disabled runtime caller remains required before full A1/RQ11/production
+adoption. A2 retains 727 scenarios; shared HUD/render/input, Linux and packaging
+remain open. Canonical promotion adds no execution or acceptance authority.
+
+Bounded E02 acceptance and its closed native/window authority remain unchanged.
+The following revision 41 and earlier records are historical.
+Historical plan revision 41 records **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**.
 Root combined the sealed technical reports with separate prerequisite verification
 and the [postsealed administrative recovery](docs/plans/research/2026-10-20-e02-final-requirements-approval-recovery.md),
 whose raw verdict is SUPPLEMENTAL_PASS. CODE r3, initial REQ r2 and supplement v4

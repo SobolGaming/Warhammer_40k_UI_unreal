@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "arcadeCommit": "5088c1c49dcaff29eb59fb64b3063d30214dde73",
+  "format": "Yaml",
+  "canonical": [
+    {
+      "id": "A1-C01",
+      "sourceRelativePath": "src/warhammer40k_arcade_ui/resources/preferences/default.yaml",
+      "bytes": 2426,
+      "sha256": "7EAF7EF3B36347661E74F1E2C3D983A9BF9727C5A2210C861B56FC45DE95CA6C",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_name",
+        "overlays",
+        "hotkeys",
+        "selection",
+        "hud",
+        "experimental",
+        "extensions"
+      ],
+      "identityKey": "profile_name",
+      "identityValue": "default",
+      "mappingFields": [
+        "overlays"
+      ],
+      "sequenceFields": [
+        "hotkeys"
+      ],
+      "schemaScalarTag": "!",
+      "inputSha1": "92D331E2FA08D3CFCE6F8BDB9D24FA6147D4B814"
+    },
+    {
+      "id": "A1-C02",
+      "sourceRelativePath": "src/warhammer40k_arcade_ui/resources/preferences/dense-debug.yaml",
+      "bytes": 2594,
+      "sha256": "CDF1F0AE216184B546E09D2C2149468FED4A225D1795CD47923EDEF308AAA966",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_name",
+        "overlays",
+        "hotkeys",
+        "selection",
+        "hud",
+        "experimental",
+        "extensions"
+      ],
+      "identityKey": "profile_name",
+      "identityValue": "dense-debug",
+      "mappingFields": [
+        "overlays"
+      ],
+      "sequenceFields": [
+        "hotkeys"
+      ],
+      "schemaScalarTag": "!",
+      "inputSha1": "9EA87F87C0D2B03A518648C8CE0CC90703FE06BE"
+    },
+    {
+      "id": "A1-C03",
+      "sourceRelativePath": "src/warhammer40k_arcade_ui/resources/preferences/keyboard-heavy.yaml",
+      "bytes": 2663,
+      "sha256": "FD95C4AC90AFAAAF3648DF6B687B74E1CB482F2A1551F6F0B7078996D149C2F1",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_name",
+        "overlays",
+        "hotkeys",
+        "selection",
+        "hud",
+        "experimental",
+        "extensions"
+      ],
+      "identityKey": "profile_name",
+      "identityValue": "keyboard-heavy",
+      "mappingFields": [
+        "overlays"
+      ],
+      "sequenceFields": [
+        "hotkeys"
+      ],
+      "schemaScalarTag": "!",
+      "inputSha1": "49CC71934FB009920AAC9C233B829B34DF070894"
+    },
+    {
+      "id": "A1-C04",
+      "sourceRelativePath": "src/warhammer40k_arcade_ui/resources/preferences/command-bench.yaml",
+      "bytes": 2439,
+      "sha256": "99836D136B39EA95B903FD62B96A97F0E7C791D2764B351BB939DFA368512DC7",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_name",
+        "overlays",
+        "hotkeys",
+        "selection",
+        "hud",
+        "experimental",
+        "extensions"
+      ],
+      "identityKey": "profile_name",
+      "identityValue": "command-bench",
+      "mappingFields": [
+        "overlays"
+      ],
+      "sequenceFields": [
+        "hotkeys"
+      ],
+      "schemaScalarTag": "!",
+      "inputSha1": "92DBC6655432BBD4E939B903AD4723C25CB0B356"
+    },
+    {
+      "id": "A1-C05",
+      "sourceRelativePath": "src/warhammer40k_arcade_ui/resources/hud/default-hud.yaml",
+      "bytes": 3051,
+      "sha256": "7ECB00781BB0C67C9412F2979E909A82B31941AF530583388094D60BD8FCF96A",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_id",
+        "layout_preset",
+        "theme",
+        "regions"
+      ],
+      "identityKey": "profile_id",
+      "identityValue": "default_compass_hud",
+      "mappingFields": [
+        "regions"
+      ],
+      "sequenceFields": [],
+      "schemaScalarTag": "?",
+      "inputSha1": "A99C0069E0FE37BE3BA21DD1A8DD261BA31A701D"
+    },
+    {
+      "id": "A1-C06",
+      "sourceRelativePath": "src/warhammer40k_arcade_ui/resources/hud/command-bench-hud.yaml",
+      "bytes": 2996,
+      "sha256": "FE6C62F92146AC2866564C379966F4E5DEB9EC5D07900C2EAD5009EEC46CA883",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_id",
+        "layout_preset",
+        "theme",
+        "regions"
+      ],
+      "identityKey": "profile_id",
+      "identityValue": "command_bench_hud",
+      "mappingFields": [
+        "regions"
+      ],
+      "sequenceFields": [],
+      "schemaScalarTag": "?",
+      "inputSha1": "F8901347B8395448DFD7509AE901C69E8BA3E0E1"
+    },
+    {
+      "id": "A1-C07",
+      "sourceRelativePath": "docs/hud/examples/unit-datasheet-preview.yaml",
+      "bytes": 1074,
+      "sha256": "1FE643A2A553CE09906281283CD7831B0475429E67CFA9A180986CE41CD0E056",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_id",
+        "layout_preset",
+        "theme",
+        "sample_data",
+        "regions"
+      ],
+      "identityKey": "profile_id",
+      "identityValue": "unit_datasheet_preview",
+      "mappingFields": [
+        "sample_data",
+        "regions"
+      ],
+      "sequenceFields": [],
+      "schemaScalarTag": "?",
+      "inputSha1": "9D8864534D46BAC8F477271605931B3499220ED9"
+    },
+    {
+      "id": "A1-C08",
+      "sourceRelativePath": "docs/hud/examples/workbench-preview.yaml",
+      "bytes": 2833,
+      "sha256": "866CEC3B6BF49DCD45855B0F821F564866A56284F80268D1DD0F580BDD07DE56",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_id",
+        "layout_preset",
+        "theme",
+        "sample_data",
+        "regions"
+      ],
+      "identityKey": "profile_id",
+      "identityValue": "workbench_preview",
+      "mappingFields": [
+        "sample_data",
+        "regions"
+      ],
+      "sequenceFields": [],
+      "schemaScalarTag": "?",
+      "inputSha1": "8D0B28A2D84197B98B717638AB0A89666BCBAEBC"
+    },
+    {
+      "id": "A1-C09",
+      "sourceRelativePath": "docs/hud/examples/overflow-stress-preview.yaml",
+      "bytes": 2934,
+      "sha256": "52D0A9F5E8FDF134B6566CD6E9D02A01B0CDB6E1C186D065865950DB5851A728",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_id",
+        "layout_preset",
+        "theme",
+        "sample_data",
+        "regions"
+      ],
+      "identityKey": "profile_id",
+      "identityValue": "overflow_stress_preview",
+      "mappingFields": [
+        "sample_data",
+        "regions"
+      ],
+      "sequenceFields": [],
+      "schemaScalarTag": "?",
+      "inputSha1": "5B2E80D26CB6E28E6FC33C41334F8BA5AAEA3400"
+    },
+    {
+      "id": "A1-C10",
+      "sourceRelativePath": "docs/hud/examples/player-units-roster-preview.yaml",
+      "bytes": 4259,
+      "sha256": "B7BE9ADD6A07137E09F8FA29D64850D7AD0BCFAFAAD5E4F5AFA891E3261CF6AF",
+      "expectedCode": "Success",
+      "expectedRootKeys": [
+        "schema_version",
+        "profile_id",
+        "layout_preset",
+        "theme",
+        "sample_data",
+        "regions"
+      ],
+      "identityKey": "profile_id",
+      "identityValue": "player_units_roster_preview",
+      "mappingFields": [
+        "sample_data",
+        "regions"
+      ],
+      "sequenceFields": [],
+      "schemaScalarTag": "?",
+      "inputSha1": "474A8653954123B7D1B69C7514D35806AEC80DD8"
+    }
+  ],
+  "expectedRootKind": "Mapping",
+  "expectedCount": 10,
+  "qualification": "Literal source-derived raw structure only. Canonical documents must actually pass the restricted A1 parser; no normalization/schema/HUD semantics or null compatibility is implied.",
+  "nativeHashQualification": "Auxiliary inputSha1 is the native Core FSHA1 observation; primary fixture/source/run SHA256 bindings remain required before/after native execution. No production cryptography or protocol identity is implemented."
+}
