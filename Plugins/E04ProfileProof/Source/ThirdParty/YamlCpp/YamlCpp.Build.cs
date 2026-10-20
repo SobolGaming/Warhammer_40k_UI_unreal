@@ -34,6 +34,7 @@ public class YamlCpp : ModuleRules
             || RuntimeInformation.ProcessArchitecture != Architecture.X64) Fail("WIN64_NATIVE_HOST_REQUIRED");
         if (Target.bUseStaticCRT || Target.bDebugBuildsActuallyUseDebugCRT) Fail("DEVELOPMENT_DYNAMIC_RELEASE_CRT_REQUIRED");
         if (Target.CppStandard != CppStandardVersion.Cpp20) Fail("DEDICATED_TARGET_CPP20_REQUIRED");
+        RejectUnsupportedNativeToolAlternatives(Target);
 
         lock (SelectionSync)
         {
@@ -193,6 +194,19 @@ public class YamlCpp : ModuleRules
             PublicSystemIncludePaths.Add(includeRoot);
             PublicAdditionalLibraries.Add(libraryPath);
         }
+    }
+
+    private static void RejectUnsupportedNativeToolAlternatives(ReadOnlyTargetRules target)
+    {
+        // Read final effective settings; do not replace inherited configuration
+        // with defaults. Only the frozen MSVC compiler/linker route is supported.
+        ReadOnlyWindowsTargetRules windows = target.WindowsPlatform;
+        if (windows.bAllowRadLinker)
+            Fail("RAD_LINKER_UNSUPPORTED");
+        if (target.bPrintToolChainTimingInfo)
+            Fail("TOOLCHAIN_TIMING_UNSUPPORTED");
+        if (windows.bCompilerTrace)
+            Fail("COMPILER_TRACE_UNSUPPORTED");
     }
 
     private static void Fail(string code) => throw new BuildException("E04A1_YAML_" + code);
