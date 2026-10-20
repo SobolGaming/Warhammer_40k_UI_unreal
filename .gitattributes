@@ -24,3 +24,4 @@ docs/plans/evidence/2026-10-17-e01-slow120-result-030835-schema2-history.json -t
 docs/plans/research/2026-10-20-e04a-scoped-r4-*.md -text whitespace=-blank-at-eol
 # Preserve the completed pure C# diagnostic and process receipts byte for byte.
 docs/plans/evidence/2026-10-20-e04a-rules-static-check-*.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-rules-wrapper-*.json -text whitespace=cr-at-eol

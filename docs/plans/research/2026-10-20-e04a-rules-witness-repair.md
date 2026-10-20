@@ -1,6 +1,6 @@
 # E04-A1E rules witness producer repair
 
-Status: **PRODUCER_STATIC_CHECKED_WRAPPER_PENDING**, 2026-10-20 UTC.
+Status: **RULES_WITNESS_SOURCE_CHECKED_PACKETS_NOT_READY**, 2026-10-20 UTC.
 This is an implementation checkpoint and factual progress record. It is not a
 fresh SOURCE disposition, phase authority or acceptance record.
 
@@ -64,12 +64,26 @@ source-input preparation; it does not grant an amended review packet. Actual
 full BODY/unit counts must be rederived after the wrapper, tests and normative
 inputs are final.
 
-The wrapper repair, pure rejection controls, concrete runtime/selector freeze
-metadata and clean composition amendment remain in preparation. Complete the
-owned direct-UBT process join, metadata-only DLL/PDB validation, exact artifact
-retention, failure preservation and subsequent live-output checks before a new
-freeze. Preserve the existing native-output freshness guard, all budgets/root
-counts, vendor/compiler/receipt/DDC/settings checks and zero visible windows.
+The [wrapper](../../../scripts/migration/Invoke-E04AProfileProof.ps1) and
+[pure controls](../../../tests/migration/Test-E04RulesWitness.ps1) are now
+canonical. All [51 controls](../evidence/2026-10-20-e04a-rules-wrapper-controls.json)
+passed: complete synthetic joins, wrong process/creation/CWD/argv/challenge,
+selectors and source order, cache/parent mismatches, strict JSON, exact retention
+paths, actual synthetic live-file drift and primary/secondary failure handling.
+Root inspected every case disposition and independently compared unchanged and
+changed function extents. The [binding record](../evidence/2026-10-20-e04a-rules-wrapper-result.json)
+preserves exact executed source/report identities. These controls use data and
+owned synthetic files; the real EditorBuild failure/finally path has its native
+launch replaced by a throwing stub. They do not exercise the binary PE/PDB
+decoder, private Unreal API accessibility or a real UBT process.
+
+The wrapper source now requires the owned direct-UBT process join, metadata-only
+DLL/PDB validation, exact artifact retention, failure preservation and subsequent
+live-output checks. It preserves the four native-output freshness guards, all
+budgets/root counts, vendor/compiler/receipt/DDC/settings checks and zero visible
+windows. Concrete runtime/selector freeze metadata and the clean composition
+amendment remain in preparation. The added test source needs a complete positive
+BODY grant and fresh freeze; the 33 staged project members are unchanged.
 All ten fresh complete scoped SOURCE assessments, root audits and the labelled
 aggregate still precede native phases. No earlier report/admission or GO transfers.
 All eight native phases remain NOT_RUN. Final CODE/different REQ, A1G, A2/HUD,

@@ -78,7 +78,24 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 58 (2026-10-20 UTC) is
+Current A1E status at plan revision 59 (2026-10-20 UTC) is
+**RULES_WITNESS_SOURCE_CHECKED_PACKETS_NOT_READY**. Target/YamlCpp, wrapper and
+the maintained pure test source are canonical. All
+[51 pure controls](docs/plans/evidence/2026-10-20-e04a-rules-wrapper-controls.json)
+passed; [bindings](docs/plans/evidence/2026-10-20-e04a-rules-wrapper-result.json)
+preserve exact source and actual scope. The binary PE/PDB decoder, private API
+accessibility and actual UBT/runtime/cache/selector joins remain untested.
+No candidate emit/load, Rules construction or native build occurred.
+
+Complete concrete freeze metadata and clean composition bindings, whole-source
+test/API grants and new complete-unit/count derivation before fresh scoped SOURCE
+and both integrations. The new test is outside the unchanged 33-member staged
+project. All ten valid complete current PASS/root audits and the labelled
+aggregate precede phases. All eight native phases remain NOT_RUN; no old
+admission/GO transfers. Final CODE/different REQ and later gates remain open.
+Standing private-source/API review consent persists until explicitly revoked.
+
+Historical A1E status at plan revision 58 (2026-10-20 UTC) is
 **PRODUCER_STATIC_CHECKED_WRAPPER_PENDING**. The
 [producer repair](docs/plans/research/2026-10-20-e04a-rules-witness-repair.md) and
 [binding record](docs/plans/evidence/2026-10-20-e04a-rules-static-check-result.json)

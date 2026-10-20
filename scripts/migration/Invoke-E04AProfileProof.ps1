@@ -57,6 +57,7 @@ $script:Secrets=[Collections.Generic.List[string]]::new()
 foreach($entry in [Environment]::GetEnvironmentVariables().GetEnumerator()) {if($entry.Key -match '(?i)TOKEN|PASSWORD|SECRET|API_KEY|CREDENTIAL' -and ([string]$entry.Value).Length -ge 8){$script:Secrets.Add([string]$entry.Value)}}
 $script:Errors=[Collections.Generic.List[object]]::new()
 $script:Result=$null;$script:Freeze=$null;$script:E02UserContext=$null;$script:RunLock=$null
+$script:RulesSourceLocks=$null;$script:RulesTopologyBefore=$null
 $script:Clock=[Diagnostics.Stopwatch]::StartNew();$script:RootCount=0
 # exact reused function Assert-Path; original rows 138-151; UTF8 SHA256 93A9B93B0F8FB8F820A1BA0263661E991D088347A811AC1AA40EF8036C731E0B
 # exact reused function Under; original rows 152-157; UTF8 SHA256 58D77B2E28DDA4A175B0AA9BBE70BF88F0F18EF61C3F6E4C88C65642FE7972AD
@@ -1134,7 +1135,7 @@ function Check-Freeze {
     foreach($pair in @(@('buildBat','Engine/Build/BatchFiles/Build.bat'),@('editor','Engine/Binaries/Win64/UnrealEditor.exe'),@('editorCmd','Engine/Binaries/Win64/UnrealEditor-Cmd.exe'))){if($m.toolPaths[$pair[0]] -ine (Join-Path $EngineRoot $pair[1])){throw 'E04A1_ENGINE_TOOL_PATH_MISMATCH'}}
     [void](Check-CompilerInputs $m);[void](Check-DotnetSdk $m)
     $closure=Check-Descriptor $m.pluginClosure;if(-not $seen.Contains($closure.path)){throw 'E04A1_PLUGIN_CLOSURE_NOT_FROZEN'}
-    $script:Freeze=$m;Check-Dependency
+    $script:Freeze=$m;Check-Dependency;Check-RulesFreeze
     if(-not $seen.Contains((Need-File (Join-Path $script:VendorRoot 'LICENSE')))){throw 'E04A1E_ACQUIRED_MIT_LICENSE_NOT_FROZEN'}
     return $m
 }
@@ -1207,16 +1208,18 @@ function Child-Environment([hashtable]$Extra=@{}) {
     $envs['PATH']=(@([IO.Path]::GetDirectoryName($script:Freeze.toolPaths.compiler),[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.sdkRc),[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.cmake),[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.ninja),$dotnet,[IO.Path]::GetDirectoryName($script:Freeze.toolPaths.cmd)) -join ';')
     foreach($e in $Extra.GetEnumerator()){if($e.Key -clike 'E02_*'){throw 'E04A1_E02_CHILD_ENVIRONMENT_FORBIDDEN'};$envs[$e.Key]=[string]$e.Value};return ,$envs
 }
-function Invoke-Root([string]$Label,[string]$Executable,[string[]]$Arguments,[int]$Budget,[bool]$Visible=$false,[string]$Fault='',[hashtable]$Extra=@{}) {
+function Invoke-Root([string]$Label,[string]$Executable,[string[]]$Arguments,[int]$Budget,[bool]$Visible=$false,[string]$Fault='',[hashtable]$Extra=@{},[string]$WorkingDirectory='') {
     if($Visible){throw 'E04A1_VISIBLE_LAUNCH_FORBIDDEN'}
     $maxRoots=if($Phase -eq 'SupervisorControls'){5}elseif($Phase -in @('Configure','DependencyBuild','EditorBuild','Discovery','Native')){1}else{0}
     if($script:RootCount -ge $maxRoots){throw 'E04A1_DIRECT_ROOT_LIMIT'};$seconds=[Math]::Min($Budget,(Phase-Budget));if($seconds -lt 3 -or $seconds -gt 1800){throw 'E04A1_ROOT_BUDGET_INVALID'}
     $exe=Need-File $Executable;if(@($script:Freeze.files|Where-Object {$_.path -ieq $exe -and $_.sha256 -ieq (Digest $exe)}).Count -ne 1){throw 'E04A1_EXECUTABLE_NOT_FROZEN'}
     $out=Owned "logs/$Label.stdout.log";$err=Owned "logs/$Label.stderr.log";foreach($p in @($out,$err)){if(Test-Path -LiteralPath $p){throw 'E04A1_PROCESS_OUTPUT_COLLISION'}}
     foreach($arg in $Arguments){Safe-Text $arg;if($arg.Contains([char]0)){throw 'E04A1_ARGUMENT_NUL'}}
-    $saved=@{};foreach($e in [Environment]::GetEnvironmentVariables('Process').GetEnumerator()){if($e.Key -like 'E02_*' -or $e.Key -match '^(CL|_CL_|LINK|_LINK_|CMAKE_|CC$|CXX$|CFLAGS$|CXXFLAGS$|LDFLAGS$|NINJA_STATUS$)'){$saved[$e.Key]=$e.Value}}
+    $cwd=$script:Stage
+    if($WorkingDirectory){if($Phase -cne 'EditorBuild' -or $Label -cne 'editor-build' -or (Assert-Path $WorkingDirectory) -ine (Assert-Path (Join-Path $EngineRoot 'Engine/Source'))){throw 'E04A1_FIXED_EDITORBUILD_CWD_ONLY'};$cwd=Assert-Path $WorkingDirectory}
+    $saved=@{};foreach($e in [Environment]::GetEnvironmentVariables('Process').GetEnumerator()){if($e.Key -like 'E02_*' -or $e.Key -match '^(CL|_CL_|LINK|_LINK_|CMAKE_|CC$|CXX$|CFLAGS$|CXXFLAGS$|LDFLAGS$|NINJA_STATUS$)' -or ($Phase -ceq 'EditorBuild' -and $e.Key -match '(?i)^(DOTNET_|_DOTNET_|CORECLR_|COR_|COMPlus_|APP_CONTEXT_|MSBUILD|NUGET_|ASPNETCORE_|UnrealBuildTool_)')){$saved[$e.Key]=$e.Value}}
     foreach($key in $saved.Keys){[Environment]::SetEnvironmentVariable($key,$null,'Process')}
-    try{$script:RootCount++;$record=[Warhammer.E02.Supervisor]::Run($exe,$Arguments,$script:Stage,(Child-Environment $Extra),$out,$err,$seconds,$false,$(if($Fault){$Fault}else{$null}))}
+    try{$script:RootCount++;$record=[Warhammer.E02.Supervisor]::Run($exe,$Arguments,$cwd,(Child-Environment $Extra),$out,$err,$seconds,$false,$(if($Fault){$Fault}else{$null}))}
     finally{foreach($key in $saved.Keys){[Environment]::SetEnvironmentVariable($key,$saved[$key],'Process')}}
     $script:Result.processes.Add($record);$path=Join-Path $script:PhaseRoot "$Label.process.json";Write-JsonNew $path $record;$record['receiptArtifact']=Descriptor $path
     foreach($entry in @(@('stdoutArtifact',$out),@('stderrArtifact',$err))){if([IO.File]::Exists($entry[1])){if(([IO.FileInfo]::new($entry[1])).Length -gt 64MB){throw 'E04A1_RETAINED_STREAM_CAP_NO_TRUNCATION'};$record[$entry[0]]=Descriptor $entry[1];Safe-Text $script:Utf8.GetString([IO.File]::ReadAllBytes($entry[1]))}elseif($record['status'] -ceq 'PASS'){throw 'E04A1_SUCCESS_OUTPUT_MISSING'}}
@@ -1448,41 +1451,339 @@ function Publish-VendorArtifact($Process) {
     $r.sourceLicense=$sourceLicense;$r.license=$license;Write-JsonNew (Owned 'logs/yaml-artifact-receipt.json') $r
     return @{library=$copiedLib;builtLibrary=$libDescriptor;headerCount=$headers.Count;sourceLicense=$sourceLicense;license=$license;artifactReceipt=Descriptor (Owned 'logs/yaml-artifact-receipt.json');buildReceipt=Descriptor (Owned 'logs/vendor-cmake-build.json');generatedCommandEvidence=$cmake;installTargetInvoked=$false}
 }
+function Require-RulesKeys($Value,[string[]]$Names) {
+    if($Value -isnot [Collections.IDictionary]){throw 'E04A1_RULES_OBJECT_REQUIRED'}
+    $keys=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach($key in $Value.Keys){if($key -isnot [string] -or -not $keys.Add($key)){throw 'E04A1_RULES_OBJECT_KEYS'}}
+    if(-not $keys.SetEquals([string[]]$Names)){throw 'E04A1_RULES_EXACT_KEYS_REQUIRED'}
+}
+function Assert-RulesValue($Expected,$Actual,[string]$At='value') {
+    if($null -eq $Expected){if($null -ne $Actual){throw "E04A1_RULES_NULL_MISMATCH: $At"};return}
+    if($Expected -is [Collections.IDictionary]){
+        Require-RulesKeys $Actual ([string[]]@($Expected.Keys))
+        foreach($key in $Expected.Keys){Assert-RulesValue $Expected[$key] $Actual[$key] ($At+'.'+$key)};return
+    }
+    if($Expected -is [Collections.IList]){
+        if($Actual -isnot [Collections.IList] -or $Actual.Count -ne $Expected.Count){throw "E04A1_RULES_ARRAY_MISMATCH: $At"}
+        for($i=0;$i -lt $Expected.Count;$i++){Assert-RulesValue $Expected[$i] $Actual[$i] ($At+'['+$i+']')};return
+    }
+    if($Expected -is [string]){if($Actual -isnot [string] -or $Expected -cne $Actual){throw "E04A1_RULES_STRING_MISMATCH: $At"};return}
+    if($Expected -is [bool]){if($Actual -isnot [bool] -or $Expected -ne $Actual){throw "E04A1_RULES_BOOL_MISMATCH: $At"};return}
+    if($Expected -is [int] -or $Expected -is [long]){if(($Actual -isnot [int] -and $Actual -isnot [long]) -or $Expected -ne $Actual){throw "E04A1_RULES_INTEGER_MISMATCH: $At"};return}
+    throw "E04A1_RULES_UNSUPPORTED_VALUE_TYPE: $At"
+}
+function Assert-RulesDescriptor($Expected,$Actual) {
+    Require-RulesKeys $Expected @('path','bytes','sha256');Require-RulesKeys $Actual @('path','bytes','sha256')
+    if($Expected.path -isnot [string] -or $Actual.path -isnot [string] -or
+        -not [IO.Path]::IsPathFullyQualified($Expected.path) -or -not [IO.Path]::IsPathFullyQualified($Actual.path) -or
+        [IO.Path]::GetFullPath($Expected.path) -ine [IO.Path]::GetFullPath($Actual.path) -or
+        ($Actual.bytes -isnot [int] -and $Actual.bytes -isnot [long]) -or $Actual.bytes -lt 1 -or $Expected.bytes -ne $Actual.bytes -or
+        $Actual.sha256 -isnot [string] -or $Actual.sha256 -cnotmatch '^[0-9A-Fa-f]{64}$' -or $Expected.sha256 -ine $Actual.sha256){throw 'E04A1_RULES_DESCRIPTOR_MISMATCH'}
+}
+function Rules-FrozenInput($Descriptor) {
+    $actual=Check-Descriptor $Descriptor
+    $matches=@($script:Freeze.files|Where-Object {$_.path -ieq $actual.path})
+    if($matches.Count -ne 1){throw 'E04A1_RULES_INPUT_NOT_UNIQUELY_FROZEN'}
+    Assert-RulesDescriptor $matches[0] $actual;return $actual
+}
+function Check-RulesFreeze {
+    $r=$script:Freeze.rulesWitness
+    Require-RulesKeys $r @('schemaVersion','processHost','ubtAssembly','buildAssembly','rulesCacheLockAssembly','rulesCompilerSource','rulesAssemblySource','rulesCacheSource','dynamicCompilationSource','parentAssemblies','runtimeInputs','expectedRuntime','expectedSelectors','expectedPreprocessorDefines','expectedManifestEngineVersion','finiteDiscoveryRootRelativePaths','optionalDiscoveryAbsenceRelativePaths')
+    if($r.schemaVersion -ne 1 -or $r.parentAssemblies -isnot [Collections.IList] -or -not $r.parentAssemblies.Count -or $r.runtimeInputs -isnot [Collections.IList] -or -not $r.runtimeInputs.Count){throw 'E04A1_RULES_FREEZE_PREREQUISITES'}
+    foreach($key in @('processHost','ubtAssembly','buildAssembly','rulesCacheLockAssembly','rulesCompilerSource','rulesAssemblySource','rulesCacheSource','dynamicCompilationSource')){[void](Rules-FrozenInput $r[$key])}
+    if($r.processHost.path -ine (Need-File $script:Freeze.toolPaths.dotnet)){throw 'E04A1_RULES_DIRECT_HOST_NOT_SELECTED_DOTNET'}
+    Assert-RulesValue @('Source','Plugins/E04ProfileProof/Source') $r.finiteDiscoveryRootRelativePaths 'finiteDiscoveryRootRelativePaths'
+    Assert-RulesValue @('Tests','Mods','Platforms','Restricted','Intermediate/Source','Plugins/E04ProfileProof/Tests','Plugins/E04ProfileProof/Platforms','Plugins/E04ProfileProof/Restricted') $r.optionalDiscoveryAbsenceRelativePaths 'optionalDiscoveryAbsenceRelativePaths'
+    foreach($d in @($r.parentAssemblies)+@($r.runtimeInputs)){[void](Rules-FrozenInput $d)}
+    $ubt=Join-Path $EngineRoot 'Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll'
+    if($r.ubtAssembly.path -ine (Assert-Path $ubt)){throw 'E04A1_RULES_UBT_ASSEMBLY_PATH'}
+    foreach($path in @([Reflection.Metadata.MetadataReader].Assembly.Location,[Collections.Immutable.ImmutableArray].Assembly.Location)){
+        $d=Descriptor $path;[void](Rules-FrozenInput $d)
+    }
+    Require-RulesKeys $r.expectedRuntime @('runtimeFramework','runtimeVersion','processArchitecture')
+    foreach($value in $r.expectedRuntime.Values){if($value -isnot [string] -or [string]::IsNullOrWhiteSpace($value)){throw 'E04A1_RULES_EXPECTED_RUNTIME_REQUIRED'}}
+    $selectorKeys=@('name','originalName','targetType','platform','configuration','architectures','isMultiArch','architecture','cppStandard','defaultBuildSettings','includeOrderVersion','bBuildAllModules','bCompileWithPluginSupport','bCompileAgainstEngine','bCompileAgainstCoreUObject','bCompileAgainstEditor','bBuildDeveloperTools','bBuildWithEditorOnlyData','bBuildRequiresCookedData','bPrecompile','bIncludePluginsForTargetPlatforms','bAllowEnginePluginsEnabledByDefault','optedInModulePlatforms','linkType','buildEnvironment','enablePlugins','disablePlugins','optionalPlugins','additionalPlugins','buildPlugins','bUseStaticCRT','bDebugBuildsActuallyUseDebugCRT')
+    Require-RulesKeys $r.expectedSelectors $selectorKeys
+    if($r.expectedSelectors.bBuildAllModules -isnot [bool] -or $r.expectedSelectors.bBuildAllModules -or
+        $r.expectedSelectors.name -cne 'WarhammerClientE04AEditor' -or $r.expectedSelectors.targetType -cne 'Editor' -or
+        $r.expectedSelectors.platform -cne 'Win64' -or $r.expectedSelectors.configuration -cne 'Development' -or
+        $r.expectedPreprocessorDefines -isnot [Collections.IList] -or [string]::IsNullOrWhiteSpace($r.expectedManifestEngineVersion)){throw 'E04A1_RULES_FINITE_EXPECTATIONS_REQUIRED'}
+    # Expectations are root-reviewed frozen inputs, never fabricated actual selectors.
+}
+function Rules-GeneratedPaths {
+    $root=Under (Join-Path $script:Stage 'Intermediate/Build/BuildRules') $script:Stage
+    return [ordered]@{dll=(Join-Path $root 'WarhammerClientModuleRules.dll');pdb=(Join-Path $root 'WarhammerClientModuleRules.pdb');manifest=(Join-Path $root 'WarhammerClientModuleRulesManifest.json')}
+}
+function Rules-SourceFiles {
+    $files=[Collections.Generic.List[object]]::new();$seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($entry in $script:Freeze.sourceMembership){
+        if($entry.path -notmatch '(?i)\.cs$'){continue}
+        if($entry.path -cnotmatch '\.(Build|Target)\.cs$'){throw 'E04A1_RULES_UNSUPPORTED_CSHARP_SOURCE'}
+        $source=Descriptor (Join-Path $script:Repo $entry.path);[void](Rules-FrozenInput $source)
+        $stage=Descriptor (Under (Join-Path $script:Stage $entry.path) $script:Stage)
+        if(-not $seen.Add($stage.path) -or $source.bytes -ne $stage.bytes -or $source.sha256 -ine $stage.sha256){throw 'E04A1_RULES_SOURCE_MEMBERSHIP_OR_BYTES'}
+        $files.Add($stage)
+    }
+    if(-not $files.Count){throw 'E04A1_RULES_SOURCE_LIST_EMPTY'};return @($files)
+}
+function Rules-Topology([switch]$ObserveOnly) {
+    $project=Read-Json (Join-Path $script:Stage 'WarhammerClient.uproject')
+    foreach($key in @('AdditionalRootDirectories','AdditionalPluginDirectories')){if($project.Contains($key) -and ($null -eq $project[$key] -or @($project[$key]).Count)){throw 'E04A1_RULES_ADDITIONAL_ROOTS_UNSUPPORTED'}}
+    $absent=@('Tests','Mods','Platforms','Restricted','Intermediate/Source','Plugins/E04ProfileProof/Tests','Plugins/E04ProfileProof/Platforms','Plugins/E04ProfileProof/Restricted')
+    Assert-RulesValue $absent $script:Freeze.rulesWitness.optionalDiscoveryAbsenceRelativePaths 'optionalDiscoveryAbsenceRelativePaths'
+    $absence=@(foreach($relative in $absent){$path=Under (Join-Path $script:Stage $relative) $script:Stage;$exists=Test-Path -LiteralPath $path;if($exists -and -not $ObserveOnly){throw ('E04A1_RULES_EXCLUDED_DISCOVERY_ROOT_PRESENT: '+$relative)};@{path=$path;exists=$exists}})
+    $entries=[Collections.Generic.List[object]]::new();$seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($relative in @('Source','Plugins/E04ProfileProof/Source')){
+        $root=Under (Join-Path $script:Stage $relative) $script:Stage;$stack=[Collections.Generic.Stack[string]]::new();$stack.Push($root)
+        while($stack.Count){[void](Phase-Budget);foreach($path in [IO.Directory]::EnumerateFileSystemEntries($stack.Pop())){
+            $p=Under $path $root;if(-not $seen.Add($p)){throw 'E04A1_RULES_CASE_COLLIDING_TOPOLOGY'}
+            $attr=[IO.File]::GetAttributes($p);$directory=($attr -band [IO.FileAttributes]::Directory) -ne 0
+            if(-not $ObserveOnly -and ([IO.Path]::GetFileName($p) -ceq '.ubtignore' -or $p.EndsWith('.csproj',[StringComparison]::OrdinalIgnoreCase))){throw 'E04A1_RULES_PRUNING_MARKER_UNSUPPORTED'}
+            $entries.Add(@{path=$p;directory=$directory;file=$(if($directory){$null}else{Descriptor $p})});if($directory){$stack.Push($p)}
+        }}
+    }
+    return @{project=Descriptor (Join-Path $script:Stage 'WarhammerClient.uproject');absence=$absence;entries=@($entries|Sort-Object {$_.path} -CaseSensitive);qualification='Finite authored discovery topology, not a continuous directory monitor.'}
+}
+function Prepare-RulesChallenge {
+    Check-RulesFreeze;$paths=Rules-GeneratedPaths
+    foreach($path in @($paths.Values)+(Join-Path $script:Stage 'Intermediate/Build/BuildRules')){if(Test-Path -LiteralPath $path){throw 'E04A1_RULES_FRESH_BUILD_RULES_REQUIRED'}}
+    foreach($relative in @('logs/rules-runtime-witness.json','logs/rules-witness-input.json','logs/rules-prelaunch-topology.json','logs/rules-validation.json','artifacts/rules')){if(Test-Path -LiteralPath (Owned $relative)){throw 'E04A1_RULES_NO_RETRY_OR_OUTPUT_REUSE'}}
+    $files=@(Rules-SourceFiles);$script:RulesSourceLocks=[Collections.Generic.List[IDisposable]]::new()
+    foreach($d in $files){
+        $relative=[IO.Path]::GetRelativePath($script:Stage,$d.path)
+        foreach($p in @((Join-Path $script:Repo $relative),$d.path)){$script:RulesSourceLocks.Add([IO.File]::Open((Need-File $p),[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read))}
+    }
+    $script:RulesTopologyBefore=Rules-Topology;Write-JsonNew (Owned 'logs/rules-source-before.json') $script:RulesTopologyBefore
+    $nonce=[Guid]::NewGuid().ToString('D');$f=Descriptor $FreezeManifestPath;$r=$script:Freeze.rulesWitness
+    $identity=[ordered]@{schemaVersion=1;kind='E04A1_RULES_PRELAUNCH_TOPOLOGY';runId=$RunId;sourceHead=$script:Freeze.sourceHead;sourceRoot=$script:Repo;stagedProject=(Join-Path $script:Stage 'WarhammerClient.uproject');attemptNonce=$nonce;phase='EditorBuild';freezeManifest=$f;freshProjectDirectory=$true;projectBuildRulesAbsent=$true;projectIntermediateSourceAbsent=$true;sourceMembershipLockedBeforeLaunch=$true;rulesSourceFiles=$files;optionalDiscoveryAbsences=@($script:RulesTopologyBefore.absence|ForEach-Object {$_.path})}
+    # Freshness attests the same-run Preflight-created stage and checked preabsence.
+    Write-JsonNew (Owned 'logs/rules-prelaunch-topology.json') $identity
+    $challenge=[ordered]@{schemaVersion=1;kind='E04A1_RULES_WITNESS_INPUT';runId=$RunId;sourceHead=$script:Freeze.sourceHead;sourceRoot=$script:Repo;stagedProject=$identity.stagedProject;attemptNonce=$nonce;phase='EditorBuild';freezeManifest=$f;expectedRuntime=$r.expectedRuntime;expectedWorkingDirectory=(Assert-Path (Join-Path $EngineRoot 'Engine/Source'));processHost=(Descriptor $script:Freeze.toolPaths.dotnet);ubtAssembly=$r.ubtAssembly;buildAssembly=$r.buildAssembly;rulesCacheLockAssembly=$r.rulesCacheLockAssembly;rulesCompilerSource=$r.rulesCompilerSource;rulesAssemblySource=$r.rulesAssemblySource;rulesCacheSource=$r.rulesCacheSource;dynamicCompilationSource=$r.dynamicCompilationSource;targetSource=(Descriptor (Join-Path $script:Stage 'Source/WarhammerClientE04AEditor.Target.cs'));moduleSource=(Descriptor (Join-Path $script:Stage 'Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs'));rulesSourceFiles=$files;parentAssemblies=$r.parentAssemblies;expectedSelectors=$r.expectedSelectors;prelaunchTopologyReceipt=(Descriptor (Owned 'logs/rules-prelaunch-topology.json'));finiteDiscoveryRoots=@((Join-Path $script:Stage 'Source'),(Join-Path $script:Stage 'Plugins/E04ProfileProof/Source'))}
+    Write-JsonNew (Owned 'logs/rules-witness-input.json') $challenge;return $challenge
+}
+function Read-RulesMetadata([string]$Dll,[string]$Pdb='') {
+    $dllStream=[IO.File]::Open((Need-File $Dll),[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read);$pe=$null;$pdbStream=$null;$provider=$null
+    try{
+        $pe=[Reflection.PortableExecutable.PEReader]::new($dllStream)
+        if(-not $pe.HasMetadata){throw 'E04A1_RULES_PE_METADATA_REQUIRED'}
+        $reader=[Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($pe);$module=$reader.GetModuleDefinition();$mvid=$reader.GetGuid($module.Mvid).ToString('D')
+        if($mvid -ceq [Guid]::Empty.ToString('D')){throw 'E04A1_RULES_EMPTY_MVID'}
+        $assembly=$reader.GetAssemblyDefinition();$result=@{mvid=$mvid;simpleName=$reader.GetString($assembly.Name);assemblyVersion=$assembly.Version.ToString();documents=@();pdbIdentity=$null}
+        if(-not $Pdb){return $result}
+        $debug=@($pe.ReadDebugDirectory());$cv=@($debug|Where-Object {$_.Type.ToString() -ceq 'CodeView'})
+        if($cv.Count -ne 1 -or -not $cv[0].IsPortableCodeView -or @($debug|Where-Object {$_.Type.ToString() -ceq 'EmbeddedPortablePdb'}).Count){throw 'E04A1_RULES_PORTABLE_PDB_DEBUG_ENTRY_REQUIRED'}
+        $codeView=$pe.ReadCodeViewDebugDirectoryData($cv[0]);$pdbStream=[IO.File]::Open((Need-File $Pdb),[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read)
+        $provider=[Reflection.Metadata.MetadataReaderProvider]::FromPortablePdbStream($pdbStream);$pdbReader=$provider.GetMetadataReader();$id=[byte[]]@($pdbReader.DebugMetadataHeader.Id)
+        if($id.Length -ne 20 -or $codeView.Age -ne 1 -or [Guid]::new([byte[]]$id[0..15]) -ne $codeView.Guid -or [BitConverter]::ToUInt32($id,16) -ne $cv[0].Stamp){throw 'E04A1_RULES_DLL_PDB_DEBUG_ID_MISMATCH'}
+        $expectedName=[IO.Path]::GetFileName($Pdb)
+        if($codeView.Path -cne $expectedName -and ([IO.Path]::IsPathFullyQualified($codeView.Path) -eq $false -or [IO.Path]::GetFullPath($codeView.Path) -ine [IO.Path]::GetFullPath($Pdb))){throw 'E04A1_RULES_PDB_DEBUG_PATH_UNSUPPORTED'}
+        $documents=[Collections.Generic.List[object]]::new();$seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        foreach($handle in $pdbReader.Documents){
+            $document=$pdbReader.GetDocument($handle);$name=$pdbReader.GetString($document.Name);$source=Under $name $script:Stage
+            if(-not $seen.Add($source)){throw 'E04A1_RULES_PDB_DUPLICATE_DOCUMENT'}
+            $algorithm=$pdbReader.GetGuid($document.HashAlgorithm).ToString('D');$hash=[Convert]::ToHexString($pdbReader.GetBlobBytes($document.Hash))
+            $kind=switch -CaseSensitive ($algorithm){'ff1816ec-aa5e-4d10-87f7-6f4963833460'{'SHA1'};'8829d00f-11b8-4213-878b-770e8597ac16'{'SHA256'};default{throw 'E04A1_RULES_PDB_HASH_ALGORITHM_UNSUPPORTED'}}
+            $d=Descriptor $source;if((Bytes-Hash ([IO.File]::ReadAllBytes($source)) $kind) -ine $hash){throw 'E04A1_RULES_PDB_SOURCE_CHECKSUM_MISMATCH'}
+            $documents.Add(@{path=$source;sourceDescriptor=$d;checksumAlgorithm=$kind;checksum=$hash})
+        }
+        $result.documents=@($documents);$result.pdbIdentity=@{guid=$codeView.Guid.ToString('D');stamp=$cv[0].Stamp;age=$codeView.Age;recordedPath=$codeView.Path;qualification='Metadata only. Document enumeration is not Roslyn syntax-tree order.'};return $result
+    }finally{if($provider){$provider.Dispose()};if($pdbStream){$pdbStream.Dispose()};if($pe){$pe.Dispose()};$dllStream.Dispose()}
+}
+function Collect-RulesCacheSources($Node,$Paths,[int]$Depth=0) {
+    if($Depth -gt 64){throw 'E04A1_RULES_CACHE_DEPTH'}
+    Require-RulesKeys $Node @('isScanned','hasFilesContainer','listsInActualOrder','hasSubdirectoryContainer','childrenInActualOrder')
+    foreach($key in @('isScanned','hasFilesContainer','hasSubdirectoryContainer')){if($Node[$key] -isnot [bool]){throw 'E04A1_RULES_CACHE_BOOLEAN_REQUIRED'}}
+    if($Node.childrenInActualOrder -isnot [Collections.IList]){throw 'E04A1_RULES_CACHE_CHILD_ARRAY_REQUIRED'}
+    if($Node.hasFilesContainer){
+        Require-RulesKeys $Node.listsInActualOrder @('ModuleRules','TargetRules','AutomationModules','UbtPlugins')
+        foreach($kind in @('ModuleRules','TargetRules','AutomationModules','UbtPlugins')){
+            if($Node.listsInActualOrder[$kind] -isnot [Collections.IList]){throw 'E04A1_RULES_CACHE_LIST_REQUIRED'}
+            if($kind -cin @('AutomationModules','UbtPlugins') -and $Node.listsInActualOrder[$kind].Count){throw 'E04A1_RULES_EXTRA_DISCOVERY_KIND_UNSUPPORTED'}
+            foreach($path in $Node.listsInActualOrder[$kind]){if($path -isnot [string] -or -not [IO.Path]::IsPathFullyQualified($path) -or -not $Paths.Add($path)){throw 'E04A1_RULES_CACHE_DUPLICATE_OR_INVALID_SOURCE'}}
+        }
+    }else{Require-RulesKeys $Node.listsInActualOrder @()}
+    $names=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($child in $Node.childrenInActualOrder){Require-RulesKeys $child @('name','node');if($child.name -isnot [string] -or $child.name -cmatch '[/\\]' -or -not $names.Add($child.name)){throw 'E04A1_RULES_CACHE_CHILD_NAME'};Collect-RulesCacheSources $child.node $Paths ($Depth+1)}
+}
+function Check-RulesWitnessData($Challenge,$Topology,$Witness,$Root,$Actual,$Metadata,$Policy) {
+    # Pure data validator: file reads/PE parsing/retention happen before this call.
+    Require-RulesKeys $Challenge @('schemaVersion','kind','runId','sourceHead','sourceRoot','stagedProject','attemptNonce','phase','freezeManifest','expectedRuntime','expectedWorkingDirectory','processHost','ubtAssembly','buildAssembly','rulesCacheLockAssembly','rulesCompilerSource','rulesAssemblySource','rulesCacheSource','dynamicCompilationSource','targetSource','moduleSource','rulesSourceFiles','parentAssemblies','expectedSelectors','prelaunchTopologyReceipt','finiteDiscoveryRoots')
+    $nonce=[Guid]::Empty
+    if($Challenge.schemaVersion -ne 1 -or $Challenge.kind -cne 'E04A1_RULES_WITNESS_INPUT' -or $Challenge.phase -cne 'EditorBuild' -or $Topology.schemaVersion -ne 1 -or $Topology.kind -cne 'E04A1_RULES_PRELAUNCH_TOPOLOGY' -or
+        -not [Guid]::TryParseExact($Challenge.attemptNonce,'D',[ref]$nonce) -or $nonce -eq [Guid]::Empty){throw 'E04A1_RULES_INPUT_CHALLENGE_SCHEMA'}
+    foreach($pair in @(@($Challenge,'rulesSourceFiles'),@($Challenge,'parentAssemblies'),@($Challenge,'finiteDiscoveryRoots'),@($Topology,'optionalDiscoveryAbsences'),@($Witness,'orderedAssemblySourceFileDescriptors'),@($Witness,'parentAssemblyChain'))){if($pair[0][$pair[1]] -isnot [Collections.IList]){throw 'E04A1_RULES_REQUIRED_ORDERED_ARRAY'}}
+    Require-RulesKeys $Witness @('schemaVersion','kind','runId','sourceHead','sourceRoot','stagedProject','attemptNonce','phase','freezeManifest','inputContract','prelaunchTopologyReceipt','process','selectedTarget','module','effectiveSelectors','actualProjectRules','generatedRules','orderedAssemblySourceFileDescriptors','parentAssemblyChain','discoveryCache','pinnedEngineSources','moduleTimeOptionalDiscoveryAbsences','observationStage','lineageQualification','fileReadLocksHeldThroughUbtExit','scope')
+    Require-RulesKeys $Topology @('schemaVersion','kind','runId','sourceHead','sourceRoot','stagedProject','attemptNonce','phase','freezeManifest','freshProjectDirectory','projectBuildRulesAbsent','projectIntermediateSourceAbsent','sourceMembershipLockedBeforeLaunch','rulesSourceFiles','optionalDiscoveryAbsences')
+    Require-RulesKeys $Witness.selectedTarget @('exactClrType','assemblyQualifiedName','sourceDescriptor','assemblyDescriptor','loadedMvid','constructorInstanceId','constructorBuildAllModules')
+    Require-RulesKeys $Witness.module @('actualClrType','sourceDescriptor','sameAssemblyReference')
+    Require-RulesKeys $Witness.generatedRules @('dll','pdb','manifest','engineVersion','orderedManifestSourceFiles','manifestSequenceEqualsAssemblySourceFiles')
+    foreach($key in @('runId','sourceHead','sourceRoot','stagedProject','attemptNonce','phase')){Assert-RulesValue $Challenge[$key] $Witness[$key] $key;Assert-RulesValue $Challenge[$key] $Topology[$key] ('topology.'+$key)}
+    if($Witness.schemaVersion -ne 1 -or $Witness.kind -cne 'E04A1_RULES_RUNTIME_WITNESS' -or $Witness.phase -cne 'EditorBuild' -or
+        $Witness.observationStage -cne 'MODULE_CONSTRUCTOR_AFTER_CREATE_TARGET_RULES_VALIDATION' -or $Witness.fileReadLocksHeldThroughUbtExit -isnot [bool] -or -not $Witness.fileReadLocksHeldThroughUbtExit){throw 'E04A1_RULES_WITNESS_STAGE_REQUIRED'}
+    Assert-RulesDescriptor $Challenge.freezeManifest $Witness.freezeManifest;Assert-RulesDescriptor $Challenge.freezeManifest $Topology.freezeManifest
+    Assert-RulesDescriptor $Actual.inputContract $Witness.inputContract;Assert-RulesDescriptor $Challenge.prelaunchTopologyReceipt $Witness.prelaunchTopologyReceipt
+    foreach($key in @('freshProjectDirectory','projectBuildRulesAbsent','projectIntermediateSourceAbsent','sourceMembershipLockedBeforeLaunch')){Assert-RulesValue $true $Topology[$key] $key}
+    Assert-RulesValue $Challenge.rulesSourceFiles $Topology.rulesSourceFiles 'topology.rulesSourceFiles'
+    Assert-RulesValue $Topology.optionalDiscoveryAbsences $Witness.moduleTimeOptionalDiscoveryAbsences 'optionalDiscoveryAbsences'
+    if($Root.status -cne 'PASS' -or $Root.exitCode -ne 0 -or $Root.exitConfirmed -ne $true -or $Root.cleanupConfirmed -ne $true -or $Root.timedOut -ne $false -or
+        $Root.assignedBeforeResume -ne $true -or $Root.resumed -ne $true -or @($Root.jobAccounting).Count -eq 0 -or $Root.jobAccounting[-1].activeProcesses -ne 0){throw 'E04A1_RULES_OWNED_ROOT_NOT_COMPLETE'}
+    foreach($key in @('exitConfirmed','cleanupConfirmed','assignedBeforeResume','resumed')){Assert-RulesValue $true $Root[$key] ('ownedRoot.'+$key)};Assert-RulesValue $false $Root.timedOut 'ownedRoot.timedOut'
+    $process=$Witness.process
+    Require-RulesKeys $process @('pid','startTimeUtc','startFileTimeUtc','processPath','workingDirectory','actualArgv','runtimeFramework','runtimeVersion','processArchitecture','hostDescriptor','ubtAssemblyDescriptor','buildAssemblyDescriptor','rulesCacheLockAssemblyDescriptor')
+    if(($process.pid -isnot [int] -and $process.pid -isnot [long]) -or $process.pid -ne $Root.pid -or $process.startFileTimeUtc -ne $Root.creationFileTime -or
+        $process.startFileTimeUtc -lt 1 -or $process.startTimeUtc -cnotmatch '(Z|\+00:00)$' -or [DateTime]::Parse($process.startTimeUtc,[Globalization.CultureInfo]::InvariantCulture,[Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime().ToFileTimeUtc() -ne $Root.creationFileTime){throw 'E04A1_RULES_ROOT_PID_CREATION_IDENTITY_MISMATCH'}
+    if($Root.executable -ine $Challenge.processHost.path -or $process.processPath -ine $Root.executable -or
+        $process.workingDirectory -ine $Challenge.expectedWorkingDirectory -or $Root.workingDirectory -ine $Challenge.expectedWorkingDirectory){throw 'E04A1_RULES_ROOT_PATH_OR_CWD_MISMATCH'}
+    Assert-RulesValue $Actual.expectedArgv $Root.arguments 'exactDirectRootArgv'
+    Assert-RulesValue $Root.arguments $process.actualArgv 'literalManagedArgv'
+    Assert-RulesDescriptor $Challenge.processHost $process.hostDescriptor;Assert-RulesDescriptor $Challenge.ubtAssembly $process.ubtAssemblyDescriptor;Assert-RulesDescriptor $Challenge.buildAssembly $process.buildAssemblyDescriptor;Assert-RulesDescriptor $Challenge.rulesCacheLockAssembly $process.rulesCacheLockAssemblyDescriptor
+    foreach($key in @('runtimeFramework','runtimeVersion','processArchitecture')){Assert-RulesValue $Challenge.expectedRuntime[$key] $process[$key] ('actualCLR.'+$key)}
+    foreach($key in @('DOTNET_ROLL_FORWARD','DOTNET_MULTILEVEL_LOOKUP','DOTNET_STARTUP_HOOKS','DOTNET_ADDITIONAL_DEPS','DOTNET_SHARED_STORE','DOTNET_EnableDiagnostics','CORECLR_ENABLE_PROFILING','COR_ENABLE_PROFILING','COMPlus_EnableDiagnostics')){Assert-RulesValue $Actual.expectedChildEnvironment[$key] $Root.environmentOverrides[$key] ('explicitChildEnvironment.'+$key)}
+    Assert-RulesValue $Challenge.expectedSelectors $Witness.effectiveSelectors 'effectiveSelectors'
+    if($Witness.effectiveSelectors.bBuildAllModules -ne $false -or $Witness.selectedTarget.constructorBuildAllModules -ne $false -or $Witness.selectedTarget.exactClrType -cne 'WarhammerClientE04AEditorTarget' -or $Witness.module.actualClrType -cne 'YamlCpp' -or $Witness.module.sameAssemblyReference -ne $true){throw 'E04A1_RULES_SELECTED_TYPE_OR_FINAL_SELECTOR_UNSUPPORTED'}
+    Assert-RulesValue $false $Witness.selectedTarget.constructorBuildAllModules 'constructorBuildAllModules';Assert-RulesValue $true $Witness.module.sameAssemblyReference 'sameAssemblyReference'
+    $guid=[Guid]::Empty;if(-not [Guid]::TryParseExact($Witness.selectedTarget.constructorInstanceId,'D',[ref]$guid) -or $guid -eq [Guid]::Empty){throw 'E04A1_RULES_CONSTRUCTOR_INSTANCE_REQUIRED'}
+    Assert-RulesDescriptor $Challenge.targetSource $Witness.selectedTarget.sourceDescriptor;Assert-RulesDescriptor $Challenge.moduleSource $Witness.module.sourceDescriptor
+    Assert-RulesDescriptor $Actual.dll $Witness.selectedTarget.assemblyDescriptor
+    if($Witness.selectedTarget.loadedMvid -ine $Metadata.mvid -or $Metadata.simpleName -cne 'WarhammerClientModuleRules' -or $null -eq $Metadata.pdbIdentity){throw 'E04A1_RULES_RETAINED_MVID_OR_PDB_MISMATCH'}
+    foreach($key in @('dll','pdb','manifest')){Assert-RulesDescriptor $Actual[$key] $Witness.generatedRules[$key]}
+    if($Witness.generatedRules.engineVersion -cne $Actual.manifestBody.EngineVersion -or $Witness.generatedRules.engineVersion -cne $Policy.expectedManifestEngineVersion -or $Witness.generatedRules.manifestSequenceEqualsAssemblySourceFiles -ne $true){throw 'E04A1_RULES_MANIFEST_ENGINE_OR_SEQUENCE_REQUIRED'}
+    $cache=$Witness.actualProjectRules
+    Require-RulesKeys $cache @('kind','exactProjectPath','expectedProjectAssemblyPath','selectedProjectLazyWasValueCreated','selectedType','selectedTypeSource','selectedModuleType','selectedModuleTypeSource','selectedAssembly','selectedAssemblyObjectEqualsActualTargetAssembly','actualAssemblySourceFilesSequence','actualPreprocessorDefines','targetNameMapSequence','moduleNameMapSequence','parentChain','loadedProjectCacheEntryMetadata','scope')
+    if($cache.kind -cne 'E04A1_COMPLETED_PROJECT_RULES_CACHE_POSTSTATE' -or $cache.exactProjectPath -cne $Challenge.stagedProject -or $cache.expectedProjectAssemblyPath -ine $Actual.dll.path -or
+        $cache.selectedProjectLazyWasValueCreated -ne $true -or $cache.selectedAssemblyObjectEqualsActualTargetAssembly -ne $true -or $cache.selectedType -cne $Witness.selectedTarget.assemblyQualifiedName -or
+        $cache.selectedTypeSource -cne $Challenge.targetSource.path -or $cache.selectedModuleTypeSource -cne $Challenge.moduleSource.path -or $cache.selectedAssembly.mvid -ine $Metadata.mvid -or $cache.selectedAssembly.path -ine $Actual.dll.path -or $cache.selectedAssembly.simpleName -cne $Metadata.simpleName){throw 'E04A1_RULES_COMPLETED_PROJECT_CACHE_MISMATCH'}
+    Assert-RulesValue $true $cache.selectedProjectLazyWasValueCreated 'projectLazyCreated';Assert-RulesValue $true $cache.selectedAssemblyObjectEqualsActualTargetAssembly 'projectAssemblyObjectIdentity'
+    foreach($pair in @(@($Witness.selectedTarget.assemblyQualifiedName,'WarhammerClientE04AEditorTarget'),@($cache.selectedModuleType,'YamlCpp'))){
+        $firstComma=$pair[0].IndexOf(',');if($firstComma -lt 1 -or $pair[0].Substring(0,$firstComma) -cne $pair[1]){throw 'E04A1_RULES_ASSEMBLY_QUALIFIED_TYPE'}
+        $identity=[Reflection.AssemblyName]::new($pair[0].Substring($firstComma+1).Trim())
+        if($identity.Name -cne $Metadata.simpleName -or $identity.Version.ToString() -cne $Metadata.assemblyVersion){throw 'E04A1_RULES_QUALIFIED_ASSEMBLY_IDENTITY'}
+    }
+    Assert-RulesValue $Policy.expectedPreprocessorDefines $cache.actualPreprocessorDefines 'actualPreprocessorDefines'
+    $order=@($cache.actualAssemblySourceFilesSequence);Assert-RulesValue $order $Actual.manifestBody.SourceFiles 'rawManifestSourceOrder';Assert-RulesValue $order $Witness.generatedRules.orderedManifestSourceFiles 'witnessManifestSourceOrder'
+    $expected=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($d in $Challenge.rulesSourceFiles){if(-not $expected.TryAdd($d.path,$d)){throw 'E04A1_RULES_FROZEN_SOURCE_CASE_COLLISION'}}
+    if($order.Count -ne $expected.Count -or @($Witness.orderedAssemblySourceFileDescriptors).Count -ne $order.Count -or @($Metadata.documents).Count -ne $order.Count){throw 'E04A1_RULES_COMPILED_SOURCE_COUNT'}
+    $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    for($i=0;$i -lt $order.Count;$i++){$path=$order[$i];if($path -isnot [string] -or -not $expected.ContainsKey($path) -or -not $seen.Add($path) -or $path -cne $Witness.orderedAssemblySourceFileDescriptors[$i].path){throw 'E04A1_RULES_SOURCE_MEMBERSHIP_ORDER'};Assert-RulesDescriptor $expected[$path] $Witness.orderedAssemblySourceFileDescriptors[$i]}
+    $docSeen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($d in $Metadata.documents){if(-not $expected.ContainsKey($d.path) -or -not $docSeen.Add($d.path)){throw 'E04A1_RULES_PDB_DOCUMENT_MEMBERSHIP'};Assert-RulesDescriptor $expected[$d.path] $d.sourceDescriptor}
+    foreach($pair in @(@('targetNameMapSequence','.Target.cs'),@('moduleNameMapSequence','.Build.cs'))){
+        $map=@($cache[$pair[0]]);$wanted=@($Challenge.rulesSourceFiles|Where-Object {$_.path.EndsWith($pair[1],[StringComparison]::Ordinal)});$names=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        if($map.Count -ne $wanted.Count){throw 'E04A1_RULES_NAME_MAP_MEMBERSHIP'}
+        foreach($entry in $map){Require-RulesKeys $entry @('name','path');$stem=[IO.Path]::GetFileName($entry.path);$stem=$stem.Substring(0,$stem.Length-$pair[1].Length);if(-not $expected.ContainsKey($entry.path) -or $entry.name -cne $stem -or -not $names.Add($entry.name)){throw 'E04A1_RULES_NAME_MAP_SOURCE_OR_CASE'}}
+    }
+    $projectEntries=@($cache.loadedProjectCacheEntryMetadata|Where-Object {$_.project -ieq $Challenge.stagedProject})
+    if($projectEntries.Count -ne 1 -or @($cache.loadedProjectCacheEntryMetadata).Count -ne 1 -or $projectEntries[0].isValueCreated -ne $true){throw 'E04A1_RULES_PROJECT_CACHE_ENTRY_REQUIRED'}
+    if(@($Witness.parentAssemblyChain).Count -ne @($Challenge.parentAssemblies).Count -or @($Actual.parentMetadata).Count -ne @($Challenge.parentAssemblies).Count){throw 'E04A1_RULES_PARENT_COUNT'}
+    if(@($cache.parentChain).Count -ne @($Challenge.parentAssemblies).Count){throw 'E04A1_RULES_RAW_PARENT_COUNT'}
+    for($i=0;$i -lt @($Challenge.parentAssemblies).Count;$i++){
+        $parent=$Witness.parentAssemblyChain[$i];Require-RulesKeys $parent @('level','simpleName','fullName','assemblyDescriptor','loadedMvid')
+        if($parent.level -ne $i -or $parent.loadedMvid -ine $Actual.parentMetadata[$i].mvid -or $parent.simpleName -cne $Actual.parentMetadata[$i].simpleName){throw 'E04A1_RULES_PARENT_MVID_OR_ORDER'}
+        Assert-RulesDescriptor $Challenge.parentAssemblies[$i] $parent.assemblyDescriptor
+        $rawParent=$cache.parentChain[$i];Require-RulesKeys $rawParent @('index','hasCompiledAssembly','identity');Assert-RulesValue $true $rawParent.hasCompiledAssembly 'parentHasCompiledAssembly'
+        if($rawParent.index -ne $i -or $rawParent.identity.path -ine $parent.assemblyDescriptor.path -or $rawParent.identity.mvid -ine $parent.loadedMvid -or $rawParent.identity.simpleName -cne $parent.simpleName -or $rawParent.identity.fullName -cne $parent.fullName){throw 'E04A1_RULES_RAW_TRANSFORMED_PARENT_MISMATCH'}
+    }
+    $tree=$Witness.discoveryCache;if($tree.kind -cne 'E04A1_FINITE_RULES_TREE_POSTSTATE' -or @($tree.selectedRoots).Count -ne @($Challenge.finiteDiscoveryRoots).Count){throw 'E04A1_RULES_CACHE_ROOTS'}
+    $treeSources=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    for($i=0;$i -lt @($tree.selectedRoots).Count;$i++){$node=$tree.selectedRoots[$i];if($node.path -cne $Challenge.finiteDiscoveryRoots[$i] -or $node.cacheNodePresent -ne $true -or $node.node.isScanned -ne $true){throw 'E04A1_RULES_CACHE_ROOT_UNSCANNED'};Collect-RulesCacheSources $node.node $treeSources}
+    if(-not $treeSources.SetEquals([string[]]@($expected.Keys))){throw 'E04A1_RULES_CACHE_SOURCE_SET_MISMATCH'}
+    Assert-RulesValue @($Challenge.rulesCompilerSource,$Challenge.rulesAssemblySource,$Challenge.rulesCacheSource,$Challenge.dynamicCompilationSource) $Witness.pinnedEngineSources 'pinnedEngineSources'
+    $qualification=@{freshProcessInference='CONDITIONAL_SOURCE_SUPPORTED_FROM_ROOT_OWNED_PROCESS_AND_PREABSENCE';cacheObservation='POSTSTATE_ONLY';manifestOrder='DIRECT_MANIFEST_ARRAY_ORDER';assemblySourceOrder='DIRECT_CURRENT_ENUMERATION_ORDER';roslynOrder='SOURCE_DERIVED_FILEPATH_SORT_NOT_DIRECT_EVENT_TRACE';chronologicalScanEventsObserved=$false;nativeFlagsObserved=$false;pluginActivationObserved=$false}
+    Assert-RulesValue $qualification $Witness.lineageQualification 'lineageQualification'
+    if($Witness.scope -cne 'CONSTRUCTOR_SELECTION_AND_RULES_CACHE_POSTSTATE_NOT_NATIVE_FLAGS_OR_ACTIVATION_CERTIFICATION'){throw 'E04A1_RULES_SCOPE_QUALIFICATION'}
+    return @{status='VALIDATED_FINITE_OWNED_PROCESS_RULES_POSTSTATE';sourceCount=$order.Count;parentCount=@($Challenge.parentAssemblies).Count;loadedMvid=$Metadata.mvid;literalSourceOrder=$order;lineageQualification=$qualification;nativeOrActivationAcceptance=$false}
+}
+function Retain-RulesArtifacts {
+    $root=Owned 'artifacts/rules';if(-not [IO.Directory]::Exists($root)){[void][IO.Directory]::CreateDirectory($root)}
+    $items=[Collections.Generic.List[object]]::new();$missing=[Collections.Generic.List[string]]::new();$failures=[Collections.Generic.List[object]]::new();$paths=Rules-GeneratedPaths
+    $sources=[ordered]@{dll=$paths.dll;pdb=$paths.pdb;manifest=$paths.manifest;witness=(Owned 'logs/rules-runtime-witness.json');input=(Owned 'logs/rules-witness-input.json');topology=(Owned 'logs/rules-prelaunch-topology.json');before=(Owned 'logs/rules-source-before.json');after=(Owned 'logs/rules-source-after.json')}
+    foreach($key in $sources.Keys){try{$path=Assert-Path $sources[$key];if(-not [IO.File]::Exists($path)){$missing.Add($key);continue};$before=Descriptor $path
+        if($before.bytes -gt 64MB){throw 'E04A1_RULES_RETAINED_FILE_CAP_PRESERVE_ORIGINAL'}
+        $copy=Under (Join-Path $root ([IO.Path]::GetFileName($path))) $root
+        if([IO.File]::Exists($copy)){throw 'E04A1_RULES_RETENTION_COPY_ALREADY_EXISTS'}
+        [IO.File]::Copy($path,$copy,$false);$copied=Descriptor $copy;$after=Descriptor $path
+        if($before.bytes -ne $copied.bytes -or $before.sha256 -ine $copied.sha256 -or $before.bytes -ne $after.bytes -or $before.sha256 -ine $after.sha256){throw 'E04A1_RULES_RETENTION_BYTE_MISMATCH'}
+        $items.Add(@{role=$key;original=$after;retainedCopy=$copied})
+    }catch{$failures.Add((Failure $_ ('rules-retain-'+$key)))}}
+    $record=@{schemaVersion=1;kind='E04A1_RULES_RAW_ARTIFACT_RETENTION';runId=$RunId;sourceHead=$script:Freeze.sourceHead;phase=$Phase;items=@($items);missing=@($missing);failures=@($failures);status=$(if($missing.Count -or $failures.Count){'PARTIAL_PRESERVED'}else{'COMPLETE'});observedUtc=[DateTime]::UtcNow.ToString('o');qualification='Exact owned byte copies; no independent loaded-memory or chronological-cache attestation.'}
+    Write-JsonNew (Owned 'artifacts/rules/retention.json') $record;return $record
+}
+function Check-RulesRetentionData($Retention) {
+    if($Retention.kind -cne 'E04A1_RULES_RAW_ARTIFACT_RETENTION' -or $Retention.status -cne 'COMPLETE' -or @($Retention.missing).Count -or @($Retention.failures).Count){throw 'E04A1_RULES_RETENTION_INCOMPLETE'}
+    $roles=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $generated=Rules-GeneratedPaths
+    $expected=[ordered]@{dll=$generated.dll;pdb=$generated.pdb;manifest=$generated.manifest;witness=(Owned 'logs/rules-runtime-witness.json');input=(Owned 'logs/rules-witness-input.json');topology=(Owned 'logs/rules-prelaunch-topology.json');before=(Owned 'logs/rules-source-before.json');after=(Owned 'logs/rules-source-after.json')}
+    foreach($entry in $Retention.items){
+        Require-RulesKeys $entry @('role','original','retainedCopy')
+        Assert-RulesDescriptor $entry.original $entry.original;Assert-RulesDescriptor $entry.retainedCopy $entry.retainedCopy
+        if(-not $expected.Contains($entry.role) -or -not $roles.Add($entry.role)){throw 'E04A1_RULES_RETENTION_ROLE'}
+        $copy=Owned ('artifacts/rules/'+[IO.Path]::GetFileName($expected[$entry.role]))
+        if($entry.original.path -ine $expected[$entry.role] -or $entry.retainedCopy.path -ine $copy -or $entry.original.path -ieq $entry.retainedCopy.path -or $entry.original.bytes -ne $entry.retainedCopy.bytes -or $entry.original.sha256 -ine $entry.retainedCopy.sha256){throw 'E04A1_RULES_RETENTION_COPY_OR_MEMBERSHIP'}
+    }
+    if(-not $roles.SetEquals([string[]]@('dll','pdb','manifest','witness','input','topology','before','after'))){throw 'E04A1_RULES_RETENTION_REQUIRED_ROLE_SET'}
+}
+function Check-RulesPreservation($EditorResult) {
+    if($EditorResult.rulesWitness.status -cne 'VALIDATED_FINITE_OWNED_PROCESS_RULES_POSTSTATE' -or $EditorResult.rulesRetention.status -cne 'COMPLETE'){throw 'E04A1_RULES_PREDECESSOR_VALIDATION_REQUIRED'}
+    Check-RulesRetentionData $EditorResult.rulesRetention
+    foreach($entry in $EditorResult.rulesRetention.items){$actual=Check-Descriptor $entry.original;$copy=Check-Descriptor $entry.retainedCopy;if($actual.bytes -ne $copy.bytes -or $actual.sha256 -ine $copy.sha256){throw 'E04A1_RULES_LIVE_RETAINED_DRIFT'}}
+    $paths=Rules-GeneratedPaths;$live=@(Plain-Files ([IO.Path]::GetDirectoryName($paths.dll)))
+    $members=[Collections.Generic.HashSet[string]]::new([string[]]$live,[StringComparer]::OrdinalIgnoreCase)
+    if(-not $members.SetEquals([string[]]@($paths.Values))){throw 'E04A1_RULES_LIVE_GENERATED_DIRECTORY_MEMBERSHIP_DRIFT'}
+    [void](Check-Descriptor $EditorResult.rulesValidation)
+    return @{editorResultValidated=$true;liveAndRetainedBytesMatch=$true;observedUtc=[DateTime]::UtcNow.ToString('o')}
+}
 function Editor-Build {
-    foreach($relative in @('Binaries','Intermediate','Plugins/E04ProfileProof/Binaries','Plugins/E04ProfileProof/Intermediate')){if(Test-Path -LiteralPath (Join-Path $script:Stage $relative)){throw 'E04A1_EDITOR_BUILD_REQUIRES_FRESH_STAGED_NATIVE_OUTPUTS'}}
-    foreach($relative in @('logs/yaml-module-selection.json','logs/build-dotnet-path.txt','logs/build-dotnet-sdk.txt','logs/build.log')){if(Test-Path -LiteralPath (Owned $relative)){throw 'E04A1_EDITOR_BUILD_EVIDENCE_ALREADY_EXISTS'}}
-    $receipt=Descriptor (Owned 'logs/yaml-artifact-receipt.json');$pathReceipt=Owned 'logs/build-dotnet-path.txt';$sdkReceipt=Owned 'logs/build-dotnet-sdk.txt'
-    $extra=@{E04A1_NATIVE_BOUNDARY_REQUIRED='1';E04A1_RUN_ID=$RunId;E04A1_SOURCE_HEAD=$script:Freeze.sourceHead;E04A1_SOURCE_ROOT=$script:Repo;E04A1_STAGED_PROJECT=(Join-Path $script:Stage 'WarhammerClient.uproject');E04A1_ARTIFACT_RECEIPT=$receipt.path;E04A1_ARTIFACT_RECEIPT_SHA256=$receipt.sha256;
-        E04A1_BUILD_BAT=$script:Freeze.toolPaths.buildBat;E04A1_CMD=$script:Freeze.toolPaths.cmd;E04A1_WHERE=$script:Freeze.toolPaths.where;E04A1_GET_DOTNET_BAT=$script:Freeze.toolPaths.getDotnetPath;E04A1_ENGINE_SOURCE=(Join-Path $EngineRoot 'Engine/Source');E04A1_DOTNET_EXE=$script:Freeze.toolPaths.dotnet;E04A1_DOTNET_VERSION=$script:Freeze.dotnetSdk.version;E04A1_DOTNET_WHERE_LOG=$pathReceipt;E04A1_DOTNET_SDK_LOG=$sdkReceipt;E04A1_UBA=(Owned 'uba');E04A1_BUILD_LOG=(Owned 'logs/build.log')}
-    foreach($v in $extra.Values){if($v -match '[%!^&|<>\r\n\x00]'){throw 'E04A1_AMBIGUOUS_BUILD_BATCH_VALUE'}}
-    $worker=@'
-$ErrorActionPreference='Stop'
-$batch=@(
- 'cd /d "%E04A1_ENGINE_SOURCE%"',
- 'call "%E04A1_GET_DOTNET_BAT%"',
- '"%E04A1_WHERE%" dotnet >"%E04A1_DOTNET_WHERE_LOG%"',
- 'set "E04A1_SELECTED_DOTNET="',
- 'set /p E04A1_SELECTED_DOTNET=<"%E04A1_DOTNET_WHERE_LOG%"',
- '(for %I in ("!E04A1_SELECTED_DOTNET!") do @set "E04A1_SELECTED_DOTNET=%~fI")',
- '(if /i not "!E04A1_SELECTED_DOTNET!"=="%E04A1_DOTNET_EXE%" (exit /b 97))',
- 'dotnet --version >"%E04A1_DOTNET_SDK_LOG%"',
- 'set "E04A1_SELECTED_SDK="',
- 'set /p E04A1_SELECTED_SDK=<"%E04A1_DOTNET_SDK_LOG%"',
- '(if not "!E04A1_SELECTED_SDK!"=="%E04A1_DOTNET_VERSION%" (exit /b 98))',
- 'call "%E04A1_BUILD_BAT%" WarhammerClientE04AEditor Win64 Development "-Project=%E04A1_STAGED_PROJECT%" -WaitMutex -NoUBA -NoVFS -Compiler=VisualStudio2022 -CompilerVersion=14.44.35229 -WindowsSDKVersion=10.0.22621.0 "-UBARootDir=%E04A1_UBA%" "-Log=%E04A1_BUILD_LOG%"'
-) -join ' && '
-& $env:E04A1_CMD /d /v:on /s /c $batch
-if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE
-'@
-    $p=Invoke-Root 'editor-build' ([Environment]::ProcessPath) @('-NoProfile','-NonInteractive','-Command',$worker) 1800 $false '' $extra;Require-RootPass $p
-    $resolved=[IO.File]::ReadAllLines((Need-File $pathReceipt));$sdk=[IO.File]::ReadAllLines((Need-File $sdkReceipt));if(-not $resolved.Count -or (Assert-Path $resolved[0]) -ine $script:Freeze.toolPaths.dotnet -or $sdk.Count -ne 1 -or $sdk[0] -cne $script:Freeze.dotnetSdk.version){throw 'E04A1_ACTUAL_DOTNET_SELECTION_MISMATCH'}
-    $log=Need-File (Owned 'logs/build.log');$text=$script:Utf8.GetString([IO.File]::ReadAllBytes($log));Safe-Text $text
-    if($text -notmatch '(?m)^Result: Succeeded\s*$' -or $text -notmatch '14\.44\.35229' -or $text -notmatch '10\.0\.22621\.0' -or $text -match '(?im)\b(?:Win32_Process\.Create|external process broker|using (?:XGE|FASTBuild|Incredibuild|remote executor))\b'){throw 'E04A1_EDITOR_BUILD_RESULT_OR_EXECUTOR_MISMATCH'}
-    $selection=Read-Json (Owned 'logs/yaml-module-selection.json')
-    if($selection.kind -cne 'E04A1_YAML_MODULE_SELECTION' -or $selection.runId -cne $RunId -or $selection.sourceHead -cne $script:Freeze.sourceHead -or $selection.target -cne 'WarhammerClientE04AEditor' -or $selection.fileReadLocksHeldThroughUbtExit -ne $true -or $selection.artifactReceipt.sha256 -ine $receipt.sha256){throw 'E04A1_ACTUAL_MODULE_SELECTION_MISMATCH'}
-    foreach($key in @('artifactReceipt','acquisitionResult','vendorBuildReceipt')){[void](Check-Descriptor $selection[$key])}
-    Check-StagedPluginClosure -RequireTargetReceipt
-    return @{log=Descriptor $log;process=$p.receiptArtifact;selection=Descriptor (Owned 'logs/yaml-module-selection.json');dotnetPath=Descriptor $pathReceipt;dotnetSdk=Descriptor $sdkReceipt;nativeFlags=Check-EditorFlags;targetReceipt=$script:Result.pluginClosure.targetReceipt.artifact;packaging='NOT_RUN'}
+    $localFailure=$null;$retentionAttempted=$false;$retention=$null
+    try {
+        foreach($relative in @('Binaries','Intermediate','Plugins/E04ProfileProof/Binaries','Plugins/E04ProfileProof/Intermediate')){if(Test-Path -LiteralPath (Join-Path $script:Stage $relative)){throw 'E04A1_EDITOR_BUILD_REQUIRES_FRESH_STAGED_NATIVE_OUTPUTS'}}
+        foreach($relative in @('logs/yaml-module-selection.json','logs/build-dotnet-path.txt','logs/build-dotnet-sdk.txt','logs/build.log')){if(Test-Path -LiteralPath (Owned $relative)){throw 'E04A1_EDITOR_BUILD_EVIDENCE_ALREADY_EXISTS'}}
+        $challenge=Prepare-RulesChallenge;$receipt=Descriptor (Owned 'logs/yaml-artifact-receipt.json')
+        $challengeDescriptor=Descriptor (Owned 'logs/rules-witness-input.json')
+        $extra=@{E04A1_NATIVE_BOUNDARY_REQUIRED='1';E04A1_RUN_ID=$RunId;E04A1_SOURCE_HEAD=$script:Freeze.sourceHead;E04A1_SOURCE_ROOT=$script:Repo;E04A1_STAGED_PROJECT=$challenge.stagedProject;E04A1_ARTIFACT_RECEIPT=$receipt.path;E04A1_ARTIFACT_RECEIPT_SHA256=$receipt.sha256;E04A1_RULES_WITNESS_INPUT=$challengeDescriptor.path;E04A1_RULES_WITNESS_INPUT_SHA256=$challengeDescriptor.sha256;E04A1_RULES_WITNESS_NONCE=$challenge.attemptNonce;
+            DOTNET_ROLL_FORWARD='LatestPatch';DOTNET_MULTILEVEL_LOOKUP='0';DOTNET_STARTUP_HOOKS='';DOTNET_ADDITIONAL_DEPS='';DOTNET_SHARED_STORE='';DOTNET_EnableDiagnostics='0';CORECLR_ENABLE_PROFILING='0';COR_ENABLE_PROFILING='0';COMPlus_EnableDiagnostics='0'}
+        # Direct frozen host: no Build.bat/SDK --version/UBT rebuild fallback.
+        $arguments=@($challenge.ubtAssembly.path,'WarhammerClientE04AEditor','Win64','Development',('-Project='+$challenge.stagedProject),'-WaitMutex','-NoUBA','-NoVFS','-NoUBTMakefiles','-Compiler=VisualStudio2022','-CompilerVersion=14.44.35229','-WindowsSDKVersion=10.0.22621.0',('-UBARootDir='+(Owned 'uba')),('-Log='+(Owned 'logs/build.log')))
+        $p=Invoke-Root 'editor-build' $script:Freeze.toolPaths.dotnet $arguments 1800 $false '' $extra $challenge.expectedWorkingDirectory
+        Require-RootPass $p
+        $after=Rules-Topology -ObserveOnly;Write-JsonNew (Owned 'logs/rules-source-after.json') $after
+        Assert-RulesValue $script:RulesTopologyBefore $after 'finiteTopologyAfter'
+        $retentionAttempted=$true;$retention=Retain-RulesArtifacts;$script:Result.rulesRetention=$retention
+        if($retention.status -cne 'COMPLETE'){throw 'E04A1_RULES_ALL_RAW_OUTPUTS_REQUIRED'}
+        $witnessPath=Owned 'logs/rules-runtime-witness.json';$witness=Read-Json $witnessPath;$topology=Read-Json (Owned 'logs/rules-prelaunch-topology.json')
+        $paths=Rules-GeneratedPaths
+        $actual=@{dll=Descriptor $paths.dll;pdb=Descriptor $paths.pdb;manifest=Descriptor $paths.manifest;inputContract=$challengeDescriptor;manifestBody=Read-Json $paths.manifest;parentMetadata=@();expectedChildEnvironment=$extra;expectedArgv=$arguments}
+        Require-RulesKeys $actual.manifestBody @('SourceFiles','EngineVersion')
+        $actual.parentMetadata=@(foreach($parent in $challenge.parentAssemblies){[void](Rules-FrozenInput $parent);Read-RulesMetadata $parent.path})
+        $metadata=Read-RulesMetadata $paths.dll $paths.pdb
+        $validated=Check-RulesWitnessData $challenge $topology $witness $p $actual $metadata $script:Freeze.rulesWitness
+        foreach($d in @($challenge.ubtAssembly,$challenge.buildAssembly,$challenge.rulesCacheLockAssembly)+@($challenge.parentAssemblies)+@($script:Freeze.rulesWitness.runtimeInputs)){[void](Rules-FrozenInput $d)}
+        $log=Need-File (Owned 'logs/build.log');$text=$script:Utf8.GetString([IO.File]::ReadAllBytes($log));Safe-Text $text
+        if($text -notmatch '(?m)^Result: Succeeded\s*$' -or $text -notmatch '14\.44\.35229' -or $text -notmatch '10\.0\.22621\.0' -or $text -match '(?im)\b(?:Win32_Process\.Create|external process broker|using (?:XGE|FASTBuild|Incredibuild|remote executor))\b'){throw 'E04A1_EDITOR_BUILD_RESULT_OR_EXECUTOR_MISMATCH'}
+        $selection=Read-Json (Owned 'logs/yaml-module-selection.json')
+        if($selection.kind -cne 'E04A1_YAML_MODULE_SELECTION' -or $selection.runId -cne $RunId -or $selection.sourceHead -cne $script:Freeze.sourceHead -or $selection.target -cne 'WarhammerClientE04AEditor' -or $selection.fileReadLocksHeldThroughUbtExit -ne $true -or $selection.artifactReceipt.sha256 -ine $receipt.sha256){throw 'E04A1_ACTUAL_MODULE_SELECTION_MISMATCH'}
+        foreach($key in @('artifactReceipt','acquisitionResult','vendorBuildReceipt')){[void](Check-Descriptor $selection[$key])}
+        Assert-RulesDescriptor (Descriptor $witnessPath) $selection.rulesWitness
+        $validation=@{schemaVersion=1;kind='E04A1_VALIDATED_RULES_WITNESS_JOIN';runId=$RunId;sourceHead=$script:Freeze.sourceHead;phase='EditorBuild';freezeManifest=Descriptor $FreezeManifestPath;inputContract=$challengeDescriptor;prelaunchTopology=$challenge.prelaunchTopologyReceipt;witness=Descriptor $witnessPath;ownedUbtProcess=$p.receiptArtifact;validated=$validated;peAndPortablePdb=$metadata;topologyAfter=Descriptor (Owned 'logs/rules-source-after.json');retention=Descriptor (Owned 'artifacts/rules/retention.json');installedSdkMetadata=$script:Freeze.dotnetSdk;installedSdkVersionCommandExecuted=$false;actualClr=@{runtimeFramework=$witness.process.runtimeFramework;runtimeVersion=$witness.process.runtimeVersion;processArchitecture=$witness.process.processArchitecture};limits=@('Trusted same-run metadata parsed as data; generated assembly never loaded into wrapper.','Actual CLR observation is distinct from installed SDK metadata; no dotnet --version execution.','Cache poststate and manifest/current source enumeration are direct facts; chronology and private Roslyn order are not direct observations.')}
+        Write-JsonNew (Owned 'logs/rules-validation.json') $validation
+        Check-StagedPluginClosure -RequireTargetReceipt
+        $answer=@{log=Descriptor $log;process=$p.receiptArtifact;selection=Descriptor (Owned 'logs/yaml-module-selection.json');directDotnetHost=$challenge.processHost;actualClr=$validation.actualClr;installedSdkMetadata=$script:Freeze.dotnetSdk;installedSdkVersionCommandExecuted=$false;rulesWitness=$validated;rulesRetention=$retention;rulesValidation=Descriptor (Owned 'logs/rules-validation.json');nativeFlags=Check-EditorFlags;targetReceipt=$script:Result.pluginClosure.targetReceipt.artifact;packaging='NOT_RUN'}
+        [void](Check-RulesPreservation $answer);return $answer
+    }catch{$localFailure=$_;throw}
+    finally{
+        $lateFailure=$null
+        if($null -ne $script:RulesTopologyBefore -and -not (Test-Path -LiteralPath (Owned 'logs/rules-source-after.json'))){
+            try{$after=Rules-Topology -ObserveOnly;Write-JsonNew (Owned 'logs/rules-source-after.json') $after;Assert-RulesValue $script:RulesTopologyBefore $after 'failedBuildTopologyAfter'}catch{$script:Errors.Add((Failure $_ 'rules-topology-after'));$lateFailure=$_}
+        }
+        if(-not $retentionAttempted -and $null -ne $script:RulesSourceLocks){
+            try{$retention=Retain-RulesArtifacts;$script:Result.rulesRetention=$retention}catch{$script:Errors.Add((Failure $_ 'rules-failure-retention'));$lateFailure=$_}
+        }
+        if($null -ne $script:RulesSourceLocks){
+            foreach($lock in $script:RulesSourceLocks){try{$lock.Dispose()}catch{$script:Errors.Add((Failure $_ 'rules-source-lock-close'));if($null -eq $lateFailure){$lateFailure=$_}}}
+            $script:RulesSourceLocks=$null
+        }
+        if($null -eq $localFailure -and $null -ne $lateFailure){throw $lateFailure}
+    }
 }
 function Response-Chain([string]$Path) {
     # Literal data only. UBT emits @shared.rsp (VCToolChain.cs:258-261,3184-3204).
@@ -1622,8 +1923,10 @@ function Check-Previous {
     $index=[Array]::IndexOf($script:Order,$Phase);$links=[Collections.Generic.List[object]]::new()
     for($i=0;$i -lt $index;$i++){$prior=$script:Order[$i];$root=Owned $prior.ToLowerInvariant();$c=Read-Json (Join-Path $root 'completion.json')
         if($c.schemaVersion -ne 1 -or $c.subset -cne $script:Subset -or $c.runtimeCallerProof -cne $script:RuntimeCallerProof -or $c.runId -cne $RunId -or $c.phase -cne $prior -or $c.sourceHead -cne $script:Freeze.sourceHead -or $c.executionPassed -ne $true -or $c.state -cne 'COMPLETE' -or $c.freezeManifestSha256 -ine (Digest $FreezeManifestPath)){throw 'E04A1E_SUCCESSFUL_SAME_SUBSET_PREDECESSOR_REQUIRED'}
-        $r=Check-Descriptor $c.result;$body=Read-Json $r.path;if($body.subset -cne $script:Subset -or $body.runtimeCallerProof -cne $script:RuntimeCallerProof -or $body.executionPassed -ne $true -or $body.phase -cne $prior -or $body.runId -cne $RunId){throw 'E04A1E_PREDECESSOR_RESULT_SUBSET_MISMATCH'}
-        foreach($d in $body.retainedArtifacts){[void](Check-Descriptor $d)};$links.Add(@{phase=$prior;completion=Descriptor (Join-Path $root 'completion.json');result=$r})
+        $r=Check-Descriptor $c.result;$body=Read-Json $r.path;if($body.subset -cne $script:Subset -or $body.runtimeCallerProof -cne $script:RuntimeCallerProof -or $body.executionPassed -ne $true -or $body.phase -cne $prior -or $body.runId -cne $RunId -or $body.sourceHead -cne $script:Freeze.sourceHead){throw 'E04A1E_PREDECESSOR_RESULT_SUBSET_MISMATCH'}
+        foreach($d in $body.retainedArtifacts){[void](Check-Descriptor $d)}
+        if($prior -ceq 'EditorBuild' -and $Phase -cin @('Discovery','Native','Audit')){[void](Check-RulesPreservation $body.editorBuild)}
+        $links.Add(@{phase=$prior;completion=Descriptor (Join-Path $root 'completion.json');result=$r})
     };return @($links)
 }
 function Output-Inventory {
@@ -1631,6 +1934,8 @@ function Output-Inventory {
     foreach($name in @('logs','reports','artifacts','fixtures')){foreach($p in Plain-Files (Owned $name)){$d=Descriptor $p;if($d.bytes -gt 64MB){throw 'E04A1_DATA_OR_STREAM_CAP_PRESERVE_OVERSIZE'};if($name -ceq 'reports'){$reportBytes+=$d.bytes};$items.Add($d)}}
     if([IO.Directory]::Exists((Artifact-Root))){foreach($p in Plain-Files (Artifact-Root)){$d=Descriptor $p;if($d.bytes -gt 64MB){throw 'E04A1E_COPIED_VENDOR_ARTIFACT_DATA_CAP'};$items.Add($d)}}
     foreach($phaseName in $script:Order){$root=Owned $phaseName.ToLowerInvariant();if([IO.Directory]::Exists($root)){foreach($p in Plain-Files $root){$items.Add((Descriptor $p))}}}
+    $rules=Rules-GeneratedPaths
+    foreach($path in $rules.Values){if([IO.File]::Exists($path)){$d=Descriptor $path;if($d.bytes -gt 64MB){throw 'E04A1_RULES_LIVE_DATA_CAP_PRESERVE_ORIGINAL'};$items.Add($d)}}
     if($reportBytes -gt 512MB){throw 'E04A1_REPORT_AGGREGATE_CAP'};return @($items)
 }
 
@@ -1682,6 +1987,7 @@ finally{
                 $script:Result.projectPluginCatalogAfter=@(foreach($root in @($script:Repo,$script:Stage)){Check-ProjectPluginMembership $script:Freeze.projectPluginMembership $root})
             }
             if($null -ne $fixtureBefore){$after=@(Fixture-Snapshot);if(($fixtureBefore|ConvertTo-Json -Depth 8 -Compress) -cne ($after|ConvertTo-Json -Depth 8 -Compress)){throw 'E04A1_FIXTURE_PRIMARY_BYTES_CHANGED'};$script:Result.fixturesAfter=$after}
+            if($Phase -cin @('Discovery','Native','Audit')){$editor=Read-Json (Owned 'editorbuild/result.json');$script:Result.rulesPreservationAfter=Check-RulesPreservation $editor.editorBuild}
             Check-Dependency;$script:Result.retainedArtifacts=@(Output-Inventory);[void](Phase-Budget)
         }catch{$script:Errors.Add((Failure $_ 'post-phase-preservation'));$script:Result.executionPassed=$false;$script:Result.status='FAIL_PRESERVATION_OR_OUTPUT_VALIDATION'}
         try{
