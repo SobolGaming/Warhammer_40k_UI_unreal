@@ -1459,7 +1459,7 @@ $batch=@(
  'set "E04A1_SELECTED_SDK="',
  'set /p E04A1_SELECTED_SDK=<"%E04A1_DOTNET_SDK_LOG%"',
  '(if not "!E04A1_SELECTED_SDK!"=="%E04A1_DOTNET_VERSION%" (exit /b 98))',
- 'call "%E04A1_BUILD_BAT%" WarhammerClientE04AEditor Win64 Development "-Project=%E04A1_STAGED_PROJECT%" -WaitMutex -NoUBA -Compiler=VisualStudio2022 -CompilerVersion=14.44.35229 -WindowsSDKVersion=10.0.22621.0 "-UBARootDir=%E04A1_UBA%" "-Log=%E04A1_BUILD_LOG%"'
+ 'call "%E04A1_BUILD_BAT%" WarhammerClientE04AEditor Win64 Development "-Project=%E04A1_STAGED_PROJECT%" -WaitMutex -NoUBA -NoVFS -Compiler=VisualStudio2022 -CompilerVersion=14.44.35229 -WindowsSDKVersion=10.0.22621.0 "-UBARootDir=%E04A1_UBA%" "-Log=%E04A1_BUILD_LOG%"'
 ) -join ' && '
 & $env:E04A1_CMD /d /v:on /s /c $batch
 if($null -eq $LASTEXITCODE){exit 99};exit $LASTEXITCODE

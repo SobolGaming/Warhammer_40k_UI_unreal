@@ -183,6 +183,16 @@ of actual compile/link flags and module-load evidence.
 Actual Editor `/EHsc` and `PLATFORM_EXCEPTIONS_DISABLED=0` must be demonstrated
 for both parser and probe. This observation does not prove the required A1G mode.
 
+The proof parser/probe modules use `PCHUsageMode.NoPCHs`, and the bounded UBT
+invocation explicitly passes `-NoVFS`. Installed ModuleRules/UEBuildModuleCPP
+source supports direct module definitions without shared PCH selection;
+TargetRules applies the explicit VFS argument after configuration. Freeze those
+primary implementations and response serialization/path normalization with the
+target/plugin discovery and receipt implementations. Keep the strict absolute
+stage-owned response/forced-definition path checks. This removes unresolved PCH
+topology from this proof; it is not a claim that the earlier candidate actually
+emitted an escaping path or that the revised build has run.
+
 Failure blocks the affected claim. Preserve partial artifacts and close its
 authority; repair/refreeze/review rather than weakening limits or changing the
 legacy corpus. Closed execution/evidence then requires fresh independent CODE

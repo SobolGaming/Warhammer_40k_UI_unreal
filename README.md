@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E parser proof now has canonical authored source; its fresh SOURCE review and all execution phases are pending. The plan records the evidence and next gate.
+The bounded E04-A1E parser proof's first SOURCE review is BLOCKED on missing primary API evidence. A source/packet amendment is authored; all execution phases remain NOT RUN. The plan records the evidence and next gate.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,11 +76,18 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 42 records 18 canonical authored paths for the bounded E04-A1E
+Plan revision 43 preserves the first [E04-A1E SOURCE BLOCKED report](docs/plans/research/2026-10-20-e04a-source-review-r1.md)
+and [factual record](docs/plans/evidence/2026-10-20-e04a-source-r1-result.json).
+It requires more primary plugin/receipt and compiler-path evidence and a fresh
+policy-clean assessment. No confirmed C++ defect or executed build failure is
+reported. The two proof modules now request NoPCHs and UBT explicitly requests
+-NoVFS; these source simplifications and the packet amendment remain UNEXECUTED.
+The original 18 canonical authored paths form the bounded E04-A1E
 Editor/raw-document proof. The [promotion record](docs/plans/evidence/2026-10-20-e04a-source-promotion.json)
 binds the source bytes; the [packet](docs/plans/research/2026-10-19-e04a-profile-packet.md)
 and [journal](docs/plans/evidence/2026-10-19-e04a-profile.md) define the subset.
-The candidate checkpoint/freeze and fresh affected SOURCE review are pending.
+The original promotion hashes are historical; later source changes need a new
+candidate checkpoint/freeze, neutral packet, RunId and affected SOURCE review.
 All eight phases are NOT RUN; eight suites, 38 unique IDs and 45 attempts are
 planned. Editor exceptions are enabled by target policy, while A1G's genuinely
 exception-disabled runtime caller remains required before full A1/RQ11/production

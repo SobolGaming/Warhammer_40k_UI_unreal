@@ -78,16 +78,25 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 42 (2026-10-20 UTC) is
-**CANONICAL_SOURCE_AUTHORED_PENDING_INDEPENDENT_SOURCE**. The exact 18-path
-Editor/raw-document proof is now in this repository; the
-[promotion record](docs/plans/evidence/2026-10-20-e04a-source-promotion.json)
-binds its unchanged source-preparation bytes. Read the actual
+Current A1E status at plan revision 43 (2026-10-20 UTC) is
+**SOURCE_BLOCKED_PRIMARY_API_AMENDMENT_AUTHORED**. The first independent
+[SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r1.md) is raw
+BLOCKED for `c6a9410`/run `010406`: missing plugin/receipt and compiler-path
+primary implementations, plus an excluded metadata-purpose projection. It
+reports no confirmed C++ defect. Its authority is CLOSED_DO_NOT_REUSE; all eight
+phases remain NOT RUN. The [factual record](docs/plans/evidence/2026-10-20-e04a-source-r1-result.json)
+preserves the report, runtime, scope deviation and physical-coverage limits.
+
+The two proof modules now request NoPCHs and the wrapper requests -NoVFS to
+remove the unresolved shared-PCH topology from this bounded proof. These changes
+are authored and UNEXECUTED, with primary API packet amendments in progress.
+The original 18-path [promotion record](docs/plans/evidence/2026-10-20-e04a-source-promotion.json)
+retains its historical bytes; it does not bind these later changed files. Read the actual
 [packet](docs/plans/research/2026-10-19-e04a-profile-packet.md) and
 [journal](docs/plans/evidence/2026-10-19-e04a-profile.md).
 
-The next gate is a coherent candidate checkpoint/freeze and fresh affected SOURCE
-review. All eight phases—Preflight, SupervisorControls, Configure,
+The next gate is a coherent amended candidate checkpoint/freeze and fresh affected
+SOURCE review with complete primary inputs and a new RunId. All eight phases—Preflight, SupervisorControls, Configure,
 DependencyBuild, EditorBuild, Discovery, Native and Audit—are NOT RUN. Eight
 suites, 38 unique input IDs and 45 attempts are planned counts. Installed Editor
 policy enables exceptions; genuinely exception-disabled A1G remains required
@@ -618,7 +627,19 @@ nor independence. Resolve actionable findings before completion.
 
 ### Standing migration review-packet consent — 2026-10-19
 
-The owner directly stated in this chat:
+The owner later directly clarified:
+
+> All reviews with private source/API are approved in perpetuity unless revoked explicitly.  This is a low stakes project.
+
+This explicitly includes the current E04-A1E packet and future migration reviews
+within the established necessary data scope and configured OpenAI Codex
+destination. Consent has no expiry and lasts until the owner explicitly revokes
+it; do not ask again for the same transmission scope and destination. This direct
+reply resolved the prior automatic review's E04 scope rejection before launch.
+Keep credentials and unrelated private sessions excluded. Candidate freeze,
+independent roles, truthful evidence and applicable execution gates still apply.
+
+The earlier owner statement in this chat remains preserved:
 
 > I approve all review packets.
 

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "recordKind": "CLOSED_FIRST_SOURCE_ASSESSMENT_NOT_EXECUTION_OR_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T01:36:10.8508652Z",
+  "sourceHead": "c6a9410a524649147f157c3c17a2b838c7e0fc81",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T010406Z-a7dec142",
+  "review": {
+    "role": "SOURCE",
+    "status": "BLOCKED",
+    "sessionId": "01a156e8-9de6-7d13-8fcb-ed2b4344013b",
+    "report": {
+      "bytes": 7896,
+      "sha256": "dfd6914ca1cc786d66f2a0ab6a1541e1d8019562898a4e6fa775f036427d4e7e",
+      "path": "docs/plans/research/2026-10-20-e04a-source-review-r1.md"
+    },
+    "confirmedCppDefectReported": false,
+    "blockers": [
+      "Missing admitted primary plugin/target discovery, target-receipt and UE-CmdLineArgs implementations",
+      "Missing primary response normalization/root/shared-response/PCH/generated-definition path contracts",
+      "Call56 emitted excluded selectedRanges.purpose strings; fresh policy-clean assessment required"
+    ],
+    "requiredBodyFiles": 47,
+    "requiredPhysicalRows": 12152,
+    "mechanicallyMatchedPhysicalRows": 12152,
+    "physicalCoverageIsNotComprehension": true,
+    "actualReadOnly": true,
+    "actualApprovalPolicy": "never",
+    "actualMemoryMode": "disabled",
+    "actualModel": "gpt-6.1-sol",
+    "actualEffort": "ultra",
+    "freshExec": true,
+    "actualFullGoObserved": true,
+    "byteIdenticalPromptTransport": false,
+    "promptDifference": "Two trailing CR/LF bytes; equality after trailing CR/LF removal",
+    "toolInputCount": 59,
+    "toolOutputCount": 59,
+    "pairingAnomalies": 0,
+    "metadataTruncatedCalls": [
+      1,
+      4,
+      56,
+      57
+    ],
+    "metadataRecoveryLimit": "Later selected recoveries retained; complete metadata visibility/comprehension not independently certified",
+    "limits": [
+      "App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED",
+      "Reported source observations and exact-row visibility do not establish SOURCE_PASS or runtime proof"
+    ]
+  },
+  "reviewProcess": {
+    "finalActiveProcesses": 0,
+    "timedOut": false,
+    "exitCode": 0,
+    "cleanupConfirmed": true,
+    "pid": 9376,
+    "cliExitIsNotSourceApproval": true,
+    "elapsedSeconds": 458.0237109,
+    "exitConfirmed": true
+  },
+  "authorityState": "CLOSED_DO_NOT_REUSE",
+  "remainingReviewLaunches": 0,
+  "nativeRunRootCreated": false,
+  "phases": [
+    {
+      "phase": "Preflight",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "SupervisorControls",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Configure",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "DependencyBuild",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "EditorBuild",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Discovery",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Native",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Audit",
+      "status": "NOT_RUN"
+    }
+  ],
+  "nativeSuiteCount": null,
+  "nativeInputCount": null,
+  "nativeAttemptCount": null,
+  "plannedCounts": {
+    "uniqueInputs": 38,
+    "suites": 8,
+    "attempts": 45
+  },
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "a2ScenariosRequired": 727,
+  "fullA1Acceptance": false,
+  "broaderGatesOpen": [
+    "A1G",
+    "A2",
+    "E04-B shared HUD/render/input",
+    "RQ11",
+    "RQ23/RQ24",
+    "full E04/M02",
+    "Linux",
+    "packaging",
+    "real-Core play"
+  ],
+  "standingTransmissionConsent": {
+    "automaticScopeRejectionResolvedBeforeLaunch": true,
+    "destination": "Existing configured OpenAI Codex review service",
+    "executionAndAcceptanceGatesUnchanged": true,
+    "expires": "Only on explicit owner revocation",
+    "credentialsAndUnrelatedSessionsExcluded": true,
+    "repeatedSameScopeConsentQuestionRequired": false,
+    "exactDirectUserText": "All reviews with private source/API are approved in perpetuity unless revoked explicitly.  This is a low stakes project.",
+    "scope": "Current and future migration private source/API review packets within established necessary review data scope"
+  },
+  "privateEvidence": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\root-raw-source-report-seal.original.json",
+      "bytes": 1000,
+      "sha256": "0680ee27685f06e94c5d4201d4ee5a5751d788a12c57e3759f6aa57fda072c10"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\runtime-evidence.final.selected.json",
+      "bytes": 8463,
+      "sha256": "d651ffe6465524b495ac599b9b5c0ca5b0ac26a7bdc6d0600da16714b0a0867f"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\completion.json",
+      "bytes": 2603,
+      "sha256": "f1e96a37bfda10d0513a899c72814108b71dab342062991f9d308b2c880175c6"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\owned-job-receipt.json",
+      "bytes": 125516,
+      "sha256": "0f0ad0fe38baa6de29dbd5d0cc8d6f8dc2b9e1285bd188b63ce404f5d659d051"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\actual-tool-input-ledger.json",
+      "bytes": 67675,
+      "sha256": "ba2f0aa8278d96241fadc3db867bbbce03906c07562ce54b7c858b96a9a260a9"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\actual-complete-tool-input-output-ledger.json",
+      "bytes": 1201501,
+      "sha256": "7219b04df76bd55512a3ec5af86ab001745fc9e8e8e19ab890ff0a402472f501"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\root-source-blocked-authority-closure.original.json",
+      "bytes": 4016,
+      "sha256": "62a87bb95d3524cfbba39f7f0b3a196d61260d78023ef27ee4524bdb34ec207b"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\root-postclose-source-observations.original.json",
+      "bytes": 3767,
+      "sha256": "aded1041d29eaf75dcd853d7cf255c16d7bfddd52f3cd3916e557969a3f07818"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c6a9410-20261020T010406Z-a7dec142\\direct-human-perpetual-review-consent.original.json",
+      "bytes": 1423,
+      "sha256": "6f372487f784bd6808bb96f039877c6ddc0b53fe6f4290a6ede52f9bab7cd95e"
+    }
+  ],
+  "nextStep": "Amend clean primary API evidence and any demonstrated source incompatibility, checkpoint coherent metadata/source changes, freeze a new neutral packet with a new RunId and obtain fresh affected SOURCE under standing consent",
+  "nextCandidateSourceAmendments": {
+    "status": "AUTHORED_UNEXECUTED_PENDING_FRESH_SOURCE",
+    "sourceParent": "c6a9410a524649147f157c3c17a2b838c7e0fc81",
+    "purpose": "Proof-only topology simplification; no observed escaping-path failure claimed",
+    "changes": [
+      "NoPCHs in parser/probe modules",
+      "-NoVFS in bounded UBT invocation",
+      "Packet freezes the needed primary discovery/receipt/response/PCH interfaces"
+    ],
+    "affectedFiles": [
+      {
+        "path": "Plugins/E04ProfileProof/Source/E04ProfileParser/E04ProfileParser.Build.cs",
+        "sha256": "cd9a17e7c2190b523a647ee004387756e9f6a8b3c38d170823e3fd093f2f6e0d",
+        "bytes": 486
+      },
+      {
+        "path": "Plugins/E04ProfileProof/Source/E04ProfileProbe/E04ProfileProbe.Build.cs",
+        "sha256": "528a292cd6a19409602d5ae831a8137e6bc05534d4159b9f98317e2ea0288ddf",
+        "bytes": 799
+      },
+      {
+        "path": "scripts/migration/Invoke-E04AProfileProof.ps1",
+        "sha256": "eaaac8dc3cf288430dfc4c3e15a6ae4f8081a500eaa3aa7bd981efc82016ac21",
+        "bytes": 157029
+      },
+      {
+        "path": "docs/plans/research/2026-10-19-e04a-profile-packet.md",
+        "sha256": "dd02dc83c8f2617f6387d94036869c30777058605a6cc4003ad28bcf2b37f225",
+        "bytes": 12779
+      }
+    ]
+  },
+  "checkpointValidation": {
+    "scopedWhitespacePolicy": "Standard git diff --check for all authored changes; report-only core.whitespace=-blank-at-eol permits its original Markdown hard-break spaces",
+    "nativeBuildTests": "NOT_RUN_PENDING_FRESH_SOURCE",
+    "defaultStagedWhitespace": "FAIL_ONLY_FIVE_INTENTIONAL_MARKDOWN_HARD_BREAKS_IN_BYTE_EXACT_RAW_REPORT",
+    "wrapperAstErrors": 0,
+    "rawReportHardBreakLines": [
+      14,
+      15,
+      18,
+      19,
+      22
+    ],
+    "jsonParse": "PASS",
+    "localLinksVerified": 307,
+    "rawReportBytesPreserved": true
+  }
+}

@@ -4,7 +4,8 @@ public class E04ProfileProbe : ModuleRules
 {
     public E04ProfileProbe(ReadOnlyTargetRules Target) : base(Target)
     {
-        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+        // Keep this boundary proof's generated definitions local and explicit.
+        PCHUsage = PCHUsageMode.NoPCHs;
         CppStandard = CppStandardVersion.Cpp20;
         bUseUnity = false;
         // A1E uses the actual Editor environment: global exceptions are ON.

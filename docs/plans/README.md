@@ -1,16 +1,23 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 42 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 43 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 42 records **CANONICAL_SOURCE_AUTHORED_PENDING_INDEPENDENT_SOURCE**
-for the 18-path E04-A1E Editor/raw-document proof. Read its actual
+Revision 43 records **SOURCE_BLOCKED_PRIMARY_API_AMENDMENT_AUTHORED** for
+E04-A1E. The first [SOURCE report](research/2026-10-20-e04a-source-review-r1.md)
+is raw BLOCKED on missing primary API inputs and an excluded metadata-purpose
+projection, with no confirmed C++ defect. The [factual record](evidence/2026-10-20-e04a-source-r1-result.json)
+closes that review/run authority; all eight phases remain NOT RUN. The two proof
+modules request NoPCHs and UBT requests -NoVFS in the authored, unexecuted amendment.
+Read the actual
 [packet](research/2026-10-19-e04a-profile-packet.md),
 [journal](evidence/2026-10-19-e04a-profile.md) and
 [source promotion record](evidence/2026-10-20-e04a-source-promotion.json).
-The candidate checkpoint/freeze and fresh affected SOURCE review are next; all
+The promotion record retains the original 18-path bytes. The amended candidate
+needs a new checkpoint/freeze, complete primary API inputs, new RunId and fresh
+affected SOURCE review; all
 eight phases are NOT RUN. Eight suites, 38 unique input IDs and 45 attempts are
 planned. Editor exceptions are enabled by target policy; genuinely disabled A1G
 runtime-caller proof remains mandatory before full A1 adoption. A2 keeps all
