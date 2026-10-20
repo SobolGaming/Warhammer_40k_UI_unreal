@@ -1,11 +1,20 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 57 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 63 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at plan revision 57 (2026-10-20 UTC) is
+Current A1E status at revision 63 is **SCOPED_SOURCE_REPAIRS_REQUIRED**.
+The [R5 summary](research/2026-10-20-e04a-scoped-r5-summary.md) and
+[factual record](evidence/2026-10-20-e04a-scoped-r5-result.json) preserve eight closed
+raw reports (four SOURCE_PASS, three BLOCKED, one CHANGES_REQUESTED), 490 captured
+tool pairs and zero root admissions. Root-confirmed source locking, map-category
+and manifest-control gaps require repair and fresh affected review. Both
+integrations are unused; all eight native phases remain NOT_RUN/no native RunRoot.
+Standing private-source/API review consent persists until explicitly revoked.
+
+Historical A1E status at plan revision 57 (2026-10-20 UTC) is
 **SCOPED_SOURCE_CHANGES_REQUESTED_RULES_OBSERVATION**. The closed
 [R4 summary](research/2026-10-20-e04a-scoped-r4-summary.md) and
 [factual record](evidence/2026-10-20-e04a-scoped-r4-result.json)

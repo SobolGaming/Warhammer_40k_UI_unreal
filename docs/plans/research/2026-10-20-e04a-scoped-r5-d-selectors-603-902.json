@@ -1,0 +1,150 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+  "subject": {
+    "sourceHead": "4c993181287e18e92da614af0e09a8d8ea92378a",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "campaignId": "E04A1E-SCOPED-4c99318-20261020T104640Z-54a3b913",
+    "scopeId": "D_SELECTORS_603_902",
+    "plannedRunId": "20261020T104640Z-54a3b913",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF"
+  },
+  "bindingVerification": {
+    "result": "MATCH",
+    "inputManifest": {
+      "bytes": 663185,
+      "sha256": "2074a2c2f0365efd1dcd2f1f0fbc44d45dee81ef9babf3f4eb977ff738336f49"
+    },
+    "runtimeFreeze": {
+      "bytes": 747173,
+      "sha256": "aa95f7b04cfb75458fa516a2add3fcff6c032f0fce51545436649baef9edabd3"
+    },
+    "scopeContract": {
+      "bytes": 86142,
+      "sha256": "d085775971ab49efecce56430edf88fbfa13bb04fd3421bd89a58fe5c97f5ceb"
+    },
+    "bootstrap": {
+      "bytes": 5460,
+      "sha256": "b3fc2229266afda6fbe92c7b9cb0f03fc714d9cd0ce611148542afa560b20121"
+    },
+    "ownCoverage": {
+      "bytes": 7638,
+      "sha256": "5d4278dae4458192519804551275bbdf727f4d753d7006d6a71c8e17c301f0c5"
+    },
+    "actualGo": {
+      "bytes": 2053,
+      "sha256": "36d59647dc5579ea495e94d074356dcffb7029ab149f095885968a1f1e519388"
+    },
+    "preparedPrompt": {
+      "bytes": 34668,
+      "sha256": "ee68cbd19f4c45c10029d10041d83d2a663a6970bd55f9732a5746030580d8f7"
+    },
+    "actualPromptFile": {
+      "bytes": 35908,
+      "sha256": "449DB5673F4B20FF42C92C3C33CD3FE755D46865E19D2A012E5C2089D5C0E19B"
+    },
+    "details": [
+      "Verified exact bound paths, byte counts and digests. Parsed all three common criteria records only at their bound absolute paths; each occurs exactly once with the matching descriptor in both panel inputFiles and frozenFiles.",
+      "Independently compared the own scope and prepared prompt against the pure contract using case-sensitive typed JSON comparisons, including subject, campaign/scope, duties, bindingRequirements, finiteRulesWitnessCriteria, global access, ownership and applicable material join. All compared values matched.",
+      "The actual prompt file contains the complete prepared prompt followed by the matching ROOT ACTUAL GO. Contract/template false and null values were retained; they were not inferred into authorization.",
+      "Head/base identities are root supplied and freeze bound; Git verification was not performed."
+    ]
+  },
+  "coverage": {
+    "mandatoryBodiesCompletelyRead": [
+      "SOURCE-BODY-054 physical rows 1-294",
+      "SOURCE-BODY-055 physical rows 1-142",
+      "SOURCE-BODY-056 physical rows 1-14",
+      "SOURCE-BODY-057 physical rows 1-196",
+      "SOURCE-BODY-096 physical rows 1-50",
+      "SOURCE-BODY-097 physical rows 1-88"
+    ],
+    "mandatoryBodyPhysicalRows": 784,
+    "mandatoryCompleteUnits": [],
+    "mandatorySelectedData": [
+      "Record8: every physical JSONL row 603-902, exactly 300 rows",
+      "Records9/10: complete positively selected catalog and field-policy records",
+      "Records7/11/12: material catalog, membership, project, root, receipt-policy and identity relationships"
+    ],
+    "additionalBodiesCompletelyRead": [
+      "SOURCE-BODY-001 rows 1-88",
+      "SOURCE-BODY-002 rows 1-17",
+      "SOURCE-BODY-016 rows 1-8",
+      "SOURCE-BODY-064 rows 1-271",
+      "SOURCE-BODY-065 rows 1-567",
+      "SOURCE-BODY-069 rows 1-445",
+      "SOURCE-BODY-078 rows 1-211",
+      "SOURCE-BODY-081 rows 1-1725",
+      "SOURCE-BODY-082 rows 1-998"
+    ],
+    "additionalCompleteBodyPhysicalRows": 4330,
+    "otherInspection": [
+      "Targeted source searches in BODY072/076; these were not complete BODY assessments.",
+      "Verified all98 BODY descriptor byte counts, SHA256 digests and physical counts: 49749 rows. This identity verification does not constitute substantive review of all98 bodies.",
+      "Compared all902 original descriptor identities and Plugins presence/values against the bound index to support complete incident-reference identification."
+    ],
+    "unreadScope": "No mandatory local body, unit, assigned row or assigned full selected record remains unread. The remaining83 bodies were not completely substantively reviewed here. Other selected-record content received only the stated necessary cross-reference or remained unread. Full runtime/build/cross-system graph assessment and BODY092-095/098 primary duties are outside this local assignment."
+  },
+  "dataAssessment": {
+    "originalCorrespondence": {
+      "completeAssignedRows": 300,
+      "uniqueOriginalPaths": 300,
+      "selectedFieldPresenceComparisons": 14700,
+      "presentFields": 2282,
+      "absentFields": 12418,
+      "differences": [],
+      "details": "Compared every selected field against its hash-bound original using exact-case keys and recursive JSON type/value comparisons, preserving array order, nested object key order and number spelling. Also compared the complete ordered absentSelectorFields and otherPresentTopLevelFieldNames. No duplicate exact top-level original keys were found."
+    },
+    "semanticReview": [
+      "Assessed all assigned scalar/structured selector values and absence groups, all668 module objects through149 complete ordered non-name signatures, and complete name identities against originals. Assigned selectorValues contain no explicit JSON null; absence was never converted to null or false.",
+      "Distinguished unspecified EnabledByDefault from explicit false and true. UBT defaults depend on plugin origin and the engine-default permission; literal metadata supplies no derived enablement. Citations: BODY069:83-98 and364-381; BODY082:118-154.",
+      "Assessed platform, target, configuration, architecture, cooked-data, developer-tool and commandlet restrictions separately. UBT's non-null empty module platform allow-list rejects all platforms; runtime module filtering has its own explicit-platform logic. Missing LoadingPhase retains the constructor Default; None does not request automatic startup loading. Citations: BODY064:207-212; BODY065:281-566; BODY081:1115-1445.",
+      "Preserved ProgramAllowlist separately from ProgramAllowList, including rows826/854/856/860. The supplied consumers request ProgramAllowList; program-specific checks are conditional on Program target type. No universal key-case equivalence was assumed.",
+      "Preserved Hidden as the strings \"true\" at row879 and \"false\" at rows880/881, separately from Boolean values. The source requests a Boolean field; these literals do not establish observed runtime hidden state. Citations: record8 rows879-881; BODY069:378.",
+      "Retained all localization, Verse, PythonRequirements, version-number and other selected metadata literally. Python requirement strings and hashes remained inert. No stored command or dependency installation was executed."
+    ],
+    "membershipRelationships": [
+      "All901 catalog-root descriptor identities match the index:895 Engine/Plugins and6 Engine/Platforms. Row902 is the project E04ProfileProof descriptor.",
+      "Current record7 and older record12 contain the same245 descriptors in the same order, with matching paths, sizes and SHA256 digests. All245 hash strings differ only in hexadecimal letter case; their original spellings were retained. Record12's older head/run and records9/12's historical originClosure references were not promoted into current execution evidence or followed as BODY grants.",
+      "All81 record7 sourceBindings excerpt descriptors resolve uniquely to positive BODY grants.",
+      "Record11's entire selected literalObject matches BODY016 and its original descriptor identity. Its Plugins[0] enables ProceduralMeshComponent, indexed row749.",
+      "Row902 matches BODY002: default-disabled, content-free, Win64/Linux, Runtime parser and Editor-restricted DeveloperTool probe, both Default phase. BODY001:12-22 explicitly selects Editor, pins bBuildAllModules=false and enables E04ProfileProof; BODY001:44-85 guards and captures selectors. These are source design facts, not observed effective Rules or native values."
+    ]
+  },
+  "incidentReferences": {
+    "catalogPluginReferenceOccurrences": 1561,
+    "assignedOutgoingOccurrences": 497,
+    "exactNameIncomingOccurrences": 547,
+    "exactNameInternalOccurrences": 299,
+    "uniqueIncidentOccurrences": 745,
+    "establishedCrossPartitionOccurrences": 445,
+    "additionalProjectReference": "Record11 literalObject.Plugins[0]: ProceduralMeshComponent -> row749",
+    "additionalExplicitRootRelationship": "BODY001 EnablePlugins and record7 targetReceiptPolicy.pluginOverrides select E04ProfileProof -> row902",
+    "method": "Enumerated every catalog Plugins occurrence with original source row, zero-based reference index, complete literal reference fields and indexed target identity. Preserved all incident endpoint mappings and conditional fields without deduplication or case folding.",
+    "preservedCondition": {
+      "source": "record8 row667, Plugins[0], AudioModulation",
+      "literalTarget": "MetaSound",
+      "exactIndexedTargetPresent": false,
+      "ordinalIgnoreCaseCandidate": "record8 row715, Metasound",
+      "assessment": "BODY082:283-304 supports an OrdinalIgnoreCase filtered UBT name dictionary. This consumer-specific candidate does not rewrite the literal identity or establish runtime resolution. AudioModulation is explicitly default-disabled and absent from record7 enabledPlugins. Full activation consequences remain with the independently assigned graph scopes."
+    },
+    "referenceSemantics": "Enabled=false suppresses enablement; Optional is distinct from Enabled and defaults false in the runtime constructor. Allow/deny, configuration and supported-platform restrictions remain conditional rather than unconditional edges. Citations: BODY078:35-185; BODY081:712-850."
+  },
+  "findingsRequiringChanges": [],
+  "errorsAndRecoveries": [
+    "Recovered an ambiguous JsonDocument byte-array overload by explicitly decoding verified bytes.",
+    "Recovered two truncated policy/inventory outputs with complete compact comparisons and rereads; no omitted output was credited as substantive coverage.",
+    "Recovered a truncated record7 projection through complete901 catalog joins,81 source-binding joins and rereading the relevant relationship fields.",
+    "Recovered strict original JSON failures caused by trailing commas and UTF8 BOMs. Reran all300 assigned comparisons with explicit trailing-comma support and BOM-aware decoding, retaining unchanged byte/hash identities. Eleven assigned originals required trailing-comma handling and eleven carried UTF8 BOMs.",
+    "Recovered an empty-list Join error using concrete lists, preserving [] separately from null. Corrected a derived ordinal rendering error with explicit1-13 indexing.",
+    "Raw scope-text equality differed because of formatting; complete typed case-sensitive comparisons established equality.",
+    "Corrected an earlier derived cross-boundary count of446: it included the unresolved MetaSound endpoint. The established cross-partition count is445, plus that separately preserved unresolved exact-name endpoint."
+  ],
+  "independenceAndLimits": {
+    "observedConduct": "Fresh scoped assessment; no implementation authorship, peer reports/graphs, prior verdicts, private sessions, credentials, delegation, resume/fork, memory use, mutation, helper execution, YAML parsing, build/test/native/GUI/network/GitHub execution or saved files.",
+    "runtimeEvidence": "Read-only/never is supplied by the current environment. Actual CLI/session identity, selector/isolation settings, disabled-memory enforcement and received-input provenance were not independently verified here. Those remain root-owned attestations; prohibited generated runtime/invocation/output bodies were not inspected.",
+    "materialUncertainty": "Actual effective selectors, discovery/cache lineage, loaded types/assemblies, native flags, receipts and activation remain unexecuted and unproved. This local data assessment does not supply the separate full graph or finite-witness producer/validator assessment.",
+    "authority": "SOURCE_PASS is local only. It is not the aggregate SOURCE gate, phase/native authorization or final acceptance. E04-A1G, A2 compatibility, Linux, rendering/HUD, packaging and independent final CODE/REQ gates remain open."
+  }
+}

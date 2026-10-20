@@ -78,7 +78,22 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 62 (2026-10-20 UTC) is
+Current A1E status at plan revision 63 (2026-10-20 UTC) is
+**SCOPED_SOURCE_REPAIRS_REQUIRED**. All eight R5 initial reviews for `4c99318`
+/ `20261020T104640Z-54a3b913` are closed. The [summary](docs/plans/research/2026-10-20-e04a-scoped-r5-summary.md)
+and [factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r5-result.json)
+preserve eight exact raw reports: four SOURCE_PASS, three BLOCKED and one
+CHANGES_REQUESTED, with 490 captured tool pairs. Root admissions remain zero;
+full acceptance audits are unfinished. Root independently confirmed BUILD F01's
+hash-before-lock gap and TARGET001/002's wrong-category map validation and missing
+explicit manifest controls. Repair those sources/tests and rederive fresh bindings.
+Both integrations are unused without GO/launch. All eight native phases are
+NOT_RUN, no native RunRoot exists and zero visible launches remain. No old approval
+or GO transfers. Preserve runtime limits, including PLUGIN2/TARGET3 same-turn
+context records and unexplained initial instruction descriptor variants. Standing
+private-source/API review consent persists until explicitly revoked.
+
+Historical A1E status at plan revision 62 (2026-10-20 UTC) is
 **RULES_WITNESS_AMENDMENT_ADOPTED_BINDINGS_PENDING**. Root adopted the
 [finite-witness SOURCE criteria](docs/plans/research/2026-10-20-e04a-source-composition-packet-v5.md)
 and [metadata source/input bindings](docs/plans/evidence/2026-10-20-e04a-rules-witness-amendment-adoption.json).

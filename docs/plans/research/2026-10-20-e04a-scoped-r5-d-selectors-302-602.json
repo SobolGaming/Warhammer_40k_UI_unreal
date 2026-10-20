@@ -1,0 +1,160 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+  "campaignId": "E04A1E-SCOPED-4c99318-20261020T104640Z-54a3b913",
+  "scopeId": "D_SELECTORS_302_602",
+  "subject": {
+    "sourceHead": "4c993181287e18e92da614af0e09a8d8ea92378a",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T104640Z-54a3b913",
+    "inputManifestPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\source-review-input-manifest.json",
+    "inputManifestSHA256": "ac14597e8fee841f6a6faa5cb70450ac2311b17b85d60c2adb57e7853e57bc21",
+    "runtimeFreezePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4c99318-20261020T104640Z-54a3b913\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+    "runtimeFreezeSHA256": "aa95f7b04cfb75458fa516a2add3fcff6c032f0fce51545436649baef9edabd3"
+  },
+  "bindingAssessment": {
+    "result": "MATCH",
+    "scopeContractSHA256": "d085775971ab49efecce56430edf88fbfa13bb04fd3421bd89a58fe5c97f5ceb",
+    "bootstrapSHA256": "e93afa83e8bfc4f8d46177237f2a6ce7eb9e82c31db411d4863e251bf9fa587e",
+    "coverageSHA256": "e61343c0ba8ca3bb8e5775911a4cd3ed466d59e78f8d9e862005db854902eb8e",
+    "launchPermissionSHA256": "1b0e5083f585faa00d45cc2934b284ce6c4cd2256d53cc3d9a33c6cf11901921",
+    "preparedPromptSHA256": "d4d431c686ba5a7e147371dc6c4a387e6d33341b74cd2bfbc983ce1b15c56305",
+    "actualPromptFileSHA256": "097BDF1573E1F4A716B73264F09D75D5BB007065B4C7E1AC22A2366BE7FEC070",
+    "details": [
+      "Verified exact descriptors, byte counts and hashes before dependent assessment. The complete selected subject and own scope exactly match the pure contract.",
+      "Parsed the prepared prompt's embedded criteria and independently compared its complete subject, scope, bindingRequirements, globalAccess, reviewDiscipline, scopeReportRequirements and launchBinding against the bound records.",
+      "The actual prompt file begins with the complete exact prepared prompt and appends the supplied ROOT ACTUAL GO. Template actualGo=false and authority=false values were preserved as template criteria, not treated as the actual consent record.",
+      "Read and parsed the three common criteria records through their exact bound descriptors. Each occurs exactly once with matching identity in both inputFiles and frozenFiles. Local/global BODY grants agree; all13 selected grants agree apart from the declared panel/common record4 path.",
+      "Revision labels remain root-supplied; no Git verification was executed."
+    ]
+  },
+  "coverage": {
+    "mandatoryEntireBodiesComplete": [
+      "SOURCE-BODY-054: physical1..294",
+      "SOURCE-BODY-055: physical1..142",
+      "SOURCE-BODY-056: physical1..14",
+      "SOURCE-BODY-057: physical1..196",
+      "SOURCE-BODY-096: physical1..50",
+      "SOURCE-BODY-097: physical1..88"
+    ],
+    "mandatoryPhysicalLines": 784,
+    "mandatoryCompleteUnits": [],
+    "fullSelectedRecordsComplete": [9, 10],
+    "record8": {
+      "completeAssignedPhysicalRows": "302..602 inclusive",
+      "assignedRows": 301,
+      "uniqueAssignedOriginPaths": 301,
+      "exactSelectedFieldComparisons": 14749,
+      "presentFields": 2488,
+      "absentFields": 12261,
+      "explicitNullFields": 0,
+      "mismatches": 0,
+      "modulesCompletelyAssessed": 587,
+      "pluginReferencesCompletelyAssessed": 607
+    },
+    "relationshipRecords": [
+      "record7: current closure identity, selected descriptors, roots, disabled/enabled names, absence/environment requirements and receipt policy",
+      "record11: complete selected project-descriptor values",
+      "record12: complete ordered descriptor-membership comparison"
+    ],
+    "additionalEntireBodiesComplete": [
+      "SOURCE-BODY-001: physical1..88",
+      "SOURCE-BODY-002: physical1..17",
+      "SOURCE-BODY-064: physical1..271",
+      "SOURCE-BODY-065: physical1..567",
+      "SOURCE-BODY-069: physical1..445",
+      "SOURCE-BODY-072: physical1..407",
+      "SOURCE-BODY-078: physical1..211"
+    ],
+    "additionalTargetedSourceReads": [
+      "BODY013: physical1239..1402, plus relevant search matches",
+      "BODY073: physical198..274 and424..450, plus relevant search matches",
+      "BODY081: physical298..505,1068..1269,1304..1548, plus relevant search matches",
+      "BODY082: physical107..135,279..313,690..728, plus relevant search matches",
+      "BODY074/BODY076: relevant search matches only"
+    ],
+    "inventoryVerification": "Recalculated98 BODY files and49749 physical lines; verified902 catalog rows and all13 selected-record descriptor hashes. Hash/count verification is not claimed as substantive review of unread bodies.",
+    "unreadScope": "No mandatory local body, complete unit, assigned row or required selected field remains unread. Remaining global bodies, unassigned selector semantics, unrelated portions of relationship records and complete graph/activation obligations are outside this local assessment."
+  },
+  "substantiveAssessment": [
+    {
+      "conclusion": "The assigned projection faithfully preserves the positively selected originals.",
+      "evidence": "Compared every assigned original descriptor's complete bytes/SHA256 identity and all49 exact-case field presences and values. Independently checked absence order, complete ordinal-sorted other-present names, selected JSON key uniqueness and lossless reconstruction of all1194 Modules/Plugins objects. Empty arrays, singleton arrays, false, empty strings, numeric spellings, nested property order and complete opaque strings were retained.",
+      "citations": [
+        "scope.duties[0..2]",
+        "reviewDiscipline.metadataPresence",
+        "reviewDiscipline.exactCaseDataRead",
+        "metadata record8 rows302..602",
+        "complete metadata records9/10"
+      ]
+    },
+    {
+      "conclusion": "Defaults and filters must remain consumer-specific.",
+      "evidence": "Absent EnabledByDefault remains unspecified; explicit false remains disabled. Engine/project default behavior differs. HasExplicitPlatforms with an empty supported/allowed list restricts applicability; it cannot be treated as an absent list. UBT's module platform-list null/empty distinction is also explicit. Reviewed all140 distinct module configurations, including commandlet, architecture, target/configuration and loading-phase conditions. Duplicate module names at distinct array indices were preserved. Alternate literal names such as AllowlistPrograms, IsHidden and bRequiresBuildPlatform were not silently converted into the readers' recognized names.",
+      "citations": [
+        "BODY069 physical83..99,262..418,433..443",
+        "BODY064 physical207..212",
+        "BODY065 physical165..255,281..567",
+        "BODY081 physical1115..1269,1307..1443",
+        "BODY082 physical118..135",
+        "BODY073 physical424..450"
+      ]
+    },
+    {
+      "conclusion": "The required incident reference occurrences were identified without collapsing literal case.",
+      "evidence": "Enumerated all1561 bound catalog Plugin-reference occurrences. Exact-name mapping yields607 outgoing,487 incoming and769 incident-union occurrences. Source-supported UBT OrdinalIgnoreCase resolution additionally preserves row207 Plugins[6] Name=\"TensorBoard\" -> row420 Tensorboard, and row310 Plugins[1] Name=\"InterchangeAxFAssets\" -> row309 InterchangeAxfAssets. Under that consumer resolution:607 outgoing,489 incoming,770 incident occurrences,326 internal occurrences and444 crossing the partition boundary. Original source rows, array indices, names and reference conditions were retained.",
+      "citations": [
+        "scope.duties[3]",
+        "materialJoins.SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+        "BODY082 physical283..304",
+        "metadata record8 rows207,309,310,420 and all incident occurrence mappings",
+        "BODY078 physical44..184",
+        "BODY072 physical168..406"
+      ]
+    },
+    {
+      "conclusion": "Membership and provenance joins agree without implying observed activation.",
+      "evidence": "All245 ordered record7/12 descriptors have identical paths and byte counts and equivalent complete digest identities. Their hash strings differ in letter case: every record7 lowercase digest uppercases exactly to its record12 digest. All match catalog origins. Both catalog roots match all895+6 indexed identities. There are52 assigned selected-membership rows. Record12's historical sourceHead/runId and record9's historical originClosure descriptor were retained as provenance, not promoted to current authority. Project plugin references, target enablement and receipt overrides remain separate inputs.",
+      "citations": [
+        "metadata records7,9,11,12",
+        "BODY001 physical12..22,44..86",
+        "BODY002 physical1..17",
+        "BODY013 physical1239..1393"
+      ]
+    },
+    {
+      "conclusion": "The inspected source supplies bounded prospective preservation checks.",
+      "evidence": "The wrapper checks raw descriptor membership/bytes, rejects reparse discovery paths and unexpected roots, checks required absences, controls the two named environment channels and validates staged receipt identity, overrides and default policy. Its limits explicitly preserve independent source-completeness and startup obligations. BODY001 pins bBuildAllModules=false and guards the later selector bridge; constructor text alone establishes no actual effective selector value. PythonRequirements strings were compared completely and interpreted as ordered inert platform/package data; no dependency command was executed.",
+      "citations": [
+        "BODY013 physical1239..1393",
+        "BODY001 physical12..22,44..86",
+        "bindingRequirements[6]",
+        "reviewDiscipline.finiteRulesWitnessCriteria",
+        "BODY096 physical26..49"
+      ]
+    }
+  ],
+  "findings": [],
+  "errorsAndRecoveries": [
+    "Python was unavailable; switched to independent PowerShell/.NET data-only reads.",
+    "A JSON serializer overload and an R/Invoke-History alias collision failed rendering; replaced them with explicit writer and uniquely named rendering functions.",
+    "Recovered truncated outputs through narrower rereads, complete identity comparisons, complete occurrence mappings and independently checked reconstruction. No truncated output alone received completeness credit.",
+    "Recovered original-descriptor BOM and trailing-comma parser errors using BOM-aware text reading and explicit inert JSON reader options.",
+    "Corrected an initial source-order comparison of other-present names to their actual ordinal-sorted representation.",
+    "Corrected an empty-array pipeline rendering mismatch by comparing explicit array counts and every element.",
+    "Corrected an erroneous present=true recovery label for absent row471 Plugins; reread with TryGetProperty and established actual absence. Rows472/475 Plugins are also absent.",
+    "Corrected an overly strict record7/12 literal hash-string equality check; independently verified all245 complete digest identities while preserving their case difference."
+  ],
+  "independenceAndExecution": {
+    "activity": "One read-only scoped assessment; no delegation, memory use, implementation import, stored-command evaluation, YAML parsing, build/test/engine/GUI/network/GitHub action or file mutation.",
+    "runtimeEvidenceLimit": "Developer context supplies read-only/never permissions. Actual reviewer selector/session/process isolation, received-input transmission and disabled-memory enforcement remain for root's independent verification. No generated reviewer runtime, invocation, receipt, ledger, stdout/stderr or last-message body was read."
+  },
+  "materialUncertaintyAndBoundary": [
+    "No unresolved local source/data defect was found.",
+    "The UBT case-insensitive name correspondence is source-supported. An equivalent runtime FString-map comparison was not established here; both case-different pairs remain explicit inputs to the separately owned runtime/cross-system graph assessment.",
+    "Complete runtime/build/cross-system graph semantics, effective configuration, cache/process lineage, native outputs and actual activation are not established by this data scope.",
+    "A1G, A2, Linux, rendering/HUD, packaging and separate final CODE/REQ gates remain open.",
+    "SOURCE_PASS applies only to D_SELECTORS_302_602 for this exact subject. It is not the aggregate SOURCE gate, phase/native GO or final acceptance."
+  ]
+}
