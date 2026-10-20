@@ -78,7 +78,35 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current E02 status at plan revision 40 (2026-10-20 UTC) is **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN** for executed source `5e92ba336da0570cb4b57def390ad3c58921e625`, run `20261019T202805Z-5ff8cb61`. Fresh affected SOURCE PASS preceded completed Preflight, SupervisorControls, Win64 Editor Build, Discovery, Numeric, WorldInput and Audit. Native results are 16 cases / 18174 assertions: Numeric 4/17041, Rendered 4/158 and Input 8/975. The six supervisor cases in three groups/five roots are separate. Six required PNGs, 4562 input events and 20 ray records were recorded. Audit retains its producer label `EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT`.
+Current E02 status at plan revision 41 (2026-10-20 UTC) is
+**BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**. Root combined the closed
+CODE/REQ assessments with separate administrative prerequisite verification and
+the new postsealed [approval-recovery supplement](docs/plans/research/2026-10-20-e02-final-requirements-approval-recovery.md)
+**SUPPLEMENTAL_PASS**. Original CODE r3, REQ r2 and supplement v4 remain raw
+BLOCKED; none is rewritten. The [combined disposition](docs/plans/evidence/2026-10-20-e02-bounded-acceptance.json)
+binds technical subject `3a1d179`/base `bd801233`, metadata review `d7e5076` and unchanged
+execution `5e92ba3`/run `202805`: 16 native cases / 18174 assertions, six separate supervisor cases (`SUP6`) and six PNG images.
+
+The parent reports independent retrieval of the original approval service objects.
+Their answer timestamp `21:42:55.923690Z` precedes Discovery creation `21:44:51.9464079Z`.
+Root/auditor inspected trusted selected complete objects, not a locally verified
+whole service response; partial-response/contextual-reply limits remain. The old
+relay timestamp/retrieval flag and all earlier procedural failures are preserved.
+The historical checkpoint `1c99360` checkpoint remains UNREVIEWED_FOR_ACCEPTANCE; its original
+OWN16 omission is unchanged, with RQ25/E09 open/unexecuted.
+
+This accepts only the bounded synthetic Windows proof. Full E02/M02, RQ23/RQ24,
+Linux, packages, real-Core play, full HUD/profiles, physical OS input/focus and the
+recorded pixel/provider/process/network limits remain open. Both windows were
+consumed; all native authority remains CLOSED_DO_NOT_REUSE, zero launches remain,
+and no publication/merge authority is added. Continue the next bounded E04-A1E
+source freeze/review under OWN13. Editor exceptions are actually enabled; A1G's
+exception-disabled runtime caller remains required before full A1/RQ11/adoption.
+No A1 configure/build/native result or SOURCE approval is established yet.
+
+The following revision 40 E02 hold is historical and superseded by that combined
+disposition; its original findings and evidence remain unchanged.
+Historical E02 status at plan revision 40 (2026-10-20 UTC) is **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN** for executed source `5e92ba336da0570cb4b57def390ad3c58921e625`, run `20261019T202805Z-5ff8cb61`. Fresh affected SOURCE PASS preceded completed Preflight, SupervisorControls, Win64 Editor Build, Discovery, Numeric, WorldInput and Audit. Native results are 16 cases / 18174 assertions: Numeric 4/17041, Rendered 4/158 and Input 8/975. The six supervisor cases in three groups/five roots are separate. Six required PNGs, 4562 input events and 20 ray records were recorded. Audit retains its producer label `EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT`.
 
 Root closed execution at `2026-10-19T22:00:44.9846603Z`. All hidden/visible authority is **CLOSED_DO_NOT_REUSE**; both approved windows were consumed, zero remain, and no retry or merge is authorized. The exact owner answer **Yes.  Go ahead.** at `2026-10-19T21:42:57Z` was received through a trusted transcript relay; the original message was not independently retrieved. The [current factual record](docs/plans/evidence/2026-10-19-e02-5e92-result.json) binds approval, raw reports, closed evidence and execution-source seals. A later documentation checkpoint does not change the executed source identity.
 

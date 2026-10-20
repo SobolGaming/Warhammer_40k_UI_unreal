@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "PUBLIC_ROOT_COMBINED_BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T00:50:10.7937124Z",
+  "status": "BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED",
+  "metadataReviewHead": "d7e5076c753c934b040592a28c8b1118fababd83",
+  "technicalReviewedSubject": "3a1d17902f6fa94b6009c0cae573da8bf7dff063",
+  "comparisonBase": "bd801233cc9989e0ae146a3be7b136d26dc73183",
+  "executedSource": "5e92ba336da0570cb4b57def390ad3c58921e625",
+  "runId": "20261019T202805Z-5ff8cb61",
+  "rootDisposition": "Root combines the distinct sealed technical assessments with the separately established administrative prerequisite/recovery facts for this bounded synthetic Windows proof. No raw verdict is rewritten. Full E02/M02 and broader migration acceptance remain open.",
+  "code": {
+    "rawVerdict": "BLOCKED",
+    "sessionId": "01a1564c-8ace-7c02-a384-57d8311c746f",
+    "substantiveFinding": "No confirmed defect requiring change within the assessed cumulative scope",
+    "administrativeB1": "Original affected SOURCE PASS and exact pre-execution sourceReviewed bindings separately verified by root after the initial report was sealed",
+    "closure": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\operator-3a1d179-20261019T220216Z\\FINAL_CODE-r3.root-closure.json",
+      "bytes": 6527,
+      "sha256": "15DE04D265ECEBB663ED96EB64771ECA49916DE1099417CA2CD481BE05B2972D"
+    },
+    "verification": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\operator-3a1d179-20261019T220216Z\\root-source-prerequisite-verification.OPERATOR_ONLY.json",
+      "bytes": 22016,
+      "sha256": "2780BA6D4E557B5BAC18C72007C252169FB9D644D4FE86D30923E7081844993C"
+    }
+  },
+  "requirements": {
+    "initialRawVerdict": "BLOCKED",
+    "initialSessionId": "01a15648-7d6b-74a0-a767-0314f573d2b1",
+    "v4RawVerdict": "BLOCKED",
+    "v4SessionId": "01a15699-0c63-7a43-8b17-0f8186062842",
+    "v4Closure": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\operator-3a1d179-20261019T220216Z\\FINAL_REQ-postseal-supplement-v4.root-closure.BLOCKED_ADMIN.json",
+      "bytes": 8011,
+      "sha256": "E0B83579652051FF3162A901C58E0A7E14C1277701A0041B669AA3464A67D801"
+    },
+    "newSupplementRawVerdict": "SUPPLEMENTAL_PASS",
+    "newSupplementSessionId": "01a156c0-697c-7793-90de-68bada024e03",
+    "newSupplementReport": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\admin-recovery-20261020T003308Z\\last-message.txt",
+      "bytes": 4906,
+      "sha256": "D62613C48DD588C39E14F5EEF2EC01CC9E2751C2A334BAB52453F9DF79C23452"
+    },
+    "newSupplementToolAudit": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\admin-recovery-20261020T003308Z\\literal-command-scope-audit.PROPOSED.OPERATOR_ONLY.json",
+      "bytes": 125191,
+      "sha256": "7FEF40F74796672BE121C6885243BAF7386C9B444E37E95E965B920977E20944"
+    },
+    "scope": "Two remaining postsealed administrative questions only; new context, not a resumed or new blind initial/full technical assessment; no current CODE verdict supplied."
+  },
+  "originalApproval": {
+    "serviceAnswerSentAt": "2026-10-19T21:42:55.923690+00:00",
+    "unchangedOldRelayAnswerUtc": "2026-10-19T21:42:57Z",
+    "localReceiptUtc": "2026-10-19T21:44:19.1422716Z",
+    "discoveryCreationUtc": "2026-10-19T21:44:51.9464079Z",
+    "discoveryResumeObservationUtc": "2026-10-19T21:44:51.9542284Z",
+    "questionMessageId": "Sentinel_47f064a6f5a88191aa2dc3fe11119efc",
+    "answerMessageId": "Sentinel_e9e9228c10e48191b6d4a41bc63083e9",
+    "answer": "Yes.  Go ahead.  ",
+    "recovery": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\admin-recovery-20261020T003308Z\\new-original-approval-evidence.original.json",
+      "bytes": 3446,
+      "sha256": "6FC9DAA042B7B66844C08C637DD97822F5A6C6E61FC8FB95C7E7DA442C47D7EA"
+    },
+    "trust": "Parent reports independent room-service retrieval. Root and auditor inspected selected complete objects supplied through trusted delegation; neither independently invoked that service locally. Response partial:true, explicit reply edge absent, association contextual. Original false retrieval flag and relay timestamp remain unchanged. No retroactive/new permission."
+  },
+  "checkpointClarification": {
+    "commit": "1c99360f1160a9d0fa234bbc5131dcc7c60da7fb",
+    "currentClassification": "UNREVIEWED_FOR_ACCEPTANCE",
+    "originalOmissionPreserved": true,
+    "historicalOwn16ComplianceEstablished": false,
+    "independentApprovalEstablished": false,
+    "rq25": "OPEN",
+    "e09": "NOT_RUN"
+  },
+  "sourceAndRun": {
+    "nativeCases": 16,
+    "nativeAssertions": 18174,
+    "numericCases": 4,
+    "numericAssertions": 17041,
+    "renderedCases": 4,
+    "renderedAssertions": 158,
+    "inputCases": 8,
+    "inputAssertions": 975,
+    "supervisorCasesSeparate": 6,
+    "requiredPngs": 6,
+    "inputEvents": 4562,
+    "rayRecords": 20,
+    "producerAuditLabel": "EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT",
+    "historicalResult": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-19-e02-5e92-result.json",
+      "bytes": 21213,
+      "sha256": "D4EFFFC6452B41EB6D8E00FE8B8C3A5B709469B2DD01D41FD23ABC30D768BA6D"
+    }
+  },
+  "runtimeAndProcedure": {
+    "actualRuntime": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\admin-recovery-20261020T003308Z\\runtime-evidence.final.selected.json",
+      "bytes": 4651,
+      "sha256": "392BC2D685B9A604FDE12B10C259C394D251ABF7D2126CAC185B0BD32D05B89F"
+    },
+    "actualInputs": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\admin-recovery-20261020T003308Z\\actual-tool-input-ledger.json",
+      "bytes": 31613,
+      "sha256": "99E6598F881A0354C8CF82562CB29D25E7293969DBD8620E34FC9359883F22CC"
+    },
+    "actualInputsOutputs": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\admin-recovery-20261020T003308Z\\actual-complete-tool-input-output-ledger.json",
+      "bytes": 108904,
+      "sha256": "EC2445F099B438AD2A7E45109338EEC7C4C606DEB29FB683EF5EE32014AE4E8D"
+    },
+    "initialSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\admin-recovery-20261020T003308Z\\root-initial-report-seal.v2.OPERATOR_ONLY.json",
+      "bytes": 2595,
+      "sha256": "560D8FDF1897A919DB7A7328B24DDF05EF46E81E03DCFDCC4468FCD5ED0DEDED"
+    },
+    "rootInspection": "Root read all 20 literal wrappers, complete new report and selected runtime; rehashed 28 adopted descriptors without drift on clean d7e5076. Adopts the finite helper audit of all actual commands/outputs. Recorded input/output is not OS argv/PID attestation.",
+    "actualReadOnly": true,
+    "actualApprovalNever": true,
+    "actualMemoryMode": "disabled",
+    "lowerMemoryFeatureOsArgvPidNetworkEnforcement": "UNVERIFIED",
+    "newProcedureDeviations": "Permission read used a 7000-byte guard/full 37-row identity object instead of a 6000-byte guard/explicit selection; actual 2057-byte output below both limits. Suppressed Discovery attempt gets zero content credit; recovered in smaller chunks. JSON-coerced invalid timestamp deltas discarded/replaced by literal parsing. No body-scope/current-CODE leak or actual text overflow established. Earlier count/recovery/EOF/selector failures remain preserved.",
+    "initialSealFailure": "Bare false caused the first 4-byte null seal; preserved. Separate corrected v2 seal preceded root report-body read.",
+    "countLabelCorrection": "Raw report/captured equality labels say 23 approval / 21 pending fields; actual explicit/granted selectors are 22 / 19. All selected fields compared; raw report is unchanged. Scope audit independently counts the actual lists.",
+    "finiteAuditCounts": {
+      "inputWrappers": 20,
+      "literalCommands": 29,
+      "pairedOutputs": 20,
+      "successfulPhysicalChunks": 22,
+      "actualSourceRows": 627,
+      "maxSourceRowsPerCommand": 40,
+      "maxJoinedTextUtf8Bytes": 4396,
+      "descriptorMismatches": 0,
+      "ungrantedBodyDisclosures": 0,
+      "currentCodeBodyReads": 0,
+      "capturedTruncations": 0
+    }
+  },
+  "limits": [
+    "Synthetic Windows scene and bounded scripted viewport input only.",
+    "Same-effective-pixel 1e-4 inch / one physical pixel checks; nominal fractional-point deviations up to about 0.09801 inches remain.",
+    "Two C4701 warnings retained; no confirmed runtime defect established by the report.",
+    "Linux, packages, real-Core play, full HUD/profiles, physical OS input/focus, Known Documents provider/target/present-file branch, lower process/network internals remain unverified/open.",
+    "Original E01 30-second FAIL/UNKNOWN and narrow SLOW120 acceptance unchanged; all earlier failures remain.",
+    "RQ23/RQ24/full E02/M02/E04/G-RESEARCH/G-IMPLEMENT remain open.",
+    "A1E source preparation and dependency acquisition only; no A1 source review/configure/build/native acceptance inferred."
+  ],
+  "operationClosed": true,
+  "nativeAuthority": "CLOSED_DO_NOT_REUSE",
+  "visibleWindowsConsumed": 2,
+  "visibleWindowsRemaining": 0,
+  "additionalNativeBuildGuiAuthority": false,
+  "publicationOrMergeAuthority": false,
+  "privateRootDisposition": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E02-final-review\\admin-recovery-20261020T003308Z\\root-combined-bounded-disposition.original.json",
+    "bytes": 9594,
+    "sha256": "7771E91B5D7069809883D87449307522A945CA259EC7E0BB741FC4D98BB258C0"
+  },
+  "publicSupplementalReport": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-20-e02-final-requirements-approval-recovery.md",
+    "bytes": 4906,
+    "sha256": "D62613C48DD588C39E14F5EEF2EC01CC9E2751C2A334BAB52453F9DF79C23452"
+  }
+}

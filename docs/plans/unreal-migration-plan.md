@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 40 — EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN. Executed5e92ba3/run202805 retains native16/18174, separate SUP6 and six PNGs. Final3a1d179 CODE r3, REQ r2 and limited postsealed supplement v4 are sealed raw BLOCKED; original approval-provenance clarification remains pending. Historical checkpoint omission is now conservatively clarified, not retroactively repaired. Native authority remains closed.
+**Revision:** 41 — BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED. Root combined distinct sealed technical assessments with separate prerequisite verification and postsealed administrative recovery SUPPLEMENTAL_PASS. Raw prior BLOCKED reports and all failures remain unchanged. Native authority is closed; next is E04-A1E source freeze/review, with A1G still required.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,40 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 40 changes
+### Revision 41 changes
+
+Root records **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED** for the
+unchanged synthetic Windows proof. Technical reviewed subject remains `3a1d179`,
+comparison base `bd801233` and execution `5e92ba3`/run `202805`; the new limited
+administrative review bound clean metadata checkpoint `d7e5076`. The
+[approval-recovery supplement](research/2026-10-20-e02-final-requirements-approval-recovery.md)
+is SUPPLEMENTAL_PASS for the two remaining administrative findings only. Root
+combines it with the distinct closed technical assessments and separate SOURCE
+prerequisite verification. Original CODE r3, REQ r2 and supplement v4 remain raw
+BLOCKED. The [combined disposition](evidence/2026-10-20-e02-bounded-acceptance.json)
+records exact reports/runtime/audit identities and the narrow acceptance limits.
+
+Recovered original service objects place the answer before the first launch.
+The parent reports independent retrieval; root/auditor received trusted selected
+complete objects, not a locally verified whole service response. Partial response
+and absent explicit reply-edge qualifications remain, as do the original relay
+timestamp/false retrieval flag. Historical checkpoint `1c99360` remains UNREVIEWED_FOR_ACCEPTANCE;
+its original omission/noncompliance and open RQ25/E09 are preserved.
+
+All execution authority is CLOSED_DO_NOT_REUSE, both windows consumed, zero remain.
+16 native cases / 18174 assertions, six separate supervisor cases (`SUP6`), six PNG images and effective-pixel precision limits
+are unchanged. Full E02/M02, RQ23/RQ24, Linux, packages, real-Core play, full HUD/
+profiles and the recorded physical-input/provider/process/network gaps remain open.
+No publication or merge authority follows this root disposition.
+
+Continue E04-A1E's source freeze and affected SOURCE review: 18 source paths,
+eight proposed suites/38 inputs/45 attempts and acquired pinned yaml-cpp source.
+Actual Editor exceptions are ON. E04-A1G's real exception-disabled runtime caller
+remains required before full A1/RQ11/adoption; A2 keeps 727 compatibility scenarios
+and E04-B retains shared HUD/render/input proof. No A1 configure/build/native test
+has run and no affected SOURCE verdict is established yet.
+
+### Revision 40 history
 
 Final reviewed candidate `3a1d17902f6fa94b6009c0cae573da8bf7dff063`, against
 cumulative base `bd801233cc9989e0ae146a3be7b136d26dc73183`, now has closed
@@ -366,7 +399,7 @@ historical routing does not describe the current acceptance disposition.
 
 **Review status:** Normal full-chain run `20261017T044903Z-b0169768` completed on executed source `d1189592a5f99bdee58cea25ae8546e5ee2e3623` and packet revision 7. Preflight, verified runtime reuse, Capture, auxiliary privacy inspection, exact-byte promotion, Native and Audit completed in order. Actual results are 87 Python units in 15.167 seconds, 14 Capture checks including source/runtime/schema checks, 132 unique native successes and two automated evidence checks. The 135 pure PowerShell controls with 39 stable inputs are separate pre-execution evidence. All six real editor-settings before/after observations matched, alongside UBT/Config and same-run wire checks. Status is **EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING**; finalize the factual/documentation freeze before launching the separate fresh final CODE and REQ contexts under OWN15. Neither final context has launched. Execution is stopped. Historical `030835` retains its omitted six-path comparison as UNVERIFIED. Full E01/M01/M02, G-RESEARCH/G-IMPLEMENT, production responsiveness, the original 30-second budget, UE HTTP, rendering, packaging and Linux remain open. [Factual result](evidence/2026-10-16-e01-slow120-result.json); current and historical detail in Section 0.8.
 
-**Current assignment: finalize and freeze the factual record and current documentation for completed normal run `20261017T044903Z-b0169768`, then launch separate fresh cumulative CODE and REQ assessments under OWN15.** Executed source `d1189592a5f99bdee58cea25ae8546e5ee2e3623` and packet revision 7 have a completed same-run chain and real six-path settings observations; no further phase is currently running. The current status is EXECUTION_EVIDENCE_RECORDED_FINAL_REVIEW_PENDING. Final review launch waits for the factual/documentation freeze; neither final context has launched. Keep all raw evidence, process receipts, earlier reports, historical `030835` UNVERIFIED settings criterion and the original 30-second FAIL/UNKNOWN. Final acceptance requires both current independent reports with no unresolved acceptance blockers. After acceptance of this bounded prerequisite, advance to the next E02 packet gate under the existing plan; do not infer broader E01/M01/M02 or implementation acceptance. E02 is unchanged planning only.
+**Current assignment: freeze and obtain independent affected SOURCE review for the next bounded E04-A1E Editor/raw-document proof under OWN13.** E02 has BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED through the separate combined disposition in Section 0.9; original raw BLOCKED reports/failures remain unchanged. Its native/GUI authority is CLOSED_DO_NOT_REUSE, both windows consumed and zero launches remain. A1E source authoring/dependency acquisition are preparation only. Actual Editor exceptions are enabled; a genuine exception-disabled A1G runtime caller remains required before full A1/RQ11/production adoption. A2 keeps 727 scenarios and E04-B owns shared HUD/render/input proof. No A1 configure/build/native phase or acceptance has occurred. Full E02/M02/E04, RQ23/RQ24, Linux, packages, real-Core play and broader gates remain open. No publication or merge authority is added.
 
 
 The fresh normal `044903` run supplies its own real six-path editor-settings
@@ -1134,6 +1167,30 @@ Supporting evidence:
 The [BOOT01 packet](research/2026-10-16-bootstrap-and-native-parser.md) specifies its files, 30-minute process timeout, staging/log/output roots, cleanup and standard per-user cache/default-empty-UBT-config side effect. OWN11 is its execution authorization; results must be recorded separately. Other packets finalize exact outputs before authorization. Cleanup touches only resolved packet-owned generated paths; never shared caches/user data/engine/siblings. A failed runtime proof returns to client staging or its external supplier, never Core edits here. E03B/E05–E08 remain later acceptance except a named architecture subset. A proposed packet alone is never a passing result or execution authorization.
 
 ### 0.9 Current E02 packet gate — 2026-10-20 UTC
+
+Current status is **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**.
+The [combined disposition](evidence/2026-10-20-e02-bounded-acceptance.json)
+binds the unchanged technical subject `3a1d179`/base `bd801233`, executed source `5e92ba3`/
+run `202805` and new administrative review of `d7e5076`. The
+[recovery supplement](research/2026-10-20-e02-final-requirements-approval-recovery.md)
+is SUPPLEMENTAL_PASS for original-approval provenance and current checkpoint-status
+clarification. Root separately verified the withheld original SOURCE prerequisite.
+The initial CODE/REQ and v4 reports remain raw BLOCKED, with original procedural
+failures preserved. The new review is a limited postsealed context, not a resumed
+or new blind full technical assessment, and received no current CODE verdict.
+
+The recovered service answer `21:42:55.923690Z` preceded local receipt `21:44:19.1422716Z`
+and Discovery creation `21:44:51.9464079Z`. Parent-reported independent retrieval is
+supported here by trusted selected complete objects; partial-response, contextual
+reply association and lack of a locally verified service call remain explicit.
+Historical checkpoint `1c99360` stays UNREVIEWED_FOR_ACCEPTANCE without rewriting its omission.
+
+The narrow disposition credits 16 native cases / 18174 assertions, six separate supervisor cases (`SUP6`) and six PNG images.
+All existing effective-pixel/settings/physical-input/provider/process/network
+qualifications remain. Both windows were consumed and authority is CLOSED_DO_NOT_REUSE
+with zero remaining launches. Full E02/M02, Linux, packages, real-Core/full HUD play,
+RQ23/RQ24 and broader gates remain open. No new execution, publication or merge is
+authorized. The following revision 40 hold is historical.
 
 Current status is **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN**, executed
 source `5e92ba336da0570cb4b57def390ad3c58921e625`, run

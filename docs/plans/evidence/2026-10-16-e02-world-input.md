@@ -1828,3 +1828,45 @@ atomic snapshot. Current status is
 `CLOSED_DO_NOT_REUSE`, both windows consumed, zero remain. Full E02/M02, Linux,
 packages, real-Core play, full HUD/profile behavior and all earlier fidelity and
 process/settings limits remain open. No publication or merge authority is added.
+
+## Bounded synthetic Windows acceptance — 2026-10-20 UTC
+
+Root records **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED** through the
+[combined disposition](2026-10-20-e02-bounded-acceptance.json). Executed source `5e92ba3`/
+run `202805`, reviewed technical subject `3a1d179`/base `bd801233`, 16 native cases / 18174 assertions,
+six separate supervisor cases (`SUP6`) and six required PNG images are unchanged. The new limited
+[approval-recovery report](../research/2026-10-20-e02-final-requirements-approval-recovery.md)
+is raw SUPPLEMENTAL_PASS on the two remaining administrative questions, reviewing
+clean metadata checkpoint `d7e5076`. It received no current CODE verdict and is not
+a new blind initial/full technical assessment. CODE r3, REQ r2 and v4 stay BLOCKED;
+root combines them with separate SOURCE prerequisite verification and this recovery.
+
+Original answer service time `21:42:55.923690Z` precedes local receipt `21:44:19.1422716Z`,
+Discovery creation `21:44:51.9464079Z` and resume observation `21:44:51.9542284Z`.
+The parent reports independent room-service retrieval; root/auditor saw trusted
+selected complete objects, not a locally verified whole response/call. The partial
+response and absent explicit reply edge remain; the old relay timestamp/retrieval
+flag are preserved. This establishes no retroactive/new permission. Historical
+checkpoint `1c99360` remains UNREVIEWED_FOR_ACCEPTANCE, with omission/noncompliance
+and RQ25/E09 open. The formerly pending timing question needs no further answer.
+
+The actual new review was read-only / approval-never / `memory_mode` disabled; lower
+memory/feature/OS argv/PID/network enforcement remains UNVERIFIED. Root inspected
+all 20 wrappers and adopted the finite all-command/output audit. A permission
+read used a 7000-byte rather than 6000-byte guard/full identity object, with actual
+2057-byte output below both ceilings. A refused Discovery read earned zero content
+credit and was recovered. Invalid JSON-date-coerced deltas were discarded and
+replaced with literal timestamp arithmetic. These deviations and all prior count,
+guard, recovery, EOF, selector failures remain; no current CODE/body-scope leak
+or actual text overflow was established. A failed 4-byte null root-seal attempt
+is preserved; corrected v2 sealed the report before root read its body.
+The report/captured equality labels say 23 approval / 21 pending properties; the
+actual explicit lists have 22 / 19 and match the granted lists. This is a count-label
+correction, not a rewritten report or extra comparison coverage.
+
+Only the bounded synthetic Windows proof is accepted. Both windows remain
+consumed and all native authority CLOSED_DO_NOT_REUSE, zero launches remaining.
+Full E02/M02, Linux, packages, real-Core play, full HUD/profiles, physical input/OS
+focus and existing pixel/provider/process/network limits remain open. No additional
+execution, publication or merge authority follows. E04-A1E source freeze/review
+continues separately; A1G's exception-disabled caller remains required.

@@ -1,11 +1,22 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 40 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 41 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 40 records **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN**. Executed source remains `5e92ba336da0570cb4b57def390ad3c58921e625`, run `20261019T202805Z-5ff8cb61`; the final reviewed candidate is `3a1d17902f6fa94b6009c0cae573da8bf7dff063`. Final [CODE r3](research/2026-10-20-e02-final-code-r3.md), [REQ r2](research/2026-10-20-e02-final-requirements-r2.md) and the postsealed [limited supplement v4](research/2026-10-20-e02-final-requirements-supplement-v4.md) are closed with raw BLOCKED verdicts. Root separately verified CODE's opaque SOURCE prerequisite; the supplement resolves reading-count/hash-gate/administrative source-binding concerns without establishing fundamental contamination requiring a fresh initial assessment. The [final-review provenance](evidence/2026-10-20-e02-final-review-provenance.json) preserves those dispositions. Historical checkpoint `1c99360` is now conservatively clarified as UNREVIEWED_FOR_ACCEPTANCE; its original missing status/noncompliance is not retroactively repaired, and RQ25/E09 remain open/unexecuted. Independent original prelaunch approval retrieval/timing verification remains pending owner factual clarification. No raw verdict is promoted to PASS, and acceptance, push and merge are not released.
+Revision 41 records **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**.
+The [combined root disposition](evidence/2026-10-20-e02-bounded-acceptance.json)
+combines the unchanged technical assessments with the new
+[administrative recovery supplement](research/2026-10-20-e02-final-requirements-approval-recovery.md)
+SUPPLEMENTAL_PASS and separately verified SOURCE prerequisite. The original
+three raw BLOCKED reports, historical checkpoint omission, relay limitations and
+earlier failures remain unchanged. This is bounded synthetic Windows acceptance;
+full E02/M02 and broader gates remain open. Zero visible launches remain and no
+publication/merge authority is added. E04-A1E source freeze/review is next; the
+actual exception-disabled A1G caller is still mandatory before full A1 adoption.
+
+Historical revision 40 recorded **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN**. Executed source remains `5e92ba336da0570cb4b57def390ad3c58921e625`, run `20261019T202805Z-5ff8cb61`; the final reviewed candidate is `3a1d17902f6fa94b6009c0cae573da8bf7dff063`. Final [CODE r3](research/2026-10-20-e02-final-code-r3.md), [REQ r2](research/2026-10-20-e02-final-requirements-r2.md) and the postsealed [limited supplement v4](research/2026-10-20-e02-final-requirements-supplement-v4.md) are closed with raw BLOCKED verdicts. Root separately verified CODE's opaque SOURCE prerequisite; the supplement resolves reading-count/hash-gate/administrative source-binding concerns without establishing fundamental contamination requiring a fresh initial assessment. The [final-review provenance](evidence/2026-10-20-e02-final-review-provenance.json) preserves those dispositions. Historical checkpoint `1c99360` is now conservatively clarified as UNREVIEWED_FOR_ACCEPTANCE; its original missing status/noncompliance is not retroactively repaired, and RQ25/E09 remain open/unexecuted. Independent original prelaunch approval retrieval/timing verification remains pending owner factual clarification. No raw verdict is promoted to PASS, and acceptance, push and merge are not released.
 
 The unchanged [execution result](evidence/2026-10-19-e02-5e92-result.json) and [journal](evidence/2026-10-16-e02-world-input.md) retain 16 native cases / 18174 assertions, separate SUP6, six PNGs, 4562 input events and 20 ray records. Both visible windows are consumed; native authority is closed with zero launches remaining. Root's six-image observations are implementer evidence. Same-effective-pixel accuracy does not establish arbitrary fractional-point precision. RQ23/RQ24, full E02/M02/E04, Linux, packaging, real-Core play and full HUD/profile behavior remain open.
 

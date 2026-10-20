@@ -2,15 +2,12 @@
 
 This repository develops a C++ first, genuinely 3D Unreal client for the separate
 authoritative Python rules engine. `WarhammerClient.uproject` is the minimal C++
-foundation. Source includes an opt-in synthetic 3D proof scene. Current E02 status
-is **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN**: 16 native cases / 18174
-assertions and six rendered images passed their producer checks, while the sealed
-final reviews retain BLOCKED verdicts with an approval-provenance finding pending.
-Both visible launches are consumed and native authority is closed. Earlier
-failed/blocked runs remain preserved.
-A playable Core-connected client
-and complete rendered/input acceptance remain future work. The plan records
-actual evidence and remaining gates.
+foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorded:
+16 native cases / 18174 assertions and six rendered images. Separate administrative
+verification resolved the final hold; original BLOCKED reports remain unchanged.
+Both visible launches are consumed and native authority is closed. A playable
+Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
+The plan records actual evidence and the next bounded source-review gate.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -79,7 +76,22 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 40 (2026-10-20 UTC) records the completed E02 run
+Plan revision 41 records **BOUNDED_E02_WINDOWS_SYNTHETIC_ACCEPTANCE_RECORDED**.
+Root combined the sealed technical reports with separate prerequisite verification
+and the [postsealed administrative recovery](docs/plans/research/2026-10-20-e02-final-requirements-approval-recovery.md),
+whose raw verdict is SUPPLEMENTAL_PASS. CODE r3, initial REQ r2 and supplement v4
+remain BLOCKED. The [combined disposition](docs/plans/evidence/2026-10-20-e02-bounded-acceptance.json)
+preserves original chronology, relay/reply-edge limits, all failures and the
+UNREVIEWED_FOR_ACCEPTANCE status of historical checkpoint `1c99360`. Full E02/M02
+and broader gates remain open. No new launch, publication or merge is authorized.
+
+Next is the E04-A1E source review: an Editor/raw-document parser boundary proof
+with actual Editor exceptions enabled. A1G's genuinely exception-disabled runtime
+caller remains mandatory before full A1/RQ11/production adoption. No A1 configure,
+library build or native test has run. The source-only draft and dependency
+acquisition remain separate from acceptance.
+
+Historical plan revision 40 (2026-10-20 UTC) recorded the completed E02 run
 `20261019T202805Z-5ff8cb61` on executed source
 `5e92ba336da0570cb4b57def390ad3c58921e625`. Affected SOURCE and all seven
 producer phases passed; six separate supervisor cases are additional evidence.
