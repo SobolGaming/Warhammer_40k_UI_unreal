@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 64 — RULES_REPAIR_CONTROLS_PASSED_BINDINGS_PENDING. Root adopted the source-lock, map-category and manifest-control repairs. All 80 focused pure controls passed in 31.391131 seconds; exact source and raw evidence are retained alongside the separate earlier 72-case tuple. The wrapper is 2,100 rows and source-only test 308 rows. No current formal SOURCE admission, UBT/native build or visible test follows. Derive fresh source/unit/norm/count/freeze bindings and obtain fresh affected SOURCE plus independent integrations/root audits/aggregate before phases. All eight native phases remain NOT_RUN; standing source/API review consent persists until revoked.
+**Revision:** 65 — LOCAL_DUTY_CRITERIA_ADOPTED_BINDINGS_PENDING. Root prospectively adopted v6 review criteria and metadata sources, retaining seven complete global joins with 16 explicit atomic duties and 29 local assignments. The 98 BODY/13-record/902-row/49-field/1,561-reference/33-member scope and full independent integrations remain required. Repaired source passed 80 pure controls. The published template is deliberately unresolved until actual common/source/unit/count bindings are derived; it grants no review or phase authority. All native/final gates remain open and standing review consent persists until revoked.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,27 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 64 changes
+### Revision 65 changes
+
+Root adopted the [v6 local-duty criteria](research/2026-10-20-e04a-source-composition-packet-v6.md),
+[UNBOUND template](research/2026-10-20-e04a-source-scope-contract-v6.template.json)
+and [metadata source bindings](evidence/2026-10-20-e04a-v6-local-duty-criteria-adoption.json).
+Global duties and owner sets remain intact. Each scope receives its exact local
+duty and owned atoms; the integrations independently assess the full applicable
+raw union. VALUE additionally reads seven terminal flag units. CLIENT additionally
+reads full BODY003 and all held-source, prelaunch and root-call interfaces.
+No peer report discharges a local interface or full integration duty.
+
+Exact wrapper/test identities are known from revision 64. Fresh common/norm/body,
+complete-unit and global/scope row bindings remain unresolved. Derive them before
+the binder may publish panels; retain literal source terminators and complete AST
+extents. The adopted binder also retains the 49-field and atomic-owner aggregate
+checks. Earlier wording/diff preparation corrections remain preserved. This is
+metadata-source/criteria adoption only, with no new review invocation, SOURCE
+admission, UBT/native phase or visible-window authority. All ten current complete
+valid PASS reports, root audits and the labelled aggregate still precede phases.
+
+### Revision 64 history
 
 Root adopted the [source-preservation repair](research/2026-10-20-e04a-rules-repair-checkpoint.md)
 and its [exact source/control bindings](evidence/2026-10-20-e04a-rules-source-preservation-result.json).

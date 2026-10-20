@@ -78,7 +78,23 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 64 (2026-10-20 UTC) is
+Current A1E status at plan revision 65 (2026-10-20 UTC) is
+**LOCAL_DUTY_CRITERIA_ADOPTED_BINDINGS_PENDING**. Root prospectively adopted the
+[v6 criteria](docs/plans/research/2026-10-20-e04a-source-composition-packet-v6.md)
+and [exact metadata sources](docs/plans/evidence/2026-10-20-e04a-v6-local-duty-criteria-adoption.json).
+All seven global joins/owners remain, with 16 explicit atomic duties and 29 local
+scope duties. Full independent integrations and 98 BODY/13 records/902 rows/49
+fields/1,561 references/33 staged members remain required. VALUE adds terminal
+flag units; CLIENT adds full BODY003 and held-source/root-call interfaces.
+The published template is deliberately UNBOUND with unresolved source/unit/count
+fields. Derive those from actual canonical source and refreshed common inputs;
+binder/panel constructors must refuse unresolved values before allocation. The
+latest binder preserves atomic-owner and 49-field aggregate requirements.
+No new campaign, review GO, SOURCE approval or phase follows this adoption.
+Keep 5,400-second BUILD/TARGET/PLUGIN/integration and 1,800-second other-scope
+budgets, fresh contexts and no retry. Standing transmission consent persists.
+
+Historical A1E status at plan revision 64 (2026-10-20 UTC) is
 **RULES_REPAIR_CONTROLS_PASSED_BINDINGS_PENDING**. Root adopted the repaired
 wrapper and validator controls. The [repair record](docs/plans/research/2026-10-20-e04a-rules-repair-checkpoint.md)
 and [exact bindings](docs/plans/evidence/2026-10-20-e04a-rules-source-preservation-result.json)

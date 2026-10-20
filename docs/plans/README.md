@@ -1,11 +1,18 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 64 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 65 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at revision 64 is **RULES_REPAIR_CONTROLS_PASSED_BINDINGS_PENDING**.
+Current A1E status at revision 65 is **LOCAL_DUTY_CRITERIA_ADOPTED_BINDINGS_PENDING**.
+The [v6 criteria](research/2026-10-20-e04a-source-composition-packet-v6.md),
+[template](research/2026-10-20-e04a-source-scope-contract-v6.template.json) and
+[adoption](evidence/2026-10-20-e04a-v6-local-duty-criteria-adoption.json) retain
+complete global duties with explicit local assignments and full integrations.
+Actual new source/unit/count/common bindings and fresh reviews remain pending.
+
+Historical A1E status at revision 64 is **RULES_REPAIR_CONTROLS_PASSED_BINDINGS_PENDING**.
 The [repair](research/2026-10-20-e04a-rules-repair-checkpoint.md) and
 [bindings](evidence/2026-10-20-e04a-rules-source-preservation-result.json) record
 80/80 actual pure controls, zero failures and exact source/raw evidence. Fresh
