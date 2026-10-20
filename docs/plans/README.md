@@ -1,11 +1,20 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 71 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 74 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at revision 71 is **TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**.
+Current A1E status at revision 74 is **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**.
+The [closed SOURCE round](research/2026-10-20-e04a-value-build-source-closure.md)
+and [factual record](evidence/2026-10-20-e04a-value-build-source-closure-result.json)
+preserve five raw reports/437 captured tool pairs, zero admissions and five
+source-supported findings. Five other jobs never received GO or launch. Post-close
+2,476 listed inputs match; all eight native phases NOT_RUN/no native RunRoot/
+visible0. Checkpoint then repair; applicable SOURCE/final/later gates and standing
+source/API consent remain unchanged.
+
+Historical A1E status at revision 71 is **TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**.
 Technical commit `3b5447e777da76b555215c135977c92a1706282b` adds 14 lines/zero
 removals: `RejectUnsupportedNativeToolAlternatives` rejects three effective
 unsupported toolchain flags at final module construction. Ordinary inspection

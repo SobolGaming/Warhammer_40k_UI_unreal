@@ -7,16 +7,16 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**.
-Revision 73 records applied value/build guards and seven passing offline helper
-controls, with zero native roots. Fresh source/input bindings and affected SOURCE
-reviews remain pending; all eight native phases are NOT_RUN and visible count zero.
+The bounded E04-A1E proof is **VALUE_BUILD_SOURCE_CLOSED_REPAIRS_REQUIRED**.
+Revision 74 records five closed SOURCE jobs/437 tool pairs and zero admissions.
+Five other jobs never received GO or launch. Confirmed source findings require
+repair; all eight native phases remain NOT_RUN and visible count zero.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision73 value/build repair checkpoint](docs/plans/research/2026-10-20-e04a-value-build-repair-checkpoint.md)
-  for current repairs, exact evidence, source-refresh work and open gates.
+- Use the [revision74 SOURCE closure](docs/plans/research/2026-10-20-e04a-value-build-source-closure.md)
+  for current findings, exact evidence, bounded repair work and open gates.
 - `../Warhammer_40k_UI_arcade` is the legacy client, also called `Warhammer_40k_UI`
   in the owner's request. It supplies behavior and configuration references.
 - `../Warhammer_40k_AI` is the reference-only authoritative core. This migration
@@ -80,6 +80,15 @@ The later publication commit is a separate metadata overlay; the reports did not
 review that later commit. Execution is stopped. The narrow diagnostic is accepted;
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
+
+Historical A1E checkpoint at plan revision 73:
+
+The bounded E04-A1E proof is **VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**.
+Revision 73 records applied value/build guards and seven passing offline helper
+controls, with zero native roots. Fresh source/input bindings and affected SOURCE
+reviews remain pending; all eight native phases are NOT_RUN and visible count zero.
+The [repair checkpoint](docs/plans/research/2026-10-20-e04a-value-build-repair-checkpoint.md)
+preserves that earlier repair/control evidence.
 
 Historical A1E status at plan revision 67 (2026-10-20 UTC) is
 **AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING**. The
