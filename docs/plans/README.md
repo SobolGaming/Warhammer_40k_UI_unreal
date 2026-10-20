@@ -1,11 +1,18 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 43 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 44 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 43 records **SOURCE_BLOCKED_PRIMARY_API_AMENDMENT_AUTHORED** for
+Revision 44 records **SOURCE_CHANGES_REQUESTED_JSON_LINE_REPAIR_AUTHORED**.
+The second [SOURCE report](research/2026-10-20-e04a-source-review-r2.md) found an
+undefined Parse-JsonLine call; its exact strict E02 implementation is restored.
+The [factual record](evidence/2026-10-20-e04a-source-r2-result.json) preserves
+the closed assessment. Fifteen offline cases / 38 checks passed. Checkpoint and freeze a new
+candidate/RunId for fresh affected SOURCE. All eight phases remain NOT RUN.
+
+Historical revision 43 records **SOURCE_BLOCKED_PRIMARY_API_AMENDMENT_AUTHORED** for
 E04-A1E. The first [SOURCE report](research/2026-10-20-e04a-source-review-r1.md)
 is raw BLOCKED on missing primary API inputs and an excluded metadata-purpose
 projection, with no confirmed C++ defect. The [factual record](evidence/2026-10-20-e04a-source-r1-result.json)

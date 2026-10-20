@@ -78,31 +78,26 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 43 (2026-10-20 UTC) is
-**SOURCE_BLOCKED_PRIMARY_API_AMENDMENT_AUTHORED**. The first independent
-[SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r1.md) is raw
-BLOCKED for `c6a9410`/run `010406`: missing plugin/receipt and compiler-path
-primary implementations, plus an excluded metadata-purpose projection. It
-reports no confirmed C++ defect. Its authority is CLOSED_DO_NOT_REUSE; all eight
-phases remain NOT RUN. The [factual record](docs/plans/evidence/2026-10-20-e04a-source-r1-result.json)
-preserves the report, runtime, scope deviation and physical-coverage limits.
+Current A1E status at plan revision 44 (2026-10-20 UTC) is
+**SOURCE_CHANGES_REQUESTED_JSON_LINE_REPAIR_AUTHORED**. The second independent
+[SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r2.md) is raw
+CHANGES_REQUESTED for `3791b43`/run `013901`: the supervisor validator calls an
+undefined Parse-JsonLine function. Root independently confirmed this and restored
+the byte-exact existing E02 parser, preserving strict size/depth/duplicate-key
+and UTC-string handling. The [factual record](docs/plans/evidence/2026-10-20-e04a-source-r2-result.json)
+binds the raw report and closed runtime; closed scope/coverage auditing is separate.
+The first raw BLOCKED assessment and prior authoring records remain unchanged.
 
-The two proof modules now request NoPCHs and the wrapper requests -NoVFS to
-remove the unresolved shared-PCH topology from this bounded proof. These changes
-are authored and UNEXECUTED, with primary API packet amendments in progress.
-The original 18-path [promotion record](docs/plans/evidence/2026-10-20-e04a-source-promotion.json)
-retains its historical bytes; it does not bind these later changed files. Read the actual
-[packet](docs/plans/research/2026-10-19-e04a-profile-packet.md) and
-[journal](docs/plans/evidence/2026-10-19-e04a-profile.md).
-
-The next gate is a coherent amended candidate checkpoint/freeze and fresh affected
-SOURCE review with complete primary inputs and a new RunId. All eight phases—Preflight, SupervisorControls, Configure,
-DependencyBuild, EditorBuild, Discovery, Native and Audit—are NOT RUN. Eight
-suites, 38 unique input IDs and 45 attempts are planned counts. Installed Editor
-policy enables exceptions; genuinely exception-disabled A1G remains required
-before full A1/RQ11/production adoption. A2 retains all 727 compatibility scenarios;
-shared HUD/render/input, Linux and packaging remain open. Source promotion grants
-no phase, native, GUI, publication or merge authority.
+All eight phases remain NOT RUN; both attempts are CLOSED_DO_NOT_REUSE. Only
+bounded parser remediation, focused offline controls and factual metadata are
+released. Fifteen pure offline cases / 38 checks passed; no native phase ran.
+Checkpoint, bind a new candidate/base, complete clean
+primary inputs and new RunId, then obtain fresh affected SOURCE before any phase.
+The actual [packet](docs/plans/research/2026-10-19-e04a-profile-packet.md) retains
+NoPCHs/-NoVFS and all limits. Eight suites / 38 IDs / 45 attempts are planned,
+not executed. Editor exceptions are enabled; genuine exception-disabled A1G
+remains required before full A1/RQ11/production adoption. All 727 A2 scenarios,
+shared HUD/render/input, Linux, packaging and broader gates remain open.
 
 Bounded E02 Windows acceptance remains recorded under the
 [combined disposition](docs/plans/evidence/2026-10-20-e02-bounded-acceptance.json).

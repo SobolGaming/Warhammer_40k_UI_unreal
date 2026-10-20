@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E parser proof's first SOURCE review is BLOCKED on missing primary API evidence. A source/packet amendment is authored; all execution phases remain NOT RUN. The plan records the evidence and next gate.
+The bounded E04-A1E parser proof received SOURCE CHANGES_REQUESTED for a missing JSON-line helper. The strict parser is restored; 15 offline cases / 38 checks passed. A fresh review precedes execution. All eight phases remain NOT RUN.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +76,7 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 43 preserves the first [E04-A1E SOURCE BLOCKED report](docs/plans/research/2026-10-20-e04a-source-review-r1.md)
+Plan revision 44 preserves the second [E04-A1E SOURCE CHANGES_REQUESTED report](docs/plans/research/2026-10-20-e04a-source-review-r2.md) and its [factual record](docs/plans/evidence/2026-10-20-e04a-source-r2-result.json). The missing strict JSON-line function is restored; 15 offline cases / 38 checks passed; a new freeze/RunId and fresh SOURCE review are next. No A1E native phase has run. Historical revision 43 preserves the first [E04-A1E SOURCE BLOCKED report](docs/plans/research/2026-10-20-e04a-source-review-r1.md)
 and [factual record](docs/plans/evidence/2026-10-20-e04a-source-r1-result.json).
 It requires more primary plugin/receipt and compiler-path evidence and a fresh
 policy-clean assessment. No confirmed C++ defect or executed build failure is

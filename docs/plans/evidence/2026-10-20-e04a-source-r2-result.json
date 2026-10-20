@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "recordKind": "CLOSED_SECOND_SOURCE_ASSESSMENT_NOT_EXECUTION_OR_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T02:04:36.4748437Z",
+  "sourceHead": "3791b43dd5966b49c5abc2926fb989aea587d941",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T013901Z-4761d5fc",
+  "review": {
+    "role": "SOURCE",
+    "status": "CHANGES_REQUESTED",
+    "sessionId": "01a156ff-48de-7042-9b72-e69e291a4617",
+    "report": {
+      "bytes": 4820,
+      "sha256": "4992c7313fa3b952ad4fd289864b7b3a3e4d341f61bc5b9d142153e6ade43b8b",
+      "path": "docs/plans/research/2026-10-20-e04a-source-review-r2.md"
+    },
+    "finding": "P1: Check-ControlChildEvidence calls undefined Parse-JsonLine at original wrapper569, preventing required supervisor controls",
+    "rootIndependentlyConfirmed": true,
+    "requiredBodyFiles": 78,
+    "requiredPhysicalRows": 26413,
+    "reviewerReportedCompleteBodyInspection": true,
+    "rootMechanicalExposure": "NOT_INDEPENDENTLY_CERTIFIED: adopted candidate reader recognized zero rows because this review used FILE/headerless forms; zero automatic candidates does not establish zero exposure",
+    "reviewerReportedCompleteSelectedMetadata": true,
+    "selectedMetadataRecords": 13,
+    "descriptorSelectorRows": 902,
+    "actualReadOnly": true,
+    "actualApprovalPolicy": "never",
+    "actualMemoryMode": "disabled",
+    "actualModel": "gpt-6.1-sol",
+    "actualEffort": "ultra",
+    "freshExec": true,
+    "actualFullGoObserved": true,
+    "byteIdenticalPromptTransport": false,
+    "promptDifference": "Two extra trailing CR/LF bytes; equal after trailing CR/LF removal",
+    "toolInputCount": 105,
+    "toolOutputCount": 105,
+    "pairingAnomalies": 0,
+    "scopeAudit": "Root read all105 literal command inputs; no private session/config/credentials/peer conclusions or mutation invocation apparent. Complete metadata output recovery and semantic inspection not independently certified. No approval depends on this CHANGES_REQUESTED report.",
+    "limits": [
+      "Actual app/multi-agent enforcement, memory internals, OS PID linkage and lower isolation UNVERIFIED",
+      "Physical visibility does not prove comprehension or approval"
+    ],
+    "rootReadAll105LiteralCommandInputs": true,
+    "rootMetadataOutputRecoveryCertification": "NOT_ESTABLISHED",
+    "retainedTruncationCalls": [
+      1,
+      4,
+      23,
+      31,
+      86,
+      89,
+      92,
+      94,
+      98,
+      100
+    ],
+    "retainedParseErrorCall": 95,
+    "laterCorrectedQueryCall": 96
+  },
+  "reviewProcess": {
+    "status": "PASS",
+    "timedOut": false,
+    "pid": 35032,
+    "cliExitIsNotSourceApproval": true,
+    "exitConfirmed": true,
+    "elapsedSeconds": 723.0562136,
+    "finalActiveProcesses": 0,
+    "exitCode": 0,
+    "cleanupConfirmed": true
+  },
+  "authorityState": "CLOSED_DO_NOT_REUSE",
+  "remainingReviewLaunches": 0,
+  "nativeRunRootCreated": false,
+  "phases": [
+    {
+      "status": "NOT_RUN",
+      "phase": "Preflight"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "SupervisorControls"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Configure"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "DependencyBuild"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "EditorBuild"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Discovery"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Native"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Audit"
+    }
+  ],
+  "nativeSuiteCount": null,
+  "nativeInputCount": null,
+  "nativeAttemptCount": null,
+  "plannedCounts": {
+    "attempts": 45,
+    "uniqueInputs": 38,
+    "suites": 8
+  },
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "a2ScenariosRequired": 727,
+  "fullA1Acceptance": false,
+  "remediation": {
+    "status": "AUTHORED_OFFLINE_CONTROLS_PASS_PENDING_FRESH_SOURCE",
+    "nativePhasesExecuted": false,
+    "wrapper": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+      "bytes": 157504,
+      "sha256": "3eb417cfbf0a0d9189ae3afdb44bf7743f0f53fe74d4b48004f77307f0e0c85c"
+    },
+    "change": "Restore byte-exact E02 Parse-JsonLine function; preserve strict size/depth/type/duplicate-field handling",
+    "offlineControls": {
+      "report": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\parse-jsonline-remediation-20261020\\parser-controls\\pure-controls.actual.json",
+        "bytes": 8848,
+        "sha256": "456fcfdd0ef5ed59c1c1aab103279016a56f2e7b17d94c0ce4063ed52f901267"
+      },
+      "status": "PASS",
+      "cases": 15,
+      "checks": 38,
+      "failedCases": 0,
+      "fullWrapperInvoked": false,
+      "supervisorOrNativePhasesRun": false,
+      "rootReadCompleteHarnessAndReport": true,
+      "limits": [
+        "Only selected strict JSON/parser/type/UTC functions were imported and invoked.",
+        "Synthetic bound/alive lines demonstrate parsing/type preservation, not actual process/job/ACK or full caller validation.",
+        "Caller schema/lifecycle code remains unchanged by exact insertion reconstruction; that validator was not invoked.",
+        "Inherited 8MB comparison is string Length (UTF16 characters), preserved exactly; this is not a new byte-limit claim.",
+        "All eight E04 phases remain NOT_RUN; new candidate/run/refreeze/affected SOURCE required before phase execution."
+      ]
+    }
+  },
+  "standingTransmissionConsent": {
+    "expires": "Only on explicit owner revocation",
+    "scope": "Necessary current and future private source/API migration review packets to existing configured OpenAI Codex service",
+    "repeatQuestionRequired": false,
+    "credentialsAndUnrelatedSessionsExcluded": true
+  },
+  "privateEvidence": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-3791b43-20261020T013901Z-4761d5fc\\root-raw-source-report-seal.original.json",
+      "bytes": 903,
+      "sha256": "6bd5b70cce45343ecf74aae558626f61e6492162a665cd5a8bf02b856ce87d4f"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-3791b43-20261020T013901Z-4761d5fc\\runtime-evidence.final.selected.json",
+      "bytes": 9402,
+      "sha256": "d21990996d557a479874da72c2e7d93fdad92207ac8958cecdd5a8bd25d37d3c"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-3791b43-20261020T013901Z-4761d5fc\\completion.json",
+      "bytes": 2603,
+      "sha256": "d27836e090b725dc3744bfe57ee6a59ea27f53f8ef6e9bf42b054001f49046d4"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-3791b43-20261020T013901Z-4761d5fc\\owned-job-receipt.json",
+      "bytes": 225811,
+      "sha256": "376c658b369f21ad2f6343ba81d6833893f9573aa27e7380f50792f9207c6e29"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-3791b43-20261020T013901Z-4761d5fc\\actual-tool-input-ledger.json",
+      "bytes": 125058,
+      "sha256": "e4ab5a8a601fdca25c283cb2e64d62bd497885a67c76c0c13dcae3289b689874"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-3791b43-20261020T013901Z-4761d5fc\\actual-complete-tool-input-output-ledger.json",
+      "bytes": 2351084,
+      "sha256": "61ed4988e6de19960e64c4565824fa5107ca0a766f2862a6f8b2c0fb147635ef"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-3791b43-20261020T013901Z-4761d5fc\\root-source-changes-requested-authority-closure.original.json",
+      "bytes": 916,
+      "sha256": "48d484950f20c6d12a963142bb2f5981b4a88eedf68877dd077f94bb961aa2fa"
+    }
+  ],
+  "nextStep": "Complete focused offline controls and factual checkpoint, freeze new candidate with clean primary inputs/new RunId, then fresh affected SOURCE before any phase",
+  "validationPreparation": "Initial doc helper stopped before saving plan when an overbroad Current assignment selector matched two paragraphs; preserved draft and narrowed selector, then completed. No native action.",
+  "checkpointValidation": {
+    "wrapperAstErrors": 0,
+    "factualJson": "PASS",
+    "localLinksVerified": 304,
+    "lineLinksVerified": 4,
+    "initialLinkChecker": "False missing targets due unsupported :line suffix; corrected checker verifies file and line",
+    "rawReportBytes": 4820,
+    "rawReportExactSha256": "4992c7313fa3b952ad4fd289864b7b3a3e4d341f61bc5b9d142153e6ade43b8b",
+    "nativeBuildTests": "NOT_RUN_PENDING_FRESH_SOURCE",
+    "independentReviewOfRepair": "NOT_RUN",
+    "whitespace": "PASS_STANDARD_STAGED_DIFF_CHECK"
+  }
+}

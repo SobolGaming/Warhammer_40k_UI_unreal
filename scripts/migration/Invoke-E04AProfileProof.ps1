@@ -168,6 +168,14 @@ function Read-Json([string] $Path) {
     return ConvertFrom-Json -InputObject $text -AsHashtable -Depth 80 -DateKind String
 }
 
+function Parse-JsonLine([string] $Line) {
+    if ($Line.Length -gt 8MB -or [string]::IsNullOrWhiteSpace($Line)) { throw 'E02_JSONL_EMPTY_OR_OVERSIZED_LINE' }
+    Safe-Text $Line; $options=[Text.Json.JsonDocumentOptions]::new();$options.MaxDepth=80
+    $doc=[Text.Json.JsonDocument]::Parse($Line,$options)
+    try { Check-JsonElement $doc.RootElement 0 } finally {$doc.Dispose()}
+    return ConvertFrom-Json -InputObject $Line -AsHashtable -Depth 80 -DateKind String
+}
+
 function Failure($Record,[string] $Stage) {
     $message=$Record.Exception.Message
     try { Safe-Text $message } catch { $message='E02_REDACTED_FAILURE_DETAILS' }
