@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 67 — AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING. Root adopted the exact v7.1 prospective method/UNBOUND design and separate API, transport and typed common-helper source choices. Actual source/scope/unit/typed-data/count/NORM/grant bindings and own-panel implementation remain pending. Six retained-candidate ordinary evidence audits are complete, with no current eligibility or admissions. R6 raw five PASS/three BLOCKED/479 pairs and its failed old v6 gate remain unchanged; both integrations are unused. Actual P/C/E/F/panels/GO are absent, all eight native phases NOT_RUN and new visible authority zero. Standing source/API consent and final fresh CODE/different REQ remain unchanged.
+**Revision:** 68 — COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING. All three nonblind compatibility jobs for `93659c5` / `20261020T145014Z-0c80c9c7` are CLOSED with literal INCOMPLETE, 238 captured tool pairs and six immutable negative retention decisions. Root adopted the v7.2 all-fresh route: 12 primaries plus five independent integrations, preserving all seven joins/16 atoms/29 duties and both witnesses. Repaired projector/schema/transport source choices are adopted but uninvoked; actual successor bindings/P/F/panels remain pending. No fresh SOURCE GO or admission exists; all eight native phases are NOT_RUN and visible authority is zero. Historical R6 verdicts/failed gate and final fresh CODE/different REQ remain unchanged.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,37 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 67 changes
+### Revision 68 changes
+
+Status is **COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING**. The
+[compatibility closure/v7.2 checkpoint](research/2026-10-20-e04a-compat-closed-v7.2-checkpoint.md)
+and [factual record](evidence/2026-10-20-e04a-compat-closed-result.json) preserve
+all three CLOSED nonblind C reports with literal INCOMPLETE: VALUE_CLIENT 154,
+SELECTORS 26 and BUILD 58 captured pairs, 238 total. Root fully read the sealed
+reports; bounded ordinary closure audits are complete. Six immutable negative E
+records make the retained candidates ineligible in that planned set. The
+post-close rehash matched all 2,687 unique frozen input files.
+
+Root adopted v7.2 and selected 17 fresh contexts: 12 primaries plus five
+independent integrations, with no retention or new C job. All seven joins,
+16 atoms, 29 duties, original whole-BODY/unit/data obligations and both
+independent witnesses remain. Exact repaired constructor `B12F0893...`, schema,
+new launcher/selector and four unchanged generic transport sources are adopted
+source choices. F01 is statically closed; dynamic valid-path/refusal checks are
+NOT_RUN and the successor helpers have not been invoked. Eight new raw
+definitions are prepared with adoption pending; the other nine templates remain
+preserved.
+
+Update/adopt the common assembler owner registry/transport pins before emission.
+Derive/adopt exact successor current inputs, common/freeze/own/policy/count/grant
+bindings and the 12-predecessor policy, then seal new P/F before fresh panels/GO.
+Actual complete child/runtime/duty/finding and integration audits precede root
+aggregate closure and any native phase. No F, fresh SOURCE GO or admission exists;
+all eight native phases are NOT_RUN and visible authority is zero. R6 raw five
+PASS/three BLOCKED/479 pairs, its failed v6 gate and both unused old integrations
+remain unchanged. This metadata checkpoint is not acceptance.
+
+### Revision 67 history
 
 The [v7.1 checkpoint and exact-copy index](research/2026-10-20-e04a-v7.1-method-checkpoint.md)
 publish the exact adopted [method criteria](research/2026-10-20-e04a-source-composition-packet-v7.1.md),
@@ -1145,30 +1175,33 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: bind the adopted v7.1 affected-SOURCE design before allocation.**
-Status is **AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING**. The
-[revision67 checkpoint](research/2026-10-20-e04a-v7.1-method-checkpoint.md) records
-exact method/UNBOUND, runtime API, transport and typed common-helper source choices.
-The grouped assembler type gap is statically closed; dynamic refusal is untested,
-no helper ran and the own-panel work remains interface only. Complete/adopt actual
-source/API/scope/helper definitions and derive clean own source/unit/typed-data/
-count/NORM/grant bindings before P or panels; audit constructed metadata before GO.
+**Current assignment: bind the adopted v7.2 all-fresh successor before allocation.**
+Status is **COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING**. The
+[revision68 checkpoint](research/2026-10-20-e04a-compat-closed-v7.2-checkpoint.md)
+and [factual record](evidence/2026-10-20-e04a-compat-closed-result.json) close all
+three C jobs for `93659c5` / `20261020T145014Z-0c80c9c7` with literal INCOMPLETE,
+238 pairs and six negative E decisions in that planned set. Root read all sealed
+raw reports, completed bounded ordinary closure audits and matched 2,687 unique
+frozen inputs after closure. Preserve those raw results and their limits.
 
-Six ordinary retained-candidate evidence audits are complete, not eligibility.
-The conditional selection retains six technical candidates and adds nine fresh
-SOURCE contexts plus three nonblind C cohorts. All seven pre-E clauses and exact
-BUILD/separate D001 dispositions remain conjunctive. Seal exact P before C;
-conditional root E and immutable F precede fresh SOURCE GO. Actual current-vector
-integrations and complete child/runtime/duty/finding audits precede aggregate
-closure and any native phase. Neutral own permission/identities do not expose
-C/E results; E/F remain HASH_ONLY. No old report becomes fresh by relabelling.
+The adopted selection is 17 fresh contexts: 12 primaries and five independent
+integrations, no retained candidate or new C job. Keep all seven joins/16 atoms/
+29 duties, complete source/unit/data obligations and both witness assessments.
+The repaired constructor/schema/transport source choices are adopted, F01 is
+statically closed, dynamic checks are NOT_RUN and successor helpers are uninvoked.
+Eight new raw definitions await adoption; nine existing templates are preserved.
+Update/adopt common assembler owner-registry/transport-pin sources before emission.
+Complete exact successor common/freeze/own/source/API/typed-data/count/NORM/grant
+bindings and neutral 12-predecessor policy before new P/F or panels/GO.
+Fresh blind inputs exclude old C/E conclusions; operator P/F remain HASH_ONLY.
+Actual complete reviews, current-vector integrations and root runtime/duty/finding
+audits precede aggregate closure and any native phase.
 
-The [R6 record](research/2026-10-20-e04a-scoped-r6-summary.md) preserves five raw
-passes/three blockers/479 pairs, zero admissions and both unused integrations.
-Its failed v6 gate is unchanged; only the prospective ten-new-PASS-only rule is
-superseded. The 80 source-preservation controls and six separate synthetic reader
-cases establish no actual Rules/private API/UBT/native behavior. P/C/E/F/panels/GO
-remain absent, all eight native phases NOT_RUN and visible authority zero.
+No F, fresh SOURCE GO or admission exists. All eight native phases remain NOT_RUN
+and visible authority zero. R6 raw five PASS/three BLOCKED/479 pairs, its failed
+v6 gate and both unused old integrations remain unchanged. Final fresh CODE/
+different REQ and all later acceptance gates remain open. Standing perpetual
+private-source/API consent is unchanged.
 
 **Historical R4 assignment and findings (revision 57):**
 
@@ -1444,7 +1477,9 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **2026-10-16 finding:** [Complete field/diagnostic/YAML inventory](research/2026-10-16-capability-checklist.md) and [total active/inactive/reject normalization](research/2026-10-16-parity-closure-design.md) finish source/design mapping. Immutable yaml-cpp0.9.0 evaluation candidate is56e3bb550c91fd7005566f19c079cb7a503223cf. E04 compiler/ABI/private-exception/corpus/render proof remains BLOCKED. No library adoption, compatibility PASS, silent dropped fields or new supported editor is implied.
 
-**Current source-scope update (revision 67):** the [v7.1 method/input checkpoint](research/2026-10-20-e04a-v7.1-method-checkpoint.md) records prospective method/UNBOUND and API/transport/typed common-helper source choices. Actual bindings, own-panel implementation, seven-clause eligibility, P/C/E/F and GO remain pending. Six ordinary candidate evidence audits are complete, with zero admissions. Original R6 history and its failed gate remain unchanged; only the prospective ten-new-PASS-only rule is superseded. Controls and synthetic readers establish no actual Rules/private API/native result. RQ11, final CODE/different REQ and A1G/A2/HUD/Linux/package obligations remain open.
+**Current source-scope update (revision 68):** **COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING**. The [closed compatibility/v7.2 checkpoint](research/2026-10-20-e04a-compat-closed-v7.2-checkpoint.md) preserves three literal INCOMPLETE C reports, 238 pairs and six negative E decisions; no old approval transfers. Adopted v7.2 selects 12 fresh primaries plus five independent integrations, preserving all seven joins/16 atoms/29 duties and both witnesses. Repaired helper source choices are adopted but uninvoked; dynamic checks are NOT_RUN. Exact successor bindings/P/F/panels/GO and actual reviews/audits remain pending. RQ11, A1G/A2/HUD/Linux/package and final CODE/different REQ remain open.
+
+**Historical source-scope update (revision 67):** the [v7.1 method/input checkpoint](research/2026-10-20-e04a-v7.1-method-checkpoint.md) records prospective method/UNBOUND and API/transport/typed common-helper source choices. Actual bindings, own-panel implementation, seven-clause eligibility, P/C/E/F and GO remain pending. Six ordinary candidate evidence audits are complete, with zero admissions. Original R6 history and its failed gate remain unchanged; only the prospective ten-new-PASS-only rule is superseded. Controls and synthetic readers establish no actual Rules/private API/native result. RQ11, final CODE/different REQ and A1G/A2/HUD/Linux/package obligations remain open.
 
 **Historical source-scope update (revision 66):** the [R6 campaign](research/2026-10-20-e04a-scoped-r6-summary.md) is closed with five raw passes and three blockers, zero admissions and no native result. The revision-64 source repair passed 80 pure controls; six separate synthetic reader cases passed. Complete useful audits, missing runtime helper inputs and an explicit prospective affected-review amendment before new bindings. Current v6 permits no reuse. RQ11, real Rules/private API/native observations, A1G/A2/HUD/Linux/package obligations remain open.
 
@@ -2815,7 +2850,9 @@ Retain separate preferences and composition files. Use a whitelist registry of w
 
 **Historical source finding (2026-10-16):** Candidate parser: **yaml-cpp 0.9.0**, evaluation pin `56e3bb550c91fd7005566f19c079cb7a503223cf` / tag `yaml-cpp-0.9.0`, MIT license. [Primary-source/ABI refresh](research/2026-10-16-bootstrap-and-native-parser.md) retrieved 2026-10-16. E04 must still verify Unreal compiler/runtime, private exception boundary and actual PyYAML6.0.3 corpus behavior; [normalization design](research/2026-10-16-parity-closure-design.md) specifies the mapping. No library was adopted, downloaded, built or installed. No third-party Unreal wrapper is required. Resolver/alias/duplicate/merge compatibility cannot be inferred from YAML branding.
 
-**Current source status (revision 67):** the [v7.1 checkpoint](research/2026-10-20-e04a-v7.1-method-checkpoint.md) adopts prospective method/input/source choices only. The finite runtime API input and typed assembler repair have ordinary static audits; no helper invocation, current binding/eligibility or native parser/compatibility result follows. Exact source/unit/typed-data/NORM/helper bindings and the conditional P/C/E/F/fresh-review/aggregate route precede phases. Actual loaded type/assembly, source order, cache/process, finalized selectors, artifacts, A1G/A2/HUD/Linux/package and final CODE/different REQ remain required.
+**Current source status (revision 68):** **COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING**. The [closed compatibility/v7.2 checkpoint](research/2026-10-20-e04a-compat-closed-v7.2-checkpoint.md) records three INCOMPLETE C reports and negative retention decisions, not a parser or compatibility result. Root adopted the method for 17 fresh contexts and exact repaired projector/schema/transport source choices; F01 is statically closed, dynamic checks NOT_RUN and successor helpers uninvoked. Bind new current inputs/P/F before fresh reviews and aggregate audits. Actual loaded type/assembly, source order, cache/process, finalized selectors, artifacts, A1G/A2/HUD/Linux/package and final CODE/different REQ remain required.
+
+**Historical source status (revision 67):** the [v7.1 checkpoint](research/2026-10-20-e04a-v7.1-method-checkpoint.md) adopts prospective method/input/source choices only. The finite runtime API input and typed assembler repair have ordinary static audits; no helper invocation, current binding/eligibility or native parser/compatibility result follows. Exact source/unit/typed-data/NORM/helper bindings and the conditional P/C/E/F/fresh-review/aggregate route precede phases. Actual loaded type/assembly, source order, cache/process, finalized selectors, artifacts, A1G/A2/HUD/Linux/package and final CODE/different REQ remain required.
 
 **Historical source status (revision 66):** the [R6 record](research/2026-10-20-e04a-scoped-r6-summary.md) preserves current review blockers. The adopted source repair and 80 pure controls cover the prospective rules-witness design; actual loaded assembly/type, source order, cache/process, finalized selectors and retained artifacts still require the authorized native phases. Neither those controls nor the six separate synthetic reader cases establish actual UBT/private API or parser compatibility. Current v6 and all later gates remain in force.
 
@@ -3595,29 +3632,29 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** The [v7.1 checkpoint](research/2026-10-20-e04a-v7.1-method-checkpoint.md)
-publishes adopted prospective rules/UNBOUND design and API/transport/typed
-common-helper source choices. Six original-evidence audits are complete, with
-no current eligibility/admission. Bind actual own source/unit/typed-data/NORM/
-count/helper inputs before P; the own-panel implementation is still pending.
-Preserve all seven joins/16 atoms/29 duties, duplicate primaries, original13/902/
-49/1,561 obligations, 33 members and both complete witness integrations.
-Exact P precedes three nonblind C cohorts; seven-clause conditional root E and
-immutable F precede nine fresh SOURCE contexts in the favorable six-retained
-selection. Actual child/current-vector integration/runtime/duty/finding audits
-close the aggregate before phases. The 12 named new contexts use source-bound
-5,400-second deadlines, one new context/launch, no retry or model override;
-replacement scopes require explicit prospective selection and bindings.
-R6 five raw passes/three blockers/479 pairs, zero admissions, unused integrations
-and its failed old gate remain unchanged. All native phases remain NOT_RUN/no
-native RunRoot and visible authority zero. Actual Rules/cache/assembly/type,
-effective configuration, activation and separate final acceptance remain open.
+**Ready now:** **COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING**. The
+[v7.2 checkpoint](research/2026-10-20-e04a-compat-closed-v7.2-checkpoint.md) records
+all three closed INCOMPLETE C reports/238 pairs, six negative E decisions and
+2,687 matching unique frozen inputs. Root adopted the selection of 17 fresh contexts:
+12 primaries plus five independent integrations, with no retention/new C.
+Keep all seven joins/16 atoms/29 duties, original whole-BODY/unit/data obligations,
+33 staged members and both independent witness assessments. The repaired
+projector/schema/transport source choices are adopted and uninvoked; F01 is
+statically closed and dynamic checks are NOT_RUN. Eight raw definitions await
+adoption; nine existing templates are preserved. Derive exact successor bindings
+and the neutral 12-predecessor policy, then seal new P/F before fresh panels/GO.
+Actual complete review/runtime/duty/finding/integration audits precede aggregate
+closure and any phase. All selected contexts use exact 5,400-second deadlines,
+one new context/launch and no retry/model override. No F/fresh SOURCE GO/admission
+exists; all eight native phases are NOT_RUN and visible authority zero.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Current progress (revision 67):** AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING. Exact v7.1 method/UNBOUND and API/transport/typed common-helper source choices are adopted; all six ordinary retained-candidate evidence audits are complete. The grouped assembler type repair is statically closed, dynamic refusal untested and no helper ran. Actual bindings/own-panel implementation/eligibility/P/C/E/F/GO/admissions remain absent. R6 raw history/failed gate and all native/final limits are preserved.
+**Current progress (revision 68):** COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING. All three C jobs for `93659c5` / `20261020T145014Z-0c80c9c7` closed INCOMPLETE with 238 pairs; six negative E decisions preserve non-eligibility in that planned set. Post-close rehash matched 2,687 unique inputs. Root adopted the v7.2 route of 17 fresh contexts and the repaired uninvoked projector/schema/transport source choices. Eight raw definitions await adoption; exact successor bindings/P/F/panels are pending. No F, fresh SOURCE GO, admission, native result or visible authority follows.
+
+**Historical progress (revision 67):** AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING. Exact v7.1 method/UNBOUND and API/transport/typed common-helper source choices are adopted; all six ordinary retained-candidate evidence audits are complete. The grouped assembler type repair is statically closed, dynamic refusal untested and no helper ran. Actual bindings/own-panel implementation/eligibility/P/C/E/F/GO/admissions remain absent. R6 raw history/failed gate and all native/final limits are preserved.
 
 **Historical progress (revision 66):** R6 is closed with five unchanged raw passes and three BLOCKED reports, 479 captured pairs, zero admissions and both integrations unused. The 80 pure controls and six separate synthetic reader cases remain bounded source evidence. TARGET incompleteness, PLUGIN missing helper contracts and BUILD review-conduct deviation require distinct follow-up; no new implementation defect or native result is established.
 
@@ -3647,7 +3684,7 @@ separate acceptance gates remain open.
 
 **Work completed so far (historical through revision 49):** imported plan/strong instructions, M00 metadata, legacy 44.1 source characterization and selected 44.3.33 adaptation, profile/capability/design checklists, Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units / 14 Capture checks / 132 native successes / two evidence checks, plus separate 135 PowerShell controls / 39 inputs. E02 `202805` on `5e92ba3` completed affected SOURCE and all seven producer phases, 16 native cases / 18174 assertions, separate SUP6 and six images. Root recorded bounded Windows synthetic acceptance after separate administrative recovery; original CODE r3, REQ r2 and v4 raw BLOCKED reports and their limits are unchanged. The exact 18 E04-A1E source paths are now canonical, with eight planned suites / 38 unique IDs / 45 attempts and pinned yaml-cpp acquisition verified (394 files / 5156535 bytes). The first SOURCE assessment remains BLOCKED; the second remains CHANGES_REQUESTED for the now-restored strict Parse-JsonLine (15 offline cases / 38 checks passed). The third is BLOCKED with incomplete coverage and a DDC observation gap. Its guard repair passed 21 offline cases/63 checks. The fourth assessment remains BLOCKED with 19/78 coverage and unselected metadata exposure. The fifth raw SOURCE_PASS applies only to c500f21/run024733 with bounded Editor qualifications. That run passed Preflight (zero roots) and six supervisor controls/three groups/five roots, then Configure failed on generated SDK RC-path escaping. Root CMake exited 1 in about 0.859 seconds; one unidentified member lingered until confirmed timeout cleanup/final zero, and producer preservation missed its deadline. Separate manual checks matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings pairs without passing the failed phase. The authored path repair passed 21 pure PowerShell cases with zero failures; at revision 47 checkpoint/new candidate/freeze/RunId/fresh affected SOURCE were pending. The subsequent sixth SOURCE review on 0ed4221/run035315 is raw BLOCKED after 48/81 BODY files, with incomplete 13-record/902-row assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. The full staged-source BODY-grant inventory proposal is authored without implementation changes or rerunning the controls; a neutral complete SOURCE packet is next. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. All eight phases for 0ed4221 remain NOT RUN/no native RunRoot. Subsequent r7 on e505b21/run041347 is raw BLOCKED after 55/93 BODY files, with all 33 staged members granted, incomplete 13/902 assessment and no confirmed implementation defect/binding/access denial. A prospective blind scoped SOURCE plus fresh independent integration design is being prepared, not adopted; full current 93-file union/all selected data/material relationships and unchanged criteria remain required. All eight e505b21 phases are NOT RUN/no native RunRoot; future frozen descriptors/counts remain derived. The five later phases remain NOT RUN; no native parser suite ran and final CODE/different REQ are pending. A1G, all 727 A2 compatibility scenarios, shared HUD/render/input, RQ23/RQ24, full E02/M02/E04, Linux, packages and real-Core play remain open. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
 
-**Next concrete step:** Complete/adopt actual v7.1 source/API/scope/helper definitions, the own-panel implementation and exact clean own source/unit/typed-data/count/NORM/grant bindings. Independently audit constructed metadata before GO. Seal exact P before three nonblind C cohorts; root E conditionally evaluates all seven clauses and exact admin dispositions, then seal immutable F before fresh SOURCE panels/GO. Actual current-vector integrations and complete child/runtime/duty/finding audits discharge future obligations at the root aggregate before any native phase. Keep R6 raw history and failed gate unchanged; no old report becomes fresh. P/C/E/F/panels/GO/admissions remain absent now. Final fresh CODE/different REQ, A1G/A2/HUD/Linux/package and all phase/visible/acceptance gates remain separate.
+**Next concrete step:** Complete/adopt the eight selected raw definitions and the common assembler owner-registry/transport-pin amendment, then derive exact v7.2 successor source/API/common/freeze/transport-literal/NORM/policy/own-spec/count/grant bindings and neutral 12-predecessor policy. Verify constructed metadata, seal new P/F and prepare the selected 12 fresh primaries plus five independent integrations before applicable fresh SOURCE GO. Preserve closed C/negative E and R6 raw history without transferring verdicts. Actual complete child/runtime/duty/finding/integration audits and root aggregate closure precede any native phase; final fresh CODE/different REQ, A1G/A2/HUD/Linux/package and visible/acceptance gates remain separate.
 
 ## 16. Sources and inspection index
 

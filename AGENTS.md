@@ -78,7 +78,37 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 67 (2026-10-20 UTC) is
+Current A1E status at plan revision 68 (2026-10-20 UTC) is
+**COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING**. Read the
+[compatibility closure/v7.2 checkpoint](docs/plans/research/2026-10-20-e04a-compat-closed-v7.2-checkpoint.md)
+and [factual record](docs/plans/evidence/2026-10-20-e04a-compat-closed-result.json).
+All three nonblind C jobs for `93659c5` / `20261020T145014Z-0c80c9c7` are CLOSED
+with literal INCOMPLETE and 238 captured pairs (VALUE_CLIENT 154/SELECTORS 26/
+BUILD 58). Root read all sealed reports and completed bounded ordinary closure
+audits. Six immutable negative E decisions make the retained candidates
+ineligible in that planned set. All 2,687 unique frozen inputs matched after closure.
+
+Root adopted v7.2 and selected 17 fresh contexts: 12 primaries plus five independent
+integrations, with no retention or new C job. Preserve all seven joins/16 atoms/
+29 duties, original whole-BODY/unit/data obligations and both witness assessments.
+The exact repaired `B12F0893...` projector, schema, new launcher/selector and four
+unchanged generic transport sources are adopted source choices. F01 is statically
+closed; dynamic checks are NOT_RUN and successor helpers are uninvoked.
+Eight raw definitions are prepared with adoption pending; nine existing
+templates are preserved. Update/adopt the common assembler owner registry and
+transport pins before emission. Derive/adopt exact successor common/freeze/own/source/
+API/typed-data/count/NORM/grant bindings and the neutral 12-predecessor policy,
+then seal new P/F before fresh panels/GO. Keep P/F HASH_ONLY and exclude old
+C/E conclusions from fresh blind inputs. Actual complete child/runtime/duty/
+finding/integration audits and root aggregate closure precede any native phase.
+
+No F, fresh SOURCE GO or admission exists; all eight native phases are NOT_RUN
+and visible authority zero. R6 raw five PASS/three BLOCKED/479 pairs, its failed
+old v6 gate and both unused old integrations remain unchanged. Final fresh
+CODE/different REQ and later gates remain open. Standing perpetual private-source/
+API consent persists until revoked. This is a metadata checkpoint, not acceptance.
+
+Historical A1E status at plan revision 67 (2026-10-20 UTC) is
 **AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING**. Read the
 [v7.1 checkpoint and exact-copy index](docs/plans/research/2026-10-20-e04a-v7.1-method-checkpoint.md),
 [adopted method/UNBOUND design](docs/plans/evidence/2026-10-20-e04a-v7.1-method-adoption.json),

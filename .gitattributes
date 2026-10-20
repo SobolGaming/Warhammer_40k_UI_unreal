@@ -51,3 +51,9 @@ docs/plans/evidence/2026-10-20-e04a-runtime-api-input-adoption.json -text whites
 docs/plans/evidence/2026-10-20-e04a-v7-transport-source-adoption.json -text whitespace=cr-at-eol
 docs/plans/evidence/2026-10-20-e04a-v7-common-helper-source-adoption.json -text whitespace=cr-at-eol
 docs/plans/research/2026-10-20-e04a-v7-common-assembler-type-recheck.md -text whitespace=cr-at-eol
+# Revision68 closed-campaign and prospective source choices preserve sealed bytes.
+docs/plans/evidence/2026-10-20-e04a-compat-closed-result.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-v7.2-*.json -text whitespace=cr-at-eol
+docs/plans/research/2026-10-20-e04a-source-composition-packet-v7.2.md -text
+docs/plans/research/2026-10-20-e04a-v7.2-method-audit.md -text
+docs/plans/research/2026-10-20-e04a-v7.2-projector-repair-recheck.md -text
