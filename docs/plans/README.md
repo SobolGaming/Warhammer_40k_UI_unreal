@@ -1,11 +1,30 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 49 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 50 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 49 records **SOURCE_BLOCKED_INCOMPLETE_REVIEW_DECOMPOSITION_PREPARING**.
+Revision 50 records **SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY**.
+Root has prospectively adopted the [ten-context SOURCE composition packet](research/2026-10-20-e04a-source-composition-packet.md):
+five fresh blind primary SOURCE scopes, three complete descriptor-data partitions
+and two fresh blind integrations after the eight primary/data reports are sealed.
+The [adoption record](evidence/2026-10-20-e04a-source-composition-adoption.json)
+binds this prospective decision. Every one of the ten must be independently valid, complete and PASS, followed by
+root runtime/input/output/scope/completeness audits and a labelled aggregate
+SOURCE disposition. Preserve the full reference 93-BODY union, all 13 selected
+metadata records/902 rows, all 1,561 Plugin-reference occurrences and material
+relationships; derive actual new frozen identities/counts. Exact-candidate
+packets, contracts/manifests/policies/prompts and runtime bindings are not ready.
+The immutable transport is unchanged; root separately enforces scope/campaign/
+full-prompt bindings and the aggregate gate. `sourceReviewed.report` must bind
+the labelled root aggregate JSON; the wrapper does not automatically validate
+all child reports. This adoption grants no review launch GO, native/phase GO,
+acceptance or merge. Raw r7 and all earlier records remain unchanged; all eight
+phases remain NOT RUN/no native RunRoot. Final CODE/different REQ and A1G/A2/
+broader gates remain separate. Standing review consent persists until revoked.
+
+Historical revision 49 records **SOURCE_BLOCKED_INCOMPLETE_REVIEW_DECOMPOSITION_PREPARING**.
 The seventh [E04-A1E SOURCE report](research/2026-10-20-e04a-source-review-r7.md)
 is raw **BLOCKED** for `e505b21` / run `20261020T041347Z-5175df78`.
 It completed 55 of 93 BODY files; all 33 staged members now have BODY grants.

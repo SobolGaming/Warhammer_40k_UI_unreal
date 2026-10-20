@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_SCOPED_SOURCE_COMPOSITION_ADOPTION_FACTS",
+  "recordedUtc": "2026-10-20T04:40:33.6492443Z",
+  "planRevision": 50,
+  "status": "SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY",
+  "rootAdoptsDesignProspectively": true,
+  "designSourceHead": "6738ad5cf2a43f5ad8574fbe4dff2613794ab483",
+  "adoptionBasis": "Root read the complete pure v4.1 corrected template and public pure criteria, validated inventory/ownership/ranges, and prospectively adopted criteria. This is neither an independent SOURCE assessment nor a launch.",
+  "localRootAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-scope-contract-v4-ten-contexts-20261020-PROPOSED\\root-design-adoption.original.json",
+    "bytes": 7527,
+    "sha256": "7859F01C3D71CE22170212BD1FDE4F1DE06EF3941A765CF010647CFD2026FEC4"
+  },
+  "pureTemplate": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-scope-contract-v4-ten-contexts-20261020-PROPOSED\\source-scope-contract.v4.1.corrected.TEMPLATE.json",
+    "bytes": 41757,
+    "sha256": "7012CD5EDA96F6E0C9E5829E4E59F3B5DA77B4E87F00EEE8E35B4C6CB970F924"
+  },
+  "referenceBodyPolicy": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\body-access-policy.json",
+    "bytes": 52390,
+    "sha256": "2E160CE396FAA4991868A7DDEB40ABE471817196008C2BE75BF28A27D7E84265"
+  },
+  "wrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+    "bytes": 158769,
+    "sha256": "642FD17AE0E46F179C694CBF593365446F989E7754F01D37BD7CB4942EB08E14"
+  },
+  "referenceInventory": {
+    "bodyFiles": 93,
+    "physicalRows": 32460,
+    "domainPrimaryFiles": 87,
+    "commonFiles": 6,
+    "selectedMetadataRecords": 13,
+    "descriptorRows": 902,
+    "pluginReferenceOccurrences": 1561,
+    "stagedMembers": 33,
+    "authoredPaths": 18,
+    "actualFutureCountsMustBeDerived": true
+  },
+  "validation": {
+    "primaryCommonUnionFiles": 93,
+    "primaryCommonDuplicateFiles": 0,
+    "scopes": [
+      {
+        "scopeId": "S_VALUE",
+        "primaryFiles": 25,
+        "requiredEntireFiles": 34,
+        "requiredEntireRows": 8887,
+        "completeUnitBodyCount": 1
+      },
+      {
+        "scopeId": "S_BUILD_HOST",
+        "primaryFiles": 12,
+        "requiredEntireFiles": 35,
+        "requiredEntireRows": 8463,
+        "completeUnitBodyCount": 0
+      },
+      {
+        "scopeId": "S_TARGET_RECEIPT",
+        "primaryFiles": 21,
+        "requiredEntireFiles": 31,
+        "requiredEntireRows": 10543,
+        "completeUnitBodyCount": 0
+      },
+      {
+        "scopeId": "S_PLUGIN",
+        "primaryFiles": 18,
+        "requiredEntireFiles": 34,
+        "requiredEntireRows": 8482,
+        "completeUnitBodyCount": 1
+      },
+      {
+        "scopeId": "S_CLIENT",
+        "primaryFiles": 11,
+        "requiredEntireFiles": 32,
+        "requiredEntireRows": 7106,
+        "completeUnitBodyCount": 1
+      },
+      {
+        "scopeId": "I_ABI_BUILD",
+        "primaryFiles": 0,
+        "requiredEntireFiles": 40,
+        "requiredEntireRows": 10605,
+        "completeUnitBodyCount": 0
+      },
+      {
+        "scopeId": "I_ACTIVATION",
+        "primaryFiles": 0,
+        "requiredEntireFiles": 39,
+        "requiredEntireRows": 9765,
+        "completeUnitBodyCount": 0
+      },
+      {
+        "scopeId": "D_SELECTORS_001_301",
+        "primaryFiles": 0,
+        "requiredEntireFiles": 6,
+        "requiredEntireRows": 784,
+        "completeUnitBodyCount": 0
+      },
+      {
+        "scopeId": "D_SELECTORS_302_602",
+        "primaryFiles": 0,
+        "requiredEntireFiles": 6,
+        "requiredEntireRows": 784,
+        "completeUnitBodyCount": 0
+      },
+      {
+        "scopeId": "D_SELECTORS_603_902",
+        "primaryFiles": 0,
+        "requiredEntireFiles": 6,
+        "requiredEntireRows": 784,
+        "completeUnitBodyCount": 0
+      }
+    ],
+    "fullMetadataRecordOwners": 13,
+    "descriptorRowPartitions": {
+      "first": [
+        1,
+        301
+      ],
+      "second": [
+        302,
+        602
+      ],
+      "third": [
+        603,
+        902
+      ],
+      "covered": 902,
+      "duplicates": 0,
+      "gaps": 0
+    },
+    "completeNamedWrapperUnitChecks": 18,
+    "clientTopLevelRange": [
+      1637,
+      1696
+    ],
+    "limits": "Structural inventory/range checks only; no semantic source/metadata review, native execution or automatic approval is inferred."
+  },
+  "composition": {
+    "freshPrimaryContexts": 5,
+    "freshDataContexts": 3,
+    "freshIndependentIntegrationContexts": 2,
+    "allTenCompleteValidPassRequired": true,
+    "initialEightRawReportsSealedBeforeBlindIntegrations": true,
+    "all93BodiesAnd13SelectedRecordsAccessibleToEveryScope": true,
+    "localMandatoryDutiesBindExactScopeContract": true,
+    "fullMaterialGraphAndInterfaceAssessmentRequired": true,
+    "defaultAccess": "HASH_ONLY",
+    "aggregateRecordKind": "ROOT_AGGREGATED_SCOPED_SOURCE_DISPOSITION",
+    "sourceReviewedReportMapping": "Exact descriptor of labelled root aggregate JSON binding all ten raw reports and runtime/input/output/scope/finding audits",
+    "transportImplementationChanged": false,
+    "scopeBindingEnforcement": "Explicit root prelaunch checks plus existing immutable hashes/full actual prompt",
+    "wrapperImplementationChanged": false,
+    "aggregateEnforcement": "Explicit root enforcement before each actual single-phase GO; unchanged wrapper does not validate all child assessments"
+  },
+  "currentReview": {
+    "rawReport": "docs/plans/research/2026-10-20-e04a-source-review-r7.md",
+    "rawVerdict": "BLOCKED",
+    "sourceHead": "e505b2168a60ee468b441127164db29c70be7ae6",
+    "plannedRunId": "20261020T041347Z-5175df78",
+    "closed": true,
+    "completeBodyFiles": 55,
+    "requiredBodyFiles": 93,
+    "selectedMetadataAssessment": "INCOMPLETE_13_RECORDS_902_ROWS",
+    "confirmedImplementationDefect": false,
+    "allEightPhases": "NOT_RUN",
+    "nativeRunRootExists": false,
+    "historicalReportsAndExecutionResultsUnchanged": true
+  },
+  "nextRequired": "Checkpoint coherent adoption criteria and facts; derive a new clean candidate/common manifest/freeze/campaign/RunId; bind and root-inspect every scope packet before a separately authored single-review GO. All ten current valid complete PASS reports and actual root audits precede aggregate SOURCE approval and any phase GO.",
+  "reviewLaunchAuthority": false,
+  "phaseAuthority": false,
+  "nativeExecutionAuthority": false,
+  "visibleWindowAuthority": false,
+  "publicationOrMergeAuthority": false,
+  "actualGo": false,
+  "separateGates": [
+    "Final independent CODE and different REQ",
+    "E04-A1G genuinely exception-disabled caller",
+    "A2 all 727 compatibility scenarios",
+    "Shared HUD/render/input",
+    "Linux x86-64 remains untested pending host",
+    "Packaging and real-Core play",
+    "Milestone acceptance/publication/merge"
+  ],
+  "standingPrivateSourceApiReviewConsent": "Owner approval in perpetuity to established configured OpenAI Codex destination until explicit revocation; credentials/unrelated private sessions excluded; no repeat consent required"
+}

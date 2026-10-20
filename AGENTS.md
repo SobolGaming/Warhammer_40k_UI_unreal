@@ -78,7 +78,27 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 49 (2026-10-20 UTC) is
+Current A1E status at plan revision 50 (2026-10-20 UTC) is
+**SCOPED_SOURCE_COMPOSITION_ADOPTED_PACKETS_NOT_READY**.
+Root has prospectively adopted the [ten-context SOURCE composition packet](docs/plans/research/2026-10-20-e04a-source-composition-packet.md):
+five fresh blind primary SOURCE scopes, three complete descriptor-data partitions
+and two fresh blind integrations after the eight primary/data reports are sealed.
+The [adoption record](docs/plans/evidence/2026-10-20-e04a-source-composition-adoption.json)
+binds this prospective decision. Every one of the ten must be independently valid, complete and PASS, followed by
+root runtime/input/output/scope/completeness audits and a labelled aggregate
+SOURCE disposition. Preserve the full reference 93-BODY union, all 13 selected
+metadata records/902 rows, all 1,561 Plugin-reference occurrences and material
+relationships; derive actual new frozen identities/counts. Exact-candidate
+packets, contracts/manifests/policies/prompts and runtime bindings are not ready.
+The immutable transport is unchanged; root separately enforces scope/campaign/
+full-prompt bindings and the aggregate gate. `sourceReviewed.report` must bind
+the labelled root aggregate JSON; the wrapper does not automatically validate
+all child reports. This adoption grants no review launch GO, native/phase GO,
+acceptance or merge. Raw r7 and all earlier records remain unchanged; all eight
+phases remain NOT RUN/no native RunRoot. Final CODE/different REQ and A1G/A2/
+broader gates remain separate. Standing review consent persists until revoked.
+
+Historical A1E status at plan revision 49 (2026-10-20 UTC) is
 **SOURCE_BLOCKED_INCOMPLETE_REVIEW_DECOMPOSITION_PREPARING**.
 The seventh [E04-A1E SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r7.md)
 is raw **BLOCKED** for `e505b21` / run `20261020T041347Z-5175df78`.
