@@ -22,6 +22,12 @@ These sibling links are navigation aids to mutable checkouts. Use the immutable 
 
 Root prospectively adopted the [normal rules discovery SOURCE amendment](research/2026-10-20-e04a-source-composition-packet-v4.md)
 and its [adoption record](evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json).
+The [count-text correction](evidence/2026-10-20-e04a-normal-rules-count-text-correction.json)
+supersedes only the earlier unbound template: two stale prose numbers now agree
+with the correct numeric counts. The first common packet and ten panels for
+`354cab7` / `20261020T082729Z-26fda962` are closed unused, without any GO or review
+launch. Preserve those metadata outputs; the corrected template/binder require
+a fresh checkpoint/run. No source/duty/budget/runtime criterion changed.
 Preserve implementation BODY001–094 and add BODY095 for the complete bounded
 normal `RulesCompiler.CreateTargetRulesAssembly` discovery/cache/assembly producer
 and material selection dependencies: 4,424 physical rows / 4,332 literal rows,
@@ -50,8 +56,8 @@ retry=false and no model change. Bind the selected budget consistently in the
 actual packet/runtime/supervisor/GO before use. This is review metadata authority;
 native phase budgets and single-phase execution gates are unchanged.
 
-No new exact head/run/campaign/freeze/panel/GO, helper invocation, reviewer
-assessment or native result exists yet. All ten fresh independently valid
+Fresh corrected head/run/campaign/freeze/panel/GO bindings and reviewer
+assessments/native results remain pending. All ten fresh independently valid
 complete PASS assessments, root admission audits and the labelled aggregate
 must precede any phase. Preserve the closed R3 campaign below: ten unchanged raw
 reports (eight SOURCE_PASS/two BLOCKED), ABI capacity failure without a report,

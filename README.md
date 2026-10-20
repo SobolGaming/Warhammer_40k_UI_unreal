@@ -83,6 +83,10 @@ Current A1E status at plan revision 56 (2026-10-20 UTC) is
 **NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. Root prospectively
 adopted the [normal rules discovery SOURCE amendment](docs/plans/research/2026-10-20-e04a-source-composition-packet-v4.md)
 and its [adoption record](docs/plans/evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json).
+The [count-text correction](docs/plans/evidence/2026-10-20-e04a-normal-rules-count-text-correction.json)
+replaces only its unbound template. The first ten-panel metadata campaign is
+closed unused after two stale prose counts were caught before any GO or launch;
+fresh corrected bindings remain pending.
 The reference inventory is 97 BODY files / 47,410 physical rows, to be derived
 again from the actual new freeze after normative inputs are final. BODY095 adds
 4,424 physical rows / 4,332 literal rows from 23 ranges in 16 installed origins.
@@ -101,8 +105,8 @@ integrations and 1,800 seconds for the other six scopes, with one fresh context,
 one review launch maximum per assessment, no retry and no model change. Exact packet/runtime/
 supervisor/GO bindings remain required before any launch.
 
-No new exact head/run/campaign/freeze/panel/GO, helper invocation, review or native
-result exists yet. All ten fresh independently valid complete PASS assessments,
+Fresh corrected head/run/campaign/freeze/panel/GO bindings and review/native
+results remain pending. All ten fresh independently valid complete PASS assessments,
 root admission audits and a labelled aggregate precede any phase. All eight
 native phases remain NOT RUN/no native RunRoot. R3's unchanged reports and
 withdrawn admissions remain historical; none transfers to the amended source.

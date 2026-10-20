@@ -82,6 +82,10 @@ Current A1E status at plan revision 56 (2026-10-20 UTC) is
 **NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**. Root prospectively
 adopted the [normal rules discovery SOURCE amendment](docs/plans/research/2026-10-20-e04a-source-composition-packet-v4.md)
 and its [adoption record](docs/plans/evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json).
+The [count-text correction](docs/plans/evidence/2026-10-20-e04a-normal-rules-count-text-correction.json)
+supersedes only its unbound template. The first ten-panel metadata campaign is
+closed unused after two stale prose counts were caught before any GO or launch.
+Preserve it; use the corrected template/binder with a fresh checkpoint and run.
 The reference inventory is 97 BODY files / 47,410 physical rows; derive actual
 identities and counts from the new freeze after normative inputs are final.
 BODY095 adds the complete bounded normal discovery/cache/assembly producer:
@@ -102,8 +106,8 @@ Prospective SOURCE launch budgets are 2,700 seconds for BUILD, TARGET and both
 integrations, and 1,800 seconds for the other six scopes. Each launch uses one
 fresh context and one review launch maximum per assessment, no retry and no model change. Bind the
 selected budget consistently in the exact packet/runtime/supervisor/GO before use.
-No new exact head/run/campaign/freeze/panel/GO, helper invocation, review or native
-result exists yet. All ten fresh independently valid complete PASS assessments,
+Fresh corrected head/run/campaign/freeze/panel/GO bindings and review/native
+results remain pending. All ten fresh independently valid complete PASS assessments,
 root admission audits and a labelled aggregate precede any phase. All eight
 native phases remain NOT RUN/no native RunRoot. No old admission transfers to
 the amended source; preserve the R3 closure below. Final CODE/different REQ,
