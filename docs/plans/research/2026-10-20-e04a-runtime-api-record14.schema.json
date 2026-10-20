@@ -1,0 +1,436 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PROPOSED record14 complete runtime lookup API source metadata",
+  "description": "Structural proposal only. FULL_RECORD means all metadata fields recursively; it grants no source BODY read or execution. Cross-record candidate/ownership/unit/line/hash joins require separate root derivation and unresolved values must be refused before review allocation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "recordOrdinal",
+    "proposalState",
+    "bindingStatus",
+    "candidateBinding",
+    "accessSelection",
+    "engine",
+    "provenance",
+    "inventory",
+    "wholeOrigins",
+    "selectedUnits",
+    "typedBoundaries",
+    "frameworkLeaves",
+    "callClosure",
+    "limits",
+    "reviewLaunchAuthority",
+    "nativeExecutionAuthority",
+    "sourceApproval",
+    "admissions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "E04A1E_RUNTIME_LOOKUP_API_METADATA_RECORD_PROPOSED"
+    },
+    "recordOrdinal": {
+      "const": 14
+    },
+    "proposalState": {
+      "const": "PROPOSED_NOT_ADOPTED_NOT_A_BODY_GRANT"
+    },
+    "bindingStatus": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "candidateBinding": {
+      "properties": {
+        "sourceHead": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "scopeOwnership": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "plannedRunId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "comparisonBase": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "sourceHead",
+        "comparisonBase",
+        "plannedRunId",
+        "scopeOwnership"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "accessSelection": {
+      "properties": {
+        "mode": {
+          "const": "FULL_RECORD"
+        },
+        "fields": {
+          "const": "ALL_FIELDS_RECURSIVELY"
+        },
+        "omittedFields": {
+          "maxItems": 0,
+          "type": "array"
+        },
+        "sourceBodyAccess": {
+          "const": "SEPARATE_EXACT_BODY_POLICY_REQUIRED"
+        }
+      },
+      "required": [
+        "mode",
+        "fields",
+        "omittedFields",
+        "sourceBodyAccess"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "engine": {
+      "properties": {
+        "changelist": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "versionFile": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "versionFileSha256": {
+          "pattern": "^[A-Fa-f0-9]{64}$",
+          "type": "string"
+        },
+        "root": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "root",
+        "versionFile",
+        "versionFileSha256",
+        "version",
+        "changelist"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "provenance": {
+      "properties": {
+        "v3Supplement": {
+          "$ref": "#/$defs/descriptor"
+        },
+        "v2": {
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/descriptor"
+          },
+          "type": "array"
+        },
+        "authorLineage": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "authorLineage",
+        "v2",
+        "v3Supplement"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "inventory": {
+      "properties": {
+        "selectedUnitCount": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "selectedLiteralRowsWithOverlap": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "countStatus": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "wholeOriginCount": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "wholeOriginCount",
+        "selectedUnitCount",
+        "selectedLiteralRowsWithOverlap",
+        "countStatus"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "wholeOrigins": {
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/origin"
+      },
+      "type": "array"
+    },
+    "selectedUnits": {
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/unit"
+      },
+      "type": "array"
+    },
+    "typedBoundaries": {
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/boundary"
+      },
+      "type": "array"
+    },
+    "frameworkLeaves": {
+      "minItems": 1,
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "callClosure": {
+      "minItems": 1,
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "limits": {
+      "minItems": 1,
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "reviewLaunchAuthority": {
+      "const": false
+    },
+    "nativeExecutionAuthority": {
+      "const": false
+    },
+    "sourceApproval": {
+      "const": false
+    },
+    "admissions": {
+      "const": 0
+    }
+  },
+  "$defs": {
+    "descriptor": {
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[A-Fa-f0-9]{64}$",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "bytes",
+        "sha256"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "origin": {
+      "properties": {
+        "bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "physicalRows": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[A-Fa-f0-9]{64}$",
+          "type": "string"
+        },
+        "bodyGrant": {
+          "const": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+        },
+        "sourceCategory": {
+          "const": "INSTALLED_PRIMARY_SOURCE"
+        },
+        "originId": {
+          "pattern": "^P[0-9]{2,}$",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "originId",
+        "path",
+        "bytes",
+        "sha256",
+        "physicalRows",
+        "sourceCategory",
+        "bodyGrant"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "unit": {
+      "properties": {
+        "sourceTextSha256": {
+          "pattern": "^[A-Fa-f0-9]{64}$",
+          "type": "string"
+        },
+        "decodedUtf8Bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "supplementId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "unitId": {
+          "pattern": "^APIUNIT-P[0-9]{2,}-[0-9]{3,}$",
+          "type": "string"
+        },
+        "physicalRange": {
+          "minItems": 2,
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "type": "array",
+          "maxItems": 2
+        },
+        "originId": {
+          "pattern": "^P[0-9]{2,}$",
+          "type": "string"
+        },
+        "evidencePackage": {
+          "enum": [
+            "API_V2",
+            "API_V3_SUPPLEMENT"
+          ]
+        }
+      },
+      "required": [
+        "unitId",
+        "originId",
+        "physicalRange",
+        "decodedUtf8Bytes",
+        "sourceTextSha256",
+        "evidencePackage",
+        "supplementId"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "boundary": {
+      "properties": {
+        "unitId": {
+          "pattern": "^APIUNIT-P[0-9]{2,}-[0-9]{3,}$",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "BRANCH_BINDING_WITH_COMPLETE_FUNCTION",
+            "BRANCH_BINDING_WITH_COMPLETE_FUNCTIONS",
+            "CLASS_DECLARATION_AND_ALIAS_BINDING_SLICE",
+            "CLASS_DECLARATION_AND_ELEMENT_STORAGE_BINDING_SLICE",
+            "CLASS_DECLARATION_AND_KEY_FUNCTION_BINDING_SLICE",
+            "CLASS_DECLARATION_AND_MEMBER_TYPE_BINDING_SLICE",
+            "CLASS_DECLARATION_BINDING_WITH_COMPLETE_CONSTRUCTORS",
+            "CLASS_DECLARATION_BINDING_WITH_COMPLETE_FUNCTIONS",
+            "CLASS_INHERITANCE_AND_ALIAS_BINDING_SLICE",
+            "CLASS_INHERITANCE_AND_KEY_FUNCTION_BINDING_SLICE",
+            "CLASS_INHERITANCE_BINDING_SLICE",
+            "COMPLETE_API_CONTRACT_COMMENT",
+            "COMPLETE_CLASS_API_DECLARATION_WITH_INLINE_MEMBERS",
+            "COMPLETE_CLASS_API_DECLARATIONS_AND_INLINE_MEMBERS",
+            "COMPLETE_CONCEPT_AND_VALIDATOR_FUNCTION",
+            "COMPLETE_CONCEPT_DECLARATIONS",
+            "COMPLETE_ENUM_DECLARATION",
+            "COMPLETE_FUNCTION",
+            "COMPLETE_FUNCTION_TEMPLATE",
+            "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+            "COMPLETE_FUNCTION_TEMPLATES",
+            "COMPLETE_FUNCTIONS",
+            "COMPLETE_HELPER_DECLARATION_AND_CLASS_TYPE_BINDING_SLICE",
+            "COMPLETE_INLINE_FUNCTIONS",
+            "COMPLETE_MACRO_DEFINITION_AND_USAGE_CONTRACT",
+            "COMPLETE_MACRO_DEFINITION_BRANCHES",
+            "COMPLETE_MEMBER_FUNCTION",
+            "COMPLETE_NESTED_TYPES_AND_FUNCTIONS_WITH_BRANCH_BINDING",
+            "DECLARATION_OR_EXPLICIT_API_BINDING",
+            "DECLARED_FUNCTION_API_CONTRACT",
+            "DECLARED_MEMBER_API_CONTRACT",
+            "ENTIRE_FILE",
+            "ENTIRE_SMALL_PRIMARY_FILE",
+            "FORWARD_DECLARATION_AND_ALIAS_BINDING_SLICE",
+            "INCLUDE_FORWARD_DECLARATION_DEFAULT_BINDING_SLICE",
+            "MACRO_BINDING_SLICE",
+            "MACRO_BRANCH_BINDING_SLICE",
+            "MACRO_DEFAULT_BINDING",
+            "MACRO_SPECIALIZATION_BINDING_SLICE",
+            "MEMBER_STORAGE_BINDING_SLICE",
+            "NAMESPACE_BINDING_WITH_COMPLETE_FUNCTION",
+            "NAMESPACE_OPERATOR_VISIBILITY_BINDING_SLICE",
+            "PREPROCESSOR_BRANCH_BINDING_SLICE",
+            "TYPE_ALIAS_BINDING_SLICE"
+          ]
+        },
+        "purpose": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "enclosingClassCompletenessClaim": {
+          "enum": [
+            "ENTIRE_FILE",
+            "CLASS_API_DECLARATION_NOT_ALL_OUT_OF_LINE_IMPLEMENTATIONS",
+            "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+          ]
+        }
+      },
+      "required": [
+        "unitId",
+        "kind",
+        "purpose",
+        "enclosingClassCompletenessClaim"
+      ],
+      "additionalProperties": false,
+      "type": "object"
+    }
+  }
+}

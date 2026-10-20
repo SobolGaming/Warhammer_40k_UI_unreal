@@ -78,7 +78,42 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 66 (2026-10-20 UTC) is
+Current A1E status at plan revision 67 (2026-10-20 UTC) is
+**AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING**. Read the
+[v7.1 checkpoint and exact-copy index](docs/plans/research/2026-10-20-e04a-v7.1-method-checkpoint.md),
+[adopted method/UNBOUND design](docs/plans/evidence/2026-10-20-e04a-v7.1-method-adoption.json),
+[API input definition](docs/plans/evidence/2026-10-20-e04a-runtime-api-input-adoption.json),
+[transport source choice](docs/plans/evidence/2026-10-20-e04a-v7-transport-source-adoption.json)
+and [common-helper source choice](docs/plans/evidence/2026-10-20-e04a-v7-common-helper-source-adoption.json).
+Exact authored PROPOSED/NOT_ADOPTED labels remain provenance; the later root
+records adopt rules, input/source choices and the UNBOUND design, not actual
+current bindings. The typed assembler's grouped F01 is statically closed and its
+source choice adopted; dynamic refusal is untested and no helper was invoked.
+The own-panel work remains interface only.
+
+The conditional route is six retained candidates, four fresh primaries, five
+fresh independent integrations and three nonblind compatibility cohorts. All
+six ordinary original-evidence audits are complete, with no current eligibility
+or admission. Root must establish all seven pre-E clauses and the exact narrow
+BUILD/separate D001 dispositions; no old verdict or subject becomes fresh.
+Preserve all seven joins, 16 atoms, 29 local duties, original whole-body/unit/data
+obligations and both independent witness assessments. Keep original 13 records
+separate from supplemental record14/BODY099 and count SOURCE-NORM-001 separately.
+
+Complete/adopt actual source/API/scope/helper definitions and derive exact clean
+own source/unit/typed-data/count/NORM/grant bindings before P or panels. Seal P
+before the three C cohorts; root E is conditional and immutable F precedes fresh
+SOURCE GO. Actual fresh current-vector integrations and complete child/runtime/
+duty/finding audits must discharge future obligations in the aggregate before
+any native phase. Initial integrations receive neutral own permission/identities
+only; E/F remain HASH_ONLY and C/E status/conclusions are excluded.
+The prospective v6 ten-new-PASS-only rule is superseded; its failed R6 raw gate
+and five PASS/three BLOCKED/479-pair history remain unchanged. Both old integrations
+are unused, actual P/C/E/F/panels/GO/admissions remain absent, all eight native
+phases NOT_RUN and visible authority zero. Final fresh CODE/different REQ and
+later gates remain open. Standing private-source/API consent persists until revoked.
+
+Historical A1E status at plan revision 66 (2026-10-20 UTC) is
 **SCOPED_SOURCE_R6_CLOSED_FOLLOWUP_REQUIRED**. The closed
 [R6 summary](docs/plans/research/2026-10-20-e04a-scoped-r6-summary.md) and
 [factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r6-result.json)

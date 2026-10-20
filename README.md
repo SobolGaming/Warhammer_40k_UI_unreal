@@ -7,14 +7,16 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **SCOPED_SOURCE_CHANGES_REQUESTED_RULES_OBSERVATION**.
-The latest source review requires concrete loaded-rules/discovery evidence.
-All initial review processes are closed; all eight native phases remain NOT_RUN.
-The plan records the required repair and preserved reports.
+The bounded E04-A1E proof is **AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING**.
+Revision67 adopts the prospective v7.1 method and UNBOUND design; actual source/
+scope bindings, eligibility, panels and GO remain pending. All eight native
+phases remain NOT_RUN, with zero new visible authority.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
+- Use the [revision67 v7.1 checkpoint and exact-copy index](docs/plans/research/2026-10-20-e04a-v7.1-method-checkpoint.md)
+  for current method, API, transport, metadata-source choices and open bindings.
 - `../Warhammer_40k_UI_arcade` is the legacy client, also called `Warhammer_40k_UI`
   in the owner's request. It supplies behavior and configuration references.
 - `../Warhammer_40k_AI` is the reference-only authoritative core. This migration
@@ -79,7 +81,33 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Current A1E status at plan revision 57 (2026-10-20 UTC) is
+Current A1E status at plan revision 67 (2026-10-20 UTC) is
+**AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING**. The
+[method adoption](docs/plans/evidence/2026-10-20-e04a-v7.1-method-adoption.json)
+binds the exact [criteria](docs/plans/research/2026-10-20-e04a-source-composition-packet-v7.1.md),
+[clean norms](docs/plans/research/2026-10-20-e04a-fresh-source-norms-v7.1.md) and
+[UNBOUND template](docs/plans/research/2026-10-20-e04a-source-scope-contract-v7.1.template.json).
+The [checkpoint](docs/plans/research/2026-10-20-e04a-v7.1-method-checkpoint.md)
+indexes the separate API, transport and typed common-helper source choices and
+their ordinary audits. The assembler's grouped strict-type gap is statically
+closed; dynamic refusal remains untested and no helper ran. Own-panel work is
+interface only. Exact copied PROPOSED/NOT_ADOPTED labels preserve authoring
+provenance; later adoption covers the stated design choices, not actual bindings.
+
+The favorable selection is six retained candidates, nine fresh SOURCE contexts
+and three nonblind compatibility cohorts, conditional on all seven pre-E clauses.
+Six ordinary original-evidence audits are complete; no current eligibility or
+admission follows. Bind actual source/scope/unit/data/count/NORM/helper inputs
+before P; exact P precedes C, conditional root E and immutable F precede fresh
+SOURCE GO, and actual child/integration/runtime audits precede the aggregate
+and any native phase. Original R6 five PASS/three BLOCKED/479 pairs, zero
+admissions and both unused integrations remain historical facts. The failed old
+v6 gate is unchanged; only its prospective ten-new-PASS-only method is superseded.
+P/C/E/F/panels/GO remain absent, all eight native phases NOT_RUN and new visible
+authority zero. Standing source/API consent and final fresh CODE/different REQ
+plus A1G/A2/HUD/Linux/package gates remain unchanged.
+
+Historical A1E status at plan revision 57 (2026-10-20 UTC) is
 **SCOPED_SOURCE_CHANGES_REQUESTED_RULES_OBSERVATION**. The closed
 [R4 summary](docs/plans/research/2026-10-20-e04a-scoped-r4-summary.md) and
 [factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r4-result.json)

@@ -1,0 +1,2686 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_RUNTIME_LOOKUP_API_METADATA_RECORD_PROPOSED",
+  "recordOrdinal": 14,
+  "proposalState": "PROPOSED_NOT_ADOPTED_NOT_A_BODY_GRANT",
+  "bindingStatus": "UNBOUND_FOR_FUTURE_REVIEW",
+  "candidateBinding": {
+    "sourceHead": "UNBOUND",
+    "comparisonBase": "UNBOUND",
+    "plannedRunId": "UNBOUND",
+    "scopeOwnership": "UNBOUND_ROOT_CRITERIA_REQUIRED"
+  },
+  "accessSelection": {
+    "mode": "FULL_RECORD",
+    "fields": "ALL_FIELDS_RECURSIVELY",
+    "omittedFields": [],
+    "sourceBodyAccess": "SEPARATE_EXACT_BODY_POLICY_REQUIRED"
+  },
+  "engine": {
+    "root": "C:\\Program Files\\Epic Games\\UE_5.8",
+    "versionFile": "Engine/Build/Build.version",
+    "versionFileSha256": "EAB58750E84719489F3EE0D42D05A533CEB357EB3EE511777E9408D27A85F43C",
+    "version": "5.8.3",
+    "changelist": 58210709
+  },
+  "provenance": {
+    "authorLineage": "SAME_AUTHOR_AS_API_V1_V2_NONINDEPENDENT_REINSPECTION",
+    "v2": [
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\proposed-runtime-lookup-api-v2-20261020T134900Z-bootstrap-code-review\\proposed-api-units.json",
+        "bytes": 61015,
+        "sha256": "68FCF91C7B4935152A2F77E45DEA57ED31F1C6CCE6FADBE3288C2BAC807DE2BA"
+      },
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\proposed-runtime-lookup-api-v2-20261020T134900Z-bootstrap-code-review\\proposed-source-units.literal.txt",
+        "bytes": 156217,
+        "sha256": "A521A962C2AC7BA8789DC43D78D556DD7AA641F7635109AE68BC0E8DD2378FE3"
+      },
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\proposed-runtime-lookup-api-v2-20261020T134900Z-bootstrap-code-review\\research.md",
+        "bytes": 11000,
+        "sha256": "9DD374003B9EDCCEE96B84553F4756C0D06C5DB010E0521A9BBAB7B62E3C0CB2"
+      },
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\proposed-runtime-lookup-api-v2-20261020T134900Z-bootstrap-code-review\\research-seal.json",
+        "bytes": 1515,
+        "sha256": "F365D7B5748184B4B7151C2840B40E51BB54526B28C52DE8ABDF8D160D647AAF"
+      }
+    ],
+    "v3Supplement": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\proposed-runtime-lookup-api-v3-SUPPLEMENT-20261020T140500Z-bootstrap-code-review\\proposed-api-supplement-v3.json",
+      "bytes": 16718,
+      "sha256": "69173521F417ED9B1FC7EB5E59A7D841391130C15A57BE261634BFD981C45E7C"
+    }
+  },
+  "inventory": {
+    "wholeOriginCount": 38,
+    "selectedUnitCount": 125,
+    "selectedLiteralRowsWithOverlap": 4065,
+    "countStatus": "PROPOSED_COMPOSED_EXACT_PHYSICAL_RANGES_NOT_FORMAL_BODY_COUNTS"
+  },
+  "wholeOrigins": [
+    {
+      "originId": "P01",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Projects\\Private\\RapidJsonPluginLoading.cpp",
+      "bytes": 7776,
+      "sha256": "A3B30B3E07F695B017337D0D54D6405A8A535D41E9EDDF6D7E738F4939C3F353",
+      "physicalRows": 322,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P02",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Projects\\Private\\RapidJsonPluginLoading.h",
+      "bytes": 5675,
+      "sha256": "1B70BCDAC19E2B404CD78C9F2871730DA3524FD769AA2E09B2C3E0610CBCC353",
+      "physicalRows": 192,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P03",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Misc\\CString.h",
+      "bytes": 41039,
+      "sha256": "BE9F2595E082C233C794C2A274201F75D55DC3712AAD76F235D916388D85EF67",
+      "physicalRows": 1291,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P04",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Private\\Misc\\CString.cpp",
+      "bytes": 12877,
+      "sha256": "816B895F1755DD6C35E6C72E08219438E3164964571EE384FFC36657728E386F",
+      "physicalRows": 196,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P05",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\UnrealString.h",
+      "bytes": 8550,
+      "sha256": "76328CA4DFEC744F1A2E05E67010F5628D028967A9333D06F1C8F5A0BD85C3E2",
+      "physicalRows": 304,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P06",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\UnrealString.h.inl",
+      "bytes": 97876,
+      "sha256": "D7C3F34C038D77855D5332D5DF2FB36CA583578BA085CB5AC72C3A89EB5A7996",
+      "physicalRows": 2298,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P07",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Misc\\UEOps.h",
+      "bytes": 14289,
+      "sha256": "44DF4E5ACB454393560EB0B0BDA7C3443D98377AAE0E8B80FE63F12A38B1B225",
+      "physicalRows": 366,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P08",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\ContainersFwd.h",
+      "bytes": 5091,
+      "sha256": "621A2BE80CD7292B06E59F086E173C5E0290123CF714529035E12DFC3DC4916F",
+      "physicalRows": 93,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P09",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\Map.h",
+      "bytes": 14090,
+      "sha256": "D7E8721135C55669DFE46AC6F0D7FD15E0C1AB8DCCD23CC4123CEE81A8AA4218",
+      "physicalRows": 447,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P10",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\Map.h.inl",
+      "bytes": 66188,
+      "sha256": "8ABBAC8D11E3988601A7E226E3ED3A082CDA2CEEF783A90D0434FAD32B1153D0",
+      "physicalRows": 1862,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P11",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\Set.h",
+      "bytes": 1338,
+      "sha256": "134EC528DAB0CF2F7124A765FA6DE1EFDA90F12DE99FDA84099D085EF1349CF2",
+      "physicalRows": 42,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P12",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\SparseSet.h.inl",
+      "bytes": 60839,
+      "sha256": "946E30739B523BC7A20A3C78C95C9A9216D6A99FD5839B82B3D318CF66C88408",
+      "physicalRows": 1855,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P13",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\CompactSet.h.inl",
+      "bytes": 62261,
+      "sha256": "AA982B5D04AD19717A5FEF254DAE7507F992838EF6ADB257CB0064214FC9B856",
+      "physicalRows": 1819,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P14",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Misc\\Crc.h",
+      "bytes": 11019,
+      "sha256": "33F0C99B49EAB356C6877E4B5A3E7B29DFFCBE1115B692B74CDA727B2E67EF35",
+      "physicalRows": 331,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P15",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Misc\\Char.h",
+      "bytes": 9190,
+      "sha256": "B0A3B64758CADDF5151A0396FDB042476BBA4D9C9D1EAAEDA94318B4B069A0E1",
+      "physicalRows": 360,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P16",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Private\\GenericPlatform\\GenericPlatformStricmp.cpp",
+      "bytes": 8485,
+      "sha256": "919AE6E2F1C55E04043D736C1B150B632C07183720C7FD6BE0AB5D470168AE2C",
+      "physicalRows": 194,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P17",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Windows\\WindowsPlatformString.h",
+      "bytes": 2417,
+      "sha256": "15186DC5762C0B628030F94CB6624E13CBAEC2BA015ECA40B4CF53F9605E7F14",
+      "physicalRows": 71,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P18",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Microsoft\\MicrosoftPlatformString.h",
+      "bytes": 14370,
+      "sha256": "C16121EA45BB0245B530D86B80C9C2B0DBB3F7A51B8FD5F7B956609F6C33A48B",
+      "physicalRows": 448,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P19",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\GenericPlatform\\GenericPlatformString.h",
+      "bytes": 15830,
+      "sha256": "32DB30E55F467376DA16FAD6DC9589BFE46AF814940F34AD5A3B1AF3E9995694",
+      "physicalRows": 403,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P20",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\GenericPlatform\\GenericWidePlatformString.h",
+      "bytes": 14459,
+      "sha256": "263FAC7DE2CB6C7A51B710AA08F1925C8E503817CD9833B490B8FB3FB4E505B8",
+      "physicalRows": 497,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P21",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Public\\JsonUtils\\RapidJsonUtils.h",
+      "bytes": 6989,
+      "sha256": "4C7C1642AD4B018F45D743D401FCBA39AFE4EC88AAFD877FEACB6BB51D99E79C",
+      "physicalRows": 239,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P22",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Private\\JsonUtils\\RapidJsonUtils.cpp",
+      "bytes": 8326,
+      "sha256": "07D7EC21D64FD2864F4E466413EC9A2F793A26C4844E084F7587482888C6BE78",
+      "physicalRows": 386,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P23",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Public\\RapidJsonIncludes.h",
+      "bytes": 1964,
+      "sha256": "218E7CB47862114099176DF76C53033E96C24C57FF629A35D0E49B7FB41DD499",
+      "physicalRows": 72,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P24",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\ThirdParty\\RapidJSON\\1.1.0\\rapidjson\\rapidjson.h",
+      "bytes": 26326,
+      "sha256": "F11A9409E04A8C7523C5082035E2D0655BE7E14294DB7B107999C2D1F29075F3",
+      "physicalRows": 741,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P25",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\ThirdParty\\RapidJSON\\1.1.0\\rapidjson\\document.h",
+      "bytes": 137096,
+      "sha256": "986FD88A3FCB2F12B9F7ABF53EAEA2EFB81B6471B8922DB03B67A73594A0CECF",
+      "physicalRows": 3052,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P26",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\StringView.h",
+      "bytes": 32635,
+      "sha256": "031ED90D9BC327B61F04FA2424276821FB34A439EA3DAD3EE4F21F10FE6E7AA6",
+      "physicalRows": 910,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P27",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Public\\JsonUtils\\JsonConversion.h",
+      "bytes": 729,
+      "sha256": "680C2A81827A3DD8725CB48797C6B249474D864E06B33070532F0C86B56C3FB1",
+      "physicalRows": 30,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P28",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Private\\JsonUtils\\JsonConversion.cpp",
+      "bytes": 6208,
+      "sha256": "DE28D9B0CBB0573482E391767BE2719D714A7064F53EA029259C222063173B69",
+      "physicalRows": 229,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P29",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Public\\Dom\\JsonValue.h",
+      "bytes": 19810,
+      "sha256": "3A69F8F30E5FC97D14A20C2268CACC5093C057D3A71C7FCEEA020E90F4C89582",
+      "physicalRows": 675,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P30",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Private\\Dom\\JsonValue.cpp",
+      "bytes": 17555,
+      "sha256": "74F9E9E994238669738869C226FF49A128191EA1388DC198C8926FD999148688",
+      "physicalRows": 782,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P31",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Public\\Dom\\JsonObject.h",
+      "bytes": 21774,
+      "sha256": "05C8E3751D4700E0BEC1AE9BAD522F4D613409105B969B2F2BA4BAE571093029",
+      "physicalRows": 511,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P32",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Private\\Dom\\JsonObject.cpp",
+      "bytes": 17526,
+      "sha256": "8EE9023FEA372291E4F16F5EA2E6207312037447522F1409ABD2308D8EE1071C",
+      "physicalRows": 570,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P33",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\SharedString.h",
+      "bytes": 7264,
+      "sha256": "959634F12652ABB0DAE2AE480DA080FFBD2D2CD0925C28E028AAA217767EAA38",
+      "physicalRows": 241,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P34",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\StringFwd.h",
+      "bytes": 2805,
+      "sha256": "5C3376A3EC40E6EA8FC864A224EED08980C82A4D15BE78873DAB8A58BE498D6D",
+      "physicalRows": 72,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P35",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Json\\Public\\Serialization\\JsonTypes.h",
+      "bytes": 2185,
+      "sha256": "EA507A85E2E36761954673CCDF69F0D1913C92B64CF11017C0023F48FCE06C24",
+      "physicalRows": 90,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P36",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Private\\Containers\\String.cpp.inl",
+      "bytes": 65564,
+      "sha256": "32192417DE792789561E3CDFE0EA80E7ADBF21EBDE173CCFEBB4D69864B2C63B",
+      "physicalRows": 2052,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P37",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Private\\Containers\\String.cpp",
+      "bytes": 2153,
+      "sha256": "3BCEFB43B7FDA1162BF0FC3A9C46839541F563A785B42DF0FEC26A13EBB6104A",
+      "physicalRows": 60,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    },
+    {
+      "originId": "P38",
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Containers\\CompactHashTable.h",
+      "bytes": 19723,
+      "sha256": "60E6DBFE16040194DEC374AF6A0962149B915F1BAE348A5FD57C0093D43A3F1D",
+      "physicalRows": 465,
+      "sourceCategory": "INSTALLED_PRIMARY_SOURCE",
+      "bodyGrant": "NOT_GRANTED_BY_THIS_METADATA_RECORD"
+    }
+  ],
+  "selectedUnits": [
+    {
+      "unitId": "APIUNIT-P01-001",
+      "originId": "P01",
+      "physicalRange": [
+        1,
+        322
+      ],
+      "decodedUtf8Bytes": 7776,
+      "sourceTextSha256": "A3B30B3E07F695B017337D0D54D6405A8A535D41E9EDDF6D7E738F4939C3F353",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P02-001",
+      "originId": "P02",
+      "physicalRange": [
+        1,
+        192
+      ],
+      "decodedUtf8Bytes": 5675,
+      "sourceTextSha256": "1B70BCDAC19E2B404CD78C9F2871730DA3524FD769AA2E09B2C3E0610CBCC353",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P03-001",
+      "originId": "P03",
+      "physicalRange": [
+        517,
+        543
+      ],
+      "decodedUtf8Bytes": 781,
+      "sourceTextSha256": "657D1AEBB4B865C29236D9423E776ECEE08C0CD86C3528873D88E6D067AA35F7",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P03-002",
+      "originId": "P03",
+      "physicalRange": [
+        1071,
+        1081
+      ],
+      "decodedUtf8Bytes": 389,
+      "sourceTextSha256": "9AA37BD12E69A30B0CE44980F3ABEE16127254BDDF36849E459A914C2CDA9A70",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P04-001",
+      "originId": "P04",
+      "physicalRange": [
+        114,
+        185
+      ],
+      "decodedUtf8Bytes": 2214,
+      "sourceTextSha256": "A2D11E9D25CFBAE314EE9F9F0602E77457FE376099B3B7A56D15CCAC6ED95E7E",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P05-001",
+      "originId": "P05",
+      "physicalRange": [
+        13,
+        23
+      ],
+      "decodedUtf8Bytes": 482,
+      "sourceTextSha256": "83A25ADB3C3A038A93F6B1B96DD2088464646F03925E4CB4C3D49AA46288D0B0",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P06-001",
+      "originId": "P06",
+      "physicalRange": [
+        904,
+        915
+      ],
+      "decodedUtf8Bytes": 443,
+      "sourceTextSha256": "466174A1DD34434162A9D5B47576B8D83B9F9762DB0EDFE9EBBAB3FA14E5CF24",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P06-002",
+      "originId": "P06",
+      "physicalRange": [
+        931,
+        935
+      ],
+      "decodedUtf8Bytes": 176,
+      "sourceTextSha256": "C319B22A7DC5B91219233457BE855C04D1163FAE6860D88280CAF8241F1B352B",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P06-003",
+      "originId": "P06",
+      "physicalRange": [
+        1264,
+        1294
+      ],
+      "decodedUtf8Bytes": 953,
+      "sourceTextSha256": "74F3E28D90DD2B85BC96DF892AC63324747B7E1E812F699223C9383628752B63",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P06-004",
+      "originId": "P06",
+      "physicalRange": [
+        2128,
+        2133
+      ],
+      "decodedUtf8Bytes": 256,
+      "sourceTextSha256": "69958573FC0CF79576C9CF033F709A284F59DCF1BB946C985A7E5FC53F063C65",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P06-005",
+      "originId": "P06",
+      "physicalRange": [
+        2002,
+        2009
+      ],
+      "decodedUtf8Bytes": 327,
+      "sourceTextSha256": "D5C5F74EBC55CAF928330EACCA5F352E2F829ECCFBA273B1D0A04D751F215182",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P06-006",
+      "originId": "P06",
+      "physicalRange": [
+        58,
+        74
+      ],
+      "decodedUtf8Bytes": 562,
+      "sourceTextSha256": "E0EA413AFAAFF576CFED1EA0C529D514307AA8540D3925893562076A6B4B5E7A",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P07-001",
+      "originId": "P07",
+      "physicalRange": [
+        8,
+        65
+      ],
+      "decodedUtf8Bytes": 2685,
+      "sourceTextSha256": "6E9D08E0A44E4C046E88F6F460AD952A47E77C8A65E8958940D1F328AD81F3AA",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P07-002",
+      "originId": "P07",
+      "physicalRange": [
+        93,
+        103
+      ],
+      "decodedUtf8Bytes": 361,
+      "sourceTextSha256": "67A1426FB9784E7BC4F94DF51296905E257EEE3A74B15E3432B3CAC1C39C272C",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P07-003",
+      "originId": "P07",
+      "physicalRange": [
+        135,
+        156
+      ],
+      "decodedUtf8Bytes": 903,
+      "sourceTextSha256": "4E33FF43CB25637EA5C7E5D4290E43A0137FEF5E5B276ABAC362DC6C94DC306F",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P07-004",
+      "originId": "P07",
+      "physicalRange": [
+        188,
+        204
+      ],
+      "decodedUtf8Bytes": 527,
+      "sourceTextSha256": "E4DB211ACE2E2C16B73ED20988D22AF82B17A9BE6DE2F8656DBE7ADE94090BA8",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P07-005",
+      "originId": "P07",
+      "physicalRange": [
+        80,
+        84
+      ],
+      "decodedUtf8Bytes": 137,
+      "sourceTextSha256": "DE81A74FBC348CF7AD560CC5DE53E88C493F1611C433A7520DCEC68D27E81B8E",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P07-006",
+      "originId": "P07",
+      "physicalRange": [
+        341,
+        362
+      ],
+      "decodedUtf8Bytes": 1015,
+      "sourceTextSha256": "A9C273B31D45EECB04E3363F3B94AF21D566437C1EB428D8B79D787696B4D3CB",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P08-001",
+      "originId": "P08",
+      "physicalRange": [
+        75,
+        81
+      ],
+      "decodedUtf8Bytes": 1305,
+      "sourceTextSha256": "CB926E9FF37569DD31AFC326E46C08740CEB763FE0671567765CB21D88AFA692",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P09-001",
+      "originId": "P09",
+      "physicalRange": [
+        76,
+        119
+      ],
+      "decodedUtf8Bytes": 1516,
+      "sourceTextSha256": "A087B8F30163F85E9BE2ACF35903E2D1CAF0DD3369AFB546CE7EAF053C28FDF6",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P09-002",
+      "originId": "P09",
+      "physicalRange": [
+        140,
+        150
+      ],
+      "decodedUtf8Bytes": 230,
+      "sourceTextSha256": "9BC076111694F5A434F451A0BFA6B11697741F18988117F55679E08D150305C8",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P10-001",
+      "originId": "P10",
+      "physicalRange": [
+        3,
+        13
+      ],
+      "decodedUtf8Bytes": 456,
+      "sourceTextSha256": "8BC55A290A8889BD75E3547355B8D68E56892323CF6372EEB30DBEAC5CC4BFD8",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P10-002",
+      "originId": "P10",
+      "physicalRange": [
+        27,
+        41
+      ],
+      "decodedUtf8Bytes": 703,
+      "sourceTextSha256": "DC9B91ED2EC1615806C34AFD3CE7BFDBC7BD977BED76F433FB0964935ECB370F",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P10-003",
+      "originId": "P10",
+      "physicalRange": [
+        482,
+        518
+      ],
+      "decodedUtf8Bytes": 1140,
+      "sourceTextSha256": "1D6C43A08F55E40B735C4D18ADAED357AEBD11EA34A96A7EFF18C2A6F6070574",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P10-004",
+      "originId": "P10",
+      "physicalRange": [
+        881,
+        882
+      ],
+      "decodedUtf8Bytes": 74,
+      "sourceTextSha256": "55F564F07D82327DCA03CC65EA0DB850446BAD39943BE18AC49575CBDC65B3EC",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P10-005",
+      "originId": "P10",
+      "physicalRange": [
+        1020,
+        1025
+      ],
+      "decodedUtf8Bytes": 302,
+      "sourceTextSha256": "958BF0D59B4A191407C1D3CEFDB69D6AFA64246BA3B633E1CDB33DF23FD35A80",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P10-006",
+      "originId": "P10",
+      "physicalRange": [
+        1177,
+        1193
+      ],
+      "decodedUtf8Bytes": 856,
+      "sourceTextSha256": "30E04A58AA4E59BC870E0EC9963CEDDE366E9FB167DEFF9F15766A3C9ADB94FE",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P11-001",
+      "originId": "P11",
+      "physicalRange": [
+        1,
+        42
+      ],
+      "decodedUtf8Bytes": 1338,
+      "sourceTextSha256": "134EC528DAB0CF2F7124A765FA6DE1EFDA90F12DE99FDA84099D085EF1349CF2",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P12-001",
+      "originId": "P12",
+      "physicalRange": [
+        736,
+        766
+      ],
+      "decodedUtf8Bytes": 965,
+      "sourceTextSha256": "822BED792934B096241B492FB9570068693E2E3F86AC59F2F3D5324C3E9196F6",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P12-002",
+      "originId": "P12",
+      "physicalRange": [
+        786,
+        810
+      ],
+      "decodedUtf8Bytes": 1024,
+      "sourceTextSha256": "E32744E6BA1D0DC886D253E343CE942A772B0742829416510944D7A31AC1900D",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P12-003",
+      "originId": "P12",
+      "physicalRange": [
+        812,
+        863
+      ],
+      "decodedUtf8Bytes": 1628,
+      "sourceTextSha256": "91B07488059856C7CA5648148712214F0A1BFECCC3E03DC5920AA43F46196F95",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P13-001",
+      "originId": "P13",
+      "physicalRange": [
+        1000,
+        1020
+      ],
+      "decodedUtf8Bytes": 859,
+      "sourceTextSha256": "A48B4432983B3E1582286B79E6A9D8D7A55FD57BD6C7A6900E844DA478112B03",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P13-002",
+      "originId": "P13",
+      "physicalRange": [
+        1022,
+        1073
+      ],
+      "decodedUtf8Bytes": 1621,
+      "sourceTextSha256": "B1830B36A5FC60538ED2480078E9DD1999498EE69936F4143623B523CCED2AED",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P13-003",
+      "originId": "P13",
+      "physicalRange": [
+        1530,
+        1565
+      ],
+      "decodedUtf8Bytes": 1411,
+      "sourceTextSha256": "7937F77261C72A1FB3DFDFFD7AE383D4DF1A7813FF6C452589A2FEC66FE74786",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P14-001",
+      "originId": "P14",
+      "physicalRange": [
+        158,
+        172
+      ],
+      "decodedUtf8Bytes": 418,
+      "sourceTextSha256": "24112D6B8980E0C389CC24C22EBD08979405214A05180497EA371363AC8DE79F",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P14-002",
+      "originId": "P14",
+      "physicalRange": [
+        192,
+        208
+      ],
+      "decodedUtf8Bytes": 550,
+      "sourceTextSha256": "8A260258513F6AD15E03A19DC9091C81D55C2F1D9B34F4C61567E7E75E741D40",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P14-003",
+      "originId": "P14",
+      "physicalRange": [
+        232,
+        251
+      ],
+      "decodedUtf8Bytes": 715,
+      "sourceTextSha256": "D62AF755FF9625578854165937F47A65EE08F7C96F1461CD84310887EBEC5198",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P15-001",
+      "originId": "P15",
+      "physicalRange": [
+        74,
+        91
+      ],
+      "decodedUtf8Bytes": 529,
+      "sourceTextSha256": "B9D1B4068927C9BB4872C82CC7510949C99DDF58C64989661DF2E26C55B24DB7",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P15-002",
+      "originId": "P15",
+      "physicalRange": [
+        344,
+        355
+      ],
+      "decodedUtf8Bytes": 443,
+      "sourceTextSha256": "F464BC95307036D89E5F21B2E3DF5DD9DA28B2FB4712D0D4EF6406BAEBE67795",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P16-001",
+      "originId": "P16",
+      "physicalRange": [
+        1,
+        119
+      ],
+      "decodedUtf8Bytes": 5913,
+      "sourceTextSha256": "8440B2CA37285543F3716775F156A32AA32358EC2AB31204DBA83D3D01531008",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P17-001",
+      "originId": "P17",
+      "physicalRange": [
+        1,
+        27
+      ],
+      "decodedUtf8Bytes": 817,
+      "sourceTextSha256": "582D4B2025159D0106F60A011DA9C54B01737A622E55B735484CCA45FE82CB55",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P18-001",
+      "originId": "P18",
+      "physicalRange": [
+        7,
+        13
+      ],
+      "decodedUtf8Bytes": 250,
+      "sourceTextSha256": "BF2B8D5AEB3EE475BDE5B209E4987A16DDBB5163313423817CB058F0A07419DC",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P18-002",
+      "originId": "P18",
+      "physicalRange": [
+        28,
+        43
+      ],
+      "decodedUtf8Bytes": 442,
+      "sourceTextSha256": "69D3F34D6ED7F8C3103F6AE41EA6CFC48A9A403D31BC5E2FA351C408A5A67FC5",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P19-001",
+      "originId": "P19",
+      "physicalRange": [
+        1,
+        6
+      ],
+      "decodedUtf8Bytes": 147,
+      "sourceTextSha256": "1EB2D5FDD6555C7E884C53D2838A6077F62BC4862CB1EEC9D744F02EFA2141C3",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P19-002",
+      "originId": "P19",
+      "physicalRange": [
+        58,
+        62
+      ],
+      "decodedUtf8Bytes": 130,
+      "sourceTextSha256": "F7621505CBF8A455B187D8090F3D47CDA0A15A384ECD4B43F06C49A23400C9D6",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P20-001",
+      "originId": "P20",
+      "physicalRange": [
+        7,
+        22
+      ],
+      "decodedUtf8Bytes": 466,
+      "sourceTextSha256": "1782E90F82134A848044B1D98A65DF2D47292EC1102AE08B9E902A00B909CC23",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P21-001",
+      "originId": "P21",
+      "physicalRange": [
+        56,
+        74
+      ],
+      "decodedUtf8Bytes": 831,
+      "sourceTextSha256": "A18356B701693E9C7993A62EF59FBE01BE061845B6C40674572314CBA797EE4F",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P22-001",
+      "originId": "P22",
+      "physicalRange": [
+        131,
+        140
+      ],
+      "decodedUtf8Bytes": 267,
+      "sourceTextSha256": "F63FC66B0AE81C4ABA99ADEF37E2A4E21D7DE1D11F96E6DA0BA439FD2093DF46",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P23-001",
+      "originId": "P23",
+      "physicalRange": [
+        1,
+        72
+      ],
+      "decodedUtf8Bytes": 1964,
+      "sourceTextSha256": "218E7CB47862114099176DF76C53033E96C24C57FF629A35D0E49B7FB41DD499",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P24-001",
+      "originId": "P24",
+      "physicalRange": [
+        166,
+        181
+      ],
+      "decodedUtf8Bytes": 591,
+      "sourceTextSha256": "9BA1D2875AB50ABE552035118D10A10346CDE36E0E40810ACE47E1C509FF4F28",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P24-002",
+      "originId": "P24",
+      "physicalRange": [
+        728,
+        737
+      ],
+      "decodedUtf8Bytes": 294,
+      "sourceTextSha256": "81895F0604BC348FEF9EF4254DE010B89446D1D4F9238BA8FB99FE335DFBD147",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-001",
+      "originId": "P25",
+      "physicalRange": [
+        1120,
+        1133
+      ],
+      "decodedUtf8Bytes": 1002,
+      "sourceTextSha256": "F4FB52EA1433438500D6C2A2A7FB1AE92B64F13624B527F9274D10080780D8D0",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-002",
+      "originId": "P25",
+      "physicalRange": [
+        1185,
+        1185
+      ],
+      "decodedUtf8Bytes": 93,
+      "sourceTextSha256": "161A14F877B66BF8347922AB75BEBC4CD666653E81051E818D391C1EA81BA09D",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-003",
+      "originId": "P25",
+      "physicalRange": [
+        1346,
+        1372
+      ],
+      "decodedUtf8Bytes": 1309,
+      "sourceTextSha256": "C15EB959508CE5FD6B1F3FCECF1F38D0BF58F4BE08422C4B9A41A181977F342F",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-004",
+      "originId": "P25",
+      "physicalRange": [
+        1826,
+        1841
+      ],
+      "decodedUtf8Bytes": 1306,
+      "sourceTextSha256": "0A4DF095D3A64CE694E0A8BFB35050258806E4AC571318330034F83F78BF1E07",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-005",
+      "originId": "P25",
+      "physicalRange": [
+        2290,
+        2297
+      ],
+      "decodedUtf8Bytes": 331,
+      "sourceTextSha256": "7190235A1E3590596322686346E55A2BD3E79901364E45D5749437D2B906EEE2",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-006",
+      "originId": "P25",
+      "physicalRange": [
+        2474,
+        2488
+      ],
+      "decodedUtf8Bytes": 603,
+      "sourceTextSha256": "CC90E2BEC85770E37EA71F9B80FFB1C570F1BBCCF18E9DDA2736F45996644CF6",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-007",
+      "originId": "P25",
+      "physicalRange": [
+        2990,
+        2991
+      ],
+      "decodedUtf8Bytes": 142,
+      "sourceTextSha256": "68C28FA48DFAABB003139A2856F33961FC1B1D35D34ABA506C12C6424BC97ADE",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-008",
+      "originId": "P25",
+      "physicalRange": [
+        2998,
+        2999
+      ],
+      "decodedUtf8Bytes": 255,
+      "sourceTextSha256": "016388B6551714B82019644A42F986A373FF8DAC109EE053CF94A55192569C12",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-009",
+      "originId": "P25",
+      "physicalRange": [
+        54,
+        79
+      ],
+      "decodedUtf8Bytes": 763,
+      "sourceTextSha256": "701CAD36F3C25FA2FDC5B5018EECB603807507E5D6DE6D7025793CED399FA547",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-010",
+      "originId": "P25",
+      "physicalRange": [
+        666,
+        693
+      ],
+      "decodedUtf8Bytes": 1844,
+      "sourceTextSha256": "31F3207C1E9FBA50FF93DAEAFC1B7DC29C641D89D782724505C9282BC3E103A9",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-011",
+      "originId": "P25",
+      "physicalRange": [
+        1275,
+        1286
+      ],
+      "decodedUtf8Bytes": 822,
+      "sourceTextSha256": "69FB7FCC307441F79CF7A47959277D9F6C844868CB460901A32B651EBAEAC53D",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-012",
+      "originId": "P25",
+      "physicalRange": [
+        1637,
+        1640
+      ],
+      "decodedUtf8Bytes": 346,
+      "sourceTextSha256": "3614CF322B7D58BC6F114FBE78A08C1E239294ED1B2BBFAD9E1EB56F7D93919B",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-013",
+      "originId": "P25",
+      "physicalRange": [
+        1818,
+        1819
+      ],
+      "decodedUtf8Bytes": 168,
+      "sourceTextSha256": "94AB2E7F94CA98032AFC5009998E2218A92C8DEAFEF0D74E05A684B4CF00B733",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-014",
+      "originId": "P25",
+      "physicalRange": [
+        1862,
+        1867
+      ],
+      "decodedUtf8Bytes": 365,
+      "sourceTextSha256": "4E4D9AB8EC4AEE4906707002F1824D60CA4A4FC0E76220A50FA05CC0EFE82C71",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-015",
+      "originId": "P25",
+      "physicalRange": [
+        2000,
+        2030
+      ],
+      "decodedUtf8Bytes": 1859,
+      "sourceTextSha256": "9F4EE498696AA7FA8165998EEA82801907EC24496E8AE422EC3FA05CBC90BC6D",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-016",
+      "originId": "P25",
+      "physicalRange": [
+        2035,
+        2147
+      ],
+      "decodedUtf8Bytes": 5097,
+      "sourceTextSha256": "844477775375A073309CB76F4170DCAB1C54041E998FB2659CBD29CF42C11BCD",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-017",
+      "originId": "P25",
+      "physicalRange": [
+        2182,
+        2187
+      ],
+      "decodedUtf8Bytes": 344,
+      "sourceTextSha256": "11BC4D29969CE301920534CD7759B264BCA5CF1A0C57CC4DEE378283A46039E9",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-018",
+      "originId": "P25",
+      "physicalRange": [
+        2237,
+        2247
+      ],
+      "decodedUtf8Bytes": 473,
+      "sourceTextSha256": "4B54CCE8FD0CC7E8E50C0B67608D59F38C85DFF4F1750678E2B589B10AC95BAE",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-019",
+      "originId": "P25",
+      "physicalRange": [
+        2275,
+        2275
+      ],
+      "decodedUtf8Bytes": 36,
+      "sourceTextSha256": "D6A7DD26C8644BB8BF9735BA7A183F13E5EE4B39E9B0366CC670FA963E5E43E4",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-020",
+      "originId": "P25",
+      "physicalRange": [
+        2311,
+        2311
+      ],
+      "decodedUtf8Bytes": 37,
+      "sourceTextSha256": "7DD748028CB5C990172E85C42771006C55BD58B9A6A9BF472D4E55A227677ED0",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P25-021",
+      "originId": "P25",
+      "physicalRange": [
+        2955,
+        2975
+      ],
+      "decodedUtf8Bytes": 1130,
+      "sourceTextSha256": "941EF0F7B45DC3CD20CEFD4C37B2D6BA7ED7A38A1560634FEEC6E39DB227B037",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-001",
+      "originId": "P26",
+      "physicalRange": [
+        367,
+        371
+      ],
+      "decodedUtf8Bytes": 255,
+      "sourceTextSha256": "A21EBE2C27FDE2CA6D86F5B1EB9D6D2A72821DE45547DE2BA2A867E30A6E5A9F",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-002",
+      "originId": "P26",
+      "physicalRange": [
+        411,
+        415
+      ],
+      "decodedUtf8Bytes": 230,
+      "sourceTextSha256": "9A17196B3B404B5B9F29E6A9270B391A92ED8521B0808022C4EE132A4EC9755C",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-003",
+      "originId": "P26",
+      "physicalRange": [
+        509,
+        530
+      ],
+      "decodedUtf8Bytes": 745,
+      "sourceTextSha256": "F8B59B0AFB41D85856327CDF491534409B75A35EB2451FD3C1B8ACE7FAFC8A57",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-004",
+      "originId": "P26",
+      "physicalRange": [
+        778,
+        807
+      ],
+      "decodedUtf8Bytes": 739,
+      "sourceTextSha256": "1F2CE67C62897363EF8E23F99184EFBCDFA9F8F243438540754DAE10B7435180",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-005",
+      "originId": "P26",
+      "physicalRange": [
+        870,
+        880
+      ],
+      "decodedUtf8Bytes": 386,
+      "sourceTextSha256": "934D53ABE38750DC5549EDD7D5B65E2CD2A2D591ED401176CDD24EF8737CB293",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-006",
+      "originId": "P26",
+      "physicalRange": [
+        30,
+        49
+      ],
+      "decodedUtf8Bytes": 323,
+      "sourceTextSha256": "5F212379CAF836A826F57B0B19B8B7965BE23A5E3B53B9B8426AEDB5712F29BB",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-007",
+      "originId": "P26",
+      "physicalRange": [
+        113,
+        172
+      ],
+      "decodedUtf8Bytes": 2604,
+      "sourceTextSha256": "18F08CCDD42C0FA3CF60258563801B14E28A2BA01C6FAE4C93E28D33E28948F2",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-008",
+      "originId": "P26",
+      "physicalRange": [
+        568,
+        579
+      ],
+      "decodedUtf8Bytes": 574,
+      "sourceTextSha256": "3BF7E5A36EDBE9314AC6433EBAFABDA51D695BE71986B35C2791B678C92D207D",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P26-009",
+      "originId": "P26",
+      "physicalRange": [
+        894,
+        906
+      ],
+      "decodedUtf8Bytes": 529,
+      "sourceTextSha256": "122E84A8C43461CFB48EBBBA55808501D39C6971916AD3774EACBAF2E49A456C",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P27-001",
+      "originId": "P27",
+      "physicalRange": [
+        1,
+        30
+      ],
+      "decodedUtf8Bytes": 729,
+      "sourceTextSha256": "680C2A81827A3DD8725CB48797C6B249474D864E06B33070532F0C86B56C3FB1",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P28-001",
+      "originId": "P28",
+      "physicalRange": [
+        1,
+        229
+      ],
+      "decodedUtf8Bytes": 6208,
+      "sourceTextSha256": "DE28D9B0CBB0573482E391767BE2719D714A7064F53EA029259C222063173B69",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P29-001",
+      "originId": "P29",
+      "physicalRange": [
+        1,
+        322
+      ],
+      "decodedUtf8Bytes": 11682,
+      "sourceTextSha256": "A8D7F9163C2C417E4B779CBE6C9C8D8504A54ECF69C2CA966CBE4A2AA95813F8",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P29-002",
+      "originId": "P29",
+      "physicalRange": [
+        408,
+        448
+      ],
+      "decodedUtf8Bytes": 869,
+      "sourceTextSha256": "E6342FAF5E8B8E1B5F92D315FF9708EBCD403C7516C1B1111522E17AEF84EB7D",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P29-003",
+      "originId": "P29",
+      "physicalRange": [
+        492,
+        497
+      ],
+      "decodedUtf8Bytes": 145,
+      "sourceTextSha256": "D3D02B0D31701E2105CC3CBFD65BF8A19A7AC8995996FE3FFF86AA66A371D562",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P29-004",
+      "originId": "P29",
+      "physicalRange": [
+        544,
+        596
+      ],
+      "decodedUtf8Bytes": 1230,
+      "sourceTextSha256": "10628A19984CAF6133BBF61B2F5CE1D1121F8B9A892FDF69F6E3C314414E7069",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P29-005",
+      "originId": "P29",
+      "physicalRange": [
+        646,
+        651
+      ],
+      "decodedUtf8Bytes": 151,
+      "sourceTextSha256": "F4A5FD051C586EF1998AB3492D1450FD34293986F1614A240E090A4667A8ADF8",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-001",
+      "originId": "P30",
+      "physicalRange": [
+        6,
+        11
+      ],
+      "decodedUtf8Bytes": 94,
+      "sourceTextSha256": "3DBAC324F80D67AC933396595F2E31177689E35B252C60E6EF20CF5BD7EF0234",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-002",
+      "originId": "P30",
+      "physicalRange": [
+        78,
+        90
+      ],
+      "decodedUtf8Bytes": 317,
+      "sourceTextSha256": "F8A23A696E16BEFDC1894229726B340618E4EA091497FDB1795BBA4E28B513A4",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-003",
+      "originId": "P30",
+      "physicalRange": [
+        139,
+        142
+      ],
+      "decodedUtf8Bytes": 78,
+      "sourceTextSha256": "20D37AC74CFAD7FEED9222A4EA107897AF6D43ABF48F22D6A859309427B86AB1",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-004",
+      "originId": "P30",
+      "physicalRange": [
+        197,
+        230
+      ],
+      "decodedUtf8Bytes": 639,
+      "sourceTextSha256": "AAC5E53ABC3F853EB7A3E5A353D0BA2737065F5167A049BD5EE1A4E25D8658EB",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-005",
+      "originId": "P30",
+      "physicalRange": [
+        426,
+        456
+      ],
+      "decodedUtf8Bytes": 647,
+      "sourceTextSha256": "EF4349897ACCE582E5FFB980706892F0D9617018396B1FE79BE07DB8DD2F5F4D",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-006",
+      "originId": "P30",
+      "physicalRange": [
+        468,
+        498
+      ],
+      "decodedUtf8Bytes": 662,
+      "sourceTextSha256": "8B04E627DCCC68627F3959F30B2D564F8B453B48BF72893EA71B2EEC6B6B4B05",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-007",
+      "originId": "P30",
+      "physicalRange": [
+        510,
+        534
+      ],
+      "decodedUtf8Bytes": 569,
+      "sourceTextSha256": "2AAB550C32ED56ED0E7F0EE9886B3255FF7F70BAC9C8D5A55BF0D7A696DB1D15",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-008",
+      "originId": "P30",
+      "physicalRange": [
+        557,
+        575
+      ],
+      "decodedUtf8Bytes": 431,
+      "sourceTextSha256": "70CB47E2B5E7AE8893E5AB4D4458B801B054C1D0AE5A1D807D02DCE5F85AC70D",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P30-009",
+      "originId": "P30",
+      "physicalRange": [
+        592,
+        597
+      ],
+      "decodedUtf8Bytes": 110,
+      "sourceTextSha256": "D224B223D22506C47A17390D9C7008DB6EA020B35BFE86E8A32D20B9F414C1C3",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P31-001",
+      "originId": "P31",
+      "physicalRange": [
+        1,
+        511
+      ],
+      "decodedUtf8Bytes": 21774,
+      "sourceTextSha256": "05C8E3751D4700E0BEC1AE9BAD522F4D613409105B969B2F2BA4BAE571093029",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P32-001",
+      "originId": "P32",
+      "physicalRange": [
+        17,
+        26
+      ],
+      "decodedUtf8Bytes": 326,
+      "sourceTextSha256": "60FF324157BFB6A1B7667A209D6C55A01FA1F21911600AEDC3B16B5DE8B1FABC",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P32-002",
+      "originId": "P32",
+      "physicalRange": [
+        38,
+        48
+      ],
+      "decodedUtf8Bytes": 374,
+      "sourceTextSha256": "05FE5493FC5C7CACA07D617C67676FCB3A5F97E59C1AFE3EA8A86BC232D80674",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P32-003",
+      "originId": "P32",
+      "physicalRange": [
+        68,
+        71
+      ],
+      "decodedUtf8Bytes": 177,
+      "sourceTextSha256": "AF71521435651344EDA50E9A9D4E022ED6A15CB7CF00D1B7E1BC0D2B4BA95600",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P32-004",
+      "originId": "P32",
+      "physicalRange": [
+        157,
+        177
+      ],
+      "decodedUtf8Bytes": 642,
+      "sourceTextSha256": "7C340E27AA1603F068687A32DE5C29ACDA0B0732433A38B2083B6877B434082A",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P32-005",
+      "originId": "P32",
+      "physicalRange": [
+        328,
+        386
+      ],
+      "decodedUtf8Bytes": 1647,
+      "sourceTextSha256": "F25CD420FD523634E773B9D709EFF17D1C0F0D807DE3EC2BA3F9FCB014D1EE09",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P32-006",
+      "originId": "P32",
+      "physicalRange": [
+        484,
+        519
+      ],
+      "decodedUtf8Bytes": 733,
+      "sourceTextSha256": "BC10C3A601287DD6708D9BA05A6615FEC27DB77D01ADE78753CAA0B21E8465F3",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P32-007",
+      "originId": "P32",
+      "physicalRange": [
+        523,
+        554
+      ],
+      "decodedUtf8Bytes": 1103,
+      "sourceTextSha256": "802051F28ADD2AC2BC380D872C49F3A5FBAE21385F6CF882A62FC200B63FE854",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P33-001",
+      "originId": "P33",
+      "physicalRange": [
+        1,
+        146
+      ],
+      "decodedUtf8Bytes": 4424,
+      "sourceTextSha256": "CBD7DAFC8C98DBDE9F3BE471EAB15A5289F4A14FD14AAC922E976F627219AF0C",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P33-002",
+      "originId": "P33",
+      "physicalRange": [
+        236,
+        241
+      ],
+      "decodedUtf8Bytes": 191,
+      "sourceTextSha256": "C45ED4351E745545FD3D9F0B6DA3FFE9D530AE97C4453B635C1F9DBA4D62D4E5",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P34-001",
+      "originId": "P34",
+      "physicalRange": [
+        40,
+        64
+      ],
+      "decodedUtf8Bytes": 690,
+      "sourceTextSha256": "2F127B9B5A38EE83FFB0D6ABE82DEE6FF97FF715E9F850C74F01544FBF143743",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P35-001",
+      "originId": "P35",
+      "physicalRange": [
+        19,
+        31
+      ],
+      "decodedUtf8Bytes": 150,
+      "sourceTextSha256": "C84BAD93E11FF78FE4ED2D5867EE3A572E7C3981F89FC8324A8BD10B512FE4A8",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P36-001",
+      "originId": "P36",
+      "physicalRange": [
+        1166,
+        1169
+      ],
+      "decodedUtf8Bytes": 92,
+      "sourceTextSha256": "2DC684B1A35AFFEC67ACF773C96029E74842920691A1044378C5AECB85FBD68A",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P37-001",
+      "originId": "P37",
+      "physicalRange": [
+        3,
+        14
+      ],
+      "decodedUtf8Bytes": 483,
+      "sourceTextSha256": "E90D5FDC6A9A33F31AFE4A9B261D8C8164629BF50F43AD257626908B0D52839C",
+      "evidencePackage": "API_V2",
+      "supplementId": null
+    },
+    {
+      "unitId": "APIUNIT-P21-002",
+      "originId": "P21",
+      "physicalRange": [
+        196,
+        199
+      ],
+      "decodedUtf8Bytes": 162,
+      "sourceTextSha256": "FC164EA2A2EC91485C53E604B7BB304AA3DB0A63B8EEDB2E3D0FDB9D83F46B3E",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-01"
+    },
+    {
+      "unitId": "APIUNIT-P22-002",
+      "originId": "P22",
+      "physicalRange": [
+        121,
+        129
+      ],
+      "decodedUtf8Bytes": 156,
+      "sourceTextSha256": "EE63D75C666815EBFF832FE26193F8E274455C15D6A32E14AE1BD17C1404C1D6",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-02"
+    },
+    {
+      "unitId": "APIUNIT-P25-022",
+      "originId": "P25",
+      "physicalRange": [
+        2507,
+        2513
+      ],
+      "decodedUtf8Bytes": 634,
+      "sourceTextSha256": "BD65FDC7A5543A02E1EC772A5501EC1AC8C2739251F2EB404A74F480F7B7B166",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-03"
+    },
+    {
+      "unitId": "APIUNIT-P25-023",
+      "originId": "P25",
+      "physicalRange": [
+        81,
+        89
+      ],
+      "decodedUtf8Bytes": 348,
+      "sourceTextSha256": "23FAA0F767B974DDF3E884382928B6DFD65FDC7A40438513500AD7794B0B32AE",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-04"
+    },
+    {
+      "unitId": "APIUNIT-P03-003",
+      "originId": "P03",
+      "physicalRange": [
+        52,
+        70
+      ],
+      "decodedUtf8Bytes": 772,
+      "sourceTextSha256": "A6097B024412D96AC859BE26D0C4815EBDD749251D32F019143210BA170CC166",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-05"
+    },
+    {
+      "unitId": "APIUNIT-P03-004",
+      "originId": "P03",
+      "physicalRange": [
+        635,
+        638
+      ],
+      "decodedUtf8Bytes": 164,
+      "sourceTextSha256": "75B23ECE0F41D19C58601EB40A808B29D34310AD4D715D29FF0FD3F8F09EBEF8",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-06"
+    },
+    {
+      "unitId": "APIUNIT-P12-004",
+      "originId": "P12",
+      "physicalRange": [
+        53,
+        78
+      ],
+      "decodedUtf8Bytes": 802,
+      "sourceTextSha256": "96DFB834ABD82B4B2F8718339C5BC3972C22978876E4A1AF953F22CC016FC2F7",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-07"
+    },
+    {
+      "unitId": "APIUNIT-P13-004",
+      "originId": "P13",
+      "physicalRange": [
+        69,
+        83
+      ],
+      "decodedUtf8Bytes": 800,
+      "sourceTextSha256": "8EC748B61B9E9FF99AC6281F164001C0EAE4A80C1DAB2E04418D28CAE96C7FB2",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-08"
+    },
+    {
+      "unitId": "APIUNIT-P38-001",
+      "originId": "P38",
+      "physicalRange": [
+        19,
+        29
+      ],
+      "decodedUtf8Bytes": 593,
+      "sourceTextSha256": "833C55E9792EAD069A32831E589E523E2505B6A3E5223493454CE341F964A078",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-09"
+    },
+    {
+      "unitId": "APIUNIT-P38-002",
+      "originId": "P38",
+      "physicalRange": [
+        52,
+        58
+      ],
+      "decodedUtf8Bytes": 272,
+      "sourceTextSha256": "60AA3BA903E7BA5FAAC51246EA8833695C71558F162E7FD3BC0D13FC20BAA3D4",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-10"
+    },
+    {
+      "unitId": "APIUNIT-P26-010",
+      "originId": "P26",
+      "physicalRange": [
+        221,
+        225
+      ],
+      "decodedUtf8Bytes": 191,
+      "sourceTextSha256": "90019EEED7D37874A0025B86CCDD168B96E4C3935F428BB64BF34799B4EAF25B",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-11"
+    },
+    {
+      "unitId": "APIUNIT-P26-011",
+      "originId": "P26",
+      "physicalRange": [
+        235,
+        239
+      ],
+      "decodedUtf8Bytes": 123,
+      "sourceTextSha256": "808CCCCD929BC260F692C939708EBA4C59E86F705B7B6A9ECCB5FB6E7D73389A",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-12"
+    },
+    {
+      "unitId": "APIUNIT-P26-012",
+      "originId": "P26",
+      "physicalRange": [
+        559,
+        562
+      ],
+      "decodedUtf8Bytes": 71,
+      "sourceTextSha256": "6F567F16A9DB5293729FE7ED82784E283D1E6211A4B70E7872FA80A692B2331D",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-13"
+    },
+    {
+      "unitId": "APIUNIT-P21-003",
+      "originId": "P21",
+      "physicalRange": [
+        184,
+        189
+      ],
+      "decodedUtf8Bytes": 245,
+      "sourceTextSha256": "EF1A5AC7C4358D79EA7D92D13953A64DBD365C1435D3D49A352185642F9EB645",
+      "evidencePackage": "API_V3_SUPPLEMENT",
+      "supplementId": "V3-14"
+    }
+  ],
+  "typedBoundaries": [
+    {
+      "unitId": "APIUNIT-P01-001",
+      "kind": "ENTIRE_SMALL_PRIMARY_FILE",
+      "purpose": "Actual Projects helper implementation; complete case-insensitive lookup, bool/numeric/string conversions, arrays and fallback",
+      "enclosingClassCompletenessClaim": "ENTIRE_FILE"
+    },
+    {
+      "unitId": "APIUNIT-P02-001",
+      "kind": "ENTIRE_SMALL_PRIMARY_FILE",
+      "purpose": "Actual Projects helper contracts, complete enum array/fallback and FJsonObject conversion bridge templates",
+      "enclosingClassCompletenessClaim": "ENTIRE_FILE"
+    },
+    {
+      "unitId": "APIUNIT-P03-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete TCString ToBool, Stricmp and Strnicmp dispatch functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P03-002",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete TCString ToBool, Stricmp and Strnicmp dispatch functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P04-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete ANSI/WIDE/UTF8 ToBool helpers",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P05-001",
+      "kind": "MACRO_BINDING_SLICE",
+      "purpose": "Complete macro define/include/undef specialization for FString and TCHAR; not a class definition",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P06-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete FString equality, length and hash members plus API contracts",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P06-002",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete FString equality, length and hash members plus API contracts",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P06-003",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete FString equality, length and hash members plus API contracts",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P06-004",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete FString equality, length and hash members plus API contracts",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P06-005",
+      "kind": "DECLARED_MEMBER_API_CONTRACT",
+      "purpose": "FString ToBool declaration and documented conversion contract",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P06-006",
+      "kind": "CLASS_DECLARATION_AND_ELEMENT_STORAGE_BINDING_SLICE",
+      "purpose": "UE_STRING_CLASS ElementType=UE_STRING_CHARTYPE and Data binding; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P07-001",
+      "kind": "COMPLETE_API_CONTRACT_COMMENT",
+      "purpose": "Equality API contract, complete concepts/validator/global operator==",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P07-002",
+      "kind": "COMPLETE_CONCEPT_DECLARATIONS",
+      "purpose": "Equality API contract, complete concepts/validator/global operator==",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P07-003",
+      "kind": "COMPLETE_CONCEPT_AND_VALIDATOR_FUNCTION",
+      "purpose": "Equality API contract, complete concepts/validator/global operator==",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P07-004",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE",
+      "purpose": "Equality API contract, complete concepts/validator/global operator==",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P07-005",
+      "kind": "MACRO_BRANCH_BINDING_SLICE",
+      "purpose": "Compiler-selected UEOps private workaround",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P07-006",
+      "kind": "COMPLETE_MACRO_DEFINITION_BRANCHES",
+      "purpose": "UE_OPS_NAMESPACE_VISIBLE definitions and undef",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P08-001",
+      "kind": "DECLARATION_OR_EXPLICIT_API_BINDING",
+      "purpose": "Exact default map key-function template declarations",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P09-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete default map key funcs and TMap specialization bindings",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P09-002",
+      "kind": "MACRO_SPECIALIZATION_BINDING_SLICE",
+      "purpose": "Complete default map key funcs and TMap specialization bindings",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P10-001",
+      "kind": "MACRO_BINDING_SLICE",
+      "purpose": "TMAP/TMAPBASE/TSORTABLEMAPBASE/TSET names from UE_TMAP_PREFIX",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P10-002",
+      "kind": "CLASS_DECLARATION_AND_MEMBER_TYPE_BINDING_SLICE",
+      "purpose": "TMAPBASE key/init/pair/ElementSetType binding only; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P10-003",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Find and FindByHash overloads",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P10-004",
+      "kind": "MEMBER_STORAGE_BINDING_SLICE",
+      "purpose": "Pairs has ElementSetType",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P10-005",
+      "kind": "CLASS_INHERITANCE_BINDING_SLICE",
+      "purpose": "TSORTABLEMAPBASE publicly inherits TMAPBASE and declares Super; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P10-006",
+      "kind": "CLASS_INHERITANCE_BINDING_SLICE",
+      "purpose": "TMAP publicly inherits TSORTABLEMAPBASE with unchanged template KeyFuncs; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P11-001",
+      "kind": "ENTIRE_SMALL_PRIMARY_FILE",
+      "purpose": "Complete default TSet compact/sparse preprocessor bindings",
+      "enclosingClassCompletenessClaim": "ENTIRE_FILE"
+    },
+    {
+      "unitId": "APIUNIT-P12-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete sparse lookup implementation and public lookup functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P12-002",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete sparse lookup implementation and public lookup functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P12-003",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete sparse lookup implementation and public lookup functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P13-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete compact lookup implementation and public lookup functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P13-002",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete compact lookup implementation and public lookup functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P13-003",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete compact lookup implementation and public lookup functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P14-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete length-delimited ANSI/WIDE/UTF8 case-insensitive hash overloads",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P14-002",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete length-delimited ANSI/WIDE/UTF8 case-insensitive hash overloads",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P14-003",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete length-delimited ANSI/WIDE/UTF8 case-insensitive hash overloads",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P15-001",
+      "kind": "CLASS_DECLARATION_BINDING_WITH_COMPLETE_FUNCTIONS",
+      "purpose": "Complete ASCII ToUpper/ToLower and unsigned-character helper",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P15-002",
+      "kind": "COMPLETE_MEMBER_FUNCTION",
+      "purpose": "Complete ASCII ToUpper/ToLower and unsigned-character helper",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P16-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete ASCII fold table, comparison templates and TCHAR-compatible overloads",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P17-001",
+      "kind": "DECLARATION_OR_EXPLICIT_API_BINDING",
+      "purpose": "Windows platform string inheritance and alias contract",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P18-001",
+      "kind": "DECLARATION_OR_EXPLICIT_API_BINDING",
+      "purpose": "Microsoft platform selection and inherited comparison API bindings",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P18-002",
+      "kind": "DECLARATION_OR_EXPLICIT_API_BINDING",
+      "purpose": "Microsoft platform selection and inherited comparison API bindings",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P19-001",
+      "kind": "DECLARATION_OR_EXPLICIT_API_BINDING",
+      "purpose": "Generic comparison include and inheritance binding",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P19-002",
+      "kind": "CLASS_INHERITANCE_BINDING_SLICE",
+      "purpose": "Generic comparison include and inheritance binding",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P20-001",
+      "kind": "DECLARATION_OR_EXPLICIT_API_BINDING",
+      "purpose": "Generic wide comparison inheritance and using bindings",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P21-001",
+      "kind": "DECLARATION_OR_EXPLICIT_API_BINDING",
+      "purpose": "Actual FEncoding/FValue/FConstObject/FConstArray aliases",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P22-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete exact GetArrayField implementation used by enum readers",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P23-001",
+      "kind": "ENTIRE_SMALL_PRIMARY_FILE",
+      "purpose": "Engine RapidJSON include/define binding",
+      "enclosingClassCompletenessClaim": "ENTIRE_FILE"
+    },
+    {
+      "unitId": "APIUNIT-P24-001",
+      "kind": "DECLARATION_OR_EXPLICIT_API_BINDING",
+      "purpose": "Default member-map selection contract; actual compiled override remains unobserved",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P24-002",
+      "kind": "COMPLETE_ENUM_DECLARATION",
+      "purpose": "RapidJSON Type values used by predicates and conversion",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete material predicates/getters/string access and both member lookup branches/comparator, plus explicit class/data/default/branch bindings; not entire document class or parser",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-002",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete material predicates/getters/string access and both member lookup branches/comparator, plus explicit class/data/default/branch bindings; not entire document class or parser",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-003",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete material predicates/getters/string access and both member lookup branches/comparator, plus explicit class/data/default/branch bindings; not entire document class or parser",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-004",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete material predicates/getters/string access and both member lookup branches/comparator, plus explicit class/data/default/branch bindings; not entire document class or parser",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-005",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete material predicates/getters/string access and both member lookup branches/comparator, plus explicit class/data/default/branch bindings; not entire document class or parser",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-006",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete material predicates/getters/string access and both member lookup branches/comparator, plus explicit class/data/default/branch bindings; not entire document class or parser",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-007",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete material predicates/getters/string access and both member lookup branches/comparator, plus explicit class/data/default/branch bindings; not entire document class or parser",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-008",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete material predicates/getters/string access and both member lookup branches/comparator, plus explicit class/data/default/branch bindings; not entire document class or parser",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-009",
+      "kind": "INCLUDE_FORWARD_DECLARATION_DEFAULT_BINDING_SLICE",
+      "purpose": "Member-map std::multimap include, GenericValue/Document declarations and default allocator",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-010",
+      "kind": "CLASS_DECLARATION_AND_ALIAS_BINDING_SLICE",
+      "purpose": "GenericValue Encoding/Ch/allocator/member/array/object aliases; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-011",
+      "kind": "COMPLETE_INLINE_FUNCTIONS",
+      "purpose": "Const/mutable MemberBegin and MemberEnd",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-012",
+      "kind": "COMPLETE_INLINE_FUNCTIONS",
+      "purpose": "GetObject/GetObj wrappers",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-013",
+      "kind": "COMPLETE_INLINE_FUNCTIONS",
+      "purpose": "GetArray wrappers",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-014",
+      "kind": "COMPLETE_INLINE_FUNCTIONS",
+      "purpose": "GetString and GetStringLength",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-015",
+      "kind": "COMPLETE_ENUM_DECLARATION",
+      "purpose": "Value flag and type-mask constants",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-016",
+      "kind": "COMPLETE_NESTED_TYPES_AND_FUNCTIONS_WITH_BRANCH_BINDING",
+      "purpose": "Flag/String/ShortString/Number/ObjectData/ArrayData/Data, string/member pointers and full MapTraits comparator/aliases; ends inside #if branch by design",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-017",
+      "kind": "COMPLETE_FUNCTION",
+      "purpose": "Member-map GetMap accessor",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-018",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE",
+      "purpose": "Member-map DoFindMember; std::multimap lookup uses declared Less comparator",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-019",
+      "kind": "PREPROCESSOR_BRANCH_BINDING_SLICE",
+      "purpose": "Non-member-map #else selection",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-020",
+      "kind": "PREPROCESSOR_BRANCH_BINDING_SLICE",
+      "purpose": "Complete member-map conditional terminator",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-021",
+      "kind": "CLASS_DECLARATION_AND_ALIAS_BINDING_SLICE",
+      "purpose": "GenericObject const/member/type aliases; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-001",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete heterogeneous view hash/equality/comparison contract and functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-002",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete heterogeneous view hash/equality/comparison contract and functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-003",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete heterogeneous view hash/equality/comparison contract and functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-004",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete heterogeneous view hash/equality/comparison contract and functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-005",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE_OR_EXPLICIT_API_CONTRACT",
+      "purpose": "Complete heterogeneous view hash/equality/comparison contract and functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-006",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE",
+      "purpose": "StringLength used by pointer view construction",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-007",
+      "kind": "CLASS_DECLARATION_BINDING_WITH_COMPLETE_CONSTRUCTORS",
+      "purpose": "View type/ElementType and complete pointer/range constructors; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-008",
+      "kind": "COMPLETE_FUNCTION_TEMPLATES",
+      "purpose": "MakeStringView range/pointer functions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-009",
+      "kind": "COMPLETE_FUNCTION_TEMPLATES",
+      "purpose": "Generic view Equals/Compare wrappers",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P27-001",
+      "kind": "ENTIRE_FILE",
+      "purpose": "Complete public conversion declarations",
+      "enclosingClassCompletenessClaim": "ENTIRE_FILE"
+    },
+    {
+      "unitId": "APIUNIT-P28-001",
+      "kind": "ENTIRE_FILE",
+      "purpose": "Complete conversion implementations, including root-member skip versus nested failure",
+      "enclosingClassCompletenessClaim": "ENTIRE_FILE"
+    },
+    {
+      "unitId": "APIUNIT-P29-001",
+      "kind": "COMPLETE_CLASS_API_DECLARATIONS_AND_INLINE_MEMBERS",
+      "purpose": "Includes and full base/String/Number/NumberString/Boolean/Array/Object/Null class definitions",
+      "enclosingClassCompletenessClaim": "CLASS_API_DECLARATION_NOT_ALL_OUT_OF_LINE_IMPLEMENTATIONS"
+    },
+    {
+      "unitId": "APIUNIT-P29-002",
+      "kind": "COMPLETE_FUNCTION_TEMPLATES",
+      "purpose": "String constructors, TryGetString and TryGetUtf8String",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P29-003",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE",
+      "purpose": "String TryGetBool delegates Value.ToBool",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P29-004",
+      "kind": "COMPLETE_FUNCTION_TEMPLATES",
+      "purpose": "NumberString constructors/string conversions/double and float conversion",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P29-005",
+      "kind": "COMPLETE_FUNCTION_TEMPLATE",
+      "purpose": "NumberString bool conversion",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-001",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Base constructor and destructor",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-002",
+      "kind": "COMPLETE_FUNCTION",
+      "purpose": "AsObject used by public conversion return",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-003",
+      "kind": "COMPLETE_FUNCTION",
+      "purpose": "Base double conversion refuses",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-004",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Base string/UTF8/bool/array/object conversion refusals",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-005",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Number constructor/destructor and material conversions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-006",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Boolean constructor/destructor and material conversions",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-007",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Array constructors/destructor and array getters",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-008",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Object constructor/destructor and object getters",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P30-009",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Null constructor and destructor",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P31-001",
+      "kind": "ENTIRE_FILE",
+      "purpose": "Complete storage classes, interning key funcs, default macro and FJsonObject API",
+      "enclosingClassCompletenessClaim": "ENTIRE_FILE"
+    },
+    {
+      "unitId": "APIUNIT-P32-001",
+      "kind": "BRANCH_BINDING_WITH_COMPLETE_FUNCTION",
+      "purpose": "Default shared storage branch and FJsonStringSet::Place",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P32-002",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Intern pool hash and shared storage constructor",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P32-003",
+      "kind": "COMPLETE_FUNCTION",
+      "purpose": "Shared storage SetField",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P32-004",
+      "kind": "BRANCH_BINDING_WITH_COMPLETE_FUNCTIONS",
+      "purpose": "Legacy string storage branch and all SetField overloads",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P32-005",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Untyped/typed/try field getters and presence tests",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P32-006",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "String and string-array getters",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P32-007",
+      "kind": "COMPLETE_FUNCTIONS",
+      "purpose": "Bool/array/object getters",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P33-001",
+      "kind": "COMPLETE_CLASS_API_DECLARATION_WITH_INLINE_MEMBERS",
+      "purpose": "Includes, namespace and complete class definition; namespace intentionally remains open in this unit",
+      "enclosingClassCompletenessClaim": "CLASS_API_DECLARATION_NOT_ALL_OUT_OF_LINE_IMPLEMENTATIONS"
+    },
+    {
+      "unitId": "APIUNIT-P33-002",
+      "kind": "NAMESPACE_OPERATOR_VISIBILITY_BINDING_SLICE",
+      "purpose": "All shared-string UE_OPS_NAMESPACE_VISIBLE specializations and UE namespace close",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P34-001",
+      "kind": "FORWARD_DECLARATION_AND_ALIAS_BINDING_SLICE",
+      "purpose": "TStringView/TSharedString aliases and complete UE namespace alias block",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P35-001",
+      "kind": "COMPLETE_ENUM_DECLARATION",
+      "purpose": "EJson None/Null/String/Number/Boolean/Array/Object",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P36-001",
+      "kind": "COMPLETE_FUNCTION",
+      "purpose": "UE_STRING_CLASS::ToBool",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P37-001",
+      "kind": "MACRO_BINDING_SLICE",
+      "purpose": "Includes and complete define/include/undef FString implementation binding",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P21-002",
+      "kind": "DECLARED_FUNCTION_API_CONTRACT",
+      "purpose": "GetRootObject public contract used by normal descriptor reader and public DOM bridge",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P22-002",
+      "kind": "COMPLETE_FUNCTION",
+      "purpose": "GetRootObject object type check and GetObject return, with explicit absent result",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-022",
+      "kind": "CLASS_INHERITANCE_AND_ALIAS_BINDING_SLICE",
+      "purpose": "GenericDocument inherits GenericValue with same Encoding/Allocator and declares ValueType; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P25-023",
+      "kind": "MACRO_DEFAULT_BINDING",
+      "purpose": "Complete default stack allocator macro contract for GenericDocument template",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P03-003",
+      "kind": "COMPLETE_HELPER_DECLARATION_AND_CLASS_TYPE_BINDING_SLICE",
+      "purpose": "Complete FToBoolHelper declarations plus TCString<T>::CharType=T binding; TCString class remains partial",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P03-004",
+      "kind": "TYPE_ALIAS_BINDING_SLICE",
+      "purpose": "Exact TCString TCHAR/ANSI/WIDE/UTF8 aliases used by Projects and bool conversion",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P12-004",
+      "kind": "CLASS_DECLARATION_AND_KEY_FUNCTION_BINDING_SLICE",
+      "purpose": "Sparse set template KeyFuncs and KeyInitType/ElementType identity; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P13-004",
+      "kind": "CLASS_INHERITANCE_AND_KEY_FUNCTION_BINDING_SLICE",
+      "purpose": "Compact set template KeyFuncs, base class and init/element types; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P38-001",
+      "kind": "COMPLETE_MACRO_DEFINITION_AND_USAGE_CONTRACT",
+      "purpose": "Compact lookup loop type dispatch expands uint8/uint16/uint32 branches and default assertion",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P38-002",
+      "kind": "NAMESPACE_BINDING_WITH_COMPLETE_FUNCTION",
+      "purpose": "GetTypeSize exact unsigned threshold dispatch; namespace slice intentionally open",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-010",
+      "kind": "COMPLETE_MEMBER_FUNCTION",
+      "purpose": "String view GetData exact stored pointer accessor",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-011",
+      "kind": "COMPLETE_MEMBER_FUNCTION",
+      "purpose": "String view Len exact stored size accessor",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P26-012",
+      "kind": "MEMBER_STORAGE_BINDING_SLICE",
+      "purpose": "String view protected pointer/size fields and enclosing class close; not entire class",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    },
+    {
+      "unitId": "APIUNIT-P21-003",
+      "kind": "DECLARED_FUNCTION_API_CONTRACT",
+      "purpose": "Already selected GetArrayField complete public API declaration and contract",
+      "enclosingClassCompletenessClaim": "NO_ENTIRE_ENCLOSING_CLASS_CLAIM"
+    }
+  ],
+  "frameworkLeaves": [
+    "C++ standard library contracts: std::memcmp, std::multimap::find/end with the explicitly bound comparator, type traits and ordinary scalar casts. No standard-library implementation audit.",
+    "UE generic container/pointer/optional/range/allocator/string-storage/lifetime/intern-pool allocation and logging/ensure/assert APIs remain explicit framework leaves. Their callers and key comparison/hash contracts are bound; arbitrary mutation, iteration-order or memory-safety proofs are not supplied.",
+    "Numeric parsing/formatting, localized FText true/false spellings and general Unicode/encoding behavior remain framework leaves outside the concrete ASCII bool/case examples. No equivalence to .NET Unicode OrdinalIgnoreCase.",
+    "Roslyn/.NET/OS/process and unrelated descriptor/parser grammar APIs remain outside this finite lookup/conversion proposal. No whole-engine or all-platform recursion.",
+    "RapidJSON generic parsing/serialization, value construction/mutation/copy/move, member/array iterator and allocator contracts remain explicit framework APIs beyond the selected exact member/type lookup functions. No arbitrary lexical-order, duplicate/case-colliding key, embedded-NUL preservation, precision or custom allocator proof.",
+    "Compact/sparse storage allocation, hash bucket/index memory layout, GetData/GetHashTableMemory/GetSetLayout, insertion/removal/rehash and allocator internals remain explicit framework APIs. Only exact key equality/hash, caller binding, lookup control and compact dispatch are supplemented.",
+    "Runtime compile choices UE_USE_COMPACT_SET_AS_DEFAULT, UE_JSONOBJECT_LEGACY_STRING_KEYS, RAPIDJSON_USE_MEMBERSMAP and TCHAR/platform choices remain source-conditioned and unobserved in installed binaries. Both selected comparison/lookup branches are supplied without asserting an actual runtime selection."
+  ],
+  "callClosure": [
+    "P02 ReadFromDefaultJsonHelper -> P28 ConvertSharedJsonToRapidJsonDocument -> V3-01/V3-02 GetRootObject -> V3-03 GenericDocument/GenericValue inheritance -> v2 P25 IsObject/GetObject -> typed Read functor already supplied by descriptor callers.",
+    "Normal textual descriptor Read -> parser API framework leaf -> GetRootObject contract/implementation -> same bound object APIs and Projects reader.",
+    "P01 FindMemberCaseInsensitive -> V3-06 FCString=TCHAR -> V3-05 TCString CharType identity -> v2 P03 Strnicmp -> v2 platform comparison implementation.",
+    "P10 map ElementSetType -> v2 P11 backend macro injection -> V3-07/V3-08 exact class KeyFuncs binding -> selected Find/FindByHash -> selected key Matches; compact path -> V3-09 macro -> V3-10 GetTypeSize -> selected uint8/uint16/uint32 loop; storage stays explicit framework leaf.",
+    "P33 shared-string hash/equality and DOM heterogeneous view route -> v2 P26 view comparison/hash -> V3-11/V3-12 exact pointer/size accessors and V3-13 fields."
+  ],
+  "limits": [
+    "No independent audit: author reinspection of authored v2.",
+    "No universal API closure, installed-binary/current compiled macro proof, runtime map membership or activation claim.",
+    "No v2 artifact edit, source implementation change, policy/grant/adoption or review/native/helper execution.",
+    "Supplement and prospective FULL record14 require separate root criteria/candidate binding and full review before any use."
+  ],
+  "reviewLaunchAuthority": false,
+  "nativeExecutionAuthority": false,
+  "sourceApproval": false,
+  "admissions": 0
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_ADOPTED_V7_COMMON_METADATA_HELPER_SOURCE_CHOICE",
+  "adoptedUtc": "2026-10-20T14:42:32.2449923Z",
+  "publicationHeadBeforeAdoption": "36740bf4623fb9c589c2dec60207eadf6c3bb789",
+  "metadataSourceChoiceAdopted": true,
+  "metadataConstructionPermittedOnlyAfterExactInputBinding": true,
+  "helpers": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Refresh-E04SourcePacket42.RulesWitness.PROPOSED.ps1",
+      "bytes": 17850,
+      "sha256": "DD339086FE30D3BF338EFD8E85D1054A8B6415EE1E5B63DAB351BF1674413ACF"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Prepare-E04RuntimeMetadata.RulesWitness.v2.PROPOSED.ps1",
+      "bytes": 12475,
+      "sha256": "F55E0B7F2B112EAF73762C99C0AD6A21F3B812D06BC608214504854AAE2F3898"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-freeze-constructor-PROPOSED\\New-E04A1EFreezeMetadata.RulesWitness.PROPOSED.ps1",
+      "bytes": 24524,
+      "sha256": "55864AB7C5BF8349DE71AD29DFAD335584F623B26F71653C570816F75EC079EE"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Add-E04StagedProjectBodyCoverage.RulesWitness.PROPOSED.ps1",
+      "bytes": 9286,
+      "sha256": "BAAF4E388BF0315FAFBC8ECA6CF28671561BE2EEAE2EF7617AFC3AC8A322D429"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-common-assembler-type-repair-PROPOSED\\Assemble-RootSourcePacket.V7.Typed.PROPOSED.ps1",
+      "bytes": 75705,
+      "sha256": "915087F542447067C4F10388E4F84274000339362CE776CE6BC96FB5183AF8C7"
+    }
+  ],
+  "originalAssemblerAuditSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-assembler-independent-audit-PROPOSED\\seal.PROPOSED.json",
+    "bytes": 1519,
+    "sha256": "AA404F740E033BE7ED6EA9FE7B4183FF8F3C97DE58B500D95AD52638D80D42B7"
+  },
+  "typedSuccessorSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-common-assembler-type-repair-PROPOSED\\stopped-source-handoff.original.json",
+    "bytes": 2675,
+    "sha256": "120864029881E76DC8E270E9A8162FEA9927466FCDE76639CBD7504A097AAC4B"
+  },
+  "independentRemediationRecheckSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-assembler-type-repair-independent-recheck-PROPOSED\\seal.PROPOSED.json",
+    "bytes": 1517,
+    "sha256": "98D29C114669C6DC8D3A72B5D0471742DD015BED813E4FF74C075ED7F3B52753"
+  },
+  "rootReading": "Full original new validation and16literal deltas read previously; complete type repair diff, handoff, new operand sites/guard implementations and independent original audit/recheck read. All5successor artifact pins independently matched.",
+  "sourceDelta": "Seven added lines at5sites;2integer and17string routes;22existingfunctions unchanged;exact75183Bpredecessor recovered independently.",
+  "scope": "First4already adopted metadata helpers unchanged; final typed assembler supersedes stopped75183Bproposal for future exact current common API/NORM metadata only.",
+  "notAdopted": "No general v7 binder or own-panel constructor, P/C/E/F, scope eligibility, current counts/grants, formal SOURCE or native phase. Original stopped reports/failedgates preserved.",
+  "dynamicRefusalBehaviorUntested": true,
+  "actualCompleteSourceScopeBindingsAdopted": false,
+  "helperInvoked": false,
+  "actualCommonCreated": false,
+  "PAllocated": false,
+  "reviewGo": false,
+  "nativePhaseGo": false,
+  "rootAdmissions": 0,
+  "visibleAuthority": 0
+}

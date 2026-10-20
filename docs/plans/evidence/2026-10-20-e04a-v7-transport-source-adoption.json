@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_V7_TRANSPORT_SOURCE_CHOICE_ADOPTION_NO_INVOCATION",
+  "adoptedUtc": "2026-10-20T14:12:25.4866882Z",
+  "publicationHeadAtChoice": "36740bf4623fb9c589c2dec60207eadf6c3bb789",
+  "basis": "Continued migration permits routine prospective review-method engineering. OWN15 final distinct CODE/REQ and all execution gates remain unchanged. Standing source/API transmission consent is not a method waiver.",
+  "sourceChoiceAdopted": true,
+  "selectedLauncher": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-source-transport-PROPOSED-20261020T141500Z-bootstrap-code-review\\proposed\\Invoke-FreshE04A1ESourceReview.bound.ps1",
+    "bytes": 18509,
+    "sha256": "3510FF356FF27D5FF49E6A1B6B58D0ADF36A58F068B94D5F9350D9B3817F04E9"
+  },
+  "selectedOwnRuntimeSelector": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-source-transport-PROPOSED-20261020T141500Z-bootstrap-code-review\\proposed\\Select-OwnSourceRuntimeEvidence.bound.ps1",
+    "bytes": 16510,
+    "sha256": "E491B222BBD82DBB248DBF94632E00F40E94809B7FF4B385E01938C7E7B69EC8"
+  },
+  "ordinaryIndependentStaticAuditSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-transport-independent-audit-PROPOSED\\stopped-audit-seal.original.json",
+    "bytes": 1568,
+    "sha256": "FDB2E545C1A01DAD85F83569AD2E12E45F7346310835068414A2CAF5403C469F"
+  },
+  "unchangedSupportSources": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-73bc2c0-20261020T122137Z-3498b937-S_VALUE\\Invoke-E04A1ESourceCliWorker.bound.ps1",
+      "bytes": 2463,
+      "sha256": "68FB811CF83AD77F798F88F073F2083814122934D4D59C5087AB2F71D9EBAF6B",
+      "changed": false,
+      "compatibility": "No assessmentKind/scopeId/deadline registry in these sources; supervisor accepts seconds<=5400; worker fresh exec flags and capture roleSOURCE records remain compatible"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-73bc2c0-20261020T122137Z-3498b937-S_VALUE\\owned-job-supervisor.reused.cs.txt",
+      "bytes": 26412,
+      "sha256": "8C9FAB1A9692B9D02724C9C794F0637373FA0CA0E0F141AA0E4A0CEA6F68FF54",
+      "changed": false,
+      "compatibility": "No assessmentKind/scopeId/deadline registry in these sources; supervisor accepts seconds<=5400; worker fresh exec flags and capture roleSOURCE records remain compatible"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-73bc2c0-20261020T122137Z-3498b937-S_VALUE\\Capture-OwnSourceToolInputs.bound.ps1",
+      "bytes": 5873,
+      "sha256": "1E7696AAE901F5BD83063105DA20E9B87D67C778B65825EC5E0FE320A765F068",
+      "changed": false,
+      "compatibility": "No assessmentKind/scopeId/deadline registry in these sources; supervisor accepts seconds<=5400; worker fresh exec flags and capture roleSOURCE records remain compatible"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-73bc2c0-20261020T122137Z-3498b937-S_VALUE\\Capture-OwnSourceCompleteToolTrace.bound.ps1",
+      "bytes": 7425,
+      "sha256": "17CBDAB8F7BAC8772B9624B218743EF8AAD47425741DCECF119117636109FEED",
+      "changed": false,
+      "compatibility": "No assessmentKind/scopeId/deadline registry in these sources; supervisor accepts seconds<=5400; worker fresh exec flags and capture roleSOURCE records remain compatible"
+    }
+  ],
+  "rootCompleteChangedSourceBodiesRead": true,
+  "exactSingleReplacementEach": true,
+  "registry": [
+    {
+      "scopeId": "F_T_RULES_GRAPH",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "F_T_STAGE_PROCESS",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "F_T_RUNTIME_RECEIPT",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "F_PLUGIN_RUNTIME",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "F_I_VALUE_TOOLCHAIN_STARTUP",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "F_I_RULES_ABI_WITNESS",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "F_I_RULES_STAGE_WITNESS",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "F_I_PROCESS_STARTUP",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "F_I_GRAPH_CROSS",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "A_COMPAT_VALUE_CLIENT",
+      "assessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "A_COMPAT_SELECTORS",
+      "assessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN",
+      "deadlineSeconds": 5400
+    },
+    {
+      "scopeId": "A_COMPAT_BUILD",
+      "assessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN",
+      "deadlineSeconds": 5400
+    }
+  ],
+  "sourceOnlyRefusalChecks": "Exact ordinal registered ID; exact corresponding assessmentKind; int/long5400; no implicit old/fallback IDs.",
+  "limits": [
+    "Static/parser/byte checks only; no dynamic refusal/runtime test or actual enforcement established.",
+    "31-field outer GO representation retained; no exact31-key whitelist newly enforced.",
+    "SOURCE transport retains explicitly NONBLIND_CURRENT_COMPAT_ADMIN for3administrativecohorts; no blind or SOURCEverdict claim for them.",
+    "Pending repaired method and actual complete source/API/scope/metadata binding adoption before P/panel/GO."
+  ],
+  "invocationAuthority": false,
+  "helperInvoked": false,
+  "reviewGo": false,
+  "reviewLaunched": false,
+  "nativePhaseGo": false,
+  "visibleAuthority": 0,
+  "acceptance": false
+}

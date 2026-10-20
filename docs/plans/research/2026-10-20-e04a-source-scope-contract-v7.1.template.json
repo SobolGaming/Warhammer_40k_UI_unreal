@@ -1,0 +1,3840 @@
+{
+  "schemaVersion": 7,
+  "recordKind": "PROPOSED_PURE_SOURCE_COMPOSITION_CONTRACT_TEMPLATE",
+  "templateState": "UNBOUND_NOT_ADOPTED_NOT_BINDABLE_NOT_LAUNCHABLE",
+  "criteriaDraft": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v7.1-PROPOSED\\source-composition-v7.1.criteria.PROPOSED.md",
+    "bytes": 29955,
+    "sha256": "3339A615FDC1C322C087FAB8B64ABA78120C267AE651FA8A53C0A25D168A26C2"
+  },
+  "immutableDutyObligationBaseline": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v7.1-PROPOSED\\v6-duty-obligation-baseline.IMMUTABLE.PROPOSED.json",
+    "bytes": 180731,
+    "sha256": "CD5473DF1A2AC49623A49441915184F545B04CF69E100A798BE62F0087609497"
+  },
+  "authority": {
+    "methodChoice": "ROOT_PROSPECTIVE_METHOD_CRITERIA_IMMUTABLE_DUTIES_AND_UNBOUND_TEMPLATE_CHOICE_AFTER_SEPARATE_EXPLICIT_ADOPTION",
+    "applicableAuthorityRecord": null,
+    "explicitAdoptionRecord": null,
+    "standingTransmissionConsentIsMethodWaiver": false,
+    "adopted": false,
+    "reviewLaunchAuthority": false,
+    "helperInvocationAuthority": false,
+    "phaseAuthority": false,
+    "nativeExecutionAuthority": false,
+    "publicationAuthority": false,
+    "mergeAuthority": false,
+    "methodAndUnboundTemplateAdoptionMayPrecedeDerivedCurrentSourceScopeBindings": true,
+    "methodAdoptionEstablishesActualSourceBindingsEligibilityOrGo": false,
+    "completeSourceApiScopeHelperAdoptionAndBindingsCountsGrantsBeforePRequired": true,
+    "actualCompleteSourceApiScopeHelperAdoptionRecord": null
+  },
+  "currentSubject": {
+    "publicationHead": null,
+    "comparisonBase": null,
+    "campaignId": null,
+    "plannedRunId": null,
+    "actualRuntimeFreezeManifest": null,
+    "actualCommonSourceInputManifest": null,
+    "actualBodyAccessPolicy": null,
+    "actualCoverageInventory": null,
+    "actualSelectedMetadataPolicy": null,
+    "actualOriginal13CatalogBindings": null,
+    "actualSupplementalApiCatalog": null,
+    "adoptedCleanCriteria": null,
+    "actualGlobalBodyCount": null,
+    "actualSelectedRecordCount": null,
+    "actualGlobalPhysicalRows": null,
+    "actualGlobalLiteralRows": null,
+    "actualCompleteUnitBindings": null,
+    "actualAdditionalNormInputDescriptors": null,
+    "actualAllRequiredInputFileCount": null,
+    "actualTotalRequiredReadingPhysicalRows": null,
+    "actualCompleteApplicableA1eTechnicalCriteriaAndCleanNormDescriptors": null
+  },
+  "historicalTechnicalSubjectsAreLiteral": true,
+  "assessmentSelection": {
+    "potentialRetainedNodeIds": [
+      "R_S_VALUE",
+      "R_S_CLIENT",
+      "R_D_SELECTORS_001_301",
+      "R_D_SELECTORS_302_602",
+      "R_D_SELECTORS_603_902",
+      "R_S_BUILD_HOST"
+    ],
+    "freshPrimaryNodeIds": [
+      "F_T_RULES_GRAPH",
+      "F_T_STAGE_PROCESS",
+      "F_T_RUNTIME_RECEIPT",
+      "F_PLUGIN_RUNTIME"
+    ],
+    "freshIntegrationNodeIds": [
+      "F_I_VALUE_TOOLCHAIN_STARTUP",
+      "F_I_RULES_ABI_WITNESS",
+      "F_I_RULES_STAGE_WITNESS",
+      "F_I_PROCESS_STARTUP",
+      "F_I_GRAPH_CROSS"
+    ],
+    "nonblindCompatibilityCohortIds": [
+      "A_COMPAT_VALUE_CLIENT",
+      "A_COMPAT_SELECTORS",
+      "A_COMPAT_BUILD"
+    ],
+    "favorableConditionalCounts": {
+      "retainedTechnical": 6,
+      "freshPrimary": 4,
+      "freshIndependentIntegration": 5,
+      "newNonblindCompatibility": 3,
+      "totalNewContexts": 12,
+      "totalSourceAssessmentNodes": 15,
+      "totalLabelledNodes": 18
+    },
+    "actualFinalSelectedNodeIds": null,
+    "noCountBasedApproval": true
+  },
+  "retainedEligibility": {
+    "allClausesConjunctive": true,
+    "falseUnknownMissingFailsToFreshAffected": true,
+    "sevenCompleteClauses": [
+      {
+        "clauseId": 1,
+        "completeCriterion": "**Actually valid and complete original assessment.** Bind the byte-exact raw report, seal before first root body read, original subject/scope/contract, full actual GO/prompt/input/runtime/isolation, complete captured tools, closed execution and root audit. All original reading and semantic duties must actually be complete, with failed/truncated/access/query reads recovered and no unresolved technical finding or uncertainty. Independence, disclosure and verified runtime limits must satisfy the adopted policy. A raw PASS string, count or exit code is insufficient. Incomplete, contaminated, CHANGES_REQUESTED or unaudited work is ineligible. A raw administrative BLOCKED report is ineligible except the narrowly enumerated BUILD alternative below; later evidence cannot invent missing original reading or independence.",
+        "established": false,
+        "preEDischarge": "COMPLETED_ORIGINAL_VALIDITY_AND_CURRENT_COMPLETE_TECHNICAL_ADMIN_COMPATIBILITY"
+      },
+      {
+        "clauseId": 2,
+        "completeCriterion": "**Same own semantic duty.** Compare full old/current applicable criteria, every owned atom/global interface, all mandatory whole bodies and complete units, original 13-record full/relationship/partition duties, origin-field policy and transitive assumptions. Preserve interpretation, exact case, types, array order/cardinality, defaults, null/false/empty/absence and consumer semantics. A smaller child, new unit partition, changed relationship set or reduced duty is fresh work, not the original assessment. Never manufacture child PASS verdicts from old passages.",
+        "established": false,
+        "preEDischarge": "COMPLETED_ORIGINAL_VALIDITY_AND_CURRENT_COMPLETE_TECHNICAL_ADMIN_COMPATIBILITY"
+      },
+      {
+        "clauseId": 3,
+        "completeCriterion": "**Unchanged complete material technical slice.** Compare every required technical whole BODY, complete literal unit with enclosing declarations/control dependencies, additionally inspected material source, dependency/tool/runtime/API identity, fixture, selected origin identity/value and producer/caller/consumer interface. Required technical bytes and values must match, except a narrowly parameterized binding instance proved under clause4. A changed producer/counterpart may affect a scope whose owned file is unchanged. Global optional access is not proof of actual reading or material closure; every material unlisted dependency must be included and checked. Hash identity is provenance, not semantic review.",
+        "established": false,
+        "preEDischarge": "COMPLETED_ORIGINAL_VALIDITY_AND_CURRENT_COMPLETE_TECHNICAL_ADMIN_COMPATIBILITY"
+      },
+      {
+        "clauseId": 4,
+        "completeCriterion": "**Exact narrow administrative overlay.** Preserve a complete old-to-current difference list, exact JSON pointers/roles, complete typed old/current values, adopted named rule, proof descriptor and origin/copy association. New publication head/campaign/copied paths/common criteria are differences, not byte equality. Never wildcard sourceHead/run/path/nonce/descriptor values, strip keys or ignore new metadata to manufacture equality. Stage roots, literal argv/CWD, environment/configuration, source membership/order, origin identity and process/retention relationships are potentially technical. At E, a changed binding instance can be ELIGIBLE_FOR_CONDITIONAL_RETENTION only if the completed original assessment covered that same parameterized contract, a current independent audit has proved both complete old/current vectors satisfy it, and P binds the exact named future fresh raw-integration duties, current raw inputs and required vector checks. No future report is a pre-E prerequisite or treated as already complete. At the aggregate before any phase GO, the actual valid current raw-integration PASS reports must independently assess that current vector and discharge those exact duties; a missing, unknown, failing or contradictory result invalidates affected E use, admissions and the aggregate gate through a new immutable invalidation/replacement chain, never mutation of sealed E/F/GO. A new technical argument outside the original completed duty requires fresh affected SOURCE. Preserve hexadecimal spelling differences separately from digest-byte identity; do not normalize other strings.",
+        "established": false,
+        "preEDischarge": "ORIGINAL_PARAMETERIZED_CONTRACT_AND_COMPLETE_OLD_CURRENT_VECTOR_AUDIT_PLUS_EXACT_NAMED_FUTURE_RAW_INTEGRATION_DUTIES"
+      },
+      {
+        "clauseId": 5,
+        "completeCriterion": "**Current governance assessed separately.** Record exactly which future criteria the old reviewer did not read. The assigned fresh nonblind compatibility cohort must read the complete relevant old/current criteria and exact overlay. It cannot claim the old report assessed new bytes or substitute for an integration. Counting/ordering/role-routing changes may be administrative only under the explicitly adopted rule for an unchanged technical duty. Changed own interpretation, obligation or acceptance condition requires fresh SOURCE. Fresh SOURCE contexts receive current clean criteria and raw inputs.",
+        "established": false,
+        "preEDischarge": "COMPLETED_ORIGINAL_VALIDITY_AND_CURRENT_COMPLETE_TECHNICAL_ADMIN_COMPATIBILITY"
+      },
+      {
+        "clauseId": 6,
+        "completeCriterion": "**Current closure and contradiction check.** Reconcile the current source/metadata dependency graph, all counterpart interfaces, new API primary definitions, every applicable material finding and every material claim in the original report. Unchanged file bytes or unchanged original 13-record schemas do not establish unaffectedness if new evidence exposes an unassessed technical premise. Record the exact reverse dependency/claim reasoning and limits. A source defect, incompatible counterpart, value-bearing/unknown disclosure or unsupported inference invalidates affected eligibility. The compatibility cohort identifies affectedness; it cannot supply the missing original technical argument.",
+        "established": false,
+        "preEDischarge": "COMPLETED_ORIGINAL_VALIDITY_AND_CURRENT_COMPLETE_TECHNICAL_ADMIN_COMPATIBILITY"
+      },
+      {
+        "clauseId": 7,
+        "completeCriterion": "**Fresh affected-assessment plans and mandatory later discharge.** At E, verify exact bound plans and source-inspected policies for every replacement scope and selected fresh independent integration: one new blind raw-source context, current exact subject/criteria/grants, budget, clean input/exclusion policy, no inherited implementation transcript, resume/fork/retry or model override. Initial SOURCE inputs exclude retained/new peer reports, findings, tables, graphs and compatibility conclusions. These pre-E plans do not establish actual future runtime or completed review facts. After each review and before the aggregate permits any phase, require the actual read-only/approval-never evidence, requested versus verified memory state, full actual prompt/session/invocation/model/settings, complete captured I/O, seal before first root body read, closed execution, error recovery, full source/data/duty completion and root audits. Missing, unknown, failing or contradictory discharge invalidates affected E use, admissions and the aggregate gate through immutable replacement/invalidation records. Retained reports enter only the current nonblind eligibility evidence and labelled root composition after their audits. Final exact-candidate CODE and a different REQ remain independently fresh.",
+        "established": false,
+        "preEDischarge": "EXACT_BOUND_FUTURE_FRESH_ASSESSMENT_POLICY_AND_INPUT_GRANT_BUDGET_EXCLUSION_PLANS_ONLY"
+      }
+    ],
+    "originalTechnicalRawPassIsNotAutomaticEligibility": true,
+    "nonblindAuditCannotCreateMissingOriginalTechnicalDuty": true,
+    "everyExactAdministrativeDifferenceRequired": true,
+    "parameterizedBindingExceptionRequiresOriginalCompletedContractAndBothCurrentVectors": true,
+    "newApiReverseDependencyAndMaterialClaimCheckMandatory": true,
+    "favorablePreEDecisionStatus": "ELIGIBLE_FOR_CONDITIONAL_RETENTION",
+    "eAloneIsFinalAcceptance": false,
+    "futureReportOrActualFutureRuntimePrerequisiteForE": false,
+    "postReviewAggregateDischarge": {
+      "currentRawIntegrationPassVectorChecksRequired": true,
+      "actualFreshContextInputGrantBudgetExclusionRuntimePromptSealClosedIoAndFullDutyAuditsRequired": true,
+      "missingUnknownFailingOrContradictoryDischargeInvalidatesAffectedEUseAdmissionsAndGate": true,
+      "sealedEAndFAndGoMayMutate": false,
+      "newImmutableInvalidationOrReplacementChainRequired": true,
+      "actualDischargeDescriptors": null,
+      "discharged": false
+    }
+  },
+  "retainedCandidates": [
+    {
+      "assessmentNodeId": "R_S_VALUE",
+      "mode": "RETAINED_TECHNICAL",
+      "originalScopeId": "S_VALUE",
+      "historicalTechnicalSubjectVerbatim": {
+        "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+        "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+        "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+        "plannedRunId": "20261020T122137Z-3498b937",
+        "runtimeFreezeManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+          "bytes": 746749,
+          "sha256": "E4C776C0C0ACA5CF09995BCF7484260C6AD20B039C1791523060D35384B3DCB6"
+        },
+        "globalBodyAccessPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\body-access-policy.json",
+          "bytes": 55392,
+          "sha256": "2029E07863BD69C5E7966F58AC6EEDBCA88C0DFEA9FBAA521DB7CCFFDC15FCF5"
+        },
+        "globalSelectedMetadataPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\metadata-selection-policy.json",
+          "bytes": 14547,
+          "sha256": "B156E3761917616D200256475D695D8713919EB5BE835B9E8066A967F380CED1"
+        },
+        "globalCoverageInventory": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\coverage-plan.json",
+          "bytes": 67814,
+          "sha256": "042D0CC262B803C8FAC900B72CCBF1E1E61DFE397AE08BAFE792C2DBB8BED24F"
+        },
+        "primaryCatalog": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\primary-catalog.integrated.json",
+          "bytes": 185431,
+          "sha256": "26EB9E9FCF475C1DEB7E9466A0A8A6E20816C62F284279D5CCB69AC27074858A"
+        },
+        "commonSourceInputManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\source-review-input-manifest.json",
+          "bytes": 656261,
+          "sha256": "2B26CC424D488E929634D6E5C7DB4CDE304C99844593EE39BDC505113D2F72E4"
+        }
+      },
+      "originalBoundScopeDefinitionVerbatim": {
+        "scopeId": "S_VALUE",
+        "role": "SOURCE",
+        "assessmentKind": "BLIND_SCOPED_INITIAL",
+        "primaryEntireBodyIds": [
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-005",
+          "SOURCE-BODY-006",
+          "SOURCE-BODY-007",
+          "SOURCE-BODY-008",
+          "SOURCE-BODY-009",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-011",
+          "SOURCE-BODY-012",
+          "SOURCE-BODY-014",
+          "SOURCE-BODY-015",
+          "SOURCE-BODY-037",
+          "SOURCE-BODY-038",
+          "SOURCE-BODY-039",
+          "SOURCE-BODY-040",
+          "SOURCE-BODY-041",
+          "SOURCE-BODY-042",
+          "SOURCE-BODY-043",
+          "SOURCE-BODY-044",
+          "SOURCE-BODY-045",
+          "SOURCE-BODY-046",
+          "SOURCE-BODY-049",
+          "SOURCE-BODY-050",
+          "SOURCE-BODY-051",
+          "SOURCE-BODY-052"
+        ],
+        "requiredEntireBodyIds": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-005",
+          "SOURCE-BODY-006",
+          "SOURCE-BODY-007",
+          "SOURCE-BODY-008",
+          "SOURCE-BODY-009",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-011",
+          "SOURCE-BODY-012",
+          "SOURCE-BODY-014",
+          "SOURCE-BODY-015",
+          "SOURCE-BODY-037",
+          "SOURCE-BODY-038",
+          "SOURCE-BODY-039",
+          "SOURCE-BODY-040",
+          "SOURCE-BODY-041",
+          "SOURCE-BODY-042",
+          "SOURCE-BODY-043",
+          "SOURCE-BODY-044",
+          "SOURCE-BODY-045",
+          "SOURCE-BODY-046",
+          "SOURCE-BODY-049",
+          "SOURCE-BODY-050",
+          "SOURCE-BODY-051",
+          "SOURCE-BODY-052",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097"
+        ],
+        "requiredCompleteUnitRanges": [
+          {
+            "body": "SOURCE-BODY-013",
+            "bodySha256": "ffe36d92f9cbfe1ba4609c2586feea0134260efb6742a78e2ce09afbad3b8329",
+            "physicalRanges": [
+              [
+                1163,
+                1165
+              ],
+              [
+                1166,
+                1177
+              ],
+              [
+                1178,
+                1196
+              ],
+              [
+                1197,
+                1197
+              ],
+              [
+                1990,
+                1992
+              ],
+              [
+                1993,
+                2019
+              ],
+              [
+                1403,
+                1403
+              ],
+              [
+                1404,
+                1408
+              ],
+              [
+                1409,
+                1427
+              ],
+              [
+                1886,
+                1901
+              ],
+              [
+                1902,
+                1916
+              ],
+              [
+                1917,
+                1922
+              ],
+              [
+                1923,
+                1946
+              ]
+            ],
+            "completeUnits": [
+              "Bytes-Hash",
+              "Expand-Recipe",
+              "Prepare-Fixtures",
+              "Fixture-Snapshot",
+              "Expected-Attempts",
+              "Check-Native",
+              "CMake-Path",
+              "CMake-Options",
+              "Check-CMake",
+              "Response-Chain",
+              "Forced-DefinitionHeaders",
+              "Macro-Values",
+              "Check-EditorFlags"
+            ],
+            "completeUnitBindings": [
+              {
+                "name": "Bytes-Hash",
+                "physicalRange": [
+                  1163,
+                  1165
+                ],
+                "sourceTextSha256": "200209577C233BA40E96A867393C68EAB1C51DA8E9460A37F52132BA292B8692"
+              },
+              {
+                "name": "Expand-Recipe",
+                "physicalRange": [
+                  1166,
+                  1177
+                ],
+                "sourceTextSha256": "D619BB7B72EB700E25A5722C5BF2672793B7FB6865CE0BE1192AA6E1798FC6A0"
+              },
+              {
+                "name": "Prepare-Fixtures",
+                "physicalRange": [
+                  1178,
+                  1196
+                ],
+                "sourceTextSha256": "30D4CD70713E9772FF20D216D08267C5025DFDD0BBCF73B49336724ADC4394CB"
+              },
+              {
+                "name": "Fixture-Snapshot",
+                "physicalRange": [
+                  1197,
+                  1197
+                ],
+                "sourceTextSha256": "144BF7FF814D678C8AB006BBB2220D6EA3166CC45DCBF69B1A844CF5966DE89A"
+              },
+              {
+                "name": "Expected-Attempts",
+                "physicalRange": [
+                  1990,
+                  1992
+                ],
+                "sourceTextSha256": "F426AD477E2B00DA66DD88BE641C88587B81F1D15FA7399E1D576EA9F215293F"
+              },
+              {
+                "name": "Check-Native",
+                "physicalRange": [
+                  1993,
+                  2019
+                ],
+                "sourceTextSha256": "E542C846CA23531CB0872D9B40623CA9EA39FFA7FF0517C203F1FAA309FA728E"
+              },
+              {
+                "name": "CMake-Path",
+                "physicalRange": [
+                  1403,
+                  1403
+                ],
+                "sourceTextSha256": "C8D4B3CCEF8C616C11C46C47BFE4FA02F306C665CD1277A3F66D1AA42BF0965A"
+              },
+              {
+                "name": "CMake-Options",
+                "physicalRange": [
+                  1404,
+                  1408
+                ],
+                "sourceTextSha256": "CEAC19B3812CBE675D5F8FE4C161DC31792C27F43FD02759560558DCDF79CA29"
+              },
+              {
+                "name": "Check-CMake",
+                "physicalRange": [
+                  1409,
+                  1427
+                ],
+                "sourceTextSha256": "749C289DFAF6F3B6C5513052931099CE036A68BC2DD865C4294109BA865C755D"
+              },
+              {
+                "name": "Response-Chain",
+                "physicalRange": [
+                  1886,
+                  1901
+                ],
+                "sourceTextSha256": "D2F12521F80E720F72FB660A143E2FF83F0AC4AE64CDE1F10CE6A16F9B0EBA0F"
+              },
+              {
+                "name": "Forced-DefinitionHeaders",
+                "physicalRange": [
+                  1902,
+                  1916
+                ],
+                "sourceTextSha256": "BFDB6AE2D489B8A70C3F60ED9FD5A494E9284EB3081FC83D2A2C8DF4FC3057D4"
+              },
+              {
+                "name": "Macro-Values",
+                "physicalRange": [
+                  1917,
+                  1922
+                ],
+                "sourceTextSha256": "611B56B801D51AF2A449AD71ED1B1A909D87F49755328C683AEC21424E74EE8B"
+              },
+              {
+                "name": "Check-EditorFlags",
+                "physicalRange": [
+                  1923,
+                  1946
+                ],
+                "sourceTextSha256": "8123A9E4327F09F85023041D3680C5B61637B23B37A7AC10564F8398C3708C16"
+              }
+            ]
+          }
+        ],
+        "metadataFullRecordOrdinals": [
+          13
+        ],
+        "metadataRelationshipRecordOrdinals": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "metadataRowPartitions": [],
+        "duties": [
+          "Assess the complete UE-owned raw document/value graph, no-borrow/no-vendor-public ownership, noexcept/typed private exception boundary, failed-empty result, original accepted bytes, aliases/tags/UTF8/null restrictions, copy/move/destruction and five inclusive quota units.",
+          "Assess all 38 input IDs, 45 planned attempts and eight suite contracts, complete canonical and generated definitions, independent recipes/byte expectations/keys/embedded NUL, exact typed failures and evaluated check accounting.",
+          "Assess actual used vendor public Parser/EventHandler/scanner/escape and owned UE APIs, selected source/header/static ownership lineage and bounded A1E versus required A1G/A2 claims.",
+          "Assess the complete terminal ABI/flag wrapper units CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags with full assigned ModuleRules/public/private parser sources. Keep their selected-artifact/CRT/C++/exception/definition/include/link assumptions explicit; local duties do not import the complete upstream target/configuration/catalog/compiler engine domain."
+        ],
+        "referenceCounts": {
+          "primaryEntireFiles": 25,
+          "requiredEntireFiles": 34,
+          "requiredEntirePhysicalRows": 9440,
+          "requiredCompleteUnitPhysicalRows": 151,
+          "requiredTotalMandatoryPhysicalRows": 9591
+        },
+        "assessmentStatus": "PENDING",
+        "report": null
+      },
+      "expectedOriginalRawVerdictForExactAudit": "SOURCE_PASS",
+      "rawVerdictMayBeRewritten": false,
+      "mayBeCalledFreshSourcePass": false,
+      "newPanelOrSessionClaimPermitted": false,
+      "originalRawReport": null,
+      "originalSealAndFirstRead": null,
+      "originalGoPromptRuntimeCompleteIoAndClosedExecution": null,
+      "rootOriginalTechnicalCompletenessAndValidityAudit": null,
+      "completeOldCurrentTechnicalSliceAndEveryDifference": null,
+      "compatibilityCohortId": "A_COMPAT_VALUE_CLIENT",
+      "compatibilityReportC": null,
+      "rootEligibilityDecisionE": null,
+      "adminDisposition": null,
+      "allSevenClausesEstablished": false,
+      "eligible": false,
+      "eligibleFlagMeaning": "ELIGIBLE_FOR_CONDITIONAL_RETENTION_ONLY_NOT_FINAL_ACCEPTANCE"
+    },
+    {
+      "assessmentNodeId": "R_S_CLIENT",
+      "mode": "RETAINED_TECHNICAL",
+      "originalScopeId": "S_CLIENT",
+      "historicalTechnicalSubjectVerbatim": {
+        "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+        "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+        "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+        "plannedRunId": "20261020T122137Z-3498b937",
+        "runtimeFreezeManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+          "bytes": 746749,
+          "sha256": "E4C776C0C0ACA5CF09995BCF7484260C6AD20B039C1791523060D35384B3DCB6"
+        },
+        "globalBodyAccessPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\body-access-policy.json",
+          "bytes": 55392,
+          "sha256": "2029E07863BD69C5E7966F58AC6EEDBCA88C0DFEA9FBAA521DB7CCFFDC15FCF5"
+        },
+        "globalSelectedMetadataPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\metadata-selection-policy.json",
+          "bytes": 14547,
+          "sha256": "B156E3761917616D200256475D695D8713919EB5BE835B9E8066A967F380CED1"
+        },
+        "globalCoverageInventory": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\coverage-plan.json",
+          "bytes": 67814,
+          "sha256": "042D0CC262B803C8FAC900B72CCBF1E1E61DFE397AE08BAFE792C2DBB8BED24F"
+        },
+        "primaryCatalog": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\primary-catalog.integrated.json",
+          "bytes": 185431,
+          "sha256": "26EB9E9FCF475C1DEB7E9466A0A8A6E20816C62F284279D5CCB69AC27074858A"
+        },
+        "commonSourceInputManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\source-review-input-manifest.json",
+          "bytes": 656261,
+          "sha256": "2B26CC424D488E929634D6E5C7DB4CDE304C99844593EE39BDC505113D2F72E4"
+        }
+      },
+      "originalBoundScopeDefinitionVerbatim": {
+        "scopeId": "S_CLIENT",
+        "role": "SOURCE",
+        "assessmentKind": "BLIND_SCOPED_INITIAL",
+        "primaryEntireBodyIds": [
+          "SOURCE-BODY-026",
+          "SOURCE-BODY-027",
+          "SOURCE-BODY-028",
+          "SOURCE-BODY-029",
+          "SOURCE-BODY-030",
+          "SOURCE-BODY-031",
+          "SOURCE-BODY-032",
+          "SOURCE-BODY-033",
+          "SOURCE-BODY-034",
+          "SOURCE-BODY-035",
+          "SOURCE-BODY-036"
+        ],
+        "requiredEntireBodyIds": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-011",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-017",
+          "SOURCE-BODY-018",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-020",
+          "SOURCE-BODY-021",
+          "SOURCE-BODY-022",
+          "SOURCE-BODY-023",
+          "SOURCE-BODY-024",
+          "SOURCE-BODY-025",
+          "SOURCE-BODY-026",
+          "SOURCE-BODY-027",
+          "SOURCE-BODY-028",
+          "SOURCE-BODY-029",
+          "SOURCE-BODY-030",
+          "SOURCE-BODY-031",
+          "SOURCE-BODY-032",
+          "SOURCE-BODY-033",
+          "SOURCE-BODY-034",
+          "SOURCE-BODY-035",
+          "SOURCE-BODY-036",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097"
+        ],
+        "requiredCompleteUnitRanges": [
+          {
+            "body": "SOURCE-BODY-013",
+            "bodySha256": "ffe36d92f9cbfe1ba4609c2586feea0134260efb6742a78e2ce09afbad3b8329",
+            "physicalRanges": [
+              [
+                1066,
+                1079
+              ],
+              [
+                1080,
+                1089
+              ],
+              [
+                1090,
+                1113
+              ],
+              [
+                1198,
+                1210
+              ],
+              [
+                1454,
+                1459
+              ],
+              [
+                1460,
+                1474
+              ],
+              [
+                1475,
+                1482
+              ],
+              [
+                1483,
+                1488
+              ],
+              [
+                1489,
+                1512
+              ],
+              [
+                1513,
+                1516
+              ],
+              [
+                1542,
+                1580
+              ],
+              [
+                1612,
+                1629
+              ],
+              [
+                1630,
+                1643
+              ],
+              [
+                1644,
+                1671
+              ],
+              [
+                1672,
+                1687
+              ],
+              [
+                1688,
+                1792
+              ],
+              [
+                1793,
+                1807
+              ],
+              [
+                1808,
+                1821
+              ],
+              [
+                1822,
+                1831
+              ],
+              [
+                1832,
+                1885
+              ],
+              [
+                1947,
+                1953
+              ],
+              [
+                1517,
+                1533
+              ],
+              [
+                1534,
+                1541
+              ],
+              [
+                1581,
+                1611
+              ],
+              [
+                1211,
+                1227
+              ],
+              [
+                1228,
+                1231
+              ],
+              [
+                2041,
+                2100
+              ]
+            ],
+            "completeUnits": [
+              "Snapshot-Source",
+              "Snapshot-ProjectPlugins",
+              "Check-ProjectPluginMembership",
+              "Child-Environment",
+              "Require-RulesKeys",
+              "Assert-RulesValue",
+              "Assert-RulesDescriptor",
+              "Rules-FrozenInput",
+              "Check-RulesFreeze",
+              "Rules-GeneratedPaths",
+              "Rules-SourceFiles",
+              "Rules-Topology",
+              "Prepare-RulesChallenge",
+              "Read-RulesMetadata",
+              "Collect-RulesCacheSources",
+              "Check-RulesWitnessData",
+              "Retain-RulesArtifacts",
+              "Check-RulesRetentionData",
+              "Check-RulesPreservation",
+              "Editor-Build",
+              "Native-Arguments",
+              "Read-RulesHeldDescriptor",
+              "Confirm-RulesHeldSources",
+              "Confirm-RulesPrelaunchInputs",
+              "Invoke-Root",
+              "Require-RootPass",
+              "initialization boundary plus complete top-level try/dispatch/catch/finally and final exit"
+            ],
+            "completeUnitBindings": [
+              {
+                "name": "Snapshot-Source",
+                "physicalRange": [
+                  1066,
+                  1079
+                ],
+                "sourceTextSha256": "7EC4865404AEE41CF05D9B5E4E77A43FE2E135FD5C5555ABDF857A9569459AAE"
+              },
+              {
+                "name": "Snapshot-ProjectPlugins",
+                "physicalRange": [
+                  1080,
+                  1089
+                ],
+                "sourceTextSha256": "D0F59851959C858E58881D96F8E28440693791CFA94E407E6F211322F3A4D3FA"
+              },
+              {
+                "name": "Check-ProjectPluginMembership",
+                "physicalRange": [
+                  1090,
+                  1113
+                ],
+                "sourceTextSha256": "8E43EC2EF7AC281E4D65052FFCB09A05E3B2B1733A0287385B9C19C5983F1DF4"
+              },
+              {
+                "name": "Child-Environment",
+                "physicalRange": [
+                  1198,
+                  1210
+                ],
+                "sourceTextSha256": "0DC3AF355064CEB227D5C43CAD860C7A43B40EDE8D81C680DA0B4E15E2020430"
+              },
+              {
+                "name": "Require-RulesKeys",
+                "physicalRange": [
+                  1454,
+                  1459
+                ],
+                "sourceTextSha256": "0FB40C26F2FE319E20BCF24752937658EDF2E5FDFB80DBF3F5DFA9818476F183"
+              },
+              {
+                "name": "Assert-RulesValue",
+                "physicalRange": [
+                  1460,
+                  1474
+                ],
+                "sourceTextSha256": "C2C3BBF13BE8E16472041034812C462D3751CC8C25F5E1760BC1C88C2EA47392"
+              },
+              {
+                "name": "Assert-RulesDescriptor",
+                "physicalRange": [
+                  1475,
+                  1482
+                ],
+                "sourceTextSha256": "B17063F02955AFA30048D1A519B89561916D7BE7704F063B877811CAF4682153"
+              },
+              {
+                "name": "Rules-FrozenInput",
+                "physicalRange": [
+                  1483,
+                  1488
+                ],
+                "sourceTextSha256": "74ADE036F40595C186F5669644523C97C3B7F5BC76730CB1D6A00643F80808D1"
+              },
+              {
+                "name": "Check-RulesFreeze",
+                "physicalRange": [
+                  1489,
+                  1512
+                ],
+                "sourceTextSha256": "E8E3883160B9328DFAF288F2DAC424FC173A4F621A890E942AA001CED59BF5FB"
+              },
+              {
+                "name": "Rules-GeneratedPaths",
+                "physicalRange": [
+                  1513,
+                  1516
+                ],
+                "sourceTextSha256": "4E894AD7072F1BC531E76F2FAB21B0E5344666D9016B75DBAABB477A238919E5"
+              },
+              {
+                "name": "Rules-SourceFiles",
+                "physicalRange": [
+                  1542,
+                  1580
+                ],
+                "sourceTextSha256": "8E7BC3B4E52A65CE81DC204CD10505CC9DE727DA7BBD8752FACDA48CBB9716C0"
+              },
+              {
+                "name": "Rules-Topology",
+                "physicalRange": [
+                  1612,
+                  1629
+                ],
+                "sourceTextSha256": "DA5F1E9C45C8EA6D07133E7ADDBC06C7795EA37B163435FF94103435EF7C2F91"
+              },
+              {
+                "name": "Prepare-RulesChallenge",
+                "physicalRange": [
+                  1630,
+                  1643
+                ],
+                "sourceTextSha256": "4D5AE44E243F719098AE8CE31E86507283AE25E82CA1EBFC279A3D7322AB0A24"
+              },
+              {
+                "name": "Read-RulesMetadata",
+                "physicalRange": [
+                  1644,
+                  1671
+                ],
+                "sourceTextSha256": "06E6734B47503522CE25C75C8F219062BB6922DFD8A53DEDE3340ADB50288F10"
+              },
+              {
+                "name": "Collect-RulesCacheSources",
+                "physicalRange": [
+                  1672,
+                  1687
+                ],
+                "sourceTextSha256": "49C1510611D5A88E2E2763F1A06FA5CD793A83DD94B918E8808B531EE53CB85E"
+              },
+              {
+                "name": "Check-RulesWitnessData",
+                "physicalRange": [
+                  1688,
+                  1792
+                ],
+                "sourceTextSha256": "F476548D1EB033F5F4A685A2DB20D316A01E30990F030C1EDCA06D14970C616B"
+              },
+              {
+                "name": "Retain-RulesArtifacts",
+                "physicalRange": [
+                  1793,
+                  1807
+                ],
+                "sourceTextSha256": "C6CB07AB476349AF5FF107C2C4C5F2E9F714086817FB233BB740B86B2AD8E657"
+              },
+              {
+                "name": "Check-RulesRetentionData",
+                "physicalRange": [
+                  1808,
+                  1821
+                ],
+                "sourceTextSha256": "3C9DD089F7C8C56F21B1E9C686DB548552829DC588A37B2F663C39BCC0C05D97"
+              },
+              {
+                "name": "Check-RulesPreservation",
+                "physicalRange": [
+                  1822,
+                  1831
+                ],
+                "sourceTextSha256": "65DB2C95A434CFC905BC64A34B8EABBC2790DDB65ED64FB80FEE17CDCFE9C81F"
+              },
+              {
+                "name": "Editor-Build",
+                "physicalRange": [
+                  1832,
+                  1885
+                ],
+                "sourceTextSha256": "E0E36C52849B3A39DFB03543BEE52CD1ED3DBDAD08EA5EB66AF12F0001266925"
+              },
+              {
+                "name": "Native-Arguments",
+                "physicalRange": [
+                  1947,
+                  1953
+                ],
+                "sourceTextSha256": "EBE3B883A66311A9E06040BB417C9D6D14C661D1810255423B2523EC5A4B9D64"
+              },
+              {
+                "name": "Read-RulesHeldDescriptor",
+                "physicalRange": [
+                  1517,
+                  1533
+                ],
+                "sourceTextSha256": "9F110824789DB78CA97BF909CC088C5578B76591D94AB9F4DFB5C7DBEA0C01A0"
+              },
+              {
+                "name": "Confirm-RulesHeldSources",
+                "physicalRange": [
+                  1534,
+                  1541
+                ],
+                "sourceTextSha256": "CCBCDACC2CACE120D464AED07ED8E5294C55AEB6D00452487FB05988119D6E84"
+              },
+              {
+                "name": "Confirm-RulesPrelaunchInputs",
+                "physicalRange": [
+                  1581,
+                  1611
+                ],
+                "sourceTextSha256": "152F5EABF92EEC829AC19FFE7B93C06EA7C3E8D4989BB756CADDCEAF15C098D1"
+              },
+              {
+                "name": "Invoke-Root",
+                "physicalRange": [
+                  1211,
+                  1227
+                ],
+                "sourceTextSha256": "938A8B24E896FD1EBBE6252CEE71BD3619E430544F111906566AEF79ECC03570"
+              },
+              {
+                "name": "Require-RootPass",
+                "physicalRange": [
+                  1228,
+                  1231
+                ],
+                "sourceTextSha256": "908172D215A9C4BBE696ABB3770BBF2743DF0FBE597B94AC2648F334AA2DC46F"
+              },
+              {
+                "name": "initialization boundary plus complete top-level try/dispatch/catch/finally and final exit",
+                "physicalRange": [
+                  2041,
+                  2100
+                ],
+                "sourceTextSha256": "8999EBB1D874B5FD07310905B19874FB908256235742A705963484F3D65A85D6"
+              }
+            ]
+          }
+        ],
+        "metadataFullRecordOrdinals": [
+          2
+        ],
+        "metadataRelationshipRecordOrdinals": [
+          1,
+          4,
+          7,
+          11,
+          12
+        ],
+        "metadataRowPartitions": [],
+        "duties": [
+          "Assess full existing client CoreBoundary/E02 implementation, headers and all three test translation units, source includes/UHT/build and conditional automation paths, project/entry/Config routes.",
+          "Match all33 frozen staged authored members to complete positive BODY paths and exact source copies, including every compiled client/test/settings member.",
+          "Assess dedicated A1E target/plugin/startup and cleared E02 environment behavior, preserving existing client/Core-authority/entry behavior and preventing unintended host/window or other experiment activation.",
+          "Assess complete required wrapper witness initialization/challenge/process/retention/preservation units together with the dedicated target AdditionalData bridge and staged client/source paths; preserve all33 staged members. The source-only validator test is not a staged member; read globally granted BODY098 as needed for a material interface.",
+          "Read complete BODY003 module-side witness producer and every required complete wrapper source/held-descriptor/prelaunch/environment/owned-root-call/witness-validator/retained-live/control-flow interface. Verify all33 canonical/staged memberships and approved bytes after handles are held, the complete prelaunch topology, actual direct root call and release/failure ordering; preserved generic job/catalog/compiler internals have explicit complete owners and are not duplicated by this local interface obligation."
+        ],
+        "referenceCounts": {
+          "primaryEntireFiles": 11,
+          "requiredEntireFiles": 33,
+          "requiredEntirePhysicalRows": 7985,
+          "requiredCompleteUnitPhysicalRows": 581,
+          "requiredTotalMandatoryPhysicalRows": 8566
+        },
+        "assessmentStatus": "PENDING",
+        "report": null
+      },
+      "expectedOriginalRawVerdictForExactAudit": "SOURCE_PASS",
+      "rawVerdictMayBeRewritten": false,
+      "mayBeCalledFreshSourcePass": false,
+      "newPanelOrSessionClaimPermitted": false,
+      "originalRawReport": null,
+      "originalSealAndFirstRead": null,
+      "originalGoPromptRuntimeCompleteIoAndClosedExecution": null,
+      "rootOriginalTechnicalCompletenessAndValidityAudit": null,
+      "completeOldCurrentTechnicalSliceAndEveryDifference": null,
+      "compatibilityCohortId": "A_COMPAT_VALUE_CLIENT",
+      "compatibilityReportC": null,
+      "rootEligibilityDecisionE": null,
+      "adminDisposition": null,
+      "allSevenClausesEstablished": false,
+      "eligible": false,
+      "eligibleFlagMeaning": "ELIGIBLE_FOR_CONDITIONAL_RETENTION_ONLY_NOT_FINAL_ACCEPTANCE"
+    },
+    {
+      "assessmentNodeId": "R_D_SELECTORS_001_301",
+      "mode": "RETAINED_TECHNICAL",
+      "originalScopeId": "D_SELECTORS_001_301",
+      "historicalTechnicalSubjectVerbatim": {
+        "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+        "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+        "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+        "plannedRunId": "20261020T122137Z-3498b937",
+        "runtimeFreezeManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+          "bytes": 746749,
+          "sha256": "E4C776C0C0ACA5CF09995BCF7484260C6AD20B039C1791523060D35384B3DCB6"
+        },
+        "globalBodyAccessPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\body-access-policy.json",
+          "bytes": 55392,
+          "sha256": "2029E07863BD69C5E7966F58AC6EEDBCA88C0DFEA9FBAA521DB7CCFFDC15FCF5"
+        },
+        "globalSelectedMetadataPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\metadata-selection-policy.json",
+          "bytes": 14547,
+          "sha256": "B156E3761917616D200256475D695D8713919EB5BE835B9E8066A967F380CED1"
+        },
+        "globalCoverageInventory": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\coverage-plan.json",
+          "bytes": 67814,
+          "sha256": "042D0CC262B803C8FAC900B72CCBF1E1E61DFE397AE08BAFE792C2DBB8BED24F"
+        },
+        "primaryCatalog": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\primary-catalog.integrated.json",
+          "bytes": 185431,
+          "sha256": "26EB9E9FCF475C1DEB7E9466A0A8A6E20816C62F284279D5CCB69AC27074858A"
+        },
+        "commonSourceInputManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\source-review-input-manifest.json",
+          "bytes": 656261,
+          "sha256": "2B26CC424D488E929634D6E5C7DB4CDE304C99844593EE39BDC505113D2F72E4"
+        }
+      },
+      "originalBoundScopeDefinitionVerbatim": {
+        "scopeId": "D_SELECTORS_001_301",
+        "role": "SOURCE",
+        "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+        "primaryEntireBodyIds": [],
+        "requiredEntireBodyIds": [
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097"
+        ],
+        "requiredCompleteUnitRanges": [],
+        "metadataFullRecordOrdinals": [
+          9,
+          10
+        ],
+        "metadataRelationshipRecordOrdinals": [
+          7,
+          11,
+          12
+        ],
+        "metadataRowPartitions": [
+          {
+            "recordOrdinal": 8,
+            "rowOrder": "ORIGINAL_BOUND_JSONL_PHYSICAL_ROW_ORDER",
+            "firstRowInclusive": 1,
+            "lastRowInclusive": 301,
+            "requirement": "EVERY_SELECTED_FIELD_VALUE_ABSENCE_AND_ORIGIN_IDENTITY_IN_EVERY_ASSIGNED_ROW"
+          }
+        ],
+        "duties": [
+          "Assess every assigned complete row, its ordered original origin identity, all selected literal field values/presence/absence/other-present names, exact case/null/false/empty and singleton arrays, full opaque strings and all applicable source-field correspondence.",
+          "Read the complete catalog and field/schema data in records9/10; query any needed original descriptors only through the positive49-field origin policy. No descriptor-origin BODY grant is implied.",
+          "Independently perform complete exact identity/value comparisons where suitable and substantively interpret material selector values in assigned rows; preserve full unequal/unresolved values. Match every assigned row exactly once without samples or shortened hashes.",
+          "Identify all incoming/outgoing Plugin-reference occurrences incident to assigned rows using globally accessible raw data and preserve cross-partition identities. Full runtime/build/cross-system graph semantics are independently owned by S_PLUGIN/S_TARGET_RECEIPT/I_ACTIVATION; their peer graphs/reports are not inputs."
+        ],
+        "referenceCounts": {
+          "primaryEntireFiles": 0,
+          "requiredEntireFiles": 6,
+          "requiredEntirePhysicalRows": 784,
+          "assignedRows": 301,
+          "requiredCompleteUnitPhysicalRows": 0,
+          "requiredTotalMandatoryPhysicalRows": 784
+        },
+        "assessmentStatus": "PENDING",
+        "report": null
+      },
+      "expectedOriginalRawVerdictForExactAudit": "SOURCE_PASS",
+      "rawVerdictMayBeRewritten": false,
+      "mayBeCalledFreshSourcePass": false,
+      "newPanelOrSessionClaimPermitted": false,
+      "originalRawReport": null,
+      "originalSealAndFirstRead": null,
+      "originalGoPromptRuntimeCompleteIoAndClosedExecution": null,
+      "rootOriginalTechnicalCompletenessAndValidityAudit": null,
+      "completeOldCurrentTechnicalSliceAndEveryDifference": null,
+      "compatibilityCohortId": "A_COMPAT_SELECTORS",
+      "compatibilityReportC": null,
+      "rootEligibilityDecisionE": null,
+      "adminDisposition": null,
+      "allSevenClausesEstablished": false,
+      "eligible": false,
+      "eligibleFlagMeaning": "ELIGIBLE_FOR_CONDITIONAL_RETENTION_ONLY_NOT_FINAL_ACCEPTANCE"
+    },
+    {
+      "assessmentNodeId": "R_D_SELECTORS_302_602",
+      "mode": "RETAINED_TECHNICAL",
+      "originalScopeId": "D_SELECTORS_302_602",
+      "historicalTechnicalSubjectVerbatim": {
+        "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+        "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+        "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+        "plannedRunId": "20261020T122137Z-3498b937",
+        "runtimeFreezeManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+          "bytes": 746749,
+          "sha256": "E4C776C0C0ACA5CF09995BCF7484260C6AD20B039C1791523060D35384B3DCB6"
+        },
+        "globalBodyAccessPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\body-access-policy.json",
+          "bytes": 55392,
+          "sha256": "2029E07863BD69C5E7966F58AC6EEDBCA88C0DFEA9FBAA521DB7CCFFDC15FCF5"
+        },
+        "globalSelectedMetadataPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\metadata-selection-policy.json",
+          "bytes": 14547,
+          "sha256": "B156E3761917616D200256475D695D8713919EB5BE835B9E8066A967F380CED1"
+        },
+        "globalCoverageInventory": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\coverage-plan.json",
+          "bytes": 67814,
+          "sha256": "042D0CC262B803C8FAC900B72CCBF1E1E61DFE397AE08BAFE792C2DBB8BED24F"
+        },
+        "primaryCatalog": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\primary-catalog.integrated.json",
+          "bytes": 185431,
+          "sha256": "26EB9E9FCF475C1DEB7E9466A0A8A6E20816C62F284279D5CCB69AC27074858A"
+        },
+        "commonSourceInputManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\source-review-input-manifest.json",
+          "bytes": 656261,
+          "sha256": "2B26CC424D488E929634D6E5C7DB4CDE304C99844593EE39BDC505113D2F72E4"
+        }
+      },
+      "originalBoundScopeDefinitionVerbatim": {
+        "scopeId": "D_SELECTORS_302_602",
+        "role": "SOURCE",
+        "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+        "primaryEntireBodyIds": [],
+        "requiredEntireBodyIds": [
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097"
+        ],
+        "requiredCompleteUnitRanges": [],
+        "metadataFullRecordOrdinals": [
+          9,
+          10
+        ],
+        "metadataRelationshipRecordOrdinals": [
+          7,
+          11,
+          12
+        ],
+        "metadataRowPartitions": [
+          {
+            "recordOrdinal": 8,
+            "rowOrder": "ORIGINAL_BOUND_JSONL_PHYSICAL_ROW_ORDER",
+            "firstRowInclusive": 302,
+            "lastRowInclusive": 602,
+            "requirement": "EVERY_SELECTED_FIELD_VALUE_ABSENCE_AND_ORIGIN_IDENTITY_IN_EVERY_ASSIGNED_ROW"
+          }
+        ],
+        "duties": [
+          "Assess every assigned complete row, its ordered original origin identity, all selected literal field values/presence/absence/other-present names, exact case/null/false/empty and singleton arrays, full opaque strings and all applicable source-field correspondence.",
+          "Read the complete catalog and field/schema data in records9/10; query any needed original descriptors only through the positive49-field origin policy. No descriptor-origin BODY grant is implied.",
+          "Independently perform complete exact identity/value comparisons where suitable and substantively interpret material selector values in assigned rows; preserve full unequal/unresolved values. Match every assigned row exactly once without samples or shortened hashes.",
+          "Identify all incoming/outgoing Plugin-reference occurrences incident to assigned rows using globally accessible raw data and preserve cross-partition identities. Full runtime/build/cross-system graph semantics are independently owned by S_PLUGIN/S_TARGET_RECEIPT/I_ACTIVATION; their peer graphs/reports are not inputs."
+        ],
+        "referenceCounts": {
+          "primaryEntireFiles": 0,
+          "requiredEntireFiles": 6,
+          "requiredEntirePhysicalRows": 784,
+          "assignedRows": 301,
+          "requiredCompleteUnitPhysicalRows": 0,
+          "requiredTotalMandatoryPhysicalRows": 784
+        },
+        "assessmentStatus": "PENDING",
+        "report": null
+      },
+      "expectedOriginalRawVerdictForExactAudit": "SOURCE_PASS",
+      "rawVerdictMayBeRewritten": false,
+      "mayBeCalledFreshSourcePass": false,
+      "newPanelOrSessionClaimPermitted": false,
+      "originalRawReport": null,
+      "originalSealAndFirstRead": null,
+      "originalGoPromptRuntimeCompleteIoAndClosedExecution": null,
+      "rootOriginalTechnicalCompletenessAndValidityAudit": null,
+      "completeOldCurrentTechnicalSliceAndEveryDifference": null,
+      "compatibilityCohortId": "A_COMPAT_SELECTORS",
+      "compatibilityReportC": null,
+      "rootEligibilityDecisionE": null,
+      "adminDisposition": null,
+      "allSevenClausesEstablished": false,
+      "eligible": false,
+      "eligibleFlagMeaning": "ELIGIBLE_FOR_CONDITIONAL_RETENTION_ONLY_NOT_FINAL_ACCEPTANCE"
+    },
+    {
+      "assessmentNodeId": "R_D_SELECTORS_603_902",
+      "mode": "RETAINED_TECHNICAL",
+      "originalScopeId": "D_SELECTORS_603_902",
+      "historicalTechnicalSubjectVerbatim": {
+        "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+        "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+        "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+        "plannedRunId": "20261020T122137Z-3498b937",
+        "runtimeFreezeManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+          "bytes": 746749,
+          "sha256": "E4C776C0C0ACA5CF09995BCF7484260C6AD20B039C1791523060D35384B3DCB6"
+        },
+        "globalBodyAccessPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\body-access-policy.json",
+          "bytes": 55392,
+          "sha256": "2029E07863BD69C5E7966F58AC6EEDBCA88C0DFEA9FBAA521DB7CCFFDC15FCF5"
+        },
+        "globalSelectedMetadataPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\metadata-selection-policy.json",
+          "bytes": 14547,
+          "sha256": "B156E3761917616D200256475D695D8713919EB5BE835B9E8066A967F380CED1"
+        },
+        "globalCoverageInventory": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\coverage-plan.json",
+          "bytes": 67814,
+          "sha256": "042D0CC262B803C8FAC900B72CCBF1E1E61DFE397AE08BAFE792C2DBB8BED24F"
+        },
+        "primaryCatalog": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\primary-catalog.integrated.json",
+          "bytes": 185431,
+          "sha256": "26EB9E9FCF475C1DEB7E9466A0A8A6E20816C62F284279D5CCB69AC27074858A"
+        },
+        "commonSourceInputManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\source-review-input-manifest.json",
+          "bytes": 656261,
+          "sha256": "2B26CC424D488E929634D6E5C7DB4CDE304C99844593EE39BDC505113D2F72E4"
+        }
+      },
+      "originalBoundScopeDefinitionVerbatim": {
+        "scopeId": "D_SELECTORS_603_902",
+        "role": "SOURCE",
+        "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+        "primaryEntireBodyIds": [],
+        "requiredEntireBodyIds": [
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097"
+        ],
+        "requiredCompleteUnitRanges": [],
+        "metadataFullRecordOrdinals": [
+          9,
+          10
+        ],
+        "metadataRelationshipRecordOrdinals": [
+          7,
+          11,
+          12
+        ],
+        "metadataRowPartitions": [
+          {
+            "recordOrdinal": 8,
+            "rowOrder": "ORIGINAL_BOUND_JSONL_PHYSICAL_ROW_ORDER",
+            "firstRowInclusive": 603,
+            "lastRowInclusive": 902,
+            "requirement": "EVERY_SELECTED_FIELD_VALUE_ABSENCE_AND_ORIGIN_IDENTITY_IN_EVERY_ASSIGNED_ROW"
+          }
+        ],
+        "duties": [
+          "Assess every assigned complete row, its ordered original origin identity, all selected literal field values/presence/absence/other-present names, exact case/null/false/empty and singleton arrays, full opaque strings and all applicable source-field correspondence.",
+          "Read the complete catalog and field/schema data in records9/10; query any needed original descriptors only through the positive49-field origin policy. No descriptor-origin BODY grant is implied.",
+          "Independently perform complete exact identity/value comparisons where suitable and substantively interpret material selector values in assigned rows; preserve full unequal/unresolved values. Match every assigned row exactly once without samples or shortened hashes.",
+          "Identify all incoming/outgoing Plugin-reference occurrences incident to assigned rows using globally accessible raw data and preserve cross-partition identities. Full runtime/build/cross-system graph semantics are independently owned by S_PLUGIN/S_TARGET_RECEIPT/I_ACTIVATION; their peer graphs/reports are not inputs."
+        ],
+        "referenceCounts": {
+          "primaryEntireFiles": 0,
+          "requiredEntireFiles": 6,
+          "requiredEntirePhysicalRows": 784,
+          "assignedRows": 300,
+          "requiredCompleteUnitPhysicalRows": 0,
+          "requiredTotalMandatoryPhysicalRows": 784
+        },
+        "assessmentStatus": "PENDING",
+        "report": null
+      },
+      "expectedOriginalRawVerdictForExactAudit": "SOURCE_PASS",
+      "rawVerdictMayBeRewritten": false,
+      "mayBeCalledFreshSourcePass": false,
+      "newPanelOrSessionClaimPermitted": false,
+      "originalRawReport": null,
+      "originalSealAndFirstRead": null,
+      "originalGoPromptRuntimeCompleteIoAndClosedExecution": null,
+      "rootOriginalTechnicalCompletenessAndValidityAudit": null,
+      "completeOldCurrentTechnicalSliceAndEveryDifference": null,
+      "compatibilityCohortId": "A_COMPAT_SELECTORS",
+      "compatibilityReportC": null,
+      "rootEligibilityDecisionE": null,
+      "adminDisposition": null,
+      "allSevenClausesEstablished": false,
+      "eligible": false,
+      "eligibleFlagMeaning": "ELIGIBLE_FOR_CONDITIONAL_RETENTION_ONLY_NOT_FINAL_ACCEPTANCE"
+    },
+    {
+      "assessmentNodeId": "R_S_BUILD_HOST",
+      "mode": "RETAINED_TECHNICAL",
+      "originalScopeId": "S_BUILD_HOST",
+      "historicalTechnicalSubjectVerbatim": {
+        "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+        "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+        "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+        "plannedRunId": "20261020T122137Z-3498b937",
+        "runtimeFreezeManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+          "bytes": 746749,
+          "sha256": "E4C776C0C0ACA5CF09995BCF7484260C6AD20B039C1791523060D35384B3DCB6"
+        },
+        "globalBodyAccessPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\body-access-policy.json",
+          "bytes": 55392,
+          "sha256": "2029E07863BD69C5E7966F58AC6EEDBCA88C0DFEA9FBAA521DB7CCFFDC15FCF5"
+        },
+        "globalSelectedMetadataPolicy": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\metadata-selection-policy.json",
+          "bytes": 14547,
+          "sha256": "B156E3761917616D200256475D695D8713919EB5BE835B9E8066A967F380CED1"
+        },
+        "globalCoverageInventory": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\coverage-plan.json",
+          "bytes": 67814,
+          "sha256": "042D0CC262B803C8FAC900B72CCBF1E1E61DFE397AE08BAFE792C2DBB8BED24F"
+        },
+        "primaryCatalog": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\primary-catalog.integrated.json",
+          "bytes": 185431,
+          "sha256": "26EB9E9FCF475C1DEB7E9466A0A8A6E20816C62F284279D5CCB69AC27074858A"
+        },
+        "commonSourceInputManifest": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\source-review-input-manifest.json",
+          "bytes": 656261,
+          "sha256": "2B26CC424D488E929634D6E5C7DB4CDE304C99844593EE39BDC505113D2F72E4"
+        }
+      },
+      "originalBoundScopeDefinitionVerbatim": {
+        "scopeId": "S_BUILD_HOST",
+        "role": "SOURCE",
+        "assessmentKind": "BLIND_SCOPED_INITIAL",
+        "primaryEntireBodyIds": [
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-013",
+          "SOURCE-BODY-047",
+          "SOURCE-BODY-048",
+          "SOURCE-BODY-053",
+          "SOURCE-BODY-085",
+          "SOURCE-BODY-086",
+          "SOURCE-BODY-087",
+          "SOURCE-BODY-088",
+          "SOURCE-BODY-089",
+          "SOURCE-BODY-090",
+          "SOURCE-BODY-091",
+          "SOURCE-BODY-098"
+        ],
+        "requiredEntireBodyIds": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-005",
+          "SOURCE-BODY-006",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-011",
+          "SOURCE-BODY-012",
+          "SOURCE-BODY-013",
+          "SOURCE-BODY-014",
+          "SOURCE-BODY-015",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-017",
+          "SOURCE-BODY-018",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-047",
+          "SOURCE-BODY-048",
+          "SOURCE-BODY-053",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-060",
+          "SOURCE-BODY-061",
+          "SOURCE-BODY-062",
+          "SOURCE-BODY-081",
+          "SOURCE-BODY-082",
+          "SOURCE-BODY-085",
+          "SOURCE-BODY-086",
+          "SOURCE-BODY-087",
+          "SOURCE-BODY-088",
+          "SOURCE-BODY-089",
+          "SOURCE-BODY-090",
+          "SOURCE-BODY-091",
+          "SOURCE-BODY-092",
+          "SOURCE-BODY-093",
+          "SOURCE-BODY-095",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097",
+          "SOURCE-BODY-098"
+        ],
+        "requiredCompleteUnitRanges": [],
+        "metadataFullRecordOrdinals": [
+          1,
+          3,
+          6
+        ],
+        "metadataRelationshipRecordOrdinals": [
+          2,
+          4,
+          5,
+          7,
+          13
+        ],
+        "metadataRowPartitions": [],
+        "duties": [
+          "Assess the complete wrapper and native supervisor, all six controls, phase authority/predecessors/budgets, root/member/job/pipe/exit/timeout/cleanup paths and receiptArtifact/result schemas.",
+          "Assess all nine settings roles and source/stage/fixture/project-plugin preservation, owned environment/DDC/output paths, retained partial failure evidence and resource limits.",
+          "Assess selected dependency/CMake RC serialization/compiler/SDK/CRT/C++/static artifact/copy/response/forced-definition contracts, NoPCHs/NoVFS, actual Editor exception mode and measurement support.",
+          "Assess the concrete dedicated target bBuildAllModules=false assignment, applicable TargetRules creation/configuration/finalization and normal non-test target-discovery route through complete BODY093. Distinguish source assignments and configuration gates from an actual unexecuted effective-target receipt.",
+          "Independently inspect complete BODY095 and join the frozen explicit project/name invocation and source-derived non-test descriptor parsing route, Source/extensions/additional-root/Mods/plugin-Tests/Intermediate/Source discovery, source order and competing filename/type/platform/group candidates, Rules/DirectoryItem/file/assembly caches, source-union compilation/load and parent/foreign-plugin guards to the concrete target/module/compiler/receipt route. Reuse full BODY081/082/092/093. Distinguish current literal/static source correspondence from future actual staged topology, first-scan/process lineage and selected loaded assembly/type evidence; no universal all-UBT or actual-execution conclusion follows. .NET/Roslyn/OS/library leaves and inapplicable no-project/foreign-plugin/no-code/test branches remain explicit and conditioned.",
+          "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+        ],
+        "referenceCounts": {
+          "primaryEntireFiles": 13,
+          "requiredEntireFiles": 41,
+          "requiredEntirePhysicalRows": 23188,
+          "requiredCompleteUnitPhysicalRows": 0,
+          "requiredTotalMandatoryPhysicalRows": 23188
+        },
+        "assessmentStatus": "PENDING",
+        "report": null
+      },
+      "expectedOriginalRawVerdictForExactAudit": "BLOCKED",
+      "rawVerdictMayBeRewritten": false,
+      "mayBeCalledFreshSourcePass": false,
+      "newPanelOrSessionClaimPermitted": false,
+      "originalRawReport": null,
+      "originalSealAndFirstRead": null,
+      "originalGoPromptRuntimeCompleteIoAndClosedExecution": null,
+      "rootOriginalTechnicalCompletenessAndValidityAudit": null,
+      "completeOldCurrentTechnicalSliceAndEveryDifference": null,
+      "compatibilityCohortId": "A_COMPAT_BUILD",
+      "compatibilityReportC": null,
+      "rootEligibilityDecisionE": null,
+      "adminDisposition": null,
+      "allSevenClausesEstablished": false,
+      "eligible": false,
+      "eligibleFlagMeaning": "ELIGIBLE_FOR_CONDITIONAL_RETENTION_ONLY_NOT_FINAL_ACCEPTANCE"
+    }
+  ],
+  "freshSourceNodes": [
+    {
+      "assessmentNodeId": "F_T_RULES_GRAPH",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 6,
+          "oldScopeId": "S_TARGET_RECEIPT",
+          "globalJoinId": "DEPENDENCY_COMPILER_ABI",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "DEPENDENCY_TARGET_DISCOVERY_SELECTION"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state."
+          },
+          "wholeAtomicIds": [
+            "DEPENDENCY_TARGET_DISCOVERY_SELECTION"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        },
+        {
+          "oldEntryOrdinal": 9,
+          "oldScopeId": "S_TARGET_RECEIPT",
+          "globalJoinId": "STAGED_CLIENT",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+              "STAGED_NORMAL_DISCOVERY_PRODUCER"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion. Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations."
+          },
+          "wholeAtomicIds": [
+            "STAGED_NORMAL_DISCOVERY_PRODUCER"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        },
+        {
+          "oldEntryOrdinal": 16,
+          "oldScopeId": "S_TARGET_RECEIPT",
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "SELECTOR_COMPLETE_BUILD_GRAPH"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Independently assess complete build-selection semantics over all902 nodes and1561 Plugin-reference occurrences, including inherited hook/defaults/configuration/target/platform initialization and every material selector/filter/dependency/default/collision/root/extension/receipt edge. Reconcile build/runtime/cross-system differences against raw data and complete applicable source; conservative closure, selected membership and actual enablement remain distinct."
+          },
+          "wholeAtomicIds": [
+            "SELECTOR_COMPLETE_BUILD_GRAPH"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        },
+        {
+          "oldEntryOrdinal": 18,
+          "oldScopeId": "S_TARGET_RECEIPT",
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+              "BUILD_RECEIPT_RUNTIME_STARTUP"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state. Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source."
+          },
+          "wholeAtomicIds": [
+            "BUILD_RECEIPT_UPSTREAM_PRODUCER"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        },
+        {
+          "oldEntryOrdinal": 27,
+          "oldScopeId": "S_TARGET_RECEIPT",
+          "globalJoinId": "FINITE_RULES_RUNTIME_WITNESS",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+          },
+          "wholeAtomicIds": [
+            "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "DEPENDENCY_COMPILER_ABI",
+          "atomicDutyVerbatim": {
+            "id": "DEPENDENCY_TARGET_DISCOVERY_SELECTION",
+            "completeDuty": "Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ABI_BUILD"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "STAGED_CLIENT",
+          "atomicDutyVerbatim": {
+            "id": "STAGED_NORMAL_DISCOVERY_PRODUCER",
+            "completeDuty": "Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "atomicDutyVerbatim": {
+            "id": "SELECTOR_COMPLETE_BUILD_GRAPH",
+            "completeDuty": "Independently assess complete build-selection semantics over all902 nodes and1561 Plugin-reference occurrences, including inherited hook/defaults/configuration/target/platform initialization and every material selector/filter/dependency/default/collision/root/extension/receipt edge. Reconcile build/runtime/cross-system differences against raw data and complete applicable source; conservative closure, selected membership and actual enablement remain distinct.",
+            "primaryScopes": [
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "atomicDutyVerbatim": {
+            "id": "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+            "completeDuty": "Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "FINITE_RULES_RUNTIME_WITNESS",
+          "atomicDutyVerbatim": {
+            "id": "FINITE_RULES_RUNTIME_WITNESS_COMPLETE",
+            "completeDuty": "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ABI_BUILD",
+              "I_ACTIVATION"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_T_RULES_GRAPH",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-013",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-017",
+          "SOURCE-BODY-018",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-020",
+          "SOURCE-BODY-021",
+          "SOURCE-BODY-022",
+          "SOURCE-BODY-023",
+          "SOURCE-BODY-024",
+          "SOURCE-BODY-025",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-081",
+          "SOURCE-BODY-082",
+          "SOURCE-BODY-083",
+          "SOURCE-BODY-084",
+          "SOURCE-BODY-092",
+          "SOURCE-BODY-093",
+          "SOURCE-BODY-095",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097",
+          "SOURCE-BODY-098"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 19371,
+        "preservedExistingAdditionalUnitRows": 0,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 19371,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [
+        4,
+        5,
+        7,
+        11,
+        12
+      ],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        1,
+        2,
+        3,
+        6,
+        8,
+        9,
+        10,
+        13
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "requiredWholeWitnessBodiesExplicit": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-013",
+        "SOURCE-BODY-081",
+        "SOURCE-BODY-082",
+        "SOURCE-BODY-092",
+        "SOURCE-BODY-093",
+        "SOURCE-BODY-095",
+        "SOURCE-BODY-098"
+      ],
+      "record1MandatoryWholeRulesWitnessObjectKeys": 17,
+      "record1MandatoryTypedSelectorValues": 32,
+      "record1MandatoryFlatSourceRuntimeDescriptors": 318,
+      "actualWitnessAndUpstreamMetadataRelationships": null,
+      "completeRawGraphRows": 902,
+      "completeSelectedFieldPolicyCount": 49,
+      "completeRawReferenceOccurrences": 1561,
+      "actualRawGraphCatalogOriginAndFieldDescriptors": null,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null,
+      "mandatoryRawGraphSelectedRecordOrdinal": 8
+    },
+    {
+      "assessmentNodeId": "F_T_STAGE_PROCESS",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 9,
+          "oldScopeId": "S_TARGET_RECEIPT",
+          "globalJoinId": "STAGED_CLIENT",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+              "STAGED_NORMAL_DISCOVERY_PRODUCER"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion. Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations."
+          },
+          "wholeAtomicIds": [
+            "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        },
+        {
+          "oldEntryOrdinal": 24,
+          "oldScopeId": "S_TARGET_RECEIPT",
+          "globalJoinId": "PROCESS_PRESERVATION",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "PROCESS_COMPLETE_HARNESS_PRESERVATION"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess one-phase authority and predecessor binding; actual root/member/job/pipe/PID/creation/exit/timeout/cleanup and receiptArtifact contracts; all9 settings roles, all6 expected supervisor controls, owned DDC/environment/output behavior and every source/stage/project-plugin/fixture/output/partial-failure/retained-live preservation path."
+          },
+          "wholeAtomicIds": [
+            "PROCESS_COMPLETE_HARNESS_PRESERVATION"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "STAGED_CLIENT",
+          "atomicDutyVerbatim": {
+            "id": "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+            "completeDuty": "Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion.",
+            "primaryScopes": [
+              "S_CLIENT",
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "PROCESS_PRESERVATION",
+          "atomicDutyVerbatim": {
+            "id": "PROCESS_COMPLETE_HARNESS_PRESERVATION",
+            "completeDuty": "Completely assess one-phase authority and predecessor binding; actual root/member/job/pipe/PID/creation/exit/timeout/cleanup and receiptArtifact contracts; all9 settings roles, all6 expected supervisor controls, owned DDC/environment/output behavior and every source/stage/project-plugin/fixture/output/partial-failure/retained-live preservation path.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_T_STAGE_PROCESS",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-011",
+          "SOURCE-BODY-013",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-017",
+          "SOURCE-BODY-018",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-020",
+          "SOURCE-BODY-021",
+          "SOURCE-BODY-022",
+          "SOURCE-BODY-023",
+          "SOURCE-BODY-024",
+          "SOURCE-BODY-025",
+          "SOURCE-BODY-026",
+          "SOURCE-BODY-027",
+          "SOURCE-BODY-028",
+          "SOURCE-BODY-029",
+          "SOURCE-BODY-030",
+          "SOURCE-BODY-031",
+          "SOURCE-BODY-032",
+          "SOURCE-BODY-033",
+          "SOURCE-BODY-034",
+          "SOURCE-BODY-035",
+          "SOURCE-BODY-036",
+          "SOURCE-BODY-048",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097",
+          "SOURCE-BODY-098"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 10957,
+        "preservedExistingAdditionalUnitRows": 0,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 10957,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [
+        1,
+        2,
+        3,
+        7
+      ],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null
+    },
+    {
+      "assessmentNodeId": "F_T_RUNTIME_RECEIPT",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 18,
+          "oldScopeId": "S_TARGET_RECEIPT",
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+              "BUILD_RECEIPT_RUNTIME_STARTUP"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state. Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source."
+          },
+          "wholeAtomicIds": [
+            "BUILD_RECEIPT_RUNTIME_STARTUP"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "atomicDutyVerbatim": {
+            "id": "BUILD_RECEIPT_RUNTIME_STARTUP",
+            "completeDuty": "Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source.",
+            "primaryScopes": [
+              "S_TARGET_RECEIPT",
+              "S_PLUGIN"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_T_RUNTIME_RECEIPT",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-058",
+          "SOURCE-BODY-059",
+          "SOURCE-BODY-060",
+          "SOURCE-BODY-061",
+          "SOURCE-BODY-062",
+          "SOURCE-BODY-063",
+          "SOURCE-BODY-064",
+          "SOURCE-BODY-065",
+          "SOURCE-BODY-066",
+          "SOURCE-BODY-067",
+          "SOURCE-BODY-068",
+          "SOURCE-BODY-069",
+          "SOURCE-BODY-070",
+          "SOURCE-BODY-071",
+          "SOURCE-BODY-072",
+          "SOURCE-BODY-073",
+          "SOURCE-BODY-074",
+          "SOURCE-BODY-075",
+          "SOURCE-BODY-076",
+          "SOURCE-BODY-077",
+          "SOURCE-BODY-078",
+          "SOURCE-BODY-079",
+          "SOURCE-BODY-080",
+          "SOURCE-BODY-094",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 14525,
+        "preservedExistingAdditionalUnitRows": 0,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 14525,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [
+        4,
+        5,
+        7,
+        11,
+        12
+      ],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        1,
+        2,
+        3,
+        6,
+        8,
+        9,
+        10,
+        13
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null
+    },
+    {
+      "assessmentNodeId": "F_PLUGIN_RUNTIME",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 15,
+          "oldScopeId": "S_PLUGIN",
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "SELECTOR_COMPLETE_RUNTIME_GRAPH"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Independently assess complete runtime selection semantics over all902 nodes and1561 Plugin-reference occurrences: defaults, exact consumer-specific name/key resolution, platform/target/configuration/Program/module filters, dependency and collision/extension/root handling, project/receipt membership and conditional explicit loading. Full record9/10 catalog/field schema and every material runtime value/relationship remain required; literal partitions do not replace this assessment."
+          },
+          "wholeAtomicIds": [
+            "SELECTOR_COMPLETE_RUNTIME_GRAPH"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        },
+        {
+          "oldEntryOrdinal": 19,
+          "oldScopeId": "S_PLUGIN",
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "LOCAL_PRIMARY",
+            "atomicDutyIds": [
+              "BUILD_RECEIPT_RUNTIME_STARTUP"
+            ],
+            "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source."
+          },
+          "wholeAtomicIds": [
+            "BUILD_RECEIPT_RUNTIME_STARTUP"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "atomicDutyVerbatim": {
+            "id": "SELECTOR_COMPLETE_RUNTIME_GRAPH",
+            "completeDuty": "Independently assess complete runtime selection semantics over all902 nodes and1561 Plugin-reference occurrences: defaults, exact consumer-specific name/key resolution, platform/target/configuration/Program/module filters, dependency and collision/extension/root handling, project/receipt membership and conditional explicit loading. Full record9/10 catalog/field schema and every material runtime value/relationship remain required; literal partitions do not replace this assessment.",
+            "primaryScopes": [
+              "S_PLUGIN"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "atomicDutyVerbatim": {
+            "id": "BUILD_RECEIPT_RUNTIME_STARTUP",
+            "completeDuty": "Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source.",
+            "primaryScopes": [
+              "S_TARGET_RECEIPT",
+              "S_PLUGIN"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_PLUGIN_RUNTIME",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-059",
+          "SOURCE-BODY-060",
+          "SOURCE-BODY-061",
+          "SOURCE-BODY-062",
+          "SOURCE-BODY-063",
+          "SOURCE-BODY-064",
+          "SOURCE-BODY-065",
+          "SOURCE-BODY-066",
+          "SOURCE-BODY-067",
+          "SOURCE-BODY-068",
+          "SOURCE-BODY-069",
+          "SOURCE-BODY-070",
+          "SOURCE-BODY-071",
+          "SOURCE-BODY-072",
+          "SOURCE-BODY-073",
+          "SOURCE-BODY-074",
+          "SOURCE-BODY-075",
+          "SOURCE-BODY-076",
+          "SOURCE-BODY-077",
+          "SOURCE-BODY-078",
+          "SOURCE-BODY-079",
+          "SOURCE-BODY-080",
+          "SOURCE-BODY-083",
+          "SOURCE-BODY-084",
+          "SOURCE-BODY-094",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 14094,
+        "preservedExistingAdditionalUnitRows": 154,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 14248,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [
+        9,
+        10
+      ],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        11,
+        12
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "completeRawGraphRows": 902,
+      "completeSelectedFieldPolicyCount": 49,
+      "completeRawReferenceOccurrences": 1561,
+      "actualRawGraphCatalogOriginAndFieldDescriptors": null,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null,
+      "mandatoryRawGraphSelectedRecordOrdinal": 8
+    },
+    {
+      "assessmentNodeId": "F_I_VALUE_TOOLCHAIN_STARTUP",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "INDEPENDENT_RAW_SOURCE_INTEGRATION",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 3,
+          "oldScopeId": "I_ABI_BUILD",
+          "globalJoinId": "VALUE_FIXTURE",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "VALUE_FIXTURE_COMPLETE"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. All38 IDs/45 planned attempts/eight suites; complete raw input/value/caller/fixture/result interfaces, UE-owned lifetimes, typed/noexcept and failed-empty semantics, five inclusive quotas, exact recipes/bytes/hash/path/check accounting and source-supported A1E limits."
+          },
+          "wholeAtomicIds": [
+            "VALUE_FIXTURE_COMPLETE"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        },
+        {
+          "oldEntryOrdinal": 7,
+          "oldScopeId": "I_ABI_BUILD",
+          "globalJoinId": "DEPENDENCY_COMPILER_ABI",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "DEPENDENCY_TERMINAL_VALUE_ABI",
+              "DEPENDENCY_BUILD_TOOLCHAIN",
+              "DEPENDENCY_TARGET_DISCOVERY_SELECTION"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Join public Core-only UE-owned input/output ABI, private yaml headers/callbacks/exception containment/static artifact, copied source/header/license identity and parser/probe include/definition/link isolation to the terminal CRT/C++/exception/static-definition flags. S_VALUE inspects complete BODY001-012/014-015 as assigned and complete wrapper CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags alongside its existing fixture/native units. Assess the literal terminal checks and their interface assumptions; full inherited target/configuration/catalog/compiler engine internals are separately owned below. Completely assess acquired source/header/license/tree to selected tools, CMake/RC path serialization, compiler/SDK/CRT/C++ selection, supervised dependency build, copied private static library, ModuleRules, actual response/shared-response/forced-definition/link contracts, NoPCHs/NoVFS and measured Editor exception mode. Preserve mismatch/refusal, provenance, failure and later actual output obligations. Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state."
+          },
+          "wholeAtomicIds": [
+            "DEPENDENCY_TERMINAL_VALUE_ABI",
+            "DEPENDENCY_BUILD_TOOLCHAIN"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "VALUE_FIXTURE",
+          "atomicDutyVerbatim": {
+            "id": "VALUE_FIXTURE_COMPLETE",
+            "completeDuty": "All38 IDs/45 planned attempts/eight suites; complete raw input/value/caller/fixture/result interfaces, UE-owned lifetimes, typed/noexcept and failed-empty semantics, five inclusive quotas, exact recipes/bytes/hash/path/check accounting and source-supported A1E limits.",
+            "primaryScopes": [
+              "S_VALUE",
+              "S_BUILD_HOST"
+            ],
+            "independentIntegrationScopes": [
+              "I_ABI_BUILD"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "DEPENDENCY_COMPILER_ABI",
+          "atomicDutyVerbatim": {
+            "id": "DEPENDENCY_TERMINAL_VALUE_ABI",
+            "completeDuty": "Join public Core-only UE-owned input/output ABI, private yaml headers/callbacks/exception containment/static artifact, copied source/header/license identity and parser/probe include/definition/link isolation to the terminal CRT/C++/exception/static-definition flags. S_VALUE inspects complete BODY001-012/014-015 as assigned and complete wrapper CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags alongside its existing fixture/native units. Assess the literal terminal checks and their interface assumptions; full inherited target/configuration/catalog/compiler engine internals are separately owned below.",
+            "primaryScopes": [
+              "S_VALUE",
+              "S_BUILD_HOST"
+            ],
+            "independentIntegrationScopes": [
+              "I_ABI_BUILD"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "DEPENDENCY_COMPILER_ABI",
+          "atomicDutyVerbatim": {
+            "id": "DEPENDENCY_BUILD_TOOLCHAIN",
+            "completeDuty": "Completely assess acquired source/header/license/tree to selected tools, CMake/RC path serialization, compiler/SDK/CRT/C++ selection, supervised dependency build, copied private static library, ModuleRules, actual response/shared-response/forced-definition/link contracts, NoPCHs/NoVFS and measured Editor exception mode. Preserve mismatch/refusal, provenance, failure and later actual output obligations.",
+            "primaryScopes": [
+              "S_BUILD_HOST"
+            ],
+            "independentIntegrationScopes": [
+              "I_ABI_BUILD"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_I_VALUE_TOOLCHAIN_STARTUP",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-005",
+          "SOURCE-BODY-006",
+          "SOURCE-BODY-007",
+          "SOURCE-BODY-008",
+          "SOURCE-BODY-009",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-011",
+          "SOURCE-BODY-012",
+          "SOURCE-BODY-013",
+          "SOURCE-BODY-014",
+          "SOURCE-BODY-015",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-017",
+          "SOURCE-BODY-018",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-047",
+          "SOURCE-BODY-049",
+          "SOURCE-BODY-050",
+          "SOURCE-BODY-051",
+          "SOURCE-BODY-053",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-060",
+          "SOURCE-BODY-061",
+          "SOURCE-BODY-062",
+          "SOURCE-BODY-085",
+          "SOURCE-BODY-086",
+          "SOURCE-BODY-087",
+          "SOURCE-BODY-088",
+          "SOURCE-BODY-089",
+          "SOURCE-BODY-090",
+          "SOURCE-BODY-091",
+          "SOURCE-BODY-094",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097",
+          "SOURCE-BODY-098"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 17409,
+        "preservedExistingAdditionalUnitRows": 0,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 17409,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        13
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null
+    },
+    {
+      "assessmentNodeId": "F_I_RULES_ABI_WITNESS",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "INDEPENDENT_RAW_SOURCE_INTEGRATION",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 7,
+          "oldScopeId": "I_ABI_BUILD",
+          "globalJoinId": "DEPENDENCY_COMPILER_ABI",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "DEPENDENCY_TERMINAL_VALUE_ABI",
+              "DEPENDENCY_BUILD_TOOLCHAIN",
+              "DEPENDENCY_TARGET_DISCOVERY_SELECTION"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Join public Core-only UE-owned input/output ABI, private yaml headers/callbacks/exception containment/static artifact, copied source/header/license identity and parser/probe include/definition/link isolation to the terminal CRT/C++/exception/static-definition flags. S_VALUE inspects complete BODY001-012/014-015 as assigned and complete wrapper CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags alongside its existing fixture/native units. Assess the literal terminal checks and their interface assumptions; full inherited target/configuration/catalog/compiler engine internals are separately owned below. Completely assess acquired source/header/license/tree to selected tools, CMake/RC path serialization, compiler/SDK/CRT/C++ selection, supervised dependency build, copied private static library, ModuleRules, actual response/shared-response/forced-definition/link contracts, NoPCHs/NoVFS and measured Editor exception mode. Preserve mismatch/refusal, provenance, failure and later actual output obligations. Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state."
+          },
+          "wholeAtomicIds": [
+            "DEPENDENCY_TARGET_DISCOVERY_SELECTION"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        },
+        {
+          "oldEntryOrdinal": 28,
+          "oldScopeId": "I_ABI_BUILD",
+          "globalJoinId": "FINITE_RULES_RUNTIME_WITNESS",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+          },
+          "wholeAtomicIds": [
+            "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "DEPENDENCY_COMPILER_ABI",
+          "atomicDutyVerbatim": {
+            "id": "DEPENDENCY_TARGET_DISCOVERY_SELECTION",
+            "completeDuty": "Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ABI_BUILD"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "FINITE_RULES_RUNTIME_WITNESS",
+          "atomicDutyVerbatim": {
+            "id": "FINITE_RULES_RUNTIME_WITNESS_COMPLETE",
+            "completeDuty": "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ABI_BUILD",
+              "I_ACTIVATION"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_I_RULES_ABI_WITNESS",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-013",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-017",
+          "SOURCE-BODY-018",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-047",
+          "SOURCE-BODY-053",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-060",
+          "SOURCE-BODY-061",
+          "SOURCE-BODY-062",
+          "SOURCE-BODY-081",
+          "SOURCE-BODY-082",
+          "SOURCE-BODY-085",
+          "SOURCE-BODY-086",
+          "SOURCE-BODY-087",
+          "SOURCE-BODY-088",
+          "SOURCE-BODY-089",
+          "SOURCE-BODY-090",
+          "SOURCE-BODY-091",
+          "SOURCE-BODY-092",
+          "SOURCE-BODY-093",
+          "SOURCE-BODY-095",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097",
+          "SOURCE-BODY-098"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 21135,
+        "preservedExistingAdditionalUnitRows": 0,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 21135,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        13
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "requiredWholeWitnessBodiesExplicit": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-013",
+        "SOURCE-BODY-081",
+        "SOURCE-BODY-082",
+        "SOURCE-BODY-092",
+        "SOURCE-BODY-093",
+        "SOURCE-BODY-095",
+        "SOURCE-BODY-098"
+      ],
+      "record1MandatoryWholeRulesWitnessObjectKeys": 17,
+      "record1MandatoryTypedSelectorValues": 32,
+      "record1MandatoryFlatSourceRuntimeDescriptors": 318,
+      "actualWitnessAndUpstreamMetadataRelationships": null,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null
+    },
+    {
+      "assessmentNodeId": "F_I_RULES_STAGE_WITNESS",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "INDEPENDENT_RAW_SOURCE_INTEGRATION",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 11,
+          "oldScopeId": "I_ACTIVATION",
+          "globalJoinId": "STAGED_CLIENT",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+              "STAGED_NORMAL_DISCOVERY_PRODUCER"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion. Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations."
+          },
+          "wholeAtomicIds": [
+            "STAGED_NORMAL_DISCOVERY_PRODUCER"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        },
+        {
+          "oldEntryOrdinal": 21,
+          "oldScopeId": "I_ACTIVATION",
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+              "BUILD_RECEIPT_RUNTIME_STARTUP"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state. Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source."
+          },
+          "wholeAtomicIds": [
+            "BUILD_RECEIPT_UPSTREAM_PRODUCER"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        },
+        {
+          "oldEntryOrdinal": 29,
+          "oldScopeId": "I_ACTIVATION",
+          "globalJoinId": "FINITE_RULES_RUNTIME_WITNESS",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+          },
+          "wholeAtomicIds": [
+            "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "STAGED_CLIENT",
+          "atomicDutyVerbatim": {
+            "id": "STAGED_NORMAL_DISCOVERY_PRODUCER",
+            "completeDuty": "Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "atomicDutyVerbatim": {
+            "id": "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+            "completeDuty": "Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "FINITE_RULES_RUNTIME_WITNESS",
+          "atomicDutyVerbatim": {
+            "id": "FINITE_RULES_RUNTIME_WITNESS_COMPLETE",
+            "completeDuty": "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ABI_BUILD",
+              "I_ACTIVATION"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_I_RULES_STAGE_WITNESS",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-002",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-008",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-011",
+          "SOURCE-BODY-013",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-017",
+          "SOURCE-BODY-018",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-020",
+          "SOURCE-BODY-021",
+          "SOURCE-BODY-022",
+          "SOURCE-BODY-023",
+          "SOURCE-BODY-024",
+          "SOURCE-BODY-025",
+          "SOURCE-BODY-027",
+          "SOURCE-BODY-029",
+          "SOURCE-BODY-031",
+          "SOURCE-BODY-033",
+          "SOURCE-BODY-048",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-081",
+          "SOURCE-BODY-082",
+          "SOURCE-BODY-083",
+          "SOURCE-BODY-084",
+          "SOURCE-BODY-092",
+          "SOURCE-BODY-093",
+          "SOURCE-BODY-095",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097",
+          "SOURCE-BODY-098"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 20399,
+        "preservedExistingAdditionalUnitRows": 0,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 20399,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [
+        4,
+        5,
+        7,
+        11,
+        12
+      ],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        1,
+        2,
+        8,
+        9,
+        10
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "requiredWholeWitnessBodiesExplicit": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-013",
+        "SOURCE-BODY-081",
+        "SOURCE-BODY-082",
+        "SOURCE-BODY-092",
+        "SOURCE-BODY-093",
+        "SOURCE-BODY-095",
+        "SOURCE-BODY-098"
+      ],
+      "record1MandatoryWholeRulesWitnessObjectKeys": 17,
+      "record1MandatoryTypedSelectorValues": 32,
+      "record1MandatoryFlatSourceRuntimeDescriptors": 318,
+      "actualWitnessAndUpstreamMetadataRelationships": null,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null
+    },
+    {
+      "assessmentNodeId": "F_I_PROCESS_STARTUP",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "INDEPENDENT_RAW_SOURCE_INTEGRATION",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 11,
+          "oldScopeId": "I_ACTIVATION",
+          "globalJoinId": "STAGED_CLIENT",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+              "STAGED_NORMAL_DISCOVERY_PRODUCER"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion. Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations."
+          },
+          "wholeAtomicIds": [
+            "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        },
+        {
+          "oldEntryOrdinal": 21,
+          "oldScopeId": "I_ACTIVATION",
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+              "BUILD_RECEIPT_RUNTIME_STARTUP"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state. Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source."
+          },
+          "wholeAtomicIds": [
+            "BUILD_RECEIPT_RUNTIME_STARTUP"
+          ],
+          "requiresCompleteInterfaceComposition": true
+        },
+        {
+          "oldEntryOrdinal": 25,
+          "oldScopeId": "I_ACTIVATION",
+          "globalJoinId": "PROCESS_PRESERVATION",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "PROCESS_COMPLETE_HARNESS_PRESERVATION",
+              "PROCESS_CLIENT_BOUND_INTERFACES"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely assess one-phase authority and predecessor binding; actual root/member/job/pipe/PID/creation/exit/timeout/cleanup and receiptArtifact contracts; all9 settings roles, all6 expected supervisor controls, owned DDC/environment/output behavior and every source/stage/project-plugin/fixture/output/partial-failure/retained-live preservation path. Completely assess CLIENT interface units for Snapshot-Source, Snapshot-ProjectPlugins, Check-ProjectPluginMembership, Child-Environment, Invoke-Root, Require-RootPass, all required witness/source/held-stream/prelaunch/retention validators, Editor-Build, Native-Arguments and the complete initialization/dispatch/catch/finally/final-exit boundary. Follow exact bound inputs, source/run/phase/nonce/process identity, controlled environment and call order into and out of the owned root; verify failure propagation, lock lifetime/finally release and retained/live predecessor use. Full generic job/supervisor/catalog/compiler engine internals remain the complete-harness owners; the local interfaces must not assume their unverified success."
+          },
+          "wholeAtomicIds": [
+            "PROCESS_COMPLETE_HARNESS_PRESERVATION",
+            "PROCESS_CLIENT_BOUND_INTERFACES"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "STAGED_CLIENT",
+          "atomicDutyVerbatim": {
+            "id": "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+            "completeDuty": "Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion.",
+            "primaryScopes": [
+              "S_CLIENT",
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "BUILD_RECEIPT_STARTUP",
+          "atomicDutyVerbatim": {
+            "id": "BUILD_RECEIPT_RUNTIME_STARTUP",
+            "completeDuty": "Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source.",
+            "primaryScopes": [
+              "S_TARGET_RECEIPT",
+              "S_PLUGIN"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "PROCESS_PRESERVATION",
+          "atomicDutyVerbatim": {
+            "id": "PROCESS_COMPLETE_HARNESS_PRESERVATION",
+            "completeDuty": "Completely assess one-phase authority and predecessor binding; actual root/member/job/pipe/PID/creation/exit/timeout/cleanup and receiptArtifact contracts; all9 settings roles, all6 expected supervisor controls, owned DDC/environment/output behavior and every source/stage/project-plugin/fixture/output/partial-failure/retained-live preservation path.",
+            "primaryScopes": [
+              "S_BUILD_HOST",
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "PROCESS_PRESERVATION",
+          "atomicDutyVerbatim": {
+            "id": "PROCESS_CLIENT_BOUND_INTERFACES",
+            "completeDuty": "Completely assess CLIENT interface units for Snapshot-Source, Snapshot-ProjectPlugins, Check-ProjectPluginMembership, Child-Environment, Invoke-Root, Require-RootPass, all required witness/source/held-stream/prelaunch/retention validators, Editor-Build, Native-Arguments and the complete initialization/dispatch/catch/finally/final-exit boundary. Follow exact bound inputs, source/run/phase/nonce/process identity, controlled environment and call order into and out of the owned root; verify failure propagation, lock lifetime/finally release and retained/live predecessor use. Full generic job/supervisor/catalog/compiler engine internals remain the complete-harness owners; the local interfaces must not assume their unverified success.",
+            "primaryScopes": [
+              "S_CLIENT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_I_PROCESS_STARTUP",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-001",
+          "SOURCE-BODY-003",
+          "SOURCE-BODY-004",
+          "SOURCE-BODY-008",
+          "SOURCE-BODY-010",
+          "SOURCE-BODY-011",
+          "SOURCE-BODY-013",
+          "SOURCE-BODY-016",
+          "SOURCE-BODY-017",
+          "SOURCE-BODY-018",
+          "SOURCE-BODY-019",
+          "SOURCE-BODY-020",
+          "SOURCE-BODY-021",
+          "SOURCE-BODY-022",
+          "SOURCE-BODY-023",
+          "SOURCE-BODY-024",
+          "SOURCE-BODY-025",
+          "SOURCE-BODY-027",
+          "SOURCE-BODY-029",
+          "SOURCE-BODY-031",
+          "SOURCE-BODY-033",
+          "SOURCE-BODY-048",
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-058",
+          "SOURCE-BODY-059",
+          "SOURCE-BODY-060",
+          "SOURCE-BODY-061",
+          "SOURCE-BODY-062",
+          "SOURCE-BODY-063",
+          "SOURCE-BODY-064",
+          "SOURCE-BODY-065",
+          "SOURCE-BODY-066",
+          "SOURCE-BODY-067",
+          "SOURCE-BODY-068",
+          "SOURCE-BODY-069",
+          "SOURCE-BODY-070",
+          "SOURCE-BODY-071",
+          "SOURCE-BODY-072",
+          "SOURCE-BODY-073",
+          "SOURCE-BODY-074",
+          "SOURCE-BODY-075",
+          "SOURCE-BODY-076",
+          "SOURCE-BODY-077",
+          "SOURCE-BODY-078",
+          "SOURCE-BODY-079",
+          "SOURCE-BODY-080",
+          "SOURCE-BODY-094",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097",
+          "SOURCE-BODY-098"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 19238,
+        "preservedExistingAdditionalUnitRows": 0,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 19238,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [
+        4,
+        5,
+        7,
+        11,
+        12
+      ],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        1,
+        2,
+        8,
+        9,
+        10
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null
+    },
+    {
+      "assessmentNodeId": "F_I_GRAPH_CROSS",
+      "mode": "FRESH_BLIND_SOURCE",
+      "nodeRole": "INDEPENDENT_RAW_SOURCE_INTEGRATION",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "oldLocalContributionsVerbatim": [
+        {
+          "oldEntryOrdinal": 17,
+          "oldScopeId": "I_ACTIVATION",
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "oldLocalDutyVerbatim": {
+            "dutyKind": "INDEPENDENT_INTEGRATION",
+            "atomicDutyIds": [
+              "SELECTOR_LITERAL_ROWS_001_301",
+              "SELECTOR_LITERAL_ROWS_302_602",
+              "SELECTOR_LITERAL_ROWS_603_902",
+              "SELECTOR_COMPLETE_RUNTIME_GRAPH",
+              "SELECTOR_COMPLETE_BUILD_GRAPH"
+            ],
+            "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely assess original record8 ordered rows1-301, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs. Completely assess original record8 ordered rows302-602, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs. Completely assess original record8 ordered rows603-902, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs. Independently assess complete runtime selection semantics over all902 nodes and1561 Plugin-reference occurrences: defaults, exact consumer-specific name/key resolution, platform/target/configuration/Program/module filters, dependency and collision/extension/root handling, project/receipt membership and conditional explicit loading. Full record9/10 catalog/field schema and every material runtime value/relationship remain required; literal partitions do not replace this assessment. Independently assess complete build-selection semantics over all902 nodes and1561 Plugin-reference occurrences, including inherited hook/defaults/configuration/target/platform initialization and every material selector/filter/dependency/default/collision/root/extension/receipt edge. Reconcile build/runtime/cross-system differences against raw data and complete applicable source; conservative closure, selected membership and actual enablement remain distinct."
+          },
+          "wholeAtomicIds": [
+            "SELECTOR_LITERAL_ROWS_001_301",
+            "SELECTOR_LITERAL_ROWS_302_602",
+            "SELECTOR_LITERAL_ROWS_603_902",
+            "SELECTOR_COMPLETE_RUNTIME_GRAPH",
+            "SELECTOR_COMPLETE_BUILD_GRAPH"
+          ],
+          "requiresCompleteInterfaceComposition": false
+        }
+      ],
+      "inheritedWholeAtomicDuties": [
+        {
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "atomicDutyVerbatim": {
+            "id": "SELECTOR_LITERAL_ROWS_001_301",
+            "completeDuty": "Completely assess original record8 ordered rows1-301, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs.",
+            "primaryScopes": [
+              "D_SELECTORS_001_301"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "atomicDutyVerbatim": {
+            "id": "SELECTOR_LITERAL_ROWS_302_602",
+            "completeDuty": "Completely assess original record8 ordered rows302-602, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs.",
+            "primaryScopes": [
+              "D_SELECTORS_302_602"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "atomicDutyVerbatim": {
+            "id": "SELECTOR_LITERAL_ROWS_603_902",
+            "completeDuty": "Completely assess original record8 ordered rows603-902, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs.",
+            "primaryScopes": [
+              "D_SELECTORS_603_902"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "atomicDutyVerbatim": {
+            "id": "SELECTOR_COMPLETE_RUNTIME_GRAPH",
+            "completeDuty": "Independently assess complete runtime selection semantics over all902 nodes and1561 Plugin-reference occurrences: defaults, exact consumer-specific name/key resolution, platform/target/configuration/Program/module filters, dependency and collision/extension/root handling, project/receipt membership and conditional explicit loading. Full record9/10 catalog/field schema and every material runtime value/relationship remain required; literal partitions do not replace this assessment.",
+            "primaryScopes": [
+              "S_PLUGIN"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        },
+        {
+          "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+          "atomicDutyVerbatim": {
+            "id": "SELECTOR_COMPLETE_BUILD_GRAPH",
+            "completeDuty": "Independently assess complete build-selection semantics over all902 nodes and1561 Plugin-reference occurrences, including inherited hook/defaults/configuration/target/platform initialization and every material selector/filter/dependency/default/collision/root/extension/receipt edge. Reconcile build/runtime/cross-system differences against raw data and complete applicable source; conservative closure, selected membership and actual enablement remain distinct.",
+            "primaryScopes": [
+              "S_TARGET_RECEIPT"
+            ],
+            "independentIntegrationScopes": [
+              "I_ACTIVATION"
+            ]
+          }
+        }
+      ],
+      "baselineWholeBodyWorkloadVerbatim": {
+        "assessmentNodeId": "F_I_GRAPH_CROSS",
+        "kind": "FRESH_BLIND_SOURCE",
+        "requiredEntireBodyIdsCurrentBaseline": [
+          "SOURCE-BODY-054",
+          "SOURCE-BODY-055",
+          "SOURCE-BODY-056",
+          "SOURCE-BODY-057",
+          "SOURCE-BODY-058",
+          "SOURCE-BODY-059",
+          "SOURCE-BODY-060",
+          "SOURCE-BODY-061",
+          "SOURCE-BODY-062",
+          "SOURCE-BODY-063",
+          "SOURCE-BODY-064",
+          "SOURCE-BODY-065",
+          "SOURCE-BODY-066",
+          "SOURCE-BODY-067",
+          "SOURCE-BODY-068",
+          "SOURCE-BODY-069",
+          "SOURCE-BODY-070",
+          "SOURCE-BODY-071",
+          "SOURCE-BODY-072",
+          "SOURCE-BODY-073",
+          "SOURCE-BODY-074",
+          "SOURCE-BODY-075",
+          "SOURCE-BODY-076",
+          "SOURCE-BODY-077",
+          "SOURCE-BODY-078",
+          "SOURCE-BODY-079",
+          "SOURCE-BODY-080",
+          "SOURCE-BODY-081",
+          "SOURCE-BODY-082",
+          "SOURCE-BODY-083",
+          "SOURCE-BODY-084",
+          "SOURCE-BODY-092",
+          "SOURCE-BODY-093",
+          "SOURCE-BODY-094",
+          "SOURCE-BODY-096",
+          "SOURCE-BODY-097"
+        ],
+        "fullBodyPhysicalRowsCurrentBaseline": 23659,
+        "preservedExistingAdditionalUnitRows": 0,
+        "currentBaselineTotalBeforeNewInterfacesAndApi": 23659,
+        "newCompleteInterfaceBindings": null,
+        "newRuntimeApiBindings": null,
+        "futureActualTotalRows": null,
+        "futureLaunchable": false
+      },
+      "actualCurrentSubject": null,
+      "actualOwnExactDutyProjection": null,
+      "actualRequiredEntireBodyIds": null,
+      "actualCompleteLiteralUnitsAndTextHashes": null,
+      "actualFullSelectedRecordOrdinals": null,
+      "actualRelationshipSelectedRecordOrdinals": null,
+      "actualMetadataRowAndOriginFieldDuties": null,
+      "actualNewApiAffectednessAndCatalogOwnership": null,
+      "actualRawInterfaceBindings": null,
+      "actualTotalPhysicalRows": null,
+      "actualTotalLiteralRows": null,
+      "actualSelectedDataRowsBytesAndOccurrences": null,
+      "proposedDeadlineSeconds": 5400,
+      "exactTransportPolicy": null,
+      "ownScopeContract": null,
+      "ownInputManifest": null,
+      "ownPanelGoPromptSessionRuntimeSealAndRawReport": null,
+      "rootAdmission": false,
+      "launchable": false,
+      "proposedOriginalFullSelectedRecordOrdinals": [
+        4,
+        5,
+        7,
+        9,
+        10,
+        11,
+        12
+      ],
+      "proposedOriginalRelationshipSelectedRecordOrdinals": [
+        1,
+        2,
+        8
+      ],
+      "originalContributedScopeRecordDutiesRemainCumulative": true,
+      "completeRawGraphRows": 902,
+      "completeSelectedFieldPolicyCount": 49,
+      "completeRawReferenceOccurrences": 1561,
+      "actualRawGraphCatalogOriginAndFieldDescriptors": null,
+      "actualAdditionalRequiredNormDescriptorsAndRows": null,
+      "actualTotalRequiredReadingIncludingNorms": null,
+      "mandatoryRawGraphSelectedRecordOrdinal": 8
+    }
+  ],
+  "compatibilityCohorts": [
+    {
+      "assessmentNodeId": "A_COMPAT_VALUE_CLIENT",
+      "candidateNodeIds": [
+        "R_S_VALUE",
+        "R_S_CLIENT"
+      ],
+      "assessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN",
+      "isInitialBlindSource": false,
+      "suppliesPrimaryOrIntegrationSourceVerdict": false,
+      "mayFillMissingOriginalTechnicalDuty": false,
+      "proposedDeadlineSeconds": 5400,
+      "actualTransportRole": null,
+      "exactSourceInspectedTransportPolicy": null,
+      "requiredRawOldCurrentInputDescriptorManifest": null,
+      "actualCompleteCapturedIoFileCountsBytesRowsAndToolPairs": null,
+      "requiredFullNewApiCatalogAndReverseClaimInputs": null,
+      "perCandidateAllSevenClauseAndAdminFindings": null,
+      "rawReport": null,
+      "sealAndRuntimeRootAudit": null,
+      "launchable": false
+    },
+    {
+      "assessmentNodeId": "A_COMPAT_SELECTORS",
+      "candidateNodeIds": [
+        "R_D_SELECTORS_001_301",
+        "R_D_SELECTORS_302_602",
+        "R_D_SELECTORS_603_902"
+      ],
+      "assessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN",
+      "isInitialBlindSource": false,
+      "suppliesPrimaryOrIntegrationSourceVerdict": false,
+      "mayFillMissingOriginalTechnicalDuty": false,
+      "proposedDeadlineSeconds": 5400,
+      "actualTransportRole": null,
+      "exactSourceInspectedTransportPolicy": null,
+      "requiredRawOldCurrentInputDescriptorManifest": null,
+      "actualCompleteCapturedIoFileCountsBytesRowsAndToolPairs": null,
+      "requiredFullNewApiCatalogAndReverseClaimInputs": null,
+      "perCandidateAllSevenClauseAndAdminFindings": null,
+      "rawReport": null,
+      "sealAndRuntimeRootAudit": null,
+      "launchable": false
+    },
+    {
+      "assessmentNodeId": "A_COMPAT_BUILD",
+      "candidateNodeIds": [
+        "R_S_BUILD_HOST"
+      ],
+      "assessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN",
+      "isInitialBlindSource": false,
+      "suppliesPrimaryOrIntegrationSourceVerdict": false,
+      "mayFillMissingOriginalTechnicalDuty": false,
+      "proposedDeadlineSeconds": 5400,
+      "actualTransportRole": null,
+      "exactSourceInspectedTransportPolicy": null,
+      "requiredRawOldCurrentInputDescriptorManifest": null,
+      "actualCompleteCapturedIoFileCountsBytesRowsAndToolPairs": null,
+      "requiredFullNewApiCatalogAndReverseClaimInputs": null,
+      "perCandidateAllSevenClauseAndAdminFindings": null,
+      "rawReport": null,
+      "sealAndRuntimeRootAudit": null,
+      "launchable": false
+    }
+  ],
+  "semanticRouting": {
+    "all29LiteralOldEntryMappingsBaselinePointer": "/localSemanticRoutesVerbatim",
+    "all7GlobalTextsAnd16AtomicTextsBaselinePointer": "/globalJoinsVerbatim",
+    "allOldWholeBodyUnitDataObligationsBaselinePointer": "/oldScopesAndWholeBodyUnitDataObligationsVerbatim",
+    "actualSuccessorMetadataOwnership": null,
+    "actualSuccessorCompleteUnitProjections": null,
+    "actualWholeBodyConservationProof": null,
+    "actualPrimaryDuplicateOwnerConservationProof": null,
+    "globalJoinStitches": [
+      {
+        "globalJoinId": "VALUE_FIXTURE",
+        "ownerIds": [
+          "F_I_VALUE_TOOLCHAIN_STARTUP"
+        ],
+        "boundary": "Complete UE-owned input/output lifetime/callback/quotas/fixture/ID/attempt/test/result/failure raw interfaces.",
+        "actualCompleteRawDeclarationCallerDefaultAndControlUnits": null,
+        "actualTypedSelectedMetadataBindings": null,
+        "actualConditionalAssumptionsAndMismatchRefusals": null,
+        "closed": false
+      },
+      {
+        "globalJoinId": "DEPENDENCY_COMPILER_ABI",
+        "ownerIds": [
+          "F_I_RULES_ABI_WITNESS"
+        ],
+        "boundary": "Target/configuration/discovery -> ModuleRules/compiler/response/artifact/header/public-private ABI; complete raw producer/consumer interfaces to value/toolchain atoms.",
+        "actualCompleteRawDeclarationCallerDefaultAndControlUnits": null,
+        "actualTypedSelectedMetadataBindings": null,
+        "actualConditionalAssumptionsAndMismatchRefusals": null,
+        "closed": false
+      },
+      {
+        "globalJoinId": "STAGED_CLIENT",
+        "ownerIds": [
+          "F_I_RULES_STAGE_WITNESS"
+        ],
+        "boundary": "All33 staged source/include/UHT/config/entry/conditional and complete client raw interfaces -> scanner/type/source/cache/assembly witnesses.",
+        "actualCompleteRawDeclarationCallerDefaultAndControlUnits": null,
+        "actualTypedSelectedMetadataBindings": null,
+        "actualConditionalAssumptionsAndMismatchRefusals": null,
+        "closed": false
+      },
+      {
+        "globalJoinId": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+        "ownerIds": [
+          "F_I_GRAPH_CROSS"
+        ],
+        "boundary": "All902 raw rows,49 origin-field duties,1561 reference occurrences and complete build/runtime/cross-system semantic graph.",
+        "actualCompleteRawDeclarationCallerDefaultAndControlUnits": null,
+        "actualTypedSelectedMetadataBindings": null,
+        "actualConditionalAssumptionsAndMismatchRefusals": null,
+        "closed": false
+      },
+      {
+        "globalJoinId": "BUILD_RECEIPT_STARTUP",
+        "ownerIds": [
+          "F_I_PROCESS_STARTUP"
+        ],
+        "boundary": "Complete actual upstream receipt schema/serialization/caller/default boundary -> environment/commands/consumer/Default/explicit load/mount phases/errors.",
+        "actualCompleteRawDeclarationCallerDefaultAndControlUnits": null,
+        "actualTypedSelectedMetadataBindings": null,
+        "actualConditionalAssumptionsAndMismatchRefusals": null,
+        "closed": false
+      },
+      {
+        "globalJoinId": "PROCESS_PRESERVATION",
+        "ownerIds": [
+          "F_I_PROCESS_STARTUP"
+        ],
+        "boundary": "Complete root/member/job/pipe/PID/creation/exit/timeout/cleanup/settings9/controls6/DDC/source/stage/fixture/retention/client call-finally.",
+        "actualCompleteRawDeclarationCallerDefaultAndControlUnits": null,
+        "actualTypedSelectedMetadataBindings": null,
+        "actualConditionalAssumptionsAndMismatchRefusals": null,
+        "closed": false
+      },
+      {
+        "globalJoinId": "FINITE_RULES_RUNTIME_WITNESS",
+        "ownerIds": [
+          "F_I_RULES_ABI_WITNESS",
+          "F_I_RULES_STAGE_WITNESS"
+        ],
+        "boundary": "Two distinct complete independent producer/validator/test/preservation assessments,32 typed selectors/318 descriptors and bounded observation/inference contracts.",
+        "actualCompleteRawDeclarationCallerDefaultAndControlUnits": null,
+        "actualTypedSelectedMetadataBindings": null,
+        "actualConditionalAssumptionsAndMismatchRefusals": null,
+        "closed": false
+      }
+    ],
+    "bothWitnessIntegrationsRequiredEntireBodyIds": [
+      "SOURCE-BODY-081",
+      "SOURCE-BODY-082",
+      "SOURCE-BODY-092",
+      "SOURCE-BODY-093",
+      "SOURCE-BODY-095"
+    ],
+    "bothWitnessIntegrationsAlsoRequireCompleteActualProducerWrapperModuleTargetTestChain": true,
+    "abiStartupIntegrationRetainsEntireBody094": true,
+    "graphIntegrationCompleteRawRows": 902,
+    "graphIntegrationOriginFieldDuties": 49,
+    "graphIntegrationReferenceOccurrences": 1561,
+    "graphIntegrationMayUseDPeerReportAsEvidence": false,
+    "proposedOriginalFullMetadataOwners": [
+      {
+        "recordOrdinal": 1,
+        "ownerIds": [
+          "R_S_BUILD_HOST",
+          "F_T_STAGE_PROCESS"
+        ]
+      },
+      {
+        "recordOrdinal": 2,
+        "ownerIds": [
+          "R_S_CLIENT",
+          "F_T_STAGE_PROCESS"
+        ]
+      },
+      {
+        "recordOrdinal": 3,
+        "ownerIds": [
+          "R_S_BUILD_HOST",
+          "F_T_STAGE_PROCESS"
+        ]
+      },
+      {
+        "recordOrdinal": 4,
+        "ownerIds": [
+          "F_T_RULES_GRAPH",
+          "F_T_RUNTIME_RECEIPT"
+        ]
+      },
+      {
+        "recordOrdinal": 5,
+        "ownerIds": [
+          "F_T_RULES_GRAPH",
+          "F_T_RUNTIME_RECEIPT"
+        ]
+      },
+      {
+        "recordOrdinal": 6,
+        "ownerIds": [
+          "R_S_BUILD_HOST"
+        ]
+      },
+      {
+        "recordOrdinal": 7,
+        "ownerIds": [
+          "F_T_RULES_GRAPH",
+          "F_T_STAGE_PROCESS",
+          "F_T_RUNTIME_RECEIPT"
+        ]
+      },
+      {
+        "recordOrdinal": 8,
+        "ownerIds": [
+          "R_D_SELECTORS_001_301",
+          "R_D_SELECTORS_302_602",
+          "R_D_SELECTORS_603_902"
+        ],
+        "partitionRule": "Complete disjoint physical ordered902-row union; original exact partition duty remains"
+      },
+      {
+        "recordOrdinal": 9,
+        "ownerIds": [
+          "F_PLUGIN_RUNTIME",
+          "R_D_SELECTORS_001_301",
+          "R_D_SELECTORS_302_602",
+          "R_D_SELECTORS_603_902"
+        ]
+      },
+      {
+        "recordOrdinal": 10,
+        "ownerIds": [
+          "F_PLUGIN_RUNTIME",
+          "R_D_SELECTORS_001_301",
+          "R_D_SELECTORS_302_602",
+          "R_D_SELECTORS_603_902"
+        ]
+      },
+      {
+        "recordOrdinal": 11,
+        "ownerIds": [
+          "F_T_RULES_GRAPH",
+          "F_T_RUNTIME_RECEIPT"
+        ]
+      },
+      {
+        "recordOrdinal": 12,
+        "ownerIds": [
+          "F_T_RULES_GRAPH",
+          "F_T_RUNTIME_RECEIPT"
+        ]
+      },
+      {
+        "recordOrdinal": 13,
+        "ownerIds": [
+          "R_S_VALUE"
+        ]
+      }
+    ],
+    "proposedFullOwnersAreConditionalOnFinalFSelection": true,
+    "retainedOwnerFailureRequiresExactFreshReplacementAndReboundOwnership": true,
+    "relationshipProjectionMayOmitBaselineContributedScopeMaterialRecord": false
+  },
+  "buildAdministrativeAlternative": {
+    "prospectiveOnly": true,
+    "originalRawVerdict": "BLOCKED",
+    "oldV6GatePassed": false,
+    "requiredDistinctAtomicIdsVerbatim": [
+      "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+      "DEPENDENCY_BUILD_TOOLCHAIN",
+      "DEPENDENCY_TARGET_DISCOVERY_SELECTION",
+      "DEPENDENCY_TERMINAL_VALUE_ABI",
+      "FINITE_RULES_RUNTIME_WITNESS_COMPLETE",
+      "PROCESS_COMPLETE_HARNESS_PRESERVATION",
+      "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+      "STAGED_NORMAL_DISCOVERY_PRODUCER",
+      "VALUE_FIXTURE_COMPLETE"
+    ],
+    "allowedClass": "EXACT_HARMLESS_OWN_REVIEW_MANIFEST_TOP_LEVEL_KEY_NAMES_AND_RETURNED_ABSENCE_ONLY",
+    "everyActualQueryReturnedNameAbsenceAndDisclosureRequired": true,
+    "fullOriginalTraceRequired": true,
+    "completeOriginalTechnicalDutiesRequired": true,
+    "excludedValuesPeerAuthorPrivateSessionConfigOrUnknownDisclosurePermitted": false,
+    "independentFreshNonblindCohort": "A_COMPAT_BUILD",
+    "rootExactProportionalMaterialityDispositionRequired": true,
+    "rawFindingAndVerdictUnchanged": true,
+    "currentDispositionIfAllConditionsPass": "ELIGIBLE_FOR_CONDITIONAL_RETENTION",
+    "actualExceptionDecision": null
+  },
+  "d001ProceduralException": {
+    "separateFromBuildException": true,
+    "capturedAttemptResolutionErrorAndReturnedContentEvidenceRequired": true,
+    "unsuccessfulInvokeHistoryResolutionAloneProvesNoContentContamination": false,
+    "unsuccessfulAttemptMayBeErased": false,
+    "actualRetrievedExcludedContentOrUnknownGapFailsEligibility": true,
+    "independentFreshNonblindCohort": "A_COMPAT_SELECTORS",
+    "rootExactSeparateDispositionRequired": true,
+    "actualDecision": null
+  },
+  "proposedApiSupplement": {
+    "routeState": "PROPOSED_PENDING_COMPLETE_SOURCE_BOUNDARY_ADOPTION",
+    "proposedBodyId": "SOURCE-BODY-099",
+    "proposedSupplementalSelectedRecordOrdinal": 14,
+    "originalSelectedRecordOrdinals": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "original13SchemasCatalogGroupsMayBeSilentlyRewritten": false,
+    "actualCompleteRawApiBodyDescriptors": null,
+    "actualCompleteCatalogDescriptor": null,
+    "actualDeclarationCallerDefaultMacroDomInheritanceAndControlUnits": null,
+    "actualPhysicalLiteralRowsAndCounts": null,
+    "actualFreshFullRecord14PrimaryOwners": null,
+    "actualFreshFullRecord14IndependentIntegrationOwners": null,
+    "actualAffectedScopeFullCatalogOwners": null,
+    "actualRetainedReverseClaimAffectednessProof": null,
+    "additionalBodyOrShapeNeedsExplicitAmendmentBeforeP": true,
+    "assumedFinalBodyCount": null,
+    "assumedFinalRecordCount": null,
+    "defaultAccess": "HASH_ONLY",
+    "positiveFullRecordAndRawBodyGrantRequired": true,
+    "v2OrEarlierCaptureIsNotAdoptedHere": true,
+    "pendingCompleteJsonGetRootObjectDomBoundary": true
+  },
+  "artifactGraph": {
+    "order": [
+      "METHOD_CRITERIA_AND_UNBOUND_TEMPLATE_ADOPTION",
+      "COMPLETE_SOURCE_API_SCOPE_HELPER_ADOPTION_AND_BINDING_DERIVATION",
+      "P_PLANNED_SET",
+      "NONBLIND_COMPATIBILITY_PANEL_AND_GO_BOUND_TO_P",
+      "C_COHORT_COMPATIBILITY",
+      "E_ROOT_ELIGIBILITY",
+      "F_FINAL_SELECTED_SET",
+      "FRESH_SOURCE_ONLY_PANEL_AND_GO_BOUND_TO_F",
+      "RAW_FRESH_SOURCE_REPORTS",
+      "ROOT_AGGREGATE"
+    ],
+    "P": {
+      "binds": [
+        "Exact adopted method/UNBOUND-template criteria and authority plus separately adopted complete current source/API/scope/helper inputs and every actual complete binding/count/grant",
+        "Exact complete current source/common/freeze/catalog/policy identities",
+        "Potential retained/fresh/replacement node plans and all exact duties"
+      ],
+      "forbiddenDownstreamDescriptors": [
+        "C",
+        "E",
+        "F",
+        "futurePanel",
+        "futureGo",
+        "futureSession",
+        "futureRawReport",
+        "aggregate"
+      ],
+      "eligibilityClaimPermitted": false,
+      "actualDescriptor": null,
+      "noOwnPanelOrGoBeforeCompleteCurrentBindingsAndHelperAdoption": true
+    },
+    "C": {
+      "requiredUpstream": [
+        "P",
+        "Own exact historical/current inputs"
+      ],
+      "forbiddenDownstreamDescriptors": [
+        "E",
+        "F",
+        "futureSourceReport",
+        "aggregate"
+      ],
+      "perCandidateAllSevenClauseAndAdminAffectednessResultsRequired": true,
+      "actualDescriptors": null,
+      "perCandidateSevenPreEClauseCompletedProofAndExactFuturePlansRequired": true,
+      "mayClaimFutureReviewExecutionOrDischargeBeforeItOccurs": false
+    },
+    "E": {
+      "requiredUpstream": [
+        "P",
+        "Assigned C",
+        "Completed original validity and current complete old/current technical/admin comparisons",
+        "For a changed parameterized binding: original completed parameterized contract and independent complete old/current vector proof",
+        "Exact P-bound mandatory named future fresh raw-integration vector duties and fresh-context/input/grant/budget/exclusion plans"
+      ],
+      "forbiddenDownstreamDescriptors": [
+        "F",
+        "futurePanel",
+        "futureGo",
+        "futureSourceReport",
+        "aggregate"
+      ],
+      "semanticDecisionOwner": "ROOT",
+      "decisionValues": [
+        "ELIGIBLE_FOR_CONDITIONAL_RETENTION",
+        "INELIGIBLE",
+        "UNVERIFIED"
+      ],
+      "actualPerCandidateDescriptors": null,
+      "actualFutureReviewReportOrRuntimePrerequisite": false,
+      "finalAcceptanceFromEAlonePermitted": false
+    },
+    "F": {
+      "requiredUpstream": [
+        "P",
+        "Each selected retained E with ELIGIBLE_FOR_CONDITIONAL_RETENTION status and its C provenance; no future report/runtime claimed"
+      ],
+      "forbiddenDownstreamDescriptors": [
+        "futurePanel",
+        "futureGo",
+        "futureSession",
+        "futureRawReport",
+        "aggregate"
+      ],
+      "sealsBeforeAnyFreshSourcePanelOrGo": true,
+      "mayMutateAfterGo": false,
+      "mayRewriteHistoricalSubjectOrVerdict": false,
+      "actualDescriptor": null,
+      "selectionMustUseExactPAlternatives": true,
+      "unplannedReplacementRequiresNewPAndAffectedChain": true
+    },
+    "panelGo": {
+      "freshSourceNodesOnly": true,
+      "requiredUpstream": [
+        "F",
+        "Exact current own scope contract/input/policy/prompt/runtime/budget"
+      ],
+      "retainedSyntheticPanelOrSessionPermitted": false,
+      "exactSourceInspectedHelperDescriptors": null
+    },
+    "integrationOrdering": {
+      "everyRelevantSelectedPrimaryOrDataPredecessorMustBe": "FRESH_COMPLETE_ROOT_ADMITTED_OR_RETAINED_ELIGIBLE_FOR_CONDITIONAL_RETENTION_WITH_SEALED_F_PROVENANCE",
+      "actualPredecessorMap": null,
+      "neutralPrerequisiteIdentityAttestationOnly": true,
+      "peerVerdictBodyTableGraphOrCompatibilityConclusionPermitted": false
+    },
+    "aggregate": {
+      "requiredUpstream": [
+        "F",
+        "Every actual fresh raw report and audit",
+        "Every selected retained literal raw report, E/C and original/current validity/completeness provenance",
+        "Every concrete closed raw global stitch",
+        "Actual valid current raw-integration PASS reports independently assessing each conditionally retained current vector and all exact planned integration duties",
+        "Actual fresh-context/input/grant/budget/exclusion policy compliance, runtime/prompt/seal/closed-I-O/error-recovery/full-duty audits after each review"
+      ],
+      "beforeAnyPhaseGo": true,
+      "actualDescriptor": null,
+      "missingUnknownFailingOrContradictoryDischargeInvalidatesAffectedEUseAdmissionsAndGate": true,
+      "sealedArtifactsRemainImmutableAndInvalidationUsesNewRecords": true
+    },
+    "selfHashOrFutureArtifactHashRequired": false,
+    "compatibilityPanelGo": {
+      "requiredUpstream": [
+        "P",
+        "Exact own historical/current nonblind inputs and source-inspected cohort budget/transport policy"
+      ],
+      "forbiddenDownstreamDescriptors": [
+        "C",
+        "E",
+        "F",
+        "futureSourceReport",
+        "aggregate"
+      ],
+      "explicitAssessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN",
+      "sourceVerdictPermitted": false,
+      "actualDescriptors": null
+    }
+  },
+  "retainedMetadataConstructorProposal": {
+    "name": "New-RetainedTechnicalEligibilityMetadata",
+    "mandatoryHashBoundInputs": [
+      "PlannedSetP+ExpectedSha256",
+      "OriginalScopeAndRawReport+ExpectedSha256",
+      "OriginalCompleteValidityAndTechnicalAudit+ExpectedSha256",
+      "CompleteExactOldCurrentSliceComparison+ExpectedSha256",
+      "AssignedCompatibilityC+ExpectedSha256",
+      "ExplicitRootDecisionE+ExpectedSha256",
+      "CreateNewOutputDirectory"
+    ],
+    "finalSetFInputForbidden": true,
+    "mayDecideSemanticEquivalence": false,
+    "mayWriteRootDecisionE": false,
+    "mayCreateGo": false,
+    "outputAuthorityFlagsAllFalse": true,
+    "sourceExists": false,
+    "sourceInspected": false,
+    "invoked": false,
+    "rootEStatusMustBe": "ELIGIBLE_FOR_CONDITIONAL_RETENTION_OR_EXPLICIT_INELIGIBLE_UNVERIFIED",
+    "futureReviewCompletionMayBeAssertedBeforeExecution": false
+  },
+  "reviewOwnedControlNamePolicy": {
+    "prospectiveOnly": true,
+    "exactPerFileDescriptorAndOwnerScopeRequired": true,
+    "allowedControlRoles": [
+      "OWN_INPUT_MANIFEST",
+      "OWN_BOUND_SCOPE_CONTRACT",
+      "OWN_PANEL_METADATA",
+      "OWN_BODY_ACCESS_POLICY",
+      "OWN_COVERAGE_INVENTORY",
+      "OWN_SELECTED_METADATA_POLICY",
+      "OWN_BOUND_P_OR_F_CONTROL",
+      "OWN_EXACT_ROOT_LAUNCH_GO_CONTROL"
+    ],
+    "permittedPointer": "",
+    "outputModes": [
+      "TOP_LEVEL_KEY_NAMES_ONLY",
+      "EXACT_TOP_LEVEL_PRESENCE_ONLY"
+    ],
+    "actualGrantedControlDescriptorsAndProbeNames": null,
+    "recursiveEnumerationPermitted": false,
+    "unselectedFieldValuesPermitted": false,
+    "referencedFilesOrDirectoriesGranted": false,
+    "engineOrOriginFieldPermissionExpanded": false,
+    "generatedRuntimeInvocationProcessCompletionOrOutputBodiesGranted": false,
+    "privateSessionSettingsConfigCredentialsGranted": false,
+    "retroactivelyAuthorizesR6BuildConduct": false
+  },
+  "readingAndIsolation": {
+    "defaultAccess": "HASH_ONLY",
+    "actualCleanNormativeGrantsRequired": true,
+    "completeBodyUnitDataAndNoSamplingRequired": true,
+    "literalAstTextAndOriginalTerminatorsRequired": true,
+    "exactCasePresenceTypesOrderCardinalityOpaqueValuesRequired": true,
+    "failedTruncatedEofQueryRecoveryRequired": true,
+    "freshContextPerAssessment": true,
+    "resumeForkInheritedTranscriptRetryOrModelOverridePermitted": false,
+    "maxLaunchesPerAssessment": 1,
+    "enforcedReadOnlyApprovalNeverEvidenceRequired": true,
+    "requestedVsVerifiedMemoryAndModelSettingsRequired": true,
+    "sealBeforeFirstRootBodyReadRequired": true,
+    "completeIoAndClosedExecutionEvidenceRequired": true,
+    "initialSourcePeerReportsAuthorNotesPrivateSessionsConfigCredentialsExcluded": true,
+    "ownGeneratedRuntimeAndOutputsUngranted": true
+  },
+  "transportPolicy": {
+    "selectedSourceDescriptors": null,
+    "exactAssessmentIdsAndProposedBudgets": [
+      {
+        "exactAssessmentNodeId": "F_T_RULES_GRAPH",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_SCOPED_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "F_T_STAGE_PROCESS",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_SCOPED_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "F_T_RUNTIME_RECEIPT",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_SCOPED_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "F_PLUGIN_RUNTIME",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_SCOPED_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "F_I_VALUE_TOOLCHAIN_STARTUP",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_INTEGRATION_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "F_I_RULES_ABI_WITNESS",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_INTEGRATION_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "F_I_RULES_STAGE_WITNESS",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_INTEGRATION_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "F_I_PROCESS_STARTUP",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_INTEGRATION_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "F_I_GRAPH_CROSS",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "BLIND_INTEGRATION_INITIAL"
+      },
+      {
+        "exactAssessmentNodeId": "A_COMPAT_VALUE_CLIENT",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN"
+      },
+      {
+        "exactAssessmentNodeId": "A_COMPAT_SELECTORS",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN"
+      },
+      {
+        "exactAssessmentNodeId": "A_COMPAT_BUILD",
+        "proposedDeadlineSeconds": 5400,
+        "sourceInspectedPolicyDescriptor": null,
+        "runtimeSupervisorGoBudgetAgreement": false,
+        "expectedAssessmentKind": "NONBLIND_CURRENT_COMPAT_ADMIN"
+      }
+    ],
+    "freshenedValueClientDDefaultSeconds": 1800,
+    "unknownIdOrBudgetMismatchFailsClosed": true,
+    "compatibilityTransportRoleMayBeSOURCEOnlyIfActualSourceProvesExplicitNonblindKindAndNonSourceDisposition": true,
+    "inspectionAndBindingBeforeInvocationRequired": true,
+    "capacityGuaranteed": false,
+    "semanticNodeRoleIsNotAssessmentKind": true
+  },
+  "rootAggregateGate": {
+    "recordKind": "ROOT_AGGREGATED_SCOPED_SOURCE_DISPOSITION",
+    "compositionVersion": 7,
+    "currentSubjectAndLiteralHistoricalSubjectsRequired": true,
+    "allActualFreshReportsValidCompleteAndAdmittedRequired": true,
+    "allSelectedRetainedSevenClausesAndAdminDispositionsRequired": true,
+    "all7Joins16Atoms29LocalEntriesAndExactOwnersRequired": true,
+    "bothIndependentWitnessReviewsRequired": true,
+    "allActualBodiesUnitsSelectedRecordsAndNewApiInputsRequired": true,
+    "rawPassStringOrCountUnionMaySatisfyGate": false,
+    "rawBlockedMayBeRewritten": false,
+    "noUnresolvedMaterialOrAdminBlocker": true,
+    "sourceReviewedReportMapsExactAggregateAndChildBindings": true,
+    "nativeOpaqueSummaryIsChildValidation": false,
+    "rootChildValidationBeforePhaseGoRequired": true,
+    "actualSourceInspectedAggregateProducerAndNativeConsumerDescriptors": null,
+    "currentGatePassed": false,
+    "criteriaRevision": "7.1",
+    "currentRawIntegrationPassVectorChecksRequired": true,
+    "actualFreshContextRuntimePromptSealClosedIoAndFullDutyDischargeRequired": true,
+    "missingUnknownFailingOrContradictoryDischargeInvalidatesAffectedEUseAdmissionsAndGate": true,
+    "eAloneCanSatisfyAggregate": false,
+    "actualPostReviewDischargeDescriptors": null
+  },
+  "bindingRefusalConditions": [
+    "No separate exact prospective method-criteria/immutable-duty/UNBOUND-template adoption authority",
+    "Before P or any own panel/GO: unresolved/null actual subject/body/catalog/unit/count/source/policy/grant bindings or absent separate complete source/API/scope/helper adoption",
+    "Any new API boundary or raw interface incomplete",
+    "Any unprojected exact own duty or missing/duplicate primary/integration/record owner",
+    "Any unknown assessment mode/kind/id/role/deadline or budget mismatch",
+    "Any self-reference/downstream hash dependency or GO-bound mutation",
+    "Any omitted/unlisted/unknown old-current difference or incompatible technical claim",
+    "Any incomplete original technical duty or contamination/unknown disclosure",
+    "Any retained synthetic fresh panel/session/verdict/head substitution",
+    "Any initial SOURCE peer report/graph/table/admin conclusion priming",
+    "After each review and before aggregate phase permission: any required actual child/runtime/prompt/I-O/seal/error-recovery/full-duty provenance missing; pre-E requires exact mandatory plans, never future execution facts",
+    "Before aggregate phase permission: any unclosed actual current raw integration/vector/global stitch or unresolved material/admin finding; before P bind complete exact future duties and source inputs, not future reports"
+  ],
+  "separateGates": {
+    "sourceBoundary": "Frozen textual source/intended selection and prospective enforcement/observation design; necessary source/input/design gaps block.",
+    "actualStageProcessCacheLoadConfigurationCompilerActivationRemainNativeFinalObligations": true,
+    "actualSinglePhaseGoRequired": true,
+    "finalExactCandidateCodeFresh": true,
+    "differentReqFresh": true,
+    "A1GA2HudLinuxPackagingAcceptanceMergeUnchanged": true,
+    "noVisibleWindowAuthority": true
+  },
+  "currentEligibility": [],
+  "currentAdmissions": [],
+  "actualGo": false,
+  "cleanFreshSourceNormDraft": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.1-neutral-attestation-repair-PROPOSED\\fresh-source-norms-v7.1.PROPOSED.md",
+    "bytes": 20921,
+    "sha256": "1259AFC63438838FF7B671A725D99631F352879BFC59C43530CBF22BFCFCE59E"
+  },
+  "inputClassSeparation": {
+    "wholeMethodCriteriaAndTemplate": "ROOT_AND_EXACT_NONBLIND_ADMIN_INPUT_ONLY_NOT_INITIAL_SOURCE_BODY",
+    "initialSourcePermitted": "Exact clean fresh norm projection, actual applicable complete technical criteria, own current source/data/duties and neutral prerequisite identity attestation",
+    "historicalVerdictsAndConductAndEligibilityCompatibilityBodiesPermittedInInitialSource": false,
+    "PAndFDefaultAccessForInitialSource": "HASH_ONLY_WITH_EXPLICIT_CURRENT_OWN_IDENTITY_SELECTION_ONLY",
+    "retainedRawVerdictsAndCOrEFieldsGrantedByPOrFReference": false,
+    "actualOwnCleanProjectionDescriptors": null
+  },
+  "additionalNormInputPolicy": {
+    "freshNormMayBeSeparateExplicitNORMOutsideNumberedBodyCatalog": true,
+    "allOriginal98BodyAndCommonNormDutiesPreserved": true,
+    "newNormsMayBeGraftedIntoOriginal13MetadataCatalogs": false,
+    "newNormsMayBeGraftedIntoSupplementalApiCatalog": false,
+    "actualAdditionalNormInputDescriptors": null,
+    "actualAdditionalNormFileCount": null,
+    "actualAdditionalNormPhysicalRows": null,
+    "actualAdditionalNormLiteralRows": null,
+    "allRequiredBodyUnitNormAndSelectedDataReadingCountedInActualTotalWorkload": true,
+    "materialBodyCountAloneIsTotalReadingCount": false
+  },
+  "criteriaRevision": "7.1"
+}
