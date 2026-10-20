@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 54 — STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY. Root prospectively adopted the complete startup/all-modules primary inputs, pure criteria/unbound contract and metadata-helper sources. The dedicated target explicitly assigns bBuildAllModules=false (593 bytes / 16 rows), unexecuted. Reference inventory 96 BODY / 42,986 rows retains all prior 13/902/1,561 duties. Exact fresh subject/freeze/campaign/GO and helper/review/native results are pending; R2 raw reports remain unchanged with zero aggregate-admitted passes. Standing consent and all separate gates persist.
+**Revision:** 55 — SCOPED_SOURCE_BLOCKED_RULES_ASSEMBLY_DISCOVERY. All eleven R3 review invocations are closed for 4a4f107 / 20261020T061255Z-f9eae715. Ten unchanged raw reports comprise eight SOURCE_PASS and two BLOCKED; the ABI integration produced no report after a service-capacity error. Root recorded eight local scope admissions, but the all-ten SOURCE gate remains false and no aggregate exists. I_ACTIVATION-B01 requires the normal target-discovery/assembly producer. All 743 tool pairs are retained. The unused ABI replacement is closed without GO/launch. All eight native phases remain NOT RUN/no native RunRoot. Standing consent and separate gates persist.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,36 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 54 changes
+### Revision 55 changes
+
+The [R3 summary](research/2026-10-20-e04a-scoped-r3-summary.md) and
+[factual record](evidence/2026-10-20-e04a-scoped-r3-result.json) preserve eleven
+closed review invocations, ten byte-exact reports and 743 tool input/output pairs.
+Root initially admitted eight primary/data scopes in a partial record, then
+withdrew TARGET and BUILD after the discovery gap was confirmed. Six admissions
+remain limited to their old scopes; the complete ten-scope SOURCE gate is false.
+The original incomplete plugin
+BLOCKED report remains separate from its fresh complete SOURCE_PASS replacement.
+
+I_ACTIVATION-B01 identifies missing `RulesCompiler.CreateTargetRulesAssembly`
+producer/discovery source, while preserving complete physical exposure of its
+42 mandatory BODY files / 20,291 rows and incomplete compiler/binding semantic
+display qualifications. This is a packet gap; no implementation defect or actual
+target-discovery failure is asserted. ABI exited 1 after “Selected model is at
+capacity. Please try a different model.” It produced no report or SOURCE verdict.
+Every process confirmed cleanup and no timeout. The same-boundary ABI replacement
+metadata is superseded and closed without GO/launch.
+
+The source inventory remains 96 BODY / 42,986 rows and 13 selected records /
+902 descriptor rows / 1,561 references. Prepare the complete normal discovery/
+assembly producer and material dependencies, prospectively adopt the amendment,
+then derive/refreeze fresh exact bindings and obtain current affected SOURCE
+plus independent integrations. The eight local admissions do not approve amended
+source. All eight native phases remain NOT RUN/no native RunRoot; final
+CODE/different REQ, A1G/A2, HUD/render/input, Linux and packaging remain open.
+Standing private-source/API review consent persists until explicitly revoked.
+
+### Revision 54 history
 
 Root prospectively adopted the [startup and target-selection SOURCE amendment](research/2026-10-20-e04a-source-composition-packet-v3.md).
 The [adoption record](evidence/2026-10-20-e04a-startup-target-amendment-adoption.json)
@@ -839,17 +868,21 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: construct and bind fresh complete SOURCE packets under the prospectively adopted startup and target-selection amendment.**
-The [adopted criteria](research/2026-10-20-e04a-source-composition-packet-v3.md)
-and [adoption record](evidence/2026-10-20-e04a-startup-target-amendment-adoption.json)
-retain every earlier source/unit/data duty and ten-context gate, with reference
-96 BODY files / 42,986 rows and complete 13/902/1,561 responsibilities.
-The dedicated target's explicit `bBuildAllModules=false` assignment is applied
-but unexecuted (593 bytes / 16 rows). Exact future subject/freeze/campaign,
-metadata-helper operations, panels/prompts/GO and fresh review results remain
-pending. All ten independently valid complete PASS assessments and root
-admission/labelled aggregate precede any phase; source defaults or conditional
-routes do not establish observed runtime activation.
+**Current assignment: close the R3 source-input gap, then refreeze fresh complete SOURCE packets.**
+The [closed R3 campaign](research/2026-10-20-e04a-scoped-r3-summary.md) retains
+eight initially recorded local scope admissions, two raw BLOCKED reports (including the
+excluded original plugin review) and an ABI service failure without a report.
+I_ACTIVATION-B01 requires complete normal target-rules discovery/assembly
+producer source and material selection dependencies. Inspect and prospectively
+adopt that amendment before preparing a new exact subject/freeze/campaign.
+The later root decision withdraws TARGET/BUILD's earlier admissions; six remain
+limited to old bounded scopes. No admission transfers to the amended packet.
+The [current criteria](research/2026-10-20-e04a-source-composition-packet-v3.md)
+retain all source/unit/data duties and the ten-context gate. The current
+96-BODY / 42,986-row inventory and complete 13/902/1,561 responsibilities are
+not a future inventory assertion. All ten valid complete PASS assessments,
+root admission and a labelled aggregate must precede any phase. No closed or
+superseded review GO may be reused. The explicit target pin remains unexecuted.
 
 Preserve the closed [R2 campaign](research/2026-10-20-e04a-scoped-r2-summary.md):
 six raw local SOURCE_PASS/two BLOCKED, zero aggregate-admitted passes, unused
@@ -1095,7 +1128,9 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **2026-10-16 finding:** [Complete field/diagnostic/YAML inventory](research/2026-10-16-capability-checklist.md) and [total active/inactive/reject normalization](research/2026-10-16-parity-closure-design.md) finish source/design mapping. Immutable yaml-cpp0.9.0 evaluation candidate is56e3bb550c91fd7005566f19c079cb7a503223cf. E04 compiler/ABI/private-exception/corpus/render proof remains BLOCKED. No library adoption, compatibility PASS, silent dropped fields or new supported editor is implied.
 
-**2026-10-20 current source-scope update (revision 54):** root prospectively adopted the [startup and target-selection amendment](research/2026-10-20-e04a-source-composition-packet-v3.md), with reference 96 BODY / 42,986 rows and all earlier 13/902/1,561 duties retained. The [adoption record](evidence/2026-10-20-e04a-startup-target-amendment-adoption.json) binds the source-only decision. The explicit dedicated-target bBuildAllModules=false assignment is applied (593 bytes / 16 rows) but unexecuted; effective configuration, startup and runtime remain unproved. Exact new subject/freeze/campaign/packets/GO and metadata-helper/review/native results are pending. R2 raw reports remain unchanged with zero aggregate-admitted passes, unused integrations, all eight phases NOT RUN and no native RunRoot. RQ11 remains BLOCKED; all ten fresh valid complete SOURCE assessments/root admission and separate final CODE/different REQ, A1G/A2/HUD/Linux/package gates remain required.
+**2026-10-20 current source-scope update (revision 55):** the [R3 campaign](research/2026-10-20-e04a-scoped-r3-summary.md) is SCOPED_SOURCE_BLOCKED_RULES_ASSEMBLY_DISCOVERY. Eleven invocations closed with ten unchanged reports (eight SOURCE_PASS/two BLOCKED), 743 tool pairs and eight local root scope admissions; the all-ten gate remains false. ABI produced no report after a service-capacity failure. I_ACTIVATION-B01 requires the normal discovery/assembly producer and material selection dependencies; full compiler/binding semantic assessment also remains qualified. No implementation defect is asserted. The unused ABI replacement is superseded without GO/launch. All eight native phases remain NOT RUN/no native RunRoot. Prospectively amend/refreeze and obtain current affected SOURCE and fresh integrations before any phase. RQ11, final CODE/different REQ, A1G/A2/HUD/Linux/package gates remain open.
+
+**Historical source-scope update (revision 54, 2026-10-20):** root prospectively adopted the [startup and target-selection amendment](research/2026-10-20-e04a-source-composition-packet-v3.md), with reference 96 BODY / 42,986 rows and all earlier 13/902/1,561 duties retained. The [adoption record](evidence/2026-10-20-e04a-startup-target-amendment-adoption.json) binds the source-only decision. The explicit dedicated-target bBuildAllModules=false assignment is applied (593 bytes / 16 rows) but unexecuted; effective configuration, startup and runtime remain unproved. Exact new subject/freeze/campaign/packets/GO and metadata-helper/review/native results were pending. R2 raw reports remain unchanged with zero aggregate-admitted passes, unused integrations, all eight phases NOT RUN and no native RunRoot. RQ11 remains BLOCKED; all ten fresh valid complete SOURCE assessments/root admission and separate final CODE/different REQ, A1G/A2/HUD/Linux/package gates remain required.
 
 **Historical source-scope update (revision 53, 2026-10-20):** the second [scoped SOURCE campaign](research/2026-10-20-e04a-scoped-r2-summary.md) is **SCOPED_SOURCE_BLOCKED_STARTUP_AND_ALL_MODULES**. Eight initial contexts closed: six raw local SOURCE_PASS and two BLOCKED, with zero aggregate-admitted passes. TARGET/PLUGIN require effective all-modules selection plus complete startup/Default dispatch and explicit load/mount caller inputs; no implementation defect is asserted. The [factual record](evidence/2026-10-20-e04a-scoped-r2-result.json) binds the exact 94-BODY/35,428-row, 13-record/902-row campaign. Both integrations remain unused metadata without GO/launch, and all eight phases remain NOT RUN/no native RunRoot. Source-only repair proposals are being prepared, not adopted/implemented/proved. RQ11 stays BLOCKED; A1G/A2, final CODE/different REQ, Linux and broader gates remain open.
 
@@ -3204,13 +3239,15 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Current progress (revision 54):** Root source-inspected and prospectively adopted complete all-modules and startup/explicit-loading inputs, full pure criteria/unbound scope contract and metadata-helper source proposals. The dedicated target now explicitly assigns bBuildAllModules=false (593 bytes / 16 rows), without execution. Reference96 BODY / 42,986 rows preserves all earlier source/unit/data ownership; exact next bindings/packets/GO and helper/review/native results are pending. All acceptance, A1G/A2/HUD/Linux/package gates remain open. [Adoption record](evidence/2026-10-20-e04a-startup-target-amendment-adoption.json).
+**Current progress (revision 55):** The [closed R3 campaign](research/2026-10-20-e04a-scoped-r3-summary.md) preserves all eleven invocations, ten raw reports and 743 exact tool pairs. Root's eight local scope admissions do not close the all-ten gate. I_ACTIVATION remains BLOCKED on the normal rules-discovery producer; ABI produced no report after a service-capacity failure. The unused ABI replacement is closed without GO/launch. The target pin and implementation remain unexecuted; all eight native phases are NOT RUN/no native RunRoot. A new source-input amendment/refreeze and current complete SOURCE/integrations are next. All separate acceptance gates remain open.
+
+**Historical progress (revision 54):** Root source-inspected and prospectively adopted complete all-modules and startup/explicit-loading inputs, full pure criteria/unbound scope contract and metadata-helper source proposals. The dedicated target explicitly assigns bBuildAllModules=false (593 bytes / 16 rows), without execution. Reference96 BODY / 42,986 rows preserves all earlier source/unit/data ownership; exact next bindings/packets/GO and helper/review/native results were pending. All acceptance, A1G/A2/HUD/Linux/package gates remain open. [Adoption record](evidence/2026-10-20-e04a-startup-target-amendment-adoption.json).
 
 **Historical progress (revision 53):** R2 bound the adopted v5 access/target-rule amendment to source `7ef9358` and closed all eight initial SOURCE contexts. The 94 BODY files / 35,428 rows and 13 selected records / 902 rows yielded 414 captured tool pairs; all review processes exited 0 with cleanup and no timeout. Six raw local passes remain unadmitted because TARGET and PLUGIN identify material packet/source-context gaps. Both integration metadata directories are unused, with no GO or launch; no experiment phase or native RunRoot exists. Future repair proposals remain preparation only. [R2 summary](research/2026-10-20-e04a-scoped-r2-summary.md).
 
 **Work completed so far (historical through revision 49):** imported plan/strong instructions, M00 metadata, legacy 44.1 source characterization and selected 44.3.33 adaptation, profile/capability/design checklists, Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units / 14 Capture checks / 132 native successes / two evidence checks, plus separate 135 PowerShell controls / 39 inputs. E02 `202805` on `5e92ba3` completed affected SOURCE and all seven producer phases, 16 native cases / 18174 assertions, separate SUP6 and six images. Root recorded bounded Windows synthetic acceptance after separate administrative recovery; original CODE r3, REQ r2 and v4 raw BLOCKED reports and their limits are unchanged. The exact 18 E04-A1E source paths are now canonical, with eight planned suites / 38 unique IDs / 45 attempts and pinned yaml-cpp acquisition verified (394 files / 5156535 bytes). The first SOURCE assessment remains BLOCKED; the second remains CHANGES_REQUESTED for the now-restored strict Parse-JsonLine (15 offline cases / 38 checks passed). The third is BLOCKED with incomplete coverage and a DDC observation gap. Its guard repair passed 21 offline cases/63 checks. The fourth assessment remains BLOCKED with 19/78 coverage and unselected metadata exposure. The fifth raw SOURCE_PASS applies only to c500f21/run024733 with bounded Editor qualifications. That run passed Preflight (zero roots) and six supervisor controls/three groups/five roots, then Configure failed on generated SDK RC-path escaping. Root CMake exited 1 in about 0.859 seconds; one unidentified member lingered until confirmed timeout cleanup/final zero, and producer preservation missed its deadline. Separate manual checks matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings pairs without passing the failed phase. The authored path repair passed 21 pure PowerShell cases with zero failures; at revision 47 checkpoint/new candidate/freeze/RunId/fresh affected SOURCE were pending. The subsequent sixth SOURCE review on 0ed4221/run035315 is raw BLOCKED after 48/81 BODY files, with incomplete 13-record/902-row assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. The full staged-source BODY-grant inventory proposal is authored without implementation changes or rerunning the controls; a neutral complete SOURCE packet is next. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. All eight phases for 0ed4221 remain NOT RUN/no native RunRoot. Subsequent r7 on e505b21/run041347 is raw BLOCKED after 55/93 BODY files, with all 33 staged members granted, incomplete 13/902 assessment and no confirmed implementation defect/binding/access denial. A prospective blind scoped SOURCE plus fresh independent integration design is being prepared, not adopted; full current 93-file union/all selected data/material relationships and unchanged criteria remain required. All eight e505b21 phases are NOT RUN/no native RunRoot; future frozen descriptors/counts remain derived. The five later phases remain NOT RUN; no native parser suite ran and final CODE/different REQ are pending. A1G, all 727 A2 compatibility scenarios, shared HUD/render/input, RQ23/RQ24, full E02/M02/E04, Linux, packages and real-Core play remain open. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
 
-**Next concrete step:** Bind a fresh coherent candidate/run/freeze and construct the complete common/scoped SOURCE packets using the prospectively adopted metadata-helper sources. Supply all relevant criteria directly in the pure contract, own scope and complete prompt, with exact positive BODY/metadata access and no peer/author history. Root must inspect/adopt actual bindings and issue separate actual review GO; all ten independently valid complete PASS assessments, root admission and a labelled aggregate must precede any phase. Preserve R2 raw reports and all earlier failures without reuse or retroactive admission. No helper invocation, review/native result, acceptance or merge is implied; final CODE/different REQ, A1G/A2/shared HUD, Linux and packaging remain required.
+**Next concrete step:** Preserve the R3 closure, ten raw reports, ABI absence seal, eight local admissions and superseded unused ABI metadata. Supply the complete normal rules-assembly/discovery producer and material dependencies, prospectively adopt the amendment and derive/refreeze a new exact subject/run/campaign. Deliver all criteria and positive access directly through the pure contract, own scope and prompt, excluding peer/author history. Obtain current affected SOURCE and fresh independent integrations, then root all-ten admission and a labelled aggregate before any phase. No native result, acceptance or merge follows from this documentation; final CODE/different REQ, A1G/A2/shared HUD, Linux and packaging remain required.
 
 ## 16. Sources and inspection index
 

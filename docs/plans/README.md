@@ -1,11 +1,26 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 54 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 55 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at plan revision 54 (2026-10-20 UTC) is
+Current A1E status at plan revision 55 (2026-10-20 UTC) is
+**SCOPED_SOURCE_BLOCKED_RULES_ASSEMBLY_DISCOVERY**. The
+[R3 summary](research/2026-10-20-e04a-scoped-r3-summary.md) and
+[factual record](evidence/2026-10-20-e04a-scoped-r3-result.json)
+preserve eleven closed invocations, ten unchanged raw reports and 743 tool pairs.
+Eight local admissions were initially recorded; TARGET/BUILD were later withdrawn,
+leaving six old-scope admissions. The complete ten-scope SOURCE gate remains false.
+I_ACTIVATION-B01 requires the normal discovery/assembly producer. ABI exited 1
+after a service-capacity error and produced no report or verdict; all processes
+confirmed cleanup and no timeout. The unused ABI replacement is superseded
+without GO/launch. Prospectively amend/refreeze the missing source and obtain
+current complete SOURCE/integrations before any phase. All eight native phases
+remain NOT RUN/no native RunRoot. Final CODE/different REQ, A1G/A2, Linux,
+packaging and broader gates remain open. Standing review consent persists.
+
+Historical A1E status at plan revision 54 (2026-10-20 UTC) is
 **STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
 Root prospectively adopted the [startup and target-selection SOURCE amendment](research/2026-10-20-e04a-source-composition-packet-v3.md)
 and its [adoption record](evidence/2026-10-20-e04a-startup-target-amendment-adoption.json). The reference inventory is

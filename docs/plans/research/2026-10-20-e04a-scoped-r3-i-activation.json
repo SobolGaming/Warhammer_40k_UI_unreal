@@ -1,0 +1,249 @@
+{
+  "verdict": "BLOCKED",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+  "subject": {
+    "sourceHead": "4a4f107f316456c8eac7935c0ef8d785a1f4e48e",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "campaignId": "E04A1E-SCOPED-4a4f107-20261020T061255Z-f9eae715",
+    "scopeId": "I_ACTIVATION",
+    "plannedRunId": "20261020T061255Z-f9eae715",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF"
+  },
+  "disposition": "All 42 mandatory BODY files were read completely. The required normal target-discovery relationship cannot be completed from the granted source boundary. This is an evidence-access blocker, not a demonstrated implementation defect.",
+  "bindingVerification": {
+    "panelDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4a4f107-20261020T061255Z-f9eae715-I_ACTIVATION",
+    "commonDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4a4f107-20261020T061255Z-f9eae715",
+    "verifiedFilesRelativeToPanelDirectory": [
+      {
+        "path": "scope-contract.original.json",
+        "bytes": 52294,
+        "sha256": "E3BEC3B32C04E2495084DBD393BA67B81E3B339A91DA7F5FD7B30EAFB1E446FB"
+      },
+      {
+        "path": "review-bootstrap.json",
+        "bytes": 5415,
+        "sha256": "4E0FA8BEAC319ABE23ABDAC9363A4EF168460FF62A89B470712F2748503165D8"
+      },
+      {
+        "path": "coverage-plan.json",
+        "bytes": 33950,
+        "sha256": "609F0669D6B54CDAAB6556AD8E4CFD60F7F763D018F67C5CBCA071B2E5B1DF5A"
+      },
+      {
+        "path": "source-review-input-manifest.json",
+        "bytes": 566220,
+        "sha256": "ED852112E16F294413AE649D92473DC6B17F04C404118E2EC525496BF0267FC9"
+      },
+      {
+        "path": "launch-permission-go.original.json",
+        "bytes": 2025,
+        "sha256": "4EE62E638CF5E78F25F537DF353FEEDD225E658464A2E26214D651FD5DE39353"
+      },
+      {
+        "path": "prepared-review.prompt.original.txt",
+        "bytes": 26788,
+        "sha256": "A912176D732E0D75E5DF2E0422D10765046CEBFBF0EDD6B28F81E36CF76AF7F0"
+      },
+      {
+        "path": "actual-launch.prompt.original.txt",
+        "bytes": 28014,
+        "sha256": "980762B3063D12A43D83CC064C1CF5CC89D9824422847E2231D252625540E4CE"
+      },
+      {
+        "path": "root-launch-go.original.json",
+        "bytes": 4811,
+        "sha256": "19319B4C1A8BF4818A3276C7B09B28E970E8A4BBF4E51B499BBCD8BF9352C73F"
+      }
+    ],
+    "runtimeFreezeManifest": {
+      "pathRelativeToCommonDirectory": "runtime-freeze\\freeze-manifest.PROPOSED.json",
+      "bytes": 556205,
+      "sha256": "430C806C4B82214E4B51A570C0D7BC27BA9E3257E4F14EBADD90F076E52D50BC"
+    },
+    "exactCriteriaMetadataRecords": [
+      {
+        "pathRelativeToCommonDirectory": "body-access-policy.json",
+        "bytes": 54132,
+        "sha256": "80473D60F07F95439AE5112EC6E9E459A69CC21E7AC3B02D1F4ADF92C9436219"
+      },
+      {
+        "pathRelativeToCommonDirectory": "coverage-plan.json",
+        "bytes": 66236,
+        "sha256": "EA2AFF1EB5B8A1FD50651D3F2D29396C86C6E263AA4DB9F2A08DCA61B44CA910"
+      },
+      {
+        "pathRelativeToCommonDirectory": "metadata-selection-policy.json",
+        "bytes": 14015,
+        "sha256": "D5C20471D8E7693238FDCFC2021258B2298176BDD8EBD750621ACA08E49A88FC"
+      }
+    ],
+    "results": [
+      "Verified the named descriptors before dependent source conclusions. The three common criteria records were read and parsed through their exact bound paths, sizes and hashes, and each occurs once in both own manifest inventories.",
+      "Compared the applicable contract subject, I_ACTIVATION scope, global access, common BODY requirements, review discipline and report requirements with the own scope records. The comparisons matched.",
+      "Verified the prepared and actual prompt files. The actual file begins with the exact prepared prompt; its appended ROOT ACTUAL GO matches the received subject/run/manifest/freeze/permission bindings.",
+      "Kept proposed/template false authority fields distinct from the separate current actual GO. Generic transport was not treated as semantic validation of campaign/scope fields.",
+      "Verified actual bytes, SHA256 and physical line counts for all 96 positive BODY grants and descriptors for all 13 selected metadata records."
+    ]
+  },
+  "blockingFinding": {
+    "id": "I_ACTIVATION-B01",
+    "requirementCitations": [
+      "scope-contract.original.json /scopes: I_ACTIVATION /duties/4: normal non-test target discovery/alternate build setup",
+      "scope-contract.original.json /materialJoins: BUILD_RECEIPT_STARTUP",
+      "scope-contract.original.json /reviewDiscipline/materialGap"
+    ],
+    "sourceCitations": [
+      "SOURCE-BODY-093 physical 852-870, originating UEBuildTarget.cs 1364-1382",
+      "SOURCE-BODY-093 physical 705-746, originating RulesAssembly.cs 920-961",
+      "SOURCE-BODY-092 physical 1306-1308, originating UEBuildTarget.cs 1373-1375",
+      "Selected metadata record 4: groups and uniquePrimarySources"
+    ],
+    "finding": "The normal route calls RulesCompiler.CreateTargetRulesAssembly before consuming TargetNameToTargetFile and the compiled target type. The granted excerpts provide the call and consumer, but not the producer that discovers/assembles the staged target rules. A search across all 96 granted BODY files found only the call sites; the complete 142-origin primary catalog contains no RulesCompiler source entry.",
+    "impact": "I can assess initialization and finalization conditional on discovery of WarhammerClientE04AEditorTarget. I cannot independently close the required relationship from the staged target source to the normal rules assembly and target-file mapping. File membership and the downstream constructor do not establish that producer relationship.",
+    "requiredResolution": "Amend/refreeze the positive source boundary with the complete normal target-rules assembly/discovery producer and its material selection dependencies, then obtain the required current affected assessment. I did not read an ungranted RulesCompiler origin."
+  },
+  "substantiveAssessment": [
+    {
+      "topic": "Target pin and effective configuration",
+      "assessment": "BODY001 explicitly assigns bBuildAllModules=false after base construction. BODY092 supplies inherited defaults, the false dependency hook, annotation-gated configuration assignment, uninitialized-object setup, base/derived construction and platform finalization. Configuration application precedes the concrete derived assignment. BODY093 preserves the ordinary IsTestTarget=false path separately from TestTargetRules.Create and guards AddAllValidModulesToTarget with Rules.bBuildAllModules. The all-modules route broadens build candidates conditionally; it does not establish runtime enablement.",
+      "citations": [
+        "SOURCE-BODY-001 physical 1-16",
+        "SOURCE-BODY-092 physical 1-2968",
+        "SOURCE-BODY-093 physical 1-2018, particularly 645-648, 705-746 and 1194-1198"
+      ],
+      "limit": "No actual configuration, constructed target or receipt was executed or observed. The discovery-producer gap remains."
+    },
+    {
+      "topic": "Staging and public client/entry relationships",
+      "assessment": "Independently joined all 33 frozen staged-member descriptors to their declared source/reuse routes. Each had one matching route by complete byte count and SHA256 identity. Joined the 15 authored BODY routes and 21 reused entrypoint routes to positive BODY IDs. The reviewed public interfaces preserve evidence/advisory client behavior and external Core authority; the ordinary game/editor targets do not themselves enable the proof plugin. The proof target, plugin descriptor, module rules, module entrypoints, project module and default game-mode configuration form a conditional Default-phase proof route.",
+      "citations": [
+        "Selected metadata records 1 and 2",
+        "SOURCE-BODY-001, 002, 004, 008, 010, 011",
+        "SOURCE-BODY-016 through 025",
+        "SOURCE-BODY-027, 029, 031, 033"
+      ],
+      "limit": "This does not claim complete reading of every globally granted staged private implementation or test body."
+    },
+    {
+      "topic": "Complete raw graph traversal and conditional closure",
+      "assessment": "Parsed all 902 selected rows. Checked the presence/absence partition for all 49 permitted fields without partition errors. Traversed all 1,561 reference occurrences, including 664 cross-partition occurrences. Examined all observed reference-selector patterns, optional-field occurrences, module selector value patterns, five extensions and six ExplicitlyLoaded descriptors. For Win64 Editor Development, default allowance true, the declared project/target roots, no runtime platform veto and unconstrained optional membership, independent reachability produced exactly the 245 selected closure members, with none of the six disabled names reached.",
+      "citations": [
+        "Selected metadata records 7-12",
+        "SOURCE-BODY-069, 072, 073, 074, 076, 078, 080, 081, 082, 084"
+      ],
+      "limits": [
+        "The 245-member result is conditional source reachability, not observed activation.",
+        "Four literal name variants resolve under the explicitly case-insensitive UBT dictionary. They were preserved as literal case variants; runtime case behavior was not inferred from that UBT rule.",
+        "The five extension descriptors contain no module or plugin additions. The reviewed build/runtime merge implementations differ more generally, so catalog membership was not treated as identical merge behavior.",
+        "Actual receipt BuildPlugins, optional-dependency restrictions, platform vetoes and configured values were not observed. Complete material relationship certification remains withheld."
+      ]
+    },
+    {
+      "topic": "Receipt production and consumption",
+      "assessment": "Joined UBT root/dependency selection, EnabledPlugins versus BuildPlugins, runtime descriptor staging, receipt serialization, metadata publication and runtime receipt consumption. Receipt selection can prefer a matching executable, then configured/default editor choices; the wrapper checks the expected staged target receipt independently. BuildPlugins supplies optional-dependency information and is not itself a runtime enablement list. The runtime project's default allowance assignment differs from the UBT conjunction in the general case; the reviewed candidate's source-supported default case agrees.",
+      "citations": [
+        "SOURCE-BODY-059 physical 1-407",
+        "SOURCE-BODY-060 physical 1-67",
+        "SOURCE-BODY-061 physical 1-292",
+        "SOURCE-BODY-062 physical 1-151",
+        "SOURCE-BODY-083 physical 1-971",
+        "SOURCE-BODY-084 physical 1-454",
+        "SOURCE-BODY-013 physical 1311-1350"
+      ]
+    },
+    {
+      "topic": "Default startup and explicit loading",
+      "assessment": "Read complete BODY094 and BODY058. Normal startup dispatches project modules before plugin modules for PreDefault, Default and PostDefault, with short-circuit failure propagation. Normal plugin dispatch excludes ExplicitlyLoaded plugins. Explicit mount uses the public MaxLoadingPhase=ELoadingPhase::Max default; the private external mount declaration has the same explicit default. Its numeric phase loop excludes None and ignores TryLoadModulesForPlugin return values, so mount success does not prove every module initialized successfully. Assessed the finite PluginUtils, Fab, PakFileUtilities, GDK DLC, GameFeatures and low-level-test callers with their respective gates.",
+      "citations": [
+        "SOURCE-BODY-094 physical 1-5539",
+        "SOURCE-BODY-094 physical 983-1009: complete Default startup dispatcher",
+        "SOURCE-BODY-094 physical 2179 and 5220: public/private loading defaults",
+        "SOURCE-BODY-058 physical 1-2257",
+        "SOURCE-BODY-064 physical 1-271",
+        "SOURCE-BODY-065 physical 1-277"
+      ],
+      "limit": "No universal all-plugins execution claim follows. None of these caller routes or activation outcomes was executed or observed."
+    },
+    {
+      "topic": "Phase/process/preservation contracts",
+      "assessment": "Reviewed same-candidate source authority, single-phase permission, predecessor requirements, process/job ownership, timeout/exit/cleanup handling, receipt publication and preservation checks. The wrapper uses original process handles, suspended assignment to a private kill-on-close job, explicit inherited handles and final job accounting. Read all nine settings-role definitions and all six expected control contracts. Joined owned DDC selection with the inline filesystem graph and suppression of default graph fallback. Source, stage, plugin membership, fixtures and settings checks are source-supported prospective checks.",
+      "citations": [
+        "SOURCE-BODY-013 physical 1-1696",
+        "SOURCE-BODY-048 physical 1-564",
+        "SOURCE-BODY-054 through 057",
+        "SOURCE-BODY-095 physical 1-50"
+      ],
+      "limit": "These are unexecuted contracts. They do not establish actual control success, settings preservation, OS-wide network isolation or native acceptance."
+    }
+  ],
+  "actualCoverage": {
+    "integrityVerifiedInventory": {
+      "bodyFiles": 96,
+      "physicalRows": 42986,
+      "selectedMetadataRecords": 13
+    },
+    "mandatoryComplete": {
+      "files": 42,
+      "physicalRows": 20291,
+      "unreadMandatoryFiles": [],
+      "physicalRangesByBodyNumber": {
+        "001": [1, 16], "002": [1, 17], "004": [1, 15],
+        "008": [1, 48], "010": [1, 18], "011": [1, 3],
+        "013": [1, 1696], "016": [1, 8], "017": [1, 12],
+        "018": [1, 12], "019": [1, 288], "020": [1, 3],
+        "021": [1, 12], "022": [1, 1], "023": [1, 8],
+        "024": [1, 4], "025": [1, 2], "027": [1, 60],
+        "029": [1, 167], "031": [1, 111], "033": [1, 75],
+        "048": [1, 564], "054": [1, 294], "055": [1, 142],
+        "056": [1, 14], "057": [1, 196], "058": [1, 2257],
+        "059": [1, 407], "060": [1, 67], "061": [1, 292],
+        "062": [1, 151], "075": [1, 166], "076": [1, 621],
+        "078": [1, 211], "080": [1, 245], "083": [1, 971],
+        "084": [1, 454], "092": [1, 2968], "093": [1, 2018],
+        "094": [1, 5539], "095": [1, 50], "096": [1, 88]
+      }
+    },
+    "additionalCompletePhysicalRangesByBodyNumber": {
+      "063": [1, 144], "064": [1, 271], "066": [1, 40],
+      "067": [1, 63], "069": [1, 445], "070": [1, 51],
+      "071": [1, 54], "072": [1, 407], "073": [1, 545],
+      "074": [1, 585], "081": [1, 1725], "082": [1, 998]
+    },
+    "additionalPartial": {
+      "SOURCE-BODY-065": {
+        "readPhysicalRange": [1, 277],
+        "unreadPhysicalRange": [278, 567]
+      }
+    },
+    "totalCompleteBodyFiles": 54,
+    "totalPhysicallyReadRowsIncludingPartial": 25896,
+    "notCompletelyOrSubstantivelyReadBodyNumbers": [
+      "003", "005", "006", "007", "009", "012", "014", "015",
+      "026", "028", "030", "032", "034", "035", "036",
+      "037", "038", "039", "040", "041", "042", "043", "044", "045", "046",
+      "047", "049", "050", "051", "052", "053", "068", "077", "079",
+      "085", "086", "087", "088", "089", "090", "091"
+    ],
+    "metadataQualification": "Queried the assigned relationship records 1, 2, 4, 5, 7, 8, 9, 10, 11 and 12 through positive fields. No full-record ownership was assigned locally. Integrity checks, full JSON parsing and graph traversals are distinguished from complete substantive relationship assessment; the latter remains incomplete at the stated source boundary."
+  },
+  "errorsAndRecoveries": [
+    "Several oversized contract/policy/metadata renderings truncated. Applicable binding comparisons and coverage were recovered through focused exact comparisons and smaller queries. No truncated rendering was counted as complete substantive reading.",
+    "One JavaScript syntax error occurred before its intended read and was corrected.",
+    "An early coverage lookup used a nonexistent key. It yielded undefined; it was replaced with the actual requiredCoverage field and was not reported as source null.",
+    "A PowerShell query collided with the automatic Matches variable and failed. It was rerun using a distinct variable; the complete 27-binding symbol/range projection was subsequently rendered.",
+    "A descriptor comparison expanded 490 case-only SHA256 representation differences and truncated. Recovery compared all complete paths, byte counts and validated hexadecimal hash identities: no non-case identity differences, no ordering differences and no unindexed closure descriptors. Original strings were not rewritten.",
+    "Compiler-input and source-binding renderings were not all recovered as complete semantic displays. Their complete parsing/count or focused comparison results were not substituted for a complete relationship assessment."
+  ],
+  "independenceAndRuntimeLimits": {
+    "delegation": false,
+    "filesSavedOrMutated": false,
+    "implementationOrStoredCommandsExecuted": false,
+    "buildTestsEngineGuiNetworkGitHubInvoked": false,
+    "yamlParsed": false,
+    "peerReportsOrAuthorNotesUsed": false,
+    "generatedRuntimeInvocationOrOutputBodiesRead": false,
+    "runtimeIsolationAndReceivedInputProvenance": "Not independently verified from forbidden generated artifacts. Root remains responsible for actual runtime/isolation/settings and received-input provenance. Authorization and bound prompt files do not independently establish those facts."
+  },
+  "acceptanceBoundary": "This BLOCKED disposition is local to I_ACTIVATION. It supplies no aggregate SOURCE approval, phase GO, native result or final acceptance. E04-A1G, A2, Linux, rendering/HUD, packaging and separate final CODE/REQ gates remain open."
+}

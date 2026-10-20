@@ -1,0 +1,283 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-4a4f107-20261020T061255Z-f9eae715",
+  "scopeId": "S_CLIENT",
+  "subject": {
+    "sourceHead": "4a4f107f316456c8eac7935c0ef8d785a1f4e48e",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T061255Z-f9eae715",
+    "runtimeFreezeManifest": {
+      "bytes": 556205,
+      "sha256": "430C806C4B82214E4B51A570C0D7BC27BA9E3257E4F14EBADD90F076E52D50BC"
+    },
+    "globalBodyAccessPolicy": {
+      "bytes": 54132,
+      "sha256": "80473D60F07F95439AE5112EC6E9E459A69CC21E7AC3B02D1F4ADF92C9436219"
+    },
+    "globalSelectedMetadataPolicy": {
+      "bytes": 14015,
+      "sha256": "D5C20471D8E7693238FDCFC2021258B2298176BDD8EBD750621ACA08E49A88FC"
+    },
+    "globalCoverageInventory": {
+      "bytes": 66236,
+      "sha256": "EA2AFF1EB5B8A1FD50651D3F2D29396C86C6E263AA4DB9F2A08DCA61B44CA910"
+    },
+    "primaryCatalog": {
+      "bytes": 169575,
+      "sha256": "F4DE2F7694381C1FF3BFB9C5796DBFC77F6436E2AD815D4F7242FDEB3E340B5E"
+    },
+    "commonSourceInputManifest": {
+      "bytes": 559659,
+      "sha256": "6A90F33B48E79EBB30D47E64A82AC3592B3E0EF3EA6A5CAB0AFA0035B4E72AC1"
+    }
+  },
+  "bindingVerification": {
+    "result": "MATCH",
+    "directory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4a4f107-20261020T061255Z-f9eae715-S_CLIENT",
+    "inputManifest": {
+      "bytes": 566083,
+      "sha256": "c58f298565ba681bcd59105f107c37ea1bbf09bfd2912f56d57dbf0456b80fbc"
+    },
+    "scopeContract": {
+      "bytes": 52294,
+      "sha256": "e3bec3b32c04e2495084dbd393ba67b81e3b339a91da7f5fd7b30eafb1e446fb"
+    },
+    "bootstrap": {
+      "bytes": 5381,
+      "sha256": "6c525680c193ca58e15f6b831e9138fc0ebc096f4ff2231a6086e5a50bfa6df0"
+    },
+    "scope": {
+      "bytes": 13652,
+      "sha256": "f63661c656510ddc7ff002c5cbdc4f201d0477fc3e5bc49df2b7442e9d873aa5"
+    },
+    "coverage": {
+      "bytes": 31220,
+      "sha256": "fde5a24d55871ebec21a24c66d998d2f5a04e787f08fd28ff784d83abe9a2056"
+    },
+    "bodyAccessPolicy": {
+      "bytes": 55177,
+      "sha256": "5ae50838085c0f03c348aba4c1a2f4beeacb212602a5c0bcfd4ad3e2469abc0e"
+    },
+    "metadataSelectionPolicy": {
+      "bytes": 17583,
+      "sha256": "502427cf57698d85c38d4e74602de40a6dd9e48ef9e665736dccd3273df51a5e"
+    },
+    "launchPermission": {
+      "bytes": 2009,
+      "sha256": "9dfee42160e836d6915a72de84608352ca3018d3f6fe758fe8f6bdf98fad3023"
+    },
+    "rootLaunchGo": {
+      "bytes": 4762,
+      "sha256": "c9d31a6a45a64c8f1bfd386e9ef906441b113b39c89e1ec8ad33ccc311ac6e3b"
+    },
+    "preparedPrompt": {
+      "bytes": 24736,
+      "sha256": "13b73762e97831675b8b6048e59a3501a6c572760a08fc7176c84fad40f650a7"
+    },
+    "actualPrompt": {
+      "bytes": 25954,
+      "sha256": "62f4debfc2d5805ef4bd281afe2a61741e9c21b31983162112a8f0d1a6e759db"
+    },
+    "details": [
+      "Actual prompt begins with the exact prepared prompt and appends the matching ROOT ACTUAL GO.",
+      "The complete prompt subject, S_CLIENT scope, common criteria, composition requirements and assigned material joins match the bound contract and own scope.",
+      "The pure contract retains actualGo:false and launch authority:false. The separate current ROOT GO supplies review authority.",
+      "All three common criteria records were read and parsed only at their exact bound paths after byte-count and SHA256 verification. Each occurs exactly once in both panel inputFiles and frozenFiles.",
+      "All 96 ordered positive BODY descriptors match their files and panel input/frozen membership. BODY095 is the neutral record; BODY096 is Arcade AGENTS.md.",
+      "Head/base identity is root supplied; Git ancestry and checkout HEAD were not independently inspected."
+    ]
+  },
+  "coverage": {
+    "mandatoryEntireFiles": 32,
+    "mandatoryEntirePhysicalRows": 7107,
+    "mandatoryEntirePhysicalRanges": {
+      "SOURCE-BODY-001": [1, 16],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-004": [1, 15],
+      "SOURCE-BODY-010": [1, 18],
+      "SOURCE-BODY-011": [1, 3],
+      "SOURCE-BODY-016": [1, 8],
+      "SOURCE-BODY-017": [1, 12],
+      "SOURCE-BODY-018": [1, 12],
+      "SOURCE-BODY-019": [1, 288],
+      "SOURCE-BODY-020": [1, 3],
+      "SOURCE-BODY-021": [1, 12],
+      "SOURCE-BODY-022": [1, 1],
+      "SOURCE-BODY-023": [1, 8],
+      "SOURCE-BODY-024": [1, 4],
+      "SOURCE-BODY-025": [1, 2],
+      "SOURCE-BODY-026": [1, 681],
+      "SOURCE-BODY-027": [1, 60],
+      "SOURCE-BODY-028": [1, 683],
+      "SOURCE-BODY-029": [1, 167],
+      "SOURCE-BODY-030": [1, 260],
+      "SOURCE-BODY-031": [1, 111],
+      "SOURCE-BODY-032": [1, 1411],
+      "SOURCE-BODY-033": [1, 75],
+      "SOURCE-BODY-034": [1, 861],
+      "SOURCE-BODY-035": [1, 500],
+      "SOURCE-BODY-036": [1, 1095],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-095": [1, 50],
+      "SOURCE-BODY-096": [1, 88]
+    },
+    "mandatoryCompleteUnits": {
+      "body": "SOURCE-BODY-013",
+      "sha256": "642fd17ae0e46f179c694cbf593365446f989e7754f01d37bd7cb4942eb08e14",
+      "physicalRanges": [[1065, 1112], [1197, 1209], [1451, 1486], [1548, 1554], [1637, 1696]],
+      "physicalRows": 164,
+      "result": "COMPLETE"
+    },
+    "additionalEntireBodies": {
+      "SOURCE-BODY-008": [1, 48],
+      "SOURCE-BODY-013": [1, 1696],
+      "SOURCE-BODY-069": [1, 445]
+    },
+    "totalEntireBodiesRead": 35,
+    "totalEntirePhysicalRowsRead": 9296,
+    "additionalPartialBodies": {
+      "SOURCE-BODY-093": [[1, 12], [180, 419], [432, 766], [852, 895], [930, 990], [1180, 1215]],
+      "SOURCE-BODY-094": [[980, 1017], [1460, 1704], [2530, 2610]]
+    },
+    "searchOnlyAdditionalBodies": ["SOURCE-BODY-068", "SOURCE-BODY-092"],
+    "mandatoryMetadata": {
+      "record2": "Complete selected record assessed.",
+      "relationshipRecords": [1, 4, 7, 11, 12],
+      "assignedRowPartitions": [],
+      "details": [
+        "Assessed source/body/reused membership and project-plugin relationships.",
+        "Compared all 33 frozen staged members to exactly one positive BODY route, canonical bytes/hash and frozen canonical descriptor; all matched.",
+        "Assessed current closure target, enabled/disabled roots, receipt policy, startup environment and project values.",
+        "Compared the complete ordered 245-descriptor membership identities between records 7 and 12.",
+        "Record 12 retains sourceHead c6a9410a524649147f157c3c17a2b838c7e0fc81 and runId 20261020T010406Z-a7dec142. It was treated as reused membership metadata, not current authority.",
+        "Verified all 13 selected-record descriptor hashes. This does not claim substantive ownership review of all 13 records."
+      ]
+    },
+    "recalculatedGlobalInventory": {
+      "bodyFiles": 96,
+      "physicalRows": 42986,
+      "selectedMetadataRecords": 13,
+      "selectorJsonlPhysicalRows": 902,
+      "stagedAuthoredMembers": 33,
+      "authoredPaths": 18,
+      "authoredBodyRoutes": 15,
+      "reusedBodyRoutes": 21,
+      "legacyBodyRoutes": 10
+    },
+    "unreadMandatoryScope": [],
+    "unreadGlobalScope": "The other 61 BODY files were not read completely; this includes the disclosed partial/search-only bodies. No complete global selector-row, dependency-graph or all-plugins caller assessment is claimed."
+  },
+  "assessment": [
+    {
+      "topic": "Client and Core authority",
+      "result": "No actionable local defect found.",
+      "reason": "CoreBoundary remains a bounded evidence reader. It preserves typed submissions and opaque identities, rejects unsupported JSON loss, checks exact revisions and outcome context, and distinguishes accepted, recorded-invalid, uncommitted-invalid and error outcomes. E02 has no Core/session submission port; geometry, selection, camera and local review remain advisory.",
+      "sourceCitations": [
+        "SOURCE-BODY-026:419-668",
+        "SOURCE-BODY-027:17-58",
+        "SOURCE-BODY-028:180-464",
+        "SOURCE-BODY-030:164-258",
+        "SOURCE-BODY-032:557-583"
+      ],
+      "requirementCitations": ["SOURCE-BODY-054:2-21", "SOURCE-BODY-096:11-27"]
+    },
+    {
+      "topic": "Includes, UHT, build and all three test translation units",
+      "result": "Complete local source assessment.",
+      "reason": "Module dependencies cover the client includes. Reflected headers retain generated-header placement and exported classes; private-state destruction is defined where the state is complete. AutomationDriver dependencies are conditional on developer tools and non-Shipping configuration. E01/E02 tests are conditionally compiled and separately named; driver activation and latent work occur when their tests run. Discovery fixture failures remain explicit configuration cases, without launching a host.",
+      "sourceCitations": [
+        "SOURCE-BODY-019:21-78",
+        "SOURCE-BODY-021:1-12",
+        "SOURCE-BODY-033:1-75",
+        "SOURCE-BODY-032:1055-1062",
+        "SOURCE-BODY-034:1-861",
+        "SOURCE-BODY-035:1-500",
+        "SOURCE-BODY-036:1-1095"
+      ],
+      "requirementCitations": ["scope S_CLIENT duties[0]", "materialJoins STAGED_CLIENT"]
+    },
+    {
+      "topic": "Dedicated target, project entry and startup",
+      "result": "Source supports the scoped opt-in behavior.",
+      "reason": "The dedicated Editor constructor explicitly pins bBuildAllModules=false, selects WarhammerClient and enables E04ProfileProof. Ordinary targets do not add that enable. The project retains its existing Runtime client module, ProceduralMeshComponent reference and shell GameMode. The proof plugin is content-free and EnabledByDefault:false. ExplicitlyLoaded is absent; the inspected descriptor constructor initializes its effective value false. Parser/probe use FDefaultModuleImpl without custom startup work. E02 scene setup requires both its exact GameMode URL and -E02Proof.",
+      "sourceCitations": [
+        "SOURCE-BODY-001:4-15",
+        "SOURCE-BODY-002:8-15",
+        "SOURCE-BODY-008:1-5",
+        "SOURCE-BODY-011:1-3",
+        "SOURCE-BODY-016:1-8",
+        "SOURCE-BODY-017:1-12",
+        "SOURCE-BODY-018:1-12",
+        "SOURCE-BODY-020:1-3",
+        "SOURCE-BODY-023:1-8",
+        "SOURCE-BODY-032:1063-1094",
+        "SOURCE-BODY-069:83-100",
+        "SOURCE-BODY-069:364-380"
+      ],
+      "requirementCitations": ["scope S_CLIENT duties[2]", "SOURCE-BODY-057:48-65"]
+    },
+    {
+      "topic": "Effective target settings and Default loading",
+      "result": "Conditional source support; no observed-build claim.",
+      "reason": "The inspected TargetRules base constructor applies configuration/XML/arguments before the dedicated derived constructor pins false. Rules creation can select platform/group specializations and later platform validation; the normal non-test discovery route and bBuildAllModules-gated expansion were inspected locally. Full alternate prebuild/all-modules closure remains outside this local assessment. Default startup loads project and enabled non-explicit plugin modules by phase, propagates failures, and checks current-configuration eligibility. These routes do not establish actual activation, universal plugin execution or successful effective runtime settings.",
+      "sourceCitations": [
+        "SOURCE-BODY-093:180-419",
+        "SOURCE-BODY-093:432-754",
+        "SOURCE-BODY-093:852-895",
+        "SOURCE-BODY-093:1180-1215",
+        "SOURCE-BODY-094:983-1009",
+        "SOURCE-BODY-094:1471-1532",
+        "SOURCE-BODY-094:1582-1677",
+        "SOURCE-BODY-094:2539-2566"
+      ],
+      "requirementCitations": ["scopeReportRequirements[3]", "scopeReportRequirements[4]"]
+    },
+    {
+      "topic": "Staging and process preservation",
+      "result": "Assigned relationships assessed without an actionable local defect.",
+      "reason": "The wrapper binds source/freeze/subset and one phase GO, checks predecessors, stages exact source membership, checks project-plugin membership and preserves nine settings roles. It clears inherited E02_* controls around child creation, restores the parent environment, empties reserved UE startup channels, forbids visible launch, and selects the E04A1 automation prefix. The supervisor assigns a suspended root to a private kill-on-close job before resume, retains ownership handles, checks root exit and final job zero, and fails on timeout or cleanup uncertainty. Six supervisor controls remain separate from native cases. receiptArtifact identifies the published process record; later annotations remain distinct. Preservation checks retain partial/oversize output and validate source, stage, plugins, fixtures, dependency and owned DDC evidence.",
+      "sourceCitations": [
+        "SOURCE-BODY-013:283-361",
+        "SOURCE-BODY-013:363-742",
+        "SOURCE-BODY-013:862-994",
+        "SOURCE-BODY-013:1052-1161",
+        "SOURCE-BODY-013:1197-1228",
+        "SOURCE-BODY-013:1236-1390",
+        "SOURCE-BODY-013:1451-1486",
+        "SOURCE-BODY-013:1548-1590",
+        "SOURCE-BODY-013:1621-1696"
+      ],
+      "requirementCitations": ["materialJoins PROCESS_PRESERVATION", "SOURCE-BODY-057:147-176"]
+    }
+  ],
+  "findings": [],
+  "errorsAndRecoveries": [
+    "Three oversized policy/inventory/relationship output requests were truncated. Mandatory source-body output was not truncated. Required information was recovered through smaller reads and complete descriptor/order comparisons; truncated output was not counted as complete substantive coverage.",
+    "An initial materialJoins comparison incorrectly compared the scoped prompt array with the whole global contract array. Recomparison against the complete S_CLIENT-assigned contract joins and own scope matched exactly.",
+    "No unrecovered mandatory read, EOF, JSON parsing or descriptor mismatch remains."
+  ],
+  "independenceAndRuntime": {
+    "observed": [
+      "Read-only filesystem and approval policy never were supplied in this context.",
+      "No implementation was authored; no files were saved or mutated.",
+      "No delegation, resume/fork, memory retrieval, implementation import, stored-command execution, YAML parsing, build/test, engine/GUI launch, network or GitHub action occurred.",
+      "No peer reports, previous verdicts, unlisted origin bodies, credentials or generated reviewer runtime/invocation bodies were inspected."
+    ],
+    "unverified": [
+      "Actual session/model identity, launch count, platform memory-disable enforcement and received-input provenance require root's independent runtime/isolation attestation.",
+      "Bound prompt files and GO records establish inspected bindings, not independent proof of transport delivery or runtime isolation.",
+      "The existing generic wrapper does not itself semantically validate every added campaign/scope/composition field; root validation remains separate."
+    ]
+  },
+  "limitations": [
+    "No native/build/test checks were run. Compilation, UHT execution, effective compiler flags, receipts, module loading and runtime activation remain unobserved.",
+    "No universal host/window/network-isolation or all-plugins execution claim is made.",
+    "A1E remains the exception-enabled Editor raw-document subset. A1G, A2 compatibility, Linux, rendering/HUD, packaging and other gates remain open.",
+    "SOURCE_PASS applies only to this S_CLIENT source assessment. It is not the aggregate SOURCE gate, phase authority, native acceptance or final CODE/REQ acceptance."
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "verdict": "BLOCKED",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "scopeId": "S_PLUGIN",
+  "campaignId": "E04A1E-SCOPED-4a4f107-20261020T061255Z-f9eae715",
+  "subject": {
+    "sourceHead": "4a4f107f316456c8eac7935c0ef8d785a1f4e48e",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T061255Z-f9eae715",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF"
+  },
+  "disposition": "This assessment did not complete mandatory S_PLUGIN coverage. BLOCKED records an incomplete reviewer assessment, not an established implementation defect or unavailable source. It supplies no local PASS and cannot satisfy the aggregate SOURCE gate.",
+  "bindings": {
+    "inputManifest": {
+      "bytes": 566083,
+      "sha256": "a0e94948fc507bac3841f935006c8db265efb4df6a8c26be239152f3e701e336",
+      "matchesReceivedRootGo": true
+    },
+    "runtimeFreezeManifest": {
+      "bytes": 556205,
+      "sha256": "430C806C4B82214E4B51A570C0D7BC27BA9E3257E4F14EBADD90F076E52D50BC",
+      "verified": true
+    },
+    "scopeContract": {
+      "bytes": 52294,
+      "sha256": "e3bec3b32c04e2495084dbd393ba67b81e3b339a91da7f5fd7b30eafb1e446fb",
+      "verified": true
+    },
+    "bootstrap": {
+      "bytes": 5382,
+      "sha256": "251c8b5864e19fed6ce9e15bc80370862dd63e74c51a3a98e0717e567fd9a1b5",
+      "verified": true
+    },
+    "ownCoverage": {
+      "bytes": 31960,
+      "sha256": "8edb12e4fcaf8118c25b2e6c29d19c16d0d3eab45397f5235a50bbb20a8fc023",
+      "verified": true
+    },
+    "launchPermission": {
+      "bytes": 2009,
+      "sha256": "e59631d905923c2ae1f45e12d984d280b3174ac16faa5c7041c043b01ac60a31",
+      "matchesReceivedRootGo": true
+    },
+    "preparedPrompt": {
+      "bytes": 26263,
+      "sha256": "0129792ff48e3c938c403d8576e34e6b615838282ec5b57356a9d31750468755"
+    },
+    "savedActualPrompt": {
+      "bytes": 27481,
+      "sha256": "ED32D308507D6D07EA2730AD044FD534C01E53DE0A9FF3B64BBFE5C6AD748196",
+      "completePreparedPrefixAndMatchingGoTail": true
+    },
+    "commonCriteria": [
+      {
+        "field": "globalBodyAccessPolicy",
+        "bytes": 54132,
+        "sha256": "80473D60F07F95439AE5112EC6E9E459A69CC21E7AC3B02D1F4ADF92C9436219"
+      },
+      {
+        "field": "globalCoverageInventory",
+        "bytes": 66236,
+        "sha256": "EA2AFF1EB5B8A1FD50651D3F2D29396C86C6E263AA4DB9F2A08DCA61B44CA910"
+      },
+      {
+        "field": "globalSelectedMetadataPolicy",
+        "bytes": 14015,
+        "sha256": "D5C20471D8E7693238FDCFC2021258B2298176BDD8EBD750621ACA08E49A88FC"
+      }
+    ],
+    "commonCriteriaVerification": "Each exact absolute subject descriptor was verified before parsing. Each occurs exactly once in both panel inputFiles and frozenFiles. Referenced descriptors were not treated as additional BODY grants.",
+    "primaryCatalog": {
+      "bytes": 169575,
+      "sha256": "F4DE2F7694381C1FF3BFB9C5796DBFC77F6436E2AD815D4F7242FDEB3E340B5E",
+      "verified": true
+    },
+    "commonSourceInputManifest": {
+      "bytes": 559659,
+      "sha256": "6A90F33B48E79EBB30D47E64A82AC3592B3E0EF3EA6A5CAB0AFA0035B4E72AC1",
+      "verified": true
+    },
+    "criteriaComparison": "Independently compared the own subject, scope, common bodies, global access, material joins, review discipline and report requirements with the embedded prompt criteria. Compared the prompt subset, binding requirements, inventory shape, ownership, launch binding, aggregate criteria and separate gates with the pure contract. Those comparisons matched. This does not establish generic transport semantic validation of added fields.",
+    "gitIdentityLimit": "Head and base remain root-supplied identities; Git was not invoked."
+  },
+  "coverage": {
+    "identityChecksOnly": {
+      "globalBodyFiles": 96,
+      "globalPhysicalRows": 42986,
+      "mandatoryEntireFiles": 35,
+      "mandatoryEntireRows": 14022,
+      "allBodyBytesHashesAndLineCountsMatched": true,
+      "qualification": "These checks do not establish substantive reading coverage."
+    },
+    "completeMandatoryBodyPhysicalRanges": {
+      "SOURCE-BODY-001": [1, 16],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-016": [1, 8],
+      "SOURCE-BODY-019": [1, 288],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-059": [1, 407],
+      "SOURCE-BODY-060": [1, 67],
+      "SOURCE-BODY-061": [1, 292],
+      "SOURCE-BODY-062": [1, 151],
+      "SOURCE-BODY-063": [1, 144],
+      "SOURCE-BODY-064": [1, 271],
+      "SOURCE-BODY-065": [1, 567],
+      "SOURCE-BODY-066": [1, 40],
+      "SOURCE-BODY-067": [1, 63],
+      "SOURCE-BODY-068": [1, 267],
+      "SOURCE-BODY-069": [1, 445],
+      "SOURCE-BODY-070": [1, 51],
+      "SOURCE-BODY-071": [1, 54],
+      "SOURCE-BODY-072": [1, 407],
+      "SOURCE-BODY-073": [1, 545],
+      "SOURCE-BODY-074": [1, 585],
+      "SOURCE-BODY-075": [1, 166],
+      "SOURCE-BODY-076": [1, 621],
+      "SOURCE-BODY-077": [1, 134],
+      "SOURCE-BODY-078": [1, 211],
+      "SOURCE-BODY-079": [1, 212],
+      "SOURCE-BODY-080": [1, 245],
+      "SOURCE-BODY-083": [1, 971],
+      "SOURCE-BODY-084": [1, 454],
+      "SOURCE-BODY-095": [1, 50],
+      "SOURCE-BODY-096": [1, 88]
+    },
+    "completeMandatoryEntireFileCount": 34,
+    "completeMandatoryEntireFileRows": 8483,
+    "SOURCE-BODY-013": {
+      "sha256": "642FD17AE0E46F179C694CBF593365446F989E7754F01D37BD7CB4942EB08E14",
+      "completeReadPhysicalRanges": [[1236, 1390], [1548, 1554]],
+      "rows": 162,
+      "unitsRead": [
+        "Catalog-Descriptors",
+        "Check-PluginDiscoveryCatalog",
+        "Resolve-ReceiptPath",
+        "Check-TargetReceipt",
+        "Check-StagedPluginClosure",
+        "Native-Arguments"
+      ]
+    },
+    "SOURCE-BODY-094": {
+      "completeReadPhysicalRanges": [[1, 1010], [1689, 2220], [5019, 5539]],
+      "readRows": 2063,
+      "notCompletelyReadPhysicalRanges": [[1011, 1688], [2221, 5018]],
+      "unreadRows": 3476,
+      "qualification": "Header navigation over the file does not count as reading the omitted bodies."
+    },
+    "metadata": {
+      "completePositiveSelectedRecordsRead": [9, 10, 11],
+      "partialRelationshipInspection": [1, 7, 8, 12],
+      "relationshipRecordsNotSubstantivelyAssessed": [2, 4, 5],
+      "record8": "Parsed all 902 rows and counted all 1561 references. Inspected ten plugin selector presence/value distributions, selected named relationships and graph lookup/membership checks. This was not a complete semantic disposition of every node, module and reference.",
+      "membershipChecks": "All 245 descriptors in record7 and all 245 in record12 individually matched exactly one record8 origin by path, byte count and complete hash identity. Ordered literal descriptor JSON equality was false; that result was not resolved into a complete order/value comparison.",
+      "record7SourceBindings": "Recovered all 81 excerpt-descriptor matches against the positive BODY policy and displayed every symbols/ranges value. This does not establish assessment of every referenced implementation."
+    }
+  },
+  "sourceObservations": [
+    {
+      "observation": "The dedicated target assigns bBuildAllModules=false and enables E04ProfileProof. The plugin is disabled by default, contains no content, and declares Default-phase parser/probe modules with platform and probe target restrictions. Final effective target configuration and actual activation were not established.",
+      "citations": [
+        "SOURCE-BODY-001 physical 6-14",
+        "SOURCE-BODY-002 physical 8-15",
+        "scopeReportRequirements: distinguish source assignments from unexecuted actual values"
+      ]
+    },
+    {
+      "observation": "Runtime discovery scans applicable engine/project extension roots, separates extension children, merges supported-platform/module data and resolves offered plugin versions. Its directory traversal stops below a discovered plugin and excludes Content directories. The wrapper's recursive descriptor catalog is therefore a conservative inventory, not proof that every catalog member is discovered or enabled.",
+      "citations": [
+        "SOURCE-BODY-074 physical 28-310 and 375-584",
+        "SOURCE-BODY-066 physical 15-39",
+        "SOURCE-BODY-067 physical 12-62",
+        "SOURCE-BODY-013 physical 1236-1296"
+      ]
+    },
+    {
+      "observation": "Receipt plugin overrides, BuildPlugins, descriptor runtime dependencies and runtime enablement have separate meanings. BuildPlugins supplies an optional-dependency allowlist in the applicable runtime branch. Normal configuration processes compile-time information, command-line requests, target/project/default requests and program requests in order.",
+      "citations": [
+        "SOURCE-BODY-059 physical 58-93",
+        "SOURCE-BODY-060 physical 21-61",
+        "SOURCE-BODY-076 physical 139-297 and 565-620",
+        "SOURCE-BODY-083 physical 88-150",
+        "SOURCE-BODY-013 physical 1311-1349"
+      ]
+    },
+    {
+      "observation": "Normal loading excludes ExplicitlyLoaded plugins. PreInitPostStartupScreen calls LoadStartupModules under WITH_ENGINE; the dispatcher processes PreDefault, Default and PostDefault, with project loading first and short-circuit failure returns. This supports conditional source reachability of the proof modules, not observed execution.",
+      "citations": [
+        "SOURCE-BODY-075 physical 70-165",
+        "SOURCE-BODY-094 physical 451-464 and 982-1009",
+        "S_PLUGIN duty4"
+      ]
+    },
+    {
+      "observation": "Public MountExplicitlyLoadedPlugin and private MountPluginFromExternalSource both default MaxLoadingPhase to ELoadingPhase::Max. The mount implementation iterates phases below that bound, skips None, ignores TryLoadModulesForPlugin return values and subsequently marks the plugin mounted. Its success Boolean must not be interpreted as proof that every module loaded successfully.",
+      "citations": [
+        "SOURCE-BODY-094 physical 1705-1717",
+        "SOURCE-BODY-094 physical 1926-2011",
+        "SOURCE-BODY-094 physical 2173-2181",
+        "SOURCE-BODY-094 physical 5219-5220",
+        "SOURCE-BODY-065 physical 539-566"
+      ]
+    }
+  ],
+  "blockingReviewGaps": [
+    {
+      "id": "S_PLUGIN-COVERAGE-1",
+      "requirement": "S_PLUGIN requiredEntireBodyIds includes complete SOURCE-BODY-094; duty4 requires finite material caller/gate assessment.",
+      "gap": "3476 physical BODY094 rows remain unread. The complete finite caller, feature/platform/configuration/test gate and error-propagation join was not assessed."
+    },
+    {
+      "id": "S_PLUGIN-COVERAGE-2",
+      "requirement": "S_PLUGIN duty2 and SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH require substantive full902-node/1561-reference runtime relationships.",
+      "gap": "Parsing, counts, selector distributions and membership checks did not complete all material module/default/filter/dependency/root/extension relationships or resolve every conditional route."
+    },
+    {
+      "id": "S_PLUGIN-COVERAGE-3",
+      "requirement": "Assigned metadata relationship records and BUILD_RECEIPT_STARTUP duties.",
+      "gap": "Records2/4/5 and the remaining material relationships were not fully assessed. Applicable inherited configuration/finalization and actual effective values remain unestablished."
+    }
+  ],
+  "errorsAndRecoveries": [
+    "The initial full scope-contract display was truncated. Recovered the complete own scope and relevant common criteria through bounded record queries and independent exact comparisons; no complete reading of other scopes is claimed.",
+    "The record7 sourceBindings display was truncated. Recovered all81 excerpt identity matches and every symbols/ranges value. No implementation coverage follows from those descriptor matches.",
+    "The first selector-profile display was truncated. Recovered all requested presence/value distributions without the oversized derived row lists. Complete per-row semantic assessment is not claimed.",
+    "No parser, EOF or shell query exception was observed. Data reads used ErrorActionPreference Stop."
+  ],
+  "independenceAndExecutionLimits": {
+    "delegationResumeForkOrMemoryToolsUsed": false,
+    "filesSavedOrMutated": false,
+    "implementationHelpersBuildTestsEngineGuiNetworkGitHubExecuted": false,
+    "generatedRuntimeInvocationOrOutputBodiesRead": false,
+    "runtimeEvidence": "The supplied environment declares read-only permissions and approval policy never. Actual invocation/session isolation, received-input provenance and memory disabling were not independently verified from generated artifacts; those bodies were deliberately not inspected. Root attestation remains separate.",
+    "sourceCommands": "Stored source and fixture commands remained inert."
+  },
+  "acceptanceLimits": "No aggregate SOURCE approval, phase GO, native result or final acceptance is established. E04-A1G, A2 compatibility, Linux, rendering/HUD, packaging and separate final CODE/REQ gates remain open."
+}

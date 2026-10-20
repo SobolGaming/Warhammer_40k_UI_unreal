@@ -78,7 +78,36 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 54 (2026-10-20 UTC) is
+Current A1E status at plan revision 55 (2026-10-20 UTC) is
+**SCOPED_SOURCE_BLOCKED_RULES_ASSEMBLY_DISCOVERY**. The
+[R3 summary](docs/plans/research/2026-10-20-e04a-scoped-r3-summary.md) and
+[factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r3-result.json)
+bind eleven closed invocations for `4a4f107` / `20261020T061255Z-f9eae715`,
+ten unchanged raw reports (eight SOURCE_PASS/two BLOCKED) and 743 tool pairs.
+Every process confirmed cleanup and no timeout. ABI exited 1 after a service
+capacity error and produced no report or SOURCE verdict.
+
+Root recorded eight local scope admissions; the all-ten SOURCE gate is false
+and no aggregate or phase GO exists. I_ACTIVATION-B01 requires the complete
+normal `RulesCompiler.CreateTargetRulesAssembly` producer and material
+discovery/selection dependencies. Its 42 mandatory bodies / 20,291 rows are
+complete, while required interface/semantic assessment remains incomplete.
+Root subsequently withdrew TARGET/BUILD's earlier admissions after this gap;
+six remain limited to their old scopes. No admission transfers to amended source.
+The original incomplete plugin BLOCKED report remains separate from the fresh
+complete plugin PASS. The unused ABI replacement is superseded without GO/launch.
+
+All eight native phases remain NOT RUN/no native RunRoot. Inspect and
+prospectively adopt the necessary source-input amendment, derive/refreeze new
+exact bindings, and obtain current affected SOURCE and fresh integrations.
+Do not launch a closed or superseded packet. All ten valid complete passing
+assessments, root admission and the labelled aggregate precede any phase.
+Final CODE/different REQ, A1G/A2, Linux, packaging and broader gates remain open.
+Standing private-source/API review consent persists until explicitly revoked;
+do not request transmission reconfirmation for the established project scope
+and configured OpenAI Codex destination.
+
+Historical A1E status at plan revision 54 (2026-10-20 UTC) is
 **STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
 Root prospectively adopted the [startup and target-selection SOURCE amendment](docs/plans/research/2026-10-20-e04a-source-composition-packet-v3.md)
 and its [adoption record](docs/plans/evidence/2026-10-20-e04a-startup-target-amendment-adoption.json). The reference inventory is

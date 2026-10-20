@@ -10,6 +10,10 @@ docs/plans/research/2026-10-20-e04a-source-review-r*.md -text whitespace=-blank-
 # E04 scoped raw JSON reports also retain sealed original bytes.
 docs/plans/research/2026-10-20-e04a-scoped-r*-s-*.json -text
 docs/plans/research/2026-10-20-e04a-scoped-r*-d-selectors-*.json -text
+# R3 includes integration JSON and original Markdown reports as sealed bytes.
+docs/plans/research/2026-10-20-e04a-scoped-r3-*.json -text
+docs/plans/research/2026-10-20-e04a-scoped-r3-s-build-host.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-20-e04a-scoped-r3-d-selectors-302-602.md -text whitespace=-blank-at-eol
 # Pure composition criteria are SHA-bound by their adoption records.
 docs/plans/research/2026-10-20-e04a-source-composition-packet*.md text eol=lf
 # Preserve the previous factual record as exact historical bytes.
