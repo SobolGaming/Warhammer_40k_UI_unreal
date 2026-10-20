@@ -742,6 +742,128 @@ $long=$fixtureParentTemplate.Replace('__CHILD_LITERAL__',("'"+$timeoutChild.Repl
     return $controlEvidence
 }
 
+function Require-ObjSrcMapRulesError($Process,[string[]]$Arguments,[string]$WorkingDirectory,[string]$UbtLog) {
+    # The unchanged supervisor deliberately labels a nonzero root FAIL. Validate
+    # precisely that expected terminal failure; Require-RootPass must not be used.
+    if($Process['status'] -cne 'FAIL' -or $Process['exitCode'] -ne 8 -or
+        $Process['exitConfirmed'] -ne $true -or $Process['cleanupConfirmed'] -ne $true -or
+        $Process['assignedBeforeResume'] -ne $true -or $Process['resumed'] -ne $true -or
+        $Process['timedOut'] -ne $false -or $Process['technicalBlocked'] -ne $false -or
+        $Process['budgetSeconds'] -ne 60 -or $Process['visibleWindowRequested'] -ne $false -or
+        $null -ne $Process['syntheticFault'] -or @($Process['secondaryErrors']).Count){throw 'E04A1_OBJ_SRC_MAP_EXPECTED_CLOSED_RULES_ERROR_REQUIRED'}
+    $failure=$Process['primaryFailure']
+    if($failure -isnot [Collections.IDictionary] -or $failure['stage'] -cne 'owned-root' -or
+        $failure['type'] -cne 'System.IO.InvalidDataException' -or
+        $failure['message'] -cne 'Root unsuccessful or exit unavailable' -or
+        $failure['syntheticFault'] -ne $false -or $null -ne $failure['win32Error']){throw 'E04A1_OBJ_SRC_MAP_UNRELATED_SUPERVISOR_FAILURE'}
+    $accounting=@($Process['jobAccounting'])
+    if(-not $accounting.Count -or $accounting[-1]['querySucceeded'] -ne $true -or $accounting[-1]['activeProcesses'] -ne 0){throw 'E04A1_OBJ_SRC_MAP_FINAL_JOB_ZERO_REQUIRED'}
+    Assert-RulesValue (Need-File $script:Freeze.toolPaths.dotnet) $Process['executable'] 'objMap.processHost'
+    Assert-RulesValue @($Arguments) @($Process['arguments']) 'objMap.argv'
+    Assert-RulesValue $WorkingDirectory $Process['workingDirectory'] 'objMap.cwd'
+    foreach($key in @('receiptArtifact','stdoutArtifact','stderrArtifact')){[void](Check-Descriptor $Process[$key])}
+    $text=$script:Utf8.GetString([IO.File]::ReadAllBytes((Need-File $UbtLog)));Safe-Text $text
+    if($text -notmatch '(?m)^Result: Failed \(RulesError\)\s*$' -or
+        $text -notmatch 'E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED' -or
+        $text -notmatch "Unable to instantiate instance of 'WarhammerClientE04AEditorTarget'" -or
+        $text -match '(?m)^Result: Succeeded\s*$'){throw 'E04A1_OBJ_SRC_MAP_DEDICATED_TARGET_REFUSAL_NOT_REACHED'}
+    # The trusted source route + target-instantiation diagnostic is the refusal
+    # evidence. Missing outputs/job counters are not a universal child inventory.
+    return @{exitCode=8;ubtResult='RulesError';diagnostic='E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED';
+        process=$Process['receiptArtifact'];stdout=$Process['stdoutArtifact'];stderr=$Process['stderrArtifact'];ubtLog=Descriptor $UbtLog;
+        normalRouteInference='Pinned target constructor refused before normal VCToolChain construction';
+        universalNativeChildAbsence='NOT_OBSERVED_NO_UNIVERSAL_DESCENDANT_INVENTORY'}
+}
+
+function ObjSrcMap-TargetRefusalControl {
+    if($Phase -cne 'SupervisorControls' -or $script:RootCount -ne 5 -or
+        $null -ne $script:RulesSourceLocks -or $null -ne $script:RulesSourceBindings -or
+        $null -ne $script:RulesTopologyBefore){throw 'E04A1_OBJ_SRC_MAP_EXACT_AFTER_SUPERVISOR_CONTEXT_REQUIRED'}
+    $root=Owned 'logs/obj-src-map-target-control';$project=Under (Join-Path $root 'project') $root
+    $canary=Under (Join-Path $root 'object-source-map.canary') $root
+    $resultPath=Under (Join-Path $root 'result.json') $root
+    $ubtLog=Under (Join-Path $root 'ubt.log') $root
+    $expectedMainAbsences=@('Binaries','Intermediate','Plugins/E04ProfileProof/Binaries','Plugins/E04ProfileProof/Intermediate')
+    $locks=[Collections.Generic.List[IDisposable]]::new();$bindings=[Collections.Generic.List[object]]::new()
+    $primary=$null;$late=$null;$created=$false;$canaryBefore=$null;$mainBefore=$null
+    $result=[ordered]@{schemaVersion=1;kind='E04A1_OBJ_SRC_MAP_TARGET_REFUSAL_CONTROL';runId=$RunId;sourceHead=$script:Freeze.sourceHead;
+        phase='SupervisorControls';status='PROVISIONAL';nativeSuiteCount=0;rootCount=1;retryCount=0;budgetSeconds=60;
+        mainProject=$script:Stage;controlProject=$project;freezeManifest=Descriptor $FreezeManifestPath;
+        sourceBindings=@();canaryBefore=$null;canaryAfter=$null;process=$null;refusal=$null;primaryFailure=$null;secondaryErrors=@();
+        limits=@('Separate owned project and Intermediate/BuildRules; no main EditorBuild witness/cache reuse.','Canary is closed/unlocked during UBT; disappearance or change refuses.','Source locks and before/after membership are not a continuous directory monitor.','No native child absence claim from missing files or aggregate job counters.')}
+    try {
+        New-Directory $root;$created=$true;[void][IO.Directory]::CreateDirectory($project)
+        foreach($name in @('temp','dotnet-home','nuget','uba')){[void][IO.Directory]::CreateDirectory((Under (Join-Path $root $name) $root))}
+        $mainBefore=@(Snapshot-Source $script:Stage);Same-Source @($script:Freeze.sourceMembership) $mainBefore
+        foreach($relative in $expectedMainAbsences){if(Test-Path -LiteralPath (Under (Join-Path $script:Stage $relative) $script:Stage)){throw 'E04A1_OBJ_SRC_MAP_MAIN_OUTPUTS_MUST_REMAIN_FRESH'}}
+        if($script:Freeze.sourceMembership -isnot [Collections.IList] -or $script:Freeze.sourceMembership.Count -ne 33){throw 'E04A1_OBJ_SRC_MAP_EXACT_33_SOURCES_REQUIRED'}
+        $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        foreach($entry in $script:Freeze.sourceMembership){
+            Require-RulesKeys $entry @('path','bytes','sha256')
+            if($entry.path -isnot [string] -or [string]::IsNullOrWhiteSpace($entry.path) -or -not $seen.Add($entry.path)){throw 'E04A1_OBJ_SRC_MAP_DUPLICATE_OR_INVALID_MEMBER'}
+            $canonical=Under (Join-Path $script:Repo $entry.path) $script:Repo
+            $copy=Under (Join-Path $project $entry.path) $project
+            if([IO.Path]::GetRelativePath($project,$copy).Replace('\','/') -cne $entry.path){throw 'E04A1_OBJ_SRC_MAP_NONCANONICAL_RELATIVE_MEMBER'}
+            $approved=[ordered]@{path=$canonical;bytes=$entry.bytes;sha256=$entry.sha256}
+            [void](Rules-FrozenInput $approved)
+            $original=[IO.File]::Open((Need-File $canonical),[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read);$locks.Add($original)
+            [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($copy))
+            $destination=$null
+            try{$destination=[IO.File]::Open($copy,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None);$original.CopyTo($destination)}finally{if($null -ne $destination){$destination.Dispose()}}
+            $staged=[IO.File]::Open((Need-File $copy),[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read);$locks.Add($staged)
+            $bindings.Add(@{canonical=$approved;control=[ordered]@{path=$copy;bytes=$entry.bytes;sha256=$entry.sha256};canonicalStream=$original;controlStream=$staged})
+        }
+        if($bindings.Count -ne 33 -or $locks.Count -ne 66){throw 'E04A1_OBJ_SRC_MAP_COMPLETE_SOURCE_LOCKS_REQUIRED'}
+        foreach($binding in $bindings){Assert-RulesDescriptor $binding.canonical (Read-RulesHeldDescriptor $binding.canonical.path $binding.canonicalStream);Assert-RulesDescriptor $binding.control (Read-RulesHeldDescriptor $binding.control.path $binding.controlStream)}
+        Same-Source @($script:Freeze.sourceMembership) @(Snapshot-Source $project)
+        [void](Check-ProjectPluginMembership $script:Freeze.projectPluginMembership $project)
+        $result.sourceBindings=@($bindings|ForEach-Object {@{canonical=$_.canonical;control=$_.control}})
+        $canaryBytes=$script:Utf8.GetBytes("E04A1_OBJ_SRC_MAP_CANARY|$RunId|$($script:Freeze.sourceHead)`n")
+        $stream=$null
+        try{$stream=[IO.File]::Open($canary,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None);$stream.Write($canaryBytes,0,$canaryBytes.Length)}finally{if($null -ne $stream){$stream.Dispose()}}
+        $canaryBefore=Descriptor $canary;$result.canaryBefore=$canaryBefore
+        if($canaryBefore.bytes -ne $canaryBytes.Length -or $canaryBefore.sha256 -ine (Bytes-Hash $canaryBytes)){throw 'E04A1_OBJ_SRC_MAP_CANARY_INITIAL_IDENTITY'}
+        $hostInput=Rules-FrozenInput $script:Freeze.rulesWitness.processHost
+        $ubtInput=Rules-FrozenInput $script:Freeze.rulesWitness.ubtAssembly
+        if($hostInput.path -ine (Need-File $script:Freeze.toolPaths.dotnet)){throw 'E04A1_OBJ_SRC_MAP_FROZEN_HOST_MISMATCH'}
+        $cwd=Assert-Path (Join-Path $EngineRoot 'Engine/Source')
+        $extra=@{TEMP=(Join-Path $root 'temp');TMP=(Join-Path $root 'temp');DOTNET_CLI_HOME=(Join-Path $root 'dotnet-home');NUGET_PACKAGES=(Join-Path $root 'nuget');UBA_ROOT=(Join-Path $root 'uba');
+            DOTNET_ROLL_FORWARD='LatestPatch';DOTNET_MULTILEVEL_LOOKUP='0';DOTNET_STARTUP_HOOKS='';DOTNET_ADDITIONAL_DEPS='';DOTNET_SHARED_STORE='';DOTNET_EnableDiagnostics='0';CORECLR_ENABLE_PROFILING='0';COR_ENABLE_PROFILING='0';COMPlus_EnableDiagnostics='0'}
+        $argv=@($ubtInput.path,'WarhammerClientE04AEditor','Win64','Development',('-Project='+(Join-Path $project 'WarhammerClient.uproject')),'-WaitMutex','-NoUBA','-NoVFS','-NoUBTMakefiles','-Compiler=VisualStudio2022','-CompilerVersion=14.44.35229','-WindowsSDKVersion=10.0.22621.0',('-UBARootDir='+(Join-Path $root 'uba')),('-Log='+$ubtLog),('-ObjSrcMap='+$canary))
+        if(@($argv|Where-Object {$_.StartsWith('-ObjSrcMap=',[StringComparison]::Ordinal)}).Count -ne 1){throw 'E04A1_OBJ_SRC_MAP_EXACT_SINGLE_SELECTOR_ARG_REQUIRED'}
+        $expectedEnvironment=Child-Environment $extra
+        Write-JsonNew (Under (Join-Path $root 'prepared.json') $root) @{schemaVersion=1;kind='E04A1_OBJ_SRC_MAP_NEGATIVE_PREPARATION';runId=$RunId;sourceHead=$script:Freeze.sourceHead;freezeManifest=Descriptor $FreezeManifestPath;processHost=$hostInput;ubtAssembly=$ubtInput;cwd=$cwd;argv=$argv;expectedEnvironment=$expectedEnvironment;canary=$canaryBefore;sourceBindings=$result.sourceBindings;expectedExit=8;expectedResult='RulesError';expectedDiagnostic='E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED';budgetSeconds=60;retryCount=0}
+        foreach($binding in $bindings){Assert-RulesDescriptor $binding.canonical (Read-RulesHeldDescriptor $binding.canonical.path $binding.canonicalStream);Assert-RulesDescriptor $binding.control (Read-RulesHeldDescriptor $binding.control.path $binding.controlStream)}
+        Same-Source @($script:Freeze.sourceMembership) @(Snapshot-Source $project)
+        [void](Check-ProjectPluginMembership $script:Freeze.projectPluginMembership $project)
+        if((Phase-Budget) -lt 60){throw 'E04A1_OBJ_SRC_MAP_FULL_60_SECOND_BUDGET_REQUIRED'}
+        $process=Invoke-Root 'obj-src-map-target-refusal' $hostInput.path $argv 60 $false '' $extra $cwd
+        $result.process=$process.receiptArtifact
+        Assert-RulesValue $expectedEnvironment $process.environmentOverrides 'objMap.environment'
+        $result.refusal=Require-ObjSrcMapRulesError $process $argv $cwd $ubtLog
+        [void](Rules-FrozenInput $hostInput);[void](Rules-FrozenInput $ubtInput)
+    }catch{$primary=$_;$result.primaryFailure=Failure $_ 'obj-src-map-target-refusal';throw}
+    finally {
+        if($created){
+            try{
+                if($null -ne $canaryBefore){$result.canaryAfter=Descriptor $canary;Assert-RulesDescriptor $canaryBefore $result.canaryAfter}
+                foreach($binding in $bindings){Assert-RulesDescriptor $binding.canonical (Read-RulesHeldDescriptor $binding.canonical.path $binding.canonicalStream);Assert-RulesDescriptor $binding.control (Read-RulesHeldDescriptor $binding.control.path $binding.controlStream)}
+                if($bindings.Count -eq 33){Same-Source @($script:Freeze.sourceMembership) @(Snapshot-Source $project);[void](Check-ProjectPluginMembership $script:Freeze.projectPluginMembership $project)}
+                if($null -ne $mainBefore){Same-Source $mainBefore @(Snapshot-Source $script:Stage);foreach($relative in $expectedMainAbsences){if(Test-Path -LiteralPath (Under (Join-Path $script:Stage $relative) $script:Stage)){throw 'E04A1_OBJ_SRC_MAP_MAIN_OUTPUT_STATE_CHANGED'}}}
+                if($null -ne $script:RulesSourceLocks -or $null -ne $script:RulesSourceBindings -or $null -ne $script:RulesTopologyBefore){throw 'E04A1_OBJ_SRC_MAP_MAIN_RULES_STATE_CHANGED'}
+            }catch{$late=$_;$script:Errors.Add((Failure $_ 'obj-src-map-preservation'))}
+        }
+        foreach($held in $locks){try{$held.Dispose()}catch{if($null -eq $late){$late=$_};$script:Errors.Add((Failure $_ 'obj-src-map-source-close'))}}
+        if($created){
+            $result.status=if($null -eq $primary -and $null -eq $late -and $null -ne $result.refusal){'PASS_EXPECTED_TARGET_REFUSAL'}else{'FAIL_PRESERVE_PARTIALS_NO_RETRY'}
+            $result.secondaryErrors=@($script:Errors)
+            try{Write-JsonNew $resultPath $result}catch{if($null -eq $late){$late=$_};$script:Errors.Add((Failure $_ 'obj-src-map-result-preservation'))}
+        }
+        if($null -eq $primary -and $null -ne $late){throw $late}
+    }
+    return $result
+}
+
 $script:NativeSource = @'
 using System;
 using System.IO;
@@ -1177,7 +1299,7 @@ function Expand-Recipe($Recipe) {
 }
 function Prepare-Fixtures {
     $c=Read-Json (Join-Path $script:FixtureRoot 'corpus-manifest.json');$g=Read-Json (Join-Path $script:FixtureRoot 'generated-cases.json')
-    if($c.schemaVersion -ne 1 -or $g.schemaVersion -ne 1 -or @($c.canonical).Count -ne 10 -or @($g.generated).Count -ne 28 -or $g.totalWithCanonical -ne 38 -or $c.arcadeCommit -cne '5088c1c49dcaff29eb59fb64b3063d30214dde73'){throw 'E04A1_FIXTURE_EXACT_38_REQUIRED'}
+    if($c.schemaVersion -ne 1 -or $g.schemaVersion -ne 1 -or @($c.canonical).Count -ne 10 -or @($g.generated).Count -ne 30 -or $g.totalWithCanonical -ne 40 -or $c.arcadeCommit -cne '5088c1c49dcaff29eb59fb64b3063d30214dde73'){throw 'E04A1_FIXTURE_EXACT_40_REQUIRED'}
     foreach($name in @('corpus-manifest.json','generated-cases.json')){[IO.File]::Copy((Need-File (Join-Path $script:FixtureRoot $name)),(Owned "fixtures/$name"),$false)}
     $definitions=[Collections.Generic.List[object]]::new();$seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     foreach($e in @($c.canonical)+@($g.generated)){
@@ -1191,7 +1313,7 @@ function Prepare-Fixtures {
         $definitions.Add(@{id=$e.id;bytes=$bytes.Length;sha256=(Bytes-Hash $bytes);inputSha1=$e.inputSha1;expectedCode=$e.expectedCode;source=$(if($canonical){'Canonical'}else{'Generated'});recipeKind=$(if($canonical){'StagedFile'}else{$e.recipe.kind});expectedInput=Descriptor $expected})
     }
     $expectedIds=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal);foreach($ids in (Expected-Attempts).Values){foreach($id in $ids){[void]$expectedIds.Add($id)}}
-    if($seen.Count -ne 38 -or -not $seen.SetEquals($expectedIds)){throw 'E04A1_EXACT_INPUT_UNION_NOT_38'}
+    if($seen.Count -ne 40 -or -not $seen.SetEquals($expectedIds)){throw 'E04A1_EXACT_INPUT_UNION_NOT_40'}
     Write-JsonNew (Owned 'fixtures/input-definitions.json') @{schemaVersion=1;runId=$RunId;sourceHead=$script:Freeze.sourceHead;inputs=@($definitions);primaryHash='SHA256';nativeSha1='AUXILIARY_ONLY'}
 }
 function Fixture-Snapshot {return @(Plain-Files (Owned 'fixtures')|ForEach-Object {Descriptor $_})}
@@ -1210,16 +1332,26 @@ function Child-Environment([hashtable]$Extra=@{}) {
 }
 function Invoke-Root([string]$Label,[string]$Executable,[string[]]$Arguments,[int]$Budget,[bool]$Visible=$false,[string]$Fault='',[hashtable]$Extra=@{},[string]$WorkingDirectory='') {
     if($Visible){throw 'E04A1_VISIBLE_LAUNCH_FORBIDDEN'}
-    $maxRoots=if($Phase -eq 'SupervisorControls'){5}elseif($Phase -in @('Configure','DependencyBuild','EditorBuild','Discovery','Native')){1}else{0}
+    $isObjSrcMapControl=($Phase -ceq 'SupervisorControls' -and $Label -ceq 'obj-src-map-target-refusal')
+    $maxRoots=if($Phase -eq 'SupervisorControls'){6}elseif($Phase -in @('Configure','DependencyBuild','EditorBuild','Discovery','Native')){1}else{0}
     if($script:RootCount -ge $maxRoots){throw 'E04A1_DIRECT_ROOT_LIMIT'};$seconds=[Math]::Min($Budget,(Phase-Budget));if($seconds -lt 3 -or $seconds -gt 1800){throw 'E04A1_ROOT_BUDGET_INVALID'}
+    if($isObjSrcMapControl -and ($script:RootCount -ne 5 -or $seconds -ne 60 -or $Fault -or -not $WorkingDirectory)){throw 'E04A1_OBJ_SRC_MAP_EXACT_SINGLE_ROOT_MODE'}
     $exe=Need-File $Executable;if(@($script:Freeze.files|Where-Object {$_.path -ieq $exe -and $_.sha256 -ieq (Digest $exe)}).Count -ne 1){throw 'E04A1_EXECUTABLE_NOT_FROZEN'}
     $out=Owned "logs/$Label.stdout.log";$err=Owned "logs/$Label.stderr.log";foreach($p in @($out,$err)){if(Test-Path -LiteralPath $p){throw 'E04A1_PROCESS_OUTPUT_COLLISION'}}
     foreach($arg in $Arguments){Safe-Text $arg;if($arg.Contains([char]0)){throw 'E04A1_ARGUMENT_NUL'}}
     $cwd=$script:Stage
-    if($WorkingDirectory){if($Phase -cne 'EditorBuild' -or $Label -cne 'editor-build' -or (Assert-Path $WorkingDirectory) -ine (Assert-Path (Join-Path $EngineRoot 'Engine/Source'))){throw 'E04A1_FIXED_EDITORBUILD_CWD_ONLY'};$cwd=Assert-Path $WorkingDirectory}
-    $saved=@{};foreach($e in [Environment]::GetEnvironmentVariables('Process').GetEnumerator()){if($e.Key -like 'E02_*' -or $e.Key -match '^(CL|_CL_|LINK|_LINK_|CMAKE_|CC$|CXX$|CFLAGS$|CXXFLAGS$|LDFLAGS$|NINJA_STATUS$)' -or ($Phase -ceq 'EditorBuild' -and $e.Key -match '(?i)^(DOTNET_|_DOTNET_|CORECLR_|COR_|COMPlus_|APP_CONTEXT_|MSBUILD|NUGET_|ASPNETCORE_|UnrealBuildTool_)')){$saved[$e.Key]=$e.Value}}
+    if($WorkingDirectory){if((-not ($Phase -ceq 'EditorBuild' -and $Label -ceq 'editor-build') -and -not $isObjSrcMapControl) -or (Assert-Path $WorkingDirectory) -ine (Assert-Path (Join-Path $EngineRoot 'Engine/Source'))){throw 'E04A1_FIXED_EDITORBUILD_CWD_ONLY'};$cwd=Assert-Path $WorkingDirectory}
+    $saved=@{};foreach($e in [Environment]::GetEnvironmentVariables('Process').GetEnumerator()){if($e.Key -like 'E02_*' -or $e.Key -match '^(CL|_CL_|LINK|_LINK_|CMAKE_|CC$|CXX$|CFLAGS$|CXXFLAGS$|LDFLAGS$|NINJA_STATUS$)' -or (($Phase -ceq 'EditorBuild' -or $isObjSrcMapControl) -and $e.Key -match '(?i)^(DOTNET_|_DOTNET_|CORECLR_|COR_|COMPlus_|APP_CONTEXT_|MSBUILD|NUGET_|ASPNETCORE_|UnrealBuildTool_)') -or ($isObjSrcMapControl -and $e.Key -like 'E04A1_*')){$saved[$e.Key]=$e.Value}}
     foreach($key in $saved.Keys){[Environment]::SetEnvironmentVariable($key,$null,'Process')}
-    try{$script:RootCount++;$record=[Warhammer.E02.Supervisor]::Run($exe,$Arguments,$cwd,(Child-Environment $Extra),$out,$err,$seconds,$false,$(if($Fault){$Fault}else{$null}))}
+    try{
+        $childEnvironment=Child-Environment $Extra
+        if($Phase -ceq 'DependencyBuild'){
+            $script:Result.configuredBuildInputPrelaunch=Confirm-ConfiguredBuildInputs
+            $seconds=[Math]::Min($Budget,(Phase-Budget));if($seconds -lt 3 -or $seconds -gt 1800){throw 'E04A1_ROOT_BUDGET_INVALID'}
+        }
+        $script:RootCount++
+        $record=[Warhammer.E02.Supervisor]::Run($exe,$Arguments,$cwd,$childEnvironment,$out,$err,$seconds,$false,$(if($Fault){$Fault}else{$null}))
+    }
     finally{foreach($key in $saved.Keys){[Environment]::SetEnvironmentVariable($key,$saved[$key],'Process')}}
     $script:Result.processes.Add($record);$path=Join-Path $script:PhaseRoot "$Label.process.json";Write-JsonNew $path $record;$record['receiptArtifact']=Descriptor $path
     foreach($entry in @(@('stdoutArtifact',$out),@('stderrArtifact',$err))){if([IO.File]::Exists($entry[1])){if(([IO.FileInfo]::new($entry[1])).Length -gt 64MB){throw 'E04A1_RETAINED_STREAM_CAP_NO_TRUNCATION'};$record[$entry[0]]=Descriptor $entry[1];Safe-Text $script:Utf8.GetString([IO.File]::ReadAllBytes($entry[1]))}elseif($record['status'] -ceq 'PASS'){throw 'E04A1_SUCCESS_OUTPUT_MISSING'}}
@@ -1425,6 +1557,315 @@ function Check-CMake {
     if($ninjaText -notmatch '(?m)^build yaml-cpp\.lib: CXX_STATIC_LIBRARY_LINKER__yaml-cpp_Release\b' -or $ninjaText -match '(?m)^build (?:install|uninstall|format):'){throw 'E04A1_NINJA_STATIC_TARGET_OR_FORBIDDEN_TARGET'}
     return @{cache=Descriptor $cache;compileCommands=Descriptor $commandsPath;ninja=Descriptor $ninja;sourceCount=$actual.Count;actualCommandData=@($flags);qualification='Literal generated command/flag observations, never executed as evidence text. Actual supervised build/process evidence remains separate.'}
 }
+# Generated instruction identity/lineage only. No general Ninja/CMake interpreter.
+function Require-GeneratedBuildKeys($Value,[string[]]$Keys) {
+    if($Value -isnot [Collections.IDictionary] -or $Value.Count -ne $Keys.Count){throw 'E04A1_GENERATED_INPUT_OBJECT_KEYS'}
+    $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach($key in $Value.Keys){if($key -isnot [string] -or -not $seen.Add($key)){throw 'E04A1_GENERATED_INPUT_OBJECT_KEYS'}}
+    if(-not $seen.SetEquals($Keys)){throw 'E04A1_GENERATED_INPUT_OBJECT_KEYS'}
+}
+function Assert-GeneratedBuildDescriptor($Value,[switch]$IdentityOnly) {
+    Require-GeneratedBuildKeys $Value @('path','bytes','sha256')
+    if($Value.path -isnot [string] -or -not [IO.Path]::IsPathFullyQualified($Value.path) -or
+        ($Value.bytes -isnot [int] -and $Value.bytes -isnot [long]) -or $Value.bytes -lt 0 -or
+        $Value.sha256 -isnot [string] -or $Value.sha256 -cnotmatch '^[a-fA-F0-9]{64}$'){throw 'E04A1_GENERATED_INPUT_DESCRIPTOR_TYPE'}
+    [void](Assert-Path $Value.path)
+    if(-not $IdentityOnly){[void](Check-Descriptor $Value)}
+}
+function Resolve-GeneratedBuildReference([string]$Token,[string]$Root) {
+    $token=$Token.Trim()
+    if($token.StartsWith('"',[StringComparison]::Ordinal)){
+        if($token.Length -lt 2 -or -not $token.EndsWith('"',[StringComparison]::Ordinal)){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_REFERENCE'}
+        $token=$token.Substring(1,$token.Length-2)
+    }
+    $decoded=[Text.StringBuilder]::new()
+    for($i=0;$i -lt $token.Length;$i++){
+        $ch=$token[$i]
+        if($ch -eq '$'){
+            $i++;if($i -ge $token.Length -or $token[$i] -cnotin @(' ',':','$')){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_REFERENCE'}
+            $ch=$token[$i]
+        }
+        if([int]$ch -lt 32 -or $ch -eq '"'){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_REFERENCE'}
+        [void]$decoded.Append($ch)
+    }
+    $name=$decoded.ToString();if(-not $name){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_REFERENCE'}
+    $path=if([IO.Path]::IsPathFullyQualified($name)){Assert-Path $name}else{Under (Join-Path $Root $name) $Root}
+    [void](Need-File $path)
+    $prefix=$Root.TrimEnd('\','/')+[IO.Path]::DirectorySeparatorChar
+    if(-not $path.StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase)){
+        $frozen=@($script:Freeze.files|Where-Object {$_.path -is [string] -and [string]::Equals((Assert-Path $_.path),$path,[StringComparison]::OrdinalIgnoreCase)})
+        if($frozen.Count -ne 1){throw 'E04A1_GENERATED_INPUT_EXTERNAL_REFERENCE_NOT_FROZEN'}
+        Assert-GeneratedBuildDescriptor @{path=$frozen[0].path;bytes=$frozen[0].bytes;sha256=$frozen[0].sha256}
+    }
+    return $path
+}
+function Get-GeneratedBuildInputInventory {
+    $root=Build-Root
+    $files=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $rootFiles=@(foreach($name in @('CMakeCache.txt','compile_commands.json','build.ninja')){Need-File (Under (Join-Path $root $name) $root)})
+    foreach($path in $rootFiles){[void]$files.Add($path)}
+    foreach($path in Plain-Files $root){
+        if([IO.Path]::GetExtension($path) -in @('.ninja','.cmake') -or [IO.Path]::GetFileName($path) -in @('CMakeCache.txt','compile_commands.json')){
+            if(-not $files.Add($path) -and $path -inotIn $rootFiles){throw 'E04A1_GENERATED_INPUT_PATH_COLLISION'}
+        }
+    }
+    $references=[Collections.Generic.List[object]]::new()
+    foreach($path in @($files|Sort-Object -CaseSensitive)){
+        if([IO.Path]::GetExtension($path) -ine '.ninja'){continue}
+        if(([IO.FileInfo]::new($path)).Length -gt 64MB){throw 'E04A1_GENERATED_INPUT_SIZE'}
+        $text=$script:Utf8.GetString([IO.File]::ReadAllBytes($path));Safe-Text $text
+        # Only Ninja's escaped newline is joined; unresolved path-variable forms refuse.
+        $logical=[regex]::Replace($text,'\$\r?\n[ \t]*','')
+        $rule='';$properties=@{};$blocks=[Collections.Generic.List[object]]::new()
+        foreach($line in ($logical -split '\r?\n')){
+            if($line -match '^\s*(?:#|$)'){continue}
+            if($line -cmatch '^rule ([A-Za-z0-9_.-]+)$'){
+                if($rule){$blocks.Add(@{name=$rule;properties=$properties})};$rule=$Matches[1];$properties=@{};continue
+            }
+            if($line -cmatch '^\S'){
+                if($rule){$blocks.Add(@{name=$rule;properties=$properties});$rule='';$properties=@{}}
+            }
+            if($rule -and $line -cmatch '^\s+(command|rspfile|rspfile_content)\s*=\s*(.*)$'){
+                if($properties.ContainsKey($Matches[1])){throw 'E04A1_GENERATED_INPUT_RULE_PROPERTY_DUPLICATE'}
+                $properties[$Matches[1]]=$Matches[2]
+            }
+            if($line -cmatch '^(include|subninja)\s+(.+)$'){
+                $kind=$Matches[1];$target=Resolve-GeneratedBuildReference $Matches[2] $root
+                if([IO.Path]::GetExtension($target) -ine '.ninja' -or -not $files.Contains($target)){throw 'E04A1_GENERATED_INPUT_INCLUDE_OUTSIDE_TYPED_CLOSURE'}
+                $references.Add([ordered]@{kind=$kind;owner=$path;target=$target;rule='';expression=$line})
+            }elseif($line -match '^\s*(?:include|subninja)\b'){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_REFERENCE'}
+            if($line -match '^\s*dyndep\s*='){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_DYNDEP'}
+            if($line -cmatch '^\s*(?:command|COMMAND|PRE_LINK|POST_BUILD)\s*=\s*(.*)$'){
+                $command=$Matches[1]
+                foreach($m in [regex]::Matches($command,'(?:^|\s)-P\s+("[^"]+"|[^\s"&|]+)')){
+                    $target=Resolve-GeneratedBuildReference $m.Groups[1].Value $root
+                    if([IO.Path]::GetExtension($target) -ine '.cmake'){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_SCRIPT'}
+                    [void]$files.Add($target);$references.Add([ordered]@{kind='cmake-P';owner=$path;target=$target;rule=$rule;expression=$m.Value})
+                    $scriptText=$script:Utf8.GetString([IO.File]::ReadAllBytes($target));Safe-Text $scriptText
+                    # Positive bounded script grammar: no user-defined commands or hidden
+                    # script-reading primitives. Ambiguous literals may conservatively refuse.
+                    foreach($call in [regex]::Matches($scriptText,'(?i)(?<![A-Za-z0-9_])([A-Za-z_][A-Za-z0-9_]*)\s*\(')){
+                        if($call.Groups[1].Value -inotIn @('cmake_policy','file','set','if','message','endif')){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_CMAKE_SCRIPT_COMMAND'}
+                        if($call.Groups[1].Value -ieq 'file' -and $scriptText.Substring($call.Index+$call.Length) -notmatch '(?i)^\s*(?:GLOB_RECURSE|GLOB|TOUCH_NOCREATE)(?:\s|\))'){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_CMAKE_SCRIPT_REFERENCE'}
+                    }
+                    foreach($call in [regex]::Matches($scriptText,'(?i)\bfile\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)')){
+                        if($call.Groups[1].Value -inotIn @('GLOB','GLOB_RECURSE','TOUCH_NOCREATE')){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_CMAKE_SCRIPT_REFERENCE'}
+                    }
+                    if($scriptText -match '(?i)\b(?:include|execute_process|cmake_language|add_subdirectory|configure_file)\s*\(' -or
+                        $scriptText -match '(?i)\bfile\s*\(\s*(?:READ|STRINGS|MD5|SHA[0-9]+|DOWNLOAD|UPLOAD|COPY|INSTALL|CONFIGURE|GENERATE)\b'){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_CMAKE_SCRIPT_REFERENCE'}
+                }
+                foreach($m in [regex]::Matches($command,'(?i)"[^"]+\.(?:bat|cmd|ps1)"|[^\s"&|]+\.(?:bat|cmd|ps1)')){
+                    $target=Resolve-GeneratedBuildReference $m.Value $root;[void]$files.Add($target)
+                    $references.Add([ordered]@{kind='command-script';owner=$path;target=$target;rule=$rule;expression=$m.Value})
+                    # Never guess transitive semantics of a generated shell/PowerShell script.
+                    throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_COMMAND_SCRIPT'
+                }
+            }
+        }
+        if($rule){$blocks.Add(@{name=$rule;properties=$properties})}
+        foreach($block in $blocks){
+            if(-not $block.properties.ContainsKey('command')){continue}
+            foreach($m in [regex]::Matches($block.properties.command,'@("[^"]+"|[^\s"&|]+)')){
+                $arg=$m.Groups[1].Value.Trim('"')
+                if($arg -cin @('$RSP_FILE','${RSP_FILE}')){
+                    if(-not $block.properties.ContainsKey('rspfile') -or -not $block.properties.ContainsKey('rspfile_content') -or
+                        $block.properties.rspfile -cne $arg -or -not $block.properties.rspfile_content){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_RESPONSE'}
+                    $references.Add([ordered]@{kind='ninja-produced-response';owner=$path;target='';rule=$block.name;expression=($arg+' | '+$block.properties.rspfile_content)})
+                }else{
+                    # Only Ninja-produced response files have a supported grammar here.
+                    # Refuse literal argument files rather than infer recursive tool semantics.
+                    throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_PREEXISTING_RESPONSE'
+                }
+            }
+        }
+        # An @ argument outside the recognized rule-command form must not be ignored.
+        foreach($line in ($logical -split '\r?\n')){if($line -match '^\s*(?:#|$)'){continue};if($line.Contains('@') -and $line -cnotmatch '^\s*command\s*='){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_RESPONSE_CONTEXT'}}
+    }
+    return @{files=@($files|Sort-Object -CaseSensitive);references=@($references)}
+}
+function Copy-GeneratedBuildInput([string]$Source,[string]$Destination) {
+    $before=Descriptor $Source
+    if($before.bytes -gt 64MB){throw 'E04A1_GENERATED_INPUT_SIZE_PRESERVE_ORIGINAL'}
+    [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName((Under $Destination $script:RunRoot)))
+    [IO.File]::Copy((Need-File $Source),$Destination,$false)
+    $copy=Descriptor $Destination;$after=Descriptor $Source
+    if($before.bytes -ne $after.bytes -or $before.sha256 -ine $after.sha256 -or $copy.bytes -ne $before.bytes -or $copy.sha256 -ine $before.sha256){throw 'E04A1_GENERATED_INPUT_CHANGED_DURING_COPY'}
+    return @{live=$before;retainedCopy=$copy}
+}
+function Capture-ConfiguredBuildInputs($CheckedConfigure,$ConfigureProcess) {
+    if($CheckedConfigure -isnot [Collections.IDictionary]){throw 'E04A1_GENERATED_INPUT_CONFIGURE_TYPE'}
+    $rootNames=@{cache='CMakeCache.txt';compileCommands='compile_commands.json';ninja='build.ninja'}
+    foreach($key in $rootNames.Keys){Assert-GeneratedBuildDescriptor $CheckedConfigure[$key];if(-not [string]::Equals((Assert-Path $CheckedConfigure[$key].path),(Under (Join-Path (Build-Root) $rootNames[$key]) (Build-Root)),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_ROOT_PATH'}}
+    Assert-GeneratedBuildDescriptor $ConfigureProcess
+    if(-not [string]::Equals((Assert-Path $ConfigureProcess.path),(Owned 'configure/configure.process.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_PATH'}
+    $store=Owned 'logs/configured-build-inputs';New-Directory $store
+    $records=[Collections.Generic.List[object]]::new()
+    try{
+        # Copy the typed inputs first, so unsupported reference syntax also retains its bytes.
+        $copied=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase);$n=0
+        foreach($path in @(Plain-Files (Build-Root)|Where-Object {[IO.Path]::GetExtension($_) -in @('.ninja','.cmake') -or [IO.Path]::GetFileName($_) -in @('CMakeCache.txt','compile_commands.json')})){
+            $n++;$records.Add((Copy-GeneratedBuildInput $path (Join-Path $store ('files/{0:D6}.input' -f $n))));[void]$copied.Add($path)
+        }
+        $inventory=Get-GeneratedBuildInputInventory
+        foreach($path in $inventory.files){if($copied.Add($path)){$n++;$records.Add((Copy-GeneratedBuildInput $path (Join-Path $store ('files/{0:D6}.input' -f $n))))}}
+        $manifest=@{schemaVersion=1;kind='E04A1_CONFIGURED_BUILD_INPUT_CLOSURE';status='CAPTURED';runId=$RunId;sourceHead=$script:Freeze.sourceHead;freezeManifest=Descriptor $FreezeManifestPath;buildRoot=Build-Root;configureProcess=$ConfigureProcess;configureRoots=@{cache=$CheckedConfigure.cache;compileCommands=$CheckedConfigure.compileCommands;ninja=$CheckedConfigure.ninja};records=@($records);references=$inventory.references;limits='Typed generated input identity, not general Ninja/CMake interpretation, atomic launch or universal TOCTOU protection.'}
+        $path=Join-Path $store 'manifest.json';Write-JsonNew $path $manifest;return Descriptor $path
+    }catch{
+        $primary=$_
+        try{Write-JsonNew (Join-Path $store 'capture-failure.json') @{kind='E04A1_GENERATED_INPUT_CAPTURE_FAILED';runId=$RunId;sourceHead=$script:Freeze.sourceHead;retainedPartialRecords=@($records);primaryFailure=Failure $primary 'generated-input-capture';limits='Partial files preserved; no Configure success or build release.'}}catch{$script:Errors.Add((Failure $_ 'generated-input-capture-evidence'))}
+        throw $primary
+    }
+}
+function Read-ConfiguredBuildInputBaseline {
+    $completion=Read-Json (Owned 'configure/completion.json')
+    foreach($key in @('phase','state','runId','sourceHead','freezeManifestSha256','subset','runtimeCallerProof')){if($completion[$key] -isnot [string]){throw 'E04A1_GENERATED_INPUT_PREDECESSOR_TYPE'}}
+    if(($completion.schemaVersion -isnot [int] -and $completion.schemaVersion -isnot [long]) -or $completion.schemaVersion -ne 1 -or $completion.executionPassed -isnot [bool] -or -not $completion.executionPassed -or
+        $completion.phase -cne 'Configure' -or $completion.state -cne 'COMPLETE' -or $completion.runId -cne $RunId -or $completion.sourceHead -cne $script:Freeze.sourceHead -or
+        $completion.subset -cne $script:Subset -or $completion.runtimeCallerProof -cne $script:RuntimeCallerProof -or $completion.freezeManifestSha256 -ine (Digest $FreezeManifestPath)){throw 'E04A1_GENERATED_INPUT_SAME_RUN_CONFIGURE_REQUIRED'}
+    Assert-GeneratedBuildDescriptor $completion.result
+    if(-not [string]::Equals((Assert-Path $completion.result.path),(Owned 'configure/result.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_PREDECESSOR_PATH'}
+    $result=Read-Json $completion.result.path
+    foreach($key in @('phase','runId','sourceHead','subset','runtimeCallerProof')){if($result[$key] -isnot [string]){throw 'E04A1_GENERATED_INPUT_PREDECESSOR_TYPE'}}
+    if(($result.schemaVersion -isnot [int] -and $result.schemaVersion -isnot [long]) -or $result.schemaVersion -ne 1 -or
+        $result.executionPassed -isnot [bool] -or -not $result.executionPassed -or $result.phase -cne 'Configure' -or $result.runId -cne $RunId -or
+        $result.sourceHead -cne $script:Freeze.sourceHead -or $result.subset -cne $script:Subset -or $result.runtimeCallerProof -cne $script:RuntimeCallerProof -or $result.configure -isnot [Collections.IDictionary]){throw 'E04A1_GENERATED_INPUT_SAME_RUN_CONFIGURE_REQUIRED'}
+    $descriptor=$result.configure.generatedBuildInputs;Assert-GeneratedBuildDescriptor $descriptor
+    if(-not [string]::Equals((Assert-Path $descriptor.path),(Owned 'logs/configured-build-inputs/manifest.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_BASELINE_PATH'}
+    $manifest=Read-Json $descriptor.path
+    Require-GeneratedBuildKeys $manifest @('schemaVersion','kind','status','runId','sourceHead','freezeManifest','buildRoot','configureProcess','configureRoots','records','references','limits')
+    foreach($key in @('kind','status','runId','sourceHead','buildRoot','limits')){if($manifest[$key] -isnot [string]){throw 'E04A1_GENERATED_INPUT_MANIFEST_TYPE'}}
+    if(($manifest.schemaVersion -isnot [int] -and $manifest.schemaVersion -isnot [long]) -or $manifest.schemaVersion -ne 1 -or $manifest.kind -cne 'E04A1_CONFIGURED_BUILD_INPUT_CLOSURE' -or $manifest.status -cne 'CAPTURED' -or
+        $manifest.runId -cne $RunId -or $manifest.sourceHead -cne $script:Freeze.sourceHead -or -not [string]::Equals((Assert-Path $manifest.buildRoot),(Build-Root),[StringComparison]::OrdinalIgnoreCase) -or
+        $manifest.records -isnot [Collections.IList] -or -not $manifest.records.Count -or $manifest.references -isnot [Collections.IList]){throw 'E04A1_GENERATED_INPUT_MANIFEST_TYPE'}
+    Assert-GeneratedBuildDescriptor $manifest.freezeManifest
+    if(-not [string]::Equals((Assert-Path $manifest.freezeManifest.path),(Assert-Path $FreezeManifestPath),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_FREEZE_PATH'}
+    Assert-GeneratedBuildDescriptor $manifest.configureProcess
+    if(-not [string]::Equals((Assert-Path $manifest.configureProcess.path),(Owned 'configure/configure.process.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_PATH'}
+    if($result.processes -isnot [Collections.IList] -or $result.processes.Count -ne 1 -or $result.processes[0] -isnot [Collections.IDictionary]){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_BINDING'}
+    Assert-GeneratedBuildDescriptor $result.processes[0].receiptArtifact
+    if(($result.processes[0].receiptArtifact|ConvertTo-Json -Compress) -cne ($manifest.configureProcess|ConvertTo-Json -Compress)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_BINDING'}
+    Require-GeneratedBuildKeys $manifest.configureRoots @('cache','compileCommands','ninja')
+    foreach($reference in $manifest.references){
+        Require-GeneratedBuildKeys $reference @('kind','owner','target','rule','expression')
+        foreach($key in @('kind','owner','target','rule','expression')){if($reference[$key] -isnot [string]){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}}
+        if($reference.kind -cnotin @('include','subninja','cmake-P','ninja-produced-response')){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}
+        if(-not $reference.owner -or ($reference.kind -cne 'ninja-produced-response' -and -not $reference.target)){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}
+    }
+    foreach($key in @('cache','compileCommands','ninja')){
+        Assert-GeneratedBuildDescriptor $manifest.configureRoots[$key] -IdentityOnly;Assert-GeneratedBuildDescriptor $result.configure[$key] -IdentityOnly
+        if(($manifest.configureRoots[$key]|ConvertTo-Json -Compress) -cne ($result.configure[$key]|ConvertTo-Json -Compress)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_ROOT_BINDING'}
+    }
+    return @{descriptor=$descriptor;manifest=$manifest;configureResult=$completion.result}
+}
+function Confirm-ConfiguredBuildInputs([switch]$AfterBuild) {
+    $label=if($AfterBuild){'postbuild'}else{'prelaunch'}
+    $store=Owned ('logs/configured-build-input-'+$label);New-Directory $store
+    $observed=[Collections.Generic.List[object]]::new();$baseline=$null;$missing=@();$unexpected=@();$drift=@()
+    try{
+        $baseline=Read-ConfiguredBuildInputBaseline
+        $expected=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::OrdinalIgnoreCase)
+        foreach($record in $baseline.manifest.records){
+            Require-GeneratedBuildKeys $record @('live','retainedCopy');Assert-GeneratedBuildDescriptor $record.live -IdentityOnly;Assert-GeneratedBuildDescriptor $record.retainedCopy -IdentityOnly
+            [void](Under $record.retainedCopy.path (Owned 'logs/configured-build-inputs/files'))
+            if(-not $expected.TryAdd((Assert-Path $record.live.path),$record)){throw 'E04A1_GENERATED_INPUT_BASELINE_DUPLICATE'}
+            # Preserve a corrupt retained copy before refusing it.
+            $copyActual=Descriptor $record.retainedCopy.path
+            if($copyActual.bytes -ne $record.live.bytes -or $copyActual.sha256 -ine $record.live.sha256 -or
+                $copyActual.bytes -ne $record.retainedCopy.bytes -or $copyActual.sha256 -ine $record.retainedCopy.sha256){
+                $drift+=@{kind='retained-copy';expected=$record.retainedCopy;actual=$copyActual}
+                [void](Copy-GeneratedBuildInput $record.retainedCopy.path (Join-Path $store ('corrupt-copy-{0:D6}.input' -f $expected.Count)))
+                throw 'E04A1_GENERATED_INPUT_RETAINED_COPY_DRIFT'
+            }
+        }
+        # Preserve typed current files even if later reference recognition refuses.
+        $typed=@(Plain-Files (Build-Root)|Where-Object {[IO.Path]::GetExtension($_) -in @('.ninja','.cmake') -or [IO.Path]::GetFileName($_) -in @('CMakeCache.txt','compile_commands.json')})
+        $n=0;foreach($path in $typed){$n++;$observed.Add((Copy-GeneratedBuildInput $path (Join-Path $store ('files/{0:D6}.input' -f $n))))}
+        foreach($path in $expected.Keys){if(-not [IO.File]::Exists($path)){$missing+=$path}}
+        if($missing.Count){throw 'E04A1_GENERATED_INPUT_LIVE_MEMBER_MISSING'}
+        $inventory=Get-GeneratedBuildInputInventory
+        # Retain discovered argument/script inputs before membership/byte refusal too.
+        foreach($path in $inventory.files){if($path -inotIn $typed){$n++;$observed.Add((Copy-GeneratedBuildInput $path (Join-Path $store ('files/{0:D6}.input' -f $n))))}}
+        $unexpected=@($inventory.files|Where-Object {-not $expected.ContainsKey($_)})
+        if($inventory.files.Count -ne $expected.Count){throw 'E04A1_GENERATED_INPUT_LIVE_MEMBERSHIP_DRIFT'}
+        foreach($path in $inventory.files){
+            if(-not $expected.ContainsKey($path)){throw 'E04A1_GENERATED_INPUT_LIVE_MEMBERSHIP_DRIFT'}
+            $actual=Descriptor $path;$record=$expected[$path]
+            if($actual.bytes -ne $record.live.bytes -or $actual.sha256 -ine $record.live.sha256){$drift+=@{kind='live-input';expected=$record.live;actual=$actual};throw 'E04A1_GENERATED_INPUT_LIVE_BYTE_DRIFT'}
+        }
+        if(($inventory.references|ConvertTo-Json -Depth 10 -Compress) -cne ($baseline.manifest.references|ConvertTo-Json -Depth 10 -Compress)){throw 'E04A1_GENERATED_INPUT_REFERENCE_DRIFT'}
+        foreach($key in @('cache','compileCommands','ninja')){Assert-GeneratedBuildDescriptor $baseline.manifest.configureRoots[$key]}
+        $receipt=Join-Path $store 'observed.json'
+        Write-JsonNew $receipt @{kind='E04A1_GENERATED_INPUT_CONFIRMED';runId=$RunId;sourceHead=$script:Freeze.sourceHead;stage=$label;baseline=$baseline.descriptor;configureResult=$baseline.configureResult;observed=@($observed);references=$inventory.references;limits='Immediate synchronous before/after identity observations, not atomic launch or universal TOCTOU/lineage proof.'}
+        return Descriptor $receipt
+    }catch{
+        $primary=$_
+        try{Write-JsonNew (Join-Path $store 'failure.json') @{kind='E04A1_GENERATED_INPUT_CONFIRM_FAILED';runId=$RunId;sourceHead=$script:Freeze.sourceHead;stage=$label;baseline=$(if($null -ne $baseline){$baseline.descriptor}else{$null});missing=$missing;unexpected=$unexpected;drift=$drift;observedPartial=@($observed);primaryFailure=Failure $primary 'generated-input-confirm';limits='No prelaunch release; preserve missing/extra/drift evidence and all partial copies without rebaselining.'}}catch{$script:Errors.Add((Failure $_ 'generated-input-confirm-evidence'))}
+        throw $primary
+    }
+}
+function Retain-GeneratedBuildInputPartials {
+    $store=Owned ('logs/configured-build-input-partials-'+$Phase.ToLowerInvariant());New-Directory $store
+    $records=[Collections.Generic.List[object]]::new();$errors=[Collections.Generic.List[object]]::new();$root=Build-Root;$n=0
+    if([IO.Directory]::Exists($root)){
+        foreach($path in @(Plain-Files $root|Where-Object {[IO.Path]::GetExtension($_) -in @('.ninja','.cmake','.rsp') -or [IO.Path]::GetFileName($_) -in @('CMakeCache.txt','compile_commands.json')})){
+            $n++;$entry=@{live=$null;retainedCopy=$null;failure=$null}
+            try{$entry.live=Descriptor $path;$copy=Copy-GeneratedBuildInput $path (Join-Path $store ('files/{0:D6}.input' -f $n));$entry.retainedCopy=$copy.retainedCopy}
+            catch{$entry.failure=Failure $_ 'generated-input-partial-copy';$errors.Add($entry.failure)}
+            $records.Add($entry)
+        }
+    }
+    $path=Join-Path $store 'retention.json';Write-JsonNew $path @{kind='E04A1_GENERATED_INPUT_FAILED_PHASE_PARTIALS';phase=$Phase;runId=$RunId;sourceHead=$script:Freeze.sourceHead;buildRoot=$root;buildRootPresent=[IO.Directory]::Exists($root);records=@($records);copyErrors=@($errors);limits='Failed-phase partial evidence only. Oversize/unreadable originals remain untouched at recorded live paths; no successful Configure/build or complete closure is inferred.'}
+    return Descriptor $path
+}
+function Generated-BuildInputControls {
+    $parent=Owned 'logs/generated-build-input-controls';New-Directory $parent
+    $originalRunRoot=$script:RunRoot;$originalRootCount=$script:RootCount;$cases=[Collections.Generic.List[object]]::new()
+    try{
+        foreach($case in @('unchanged','changed-rules','missing-rule','extra-input','changed-globs','corrupt-copy','preexisting-response')){
+            $root=Under (Join-Path $parent $case) $originalRunRoot;[void][IO.Directory]::CreateDirectory($root);$script:RunRoot=$root
+            $build=Build-Root;[void][IO.Directory]::CreateDirectory((Join-Path $build 'CMakeFiles'));[void][IO.Directory]::CreateDirectory((Owned 'configure'))
+            [IO.File]::WriteAllText((Join-Path $build 'CMakeCache.txt'),'SYNTHETIC_CONFIGURE_DATA_ONLY',$script:Utf8)
+            [IO.File]::WriteAllText((Join-Path $build 'compile_commands.json'),'[]',$script:Utf8)
+            $nested=Under (Join-Path $build 'CMakeFiles/nested-config') $build;[void][IO.Directory]::CreateDirectory($nested)
+            [IO.File]::WriteAllText((Join-Path $nested 'CMakeCache.txt'),'SYNTHETIC_NESTED_CONFIGURE_DATA_ONLY',$script:Utf8)
+            [IO.File]::WriteAllText((Join-Path $nested 'compile_commands.json'),'[]',$script:Utf8)
+            [IO.File]::WriteAllText((Join-Path $build 'build.ninja'),"include CMakeFiles/rules.ninja`n",$script:Utf8)
+            $rules=Join-Path $build 'CMakeFiles/rules.ninja';[IO.File]::WriteAllText($rules,"rule compile`n  command = SYNTHETIC_FROZEN_COMPILER`n",$script:Utf8)
+            $glob=Join-Path $build 'CMakeFiles/VerifyGlobs.cmake';[IO.File]::WriteAllText($glob,"# SYNTHETIC_GLOB_CHECK_NOT_EXECUTED`n",$script:Utf8)
+            $process=Owned 'configure/configure.process.json';Write-JsonNew $process @{kind='SYNTHETIC_NO_PROCESS'}
+            $checked=@{cache=Descriptor (Join-Path $build 'CMakeCache.txt');compileCommands=Descriptor (Join-Path $build 'compile_commands.json');ninja=Descriptor (Join-Path $build 'build.ninja')}
+            $closure=Capture-ConfiguredBuildInputs $checked (Descriptor $process);$checked.generatedBuildInputs=$closure
+            $resultPath=Owned 'configure/result.json';Write-JsonNew $resultPath @{schemaVersion=1;phase='Configure';runId=$RunId;sourceHead=$script:Freeze.sourceHead;subset=$script:Subset;runtimeCallerProof=$script:RuntimeCallerProof;executionPassed=$true;configure=$checked;processes=@(@{receiptArtifact=Descriptor $process})}
+            Write-JsonNew (Owned 'configure/completion.json') @{schemaVersion=1;phase='Configure';state='COMPLETE';runId=$RunId;sourceHead=$script:Freeze.sourceHead;subset=$script:Subset;runtimeCallerProof=$script:RuntimeCallerProof;executionPassed=$true;freezeManifestSha256=Digest $FreezeManifestPath;result=Descriptor $resultPath}
+            switch -CaseSensitive ($case){
+                'changed-rules'{[IO.File]::WriteAllText($rules,"rule compile`n  command = SYNTHETIC_CHANGED_COMPILER`n",$script:Utf8)}
+                'missing-rule'{[IO.File]::Delete((Under $rules $build))}
+                'extra-input'{[IO.File]::WriteAllText((Under (Join-Path $build 'extra.ninja') $build),"# EXTRA MATERIAL INPUT`n",$script:Utf8)}
+                'changed-globs'{[IO.File]::WriteAllText($glob,"# CHANGED_GLOB_CHECK_NOT_EXECUTED`n",$script:Utf8)}
+                'corrupt-copy'{$manifest=Read-Json $closure.path;$copy=Under $manifest.records[0].retainedCopy.path (Owned 'logs/configured-build-inputs/files');[IO.File]::WriteAllText($copy,'CORRUPT_RETAINED_COPY',$script:Utf8)}
+            }
+            if($case -ceq 'preexisting-response'){
+                [IO.File]::WriteAllText((Under (Join-Path $build 'parent.rsp') $build),"@nested.rsp`n",$script:Utf8)
+                [IO.File]::WriteAllText((Under (Join-Path $build 'nested.rsp') $build),"SYNTHETIC_ARGUMENT_BYTES_NOT_EXECUTED`n",$script:Utf8)
+                [IO.File]::WriteAllText($rules,"rule compile`n  command = SYNTHETIC_FROZEN_COMPILER @parent.rsp`n",$script:Utf8)
+            }
+            $sentinel=0;$caught=$null;$receipt=$null
+            try{$receipt=Confirm-ConfiguredBuildInputs;$sentinel++}catch{$caught=$_.Exception.Message}
+            $baselineStable=$true;$copiesStable=$true;$rootsStable=$true
+            try{[void](Check-Descriptor $closure);$manifest=Read-Json $closure.path;foreach($record in $manifest.records){[void](Check-Descriptor $record.retainedCopy)}}catch{$copiesStable=$false;try{[void](Check-Descriptor $closure)}catch{$baselineStable=$false}}
+            try{foreach($key in @('cache','compileCommands','ninja')){[void](Check-Descriptor $checked[$key])}}catch{$rootsStable=$false}
+            $expected=if($case -ceq 'unchanged'){$null}elseif($case -ceq 'corrupt-copy'){'E04A1_GENERATED_INPUT_RETAINED_COPY_DRIFT'}elseif($case -ceq 'preexisting-response'){'E04A1_GENERATED_INPUT_UNSUPPORTED_PREEXISTING_RESPONSE'}elseif($case -ceq 'missing-rule'){'E04A1_GENERATED_INPUT_LIVE_MEMBER_MISSING'}elseif($case -ceq 'extra-input'){'E04A1_GENERATED_INPUT_LIVE_MEMBERSHIP_DRIFT'}else{'E04A1_GENERATED_INPUT_LIVE_BYTE_DRIFT'}
+            $matched=if($case -ceq 'unchanged'){$sentinel -eq 1 -and $null -eq $caught}else{$sentinel -eq 0 -and $null -ne $caught -and ($null -eq $expected -or $caught -ceq $expected) -and [IO.File]::Exists((Owned 'logs/configured-build-input-prelaunch/failure.json'))}
+            $matched=$matched -and $baselineStable -and $rootsStable -and ($copiesStable -eq ($case -cne 'corrupt-copy'))
+            $cases.Add(@{name=$case;matched=$matched;wouldConsumeSentinel=$sentinel;diagnostic=$caught;expectedDiagnostic=$expected;baselineManifestUnchanged=$baselineStable;retainedCopiesUnchanged=$copiesStable;originalThreeRootsUnchanged=$rootsStable;receipt=$receipt;root=$root;meaning='Real capture/confirm helpers over owned inert bytes; no process or copied guard.'})
+        }
+    }finally{$script:RunRoot=$originalRunRoot}
+    if($script:RootCount -ne $originalRootCount){throw 'E04A1_GENERATED_INPUT_CONTROL_LAUNCHED_PROCESS'}
+    $report=Owned 'logs/generated-build-input-controls/report.json';Write-JsonNew $report @{kind='PURE_GENERATED_INPUT_PREPARATION_CONTROLS_NOT_NATIVE';caseCount=$cases.Count;matchedCount=@($cases|Where-Object matched).Count;cases=@($cases);externalRoots=0;limits='No CMake/Ninja/compiler/native process; sentinel tests real guard refusal, not OS atomicity or complete generated-format acceptance.'}
+    if(@($cases|Where-Object {-not $_.matched}).Count){throw 'E04A1_GENERATED_INPUT_CONTROL_FAILED'}
+    return @{report=Descriptor $report;caseCount=$cases.Count;externalRoots=0}
+}
+
 function Publish-VendorArtifact($Process) {
     $root=Build-Root;$lib=Need-File (Join-Path $root 'yaml-cpp.lib');$libDescriptor=Descriptor $lib
     if($libDescriptor.bytes -le 8 -or $libDescriptor.bytes -gt 64MB){throw 'E04A1_VENDOR_STATIC_LIBRARY_SIZE'}
@@ -1435,7 +1876,7 @@ function Publish-VendorArtifact($Process) {
     $tools=@{compiler=Descriptor $script:Freeze.toolPaths.compiler;linker=Descriptor $script:Freeze.toolPaths.linker;librarian=Descriptor $script:Freeze.toolPaths.librarian;resourceCompiler=Descriptor $script:Freeze.toolPaths.sdkRc}
     $identity=@{schemaVersion=1;subset=$script:Subset;runtimeCallerProof=$script:RuntimeCallerProof;runId=$RunId;sourceHead=$script:Freeze.sourceHead;sourceRoot=$script:Repo;stagedProject=(Join-Path $script:Stage 'WarhammerClient.uproject');vendorPin=$script:Dependency.pin;sourceTreeOid=$tree[0].treeOid}
     $b=@{};foreach($e in $identity.GetEnumerator()){$b[$e.Key]=$e.Value};$b.kind='E04A1_VENDOR_CMAKE_BUILD_RECEIPT';$b.status='COMPLETED_SUCCESS';$b.vendorSourceRoot=$script:VendorRoot;$b.acquisitionResultSha256=$script:AcquisitionDescriptor.sha256;$b.configuration='Release';$b.platform='Win64';$b.architecture='x64';$b.cppStandard='C++20';$b.runtime='MD';$b.linkage='static';$b.exceptionsEnabled=$true;$b.installTargetInvoked=$false;$b.library=$libDescriptor;$b.compiler=$tools.compiler;$b.process=$Process.receiptArtifact;$b.actualGeneratedCommands=$cmake;$b.qualification='Producer receipt bound to supervised build and generated commands, not independent artifact lineage approval.'
-    $b.sourceLicense=$sourceLicense;Write-JsonNew (Owned 'logs/vendor-cmake-build.json') $b
+    $b.configuredBuildInputPrelaunch=$script:Result.configuredBuildInputPrelaunch;$b.configuredBuildInputPostbuild=$script:Result.configuredBuildInputPostbuild;$b.sourceLicense=$sourceLicense;Write-JsonNew (Owned 'logs/vendor-cmake-build.json') $b
     $artifact=Artifact-Root;New-Directory $artifact;[void][IO.Directory]::CreateDirectory((Join-Path $artifact 'include'));[void][IO.Directory]::CreateDirectory((Join-Path $artifact 'lib'))
     $licensePath=Under (Join-Path $artifact 'LICENSE.yaml-cpp') $artifact
     [IO.File]::Copy($sourceLicense.path,$licensePath,$false);$license=Descriptor $licensePath
@@ -1988,7 +2429,7 @@ function Check-Discovery {
     return @{engineEligibleCount=$listed.Count;selectedCount=8;selectedNames=$selected;log=Descriptor (Owned 'logs/native-discovery.log')}
 }
 function Expected-Attempts {
-    $m=[ordered]@{'Abi.LoadAndBoundary'=@('A1-K04');'Abi.TypedRefusal'=@('A1-F01','A1-K04');'Abi.ValueLifetime'=@('A1-K03');'Parser.CanonicalSyntax'=@(1..10|ForEach-Object {'A1-C{0:D2}' -f $_});'Parser.OrderedCaseValues'=@(1..4|ForEach-Object {'A1-K{0:D2}' -f $_});'Parser.LexicalFailures'=@(1..9|ForEach-Object {'A1-F{0:D2}' -f $_});'Parser.ResourceBounds'=@(foreach($kind in @('file','depth','nodes','aliases','scalar')){foreach($level in @('below','at','above')){"A1-L.$kind.$level"}});'Integration.RepeatIsolation'=@('A1-K03','A1-F02','A1-K03')};return $m
+    $m=[ordered]@{'Abi.LoadAndBoundary'=@('A1-K04');'Abi.TypedRefusal'=@('A1-F01','A1-K04');'Abi.ValueLifetime'=@('A1-K03');'Parser.CanonicalSyntax'=@(1..10|ForEach-Object {'A1-C{0:D2}' -f $_});'Parser.OrderedCaseValues'=@(1..5|ForEach-Object {'A1-K{0:D2}' -f $_});'Parser.LexicalFailures'=@(1..10|ForEach-Object {'A1-F{0:D2}' -f $_});'Parser.ResourceBounds'=@(foreach($kind in @('file','depth','nodes','aliases','scalar')){foreach($level in @('below','at','above')){"A1-L.$kind.$level"}});'Integration.RepeatIsolation'=@('A1-K03','A1-F02','A1-K03')};return $m
 }
 function Check-Native {
     $reportPath=Owned 'reports/native/index.json';$report=Read-Json $reportPath;$tests=@($report.tests)
@@ -1997,7 +2438,7 @@ function Check-Native {
     foreach($field in @('failed','notRun','inProcess')){if($report[$field] -ne 0){throw 'E04A1_UE_REPORT_INCOMPLETE'}}
     $warnings=if($report.Contains('succeededWithWarnings')){[int]$report.succeededWithWarnings}else{0};if([int]$report.succeeded+$warnings -ne 8){throw 'E04A1_UE_SUCCESS_TOTAL_MISMATCH'}
     $definitions=Read-Json (Owned 'fixtures/input-definitions.json');$byId=@{};foreach($d in $definitions.inputs){if($byId.ContainsKey($d.id)){throw 'E04A1_DEFINITION_DUPLICATE'};$byId[$d.id]=$d}
-    if($byId.Count -ne 38){throw 'E04A1_DEFINITION_UNION_MISMATCH'}
+    if($byId.Count -ne 40){throw 'E04A1_DEFINITION_UNION_MISMATCH'}
     $expected=Expected-Attempts;$union=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal);$artifacts=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase);$observed=[Collections.Generic.List[object]]::new();$totalChecks=0L;$totalAttempts=0
     foreach($suffix in $script:SuiteSlugs.Keys){$slug=$script:SuiteSlugs[$suffix];$ledgerPath=Owned "artifacts/native/$slug/input-ledger.json";$ledger=Read-Json $ledgerPath
         if($ledger.schemaVersion -ne 1 -or $ledger.subset -cne $script:Subset -or $ledger.runtimeCallerProof -cne $script:RuntimeCallerProof -or $ledger.callerExceptionsEnabled -isnot [bool] -or $ledger.callerExceptionsEnabled -ne $true -or $ledger.platformExceptionsDisabled -ne 0 -or ($ledger.platformExceptionsDisabled -isnot [int] -and $ledger.platformExceptionsDisabled -isnot [long])){throw 'E04A1E_ACTUAL_LEDGER_SUBSET_OR_EDITOR_CALLER_MODE_MISMATCH'}
@@ -2013,7 +2454,7 @@ function Check-Native {
         if($rowChecks -gt [long]$ledger.checkCount){throw 'E04A1_ROW_CHECK_TOTAL_EXCEEDS_ACTUAL_SUITE_CHECKS'}
         $totalChecks+=[long]$ledger.checkCount;$totalAttempts+=@($ledger.inputs).Count;$observed.Add(@{suite=$ledger.suiteName;subset=$ledger.subset;runtimeCallerProof=$ledger.runtimeCallerProof;callerExceptionsEnabled=$ledger.callerExceptionsEnabled;platformExceptionsDisabled=$ledger.platformExceptionsDisabled;ledger=Descriptor $ledgerPath;actualCustomCheckCount=$ledger.checkCount;rowChecks=$rowChecks;inputs=@($rows)})
     }
-    $files=@(Plain-Files (Owned 'artifacts/native'));if($files.Count -ne $artifacts.Count -or @($files|Where-Object {-not $artifacts.Contains($_)}).Count -or $union.Count -ne 38 -or $totalAttempts -ne 45){throw 'E04A1_EXACT_ARTIFACT_MEMBERSHIP_OR_38_ID_UNION_MISMATCH'}
+    $files=@(Plain-Files (Owned 'artifacts/native'));if($files.Count -ne $artifacts.Count -or @($files|Where-Object {-not $artifacts.Contains($_)}).Count -or $union.Count -ne 40 -or $totalAttempts -ne 47){throw 'E04A1_EXACT_ARTIFACT_MEMBERSHIP_OR_40_ID_UNION_MISMATCH'}
     [void](Need-File (Owned 'reports/native/index.html'))
     return @{subset=$script:Subset;runtimeCallerProof=$script:RuntimeCallerProof;fullA1Acceptance='NOT_ESTABLISHED_REQUIRES_A1G_AND_OTHER_OPEN_GATES';automationReport=Descriptor $reportPath;html=Descriptor (Owned 'reports/native/index.html');suiteCount=8;attemptCount=$totalAttempts;distinctInputCount=$union.Count;actualCustomCheckTotal=$totalChecks;ueAssertionTotal='NOT_ESTABLISHED_BY_EXPORT_DO_NOT_EQUATE_WITH_CUSTOM_CHECK_COUNT';actualCustomCountQualification='Evaluated native P.Check calls before ledger publication, not a prefilled assertion total.';suites=@($observed);linux='NOT_RUN_UNTESTED'}
 }
@@ -2064,15 +2505,15 @@ try {
     Check-StagedPluginClosure -RequireTargetReceipt:($Phase -in @('Discovery','Native','Audit'))
     if($Phase -notin @('Preflight','Audit')){Enable-NativeHelper}
     switch($Phase){
-        'Preflight'{$script:Result.status='PREFLIGHT_PASS_NO_NATIVE_ROOT';$script:Result.generatedInputCount=38}
-        'SupervisorControls'{$script:Result.controls=Supervisor-Controls;$script:Result.status='SUPERVISOR_CONTROLS_PASS_6_SEPARATE_FROM_NATIVE'}
-        'Configure'{$build=Build-Root;New-Directory $build;$p=Invoke-Root 'configure' $script:Freeze.toolPaths.cmake (@('-S',(CMake-Path $script:VendorRoot),'-B',(CMake-Path $build))+(CMake-Options)) 600;Require-RootPass $p;$script:Result.configure=Check-CMake;$script:Result.status='CONFIGURE_PASS_NO_INSTALL'}
-        'DependencyBuild'{$p=Invoke-Root 'dependency-build' $script:Freeze.toolPaths.cmake @('--build',(CMake-Path (Build-Root)),'--target','yaml-cpp','--parallel','2','--verbose') 1200;Require-RootPass $p;$script:Result.vendorArtifact=Publish-VendorArtifact $p;$script:Result.status='DEPENDENCY_BUILD_AND_EXPLICIT_COPY_PASS'}
+        'Preflight'{$script:Result.status='PREFLIGHT_PASS_NO_NATIVE_ROOT';$script:Result.generatedInputCount=40}
+        'SupervisorControls'{$script:Result.controls=Supervisor-Controls;$script:Result.generatedBuildInputControls=Generated-BuildInputControls;$script:Result.objSrcMapTargetRefusal=ObjSrcMap-TargetRefusalControl;$script:Result.status='SUPERVISOR_CONTROLS_PASS_6_AND_OBJ_SRC_MAP_TARGET_REFUSAL_PASS'}
+        'Configure'{$build=Build-Root;New-Directory $build;$p=Invoke-Root 'configure' $script:Freeze.toolPaths.cmake (@('-S',(CMake-Path $script:VendorRoot),'-B',(CMake-Path $build))+(CMake-Options)) 600;Require-RootPass $p;$script:Result.configure=Check-CMake;$script:Result.configure.generatedBuildInputs=Capture-ConfiguredBuildInputs $script:Result.configure $p.receiptArtifact;$script:Result.status='CONFIGURE_PASS_NO_INSTALL'}
+        'DependencyBuild'{$p=Invoke-Root 'dependency-build' $script:Freeze.toolPaths.cmake @('--build',(CMake-Path (Build-Root)),'--target','yaml-cpp','--parallel','2','--verbose') 1200;Require-RootPass $p;$script:Result.configuredBuildInputPostbuild=Confirm-ConfiguredBuildInputs -AfterBuild;$script:Result.vendorArtifact=Publish-VendorArtifact $p;$script:Result.status='DEPENDENCY_BUILD_AND_EXPLICIT_COPY_PASS'}
         'EditorBuild'{$script:Result.editorBuild=Editor-Build;$script:Result.status='EDITOR_BUILD_PASS_SELECTED_NATIVE_FLAGS_OBSERVED'}
         {$_ -in @('Discovery','Native')}{$label=$Phase.ToLowerInvariant();$p=Invoke-Root $label $script:Freeze.toolPaths.editorCmd @(Native-Arguments) 600;Require-RootPass $p;$script:Result.nativeLog=Inspect-NativeLog;if($Phase -ceq 'Discovery'){$script:Result.discovery=Check-Discovery;Write-JsonNew (Owned 'reports/discovery/selected-names.json') $script:Result.discovery;$script:Result.status='DISCOVERY_PASS_EXACT_8'}else{$script:Result.native=Check-Native;Write-JsonNew (Owned 'reports/native/validated-input-ledgers.json') $script:Result.native;$script:Result.status='NATIVE_A1E_EDITOR_SUBSET_EXECUTION_PASS_NO_A1G_NO_FULL_A1_ACCEPTANCE'}}
         'Audit'{$script:Result.native=Check-Native;$script:Result.editorFlags=Check-EditorFlags;$script:Result.configure=Check-CMake;$script:Result.status='EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT';$script:Result.authorityState='RUNTIME_CLOSED_REQUIRE_ROOT_RECORD_NO_RETRY_OR_MERGE'}
     }
-    $expectedRoots=if($Phase -ceq 'SupervisorControls'){5}elseif($Phase -in @('Configure','DependencyBuild','EditorBuild','Discovery','Native')){1}else{0};if($script:RootCount -ne $expectedRoots){throw 'E04A1_EXACT_PHASE_ROOT_COUNT_MISMATCH'}
+    $expectedRoots=if($Phase -ceq 'SupervisorControls'){6}elseif($Phase -in @('Configure','DependencyBuild','EditorBuild','Discovery','Native')){1}else{0};if($script:RootCount -ne $expectedRoots){throw 'E04A1_EXACT_PHASE_ROOT_COUNT_MISMATCH'}
     [void](Phase-Budget);$script:Result.executionPassed=$true
 }catch{$primary=Failure $_ $Phase;if($null -ne $script:Result){$script:Result.primaryFailure=$primary;$script:Result.executionPassed=$false;$script:Result.status='FAIL_PRESERVE_PARTIALS_NO_RETRY'}}
 finally{
@@ -2088,6 +2529,10 @@ finally{
             if($Phase -cin @('Discovery','Native','Audit')){$editor=Read-Json (Owned 'editorbuild/result.json');$script:Result.rulesPreservationAfter=Check-RulesPreservation $editor.editorBuild}
             Check-Dependency;$script:Result.retainedArtifacts=@(Output-Inventory);[void](Phase-Budget)
         }catch{$script:Errors.Add((Failure $_ 'post-phase-preservation'));$script:Result.executionPassed=$false;$script:Result.status='FAIL_PRESERVATION_OR_OUTPUT_VALIDATION'}
+        if($Phase -cin @('Configure','DependencyBuild') -and -not $script:Result.executionPassed){
+            try{$script:Result.generatedBuildInputFailureEvidence=Retain-GeneratedBuildInputPartials;$script:Result.retainedArtifacts=@(Output-Inventory)}
+            catch{$script:Errors.Add((Failure $_ 'generated-input-failed-phase-retention'));$script:Result.executionPassed=$false}
+        }
         try{
             $script:Result.completedUtc=[DateTime]::UtcNow.ToString('o');$script:Result.elapsedSeconds=$script:Clock.Elapsed.TotalSeconds;$script:Result.secondaryErrors=@($script:Errors)
             $resultPath=Join-Path $script:PhaseRoot 'result.json';Write-JsonNew $resultPath $script:Result

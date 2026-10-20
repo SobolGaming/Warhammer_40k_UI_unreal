@@ -22,10 +22,10 @@ FParseResult ParseDocument(TConstArrayView<uint8> Input, EFormat Format) noexcep
     { Fail(EParseCode::InputTooLarge, Result.InputByteCount, FLimits::MaxInputBytes); return Result; }
     if (Input.IsEmpty())
     { Fail(EParseCode::NoDocument); return Result; }
-    // Raw YAML NUL/EOT are not escaped decoded scalar bytes. Refuse before
+    // Raw forbidden C0 bytes are not escaped decoded scalar bytes. Refuse before
     // vendor UTF16/32 sniffing or its raw 0x04 EOF sentinel can reinterpret them.
     for (uint8 Byte : Input)
-    { if (Byte == 0 || Byte == 0x04) { Fail(EParseCode::MalformedYaml); return Result; } }
+    { if (Byte < 0x20 && Byte != 0x09 && Byte != 0x0A && Byte != 0x0D) { Fail(EParseCode::MalformedYaml); return Result; } }
     if (!Private::IsWellFormedUtf8(Input))
     { Fail(EParseCode::MalformedYaml); return Result; }
     try

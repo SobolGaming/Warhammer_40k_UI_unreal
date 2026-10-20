@@ -78,7 +78,28 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 72 (2026-10-20 UTC) is
+Current A1E status at plan revision 73 (2026-10-20 UTC) is
+**VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. The
+[value/build repair checkpoint](docs/plans/research/2026-10-20-e04a-value-build-repair-checkpoint.md)
+and [exact descriptors](docs/plans/evidence/2026-10-20-e04a-value-build-repairs.json)
+record applied raw-C0/native-fixture, generated-build-input preservation and early
+ObjSrcMapFile refusal repairs after closure checkpoint `b553631`; successor commit/
+run bindings are pending. Seven real-helper offline controls passed in 5.9663258
+seconds with zero external/native roots. Ordinary source checks and these controls
+are not SOURCE approval. The packet plans 40 inputs/30 generated recipes/47
+attempts/eight suites, preserving the original 38. The future ObjSrcMap control
+adds one 60-second root: original supervisor six cases/five roots remain, total six.
+That UBT control and all eight native phases are NOT_RUN.
+
+Checkpoint/refreeze changed inputs and derive fresh exact bindings and affected
+SOURCE coverage under unchanged v7.3, including both complete finite witnesses;
+no old PASS/GO transfers. Basic finite A1E C0 handling does not close plain-DEL/
+context-sensitive lexical fidelity or A2/production conformance, and waives no
+applicable A1 criterion. Zero admissions, no native RunRoot, visible count zero;
+final CODE/different REQ after execution/evidence freeze and A1G/A2/HUD/Linux/
+package/full acceptance remain open. Standing perpetual source/API consent persists.
+
+Historical A1E status at plan revision 72 (2026-10-20 UTC) is
 **PRACTICAL_SOURCE_CLOSED_REPAIRS_REQUIRED**. The
 [closed repaired-source round](docs/plans/research/2026-10-20-e04a-repaired-source-closure.md)
 and [exact factual record](docs/plans/evidence/2026-10-20-e04a-repaired-source-result.json)

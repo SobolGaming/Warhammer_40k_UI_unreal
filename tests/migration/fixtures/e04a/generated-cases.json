@@ -131,6 +131,35 @@
       "inputSha1": "16A682A8DADA79B6ED9D1A54F613EA17739EB4A1"
     },
     {
+      "id": "A1-K05",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "escaped: \"\\x01\"\nquoted: \"\u007F\u0080\u009F\"\n"
+      },
+      "inputBytes": 32,
+      "inputSha256": "454EAAE473C179254F4404459416DCC017A06265330AA297EF33F1FFD38FF6EA",
+      "inputSha1": "94C8C88C7EDCC6E441B2612E250D93552F656C74",
+      "expectedCode": "Success",
+      "expected": {
+        "kind": "EscapedControlAndQuotedNonC0",
+        "rawNodes": 5,
+        "depth": 1,
+        "aliases": 0,
+        "keys": [
+          "escaped",
+          "quoted"
+        ],
+        "values": [
+          "\u0001",
+          "\u007F\u0080\u009F"
+        ],
+        "valueUtf8Hex": [
+          "01",
+          "7FC280C29F"
+        ]
+      }
+    },
+    {
       "id": "A1-F01",
       "recipe": {
         "kind": "LiteralUtf8",
@@ -236,6 +265,18 @@
       "inputSha256": "CF458FF1AB2B694EB1DB36E2B2D7EDA06FC98857C64FF6347F92C8CF0F0E57A1",
       "inputSha1": "69C271E5FC5AD92E0F9026894A3BE77226E7996C",
       "expectedCode": "InvalidEventStream",
+      "expected": null
+    },
+    {
+      "id": "A1-F10",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "\"\u0001\"\n"
+      },
+      "inputBytes": 4,
+      "inputSha256": "0EB4A4BF3ACD34AD8E86A4FDF3513252BB8B0D53CDE2F6A7E8D008F417683E03",
+      "inputSha1": "704D5E9B77785F88FDB8C028BF6893BB3C7E046C",
+      "expectedCode": "MalformedYaml",
       "expected": null
     },
     {
@@ -494,8 +535,8 @@
       "inputSha1": "3EAD2AED704DC0B1A8D3B8B91A769A71B2BBCF40"
     }
   ],
-  "expectedCount": 28,
-  "totalWithCanonical": 38,
+  "expectedCount": 30,
+  "totalWithCanonical": 40,
   "recipeEncoding": "UTF-8 without BOM; exact LF and literal text as authored",
   "recipeDefinitions": {
     "file": "a: x + LF + # + p repeated(count-7) + LF",
@@ -504,7 +545,8 @@
     "aliases": "[&a x + comma-space-*a repeated(count) + ] + LF",
     "scalar": "double-quote + x repeated(count) + double-quote + LF"
   },
-  "qualification": "Deterministic input identities were computed during inert fixture-data authoring using built-in UTF8/SHA256, independently of the future parser. No parser, test, source generator executable, Python, vendor code or native tool was run. Expected full-input metrics are not claims that a refused parser returned partial nodes.",
+  "qualification": "Deterministic input identities were computed during inert fixture-data authoring using built-in UTF8/SHA256, independently of the future parser. No parser, test, candidate source generator, vendor code or native tool was run. The successor additionally used an independently authored inert Python byte/text comparison; no candidate function was invoked. Expected full-input metrics are not claims that a refused parser returned partial nodes.",
   "nativeHashQualification": "Auxiliary inputSha1 is the native Core FSHA1 observation; primary fixture/source/run SHA256 bindings remain required before/after native execution. No production cryptography or protocol identity is implemented.",
+  "rawC0BoundaryAmendment": "Two focused prospective regressions: K05 preserves escaped C0 and legal quoted DEL/C1 bytes; F10 rejects raw quoted U+0001. Original28 generated records and10 canonical inputs remain unchanged;30 generated/40 unique inputs/47 attempts/same8 native suites. No parser/native result is claimed.",
   "authoringAmendment": "Four focused source-derived regressions added before any SOURCE/build/test freeze: raw literal NUL/EOT refusal and invalid vendor UTF8 from valid YAML backslash-N/backslash-underscore. Existing K04 now proves embedded and terminal decoded NUL bytes via full hex. Same8native suites/5quotas/18source paths; older34input proposal retained as history."
 }

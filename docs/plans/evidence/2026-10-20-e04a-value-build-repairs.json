@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_VALUE_BUILD_REPAIR_CHECKPOINT",
+  "revision": 73,
+  "status": "VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING",
+  "recordDateUtc": "2026-10-20",
+  "candidate": {
+    "closureCheckpointCommit": "b553631",
+    "newTechnicalCommit": null,
+    "publicationAndRunBindings": "PENDING_SOURCE_REFRESH",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "canonicalCode": [
+      {
+        "path": "Plugins/E04ProfileProof/Source/E04ProfileParser/Private/E04ProfileParserModule.cpp",
+        "bytes": 1946,
+        "sha256": "096232947D6E9EF36C6629D1D3080C2998858475C1000AD085CE73ECD960CC7B"
+      },
+      {
+        "path": "Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/Tests/E04ProfileAbiTests.cpp",
+        "bytes": 38116,
+        "sha256": "125FDBDD94AFB571B589F2DC6E8A3E337680D560C0D795F61C3BADEC1B3B1CD3"
+      },
+      {
+        "path": "tests/migration/fixtures/e04a/generated-cases.json",
+        "bytes": 17018,
+        "sha256": "5C6D5A9DBC1D4FA273BF2372B09F27E2B83271C196A331CE674FC9CADADAE389"
+      },
+      {
+        "path": "Source/WarhammerClientE04AEditor.Target.cs",
+        "bytes": 5031,
+        "sha256": "8915E31A93F3C1EF1B12A4DC64CA9365149B7E945B41E96304BAE8B2CB715FEF"
+      },
+      {
+        "path": "scripts/migration/Invoke-E04AProfileProof.ps1",
+        "bytes": 255877,
+        "sha256": "588CED35D74AD2617F652DF48FB9DE8ADBEB80C31EE5A23FC8A2AE79686594CC"
+      }
+    ],
+    "packet": {
+      "path": "docs/plans/research/2026-10-19-e04a-profile-packet.md",
+      "bytes": 21959,
+      "sha256": "E4765E2B12854C8F309FC179E55499F8FBE1FABD889648AFAC73BE76961105C8"
+    },
+    "plannedResult": {
+      "path": "docs/plans/evidence/2026-10-19-e04a-profile-result.json",
+      "bytes": 2774,
+      "sha256": "47397F5892EF66A3E7907755014C15CB19025DD1F0E6DEFD562B2BB444B9A722"
+    }
+  },
+  "previousClosure": {
+    "result": {
+      "path": "docs/plans/evidence/2026-10-20-e04a-repaired-source-result.json",
+      "bytes": 31850,
+      "sha256": "1E738D6FFC17C9CAAF24CCE00D8C6714547D48D636604F798E046D8E457949AF"
+    },
+    "subject": {
+      "publicationHead": "6874c1784d7b2d2dd00019e897768894aa9b66b1",
+      "technicalSourceHead": "3b5447e777da76b555215c135977c92a1706282b",
+      "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+      "plannedRunId": "20261020T203627Z-e262e08c",
+      "sharedSourceIndex": {
+        "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-common-6874c17-20261020T203627Z-e262e08c/shared-source-index.json",
+        "bytes": 472816,
+        "sha256": "A480AF5CABA0C1599EE6116AD9B13421B278BF1D24732E9497CCA8090C41DEBB"
+      }
+    },
+    "closedJobs": 6,
+    "rawPass": 3,
+    "rawChangesRequested": 3,
+    "completeToolPairs": 584,
+    "admissions": 0,
+    "otherPreparedJobsLaunched": 0,
+    "qualification": "Revision72 closure and raw reports remain historical; no approval transfers."
+  },
+  "repairs": [
+    {
+      "id": "RAW_C0",
+      "change": "Reject raw document C0 bytes except TAB/LF/CR; decoded escaped controls retain the encoding-only scalar path.",
+      "regressions": [
+        "K05",
+        "F10"
+      ],
+      "originalInputsPreserved": 38,
+      "currentUniqueInputs": 40,
+      "generatedRecipes": 30,
+      "plannedNativeAttempts": 47,
+      "nativeSuites": 8,
+      "correctedK05Bytes": 32,
+      "initialK05ProposalPreserved": true
+    },
+    {
+      "id": "D-ABI-01",
+      "findingSubject": {
+        "publicationHead": "6874c1784d7b2d2dd00019e897768894aa9b66b1",
+        "technicalSourceHead": "3b5447e777da76b555215c135977c92a1706282b",
+        "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+        "plannedRunId": "20261020T203627Z-e262e08c",
+        "sharedSourceIndex": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-common-6874c17-20261020T203627Z-e262e08c/shared-source-index.json",
+          "bytes": 472816,
+          "sha256": "A480AF5CABA0C1599EE6116AD9B13421B278BF1D24732E9497CCA8090C41DEBB"
+        }
+      },
+      "change": "Bind retained generated build instructions to same-run Configure; confirm live membership/bytes/references immediately before DependencyBuild release and after build before publication; preserve failures.",
+      "ordinaryCorrections": [
+        "Reject literal/preexisting response-file forms; preserve exact Ninja-produced RSP_FILE support.",
+        "Include nested CMakeCache.txt/compile_commands.json in the same inventory family as capture/confirmation."
+      ],
+      "qualification": "Current finding ID is qualified by the closed source round; historical tool-alternative D-ABI-01 is separate. Supported grammar remains bounded; actual generator compatibility is untested."
+    },
+    {
+      "id": "D-ABI-02",
+      "change": "Reject non-null effective ObjSrcMapFile in the early derived target constructor.",
+      "plannedControl": {
+        "phase": "SupervisorControls",
+        "rootBudgetSeconds": 60,
+        "additionalRoots": 1,
+        "originalSupervisorCases": 6,
+        "originalSupervisorRoots": 5,
+        "totalSupervisorPhaseRoots": 6,
+        "phaseBudgetSeconds": 600,
+        "status": "NOT_RUN"
+      },
+      "qualification": "Actual UBT refusal/log/canary observation remains unrun."
+    }
+  ],
+  "offlineControls": {
+    "driver": {
+      "path": ".local/planning/E04/generated-input-offline-controls-20261020T2202Z/Invoke-PureGeneratedInputControls.ps1",
+      "bytes": 3744,
+      "sha256": "116DC2DB71B1287596510E56415BDDDB2B866FB99F48EA422EE2B70CF4809909"
+    },
+    "result": {
+      "path": ".local/planning/E04/generated-input-offline-controls-20261020T2202Z/control-run/offline-result.json",
+      "bytes": 6224,
+      "sha256": "5FE8446A68F659269257E3758C9BA6EDCAC70A6B221445D8283EFAAAFA74204D"
+    },
+    "report": {
+      "path": ".local/planning/E04/generated-input-offline-controls-20261020T2202Z/control-run/logs/generated-build-input-controls/report.json",
+      "bytes": 5495,
+      "sha256": "1D115449E315561D63F6945F63122B4110D1FDA975387F86A7A298007508D26C"
+    },
+    "stdout": {
+      "path": ".local/planning/E04/generated-input-offline-controls-20261020T2202Z/driver.stdout.log",
+      "bytes": 6225,
+      "sha256": "3ED537F0163676D169079DE494D3C39513CFB4DE59051D6E2553D814D6C5CB07"
+    },
+    "stderr": {
+      "path": ".local/planning/E04/generated-input-offline-controls-20261020T2202Z/driver.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "caseCount": 7,
+    "matchedCount": 7,
+    "elapsedSeconds": 5.9663258,
+    "rootCount": 0,
+    "externalRoots": 0,
+    "nativePhasesExecuted": 0,
+    "failure": null,
+    "secondaryErrors": [],
+    "cases": [
+      {
+        "name": "unchanged",
+        "matched": true,
+        "wouldConsumeSentinel": 1,
+        "diagnostic": null
+      },
+      {
+        "name": "changed-rules",
+        "matched": true,
+        "wouldConsumeSentinel": 0,
+        "diagnostic": "E04A1_GENERATED_INPUT_LIVE_BYTE_DRIFT"
+      },
+      {
+        "name": "missing-rule",
+        "matched": true,
+        "wouldConsumeSentinel": 0,
+        "diagnostic": "E04A1_GENERATED_INPUT_LIVE_MEMBER_MISSING"
+      },
+      {
+        "name": "extra-input",
+        "matched": true,
+        "wouldConsumeSentinel": 0,
+        "diagnostic": "E04A1_GENERATED_INPUT_LIVE_MEMBERSHIP_DRIFT"
+      },
+      {
+        "name": "changed-globs",
+        "matched": true,
+        "wouldConsumeSentinel": 0,
+        "diagnostic": "E04A1_GENERATED_INPUT_LIVE_BYTE_DRIFT"
+      },
+      {
+        "name": "corrupt-copy",
+        "matched": true,
+        "wouldConsumeSentinel": 0,
+        "diagnostic": "E04A1_GENERATED_INPUT_RETAINED_COPY_DRIFT"
+      },
+      {
+        "name": "preexisting-response",
+        "matched": true,
+        "wouldConsumeSentinel": 0,
+        "diagnostic": "E04A1_GENERATED_INPUT_UNSUPPORTED_PREEXISTING_RESPONSE"
+      }
+    ],
+    "qualification": "Actual selected candidate helpers executed over owned synthetic control files only. No full wrapper phase, native helper, process supervisor, CMake/Ninja, UBT/compiler or Unreal invocation.",
+    "wallClockStartUtc": null,
+    "wallClockFinishUtc": null,
+    "timeQualification": "Directory suffix is an operator label; producer result contains elapsed time only.",
+    "evidenceSeal": {
+      "path": ".local/planning/E04/generated-input-offline-controls-20261020T2202Z/offline-evidence.seal.original.json",
+      "bytes": 69747,
+      "sha256": "3DC4DD368C0E8F7762E4DF7A15B9A7908BB0FE8D9DAA1A47F48061DDA78E487C"
+    },
+    "sourceConservation": {
+      "path": ".local/planning/E04/generated-input-offline-controls-20261020T2202Z/source-conservation.original.json",
+      "bytes": 1745,
+      "sha256": "A444CBAB3AB60CBC9BC6576A4524C37491ECA75D906CCAFB83967B401FC42D48"
+    }
+  },
+  "ordinaryChecks": {
+    "c0": {
+      "path": ".local/planning/E04/yaml-raw-c0-three-file-ordinary-assessment-PROPOSED/ordinary-source-note.OPERATOR_ONLY.md",
+      "bytes": 3844,
+      "sha256": "863EEFB55F8F7FCD5838F4D56AE8B9616E95E35B4589017366C23F4E209850C0"
+    },
+    "objSrcMap": {
+      "path": ".local/planning/E04/obj-src-map-negative-control-ordinary-assessment-PROPOSED/ordinary-source-assessment.OPERATOR_ONLY.md",
+      "bytes": 3602,
+      "sha256": "3E5348760DF4812040261770F3AC3AD49508AB173D21BFCF557D0F6D53BE8F7A"
+    },
+    "generatedBuildInputs": {
+      "path": ".local/planning/E04/generated-build-input-preservation-wrapper-ordinary-assessment-PROPOSED/ordinary-source-assessment.OPERATOR_ONLY.md",
+      "bytes": 4518,
+      "sha256": "CE25F3C4A7F74E7681387D6EFC3A7DFF9DF4E1EC3C4AD4B18554FD08F70E42D9"
+    },
+    "qualification": "Bounded source/data checks are not formal SOURCE or acceptance; D01 findings concern the sealed predecessor proposal, not a claim of independent semantic approval for the composed wrapper."
+  },
+  "lexicalLimit": {
+    "boundedInterpretation": "Basic finite A1E source/probe repair; not universal YAML lexical or production conformance.",
+    "plainDELContextSensitiveGap": "OPEN_A2_PRODUCTION_RISK",
+    "universalMalformedRequirementWaived": false,
+    "decodedEscapedControlsFiltered": false
+  },
+  "authority": {
+    "sourceAdmissions": 0,
+    "newSourceGo": false,
+    "nativeRunRoot": null,
+    "visibleCount": 0,
+    "nativePhases": {
+      "Preflight": "NOT_RUN",
+      "SupervisorControls": "NOT_RUN",
+      "Configure": "NOT_RUN",
+      "DependencyBuild": "NOT_RUN",
+      "EditorBuild": "NOT_RUN",
+      "Discovery": "NOT_RUN",
+      "Native": "NOT_RUN",
+      "Audit": "NOT_RUN"
+    },
+    "standingPerpetualPrivateSourceApiConsent": "UNCHANGED",
+    "formalSourceApproval": false,
+    "finalCodeDifferentReq": "OPEN_AFTER_ACTUAL_EXECUTION_AND_EVIDENCE_FREEZE",
+    "laterGates": [
+      "A1G",
+      "A2",
+      "HUD",
+      "Linux",
+      "packaging",
+      "full acceptance"
+    ]
+  },
+  "nextStep": "Checkpoint repaired source; derive fresh exact source/run/common/index/assignment bindings and affected independent SOURCE coverage under unchanged practical v7.3, including both complete finite witnesses, before native release. No old PASS/GO transfers."
+}

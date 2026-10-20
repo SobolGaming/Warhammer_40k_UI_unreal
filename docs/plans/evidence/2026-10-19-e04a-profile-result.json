@@ -27,11 +27,13 @@
   },
   "plannedNative": {
     "suiteCount": 8,
-    "uniqueInputs": 38,
+    "uniqueInputs": 40,
     "canonicalInputs": 10,
-    "generatedInputs": 28,
-    "typedNegativeInputs": 9,
+    "generatedInputs": 30,
+    "typedNegativeInputs": 10,
     "resourceBoundaryInputs": 15,
+    "plannedAttempts": 47,
+    "originalUniqueInputsPreserved": 38,
     "actualChecks": null,
     "actualAssertions": null,
     "result": "NOT_RUN"

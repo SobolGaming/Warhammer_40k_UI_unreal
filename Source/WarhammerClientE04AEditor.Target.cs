@@ -9,6 +9,10 @@ public class WarhammerClientE04AEditorTarget : TargetRules
 {
     public WarhammerClientE04AEditorTarget(TargetInfo Target) : base(Target)
     {
+        // Base rules applied XML/CLI; reject before toolchain path side effects.
+        if (WindowsPlatform.ObjSrcMapFile != null)
+            throw new BuildException("E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED");
+
         Type = TargetType.Editor;
         bBuildAllModules = false;
         bCompileWithPluginSupport = true;

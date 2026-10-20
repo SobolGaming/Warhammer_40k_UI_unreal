@@ -96,12 +96,28 @@ Canonical inputs must actually pass this restricted subset; never rewrite
 them to avoid a refusal. A2 must resolve faithful null/property handling before
 full profile or production acceptance.
 
-Raw source must be well-formed UTF-8 without literal NUL/EOT controls, preventing
-the vendor's leading-zero encoding detection and raw EOT sentinel from silently
-reinterpreting/truncating it. Valid YAML `\N` and `\_` escapes produce single
+Raw source must be well-formed UTF-8. Before vendor parsing or decoding, refuse
+every raw C0 byte below 0x20 except TAB (0x09), LF (0x0A) and CR (0x0D) as
+`MalformedYaml`, with failed-empty result and unavailable source mark. This
+includes the earlier NUL/EOT exclusions, preventing vendor encoding sniffing or
+its raw EOT sentinel from reinterpreting/truncating the source. This is a raw
+input check, not a filter over valid escaped decoded scalar values. Valid YAML `\N` and `\_` escapes produce single
 non-UTF-8 bytes in the pinned `src/exp.cpp`; invalid callback bytes yield
 `InvalidEventStream`, not a false malformed-source claim. Those valid escape
 forms remain an explicit A1 fidelity gap for A2/RISK09.
+
+Context-sensitive non-C0 lexical conformance remains unresolved. In particular,
+plain raw DEL has a source-supported acceptance route in the pinned scanner;
+it is not claimed fixed by the C0 entry check. Quoted DEL/C1 and an ASCII YAML
+escape decoding to C0 are different cases and must not be rejected by a global
+c-printable/scalar filter. Preserve this known plain-DEL risk for A2/full YAML
+conformance and production; A1E remains the basic raw proof and finite typed
+refusals described in this packet, not a general malformed-YAML rejection claim.
+The original scope paragraphs (opening A1E/A2 split; value-boundary restrictions;
+expected typed refusals; finite LexicalFailures list) retain that distinction.
+No broader applicable A1, RQ11 or production criterion is waived. Any future
+result must state this limitation explicitly rather than report lexical or
+legacy compatibility from the finite negative set.
 
 ## Required native evidence
 
@@ -113,16 +129,25 @@ Exactly eight names use prefix `Warhammer.Migration.E04A1.`:
 | `Abi.TypedRefusal` | Typed failure to a separate Editor caller, followed by a successful parse; no exception-disabled caller claim |
 | `Abi.ValueLifetime` | Independent copies/moves/destruction after vendor temporaries die |
 | `Parser.CanonicalSyntax` | Ten source-bound profiles: exact root-key order, literal profile identity, selected map/sequence fields and scalar tag provenance |
-| `Parser.OrderedCaseValues` | Unicode/case-distinct and equal duplicate keys; anchor rebinding/alias targets; raw scalar tags and full decoded NUL bytes |
-| `Parser.LexicalFailures` | Nine exact typed negatives, including property-loss, source NUL/EOT and invalid vendor UTF-8 regressions |
+| `Parser.OrderedCaseValues` | Unicode/case-distinct and equal duplicate keys; anchor rebinding/alias targets; raw scalar tags and full decoded NUL bytes; K05 escaped C0 and legal quoted DEL/C1 with exact decoded bytes |
+| `Parser.LexicalFailures` | Ten exact typed negatives, including property-loss, source C0 and invalid vendor UTF-8 regressions; F10 is raw quoted U+0001 refused at entry |
 | `Parser.ResourceBounds` | Below/at/above inputs for all five inclusive limits |
 | `Integration.RepeatIsolation` | Fresh good/bad/good parses without stale anchors, counters or diagnostics |
 
-Freeze **38 unique inputs**: ten canonical C01-C10, four K01-K04, nine F01-F09
-and fifteen L records. The earlier 34-input proposal is historical; four focused
-regressions were added during source preparation before any SOURCE/build/test
-freeze. Manifests bind deterministic recipes, exact bytes and independent expected
-structures/refusals. Primary source/staging identities use SHA256. Native UE Core
+Freeze **40 unique inputs / 47 attempts**: ten canonical C01-C10, five K01-K05,
+ten F01-F10 and fifteen L records: 30 generated inputs and the same eight suites.
+The earlier 34-input proposal and subsequent 38-input/45-attempt set remain
+historical. Preserve all 38 original inputs and all 28 original generated records,
+recipes, expectations and relative order; K05/F10 add one attempt each to
+OrderedCaseValues/LexicalFailures. Manifests bind deterministic recipes, exact
+bytes and independent expected structures/refusals. K05 is 32 input bytes with
+SHA256 `454EAAE473C179254F4404459416DCC017A06265330AA297EF33F1FFD38FF6EA`;
+its two mapping values have decoded UTF8 hex `01` and `7FC280C29F`, five raw nodes,
+depth 1 and zero aliases. F10 is 4 input bytes (`22 01 22 0A`), SHA256
+`0EB4A4BF3ACD34AD8E86A4FDF3513252BB8B0D53CDE2F6A7E8D008F417683E03`,
+and must return MalformedYaml with original input count 4, no document and default
+unavailable mark/observed 0/limit 0. Hashes/metrics are independent expectations,
+not observed parser results. Primary source/staging identities use SHA256. Native UE Core
 FSHA1 is an auxiliary observation of bytes actually passed to the parser; it is
 not SHA256 or a Core protocol identity.
 
@@ -143,7 +168,7 @@ Each suite writes its actual input ledger under
 `RunRoot/artifacts/native/<suite-slug>/input-ledger.json` and retained original
 input bytes under its `inputs/` directory. Derive paths from exact staged project
 ancestry; no user-default fallback. The wrapper independently seals physical
-no-reparse ownership. Require eight unique suites and a 38-ID union; preserve
+no-reparse ownership. Require eight unique suites, a 40-ID union and 47 exact attempts; preserve
 repeated attempt labels. Custom evaluated check counts and UE report assertions
 remain distinct, actual observations. No totals are prefilled.
 Each native suite also records actual compiler-guarded Editor exception mode:
@@ -160,10 +185,14 @@ arguments. SOURCE review precedes Configure/build/native work. Record the actual
 candidate/run and phase GO; freeze and authority must identify the A1E subset and
 the unresolved required A1G proof. No historical E02 authority transfers.
 
-The proposed phases are Preflight 300s (no external root), SupervisorControls
-600s (six controls/three groups/five roots), Configure 600s, DependencyBuild
-1200s, EditorBuild 1800s, hidden Discovery 600s, hidden Native 600s and Audit
-300s. Configure/build/Discovery/Native each get one owned root. There is no
+The proposed phases remain Preflight 300s (no external root), SupervisorControls
+600s, Configure 600s, DependencyBuild 1200s, EditorBuild 1800s, hidden Discovery 600s,
+hidden Native 600s and Audit 300s, in that exact eight-phase order. SupervisorControls
+retains its original six supervisor cases/three groups/five roots unchanged, adds
+seven pure generated-input preparation controls with zero external roots, and one
+separate target-refusal control with one 60-second root: total six roots. Keep
+all three result families distinct; the target failure is not an additional native
+suite or a seventh existing supervisor case. Configure/build/Discovery/Native each get one owned root. There is no
 Python/oracle phase, visible window, Core host or package execution.
 
 Use fresh `.local/experiments/E04A1/<RunId>/project` and owned temporary,
@@ -183,6 +212,73 @@ of actual compile/link flags and module-load evidence.
 Actual Editor `/EHsc` and `PLATFORM_EXCEPTIONS_DISABLED=0` must be demonstrated
 for both parser and probe. This observation does not prove the required A1G mode.
 
+### Generated Configure instructions and dependency handoff
+
+After successful Configure and Check-CMake, capture the actual typed generated
+instruction closure, bound to this run/source/freeze/build root and Configure
+process. Include CMakeCache.txt, compile_commands.json and build.ninja; generated
+.ninja/.cmake inputs, nested CMakeCache.txt/compile_commands.json files and
+include/subninja/rule/glob/regeneration inputs must have complete exact reference
+mappings. Only Ninja-produced scratch response outputs with exact rule bindings
+are supported; refuse literal/preexisting argument-file forms without guessing
+recursive tool semantics. Generated inputs stay inside the owned build root;
+external referenced primary inputs require an exact frozen descriptor. Refuse
+unhandled/dynamic references, reparse paths, duplicate/case-colliding identities
+or an incomplete recognizer rather than treating a root-file count as closure. Derive actual membership from Configure; do not invent a fixed file count
+or include every object/output as an immutable instruction.
+
+Retain exact baseline copies/manifest under owned logs with before/copy/after
+identities. At Invoke-Root's final DependencyBuild preparation point, after the
+child environment is prepared and before root-count increment/Supervisor.Run,
+compare live complete membership/bytes/hash and retained copies to that same
+successful Configure baseline. Bind the original Check-CMake tuple; never
+self-approve a fresh baseline. Changed/missing/extra/corrupt input means no launch.
+Recheck after build before the vendor receipt/artifact publication; preserve
+available observations/offending bytes and baseline on failure, keeping the
+primary error separate from retention errors. Generated instruction changes or
+regeneration leave lineage unresolved; no silent rebaseline. This check is not
+an atomic filesystem/process guarantee against post-check concurrent mutation.
+
+`Generated-BuildInputControls` calls the actual capture/confirm helpers with
+owned inert instruction files, not a duplicate validator: unchanged positive,
+changed included rules, missing rule, extra.ninja, VerifyGlobs drift, corrupt
+retained copy and unsupported preexisting response files. The positive includes
+nested cache/compile-command files to check that all helper membership sets agree.
+Negative cases require the intended refusal, unchanged baseline,
+retained differences and a would-launch counter 0; they invoke no native tool.
+This preparation function stays inside the wrapper; it adds no test-file or
+external-root allowance. Actual Configure/Ninja/native behavior remains separate.
+
+### Early object/source-map refusal and real negative control
+
+The dedicated target rejects every effective non-null WindowsPlatform.ObjSrcMapFile
+at the first derived-constructor statement after base configuration, before proof
+target setup, with exact diagnostic `E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED`.
+Do not clear/redirect an arbitrary configured path. Keep the existing module-time
+native-tool refusals and live 32-selector witness unchanged. The public field's XML
+and CLI routes and normal target-to-VCToolChain construction order are material
+source contracts; its constructor can delete that path before compilation.
+
+After the unchanged supervisor cases and pure preparation controls, run exactly
+one hidden frozen dotnet/UBT invocation, 60 seconds/no retry, on a separate fresh
+owned project/control stage. Copy and bind the complete required 33 authored
+members; keep its Rules/cache/output state disjoint from the main EditorBuild
+project. Retain control files/results under existing logs coverage, and require
+main source/output freshness/settings preservation. Pass the owned canary through
+one argv token `-ObjSrcMap=<absolute-owned-canary>`, without modifying private XML.
+Pin nonempty canary bytes before/after and leave it closed/unlocked during UBT.
+
+Require actual resumed/assigned process exit 8/RulesError, exact dedicated target
+instantiation/refusal diagnostic, complete stdout/stderr/log/receipt and exit/job
+cleanup, unchanged canary and approved sources. The unchanged supervisor's nonzero
+FAIL receipt is the expected attempt result; validate that exact terminal failure
+rather than call Require-RootPass or accept any failure. Earlier unrelated error,
+wrong/missing diagnostic, timeout, unavailable evidence or canary mutation fails
+the control. Source-supported early refusal and observable evidence do not prove
+a universal child/compiler absence from missing files or aggregate job counters.
+The normal/null positive path remains the later ordinary EditorBuild; no extra
+positive root, phase, retry or visible launch is authorized.
+
 The proof parser/probe modules use `PCHUsageMode.NoPCHs`, and the bounded UBT
 invocation explicitly passes `-NoVFS`. Installed ModuleRules/UEBuildModuleCPP
 source supports direct module definitions without shared PCH selection;
@@ -199,9 +295,14 @@ legacy corpus. Closed execution/evidence then requires fresh independent CODE
 and a different REQ under OWN15. No bounded result closes full E04, Linux,
 packaging, production profiles, HUD rendering or broader implementation gates.
 
-## Revision 54: prospective SOURCE amendment and current state
+## Historical revision 54: prospective SOURCE amendment and then-current state
 
-Current status is **STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
+This historical packaging record is preserved; the adopted practical v7.3 method
+supersedes its context-count/projection procedure. This packet amendment changes
+fixture/control contracts only, preserving substantive duties, two complete
+independent finite witnesses, affected review and separate final CODE/different REQ.
+
+Then-current status was **STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
 The [adopted composition criteria](2026-10-20-e04a-source-composition-packet-v3.md)
 and [adoption record](../evidence/2026-10-20-e04a-startup-target-amendment-adoption.json)
 add complete applicable target creation/configuration/finalization/normal

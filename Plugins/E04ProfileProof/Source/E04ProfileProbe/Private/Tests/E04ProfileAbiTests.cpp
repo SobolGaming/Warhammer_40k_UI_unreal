@@ -80,6 +80,7 @@ const FGeneratedSpec Generated[] = {
     {TEXT("A1-K02"), TEXT("LiteralUtf8"), 0, TEXT("a: first\na: second\n"), EParseCode::Success},
     {TEXT("A1-K03"), TEXT("LiteralUtf8"), 0, TEXT("[&a [x], *a, &a y, *a]\n"), EParseCode::Success},
     {TEXT("A1-K04"), TEXT("LiteralUtf8"), 0, TEXT("plain: yes\nquoted: \"yes\"\nexplicit: !!str 123\nescaped: \"x\\0y\\0\"\n"), EParseCode::Success},
+    {TEXT("A1-K05"), TEXT("LiteralUtf8"), 0, TEXT("escaped: \"\\x01\"\nquoted: \"") TEXT("\x007F") TEXT("\x0080") TEXT("\x009F") TEXT("\"\n"), EParseCode::Success},
     {TEXT("A1-F01"), TEXT("LiteralUtf8"), 0, TEXT("a: [unterminated\n"), EParseCode::MalformedYaml},
     {TEXT("A1-F02"), TEXT("LiteralUtf8"), 0, TEXT("a: *missing\n"), EParseCode::MalformedYaml},
     {TEXT("A1-F03"), TEXT("LiteralUtf8"), 0, TEXT("a: one\n---\nb: two\n"), EParseCode::MultipleDocuments},
@@ -89,6 +90,7 @@ const FGeneratedSpec Generated[] = {
     {TEXT("A1-F07"), TEXT("LiteralUtf8"), 0, TEXT("a: x") TEXT("\x04") TEXT("b: y\n"), EParseCode::MalformedYaml},
     {TEXT("A1-F08"), TEXT("LiteralUtf8"), 0, TEXT("\"\\N\"\n"), EParseCode::InvalidEventStream},
     {TEXT("A1-F09"), TEXT("LiteralUtf8"), 0, TEXT("\"\\_\"\n"), EParseCode::InvalidEventStream},
+    {TEXT("A1-F10"), TEXT("LiteralUtf8"), 0, TEXT("\"") TEXT("\x0001") TEXT("\"\n"), EParseCode::MalformedYaml},
     {TEXT("A1-L.file.below"), TEXT("file"), 1048575, nullptr, EParseCode::Success},
     {TEXT("A1-L.file.at"), TEXT("file"), 1048576, nullptr, EParseCode::Success},
     {TEXT("A1-L.file.above"), TEXT("file"), 1048577, nullptr, EParseCode::InputTooLarge},
@@ -105,7 +107,7 @@ const FGeneratedSpec Generated[] = {
     {TEXT("A1-L.scalar.at"), TEXT("scalar"), 65536, nullptr, EParseCode::Success},
     {TEXT("A1-L.scalar.above"), TEXT("scalar"), 65537, nullptr, EParseCode::ScalarLimit}
 };
-static_assert(UE_ARRAY_COUNT(Generated) == 28);
+static_assert(UE_ARRAY_COUNT(Generated) == 30);
 
 FString LiteralText(const FGeneratedSpec& Spec)
 {
@@ -235,8 +237,8 @@ public:
             !Check(TEXT("Create owned suite inputs"), IFileManager::Get().MakeDirectory(*FPaths::Combine(SuiteRoot, TEXT("inputs")), true))) { return false; }
         TSharedPtr<FJsonObject> Corpus, Cases;
         if (!ReadManifest(TEXT("corpus-manifest.json"), Corpus) || !ReadManifest(TEXT("generated-cases.json"), Cases)) { return false; }
-        if (!IndexManifest(Corpus, TEXT("canonical"), 10) || !IndexManifest(Cases, TEXT("generated"), 28)) { return false; }
-        return Check(TEXT("Exactly38 distinct frozen input IDs"), Descriptors.Num() == 38);
+        if (!IndexManifest(Corpus, TEXT("canonical"), 10) || !IndexManifest(Cases, TEXT("generated"), 30)) { return false; }
+        return Check(TEXT("Exactly40 distinct frozen input IDs"), Descriptors.Num() == 40);
     }
 
     FParseResult Run(const FString& Id, int32 Attempt = 1)
@@ -386,7 +388,7 @@ private:
             bool bCanonical = false;
             for (int32 I = 1; I <= 10; ++I) { bCanonical |= Id == FString::Printf(TEXT("A1-C%02d"), I); }
             if (!Check(TEXT("Unique known ID in correct manifest"), !Descriptors.Contains(Id) &&
-                ((Count == 10 && bCanonical) || (Count == 28 && FindSpec(Id) != nullptr)))) { return false; }
+                ((Count == 10 && bCanonical) || (Count == 30 && FindSpec(Id) != nullptr)))) { return false; }
             Descriptors.Add(Id, Entry);
         }
         return true;
@@ -503,13 +505,13 @@ bool FE04A1Ordered::RunTest(const FString&)
 {
     FProbe P(*this, TEXT("Parser.OrderedCaseValues"), TEXT("parser-ordered-case-values"));
     if (!P.Initialize()) { return false; }
-    for (int32 I = 0; I < 4; ++I)
+    for (int32 I = 0; I < 5; ++I)
     {
         const FParseResult R = P.Run(Generated[I].Id);
         if (!P.Check(TEXT("Structured raw graph accepted"), R.IsSuccess() && R.Document.Nodes.IsValidIndex(R.Document.Root))) { continue; }
         const FDocument& D = R.Document;
         const FNode& Root = D.Nodes[D.Root];
-        P.Metrics(D, I == 0 ? 13 : I == 1 ? 5 : I == 2 ? 6 : 9, I == 1 || I == 3 ? 1 : 2, I == 2 ? 2 : 0);
+        P.Metrics(D, I == 0 ? 13 : I == 1 ? 5 : I == 2 ? 6 : I == 3 ? 9 : 5, I == 1 || I == 3 || I == 4 ? 1 : 2, I == 2 ? 2 : 0);
         if (I == 0)
         {
             CheckPairs(P, D, Root, {TEXT("A"), TEXT("a")});
@@ -545,6 +547,19 @@ bool FE04A1Ordered::RunTest(const FString&)
                 P.Check(TEXT("Plain/nonplain/explicit tag observation without resolution"), Value && Value->bTagAvailable && BytesEqual(Value->TagUtf8, Tags[J]));
             }
         }
+        else if (I == 4)
+        {
+            CheckPairs(P, D, Root, {TEXT("escaped"), TEXT("quoted")});
+            const TArray<FString> ExpectedHex = P.ExpectedStrings(TEXT("A1-K05"), TEXT("valueUtf8Hex"));
+            P.Check(TEXT("Escaped control and quoted non-C0 have exact independent bytes"), ExpectedHex == TArray<FString>{TEXT("01"), TEXT("7FC280C29F")});
+            const TCHAR* Keys[] = {TEXT("escaped"), TEXT("quoted")};
+            for (int32 J = 0; J < 2; ++J)
+            {
+                const FNode* Value = MappingValue(D, Root, Keys[J]);
+                P.Check(TEXT("Valid escaped control and quoted DEL/C1 remain scalar bytes"), Value && Value->Kind == ENodeKind::Scalar && ExpectedHex.IsValidIndex(J) &&
+                    BytesToHex(Value->ScalarUtf8.GetData(), Value->ScalarUtf8.Num()).Equals(ExpectedHex[J], ESearchCase::IgnoreCase));
+            }
+        }
     }
     return P.Finish();
 }
@@ -554,10 +569,15 @@ bool FE04A1Lexical::RunTest(const FString&)
 {
     FProbe P(*this, TEXT("Parser.LexicalFailures"), TEXT("parser-lexical-failures"));
     if (!P.Initialize()) { return false; }
-    for (int32 I = 4; I < 13; ++I)
+    for (int32 I = 5; I < 15; ++I)
     {
         const FParseResult R = P.Run(Generated[I].Id);
         P.Check(TEXT("Each frozen negative refuses with precise independent type"), R.Code == Generated[I].Code && !R.IsSuccess());
+        if (FCString::Strcmp(Generated[I].Id, TEXT("A1-F10")) == 0)
+        {
+            P.Check(TEXT("Raw quoted C0 refuses at entry with default unavailable mark"), R.InputByteCount == 4 &&
+                !R.Diagnostic.Mark.bAvailable && R.Diagnostic.Observed == 0 && R.Diagnostic.Limit == 0);
+        }
     }
     return P.Finish();
 }
@@ -567,11 +587,11 @@ bool FE04A1Limits::RunTest(const FString&)
 {
     FProbe P(*this, TEXT("Parser.ResourceBounds"), TEXT("parser-resource-bounds"));
     if (!P.Initialize()) { return false; }
-    for (int32 I = 13; I < static_cast<int32>(UE_ARRAY_COUNT(Generated)); ++I)
+    for (int32 I = 15; I < static_cast<int32>(UE_ARRAY_COUNT(Generated)); ++I)
     {
         const FGeneratedSpec& S = Generated[I];
         const FParseResult R = P.Run(S.Id);
-        const int32 Family = (I - 13) / 3;
+        const int32 Family = (I - 15) / 3;
         if (S.Code == EParseCode::Success && R.IsSuccess())
         {
             const int32 Nodes = Family == 0 ? 3 : Family == 1 ? S.Count + 1 : Family == 2 ? S.Count : Family == 3 ? S.Count + 2 : 1;
