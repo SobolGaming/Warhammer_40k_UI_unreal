@@ -1,11 +1,21 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 65 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 66 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at revision 65 is **LOCAL_DUTY_CRITERIA_ADOPTED_BINDINGS_PENDING**.
+Current A1E status at revision 66 is **SCOPED_SOURCE_R6_CLOSED_FOLLOWUP_REQUIRED**.
+The [R6 summary](research/2026-10-20-e04a-scoped-r6-summary.md) and
+[factual record](evidence/2026-10-20-e04a-scoped-r6-result.json) preserve eight
+closed initial reports: five SOURCE_PASS, three BLOCKED and 479 tool pairs.
+No local admission or aggregate follows. TARGET is incomplete, PLUGIN needs
+runtime helper source, and BUILD records a review-conduct deviation. Both
+integrations remain unused and all native phases NOT_RUN. Complete audits and
+prospectively amend/rebind affected review duties before follow-up. Current v6
+permits no reuse. Standing source/API consent persists until revoked.
+
+Historical A1E status at revision 65 is **LOCAL_DUTY_CRITERIA_ADOPTED_BINDINGS_PENDING**.
 The [v6 criteria](research/2026-10-20-e04a-source-composition-packet-v6.md),
 [template](research/2026-10-20-e04a-source-scope-contract-v6.template.json) and
 [adoption](evidence/2026-10-20-e04a-v6-local-duty-criteria-adoption.json) retain

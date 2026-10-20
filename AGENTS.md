@@ -78,7 +78,22 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 65 (2026-10-20 UTC) is
+Current A1E status at plan revision 66 (2026-10-20 UTC) is
+**SCOPED_SOURCE_R6_CLOSED_FOLLOWUP_REQUIRED**. The closed
+[R6 summary](docs/plans/research/2026-10-20-e04a-scoped-r6-summary.md) and
+[factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r6-result.json)
+preserve eight raw reports: five SOURCE_PASS, three BLOCKED, 479 captured tool
+pairs, zero root admissions. TARGET is incomplete; PLUGIN needs runtime helper
+contracts; BUILD records a positive-field conduct deviation. These establish no
+new implementation defect. Complete useful audits and missing-helper research,
+then explicitly amend any affected review decomposition/eligibility and exact
+bindings before use. Current v6 ten-fresh-PASS gate remains false and permits no
+reuse. Preserve raw verdicts and technical head/run identities. Both integrations
+remain UNUSED/no GO/no launch; all native phases NOT_RUN, no native RunRoot,
+zero visible windows. Final CODE/different REQ and later gates remain open.
+Standing private source/API transmission consent persists until revoked.
+
+Historical A1E status at plan revision 65 (2026-10-20 UTC) is
 **LOCAL_DUTY_CRITERIA_ADOPTED_BINDINGS_PENDING**. Root prospectively adopted the
 [v6 criteria](docs/plans/research/2026-10-20-e04a-source-composition-packet-v6.md)
 and [exact metadata sources](docs/plans/evidence/2026-10-20-e04a-v6-local-duty-criteria-adoption.json).

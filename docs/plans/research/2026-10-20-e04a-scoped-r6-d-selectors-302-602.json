@@ -1,0 +1,130 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+  "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+  "scopeId": "D_SELECTORS_302_602",
+  "subject": {
+    "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T122137Z-3498b937",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+    "runtimeFreezeManifestSHA256": "E4C776C0C0ACA5CF09995BCF7484260C6AD20B039C1791523060D35384B3DCB6"
+  },
+  "bindingVerification": {
+    "scopeContractSHA256": "99cebdde29f1544efa3fdb03a70ba59d584ee5b3153846d82e486d6fa274b49b",
+    "bootstrapSHA256": "03c245c5ef2ae63a5839f891b91dbf3fa578bd33ae07c35c105abe2c54245e37",
+    "ownCoverageSHA256": "2d716f3b664effdf3035d5bc040bc40ed26e52b50e4131558ab61c9a5625dfa6",
+    "inputManifestSHA256": "ac112d2e41e5df0b80e98f29490a27ea1e8eaad3c3f34a50a7702b4a45b61e5c",
+    "launchPermissionSHA256": "ef920b8f58e6c475400e5449dd22251264d157aa335565591d42a403bc075980",
+    "preparedPromptSHA256": "8ea94f9d3d28702498f428f3b9bbe3d669f4969aca658a3b445584d1d6517b61",
+    "ownActualPromptFileSHA256": "6CAECFD75CC8E60685CEF89970ED4927D4DE43EA059462479925FF7E553779DE",
+    "result": "Matched exact paths, byte counts and digests. Verified all subject descriptors, own policies and the three exact common criteria metadata records. Parsed prompt criteria matched the pure contract; own scope, coverage and LOCAL_PRIMARY atom projection matched. The actual prompt file contained the exact prepared prompt followed by the supplied ROOT ACTUAL GO.",
+    "limits": "Head/base are verified as supplied bindings, not independently Git-verified commits. Prompt-file consistency does not independently attest actual transmission or runtime provenance. Generic transport was not credited with semantic validation of added campaign/scope fields."
+  },
+  "coverage": {
+    "mandatoryEntireBodies": [
+      {"id": "SOURCE-BODY-054", "physicalRange": [1, 294]},
+      {"id": "SOURCE-BODY-055", "physicalRange": [1, 142]},
+      {"id": "SOURCE-BODY-056", "physicalRange": [1, 14]},
+      {"id": "SOURCE-BODY-057", "physicalRange": [1, 196]},
+      {"id": "SOURCE-BODY-096", "physicalRange": [1, 50]},
+      {"id": "SOURCE-BODY-097", "physicalRange": [1, 88]}
+    ],
+    "mandatoryPhysicalRows": 784,
+    "mandatoryCompleteUnits": 0,
+    "assignedRecord8Rows": [302, 602],
+    "assignedRowsReviewed": 301,
+    "originDescriptorsVerified": 301,
+    "permittedOriginFieldsPerRow": 49,
+    "presentFieldComparisons": 2488,
+    "absentFieldComparisons": 12261,
+    "literalComparisonDifferences": [],
+    "selectedMetadataReviewed": {
+      "records9And10": "Complete positively selected records, including exact ordered49-field schema.",
+      "record8": "Every assigned row, complete selected values, ordered absence arrays, other-present names and original identity; all902 rows used to identify incident references.",
+      "records7And12": "Complete relevant catalog/member identity relationships; both selected membership arrays contain245 entries, including52 assigned rows.",
+      "record11": "Complete selected project descriptor record.",
+      "record1": "Permitted scalar binding fields."
+    },
+    "additionalEntireBodies": [
+      {"id": "SOURCE-BODY-065", "physicalRange": [1, 567]},
+      {"id": "SOURCE-BODY-069", "physicalRange": [1, 445]},
+      {"id": "SOURCE-BODY-071", "physicalRange": [1, 54]},
+      {"id": "SOURCE-BODY-072", "physicalRange": [1, 407]},
+      {"id": "SOURCE-BODY-078", "physicalRange": [1, 211]}
+    ],
+    "additionalSourceRanges": {
+      "SOURCE-BODY-064": [[150, 215]],
+      "SOURCE-BODY-068": [[120, 175]],
+      "SOURCE-BODY-073": [[80, 260], [410, 453]],
+      "SOURCE-BODY-081": [[270, 455], [680, 856], [1100, 1445]],
+      "SOURCE-BODY-082": [[100, 138], [270, 300], [685, 732]]
+    },
+    "inventoryVerification": "All98 BODY byte/digest bindings matched; independently counted50001 physical rows. All13 selected metadata descriptors matched. These inventory checks do not constitute substantive review of every globally available body or record.",
+    "unreadScope": "No mandatory local scope remains unread. Other source bodies/ranges and separately owned full metadata, graph, construction, startup and witness domains were not substantively completed here. Record7 sourceBindings was not credited as a complete semantic assessment."
+  },
+  "localDutyDisposition": {
+    "join": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+    "dutyKind": "LOCAL_PRIMARY",
+    "ownedAtomicDuty": "SELECTOR_LITERAL_ROWS_302_602",
+    "status": "COMPLETE",
+    "requirementCitation": "Bound scope-contract materialJoins.SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH.scopeDuties.D_SELECTORS_302_602; own scope duties and metadataRowPartitions.",
+    "assessment": [
+      "Matched all301 assigned rows exactly once to their hash-bound originals. Preserved exact-case keys, types, false values, empty strings, empty/singleton arrays, array positions and complete opaque strings. Independently repeated all2488 present-value comparisons, including nested object key order, without payload differences.",
+      "Verified all ordered absence arrays and other-present top-level names. No assigned selected field contained explicit null; absence was not substituted with null. Catalog top-level selector keys follow policy field order, which differs from many original descriptor object orders.",
+      "Substantively reviewed every assigned Modules array and incident Plugins reference. Repeated module names with different host types remain distinct occurrences; missing LoadingPhase retains its separate source-defined default relationship."
+    ]
+  },
+  "substantiveSourceAssessment": [
+    {
+      "conclusion": "Missing EnabledByDefault remains unspecified; explicit false remains disabled. Engine/project origin and the engine-default policy determine the subsequent default relationship.",
+      "citations": ["SOURCE-BODY-069 physical83-99 and364-381", "SOURCE-BODY-073 physical424-438", "SOURCE-BODY-082 physical118-135"]
+    },
+    {
+      "conclusion": "Empty platform arrays cannot receive a universal default. Row321 retains HasExplicitPlatforms=true and empty SupportedTargetPlatforms. Rows321,551 and600 also retain explicit empty module allow lists. C++ and UBT module filtering have distinct empty/null conditions.",
+      "citations": ["Record8 rows321,551,600", "SOURCE-BODY-069 physical433-443", "SOURCE-BODY-065 physical281-293", "SOURCE-BODY-081 physical1127-1139 and1307-1318"]
+    },
+    {
+      "conclusion": "Preserved literal spellings such as AllowlistPrograms, IsHidden, IsExperimental and bRequiresBuildPlatform without promoting them into different reader fields. Row580 EngineVersion remains an empty string; row540 Version remains0.2. Ancillary Python requirement strings and hashes were compared completely and treated as inert data.",
+      "citations": ["Record8 rows328,362,383,401,411,423,501,513,540,580", "SOURCE-BODY-065 physical199-214", "SOURCE-BODY-069 physical370-381", "SOURCE-BODY-081 physical398-416 and1232-1242"]
+    },
+    {
+      "conclusion": "Module host type, platform/architecture, target/configuration, program and commandlet gates remain conditional. Row333 ExplicitlyLoaded=true is distinct from ordinary phase loading. Selected descriptor membership establishes neither compilation nor activation.",
+      "citations": ["Record8 row333 and complete assigned Modules values", "SOURCE-BODY-068 physical156-160", "SOURCE-BODY-065 physical281-567", "SOURCE-BODY-078 physical44-123", "SOURCE-BODY-081 physical1291-1445"]
+    }
+  ],
+  "incidentReferences": {
+    "globalRawOccurrencesEnumerated": 1561,
+    "outgoingFromAssignedRows": 607,
+    "incomingFromOtherPartitions": 163,
+    "internalOccurrencesIncludedInOutgoing": 326,
+    "incidentUnion": 770,
+    "distinctLiteralReferenceObjectGroups": 316,
+    "incomingOriginalSourcesVerified": 105,
+    "evidence": "Complete incident projections retained literal reference objects, original source row and zero-based Plugins index, and target candidate row identities. Disabled and optional occurrences were retained. Incoming originals were independently checked against their descriptors and complete Plugins values.",
+    "caseDifferences": [
+      {"sourceRow": 207, "pluginsIndex": 6, "literalName": "TensorBoard", "targetRow": 420, "targetFileStem": "Tensorboard"},
+      {"sourceRow": 310, "pluginsIndex": 1, "literalName": "InterchangeAxFAssets", "targetRow": 309, "targetFileStem": "InterchangeAxfAssets"}
+    ],
+    "interpretation": "Literal grouping used Ordinal equality. Separate OrdinalIgnoreCase candidate matching is supported for the inspected UBT dictionary. These candidates are not asserted as observed runtime edges. Full runtime/build/cross-system graph disposition remains separately owned.",
+    "citations": ["Record8 complete902-row Plugins occurrence input", "SOURCE-BODY-082 physical283-300", "SOURCE-BODY-072 physical223-405"]
+  },
+  "errorsAndRecoveries": [
+    "Python was unavailable; no comparison executed through that failed invocation. Used independently authored PowerShell/.NET data comparisons.",
+    "Recovered original JSON reads from UTF-8 BOM and trailing-comma parser failures; original bytes remained unchanged for hashing.",
+    "Corrected a PowerShell array-expression error before crediting graph results.",
+    "Several oversized outputs were truncated. Recovered mandatory/material content through smaller source ranges, complete compact occurrence projections, complete comparisons and explicit absence reconstruction. No truncated output was credited as complete source coverage.",
+    "An early own-scope query emitted synthesized null values for three absent fields. Corrected witnesses showed bindingRequirements, launchBinding and separateGates absent from scope.selected.json, without values; their actual criteria were independently verified in the contract and prompt.",
+    "An overstrict comparison initially labelled policy-ordered top-level selector keys as payload errors. Recovery distinguished those orders and rechecked all2488 payloads plus incoming Plugins values with no differences.",
+    "Common/local coverage records differed only by the local fullBodyRequired=true addition. Catalog-root enumeration order was not assumed to equal bound JSONL physical order."
+  ],
+  "findings": [],
+  "materialUncertainty": "No unresolved material blocker within the assigned literal-row and incident-occurrence duty. Consumer-wide graph disposition, actual effective configuration, discovery/cache lineage, selected loaded types, compiler outputs, startup activation and native results are not established by this local assessment.",
+  "independenceAndExecution": {
+    "performed": "Read-only source/metadata inspection and independently authored comparisons.",
+    "notPerformed": "No delegation, resume/fork, memory retrieval, implementation import, stored-command execution, YAML parsing, build/test, engine/GUI, network, GitHub or file mutation.",
+    "runtimeEvidenceLimit": "Read-only/never permissions were supplied in this context. Actual launch isolation, CLI/model/settings, disabled-memory enforcement and received-input provenance remain for root's independent attestation. No generated runtime/invocation bodies were inspected."
+  },
+  "authorityBoundary": "SOURCE_PASS is local to D_SELECTORS_302_602. It supplies neither the aggregate SOURCE gate nor phase/native/final acceptance. A1G, A2, Linux, rendering/HUD, packaging and independent final CODE/REQ gates remain open."
+}
