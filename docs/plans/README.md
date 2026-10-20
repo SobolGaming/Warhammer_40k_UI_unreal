@@ -1,11 +1,36 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 52 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 53 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 52 records
+Revision 53 records
+**SCOPED_SOURCE_BLOCKED_STARTUP_AND_ALL_MODULES**.
+Eight fresh scoped SOURCE reviews closed for `7ef9358d836ed75b9d8ebc40b26c1b8f74af6ac4`
+/ run `20261020T052654Z-6fe9feeb`, against base
+`03d28af606fc6c57d20915f746296b0d843211c6`. Six raw local reports are
+SOURCE_PASS and TARGET/PLUGIN are BLOCKED; **zero passes are aggregate-admitted**.
+The 94-BODY / 35,428-row, 13-record / 902-row campaign retained 414 exact tool
+input/output pairs. All eight distinct review sessions exited 0 with confirmed
+cleanup and no timeout. These process results do not establish SOURCE approval.
+
+TARGET-B01 leaves effective XML-configurable `bBuildAllModules` and its alternate
+`PreBuildSetup` path unresolved. TARGET-B02 / PLUGIN-B1 lack the complete
+Default-phase startup caller; PLUGIN-B2 lacks complete explicit plugin load/mount
+implementations and material callers. These are positive-input/source-context
+gaps; no implementation defect is asserted. The
+[R2 summary](research/2026-10-20-e04a-scoped-r2-summary.md) and [factual record](evidence/2026-10-20-e04a-scoped-r2-result.json) preserve all eight raw reports.
+
+Both integration directories contain unused metadata only: no GO or launch.
+All eight experiment phases remain NOT RUN, with no native RunRoot. Repair
+proposals are being prepared; they are not adopted, implemented or natively
+proved. Fresh affected SOURCE and blind integrations, root admission and a
+labelled aggregate remain required before any phase. Final CODE/different REQ,
+A1G, A2's 727 scenarios, shared HUD/render/input, Linux and packaging remain open.
+Standing private-source/API review consent persists until explicitly revoked.
+
+Historical revision 52 records
 **TARGET_RULE_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY**.
 Root prospectively adopted the [target-rule SOURCE amendment](research/2026-10-20-e04a-source-composition-packet-v2.md).
 Its reference inventory is 94 BODY files / 35,428 rows, including the new

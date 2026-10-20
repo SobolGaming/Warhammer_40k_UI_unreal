@@ -1,0 +1,248 @@
+{
+  "verdict": "BLOCKED",
+  "role": "SOURCE",
+  "scopeId": "S_PLUGIN",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-7ef9358-20261020T052654Z-6fe9feeb",
+  "subject": {
+    "sourceHead": "7ef9358d836ed75b9d8ebc40b26c1b8f74af6ac4",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T052654Z-6fe9feeb",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF"
+  },
+  "disposition": "The assigned complete files and declared wrapper units were fully reviewed. Required startup-caller coverage remains incomplete within the positive BODY grants. No implementation defect is established by this report.",
+  "bindingVerification": {
+    "result": "MATCH",
+    "method": "Independently compared exact identity fields, descriptor paths, byte counts and SHA256 values. Actual launch prompt consists of the exact prepared prompt followed by the matching ROOT ACTUAL GO. Template authority fields were kept distinct from the actual authorization.",
+    "scopeContract": {
+      "bytes": 47610,
+      "sha256": "f2ffef0d6526ee8c201b4a278d135199fa04b58375f3bd6a9afb111a530871ae"
+    },
+    "bootstrap": {
+      "bytes": 5381,
+      "sha256": "059626f335cbc33299491caedf95d50b8081499953c77c1d80708f9f164824e2"
+    },
+    "ownCoverage": {
+      "bytes": 30922,
+      "sha256": "ed5081011ee34ec3ffd48595da76bcd147dbd5b8c552647ed38ac815f9b5029a"
+    },
+    "inputManifest": {
+      "bytes": 559382,
+      "sha256": "ade040b896c176263b673a4724a7c0c3e6db9ffa56ee9c3d9b1acbcbad54f8b4"
+    },
+    "runtimeFreezeManifest": {
+      "bytes": 550803,
+      "sha256": "42e3967d9456e0e1291cbc1d5bace3481c9cc2da90f3414ca6993cb3a4eea37e"
+    },
+    "launchPermission": {
+      "bytes": 2009,
+      "sha256": "e7e65a4741de30dda6e5ab50c10c566e3bcbb9be5027ead45cfee5ea626f649c"
+    },
+    "rootLaunchGo": {
+      "bytes": 4762,
+      "sha256": "076ad9ab2426027eb21c5cbf0a1ece5309b41238437d20e0393715a78c8bd199"
+    },
+    "preparedPrompt": {
+      "bytes": 24233,
+      "sha256": "3ef2b05f43a2e68bc3229bc36e1101ac3f7d0c78149a235c835bc0a0373df866"
+    },
+    "actualPrompt": {
+      "bytes": 25451,
+      "sha256": "e66240e7a65862937f6d0a6b8aca70aa1056b42306dadeb92d8d47b52fe3a7cf"
+    },
+    "commonCriteria": [
+      {
+        "name": "globalBodyAccessPolicy",
+        "bytes": 52988,
+        "sha256": "1b6005ccf0f4b88aa5b7cd01cd08aa0a2aafea29b1ddc006708757d15b2468fd"
+      },
+      {
+        "name": "globalCoverageInventory",
+        "bytes": 64771,
+        "sha256": "b09a80f8050ab7ca5b3d5b21fba0e37ab081f1bf3d5c466a6304cfa3fddd819a"
+      },
+      {
+        "name": "globalSelectedMetadataPolicy",
+        "bytes": 14015,
+        "sha256": "7aa33dfa00138cde8b3577bffbaf3f05f75a14e880979592650f973f867900d2"
+      }
+    ],
+    "criteriaHandling": "Each complete common criteria record was parsed only from its exact bound absolute path after byte-count and SHA256 verification. Each appears in the panel input and frozen inventories. References were not treated as additional BODY grants.",
+    "limits": "Source head and comparison base are bound root-supplied identities; Git was not invoked. Existing transport was not treated as automatic semantic validation of campaign, scope or added fields."
+  },
+  "blockingFindings": [
+    {
+      "id": "S_PLUGIN-B1",
+      "requirement": "scope.duties[0]; materialJoins.BUILD_RECEIPT_STARTUP; reviewDiscipline.materialGap",
+      "finding": "The granted source does not complete the startup relationship that dispatches the proof modules at LoadingPhase Default.",
+      "evidence": [
+        "SOURCE-BODY-002 physical lines 14–15 declares both proof modules with LoadingPhase Default.",
+        "SOURCE-BODY-075 physical lines 4–65 and 70–165 completely supplies the phase-parameterized plugin module loader, including enablement and ExplicitlyLoaded filtering. It does not supply the startup caller selecting Default.",
+        "SOURCE-BODY-065 physical lines 539–566 supplies LoadModulesForPhase; matching a requested phase does not establish that startup requests Default.",
+        "SOURCE-BODY-058 physical lines 1710–1738 supplies FEngineLoop::PreInit, including its call to PreInitPostStartupScreen at physical line 1730. The latter body is outside this excerpt.",
+        "Selected metadata record 5, binding LAUNCH_ENV_AND_TARGET_ORDERING, limits the supplied LaunchEngineLoop.cpp ranges to 1728–3435, 4395–4422, 6322–6434 and 6518–6921. The origin descriptor is 244123 bytes, SHA256 C45991A136185130235E507C9BB9EC6E926D4F2006A384B2F61E7E6227742C6F.",
+        "Searches confined to all 94 positively granted BODY files did not locate the missing Default-phase startup dispatch."
+      ],
+      "impact": "The reviewed enablement and module-filter code supports a conditional loading analysis, but the required complete caller-to-startup relationship cannot be concluded.",
+      "requiredRecovery": "Amend and refreeze positive grants for the complete relevant startup caller units, then obtain a current affected assessment. No ungranted origin body was read."
+    },
+    {
+      "id": "S_PLUGIN-B2",
+      "requirement": "scope.duties[0], complete explicit-loading routes and callers",
+      "finding": "The granted bodies establish ExplicitlyLoaded parsing, documented behavior and exclusion from automatic loading, but do not supply the complete explicit load/mount implementation and caller route.",
+      "evidence": [
+        "SOURCE-BODY-068 physical lines 156–157 documents explicit loading and mounting with loading phases ignored.",
+        "SOURCE-BODY-075 physical lines 95–108 excludes explicitly loaded plugins from ordinary phase loading.",
+        "Selected metadata record 5 supplies the automatic loader ranges but no complete explicit load/mount implementation."
+      ],
+      "impact": "This leaves the expressly assigned route duty incomplete. Its immediate effect on the conservative current membership is limited: all six catalog entries with ExplicitlyLoaded true are outside the selected 245-plugin set.",
+      "requiredRecovery": "Bind the necessary complete explicit-loading source units and material callers, or prospectively amend the scope duty and refreeze. A descriptor reference alone is insufficient."
+    }
+  ],
+  "substantiveAssessment": [
+    {
+      "topic": "Discovery and catalog semantics",
+      "result": "The 902-row raw catalog is a conservative inventory, not the exact set discovered by normal runtime traversal.",
+      "citations": [
+        "SOURCE-BODY-013 physical lines 1236–1297",
+        "SOURCE-BODY-073 physical lines 1–545",
+        "SOURCE-BODY-074 physical lines 1–585",
+        "Selected metadata records 8, 9 and 10"
+      ],
+      "detail": "Runtime discovery handles root origin, project precedence, versions, platform extensions and directory stopping rules. Five extension descriptors contain no module or dependency payload to merge. Catalog row 467, PregenContent, is nested below the USDPregen descriptor at row 468; ordinary traversal stops at the parent descriptor. Both are outside the current conservative reachable set."
+    },
+    {
+      "topic": "Complete raw graph",
+      "result": "All 902 nodes, all 1561 plugin-reference occurrences and all 1774 module occurrences were independently considered from permitted raw selected data.",
+      "detail": "All 32 reference-selector profiles and 310 module-selector profiles were inspected exhaustively with occurrence membership. Presence, ordered arrays, exact spelling and case were retained. For Win64 Editor Development, the conservative reference calculation has 1551 candidate occurrences, seven disabled occurrences and three occurrences excluded by platform allow lists. Starting from 186 roots, the conservative reachable set contains 245 plugins and matches the frozen selected membership in both directions. No disabled plugin or unresolved reference is reachable under that calculation.",
+      "limits": "This equality is a conditional source calculation, not observed runtime enablement. Four case-mismatched reference names occur under parents outside the reachable set; exact runtime string-lookup behavior was not established from a granted string implementation. Platform runtime hooks, optional compile-time restrictions and actual build configuration can reduce the conservative set.",
+      "citations": [
+        "SOURCE-BODY-069 physical lines 1–445",
+        "SOURCE-BODY-072 physical lines 1–407",
+        "SOURCE-BODY-076 physical lines 1–621",
+        "SOURCE-BODY-077 physical lines 1–134",
+        "SOURCE-BODY-078 physical lines 1–211",
+        "Selected metadata record 8, complete rows 1–902",
+        "Selected metadata records 7 and 12, all 245 membership descriptors"
+      ]
+    },
+    {
+      "topic": "Target, receipt and runtime relationship",
+      "result": "Selected membership and BuildPlugins are not equivalent to runtime enablement.",
+      "detail": "The concrete Editor target enables E04ProfileProof. The complete target initialization artifact supplies inherited defaults, CLI/configuration application, hook forwarding and finalization. Receipt construction serializes plugin overrides and build membership separately; runtime receipt consumption and command-line/project/default processing remain distinct selection steps. The wrapper checks exact receipt identity and expected override policy, then passes explicit enable/disable arguments.",
+      "citations": [
+        "SOURCE-BODY-001 physical lines 1–15",
+        "SOURCE-BODY-059 physical lines 1–407",
+        "SOURCE-BODY-060 physical lines 1–67",
+        "SOURCE-BODY-061 physical lines 1–292",
+        "SOURCE-BODY-083 physical lines 1–971",
+        "SOURCE-BODY-084 physical lines 1–454",
+        "SOURCE-BODY-092 physical lines 1–2968",
+        "SOURCE-BODY-013 physical lines 1300–1390 and 1548–1554"
+      ]
+    },
+    {
+      "topic": "Metadata identity and historical provenance",
+      "result": "Current relationships were checked without promoting historical provenance into current authority.",
+      "detail": "All 902 catalog origin descriptors match frozen descriptor identities. All 245 selected membership descriptors match the current closure by path, byte count and SHA256 identity. Record 12 retains its older sourceHead and runId; these were not substituted for the current campaign identity. Records 9 and 10 were read completely through every positively selected field, including the complete 49-field policy. Similar but unconsumed spellings were not normalized into recognized selectors."
+    },
+    {
+      "topic": "Subset boundary",
+      "result": "The source remains an exception-enabled Editor raw-document subset.",
+      "detail": "The probe's local bEnableExceptions false does not establish an exception-disabled caller environment. A1G, A2 compatibility, Linux, rendering/HUD and other acceptance gates remain open.",
+      "citations": [
+        "SOURCE-BODY-010 physical lines 11–14",
+        "SOURCE-BODY-057 physical lines 1–196",
+        "SOURCE-BODY-093 physical lines 1–50"
+      ]
+    }
+  ],
+  "coverage": {
+    "citationConvention": "SOURCE-BODY identifiers resolve through the bound inventory. Ranges below are positive physical line ranges, including excerpt headers.",
+    "verifiedInventory": {
+      "bodyFiles": 94,
+      "physicalRows": 35428,
+      "selectedMetadataRecords": 13,
+      "descriptorRows": 902,
+      "pluginReferenceOccurrences": 1561
+    },
+    "mandatoryEntireBodies": {
+      "SOURCE-BODY-001": [1, 15],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-016": [1, 8],
+      "SOURCE-BODY-019": [1, 288],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-059": [1, 407],
+      "SOURCE-BODY-060": [1, 67],
+      "SOURCE-BODY-061": [1, 292],
+      "SOURCE-BODY-062": [1, 151],
+      "SOURCE-BODY-063": [1, 144],
+      "SOURCE-BODY-064": [1, 271],
+      "SOURCE-BODY-065": [1, 567],
+      "SOURCE-BODY-066": [1, 40],
+      "SOURCE-BODY-067": [1, 63],
+      "SOURCE-BODY-068": [1, 267],
+      "SOURCE-BODY-069": [1, 445],
+      "SOURCE-BODY-070": [1, 51],
+      "SOURCE-BODY-071": [1, 54],
+      "SOURCE-BODY-072": [1, 407],
+      "SOURCE-BODY-073": [1, 545],
+      "SOURCE-BODY-074": [1, 585],
+      "SOURCE-BODY-075": [1, 166],
+      "SOURCE-BODY-076": [1, 621],
+      "SOURCE-BODY-077": [1, 134],
+      "SOURCE-BODY-078": [1, 211],
+      "SOURCE-BODY-079": [1, 212],
+      "SOURCE-BODY-080": [1, 245],
+      "SOURCE-BODY-083": [1, 971],
+      "SOURCE-BODY-084": [1, 454],
+      "SOURCE-BODY-093": [1, 50],
+      "SOURCE-BODY-094": [1, 88]
+    },
+    "mandatoryEntireBodyCount": 34,
+    "mandatoryEntirePhysicalRows": 8482,
+    "mandatoryCompleteUnits": {
+      "body": "SOURCE-BODY-013",
+      "sha256": "642FD17AE0E46F179C694CBF593365446F989E7754F01D37BD7CB4942EB08E14",
+      "physicalRanges": [[1236, 1390], [1548, 1554]],
+      "units": [
+        "Catalog-Descriptors",
+        "Check-PluginDiscoveryCatalog",
+        "Resolve-ReceiptPath",
+        "Check-TargetReceipt",
+        "Check-StagedPluginClosure",
+        "Native-Arguments"
+      ],
+      "result": "Complete"
+    },
+    "additionalEntireBodies": {
+      "SOURCE-BODY-004": [1, 15],
+      "SOURCE-BODY-008": [1, 48],
+      "SOURCE-BODY-010": [1, 18],
+      "SOURCE-BODY-011": [1, 3],
+      "SOURCE-BODY-058": [1, 2257],
+      "SOURCE-BODY-092": [1, 2968]
+    },
+    "allReviewedBody013Ranges": [[1197, 1490], [1548, 1590], [1638, 1675]],
+    "completeFileTotal": 40,
+    "completeFilePhysicalRows": 13791,
+    "completeFilesPlusEnumeratedBody013Ranges": 14166,
+    "unreadScope": "The remaining 54 BODY files were not reviewed in their entirety; BODY013 was reviewed only in the enumerated ranges plus search snippets. Integrity and physical counts for all 94 are not a claim of substantive complete-file review. Metadata records 3, 6 and 13 were not substantively assessed. Relationship records 1, 2, 4, 5, 7, 8, 11 and 12 were inspected as needed; this does not claim every permitted field of each was fully rendered. In particular, record 4 groups/uniquePrimarySources and record 7 sourceBindings were not completely rendered. Required full selected records 9 and 10 and the complete raw graph data were assessed. The material ungranted caller duties remain incomplete as identified above."
+  },
+  "errorsAndRecoveries": [
+    "Several oversized tool renderings were truncated. Missing mandatory source portions were reread with explicit physical ranges. Complete record 5 bindings were reread in two exhaustive ordered chunks. No truncated mandatory source output was treated as complete.",
+    "An independently authored graph query initially had a PowerShell brace/parser error and produced no source result. The corrected self-contained query completed successfully.",
+    "A metadata query emitted a query-generated field:null/present:false placeholder. This was an erroneous query artifact, not source absence or source null. Exact named-field presence queries replaced it.",
+    "A later policy query incorrectly assumed selected records contained recordOrdinal and failed its uniqueness guard. The complete policy was reread, and its actual ordered record representation was used.",
+    "All reported data reads used ErrorActionPreference Stop. No source EOF or JSON parsing failure remains unresolved. Earlier exposure and partial optional renderings are disclosed rather than treated as nonexistent."
+  ],
+  "independenceAndRuntime": {
+    "actions": "Read-only source and permitted metadata inspection; independently authored comparisons and graph calculations.",
+    "notPerformed": "No delegation, saved files, mutation, Git, network, GitHub, GUI, build, tests, engine execution, stored-command execution, implementation import or YAML parsing. No peer reports, previous verdicts, private sessions, credentials or external memory were consulted.",
+    "attestationLimit": "Fresh independent context and disabled memory were requested. No memory facility was used. Actual runtime settings, isolation and received-input provenance were not independently verified through generated artifacts because those bodies are expressly ungranted; root attestation and postclose verification remain separate."
+  },
+  "authority": "This is one local S_PLUGIN scoped BLOCKED assessment. It is not the aggregate SOURCE disposition, a phase GO, native execution evidence or final acceptance. Root alone aggregates the ten scopes. A1G, A2, Linux, rendering/HUD, packaging, final independent CODE and different REQ requirements remain open."
+}

@@ -1,0 +1,197 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+  "campaignId": "E04A1E-SCOPED-7ef9358-20261020T052654Z-6fe9feeb",
+  "scopeId": "D_SELECTORS_603_902",
+  "subject": {
+    "sourceHead": "7ef9358d836ed75b9d8ebc40b26c1b8f74af6ac4",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T052654Z-6fe9feeb"
+  },
+  "qualification": "Local scoped SOURCE_PASS only. This report does not establish the aggregate SOURCE gate, phase authority, native execution success or final acceptance.",
+  "bindingVerification": {
+    "result": "PASS",
+    "inputManifestSHA256": "c71e2286bac25670bd22f8a34d4b660583f61a00f9b65facb2d218ec2ce96422",
+    "runtimeFreezeSHA256": "42e3967d9456e0e1291cbc1d5bace3481c9cc2da90f3414ca6993cb3a4eea37e",
+    "scopeContractSHA256": "f2ffef0d6526ee8c201b4a278d135199fa04b58375f3bd6a9afb111a530871ae",
+    "bootstrapSHA256": "a083df4ca0bf67ba0e026c78d9eb7971e57388c037fdee97c995fde539126be6",
+    "localCoverageSHA256": "2bbf02a02454b88ef8bba4ec337e7d37004a6b9d0c0c2b60f4ea21bf611b475a",
+    "launchPermissionSHA256": "080f245ab06f3e95b182785460cb8df6c5a006f288faee13f14936134826292c",
+    "preparedPromptSHA256": "82e5c0ad4c5753d2fe1f30280cd0436ca32fcf8d55608af5403736482c858206",
+    "actualPromptSHA256": "95cf83badf893e027b93ed8ddf8bae3bb61b696106428a4994ac0d3e9b3769b2",
+    "details": [
+      "Verified bound byte counts and hashes before dependent assessment.",
+      "Exact head/base/run/campaign/scope/assessment identities agree across applicable own bootstrap, manifest, policies, coverage, scope and current ROOT GO records.",
+      "The actual prompt has the exact prepared-prompt prefix and matching ROOT ACTUAL GO tail. Its complete local/common requirements JSON equals the corresponding bound scope-contract records.",
+      "Verified the three common criteria records by their exact absolute descriptors before parsing. Each occurs exactly once in both panel inputFiles and frozenFiles.",
+      "Common and local BODY grants agree. Selected-record policy comparisons agree, allowing the expressly identified own-copy path for record 4 with identical bytes and hash.",
+      "Recalculated and verified 94 BODY files and 35,428 physical lines, including actual hashes and freeze membership; verified all 13 selected-record descriptors.",
+      "Head/base are root-supplied identities; no Git commands were run."
+    ],
+    "commonCriteriaSHA256": {
+      "bodyAccessPolicy": "1b6005ccf0f4b88aa5b7cd01cd08aa0a2aafea29b1ddc006708757d15b2468fd",
+      "coverageInventory": "b09a80f8050ab7ca5b3d5b21fba0e37ab081f1bf3d5c466a6304cfa3fddd819a",
+      "selectedMetadataPolicy": "7aa33dfa00138cde8b3577bffbaf3f05f75a14e880979592650f973f867900d2"
+    }
+  },
+  "completeCoverage": {
+    "mandatoryBodies": [
+      "SOURCE-BODY-054: physical lines 1–294",
+      "SOURCE-BODY-055: physical lines 1–142",
+      "SOURCE-BODY-056: physical lines 1–14",
+      "SOURCE-BODY-057: physical lines 1–196",
+      "SOURCE-BODY-093: physical lines 1–50",
+      "SOURCE-BODY-094: physical lines 1–88"
+    ],
+    "mandatoryBodyFiles": 6,
+    "mandatoryPhysicalLines": 784,
+    "mandatoryCompleteUnitRanges": [],
+    "selectedMetadata": [
+      "Record 8: every complete physical row 603–902, in original JSONL order",
+      "Records 9 and 10: all positively selected catalog/schema fields",
+      "Records 7, 11 and 12: material catalog, membership, project and receipt-policy relationships"
+    ],
+    "additionalCompleteBodies": [
+      "SOURCE-BODY-001: 1–15",
+      "SOURCE-BODY-002: 1–17",
+      "SOURCE-BODY-016: 1–8",
+      "SOURCE-BODY-017: 1–12",
+      "SOURCE-BODY-018: 1–12",
+      "SOURCE-BODY-065: 1–567",
+      "SOURCE-BODY-069: 1–445",
+      "SOURCE-BODY-078: 1–211"
+    ],
+    "totalCompleteBodyFilesInspected": 14,
+    "totalCompleteBodyPhysicalLines": 2071,
+    "additionalPartialSourceReads": [
+      "SOURCE-BODY-064: 140–260",
+      "SOURCE-BODY-072: 168–407",
+      "SOURCE-BODY-076: 142–300",
+      "SOURCE-BODY-084: 194–454",
+      "SOURCE-BODY-092: 220–318 and 380–390",
+      "Additional source index searches in BODY072/076/084/092; these are not claimed as complete-file review."
+    ]
+  },
+  "assessment": {
+    "literalCorrespondence": {
+      "result": "PASS",
+      "assignedRows": 300,
+      "uniqueAssignedOriginPaths": 300,
+      "selectedFieldsPerRow": 49,
+      "presentFieldComparisons": 2282,
+      "absentFieldComparisons": 12418,
+      "mismatches": 0,
+      "details": [
+        "Independently compared every assigned hash-bound original through the positive 49-field policy, including complete nested values and array order.",
+        "Verified actual origin bytes and full SHA256 strings, selected property presence, ordered absentSelectorFields, otherPresentTopLevelFieldNames and row shape.",
+        "All 299 assigned engine origins join the current catalog by exact path and matching byte/digest identity; row 902 corresponds to the proof plugin.",
+        "Observed 668 module entries, zero top-level explicit null values, six top-level empty arrays and 293 top-level singleton arrays. No null/default substitution was used.",
+        "The 65 assigned members of the selected-membership inventory match their catalog identities."
+      ],
+      "citations": [
+        "scope.selected.json:75–88",
+        "metadata record 8, descriptor-selection-values.v2.PROPOSED.jsonl:603–902; SHA256 2c827479c1ac99987bcd42e305c9d3ccbf453070b81351e980c06e66dd7bf8fd",
+        "metadata record 9: representation, selectorFields, catalogRoots",
+        "metadata record 10: valueRepresentation, absentRepresentation, originIdentity, fields"
+      ]
+    },
+    "selectorInterpretation": {
+      "result": "PASS",
+      "details": [
+        "Preserved EnabledByDefault=false, true and absent as distinct states: 173, 48 and 79 assigned rows respectively. PluginDescriptor construction initializes the absent state as Unspecified.",
+        "Preserved explicit platform lists, empty arrays, architecture exclusions, target/configuration filters, optional references and ExplicitlyLoaded values. Inventory membership was not equated with module loading.",
+        "Preserved string-valued Hidden in rows 879–881 and ProgramAllowlist spelling in nested module objects; neither was rewritten into another type or property name.",
+        "Preserved Version values including 1.2, 1.1 and 1.0 without inserting derived engine conversions.",
+        "Row 902 matches BODY002. BODY001 explicitly enables E04ProfileProof for the dedicated Editor target. The project explicitly references ProceduralMeshComponent; ordinary targets contain no proof-plugin enablement.",
+        "The probe's DeveloperTool and Editor allow-list conditions remain conditional on actual target/build configuration. Raw descriptor data does not establish successful compilation or loading."
+      ],
+      "citations": [
+        "SOURCE-BODY-069:83–99, 364–381, 433–443",
+        "SOURCE-BODY-064:207–212",
+        "SOURCE-BODY-065:165–255, 281–391, 398–566",
+        "SOURCE-BODY-078:44–123, 134–182",
+        "SOURCE-BODY-001:6–14",
+        "SOURCE-BODY-002:8–15",
+        "SOURCE-BODY-016:6–7",
+        "SOURCE-BODY-092:254–276, 306–315, 382–387",
+        "SOURCE-BODY-057:48–76, 149–176"
+      ]
+    },
+    "incidentReferences": {
+      "result": "PASS_FOR_LOCAL_OCCURRENCE_DUTY",
+      "globalRawPluginReferenceOccurrences": 1561,
+      "assignedOutgoingOccurrences": 497,
+      "assignedIncomingOccurrences": 548,
+      "internalOccurrences": 300,
+      "crossPartitionOutgoingOccurrences": 197,
+      "crossPartitionIncomingOccurrences": 248,
+      "distinctIncidentOccurrences": 745,
+      "identityMethod": "Retained bound record-8 physical source row, zero-based Plugins array index, complete literal reference and endpoint origin-row identity. Enumerated every outgoing occurrence and every incoming cross-partition occurrence without sampling.",
+      "details": [
+        "Endpoint-name candidate matching has no basename ambiguity. Original reference spelling remains intact.",
+        "Enabled=false references remain occurrences, including row 608 Plugins[4]. Optional=false and Optional=true remain distinct from absence.",
+        "Configuration-dependent references, including row 668's Shipping exclusion, were retained as conditions.",
+        "The project reference in record 11 additionally joins ProceduralMeshComponent at row 749.",
+        "Full runtime/build/cross-system graph disposition remains assigned to S_PLUGIN, S_TARGET_RECEIPT and I_ACTIVATION."
+      ],
+      "caseDifferentReference": {
+        "sourceRow": 667,
+        "pluginIndexZeroBased": 0,
+        "referencePresent": true,
+        "reference": {
+          "Name": "MetaSound",
+          "Enabled": true
+        },
+        "candidateTargetRow": 715,
+        "targetOriginPresent": true,
+        "targetOrigin": {
+          "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Plugins\\Runtime\\Metasound\\Metasound.uplugin",
+          "bytes": 1716,
+          "sha256": "DA4A4EBAF2E26447C99A2742D008E1B799D5FC7C28FC154CA8732B4991C86E1E"
+        },
+        "disposition": "Literal case difference preserved. Candidate identity is not a claim of actual runtime resolution."
+      },
+      "citations": [
+        "scope.selected.json:84–88 and 234–247",
+        "metadata record 8: complete Plugins occurrence inventory across rows 1–902",
+        "SOURCE-BODY-072:228–241, 281–318, 357–405",
+        "SOURCE-BODY-084:202–434",
+        "SOURCE-BODY-076:149–293"
+      ]
+    },
+    "relatedMetadata": {
+      "result": "PASS",
+      "details": [
+        "Record 11's complete literalObject equals granted BODY016.",
+        "Current record 7 and historical record 12 contain the same 245 path/byte/digest identities. All 245 SHA256 text comparisons differ only in letter case; exact source casing was retained.",
+        "Record 12 retains sourceHead c6a9410a524649147f157c3c17a2b838c7e0fc81 and runId 20261020T010406Z-a7dec142. It is historical membership metadata, not current runtime evidence.",
+        "The historical originClosure descriptor was retained without opening that ungranted origin body.",
+        "Record 7's targetReceiptPolicy requires the dedicated Editor receipt, E04ProfileProof=true and engine-default allowance. These are policy inputs, not an observed receipt."
+      ]
+    }
+  },
+  "findings": [],
+  "errorsAndRecoveries": [
+    "Initial combined identity/contract output truncated. Recovered complete local duties and policies through smaller reads and exact full local/common prompt-to-contract comparisons.",
+    "Python was unavailable; that attempted comparison did not run. Reimplemented comparisons as independent inert PowerShell data queries.",
+    "Direct UTF-8 byte decoding encountered an origin BOM. Recovered with BOM-aware ReadAllText and reran all 300 origin comparisons successfully.",
+    "An incorrect root-concatenation ordering assumption generated truncated mismatch diagnostics. Replaced it with complete exact-path catalog joins while preserving original JSONL physical row order; no source ordering defect was established.",
+    "A case-sensitive historical/current membership diagnostic expanded all SHA256 casing differences and truncated. Recovered the complete comparison: 245 case-only differences, no unresolved path/byte/digest differences.",
+    "Oversized relationship/row outputs truncated. Recovered relevant metadata through complete joins and reread assigned selector objects in contiguous batches. The small truncation within row 827 was separately reread completely."
+  ],
+  "independenceAndRuntime": {
+    "observed": "Review-only work in the supplied read-only, approval-never environment. No implementation authored, files saved, delegation, stored-command execution, YAML parsing, builds, tests, engine/GUI, network or GitHub operations.",
+    "excludedInputs": "No peer reports/graphs, previous verdicts, author notes, credentials, private sessions or prohibited generated runtime/invocation bodies were inspected.",
+    "memory": "No memory facility used. Actual launcher memory-setting enforcement remains independently unverified here.",
+    "rootReservedVerification": "Actual invocation/session/model/settings, freshness/isolation and received-input provenance require root's independent attestation and postclose verification. Hash-matching prompt files alone do not prove transmission or execution."
+  },
+  "unreadScopeAndUncertainty": {
+    "mandatoryLocalScopeUnread": [],
+    "remainingGlobalScope": "The remaining BODY files were identity/hash/line-count verified but not completely substantively reviewed. Partial source reads above are explicitly limited. Unassigned selector rows were used for incident-reference and identity joins, not claimed as complete independent literal assessments.",
+    "metadataLimits": "Records 7/11/12 were assessed for local material relationships; this is not a full ownership assessment of every global selected record.",
+    "materialLocalDataUncertainty": "None remaining in assigned literal correspondence or occurrence enumeration.",
+    "reservedClaims": "Actual activation, final target configuration, extension/discovery behavior and complete graph acceptance remain with their assigned owners. Root runtime validation remains required before aggregation."
+  },
+  "separateGates": "E04-A1G exception-disabled caller proof, A2 compatibility, Linux, rendering/HUD, packaging, phase/native evidence and final independent CODE/different REQ acceptance remain open."
+}

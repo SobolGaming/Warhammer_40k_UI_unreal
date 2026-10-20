@@ -1,0 +1,206 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-7ef9358-20261020T052654Z-6fe9feeb",
+  "scopeId": "S_BUILD_HOST",
+  "sourceHead": "7ef9358d836ed75b9d8ebc40b26c1b8f74af6ac4",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T052654Z-6fe9feeb",
+  "disposition": "Local scoped source assessment only. No actionable source defect or unresolved material blocker was identified within S_BUILD_HOST. This does not establish the aggregate SOURCE gate, phase authority, native success or final acceptance.",
+  "bindings": {
+    "panelDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-7ef9358-20261020T052654Z-6fe9feeb-S_BUILD_HOST",
+    "commonDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-7ef9358-20261020T052654Z-6fe9feeb",
+    "verifiedPanelFiles": {
+      "source-review-input-manifest.json": {
+        "bytes": 559514,
+        "sha256": "569d1cbdb6159a93b293fb23460bbf456e304721f0dc10db81186098ab0ccbe1"
+      },
+      "scope-contract.original.json": {
+        "bytes": 47610,
+        "sha256": "f2ffef0d6526ee8c201b4a278d135199fa04b58375f3bd6a9afb111a530871ae"
+      },
+      "review-bootstrap.json": {
+        "bytes": 5409,
+        "sha256": "91e00b98e269850f00f8b918ab86c3a8a01cb3bce8a6f927bc768d2216c7fb21"
+      },
+      "coverage-plan.json": {
+        "bytes": 29917,
+        "sha256": "3b4ad7071cd25bf2f704b26f23cc19be814ffe7a3fe75c0016bc0417025d6a9f"
+      },
+      "body-access-policy.json": {
+        "bytes": 54049,
+        "sha256": "662d4c5e24ea4af0bb5d8f0e62a74d2ce77de3292780923b7a0d1c2a948e4c00"
+      },
+      "metadata-selection-policy.json": {
+        "bytes": 17599,
+        "sha256": "d54450e3271d58040da25fa1861115669fce4a6ea0d55f77d5b98394deb70549"
+      },
+      "launch-permission-go.original.json": {
+        "bytes": 2025,
+        "sha256": "720295f1056f56176575d09e6e0fb9599c86f62c5e95e974ac85fa8fc1cad275"
+      },
+      "prepared-review.prompt.original.txt": {
+        "bytes": 24666,
+        "sha256": "aafc874b00c344b090197dbf88b638f9c28357688d06254de6f3e2a940359bf0"
+      },
+      "actual-launch.prompt.original.txt": {
+        "bytes": 25892,
+        "sha256": "379ba8e1488820035021bc342f902a06f0dc1d01046a183fcbfb02724e41fe12"
+      }
+    },
+    "verifiedCommonFiles": {
+      "runtime-freeze\\freeze-manifest.PROPOSED.json": {
+        "bytes": 550803,
+        "sha256": "42e3967d9456e0e1291cbc1d5bace3481c9cc2da90f3414ca6993cb3a4eea37e"
+      },
+      "body-access-policy.json": {
+        "bytes": 52988,
+        "sha256": "1b6005ccf0f4b88aa5b7cd01cd08aa0a2aafea29b1ddc006708757d15b2468fd"
+      },
+      "metadata-selection-policy.json": {
+        "bytes": 14015,
+        "sha256": "7aa33dfa00138cde8b3577bffbaf3f05f75a14e880979592650f973f867900d2"
+      },
+      "coverage-plan.json": {
+        "bytes": 64771,
+        "sha256": "b09a80f8050ab7ca5b3d5b21fba0e37ab081f1bf3d5c466a6304cfa3fddd819a"
+      },
+      "primary-catalog.integrated.json": {
+        "bytes": 147182,
+        "sha256": "0eeae8618bab7796db32c14cebb59c25f1bbd644f03e9e4a6308d3506d5f6637"
+      },
+      "source-review-input-manifest.json": {
+        "bytes": 552958,
+        "sha256": "49102964725d39c2e802066e57df676c4135511a6e8427dacc3bac469a56e66a"
+      }
+    },
+    "identityAssessment": [
+      "Head, base, run, campaign, scope and assessment kind agree across the own bootstrap, policies, coverage, manifest and root launch GO.",
+      "The selected scope and subject exactly equal the corresponding pure contract objects.",
+      "The pure contract explicitly contains reviewLaunchAuthority=false, phaseAuthority=false, nativeExecutionAuthority=false and actualGo=false. These were not treated as launch consent.",
+      "The actual prompt file starts with the complete prepared prompt and appends the supplied ROOT ACTUAL GO tail.",
+      "The three exact common criteria records were descriptor-verified before parsing and each occurs once in both panel inputFiles and frozenFiles.",
+      "Common and panel BODY grants agree exactly. The metadata policies differ only in record 4's common versus panel catalog path; both catalog copies have identical bound bytes and SHA256.",
+      "Head/base bindings are root-supplied identities; Git ancestry was not independently verified."
+    ]
+  },
+  "coverage": {
+    "citationConvention": "SOURCE-BODY IDs resolve through the bound policies and coverage inventory. Ranges below are inclusive physical rows of those bound files.",
+    "actualAvailableBodyFiles": 94,
+    "actualAvailablePhysicalRows": 35428,
+    "allBodyDescriptorChecks": "Byte counts, SHA256 values and physical line counts matched for all 94 available BODY files.",
+    "mandatoryCompleteFiles": 35,
+    "mandatoryCompletePhysicalRows": 8463,
+    "completeMandatoryRanges": {
+      "SOURCE-BODY-001": [1, 15],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-003": [1, 326],
+      "SOURCE-BODY-004": [1, 15],
+      "SOURCE-BODY-005": [1, 50],
+      "SOURCE-BODY-006": [1, 58],
+      "SOURCE-BODY-010": [1, 18],
+      "SOURCE-BODY-011": [1, 3],
+      "SOURCE-BODY-012": [1, 608],
+      "SOURCE-BODY-013": [1, 1696],
+      "SOURCE-BODY-014": [1, 260],
+      "SOURCE-BODY-015": [1, 510],
+      "SOURCE-BODY-016": [1, 8],
+      "SOURCE-BODY-017": [1, 12],
+      "SOURCE-BODY-018": [1, 12],
+      "SOURCE-BODY-019": [1, 288],
+      "SOURCE-BODY-047": [1, 398],
+      "SOURCE-BODY-048": [1, 564],
+      "SOURCE-BODY-053": [1, 293],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-060": [1, 67],
+      "SOURCE-BODY-061": [1, 292],
+      "SOURCE-BODY-062": [1, 151],
+      "SOURCE-BODY-085": [1, 24],
+      "SOURCE-BODY-086": [1, 675],
+      "SOURCE-BODY-087": [1, 680],
+      "SOURCE-BODY-088": [1, 521],
+      "SOURCE-BODY-089": [1, 63],
+      "SOURCE-BODY-090": [1, 9],
+      "SOURCE-BODY-091": [1, 46],
+      "SOURCE-BODY-093": [1, 50],
+      "SOURCE-BODY-094": [1, 88]
+    },
+    "additionalCompleteBodies": {
+      "SOURCE-BODY-050": [1, 367],
+      "SOURCE-BODY-059": [1, 407]
+    },
+    "additionalPartialBodies": {
+      "SOURCE-BODY-083": [[1, 178], [479, 556], [783, 882], [961, 971]],
+      "SOURCE-BODY-092": [[222, 634], [834, 1064], [1671, 1913], [1966, 2104], [2127, 2503], [2651, 2968]]
+    },
+    "mandatoryCompleteUnitRanges": [],
+    "unreadMandatoryScope": [],
+    "unreadAvailableScope": "Remaining rows of BODY083/BODY092 and all other globally available bodies outside the complete lists above were not substantively reviewed. Hash/count verification is not claimed as source assessment.",
+    "metadata": {
+      "completeAssignedSelectedRecords": [1, 3, 6],
+      "relationshipRecordsInspected": [2, 4, 5, 7, 13],
+      "assignedRowPartitions": [],
+      "identityComparisons": [
+        "All 1,900 freeze file descriptors match panel frozenFiles.",
+        "All 167 compiler reference descriptors match the freeze.",
+        "All 110 primary source descriptors and every catalog group origin match frozen identities; all 42 record-3 artifacts resolve to positive BODY grants.",
+        "All 15 canonical/body routes agree; all 33 staged members match the authored/reused routes.",
+        "All 394 acquisition file descriptors, 245 closure descriptors and 81 closure source-binding identities match their corresponding frozen source or granted excerpt identities."
+      ],
+      "qualification": "Opaque descriptor comparisons were used for identity. Selected values, defaults, ordered arrays, source ranges and material relationships were also interpreted. No complete 902-row selector or 1,561-reference graph assessment is claimed."
+    }
+  },
+  "assessment": [
+    {
+      "duty": "PROCESS_PRESERVATION",
+      "conclusion": "The wrapper requires exact single-phase authority and successful same-run/subset/freeze predecessors. Root counts, budgets, six controls, suspended creation, assignment before resume, restricted inherited handles, child acknowledgement, timeout shutdown, original-handle cleanup, final job-zero evidence and retained failures are supported. Raw process sidecars precede receiptArtifact annotations; completion is published only after preservation/output checks succeed.",
+      "sourceCitations": ["BODY013:363-742", "BODY013:744-1050", "BODY013:1120-1161", "BODY013:1210-1231", "BODY013:1621-1696"],
+      "requirementCitations": ["BODY057:147-184", "scope.duties[0]", "materialJoins.PROCESS_PRESERVATION"]
+    },
+    {
+      "duty": "Settings, staging and owned outputs",
+      "conclusion": "All nine settings roles are observed and compared. Source, staged source, fixtures and project-plugin membership are preserved across phases. Temporary, DDC, logs, reports and artifact routes are owned. Known-Documents observations explicitly retain their logical-path limitation. The 20 GiB prerequisite, phase deadlines and retained-output caps are represented honestly; caps are not continuous OS quotas.",
+      "sourceCitations": ["BODY013:283-360", "BODY013:1052-1115", "BODY013:1177-1209", "BODY013:1235-1297", "BODY013:1548-1580", "BODY013:1629-1696", "BODY048:1-564"],
+      "requirementCitations": ["BODY057:155-176", "scope.duties[1]"]
+    },
+    {
+      "duty": "DEPENDENCY_COMPILER_ABI",
+      "conclusion": "The pinned acquisition, static Release/C++20/MD recipe, explicit compiler/SDK/tool selection, normalized CMake paths, disabled install/test/tool/contrib/format routes, verified header/library/license copies and same-run receipts agree. ModuleRules validates selected UBT tools and copied identities while retaining read locks. Parser/probe NoPCHs and explicit NoVFS support direct module definitions and stage-owned response paths. Actual compile/link flags remain required observations.",
+      "sourceCitations": ["BODY003:1-326", "BODY004:1-15", "BODY010:1-18", "BODY013:1391-1546", "BODY050:1-367", "BODY053:1-293", "BODY085:1-24", "BODY086:1-675", "BODY087:1-680", "BODY088:1-521", "BODY089:1-63", "BODY090:1-9", "BODY091:1-46"],
+      "requirementCitations": ["BODY057:168-196", "scope.duties[2]", "materialJoins.DEPENDENCY_COMPILER_ABI"]
+    },
+    {
+      "duty": "Target initialization and BUILD_RECEIPT_STARTUP",
+      "conclusion": "The inherited selector defaults and false dependency-ignore hook were joined to the concrete target constructor, attributed INI/XML/command-line assignment gates, target-type overrides and Windows finalization. The dedicated constructor adds E04ProfileProof; the receipt serializes rules overrides separately from BuildPlugins. Runtime receipt selection, command-line-before-target configuration and enabled-module loading were distinguished from selected membership. Private configuration contents and actual runtime selections remain unknown until execution.",
+      "sourceCitations": ["BODY001:1-15", "BODY016:1-8", "BODY017:1-12", "BODY018:1-12", "BODY092:222-634", "BODY092:834-1064", "BODY092:1671-1913", "BODY092:1966-2104", "BODY092:2127-2503", "BODY092:2651-2968", "BODY083:1-178", "BODY083:479-556", "BODY083:783-882", "BODY059:1-407", "BODY060:1-67", "BODY061:1-292", "BODY062:1-151", "BODY013:1300-1389"],
+      "requirementCitations": ["materialJoins.BUILD_RECEIPT_STARTUP", "materialJoins.DEPENDENCY_COMPILER_ABI"]
+    },
+    {
+      "duty": "VALUE_FIXTURE and measurement support",
+      "conclusion": "The public boundary exposes UE-owned values and a synchronous noexcept API. The eight suites, 38-ID union and 45 attempts agree with the fixtures and wrapper. Independent boundary recipes cover all five inclusive quotas. Input SHA256 sealing, auxiliary native SHA1, typed refusals, lifetime checks, repeated-attempt paths and evaluated custom checks are kept distinct. Editor exceptions are globally enabled and OR-combined with module requests; the probe's local false does not disable them. Compiler guards and response checks require the actual A1E mode.",
+      "sourceCitations": ["BODY005:1-50", "BODY006:1-58", "BODY012:1-608", "BODY014:1-260", "BODY015:1-510", "BODY047:30-84", "BODY013:1177-1194", "BODY013:1524-1546", "BODY013:1591-1619"],
+      "requirementCitations": ["BODY057:56-145", "materialJoins.VALUE_FIXTURE"]
+    }
+  ],
+  "findings": [],
+  "errorsAndRecoveries": [
+    "Initial combined policy/coverage output and oversized metadata projections were truncated. Smaller reads, complete source ranges and complete descriptor comparisons recovered the material content; no truncated source read was counted complete.",
+    "An absent policy records field was initially rendered with a synthesized null. It was reread as present=false with no value; that null was not treated as source data.",
+    "An intermediate PowerShell projection flattened singleton selectedRanges arrays. Direct-assignment rereads restored the arrays and their order.",
+    "A null optional field-list entry caused a Contains query error. Explicit permitted-field reads recovered the relevant record-13 data.",
+    "An incorrect assumption that closure sourceBindings contained top-level paths caused a query failure. Its actual file/excerpt/symbols/ranges representation was inspected and all 81 identities were checked. The 27 record-5 bindings and 81 closure rows were not treated as identical representations.",
+    "One slow read-only descriptor join yielded without captured session metadata; its incomplete output was not relied upon. An indexed replacement completed successfully.",
+    "No source execution, build, test, YAML parsing, GUI/network/GitHub action, mutation, saved file, delegation, resume/fork or memory tool use occurred."
+  ],
+  "independenceAndUncertainty": {
+    "visibleContext": "No implementation transcript, peer assessment or previous verdict was used.",
+    "permissions": "The supplied runtime instructions enforce read-only filesystem access and approval policy never.",
+    "rootOnlyEvidence": "Actual session/model/settings, memory-disable enforcement, launch isolation and received-input provenance were not independently verified from generated runtime/invocation bodies. Those bodies were not inspected; root attestation and postclose validation remain separate.",
+    "execution": "All native phases remain NOT RUN for this assessment. No empirical compiler, receipt, startup, DDC, module-load or parser success is asserted.",
+    "remainingGates": "E04-A1G exception-disabled caller proof, A2 compatibility, Linux, rendering/HUD, packaging, final independent CODE and different REQ remain open."
+  }
+}

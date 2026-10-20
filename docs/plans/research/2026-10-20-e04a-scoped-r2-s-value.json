@@ -1,0 +1,272 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-7ef9358-20261020T052654Z-6fe9feeb",
+  "scopeId": "S_VALUE",
+  "sourceHead": "7ef9358d836ed75b9d8ebc40b26c1b8f74af6ac4",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T052654Z-6fe9feeb",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "disposition": "No actionable defect found in the completed local S_VALUE source assessment. This PASS is local only; it is not the aggregate SOURCE gate, phase authorization, native acceptance or final acceptance.",
+  "bindings": {
+    "inputManifest": {
+      "bytes": 559349,
+      "sha256": "162566a0c7f3663901484eaaea32bc34541cdba287757d0d59197179faaa9d18"
+    },
+    "runtimeFreezeManifest": {
+      "bytes": 550803,
+      "sha256": "42e3967d9456e0e1291cbc1d5bace3481c9cc2da90f3414ca6993cb3a4eea37e"
+    },
+    "scopeContract": {
+      "bytes": 47610,
+      "sha256": "f2ffef0d6526ee8c201b4a278d135199fa04b58375f3bd6a9afb111a530871ae"
+    },
+    "ownBootstrap": {
+      "bytes": 5374,
+      "sha256": "fda997acb870abb2625283c3cc79196776057b6b041835ea64eea2ac6aec32cf"
+    },
+    "ownCoverage": {
+      "bytes": 31191,
+      "sha256": "abadac02f2b12c5f6e3028790af4f1ac38192c693e91e2923fc60a9b0730ab84"
+    },
+    "ownBodyPolicy": {
+      "bytes": 54029,
+      "sha256": "f12455d35bb2a2d5d1f3b624df0c571b7b61b630381ff8cd9385f51e26c770ac"
+    },
+    "ownSelectedMetadataPolicy": {
+      "bytes": 17579,
+      "sha256": "0922fd948cc571e2e90f59a8739d653326367d4f123eda3b136a79cd44ed84d6"
+    },
+    "launchPermission": {
+      "bytes": 2005,
+      "sha256": "f55ca1a40daff3ba59db60a20cdac30b9ee425e4e0c6e91ea3d70469053c5ad4"
+    },
+    "preparedPrompt": {
+      "bytes": 24025,
+      "sha256": "76058e87dde3ee205c14f30e50afa88ff257c71c6854ccac8b157fe7e24f12e1"
+    },
+    "actualLaunchPrompt": {
+      "bytes": 25241,
+      "sha256": "874fd7395ebc603c0578bac4d397cfae58dfa41b9291ddb335bf574bedfc1956"
+    },
+    "commonSourceInputManifest": {
+      "bytes": 552958,
+      "sha256": "49102964725d39c2e802066e57df676c4135511a6e8427dacc3bac469a56e66a"
+    },
+    "primaryCatalog": {
+      "bytes": 147182,
+      "sha256": "0eeae8618bab7796db32c14cebb59c25f1bbd644f03e9e4a6308d3506d5f6637"
+    },
+    "exactCriteriaMetadataRecords": [
+      {
+        "subjectDescriptorField": "globalBodyAccessPolicy",
+        "bytes": 52988,
+        "sha256": "1b6005ccf0f4b88aa5b7cd01cd08aa0a2aafea29b1ddc006708757d15b2468fd"
+      },
+      {
+        "subjectDescriptorField": "globalCoverageInventory",
+        "bytes": 64771,
+        "sha256": "b09a80f8050ab7ca5b3d5b21fba0e37ab081f1bf3d5c466a6304cfa3fddd819a"
+      },
+      {
+        "subjectDescriptorField": "globalSelectedMetadataPolicy",
+        "bytes": 14015,
+        "sha256": "7aa33dfa00138cde8b3577bffbaf3f05f75a14e880979592650f973f867900d2"
+      }
+    ],
+    "verification": [
+      "Exact bound paths, byte counts and hashes were checked before dependent conclusions.",
+      "All named identity fields were present and matched across seven own identity-bearing records. The pure contract S_VALUE object exactly matched scope.selected.json.",
+      "The prepared prompt subject and scope exactly matched the bound contract. The actual launch prompt began with the complete prepared prompt and appended the matching ROOT ACTUAL GO.",
+      "Template actualGo=false was preserved separately from explicitRootGo=true in current root authority.",
+      "The three common criteria records were read and parsed only through their exact bound absolute descriptors. Each occurred exactly once in both inputFiles and frozenFiles.",
+      "All 94 BODY descriptors occurred exactly once in both manifest arrays. All 13 selected metadata files matched their policy byte counts and hashes and occurred in frozenFiles. Record 13 had inputFiles membership zero; its positive policy grant and frozen descriptor remained present.",
+      "Head/base identity is root-supplied. No Git command independently verified repository HEAD."
+    ]
+  },
+  "coverage": {
+    "inventoryVerified": {
+      "bodyFiles": 94,
+      "physicalBodyRows": 35428,
+      "selectedMetadataDescriptors": 13,
+      "selectorPhysicalRows": 902
+    },
+    "mandatoryCompleteBodies": {
+      "SOURCE-BODY-001": [1, 15],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-003": [1, 326],
+      "SOURCE-BODY-004": [1, 15],
+      "SOURCE-BODY-005": [1, 50],
+      "SOURCE-BODY-006": [1, 58],
+      "SOURCE-BODY-007": [1, 52],
+      "SOURCE-BODY-008": [1, 48],
+      "SOURCE-BODY-009": [1, 276],
+      "SOURCE-BODY-010": [1, 18],
+      "SOURCE-BODY-011": [1, 3],
+      "SOURCE-BODY-012": [1, 608],
+      "SOURCE-BODY-014": [1, 260],
+      "SOURCE-BODY-015": [1, 510],
+      "SOURCE-BODY-037": [1, 109],
+      "SOURCE-BODY-038": [1, 116],
+      "SOURCE-BODY-039": [1, 118],
+      "SOURCE-BODY-040": [1, 109],
+      "SOURCE-BODY-041": [1, 103],
+      "SOURCE-BODY-042": [1, 96],
+      "SOURCE-BODY-043": [1, 40],
+      "SOURCE-BODY-044": [1, 83],
+      "SOURCE-BODY-045": [1, 78],
+      "SOURCE-BODY-046": [1, 150],
+      "SOURCE-BODY-049": [1, 818],
+      "SOURCE-BODY-050": [1, 367],
+      "SOURCE-BODY-051": [1, 1145],
+      "SOURCE-BODY-052": [1, 2515],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-093": [1, 50],
+      "SOURCE-BODY-094": [1, 88]
+    },
+    "mandatoryEntireBodyFiles": 34,
+    "mandatoryEntirePhysicalRows": 8887,
+    "mandatoryCompleteUnits": {
+      "body": "SOURCE-BODY-013",
+      "sha256": "642fd17ae0e46f179c694cbf593365446f989e7754f01d37bd7cb4942eb08e14",
+      "physicalRanges": [[1162, 1196], [1591, 1620]],
+      "physicalRows": 65,
+      "units": [
+        "Bytes-Hash",
+        "Expand-Recipe",
+        "Prepare-Fixtures",
+        "Fixture-Snapshot",
+        "Expected-Attempts",
+        "Check-Native"
+      ],
+      "validation": "Inert PowerShell AST parsing confirmed all six complete function extents within the declared ranges. No function was invoked."
+    },
+    "selectedMetadata": {
+      "completeSelectedRecord": 13,
+      "relationshipRecordsAssessed": [1, 2, 3, 4, 6],
+      "record13Coverage": "All permitted scalar fields and complete files, trees, license, licenseRetainedCopy and gitStoreFiles structures were read. All 394 file byte counts, SHA256 values and Git blob OIDs were independently compared; all 47 tree OIDs were reconstructed from the complete membership metadata.",
+      "assignedRowPartitions": [],
+      "selectorRowsSemanticallyAssessed": 0
+    },
+    "additionalSubstantiveRanges": {
+      "SOURCE-BODY-013": [[1, 60], [1149, 1161], [1391, 1547]],
+      "SOURCE-BODY-047": [[1, 65], [148, 254]],
+      "SOURCE-BODY-086": [[1, 90], [298, 498]],
+      "SOURCE-BODY-087": [[3, 90], [547, 680]],
+      "SOURCE-BODY-088": [[3, 154], [434, 521]],
+      "SOURCE-BODY-089": [[1, 63]],
+      "SOURCE-BODY-090": [[1, 9]],
+      "SOURCE-BODY-091": [[1, 46]],
+      "SOURCE-BODY-092": [
+        [222, 1130],
+        [1539, 1805],
+        [1966, 2104],
+        [2127, 2285],
+        [2331, 2503],
+        [2651, 2968]
+      ]
+    },
+    "unreadScope": "No mandatory local body, complete unit or selected-record obligation remains unread. Other globally available bodies and metadata outside the stated substantive ranges were not fully assessed. Hash, descriptor-membership and physical-row verification do not constitute substantive review of that remaining scope."
+  },
+  "assessment": [
+    {
+      "topic": "Owned public boundary",
+      "conclusion": "The exported synchronous noexcept API exposes UE-owned values and stable indices. Vendor/std objects remain private. Accepted original bytes are copied exactly; typed refusals publish an empty document. Expected vendor syntax exceptions become private refusals, while unexpected exceptions terminate at noexcept as explicitly required.",
+      "sourceCitations": [
+        "SOURCE-BODY-005:1-50",
+        "SOURCE-BODY-006:9-57",
+        "SOURCE-BODY-007:7-46",
+        "SOURCE-BODY-008:9-46",
+        "SOURCE-BODY-009:258-274"
+      ],
+      "requirementCitations": ["SOURCE-BODY-057:58-90"]
+    },
+    {
+      "topic": "Graph fidelity and quotas",
+      "conclusion": "Ordered and duplicate mapping keys, case-sensitive UTF-8 bytes, anchor definitions, rebound aliases and collection style are retained without alias expansion. References are obtained after node growth. All OnNull routes refuse; unsupported tags refuse before copying. Raw NUL/EOT and malformed UTF-8 are rejected, while decoded NUL is retained. Input bytes, simultaneous collection depth, raw nodes including keys, alias occurrences and decoded scalar bytes use the specified inclusive limits.",
+      "sourceCitations": [
+        "SOURCE-BODY-009:25-243",
+        "SOURCE-BODY-051:582-681",
+        "SOURCE-BODY-051:904-965",
+        "SOURCE-BODY-052:2241-2346"
+      ],
+      "requirementCitations": [
+        "SOURCE-BODY-057:67-90",
+        "SOURCE-BODY-057:121-132"
+      ]
+    },
+    {
+      "topic": "Fixtures and evaluated checks",
+      "conclusion": "All 38 IDs, eight suites and 45 planned attempts agree across canonical bodies, generated definitions, independent native specifications and wrapper contracts. Independently authored inert byte comparisons matched the lengths, SHA256 and auxiliary SHA1 expectations for all 28 generated and ten canonical inputs. The source checks Unicode/case distinctions, ordered duplicate keys, rebound alias targets and complete decoded 78007900 bytes. Check counters increment on evaluated calls; suite totals, row counts and UE assertions remain distinct.",
+      "sourceCitations": [
+        "SOURCE-BODY-012:49-161",
+        "SOURCE-BODY-012:193-414",
+        "SOURCE-BODY-012:417-608",
+        "SOURCE-BODY-014:1-260",
+        "SOURCE-BODY-015:1-510",
+        "SOURCE-BODY-013:1162-1196",
+        "SOURCE-BODY-013:1591-1620"
+      ],
+      "requirementCitations": ["SOURCE-BODY-057:94-145"]
+    },
+    {
+      "topic": "Copy, move and destruction",
+      "conclusion": "The complete public graph contains owned containers rather than borrowed vendor storage. UE container source supports the copy/move/destruction design. The lifetime suite checks independent outer and nested allocations, mutation isolation, survival after source destruction and stable alias targets after moving.",
+      "sourceCitations": [
+        "SOURCE-BODY-005:25-49",
+        "SOURCE-BODY-012:440-463",
+        "SOURCE-BODY-049:4-197",
+        "SOURCE-BODY-049:306-394"
+      ],
+      "requirementCitations": ["SOURCE-BODY-057:98-105"]
+    },
+    {
+      "topic": "Dependency and compiler ABI relationship",
+      "conclusion": "The pin, acquired header membership, same-run static library, copied artifact and selected compiler/SDK/CRT contracts join coherently. CMake paths are normalized before quoted serialization. The dedicated target enables the proof plugin; the inherited dependency hook remains false and ReadOnlyTargetRules forwards it directly. INI/XML/CLI assignments are annotation-gated, precede derived construction, and are followed by target-type and Windows finalization. Actual finalized selections and emitted flags are checked rather than inferred from defaults. NoPCHs bypasses PCH setup; explicit -NoVFS follows configuration application. Source supports the exception-enabled Editor claim for both modules and private vendor include/definition/link exposure.",
+      "sourceCitations": [
+        "SOURCE-BODY-001:4-14",
+        "SOURCE-BODY-003:22-191",
+        "SOURCE-BODY-004:7-13",
+        "SOURCE-BODY-010:7-16",
+        "SOURCE-BODY-013:1391-1547",
+        "SOURCE-BODY-047:30-64",
+        "SOURCE-BODY-086:298-424",
+        "SOURCE-BODY-087:3-34",
+        "SOURCE-BODY-087:547-614",
+        "SOURCE-BODY-089:1-63",
+        "SOURCE-BODY-090:1-9",
+        "SOURCE-BODY-091:1-46",
+        "SOURCE-BODY-092:222-1130",
+        "SOURCE-BODY-092:1671-1805",
+        "SOURCE-BODY-092:1966-2104",
+        "SOURCE-BODY-092:2127-2285",
+        "SOURCE-BODY-092:2651-2908"
+      ],
+      "requirementCitations": [
+        "Scope contract materialJoins.DEPENDENCY_COMPILER_ABI",
+        "SOURCE-BODY-057:168-195"
+      ]
+    }
+  ],
+  "findings": [],
+  "errorsAndRecoveries": [
+    "Several combined policy, catalog, search and source renderings exceeded tool output limits. Mandatory source gaps were reread in explicit physical ranges. Clipped material catalog identities were recovered through complete exact comparisons, with substantive interpretation supplied by the corresponding source reads.",
+    "One coverage comparison addressed the outer scope record instead of its nested scope object and produced a spurious zero. The corrected query confirmed all 34 required descriptors.",
+    "The common-versus-panel selected descriptor comparison differed at record 4 because its bound copy has a different path. Both exact files had the same verified byte count and SHA256; no path identity was inferred.",
+    "An optional membership check incorrectly required every selected metadata record in inputFiles and exited with an exception. Recovery established the actual result: records 1-12 occur once in both arrays; record 13 occurs zero times in inputFiles and once in frozenFiles, with its explicit positive policy grant intact.",
+    "No unresolved mandatory-source truncation, EOF, file-read or parser error remains. Earlier erroneous or clipped outputs were not treated as source facts."
+  ],
+  "independenceAndLimits": [
+    "This assessment used the fresh supplied context. No delegation, resume/fork, memory service, peer report, previous verdict, private session, credential or unlisted origin BODY was used.",
+    "Work was read-only. No files were saved or mutated. No implementation helper was invoked, YAML parsed, stored command executed, or build/test/engine/GUI/network/GitHub action performed.",
+    "Current instructions specify read-only permissions and approval policy never. Actual launch/session/model/isolation, memory settings and received-input provenance remain root's separate attestation duties; generated runtime/invocation bodies were not inspected.",
+    "Acquired file and tree identities were independently checked, but association of the pinned commit with the acquisition record remains supplied metadata; no Git command or commit BODY was inspected.",
+    "No native suite ran. Actual compilation, finalized runtime configuration, module loading, emitted response files and execution outcomes remain separate phase evidence.",
+    "Required A1G exception-disabled caller proof, A2 compatibility including null/property and escape fidelity gaps, Linux, HUD/rendering, packaging and final independent CODE/REQ gates remain open.",
+    "No peer verdict or aggregate 94-body/13-record/902-row semantic approval is inferred."
+  ]
+}
