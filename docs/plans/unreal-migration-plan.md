@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 57 — SCOPED_SOURCE_CHANGES_REQUESTED_RULES_OBSERVATION. R4 is closed: eight initial invocations, seven unchanged reports (six local SOURCE_PASS/one CHANGES_REQUESTED), plugin timeout without a report and 416 captured tool pairs from seven contexts. Cleanup is confirmed for all eight. S_TARGET_RECEIPT-01 requires concrete rules discovery/cache/load/type/configuration observation and retained generated artifacts. D001 has a case-collapsed semantic projection; its raw PASS is unchanged and not admitted. Only S_VALUE has a current local admission; no aggregate or future approval. Neither integration launched. All eight native phases remain NOT_RUN/no RunRoot. Repair, checkpoint/refreeze and fresh affected SOURCE/integrations precede phases.
+**Revision:** 58 — PRODUCER_STATIC_CHECKED_WRAPPER_PENDING. The rules-witness target/YamlCpp producer repair is canonical. The first pure C# check retains five CS0012 errors; the repaired seven-source set returns zero diagnostics against UBT's 31 normal references. No candidate assembly was emitted/loaded, no rules object constructed and no UBT/native build ran. Wrapper controls, runtime freeze, complete-unit/count rebinding and fresh scoped SOURCE/integrations remain pending. R4 is closed and its original reports/limits are unchanged; no previous admission or GO transfers. All eight native phases remain NOT_RUN/no RunRoot.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,27 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 57 changes
+### Revision 58 changes
+
+The [producer repair record](research/2026-10-20-e04a-rules-witness-repair.md)
+and [static binding record](evidence/2026-10-20-e04a-rules-static-check-result.json)
+identify the canonical target/YamlCpp observation producer and both retained
+static diagnostics. The repair requires actual target-object/type/selector,
+completed cache/source-order, process/runtime and generated artifact witnesses.
+It uses finite poststate observations with explicit inference limits. The pure
+compiler check found and then cleared five JSON-overload reference errors.
+Zero static diagnostics does not establish UBT construction, API accessibility,
+DLL/PDB joins, a build or acceptance.
+
+Finish the wrapper's owned direct-UBT process join, metadata-only validation,
+retention and later live-output checks, plus meaningful pure rejection controls
+and concrete freeze metadata. Preserve the native-output freshness guard and
+all existing process/settings/vendor/native limits. Rebind complete source,
+API/test inputs and counts, then obtain fresh complete scoped SOURCE and the
+independent integrations before phases. No old GO/admission transfers. Standing
+private-source/API review consent has no expiry unless explicitly revoked.
+
+### Revision 57 history
 
 The [R4 summary](research/2026-10-20-e04a-scoped-r4-summary.md) and
 [factual record](evidence/2026-10-20-e04a-scoped-r4-result.json) close the
@@ -939,7 +959,13 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: repair S_TARGET_RECEIPT-01 before another SOURCE campaign.**
+**Current assignment: finish the rules-witness wrapper and freeze before another SOURCE campaign.**
+The [canonical producer repair](research/2026-10-20-e04a-rules-witness-repair.md)
+passes only a pure seven-source C# semantic check with 31 normal UBT references.
+Its first five compiler errors remain preserved. Complete wrapper controls,
+concrete runtime/selector freeze values, retained DLL/PDB/manifest validation and
+current complete-unit/count bindings are pending. No UBT or native run occurred.
+
 The [closed R4 campaign](research/2026-10-20-e04a-scoped-r4-summary.md) preserves
 seven raw reports and the plugin timeout without a verdict. Root confirmed the
 missing concrete rules assembly/type, first-scan/cache/process/source-order and

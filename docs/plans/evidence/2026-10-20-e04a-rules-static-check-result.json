@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_RULES_PRODUCER_PURE_STATIC_REPAIR_CHECKPOINT",
+  "recordedUtc": "2026-10-20T10:07:59.5114621Z",
+  "status": "PRODUCER_STATIC_CHECKED_WRAPPER_PENDING",
+  "previousCanonicalHead": "5ad045f3fedde1c0e67064c94ec8f05698dd1b86",
+  "sourcePromotion": [
+    {
+      "repositoryPath": "Source/WarhammerClientE04AEditor.Target.cs",
+      "checkedProposal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-repair-PROPOSED\\WarhammerClientE04AEditor.Target.v2.explicit-proof-pins.PROPOSED.cs",
+        "bytes": 4510,
+        "sha256": "1A52137CF01279D83D9A8C51D5CCE191B9D793F5F4C3AF5AA534BC8F805E23E6"
+      },
+      "canonicalWorkingBytes": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClientE04AEditor.Target.cs",
+        "bytes": 4510,
+        "sha256": "1A52137CF01279D83D9A8C51D5CCE191B9D793F5F4C3AF5AA534BC8F805E23E6"
+      }
+    },
+    {
+      "repositoryPath": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "checkedProposal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-repair-PROPOSED\\YamlCpp.Build.v4.string-json-overloads.PROPOSED.cs",
+        "bytes": 58351,
+        "sha256": "A61A4CD74B30A6C2129786F8E70B3248C85CD8C168E59D8756DAB4B81D258E02"
+      },
+      "canonicalWorkingBytes": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+        "bytes": 58351,
+        "sha256": "A61A4CD74B30A6C2129786F8E70B3248C85CD8C168E59D8756DAB4B81D258E02"
+      }
+    }
+  ],
+  "firstCheck": {
+    "manifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\source-and-reference-manifest.PROPOSED.json",
+      "bytes": 71379,
+      "sha256": "DBE2B1BD50C2EB28EBFCC9CEF68254EDAB7434257A3EB4F547A10602DA233561"
+    },
+    "cleanupConfirmed": true,
+    "semanticPass": false,
+    "rootAdoption": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\root-source-adoption.original.json",
+      "bytes": 2357,
+      "sha256": "7DB4E50EBAEC1ADCE0BAB3CDD3C238B148EFC76E2948D02713C4A90C565C483C"
+    },
+    "errors": "CS0012 System.Memory/ReadOnlySequence overload resolution",
+    "errorCount": 5,
+    "timedOut": false,
+    "driverExitCode": 0
+  },
+  "secondCheck": {
+    "metadataReferenceCount": 31,
+    "driverExitCode": 0,
+    "manifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\source-and-reference-manifest.check02.target-v2.PROPOSED.json",
+      "bytes": 73817,
+      "sha256": "ED747EA69DE94D5231F77DD360206DE84161C19312639B72C4E94781A9B46E88"
+    },
+    "sourceCount": 7,
+    "elapsedMilliseconds": 3497,
+    "staticSemanticPass": true,
+    "timedOut": false,
+    "cleanupConfirmed": true,
+    "diagnosticCount": 0,
+    "rootAdoption": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\root-source-adoption.check02.original.json",
+      "bytes": 1628,
+      "sha256": "D5BD4FE5D723EE2A8A8EA06F9A43FC5BF70D5926707E1FB9A3317ACA7F14E2A5"
+    }
+  },
+  "rawCopies": [
+    {
+      "published": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-static-check-01.json",
+        "bytes": 7991,
+        "sha256": "2F1FD3A2C3A9A372EEAA6E556FA81F8161A71817E3A2F46B0386011BE6D115E3"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\after-root-adoption-check-01\\static-semantic-diagnostics.json",
+        "bytes": 7991,
+        "sha256": "2F1FD3A2C3A9A372EEAA6E556FA81F8161A71817E3A2F46B0386011BE6D115E3"
+      }
+    },
+    {
+      "published": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-static-check-01-process.json",
+        "bytes": 557,
+        "sha256": "DF1A45AA9804575E01FF2837F5707415092F310C5895966781892E3370C8AA62"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\after-root-adoption-check-01\\driver-completion.json",
+        "bytes": 557,
+        "sha256": "DF1A45AA9804575E01FF2837F5707415092F310C5895966781892E3370C8AA62"
+      }
+    },
+    {
+      "published": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-static-check-02.json",
+        "bytes": 2788,
+        "sha256": "56B3D5EFFBAB1D400FBDA477942D2E9A3CAECC60A0C6D5F5150FADE4731A056D"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\after-root-adoption-check-02\\static-semantic-diagnostics.json",
+        "bytes": 2788,
+        "sha256": "56B3D5EFFBAB1D400FBDA477942D2E9A3CAECC60A0C6D5F5150FADE4731A056D"
+      }
+    },
+    {
+      "published": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-static-check-02-process.json",
+        "bytes": 557,
+        "sha256": "8541574C1006447B5592EBA67151BFF13F2A94F0133F73D7EE1E12A87664C237"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-csharp-static-check-PROPOSED\\after-root-adoption-check-02\\driver-completion.json",
+        "bytes": 557,
+        "sha256": "8541574C1006447B5592EBA67151BFF13F2A94F0133F73D7EE1E12A87664C237"
+      }
+    }
+  ],
+  "apiSupplement": {
+    "futureReviewGrant": false,
+    "old191150BytePrefixExact": true,
+    "primary": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-api-supplement-PROPOSED\\normal-target-rules-discovery-and-assembly.WITNESS-SUPPLEMENT.PROPOSED.primary.txt",
+      "bytes": 233628,
+      "sha256": "AF209556D182A7DDE84EA88447C82E41F9A932B017F6A7EACFBC5D1FC7A795B6"
+    },
+    "origins": 19,
+    "ranges": 43,
+    "physicalRows": 5429,
+    "rootLiteralReconstruction": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-api-supplement-PROPOSED\\root-independent-literal-reconstruction.original.json",
+      "bytes": 776,
+      "sha256": "F491B2719ECA00E51664E57EABBB21D54AE49AE9BC96CD82663B396A2540C6D0"
+    },
+    "literalRows": 5257
+  },
+  "implementationState": {
+    "candidateAssemblyLoaded": false,
+    "finalAcceptance": false,
+    "newReviewLaunched": false,
+    "rulesConstructed": false,
+    "pureWrapperControlsRun": false,
+    "sourceAggregate": false,
+    "ubtExecuted": false,
+    "allEightNativePhases": "NOT_RUN",
+    "targetAndYamlProducerCanonical": true,
+    "newFreezePrepared": false,
+    "nativeBuild": false,
+    "wrapperRepairCanonical": false,
+    "candidateAssemblyEmitted": false
+  },
+  "limits": [
+    "Static GetDiagnostics only; trusted compiler bridge on .NET10.0.11 with intended .NET10.0.7 metadata.",
+    "No actual UBT rules/cache/selector/accessibility, DLL/PDB or build/runtime result.",
+    "First five compiler diagnostics preserved unchanged; no older failed source becomes PASS.",
+    "Complete wrapper/tests/runtime freeze and new composition bindings/reviews remain required."
+  ],
+  "reviewOrNativeAuthority": false
+}

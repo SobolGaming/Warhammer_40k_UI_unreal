@@ -172,6 +172,8 @@ public class YamlCpp : ModuleRules
             if (Integer(buildCompiler, "bytes") != Integer(Get(tools, "compiler"), "bytes")
                 || HashText(buildCompiler, "sha256") != HashText(Get(tools, "compiler"), "sha256")) Fail("VENDOR_UBT_COMPILER_BYTES_MISMATCH");
 
+            object rulesWitness = ObserveRules(Target, runId, sourceHead, sourceRoot, stagedProject, run.FullName);
+
             byte[] selection = JsonSerializer.SerializeToUtf8Bytes(new
             {
                 schemaVersion = 1, kind = "E04A1_YAML_MODULE_SELECTION", runId, sourceHead, sourceRoot,
@@ -182,6 +184,7 @@ public class YamlCpp : ModuleRules
                 target = Target.Name, platform = Target.Platform.ToString(), configuration = Target.Configuration.ToString(), architecture = "x64",
                 cppStandard = "C++20", runtime = "MD", linkage = "static", includeRoot, libraryPath, librarySha256 = libraryHash,
                 headerCount = headerPaths.Count, selectedWindows = windows, selectedTools = tools,
+                rulesWitness,
                 fileReadLocksHeldThroughUbtExit = true,
                 scope = "CONSTRUCTOR_SELECTION_AND_BYTES_ONLY_NOT_NATIVE_FLAGS_OR_ARTIFACT_LINEAGE_CERTIFICATION"
             });
@@ -255,10 +258,21 @@ public class YamlCpp : ModuleRules
     }
     private static JsonDocument ReadJson(FileStream stream)
     {
-        if (stream.Length <= 0 || stream.Length > 8388608) throw new BuildException("E04A1_YAML_RECEIPT_SIZE_INVALID");
+        long length = stream.Length;
+        if (length <= 0 || length > 8388608) throw new BuildException("E04A1_YAML_RECEIPT_SIZE_INVALID");
+        byte[] bytes = new byte[checked((int)length)];
         stream.Position = 0;
-        JsonDocument document = JsonDocument.Parse(stream, new JsonDocumentOptions { MaxDepth = 32, CommentHandling = JsonCommentHandling.Disallow, AllowTrailingCommas = false });
-        CheckDuplicates(document.RootElement); stream.Position = 0; return document;
+        try
+        {
+            stream.ReadExactly(bytes, 0, bytes.Length);
+            if (stream.ReadByte() != -1 || stream.Length != length) Fail("RECEIPT_LENGTH_CHANGED");
+        }
+        finally { stream.Position = 0; }
+        string json = new System.Text.UTF8Encoding(false, true).GetString(bytes, 0, bytes.Length);
+        JsonDocument document = JsonDocument.Parse(json: json,
+            options: new JsonDocumentOptions { MaxDepth = 32, CommentHandling = JsonCommentHandling.Disallow, AllowTrailingCommas = false });
+        try { CheckDuplicates(document.RootElement); return document; }
+        catch { document.Dispose(); throw; }
     }
     private static void CheckDuplicates(JsonElement element)
     {
@@ -323,4 +337,470 @@ public class YamlCpp : ModuleRules
         if (File.Exists(path)) { if (!File.ReadAllBytes(path).SequenceEqual(bytes)) Fail("SELECTION_RECEIPT_ALREADY_DIFFERS"); return; }
         using FileStream output = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.Read); output.Write(bytes); output.Flush(true);
     }
+    // Proposed source-only rules provenance boundary. Runtime execution remains gated.
+    private object ObserveRules(ReadOnlyTargetRules target, string runId, string sourceHead,
+        string sourceRoot, string stagedProject, string runRoot)
+    {
+        string inputPath = CheckedPath(Path.Combine(runRoot, "logs", "rules-witness-input.json"), true);
+        if (!Same(inputPath, CheckedPath(Required("E04A1_RULES_WITNESS_INPUT"), true))) Fail("RULES_INPUT_PATH_MISMATCH");
+        FileStream inputLock = Hold(inputPath, null, HashInput("E04A1_RULES_WITNESS_INPUT_SHA256"));
+        using JsonDocument input = ReadJson(inputLock);
+        JsonElement r = input.RootElement;
+        RulesKeys(r, new[] { "schemaVersion", "kind", "runId", "sourceHead", "sourceRoot", "stagedProject", "attemptNonce",
+            "expectedWorkingDirectory", "processHost", "ubtAssembly", "buildAssembly", "rulesCacheLockAssembly",
+            "rulesCompilerSource", "rulesAssemblySource", "rulesCacheSource", "dynamicCompilationSource",
+            "targetSource", "moduleSource", "rulesSourceFiles", "parentAssemblies", "expectedSelectors",
+            "prelaunchTopologyReceipt", "finiteDiscoveryRoots", "phase", "freezeManifest", "expectedRuntime" });
+        Identity(r, "E04A1_RULES_WITNESS_INPUT", runId, sourceHead, sourceRoot, stagedProject);
+        Eq(r, "phase", "EditorBuild");
+        JsonElement frozen = Get(r, "freezeManifest");
+        object freezeManifest = RulesHeldDescriptor(frozen, CheckedPath(Text(frozen, "path"), true));
+        var runtime = new { runtimeFramework = RuntimeInformation.FrameworkDescription, runtimeVersion = Environment.Version.ToString(),
+            processArchitecture = RuntimeInformation.ProcessArchitecture.ToString() };
+        using JsonDocument runtimeJson = JsonDocument.Parse(json: JsonSerializer.Serialize(runtime));
+        RulesEqual(Get(r, "expectedRuntime"), runtimeJson.RootElement);
+        string nonce = Required("E04A1_RULES_WITNESS_NONCE");
+        if (!Guid.TryParseExact(nonce, "D", out Guid attempt) || attempt == Guid.Empty) Fail("RULES_NONCE_INVALID");
+        Eq(r, "attemptNonce", nonce);
+        string workingDirectory = CheckedPath(Directory.GetCurrentDirectory(), true);
+        PathEq(r, "expectedWorkingDirectory", workingDirectory);
+        string processPath = CheckedPath(Environment.ProcessPath ?? throw new BuildException("E04A1_RULES_PROCESS_PATH_MISSING"), true);
+        object processHost = RulesHeldDescriptor(Get(r, "processHost"), processPath);
+        object ubtAssembly = RulesHeldDescriptor(Get(r, "ubtAssembly"), CheckedPath(typeof(TargetRules).Assembly.Location, true));
+        object buildAssembly = RulesHeldDescriptor(Get(r, "buildAssembly"), CheckedPath(typeof(UnrealBuildBase.Rules).Assembly.Location, true));
+        string engine = CheckedPath(UnrealBuildBase.Unreal.EngineDirectory.FullName, true);
+        object[] sourcePins = new[] {
+            RulesHeldDescriptor(Get(r, "rulesCompilerSource"), Path.Combine(engine, "Source", "Programs", "UnrealBuildTool", "Configuration", "Rules", "RulesCompiler.cs")),
+            RulesHeldDescriptor(Get(r, "rulesAssemblySource"), Path.Combine(engine, "Source", "Programs", "UnrealBuildTool", "Configuration", "Rules", "RulesAssembly.cs")),
+            RulesHeldDescriptor(Get(r, "rulesCacheSource"), Path.Combine(engine, "Source", "Programs", "Shared", "EpicGames.Build", "System", "Rules.cs")),
+            RulesHeldDescriptor(Get(r, "dynamicCompilationSource"), Path.Combine(engine, "Source", "Programs", "UnrealBuildTool", "System", "DynamicCompilation.cs")) };
+        string topologyPath = CheckedPath(Path.Combine(runRoot, "logs", "rules-prelaunch-topology.json"), true);
+        object topologyDescriptor = RulesHeldDescriptor(Get(r, "prelaunchTopologyReceipt"), topologyPath);
+        FileStream topologyLock = ReadLocks.Last();
+        using JsonDocument topology = ReadJson(topologyLock);
+        JsonElement t = topology.RootElement;
+        RulesKeys(t, new[] { "schemaVersion", "kind", "runId", "sourceHead", "sourceRoot", "stagedProject", "attemptNonce",
+            "freshProjectDirectory", "projectBuildRulesAbsent", "projectIntermediateSourceAbsent", "sourceMembershipLockedBeforeLaunch", "rulesSourceFiles", "phase", "freezeManifest", "optionalDiscoveryAbsences" });
+        Identity(t, "E04A1_RULES_PRELAUNCH_TOPOLOGY", runId, sourceHead, sourceRoot, stagedProject);
+        Eq(t, "phase", "EditorBuild"); RulesEqual(Get(t, "freezeManifest"), frozen);
+        Eq(t, "attemptNonce", nonce);
+        foreach (string key in new[] { "freshProjectDirectory", "projectBuildRulesAbsent", "projectIntermediateSourceAbsent", "sourceMembershipLockedBeforeLaunch" })
+            if (!Boolean(t, key)) Fail("RULES_PRELAUNCH_TOPOLOGY_REQUIRED");
+        RulesEqual(Get(t, "rulesSourceFiles"), Get(r, "rulesSourceFiles"));
+        string topologyProjectRoot = CheckedPath(Path.GetDirectoryName(stagedProject)!, true);
+        string[] optionalAbsences = RulesStrings(Get(t, "optionalDiscoveryAbsences"));
+        string[] expectedAbsences = new[] {
+            Path.Combine(topologyProjectRoot, "Tests"), Path.Combine(topologyProjectRoot, "Mods"),
+            Path.Combine(topologyProjectRoot, "Platforms"), Path.Combine(topologyProjectRoot, "Restricted"),
+            Path.Combine(topologyProjectRoot, "Intermediate", "Source"),
+            Path.Combine(topologyProjectRoot, "Plugins", "E04ProfileProof", "Tests"),
+            Path.Combine(topologyProjectRoot, "Plugins", "E04ProfileProof", "Platforms"),
+            Path.Combine(topologyProjectRoot, "Plugins", "E04ProfileProof", "Restricted") };
+        if (!optionalAbsences.SequenceEqual(expectedAbsences, StringComparer.Ordinal)) Fail("RULES_OPTIONAL_ABSENCE_POLICY_MISMATCH");
+        foreach (string path in optionalAbsences) RulesRequireAbsent(path);
+
+
+        var observation = target.AdditionalData as E04RulesObservation
+            ?? throw new BuildException("E04A1_RULES_ADDITIONAL_DATA_WITNESS_MISSING");
+        Dictionary<string, object?> selectors = observation.CaptureSelectors(target);
+        using JsonDocument actualSelectors = JsonDocument.Parse(json: JsonSerializer.Serialize(selectors));
+        RulesEqual(Get(r, "expectedSelectors"), actualSelectors.RootElement);
+        System.Type targetType = observation.SelectedType;
+        System.Type moduleType = GetType();
+        if (moduleType != typeof(YamlCpp) || targetType.Assembly != moduleType.Assembly) Fail("RULES_MODULE_TYPE_OR_ASSEMBLY_MISMATCH");
+        var loaded = targetType.Assembly;
+        string projectRoot = CheckedPath(Path.GetDirectoryName(stagedProject)!, true);
+        string expectedAssemblyPath = CheckedPath(Path.Combine(projectRoot, "Intermediate", "Build", "BuildRules",
+            Path.GetFileNameWithoutExtension(stagedProject) + "ModuleRules.dll"), true);
+        if (loaded.IsDynamic || loaded.ManifestModule.ModuleVersionId == Guid.Empty
+            || !Same(CheckedPath(loaded.Location, true), expectedAssemblyPath)) Fail("RULES_LOADED_ASSEMBLY_OUTSIDE_FINITE_PROOF");
+        object dll = RulesObservedDescriptor(expectedAssemblyPath);
+        object pdb = RulesObservedDescriptor(Path.ChangeExtension(expectedAssemblyPath, ".pdb"));
+        string manifestPath = CheckedPath(Path.Combine(Path.GetDirectoryName(expectedAssemblyPath)!,
+            Path.GetFileNameWithoutExtension(expectedAssemblyPath) + "Manifest.json"), true);
+        object manifestDescriptor = RulesObservedDescriptor(manifestPath);
+        FileStream manifestLock = ReadLocks.Last();
+        using JsonDocument manifest = ReadJson(manifestLock);
+        RulesKeys(manifest.RootElement, new[] { "SourceFiles", "EngineVersion" });
+        string[] manifestSources = RulesStrings(Get(manifest.RootElement, "SourceFiles"));
+        string engineVersion = Text(manifest.RootElement, "EngineVersion");
+        if (String.IsNullOrWhiteSpace(engineVersion)) Fail("RULES_MANIFEST_ENGINE_VERSION_EMPTY");
+        object projectCache = E04CompletedProjectRules(targetType, moduleType, stagedProject, expectedAssemblyPath);
+        using JsonDocument cache = JsonDocument.Parse(json: JsonSerializer.Serialize(projectCache));
+        JsonElement c = cache.RootElement;
+        string[] actualSources = RulesStrings(Get(c, "actualAssemblySourceFilesSequence"));
+        if (!manifestSources.SequenceEqual(actualSources, StringComparer.Ordinal)) Fail("RULES_MANIFEST_SOURCE_SEQUENCE_MISMATCH");
+        var expectedSources = new Dictionary<string, JsonElement>(PathComparison == StringComparison.OrdinalIgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal);
+        foreach (JsonElement descriptor in Array(r, "rulesSourceFiles"))
+        {
+            string path = CheckedPath(Text(descriptor, "path"), true);
+            if (!IsInside(path, projectRoot) || !expectedSources.TryAdd(path, descriptor)) Fail("RULES_FROZEN_SOURCE_OUTSIDE_PROJECT_OR_DUPLICATE");
+        }
+        if (expectedSources.Count == 0 || expectedSources.Count > 8192 || actualSources.Length != expectedSources.Count) Fail("RULES_SOURCE_MEMBERSHIP_COUNT");
+        var seen = new HashSet<string>(expectedSources.Comparer);
+        var sourceDescriptors = new List<object>();
+        foreach (string rawPath in actualSources)
+        {
+            string path = CheckedPath(rawPath, true);
+            if (!seen.Add(path)) Fail("RULES_DUPLICATE_SOURCE");
+            if (!expectedSources.TryGetValue(path, out JsonElement expected)) Fail("RULES_UNFROZEN_SOURCE");
+            sourceDescriptors.Add(RulesHeldDescriptor(expected, path));
+        }
+        string targetSource = CheckedPath(Text(c, "selectedTypeSource"), true);
+        string moduleSource = CheckedPath(Text(c, "selectedModuleTypeSource"), true);
+        string expectedTargetSource = CheckedPath(Path.Combine(projectRoot, "Source", "WarhammerClientE04AEditor.Target.cs"), true);
+        string expectedModuleSource = CheckedPath(Path.Combine(projectRoot, "Plugins", "E04ProfileProof", "Source", "ThirdParty", "YamlCpp", "YamlCpp.Build.cs"), true);
+        if (!Same(targetSource, expectedTargetSource) || !Same(moduleSource, expectedModuleSource)
+            || !seen.Contains(targetSource) || !seen.Contains(moduleSource)) Fail("RULES_SELECTED_SOURCE_MAPPING_MISMATCH");
+        object targetDescriptor = RulesHeldDescriptor(Get(r, "targetSource"), targetSource);
+        object moduleDescriptor = RulesHeldDescriptor(Get(r, "moduleSource"), moduleSource);
+        JsonElement[] parentFacts = Array(c, "parentChain");
+        JsonElement[] expectedParents = Array(r, "parentAssemblies");
+        if (parentFacts.Length == 0 || parentFacts.Length != expectedParents.Length) Fail("RULES_PARENT_CHAIN_COUNT");
+        var parents = new List<object>();
+        for (int i = 0; i < parentFacts.Length; ++i)
+        {
+            if (!Boolean(parentFacts[i], "hasCompiledAssembly")) Fail("RULES_PARENT_WITHOUT_COMPILED_ASSEMBLY_UNSUPPORTED");
+            JsonElement identity = Get(parentFacts[i], "identity");
+            string path = CheckedPath(Text(identity, "path"), true);
+            string mvid = Text(identity, "mvid");
+            if (!Guid.TryParseExact(mvid, "D", out Guid parentMvid) || parentMvid == Guid.Empty) Fail("RULES_PARENT_MVID_INVALID");
+            parents.Add(new { level = i, simpleName = Text(identity, "simpleName"), fullName = Text(identity, "fullName"), assemblyDescriptor = RulesHeldDescriptor(expectedParents[i], path), loadedMvid = mvid });
+        }
+        string[] finiteRoots = RulesStrings(Get(r, "finiteDiscoveryRoots"));
+        string[] exactRoots = new[] {
+            CheckedPath(Path.Combine(projectRoot, "Source"), true),
+            CheckedPath(Path.Combine(projectRoot, "Plugins", "E04ProfileProof", "Source"), true) };
+        if (!finiteRoots.SequenceEqual(exactRoots, StringComparer.Ordinal)) Fail("RULES_FINITE_DISCOVERY_ROOTS_MISMATCH");
+        object lockAssembly = RulesLockAssemblyDescriptor(Get(r, "rulesCacheLockAssembly"));
+        // Only these two required existing source roots receive cache/scanned obligations.
+        // Optional absent roots are wrapper topology policy, not cache observations.
+        object tree = E04RulesTreePoststate(finiteRoots);
+        using JsonDocument treeJson = JsonDocument.Parse(json: JsonSerializer.Serialize(tree));
+        var treeSources = new HashSet<string>(expectedSources.Comparer);
+        foreach (JsonElement root in Array(treeJson.RootElement, "selectedRoots"))
+        {
+            if (!Boolean(root, "cacheNodePresent") || !Boolean(Get(root, "node"), "isScanned")) Fail("RULES_REQUIRED_CACHE_ROOT_MISSING_OR_UNSCANNED");
+            RulesCollectTreeSources(Get(root, "node"), treeSources);
+        }
+        if (!treeSources.SetEquals(seen)) Fail("RULES_CACHE_SOURCE_MEMBERSHIP_MISMATCH");
+        using var process = System.Diagnostics.Process.GetCurrentProcess();
+        DateTime startUtc = process.StartTime.ToUniversalTime();
+        byte[] bytes = JsonSerializer.SerializeToUtf8Bytes(new {
+            schemaVersion = 1, kind = "E04A1_RULES_RUNTIME_WITNESS", runId, sourceHead, sourceRoot, stagedProject, attemptNonce = nonce,
+            phase = "EditorBuild", freezeManifest,
+            inputContract = RulesDescriptor(inputPath, inputLock), prelaunchTopologyReceipt = topologyDescriptor,
+            process = new { pid = Environment.ProcessId, startTimeUtc = startUtc.ToString("O", CultureInfo.InvariantCulture),
+                startFileTimeUtc = startUtc.ToFileTimeUtc(), processPath, workingDirectory,
+                actualArgv = Environment.GetCommandLineArgs(), runtimeFramework = RuntimeInformation.FrameworkDescription,
+                runtimeVersion = Environment.Version.ToString(), processArchitecture = RuntimeInformation.ProcessArchitecture.ToString(),
+                hostDescriptor = processHost, ubtAssemblyDescriptor = ubtAssembly, buildAssemblyDescriptor = buildAssembly,
+                rulesCacheLockAssemblyDescriptor = lockAssembly },
+            selectedTarget = new { exactClrType = targetType.FullName, assemblyQualifiedName = targetType.AssemblyQualifiedName,
+                sourceDescriptor = targetDescriptor, assemblyDescriptor = dll, loadedMvid = loaded.ManifestModule.ModuleVersionId.ToString("D"),
+                constructorInstanceId = observation.InstanceId, constructorBuildAllModules = observation.ConstructorBuildAllModules },
+            module = new { actualClrType = moduleType.FullName, sourceDescriptor = moduleDescriptor, sameAssemblyReference = true },
+            effectiveSelectors = selectors, actualProjectRules = projectCache,
+            generatedRules = new { dll, pdb, manifest = manifestDescriptor, engineVersion,
+                orderedManifestSourceFiles = manifestSources, manifestSequenceEqualsAssemblySourceFiles = true },
+            orderedAssemblySourceFileDescriptors = sourceDescriptors.ToArray(), parentAssemblyChain = parents.ToArray(),
+            discoveryCache = tree, pinnedEngineSources = sourcePins,
+            moduleTimeOptionalDiscoveryAbsences = optionalAbsences,
+            observationStage = "MODULE_CONSTRUCTOR_AFTER_CREATE_TARGET_RULES_VALIDATION",
+            lineageQualification = new {
+                freshProcessInference = "CONDITIONAL_SOURCE_SUPPORTED_FROM_ROOT_OWNED_PROCESS_AND_PREABSENCE",
+                cacheObservation = "POSTSTATE_ONLY", manifestOrder = "DIRECT_MANIFEST_ARRAY_ORDER",
+                assemblySourceOrder = "DIRECT_CURRENT_ENUMERATION_ORDER",
+                roslynOrder = "SOURCE_DERIVED_FILEPATH_SORT_NOT_DIRECT_EVENT_TRACE",
+                chronologicalScanEventsObserved = false, nativeFlagsObserved = false, pluginActivationObserved = false },
+            fileReadLocksHeldThroughUbtExit = true,
+            scope = "CONSTRUCTOR_SELECTION_AND_RULES_CACHE_POSTSTATE_NOT_NATIVE_FLAGS_OR_ACTIVATION_CERTIFICATION" });
+        string witnessPath = CheckedPath(Path.Combine(runRoot, "logs", "rules-runtime-witness.json"), false);
+        // Repeated construction is supported only when this exact witness is byte-identical.
+        // Changed target instance/cache order/poststate is unsupported: WriteStable fails; never overwrite.
+        WriteStable(witnessPath, bytes);
+        return RulesObservedDescriptor(witnessPath);
+    }
+
+    private static void RulesRequireAbsent(string path)
+    {
+        path = CheckedPath(path, false);
+        try { File.GetAttributes(path); Fail("RULES_OPTIONAL_DISCOVERY_PATH_EXISTS"); }
+        catch (FileNotFoundException) { }
+        catch (DirectoryNotFoundException) { }
+        // Any access/IO error is unsupported and propagates; it is never absence.
+    }
+    private static object RulesDescriptor(string path, FileStream stream)
+        => new { path = CheckedPath(path, true), bytes = stream.Length, sha256 = StreamHash(stream) };
+    private static object RulesHeldDescriptor(JsonElement expected, string path)
+    {
+        path = CheckedPath(path, true);
+        RulesKeys(expected, new[] { "path", "bytes", "sha256" });
+        return RulesDescriptor(path, HoldDescriptor(expected, path));
+    }
+    private static object RulesObservedDescriptor(string path)
+    {
+        path = CheckedPath(path, true);
+        FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        try { if (stream.Length == 0) Fail("RULES_OBSERVED_FILE_EMPTY"); CheckedPath(path, true); ReadLocks.Add(stream); return RulesDescriptor(path, stream); }
+        catch { stream.Dispose(); throw; }
+    }
+    private static void RulesKeys(JsonElement value, string[] expected)
+    {
+        if (value.ValueKind != JsonValueKind.Object) Fail("RULES_OBJECT_REQUIRED");
+        string[] actual = value.EnumerateObject().Select(p => p.Name).ToArray();
+        if (actual.Length != expected.Length || !new HashSet<string>(actual, StringComparer.Ordinal).SetEquals(expected)) Fail("RULES_OBJECT_FIELDS_MISMATCH");
+    }
+    private static string[] RulesStrings(JsonElement value)
+    {
+        if (value.ValueKind != JsonValueKind.Array) Fail("RULES_STRING_ARRAY_REQUIRED");
+        return value.EnumerateArray().Select(e => e.ValueKind == JsonValueKind.String ? e.GetString()!
+            : throw new BuildException("E04A1_RULES_STRING_MEMBER_REQUIRED")).ToArray();
+    }
+    private static void RulesEqual(JsonElement expected, JsonElement actual)
+    {
+        if (expected.ValueKind != actual.ValueKind) Fail("RULES_EXPECTED_JSON_TYPE_MISMATCH");
+        if (expected.ValueKind == JsonValueKind.Object)
+        {
+            var a = actual.EnumerateObject().ToDictionary(p => p.Name, p => p.Value, StringComparer.Ordinal);
+            var e = expected.EnumerateObject().ToArray();
+            if (a.Count != e.Length) Fail("RULES_EXPECTED_JSON_FIELDS_MISMATCH");
+            foreach (JsonProperty p in e) { if (!a.TryGetValue(p.Name, out JsonElement v)) Fail("RULES_EXPECTED_JSON_FIELD_ABSENT"); RulesEqual(p.Value, v); }
+        }
+        else if (expected.ValueKind == JsonValueKind.Array)
+        {
+            var e = expected.EnumerateArray().ToArray(); var a = actual.EnumerateArray().ToArray();
+            if (e.Length != a.Length) Fail("RULES_EXPECTED_JSON_ARRAY_LENGTH");
+            for (int i = 0; i < e.Length; ++i) RulesEqual(e[i], a[i]);
+        }
+        else if (expected.ValueKind == JsonValueKind.String)
+        { if (expected.GetString() != actual.GetString()) Fail("RULES_EXPECTED_JSON_STRING"); }
+        else if (expected.GetRawText() != actual.GetRawText()) Fail("RULES_EXPECTED_JSON_SCALAR");
+    }
+    private static void RulesCollectTreeSources(JsonElement node, HashSet<string> result)
+    {
+        JsonElement lists = Get(node, "listsInActualOrder");
+        if (Boolean(node, "hasFilesContainer"))
+            foreach (string name in new[] { "ModuleRules", "TargetRules" })
+                foreach (string path in RulesStrings(Get(lists, name)))
+                    if (!result.Add(CheckedPath(path, true))) Fail("RULES_CACHE_DUPLICATE_SOURCE");
+        foreach (JsonElement child in Array(node, "childrenInActualOrder")) RulesCollectTreeSources(Get(child, "node"), result);
+    }
+    private static object RulesLockAssemblyDescriptor(JsonElement expected)
+    {
+        var field = E04LockField();
+        return RulesHeldDescriptor(expected, CheckedPath(field.FieldType.Assembly.Location, true));
+    }
+    private static System.Reflection.FieldInfo E04LockField()
+    {
+        System.Type owner = typeof(UnrealBuildBase.Rules);
+        var field = owner.GetField("RootLock", System.Reflection.BindingFlags.NonPublic
+            | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.DeclaredOnly);
+        if (field == null || field.DeclaringType != owner || !field.IsStatic || field.IsInitOnly
+            || field.FieldType.FullName != "System.Threading.ReaderWriterLockSlim") Fail("RULES_LOCK_FIELD_SHAPE_UNSUPPORTED");
+        return field!;
+    }
+
+private static System.Reflection.FieldInfo E04Field(
+    System.Type owner, string name, System.Type expectedType, bool isStatic, bool isReadOnly)
+{
+    var flags = System.Reflection.BindingFlags.DeclaredOnly
+        | System.Reflection.BindingFlags.NonPublic
+        | (isStatic ? System.Reflection.BindingFlags.Static : System.Reflection.BindingFlags.Instance);
+    var field = owner.GetField(name, flags);
+    if (field == null || field.DeclaringType != owner || field.FieldType != expectedType
+        || field.IsStatic != isStatic || field.IsInitOnly != isReadOnly)
+        throw new BuildException("E04A1_RULES_PRIVATE_SHAPE_UNSUPPORTED: {0}.{1}", owner.FullName, name);
+    return field;
+}
+
+private static object E04RequiredField(System.Reflection.FieldInfo field, object? instance)
+    => field.GetValue(instance) ?? throw new BuildException("E04A1_RULES_PRIVATE_VALUE_MISSING: {0}", field.Name);
+
+private static object E04AssemblyIdentity(System.Reflection.Assembly assembly)
+{
+    if (assembly.IsDynamic || String.IsNullOrWhiteSpace(assembly.Location) || assembly.FullName == null)
+        throw new BuildException("E04A1_RULES_ASSEMBLY_NOT_FILE_BACKED");
+    return new { simpleName = assembly.GetName().Name, fullName = assembly.FullName, path = assembly.Location,
+        mvid = assembly.ManifestModule.ModuleVersionId.ToString("D") };
+}
+
+private static object E04CompletedProjectRules(System.Type actualTargetType, System.Type actualModuleType, string exactProjectPath,
+    string expectedProjectAssemblyPath)
+{
+    var mapType = typeof(System.Collections.Concurrent.ConcurrentDictionary<
+        EpicGames.Core.FileReference, System.Lazy<RulesAssembly>>);
+    var mapField = E04Field(typeof(RulesCompiler), "LoadedAssemblyMap", mapType, true, true);
+    var map = (System.Collections.Concurrent.ConcurrentDictionary<
+        EpicGames.Core.FileReference, System.Lazy<RulesAssembly>>)E04RequiredField(mapField, null);
+    var entries = map.ToArray();
+    if (entries.Length > 128) throw new BuildException("E04A1_RULES_CACHE_ENTRY_CAP");
+    var selected = entries.Where(e => String.Equals(e.Key.FullName, exactProjectPath,
+        OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal)).ToArray();
+    if (selected.Length != 1 || !selected[0].Value.IsValueCreated)
+        throw new BuildException("E04A1_RULES_PROJECT_CACHE_MISSING_AMBIGUOUS_OR_UNCREATED");
+    // This Value is already completed. Never read Value for any uncreated Lazy.
+    RulesAssembly project = selected[0].Value.Value;
+    var assemblyField = E04Field(typeof(RulesAssembly), "CompiledAssembly",
+        typeof(System.Reflection.Assembly), false, true);
+    var compiled = (System.Reflection.Assembly)E04RequiredField(assemblyField, project);
+    if (!Object.ReferenceEquals(compiled, actualTargetType.Assembly)
+        || !String.Equals(compiled.Location, expectedProjectAssemblyPath,
+            OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
+        throw new BuildException("E04A1_RULES_SELECTED_ASSEMBLY_OBJECT_OR_PATH_MISMATCH");
+    // Compiler-level GetFileNameFromType reads all map Lazy.Value entries and can
+    // force another project. Query this already completed assembly directly.
+    if (!project.TryGetFileNameFromType(actualTargetType, out EpicGames.Core.FileReference? selectedFile)
+        || selectedFile == null)
+        throw new BuildException("E04A1_RULES_SELECTED_TYPE_SOURCE_MISSING");
+    string selectedSource = selectedFile.FullName;
+    if (!project.TryGetFileNameFromType(actualModuleType, out EpicGames.Core.FileReference? moduleFile)
+        || moduleFile == null || actualModuleType.Assembly != compiled)
+        throw new BuildException("E04A1_RULES_SELECTED_MODULE_SOURCE_OR_ASSEMBLY_MISMATCH");
+    string selectedModuleSource = moduleFile.FullName;
+    var sources = project.AssemblySourceFiles?.Select(f => f.FullName).ToArray()
+        ?? throw new BuildException("E04A1_RULES_PROJECT_SOURCE_ENUMERATION_MISSING");
+    if (sources.Length == 0 || sources.Length > 8192)
+        throw new BuildException("E04A1_RULES_PROJECT_SOURCE_ENUMERATION_CAP");
+    var mapFieldType = typeof(System.Collections.Generic.IReadOnlyDictionary<string, EpicGames.Core.FileReference>);
+    var targetField = E04Field(typeof(RulesAssembly), "TargetNameToTargetFile", mapFieldType, false, true);
+    var moduleField = E04Field(typeof(RulesAssembly), "ModuleNameToModuleFile", mapFieldType, false, true);
+    var targetMap = (System.Collections.Generic.IReadOnlyDictionary<string, EpicGames.Core.FileReference>)
+        E04RequiredField(targetField, project);
+    var moduleMap = (System.Collections.Generic.IReadOnlyDictionary<string, EpicGames.Core.FileReference>)
+        E04RequiredField(moduleField, project);
+    if (targetMap.Count > 8192 || moduleMap.Count > 8192)
+        throw new BuildException("E04A1_RULES_NAME_MAP_CAP");
+    var parents = new System.Collections.Generic.List<object>();
+    var seen = new System.Collections.Generic.HashSet<RulesAssembly>();
+    for (RulesAssembly? parent = project.Parent; parent != null; parent = parent.Parent)
+    {
+        if (!seen.Add(parent) || parents.Count >= 32)
+            throw new BuildException("E04A1_RULES_PARENT_CYCLE_OR_CAP");
+        var parentAssembly = (System.Reflection.Assembly?)assemblyField.GetValue(parent);
+        parents.Add(new { index = parents.Count, hasCompiledAssembly = parentAssembly != null,
+            identity = parentAssembly == null ? null : E04AssemblyIdentity(parentAssembly) });
+    }
+    // Preserve actual sequences. Do not sort maps/source arrays into one inferred order.
+    // Other cache keys are metadata only: do not force their Lazy values.
+    return new {
+        kind = "E04A1_COMPLETED_PROJECT_RULES_CACHE_POSTSTATE",
+        exactProjectPath, expectedProjectAssemblyPath,
+        selectedProjectLazyWasValueCreated = true,
+        selectedType = actualTargetType.AssemblyQualifiedName,
+        selectedTypeSource = selectedSource,
+        selectedModuleType = actualModuleType.AssemblyQualifiedName, selectedModuleTypeSource = selectedModuleSource,
+        selectedAssembly = E04AssemblyIdentity(compiled),
+        selectedAssemblyObjectEqualsActualTargetAssembly = true,
+        actualAssemblySourceFilesSequence = sources,
+        actualPreprocessorDefines = project.PreprocessorDefines?.ToArray()
+            ?? throw new BuildException("E04A1_RULES_PREPROCESSOR_ENUMERATION_MISSING"),
+        targetNameMapSequence = targetMap.Select(e => new { name = e.Key, path = e.Value.FullName }).ToArray(),
+        moduleNameMapSequence = moduleMap.Select(e => new { name = e.Key, path = e.Value.FullName }).ToArray(),
+        parentChain = parents.ToArray(),
+        loadedProjectCacheEntryMetadata = entries.Select(e => new {
+            project = e.Key.FullName, isValueCreated = e.Value.IsValueCreated }).ToArray(),
+        scope = "SAME_PROCESS_COMPLETED_CACHE_AND_LOADED_ASSEMBLY_NOT_SCAN_CHRONOLOGY"
+    };
+}
+
+private static object E04RulesTreePoststate(string[] finiteAbsoluteRoots)
+{
+    if (finiteAbsoluteRoots.Length == 0 || finiteAbsoluteRoots.Length > 128)
+        throw new BuildException("E04A1_RULES_TREE_ROOT_CAP");
+    System.Type owner = typeof(UnrealBuildBase.Rules);
+    System.Type node = owner.GetNestedType("Directory", System.Reflection.BindingFlags.NonPublic)
+        ?? throw new BuildException("E04A1_RULES_DIRECTORY_TYPE_UNSUPPORTED");
+    System.Type files = owner.GetNestedType("Files", System.Reflection.BindingFlags.NonPublic)
+        ?? throw new BuildException("E04A1_RULES_FILES_TYPE_UNSUPPORTED");
+    var rootField = E04Field(owner, "Root", node, true, false);
+    var lockField = E04LockField();
+    var dirsType = typeof(System.Collections.Generic.Dictionary<,>).MakeGenericType(typeof(string), node);
+    // Directory's fields are internal. E04Field's NonPublic flag covers them.
+    var dirsField = E04Field(node, "SubDirectories", dirsType, false, false);
+    var filesField = E04Field(node, "Files", files, false, false);
+    var scannedField = E04Field(node, "IsScanned", typeof(bool), false, false);
+    // Files' four list fields are public on a private nested class.
+    var fileLists = new System.Collections.Generic.Dictionary<string, System.Reflection.FieldInfo>();
+    foreach (string name in new[] { "ModuleRules", "TargetRules", "AutomationModules", "UbtPlugins" })
+    {
+        var field = files.GetField(name, System.Reflection.BindingFlags.Public
+            | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+        if (field == null || field.DeclaringType != files || field.IsStatic || field.IsInitOnly
+            || field.FieldType != typeof(System.Collections.Generic.List<EpicGames.Core.FileReference>))
+            throw new BuildException("E04A1_RULES_FILES_LIST_SHAPE_UNSUPPORTED: {0}", name);
+        fileLists.Add(name, field);
+    }
+    object rootLock = E04RequiredField(lockField, null);
+    System.Type lockType = lockField.FieldType;
+    var methodFlags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly;
+    var enter = lockType.GetMethod("TryEnterReadLock", methodFlags, null, new[] { typeof(int) }, null);
+    var exit = lockType.GetMethod("ExitReadLock", methodFlags, null, System.Type.EmptyTypes, null);
+    if (rootLock.GetType() != lockType || enter == null || exit == null
+        || enter.DeclaringType != lockType || exit.DeclaringType != lockType
+        || enter.IsStatic || exit.IsStatic || enter.IsGenericMethod || exit.IsGenericMethod
+        || enter.ReturnType != typeof(bool) || exit.ReturnType != typeof(void))
+        throw new BuildException("E04A1_RULES_TREE_LOCK_METHOD_SHAPE_UNSUPPORTED");
+    if (!(bool)(enter.Invoke(rootLock, new object[] { 2000 })
+        ?? throw new BuildException("E04A1_RULES_TREE_LOCK_RESULT_MISSING")))
+        throw new BuildException("E04A1_RULES_TREE_LOCK_UNAVAILABLE");
+    try
+    {
+        object root = E04RequiredField(rootField, null);
+        int nodes = 0, members = 0;
+        object Copy(object value, int depth)
+        {
+            if (value.GetType() != node || depth > 64 || ++nodes > 4096)
+                throw new BuildException("E04A1_RULES_TREE_NODE_SHAPE_OR_CAP");
+            var listValues = new System.Collections.Generic.Dictionary<string, string[]>();
+            object? fileValue = filesField.GetValue(value);
+            if (fileValue != null)
+            {
+                if (fileValue.GetType() != files) throw new BuildException("E04A1_RULES_FILES_VALUE_SHAPE");
+                foreach (var pair in fileLists)
+                {
+                    var list = (System.Collections.Generic.List<EpicGames.Core.FileReference>)
+                        E04RequiredField(pair.Value, fileValue);
+                    members += list.Count;
+                    if (members > 65536) throw new BuildException("E04A1_RULES_TREE_MEMBER_CAP");
+                    listValues.Add(pair.Key, list.Select(f => f.FullName).ToArray());
+                }
+            }
+            var children = new System.Collections.Generic.List<object>();
+            var childValue = (System.Collections.IDictionary?)dirsField.GetValue(value);
+            if (childValue != null)
+                foreach (System.Collections.DictionaryEntry pair in childValue)
+                    children.Add(new { name = (string)pair.Key,
+                        node = Copy(pair.Value ?? throw new BuildException("E04A1_RULES_NULL_CHILD"), depth + 1) });
+            return new { isScanned = (bool)E04RequiredField(scannedField, value),
+                hasFilesContainer = fileValue != null, listsInActualOrder = listValues,
+                hasSubdirectoryContainer = childValue != null, childrenInActualOrder = children.ToArray() };
+        }
+        var selected = new System.Collections.Generic.List<object>();
+        foreach (string path in finiteAbsoluteRoots)
+        {
+            if (!System.IO.Path.IsPathFullyQualified(path)
+                || !String.Equals(System.IO.Path.GetFullPath(path), path, StringComparison.Ordinal))
+                throw new BuildException("E04A1_RULES_TREE_ROOT_NOT_CANONICAL");
+            object? current = root;
+            // Match Rules.FindDirectory's exact split, including drive component.
+            foreach (string component in path.Split(System.IO.Path.DirectorySeparatorChar))
+            {
+                if (current == null) break;
+                var children = (System.Collections.IDictionary?)dirsField.GetValue(current);
+                if (children == null || !children.Contains(component)) { current = null; break; }
+                current = children[component];
+            }
+            selected.Add(new { path, cacheNodePresent = current != null,
+                node = current == null ? null : Copy(current, 0) });
+        }
+        return new { kind = "E04A1_FINITE_RULES_TREE_POSTSTATE", selectedRoots = selected.ToArray(),
+            nodesCopied = nodes, fileMembersCopied = members,
+            scope = "READ_LOCKED_MATERIALIZED_POSTSTATE_NO_POPULATE_NO_INVALIDATE_NO_CHRONOLOGY" };
+    }
+    finally { exit.Invoke(rootLock, null); }
+}
+
+
+
 }

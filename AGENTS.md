@@ -78,7 +78,24 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 57 (2026-10-20 UTC) is
+Current A1E status at plan revision 58 (2026-10-20 UTC) is
+**PRODUCER_STATIC_CHECKED_WRAPPER_PENDING**. The
+[producer repair](docs/plans/research/2026-10-20-e04a-rules-witness-repair.md) and
+[binding record](docs/plans/evidence/2026-10-20-e04a-rules-static-check-result.json)
+identify canonical target/YamlCpp witness sources. The first pure compiler check
+retains five CS0012 errors; the repaired seven-source set returns zero diagnostics
+against UBT's 31 normal metadata references. No candidate assembly was emitted or
+loaded, no rules object constructed and no UBT/native build executed.
+
+Complete the wrapper, pure rejection controls, concrete runtime/selector freeze
+and clean composition/count/unit bindings before fresh scoped SOURCE and both
+independent integrations. Preserve native-output freshness, all existing budgets,
+vendor/compiler/receipt/settings/DDC checks and zero visible windows. No old
+admission or GO transfers. All eight native phases remain NOT_RUN. Final
+CODE/different REQ, A1G/A2, Linux, packaging and broader gates remain open.
+Standing private-source/API review consent persists until explicitly revoked.
+
+Historical A1E status at plan revision 57 (2026-10-20 UTC) is
 **SCOPED_SOURCE_CHANGES_REQUESTED_RULES_OBSERVATION**. The closed
 [R4 summary](docs/plans/research/2026-10-20-e04a-scoped-r4-summary.md) and
 [factual record](docs/plans/evidence/2026-10-20-e04a-scoped-r4-result.json)
