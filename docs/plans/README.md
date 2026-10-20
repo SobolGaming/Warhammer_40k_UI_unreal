@@ -1,22 +1,21 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 70 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 71 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at revision 70 is **PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED**.
-The [practical closure](research/2026-10-20-e04a-practical-source-closure.md) and
-[factual overlay](evidence/2026-10-20-e04a-practical-source-result.json) preserve
-five closed reports: two BLOCKED, one CHANGES_REQUESTED and two raw PASS,
-476 captured tool pairs and zero admissions. D-ABI-01 needs final module-time
-toolchain-alternative refusal and fresh affected reviews, including both whole
-witnesses. Seven future definitions have no GO; shared index v3 was never
-created. The transient frozen-copy deletion/restoration and subsequent 2,344-input
-rehash are recorded without claiming continuity. The substantive
-[practical v7.3 method](research/2026-10-20-e04a-practical-source-method-v7.3.md)
-is unchanged. All eight native phases remain NOT_RUN, no native RunRoot, visible
-authority zero and all final/later gates remain open. Standing consent persists.
+Current A1E status at revision 71 is **TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**.
+Technical commit `3b5447e777da76b555215c135977c92a1706282b` adds 14 lines/zero
+removals: `RejectUnsupportedNativeToolAlternatives` rejects three effective
+unsupported toolchain flags at final module construction. Ordinary inspection
+found no actionable issue; compilation/controls/native checks are NOT_RUN and
+there is no SOURCE approval. Derive fresh current publication/run/common/index
+bindings and affected reviews, including both whole witnesses. The
+[revision70 closure](research/2026-10-20-e04a-practical-source-closure.md) and
+[factual record](evidence/2026-10-20-e04a-practical-source-result.json) remain
+historical and unchanged. Zero admissions, no native RunRoot, visible authority
+zero and final/later gates remain open; substantive v7.3 and consent persist.
 
 Historical A1E status at revision 66 is **SCOPED_SOURCE_R6_CLOSED_FOLLOWUP_REQUIRED**.
 The [R6 summary](research/2026-10-20-e04a-scoped-r6-summary.md) and

@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 70 — PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED. All five practical SOURCE jobs for `da00e83` / `20261020T192245Z-8fa15b75` are CLOSED: two raw BLOCKED, one CHANGES_REQUESTED and two raw PASS, 476 captured tool pairs and zero admissions. D-ABI-01 requires rejection of effective unsupported toolchain alternatives, then fresh affected reviews including both complete finite witnesses. The temporary ignored BODY013 copy deletion occurred after all five jobs closed; exact bytes were restored and the subsequent 2,344-input rehash matched, without a continuous-immutability claim. Seven prepared future definitions have no GO and shared index v3 was never created. The substantive practical v7.3 method is unchanged. All eight native phases remain NOT_RUN, no native RunRoot and visible authority zero; final CODE/different REQ and later gates remain open.
+**Revision:** 71 — TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING. Technical commit `3b5447e777da76b555215c135977c92a1706282b` adds final module-time rejection of the three unsupported effective toolchain flags (14 lines added, zero removed). Ordinary source inspection found no actionable issue; compilation, controls and native phases are NOT_RUN and no SOURCE approval follows. Derive fresh publication/run/common/index bindings and obtain fresh affected reviews, including both whole witnesses. Revision70 closure records remain historical and unchanged; zero admissions, no native RunRoot and visible authority zero.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,27 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 70 changes
+### Revision 71 changes
+
+Status is **TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. Technical commit
+`3b5447e777da76b555215c135977c92a1706282b` adds 14 lines and removes none in
+`YamlCpp.Build.cs`. `RejectUnsupportedNativeToolAlternatives` now rejects effective
+`WindowsPlatform.bAllowRadLinker`, `bPrintToolChainTimingInfo` and
+`WindowsPlatform.bCompilerTrace` at final module construction. The module is
+59,007 bytes / 820 rows, SHA256
+`9865BADE25264DC00F3774FA80B7C5D391B7BB36020AD44D9FDADAB6689F3557`.
+Wrapper, target and test source are unchanged. Ordinary source inspection found
+no actionable issue and installed read-only getters support the guards;
+compilation/control/native checks remain NOT_RUN. This is not SOURCE approval.
+
+Next derive exact current publication/run/common/index inputs and obtain fresh
+affected reviews, including both complete independent witnesses. The
+[revision70 closure](research/2026-10-20-e04a-practical-source-closure.md) and
+[result](evidence/2026-10-20-e04a-practical-source-result.json) remain immutable
+historical records of the pre-repair source. No old PASS transfers; substantive
+v7.3 method, zero admissions, native/final gates and standing consent are unchanged.
+
+### Revision 70 history
 
 Status is **PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED**. The
 [practical closure](research/2026-10-20-e04a-practical-source-closure.md) and
@@ -1236,42 +1256,28 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint closed practical SOURCE evidence, repair D-ABI-01,
-then refreeze and obtain fresh affected reviews.** Status is
-**PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED**. Read the
+**Current assignment: derive fresh source bindings for the repaired toolchain
+guards, then obtain fresh affected reviews.** Status is
+**TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. Technical commit
+`3b5447e777da76b555215c135977c92a1706282b` adds final module-time refusal of
+effective `Target.WindowsPlatform.bAllowRadLinker`,
+`Target.bPrintToolChainTimingInfo` and `Target.WindowsPlatform.bCompilerTrace`
+through `RejectUnsupportedNativeToolAlternatives` (14 added lines, zero removed).
+Ordinary inspection found no actionable issue; compilation, control and native
+checks are NOT_RUN. No SOURCE approval is supplied by that inspection.
+
+Derive exact current publication/run/common/index identities and complete
+affected inputs, including material vendor access, before fresh reviews. Both
+complete independent witness assessments are affected and must be fresh. The
 [revision70 closure](research/2026-10-20-e04a-practical-source-closure.md) and
-[current factual overlay](evidence/2026-10-20-e04a-practical-source-result.json).
-Five jobs for publication `da00e83`, technical source `73bc2c0`, base `03d28af`
-and run `20261020T192245Z-8fa15b75` are closed: two BLOCKED, one
-CHANGES_REQUESTED and two raw PASS, 476 captured pairs and zero admissions.
-Original reports were sealed before body reading and remain unchanged.
-
-D-ABI-01 requires final module-time rejection of effective
-`Target.WindowsPlatform.bAllowRadLinker`, `Target.bPrintToolChainTimingInfo` and
-`Target.WindowsPlatform.bCompilerTrace`. Configurable radlink/cl-filter paths are
-unfrozen/not refused; active configuration and actual tool execution are not
-inferred. Vendor BODY access gaps require complete fresh inputs. Preserve the
-independent VALUE report's conditional Dispose source-order finding; research
-does not demonstrate a normally reachable throwing close for this untouched
-synchronous stream/runtime, so no wrapper patch is selected on that premise alone.
-That finding is not converted into a universal framework guarantee.
-
-All five jobs closed by 20:17:10.138895Z. The ignored frozen BODY013 copy was
-temporarily deleted after 20:17:39Z through an `RD` alias collision; canonical
-source was unchanged. Root restored exact 209,830-byte `FFE36D92...B8329` content
-at 20:20:39.0379885Z and matched 2,344 unique current inputs afterward, zero conflicts.
-No continuous freeze or retrospective admission is claimed.
-
-The seven prepared future definitions are superseded for use after the technical
-repair; shared index v3 was never created and no GO exists for those definitions.
-Keep substantive [practical v7.3 criteria](research/2026-10-20-e04a-practical-source-method-v7.3.md),
-all seven joins/16 atoms/29 duties, complete material/global unit coverage,
-independent raw seams and both complete independent finite witnesses. Refreeze
-changed source and derive exact affected inputs before fresh assessments; old
-raw PASS and incomplete reports do not transfer. All eight native phases remain
-NOT_RUN, no native RunRoot and visible authority zero. Final independent CODE,
-different REQ, A1G/A2/HUD/Linux/package and broader acceptance remain open.
-Standing perpetual private-source/API consent remains current until revoked.
+[factual result](evidence/2026-10-20-e04a-practical-source-result.json) retain the
+pre-repair five raw reports/476 pairs, conditional Dispose limits and restored
+frozen-copy incident without revision. Seven old prepared definitions remain
+superseded and their shared index v3 was never created; no old GO/PASS transfers.
+Substantive v7.3 duties remain unchanged. There are zero admissions, all eight
+native phases NOT_RUN, no native RunRoot and visible authority zero. Final CODE,
+different REQ and A1G/A2/HUD/Linux/package/broader acceptance remain open.
+Standing perpetual private-source/API consent persists until explicitly revoked.
 
 **Historical R4 assignment and findings (revision 57):**
 

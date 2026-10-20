@@ -78,43 +78,27 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 70 (2026-10-20 UTC) is
-**PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED**. Read the
-[practical closure](docs/plans/research/2026-10-20-e04a-practical-source-closure.md),
-[factual overlay](docs/plans/evidence/2026-10-20-e04a-practical-source-result.json)
-and [adopted practical v7.3 method](docs/plans/research/2026-10-20-e04a-practical-source-method-v7.3.md).
-All five practical jobs for `da00e83` / `20261020T192245Z-8fa15b75` closed:
-VALUE BLOCKED/109 pairs, independent VALUE seam BLOCKED/57, compiler/ABI
-CHANGES_REQUESTED/84 and two witnesses raw PASS/117 and PASS/109. Total 476
-pairs, zero admissions. Root sealed reports before body reading; raw results
-remain unchanged. D-ABI-01 confirms unfrozen/unrefused configurable radlink/
-cl-filter alternatives, without inferring active configuration or tool execution.
-Reject effective `bAllowRadLinker`, `bPrintToolChainTimingInfo` and `bCompilerTrace`
-at final module-time, then refreeze and obtain fresh affected reviews including
-both whole finite witnesses. Seven prepared future definitions are superseded
-for use after repair; shared index v3 was never created and they have no GO.
+Current A1E status at plan revision 71 (2026-10-20 UTC) is
+**TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. Technical commit
+`3b5447e777da76b555215c135977c92a1706282b` adds 14 lines/zero removals in
+YamlCpp.Build.cs. `RejectUnsupportedNativeToolAlternatives` rejects effective
+`Target.WindowsPlatform.bAllowRadLinker`, `Target.bPrintToolChainTimingInfo` and
+`Target.WindowsPlatform.bCompilerTrace` at final module construction. Ordinary
+source inspection found no actionable issue; installed read-only getters support
+the guard interface. Compilation/control/native checks are NOT_RUN and no SOURCE
+approval follows. Wrapper, target and test source are unchanged.
 
-V7.3 explicitly supersedes blanket whole013/all45/full099/full14 in every
-context, repeated whole-domain primary replicas and compulsory P/F/constructor
-machinery. Preserve complete material source/global45 units, all substantive
-seven joins/16 atoms/29 duty texts,902/49/1561 coverage, two complete independent
-finite witnesses and independent raw seams. Use a shared exact index, concise
-own assignments and verified unchanged additional relevant primary-source reads.
-Own exact clean controls are fully readable; privacy, selected-origin and blind
-review exclusions remain. Old incomplete reports never transfer approval.
-
-The conditional Dispose source-order finding remains preserved. Pinned
-PowerShell7.6.5/.NET10.0.11 research found no demonstrated normally reachable
-throwing close for the untouched synchronous lock; no universal no-throw/unlock/process
-guarantee or wrapper patch on that antecedent alone follows. An `RD` alias
-collision temporarily deleted the ignored BODY013 frozen copy after all five
-jobs closed; canonical source was unchanged. Exact bytes were restored and the
-post-close rehash matched 2,344 unique inputs, zero conflicts. Continuous freeze
-is not claimed. This checkpoint changes documentation only; substantive v7.3
-method is unchanged. All eight native phases remain NOT_RUN, no native RunRoot
-and visible authority zero.
-Final independent CODE/different REQ and A1G/A2/HUD/Linux/package/acceptance gates
-remain open. Standing perpetual source/API consent persists until explicitly revoked.
+Derive exact current publication/run/common/index bindings and obtain fresh
+affected reviews including both complete independent finite witnesses. The
+[revision70 closure](docs/plans/research/2026-10-20-e04a-practical-source-closure.md)
+and [factual record](docs/plans/evidence/2026-10-20-e04a-practical-source-result.json)
+remain historical and unchanged, including raw verdicts, conditional Dispose
+limits and the restored-copy incident. No old PASS/GO transfers. Substantive
+[practical v7.3 duties](docs/plans/research/2026-10-20-e04a-practical-source-method-v7.3.md)
+and privacy/blind-review exclusions remain. There are zero admissions, all eight
+native phases NOT_RUN, no native RunRoot and visible authority zero. Final CODE,
+different REQ and A1G/A2/HUD/Linux/package/acceptance remain open. Standing perpetual
+source/API consent persists until explicitly revoked.
 
 Historical A1E status at plan revision 67 (2026-10-20 UTC) is
 **AFFECTED_SOURCE_METHOD_ADOPTED_BINDINGS_PENDING**. Read the
