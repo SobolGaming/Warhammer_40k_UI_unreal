@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E parser proof received SOURCE CHANGES_REQUESTED for a missing JSON-line helper. The strict parser is restored; 15 offline cases / 38 checks passed. A fresh review precedes execution. All eight phases remain NOT RUN.
+The bounded E04-A1E proof is **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. SOURCE r5 passed only the old `c500f21` candidate; Preflight and supervisor controls passed, then Configure failed on generated SDK RC-path serialization. The authored repair passed 21 pure PowerShell cases with zero failures; checkpoint, a new candidate/freeze/run and fresh affected SOURCE are next. No native parser suite ran.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
@@ -76,7 +76,24 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Plan revision 46 preserves the fourth [E04-A1E SOURCE BLOCKED report](docs/plans/research/2026-10-20-e04a-source-review-r4.md) and its [factual record](docs/plans/evidence/2026-10-20-e04a-source-r4-result.json). It inspected only 19 of 78 files and reported a truncated metadata read outside the selected fields. No new code defect was established. A compact bootstrap repairs review delivery; complete coverage remains required before native work. All eight phases remain NOT RUN. Standing private-source/API review consent persists until revoked.
+Plan revision 47 records **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. The fifth
+[SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r5.md) is raw
+SOURCE_PASS for `c500f21` / run `20261020T024733Z-0781e386` only, with the
+[factual record's](docs/plans/evidence/2026-10-20-e04a-source-r5-result.json)
+bounded Editor rendering/isolation qualifications. Preflight passed with zero
+native roots; six supervisor controls passed in three groups/five owned roots.
+Configure failed after root CMake exited 1 in about 0.859 seconds on an invalid
+`\P` escape in its generated RC-compiler path. An unidentified member kept the
+private job active until timeout cleanup; final active count was zero. Producer
+post-phase preservation then exceeded its deadline. Separate manual post-close
+checks matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings
+pairs; these observations do not pass Configure. That run is closed and cannot be
+reused. The path repair passed 21 pure PowerShell cases with zero failures;
+checkpoint, new candidate/freeze/run and fresh affected SOURCE remain pending.
+No timeout budget increase or final
+acceptance follows. Standing review consent persists until explicit revocation.
+
+Historical plan revision 46 preserves the fourth [E04-A1E SOURCE BLOCKED report](docs/plans/research/2026-10-20-e04a-source-review-r4.md) and its [factual record](docs/plans/evidence/2026-10-20-e04a-source-r4-result.json). It inspected only 19 of 78 files and reported a truncated metadata read outside the selected fields. No new code defect was established. A compact bootstrap repairs review delivery; complete coverage remains required before native work. All eight phases remain NOT RUN. Standing private-source/API review consent persists until revoked.
 
 Historical plan revision 45 preserves the third [E04-A1E SOURCE BLOCKED report](docs/plans/research/2026-10-20-e04a-source-review-r3.md) and its [factual record](docs/plans/evidence/2026-10-20-e04a-source-r3-result.json). Required review coverage was incomplete (52 of 78 BODY files). The DDC guard is repaired to require the owned writable store and reject graph switches; 21 offline cases / 63 checks passed. A new freeze/RunId and complete fresh SOURCE review are next. No A1E native phase has run. Historical revision 44 preserves the second [SOURCE CHANGES_REQUESTED report](docs/plans/research/2026-10-20-e04a-source-review-r2.md) and its [factual record](docs/plans/evidence/2026-10-20-e04a-source-r2-result.json): the strict JSON-line parser was restored with 15 offline cases / 38 checks. Historical revision 43 preserves the first [E04-A1E SOURCE BLOCKED report](docs/plans/research/2026-10-20-e04a-source-review-r1.md)
 and [factual record](docs/plans/evidence/2026-10-20-e04a-source-r1-result.json).
@@ -90,11 +107,14 @@ binds the source bytes; the [packet](docs/plans/research/2026-10-19-e04a-profile
 and [journal](docs/plans/evidence/2026-10-19-e04a-profile.md) define the subset.
 The original promotion hashes are historical; later source changes need a new
 candidate checkpoint/freeze, neutral packet, RunId and affected SOURCE review.
-All eight phases are NOT RUN; eight suites, 38 unique IDs and 45 attempts are
-planned. Editor exceptions are enabled by target policy, while A1G's genuinely
-exception-disabled runtime caller remains required before full A1/RQ11/production
-adoption. A2 retains 727 scenarios; shared HUD/render/input, Linux and packaging
-remain open. Canonical promotion adds no execution or acceptance authority.
+In the closed `c500f21` run, Preflight and SupervisorControls passed and Configure
+failed. DependencyBuild, EditorBuild, Discovery, Native and Audit are NOT RUN;
+eight parser suites, 38 unique inputs and 45 attempts remain planned. Editor
+exceptions are enabled by target policy. A1G's genuinely exception-disabled
+runtime caller remains required before full A1/RQ11/production adoption. A2 retains
+727 scenarios; shared HUD/render/input, Linux and packaging remain open. Canonical
+promotion and the old SOURCE result supply no repaired-candidate execution or
+final CODE/different REQ acceptance.
 
 Bounded E02 acceptance and its closed native/window authority remain unchanged.
 The following revision 41 and earlier records are historical.
@@ -107,11 +127,13 @@ preserves original chronology, relay/reply-edge limits, all failures and the
 UNREVIEWED_FOR_ACCEPTANCE status of historical checkpoint `1c99360`. Full E02/M02
 and broader gates remain open. No new launch, publication or merge is authorized.
 
-Next is the E04-A1E source review: an Editor/raw-document parser boundary proof
-with actual Editor exceptions enabled. A1G's genuinely exception-disabled runtime
-caller remains mandatory before full A1/RQ11/production adoption. No A1 configure,
-library build or native test has run. The source-only draft and dependency
-acquisition remain separate from acceptance.
+Next, validate and checkpoint the authored CMake path repair, then bind a new
+candidate/freeze/RunId and obtain fresh affected E04-A1E SOURCE before any new
+phase. The old failed Configure result stays unchanged; no library build, Editor
+build, discovery or native parser test ran. Successful-root lingering-member
+behavior remains unproved by this repair. A1G's genuinely exception-disabled
+runtime caller and all broader gates remain required; final CODE/different REQ
+are pending.
 
 Historical plan revision 40 (2026-10-20 UTC) recorded the completed E02 run
 `20261019T202805Z-5ff8cb61` on executed source

@@ -1396,8 +1396,10 @@ function Windows-Contract {
 }
 function Build-Root {return Owned 'vendor-build/Win64/Development/x64'}
 function Artifact-Root {return Owned 'vendor-artifact/Win64/Development/x64'}
+# CMake listfiles quote these values; native backslashes can become escapes such as \P.
+function CMake-Path([string]$Path) {return $Path.Replace('\','/')}
 function CMake-Options {
-    return @('-G','Ninja',('-DCMAKE_MAKE_PROGRAM='+$script:Freeze.toolPaths.ninja),('-DCMAKE_CXX_COMPILER='+$script:Freeze.toolPaths.compiler),('-DCMAKE_LINKER='+$script:Freeze.toolPaths.linker),('-DCMAKE_AR='+$script:Freeze.toolPaths.librarian),('-DCMAKE_RC_COMPILER='+$script:Freeze.toolPaths.sdkRc),
+    return @('-G','Ninja',('-DCMAKE_MAKE_PROGRAM='+(CMake-Path $script:Freeze.toolPaths.ninja)),('-DCMAKE_CXX_COMPILER='+(CMake-Path $script:Freeze.toolPaths.compiler)),('-DCMAKE_LINKER='+(CMake-Path $script:Freeze.toolPaths.linker)),('-DCMAKE_AR='+(CMake-Path $script:Freeze.toolPaths.librarian)),('-DCMAKE_RC_COMPILER='+(CMake-Path $script:Freeze.toolPaths.sdkRc)),
         '-DCMAKE_BUILD_TYPE=Release','-DCMAKE_CXX_STANDARD=20','-DCMAKE_CXX_STANDARD_REQUIRED=ON','-DCMAKE_CXX_EXTENSIONS=OFF','-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL','-DCMAKE_CXX_FLAGS=/EHsc /GR-','-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
         '-DYAML_BUILD_SHARED_LIBS=OFF','-DYAML_CPP_BUILD_TESTS=OFF','-DYAML_CPP_BUILD_TOOLS=OFF','-DYAML_CPP_BUILD_CONTRIB=OFF','-DYAML_CPP_INSTALL=OFF','-DYAML_CPP_FORMAT_SOURCE=OFF','-DBUILD_TESTING=OFF','-DYAML_CPP_DISABLE_UNINSTALL=ON','-DYAML_ENABLE_PIC=ON','-DYAML_MSVC_SHARED_RT=ON')
 }
@@ -1411,8 +1413,8 @@ function Check-CMake {
     $actual=[Collections.Generic.List[string]]::new();$flags=[Collections.Generic.List[object]]::new()
     foreach($c in $commands){$file=Assert-Path $c.file;if($file -cin $actual){throw 'E04A1_DUPLICATE_VENDOR_COMPILE_COMMAND'};$actual.Add($file)
         if((Assert-Path $c.directory) -ine $root -or $c.command -isnot [string]){throw 'E04A1_VENDOR_COMMAND_SHAPE_OR_DIRECTORY'}
-        $cmd=[string]$c.command;Safe-Text $cmd;$compiler=$script:Freeze.toolPaths.compiler
-        if(-not ($cmd.StartsWith(('"'+$compiler+'" '),[StringComparison]::OrdinalIgnoreCase) -or $cmd.StartsWith(($compiler+' '),[StringComparison]::OrdinalIgnoreCase)) -or $cmd -notmatch '(?i)(?:^|\s)[/-]MD(?:\s|$)' -or $cmd -match '(?i)(?:^|\s)[/-](?:MDd|MTd?)(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)[/-]std:c\+\+20(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)/EHsc(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)/GR-(?:\s|$)' -or $cmd -notmatch '(?:-D|/D)YAML_CPP_STATIC_DEFINE(?:=1)?(?:\s|$)'){throw 'E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH'}
+        $cmd=[string]$c.command;Safe-Text $cmd;$compiler=CMake-Path $script:Freeze.toolPaths.compiler;$commandPathView=$cmd.Replace('\','/')
+        if(-not ($commandPathView.StartsWith(('"'+$compiler+'" '),[StringComparison]::OrdinalIgnoreCase) -or $commandPathView.StartsWith(($compiler+' '),[StringComparison]::OrdinalIgnoreCase)) -or $cmd -notmatch '(?i)(?:^|\s)[/-]MD(?:\s|$)' -or $cmd -match '(?i)(?:^|\s)[/-](?:MDd|MTd?)(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)[/-]std:c\+\+20(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)/EHsc(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)/GR-(?:\s|$)' -or $cmd -notmatch '(?:-D|/D)YAML_CPP_STATIC_DEFINE(?:=1)?(?:\s|$)'){throw 'E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH'}
         $flags.Add(@{file=$file;command=$cmd;observedRuntime='MD';observedStandard='C++20';observedExceptions='EHsc';observedRtti='GR-';staticDefineObserved=$true})
     }
     if(-not $expectedSources.Count -or (@($actual|Sort-Object -CaseSensitive)-join "`n") -cne ($expectedSources -join "`n")){throw 'E04A1_VENDOR_COMPILE_SOURCE_MEMBERSHIP_MISMATCH'}
@@ -1661,8 +1663,8 @@ try {
     switch($Phase){
         'Preflight'{$script:Result.status='PREFLIGHT_PASS_NO_NATIVE_ROOT';$script:Result.generatedInputCount=38}
         'SupervisorControls'{$script:Result.controls=Supervisor-Controls;$script:Result.status='SUPERVISOR_CONTROLS_PASS_6_SEPARATE_FROM_NATIVE'}
-        'Configure'{$build=Build-Root;New-Directory $build;$p=Invoke-Root 'configure' $script:Freeze.toolPaths.cmake (@('-S',$script:VendorRoot,'-B',$build)+(CMake-Options)) 600;Require-RootPass $p;$script:Result.configure=Check-CMake;$script:Result.status='CONFIGURE_PASS_NO_INSTALL'}
-        'DependencyBuild'{$p=Invoke-Root 'dependency-build' $script:Freeze.toolPaths.cmake @('--build',(Build-Root),'--target','yaml-cpp','--parallel','2','--verbose') 1200;Require-RootPass $p;$script:Result.vendorArtifact=Publish-VendorArtifact $p;$script:Result.status='DEPENDENCY_BUILD_AND_EXPLICIT_COPY_PASS'}
+        'Configure'{$build=Build-Root;New-Directory $build;$p=Invoke-Root 'configure' $script:Freeze.toolPaths.cmake (@('-S',(CMake-Path $script:VendorRoot),'-B',(CMake-Path $build))+(CMake-Options)) 600;Require-RootPass $p;$script:Result.configure=Check-CMake;$script:Result.status='CONFIGURE_PASS_NO_INSTALL'}
+        'DependencyBuild'{$p=Invoke-Root 'dependency-build' $script:Freeze.toolPaths.cmake @('--build',(CMake-Path (Build-Root)),'--target','yaml-cpp','--parallel','2','--verbose') 1200;Require-RootPass $p;$script:Result.vendorArtifact=Publish-VendorArtifact $p;$script:Result.status='DEPENDENCY_BUILD_AND_EXPLICIT_COPY_PASS'}
         'EditorBuild'{$script:Result.editorBuild=Editor-Build;$script:Result.status='EDITOR_BUILD_PASS_SELECTED_NATIVE_FLAGS_OBSERVED'}
         {$_ -in @('Discovery','Native')}{$label=$Phase.ToLowerInvariant();$p=Invoke-Root $label $script:Freeze.toolPaths.editorCmd @(Native-Arguments) 600;Require-RootPass $p;$script:Result.nativeLog=Inspect-NativeLog;if($Phase -ceq 'Discovery'){$script:Result.discovery=Check-Discovery;Write-JsonNew (Owned 'reports/discovery/selected-names.json') $script:Result.discovery;$script:Result.status='DISCOVERY_PASS_EXACT_8'}else{$script:Result.native=Check-Native;Write-JsonNew (Owned 'reports/native/validated-input-ledgers.json') $script:Result.native;$script:Result.status='NATIVE_A1E_EDITOR_SUBSET_EXECUTION_PASS_NO_A1G_NO_FULL_A1_ACCEPTANCE'}}
         'Audit'{$script:Result.native=Check-Native;$script:Result.editorFlags=Check-EditorFlags;$script:Result.configure=Check-CMake;$script:Result.status='EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT';$script:Result.authorityState='RUNTIME_CLOSED_REQUIRE_ROOT_RECORD_NO_RETRY_OR_MERGE'}

@@ -1,11 +1,27 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 46 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 47 (2026-10-20 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Revision 46 records **SOURCE_BLOCKED_REVIEW_DELIVERY_REPAIR_AUTHORED**. The
+Revision 47 records **CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. The fifth
+[SOURCE report](research/2026-10-20-e04a-source-review-r5.md) is raw SOURCE_PASS
+only for `c500f21` / run `20261020T024733Z-0781e386`. The
+[factual record](evidence/2026-10-20-e04a-source-r5-result.json) retains its bounded
+Editor qualifications and closed execution: Preflight passed with zero roots,
+six supervisor controls passed in three groups/five roots, then Configure failed
+on generated SDK RC-path escaping. The root exited 1 in about 0.859 seconds;
+one unidentified job member lingered until confirmed timeout cleanup/final zero.
+Producer preservation missed its deadline; separate manual post-close checks
+matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings pairs.
+They do not pass the failed phase. The path repair passed 21 pure PowerShell
+cases with zero failures; checkpoint/new freeze/RunId and fresh affected SOURCE
+remain pending. The five
+later phases are NOT RUN. Final CODE/different REQ, A1G, A2/HUD, Linux and packages
+remain open; standing review consent persists until explicit revocation.
+
+Historical revision 46 records **SOURCE_BLOCKED_REVIEW_DELIVERY_REPAIR_AUTHORED**. The
 fourth [SOURCE report](research/2026-10-20-e04a-source-review-r4.md) is raw
 BLOCKED: only 19 of 78 BODY files were inspected, metadata relationships remain
 incomplete, and an oversized dump exposed unselected freeze qualifications.

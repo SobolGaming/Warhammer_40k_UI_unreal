@@ -78,7 +78,30 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 46 (2026-10-20 UTC) is
+Current A1E status at plan revision 47 (2026-10-20 UTC) is
+**CONFIGURE_FAILED_PATH_REPAIR_AUTHORED**. The fifth
+[SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r5.md) is raw
+SOURCE_PASS only for `c500f21` / run `20261020T024733Z-0781e386`; its bounded
+Editor source gate retains the [factual record's](docs/plans/evidence/2026-10-20-e04a-source-r5-result.json)
+rendering and isolation qualifications. Preflight passed with zero native roots;
+six supervisor controls passed in three groups/five owned roots, retaining their
+expected raw failure results. Configure failed: CMake exited 1 after about
+0.859 seconds because its generated RC-compiler file rejected the SDK path's
+unescaped `\P`. One unidentified job member remained until timeout cleanup;
+exit/cleanup were confirmed and final active count was zero. Producer post-phase
+preservation missed its deadline. Separate post-close checks matched 1,885 frozen
+files, 33 staged sources, 51 fixtures and nine settings pairs; they do not make
+Configure PASS. The run is CLOSED_FAILED_CONFIGURE_DO_NOT_REUSE. DependencyBuild,
+EditorBuild, Discovery, Native and Audit are NOT RUN; eight parser suites /
+38 inputs / 45 attempts remain planned. The path serialization repair is authored;
+21 pure PowerShell offline cases passed with zero failures. A new checkpoint/
+candidate/freeze/RunId and fresh affected SOURCE precede any new phase. Budgets and supervisor behavior are unchanged; successful-root
+lingering-member behavior is not newly proved. Final CODE/different REQ, A1G,
+727 A2 scenarios, shared HUD/render/input, Linux and packaging remain open.
+Standing review consent persists until explicit revocation. The following
+revision 46 record is historical.
+
+Historical A1E status at plan revision 46 (2026-10-20 UTC) is
 **SOURCE_BLOCKED_REVIEW_DELIVERY_REPAIR_AUTHORED**. The fourth independent
 [SOURCE report](docs/plans/research/2026-10-20-e04a-source-review-r4.md) is raw
 BLOCKED for `d39b7b8`/run `023034`: only 19 of 78 required BODY files were
