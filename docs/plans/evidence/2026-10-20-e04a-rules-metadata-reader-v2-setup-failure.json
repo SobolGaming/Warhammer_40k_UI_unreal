@@ -1,0 +1,39 @@
+{
+  "caseCount": 0,
+  "manifest": {
+    "bytes": 49298,
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v2\\metadata-reader-fixture-manifest.PROPOSED.json",
+    "sha256": "107D201E72C33FA719BE85C021158F235DAD77F79CE934F814E3210C904D4BBE"
+  },
+  "candidateOrFixtureAssemblyExecuted": false,
+  "loadedAssemblyCheckCompleted": false,
+  "functionBindings": [],
+  "emittedFixtureAssemblyLoadObserved": null,
+  "fullWrapperInvoked": false,
+  "candidateRulesEmitted": false,
+  "limitations": [
+    "Trusted tiny own synthetic PE/PDB only, not malformed hostile binary hardening or a native UBT/rules/runtime proof.",
+    "Synthetic assembly metadata references only the selected already-loaded host core library; trusted emitter compiler references are bundled framework/Roslyn only.",
+    "Only the reviewed emitter bridge is compiled/loaded/executed. Emitted fixture DLLs are never passed to an assembly loader or invoked.",
+    "Read-RulesMetadata and exact named trusted definitions are extracted from approved full wrapper hash; full wrapper initialization and native helper are never invoked.",
+    "Roslyn cancellation40s plus outer process45s/cleanup5s; synchronous managed I/O remains checked at boundaries.",
+    "Any failure and all partial emitted/source/log files remain owned and preserved."
+  ],
+  "syntheticFixtureEmitOnly": true,
+  "trustedEmitterBridgeCompiledAndLoaded": false,
+  "ubtOrEngineExecuted": false,
+  "schemaVersion": 1,
+  "workerFailure": {
+    "message": "error CS1701: Assuming assembly reference 'System.Runtime, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'Microsoft.CodeAnalysis' matches identity 'System.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.Runtime', you may need to supply runtime policy",
+    "type": "System.Exception"
+  },
+  "kind": "TRUSTED_SYNTHETIC_ACTUAL_METADATA_READER_CONTROLS_NOT_NATIVE_PROOF",
+  "cases": [],
+  "wrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+    "bytes": 202111,
+    "sha256": "141800CD5D87574EC634FF0D423AE95D2AEB260DB361F376D8EE9B55C64DEAF9"
+  },
+  "elapsedMilliseconds": 400,
+  "failedCount": 0
+}

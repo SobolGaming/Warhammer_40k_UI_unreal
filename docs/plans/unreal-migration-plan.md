@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 60 — RULES_WITNESS_SOURCE_CHECKED_PACKETS_NOT_READY. The target now checks actual enum values before emitting canonical version tags, avoiding Latest-alias ambiguity. The current seven-source static check returns zero diagnostics against 31 normal UBT references; the unchanged wrapper's 51 pure controls passed. Initial five CS0012 errors and unused authoring drafts remain preserved. No binary PE/PDB decoder test, candidate emit/load, Rules construction or UBT/native build ran. Concrete freeze metadata, full source/test/API grants, complete-unit/count rebinding and fresh scoped SOURCE/integrations remain pending. No previous admission or GO transfers. All eight native phases remain NOT_RUN/no RunRoot.
+**Revision:** 61 — RULES_WITNESS_CONTROLS_PASSED_PACKETS_PENDING. The current seven-source static check returns zero diagnostics against 31 normal UBT references; all 51 pure wrapper controls and six actual metadata-reader controls on synthetic PE/PDB fixtures passed. The earlier reader setup failure remains preserved. No candidate Rules assembly was emitted/loaded and no Rules construction or UBT/native build ran. Complete the concrete freeze, clean source/test/API grants and exact count/unit bindings before fresh scoped SOURCE/integrations. No previous admission or GO transfers. All eight native phases remain NOT_RUN/no RunRoot.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,21 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 60 changes
+### Revision 61 changes
+
+The [metadata-reader checks](evidence/2026-10-20-e04a-rules-metadata-reader-result.json)
+exercise the actual wrapper decoder against two trusted synthetic DLL/PDB pairs.
+All six cases passed, including wrong-PDB, source-checksum and missing-PDB
+rejections; the child exited 0 in 2,693 ms with confirmed cleanup and no timeout.
+The first check stopped at trusted bridge compilation with CS1701 and ran zero
+reader cases. Preserve that setup failure separately. The repaired setup permits
+only CS1701 after checking the pinned Roslyn .NET 9 / host .NET 10 identities;
+suppression itself proves no API equivalence. No emitted fixture was loaded or
+executed. Actual Unreal private API accessibility, Rules/cache/runtime joins and
+native execution remain untested. The 51-control and static-check sources are
+unchanged. Complete the new review packets before the next source campaign.
+
+### Revision 60 history
 
 The [enum-tag repair](evidence/2026-10-20-e04a-rules-enum-tag-result.json)
 requires actual Cpp20/V7/Unreal5_8 values before recording their canonical tags.

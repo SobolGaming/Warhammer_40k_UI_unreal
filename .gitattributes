@@ -25,3 +25,4 @@ docs/plans/research/2026-10-20-e04a-scoped-r4-*.md -text whitespace=-blank-at-eo
 # Preserve the completed pure C# diagnostic and process receipts byte for byte.
 docs/plans/evidence/2026-10-20-e04a-rules-static-check-*.json -text whitespace=cr-at-eol
 docs/plans/evidence/2026-10-20-e04a-rules-wrapper-*.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-rules-metadata-reader-*.json -text whitespace=cr-at-eol

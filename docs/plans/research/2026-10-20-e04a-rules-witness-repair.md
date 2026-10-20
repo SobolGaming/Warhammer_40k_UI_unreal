@@ -101,3 +101,12 @@ All ten fresh complete scoped SOURCE assessments, root audits and the labelled
 aggregate still precede native phases. No earlier report/admission or GO transfers.
 All eight native phases remain NOT_RUN. Final CODE/different REQ, A1G, A2/HUD,
 Linux, packaging and broader acceptance remain open.
+
+The later [trusted binary-reader check](2026-10-20-e04a-rules-metadata-reader-controls.md)
+now exercises the actual decoder on synthetic PE/PDB fixtures: six controls
+matched, including three expected refusals. The earlier CS1701 bridge setup
+failure ran zero reader cases and remains separately preserved. Exact raw
+reports, process receipts, source/adoption bindings and scope limits are in the
+[reader record](../evidence/2026-10-20-e04a-rules-metadata-reader-result.json).
+No candidate Rules, private Unreal API, UBT or native phase execution follows
+from these synthetic controls. The existing 51-control source/results are unchanged.
