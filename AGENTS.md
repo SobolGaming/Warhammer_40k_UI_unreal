@@ -78,7 +78,34 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 71 (2026-10-20 UTC) is
+Current A1E status at plan revision 72 (2026-10-20 UTC) is
+**PRACTICAL_SOURCE_CLOSED_REPAIRS_REQUIRED**. The
+[closed repaired-source round](docs/plans/research/2026-10-20-e04a-repaired-source-closure.md)
+and [exact factual record](docs/plans/evidence/2026-10-20-e04a-repaired-source-result.json)
+bind publication `6874c1784d7b2d2dd00019e897768894aa9b66b1`, technical `3b5447e`,
+base `03d28af` and run `20261020T203627Z-e262e08c`. All six raw reports and bounded
+audits are closed: W_A PASS/116 pairs, W_B PASS/72, C PASS/107, P CHANGES_REQUESTED/97,
+I CHANGES_REQUESTED/70 and D CHANGES_REQUESTED/122; total 584, zero admissions.
+Each witness's 18,522 mandatory rows were machine-delivered; ordinary/archival
+audits do not establish favorable semantics/full delivery for C or rejected D/P/I.
+Root sealed reports before first body reads, fully read stopped reports/audits,
+and matched 2,446 unique inputs in the post-close rehash before canonical edits.
+No continuous immutability claim or round incident is recorded. The other four
+prepared jobs never received GO/launched.
+
+Checkpoint the closure before code changes. Bounded raw-C0, current D-ABI-01
+build-instruction preservation and current D-ABI-02 ObjSrcMapFile refusal designs
+remain unapplied; qualify current D IDs by this head/run to distinguish historical
+tool-alternative findings. Corrected32-byte K05 and proposed 40 inputs/47 attempts
+preserve the original 38/eight suites. Plain-DEL/context-sensitive lexical/A2
+production risk remains open without waiving applicable A1 requirements. Rebind
+changed source/control/fixture inputs and affected reviews under unchanged v7.3;
+no prior PASS/GO transfers. All eight native phases remain NOT_RUN, no native
+RunRoot exists and visible count is zero. Final CODE/different REQ after actual
+execution/evidence freeze and A1G/A2/HUD/Linux/package/full acceptance remain
+open. Standing perpetual private-source/API consent is unchanged.
+
+Historical A1E status at plan revision 71 (2026-10-20 UTC) is
 **TOOLCHAIN_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. Technical commit
 `3b5447e777da76b555215c135977c92a1706282b` adds 14 lines/zero removals in
 YamlCpp.Build.cs. `RejectUnsupportedNativeToolAlternatives` rejects effective

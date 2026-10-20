@@ -1,0 +1,566 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_REPAIRED_SOURCE_ROUND_CLOSURE",
+  "revision": 72,
+  "status": "PRACTICAL_SOURCE_CLOSED_REPAIRS_REQUIRED",
+  "recordDateUtc": "2026-10-20",
+  "scope": "Documentation-only factual closure overlay, separate from reviewed source and all native/final acceptance",
+  "subject": {
+    "publicationHead": "6874c1784d7b2d2dd00019e897768894aa9b66b1",
+    "technicalSourceHead": "3b5447e777da76b555215c135977c92a1706282b",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T203627Z-e262e08c",
+    "sharedSourceIndex": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-common-6874c17-20261020T203627Z-e262e08c/shared-source-index.json",
+      "bytes": 472816,
+      "sha256": "A480AF5CABA0C1599EE6116AD9B13421B278BF1D24732E9497CCA8090C41DEBB"
+    }
+  },
+  "closure": {
+    "allSixLaunchedReviewsClosed": true,
+    "allAffectedOrdinaryAndArchivalAuditsClosed": true,
+    "rawPassCount": 3,
+    "rawChangesRequestedCount": 3,
+    "completeToolPairs": 584,
+    "reviews": [
+      {
+        "id": "W_RULES_WITNESS_A",
+        "status": "CLOSED",
+        "rawVerdict": "PASS",
+        "completeToolPairs": 116,
+        "rawReport": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_A/last-message.txt",
+          "bytes": 7019,
+          "sha256": "1E2AC1EB52E9D190BF959D2B334983DF953AF72892F7D3A5E182D9AA8DA28033"
+        },
+        "rootClosedOutputSeal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_A/root-closed-output.seal.original.json",
+          "bytes": 150692,
+          "sha256": "8E8FE37CE8A8491F5D15739398B9259900BE6E6079AAD6E8BFD323553C1C4772"
+        },
+        "runtime": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_A/runtime-evidence.final.selected.json",
+          "bytes": 9506,
+          "sha256": "70A28C3E02B2D482EEC41E5B3C0928264C0AEBA9C78F62D037FAF19E10084870"
+        },
+        "completeToolLedger": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_A/actual-complete-tool-input-output-ledger.json",
+          "bytes": 2488898,
+          "sha256": "70F404F7D4A7FB240C90E3206BD01A0FC7A662412B453C97458926BEEEF44D9B"
+        },
+        "invocation": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_A/invocation.json",
+          "bytes": 4880,
+          "sha256": "85CFBAEC87F4F1A2CDA128332AD3DFD9EAC51AAE7D50AA412410FB262082861F"
+        },
+        "sealedBeforeFirstRootFullBodyRead": true,
+        "rootFullyReadReport": true,
+        "sourceAdmission": false,
+        "ordinaryAudit": {
+          "status": "CLOSED",
+          "kind": "BOUNDED_ORDINARY_CLOSED_EVIDENCE_AUDIT",
+          "report": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-WA203627-closed-evidence-audit/report.OPERATOR_ONLY.md",
+            "bytes": 6446,
+            "sha256": "6B6C0170E12F40408696C9B7E186DCBF60563F00B30C8E8F2AF724B8F70B76A5"
+          },
+          "seal": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-WA203627-closed-evidence-audit/seal.OPERATOR_ONLY.json",
+            "bytes": 996,
+            "sha256": "363E81243CD37332641DEA08F491A527BA282D5800AC288C13F11CFC2C6936CF"
+          },
+          "reportAndSealFullyReadAndRehashedByRoot": true,
+          "semanticAcceptanceEstablished": false,
+          "mandatorySourceRowsMachineDelivered": 18522,
+          "deliveryQualification": "Exact mandatory18522 source rows machine-delivered; delivery is not semantic review or admission."
+        }
+      },
+      {
+        "id": "W_RULES_WITNESS_B",
+        "status": "CLOSED",
+        "rawVerdict": "PASS",
+        "completeToolPairs": 72,
+        "rawReport": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_B/last-message.txt",
+          "bytes": 4879,
+          "sha256": "E7169534B30F7353E4D4E6A8510936773A2689740D9C0A9010CEEB03071247AB"
+        },
+        "rootClosedOutputSeal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_B/root-closed-output.seal.original.json",
+          "bytes": 95802,
+          "sha256": "F1847C3DCDD3C2C1B274705111F77396AAC6FDC90CBF3CB453ADE2B0D7F3060D"
+        },
+        "runtime": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_B/runtime-evidence.final.selected.json",
+          "bytes": 8567,
+          "sha256": "371A6C95815089A9836659478194B1668D239238770C9AD6B9474E71034EDD60"
+        },
+        "completeToolLedger": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_B/actual-complete-tool-input-output-ledger.json",
+          "bytes": 1784265,
+          "sha256": "2EB6043A15F6BDA694F1FE285EE83076505492563C65A666C999F7DDDBE51BF1"
+        },
+        "invocation": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-W_RULES_WITNESS_B/invocation.json",
+          "bytes": 4880,
+          "sha256": "7E7FC36E592D5BC816E333A11B0EABAE724B237A59A8FFED8945F57BF266F8A8"
+        },
+        "sealedBeforeFirstRootFullBodyRead": true,
+        "rootFullyReadReport": true,
+        "sourceAdmission": false,
+        "ordinaryAudit": {
+          "status": "CLOSED",
+          "kind": "BOUNDED_ORDINARY_CLOSED_EVIDENCE_AUDIT",
+          "report": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-WB203627-closed-evidence-audit/report.OPERATOR_ONLY.md",
+            "bytes": 4432,
+            "sha256": "D2D66F24759BAB60149D3D771B0E11BA302859E8C3102B81BBB252F3D69CF891"
+          },
+          "seal": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-WB203627-closed-evidence-audit/seal.OPERATOR_ONLY.json",
+            "bytes": 971,
+            "sha256": "E0627283A5BE87E1B0DCD55C2DEADBCC9A508808907F6068CA8D18992F60990F"
+          },
+          "reportAndSealFullyReadAndRehashedByRoot": true,
+          "semanticAcceptanceEstablished": false,
+          "mandatorySourceRowsMachineDelivered": 18522,
+          "deliveryQualification": "Exact mandatory18522 source rows machine-delivered; delivery is not semantic review or admission."
+        }
+      },
+      {
+        "id": "C_CLIENT_STAGE",
+        "status": "CLOSED",
+        "rawVerdict": "PASS",
+        "completeToolPairs": 107,
+        "rawReport": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-C_CLIENT_STAGE/last-message.txt",
+          "bytes": 6942,
+          "sha256": "4E90425459F90E768A360DCE8919416733562119EC18B30639B52CD49D048BD1"
+        },
+        "rootClosedOutputSeal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-C_CLIENT_STAGE/root-closed-output.seal.original.json",
+          "bytes": 141041,
+          "sha256": "97E8273F7687C397B618FD6AF3A7E54270F8269AD1F88DA782E0D4CEB82C986A"
+        },
+        "runtime": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-C_CLIENT_STAGE/runtime-evidence.final.selected.json",
+          "bytes": 9497,
+          "sha256": "42BBF0184B4D847224B7ECEAC7A33FD3656C7713D2C5EFC7EF1860BB2ABFDE71"
+        },
+        "completeToolLedger": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-C_CLIENT_STAGE/actual-complete-tool-input-output-ledger.json",
+          "bytes": 2372759,
+          "sha256": "DAD32F016A503BF41E32BFC2928FA5831C0497B0A846DDDE2CC9052E352689F6"
+        },
+        "invocation": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-C_CLIENT_STAGE/invocation.json",
+          "bytes": 4868,
+          "sha256": "9971760306000D7E23667D8BCE4778C1C93AF62F70EDAE278B34EE0AD0EBE4BD"
+        },
+        "sealedBeforeFirstRootFullBodyRead": true,
+        "rootFullyReadReport": true,
+        "sourceAdmission": false,
+        "ordinaryAudit": {
+          "status": "CLOSED",
+          "kind": "BOUNDED_ARCHIVAL_CONDUCT_AUDIT",
+          "report": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-C203627-archival-conduct-audit/archival-note.OPERATOR_ONLY.md",
+            "bytes": 4328,
+            "sha256": "26CF4BB5AF7011CA64A9A3CAA5E10D0E29D147E39B8DDD053A69D42A12BD67D9"
+          },
+          "seal": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-C203627-archival-conduct-audit/seal.OPERATOR_ONLY.json",
+            "bytes": 716,
+            "sha256": "A09A443565CEFBB0005BCFB6C8A6D6F8DD415EF9FD4C464EFCBB69AE614FE624"
+          },
+          "reportAndSealFullyReadAndRehashedByRoot": true,
+          "semanticAcceptanceEstablished": false,
+          "mandatorySourceRowsMachineDelivered": null,
+          "deliveryQualification": "Semantic acceptance and complete favorable source delivery remain UNVERIFIED by the bounded ordinary/archival audit."
+        }
+      },
+      {
+        "id": "P_VALUE_VENDOR_COMPLETE",
+        "status": "CLOSED",
+        "rawVerdict": "CHANGES_REQUESTED",
+        "completeToolPairs": 97,
+        "rawReport": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-P_VALUE_VENDOR_COMPLETE/last-message.txt",
+          "bytes": 8284,
+          "sha256": "296CDB701D746191618AE1D8B8C2BBEDE309284E3F6FD43D5A4E8A410D079865"
+        },
+        "rootClosedOutputSeal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-P_VALUE_VENDOR_COMPLETE/root-closed-output.seal.original.json",
+          "bytes": 131524,
+          "sha256": "8EF8F244DEE89FF56A5D182127CF8098D4C4734D06B16B950A4FBBA939979921"
+        },
+        "runtime": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-P_VALUE_VENDOR_COMPLETE/runtime-evidence.final.selected.json",
+          "bytes": 9532,
+          "sha256": "8E76D7907CFC7A35E02BA49A106AC4C89E3997FB5B4D79B239F12EF1924D8C84"
+        },
+        "completeToolLedger": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-P_VALUE_VENDOR_COMPLETE/actual-complete-tool-input-output-ledger.json",
+          "bytes": 2218622,
+          "sha256": "FD4936119981762977CB07FB91E7683E05E1784C14D624E6A88F34EE9324AE43"
+        },
+        "invocation": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-P_VALUE_VENDOR_COMPLETE/invocation.json",
+          "bytes": 4930,
+          "sha256": "14E154BC27E9ED834FCCD477D814BAE7F3919741616079E7FB80A0CE1F01673F"
+        },
+        "sealedBeforeFirstRootFullBodyRead": true,
+        "rootFullyReadReport": true,
+        "sourceAdmission": false,
+        "ordinaryAudit": {
+          "status": "CLOSED",
+          "kind": "BOUNDED_ORDINARY_CLOSED_EVIDENCE_AUDIT",
+          "report": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-203627-value-pair-closed-evidence-audit/ordinary-closed-evidence-audit.OPERATOR_ONLY.md",
+            "bytes": 11740,
+            "sha256": "BEA0910E0AD92B55AA249B45821E8676892CF57EC7F5BDAA48D644908100099F"
+          },
+          "seal": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-203627-value-pair-closed-evidence-audit/stopped-audit.seal.OPERATOR_ONLY.json",
+            "bytes": 2379,
+            "sha256": "DC9C4A760DFF36ABA206926411E29A766D087A14263C15C143F315BF1279502E"
+          },
+          "reportAndSealFullyReadAndRehashedByRoot": true,
+          "semanticAcceptanceEstablished": false,
+          "mandatorySourceRowsMachineDelivered": null,
+          "deliveryQualification": "Semantic acceptance and complete favorable source delivery remain UNVERIFIED by the bounded ordinary/archival audit."
+        }
+      },
+      {
+        "id": "I_FIXTURE_VALUE_VENDOR_RESULT",
+        "status": "CLOSED",
+        "rawVerdict": "CHANGES_REQUESTED",
+        "completeToolPairs": 70,
+        "rawReport": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-I_FIXTURE_VALUE_VENDOR_RESULT/last-message.txt",
+          "bytes": 5242,
+          "sha256": "5A4BBEB886CE256586AD26A4E1F4A51941DE9717D6B2D37D27E7FE625BE622FF"
+        },
+        "rootClosedOutputSeal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-I_FIXTURE_VALUE_VENDOR_RESULT/root-closed-output.seal.original.json",
+          "bytes": 99065,
+          "sha256": "B2D6974803B0F4CDDD6806634E7D42129E5967AB1D516F6D334057212B49FFBC"
+        },
+        "runtime": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-I_FIXTURE_VALUE_VENDOR_RESULT/runtime-evidence.final.selected.json",
+          "bytes": 8636,
+          "sha256": "0B252D99F19AE663CE983F86BF842D25CC006E148F2A97AF4BAEE43248913BBE"
+        },
+        "completeToolLedger": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-I_FIXTURE_VALUE_VENDOR_RESULT/actual-complete-tool-input-output-ledger.json",
+          "bytes": 1550984,
+          "sha256": "611C80DC3530D886E4D5325ABEF1A32EB6A8F855506E59E49C0AF65CE9671FA0"
+        },
+        "invocation": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-I_FIXTURE_VALUE_VENDOR_RESULT/invocation.json",
+          "bytes": 4991,
+          "sha256": "877C03A51363AD06F7B5D5B442E686F69EC76A22AE5CF9AA268BF1B6A2CE3A75"
+        },
+        "sealedBeforeFirstRootFullBodyRead": true,
+        "rootFullyReadReport": true,
+        "sourceAdmission": false,
+        "ordinaryAudit": {
+          "status": "CLOSED",
+          "kind": "BOUNDED_ORDINARY_CLOSED_EVIDENCE_AUDIT",
+          "report": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-203627-value-pair-closed-evidence-audit/ordinary-closed-evidence-audit.OPERATOR_ONLY.md",
+            "bytes": 11740,
+            "sha256": "BEA0910E0AD92B55AA249B45821E8676892CF57EC7F5BDAA48D644908100099F"
+          },
+          "seal": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-203627-value-pair-closed-evidence-audit/stopped-audit.seal.OPERATOR_ONLY.json",
+            "bytes": 2379,
+            "sha256": "DC9C4A760DFF36ABA206926411E29A766D087A14263C15C143F315BF1279502E"
+          },
+          "reportAndSealFullyReadAndRehashedByRoot": true,
+          "semanticAcceptanceEstablished": false,
+          "mandatorySourceRowsMachineDelivered": null,
+          "deliveryQualification": "Semantic acceptance and complete favorable source delivery remain UNVERIFIED by the bounded ordinary/archival audit."
+        }
+      },
+      {
+        "id": "D_COMPILER_ABI",
+        "status": "CLOSED",
+        "rawVerdict": "CHANGES_REQUESTED",
+        "completeToolPairs": 122,
+        "rawReport": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-D_COMPILER_ABI/last-message.txt",
+          "bytes": 12882,
+          "sha256": "C29098FF4432FEDE12462110C51C440253EA333644A76D6E5988835BF58D866B"
+        },
+        "rootClosedOutputSeal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-D_COMPILER_ABI/root-closed-output.seal.original.json",
+          "bytes": 158100,
+          "sha256": "0FC3EE752D3C7371E588F4D09D605314A3645B69DD5B3F244CAE67DC9933846B"
+        },
+        "runtime": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-D_COMPILER_ABI/runtime-evidence.final.selected.json",
+          "bytes": 9486,
+          "sha256": "371D57769866E3AF297645BEC5386CE78DBC5ECEA370C8991DC6E86E455C10B6"
+        },
+        "completeToolLedger": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-D_COMPILER_ABI/actual-complete-tool-input-output-ledger.json",
+          "bytes": 2199396,
+          "sha256": "955CE7B196ECDFA05DDA4A0B2413639EDA4734D20703AA7A758E72329D98D410"
+        },
+        "invocation": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/practical-203627-D_COMPILER_ABI/invocation.json",
+          "bytes": 4856,
+          "sha256": "0C34E551083AABE5850BC0188E1E96FCCEC12994DA34B8F3F8A4CF5DB9B91849"
+        },
+        "sealedBeforeFirstRootFullBodyRead": true,
+        "rootFullyReadReport": true,
+        "sourceAdmission": false,
+        "ordinaryAudit": {
+          "status": "CLOSED",
+          "kind": "BOUNDED_ORDINARY_CLOSED_EVIDENCE_AUDIT",
+          "report": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-D203627-closed-evidence-audit/report.OPERATOR_ONLY.md",
+            "bytes": 5733,
+            "sha256": "AD5EB7B8A65C910FB39FB32488BA52D00362F27A8CD27165A3A335CA4CE2BF4A"
+          },
+          "seal": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-D203627-closed-evidence-audit/seal.OPERATOR_ONLY.json",
+            "bytes": 969,
+            "sha256": "7032948BC976FE5939241C67DA9E2D5FF90FE48C55015D188361DF52B64BB494"
+          },
+          "reportAndSealFullyReadAndRehashedByRoot": true,
+          "semanticAcceptanceEstablished": false,
+          "mandatorySourceRowsMachineDelivered": null,
+          "deliveryQualification": "Semantic acceptance and complete favorable source delivery remain UNVERIFIED by the bounded ordinary/archival audit.",
+          "appendOnlyBeforeIdentityQueryRecovery": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-D203627-closed-evidence-audit/before-identity-query-recovery.OPERATOR_ONLY.json",
+            "bytes": 2186,
+            "sha256": "70DAAB6ECB58B02B8C661363F42F61BE2D61B31307721E20A378285663D52595"
+          },
+          "recoverySeal": {
+            "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-D203627-closed-evidence-audit/query-recovery.seal.OPERATOR_ONLY.json",
+            "bytes": 764,
+            "sha256": "44B2EDF76AF75AB18EBFEDC875846A0936AE727C782AA4AED6A7E2D116D6DCBA"
+          },
+          "recoveryQualification": "Initial extractor missed two pretty JSON before-identities; append-only recovery found matching captures in calls 90/92. Original audit and seal unchanged; no source/capture identity mismatch asserted."
+        }
+      }
+    ],
+    "sourceAdmissions": 0,
+    "neverGoOrLaunched": [
+      "P_HARNESS_PROCESS",
+      "G_BUILD_SELECTION",
+      "G_RUNTIME_STARTUP",
+      "I_GRAPH_CROSS"
+    ],
+    "rootFullyReadAllRawReportsAndStoppedAuditProse": true,
+    "rootRehashedSeals": true
+  },
+  "postCloseIdentity": {
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/practical-source-controls-203627/postclose-frozen-input-rehash.original.json",
+      "bytes": 1054822,
+      "sha256": "DBD0D29E32ACB4775A88A1CDF26D06CCEAF81C544F5EDC06B0A654269A1D7683"
+    },
+    "sourceIndexEntries": 1749,
+    "freezeEntries": 2101,
+    "uniqueFiles": 2446,
+    "differences": 0,
+    "identityConflicts": 0,
+    "afterAllSixClosedBeforeAnyCanonicalEdit": true,
+    "startedUtc": "2026-10-20T21:37:49.0427077Z",
+    "finishedUtc": "2026-10-20T21:37:49.6442166Z",
+    "continuousImmutabilityClaimed": false,
+    "roundIncidentRecorded": false,
+    "qualification": "Point-in-time listed-input identity check only; no conduct/semantic/admission/native conclusion follows."
+  },
+  "findings": [
+    {
+      "identity": "RAW_QUOTED_U0001__6874c17_20261020T203627Z-e262e08c",
+      "reportedIndependentlyBy": [
+        "P_VALUE_VENDOR_COMPLETE",
+        "I_FIXTURE_VALUE_VENDOR_RESULT"
+      ],
+      "inputRawHex": "2201220A",
+      "sourceFinding": "Quoted raw U+0001 passes current NUL/EOT and UTF8 guards, vendor copies it, encoding-only scalar callback accepts it and source route returns Success.",
+      "parserExecution": false,
+      "disposition": "REPAIR_REQUIRED_NOT_APPLIED",
+      "proposal": {
+        "directory": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-raw-c0-implementation-mirror-PROPOSED",
+        "handoff": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-raw-c0-implementation-mirror-PROPOSED/stopped-implementation-handoff.PROPOSED.json",
+          "bytes": 4766,
+          "sha256": "3AA9B49534AEAEB50A184E14DF9D5F9E80FCB389E9E519ECBC7E4F1305F3B9E7"
+        },
+        "seal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-raw-c0-implementation-mirror-PROPOSED/stopped-implementation.seal.PROPOSED.json",
+          "bytes": 5376,
+          "sha256": "9DD38A45E6C700F0369C4EE82769F5AA6DF6C8D6339D83E3D0716309346FF72B"
+        },
+        "finalDiff": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-raw-c0-implementation-mirror-PROPOSED/four-file-repair.final.diff",
+          "bytes": 20215,
+          "sha256": "A1758EFC094707A35ED61D12E19430BAF34512A479C2B760CB511809139498A1"
+        },
+        "stage": "FOUR_FILE_IGNORED_SOURCE_MIRROR_ONLY",
+        "canonicalApplied": false,
+        "nativeTestExecuted": false,
+        "rawPredicate": "Byte < 0x20 && Byte != 0x09 && Byte != 0x0A && Byte != 0x0D",
+        "decodedScalarEncodingCheckUnchanged": true,
+        "existingInputsPreserved": 38,
+        "proposedUniqueInputs": 40,
+        "existingAttempts": 45,
+        "proposedAttempts": 47,
+        "nativeSuitesRemain": 8,
+        "mandatoryF10": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-raw-c0-boundary-repair-PROPOSED/A1-F10.raw-quoted-u0001.PROPOSED.yaml",
+          "bytes": 4,
+          "sha256": "0EB4A4BF3ACD34AD8E86A4FDF3513252BB8B0D53CDE2F6A7E8D008F417683E03"
+        },
+        "correctedK05": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-context-nonc0-disposition-PROPOSED/A1-K05.narrowed-quoted-nonc0.PROPOSED.yaml",
+          "bytes": 32,
+          "sha256": "454EAAE473C179254F4404459416DCC017A06265330AA297EF33F1FFD38FF6EA"
+        },
+        "k05Expected": {
+          "orderedKeys": [
+            "escaped",
+            "quoted"
+          ],
+          "rawNodes": 5,
+          "depth": 1,
+          "aliases": 0,
+          "status": "PROPOSED_NOT_RUN",
+          "valueUtf8Hex": [
+            "01",
+            "7FC280C29F"
+          ]
+        },
+        "initial38ByteK05Preserved": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-raw-c0-boundary-repair-PROPOSED/A1-K05.escaped-control-and-quoted-nonc0.PROPOSED.yaml",
+          "bytes": 38,
+          "sha256": "4EAC719FC2C762BDF8E69CDA81AA7ECD23F812FDF4ACF0A5E9E160760E1E89AC"
+        },
+        "initialProposalSealPreserved": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-raw-c0-boundary-repair-PROPOSED/seal.OPERATOR_ONLY.json",
+          "bytes": 2218,
+          "sha256": "6B7200212881D3B19603253DD5F6A92B45F372C0975F489B0EC5D62DE3FD0936"
+        },
+        "constructionNote": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-context-nonc0-disposition-PROPOSED/native-utf8-fixture-construction.OPERATOR_ONLY.md",
+          "bytes": 3198,
+          "sha256": "600E288DA26BBD0DF39FA729FE6301139EEA226F5AE52ADF52025B6D1E968713"
+        }
+      }
+    },
+    {
+      "identity": "D-ABI-01",
+      "identityScope": "CURRENT6874c1784d7b2d2dd00019e897768894aa9b66b1/run20261020T203627Z-e262e08c",
+      "reportedBy": "D_COMPILER_ABI",
+      "sourceFinding": "Generated Ninja/.cmake build instruction inputs are not preserved/rechecked before DependencyBuild consumes them; post-build Configure projection checks do not close the pre-consumption gap.",
+      "disposition": "REPAIR_DESIGN_ONLY_NOT_IMPLEMENTED",
+      "historicalIdCollision": "Historical D-ABI-01 referred to radlink/cl-filter alternatives and is preserved separately; its guard repair is technical 3b5447e.",
+      "proposal": {
+        "directory": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/generated-build-instruction-preservation-design-PROPOSED",
+        "design": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/generated-build-instruction-preservation-design-PROPOSED/repair-design.OPERATOR_ONLY.md",
+          "bytes": 9912,
+          "sha256": "9543EACDCD746BB30204FAB3425D87EBC92A078ED797CC7EBBA8E9861E724EDB"
+        },
+        "integrationSketch": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/generated-build-instruction-preservation-design-PROPOSED/integration-sites.PROPOSED.diff",
+          "bytes": 3088,
+          "sha256": "B856CFD5DB75244A35B43053337EF86DD51ED798F9400C98D0222D28C2011D50"
+        },
+        "handoff": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/generated-build-instruction-preservation-design-PROPOSED/stopped-design-handoff.OPERATOR_ONLY.json",
+          "bytes": 2972,
+          "sha256": "21D7687AECF94FCF3E8051263764AF27D4FBFB2FA6F3CBE0164AD3CCF3A6CE9E"
+        },
+        "seal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/generated-build-instruction-preservation-design-PROPOSED/stopped-design.seal.PROPOSED.json",
+          "bytes": 1814,
+          "sha256": "7F1FAC8AC6930061E3607F71C2AA4278E015B1FB43EA529E0FBE3012A63362EB"
+        },
+        "helperImplementationExists": false,
+        "canonicalApplied": false,
+        "controlExecuted": false
+      }
+    },
+    {
+      "identity": "D-ABI-02",
+      "identityScope": "CURRENT6874c1784d7b2d2dd00019e897768894aa9b66b1/run20261020T203627Z-e262e08c",
+      "reportedBy": "D_COMPILER_ABI",
+      "sourceFinding": "XML/CLI-configurable Windows ObjSrcMapFile reaches VCToolChain File.Delete/File.AppendText without an owned destination/refusal boundary.",
+      "disposition": "EARLY_TARGET_REFUSAL_PROPOSED_NOT_APPLIED",
+      "proposal": {
+        "directory": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/d-abi-02-object-source-map-refusal-PROPOSED",
+        "design": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/d-abi-02-object-source-map-refusal-PROPOSED/design.OPERATOR_ONLY.md",
+          "bytes": 8703,
+          "sha256": "41C26EF8DD5F613C9C830E9FE44861B6B27AC518EB8988395053957669FA576E"
+        },
+        "patch": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/d-abi-02-object-source-map-refusal-PROPOSED/target-early-refusal.PROPOSED.patch",
+          "bytes": 534,
+          "sha256": "5788A11CD5916D7F3D2C3150D11A4CC91AAC33BE65E21F72C65258C7F8470969"
+        },
+        "handoff": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/d-abi-02-object-source-map-refusal-PROPOSED/stopped-design-handoff.OPERATOR_ONLY.json",
+          "bytes": 4167,
+          "sha256": "D3432691EF870FF5F443DBAE696C8CB990F79CCB9EEA3805A0E7B423D84EC2D5"
+        },
+        "seal": {
+          "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/d-abi-02-object-source-map-refusal-PROPOSED/seal.OPERATOR_ONLY.json",
+          "bytes": 1353,
+          "sha256": "15D327F07D840E68B9460FC50D542368A3E1371E43131C447125B9B79BD751F9"
+        },
+        "addedTargetLines": 4,
+        "removedTargetLines": 0,
+        "guard": "Reject effective non-null WindowsPlatform.ObjSrcMapFile as first derived-target constructor statement after base(Target).",
+        "negativeControl": "One future separate-stage owned-canary UBT root using single argv token -ObjSrcMap=<absolute-owned-canary>; proposed60second cap/no retry.",
+        "explicitPhaseAndRootAccountingRequired": true,
+        "controlExecuted": false,
+        "canonicalApplied": false
+      }
+    }
+  ],
+  "unclosedLexicalRisk": {
+    "disposition": "EXPLICIT_UNCLOSED_A2_AND_PRODUCTION_RISK_WITHOUT_A1_WAIVER",
+    "plainDelRawHex": "7F0A",
+    "plainDelSuccessSourceConditional": true,
+    "executionPerformed": false,
+    "quotedNonC0Allowed": true,
+    "wholeLexicalConformanceEstablished": false,
+    "universalMalformedA1RequirementWaived": false,
+    "qualification": "A1 packet typed expected syntax/format/resource refusal claims still require assessment; any applicable universal-malformed requirement remains open. C0 repair does not prove context-sensitive DEL/C1/noncharacter handling.",
+    "sourceDisposition": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/yaml-context-nonc0-disposition-PROPOSED/source-disposition.OPERATOR_ONLY.md",
+      "bytes": 4759,
+      "sha256": "C8DC78C91257D1E3E7A939D81E2F2C948CC32DF0886447261025B4F0E2E6B0EE"
+    }
+  },
+  "authority": {
+    "canonicalCodeRepairApplied": false,
+    "canonicalRepairTestsExecuted": false,
+    "allEightNativePhases": "NOT_RUN",
+    "nativeRunRootCreated": false,
+    "visibleCount": 0,
+    "sourceAdmissions": 0,
+    "newGoCreated": false,
+    "newMethodOrRetentionCampaign": false,
+    "standingPerpetualPrivateSourceApiConsent": "UNCHANGED_UNTIL_EXPLICITLY_REVOKED",
+    "finalIndependentCodeAndDifferentReq": "OPEN_AFTER_ACTUAL_EXECUTION_AND_EVIDENCE_FREEZE",
+    "laterOpen": [
+      "A1G genuinely exception-disabled runtime caller",
+      "A2 all 727 compatibility scenarios and full lexical/fidelity disposition",
+      "HUD/render/input",
+      "Linux untested",
+      "packaging",
+      "full E04/M02 and production acceptance"
+    ]
+  },
+  "nextStep": "Root checkpoint commit first; then select/apply bounded repairs, obtain affected source checks and new exact source/run/freeze/index bindings under unchanged v7.3. No prior PASS/GO transfers and no native release follows from this closure.",
+  "provenanceQualification": "Root supplied final closure/audit dispositions and fully read stopped evidence. Documentation author rehashed bound files and the exact post-close identity record; this is not a new semantic SOURCE audit, no private session/config bodies copied, and no installed source bodies published."
+}
