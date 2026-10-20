@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "recordKind": "CLOSED_FOURTH_SOURCE_ASSESSMENT_NOT_EXECUTION_OR_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T02:45:05.0824457Z",
+  "sourceHead": "d39b7b84dab24495f583728213afd984766957b8",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T023034Z-0b7a1fb0",
+  "review": {
+    "role": "SOURCE",
+    "status": "BLOCKED",
+    "sessionId": "01a15729-a6f8-7da1-bb58-e25a04726979",
+    "report": {
+      "path": "docs/plans/research/2026-10-20-e04a-source-review-r4.md",
+      "sha256": "2a3be57dcc7b01bf62848afad3d8aa16777796a65aa60637ab7f19f42ac87cee",
+      "bytes": 3165
+    },
+    "finding": "Incomplete mandatory coverage and an oversized initial read emitting unselected freeze qualification fields",
+    "newImplementationDefectEstablished": false,
+    "requiredBodyFiles": 78,
+    "requiredPhysicalRows": 26434,
+    "reviewerReportedCompleteBodyFiles": 19,
+    "assessedBodyIds": [
+      "001-013",
+      "044-045",
+      "049-050",
+      "077-078"
+    ],
+    "unassessedBodyIds": [
+      "014-043",
+      "046-048",
+      "051-076"
+    ],
+    "completeCoverage": false,
+    "descriptorSelectorRows": 902,
+    "pluginReferences": 1561,
+    "mechanicalDescriptorComparisons": "All902 selected origin hashes, literal values and absence lists matched; no complete semantic relationship assessment",
+    "selectedMetadataComplete": false,
+    "actualReadOnly": true,
+    "actualApprovalPolicy": "never",
+    "actualMemoryMode": "disabled",
+    "actualModel": "gpt-6.1-sol",
+    "actualEffort": "ultra",
+    "freshExec": true,
+    "actualFullGoObserved": true,
+    "byteIdenticalPromptTransport": false,
+    "promptDifference": "Two extra trailing CR/LF bytes; equal after trailing CR/LF removal",
+    "toolInputCount": 33,
+    "toolOutputCount": 33,
+    "pairingAnomalies": 0,
+    "scopeAudit": "Ordinary helper read all33 literal inputs and captured outputs; root adopted exact data-only auditor. Call1 emitted two unselected freeze qualification fields. No earlier peer merits verdict was visibly exposed, and no native/network/mutation invocation was apparent. Selected-field discipline is not certified; no approval or waiver follows.",
+    "retainedTruncationCalls": [
+      1,
+      3,
+      6,
+      33
+    ],
+    "unselectedFields": {
+      "sourceHeadQualification": "Root-supplied post-promotion HEAD; root must verify actual Git HEAD. Harness separately requires its actual Get-Head match.",
+      "closureLimits": [
+        "Finite descriptor membership/bytes only; no tool version command, native execution, source acceptance or phase authority.",
+        "Not a complete transitive DLL, compiler/SDK header/library, CMake module, OS or engine/content closure.",
+        "Actual Target.WindowsPlatform, UBT commands, compile/link and runtime loads remain unexecuted.",
+        "Installed E02 source superset reused only after current-byte matches; no execution or verdict inherited."
+      ]
+    },
+    "limits": [
+      "Actual app/multi-agent enforcement, memory internals, OS PID linkage and lower isolation UNVERIFIED",
+      "59 BODY files remain formally UNASSESSED",
+      "Physical exposure/identity checks do not establish substantive review"
+    ]
+  },
+  "reviewProcess": {
+    "cleanupConfirmed": true,
+    "finalJobTotalProcesses": 244,
+    "resumed": true,
+    "pid": 3812,
+    "timedOut": false,
+    "completedUtc": "2026-10-20T02:39:53.4487550Z",
+    "assignedBeforeResume": true,
+    "exitCode": 0,
+    "cliExitIsNotSourceApproval": true,
+    "finalActiveProcesses": 0,
+    "exitConfirmed": true,
+    "elapsedSeconds": 284.243425,
+    "status": "PASS"
+  },
+  "authorityState": "CLOSED_DO_NOT_REUSE",
+  "remainingReviewLaunches": 0,
+  "nativeRunRootCreated": false,
+  "phases": [
+    {
+      "status": "NOT_RUN",
+      "phase": "Preflight"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "SupervisorControls"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Configure"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "DependencyBuild"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "EditorBuild"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Discovery"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Native"
+    },
+    {
+      "status": "NOT_RUN",
+      "phase": "Audit"
+    }
+  ],
+  "nativeSuiteCount": null,
+  "nativeInputCount": null,
+  "nativeAttemptCount": null,
+  "plannedCounts": {
+    "attempts": 45,
+    "suites": 8,
+    "uniqueInputs": 38
+  },
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "a2ScenariosRequired": 727,
+  "fullA1Acceptance": false,
+  "remediation": {
+    "status": "REVIEW_DELIVERY_REPAIR_AUTHORED_PENDING_FRESH_COMPLETE_SOURCE",
+    "implementationChanged": false,
+    "wrapper": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/scripts/migration/Invoke-E04AProfileProof.ps1",
+      "bytes": 158436,
+      "sha256": "ce1501d2d944d8958b074b6116016215daca691004bfacffdd7a22573b41e4d8"
+    },
+    "change": "Compact first identity/selector bootstrap and positive initial metadata reads; unchanged complete78-body/13selected-metadata/902-row and material-relationship obligation",
+    "packetCriteriaChanged": false,
+    "splitAssessmentAdopted": false,
+    "criterionWaiver": false,
+    "nativePhasesExecuted": false,
+    "priorDdcOfflineControls": {
+      "report": {
+        "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/ddc-log-remediation-20261020/log-controls/pure-controls.actual.json",
+        "bytes": 14039,
+        "sha256": "df1d3e6d5ed8edd6e0b7e62456777fb8b2fa37da94728674c40a18e06ec0f7e3"
+      },
+      "checks": 63,
+      "status": "PASS_UNCHANGED_NOT_RERUN",
+      "cases": 21
+    },
+    "deliveryProposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-bootstrap-assembler-proposal-20261020\\Assemble-RootSourcePacket.BootstrapA.PROPOSED.ps1",
+      "bytes": 37874,
+      "sha256": "2c13bfa7e225710d1c702b97cd0313a2f6ad0f9a12bd1102bf9355c51fd9bd76"
+    },
+    "rootReadOriginal249RowsAndExact74RowDelta": true,
+    "deliveryProposalAstErrors": 0,
+    "deliveryHelperInvoked": false
+  },
+  "standingTransmissionConsent": {
+    "repeatQuestionRequired": false,
+    "expires": "Only on explicit owner revocation",
+    "scope": "Necessary current and future private source/API migration review packets to configured OpenAI Codex service",
+    "credentialsAndUnrelatedSessionsExcluded": true
+  },
+  "privateEvidence": [
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-d39b7b8-20261020T023034Z-0b7a1fb0/root-raw-source-report-seal.original.json",
+      "bytes": 662,
+      "sha256": "ddca305e67e32db85160a2137dbd07fd94fdcd482870217511eed2d3b50028cb"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-d39b7b8-20261020T023034Z-0b7a1fb0/runtime-evidence.final.selected.json",
+      "bytes": 8463,
+      "sha256": "11e8d9404aeaf38a3797dfff53501a2383247e7a6101abe25cbe03f1d2c8a0c0"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-d39b7b8-20261020T023034Z-0b7a1fb0/completion.json",
+      "bytes": 2602,
+      "sha256": "71a64fdd28b0edbb86c2fbede80477dcc221730c7740a6ccc60108921bcb3a8d"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-d39b7b8-20261020T023034Z-0b7a1fb0/owned-job-receipt.json",
+      "bytes": 69923,
+      "sha256": "3794c9c7c58027fd18bd5a31ef4e7c8f46bb2f046806414ba8a7e92648df7c25"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-d39b7b8-20261020T023034Z-0b7a1fb0/actual-tool-input-ledger.json",
+      "bytes": 40147,
+      "sha256": "5194c30927b901e220e262afac9946ed737a1597cecb42e8b5434f97f75f291d"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-d39b7b8-20261020T023034Z-0b7a1fb0/actual-complete-tool-input-output-ledger.json",
+      "bytes": 611210,
+      "sha256": "c12a09f4f2ccce4399e9cd5272cb73fda6793ed5ed029c90a9db2b2b50c5c947"
+    },
+    {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A1-source-review/source-d39b7b8-20261020T023034Z-0b7a1fb0/root-source-blocked-authority-closure.original.json",
+      "bytes": 1276,
+      "sha256": "15a229f3cc8a367a270dc0ed836ac601f260c9da5df47d37b6e00d4e03d52a23"
+    }
+  ],
+  "closedScopeAudit": {
+    "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/postclose-audit-proposal-d39b7b8-20261020T023034Z-0b7a1fb0-PROPOSED/closed-d39-literal-output-facts.OPERATOR_ONLY.json",
+    "bytes": 22787,
+    "sha256": "2660bf67640af807d7e039f7904b5ba661e27e854fd9493aab0178d1ca9ad958"
+  },
+  "nextStep": "Checkpoint factual metadata/delivery amendment; new candidate/run/freeze and complete fresh affected SOURCE before any phase",
+  "checkpointValidation": {
+    "whitespace": "PASS_STANDARD_STAGED_DIFF_CHECK; sealed E04 report bytes protected by -text and intentional Markdown hard-break attribute",
+    "implementationUnchanged": true,
+    "localLinks": "338 local targets and3 colon-line references verified;12 JSON descriptors verified;13 external URLs and26 named anchors not fetched/semantically verified",
+    "rawReportExactSha256": "2a3be57dcc7b01bf62848afad3d8aa16777796a65aa60637ab7f19f42ac87cee",
+    "factualJson": "PASS",
+    "nativeBuildTests": "NOT_RUN_PENDING_COMPLETE_FRESH_SOURCE",
+    "independentApproval": "NOT_ESTABLISHED",
+    "jsonStructuralChecks": 20,
+    "planLineEndings": "LF_ONLY"
+  },
+  "capturePreparation": "Input capture wrote33 records successfully. A root shell LASTEXITCODE check misclassified an in-process script with no native exit status; that input file was preserved and only still-pending complete trace capture ran next."
+}
