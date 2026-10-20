@@ -998,3 +998,43 @@ proceed separately. Human/physical input and Linux remain NOT RUN.
 Current source/run dispositions are recorded separately in the authority journal;
 no E02 process or result is claimed by this adoption record. Research remains
 incomplete; full E01/M01/M02 and G-IMPLEMENT remain open.
+
+## Closed final review record — 2026-10-20 UTC
+
+This append is factual publication after the three review processes closed. The
+normative packet prefix and the historical adoption statements above retain their
+original meaning. Executed source is `5e92ba336da0570cb4b57def390ad3c58921e625`,
+run `20261019T202805Z-5ff8cb61`; the final documentation candidate reviewed was
+`3a1d17902f6fa94b6009c0cae573da8bf7dff063`, against cumulative base
+`bd801233cc9989e0ae146a3be7b136d26dc73183`.
+
+Windows execution completed 16 native cases / 18174 assertions and six required
+PNGs. Both approved visible windows were consumed. All native/GUI authority is
+`CLOSED_DO_NOT_REUSE`, with zero windows remaining.
+
+The exact [CODE r3](2026-10-20-e02-final-code-r3.md),
+[REQ r2](2026-10-20-e02-final-requirements-r2.md) and
+[limited post-seal supplement v4](2026-10-20-e02-final-requirements-supplement-v4.md)
+reports remain **BLOCKED**, unchanged. CODE completed its cumulative technical
+assessment without a confirmed defect requiring change; root separately verified
+the withheld original SOURCE prerequisite and its pre-execution bindings after
+that assessment was sealed. The supplement resolved specified reading-coverage,
+hash-scope and administrative-binding questions. Its procedural failures remain
+recorded; it found no fundamental contamination requiring a fresh full initial
+review solely for those deviations.
+
+The [publication provenance](../evidence/2026-10-20-e02-final-review-provenance.json)
+records exact reports, distinct sessions, runtime/isolation qualifications and the
+remaining administrative disposition. Historical commit `1c99360` omitted an
+explicit independent-review status; current clarification conservatively treats
+that planning increment as unreviewed for acceptance and preserves the omission.
+Original prelaunch approval was supported by a trusted transcript relay; original
+message retrieval/timing remains independently unverified and a factual owner
+clarification is pending. A later direct confirmation grants no retroactive
+permission or new launch.
+
+Current status is `EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN`. This append
+does not accept E02/M02 or authorize execution, publication or merge. Linux,
+packaging, real-Core play, full HUD/profile behavior, physical input/OS focus and
+the original evidence limitations remain open. The historical revision39 factual
+result JSON is preserved byte-for-byte.

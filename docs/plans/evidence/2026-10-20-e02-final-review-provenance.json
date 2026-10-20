@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "POSTSEALED_E02_REVIEW_PUBLICATION_OVERLAY_NOT_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T00:24:26.1767752Z",
+  "planRevision": 40,
+  "reviewedHead": "3a1d17902f6fa94b6009c0cae573da8bf7dff063",
+  "comparisonBase": "bd801233cc9989e0ae146a3be7b136d26dc73183",
+  "executedHead": "5e92ba336da0570cb4b57def390ad3c58921e625",
+  "runId": "20261019T202805Z-5ff8cb61",
+  "status": "EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN",
+  "finalAcceptance": false,
+  "reports": [
+    {
+      "role": "FINAL_CODE",
+      "rawVerdict": "BLOCKED",
+      "sessionId": "01a1564c-8ace-7c02-a384-57d8311c746f",
+      "rawReport": {
+        "path": "docs/plans/research/2026-10-20-e02-final-code-r3.md",
+        "bytes": 9982,
+        "sha256": "9DAF32A39F95F850301C8CBD813BF1DC5F2E760C0994646F3D81B479D5FFCE43"
+      },
+      "originalRawReport": {
+        "path": ".local/reviews/E02-final-review/code-r3-3a1d179-20261019T223400Z/last-message.txt",
+        "bytes": 9982,
+        "sha256": "9DAF32A39F95F850301C8CBD813BF1DC5F2E760C0994646F3D81B479D5FFCE43"
+      },
+      "runtime": {
+        "path": ".local/reviews/E02-final-review/code-r3-3a1d179-20261019T223400Z/runtime-evidence.final.selected.json",
+        "bytes": 4652,
+        "sha256": "801FF1A3BD6DDEA2C3FC06DA8F6FC0F5E0B33C9EA9EDA630D14E0BAC8CDB86B5"
+      },
+      "invocation": {
+        "path": ".local/reviews/E02-final-review/code-r3-3a1d179-20261019T223400Z/invocation.json",
+        "bytes": 2702,
+        "sha256": "CD8DE6AC488871FCB0C195EF36FF3139D2BBD85BE0C038959384AE7D07997D82"
+      },
+      "actualPrompt": {
+        "path": ".local/reviews/E02-final-review/code-r3-3a1d179-20261019T223400Z/actual-launch.prompt.original.txt",
+        "bytes": 9251,
+        "sha256": "F1200074ADE75A853D30DED21193A7FC68150636B9C94A8764BB6F5BBCD5FA6A"
+      },
+      "rootLaunchAuthority": {
+        "path": ".local/reviews/E02-final-review/code-r3-3a1d179-20261019T223400Z/root-launch-go.original.json",
+        "bytes": 3765,
+        "sha256": "8652E5469CAA84FE2752C7D48322DCC3DCE91975CEB98909B84B3ED1C0299D36"
+      },
+      "inputManifest": {
+        "path": ".local/reviews/E02-final-review/code-r3-3a1d179-20261019T223400Z/final-review-input-manifest.json",
+        "bytes": 409021,
+        "sha256": "FC1196C89F12C6CA803F83912517C3D8A1C569C8152990DE51336E542455C484"
+      },
+      "requestedNewExecNoResumeNoFork": true,
+      "observedRuntime": {
+        "source": "exec",
+        "cwd": "C:\\SWDev\\warhammer",
+        "cliVersion": "0.163.0-alpha.10.2",
+        "model": "gpt-6.1-sol",
+        "effort": "ultra",
+        "memoryMode": "disabled",
+        "sandbox": "read-only",
+        "approvalPolicy": "never"
+      },
+      "lowerIsolationMemoryFeaturesOsArgvPidNetworkEquivalence": "UNVERIFIED",
+      "payloadEqualsFileAfterTrailingCrLfRemoval": true,
+      "payloadByteDifference": 2,
+      "newTestsBuildsNativeGuiCoreOperations": 0
+    },
+    {
+      "role": "FINAL_REQ",
+      "rawVerdict": "BLOCKED",
+      "sessionId": "01a15648-7d6b-74a0-a767-0314f573d2b1",
+      "rawReport": {
+        "path": "docs/plans/research/2026-10-20-e02-final-requirements-r2.md",
+        "bytes": 13812,
+        "sha256": "6B5AEFD1E7CA0D1A30578CC9130E51650185AF9E7993FC380B368965B5BD2947"
+      },
+      "originalRawReport": {
+        "path": ".local/reviews/E02-final-review/req-r2-3a1d179-20261019T223000Z/last-message.txt",
+        "bytes": 13812,
+        "sha256": "6B5AEFD1E7CA0D1A30578CC9130E51650185AF9E7993FC380B368965B5BD2947"
+      },
+      "runtime": {
+        "path": ".local/reviews/E02-final-review/req-r2-3a1d179-20261019T223000Z/runtime-evidence.final.selected.json",
+        "bytes": 4651,
+        "sha256": "0FBF1A608CF9DD825F70DF74B8AD8440394073DA2C6BE16C0FBEED8BB464A0B2"
+      },
+      "invocation": {
+        "path": ".local/reviews/E02-final-review/req-r2-3a1d179-20261019T223000Z/invocation.json",
+        "bytes": 2698,
+        "sha256": "10C41123CC746A5724BAA5E722279F77905DD57713F08243D4842317A6BF9E5C"
+      },
+      "actualPrompt": {
+        "path": ".local/reviews/E02-final-review/req-r2-3a1d179-20261019T223000Z/actual-launch.prompt.original.txt",
+        "bytes": 8921,
+        "sha256": "9D669093D998F604A944BF7104EB35E3213FDE7819DB308A39B1A74106559FAD"
+      },
+      "rootLaunchAuthority": {
+        "path": ".local/reviews/E02-final-review/req-r2-3a1d179-20261019T223000Z/root-launch-go.original.json",
+        "bytes": 3784,
+        "sha256": "3281407CFBCAA5A58D85340B85C038C5BAA6509F55C1CC23614D5480B71983C1"
+      },
+      "inputManifest": {
+        "path": ".local/reviews/E02-final-review/req-r2-3a1d179-20261019T223000Z/final-review-input-manifest.json",
+        "bytes": 409035,
+        "sha256": "6D9588843BD354BB49F1D9A684C6DB4C097244EB760CFCF8C15D7BF007F88019"
+      },
+      "requestedNewExecNoResumeNoFork": true,
+      "observedRuntime": {
+        "source": "exec",
+        "cwd": "C:\\SWDev\\warhammer",
+        "cliVersion": "0.163.0-alpha.10.2",
+        "model": "gpt-6.1-sol",
+        "effort": "ultra",
+        "memoryMode": "disabled",
+        "sandbox": "read-only",
+        "approvalPolicy": "never"
+      },
+      "lowerIsolationMemoryFeaturesOsArgvPidNetworkEquivalence": "UNVERIFIED",
+      "payloadEqualsFileAfterTrailingCrLfRemoval": true,
+      "payloadByteDifference": 2,
+      "newTestsBuildsNativeGuiCoreOperations": 0
+    },
+    {
+      "role": "POSTSEALED_LIMITED_PROCEDURAL_ADMIN_SUPPLEMENT",
+      "rawVerdict": "BLOCKED",
+      "sessionId": "01a15699-0c63-7a43-8b17-0f8186062842",
+      "rawReport": {
+        "path": "docs/plans/research/2026-10-20-e02-final-requirements-supplement-v4.md",
+        "bytes": 8419,
+        "sha256": "DD8095E42C66404B341A43F62223EF0808475CA8042D4D9C27EBD9094F2DE474"
+      },
+      "originalRawReport": {
+        "path": ".local/reviews/E02-final-review/req-postseal-procedure-admin-3a1d179-20261019T234436Z-v4/last-message.txt",
+        "bytes": 8419,
+        "sha256": "DD8095E42C66404B341A43F62223EF0808475CA8042D4D9C27EBD9094F2DE474"
+      },
+      "runtime": {
+        "path": ".local/reviews/E02-final-review/req-postseal-procedure-admin-3a1d179-20261019T234436Z-v4/runtime-evidence.final.selected.json",
+        "bytes": 4651,
+        "sha256": "FA84538A0E4B4E18E8DD7C487FFC0B30D288D2B78602E0B2C5EF902BCC40AA66"
+      },
+      "invocation": {
+        "path": ".local/reviews/E02-final-review/req-postseal-procedure-admin-3a1d179-20261019T234436Z-v4/invocation.json",
+        "bytes": 2773,
+        "sha256": "064FFE4DCEEEC4D2EE1AA599C4AF0102058461DE1A48CCAE46CCA12E325CE85A"
+      },
+      "actualPrompt": {
+        "path": ".local/reviews/E02-final-review/req-postseal-procedure-admin-3a1d179-20261019T234436Z-v4/actual-launch.prompt.original.txt",
+        "bytes": 9110,
+        "sha256": "F05A92C13CE6EBB25F022E173E1E5EA1DABD13179C48399D8170E053A1E54E4B"
+      },
+      "rootLaunchAuthority": {
+        "path": ".local/reviews/E02-final-review/req-postseal-procedure-admin-3a1d179-20261019T234436Z-v4/root-launch-go.original.json",
+        "bytes": 4699,
+        "sha256": "3B87BD6B61D055E0F24E049F22E48CFB4B9BD57A1C4D97D53737FDE6F270C4B6"
+      },
+      "inputManifest": {
+        "path": ".local/reviews/E02-final-review/req-postseal-procedure-admin-3a1d179-20261019T234436Z-v4/final-review-input-manifest.json",
+        "bytes": 401812,
+        "sha256": "3519D4D76AF446D8C0D1F863BC3F4A1485A3A7E1D873F5A0DC4C96ADE7767667"
+      },
+      "requestedNewExecNoResumeNoFork": true,
+      "observedRuntime": {
+        "source": "exec",
+        "cwd": "C:\\SWDev\\warhammer",
+        "cliVersion": "0.163.0-alpha.10.2",
+        "model": "gpt-6.1-sol",
+        "effort": "ultra",
+        "memoryMode": "disabled",
+        "sandbox": "read-only",
+        "approvalPolicy": "never"
+      },
+      "lowerIsolationMemoryFeaturesOsArgvPidNetworkEquivalence": "UNVERIFIED",
+      "payloadEqualsFileAfterTrailingCrLfRemoval": true,
+      "payloadByteDifference": 2,
+      "newTestsBuildsNativeGuiCoreOperations": 0
+    }
+  ],
+  "rootDisposition": {
+    "codeReportUnchanged": "BLOCKED; substantive cumulative review completed with no confirmed defect requiring change",
+    "codeB1": "Separate root post-seal verification establishes original affected SOURCE PASS and pre-execution sourceReviewed bindings; not a rewritten independent verdict",
+    "codeClosure": {
+      "path": ".local/reviews/E02-final-review/operator-3a1d179-20261019T220216Z/FINAL_CODE-r3.root-closure.json",
+      "bytes": 6527,
+      "sha256": "15DE04D265ECEBB663ED96EB64771ECA49916DE1099417CA2CD481BE05B2972D"
+    },
+    "sourcePrerequisiteVerification": {
+      "path": ".local/reviews/E02-final-review/operator-3a1d179-20261019T220216Z/root-source-prerequisite-verification.OPERATOR_ONLY.json",
+      "bytes": 22016,
+      "sha256": "2780BA6D4E557B5BAC18C72007C252169FB9D644D4FE86D30923E7081844993C"
+    },
+    "initialReqReportUnchanged": "BLOCKED",
+    "supplementReportUnchanged": "BLOCKED",
+    "closedSupplement": {
+      "path": ".local/reviews/E02-final-review/operator-3a1d179-20261019T220216Z/FINAL_REQ-postseal-supplement-v4.root-closure.BLOCKED_ADMIN.json",
+      "bytes": 8011,
+      "sha256": "E0B83579652051FF3162A901C58E0A7E14C1277701A0041B669AA3464A67D801"
+    },
+    "supplementResolved": [
+      "Original 9156 mechanical rows remain; successful initial outputs separately demonstrate 80 more original rows, for 9236 actual visibility without a comprehension claim.",
+      "All 21 staged-file hashes fit the original HASH_ONLY grant.",
+      "Original count-cap, recovery and EOF deviations remain procedural failures; no fundamental contamination requiring a new full initial assessment was established.",
+      "E01 and SOURCE administrative opacity resolved at record/binding level."
+    ],
+    "remainingApprovalFinding": "Original prelaunch 21:42:57Z answer is supported by trusted transcript relay, not independently retrieved. The later direct same-pair confirmation is postclosure and supplies no retroactive permission or new windows. A factual historical-timing clarification is pending from the owner."
+  },
+  "checkpointClarification": {
+    "historicalCommit": "1c99360f1160a9d0fa234bbc5131dcc7c60da7fb",
+    "originalMessageOmission": "Actual independent-review status was not stated; pending approval did not satisfy OWN16. Original Git message/history remain unchanged.",
+    "basis": "Root inspected git show --no-patch --format=fuller and --stat for the exact commit: a three-document planning increment for RQ25/START01-START10/E09, with no new Core/native/rendered/scenario execution claimed.",
+    "actualIndependentReviewStatus": "No separate independent approval for that planning increment is established by retained evidence. Conservatively classified UNREVIEWED_FOR_ACCEPTANCE; no historical PASS is inferred.",
+    "laterClarificationEffect": "Clarifies present treatment and records historical noncompliance; does not retroactively amend the original message or approve E09. RQ25 and future E09 stay open/unexecuted.",
+    "currentCheckpointRequirement": "The new publication checkpoint records all three actual BLOCKED review verdicts and the pending acceptance finding."
+  },
+  "coverage": {
+    "code": {
+      "requiredRows": 9236,
+      "visibleRows": 9236,
+      "decodedImages": 6
+    },
+    "initialReq": {
+      "requiredRows": 9236,
+      "mechanicalRows": 9156,
+      "separatelyDemonstratedRows": 80,
+      "decodedImages": 6,
+      "individualArraysOverThreeEntries": 114,
+      "aggregateOverCountObservations": 128,
+      "countRuleFailurePreserved": true
+    },
+    "supplement": {
+      "mandatoryRows": 595,
+      "groups": 8,
+      "chunks": 20,
+      "newImages": 0,
+      "literalCallsAudited": 134,
+      "maximumJoinedTextUtf8Bytes": 6025,
+      "wholeObjectOrWildcardDeviations": [
+        1,
+        36,
+        38,
+        44
+      ],
+      "explicitRecoveries": [
+        130,
+        131,
+        132,
+        133
+      ]
+    },
+    "eofCorrection": {
+      "nonexistentLabels": 5,
+      "rowCredit": 0,
+      "explanation": "Two-row 582-byte stdout has no extra third row from its terminal CRLF. Original attempt446 padded two labels, attempt11 padded three. Earlier root four-label premise is corrected separately.",
+      "descriptor": {
+        "path": ".local/reviews/E02-final-review/operator-3a1d179-20261019T220216Z/root-eof-row-count-correction.POSTSEALED.json",
+        "bytes": 1699,
+        "sha256": "3664897189FA4EA0C5B7193EF22135A2368122364F8D35C44449448810F962A6"
+      }
+    }
+  },
+  "execution": {
+    "nativeCases": 16,
+    "nativeAssertions": 18174,
+    "numericCases": 4,
+    "numericAssertions": 17041,
+    "renderedCases": 4,
+    "renderedAssertions": 158,
+    "inputCases": 8,
+    "inputAssertions": 975,
+    "separateSupervisorCases": 6,
+    "supervisorGroups": 3,
+    "supervisorProcessRoots": 5,
+    "requiredPngs": 6,
+    "inputEvents": 4562,
+    "rayRecords": 20,
+    "executionAuthority": "CLOSED_DO_NOT_REUSE",
+    "visibleWindowsConsumed": 2,
+    "visibleWindowsRemaining": 0,
+    "historicalFactualResult": {
+      "path": "docs/plans/evidence/2026-10-19-e02-5e92-result.json",
+      "bytes": 21213,
+      "sha256": "D4EFFFC6452B41EB6D8E00FE8B8C3A5B709469B2DD01D41FD23ABC30D768BA6D"
+    },
+    "historicalFactualResultUnchanged": true
+  },
+  "limitations": [
+    "Synthetic advisory Windows proof only; real-Core play and production responsiveness unproven.",
+    "Effective-pixel support/hit accuracy does not prove arbitrary fractional-point precision; nominal deviations reached about 0.09801 inches.",
+    "Linux, packages, full HUD/profile behavior, physical input and OS-focus switching remain unverified.",
+    "KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified; trace/CrashReportClient activity and C4701 warnings remain recorded.",
+    "All earlier failures and unknowns remain unchanged, including original E01 30-second failure and narrow separate SLOW120 scope.",
+    "This documentation overlay is outside the original reviewed commit and is not a new independent technical approval."
+  ],
+  "sourceFreezeClosure": {
+    "allThreeReviewProcessesClosed": true,
+    "descriptorPurposes": 1547,
+    "uniquePhysicalFiles": 1534,
+    "noDriftObserved": true,
+    "atomicSnapshot": false,
+    "metadataOverlayPermitted": true
+  },
+  "publicationOrMergeAuthority": false,
+  "newExecutionAuthority": false
+}

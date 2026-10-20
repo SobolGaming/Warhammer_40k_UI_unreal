@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
-**Planning date / revision date:** 2026-10-02 / 2026-10-19 UTC
-**Revision:** 39 — 5e92ba3/run202805 completed affected SOURCE and seven producer phases; EXECUTION_PASS_FINAL_ACCEPTANCE_NOT_ESTABLISHED. Native 16 cases/18174 assertions, separate SUP6, six images and closed authority. Final cumulative CODE/different REQ remain pending; historical failures stay unchanged.
+**Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
+**Revision:** 40 — EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN. Executed5e92ba3/run202805 retains native16/18174, separate SUP6 and six PNGs. Final3a1d179 CODE r3, REQ r2 and limited postsealed supplement v4 are sealed raw BLOCKED; original approval-provenance clarification remains pending. Historical checkpoint omission is now conservatively clarified, not retroactively repaired. Native authority remains closed.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,37 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 39 changes
+### Revision 40 changes
+
+Final reviewed candidate `3a1d17902f6fa94b6009c0cae573da8bf7dff063`, against
+cumulative base `bd801233cc9989e0ae146a3be7b136d26dc73183`, now has closed
+[CODE r3](research/2026-10-20-e02-final-code-r3.md),
+[REQ r2](research/2026-10-20-e02-final-requirements-r2.md) and a separate
+postsealed [limited supplement v4](research/2026-10-20-e02-final-requirements-supplement-v4.md).
+All three raw verdicts remain **BLOCKED**. Root separately verified CODE's opaque
+affected-SOURCE prerequisite. The supplement resolves reading-count, hash-gate
+and administrative source-binding concerns; no fundamental contamination requiring
+a fresh initial assessment was established. The [final-review provenance](evidence/2026-10-20-e02-final-review-provenance.json)
+records exact reports, limits and closure; this overlay supplies no new independent approval.
+
+Historical checkpoint `1c99360` omitted independent-review status in its message.
+Root's present clarification is **UNREVIEWED_FOR_ACCEPTANCE**, because no separate
+independent approval is established. Original history/noncompliance is preserved;
+RQ25/E09 remain open/unexecuted. Independent retrieval/timing verification of the
+original prelaunch approval remains pending owner factual clarification. Current
+status is **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN**; an answer does not
+itself establish acceptance. Both visible launches are consumed and all native
+authority is closed with zero remaining launches. No push or merge is released.
+
+Separately, an isolated E04-A1 source-only draft covers 18 paths, eight proposed
+native cases and 38 input IDs. Pinned yaml-cpp source
+`56e3bb550c91fd7005566f19c079cb7a503223cf` was acquired and byte-verified:
+394 files / 5156535 bytes. Canonical promotion, library configure/build, native
+execution and acceptance have not occurred. RQ23/RQ24, full E02/M02/E04, Linux,
+packaging, real-Core play and full HUD/profile behavior remain open. Existing
+normative gates and all historical blocks/failures remain unchanged.
+
+### Revision 39 history
 
 Executed source `5e92ba336da0570cb4b57def390ad3c58921e625`, run
 `20261019T202805Z-5ff8cb61`, completed affected SOURCE, Preflight,
@@ -424,7 +454,7 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the factual documentation and freeze the completed bounded E02 execution/evidence for fresh final independent cumulative CODE and different REQ assessments under OWN15.** Executed source `5e92ba336da0570cb4b57def390ad3c58921e625`, run `20261019T202805Z-5ff8cb61`, has status **EXECUTION_PASS_FINAL_ACCEPTANCE_NOT_ESTABLISHED**. All seven producer phases are closed; 16 native cases/18174 assertions and six separate supervisor cases passed. Both approved visible windows are consumed and all execution authority is CLOSED_DO_NOT_REUSE. Section0.9, the [factual result](evidence/2026-10-19-e02-5e92-result.json) and [journal](evidence/2026-10-16-e02-world-input.md) bind preservation, approval provenance and fidelity limits. Use cumulative base `bd801233cc9989e0ae146a3be7b136d26dc73183`; the narrow affected SOURCE PASS does not replace either final review. Preserve every earlier failure/unknown and the effective-pixel precision limit. Full E02/M02, Linux, packaging, real-Core play, full HUD/profile behavior and broader research/implementation gates remain open. No further native execution or merge is released.
+**Current assignment: record the closed final E02 review operation and resolve its remaining administrative approval-provenance finding under OWN15.** Status is **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN**. Final candidate `3a1d17902f6fa94b6009c0cae573da8bf7dff063`, cumulative base `bd801233cc9989e0ae146a3be7b136d26dc73183`, has sealed raw BLOCKED CODE r3, REQ r2 and limited postsealed supplement v4 reports; see Section0.9 and [final-review provenance](evidence/2026-10-20-e02-final-review-provenance.json). Root separately verified CODE's opaque SOURCE prerequisite. Historical checkpoint `1c99360` is conservatively clarified as UNREVIEWED_FOR_ACCEPTANCE without rewriting its message; original prelaunch approval retrieval/timing verification remains pending owner factual clarification. Executed source stays `5e92ba336da0570cb4b57def390ad3c58921e625`, run `20261019T202805Z-5ff8cb61`, with all seven producer phases closed, 16 native cases/18174 assertions, separate SUP6 and six PNGs. Both windows are consumed; all execution authority is CLOSED_DO_NOT_REUSE with zero remaining launches. Preserve every earlier failure/unknown and the effective-pixel precision limit. Separate E04-A1 work is isolated source authoring/acquired dependency data only; canonical promotion, library configure/build/native and acceptance have not occurred. RQ23/RQ24, full E02/M02/E04, Linux, packaging, real-Core play, full HUD/profile behavior and broader gates remain open. No further native execution, push or merge is released.
 
 ### 0.1 Fixed scope and authority
 
@@ -1103,9 +1133,9 @@ Supporting evidence:
 
 The [BOOT01 packet](research/2026-10-16-bootstrap-and-native-parser.md) specifies its files, 30-minute process timeout, staging/log/output roots, cleanup and standard per-user cache/default-empty-UBT-config side effect. OWN11 is its execution authorization; results must be recorded separately. Other packets finalize exact outputs before authorization. Cleanup touches only resolved packet-owned generated paths; never shared caches/user data/engine/siblings. A failed runtime proof returns to client staging or its external supplier, never Core edits here. E03B/E05–E08 remain later acceptance except a named architecture subset. A proposed packet alone is never a passing result or execution authorization.
 
-### 0.9 Current E02 packet gate — 2026-10-19 UTC
+### 0.9 Current E02 packet gate — 2026-10-20 UTC
 
-Current status is **EXECUTION_PASS_FINAL_ACCEPTANCE_NOT_ESTABLISHED**, executed
+Current status is **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN**, executed
 source `5e92ba336da0570cb4b57def390ad3c58921e625`, run
 `20261019T202805Z-5ff8cb61`. Fresh affected SOURCE PASS preceded successful
 Preflight, SupervisorControls, Win64 Editor Build, Discovery, Numeric, WorldInput
@@ -1119,7 +1149,7 @@ the six supervisor cases in three groups/five roots are separate. All six PNGs,
 Nine settings before/after pairs match in Preflight, Build, Discovery, Numeric
 and WorldInput. SupervisorControls/Audit use predecessor evidence and have no
 same-phase pair. Root viewed all six originals and recorded bounded visual
-observations; final independent REQ must inspect the actual images itself.
+observations; they remain implementer evidence separate from the sealed final assessments.
 The `1e-4` inch/one-pixel RaisedPicking checks compare independent expected and
 actual points at the same effective viewport pixel. Float-cast/toward-zero
 quantization is unchanged; nominal deviations were about0.04663/0.08687/0.09801
@@ -1133,13 +1163,29 @@ windows remain and retry is unauthorized. The [factual result](evidence/2026-10-
 binds raw source/report/approval/closure/runtime and execution-source descriptors.
 A later documentation freeze does not replace the executed source identity.
 
-Next: fresh final independent CODE against cumulative base
-`bd801233cc9989e0ae146a3be7b136d26dc73183` and a different independent REQ,
-after the final documentation/evidence freeze. Affected SOURCE PASS is not either
-final review. Full E02/M02, Linux, packaging, real-Core play, full HUD/profile,
-physical input/OS-focus switching, KnownDocuments provider/target/present-file
-branch and lower process/network internals remain open/unverified. All earlier
-failed/unknown results remain unchanged. No further execution or merge is released.
+Final candidate `3a1d17902f6fa94b6009c0cae573da8bf7dff063` against cumulative base
+`bd801233cc9989e0ae146a3be7b136d26dc73183` has closed
+[CODE r3](research/2026-10-20-e02-final-code-r3.md),
+[REQ r2](research/2026-10-20-e02-final-requirements-r2.md) and the postsealed
+[limited supplement v4](research/2026-10-20-e02-final-requirements-supplement-v4.md).
+All raw verdicts remain BLOCKED. Root separately verified CODE's opaque SOURCE
+prerequisite; the supplement resolves reading-count, hash-gate and administrative
+source-binding concerns without establishing fundamental contamination requiring
+a fresh initial assessment. Original count-cap/recovery/EOF procedural failures
+remain recorded. The [final-review provenance](evidence/2026-10-20-e02-final-review-provenance.json)
+preserves this scope and the closed metadata operation.
+
+The historical `1c99360` message omission is now explicitly classified
+UNREVIEWED_FOR_ACCEPTANCE: no separate independent approval is established, original
+noncompliance is unchanged, and RQ25/E09 stay open/unexecuted. Independent original
+prelaunch approval retrieval/timing verification remains pending owner factual
+clarification. The later direct same-pair confirmation was postclosure; it supplies
+neither retroactive permission nor additional windows. No final acceptance is
+established. RQ23/RQ24, full E02/M02/E04,
+Linux, packaging, real-Core play, full HUD/profile, physical input/OS-focus switching,
+KnownDocuments provider/target/present-file branch and lower process/network
+internals remain open/unverified. All earlier failed/unknown results remain
+unchanged. No further execution, push or merge is released.
 
 #### Historical 3483f79 source-review disposition
 
@@ -2667,6 +2713,8 @@ During the current research task, choose and log reversible **planning** details
 
 ### 15.1 Actual review record
 
+**2026-10-20 E02 revision40:** Final3a1d179 against basebd80123 has sealed raw BLOCKED [CODE r3](research/2026-10-20-e02-final-code-r3.md), [REQ r2](research/2026-10-20-e02-final-requirements-r2.md) and separate postsealed [limited supplement v4](research/2026-10-20-e02-final-requirements-supplement-v4.md). Root separately verified the opaque SOURCE prerequisite; limited administrative reading/count/hash/source concerns are resolved without establishing fundamental contamination requiring a fresh initial assessment. Root conservatively clarifies the historical1c99360 omission as UNREVIEWED_FOR_ACCEPTANCE, preserving original noncompliance and open RQ25/E09. Original prelaunch approval retrieval/timing verification remains pending owner factual clarification. **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN** retains executed5e92/run202805 native16/18174, separate SUP6 and six PNGs; all authority is closed, both windows consumed and zero launches remain. [Provenance](evidence/2026-10-20-e02-final-review-provenance.json) binds scope/limits. No raw report is rewritten as PASS and no acceptance/publication/merge is released.
+
 **2026-10-19 E02 revision39:** 5e92ba3/run202805 completed fresh affected SOURCE and all seven producer phases. Native16/18174 and separate SUP6 passed; six images/input/ray evidence and closed preservation records exist. Root's scoped visual observations are implementer evidence. All authority is closed after two consumed windows. Fresh final cumulative CODE and different REQ are NOT RUN; **EXECUTION_PASS_FINAL_ACCEPTANCE_NOT_ESTABLISHED**. The [factual result](evidence/2026-10-19-e02-5e92-result.json) preserves raw phase labels, source-gate limits, quantization and exact approval/closure descriptors. No older verdict or failed run changes.
 
 **2026-10-19 E02 revision38:** 3483f79 SOURCE BLOCKED because the actual initial prompt omitted explicit matching root launch GO. The reviewer stopped before source/requirements bodies; 0/1458 C++ rows, 0/1231 API rows and 0/35 diff rows were read, with owner/norm/supplement unread. Source merits remain UNASSESSED, with no C++ finding. The one context and all planned-run authority are closed; no E02 execution occurred. A new explicit-authority packet/context/run is required. [Facts](evidence/2026-10-19-e02-3483-source-result.json) preserve exact descriptors and metadata limits.
@@ -2709,15 +2757,15 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** Checkpoint the factual revision39 overlay, then freeze the cumulative E02 result against `bd801233cc9989e0ae146a3be7b136d26dc73183` for fresh final independent CODE and a different REQ under OWN15. The executed source remains5e92ba3/run202805; all seven producer phases are closed and all execution authority is CLOSED_DO_NOT_REUSE after both visible windows. The affected SOURCE PASS is not final CODE/REQ or acceptance. Preserve sealed runtime/source bytes, raw labels, earlier failures/unknowns and the nominal fractional-pixel fidelity gap. No further native execution or merge is released.
+**Ready now:** Checkpoint the factual revision40 overlay with all three actual BLOCKED review dispositions and the honest historical checkpoint clarification. The remaining original prelaunch approval retrieval/timing finding awaits owner factual clarification; no acceptance follows automatically from an answer. Preserve final3a1d179/basebd80123, executed5e92ba3/run202805, sealed raw reports and the nominal fractional-pixel fidelity gap. All native authority is CLOSED_DO_NOT_REUSE after both consumed windows. Separately isolated E04-A1 source preparation and verified source acquisition are recorded below; they are not a library build or native result. No further native execution, push or merge is released.
 
 **Research status: RESEARCH_INCOMPLETE.** RQ01 baseline is established; owner target/topology/platform/mode/continuity/internal-use questions are answered. The selected checkout command host and owned exact-version runtime were exercised in normal `044903` under OWN13/OWN14; no new host or sibling edits were introduced. BOOT01 passed under OWN11. Diagnostic status is **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED** for the narrow accepted proof; the reviewed head is `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` and execution source remains `d1189592a5f99bdee58cea25ae8546e5ee2e3623`. Full E01/M01/M02 and G-RESEARCH/G-IMPLEMENT remain open. Broad implementation and unrelated E02–E08 execution remain outside the immediate scope; Linux execution is deferred.
 
-**Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence pending independent final REQ. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
+**Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 source characterization and selected44.3.33 adaptation, profile/capability/design checklists, developer Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units/14 Capture checks/132 native successes/two evidence checks plus separate135 PowerShell controls/39 inputs. Current E02 `202805` on5e92 records affected SOURCE and all seven producer phases,16 native cases/18174 assertions, separate SUP6 and six images. Final cumulative CODE/different REQ remain pending. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
+**Work completed so far:** imported plan/strong instructions, M00 metadata, legacy44.1 source characterization and selected44.3.33 adaptation, profile/capability/design checklists, developer Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units/14 Capture checks/132 native successes/two evidence checks plus separate135 PowerShell controls/39 inputs. Current E02 `202805` on5e92 records affected SOURCE and all seven producer phases,16 native cases/18174 assertions, separate SUP6 and six images. Final cumulative CODE r3, different REQ r2 and postsealed limited supplement v4 are sealed raw BLOCKED; administrative approval provenance remains unresolved. Separately, an isolated18-path E04-A1 source draft proposes8 cases/38 inputs; pinned yaml-cpp56e3bb550c91fd7005566f19c079cb7a503223cf acquisition/byte verification completed394 files/5156535 bytes, with no canonical promotion, library configure/build/native or acceptance. RQ23/RQ24/fullE02/M02/E04 stay open. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
 
-**Next concrete step:** Freeze the factual revision39 checkpoint and completed execution/evidence for separate fresh final independent cumulative CODE and different REQ assessments. Use base `bd801233cc9989e0ae146a3be7b136d26dc73183`, full E02 source/build/config/fixture/harness coverage and clean normative/factual extracts from mixed-history documents. Preserve executed5e92/run202805 and all older failures; no historical or affected SOURCE verdict substitutes final review. No native execution or merge is currently released.
+**Next concrete step:** Preserve the closed final operation and checkpoint these actual review/clarification facts under OWN16. Resolve the original prelaunch approval timing/retrieval finding through the already-pending owner factual clarification, then make an explicit disposition against OWN15 without rewriting raw reports or assuming acceptance. E04-A1 remains a separate isolated source draft and acquired dependency, with its own later canonical promotion, SOURCE freeze and bounded execution gates still required. No native execution, push or merge is currently released.
 
 ## 16. Sources and inspection index
 

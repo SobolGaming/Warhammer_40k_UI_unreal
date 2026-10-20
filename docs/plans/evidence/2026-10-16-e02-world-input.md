@@ -1767,3 +1767,64 @@ packaging, real-Core play, full HUD/profile behavior, physical input/OS-focus
 switching, KnownDocuments provider/target/present-file branch and lower
 process/network internals remain open/unverified. Standing packet-transmission
 consent adds no native or merge authority. No final acceptance is claimed.
+
+## Final reviews closed; administrative acceptance hold — 2026-10-20 UTC
+
+The final reviewed candidate is `3a1d17902f6fa94b6009c0cae573da8bf7dff063`,
+against `bd801233cc9989e0ae146a3be7b136d26dc73183`. Executed source remains
+`5e92ba336da0570cb4b57def390ad3c58921e625` and run remains
+`20261019T202805Z-5ff8cb61`. This later documentation overlay was not the executed
+or independently reviewed source. No new native, rendered or Core check ran.
+
+| Closed assessment | Session | Original verdict | Raw report |
+|---|---|---|---|
+| Final CODE r3 | `01a1564c-8ace-7c02-a384-57d8311c746f` | BLOCKED | [Exact report](../research/2026-10-20-e02-final-code-r3.md) |
+| Final REQ r2 | `01a15648-7d6b-74a0-a767-0314f573d2b1` | BLOCKED | [Exact report](../research/2026-10-20-e02-final-requirements-r2.md) |
+| Limited post-seal procedural/admin supplement v4 | `01a15699-0c63-7a43-8b17-0f8186062842` | BLOCKED | [Exact report](../research/2026-10-20-e02-final-requirements-supplement-v4.md) |
+
+The [provenance JSON](2026-10-20-e02-final-review-provenance.json) binds the exact
+reports, prompts, root launch authorities, runtime records and post-close audits.
+Both initial reviews inspected the six original PNGs and all 9236 required source,
+normative and API rows were visibly available: REQ's mechanical counter remains
+9156 plus 80 separately verified successful original output rows. This proves
+visibility, not comprehension. The supplement inspected 595 additional mandatory
+rows in eight groups/20 chunks and no new images. No current CODE conclusion was
+supplied to either initial REQ or the later limited supplement.
+
+CODE found no confirmed defect requiring change but withheld acceptance because
+the blind inputs omitted the prior SOURCE disposition. Root's separate sealed
+administrative verification establishes the original affected SOURCE PASS and
+matching `sourceReviewed` bindings before the applicable phases. The raw CODE
+report remains BLOCKED. The limited REQ supplement resolves E01/SOURCE record
+opacity, original staged HASH_ONLY operations and the separate 80-row coverage.
+It does not require a full new blind initial solely for the retained count-cap,
+recovery and EOF deviations; those deviations remain procedural failures.
+
+One root counting premise is corrected explicitly: the 582-byte SUP01 stdout has
+two lines, not three. A terminal CRLF does not create an extra ReadAllLines row.
+Original attempts 11 and 446 padded three and two nonexistent labels respectively;
+all five receive zero credit. The earlier frozen root record and its incorrect
+four-label premise remain preserved alongside a separate correction. This does
+not change native results or the 9156 + 80 visibility accounting.
+
+OWN16's original `1c99360f1160a9d0fa234bbc5131dcc7c60da7fb` message omitted the
+actual independent-review status. Root inspected its stored message and three-
+document planning diff/stat. No separate independent approval for that increment
+is established; it is conservatively `UNREVIEWED_FOR_ACCEPTANCE`. This clarification
+does not rewrite history, claim original compliance or approve future RQ25/E09.
+The new checkpoint records the actual three BLOCKED verdicts.
+
+The remaining externally dependent finding concerns the original visible approval:
+the prelaunch `21:42:57Z` answer is supported by a trusted transcript relay, while
+original-message retrieval is unverified. The later `22:04:48.7037181Z` same-pair
+confirmation followed execution closure and cannot supply retroactive permission.
+A factual historical-timing clarification is pending from the owner. Preserve
+this distinction and do not infer new desktop authority.
+
+Root closed the review freeze after checking 1547 descriptor-purpose entries /1534
+unique physical files without observed drift; the check spans time and is not an
+atomic snapshot. Current status is
+`EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN`. All execution authority remains
+`CLOSED_DO_NOT_REUSE`, both windows consumed, zero remain. Full E02/M02, Linux,
+packages, real-Core play, full HUD/profile behavior and all earlier fidelity and
+process/settings limits remain open. No publication or merge authority is added.

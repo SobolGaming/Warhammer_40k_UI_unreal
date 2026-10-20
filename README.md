@@ -2,11 +2,12 @@
 
 This repository develops a C++ first, genuinely 3D Unreal client for the separate
 authoritative Python rules engine. `WarhammerClient.uproject` is the minimal C++
-foundation. Source includes an opt-in synthetic 3D proof scene. The latest 3483f79
-SOURCE review stopped BLOCKED because its actual prompt omitted explicit launch
-authority; source merits remain UNASSESSED. The projection-invertibility guard is
-authored and UNEXECUTED; that planned run is closed without native execution.
-Historical c9a5ac5 CHANGES_REQUESTED and c987863 WorldInput FAILED remain preserved.
+foundation. Source includes an opt-in synthetic 3D proof scene. Current E02 status
+is **EXECUTION_PASS_FINAL_ACCEPTANCE_BLOCKED_ADMIN**: 16 native cases / 18174
+assertions and six rendered images passed their producer checks, while the sealed
+final reviews retain BLOCKED verdicts with an approval-provenance finding pending.
+Both visible launches are consumed and native authority is closed. Earlier
+failed/blocked runs remain preserved.
 A playable Core-connected client
 and complete rendered/input acceptance remain future work. The plan records
 actual evidence and remaining gates.
@@ -78,7 +79,39 @@ review that later commit. Execution is stopped. The narrow diagnostic is accepte
 full E01/M01/M02, research gates, the 30-second budget, production responsiveness,
 UE HTTP, rendering, packaging and Linux remain open.
 
-Latest reviewed E02 checkpoint `3483f79031d8a7840a574b1f78974970cfe4e6e5` received **SOURCE BLOCKED** before source/requirements body reads: the matching root launch GO existed on disk but was omitted from the actual initial prompt. Source merits are **UNASSESSED**; this is an authority/protocol failure with no C++ finding. Planned run `20261019T201705Z-77706340` and all associated authority are **CLOSED_DO_NOT_REUSE**.
+Plan revision 40 (2026-10-20 UTC) records the completed E02 run
+`20261019T202805Z-5ff8cb61` on executed source
+`5e92ba336da0570cb4b57def390ad3c58921e625`. Affected SOURCE and all seven
+producer phases passed; six separate supervisor cases are additional evidence.
+Final [CODE r3](docs/plans/research/2026-10-20-e02-final-code-r3.md),
+[REQ r2](docs/plans/research/2026-10-20-e02-final-requirements-r2.md) and the
+postsealed [limited supplement v4](docs/plans/research/2026-10-20-e02-final-requirements-supplement-v4.md)
+are all sealed raw **BLOCKED** for final candidate
+`3a1d17902f6fa94b6009c0cae573da8bf7dff063`. Root separately verified CODE's
+opaque affected-SOURCE prerequisite. The supplement resolves reading-count,
+hash-gate and administrative source-binding concerns; no fundamental contamination
+requiring a fresh initial assessment was established. The raw reports remain unchanged.
+
+Root now clarifies historical checkpoint `1c99360` as **UNREVIEWED_FOR_ACCEPTANCE**:
+no separate independent approval is established. Its original message omission and
+OWN16 noncompliance remain unchanged; RQ25/E09 remain open/unexecuted. Independent
+original prelaunch approval retrieval/timing verification remains pending owner factual clarification.
+[Final-review provenance](docs/plans/evidence/2026-10-20-e02-final-review-provenance.json)
+binds these limits. Native execution is closed with zero launches remaining; final
+acceptance, push and merge are not released. Full E02/M02, RQ23/RQ24, Linux,
+packaging, real-Core play and full HUD/profile behavior remain open. The E02
+round-trip checks concern the same effective viewport pixel; they do not establish
+arbitrary fractional-point pointing precision.
+
+Separately, an isolated E04-A1 source draft covers 18 paths, eight proposed native
+cases and 38 input IDs. Acquisition and byte verification of yaml-cpp pin
+`56e3bb550c91fd7005566f19c079cb7a503223cf` completed (394 files / 5156535 bytes).
+Canonical promotion, library configure/build, native execution and acceptance have
+not occurred; full E04 remains open.
+
+The following 3483f79 source-review disposition is historical.
+
+Historical reviewed E02 checkpoint `3483f79031d8a7840a574b1f78974970cfe4e6e5` received **SOURCE BLOCKED** before source/requirements body reads: the matching root launch GO existed on disk but was omitted from the actual initial prompt. Source merits are **UNASSESSED**; this is an authority/protocol failure with no C++ finding. Planned run `20261019T201705Z-77706340` and all associated authority are **CLOSED_DO_NOT_REUSE**.
 
 The full-matrix invertibility/finite-inverse guard remains authored and **UNEXECUTED**. No E02 RunRoot, Preflight, supervisor controls, build, native/GUI or Audit ran for this checkpoint; zero visible windows were consumed. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and c987 WorldInput FAIL remain unchanged. Fresh affected SOURCE review with explicit actual launch authority, a new run, hidden checks and applicable visible approval remain gates. See [current facts](docs/plans/evidence/2026-10-19-e02-3483-source-result.json), the [prior c9 result](docs/plans/evidence/2026-10-19-e02-c9a5-source-result.json) and the [journal](docs/plans/evidence/2026-10-16-e02-world-input.md).
 
@@ -94,7 +127,7 @@ The exact-pair approval came from a trusted source-progress-chat relay: the owne
 
 A bounded ray/projection/quantization diagnosis and repair must preserve the existing scene/domain values, actual projection/input route, nearest-hit/NoHit semantics, geometry and pixel tolerances, cases, screenshots, zero Core counters, ownership/cleanup, timing budgets and startup controls. No repaired candidate has executed. Require a coherent checkpoint, fresh source/tool/API/fixture freeze, affected SOURCE review, new RunId, preservation/SUP/build checks and new applicable visible approval before native repaired graphical work. Fresh final independent CODE and different REQ assessments still follow a completed final execution/documentation/evidence freeze. Acceptance, publication/merge, full E02/M02, production Core-connected play, packaging and Linux remain open. Preserve every earlier failure/unknown.
 
-See [current E02 facts](docs/plans/evidence/2026-10-19-e02-c987-result.json) and the [journal](docs/plans/evidence/2026-10-16-e02-world-input.md).
+See [historical c987 facts](docs/plans/evidence/2026-10-19-e02-c987-result.json) and the [journal](docs/plans/evidence/2026-10-16-e02-world-input.md).
 
 The following 0ed4d7c disposition is historical.
 
