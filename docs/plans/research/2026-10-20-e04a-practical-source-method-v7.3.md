@@ -3,8 +3,13 @@
 Root prospectively adopted this method after all four launched v7.2 reviews
 closed. The [adoption record](../evidence/2026-10-20-e04a-practical-method-adoption.json)
 binds the stopped proposal, original duty map and root conservation checks.
-Actual successor assignments, input index, publication/run and launch bindings
-remain pending. This method is not SOURCE approval or native authority.
+Revision 70 records five closed practical reviews for `da00e83` /
+`20261020T192245Z-8fa15b75`, 476 captured pairs and zero admissions in the
+[current closure](2026-10-20-e04a-practical-source-closure.md). D-ABI-01 requires
+technical repair and fresh affected review, including both complete witnesses;
+seven prepared future definitions have no GO and shared index v3 was never
+created. This introduction is a status overlay only; all substantive method
+clauses below are unchanged. This method is not SOURCE approval or native authority.
 
 ## Explicit procedural changes
 

@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 69 — SOURCE_V72_CLOSED_PRACTICAL_METHOD_ADOPTED_BINDINGS_PENDING. All four launched v7.2 SOURCE reviews for `8e38541` / `20261020T174334Z-617cf39e` are CLOSED BLOCKED, with 162 captured tool pairs and zero admissions. Twelve panels were emitted/input-audited; eight stayed unused and integrations never allocated. Post-close rehash matched all 2,576 unique frozen inputs. Missing JSON/localization reader sources are located. Root adopted practical v7.3 composition, explicitly replacing repeated oversized packaging while preserving substantive duties, two independent finite witnesses and independent raw seams. Actual successor assignments/index/transport/run/GO remain pending. All eight native phases are NOT_RUN and visible authority zero; final CODE/different REQ and later gates remain open.
+**Revision:** 70 — PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED. All five practical SOURCE jobs for `da00e83` / `20261020T192245Z-8fa15b75` are CLOSED: two raw BLOCKED, one CHANGES_REQUESTED and two raw PASS, 476 captured tool pairs and zero admissions. D-ABI-01 requires rejection of effective unsupported toolchain alternatives, then fresh affected reviews including both complete finite witnesses. The temporary ignored BODY013 copy deletion occurred after all five jobs closed; exact bytes were restored and the subsequent 2,344-input rehash matched, without a continuous-immutability claim. Seven prepared future definitions have no GO and shared index v3 was never created. The substantive practical v7.3 method is unchanged. All eight native phases remain NOT_RUN, no native RunRoot and visible authority zero; final CODE/different REQ and later gates remain open.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -18,7 +18,35 @@
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 69 changes
+### Revision 70 changes
+
+Status is **PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED**. The
+[practical closure](research/2026-10-20-e04a-practical-source-closure.md) and
+[factual overlay](evidence/2026-10-20-e04a-practical-source-result.json) preserve
+five closed jobs: VALUE BLOCKED/109 pairs, independent VALUE seam BLOCKED/57,
+compiler/ABI CHANGES_REQUESTED/84 and the two finite witnesses raw PASS/117 and
+PASS/109. Total 476 pairs, zero admissions. Reports were sealed before body reads;
+raw reports and the historical profile-result sourceDraft are unchanged.
+
+D-ABI-01 directly confirms unfrozen/unrefused configurable radlink/cl-filter
+alternatives; it does not establish active configuration or tool execution.
+Repair final module-time refusal of effective `bAllowRadLinker`,
+`bPrintToolChainTimingInfo` and `bCompilerTrace`, then refreeze/review affected
+source including both whole witnesses. Seven prepared future definitions are
+superseded for use after repair; shared index v3 was never created and has no GO.
+The conditional Dispose source-order finding remains; pinned framework research
+does not demonstrate a normally reachable throwing close for the untouched
+synchronous lock. No universal no-throw/unlock/process guarantee or wrapper patch
+on that antecedent alone follows.
+
+The ignored BODY013 copy was temporarily deleted through an `RD` alias collision
+after all five jobs closed, then restored exactly. Root's post-restoration check
+matched 2,344 unique inputs with no conflicts; continuous immutability is not
+claimed. This is a documentation checkpoint before technical repair. Substantive
+v7.3 criteria, standing perpetual consent and all native/final/later gates remain
+unchanged; native phases are NOT_RUN, no native RunRoot and visible authority zero.
+
+### Revision 69 history
 
 Status is **SOURCE_V72_CLOSED_PRACTICAL_METHOD_ADOPTED_BINDINGS_PENDING**.
 The [closed v7.2 summary](research/2026-10-20-e04a-v7.2-source-closure.md)
@@ -1208,33 +1236,42 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: bind the adopted v7.2 all-fresh successor before allocation.**
-Status is **COMPATIBILITY_CLOSED_ALL_FRESH_BINDINGS_PENDING**. The
-[revision68 checkpoint](research/2026-10-20-e04a-compat-closed-v7.2-checkpoint.md)
-and [factual record](evidence/2026-10-20-e04a-compat-closed-result.json) close all
-three C jobs for `93659c5` / `20261020T145014Z-0c80c9c7` with literal INCOMPLETE,
-238 pairs and six negative E decisions in that planned set. Root read all sealed
-raw reports, completed bounded ordinary closure audits and matched 2,687 unique
-frozen inputs after closure. Preserve those raw results and their limits.
+**Current assignment: checkpoint closed practical SOURCE evidence, repair D-ABI-01,
+then refreeze and obtain fresh affected reviews.** Status is
+**PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED**. Read the
+[revision70 closure](research/2026-10-20-e04a-practical-source-closure.md) and
+[current factual overlay](evidence/2026-10-20-e04a-practical-source-result.json).
+Five jobs for publication `da00e83`, technical source `73bc2c0`, base `03d28af`
+and run `20261020T192245Z-8fa15b75` are closed: two BLOCKED, one
+CHANGES_REQUESTED and two raw PASS, 476 captured pairs and zero admissions.
+Original reports were sealed before body reading and remain unchanged.
 
-The adopted selection is 17 fresh contexts: 12 primaries and five independent
-integrations, no retained candidate or new C job. Keep all seven joins/16 atoms/
-29 duties, complete source/unit/data obligations and both witness assessments.
-The repaired constructor/schema/transport source choices are adopted, F01 is
-statically closed, dynamic checks are NOT_RUN and successor helpers are uninvoked.
-Eight new raw definitions await adoption; nine existing templates are preserved.
-Update/adopt common assembler owner-registry/transport-pin sources before emission.
-Complete exact successor common/freeze/own/source/API/typed-data/count/NORM/grant
-bindings and neutral 12-predecessor policy before new P/F or panels/GO.
-Fresh blind inputs exclude old C/E conclusions; operator P/F remain HASH_ONLY.
-Actual complete reviews, current-vector integrations and root runtime/duty/finding
-audits precede aggregate closure and any native phase.
+D-ABI-01 requires final module-time rejection of effective
+`Target.WindowsPlatform.bAllowRadLinker`, `Target.bPrintToolChainTimingInfo` and
+`Target.WindowsPlatform.bCompilerTrace`. Configurable radlink/cl-filter paths are
+unfrozen/not refused; active configuration and actual tool execution are not
+inferred. Vendor BODY access gaps require complete fresh inputs. Preserve the
+independent VALUE report's conditional Dispose source-order finding; research
+does not demonstrate a normally reachable throwing close for this untouched
+synchronous stream/runtime, so no wrapper patch is selected on that premise alone.
+That finding is not converted into a universal framework guarantee.
 
-No F, fresh SOURCE GO or admission exists. All eight native phases remain NOT_RUN
-and visible authority zero. R6 raw five PASS/three BLOCKED/479 pairs, its failed
-v6 gate and both unused old integrations remain unchanged. Final fresh CODE/
-different REQ and all later acceptance gates remain open. Standing perpetual
-private-source/API consent is unchanged.
+All five jobs closed by 20:17:10.138895Z. The ignored frozen BODY013 copy was
+temporarily deleted after 20:17:39Z through an `RD` alias collision; canonical
+source was unchanged. Root restored exact 209,830-byte `FFE36D92...B8329` content
+at 20:20:39.0379885Z and matched 2,344 unique current inputs afterward, zero conflicts.
+No continuous freeze or retrospective admission is claimed.
+
+The seven prepared future definitions are superseded for use after the technical
+repair; shared index v3 was never created and no GO exists for those definitions.
+Keep substantive [practical v7.3 criteria](research/2026-10-20-e04a-practical-source-method-v7.3.md),
+all seven joins/16 atoms/29 duties, complete material/global unit coverage,
+independent raw seams and both complete independent finite witnesses. Refreeze
+changed source and derive exact affected inputs before fresh assessments; old
+raw PASS and incomplete reports do not transfer. All eight native phases remain
+NOT_RUN, no native RunRoot and visible authority zero. Final independent CODE,
+different REQ, A1G/A2/HUD/Linux/package and broader acceptance remain open.
+Standing perpetual private-source/API consent remains current until revoked.
 
 **Historical R4 assignment and findings (revision 57):**
 

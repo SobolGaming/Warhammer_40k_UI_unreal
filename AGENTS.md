@@ -78,16 +78,21 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 69 (2026-10-20 UTC) is
-**SOURCE_V72_CLOSED_PRACTICAL_METHOD_ADOPTED_BINDINGS_PENDING**. Read the
-[v7.2 closure](docs/plans/research/2026-10-20-e04a-v7.2-source-closure.md),
-[factual record](docs/plans/evidence/2026-10-20-e04a-v7.2-source-result.json)
+Current A1E status at plan revision 70 (2026-10-20 UTC) is
+**PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED**. Read the
+[practical closure](docs/plans/research/2026-10-20-e04a-practical-source-closure.md),
+[factual overlay](docs/plans/evidence/2026-10-20-e04a-practical-source-result.json)
 and [adopted practical v7.3 method](docs/plans/research/2026-10-20-e04a-practical-source-method-v7.3.md).
-All four launched v7.2 SOURCE jobs closed BLOCKED/162 pairs, zero admissions.
-Eight other primary panels stayed unused; no integration was allocated. Root
-sealed and fully read reports; bounded ordinary closure audits preserve incomplete
-reading, missing consumer inputs and access/evidence qualifications. All 2,576
-unique frozen inputs matched after closure and before documentation edits.
+All five practical jobs for `da00e83` / `20261020T192245Z-8fa15b75` closed:
+VALUE BLOCKED/109 pairs, independent VALUE seam BLOCKED/57, compiler/ABI
+CHANGES_REQUESTED/84 and two witnesses raw PASS/117 and PASS/109. Total 476
+pairs, zero admissions. Root sealed reports before body reading; raw results
+remain unchanged. D-ABI-01 confirms unfrozen/unrefused configurable radlink/
+cl-filter alternatives, without inferring active configuration or tool execution.
+Reject effective `bAllowRadLinker`, `bPrintToolChainTimingInfo` and `bCompilerTrace`
+at final module-time, then refreeze and obtain fresh affected reviews including
+both whole finite witnesses. Seven prepared future definitions are superseded
+for use after repair; shared index v3 was never created and they have no GO.
 
 V7.3 explicitly supersedes blanket whole013/all45/full099/full14 in every
 context, repeated whole-domain primary replicas and compulsory P/F/constructor
@@ -98,10 +103,16 @@ own assignments and verified unchanged additional relevant primary-source reads.
 Own exact clean controls are fully readable; privacy, selected-origin and blind
 review exclusions remain. Old incomplete reports never transfer approval.
 
-Actual successor assignments/workloads/index/transport/publication/run/GO are
-pending. The missing JSON/localization implementations are located; conditional
-source expectations do not establish native parsing or plugin activation. All
-eight native phases remain NOT_RUN, no native RunRoot and visible authority zero.
+The conditional Dispose source-order finding remains preserved. Pinned
+PowerShell7.6.5/.NET10.0.11 research found no demonstrated normally reachable
+throwing close for the untouched synchronous lock; no universal no-throw/unlock/process
+guarantee or wrapper patch on that antecedent alone follows. An `RD` alias
+collision temporarily deleted the ignored BODY013 frozen copy after all five
+jobs closed; canonical source was unchanged. Exact bytes were restored and the
+post-close rehash matched 2,344 unique inputs, zero conflicts. Continuous freeze
+is not claimed. This checkpoint changes documentation only; substantive v7.3
+method is unchanged. All eight native phases remain NOT_RUN, no native RunRoot
+and visible authority zero.
 Final independent CODE/different REQ and A1G/A2/HUD/Linux/package/acceptance gates
 remain open. Standing perpetual source/API consent persists until explicitly revoked.
 

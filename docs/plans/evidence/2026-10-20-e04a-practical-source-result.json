@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_PRACTICAL_SOURCE_CLOSURE_FACTS_NOT_ACCEPTANCE",
+  "recordedDateUtc": "2026-10-20",
+  "planRevision": 70,
+  "status": "PRACTICAL_SOURCE_CLOSED_TOOLCHAIN_REPAIR_REQUIRED",
+  "subject": {
+    "publicationHead": "da00e83df5cb1ff227e794d37edad433f676f368",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "technicalSourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+    "plannedRunId": "20261020T192245Z-8fa15b75"
+  },
+  "privateEvidenceDirectoryPattern": ".local/reviews/E04A1-source-review/practical-192245-<scopeId>/",
+  "reviews": [
+    {
+      "scopeId": "P_VALUE_FIXTURE",
+      "rawVerdict": "BLOCKED",
+      "toolPairs": 109,
+      "rawReportBytes": 14993,
+      "rawReportSha256": "A63E5E19E7E36CB6EB914DC69FA9E466234A47762F04D30438B885122858E5EA",
+      "rootClosedSealSha256": "C6962063F8667676912D838554D718617AFCC90F0501EC19B9510F7ECACBBCE6",
+      "disposition": "Material vendor BODY access gap; no source admission."
+    },
+    {
+      "scopeId": "I_FIXTURE_VALUE_RESULT",
+      "rawVerdict": "BLOCKED",
+      "toolPairs": 57,
+      "rawReportBytes": 6389,
+      "rawReportSha256": "6B9EEB7402E1E0B7595C6CF4E2DE0B77EA6D1EA07820A2CCD6C964AF264D0D72",
+      "rootClosedSealSha256": "0ABAA1FE4C65706A55DD90CAE472B6BF35CB78ADDF8F82E4D45118F34E0FD717",
+      "disposition": "Vendor BODY access gap and conditional lock-disposal finding preserved; no source admission."
+    },
+    {
+      "scopeId": "D_COMPILER_ABI",
+      "rawVerdict": "CHANGES_REQUESTED",
+      "toolPairs": 84,
+      "rawReportBytes": 7045,
+      "rawReportSha256": "2FB4D07820FD259299CFA69E3C8DD26F6070A3C3D08FE094C7637EB42C858A66",
+      "rootClosedSealSha256": "751CB6995BB415FBA9FC49046A80535C4F74750BF4F8D1EB95A0470D70C9B572",
+      "disposition": "D-ABI-01 confirmed; repair required, no source admission."
+    },
+    {
+      "scopeId": "W_RULES_WITNESS_A",
+      "rawVerdict": "PASS",
+      "toolPairs": 117,
+      "rawReportBytes": 6641,
+      "rawReportSha256": "C6CDB05BB0DA3E396D469056AD0F20C3B204BEBC8A29DFD4F066BE9C0CE57916",
+      "rootClosedSealSha256": "A5C0956B94E9498855314947158F06087C7CC78E267D2058F7775C2D82BD7868",
+      "disposition": "Raw PASS unchanged; not admitted and not transferable to repaired source."
+    },
+    {
+      "scopeId": "W_RULES_WITNESS_B",
+      "rawVerdict": "PASS",
+      "toolPairs": 109,
+      "rawReportBytes": 9319,
+      "rawReportSha256": "8C40653EEB50DF0CF699697F2B77FE9E52D85042C1708A820BC9EED6E53C7C4C",
+      "rootClosedSealSha256": "7CCC2ECC124040E89E27E393417737A4B13A57109067E1798FC16E715E71745B",
+      "disposition": "Raw PASS unchanged; not admitted and not transferable to repaired source."
+    }
+  ],
+  "reviewsClosed": 5,
+  "totalToolPairs": 476,
+  "reportsSealedBeforeFirstBodyRead": true,
+  "rawReportsRewritten": false,
+  "allReviewProcessesExitZeroAndCleanupConfirmed": true,
+  "rootSourceAdmissions": 0,
+  "toolchainRepair": {
+    "findingId": "D-ABI-01",
+    "confirmedSourceGap": "Configurable radlink/cl-filter alternatives are unfrozen and not refused.",
+    "actualAlternativeToolExecutionOrActiveConfiguration": "NOT_INFERRED",
+    "selectedFinalModuleTimeRejections": [
+      "Target.WindowsPlatform.bAllowRadLinker",
+      "Target.bPrintToolChainTimingInfo",
+      "Target.WindowsPlatform.bCompilerTrace"
+    ],
+    "implementationStatus": "PENDING",
+    "freshAffectedReviewsRequiredIncludingBothWholeWitnesses": true
+  },
+  "preparedFutureDefinitions": {
+    "count": 7,
+    "sharedIndexV3Created": false,
+    "goCreated": false,
+    "disposition": "SUPERSEDED_FOR_USE_AFTER_TECHNICAL_REPAIR"
+  },
+  "conditionalDisposeFinding": {
+    "sourceOrder": "Success/completion published at wrapper2093-2094 before RunLock.Dispose2097; Check-Previous2020-2028 accepts the marker.",
+    "pinnedPowerShell": "7.6.5",
+    "pinnedDotNet": "10.0.11",
+    "normalReachableThrowForUntouchedSynchronousLock": "NOT_DEMONSTRATED",
+    "universalNoThrowOrOsUnlockOrProcessGuarantee": false,
+    "rootDisposition": "No wrapper patch on this antecedent alone; preserve original conditional finding and research limits.",
+    "researchReport": {
+      "path": ".local/planning/E04/filestream-runlock-dispose-research-PROPOSED/research-report.OPERATOR_ONLY.md",
+      "bytes": 8075,
+      "sha256": "A1F2C35FCEFF5D491F0DE066E4D4A5788ED4BDF042D19997C26D2451A83AD4CB"
+    },
+    "researchSeal": {
+      "path": ".local/planning/E04/filestream-runlock-dispose-research-PROPOSED/stopped-research.seal.PROPOSED.json",
+      "bytes": 3556,
+      "sha256": "DBB2F25FE7C5C22CB10352C440729F437C756D3FB2E048A23E111BCD8CC42A26"
+    }
+  },
+  "frozenCopyIncident": {
+    "target": ".local/planning/E04/source-refresh-runs/da00e83-20261020T192245Z-8fa15b75-practical/bodies/canonical/scripts/migration/Invoke-E04AProfileProof.ps1",
+    "cause": "Descriptor helper RD resolved to rd/Remove-Item alias and deleted the ignored frozen copy.",
+    "canonicalSourceChanged": false,
+    "earliestEstablishedDeletionOpportunityAfterUtc": "2026-10-20T20:17:39Z",
+    "allFiveReviewProcessesClosedByUtc": "2026-10-20T20:17:10.138895Z",
+    "restoredAndVerifiedUtc": "2026-10-20T20:20:39.0379885Z",
+    "bytes": 209830,
+    "sha256": "FFE36D92F9CBFE1BA4609C2586FEEA0134260EFB6742A78E2CE09AFBAD3B8329",
+    "continuousImmutabilityClaimed": false,
+    "restorationReceipt": {
+      "path": ".local/planning/E04/practical-source-controls/frozen-wrapper-copy.exact-byte-restoration.original.json",
+      "bytes": 1761,
+      "sha256": "2260C81E7C8CE034E829835AFA6E7A472A141CF2E55B13532ABB0784B1071320"
+    }
+  },
+  "postCloseAfterRestorationRehash": {
+    "path": ".local/planning/E04/practical-source-controls/practical-source.postclose-input-rehash.original.json",
+    "bytes": 675,
+    "sha256": "6D7657CF3D211631212DE1CA1CB81466C13DC5DAD74D7809FAFA0F34F26226AF",
+    "uniqueInputs": 2344,
+    "mismatches": 0,
+    "descriptorConflicts": 0,
+    "retroactiveContinuityOrAdmission": false
+  },
+  "nativePhases": {
+    "Preflight": "NOT_RUN",
+    "SupervisorControls": "NOT_RUN",
+    "Configure": "NOT_RUN",
+    "DependencyBuild": "NOT_RUN",
+    "EditorBuild": "NOT_RUN",
+    "Discovery": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "nativeRunRoot": null,
+  "nativeAuthority": false,
+  "visibleAuthority": 0,
+  "substantiveV73MethodChanged": false,
+  "standingSourceApiConsent": "PERPETUAL_UNTIL_EXPLICITLY_REVOKED",
+  "openGates": ["fresh affected SOURCE", "final independent CODE", "different independent REQ", "A1G", "A2", "HUD", "Linux", "package", "broader acceptance"],
+  "historicalProfileResult": {
+    "path": "docs/plans/evidence/2026-10-19-e04a-profile-result.json",
+    "bytes": 2703,
+    "sha256": "F22C6077A10AC7497AB5ACAF263DE7C20047118CF560DA25882A1F4946DBE4F7",
+    "sourceDraftRewritten": false,
+    "currentStatusOverlay": "THIS_RECORD"
+  },
+  "checkpointScope": "Documentation and AGENTS only; no technical source change, build, native execution or review launch."
+}
