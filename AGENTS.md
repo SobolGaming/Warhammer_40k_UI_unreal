@@ -78,7 +78,20 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 77 (2026-10-21 UTC) is
+Current A1E status at plan revision 78 (2026-10-21 UTC) is
+**FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. The
+[closed focused review](docs/plans/research/2026-10-21-e04a-focused-source-f13-closure.md)
+records raw CHANGES_REQUESTED with declared complete coverage and one P2: F13
+expects Observed 2, while the pinned scanner source trace yields 3. This is not
+native execution. The 9e83408/run002433 review closed with 65 pairs/zero extraction
+anomalies; root verified both seals before its first full report read. No repair,
+SOURCE PASS/admission or native phase GO is recorded. Checkpoint/backup this closure,
+then repair/rebind and obtain fresh affected focused SOURCE. OWN17 stays deferred,
+never PASS; runtime checks fail-closed. Counts remain 43/33/50/eight, all native
+phases NOT_RUN/visible0; final CODE/different REQ/A1G/A2/plain-DEL/Linux/later gates
+remain open. Standing consent is unchanged.
+
+Historical A1E status at plan revision 77 (2026-10-21 UTC) is
 **ROUTINE_CONSUMERS_REPAIRED_FOCUSED_SOURCE_PENDING**. The
 [repair receipt](docs/plans/evidence/2026-10-21-e04a-routine-consumer-repairs.json)
 binds two routine wrapper consumers after closure checkpoint `e07c436` and its

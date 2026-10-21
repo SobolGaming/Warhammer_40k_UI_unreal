@@ -7,16 +7,19 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
-Revision 75 records applied null/response/environment repairs and 14 matching
-PS-only controls. Exact successor bindings and affected SOURCE remain pending;
-C#4/Rules86/whole18 and all eight native phases are NOT_RUN, visible count zero.
+The bounded E04-A1E proof is **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**.
+Revision 78 records the focused review's raw CHANGES_REQUESTED: F13 expects
+Observed 2 while the pinned scanner source trace yields 3. Repair and fresh
+affected SOURCE remain pending; no native phase GO or admission exists. Separate
+Rules86 offline controls matched 86/86; C#4/whole18/full SupervisorControls and all
+eight native phases remain NOT_RUN, visible count zero.
 
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision75 repair checkpoint](docs/plans/research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
-  for current source changes, bounded control evidence and open gates.
+- Use the [revision78 focused closure](docs/plans/research/2026-10-21-e04a-focused-source-f13-closure.md)
+  for current facts and open gates; the [Rules86 receipt](docs/plans/evidence/2026-10-20-e04a-rules-controls-result.json)
+  records the separate offline result. Revision75 repair history remains in the plan.
 - `../Warhammer_40k_UI_arcade` is the legacy client, also called `Warhammer_40k_UI`
   in the owner's request. It supplies behavior and configuration references.
 - `../Warhammer_40k_AI` is the reference-only authoritative core. This migration
