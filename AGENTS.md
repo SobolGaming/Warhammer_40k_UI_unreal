@@ -78,7 +78,26 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 92 (2026-10-21 UTC) is
+Current A1E status at plan revision 93 (2026-10-21 UTC) is
+**EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**. The
+[repair receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-test-declarations-repair.json)
+records only an explicit `<type_traits>` include, an exact noexcept function-pointer
+type assertion for `ParseDocument`, and the installed global
+`EAutomationTestFlags_ApplicationContextMask` with the same EngineFilter. The
+assertion now checks the public function declaration without constructing an
+argument; the production API was already noexcept and remains unchanged. Norm,
+wrapper, targets, parser implementation, suite bodies and 43/33/50/eight remain
+unchanged; no assert bypass, skipped case or new framework. The changed test file
+is 40127 bytes / SHA256 `F6417DE865F9C75B565D855036DA9A0FD4123505916D2966EC0F50273292B62E`.
+Source-only repair: compiler/native validation NOT_RUN, fresh affected SOURCE and
+all eight fresh phases NOT_RUN. Failed `91af1b9`/run `20261021T053636Z-2e62b3d2`
+stays closed with no approval transfer. Checkpoint/push/verify OWN18 exact repair
+backup, then fresh head/run/freeze/current bindings and affected focused SOURCE
+before ordered phases. OWN17/D-P2 stay deferred/unproven/fail-closed; final CODE/
+different REQ/A1E and later gates open, visible zero/Linux UNTESTED and perpetual
+private source/API review consent unchanged.
+
+Historical A1E status at plan revision 92 (2026-10-21 UTC) is
 **FOCUSED_SOURCE_PASSED_EDITOR_PROBE_COMPILE_FAILURE_CLOSED**. The
 [receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-compile-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-editor-probe-compile-closure.md)

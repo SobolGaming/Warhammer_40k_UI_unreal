@@ -12,6 +12,7 @@
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
+#include <type_traits>
 
 #if !WITH_EDITOR
 #error E04-A1E is an Editor module proof; the required A1G runtime caller is separate.
@@ -27,8 +28,8 @@
 namespace
 {
 using namespace Warhammer::E04A1;
-static_assert(noexcept(ParseDocument(TConstArrayView<uint8>{})), "Public boundary must be noexcept");
-constexpr EAutomationTestFlags Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::EngineFilter;
+static_assert(std::is_same_v<decltype(&ParseDocument), FParseResult (*)(TConstArrayView<uint8>, EFormat) noexcept>, "Public boundary must be noexcept");
+constexpr EAutomationTestFlags Flags = EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::EngineFilter;
 constexpr bool CallerExceptionsEnabled = true; // Enforced by compiler guards above.
 constexpr int32 CallerPlatformExceptionsDisabled = PLATFORM_EXCEPTIONS_DISABLED;
 

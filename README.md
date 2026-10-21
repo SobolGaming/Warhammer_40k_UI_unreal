@@ -7,7 +7,19 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_EDITOR_PROBE_COMPILE_FAILURE_CLOSED**
+The bounded E04-A1E proof is **EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**
+(revision 93). The [repair receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-test-declarations-repair.json)
+records an explicit `<type_traits>` include, an exact noexcept function-pointer
+assertion and the installed global all-context automation mask. This changes
+three test declarations/includes; production API/parser, norm/wrapper/targets,
+suite bodies and 43/33/50/eight remain unchanged. Compiler/native validation and
+fresh SOURCE/eight phases are NOT_RUN. The failed `91af1b9` run stays closed;
+no old approval transfers. Checkpoint/push/verify OWN18 repair backup, then fresh
+exact bindings/affected SOURCE before ordered phases. OWN17/D-P2 remain deferred/
+unproven/fail-closed, final/later gates open, visible zero/Linux UNTESTED and
+perpetual review consent unchanged.
+
+Historical revision 92 A1E status was **FOCUSED_SOURCE_PASSED_EDITOR_PROBE_COMPILE_FAILURE_CLOSED**
 (revision 92). The [receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-compile-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-editor-probe-compile-closure.md)
 record admitted SOURCE/four phase passes for `91af1b9`, then EditorBuild FAIL.

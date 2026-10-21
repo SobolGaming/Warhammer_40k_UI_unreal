@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_EDITOR_PROBE_TEST_DECLARATIONS_SOURCE_REPAIR",
+  "planningRevision": 93,
+  "status": "EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING",
+  "sourceAdoptedUtc": "2026-10-21T06:24:13.7074295Z",
+  "rootAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\editor-probe-compile-repair-PROPOSED\\root-test-source-adoption.original.json",
+    "bytes": 1197,
+    "sha256": "AF62F1E9C4572752E31F943525451A474B00406CCD8FEC5ED24823390CD602D7"
+  },
+  "closureCheckpoint": "c5f2933cec79d595d3dcb05ad1d0f6beb1e48b51",
+  "closureBackup": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\editor-probe-compile-closure-PROPOSED\\root-closure-remote-backup.original.json",
+      "bytes": 826,
+      "sha256": "6297748DD08AF971121D2C612F4B85C36CADA7B69906AA500316F9A36FF724F4"
+    },
+    "verifiedUtc": "2026-10-21T06:23:14.3399825Z",
+    "localCommit": "c5f2933cec79d595d3dcb05ad1d0f6beb1e48b51",
+    "remoteCommit": "c5f2933cec79d595d3dcb05ad1d0f6beb1e48b51",
+    "exactMatch": true
+  },
+  "closedFailureSource": "91af1b9bff52a510c3fd9508b48c9dae45f0005d",
+  "closedRunId": "20261021T053636Z-2e62b3d2",
+  "closedFailureReceipt": "docs/plans/evidence/2026-10-21-e04a-editor-probe-compile-result.json",
+  "change": {
+    "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/Tests/E04ProfileAbiTests.cpp",
+    "before": {
+      "bytes": 40054,
+      "sha256": "69CF7548DDF5061EA0D97318B9B7EF1B3F6BC5F947B774FD2A22F391008C5863"
+    },
+    "after": {
+      "bytes": 40127,
+      "sha256": "F6417DE865F9C75B565D855036DA9A0FD4123505916D2966EC0F50273292B62E"
+    },
+    "edits": [
+      "Add explicit #include <type_traits>.",
+      "Assert std::is_same_v<decltype(&ParseDocument), FParseResult (*)(TConstArrayView<uint8>, EFormat) noexcept>.",
+      "Use installed global EAutomationTestFlags_ApplicationContextMask with EAutomationTestFlags::EngineFilter."
+    ],
+    "fullInverseMatchesOriginal": true,
+    "allOtherBytesUnchanged": true,
+    "eightSuiteDeclarationsUnchanged": true,
+    "qualification": "Exact noexcept function-pointer declaration check avoids default argument construction. Existing production ParseDocument declaration/definition are already noexcept and remain unchanged. Same intended all-context/EngineFilter registration; no assertion/case bypass."
+  },
+  "sourceOnlyPreparationObservation": "An initial root shape guard expected a CRLF new include and stopped before writes. Root corrected the expected literal to the proposal exact LF; final canonical bytes match the reviewed proposal. No compiler/native result follows.",
+  "unchanged": [
+    "Functional norm and wrapper",
+    "Both target definitions and strict consumers",
+    "Production parser/API and fixtures",
+    "Suite bodies and 43/33/50/eight counts"
+  ],
+  "functionalCounts": {
+    "inputs": 43,
+    "generated": 33,
+    "attempts": 50,
+    "suites": 8
+  },
+  "compilerAndNativeValidation": "NOT_RUN_FOR_REPAIRED_CANDIDATE",
+  "freshAffectedSource": "NOT_RUN",
+  "freshPhases": [
+    {
+      "phase": "Preflight",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "SupervisorControls",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Configure",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "DependencyBuild",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "EditorBuild",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Discovery",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Native",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Audit",
+      "status": "NOT_RUN"
+    }
+  ],
+  "newHeadRunFreeze": "PENDING_REPAIR_CHECKPOINT_AND_FRESH_BINDINGS",
+  "closedAuthority": "CLOSED_DO_NOT_REUSE_NO_APPROVAL_TRANSFER",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleWindows": 0,
+  "linux": "NOT_RUN_UNTESTED",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "a1eAcceptance": "NOT_ESTABLISHED",
+  "standingPrivateSourceApiReviewConsent": "PERPETUAL_UNLESS_EXPLICITLY_REVOKED",
+  "next": "Checkpoint/push and verify OWN18 exact repair backup, derive fresh exact head/run/freeze/current bindings, obtain fresh affected focused SOURCE and then proceed through ordered phases under separate current authority.",
+  "publicationState": "FACTUAL_SOURCE_REPAIR_RECORDED",
+  "limits": [
+    "Three bounded test-source edits only; no new compiler/helper/native/review execution or acceptance.",
+    "Failure of the old assertion expression did not establish that the production noexcept API can throw.",
+    "No new assurance framework or relaxed operational guards; OWN17/D-P2 remain deferred/unproven/fail-closed and later gates stay open.",
+    "All closed run evidence and earlier historical dispositions remain unchanged."
+  ]
+}
