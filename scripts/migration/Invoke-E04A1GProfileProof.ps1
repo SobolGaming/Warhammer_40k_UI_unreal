@@ -1149,8 +1149,9 @@ function Get-A1GUbtActionLog($Process,$Before,[string]$Target) {
 }
 
 function Require-A1GBuildAction([string]$Text,[string]$Action,[string]$Leaf) {
-    # Narrow installed ActionLogger/VC status form; unsupported output refuses.
-    $pattern='(?m)^\s*\[[0-9]+/[0-9]+\]\s+'+[regex]::Escape($Action)+' \[x64\]\s+'+[regex]::Escape($Leaf)+'\s*\r?$'
+    # Narrow installed ActionLogger/VC status form, including native [NoUba].
+    # Other suffixes (cache/remote/timing/unknown) remain unsupported and refuse.
+    $pattern='(?m)^\s*\[[0-9]+/[0-9]+\]\s+'+[regex]::Escape($Action)+' \[x64\]\s+'+[regex]::Escape($Leaf)+'(?: \[NoUba\])?\s*\r?$'
     if(@([regex]::Matches($Text,$pattern)).Count -ne 1){throw 'A1G_UNIQUE_REAL_BUILD_ACTION_NOT_OBSERVED'}
 }
 
