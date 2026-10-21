@@ -72,11 +72,20 @@ configuration selection alone does not establish successful cleanup.
 Set `CMAKE_CXX_SCAN_FOR_MODULES=OFF` before creating the pinned yaml-cpp target
 and require the exact OFF cache value. The nonmodule static target retains
 C++20, real source compilation and ordinary MSVC header dependency tracking.
-Keep the existing dyndep refusal: surviving dynamic module-scan instructions
-remain a failed Configure. Reassess this selection if a future dependency pin
-introduces module sources or imports. The [CMake variable and target property](https://cmake.org/cmake/help/v3.31/variable/CMAKE_CXX_SCAN_FOR_MODULES.html)
-and [CMP0155](https://cmake.org/cmake/help/v3.31/policy/CMP0155.html) document this
-explicit selection; the exact installed primary files must be bound for review.
+Keep the existing dyndep-binding refusal. Only the exact generic declarations
+`CXX_DYNDEP__yaml-cpp_Release` and `CXX_COMPILER__yaml-cpp_scanned_Release` may
+be classified as unused metadata after exact shape and scan-OFF checks. Each
+name must have exactly one raw substring occurrence across ALL retained Ninja
+files, attributable to its exact raw declaration in the owner file. Any other
+occurrence (including comments/paths/longer identifiers), ambiguity, active use
+or unsupported metadata/response/dyndep form refuses. Retain/hash complete files
+and preserve all other script/drift guards; this is no general graph certificate.
+Reassess if a future pin introduces modules/imports. The [CMake variable/property](https://cmake.org/cmake/help/v3.31/variable/CMAKE_CXX_SCAN_FOR_MODULES.html)
+and [CMP0155](https://cmake.org/cmake/help/v3.31/policy/CMP0155.html) document OFF.
+Ninja's [literal rule-name read](https://github.com/ninja-build/ninja/blob/2daa09ba270b0a43e1929d29b073348aa985dfaa/src/manifest_parser.cc#L247-L253)
+and [identifier alphabet](https://github.com/ninja-build/ninja/blob/2daa09ba270b0a43e1929d29b073348aa985dfaa/src/lexer.in.cc#L134)
+support this conservative count. Bind actual installed and retained primaries for
+review; upstream source is not installed-binary provenance or parser certification.
 
 For the fixed synchronous CMake Configure and DependencyBuild command families,
 use an explicit successful-root cleanup mode. After observing the retained root's

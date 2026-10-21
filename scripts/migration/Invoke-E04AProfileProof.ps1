@@ -1682,6 +1682,43 @@ function Resolve-GeneratedBuildReference([string]$Token,[string]$Root) {
     }
     return $path
 }
+function Assert-UnusedCMakeScanMetadata($Block,$Blocks,[string[]]$NinjaFiles,[string]$Owner) {
+    if(@($Blocks|Where-Object {$_.name -ceq $Block.name}).Count -ne 1){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_CMAKE_SCAN_METADATA'}
+    $command=[string]$Block.properties.command
+    if($Block.name -ceq 'CXX_DYNDEP__yaml-cpp_Release'){
+        $expected='"'+$script:Freeze.toolPaths.cmake+'" -E cmake_ninja_dyndep --tdi=CMakeFiles\yaml-cpp.dir\CXXDependInfo.json --lang=CXX --modmapfmt=msvc --dd=$out @$out.rsp'
+        if($Block.properties.Count -ne 3 -or $command -cne $expected -or
+            $Block.properties.rspfile -cne '$out.rsp' -or $Block.properties.rspfile_content -cne '$in'){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_CMAKE_SCAN_METADATA'}
+    }elseif($Block.name -ceq 'CXX_COMPILER__yaml-cpp_scanned_Release'){
+        $ordinary=@($Blocks|Where-Object {$_.name -ceq 'CXX_COMPILER__yaml-cpp_unscanned_Release'})
+        $moduleMap=' @$DYNDEP_MODULE_MAP_FILE'
+        if($Block.properties.Count -ne 1 -or $ordinary.Count -ne 1 -or
+            $ordinary[0].properties.Count -ne 1 -or -not $ordinary[0].properties.ContainsKey('command') -or
+            $ordinary[0].properties.command.Contains('@') -or
+            [regex]::Matches($command,[regex]::Escape($moduleMap)).Count -ne 1 -or
+            $command.Replace($moduleMap,'') -cne $ordinary[0].properties.command){throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_CMAKE_SCAN_METADATA'}
+    }else{throw 'E04A1_GENERATED_INPUT_UNSUPPORTED_CMAKE_SCAN_METADATA'}
+    $cache=$script:Utf8.GetString([IO.File]::ReadAllBytes((Need-File (Join-Path (Build-Root) 'CMakeCache.txt'))));Safe-Text $cache
+    $scanEntries=[regex]::Matches($cache,'(?m)^CMAKE_CXX_SCAN_FOR_MODULES:[^=\r\n]+=([^\r\n]*)\r?$')
+    if($scanEntries.Count -ne 1 -or $scanEntries[0].Groups[1].Value -cne 'OFF'){throw 'E04A1_GENERATED_INPUT_CMAKE_SCAN_METADATA_REQUIRES_OFF'}
+    [long]$occurrences=0;$rawOwnerDeclaration=$false
+    foreach($ninja in @($NinjaFiles|Sort-Object -CaseSensitive)){
+        $path=Need-File $ninja
+        if(([IO.FileInfo]::new($path)).Length -gt 64MB){throw 'E04A1_GENERATED_INPUT_SIZE'}
+        $raw=$script:Utf8.GetString([IO.File]::ReadAllBytes($path));Safe-Text $raw
+        $occurrences += [regex]::Matches($raw,[regex]::Escape([string]$Block.name)).Count
+        if([string]::Equals($path,$Owner,[StringComparison]::OrdinalIgnoreCase)){
+            $rawOwnerDeclaration=[regex]::Matches($raw,('(?m)^rule '+[regex]::Escape([string]$Block.name)+'\r?$')).Count -eq 1
+        }
+    }
+    # Exactly one raw substring globally, demonstrably in this raw declaration.
+    # Comments, paths, longer identifiers and every other occurrence refuse.
+    if($occurrences -ne 1 -or -not $rawOwnerDeclaration){throw 'E04A1_GENERATED_INPUT_CMAKE_SCAN_RULE_NOT_LITERAL_UNUSED'}
+    $rsp=if($Block.properties.ContainsKey('rspfile')){$Block.properties.rspfile}else{''}
+    $content=if($Block.properties.ContainsKey('rspfile_content')){$Block.properties.rspfile_content}else{''}
+    return ($command+' | rspfile='+$rsp+' | rspfile_content='+$content)
+}
+
 function Get-GeneratedBuildInputInventory {
     $root=Build-Root
     $files=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -1747,6 +1784,11 @@ function Get-GeneratedBuildInputInventory {
         }
         if($rule){$blocks.Add(@{name=$rule;properties=$properties})}
         foreach($block in $blocks){
+            if($block.name -cin @('CXX_DYNDEP__yaml-cpp_Release','CXX_COMPILER__yaml-cpp_scanned_Release')){
+                $expression=Assert-UnusedCMakeScanMetadata $block @($blocks) @($files|Where-Object {[IO.Path]::GetExtension($_) -ieq '.ninja'}) $path
+                $references.Add([ordered]@{kind='unused-cmake-rule-metadata';owner=$path;target='';rule=$block.name;expression=$expression})
+                continue
+            }
             if(-not $block.properties.ContainsKey('command')){continue}
             foreach($m in [regex]::Matches($block.properties.command,'@("[^"]+"|[^\s"&|]+)')){
                 $arg=$m.Groups[1].Value.Trim('"')
@@ -1831,8 +1873,10 @@ function Read-ConfiguredBuildInputBaseline {
     foreach($reference in $manifest.references){
         Require-GeneratedBuildKeys $reference @('kind','owner','target','rule','expression')
         foreach($key in @('kind','owner','target','rule','expression')){if($reference[$key] -isnot [string]){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}}
-        if($reference.kind -cnotin @('include','subninja','cmake-P','ninja-produced-response')){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}
-        if(-not $reference.owner -or ($reference.kind -cne 'ninja-produced-response' -and -not $reference.target)){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}
+        if($reference.kind -cnotin @('include','subninja','cmake-P','ninja-produced-response','unused-cmake-rule-metadata')){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}
+        if(-not $reference.owner -or ($reference.kind -cnotin @('ninja-produced-response','unused-cmake-rule-metadata') -and -not $reference.target)){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}
+        if($reference.kind -ceq 'unused-cmake-rule-metadata' -and ($reference.target -cne '' -or
+            $reference.rule -cnotin @('CXX_DYNDEP__yaml-cpp_Release','CXX_COMPILER__yaml-cpp_scanned_Release') -or -not $reference.expression)){throw 'E04A1_GENERATED_INPUT_REFERENCE_TYPE'}
     }
     foreach($key in @('cache','compileCommands','ninja')){
         Assert-GeneratedBuildDescriptor $manifest.configureRoots[$key] -IdentityOnly;Assert-GeneratedBuildDescriptor $result.configure[$key] -IdentityOnly

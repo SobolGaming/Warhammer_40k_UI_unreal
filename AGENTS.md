@@ -78,7 +78,26 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 88 (2026-10-21 UTC) is
+Current A1E status at plan revision 89 (2026-10-21 UTC) is
+**UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**. The
+[repair receipt](docs/plans/evidence/2026-10-21-e04a-unused-module-rule-repair.json)
+records the adopted bounded classifier/new truthful `unused-cmake-rule-metadata`
+kind and its consumer, with the updated functional norm bound. Exact stanza
+shapes/cache OFF, one global raw literal per special name and one exact owner
+declaration are required; any other occurrence, including comments/paths/longer
+identifiers, refuses. Dyndep/response/script/byte/reference/preservation/budget
+guards and 43/33/50/eight remain unchanged. AST errors are zero; 99 old functions
+and all seven existing controls are byte-identical. No helper/control/native
+runs or fresh SOURCE PASS are claimed; all eight fresh phases are NOT_RUN.
+The `e293ea0` Configure failure and earlier runs stay closed/no approval transfer.
+Checkpoint/push/verify OWN18 backup, then fresh exact head/run/freeze/current
+bindings and affected SOURCE using corrected immutable Ninja five excerpts/60
+rows plus existing CMake 525 rows before ordered native work. Installed Ninja
+binary source provenance remains UNVERIFIED. OWN17/D-P2 remain deferred/unproven/
+fail-closed; final CODE/different REQ/A1E and later gates stay open, visible zero/
+Linux UNTESTED. Standing private source/API review consent is unchanged.
+
+Historical A1E status at plan revision 88 (2026-10-21 UTC) is
 **FOCUSED_SOURCE_PASSED_UNUSED_MODULE_RULE_CONFIGURE_FAILURE_CLOSED**. The
 [factual receipt](docs/plans/evidence/2026-10-21-e04a-unused-module-rule-configure-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-unused-module-rule-closure.md)
