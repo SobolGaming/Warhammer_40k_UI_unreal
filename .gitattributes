@@ -120,3 +120,7 @@ docs/plans/evidence/2026-10-21-e04a-game-source-adoption.json -text whitespace=c
 
 /docs/plans/evidence/2026-10-21-e04a-game-dependency-fact-source-repair.json -text whitespace=cr-at-eol
 /docs/plans/research/2026-10-21-e04a-game-dependency-fact-source-repair.md -text whitespace=cr-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-cook-intent-settings-failure.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-a00c142.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-a00c142.md -text whitespace=-blank-at-eol
