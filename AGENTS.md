@@ -78,7 +78,25 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 80 (2026-10-21 UTC) is
+Current A1E status at plan revision 81 (2026-10-21 UTC) is
+**CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. The
+[repair receipt](docs/plans/evidence/2026-10-21-e04a-cmake-probe-release-repair.json)
+records the narrow CMake option/cache expectation change after closure
+`3995baf` and verified OWN18 remote backup. The wrapper now selects
+`CMAKE_TRY_COMPILE_CONFIGURATION=Release` and requires that exact cache value;
+the functional norm requires actual Release ABI compilation/linking and bounded
+cleanup. PowerShell AST diagnostics are zero. This is source-only: no cleanup
+success, build/test result, fresh review or native execution is established.
+Parser, fixtures, vendor source, the public ABI, process-safety assertions and counts are
+unchanged. The failed `9972c75` run stays closed. Checkpoint/verify OWN18 backup,
+derive fresh exact head/run/freeze/input bindings and obtain fresh affected
+focused SOURCE before any new native phase; no prior approval transfers. All
+eight new phases are NOT_RUN, visible count is zero, and final CODE/different
+REQ/A1E acceptance and later gates remain open. OWN17 remains DEFERRED_UNPROVEN
+and assertions fail-closed. Standing private source/API review consent remains
+in force until explicitly revoked.
+
+Historical A1E status at plan revision 80 (2026-10-21 UTC) is
 **FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED**. The
 [factual receipt](docs/plans/evidence/2026-10-21-e04a-configure-timeout-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-configure-timeout-closure.md)

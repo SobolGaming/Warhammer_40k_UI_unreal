@@ -61,6 +61,14 @@ complete logs and outputs, output caps and 20 GiB free-space prerequisite.
 Record each exact phase GO before execution. No visible window, new Core host,
 engine/dependency installation, sibling edit or packaging run is included.
 
+Select `CMAKE_TRY_COMPILE_CONFIGURATION=Release` alongside the existing main
+Release build and require that exact cache value. Retain the real compiler ABI
+compile/link test. Inspect its complete CMake configure log, selected Release
+commands and actual exit/cleanup evidence. Do not force a compiler-work result,
+skip the ABI check or substitute a static-library-only probe to avoid linking.
+Existing compiler/CRT/exception/static-target choices and process bounds remain;
+configuration selection alone does not establish successful cleanup.
+
 Inspect the actual static dependency build and dedicated Editor compile/link
 results, tool/CRT/exception observations, eight discovered and successful native
 suites, input ledgers and retained input bytes. Independently reconcile the

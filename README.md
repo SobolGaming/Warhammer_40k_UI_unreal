@@ -7,7 +7,17 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED**
+The bounded E04-A1E proof is **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**
+(revision 81). The narrow repair selects and verifies CMake's Release
+try-compile configuration; the functional norm requires an actual Release ABI
+compile/link and bounded cleanup. AST diagnostics are zero, but no fresh review,
+build, native result or cleanup success is established. Checkpoint/verify the
+remote backup, then derive fresh bindings and obtain affected focused SOURCE
+before a fresh native sequence. All eight new phases are NOT_RUN; the prior
+Configure timeout stays closed. OWN17 remains deferred/unproven with assertions
+fail-closed; final reviews, A1E acceptance and broader gates remain open.
+
+Historical revision 80 status is **FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED**
 (revision 80). Focused SOURCE admitted `9972c75`; Preflight and SupervisorControls
 passed. Configure failed after 600.1306091 seconds: CMake exited 0, while its
 private job remained active until timeout cleanup. Cleanup is confirmed/final
@@ -29,9 +39,10 @@ visible count zero.
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision80 Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-configure-timeout-result.json)
+- Use the [revision81 CMake probe repair receipt](docs/plans/evidence/2026-10-21-e04a-cmake-probe-release-repair.json)
+  for current source changes and gates. The [revision80 Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-configure-timeout-result.json)
   and [closure](docs/plans/research/2026-10-21-e04a-configure-timeout-closure.md)
-  for current results and gates. The [revision79 F13 repair receipt](docs/plans/evidence/2026-10-21-e04a-f13-expectation-repair.json),
+  preserve the failed run. The [revision79 F13 repair receipt](docs/plans/evidence/2026-10-21-e04a-f13-expectation-repair.json),
   [revision78 focused closure](docs/plans/research/2026-10-21-e04a-focused-source-f13-closure.md)
   and separate [Rules86 receipt](docs/plans/evidence/2026-10-20-e04a-rules-controls-result.json)
   preserve their actual historical results.
