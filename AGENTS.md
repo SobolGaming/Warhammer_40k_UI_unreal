@@ -78,7 +78,24 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 84 (2026-10-21 UTC) is
+Current A1E status at plan revision 85 (2026-10-21 UTC) is
+**COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. The
+[repair receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-repair.json)
+records only the Check-CMake executable-token consumer change after closure
+`1c02b1f` and verified OWN18 backup. It accepts a leading quoted/unquoted token
+followed by whitespace and an argument, requires an absolute existing non-reparse
+file, expands its literal FullName, checks it again and compares the exact frozen compiler
+path. Required/forbidden flag and source checks are unchanged; the functional
+norm is unchanged. Consult the receipt for finite control results; no fresh
+SOURCE PASS, native/build or cleanup result is claimed. All eight fresh phases
+are NOT_RUN, 43/33/50/eight are unchanged and visible count is zero. Checkpoint/
+push/verify OWN18 backup, derive new exact head/run/freeze/current bindings and
+obtain fresh affected focused SOURCE before the ordered native sequence.
+No approval transfers from `ebd9ccf`. OWN17 remains DEFERRED_UNPROVEN/fail-closed;
+final CODE/different REQ/A1E acceptance and later gates stay open. Standing
+private source/API review consent remains in force until explicitly revoked.
+
+Historical A1E status at plan revision 84 (2026-10-21 UTC) is
 **FOCUSED_SOURCE_PASSED_COMPILER_ALIAS_CONFIGURE_FAILURE_CLOSED**. The
 [factual receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-configure-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-compiler-alias-closure.md)

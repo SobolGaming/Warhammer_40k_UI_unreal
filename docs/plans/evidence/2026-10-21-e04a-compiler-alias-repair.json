@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "SOURCE_ONLY_NARROW_COMPILER_ALIAS_CONSUMER_REPAIR_NOT_ACCEPTANCE",
+  "createdUtc": "2026-10-21T02:55:03.9837293Z",
+  "planRevision": 85,
+  "status": "COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING",
+  "closureCheckpoint": "1c02b1f28464f72d51c0a7a694285e0a4af19809",
+  "closureExactRemoteVerifiedUtc": "2026-10-21T02:51:18.3782139Z",
+  "closedSourceHead": "ebd9ccfe4b085902bc3830688ed3b51665d21be4",
+  "closedRun": "20261021T021806Z-c899d3a4",
+  "futureSourceHead": null,
+  "futureRunId": null,
+  "wrapperBefore": {
+    "bytes": 270794,
+    "sha256": "0187CD10C126678F93DF165F3D44BDAC514038A64012AF986DD3B5B456C9250A"
+  },
+  "wrapperAfter": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+    "bytes": 271077,
+    "sha256": "3B11C885FE2330AB81754A2FE2568A43C821AA8086E05DD357A8A5B25F289D88"
+  },
+  "change": "Only Check-CMake executable identity consumer: extract the complete leading quoted or unquoted executable token followed by whitespace and an argument; apply existing Need-File absolute/existing/non-directory/reparse checks; expand Get-Item LiteralPath FullName and recheck; compare exact frozen long compiler path. No PATH lookup, basename or arbitrary hash fallback.",
+  "unchanged": [
+    "Every required and forbidden compile-flag predicate and exact vendor source membership",
+    "CMake options and selected toolchain/CRT/exception modes",
+    "Real Release ABI compile/link and scoped successful-root private-job cleanup",
+    "Parser/public ABI/vendor source/fixtures and 43 inputs/33 generated recipes/50 attempts/eight suites",
+    "Current focused functional norm; OWN17 deferred/unproven and runtime assertions fail-closed"
+  ],
+  "norm": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-functional-proof-packet.md",
+    "bytes": 6735,
+    "sha256": "155E43DFEEF152F028CC192EA1DC003AED15476F9CAC2F14CDF5B45C4E244442"
+  },
+  "ordinaryConsumerControls": {
+    "status": "PASS",
+    "startedUtc": "2026-10-21T02:53:55.1131994Z",
+    "completedUtc": "2026-10-21T02:53:58.7765872Z",
+    "elapsedSeconds": 3.6633878,
+    "caseCount": 8,
+    "matchedCount": 8,
+    "astDiagnostics": 0,
+    "extractedActualPureFunctions": 12,
+    "cases": [
+      {
+        "name": "baseline-retained-30",
+        "status": "PASS",
+        "expectedError": null,
+        "actualError": null,
+        "readAdapterCalls": 0,
+        "positiveSourceAndFlagRowsMatched": 30,
+        "sourceCount": 30,
+        "observedCommandCount": 30
+      },
+      {
+        "name": "quoted-short-30",
+        "status": "PASS",
+        "expectedError": null,
+        "actualError": null,
+        "readAdapterCalls": 1,
+        "positiveSourceAndFlagRowsMatched": 30,
+        "sourceCount": 30,
+        "observedCommandCount": 30
+      },
+      {
+        "name": "quoted-long-30",
+        "status": "PASS",
+        "expectedError": null,
+        "actualError": null,
+        "readAdapterCalls": 1,
+        "positiveSourceAndFlagRowsMatched": 30,
+        "sourceCount": 30,
+        "observedCommandCount": 30
+      },
+      {
+        "name": "relative-compiler",
+        "status": "PASS",
+        "expectedError": "E02_PATH_NOT_ABSOLUTE",
+        "actualError": "E02_PATH_NOT_ABSOLUTE",
+        "readAdapterCalls": 1,
+        "positiveSourceAndFlagRowsMatched": 0,
+        "sourceCount": null,
+        "observedCommandCount": 0
+      },
+      {
+        "name": "wrong-existing-linker",
+        "status": "PASS",
+        "expectedError": "E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH",
+        "actualError": "E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH",
+        "readAdapterCalls": 1,
+        "positiveSourceAndFlagRowsMatched": 0,
+        "sourceCount": null,
+        "observedCommandCount": 0
+      },
+      {
+        "name": "malformed-quote",
+        "status": "PASS",
+        "expectedError": "E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH",
+        "actualError": "E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH",
+        "readAdapterCalls": 1,
+        "positiveSourceAndFlagRowsMatched": 0,
+        "sourceCount": null,
+        "observedCommandCount": 0
+      },
+      {
+        "name": "missing-delimiter",
+        "status": "PASS",
+        "expectedError": "E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH",
+        "actualError": "E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH",
+        "readAdapterCalls": 1,
+        "positiveSourceAndFlagRowsMatched": 0,
+        "sourceCount": null,
+        "observedCommandCount": 0
+      },
+      {
+        "name": "MDd-crt",
+        "status": "PASS",
+        "expectedError": "E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH",
+        "actualError": "E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH",
+        "readAdapterCalls": 1,
+        "positiveSourceAndFlagRowsMatched": 0,
+        "sourceCount": null,
+        "observedCommandCount": 0
+      }
+    ],
+    "retainedInputDescriptorsMatched": 8,
+    "wrapperBeforeAfterMatched": true,
+    "externalNativeBuildRoots": 0,
+    "phaseRetry": false,
+    "result": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\compiler-alias-repair-PROPOSED\\consumer-controls.result.rev1.json",
+      "bytes": 404617,
+      "sha256": "8FF46117E4E8C8CF618BA502EBDF8DC5CC8131A90CE178552254FD3441E4372E"
+    },
+    "script": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\compiler-alias-repair-PROPOSED\\consumer-controls.rev1.ps1",
+      "bytes": 10852,
+      "sha256": "78EE0415FB218B1A4E9F81CF215B25FC4D78CCFA13BBCFF650D87DE87E9930B4"
+    },
+    "originalUnexecutedScript": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\compiler-alias-repair-PROPOSED\\consumer-controls.original.ps1",
+      "bytes": 10859,
+      "sha256": "E2B4031C3C9101275DBA2EF32726B406B616409FA90B24D8DC599E732779F3BF"
+    },
+    "preExecutionDiagnosticSourceCorrection": "Original control script was not invoked: cmdlet metadata exposed unsupported Split-Path LiteralPath/Parent parameter combination. Preserved original; rev1 uses IO.Path.GetDirectoryName and a distinct result filename. No candidate change or control retry.",
+    "limits": [
+      "Only AST-extracted pure consumer functions execute; wrapper phase dispatch and embedded C# are not loaded or executed.",
+      "Closed run files are read-only diagnostic inputs. Old freeze supplies tools/dependency context; it does not freeze or approve the changed wrapper.",
+      "For variants only, Read-Json returns the exact in-memory command array at the exact retained compile_commands path; all other reads use the real extracted reader.",
+      "Positive variant reports retain the on-disk compileCommands descriptor emitted by the actual consumer; per-case commandRows/commandsSha256 describe the supplied in-memory data.",
+      "No native compilation, CMake/Ninja execution, process-supervisor test, source approval, phase PASS or milestone acceptance follows."
+    ]
+  },
+  "freshSource": "NOT_RUN_REQUIRED_BEFORE_NATIVE_GO",
+  "freshPhases": {
+    "Preflight": "NOT_RUN",
+    "SupervisorControls": "NOT_RUN",
+    "Configure": "NOT_RUN",
+    "DependencyBuild": "NOT_RUN",
+    "EditorBuild": "NOT_RUN",
+    "Discovery": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "oldConfigure": "FAILED_CLOSED_NO_RETROACTIVE_PASS_OR_AUTHORITY_TRANSFER",
+  "plannedFunctionalSet": {
+    "uniqueInputs": 43,
+    "generated": 33,
+    "attempts": 50,
+    "suites": 8,
+    "newParserSuitesRun": 0
+  },
+  "visibleWindows": 0,
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "acceptance": "NOT_ACCEPTED",
+  "next": "Checkpoint and verify exact OWN18 remote backup; derive fresh exact head/run/freeze/current input bindings, obtain fresh affected focused SOURCE, then separate exact phase GOs in existing order/bounds."
+}

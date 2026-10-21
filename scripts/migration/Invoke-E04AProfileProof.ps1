@@ -1626,8 +1626,13 @@ function Check-CMake {
     $actual=[Collections.Generic.List[string]]::new();$flags=[Collections.Generic.List[object]]::new()
     foreach($c in $commands){$file=Assert-Path $c.file;if($file -cin $actual){throw 'E04A1_DUPLICATE_VENDOR_COMPILE_COMMAND'};$actual.Add($file)
         if((Assert-Path $c.directory) -ine $root -or $c.command -isnot [string]){throw 'E04A1_VENDOR_COMMAND_SHAPE_OR_DIRECTORY'}
-        $cmd=[string]$c.command;Safe-Text $cmd;$compiler=CMake-Path $script:Freeze.toolPaths.compiler;$commandPathView=$cmd.Replace('\','/')
-        if(-not ($commandPathView.StartsWith(('"'+$compiler+'" '),[StringComparison]::OrdinalIgnoreCase) -or $commandPathView.StartsWith(($compiler+' '),[StringComparison]::OrdinalIgnoreCase)) -or $cmd -notmatch '(?i)(?:^|\s)[/-]MD(?:\s|$)' -or $cmd -match '(?i)(?:^|\s)[/-](?:MDd|MTd?)(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)[/-]std:c\+\+20(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)/EHsc(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)/GR-(?:\s|$)' -or $cmd -notmatch '(?:-D|/D)YAML_CPP_STATIC_DEFINE(?:=1)?(?:\s|$)'){throw 'E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH'}
+        $cmd=[string]$c.command;Safe-Text $cmd;$compiler=Need-File $script:Freeze.toolPaths.compiler
+        $leading=[regex]::Match($cmd,'\A(?:"(?<quoted>[^"\r\n]+)"|(?<plain>[^\s"]+))(?=[ \t]+\S)')
+        if(-not $leading.Success){throw 'E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH'}
+        $compilerToken=if($leading.Groups['quoted'].Success){$leading.Groups['quoted'].Value}else{$leading.Groups['plain'].Value}
+        $actualCompiler=Need-File $compilerToken
+        $actualCompiler=Need-File ((Get-Item -LiteralPath $actualCompiler -Force -ErrorAction Stop).FullName)
+        if($actualCompiler -ine $compiler -or $cmd -notmatch '(?i)(?:^|\s)[/-]MD(?:\s|$)' -or $cmd -match '(?i)(?:^|\s)[/-](?:MDd|MTd?)(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)[/-]std:c\+\+20(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)/EHsc(?:\s|$)' -or $cmd -notmatch '(?i)(?:^|\s)/GR-(?:\s|$)' -or $cmd -notmatch '(?:-D|/D)YAML_CPP_STATIC_DEFINE(?:=1)?(?:\s|$)'){throw 'E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH'}
         $flags.Add(@{file=$file;command=$cmd;observedRuntime='MD';observedStandard='C++20';observedExceptions='EHsc';observedRtti='GR-';staticDefineObserved=$true})
     }
     if(-not $expectedSources.Count -or (@($actual|Sort-Object -CaseSensitive)-join "`n") -cne ($expectedSources -join "`n")){throw 'E04A1_VENDOR_COMPILE_SOURCE_MEMBERSHIP_MISMATCH'}
