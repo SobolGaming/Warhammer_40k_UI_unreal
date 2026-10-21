@@ -23,6 +23,11 @@ public class YamlCpp : ModuleRules
     {
         Type = ModuleType.External;
         CppStandard = CppStandardVersion.Cpp20;
+        if (Target.Name == "WarhammerClientE04A1G")
+        {
+            ConfigureA1G(Target);
+            return;
+        }
         if (Required("E04A1_NATIVE_BOUNDARY_REQUIRED") != "1") Fail("REQUIRED_FLAG_INVALID");
         if (Target.Name != "WarhammerClientE04AEditor" || Target.Type != TargetType.Editor
             || Target.Configuration != UnrealTargetConfiguration.Development || Target.Architectures.bIsMultiArch
@@ -194,6 +199,252 @@ public class YamlCpp : ModuleRules
             PublicSystemIncludePaths.Add(includeRoot);
             PublicAdditionalLibraries.Add(libraryPath);
         }
+    }
+
+    // Bounded A1G-only constructor seam. No acquisition/build,
+    // Editor receipt relabel, Rules reflection or native authority occurs here.
+    private void ConfigureA1G(ReadOnlyTargetRules target)
+    {
+        if (Required("E04_A1G_NATIVE_BOUNDARY_REQUIRED") != "1") Fail("A1G_REQUIRED_FLAG_INVALID");
+        if (target.Name != "WarhammerClientE04A1G" || target.Type != TargetType.Game
+            || target.Platform != UnrealTargetPlatform.Win64
+            || target.Configuration != UnrealTargetConfiguration.Development
+            || target.Architectures.bIsMultiArch || !target.Architecture.bIsX64
+            || !OperatingSystem.IsWindows() || RuntimeInformation.ProcessArchitecture != Architecture.X64)
+            Fail("A1G_DEDICATED_WIN64_GAME_REQUIRED");
+        if (target.CppStandard != CppStandardVersion.Cpp20 || target.bUseStaticCRT
+            || target.bDebugBuildsActuallyUseDebugCRT) Fail("A1G_CPP20_DYNAMIC_RELEASE_CRT_REQUIRED");
+        if (target.bForceEnableExceptions || target.bCompileAgainstEditor
+            || !target.bBuildRequiresCookedData || target.LinkType != TargetLinkType.Monolithic
+            || target.BuildEnvironment != TargetBuildEnvironment.Shared || target.bOverrideBuildEnvironment)
+            Fail("A1G_NORMAL_INSTALLED_GAME_ENVIRONMENT_REQUIRED");
+        RejectUnsupportedNativeToolAlternatives(target);
+        foreach (System.Collections.DictionaryEntry entry in Environment.GetEnvironmentVariables())
+        {
+            string key = (string)entry.Key;
+            if (key.StartsWith("E04A1_", StringComparison.OrdinalIgnoreCase)
+                || key.StartsWith("E02_", StringComparison.OrdinalIgnoreCase))
+                Fail("A1G_EDITOR_OR_E02_ENVIRONMENT_MUST_BE_ABSENT");
+        }
+
+        lock (SelectionSync)
+        {
+            string runId = Required("E04_A1G_RUN_ID");
+            string sourceHead = Required("E04_A1G_SOURCE_HEAD");
+            if (!Regex.IsMatch(runId, "\\A[0-9]{8}T[0-9]{6}Z-[0-9a-f]{8}\\z")
+                || !Regex.IsMatch(sourceHead, "\\A[0-9a-f]{40}\\z")) Fail("A1G_RUN_OR_SOURCE_INVALID");
+            DirectoryInfo module = new DirectoryInfo(CheckedPath(ModuleDirectory, true));
+            DirectoryInfo thirdParty = Parent(module, "YamlCpp");
+            DirectoryInfo source = Parent(thirdParty, "ThirdParty");
+            DirectoryInfo plugin = Parent(source, "Source");
+            DirectoryInfo plugins = Parent(plugin, "E04ProfileProof");
+            DirectoryInfo project = Parent(plugins, "Plugins");
+            DirectoryInfo run = Parent(project, "project");
+            DirectoryInfo experiment = Parent(run, runId);
+            DirectoryInfo experiments = Parent(experiment, "E04A1G");
+            DirectoryInfo local = Parent(experiments, "experiments");
+            DirectoryInfo repository = Parent(local, ".local");
+            string sourceRoot = CheckedPath(repository.FullName, true);
+            string stagedProject = CheckedPath(Path.Combine(project.FullName, "WarhammerClient.uproject"), true);
+            string logs = CheckedPath(Path.Combine(run.FullName, "logs"), true);
+            string receiptPath = CheckedPath(Path.Combine(logs, "a1g-yaml-artifact-receipt.json"), true);
+            string selectionPath = CheckedPath(Path.Combine(logs, "a1g-yaml-module-selection.json"), false);
+            if (!Same(sourceRoot, CheckedPath(Required("E04_A1G_SOURCE_ROOT"), true))
+                || !Same(run.FullName, CheckedPath(Required("E04_A1G_RUN_ROOT"), true))
+                || !Same(stagedProject, CheckedPath(Required("E04_A1G_STAGED_PROJECT"), true))
+                || !Same(receiptPath, CheckedPath(Required("E04_A1G_ARTIFACT_RECEIPT"), true))
+                || target.ProjectFile == null || !Same(stagedProject, CheckedPath(target.ProjectFile.FullName, true)))
+                Fail("A1G_STAGED_ANCESTRY_OR_RECEIPT_MISMATCH");
+
+            FileStream receiptLock = Hold(receiptPath, null, HashInput("E04_A1G_ARTIFACT_RECEIPT_SHA256"));
+            using JsonDocument receipt = ReadJson(receiptLock);
+            JsonElement r = receipt.RootElement;
+            Identity(r, "E04_A1G_VENDOR_ARTIFACT_RECEIPT", runId, sourceHead, sourceRoot, stagedProject);
+            Eq(r, "status", "COPIED_FROM_SAME_RUN_BUILD_NOT_PHASE_ACCEPTANCE");
+            Eq(r, "vendorPin", Pin);
+            Eq(r, "specialAssuranceCertification", "DEFERRED_UNPROVEN_OWN17");
+            JsonElement abi = Get(r, "abi");
+            Eq(abi, "target", target.Name); Eq(abi, "targetType", "Game");
+            Eq(abi, "targetConfiguration", "Development"); Eq(abi, "vendorConfiguration", "Release");
+            Eq(abi, "platform", "Win64"); Eq(abi, "architecture", "x64");
+            Eq(abi, "cppStandard", "C++20"); Eq(abi, "runtime", "MD");
+            Eq(abi, "linkage", "static"); Eq(abi, "staticDefine", "YAML_CPP_STATIC_DEFINE");
+            if (!Boolean(abi, "vendorExceptionsEnabled")) Fail("A1G_VENDOR_EH_REQUIRED");
+            JsonElement requirements = Get(r, "consumerRequirements");
+            Eq(requirements, "parserExceptions", "EHsc"); Eq(requirements, "callerExceptions", "Disabled");
+            Eq(requirements, "publicBoundary", "UE_OWNED_SYNCHRONOUS_NOEXCEPT");
+
+            // The acquisition is immutable source data, with its original identity
+            // and E04A1 preparation path; it is neither an Editor nor Game artifact.
+            string preparationId = Text(r, "sourcePreparationId");
+            if (!Regex.IsMatch(preparationId, "\\A[0-9]{8}T[0-9]{6}Z-[a-z0-9]{8,32}\\z")) Fail("A1G_PREPARATION_ID_INVALID");
+            string acquiredOwner = CheckedPath(Path.Combine(sourceRoot, ".local", "dependencies", "E04A1", preparationId), true);
+            string acquiredSource = CheckedPath(Path.Combine(acquiredOwner, "yaml-cpp"), true);
+            string acquisitionPath = CheckedPath(Path.Combine(acquiredOwner, "acquisition-result.json"), true);
+            FileStream acquisitionLock = HoldDescriptor(Get(r, "acquisitionResult"), acquisitionPath);
+            using JsonDocument acquisition = ReadJson(acquisitionLock);
+            JsonElement a = acquisition.RootElement;
+            Eq(a, "status", "ACQUIRED_PIN_AND_BYTES_VERIFIED_NOT_BUILD_OR_SOURCE_APPROVAL");
+            Eq(a, "pin", Pin); Eq(a, "preparationId", preparationId);
+            Eq(a, "repository", "https://github.com/jbeder/yaml-cpp.git");
+            if (!Boolean(a, "allCheckoutBytesMatchPinnedBlobs") || Boolean(a, "dependencySourceExecuted")
+                || Boolean(a, "buildReleased")) Fail("A1G_ACQUISITION_SCOPE_INVALID");
+            string treeOid = Text(r, "sourceTreeOid");
+            if (!Regex.IsMatch(treeOid, "\\A[0-9a-f]{40}\\z")) Fail("A1G_SOURCE_TREE_INVALID");
+            JsonElement[] roots = Array(a, "trees").Where(e => Text(e, "path") == "").ToArray();
+            if (roots.Length != 1 || Text(roots[0], "treeOid") != treeOid) Fail("A1G_ACQUISITION_TREE_MISMATCH");
+
+            string artifactRoot = CheckedPath(Path.Combine(run.FullName, "vendor-artifact", "Win64", "Release", "x64"), true);
+            string includeRoot = CheckedPath(Path.Combine(artifactRoot, "include"), true);
+            string libraryPath = CheckedPath(Path.Combine(artifactRoot, "lib", "yaml-cpp.lib"), true);
+            PathEq(r, "artifactRoot", artifactRoot); PathEq(r, "includeRoot", includeRoot);
+            FileStream libraryLock = HoldDescriptor(Get(r, "library"), libraryPath);
+            if (libraryLock.Length <= 8 || libraryLock.Length > 67108864) Fail("A1G_STATIC_LIBRARY_SIZE_INVALID");
+            byte[] magic = new byte[8]; libraryLock.Position = 0; libraryLock.ReadExactly(magic); libraryLock.Position = 0;
+            if (System.Text.Encoding.ASCII.GetString(magic) != "!<arch>\n") Fail("A1G_STATIC_ARCHIVE_MAGIC_MISSING");
+            string libraryHash = StreamHash(libraryLock);
+
+            var sourceHeaders = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
+            foreach (JsonElement file in Array(a, "files"))
+            {
+                string relative = Text(file, "path");
+                if (relative.StartsWith("include/", StringComparison.Ordinal)
+                    && !sourceHeaders.TryAdd(SafeRelative(relative.Substring(8)), file)) Fail("A1G_DUPLICATE_SOURCE_HEADER");
+            }
+            if (sourceHeaders.Count == 0) Fail("A1G_SOURCE_HEADERS_ABSENT");
+            var headerPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (JsonElement header in Array(r, "headers"))
+            {
+                string relative = SafeRelative(Text(header, "relativePath"));
+                if (!headerPaths.Add(relative)) Fail("A1G_DUPLICATE_OR_COLLIDING_HEADER");
+                if (!sourceHeaders.TryGetValue(relative, out JsonElement original)) Fail("A1G_HEADER_MEMBERSHIP_MISMATCH");
+                long bytes = Integer(header, "bytes"); string hash = HashText(header, "sha256");
+                if (bytes != Integer(original, "bytes") || hash != HashText(original, "sha256")) Fail("A1G_HEADER_NOT_PINNED_BYTES");
+                Hold(Inside(acquiredSource, "include/" + relative), bytes, hash);
+                Hold(Inside(includeRoot, relative), bytes, hash);
+            }
+            if (headerPaths.Count != sourceHeaders.Count) Fail("A1G_HEADER_LIST_INCOMPLETE");
+            CheckMembership(CheckedPath(Path.Combine(acquiredSource, "include"), true), headerPaths);
+            CheckMembership(includeRoot, headerPaths);
+            FileStream sourceLicense = HoldDescriptor(Get(r, "sourceLicense"), CheckedPath(Path.Combine(acquiredSource, "LICENSE"), true));
+            FileStream license = HoldDescriptor(Get(r, "license"), CheckedPath(Path.Combine(artifactRoot, "LICENSE.yaml-cpp"), true));
+            if (sourceLicense.Length != 1061 || StreamHash(sourceLicense) != "AA6FCC27BE034E41E21DD832F9175BFE694A48491D9E14FF0FA278E19AD14F1B"
+                || license.Length != sourceLicense.Length || StreamHash(license) != StreamHash(sourceLicense)) Fail("A1G_MIT_NOTICE_COPY_MISMATCH");
+
+            JsonElement windows = Get(r, "windows");
+            ReadOnlyWindowsTargetRules w = target.WindowsPlatform;
+            if (w.Compiler != WindowsCompiler.VisualStudio2022 || w.ToolChain != WindowsCompiler.VisualStudio2022
+                || w.CompilerVersion != "14.44.35229" || w.ToolChainVersion != "14.44.35229"
+                || w.WindowsSdkVersion != "10.0.22621.0" || !w.Architecture.bIsX64) Fail("A1G_WINDOWS_VERSION_MISMATCH");
+            string compilerDir = CheckedPath(w.CompilerDir ?? throw new BuildException("E04_A1G_COMPILER_DIRECTORY_UNRESOLVED"), true);
+            string toolChainDir = CheckedPath(w.ToolChainDir ?? throw new BuildException("E04_A1G_TOOLCHAIN_DIRECTORY_UNRESOLVED"), true);
+            string sdkDir = CheckedPath(w.WindowsSdkDir ?? throw new BuildException("E04_A1G_SDK_DIRECTORY_UNRESOLVED"), true);
+            if (!Same(compilerDir, toolChainDir)) Fail("A1G_COMPILER_TOOLCHAIN_DIRECTORY_MISMATCH");
+            Eq(windows, "compilerName", w.Compiler.ToString()); Eq(windows, "compilerVersion", w.CompilerVersion!);
+            Eq(windows, "toolChainName", w.ToolChain.ToString()); Eq(windows, "toolChainVersion", w.ToolChainVersion!);
+            Eq(windows, "sdkVersion", w.WindowsSdkVersion!);
+            PathEq(windows, "compilerDir", compilerDir); PathEq(windows, "toolChainDir", toolChainDir); PathEq(windows, "sdkDir", sdkDir);
+            var selectedTools = new Dictionary<string, string>(StringComparer.Ordinal)
+            {
+                { "compiler", Path.Combine(compilerDir, "bin", "Hostx64", "x64", "cl.exe") },
+                { "linker", Path.Combine(toolChainDir, "bin", "Hostx64", "x64", "link.exe") },
+                { "librarian", Path.Combine(toolChainDir, "bin", "Hostx64", "x64", "lib.exe") },
+                { "resourceCompiler", Path.Combine(sdkDir, "bin", w.WindowsSdkVersion!, "x64", "rc.exe") }
+            };
+            JsonElement tools = Get(r, "tools");
+            foreach (var tool in selectedTools) HoldDescriptor(Get(tools, tool.Key), CheckedPath(tool.Value, true));
+            string cmakePath = CheckedPath(Text(Get(tools, "cmake"), "path"), true);
+            HoldDescriptor(Get(tools, "cmake"), cmakePath);
+            HoldDescriptor(Get(tools, "ninja"), CheckedPath(Text(Get(tools, "ninja"), "path"), true));
+
+            string buildRoot = CheckedPath(Path.Combine(run.FullName, "vendor-build", "Win64", "Release", "x64"), true);
+            string configureReceiptPath = CheckedPath(Path.Combine(logs, "a1g-vendor-cmake-configure.json"), true);
+            FileStream configureLock = HoldDescriptor(Get(r, "vendorConfigureReceipt"), configureReceiptPath);
+            using JsonDocument configure = ReadJson(configureLock);
+            JsonElement c = configure.RootElement;
+            Identity(c, "E04_A1G_VENDOR_CMAKE_CONFIGURE_RECEIPT", runId, sourceHead, sourceRoot, stagedProject);
+            Eq(c, "status", "CONFIGURE_ROOT_AND_CHECKS_PASSED"); Eq(c, "vendorPin", Pin); Eq(c, "sourceTreeOid", treeOid);
+            PathEq(c, "vendorSourceRoot", acquiredSource); PathEq(c, "buildRoot", buildRoot);
+            if (HashText(c, "acquisitionResultSha256") != StreamHash(acquisitionLock)) Fail("A1G_CONFIGURE_ACQUISITION_MISMATCH");
+            Eq(c, "configuration", "Release"); Eq(c, "tryCompileConfiguration", "Release");
+            Eq(c, "cxxScanForModules", "OFF");
+            Eq(c, "cppStandard", "C++20"); Eq(c, "runtime", "MD"); Eq(c, "exceptions", "EHsc"); Eq(c, "rtti", "GR-");
+            Eq(c, "abiProbe", "ACTUAL_RELEASE_COMPILE_AND_LINK_SUCCEEDED");
+            HoldDescriptor(Get(c, "cache"), CheckedPath(Path.Combine(buildRoot, "CMakeCache.txt"), true));
+            HoldDescriptor(Get(c, "compileCommands"), CheckedPath(Path.Combine(buildRoot, "compile_commands.json"), true));
+            HoldDescriptor(Get(c, "ninja"), CheckedPath(Path.Combine(buildRoot, "build.ninja"), true));
+            HoldDescriptor(Get(c, "abiEvidenceLog"), CheckedPath(Path.Combine(buildRoot, "CMakeFiles", "CMakeConfigureLog.yaml"), true));
+            RequireA1GCMakeRoot(Get(c, "process"),
+                CheckedPath(Path.Combine(run.FullName, "dependencyconfigure", "a1g-cmake-configure.process.json"), true), cmakePath, buildRoot);
+
+            string buildReceiptPath = CheckedPath(Path.Combine(logs, "a1g-vendor-cmake-build.json"), true);
+            FileStream buildLock = HoldDescriptor(Get(r, "vendorBuildReceipt"), buildReceiptPath);
+            using JsonDocument build = ReadJson(buildLock);
+            JsonElement b = build.RootElement;
+            Identity(b, "E04_A1G_VENDOR_CMAKE_BUILD_RECEIPT", runId, sourceHead, sourceRoot, stagedProject);
+            Eq(b, "status", "BUILD_ROOT_AND_ARTIFACT_CHECKS_PASSED"); Eq(b, "vendorPin", Pin); Eq(b, "sourceTreeOid", treeOid);
+            PathEq(b, "vendorSourceRoot", acquiredSource); PathEq(b, "buildRoot", buildRoot);
+            if (HashText(b, "acquisitionResultSha256") != StreamHash(acquisitionLock)) Fail("A1G_BUILD_ACQUISITION_MISMATCH");
+            Eq(b, "configuration", "Release"); Eq(b, "platform", "Win64"); Eq(b, "architecture", "x64");
+            Eq(b, "cppStandard", "C++20"); Eq(b, "runtime", "MD"); Eq(b, "linkage", "static");
+            Eq(b, "exceptions", "EHsc"); Eq(b, "rtti", "GR-");
+            if (!Boolean(b, "exceptionsEnabled") || Boolean(b, "installTargetInvoked")) Fail("A1G_VENDOR_BUILD_SCOPE_INVALID");
+            FileStream sameConfigure = HoldDescriptor(Get(b, "configureReceipt"), configureReceiptPath);
+            if (StreamHash(sameConfigure) != StreamHash(configureLock)) Fail("A1G_CONFIGURE_RECEIPT_MISMATCH");
+            FileStream builtLibrary = HoldDescriptor(Get(b, "library"), CheckedPath(Path.Combine(buildRoot, "yaml-cpp.lib"), true));
+            if (builtLibrary.Length != libraryLock.Length || StreamHash(builtLibrary) != libraryHash) Fail("A1G_LIBRARY_COPY_NOT_BUILD_BYTES");
+            FileStream buildCompiler = HoldDescriptor(Get(b, "compiler"), CheckedPath(selectedTools["compiler"], true));
+            if (buildCompiler.Length != Integer(Get(tools, "compiler"), "bytes")
+                || StreamHash(buildCompiler) != HashText(Get(tools, "compiler"), "sha256")) Fail("A1G_VENDOR_UBT_COMPILER_MISMATCH");
+            RequireA1GCMakeRoot(Get(b, "process"),
+                CheckedPath(Path.Combine(run.FullName, "dependencybuild", "a1g-cmake-build.process.json"), true), cmakePath, buildRoot);
+
+            byte[] selection = JsonSerializer.SerializeToUtf8Bytes(new
+            {
+                schemaVersion = 1, kind = "E04_A1G_YAML_MODULE_SELECTION", runId, sourceHead, sourceRoot, stagedProject,
+                vendorPin = Pin, sourcePreparationId = preparationId, sourceTreeOid = treeOid,
+                artifactReceipt = new { path = receiptPath, bytes = receiptLock.Length, sha256 = StreamHash(receiptLock) },
+                acquisitionResult = new { path = acquisitionPath, bytes = acquisitionLock.Length, sha256 = StreamHash(acquisitionLock) },
+                vendorConfigureReceipt = new { path = configureReceiptPath, bytes = configureLock.Length, sha256 = StreamHash(configureLock) },
+                vendorBuildReceipt = new { path = buildReceiptPath, bytes = buildLock.Length, sha256 = StreamHash(buildLock) },
+                target = target.Name, targetType = target.Type.ToString(), platform = target.Platform.ToString(),
+                targetConfiguration = target.Configuration.ToString(), vendorConfiguration = "Release", architecture = "x64",
+                cppStandard = "C++20", runtime = "MD", linkage = "static", includeRoot, libraryPath, librarySha256 = libraryHash,
+                headerCount = headerPaths.Count, selectedWindows = windows, selectedTools = tools,
+                targetGlobalExceptionsRequested = target.bForceEnableExceptions, targetCompilesAgainstEditor = target.bCompileAgainstEditor,
+                parserExceptionsRequirement = "EHsc", callerExceptionsRequirement = "Disabled", publicBoundaryRequirement = "UE_OWNED_SYNCHRONOUS_NOEXCEPT",
+                terminalCallerAndParserFlagsObserved = false, fileReadLocksHeldThroughUbtExit = true,
+                specialAssuranceCertification = "DEFERRED_UNPROVEN_OWN17",
+                scope = "ORDINARY_GAME_TARGET_AND_RECEIPT_FILE_SELECTION_NOT_NATIVE_FLAGS_RULES_OR_ARTIFACT_LINEAGE_CERTIFICATION"
+            });
+            WriteStable(selectionPath, selection);
+            PublicDefinitions.Add("YAML_CPP_STATIC_DEFINE");
+            PublicSystemIncludePaths.Add(includeRoot);
+            PublicAdditionalLibraries.Add(libraryPath);
+        }
+    }
+
+    // Ordinary retained owned-root receipt predicate, not descendant inventory,
+    // command-language interpretation, phase-completion or lineage certification.
+    private static FileStream RequireA1GCMakeRoot(JsonElement descriptor, string expectedPath, string cmakePath, string buildRoot)
+    {
+        FileStream held = HoldDescriptor(descriptor, expectedPath);
+        using JsonDocument json = ReadJson(held);
+        JsonElement p = json.RootElement;
+        if (Integer(p, "schemaVersion") != 1) Fail("A1G_PROCESS_SCHEMA_UNSUPPORTED");
+        PathEq(p, "executable", cmakePath); PathEq(p, "workingDirectory", buildRoot);
+        Eq(p, "status", "PASS"); Eq(p, "completionCleanupMode", "PostSuccessfulRootCleanup");
+        Eq(p, "syntheticFault", "");
+        if (Integer(p, "exitCode") != 0 || Integer(p, "postRootGraceSeconds") != 5
+            || !Boolean(p, "assignedBeforeResume") || !Boolean(p, "resumed")
+            || !Boolean(p, "exitConfirmed") || !Boolean(p, "cleanupConfirmed")
+            || Boolean(p, "timedOut") || Boolean(p, "technicalBlocked") || Boolean(p, "visibleWindowRequested")
+            || Get(p, "primaryFailure").ValueKind != JsonValueKind.Null || Array(p, "secondaryErrors").Length != 0)
+            Fail("A1G_CMAKE_ROOT_NOT_COMPLETE_SUCCESS");
+        JsonElement[] samples = Array(p, "jobAccounting");
+        if (samples.Length == 0 || !Boolean(samples[samples.Length - 1], "querySucceeded")
+            || Integer(samples[samples.Length - 1], "activeProcesses") != 0) Fail("A1G_CMAKE_JOB_NOT_EMPTY");
+        return held;
     }
 
     private static void RejectUnsupportedNativeToolAlternatives(ReadOnlyTargetRules target)

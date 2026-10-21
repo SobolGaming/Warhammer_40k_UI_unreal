@@ -65,3 +65,10 @@ docs/plans/research/2026-10-21-e04a-editor-final-requirements.md -text whitespac
 docs/plans/research/2026-10-21-e04a-editor-requirements-supplement.md -text whitespace=-blank-at-eol
 docs/plans/research/2026-10-21-e04a-editor-source-review.md -text whitespace=-blank-at-eol
 docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json -text whitespace=cr-at-eol
+# Game proof literals and the exact pinned supervisor source must not be normalized.
+scripts/migration/fixtures/e04a1g/A1G_BAD.utf8 -text
+scripts/migration/fixtures/e04a1g/A1G_GOOD.utf8 -text
+scripts/migration/E04A1GOwnedJobSupervisor.cs -text whitespace=cr-at-eol
+scripts/migration/Invoke-E04A1GProfileProof.ps1 -text whitespace=cr-at-eol
+docs/plans/research/2026-10-21-e04a-game-proof-packet.md text eol=lf
+docs/plans/evidence/2026-10-21-e04a-game-source-adoption.json -text whitespace=cr-at-eol

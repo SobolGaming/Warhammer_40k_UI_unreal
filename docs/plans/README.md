@@ -1,13 +1,15 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 95 (2026-10-21 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 96 (2026-10-21 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
+**A1G_SOURCE_ADOPTED_FRESH_BINDINGS_PENDING** (revision 96). The dedicated Game caller, Game-only vendor branch, Editor-only AutomationDriver dependency, nine-phase wrapper and qualified Native window observer are canonical source. Two inputs/two attempts/52 checks are planned, with no actual build/cook/stage/native result or SOURCE admission. The existing bounded A1E acceptance remains unchanged. [Game proof packet](research/2026-10-21-e04a-game-proof-packet.md) and [source adoption](evidence/2026-10-21-e04a-game-source-adoption.json). Checkpoint/verify OWN18 source backup, derive fresh exact head/run/freeze/tools/config/inputs/commands, then obtain one focused SOURCE assessment before any of the nine ordered phase GOs. All nine phases are NOT_RUN, no native RunRoot is allocated, visible authority is zero and Linux remains UNTESTED. Final CODE and different REQ follow actual closed execution; OWN17 remains deferred/unproven.
+
 Current A1E status at revision 95 is **BOUNDED_E04_A1E_ACCEPTANCE_RECORDED**.
 [Final review provenance](evidence/2026-10-21-e04a-editor-final-review-provenance.json); [CODE](research/2026-10-21-e04a-editor-final-code.md), [initial REQ](research/2026-10-21-e04a-editor-final-requirements.md), [limited supplement](research/2026-10-21-e04a-editor-requirements-supplement.md) and [focused SOURCE](research/2026-10-21-e04a-editor-source-review.md).
-CODE PASS plus the valid initial REQ technical findings and limited supplement PASS close only the Windows Editor subset. The initial raw BLOCKED verdict and ordering failure remain unchanged. Checkpoint this report/metadata overlay, push and verify OWN18 exact remote backup, then adopt the separately prepared bounded A1G Game-caller source and clean norm. Checkpoint/verify its backup, freeze fresh exact source/run/tool/config/input identities and obtain affected SOURCE before any exact phase GO. Existing execution is closed; A1G/A2/later gates stay open, no visible launch is authorized and Linux remains UNTESTED.
+CODE PASS plus the valid initial REQ technical findings and limited supplement PASS close only the Windows Editor subset. The initial raw BLOCKED verdict and ordering failure remain unchanged. Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G source work follows revision96 above; no old review or native authority transfers.
 
 Historical A1E status at revision 75 was **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
 The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)

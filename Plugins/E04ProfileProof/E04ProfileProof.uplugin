@@ -12,6 +12,7 @@
     "SupportedTargetPlatforms": ["Win64", "Linux"],
     "Modules": [
         {"Name": "E04ProfileParser", "Type": "Runtime", "LoadingPhase": "Default", "PlatformAllowList": ["Win64", "Linux"]},
-        {"Name": "E04ProfileProbe", "Type": "DeveloperTool", "LoadingPhase": "Default", "PlatformAllowList": ["Win64", "Linux"], "TargetAllowList": ["Editor"]}
+        {"Name": "E04ProfileProbe", "Type": "DeveloperTool", "LoadingPhase": "Default", "PlatformAllowList": ["Win64", "Linux"], "TargetAllowList": ["Editor"]},
+        {"Name": "E04ProfileGameProbe", "Type": "Runtime", "LoadingPhase": "Default", "PlatformAllowList": ["Win64"], "TargetAllowList": ["Game"], "TargetConfigurationAllowList": ["Development"]}
     ]
 }

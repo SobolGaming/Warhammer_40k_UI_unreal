@@ -29,7 +29,8 @@ public class WarhammerClient : ModuleRules
             "Json", "InputCore", "Slate", "SlateCore", "ProceduralMeshComponent", "RHI"
         });
 
-        bool bE02AutomationDriver = Target.bBuildDeveloperTools
+        bool bE02AutomationDriver = Target.Type == TargetType.Editor
+            && Target.bBuildDeveloperTools
             && Target.Configuration != UnrealTargetConfiguration.Shipping;
         PrivateDefinitions.Add("WITH_E02_AUTOMATION_DRIVER=" + (bE02AutomationDriver ? "1" : "0"));
         if (bE02AutomationDriver)

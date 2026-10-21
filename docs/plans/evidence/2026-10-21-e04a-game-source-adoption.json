@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "CANONICAL_GAME_PROOF_SOURCE_ADOPTION_NOT_BUILD_OR_REVIEW",
+  "createdUtc": "2026-10-21T09:04:20.6835258Z",
+  "status": "A1G_SOURCE_ADOPTED_FRESH_BINDINGS_PENDING",
+  "sourceAdoptionBase": "2651a8652915824fe339a958ca5afc1a835f5731",
+  "priorBoundedA1E": "BOUNDED_E04_A1E_ACCEPTANCE_RECORDED",
+  "sourceCompositionManifest": {
+    "path": ".local/planning/E04/A1G-bounded-packet-PROPOSED/canonical-source-composition-PROPOSED/source-composition.manifest.PROPOSED.json",
+    "bytes": 22319,
+    "sha256": "51C42D5596576458FE0BBF986AA465A1896B65D3C0CD287F7BA0AB46C27C7D4C"
+  },
+  "sourceApplyCompletion": {
+    "path": ".local/planning/E04/A1G-bounded-packet-PROPOSED/canonical-source-composition-PROPOSED/apply-records/20261021T090034Z-7af9c307/source-adoption-completion.original.json",
+    "bytes": 5587,
+    "sha256": "A2C93643C5DD55D26F7B4F471C0280D8C6EE7B0AF1F787CD73BB4DB3B0F841F6"
+  },
+  "files": [
+    {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "bytes": 171414,
+      "sha256": "8F3100A7FE89D9FB14CE2B5BC4568A4E4213A18E1A054D39CA5D7A31A895CBC1"
+    },
+    {
+      "path": "scripts/migration/E04A1GOwnedJobSupervisor.cs",
+      "bytes": 41523,
+      "sha256": "F4BF73355ECCEB727DBE23E60FB21B61A29C424776F7C7938EA946F18826E32C"
+    },
+    {
+      "path": "Source/WarhammerClientE04A1G.Target.cs",
+      "bytes": 1178,
+      "sha256": "2E156BCA977EB23ED89B78A33DCE063F0D1739B07537F3A9CC263DB4EFC53B8F"
+    },
+    {
+      "path": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+      "bytes": 20592,
+      "sha256": "0B127BA256912A4B388EB476A3429BAB3663D0C4F0467F76DDD4F64A925F22D4"
+    },
+    {
+      "path": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/E04ProfileGameProbe.Build.cs",
+      "bytes": 5033,
+      "sha256": "702DD3A3054AC9748CC883A98FE0AEA7FFA0F2210FC6A36075E3D3B4EF436871"
+    },
+    {
+      "path": "Plugins/E04ProfileProof/E04ProfileProof.uplugin",
+      "bytes": 943,
+      "sha256": "172D21D80FDC4148CFCADDF92FADD8465A14A038CD273298DED16C8166E29981"
+    },
+    {
+      "path": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "bytes": 79334,
+      "sha256": "7B611A3AB16535F94FC2F3D6EF7EF4E30DD14C26373EB5ACDE094F368086505E"
+    },
+    {
+      "path": "Source/WarhammerClient/WarhammerClient.Build.cs",
+      "bytes": 14895,
+      "sha256": "E222CB7E2B2E2843802C41580AEE8897122BB65E4E258C12386F584613A6449B"
+    },
+    {
+      "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "bytes": 13467,
+      "sha256": "7CA646443C752D33D53A1F906F6F3DCA605EB8E1FF200E2FDA1D677C9B3F7108"
+    },
+    {
+      "path": "scripts/migration/fixtures/e04a1g/DefaultEngine.ini",
+      "bytes": 375,
+      "sha256": "15E5F0F761C9DD6EFE929062426257904197222AB4A0183BEABC82D24B620A25"
+    },
+    {
+      "path": "scripts/migration/fixtures/e04a1g/DefaultGame.ini",
+      "bytes": 177,
+      "sha256": "2B2C97EB1213E0562811A0AAB3B02263D9CD155DFBC774E2C3D5F70FF5568226"
+    },
+    {
+      "path": "scripts/migration/fixtures/e04a1g/A1G_BAD.utf8",
+      "bytes": 17,
+      "sha256": "CA15BE3A44E31C173E9697942EA8AE1F1988C902954AB10E74EAFE9F4E98B93C"
+    },
+    {
+      "path": "scripts/migration/fixtures/e04a1g/A1G_GOOD.utf8",
+      "bytes": 19,
+      "sha256": "F522FFF3CCDADCDA1FB8001D2B86727D39E43DB96A2D2D5A7C4CE7A2D0AD095B"
+    }
+  ],
+  "rootNormAmendment": "Add one bounded2700s fresh focused SOURCE prerequisite with actual runtime/closure/seal limits; no native GO.",
+  "changes": [
+    "Dedicated normal Shared/monolithic Game target and Runtime/Default Win64 Development caller, exact noexcept signature/disabled-exception guards.",
+    "Game-only fresh vendor receipt branch; existing Editor constructor statements/assertions retained. Add explicit Game configure-receipt cxxScanForModules OFF check.",
+    "Main module selects AutomationDriver only for Editor; this changes Game test dependencies and preserves Editor selection.",
+    "Nine-phase wrapper, exact owned-job supervisor with Native-only qualified window sampling, owned startup templates and BAD17/GOOD19 data.",
+    "Stage uses template Config mappings; canonical product Config is not edited."
+  ],
+  "checks": {
+    "powerShellAstErrors": 0,
+    "wrapperFunctions": 107,
+    "pluginJsonParsed": true,
+    "badGoodExactBytes": true,
+    "independentSource": "NOT_RUN",
+    "csharpOrCppCompilation": "NOT_RUN",
+    "controlsNativeCookStage": "NOT_RUN"
+  },
+  "plannedPhases": [
+    "Preflight",
+    "DependencyConfigure",
+    "DependencyBuild",
+    "EditorPrerequisiteBuild",
+    "GameBuild",
+    "Cook",
+    "Stage",
+    "Native",
+    "Audit"
+  ],
+  "plannedBudgetsSeconds": [
+    300,
+    600,
+    1200,
+    1800,
+    1800,
+    1800,
+    600,
+    600,
+    300
+  ],
+  "plannedRoots": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+  ],
+  "plannedInputs": 2,
+  "plannedAttempts": 2,
+  "plannedOrderedChecks": 52,
+  "runId": "UNBOUND",
+  "freeze": "NOT_CREATED",
+  "sourceAdmission": "NOT_ESTABLISHED",
+  "allPhases": "NOT_RUN",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "limits": [
+    "Source adoption/AST parsing is not successful compilation, functional execution, source review or acceptance.",
+    "All fresh source/run/tool/config/input/norm/command bindings, checkpoint/verified backup and affected SOURCE are required before exact phase GOs.",
+    "Native window samples are noncontinuous/current-desktop/owned-PID observations; build/cook hidden flags do not establish observer coverage.",
+    "Exact BAD/GOOD/supervisor bytes use explicit Git attributes; other text follows normal repository EOL policy. No binary art or generated runtime output is committed.",
+    "Ordinary installed Game readiness, actual compiler flags/cook/stage/log formats/DDC/startup/exit and selected sizes/budgets remain untested.",
+    "A1G/A2, production YAML/profile/HUD/input/rendering/Core play, Linux and distribution remain open."
+  ]
+}

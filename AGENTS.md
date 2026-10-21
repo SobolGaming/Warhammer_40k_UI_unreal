@@ -78,6 +78,16 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
+Current A1G status at plan revision 96 is **A1G_SOURCE_ADOPTED_FRESH_BINDINGS_PENDING**.
+The [Game packet](docs/plans/research/2026-10-21-e04a-game-proof-packet.md) and
+[source adoption](docs/plans/evidence/2026-10-21-e04a-game-source-adoption.json) bind
+canonical source only: two planned inputs/attempts and 52 checks, nine phases,
+no compiler/native result, no new RunId/freeze/SOURCE admission. The Game-only
+vendor branch retains the old Editor path; main AutomationDriver selection is
+Editor-only. Product Config stays unchanged; owned startup uses separate templates.
+Native-only window samples retain their noncontinuous scope. Bounded A1E acceptance
+and all old failures/limits remain unchanged. Checkpoint/verify OWN18 source backup, derive fresh exact head/run/freeze/tools/config/inputs/commands, then obtain one focused SOURCE assessment before any of the nine ordered phase GOs. All nine phases are NOT_RUN, no native RunRoot is allocated, visible authority is zero and Linux remains UNTESTED. Final CODE and different REQ follow actual closed execution; OWN17 remains deferred/unproven.
+
 Current A1E status at plan revision 95 (2026-10-21 UTC) is
 **BOUNDED_E04_A1E_ACCEPTANCE_RECORDED**.
 Bounded E04-A1E acceptance is recorded for reviewed `3bfd22d0018dbda285a3db4184c8509dbc3783f1`
@@ -99,7 +109,7 @@ rendering/Core play, Linux execution and distribution remain open. Standing priv
 source/API review consent continues until explicitly revoked. This publication is
 a metadata/report overlay, outside the exact head assessed by the reports.
 See [final review provenance](docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json).
-Checkpoint this report/metadata overlay, push and verify OWN18 exact remote backup, then adopt the separately prepared bounded A1G Game-caller source and clean norm. Checkpoint/verify its backup, freeze fresh exact source/run/tool/config/input identities and obtain affected SOURCE before any exact phase GO. Existing execution is closed; A1G/A2/later gates stay open, no visible launch is authorized and Linux remains UNTESTED.
+Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G source work follows revision96 above; no old review or native authority transfers.
 
 Historical A1E status at plan revision 94 (2026-10-21 UTC) is
 **EIGHT_PHASES_PASSED_FINAL_REVIEWS_PENDING**. The
