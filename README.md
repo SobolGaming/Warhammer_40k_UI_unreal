@@ -7,7 +7,22 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **SHARED_EDITOR_PLUGIN_DEFAULT_REPAIRED_SOURCE_PENDING**
+The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_EDITOR_PROBE_COMPILE_FAILURE_CLOSED**
+(revision 92). The [receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-compile-result.json)
+and [closure](docs/plans/research/2026-10-21-e04a-editor-probe-compile-closure.md)
+record admitted SOURCE/four phase passes for `91af1b9`, then EditorBuild FAIL.
+The shared-setting refusal cleared and parser/client DLLs linked; probe test C++
+failed at the noexcept assertion and unavailable `ApplicationContextMask` flag,
+with eight dependent macro errors. UBT exited 6; cleanup confirmed/no timeout,
+final aggregate 57/0. Probe DLL absent, no plugin load/parser attempts;
+Discovery/Native/Audit NOT_RUN and 43/33/50/eight planned. Raw Rules retention is
+complete; post-success validation was not reached. Authority is closed.
+Checkpoint/push/verify OWN18 backup before a narrow test assertion/automation-flag declaration repair (not
+adopted here), then fresh bindings/affected SOURCE and ordered phases. OWN17/D-P2
+stay deferred/unproven/fail-closed; final/later gates open, visible zero/Linux
+UNTESTED and perpetual review consent unchanged.
+
+Historical revision 91 A1E status was **SHARED_EDITOR_PLUGIN_DEFAULT_REPAIRED_SOURCE_PENDING**
 (revision 91). The [repair receipt](docs/plans/evidence/2026-10-21-e04a-shared-editor-plugin-default-repair.json)
 records one removed forced plugin-support assignment; normal installed Shared,
 explicit plugin enablement, wrapper/norm/tests and strict consumers remain.

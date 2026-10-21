@@ -78,7 +78,27 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 91 (2026-10-21 UTC) is
+Current A1E status at plan revision 92 (2026-10-21 UTC) is
+**FOCUSED_SOURCE_PASSED_EDITOR_PROBE_COMPILE_FAILURE_CLOSED**. The
+[receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-compile-result.json)
+and [closure](docs/plans/research/2026-10-21-e04a-editor-probe-compile-closure.md)
+record focused SOURCE/root admission and four phases PASS for `91af1b9` / run
+`20261021T053636Z-2e62b3d2`. The shared target-setting refusal is cleared;
+ParserModule/EventReader compiled and parser/client DLLs linked. EditorBuild
+still failed in 102.1898243 seconds: UBT exit 6 (`OtherCompilationError`) from
+probe test line 30's noexcept assertion and line 31's unavailable
+`ApplicationContextMask`, followed by eight dependent C2131 macro errors.
+Exit/cleanup are confirmed, no timeout, final aggregate 57/0. Probe DLL did not
+link; no plugin load or native parser attempt occurred. Eight raw Rules roles
+are retained COMPLETE, including a witness; post-success Rules/flags validation
+was not reached. Discovery/Native/Audit are NOT_RUN; 43/33/50/eight remain planned,
+visible zero/Linux UNTESTED. All authority is closed/no approval transfer.
+Checkpoint/push/verify OWN18 exact backup before a narrow test assertion/automation-flag declaration repair
+(not adopted here), then fresh bindings/affected SOURCE and ordered phases.
+OWN17/D-P2 remain deferred/unproven/fail-closed; final CODE/different REQ/A1E and
+later gates stay open. Perpetual private source/API review consent is unchanged.
+
+Historical A1E status at plan revision 91 (2026-10-21 UTC) is
 **SHARED_EDITOR_PLUGIN_DEFAULT_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](docs/plans/evidence/2026-10-21-e04a-shared-editor-plugin-default-repair.json)
 records removal of only `bCompileWithPluginSupport = true;` after exact closure
