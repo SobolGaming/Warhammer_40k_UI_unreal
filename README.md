@@ -7,7 +7,22 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**
+The bounded E04-A1E proof is **EIGHT_PHASES_PASSED_FINAL_REVIEWS_PENDING**
+(revision 94). The [execution receipt](docs/plans/evidence/2026-10-21-e04a-editor-native-execution.json)
+records all eight phases PASS for `0bbbf884` / `20261021T062742Z-6f13b8a2`:
+eight UE successes, zero warnings/failures, 43 IDs, 33 generated definitions,
+50 attempts, 58 native files and 1745 evaluated custom checks. The UE assertion
+total remains unestablished. This is the Windows exception-enabled Editor subset;
+all execution authority is closed/no retry. The pre-allocation restricted-host
+refusal, separate normal-desktop GO, metadata-only inspection correction and
+SOURCE seal-ordering gap are retained; strict pre-read ordering was not fully met.
+Final CODE/different REQ are NOT_RUN and E04-A1E acceptance is pending.
+Checkpoint/push/verify OWN18 results, freeze final evidence/source correspondence,
+then obtain those independent reviews. OWN17/D-P2 remain deferred/unproven/
+fail-closed; A1G/A2/later gates stay open, visible zero/Linux UNTESTED and
+perpetual private source/API consent unchanged.
+
+Historical revision 93 A1E status was **EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**
 (revision 93). The [repair receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-test-declarations-repair.json)
 records an explicit `<type_traits>` include, an exact noexcept function-pointer
 assertion and the installed global all-context automation mask. This changes

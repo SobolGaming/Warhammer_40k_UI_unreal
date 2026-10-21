@@ -78,7 +78,28 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 93 (2026-10-21 UTC) is
+Current A1E status at plan revision 94 (2026-10-21 UTC) is
+**EIGHT_PHASES_PASSED_FINAL_REVIEWS_PENDING**. The
+[execution receipt](docs/plans/evidence/2026-10-21-e04a-editor-native-execution.json)
+records all eight phases PASS for `0bbbf884` / run
+`20261021T062742Z-6f13b8a2`, now closed with no retry authority. Eight UE suites
+succeeded with zero warnings/failures: 43 IDs, 33 generated definitions, 50 attempts,
+58 native files and 1745 evaluated custom checks. The UE assertion total is not
+established. Nine settings roles, 33 canonical files, 33 staged files and 56
+fixtures were preserved. This proves the Windows exception-enabled Editor subset.
+SOURCE passed and root admitted it with a retained seal-ordering gap: 358 raw/extraction
+members were rehashed before the first report read and 15 operator members after;
+all 373 matched, but strict ordering was not fully met and remains for REQ review.
+The first restricted host's exit 1 context refusal occurred before run allocation;
+its GO stays closed. A new explicit normal-desktop GO used the same unused run.
+A metadata-only inspector's slash-comparison failure was corrected against existing
+results; no native retry occurred. Final CODE and different REQ are NOT_RUN;
+E04-A1E acceptance remains pending. Checkpoint/push/verify OWN18 results, then freeze
+final evidence/source correspondence and obtain those independent final reviews.
+OWN17/D-P2 stay deferred/unproven/fail-closed; A1G/A2/later gates remain open,
+visible zero/Linux UNTESTED and perpetual private source/API consent unchanged.
+
+Historical A1E status at plan revision 93 (2026-10-21 UTC) is
 **EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-test-declarations-repair.json)
 records only an explicit `<type_traits>` include, an exact noexcept function-pointer
