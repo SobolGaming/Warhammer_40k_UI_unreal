@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_ADOPTED_E04_A1G_AUDIT_DDC_RETENTION_SOURCE_REPAIR",
+  "status": "AUDIT_DDC_RETENTION_REPAIRED_TRACE_SCOPE_DECISION_PENDING",
+  "adoptedUtc": "2026-10-21T16:53:12.3812443Z",
+  "failureCheckpoint": "2c99fc3288f846593613e899e177ba86f9ee3537",
+  "verifiedFailureBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-c187d34-final-review-failure-root-20261021\\root-final-review-failure-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "230CF2A0A2DA65143FD9C74362E201CAF9F33163CA9307EE0D9E1015B16D0840"
+  },
+  "source": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+  "function": "Complete-A1GAuditPhase",
+  "before": {
+    "bytes": 184764,
+    "sha256": "48E1983B5B7911B859E1B1EC387ACB5801A1CD1BFD356D65DF9C6AA0548DA384"
+  },
+  "after": {
+    "bytes": 184777,
+    "sha256": "6F9F7E97180125890F5FD44CC04E394987FBA538F23C8E5D4581A70C8E7DF133"
+  },
+  "change": "Retain ddc=$log.ddc in the Audit object immediately after log=$log.log",
+  "insertedBytes": 13,
+  "literalOccurrences": 1,
+  "wholeInverseMatches": true,
+  "astErrors": 0,
+  "functions": 113,
+  "beforeCrCount": 169,
+  "afterCrCount": 169,
+  "validatorChanged": false,
+  "normChanged": false,
+  "oldResultsChanged": false,
+  "validation": "Source-only exact-byte inverse and PowerShell AST; no behavior test claimed",
+  "freshSourceReview": "NOT_RUN",
+  "freshNinePhases": "NOT_RUN",
+  "newRunId": "UNBOUND",
+  "newBindings": "NOT_CREATED",
+  "traceScopeException": "UNADOPTED_OWNER_DECISION_PENDING",
+  "acceptance": false,
+  "nativeExecution": false,
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "specialAssurance": "DEFERRED_UNPROVEN_OWN17",
+  "next": "Checkpoint/push/exact-gh-verify this repaired source before new bindings; resolve finite trace-output scope before combined affected SOURCE and fresh separately authorized ordered phases."
+}
