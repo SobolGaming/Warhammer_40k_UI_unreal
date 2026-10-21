@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_FAILED_E04A1E_EXECUTION_CLOSED_NOT_ACCEPTED",
+  "createdUtc": "2026-10-21T01:34:11.1549083Z",
+  "status": "FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED",
+  "planRevision": 80,
+  "sourceHead": "9972c75dcc14b75437abd7b17a886ca0ba0461d2",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "runId": "20261021T005502Z-ef7254a5",
+  "publicationCommit": null,
+  "publicationQualification": "This factual/documentation checkpoint follows execution on9972c75; it is not a reviewed or executed later publication head.",
+  "sourceReview": {
+    "report": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\focused-9972c75-005502-E04_COMPONENT_SOURCE\\last-message.txt",
+      "bytes": 12159,
+      "sha256": "F56268AC065F9DAC3A9DB1D618AB03D60BB1834EAB39C8AB1752CD455045E9C8"
+    },
+    "rootAdmitted": true,
+    "uniqueTurnIds": 1,
+    "toolPairs": 81,
+    "actualRuntime": "READ_ONLY_APPROVAL_NEVER",
+    "memoryMode": "disabled",
+    "sourceOnly": true,
+    "scope": "E04_COMPONENT_SOURCE",
+    "admission": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\focused-9972c75-005502-E04_COMPONENT_SOURCE\\root-focused-source-admission.original.json",
+      "bytes": 2881,
+      "sha256": "19A20FBE7F00D0D96706653A05C65EFFC53FA49918DB5D957B1091732B460D97"
+    },
+    "extractionAnomalies": 0,
+    "rawVerdict": "PASS",
+    "actualReasoning": "ultra",
+    "actualModel": "gpt-6.1-sol",
+    "assessmentKind": "BLIND_JOINED_SOURCE_INITIAL",
+    "identicalTurnContextObservations": 2,
+    "lowerMemoryFeatureOsIsolation": "UNVERIFIED"
+  },
+  "phases": {
+    "EditorBuild": "NOT_RUN",
+    "Audit": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "DependencyBuild": "NOT_RUN",
+    "SupervisorControls": {
+      "buildBoundaryControls": 18,
+      "elapsedSeconds": 46.9326087,
+      "cleanupAll6": true,
+      "expectedObjSrcMapRefusal": "RulesError8 E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED",
+      "executionPassed": true,
+      "supervisorCases": 6,
+      "generatedInputControls": 7,
+      "roots": 6
+    },
+    "Configure": {
+      "timedOut": true,
+      "producerFixturesAfterCount": 0,
+      "status": "FAIL_PRESERVATION_OR_OUTPUT_VALIDATION",
+      "rootExitWhileMembersActive": true,
+      "rootCreationUtc": "2026-10-21T01:23:03.3908587Z",
+      "roots": 1,
+      "executionPassed": false,
+      "producerRetainedArtifactCount": 0,
+      "phaseBudgetSeconds": 600,
+      "completionMarkerPresent": false,
+      "producerSourceAfterCount": 0,
+      "primaryFailure": {
+        "stage": "Configure",
+        "type": "System.Management.Automation.RuntimeException",
+        "message": "E04A1_ROOT_FAILED_OR_CLEANUP_UNVERIFIED"
+      },
+      "rootPrimaryFailure": {
+        "stage": "owned-root",
+        "type": "System.TimeoutException",
+        "message": "Owned execution exceeded its reserved running budget",
+        "win32Error": null,
+        "syntheticFault": false,
+        "observedUtc": "2026-10-21T01:32:30.4570756Z"
+      },
+      "finalAccounting": {
+        "stage": "progress",
+        "observedUtc": "2026-10-21T01:32:30.4567194Z",
+        "querySucceeded": true,
+        "totalProcesses": 29,
+        "activeProcesses": 0,
+        "totalTerminatedProcesses": 0,
+        "totalUserTime100ns": 8125000,
+        "totalKernelTime100ns": 8593750,
+        "thisPeriodUserTime100ns": 8125000,
+        "thisPeriodKernelTime100ns": 8593750,
+        "totalPageFaultCount": 146179
+      },
+      "producerSettingsAfterCount": 9,
+      "exitConfirmed": true,
+      "rootExitUtc": "2026-10-21T01:23:05.3665301Z",
+      "cleanupConfirmed": true,
+      "secondaryErrors": [
+        {
+          "stage": "post-phase-preservation",
+          "type": "System.Management.Automation.RuntimeException",
+          "message": "E04A1_PHASE_DEADLINE_EXCEEDED"
+        },
+        {
+          "stage": "generated-input-failed-phase-retention",
+          "type": "System.Management.Automation.RuntimeException",
+          "message": "E04A1_PHASE_DEADLINE_EXCEEDED"
+        }
+      ],
+      "shutdownRequests": [
+        {
+          "operation": "TerminateJobObject",
+          "succeeded": true,
+          "observedUtc": "2026-10-21T01:32:30.4263099Z"
+        }
+      ],
+      "producerStageAfterCount": 0,
+      "rootBudgetSeconds": 572,
+      "rootPid": 44512,
+      "elapsedSeconds": 600.1306091,
+      "rootExitCode": 0
+    },
+    "Preflight": {
+      "elapsedSeconds": 29.0109635,
+      "executionPassed": true,
+      "roots": 0,
+      "materializedInputs": 43
+    },
+    "Discovery": "NOT_RUN"
+  },
+  "diagnostic": {
+    "classification": "Normal toolchain configuration/process-bound failure. No assertion bypass or special-assurance PASS.",
+    "observedPdbServer": {
+      "parentPid": 45712,
+      "pid": 43356,
+      "creationUtc": "2026-10-21T01:23:04.5175110Z"
+    },
+    "causalityLimit": "Consistent with a lingering MSVC debug service; direct per-child job membership and complete descendant identity were not observed.",
+    "observedAbi": "Real ABI compile/link exited0, but defaultDebug compile has -Zi /FS and link /debug /INCREMENTAL while main build isRelease.",
+    "prospectiveRepair": "Select CMAKE_TRY_COMPILE_CONFIGURATION=Release and require exact cache value; preserve real ABI compile/link and ordinary process checks. Not applied at this closure."
+  },
+  "separatePostCloseObservation": {
+    "present": 4,
+    "canonicalDescriptorsMatched": 33,
+    "absent": 5,
+    "retainedRunFiles": 388,
+    "qualification": "Later finite root observations only. Producer preservation and failed retention remain failed; no retrospective phase PASS or universal/continuous preservation claim.",
+    "settingsMatched": 9,
+    "fixtureDescriptorsMatched": 56,
+    "stagedDescriptorsMatched": 33
+  },
+  "plannedFunctionalSet": {
+    "generated": 33,
+    "attempts": 50,
+    "suites": 8,
+    "actualParserSuitesRun": 0,
+    "uniqueInputs": 43
+  },
+  "actualGuiWindows": 0,
+  "allRunAuthority": "CLOSED_DO_NOT_REUSE",
+  "acceptance": "NOT_ACCEPTED",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "assertions": "RETAINED_FAIL_CLOSED",
+  "remaining": [
+    "Fresh repair checkpoint/remote backup/new bindings/focused SOURCE/native sequence",
+    "Final independent CODE and different REQ after actual completed execution",
+    "A1G exception-disabled runtime caller",
+    "A2 and727 compatibility scenarios",
+    "Full YAML/null/property/plain-DEL/profile/HUD/input/render fidelity",
+    "Linux builds/tests/packages UNTESTED",
+    "Real Core playable client"
+  ],
+  "artifacts": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\preflight\\completion.json",
+      "bytes": 876,
+      "sha256": "DFC2CD0D5EAB676B39B9ACC3F1EB77A856A43E06F0350CF90239F53288769957"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\preflight\\result.json",
+      "bytes": 96892,
+      "sha256": "061D2296ED5AA775FD8069325F8167E36A81F0537084DB9B866D5793CAD75809"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\supervisorcontrols\\completion.json",
+      "bytes": 928,
+      "sha256": "A04E98926AADF489AB13804CC2E79C7945B23624AAAC59E65BEEC15A81737AA5"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\supervisorcontrols\\result.json",
+      "bytes": 310944,
+      "sha256": "6832905AC411022793FAE3155F531703C385E12F239FA22C6E8B3755D40FAAB3"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\configure\\result.json",
+      "bytes": 8732495,
+      "sha256": "4CAF628C495360528429AB4058F3284457E8B23188222D78399CD9A4193DD598"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\configure\\configure.process.json",
+      "bytes": 7736978,
+      "sha256": "7417C89D942270A733DB522BC799DDF482FE9B099A38CEA77E99DD442A984710"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\logs\\configure.stdout.log",
+      "bytes": 578,
+      "sha256": "406A2212D4F7BE6D4C6FFE213A3CE82F56930C8114EE57157FDEE68D10B870B5"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\logs\\configure.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\vendor-build\\Win64\\Development\\x64\\CMakeCache.txt",
+      "bytes": 18834,
+      "sha256": "8AB91627F0CD19676551C4C50DB1817EBCBD70C33A59D493935F7D7299AAE96C"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\vendor-build\\Win64\\Development\\x64\\CMakeFiles\\CMakeConfigureLog.yaml",
+      "bytes": 8310,
+      "sha256": "064896690D763842CD7A49B3BBEBF0BE4BB87A9FC0B728C5D2AD3D9618C9F219"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T005502Z-ef7254a5\\vendor-build\\Win64\\Development\\x64\\compile_commands.json",
+      "bytes": 33898,
+      "sha256": "983D2AEBE08B0AAEFD5901BFBE78E0EBD70BB05C6B9DFE3F575386D23E5DDC31"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-9972c75\\root-Configure-post-close-preservation.original.json",
+      "bytes": 3568,
+      "sha256": "58D6B76DFFBB697901CA5D7CE2B01FF9ACEE727BB5D921AD94985C29B8ECA00D"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-9972c75\\root-closed-run-file-inventory.original.json",
+      "bytes": 125501,
+      "sha256": "CFCD71CA956FC14A1F482443E731ED467C2F391A28BBF0EAFFEDAF0F12570D82"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-9972c75\\root-Preflight-result-inspection.original.json",
+      "bytes": 1120,
+      "sha256": "2FFA3F8CB07960AC35D0D407E55CC0014A3FB74D748BDA94A19A9A1AF9BC44F6"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-9972c75\\root-SupervisorControls-result-inspection.original.json",
+      "bytes": 1351,
+      "sha256": "C586E46A394690349AAACBD0D349D128987F8EB1DE4FD0F41D85478F8BCA8A6D"
+    }
+  ]
+}

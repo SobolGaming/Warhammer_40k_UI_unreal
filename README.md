@@ -7,7 +7,18 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**.
+The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED**
+(revision 80). Focused SOURCE admitted `9972c75`; Preflight and SupervisorControls
+passed. Configure failed after 600.1306091 seconds: CMake exited 0, while its
+private job remained active until timeout cleanup. Cleanup is confirmed/final
+active count 0; producer post-phase preservation and failed-input retention exceeded
+their deadline. The run is closed; five later phases and all native parser suites
+are NOT_RUN. No final review or A1E acceptance is recorded, visible count is zero,
+and OWN17 special assurance stays deferred/unproven with assertions fail-closed.
+Checkpoint/verify the remote backup before a narrow CMake probe Release-option/
+cache review; no repair has been applied.
+
+Historical revision 79 status is **F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**.
 Revision 79 corrects F13's native/manifest expected Observed count to 3 while
 retaining F11=2 and all input bytes, 43 inputs/33 recipes/50 attempts/eight suites. Fresh exact bindings and
 affected focused SOURCE remain required before native phase GO; no admission or
@@ -18,8 +29,10 @@ visible count zero.
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision79 F13 repair receipt](docs/plans/evidence/2026-10-21-e04a-f13-expectation-repair.json)
-  for current changes and gates. The [revision78 focused closure](docs/plans/research/2026-10-21-e04a-focused-source-f13-closure.md)
+- Use the [revision80 Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-configure-timeout-result.json)
+  and [closure](docs/plans/research/2026-10-21-e04a-configure-timeout-closure.md)
+  for current results and gates. The [revision79 F13 repair receipt](docs/plans/evidence/2026-10-21-e04a-f13-expectation-repair.json),
+  [revision78 focused closure](docs/plans/research/2026-10-21-e04a-focused-source-f13-closure.md)
   and separate [Rules86 receipt](docs/plans/evidence/2026-10-20-e04a-rules-controls-result.json)
   preserve their actual historical results.
 - `../Warhammer_40k_UI_arcade` is the legacy client, also called `Warhammer_40k_UI`

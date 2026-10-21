@@ -78,7 +78,31 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 79 (2026-10-21 UTC) is
+Current A1E status at plan revision 80 (2026-10-21 UTC) is
+**FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED**. The
+[factual receipt](docs/plans/evidence/2026-10-21-e04a-configure-timeout-result.json)
+and [closure](docs/plans/research/2026-10-21-e04a-configure-timeout-closure.md)
+preserve focused SOURCE PASS/root admission for `9972c75` and run
+`20261021T005502Z-ef7254a5`. Preflight passed in 29.0109635 seconds with zero
+roots; SupervisorControls passed in 46.9326087 seconds with six roots, six cases,
+seven generated-preparation controls and 18 boundary controls, including the
+expected ObjSrcMap RulesError/exit 8 refusal. Configure failed after 600.1306091
+seconds: CMake exited 0, but the private job remained active until timeout cleanup.
+Exit/cleanup were confirmed and final active count was zero; post-phase
+preservation and failed-input retention exceeded their deadline. Separate
+post-close checks matched nine settings roles, 33 canonical sources, 33 staged
+sources and 56 fixture descriptors; they do not pass producer preservation or
+establish continuous process membership. This is not a Configure PASS or proof
+of the lingering member's identity/cause. The run is
+closed; DependencyBuild, EditorBuild, Discovery, Native and Audit are NOT_RUN,
+native parser suites executed zero, and 43/33/50/eight remain planned. No final
+CODE/different REQ, A1E acceptance or visible launch follows. OWN17 stays
+DEFERRED_UNPROVEN and assertions fail-closed. Checkpoint this closure and verify
+OWN18 remote backup before a narrow CMake probe Release-option/cache review;
+no repair is applied. Fresh exact bindings and affected SOURCE must precede a
+fresh native sequence. A1G/A2/plain-DEL/Linux and broader gates remain open.
+
+Historical A1E status at plan revision 79 (2026-10-21 UTC) is
 **F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**. The
 [F13 expectation receipt](docs/plans/evidence/2026-10-21-e04a-f13-expectation-repair.json)
 records only native/manifest F13 Observed 2-to-3, retaining F11=2, after closure
