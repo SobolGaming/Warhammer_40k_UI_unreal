@@ -7,7 +7,19 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **SCOPED_CMAKE_JOB_CLEANUP_REPAIRED_SOURCE_PENDING**
+The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_COMPILER_ALIAS_CONFIGURE_FAILURE_CLOSED**
+(revision 84). Focused SOURCE admitted `ebd9ccf`; Preflight/SupervisorControls
+passed. Configure failed in 37.1059373 seconds on compiler-token validation:
+all 30 generated commands use DOS 8.3 aliases of the frozen compiler, with the
+required flags present and forbidden flags absent. CMake/real Release ABI
+compile/link and scoped same-job cleanup succeeded without timeout; Configure
+remains FAIL. The run is closed, five later phases/native parser suites are
+NOT_RUN, visible count is zero and no final review/A1E acceptance follows.
+Checkpoint/verify remote backup before the proposed narrow absolute compiler
+token canonicalization fix; no alias repair is applied. OWN17 stays
+deferred/unproven/fail-closed and broader gates remain open.
+
+Historical revision 83 status is **SCOPED_CMAKE_JOB_CLEANUP_REPAIRED_SOURCE_PENDING**
 (revision 83). The source-only repair under review scopes a five-second
 success-root cleanup mode to fixed CMake Configure/DependencyBuild roots and
 SUP01. Other roots retain NaturalDrain; timeout priority, fail-closed checks,
@@ -61,8 +73,10 @@ visible count zero.
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision83 scoped cleanup repair receipt](docs/plans/evidence/2026-10-21-e04a-owned-job-cleanup-repair.json)
-  for current source changes and gates. The [revision82 Release Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-release-configure-timeout-result.json)
+- Use the [revision84 compiler-alias result](docs/plans/evidence/2026-10-21-e04a-compiler-alias-configure-result.json)
+  and [closure](docs/plans/research/2026-10-21-e04a-compiler-alias-closure.md)
+  for current results and gates. The [revision83 scoped cleanup repair receipt](docs/plans/evidence/2026-10-21-e04a-owned-job-cleanup-repair.json)
+  records the prior change; the [revision82 Release Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-release-configure-timeout-result.json)
   and [closure](docs/plans/research/2026-10-21-e04a-release-configure-timeout-closure.md)
   preserve the later failed run. The [revision81 CMake probe repair receipt](docs/plans/evidence/2026-10-21-e04a-cmake-probe-release-repair.json)
   records the prior change; the [revision80 Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-configure-timeout-result.json)

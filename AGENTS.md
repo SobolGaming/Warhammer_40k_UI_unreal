@@ -78,7 +78,29 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 83 (2026-10-21 UTC) is
+Current A1E status at plan revision 84 (2026-10-21 UTC) is
+**FOCUSED_SOURCE_PASSED_COMPILER_ALIAS_CONFIGURE_FAILURE_CLOSED**. The
+[factual receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-configure-result.json)
+and [closure](docs/plans/research/2026-10-21-e04a-compiler-alias-closure.md)
+preserve focused SOURCE PASS/root admission for `ebd9ccf` and run
+`20261021T021806Z-c899d3a4`: 74 pairs/zero extraction anomalies. Preflight passed
+in 28.5084403 seconds and SupervisorControls in 49.2291709 seconds. Configure
+failed after 37.1059373 seconds with
+`E04A1_VENDOR_ACTUAL_COMPILE_FLAGS_MISMATCH` and zero secondary errors. CMake
+and the real Release ABI compile/link exited 0; scoped five-second same-job
+cleanup succeeded without timeout, final 22 total processes/active count 0.
+All 30 generated compiler tokens use DOS 8.3 aliases of the frozen `cl.exe`;
+required flags are present and forbidden flags absent. This validates the
+cleanup repair, not Configure. The run is closed; five later phases/native
+parser suites are NOT_RUN and 43/33/50/eight remain planned. No alias repair,
+final CODE/different REQ or A1E acceptance follows; visible count is zero.
+Checkpoint this closure and verify OWN18 exact remote backup before a minimal
+absolute executable-token filesystem canonicalization/exact pinned-path fix.
+Fresh head/run/freeze/input bindings and affected focused SOURCE precede any
+new native phase. OWN17 remains DEFERRED_UNPROVEN/fail-closed; broader gates
+and standing private source/API review consent remain unchanged.
+
+Historical A1E status at plan revision 83 (2026-10-21 UTC) is
 **SCOPED_CMAKE_JOB_CLEANUP_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](docs/plans/evidence/2026-10-21-e04a-owned-job-cleanup-repair.json)
 records the source-only cleanup repair under review after closure `7814ba7`
