@@ -263,6 +263,21 @@ public class YamlCpp : ModuleRules
             Eq(r, "status", "COPIED_FROM_SAME_RUN_BUILD_NOT_PHASE_ACCEPTANCE");
             Eq(r, "vendorPin", Pin);
             Eq(r, "specialAssuranceCertification", "DEFERRED_UNPROVEN_OWN17");
+            // Explicit current wrapper-selected freeze, independent of claims
+            // inside vendor/phase files. Scope is this finite Game dependency pair.
+            string freezePath = CheckedPath(Required("E04_A1G_FREEZE_MANIFEST"), true);
+            FileStream freezeLock = Hold(freezePath, null, HashInput("E04_A1G_FREEZE_MANIFEST_SHA256"));
+            using JsonDocument freezeJson = ReadJson(freezeLock);
+            JsonElement frozen = freezeJson.RootElement;
+            if (Integer(frozen, "schemaVersion") != 1) Fail("A1G_FREEZE_SCHEMA_UNSUPPORTED");
+            Eq(frozen, "experiment", "E04-A1G"); Eq(frozen, "runId", runId); Eq(frozen, "sourceHead", sourceHead);
+            Eq(frozen, "subset", "E04-A1G_WIN64_DEVELOPMENT_GAME_CALLER");
+            Eq(frozen, "runtimeCallerProof", "ACTUAL_HIDDEN_COOKED_GAME_REQUIRED");
+            Eq(frozen, "specialAssuranceCertification", "DEFERRED_UNPROVEN_OWN17");
+            PathEq(frozen, "sourceRoot", sourceRoot); PathEq(frozen, "runRoot", run.FullName);
+            PathEq(frozen, "stagedProject", stagedProject);
+
+
             JsonElement abi = Get(r, "abi");
             Eq(abi, "target", target.Name); Eq(abi, "targetType", "Game");
             Eq(abi, "targetConfiguration", "Development"); Eq(abi, "vendorConfiguration", "Release");
@@ -374,8 +389,8 @@ public class YamlCpp : ModuleRules
             HoldDescriptor(Get(c, "compileCommands"), CheckedPath(Path.Combine(buildRoot, "compile_commands.json"), true));
             HoldDescriptor(Get(c, "ninja"), CheckedPath(Path.Combine(buildRoot, "build.ninja"), true));
             HoldDescriptor(Get(c, "abiEvidenceLog"), CheckedPath(Path.Combine(buildRoot, "CMakeFiles", "CMakeConfigureLog.yaml"), true));
-            RequireA1GCMakeRoot(Get(c, "process"),
-                CheckedPath(Path.Combine(run.FullName, "phases", "dependencyconfigure", "a1g-cmake-configure.process.json"), true), cmakePath, buildRoot);
+            string configureProcessPath = CheckedPath(Path.Combine(run.FullName, "phases", "dependencyconfigure", "a1g-cmake-configure.process.json"), true);
+            FileStream configureProcessLock = RequireA1GCMakeRoot(Get(c, "process"), configureProcessPath, cmakePath, buildRoot);
 
             string buildReceiptPath = CheckedPath(Path.Combine(logs, "a1g-vendor-cmake-build.json"), true);
             FileStream buildLock = HoldDescriptor(Get(r, "vendorBuildReceipt"), buildReceiptPath);
@@ -396,8 +411,25 @@ public class YamlCpp : ModuleRules
             FileStream buildCompiler = HoldDescriptor(Get(b, "compiler"), CheckedPath(selectedTools["compiler"], true));
             if (buildCompiler.Length != Integer(Get(tools, "compiler"), "bytes")
                 || StreamHash(buildCompiler) != HashText(Get(tools, "compiler"), "sha256")) Fail("A1G_VENDOR_UBT_COMPILER_MISMATCH");
-            RequireA1GCMakeRoot(Get(b, "process"),
-                CheckedPath(Path.Combine(run.FullName, "phases", "dependencybuild", "a1g-cmake-build.process.json"), true), cmakePath, buildRoot);
+            string buildProcessPath = CheckedPath(Path.Combine(run.FullName, "phases", "dependencybuild", "a1g-cmake-build.process.json"), true);
+            FileStream buildProcessLock = RequireA1GCMakeRoot(Get(b, "process"), buildProcessPath, cmakePath, buildRoot);
+            var configurePhase = RequireA1GClosedPhase(run.FullName, "DependencyConfigure", runId, sourceHead,
+                freezePath, freezeLock, configureProcessPath, configureProcessLock);
+            RequireA1GHeldFileJoin(Get(configurePhase.Value, "vendorConfigureReceipt"), configureReceiptPath, configureLock);
+            var buildPhase = RequireA1GClosedPhase(run.FullName, "DependencyBuild", runId, sourceHead,
+                freezePath, freezeLock, buildProcessPath, buildProcessLock);
+            JsonElement artifact = Get(buildPhase.Value, "vendorArtifact");
+            RequireA1GHeldFileJoin(Get(artifact, "artifactReceipt"), receiptPath, receiptLock);
+            RequireA1GHeldFileJoin(Get(artifact, "builtLibrary"), CheckedPath(Path.Combine(buildRoot, "yaml-cpp.lib"), true), builtLibrary);
+            RequireA1GHeldFileJoin(Get(artifact, "library"), libraryPath, libraryLock);
+            RequireA1GHeldFileJoin(Get(artifact, "license"), CheckedPath(Path.Combine(artifactRoot, "LICENSE.yaml-cpp"), true), license);
+            if (Integer(artifact, "headerCount") != headerPaths.Count) Fail("A1G_PHASE_HEADER_COUNT_MISMATCH");
+            JsonElement[] predecessor = Array(buildPhase.Value, "previous").Where(e => Text(e, "phase") == "DependencyConfigure").ToArray();
+            if (predecessor.Length != 1) Fail("A1G_BUILD_CONFIGURE_PREDECESSOR_NOT_UNIQUE");
+            RequireA1GHeldFileJoin(Get(predecessor[0], "completion"), CheckedPath(Path.Combine(run.FullName, "phases", "dependencyconfigure", "completion.json"), true), configurePhase.Completion);
+            RequireA1GHeldFileJoin(Get(predecessor[0], "result"), CheckedPath(Path.Combine(run.FullName, "phases", "dependencyconfigure", "result.json"), true), configurePhase.Result);
+
+
 
             byte[] selection = JsonSerializer.SerializeToUtf8Bytes(new
             {
@@ -407,6 +439,12 @@ public class YamlCpp : ModuleRules
                 acquisitionResult = new { path = acquisitionPath, bytes = acquisitionLock.Length, sha256 = StreamHash(acquisitionLock) },
                 vendorConfigureReceipt = new { path = configureReceiptPath, bytes = configureLock.Length, sha256 = StreamHash(configureLock) },
                 vendorBuildReceipt = new { path = buildReceiptPath, bytes = buildLock.Length, sha256 = StreamHash(buildLock) },
+                freezeManifest = new { path = freezePath, bytes = freezeLock.Length, sha256 = StreamHash(freezeLock) },
+                dependencyPhases = new {
+                    configureCompletion = new { path = Path.Combine(run.FullName, "phases", "dependencyconfigure", "completion.json"), bytes = configurePhase.Completion.Length, sha256 = StreamHash(configurePhase.Completion) },
+                    configureResult = new { path = Path.Combine(run.FullName, "phases", "dependencyconfigure", "result.json"), bytes = configurePhase.Result.Length, sha256 = StreamHash(configurePhase.Result) },
+                    buildCompletion = new { path = Path.Combine(run.FullName, "phases", "dependencybuild", "completion.json"), bytes = buildPhase.Completion.Length, sha256 = StreamHash(buildPhase.Completion) },
+                    buildResult = new { path = Path.Combine(run.FullName, "phases", "dependencybuild", "result.json"), bytes = buildPhase.Result.Length, sha256 = StreamHash(buildPhase.Result) } },
                 target = target.Name, targetType = target.Type.ToString(), platform = target.Platform.ToString(),
                 targetConfiguration = target.Configuration.ToString(), vendorConfiguration = "Release", architecture = "x64",
                 cppStandard = "C++20", runtime = "MD", linkage = "static", includeRoot, libraryPath, librarySha256 = libraryHash,
@@ -446,6 +484,73 @@ public class YamlCpp : ModuleRules
             || Integer(samples[samples.Length - 1], "activeProcesses") != 0) Fail("A1G_CMAKE_JOB_NOT_EMPTY");
         return held;
     }
+
+    // Ordinary Game-only phase-file binding. No review authority, recursive
+    // artifact certification, Rules witness or command text execution.
+    private static FileStream HoldA1GObservedPhaseFile(string path)
+    {
+        path = CheckedPath(path, true);
+        FileStream held = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        try
+        {
+            if (held.Length <= 0 || held.Length > 8388608) Fail("A1G_PHASE_FILE_SIZE_INVALID");
+            CheckedPath(path, true); ReadLocks.Add(held); return held;
+        }
+        catch { held.Dispose(); throw; }
+    }
+
+    private static void RequireA1GHeldFileJoin(JsonElement descriptor, string path, FileStream expected)
+    {
+        FileStream held = HoldDescriptor(descriptor, path);
+        if (held.Length != expected.Length || StreamHash(held) != StreamHash(expected)) Fail("A1G_PHASE_HELD_FILE_JOIN_MISMATCH");
+    }
+
+    private static (FileStream Completion, FileStream Result, JsonElement Value) RequireA1GClosedPhase(
+        string runRoot, string phase, string runId, string sourceHead,
+        string freezePath, FileStream freezeLock, string processPath, FileStream processLock)
+    {
+        string status;
+        if (phase == "DependencyConfigure") status = "DEPENDENCY_CONFIGURE_PASS_NO_INSTALL";
+        else if (phase == "DependencyBuild") status = "DEPENDENCY_BUILD_AND_EXPLICIT_GAME_ARTIFACT_COPY_PASS";
+        else throw new BuildException("E04A1_YAML_A1G_PHASE_OUTSIDE_FINITE_DEPENDENCY_PAIR");
+        string phaseRoot = CheckedPath(Path.Combine(runRoot, "phases", phase.ToLowerInvariant()), true);
+        string completionPath = CheckedPath(Path.Combine(phaseRoot, "completion.json"), true);
+        string resultPath = CheckedPath(Path.Combine(phaseRoot, "result.json"), true);
+        FileStream completionLock = HoldA1GObservedPhaseFile(completionPath);
+        using JsonDocument completionJson = ReadJson(completionLock);
+        JsonElement completion = completionJson.RootElement;
+        Eq(completion, "state", "COMPLETE");
+        if (HashText(completion, "freezeManifestSha256") != StreamHash(freezeLock)) Fail("A1G_PHASE_COMPLETION_FREEZE_MISMATCH");
+        FileStream resultLock = HoldDescriptor(Get(completion, "result"), resultPath);
+        using JsonDocument resultJson = ReadJson(resultLock);
+        JsonElement result = resultJson.RootElement;
+        foreach (JsonElement value in new[] { completion, result })
+        {
+            if (Integer(value, "schemaVersion") != 1 || !Boolean(value, "executionPassed")) Fail("A1G_PHASE_NOT_CLOSED_SUCCESS");
+            Eq(value, "experiment", "E04-A1G"); Eq(value, "phase", phase); Eq(value, "runId", runId); Eq(value, "sourceHead", sourceHead);
+            Eq(value, "subset", "E04-A1G_WIN64_DEVELOPMENT_GAME_CALLER");
+            Eq(value, "runtimeCallerProof", "ACTUAL_HIDDEN_COOKED_GAME_REQUIRED");
+        }
+        Eq(result, "status", status);
+        if (Get(result, "primaryFailure").ValueKind != JsonValueKind.Null || Array(result, "secondaryErrors").Length != 0)
+            Fail("A1G_PHASE_RESULT_HAS_ERRORS");
+        RequireA1GHeldFileJoin(Get(result, "freezeManifest"), freezePath, freezeLock);
+        JsonElement[] processes = Array(result, "processes");
+        if (processes.Length != 1) Fail("A1G_PHASE_PROCESS_COUNT");
+        RequireA1GHeldFileJoin(Get(processes[0], "receiptArtifact"), processPath, processLock);
+        // The embedded phase process row is the original raw process object plus
+        // exactly its persisted receiptArtifact descriptor. Compare every raw
+        // property structurally; existing RulesEqual is only a pure JSON walker.
+        using JsonDocument processJson = ReadJson(processLock);
+        JsonElement rawProcess = processJson.RootElement;
+        if (rawProcess.TryGetProperty("receiptArtifact", out _)
+            || processes[0].ValueKind != JsonValueKind.Object
+            || processes[0].EnumerateObject().Count() != rawProcess.EnumerateObject().Count() + 1)
+            Fail("A1G_PHASE_PROCESS_ROW_SHAPE");
+        foreach (JsonProperty property in rawProcess.EnumerateObject()) RulesEqual(property.Value, Get(processes[0], property.Name));
+        return (completionLock, resultLock, result.Clone());
+    }
+
 
     private static void RejectUnsupportedNativeToolAlternatives(ReadOnlyTargetRules target)
     {

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A1G_GAME_DEPENDENCY_PHASE_CLOSURE_SOURCE_REPAIR",
+  "recordedUtc": "2026-10-21T11:10:40.2181180Z",
+  "status": "GAME_DEPENDENCY_PHASE_CLOSURE_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "validationAsOfUtc": "2026-10-21T11:09:10.2893142Z",
+  "failureCheckpoint": "8e9200758d56fb94e9beb9c9b6c7c3cb755fabf6",
+  "failureBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-phase-closure-failure-PROPOSED\\root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 868,
+    "sha256": "E1EA71E4B41BA770EBC31908C8969DC2421DB614ACC38786B3195D395151E85A"
+  },
+  "rootAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-phase-closure-repair-PROPOSED\\root-source-adoption.original.json",
+    "bytes": 2854,
+    "sha256": "C07A76E3C7213BB296138A707B8C035158B40B63A4441D1E047F3C193434AC87"
+  },
+  "sourceState": "Rules/wrapper edits adopted after the verified failure checkpoint; no future repaired-source commit SHA is invented here.",
+  "changedFiles": [
+    {
+      "path": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "before": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-phase-closure-repair-PROPOSED\\rules.before-phase-closure.original",
+        "bytes": 79354,
+        "sha256": "8730E81A24D62FB136F1A05C2F96FC79279DE397219C4BA79A633E7235955450"
+      },
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+        "bytes": 87636,
+        "sha256": "CD9C8424E543BD40A0FAE209837EE9EA2AFC0351ECF929BDC7F5F0786313D939"
+      },
+      "scope": "Game-only current freeze and finite dependency phase/process/artifact joins before library selection; selected descriptors retained in module-selection evidence."
+    },
+    {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "before": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-phase-closure-repair-PROPOSED\\wrapper.before-phase-closure.original",
+        "bytes": 182184,
+        "sha256": "078E7A42A35B7769500652F42D89E946E72389F468EA5429CE763AFE31835689"
+      },
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+        "bytes": 182340,
+        "sha256": "242A61112500129C661115F3C09B9F75DBC0BEA47B8128CABBAFDDAE9FE99770"
+      },
+      "scope": "Pass the wrapper-selected current freeze manifest path/hash into the Game build environment."
+    }
+  ],
+  "unchangedNorm": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 16226,
+    "sha256": "C3D17762FDE8DCBFD2DE7287BF8D2A3AF668F5D0D0FE488F3A31A71A7A91929C"
+  },
+  "requiredJoins": [
+    "Current wrapper-selected freeze subject/path/hash",
+    "Same-run DependencyConfigure and DependencyBuild COMPLETE completion/result identity, success state and expected status",
+    "Closed result joined to the same freeze and single already validated raw process receipt",
+    "Configure receipt, artifact receipt, built/copied library, license and header count joined to held descriptors",
+    "Build predecessor uniquely joins the same configure completion/result"
+  ],
+  "validationAtAdoption": {
+    "rootInspectedCompleteFunctionalDiff": true,
+    "rootWrapperWholeSourceInverseMatched": true,
+    "rootEditorPrefix15207BytesMatched": true,
+    "originalAndNewRulesCrBytes": [
+      6,
+      6
+    ],
+    "auxiliaryWholeRulesInverseMatched": "REPORTED_TRUE_IN_TOOL_33db68; root separately inspected entire functional diff and exact Editor prefix",
+    "auxiliaryQualification": "Reported auxiliary inverse is distinct from root verification. Root did not repeat the whole Rules inverse; root independently inspected the functional diff and exact Editor prefix.",
+    "wrapperAstErrors": 0,
+    "wrapperFunctionCount": 112,
+    "csharpCompilation": "NOT_RUN_AT_ADOPTION",
+    "behavioralControls": "NOT_RUN_AT_ADOPTION",
+    "freshSourceReview": "NOT_RUN_AT_ADOPTION",
+    "newRun": "NOT_BOUND_AT_ADOPTION",
+    "allNineNativePhases": "NOT_RUN_FOR_REPAIRED_CANDIDATE_AT_ADOPTION",
+    "gameAttemptsExecuted": 0,
+    "customChecksExecuted": 0,
+    "limits": "These are explicitly as-of-adoption source/static observations, not C# compatibility, semantic behavior, independent SOURCE or native PASS. Later evidence requires its own record."
+  },
+  "historicalControls": "Ten archive-action controls passed for source 553dc39 before its failed SOURCE. They are historical candidate evidence and do not validate the new C# phase joins.",
+  "closedPriorRun": {
+    "sourceHead": "553dc392e97c8cf3e81b2e05a6ec77b7e8f55bc3",
+    "runId": "20261021T105009Z-0a4b58ea",
+    "rawSourceVerdict": "FAIL",
+    "sourceAdmission": false,
+    "nativeRunRoot": "NEVER_ALLOCATED",
+    "phases": "ALL_NINE_NOT_RUN",
+    "authority": "CLOSED_NO_RETRY",
+    "oldApprovalTransfers": false
+  },
+  "unaffected": "Norm, Editor behavior, product Config, C++ parser and vendor acquisition, earlier raw reports/failures, bounded A1E acceptance and perpetual source/API review consent are unchanged. The older 3201552 raw PASS/closed DependencyBuild failure remain preserved.",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "scope": "Game-only current freeze and closed dependency phase/process/artifact joins; no Editor behavior, Rules witness, transitive certification or native authority",
+  "next": "Checkpoint repaired source and factual metadata, push and gh-verify OWN18 exact remote backup before fresh exact bindings and affected SOURCE. Native phases require positive fresh SOURCE admission and separate ordered GOs. Final CODE/different REQ follow actual successful closed execution. Do not introduce an optional pure C# harness or special Rules certification as a new critical-path gate."
+}

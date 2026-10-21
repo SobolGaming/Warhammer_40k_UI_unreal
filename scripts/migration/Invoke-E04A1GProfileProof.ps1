@@ -881,7 +881,8 @@ function Ubt-Arguments([string]$Target){
 }
 function Game-BuildEnvironment {
     $receipt=Descriptor (Owned 'logs/a1g-yaml-artifact-receipt.json')
-    @{E04_A1G_NATIVE_BOUNDARY_REQUIRED='1';E04_A1G_RUN_ID=$RunId;E04_A1G_SOURCE_HEAD=$script:Freeze.sourceHead;E04_A1G_SOURCE_ROOT=$script:Repo;E04_A1G_RUN_ROOT=$script:RunRoot;E04_A1G_STAGED_PROJECT=(Join-Path $script:Stage 'WarhammerClient.uproject');E04_A1G_ARTIFACT_RECEIPT=$receipt.path;E04_A1G_ARTIFACT_RECEIPT_SHA256=$receipt.sha256}
+    $freezeDescriptor=Descriptor $FreezeManifestPath
+    @{E04_A1G_NATIVE_BOUNDARY_REQUIRED='1';E04_A1G_RUN_ID=$RunId;E04_A1G_SOURCE_HEAD=$script:Freeze.sourceHead;E04_A1G_SOURCE_ROOT=$script:Repo;E04_A1G_RUN_ROOT=$script:RunRoot;E04_A1G_STAGED_PROJECT=(Join-Path $script:Stage 'WarhammerClient.uproject');E04_A1G_ARTIFACT_RECEIPT=$receipt.path;E04_A1G_ARTIFACT_RECEIPT_SHA256=$receipt.sha256;E04_A1G_FREEZE_MANIFEST=$freezeDescriptor.path;E04_A1G_FREEZE_MANIFEST_SHA256=$freezeDescriptor.sha256}
 }
 function Uat-Arguments([switch]$Cook){
     $common=@($script:Freeze.toolPaths.uat,'-NoCompile','-NoP4','BuildCookRun',('-project='+(Join-Path $script:Stage 'WarhammerClient.uproject')),'-target=WarhammerClientE04A1G','-platform=Win64','-clientconfig=Development','-skipbuild','-skippackage','-unattended')
