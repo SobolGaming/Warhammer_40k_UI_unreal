@@ -7,7 +7,7 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The next [Game-caller proof](docs/plans/research/2026-10-21-e04a-game-proof-packet.md) has canonical source adopted (revision 96): two planned inputs/attempts and 52 checks. It awaits fresh bindings/SOURCE and all nine build/cook/stage/native phases; no Game result or Linux execution is claimed.
+The [Game-caller proof](docs/plans/research/2026-10-21-e04a-game-proof-packet.md) is FOCUSED_SOURCE_FAILED_GAME_WRAPPER_REPAIRS_REQUIRED (revision97). SOURCE found three wrapper issues before execution; all nine phases remain NOT_RUN. [Failure closure](docs/plans/research/2026-10-21-e04a-game-source-failure-closure.md). Two inputs/two attempts/52 checks remain planned; Linux is UNTESTED.
 
 The bounded E04-A1E proof is **BOUNDED_E04_A1E_ACCEPTANCE_RECORDED** (revision 95).
 Bounded E04-A1E acceptance is recorded for reviewed `3bfd22d0018dbda285a3db4184c8509dbc3783f1`
@@ -29,7 +29,7 @@ rendering/Core play, Linux execution and distribution remain open. Standing priv
 source/API review consent continues until explicitly revoked. This publication is
 a metadata/report overlay, outside the exact head assessed by the reports.
 See the [final review provenance](docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json).
-Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G source work follows revision96 above; no old review or native authority transfers.
+Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G source work follows revision97 above; no old review or native authority transfers.
 
 Historical revision 93 A1E status was **EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**
 (revision 93). The [repair receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-test-declarations-repair.json)

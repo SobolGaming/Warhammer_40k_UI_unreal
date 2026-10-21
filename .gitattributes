@@ -72,3 +72,7 @@ scripts/migration/E04A1GOwnedJobSupervisor.cs -text whitespace=cr-at-eol
 scripts/migration/Invoke-E04A1GProfileProof.ps1 -text whitespace=cr-at-eol
 docs/plans/research/2026-10-21-e04a-game-proof-packet.md text eol=lf
 docs/plans/evidence/2026-10-21-e04a-game-source-adoption.json -text whitespace=cr-at-eol
+
+# Preserve exact closed A1G source report and raw metadata bytes.
+/docs/plans/research/2026-10-21-e04a-game-source-review-370bfba.md -text whitespace=-blank-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-failure-370bfba.json -text whitespace=cr-at-eol
