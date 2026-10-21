@@ -154,6 +154,12 @@ IterateSharedBuildUsePrecompiledExe=False. Select the ordinary non-DLC route wit
 the exact frozen argv and installed defaults; do not invent an unlogged literal
 null DLC value. Existing loose-store/debug/copy and preservation checks remain.
 
+Structured JSON fact comparison ignores dictionary key enumeration order while
+retaining exact case-sensitive string keys, nested array order/cardinality, scalar
+JSON types/values, Boolean values and null distinctions. Preserve empty and
+singleton arrays as arrays. Do not lowercase keys/paths, reorder arrays or coerce
+scalar values to make preservation or predecessor joins pass.
+
 ## Preservation and Game settings
 
 Preserve original nine Editor/UBT Settings roles and canonical/staged source/

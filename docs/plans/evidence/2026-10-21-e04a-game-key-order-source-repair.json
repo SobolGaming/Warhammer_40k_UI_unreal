@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A1G_NARROW_KEY_ORDER_SOURCE_REPAIR_NOT_REVIEW_OR_EXECUTION",
+  "recordedUtc": "2026-10-21T10:17:05.1114033Z",
+  "planRevision": 100,
+  "status": "GAME_KEY_ORDER_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "adoptedUtc": "2026-10-21T10:13:10.2382869Z",
+  "failureCheckpoint": "38b9c668bdbfb4ea331a9ec89746bb6e9735d3df",
+  "failureBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-2b52bbc-PROPOSED\\root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 838,
+    "sha256": "E1F43C10B6D87DB1C9493103BF9B97FA992D3C45EFB34F6B590A49E4D110248F"
+  },
+  "canonicalAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-2b52bbc-PROPOSED\\root-key-order-source-adoption.original.json",
+    "bytes": 1774,
+    "sha256": "C7C50778E565CAA9E306DD1736DF7FD60FBA4676EE37DEBBAF8FA1C4B26C4D2B"
+  },
+  "exactSourceReplacement": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-2b52bbc-PROPOSED\\dictionary-comparison-repair-PROPOSED\\exact-source-replacement.PROPOSED.json",
+    "bytes": 2726,
+    "sha256": "5B58AF186C11F2624F912F56F11A5A08C6F0EEC0E72CA0B688219779968A9FE5"
+  },
+  "previousWrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+    "bytes": 177956,
+    "sha256": "264BE06E0BA2813167F388328E074EAD87A831F3EAD75ABB2E9C49D5769BFEB5"
+  },
+  "adoptedWrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+    "bytes": 179067,
+    "sha256": "D4AB1608597A79897677FDE76A3862CC6C41DDE13BCC05323EB56F30DCF18AEB"
+  },
+  "norm": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 15842,
+    "sha256": "0CD9A9A2F57E1C8DA73307C48E840A62E5E298B41922B04C3E2A5ECE0DD7BBFF"
+  },
+  "sourceChange": {
+    "oldFunction": "Equal-Data raw JSON string comparison",
+    "newDirectHelper": "ConvertTo-A1GComparableData",
+    "dictionaryKeys": "Require strings; ordinal sort with case-sensitive ordinal OrderedDictionary",
+    "arrays": "Retain IList order/cardinality and empty/singleton array identity",
+    "scalarComparison": "Retain JSON type/value, Boolean and null distinctions",
+    "limits": "Depth limit retained; JSON depth warning stops; no key/path lowercasing or array reordering"
+  },
+  "validationAtAdoption": {
+    "asOfUtc": "2026-10-21T10:13:10.2382869Z",
+    "wholeOriginalInverseMatched": true,
+    "astErrors": 0,
+    "functionCount": 111,
+    "behavioralControls": "NOT_RUN",
+    "freshSourceReview": "NOT_RUN",
+    "nativePhases": "NOT_RUN",
+    "qualification": "Timestamped adoption facts; AST/inverse are not behavior, controls or independent review evidence"
+  },
+  "next": "Checkpoint/push/verify OWN18 repaired-source backup; finite pure comparison controls; fresh exact bindings and fresh affected SOURCE before any ordered native phase GO",
+  "historicalFailure": {
+    "sourceHead": "2b52bbce47fc116ba60576f3d0495cc8e083e33f",
+    "runId": "20261021T095500Z-68aaa7fa",
+    "rawVerdict": "FAIL_UNCHANGED",
+    "authority": "CLOSED_DO_NOT_REUSE",
+    "nativeRunRoot": "NEVER_ALLOCATED",
+    "receipt": "docs/plans/evidence/2026-10-21-e04a-game-source-failure-2b52bbc.json",
+    "sourceFindingNotReproducedAtAdoption": true
+  },
+  "native": {
+    "allNinePhases": "NOT_RUN",
+    "inputsPlanned": 2,
+    "attemptsPlanned": 2,
+    "checksPlanned": 52,
+    "attemptsExecuted": 0,
+    "checksExecuted": 0,
+    "newRunId": "NOT_BOUND",
+    "sourceAdmission": false,
+    "nativeAuthority": false,
+    "visibleAuthority": 0,
+    "linux": "UNTESTED"
+  },
+  "a1eAcceptance": "UNCHANGED_BOUNDED_E04_A1E_ACCEPTANCE_RECORDED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "standingReviewConsent": "PERPETUAL_UNLESS_EXPLICITLY_REVOKED",
+  "limits": [
+    "This publication grants no native/review authority and records no review/native PASS.",
+    "Finite controls are planned after repaired-source checkpoint/backup and before fresh SOURCE; this record does not assert their later global status.",
+    "Raw historical failures and receipts are unchanged; old approvals do not transfer.",
+    "Final CODE/different REQ follow actual closed execution. A2/fidelity/Core play/rendering/Linux/distribution remain open."
+  ]
+}

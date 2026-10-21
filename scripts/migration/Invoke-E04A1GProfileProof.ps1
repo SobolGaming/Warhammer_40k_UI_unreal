@@ -644,8 +644,30 @@ function Retain-GeneratedBuildInputPartials {
 
 function Build-Root { Owned 'vendor-build/Win64/Release/x64' }
 function Artifact-Root { Owned 'vendor-artifact/Win64/Release/x64' }
+function ConvertTo-A1GComparableData($Value,[int]$Depth=0) {
+    if($Depth -gt 80){throw 'A1G_DATA_DEPTH_LIMIT'}
+    if($null -eq $Value){return $null}
+    if($Value -is [Collections.IDictionary]){
+        foreach($key in $Value.Keys){if($key -isnot [string]){throw 'A1G_DATA_DICTIONARY_STRING_KEYS_REQUIRED'}}
+        [string[]]$keys=@($Value.Keys)
+        [Array]::Sort($keys,[StringComparer]::Ordinal)
+        $ordered=[Collections.Specialized.OrderedDictionary]::new([StringComparer]::Ordinal)
+        foreach($key in $keys){$ordered.Add($key,(ConvertTo-A1GComparableData $Value[$key] ($Depth+1)))}
+        return ,$ordered
+    }
+    if($Value -is [Collections.IList]){
+        $items=[object[]]::new($Value.Count)
+        for($index=0;$index -lt $Value.Count;$index++){$items[$index]=ConvertTo-A1GComparableData $Value[$index] ($Depth+1)}
+        return ,$items
+    }
+    return $Value
+}
 function Equal-Data($Left,$Right,[string]$Label){
-    if(($Left|ConvertTo-Json -Depth 80 -Compress) -cne ($Right|ConvertTo-Json -Depth 80 -Compress)){throw ('A1G_DATA_CHANGED: '+$Label)}
+    $leftData=ConvertTo-A1GComparableData $Left
+    $rightData=ConvertTo-A1GComparableData $Right
+    $leftJson=ConvertTo-Json -InputObject $leftData -Depth 80 -Compress -WarningAction Stop
+    $rightJson=ConvertTo-Json -InputObject $rightData -Depth 80 -Compress -WarningAction Stop
+    if($leftJson -cne $rightJson){throw ('A1G_DATA_CHANGED: '+$Label)}
 }
 function Snapshot-Members([string]$Root,$Members){
     $observed=@(foreach($m in $Members){$p=Under (Join-Path $Root $m.path) $Root;$d=Descriptor $p
