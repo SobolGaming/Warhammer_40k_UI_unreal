@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_FAILED_E04A1E_UNUSED_MODULE_RULE_CONFIGURE_CLOSED_NOT_ACCEPTED",
+  "createdUtc": "2026-10-21T04:26:53.8413100Z",
+  "planRevision": 88,
+  "status": "FOCUSED_SOURCE_PASSED_UNUSED_MODULE_RULE_CONFIGURE_FAILURE_CLOSED",
+  "technicalSourceHead": "e293ea07cfe2a41dccfb8e2e8cf8477002c89159",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "runId": "20261021T034847Z-14f6de27",
+  "publicationQualification": "Later documentation publication is a separate overlay, not the executed technical candidate.",
+  "sourceReview": {
+    "verdict": "PASS",
+    "rootAdmitted": true,
+    "elapsedSeconds": 869.9143447,
+    "capturedPairs": 61,
+    "extractionAnomalies": 0,
+    "sourceReport": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\focused-e293ea0-034847-E04_COMPONENT_SOURCE\\last-message.txt",
+      "bytes": 7992,
+      "sha256": "BB24FD5D0F263C99FF538071A36AA15E47E08A620885C0D77C38450312B7E083"
+    },
+    "rootAdmission": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\focused-e293ea0-034847-E04_COMPONENT_SOURCE\\root-focused-source-admission.original.json",
+      "bytes": 4744,
+      "sha256": "948BC9EF3245DE83B278FE3CE19B0786C88FA50E62C405FA0B4FCC76A43EFC40"
+    },
+    "freezeManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\practical-common-e293ea0-20261021T034847Z-14f6de27\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+      "bytes": 702000,
+      "sha256": "C46631A9E2306EE32D9D49C23E68F9B6A5A85615DEC024D41B4C2117DB0E185E"
+    },
+    "normativeRequirement": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-functional-proof-packet.md",
+      "bytes": 7443,
+      "sha256": "39B9852CDCAEC6842361FA3E4FF730D5958469913C713FC09711DFE548EAAF86"
+    },
+    "runtime": {
+      "actualModel": "gpt-6.1-sol",
+      "sessionId": "01a15c9a-f50c-78b3-b05f-9eb87a306d59",
+      "effort": "ultra",
+      "memoryMode": "disabled",
+      "lowerMemoryFeatureOsIsolation": "UNVERIFIED",
+      "exactTPlusOneCrLf": true,
+      "contexts": 1,
+      "permission": "READ_ONLY_APPROVAL_NEVER"
+    },
+    "process": {
+      "elapsedSeconds": 869.9143447,
+      "jobAccountingQualification": "Aggregate retained private-job observation only, not universal descendant identity attestation.",
+      "workerPid": 15148,
+      "exitCode": 0,
+      "timedOut": false,
+      "cleanupConfirmed": true,
+      "finalJobActive": 0,
+      "exitConfirmed": true
+    },
+    "qualification": "Focused component SOURCE only. Not final CODE/different REQ, native acceptance or OWN17 special assurance."
+  },
+  "preflight": {
+    "status": "PASS",
+    "elapsedSeconds": 30.934544,
+    "nativeRoots": 0,
+    "materializedInputs": 43,
+    "canonicalInputs": 10,
+    "generatedInputs": 33,
+    "retainedDescriptorsRehashed": 56,
+    "result": {
+      "bytes": 96890,
+      "sha256": "AAE7669385C861E7F07CCD95323CCE5D7EBF46306A11C027EB133BA99B5AE77A",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\preflight\\result.json"
+    },
+    "completion": {
+      "bytes": 876,
+      "sha256": "DCB41A2005A0E4B953EF861065BC186C4F2E8AC99D097E25EF0A08068E6F3AFA",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\preflight\\completion.json"
+    },
+    "hostCompletion": {
+      "bytes": 830,
+      "sha256": "E23733B698D2AE81C53709CC0BAE286F4BED5EF718C7BB1993EC1F551A1EECD6",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\native-phase-invocations\\Preflight.host-completion.original.json"
+    },
+    "rootInspection": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\root-Preflight-inspection.original.json",
+      "bytes": 1866,
+      "sha256": "D996357F6CA832E3C7B6635202ACE478BD8FAFCCA2DE95884E022CDA63004917"
+    }
+  },
+  "supervisorControls": {
+    "status": "PASS",
+    "elapsedSeconds": 51.8500308,
+    "nativeRoots": 6,
+    "controlCases": 6,
+    "pureControls": [
+      {
+        "count": 7,
+        "matched": 7,
+        "part": "generatedBuildInputControls",
+        "externalRoots": 0,
+        "qualification": "Reported individual matched outcomes; heterogeneous diagnostic/invariant schemas retained, no full parser/harness assurance."
+      },
+      {
+        "count": 18,
+        "matched": 18,
+        "part": "buildBoundaryControls",
+        "externalRoots": 0,
+        "qualification": "Reported individual matched outcomes; heterogeneous diagnostic/invariant schemas retained, no full parser/harness assurance."
+      }
+    ],
+    "targetRefusal": {
+      "exitCode": 8,
+      "diagnostic": "E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED",
+      "ubtResult": "RulesError",
+      "canonicalAndControlSourcePairs": 33,
+      "canaryUnchanged": true
+    },
+    "allSixCleanupConfirmed": true,
+    "result": {
+      "sha256": "687DA9FF6363307B3FDCE902CC9F0381061B60E5AA2B0858B5F0CDC7EBA23965",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\supervisorcontrols\\result.json",
+      "bytes": 359968
+    },
+    "completion": {
+      "sha256": "69C1C84A6FE9913444527BFC08347CB2D2A056A3E2BF4E4E2FA22590AD3FDB32",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\supervisorcontrols\\completion.json",
+      "bytes": 928
+    },
+    "hostCompletion": {
+      "sha256": "ACB85E7CB0C48F3762374808F12ECA3A5E4B9A2B01FC8EC1FFDC3FD52555EFCA",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\native-phase-invocations\\SupervisorControls.host-completion.original.json",
+      "bytes": 857
+    },
+    "rootInspection": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\root-SupervisorControls-inspection.original.json",
+      "bytes": 5053,
+      "sha256": "83E2771B6A9D45EA947C1E8D181DD1A3DB5A3F68D7680EFB016F5927297C675A"
+    },
+    "qualification": "Expected timeout/fault/refusal attempts remain FAIL records within passing control cases."
+  },
+  "configure": {
+    "status": "FAIL_PRESERVE_PARTIALS_NO_RETRY",
+    "executionPassed": false,
+    "elapsedSeconds": 40.2610337,
+    "primaryFailure": {
+      "stage": "Configure",
+      "type": "System.Management.Automation.RuntimeException",
+      "message": "E04A1_GENERATED_INPUT_UNSUPPORTED_PREEXISTING_RESPONSE"
+    },
+    "secondaryErrors": 0,
+    "completionPublished": false,
+    "result": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\configure\\result.json",
+      "bytes": 319696,
+      "sha256": "3EF8B7C213B63DFDE42462D74CB3E8971084370B94FD2378744A44A0575E2E99"
+    },
+    "rootInspection": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\root-Configure-unused-rule-failure-inspection.original.json",
+      "bytes": 4535,
+      "sha256": "53BB238798799466887B3B36BB47C457FEF716732617B21A8C1BF5E32BF85BDE"
+    },
+    "retainedDescriptorsRehashed": 353,
+    "settingsRolesBeforeAfterAndCurrent": 9,
+    "sourceFilesBeforeAfterAndCurrent": 33,
+    "stagedFilesBeforeAfterAndCurrent": 33,
+    "fixtureFilesBeforeAfterAndCurrent": 56,
+    "partialRetention": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\logs\\configured-build-input-partials-configure\\retention.json",
+      "bytes": 8315,
+      "sha256": "3F56685DE0F56080FD741A81A1A415986578ABDD89108414D866784D2EE9A0FB"
+    },
+    "partialOriginalCopyPairsRehashed": 11,
+    "process": {
+      "pid": 36408,
+      "exitCode": 0,
+      "timedOut": false,
+      "elapsedSeconds": 6.0348077,
+      "rootExitObservedElapsedSeconds": 0.9783904,
+      "completionCleanupMode": "PostSuccessfulRootCleanup",
+      "postRootGraceSeconds": 5,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\configure\\configure.process.json",
+        "bytes": 79402,
+        "sha256": "5cee87f0377024cba2457d41aa99912351cd9b3f783064c60a289cf897c56883"
+      },
+      "cleanupConfirmed": true,
+      "finalAggregateTotal": 22,
+      "finalAggregateActive": 0
+    },
+    "actualEvidence": {
+      "activeScannedDyndepAtRspModmapMatchesInMainBuild": 0,
+      "abiLog": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\vendor-build\\Win64\\Development\\x64\\CMakeFiles\\CMakeConfigureLog.yaml",
+        "bytes": 8310,
+        "sha256": "086488BC1334366BEBA6A15382AFAFEA5E31C71176B3B097CF39E23EEDBD4E20"
+      },
+      "materializedResponseFiles": 0,
+      "unsupportedUnusedForms": [
+        "@$out.rsp",
+        "@$DYNDEP_MODULE_MAP_FILE"
+      ],
+      "realReleaseAbiCompileAndExecutableLink": "PASS",
+      "buildNinja": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\vendor-build\\Win64\\Development\\x64\\build.ninja",
+        "bytes": 65733,
+        "sha256": "5508801354B5AB51831212B16CE3A4603683E506F27E2BEDBD22D712408B3B10"
+      },
+      "rulesNinja": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\vendor-build\\Win64\\Development\\x64\\CMakeFiles\\rules.ninja",
+        "bytes": 4623,
+        "sha256": "9CDA1610F8B78DBE1CD9ED93EB126DEDAB51CE8E6A30EAA708A2CCE4E493CCBC"
+      },
+      "cmakeCache": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T034847Z-14f6de27\\vendor-build\\Win64\\Development\\x64\\CMakeCache.txt",
+        "bytes": 19043,
+        "sha256": "8180EAF62309F3B868575480A6BE06C0CEB1C907088BA03C858144FB4D73DABF"
+      },
+      "unscannedObjectEdges": 30,
+      "moduleScanCache": "OFF",
+      "compileCommandRecords": 30
+    },
+    "diagnosis": "Existing all-rule response recognizer rejects unused CMake-generated module-rule templates; no actual preexisting response file, selected module-scan edge or component compile failure observed. Configure phase remains FAIL.",
+    "preservationQualification": "Finite retained before/after/current descriptor observations only; no continuous preservation or universal descendant assertion."
+  },
+  "laterPhases": {
+    "Native": "NOT_RUN",
+    "EditorBuild": "NOT_RUN",
+    "Discovery": "NOT_RUN",
+    "DependencyBuild": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "plannedCounts": {
+    "inputs": 43,
+    "generatedRecipes": 33,
+    "attempts": 50,
+    "suites": 8
+  },
+  "parserSuitesRun": 0,
+  "visibleWindows": 0,
+  "linux": "UNTESTED",
+  "allExecutionAuthority": "CLOSED_DO_NOT_REUSE",
+  "noRetryOrDownstream": true,
+  "unusedTemplateClassificationRepairApplied": false,
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "a1eAcceptance": "NOT_ESTABLISHED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "broaderGates": "A1G,A2,727compatibility,fullYAMLfidelity,plainDEL,profiles,HUD,input,rendering,Linux,packaging,realCore,fullmigration remain open",
+  "standingPrivateSourceApiConsent": "IN_FORCE_UNTIL_EXPLICITLY_REVOKED",
+  "next": "Checkpoint/push/verify OWN18 exact remote backup, then bounded unused-template classification repair. Fresh exact source/head/run/freeze/current bindings and affected focused SOURCE precede the ordered native sequence. Preserve all fail-closed assertions and earlier failures; no old phase GO or approval transfers. Actual suites/evidence freeze/final CODE/different REQ remain required.",
+  "limits": "Ordinary factual review/process/result/retained-file observations only. No comprehensive graph/harness/response semantic certification or universal process/descendant claim."
+}

@@ -7,7 +7,20 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **MODULE_SCAN_CONFIGURATION_REPAIRED_SOURCE_PENDING**
+The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_UNUSED_MODULE_RULE_CONFIGURE_FAILURE_CLOSED**
+(revision 88). Focused SOURCE admitted `e293ea0`; Preflight/SupervisorControls
+passed. Configure failed in 40.2610337 seconds because the all-rule guard rejects
+unused `@$out.rsp` / `@$DYNDEP_MODULE_MAP_FILE` templates. Actual scanning OFF,
+real Release ABI/executable link and scoped cleanup passed, final 22/0; all 30
+selected edges are unscanned and no actual response files exist. This is a
+wrapper/tool limitation; no component compile failure was observed. The run is
+closed, five later phases/native parser suites are NOT_RUN, visible zero/Linux
+UNTESTED. Checkpoint/push/verify OWN18 backup before the bounded unused-template
+classification repair (not applied), fresh bindings/affected SOURCE and ordered
+native work. No old approval transfers; OWN17 stays deferred/unproven/fail-closed,
+final/later gates stay open and standing review consent is unchanged.
+
+Historical revision 87 status is **MODULE_SCAN_CONFIGURATION_REPAIRED_SOURCE_PENDING**
 (revision 87). The narrow repair explicitly sets `CMAKE_CXX_SCAN_FOR_MODULES=OFF`
 and requires that exact cache value for the pinned nonmodule target; the updated
 functional norm binds it. Dyndep refusal, ABI/build/flags/source/cleanup checks
@@ -107,8 +120,10 @@ visible count zero.
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision87 module-scan repair receipt](docs/plans/evidence/2026-10-21-e04a-module-scan-repair.json)
-  for current source changes and gates. The [revision86 dyndep Configure result](docs/plans/evidence/2026-10-21-e04a-dyndep-configure-result.json)
+- Use the [revision88 unused-module-rule Configure result](docs/plans/evidence/2026-10-21-e04a-unused-module-rule-configure-result.json)
+  and [closure](docs/plans/research/2026-10-21-e04a-unused-module-rule-closure.md)
+  for current results and gates. The [revision87 module-scan repair receipt](docs/plans/evidence/2026-10-21-e04a-module-scan-repair.json)
+  preserves the preceding source-only repair. The [revision86 dyndep Configure result](docs/plans/evidence/2026-10-21-e04a-dyndep-configure-result.json)
   and [closure](docs/plans/research/2026-10-21-e04a-dyndep-closure.md) preserve
   that closed run. The [revision85 compiler-alias repair receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-repair.json)
   preserves the prior source change. The [revision84 compiler-alias result](docs/plans/evidence/2026-10-21-e04a-compiler-alias-configure-result.json)
