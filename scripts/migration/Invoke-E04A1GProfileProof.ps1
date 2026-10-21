@@ -748,7 +748,10 @@ function Assert-A1GScopedProofProject($Project) {
     # case aliases and additional fields cannot silently broaden the selection.
     $expected=@{Name='E04ProfileProof';Enabled=$true;PlatformAllowList=@('Win64');TargetAllowList=@('Game');TargetConfigurationAllowList=@('Development')}
     Equal-Data $rows[0] $expected 'exact owned Win64 Development Game-only proof project reference'
-    return @{reference=$rows[0];gameEnabled=$true;editorEnabled=$false;selectionBasis='EXACT_OWNED_PROJECT_REFERENCE_PLATFORM_CONFIGURATION_TARGET_FILTERS'}
+    $androidRows=@($Project['Plugins']|Where-Object {$_ -is [Collections.IDictionary] -and $_['Name'] -is [string] -and $_['Name'] -ieq 'AndroidFileServer'})
+    if($androidRows.Count -ne 1){throw 'A1G_EXACT_ONE_DISABLED_ANDROID_FILE_SERVER_REFERENCE_REQUIRED'}
+    Equal-Data $androidRows[0] @{Name='AndroidFileServer';Enabled=$false} 'exact owned disabled AndroidFileServer project reference'
+    return @{reference=$rows[0];gameEnabled=$true;editorEnabled=$false;androidFileServerReference=$androidRows[0];androidFileServerEnabled=$false;selectionBasis='EXACT_OWNED_PROJECT_REFERENCE_PLATFORM_CONFIGURATION_TARGET_FILTERS'}
 }
 
 function Materialize-Stage {
@@ -900,7 +903,7 @@ function Uat-Arguments([switch]$Cook){
     $common=@($script:Freeze.toolPaths.uat,'-NoCompile','-NoP4','BuildCookRun',('-project='+(Join-Path $script:Stage 'WarhammerClient.uproject')),'-target=WarhammerClientE04A1G','-platform=Win64','-clientconfig=Development','-skipbuild','-skippackage','-unattended')
     if($Cook){
         $ddc=Owned 'ddc/cook';if($ddc.Length -ge 119){throw 'A1G_DDC_PATH_TOO_LONG'}
-        $child='-SkipZenStore -NullRHI -RenderOffScreen -NoSplash -nosound -NoSourceControl -NoLiveCoding -DDC-NoDefaultGraph -DDC=(E04A1G=(Type=FileSystem,Path='+$ddc+',ReadOnly=false,Remote=false,DeleteUnused=false)) -UserDir='+(Owned 'ue-user/cook')+' -ShaderWorkingDir='+(Owned 'shader-work/cook')+' -NoRemoteShaderCompile'
+        $child='-SkipZenStore -NullRHI -RenderOffScreen -NoSplash -nosound -NoSourceControl -NoLiveCoding -DDC-NoDefaultGraph -DDC=(E04A1G=(Type=FileSystem,Path='+$ddc+',ReadOnly=false,Remote=false,DeleteUnused=false)) -UserDir='+(Owned 'ue-user/cook')+' -EditorSettingsINI='+(Owned 'ue-user/cook/Saved/Config/WindowsEditor/EditorSettings.ini')+' -ShaderWorkingDir='+(Owned 'shader-work/cook')+' -NoRemoteShaderCompile'
         $common+@('-cook','-map=/Engine/Maps/Entry',('-CookOutputDir='+(Owned 'cook/Windows')),('-unrealexe='+$script:Freeze.toolPaths.editorCmd),('-AdditionalCookerOptions='+$child))
     }else{$common+@('-skipcook','-stage','-map=/Engine/Maps/Entry',('-CookOutputDir='+(Owned 'cook/Windows')),('-stagingdirectory='+(Owned 'stage')))}
 }
@@ -1130,6 +1133,7 @@ function Get-A1GProofPluginSelection($Receipt,[bool]$Enabled) {
     if($d.EnabledByDefault -ne $false -or $d.CanContainContent -ne $false){throw 'A1G_PROOF_PLUGIN_DISABLED_DEFAULT_REQUIRED'}
     $scope=Assert-A1GScopedProofProject $p
     $pluginArrays=Get-A1GReceiptPluginArrays $Receipt
+    if(@($pluginArrays.overrides|Where-Object {$_.Name -ieq 'AndroidFileServer'}).Count -or @($pluginArrays.buildPlugins|Where-Object {$_ -ieq 'AndroidFileServer'}).Count){throw 'A1G_ANDROID_FILE_SERVER_MUST_BE_DISABLED_WITHOUT_RULES_OVERRIDE'}
     $overrides=@($pluginArrays.overrides)
     $rows=@($overrides|Where-Object {$_.Name -ieq 'E04ProfileProof'})
     $built=@($pluginArrays.buildPlugins|Where-Object {$_ -ieq 'E04ProfileProof'})
@@ -1142,7 +1146,7 @@ function Get-A1GProofPluginSelection($Receipt,[bool]$Enabled) {
             if([IO.Directory]::Exists($root) -and @(Plain-Files $root).Count){throw 'A1G_DISABLED_EDITOR_PLUGIN_GENERATED_OUTPUTS_PRESENT'}
         }
     }
-    return @{proofPluginEnabled=$Enabled;descriptor=Descriptor $descriptor;project=Descriptor $project;projectReference=$scope.reference;selectionBasis=$scope.selectionBasis;receiptOverrides=$overrides;buildPlugins=@($pluginArrays.buildPlugins);qualification='Exact scoped owned project selection plus actual receipt/build set and owned output checks; no Rules override. Not an Editor startup observation. Cook must retain the actual normal startup outcome.'}
+    return @{proofPluginEnabled=$Enabled;androidFileServerEnabled=$false;androidFileServerProjectReference=$scope.androidFileServerReference;descriptor=Descriptor $descriptor;project=Descriptor $project;projectReference=$scope.reference;selectionBasis=$scope.selectionBasis;receiptOverrides=$overrides;buildPlugins=@($pluginArrays.buildPlugins);qualification='Exact scoped owned project selection plus actual receipt/build set and owned output checks; no Rules override. Not an Editor startup observation. Cook must retain the actual normal startup outcome.'}
 }
 
 function Get-A1GUbtActionLog($Process,$Before,[string]$Target) {
@@ -1311,7 +1315,7 @@ function Get-A1GUatLog([string]$Name){
 function Get-A1GUatIntent([string]$Text,[string]$Name){
     $blocks=@([regex]::Matches($Text,'(?ms)^[\t ]*Project Params \*+\r?\n(?<body>.*?)^[\t ]*Project Params \*+\r?$'))
     if($blocks.Count -ne 1){throw 'A1G_SINGLE_NORMAL_UAT_PROJECT_PARAMS_REQUIRED'};$body=$blocks[0].Groups['body'].Value
-    $expected=[ordered]@{Build='False';SkipBuildClient='True';Cook='True';CookOnTheFly='False';DedicatedServer='False';IsProgramTarget='False';Pak='False';IoStore='False';ZenStore='False';SkipPak='False';PrePak='False';Package='False';SkipPackage='True';Archive='False';Deploy='False';Run='False';IncrementalCook='False';CookInEditor='False';IterateSharedCookedBuild='False';NoCleanStage='False';NoDebugInfo='False';SeparateDebugInfo='False';IterateSharedBuildUsePrecompiledExe='False';SkipStage='False';LogWindow='False';bTreatNonShippingBinariesAsDebugFiles='False';ClientConfigsToBuild='Development';ClientCookedTargets='WarhammerClientE04A1G';ClientTargetPlatform='Win64';RawProjectPath=(Join-Path $script:Stage 'WarhammerClient.uproject');MapsToCook='/Engine/Maps/Entry'}
+    $expected=[ordered]@{Build='False';SkipBuildClient='False';Cook='True';CookOnTheFly='False';DedicatedServer='False';IsProgramTarget='False';Pak='False';IoStore='False';ZenStore='False';SkipPak='False';PrePak='False';Package='False';SkipPackage='True';Archive='False';Deploy='False';Run='False';IncrementalCook='False';CookInEditor='False';IterateSharedCookedBuild='';NoCleanStage='False';NoDebugInfo='False';SeparateDebugInfo='False';IterateSharedBuildUsePrecompiledExe='False';SkipStage='False';LogWindow='False';bTreatNonShippingBinariesAsDebugFiles='False';ClientConfigsToBuild='Development';ClientCookedTargets='WarhammerClientE04A1G';ClientTargetPlatform='Win64';RawProjectPath=(Join-Path $script:Stage 'WarhammerClient.uproject');MapsToCook='/Engine/Maps/Entry'}
     $expected.SkipCook=if($Name -ceq 'cook'){'False'}else{'True'}
     $expected.Stage=if($Name -ceq 'stage'){'True'}else{'False'}
     $actual=[ordered]@{}
@@ -1353,12 +1357,12 @@ function Get-A1GClosedPriorResult([string]$Name,[string]$Field){
     @{result=$completion.result;facts=$r[$Field]}
 }
 function Assert-A1GCookEditorPrerequisite($Editor){
-    if($Editor.pluginSelection.proofPluginEnabled -ne $false -or $Editor.projectModule.module -cne 'WarhammerClient'){throw 'A1G_NORMAL_EDITOR_PLUGIN_DISABLED_PREREQUISITE_REQUIRED'}
+    if($Editor.pluginSelection.proofPluginEnabled -ne $false -or $Editor.pluginSelection.androidFileServerEnabled -ne $false -or $Editor.projectModule.module -cne 'WarhammerClient'){throw 'A1G_NORMAL_EDITOR_PLUGIN_DISABLED_PREREQUISITE_REQUIRED'}
     foreach($d in @($Editor.targetReceipt,$Editor.launch,$Editor.launchCmd,$Editor.projectModule.manifest,$Editor.projectModule.binary,$Editor.pluginSelection.descriptor,$Editor.pluginSelection.project)){[void](Check-Descriptor $d)}
     if((Assert-Path $Editor.launchCmd.path) -ine (Assert-Path $script:Freeze.toolPaths.editorCmd)){throw 'A1G_COOK_EDITOR_EXECUTABLE_MISMATCH'}
     $receipt=Read-Json $Editor.targetReceipt.path
     $pluginArrays=Get-A1GReceiptPluginArrays $receipt
-    if($receipt.TargetType -cne 'Editor' -or $receipt.TargetName -cne 'WarhammerClientEditor' -or $receipt.Platform -cne 'Win64' -or $receipt.Configuration -cne 'Development' -or @($pluginArrays.overrides|Where-Object {$_.Name -ieq 'E04ProfileProof'}).Count -or @($pluginArrays.buildPlugins|Where-Object {$_ -ieq 'E04ProfileProof'}).Count){throw 'A1G_COOK_NORMAL_EDITOR_RECEIPT_MISMATCH'}
+    if($receipt.TargetType -cne 'Editor' -or $receipt.TargetName -cne 'WarhammerClientEditor' -or $receipt.Platform -cne 'Win64' -or $receipt.Configuration -cne 'Development' -or @($pluginArrays.overrides|Where-Object {$_.Name -ieq 'E04ProfileProof' -or $_.Name -ieq 'AndroidFileServer'}).Count -or @($pluginArrays.buildPlugins|Where-Object {$_ -ieq 'E04ProfileProof' -or $_ -ieq 'AndroidFileServer'}).Count){throw 'A1G_COOK_NORMAL_EDITOR_RECEIPT_MISMATCH'}
     $plugin=Read-Json $Editor.pluginSelection.descriptor.path;$project=Read-Json $Editor.pluginSelection.project.path
     if($plugin.EnabledByDefault -ne $false){throw 'A1G_COOK_EDITOR_PROOF_PLUGIN_ENABLE'}
     [void](Assert-A1GScopedProofProject $project)
@@ -1377,6 +1381,8 @@ function Prepare-A1GCookStagePhase([string]$Name){
     foreach($d in @($game.facts.targetReceipt,$game.facts.executable,$game.facts.selection,$game.facts.vendorArtifactReceipt)){[void](Check-Descriptor $d)}
     if($Name -ceq 'cook'){
         if(Test-Path -LiteralPath (Owned 'cook')){throw 'A1G_COOK_OUTPUT_REQUIRES_PREABSENCE'}
+        $editorSettings=Owned 'ue-user/cook/Saved/Config/WindowsEditor/EditorSettings.ini'
+        if(Test-Path -LiteralPath $editorSettings){throw 'A1G_COOK_EDITOR_SETTINGS_REQUIRES_PREABSENCE'};New-Directory ([IO.Path]::GetDirectoryName($editorSettings))
         @{name=$Name;editor=$editor;game=$game;outputPreabsence=$true;observedUtc=[DateTime]::UtcNow.ToString('o')}
     }else{
         if(Test-Path -LiteralPath (Owned 'stage')){throw 'A1G_STAGE_OUTPUT_REQUIRES_PREABSENCE'}
@@ -1407,8 +1413,8 @@ function Get-A1GCookArgumentEvidence([string]$UatText,[string]$CookText){
     if($runs.Count -ne 1){throw 'A1G_ONE_ACTUAL_COOK_CHILD_COMMAND_REQUIRED'}
     $arguments=@(Split-A1GSimpleCookArguments $runs[0].Groups['args'].Value)
     if(@($arguments|Where-Object {$_ -ieq (Join-Path $script:Stage 'WarhammerClient.uproject').Replace('\','/')}).Count -ne 1){throw 'A1G_COOK_CHILD_PROJECT_ARGUMENT'}
-    foreach($pair in @(@('run','Cook'),@('TargetPlatform','Windows'),@('Map','/Engine/Maps/Entry'),@('outputdir',(Owned 'cook/Windows')), @('UserDir',(Owned 'ue-user/cook')),@('ShaderWorkingDir',(Owned 'shader-work/cook')))){
-        Assert-A1GExactCookArgument $arguments $pair[0] $pair[1] -PathValue:($pair[0] -in @('outputdir','UserDir','ShaderWorkingDir'))}
+    foreach($pair in @(@('run','Cook'),@('TargetPlatform','Windows'),@('Map','/Engine/Maps/Entry'),@('outputdir',(Owned 'cook/Windows')), @('UserDir',(Owned 'ue-user/cook')),@('EditorSettingsINI',(Owned 'ue-user/cook/Saved/Config/WindowsEditor/EditorSettings.ini')),@('ShaderWorkingDir',(Owned 'shader-work/cook')))){
+        Assert-A1GExactCookArgument $arguments $pair[0] $pair[1] -PathValue:($pair[0] -in @('outputdir','UserDir','EditorSettingsINI','ShaderWorkingDir'))}
     foreach($flag in @('SkipZenStore','NullRHI','RenderOffScreen','NoSplash','nosound','NoSourceControl','NoLiveCoding','DDC-NoDefaultGraph','NoRemoteShaderCompile','stdout','CrashForUAT','unattended','NoLogTimes')){Assert-A1GExactCookArgument $arguments $flag}
     $ddc='(E04A1G=(Type=FileSystem,Path='+(Owned 'ddc/cook').Replace('\','/')+',ReadOnly=false,Remote=false,DeleteUnused=false))'
     Assert-A1GExactCookArgument $arguments 'DDC' $ddc
@@ -1459,6 +1465,7 @@ function Complete-A1GCookPhase($Process,$Before){
     $lines=@($child.text -split "`n"|Where-Object {-not [string]::IsNullOrWhiteSpace($_)})
     if(-not $lines.Count -or $lines[-1] -notmatch '^Log file closed, [^\r\n]+\r?$' -or @([regex]::Matches($child.text,'(?m)^LogInit: Display: Success - 0 error\(s\), [0-9]+ warning\(s\)\r?$')).Count -ne 1 -or $child.text -match '(?im)\b(?:Fatal error:|Critical error:|Log[^:\r\n]*: Error:)'){throw 'A1G_COOK_COPIED_LOG_INCOMPLETE_OR_FAILED'}
     if($child.text -match '(?im)LogPluginManager:.*(?:Mounting|Enabling).*\bE04ProfileProof\b|LogModuleManager:.*(?:Loaded|Loading).*\bE04Profile(?:Parser|Probe|GameProbe)\b'){throw 'A1G_COOK_EDITOR_PROOF_PLUGIN_OBSERVED_ENABLED'}
+    if($child.text -match '(?im)LogPluginManager:.*(?:Mounting|Enabling).*\bAndroidFileServer\b|LogModuleManager:.*(?:InternalLoadLibrary|Loaded|Loading).*\bAndroidFileServer(?:Editor)?\b'){throw 'A1G_COOK_ANDROID_FILE_SERVER_OBSERVED_ENABLED'}
     $argv=Get-A1GCookArgumentEvidence $uat.text $child.text;$ddc=Get-A1GCookDdc $child.text
     $files=@(Get-A1GCookedInventory)
     $dev=@([regex]::Matches($child.text,'(?m)^LogAssetRegistryGenerator: Display: Generated development asset registry (?<path>[^\r\n]+) num assets [0-9]+, size is [^\r\n]+\r?$'))

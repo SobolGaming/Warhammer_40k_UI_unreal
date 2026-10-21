@@ -35,8 +35,12 @@ at scripts/migration/fixtures/e04a1g/WarhammerClient.uproject is explicitly froz
 and copied as the owned PROJECT descriptor, without mutating a run input. Require
 exactly one E04ProfileProof enabled reference scoped by PlatformAllowList=[Win64],
 TargetAllowList=[Game], TargetConfigurationAllowList=[Development], with no other
-reference fields. Canonical product WarhammerClient.uproject is unchanged. Preserve
-ordinary targets/A1E Editor behavior. The main-module dependency condition selects
+reference fields. Require exactly one additional AndroidFileServer reference with
+only Name=AndroidFileServer and typed Enabled=false in that owned project. This
+prevents the unrelated default Editor module's first-start DefaultEngine.ini writer;
+its runtime bEnablePlugin setting does not gate that writer. Canonical product
+WarhammerClient.uproject is unchanged. Preserve ordinary targets/A1E Editor behavior.
+The main-module dependency condition selects
 AutomationDriver only for Editor; review that explicit Game dependency amendment.
 
 Add E04ProfileGameProbe Runtime/Default, Win64/Game/Development only; retain plugin
@@ -123,13 +127,19 @@ Target-receipt Plugins and BuildPlugins may be omitted to mean empty. Present
 values must satisfy their array/typed-entry checks; malformed present values
 refuse. Preserve case-insensitive override-name uniqueness and the Game-positive
 exact scoped project reference plus exact matching E04ProfileProof build-plugin
-entry. The Game and Editor receipts must contain no E04ProfileProof Rules
-override, because Shared Game cannot support one.
+entry. The Game and Editor receipts must contain no E04ProfileProof or
+AndroidFileServer Rules override, because Shared Game cannot support one. Both
+actual BuildPlugins arrays must exclude AndroidFileServer; retain the exact owned
+disabled project reference as selection evidence.
 Do not interpret omitted arrays as Game enablement or weaken its positive proof:
 require exact project-reference filters, actual Game build-plugin membership,
 caller/parser compilation, link consumption and the later actual cooked Game
 result. Editor requires no proof build-plugin entry and the exact reference
-filters that exclude Editor; retain actual disabled Cook observations.
+filters that exclude Editor; retain actual disabled Cook observations. The retained
+normal Cook child log must show no AndroidFileServer mount/enable or
+AndroidFileServer/AndroidFileServerEditor module load; preserve the owned staged
+DefaultEngine.ini bytes exactly. Installed-source selection/write evidence remains
+a trusted installed-tool leaf, not binary-to-source or universal load-path proof.
 
 Only owned config selects DefaultGameTarget=WarhammerClientE04A1G,
 DefaultEditorTarget=WarhammerClientEditor, GameDefaultMap/ServerDefaultMap
@@ -141,6 +151,10 @@ not substitute. Preserve complete actual cook metadata/registries/maps/membershi
 
 Pinned installed dotnet/AutomationTool.dll: `-NoCompile -NoP4 BuildCookRun`,
 PROJECT/dedicated target/Win64/Development/`-skipbuild -skippackage -unattended`.
+For this exact argv, resolved Build=False and SkipBuildClient=False are distinct
+fields. Inactive IterateSharedCookedBuild is the empty string;
+IterateSharedBuildUsePrecompiledExe=False remains Boolean.
+
 Cook: `-cook`, Entry, `-CookOutputDir=R/cook/Windows`, installed UnrealEditor-Cmd.exe.
 Stage: `-skipcook -stage`, same map/output root, `-stagingdirectory=R/stage`.
 No pak/iostore/zenstore/skippak/archive/deploy/run. Check actual RequiresPak/platform/
@@ -151,6 +165,13 @@ NoSplash/nosound/NoSourceControl/NoLiveCoding, owned UserDir/ShaderWorkingDir,
 NoRemoteShaderCompile/DDC-NoDefaultGraph and inline E04A1G filesystem DDC
 (ReadOnly=false,Remote=false,DeleteUnused=false). Require path length<119, actual
 argv/positive owned writable backend logs; no fallback/Zen/cloud/shared writer.
+
+Cook also selects owned EditorSettingsINI at
+`R/ue-user/cook/Saved/Config/WindowsEditor/EditorSettings.ini`: require file
+preabsence, owned parent, and exact UAT-sent/own-received override tokens.
+Keep all actual shared/global settings baselines unchanged; UserDir alone does
+not redirect project-agnostic EditorSettings. This selects one config destination,
+not total user-directory isolation.
 
 Cook/Stage get separate fresh uebp_EngineSavedFolder/uebp_LogFolder/
 uebp_FinalLogFolder, owned TEMP/TMP/DOTNET_CLI_HOME/NUGET_PACKAGES, pinned engine.
@@ -272,6 +293,13 @@ Engine source prefix C:/Program Files/Epic Games/UE_5.8/Engine/Source/:
 Runtime/Launch/Private/LaunchEngineLoop.cpp:4886-4964;
 Runtime/Engine/Private/GameUserSettings.cpp:672-744;
 Runtime/Core/Private/Misc/ConfigCacheIni.cpp:6288-6312;
+Runtime/Core/Private/Misc/ConfigCacheIni.cpp:6650-6654;
+Runtime/Core/Private/Misc/ConfigContext.cpp:475-489;
+Runtime/Core/Private/Misc/Paths.cpp:204-208,238-245,451-458,849-851;
+Editor/UnrealEd/Public/Settings/EditorSettings.h:56-59;
+Editor/UnrealEd/Private/Settings/EditorSettings.cpp:60-65,138-139;
+Editor/UnrealEd/Private/EditorEngine.cpp:1033-1034,5861-5894;
+Runtime/CoreUObject/Private/UObject/Obj.cpp:549-552;
 Runtime/Core/Private/Windows/WindowsPlatformProcess.cpp:2686-2708.
 Refresh identities; bind adopted target/caller/plugin/vendor/public headers/
 wrapper/validators/observer. Source alone is not installed-binary correspondence.

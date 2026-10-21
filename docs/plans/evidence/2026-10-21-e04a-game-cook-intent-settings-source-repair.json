@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_ADOPTED_E04_A1G_COOK_INTENT_AND_SETTINGS_SOURCE_REPAIR",
+  "status": "COOK_INTENT_AND_SETTINGS_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "adoptedUtc": "2026-10-21T14:21:00.8455645Z",
+  "failureCheckpoint": "c2173ea2f71b63224bffeae833927f22f8b5d060",
+  "verifiedFailureBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-intent-settings-failure-PROPOSED\\root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "D75296CDFBAF3DDE20FE1BDFA342AC073C61B0546A96F99FF76E6D3D91E316FE"
+  },
+  "failureBackupVerificationTool": "ff4bea",
+  "rootAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-intent-settings-repair-PROPOSED\\root-source-repair-adoption.original.json",
+    "bytes": 4731,
+    "sha256": "20030823FCE771454156820AC986BF279C76AE6A8CD2627B34EBAC9BD9C6E131"
+  },
+  "changes": [
+    {
+      "kind": "wrapper",
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "beforeBytes": 183226,
+      "beforeSha256": "CFAB119EA9BC16FC2FB3A724A9EEDC7DF7C0A6DA181FA4ADF3E3835AC6A59FD0",
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+        "bytes": 184876,
+        "sha256": "580EABA9DF545F80418227E0F4A0A96666B1B5A42BA6A06E370C6F9AA638626E"
+      },
+      "detail": "Expected resolved UAT literals become SkipBuildClient=False and IterateSharedCookedBuild empty string. Four owned EditorSettingsINI route edits and strict disabled AndroidFileServer fixture assertions are combined without weakening unrelated checks.",
+      "uniqueEdits": 12
+    },
+    {
+      "kind": "owned-proof-project-fixture",
+      "path": "scripts/migration/fixtures/e04a1g/WarhammerClient.uproject",
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\fixtures\\e04a1g\\WarhammerClient.uproject",
+        "bytes": 667,
+        "sha256": "7257F92F8CABB963BDAE2FF299656EE1A8F80CFA0D4FF5D3681B12C7267659F3"
+      },
+      "detail": "Explicitly disable AndroidFileServer in the owned proof fixture; retain scoped E04ProfileProof selection and strict typed reference checks.",
+      "beforeBytes": 608,
+      "beforeSha256": "7BD07DC7C969BF0FDB69E876F6AD55CD9F0EA679130CB6D856CD65E01BF39AE8",
+      "uniqueEdits": 1
+    },
+    {
+      "kind": "norm",
+      "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "beforeBytes": 17266,
+      "beforeSha256": "E4F3FA8E117D4FC4C23DBAB9D70AEE09411B8C78F0302EF945823A60BB5B9692",
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+        "bytes": 19058,
+        "sha256": "3003D0D1C08AC01F85504A673A4D4B76C387739AE7E5FE82902E44DC04097605"
+      },
+      "detail": "Document exact owned EditorSettingsINI preabsence/parent/sent-and-received arguments and AndroidFileServer disable checks. Keep all global/shared settings baselines and staged Config preservation checks.",
+      "uniqueEdits": 6
+    }
+  ],
+  "technicalBuilderV8": {
+    "descriptor": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-successor-technical-v8-PROPOSED-20261021-7e5c194a\\New-FreshA1GTechnicalPacket.root-v8.PROPOSED.ps1",
+      "bytes": 23040,
+      "sha256": "3A7212440067D8B022D0B9121364638B09AC6CE0DA8920424802E5A0901CD6A9"
+    },
+    "validation": "Root read full actual functional diff 29944e; zero AST errors and nine functions. Metadata-only adoption; builder not executed.",
+    "scope": "Add clean installed-primary source coverage for UAT defaults/build gating, EditorSettings destination/override/save dispatch and AndroidFileServer registration/config-write/project-disable precedence. No review or native execution is supplied by metadata adoption.",
+    "runtimeFreezeBuilderChanged": false,
+    "requiredWholeSourceCount": 43
+  },
+  "sourceValidation": {
+    "fullFunctionalDiffReadTool": "de0001",
+    "wholeInverses": "All three combined wrapper/fixture/norm inverses matched by root at adoption 95fb61.",
+    "wrapperCRBefore": 169,
+    "wrapperCRAfter": 169,
+    "wrapperAstErrors": 0,
+    "wrapperFunctions": 113,
+    "fixtureJson": "ROOT_PARSED",
+    "qualification": "Finite source/inverse/AST/metadata observations only; no behavioral PASS."
+  },
+  "separateSettingsRestoration": {
+    "receipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-intent-settings-failure-PROPOSED\\root-exact-editor-settings-restoration.original.json",
+      "bytes": 1255,
+      "sha256": "7C8C84F95E5B4195CE715793D2A147518D975DA31C149499A2663DAAE2653E7E"
+    },
+    "rootTool": "58e0e4",
+    "restoredUtc": "2026-10-21T14:18:51.2927258Z",
+    "restoredBytes": 461,
+    "restoredSha256": "B7E47645C8169E0C05AB6AD43F99F4529D33CD12EF019432FA56BD9F994B464E",
+    "qualification": "Root restored exact before-hash bytes after current/preimage guards. Raw before bytes were not originally captured; the recovered candidate was derived by removing only the unique failed-run row. Exclusive historical writer attribution remains unproved. Failed raw evidence and both observed deltas remain unchanged; recovery does not retroactively pass preservation."
+  },
+  "asOfAdoption": {
+    "behavior": "NOT_RUN",
+    "freshSource": "NOT_RUN",
+    "allNineNewPhases": "NOT_RUN",
+    "newRunId": "UNBOUND",
+    "actualNewBindings": "NOT_CREATED",
+    "newSourceAdmission": false,
+    "newPhaseGo": false
+  },
+  "unchanged": "Product project descriptor, Rules, C++, targets, authored product Config and supervisor; closed historical raw evidence and SOURCE/five-predecessor PASS admissions.",
+  "historicalFailure": "docs/plans/research/2026-10-21-e04a-game-cook-intent-settings-failure-closure.md",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "next": "After completed root source adoption, checkpoint/push/gh-verify repaired-source backup before fresh exact head/base/run/freeze/source/config/command/norm bindings and affected SOURCE. Positive root admission precedes separately ordered nine-phase GOs. No old authority transfers; final CODE and different REQ follow successful closed execution.",
+  "rootAdoptionTool": "95fb61"
+}
