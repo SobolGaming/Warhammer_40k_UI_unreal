@@ -20,7 +20,7 @@ $script:Utf8=[Text.UTF8Encoding]::new($false,$true)
 $script:Repo=[IO.Path]::GetFullPath($RepositoryRoot)
 $script:RunRoot=Join-Path $script:Repo ('.local/experiments/E04A1G/'+$RunId)
 $script:Stage=Join-Path $script:RunRoot 'project'
-$script:PhaseRoot=Join-Path $script:RunRoot $Phase.ToLowerInvariant()
+$script:PhaseRoot=Join-Path (Join-Path $script:RunRoot 'phases') $Phase.ToLowerInvariant()
 $script:Order=@('Preflight','DependencyConfigure','DependencyBuild','EditorPrerequisiteBuild','GameBuild','Cook','Stage','Native','Audit')
 $script:Budgets=@{Preflight=300;DependencyConfigure=600;DependencyBuild=1200;EditorPrerequisiteBuild=1800;GameBuild=1800;Cook=1800;Stage=600;Native=600;Audit=300}
 $script:Subset='E04-A1G_WIN64_DEVELOPMENT_GAME_CALLER'
@@ -516,7 +516,7 @@ function Capture-ConfiguredBuildInputs($CheckedConfigure,$ConfigureProcess) {
     $rootNames=@{cache='CMakeCache.txt';compileCommands='compile_commands.json';ninja='build.ninja'}
     foreach($key in $rootNames.Keys){Assert-GeneratedBuildDescriptor $CheckedConfigure[$key];if(-not [string]::Equals((Assert-Path $CheckedConfigure[$key].path),(Under (Join-Path (Build-Root) $rootNames[$key]) (Build-Root)),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_ROOT_PATH'}}
     Assert-GeneratedBuildDescriptor $ConfigureProcess
-    if(-not [string]::Equals((Assert-Path $ConfigureProcess.path),(Owned 'dependencyconfigure/a1g-cmake-configure.process.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_PATH'}
+    if(-not [string]::Equals((Assert-Path $ConfigureProcess.path),(Owned 'phases/dependencyconfigure/a1g-cmake-configure.process.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_PATH'}
     $store=Owned 'logs/configured-build-inputs';New-Directory $store
     $records=[Collections.Generic.List[object]]::new()
     try{
@@ -537,13 +537,13 @@ function Capture-ConfiguredBuildInputs($CheckedConfigure,$ConfigureProcess) {
 }
 
 function Read-ConfiguredBuildInputBaseline {
-    $completion=Read-Json (Owned 'dependencyconfigure/completion.json')
+    $completion=Read-Json (Owned 'phases/dependencyconfigure/completion.json')
     foreach($key in @('phase','state','runId','sourceHead','freezeManifestSha256','subset','runtimeCallerProof')){if($completion[$key] -isnot [string]){throw 'E04A1_GENERATED_INPUT_PREDECESSOR_TYPE'}}
     if(($completion.schemaVersion -isnot [int] -and $completion.schemaVersion -isnot [long]) -or $completion.schemaVersion -ne 1 -or $completion.executionPassed -isnot [bool] -or -not $completion.executionPassed -or
         $completion.phase -cne 'DependencyConfigure' -or $completion.state -cne 'COMPLETE' -or $completion.runId -cne $RunId -or $completion.sourceHead -cne $script:Freeze.sourceHead -or
         $completion.subset -cne $script:Subset -or $completion.runtimeCallerProof -cne $script:RuntimeCallerProof -or $completion.freezeManifestSha256 -ine (Digest $FreezeManifestPath)){throw 'E04A1_GENERATED_INPUT_SAME_RUN_CONFIGURE_REQUIRED'}
     Assert-GeneratedBuildDescriptor $completion.result
-    if(-not [string]::Equals((Assert-Path $completion.result.path),(Owned 'dependencyconfigure/result.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_PREDECESSOR_PATH'}
+    if(-not [string]::Equals((Assert-Path $completion.result.path),(Owned 'phases/dependencyconfigure/result.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_PREDECESSOR_PATH'}
     $result=Read-Json $completion.result.path
     foreach($key in @('phase','runId','sourceHead','subset','runtimeCallerProof')){if($result[$key] -isnot [string]){throw 'E04A1_GENERATED_INPUT_PREDECESSOR_TYPE'}}
     if(($result.schemaVersion -isnot [int] -and $result.schemaVersion -isnot [long]) -or $result.schemaVersion -ne 1 -or
@@ -560,7 +560,7 @@ function Read-ConfiguredBuildInputBaseline {
     Assert-GeneratedBuildDescriptor $manifest.freezeManifest
     if(-not [string]::Equals((Assert-Path $manifest.freezeManifest.path),(Assert-Path $FreezeManifestPath),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_FREEZE_PATH'}
     Assert-GeneratedBuildDescriptor $manifest.configureProcess
-    if(-not [string]::Equals((Assert-Path $manifest.configureProcess.path),(Owned 'dependencyconfigure/a1g-cmake-configure.process.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_PATH'}
+    if(-not [string]::Equals((Assert-Path $manifest.configureProcess.path),(Owned 'phases/dependencyconfigure/a1g-cmake-configure.process.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_PATH'}
     if($result.processes -isnot [Collections.IList] -or $result.processes.Count -ne 1 -or $result.processes[0] -isnot [Collections.IDictionary]){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_BINDING'}
     Assert-GeneratedBuildDescriptor $result.processes[0].receiptArtifact
     if(($result.processes[0].receiptArtifact|ConvertTo-Json -Compress) -cne ($manifest.configureProcess|ConvertTo-Json -Compress)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_BINDING'}
@@ -709,13 +709,13 @@ function Check-Dependency {
 function Check-Previous {
     $links=[Collections.Generic.List[object]]::new();$index=[Array]::IndexOf($script:Order,$Phase)
     for($i=0;$i -lt $index;$i++){
-        $name=$script:Order[$i];$completion=Read-Json (Owned ($name.ToLowerInvariant()+'/completion.json'))
+        $name=$script:Order[$i];$completion=Read-Json (Owned ('phases/'+$name.ToLowerInvariant()+'/completion.json'))
         if($completion.phase -cne $name -or $completion.state -cne 'COMPLETE' -or $completion.executionPassed -ne $true -or $completion.runId -cne $RunId -or $completion.sourceHead -cne $script:Freeze.sourceHead -or $completion.freezeManifestSha256 -ine $ExpectedFreezeSha256){throw 'A1G_SAME_RUN_ORDERED_PREDECESSOR_REQUIRED'}
         [void](Check-Descriptor $completion.result);$result=Read-Json $completion.result.path
         if($result.executionPassed -ne $true -or $null -ne $result.primaryFailure -or @($result.secondaryErrors).Count -or $result.phase -cne $name -or $result.runId -cne $RunId -or $result.sourceHead -cne $script:Freeze.sourceHead){throw 'A1G_PREDECESSOR_FAILED_OR_UNCLOSED'}
         foreach($d in $result.retainedArtifacts){[void](Check-Descriptor $d)}
         foreach($p in $result.processes){Require-RootPass $p}
-        $links.Add([ordered]@{phase=$name;completion=(Descriptor (Owned ($name.ToLowerInvariant()+'/completion.json')));result=$completion.result})
+        $links.Add([ordered]@{phase=$name;completion=(Descriptor (Owned ('phases/'+$name.ToLowerInvariant()+'/completion.json')));result=$completion.result})
     };$links.ToArray()
 }
 function Materialize-Stage {
@@ -940,7 +940,7 @@ function Assert-A1GNewBuildFile($Before,[string]$Path) {
     return Descriptor $p
 }
 
-function Resolve-A1GReceiptFile([string]$Value,[string]$ReceiptDirectory) {
+function Resolve-A1GReceiptFile([string]$Value,[string]$ReceiptDirectory,[switch]$AllowMissing) {
     if([string]::IsNullOrWhiteSpace($Value)){throw 'A1G_RECEIPT_FILE_MISSING'}
     if($Value.StartsWith('$(EngineDir)/',[StringComparison]::Ordinal)){$Value=Join-Path (Join-Path $EngineRoot 'Engine') $Value.Substring(13)}
     elseif($Value.StartsWith('$(ProjectDir)/',[StringComparison]::Ordinal)){$Value=Join-Path $script:Stage $Value.Substring(14)}
@@ -950,7 +950,62 @@ function Resolve-A1GReceiptFile([string]$Value,[string]$ReceiptDirectory) {
     $owned=$p.StartsWith($script:Stage+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)
     $installed=$p.StartsWith((Join-Path $EngineRoot 'Engine')+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)
     if(-not ($owned -or $installed)){throw 'A1G_RECEIPT_FILE_OUTSIDE_SELECTED_PROJECT_ENGINE'}
+    if($AllowMissing){return $p}
     return Need-File $p
+}
+
+function Get-A1GReceiptRuntimeDependencies($Receipt,[string]$Directory) {
+    if($Receipt.RuntimeDependencies -isnot [System.Collections.IList]){throw 'A1G_RUNTIME_DEPENDENCY_ARRAY_REQUIRED'}
+    $rows=[Collections.Generic.List[object]]::new()
+    # Keep repeated declarations in original order; each must independently join.
+    $ordinal=0
+    foreach($dependency in $Receipt.RuntimeDependencies){
+        if($dependency -isnot [Collections.IDictionary] -or $dependency.Count -ne 2 -or -not $dependency.Contains('Path') -or -not $dependency.Contains('Type') -or $dependency.Path -isnot [string] -or $dependency.Type -isnot [string]){throw 'A1G_RUNTIME_DEPENDENCY_CURRENT_PATH_TYPE_SCHEMA_REQUIRED'}
+        if($dependency.Type -cnotin @('UFS','NonUFS','DebugNonUFS','SystemNonUFS')){throw 'A1G_RUNTIME_DEPENDENCY_TYPE_UNSUPPORTED'}
+        # UBT already expands module variables, SourcePath mappings and wildcards
+        # before writing this concrete receipt. Do not expand them a second time.
+        if($dependency.Path -match '[\x00-\x1f\x7f*?]' -or $dependency.Path.Contains('...')){throw 'A1G_RUNTIME_DEPENDENCY_NONCONCRETE_PATH'}
+        $path=Resolve-A1GReceiptFile $dependency.Path $Directory -AllowMissing
+        $exists=$true
+        try {[void](Need-File $path)}
+        catch [IO.FileNotFoundException] {$exists=$false}
+        catch [IO.DirectoryNotFoundException] {$exists=$false}
+        if(-not $exists -and $dependency.Type -cne 'DebugNonUFS'){throw 'A1G_REQUIRED_RUNTIME_DEPENDENCY_MISSING'}
+        $rows.Add([ordered]@{receiptOrdinal=$ordinal;rawPath=$dependency.Path;path=$path;type=$dependency.Type;exists=$exists;file=if($exists){Descriptor $path}else{$null};disposition=if($exists){'REQUIRES_CLASSIFIED_COPY'}else{'OPTIONAL_DEBUG_MISSING'}})
+        $ordinal++
+    }
+    return $rows.ToArray()
+}
+
+function Confirm-A1GRuntimeDependencyCoverage($GameFacts,$CopyRows) {
+    [void](Check-Descriptor $GameFacts.targetReceipt)
+    $current=Read-A1GMatchingTargetReceipt 'WarhammerClientE04A1G' 'Game'
+    Equal-Data $GameFacts.targetReceipt $current.targetReceipt 'runtime coverage exact Game target receipt'
+    Equal-Data @($GameFacts.runtimeDependencies) @($current.runtimeDependencies) 'runtime dependency paths, classifications, presence and current source bytes'
+    $covered=[Collections.Generic.List[object]]::new()
+    foreach($dependency in $current.runtimeDependencies){
+        $copyCandidates=@($CopyRows|Where-Object {$_.source.path -ieq $dependency.path})
+        if(-not $dependency.exists){
+            if($dependency.type -cne 'DebugNonUFS' -or $copyCandidates.Count){throw 'A1G_OPTIONAL_DEBUG_ABSENCE_OR_COPY_MISMATCH'}
+            $covered.Add([ordered]@{receiptOrdinal=$dependency.receiptOrdinal;rawPath=$dependency.rawPath;path=$dependency.path;type=$dependency.type;disposition='OPTIONAL_DEBUG_MISSING';source=$null;copy=$null})
+            continue
+        }
+        $kind=switch -CaseSensitive ($dependency.type){'UFS' {'UFSFiles'};'NonUFS' {'NonUFSFiles'};'SystemNonUFS' {'NonUFSFiles'};'DebugNonUFS' {'NonUFSFilesDebug'};default {throw 'A1G_RUNTIME_DEPENDENCY_TYPE_UNSUPPORTED'}}
+        if($copyCandidates.Count -ne 1 -or $copyCandidates[0].kind -cne $kind){throw 'A1G_RUNTIME_DEPENDENCY_NOT_UNIQUELY_CLASSIFIED_STAGED'}
+        $copy=$copyCandidates[0]
+        [void](Check-Descriptor $copy.source);[void](Check-Descriptor $copy.staged)
+        Equal-Data $dependency.file $copy.source 'declared runtime dependency versus FinalCopy source bytes'
+        if($copy.byteIdentical -isnot [bool]){throw 'A1G_RUNTIME_DEPENDENCY_COPY_FLAG_INVALID'}
+        $exact=$copy.source.bytes -eq $copy.staged.bytes -and $copy.source.sha256 -ieq $copy.staged.sha256
+        if($copy.byteIdentical -cne $exact){throw 'A1G_RUNTIME_DEPENDENCY_COPY_BYTES_OR_FLAG_MISMATCH'}
+        if($exact){
+            if($copy.copyQualification -cne 'EXACT_BYTES'){throw 'A1G_RUNTIME_DEPENDENCY_COPY_QUALIFICATION_MISMATCH'}
+        }elseif([IO.Path]::GetExtension($dependency.path) -ine '.ini' -or $copy.copyQualification -cne 'INI_MAY_BE_SANITIZED_BY_NORMAL_COPY_NO_SOURCE_BYTE_EQUALITY_CLAIM'){
+            throw 'A1G_RUNTIME_DEPENDENCY_CHANGED_WITHOUT_SELECTED_INI_QUALIFICATION'
+        }
+        $covered.Add([ordered]@{receiptOrdinal=$dependency.receiptOrdinal;rawPath=$dependency.rawPath;path=$dependency.path;type=$dependency.type;disposition='CLASSIFIED_COPY_OBSERVED';source=$dependency.file;copy=$copy})
+    }
+    return [ordered]@{targetReceipt=$current.targetReceipt;declaredCount=@($current.runtimeDependencies).Count;copiedDeclarationCount=@($covered|Where-Object {$_.disposition -ceq 'CLASSIFIED_COPY_OBSERVED'}).Count;optionalDebugMissingCount=@($covered|Where-Object {$_.disposition -ceq 'OPTIONAL_DEBUG_MISSING'}).Count;rows=$covered.ToArray();scope='Every ordered declaration, including repeated paths, in the concrete current Game receipt joined to one actual classified FinalCopy row, or explicit unchanged optional-debug absence. Existing INI sanitization qualification is retained. No transitive dependency or sanitization-content certificate.'}
 }
 
 function Read-A1GMatchingTargetReceipt([string]$Target,[string]$Type) {
@@ -974,11 +1029,27 @@ function Read-A1GMatchingTargetReceipt([string]$Target,[string]$Type) {
         $products.Add(@{file=Descriptor $path;type=$p.Type})
     }
     if(-not $products.Count){throw 'A1G_BUILD_PRODUCTS_EMPTY'}
-    foreach($p in @($r.RuntimeDependencies)){
-        if($p.Type -isnot [string]){throw 'A1G_RUNTIME_DEPENDENCY_TYPE_MISSING'}
-        $dependencies.Add(@{file=Descriptor (Resolve-A1GReceiptFile $p.Path $directory);type=$p.Type})
-    }
+    foreach($dependency in @(Get-A1GReceiptRuntimeDependencies $r $directory)){$dependencies.Add($dependency)}
     return @{targetReceipt=Descriptor $item.path;data=$r;directory=$directory;buildProducts=$products.ToArray();runtimeDependencies=$dependencies.ToArray();launch=Descriptor (Resolve-A1GReceiptFile $r.Launch $directory)}
+}
+
+function Get-A1GReceiptPluginArrays($Receipt) {
+    if($Receipt -isnot [Collections.IDictionary]){throw 'A1G_PLUGIN_OVERRIDE_SHAPE'}
+    $overrides=@();$buildPlugins=@()
+    if($Receipt.Contains('Plugins')){
+        if($Receipt['Plugins'] -isnot [array]){throw 'A1G_PLUGIN_OVERRIDE_SHAPE'}
+        $overrides=@($Receipt['Plugins'])
+    }
+    if($Receipt.Contains('BuildPlugins')){
+        if($Receipt['BuildPlugins'] -isnot [array]){throw 'A1G_BUILD_PLUGIN_ARRAY_SHAPE'}
+        $buildPlugins=@($Receipt['BuildPlugins'])
+    }
+    $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach($row in $overrides){
+        if($row -isnot [Collections.IDictionary] -or $row['Name'] -isnot [string] -or $row['Enabled'] -isnot [bool] -or -not $seen.Add($row['Name'])){throw 'A1G_PLUGIN_OVERRIDE_SHAPE'}
+    }
+    foreach($name in $buildPlugins){if($name -isnot [string]){throw 'A1G_BUILD_PLUGIN_ARRAY_SHAPE'}}
+    return @{overrides=$overrides;buildPlugins=$buildPlugins}
 }
 
 function Get-A1GProofPluginSelection($Receipt,[bool]$Enabled) {
@@ -988,11 +1059,10 @@ function Get-A1GProofPluginSelection($Receipt,[bool]$Enabled) {
     if($d.EnabledByDefault -ne $false -or $d.CanContainContent -ne $false){throw 'A1G_PROOF_PLUGIN_DISABLED_DEFAULT_REQUIRED'}
     $projectRows=@($p.Plugins|Where-Object {$_.Name -ceq 'E04ProfileProof'})
     if($projectRows.Count -gt 1 -or @($projectRows|Where-Object {$_.Enabled -ne $false}).Count){throw 'A1G_PROJECT_WIDE_PROOF_ENABLE_FORBIDDEN'}
-    $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-    $overrides=@($Receipt.Plugins)
-    foreach($row in $overrides){if($row.Name -isnot [string] -or $row.Enabled -isnot [bool] -or -not $seen.Add($row.Name)){throw 'A1G_PLUGIN_OVERRIDE_SHAPE'}}
+    $pluginArrays=Get-A1GReceiptPluginArrays $Receipt
+    $overrides=@($pluginArrays.overrides)
     $rows=@($overrides|Where-Object {$_.Name -ceq 'E04ProfileProof'})
-    $built=@($Receipt.BuildPlugins|Where-Object {$_ -ceq 'E04ProfileProof'})
+    $built=@($pluginArrays.buildPlugins|Where-Object {$_ -ceq 'E04ProfileProof'})
     if($Enabled){if($rows.Count -ne 1 -or $rows[0].Enabled -ne $true -or $built.Count -ne 1){throw 'A1G_GAME_RECEIPT_PROOF_PLUGIN_ENABLE_REQUIRED'}}
     else{
         if(@($rows|Where-Object Enabled).Count -or $built.Count){throw 'A1G_EDITOR_RECEIPT_PROOF_PLUGIN_MUST_BE_DISABLED'}
@@ -1001,7 +1071,7 @@ function Get-A1GProofPluginSelection($Receipt,[bool]$Enabled) {
             if([IO.Directory]::Exists($root) -and @(Plain-Files $root).Count){throw 'A1G_DISABLED_EDITOR_PLUGIN_GENERATED_OUTPUTS_PRESENT'}
         }
     }
-    return @{proofPluginEnabled=$Enabled;descriptor=Descriptor $descriptor;project=Descriptor $project;receiptOverrides=$overrides;buildPlugins=@($Receipt.BuildPlugins);qualification='Actual receipt/build set, selected disabled default/project configuration and owned output checks; not an Editor startup observation. Cook must retain the actual normal startup outcome.'}
+    return @{proofPluginEnabled=$Enabled;descriptor=Descriptor $descriptor;project=Descriptor $project;receiptOverrides=$overrides;buildPlugins=@($pluginArrays.buildPlugins);qualification='Actual receipt/build set, selected disabled default/project configuration and owned output checks; not an Editor startup observation. Cook must retain the actual normal startup outcome.'}
 }
 
 function Get-A1GUbtActionLog($Process,$Before,[string]$Target) {
@@ -1112,7 +1182,7 @@ function Check-A1GEditorPrerequisiteBuild($Process,$Before) {
     if($manifest.data.BuildId -isnot [string] -or [string]::IsNullOrEmpty($manifest.data.BuildId) -or $manifest.data.BuildId -cne $engineModules.BuildId){throw 'A1G_EDITOR_PROJECT_ENGINE_BUILDID_MISMATCH'}
     $binary=Under (Join-Path ([IO.Path]::GetDirectoryName($manifest.path)) $manifest.data.Modules.WarhammerClient) $script:Stage
     if(@($receipt.buildProducts|Where-Object {$_.file.path -ieq $binary -and $_.type -ceq 'DynamicLibrary'}).Count -ne 1){throw 'A1G_EDITOR_MODULE_NOT_MATCHING_RECEIPT_PRODUCT'}
-    if(@($receipt.buildProducts|Where-Object {$_.file.path.Replace('\','/').Contains('/Plugins/E04ProfileProof/',[StringComparison]::OrdinalIgnoreCase)}).Count -or @($receipt.runtimeDependencies|Where-Object {$_.file.path.Replace('\','/').Contains('/Plugins/E04ProfileProof/',[StringComparison]::OrdinalIgnoreCase)}).Count){throw 'A1G_DISABLED_EDITOR_PROOF_PLUGIN_PRODUCT_OR_RUNTIME_INPUT'}
+    if(@($receipt.buildProducts|Where-Object {$_.file.path.Replace('\','/').Contains('/Plugins/E04ProfileProof/',[StringComparison]::OrdinalIgnoreCase)}).Count -or @($receipt.runtimeDependencies|Where-Object {$_.path.Replace('\','/').Contains('/Plugins/E04ProfileProof/',[StringComparison]::OrdinalIgnoreCase)}).Count){throw 'A1G_DISABLED_EDITOR_PROOF_PLUGIN_PRODUCT_OR_RUNTIME_INPUT'}
     $compiles=@(Get-A1GCompileEvidence 'WarhammerClient' '' 'EditorProject' $Before $log.text)
     $link=Get-A1GLinkEvidence $binary $compiles $Before $log.text
     return @{targetReceipt=$receipt.targetReceipt;launch=$receipt.launch;launchCmd=$launchCmd;projectModule=@{module='WarhammerClient';manifest=Descriptor $manifest.path;engineManifest=Descriptor $engineManifest;binary=$link.binary;buildId=$manifest.data.BuildId};pluginSelection=$plugin;buildProducts=$receipt.buildProducts;runtimeDependencies=$receipt.runtimeDependencies;log=$log.file;process=$Process.receiptArtifact;nativeFlags=@{compileResponses=$compiles;linkResponses=@($link)};limits='Normal Editor build prerequisite only; no Editor/cook startup or A1E proof/acceptance transfer.'}
@@ -1169,7 +1239,7 @@ function Get-A1GUatLog([string]$Name){
 function Get-A1GUatIntent([string]$Text,[string]$Name){
     $blocks=@([regex]::Matches($Text,'(?ms)^[\t ]*Project Params \*+\r?\n(?<body>.*?)^[\t ]*Project Params \*+\r?$'))
     if($blocks.Count -ne 1){throw 'A1G_SINGLE_NORMAL_UAT_PROJECT_PARAMS_REQUIRED'};$body=$blocks[0].Groups['body'].Value
-    $expected=[ordered]@{Build='False';SkipBuildClient='True';Cook='True';CookOnTheFly='False';DedicatedServer='False';IsProgramTarget='False';Pak='False';IoStore='False';ZenStore='False';SkipPak='False';PrePak='False';Package='False';SkipPackage='True';Archive='False';Deploy='False';Run='False';IncrementalCook='False';CookInEditor='False';IterateSharedCookedBuild='False';NoCleanStage='False';SkipStage='False';LogWindow='False';bTreatNonShippingBinariesAsDebugFiles='False';ClientConfigsToBuild='Development';ClientCookedTargets='WarhammerClientE04A1G';ClientTargetPlatform='Win64';RawProjectPath=(Join-Path $script:Stage 'WarhammerClient.uproject');MapsToCook='/Engine/Maps/Entry'}
+    $expected=[ordered]@{Build='False';SkipBuildClient='True';Cook='True';CookOnTheFly='False';DedicatedServer='False';IsProgramTarget='False';Pak='False';IoStore='False';ZenStore='False';SkipPak='False';PrePak='False';Package='False';SkipPackage='True';Archive='False';Deploy='False';Run='False';IncrementalCook='False';CookInEditor='False';IterateSharedCookedBuild='False';NoCleanStage='False';NoDebugInfo='False';SeparateDebugInfo='False';IterateSharedBuildUsePrecompiledExe='False';SkipStage='False';LogWindow='False';bTreatNonShippingBinariesAsDebugFiles='False';ClientConfigsToBuild='Development';ClientCookedTargets='WarhammerClientE04A1G';ClientTargetPlatform='Win64';RawProjectPath=(Join-Path $script:Stage 'WarhammerClient.uproject');MapsToCook='/Engine/Maps/Entry'}
     $expected.SkipCook=if($Name -ceq 'cook'){'False'}else{'True'}
     $expected.Stage=if($Name -ceq 'stage'){'True'}else{'False'}
     $actual=[ordered]@{}
@@ -1204,7 +1274,7 @@ function Assert-A1GUatRoot($Process,[string]$Name){
     $raw
 }
 function Get-A1GClosedPriorResult([string]$Name,[string]$Field){
-    $directory=Owned $Name.ToLowerInvariant();$completion=Read-Json (Join-Path $directory 'completion.json')
+    $directory=Owned ('phases/'+$Name.ToLowerInvariant());$completion=Read-Json (Join-Path $directory 'completion.json')
     if($completion.phase -cne $Name -or $completion.runId -cne $RunId -or $completion.sourceHead -cne $script:Freeze.sourceHead -or $completion.freezeManifestSha256 -ine $ExpectedFreezeSha256 -or $completion.state -cne 'COMPLETE' -or $completion.executionPassed -ne $true){throw 'A1G_CLOSED_SAME_RUN_PHASE_REQUIRED'}
     [void](Check-Descriptor $completion.result);$r=Read-Json $completion.result.path
     if($r.phase -cne $Name -or $r.runId -cne $RunId -or $r.sourceHead -cne $script:Freeze.sourceHead -or $r.executionPassed -ne $true -or $null -ne $r.primaryFailure -or @($r.secondaryErrors).Count -or $r[$Field] -isnot [Collections.IDictionary]){throw 'A1G_POSITIVE_PRIOR_PHASE_FACTS_REQUIRED'}
@@ -1215,7 +1285,8 @@ function Assert-A1GCookEditorPrerequisite($Editor){
     foreach($d in @($Editor.targetReceipt,$Editor.launch,$Editor.launchCmd,$Editor.projectModule.manifest,$Editor.projectModule.binary,$Editor.pluginSelection.descriptor,$Editor.pluginSelection.project)){[void](Check-Descriptor $d)}
     if((Assert-Path $Editor.launchCmd.path) -ine (Assert-Path $script:Freeze.toolPaths.editorCmd)){throw 'A1G_COOK_EDITOR_EXECUTABLE_MISMATCH'}
     $receipt=Read-Json $Editor.targetReceipt.path
-    if($receipt.TargetType -cne 'Editor' -or $receipt.TargetName -cne 'WarhammerClientEditor' -or $receipt.Platform -cne 'Win64' -or $receipt.Configuration -cne 'Development' -or @($receipt.Plugins|Where-Object {$_.Name -ceq 'E04ProfileProof' -and $_.Enabled}).Count){throw 'A1G_COOK_NORMAL_EDITOR_RECEIPT_MISMATCH'}
+    $pluginArrays=Get-A1GReceiptPluginArrays $receipt
+    if($receipt.TargetType -cne 'Editor' -or $receipt.TargetName -cne 'WarhammerClientEditor' -or $receipt.Platform -cne 'Win64' -or $receipt.Configuration -cne 'Development' -or @($pluginArrays.overrides|Where-Object {$_.Name -ceq 'E04ProfileProof' -and $_.Enabled}).Count){throw 'A1G_COOK_NORMAL_EDITOR_RECEIPT_MISMATCH'}
     $plugin=Read-Json $Editor.pluginSelection.descriptor.path;$project=Read-Json $Editor.pluginSelection.project.path
     if($plugin.EnabledByDefault -ne $false -or @($project.Plugins|Where-Object {$_.Name -ceq 'E04ProfileProof' -and $_.Enabled}).Count){throw 'A1G_COOK_EDITOR_PROOF_PLUGIN_ENABLE'}
     $manifest=Read-Json $Editor.projectModule.manifest.path
@@ -1388,6 +1459,7 @@ function Complete-A1GStagePhase($Process,$Before){
     if($executableRows.Count -ne 1){throw 'A1G_GAME_RECEIPT_EXECUTABLE_NOT_UNIQUELY_LOOSE_STAGED'}
     foreach($product in $Before.game.facts.buildProducts|Where-Object {$_.type -in @('Executable','DynamicLibrary','RequiredResource')}){
         [void](Check-Descriptor $product.file);if(@($maps.NonUFSFiles.rows|Where-Object {$_.source.path -ieq $product.file.path -and $_.byteIdentical}).Count -ne 1){throw 'A1G_REQUIRED_GAME_BUILD_PRODUCT_NOT_LOOSE_STAGED'}}
+    $runtimeCoverage=Confirm-A1GRuntimeDependencyCoverage $Before.game.facts $allRows
     $cookRoot=Assert-Path $Before.cook.facts.outputRoot
     $cookedRows=@($maps.UFSFiles.rows|Where-Object {$_.source.path.StartsWith($cookRoot+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)})
     $stagedMaps=@($cookedRows|Where-Object {[IO.Path]::GetExtension($_.source.path) -ceq '.umap'})
@@ -1400,7 +1472,7 @@ function Complete-A1GStagePhase($Process,$Before){
     foreach($row in $allFiles){[void](Under $row.file.path $stageRoot)}
     $expectedPaths=@($allRows.staged.path)+$stagedManifestFiles.ToArray()
     Equal-Data @($allFiles.file.path|Sort-Object -CaseSensitive) @($expectedPaths|Sort-Object -CaseSensitive) 'actual stage files versus emitted copy maps and copied timestamp manifests'
-    @{uatLog=$uat.file;process=$Process.receiptArtifact;resolvedIntent=$intent;stageRoot=$stageRoot;platform=$platform;projectName=$project;copyManifests=@(foreach($pair in $kinds){$maps[$pair[0]].manifest});timestampManifests=@(foreach($pair in $kinds){$timestamps[$pair[0]]});copyRows=$allRows;files=$allFiles;executable=$executableRows[0].staged;originalGameExecutable=$exe;gameTargetReceipt=$Before.game.facts.targetReceipt;cookedMaps=$stagedMaps;cookedRuntimeRegistries=$stagedRegistries;cookResult=$Before.cook.result;scope='Observed normal loose-stage mappings/current bytes and receipt executable. Binary registry/package-store contents are retained opaque data. Later actual Native cooked Game/Entry world supplies functional startup-dependency proof; no comprehensive transitive asset graph certification.'}
+    @{uatLog=$uat.file;process=$Process.receiptArtifact;resolvedIntent=$intent;stageRoot=$stageRoot;platform=$platform;projectName=$project;copyManifests=@(foreach($pair in $kinds){$maps[$pair[0]].manifest});timestampManifests=@(foreach($pair in $kinds){$timestamps[$pair[0]]});copyRows=$allRows;runtimeDependencyCoverage=$runtimeCoverage;files=$allFiles;executable=$executableRows[0].staged;originalGameExecutable=$exe;gameTargetReceipt=$Before.game.facts.targetReceipt;cookedMaps=$stagedMaps;cookedRuntimeRegistries=$stagedRegistries;cookResult=$Before.cook.result;scope='Observed normal loose-stage mappings/current bytes and receipt executable. Binary registry/package-store contents are retained opaque data. Later actual Native cooked Game/Entry world supplies functional startup-dependency proof; no comprehensive transitive asset graph certification.'}
 }
 
 # Bounded Native/Audit consumers. Source definitions do not grant execution.
@@ -1453,6 +1525,8 @@ function Get-A1GNativePriorJoin {
     Confirm-A1GCookedFiles $cook.facts;[void](Confirm-A1GStageFiles $stage.facts)
     foreach($d in @($game.facts.targetReceipt,$game.facts.executable,$game.facts.selection,$game.facts.vendorArtifactReceipt)){[void](Check-Descriptor $d)}
     if($stage.facts.originalGameExecutable.path -ine $game.facts.executable.path -or $stage.facts.executable.bytes -ne $game.facts.executable.bytes -or $stage.facts.executable.sha256 -ine $game.facts.executable.sha256 -or $stage.facts.gameTargetReceipt.sha256 -ine $game.facts.targetReceipt.sha256 -or $stage.facts.cookResult.sha256 -ine $cook.result.sha256){throw 'A1G_NATIVE_STAGE_GAME_COOK_JOIN_MISMATCH'}
+    $runtimeCoverage=Confirm-A1GRuntimeDependencyCoverage $game.facts $stage.facts.copyRows
+    Equal-Data $stage.facts.runtimeDependencyCoverage $runtimeCoverage 'same-run Stage runtime dependency coverage rejoin'
     $literals=@(foreach($spec in @(@('A1G_BAD',17,'CA15BE3A44E31C173E9697942EA8AE1F1988C902954AB10E74EAFE9F4E98B93C'),@('A1G_GOOD',19,'F522FFF3CCDADCDA1FB8001D2B86727D39E43DB96A2D2D5A7C4CE7A2D0AD095B'))){
         $literalCandidates=@($script:Freeze.fixtureInputs|Where-Object {$_.bytes -eq $spec[1] -and $_.sha256 -ieq $spec[2]})
         if($literalCandidates.Count -ne 1){throw 'A1G_FROZEN_COMPILED_LITERAL_DATA_NOT_UNIQUE'}
@@ -1461,7 +1535,7 @@ function Get-A1GNativePriorJoin {
     $caller=@($game.facts.nativeFlags.compileResponses|Where-Object {$_.module -ceq 'E04ProfileGameProbe'})
     if($caller.Count -ne 1 -or $caller[0].mode -cne 'Caller' -or $game.facts.nativeFlags.monolithicDefinitionObserved -ne $true){throw 'A1G_ACTUAL_CALLER_BUILD_EVIDENCE_MISSING'}
     [void](Check-Descriptor $caller[0].source)
-    @{game=$game;cook=$cook;stage=$stage;literalInputs=$literals;compiledCallerSource=$caller[0].source}
+    @{game=$game;cook=$cook;stage=$stage;runtimeDependencyCoverage=$runtimeCoverage;literalInputs=$literals;compiledCallerSource=$caller[0].source}
 }
 
 function Prepare-A1GNativePhase {
@@ -1575,7 +1649,7 @@ function Complete-A1GAuditPhase {
     $names=@('Preflight','DependencyConfigure','DependencyBuild','EditorPrerequisiteBuild','GameBuild','Cook','Stage','Native');$closed=[ordered]@{};$descriptors=[Collections.Generic.List[object]]::new();$last=$null
     $statuses=@{Preflight='PREFLIGHT_PASS_NO_NATIVE_ROOT';DependencyConfigure='DEPENDENCY_CONFIGURE_PASS_NO_INSTALL';DependencyBuild='DEPENDENCY_BUILD_AND_EXPLICIT_GAME_ARTIFACT_COPY_PASS';EditorPrerequisiteBuild='EDITOR_PREREQUISITE_BUILD_PASS_NORMAL_RECEIPT_AND_PROJECT_MODULE';GameBuild='GAME_BUILD_PASS_ACTUAL_CALLER_PARSER_FLAGS_AND_MONOLITHIC_LINK';Cook='COOK_PASS_NORMAL_COPIED_LOG_AND_LOOSE_PRIMARY_OUTPUTS';Stage='STAGE_PASS_ACTUAL_LOOSE_MANIFESTS_AND_GAME_EXECUTABLE_MAPPING';Native='NATIVE_PASS_COOKED_GAME_FINITE_RESULT_AND_ZERO_OBSERVED_WINDOWS'}
     foreach($name in $names){
-        $root=Owned $name.ToLowerInvariant();$completion=Read-Json (Join-Path $root 'completion.json');[void](Check-Descriptor $completion.result);$r=Read-Json $completion.result.path
+        $root=Owned ('phases/'+$name.ToLowerInvariant());$completion=Read-Json (Join-Path $root 'completion.json');[void](Check-Descriptor $completion.result);$r=Read-Json $completion.result.path
         if($completion.state -cne 'COMPLETE' -or $completion.executionPassed -ne $true -or $completion.phase -cne $name -or $completion.runId -cne $RunId -or $completion.sourceHead -cne $script:Freeze.sourceHead -or $completion.freezeManifestSha256 -ine $ExpectedFreezeSha256 -or $completion.subset -cne $script:Subset -or $completion.runtimeCallerProof -cne $script:RuntimeCallerProof -or (Assert-Path $completion.result.path) -ine (Join-Path $root 'result.json') -or $r.phase -cne $name -or $r.runId -cne $RunId -or $r.sourceHead -cne $script:Freeze.sourceHead -or $r.executionPassed -ne $true -or $r.status -cne $statuses[$name] -or $null -ne $r.primaryFailure -or @($r.secondaryErrors).Count){throw 'A1G_AUDIT_SAME_RUN_CLOSED_PREFIX_REQUIRED'}
         [void](Check-Descriptor $r.freezeManifest)
         if((Assert-Path $r.freezeManifest.path) -ine (Assert-Path $FreezeManifestPath) -or $r.freezeManifest.sha256 -ine $ExpectedFreezeSha256){throw 'A1G_AUDIT_PRIOR_FREEZE_IDENTITY_MISMATCH'}
@@ -1600,7 +1674,7 @@ function Complete-A1GAuditPhase {
     if($process.executable -ine $join.stage.facts.executable.path -or $process.workingDirectory -ine $join.stage.facts.stageRoot -or $process.completionCleanupMode -cne 'NaturalDrain'){throw 'A1G_AUDIT_NATIVE_PROCESS_BINARY_OR_CWD_MISMATCH'}
     Equal-Data @($process.arguments) @($n.arguments) 'audit actual native argv'
     $windows=Check-A1GOwnedWindowSamples $process;$proof=Check-A1GNativeResultDetails $process $join $n.paths;$log=Check-A1GNativeLog $process $n.paths $n.arguments
-    @{closedPhaseCount=8;predecessors=$descriptors.ToArray();literalInputCount=$join.literalInputs.Count;attemptCount=$proof.attemptCount;evaluatedCheckCount=$proof.evaluatedCheckCount;nativeAssertionTotal='NOT_INFERRED';executable=$join.stage.facts.executable;result=$proof.result;log=$log.log;windowObservation=$windows;settingsScope='Original9 roles plus separately prebaselined medium-integrity GameUserSettings fallback role';specialAssuranceCertification='DEFERRED_UNPROVEN_OWN17';scope='Closed ordinary source/settings/input/cook/stage/binary/result reconciliation. Final CODE and different REQ remain required; no A1E acceptance transfer.'}
+    @{closedPhaseCount=8;predecessors=$descriptors.ToArray();literalInputCount=$join.literalInputs.Count;attemptCount=$proof.attemptCount;evaluatedCheckCount=$proof.evaluatedCheckCount;nativeAssertionTotal='NOT_INFERRED';executable=$join.stage.facts.executable;runtimeDependencyCoverage=$join.runtimeDependencyCoverage;result=$proof.result;log=$log.log;windowObservation=$windows;settingsScope='Original9 roles plus separately prebaselined medium-integrity GameUserSettings fallback role';specialAssuranceCertification='DEFERRED_UNPROVEN_OWN17';scope='Closed ordinary source/settings/input/cook/stage/binary/result reconciliation. Final CODE and different REQ remain required; no A1E acceptance transfer.'}
 }
 
 # END direct ordinary source integration.
@@ -1630,7 +1704,7 @@ try{
     if($Phase -ceq 'Preflight'){Materialize-Stage}
     $sourceBefore=@(Snapshot-Members $script:Repo $script:Freeze.sourceMembership);$stageBefore=@(Snapshot-Members $script:Stage $script:Freeze.stageMembership);$inputsBefore=@(Snapshot-Inputs)
     $baseline=@(Settings);Check-Settings $baseline $baseline
-    if($Phase -cne 'Preflight'){$pf=Read-Json (Owned 'preflight/result.json');Check-Settings $pf.settingsAfter $baseline;Check-A1GUnownedGameSettings $pf.gameSettingsAfter $gameBaseline}
+    if($Phase -cne 'Preflight'){$pf=Read-Json (Owned 'phases/preflight/result.json');Check-Settings $pf.settingsAfter $baseline;Check-A1GUnownedGameSettings $pf.gameSettingsAfter $gameBaseline}
     $script:Result.settingsBefore=$baseline;$script:Result.sourceBefore=$sourceBefore;$script:Result.stageBefore=$stageBefore;$script:Result.fixturesBefore=$inputsBefore
     if($Phase -notin @('Preflight','Audit')){if('Warhammer.E02.Supervisor' -as [type]){throw 'A1G_FRESH_POWERSHELL_HOST_REQUIRED'};Add-Type -TypeDefinition ([IO.File]::ReadAllText($script:Freeze.supervisorSource.path)) -Language CSharp}
     switch($Phase){

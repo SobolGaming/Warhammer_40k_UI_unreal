@@ -15,6 +15,9 @@ selected records and frozen input identities before first report/tool-value body
 inspection. SOURCE is the pre-execution prerequisite; final CODE and a different
 REQ remain separate after actual execution. This is ordinary focused review,
 not a new harness/transitive certification campaign.
+Workspace instructions require a full read of the clean sibling Arcade AGENTS.md;
+explicitly supply and grant that whole body. Supply only clean necessary Unreal
+instruction extracts; exclude its mixed current/history body from initial inputs.
 
 ## Build and boundary
 
@@ -66,6 +69,12 @@ PROJECT=R/project/WarhammerClient.uproject. Own all outputs under R; reject esca
 reparse paths. No sibling/Core writes, Python host, service/tool installation,
 remote shader compiler, deploy/distribution or unowned persistent process.
 
+Keep phase evidence at `R/phases/<phaseLower>` (process receipt/result/completion),
+separate from fresh Cook payload `R/cook` (`R/cook/Windows`) and Stage payload
+`R/stage`. Creating phase evidence must not create either payload first.
+All strict predecessor/process consumers, including the Game vendor ModuleRules,
+use that same separate evidence route; preserve payload preabsence checks.
+
 | Exact ordered phase | Seconds | Root cap |
 |---|---:|---:|
 | Preflight | 300 | 0 |
@@ -97,6 +106,12 @@ manifest/DLL with matching Editor BuildId and proof-plugin positively disabled i
 selection/receipt/cook. No project/command-line enable, A1E copies, skipped modules
 or implicit rebuild. Game outputs/UAT Build=false cannot supply this prerequisite.
 
+Target-receipt Plugins and BuildPlugins may be omitted to mean empty. Present
+values must satisfy their array/typed-entry checks; malformed present values
+refuse. Preserve case-insensitive override-name uniqueness and the Game-positive
+explicit enabled E04ProfileProof override plus exact matching build-plugin entry.
+Do not interpret omitted arrays as Game enablement or weaken its positive proof.
+
 Only owned config selects DefaultGameTarget=WarhammerClientE04A1G,
 DefaultEditorTarget=WarhammerClientEditor, GameDefaultMap/ServerDefaultMap
 `/Engine/Maps/Entry`, GlobalDefaultGameMode `/Script/Engine.GameModeBase`, empty
@@ -124,6 +139,20 @@ UAT may clear LogFolder: no shared evidence parent. Require complete copied Cook
 log/streams/early fallback; no conflicting child abslog. Join UFS/NonUFS copy/time
 manifests to Cook/Game products/dependencies; rehash whole loose Entry/registry/
 executable stage. Unsupported or missing output/log forms fail.
+
+Retain every concrete ordered RuntimeDependencies Path/Type declaration, including
+duplicates. Reject malformed/unsupported rows or missing required files; only
+DebugNonUFS may retain explicit unchanged optional absence. Join each present row
+to its one actual classified copy: UFS to UFSFiles, NonUFS/SystemNonUFS to
+NonUFSFiles, DebugNonUFS to NonUFSFilesDebug. Preserve original declaration
+ordinals rather than deduplicating the receipt. Stage, Native rejoin and zero-root
+Audit reconcile these source/copy bytes and classifications. Retain the selected
+normal INI-sanitization nonidentity qualification; it is not a content certificate.
+
+Check actual resolved NoDebugInfo=False, SeparateDebugInfo=False and
+IterateSharedBuildUsePrecompiledExe=False. Select the ordinary non-DLC route with
+the exact frozen argv and installed defaults; do not invent an unlogged literal
+null DLC value. Existing loose-store/debug/copy and preservation checks remain.
 
 ## Preservation and Game settings
 

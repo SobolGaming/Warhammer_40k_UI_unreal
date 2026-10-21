@@ -375,7 +375,7 @@ public class YamlCpp : ModuleRules
             HoldDescriptor(Get(c, "ninja"), CheckedPath(Path.Combine(buildRoot, "build.ninja"), true));
             HoldDescriptor(Get(c, "abiEvidenceLog"), CheckedPath(Path.Combine(buildRoot, "CMakeFiles", "CMakeConfigureLog.yaml"), true));
             RequireA1GCMakeRoot(Get(c, "process"),
-                CheckedPath(Path.Combine(run.FullName, "dependencyconfigure", "a1g-cmake-configure.process.json"), true), cmakePath, buildRoot);
+                CheckedPath(Path.Combine(run.FullName, "phases", "dependencyconfigure", "a1g-cmake-configure.process.json"), true), cmakePath, buildRoot);
 
             string buildReceiptPath = CheckedPath(Path.Combine(logs, "a1g-vendor-cmake-build.json"), true);
             FileStream buildLock = HoldDescriptor(Get(r, "vendorBuildReceipt"), buildReceiptPath);
@@ -397,7 +397,7 @@ public class YamlCpp : ModuleRules
             if (buildCompiler.Length != Integer(Get(tools, "compiler"), "bytes")
                 || StreamHash(buildCompiler) != HashText(Get(tools, "compiler"), "sha256")) Fail("A1G_VENDOR_UBT_COMPILER_MISMATCH");
             RequireA1GCMakeRoot(Get(b, "process"),
-                CheckedPath(Path.Combine(run.FullName, "dependencybuild", "a1g-cmake-build.process.json"), true), cmakePath, buildRoot);
+                CheckedPath(Path.Combine(run.FullName, "phases", "dependencybuild", "a1g-cmake-build.process.json"), true), cmakePath, buildRoot);
 
             byte[] selection = JsonSerializer.SerializeToUtf8Bytes(new
             {

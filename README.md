@@ -7,7 +7,9 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The [Game-caller proof](docs/plans/research/2026-10-21-e04a-game-proof-packet.md) is FOCUSED_SOURCE_FAILED_GAME_WRAPPER_REPAIRS_REQUIRED (revision97). SOURCE found three wrapper issues before execution; all nine phases remain NOT_RUN. [Failure closure](docs/plans/research/2026-10-21-e04a-game-source-failure-closure.md). Two inputs/two attempts/52 checks remain planned; Linux is UNTESTED.
+**GAME_WRAPPER_SOURCE_REPAIRED_FRESH_SOURCE_PENDING** (revision 98). Three source-only repairs are applied after failure checkpoint `7c0c017` and verified OWN18 backup: separate phase evidence, optional receipt arrays and ordered runtime-dependency copy joins. [Repair](docs/plans/research/2026-10-21-e04a-game-wrapper-source-repair.md), [receipt](docs/plans/evidence/2026-10-21-e04a-game-wrapper-source-repair.json). Inverse/AST diagnostics only; fresh SOURCE and all nine phases are NOT_RUN, with zero executed attempts/checks and no new RunId/freeze/admission. Preserve raw `370bfba` FAIL and its closed, never-allocated planned run. Checkpoint/verify the repaired candidate backup, then fresh exact bindings and focused SOURCE before any phase GO. Bounded A1E acceptance is unchanged; OWN17 deferred/unproven, visible authority zero, Linux UNTESTED and perpetual review consent unchanged.
+
+Historical revision97: The [Game-caller proof](docs/plans/research/2026-10-21-e04a-game-proof-packet.md) is FOCUSED_SOURCE_FAILED_GAME_WRAPPER_REPAIRS_REQUIRED (revision97). SOURCE found three wrapper issues before execution; all nine phases remain NOT_RUN. [Failure closure](docs/plans/research/2026-10-21-e04a-game-source-failure-closure.md). Two inputs/two attempts/52 checks remain planned; Linux is UNTESTED.
 
 The bounded E04-A1E proof is **BOUNDED_E04_A1E_ACCEPTANCE_RECORDED** (revision 95).
 Bounded E04-A1E acceptance is recorded for reviewed `3bfd22d0018dbda285a3db4184c8509dbc3783f1`
@@ -29,7 +31,7 @@ rendering/Core play, Linux execution and distribution remain open. Standing priv
 source/API review consent continues until explicitly revoked. This publication is
 a metadata/report overlay, outside the exact head assessed by the reports.
 See the [final review provenance](docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json).
-Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G source work follows revision97 above; no old review or native authority transfers.
+Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G source work follows revision98 above; no old review or native authority transfers.
 
 Historical revision 93 A1E status was **EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**
 (revision 93). The [repair receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-test-declarations-repair.json)

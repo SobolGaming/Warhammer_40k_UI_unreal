@@ -78,7 +78,10 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1G status at plan revision97 is **FOCUSED_SOURCE_FAILED_GAME_WRAPPER_REPAIRS_REQUIRED** (revision 97). Fresh SOURCE for `370bfba` / planned run `20261021T090959Z-5fce384b` is FAIL: phase-evidence/payload collisions, optional receipt arrays and missing runtime-dependency reconciliation. The process is closed, raw FAIL report and before-body seals are retained; root made no SOURCE admission. All nine phases remain NOT_RUN, no native RunRoot or phase GO exists, visible authority is zero and Linux is UNTESTED. Checkpoint/push/verify OWN18 failure backup before narrow repairs; then checkpoint/backup, fresh bindings and affected SOURCE. A1E acceptance is unchanged; OWN17 remains deferred/unproven. Final CODE/different REQ and later gates stay open.
+Current A1G status at plan revision98 is **GAME_WRAPPER_SOURCE_REPAIRED_FRESH_SOURCE_PENDING** (revision 98). Three source-only repairs are applied after failure checkpoint `7c0c017` and verified OWN18 backup: separate phase evidence, optional receipt arrays and ordered runtime-dependency copy joins. [Repair](docs/plans/research/2026-10-21-e04a-game-wrapper-source-repair.md), [receipt](docs/plans/evidence/2026-10-21-e04a-game-wrapper-source-repair.json). Inverse/AST diagnostics only; fresh SOURCE and all nine phases are NOT_RUN, with zero executed attempts/checks and no new RunId/freeze/admission. Preserve raw `370bfba` FAIL and its closed, never-allocated planned run. Checkpoint/verify the repaired candidate backup, then fresh exact bindings and focused SOURCE before any phase GO. Bounded A1E acceptance is unchanged; OWN17 deferred/unproven, visible authority zero, Linux UNTESTED and perpetual review consent unchanged.
+The next SOURCE packet must grant the whole clean Arcade AGENTS.md required by workspace instructions; use clean Unreal instruction extracts and exclude its history.
+
+Historical A1G status at plan revision97 was **FOCUSED_SOURCE_FAILED_GAME_WRAPPER_REPAIRS_REQUIRED** (revision 97). Fresh SOURCE for `370bfba` / planned run `20261021T090959Z-5fce384b` is FAIL: phase-evidence/payload collisions, optional receipt arrays and missing runtime-dependency reconciliation. The process is closed, raw FAIL report and before-body seals are retained; root made no SOURCE admission. All nine phases remain NOT_RUN, no native RunRoot or phase GO exists, visible authority is zero and Linux is UNTESTED. Checkpoint/push/verify OWN18 failure backup before narrow repairs; then checkpoint/backup, fresh bindings and affected SOURCE. A1E acceptance is unchanged; OWN17 remains deferred/unproven. Final CODE/different REQ and later gates stay open.
 See [closure](docs/plans/research/2026-10-21-e04a-game-source-failure-closure.md) and [factual receipt](docs/plans/evidence/2026-10-21-e04a-game-source-failure-370bfba.json). No canonical repair, native GO or positive review admission is made here.
 
 Historical A1G status at plan revision96 was **A1G_SOURCE_ADOPTED_FRESH_BINDINGS_PENDING**.
@@ -112,7 +115,7 @@ rendering/Core play, Linux execution and distribution remain open. Standing priv
 source/API review consent continues until explicitly revoked. This publication is
 a metadata/report overlay, outside the exact head assessed by the reports.
 See [final review provenance](docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json).
-Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G source work follows revision97 above; no old review or native authority transfers.
+Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G source work follows revision98 above; no old review or native authority transfers.
 
 Historical A1E status at plan revision 94 (2026-10-21 UTC) is
 **EIGHT_PHASES_PASSED_FINAL_REVIEWS_PENDING**. The

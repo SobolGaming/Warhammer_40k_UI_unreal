@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A1G_NARROW_WRAPPER_SOURCE_REPAIRS_NOT_REVIEW_OR_EXECUTION",
+  "createdUtc": "2026-10-21T09:48:17.4845977Z",
+  "planRevision": 98,
+  "status": "GAME_WRAPPER_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "appliedUtc": "2026-10-21T09:42:08.9594574Z",
+  "failureCheckpoint": "7c0c017b5498d66bceb3542e3b8f08607c257b46",
+  "failureCheckpointBackup": "Root reported exact existing-project remote ref verified through gh before source adoption",
+  "canonicalAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-370bfba-PROPOSED\\root-composed-repairs\\canonical-adoption.original.json",
+    "bytes": 1318,
+    "sha256": "7BAA925E8786D8D036E7398FBC8EFFA5B8DD7D1AAD418A6D642AFA50534BE0D3"
+  },
+  "composition": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-370bfba-PROPOSED\\root-composed-repairs\\composition-manifest.original.json",
+    "bytes": 19599,
+    "sha256": "67A4470BB2B4FE214C4CBEA51491F67E2C432E381F1A1CBD5564989D50D434D8"
+  },
+  "files": [
+    {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "bytes": 177956,
+      "sha256": "264BE06E0BA2813167F388328E074EAD87A831F3EAD75ABB2E9C49D5769BFEB5",
+      "previousBytes": 171414,
+      "previousSha256": "8F3100A7FE89D9FB14CE2B5BC4568A4E4213A18E1A054D39CA5D7A31A895CBC1"
+    },
+    {
+      "path": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "bytes": 79354,
+      "sha256": "8730E81A24D62FB136F1A05C2F96FC79279DE397219C4BA79A633E7235955450",
+      "previousBytes": 79334,
+      "previousSha256": "7B611A3AB16535F94FC2F3D6EF7EF4E30DD14C26373EB5ACDE094F368086505E"
+    }
+  ],
+  "norm": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 15459,
+    "sha256": "1A66344B6030768FC722BC185F16A897953EEDC8B764FF26CD229B8317836C64"
+  },
+  "sourceChecks": {
+    "wrapperTextEdits": 26,
+    "gameYamlTextEdits": 2,
+    "entireOriginalInverseMatched": true,
+    "powerShellAstErrors": 0,
+    "powerShellFunctionCount": 110,
+    "functionCountOrigin": "Root reported post-adoption source AST observation:107+3 direct helpers",
+    "behavioralTests": "NOT_RUN",
+    "controls": "NOT_RUN",
+    "csharpOrNativeCompiler": "NOT_RUN",
+    "newSourceReview": "NOT_RUN"
+  },
+  "repairs": [
+    {
+      "finding": 1,
+      "change": "Evidence now uses R/phases/<phaseLower>; Cook/Stage payload roots and fresh-preabsence remain unchanged",
+      "strictConsumers": "All direct wrapper predecessors/processes plus two GameYaml process receipt expectations updated"
+    },
+    {
+      "finding": 2,
+      "change": "Omitted Plugins/BuildPlugins are empty; malformed present arrays/entries refuse",
+      "positiveGameProof": "Explicit enabled override and exact matching E04ProfileProof built-plugin entry remain required"
+    },
+    {
+      "finding": 3,
+      "change": "Ordered concrete runtime declarations including duplicates rejoin to classified actual Stage copies, Native and Audit",
+      "typeMap": {
+        "UFS": "UFSFiles",
+        "NonUFS": "NonUFSFiles",
+        "SystemNonUFS": "NonUFSFiles",
+        "DebugNonUFS": "NonUFSFilesDebug"
+      },
+      "optionalMissing": "Only unchanged absent DebugNonUFS with explicit record",
+      "ini": "Existing normal sanitization nonidentity qualification retained",
+      "requiredResolvedFlags": [
+        "NoDebugInfo=False",
+        "SeparateDebugInfo=False",
+        "IterateSharedBuildUsePrecompiledExe=False"
+      ],
+      "dlc": "Exact current no-DLC argv/defaults; no invented literal null log field"
+    }
+  ],
+  "preserved": {
+    "oldEditorYamlBranch": "UNCHANGED",
+    "supervisor": {
+      "bytes": 41523,
+      "sha256": "F4BF73355ECCEB727DBE23E60FB21B61A29C424776F7C7938EA946F18826E32C"
+    },
+    "phaseBudgetsAndRootCaps": "UNCHANGED",
+    "selectedFileStorageCaps": "UNCHANGED",
+    "settingsAndSourcePreservation": "FAIL_CLOSED_UNCHANGED",
+    "nativeWindowScope": "NATIVE_ONLY_ZERO_OBSERVED_QUALIFIED_SAMPLES_NONCONTINUOUS",
+    "productConfig": "UNCHANGED"
+  },
+  "historicalFailure": {
+    "sourceHead": "370bfba047805913a06cd7ad1afd10ef26dff879",
+    "plannedRunId": "20261021T090959Z-5fce384b",
+    "rawVerdict": "FAIL_UNCHANGED",
+    "authority": "CLOSED_DO_NOT_REUSE",
+    "nativeRunRoot": "NEVER_ALLOCATED",
+    "failureReceipt": "docs/plans/evidence/2026-10-21-e04a-game-source-failure-370bfba.json"
+  },
+  "currentExecution": {
+    "phaseCount": 9,
+    "allNinePhases": "NOT_RUN",
+    "executedAttempts": 0,
+    "evaluatedChecks": 0,
+    "plannedInputs": 2,
+    "plannedAttempts": 2,
+    "plannedChecks": 52,
+    "newRun": "NOT_BOUND",
+    "newFreeze": "NOT_BOUND",
+    "sourceAdmission": false,
+    "nativeAuthority": false,
+    "visibleAuthority": 0,
+    "linux": "UNTESTED"
+  },
+  "next": "Checkpoint and verify OWN18 repaired-source backup; derive fresh exact source/run/tool/config/input/command/norm bindings and obtain focused SOURCE before exact ordered phase GOs",
+  "freshSourceInstructions": "Explicit whole clean Arcade AGENTS body grant required by workspace; clean Unreal normative extracts only, excluding mixed history and initial author/peer bodies",
+  "a1eAcceptance": "UNCHANGED_BOUNDED_E04_A1E_ACCEPTANCE_RECORDED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "standingReviewConsent": "PERPETUAL_UNLESS_EXPLICITLY_REVOKED",
+  "limits": [
+    "Source application, inverse and AST metadata are not passing behavior, control, compiler, independent SOURCE or native evidence.",
+    "The original raw FAIL and all old records remain unchanged; no old authority transfers.",
+    "Final CODE/different REQ require actual closed execution/evidence freeze.",
+    "OWN17 special certification, A2/full fidelity/Core play/rendering/Linux/distribution remain separate/open."
+  ]
+}
