@@ -7,7 +7,19 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**
+The bounded E04-A1E proof is **MODULE_SCAN_CONFIGURATION_REPAIRED_SOURCE_PENDING**
+(revision 87). The narrow repair explicitly sets `CMAKE_CXX_SCAN_FOR_MODULES=OFF`
+and requires that exact cache value for the pinned nonmodule target; the updated
+functional norm binds it. Dyndep refusal, ABI/build/flags/source/cleanup checks
+and 43/33/50/eight requirements remain unchanged. Actual OFF configuration,
+fresh SOURCE and all eight fresh phases are NOT_RUN; visible count is zero,
+Linux remains UNTESTED and all failed runs stay closed. Checkpoint/push/verify
+OWN18 backup, then derive fresh bindings and obtain affected focused SOURCE
+before ordered native work. No old approval transfers. OWN17 remains deferred/
+unproven/fail-closed; final CODE/different REQ/A1E and broader gates stay open.
+Standing review consent is unchanged.
+
+Historical revision 86 status is **FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**
 (revision 86). Focused SOURCE admitted `6e2262d`; Preflight/SupervisorControls
 passed. Configure failed in 40.9745989 seconds when the capture guard correctly
 refused 30 automatic C++20 module-scanning dyndep bindings. Compiler-alias/flag/
@@ -95,9 +107,10 @@ visible count zero.
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision86 dyndep Configure result](docs/plans/evidence/2026-10-21-e04a-dyndep-configure-result.json)
-  and [closure](docs/plans/research/2026-10-21-e04a-dyndep-closure.md) for current
-  results and gates. The [revision85 compiler-alias repair receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-repair.json)
+- Use the [revision87 module-scan repair receipt](docs/plans/evidence/2026-10-21-e04a-module-scan-repair.json)
+  for current source changes and gates. The [revision86 dyndep Configure result](docs/plans/evidence/2026-10-21-e04a-dyndep-configure-result.json)
+  and [closure](docs/plans/research/2026-10-21-e04a-dyndep-closure.md) preserve
+  that closed run. The [revision85 compiler-alias repair receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-repair.json)
   preserves the prior source change. The [revision84 compiler-alias result](docs/plans/evidence/2026-10-21-e04a-compiler-alias-configure-result.json)
   and [closure](docs/plans/research/2026-10-21-e04a-compiler-alias-closure.md)
   preserve the failed run. The [revision83 scoped cleanup repair receipt](docs/plans/evidence/2026-10-21-e04a-owned-job-cleanup-repair.json)

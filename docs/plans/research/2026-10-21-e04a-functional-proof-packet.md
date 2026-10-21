@@ -69,6 +69,15 @@ skip the ABI check or substitute a static-library-only probe to avoid linking.
 Existing compiler/CRT/exception/static-target choices and process bounds remain;
 configuration selection alone does not establish successful cleanup.
 
+Set `CMAKE_CXX_SCAN_FOR_MODULES=OFF` before creating the pinned yaml-cpp target
+and require the exact OFF cache value. The nonmodule static target retains
+C++20, real source compilation and ordinary MSVC header dependency tracking.
+Keep the existing dyndep refusal: surviving dynamic module-scan instructions
+remain a failed Configure. Reassess this selection if a future dependency pin
+introduces module sources or imports. The [CMake variable and target property](https://cmake.org/cmake/help/v3.31/variable/CMAKE_CXX_SCAN_FOR_MODULES.html)
+and [CMP0155](https://cmake.org/cmake/help/v3.31/policy/CMP0155.html) document this
+explicit selection; the exact installed primary files must be bound for review.
+
 For the fixed synchronous CMake Configure and DependencyBuild command families,
 use an explicit successful-root cleanup mode. After observing the retained root's
 exit code 0, allow five full seconds for natural job draining. If owned members

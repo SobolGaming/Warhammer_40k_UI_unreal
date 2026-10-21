@@ -78,7 +78,24 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 86 (2026-10-21 UTC) is
+Current A1E status at plan revision 87 (2026-10-21 UTC) is
+**MODULE_SCAN_CONFIGURATION_REPAIRED_SOURCE_PENDING**. The
+[repair receipt](docs/plans/evidence/2026-10-21-e04a-module-scan-repair.json)
+records only explicit `CMAKE_CXX_SCAN_FOR_MODULES=OFF` in CMake-Options and its
+exact OFF cache expectation in Check-CMake for the pinned nonmodule target.
+The updated functional norm binds this configuration and its future-pin limits.
+Existing unsupported-dyndep refusal, Release ABI/full static build, compiler/
+flags/source checks, scoped cleanup and 43/33/50/eight requirements are unchanged.
+Actual scanning-OFF Configure, fresh SOURCE and all eight fresh phases are
+NOT_RUN; visible count is zero and Linux remains UNTESTED. The closed `6e2262d`
+run and earlier failures stay unchanged; no old approval transfers. Checkpoint/
+push and verify OWN18 exact remote backup, then derive new head/run/freeze/
+current bindings and obtain affected focused SOURCE before ordered native work.
+OWN17 remains DEFERRED_UNPROVEN/fail-closed; final CODE/different REQ/A1E
+acceptance and broader gates remain open. Standing private source/API review
+consent remains in force until explicitly revoked.
+
+Historical A1E status at plan revision 86 (2026-10-21 UTC) is
 **FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**. The
 [receipt](docs/plans/evidence/2026-10-21-e04a-dyndep-configure-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-dyndep-closure.md) record
