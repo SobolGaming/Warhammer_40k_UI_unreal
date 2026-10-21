@@ -338,9 +338,13 @@ private:
         Report->SetStringField(TEXT("completedUtc"), FDateTime::UtcNow().ToIso8601());
         const bool bPublished = PublishNew(ResultPath, Report);
         if (bPublished)
+        {
             UE_LOG(LogE04A1G, Display, TEXT("E04_A1G_TERMINAL status=%s run=%s attempts=%d checks=%d result=%s"), bPassed ? TEXT("PASS") : TEXT("FAIL"), *RunId, Out.AttemptIds.Num(), Out.Ids.Num(), *ResultPath);
+        }
         else
+        {
             UE_LOG(LogE04A1G, Error, TEXT("Result publication failed; no terminal proof marker; preserve partial output"));
+        }
         // Windows may still return EngineInit's zero from this callback. The
         // consumer must independently reject absent/invalid/FAIL result files.
         FPlatformMisc::RequestExitWithStatus(false, bPassed && bPublished ? 0 : 1, TEXT("E04_A1G_PROOF_COMPLETE"));

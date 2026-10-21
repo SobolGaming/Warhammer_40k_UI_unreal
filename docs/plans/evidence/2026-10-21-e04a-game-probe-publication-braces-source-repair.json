@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_GAME_PROBE_PUBLICATION_BRACES_SOURCE_REPAIR_ADOPTION",
+  "status": "GAME_PROBE_PUBLICATION_BRACES_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "asOfUtc": "2026-10-21T12:36:37.5583085Z",
+  "failureCheckpoint": "47de39639f6ec7844e2c6f62cfd82fa85aefbefc",
+  "failureBackup": {
+    "path": ".local/planning/E04/A1G-gameprobe-else-failure-PROPOSED/root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "341AE2E8B038C1190D7491CFE5FA5350A477D5C677E40A39A88A77F655F6331D"
+  },
+  "rootAdoption": {
+    "path": ".local/planning/E04/A1G-gameprobe-else-repair-PROPOSED/root-source-adoption.original.json",
+    "bytes": 3429,
+    "sha256": "2B6C3555AF41A61496225846D4AB89C19856016B8CA2CFC12E9D64568612C4A1"
+  },
+  "change": {
+    "path": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+    "before": {
+      "path": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+      "bytes": 20592,
+      "sha256": "0B127BA256912A4B388EB476A3429BAB3663D0C4F0467F76DDD4F64A925F22D4"
+    },
+    "after": {
+      "path": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+      "bytes": 20632,
+      "sha256": "302D258BBCE3FE6A7BBFDD4C05ECDB06149A16EBEB6E324E011DD7168BD24703"
+    },
+    "symbol": "FE04ProfileGameProbeModule publication branch",
+    "behavior": "Add four brace lines around the if(bPublished) and else UE_LOG branches. Retain log arguments, publication/result/exit ordering and all 52 planned check semantics. Other GameProbe logging branches were already braced; no deprecation-warning fix is adopted."
+  },
+  "unchanged": {
+    "recordedFiles": [
+      {
+        "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+        "bytes": 17266,
+        "sha256": "E4F3FA8E117D4FC4C23DBAB9D70AEE09411B8C78F0302EF945823A60BB5B9692"
+      },
+      {
+        "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+        "bytes": 183417,
+        "sha256": "6C0F250D59EE34C575EEAC055CE2A058198E3F27F9A689AD3897B15778CCDCF7"
+      },
+      {
+        "path": "Source/WarhammerClientE04A1G.Target.cs",
+        "bytes": 1271,
+        "sha256": "CBE503A93B79FD470C66102D04AA73E9F13523224BF1138003649ECAA5365604"
+      },
+      {
+        "path": "WarhammerClient.uproject",
+        "bytes": 356,
+        "sha256": "8A1A494E67831C67E23A646BF543A2268015301F2B8EBD661F5F462DFBD611D8"
+      },
+      {
+        "path": "scripts/migration/fixtures/e04a1g/WarhammerClient.uproject",
+        "bytes": 608,
+        "sha256": "7BD07DC7C969BF0FDB69E876F6AD55CD9F0EA679130CB6D856CD65E01BF39AE8"
+      },
+      {
+        "path": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+        "bytes": 87636,
+        "sha256": "CD9C8424E543BD40A0FAE209837EE9EA2AFC0351ECF929BDC7F5F0786313D939"
+      }
+    ],
+    "scope": "Norm, wrapper, ModuleRules, targets, canonical product descriptor, project fixtures, parser, supervisor, authored Config and the 52 planned checks are unchanged by this source repair."
+  },
+  "rootStaticChecks": {
+    "rootInspectedWholeFunctionalDiff": true,
+    "wholePhysicalSourceInverseMatched": true,
+    "insertedBraceLines": 4,
+    "oldCrBytes": 1,
+    "newCrBytes": 1,
+    "existingPhysicalCrByteOffset": 684,
+    "existingPhysicalCrFollowedByLf": true,
+    "otherGameProbeLoggingBranchAlreadyBraced": true,
+    "limits": "Source/static observations against the physical pre-repair source. The prior Git HEAD blob normalized one existing CR, so this does not claim that the Git-parent blob diff consists only of the four brace lines. No C++ compilation, behavior, fresh SOURCE or native execution PASS is inferred."
+  },
+  "bytePreservationPolicy": {
+    "requiredAttribute": "/Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp -text whitespace=cr-at-eol",
+    "physicalBeforeBytes": 20592,
+    "priorGitHeadBlobBytes": 20591,
+    "purpose": "Preserve the exact adopted mixed-ending source bytes and the one existing physical CRLF at byte offset 684 through Git indexing. Root observed that the prior text filter would normalize that CR. The staged Git diff may therefore also show the previously normalized CR alongside the four new brace lines. This attribute is separate from C++ semantics; no semantic change is made to that pre-existing source line.",
+    "checkpointRequirement": "Root must append this attribute with the metadata overlay and verify raw/index byte identity before the repaired-source checkpoint."
+  },
+  "asOfAdoption": {
+    "cppCompilation": "NOT_RUN",
+    "behavior": "NOT_RUN",
+    "freshSource": "NOT_RUN",
+    "newRun": "UNBOUND",
+    "nativePhases": {
+      "Preflight": "NOT_RUN",
+      "DependencyConfigure": "NOT_RUN",
+      "DependencyBuild": "NOT_RUN",
+      "EditorPrerequisiteBuild": "NOT_RUN",
+      "GameBuild": "NOT_RUN",
+      "Cook": "NOT_RUN",
+      "Stage": "NOT_RUN",
+      "Native": "NOT_RUN",
+      "Audit": "NOT_RUN"
+    },
+    "gameAttempts": 0,
+    "evaluatedCustomChecks": 0,
+    "sourceAdmission": "NONE_FOR_REPAIRED_SOURCE",
+    "phaseAuthority": "NONE_FOR_REPAIRED_SOURCE"
+  },
+  "preservedOldRun": {
+    "sourceHead": "03fb024d94c944122b8ff34a317143e06bb77b5e",
+    "runId": "20261021T121210Z-65f77563",
+    "status": "CLOSED_NO_RETRY_NO_SUCCESSOR_GO",
+    "source": "PASS_ADMITTED_FOR_OLD_EXACT_HEAD",
+    "Preflight": "PASS_ADMITTED",
+    "DependencyConfigure": "PASS_ADMITTED",
+    "DependencyBuild": "PASS_ADMITTED",
+    "EditorPrerequisiteBuild": "PASS_ADMITTED",
+    "GameBuild": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "remainingFourPhases": "NOT_RUN",
+    "gameAttempts": 0,
+    "evaluatedCustomChecks": 0,
+    "closure": "docs/plans/research/2026-10-21-e04a-game-probe-compilation-failure-closure.md",
+    "receipt": "docs/plans/evidence/2026-10-21-e04a-game-probe-compilation-failure.json",
+    "approvalTransfer": false,
+    "limits": "Actual UBT exit 6, C2181 at GameProbe line 342, retained C4996/C4701 warnings and absent successful Game build/link/runtime proof remain historical facts. No failed phase is rewritten as PASS."
+  },
+  "nextRequired": "Checkpoint this repaired source and factual overlay, push and gh-verify exact OWN18 remote backup before fresh head/base/run/freeze/tool/config/input/command/norm bindings and affected SOURCE. Only positive root SOURCE admission permits separately ordered native phase GOs. Final CODE and a different REQ follow actual successful closed execution.",
+  "optionalHarnessCertificationPrerequisite": false,
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "standingReviewTransmissionConsent": "APPROVED_UNTIL_EXPLICIT_HUMAN_REVOCATION_WITHIN_ESTABLISHED_SCOPE_AND_DESTINATION",
+  "limits": [
+    "All NOT_RUN/UNBOUND statements describe the repaired candidate as of adoption, not the old closed run or any later evidence.",
+    "The four brace lines are a source repair only; the unchanged compiler warnings remain retained and no actual compilation success is asserted.",
+    "This adoption record grants no SOURCE admission, native execution, GUI interaction, Core-host action, review acceptance, merge or migration acceptance.",
+    "No old source or phase approval transfers to changed source; preserve all historical raw failures and bounded A1E acceptance.",
+    "OWN17 optional harness/generated-response/transitive Rules/cache/witness/repeated certification remains deferred/unproven; ordinary runtime assertions remain fail-closed. No optional harness campaign becomes a new prerequisite.",
+    "The later factual metadata overlay lies outside any old reviewed candidate. Auxiliary drafting supplies no formal gate approval and performs no canonical/sibling edit, Git operation, candidate test/runtime/review execution or authority admission."
+  ]
+}
