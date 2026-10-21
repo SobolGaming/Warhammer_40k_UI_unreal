@@ -7,20 +7,27 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **EIGHT_PHASES_PASSED_FINAL_REVIEWS_PENDING**
-(revision 94). The [execution receipt](docs/plans/evidence/2026-10-21-e04a-editor-native-execution.json)
-records all eight phases PASS for `0bbbf884` / `20261021T062742Z-6f13b8a2`:
-eight UE successes, zero warnings/failures, 43 IDs, 33 generated definitions,
-50 attempts, 58 native files and 1745 evaluated custom checks. The UE assertion
-total remains unestablished. This is the Windows exception-enabled Editor subset;
-all execution authority is closed/no retry. The pre-allocation restricted-host
-refusal, separate normal-desktop GO, metadata-only inspection correction and
-SOURCE seal-ordering gap are retained; strict pre-read ordering was not fully met.
-Final CODE/different REQ are NOT_RUN and E04-A1E acceptance is pending.
-Checkpoint/push/verify OWN18 results, freeze final evidence/source correspondence,
-then obtain those independent reviews. OWN17/D-P2 remain deferred/unproven/
-fail-closed; A1G/A2/later gates stay open, visible zero/Linux UNTESTED and
-perpetual private source/API consent unchanged.
+The bounded E04-A1E proof is **BOUNDED_E04_A1E_ACCEPTANCE_RECORDED** (revision 95).
+Bounded E04-A1E acceptance is recorded for reviewed `3bfd22d0018dbda285a3db4184c8509dbc3783f1`
+against `03d28af606fc6c57d20915f746296b0d843211c6`, using unchanged execution
+`0bbbf884` / run `20261021T062742Z-6f13b8a2`. Final CODE is PASS. Valid initial
+REQ remains BLOCKED; the separate limited postsealed supplement is PASS and
+resolves historical 38/40-input continuity and reserved administrative items.
+Root combines those dispositions for this Windows exception-enabled Editor subset.
+Eight suites passed: 43 IDs, 33 generated definitions, 50 attempts, 58 native files
+and 1745 evaluated custom checks; the UE assertion total remains unestablished.
+The original SOURCE ordering failure remains FALSE/nonconforming, accepted as a
+nonblocking qualification; the preallocation same-unused-RunId route remains an
+interpretation. No owner waiver or retrospective ordering PASS is claimed.
+Parent read-only/never runtime and prompt identities are recorded; the supplement's
+opaque arithmetic-helper task/child permissions and lower-level isolation remain
+UNVERIFIED. All review/native process groups are closed, with no retry authority.
+OWN17/D-P2 stay deferred/unproven. A1G, A2/727 scenarios, full YAML/profile/HUD/input/
+rendering/Core play, Linux execution and distribution remain open. Standing private
+source/API review consent continues until explicitly revoked. This publication is
+a metadata/report overlay, outside the exact head assessed by the reports.
+See the [final review provenance](docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json).
+Checkpoint this report/metadata overlay, push and verify OWN18 exact remote backup, then adopt the separately prepared bounded A1G Game-caller source and clean norm. Checkpoint/verify its backup, freeze fresh exact source/run/tool/config/input identities and obtain affected SOURCE before any exact phase GO. Existing execution is closed; A1G/A2/later gates stay open, no visible launch is authorized and Linux remains UNTESTED.
 
 Historical revision 93 A1E status was **EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**
 (revision 93). The [repair receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-test-declarations-repair.json)

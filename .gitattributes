@@ -59,3 +59,9 @@ docs/plans/research/2026-10-20-e04a-v7.2-method-audit.md -text
 docs/plans/research/2026-10-20-e04a-v7.2-projector-repair-recheck.md -text
 # Revision69 practical-method adoption is an exact copy of the root record.
 docs/plans/evidence/2026-10-20-e04a-practical-method-adoption.json -text whitespace=cr-at-eol
+# E04-A1E final reports and publication provenance retain their exact bytes.
+docs/plans/research/2026-10-21-e04a-editor-final-code.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-21-e04a-editor-final-requirements.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-21-e04a-editor-requirements-supplement.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-21-e04a-editor-source-review.md -text whitespace=-blank-at-eol
+docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json -text whitespace=cr-at-eol

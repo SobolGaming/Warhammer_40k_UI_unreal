@@ -78,7 +78,30 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 94 (2026-10-21 UTC) is
+Current A1E status at plan revision 95 (2026-10-21 UTC) is
+**BOUNDED_E04_A1E_ACCEPTANCE_RECORDED**.
+Bounded E04-A1E acceptance is recorded for reviewed `3bfd22d0018dbda285a3db4184c8509dbc3783f1`
+against `03d28af606fc6c57d20915f746296b0d843211c6`, using unchanged execution
+`0bbbf884` / run `20261021T062742Z-6f13b8a2`. Final CODE is PASS. Valid initial
+REQ remains BLOCKED; the separate limited postsealed supplement is PASS and
+resolves historical 38/40-input continuity and reserved administrative items.
+Root combines those dispositions for this Windows exception-enabled Editor subset.
+Eight suites passed: 43 IDs, 33 generated definitions, 50 attempts, 58 native files
+and 1745 evaluated custom checks; the UE assertion total remains unestablished.
+The original SOURCE ordering failure remains FALSE/nonconforming, accepted as a
+nonblocking qualification; the preallocation same-unused-RunId route remains an
+interpretation. No owner waiver or retrospective ordering PASS is claimed.
+Parent read-only/never runtime and prompt identities are recorded; the supplement's
+opaque arithmetic-helper task/child permissions and lower-level isolation remain
+UNVERIFIED. All review/native process groups are closed, with no retry authority.
+OWN17/D-P2 stay deferred/unproven. A1G, A2/727 scenarios, full YAML/profile/HUD/input/
+rendering/Core play, Linux execution and distribution remain open. Standing private
+source/API review consent continues until explicitly revoked. This publication is
+a metadata/report overlay, outside the exact head assessed by the reports.
+See [final review provenance](docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json).
+Checkpoint this report/metadata overlay, push and verify OWN18 exact remote backup, then adopt the separately prepared bounded A1G Game-caller source and clean norm. Checkpoint/verify its backup, freeze fresh exact source/run/tool/config/input identities and obtain affected SOURCE before any exact phase GO. Existing execution is closed; A1G/A2/later gates stay open, no visible launch is authorized and Linux remains UNTESTED.
+
+Historical A1E status at plan revision 94 (2026-10-21 UTC) is
 **EIGHT_PHASES_PASSED_FINAL_REVIEWS_PENDING**. The
 [execution receipt](docs/plans/evidence/2026-10-21-e04a-editor-native-execution.json)
 records all eight phases PASS for `0bbbf884` / run

@@ -1,11 +1,15 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 75 (2026-10-20 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 95 (2026-10-21 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-Current A1E status at revision 75 is **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
+Current A1E status at revision 95 is **BOUNDED_E04_A1E_ACCEPTANCE_RECORDED**.
+[Final review provenance](evidence/2026-10-21-e04a-editor-final-review-provenance.json); [CODE](research/2026-10-21-e04a-editor-final-code.md), [initial REQ](research/2026-10-21-e04a-editor-final-requirements.md), [limited supplement](research/2026-10-21-e04a-editor-requirements-supplement.md) and [focused SOURCE](research/2026-10-21-e04a-editor-source-review.md).
+CODE PASS plus the valid initial REQ technical findings and limited supplement PASS close only the Windows Editor subset. The initial raw BLOCKED verdict and ordering failure remain unchanged. Checkpoint this report/metadata overlay, push and verify OWN18 exact remote backup, then adopt the separately prepared bounded A1G Game-caller source and clean norm. Checkpoint/verify its backup, freeze fresh exact source/run/tool/config/input identities and obtain affected SOURCE before any exact phase GO. Existing execution is closed; A1G/A2/later gates stay open, no visible launch is authorized and Linux remains UNTESTED.
+
+Historical A1E status at revision 75 was **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
 The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
 and [factual record](evidence/2026-10-20-e04a-null-response-env-repairs.json) bind
 applied source repairs, 43 inputs/33 recipes/50 attempts/eight suites and 14
