@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_ADOPTED_NARROW_E04_A1G_DEPENDENCY_FACT_COMPARISON_SOURCE_REPAIR",
+  "status": "DEPENDENCY_FACT_COMPARISONS_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "adoptedUtc": "2026-10-21T13:38:02.4830571Z",
+  "failureCheckpoint": "a672ab072fb7ffca237445687eebb667b52c35ba",
+  "failureCheckpointRemoteBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-dependency-fact-source-failure-PROPOSED\\root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "52E6F695108DDFC74746A60E73EEEE8F35BFF44D11E01D9C88A35AA94D061610",
+    "exactRemoteCheckpointVerified": "a672ab072fb7ffca237445687eebb667b52c35ba",
+    "rootVerificationTool": "8b35e0"
+  },
+  "rootAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-dependency-fact-order-repair-PROPOSED\\root-source-repair-adoption.original.json",
+    "bytes": 1568,
+    "sha256": "CBEB7B5677DE420D503B8A7B589B4552DD6602E9E3B3CB07846A60308C803C62",
+    "fullFunctionalDiffReadTool": "3e6258"
+  },
+  "change": {
+    "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+    "lines": [566, 578, 618],
+    "oldBytes": 183417,
+    "oldSha256": "6C0F250D59EE34C575EEAC055CE2A058198E3F27F9A689AD3897B15778CCDCF7",
+    "newBytes": 183226,
+    "newSha256": "CFAB119EA9BC16FC2FB3A724A9EEDC7DF7C0A6DA181FA4ADF3E3835AC6A59FD0",
+    "behavior": "Replace three direct ConvertTo-Json string comparisons with existing Equal-Data. Both reference-array operands retain explicit array wrapping.",
+    "preserved": "Independent descriptor, type, path and byte checks; dictionary exact keys and scalar types/values/null distinctions; reference-array order/cardinality."
+  },
+  "sourceValidation": {
+    "wholeInverseMatches": true,
+    "originalCR": 169,
+    "repairedCR": 169,
+    "originalLF": 1847,
+    "repairedLF": 1847,
+    "astErrors": 0,
+    "functions": 113,
+    "qualification": "Full functional diff and finite inverse/AST observations only; no behavioral, independent review or native PASS."
+  },
+  "asOfAdoption": {
+    "behavior": "NOT_RUN",
+    "freshSource": "NOT_RUN",
+    "allNineNewPhases": "NOT_RUN",
+    "newRunId": "UNBOUND",
+    "actualNewBindings": "NOT_CREATED",
+    "sourceAdmission": false,
+    "newPhaseAuthority": false
+  },
+  "unchanged": "Equal-Data helper, norm, Rules, C++, targets, project, Config, fixtures, supervisor and closed historical evidence.",
+  "historicalFailure": {
+    "sourceHead": "92d915fc11679e8ba4f7ec4346d24fa5c67adf81",
+    "runId": "20261021T132014Z-5daec77b",
+    "rawVerdict": "FAIL",
+    "closure": "docs/plans/research/2026-10-21-e04a-game-dependency-fact-source-failure-closure.md",
+    "rawReport": "docs/plans/research/2026-10-21-e04a-game-source-review-92d915f.md",
+    "receipt": "docs/plans/evidence/2026-10-21-e04a-game-source-failure-92d915f.json",
+    "authorityTransfers": false
+  },
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "unaffected": "Bounded A1E acceptance, historical failures and perpetual private source/API review consent remain unchanged.",
+  "next": "Checkpoint/push/gh-verify repaired-source backup; then fresh exact head/base/run/freeze/source/config/command bindings and affected SOURCE. Separate ordered nine-phase GOs require positive root SOURCE admission. Final CODE and different REQ follow successful closed execution."
+}

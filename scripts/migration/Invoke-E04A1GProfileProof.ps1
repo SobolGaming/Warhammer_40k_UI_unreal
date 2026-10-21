@@ -563,7 +563,7 @@ function Read-ConfiguredBuildInputBaseline {
     if(-not [string]::Equals((Assert-Path $manifest.configureProcess.path),(Owned 'phases/dependencyconfigure/a1g-cmake-configure.process.json'),[StringComparison]::OrdinalIgnoreCase)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_PATH'}
     if($result.processes -isnot [Collections.IList] -or $result.processes.Count -ne 1 -or $result.processes[0] -isnot [Collections.IDictionary]){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_BINDING'}
     Assert-GeneratedBuildDescriptor $result.processes[0].receiptArtifact
-    if(($result.processes[0].receiptArtifact|ConvertTo-Json -Compress) -cne ($manifest.configureProcess|ConvertTo-Json -Compress)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_BINDING'}
+    Equal-Data $result.processes[0].receiptArtifact $manifest.configureProcess 'E04A1_GENERATED_INPUT_CONFIGURE_PROCESS_BINDING'
     Require-GeneratedBuildKeys $manifest.configureRoots @('cache','compileCommands','ninja')
     foreach($reference in $manifest.references){
         Require-GeneratedBuildKeys $reference @('kind','owner','target','rule','expression')
@@ -575,7 +575,7 @@ function Read-ConfiguredBuildInputBaseline {
     }
     foreach($key in @('cache','compileCommands','ninja')){
         Assert-GeneratedBuildDescriptor $manifest.configureRoots[$key] -IdentityOnly;Assert-GeneratedBuildDescriptor $result.configure[$key] -IdentityOnly
-        if(($manifest.configureRoots[$key]|ConvertTo-Json -Compress) -cne ($result.configure[$key]|ConvertTo-Json -Compress)){throw 'E04A1_GENERATED_INPUT_CONFIGURE_ROOT_BINDING'}
+        Equal-Data $manifest.configureRoots[$key] $result.configure[$key] 'E04A1_GENERATED_INPUT_CONFIGURE_ROOT_BINDING'
     }
     return @{descriptor=$descriptor;manifest=$manifest;configureResult=$completion.result}
 }
@@ -615,7 +615,7 @@ function Confirm-ConfiguredBuildInputs([switch]$AfterBuild) {
             $actual=Descriptor $path;$record=$expected[$path]
             if($actual.bytes -ne $record.live.bytes -or $actual.sha256 -ine $record.live.sha256){$drift+=@{kind='live-input';expected=$record.live;actual=$actual};throw 'E04A1_GENERATED_INPUT_LIVE_BYTE_DRIFT'}
         }
-        if(($inventory.references|ConvertTo-Json -Depth 10 -Compress) -cne ($baseline.manifest.references|ConvertTo-Json -Depth 10 -Compress)){throw 'E04A1_GENERATED_INPUT_REFERENCE_DRIFT'}
+        Equal-Data @($inventory.references) @($baseline.manifest.references) 'E04A1_GENERATED_INPUT_REFERENCE_DRIFT'
         foreach($key in @('cache','compileCommands','ninja')){Assert-GeneratedBuildDescriptor $baseline.manifest.configureRoots[$key]}
         $receipt=Join-Path $store 'observed.json'
         Write-JsonNew $receipt @{kind='E04A1_GENERATED_INPUT_CONFIRMED';runId=$RunId;sourceHead=$script:Freeze.sourceHead;stage=$label;baseline=$baseline.descriptor;configureResult=$baseline.configureResult;observed=@($observed);references=$inventory.references;limits='Immediate synchronous before/after identity observations, not atomic launch or universal TOCTOU/lineage proof.'}
