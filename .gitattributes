@@ -79,3 +79,5 @@ docs/plans/evidence/2026-10-21-e04a-game-source-adoption.json -text whitespace=c
 /docs/plans/evidence/2026-10-21-e04a-game-wrapper-source-repair.json -text whitespace=cr-at-eol
 # Retain the exact mixed-ending vendor rule bytes bound by source receipts.
 /Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-2b52bbc.md -text whitespace=-blank-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-failure-2b52bbc.json -text whitespace=cr-at-eol
