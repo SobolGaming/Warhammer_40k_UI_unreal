@@ -78,7 +78,21 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 78 (2026-10-21 UTC) is
+Current A1E status at plan revision 79 (2026-10-21 UTC) is
+**F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**. The
+[F13 expectation receipt](docs/plans/evidence/2026-10-21-e04a-f13-expectation-repair.json)
+records only native/manifest F13 Observed 2-to-3, retaining F11=2, after closure
+checkpoint `584a339` and verified remote backup. The current functional norm
+explicitly supersedes the old operational packet's shared count of 2 only; the
+historical packet and raw CHANGES_REQUESTED report remain unchanged. No parser or
+wrapper behavior, input bytes/recipes or 43/33/50/eight counts change. No test/build
+or native result is claimed. Fresh exact head/run/freeze and affected focused
+SOURCE must precede native phase GO; final CODE/different REQ follows actual
+execution/evidence freeze. OWN17 stays deferred, runtime checks fail-closed,
+standing consent unchanged; zero admissions, all eight native phases NOT_RUN,
+visible0, and A1G/A2/plain-DEL/Linux/later gates remain open.
+
+Historical A1E status at plan revision 78 (2026-10-21 UTC) is
 **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. The
 [closed focused review](docs/plans/research/2026-10-21-e04a-focused-source-f13-closure.md)
 records raw CHANGES_REQUESTED with declared complete coverage and one P2: F13

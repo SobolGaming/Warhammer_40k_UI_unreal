@@ -21,6 +21,11 @@ The exact current set is 43 input IDs, 50 attempts and eight Automation suites.
 Preserve earlier input bytes, recipes and expectations; this amendment does not
 weaken the functional checks.
 
+F13's corrected null diagnostic expects Observed 3; F11 still expects 2. This
+supersedes the earlier operational packet's shared value 2 only. Keep the exact
+refusal type, mark, limit, input bytes and bounded-probe behavior. This pinned-source
+expectation still requires native verification.
+
 Before any native phase, freeze the actual candidate/run/source/tool/fixture
 identities and obtain a fresh independent focused SOURCE assessment. Supply the
 complete component, tests, fixtures, wrapper and material direct build/process

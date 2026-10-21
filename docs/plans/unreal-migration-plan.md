@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-21 UTC
-**Revision:** 78 - FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED. Focused 9e83408/run002433 SOURCE closed CHANGES_REQUESTED; F13 expectation repair and fresh affected SOURCE remain pending. All native phases NOT_RUN.
+**Revision:** 79 - F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING. Native/manifest F13 Observed corrected to 3, F11 remains 2; input bytes/counts unchanged. Fresh exact bindings and affected focused SOURCE precede native phase GO. All native phases NOT_RUN.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -28,7 +28,19 @@ execution gates. [Closure and scope](research/2026-10-21-e04a-source-assurance-d
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 78 changes
+### Revision 79 changes
+
+Status is **F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**. The
+[F13 receipt](evidence/2026-10-21-e04a-f13-expectation-repair.json) records native
+and generated-manifest Observed 2-to-3 for F13 only, retaining F11=2 and all input
+bytes/recipes and 43 inputs/33 recipes/50 attempts/eight suites. Closure `584a339` was remotely verified before
+repair. The current functional norm supersedes only the old operational packet's
+shared diagnostic count; that packet and raw revision78 report are unchanged.
+No parser/wrapper behavior, test/build/native result or SOURCE admission follows.
+Fresh exact head/run/freeze and focused SOURCE precede native GO; OWN17/fail-closed
+policy, standing consent and final/later gates remain unchanged.
+
+### Revision 78 history
 
 Status is **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. The
 [focused closure](research/2026-10-21-e04a-focused-source-f13-closure.md) and
@@ -1394,7 +1406,15 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the closed focused SOURCE finding before any
+**Current assignment: freeze the narrow F13 expectation repair with fresh exact
+head/run/input bindings, then obtain fresh affected focused SOURCE before native GO.**
+Status is **F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**. The
+[receipt](evidence/2026-10-21-e04a-f13-expectation-repair.json) preserves F11=2,
+F13 input bytes, 43/33/50/eight and the closed raw CHANGES_REQUESTED report. No
+parser/wrapper behavior or test/native result changes. OWN17 remains deferred,
+runtime assertions fail-closed, admissions zero and final/later gates open.
+
+**Historical assignment (revision 78): checkpoint the closed focused SOURCE finding before any
 F13 expectation change, then repair/rebind and obtain fresh affected SOURCE.**
 Status is **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. The
 [closure](research/2026-10-21-e04a-focused-source-f13-closure.md) records raw
@@ -1731,7 +1751,9 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **2026-10-16 finding:** [Complete field/diagnostic/YAML inventory](research/2026-10-16-capability-checklist.md) and [total active/inactive/reject normalization](research/2026-10-16-parity-closure-design.md) finish source/design mapping. Immutable yaml-cpp0.9.0 evaluation candidate is56e3bb550c91fd7005566f19c079cb7a503223cf. E04 compiler/ABI/private-exception/corpus/render proof remains BLOCKED. No library adoption, compatibility PASS, silent dropped fields or new supported editor is implied.
 
-**Current status (revision 78):** **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. The [focused closure](research/2026-10-21-e04a-focused-source-f13-closure.md) preserves raw CHANGES_REQUESTED/F13 expected 2 versus source-derived 3; no native result, repair, admission or phase GO. Fresh affected focused SOURCE remains required; OWN17 stays deferred/fail-closed and all native/final/A1G/A2/plain-DEL/Linux gates remain open.
+**Current status (revision 79):** **F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-f13-expectation-repair.json) records F13 expected Observed 3/F11=2 only, unchanged bytes/counts and no parser/wrapper behavior or native result. Fresh exact bindings/focused SOURCE precede native GO; OWN17 deferred/fail-closed and final/A1G/A2/plain-DEL/Linux gates remain open.
+
+**Historical status (revision 78):** **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. The [focused closure](research/2026-10-21-e04a-focused-source-f13-closure.md) preserves raw CHANGES_REQUESTED/F13 expected 2 versus source-derived 3; no native result, repair, admission or phase GO. Fresh affected focused SOURCE remains required; OWN17 stays deferred/fail-closed and all native/final/A1G/A2/plain-DEL/Linux gates remain open.
 
 **Historical status (revision 77):** **ROUTINE_CONSUMERS_REPAIRED_FOCUSED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-routine-consumer-repairs.json) records only two routine wrapper consumers. Fresh exact bindings and focused SOURCE precede native GO; OWN17 remains active/fail-closed, zero admissions, all native/final/A1G/A2/plain-DEL/Linux gates open.
 
@@ -3114,7 +3136,9 @@ Retain separate preferences and composition files. Use a whitelist registry of w
 
 **Historical source finding (2026-10-16):** Candidate parser: **yaml-cpp 0.9.0**, evaluation pin `56e3bb550c91fd7005566f19c079cb7a503223cf` / tag `yaml-cpp-0.9.0`, MIT license. [Primary-source/ABI refresh](research/2026-10-16-bootstrap-and-native-parser.md) retrieved 2026-10-16. E04 must still verify Unreal compiler/runtime, private exception boundary and actual PyYAML6.0.3 corpus behavior; [normalization design](research/2026-10-16-parity-closure-design.md) specifies the mapping. No library was adopted, downloaded, built or installed. No third-party Unreal wrapper is required. Resolver/alias/duplicate/merge compatibility cannot be inferred from YAML branding.
 
-**Current status (revision 78):** **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. The [focused closure](research/2026-10-21-e04a-focused-source-f13-closure.md) preserves raw CHANGES_REQUESTED/F13 expected 2 versus source-derived 3; no native result, repair, admission or phase GO. Fresh affected focused SOURCE remains required; OWN17 stays deferred/fail-closed and all native/final/A1G/A2/plain-DEL/Linux gates remain open.
+**Current status (revision 79):** **F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-f13-expectation-repair.json) records F13 expected Observed 3/F11=2 only, unchanged bytes/counts and no parser/wrapper behavior or native result. Fresh exact bindings/focused SOURCE precede native GO; OWN17 deferred/fail-closed and final/A1G/A2/plain-DEL/Linux gates remain open.
+
+**Historical status (revision 78):** **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. The [focused closure](research/2026-10-21-e04a-focused-source-f13-closure.md) preserves raw CHANGES_REQUESTED/F13 expected 2 versus source-derived 3; no native result, repair, admission or phase GO. Fresh affected focused SOURCE remains required; OWN17 stays deferred/fail-closed and all native/final/A1G/A2/plain-DEL/Linux gates remain open.
 
 **Historical status (revision 77):** **ROUTINE_CONSUMERS_REPAIRED_FOCUSED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-routine-consumer-repairs.json) records only two routine wrapper consumers. Fresh exact bindings and focused SOURCE precede native GO; OWN17 remains active/fail-closed, zero admissions, all native/final/A1G/A2/plain-DEL/Linux gates open.
 
@@ -3904,7 +3928,12 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. Checkpoint the
+**Ready now:** **F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING**. Freeze fresh
+exact head/run/inputs for the [expectation repair](evidence/2026-10-21-e04a-f13-expectation-repair.json)
+and obtain affected focused SOURCE before native GO. No test, native or acceptance
+pass is recorded; all runtime assertions remain fail-closed.
+
+**Historical readiness (revision 78):** **FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED**. Checkpoint the
 [closed focused report](research/2026-10-21-e04a-focused-source-f13-closure.md),
 verify OWN18 backup, then repair F13/rebind/fresh affected SOURCE before native GO.
 No SOURCE PASS or execution approval exists; runtime assertions remain fail-closed.
@@ -3940,7 +3969,9 @@ approval, no successor GO exists and all eight native phases remain NOT_RUN.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Current progress (revision 78):** FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED. One focused raw CHANGES_REQUESTED/65 pairs/zero extraction anomalies; F13 expected 2/source-derived 3 remains unrepaired. Zero admissions/native GO; all eight native phases NOT_RUN, OWN17 deferred, final/later gates open.
+**Current progress (revision 79):** F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING. Native/manifest F13 expected Observed is 3; F11=2, all input bytes and 43/33/50/eight remain. No parser/wrapper behavior change or candidate execution; fresh bindings/focused SOURCE pending, zero admissions, all native phases NOT_RUN and final/later gates open.
+
+**Historical progress (revision 78):** FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED. One focused raw CHANGES_REQUESTED/65 pairs/zero extraction anomalies; F13 expected 2/source-derived 3 remains unrepaired. Zero admissions/native GO; all eight native phases NOT_RUN, OWN17 deferred, final/later gates open.
 
 **Historical progress (revision 77):** ROUTINE_CONSUMERS_REPAIRED_FOCUSED_SOURCE_PENDING. Two wrapper consumers repaired/AST0, no execution; 43 inputs/33 recipes/50 attempts/eight suites. New head/run/focused SOURCE pending; OWN17 active, all native phases NOT_RUN, final/later gates open.
 
@@ -3984,7 +4015,9 @@ separate acceptance gates remain open.
 
 **Work completed so far (historical through revision 49):** imported plan/strong instructions, M00 metadata, legacy 44.1 source characterization and selected 44.3.33 adaptation, profile/capability/design checklists, Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units / 14 Capture checks / 132 native successes / two evidence checks, plus separate 135 PowerShell controls / 39 inputs. E02 `202805` on `5e92ba3` completed affected SOURCE and all seven producer phases, 16 native cases / 18174 assertions, separate SUP6 and six images. Root recorded bounded Windows synthetic acceptance after separate administrative recovery; original CODE r3, REQ r2 and v4 raw BLOCKED reports and their limits are unchanged. The exact 18 E04-A1E source paths are now canonical, with eight planned suites / 38 unique IDs / 45 attempts and pinned yaml-cpp acquisition verified (394 files / 5156535 bytes). The first SOURCE assessment remains BLOCKED; the second remains CHANGES_REQUESTED for the now-restored strict Parse-JsonLine (15 offline cases / 38 checks passed). The third is BLOCKED with incomplete coverage and a DDC observation gap. Its guard repair passed 21 offline cases/63 checks. The fourth assessment remains BLOCKED with 19/78 coverage and unselected metadata exposure. The fifth raw SOURCE_PASS applies only to c500f21/run024733 with bounded Editor qualifications. That run passed Preflight (zero roots) and six supervisor controls/three groups/five roots, then Configure failed on generated SDK RC-path escaping. Root CMake exited 1 in about 0.859 seconds; one unidentified member lingered until confirmed timeout cleanup/final zero, and producer preservation missed its deadline. Separate manual checks matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings pairs without passing the failed phase. The authored path repair passed 21 pure PowerShell cases with zero failures; at revision 47 checkpoint/new candidate/freeze/RunId/fresh affected SOURCE were pending. The subsequent sixth SOURCE review on 0ed4221/run035315 is raw BLOCKED after 48/81 BODY files, with incomplete 13-record/902-row assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. The full staged-source BODY-grant inventory proposal is authored without implementation changes or rerunning the controls; a neutral complete SOURCE packet is next. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. All eight phases for 0ed4221 remain NOT RUN/no native RunRoot. Subsequent r7 on e505b21/run041347 is raw BLOCKED after 55/93 BODY files, with all 33 staged members granted, incomplete 13/902 assessment and no confirmed implementation defect/binding/access denial. A prospective blind scoped SOURCE plus fresh independent integration design is being prepared, not adopted; full current 93-file union/all selected data/material relationships and unchanged criteria remain required. All eight e505b21 phases are NOT RUN/no native RunRoot; future frozen descriptors/counts remain derived. The five later phases remain NOT RUN; no native parser suite ran and final CODE/different REQ are pending. A1G, all 727 A2 compatibility scenarios, shared HUD/render/input, RQ23/RQ24, full E02/M02/E04, Linux, packages and real-Core play remain open. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
 
-**Next concrete step:** Checkpoint this [focused closure](research/2026-10-21-e04a-focused-source-f13-closure.md) and verify OWN18 backup before F13 changes. Reconcile the native expectation/generated manifest or explicitly revise the construction while preserving the bounded regression, then rebind and obtain fresh affected focused SOURCE under the [functional packet](research/2026-10-21-e04a-functional-proof-packet.md) before native phase GO. No repair, PASS/admission or execution authority is recorded; actual suites/evidence freeze and final independent CODE/different REQ remain required.
+**Next concrete step:** Checkpoint the [narrow F13 expectation repair](evidence/2026-10-21-e04a-f13-expectation-repair.json), verify OWN18 backup and derive fresh exact head/run/freeze/input bindings. Obtain fresh affected focused SOURCE under the current [functional packet](research/2026-10-21-e04a-functional-proof-packet.md) before native phase GO; no old CHANGES_REQUESTED report becomes PASS. Actual native suites/evidence freeze then final independent CODE/different REQ remain required; no execution authority is recorded here.
+
+**Historical next step (revision 78):** Checkpoint this [focused closure](research/2026-10-21-e04a-focused-source-f13-closure.md) and verify OWN18 backup before F13 changes. Reconcile the native expectation/generated manifest or explicitly revise the construction while preserving the bounded regression, then rebind and obtain fresh affected focused SOURCE under the [functional packet](research/2026-10-21-e04a-functional-proof-packet.md) before native phase GO. No repair, PASS/admission or execution authority is recorded; actual suites/evidence freeze and final independent CODE/different REQ remain required.
 
 **Historical next step (revision 77):** Checkpoint the routine consumer repairs and verify OWN18 remote backup, then derive exact source/run bindings under the [focused proof packet](research/2026-10-21-e04a-functional-proof-packet.md). One fresh frozen 1,800-second focused SOURCE pass is required before native phase GO. Keep runtime assertions fail-closed; actual eight suites/evidence freeze and final independent CODE/different REQ remain required. No execution approval is recorded here.
 
