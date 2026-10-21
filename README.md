@@ -7,7 +7,19 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**
+The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**
+(revision 86). Focused SOURCE admitted `6e2262d`; Preflight/SupervisorControls
+passed. Configure failed in 40.9745989 seconds when the capture guard correctly
+refused 30 automatic C++20 module-scanning dyndep bindings. Compiler-alias/flag/
+source checks, CMake/real Release ABI compile/executable link and scoped cleanup
+passed, final 22/0. Five later phases/native parser suites are NOT_RUN and
+visible count is zero. Checkpoint/push/verify OWN18 backup before the minimal
+explicit `CMAKE_CXX_SCAN_FOR_MODULES=OFF` plus cache expectation for this
+nonmodule target; no repair is applied here. Fresh bindings/affected SOURCE
+precede ordered native work. Old authority is closed; OWN17 stays deferred/
+unproven/fail-closed, final/later gates stay open and review consent is unchanged.
+
+Historical revision 85 status is **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**
 (revision 85). Check-CMake now resolves the absolute leading compiler token
 through file checks/literal FullName and compares the exact frozen path.
 Required/forbidden flags, source checks and the functional norm are unchanged.
@@ -83,8 +95,10 @@ visible count zero.
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision85 compiler-alias repair receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-repair.json)
-  for current source changes and gates. The [revision84 compiler-alias result](docs/plans/evidence/2026-10-21-e04a-compiler-alias-configure-result.json)
+- Use the [revision86 dyndep Configure result](docs/plans/evidence/2026-10-21-e04a-dyndep-configure-result.json)
+  and [closure](docs/plans/research/2026-10-21-e04a-dyndep-closure.md) for current
+  results and gates. The [revision85 compiler-alias repair receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-repair.json)
+  preserves the prior source change. The [revision84 compiler-alias result](docs/plans/evidence/2026-10-21-e04a-compiler-alias-configure-result.json)
   and [closure](docs/plans/research/2026-10-21-e04a-compiler-alias-closure.md)
   preserve the failed run. The [revision83 scoped cleanup repair receipt](docs/plans/evidence/2026-10-21-e04a-owned-job-cleanup-repair.json)
   records the prior change; the [revision82 Release Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-release-configure-timeout-result.json)

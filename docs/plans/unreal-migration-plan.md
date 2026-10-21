@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-21 UTC
-**Revision:** 85 - COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING. Narrow Check-CMake absolute executable-token/file FullName comparison repair applied; flag/source checks and functional norm unchanged. Fresh checkpoint/backup/current bindings and affected focused SOURCE precede ordered native work. All eight fresh phases NOT_RUN; no prior approval transfer or new native result.
+**Revision:** 86 - FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED. Focused SOURCE/root admission and Preflight/SupervisorControls passed on 6e2262d/run025602-f6f74902. Configure failed closed on 30 automatic C++20 module-scanning dyndep bindings after compiler/flag/source checks and CMake/real Release ABI/scoped cleanup passed. Five later phases/native suites NOT_RUN; checkpoint/OWN18 backup before minimal explicit scanning-OFF/cache repair, fresh bindings/affected SOURCE and ordered native work.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -28,7 +28,41 @@ execution gates. [Closure and scope](research/2026-10-21-e04a-source-assurance-d
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 85 changes
+### Revision 86 changes
+
+Status is **FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**. The
+[receipt](evidence/2026-10-21-e04a-dyndep-configure-result.json) and
+[closure](research/2026-10-21-e04a-dyndep-closure.md) record technical source
+`6e2262dfe77deea171b12c742351efaa68a27cbc` and run
+`20261021T025602Z-f6f74902`. Focused SOURCE/root admission passed in
+1051.7899451 seconds, 80 pairs/zero extraction anomalies. Preflight passed in
+31.8576293 seconds with zero roots; SupervisorControls passed in 52.1325947
+seconds with six roots/six cases, seven generated and 18 boundary controls.
+Configure failed in 40.9745989 seconds with
+`E04A1_GENERATED_INPUT_UNSUPPORTED_DYNDEP` and zero secondary errors.
+
+CMake root 36108 exited 0 with real Release ABI compile/executable link; root
+exit was observed in 1.3412771 seconds, scoped five-second same-private-job
+post-success cleanup took 6.3938272 seconds overall, final 22 total/zero active.
+All 30 compiler-alias/required/forbidden flag/source checks passed. The capture
+guard correctly refused 30 dyndep bindings from automatic C++20 module scanning.
+Root checked 354 retained members including result, nine settings/33 canonical/
+33 staged sources/56 fixtures and 11 partial live-copy pairs with matching
+observations. Configure completion is absent; five later phases and native
+parser suites are NOT_RUN. Planned 43/33/50/eight and visible count zero remain
+unchanged; full static-library build success is not established.
+
+Checkpoint/push this closure and verify OWN18 exact remote backup before the
+minimal explicit `CMAKE_CXX_SCAN_FOR_MODULES=OFF` plus exact cache expectation
+for this nonmodule target, supported by installed primary docs. No repair is
+applied here. Fresh head/run/freeze/current bindings and affected focused
+SOURCE precede ordered native work; old phase authority is CLOSED_DO_NOT_REUSE
+and no approval transfers. OWN17 remains DEFERRED_UNPROVEN/fail-closed; final
+CODE/different REQ/A1E acceptance, A1G/A2/all 727/full fidelity, plain-DEL, shared
+HUD/input/rendering, Linux, packaging and real-Core play remain open. Standing
+private source/API review consent is unchanged.
+
+### Revision 85 changes (historical)
 
 Status is **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](evidence/2026-10-21-e04a-compiler-alias-repair.json) records
@@ -1533,7 +1567,21 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the narrow compiler-alias consumer repair,
+**Current assignment: checkpoint the closed dyndep Configure failure and verify
+OWN18 exact remote backup before the minimal explicit
+`CMAKE_CXX_SCAN_FOR_MODULES=OFF` plus cache expectation for this nonmodule
+target, supported by installed primary docs.** Status is
+**FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**. The
+[receipt](evidence/2026-10-21-e04a-dyndep-configure-result.json) and
+[closure](research/2026-10-21-e04a-dyndep-closure.md) preserve focused SOURCE
+admission for `6e2262d`, Preflight/SupervisorControls PASS and Configure FAIL on
+30 dyndep bindings after compiler/flag/source/CMake/ABI/scoped cleanup passed.
+Five later phases/native suites are NOT_RUN. No repair is applied here. Fresh
+bindings/affected SOURCE precede ordered native work; old authority is closed,
+OWN17 stays deferred/unproven/fail-closed, final/later gates and consent are
+unchanged, visible zero.
+
+**Historical assignment (revision 85): checkpoint the narrow compiler-alias consumer repair,
 push and verify OWN18 exact remote backup, then derive new exact head/run/freeze/
 current bindings and obtain fresh affected focused SOURCE before ordered native
 work.** Status is **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. The
@@ -1945,7 +1993,9 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **2026-10-16 finding:** [Complete field/diagnostic/YAML inventory](research/2026-10-16-capability-checklist.md) and [total active/inactive/reject normalization](research/2026-10-16-parity-closure-design.md) finish source/design mapping. Immutable yaml-cpp0.9.0 evaluation candidate is56e3bb550c91fd7005566f19c079cb7a503223cf. E04 compiler/ABI/private-exception/corpus/render proof remains BLOCKED. No library adoption, compatibility PASS, silent dropped fields or new supported editor is implied.
 
-**Current status (revision 85):** **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-compiler-alias-repair.json) records narrow absolute executable-token/file FullName comparison changes only; flag/source checks and functional norm unchanged. No fresh SOURCE PASS/native result or approval transfer; all eight fresh phases NOT_RUN, 43/33/50/eight unchanged. Checkpoint/backup/new bindings/affected focused SOURCE precede ordered native work. Earlier failures stay closed; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates remain open.
+**Current status (revision 86):** **FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**. The [dyndep receipt](evidence/2026-10-21-e04a-dyndep-configure-result.json) records focused SOURCE admission for `6e2262d`, Preflight/SupervisorControls PASS and Configure FAIL on 30 automatic C++20 module-scanning dyndep bindings after compiler-alias/flag/source checks passed. CMake/real Release ABI/scoped cleanup passed, final 22/0. Five later phases/native suites NOT_RUN, 43/33/50/eight planned, visible zero; no repair/final review/A1E acceptance. Checkpoint/OWN18 backup before explicit scanning-OFF/cache expectation, fresh bindings/affected SOURCE and ordered native work. Old authority closed; OWN17 deferred/unproven/fail-closed, final/A1G/A2/plain-DEL/Linux gates open and standing consent unchanged.
+
+**Historical status (revision 85):** **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-compiler-alias-repair.json) records narrow absolute executable-token/file FullName comparison changes only; flag/source checks and functional norm unchanged. No fresh SOURCE PASS/native result or approval transfer; all eight fresh phases NOT_RUN, 43/33/50/eight unchanged. Checkpoint/backup/new bindings/affected focused SOURCE precede ordered native work. Earlier failures stay closed; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates remain open.
 
 **Historical status (revision 84):** **FOCUSED_SOURCE_PASSED_COMPILER_ALIAS_CONFIGURE_FAILURE_CLOSED**. The [compiler-alias receipt](evidence/2026-10-21-e04a-compiler-alias-configure-result.json) records focused SOURCE admission for `ebd9ccf`, Preflight/SupervisorControls PASS and Configure FAIL on 30 DOS 8.3 tokens resolving to the frozen compiler, with valid required/no forbidden flags. Real Release ABI and scoped cleanup succeeded; Configure remains failed. Five later phases/native suites NOT_RUN, 43/33/50/eight planned; no alias repair or A1E acceptance. Checkpoint/backup then narrow canonicalization/fresh bindings/affected SOURCE; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates stay open.
 
@@ -3342,7 +3392,9 @@ Retain separate preferences and composition files. Use a whitelist registry of w
 
 **Historical source finding (2026-10-16):** Candidate parser: **yaml-cpp 0.9.0**, evaluation pin `56e3bb550c91fd7005566f19c079cb7a503223cf` / tag `yaml-cpp-0.9.0`, MIT license. [Primary-source/ABI refresh](research/2026-10-16-bootstrap-and-native-parser.md) retrieved 2026-10-16. E04 must still verify Unreal compiler/runtime, private exception boundary and actual PyYAML6.0.3 corpus behavior; [normalization design](research/2026-10-16-parity-closure-design.md) specifies the mapping. No library was adopted, downloaded, built or installed. No third-party Unreal wrapper is required. Resolver/alias/duplicate/merge compatibility cannot be inferred from YAML branding.
 
-**Current status (revision 85):** **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-compiler-alias-repair.json) records narrow absolute executable-token/file FullName comparison changes only; flag/source checks and functional norm unchanged. No fresh SOURCE PASS/native result or approval transfer; all eight fresh phases NOT_RUN, 43/33/50/eight unchanged. Checkpoint/backup/new bindings/affected focused SOURCE precede ordered native work. Earlier failures stay closed; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates remain open.
+**Current status (revision 86):** **FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**. The [dyndep receipt](evidence/2026-10-21-e04a-dyndep-configure-result.json) records focused SOURCE admission for `6e2262d`, Preflight/SupervisorControls PASS and Configure FAIL on 30 automatic C++20 module-scanning dyndep bindings after compiler-alias/flag/source checks passed. CMake/real Release ABI/scoped cleanup passed, final 22/0. Five later phases/native suites NOT_RUN, 43/33/50/eight planned, visible zero; no repair/final review/A1E acceptance. Checkpoint/OWN18 backup before explicit scanning-OFF/cache expectation, fresh bindings/affected SOURCE and ordered native work. Old authority closed; OWN17 deferred/unproven/fail-closed, final/A1G/A2/plain-DEL/Linux gates open and standing consent unchanged.
+
+**Historical status (revision 85):** **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-compiler-alias-repair.json) records narrow absolute executable-token/file FullName comparison changes only; flag/source checks and functional norm unchanged. No fresh SOURCE PASS/native result or approval transfer; all eight fresh phases NOT_RUN, 43/33/50/eight unchanged. Checkpoint/backup/new bindings/affected focused SOURCE precede ordered native work. Earlier failures stay closed; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates remain open.
 
 **Historical status (revision 84):** **FOCUSED_SOURCE_PASSED_COMPILER_ALIAS_CONFIGURE_FAILURE_CLOSED**. The [compiler-alias receipt](evidence/2026-10-21-e04a-compiler-alias-configure-result.json) records focused SOURCE admission for `ebd9ccf`, Preflight/SupervisorControls PASS and Configure FAIL on 30 DOS 8.3 tokens resolving to the frozen compiler, with valid required/no forbidden flags. Real Release ABI and scoped cleanup succeeded; Configure remains failed. Five later phases/native suites NOT_RUN, 43/33/50/eight planned; no alias repair or A1E acceptance. Checkpoint/backup then narrow canonicalization/fresh bindings/affected SOURCE; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates stay open.
 
@@ -4146,7 +4198,15 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. Checkpoint
+**Ready now:** **FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**.
+Checkpoint the [dyndep closure](research/2026-10-21-e04a-dyndep-closure.md) and
+[receipt](evidence/2026-10-21-e04a-dyndep-configure-result.json), push and verify
+OWN18 backup before explicit `CMAKE_CXX_SCAN_FOR_MODULES=OFF` plus cache
+expectation for this nonmodule target; no repair is applied here. Fresh bindings/
+affected SOURCE precede ordered native work. Current run closed after Configure
+FAIL; five later phases/native suites/final reviews NOT_RUN, A1E acceptance open.
+
+**Historical readiness (revision 85):** **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. Checkpoint
 the [consumer repair](evidence/2026-10-21-e04a-compiler-alias-repair.json), push
 and verify OWN18 exact backup, then bind new head/run/freeze/current inputs and
 obtain affected focused SOURCE before ordered native work. All eight fresh
@@ -4229,7 +4289,9 @@ approval, no successor GO exists and all eight native phases remain NOT_RUN.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Current progress (revision 85):** COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING. Narrow Check-CMake absolute executable-token/file FullName comparison repair applied; flag/source checks and functional norm unchanged. Finite controls belong in the repair receipt; no fresh SOURCE PASS/native result or approval transfer. All eight fresh phases NOT_RUN, 43/33/50/eight unchanged and visible count zero. Checkpoint/push/backup/new bindings/affected SOURCE precede ordered native work; prior failures stay closed, OWN17 deferred/unproven/fail-closed and final/later gates open.
+**Current progress (revision 86):** FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED. Focused SOURCE admitted `6e2262d`/run025602-f6f74902: 1051.7899451 seconds, 80 pairs/zero anomalies; Preflight 31.8576293 and SupervisorControls 52.1325947 seconds PASS. Configure 40.9745989 seconds FAIL on 30 dyndep bindings after compiler-alias/flag/source checks passed; CMake/real Release ABI/scoped cleanup passed, final 22/0. Root checked 354 retained including result, 9 settings/33 source/33 stage/56 fixtures and 11 partial live-copy pairs. Five later phases/native suites NOT_RUN, 43/33/50/eight planned, visible zero. No repair/final review/A1E acceptance. Checkpoint/OWN18 backup before explicit scanning-OFF/cache expectation, fresh bindings/affected SOURCE and ordered native; old authority closed, OWN17 deferred/unproven/fail-closed, broader gates/consent unchanged.
+
+**Historical progress (revision 85):** COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING. Narrow Check-CMake absolute executable-token/file FullName comparison repair applied; flag/source checks and functional norm unchanged. Finite controls belong in the repair receipt; no fresh SOURCE PASS/native result or approval transfer. All eight fresh phases NOT_RUN, 43/33/50/eight unchanged and visible count zero. Checkpoint/push/backup/new bindings/affected SOURCE precede ordered native work; prior failures stay closed, OWN17 deferred/unproven/fail-closed and final/later gates open.
 
 **Historical progress (revision 84):** FOCUSED_SOURCE_PASSED_COMPILER_ALIAS_CONFIGURE_FAILURE_CLOSED. Focused SOURCE admitted `ebd9ccf` / run `20261021T021806Z-c899d3a4`; Preflight/SupervisorControls PASS. Configure failed in 37.1059373 seconds on DOS 8.3 compiler-token spelling despite real Release ABI/scoped cleanup success; all 30 tokens resolve to the frozen compiler and flags are valid. Run closed; five later phases/native suites NOT_RUN, 43/33/50/eight planned, visible count zero and no alias repair/final review/A1E acceptance. Checkpoint/backup precedes narrow canonicalization and fresh bindings/affected SOURCE. OWN17 stays deferred/unproven/fail-closed; later gates remain open.
 
@@ -4287,7 +4349,9 @@ separate acceptance gates remain open.
 
 **Work completed so far (historical through revision 49):** imported plan/strong instructions, M00 metadata, legacy 44.1 source characterization and selected 44.3.33 adaptation, profile/capability/design checklists, Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units / 14 Capture checks / 132 native successes / two evidence checks, plus separate 135 PowerShell controls / 39 inputs. E02 `202805` on `5e92ba3` completed affected SOURCE and all seven producer phases, 16 native cases / 18174 assertions, separate SUP6 and six images. Root recorded bounded Windows synthetic acceptance after separate administrative recovery; original CODE r3, REQ r2 and v4 raw BLOCKED reports and their limits are unchanged. The exact 18 E04-A1E source paths are now canonical, with eight planned suites / 38 unique IDs / 45 attempts and pinned yaml-cpp acquisition verified (394 files / 5156535 bytes). The first SOURCE assessment remains BLOCKED; the second remains CHANGES_REQUESTED for the now-restored strict Parse-JsonLine (15 offline cases / 38 checks passed). The third is BLOCKED with incomplete coverage and a DDC observation gap. Its guard repair passed 21 offline cases/63 checks. The fourth assessment remains BLOCKED with 19/78 coverage and unselected metadata exposure. The fifth raw SOURCE_PASS applies only to c500f21/run024733 with bounded Editor qualifications. That run passed Preflight (zero roots) and six supervisor controls/three groups/five roots, then Configure failed on generated SDK RC-path escaping. Root CMake exited 1 in about 0.859 seconds; one unidentified member lingered until confirmed timeout cleanup/final zero, and producer preservation missed its deadline. Separate manual checks matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings pairs without passing the failed phase. The authored path repair passed 21 pure PowerShell cases with zero failures; at revision 47 checkpoint/new candidate/freeze/RunId/fresh affected SOURCE were pending. The subsequent sixth SOURCE review on 0ed4221/run035315 is raw BLOCKED after 48/81 BODY files, with incomplete 13-record/902-row assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. The full staged-source BODY-grant inventory proposal is authored without implementation changes or rerunning the controls; a neutral complete SOURCE packet is next. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. All eight phases for 0ed4221 remain NOT RUN/no native RunRoot. Subsequent r7 on e505b21/run041347 is raw BLOCKED after 55/93 BODY files, with all 33 staged members granted, incomplete 13/902 assessment and no confirmed implementation defect/binding/access denial. A prospective blind scoped SOURCE plus fresh independent integration design is being prepared, not adopted; full current 93-file union/all selected data/material relationships and unchanged criteria remain required. All eight e505b21 phases are NOT RUN/no native RunRoot; future frozen descriptors/counts remain derived. The five later phases remain NOT RUN; no native parser suite ran and final CODE/different REQ are pending. A1G, all 727 A2 compatibility scenarios, shared HUD/render/input, RQ23/RQ24, full E02/M02/E04, Linux, packages and real-Core play remain open. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
 
-**Next concrete step:** Checkpoint the [compiler-alias consumer repair](evidence/2026-10-21-e04a-compiler-alias-repair.json), push and verify OWN18 exact remote backup. Derive new exact head/run/freeze/current bindings and obtain fresh affected focused SOURCE under the unchanged [functional packet](research/2026-10-21-e04a-functional-proof-packet.md) before ordered native phases. Preserve all failed runs, exact compiler/flag/source requirements and fail-closed assertions; no prior approval transfers. Actual suites/evidence freeze and final independent CODE/different REQ remain required before A1E acceptance. OWN17 special assurance and standing consent remain unchanged.
+**Next concrete step:** Checkpoint the [dyndep closure](research/2026-10-21-e04a-dyndep-closure.md) and [receipt](evidence/2026-10-21-e04a-dyndep-configure-result.json), push and verify OWN18 exact remote backup. Then make the minimal explicit `CMAKE_CXX_SCAN_FOR_MODULES=OFF` plus exact cache expectation for this nonmodule target, supported by installed primary docs; no repair is applied here. Preserve compiler/flag/source/fail-closed requirements and all failed runs. Fresh exact head/run/freeze/current bindings and affected focused SOURCE under the [functional packet](research/2026-10-21-e04a-functional-proof-packet.md) precede ordered native work; old authority/approvals do not transfer. Actual suites/evidence freeze and final independent CODE/different REQ remain required before A1E acceptance. OWN17 and standing consent remain unchanged.
+
+**Historical next step (revision 85):** Checkpoint the [compiler-alias consumer repair](evidence/2026-10-21-e04a-compiler-alias-repair.json), push and verify OWN18 exact remote backup. Derive new exact head/run/freeze/current bindings and obtain fresh affected focused SOURCE under the unchanged [functional packet](research/2026-10-21-e04a-functional-proof-packet.md) before ordered native phases. Preserve all failed runs, exact compiler/flag/source requirements and fail-closed assertions; no prior approval transfers. Actual suites/evidence freeze and final independent CODE/different REQ remain required before A1E acceptance. OWN17 special assurance and standing consent remain unchanged.
 
 **Historical next step (revision 84):** Checkpoint the [compiler-alias closure](research/2026-10-21-e04a-compiler-alias-closure.md) and [receipt](evidence/2026-10-21-e04a-compiler-alias-configure-result.json), push and verify OWN18 exact remote backup. Then make the minimal absolute executable-token filesystem canonicalization/exact pinned-path comparison repair without relaxing required/forbidden flags or other compiler checks. No alias repair is recorded yet. Fresh exact head/run/freeze/input bindings and affected focused SOURCE precede a new ordered native sequence; preserve all failed runs and fail-closed assertions. Actual suites/evidence freeze and final independent CODE/different REQ remain required before A1E acceptance; OWN17 special assurance stays deferred/unproven.
 

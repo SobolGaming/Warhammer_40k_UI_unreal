@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_FAILED_E04A1E_DYNDEP_CONFIGURE_CLOSED_NOT_ACCEPTED",
+  "createdUtc": "2026-10-21T03:37:12.2409388Z",
+  "status": "FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED",
+  "planRevision": 86,
+  "sourceHead": "6e2262dfe77deea171b12c742351efaa68a27cbc",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "runId": "20261021T025602Z-f6f74902",
+  "publicationCommit": null,
+  "publicationQualification": "Documentation follows execution on6e2262d. Later publication/source commits are not reviewed or executed by this evidence.",
+  "sourceReview": {
+    "report": {
+      "bytes": 8442,
+      "sha256": "2A988B3D24A8B44397AD20C921AD053189AD0450B7830570B5AAA6191DE44859",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\focused-6e2262d-025602-E04_COMPONENT_SOURCE\\last-message.txt"
+    },
+    "rootAdmitted": true,
+    "lowerMemoryFeatureOsIsolation": "UNVERIFIED",
+    "rawVerdict": "PASS",
+    "assessmentKind": "BLIND_JOINED_SOURCE_INITIAL",
+    "sourceOnly": true,
+    "extractionAnomalies": 0,
+    "memoryMode": "disabled",
+    "toolPairs": 80,
+    "admission": {
+      "bytes": 4412,
+      "sha256": "D500A93451B9C1F23BB14E0AA89AD0B55FF40CAF97584C2C9347A49186274E0F",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\focused-6e2262d-025602-E04_COMPONENT_SOURCE\\root-focused-source-admission.original.json"
+    },
+    "actualModel": "gpt-6.1-sol",
+    "scope": "E04_COMPONENT_SOURCE",
+    "actualReasoning": "ultra",
+    "elapsedSeconds": 1051.7899451,
+    "actualRuntime": "READ_ONLY_APPROVAL_NEVER"
+  },
+  "phases": {
+    "Preflight": {
+      "retainedDescriptorsRehashedIncludingResult": 57,
+      "materializedInputs": 43,
+      "roots": 0,
+      "elapsedSeconds": 31.8576293,
+      "executionPassed": true
+    },
+    "SupervisorControls": {
+      "executionPassed": true,
+      "supervisorCases": 6,
+      "roots": 6,
+      "generatedInputControls": 7,
+      "elapsedSeconds": 52.1325947,
+      "expectedObjSrcMapRefusal": "RulesError8 E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED",
+      "buildBoundaryControls": 18,
+      "retainedDescriptorsRehashedIncludingResult": 325,
+      "cleanupAll6": true
+    },
+    "Configure": {
+      "recordKind": "ROOT_CLOSED_CONFIGURE_FAILURE_FINITE_INSPECTION",
+      "observedUtc": "2026-10-21T03:37:12.2220046Z",
+      "sourceHead": "6e2262dfe77deea171b12c742351efaa68a27cbc",
+      "runId": "20261021T025602Z-f6f74902",
+      "status": "FAILED_CLOSED_NO_RETRY_OR_DOWNSTREAM",
+      "actualPrimaryFailure": {
+        "stage": "Configure",
+        "type": "System.Management.Automation.RuntimeException",
+        "message": "E04A1_GENERATED_INPUT_UNSUPPORTED_DYNDEP"
+      },
+      "secondaryErrors": [],
+      "phaseElapsedSeconds": 40.9745989,
+      "hostExitCode": 1,
+      "retainedDescriptorsRehashed": 353,
+      "resultRehashed": {
+        "bytes": 321787,
+        "sha256": "437BC487322CA31C28691FFC38B6A78BD3FF2D840F480B6C6FE83397F610CA19",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\configure\\result.json"
+      },
+      "sourcePairsAndCurrent": 33,
+      "stagePairsAndCurrent": 33,
+      "fixturePairsAndCurrent": 56,
+      "settingsPairsAndCurrent": 9,
+      "partialLiveCopyPairs": 11,
+      "realReleaseAbiCompileAndExecutableLinkObserved": true,
+      "actualCmakeRoot": {
+        "finalJob": {
+          "stage": "progress",
+          "observedUtc": "2026-10-21T03:35:34.1462732Z",
+          "querySucceeded": true,
+          "totalProcesses": 22,
+          "activeProcesses": 0,
+          "totalTerminatedProcesses": 0,
+          "totalUserTime100ns": 2968750,
+          "totalKernelTime100ns": 5781250,
+          "thisPeriodUserTime100ns": 2968750,
+          "thisPeriodKernelTime100ns": 5781250,
+          "totalPageFaultCount": 112549
+        },
+        "timedOut": false,
+        "completionCleanupMode": "PostSuccessfulRootCleanup",
+        "pid": 36108,
+        "receipt": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\configure\\configure.process.json",
+          "bytes": 79765,
+          "sha256": "f42ad29647b77b3ae9f8239448a05d2a960a92b3f1c4e1b3797f36adca60d3f3"
+        },
+        "exitUtc": "2026-10-21T03:35:29.0909551Z",
+        "rootExitObservedElapsedSeconds": 1.3412771,
+        "creationUtc": "2026-10-21T03:35:27.7701091Z",
+        "exitCode": 0,
+        "shutdownRequests": [
+          {
+            "operation": "TerminateJobObject",
+            "reason": "POST_ROOT_COMPLETION",
+            "succeeded": true,
+            "observedUtc": "2026-10-21T03:35:34.1150866Z",
+            "elapsedSeconds": 6.3624671,
+            "rootExitElapsedSeconds": 1.3412771,
+            "naturalGraceSeconds": 5,
+            "activeProcessesBefore": 1,
+            "rootExitCode": 0,
+            "terminationExitCode": 3760193539,
+            "win32Error": null
+          }
+        ],
+        "cleanupConfirmed": true,
+        "budgetSeconds": 570,
+        "elapsedSeconds": 6.3938272,
+        "exitConfirmed": true,
+        "postRootGraceSeconds": 5
+      },
+      "compilerAliasCheckPassedFor30Commands": true,
+      "generatedNinjaDyndepBindings": 30,
+      "configureCompletionPresent": false,
+      "laterPhases": "DependencyBuild,EditorBuild,Discovery,Native,Audit NOT_RUN",
+      "parserSuitesRun": 0,
+      "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+      "qualification": "Finite actual file/process/source observations. The failed assertion is preserved and not bypassed or relabelled as Configure success."
+    }
+  },
+  "diagnosis": {
+    "nextRoute": "Inspect installed primary docs and pinned sources for an explicit CMAKE_CXX_SCAN_FOR_MODULES=OFF setting for this nonmodule static build. No repair applied or execution approval transferred.",
+    "abiScope": "The genuine compiler ABI try-compile used Release /MD and executable linking and passed. Its own CMake variables already show module scanning OFF; the main target still generated scanning rules.",
+    "compilerAliasRepair": "Actual Check-CMake completed all30 source/flag checks before capture failed; no relaxation of flags or source membership.",
+    "disposition": "Operational capture limitation exposed by actual generated build instructions; it is not a demonstrated parser/vendor compile failure. Configure remains failed.",
+    "actualGeneratedBuild": "CMake3.31 emitted C++20 module-scan and dyndep rules for the pinned nonmodule yaml-cpp target. Thirty object statements have dyndep bindings; the existing capture guard explicitly refuses them."
+  },
+  "allExecutionAuthority": "CLOSED_DO_NOT_REUSE",
+  "visibleWindows": 0,
+  "laterPhases": "DependencyBuild,EditorBuild,Discovery,Native,Audit NOT_RUN",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "a1eAcceptance": "NOT_ESTABLISHED",
+  "broaderGates": "A1G,A2,727compatibility,plainDEL,HUD,input,rendering,Linux,packaging,realCore,fullmigration remain open",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "standingPrivateSourceApiConsent": "IN_FORCE_UNTIL_EXPLICITLY_REVOKED",
+  "primaryArtifacts": [
+    {
+      "bytes": 321787,
+      "sha256": "437BC487322CA31C28691FFC38B6A78BD3FF2D840F480B6C6FE83397F610CA19",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\configure\\result.json"
+    },
+    {
+      "bytes": 3193,
+      "sha256": "B58636066661704CBFE155C13BFB6D80806F3D9F923A5072B5A83ADEAB267861",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-6e2262d\\root-configure-dyndep-failure-inspection.original.json"
+    },
+    {
+      "bytes": 830,
+      "sha256": "D33F111ACDC274219852CEBC73A69C86C926756F1AA12C0C7D95E6B60E7969C2",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-6e2262d\\native-phase-invocations\\Configure.host-completion.original.json"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\configure\\configure.process.json",
+      "bytes": 79765,
+      "sha256": "f42ad29647b77b3ae9f8239448a05d2a960a92b3f1c4e1b3797f36adca60d3f3"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\logs\\configure.stdout.log",
+      "bytes": 578,
+      "sha256": "03cab428da03041161215296a4a82706cc32694fcc61fc6b51fdfe5658053f4a"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\logs\\configure.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 8310,
+      "sha256": "9964D8488418E039B82A5F27EB67A0558096B8FF3C3D53F7FD675FE4C2F11DC9",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\vendor-build\\Win64\\Development\\x64\\CMakeFiles\\CMakeConfigureLog.yaml"
+    },
+    {
+      "bytes": 102800,
+      "sha256": "F119E1B70E4703D2FAF18A63524ACCD8A67E75A355DA5308019E4F374EC163F3",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\vendor-build\\Win64\\Development\\x64\\build.ninja"
+    },
+    {
+      "bytes": 4623,
+      "sha256": "78D7D801224281CB679D2FAF0A16B990FC16CB8C1EB3CB0947D06A3AD4ED88B3",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\vendor-build\\Win64\\Development\\x64\\CMakeFiles\\rules.ninja"
+    },
+    {
+      "bytes": 18943,
+      "sha256": "EDD7E89E77E30A98C2F59FECB451D9110AB005BE9FA8454F9DA5463942C1890A",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\vendor-build\\Win64\\Development\\x64\\CMakeCache.txt"
+    },
+    {
+      "bytes": 33898,
+      "sha256": "C19C4AE58F322956236C9E399B67A70482C4B43BEBE17A27115C99F9FEA3AB3B",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\vendor-build\\Win64\\Development\\x64\\compile_commands.json"
+    },
+    {
+      "bytes": 7714,
+      "sha256": "CC675C2AB9351827AB54542B69A6DBFBDABA94DD9116711C3E7F7CFBE83557B6",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\logs\\configured-build-inputs\\capture-failure.json"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T025602Z-f6f74902\\logs\\configured-build-input-partials-configure\\retention.json",
+      "bytes": 8317,
+      "sha256": "5a477efb0e10089fb17cb0e81c2359291a6ca8d7e016dc6aa6d302f4c528fca6"
+    },
+    {
+      "bytes": 3705,
+      "sha256": "AE9132DE8647FDFAFC3C26DFD6A498D34A9F8648A0B179820932062813BB2023",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-6e2262d\\root-SupervisorControls-inspection-correction.original.json"
+    }
+  ]
+}

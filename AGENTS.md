@@ -78,7 +78,26 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 85 (2026-10-21 UTC) is
+Current A1E status at plan revision 86 (2026-10-21 UTC) is
+**FOCUSED_SOURCE_PASSED_DYNDEP_CONFIGURE_FAILURE_CLOSED**. The
+[receipt](docs/plans/evidence/2026-10-21-e04a-dyndep-configure-result.json)
+and [closure](docs/plans/research/2026-10-21-e04a-dyndep-closure.md) record
+focused SOURCE/root admission for `6e2262d` / run `20261021T025602Z-f6f74902`,
+Preflight/SupervisorControls PASS and Configure FAIL in 40.9745989 seconds on
+30 automatic C++20 module-scanning dyndep bindings. Compiler-alias/flag/source
+checks, CMake/real Release ABI compile/executable link and scoped five-second
+same-private-job cleanup passed, final 22 total/zero active. Five later phases
+and native parser suites are NOT_RUN, 43/33/50/eight remain planned and visible
+count is zero. All old phase authority is CLOSED_DO_NOT_REUSE. Checkpoint/push
+this closure and verify OWN18 exact remote backup before the minimal explicit
+`CMAKE_CXX_SCAN_FOR_MODULES=OFF` plus cache expectation for this nonmodule
+target, supported by installed primary docs; no repair is applied here. Fresh
+head/run/freeze/current bindings and affected focused SOURCE precede ordered
+native work. OWN17 remains DEFERRED_UNPROVEN/fail-closed; final CODE/different
+REQ/A1E acceptance and broader fidelity/HUD/input/rendering/Linux/package/Core
+gates remain open. Standing private source/API review consent is unchanged.
+
+Historical A1E status at plan revision 85 (2026-10-21 UTC) is
 **COMPILER_ALIAS_CONSUMER_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](docs/plans/evidence/2026-10-21-e04a-compiler-alias-repair.json)
 records only the Check-CMake executable-token consumer change after closure
