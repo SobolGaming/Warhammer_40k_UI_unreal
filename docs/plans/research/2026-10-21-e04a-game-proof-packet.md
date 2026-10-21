@@ -59,6 +59,11 @@ selectors/owned ancestry/tools/CRT/bytes and the original frozen source acquisit
 plus FRESH same-run configure/build/artifact receipts and closed phases. Reusing
 the immutable source acquisition does not reuse an Editor/Game artifact or build.
 Distinguish Development Game/Release vendor.
+Validate the one verbose direct MSVC static-archive action emitted by the pinned
+CMake: selected cmd shell, canonical frozen librarian path/bytes/hash, x64 output
+yaml-cpp.lib and the exact ordinal acquired-source object sequence inside this
+build root. Retain the action in the build receipt. This is a finite action
+observation; generated/transitive certification remains deferred.
 Keep Editor branch/assertions/ObserveRules unchanged; no relabel or private
 Rules/cache/witness branch. Receipt status is not final preservation or flags.
 

@@ -807,6 +807,41 @@ function Configure-Dependency {
     Write-JsonNew (Owned 'logs/a1g-vendor-cmake-configure.json') $r
     $script:Result.configure=$checked;$script:Result.abi=$abi;$script:Result.vendorConfigureReceipt=Descriptor (Owned 'logs/a1g-vendor-cmake-configure.json')
 }
+function Confirm-A1GDirectArchiveAction([string]$Log) {
+    if($Log -match '(?i)ninja: no work to do'){throw 'A1G_VENDOR_STATIC_ARCHIVE_ACTION_NOT_OBSERVED'}
+    $lines=@($Log -split '\r?\n'|Where-Object {$_ -match '^\[[0-9]+/[0-9]+\].*(?i:/out:yaml-cpp\.lib)(?:[ \t]|$)'})
+    if($lines.Count -ne 1){throw 'A1G_VENDOR_STATIC_ARCHIVE_ACTION_NOT_UNIQUE'}
+    $pattern='\A\[[0-9]+/[0-9]+\][ \t]+(?<shell>"[^"\r\n]+"|[^"\s]+)[ \t]+/C[ \t]+"cd[ \t]+\.[ \t]+&&[ \t]+(?<librarian>"[^"\r\n]+"|[^"\s]+)[ \t]+/nologo[ \t]+/machine:x64[ \t]+/out:yaml-cpp\.lib[ \t]+(?<objects>[A-Za-z0-9_./\\ \t-]+)[ \t]+&&[ \t]+cd[ \t]+\."\z'
+    $match=[regex]::Match($lines[0],$pattern,([Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::CultureInvariant))
+    if(-not $match.Success){throw 'A1G_VENDOR_STATIC_ARCHIVE_ACTION_SHAPE'}
+    $shellToken=$match.Groups['shell'].Value.Trim('"')
+    $shell=Descriptor $shellToken
+    if($shell.path -ine $script:Freeze.toolPaths.cmd){throw 'A1G_VENDOR_STATIC_ARCHIVE_SHELL_IDENTITY'}
+    $librarianToken=$match.Groups['librarian'].Value.Trim('"')
+    $librarianPath=Need-File $librarianToken
+    $librarianPath=Need-File ((Get-Item -LiteralPath $librarianPath -Force -ErrorAction Stop).FullName)
+    if($librarianPath -ine $script:Freeze.toolPaths.librarian){throw 'A1G_VENDOR_STATIC_ARCHIVE_LIBRARIAN_PATH'}
+    $librarian=Descriptor $librarianPath
+    $frozenLibrarians=@($script:Freeze.files|Where-Object {$_.path -ieq $script:Freeze.toolPaths.librarian})
+    if($frozenLibrarians.Count -ne 1){throw 'A1G_FROZEN_LIBRARIAN_NOT_UNIQUE'}
+    $frozenLibrarian=Check-Descriptor $frozenLibrarians[0]
+    # Match the existing Check-CMake compiler-token normalization: FileInfo
+    # resolves the logged 8.3 spelling to the canonical selected path, then
+    # exact frozen descriptor bytes/hash independently verify the tool.
+    if($librarian.bytes -ne $frozenLibrarian.bytes -or $librarian.sha256 -ine $frozenLibrarian.sha256){throw 'A1G_VENDOR_STATIC_ARCHIVE_LIBRARIAN_IDENTITY'}
+    $sourcePaths=[string[]]@($script:Dependency.files|Where-Object {$_.path -cmatch '^src/[^/]+\.cpp$'}|ForEach-Object {$_.path})
+    [Array]::Sort($sourcePaths,[StringComparer]::Ordinal)
+    if(-not $sourcePaths.Count){throw 'A1G_VENDOR_STATIC_ARCHIVE_SOURCE_MEMBERSHIP'}
+    $expectedObjects=@($sourcePaths|ForEach-Object {'CMakeFiles/yaml-cpp.dir/'+$_+'.obj'})
+    $objects=@($match.Groups['objects'].Value.Trim() -split '[ \t]+'|ForEach-Object {$_.Replace('\','/')})
+    if($objects.Count -ne $expectedObjects.Count){throw 'A1G_VENDOR_STATIC_ARCHIVE_OBJECT_COUNT'}
+    for($i=0;$i -lt $objects.Count;$i++){
+        if($objects[$i] -cne $expectedObjects[$i]){throw 'A1G_VENDOR_STATIC_ARCHIVE_ORDERED_OBJECT_MEMBERSHIP'}
+        [void](Need-File (Under (Join-Path (Build-Root) $objects[$i]) (Build-Root)))
+    }
+    @{form='PINNED_DIRECT_MSVC_LIB_EXE';shell=$shell;librarian=$librarian;frozenLibrarian=$frozenLibrarian;machine='x64';output=(Join-Path (Build-Root) 'yaml-cpp.lib');orderedObjects=$objects;actionLine=$lines[0];qualification='Finite verbose action observation and pinned tool byte identity only; no generic shell or generated/transitive graph certification.'}
+}
+
 function Build-Dependency {
     $library=Join-Path (Build-Root) 'yaml-cpp.lib';if(Test-Path -LiteralPath $library){throw 'A1G_FRESH_LIBRARY_PREABSENCE_REQUIRED'}
     $script:Result.configuredBuildInputPrelaunch=Confirm-ConfiguredBuildInputs
@@ -817,10 +852,11 @@ function Build-Dependency {
     $stream=[IO.File]::OpenRead($library);try{$magic=[byte[]]::new(8);if($stream.Read($magic,0,8) -ne 8 -or [Text.Encoding]::ASCII.GetString($magic) -cne "!<arch>`n"){throw 'A1G_STATIC_ARCHIVE_MAGIC'}}finally{$stream.Dispose()}
     $log=$script:Utf8.GetString([IO.File]::ReadAllBytes($p.stdout));$expectedSources=@($script:Dependency.files|Where-Object path -CMatch '^src/[^/]+\.cpp$')
     foreach($source in $expectedSources){if($log -notmatch ([regex]::Escape([IO.Path]::GetFileName($source.path))+'(?:\.obj)?')){throw 'A1G_FRESH_VENDOR_COMPILE_NOT_OBSERVED'}}
-    if($log -match '(?i)ninja: no work to do' -or $log -notmatch '(?i)yaml-cpp\.lib' -or $log -notmatch '(?i)cmake\.exe"? -E vs_link_lib'){throw 'A1G_VENDOR_STATIC_ARCHIVE_ACTION_NOT_OBSERVED'}
+    $archiveAction=Confirm-A1GDirectArchiveAction $log
     $b=Vendor-Identity;$b.kind='E04_A1G_VENDOR_CMAKE_BUILD_RECEIPT';$b.status='BUILD_ROOT_AND_ARTIFACT_CHECKS_PASSED';$b.vendorSourceRoot=$script:VendorRoot;$b.buildRoot=Build-Root;$b.acquisitionResultSha256=$script:AcquisitionDescriptor.sha256
     $b.configuration='Release';$b.platform='Win64';$b.architecture='x64';$b.cppStandard='C++20';$b.runtime='MD';$b.linkage='static';$b.exceptions='EHsc';$b.rtti='GR-';$b.exceptionsEnabled=$true;$b.installTargetInvoked=$false
     $b.configureReceipt=Descriptor (Owned 'logs/a1g-vendor-cmake-configure.json');$b.compiler=Descriptor $script:Freeze.toolPaths.compiler;$b.library=$lib;$b.process=$p.receiptArtifact
+    $b.archiveAction=$archiveAction
     Write-JsonNew (Owned 'logs/a1g-vendor-cmake-build.json') $b
     New-Directory (Artifact-Root);[void][IO.Directory]::CreateDirectory((Join-Path (Artifact-Root) 'lib'));[void][IO.Directory]::CreateDirectory((Join-Path (Artifact-Root) 'include'))
     $headers=[Collections.Generic.List[object]]::new()
