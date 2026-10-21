@@ -740,6 +740,17 @@ function Check-Previous {
         $links.Add([ordered]@{phase=$name;completion=(Descriptor (Owned ('phases/'+$name.ToLowerInvariant()+'/completion.json')));result=$completion.result})
     };$links.ToArray()
 }
+function Assert-A1GScopedProofProject($Project) {
+    if($Project -isnot [Collections.IDictionary] -or $Project['Plugins'] -isnot [array]){throw 'A1G_SCOPED_PROJECT_PLUGIN_ARRAY_REQUIRED'}
+    $rows=@($Project['Plugins']|Where-Object {$_ -is [Collections.IDictionary] -and $_['Name'] -is [string] -and $_['Name'] -ieq 'E04ProfileProof'})
+    if($rows.Count -ne 1){throw 'A1G_EXACT_ONE_SCOPED_PROOF_PROJECT_REFERENCE_REQUIRED'}
+    # Compare all keys and typed values. Optional/alternate selectors, duplicate
+    # case aliases and additional fields cannot silently broaden the selection.
+    $expected=@{Name='E04ProfileProof';Enabled=$true;PlatformAllowList=@('Win64');TargetAllowList=@('Game');TargetConfigurationAllowList=@('Development')}
+    Equal-Data $rows[0] $expected 'exact owned Win64 Development Game-only proof project reference'
+    return @{reference=$rows[0];gameEnabled=$true;editorEnabled=$false;selectionBasis='EXACT_OWNED_PROJECT_REFERENCE_PLATFORM_CONFIGURATION_TARGET_FILTERS'}
+}
+
 function Materialize-Stage {
     foreach($name in @('project','logs','reports','artifacts','fixtures','temp','dotnet-home','nuget','uba','ddc','ue-user','shader-work')){[void][IO.Directory]::CreateDirectory((Owned $name))}
     $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -752,7 +763,8 @@ function Materialize-Stage {
     [void](Snapshot-Members $script:Stage $script:Freeze.stageMembership)
     $plugin=Read-Json (Join-Path $script:Stage 'Plugins/E04ProfileProof/E04ProfileProof.uplugin')
     $project=Read-Json (Join-Path $script:Stage 'WarhammerClient.uproject')
-    if($plugin.EnabledByDefault -ne $false -or $plugin.CanContainContent -ne $false -or @($project.Plugins|Where-Object {$_.Name -ceq 'E04ProfileProof' -and $_.Enabled}).Count){throw 'A1G_EDITOR_COOK_PLUGIN_MUST_REMAIN_DISABLED'}
+    if($plugin.EnabledByDefault -ne $false -or $plugin.CanContainContent -ne $false){throw 'A1G_PROOF_PLUGIN_DISABLED_DEFAULT_REQUIRED'}
+    [void](Assert-A1GScopedProofProject $project)
     $engineConfig=$script:Utf8.GetString([IO.File]::ReadAllBytes((Join-Path $script:Stage 'Config/DefaultEngine.ini')))
     $gameConfig=$script:Utf8.GetString([IO.File]::ReadAllBytes((Join-Path $script:Stage 'Config/DefaultGame.ini')))
     foreach($text in @('DefaultGameTarget=WarhammerClientE04A1G','DefaultEditorTarget=WarhammerClientEditor','GameDefaultMap=/Engine/Maps/Entry','ServerDefaultMap=/Engine/Maps/Entry','GlobalDefaultGameMode=/Script/Engine.GameModeBase','LocalMapOptions=')){if($engineConfig -notmatch ('(?m)^'+[regex]::Escape($text)+'\r?$')){throw 'A1G_OWNED_STARTUP_CONFIGURATION_MISSING'}}
@@ -1116,21 +1128,21 @@ function Get-A1GProofPluginSelection($Receipt,[bool]$Enabled) {
     $project=Join-Path $script:Stage 'WarhammerClient.uproject'
     $d=Read-Json $descriptor;$p=Read-Json $project
     if($d.EnabledByDefault -ne $false -or $d.CanContainContent -ne $false){throw 'A1G_PROOF_PLUGIN_DISABLED_DEFAULT_REQUIRED'}
-    $projectRows=@($p.Plugins|Where-Object {$_.Name -ceq 'E04ProfileProof'})
-    if($projectRows.Count -gt 1 -or @($projectRows|Where-Object {$_.Enabled -ne $false}).Count){throw 'A1G_PROJECT_WIDE_PROOF_ENABLE_FORBIDDEN'}
+    $scope=Assert-A1GScopedProofProject $p
     $pluginArrays=Get-A1GReceiptPluginArrays $Receipt
     $overrides=@($pluginArrays.overrides)
-    $rows=@($overrides|Where-Object {$_.Name -ceq 'E04ProfileProof'})
-    $built=@($pluginArrays.buildPlugins|Where-Object {$_ -ceq 'E04ProfileProof'})
-    if($Enabled){if($rows.Count -ne 1 -or $rows[0].Enabled -ne $true -or $built.Count -ne 1){throw 'A1G_GAME_RECEIPT_PROOF_PLUGIN_ENABLE_REQUIRED'}}
+    $rows=@($overrides|Where-Object {$_.Name -ieq 'E04ProfileProof'})
+    $built=@($pluginArrays.buildPlugins|Where-Object {$_ -ieq 'E04ProfileProof'})
+    if($rows.Count){throw 'A1G_SHARED_TARGET_RULES_PROOF_OVERRIDE_FORBIDDEN'}
+    if($Enabled){if($scope.gameEnabled -ne $true -or $built.Count -ne 1 -or $built[0] -cne 'E04ProfileProof'){throw 'A1G_GAME_SCOPED_PROJECT_AND_BUILD_PLUGIN_REQUIRED'}}
     else{
-        if(@($rows|Where-Object Enabled).Count -or $built.Count){throw 'A1G_EDITOR_RECEIPT_PROOF_PLUGIN_MUST_BE_DISABLED'}
+        if($scope.editorEnabled -ne $false -or $built.Count){throw 'A1G_EDITOR_RECEIPT_PROOF_PLUGIN_MUST_BE_DISABLED'}
         foreach($relative in @('Plugins/E04ProfileProof/Binaries','Plugins/E04ProfileProof/Intermediate')){
             $root=Join-Path $script:Stage $relative
             if([IO.Directory]::Exists($root) -and @(Plain-Files $root).Count){throw 'A1G_DISABLED_EDITOR_PLUGIN_GENERATED_OUTPUTS_PRESENT'}
         }
     }
-    return @{proofPluginEnabled=$Enabled;descriptor=Descriptor $descriptor;project=Descriptor $project;receiptOverrides=$overrides;buildPlugins=@($pluginArrays.buildPlugins);qualification='Actual receipt/build set, selected disabled default/project configuration and owned output checks; not an Editor startup observation. Cook must retain the actual normal startup outcome.'}
+    return @{proofPluginEnabled=$Enabled;descriptor=Descriptor $descriptor;project=Descriptor $project;projectReference=$scope.reference;selectionBasis=$scope.selectionBasis;receiptOverrides=$overrides;buildPlugins=@($pluginArrays.buildPlugins);qualification='Exact scoped owned project selection plus actual receipt/build set and owned output checks; no Rules override. Not an Editor startup observation. Cook must retain the actual normal startup outcome.'}
 }
 
 function Get-A1GUbtActionLog($Process,$Before,[string]$Target) {
@@ -1346,9 +1358,10 @@ function Assert-A1GCookEditorPrerequisite($Editor){
     if((Assert-Path $Editor.launchCmd.path) -ine (Assert-Path $script:Freeze.toolPaths.editorCmd)){throw 'A1G_COOK_EDITOR_EXECUTABLE_MISMATCH'}
     $receipt=Read-Json $Editor.targetReceipt.path
     $pluginArrays=Get-A1GReceiptPluginArrays $receipt
-    if($receipt.TargetType -cne 'Editor' -or $receipt.TargetName -cne 'WarhammerClientEditor' -or $receipt.Platform -cne 'Win64' -or $receipt.Configuration -cne 'Development' -or @($pluginArrays.overrides|Where-Object {$_.Name -ceq 'E04ProfileProof' -and $_.Enabled}).Count){throw 'A1G_COOK_NORMAL_EDITOR_RECEIPT_MISMATCH'}
+    if($receipt.TargetType -cne 'Editor' -or $receipt.TargetName -cne 'WarhammerClientEditor' -or $receipt.Platform -cne 'Win64' -or $receipt.Configuration -cne 'Development' -or @($pluginArrays.overrides|Where-Object {$_.Name -ieq 'E04ProfileProof'}).Count -or @($pluginArrays.buildPlugins|Where-Object {$_ -ieq 'E04ProfileProof'}).Count){throw 'A1G_COOK_NORMAL_EDITOR_RECEIPT_MISMATCH'}
     $plugin=Read-Json $Editor.pluginSelection.descriptor.path;$project=Read-Json $Editor.pluginSelection.project.path
-    if($plugin.EnabledByDefault -ne $false -or @($project.Plugins|Where-Object {$_.Name -ceq 'E04ProfileProof' -and $_.Enabled}).Count){throw 'A1G_COOK_EDITOR_PROOF_PLUGIN_ENABLE'}
+    if($plugin.EnabledByDefault -ne $false){throw 'A1G_COOK_EDITOR_PROOF_PLUGIN_ENABLE'}
+    [void](Assert-A1GScopedProofProject $project)
     $manifest=Read-Json $Editor.projectModule.manifest.path
     if(@($manifest.Modules.Keys|Where-Object {$_ -in @('E04ProfileParser','E04ProfileProbe','E04ProfileGameProbe')}).Count){throw 'A1G_COOK_EDITOR_MODULE_MANIFEST_ENABLES_PROOF'}
 }

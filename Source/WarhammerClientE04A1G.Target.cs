@@ -20,7 +20,8 @@ public class WarhammerClientE04A1GTarget : TargetRules
         CppStandard = CppStandardVersion.Cpp20;
         bBuildAllModules = false;
         ExtraModuleNames.Add("WarhammerClient");
-        EnablePlugins.Add("E04ProfileProof");
+        // The owned experiment project selects the Game-only proof plugin.
+        // Shared Game targets cannot use Rules.EnablePlugins.
         // Retain ordinary installed Game/Shared/monolithic defaults. Do not set
         // Unique, bOverrideBuildEnvironment or bForceEnableExceptions.
     }

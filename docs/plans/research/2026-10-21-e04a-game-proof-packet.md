@@ -29,7 +29,13 @@ override or global developer-tools toggle.
 
 Add Source/WarhammerClientE04A1G.Target.cs: exact dedicated Game name/type,
 Win64/x64 Development, V7, Unreal5_8 include order, C++20, bBuildAllModules=false,
-ExtraModuleNames WarhammerClient and EnablePlugins E04ProfileProof. Preserve
+ExtraModuleNames WarhammerClient. Use no target Rules.EnablePlugins/DisablePlugins;
+normal Shared Game rejects those overrides. The committed experiment project
+at scripts/migration/fixtures/e04a1g/WarhammerClient.uproject is explicitly frozen
+and copied as the owned PROJECT descriptor, without mutating a run input. Require
+exactly one E04ProfileProof enabled reference scoped by PlatformAllowList=[Win64],
+TargetAllowList=[Game], TargetConfigurationAllowList=[Development], with no other
+reference fields. Canonical product WarhammerClient.uproject is unchanged. Preserve
 ordinary targets/A1E Editor behavior. The main-module dependency condition selects
 AutomationDriver only for Editor; review that explicit Game dependency amendment.
 
@@ -108,14 +114,22 @@ capped artifact copies. No silent cap increase/truncation/deletion of failures.
 
 Before Cook require normal WarhammerClientEditor Win64 Development receipt/project
 manifest/DLL with matching Editor BuildId and proof-plugin positively disabled in
-selection/receipt/cook. No project/command-line enable, A1E copies, skipped modules
+selection/receipt/cook. The owned project reference must exclude Editor through
+its exact Game-only target filter; no effective Editor project enable or
+command-line enable, A1E copies, skipped modules
 or implicit rebuild. Game outputs/UAT Build=false cannot supply this prerequisite.
 
 Target-receipt Plugins and BuildPlugins may be omitted to mean empty. Present
 values must satisfy their array/typed-entry checks; malformed present values
 refuse. Preserve case-insensitive override-name uniqueness and the Game-positive
-explicit enabled E04ProfileProof override plus exact matching build-plugin entry.
-Do not interpret omitted arrays as Game enablement or weaken its positive proof.
+exact scoped project reference plus exact matching E04ProfileProof build-plugin
+entry. The Game and Editor receipts must contain no E04ProfileProof Rules
+override, because Shared Game cannot support one.
+Do not interpret omitted arrays as Game enablement or weaken its positive proof:
+require exact project-reference filters, actual Game build-plugin membership,
+caller/parser compilation, link consumption and the later actual cooked Game
+result. Editor requires no proof build-plugin entry and the exact reference
+filters that exclude Editor; retain actual disabled Cook observations.
 
 Only owned config selects DefaultGameTarget=WarhammerClientE04A1G,
 DefaultEditorTarget=WarhammerClientEditor, GameDefaultMap/ServerDefaultMap

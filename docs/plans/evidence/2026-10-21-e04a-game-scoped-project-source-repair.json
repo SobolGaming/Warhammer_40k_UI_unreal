@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_SCOPED_PROJECT_PLUGIN_SOURCE_REPAIR_ADOPTION",
+  "status": "GAME_SCOPED_PROJECT_PLUGIN_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "asOfUtc": "2026-10-21T12:09:20.5429418Z",
+  "failureCheckpoint": "3d6d5ffb33fd3f901ead6af0d7394da04f5959ff",
+  "failureBackup": {
+    "path": ".local/planning/E04/A1G-shared-plugin-failure-PROPOSED/root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "1FA2A73BDAFE9F2DDDF9AC979B0AF445713BCFC4480D742EB0962090975785F2"
+  },
+  "rootAdoption": {
+    "path": ".local/planning/E04/A1G-shared-plugin-failure-PROPOSED/root-source-adoption.original.json",
+    "bytes": 3991,
+    "sha256": "D5194292742EA4916295A8658EFDDEC72E94D69DCBF491DB6BC0D5BFF50A188C"
+  },
+  "recordedBefore": [
+    {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "bytes": 182435,
+      "sha256": "EEE12E27367F942DC21E081623B552C2D98856F61A4C8EC4D70B8FE2B831EAC8"
+    },
+    {
+      "path": "Source/WarhammerClientE04A1G.Target.cs",
+      "bytes": 1178,
+      "sha256": "2E156BCA977EB23ED89B78A33DCE063F0D1739B07537F3A9CC263DB4EFC53B8F"
+    },
+    {
+      "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "bytes": 16226,
+      "sha256": "C3D17762FDE8DCBFD2DE7287BF8D2A3AF668F5D0D0FE488F3A31A71A7A91929C"
+    }
+  ],
+  "adoptedFiles": [
+    {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "bytes": 183417,
+      "sha256": "6C0F250D59EE34C575EEAC055CE2A058198E3F27F9A689AD3897B15778CCDCF7"
+    },
+    {
+      "path": "Source/WarhammerClientE04A1G.Target.cs",
+      "bytes": 1271,
+      "sha256": "CBE503A93B79FD470C66102D04AA73E9F13523224BF1138003649ECAA5365604"
+    },
+    {
+      "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "bytes": 17266,
+      "sha256": "E4F3FA8E117D4FC4C23DBAB9D70AEE09411B8C78F0302EF945823A60BB5B9692"
+    },
+    {
+      "path": "scripts/migration/fixtures/e04a1g/WarhammerClient.uproject",
+      "bytes": 608,
+      "sha256": "7BD07DC7C969BF0FDB69E876F6AD55CD9F0EA679130CB6D856CD65E01BF39AE8"
+    }
+  ],
+  "changes": [
+    {
+      "path": "Source/WarhammerClientE04A1G.Target.cs",
+      "behavior": "Remove explicit Rules.EnablePlugins selection; retain ordinary installed Shared/monolithic Game defaults, exact dedicated Win64/x64 Development target guards and normal main module."
+    },
+    {
+      "path": "scripts/migration/fixtures/e04a1g/WarhammerClient.uproject",
+      "behavior": "Add a committed owned-project fixture containing exactly one enabled E04ProfileProof reference with PlatformAllowList=[Win64], TargetAllowList=[Game], TargetConfigurationAllowList=[Development] and no extra proof-reference fields. It must be explicitly frozen and copied as the owned PROJECT descriptor."
+    },
+    {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "behavior": "Add Assert-A1GScopedProofProject and bind the staged project reference with all keys and typed values. Reject proof-plugin receipt Rules overrides; require exact matching positive Game BuildPlugins membership. Retain Editor-disabled receipt/product/runtime/output checks and actual Game compile/link/runtime proof requirements."
+    },
+    {
+      "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "behavior": "Amend the plugin-selection method to the exact frozen owned project reference and actual receipt/build-plugin joins. Shared targets cannot use Rules.EnablePlugins/DisablePlugins; no Unique, bOverrideBuildEnvironment or global exception override is introduced."
+    }
+  ],
+  "unchanged": {
+    "recordedFiles": [
+      {
+        "path": "WarhammerClient.uproject",
+        "bytes": 356,
+        "sha256": "8A1A494E67831C67E23A646BF543A2268015301F2B8EBD661F5F462DFBD611D8"
+      },
+      {
+        "path": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+        "bytes": 87636,
+        "sha256": "CD9C8424E543BD40A0FAE209837EE9EA2AFC0351ECF929BDC7F5F0786313D939"
+      },
+      {
+        "path": "Plugins/E04ProfileProof/E04ProfileProof.uplugin",
+        "bytes": 943,
+        "sha256": "172D21D80FDC4148CFCADDF92FADD8465A14A038CD273298DED16C8166E29981"
+      }
+    ],
+    "scope": "Canonical product project descriptor, authored Config, vendor ModuleRules, plugin descriptor, caller/parser C++, vendor acquisition and supervisor are not changed by this repair. The norm selection method is amended; actual execution remains required."
+  },
+  "rootStaticChecks": {
+    "rootInspectedWholeFunctionalDiff": true,
+    "wholeWrapperInverseMatched": true,
+    "oldCrBytes": 169,
+    "newCrBytes": 169,
+    "wrapperAstErrors": 0,
+    "oldWrapperFunctionCount": 112,
+    "newWrapperFunctionCount": 113,
+    "newFixtureJsonParsed": true,
+    "limits": "Static/source-only observations. No behavior, C# compilation, native compilation, fresh SOURCE approval or execution PASS is inferred."
+  },
+  "asOfAdoption": {
+    "behavior": "NOT_RUN",
+    "freshSource": "NOT_RUN",
+    "newRun": "UNBOUND",
+    "nativePhases": {
+      "Preflight": "NOT_RUN",
+      "DependencyConfigure": "NOT_RUN",
+      "DependencyBuild": "NOT_RUN",
+      "EditorPrerequisiteBuild": "NOT_RUN",
+      "GameBuild": "NOT_RUN",
+      "Cook": "NOT_RUN",
+      "Stage": "NOT_RUN",
+      "Native": "NOT_RUN",
+      "Audit": "NOT_RUN"
+    },
+    "gameAttempts": 0,
+    "evaluatedCustomChecks": 0,
+    "sourceAdmission": "NONE_FOR_REPAIRED_SOURCE",
+    "phaseAuthority": "NONE_FOR_REPAIRED_SOURCE"
+  },
+  "preservedOldRun": {
+    "sourceHead": "10f1d385903ea7b033cf55f50e19eb2794c61565",
+    "runId": "20261021T114118Z-96c095f7",
+    "status": "CLOSED_NO_RETRY_NO_SUCCESSOR_GO",
+    "source": "PASS_ADMITTED_FOR_OLD_EXACT_HEAD",
+    "Preflight": "PASS_ADMITTED",
+    "DependencyConfigure": "PASS_ADMITTED",
+    "DependencyBuild": "PASS_ADMITTED",
+    "EditorPrerequisiteBuild": "PASS_ADMITTED",
+    "GameBuild": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "remainingFourPhases": "NOT_RUN",
+    "gameAttempts": 0,
+    "evaluatedCustomChecks": 0,
+    "closure": "docs/plans/research/2026-10-21-e04a-game-shared-plugin-failure-closure.md",
+    "receipt": "docs/plans/evidence/2026-10-21-e04a-game-shared-plugin-failure.json",
+    "approvalTransfer": false,
+    "limits": "Actual UBT exit6 and Shared/EnablePlugins target-setup rejection before Game C++ compilation remain unchanged. The partial target receipt is not a successful build. No failed phase is rewritten as PASS."
+  },
+  "nextRequired": "Checkpoint this repaired source and factual overlay, push and gh-verify exact OWN18 remote backup before fresh head/base/run/freeze/tool/config/input/command/norm bindings and affected SOURCE. Explicitly freeze/copy the committed owned project fixture. Only positive root SOURCE admission permits separately ordered native phase GOs. Final CODE and a different REQ follow actual successful closed execution.",
+  "optionalHarnessCertificationPrerequisite": false,
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "standingReviewTransmissionConsent": "APPROVED_UNTIL_EXPLICIT_HUMAN_REVOCATION_WITHIN_ESTABLISHED_SCOPE_AND_DESTINATION",
+  "limits": [
+    "All NOT_RUN/UNBOUND statements describe the repaired candidate as of adoption, not the old closed run or any later evidence.",
+    "The new owned project fixture must be bound explicitly by future frozen inputs; merely adding the file does not prove staging, selection, compilation or runtime behavior.",
+    "This adoption record grants no SOURCE admission, native execution, GUI interaction, Core-host action, review acceptance, merge or migration acceptance.",
+    "No old source or phase approval transfers to changed source; preserve all historical raw failures and bounded A1E acceptance.",
+    "OWN17 optional harness/generated-response/transitive Rules/cache/witness/repeated certification remains deferred/unproven; ordinary runtime assertions remain fail-closed. No optional harness campaign becomes a new prerequisite.",
+    "The later factual metadata overlay lies outside any old reviewed candidate. Auxiliary drafting supplies no formal gate approval and performs no canonical/sibling edit, Git operation, candidate test/runtime/review execution or authority admission."
+  ]
+}
