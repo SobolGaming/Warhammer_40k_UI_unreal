@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_SHARED_EDITOR_PLUGIN_DEFAULT_SOURCE_REPAIR",
+  "recordedUtc": "2026-10-21T05:33:09.0655492Z",
+  "planningRevision": 91,
+  "status": "SHARED_EDITOR_PLUGIN_DEFAULT_REPAIRED_SOURCE_PENDING",
+  "basedOnClosedSource": "058deb1168f61e8457fcdf7cee8a1be76bc315bf",
+  "closedRunId": "20261021T044229Z-e2488cb8",
+  "closedFailureReceipt": "docs/plans/evidence/2026-10-21-e04a-shared-plugin-target-result.json",
+  "rootAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\editor-plugin-shared-default-repair-PROPOSED\\root-one-line-target-adoption.original.json",
+    "bytes": 2603,
+    "sha256": "03D86D29A31198734AEAD906CEF5AB827BF2EC00C9D775827CF564AAEE363594"
+  },
+  "closureCheckpoint": "0243bc94bf95d29d042a3aea5beccc29c2a36097",
+  "closureBackup": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-058deb1\\root-shared-plugin-target-closure-remote-backup.original.json",
+      "bytes": 647,
+      "sha256": "235F48F39766CC2AC7EC218CF37F65AD06D8FFB68E85E48F5783A5F90191778E"
+    },
+    "verifiedUtc": "2026-10-21T05:30:22.1461455Z",
+    "localCommit": "0243bc94bf95d29d042a3aea5beccc29c2a36097",
+    "remoteCommit": "0243bc94bf95d29d042a3aea5beccc29c2a36097",
+    "exactMatch": true,
+    "initialVerification": "Did not establish an exact match; no repair proceeded. The later fresh no-cache remote observation established this exact closure checkpoint before adoption."
+  },
+  "change": {
+    "file": "Source/WarhammerClientE04AEditor.Target.cs",
+    "removedAssignment": "bCompileWithPluginSupport = true;",
+    "originalLine": 18,
+    "removedLines": 1,
+    "before": {
+      "bytes": 5031,
+      "sha256": "8915E31A93F3C1EF1B12A4DC64CA9365149B7E945B41E96304BAE8B2CB715FEF"
+    },
+    "after": {
+      "bytes": 4988,
+      "sha256": "9BF62B762133CBCA44D72741B1151B7CAB89B90E78E4F969ACC217674608CE80"
+    },
+    "fullInverseRecoversPriorBytes": true,
+    "remainingBytesPreserved": true,
+    "normalInstalledSharedPreserved": true,
+    "explicitEnablePluginsPreserved": true,
+    "forcedFalseAdded": false,
+    "uniqueBuildEnvironmentAdded": false,
+    "buildEnvironmentOverrideAdded": false,
+    "engineOrSiblingEdits": 0
+  },
+  "sourceBasis": {
+    "observedBaseline": "Closed UBT diagnostic reports the vanilla shared UnrealEditor value False against the former forced True.",
+    "primaryPointers": [
+      "TargetRules.cs:1543-1548 marks bCompileWithPluginSupport RequiresUniqueBuildEnvironment with no True initializer.",
+      "UEBuildTarget.cs:1506-1530 compares shared settings and supports EnablePlugins via normal modular Editor target receipts.",
+      "Projects.Build.cs:20-33 selects target-receipt enabled-plugin state for Shared modular Editor."
+    ],
+    "qualification": "Static source and the closed diagnostic support the expected future value and ordinary receipt route; no new effective target, build, receipt selection or module load is observed."
+  },
+  "futureMetadata": {
+    "status": "SUCCESSOR_PROPOSED_NOT_RUN",
+    "expectedSelectorProjection": {
+      "jsonPointer": "/rulesWitness/expectedSelectors/bCompileWithPluginSupport",
+      "value": false,
+      "basis": "CLOSED_VANILLA_DIAGNOSTIC_AND_CURRENT_SOURCE",
+      "newEffectiveTargetInstanceObserved": false
+    },
+    "otherSelectorCountToRetainExactly": 31,
+    "runtimeInputDescriptorsToRetainExactly": 311,
+    "flatDescriptorsToRetainExactly": 318,
+    "strictWholeSelectorComparisonRetained": true,
+    "closedTrueFreezeModified": false,
+    "successorHeadRunFreeze": "UNBOUND_PENDING_CHECKPOINT_AND_FRESH_BINDINGS"
+  },
+  "unchangedSourceIdentities": [
+    {
+      "relativePath": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "bytes": 275014,
+      "sha256": "FE278EA12C3C6D474F1F59A360E352BB3FD4023216F09C9267F73A27DA59DB48"
+    },
+    {
+      "relativePath": "docs/plans/research/2026-10-21-e04a-functional-proof-packet.md",
+      "bytes": 8293,
+      "sha256": "57410E0F5666D4BCFF88CFACD9EBBD1E640F8B1A8D00A00F93EE2422386A5172"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "bytes": 59007,
+      "sha256": "9865BADE25264DC00F3774FA80B7C5D391B7BB36020AD44D9FDADAB6689F3557"
+    },
+    {
+      "relativePath": "tests/migration/Test-E04RulesWitness.ps1",
+      "bytes": 46494,
+      "sha256": "194648FA854DA465D41D932AC45331E733EA1F2753DF61257D47FADB493922FF"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/Tests/E04ProfileAbiTests.cpp",
+      "bytes": 40054,
+      "sha256": "69CF7548DDF5061EA0D97318B9B7EF1B3F6BC5F947B774FD2A22F391008C5863"
+    }
+  ],
+  "functionalCounts": {
+    "inputs": 43,
+    "generated": 33,
+    "attempts": 50,
+    "suites": 8
+  },
+  "freshAffectedSource": "NOT_RUN",
+  "freshNativePhases": [
+    {
+      "phase": "Preflight",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "SupervisorControls",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Configure",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "DependencyBuild",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "EditorBuild",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Discovery",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Native",
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Audit",
+      "status": "NOT_RUN"
+    }
+  ],
+  "closedFailureAuthority": "CLOSED_DO_NOT_REUSE_NO_APPROVAL_TRANSFER",
+  "newEffectiveTargetObserved": false,
+  "newBuildOrPluginLoadObserved": false,
+  "visibleAuthority": false,
+  "visibleWindows": 0,
+  "linux": "NOT_RUN_UNTESTED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "a1eAcceptance": "NOT_ESTABLISHED",
+  "standingPrivateSourceApiReviewConsent": "PERPETUAL_UNLESS_EXPLICITLY_REVOKED",
+  "next": "Checkpoint/push and verify OWN18 exact remote backup of this repair. Then derive a fresh exact head/run/freeze/current bindings with only the explicit expected Boolean leaf changed, obtain fresh affected focused SOURCE and proceed through the ordered phases with separate current authority.",
+  "limits": [
+    "One-line source repair only; no helper, native, compiler, test or review execution was performed to publish this receipt.",
+    "No new effective selector, metadata successor, successful Editor build or loaded plugin result is established.",
+    "The failed 058deb1 run, its four successful phases, failed EditorBuild, partial Rules witness absence and all earlier histories remain unchanged.",
+    "OWN17/D-P2 special assurance stays deferred/unproven and operational checks stay fail-closed; final and later migration gates remain open."
+  ]
+}

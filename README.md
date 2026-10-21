@@ -7,7 +7,20 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is
+The bounded E04-A1E proof is **SHARED_EDITOR_PLUGIN_DEFAULT_REPAIRED_SOURCE_PENDING**
+(revision 91). The [repair receipt](docs/plans/evidence/2026-10-21-e04a-shared-editor-plugin-default-repair.json)
+records one removed forced plugin-support assignment; normal installed Shared,
+explicit plugin enablement, wrapper/norm/tests and strict consumers remain.
+The future expected selector is False from the closed vanilla/source basis,
+with the other 31 selectors, 311 runtime inputs and 318 flat descriptors retained;
+its new effective value is unobserved. Metadata successor PROPOSED/NOT_RUN,
+fresh SOURCE pending and all eight fresh phases NOT_RUN. The failed `058deb1`
+run remains closed; no approval transfers. Checkpoint/push/verify OWN18 backup,
+then fresh exact bindings/affected SOURCE before ordered phases. OWN17/D-P2 stay
+deferred/unproven/fail-closed, final/later gates open, visible zero/Linux UNTESTED
+and perpetual review consent unchanged.
+
+Historical revision 90 A1E status was
 **FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**
 (revision 90). The [receipt](docs/plans/evidence/2026-10-21-e04a-shared-plugin-target-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-shared-plugin-target-closure.md)

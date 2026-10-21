@@ -15,7 +15,6 @@ public class WarhammerClientE04AEditorTarget : TargetRules
 
         Type = TargetType.Editor;
         bBuildAllModules = false;
-        bCompileWithPluginSupport = true;
         bDebugBuildsActuallyUseDebugCRT = false;
         DefaultBuildSettings = BuildSettingsVersion.V7;
         IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_8;

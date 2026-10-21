@@ -78,7 +78,25 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 90 (2026-10-21 UTC) is
+Current A1E status at plan revision 91 (2026-10-21 UTC) is
+**SHARED_EDITOR_PLUGIN_DEFAULT_REPAIRED_SOURCE_PENDING**. The
+[repair receipt](docs/plans/evidence/2026-10-21-e04a-shared-editor-plugin-default-repair.json)
+records removal of only `bCompileWithPluginSupport = true;` after exact closure
+checkpoint/OWN18 backup `0243bc9`. The target retains normal installed Shared
+and explicit `EnablePlugins`; no forced False, Unique or override was added.
+Full inverse recovers prior bytes; wrapper, norm, tests and strict consumers are
+unchanged. Future metadata must expect False from the closed vanilla/source
+basis, preserving the other 31 selectors, 311 runtime inputs and 318 flat
+descriptors. This is an expected leaf, not an observed new effective target.
+The metadata successor is PROPOSED/NOT_RUN; fresh SOURCE and all eight fresh
+phases are NOT_RUN. Failed `058deb1`/run `20261021T044229Z-e2488cb8` remains closed,
+with no approval transfer. Checkpoint/push/verify OWN18 exact backup, then fresh
+head/run/freeze/current bindings and affected focused SOURCE before ordered
+phases. OWN17/D-P2 stay deferred/unproven/fail-closed; final CODE/different REQ/
+A1E and later gates remain open, visible zero/Linux UNTESTED. Standing private
+source/API review consent remains perpetual unless explicitly revoked.
+
+Historical A1E status at plan revision 90 (2026-10-21 UTC) is
 **FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**. The
 [factual receipt](docs/plans/evidence/2026-10-21-e04a-shared-plugin-target-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-shared-plugin-target-closure.md)
