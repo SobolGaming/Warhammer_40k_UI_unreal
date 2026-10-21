@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_OFFLINE_RULES86_CONTROLS_RESULT",
+  "evidence": {
+    "completion": {
+      "path": ".local/planning/E04/offline-rules86-controls-runs/20261020T235216Z-b0d2677240f1/completion.original.json",
+      "bytes": 2492,
+      "sha256": "5B6CA324EDDE031994FF3AEF657381F95E7AF95B645E6D51F0BABF28D2F1E2D0"
+    },
+    "report": {
+      "path": ".local/planning/E04/offline-rules86-controls-runs/20261020T235216Z-b0d2677240f1/controls/pure-control-report.json",
+      "bytes": 35067,
+      "sha256": "2C060F2BCA61C10DF5019E82503773F050EC5833F259712375E85692149414FA"
+    },
+    "rootInspection": {
+      "path": ".local/planning/E04/null-response-source-refresh-72af15d/root-Rules86-result-inspection.original.json",
+      "bytes": 13396,
+      "sha256": "8A4DF4CC0F5F00B2C55A84341F3A7180B78D28BD3E01556DA4CF48BF6B3FB9CF"
+    }
+  },
+  "actual": {
+    "startedUtc": "2026-10-20T23:52:16.6048208Z",
+    "closedUtc": "2026-10-20T23:52:55.2690881Z",
+    "elapsedSeconds": 38.6522726,
+    "outerTimeoutSeconds": 120,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "cases": 86,
+    "matched": 86,
+    "failed": 0,
+    "selectedRealPowerShellDefinitions": 30,
+    "sixUbtExtraArgsNegativesMatchedIntendedDiagnostic": true,
+    "syntheticExternalRoots": 0,
+    "hiddenInfrastructurePowerShellHosts": 1
+  },
+  "sourcePinsBeforeAfterEqual": true,
+  "sourcePins": [
+    {
+      "path": "tests/migration/Test-E04RulesWitness.ps1",
+      "bytes": 46494,
+      "sha256": "194648FA854DA465D41D932AC45331E733EA1F2753DF61257D47FADB493922FF"
+    },
+    {
+      "path": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "bytes": 264975,
+      "sha256": "AAEF3EF33C3FD6115010F1153529308B3C82695754DE2982852E41141EFA9370"
+    }
+  ],
+  "limits": "Selected real PowerShell definitions over synthetic/inert inputs. No OS-wide process-monitor claim, PE reader, C#/compiler/UBT/UE/Core/parser/native execution, SOURCE admission or final acceptance.",
+  "separatePs14": "Already public in revision75; not rerun.",
+  "remainingNotRun": [
+    "Whole18 build-boundary control",
+    "CSharp4 effective-block checks",
+    "Full SupervisorControls phase",
+    "All eight native phases"
+  ],
+  "sourceAdmissions": 0,
+  "finalAcceptance": false
+}

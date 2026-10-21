@@ -78,7 +78,39 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 75 (2026-10-20 UTC) is
+Current A1E status at plan revision 76 (2026-10-21 UTC) is
+**SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING**. The
+[closure/OWN17 record](docs/plans/research/2026-10-21-e04a-source-assurance-deferral.md)
+and [facts](docs/plans/evidence/2026-10-21-e04a-source-assurance-deferral-result.json)
+preserve five raw CHANGES_REQUESTED reports/480 pairs, zero anomalies/admissions.
+Routine count/strict-empty repairs are planned, not applied. Rules86 matched 86/86
+separately; C#4/whole18/full SupervisorControls and all eight native phases NOT_RUN,
+no native RunRoot/visible0. Actual focused component SOURCE/native/final proof is
+pending; A1G/A2/plain-DEL/Linux and later gates remain open. Consent persists.
+
+OWN17 is **activated prospectively after all five closed reports** for D-P2's
+unrecognized out-of-rule `command=@` capture context and nontrivial special-tool
+recognizer/completeness/repeated-certification cost. Defer special third-layer
+harness/generated-response certification and broad transitive graph/witness
+certification to the plan's optional Section17, never PASS. Keep existing runtime
+assertions fail-closed as uncertified checks; any failure must stop and cannot be
+ignored. No bypass/ModuleRules branch/framework is added. Ordinary UBT/dependency,
+ABI and build/process safety remain required. Fresh frozen focused SOURCE for the
+actual component/material callers/build-process safety/changed units must pass
+before native phase GO under the [focused proof packet](docs/plans/research/2026-10-21-e04a-functional-proof-packet.md);
+former ten-context/full transitive certification is no longer a prerequisite. Final independent CODE and different REQ still follow actual
+eight-suite execution/evidence freeze. Old raw v7.3 reports remain unchanged; this
+supersedes only special assurance's critical path and grants no execution approval.
+
+OWN18 (2026-10-20 23:39 UTC) requires remote backup at each next checkpoint:
+push the current migration branch to the verified existing project remote and
+verify that its remote ref contains the checkpoint commit. Use the workspace's
+github-full-access credential through gh without exposing it. No force push,
+history rewrite, unrelated branches, new remote or ignored/private evidence.
+Report the actual branch, remote and verified hash; local commits alone are not
+a remote backup. This adds no merge or execution authority.
+
+Historical A1E status at plan revision 75 (2026-10-20 UTC) is
 **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The
 [repair checkpoint](docs/plans/research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
 and [factual record](docs/plans/evidence/2026-10-20-e04a-null-response-env-repairs.json)
@@ -91,27 +123,6 @@ exact changed source/run/unit/data bindings and affected independent SOURCE
 coverage, both finite witnesses and raw seams. All eight native phases NOT_RUN,
 no native RunRoot/visible0; A1G/A2/plain-DEL/full fidelity and final CODE/different
 REQ/later gates remain open. Standing perpetual source/API consent persists.
-
-OWN17 (2026-10-20 23:36 UTC) adds a **conditional**, currently untriggered scope
-policy for the custom E04-A1E assurance harness/response-closure tooling. If the
-upcoming review requires nontrivial special third-layer tool-assurance fixes,
-remove that work from the critical path and record it as the plan's
-[optional end-of-migration follow-up](docs/plans/unreal-migration-plan.md#17-optional-end-of-migration-follow-up),
-which may become obsolete. Judge nontriviality by owner time cost and avoid
-expensive repeated hardening. Use relevant actual build/functional tests as proof
-for this small component; fix real component defects. Preserve all old failures
-and incompleteness; deferred never means passed. Normal UBT prerequisites,
-unrelated review/safety/manual-execution gates and final CODE/different REQ remain
-unchanged. This policy grants no execution approval and changes no frozen packet
-or technical input by itself.
-
-OWN18 (2026-10-20 23:39 UTC) requires remote backup at each next checkpoint:
-push the current migration branch to the verified existing project remote and
-verify that its remote ref contains the checkpoint commit. Use the workspace's
-github-full-access credential through gh without exposing it. No force push,
-history rewrite, unrelated branches, new remote or ignored/private evidence.
-Report the actual branch, remote and verified hash; local commits alone are not
-a remote backup. This adds no merge or execution authority.
 
 Historical revision 74: the [closed round](docs/plans/research/2026-10-20-e04a-value-build-source-closure.md)
 preserves five raw reports/437 pairs/zero admissions and five unlaunched jobs.

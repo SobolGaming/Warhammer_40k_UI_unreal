@@ -1,25 +1,22 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
-**Planning date / revision date:** 2026-10-02 / 2026-10-20 UTC
-**Revision:** 75 — NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING. Applied null, response-file and environment repairs follow closure b7c7ce1. Fourteen selected PowerShell controls matched; C#4/Rules86/whole18 and all eight native phases remain NOT_RUN. Exact successor bindings and affected SOURCE are pending.
+**Planning date / revision date:** 2026-10-02 / 2026-10-21 UTC
+**Revision:** 76 - SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING. Five raw CHANGES_REQUESTED reports/480 pairs/zero admissions. OWN17 defers special tool/broad transitive certification; focused component SOURCE and actual native proof remain required. Routine count/strict-empty repairs are planned, not applied.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
 **Canonical destination:** `Warhammer_40k_UI_unreal/docs/plans/unreal-migration-plan.md` (this file).
 **Review status:** **BOUNDED_E01_SLOW120_ACCEPTANCE_RECORDED**, recorded by root at `2026-10-17T06:00:32.004673+00:00` for reviewed head `b97ed5e8c1b2b2a1472aeb7fb70a267e0eab3d37` against cumulative base `0467ee63fe6d4c775f429afae2233d7292787c31`. CODE r13 is PASS. Valid initial REQ r3 remains BLOCKED on administrative A1/A2; its separate supplement is PASS and closes those items. Root combined those dispositions for this narrow diagnostic; the raw initial REQ verdict remains BLOCKED. Contaminated original REQ r2 is invalid and supplies no approval. Normal execution remains `20261017T044903Z-b0169768` on source `d1189592a5f99bdee58cea25ae8546e5ee2e3623`, with unchanged 87/14/132/2 counts, separate 135 pure PowerShell controls/39 inputs and actual settings/wire/process evidence. Publication is a separate metadata overlay outside the reports' reviewed head. Full E01/M01/M02, research/implementation gates, the original 30-second budget, production responsiveness, UE HTTP, rendering, packaging and Linux remain open. [Final review provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json); current and historical detail in Section 0.8.
 
-**Prospective owner policy — OWN17 (2026-10-20 23:36 UTC):** If the upcoming
-review requires nontrivial assurance fixes to the custom E04-A1E harness/response-
-closure tooling (the special third-layer validation tool), remove that tool-
-assurance work from the critical path and carry it as an optional
-[end-of-migration follow-up](#17-optional-end-of-migration-follow-up), possibly
-obsolete by then. Judge nontriviality by owner time cost and avoid another costly
-hardening loop. Relevant actual builds and functional tests provide proof for
-this small component; real component defects still require fixes. This condition
-has **not been triggered**. Preserve all old failures/incompleteness; deferred
-work is never a PASS. Normal UBT prerequisites, unrelated review/safety/manual-
-execution gates and final CODE/different REQ remain unchanged. This policy grants
-no execution approval.
+**OWN17 activated after the five closed SOURCE reports:** Special third-layer
+harness/generated-response certification and broad transitive graph/witness
+certification move to the [optional follow-up](#17-optional-end-of-migration-follow-up),
+never PASS. Runtime assertions remain fail-closed and must not be ignored. Ordinary
+UBT/dependency/ABI/build-process safety, fresh frozen focused component SOURCE
+before native GO, and final CODE/different REQ after actual execution remain required.
+The [focused proof packet](research/2026-10-21-e04a-functional-proof-packet.md)
+supersedes only that special assurance critical path, not old raw reports or
+execution gates. [Closure and scope](research/2026-10-21-e04a-source-assurance-deferral.md).
 
 ### Repository routes and provenance
 
@@ -31,7 +28,19 @@ no execution approval.
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 75 changes
+### Revision 76 changes
+
+Status is **SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING**.
+The [closure](research/2026-10-21-e04a-source-assurance-deferral.md) and
+[factual record](evidence/2026-10-21-e04a-source-assurance-deferral-result.json)
+preserve five raw CHANGES_REQUESTED reports/480 pairs, zero anomalies/admissions,
+and root's post-close 1,757-descriptor check with zero differences. OWN17 is active
+only for special tool/broad transitive certification; deferred is never passed.
+Routine count and strict-empty consumer fixes remain planned. Focused component/
+caller/build-process safety SOURCE must pass before native phase GO. Rules86 matched
+86/86 separately; all eight native phases NOT_RUN, final/later gates remain open.
+
+### Revision 75 history
 
 Status is **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The
 [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
@@ -1361,7 +1370,19 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the applied null/response/environment repairs,
+**Current assignment: checkpoint the closed SOURCE round and OWN17 disposition,
+then make the routine count/strict-empty repairs and freeze focused component SOURCE.**
+Status is **SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING**.
+The [closure record](research/2026-10-21-e04a-source-assurance-deferral.md) preserves
+all five raw CHANGES_REQUESTED reports and zero admissions. Special tool/broad
+transitive certification moves to Section17; actual component, material caller,
+ordinary UBT/dependency and build/process safety proof is retained. Existing
+uncertified runtime assertions must fail closed. Fresh frozen focused SOURCE must
+pass before native phase GO; completing the former ten contexts/full transitive
+certification is not a prerequisite. Final CODE/different REQ follows actual eight-
+suite execution/evidence freeze. All native phases NOT_RUN/no native RunRoot/visible0.
+
+**Historical assignment (revision 75): checkpoint the applied null/response/environment repairs,
 then refresh exact affected source/input bindings before SOURCE/native release.**
 Status is **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The
 [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
@@ -1676,7 +1697,9 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **2026-10-16 finding:** [Complete field/diagnostic/YAML inventory](research/2026-10-16-capability-checklist.md) and [total active/inactive/reject normalization](research/2026-10-16-parity-closure-design.md) finish source/design mapping. Immutable yaml-cpp0.9.0 evaluation candidate is56e3bb550c91fd7005566f19c079cb7a503223cf. E04 compiler/ABI/private-exception/corpus/render proof remains BLOCKED. No library adoption, compatibility PASS, silent dropped fields or new supported editor is implied.
 
-**Current repair status (revision 75):** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md) records applied source changes and 14 matching PS-only controls, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings, affected SOURCE, A1G/A2/full fidelity and final/later gates remain open.
+**Current status (revision 76):** **SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING**. See the [closure/OWN17 disposition](research/2026-10-21-e04a-source-assurance-deferral.md): five raw CHANGES_REQUESTED reports/zero admissions; special assurance deferred, never passed. Routine repairs and fresh focused component/caller/build-process SOURCE precede native GO. A1G/A2/plain-DEL/final/later gates remain open.
+
+**Historical repair status (revision 75):** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md) records applied source changes and 14 matching PS-only controls, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings, affected SOURCE, A1G/A2/full fidelity and final/later gates remain open.
 
 **Historical repair status (revision 73):** **VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-value-build-repair-checkpoint.md) records applied bounded guards and seven passing offline helper controls; fresh affected SOURCE and actual native/final/later gates remain open. Plain-DEL/context-sensitive lexical/A2 production risk remains unclosed.
 
@@ -2119,7 +2142,7 @@ All 67 wrapper process records have exit 0, no timeout and redaction PASS. Captu
 | OWN14 | **“Please go ahead with the increased 120 diagnostic”**, 2026-10-16 | After the late-response explanation, authorize a separate E01-SLOW120 run with a 120-second total HTTP request budget and remaining-time-capped reads. Preserve three-second connect, 30-second managed readiness, 30-minute process bounds and prior FAIL/UNKNOWN evidence. Freeze/review before a fresh run; no production-latency acceptance, Core edits or new host authority |
 | OWN15 | **Apply the legacy implementer / independent code reviewer / independent requirements auditor protocol**, owner's progress chat, 2026-10-17 UTC | New unprimed contexts, enforced read-only/approval-never, requested memory suppression with honest runtime limits, frozen candidate and raw evidence, separate findings/remediation/re-freeze/fresh reviews. Update this plan and AGENTS. Existing diagnostic evidence stays intact; affected final acceptance/publication waits for the renewed gate |
 | OWN16 | **Regular local checkpoint commits of coherent increments**, owner's progress chat, 2026-10-17 UTC | Save recoverable work regularly, before risky changes and after fixes; record actual tests and independent-review status, exclude private/generated artifacts, and keep reviewing/executing candidates frozen. This adds no acceptance or push/merge authority |
-| OWN17 | **Conditional deferral of costly special third-layer tooling assurance**, owner's progress chat, 2026-10-20 23:36 UTC | If the upcoming review needs nontrivial custom E04-A1E harness/response-closure assurance fixes, move that work to the optional end-of-migration follow-up; it may become obsolete. Use owner time cost to avoid expensive hardening loops and relevant actual builds/functional tests as component proof. Real component defects remain must-fix; old failures stay; deferral is not PASS. Condition untriggered; unrelated gates and execution approval unchanged |
+| OWN17 | **Special assurance deferral**, owner policy 2026-10-20 and root activation after all five run234412 reports closed | ACTIVE prospectively for D-P2 recognizer/completeness cost and broad transitive graph/witness certification; optional Section17, never PASS. Fail-closed runtime assertions and ordinary UBT/dependency/ABI/build-process safety remain. Focused fresh SOURCE precedes native GO; actual suites/final CODE+different REQ still required; no execution authority |
 | OWN18 | **Push the branch at the next checkpoint for remote backup**, owner's progress chat, 2026-10-20 23:39 UTC | Push the current migration branch to its verified existing project remote and verify the remote ref contains the checkpoint commit. No force push, history rewrite, unrelated branches, new remote or ignored/private evidence upload. Report branch, remote and actual hash verification; local commits alone are not remote backup. No new merge or execution authority |
 
 The source baseline is Arcade `5088c1c49dcaff29eb59fb64b3063d30214dde73` with supported Core 44.1; the separately selected Unreal target is Core `5f5097...` / 44.3.33. Existing Arcade `.venv` provenance is `4ee7cc...`; none of these identities may be silently substituted. Both sibling source worktrees were clean. The Unreal repository initially had no commits or files besides `.git`. The owner-selected project destination supersedes the old shared-repository nesting.
@@ -3055,7 +3078,9 @@ Retain separate preferences and composition files. Use a whitelist registry of w
 
 **Historical source finding (2026-10-16):** Candidate parser: **yaml-cpp 0.9.0**, evaluation pin `56e3bb550c91fd7005566f19c079cb7a503223cf` / tag `yaml-cpp-0.9.0`, MIT license. [Primary-source/ABI refresh](research/2026-10-16-bootstrap-and-native-parser.md) retrieved 2026-10-16. E04 must still verify Unreal compiler/runtime, private exception boundary and actual PyYAML6.0.3 corpus behavior; [normalization design](research/2026-10-16-parity-closure-design.md) specifies the mapping. No library was adopted, downloaded, built or installed. No third-party Unreal wrapper is required. Resolver/alias/duplicate/merge compatibility cannot be inferred from YAML branding.
 
-**Current repair status (revision 75):** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md) records applied source changes and 14 matching PS-only controls, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings, affected SOURCE, A1G/A2/full fidelity and final/later gates remain open.
+**Current status (revision 76):** **SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING**. See the [closure/OWN17 disposition](research/2026-10-21-e04a-source-assurance-deferral.md): five raw CHANGES_REQUESTED reports/zero admissions; special assurance deferred, never passed. Routine repairs and fresh focused component/caller/build-process SOURCE precede native GO. A1G/A2/plain-DEL/final/later gates remain open.
+
+**Historical repair status (revision 75):** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md) records applied source changes and 14 matching PS-only controls, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings, affected SOURCE, A1G/A2/full fidelity and final/later gates remain open.
 
 **Historical repair status (revision 73):** **VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING**. The [repair checkpoint](research/2026-10-20-e04a-value-build-repair-checkpoint.md) records applied bounded guards and seven passing offline helper controls; fresh affected SOURCE and actual native/final/later gates remain open. Plain-DEL/context-sensitive lexical/A2 production risk remains unclosed.
 
@@ -3841,7 +3866,13 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
+**Ready now:** **SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING**.
+Checkpoint the [closed round/OWN17 disposition](research/2026-10-21-e04a-source-assurance-deferral.md),
+fix the routine count/strict-empty consumers, and freeze focused component, material
+caller and build/process safety SOURCE before native phase GO. Special certification
+is optional Section17 work; retained runtime assertions remain fail-closed.
+
+**Historical readiness (revision 75):** **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
 Checkpoint the [applied repairs](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md), then derive new exact
 source/run/common/index/assignment/unit/data bindings and affected SOURCE coverage.
 Fourteen selected PS controls matched; no whole phase, C# or native pass follows.
@@ -3867,7 +3898,9 @@ approval, no successor GO exists and all eight native phases remain NOT_RUN.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Current progress (revision 75):** NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING. Null/response/environment source repairs applied; 43 inputs/33 recipes/50 attempts/eight suites. Actual PS14 matched, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings/SOURCE, A1G/A2/final/later gates remain open; prior closed reports/admissions unchanged.
+**Current progress (revision 76):** SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING. Five closed raw CHANGES_REQUESTED reports/480 pairs/zero admissions. OWN17 special assurance deferral active, no PASS; routine repairs planned, focused SOURCE/native/final proof pending. Separate Rules86 matched 86/86; all native phases NOT_RUN.
+
+**Historical progress (revision 75):** NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING. Null/response/environment source repairs applied; 43 inputs/33 recipes/50 attempts/eight suites. Actual PS14 matched, with C#4/Rules86/whole18 and all native phases NOT_RUN. Exact successor bindings/SOURCE, A1G/A2/final/later gates remain open; prior closed reports/admissions unchanged.
 
 **Historical progress (revision 73):** VALUE_AND_BUILD_GUARDS_REPAIRED_SOURCE_REFRESH_PENDING. Three bounded repairs are applied after `b553631`; exact successor source/run/input refresh is pending. Seven offline helper controls passed/zero external roots. Forty inputs/47 planned attempts/eight suites; no native phase, admission or final acceptance. Plain-DEL/A2 production risk and all later gates remain open.
 
@@ -3907,7 +3940,9 @@ separate acceptance gates remain open.
 
 **Work completed so far (historical through revision 49):** imported plan/strong instructions, M00 metadata, legacy 44.1 source characterization and selected 44.3.33 adaptation, profile/capability/design checklists, Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units / 14 Capture checks / 132 native successes / two evidence checks, plus separate 135 PowerShell controls / 39 inputs. E02 `202805` on `5e92ba3` completed affected SOURCE and all seven producer phases, 16 native cases / 18174 assertions, separate SUP6 and six images. Root recorded bounded Windows synthetic acceptance after separate administrative recovery; original CODE r3, REQ r2 and v4 raw BLOCKED reports and their limits are unchanged. The exact 18 E04-A1E source paths are now canonical, with eight planned suites / 38 unique IDs / 45 attempts and pinned yaml-cpp acquisition verified (394 files / 5156535 bytes). The first SOURCE assessment remains BLOCKED; the second remains CHANGES_REQUESTED for the now-restored strict Parse-JsonLine (15 offline cases / 38 checks passed). The third is BLOCKED with incomplete coverage and a DDC observation gap. Its guard repair passed 21 offline cases/63 checks. The fourth assessment remains BLOCKED with 19/78 coverage and unselected metadata exposure. The fifth raw SOURCE_PASS applies only to c500f21/run024733 with bounded Editor qualifications. That run passed Preflight (zero roots) and six supervisor controls/three groups/five roots, then Configure failed on generated SDK RC-path escaping. Root CMake exited 1 in about 0.859 seconds; one unidentified member lingered until confirmed timeout cleanup/final zero, and producer preservation missed its deadline. Separate manual checks matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings pairs without passing the failed phase. The authored path repair passed 21 pure PowerShell cases with zero failures; at revision 47 checkpoint/new candidate/freeze/RunId/fresh affected SOURCE were pending. The subsequent sixth SOURCE review on 0ed4221/run035315 is raw BLOCKED after 48/81 BODY files, with incomplete 13-record/902-row assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. The full staged-source BODY-grant inventory proposal is authored without implementation changes or rerunning the controls; a neutral complete SOURCE packet is next. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. All eight phases for 0ed4221 remain NOT RUN/no native RunRoot. Subsequent r7 on e505b21/run041347 is raw BLOCKED after 55/93 BODY files, with all 33 staged members granted, incomplete 13/902 assessment and no confirmed implementation defect/binding/access denial. A prospective blind scoped SOURCE plus fresh independent integration design is being prepared, not adopted; full current 93-file union/all selected data/material relationships and unchanged criteria remain required. All eight e505b21 phases are NOT RUN/no native RunRoot; future frozen descriptors/counts remain derived. The five later phases remain NOT RUN; no native parser suite ran and final CODE/different REQ are pending. A1G, all 727 A2 compatibility scenarios, shared HUD/render/input, RQ23/RQ24, full E02/M02/E04, Linux, packages and real-Core play remain open. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
 
-**Next concrete step:** Checkpoint these repairs and bounded PS14 evidence, derive fresh exact source/run/common/index/assignment/unit/data bindings, and obtain required affected independent SOURCE coverage, both complete finite witnesses and raw seams under unchanged v7.3 before native release. No old GO/PASS transfers; C#4/Rules86/whole18 remain NOT_RUN. Final CODE/different REQ follows actual execution/evidence freeze; A1G/A2/plain-DEL and later gates stay open.
+**Next concrete step:** Checkpoint this closure and OWN17 scope, apply the routine count/strict-empty consumer fixes, then use the [focused proof packet](research/2026-10-21-e04a-functional-proof-packet.md) to bind one fresh frozen 1,800-second SOURCE context for actual component/material callers/build-process safety. Require its PASS before native phase GO; do not require the former ten-context/full transitive certification campaign. Retain fail-closed assertions; actual eight suites/evidence freeze and final independent CODE/different REQ remain required. No execution GO or acceptance is recorded here.
+
+**Historical next step (revision 75):** Checkpoint these repairs and bounded PS14 evidence, derive fresh exact source/run/common/index/assignment/unit/data bindings, and obtain required affected independent SOURCE coverage, both complete finite witnesses and raw seams under unchanged v7.3 before native release. No old GO/PASS transfers; C#4/Rules86/whole18 remain NOT_RUN. Final CODE/different REQ follows actual execution/evidence freeze; A1G/A2/plain-DEL and later gates stay open.
 
 **Historical next step (revision 73):** Checkpoint the applied repairs, derive fresh exact publication/run/common/index/assignment/source/data bindings and obtain affected independent SOURCE coverage under unchanged v7.3, including both complete finite witnesses, before native release. Preserve revision72 closure, unresolved lexical/A2 limits and final CODE/different-REQ/later gates; no old PASS/GO transfers.
 
@@ -4059,6 +4094,25 @@ Before implementing a milestone, re-read its affected source at the exact approv
 [U27]: https://docs.opencv.org/4.13.0/d4/d94/tutorial_camera_calibration.html
 
 ## 17. Optional end-of-migration follow-up
+
+**OWN17 active after run `20261020T234412Z-8299df00` closed:** Root defers the
+special third-layer E04-A1E harness/generated-response recognizer, completeness
+and repeated-certification workload, plus broad transitive graph/witness
+certification. D-P2's unrecognized out-of-rule `command=@` capture context exposes
+the nontrivial assurance cost. These claims remain unresolved/uncertified and may
+become obsolete; this is not PASS or a toolchain/ABI/safety guarantee.
+
+Existing runtime assertions stay fail-closed as uncertified checks; any failure
+must stop and cannot be ignored. Add no bypass, ModuleRules branch or new framework.
+Ordinary UBT/dependency requirements and actual component/build/process safety
+errors remain must-fix. Fresh frozen focused SOURCE for actual component/material
+callers/build-process safety/changed units must pass before native GO. Completing
+the former ten contexts/full transitive certification is not required first.
+Relevant actual builds and functional tests provide component proof; all eight
+suites/evidence freeze and final independent CODE plus different REQ remain required.
+A1G/A2/plain-DEL/Linux and broader migration gates remain open.
+
+**Historical pre-activation policy wording:**
 
 **OWN17 — conditional, not yet triggered:** If the upcoming review requires
 nontrivial fixes to the special custom E04-A1E assurance harness/response-closure
