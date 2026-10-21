@@ -78,7 +78,27 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 81 (2026-10-21 UTC) is
+Current A1E status at plan revision 82 (2026-10-21 UTC) is
+**FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**. The
+[factual receipt](docs/plans/evidence/2026-10-21-e04a-release-configure-timeout-result.json)
+and [closure](docs/plans/research/2026-10-21-e04a-release-configure-timeout-closure.md)
+preserve focused SOURCE PASS/root admission for `5fb13f1` and run
+`20261021T013903Z-9972c927`. Preflight passed in 29.1928227 seconds and
+SupervisorControls in 45.978315 seconds. Configure failed after 599.6380226
+seconds: CMake exited 0 after 0.952694 seconds, including real Release ABI
+compile/link, but its private job remained active until timeout cleanup.
+Exit/cleanup were confirmed, with 22 total processes/final active count 0;
+post-phase preservation and failed-input retention hit deadline errors. This is
+not a Configure PASS or a causal identification of the lingering member. The
+run is closed with no future authority transfer; the five later phases are
+NOT_RUN, native parser suites executed zero and 43/33/50/eight remain planned.
+No final CODE/different REQ or A1E acceptance follows, visible count is zero,
+and OWN17 stays DEFERRED_UNPROVEN with assertions fail-closed. Checkpoint this
+closure and verify OWN18 remote backup before any repair. The proposed next
+route is explicit post-root private-job cleanup for CMake and SUP01 only; no
+patch is applied. Fresh bindings/affected SOURCE must precede future phases.
+
+Historical A1E status at plan revision 81 (2026-10-21 UTC) is
 **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](docs/plans/evidence/2026-10-21-e04a-cmake-probe-release-repair.json)
 records the narrow CMake option/cache expectation change after closure

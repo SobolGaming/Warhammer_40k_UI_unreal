@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-21 UTC
-**Revision:** 81 - CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING. Narrow CMake Release try-compile option/cache check applied, AST diagnostics zero; no new review, build, native execution or cleanup proof. Fresh exact bindings and affected focused SOURCE precede any new phase. All eight new phases NOT_RUN; prior Configure timeout remains closed.
+**Revision:** 82 - FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED. Focused SOURCE admitted `5fb13f1`; Preflight/SupervisorControls PASS. Configure failed on private-job timeout despite CMake/real Release ABI exit 0, with confirmed cleanup/final active count 0 and producer preservation/retention deadline errors. Five later phases NOT_RUN; no A1E acceptance, future authority transfer or new repair.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -28,7 +28,29 @@ execution gates. [Closure and scope](research/2026-10-21-e04a-source-assurance-d
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 81 changes
+### Revision 82 changes
+
+Status is **FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**. The
+[factual receipt](evidence/2026-10-21-e04a-release-configure-timeout-result.json)
+and [closure](research/2026-10-21-e04a-release-configure-timeout-closure.md)
+bind `5fb13f1` / run `20261021T013903Z-9972c927`. Focused SOURCE PASS was
+admitted; Preflight passed in 29.1928227 seconds and SupervisorControls in
+45.978315 seconds. Configure failed after 599.6380226 seconds: CMake exited 0
+after 0.952694 seconds, including real Release ABI compilation/linking, but the
+private job stayed active until timeout cleanup. Exit/cleanup are confirmed,
+with 22 total processes/final active count 0. The wrapper reported
+`E04A1_ROOT_FAILED_OR_CLEANUP_UNVERIFIED` and two
+`E04A1_PHASE_DEADLINE_EXCEEDED` errors; no completion marker was published.
+Aggregate cleanup delay does not identify a causal descendant. The run is
+closed with no future authority transfer; five later phases/native suites are
+NOT_RUN, 43/33/50/eight remain planned, and final CODE/different REQ/A1E
+acceptance and later gates stay open. Visible count is zero; OWN17 remains
+DEFERRED_UNPROVEN/fail-closed. Checkpoint this closure and verify OWN18 backup
+before the proposed explicit post-root private-job cleanup repair for CMake
+and SUP01 only. No patch is applied; future phases require fresh exact bindings
+and affected focused SOURCE. The earlier `9972c75` failure is unchanged.
+
+### Revision 81 history
 
 Status is **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](evidence/2026-10-21-e04a-cmake-probe-release-repair.json) records
@@ -1449,7 +1471,19 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the narrow CMake Release probe repair and verify
+**Current assignment: checkpoint the closed Release Configure timeout and verify
+OWN18 remote backup before the proposed CMake/SUP01 post-root private-job
+cleanup repair.** Status is
+**FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**. The
+[closure](research/2026-10-21-e04a-release-configure-timeout-closure.md) preserves
+focused SOURCE admission for `5fb13f1`, Preflight/SupervisorControls PASS and
+Configure timeout FAIL despite CMake/real Release ABI exit 0. Cleanup/final
+active count 0 are confirmed; no causal descendant identification follows.
+The run is closed, five later phases/native suites are NOT_RUN, and no repair,
+future authority transfer or A1E acceptance follows. Fresh bindings/affected
+SOURCE precede future phases; OWN17 stays deferred/unproven/fail-closed.
+
+**Historical assignment (revision 81): checkpoint the narrow CMake Release probe repair and verify
 OWN18 remote backup, then derive fresh exact head/run/freeze/input bindings and
 obtain fresh affected focused SOURCE before any new native phase.** Status is
 **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. The
@@ -1815,7 +1849,9 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **2026-10-16 finding:** [Complete field/diagnostic/YAML inventory](research/2026-10-16-capability-checklist.md) and [total active/inactive/reject normalization](research/2026-10-16-parity-closure-design.md) finish source/design mapping. Immutable yaml-cpp0.9.0 evaluation candidate is56e3bb550c91fd7005566f19c079cb7a503223cf. E04 compiler/ABI/private-exception/corpus/render proof remains BLOCKED. No library adoption, compatibility PASS, silent dropped fields or new supported editor is implied.
 
-**Current status (revision 81):** **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-cmake-probe-release-repair.json) records only the CMake Release option/cache check and corresponding functional norm, with zero AST diagnostics. No new review, build/native result or cleanup proof; 43/33/50/eight unchanged, all eight new phases NOT_RUN. Checkpoint/backup/fresh exact bindings and affected focused SOURCE precede any new phase. Prior Configure timeout remains closed; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates stay open.
+**Current status (revision 82):** **FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**. The [Release Configure receipt](evidence/2026-10-21-e04a-release-configure-timeout-result.json) records focused SOURCE admission for `5fb13f1`, Preflight/SupervisorControls PASS and Configure timeout FAIL despite CMake/real Release ABI exit 0. Cleanup/final active count 0 are confirmed; producer preservation/retention hit deadline errors. Five later phases/native suites NOT_RUN; 43/33/50/eight planned. Run closed/no future authority transfer, no new repair or A1E acceptance; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates remain open.
+
+**Historical status (revision 81):** **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-cmake-probe-release-repair.json) records only the CMake Release option/cache check and corresponding functional norm, with zero AST diagnostics. No new review, build/native result or cleanup proof; 43/33/50/eight unchanged, all eight new phases NOT_RUN. Checkpoint/backup/fresh exact bindings and affected focused SOURCE precede any new phase. Prior Configure timeout remains closed; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates stay open.
 
 **Historical status (revision 80):** **FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED**. The [Configure receipt](evidence/2026-10-21-e04a-configure-timeout-result.json) records focused SOURCE admission for `9972c75`, Preflight/SupervisorControls PASS and Configure timeout FAIL after CMake exited 0. Cleanup/final active count 0 are confirmed; producer post-phase preservation is incomplete. Five later phases/native suites are NOT_RUN; 43/33/50/eight remain planned. No repair or A1E acceptance follows; OWN17 deferred/unproven and final/A1G/A2/plain-DEL/Linux gates remain open.
 
@@ -3204,7 +3240,9 @@ Retain separate preferences and composition files. Use a whitelist registry of w
 
 **Historical source finding (2026-10-16):** Candidate parser: **yaml-cpp 0.9.0**, evaluation pin `56e3bb550c91fd7005566f19c079cb7a503223cf` / tag `yaml-cpp-0.9.0`, MIT license. [Primary-source/ABI refresh](research/2026-10-16-bootstrap-and-native-parser.md) retrieved 2026-10-16. E04 must still verify Unreal compiler/runtime, private exception boundary and actual PyYAML6.0.3 corpus behavior; [normalization design](research/2026-10-16-parity-closure-design.md) specifies the mapping. No library was adopted, downloaded, built or installed. No third-party Unreal wrapper is required. Resolver/alias/duplicate/merge compatibility cannot be inferred from YAML branding.
 
-**Current status (revision 81):** **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-cmake-probe-release-repair.json) records only the CMake Release option/cache check and corresponding functional norm, with zero AST diagnostics. No new review, build/native result or cleanup proof; 43/33/50/eight unchanged, all eight new phases NOT_RUN. Checkpoint/backup/fresh exact bindings and affected focused SOURCE precede any new phase. Prior Configure timeout remains closed; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates stay open.
+**Current status (revision 82):** **FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**. The [Release Configure receipt](evidence/2026-10-21-e04a-release-configure-timeout-result.json) records focused SOURCE admission for `5fb13f1`, Preflight/SupervisorControls PASS and Configure timeout FAIL despite CMake/real Release ABI exit 0. Cleanup/final active count 0 are confirmed; producer preservation/retention hit deadline errors. Five later phases/native suites NOT_RUN; 43/33/50/eight planned. Run closed/no future authority transfer, no new repair or A1E acceptance; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates remain open.
+
+**Historical status (revision 81):** **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-cmake-probe-release-repair.json) records only the CMake Release option/cache check and corresponding functional norm, with zero AST diagnostics. No new review, build/native result or cleanup proof; 43/33/50/eight unchanged, all eight new phases NOT_RUN. Checkpoint/backup/fresh exact bindings and affected focused SOURCE precede any new phase. Prior Configure timeout remains closed; OWN17 deferred/unproven/fail-closed and final/A1G/A2/plain-DEL/Linux gates stay open.
 
 **Historical status (revision 80):** **FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED**. The [Configure receipt](evidence/2026-10-21-e04a-configure-timeout-result.json) records focused SOURCE admission for `9972c75`, Preflight/SupervisorControls PASS and Configure timeout FAIL after CMake exited 0. Cleanup/final active count 0 are confirmed; producer post-phase preservation is incomplete. Five later phases/native suites are NOT_RUN; 43/33/50/eight remain planned. No repair or A1E acceptance follows; OWN17 deferred/unproven and final/A1G/A2/plain-DEL/Linux gates remain open.
 
@@ -4000,7 +4038,14 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. Checkpoint the
+**Ready now:** **FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**.
+Checkpoint the [closed Release Configure result](research/2026-10-21-e04a-release-configure-timeout-closure.md)
+and verify OWN18 backup before any repair. Proposed next work is explicit
+post-root private-job cleanup for CMake/SUP01 only; no patch is applied. Fresh
+exact bindings and affected focused SOURCE precede future native phases. No
+authority transfers or A1E acceptance follows; final/later gates stay open.
+
+**Historical readiness (revision 81):** **CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING**. Checkpoint the
 [narrow repair](evidence/2026-10-21-e04a-cmake-probe-release-repair.json), verify
 OWN18 backup and derive fresh exact bindings, then obtain affected focused
 SOURCE before any new native phase. The actual Release ABI probe and cleanup
@@ -4055,7 +4100,9 @@ approval, no successor GO exists and all eight native phases remain NOT_RUN.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Current progress (revision 81):** CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING. Narrow CMake Release option/cache check and functional norm applied; AST diagnostics zero, with no new review/build/native result or cleanup proof. All eight new phases NOT_RUN; 43/33/50/eight unchanged. The `9972c75` failure stays closed. Fresh checkpoint/backup/exact bindings and affected focused SOURCE precede any new phase; OWN17 deferred/unproven/fail-closed, final/later gates open and visible count zero.
+**Current progress (revision 82):** FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED. Focused SOURCE admitted `5fb13f1` / run `20261021T013903Z-9972c927`; Preflight/SupervisorControls PASS. Configure failed after 599.6380226 seconds despite CMake/real Release ABI exit 0; private-job timeout cleanup confirmed final active count 0, with producer preservation/retention deadline errors. Run closed/no future authority transfer; five later phases/native suites NOT_RUN, 43/33/50/eight planned and no new repair/final review/A1E acceptance. OWN17 stays deferred/unproven/fail-closed, visible count zero and later gates open.
+
+**Historical progress (revision 81):** CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING. Narrow CMake Release option/cache check and functional norm applied; AST diagnostics zero, with no new review/build/native result or cleanup proof. All eight new phases NOT_RUN; 43/33/50/eight unchanged. The `9972c75` failure stays closed. Fresh checkpoint/backup/exact bindings and affected focused SOURCE precede any new phase; OWN17 deferred/unproven/fail-closed, final/later gates open and visible count zero.
 
 **Historical progress (revision 80):** FOCUSED_SOURCE_PASSED_CONFIGURE_TIMEOUT_CLOSED. Focused SOURCE admitted `9972c75` / run `20261021T005502Z-ef7254a5`; Preflight and SupervisorControls PASS. Configure failed after 600.1306091 seconds: CMake exited 0, job remained active until timeout cleanup, final active count 0/cleanup confirmed. Producer post-phase preservation/failed-input retention exceeded their deadline. Five later phases/native suites NOT_RUN; 43/33/50/eight planned, no repair/final review/A1E acceptance/visible launch. OWN17 remains deferred/unproven/fail-closed and later gates open.
 
@@ -4105,7 +4152,9 @@ separate acceptance gates remain open.
 
 **Work completed so far (historical through revision 49):** imported plan/strong instructions, M00 metadata, legacy 44.1 source characterization and selected 44.3.33 adaptation, profile/capability/design checklists, Core launch/install recipes, recorded Core issues and BOOT01 scaffold/builds/generation. Normal E01 `044903` records 87 Python units / 14 Capture checks / 132 native successes / two evidence checks, plus separate 135 PowerShell controls / 39 inputs. E02 `202805` on `5e92ba3` completed affected SOURCE and all seven producer phases, 16 native cases / 18174 assertions, separate SUP6 and six images. Root recorded bounded Windows synthetic acceptance after separate administrative recovery; original CODE r3, REQ r2 and v4 raw BLOCKED reports and their limits are unchanged. The exact 18 E04-A1E source paths are now canonical, with eight planned suites / 38 unique IDs / 45 attempts and pinned yaml-cpp acquisition verified (394 files / 5156535 bytes). The first SOURCE assessment remains BLOCKED; the second remains CHANGES_REQUESTED for the now-restored strict Parse-JsonLine (15 offline cases / 38 checks passed). The third is BLOCKED with incomplete coverage and a DDC observation gap. Its guard repair passed 21 offline cases/63 checks. The fourth assessment remains BLOCKED with 19/78 coverage and unselected metadata exposure. The fifth raw SOURCE_PASS applies only to c500f21/run024733 with bounded Editor qualifications. That run passed Preflight (zero roots) and six supervisor controls/three groups/five roots, then Configure failed on generated SDK RC-path escaping. Root CMake exited 1 in about 0.859 seconds; one unidentified member lingered until confirmed timeout cleanup/final zero, and producer preservation missed its deadline. Separate manual checks matched 1,885 frozen files, 33 staged sources, 51 fixtures and nine settings pairs without passing the failed phase. The authored path repair passed 21 pure PowerShell cases with zero failures; at revision 47 checkpoint/new candidate/freeze/RunId/fresh affected SOURCE were pending. The subsequent sixth SOURCE review on 0ed4221/run035315 is raw BLOCKED after 48/81 BODY files, with incomplete 13-record/902-row assessment and missing staged client/test/settings BODY grants; no implementation defect was asserted. The full staged-source BODY-grant inventory proposal is authored without implementation changes or rerunning the controls; a neutral complete SOURCE packet is next. The root-inspected ordinary inventory proposal adds 12 missing BODY files / 5,906 rows and covers all 33 staged members. Its current-byte estimate is 93 BODY files / 32,460 rows; the actual future frozen inventory must derive and verify those counts. All eight phases for 0ed4221 remain NOT RUN/no native RunRoot. Subsequent r7 on e505b21/run041347 is raw BLOCKED after 55/93 BODY files, with all 33 staged members granted, incomplete 13/902 assessment and no confirmed implementation defect/binding/access denial. A prospective blind scoped SOURCE plus fresh independent integration design is being prepared, not adopted; full current 93-file union/all selected data/material relationships and unchanged criteria remain required. All eight e505b21 phases are NOT RUN/no native RunRoot; future frozen descriptors/counts remain derived. The five later phases remain NOT RUN; no native parser suite ran and final CODE/different REQ are pending. A1G, all 727 A2 compatibility scenarios, shared HUD/render/input, RQ23/RQ24, full E02/M02/E04, Linux, packages and real-Core play remain open. Historical0ed4d7c/052432 failed during RepeatedConfirm;5abe18c/173740 failed stale paint coordinates; c987/130651 failed RaisedPicking after11 partial log successes/1106 assertions and five PNGs. Their incomplete phases are not rewritten as PASS. Historical c9a5ac5 SOURCE CHANGES_REQUESTED and3483f79 administrative BLOCKED/source merits UNASSESSED remain unchanged; no E02 execution occurred for either planned run. All original failures, unknowns, settings history, raw source assessments and their then-unexecuted repair records remain preserved.
 
-**Next concrete step:** Checkpoint the [CMake Release probe repair](evidence/2026-10-21-e04a-cmake-probe-release-repair.json) and verify OWN18 exact remote backup. Derive fresh exact head/run/freeze/input bindings and obtain fresh affected focused SOURCE under the [functional packet](research/2026-10-21-e04a-functional-proof-packet.md), then proceed only through a new ordered native sequence. Preserve the closed timeout; no prior approval transfers or new result is claimed. Actual Release ABI compile/link, cleanup, native suites/evidence freeze and final independent CODE/different REQ remain required; A1E acceptance and later gates stay open.
+**Next concrete step:** Checkpoint the [Release Configure timeout closure](research/2026-10-21-e04a-release-configure-timeout-closure.md) and [receipt](evidence/2026-10-21-e04a-release-configure-timeout-result.json), then verify OWN18 exact remote backup. Review the proposed explicit post-root private-job cleanup repair for CMake and SUP01 only; no patch or causal descendant identification is recorded. Any repaired candidate requires fresh exact head/run/freeze/input bindings and affected focused SOURCE before a new ordered native sequence. Preserve both failed Configure runs; actual suites/evidence freeze and final independent CODE/different REQ remain required, with no future authority transfer or A1E acceptance.
+
+**Historical next step (revision 81):** Checkpoint the [CMake Release probe repair](evidence/2026-10-21-e04a-cmake-probe-release-repair.json) and verify OWN18 exact remote backup. Derive fresh exact head/run/freeze/input bindings and obtain fresh affected focused SOURCE under the [functional packet](research/2026-10-21-e04a-functional-proof-packet.md), then proceed only through a new ordered native sequence. Preserve the closed timeout; no prior approval transfers or new result is claimed. Actual Release ABI compile/link, cleanup, native suites/evidence freeze and final independent CODE/different REQ remain required; A1E acceptance and later gates stay open.
 
 **Historical next step (revision 80):** Checkpoint the [Configure timeout closure](research/2026-10-21-e04a-configure-timeout-closure.md) and [actual receipt](evidence/2026-10-21-e04a-configure-timeout-result.json), then verify OWN18 exact remote backup. Review a narrow CMake probe Release-option/cache check; no repair or retry is recorded. Any repaired candidate needs fresh exact head/run/freeze/input bindings and affected focused SOURCE before a fresh ordered native sequence. Preserve this failure and pending later phases; actual native suites/evidence freeze then final independent CODE/different REQ remain required. No A1E acceptance follows.
 

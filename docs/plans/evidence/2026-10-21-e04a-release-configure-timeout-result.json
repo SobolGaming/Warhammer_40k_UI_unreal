@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_FAILED_E04A1E_RELEASE_CONFIGURE_CLOSED_NOT_ACCEPTED",
+  "createdUtc": "2026-10-21T02:12:12.7975246Z",
+  "status": "FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED",
+  "planRevision": 82,
+  "sourceHead": "5fb13f1812f26336e2e8a34f71be05d024161013",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "runId": "20261021T013903Z-9972c927",
+  "publicationCommit": null,
+  "publicationQualification": "Documentation follows execution on5fb13f1; a later publication head is not reviewed/executed by this evidence.",
+  "sourceReview": {
+    "rawVerdict": "PASS",
+    "rootAdmitted": true,
+    "scope": "E04_COMPONENT_SOURCE",
+    "assessmentKind": "BLIND_JOINED_SOURCE_INITIAL",
+    "sourceOnly": true,
+    "toolPairs": 63,
+    "extractionAnomalies": 0,
+    "uniqueTurnIds": 1,
+    "turnContextObservations": 1,
+    "actualRuntime": "READ_ONLY_APPROVAL_NEVER",
+    "memoryMode": "disabled",
+    "lowerMemoryFeatureOsIsolation": "UNVERIFIED",
+    "actualModel": "gpt-6.1-sol",
+    "actualReasoning": "ultra",
+    "elapsedSeconds": 647.1644015,
+    "report": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\focused-5fb13f1-013903-E04_COMPONENT_SOURCE\\last-message.txt",
+      "bytes": 7831,
+      "sha256": "1934A32DDA82CE2427861885DC6102C1E5BCDD1AD674F6B6A5CFB88F2A016745"
+    },
+    "admission": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\focused-5fb13f1-013903-E04_COMPONENT_SOURCE\\root-focused-source-admission.original.json",
+      "bytes": 3482,
+      "sha256": "DE42C98C13734F8EA3D2454EE5492CF4F16A85034FDD9D7DE800A2203A05C58E"
+    }
+  },
+  "phases": {
+    "Preflight": {
+      "roots": 0,
+      "elapsedSeconds": 29.1928227,
+      "executionPassed": true,
+      "retainedDescriptorsRehashed": 57,
+      "materializedInputs": 43
+    },
+    "SupervisorControls": {
+      "roots": 6,
+      "executionPassed": true,
+      "supervisorCases": 6,
+      "retainedDescriptorsRehashed": 325,
+      "buildBoundaryControls": 18,
+      "elapsedSeconds": 45.978315,
+      "expectedObjSrcMapRefusal": "RulesError8 E04_RULES_OBJ_SRC_MAP_FILE_UNSUPPORTED",
+      "cleanupAll6": true,
+      "generatedInputControls": 7
+    },
+    "Configure": {
+      "status": "FAIL_PRESERVATION_OR_OUTPUT_VALIDATION",
+      "executionPassed": false,
+      "elapsedSeconds": 599.6380226,
+      "phaseBudgetSeconds": 600,
+      "rootBudgetSeconds": 572,
+      "rootElapsedSeconds": 567.0661358,
+      "roots": 1,
+      "rootPid": 2508,
+      "rootCreationUtc": "2026-10-21T02:01:07.3250869Z",
+      "rootExitUtc": "2026-10-21T02:01:08.2777808Z",
+      "rootExitObservedUtc": "2026-10-21T02:01:08.2809020Z",
+      "rootExitCode": 0,
+      "exitConfirmed": true,
+      "rootExitWhileMembersActive": true,
+      "timedOut": true,
+      "cleanupConfirmed": true,
+      "rootPrimaryFailure": {
+        "stage": "owned-root",
+        "type": "System.TimeoutException",
+        "message": "Owned execution exceeded its reserved running budget",
+        "win32Error": null,
+        "syntheticFault": false,
+        "observedUtc": "2026-10-21T02:10:34.3733601Z"
+      },
+      "primaryFailure": {
+        "stage": "Configure",
+        "type": "System.Management.Automation.RuntimeException",
+        "message": "E04A1_ROOT_FAILED_OR_CLEANUP_UNVERIFIED"
+      },
+      "secondaryErrors": [
+        {
+          "stage": "post-phase-preservation",
+          "type": "System.Management.Automation.RuntimeException",
+          "message": "E04A1_PHASE_DEADLINE_EXCEEDED"
+        },
+        {
+          "stage": "generated-input-failed-phase-retention",
+          "type": "System.Management.Automation.RuntimeException",
+          "message": "E04A1_PHASE_DEADLINE_EXCEEDED"
+        }
+      ],
+      "shutdownRequests": [
+        {
+          "operation": "TerminateJobObject",
+          "succeeded": true,
+          "observedUtc": "2026-10-21T02:10:34.3431144Z"
+        }
+      ],
+      "finalAccounting": {
+        "stage": "progress",
+        "observedUtc": "2026-10-21T02:10:34.3729228Z",
+        "querySucceeded": true,
+        "totalProcesses": 22,
+        "activeProcesses": 0,
+        "totalTerminatedProcesses": 0,
+        "totalUserTime100ns": 6093750,
+        "totalKernelTime100ns": 8906250,
+        "thisPeriodUserTime100ns": 6093750,
+        "thisPeriodKernelTime100ns": 8906250,
+        "totalPageFaultCount": 115346
+      },
+      "jobAccountingSamples": 18130,
+      "completionMarkerPresent": false,
+      "producerSettingsAfterCount": 9,
+      "producerSourceAfterCount": 0,
+      "producerStageAfterCount": 0,
+      "producerFixturesAfterCount": 0,
+      "producerRetainedArtifactCount": 0,
+      "outerHostPid": 42364,
+      "outerHostExit": 1,
+      "outerHostCompletedUtc": "2026-10-21T02:10:45.0670621Z"
+    },
+    "DependencyBuild": "NOT_RUN",
+    "EditorBuild": "NOT_RUN",
+    "Discovery": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "diagnostic": {
+    "classification": "Normal synchronous-tool/private-job lifecycle failure; no assertion bypass or special-assurance PASS.",
+    "realAbiCompileLink": "Observed actual Release compile/link exit0: /EHsc /GR- /O2 /Ob2 /DNDEBUG -std:c++20 -MD, /INCREMENTAL:NO, without-Zi or /debug. Complete CMakeConfigureLog.yaml inspected.",
+    "cache": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreadedDLL",
+      "CMAKE_TRY_COMPILE_CONFIGURATION": "Release"
+    },
+    "observedHelper": {
+      "finiteObservationUtc": "2026-10-21T02:02:23Z",
+      "parentPid": 292,
+      "creationUtc": "2026-10-21T02:01:07.4679380Z",
+      "name": "VCTIP.EXE",
+      "pid": 7956
+    },
+    "causalityLimit": "A compiler helper was observed during the phase. Direct per-child job membership and complete descendant identity/cause were not observed; aggregate job cleanup delay is established.",
+    "prospectiveRepair": "Explicit post-success-root owned-job cleanup after5second natural grace only for fixed synchronous CMake Configure/DependencyBuild routes and existing SUP01. Preserve timeout priority, root failure and actual final job0 requirements; all other routes NaturalDrain. No repair at this closure."
+  },
+  "plannedFunctionalSet": {
+    "uniqueInputs": 43,
+    "attempts": 50,
+    "generated": 33,
+    "suites": 8,
+    "actualParserSuitesRun": 0
+  },
+  "actualGuiWindows": 0,
+  "allRunAuthority": "CLOSED_DO_NOT_REUSE",
+  "acceptance": "NOT_ACCEPTED",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "assertions": "RETAINED_FAIL_CLOSED",
+  "remaining": [
+    "Closure checkpoint/OWN18 remote backup before narrow repair",
+    "Fresh repair checkpoint/backup/new exact bindings/focused SOURCE/native sequence",
+    "Final independent CODE and different REQ after actual execution/evidence freeze",
+    "A1G exception-disabled caller; A2/727 scenarios; full YAML/null/property/plain-DEL/profile fidelity",
+    "HUD/input/rendering, packages, real-Core play; Linux builds/tests UNTESTED"
+  ],
+  "artifacts": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\preflight\\completion.json",
+      "bytes": 876,
+      "sha256": "0A9EA873FB257F964D098C90D75822C6ADB90AB463ED7E8D16439F203FC42FA0"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\preflight\\result.json",
+      "bytes": 96891,
+      "sha256": "503D2D4FCEE03D26A9CF17E490605D72B1B09CB78BEA0D105E19E8141955C6FC"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\supervisorcontrols\\completion.json",
+      "bytes": 928,
+      "sha256": "64F07FC513FE514DE5093F1DD5B67ED618F7827E7BEFB18F11BAC1D35C0BB1F7"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\supervisorcontrols\\result.json",
+      "bytes": 311420,
+      "sha256": "0E8EEA5EFBCB4337B073F68BA010BD1E71E506D2AD97CA277756B9AB9F452EC9"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\configure\\result.json",
+      "bytes": 8745042,
+      "sha256": "F8F25B48DF329D61C547D4D5A1369C440D38A339023CD79E718263CCDDF65560"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\configure\\configure.process.json",
+      "bytes": 7748170,
+      "sha256": "36472EAE9F2D7C41EB7B7836BF464E4F7354D6B678043428FC8500F59EDCA852"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\logs\\configure.stdout.log",
+      "bytes": 578,
+      "sha256": "8BB533E24C6BC060CDE8FB1BC4B053E0EB8729CEEA68291299503101ED7B1B8C"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\logs\\configure.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\vendor-build\\Win64\\Development\\x64\\CMakeCache.txt",
+      "bytes": 18943,
+      "sha256": "C567B15F93F961D209056AC3240CFBA34D32A028FCEA9D144BDF6066ADFE2B8A"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\vendor-build\\Win64\\Development\\x64\\CMakeFiles\\CMakeConfigureLog.yaml",
+      "bytes": 8310,
+      "sha256": "33DAF08777019C35C3FDBA08B971823687595A4213A597D307D362148EB45DB5"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261021T013903Z-9972c927\\vendor-build\\Win64\\Development\\x64\\compile_commands.json",
+      "bytes": 33898,
+      "sha256": "7DAE7774556DE5FDDD0FE163ECA256AF58B1227D055E63E9382D1CE83C101870"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-5fb13f1\\root-Preflight-result-inspection.original.json",
+      "bytes": 1148,
+      "sha256": "303B2546DF3A4085D421C53F86BF928BCC2263B0204CDA02D5593AF5F5A894AE"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-5fb13f1\\root-SupervisorControls-result-inspection.original.json",
+      "bytes": 1234,
+      "sha256": "ADB2DC6A2737F4D4227D3565ACB614B49D8416ACCC99BE11468D750FBF97C6AA"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-5fb13f1\\native-phase-invocations\\Configure.host-completion.original.json",
+      "bytes": 830,
+      "sha256": "2E960D25EAC9BB70198A6C4D41E86059A89A796E30C908ACA6105D51399901DC"
+    },
+    {
+      "sha256": "D5A45846B0591881AB4F0168558F92953D2B982B5F5D3B6B73A14345D7D79056",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-5fb13f1\\root-post-close-preservation-observation.original.json",
+      "bytes": 338498
+    }
+  ],
+  "separatePostCloseObservation": {
+    "observedUtc": "2026-10-21T02:12:31.3424553Z",
+    "settingsMatched": 9,
+    "present": 4,
+    "absent": 5,
+    "canonicalDescriptorsMatched": 33,
+    "stagedDescriptorsMatched": 33,
+    "fixtureDescriptorsMatched": 56,
+    "retainedRunFiles": 388,
+    "retainedRunBytes": 22890211,
+    "rootRecheckedComparisons": 131,
+    "rootRehashedInventoryDescriptors": 388,
+    "qualification": "Separate later finite reads of retained before descriptors and current files only. No continuous preservation, universal process closure or retroactive producer PASS. Observed hash agreement does not populate missing producer after-snapshots or turn the failed Configure phase into success. Own observation descriptor is returned separately to avoid a self-hash cycle."
+  }
+}
