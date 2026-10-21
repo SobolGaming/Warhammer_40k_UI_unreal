@@ -130,3 +130,5 @@ docs/plans/evidence/2026-10-21-e04a-game-source-adoption.json -text whitespace=c
 /docs/plans/evidence/2026-10-21-e04a-game-native-ddc-failure.json -text whitespace=cr-at-eol
 /docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-ea7de0c.json -text whitespace=cr-at-eol
 /docs/plans/research/2026-10-21-e04a-game-source-review-ea7de0c.md -text whitespace=-blank-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-cooked-ddc-source-repair.json -text whitespace=cr-at-eol

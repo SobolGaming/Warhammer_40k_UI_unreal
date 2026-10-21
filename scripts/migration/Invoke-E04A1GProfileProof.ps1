@@ -1197,13 +1197,13 @@ function Get-A1GCompileEvidence([string]$Module,[string]$ExactSource,[string]$Mo
         [void](Assert-A1GNewBuildFile $Before $p)
         Require-A1GBuildAction $ActionLog 'Compile' ([IO.Path]::GetFileName($source))
         $headers=Forced-DefinitionHeaders $t $Module
-        $macro=@{};foreach($name in @('PLATFORM_EXCEPTIONS_DISABLED','_HAS_EXCEPTIONS','YAML_CPP_STATIC_DEFINE','IS_MONOLITHIC','WITH_EDITOR','UE_BUILD_DEVELOPMENT','E04_A1G_DEDICATED_CALLER')){$macro[$name]=@(Macro-Values $t $headers.moduleDefinitionText $name)}
+        $macro=@{};foreach($name in @('PLATFORM_EXCEPTIONS_DISABLED','_HAS_EXCEPTIONS','YAML_CPP_STATIC_DEFINE','IS_MONOLITHIC','WITH_EDITOR','WITH_EDITORONLY_DATA','UE_BUILD_DEVELOPMENT','E04_A1G_DEDICATED_CALLER')){$macro[$name]=@(Macro-Values $t $headers.moduleDefinitionText $name)}
         $std=@([regex]::Matches($t,'(?i)(?:^|\s)(?<option>/std:[^\s]*)')|ForEach-Object {$_.Groups['option'].Value})
         $eh=@([regex]::Matches($t,'(?i)(?:^|\s)(?<option>/EH[^\s]*)')|ForEach-Object {$_.Groups['option'].Value})
         if($t -notmatch '(?i)(?:^|\s)/MD(?:\s|$)' -or $t -match '(?i)(?:^|\s)/(?:MDd|MTd?)(?:\s|$)'){throw 'A1G_ACTUAL_DYNAMIC_RELEASE_CRT_REQUIRED'}
         if($Mode -ne 'EditorProject'){
             if($t -cnotmatch '(?:^|\s)/std:c\+\+20(?:\s|$)' -or @($std|Where-Object {$_ -cne '/std:c++20'}).Count){throw 'A1G_ACTUAL_CPP20_REQUIRED'}
-            foreach($pair in @(@('IS_MONOLITHIC','1'),@('WITH_EDITOR','0'),@('UE_BUILD_DEVELOPMENT','1'))){if($macro[$pair[0]].Count -ne 1 -or $macro[$pair[0]][0] -cne $pair[1]){throw 'A1G_ACTUAL_GAME_DEFINITIONS_MISMATCH'}}
+            foreach($pair in @(@('IS_MONOLITHIC','1'),@('WITH_EDITOR','0'),@('WITH_EDITORONLY_DATA','0'),@('UE_BUILD_DEVELOPMENT','1'))){if($macro[$pair[0]].Count -ne 1 -or $macro[$pair[0]][0] -cne $pair[1]){throw 'A1G_ACTUAL_GAME_DEFINITIONS_MISMATCH'}}
             if($Mode -ceq 'Parser'){
                 if($t -cnotmatch '(?:^|\s)/EHsc(?:\s|$)' -or @($eh|Where-Object {$_ -cne '/EHsc'}).Count -or $macro.PLATFORM_EXCEPTIONS_DISABLED.Count -ne 1 -or $macro.PLATFORM_EXCEPTIONS_DISABLED[0] -cne '0' -or $macro._HAS_EXCEPTIONS -contains '0' -or $macro.YAML_CPP_STATIC_DEFINE.Count -ne 1 -or $macro.YAML_CPP_STATIC_DEFINE[0] -cne '1'){throw 'A1G_PARSER_PRIVATE_EH_STATIC_MODE_MISMATCH'}
             }elseif($Mode -ceq 'Caller'){
@@ -1679,6 +1679,7 @@ function Check-A1GNativeResultDetails($Process,$Prior,$Paths) {
     $base=Read-GameResult $Prior.stage.facts.executable.path $Prior.stage.facts.executable.sha256;$r=Read-Json $base.result.path
     if($r.schemaVersion -ne 1 -or $r.pid -ne $Process.pid -or (Assert-Path $r.resultPath) -ine $Paths.result -or $r.binaryHashScope -cne 'EXPECTED_BINDING_ONLY_ROOT_MUST_REHASH_ACTUAL_BINARY_AND_MATCH_RECEIPT_STAGE' -or $r.specialAssuranceCertification -cne 'DEFERRED_UNPROVEN_OWN17'){throw 'A1G_NATIVE_RESULT_PROCESS_OR_PUBLICATION_JOIN_MISMATCH'}
     foreach($name in @('completeOrderedCheckSet','parserValuesDestroyedBeforePublication')){if($r[$name] -isnot [bool] -or $r[$name] -ne $true){throw 'A1G_NATIVE_LIFETIME_OR_COMPLETE_FLAG_INVALID'}}
+    foreach($name in @('requiresCookedData','existingLegacyDerivedDataCacheIsNull')){if($r[$name] -isnot [bool] -or $r[$name] -ne $true){throw 'A1G_NATIVE_COOKED_OR_EXISTING_LEGACY_DDC_FACT_INVALID'}}
     foreach($row in $r.checks){if($row.evaluated -isnot [bool] -or $row.passed -isnot [bool] -or $row.evaluated -ne $true -or $row.passed -ne $true){throw 'A1G_NATIVE_CHECK_NOT_POSITIVE_TYPED_BOOL'}}
     if(@($r.attempts).Count -ne 2){throw 'A1G_NATIVE_EXACT_TWO_ATTEMPTS_REQUIRED'}
     foreach($spec in @(@(0,'A1G_BAD',17,11,'CA15BE3A44E31C173E9697942EA8AE1F1988C902954AB10E74EAFE9F4E98B93C'),@(1,'A1G_GOOD',19,0,'F522FFF3CCDADCDA1FB8001D2B86727D39E43DB96A2D2D5A7C4CE7A2D0AD095B'))){
@@ -1687,7 +1688,7 @@ function Check-A1GNativeResultDetails($Process,$Prior,$Paths) {
     }
     $when=[DateTimeOffset]::Parse($r.completedUtc)
     if($when -lt [DateTimeOffset]::Parse($Process.creationUtc) -or $when -gt [DateTimeOffset]::Parse($Process.exitUtc)){throw 'A1G_NATIVE_RESULT_TIME_OUTSIDE_ROOT_LIFETIME'}
-    @{result=$base.result;pid=$r.pid;attemptCount=2;evaluatedCheckCount=52;orderedCheckIds=@($r.checks.id);literalInputs=$Prior.literalInputs;compiledCallerSource=$Prior.compiledCallerSource;parserValuesDestroyedBeforePublication=$true;destructionScope='Completed lexical-scope milestone in actual compiled caller, not allocator/destructor instrumentation';nativeAssertionTotal='NOT_INFERRED'}
+    @{result=$base.result;pid=$r.pid;attemptCount=2;evaluatedCheckCount=52;orderedCheckIds=@($r.checks.id);literalInputs=$Prior.literalInputs;compiledCallerSource=$Prior.compiledCallerSource;requiresCookedData=$r.requiresCookedData;existingLegacyDerivedDataCacheIsNull=$r.existingLegacyDerivedDataCacheIsNull;parserValuesDestroyedBeforePublication=$true;destructionScope='Completed lexical-scope milestone in actual compiled caller, not allocator/destructor instrumentation';nativeAssertionTotal='NOT_INFERRED'}
 }
 
 function Check-A1GNativeLog($Process,$Paths,$Arguments) {
@@ -1700,17 +1701,11 @@ function Check-A1GNativeLog($Process,$Paths,$Arguments) {
     $normal=$text.Replace('\','/');$markers=@([regex]::Matches($normal,[regex]::Escape($terminal)))
     $exit=@([regex]::Matches($text,'FPlatformMisc::RequestExitWithStatus\(0, 0, E04_A1G_PROOF_COMPLETE\)'))
     if($markers.Count -ne 1 -or $exit.Count -ne 1 -or $exit[0].Index -le $markers[0].Index -or $text -notmatch '(?m)^LogExit: Exiting\.\r?$'){throw 'A1G_NATIVE_TERMINAL_OR_ORDERLY_EXIT_NOT_OBSERVED'}
-    $rows=@($lines|Where-Object {$_ -match '\bLogDerivedDataCache:'});$writers=[Collections.Generic.List[object]]::new()
-    foreach($line in $rows){
-        if($line -match '(?i)(falling back|fallback.*(?:enabled|using)|(?:Zen|Cloud|Shared).*\b(?:using|connected|enabled|running)\b|Failed to create graph\b|Attempting to create graph\b)'){throw 'A1G_NATIVE_DDC_FALLBACK_OR_NONOWNED_BACKEND'}
-        $m=[regex]::Match($line,'\bLogDerivedDataCache:\s+(?<store>[^:\r\n]+): Using data cache path (?<path>[^\r\n]+): (?<access>Writable|ReadOnly|DeleteOnly)\r?$')
-        if($line -match '(?i)\bWritable\b'){
-            if(-not $m.Success -or $m.Groups['store'].Value -cne 'E04A1G' -or $m.Groups['access'].Value -cne 'Writable' -or (Assert-Path $m.Groups['path'].Value) -ine $Paths.ddc){throw 'A1G_NATIVE_UNSELECTED_DDC_WRITER'}
-            $writers.Add(@{store='E04A1G';path=$Paths.ddc;access='Writable'})
-        }
-    }
-    if(-not $writers.Count){throw 'A1G_NATIVE_ACTUAL_OWNED_WRITABLE_DDC_REQUIRED'}
-    @{log=Descriptor $Paths.log;commandLine=$Arguments;terminalMarker=$terminal;orderlyExitCall='RequestExitWithStatus(false,0,E04_A1G_PROOF_COMPLETE)';logClosed=$true;ddc=@{writers=$writers.ToArray();observedRows=$rows;scope='Positive selected filesystem-backend log observations; no universal write-isolation claim.'}}
+    $rows=@($lines|Where-Object {$_ -match '\bLogDerivedDataCache:'})
+    if($rows.Count -ne 0){throw 'A1G_NATIVE_UNEXPECTED_LEGACY_DDC_LOG_ROW'}
+    $ddcFiles=@(Plain-Files $Paths.ddc)
+    if($ddcFiles.Count -ne 0){throw 'A1G_NATIVE_UNEXPECTED_OWNED_DDC_FILE'}
+    @{log=Descriptor $Paths.log;commandLine=$Arguments;terminalMarker=$terminal;orderlyExitCall='RequestExitWithStatus(false,0,E04_A1G_PROOF_COMPLETE)';logClosed=$true;ddc=@{backendLogRowCount=$rows.Count;observedRows=$rows;ownedDirectory=$Paths.ddc;ownedFileCount=$ddcFiles.Count;ownedFiles=$ddcFiles;argumentsScope='DEFENSIVE_REQUEST_ONLY_NOT_SELECTED_BACKEND_EVIDENCE';scope='Zero legacy DDC category rows in this closed log and zero files in this owned directory at this validation boundary only. No universal DDC/write absence; runtime DerivedData IoStore is separate.'}}
 }
 
 function Complete-A1GNativePhase($Process,$Before) {

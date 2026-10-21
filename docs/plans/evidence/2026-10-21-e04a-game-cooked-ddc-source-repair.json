@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_ADOPTED_E04_A1G_COOKED_GAME_DDC_SOURCE_REPAIR",
+  "status": "COOKED_GAME_DDC_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "adoptedUtc": "2026-10-21T15:20:03.5397869Z",
+  "failureCheckpoint": "74cba5d14d315ae3200b1002f0c0f6ce48d65633",
+  "verifiedFailureBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-native-ddc-failure-PROPOSED\\root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "8582272B57A163150C75AC446E4F6B1317B1FC536F51DB2A41A3B88AFCF6F106"
+  },
+  "rootAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cooked-native-ddc-repair-root-PROPOSED\\root-source-repair-adoption.original.json",
+    "bytes": 5501,
+    "sha256": "8D026C3B27618488CD0B369B6EDF7778ABBCBA82AFB732A2DB012BD7B024CF69"
+  },
+  "canonicalChanges": [
+    {
+      "path": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+      "before": {
+        "repositoryPath": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+        "checkpoint": "74cba5d14d315ae3200b1002f0c0f6ce48d65633",
+        "bytes": 20632,
+        "sha256": "302D258BBCE3FE6A7BBFDD4C05ECDB06149A16EBEB6E324E011DD7168BD24703"
+      },
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\E04ProfileGameProbe\\Private\\E04ProfileGameProbeModule.cpp",
+        "bytes": 21089,
+        "sha256": "117F5F75BB2A7BDCEC0DFCB788E1125223A187F9201A55A4039D0866E6A07C25"
+      },
+      "edits": 3,
+      "intent": "At M06, retain RequiresCookedData and make one nonloading TryGetDerivedDataCache observation requiring a null pointer. Emit two typed literal result facts; preserve all 52 existing check IDs.",
+      "literalResultFacts": [
+        {
+          "name": "requiresCookedData",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "existingLegacyDerivedDataCacheIsNull",
+          "type": "Boolean",
+          "value": true
+        }
+      ]
+    },
+    {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "before": {
+        "repositoryPath": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+        "checkpoint": "74cba5d14d315ae3200b1002f0c0f6ce48d65633",
+        "bytes": 184876,
+        "sha256": "580EABA9DF545F80418227E0F4A0A96666B1B5A42BA6A06E370C6F9AA638626E"
+      },
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+        "bytes": 184764,
+        "sha256": "48E1983B5B7911B859E1B1EC387ACB5801A1CD1BFD356D65DF9C6AA0548DA384"
+      },
+      "edits": 5,
+      "intent": "Validate exact Boolean result facts, WITH_EDITORONLY_DATA=0, zero Native DDC log rows and zero files in the owned Native DDC directory. Keep other result, lifetime, process, window and preservation checks."
+    },
+    {
+      "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "before": {
+        "repositoryPath": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+        "checkpoint": "74cba5d14d315ae3200b1002f0c0f6ce48d65633",
+        "bytes": 19058,
+        "sha256": "3003D0D1C08AC01F85504A673A4D4B76C387739AE7E5FE82902E44DC04097605"
+      },
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+        "bytes": 20608,
+        "sha256": "0480C65DE08F5F397FCEA34F8B35AE2656378B30135626F7D24F4527739A28AC"
+      },
+      "edits": 4,
+      "intent": "Specify finite mode-specific cooked-Game DDC observations. Preserve Cook's positive actual owned writable DDC evidence requirement and all remaining gates."
+    }
+  ],
+  "technicalBuilderV9": {
+    "descriptor": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-native-ddc-technical-v9-PROPOSED-20261021-5a7191d2\\New-FreshA1GTechnicalPacket.root-v9.PROPOSED.ps1",
+      "bytes": 24542,
+      "sha256": "FC1F9243026129A1A072560249E1E68147C2ADE70291C1B44873126820D4491C"
+    },
+    "staticReview": {
+      "wholeForwardAndInverseMatched": true,
+      "astErrors": 0,
+      "functions": 9,
+      "metadataBuilderExecuted": false
+    },
+    "intent": "Review-only installed API ranges from six origins, prepared separately. No runtime metadata or native execution is established by the source proposal.",
+    "runtimeFreezeFileCount": 625,
+    "requiredWholeSourceCount": 43,
+    "runtimeFreezeBuilderChanged": false
+  },
+  "rootStaticValidation": {
+    "sourceBodiesAndFullFunctionalDiffsReadByRoot": true,
+    "wholeForwardAndInverseMatchedAllThree": true,
+    "lineEndings": [
+      {
+        "path": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+        "beforeCR": 1,
+        "afterCR": 1,
+        "beforeLF": 354,
+        "afterLF": 359
+      },
+      {
+        "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+        "beforeCR": 169,
+        "afterCR": 169,
+        "beforeLF": 1854,
+        "afterLF": 1849
+      },
+      {
+        "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+        "beforeCR": 0,
+        "afterCR": 0,
+        "beforeLF": 305,
+        "afterLF": 326
+      }
+    ],
+    "wrapperAstErrors": 0,
+    "wrapperFunctions": 113,
+    "unchangedCookPositiveWriterFunction": {
+      "bytes": 1348,
+      "sha256": "7564FE66E0C8C80CB55FEC9EDA83C4F7B305917B7B341466B4137B5187170060",
+      "byteIdentical": true,
+      "scope": "Complete compared function including its trailing blank line."
+    },
+    "qualification": "Source/static observations only; C++ compilation, behavioral checks and fresh SOURCE/native proof were NOT_RUN at adoption."
+  },
+  "retainedScope": {
+    "plannedOrderedGameCheckIds": 52,
+    "newDerivedDataCacheModuleDependency": false,
+    "forcedDdcInitialization": false,
+    "unchanged": "Product descriptor, Rules, targets, Config and supervisor; 52 check IDs and historical raw evidence."
+  },
+  "asOfAdoption": {
+    "behavior": "NOT_RUN",
+    "freshSource": "NOT_RUN",
+    "allNineNewPhases": "NOT_RUN",
+    "newRunId": "UNBOUND",
+    "actualNewBindings": "NOT_CREATED",
+    "newSourceAdmission": false,
+    "newPhaseGo": false,
+    "cppCompilation": "NOT_RUN"
+  },
+  "historicalFailure": {
+    "sourceHead": "ea7de0c55f0a971e72ea0ce9c3384ab753845253",
+    "runId": "20261021T142446Z-ecbcbc8d",
+    "closure": "docs/plans/research/2026-10-21-e04a-game-native-ddc-failure-closure.md",
+    "receipt": "docs/plans/evidence/2026-10-21-e04a-game-native-ddc-failure.json",
+    "rawNativeStatus": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "rawGameOutcome": "52 actual evaluated/passed custom checks, two parser attempts and one callback remain preserved. This does not pass the historical Native wrapper or Audit.",
+    "authorityTransfers": false
+  },
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "unaffected": "Every earlier failure, both failed a00 deltas and separate exact settings restoration, bounded A1E acceptance and perpetual private source/API review consent remain unchanged.",
+  "next": "After actual root adoption, checkpoint/push/gh-verify repaired-source backup before fresh exact source/run/freeze/tool/config/input/command/norm bindings and affected SOURCE. Positive root admission precedes separate ordered nine-phase GOs. No old authority transfers; final CODE/different REQ and A1G acceptance remain open.",
+  "scopeLimit": "Finite legacy-DDC pointer/log/owned-directory observations only; runtime DerivedData IoStore is separate. Source repair/static validation supplies no fresh review, native PASS, milestone acceptance or old-authority transfer."
+}

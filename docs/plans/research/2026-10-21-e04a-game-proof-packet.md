@@ -56,8 +56,9 @@ type `FParseResult(*)(TConstArrayView<uint8>,EFormat) noexcept` against
 `decltype(&ParseDocument)`. Inspect actual compiler/complete response/forced-header
 evidence: caller exceptions disabled; parser /EHsc and
 PLATFORM_EXCEPTIONS_DISABLED=0; matching frozen compiler/SDK, /MD and C++20;
-IS_MONOLITHIC=1/WITH_EDITOR=0. Require fresh caller/parser compile and real object/
-vendor-library link consumption; settings/receipts/markers alone cannot prove modes.
+IS_MONOLITHIC=1/WITH_EDITOR=0/WITH_EDITORONLY_DATA=0. Require fresh caller/parser
+compile and real object/vendor-library link consumption; settings/receipts/markers
+alone cannot prove modes.
 
 Fresh-build Release yaml-cpp pin 56e3bb550c91fd7005566f19c079cb7a503223cf. Require
 real Release ABI compile/link, actual CMAKE_TRY_COMPILE_CONFIGURATION=Release,
@@ -234,7 +235,12 @@ boolean-positive checks in order M01..M18,B01..B09,G01..G13,G23,G14..G22,L01,L02
 no skipped/implicit checks or inferred UE assertion total. M binds Game thread/
 GIsRunning/non-Editor/non-commandlet/Game/cooked/unattended/hidden flags, no prior
 exit, exactly one actual Entry world/exact GameModeBase and run/source/root/result/
-actual binary arguments. BAD: matching typed MalformedYaml codes, 17 bytes,
+actual binary arguments. At M06 snapshot RequiresCookedData() and the direct public
+Core TryGetDerivedDataCache()==nullptr observation without loading or initializing a
+cache; require both, retain separate typed Boolean requiresCookedData=true and
+existingLegacyDerivedDataCacheIsNull=true in the result, and validate both. Keep the
+same 52 IDs/order; the M06 conjunction does not merge the two reported facts.
+BAD: matching typed MalformedYaml codes, 17 bytes,
 root INDEX_NONE, empty nodes/OriginalBytes, depth/aliases 0. GOOD: matching Success,
 19 bytes, five nodes, mapping/two ordered pairs, keys A then a, values first
 then second, depth 1/no aliases, exact owned OriginalBytes after input release.
@@ -255,8 +261,18 @@ Launch only actual Stage-mapped Game executable, rehashed against receipt/Stage.
 Native uses NullRHI/RenderOffScreen/unattended/nosound/NoSplash/NoSourceControl/
 NoLiveCoding, owned absolute log/user/DDC/shader/result paths, local shaders and
 settings options above. Require result/log preabsence/fresh work paths; retain full
-nativeLog/streams/process receipt, argv, actual selected DDC writer, compiled
-literal/caller joins and before/after executable identity.
+nativeLog/streams/process receipt, argv, compiled literal/caller joins and
+before/after executable identity. For this cooked Game require M06's direct null
+existing-legacy-cache observation, zero LogDerivedDataCache category rows in the
+closed native log and zero files in its one owned Native DDC directory at the
+Native and Audit validation boundaries. Retain the separate typed result facts,
+observed row/file counts and owned directory. These finite observations do not
+prove universal DDC or write absence. Runtime DerivedData IoStore is a separate
+facility outside the legacy-cache observation. Native's DDC-NoDefaultGraph/inline
+graph arguments remain defensive requests with unproven effectiveness here; do not
+claim a selected Native backend/writer. Cook still requires its positive actual
+owned writable backend observation. Add no DerivedDataCache module/dependency or
+forced initialization to make the cooked Game produce a writer.
 
 ## Qualified observation and closure
 
@@ -290,7 +306,12 @@ fail closed. A2/fidelity/Core play/rendering/Linux/distribution stay open.
 ## Direct primary routes
 
 Engine source prefix C:/Program Files/Epic Games/UE_5.8/Engine/Source/:
-Runtime/Launch/Private/LaunchEngineLoop.cpp:4886-4964;
+Runtime/Launch/Private/LaunchEngineLoop.cpp:2902-2907,3218-3229,4886-4964;
+Runtime/Core/Public/Misc/CoreMisc.h:111-118;
+Runtime/Core/Private/Misc/CoreMisc.cpp:125-165;
+Developer/DerivedDataCache/Private/DerivedDataCacheModule.cpp:38-48,115-125;
+Developer/DerivedDataCache/Private/DerivedDataBackends.cpp:676-722;
+Runtime/Core/Public/Windows/WindowsPlatformProperties.h:12-19,66-69,152-154;
 Runtime/Engine/Private/GameUserSettings.cpp:672-744;
 Runtime/Core/Private/Misc/ConfigCacheIni.cpp:6288-6312;
 Runtime/Core/Private/Misc/ConfigCacheIni.cpp:6650-6654;

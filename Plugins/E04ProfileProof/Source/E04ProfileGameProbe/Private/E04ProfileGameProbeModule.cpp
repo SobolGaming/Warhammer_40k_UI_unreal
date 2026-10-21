@@ -14,6 +14,7 @@
 #include "Misc/App.h"
 #include "Misc/CommandLine.h"
 #include "Misc/CoreDelegates.h"
+#include "Misc/CoreMisc.h"
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
 #include "Modules/ModuleManager.h"
@@ -288,7 +289,9 @@ private:
         Out.Check(TEXT("M03"), TEXT("Non-Editor process"), !GIsEditor);
         Out.Check(TEXT("M04"), TEXT("Non-commandlet process"), !IsRunningCommandlet());
         Out.Check(TEXT("M05"), TEXT("Game application state"), FApp::IsGame());
-        Out.Check(TEXT("M06"), TEXT("Cooked data required"), FPlatformProperties::RequiresCookedData());
+        const bool bRequiresCookedData = FPlatformProperties::RequiresCookedData();
+        const bool bExistingLegacyDerivedDataCacheIsNull = TryGetDerivedDataCache() == nullptr;
+        Out.Check(TEXT("M06"), TEXT("Cooked data required and existing legacy DDC pointer null"), bRequiresCookedData && bExistingLegacyDerivedDataCacheIsNull);
         Out.Check(TEXT("M07"), TEXT("Unattended mode"), FApp::IsUnattended());
         Out.Check(TEXT("M08"), TEXT("NullRHI flag"), FParse::Param(CommandLine, TEXT("NullRHI")));
         Out.Check(TEXT("M09"), TEXT("RenderOffScreen flag"), FParse::Param(CommandLine, TEXT("RenderOffScreen")));
@@ -328,6 +331,8 @@ private:
         Report->SetNumberField(TEXT("expectedCheckCount"), 52);
         Report->SetNumberField(TEXT("evaluatedCheckCount"), Out.Ids.Num());
         Report->SetBoolField(TEXT("completeOrderedCheckSet"), bComplete);
+        Report->SetBoolField(TEXT("requiresCookedData"), bRequiresCookedData);
+        Report->SetBoolField(TEXT("existingLegacyDerivedDataCacheIsNull"), bExistingLegacyDerivedDataCacheIsNull);
         Report->SetBoolField(TEXT("parserValuesDestroyedBeforePublication"), Out.bParserScopeCompleted);
         Report->SetBoolField(TEXT("callerCppUnwindDefined"), false);
         Report->SetNumberField(TEXT("callerPlatformExceptionsDisabled"), PLATFORM_EXCEPTIONS_DISABLED);
