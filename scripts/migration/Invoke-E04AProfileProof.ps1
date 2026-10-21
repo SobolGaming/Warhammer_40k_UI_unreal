@@ -750,7 +750,7 @@ function Require-ObjSrcMapRulesError($Process,[string[]]$Arguments,[string]$Work
         $Process['assignedBeforeResume'] -ne $true -or $Process['resumed'] -ne $true -or
         $Process['timedOut'] -ne $false -or $Process['technicalBlocked'] -ne $false -or
         $Process['budgetSeconds'] -ne 60 -or $Process['visibleWindowRequested'] -ne $false -or
-        $null -ne $Process['syntheticFault'] -or @($Process['secondaryErrors']).Count){throw 'E04A1_OBJ_SRC_MAP_EXPECTED_CLOSED_RULES_ERROR_REQUIRED'}
+        $Process['syntheticFault'] -isnot [string] -or $Process['syntheticFault'].Length -ne 0 -or @($Process['secondaryErrors']).Count){throw 'E04A1_OBJ_SRC_MAP_EXPECTED_CLOSED_RULES_ERROR_REQUIRED'}
     $failure=$Process['primaryFailure']
     if($failure -isnot [Collections.IDictionary] -or $failure['stage'] -cne 'owned-root' -or
         $failure['type'] -cne 'System.IO.InvalidDataException' -or
@@ -2519,7 +2519,7 @@ function Check-Native {
     foreach($field in @('failed','notRun','inProcess')){if($report[$field] -ne 0){throw 'E04A1_UE_REPORT_INCOMPLETE'}}
     $warnings=if($report.Contains('succeededWithWarnings')){[int]$report.succeededWithWarnings}else{0};if([int]$report.succeeded+$warnings -ne 8){throw 'E04A1_UE_SUCCESS_TOTAL_MISMATCH'}
     $definitions=Read-Json (Owned 'fixtures/input-definitions.json');$byId=@{};foreach($d in $definitions.inputs){if($byId.ContainsKey($d.id)){throw 'E04A1_DEFINITION_DUPLICATE'};$byId[$d.id]=$d}
-    if($byId.Count -ne 40){throw 'E04A1_DEFINITION_UNION_MISMATCH'}
+    if($byId.Count -ne 43){throw 'E04A1_DEFINITION_UNION_MISMATCH'}
     $expected=Expected-Attempts;$union=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal);$artifacts=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase);$observed=[Collections.Generic.List[object]]::new();$totalChecks=0L;$totalAttempts=0
     foreach($suffix in $script:SuiteSlugs.Keys){$slug=$script:SuiteSlugs[$suffix];$ledgerPath=Owned "artifacts/native/$slug/input-ledger.json";$ledger=Read-Json $ledgerPath
         if($ledger.schemaVersion -ne 1 -or $ledger.subset -cne $script:Subset -or $ledger.runtimeCallerProof -cne $script:RuntimeCallerProof -or $ledger.callerExceptionsEnabled -isnot [bool] -or $ledger.callerExceptionsEnabled -ne $true -or $ledger.platformExceptionsDisabled -ne 0 -or ($ledger.platformExceptionsDisabled -isnot [int] -and $ledger.platformExceptionsDisabled -isnot [long])){throw 'E04A1E_ACTUAL_LEDGER_SUBSET_OR_EDITOR_CALLER_MODE_MISMATCH'}

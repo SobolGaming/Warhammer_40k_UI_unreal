@@ -78,15 +78,21 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 76 (2026-10-21 UTC) is
-**SOURCE_CLOSED_TOOL_ASSURANCE_DEFERRED_COMPONENT_PROOF_PENDING**. The
-[closure/OWN17 record](docs/plans/research/2026-10-21-e04a-source-assurance-deferral.md)
-and [facts](docs/plans/evidence/2026-10-21-e04a-source-assurance-deferral-result.json)
-preserve five raw CHANGES_REQUESTED reports/480 pairs, zero anomalies/admissions.
-Routine count/strict-empty repairs are planned, not applied. Rules86 matched 86/86
-separately; C#4/whole18/full SupervisorControls and all eight native phases NOT_RUN,
-no native RunRoot/visible0. Actual focused component SOURCE/native/final proof is
-pending; A1G/A2/plain-DEL/Linux and later gates remain open. Consent persists.
+Current A1E status at plan revision 77 (2026-10-21 UTC) is
+**ROUTINE_CONSUMERS_REPAIRED_FOCUSED_SOURCE_PENDING**. The
+[repair receipt](docs/plans/evidence/2026-10-21-e04a-routine-consumer-repairs.json)
+binds two routine wrapper consumers after closure checkpoint `e07c436` and its
+verified remote backup: Check-Native 43 and strict-empty ObjSrcMap syntheticFault.
+Wrapper 500C8148 is source-only/AST0; no C++/fixture/producer change or execution.
+New exact source/run bindings and one fresh 1,800-second focused SOURCE pass are
+pending before native phase GO. OWN17 remains active, runtime assertions fail-closed;
+43 inputs/50 attempts/eight suites, zero admissions, all native phases NOT_RUN/visible0.
+C#4/whole18/full SupervisorControls and final CODE/different REQ/A1G/A2/plain-DEL/
+Linux/later gates remain open. Standing consent persists.
+
+Historical revision 76: the [closure](docs/plans/research/2026-10-21-e04a-source-assurance-deferral.md)
+preserves five raw CHANGES_REQUESTED reports/480 pairs and the OWN17 decision;
+its planned-repair facts remain unchanged at that checkpoint.
 
 OWN17 is **activated prospectively after all five closed reports** for D-P2's
 unrecognized out-of-rule `command=@` capture context and nontrivial special-tool
