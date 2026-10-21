@@ -69,6 +69,21 @@ skip the ABI check or substitute a static-library-only probe to avoid linking.
 Existing compiler/CRT/exception/static-target choices and process bounds remain;
 configuration selection alone does not establish successful cleanup.
 
+For the fixed synchronous CMake Configure and DependencyBuild command families,
+use an explicit successful-root cleanup mode. After observing the retained root's
+exit code 0, allow five full seconds for natural job draining. If owned members
+remain before the existing timeout threshold, terminate only the same retained
+private job, record a distinct post-root completion reason and verify actual
+zero-active accounting within the unchanged bound. Timeout handling takes priority;
+never convert a timeout, failed root, API error or unconfirmed cleanup to success.
+This mode also applies to the existing SUP01 regression fixture, whose child must
+outlive the grace period and whose evidence must prove this cleanup path. Keep
+the same six supervisor subcases and root limits. All other command families,
+including EditorBuild, Discovery, Native and the negative controls, retain natural
+draining. A successful root is not a general asynchronous-work completion contract;
+review the selected CMake interface and require its ordinary output checks after
+cleanup. Do not address processes by name/PID or alter system telemetry settings.
+
 Inspect the actual static dependency build and dedicated Editor compile/link
 results, tool/CRT/exception observations, eight discovered and successful native
 suites, input ledgers and retained input bytes. Independently reconcile the

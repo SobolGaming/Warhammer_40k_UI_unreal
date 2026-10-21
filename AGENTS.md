@@ -78,7 +78,25 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 82 (2026-10-21 UTC) is
+Current A1E status at plan revision 83 (2026-10-21 UTC) is
+**SCOPED_CMAKE_JOB_CLEANUP_REPAIRED_SOURCE_PENDING**. The
+[repair receipt](docs/plans/evidence/2026-10-21-e04a-owned-job-cleanup-repair.json)
+records the source-only cleanup repair under review after closure `7814ba7`
+and verified OWN18 backup. An explicit five-second success-root cleanup mode
+is scoped to fixed CMake Configure/DependencyBuild roots and existing SUP01.
+Other roots retain NaturalDrain; timeout priority and fail-closed checks remain,
+with the same private job and an actual final active count of zero required.
+No new SOURCE PASS, native/build result or cleanup success is established.
+Counts remain 43 inputs/33 recipes/50 attempts/eight suites; all eight fresh
+phases are NOT_RUN and visible count is zero. Checkpoint this repair, verify
+OWN18 exact remote backup, derive new exact head/run/freeze/input bindings and
+obtain fresh affected focused SOURCE before a fresh ordered native sequence.
+The `5fb13f1` and `9972c75` failed runs remain closed with no approval transfer.
+OWN17 remains DEFERRED_UNPROVEN/fail-closed; final CODE/different REQ, A1E
+acceptance and broader gates stay open. Standing private source/API review
+consent remains in force until explicitly revoked.
+
+Historical A1E status at plan revision 82 (2026-10-21 UTC) is
 **FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**. The
 [factual receipt](docs/plans/evidence/2026-10-21-e04a-release-configure-timeout-result.json)
 and [closure](docs/plans/research/2026-10-21-e04a-release-configure-timeout-closure.md)

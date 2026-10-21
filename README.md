@@ -7,7 +7,18 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**
+The bounded E04-A1E proof is **SCOPED_CMAKE_JOB_CLEANUP_REPAIRED_SOURCE_PENDING**
+(revision 83). The source-only repair under review scopes a five-second
+success-root cleanup mode to fixed CMake Configure/DependencyBuild roots and
+SUP01. Other roots retain NaturalDrain; timeout priority, fail-closed checks,
+same-job ownership and actual final active count zero remain required. No new
+review PASS, build/native result or cleanup success is established. Checkpoint/
+verify remote backup, then derive new bindings and obtain affected focused
+SOURCE before a fresh native sequence. All eight fresh phases are NOT_RUN;
+earlier failed runs stay closed, OWN17 stays deferred/unproven, visible count is
+zero and final reviews/A1E acceptance/broader gates remain open.
+
+Historical revision 82 status is **FOCUSED_SOURCE_PASSED_RELEASE_CONFIGURE_TIMEOUT_CLOSED**
 (revision 82). Focused SOURCE admitted `5fb13f1`; Preflight/SupervisorControls
 passed. Configure failed after 599.6380226 seconds: CMake and the real Release
 ABI probe exited 0, while the private job stayed active until timeout cleanup.
@@ -50,9 +61,10 @@ visible count zero.
 - Read [AGENTS.md](AGENTS.md) before work.
 - Follow the canonical [migration plan](docs/plans/unreal-migration-plan.md), starting
   with Section 0 and its research/experiment/implementation gates.
-- Use the [revision82 Release Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-release-configure-timeout-result.json)
+- Use the [revision83 scoped cleanup repair receipt](docs/plans/evidence/2026-10-21-e04a-owned-job-cleanup-repair.json)
+  for current source changes and gates. The [revision82 Release Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-release-configure-timeout-result.json)
   and [closure](docs/plans/research/2026-10-21-e04a-release-configure-timeout-closure.md)
-  for current results and gates. The [revision81 CMake probe repair receipt](docs/plans/evidence/2026-10-21-e04a-cmake-probe-release-repair.json)
+  preserve the later failed run. The [revision81 CMake probe repair receipt](docs/plans/evidence/2026-10-21-e04a-cmake-probe-release-repair.json)
   records the prior change; the [revision80 Configure timeout receipt](docs/plans/evidence/2026-10-21-e04a-configure-timeout-result.json)
   and [closure](docs/plans/research/2026-10-21-e04a-configure-timeout-closure.md)
   preserve the earlier failed run. The [revision79 F13 repair receipt](docs/plans/evidence/2026-10-21-e04a-f13-expectation-repair.json),

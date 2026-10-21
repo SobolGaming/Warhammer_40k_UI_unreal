@@ -83,8 +83,8 @@ $script:Clock=[Diagnostics.Stopwatch]::StartNew();$script:RootCount=0
 # exact reused function Control-Utc; original rows 909-920; UTF8 SHA256 7EE68047B9C31EE71A91B193E3D6A08F6F74442B8FFBB0FD8CD083A033459DD3
 # exact reused function Sup03-Diagnostic; original rows 922-939; UTF8 SHA256 8B39D20BCA5CC4EAD2B916B9A57CAFE89F372D5C619C2727998C48055DB8F7BE
 # exact reused function Check-Sup03ExpectedFailure; original rows 941-1052; UTF8 SHA256 D79CE8F67C8C37CE4CFB044485083B0647141B6B24C8F2A3C02EFE3A0BB7EC61
-# exact reused function Check-ControlChildEvidence; original rows 1054-1157; UTF8 SHA256 07864D0A13E198ACC1671AEE9F6BBD18A172FF0F992018E5E5F7CE029B48DA3D
-# exact reused function Supervisor-Controls; original rows 1159-1279; UTF8 SHA256 75B5FE725CD9E863DC4FAF1D5707A081DA667B0E7E5A1DB9318C0E23869434E1
+# adapted Check-ControlChildEvidence: original E02 rows 1054-1157 / SHA256 07864D0A13E198ACC1671AEE9F6BBD18A172FF0F992018E5E5F7CE029B48DA3D; adds explicit normal-completion cleanup evidence.
+# adapted Supervisor-Controls: original E02 rows 1159-1279 / SHA256 75B5FE725CD9E863DC4FAF1D5707A081DA667B0E7E5A1DB9318C0E23869434E1; keeps the same cases/roots with a longer fixed SUP01 child hold.
 
 function Assert-Path([string] $Path) {
     if (-not [IO.Path]::IsPathFullyQualified($Path)) { throw 'E02_PATH_NOT_ABSOLUTE' }
@@ -526,8 +526,12 @@ function Check-ControlChildEvidence($Record,[bool] $Timeout,[string] $Executable
         if ($Record[$state[0]] -isnot [bool] -or $Record[$state[0]] -ne $state[1]) { throw 'E02_CHILD_CONTROL_STATE_INVALID' }
     }
     $budget=if($Timeout){8}else{20};$status=if($Timeout){'FAIL'}else{'PASS'}
+    $cleanupMode=if($Timeout){'NaturalDrain'}else{'PostSuccessfulRootCleanup'}
+    $postRootGrace=if($Timeout){0}else{5}
     if ((Control-UInt ($Record['schemaVersion']) 1) -ne 1 -or
         (Control-UInt ($Record['budgetSeconds']) 20) -ne $budget -or $Record['status'] -cne $status -or
+        $Record['completionCleanupMode'] -cne $cleanupMode -or
+        (Control-UInt ($Record['postRootGraceSeconds']) 5) -ne $postRootGrace -or
         $Record['syntheticFault'] -isnot [string] -or $Record['syntheticFault'].Length -ne 0 -or $Record['executable'] -cne $Executable -or
         $Record['workingDirectory'] -cne $script:Stage) { throw 'E02_CHILD_CONTROL_FIXTURE_IDENTITY_INVALID' }
     $arguments=$Record['arguments'];$expected=@('-NoProfile','-NonInteractive','-Command',$Command)
@@ -612,6 +616,32 @@ function Check-ControlChildEvidence($Record,[bool] $Timeout,[string] $Executable
         if($termination.Count -ne 1 -or $termination[0]['succeeded'] -isnot [bool] -or -not $termination[0]['succeeded']) { throw 'E02_SUP02_PRIVATE_JOB_TERMINATION_UNVERIFIED' }
         $termination=Control-Utc ($termination[0]['observedUtc'])
         if($termination -lt $lastAlive -or ($termination-$lastAlive).TotalSeconds -gt 1 -or $termination -gt $completed) { throw 'E02_SUP02_CHILD_ALIVE_PROOF_STALE' }
+    } else {
+        $requests=$Record['shutdownRequests']
+        if($requests -isnot [Collections.IList] -or $requests.Count -ne 1) { throw 'E04_SUP01_NORMAL_CLEANUP_REQUEST_MISSING' }
+        $request=$requests[0]
+        $keys=@('operation','reason','succeeded','observedUtc','elapsedSeconds','rootExitElapsedSeconds',
+            'naturalGraceSeconds','activeProcessesBefore','rootExitCode','terminationExitCode','win32Error')
+        if($request -isnot [Collections.IDictionary] -or $request.get_Count() -ne $keys.Count) { throw 'E04_SUP01_NORMAL_CLEANUP_SCHEMA_INVALID' }
+        foreach($key in $keys) { if($key -cnotin $request.get_Keys()) { throw 'E04_SUP01_NORMAL_CLEANUP_SCHEMA_INVALID' } }
+        if($request['operation'] -cne 'TerminateJobObject' -or $request['reason'] -cne 'POST_ROOT_COMPLETION' -or
+            $request['succeeded'] -isnot [bool] -or -not $request['succeeded'] -or $null -ne $request['win32Error'] -or
+            (Control-UInt ($request['rootExitCode']) ([uint32]::MaxValue)) -ne 0 -or
+            (Control-UInt ($request['terminationExitCode']) ([uint32]::MaxValue)) -ne [uint64]3760193539 -or
+            (Control-UInt ($request['naturalGraceSeconds']) 5) -ne 5 -or
+            (Control-UInt ($request['activeProcessesBefore']) ([uint32]::MaxValue)) -eq 0) { throw 'E04_SUP01_NORMAL_CLEANUP_NOT_CONFIRMED' }
+        $numeric=@([byte],[sbyte],[int16],[uint16],[int32],[uint32],[int64],[uint64],[single],[double],[decimal])
+        foreach($value in @($Record['rootExitObservedElapsedSeconds'],$request['rootExitElapsedSeconds'],$request['elapsedSeconds'],$Record['elapsedSeconds'])) {
+            if($null -eq $value -or $value.GetType() -notin $numeric -or [double]::IsNaN([double]$value) -or
+                [double]::IsInfinity([double]$value) -or [double]$value -lt 0) { throw 'E04_SUP01_NORMAL_CLEANUP_CLOCK_INVALID' }
+        }
+        $rootElapsed=[double]$Record['rootExitObservedElapsedSeconds'];$requestElapsed=[double]$request['elapsedSeconds']
+        $runningCutoff=$budget-[Math]::Min(15,$budget/4.0)-[Math]::Min(5,$budget/4.0)
+        if($rootElapsed -ne [double]$request['rootExitElapsedSeconds'] -or $requestElapsed-$rootElapsed -lt 5 -or
+            $requestElapsed -ge $runningCutoff -or $requestElapsed -gt [double]$Record['elapsedSeconds']) { throw 'E04_SUP01_NORMAL_CLEANUP_BOUND_INVALID' }
+        $termination=Control-Utc ($request['observedUtc'])
+        if($termination -lt $exitObserved -or $termination -lt $lastAlive -or $termination -gt $sampleTime -or
+            $termination -gt $completed) { throw 'E04_SUP01_NORMAL_CLEANUP_TIME_INVALID' }
     }
     # Return annotations only; never change the already-published native receipt.
     return @{stdoutArtifact=$stdout;childPid=$childPid;childCreationFileTime=$childCreation;observations=@($observations);
@@ -715,7 +745,7 @@ try {
 '@
 
 $fixtureExecutableLiteral="'"+$pwsh.Replace("'","''")+"'"
-$normalChild=$fixtureChildTemplate.Replace('__HOLD_SECONDS__','2')
+$normalChild=$fixtureChildTemplate.Replace('__HOLD_SECONDS__','60')
 $timeoutChild=$fixtureChildTemplate.Replace('__HOLD_SECONDS__','60')
 $normal=$fixtureParentTemplate.Replace('__CHILD_LITERAL__',("'"+$normalChild.Replace("'","''")+"'")).Replace('__EXECUTABLE_LITERAL__',$fixtureExecutableLiteral).Replace('__TIMEOUT_LITERAL__','$false')
 $long=$fixtureParentTemplate.Replace('__CHILD_LITERAL__',("'"+$timeoutChild.Replace("'","''")+"'")).Replace('__EXECUTABLE_LITERAL__',$fixtureExecutableLiteral).Replace('__TIMEOUT_LITERAL__','$true')
@@ -743,7 +773,7 @@ $long=$fixtureParentTemplate.Replace('__CHILD_LITERAL__',("'"+$timeoutChild.Repl
 }
 
 function Require-ObjSrcMapRulesError($Process,[string[]]$Arguments,[string]$WorkingDirectory,[string]$UbtLog) {
-    # The unchanged supervisor deliberately labels a nonzero root FAIL. Validate
+    # The supervisor deliberately labels a nonzero root FAIL. Validate
     # precisely that expected terminal failure; Require-RootPass must not be used.
     if($Process['status'] -cne 'FAIL' -or $Process['exitCode'] -ne 8 -or
         $Process['exitConfirmed'] -ne $true -or $Process['cleanupConfirmed'] -ne $true -or
@@ -1006,7 +1036,8 @@ public static class Supervisor {
     }
 
     public static Dictionary<string,object> Run(string exe,string[] arguments,string cwd,
-        Dictionary<string,string> environment,string stdout,string stderr,int seconds,bool visible,string syntheticFault) {
+        Dictionary<string,string> environment,string stdout,string stderr,int seconds,bool visible,string syntheticFault,
+        bool cleanupAfterSuccessfulRoot=false) {
         if(seconds<3 || seconds>1800) throw new ArgumentOutOfRangeException("seconds");
         var errors=new List<object>(); var samples=new List<object>(); var shutdown=new List<object>();
         var r=new Dictionary<string,object>{{"schemaVersion",1},{"executable",exe},{"arguments",arguments},{"workingDirectory",cwd},
@@ -1015,6 +1046,8 @@ public static class Supervisor {
             {"exitUtc",null},{"exitCode",null},{"exitConfirmed",false},{"assignedBeforeResume",false},{"resumed",false},
             {"timedOut",false},{"cleanupConfirmed",false},{"technicalBlocked",false},{"rootExitWhileMembersActive",false},{"jobAccounting",samples},
             {"shutdownRequests",shutdown},{"secondaryErrors",errors},{"primaryFailure",null},{"syntheticFault",syntheticFault},
+            {"completionCleanupMode",cleanupAfterSuccessfulRoot ? "PostSuccessfulRootCleanup" : "NaturalDrain"},
+            {"postRootGraceSeconds",cleanupAfterSuccessfulRoot ? 5 : 0},{"rootExitObservedElapsedSeconds",null},
             {"descendantInventory","NOT_COLLECTED; optional observations are incomplete"},{"visibleWindowRequested",visible}};
         IntPtr job=IntPtr.Zero, attr=IntPtr.Zero, handles=IntPtr.Zero, env=IntPtr.Zero;
         IntPtr outFile=IntPtr.Zero,errFile=IntPtr.Zero,input=IntPtr.Zero;
@@ -1056,12 +1089,17 @@ public static class Supervisor {
             if(ResumeThread(process.thread)==INVALID) throw new Win32Exception(Marshal.GetLastWin32Error(),"ResumeThread");
             r["resumed"]=true; r["resumedObservationUtc"]=Utc();
             Close(ref process.thread,"root-thread",errors); Close(ref outFile,"stdout-original",errors); Close(ref errFile,"stderr-original",errors); Close(ref input,"stdin-original",errors);
-            bool faultUsed=false; bool shutdownStarted=false; double killAt=0; uint? lastActive=null;
+            bool faultUsed=false; bool shutdownStarted=false,normalCleanupRequested=false;
+            double killAt=0,rootExitAt=-1; uint? lastActive=null;
             while(clock.Elapsed.TotalSeconds<seconds) {
                 if(process.process!=IntPtr.Zero) {
                     uint waited=WaitForSingleObject(process.process,50);
                     if(waited!=WAIT_OBJECT_0 && waited!=WAIT_TIMEOUT) throw new Win32Exception(Marshal.GetLastWin32Error(),"WaitForSingleObject(root)");
-                    if(waited==WAIT_OBJECT_0) { RootFinal(process.process,r); exited=true; Close(ref process.process,"root-process",errors); }
+                    if(waited==WAIT_OBJECT_0) {
+                        RootFinal(process.process,r); exited=true; rootExitAt=clock.Elapsed.TotalSeconds;
+                        r["rootExitObservedElapsedSeconds"]=rootExitAt;
+                        Close(ref process.process,"root-process",errors);
+                    }
                 }
                 if(syntheticFault=="query" && !faultUsed) { faultUsed=true; throw new InvalidOperationException("E02_INJECTED_ACCOUNTING_QUERY_FAILURE"); }
                 ACCOUNT a=new ACCOUNT(); uint n; WinCheck(QueryInformationJobObject(job,1,ref a,(uint)Marshal.SizeOf<ACCOUNT>(),out n),"QueryInformationJobObject(loop)");
@@ -1081,6 +1119,23 @@ public static class Supervisor {
                     WinCheck(TerminateJobObject(job,0xe0200001),"TerminateJobObject(timeout)");
                     shutdown.Add(new Dictionary<string,object>{{"operation","TerminateJobObject"},{"succeeded",true},{"observedUtc",Utc()}});
                     killAt=double.PositiveInfinity;
+                }
+                // Opt-in only for reviewed synchronous CMake roots and SUP01.
+                // The execution-timeout route above always retains priority.
+                if(cleanupAfterSuccessfulRoot && !timed && !shutdownStarted && !normalCleanupRequested &&
+                    assigned && job!=IntPtr.Zero && exited && (bool)r["exitConfirmed"] && (uint)r["exitCode"]==0 && a.active>0) {
+                    double requestedAt=clock.Elapsed.TotalSeconds;
+                    if(rootExitAt>=0 && requestedAt-rootExitAt>=5 && seconds-requestedAt>grace+reserve) {
+                        var request=new Dictionary<string,object>{{"operation","TerminateJobObject"},{"reason","POST_ROOT_COMPLETION"},
+                            {"succeeded",false},{"observedUtc",Utc()},{"elapsedSeconds",requestedAt},{"rootExitElapsedSeconds",rootExitAt},
+                            {"naturalGraceSeconds",5},{"activeProcessesBefore",a.active},{"rootExitCode",(uint)r["exitCode"]},
+                            {"terminationExitCode",(uint)0xe0200003},{"win32Error",null}};
+                        shutdown.Add(request); normalCleanupRequested=true;
+                        bool stopped=TerminateJobObject(job,0xe0200003);
+                        int error=stopped ? 0 : Marshal.GetLastWin32Error();
+                        request["succeeded"]=stopped; request["win32Error"]=stopped ? null : (object)error;
+                        if(!stopped) throw new Win32Exception(error,"TerminateJobObject(post-root-completion)");
+                    }
                 }
                 Thread.Sleep(25);
             }
@@ -1365,7 +1420,14 @@ function Invoke-Root([string]$Label,[string]$Executable,[string[]]$Arguments,[in
             $seconds=[Math]::Min($Budget,(Phase-Budget));if($seconds -lt 3 -or $seconds -gt 1800){throw 'E04A1_ROOT_BUDGET_INVALID'}
         }
         $script:RootCount++
-        $record=[Warhammer.E02.Supervisor]::Run($exe,$Arguments,$cwd,$childEnvironment,$out,$err,$seconds,$false,$(if($Fault){$Fault}else{$null}))
+        # These exact CMake families complete their build outputs synchronously.
+        # Other roots keep natural draining; no process name/PID selects cleanup.
+        $cmakeCompletion=(($Phase -ceq 'Configure' -and $Label -ceq 'configure') -or
+            ($Phase -ceq 'DependencyBuild' -and $Label -ceq 'dependency-build')) -and
+            $exe -ieq (Assert-Path $script:Freeze.toolPaths.cmake)
+        $normalControl=($Phase -ceq 'SupervisorControls' -and $Label -ceq 'sup01-normal-lingering')
+        $postRootCleanup=($cmakeCompletion -or $normalControl) -and -not $Fault
+        $record=[Warhammer.E02.Supervisor]::Run($exe,$Arguments,$cwd,$childEnvironment,$out,$err,$seconds,$false,$(if($Fault){$Fault}else{$null}),$postRootCleanup)
     }
     finally{foreach($key in $saved.Keys){[Environment]::SetEnvironmentVariable($key,$saved[$key],'Process')}}
     $script:Result.processes.Add($record);$path=Join-Path $script:PhaseRoot "$Label.process.json";Write-JsonNew $path $record;$record['receiptArtifact']=Descriptor $path

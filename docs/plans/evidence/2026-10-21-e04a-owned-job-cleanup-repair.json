@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_SCOPED_OWNED_JOB_CLEANUP_SOURCE_REPAIR",
+  "createdUtc": "2026-10-21T02:17:16.7653557Z",
+  "planRevision": 83,
+  "status": "SCOPED_CMAKE_JOB_CLEANUP_REPAIRED_SOURCE_PENDING",
+  "closureCheckpoint": "7814ba7e5107b5b4d7b91c9b791dbf616673df55",
+  "closureBackupVerifiedUtc": "2026-10-21T02:13:36.0770063Z",
+  "futureSourceHead": null,
+  "futureRunId": null,
+  "qualification": "Precommit source-only receipt; later checkpoint/head/run must be bound independently. No runtime PASS or SOURCE admission follows.",
+  "changedArtifacts": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+      "bytes": 270794,
+      "sha256": "0187CD10C126678F93DF165F3D44BDAC514038A64012AF986DD3B5B456C9250A"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-functional-proof-packet.md",
+      "bytes": 6735,
+      "sha256": "155E43DFEEF152F028CC192EA1DC003AED15476F9CAC2F14CDF5B45C4E244442"
+    }
+  ],
+  "implementation": [
+    "Existing embedded Supervisor.Run accepts explicit successful-root cleanup opt-in, default NaturalDrain.",
+    "Sole Invoke-Root selects opt-in only for fixed Configure/configure and DependencyBuild/dependency-build with frozen CMake executable, plus existing SUP01 fixture; no general user mode or process-name/PID selection.",
+    "After actual original-root exit0, retain full five-second natural grace. Only before existing timeout threshold and without timeout/failure may the same retained private job receive POST_ROOT_COMPLETION termination.",
+    "Retain original root exit and timeout priority; record selected mode, monotonic grace and termination request/result; independently observe actual job0 within unchanged bound. API/secondary/failed-root/timeout/unknown-cleanup failures remain failures.",
+    "SUP01 fixed child hold changes2to60seconds and same case requires exactly one normal cleanup with root/grace/time/final-job evidence. No new cases or roots; negative controls retain NaturalDrain.",
+    "Two changed reuse annotations corrected; parser, input bytes, exception ABI and real Release ABI probe unchanged."
+  ],
+  "sourceChecks": {
+    "actualControls": "NOT_RUN",
+    "sourceReview": "PENDING",
+    "rootReadWholePatch": true,
+    "native": "NOT_RUN",
+    "powerShellAstDiagnostics": 0,
+    "functionCount": 101,
+    "actualCSharpCompilation": "NOT_RUN"
+  },
+  "plannedCounts": {
+    "suites": 8,
+    "generated": 33,
+    "attempts": 50,
+    "uniqueInputs": 43
+  },
+  "freshPhases": {
+    "SupervisorControls": "NOT_RUN",
+    "DependencyBuild": "NOT_RUN",
+    "Configure": "NOT_RUN",
+    "Preflight": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN",
+    "EditorBuild": "NOT_RUN",
+    "Discovery": "NOT_RUN"
+  },
+  "preservedLimits": [
+    "Existing phase/root/deadline/log/output bounds",
+    "Nine settings roles, ownership and same retained private unnamed noninherited KILL_ON_CLOSE job",
+    "Other roots NaturalDrain, no review-transport change, no telemetry settings or external process action",
+    "Failed5fb13f1/9972c75 raw results remain closed unchanged",
+    "OWN17 DEFERRED_UNPROVEN; existing assertions fail-closed",
+    "No visible windows or Linux/package/full-fidelity/real-Core acceptance"
+  ],
+  "ordinaryPrimaryInterface": {
+    "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\manual\\cmake.1.rst",
+    "sha256": "B971390AE5148FC31CC5ED7604FBCA8E5920F4FF7C2360190418707E989AC20B",
+    "readRanges": [
+      "615-650",
+      "1455-1467"
+    ],
+    "qualification": "Standard CMake command-family interface is an explicit trusted toolchain leaf. Source review and actual post-cleanup output checks remain required; no broad compiler/build-internal correctness claim.",
+    "bytes": 46561
+  },
+  "next": [
+    "Checkpoint and verify exact OWN18 remote backup",
+    "Fresh exact head/run/freeze/source/input bindings",
+    "Fresh independent focused SOURCE for component/material callers/build-process safety/changed units",
+    "New ordered native sequence and actual eight-suite reconciliation",
+    "Final independent CODE and different REQ after execution/evidence freeze"
+  ],
+  "acceptance": "NOT_ACCEPTED",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "actualGuiWindows": 0,
+  "reviewTransmissionConsent": "STANDING_PERPETUAL_UNLESS_EXPLICITLY_REVOKED"
+}
