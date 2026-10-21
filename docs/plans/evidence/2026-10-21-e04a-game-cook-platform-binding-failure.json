@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_CLOSED_COOK_PLATFORM_BINDING_FAILURE",
+  "status": "CLOSED_COOK_PLATFORM_FREEZE_BINDING_FAILED_REPAIR_REQUIRED",
+  "asOfUtc": "2026-10-21T13:05:33.1402086Z",
+  "sourceHead": "073826d8ad061302343ad3cb02a3b449086f1451",
+  "comparisonBase": "47de39639f6ec7844e2c6f62cfd82fa85aefbefc",
+  "runId": "20261021T123959Z-657332ad",
+  "runStatus": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+  "authority": "CLOSED_NO_RETRY_NO_SUCCESSOR_GO",
+  "factualBasis": {
+    "path": ".local/planning/E04/A1G-cook-platform-binding-failure-PROPOSED/root-closed-run.original.json",
+    "bytes": 4014,
+    "sha256": "65C3C54A9D6AE67ACA23F7776AB8BFA449B983D2D8CD52E01A5C96C3F37A90C6",
+    "rootClosureToolChunk": "3fdbca"
+  },
+  "sourcePrerequisite": {
+    "status": "PASS_ADMITTED",
+    "rootAdmission": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/root-source-admission.original.json",
+      "bytes": 5439,
+      "sha256": "95DAA7719CB69CA8A06B2CF193D14DD96E576FF81000B0EF3BF1EDFE5F5D68EE"
+    },
+    "publicationReceipt": "docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-073826d.json",
+    "note": "docs/plans/research/2026-10-21-e04a-game-source-prerequisite-073826d.md",
+    "rawReport": "docs/plans/research/2026-10-21-e04a-game-source-review-073826d.md"
+  },
+  "phaseStatuses": {
+    "Preflight": "PASS_ADMITTED",
+    "DependencyConfigure": "PASS_ADMITTED",
+    "DependencyBuild": "PASS_ADMITTED",
+    "EditorPrerequisiteBuild": "PASS_ADMITTED",
+    "GameBuild": "PASS_ADMITTED",
+    "Cook": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "Stage": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "cookFailure": {
+    "explicitError": "A1G_WIN64_LOOSE_PLATFORM_PRIMARY_NOT_UNIQUELY_FROZEN",
+    "nativeRootCount": 0,
+    "nativeCookStarted": false,
+    "completionAbsent": true,
+    "cookPayloadAbsent": true,
+    "stagePayloadAbsent": true,
+    "meaning": "Wrapper frozen Win64 loose-platform primary binding failed before native Cook launch; not an observed native cooker error.",
+    "result": {
+      "path": ".local/experiments/E04A1G/20261021T123959Z-657332ad/phases/cook/result.json",
+      "bytes": 59235,
+      "sha256": "FD47D6209604465675032A3D4ED476DCF5C1C24F7174D21CABA0A906285AB3EB"
+    }
+  },
+  "successfulGameBuildRetained": {
+    "summary": "Actual Game build logged 23 actions and Result: Succeeded, including repaired GameProbe compilation and final executable link. Actual caller exception-disabled/parser EHsc, normal Shared/monolithic and compile/link evidence are retained; the executable was not run.",
+    "nativePid": 16772,
+    "elapsedSeconds": 49.4808723,
+    "exitCode": 0,
+    "cleanupConfirmed": true,
+    "completionCleanupMode": "NaturalDrain",
+    "finalJobTotalProcesses": 42,
+    "finalJobActiveProcesses": 0,
+    "executableBytes": 332397056,
+    "executableSha256": "D81FCEF0F5AAD7F9F522812AAA18498003A840C6D7004831B326BF27387FB8A5",
+    "targetBytes": 113127,
+    "targetSha256": "60F67449DEA39B5770CBA8A940DCACFF543DB39EC839D5C508FACB334F820B34"
+  },
+  "successfulEditorBuildRetained": {
+    "nativePid": 35196,
+    "elapsedSeconds": 63.6267159,
+    "exitCode": 0,
+    "cleanupConfirmed": true,
+    "completionCleanupMode": "NaturalDrain",
+    "finalJobTotalProcesses": 38,
+    "finalJobActiveProcesses": 0,
+    "qualification": "Normal Editor build passed. Cook did not reach actual Editor startup."
+  },
+  "warningsRetained": [
+    "GameProbe C4996 PLATFORM_64BITS, line25",
+    "Historical C4701 Origin at E02WorldProofGameMode.cpp:544, Editor and Game",
+    "Historical C4701 Pixel at E02WorldInputTests.cpp:273, Editor"
+  ],
+  "dependencyBuildFactualClarification": {
+    "path": ".local/planning/E04/A1G-gameprobe-else-repair-PROPOSED/phase-execution-073826d-20261021T123959Z-657332ad/dependencybuild.root-factual-clarification.original.json",
+    "bytes": 5668,
+    "sha256": "5304E3CC715479CE83C24BDFCC23B2ECA0E7D8A462EA5A375AD6CB45B4C3C5CD",
+    "qualification": "Original admission remains unchanged with mistaken manuallyInspectedFacts31/31. Actual raw archive action31/32 was root-read in3913b7 before Editor launch; correction2c1f8a retained. Do not claim the earlier filtered output delivered that line."
+  },
+  "outerCookClosure": {
+    "pid": 9064,
+    "closedUtc": "2026-10-21T13:04:18.2588691Z",
+    "exitCode": 1,
+    "exitConfirmed": true,
+    "timedOut": false,
+    "rootKillRequested": false,
+    "streamsDrained": true
+  },
+  "rootFinitePreservation": {
+    "source": 36,
+    "stage": 36,
+    "fixtures": 2,
+    "settings": 9,
+    "gameSettings": 1,
+    "selectedMemberStatesMatched": 84,
+    "retainedArtifactsMatched": 52,
+    "predecessorCompletionAndResultDescriptorsMatched": 10
+  },
+  "plannedInputs": 2,
+  "plannedGameAttempts": 2,
+  "plannedOrderedCustomChecks": 52,
+  "gameAttempts": 0,
+  "evaluatedCustomChecks": 0,
+  "repairAdopted": false,
+  "nextRequired": "Checkpoint this closed failure and SOURCE publication, push and gh-verify exact OWN18 backup before narrow binding repair. Then checkpoint/verify repaired-source backup, fresh exact bindings and affected SOURCE before a new ordered phase chain. Never retry the closed run or transfer its SOURCE/phase authority to changed source.",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "limits": [
+    "Successful SOURCE and five phases do not pass failed Cook or supply final CODE/REQ acceptance.",
+    "No cooked/staged Game-runtime, rendering or empirical window observation is established.",
+    "Finite observations supply no universal all-byte delivery, comprehension, preservation, isolation, flush or continuous window-absence certificate.",
+    "No repair, retry, successor GO, Core action or acceptance is supplied by this record. Ordinary assertions remain fail-closed; OWN17 special assurance stays deferred/unproven.",
+    "Final CODE and a different REQ follow actual successful closed execution. Bounded A1E acceptance, prior failures, standing review consent and later migration gates remain unchanged.",
+    "This later factual overlay lies outside the reviewed head; auxiliary drafting supplies no authority."
+  ]
+}
