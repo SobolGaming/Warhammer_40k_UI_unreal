@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_E04_A1G_SOURCE_PREREQUISITE_PUBLICATION",
+  "status": "PASS_ADMITTED_SOURCE_PREREQUISITE_ONLY",
+  "sourceHead": "ea7de0c55f0a971e72ea0ce9c3384ab753845253",
+  "comparisonBase": "c2173ea2f71b63224bffeae833927f22f8b5d060",
+  "runId": "20261021T142446Z-ecbcbc8d",
+  "role": "E04_GAME_COMPONENT_SOURCE",
+  "admittedUtc": "2026-10-21T14:38:13.8109526Z",
+  "rootAdmission": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-ea7de0c-20261021T142454Z-c12653\\root-source-admission.original.json",
+    "bytes": 5642,
+    "sha256": "A723B52255D5D2D64311450B08F71250F440AD1EEADCD685E52782787CF7ABCA",
+    "tool": "630bc8"
+  },
+  "sourceFreezeManifest": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\common-ea7de0c-20261021T142446Z-ecbcbc8d\\runtime-freeze\\source-freeze-manifest.json",
+    "bytes": 213886,
+    "sha256": "0DF0EBA356ADA35E14963866A9A9CC57B7FF33013565C5E3D7BAE44466D0BF6E"
+  },
+  "normativeRequirement": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 19058,
+    "sha256": "3003D0D1C08AC01F85504A673A4D4B76C387739AE7E5FE82902E44DC04097605"
+  },
+  "report": {
+    "original": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-ea7de0c-20261021T142454Z-c12653\\last-message.txt",
+      "bytes": 1726,
+      "sha256": "544BB0312786C2CB75A53D48A19E6958A06FEBBF7F873FB58BA556E80F2FD825"
+    },
+    "publishedRelativePath": "docs/plans/research/2026-10-21-e04a-game-source-review-ea7de0c.md",
+    "exactBytesPreserved": true,
+    "rawVerdict": "PASS",
+    "actionableFindings": 0,
+    "coverage": "Reviewer-reported: 43 required whole files, 84 installed-source excerpts, 137 identities and 216 ranges/72 origins checked. No root all-byte delivery, source-consumption or semantic certificate."
+  },
+  "runtime": {
+    "sessionId": "01a15eda-6fae-7151-a20d-42235adc15dc",
+    "turnId": "01a15eda-7487-7451-9aa4-97ace9fd7c37",
+    "cliVersion": "0.163.0-alpha.10.2",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "contexts": 1,
+    "contextMismatchCount": 0,
+    "sandbox": "read-only",
+    "approvalPolicy": "never",
+    "memoryMode": "disabled",
+    "lowerMemoryFeatureEnforcement": "UNVERIFIED",
+    "resume": false,
+    "fork": false,
+    "exactPromptPlusOneCrlf": true,
+    "receivedUtf8Bytes": 5103,
+    "receivedSha256": "082C491804CBD9780DCACB062CDFE6CBAF079EE9AC5A8ECBF4EFAFB65FC3F7F9",
+    "selectedEvidence": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-ea7de0c-20261021T142454Z-c12653\\runtime-evidence.final.selected.json",
+      "bytes": 5224,
+      "sha256": "23085B652887AE72A6F907A1584B8ACAB93B16D258764F37C3E42B70EF44D890"
+    }
+  },
+  "reviewClosure": {
+    "workerPid": 25364,
+    "elapsedSeconds": 626.5536709,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "finalJobTotal": 324,
+    "finalJobActive": 0,
+    "processReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-ea7de0c-20261021T142454Z-c12653\\owned-job-receipt.json",
+      "bytes": 98798,
+      "sha256": "0D7E9B030B5620F8944ED227ED6AA189BE307B13CCAA2887E22A78BA8F876C75"
+    }
+  },
+  "beforeFirstBody": {
+    "rootRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-ea7de0c-20261021T142454Z-c12653\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 1852,
+      "sha256": "9594682F2B56B05C0A375AE9AAE8028530F4077CD9BED145EBF0A3F5CC2C7286"
+    },
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "frozenAndControlIdentities": 810,
+    "allMatched": true,
+    "order": "Actual foreground closure; raw seal; final extraction and actual console captures; selected seal; root rehash; first report/tool-value body.",
+    "sealAndRehashTool": "827b86",
+    "firstRootReportReadUtc": "2026-10-21T14:36:30.1504860Z",
+    "firstReadTool": "7848c6"
+  },
+  "conduct": {
+    "rootInspectedAllInputs": true,
+    "inputInspectionTools": [
+      "8964bb",
+      "9c5878",
+      "00ee01"
+    ],
+    "inputs": 42,
+    "outputs": 42,
+    "unmatchedInputs": 0,
+    "orphanOutputs": 0,
+    "clippedOutputOrdinals": [
+      1,
+      3,
+      5,
+      7,
+      34,
+      40
+    ],
+    "observed": "Inert source/metadata/hash/clock and permitted pinned read-only Git only. No helper, agent, network, connector, candidate, native, build, test, GUI or Core execution observed.",
+    "stderr": "Retained skill-icon and unsupported-PowerShell-snapshot warnings; no final rollout-flush warning observed.",
+    "limits": "Tools remained exposed. Identity/conduct checks do not certify all-byte delivery, source consumption, comprehension, universal completeness or isolation.",
+    "metadataInspectionTools": [
+      "31497c",
+      "d4d5c1"
+    ],
+    "diagnostics": "Ordinal 40 reported 6341 mismatches from untyped hashtable key lookups; typed ordinal 41 rerun reported zero problems. Both retained; these are reviewer-reported finite comparisons.",
+    "rootReadQualification": "After root console clipping, inputs 33-36 were re-read via 00ee01. All 42 inputs were inspected; this is separate from reviewer-output clipping."
+  },
+  "nativeScope": "Native results are outside this SOURCE-only publication. Each exact native phase requires separate root GO; this record grants no phase PASS, runtime acceptance or retroactive review of later metadata.",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "limits": "SOURCE prerequisite only: no build, cook, stage, native, graphics, installed-source/binary correspondence or migration acceptance. Historical failures remain unchanged; final fresh CODE and different REQ follow actual successful closed execution.",
+  "reviewConsent": "Perpetual private source/API review consent remains unchanged."
+}

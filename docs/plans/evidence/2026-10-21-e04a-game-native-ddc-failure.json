@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "CLOSED_E04_A1G_NATIVE_DDC_EVIDENCE_FAILURE_PUBLICATION_PROPOSAL",
+  "status": "CLOSED_NATIVE_DDC_EVIDENCE_FAILED_REPAIR_REQUIRED",
+  "recordedUtc": "2026-10-21T15:09:23.2056133Z",
+  "sourceHead": "ea7de0c55f0a971e72ea0ce9c3384ab753845253",
+  "comparisonBase": "c2173ea2f71b63224bffeae833927f22f8b5d060",
+  "runId": "20261021T142446Z-ecbcbc8d",
+  "sourcePrerequisite": "PASS_ADMITTED; reuse the three existing ea7de0c SOURCE publications with their unchanged raw report and qualifications.",
+  "sourcePublicationReuseDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-ea7de0c-publication-PROPOSED-20261021-61d9f7a4",
+  "passedPredecessorPhases": [
+    "Preflight",
+    "DependencyConfigure",
+    "DependencyBuild",
+    "EditorPrerequisiteBuild",
+    "GameBuild",
+    "Cook",
+    "Stage"
+  ],
+  "predecessorAdmissionStatus": "All seven PASS_ADMITTED for the exact source/run; result/completion/admission descriptors remain retained and are indexed by the exact root closure record.",
+  "totalActualSupervisedNativeRoots": 7,
+  "cookAndStage": {
+    "cookLooseFiles": 1048,
+    "cookBytes": 206699339,
+    "stageCopyRows": 2797,
+    "stageFiles": 2800,
+    "stageBytes": 1011088884,
+    "orderedRuntimeDependencyDeclarationsAndCopies": 995,
+    "stageCopyCorrespondence": "2718 EXACT_BYTES rows plus 79 qualified normal INI sanitization rows; this is not a content certificate."
+  },
+  "nativeFailure": {
+    "result": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T142446Z-ecbcbc8d\\phases\\native\\result.json",
+      "bytes": 80943,
+      "sha256": "E0D2B012EE80E5CD5216BAB01C3BADDBA763CB723782770B7FE0B78E15EE8D56"
+    },
+    "rawResultStatus": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "executionPassed": false,
+    "elapsedSeconds": 154.911915,
+    "primaryFailure": {
+      "stage": "Native",
+      "type": "System.Management.Automation.RuntimeException",
+      "message": "A1G_NATIVE_ACTUAL_OWNED_WRITABLE_DDC_REQUIRED"
+    },
+    "secondaryErrors": [],
+    "nativeMemberPresentInRawResult": false,
+    "gameLogDerivedDataCacheRows": 0,
+    "evidenceGap": "The required actual owned writable DDC evidence was not established from the retained Game log. This does not establish an alternative cache route or identify a runtime cache failure.",
+    "consolePrintedStatus": "FAIL_OR_UNIMPLEMENTED_OR_UNPUBLISHED",
+    "statusQualification": "Preserve the console label separately; the raw result status above is authoritative for this publication.",
+    "completionExists": false,
+    "retainedArtifactDescriptorsInRawResult": 71,
+    "previousPhaseRowsInRawResult": 7
+  },
+  "actualGameProcess": {
+    "receipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T142446Z-ecbcbc8d\\phases\\native\\a1g-native.process.json",
+      "bytes": 13680,
+      "sha256": "9689C75CEF235D7D9DBAB95732A19BE4FE453B61B42B0A09E1D1B6941ADC8188"
+    },
+    "pid": 38508,
+    "exitCode": 0,
+    "elapsedSeconds": 2.4866032,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "cleanupMode": "NaturalDrain",
+    "timedOut": false,
+    "shutdownRequests": [],
+    "finalJobTotal": 1,
+    "finalJobActive": 0
+  },
+  "rawGameResult": {
+    "descriptor": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T142446Z-ecbcbc8d\\reports\\game-probe\\result.json",
+      "bytes": 8287,
+      "sha256": "764F20DDB2C873E5160B6ED176C6C2D34FD758CB051C4E1F82C47CBFFF9D2D7C"
+    },
+    "status": "PASS",
+    "gameProcesses": 1,
+    "parserAttempts": 2,
+    "callback": "OnFEngineLoopInitComplete",
+    "callbackInvocationCount": 1,
+    "expectedCustomCheckCount": 52,
+    "evaluatedCustomCheckCount": 52,
+    "evaluatedAndPassedCheckRows": 52,
+    "completeOrderedCheckSet": true,
+    "qualification": "These are actual custom Game-check results, not a unit-test total or Native wrapper admission. Raw Game PASS remains preserved alongside the failed wrapper result."
+  },
+  "actualWindowObservation": {
+    "receiptSource": "actualGameProcess.receipt:ownedJobWindowObservation",
+    "status": "PASS_ZERO_OBSERVED",
+    "sampleCount": 7,
+    "periodicSamples": 4,
+    "failedSamples": 0,
+    "observedTopLevelVisibleWindowCount": 0,
+    "maximumStartToStartGapSeconds": 0.5634256000000001,
+    "continuousAbsenceEstablished": false,
+    "limits": "Zero OBSERVED owned top-level visible windows at the retained current-desktop samples. Brief inter-sample windows, other desktops/sessions, child-only/message-only windows and non-atomic PID/HWND races remain outside the claim; no graphical proof."
+  },
+  "outerClosure": {
+    "descriptor": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-intent-settings-repair-PROPOSED\\phase-execution-ea7de0c-20261021T142446Z-ecbcbc8d\\native.outer\\completion.original.json",
+      "bytes": 1639,
+      "sha256": "86D145121423F6A854C336468FAD6509029FEF12533374B820A8D4B3E9776DDA"
+    },
+    "hostPid": 36096,
+    "closedUtc": "2026-10-21T15:06:40.0739090Z",
+    "exitCode": 1,
+    "timedOut": false,
+    "exactRootTerminationRequested": false,
+    "fullStreamCopiesCompleted": true
+  },
+  "preservationAndFinalClosure": {
+    "rawFinallyArraysPresentAndNonNull": true,
+    "rawAfterCounts": { "source": 36, "stage": 36, "fixtures": 2, "settings": 9, "gameSettings": 1 },
+    "rootClosedRun": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-native-ddc-failure-PROPOSED\\root-closed-run.original.json",
+      "bytes": 13851,
+      "sha256": "DB48CE4DE5927B87EBDE8531843675F134B84A9920B2C3806F9782D682FB8892"
+    },
+    "independentCurrentObservations": {
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-native-ddc-failure-PROPOSED\\root-current-preservation-observations.original.json",
+        "bytes": 37949,
+        "sha256": "3D0A03033F4B881B3CF463888593B4BA7377EB6144BD6A536A4039753F2ED7C8"
+      },
+      "observedStates": 84,
+      "matched": 84,
+      "changed": 0,
+      "comparisonScope": "Raw before/after, Preflight baseline and independent current identities matched for 36 source, 36 stage, two fixture, nine settings and one Game-settings state."
+    },
+    "retainedArtifactRehashes": {
+      "priorDescriptorOccurrencesMatched": 281,
+      "failedNativeDescriptorsMatched": 71,
+      "qualification": "The 281 prior matches are descriptor occurrences, not a unique-artifact count."
+    },
+    "predecessorDescriptorsMatched": 14,
+    "qualification": "Finite selected identity observations at closure; no continuous preservation, universal file-content certificate or Native PASS is inferred."
+  },
+  "Audit": "NOT_RUN",
+  "auditDirectoryExists": false,
+  "repairAdopted": false,
+  "retryAuthority": false,
+  "successorGo": false,
+  "milestoneAccepted": false,
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "next": "Checkpoint/push/gh-verify OWN18 failure backup before any repair. A changed candidate requires repaired-source backup, fresh exact bindings and affected SOURCE before a new ordered phase chain. Final CODE/different REQ and A1G acceptance remain open.",
+  "unaffected": "Historical failures, both failed a00 deltas and separate exact settings recovery, bounded A1E acceptance and perpetual private source/API review consent remain unchanged."
+}
