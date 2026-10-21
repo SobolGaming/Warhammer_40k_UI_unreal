@@ -7,7 +7,23 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-The bounded E04-A1E proof is **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**
+The bounded E04-A1E proof is
+**FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**
+(revision 90). The [receipt](docs/plans/evidence/2026-10-21-e04a-shared-plugin-target-result.json)
+and [closure](docs/plans/research/2026-10-21-e04a-shared-plugin-target-closure.md)
+record focused SOURCE admission for `058deb1`, four phases PASS through
+DependencyBuild, then EditorBuild FAIL. UBT exit 6 rejected
+`bCompileWithPluginSupport: True != False` on shared UnrealEditor products before
+client/plugin C++ compile/link or parser load. Cleanup is confirmed, no timeout,
+final aggregate 2/0. The separate 30-object vendor build/one archive passed.
+Discovery/Native/Audit are NOT_RUN; parser attempts zero and 43/33/50/eight remain
+planned. All execution authority is closed. Checkpoint/push/verify OWN18 backup
+before reviewing a prospective target-setting removal; no repair is applied or
+proved here. Fresh bindings/affected SOURCE and ordered phases follow any adopted
+repair. OWN17/D-P2 stay deferred/unproven/fail-closed; final CODE/different REQ/A1E
+and later gates remain open, visible zero/Linux UNTESTED and consent unchanged.
+
+Historical revision 89 A1E status was **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**
 (revision 89). The bounded classifier and updated norm require exact stanza
 shapes/scanning OFF, one global raw occurrence per special name and one exact
 owner declaration; all other occurrences refuse. The truthful metadata kind/

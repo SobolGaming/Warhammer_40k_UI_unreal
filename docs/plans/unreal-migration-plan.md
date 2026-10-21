@@ -1,7 +1,7 @@
 # Python/Arcade client → Unreal Engine: 3D-first migration plan
 
 **Planning date / revision date:** 2026-10-02 / 2026-10-21 UTC
-**Revision:** 89 - UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING. Bounded exact-shape/cache-OFF/raw-occurrence classifier plus truthful metadata kind/consumer and updated norm adopted; existing guards/43-33-50-eight retained. AST/text checks only; no helper/control/native execution, fresh SOURCE PASS or acceptance. All eight fresh phases NOT_RUN; checkpoint/OWN18 backup, fresh bindings/affected SOURCE and corrected immutable primary grants precede ordered work. No old approval transfer.
+**Revision:** 90 - FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED. Focused SOURCE/root admission and first four phases PASS for `058deb1` / run `20261021T044229Z-e2488cb8`; EditorBuild FAIL on shared UnrealEditor plugin-support settings before client/plugin C++ compile/link or parser load. Discovery/Native/Audit NOT_RUN, parser attempts zero; closure/checkpoint/OWN18 backup precede any prospective target repair, fresh bindings/affected SOURCE and ordered native phases. No old approval transfer or A1E acceptance.
 **Scope decision:** D01 / SCOPE01 **APPROVED**: retain the separate authoritative Python rules engine; this campaign changes the client only.
 **Research status:** **RESEARCH_INCOMPLETE** — RQ01–RQ25 require evidence-backed closure or an explicit blocked disposition.
 **Execution authority:** OWN11 approved BOOT01 and OWN12 the filed Core HTTP diagnostic issue, with explicit actual-error/fidelity-gap policy. **OWN13 (2026-10-16) authorizes commit/push/PR/merge of the original plan/BOOT01 PR and continuation through the migration plan; later merges require applicable approval.** BOOT01 is complete; OWN14 covers the separately labelled 120-second diagnostic, historical revision4 supplement and revision6 guarded-command/fixture repairs; OWN15 adds the fresh three-role review gate. Sibling edits, new Core host implementation, platform exclusion and unreviewed broad feature work remain outside scope.
@@ -28,7 +28,27 @@ execution gates. [Closure and scope](research/2026-10-21-e04a-source-assurance-d
 
 These sibling links are navigation aids to mutable checkouts. Use the immutable revisions in the research evidence for claims. Do not edit either sibling or reset Core to an older pin. The original [Arcade migration plan](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md) remains unchanged and is historical; this imported file is canonical for new development. Imported from `Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73:docs/plans/migration/unreal-migration-plan.md`; original SHA256 `265972c1f38127ec147149d262412433e34a47069a0f7f6d6e3fafe50a9fa4d2`.
 
-### Revision 89 changes
+### Revision 90 changes
+
+Status is **FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**.
+The [receipt](evidence/2026-10-21-e04a-shared-plugin-target-result.json) and
+[closure](research/2026-10-21-e04a-shared-plugin-target-closure.md) bind source
+`058deb1168f61e8457fcdf7cee8a1be76bc315bf` / run `20261021T044229Z-e2488cb8`.
+Focused SOURCE/root admission and Preflight/SupervisorControls/Configure/
+DependencyBuild passed. EditorBuild failed in 42.2335898 seconds: UBT exit 6
+rejected `bCompileWithPluginSupport: True != False` on shared UnrealEditor products
+before client/plugin C++ compile/link or parser load. The earlier 30-object vendor
+build/one archive remains passed. Exit/cleanup are confirmed, no timeout, final
+aggregate 2/0; Rules retention is partial with the runtime witness absent and no
+EditorBuild completion. Discovery/Native/Audit are NOT_RUN, parser attempts zero;
+43/33/50/eight remain planned. Visible zero/Linux UNTESTED. All execution authority
+is closed. Checkpoint/push/verify OWN18 backup before reviewing the prospective
+target-setting removal; no repair is applied or proved here. Any adopted change
+requires fresh exact bindings/affected focused SOURCE and ordered native work.
+OWN17/D-P2 remain deferred/unproven/fail-closed; final CODE/different REQ/A1E and
+later gates stay open, and standing review consent is unchanged.
+
+### Revision 89 changes (historical)
 
 Status is **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](evidence/2026-10-21-e04a-unused-module-rule-repair.json)
@@ -1652,7 +1672,21 @@ D01 is closed by the owner; the former alternative core implementation workstrea
 
 ## 0. Codex handoff: finish research before implementation
 
-**Current assignment: checkpoint the bounded unused-module-rule classifier repair,
+**Current assignment: checkpoint the closed shared plugin target EditorBuild
+failure, push and verify OWN18 exact remote backup before reviewing the prospective
+target-setting removal; no repair is applied here.** Status is
+**FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**. The
+[receipt](evidence/2026-10-21-e04a-shared-plugin-target-result.json) records focused
+SOURCE/root admission and four phases PASS through DependencyBuild for `058deb1`.
+UBT refused a shared UnrealEditor `bCompileWithPluginSupport` mismatch before
+client/plugin C++ compile/link or parser load; EditorBuild FAIL, exit 6, cleanup
+confirmed/no timeout/final aggregate 2/0. Discovery/Native/Audit NOT_RUN, parser
+attempts zero, 43/33/50/eight planned. Any adopted repair needs fresh exact head/
+run/freeze/current bindings and affected focused SOURCE before ordered phases;
+old authority is closed/no approval transfer. OWN17/D-P2 deferred/unproven/
+fail-closed, final/later gates open, visible zero/Linux UNTESTED and consent unchanged.
+
+**Historical assignment (revision 89): checkpoint the bounded unused-module-rule classifier repair,
 push and verify OWN18 exact remote backup, then fresh exact head/run/freeze/
 current bindings and affected focused SOURCE before ordered native work.**
 Status is **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**. The
@@ -2116,7 +2150,9 @@ The current output status must be one of `RESEARCH_INCOMPLETE`, `READY_FOR_BOUND
 
 **2026-10-16 finding:** [Complete field/diagnostic/YAML inventory](research/2026-10-16-capability-checklist.md) and [total active/inactive/reject normalization](research/2026-10-16-parity-closure-design.md) finish source/design mapping. Immutable yaml-cpp0.9.0 evaluation candidate is56e3bb550c91fd7005566f19c079cb7a503223cf. E04 compiler/ABI/private-exception/corpus/render proof remains BLOCKED. No library adoption, compatibility PASS, silent dropped fields or new supported editor is implied.
 
-**Current status (revision 89):** **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-unused-module-rule-repair.json) records the bounded exact-shape/cache-OFF/one-global-raw-occurrence classifier and truthful metadata kind/consumer with updated norm; all other occurrences refuse and existing guards/43-33-50-eight remain. AST/text only, no helper/control/native runs or fresh SOURCE PASS; eight fresh phases NOT_RUN, failed runs closed/no approval transfer. Checkpoint/OWN18 backup/fresh bindings/affected SOURCE with corrected Ninja five excerpts/60 rows plus CMake 525 rows precede ordered work; installed-source provenance UNVERIFIED. OWN17/D-P2 deferred/unproven/fail-closed, final CODE/different REQ/A1E/later gates open, visible zero/Linux UNTESTED/consent unchanged.
+**Current status (revision 90):** **FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**. The [receipt](evidence/2026-10-21-e04a-shared-plugin-target-result.json) and [closure](research/2026-10-21-e04a-shared-plugin-target-closure.md) record focused SOURCE admission for `058deb1` / run `20261021T044229Z-e2488cb8`; Preflight/SupervisorControls/Configure/DependencyBuild PASS. EditorBuild failed in 42.2335898 seconds on the shared UnrealEditor `bCompileWithPluginSupport` mismatch, UBT exit 6 before client/plugin C++ compile/link or parser load. Exit/cleanup confirmed, no timeout, final aggregate 2/0; partial Rules retention/runtime witness absent/no completion. Discovery/Native/Audit NOT_RUN, parser attempts zero, 43/33/50/eight planned. Checkpoint/OWN18 backup before prospective target-setting review; no repair applied or proved. Fresh bindings/affected SOURCE and ordered native phases follow any adopted change. Authority closed/no approval transfer, OWN17/D-P2 deferred/unproven/fail-closed, final CODE/different REQ/A1E/later gates open, visible zero/Linux UNTESTED/consent unchanged.
+
+**Historical status (revision 89):** **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-unused-module-rule-repair.json) records the bounded exact-shape/cache-OFF/one-global-raw-occurrence classifier and truthful metadata kind/consumer with updated norm; all other occurrences refuse and existing guards/43-33-50-eight remain. AST/text only, no helper/control/native runs or fresh SOURCE PASS; eight fresh phases NOT_RUN, failed runs closed/no approval transfer. Checkpoint/OWN18 backup/fresh bindings/affected SOURCE with corrected Ninja five excerpts/60 rows plus CMake 525 rows precede ordered work; installed-source provenance UNVERIFIED. OWN17/D-P2 deferred/unproven/fail-closed, final CODE/different REQ/A1E/later gates open, visible zero/Linux UNTESTED/consent unchanged.
 
 **Historical status (revision 88):** **FOCUSED_SOURCE_PASSED_UNUSED_MODULE_RULE_CONFIGURE_FAILURE_CLOSED**. The [receipt](evidence/2026-10-21-e04a-unused-module-rule-configure-result.json) records SOURCE admission/Preflight/SupervisorControls PASS and Configure FAIL on unused response templates, with scanning OFF/30 unscanned edges/no actual response files/real Release ABI/scoped cleanup success. This is a wrapper/tool limitation; no component compile failure observed. Five later phases/native suites NOT_RUN, 43/33/50/eight planned, visible zero/Linux UNTESTED. Checkpoint/OWN18 backup before bounded classification repair (not applied), fresh bindings/affected SOURCE and ordered native work; no retry/old approval transfer. OWN17 deferred/unproven/fail-closed; final CODE/different REQ/A1E/later gates open and consent unchanged.
 
@@ -3521,7 +3557,9 @@ Retain separate preferences and composition files. Use a whitelist registry of w
 
 **Historical source finding (2026-10-16):** Candidate parser: **yaml-cpp 0.9.0**, evaluation pin `56e3bb550c91fd7005566f19c079cb7a503223cf` / tag `yaml-cpp-0.9.0`, MIT license. [Primary-source/ABI refresh](research/2026-10-16-bootstrap-and-native-parser.md) retrieved 2026-10-16. E04 must still verify Unreal compiler/runtime, private exception boundary and actual PyYAML6.0.3 corpus behavior; [normalization design](research/2026-10-16-parity-closure-design.md) specifies the mapping. No library was adopted, downloaded, built or installed. No third-party Unreal wrapper is required. Resolver/alias/duplicate/merge compatibility cannot be inferred from YAML branding.
 
-**Current status (revision 89):** **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-unused-module-rule-repair.json) records the bounded exact-shape/cache-OFF/one-global-raw-occurrence classifier and truthful metadata kind/consumer with updated norm; all other occurrences refuse and existing guards/43-33-50-eight remain. AST/text only, no helper/control/native runs or fresh SOURCE PASS; eight fresh phases NOT_RUN, failed runs closed/no approval transfer. Checkpoint/OWN18 backup/fresh bindings/affected SOURCE with corrected Ninja five excerpts/60 rows plus CMake 525 rows precede ordered work; installed-source provenance UNVERIFIED. OWN17/D-P2 deferred/unproven/fail-closed, final CODE/different REQ/A1E/later gates open, visible zero/Linux UNTESTED/consent unchanged.
+**Current status (revision 90):** **FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**. The [receipt](evidence/2026-10-21-e04a-shared-plugin-target-result.json) and [closure](research/2026-10-21-e04a-shared-plugin-target-closure.md) record focused SOURCE admission for `058deb1` / run `20261021T044229Z-e2488cb8`; Preflight/SupervisorControls/Configure/DependencyBuild PASS. EditorBuild failed in 42.2335898 seconds on the shared UnrealEditor `bCompileWithPluginSupport` mismatch, UBT exit 6 before client/plugin C++ compile/link or parser load. Exit/cleanup confirmed, no timeout, final aggregate 2/0; partial Rules retention/runtime witness absent/no completion. Discovery/Native/Audit NOT_RUN, parser attempts zero, 43/33/50/eight planned. Checkpoint/OWN18 backup before prospective target-setting review; no repair applied or proved. Fresh bindings/affected SOURCE and ordered native phases follow any adopted change. Authority closed/no approval transfer, OWN17/D-P2 deferred/unproven/fail-closed, final CODE/different REQ/A1E/later gates open, visible zero/Linux UNTESTED/consent unchanged.
+
+**Historical status (revision 89):** **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**. The [repair receipt](evidence/2026-10-21-e04a-unused-module-rule-repair.json) records the bounded exact-shape/cache-OFF/one-global-raw-occurrence classifier and truthful metadata kind/consumer with updated norm; all other occurrences refuse and existing guards/43-33-50-eight remain. AST/text only, no helper/control/native runs or fresh SOURCE PASS; eight fresh phases NOT_RUN, failed runs closed/no approval transfer. Checkpoint/OWN18 backup/fresh bindings/affected SOURCE with corrected Ninja five excerpts/60 rows plus CMake 525 rows precede ordered work; installed-source provenance UNVERIFIED. OWN17/D-P2 deferred/unproven/fail-closed, final CODE/different REQ/A1E/later gates open, visible zero/Linux UNTESTED/consent unchanged.
 
 **Historical status (revision 88):** **FOCUSED_SOURCE_PASSED_UNUSED_MODULE_RULE_CONFIGURE_FAILURE_CLOSED**. The [receipt](evidence/2026-10-21-e04a-unused-module-rule-configure-result.json) records SOURCE admission/Preflight/SupervisorControls PASS and Configure FAIL on unused response templates, with scanning OFF/30 unscanned edges/no actual response files/real Release ABI/scoped cleanup success. This is a wrapper/tool limitation; no component compile failure observed. Five later phases/native suites NOT_RUN, 43/33/50/eight planned, visible zero/Linux UNTESTED. Checkpoint/OWN18 backup before bounded classification repair (not applied), fresh bindings/affected SOURCE and ordered native work; no retry/old approval transfer. OWN17 deferred/unproven/fail-closed; final CODE/different REQ/A1E/later gates open and consent unchanged.
 
@@ -4333,7 +4371,18 @@ An independent plan reviewer should inspect source citations and challenge: unch
 
 **Approved:** client-only scope and retention of the external authoritative Python core (D01/SCOPE01). Core source changes, its internal roadmap and its retirement are outside the migration.
 
-**Ready now:** **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**.
+**Ready now:** **FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**.
+Checkpoint the [closure](research/2026-10-21-e04a-shared-plugin-target-closure.md)
+and [receipt](evidence/2026-10-21-e04a-shared-plugin-target-result.json), push and
+verify OWN18 exact remote backup before reviewing a prospective removal of the
+forced plugin-support target setting. No repair is applied or proved here.
+SOURCE/four phases PASS; EditorBuild FAIL, three later phases NOT_RUN, parser
+attempts zero, 43/33/50/eight planned. Fresh exact bindings/affected SOURCE precede
+ordered work after any adopted change; old authority is closed/no approval
+transfer. OWN17/D-P2 remain deferred/unproven/fail-closed; final/later gates open,
+visible zero/Linux UNTESTED and standing review consent unchanged.
+
+**Historical readiness (revision 89):** **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**.
 Checkpoint the [repair receipt](evidence/2026-10-21-e04a-unused-module-rule-repair.json),
 push/verify OWN18 backup, then fresh exact bindings/affected SOURCE with corrected
 Ninja five excerpts/60 rows and CMake 525 rows before ordered native phases.
@@ -4450,7 +4499,9 @@ approval, no successor GO exists and all eight native phases remain NOT_RUN.
 
 **Empirical limits:** BOOT01 proves Windows Editor compilation/UHT and IDE generation. E01-SLOW120 records bounded Python local/HTTP behavior and native fixture consumption. Current bounded E02 records completed Numeric4/17041 and WorldInput12/1133 with six rendered images; root's actual image observations remain implementer evidence, and final raw reports remain BLOCKED. It does not establish production Unreal HTTP transport, real-Core play, full HUD/profile feasibility, packaged Windows/Linux workflow, physical input/OS-focus switching, durable recovery or production performance. Same-effective-pixel round-trip accuracy is distinct from nominal fractional-point precision. E02 has nine real before/after settings states in Preflight/Build/Discovery/Numeric/WorldInput; SUP/Audit use predecessor evidence only. E01 had six. KnownDocuments provider/target/present-file branch and lower process/network internals remain unverified. These records do not repair historical `030835` or earlier E02 gaps. Core #588/#589/#590 and RISK19 remain open; original30-second FAIL/UNKNOWN is unchanged. SOURCE review, execution and auxiliary inspection do not supply final milestone acceptance.
 
-**Current progress (revision 89):** UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING. Bounded exact-shape/cache-OFF/one-global-raw-occurrence classifier/truthful metadata kind/consumer and updated norm adopted; 99 old functions/seven controls byte-identical, existing guards/43-33-50-eight retained. AST/text only, no helper/control/native run/current SOURCE PASS; eight fresh phases NOT_RUN, failures closed/no approval transfer. Checkpoint/OWN18 backup/fresh bindings/affected SOURCE with corrected Ninja five excerpts/60 rows plus CMake 525 rows precede ordered native. Installed-source provenance UNVERIFIED; OWN17/D-P2 deferred/unproven/fail-closed, final/later gates open, visible zero/Linux UNTESTED/consent unchanged.
+**Current progress (revision 90):** FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED. Focused SOURCE/root admission and four phases passed for `058deb1`; DependencyBuild compiled 30 vendor objects/one archive. EditorBuild failed before client/plugin C++ compile/link or parser load: UBT exit 6, shared UnrealEditor plugin-support setting mismatch, cleanup confirmed/no timeout/final aggregate 2/0; partial Rules retention/no completion. Discovery/Native/Audit NOT_RUN, parser attempts zero, 43/33/50/eight planned. Closure/checkpoint/OWN18 backup before prospective target-setting review (not applied); fresh bindings/affected SOURCE precede ordered work after any adopted repair. Authority closed/no approval transfer; OWN17/D-P2 deferred/unproven/fail-closed, final/later gates open, visible zero/Linux UNTESTED/consent unchanged.
+
+**Historical progress (revision 89):** UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING. Bounded exact-shape/cache-OFF/one-global-raw-occurrence classifier/truthful metadata kind/consumer and updated norm adopted; 99 old functions/seven controls byte-identical, existing guards/43-33-50-eight retained. AST/text only, no helper/control/native run/current SOURCE PASS; eight fresh phases NOT_RUN, failures closed/no approval transfer. Checkpoint/OWN18 backup/fresh bindings/affected SOURCE with corrected Ninja five excerpts/60 rows plus CMake 525 rows precede ordered native. Installed-source provenance UNVERIFIED; OWN17/D-P2 deferred/unproven/fail-closed, final/later gates open, visible zero/Linux UNTESTED/consent unchanged.
 
 **Historical progress (revision 88):** FOCUSED_SOURCE_PASSED_UNUSED_MODULE_RULE_CONFIGURE_FAILURE_CLOSED. SOURCE admitted e293ea0 (869.9143447 seconds, 61 pairs/zero anomalies); Preflight 30.934544 and SupervisorControls 51.8500308 seconds PASS. Configure 40.2610337 seconds FAIL on unused response templates, despite scanning OFF/30 unscanned edges/no actual response files/real Release ABI/scoped cleanup success, final 22/0. Wrapper/tool limitation, no component compile failure observed. Five later phases/native suites NOT_RUN, 43/33/50/eight planned, visible zero/Linux UNTESTED. Checkpoint/OWN18 backup before bounded classification repair (not applied), fresh bindings/affected SOURCE and ordered native; old authority closed/no approval transfer. OWN17 deferred/unproven/fail-closed, final/later gates open, consent unchanged.
 

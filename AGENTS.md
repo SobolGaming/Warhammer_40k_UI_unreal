@@ -78,7 +78,27 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-Current A1E status at plan revision 89 (2026-10-21 UTC) is
+Current A1E status at plan revision 90 (2026-10-21 UTC) is
+**FOCUSED_SOURCE_PASSED_SHARED_PLUGIN_TARGET_EDITORBUILD_FAILURE_CLOSED**. The
+[factual receipt](docs/plans/evidence/2026-10-21-e04a-shared-plugin-target-result.json)
+and [closure](docs/plans/research/2026-10-21-e04a-shared-plugin-target-closure.md)
+record admitted focused SOURCE for `058deb1` / run `20261021T044229Z-e2488cb8`
+and Preflight, SupervisorControls, Configure and DependencyBuild PASS. EditorBuild
+failed in 42.2335898 seconds: UBT exit 6 (`OtherCompilationError`) refused
+`bCompileWithPluginSupport: True != False` because the target shares UnrealEditor
+products. Exit/cleanup are confirmed, no timeout, final aggregate 2/0; this is a
+target-settings refusal before client/plugin C++ compile/link or parser load.
+The earlier 30-object vendor build/one archive remains passed. Rules retention is
+partial with the runtime witness absent; no EditorBuild completion exists.
+Discovery/Native/Audit are NOT_RUN, parser attempts zero; 43/33/50/eight remain the
+planned parser proof. Visible zero/Linux UNTESTED. All execution authority is
+closed/no approval transfer. Checkpoint/push/verify OWN18 backup before reviewing
+the prospective target-setting removal; no repair is applied here. Any adopted
+repair requires fresh exact bindings/affected SOURCE and ordered native phases.
+OWN17/D-P2 remain deferred/unproven/fail-closed; final CODE/different REQ/A1E and
+later gates stay open. Standing source/API review consent is unchanged.
+
+Historical A1E status at plan revision 89 (2026-10-21 UTC) is
 **UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING**. The
 [repair receipt](docs/plans/evidence/2026-10-21-e04a-unused-module-rule-repair.json)
 records the adopted bounded classifier/new truthful `unused-cmake-rule-metadata`
