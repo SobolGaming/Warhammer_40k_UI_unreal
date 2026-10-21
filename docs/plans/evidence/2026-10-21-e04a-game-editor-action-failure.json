@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_CLOSED_EDITOR_ACTION_EVIDENCE_FAILURE",
+  "status": "CLOSED_GAME_EDITOR_ACTION_EVIDENCE_FAILED_REPAIR_REQUIRED",
+  "asOfUtc": "2026-10-21T11:33:17.1686144Z",
+  "sourceHead": "71ce1311619f1948faad76027b3156179d61134d",
+  "comparisonBase": "8e9200758d56fb94e9beb9c9b6c7c3cb755fabf6",
+  "runId": "20261021T111548Z-2b6d9f0b",
+  "runStatus": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+  "authority": "CLOSED_NO_RETRY_NO_SUCCESSOR_GO",
+  "sourcePrerequisite": {
+    "status": "PASS_ADMITTED",
+    "rawVerdict": "PASS",
+    "exactHeadOnly": true,
+    "publicationReceipt": "docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-71ce131.json",
+    "note": "docs/plans/research/2026-10-21-e04a-game-source-prerequisite-71ce131.md",
+    "rawReport": "docs/plans/research/2026-10-21-e04a-game-source-review-71ce131.md",
+    "scope": "SOURCE prerequisite only; no approval transfer to a repaired candidate or acceptance of failed native phase"
+  },
+  "normativeRequirement": {
+    "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 16226,
+    "sha256": "C3D17762FDE8DCBFD2DE7287BF8D2A3AF668F5D0D0FE488F3A31A71A7A91929C"
+  },
+  "sourceFreezeManifest": {
+    "path": ".local/reviews/E04A1G-source-review/common-71ce131-20261021T111548Z-2b6d9f0b/runtime-freeze/source-freeze-manifest.json",
+    "bytes": 213097,
+    "sha256": "EB0C0F438B9B21CB9A0EFF873F65C7D2543301F311443961753A1B41EDB1DD80"
+  },
+  "sourceBindings": {
+    "wrapper": {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "bytes": 182340,
+      "sha256": "242A61112500129C661115F3C09B9F75DBC0BEA47B8128CABBAFDDAE9FE99770"
+    },
+    "rules": {
+      "path": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "bytes": 87636,
+      "sha256": "CD9C8424E543BD40A0FAE209837EE9EA2AFC0351ECF929BDC7F5F0786313D939"
+    }
+  },
+  "phaseStatuses": {
+    "Preflight": "PASS_ADMITTED",
+    "DependencyConfigure": "PASS_ADMITTED",
+    "DependencyBuild": "PASS_ADMITTED",
+    "EditorPrerequisiteBuild": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "GameBuild": "NOT_RUN",
+    "Cook": "NOT_RUN",
+    "Stage": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "predecessors": [
+    {
+      "phase": "Preflight",
+      "status": "PASS_ADMITTED",
+      "completion": {
+        "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/phases/preflight/completion.json",
+        "bytes": 771,
+        "sha256": "EBF3C520979F1A0FDA41E01A8DABCD66CA8262AF01A8EE2CBA6403AC49167728"
+      },
+      "result": {
+        "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/phases/preflight/result.json",
+        "bytes": 40631,
+        "sha256": "4F1CDB7AE6B565FF5E42453C8D1E5F666C4F76D9332110BAC9AF2F92E1F7C722"
+      }
+    },
+    {
+      "phase": "DependencyConfigure",
+      "status": "PASS_ADMITTED",
+      "completion": {
+        "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/phases/dependencyconfigure/completion.json",
+        "bytes": 792,
+        "sha256": "C65513AB6D8AEFDCD27B6598854EDCED948E70423FF40474C8027584DF9FCD8A"
+      },
+      "result": {
+        "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/phases/dependencyconfigure/result.json",
+        "bytes": 169078,
+        "sha256": "BE24EF7CC3A6B58F4ACF6BBDF199FC7404BA615BFC508D9AB34CE0EF51E0F10D"
+      }
+    },
+    {
+      "phase": "DependencyBuild",
+      "status": "PASS_ADMITTED",
+      "completion": {
+        "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/phases/dependencybuild/completion.json",
+        "bytes": 784,
+        "sha256": "1690AEBB9AEA34BEC8CF7BF51AA4A3FE7969650EC85E0660C10E1E03F2C96791"
+      },
+      "result": {
+        "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/phases/dependencybuild/result.json",
+        "bytes": 180079,
+        "sha256": "CBB19C99F97212853B87BBA82DA63937AF26443059DA2186F464D13B9CA72E2A"
+      }
+    }
+  ],
+  "failedPhase": {
+    "phase": "EditorPrerequisiteBuild",
+    "status": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "executionPassed": false,
+    "startedUtc": "2026-10-21T11:29:39.2874305Z",
+    "completedUtc": "2026-10-21T11:32:15.6280191Z",
+    "elapsedSeconds": 159.4688456,
+    "primaryFailure": {
+      "stage": "EditorPrerequisiteBuild",
+      "type": "System.Management.Automation.RuntimeException",
+      "message": "A1G_UNIQUE_REAL_BUILD_ACTION_NOT_OBSERVED"
+    },
+    "secondaryErrorCount": 0,
+    "completionAbsent": true,
+    "result": {
+      "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/phases/editorprerequisitebuild/result.json",
+      "bytes": 71584,
+      "sha256": "7E65BBC682B2CC6D8A6543241322699457EA02CB49350B57F93AE3ECBCDB6B57"
+    }
+  },
+  "nativeUbt": {
+    "status": "PASS",
+    "pid": 41432,
+    "elapsedSeconds": 57.7511418,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "resultLine": "Result: Succeeded",
+    "loggedExecutionSeconds": 57.51,
+    "loggedActionCount": 16,
+    "finalJobTotalProcesses": 38,
+    "finalJobActiveProcesses": 0,
+    "receipt": {
+      "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/phases/editorprerequisitebuild/a1g-editor-prerequisite.process.json",
+      "bytes": 13332,
+      "sha256": "79E569BF414C15A59D9A65F5E533B9D5E306238300B4162907C24336BE28E12C"
+    },
+    "stdout": {
+      "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/logs/a1g-editor-prerequisite.stdout.log",
+      "bytes": 3050,
+      "sha256": "5E7CB45D931DBD8556E45229861341D674D3CA1F7036998E47F817A936CBA0E3"
+    },
+    "textLog": {
+      "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/logs/editorprerequisitebuild.log",
+      "bytes": 12770,
+      "sha256": "6105F15F60BE95194CBD6B984D9EBE925723D16B336F26405D628755AAB1B11C"
+    },
+    "jsonLog": {
+      "path": ".local/experiments/E04A1G/20261021T111548Z-2b6d9f0b/logs/editorprerequisitebuild.json",
+      "bytes": 40799,
+      "sha256": "958C28DE0F994793CF677DDA3AB5C31A1DC4396B9501AA119D4B66234F85A733"
+    },
+    "meaning": "Native compiler/link process succeeded; wrapper evidence assertion subsequently failed. This does not establish EditorPrerequisiteBuild PASS."
+  },
+  "retainedCompilerWarnings": [
+    {
+      "code": "C4701",
+      "source": "Source/WarhammerClient/Private/Tests/E02WorldInputTests.cpp",
+      "line": 273,
+      "variable": "Pixel",
+      "message": "potentially uninitialized local variable 'Pixel' used"
+    },
+    {
+      "code": "C4701",
+      "source": "Source/WarhammerClient/Private/Migration/E02WorldProofGameMode.cpp",
+      "line": 544,
+      "variable": "Origin",
+      "message": "potentially uninitialized local variable 'Origin' used"
+    }
+  ],
+  "actionEvidenceGap": {
+    "classification": "OBSERVED_OUTPUT_FORM_AND_SOURCE_MATCHER_MISMATCH",
+    "observedCompile": "[12/16] Compile [x64] WarhammerClient.cpp [NoUba]",
+    "observedLink": "[15/16] Link [x64] UnrealEditor-WarhammerClient.dll [NoUba]",
+    "wrapperSymbol": "Require-A1GBuildAction",
+    "wrapperLine": 1153,
+    "sourceObservation": "The existing anchored pattern expects whitespace/end-of-line after the exact basename; actual retained compile/link actions append the literal [NoUba] suffix.",
+    "scope": "Root confirmed the source/output mismatch. Auxiliary installed-source explanation is not a formal review or phase PASS. No source repair is adopted in this failure checkpoint."
+  },
+  "outerClosure": {
+    "pid": 22224,
+    "exitCode": 1,
+    "exitConfirmed": true,
+    "timedOut": false,
+    "rootKillRequested": false,
+    "streamsDrained": true,
+    "receipt": {
+      "path": ".local/planning/E04/A1G-phase-closure-repair-PROPOSED/phase-execution-71ce131-20261021T111548Z-2b6d9f0b/editorprerequisitebuild.outer/completion.original.json",
+      "bytes": 1693,
+      "sha256": "B81763E2FFD749CB57A03628B26AEDF4EADA42E128AED59ED462E751DF151AA0"
+    }
+  },
+  "rootFinitePreservation": {
+    "source": 36,
+    "stage": 36,
+    "fixtures": 2,
+    "settings": 9,
+    "gameSettings": 1,
+    "selectedCurrentMemberStatesMatched": 84,
+    "retainedArtifactsMatched": 47,
+    "predecessorDescriptorsMatched": 6,
+    "rootObservationTool": "9f66ea",
+    "rootClosedRecord": {
+      "path": ".local/planning/E04/A1G-editor-action-failure-PROPOSED/root-closed-run.original.json",
+      "bytes": 4017,
+      "sha256": "726293022A24416A0FBF993D5DF330C558F2291B7E9D23B27D725A0CE26C8671"
+    },
+    "limits": "Finite actual closed observations only; no continuous preservation, Rules certificate, reconstruction of omitted observations or promotion of the failed phase."
+  },
+  "auxiliaryFiniteAudit": {
+    "receipt": {
+      "path": ".local/planning/E04/A1G-editor-action-failure-PROPOSED/closed-71ce131-finite-preservation.audit.original.json",
+      "bytes": 73551,
+      "sha256": "E8AEFC362CF84888E316746A61A429FB648CFF4AE0CE3E4E8EC6BBE0C6E391A3"
+    },
+    "currentStatesMatched": 84,
+    "fourPhaseRecordedBeforeAfterSnapshotObservations": 672,
+    "settingsPresent": 4,
+    "settingsAbsent": 5,
+    "gameSettingsAbsent": true,
+    "retainedArtifactsMatched": 47,
+    "predecessorDescriptorsMatched": 6,
+    "embeddedRawProcessPropertiesMatched": true,
+    "limits": "Auxiliary reported checks of retained/current identities, separately distinguished from root finite 84-state checks; no new phase PASS, live descendant inventory or continuous preservation claim."
+  },
+  "remainingPhases": 5,
+  "gameAttempts": 0,
+  "evaluatedCustomChecks": 0,
+  "repairAdopted": false,
+  "nextRequired": "Checkpoint this closed failure and SOURCE publication, push and gh-verify exact OWN18 remote backup before narrow source repair. Then checkpoint/verify repaired-source backup, derive fresh exact bindings and obtain fresh affected SOURCE before a new ordered phase chain. Never retry the closed run or transfer its SOURCE admission to changed source.",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "standingReviewTransmissionConsent": "APPROVED_UNTIL_EXPLICIT_HUMAN_REVOCATION_WITHIN_ESTABLISHED_SCOPE_AND_DESTINATION",
+  "limits": [
+    "Compiler success and SOURCE admission do not pass a failed wrapper evidence gate or supply final CODE/REQ acceptance.",
+    "No successor GO, retry, new run, repair execution, GUI interaction, Core-host action or Core error issue is supplied by this record.",
+    "Final CODE and a different REQ follow actual successful closed execution; A2, full fidelity/HUD, Linux and migration acceptance remain open.",
+    "OWN17 optional harness/generated-response/transitive Rules/cache/witness/repeated certification stays deferred and unproven. Ordinary runtime assertions remain fail-closed; no optional harness campaign is required.",
+    "This later factual metadata/report overlay is outside the exact reviewed candidate. Bounded A1E acceptance and all historical raw failures, including 553dc39 SOURCE FAIL and 3201552 DependencyBuild failure, remain unchanged.",
+    "Auxiliary metadata drafting performs no canonical/sibling edits, Git operation, test/runtime/review execution or authority admission."
+  ]
+}

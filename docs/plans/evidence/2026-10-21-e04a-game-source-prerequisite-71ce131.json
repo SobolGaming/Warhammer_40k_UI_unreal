@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_SOURCE_PREREQUISITE_PUBLICATION",
+  "scope": "SOURCE only, as of root admission; subsequent native execution is outside this record",
+  "asOfUtc": "2026-10-21T11:26:04.0547408Z",
+  "status": "PASS_ADMITTED",
+  "rawVerdict": "PASS",
+  "sourceHead": "71ce1311619f1948faad76027b3156179d61134d",
+  "comparisonBase": "8e9200758d56fb94e9beb9c9b6c7c3cb755fabf6",
+  "runId": "20261021T111548Z-2b6d9f0b",
+  "role": "E04_GAME_COMPONENT_SOURCE",
+  "sessionId": "01a15e2d-5a16-7a53-a431-d5583be87956",
+  "turnIds": [
+    "01a15e2d-5bfc-79b3-bd93-aa5fc1b171e9"
+  ],
+  "normativeRequirement": {
+    "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 16226,
+    "sha256": "C3D17762FDE8DCBFD2DE7287BF8D2A3AF668F5D0D0FE488F3A31A71A7A91929C"
+  },
+  "sourceFreezeManifest": {
+    "path": ".local/reviews/E04A1G-source-review/common-71ce131-20261021T111548Z-2b6d9f0b/runtime-freeze/source-freeze-manifest.json",
+    "bytes": 213097,
+    "sha256": "EB0C0F438B9B21CB9A0EFF873F65C7D2543301F311443961753A1B41EDB1DD80"
+  },
+  "reviewProcess": {
+    "cliVersion": "0.163.0-alpha.10.2",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "modelOverride": null,
+    "freshExec": true,
+    "resume": false,
+    "fork": false,
+    "contextCount": 1,
+    "turnCount": 1,
+    "contextRequirementMismatchCount": 0,
+    "actualSandbox": "read-only",
+    "actualApprovalPolicy": "never",
+    "serializedMemoryMode": "disabled",
+    "featureAndLowerMemoryEnforcement": "UNVERIFIED",
+    "helperAndConnectorCapabilities": "EXPOSED; NO USE OBSERVED IN RETAINED CONDUCT",
+    "receivedPromptPlusExactlyOneCrlf": true,
+    "actualPromptUtf8Bytes": 5101,
+    "receivedPromptUtf8Bytes": 5103,
+    "receivedPromptSha256": "7DF9D9CD647A47D8D06CA7941A437CD14ECA6F488843FEA4444D1D45864609D0",
+    "rootPid": 28752,
+    "creationUtc": "2026-10-21T11:16:31.9400987Z",
+    "exitUtc": "2026-10-21T11:24:21.4334380Z",
+    "elapsedSeconds": 469.5403398,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "primaryFailure": null,
+    "secondaryErrorCount": 0,
+    "finalJobTotalProcesses": 295,
+    "finalJobActiveProcesses": 0,
+    "actualForegroundClosureUtc": "2026-10-21T11:24:30.4156297Z",
+    "foregroundSupervisorPid": 23548,
+    "foregroundExitCode": 0
+  },
+  "evidenceOrdering": {
+    "sequence": [
+      "Actual foreground closure",
+      "Raw 12-member seal",
+      "Final runtime and complete tool extraction",
+      "Selected 8-member seal",
+      "Independent root rehash of both seals and 774 unique frozen/control identities",
+      "First root report/tool-value body inspection",
+      "Root SOURCE admission"
+    ],
+    "rawSealCreatedUtc": "2026-10-21T11:24:36.4229358Z",
+    "rawMemberCount": 12,
+    "selectedSealCreatedUtc": "2026-10-21T11:24:52.1993305Z",
+    "selectedMemberCount": 8,
+    "independentRootRehashUtc": "2026-10-21T11:24:57.3472661Z",
+    "uniqueFrozenAndControlIdentities": 774,
+    "allComparedDescriptorsMatched": true,
+    "allRehashedBeforeFirstReportOrToolValueBody": true,
+    "firstRootReportReadUtc": "2026-10-21T11:25:04.3284914Z",
+    "beforeBodyToolChunk": "dff71a",
+    "firstReadToolChunk": "468cf1",
+    "initialSelectorConsole": "ACTUAL CAPTURE RETAINED",
+    "initialSelectorConsoleBytes": 528,
+    "initialSelectorConsoleSha256": "F3ADE2BD85B0356A13979A317D83A34FCBE2CDE0918919290A9E8785D45DF7BE"
+  },
+  "conduct": {
+    "retainedToolInputs": 39,
+    "retainedToolOutputs": 39,
+    "unmatchedInputIds": 0,
+    "orphanOutputIds": 0,
+    "rootInspectedAll39Inputs": true,
+    "rootInputInspectionToolChunks": [
+      "9e6797",
+      "2fdf64"
+    ],
+    "observed": "Inert source/metadata/hash/clock and permitted pinned read-only Git only; no helper/agent/network/connector/candidate/native/build/test/GUI/Core execution observed",
+    "wholeArcadeInstructionGrant": "EXPLICIT",
+    "gitattributesWholeGrant": "EXPLICIT",
+    "outputClipMarkerInputOrdinals": [
+      1,
+      2,
+      5,
+      28,
+      29
+    ],
+    "reviewerReportedCoverage": "42 required whole-file bodies and relevant granted installed excerpts; 115 whole-body grant hashes and 34 required tracked-file SourceHead matches; no final identity drift",
+    "limitations": "Coverage is reviewer-reported. Clipping markers and targeted later reads are retained. No all-byte delivery, consumption, comprehension or universal isolation claim."
+  },
+  "standingTransmissionConsent": {
+    "status": "APPROVED_UNTIL_EXPLICIT_HUMAN_REVOCATION",
+    "destination": "Configured OpenAI Codex service using existing sign-in",
+    "scope": "Necessary private source/API, requirements, metadata and factual evidence for migration reviews",
+    "excluded": [
+      "Credentials and token bytes",
+      "Unrelated private sessions/configuration",
+      "Author discussions and peer verdict/findings bodies in blind initial review inputs"
+    ],
+    "bytes": 927,
+    "sha256": "1DA9A9275DA640BA5377507E7E29F33494DA210ECDA39B04C34552DF7CA05D46",
+    "executionPublicationMergeAuthority": false
+  },
+  "retainedArtifacts": {
+    "rawReport": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/last-message.txt",
+      "bytes": 2581,
+      "sha256": "DDE4D37927761492917D8E989E56590FABC190210C61BDE16F3CF5AF39FA3368"
+    },
+    "rootAdmission": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/root-source-admission.original.json",
+      "bytes": 5098,
+      "sha256": "F6D6E4231D30A223E457732F983C0D9CB11F9D39C155FEF9C2EE969E559B9B69"
+    },
+    "rootFirstBodyRead": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/root-first-body-read.original.json",
+      "bytes": 310,
+      "sha256": "054394699CEEDDF3974E442D17D794348DF3A997CAEB7CD7FBD270BB3B06E3B3"
+    },
+    "rootBeforeBodyRehash": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/root-independent-before-first-body-rehash.original.json",
+      "bytes": 1852,
+      "sha256": "04818BA5729D1B028C98B323446E2D6EDB592220493CE72D35F0E81CF069F299"
+    },
+    "rawSeal": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/closed-raw-output-seal.before-body.original.json",
+      "bytes": 4920,
+      "sha256": "F921D6B32D40003F091676D2E314F94F09B5640C92D1DC1574DEE1C05AF47A3C"
+    },
+    "selectedSeal": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 3996,
+      "sha256": "62844C57AA8E2D6C1F15B24E4D68F1D4175D036ABCAA957F70B61379F9A3CDA1"
+    },
+    "finalRuntime": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/runtime-evidence.final.selected.json",
+      "bytes": 5224,
+      "sha256": "EFECBE435EC93511323CF634C4B2B36A92AAC4A624DEC02C39D87A4DE58B102B"
+    },
+    "actualInputs": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/actual-tool-input-ledger.json",
+      "bytes": 36201,
+      "sha256": "AEE69A619343B295E8644AAC6CEDB221FA7FC37B2361BB27FC1FC35CD2601F5E"
+    },
+    "completeTrace": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/actual-complete-tool-input-output-ledger.json",
+      "bytes": 1138985,
+      "sha256": "4C7778C7FFBE6A13F6040B06DBD1E6297AAF9585950A5A1E0BD257A5724562C4"
+    },
+    "ownedJob": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/owned-job-receipt.json",
+      "bytes": 90872,
+      "sha256": "9B19B7B43AE28045236BF9E89949935CC87103FB79F32DE04C3DF6040762EB4F"
+    },
+    "foregroundClosure": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/root-observed-foreground-completion.original.json",
+      "bytes": 367,
+      "sha256": "E6377A10DD69BB0ECE62215BF41201E09FED1E3777F48F3298B75694D007DD8B"
+    },
+    "initialSelectorConsole": {
+      "path": ".local/reviews/E04A1G-source-review/source-71ce131-20261021T111607Z-54c245/runtime-initial-selector.console.original.txt",
+      "bytes": 528,
+      "sha256": "F3ADE2BD85B0356A13979A317D83A34FCBE2CDE0918919290A9E8785D45DF7BE"
+    }
+  },
+  "limits": [
+    "SOURCE prerequisite only. This publication records no subsequent phase, compilation, runtime, graphics, installed-source/binary correspondence, migration acceptance or final CODE/REQ result.",
+    "Each exact native phase requires its own ordered root GO. Native status is intentionally not restated here; execution evidence belongs in a separate closure record.",
+    "OWN17 special harness/generated-response/transitive Rules/cache/witness/repeated certification remains DEFERRED_UNPROVEN; ordinary runtime assertions remain fail-closed.",
+    "Visible authority remains zero. Linux remains UNTESTED. Bounded A1E acceptance and prior raw failures, including 553dc39 SOURCE FAIL and 3201552 DependencyBuild failure, remain unchanged.",
+    "This factual publication is a later metadata/report overlay outside the exact reviewed candidate. The auxiliary preparation of these drafts supplies no gate approval."
+  ]
+}
