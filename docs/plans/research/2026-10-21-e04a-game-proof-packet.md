@@ -81,8 +81,9 @@ Rules/cache/witness branch. Receipt status is not final preservation or flags.
 ## Run, phases and bounds
 
 R is fresh absolute no-space `.local/experiments/E04A1G/<RunId>`;
-PROJECT=R/project/WarhammerClient.uproject. Own all outputs under R; reject escape/
-reparse paths. No sibling/Core writes, Python host, service/tool installation,
+PROJECT=R/project/WarhammerClient.uproject. Own all outputs under R except the
+finite normal per-user UBT trace exception below; reject every other output escape/
+reparse path. No sibling/Core writes, Python host, service/tool installation,
 remote shader compiler, deploy/distribution or unowned persistent process.
 
 Keep phase evidence at `R/phases/<phaseLower>` (process receipt/result/completion),
@@ -200,6 +201,105 @@ retaining exact case-sensitive string keys, nested array order/cardinality, scal
 JSON types/values, Boolean values and null distinctions. Preserve empty and
 singleton arrays as arrays. Do not lowercase keys/paths, reorder arrays or coerce
 scalar values to make preservation or predecessor joins pass.
+
+## Finite normal per-user UBT trace output exception
+
+Permit only the normal trace/backup writes of the two sequential owned UBT roots
+EditorPrerequisiteBuild and GameBuild in this one freshly bound proof. This is an
+explicit external-output exception, not an owned-path or total UserDir-isolation
+claim. Other phases receive no trace-writing exception. All source, settings,
+process, stream, deadline and other output restrictions remain unchanged.
+
+Require the actual Windows execution account's normal known LocalApplicationData
+route to resolve to the exact directory below, with plain non-reparse ancestry:
+
+    C:\Users\Rabid\AppData\Local\UnrealBuildTool
+
+Before either UBT root, reject actual IsBuildMachine.Trim()==1 without changing
+that environment setting. Preserve the normal installed-engine selection: freeze
+and recheck the exact six-byte Engine/Build/InstalledBuild.txt marker under the
+pinned engine. Retain its descriptor as identity-only, with no trace-root spoof
+or installed-marker change. Require the ordinary non-build-machine trace route.
+
+Allow only Trace.uba and directly contained backup basenames matching this
+case-sensitive whole-name predicate:
+
+    ^Trace-backup-\d{4}\.\d{2}\.\d{2}-\d{2}\.\d{2}\.\d{2}\.uba$
+
+The exact trace path is
+C:\Users\Rabid\AppData\Local\UnrealBuildTool\Trace.uba. Creation of only that
+UnrealBuildTool directory is allowed if absent and its known parent already
+exists. Do not create, rename, delete, restore or modify unrelated global paths.
+Do not spoof LocalAppData/UserDir/IsBuildMachine or installed-engine detection,
+change engine binaries/source, or silently restore global trace files.
+
+Before UBT can start, enumerate directory names nonrecursively and evaluate the
+installed BackupLogFile pruning predicate exactly (case-sensitive IsMatch):
+
+    Trace-backup-\d\d\d\d\.\d\d\.\d\d-\d\d\.\d\d\.\d\d.uba
+
+That source predicate is unanchored and its extension dot is unescaped. Refuse if
+any matching basename is outside the exact whole-name allowed family. Such a
+name is not permission to broaden the exception or read its body. Eligible files
+must be plain regular files; refuse unavailable/ambiguous/reparse observations.
+
+With the inspected initial defaults, a missing Trace.uba skips backup pruning.
+A present trace causes descending-filename retention of the newest nine matching
+backups, deletion of older matches, then a move of Trace.uba to an unused
+Trace-backup-yyyy.MM.dd-HH.mm.ss.uba name. The timestamp begins with that trace's
+UTC creation time and advances by seconds until unused. The move does not
+overwrite a backup. A later normal trace write replaces the current Trace.uba
+role. Command-line backup options parsed after this operation do not establish
+control over it; neither -NoUBA nor -UBARootDir is a global trace selector. Do not
+claim the declared -UBATraceOutputFile option selects this installed global path.
+
+Preflight establishes the actual prebaseline before any UBT child. Every phase
+retains before/after existence, eligible membership, sizes, SHA256 and available
+UTC creation/last-write times. Require each phase's before-state to match its
+last closed predecessor's after-state; non-UBT phases require unchanged before/
+after state. Final Audit retains its own observations. No later reconstruction
+substitutes for a missing before-state.
+
+Before each permitted UBT root, preserve every present eligible file in a fresh
+owned recovery location under R and verify copied size/hash against stable live
+bytes before launch. Retain verified owned after-state copies following complete
+supervised root closure. Preflight/final Audit also retain recoverable observed
+bytes. An unchanged observation may explicitly reference an already verified
+immutable owned copy of identical bytes; a nested descriptor alone is not proof
+of copying. Recheck live identities immediately before starting UBT.
+
+At each observation cap the eligible family at32 files, each16 MiB,64 MiB total
+(1 MiB=1048576 bytes). Check prelaunch caps before the writer starts. After-state
+cap/observation/copy failures fail the phase and preserve existing recovery and
+process evidence. These are finite capture/boundary checks, not live disk quotas.
+
+Retain an explicit created/changed/moved/deleted delta and source-to-owned-copy
+mapping. Reconcile it to the normal backup/pruning behavior: surviving prior
+backups keep their bytes; a new backup corresponds to preceding Trace.uba bytes;
+removed/replaced prior bytes remain recoverable in verified owned copies. A
+missing prior trace does not permit backup pruning. Require the retained actual
+stdout trace destination for each UBT root to resolve to the authorized Trace.uba
+path; missing, ambiguous or unexpected destination fails. Argv intent alone is
+insufficient. Retain the after-state rather than silently undoing normal changes.
+
+Run the two UBT roots sequentially, with no concurrent intentional desktop UBT
+build. Record that exclusivity assumption and actual finite process observations;
+these do not establish a filesystem lock or universal writer attribution.
+Unexpected family changes fail closed. Keep trace bodies opaque to initial
+reviewers unless separately screened and explicitly granted; never infer a body
+grant from recovery descriptors or include unrelated historical trace bodies.
+
+After positive affected SOURCE admission, run the focused pure-data regression
+controls in scripts/migration/tests/Test-E04A1GTracePolicy.ps1 against the exact
+frozen wrapper. Require every declared case to pass. These controls cover finite
+rotation/collision/refusal examples only; they neither touch live trace files nor
+replace actual capture, recovery, build or Audit evidence.
+
+Bind the direct installed-source path/backup logic below and actual tool/source
+identities. Source inspection is not installed-binary correspondence. Managed
+Trace_Destroy routing does not establish native partial-write/error behavior,
+universal preservation/write absence or OWN17 assurance. Preserve all other
+settings comparisons and the separate Native/Audit DDC retention requirements.
 
 ## Preservation and Game settings
 
@@ -321,6 +421,16 @@ Editor/UnrealEd/Public/Settings/EditorSettings.h:56-59;
 Editor/UnrealEd/Private/Settings/EditorSettings.cpp:60-65,138-139;
 Editor/UnrealEd/Private/EditorEngine.cpp:1033-1034,5861-5894;
 Runtime/CoreUObject/Private/UObject/Obj.cpp:549-552;
-Runtime/Core/Private/Windows/WindowsPlatformProcess.cpp:2686-2708.
+Runtime/Core/Private/Windows/WindowsPlatformProcess.cpp:2686-2708;
+Programs/UnrealBuildTool/UnrealBuildTool.cs:206-249,351-352;
+Programs/Shared/EpicGames.Build/Unreal.cs:193-214,250-258,485-510;
+Programs/UnrealBuildTool/Executors/ExecutorFactory.cs:23-59;
+Programs/UnrealBuildTool/Executors/UnrealBuildAccelerator/UBAExecutor.cs:312-316,366-371;
+Programs/UnrealBuildTool/Executors/UnrealBuildAccelerator/UnrealBuildAcceleratorConfig.cs:173-178,216-221;
+Programs/Shared/EpicGames.Core/Logging/Log.cs:169-180,230-275;
+Programs/Shared/EpicGames.Core/FileReference.cs:361-374;
+Programs/Shared/EpicGames.UBA/Impl/TraceImpl.cs:42-58,71-86.
+Installed marker identity-only: C:/Program Files/Epic Games/UE_5.8/Engine/Build/InstalledBuild.txt
+(exact six bytes; freeze/recheck its current size/hash, no BODY grant).
 Refresh identities; bind adopted target/caller/plugin/vendor/public headers/
 wrapper/validators/observer. Source alone is not installed-binary correspondence.

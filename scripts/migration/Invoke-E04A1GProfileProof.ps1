@@ -786,6 +786,11 @@ function Invoke-A1GRoot([string]$Label,[string]$Executable,[string[]]$Arguments,
     try{
         $envs=Child-Environment $Extra;$cleanup=$Phase -in @('DependencyConfigure','DependencyBuild')
         if($cleanup -and $script:Freeze.cmakePostSuccessfulRootCleanup -ne $true){throw 'A1G_CMAKE_SCOPED_CLEANUP_NOT_EXPLICITLY_SELECTED'}
+        if($Phase -cin @('EditorPrerequisiteBuild','GameBuild')){
+            Check-A1GUbtTraceRecovery $script:Result.ubtTrace.before $script:Result.ubtTrace.beforeRecovery $Phase 'before'
+            $script:Result.ubtTrace.immediatePrelaunch=Get-A1GUbtTraceState
+            Check-A1GUbtTraceUnchanged $script:Result.ubtTrace.before $script:Result.ubtTrace.immediatePrelaunch 'trace immediately before UBT launch'
+        }
         $seconds=[Math]::Min($script:Budgets[$Phase],(Phase-Budget));if($seconds -lt 3){throw 'A1G_PHASE_BUDGET_EXHAUSTED'}
         $script:RootCount++
         $record=[Warhammer.E02.Supervisor]::Run($exe,$Arguments,$cwd,$envs,$out,$err,$seconds,$false,'',$cleanup)
@@ -893,6 +898,155 @@ function Build-Dependency {
 }
 function Ubt-Arguments([string]$Target){
     @($script:Freeze.toolPaths.ubt,$Target,'Win64','Development',('-Project='+(Join-Path $script:Stage 'WarhammerClient.uproject')),'-WaitMutex','-NoUBA','-NoVFS','-NoUBTMakefiles','-Compiler=VisualStudio2022','-CompilerVersion=14.44.35229','-WindowsSDKVersion=10.0.22621.0',('-UBARootDir='+(Owned 'uba')),('-Log='+(Owned ('logs/'+$Phase.ToLowerInvariant()+'.log'))))
+}
+# Owner-approved normal per-user UBT trace exception; no global writes by this wrapper.
+# Finite snapshots/recovery are not locks, continuous monitoring or writer attribution.
+function Get-A1GUbtTraceNames([string]$Directory) {
+    $names=[Collections.Generic.List[string]]::new()
+    $exists=$true
+    try{$attributes=[IO.File]::GetAttributes($Directory)}catch [IO.FileNotFoundException]{$exists=$false}catch [IO.DirectoryNotFoundException]{$exists=$false}
+    if($exists){
+        if(($attributes -band [IO.FileAttributes]::Directory) -eq 0 -or ($attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0){throw 'A1G_UBT_TRACE_DIRECTORY_NOT_PLAIN'}
+        foreach($entry in [IO.Directory]::EnumerateFileSystemEntries($Directory)){
+            [void](Phase-Budget);$name=[IO.Path]::GetFileName($entry)
+            $allowed=$name -cmatch '\ATrace-backup-\d{4}\.\d{2}\.\d{2}-\d{2}\.\d{2}\.\d{2}\.uba\z'
+            $sourceMatch=$name -cmatch 'Trace-backup-\d\d\d\d\.\d\d\.\d\d-\d\d\.\d\d\.\d\d.uba'
+            if($sourceMatch -and -not $allowed){throw 'A1G_UBT_TRACE_PRUNING_MATCH_OUTSIDE_APPROVED_FAMILY'}
+            if(($name -ieq 'Trace.uba' -and $name -cne 'Trace.uba') -or ($name -imatch '\ATrace-backup-\d{4}\.\d{2}\.\d{2}-\d{2}\.\d{2}\.\d{2}\.uba\z' -and -not $allowed)){throw 'A1G_UBT_TRACE_CASE_ALIAS_AMBIGUOUS'}
+            if($name -ceq 'Trace.uba' -or $allowed){
+                $path=Assert-Path $entry
+                if(([IO.File]::GetAttributes($path) -band ([IO.FileAttributes]::Directory -bor [IO.FileAttributes]::ReparsePoint)) -ne 0){throw 'A1G_UBT_TRACE_NOT_PLAIN_FILE'}
+                $names.Add($name);if($names.Count -gt 32){throw 'A1G_UBT_TRACE_FILE_COUNT_CAP'}
+            }
+        }
+    }
+    $sorted=[string[]]$names.ToArray();[Array]::Sort($sorted,[StringComparer]::Ordinal);return $sorted
+}
+function Get-A1GUbtTraceState {
+    if(([string][Environment]::GetEnvironmentVariable('IsBuildMachine','Process')).Trim() -ceq '1'){throw 'A1G_UBT_TRACE_BUILD_MACHINE_ROUTE_FORBIDDEN'}
+    $sentinel=Assert-Path (Join-Path $EngineRoot 'Engine/Build/InstalledBuild.txt')
+    $frozen=@($script:Freeze.files|Where-Object {$_.path -ieq $sentinel})
+    if($frozen.Count -ne 1){throw 'A1G_UBT_TRACE_INSTALLED_SENTINEL_NOT_UNIQUELY_FROZEN'}
+    $installed=Check-Descriptor $frozen[0]
+    if($installed.bytes -ne 6 -or $installed.sha256 -ine '2510DF0682BBF178EBE0AB81DA5F36B2D2BFDC19D8CD562466DE649669E70393'){throw 'A1G_UBT_TRACE_PINNED_INSTALLED_SENTINEL_REQUIRED'}
+    $local=Assert-Path ([Environment]::GetFolderPath('LocalApplicationData'))
+    if($local -cne 'C:\Users\Rabid\AppData\Local' -or ([IO.File]::GetAttributes($local) -band [IO.FileAttributes]::Directory) -eq 0){throw 'A1G_UBT_TRACE_NORMAL_KNOWN_PARENT_REQUIRED'}
+    $directory=Assert-Path (Join-Path $local 'UnrealBuildTool')
+    if($directory -cne 'C:\Users\Rabid\AppData\Local\UnrealBuildTool'){throw 'A1G_UBT_TRACE_EXACT_DIRECTORY_REQUIRED'}
+    $exists=$true
+    try{$attributes=[IO.File]::GetAttributes($directory);if(($attributes -band [IO.FileAttributes]::Directory) -eq 0){throw 'A1G_UBT_TRACE_EXPECTED_DIRECTORY'}}catch [IO.FileNotFoundException]{$exists=$false}catch [IO.DirectoryNotFoundException]{$exists=$false}
+    $names=@(Get-A1GUbtTraceNames $directory)
+    $files=[Collections.Generic.List[object]]::new();$total=0L
+    foreach($name in $names){
+        $path=Need-File (Join-Path $directory $name);$info=[IO.FileInfo]::new($path)
+        $bytes=$info.Length;$creation=$info.CreationTimeUtc.ToString('o');$write=$info.LastWriteTimeUtc.ToString('o')
+        if($bytes -gt 16MB){throw 'A1G_UBT_TRACE_FILE_BYTES_CAP'};$total+=$bytes
+        if($total -gt 64MB){throw 'A1G_UBT_TRACE_TOTAL_BYTES_CAP'}
+        $sha=Digest $path;$info.Refresh()
+        if(-not $info.Exists -or $info.Length -ne $bytes -or $info.CreationTimeUtc.ToString('o') -cne $creation -or $info.LastWriteTimeUtc.ToString('o') -cne $write){throw 'A1G_UBT_TRACE_UNSTABLE_FILE_OBSERVATION'}
+        $files.Add([ordered]@{name=$name;path=$path;bytes=$bytes;sha256=$sha;creationTimeUtc=$creation;lastWriteTimeUtc=$write})
+    }
+    Equal-Data @($names) @(Get-A1GUbtTraceNames $directory) 'trace snapshot membership'
+    $existsAfter=$true
+    try{[void][IO.File]::GetAttributes($directory)}catch [IO.FileNotFoundException]{$existsAfter=$false}catch [IO.DirectoryNotFoundException]{$existsAfter=$false}
+    if($exists -ne $existsAfter){throw 'A1G_UBT_TRACE_UNSTABLE_DIRECTORY_OBSERVATION'}
+    return [ordered]@{observedUtc=[DateTime]::UtcNow.ToString('o');directory=$directory;directoryExists=$exists;traceExists=(@($names|Where-Object {$_ -ceq 'Trace.uba'}).Count -eq 1);fileCount=$files.Count;totalBytes=$total;files=$files.ToArray();limits='Finite nonrecursive family observation,32 files/16MiB per file/64MiB aggregate; not atomic or a live quota. Bodies remain opaque unless separately granted.'}
+}
+function Check-A1GUbtTraceUnchanged($Before,$After,[string]$Label) {
+    Equal-Data @{directory=$Before.directory;directoryExists=$Before.directoryExists;traceExists=$Before.traceExists;files=@($Before.files)} @{directory=$After.directory;directoryExists=$After.directoryExists;traceExists=$After.traceExists;files=@($After.files)} $Label
+}
+function Copy-A1GUbtTraceRecovery($State,[ValidateSet('before','after')][string]$When) {
+    $root=Owned ('artifacts/ubt-trace/'+$Phase.ToLowerInvariant()+'/'+$When)
+    $recovery=[ordered]@{root=$root;complete=$false;files=[Collections.Generic.List[object]]::new()}
+    $script:Result.ubtTrace[$When+'Recovery']=$recovery;New-Directory $root
+    foreach($file in $State.files){
+        [void](Check-Descriptor $file);$target=Under (Join-Path $root $file.name) $root
+        [IO.File]::Copy($file.path,$target,$false);$copy=Descriptor $target
+        $recovery.files.Add(@{original=$file;copy=$copy})
+        if($copy.bytes -ne $file.bytes -or $copy.sha256 -ine $file.sha256){throw 'A1G_UBT_TRACE_RECOVERY_COPY_IDENTITY'}
+    }
+    Check-A1GUbtTraceUnchanged $State (Get-A1GUbtTraceState) ($When+' trace recovery stable live state')
+    $recovery.complete=$true
+}
+function Check-A1GUbtTraceRecovery($State,$Recovery,[string]$Name,[string]$When) {
+    $root=Owned ('artifacts/ubt-trace/'+$Name.ToLowerInvariant()+'/'+$When)
+    if($Recovery.complete -ne $true -or $Recovery.root -cne $root -or $Recovery.files.Count -ne @($State.files).Count){throw 'A1G_UBT_TRACE_RECOVERY_INCOMPLETE'}
+    foreach($file in $State.files){
+        $rows=@($Recovery.files|Where-Object {$_.original.name -ceq $file.name})
+        if($rows.Count -ne 1){throw 'A1G_UBT_TRACE_RECOVERY_MEMBER_MISMATCH'}
+        Equal-Data $file $rows[0].original 'trace recovery original mapping'
+        $copy=Check-Descriptor $rows[0].copy
+        if($copy.path -cne (Under (Join-Path $root $file.name) $root) -or $copy.bytes -ne $file.bytes -or $copy.sha256 -ine $file.sha256){throw 'A1G_UBT_TRACE_RECOVERY_NOT_OWNED_IDENTICAL_BYTES'}
+    }
+}
+function Get-A1GUbtTraceDelta($Before,$After) {
+    if($Before.directory -cne $After.directory -or $After.directoryExists -ne $true -or $After.traceExists -ne $true){throw 'A1G_UBT_TRACE_AFTER_DESTINATION_MISSING'}
+    $prior=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::Ordinal)
+    $current=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::Ordinal)
+    foreach($f in $Before.files){$prior.Add($f.name,$f)};foreach($f in $After.files){$current.Add($f.name,$f)}
+    [string[]]$backups=@($Before.files|Where-Object {$_.name -cne 'Trace.uba'}|ForEach-Object {$_.name})
+    [Array]::Sort($backups,[StringComparer]::CurrentCulture);[Array]::Reverse($backups)
+    $kept=if($Before.traceExists){@($backups|Select-Object -First 9)}else{@($backups)}
+    $expected=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal);[void]$expected.Add('Trace.uba')
+    foreach($name in $kept){[void]$expected.Add($name);if(-not $current.ContainsKey($name)){throw 'A1G_UBT_TRACE_UNEXPLAINED_BACKUP_REMOVAL'};Equal-Data $prior[$name] $current[$name] 'surviving trace backup unchanged'}
+    $move=$null
+    if($Before.traceExists){
+        $time=[DateTimeOffset]::Parse($prior['Trace.uba'].creationTimeUtc).UtcDateTime;$backupName=$null
+        for($i=0;$i -le 32;$i++){
+            $candidate='Trace-backup-'+$time.ToString('yyyy.MM.dd-HH.mm.ss',[Globalization.CultureInfo]::InvariantCulture)+'.uba'
+            if($candidate -cnotin $kept){$backupName=$candidate;break};$time=$time.AddSeconds(1)
+        }
+        if($null -eq $backupName -or -not $current.ContainsKey($backupName)){throw 'A1G_UBT_TRACE_EXPECTED_MOVE_NOT_OBSERVED'}
+        $old=$prior['Trace.uba'];$moved=$current[$backupName]
+        if($old.bytes -ne $moved.bytes -or $old.sha256 -ine $moved.sha256){throw 'A1G_UBT_TRACE_MOVED_PRECEDING_BYTES_MISMATCH'}
+        [void]$expected.Add($backupName);$move=@{from=$old;to=$moved;rule='Prior trace UTC creation timestamp; advance seconds until unused after normal descending-name retention of nine backups.'}
+    }
+    if($expected.Count -ne $current.Count -or @($current.Keys|Where-Object {-not $expected.Contains($_)}).Count){throw 'A1G_UBT_TRACE_UNEXPLAINED_FAMILY_DELTA'}
+    $created=@($After.files|Where-Object {-not $prior.ContainsKey($_.name)})
+    $deleted=@($Before.files|Where-Object {-not $current.ContainsKey($_.name)})
+    $changed=@(foreach($f in $After.files){if($prior.ContainsKey($f.name)){
+        $old=$prior[$f.name];if($old.bytes -ne $f.bytes -or $old.sha256 -ine $f.sha256 -or $old.creationTimeUtc -cne $f.creationTimeUtc -or $old.lastWriteTimeUtc -cne $f.lastWriteTimeUtc){@{before=$old;after=$f}}
+    }})
+    return @{created=$created;changed=$changed;moved=$move;deleted=$deleted;previousTraceReplaced=[bool]$Before.traceExists;normalPrunedBackupNames=@($backups|Where-Object {$_ -cnotin $kept});unexplainedDeltaCount=0;qualification='Normal finite backup/pruning transition under the no-concurrent-intentional-UBT assumption; not universal writer attribution. Every prior file requires its independently verified owned recovery copy.'}
+}
+function Get-A1GUbtTraceStdout($Process,[string]$Name) {
+    $label=if($Name -ceq 'EditorPrerequisiteBuild'){'a1g-editor-prerequisite'}elseif($Name -ceq 'GameBuild'){'a1g-game-build'}else{throw 'A1G_UBT_TRACE_STDOUT_PHASE'}
+    $path=Owned ('logs/'+$label+'.stdout.log')
+    if($Process.stdout -cne $path){throw 'A1G_UBT_TRACE_STDOUT_PATH'}
+    $text=Read-A1GBuildText $path;$rows=@($text -split '\r?\n'|Where-Object {$_ -cmatch '^Trace written to file '})
+    if($rows.Count -ne 1){throw 'A1G_UBT_TRACE_STDOUT_DESTINATION_NOT_UNIQUE'}
+    $match=[regex]::Match($rows[0],'\ATrace written to file (?<path>.+) with size [^\r\n]+\z')
+    if(-not $match.Success -or (Assert-Path $match.Groups['path'].Value) -cne 'C:\Users\Rabid\AppData\Local\UnrealBuildTool\Trace.uba'){throw 'A1G_UBT_TRACE_STDOUT_DESTINATION_UNEXPECTED'}
+    return @{stdout=Descriptor $path;line=$rows[0];actualDestination=$match.Groups['path'].Value;scope='Actual closed child stdout route, not argv intent or native trace-write semantics.'}
+}
+function Start-A1GUbtTracePhase {
+    $state=Get-A1GUbtTraceState
+    $script:Result.ubtTrace=[ordered]@{policy='OWNER_APPROVED_OPTION_A_FINITE_NORMAL_UBT_TRACE_EXCEPTION';before=$state;immediatePrelaunch=$null;after=$null;beforeRecovery=$null;afterRecovery=$null;delta=$null;stdoutTrace=$null;rootClosureConfirmed=$false;rootProcess=$null;prepared=$false;complete=$false;exclusivityAssumption='Two sequential owned UBT roots and no concurrent intentional desktop UBT build. No filesystem lock, continuous observation or universal writer attribution.'}
+    $index=[Array]::IndexOf($script:Order,$Phase)
+    if($index -gt 0){
+        $last=Read-Json (Owned ('phases/'+$script:Order[$index-1].ToLowerInvariant()+'/result.json'))
+        if($last.ubtTrace.complete -ne $true){throw 'A1G_UBT_TRACE_CLOSED_PREDECESSOR_REQUIRED'}
+        Check-A1GUbtTraceUnchanged $last.ubtTrace.after $state 'trace exact preceding phase continuity'
+    }
+    if($Phase -cin @('Preflight','EditorPrerequisiteBuild','GameBuild')){Copy-A1GUbtTraceRecovery $state 'before';Check-A1GUbtTraceRecovery $state $script:Result.ubtTrace.beforeRecovery $Phase 'before'}
+    $script:Result.ubtTrace.prepared=$true
+}
+function Complete-A1GUbtTracePhase {
+    $evidence=$script:Result.ubtTrace;$evidence.after=Get-A1GUbtTraceState
+    if($evidence.prepared -ne $true){throw 'A1G_UBT_TRACE_PREPARATION_INCOMPLETE'}
+    if($Phase -cin @('EditorPrerequisiteBuild','GameBuild') -and $script:RootCount -gt 0){
+        if($script:Result.processes.Count -ne 1){throw 'A1G_UBT_TRACE_ROOT_CLOSURE_MISSING'};$p=$script:Result.processes[0]
+        if($p.exitConfirmed -ne $true -or $p.cleanupConfirmed -ne $true -or -not @($p.jobAccounting).Count -or $p.jobAccounting[-1].querySucceeded -ne $true -or $p.jobAccounting[-1].activeProcesses -ne 0){throw 'A1G_UBT_TRACE_ROOT_NOT_CLOSED'}
+        $evidence.rootClosureConfirmed=$true
+        $evidence.rootProcess=@{pid=$p.pid;process=Check-Descriptor $p.receiptArtifact;jobAccounting=$p.jobAccounting;visibleWindowRequested=$p.visibleWindowRequested;windowObservation='NOT_COLLECTED_FOR_UBT_ROOTS';scope='Finite retained owned-job process observations; no desktop-wide exclusivity or universal attribution certificate.'}
+        Copy-A1GUbtTraceRecovery $evidence.after 'after'
+        Check-A1GUbtTraceRecovery $evidence.before $evidence.beforeRecovery $Phase 'before';Check-A1GUbtTraceRecovery $evidence.after $evidence.afterRecovery $Phase 'after'
+        $evidence.delta=Get-A1GUbtTraceDelta $evidence.before $evidence.after;$evidence.stdoutTrace=Get-A1GUbtTraceStdout $p $Phase
+    }else{
+        Check-A1GUbtTraceUnchanged $evidence.before $evidence.after 'trace unchanged outside the two approved UBT roots'
+        if($Phase -cin @('Preflight','Audit')){Copy-A1GUbtTraceRecovery $evidence.after 'after';Check-A1GUbtTraceRecovery $evidence.after $evidence.afterRecovery $Phase 'after'}
+    }
+    $evidence.complete=$true
 }
 function Game-BuildEnvironment {
     $receipt=Descriptor (Owned 'logs/a1g-yaml-artifact-receipt.json')
@@ -1161,7 +1315,7 @@ function Get-A1GUbtActionLog($Process,$Before,[string]$Target) {
     if($Before.logPath -ine $log){throw 'A1G_UBT_LOG_BASELINE_MISMATCH'}
     $text=Read-A1GBuildText $log
     if($text -notmatch '(?m)^Result: Succeeded\s*$' -or $text -notmatch '14\.44\.35229' -or $text -notmatch '10\.0\.22621\.0' -or $text -match '(?im)\b(?:Win32_Process\.Create|external process broker|using (?:XGE|FASTBuild|Incredibuild|remote executor))\b'){throw 'A1G_UBT_BUILD_RESULT_TOOL_OR_EXECUTOR_MISMATCH'}
-    return @{file=Descriptor $log;text=$text;process=$Process.receiptArtifact}
+    return @{file=Descriptor $log;text=$text;process=$Process.receiptArtifact;traceOutput=Get-A1GUbtTraceStdout $Process $Phase}
 }
 
 function Require-A1GBuildAction([string]$Text,[string]$Action,[string]$Leaf) {
@@ -1261,7 +1415,7 @@ function Check-A1GEditorPrerequisiteBuild($Process,$Before) {
     if(@($receipt.buildProducts|Where-Object {$_.file.path.Replace('\','/').Contains('/Plugins/E04ProfileProof/',[StringComparison]::OrdinalIgnoreCase)}).Count -or @($receipt.runtimeDependencies|Where-Object {$_.path.Replace('\','/').Contains('/Plugins/E04ProfileProof/',[StringComparison]::OrdinalIgnoreCase)}).Count){throw 'A1G_DISABLED_EDITOR_PROOF_PLUGIN_PRODUCT_OR_RUNTIME_INPUT'}
     $compiles=@(Get-A1GCompileEvidence 'WarhammerClient' '' 'EditorProject' $Before $log.text)
     $link=Get-A1GLinkEvidence $binary $compiles $Before $log.text
-    return @{targetReceipt=$receipt.targetReceipt;launch=$receipt.launch;launchCmd=$launchCmd;projectModule=@{module='WarhammerClient';manifest=Descriptor $manifest.path;engineManifest=Descriptor $engineManifest;binary=$link.binary;buildId=$manifest.data.BuildId};pluginSelection=$plugin;buildProducts=$receipt.buildProducts;runtimeDependencies=$receipt.runtimeDependencies;log=$log.file;process=$Process.receiptArtifact;nativeFlags=@{compileResponses=$compiles;linkResponses=@($link)};limits='Normal Editor build prerequisite only; no Editor/cook startup or A1E proof/acceptance transfer.'}
+    return @{targetReceipt=$receipt.targetReceipt;launch=$receipt.launch;launchCmd=$launchCmd;traceOutput=$log.traceOutput;projectModule=@{module='WarhammerClient';manifest=Descriptor $manifest.path;engineManifest=Descriptor $engineManifest;binary=$link.binary;buildId=$manifest.data.BuildId};pluginSelection=$plugin;buildProducts=$receipt.buildProducts;runtimeDependencies=$receipt.runtimeDependencies;log=$log.file;process=$Process.receiptArtifact;nativeFlags=@{compileResponses=$compiles;linkResponses=@($link)};limits='Normal Editor build prerequisite only; no Editor/cook startup or A1E proof/acceptance transfer.'}
 }
 
 function Check-A1GGameBuild($Process,$Before) {
@@ -1283,7 +1437,7 @@ function Check-A1GGameBuild($Process,$Before) {
     $library=Under (Join-Path (Artifact-Root) 'lib/yaml-cpp.lib') $script:RunRoot
     if($selection.libraryPath -ine $library -or $selection.librarySha256 -ine (Descriptor $library).sha256){throw 'A1G_GAME_SELECTED_LIBRARY_DRIFT'}
     $link=Get-A1GLinkEvidence $executable $compiles.ToArray() $Before $log.text $library
-    return @{targetReceipt=$receipt.targetReceipt;executable=$link.binary;buildProducts=$receipt.buildProducts;runtimeDependencies=$receipt.runtimeDependencies;pluginSelection=$plugin;selection=Descriptor $selectionPath;vendorArtifactReceipt=$artifact;log=$log.file;process=$Process.receiptArtifact;nativeFlags=@{compileResponses=$compiles.ToArray();linkResponses=@($link);monolithicDefinitionObserved=$true};limits='Actual exception-disabled Game caller compile/link proof only; cook, stage, actual loaded process, windows, two-input result, cleanup/preservation and final acceptance remain separate.'}
+    return @{traceOutput=$log.traceOutput;targetReceipt=$receipt.targetReceipt;executable=$link.binary;buildProducts=$receipt.buildProducts;runtimeDependencies=$receipt.runtimeDependencies;pluginSelection=$plugin;selection=Descriptor $selectionPath;vendorArtifactReceipt=$artifact;log=$log.file;process=$Process.receiptArtifact;nativeFlags=@{compileResponses=$compiles.ToArray();linkResponses=@($link);monolithicDefinitionObserved=$true};limits='Actual exception-disabled Game caller compile/link proof only; cook, stage, actual loaded process, windows, two-input result, cleanup/preservation and final acceptance remain separate.'}
 }
 
 # Bounded normal Cook/Stage consumers; exact phase authority is required.
@@ -1721,7 +1875,7 @@ function Complete-A1GNativePhase($Process,$Before) {
 
 function Complete-A1GAuditPhase {
     if($Phase -cne 'Audit' -or $script:RootCount -ne 0){throw 'A1G_AUDIT_MUST_HAVE_ZERO_ROOTS'}
-    $names=@('Preflight','DependencyConfigure','DependencyBuild','EditorPrerequisiteBuild','GameBuild','Cook','Stage','Native');$closed=[ordered]@{};$descriptors=[Collections.Generic.List[object]]::new();$last=$null
+    $names=@('Preflight','DependencyConfigure','DependencyBuild','EditorPrerequisiteBuild','GameBuild','Cook','Stage','Native');$closed=[ordered]@{};$descriptors=[Collections.Generic.List[object]]::new();$last=$null;$traceLast=$null
     $statuses=@{Preflight='PREFLIGHT_PASS_NO_NATIVE_ROOT';DependencyConfigure='DEPENDENCY_CONFIGURE_PASS_NO_INSTALL';DependencyBuild='DEPENDENCY_BUILD_AND_EXPLICIT_GAME_ARTIFACT_COPY_PASS';EditorPrerequisiteBuild='EDITOR_PREREQUISITE_BUILD_PASS_NORMAL_RECEIPT_AND_PROJECT_MODULE';GameBuild='GAME_BUILD_PASS_ACTUAL_CALLER_PARSER_FLAGS_AND_MONOLITHIC_LINK';Cook='COOK_PASS_NORMAL_COPIED_LOG_AND_LOOSE_PRIMARY_OUTPUTS';Stage='STAGE_PASS_ACTUAL_LOOSE_MANIFESTS_AND_GAME_EXECUTABLE_MAPPING';Native='NATIVE_PASS_COOKED_GAME_FINITE_RESULT_AND_ZERO_OBSERVED_WINDOWS'}
     foreach($name in $names){
         $root=Owned ('phases/'+$name.ToLowerInvariant());$completion=Read-Json (Join-Path $root 'completion.json');[void](Check-Descriptor $completion.result);$r=Read-Json $completion.result.path
@@ -1733,9 +1887,26 @@ function Complete-A1GAuditPhase {
         foreach($d in $r.retainedArtifacts){[void](Check-Descriptor $d)}
         Check-Settings $r.settingsBefore $r.settingsAfter;Check-A1GUnownedGameSettings $r.gameSettingsBefore $r.gameSettingsAfter
         foreach($prefix in @('source','stage','fixtures')){Equal-Data @($r[$prefix+'Before']) @($r[$prefix+'After']) ($name+' '+$prefix+' preservation')}
+        $trace=$r.ubtTrace
+        if($trace.policy -cne 'OWNER_APPROVED_OPTION_A_FINITE_NORMAL_UBT_TRACE_EXCEPTION' -or $trace.prepared -ne $true -or $trace.complete -ne $true){throw 'A1G_AUDIT_TRACE_BOUNDARY_INCOMPLETE'}
+        if($null -ne $traceLast){Check-A1GUbtTraceUnchanged $traceLast $trace.before ($name+' trace phase continuity')}
+        if($name -cin @('EditorPrerequisiteBuild','GameBuild')){
+            if($trace.rootClosureConfirmed -ne $true -or $trace.rootProcess.pid -ne $r.processes[0].pid){throw 'A1G_AUDIT_TRACE_ROOT_JOIN'}
+            [void](Check-Descriptor $trace.rootProcess.process)
+            Equal-Data $trace.rootProcess.process $r.processes[0].receiptArtifact 'trace owned process receipt join'
+            Check-A1GUbtTraceRecovery $trace.before $trace.beforeRecovery $name 'before';Check-A1GUbtTraceRecovery $trace.after $trace.afterRecovery $name 'after'
+            Check-A1GUbtTraceUnchanged $trace.before $trace.immediatePrelaunch ($name+' trace immediate prelaunch')
+            Equal-Data $trace.delta (Get-A1GUbtTraceDelta $trace.before $trace.after) ($name+' retained trace delta')
+            Equal-Data $trace.stdoutTrace (Get-A1GUbtTraceStdout $r.processes[0] $name) ($name+' actual trace stdout')
+        }else{
+            Check-A1GUbtTraceUnchanged $trace.before $trace.after ($name+' trace unchanged outside UBT roots')
+            if($name -ceq 'Preflight'){Check-A1GUbtTraceRecovery $trace.before $trace.beforeRecovery $name 'before';Check-A1GUbtTraceRecovery $trace.after $trace.afterRecovery $name 'after'}
+        }
+        $traceLast=$trace.after
         if($null -ne $last -and [DateTimeOffset]::Parse($r.startedUtc) -le $last){throw 'A1G_AUDIT_PHASE_PREFIX_TIME_ORDER'}
         $last=[DateTimeOffset]::Parse($completion.completedUtc);$closed[$name]=$r;$descriptors.Add(@{phase=$name;completion=Descriptor (Join-Path $root 'completion.json');result=$completion.result})
     }
+    $traceCurrent=Get-A1GUbtTraceState;Check-A1GUbtTraceUnchanged $traceLast $traceCurrent 'audit current trace continuity'
     $baseline=$closed.Preflight
     foreach($r in $closed.Values){Check-Settings $baseline.settingsAfter $r.settingsBefore;Check-A1GUnownedGameSettings $baseline.gameSettingsAfter $r.gameSettingsBefore}
     Check-A1GUnownedGameSettings $baseline.gameSettingsAfter @(Get-A1GUnownedGameSettings)
@@ -1749,7 +1920,7 @@ function Complete-A1GAuditPhase {
     if($process.executable -ine $join.stage.facts.executable.path -or $process.workingDirectory -ine $join.stage.facts.stageRoot -or $process.completionCleanupMode -cne 'NaturalDrain'){throw 'A1G_AUDIT_NATIVE_PROCESS_BINARY_OR_CWD_MISMATCH'}
     Equal-Data @($process.arguments) @($n.arguments) 'audit actual native argv'
     $windows=Check-A1GOwnedWindowSamples $process;$proof=Check-A1GNativeResultDetails $process $join $n.paths;$log=Check-A1GNativeLog $process $n.paths $n.arguments
-    @{closedPhaseCount=8;predecessors=$descriptors.ToArray();literalInputCount=$join.literalInputs.Count;attemptCount=$proof.attemptCount;evaluatedCheckCount=$proof.evaluatedCheckCount;nativeAssertionTotal='NOT_INFERRED';executable=$join.stage.facts.executable;runtimeDependencyCoverage=$join.runtimeDependencyCoverage;result=$proof.result;log=$log.log;ddc=$log.ddc;windowObservation=$windows;settingsScope='Original9 roles plus separately prebaselined medium-integrity GameUserSettings fallback role';specialAssuranceCertification='DEFERRED_UNPROVEN_OWN17';scope='Closed ordinary source/settings/input/cook/stage/binary/result reconciliation. Final CODE and different REQ remain required; no A1E acceptance transfer.'}
+    @{closedPhaseCount=8;predecessors=$descriptors.ToArray();literalInputCount=$join.literalInputs.Count;attemptCount=$proof.attemptCount;evaluatedCheckCount=$proof.evaluatedCheckCount;nativeAssertionTotal='NOT_INFERRED';ubtTrace=@{policy='OWNER_APPROVED_OPTION_A_FINITE_NORMAL_UBT_TRACE_EXCEPTION';closedPredecessorBoundaries=8;current=$traceCurrent;recoveryScope='Preflight and both UBT before/after copies independently rehashed; current Audit after copy is retained in phase ubtTrace at final preservation.';limits='Finite exception observations/recovery only; no historical repair, restoration, universal writer attribution or acceptance.'};executable=$join.stage.facts.executable;runtimeDependencyCoverage=$join.runtimeDependencyCoverage;result=$proof.result;log=$log.log;ddc=$log.ddc;windowObservation=$windows;settingsScope='Original9 roles plus separately prebaselined medium-integrity GameUserSettings fallback role';specialAssuranceCertification='DEFERRED_UNPROVEN_OWN17';scope='Closed ordinary source/settings/input/cook/stage/binary/result reconciliation. Final CODE and different REQ remain required; no A1E acceptance transfer.'}
 }
 
 # END direct ordinary source integration.
@@ -1774,9 +1945,10 @@ try{
         [void][IO.Directory]::CreateDirectory((Assert-Path $script:RunRoot));$script:RunLock=[IO.File]::Open((Owned 'phase-serialization.lock'),[IO.FileMode]::CreateNew,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)
     }else{$script:RunLock=[IO.File]::Open((Need-File (Owned 'phase-serialization.lock')),[IO.FileMode]::Open,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)}
     New-Directory $script:PhaseRoot;$phaseCreated=$true
-    $script:Result=[ordered]@{schemaVersion=1;experiment='E04-A1G';subset=$script:Subset;runtimeCallerProof=$script:RuntimeCallerProof;phase=$Phase;runId=$RunId;sourceHead=$script:Freeze.sourceHead;startedUtc=[DateTime]::UtcNow.ToString('o');status='PROVISIONAL';executionPassed=$false;authority=$authority;freezeManifest=Descriptor $FreezeManifestPath;processes=[Collections.Generic.List[object]]::new();primaryFailure=$null;secondaryErrors=@();previous=@();retainedArtifacts=@();settingsBefore=$null;settingsAfter=$null;gameSettingsBefore=$gameBaseline;gameSettingsAfter=$null;sourceBefore=$null;sourceAfter=$null;stageBefore=$null;stageAfter=$null;fixturesBefore=$null;fixturesAfter=$null;limits=@('Prospective bounded proof; source adoption or tool exit does not establish final acceptance.','Windows Game proof is separate from A1E, A2, Linux, rendering, packaging-distribution and migration acceptance.','64MiB stream/data/log and512MiB report limits are retained-output checks, not live quotas.','OWN17 special assurance remains deferred/unproven; ordinary runtime assertions remain fail-closed.')}
+    $script:Result=[ordered]@{schemaVersion=1;experiment='E04-A1G';subset=$script:Subset;runtimeCallerProof=$script:RuntimeCallerProof;phase=$Phase;runId=$RunId;sourceHead=$script:Freeze.sourceHead;startedUtc=[DateTime]::UtcNow.ToString('o');status='PROVISIONAL';executionPassed=$false;authority=$authority;freezeManifest=Descriptor $FreezeManifestPath;processes=[Collections.Generic.List[object]]::new();primaryFailure=$null;secondaryErrors=@();previous=@();retainedArtifacts=@();ubtTrace=$null;settingsBefore=$null;settingsAfter=$null;gameSettingsBefore=$gameBaseline;gameSettingsAfter=$null;sourceBefore=$null;sourceAfter=$null;stageBefore=$null;stageAfter=$null;fixturesBefore=$null;fixturesAfter=$null;limits=@('Prospective bounded proof; source adoption or tool exit does not establish final acceptance.','Windows Game proof is separate from A1E, A2, Linux, rendering, packaging-distribution and migration acceptance.','64MiB stream/data/log and512MiB report limits are retained-output checks, not live quotas.','OWN17 special assurance remains deferred/unproven; ordinary runtime assertions remain fail-closed.')}
     $script:Result.previous=@(Check-Previous)
     if($Phase -ceq 'Preflight'){Materialize-Stage}
+    Start-A1GUbtTracePhase
     $sourceBefore=@(Snapshot-Members $script:Repo $script:Freeze.sourceMembership);$stageBefore=@(Snapshot-Members $script:Stage $script:Freeze.stageMembership);$inputsBefore=@(Snapshot-Inputs)
     $baseline=@(Settings);Check-Settings $baseline $baseline
     if($Phase -cne 'Preflight'){$pf=Read-Json (Owned 'phases/preflight/result.json');Check-Settings $pf.settingsAfter $baseline;Check-A1GUnownedGameSettings $pf.gameSettingsAfter $gameBaseline}
@@ -1828,6 +2000,9 @@ try{
 }catch{$primary=Failure $_ $Phase;if($null -ne $script:Result){$script:Result.primaryFailure=$primary;$script:Result.executionPassed=$false;$script:Result.status='FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY'}}
 finally{
     if($phaseCreated -and $null -ne $script:Result){
+        if($null -ne $script:Result.ubtTrace){
+            try{Complete-A1GUbtTracePhase}catch{$script:Errors.Add((Failure $_ 'ubt-trace-observation-recovery'));$script:Result.executionPassed=$false;$script:Result.status='FAIL_UBT_TRACE_EXCEPTION_OBSERVATION_OR_RECOVERY'}
+        }
         try{
             if($null -ne $baseline){$script:Result.settingsAfter=@(Settings);Check-Settings $baseline $script:Result.settingsAfter}
             if($null -ne $gameBaseline){$script:Result.gameSettingsAfter=@(Get-A1GUnownedGameSettings);Check-A1GUnownedGameSettings $gameBaseline $script:Result.gameSettingsAfter}

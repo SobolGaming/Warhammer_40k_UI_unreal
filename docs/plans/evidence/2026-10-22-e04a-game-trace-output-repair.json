@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_ADOPTED_E04_A1G_FINITE_TRACE_OUTPUT_SOURCE_REPAIR",
+  "status": "TRACE_OUTPUT_EXCEPTION_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "adoptedUtc": "2026-10-22T19:24:57.6221372Z",
+  "sourceBase": "25ac8401d80b425df1f89cd7938480771bae66f1",
+  "verifiedRepairedAuditBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-audit-ddc-retention-repair-root-20261021\\root-repaired-source-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "02B2E49CB7F4A68A96A7AD6FAC126389F13080CDB9A76A7958ABD95082A18116"
+  },
+  "ownerScopeApproval": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-output-repair-root-20261022\\owner-trace-scope-approval.original.json",
+    "bytes": 1724,
+    "sha256": "FB375BA7DBDACDE66DFD805C1748B0004785E0DDD817C0DB19EA9486F625F279"
+  },
+  "ownerDecision": {
+    "schemaVersion": 1,
+    "recordKind": "DIRECT_OWNER_APPROVED_FINITE_UBT_TRACE_OUTPUT_EXCEPTION",
+    "recordedUtc": "2026-10-22T19:16:39.8417952Z",
+    "source": "Direct human user reply in this migration chat",
+    "question": "For the next Windows proof, approve UnrealBuildTool’s normal Trace.uba and timestamped trace backups under C:\\Users\\Rabid\\AppData\\Local\\UnrealBuildTool, including normal backup pruning? I recommend this bounded exception for the two sequential build steps, with verified recovery copies first (at most 32 files, 16 MiB each, 64 MiB total). The current proof requires all outputs inside its run folder, so this changes that policy; your standing private-source/API review consent already applies.",
+    "humanReply": "I approve.  Please continue.",
+    "decision": "APPROVE_OPTION_A_FINITE_TRACE_OUTPUT_EXCEPTION",
+    "proposal": {
+      "repositoryPath": "docs/plans/research/2026-10-21-e04a-game-ubt-trace-owner-choice.md",
+      "bytes": 10322,
+      "sha256": "DD0099C43D3934235EF775FAC6215CB1BFB6497DDA6C304FBF2E91C4EF83282C"
+    },
+    "allowedRoots": [
+      "EditorPrerequisiteBuild",
+      "GameBuild"
+    ],
+    "allowedDirectory": "C:\\Users\\Rabid\\AppData\\Local\\UnrealBuildTool",
+    "maxFiles": 32,
+    "maxFileBytes": 16777216,
+    "maxAggregateBytes": 67108864,
+    "normalBackupPruning": true,
+    "verifiedOwnedRecoveryCopiesRequired": true,
+    "scope": "One fresh repaired Windows A1G proof. Source/norm changes, fresh bindings and affected SOURCE precede separate root phase GOs. No retrospective waiver, old GO reuse, engine patch, global restoration, visible windows or acceptance.",
+    "standingPrivateSourceApiReviewConsent": "Unchanged; perpetual until explicit revocation"
+  },
+  "wrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+    "bytes": 201780,
+    "sha256": "C1C006E5B51D77AFB6225D149B8B97A3C3089F22AF0B62CEFD6C2B32F71B16F9"
+  },
+  "cleanNorm": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 27522,
+    "sha256": "DF666440AC81B64F3D97430209BB289B401FB447F3A5C55F115655C33668D49C"
+  },
+  "focusedControls": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\tests\\Test-E04A1GTracePolicy.ps1",
+    "bytes": 4656,
+    "sha256": "89758FAD8A8F4728C3AD42EE884A9F162081CF34DF78C231DECE2E6FE9687843"
+  },
+  "staticObservations": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-output-repair-root-20261022\\root-source-static-observations.original.json",
+    "bytes": 3791,
+    "sha256": "B6346A1D4028E0FDEA36EDD69210EFAD01B110CD9538A8B1F949685F4283B118"
+  },
+  "functionChanges": {
+    "unchangedExisting": 108,
+    "changedExisting": [
+      "Invoke-A1GRoot",
+      "Get-A1GUbtActionLog",
+      "Check-A1GEditorPrerequisiteBuild",
+      "Check-A1GGameBuild",
+      "Complete-A1GAuditPhase"
+    ],
+    "added": [
+      "Get-A1GUbtTraceNames",
+      "Get-A1GUbtTraceState",
+      "Check-A1GUbtTraceUnchanged",
+      "Copy-A1GUbtTraceRecovery",
+      "Check-A1GUbtTraceRecovery",
+      "Get-A1GUbtTraceDelta",
+      "Get-A1GUbtTraceStdout",
+      "Start-A1GUbtTracePhase",
+      "Complete-A1GUbtTracePhase"
+    ],
+    "wrapperFunctions": 122,
+    "wrapperAstErrors": 0,
+    "wrapperCrCount": 169,
+    "testAstErrors": 0,
+    "testsExecuted": false
+  },
+  "metadataSources": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-source-bindings-SOURCE_ONLY-PROPOSED-20261022-c379a821\\r4\\Assemble-FreshGameSourceReview.own-controls.PROPOSED.ps1",
+      "functions": 6,
+      "bytes": 15687,
+      "astErrors": 0,
+      "sha256": "29BEC528B4E2B659469D25CA02498492408899780354A6FA760A8704A2BBEEC6"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-source-bindings-SOURCE_ONLY-PROPOSED-20261022-c379a821\\r4\\Invoke-OneA1GPhase.trace.UNBOUND-PROPOSED.ps1",
+      "functions": 2,
+      "bytes": 8072,
+      "astErrors": 0,
+      "sha256": "A2F61AE3E39EEB2A5A7FF554B48B191FE0647D58F0CBEE4339E7B89AF256BB97"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-source-bindings-SOURCE_ONLY-PROPOSED-20261022-c379a821\\r4\\New-E04A1GSourceFreeze.trace.PROPOSED.ps1",
+      "functions": 10,
+      "bytes": 19849,
+      "astErrors": 0,
+      "sha256": "27A5DE407A8F421E0CDCB7D8FF235E8AFA9708E9E07C32EF5A157E630A334B99"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-source-bindings-SOURCE_ONLY-PROPOSED-20261022-c379a821\\r4\\New-FreshA1GTechnicalPacket.root-v10.PROPOSED.ps1",
+      "functions": 9,
+      "bytes": 26130,
+      "astErrors": 0,
+      "sha256": "7DA73BA086179583D58978A57B5FF920C1014B97F38971DBF2FDC3EDDF89234C"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-source-bindings-SOURCE_ONLY-PROPOSED-20261022-c379a821\\r4\\New-OnePhaseGo.trace.UNBOUND-PROPOSED.ps1",
+      "functions": 3,
+      "bytes": 3587,
+      "astErrors": 0,
+      "sha256": "02019515AAB0FF0F079533C177AEB1F24BB6A35E71DB1D8FF63A380BE46D318C"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-source-bindings-SOURCE_ONLY-PROPOSED-20261022-c379a821\\r4\\Prepare-FreshBindings.trace.PROPOSED.ps1",
+      "functions": 1,
+      "bytes": 3763,
+      "astErrors": 0,
+      "sha256": "172FC7917FB4FD12639A1915DACF9860BFC1CEE35F4C5D781B9CF585F7CCEEA8"
+    }
+  ],
+  "metadataAdoption": "Root inspected full minimal changes from previously adopted helpers and the complete Prepare body. Four metadata builders adopted as source; outer/phase GO remain UNBOUND source templates, not authority.",
+  "materialWholeSourceCount": 44,
+  "primaryTraceManagedSources": 8,
+  "primaryTraceDeclaredRanges": 15,
+  "installedSentinel": "Identity-only Engine/Build/InstalledBuild.txt,6 bytes,2510DF0682BBF178EBE0AB81DA5F36B2D2BFDC19D8CD562466DE649669E70393",
+  "freshBindings": "NOT_CREATED",
+  "newRunId": "UNBOUND",
+  "freshSourceReview": "NOT_RUN",
+  "pureDataControls": "NOT_RUN_AFTER_SOURCE",
+  "freshNinePhases": "NOT_RUN",
+  "allOldAuthority": "CLOSED_DO_NOT_REUSE",
+  "acceptance": false,
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "specialAssurance": "DEFERRED_UNPROVEN_OWN17",
+  "preparationDiagnostic": "First metadata approval-record command failed at PowerShell parse on curly apostrophe before executing any statement. Corrected here-string created one complete record; no candidate/native execution occurred.",
+  "next": "Checkpoint/push/exact-gh-verify repaired source; prepare fresh bindings and obtain affected SOURCE before focused controls and separately authorized ordered phases. Preserve earlier negative reports and nine raw phase records."
+}
