@@ -1,0 +1,65 @@
+{
+  "recordKind": "ROOT_SOURCE_ONLY_WINDOW_OWNER_QUERY_REPAIR",
+  "createdUtc": "2026-10-23T15:41:28.2461604Z",
+  "status": "WINDOW_OWNER_QUERY_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "failureCheckpoint": "6c05043a88241fad39da041c7e7f885f65393e21",
+  "failureBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-emitterstyle-packet-repair-root-20261023\\root-window-query-failure-checkpoint-backup.original.json",
+    "bytes": 605,
+    "sha256": "7164935913EF44DF1A47FF1024A77B87078642FCABC89C4631AB26E20A5F5B65"
+  },
+  "actualAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-owner-query-failclosed-SOURCE_ONLY-PROPOSED-20261023T153159Z-3a853d83\\root-adoption-after-failure-backup.original.json",
+    "bytes": 2261,
+    "sha256": "523C61A9BA6A6BCA259DEBA0F9707233BBA28419CF1BAF6915F6E34D9711D6D8"
+  },
+  "actualRootAdoptionTool": "52af0c",
+  "sourceEdits": 4,
+  "oldSupervisor": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\E04A1GOwnedJobSupervisor.cs",
+    "bytes": 41523,
+    "sha256": "F4BF73355ECCEB727DBE23E60FB21B61A29C424776F7C7938EA946F18826E32C"
+  },
+  "newSupervisor": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\E04A1GOwnedJobSupervisor.cs",
+    "bytes": 41604,
+    "sha256": "44BA66FD92C826F4A50B3F9FF5656AFE3C653F02D5FC42B5B8F15FE2E06D80E8"
+  },
+  "oldWrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+    "bytes": 211429,
+    "sha256": "0837A1958A9FF58131C970578CFA66FF10DCA5551A39F125064936E4A4D7F6DD"
+  },
+  "newWrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+    "bytes": 211429,
+    "sha256": "64613E9C2947A1338939B1FC9D5A36D0255DD6D42206E8253D8138A58FB42F30"
+  },
+  "wholeSupervisorInverseMatches": true,
+  "wholeWrapperInverseMatches": true,
+  "csharpSyntaxErrors": 0,
+  "wrapperAstErrors": 0,
+  "wrapperFunctions": 125,
+  "unchangedWrapperFunctions": 124,
+  "changedWrapperFunctions": [
+    "Check-Bindings"
+  ],
+  "semanticCompilationPerformed": false,
+  "candidateFunctionsInvoked": false,
+  "normChanged": false,
+  "freshSource": "NOT_RUN",
+  "pureControls": {
+    "observerFailureCoverage": false,
+    "status": "NOT_RUN",
+    "declared": 14
+  },
+  "queryFailureBranch": "UNFORCED_UNEXECUTED",
+  "nativePhases": "ALL_NINE_NOT_RUN",
+  "newRunId": "UNBOUND",
+  "bindings": "NOT_CREATED",
+  "A1GAccepted": false,
+  "OWN17": "DEFERRED_UNPROVEN",
+  "Linux": "UNTESTED",
+  "visibleAuthority": 0,
+  "next": "Checkpoint/push/exact-gh verify this repaired source before fresh bindings and affected SOURCE. Positive SOURCE before actual14controls and separate phase GOs."
+}

@@ -57,7 +57,7 @@ public static class Supervisor {
     [DllImport("kernel32.dll")] static extern void DeleteProcThreadAttributeList(IntPtr list);
     delegate bool EnumWindow(IntPtr window,IntPtr parameter);
     [DllImport("user32.dll")] static extern bool EnumWindows(EnumWindow callback,IntPtr parameter);
-    [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window,out uint pid);
+    [DllImport("user32.dll",SetLastError=true)] static extern uint GetWindowThreadProcessId(IntPtr window,out uint pid);
     [DllImport("user32.dll",SetLastError=true)] static extern bool PostMessageW(IntPtr window,uint message,IntPtr wparam,IntPtr lparam);
 
     static string Utc() { return DateTime.UtcNow.ToString("o"); }
@@ -194,9 +194,10 @@ public static class Supervisor {
                 EnumWindow callback=(window,parameter)=> {
                     try {
                         uint pid; uint thread=GetWindowThreadProcessId(window,out pid);
+                        if(thread==0) throw new Win32Exception(Marshal.GetLastWin32Error(),"GetWindowThreadProcessId(owned PID filter)");
                         // Only transient owner-PID filtering is done for unrelated HWNDs.
                         // Their PID/handle, titles, text, class, input and pixels are not retained.
-                        if(thread!=0 && before.Contains(pid) && IsWindowVisible(window)) {
+                        if(before.Contains(pid) && IsWindowVisible(window)) {
                             int previous; visibleByPid.TryGetValue(pid,out previous);
                             visibleByPid[pid]=checked(previous+1);
                         }
@@ -209,7 +210,7 @@ public static class Supervisor {
                     if(!enumerated) enumerationError=Marshal.GetLastWin32Error();
                 } finally { GC.KeepAlive(callback); }
                 row["enumPerformed"]=true; row["enumSucceeded"]=enumerated;
-                if(callbackFailure!=null) throw new InvalidOperationException("Owned-window callback failed",callbackFailure);
+                if(callbackFailure!=null) throw callbackFailure;
                 if(!enumerated) throw new Win32Exception(enumerationError,"EnumWindows(owned PID filter)");
             } else { row["enumSucceeded"]=true; }
             var visibleRows=new List<object>(); int visibleCount=0;

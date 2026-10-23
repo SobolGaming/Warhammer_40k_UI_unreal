@@ -711,7 +711,7 @@ function Check-Bindings {
     foreach($path in @($PSCommandPath,[Environment]::ProcessPath,$f.supervisorSource.path)+@($f.toolPaths.Values)){
         $actual=Descriptor $path;$found=@($f.files|Where-Object {$_.path -ieq $actual.path -and $_.bytes -eq $actual.bytes -and $_.sha256 -ieq $actual.sha256})
         if($found.Count -ne 1){throw 'A1G_RUNTIME_TOOL_OR_WRAPPER_NOT_UNIQUELY_FROZEN'}}
-    if($f.supervisorSource.sha256 -ine 'F4BF73355ECCEB727DBE23E60FB21B61A29C424776F7C7938EA946F18826E32C' -or $f.supervisorSource.bytes -ne 41523){throw 'A1G_EXACT_OPT_IN_SUPERVISOR_SOURCE_REQUIRED'}
+    if($f.supervisorSource.sha256 -ine '44BA66FD92C826F4A50B3F9FF5656AFE3C653F02D5FC42B5B8F15FE2E06D80E8' -or $f.supervisorSource.bytes -ne 41604){throw 'A1G_EXACT_OPT_IN_SUPERVISOR_SOURCE_REQUIRED'}
     if($f.bounds.streamBytes -ne 64MB -or $f.bounds.dataBytes -ne 64MB -or $f.bounds.reportBytes -ne 512MB -or $f.bounds.initialFreeBytes -ne 50GB -or $f.bounds.freeFloorBytes -ne 20GB -or $f.bounds.runBytes -ne 24GB -or $f.bounds.cookBytes -ne 8GB -or $f.bounds.stageBytes -ne 8GB){throw 'A1G_EXACT_PROPOSED_BOUNDS_REQUIRED'}
     $script:Freeze=$f
     [ordered]@{authority=(Descriptor $AuthorityPath);sourceReviewed=$a.sourceReviewed;phase=$Phase;visibleWindows=0}
