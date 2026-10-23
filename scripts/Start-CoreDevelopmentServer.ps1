@@ -72,7 +72,7 @@ if ($Endpoint.Scheme -cnotin @('http', 'https') -or $Endpoint.UserInfo -or $Endp
 if ($Mode -eq 'Managed' -and $Endpoint.AbsoluteUri -cne "http://127.0.0.1:$Port/") { throw 'Managed mode uses only 127.0.0.1 and the selected dedicated port.' }
 if ($Mode -eq 'Managed' -and !$IsWindows) { throw 'The prepared managed runtime is Windows-only. Use the documented native Linux recipe or Attach.' }
 
-$git = (Get-Command git -CommandType Application -ErrorAction Stop).Source
+$git = (Get-Command git -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
 $gitOptions = @('--no-optional-locks', '-c', 'core.fsmonitor=false', '-c', 'core.untrackedCache=false', '-c', 'core.hooksPath=NUL', '-C', $CoreRoot)
 $head = @(& $git @gitOptions rev-parse HEAD 2>&1)
 if ($LASTEXITCODE -ne 0 -or $head.Count -ne 1 -or $head[0] -cne $expectedCommit) { throw 'Core checkout must be at the selected 5f509724 commit.' }

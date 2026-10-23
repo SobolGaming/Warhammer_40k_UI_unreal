@@ -235,7 +235,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     for (const auto& Pair : Objectives->Values)
     {
         const auto Objective = Pair.Value->Type == EJson::Object ? Pair.Value->AsObject() : nullptr;
-        FLiveCoreObjective Item; double Diameter;
+        FLiveCoreObjective Item; double Diameter = 0.0;
         if (!String(Objective, TEXT("objective_id"), Item.Id) || !FStringView(*Pair.Key, Pair.Key.Len()).Equals(Item.Id, ESearchCase::CaseSensitive) ||
             !Position(Object(Objective, TEXT("position")), Item.PositionInches) || !Number(Objective, TEXT("marker_diameter_inches"), Diameter) || Diameter <= 0)
         { OutError = TEXT("Invalid Core objective marker."); return false; }
