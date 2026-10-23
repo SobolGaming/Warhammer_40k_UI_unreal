@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A2P0_EXACT_TRIGGER_CAPTURE_FAILURE_PROVENANCE_NOT_ACCEPTANCE",
+  "status": "SOURCE_PASS_EXACT_TRIGGER_CAPTURE_FAILED",
+  "sourceHead": "c62c5a83900f2da984b5a41303c2a672d6f3d8ec",
+  "comparisonBase": "acb1cca2cda0eba6a44254da98bd172128cb40bb",
+  "runId": "20261023T195853Z-637ad147",
+  "rootFailureDisposition": {
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-root-20261023T-background-preparation/bindings-c62c5a8-20261023T195853Z-637ad147/root-native-failure-disposition.original.json",
+      "bytes": 10637,
+      "sha256": "3994C8BBD9EDAA2CCEA330FA641233918B48B34F7462A6DAF141C6C152A87BBC"
+    },
+    "createdUtc": "2026-10-23T20:15:17.2857196Z",
+    "rootTool": "40d771"
+  },
+  "note": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-exact-trigger-capture-failure.md",
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-exact-trigger-failure-publication-PRIVATE-PROPOSED-20261023-a83d6c21/final-r2/2026-10-23-e04a2-p0-exact-trigger-capture-failure.md",
+      "bytes": 2761,
+      "sha256": "E19A6B3BB597A3882307BAF18C1587B339ECC8561DC0BF0127B1A8DCCE859B92"
+    }
+  },
+  "sourcePrerequisite": {
+    "canonicalPath": "docs/plans/evidence/2026-10-23-e04a2-p0-source-prerequisite-c62c5a8.json",
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-exact-trigger-failure-publication-PRIVATE-PROPOSED-20261023-a83d6c21/final-r2/2026-10-23-e04a2-p0-source-prerequisite-c62c5a8.json",
+      "bytes": 8932,
+      "sha256": "D440F8295EC93DD6550D38D0239CC876BF1D10C23F22039F6AEA3198F004A3EE"
+    },
+    "admission": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A2P0-source-review/source-c62c5a8-20261023T195853Z-637ad147/root-source-admission.original.json",
+      "bytes": 8325,
+      "sha256": "BE5437F2F4EB0B85166C7C1A02E94E6BDFCFEBAE173659E123EA84445667133C"
+    },
+    "sourceStatus": "PASS_EXACT_SOURCE_ONLY_RETAINED"
+  },
+  "nativeAuthority": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\bindings-c62c5a8-20261023T195853Z-637ad147\\root-capture-go.original.json",
+    "bytes": 5730,
+    "sha256": "BFF47AD355E271DB270BCB2265554C87B345F0BE36A116810C39B2442EA4ABC0"
+  },
+  "permission": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\bindings-c62c5a8-20261023T195853Z-637ad147\\root-capture-permission.original.json",
+    "bytes": 8253,
+    "sha256": "E0BE68C438641E98714DFBB7338BB11EC153E8F02B27AE924262018421E35AF6"
+  },
+  "prelaunch": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\bindings-c62c5a8-20261023T195853Z-637ad147\\root-native-capture-prelaunch.original.json",
+    "bytes": 2328,
+    "sha256": "CB95A3FC86D8AE885F05E7E6C69A12907637A9E55020BE69D33FC271DC946292"
+  },
+  "actualNativeTool": "ee9d6e",
+  "foregroundExitCode": 1,
+  "statusNative": "FAIL",
+  "executionContext": "Root requested require_escalated normal-desktop execution in ee9d6e; no whole-machine isolation/cause inference or conclusion about prior run context",
+  "runtimeAuthority": "CLOSED_DO_NOT_REUSE",
+  "strictBeforeReceiptBody": {
+    "artifactFreeze": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\bindings-c62c5a8-20261023T195853Z-637ad147\\root-native-failure-artifact-freeze.original.json",
+      "bytes": 2624,
+      "sha256": "C82FED7CB9AAB2EB8BA6FB28705F0A1D13D97DD289FCB704189BD5F33941B918"
+    },
+    "freezeTool": "83ad09",
+    "firstBodyTool": "185781",
+    "order": "FREEZE_BEFORE_FIRST_RECEIPT_BODY"
+  },
+  "processReceipt": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\A2P0\\20261023T195853Z-637ad147\\process-receipt.original.json",
+    "bytes": 6002,
+    "sha256": "15A8133845B9DE9D9833D44BDCA909F133A64D3F009EF665814C670063B87104"
+  },
+  "executionReceipt": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\A2P0\\20261023T195853Z-637ad147\\execution-receipt.original.json",
+    "bytes": 4813,
+    "sha256": "E78D9F431703019C55E58C4A1D3A690EDC1F13410C498A1D1419516745766DAF"
+  },
+  "retainedFiles": [
+    {
+      "relative": "execution-receipt.original.json",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\A2P0\\20261023T195853Z-637ad147\\execution-receipt.original.json",
+      "bytes": 4813,
+      "sha256": "E78D9F431703019C55E58C4A1D3A690EDC1F13410C498A1D1419516745766DAF",
+      "allowed": true,
+      "cap": 65536,
+      "withinCap": true
+    },
+    {
+      "relative": "process-receipt.original.json",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\A2P0\\20261023T195853Z-637ad147\\process-receipt.original.json",
+      "bytes": 6002,
+      "sha256": "15A8133845B9DE9D9833D44BDCA909F133A64D3F009EF665814C670063B87104",
+      "allowed": true,
+      "cap": 131072,
+      "withinCap": true
+    },
+    {
+      "relative": "stderr.original.txt",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\A2P0\\20261023T195853Z-637ad147\\stderr.original.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "allowed": true,
+      "cap": 65536,
+      "withinCap": true
+    },
+    {
+      "relative": "stdout.original.txt",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\A2P0\\20261023T195853Z-637ad147\\stdout.original.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "allowed": true,
+      "cap": 16384,
+      "withinCap": true
+    }
+  ],
+  "retainedFileCount": 4,
+  "retainedBytes": 10815,
+  "aggregateWithinCap": true,
+  "unexpectedPaths": [],
+  "captureFilePresent": false,
+  "capturedProfileCount": 0,
+  "process": {
+    "pid": 35520,
+    "creationUtc": "2026-10-23T20:13:57.3889910Z",
+    "resumedObservationUtc": "2026-10-23T20:13:57.3978758Z",
+    "assignedBeforeResume": true,
+    "resumed": true,
+    "jobLimitFlags": 8200,
+    "activeProcessLimit": 1,
+    "creationJobAssociation": "PROC_THREAD_ATTRIBUTE_JOB_LIST",
+    "initialAccounting": {
+      "stage": "assigned-before-resume",
+      "observedUtc": "2026-10-23T20:13:57.3974487Z",
+      "querySucceeded": true,
+      "totalProcesses": 1,
+      "activeProcesses": 1,
+      "totalTerminatedProcesses": 0,
+      "totalUserTime100ns": 0,
+      "totalKernelTime100ns": 0,
+      "thisPeriodUserTime100ns": 0,
+      "thisPeriodKernelTime100ns": 0,
+      "totalPageFaultCount": 646
+    },
+    "exactTrigger": {
+      "stage": "unexpected-membership-trigger",
+      "observedUtc": "2026-10-23T20:13:57.4282496Z",
+      "sampleSource": "ALREADY_OBTAINED_LOOP_QUERY",
+      "informationClass": 1,
+      "querySucceeded": true,
+      "requestedBytes": 48,
+      "returnedBytes": 48,
+      "queryStartedElapsedSeconds": 0.0491098,
+      "queryCompletedElapsedSeconds": 0.0491188,
+      "totalProcesses": 2,
+      "activeProcesses": 2,
+      "totalTerminatedProcesses": 0,
+      "totalUserTime100ns": 156250,
+      "totalKernelTime100ns": 0,
+      "thisPeriodUserTime100ns": 156250,
+      "thisPeriodKernelTime100ns": 0,
+      "totalPageFaultCount": 3967
+    },
+    "finalAccounting": {
+      "stage": "final-job",
+      "observedUtc": "2026-10-23T20:13:57.4313333Z",
+      "querySucceeded": true,
+      "totalProcesses": 2,
+      "activeProcesses": 0,
+      "totalTerminatedProcesses": 0,
+      "totalUserTime100ns": 156250,
+      "totalKernelTime100ns": 0,
+      "thisPeriodUserTime100ns": 156250,
+      "thisPeriodKernelTime100ns": 0,
+      "totalPageFaultCount": 4256
+    },
+    "primaryError": {
+      "stage": "owned-root",
+      "type": "System.IO.InvalidDataException",
+      "message": "Single-root job accounting differs",
+      "win32Error": null,
+      "syntheticFault": false,
+      "observedUtc": "2026-10-23T20:13:57.4288219Z"
+    },
+    "secondaryErrors": [
+      {
+        "stage": "failure-cleanup",
+        "type": "System.IO.InvalidDataException",
+        "message": "Single-root job accounting differs",
+        "win32Error": null,
+        "syntheticFault": false,
+        "observedUtc": "2026-10-23T20:13:57.4313613Z"
+      }
+    ],
+    "shutdown": [
+      {
+        "operation": "TerminateJobObject",
+        "observedUtc": "2026-10-23T20:13:57.4292674Z"
+      }
+    ],
+    "exitCode": 2733637633,
+    "exitConfirmed": true,
+    "exitUtc": "2026-10-23T20:13:57.4294804Z",
+    "elapsedSeconds": 0.0528422,
+    "timedOut": false,
+    "cleanupConfirmed": true,
+    "cleanupWithinBudget": true,
+    "cleanupElapsedSeconds": 0.0030999000000000027,
+    "finalActiveJobCountObserved": 0,
+    "streamsComplete": true,
+    "stdoutComplete": true,
+    "stderrComplete": true,
+    "stdoutBytes": 0,
+    "stderrBytes": 0,
+    "readerJoinUncertainty": false
+  },
+  "outer": {
+    "operatorPid": 24448,
+    "workerPid": 39276,
+    "workerExitCode": 1,
+    "workerExitConfirmed": true,
+    "elapsedSeconds": 1.4310067,
+    "forcedRootTermination": false,
+    "timedOut": false,
+    "workerStdoutComplete": true,
+    "workerStderrComplete": true,
+    "positivePythonCleanupReceiptJoined": false,
+    "qualification": "Positive joined success remains false because phaseFAIL; distinct process receipt confirms actual cleanup/finalactive0."
+  },
+  "diagnosticObservation": "The already-obtained successful complete-size loop query that selected the strict guard is now retained exactly, including all8ACCOUNT fields,48requested/returned and existingmonotonic interval. This closes only the prior trigger-observation gap, not the capture or process-cause gap.",
+  "cause": "UNATTRIBUTED",
+  "additionalProcessIdentity": "UNATTRIBUTED",
+  "collectorEntry": "UNPROVEN",
+  "csharpCompilation": "Add-Type completed and Run reached resumed-root path; no separate compiler transcript or broader build proof",
+  "accountingQualification": "Microsoft documents lifetime and temporary active accounting for failed associations; total2/active2/terminated0 alone identifies no actor or cause and proves neither2executingpayloads nor an ineffective active limit.",
+  "primaryReferences": [
+    "https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_accounting_information",
+    "https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information"
+  ],
+  "primaryRetrievalDate": "2026-10-23",
+  "postClosurePreservation": {
+    "frozenSourceInputsChecked": 154,
+    "retainedOutputFilesChecked": 4,
+    "allComparedMatched": true,
+    "canonicalSourceRepairAfterFailure": "NOT_RUN",
+    "newDiagnosticExecution": "NOT_RUN"
+  },
+  "successor": {
+    "repair": "NOT_RUN",
+    "newBindings": "NOT_CREATED",
+    "newDiagnosticExecution": "NOT_RUN",
+    "retryAllowed": false,
+    "guardRelaxation": false,
+    "oldAuthorityTransfer": false,
+    "readOnlyDesign": "FINITE_OWN_JOB_PID_LIST_DESIGN_MAY_CONTINUE"
+  },
+  "next": "Publish/checkpoint/push/exact-gh verify this actual failure under OWN18 BEFORE repair, new binding or diagnostic execution. Finite read-only own-job diagnostic design may continue; no guard relaxation, retry, actor attribution or old authority transfer.",
+  "preserved": {
+    "originalD0Failure": "CLOSED_FAIL_UNCHANGED",
+    "rawSourcePass": "EXACT_CURRENT_SOURCE_PASS_UNCHANGED",
+    "firstSourceBlocked": "4b1e038_RAW_BLOCKED",
+    "boundedA1gAcceptance": "REV131_PRESERVED",
+    "own17": "DEFERRED_UNPROVEN",
+    "linux": "UNTESTED",
+    "broaderA2And727": "OPEN",
+    "gImplement": "NOT_GRANTED",
+    "finalCodeReqAcceptance": "NOT_ESTABLISHED",
+    "visible": "HOLD_UNTIL_EXPLICIT_OWNER_APPROVAL_20261023T1935"
+  },
+  "publisherCanonicalWritesPerformed": false
+}
