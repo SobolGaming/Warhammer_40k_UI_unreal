@@ -1,0 +1,234 @@
+{
+  "recordKind": "CANONICAL_ROUNDTRIP_CAPTURE_FINITE_PROTOCOL_DECLARATION",
+  "state": "UNBOUND_SOURCE_ONLY_NOT_AUTHORITY",
+  "notAutomaticJsonSchemaValidator": true,
+  "captureSchemaVersion": 1,
+  "captureRecordKind": "A2_CANONICAL_SEMANTIC_ROUNDTRIP_REFERENCE_CAPTURE_NOT_ACCEPTANCE",
+  "captureScope": "CANONICAL_SEMANTIC_ROUNDTRIP_REFERENCE",
+  "successStatus": "PASS_ROUNDTRIP_REFERENCE_CLOSED_NOT_ACCEPTANCE",
+  "failureStatus": "FAIL_ROUNDTRIP_REFERENCE_CLOSED_NOT_ACCEPTANCE",
+  "subjectFields": [
+    "sourceHead",
+    "sourceBase",
+    "runId",
+    "nonce",
+    "bindingSha256",
+    "helperSource"
+  ],
+  "requiredEnvelopeFields": [
+    "schemaVersion",
+    "recordKind",
+    "captureScope",
+    "sourceHead",
+    "sourceBase",
+    "runId",
+    "nonce",
+    "bindingSha256",
+    "helperSource",
+    "canonicalCount",
+    "plannedCanonicalCount",
+    "actualCaseCount",
+    "passedCaseCount",
+    "copyRelationCount",
+    "copyRelations",
+    "copyComparisons",
+    "diagnosticReferenceIdentityOnly",
+    "presenceRuleCatalog",
+    "yamlVersion",
+    "operationStatus",
+    "results",
+    "limits",
+    "transport",
+    "generatedTransportItems",
+    "aggregateExportUtf8Bytes",
+    "expectedOptionalImportRefusals",
+    "loadedSelectedModules",
+    "elapsedSeconds",
+    "scopeLimits"
+  ],
+  "limits": {
+    "seconds": 60,
+    "jsonBytes": 2093056,
+    "maximumDepth": 64,
+    "maximumProjectionNodes": 100000,
+    "maximumAggregateTransportItems": 200000,
+    "maximumTransportDepth": 64,
+    "maximumCaptureContainerDepth": 96,
+    "maximumExportUtf8Bytes": 65536,
+    "maximumAggregateExportUtf8Bytes": 655360
+  },
+  "successCriteria": {
+    "canonicalCount": 10,
+    "plannedCanonicalCount": 10,
+    "actualCaseCount": 10,
+    "passedCaseCount": 10,
+    "copyRelationCount": 6,
+    "resultsCount": 10,
+    "orderedIds": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09",
+      "C10"
+    ],
+    "everyCaseStatus": "PASS",
+    "everyCaseExplicitBooleanTrue": [
+      "checks.fullResultEqual",
+      "checks.payloadFixedPoint",
+      "checks.expectedBeforeDiagnosticsMatched",
+      "checks.expectedAfterDiagnosticsMatched"
+    ],
+    "everyDeclaredStage": "PASS",
+    "actualCopyComparisonsCount": 6,
+    "allCopyComparisonsTrue": true,
+    "exportLocationIsNull": true,
+    "allSameLogicalSourceAndPreviewContexts": true,
+    "completeCaptureContainerDepthMaximum": 96,
+    "stderrBytes": 0,
+    "childExitCode": 0,
+    "sourceAndRuntimeDescriptorsExact": true
+  },
+  "caseSchema": {
+    "requiredSuccessFields": [
+      "id",
+      "lane",
+      "preview",
+      "input",
+      "logicalOrigin",
+      "actualExportLocation",
+      "status",
+      "checks",
+      "stageStatus",
+      "inputRawBase64",
+      "rawParsedGraph",
+      "beforeHasErrors",
+      "beforeResult",
+      "beforeDiagnostics",
+      "expectedBeforeDiagnostics",
+      "expectedAfterDiagnostics",
+      "presenceAndDefaultLedger",
+      "exportPayload1",
+      "yamlText",
+      "yamlUtf8Bytes",
+      "yamlSha256",
+      "reparsedRawGraph",
+      "afterHasErrors",
+      "afterResult",
+      "afterDiagnostics",
+      "exportPayload2"
+    ],
+    "stages": [
+      "rawLoad",
+      "beforeParse",
+      "beforeCapture",
+      "presence",
+      "export1",
+      "yamlEmit",
+      "afterParse",
+      "afterCapture",
+      "export2",
+      "compare"
+    ],
+    "stageValues": [
+      "NOT_RUN",
+      "PASS",
+      "FAIL"
+    ],
+    "checksBeforeAttempt": null,
+    "checksAttemptedMismatch": false,
+    "checksPassed": true,
+    "diagnosticVector": "Ordered list of [severity,code,field,message,value]; full dataclass diagnostics also retained in beforeResult/afterResult",
+    "presenceRows": [
+      "rawPointer",
+      "typedFieldPath",
+      "presence",
+      "rawValueKind",
+      "rawGraphReference",
+      "effectiveSnapshot",
+      "ruleId",
+      "exportMaterialization"
+    ],
+    "presenceValues": [
+      "absent",
+      "explicit-null",
+      "explicit-value"
+    ],
+    "originalRaw": "Exact input bytes encoded base64 before parse, descriptor exact; parsed ordered raw graph retained separately",
+    "provenance": "Logical original ResourceSource/source_path reused for before/after; actualExportLocation null, no rebase or file facade"
+  },
+  "transport": {
+    "name": "TAGGED_TUPLE_TRANSPORT_V1_JSON_ARRAYS_NOT_P0_OBJECTS",
+    "forms": [
+      "none=[\"none\"]",
+      "bool/int/str=[tag,exact scalar]",
+      "float=[\"float_hex\",finite Python float.hex string]",
+      "path=[\"path\",concrete type symbol,string snapshot]",
+      "tuple/list=[tag,ordered snapshots array]",
+      "mapping=[\"mapping\",ordered array of [key snapshot,value snapshot]]",
+      "dataclass=[\"dataclass\",original type symbol,ordered array of [field name,snapshot]]"
+    ],
+    "perHelperSnapshotSemanticBudget": "100000 nodes and depth64; dict keys and raw path string sidecar count",
+    "generatedAggregateBudget": "Every generated tagged tuple/list container and scalar/tag/type/field-name item intended for retained snapshots; excludes plain envelope/context/expected-vector/YAML/base64 metadata and transient comparator snapshots",
+    "generatedAggregateMaximum": 200000,
+    "generatedTransportDepthMaximum": 64,
+    "captureContainerDepthMaximum": 96,
+    "parserQualification": "Whole capture guarded at96; existing worker uses ConvertFrom-Json -Depth100. No256-depth support claim.",
+    "failedCounterQualification": "Positive generatedTransportItems<=200000; failure may honestly record200001 because increment precedes rejection. Counter is generated work, not proof omitted failure-cap material was retained."
+  },
+  "failureCriteria": {
+    "caseFailure": "Keep actually obtained bounded values, explicit failed stage/type/message<=512, dependent stages NOT_RUN; stop further cases; actualCaseCount honest, nonzero exit",
+    "preBindingOrImportFailure": "May have no capture; process/stream receipts remain truthful",
+    "captureCapOrDepth": "Write finite failure envelope with results empty, observed counts, caseFailureSummaries, captureCapExceeded/captureDepthExceeded and explicit omitted material; never PASS",
+    "noFabricatedRemainingCases": true,
+    "noRetry": true
+  },
+  "outputs": [
+    {
+      "relativePath": "capture/canonical-roundtrip-reference.original.json",
+      "cap": 2093056
+    },
+    {
+      "relativePath": "stdout.original.txt",
+      "cap": 16384
+    },
+    {
+      "relativePath": "stderr.original.txt",
+      "cap": 65536
+    },
+    {
+      "relativePath": "process-receipt.original.json",
+      "cap": 131072
+    },
+    {
+      "relativePath": "execution-receipt.original.json",
+      "cap": 65536
+    }
+  ],
+  "individualCapSum": 2371584,
+  "aggregateCeiling": 4194304,
+  "collectorCompletion": {
+    "recordKind": "CANONICAL_ROUNDTRIP_REFERENCE_FILE_CLOSED_NOT_ACCEPTANCE",
+    "fields": [
+      "recordKind",
+      "bytes",
+      "sha256"
+    ],
+    "stdout": "Exactly one JSON line after capture closure, same fields on failure if capture closed; process exit distinguishes failure",
+    "captureStatusNotAcceptance": true
+  },
+  "sourceAndGo": "Actual acceptedP0/checkpoint prerequisite satisfied only by root record; future exact source/data/freeze/permission/positiveSOURCE/rootadmission/separateGO remain UNBOUND; no authority here",
+  "screen": "22:29 UTC HOLD active; no GUI/window/input/screen",
+  "claimsExcluded": [
+    "Public JSON/text/file/default wrappers",
+    "Legacy HUD exporter API",
+    "Native profile normalization/export behavior",
+    "Rendered/runtime-preview parity",
+    "727 materialized fixtures/fullA2/G-IMPLEMENT/Linux/OWN17 special assurance"
+  ],
+  "failureRetentionOrder": "Observed before/after hasErrors and diagnostic vectors are assigned before whole-result snapshot calls; a snapshot failure does not erase those obtained facts. Per-case Exception catch records FAIL/stage/type/message, stops cases, never retries or falls back to PASS."
+}

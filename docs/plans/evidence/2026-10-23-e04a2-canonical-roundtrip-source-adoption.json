@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "PUBLISHED_CANONICAL_ROUNDTRIP_SOURCE_ADOPTION_EVIDENCE",
+  "status": "CANONICAL_ROUNDTRIP_REFERENCE_SOURCE_ADOPTED_FRESH_SOURCE_PENDING",
+  "original": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-root-20261023T-background-preparation\\root-rev146-roundtrip-source-adoption.original.json",
+    "bytes": 14772,
+    "sha256": "E119E7B96BCAFB34277EF2CA3DEA28F695D7FDBAE0CEF44EA88757108F2AA2AB"
+  },
+  "adoption": {
+    "schemaVersion": 1,
+    "recordKind": "ROOT_CANONICAL_SEMANTIC_ROUNDTRIP_SOURCE_ADOPTION",
+    "createdUtc": "2026-10-23T23:00:30.6106702Z",
+    "status": "CANONICAL_ROUNDTRIP_REFERENCE_SOURCE_ADOPTED_FRESH_SOURCE_PENDING",
+    "predecessorHead": "d1a707eab3218db3f8654d65b150b17cba665348",
+    "predecessorAcceptance": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\bindings-9b0fd34-20261023T215640Z-e969ee8d\\root-final-p0-acceptance.original.json",
+      "bytes": 23095,
+      "sha256": "F902FF6329E6F6569187FDC00E7A8962FCEB44AE0CD434995E368E5E515DA0BA"
+    },
+    "predecessorExactBackup": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-rev145-accepted-p0-checkpoint-backup.original.json",
+      "bytes": 1601,
+      "sha256": "4BC38E55CF5A3DB6925A9030CB61C3140E31A347281C69D4F93F84CB335C80EC"
+    },
+    "scope": "Ten original canonical contexts/six copies;pure reference serializer/inverse/YAML reparse/full typed and diagnostic equality/payload fixed point/presence/failure evidence",
+    "sources": [
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2roundtrip\\collect_canonical_roundtrip.py",
+          "bytes": 29176,
+          "sha256": "5D72C4EC7835436F8BE13F132AC12534DC5103C4BDBF0B4247239D8FF7FC9D5D"
+        },
+        "originalProposal": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2-canonical-roundtrip-collector-GUARDED_PROPOSED-20261023-91bfc0ad\\r2\\collect_canonical_roundtrip.GUARDED_PROPOSED.py",
+          "bytes": 29239,
+          "sha256": "408D51579C8CFCD12AAC8C7C674C5768E6749E3BF04C4D41549294A9E8E74879"
+        },
+        "prototypeGuardRemovedBytes": 63
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2roundtrip\\roundtrip_values.py",
+          "bytes": 9833,
+          "sha256": "67CDE793C54A9B09D990679C9E0DDC2957C10E5C80688A5D9549B4DCBB57D5F9"
+        },
+        "originalProposal": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2-canonical-roundtrip-collector-GUARDED_PROPOSED-20261023-91bfc0ad\\r2\\roundtrip_values.UNADOPTED_PROPOSED.py",
+          "bytes": 9833,
+          "sha256": "67CDE793C54A9B09D990679C9E0DDC2957C10E5C80688A5D9549B4DCBB57D5F9"
+        },
+        "prototypeGuardRemovedBytes": 0
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2roundtrip\\roundtrip-dependencies.template.json",
+          "bytes": 34240,
+          "sha256": "6EF6F3231406CE850FF1F9DC6950E7ED16B67B559BE2CE46078275BB8018439E"
+        },
+        "originalProposal": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2-canonical-roundtrip-collector-GUARDED_PROPOSED-20261023-91bfc0ad\\r2\\roundtrip-dependencies.UNBOUND_PROPOSED.json",
+          "bytes": 34240,
+          "sha256": "6EF6F3231406CE850FF1F9DC6950E7ED16B67B559BE2CE46078275BB8018439E"
+        },
+        "prototypeGuardRemovedBytes": 0
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2roundtrip\\capture-protocol.json",
+          "bytes": 8223,
+          "sha256": "ED80BCA679B2024856B4B9BF3B3ED0A8973542728B4592146530F3AB5ACA0254"
+        },
+        "originalProposal": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2-canonical-roundtrip-collector-GUARDED_PROPOSED-20261023-91bfc0ad\\r2\\capture-schema.clean.UNBOUND_PROPOSED.json",
+          "bytes": 8223,
+          "sha256": "ED80BCA679B2024856B4B9BF3B3ED0A8973542728B4592146530F3AB5ACA0254"
+        },
+        "prototypeGuardRemovedBytes": 0
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2roundtrip\\diagnostics.expected.json",
+          "bytes": 8549,
+          "sha256": "2EC796E272DD425D5986A51E1CC6742805F2FDA1D72ED77E4B2289D138C61742"
+        },
+        "originalProposal": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2-canonical-roundtrip-collector-GUARDED_PROPOSED-20261023-91bfc0ad\\r2\\diagnostics.expected.clean.PROPOSED.json",
+          "bytes": 8549,
+          "sha256": "2EC796E272DD425D5986A51E1CC6742805F2FDA1D72ED77E4B2289D138C61742"
+        },
+        "prototypeGuardRemovedBytes": 0
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2roundtrip\\Invoke-A2CanonicalRoundtripReferenceWorker.ps1",
+          "bytes": 16757,
+          "sha256": "DC5D1B61FB2F4C7151997CC5F4831BAE28632B0C36858BC459C2768F12244FC5"
+        },
+        "originalProposal": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-worker-outer-UNBOUND_PROPOSED-20261023-fab43b8c\\final-r2\\Invoke-A2CanonicalRoundtripReferenceWorker.UNBOUND_PROPOSED.ps1",
+          "bytes": 16900,
+          "sha256": "25403952A5C93694C61961F5798A9EA2946B1451A744E9116391AF8A69983564"
+        },
+        "prototypeGuardRemovedBytes": 143
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2roundtrip\\Invoke-A2CanonicalRoundtripOuterWatchdog.ps1",
+          "bytes": 17131,
+          "sha256": "1FA6FEE1248852572CA3156D775D19725A4A2983A4BB96C3E80E4258DCCB5BC2"
+        },
+        "originalProposal": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-worker-outer-UNBOUND_PROPOSED-20261023-fab43b8c\\final-r2\\Invoke-A2CanonicalRoundtripOuterWatchdog.UNBOUND_PROPOSED.ps1",
+          "bytes": 17273,
+          "sha256": "25D67153E3F7AF16BE0635FDA9EED1AD329133BED2039876097ECC20DD6999B5"
+        },
+        "prototypeGuardRemovedBytes": 142
+      }
+    ],
+    "packet": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-23-e04a2-canonical-semantic-roundtrip-packet.md",
+      "bytes": 17422,
+      "sha256": "9AB7EADB534C624A730C3C6407424D2A8614F7B73BAD961E77F0E47F4A2D1B42"
+    },
+    "packetProposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2-roundtrip-clean-packet-r2-PRIVATE_PROPOSED-20261023-762d7dcf\\canonical-semantic-roundtrip-packet.clean.r2.UNBOUND_PROPOSED.md",
+      "bytes": 17162,
+      "sha256": "CC8BD60046DBB372EC5F29056740FF0FD4B1EFAF9500431D489C292EDB81E46F"
+    },
+    "pureHelperPrototype": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2-canonical-roundtrip-source-GUARDED_PROPOSED-20261023-d468e2a1\\canonical_roundtrip_values.GUARDED_PROPOSED.py",
+      "bytes": 9896,
+      "sha256": "3C7F235D0C07D79FED29D1A91B0826B3F8D22C3B3309ACAA5962F27632B4BFBB"
+    },
+    "pureHelperGuardRemovedBytes": 63,
+    "workerOuterDeltaLedger": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-worker-outer-UNBOUND_PROPOSED-20261023-fab43b8c\\final-r2\\exact-clone-delta-ledger.UNBOUND_PROPOSED.json",
+      "bytes": 30280,
+      "sha256": "B57BB63166A22749BF43A995B60FE24A29D274D98C0506360D2D3BB4D688FC85"
+    },
+    "routeDeltaLedger": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-rev146-routes-CONDITIONAL_PROPOSED-20261023-e638a91f\\rev146-four-route-exact-edits.CONDITIONAL_PROPOSED.json",
+      "bytes": 39122,
+      "sha256": "10153162E87366294271BC10140CA77B9954B8203BBEB9F92BEC98AE2F42B041"
+    },
+    "routes": [
+      {
+        "before": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\AGENTS.md",
+          "bytes": 196286,
+          "sha256": "07C4D33AB7E2EAD28CB4EB5DE69D74A5D795F32F0D9A609487D09A89ED38309F"
+        },
+        "proposal": {
+          "ledger": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-rev146-routes-CONDITIONAL_PROPOSED-20261023-e638a91f\\rev146-four-route-exact-edits.CONDITIONAL_PROPOSED.json",
+            "bytes": 39122,
+            "sha256": "10153162E87366294271BC10140CA77B9954B8203BBEB9F92BEC98AE2F42B041"
+          },
+          "bytes": 197872,
+          "sha256": "E9DDCF3A4D3A35C0E097F86A36B29D75D221C36801608B1D7E2999FAA105740B",
+          "state": "CONDITIONAL_VIRTUAL_BYTES_HASH_VERIFIED"
+        },
+        "after": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\AGENTS.md",
+          "bytes": 197862,
+          "sha256": "82828CCE4A8540B86E108343C947337A2C3956E98D78735BFA326B8C7EB561CE"
+        },
+        "physicalBodyEdits": 1,
+        "wholeForwardMatched": true,
+        "wholeByteInverseMatched": true,
+        "onlyAdditionalBinding": "2026-10-23T23:00:30.6106702Z"
+      },
+      {
+        "before": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\README.md",
+          "bytes": 152812,
+          "sha256": "9E57424CBC3B29B866427B6941F97CC645B17CAA8B0D244973A46C9E7DA18638"
+        },
+        "proposal": {
+          "ledger": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-rev146-routes-CONDITIONAL_PROPOSED-20261023-e638a91f\\rev146-four-route-exact-edits.CONDITIONAL_PROPOSED.json",
+            "bytes": 39122,
+            "sha256": "10153162E87366294271BC10140CA77B9954B8203BBEB9F92BEC98AE2F42B041"
+          },
+          "bytes": 154398,
+          "sha256": "87279F3B0394D0FE03B0D31B3BDB43B384CABF5BD2E6E1038E84A2734C088CD4",
+          "state": "CONDITIONAL_VIRTUAL_BYTES_HASH_VERIFIED"
+        },
+        "after": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\README.md",
+          "bytes": 154388,
+          "sha256": "FBFB814C69B5AF87D61D57C7A73F91C143523066D8CC3BFB34A50EED10CE1125"
+        },
+        "physicalBodyEdits": 1,
+        "wholeForwardMatched": true,
+        "wholeByteInverseMatched": true,
+        "onlyAdditionalBinding": "2026-10-23T23:00:30.6106702Z"
+      },
+      {
+        "before": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\README.md",
+          "bytes": 102853,
+          "sha256": "4A21C5B99EF8AEFBA2C15628FCCB2EC1C1E7F8E6602367DF8E8646877A7036F5"
+        },
+        "proposal": {
+          "ledger": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-rev146-routes-CONDITIONAL_PROPOSED-20261023-e638a91f\\rev146-four-route-exact-edits.CONDITIONAL_PROPOSED.json",
+            "bytes": 39122,
+            "sha256": "10153162E87366294271BC10140CA77B9954B8203BBEB9F92BEC98AE2F42B041"
+          },
+          "bytes": 104545,
+          "sha256": "CEFA2A09C9B98264936334C3088FE18B3F18B901DE4EBDA5E8AC8EE4D1BD034F",
+          "state": "CONDITIONAL_VIRTUAL_BYTES_HASH_VERIFIED"
+        },
+        "after": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\README.md",
+          "bytes": 104535,
+          "sha256": "725C0B52C1218A6D257A6D839349426B79D8347EE89ED318C93B85819C77B7E5"
+        },
+        "physicalBodyEdits": 2,
+        "wholeForwardMatched": true,
+        "wholeByteInverseMatched": true,
+        "onlyAdditionalBinding": "2026-10-23T23:00:30.6106702Z"
+      },
+      {
+        "before": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\unreal-migration-plan.md",
+          "bytes": 894300,
+          "sha256": "4861806D7D13521B3426D2CE1B9D9E022506B8AD4EE38541C734DBAD8EC23CB4"
+        },
+        "proposal": {
+          "ledger": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2CanonicalRoundtrip-rev146-routes-CONDITIONAL_PROPOSED-20261023-e638a91f\\rev146-four-route-exact-edits.CONDITIONAL_PROPOSED.json",
+            "bytes": 39122,
+            "sha256": "10153162E87366294271BC10140CA77B9954B8203BBEB9F92BEC98AE2F42B041"
+          },
+          "bytes": 902339,
+          "sha256": "1B860A2F2292E1A46AC52FA2E3BE225FEFBA6F5604B02488D9ED1163872CA809",
+          "state": "CONDITIONAL_VIRTUAL_BYTES_HASH_VERIFIED"
+        },
+        "after": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\unreal-migration-plan.md",
+          "bytes": 902269,
+          "sha256": "E556938E8FBFF086B363CFA6E3F6B76DD1B9EC3F123D2437191B65D642F62EE5"
+        },
+        "physicalBodyEdits": 7,
+        "wholeForwardMatched": true,
+        "wholeByteInverseMatched": true,
+        "onlyAdditionalBinding": "2026-10-23T23:00:30.6106702Z"
+      }
+    ],
+    "sharedSupervisorUnchanged": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2p0\\A2P0OwnedJobSupervisor.cs",
+      "bytes": 45441,
+      "sha256": "5D3FD69420F7D842182BB97A48714E9F20A9B6C37D5CC2B310B3F02F02FA73B5"
+    },
+    "originalDescriptorsRehashed": 44,
+    "completeBeforeDiagnosticVectorsRechecked": 10,
+    "strictAfterVectorsRequireIdentical": true,
+    "sourceInspectedTools": [
+      "4503c2",
+      "80fff6",
+      "0ccb13",
+      "b37707",
+      "11bd5c",
+      "45dda7",
+      "df05aa",
+      "cc738a",
+      "eac9a1",
+      "b28611"
+    ],
+    "preAdoptionSourceRepairs": [
+      "Nested worker checks path/exact four-key dictionary aligned",
+      "Observed hasErrors/diagnostics assigned before potentially failing snapshot",
+      "Generated transport64/whole capture96 fit worker JSONdepth100"
+    ],
+    "review": "NOT_RUN",
+    "syntaxAst": "NOT_RUN",
+    "compilation": "NOT_RUN",
+    "tests": "NOT_RUN",
+    "runtime": "NOT_RUN",
+    "newSourceHead": "UNBOUND_PENDING_CHECKPOINT",
+    "newRun": "UNBOUND",
+    "newBindings": "NOT_CREATED",
+    "sourceAdmission": "NOT_CREATED",
+    "permission": "NOT_CREATED",
+    "runtimeGo": "NOT_CREATED",
+    "screenHold": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-visible-hold-20261023T2229-relay.original.json",
+      "bytes": 1593,
+      "sha256": "9BCDB4A3ECA6D171246683FA13542B04962B45004484D24D658383EAD1BC02BC"
+    },
+    "visible": "HOLD_ACTIVE_BACKGROUND_ONLY",
+    "linux": "UNTESTED",
+    "own17": "DEFERRED_UNPROVEN",
+    "merge": "NOT_AUTHORIZED_BY_THIS_RECORD",
+    "next": "Checkpoint/push/exact-gh source backup;new complete bindings/fresh SOURCE/root admission before separate hidden GO",
+    "limits": [
+      "New migration HUD inverse;no legacy serializer claim",
+      "Exact YAML expression only;public JSON/text/file/default wrappers not measured",
+      "Reference source only;native Unreal normalization/export/render/727/fullA2 remain open",
+      "Capture protocol is finite declaration,not automatically executed JSONSchema validation",
+      "Full before/after equality remains requirement,not a run result"
+    ]
+  },
+  "futureExactBindings": "Will follow source checkpoint;canonical templates refuse UNBOUND inputs",
+  "candidateExecuted": false
+}
