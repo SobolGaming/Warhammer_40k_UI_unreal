@@ -7,6 +7,6 @@
     "Plugins": [
         { "Name": "ProceduralMeshComponent", "Enabled": true },
         { "Name": "AndroidFileServer", "Enabled": false },
-        { "Name": "EnhancedInput", "Enabled": false }
+        { "Name": "EnhancedInput", "Enabled": true }
     ]
 }
