@@ -1,0 +1,13 @@
+# A2-P0 SOURCE changes requested: worker receipt retention
+
+Root retained literal CHANGES_REQUESTED for bfbc38382f43c310524d5819f78c98f248e2019a / run 20261023T203123Z-2625b66f at 2026-10-23T20:46:46.4112578Z. [Exact report](2026-10-23-e04a2-p0-source-review-bfbc383.json); [closure evidence](../evidence/2026-10-23-e04a2-p0-source-worker-receipt-retention-failure.json). No passing SOURCE admission or runtime authority follows.
+
+The one P2 static finding concerns worker lines 58–66 and 119–128: Task-Tick precedes process-receipt creation, while the supervisor receives the remaining cooperative budget without reserved receipt-finalization time. If that budget expires before its result returns, the worker can retain a deadline exception and limited summary while discarding returned supervisor error, accounting and PID observations. Root confirmed the source finding; execution still fails closed. The triggering path was not executed.
+
+The requested repair reserves finite finalization time within existing deadlines/caps, best-effort retains the returned record before deadline recheck, and records later worker/write failures separately. No actual repair has occurred. Native GO and positive SOURCE admission are NOT_CREATED; RunRoot is absent and compilation/capture/runtime are NOT_RUN.
+
+Root retained raw12/selected8 seals and a separate 165-identity rehash before first body read, and matched all 58 tool-value hashes and 29 original input joins. Exact clipping/recovery qualifications remain in the evidence: clipped metadata/inventories are not credited as complete bodies, and narrower source deliveries and rereads are distinguished. Auxiliary work is factual, not an independent correctness verdict or comprehension certificate.
+
+Reviewer coverage is 104 whole grants/46 excerpts and 139 permitted verification identities checked twice. Root records first-half 65 exact source/excerpt/criteria sections and second-half 27 whole source bodies plus two tails. These overlapping sets are not additive. Direct reviewer access to eighteen mapped originals remains UNVERIFIED; equality is root provenance, while two binary copies received stat/hash only. One read-only/approval-never/memory-disabled context was recorded; lower-level enforcement remains UNVERIFIED.
+
+OWN18 requires publication/checkpoint/push/exact-gh backup before actual worker repair; repaired-source checkpoint/backup and fresh bindings/affected SOURCE then precede separate GO. Preserve c62 SOURCE PASS/native FAIL/exact trigger, original d0 failure and revision 131 bounded A1G acceptance/history. The 19:35 visible HOLD, OWN17 deferred/unproven, Linux UNTESTED and full A2/727/G-IMPLEMENT/final CODE/REQ limits remain.
