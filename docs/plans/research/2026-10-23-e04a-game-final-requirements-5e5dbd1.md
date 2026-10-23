@@ -1,0 +1,11 @@
+# E04 A1G final REQ: technical map retained, administration pending
+
+The fresh immutable FINAL_REQ assessment is **BLOCKED** for final head `5e5dbd166bda8b688891219411c768dc3c2b3292`, executed source `c329a3a32dca48272e29bad46af616bcc6bdebd4`, base `2651a8652915824fe339a958ca5afc1a835f5731` and run `20261023T154418Z-ce672e5f`. [Exact UTF-8/base64 report](2026-10-23-e04a-game-final-requirements-5e5dbd1.json); [provenance](../evidence/2026-10-23-e04a-game-final-requirements-provenance-5e5dbd1.json).
+
+A1G-01, -02, -04, -05, -06 and -08 are technical/scope PASS. A1G-03 is technical PASS with administrative GO verification BLOCKED; A1G-07 is administratively BLOCKED. The auditor found no unresolved substantive discrepancy in the inspected route. Original SOURCE admission, authority/sourceReviewed bindings, exact phase GOs and their chronology remained intentionally opaque to the initial blind assessment; neutral summaries and artifact identities did not establish those approvals.
+
+Foreground closed with exit 0; completion was `2026-10-23T17:51:12.4916354Z` and root observed closure at `17:52:17.6274717Z` (`0505f1`). The 12-member raw seal, eight-member selected seal and independent 1,185-file root rehash completed before first body read (`750e07`; metadata `49ae3f`/`d853c4`; first body `9f6178`). These administrative ordering facts do not replace root's still-pending conduct audit or the limited post-seal requirements supplement.
+
+CODE remains raw PASS and root-admitted with qualifications. Its later root administrative checks do not rewrite this independent REQ or supply that auditor's outstanding disposition. Preserve the [old inadmissible REQ extraction failure](2026-10-23-e04a-game-final-req-administrative-extraction-failure.md), whose body/verdict remain UNREAD.
+
+Publish/checkpoint/push/gh-verify this BLOCKED record before preparing the limited new post-seal REQ supplement. Keep the initial report immutable; any later supplement is a separate disposition, never a replacement PASS. A1G acceptance remains withheld. Candidate source and native evidence remain unchanged; no native repeat or authority expansion follows. Visible HOLD remains in effect pending fresh owner approval. OWN17 stays deferred/unproven, Linux UNTESTED and A2/broader gates open; standing private source/API review consent is unchanged.

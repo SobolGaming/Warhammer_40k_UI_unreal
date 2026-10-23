@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_FINAL_CODE_REVIEW_PROVENANCE_NOT_ACCEPTANCE",
+  "status": "CODE_PASS_ADMITTED_REQUIREMENTS_REVIEW_PENDING",
+  "role": "FINAL_CODE",
+  "reviewedFinalHead": "cb9e4588408b142c5b3908e7061b58a350b26376",
+  "executedHead": "c329a3a32dca48272e29bad46af616bcc6bdebd4",
+  "comparisonBase": "2651a8652915824fe339a958ca5afc1a835f5731",
+  "runId": "20261023T154418Z-ce672e5f",
+  "sessionId": "01a169b5-bb08-7691-96fe-bbb1cafa056f",
+  "rawVerdict": "PASS",
+  "rootAdmission": {
+    "admittedUtc": "2026-10-23T17:34:57.2064989Z",
+    "status": "PASS_ADMITTED_WITH_STATED_QUALIFICATIONS",
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-final-review\\final_code-cb9e458-20261023t170000z-9b82ac61\\root-final-code-admission.original.json",
+      "bytes": 6390,
+      "sha256": "BED7E061FACD4D3EE14978F6585C8E54D12AEBFC24590567C593960F1E178B15"
+    },
+    "rootTool": "0e600d"
+  },
+  "exactReport": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a-game-final-code-cb9e458.json",
+    "originalBytes": 8169,
+    "originalSha256": "111EECE1EEED3EAFA842410849C32C8478747D08CC863324ABC71E862494B820",
+    "encoding": "UTF-8 and base64",
+    "roundtripMatched": true,
+    "proposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-final-code-publication-UNADOPTED-PROPOSED-20261023-aux-82b6e1d7\\2026-10-23-e04a-game-final-code-cb9e458.json",
+      "bytes": 19885,
+      "sha256": "88FA8E0EC219C6440135227E53A9A7F81FB3E6120F1D7940EA2AC8893B177DCB"
+    }
+  },
+  "codeNote": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a-game-final-code-cb9e458.md",
+    "proposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-final-code-publication-UNADOPTED-PROPOSED-20261023-aux-82b6e1d7\\2026-10-23-e04a-game-final-code-cb9e458.md",
+      "bytes": 2857,
+      "sha256": "CD6878F0024747D86A466D103B38849B1E55C785858E460CBE915A88FA7DCE35"
+    }
+  },
+  "beforeFirstBody": {
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-final-review\\final_code-cb9e458-20261023t170000z-9b82ac61\\closed-raw-output-seal.before-body.original.json",
+      "bytes": 5125,
+      "sha256": "0B70C8705BCE9709F355F7E9B115F0B4EE3DE71446AF988299B3EB79FEDEC8E2"
+    },
+    "selectedSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-final-review\\final_code-cb9e458-20261023t170000z-9b82ac61\\closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 4185,
+      "sha256": "DCBBF9E020F480DDE7ADD9443D494492AD5ECD176A4515BBA414F863C1F2097F"
+    },
+    "independentRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-final-review\\final_code-cb9e458-20261023t170000z-9b82ac61\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 1930,
+      "sha256": "7A03F576E2072608E63BAF28FC7CE71B2A4A78AF22F1E8B16CE52ADEA9D36950"
+    },
+    "rehashUtc": "2026-10-23T17:18:30.8340438Z",
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "uniqueFrozenAndControlFiles": 1185,
+    "allComparedDescriptorsMatched": true,
+    "firstBodyTool": "6c1604",
+    "pointInTimeOnly": true
+  },
+  "conduct": {
+    "rootReadAllActualInputs": true,
+    "pairs": 55,
+    "unmatchedInputs": 0,
+    "orphanOutputs": 0,
+    "clippedOutputOrdinals": [
+      2,
+      8,
+      18,
+      28,
+      34,
+      92,
+      108
+    ],
+    "errors": [
+      "Python unavailable in call2; replaced with PowerShell call3",
+      "Formatting ForEach-Object -join in call46; corrected compact call47; 17 visible error headers before clipping, exact total unknown"
+    ],
+    "materialRecovery": "All2090 wrapper numbered lines retained across reads; material criteria/facts and primary007 tail/008/009 recovered; complete initial catalogs not established",
+    "completeOutputMethod": "Auxiliary parsed/rehash-scanned all110 values/112 text parts; material conduct/error/clipping/recovery passages inspected. Root inspected every actual input, complete ledger joins, actual final runtime and stderr. No claim every source/catalog byte semantically comprehended by root.",
+    "auxiliaryAudit": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-final-code-conduct-aux-PROPOSED-20261023-73cf091e\\closed-code-conduct.audit.OPERATOR_ONLY.PROPOSED.json",
+      "bytes": 121837,
+      "sha256": "D031E6DBC4ADB5AC06531140E4EB85CC5F98635E5F0089A23CFEF061DAD63324"
+    },
+    "auxiliaryRole": "Supplemental conduct audit only; not final CODE or REQ reviewer",
+    "prohibitedConductObserved": false,
+    "universalSemanticComprehension": "NOT_ESTABLISHED"
+  },
+  "runtimeLimits": {
+    "observedContexts": 1,
+    "observedTurns": 1,
+    "actualSandbox": "read-only",
+    "actualApproval": "never",
+    "actualMemoryMode": "disabled",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "modelOverride": null,
+    "resume": false,
+    "fork": false,
+    "lowerLevelInternalEnforcement": "UNVERIFIED",
+    "stderr": "Four ignored plugin-icon warnings and one unsupported PowerShell snapshot warning"
+  },
+  "reviewerReportedCoverage": {
+    "uniqueGrantedBodySourceExcerptFilesIdentityMatched": 289,
+    "canonicalMappings": 46,
+    "requiredFrozenSources": 45,
+    "ownedProjectCopyMappings": 36,
+    "ungrantedPayloadPathsNotIndependentlyReopenedOrRehashed": 5602,
+    "copiedVendorHeadersNotIndependentlyReopenedOrRehashed": 38,
+    "limits": "Reported reviewer coverage and retained metadata; not a root certification of universal source consumption or comprehension."
+  },
+  "postSealAdministrativeDisposition": {
+    "supplement": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-final-cb9e458-root-20261023\\root-post-seal-code-administrative-supplement.original.json",
+      "bytes": 43400,
+      "sha256": "559489022C5AEC05C5481CFF6091B5434D150536D0EADD462EE3881DBC14B110"
+    },
+    "descriptorOccurrencesMatched": 104,
+    "phaseAuthorityAndChronologyJoinsMatched": 9,
+    "finiteCurrentStatesMatched": 84,
+    "sourceStrictSealsAndRuntimeDescriptorsMatched": true,
+    "postSource14ControlChronologyMatched": true,
+    "disposition": "Actual SOURCE prerequisite, postSOURCE14 controls, nine separate GO/predecessor/timing joins and finite84 state preservation independently matched by root; no unresolved actionable administrative mismatch for CODE. Original raw qualification remains unchanged.",
+    "reviewerRawQualification": "PRESERVED_UNCHANGED",
+    "noPhaseOrReviewRerun": true,
+    "universalOrContinuousPreservation": "NOT_ESTABLISHED"
+  },
+  "laterMetadataBoundary": {
+    "checkpoint": "5e5dbd166bda8b688891219411c768dc3c2b3292",
+    "materialCanonicalMappingsUnchanged": 46,
+    "changedAdministrativePaths": [
+      "AGENTS.md",
+      "README.md",
+      "docs/plans/README.md",
+      "docs/plans/evidence/2026-10-23-e04a-game-final-req-administrative-extraction-failure.json",
+      "docs/plans/research/2026-10-23-e04a-game-final-req-administrative-extraction-failure.md",
+      "docs/plans/unreal-migration-plan.md"
+    ],
+    "scope": "Six administrative publications/routes only. CODE did not assess this later metadata. Earlier before-body rehash is a true point-in-time observation; current AGENTS metadata changed afterward under explicit root publication.",
+    "freshReqStatus": "PENDING_NO_REPORT_SESSION_OR_TOOL_VALUE_READ_BY_PROPOSAL_AUTHOR"
+  },
+  "substantiveLimits": [
+    "Finite A1G Win64 cooked Game route only; no universal source/binary, DDC/write or continuous window-absence proof",
+    "5602 ungranted payload paths and38 vendor headers not independently reopened/rehashed by reviewer",
+    "SDK actual writer PID and installed binary/source literal correspondence remain unverified",
+    "Observer query-failure branch unforced"
+  ],
+  "requirementsReview": "FRESH_INDEPENDENT_REQ_PENDING_OLD_REQ_BODY_UNREAD_ADMIN_EVIDENCE_INADMISSIBLE",
+  "a1gAccepted": false,
+  "sourceRepairOrRerunForPublication": false,
+  "canonicalWritesForProposal": false,
+  "currentFreshReqArtifactsRead": false,
+  "own17": "DEFERRED_UNPROVEN",
+  "linux": "UNTESTED",
+  "a2": "DEFERRED",
+  "visible": "HOLD_NO_VISIBLE_TESTING_UNTIL_FRESH_OWNER_APPROVAL",
+  "nativeAuthority": false,
+  "publicationAuthority": false,
+  "mergeAuthority": false
+}
