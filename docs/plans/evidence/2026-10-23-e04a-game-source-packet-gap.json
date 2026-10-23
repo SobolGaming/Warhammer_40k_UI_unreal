@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_E04_A1G_CLOSED_SOURCE_PACKET_GAP_PUBLICATION",
+  "status": "SOURCE_BLOCKED_MISSING_DIRECT_VENDOR_HEADER_BODY_GRANT",
+  "sourceHead": "e1e7d83cb645249d7db77c38665eb5c3de4966c5",
+  "comparisonBase": "cfd2ff3e78e40ce426ce87827d848d7fa464a66b",
+  "runId": "20261023T144716Z-0886fcf7",
+  "sourceReviewSession": "01a1693e-f545-75d0-9faf-43c99ae71dee",
+  "rootFailureClosure": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-sdk-trace-repair-root-20261023\\bindings-e1e7d83-20261023T144716Z-0886fcf7\\root-closed-source-blocked.original.json",
+    "bytes": 6938,
+    "sha256": "D7DFFD1C766E3B0C8C5ECA20DA50941BDE1CDA8416D8AEB28A8806377A5585B7"
+  },
+  "rootClosureTool": "27dae7",
+  "originalReview": {
+    "publicationRelativePath": "docs/plans/research/2026-10-23-e04a-game-source-review-e1e7d83.json",
+    "terminalOriginalByte": 46,
+    "bytes": 2092,
+    "publicationEncoding": "UTF8Base64",
+    "role": "E04_GAME_COMPONENT_SOURCE",
+    "encodedPublication": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-23-e04a-game-source-review-e1e7d83.json",
+      "bytes": 3486,
+      "sha256": "0B71C51632A0376E097C8275F5348C9EF9C1F0624B192F37BC13941BEFB6ADB5"
+    },
+    "sha256": "DC9C3C205A48704D471D114EBAE3A66DA50CA33612BC244F43FCC06E2E3D3A72",
+    "verdict": "BLOCKED"
+  },
+  "blocker": {
+    "issue": "YAML::EmitterStyle::value and Default/Block/Flow defining interface is identity-only. Applicable body grant required for affected fresh SOURCE.",
+    "sha256": "D1C9B881CA7AD54A8994DE649AE8DA84B8B82C6CC0A7B95AE590B41ED7420519",
+    "bytes": 503,
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\dependencies\\E04A1\\20261020T001330Z-29e97b84\\yaml-cpp\\include\\yaml-cpp\\emitterstyle.h"
+  },
+  "codeDefectReported": false,
+  "sourceFreezeManifest": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\common-e1e7d83-20261023T144716Z-0886fcf7\\runtime-freeze\\source-freeze-manifest.json",
+    "bytes": 218919,
+    "sha256": "AF0CB77CEA0B6C5C2C5A9488AC2D4CF80CBCF0400CEB087472C55CBC58603A97"
+  },
+  "technicalManifest": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\common-e1e7d83-20261023T144716Z-0886fcf7\\technical-inputs-v11\\technical-source-scope.manifest.json",
+    "bytes": 460923,
+    "sha256": "772797136A26BCA7BFED164EFE3B8D896142EF9CF414790CB472B0FD4C7B0ED0"
+  },
+  "sourceAdmission": "NOT_GRANTED",
+  "reviewProcess": "CLOSED_EXIT_0_CLEANUP_CONFIRMED_FINAL_JOB_ACTIVE_0",
+  "proceduralOrder": {
+    "actualExtractionConsoles": 4,
+    "frozenAndControlUnique": 852,
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "foregroundTool": "dae999",
+    "beforeBodyRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-e1e7d83-20261023T145023Z-f50ea5\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 2060,
+      "sha256": "A1AAFF64F49B07842B9D07D2F8A0B48A693324274F91FCF0C70CE80164EDB4F6"
+    },
+    "metadataSealsAndRehashTool": "714b01",
+    "firstBodyRead": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-e1e7d83-20261023T145023Z-f50ea5\\root-first-body-read.original.json",
+      "bytes": 594,
+      "sha256": "AF7817BB037520485C7DE431C751250F2F1F030A0DA4A35B1AC012F2CB39DAAC"
+    },
+    "allRehashedBeforeFirstReportOrToolValueBody": true,
+    "observedForegroundClosedUtc": "2026-10-23T15:01:11Z",
+    "firstBodyTool": "b09375",
+    "frozenControlOccurrences": 1020
+  },
+  "runtime": {
+    "actualSandbox": "read-only",
+    "effort": "ultra",
+    "requestedMultiAgentDisabled": true,
+    "memoryInternalEnforcement": "UNVERIFIED",
+    "model": "gpt-6.1-sol",
+    "actualApproval": "never",
+    "turns": 1,
+    "requestedAppsDisabled": true,
+    "actualFeatureRestriction": "UNVERIFIED_EXPOSED_UNUSED",
+    "actualMemoryMode": "disabled",
+    "contexts": 1,
+    "modelOverride": null,
+    "resume": false,
+    "fork": false
+  },
+  "conduct": {
+    "outputClipMarkerOutputOrdinals": [
+      2,
+      4,
+      6,
+      14,
+      60,
+      62,
+      68,
+      70
+    ],
+    "inputCount": 41,
+    "observed": "Only inert source/metadata/clock/hash inspection and pinned read-only Git diff commands observed. No candidate/helper execution, tests, native/build/GUI/Core, connector or sub-agent use observed.",
+    "outputCount": 41,
+    "orphanOutputs": 0,
+    "stderrQualification": "Five CLI warnings: ignored plugin icon paths and unsupported PowerShell shell snapshot; no candidate execution.",
+    "unmatchedInputs": 0,
+    "rootInspectedAllActualInputs": true,
+    "actualToolNames": [
+      "exec"
+    ],
+    "qualification": "Clipped responses retained; follow-up input ranges/selections observed. Reviewer-reported all44 body coverage is not independently certified comprehension."
+  },
+  "nativeRunRootAbsent": true,
+  "pureControls": "NOT_RUN",
+  "preflight": "NOT_RUN",
+  "allNativePhases": "NOT_RUN",
+  "authority": "CLOSED_DO_NOT_REUSE_PLANNED_RUN_ID",
+  "visibleAuthority": 0,
+  "finalCode": "NOT_RUN",
+  "finalReq": "NOT_RUN",
+  "acceptance": "NOT_GRANTED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "linux": "UNTESTED",
+  "priorFailureReceipt": "docs/plans/evidence/2026-10-22-e04a-game-cook-trace-failure.json",
+  "next": "Verified OWN18 publication checkpoint before adopting one-header packet-only correction and fresh affected SOURCE review.",
+  "limits": [
+    "SOURCE coverage blocked; no build/runtime/graphical evidence or source admission.",
+    "Reported all44 whole-source bodies read is reviewer coverage, not root certification of comprehension or universal delivery.",
+    "Earlier Cook trace failure and all previous results unchanged; scope extension approval remains separate from execution success."
+  ]
+}
