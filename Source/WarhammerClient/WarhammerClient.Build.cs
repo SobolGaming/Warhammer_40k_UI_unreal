@@ -26,7 +26,7 @@ public class WarhammerClient : ModuleRules
         PublicDependencyModuleNames.AddRange(new[] { "Core", "CoreUObject", "Engine" });
         PrivateDependencyModuleNames.AddRange(new[]
         {
-            "Json", "InputCore", "Slate", "SlateCore", "ProceduralMeshComponent", "RHI"
+            "Json", "HTTP", "InputCore", "Slate", "SlateCore", "ProceduralMeshComponent", "RHI"
         });
 
         bool bE02AutomationDriver = Target.Type == TargetType.Editor

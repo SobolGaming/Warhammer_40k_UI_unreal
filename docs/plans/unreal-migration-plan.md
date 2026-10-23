@@ -15,7 +15,7 @@ The owner prioritizes a useful client driving the existing Core over exhaustive 
 - [x] Record personal/internal development first, preserved preferences/HUD profiles, exact-Core sessions and no midgame switching requirement.
 - [x] Record explicit HTTP errors and missing diagnostic fidelity; Core issues are external dependencies.
 - [x] Inventory the shortest live path: default GameMode is empty; E02 has reusable board/camera patterns; native HTTP transport is missing.
-- [ ] Publish and exact-GitHub-verify this revised-plan checkpoint before implementing the live path.
+- [x] Publish revised-plan checkpoint a5c8db9 and verify the exact GitHub branch ref before implementation.
 
 Owner direction at 23:08 UTC supersedes earlier exhaustive proof sequencing. Historical gate labels do not prevent ordinary slice implementation/builds/focused checks. No new tool installation, Core edit or production-host development is included. Independent CODE and separate requirements review still precede acceptance; do not call unchecked work complete.
 
@@ -28,7 +28,7 @@ Owner direction at 23:08 UTC supersedes earlier exhaustive proof sequencing. His
 | [Warhammer_40k_UI_unreal](../../README.md) | This repository; runtime module [Source/WarhammerClient](../../Source/WarhammerClient), [project](../../WarhammerClient.uproject), [instructions](../../AGENTS.md). |
 | [Warhammer_40k_AI](../../../Warhammer_40k_AI/README.md) | Read-only sibling and separately maintained authoritative engine. Target commit `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, adapter contract **44.3.33**. Read [decision contract](../../../Warhammer_40k_AI/docs/ADAPTER_DECISION_CONTRACT.md), public schemas, fixtures and `scripts/run_phase18m_reference_server.py`. Do not edit this checkout. |
 | [Warhammer_40k_UI_arcade](../../../Warhammer_40k_UI_arcade/README.md) | Current legacy editable client, semantic/parity reference. Read [AGENTS](../../../Warhammer_40k_UI_arcade/AGENTS.md), [boundary ADR](../../../Warhammer_40k_UI_arcade/docs/adr/0001-ui-core-boundary.md), `src/warhammer40k_arcade_ui/core_client` and `render/core_projection.py`. Original import source: [docs/plans/migration/unreal-migration-plan.md](../../../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md). Its supported Core baseline was contract 44.1.0; do not conflate it with selected 44.3.33. |
-| Warhammer_40k_UI | Earlier UI project named in the original migration discussion. It is a separate historical reference, not an alias for Core or Arcade; no checkout with this name exists in this workspace. See the explicit reference/provenance record in the [retained plan](unreal-migration-plan-through-r146.md). Consult it if a later parity question requires it; do not invent its current contents or claim to have tested it. |
+| Warhammer_40k_UI | The UI reference name in the owner request. The original import explicitly maps it to the local Warhammer_40k_UI_arcade client above; there is no separate checkout with this name here. See the [retained provenance table](unreal-migration-plan-through-r146.md#repository-routes-and-provenance). Do not confuse this UI baseline with authoritative Core. |
 
 The imported plan and all research/failures remain available in the [complete through-r146 plan](unreal-migration-plan-through-r146.md). This active document replaces its execution ordering, not its historical results.
 
@@ -38,13 +38,15 @@ The imported plan and all research/failures remain available in the [complete th
 
 - [x] Minimal C++ Unreal project, Game/Editor targets, Windows toolchain and Linux platform configuration exist (BOOT01).
 - [x] Map reusable board/camera rendering and public Core session/action route.
-- [ ] Add native asynchronous HTTP/session transport with explicit status/errors, scoped viewer credentials and exact command identity.
-- [ ] Add startup board and connection/session controls to the default GameMode. Leave synthetic E02 proofs unchanged.
-- [ ] Start a real canonical development session and render its board/terrain, revision, phase, current request and offered choices. Unplaced models remain unplaced.
-- [ ] Let the player select and submit an offered `select_secondary_missions` finite option with original request/option IDs.
-- [ ] Refresh that viewer and display the authoritative revision/result/request transition. Never expose another player's private pending choice.
-- [ ] Support an easy managed Core development-server launch and attachment to an existing service; document checked-out and pinned-package recipes.
-- [ ] Document working commands and remaining limits.
+- [x] Add native asynchronous HTTP/session transport with explicit status/errors, scoped viewer credentials and exact command identity.
+- [x] Add startup board and connection/session controls to the default GameMode. Leave synthetic E02 proofs unchanged.
+- [x] Implement creation/start of a real canonical development session and rendering of its board/terrain, revision, phase, current request and offered choices. Unplaced models remain unplaced.
+- [x] Implement player selection and submission of an offered `select_secondary_missions` finite option with original request/option IDs.
+- [x] Implement refresh of that viewer and display of the authoritative revision/result/request transition. Never expose another player's private pending choice.
+- [x] Support an easy managed Core development-server launch and attachment to an existing service; document checked-out and pinned-package recipes.
+- [x] Document startup commands and remaining limits; actual build/functional/rendered verification remains separately tracked below.
+
+Source implementation above is authored. Checkboxes do not claim successful compilation, live execution or rendered behavior; see verification below.
 
 ### Verification
 

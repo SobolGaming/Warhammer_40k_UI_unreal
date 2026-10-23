@@ -13,7 +13,7 @@ The owner's latest priority is the smallest useful rendered client driving the e
 - This repository is a C++ first Unreal presentation client. Python Core remains a separately maintained authority.
 - `../Warhammer_40k_AI` is reference-only: never edit/reset its code, schemas, tests, data, lockfiles or environment. Use its exact selected commit `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract44.3.33 and existing reference development server.
 - Read the public adapter decision contract and matching schemas/callers before integration changes. A missing Core capability is an external issue, not a private UI rules path or new host implementation.
-- `../Warhammer_40k_UI_arcade` is the legacy client and parity reference. Do not change it as a migration side effect. `Warhammer_40k_UI` is a distinct older project, with no local checkout here.
+- `../Warhammer_40k_UI_arcade` is the legacy client and parity reference. Do not change it as a migration side effect. `Warhammer_40k_UI` in the owner request maps to that local Arcade baseline per the imported provenance; no separate checkout with that name exists here.
 - Preserve unrelated user changes. Do not install/upgrade tools or assets without applicable authority.
 - Existing UE5.8.3 project/targets already exist; use README build commands, never rerun the creation script over this project.
 

@@ -2,7 +2,7 @@
 
 C++ first 3D Unreal client for the external Python rules Core. The active goal is a board connected to a real Core session, one player action and its authoritative visible result. Follow the [migration checklist](docs/plans/unreal-migration-plan.md).
 
-The foundation and synthetic board proofs exist; the default GameMode is still an empty shell at this checkpoint. Live connection/action work is next. This is personal/internal development. Linux x86-64 plumbing exists but native builds/rendering/packages are **UNTESTED**.
+The default GameMode now has a live HTTP session adapter, board and offered-choice UI. The first slice creates a canonical session as administrator, renders only player-a's projection, submits an offered secondary-mission choice and refreshes the authoritative result. Source is authored; build and functional verification are tracked in the plan. This is personal/internal development. Linux x86-64 plumbing exists but native builds/rendering/packages are **UNTESTED**.
 
 **Desktop testing is on HOLD until the owner explicitly resumes it.** Background development/builds continue. Every checkpoint is committed, pushed and exact-ref verified in [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3), which stays open without merge.
 
@@ -10,7 +10,23 @@ The foundation and synthetic board proofs exist; the default GameMode is still a
 
 - [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Selected commit `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract44.3.33.
 - [Warhammer_40k_UI_arcade](../Warhammer_40k_UI_arcade/README.md): existing Arcade client and semantic reference; [original migration plan](../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md).
-- `Warhammer_40k_UI`: distinct earlier UI project referenced in the imported plan; no checkout here. See [historical provenance](docs/plans/unreal-migration-plan-through-r146.md).
+- `Warhammer_40k_UI`: the owner request's UI reference name, mapped by the original import to the local Arcade client above; no separate checkout here. See [historical provenance](docs/plans/unreal-migration-plan-through-r146.md#repository-routes-and-provenance).
+
+## Start the client
+
+When desktop testing is resumed, run in PowerShell7 from this repository:
+
+```powershell
+& ./scripts/Start-Client.ps1 -CoreMode Managed
+# Or attach to the already running development service:
+& ./scripts/Start-Client.ps1 -CoreMode Attach
+```
+
+The managed route launches the existing checked-out Core server hidden, verifies its own readiness, supplies development credentials only through process environment and opens the client. Closing the client stops only that owned server. Attach leaves the existing service running. See [startup and runtime details](docs/development/core-startup.md).
+
+In the client, click **Connect / create session**, then choose a Core-offered secondary-mission option. The panel shows the authoritative revision, mission choice and accepted/committed outcome. The next player's private options remain hidden. Camera is fixed, terrain is shown as advisory outlines, and undeployed models are omitted. This is a first setup interaction, not full deployment/movement or a packaged game.
+
+If a command response is lost or unusable, the client blocks new actions and offers **Reconcile unknown command**, sending the same retained envelope/ID. Unknown session creation cannot be retried safely. Actual HTTP codes/messages and diagnostic fidelity gaps are shown explicitly.
 
 ## Windows build
 
