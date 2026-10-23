@@ -205,21 +205,29 @@ scalar values to make preservation or predecessor joins pass.
 ## Finite normal per-user UBT trace output exception
 
 Permit only the normal trace/backup writes of the two sequential owned UBT roots
-EditorPrerequisiteBuild and GameBuild in this one freshly bound proof. This is an
-explicit external-output exception, not an owned-path or total UserDir-isolation
-claim. Other phases receive no trace-writing exception. All source, settings,
-process, stream, deadline and other output restrictions remain unchanged.
+EditorPrerequisiteBuild and GameBuild, plus ONE normal ValidatePlatforms
+-OutputSDKs -AllPlatforms UBT descendant of the ordinary UnrealEditor-Cmd Cook
+child within the supervised Cook UAT root, in this one freshly bound proof. This
+is an explicit external-output exception, not an owned-path or total UserDir-
+isolation claim. Stage, Native and all other phases receive no trace-writing
+exception. All source, settings, process, stream, deadline and other output
+restrictions remain unchanged.
 
 Require the actual Windows execution account's normal known LocalApplicationData
 route to resolve to the exact directory below, with plain non-reparse ancestry:
 
     C:\Users\Rabid\AppData\Local\UnrealBuildTool
 
-Before either UBT root, reject actual IsBuildMachine.Trim()==1 without changing
-that environment setting. Preserve the normal installed-engine selection: freeze
-and recheck the exact six-byte Engine/Build/InstalledBuild.txt marker under the
-pinned engine. Retain its descriptor as identity-only, with no trace-root spoof
-or installed-marker change. Require the ordinary non-build-machine trace route.
+Before either direct UBT root, reject actual IsBuildMachine.Trim()==1. Before
+Cook UAT, also reject any inherited nonzero integer IsBuildMachine value that
+Automation.cs would coerce to1, and refuse -BuildMachine. Refuse an active
+UE_SKIP_UBT_SDK_SETUP bypass and -Multiprocess worker substitution. Preserve
+normal SDK validation without setting or spoofing these selectors, SDK roots or
+caches; -NoAutoSDK does not suppress the native validation launch. Preserve the
+normal installed-engine selection: freeze and recheck the exact six-byte
+Engine/Build/InstalledBuild.txt marker under the pinned engine. Retain its
+descriptor as identity-only, with no trace-root spoof or installed-marker change.
+Require the ordinary non-build-machine trace route.
 
 Allow only Trace.uba and directly contained backup basenames matching this
 case-sensitive whole-name predicate:
@@ -233,8 +241,9 @@ exists. Do not create, rename, delete, restore or modify unrelated global paths.
 Do not spoof LocalAppData/UserDir/IsBuildMachine or installed-engine detection,
 change engine binaries/source, or silently restore global trace files.
 
-Before UBT can start, enumerate directory names nonrecursively and evaluate the
-installed BackupLogFile pruning predicate exactly (case-sensitive IsMatch):
+Before either direct UBT or Cook UAT can start, enumerate directory names
+nonrecursively and evaluate the installed BackupLogFile pruning predicate exactly
+(case-sensitive IsMatch):
 
     Trace-backup-\d\d\d\d\.\d\d\.\d\d-\d\d\.\d\d\.\d\d.uba
 
@@ -256,17 +265,19 @@ claim the declared -UBATraceOutputFile option selects this installed global path
 Preflight establishes the actual prebaseline before any UBT child. Every phase
 retains before/after existence, eligible membership, sizes, SHA256 and available
 UTC creation/last-write times. Require each phase's before-state to match its
-last closed predecessor's after-state; non-UBT phases require unchanged before/
-after state. Final Audit retains its own observations. No later reconstruction
-substitutes for a missing before-state.
+last closed predecessor's after-state; phases other than the two direct UBT builds
+and Cook require unchanged before/after state. Final Audit retains its own
+observations. No later reconstruction substitutes for a missing before-state.
 
-Before each permitted UBT root, preserve every present eligible file in a fresh
-owned recovery location under R and verify copied size/hash against stable live
-bytes before launch. Retain verified owned after-state copies following complete
-supervised root closure. Preflight/final Audit also retain recoverable observed
-bytes. An unchanged observation may explicitly reference an already verified
-immutable owned copy of identical bytes; a nested descriptor alone is not proof
-of copying. Recheck live identities immediately before starting UBT.
+Before each direct UBT root and the supervised Cook UAT root, preserve every
+present eligible file in a fresh owned recovery location under R and verify
+copied size/hash against stable live bytes before launch. Retain verified owned
+after-state copies following complete supervised root/job closure. Preflight/
+final Audit also retain recoverable observed bytes. An unchanged observation may
+explicitly reference an already verified immutable owned copy of identical bytes;
+a nested descriptor alone is not proof of copying. Recheck live identities
+immediately before starting each permitted root. Cook's pre-UAT observation is
+neither atomic nor an immediate pre-descendant observation.
 
 At each observation cap the eligible family at32 files, each16 MiB,64 MiB total
 (1 MiB=1048576 bytes). Check prelaunch caps before the writer starts. After-state
@@ -278,13 +289,35 @@ mapping. Reconcile it to the normal backup/pruning behavior: surviving prior
 backups keep their bytes; a new backup corresponds to preceding Trace.uba bytes;
 removed/replaced prior bytes remain recoverable in verified owned copies. A
 missing prior trace does not permit backup pruning. Require the retained actual
-stdout trace destination for each UBT root to resolve to the authorized Trace.uba
-path; missing, ambiguous or unexpected destination fails. Argv intent alone is
-insufficient. Retain the after-state rather than silently undoing normal changes.
+stdout trace destination for each direct UBT root and Cook's one SDK-validation
+descendant to resolve to the authorized Trace.uba path; missing, ambiguous,
+additional or unexpected destination fails. Argv intent alone is insufficient.
+Retain the after-state rather than silently undoing normal changes.
 
-Run the two UBT roots sequentially, with no concurrent intentional desktop UBT
-build. Record that exclusivity assumption and actual finite process observations;
-these do not establish a filesystem lock or universal writer attribution.
+For Cook require exactly one retained emitted ValidatePlatforms invocation with
+the bound project, expected -Mode=ValidatePlatforms -OutputSDKs -AllPlatforms
+options and exact normal dotnet/UnrealBuildTool.dll route. Require its log argument
+to resolve to R/ue-user/cook/Saved/Logs/AutoSDKInfo.txt; retain and compare that
+owned SDK log and Cook stdout. Require one matching closed trace-destination line
+and a unique Win64 VALID observation for the frozen selected SDK10.0.22621.0.
+Missing, ambiguous, additional or mismatched command/trace/SDK evidence fails
+closed; exit0 alone does not establish SDK validity. Emitted commands remain
+inert evidence. Retain the root UAT PID/process receipt, complete job closure and
+zero remaining job members separately from the source/log-supported descendant
+route. These do not attest the actual UBT writer PID, a complete descendant
+command inventory or global writer attribution. The exact emitted route is an
+actual-log guard; inspected launch source supplies general flow and does not
+establish installed source/binary correspondence or attest OS argv.
+
+Stage retains BuildCookRun -skipbuild -skipcook -stage, with RunChunkAssigner
+absent/false and no worker-mode substitution or optional pre-staging commandlet.
+The inspected Build/Cook early returns and base PreStage route are source
+pointers, not an executed guarantee of no process. Require Stage's trace family
+to remain unchanged and fail closed; infer no additional writer exception.
+
+Run the two direct UBT roots and Cook sequentially, with no concurrent intentional
+desktop UBT build. Record that exclusivity assumption and actual finite process
+observations; these do not establish a filesystem lock or universal writer attribution.
 Unexpected family changes fail closed. Keep trace bodies opaque to initial
 reviewers unless separately screened and explicitly granted; never infer a body
 grant from recovery descriptors or include unrelated historical trace bodies.
@@ -292,8 +325,8 @@ grant from recovery descriptors or include unrelated historical trace bodies.
 After positive affected SOURCE admission, run the focused pure-data regression
 controls in scripts/migration/tests/Test-E04A1GTracePolicy.ps1 against the exact
 frozen wrapper. Require every declared case to pass. These controls cover finite
-rotation/collision/refusal examples only; they neither touch live trace files nor
-replace actual capture, recovery, build or Audit evidence.
+rotation/collision/refusal and Cook SDK-evidence examples only; they neither touch
+live trace files nor replace actual capture, recovery, build, Cook or Audit evidence.
 
 Bind the direct installed-source path/backup logic below and actual tool/source
 identities. Source inspection is not installed-binary correspondence. Managed
@@ -429,7 +462,18 @@ Programs/UnrealBuildTool/Executors/UnrealBuildAccelerator/UBAExecutor.cs:312-316
 Programs/UnrealBuildTool/Executors/UnrealBuildAccelerator/UnrealBuildAcceleratorConfig.cs:173-178,216-221;
 Programs/Shared/EpicGames.Core/Logging/Log.cs:169-180,230-275;
 Programs/Shared/EpicGames.Core/FileReference.cs:361-374;
-Programs/Shared/EpicGames.UBA/Impl/TraceImpl.cs:42-58,71-86.
+Programs/Shared/EpicGames.UBA/Impl/TraceImpl.cs:42-58,71-86;
+Developer/TargetPlatform/Private/TargetPlatformManagerModule.cpp:54-74,220-245,366-410,492-554,573-581,611-624,1336-1344,1496-1502;
+Programs/UnrealBuildTool/Modes/ValidatePlatformsMode.cs:14-36,44-92;
+Programs/AutomationTool/Scripts/BuildCookRun.Automation.cs:48-59,251-266;
+Programs/AutomationTool/Scripts/BuildProjectCommand.Automation.cs:60-67;
+Programs/AutomationTool/Scripts/CookCommand.Automation.cs:275-298,332-347;
+Programs/AutomationTool/Scripts/CopyBuildToStagingDirectory.Automation.cs:6990-7035;
+Programs/AutomationTool/AutomationUtils/Automation.cs:73-84,111-133,454-460;
+Programs/UnrealBuildTool/System/PlatformExports.cs:132-159;
+Programs/AutomationTool/AutomationUtils/Platform.cs:398-402;
+Programs/AutomationTool/Program.cs:286-311;
+Developer/DesktopPlatform/Private/DesktopPlatformBase.cpp:705-755,2060-2075.
 Installed marker identity-only: C:/Program Files/Epic Games/UE_5.8/Engine/Build/InstalledBuild.txt
 (exact six bytes; freeze/recheck its current size/hash, no BODY grant).
 Refresh identities; bind adopted target/caller/plugin/vendor/public headers/

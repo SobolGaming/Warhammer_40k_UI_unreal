@@ -8,12 +8,12 @@ if((Get-FileHash -LiteralPath $wrapper -Algorithm SHA256).Hash -ine $ExpectedWra
 $tokens=$null;$parseErrors=$null
 $ast=[Management.Automation.Language.Parser]::ParseFile($wrapper,[ref]$tokens,[ref]$parseErrors)
 if(@($parseErrors).Count){throw 'TRACE_CONTROL_SOURCE_PARSE_ERROR'}
-$definitions=foreach($name in @('ConvertTo-A1GComparableData','Equal-Data','Get-A1GUbtTraceDelta')){
+$definitions=foreach($name in @('ConvertTo-A1GComparableData','Equal-Data','Get-A1GUbtTraceDelta','Split-A1GSimpleCookArguments','Assert-A1GCookSdkValidationContext','Read-A1GCookSdkValidationText')){
     $nodes=@($ast.FindAll({param($node) $node -is [Management.Automation.Language.FunctionDefinitionAst] -and $node.Name -ceq $name},$true))
     if($nodes.Count -ne 1){throw 'TRACE_CONTROL_FUNCTION_NOT_UNIQUE'}
     $nodes[0].Extent.Text
 }
-# Execute only these three function definitions in this control's local scope.
+# Execute only these six pure metadata function definitions in this control's local scope.
 . ([scriptblock]::Create(($definitions -join "`n")))
 $traceDirectory='C:\Users\Rabid\AppData\Local\UnrealBuildTool'
 function FileFact([string]$Name,[string]$Hash='a',[string]$Created='2026-10-22T10:00:00.0000000Z'){
@@ -58,4 +58,46 @@ Case 'unexplained new backup refuses' {
 Case 'backup pruning without preceding trace refuses' {
     Refuses {Get-A1GUbtTraceDelta (State @((FileFact 'Trace-backup-2026.10.20-10.00.00.uba'))) (State @((FileFact 'Trace.uba')))} 'A1G_UBT_TRACE_UNEXPLAINED_BACKUP_REMOVAL'
 }
-[ordered]@{recordKind='E04_A1G_PURE_TRACE_DELTA_REGRESSION_CONTROLS';wrapperSha256=$ExpectedWrapperSha256;passed=$results.Count;cases=$results.ToArray();scope='Pure synthetic metadata only. No live filesystem capture, recovery-copy, source review, build, process, trace writing or end-to-end assurance.'}|ConvertTo-Json -Depth 6
+# Synthetic command/log text only. None of these paths is opened or executed.
+$sdkProject='C:\proof\project\WarhammerClient.uproject'
+$sdkPath='C:\proof\ue-user\cook\Saved\Logs\AutoSDKInfo.txt'
+$sdkVersion='10.0.22621.0'
+$sdkCommand='Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" -Mode=ValidatePlatforms -OutputSDKs  -AllPlatforms -project="'+$sdkProject.Replace('\','/')+'" -log="'+$sdkPath.Replace('\','/')+'" -verbose -timestamps'
+$sdkStdout=$sdkCommand+"`n##PlatformValidate: Win64 VALID 10.0.22621.0`n##PlatformValidate: Mac INVALID 26.1.1`nTrace written to file C:\Users\Rabid\AppData\Local\UnrealBuildTool\Trace.uba with size 319b`n"
+$sdkOwnLog="[00:00:00.304] ##PlatformValidate: Win64 VALID 10.0.22621.0`n[00:00:00.304] ##PlatformValidate: Mac INVALID 26.1.1`n[00:00:00.310] Result: Succeeded`n[00:00:00.310] Total execution time: 0.24 seconds`n"
+function ReadSdk([string]$Stdout=$sdkStdout,[string]$OwnLog=$sdkOwnLog){Read-A1GCookSdkValidationText $Stdout $OwnLog $sdkProject $sdkPath $sdkVersion}
+Case 'one normal SDK command matches timestamped owned Win64 log and trace route' {
+    $guard=Assert-A1GCookSdkValidationContext '' ' 0 ' @('-cook','-AdditionalCookerOptions=-NullRHI -unattended')
+    $evidence=ReadSdk
+    if($guard.uatBuildMachine -ne $false -or $guard.sdkSetupBypass -ne $false -or $evidence.sdkVersion -cne $sdkVersion -or $evidence.observedSdkInvocationCount -ne 1 -or $evidence.observedTraceLineCount -ne 1 -or $null -ne $evidence.actualSdkWriterPid -or $evidence.writerPidAttestation -cne 'UNVERIFIED'){throw 'TRACE_CONTROL_NORMAL_COOK_SDK'}
+}
+Case 'duplicate emitted SDK invocations refuse' {
+    Refuses {ReadSdk ($sdkCommand+"`n"+$sdkStdout)} 'A1G_COOK_SDK_ONE_NORMAL_EMITTED_UBT_REQUIRED'
+}
+Case 'wrong SDK mode tool spelling or extra command argument refuses' {
+    foreach($pair in @(@('-Mode=ValidatePlatforms','-Mode=Build'),@('UnrealBuildTool.dll','OtherTool.dll'),@('-verbose -timestamps','-verbose -timestamps -Session=other'))){
+        Refuses {ReadSdk ($sdkStdout.Replace($pair[0],$pair[1]))} 'A1G_DATA_CHANGED: Cook SDK exact emitted command tokens'
+    }
+}
+Case 'SDK project or owned log route mismatch refuses' {
+    foreach($pair in @(@('C:/proof/project/WarhammerClient.uproject','C:/other/WarhammerClient.uproject'),@('C:/proof/ue-user/cook/Saved/Logs/AutoSDKInfo.txt','C:/other/AutoSDKInfo.txt'))){
+        Refuses {ReadSdk ($sdkStdout.Replace($pair[0],$pair[1]))} 'A1G_DATA_CHANGED: Cook SDK exact emitted command tokens'
+    }
+}
+Case 'missing duplicate wrong-version or failed owned SDK evidence refuses' {
+    Refuses {ReadSdk $sdkStdout ($sdkOwnLog.Replace('##PlatformValidate: Win64 VALID 10.0.22621.0','other platform data'))} 'A1G_COOK_SDK_WIN64_VALID_OBSERVATION_REQUIRED'
+    Refuses {ReadSdk $sdkStdout ($sdkOwnLog+"[00:00:00.304] ##PlatformValidate: Win64 VALID 10.0.22621.0`n")} 'A1G_COOK_SDK_WIN64_VALID_OBSERVATION_REQUIRED'
+    Refuses {ReadSdk ($sdkStdout.Replace('Win64 VALID 10.0.22621.0','Win64 VALID 10.0.99999.0'))} 'A1G_COOK_SDK_WIN64_VALID_OBSERVATION_REQUIRED'
+    Refuses {ReadSdk $sdkStdout ($sdkOwnLog.Replace('Result: Succeeded','Result: Failed'))} 'A1G_COOK_SDK_OWN_LOG_SUCCESS_REQUIRED'
+}
+Case 'missing duplicate or unapproved Cook trace route refuses' {
+    Refuses {ReadSdk ($sdkStdout.Replace('Trace written to file','other output'))} 'A1G_COOK_SDK_ONE_CLOSED_TRACE_ROUTE_REQUIRED'
+    Refuses {ReadSdk ($sdkStdout+"Trace written to file C:\Users\Rabid\AppData\Local\UnrealBuildTool\Trace.uba with size 320b`n")} 'A1G_COOK_SDK_ONE_CLOSED_TRACE_ROUTE_REQUIRED'
+    Refuses {ReadSdk ($sdkStdout.Replace('C:\Users\Rabid\AppData\Local\UnrealBuildTool\Trace.uba','C:\other\Trace.uba'))} 'A1G_COOK_SDK_TRACE_DESTINATION_UNEXPECTED'
+}
+Case 'UAT nonzero selectors native skip prefixes and worker substitutions refuse' {
+    foreach($value in @('1',' 2 ','-1')){Refuses {Assert-A1GCookSdkValidationContext $value '' @()} 'A1G_COOK_SDK_UAT_BUILD_MACHINE_ROUTE_FORBIDDEN'}
+    foreach($value in @('1','1junk','+1tail','00')){Refuses {Assert-A1GCookSdkValidationContext '' $value @()} 'A1G_COOK_SDK_SETUP_SELECTOR_UNSAFE'}
+    foreach($value in @('-BuildMachine','-AdditionalCookerOptions=-Multiprocess','-CookWorkerId=1','-CookProcessCount=2')){Refuses {Assert-A1GCookSdkValidationContext '' '' @($value)} 'A1G_COOK_SDK_VALIDATION_BYPASS_OR_WORKER_ARGUMENT'}
+}
+[ordered]@{recordKind='E04_A1G_PURE_TRACE_AND_COOK_SDK_METADATA_REGRESSION_CONTROLS';wrapperSha256=$ExpectedWrapperSha256;passed=$results.Count;cases=$results.ToArray();scope='Pure synthetic trace delta and Cook SDK command/log/selector metadata only. No live filesystem capture, recovery-copy, source review, build, process, trace writing, actual writer-PID or end-to-end assurance.'}|ConvertTo-Json -Depth 6

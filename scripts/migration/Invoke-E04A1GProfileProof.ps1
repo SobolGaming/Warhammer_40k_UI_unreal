@@ -786,10 +786,17 @@ function Invoke-A1GRoot([string]$Label,[string]$Executable,[string[]]$Arguments,
     try{
         $envs=Child-Environment $Extra;$cleanup=$Phase -in @('DependencyConfigure','DependencyBuild')
         if($cleanup -and $script:Freeze.cmakePostSuccessfulRootCleanup -ne $true){throw 'A1G_CMAKE_SCOPED_CLEANUP_NOT_EXPLICITLY_SELECTED'}
-        if($Phase -cin @('EditorPrerequisiteBuild','GameBuild')){
+        if($Phase -cin @('EditorPrerequisiteBuild','GameBuild','Cook')){
             Check-A1GUbtTraceRecovery $script:Result.ubtTrace.before $script:Result.ubtTrace.beforeRecovery $Phase 'before'
+            if($Phase -ceq 'Cook'){
+                $machine=if($envs.ContainsKey('IsBuildMachine')){$envs['IsBuildMachine']}else{[Environment]::GetEnvironmentVariable('IsBuildMachine','Process')}
+                $skip=if($envs.ContainsKey('UE_SKIP_UBT_SDK_SETUP')){$envs['UE_SKIP_UBT_SDK_SETUP']}else{[Environment]::GetEnvironmentVariable('UE_SKIP_UBT_SDK_SETUP','Process')}
+                $script:Result.ubtTrace.cookValidationContextBeforeUat=Assert-A1GCookSdkValidationContext $machine $skip $Arguments
+                if(Test-Path -LiteralPath (Owned 'ue-user/cook/Saved/Logs/AutoSDKInfo.txt')){throw 'A1G_COOK_SDK_LOG_MUST_BE_ABSENT_BEFORE_UAT'}
+                $script:Result.ubtTrace.cookSdkLogWasAbsentBeforeLaunch=$true
+            }
             $script:Result.ubtTrace.immediatePrelaunch=Get-A1GUbtTraceState
-            Check-A1GUbtTraceUnchanged $script:Result.ubtTrace.before $script:Result.ubtTrace.immediatePrelaunch 'trace immediately before UBT launch'
+            Check-A1GUbtTraceUnchanged $script:Result.ubtTrace.before $script:Result.ubtTrace.immediatePrelaunch $script:Result.ubtTrace.prelaunchScope
         }
         $seconds=[Math]::Min($script:Budgets[$Phase],(Phase-Budget));if($seconds -lt 3){throw 'A1G_PHASE_BUDGET_EXHAUSTED'}
         $script:RootCount++
@@ -1009,7 +1016,50 @@ function Get-A1GUbtTraceDelta($Before,$After) {
     }})
     return @{created=$created;changed=$changed;moved=$move;deleted=$deleted;previousTraceReplaced=[bool]$Before.traceExists;normalPrunedBackupNames=@($backups|Where-Object {$_ -cnotin $kept});unexplainedDeltaCount=0;qualification='Normal finite backup/pruning transition under the no-concurrent-intentional-UBT assumption; not universal writer attribution. Every prior file requires its independently verified owned recovery copy.'}
 }
+# Pure metadata guards/parser; no environment changes, command execution or filesystem access.
+function Assert-A1GCookSdkValidationContext([string]$BuildMachine,[string]$SkipSetup,[string[]]$Arguments) {
+    $number=0;$parsed=[int]::TryParse($BuildMachine,[ref]$number)
+    if($parsed -and $number -ne 0){throw 'A1G_COOK_SDK_UAT_BUILD_MACHINE_ROUTE_FORBIDDEN'}
+    # Native FCString::Atoi would also activate values such as 1junk. Refuse
+    # every nonempty spelling except explicit trimmed zero instead of coercing it.
+    if($SkipSetup.Trim() -cnotin @('','0')){throw 'A1G_COOK_SDK_SETUP_SELECTOR_UNSAFE'}
+    foreach($arg in $Arguments){
+        if($arg -match '(?i)(?:^|[ \t"=])-(?:BuildMachine|Multiprocess(?:Id)?|CookWorker(?:Id)?|CookDirector(?:Host|Port)?|CookProcessCount|Session|NoAutoSDK)(?:[= \t"]|$)'){throw 'A1G_COOK_SDK_VALIDATION_BYPASS_OR_WORKER_ARGUMENT'}
+    }
+    return @{uatBuildMachine=$false;buildMachineIntegerParsed=$parsed;parsedBuildMachine=$(if($parsed){$number}else{$null});sdkSetupBypass=$false;skipSelectorPolicy='Conservative missing/empty/exact trimmed zero only; every other spelling refused, including native Atoi prefixes.';forbiddenModeFlagCount=0;scope='Actual supplied environment selectors and bounded argument strings checked before the Cook UAT root; no environment spoof or descendant PID attestation.'}
+}
+function Read-A1GCookSdkValidationText([string]$StdoutText,[string]$SdkLogText,[string]$ExpectedProject,[string]$ExpectedSdkLog,[string]$ExpectedSdkVersion) {
+    $runs=@([regex]::Matches($StdoutText,'(?m)^Running UnrealBuildTool: (?<command>[^\r\n]+)\r?$'))
+    if($runs.Count -ne 1){throw 'A1G_COOK_SDK_ONE_NORMAL_EMITTED_UBT_REQUIRED'}
+    $tokens=@(Split-A1GSimpleCookArguments $runs[0].Groups['command'].Value|ForEach-Object {$_.Replace('\','/')})
+    $expected=@('dotnet','../../Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll','-Mode=ValidatePlatforms','-OutputSDKs','-AllPlatforms',('-project='+$ExpectedProject.Replace('\','/')),('-log='+$ExpectedSdkLog.Replace('\','/')),'-verbose','-timestamps')
+    Equal-Data $tokens $expected 'Cook SDK exact emitted command tokens'
+    $stdoutSdk=@([regex]::Matches($StdoutText,'(?m)^##PlatformValidate: Win64 (?<state>[^\r\n]+)\r?$'))
+    # The pinned SDK file uses an elapsed [HH:MM:SS.mmm] prefix; stdout does not.
+    $sdkPlain=[regex]::Replace($SdkLogText,'(?m)^\[[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}\] ','')
+    $fileSdk=@([regex]::Matches($sdkPlain,'(?m)^##PlatformValidate: Win64 (?<state>[^\r\n]+)\r?$'))
+    if($stdoutSdk.Count -ne 1 -or $fileSdk.Count -ne 1 -or $stdoutSdk[0].Groups['state'].Value -cne ('VALID '+$ExpectedSdkVersion) -or $fileSdk[0].Groups['state'].Value -cne ('VALID '+$ExpectedSdkVersion)){throw 'A1G_COOK_SDK_WIN64_VALID_OBSERVATION_REQUIRED'}
+    if(@([regex]::Matches($sdkPlain,'(?m)^Result: Succeeded\r?$')).Count -ne 1 -or $sdkPlain -match '(?im)^Result: (?!Succeeded\r?$)|^Error:|^ERROR:'){throw 'A1G_COOK_SDK_OWN_LOG_SUCCESS_REQUIRED'}
+    $traces=@([regex]::Matches($StdoutText,'(?m)^Trace written to file (?<path>[^\r\n]+) with size (?<size>[^\r\n]+)\r?$'))
+    if($traces.Count -ne 1){throw 'A1G_COOK_SDK_ONE_CLOSED_TRACE_ROUTE_REQUIRED'}
+    if($traces[0].Groups['path'].Value.Replace('\','/') -cne 'C:/Users/Rabid/AppData/Local/UnrealBuildTool/Trace.uba'){throw 'A1G_COOK_SDK_TRACE_DESTINATION_UNEXPECTED'}
+    return @{emittedCommand=$runs[0].Value.TrimEnd("`r");emittedCommandTokens=$tokens;emittedUbtDllToken=$tokens[1];project=$ExpectedProject;sdkLogPath=$ExpectedSdkLog;stdoutWin64Line=$stdoutSdk[0].Value.TrimEnd("`r");sdkWin64Line=$fileSdk[0].Value.TrimEnd("`r");sdkVersion=$ExpectedSdkVersion;sdkLogResult='Succeeded';traceLine=$traces[0].Value.TrimEnd("`r");actualTraceDestination=$traces[0].Groups['path'].Value;reportedTraceSizeText=$traces[0].Groups['size'].Value;observedSdkInvocationCount=1;observedTraceLineCount=1;actualSdkWriterPid=$null;writerPidAttestation='UNVERIFIED';scope='One normal emitted SDK command and matching retained Win64 SDK/trace observations. Relative tool spelling is observed emitted data; its exact installed-source literal correspondence is not established, and it is not kernel argv or writer-PID attestation; reported trace size text is not a new file-size measurement. Other platform INVALID rows do not establish Linux support.'}
+}
+function Get-A1GCookSdkTrace($Process) {
+    $raw=Assert-A1GUatRoot $Process 'cook';$stdoutPath=Owned 'logs/a1g-cook.stdout.log';$sdkPath=Owned 'ue-user/cook/Saved/Logs/AutoSDKInfo.txt'
+    if($raw.stdout -cne $stdoutPath){throw 'A1G_COOK_SDK_STDOUT_PATH'}
+    $stdout=Read-A1GCookStageText $stdoutPath;$sdk=Read-A1GCookStageText $sdkPath
+    $tools=[ordered]@{}
+    foreach($name in @('ubt','dotnet','editorCmd')){
+        $rows=@($script:Freeze.files|Where-Object {$_.path -ieq $script:Freeze.toolPaths[$name]})
+        if($rows.Count -ne 1){throw 'A1G_COOK_SDK_TOOL_NOT_UNIQUELY_FROZEN'};$tools[$name]=Check-Descriptor $rows[0]
+    }
+    if($tools.ubt.path -ine (Join-Path $EngineRoot 'Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll')){throw 'A1G_COOK_SDK_NORMAL_DLL_ROUTE_REQUIRED'}
+    $evidence=Read-A1GCookSdkValidationText $stdout.text $sdk.text (Join-Path $script:Stage 'WarhammerClient.uproject') $sdkPath $script:Freeze.windows.sdkVersion
+    return @{stdout=$stdout.file;sdkLog=$sdk.file;tools=$tools;validation=$evidence;supervisedUatRoot=@{pid=$raw.pid;process=$Process.receiptArtifact;exitConfirmed=$raw.exitConfirmed;cleanupConfirmed=$raw.cleanupConfirmed;finalJobQuerySucceeded=$raw.jobAccounting[-1].querySucceeded;finalJobActiveProcesses=$raw.jobAccounting[-1].activeProcesses};actualSdkWriterPid=$null;writerPidAttestation='UNVERIFIED';installedBinarySourceCorrespondence='UNVERIFIED_TRUSTED_LEAF';emittedRouteSourceLiteralCorrespondence='NOT_ESTABLISHED';scope='Closed supervised UAT root and source/log-supported Editor SDK descendant route are distinct evidence. No complete descendant command/PID inventory or universal writer attribution.'}
+}
 function Get-A1GUbtTraceStdout($Process,[string]$Name) {
+    if($Name -ceq 'Cook'){return Get-A1GCookSdkTrace $Process}
     $label=if($Name -ceq 'EditorPrerequisiteBuild'){'a1g-editor-prerequisite'}elseif($Name -ceq 'GameBuild'){'a1g-game-build'}else{throw 'A1G_UBT_TRACE_STDOUT_PHASE'}
     $path=Owned ('logs/'+$label+'.stdout.log')
     if($Process.stdout -cne $path){throw 'A1G_UBT_TRACE_STDOUT_PATH'}
@@ -1020,30 +1070,34 @@ function Get-A1GUbtTraceStdout($Process,[string]$Name) {
     return @{stdout=Descriptor $path;line=$rows[0];actualDestination=$match.Groups['path'].Value;scope='Actual closed child stdout route, not argv intent or native trace-write semantics.'}
 }
 function Start-A1GUbtTracePhase {
+    $context=if($Phase -ceq 'Cook'){Assert-A1GCookSdkValidationContext ([Environment]::GetEnvironmentVariable('IsBuildMachine','Process')) ([Environment]::GetEnvironmentVariable('UE_SKIP_UBT_SDK_SETUP','Process')) (Uat-Arguments -Cook)}else{$null}
     $state=Get-A1GUbtTraceState
-    $script:Result.ubtTrace=[ordered]@{policy='OWNER_APPROVED_OPTION_A_FINITE_NORMAL_UBT_TRACE_EXCEPTION';before=$state;immediatePrelaunch=$null;after=$null;beforeRecovery=$null;afterRecovery=$null;delta=$null;stdoutTrace=$null;rootClosureConfirmed=$false;rootProcess=$null;prepared=$false;complete=$false;exclusivityAssumption='Two sequential owned UBT roots and no concurrent intentional desktop UBT build. No filesystem lock, continuous observation or universal writer attribution.'}
+    $script:Result.ubtTrace=[ordered]@{policy='OWNER_APPROVED_BUILD_AND_COOK_SDK_FINITE_UBT_TRACE_EXCEPTION';before=$state;immediatePrelaunch=$null;prelaunchScope=$(if($Phase -ceq 'Cook'){'Immediately before supervised Cook UAT root; not immediate or atomic before its nested SDK UBT child.'}elseif($Phase -cin @('EditorPrerequisiteBuild','GameBuild')){'Immediately before supervised direct UBT root.'}else{$null});cookValidationContextBeforePhase=$context;cookValidationContextBeforeUat=$null;cookSdkLogWasAbsentBeforeLaunch=$null;after=$null;beforeRecovery=$null;afterRecovery=$null;delta=$null;stdoutTrace=$null;rootClosureConfirmed=$false;rootProcess=$null;prepared=$false;complete=$false;exclusivityAssumption='Two direct build UBT roots plus one normal Cook SDK-validation descendant, in sequential supervised phases, and no concurrent intentional desktop UBT build. No filesystem lock, continuous observation or universal writer attribution.'}
     $index=[Array]::IndexOf($script:Order,$Phase)
     if($index -gt 0){
         $last=Read-Json (Owned ('phases/'+$script:Order[$index-1].ToLowerInvariant()+'/result.json'))
         if($last.ubtTrace.complete -ne $true){throw 'A1G_UBT_TRACE_CLOSED_PREDECESSOR_REQUIRED'}
         Check-A1GUbtTraceUnchanged $last.ubtTrace.after $state 'trace exact preceding phase continuity'
     }
-    if($Phase -cin @('Preflight','EditorPrerequisiteBuild','GameBuild')){Copy-A1GUbtTraceRecovery $state 'before';Check-A1GUbtTraceRecovery $state $script:Result.ubtTrace.beforeRecovery $Phase 'before'}
+    if($Phase -ceq 'Cook' -and (Test-Path -LiteralPath (Owned 'ue-user/cook/Saved/Logs/AutoSDKInfo.txt'))){throw 'A1G_COOK_SDK_LOG_MUST_BE_FRESH'}
+    if($Phase -cin @('Preflight','EditorPrerequisiteBuild','GameBuild','Cook')){Copy-A1GUbtTraceRecovery $state 'before';Check-A1GUbtTraceRecovery $state $script:Result.ubtTrace.beforeRecovery $Phase 'before'}
     $script:Result.ubtTrace.prepared=$true
 }
 function Complete-A1GUbtTracePhase {
     $evidence=$script:Result.ubtTrace;$evidence.after=Get-A1GUbtTraceState
     if($evidence.prepared -ne $true){throw 'A1G_UBT_TRACE_PREPARATION_INCOMPLETE'}
-    if($Phase -cin @('EditorPrerequisiteBuild','GameBuild') -and $script:RootCount -gt 0){
+    if($Phase -cin @('EditorPrerequisiteBuild','GameBuild','Cook') -and $script:RootCount -gt 0){
         if($script:Result.processes.Count -ne 1){throw 'A1G_UBT_TRACE_ROOT_CLOSURE_MISSING'};$p=$script:Result.processes[0]
         if($p.exitConfirmed -ne $true -or $p.cleanupConfirmed -ne $true -or -not @($p.jobAccounting).Count -or $p.jobAccounting[-1].querySucceeded -ne $true -or $p.jobAccounting[-1].activeProcesses -ne 0){throw 'A1G_UBT_TRACE_ROOT_NOT_CLOSED'}
         $evidence.rootClosureConfirmed=$true
-        $evidence.rootProcess=@{pid=$p.pid;process=Check-Descriptor $p.receiptArtifact;jobAccounting=$p.jobAccounting;visibleWindowRequested=$p.visibleWindowRequested;windowObservation='NOT_COLLECTED_FOR_UBT_ROOTS';scope='Finite retained owned-job process observations; no desktop-wide exclusivity or universal attribution certificate.'}
+        $evidence.rootProcess=@{pid=$p.pid;process=Check-Descriptor $p.receiptArtifact;jobAccounting=$p.jobAccounting;visibleWindowRequested=$p.visibleWindowRequested;windowObservation='NOT_COLLECTED_FOR_BUILD_OR_COOK_UAT_ROOTS';role=$(if($Phase -ceq 'Cook'){'SUPERVISED_COOK_UAT_ROOT_NOT_SDK_WRITER_PID'}else{'SUPERVISED_DIRECT_UBT_ROOT'});scope='Finite retained owned-job process observations. Cook PID is the UAT root; actual SDK writer PID remains UNVERIFIED. No desktop-wide exclusivity or universal attribution certificate.'}
         Copy-A1GUbtTraceRecovery $evidence.after 'after'
         Check-A1GUbtTraceRecovery $evidence.before $evidence.beforeRecovery $Phase 'before';Check-A1GUbtTraceRecovery $evidence.after $evidence.afterRecovery $Phase 'after'
-        $evidence.delta=Get-A1GUbtTraceDelta $evidence.before $evidence.after;$evidence.stdoutTrace=Get-A1GUbtTraceStdout $p $Phase
+        $evidence.delta=Get-A1GUbtTraceDelta $evidence.before $evidence.after
+        if($Phase -ceq 'Cook' -and $evidence.cookSdkLogWasAbsentBeforeLaunch -ne $true){throw 'A1G_COOK_SDK_PRE_UAT_ABSENCE_REQUIRED'}
+        $evidence.stdoutTrace=Get-A1GUbtTraceStdout $p $Phase
     }else{
-        Check-A1GUbtTraceUnchanged $evidence.before $evidence.after 'trace unchanged outside the two approved UBT roots'
+        Check-A1GUbtTraceUnchanged $evidence.before $evidence.after 'trace unchanged outside the two build roots and one Cook SDK descendant phase'
         if($Phase -cin @('Preflight','Audit')){Copy-A1GUbtTraceRecovery $evidence.after 'after';Check-A1GUbtTraceRecovery $evidence.after $evidence.afterRecovery $Phase 'after'}
     }
     $evidence.complete=$true
@@ -1566,6 +1620,7 @@ function Get-A1GCookArgumentEvidence([string]$UatText,[string]$CookText){
     $runs=@([regex]::Matches($normalized,('(?m)^Running: "?'+[regex]::Escape($editor)+'"? (?<args>[^\r\n]*)\r?$'))|Where-Object {$_.Groups['args'].Value -match '(?i)(?:^|\s)-run=Cook(?:\s|$)'})
     if($runs.Count -ne 1){throw 'A1G_ONE_ACTUAL_COOK_CHILD_COMMAND_REQUIRED'}
     $arguments=@(Split-A1GSimpleCookArguments $runs[0].Groups['args'].Value)
+    [void](Assert-A1GCookSdkValidationContext '' '' $arguments)
     if(@($arguments|Where-Object {$_ -ieq (Join-Path $script:Stage 'WarhammerClient.uproject').Replace('\','/')}).Count -ne 1){throw 'A1G_COOK_CHILD_PROJECT_ARGUMENT'}
     foreach($pair in @(@('run','Cook'),@('TargetPlatform','Windows'),@('Map','/Engine/Maps/Entry'),@('outputdir',(Owned 'cook/Windows')), @('UserDir',(Owned 'ue-user/cook')),@('EditorSettingsINI',(Owned 'ue-user/cook/Saved/Config/WindowsEditor/EditorSettings.ini')),@('ShaderWorkingDir',(Owned 'shader-work/cook')))){
         Assert-A1GExactCookArgument $arguments $pair[0] $pair[1] -PathValue:($pair[0] -in @('outputdir','UserDir','EditorSettingsINI','ShaderWorkingDir'))}
@@ -1620,7 +1675,7 @@ function Complete-A1GCookPhase($Process,$Before){
     if(-not $lines.Count -or $lines[-1] -notmatch '^Log file closed, [^\r\n]+\r?$' -or @([regex]::Matches($child.text,'(?m)^LogInit: Display: Success - 0 error\(s\), [0-9]+ warning\(s\)\r?$')).Count -ne 1 -or $child.text -match '(?im)\b(?:Fatal error:|Critical error:|Log[^:\r\n]*: Error:)'){throw 'A1G_COOK_COPIED_LOG_INCOMPLETE_OR_FAILED'}
     if($child.text -match '(?im)LogPluginManager:.*(?:Mounting|Enabling).*\bE04ProfileProof\b|LogModuleManager:.*(?:Loaded|Loading).*\bE04Profile(?:Parser|Probe|GameProbe)\b'){throw 'A1G_COOK_EDITOR_PROOF_PLUGIN_OBSERVED_ENABLED'}
     if($child.text -match '(?im)LogPluginManager:.*(?:Mounting|Enabling).*\bAndroidFileServer\b|LogModuleManager:.*(?:InternalLoadLibrary|Loaded|Loading).*\bAndroidFileServer(?:Editor)?\b'){throw 'A1G_COOK_ANDROID_FILE_SERVER_OBSERVED_ENABLED'}
-    $argv=Get-A1GCookArgumentEvidence $uat.text $child.text;$ddc=Get-A1GCookDdc $child.text
+    $argv=Get-A1GCookArgumentEvidence $uat.text $child.text;$ddc=Get-A1GCookDdc $child.text;$sdk=Get-A1GCookSdkTrace $Process
     $files=@(Get-A1GCookedInventory)
     $dev=@([regex]::Matches($child.text,'(?m)^LogAssetRegistryGenerator: Display: Generated development asset registry (?<path>[^\r\n]+) num assets [0-9]+, size is [^\r\n]+\r?$'))
     if($dev.Count -ne 1){throw 'A1G_COOK_DEVELOPMENT_REGISTRY_OUTPUT_IDENTITY_REQUIRED'}
@@ -1634,7 +1689,7 @@ function Complete-A1GCookPhase($Process,$Before){
     # packagestore.manifest is compact binary in this installed loose writer,
     # not JSON. Retain its bytes without inventing a decoder/certification path.
     foreach($d in @($Before.game.facts.targetReceipt,$Before.game.facts.executable)){[void](Check-Descriptor $d)}
-    @{uatLog=$uat.file;copiedChildLog=$child.file;process=$Process.receiptArtifact;resolvedIntent=$intent;cookChildArguments=$argv;ddc=$ddc;outputRoot=(Owned 'cook/Windows');files=$files;metadataRoot=$metadataRoot;metadataFiles=$metadata;runtimeRegistries=$runtime;mapFiles=$maps;editorPrerequisite=$Before.editor.result;gameBuild=$Before.game.result;entryPackageRequested='/Engine/Maps/Entry';scope='Real same-run normal loose cook/log/output facts. Actual map filenames are discovered output files; Entry package identity and functional startup dependencies must still be established by later actual Native Entry-world load. No broad cooked/transitive-graph certificate.'}
+    @{uatLog=$uat.file;copiedChildLog=$child.file;process=$Process.receiptArtifact;resolvedIntent=$intent;cookChildArguments=$argv;ddc=$ddc;sdkValidation=$sdk;outputRoot=(Owned 'cook/Windows');files=$files;metadataRoot=$metadataRoot;metadataFiles=$metadata;runtimeRegistries=$runtime;mapFiles=$maps;editorPrerequisite=$Before.editor.result;gameBuild=$Before.game.result;entryPackageRequested='/Engine/Maps/Entry';scope='Real same-run normal loose cook/log/output facts. Actual map filenames are discovered output files; Entry package identity and functional startup dependencies must still be established by later actual Native Entry-world load. No broad cooked/transitive-graph certificate.'}
 }
 function Read-A1GCopyMap([string]$Path,[string]$StageRoot,[string]$Kind){
     $text=Read-A1GCookStageText $Path;$rows=[Collections.Generic.List[object]]::new();$seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -1888,16 +1943,23 @@ function Complete-A1GAuditPhase {
         Check-Settings $r.settingsBefore $r.settingsAfter;Check-A1GUnownedGameSettings $r.gameSettingsBefore $r.gameSettingsAfter
         foreach($prefix in @('source','stage','fixtures')){Equal-Data @($r[$prefix+'Before']) @($r[$prefix+'After']) ($name+' '+$prefix+' preservation')}
         $trace=$r.ubtTrace
-        if($trace.policy -cne 'OWNER_APPROVED_OPTION_A_FINITE_NORMAL_UBT_TRACE_EXCEPTION' -or $trace.prepared -ne $true -or $trace.complete -ne $true){throw 'A1G_AUDIT_TRACE_BOUNDARY_INCOMPLETE'}
+        if($trace.policy -cne 'OWNER_APPROVED_BUILD_AND_COOK_SDK_FINITE_UBT_TRACE_EXCEPTION' -or $trace.prepared -ne $true -or $trace.complete -ne $true){throw 'A1G_AUDIT_TRACE_BOUNDARY_INCOMPLETE'}
         if($null -ne $traceLast){Check-A1GUbtTraceUnchanged $traceLast $trace.before ($name+' trace phase continuity')}
-        if($name -cin @('EditorPrerequisiteBuild','GameBuild')){
+        if($name -cin @('EditorPrerequisiteBuild','GameBuild','Cook')){
             if($trace.rootClosureConfirmed -ne $true -or $trace.rootProcess.pid -ne $r.processes[0].pid){throw 'A1G_AUDIT_TRACE_ROOT_JOIN'}
             [void](Check-Descriptor $trace.rootProcess.process)
             Equal-Data $trace.rootProcess.process $r.processes[0].receiptArtifact 'trace owned process receipt join'
             Check-A1GUbtTraceRecovery $trace.before $trace.beforeRecovery $name 'before';Check-A1GUbtTraceRecovery $trace.after $trace.afterRecovery $name 'after'
-            Check-A1GUbtTraceUnchanged $trace.before $trace.immediatePrelaunch ($name+' trace immediate prelaunch')
+            Check-A1GUbtTraceUnchanged $trace.before $trace.immediatePrelaunch ($name+' retained pre-root trace observation')
             Equal-Data $trace.delta (Get-A1GUbtTraceDelta $trace.before $trace.after) ($name+' retained trace delta')
             Equal-Data $trace.stdoutTrace (Get-A1GUbtTraceStdout $r.processes[0] $name) ($name+' actual trace stdout')
+            if($name -ceq 'Cook'){
+                if($trace.rootProcess.role -cne 'SUPERVISED_COOK_UAT_ROOT_NOT_SDK_WRITER_PID' -or $trace.cookSdkLogWasAbsentBeforeLaunch -ne $true -or $trace.prelaunchScope -cne 'Immediately before supervised Cook UAT root; not immediate or atomic before its nested SDK UBT child.' -or $null -ne $trace.stdoutTrace.actualSdkWriterPid -or $trace.stdoutTrace.writerPidAttestation -cne 'UNVERIFIED'){throw 'A1G_AUDIT_COOK_SDK_SCOPE_OR_ABSENCE_REQUIRED'}
+                foreach($context in @($trace.cookValidationContextBeforePhase,$trace.cookValidationContextBeforeUat)){
+                    if($null -eq $context -or $context.uatBuildMachine -cne $false -or $context.sdkSetupBypass -cne $false -or $context.forbiddenModeFlagCount -ne 0){throw 'A1G_AUDIT_COOK_SDK_CONTEXT_GUARD_REQUIRED'}
+                }
+                Equal-Data $r.cook.sdkValidation $trace.stdoutTrace 'Cook phase versus final trace SDK observations'
+            }
         }else{
             Check-A1GUbtTraceUnchanged $trace.before $trace.after ($name+' trace unchanged outside UBT roots')
             if($name -ceq 'Preflight'){Check-A1GUbtTraceRecovery $trace.before $trace.beforeRecovery $name 'before';Check-A1GUbtTraceRecovery $trace.after $trace.afterRecovery $name 'after'}
@@ -1920,7 +1982,7 @@ function Complete-A1GAuditPhase {
     if($process.executable -ine $join.stage.facts.executable.path -or $process.workingDirectory -ine $join.stage.facts.stageRoot -or $process.completionCleanupMode -cne 'NaturalDrain'){throw 'A1G_AUDIT_NATIVE_PROCESS_BINARY_OR_CWD_MISMATCH'}
     Equal-Data @($process.arguments) @($n.arguments) 'audit actual native argv'
     $windows=Check-A1GOwnedWindowSamples $process;$proof=Check-A1GNativeResultDetails $process $join $n.paths;$log=Check-A1GNativeLog $process $n.paths $n.arguments
-    @{closedPhaseCount=8;predecessors=$descriptors.ToArray();literalInputCount=$join.literalInputs.Count;attemptCount=$proof.attemptCount;evaluatedCheckCount=$proof.evaluatedCheckCount;nativeAssertionTotal='NOT_INFERRED';ubtTrace=@{policy='OWNER_APPROVED_OPTION_A_FINITE_NORMAL_UBT_TRACE_EXCEPTION';closedPredecessorBoundaries=8;current=$traceCurrent;recoveryScope='Preflight and both UBT before/after copies independently rehashed; current Audit after copy is retained in phase ubtTrace at final preservation.';limits='Finite exception observations/recovery only; no historical repair, restoration, universal writer attribution or acceptance.'};executable=$join.stage.facts.executable;runtimeDependencyCoverage=$join.runtimeDependencyCoverage;result=$proof.result;log=$log.log;ddc=$log.ddc;windowObservation=$windows;settingsScope='Original9 roles plus separately prebaselined medium-integrity GameUserSettings fallback role';specialAssuranceCertification='DEFERRED_UNPROVEN_OWN17';scope='Closed ordinary source/settings/input/cook/stage/binary/result reconciliation. Final CODE and different REQ remain required; no A1E acceptance transfer.'}
+    @{closedPhaseCount=8;predecessors=$descriptors.ToArray();literalInputCount=$join.literalInputs.Count;attemptCount=$proof.attemptCount;evaluatedCheckCount=$proof.evaluatedCheckCount;nativeAssertionTotal='NOT_INFERRED';ubtTrace=@{policy='OWNER_APPROVED_BUILD_AND_COOK_SDK_FINITE_UBT_TRACE_EXCEPTION';permittedWriterPhases=@('EditorPrerequisiteBuild','GameBuild','Cook');closedPredecessorBoundaries=8;current=$traceCurrent;recoveryScope='Preflight, both direct build UBT and the Cook UAT/SDK phase before/after copies independently rehashed; current Audit after copy is retained in phase ubtTrace at final preservation.';limits='Finite exception observations/recovery only; no historical repair, restoration, universal writer attribution or acceptance.'};executable=$join.stage.facts.executable;runtimeDependencyCoverage=$join.runtimeDependencyCoverage;result=$proof.result;log=$log.log;ddc=$log.ddc;windowObservation=$windows;settingsScope='Original9 roles plus separately prebaselined medium-integrity GameUserSettings fallback role';specialAssuranceCertification='DEFERRED_UNPROVEN_OWN17';scope='Closed ordinary source/settings/input/cook/stage/binary/result reconciliation. Final CODE and different REQ remain required; no A1E acceptance transfer.'}
 }
 
 # END direct ordinary source integration.
@@ -1931,6 +1993,10 @@ function Assert-ImplementedPhase {
 function Output-Inventory {
     $items=[Collections.Generic.List[object]]::new();$reportBytes=0L
     foreach($name in @('logs','reports','artifacts','fixtures')){foreach($p in Plain-Files (Owned $name)){$d=Descriptor $p;if($d.bytes -gt 64MB){throw 'A1G_DATA_STREAM_OR_LOG_CAP_PRESERVE_ORIGINAL'};if($name -ceq 'reports'){$reportBytes+=$d.bytes};$items.Add($d)}}
+    # The SDK log is already an exact owned output; keep its descriptor in every
+    # later retained-artifact inventory so predecessor and Audit joins rehash it.
+    $sdkLog=Owned 'ue-user/cook/Saved/Logs/AutoSDKInfo.txt'
+    if(Test-Path -LiteralPath $sdkLog){$d=Descriptor $sdkLog;if($d.bytes -gt 64MB){throw 'A1G_COOK_SDK_LOG_CAP_PRESERVE_ORIGINAL'};$items.Add($d)}
     if($reportBytes -gt 512MB){throw 'A1G_REPORT_AGGREGATE_CAP'};$items.ToArray()
 }
 
