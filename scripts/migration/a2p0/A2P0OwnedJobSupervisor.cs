@@ -41,6 +41,7 @@ public static class Supervisor {
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool SetInformationJobObject(IntPtr job,int cls,ref LIMIT info,uint size);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool QueryInformationJobObject(IntPtr job,int cls,ref ACCOUNT info,uint size,out uint returned);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool QueryInformationJobObject(IntPtr job,int cls,ref LIMIT info,uint size,out uint returned);
+    [DllImport("kernel32.dll",SetLastError=true)] static extern bool QueryInformationJobObject(IntPtr job,int cls,IntPtr info,uint size,out uint returned);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool IsProcessInJob(IntPtr process,IntPtr job,out bool inside);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool TerminateJobObject(IntPtr job,uint exit);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool TerminateProcess(IntPtr process,uint exit);
@@ -88,6 +89,77 @@ public static class Supervisor {
             {"thisPeriodKernelTime100ns",a.periodKernel},{"totalPageFaultCount",a.faults}};
         samples.Add(value); return value;
     }
+    // Best-effort later membership snapshot on an already-fatal guard path only.
+    // This is not atomic with ACCOUNT and cannot identify an actor or cause.
+    static Dictionary<string,object> OwnJobPidSnapshot(IntPtr job,Stopwatch clock,double deadline) {
+        const int bufferBytes=136, maximumIds=16;
+        var value=new Dictionary<string,object>{{"stage","later-own-job-pid-list"},{"informationClass",3},
+            {"snapshotRelation","LATER_NOT_ATOMIC_WITH_ACCOUNT"},{"attempted",false},{"queryAttemptCount",0},
+            {"pointerBytes",IntPtr.Size},{"bufferBytes",bufferBytes},{"maximumIds",maximumIds},
+            {"deadlineElapsedSeconds",deadline},{"queryStartedElapsedSeconds",null},{"queryCompletedElapsedSeconds",null},
+            {"querySucceeded",null},{"win32Error",null},{"returnedBytes",null},
+            {"numberOfAssignedProcesses",null},{"numberOfProcessIdsInList",null},
+            {"idsParsed",false},{"processIds",null},{"complete",false},{"outcome","NOT_ATTEMPTED_INCOMPLETE"},
+            {"bufferAllocated",false},{"bufferFreed",null},{"managedFailureType",null},{"bufferReleaseFailureType",null},
+            {"late",false},{"nativeCallTimeout","NONE_SYNCHRONOUS_API_EXTERNAL_WATCHDOG_REQUIRED"}};
+        IntPtr buffer=IntPtr.Zero;
+        try {
+            if(job==IntPtr.Zero || IntPtr.Size!=8) { value["outcome"]="SKIPPED_HANDLE_OR_ARCH_INCOMPLETE"; return value; }
+            if(clock.Elapsed.TotalSeconds>=deadline) { value["outcome"]="SKIPPED_BUDGET_INCOMPLETE"; return value; }
+            buffer=Marshal.AllocHGlobal(bufferBytes); value["bufferAllocated"]=true;
+            if(clock.Elapsed.TotalSeconds>=deadline) { value["outcome"]="SKIPPED_BUDGET_INCOMPLETE"; return value; }
+            uint returned;
+            value["attempted"]=true; value["queryAttemptCount"]=1;
+            value["queryStartedElapsedSeconds"]=clock.Elapsed.TotalSeconds;
+            bool succeeded=QueryInformationJobObject(job,3,buffer,(uint)bufferBytes,out returned);
+            int? nativeError=succeeded ? (int?)null : Marshal.GetLastWin32Error();
+            double completed=clock.Elapsed.TotalSeconds;
+            value["queryCompletedElapsedSeconds"]=completed;
+            value["querySucceeded"]=succeeded; value["win32Error"]=nativeError;
+            // Failed native calls supply no buffer/count/return-length observation.
+            if(!succeeded) { value["outcome"]="API_FAILED_INCOMPLETE"; return value; }
+            value["returnedBytes"]=returned;
+            if(completed>=deadline) { value["outcome"]="LATE_INCOMPLETE"; return value; }
+            if(returned<8 || returned>bufferBytes) { value["outcome"]="INVALID_LENGTH_INCOMPLETE"; return value; }
+            uint assigned=unchecked((uint)Marshal.ReadInt32(buffer,0));
+            uint listed=unchecked((uint)Marshal.ReadInt32(buffer,4));
+            value["numberOfAssignedProcesses"]=assigned; value["numberOfProcessIdsInList"]=listed;
+            if(listed>maximumIds || listed>assigned || 8UL+8UL*listed>returned) {
+                value["outcome"]="INVALID_COUNTS_INCOMPLETE"; return value;
+            }
+            if(listed<assigned) { value["outcome"]="TRUNCATED_INCOMPLETE"; return value; }
+            if(clock.Elapsed.TotalSeconds>=deadline) { value["outcome"]="LATE_INCOMPLETE"; return value; }
+            var ids=new List<object>();
+            for(int i=0;i<(int)listed;i++) ids.Add(unchecked((ulong)Marshal.ReadInt64(buffer,8+8*i)));
+            value["processIds"]=ids; value["idsParsed"]=true;
+            value["complete"]=true; value["outcome"]="COMPLETE_LATER_OWN_JOB_LIST_NOT_ACCEPTANCE";
+        } catch(Exception failure) {
+            // Diagnostic failure cannot authorize continuation or replace the fatal guard.
+            value["complete"]=false; value["idsParsed"]=false; value["processIds"]=null;
+            value["outcome"]="MANAGED_FAILURE_INCOMPLETE";
+            string kind=failure.GetType().FullName ?? failure.GetType().Name;
+            value["managedFailureType"]=kind.Substring(0,Math.Min(128,kind.Length));
+        } finally {
+            if(buffer!=IntPtr.Zero) {
+                try { Marshal.FreeHGlobal(buffer); value["bufferFreed"]=true; }
+                catch(Exception failure) {
+                    value["bufferFreed"]=false; value["complete"]=false;
+                    value["idsParsed"]=false; value["processIds"]=null;
+                    value["outcome"]="BUFFER_RELEASE_FAILURE_INCOMPLETE";
+                    string kind=failure.GetType().FullName ?? failure.GetType().Name;
+                    value["bufferReleaseFailureType"]=kind.Substring(0,Math.Min(128,kind.Length));
+                }
+            }
+            double completed=clock.Elapsed.TotalSeconds;
+            value["completedObservationElapsedSeconds"]=completed; value["late"]=completed>=deadline;
+            if(completed>=deadline && (bool)value["complete"]) {
+                value["complete"]=false; value["idsParsed"]=false; value["processIds"]=null;
+                value["outcome"]="LATE_INCOMPLETE";
+            }
+        }
+        return value;
+    }
+
     static void RootFinal(IntPtr process,Dictionary<string,object> r) {
         long creation,exit,kernel,user; uint code;
         WinCheck(GetProcessTimes(process,out creation,out exit,out kernel,out user),"GetProcessTimes(exit)");
@@ -282,6 +354,9 @@ public static class Supervisor {
                 double accountingQueryCompletedElapsedSeconds=clock.Elapsed.TotalSeconds;
                 if(observationBytes!=(uint)Marshal.SizeOf<ACCOUNT>()) throw new InvalidDataException("Loop accounting size mismatch");
                 if(observation.total!=1 || observation.active>1 || observation.terminatedByLimit!=0) {
+                    double guardFailureElapsedSeconds=clock.Elapsed.TotalSeconds;
+                    cleanupDeadline=Math.Min(outerDeadline,guardFailureElapsedSeconds+5);
+                    r["cleanupStartedElapsedSeconds"]=guardFailureElapsedSeconds;
                     // Preserve this already-obtained trigger; a second query could observe different accounting.
                     // The existing monotonic clock brackets the query, not an atomic kernel timestamp.
                     samples.Add(new Dictionary<string,object>{{"stage","unexpected-membership-trigger"},{"observedUtc",Utc()},
@@ -293,7 +368,13 @@ public static class Supervisor {
                         {"totalTerminatedProcesses",observation.terminatedByLimit},{"totalUserTime100ns",observation.user},
                         {"totalKernelTime100ns",observation.kernel},{"thisPeriodUserTime100ns",observation.periodUser},
                         {"thisPeriodKernelTime100ns",observation.periodKernel},{"totalPageFaultCount",observation.faults}});
-                    throw new InvalidDataException("Single-root job accounting differs");
+                    try {
+                        r["jobPidSnapshot"]=OwnJobPidSnapshot(job,clock,Math.Min(runDeadline,cleanupDeadline));
+                    } finally {
+                        // The guard is already fatal; no diagnostic failure may replace it.
+                        if(clock.Elapsed.TotalSeconds>=runDeadline) r["timedOut"]=true;
+                        throw new InvalidDataException("Single-root job accounting differs");
+                    }
                 }
                 if(exited) {
                     var count=Count(job,samples,"root-exit"); RequireSingle(count);
@@ -311,8 +392,12 @@ public static class Supervisor {
             r["primaryError"]=Error("owned-root",error);
             r["technicalBlocked"]=!(bool)r["resumed"] && error is Win32Exception;
         } finally {
-            cleanupDeadline=Math.Min(outerDeadline,clock.Elapsed.TotalSeconds+5);
-            r["cleanupStartedElapsedSeconds"]=clock.Elapsed.TotalSeconds;
+            // A fatal guard may already have anchored this same cleanup allowance.
+            if(cleanupDeadline<0) {
+                double cleanupStartedElapsedSeconds=clock.Elapsed.TotalSeconds;
+                cleanupDeadline=Math.Min(outerDeadline,cleanupStartedElapsedSeconds+5);
+                r["cleanupStartedElapsedSeconds"]=cleanupStartedElapsedSeconds;
+            }
             r["cleanupDeadlineElapsedSeconds"]=cleanupDeadline;
             // No window enumeration/messages, PID reopening, name search or Kill(true).
             if(process.pid!=0 && (!exited || !jobZero || r["primaryError"]!=null)) {
