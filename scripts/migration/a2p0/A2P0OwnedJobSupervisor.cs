@@ -42,6 +42,8 @@ public static class Supervisor {
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool QueryInformationJobObject(IntPtr job,int cls,ref ACCOUNT info,uint size,out uint returned);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool QueryInformationJobObject(IntPtr job,int cls,ref LIMIT info,uint size,out uint returned);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool QueryInformationJobObject(IntPtr job,int cls,IntPtr info,uint size,out uint returned);
+    [DllImport("kernel32.dll",ExactSpelling=true,SetLastError=true)] static extern IntPtr OpenProcess(uint access,bool inherit,uint pid);
+    [DllImport("kernel32.dll",CharSet=CharSet.Unicode,ExactSpelling=true,SetLastError=true)] static extern bool QueryFullProcessImageNameW(IntPtr process,uint flags,[Out] char[] image,ref uint chars);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool IsProcessInJob(IntPtr process,IntPtr job,out bool inside);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool TerminateJobObject(IntPtr job,uint exit);
     [DllImport("kernel32.dll",SetLastError=true)] static extern bool TerminateProcess(IntPtr process,uint exit);
@@ -156,6 +158,136 @@ public static class Supervisor {
                 value["complete"]=false; value["idsParsed"]=false; value["processIds"]=null;
                 value["outcome"]="LATE_INCOMPLETE";
             }
+        }
+        return value;
+    }
+
+    // Later handle observation only; the caller's accounting guard remains fatal.
+    static Dictionary<string,object> OwnJobMemberImage(IntPtr job,uint rootPid,long rootCreation,
+        Dictionary<string,object> snapshot,Stopwatch clock,double deadline) {
+        var calls=new List<object>();
+        var value=new Dictionary<string,object>{{"scope","PID_LIST_PLUS_ONE_MEMBER_BASENAME"},
+            {"relation","LATER_HANDLE_NOT_ATOMIC_WITH_LIST_OR_ACCOUNT"},{"cause","UNATTRIBUTED"},
+            {"rootPid",rootPid},{"rootCreationFileTime",rootCreation},{"selectedPid",null},
+            {"deadlineElapsedSeconds",deadline},{"completedObservationElapsedSeconds",null},
+            {"openAttempted",false},{"membershipBeforeAttempted",false},{"timesAttempted",false},
+            {"imageAttempted",false},{"membershipAfterAttempted",false},{"closeAttempted",false},
+            {"memberBefore",null},{"memberAfter",null},{"creationFileTime",null},
+            {"basename",null},{"basenameChars",null},{"bufferChars",512},{"calls",calls},
+            {"handleReleaseConfirmed",true},{"managedFailureType",null},{"lastOperation",null},
+            {"complete",false},{"late",false},{"outcome","SKIPPED_SELECTION_INCOMPLETE"},
+            {"nativeCallTimeout","NONE_SYNCHRONOUS_API_EXTERNAL_WATCHDOG_REQUIRED"}};
+        IntPtr extra=IntPtr.Zero; char[] image=null; string basename=null; bool valid=false;
+        bool Budget() {
+            if(clock.Elapsed.TotalSeconds<deadline) return true;
+            value["outcome"]="LATE_INCOMPLETE"; return false;
+        }
+        void Record(string operation,double started,bool succeeded,int? error) {
+            if(calls.Count>=6) throw new InvalidOperationException("Image diagnostic call bound");
+            calls.Add(new Dictionary<string,object>{{"operation",operation},
+                {"startedElapsedSeconds",started},{"completedElapsedSeconds",clock.Elapsed.TotalSeconds},
+                {"succeeded",succeeded},{"win32Error",error}});
+        }
+        try {
+            object ready,parsed,released,raw;
+            if(job==IntPtr.Zero || rootPid==0 || rootCreation<=0 || snapshot==null ||
+               !snapshot.TryGetValue("complete",out ready) || !(ready is bool) || !(bool)ready ||
+               !snapshot.TryGetValue("idsParsed",out parsed) || !(parsed is bool) || !(bool)parsed ||
+               !snapshot.TryGetValue("bufferFreed",out released) || !(released is bool) || !(bool)released ||
+               !snapshot.TryGetValue("processIds",out raw) || !(raw is List<object>)) return value;
+            var ids=(List<object>)raw;
+            if(ids.Count!=2 || !(ids[0] is ulong) || !(ids[1] is ulong)) return value;
+            ulong first=(ulong)ids[0],second=(ulong)ids[1];
+            if(first==0 || second==0 || first==second || !((first==rootPid)^(second==rootPid))) return value;
+            ulong selected=first==rootPid ? second : first;
+            if(selected>UInt32.MaxValue) return value;
+            value["selectedPid"]=selected;
+            if(!Budget()) return value;
+            value["lastOperation"]="OpenProcess"; value["openAttempted"]=true;
+            double started=clock.Elapsed.TotalSeconds;
+            extra=OpenProcess(0x1000,false,(uint)selected);
+            int? error=extra==IntPtr.Zero ? Marshal.GetLastWin32Error() : (int?)null;
+            if(extra!=IntPtr.Zero) value["handleReleaseConfirmed"]=false;
+            Record("OpenProcess",started,extra!=IntPtr.Zero,error);
+            if(extra==IntPtr.Zero) { value["outcome"]="OPEN_FAILED_INCOMPLETE"; return value; }
+            if(!Budget()) return value;
+            bool member;
+            value["lastOperation"]="IsProcessInJobBefore"; value["membershipBeforeAttempted"]=true;
+            started=clock.Elapsed.TotalSeconds; bool ok=IsProcessInJob(extra,job,out member);
+            error=ok ? (int?)null : Marshal.GetLastWin32Error();
+            Record("IsProcessInJobBefore",started,ok,error);
+            if(!ok) { value["outcome"]="MEMBERSHIP_BEFORE_FAILED_INCOMPLETE"; return value; }
+            if(!Budget()) return value;
+            value["memberBefore"]=member;
+            if(!member) { value["outcome"]="NOT_OWN_JOB_BEFORE_INCOMPLETE"; return value; }
+            if(!Budget()) return value;
+            long creation,exit,kernel,user;
+            value["lastOperation"]="GetProcessTimes"; value["timesAttempted"]=true;
+            started=clock.Elapsed.TotalSeconds; ok=GetProcessTimes(extra,out creation,out exit,out kernel,out user);
+            error=ok ? (int?)null : Marshal.GetLastWin32Error();
+            Record("GetProcessTimes",started,ok,error);
+            if(!ok) { value["outcome"]="CREATION_FAILED_INCOMPLETE"; return value; }
+            if(!Budget()) return value;
+            if(creation<=0) { value["outcome"]="CREATION_INVALID_INCOMPLETE"; return value; }
+            DateTime.FromFileTimeUtc(creation); // Validate the creation value, not a guessed identity window.
+            if(!Budget()) return value;
+            value["creationFileTime"]=creation;
+            image=new char[512]; uint chars=512;
+            if(!Budget()) return value;
+            value["lastOperation"]="QueryFullProcessImageNameW"; value["imageAttempted"]=true;
+            started=clock.Elapsed.TotalSeconds; ok=QueryFullProcessImageNameW(extra,0,image,ref chars);
+            error=ok ? (int?)null : Marshal.GetLastWin32Error();
+            Record("QueryFullProcessImageNameW",started,ok,error);
+            if(!ok) { value["outcome"]="IMAGE_FAILED_INCOMPLETE"; return value; }
+            if(!Budget()) return value;
+            if(chars==0 || chars>=512 || image[(int)chars]!='\0') { value["outcome"]="IMAGE_INVALID_INCOMPLETE"; return value; }
+            if(!Budget()) return value;
+            value["lastOperation"]="IsProcessInJobAfter"; value["membershipAfterAttempted"]=true;
+            started=clock.Elapsed.TotalSeconds; ok=IsProcessInJob(extra,job,out member);
+            error=ok ? (int?)null : Marshal.GetLastWin32Error();
+            Record("IsProcessInJobAfter",started,ok,error);
+            if(!ok) { value["outcome"]="MEMBERSHIP_AFTER_FAILED_INCOMPLETE"; return value; }
+            if(!Budget()) return value;
+            value["memberAfter"]=member;
+            if(!member) { value["outcome"]="NOT_OWN_JOB_AFTER_INCOMPLETE"; return value; }
+            int start=0;
+            for(int i=0;i<(int)chars;i++) {
+                char c=image[i];
+                if(c=='\0' || c<' ' || c=='\u007f') { value["outcome"]="IMAGE_INVALID_INCOMPLETE"; return value; }
+                if(c=='\\' || c=='/') start=i+1;
+            }
+            int length=(int)chars-start;
+            if(length<1 || length>255) { value["outcome"]="BASENAME_INVALID_INCOMPLETE"; return value; }
+            if(!Budget()) return value;
+            basename=new string(image,start,length); // Never construct or retain a full-path string.
+            if(!Budget()) return value;
+            valid=true; value["outcome"]="COMPLETE_LATER_HANDLE_BASENAME_NOT_ACCEPTANCE";
+        } catch(Exception failure) {
+            valid=false; value["outcome"]="MANAGED_FAILURE_INCOMPLETE";
+            string kind=failure.GetType().FullName ?? failure.GetType().Name;
+            value["managedFailureType"]=kind.Substring(0,Math.Min(128,kind.Length));
+        } finally {
+            if(extra!=IntPtr.Zero) {
+                try {
+                    value["lastOperation"]="CloseHandle"; value["closeAttempted"]=true;
+                    IntPtr owned=extra; extra=IntPtr.Zero;
+                    double started=clock.Elapsed.TotalSeconds; bool closed=CloseHandle(owned);
+                    int? error=closed ? (int?)null : Marshal.GetLastWin32Error();
+                    value["handleReleaseConfirmed"]=closed;
+                    Record("CloseHandle",started,closed,error);
+                    if(!closed) { valid=false; value["outcome"]="HANDLE_RELEASE_FAILED_INCOMPLETE"; }
+                } catch(Exception failure) {
+                    valid=false; value["handleReleaseConfirmed"]=false; value["outcome"]="HANDLE_RELEASE_FAILED_INCOMPLETE";
+                    string kind=failure.GetType().FullName ?? failure.GetType().Name;
+                    value["managedFailureType"]=kind.Substring(0,Math.Min(128,kind.Length));
+                }
+            }
+            if(image!=null) for(int i=0;i<image.Length;i++) image[i]='\0';
+            double completed=clock.Elapsed.TotalSeconds;
+            value["completedObservationElapsedSeconds"]=completed; value["late"]=completed>=deadline;
+            if(completed>=deadline) { valid=false; value["outcome"]="LATE_INCOMPLETE"; }
+            value["complete"]=valid; value["basename"]=valid ? basename : null;
+            value["basenameChars"]=valid ? (object)basename.Length : null;
         }
         return value;
     }
@@ -279,7 +411,7 @@ public static class Supervisor {
         IntPtr job=IntPtr.Zero,attr=IntPtr.Zero,handles=IntPtr.Zero,jobList=IntPtr.Zero,env=IntPtr.Zero;
         IntPtr outRead=IntPtr.Zero,outWrite=IntPtr.Zero,errRead=IntPtr.Zero,errWrite=IntPtr.Zero,input=IntPtr.Zero;
         PI process=new PI(); bool assigned=false,exited=false,initialized=false;
-        bool outJoined=false,errJoined=false,jobZero=false;
+        bool outJoined=false,errJoined=false,jobZero=false,imageHandleReleased=true;
         PipeCapture outCapture=null,errCapture=null;
         var clock=Stopwatch.StartNew(); double outerDeadline=operatorRemainingMilliseconds/1000.0;
         double cleanupDeadline=-1;
@@ -369,7 +501,12 @@ public static class Supervisor {
                         {"totalKernelTime100ns",observation.kernel},{"thisPeriodUserTime100ns",observation.periodUser},
                         {"thisPeriodKernelTime100ns",observation.periodKernel},{"totalPageFaultCount",observation.faults}});
                     try {
-                        r["jobPidSnapshot"]=OwnJobPidSnapshot(job,clock,Math.Min(runDeadline,cleanupDeadline));
+                        var snapshot=OwnJobPidSnapshot(job,clock,Math.Min(runDeadline,cleanupDeadline));
+                        r["jobPidSnapshot"]=snapshot;
+                        imageHandleReleased=false;
+                        var imageObservation=OwnJobMemberImage(job,process.pid,(long)r["creationFileTime"],snapshot,clock,Math.Min(runDeadline,cleanupDeadline));
+                        r["jobMemberImageObservation"]=imageObservation;
+                        imageHandleReleased=(bool)imageObservation["handleReleaseConfirmed"];
                     } finally {
                         // The guard is already fatal; no diagnostic failure may replace it.
                         if(clock.Elapsed.TotalSeconds>=runDeadline) r["timedOut"]=true;
@@ -399,7 +536,8 @@ public static class Supervisor {
                 r["cleanupStartedElapsedSeconds"]=cleanupStartedElapsedSeconds;
             }
             r["cleanupDeadlineElapsedSeconds"]=cleanupDeadline;
-            // No window enumeration/messages, PID reopening, name search or Kill(true).
+            // The optional extra diagnostic handle has already been released or marked uncertain.
+            // No window enumeration/messages, PID reopening here, name search or Kill(true).
             if(process.pid!=0 && (!exited || !jobZero || r["primaryError"]!=null)) {
                 try {
                     if(assigned) WinCheck(TerminateJobObject(job,0xa2f00001),"TerminateJobObject(failure)");
@@ -434,7 +572,7 @@ public static class Supervisor {
             bool streams=outCapture!=null && errCapture!=null && outJoined && errJoined &&
                 (bool)outCapture.Record(outJoined)["complete"] && (bool)errCapture.Record(errJoined)["complete"];
             r["streamsComplete"]=streams;
-            r["cleanupConfirmed"]=process.pid!=0 && exited && jobZero && outJoined && errJoined;
+            r["cleanupConfirmed"]=process.pid!=0 && exited && jobZero && outJoined && errJoined && imageHandleReleased;
             r["finalActiveJobCountObserved"]=jobZero ? (object)0 : null;
             r["readerJoinUncertainty"]=!outJoined || !errJoined;
             // Failed reader joins remain incomplete; background readers die with
