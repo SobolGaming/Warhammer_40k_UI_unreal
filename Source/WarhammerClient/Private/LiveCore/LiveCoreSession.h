@@ -79,6 +79,13 @@ struct FMetadata
     int64 Revision = -1;
 };
 
+struct FReturnedViolation
+{
+    FString Code;
+    FString Message;
+    TOptional<FString> Field;
+};
+
 struct FOutcome
 {
     bool bError = false;
@@ -88,6 +95,10 @@ struct FOutcome
     bool bCommitted = false;
     FString Code;
     FString Message;
+    // Viewer-scoped returned status, not necessarily a new cause of this rejection.
+    FString ReturnedLifecycleMessage;
+    FString ReturnedViolationCode;
+    TArray<FReturnedViolation> ReturnedViolations;
     int64 Revision = -1;
 };
 

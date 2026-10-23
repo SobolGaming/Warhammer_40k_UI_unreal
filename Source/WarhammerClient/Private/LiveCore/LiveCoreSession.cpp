@@ -325,6 +325,35 @@ bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId
             ExpectedRevision >= E01::MaximumExactRevision || Parsed.SessionRevision.GetValue() != ExpectedRevision + (Parsed.bCommitted ? 1 : 0))
         { OutError = TEXT("Command receipt identity, viewer, Core build or revision does not match the retained command."); return false; }
         Candidate.bAccepted = Parsed.bAccepted; Candidate.bCommitted = Parsed.bCommitted; Candidate.Revision = Parsed.SessionRevision.GetValue();
+        // Only inspect supplied diagnostics after all receipt identity/scope gates.
+        // This is returned lifecycle status; an uncommitted result can retain older status.
+        const auto Lifecycle = Object(Metadata, TEXT("lifecycle_status"));
+        const auto LifecycleMessage = Field(Lifecycle, TEXT("message"));
+        if (!Null(Lifecycle, TEXT("message")) && (!LifecycleMessage.IsValid() || LifecycleMessage->Type != EJson::String ||
+            !LifecycleMessage->TryGetString(Candidate.ReturnedLifecycleMessage) || Candidate.ReturnedLifecycleMessage.Len() > 4096))
+        { OutError = TEXT("Returned lifecycle message is invalid or exceeds the display bound."); return false; }
+        const auto Payload = Object(Lifecycle, TEXT("payload"));
+        const auto ViolationCode = Field(Payload, TEXT("violation_code"));
+        if (ViolationCode.IsValid() && ViolationCode->Type != EJson::Null && !String(Payload, TEXT("violation_code"), Candidate.ReturnedViolationCode))
+        { OutError = TEXT("Returned lifecycle violation code is invalid."); return false; }
+        const auto ValidationValue = Field(Payload, TEXT("proposal_validation"));
+        if (ValidationValue.IsValid() && ValidationValue->Type != EJson::Null)
+        {
+            const auto Validation = Object(Payload, TEXT("proposal_validation"));
+            const TArray<TSharedPtr<FJsonValue>>* Violations = nullptr;
+            if (!Array(Validation, TEXT("violations"), Violations))
+            { OutError = TEXT("Returned lifecycle violations are invalid or exceed the display bound."); return false; }
+            for (const auto& Value : *Violations)
+            {
+                const auto Violation = Value->Type == EJson::Object ? Value->AsObject() : nullptr;
+                FReturnedViolation Item; FString FieldName;
+                if (!String(Violation, TEXT("violation_code"), Item.Code) || !String(Violation, TEXT("message"), Item.Message) ||
+                    (!Null(Violation, TEXT("field")) && !String(Violation, TEXT("field"), FieldName)))
+                { OutError = TEXT("Returned lifecycle violation has invalid fields."); return false; }
+                if (!Null(Violation, TEXT("field"))) { Item.Field = MoveTemp(FieldName); }
+                Candidate.ReturnedViolations.Add(MoveTemp(Item));
+            }
+        }
     }
     OutOutcome = MoveTemp(Candidate); OutError.Reset(); return true;
 }
@@ -341,7 +370,19 @@ bool ApplyKnownCommandOutcome(const FOutcome& Outcome, int32 HttpStatus, bool bF
     }
     else
     {
-        State.RecordedCommandError = ErrorText(HttpStatus, Outcome.Code, TEXT("Core recorded a rejected command; detailed violations were not supplied."));
+        TArray<FString> Details;
+        if (!Outcome.ReturnedLifecycleMessage.IsEmpty())
+        { Details.Add(TEXT("Returned lifecycle status: ") + Outcome.ReturnedLifecycleMessage); }
+        for (const auto& Violation : Outcome.ReturnedViolations)
+        {
+            const FString FieldName = Violation.Field.IsSet() ? TEXT(" [") + Violation.Field.GetValue() + TEXT("]") : FString();
+            Details.Add(TEXT("Returned lifecycle violation: ") + Violation.Code + FieldName + TEXT(": ") + Violation.Message);
+        }
+        if (Outcome.ReturnedViolations.IsEmpty() && !Outcome.ReturnedViolationCode.IsEmpty())
+        { Details.Add(TEXT("Returned lifecycle violation code: ") + Outcome.ReturnedViolationCode); }
+        if (Details.IsEmpty())
+        { Details.Add(TEXT("Core recorded a rejected command. Detailed engine reasons were not supplied by this HTTP response.")); }
+        State.RecordedCommandError = ErrorText(HttpStatus, Outcome.Code, FString::Join(Details, TEXT("\n")));
         State.Error = State.RecordedCommandError;
     }
     return true;

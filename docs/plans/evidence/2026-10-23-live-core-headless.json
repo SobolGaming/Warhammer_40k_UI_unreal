@@ -1,5 +1,5 @@
 {
-  "status": "NATIVE_CHECKS_PASSED_FRESH_REVIEWS_PENDING",
+  "status": "NATIVE_CHECKS_PASSED_REVIEWS_REQUEST_DIAGNOSTIC_REPAIR",
   "sourceHead": "160b5100f233fd1fddd3ae5425098ea0aa448d80",
   "coreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
   "contract": "44.3.33",
@@ -109,7 +109,7 @@
     "Non-graphical native checks do not establish rendering, UI input or interactive-launch behavior.",
     "Creation fault cases use a network-blocking test seam; no real response-loss or teardown fault injection.",
     "Uncertain-command state is retained only in memory; no durable restart recovery.",
-    "Initial CODE/REQ requested changes. Fresh affected reviews pending.",
+    "CODE/REQ for this exact source both requested the recorded-rejection diagnostic correction; repaired-source verification pending.",
     "One local player-a setup action; no full gameplay, remote product UX, spectator UX, profile parity or packaging acceptance.",
     "Linux x86-64 remains UNTESTED until a native host is arranged.",
     "4 MiB decoded-response validation is after HTTP buffering, not an enforced memory ceiling."

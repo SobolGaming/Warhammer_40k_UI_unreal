@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 148 — nine native checks passed; fresh reviews pending, 2026-10-23.**
+**Revision 148 — nine native checks passed; diagnostic fidelity repair authored, 2026-10-23.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -47,6 +47,7 @@ The imported plan and all research/failures remain available in the [complete th
 - [x] Document startup commands and remaining limits; actual build/functional/rendered verification remains separately tracked below.
 - [x] Correct creation uncertainty, endpoint validation, retained HTTP diagnostics and projection-error recovery after initial reviews requested changes.
 - [x] Separate command-receipt revision from applied projection identity so the renderer waits for refreshed board DTOs.
+- [x] Preserve supplied scoped lifecycle messages/violation details on known rejection; label them as returned status and state missing fidelity only when details are absent.
 
 Source implementation above is authored. Checkboxes do not claim successful compilation, live execution or rendered behavior; see verification below.
 
@@ -58,6 +59,7 @@ Source implementation above is authored. Checkboxes do not claim successful comp
 - [x] Obtain initial independent CODE and separate requirements assessments: both **CHANGES_REQUESTED**; findings are recorded in [slice evidence](evidence/2026-10-23-live-core-slice.md).
 - [x] Build repaired `160b510`: Windows Editor compile/link passed (21.88 seconds); all nine native checks passed, including invalid endpoint/no request, creation 4xx/5xx UNKNOWN, projection recovery and receipt-before-projection cache identity.
 - [x] Repeat the actual-Core session/action/refresh and host-lifecycle check against `160b510`: passed, four Config files unchanged. See [headless results](evidence/2026-10-23-live-core-headless.json).
+- [ ] Build and run the diagnostic fidelity repair, including exact supplied-message/violation assertions; both `160b510` reviews identified this sole remaining code defect.
 - [ ] Obtain focused independent CODE and different-reviewer requirements assessments of the frozen changed candidate; resolve concrete blockers.
 - [ ] After explicit screen resumption, observe the startup board, connection/session, player click and visible authoritative result. Record actual source/Core/session/action and limits.
 - [ ] Publish the slice checkpoint, exact-GitHub-verify its commit, update PR #3 and record acceptance only for demonstrated behavior.

@@ -178,4 +178,47 @@ bool FLiveCoreProjectionVersionTest::RunTest(const FString& Parameters)
     TestEqual(TEXT("Recovery preserves known recorded rejection details"), RejectedState.Error, RecordedError);
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreReturnedDiagnosticsTest, "Warhammer.LiveCore.Unit.ReturnedRejectionDiagnostics", Flags)
+bool FLiveCoreReturnedDiagnosticsTest::RunTest(const FString& Parameters)
+{
+    FString Text, Error;
+    if (!Load(*this, TEXT("wire/movement_recorded_invalid/playerA.json"), Text)) { return false; }
+    E01::FOutcome Original; E01::FReadError ReadError;
+    if (!E01::ReadOutcome(422, Text, Original, ReadError)) { AddError(TEXT("Recorded rejection fixture could not be read.")); return false; }
+    const FString Session = Original.Json->GetObjectField(TEXT("session"))->GetStringField(TEXT("session_id"));
+    const int64 ExpectedRevision = Original.SessionRevision.GetValue() - 1;
+    LiveCoreProtocol::FOutcome Outcome;
+    if (!TestTrue(TEXT("Actual scoped rejection receipt parsed"), LiveCoreProtocol::ReadOutcome(Text, 422, Original.CommandId, Session,
+        ExpectedRevision, false, TEXT("submit_parameterized_decision"), Outcome, Error))) { return false; }
+    TestEqual(TEXT("Actual returned lifecycle message retained"), Outcome.ReturnedLifecycleMessage, FString(TEXT("Normal Move path is invalid.")));
+    if (!TestEqual(TEXT("Actual returned violation count"), Outcome.ReturnedViolations.Num(), 1)) { return false; }
+    TestEqual(TEXT("Actual returned violation code retained"), Outcome.ReturnedViolations[0].Code, FString(TEXT("movement_distance_exceeded")));
+    TestTrue(TEXT("Nullable violation field has its supplied value"), Outcome.ReturnedViolations[0].Field.IsSet() && Outcome.ReturnedViolations[0].Field.GetValue() == TEXT("witness"));
+    FLiveCoreState State; State.SessionRevision = ExpectedRevision;
+    TestTrue(TEXT("Known rejection applied"), LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, 422, true, State));
+    TestTrue(TEXT("UI preserves actual supplied lifecycle message"), State.Error.Contains(TEXT("Normal Move path is invalid.")));
+    TestTrue(TEXT("UI preserves actual supplied violation code"), State.Error.Contains(TEXT("movement_distance_exceeded")));
+    TestTrue(TEXT("Lifecycle text is labelled as returned status, not invented current cause"), State.Error.Contains(TEXT("Returned lifecycle status:")));
+    TestFalse(TEXT("No false missing-detail claim when diagnostics exist"), State.Error.Contains(TEXT("not supplied")));
+    LiveCoreProtocol::FOutcome Foreign;
+    TestFalse(TEXT("Scope validation precedes diagnostic extraction"), LiveCoreProtocol::ReadOutcome(Text, 422, Original.CommandId, Session,
+        ExpectedRevision, true, TEXT("submit_parameterized_decision"), Foreign, Error));
+    TestTrue(TEXT("Failed-scope output receives no lifecycle diagnostic"), Foreign.ReturnedLifecycleMessage.IsEmpty() && Foreign.ReturnedViolations.IsEmpty());
+    const auto Lifecycle = Original.Json->GetObjectField(TEXT("session"))->GetObjectField(TEXT("lifecycle_status"));
+    Lifecycle->SetField(TEXT("message"), MakeShared<FJsonValueNull>());
+    const auto Payload = Lifecycle->GetObjectField(TEXT("payload"));
+    Payload->RemoveField(TEXT("proposal_validation")); Payload->RemoveField(TEXT("violation_code"));
+    TestTrue(TEXT("Known outcome can legitimately omit diagnostic detail"), LiveCoreProtocol::ReadOutcome(Serialize(Original.Json.ToSharedRef()), 422,
+        Original.CommandId, Session, ExpectedRevision, false, TEXT("submit_parameterized_decision"), Outcome, Error));
+    TestTrue(TEXT("Known detail-free rejection still applied"), LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, 422, true, State));
+    TestTrue(TEXT("Missing detail explicitly stated only when absent"), State.Error.Contains(TEXT("Detailed engine reasons were not supplied")));
+    const FString ErrorEnvelope(TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"proposal_invalid\",\"message\":\"Actual error message\"}}"));
+    TestTrue(TEXT("Flagless 422 still requires same-command reconciliation"), LiveCoreProtocol::ReadOutcome(ErrorEnvelope, 422, Original.CommandId,
+        Session, ExpectedRevision, false, TEXT("submit_parameterized_decision"), Outcome, Error) && Outcome.bRequiresReconciliation);
+    const FString PreservedError = State.Error;
+    TestFalse(TEXT("Flagless error cannot be promoted to a known recorded rejection"), LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, 422, true, State));
+    TestEqual(TEXT("Unknown receipt does not overwrite recorded diagnostics"), State.Error, PreservedError);
+    return true;
+}
+
 #endif
