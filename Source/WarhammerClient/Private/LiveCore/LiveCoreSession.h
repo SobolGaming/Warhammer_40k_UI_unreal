@@ -46,6 +46,8 @@ struct FLiveCoreState
     FString Endpoint;
     FString Status = TEXT("Disconnected. Connect to the approved development Core.");
     FString Error;
+    // Known recorded command rejection, retained independently of transient read errors.
+    FString RecordedCommandError;
     FString SessionId;
     FString Phase;
     FString ViewerPlayerId = TEXT("player-a");
@@ -53,7 +55,11 @@ struct FLiveCoreState
     FString RequestType;
     FString MissionSummary;
     FString LastOutcomeCode;
+    // Latest verified command/session revision; also the minimum acceptable projection.
     int64 SessionRevision = -1;
+    // These identify only a successfully parsed/applied DTO snapshot, never a receipt.
+    int64 ProjectionRevision = -1;
+    uint64 ProjectionVersion = 0;
     int32 LastHttpStatus = 0;
     int32 AcceptedActionCount = 0;
     FBox2D BoardBoundsInches = FBox2D(ForceInit);
@@ -91,6 +97,8 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
 bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId,
     const FString& SessionId, int64 ExpectedRevision, bool bAdministrator,
     const FString& Operation, FOutcome& OutOutcome, FString& OutError);
+// Applies a validated known receipt without advancing the applied projection identity.
+bool ApplyKnownCommandOutcome(const FOutcome& Outcome, int32 HttpStatus, bool bFiniteAction, FLiveCoreState& State);
 FString MakeStartCommand(const FString& SessionId, const FString& CommandId);
 FString MakeFiniteCommand(const FString& SessionId, const FString& CommandId,
     int64 Revision, const FString& RequestId, const FString& OptionId);
@@ -136,12 +144,18 @@ private:
     FString AdministratorToken;
     FString PlayerToken;
     FString CreatingGameId;
+#if WITH_DEV_AUTOMATION_TESTS
+    friend struct FLiveCoreSessionCreationTestAccess;
+    // A focused test can count/block requests before HTTP or credentials are touched.
+    TFunction<void()> RequestAttemptForTests;
+#endif
     void Changed();
     void Fail(const FString& Message);
     void MarkUnknown(const FString& Message, bool bCreation);
     void Request(const FString& Verb, const FString& Path, ECredential Credential,
         const FString& Body, bool bMutation, FReadReply&& OnReply);
     void CreateCanonicalSession();
+    void HandleCreateReply(int32 Status, const FString& Response);
     void SendPendingCommand();
     void FetchProjection();
 };

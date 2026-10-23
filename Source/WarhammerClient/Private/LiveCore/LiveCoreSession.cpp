@@ -178,7 +178,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     if (!IsString(O, TEXT("schema_version"), TEXT("session-projection-v9-random-profiles")) ||
         !String(O, TEXT("session_id"), ReturnedSession) || !Exact(ReturnedSession, SessionId) ||
         !IsString(O, TEXT("visibility_role"), TEXT("player")) || !Revision(O, TEXT("session_revision"), NewRevision) ||
-        NewRevision < OutState.SessionRevision || !IsString(P, TEXT("viewer_player_id"), TEXT("player-a")) ||
+        NewRevision < OutState.SessionRevision || OutState.ProjectionVersion == MAX_uint64 || !IsString(P, TEXT("viewer_player_id"), TEXT("player-a")) ||
         !IsString(P, TEXT("viewer_role"), TEXT("player")))
     {
         OutError = TEXT("Projection session, revision or authenticated player-a scope mismatch."); return false;
@@ -187,7 +187,9 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     if (!String(O, TEXT("projection_state_hash"), OuterHash) || !String(P, TEXT("projection_state_hash"), InnerHash) || !Exact(OuterHash, InnerHash))
     { OutError = TEXT("Projection checkpoint hash mismatch."); return false; }
     FLiveCoreState Candidate = OutState;
-    Candidate.SessionRevision = NewRevision; Candidate.Terrain.Reset(); Candidate.Objectives.Reset(); Candidate.Models.Reset();
+    Candidate.SessionRevision = NewRevision; Candidate.ProjectionRevision = NewRevision;
+    Candidate.ProjectionVersion = OutState.ProjectionVersion + 1;
+    Candidate.Terrain.Reset(); Candidate.Objectives.Reset(); Candidate.Models.Reset();
     Candidate.Options.Reset(); Candidate.RequestId.Reset(); Candidate.RequestType.Reset(); Candidate.MissionSummary.Reset();
     FString Stage;
     if (!String(P, TEXT("stage"), Stage)) { OutError = TEXT("Projection stage is missing."); return false; }
@@ -299,6 +301,9 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
             }
         }
     }
+    // A fresh valid snapshot recovers a GET/parser error, while a known recorded
+    // command rejection remains visible until a subsequent command resolves it.
+    Candidate.Error = Candidate.RecordedCommandError;
     OutState = MoveTemp(Candidate); OutError.Reset(); return true;
 }
 
@@ -322,6 +327,24 @@ bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId
         Candidate.bAccepted = Parsed.bAccepted; Candidate.bCommitted = Parsed.bCommitted; Candidate.Revision = Parsed.SessionRevision.GetValue();
     }
     OutOutcome = MoveTemp(Candidate); OutError.Reset(); return true;
+}
+bool ApplyKnownCommandOutcome(const FOutcome& Outcome, int32 HttpStatus, bool bFiniteAction, FLiveCoreState& State)
+{
+    if (Outcome.bError || Outcome.Revision < State.SessionRevision || Outcome.Revision < 0) { return false; }
+    State.bLastCommandHasOutcome = true; State.bLastCommandAccepted = Outcome.bAccepted; State.bLastCommandCommitted = Outcome.bCommitted;
+    State.LastOutcomeCode = Outcome.Code; State.SessionRevision = Outcome.Revision;
+    // Receipt revision is not evidence that matching board/model DTOs have arrived.
+    if (Outcome.bAccepted)
+    {
+        State.RecordedCommandError.Reset(); State.Error.Reset();
+        if (bFiniteAction) { ++State.AcceptedActionCount; }
+    }
+    else
+    {
+        State.RecordedCommandError = ErrorText(HttpStatus, Outcome.Code, TEXT("Core recorded a rejected command; detailed violations were not supplied."));
+        State.Error = State.RecordedCommandError;
+    }
+    return true;
 }
 FString MakeStartCommand(const FString& SessionId, const FString& CommandId) { return Command(SessionId, CommandId, 0, nullptr, nullptr); }
 FString MakeFiniteCommand(const FString& SessionId, const FString& CommandId, int64 RevisionValue, const FString& RequestId, const FString& OptionId)
@@ -399,6 +422,9 @@ void FLiveCoreSession::Request(const FString& Verb, const FString& Path, ECreden
     const FString& Body, bool bMutation, FReadReply&& OnReply)
 {
     check(IsInGameThread()); if (bStopped || ActiveRequest.IsValid()) { return; }
+#if WITH_DEV_AUTOMATION_TESTS
+    if (RequestAttemptForTests) { RequestAttemptForTests(); return; }
+#endif
     const FString& Token = Credential == ECredential::Administrator ? AdministratorToken : PlayerToken;
     if (!CredentialValid(Token)) { Fail(TEXT("The required development credential is unavailable.")); return; }
     auto Http = FHttpModule::Get().CreateRequest();
@@ -459,24 +485,30 @@ void FLiveCoreSession::CreateCanonicalSession()
         {
             if (const auto Self = Weak.Pin())
             {
-                LiveCoreProtocol::FMetadata Metadata; FString Error;
-                if (Status != 201)
-                {
-                    LiveCoreProtocol::FOutcome Received;
-                    if (LiveCoreProtocol::ReadOutcome(Response, Status, FString(), FString(), 0, true, FString(), Received, Error) && Received.bError && Status < 500)
-                    { Self->Fail(ErrorText(Status, Received.Code, Received.Message)); }
-                    else { Self->MarkUnknown(ErrorText(Status, TEXT("creation_unknown"), TEXT("Session creation has no retry identity.")), true); }
-                    return;
-                }
-                if (!LiveCoreProtocol::ReadCreatedSession(Response, Metadata, Error) || !Exact(Metadata.GameId, Self->CreatingGameId))
-                { Self->MarkUnknown(Error.IsEmpty() ? TEXT("Created game identity does not match the submitted configuration.") : Error, true); return; }
-                Self->State.SessionId = Metadata.SessionId; Self->State.SessionRevision = Metadata.Revision; Self->State.bHasSession = true;
-                FPendingCommand Command; Command.Id = TEXT("unreal-start-") + FGuid::NewGuid().ToString(EGuidFormats::Digits);
-                Command.Body = LiveCoreProtocol::MakeStartCommand(Metadata.SessionId, Command.Id); Command.Operation = TEXT("start_session");
-                Command.ExpectedRevision = 0; Command.Credential = ECredential::Administrator;
-                Self->PendingCommand = MoveTemp(Command); Self->SendPendingCommand();
+                Self->HandleCreateReply(Status, Response);
             }
         });
+}
+void FLiveCoreSession::HandleCreateReply(int32 Status, const FString& Response)
+{
+    check(IsInGameThread());
+    State.LastHttpStatus = Status;
+    LiveCoreProtocol::FMetadata Metadata; FString Error;
+    if (Status != 201)
+    {
+        LiveCoreProtocol::FOutcome Received;
+        if (LiveCoreProtocol::ReadOutcome(Response, Status, FString(), FString(), 0, true, FString(), Received, Error) && Received.bError)
+        { MarkUnknown(ErrorText(Status, Received.Code, Received.Message), true); }
+        else { MarkUnknown(ErrorText(Status, TEXT("creation_unknown"), TEXT("Session creation has no retry identity.")), true); }
+        return;
+    }
+    if (!LiveCoreProtocol::ReadCreatedSession(Response, Metadata, Error) || !Exact(Metadata.GameId, CreatingGameId))
+    { MarkUnknown(Error.IsEmpty() ? TEXT("Created game identity does not match the submitted configuration.") : Error, true); return; }
+    State.SessionId = Metadata.SessionId; State.SessionRevision = Metadata.Revision; State.bHasSession = true;
+    FPendingCommand Command; Command.Id = TEXT("unreal-start-") + FGuid::NewGuid().ToString(EGuidFormats::Digits);
+    Command.Body = LiveCoreProtocol::MakeStartCommand(Metadata.SessionId, Command.Id); Command.Operation = TEXT("start_session");
+    Command.ExpectedRevision = 0; Command.Credential = ECredential::Administrator;
+    PendingCommand = MoveTemp(Command); SendPendingCommand();
 }
 void FLiveCoreSession::SelectOfferedOption(const FString& OptionId)
 {
@@ -488,7 +520,7 @@ void FLiveCoreSession::SelectOfferedOption(const FString& OptionId)
     FPendingCommand Command; Command.Id = TEXT("unreal-choice-") + FGuid::NewGuid().ToString(EGuidFormats::Digits);
     Command.ExpectedRevision = State.SessionRevision; Command.Operation = TEXT("submit_finite_decision"); Command.bFiniteAction = true;
     Command.Body = LiveCoreProtocol::MakeFiniteCommand(State.SessionId, Command.Id, State.SessionRevision, State.RequestId, OptionId);
-    PendingCommand = MoveTemp(Command); State.Options.Reset(); State.Error.Reset(); State.bLastCommandHasOutcome = false;
+    PendingCommand = MoveTemp(Command); State.Options.Reset(); State.Error.Reset(); State.RecordedCommandError.Reset(); State.bLastCommandHasOutcome = false;
     SendPendingCommand();
 }
 void FLiveCoreSession::SendPendingCommand()
@@ -513,20 +545,17 @@ void FLiveCoreSession::SendPendingCommand()
                     Self->State.bLastCommandHasOutcome = false; Self->State.LastOutcomeCode = Outcome.Code;
                     Self->MarkUnknown(ErrorText(Status, Outcome.Code, Outcome.Message), false); return;
                 }
+                if (!LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, Status, Retained.bFiniteAction, Self->State))
+                { Self->MarkUnknown(TEXT("Known command receipt could not be applied without regressing session state."), false); return; }
                 Self->PendingCommand.Reset(); Self->State.bUnknown = false; Self->State.bCanReconcile = false;
-                Self->State.bLastCommandHasOutcome = true; Self->State.bLastCommandAccepted = Outcome.bAccepted; Self->State.bLastCommandCommitted = Outcome.bCommitted;
-                Self->State.LastOutcomeCode = Outcome.Code; Self->State.SessionRevision = Outcome.Revision;
-                if (Outcome.bAccepted)
-                {
-                    Self->State.Error.Reset(); if (Retained.bFiniteAction) { ++Self->State.AcceptedActionCount; }
-                }
-                else { Self->State.Error = ErrorText(Status, Outcome.Code, TEXT("Core recorded a rejected command; detailed violations were not supplied.")); }
                 Self->FetchProjection();
             }
         });
 }
 void FLiveCoreSession::FetchProjection()
 {
+    // No old offered action becomes enabled if a refresh fails.
+    State.Options.Reset();
     const TWeakPtr<FLiveCoreSession> Weak = AsShared();
     Request(TEXT("GET"), TEXT("/sessions/") + State.SessionId + TEXT("/projection"), ECredential::PlayerA, FString(), false,
         [Weak](int32 Status, const FString& Text)
@@ -543,7 +572,8 @@ void FLiveCoreSession::FetchProjection()
                 }
                 FString Error;
                 if (!LiveCoreProtocol::ReadProjection(Text, Self->State.SessionId, Self->State, Error)) { Self->State.Options.Reset(); Self->Fail(Error); return; }
-                Self->State.Status = Self->State.AcceptedActionCount > 0 ? TEXT("Core accepted the player action; authoritative state refreshed.") : TEXT("Connected. Choose an option offered by Core.");
+                Self->State.Status = !Self->State.RecordedCommandError.IsEmpty() ? TEXT("Core recorded a rejected command; authoritative state refreshed.") :
+                    Self->State.AcceptedActionCount > 0 ? TEXT("Core accepted the player action; authoritative state refreshed.") : TEXT("Connected. Choose an option offered by Core.");
                 Self->Changed();
             }
         });

@@ -129,4 +129,53 @@ bool FLiveCoreOutcomeTest::RunTest(const FString& Parameters)
     return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreProjectionVersionTest, "Warhammer.LiveCore.Unit.ProjectionVersionAndReadRecovery", Flags)
+bool FLiveCoreProjectionVersionTest::RunTest(const FString& Parameters)
+{
+    FString Before, After, Receipt, Rejection, Error;
+    if (!Load(*this, TEXT("wire/movement_before/playerA.json"), Before) || !Load(*this, TEXT("wire/movement_after/playerA.json"), After) ||
+        !Load(*this, TEXT("wire/movement_accepted/playerA.json"), Receipt) || !Load(*this, TEXT("wire/movement_recorded_invalid/playerA.json"), Rejection)) { return false; }
+    E01::FOutcome Original; E01::FReadError ReadError;
+    if (!E01::ReadOutcome(200, Receipt, Original, ReadError)) { AddError(TEXT("Committed movement receipt fixture is invalid.")); return false; }
+    const FString Session = Original.Json->GetObjectField(TEXT("session"))->GetStringField(TEXT("session_id"));
+    FLiveCoreState State;
+    if (!TestTrue(TEXT("Actual pre-move DTO snapshot applied"), LiveCoreProtocol::ReadProjection(Before, Session, State, Error))) { return false; }
+    const FLiveCoreState BeforeState = State;
+    TMap<FString, FVector> OldPositions;
+    for (const auto& Model : State.Models) { OldPositions.Add(Model.Id, Model.PositionInches); }
+    LiveCoreProtocol::FOutcome Outcome;
+    if (!TestTrue(TEXT("Actual accepted move receipt parsed"), LiveCoreProtocol::ReadOutcome(Receipt, 200, Original.CommandId, Session,
+        Original.SessionRevision.GetValue() - 1, false, TEXT("submit_parameterized_decision"), Outcome, Error))) { return false; }
+    TestTrue(TEXT("Production receipt-application path succeeds"), LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, 200, true, State));
+    TestEqual(TEXT("Receipt advances session lower bound"), State.SessionRevision, Outcome.Revision);
+    TestEqual(TEXT("Receipt alone does not advance DTO revision"), State.ProjectionRevision, BeforeState.ProjectionRevision);
+    TestEqual(TEXT("Receipt alone does not advance render cache version"), State.ProjectionVersion, BeforeState.ProjectionVersion);
+    TestFalse(TEXT("Pre-receipt old projection remains rejected"), LiveCoreProtocol::ReadProjection(Before, Session, State, Error));
+    TestEqual(TEXT("Rejected projection preserves cache version"), State.ProjectionVersion, BeforeState.ProjectionVersion);
+    State.Error = TEXT("A prior projection GET failed.");
+    if (!TestTrue(TEXT("Actual changed post-move DTO snapshot applied"), LiveCoreProtocol::ReadProjection(After, Session, State, Error))) { return false; }
+    TestEqual(TEXT("DTO revision catches up only after valid parse"), State.ProjectionRevision, Outcome.Revision);
+    TestEqual(TEXT("New DTO delivery advances render cache version"), State.ProjectionVersion, BeforeState.ProjectionVersion + 1);
+    TestTrue(TEXT("Successful projection clears prior read failure"), State.Error.IsEmpty());
+    bool bActualModelChanged = false;
+    for (const auto& Model : State.Models)
+    {
+        const FVector* Old = OldPositions.Find(Model.Id);
+        if (Old && !Old->Equals(Model.PositionInches, 0.000001)) { bActualModelChanged = true; }
+    }
+    TestTrue(TEXT("Regression fixture includes actual authoritative model movement"), bActualModelChanged);
+    E01::FOutcome RejectedOriginal;
+    if (!E01::ReadOutcome(422, Rejection, RejectedOriginal, ReadError)) { AddError(TEXT("Recorded rejection fixture is invalid.")); return false; }
+    LiveCoreProtocol::FOutcome Rejected;
+    TestTrue(TEXT("Actual recorded rejection parsed"), LiveCoreProtocol::ReadOutcome(Rejection, 422, RejectedOriginal.CommandId, Session,
+        RejectedOriginal.SessionRevision.GetValue() - 1, false, TEXT("submit_parameterized_decision"), Rejected, Error));
+    FLiveCoreState RejectedState = BeforeState;
+    TestTrue(TEXT("Actual known rejected receipt applied"), LiveCoreProtocol::ApplyKnownCommandOutcome(Rejected, 422, true, RejectedState));
+    const FString RecordedError = RejectedState.RecordedCommandError;
+    TestFalse(TEXT("Recorded rejection detail exists"), RecordedError.IsEmpty());
+    RejectedState.Error = TEXT("A subsequent projection GET failed.");
+    TestTrue(TEXT("Fresh valid read recovers after the GET failure"), LiveCoreProtocol::ReadProjection(After, Session, RejectedState, Error));
+    TestEqual(TEXT("Recovery preserves known recorded rejection details"), RejectedState.Error, RecordedError);
+    return true;
+}
 #endif

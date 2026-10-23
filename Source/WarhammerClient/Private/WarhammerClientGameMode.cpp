@@ -62,7 +62,7 @@ struct FLiveCoreScene
     FString Endpoint = TEXT("http://127.0.0.1:8765");
     FString SceneError;
     FString RenderedSession;
-    int64 RenderedRevision = -1;
+    uint64 RenderedProjectionVersion = 0;
     bool bAttached = false;
 
     UWorld* World() const { return Owner.IsValid() ? Owner->GetWorld() : nullptr; }
@@ -153,8 +153,7 @@ public:
                     {
                         if (!Scene || !Scene->Session.IsValid()) { return FReply::Handled(); }
                         Scene->Endpoint = EndpointBox->GetText().ToString();
-                        Scene->Session->InitializeEndpoint(Scene->Endpoint);
-                        Scene->Session->NewSession();
+                        Scene->Session->CreateAndStart(Scene->Endpoint);
                         return FReply::Handled();
                     })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
@@ -173,8 +172,12 @@ public:
                     {
                         const auto& Value = State();
                         if (!Value.bHasSession) { return FText::FromString(TEXT("Awaiting authoritative session state.")); }
-                        return FText::FromString(FString::Printf(TEXT("Session: %s\nRevision: %lld\nPhase: %s\nViewer: %s\nAccepted actions: %d\nLast HTTP: %d"),
-                            *Value.SessionId, static_cast<long long>(Value.SessionRevision), *Value.Phase, *Value.ViewerPlayerId,
+                        const FString RevisionText = Value.SessionRevision == Value.ProjectionRevision ?
+                            FString::Printf(TEXT("Revision: %lld"), static_cast<long long>(Value.SessionRevision)) :
+                            FString::Printf(TEXT("Session revision: %lld; displayed projection: %lld (refresh pending)"),
+                                static_cast<long long>(Value.SessionRevision), static_cast<long long>(Value.ProjectionRevision));
+                        return FText::FromString(FString::Printf(TEXT("Session: %s\n%s\nPhase: %s\nViewer: %s\nAccepted actions: %d\nLast HTTP: %d"),
+                            *Value.SessionId, *RevisionText, *Value.Phase, *Value.ViewerPlayerId,
                             Value.AcceptedActionCount, Value.LastHttpStatus));
                     })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
@@ -357,7 +360,7 @@ void FLiveCoreScene::Changed()
 {
     if (Panel.IsValid()) { Panel->RefreshOptions(); }
     const auto& State = Session->GetState();
-    if (State.bHasSession && (RenderedSession != State.SessionId || RenderedRevision != State.SessionRevision))
+    if (State.bHasSession && State.ProjectionVersion > 0 && (RenderedSession != State.SessionId || RenderedProjectionVersion != State.ProjectionVersion))
     {
         RebuildBoard();
     }
@@ -404,7 +407,7 @@ void FLiveCoreScene::RebuildBoard()
         Camera->SetActorRotation((Target - Camera->GetActorLocation()).Rotation());
     }
     RenderedSession = State.SessionId;
-    RenderedRevision = State.SessionRevision;
+    RenderedProjectionVersion = State.ProjectionVersion;
 }
 
 void FLiveCoreScene::Shutdown()

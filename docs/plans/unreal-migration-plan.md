@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 147 — fast rendered Core slice, 2026-10-23.**
+**Revision 148 — live Core checks passed; review corrections authored, 2026-10-23.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -45,15 +45,19 @@ The imported plan and all research/failures remain available in the [complete th
 - [x] Implement refresh of that viewer and display of the authoritative revision/result/request transition. Never expose another player's private pending choice.
 - [x] Support an easy managed Core development-server launch and attachment to an existing service; document checked-out and pinned-package recipes.
 - [x] Document startup commands and remaining limits; actual build/functional/rendered verification remains separately tracked below.
+- [x] Correct creation uncertainty, endpoint validation, retained HTTP diagnostics and projection-error recovery after initial reviews requested changes.
+- [x] Separate command-receipt revision from applied projection identity so the renderer waits for refreshed board DTOs.
 
 Source implementation above is authored. Checkboxes do not claim successful compilation, live execution or rendered behavior; see verification below.
 
 ### Verification
 
 - [x] Retain accepted BOOT01, E01-SLOW120, bounded E02, A1E/A1G parser proofs and bounded P0 payload-reference evidence; these do not establish the live slice.
-- [ ] Build the affected Windows Editor target.
-- [ ] Check projection parsing and command envelopes, HTTP rejection and uncertain-command handling with focused tests.
-- [ ] Exercise the actual existing Core host: create/start session, fetch intended viewer, submit one offered action, refresh and retain authoritative result.
+- [x] Build initial source: C++ compile/link at `42a5bdb`; final configuration/metadata build at `b804ec1`.
+- [x] Pass five protocol units and one actual-Core session/action/refresh integration at `b804ec1`; managed startup, authenticated Attach, attachment-stop no-op and graceful owned Stop also passed. Four Config files stayed unchanged.
+- [x] Obtain initial independent CODE and separate requirements assessments: both **CHANGES_REQUESTED**; findings are recorded in [slice evidence](evidence/2026-10-23-live-core-slice.md).
+- [ ] Build the repaired candidate and run focused regressions, including invalid endpoint/no request, creation 4xx/5xx UNKNOWN, projection recovery and receipt-before-projection cache identity.
+- [ ] Repeat the actual-Core session/action/refresh and host-lifecycle check against the repaired candidate.
 - [ ] Obtain focused independent CODE and different-reviewer requirements assessments of the frozen changed candidate; resolve concrete blockers.
 - [ ] After explicit screen resumption, observe the startup board, connection/session, player click and visible authoritative result. Record actual source/Core/session/action and limits.
 - [ ] Publish the slice checkpoint, exact-GitHub-verify its commit, update PR #3 and record acceptance only for demonstrated behavior.
