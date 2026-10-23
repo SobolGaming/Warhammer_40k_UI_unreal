@@ -7,7 +7,7 @@ param(
     [uri]$Endpoint,
     [string]$EngineRoot = 'C:/Program Files/Epic Games/UE_5.8',
     [string]$CoreRoot = (Join-Path $PSScriptRoot '../../Warhammer_40k_AI'),
-    [ValidateRange(5, 120)][int]$ReadinessSeconds = 30
+    [ValidateRange(5, 120)][int]$ReadinessSeconds = 60
 )
 
 Set-StrictMode -Version Latest

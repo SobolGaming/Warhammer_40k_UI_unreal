@@ -5,7 +5,7 @@ param(
     [ValidateRange(1024, 65535)][int]$Port = 8765,
     [uri]$Endpoint,
     [string]$CoreRoot = (Join-Path $PSScriptRoot '../../Warhammer_40k_AI'),
-    [ValidateRange(5, 120)][int]$ReadinessSeconds = 30
+    [ValidateRange(5, 120)][int]$ReadinessSeconds = 60
 )
 
 Set-StrictMode -Version Latest
