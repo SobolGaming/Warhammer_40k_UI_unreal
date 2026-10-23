@@ -78,7 +78,9 @@ Execution is stopped. Full E01/M01/M02, research/implementation gates, the origi
 30-second budget, production responsiveness, UE HTTP, rendering, packaging and
 Linux remain open. This E01 record supplies no E02 execution result.
 
-A2-P0 **SOURCE_PASS_NATIVE_CAPTURE_FAILED_JOB_ACCOUNTING** (revision 134). SOURCE d0aa425 remains PASS/root-admitted; native capture failed on its accounting guard (observed total/active 1/1 to 2/2); counter interpretation is qualified in the linked failure note. The supervisor terminated the job; exit and cleanup were confirmed, final active 0. Additional process/cause is UNATTRIBUTED, collector entry UNPROVEN; no capture file, Python stdout/stderr empty. [Failure](docs/plans/research/2026-10-23-e04a2-p0-native-job-accounting-failure.md); [evidence](docs/plans/evidence/2026-10-23-e04a2-p0-native-job-accounting-failure.json). OWN18 remote-verified failure checkpoint precedes actual repair/rebinding/diagnostic execution. No retry or guard relaxation. Renewed 19:35 visible HOLD is operative until explicit owner approval. A1G acceptance/history, OWN17 deferred, Linux UNTESTED and full A2/727/G-IMPLEMENT limits remain.
+A2-P0 **SOURCE_DIAGNOSTIC_REPAIRED_FRESH_SOURCE_PENDING** (revision 135). Root adopted diagnostic retention at 2026-10-23T19:54:39.8672424Z and narrowed the packet criterion at 2026-10-23T19:55:28.3455532Z. [Source note](docs/plans/research/2026-10-23-e04a2-p0-trigger-accounting-source-repair.md); [evidence](docs/plans/evidence/2026-10-23-e04a2-p0-trigger-accounting-source-repair.json). The successful complete-size loop query is retained instead of a second Count query; guard/policy are unchanged and no cause is diagnosed. Successor compilation/runtime and fresh SOURCE are NOT_RUN; new head/run are UNBOUND. OWN18 repaired-source checkpoint/backup precedes fresh bindings/SOURCE and separate GO. Rev134 native FAIL stays closed; d0 SOURCE PASS covers original source only. A1G acceptance/history, 19:35 visible HOLD, OWN17 deferred, Linux UNTESTED and full A2/727/G-IMPLEMENT limits remain.
+
+Historical revision 134: A2-P0 **SOURCE_PASS_NATIVE_CAPTURE_FAILED_JOB_ACCOUNTING** (revision 134). SOURCE d0aa425 remains PASS/root-admitted; native capture failed on its accounting guard (observed total/active 1/1 to 2/2); counter interpretation is qualified in the linked failure note. The supervisor terminated the job; exit and cleanup were confirmed, final active 0. Additional process/cause is UNATTRIBUTED, collector entry UNPROVEN; no capture file, Python stdout/stderr empty. [Failure](docs/plans/research/2026-10-23-e04a2-p0-native-job-accounting-failure.md); [evidence](docs/plans/evidence/2026-10-23-e04a2-p0-native-job-accounting-failure.json). OWN18 remote-verified failure checkpoint precedes actual repair/rebinding/diagnostic execution. No retry or guard relaxation. Renewed 19:35 visible HOLD is operative until explicit owner approval. A1G acceptance/history, OWN17 deferred, Linux UNTESTED and full A2/727/G-IMPLEMENT limits remain.
 
 **Operative visible-test HOLD — reported 19:35 UTC, 2026-10-23:**
 
@@ -199,7 +201,7 @@ rendering/Core play, Linux execution and distribution remain open. Standing priv
 source/API review consent continues until explicitly revoked. This publication is
 a metadata/report overlay, outside the exact head assessed by the reports.
 See [final review provenance](docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json).
-Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G/A2-P0 work follows revision 134 above; no old review or native authority transfers.
+Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G/A2-P0 work follows revision 135 above; no old review or native authority transfers.
 
 Historical A1E status at plan revision 94 (2026-10-21 UTC) is
 **EIGHT_PHASES_PASSED_FINAL_REVIEWS_PENDING**. The

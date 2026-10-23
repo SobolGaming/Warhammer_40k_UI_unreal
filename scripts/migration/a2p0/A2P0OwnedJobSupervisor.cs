@@ -276,10 +276,23 @@ public static class Supervisor {
                 if(clock.Elapsed.TotalSeconds>=runDeadline) { r["timedOut"]=true; throw new TimeoutException("Python child60s deadline reached during wait"); }
                 if(waited==WAIT_OBJECT_0) { RootFinal(process.process,r); exited=true; }
                 ACCOUNT observation=new ACCOUNT(); uint observationBytes;
-                WinCheck(QueryInformationJobObject(job,1,ref observation,(uint)Marshal.SizeOf<ACCOUNT>(),out observationBytes),"QueryInformationJobObject(loop)");
+                uint observationRequestedBytes=(uint)Marshal.SizeOf<ACCOUNT>();
+                double accountingQueryStartedElapsedSeconds=clock.Elapsed.TotalSeconds;
+                WinCheck(QueryInformationJobObject(job,1,ref observation,observationRequestedBytes,out observationBytes),"QueryInformationJobObject(loop)");
+                double accountingQueryCompletedElapsedSeconds=clock.Elapsed.TotalSeconds;
                 if(observationBytes!=(uint)Marshal.SizeOf<ACCOUNT>()) throw new InvalidDataException("Loop accounting size mismatch");
                 if(observation.total!=1 || observation.active>1 || observation.terminatedByLimit!=0) {
-                    Count(job,samples,"unexpected-membership");
+                    // Preserve this already-obtained trigger; a second query could observe different accounting.
+                    // The existing monotonic clock brackets the query, not an atomic kernel timestamp.
+                    samples.Add(new Dictionary<string,object>{{"stage","unexpected-membership-trigger"},{"observedUtc",Utc()},
+                        {"sampleSource","ALREADY_OBTAINED_LOOP_QUERY"},{"informationClass",1},{"querySucceeded",true},
+                        {"requestedBytes",observationRequestedBytes},{"returnedBytes",observationBytes},
+                        {"queryStartedElapsedSeconds",accountingQueryStartedElapsedSeconds},
+                        {"queryCompletedElapsedSeconds",accountingQueryCompletedElapsedSeconds},
+                        {"totalProcesses",observation.total},{"activeProcesses",observation.active},
+                        {"totalTerminatedProcesses",observation.terminatedByLimit},{"totalUserTime100ns",observation.user},
+                        {"totalKernelTime100ns",observation.kernel},{"thisPeriodUserTime100ns",observation.periodUser},
+                        {"thisPeriodKernelTime100ns",observation.periodKernel},{"totalPageFaultCount",observation.faults}});
                     throw new InvalidDataException("Single-root job accounting differs");
                 }
                 if(exited) {

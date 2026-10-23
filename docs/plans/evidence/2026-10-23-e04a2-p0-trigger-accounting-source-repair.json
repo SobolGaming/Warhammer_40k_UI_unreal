@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_E04_A2P0_TRIGGER_ACCOUNTING_SOURCE_REPAIR_ADOPTION_PROVENANCE",
+  "status": "SOURCE_DIAGNOSTIC_REPAIRED_FRESH_SOURCE_PENDING",
+  "adoptedUtc": "2026-10-23T19:54:39.8672424Z",
+  "criterionPrecisionUtc": "2026-10-23T19:55:28.3455532Z",
+  "predecessorCheckpoint": "9b150fcdad099e2d507c6240642abb850914bc32",
+  "sourceAdoptionRecord": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-rev135-trigger-source-adoption.original.json",
+    "bytes": 12071,
+    "sha256": "C4CB71AB49937F27174EC87A9BFCA33E1198E3E73E0061227618E65B0B63B45E"
+  },
+  "sourceAdoptionTool": "e820d4",
+  "sourceAdoptionExitCode": 0,
+  "criterionPrecisionRecord": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-rev135-trigger-criterion-precision.original.json",
+    "bytes": 1385,
+    "sha256": "93FFBC1A06E05B201CDBB4A09B12E4D53D25D7C8BD743B24C39DC79ACEBE9732"
+  },
+  "criterionPrecisionTool": "3d7bda",
+  "currentSource": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\a2p0\\A2P0OwnedJobSupervisor.cs",
+    "bytes": 29365,
+    "sha256": "5A86A94BEEA4141A6F3F6F78DB0367C1E2D45488DDE90078C79F11B5E8E36D79"
+  },
+  "currentPacket": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-23-e04a2-p0-canonical-reference-packet.md",
+    "bytes": 14439,
+    "sha256": "02099B4272C1FCE3F74D09DAB01ACBDFA8F95BFCBAD5EF261E1C462E73405579"
+  },
+  "scalarIdentityHistory": {
+    "originalSourceBytes": 27948,
+    "originalSourceSha256": "0E212A03732BEF7ABBD0C1639A644D4A81A7FDAF241337E89517055A3793154A",
+    "originalPacketBytes": 13730,
+    "originalPacketSha256": "20EEFF90C7B5BD6B0D51E0299E3DE0B265341EA17D26E7BAE82B6DCBCC3505E1",
+    "initialIntermediatePacketBytes": 14389,
+    "initialIntermediatePacketSha256": "10EF5AD9AAF6B266625B9FE7ED281513DB28F7D5AB37ECBADAC472E92B678471",
+    "intermediatePacketIsCurrentFileDescriptor": false
+  },
+  "sourcePayload": {
+    "oldPhysicalLines": "278-284",
+    "newPhysicalLines": "278-297",
+    "guardedProposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-trigger-accounting-source-GUARDED_PROPOSED-20261023-3ca94ab2\\A2P0OwnedJobSupervisor.TRIGGER_SAMPLE.GUARDED_PROPOSED.cs",
+      "bytes": 29514,
+      "sha256": "6BCD735C498FB215DE791CBC5D129E32685E47B5CEA9DD2609EC11895C7C41B2"
+    },
+    "proposalLedger": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-trigger-accounting-source-GUARDED_PROPOSED-20261023-3ca94ab2\\exact-source-packet-replacements-and-inverse.PROPOSED.json",
+      "bytes": 13067,
+      "sha256": "524566DDEC7128E159B629513EA113EE211F371ADA1137BD24BFE9DA6E79C528"
+    },
+    "guardPrefixBytesRemoved": 149,
+    "retainedObservation": "Same successful complete-size loop query, all eight ACCOUNT fields, requested/returned bytes and existing monotonic query-observation interval",
+    "replaced": "Second Count query on this strict loop-accounting failure path",
+    "newNativeApi": 0,
+    "newNativeQuery": 0
+  },
+  "packet": {
+    "changedCriteria": [
+      "P0-S06",
+      "P0-S08",
+      "P0-S09"
+    ],
+    "statusNeutralPrefacePhysicalLine": 3,
+    "cleanCriteriaPhysicalLines": "5-41",
+    "finalS06Phrase": "On a strict loop-accounting guard failure after a successful complete-size query, preserve the same already-obtained complete ACCOUNT field values",
+    "precisionReason": "Precisely scopes diagnostic observability to the successful complete-size loop query; initial/root-exit/final Count paths and query-error/size-mismatch behavior are unchanged.",
+    "intermediatePacketIdentity": "10EF5AD9 scalar history only; current descriptor is02099B4272C1FCE3F74D09DAB01ACBDFA8F95BFCBAD5EF261E1C462E73405579"
+  },
+  "rootStaticChecks": {
+    "sourceWholeForwardAndInverse": true,
+    "packetWholeForwardAndInverse": true,
+    "guardPrefixRemovedExact": true,
+    "sourceStrictGuardAndThrowUnchanged": true,
+    "newNativeApi": 0,
+    "newNativeQuery": 0,
+    "newTriggerSampleReplacesRequery": 1,
+    "cleanCriteriaPhysicalLines": "5-41",
+    "diffCheck": "PASS",
+    "compile": "NOT_RUN",
+    "runtime": "NOT_RUN",
+    "freshSource": "NOT_RUN",
+    "freshHeadRun": "UNBOUND",
+    "freshGo": "NOT_CREATED"
+  },
+  "finalPrecisionWholeInverseMatched": true,
+  "rootReportedOriginalWholeInverses": {
+    "sourceOriginalSha256": "0E212A03732BEF7ABBD0C1639A644D4A81A7FDAF241337E89517055A3793154A",
+    "packetOriginalSha256": "20EEFF90C7B5BD6B0D51E0299E3DE0B265341EA17D26E7BAE82B6DCBCC3505E1",
+    "matched": true
+  },
+  "unchanged": "Active limit1, kill-on-close/killcodes, success predicate, all deadlines/caps/paths, collector/data/worker/outer and same strict guard remain. Cause UNATTRIBUTED; no child permission or retry.",
+  "unaffectedAccountingPaths": "Initial/root-exit/final Count and query-error/size-mismatch paths remain unchanged.",
+  "diagnosisOrPolicyChangeAsserted": false,
+  "own18FailureBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-rev134-native-failure-checkpoint-backup.original.json",
+    "bytes": 837,
+    "sha256": "520CC8978FAE4167F5D24F3785C141D8AB03D172DD174BA3F0D2BE6F88A2F644"
+  },
+  "oldSourceVerdict": "d0aa425_RAW_PASS_ORIGINAL_SOURCE_ONLY",
+  "oldNativeRun": "20261023T192055Z-4a226106_CLOSED_FAIL_NO_RETRY",
+  "successorCompilation": "NOT_RUN",
+  "successorRuntime": "NOT_RUN",
+  "freshAffectedSource": "NOT_RUN",
+  "newHead": "UNBOUND",
+  "newRunId": "UNBOUND",
+  "newBindings": "NOT_CREATED",
+  "freshGo": "NOT_CREATED",
+  "administrativeTransport": {
+    "firstRangeAssertionAttempt": "659034_STOPPED_BEFORE_CANONICAL_WRITES",
+    "actualAdoption": "e820d4_EXIT0",
+    "postSuccessOrchestrationJsonParse": "Failed after successful native output due git warnings; no adoption rerun"
+  },
+  "next": "Checkpoint/push/exact-gh verify repaired source, then fresh bindings/affected SOURCE before separate runtime authority.",
+  "visible": "HOLD_UNTIL_EXPLICIT_OWNER_APPROVAL_REPORTED_1935",
+  "boundedA1gAcceptance": "REV131_PRESERVED",
+  "own17": "DEFERRED_UNPROVEN",
+  "linux": "UNTESTED",
+  "broaderA2And727AndFinalCodeReq": "OPEN",
+  "gImplement": "NOT_GRANTED",
+  "publisherCanonicalWritesPerformed": false,
+  "note": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-trigger-accounting-source-repair.md",
+    "proposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-trigger-accounting-rev135-private-PROPOSAL-20261023-d70af58c\\final-r2\\2026-10-23-e04a2-p0-trigger-accounting-source-repair.md",
+      "bytes": 2053,
+      "sha256": "4738D29F87575278E5465E543679AEA6E64C3635AF6BF9820736E1D870395262"
+    }
+  }
+}
