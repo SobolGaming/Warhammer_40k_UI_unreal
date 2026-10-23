@@ -1,0 +1,155 @@
+{
+  "recordKind": "ROOT_PUBLIC_SOURCE_FAIL_CLOSURE",
+  "createdUtc": "2026-10-23T15:37:57.6688396Z",
+  "sourceHead": "b049c0283953127efa82dacefbdc69cb79a38559",
+  "comparisonBase": "cfd2ff3e78e40ce426ce87827d848d7fa464a66b",
+  "runId": "20261023T151324Z-d32d856f",
+  "sessionId": "01a16955-6fe3-7d60-8484-5eb4233def23",
+  "status": "SOURCE_FAILED_WINDOW_OWNER_QUERY_FALSE_PASS",
+  "rawVerdict": "FAIL",
+  "encodedOriginalReport": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-23-e04a-game-source-review-b049c02.json",
+    "bytes": 3510,
+    "sha256": "C4A62EA645457709EBD9D5AB0B1AB3EB7F052355EC60EC003F5C01FA3CB9B1DA"
+  },
+  "privateRootClosure": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-emitterstyle-packet-repair-root-20261023\\bindings-b049c02-20261023T151324Z-d32d856f\\root-closed-source-fail-window-owner-query.original.json",
+    "bytes": 7229,
+    "sha256": "5E5E2B3FAF682BE039FD56F3B10B10FB6CDD53099809D34A0E0F8470E6940A2B"
+  },
+  "foreground": {
+    "exitCode": 0,
+    "observedUtc": "2026-10-23T15:27:11Z",
+    "actualToolChunk": "497f7c"
+  },
+  "sourceFinding": {
+    "line": 196,
+    "actualNativeFailureObserved": false,
+    "description": "A zero GetWindowThreadProcessId return is silently excluded; stable membership and successful enumeration can lead to ZERO_OBSERVED/PASS_ZERO_OBSERVED. The unchanged norm requires query failures to fail.",
+    "rootConfirmationTool": "99a570",
+    "observerRepairAdopted": false,
+    "path": "scripts/migration/E04A1GOwnedJobSupervisor.cs"
+  },
+  "packetCoverage": {
+    "requiredWholeSourceCount": 45,
+    "selectedMembers": 8,
+    "extractionConsoles": 4,
+    "rawMembers": 12,
+    "rehashUnique": 852,
+    "rehashDescriptorOccurrences": 1021,
+    "wholeInputs": 164,
+    "emitterstyleExplicitWholeBody": "SUPPLIED_V12",
+    "frozenFiles": 844
+  },
+  "rootOrdering": {
+    "metadataInspectionTool": "f6ce67",
+    "strictPipelineTool": "69229b",
+    "actualInputsInspected": {
+      "unmatchedInputCount": 0,
+      "inputCount": 47,
+      "chunks": [
+        "98aaee",
+        "beff60",
+        "8098f1"
+      ],
+      "inclusiveCallRanges": [
+        "1-16",
+        "17-32",
+        "33-47"
+      ],
+      "pairedOutputCount": 47,
+      "orphanOutputCount": 0
+    },
+    "firstReportToolBodyInspection": "98aaee"
+  },
+  "conduct": {
+    "featureDisableEnforcement": "UNVERIFIED",
+    "clippedCompleteRecordOrdinals": [
+      2,
+      6,
+      84,
+      88
+    ],
+    "clippingQualification": "Clipping retained; no semantic-delivery or comprehension certification.",
+    "scopedBodyDiffCalls": [
+      28,
+      39
+    ],
+    "observedInputs": "Inert source/metadata/hash/clock inspection and pinned read-only Git only. No candidate/helper/test/native/GUI/Core invocation, edits, apps/network/collaboration call or peer-report body observed.",
+    "metadataOnlyUnrestrictedNameStatusCall": 28,
+    "stderrWarnings": {
+      "unsupportedPowerShellSnapshot": 1,
+      "ignoredPluginIcon": 4
+    }
+  },
+  "sourceAdmitted": false,
+  "pureControls": {
+    "observerFailureBranchCoverage": false,
+    "status": "NOT_RUN",
+    "declared": 14
+  },
+  "phases": [
+    {
+      "phase": "Preflight",
+      "goExists": false,
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "DependencyConfigure",
+      "goExists": false,
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "DependencyBuild",
+      "goExists": false,
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "EditorPrerequisiteBuild",
+      "goExists": false,
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "GameBuild",
+      "goExists": false,
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Cook",
+      "goExists": false,
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Stage",
+      "goExists": false,
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Native",
+      "goExists": false,
+      "status": "NOT_RUN"
+    },
+    {
+      "phase": "Audit",
+      "goExists": false,
+      "status": "NOT_RUN"
+    }
+  ],
+  "nativeRPresent": false,
+  "runClosedNoReuse": true,
+  "A1GAccepted": false,
+  "OWN17": "DEFERRED_UNPROVEN",
+  "visibleAuthority": 0,
+  "Linux": "UNTESTED",
+  "next": "Publish this actual FAIL closure, checkpoint/push/exact-gh verify OWN18 BEFORE observer repair. Then separately checkpoint repaired source, verify backup, bind fresh SOURCE. No old authority transfers.",
+  "limits": "Closed source review and root input conduct audit only. No native runtime, query-failure injection, continuous window absence, semantic delivery, comprehension, source/binary correspondence or universal isolation proof.",
+  "actualNativeRObservation": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T151324Z-d32d856f",
+    "present": false,
+    "observationCorrection": {
+      "sha256": "23E8AAC50BDC8680C069597431070717C9A00E4AAEF5A47230C03A6AAEAF7AE6",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-emitterstyle-packet-repair-root-20261023\\bindings-b049c02-20261023T151324Z-d32d856f\\root-native-r-absence-correction.original.json",
+      "bytes": 495
+    }
+  }
+}
