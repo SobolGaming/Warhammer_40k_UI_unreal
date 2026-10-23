@@ -7,7 +7,15 @@ foundation. The opt-in synthetic 3D proof has bounded Windows acceptance recorde
 verification resolved the final hold; original BLOCKED reports remain unchanged.
 Both visible launches are consumed and native authority is closed. A playable
 Core-connected client, full input/HUD acceptance, Linux and packaging remain open.
-A2-P0 **SOURCE_BLOCKED_DEPENDENCY_SANDBOX_ACCESS** (revision 133). Root retains SOURCE 4b1e038 as valid raw BLOCKED: 116/134 identities matched and 18 were access denied (16 PyYAML sources and base Python exe/DLL). No content mismatch or correctness finding; material semantics remain unassessed. [Failure](docs/plans/research/2026-10-23-e04a2-p0-source-blocked-sandbox-access.md); [provenance](docs/plans/evidence/2026-10-23-e04a2-p0-source-blocked-sandbox-access.json). OWN18 remote-verified failure checkpoint precedes staging/access repair; fresh affected SOURCE precedes capture. RunRoot is absent; compilation/capture are NOT_RUN and runtime GO is NOT_CREATED. Revision 131 A1G acceptance/history, full A2/727/G-IMPLEMENT limits, Linux UNTESTED and OWN17 deferred remain. Standing project visible-test availability until owner intervention supersedes historical HOLD; other gates remain unchanged.
+A2-P0 **SOURCE_PASS_NATIVE_CAPTURE_FAILED_JOB_ACCOUNTING** (revision 134). SOURCE d0aa425 remains PASS/root-admitted; native capture failed on its accounting guard (observed total/active 1/1 to 2/2); counter interpretation is qualified in the linked failure note. The supervisor terminated the job; exit and cleanup were confirmed, final active 0. Additional process/cause is UNATTRIBUTED, collector entry UNPROVEN; no capture file, Python stdout/stderr empty. [Failure](docs/plans/research/2026-10-23-e04a2-p0-native-job-accounting-failure.md); [evidence](docs/plans/evidence/2026-10-23-e04a2-p0-native-job-accounting-failure.json). OWN18 remote-verified failure checkpoint precedes actual repair/rebinding/diagnostic execution. No retry or guard relaxation. Renewed 19:35 visible HOLD is operative until explicit owner approval. A1G acceptance/history, OWN17 deferred, Linux UNTESTED and full A2/727/G-IMPLEMENT limits remain.
+
+**Operative visible-test HOLD — reported 19:35 UTC, 2026-10-23:**
+
+> Alright.  I'm back to using the screen.  Pause visible tests until I approve otherwise
+
+Trusted relay thread 01a15972-8d00-76fb-b21e-78cded2ea00b; minute precision, original not independently retrieved. Visible tests are paused until explicit owner approval. This supersedes the historical 19:10 availability below; other gates remain unchanged.
+
+Historical revision 133 (the 19:10 availability below was superseded by the 19:35 HOLD): A2-P0 **SOURCE_BLOCKED_DEPENDENCY_SANDBOX_ACCESS** (revision 133). Root retains SOURCE 4b1e038 as valid raw BLOCKED: 116/134 identities matched and 18 were access denied (16 PyYAML sources and base Python exe/DLL). No content mismatch or correctness finding; material semantics remain unassessed. [Failure](docs/plans/research/2026-10-23-e04a2-p0-source-blocked-sandbox-access.md); [provenance](docs/plans/evidence/2026-10-23-e04a2-p0-source-blocked-sandbox-access.json). OWN18 remote-verified failure checkpoint precedes staging/access repair; fresh affected SOURCE precedes capture. RunRoot is absent; compilation/capture are NOT_RUN and runtime GO is NOT_CREATED. Revision 131 A1G acceptance/history, full A2/727/G-IMPLEMENT limits, Linux UNTESTED and OWN17 deferred remain. Standing project visible-test availability until owner intervention supersedes historical HOLD; other gates remain unchanged.
 
 **Standing project visible-test availability — reported 19:10 UTC, 2026-10-23:**
 
@@ -107,7 +115,7 @@ rendering/Core play, Linux execution and distribution remain open. Standing priv
 source/API review consent continues until explicitly revoked. This publication is
 a metadata/report overlay, outside the exact head assessed by the reports.
 See the [final review provenance](docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json).
-Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G/A2-P0 work follows revision 133 above; no old review or native authority transfers.
+Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G/A2-P0 work follows revision 134 above; no old review or native authority transfers.
 
 Historical revision 93 A1E status was **EDITOR_PROBE_TEST_DECLARATIONS_REPAIRED_SOURCE_PENDING**
 (revision 93). The [repair receipt](docs/plans/evidence/2026-10-21-e04a-editor-probe-test-declarations-repair.json)

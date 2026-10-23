@@ -1,11 +1,19 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 133 (2026-10-23 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 134 (2026-10-23 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-A2-P0 **SOURCE_BLOCKED_DEPENDENCY_SANDBOX_ACCESS** (revision 133). Root retains SOURCE 4b1e038 as valid raw BLOCKED: 116/134 identities matched and 18 were access denied (16 PyYAML sources and base Python exe/DLL). No content mismatch or correctness finding; material semantics remain unassessed. [Failure](research/2026-10-23-e04a2-p0-source-blocked-sandbox-access.md); [provenance](evidence/2026-10-23-e04a2-p0-source-blocked-sandbox-access.json). OWN18 remote-verified failure checkpoint precedes staging/access repair; fresh affected SOURCE precedes capture. RunRoot is absent; compilation/capture are NOT_RUN and runtime GO is NOT_CREATED. Revision 131 A1G acceptance/history, full A2/727/G-IMPLEMENT limits, Linux UNTESTED and OWN17 deferred remain. Standing project visible-test availability until owner intervention supersedes historical HOLD; other gates remain unchanged.
+A2-P0 **SOURCE_PASS_NATIVE_CAPTURE_FAILED_JOB_ACCOUNTING** (revision 134). SOURCE d0aa425 remains PASS/root-admitted; native capture failed on its accounting guard (observed total/active 1/1 to 2/2); counter interpretation is qualified in the linked failure note. The supervisor terminated the job; exit and cleanup were confirmed, final active 0. Additional process/cause is UNATTRIBUTED, collector entry UNPROVEN; no capture file, Python stdout/stderr empty. [Failure](research/2026-10-23-e04a2-p0-native-job-accounting-failure.md); [evidence](evidence/2026-10-23-e04a2-p0-native-job-accounting-failure.json). OWN18 remote-verified failure checkpoint precedes actual repair/rebinding/diagnostic execution. No retry or guard relaxation. Renewed 19:35 visible HOLD is operative until explicit owner approval. A1G acceptance/history, OWN17 deferred, Linux UNTESTED and full A2/727/G-IMPLEMENT limits remain.
+
+**Operative visible-test HOLD — reported 19:35 UTC, 2026-10-23:**
+
+> Alright.  I'm back to using the screen.  Pause visible tests until I approve otherwise
+
+Trusted relay thread 01a15972-8d00-76fb-b21e-78cded2ea00b; minute precision, original not independently retrieved. Visible tests are paused until explicit owner approval. This supersedes the historical 19:10 availability below; other gates remain unchanged.
+
+Historical revision 133 (the 19:10 availability below was superseded by the 19:35 HOLD): A2-P0 **SOURCE_BLOCKED_DEPENDENCY_SANDBOX_ACCESS** (revision 133). Root retains SOURCE 4b1e038 as valid raw BLOCKED: 116/134 identities matched and 18 were access denied (16 PyYAML sources and base Python exe/DLL). No content mismatch or correctness finding; material semantics remain unassessed. [Failure](research/2026-10-23-e04a2-p0-source-blocked-sandbox-access.md); [provenance](evidence/2026-10-23-e04a2-p0-source-blocked-sandbox-access.json). OWN18 remote-verified failure checkpoint precedes staging/access repair; fresh affected SOURCE precedes capture. RunRoot is absent; compilation/capture are NOT_RUN and runtime GO is NOT_CREATED. Revision 131 A1G acceptance/history, full A2/727/G-IMPLEMENT limits, Linux UNTESTED and OWN17 deferred remain. Standing project visible-test availability until owner intervention supersedes historical HOLD; other gates remain unchanged.
 
 **Standing project visible-test availability — reported 19:10 UTC, 2026-10-23:**
 
@@ -90,7 +98,7 @@ Historical revision96: **A1G_SOURCE_ADOPTED_FRESH_BINDINGS_PENDING**. The dedica
 
 Current A1E status at revision 95 is **BOUNDED_E04_A1E_ACCEPTANCE_RECORDED**.
 [Final review provenance](evidence/2026-10-21-e04a-editor-final-review-provenance.json); [CODE](research/2026-10-21-e04a-editor-final-code.md), [initial REQ](research/2026-10-21-e04a-editor-final-requirements.md), [limited supplement](research/2026-10-21-e04a-editor-requirements-supplement.md) and [focused SOURCE](research/2026-10-21-e04a-editor-source-review.md).
-CODE PASS plus the valid initial REQ technical findings and limited supplement PASS close only the Windows Editor subset. The initial raw BLOCKED verdict and ordering failure remain unchanged. Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G/A2-P0 work follows revision 133 above; no old review or native authority transfers.
+CODE PASS plus the valid initial REQ technical findings and limited supplement PASS close only the Windows Editor subset. The initial raw BLOCKED verdict and ordering failure remain unchanged. Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G/A2-P0 work follows revision 134 above; no old review or native authority transfers.
 
 Historical A1E status at revision 75 was **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
 The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
