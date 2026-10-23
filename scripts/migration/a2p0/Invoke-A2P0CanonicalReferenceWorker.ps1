@@ -56,14 +56,17 @@ function Task-ReadJson([string]$Path,[long]$Maximum){
 }
 function Task-True($Value){if($Value -isnot [bool] -or $Value -ne $true){throw 'Explicit Boolean true required'}}
 function Task-WriteProcessReceipt($Value){
-    Task-Tick
+    # Attempt the returned record before any cooperative deadline rejection.
     $bytes=$taskUtf8.GetBytes(($Value|ConvertTo-Json -Depth 100 -Compress)+"`n")
     $retained=[Math]::Min($bytes.Length,131072)
     $path=Join-Path $taskRoot 'process-receipt.original.json'
     $stream=[IO.FileStream]::new($path,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::Read)
     try{$stream.Write($bytes,0,$retained)}finally{$stream.Dispose()}
-    $descriptor=Task-Descriptor $path
-    [ordered]@{relativePath='process-receipt.original.json';bytes=$descriptor.bytes;sha256=$descriptor.sha256;complete=($bytes.Length -le 131072);encodedBytes=$bytes.Length}
+    # Dedicated receipt observation must not call Task-Descriptor/Task-Tick.
+    $item=Get-Item -LiteralPath $path
+    if($item.PSIsContainer -or $item.Length -ne $retained){throw 'Process receipt retained length differs'}
+    $sha256=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash
+    [ordered]@{relativePath='process-receipt.original.json';bytes=$item.Length;sha256=$sha256;complete=($bytes.Length -le 131072);encodedBytes=$bytes.Length}
 }
 function Task-RelativeDescriptor([string]$Relative){
     $d=Task-Descriptor (Join-Path $taskRoot $Relative)
@@ -116,16 +119,17 @@ try{
     Task-Tick
     Add-Type -TypeDefinition ([IO.File]::ReadAllText($binding.supervisorSource.path)) -Language CSharp -ErrorAction Stop
     Task-Tick
-    $remaining=[int][Math]::Floor((70-$taskClock.Elapsed.TotalSeconds)*1000)
-    if($remaining -lt 65000){throw 'No room for child60s/cleanup5s inside cooperative work budget'}
     $environment=[Collections.Generic.Dictionary[string,string]]::new([StringComparer]::OrdinalIgnoreCase)
     $arguments=[string[]]@('-I','-B','-S',(Task-Path $binding.collectorSource.path))
+    $remaining=[int][Math]::Floor((68-$taskClock.Elapsed.TotalSeconds)*1000)
+    if($remaining -lt 65000){throw 'No room for child60s/cleanup5s plus receipt-finalization reserve inside cooperative70s budget'}
     $taskProcess=[Warhammer.A2P0.Supervisor]::Run($taskBasePython,$arguments,$taskRoot,$environment,
         (Join-Path $taskRoot 'stdout.original.txt'),(Join-Path $taskRoot 'stderr.original.txt'),60,$false,'',$remaining)
     $taskProcess['sourceHead']=$taskHead;$taskProcess['runId']=$taskRunId;$taskProcess['nonce']=$Nonce
     $taskProcess['sourceBase']=$binding.sourceBase;$taskProcess['boundCollector']=$binding.collectorSource
     $taskProcess['boundData']=$binding.referenceData;$taskProcess['authority']=$authorityActual;$taskProcess['sourceAdmission']=$authority.sourceAdmission
     $taskReceiptDescriptor=Task-WriteProcessReceipt $taskProcess
+    Task-Tick
     if(!$taskReceiptDescriptor.complete){throw 'Process receipt retained only a bounded prefix; incomplete result'}
     if($taskProcess.status -cne 'PASS' -or !$taskProcess.exitConfirmed -or $taskProcess.exitCode -ne 0 -or $taskProcess.timedOut -or
        !$taskProcess.assignedBeforeResume -or !$taskProcess.resumed -or !$taskProcess.cleanupConfirmed -or !$taskProcess.streamsComplete -or
@@ -165,6 +169,7 @@ $completion=[ordered]@{recordKind='A2P0_WORKER_CLOSED_NOT_ACCEPTANCE';runId=$tas
     finalActiveJobCountObserved=$(if($taskProcess){$taskProcess.finalActiveJobCountObserved}else{$null});
     streamsComplete=($null -ne $taskProcess -and $taskProcess.streamsComplete -eq $true);processReceipt=$taskReceiptDescriptor;
     capture=$taskCaptureDescriptor;stdout=$taskStdoutDescriptor;stderr=$taskStderrDescriptor;failure=$taskFailure;
+    supervisorPrimaryError=$(if($taskProcess){$taskProcess.primaryError}else{$null});
     cooperativeElapsedSeconds=$taskClock.Elapsed.TotalSeconds;outerHardWall='REQUIRED_EXTERNAL_WATCHDOG_NOT_PROVEN_BY_WORKER_NONCE'}
 $completionBytes=$taskUtf8.GetBytes(($completion|ConvertTo-Json -Depth 20 -Compress)+"`n")
 if($completionBytes.Length -gt 4096){exit 1}
