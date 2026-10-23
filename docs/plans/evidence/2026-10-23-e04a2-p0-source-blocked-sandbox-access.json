@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_E04_A2P0_FIRST_SOURCE_BLOCKED_PUBLICATION_PROVENANCE",
+  "status": "SOURCE_BLOCKED_DEPENDENCY_SANDBOX_ACCESS",
+  "proposalState": "ROOT_ADOPTED_BLOCKED_DISPOSITION_FOR_PUBLICATION",
+  "sourceHead": "4b1e038be53e87de7128c4a313f287689fdbb1af",
+  "comparisonBase": "acb1cca2cda0eba6a44254da98bd172128cb40bb",
+  "runId": "20261023T184944Z-1ebb4813",
+  "rawVerdict": "BLOCKED",
+  "exactReport": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-source-review-4b1e038.json",
+    "originalBytes": 3498,
+    "originalSha256": "C0BB2880D1A2CAC03352D220EB7AC5254A3B3AF1AF7412D4FB60916E1C2196A6",
+    "roundtripMatched": true,
+    "proposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-source-blocked-publication-AUXILIARY-UNADOPTED-PROPOSED-20261023-c904fa1e\\final-r2\\2026-10-23-e04a2-p0-source-review-4b1e038.json",
+      "bytes": 8892,
+      "sha256": "3CF96899B190CB02B1C84DF9D4E7DAA5767BE4885136AC971C9A06E1FBBF2B79"
+    }
+  },
+  "note": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-source-blocked-sandbox-access.md",
+    "proposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-source-blocked-publication-AUXILIARY-UNADOPTED-PROPOSED-20261023-c904fa1e\\final-r2\\2026-10-23-e04a2-p0-source-blocked-sandbox-access.md",
+      "bytes": 2363,
+      "sha256": "00CA3AC07F330D5C79EC256359BFB47EC21B29F6A26BB9B3AC9A09E93E74F7D7"
+    }
+  },
+  "identityAttempt": {
+    "manifestFrozen": 134,
+    "matched": 116,
+    "accessDenied": 18,
+    "contentMismatchDemonstrated": false,
+    "sourceCorrectnessFinding": false,
+    "materialComponentParserAndInterfaceBodies": "NOT_INSPECTED",
+    "exactAccessDenialCause": "NOT_ESTABLISHED_ORIGINAL_RUNTIME_PATHS_UNCHANGED"
+  },
+  "inaccessibleInputs": {
+    "pyYamlSourceCount": 16,
+    "pyYamlBasenames": [
+      "__init__.py",
+      "composer.py",
+      "constructor.py",
+      "dumper.py",
+      "emitter.py",
+      "error.py",
+      "events.py",
+      "loader.py",
+      "nodes.py",
+      "parser.py",
+      "reader.py",
+      "representer.py",
+      "resolver.py",
+      "scanner.py",
+      "serializer.py",
+      "tokens.py"
+    ],
+    "baseCpythonFiles": [
+      "python.exe",
+      "python314.dll"
+    ],
+    "exactPaths": "Preserved in immutable raw report; no substitute inputs or hashes are supplied."
+  },
+  "strictClosure": {
+    "foregroundExitCode": 0,
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-4b1e038-20261023T184944Z-1ebb4813\\closed-raw-output-seal.before-body.original.json",
+      "bytes": 4958,
+      "sha256": "01ED446C5A4DBC9D6AA942AF82E998D599E959A87DEBB75D8B06D05957B0DE1A"
+    },
+    "selectedSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-4b1e038-20261023T184944Z-1ebb4813\\closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 4025,
+      "sha256": "73CD339A6B45E7E720919BFB63B2E72DF6CBC4E3582C13866474969FD7C8A87F"
+    },
+    "independentRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-4b1e038-20261023T184944Z-1ebb4813\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 2059,
+      "sha256": "B869C706B4915C2670D2EB991ADD6889416F9B304ABAD6ACB6C4531448DA6E6B"
+    },
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "frozenAndControlUnique": 142,
+    "rehashUtc": "2026-10-23T19:07:18.0989999Z",
+    "allComparedDescriptorsMatched": true,
+    "firstBody": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-4b1e038-20261023T184944Z-1ebb4813\\root-first-body-read.original.json",
+      "bytes": 952,
+      "sha256": "CA91492BF3557D38308EA5798FD0DE086979CB5A3CE2B36C0AB0BEF594A1638E"
+    },
+    "firstBodyTool": "43e34c",
+    "limits": "Seals and the point-in-time rehash establish recorded identities/order only; the separate root conduct audit is recorded in rootDisposition. They do not establish source correctness, universal comprehension or positive SOURCE admission.",
+    "clockQualification": "Original whole-second clock record preserved; precise later actual closure observation used by seals, not reconstructed process time",
+    "preciseLaterObservedClosure": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-4b1e038-20261023T184944Z-1ebb4813\\root-observed-foreground-completion.precise.original.json",
+      "bytes": 1343,
+      "sha256": "948E2F6BEA3FD2870EC400A8517F8A4EAF71EC511B30FAEE24E7305BC15661B1"
+    }
+  },
+  "rootDisposition": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-4b1e038-20261023T184944Z-1ebb4813\\root-source-blocked-disposition.original.json",
+      "bytes": 12661,
+      "sha256": "B9954AFC8336CC8C2FC5A975B6D653E44B68576724CC056160920752B47B7794"
+    },
+    "observedUtc": "2026-10-23T19:13:22.8780239Z",
+    "disposition": "VALID_BLOCKED_SOURCE_ASSESSMENT_RETAINED_NO_POSITIVE_SOURCE_ADMISSION",
+    "rootTool": "c9fcc4",
+    "approval": "NOT_GRANTED",
+    "positiveSourceAdmission": false,
+    "conduct": {
+      "traceRehash": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-4b1e038-20261023T184944Z-1ebb4813\\root-independent-trace-value-rehash.original.json",
+        "bytes": 3897,
+        "sha256": "28E793F9503B38512A8298C90FA5458948A34EEC7A3A45A26EE72B76E9CEC2D9"
+      },
+      "fiveOriginalInputJoinsMatched": true,
+      "allTenRetainedValueHashesMatched": true,
+      "nullHashErrorPathFrozenJoinsMatched": 18,
+      "inputCount": 5,
+      "outputCount": 5,
+      "unmatched": 0,
+      "orphans": 0,
+      "clippedCalls": [
+        1,
+        3,
+        4
+      ],
+      "partialRecoveryCall": 5,
+      "completeDisplayedCoverage": "NOT_ESTABLISHED",
+      "prohibitedActionObserved": false,
+      "scopeLimit": "Only these retained actual inputs/outputs; not OS-wide isolation or universal delivery certification"
+    },
+    "auxiliaryDraftIsFormalReview": false
+  },
+  "execution": {
+    "capture": "NOT_RUN",
+    "compilation": "NOT_RUN",
+    "runtimeGo": "NOT_CREATED",
+    "sourceAdmission": "NOT_GRANTED",
+    "packetStagingOrRepairForPublication": "NONE",
+    "applicationRunRoot": "ABSENT_NOT_ALLOCATED"
+  },
+  "next": "OWN18 checkpoint/push/exact-gh-verify this failure BEFORE packet staging/access repair. Then review exact dependency-access/input bindings and obtain fresh affected SOURCE before any capture.",
+  "visibleAvailability": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-standing-visible-test-permission-20261023T1910-relay.original.json",
+      "bytes": 912,
+      "sha256": "CF061AD9047AA974AFDF4ACC74DA2A1ABE4A13674C2FF760116C964487EC9935"
+    },
+    "reportedOwnerMessageUtc": "2026-10-23T19:10:00Z",
+    "precision": "Minute precision reported by trusted progress-chat relay; original not independently retrieved",
+    "sourceThreadId": "01a15972-8d00-76fb-b21e-78cded2ea00b",
+    "quote": "I'm done using the screen for now.  Visible tests are all approved until I intervene again",
+    "independentOriginalRetrieval": "NOT_ESTABLISHED",
+    "adoption": "ADOPTED_BY_ROOT",
+    "scope": "Visible tests for this Warhammer migration project until owner intervention",
+    "supersedes": "Previous visible-test/screen HOLD",
+    "until": "OWNER_INTERVENTION",
+    "remaining": "Source review, execution/phase, process-safety, project scope and other permission gates unchanged",
+    "currentVisibleTests": "NOT_RUN",
+    "runtimeAuthorityFromThisFailurePublication": false
+  },
+  "boundedA1gAcceptance": "REV131_PRESERVED",
+  "history": "PRESERVE_ALL_PRIOR_FAILURES_UNKNOWNS_AND_RAW_VERDICTS",
+  "fullA2And727": "OPEN",
+  "gImplement": "NOT_GRANTED",
+  "linux": "UNTESTED",
+  "own17": "DEFERRED_UNPROVEN",
+  "runtime": {
+    "metadata": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-4b1e038-20261023T184944Z-1ebb4813\\runtime-evidence.final.selected.json",
+      "bytes": 5219,
+      "sha256": "C4023375C43433B334E96EF1B2DE1DC23DBC73219C19B8A1802C33A59765EA38"
+    },
+    "contexts": 1,
+    "turns": 1,
+    "sandbox": "read-only",
+    "approval": "never",
+    "memoryMode": "disabled",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "defaultModelNoOverride": true,
+    "resume": false,
+    "fork": false,
+    "receivedPromptPlusOneCrlf": true,
+    "lowerLevelEnforcement": "UNVERIFIED"
+  },
+  "publisherCanonicalWritesPerformed": false
+}

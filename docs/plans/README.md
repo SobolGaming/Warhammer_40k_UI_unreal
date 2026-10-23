@@ -1,11 +1,19 @@
 # Plans
 
-The [Unreal migration plan](unreal-migration-plan.md), revision 132 (2026-10-23 UTC), is canonical.
+The [Unreal migration plan](unreal-migration-plan.md), revision 133 (2026-10-23 UTC), is canonical.
 Section 0 holds research status, owner decisions and the next bounded gate. It
 preserves the client-only scope, genuine 3D/parity requirements and separate
 execution and acceptance criteria. Supporting findings live under [research](research/).
 
-A2-P0 **SOURCE_ADOPTED_EXECUTION_NOT_RUN_FRESH_SOURCE_PENDING** (revision 132). Root adopted four guarded source files, one dependency data template and the clean packet at 2026-10-23T18:45:12.3754142Z. [Minimum canonical payload capture packet](research/2026-10-23-e04a2-p0-canonical-reference-packet.md); [source-adoption evidence](evidence/2026-10-23-e04a2-p0-source-adoption.json). Capture/runtime/control results are NOT_RUN; exact bindings and fresh affected SOURCE precede any capture. Revision131 bounded A1G acceptance/history is unchanged. Full A2/727 recipes, G-IMPLEMENT and broader gates remain open/not granted; Linux UNTESTED, OWN17 deferred/unproven and visible HOLD/zero launches remain.
+A2-P0 **SOURCE_BLOCKED_DEPENDENCY_SANDBOX_ACCESS** (revision 133). Root retains SOURCE 4b1e038 as valid raw BLOCKED: 116/134 identities matched and 18 were access denied (16 PyYAML sources and base Python exe/DLL). No content mismatch or correctness finding; material semantics remain unassessed. [Failure](research/2026-10-23-e04a2-p0-source-blocked-sandbox-access.md); [provenance](evidence/2026-10-23-e04a2-p0-source-blocked-sandbox-access.json). OWN18 remote-verified failure checkpoint precedes staging/access repair; fresh affected SOURCE precedes capture. RunRoot is absent; compilation/capture are NOT_RUN and runtime GO is NOT_CREATED. Revision 131 A1G acceptance/history, full A2/727/G-IMPLEMENT limits, Linux UNTESTED and OWN17 deferred remain. Standing project visible-test availability until owner intervention supersedes historical HOLD; other gates remain unchanged.
+
+**Standing project visible-test availability — reported 19:10 UTC, 2026-10-23:**
+
+> I'm done using the screen for now.  Visible tests are all approved until I intervene again
+
+Trusted progress-chat relay thread 01a15972-8d00-76fb-b21e-78cded2ea00b; minute precision, original not independently retrieved. This permission is operative until owner intervention and supersedes historical visible HOLD references. Applicable packet/source-review/execution-GO/process-safety/scope gates remain unchanged.
+
+Historical revision 132: A2-P0 **SOURCE_ADOPTED_EXECUTION_NOT_RUN_FRESH_SOURCE_PENDING** (revision 132). Root adopted four guarded source files, one dependency data template and the clean packet at 2026-10-23T18:45:12.3754142Z. [Minimum canonical payload capture packet](research/2026-10-23-e04a2-p0-canonical-reference-packet.md); [source-adoption evidence](evidence/2026-10-23-e04a2-p0-source-adoption.json). Capture/runtime/control results are NOT_RUN; exact bindings and fresh affected SOURCE precede any capture. Revision131 bounded A1G acceptance/history is unchanged. Full A2/727 recipes, G-IMPLEMENT and broader gates remain open/not granted; Linux UNTESTED, OWN17 deferred/unproven and visible HOLD/zero launches remain.
 
 Historical revision 131 (bounded A1G acceptance remains recorded): **BOUNDED_A1G_WIN64_GAME_ACCEPTANCE_RECORDED** (revision 131), recorded by root at 2026-10-23T18:30:01.0810466Z. Executed c329a3a / run 20261023T154418Z-ce672e5f closes only the finite Win64 Development cooked Game parser/caller proof: nine phases/seven supervised roots, BAD then GOOD/two calls/52 typed checks. CODE cb9e458 remains raw PASS/root-admitted; initial REQ5e5dbd1 remains raw BLOCKED with its technical map. The separate limited post-sealed REQ supplement for b12ab6e is PASS/root-admitted and closes reserved SOURCE/GO/chronology administration; root combined those dispositions. [Supplement/disposition](research/2026-10-23-e04a-game-final-requirements-administrative-supplement-b12ab6e.md), [combined provenance](evidence/2026-10-23-e04a-game-final-review-provenance.json). Preserve raw verdicts, old inadmissible REQ UNREAD, all finite qualifications and history. Checkpoint/push/gh-verify this acceptance overlay, then prepare/adopt the minimum A2-P0 packet/exact bindings; P0 UNBOUND/NOT_RUN, fresh affected SOURCE before capture. Broader A2/727, full E04/M02/playable slice and G-IMPLEMENT remain open/not granted; OWN17 deferred/unproven, Linux UNTESTED, visible HOLD/zero launches and perpetual source/API consent unchanged. No old GO/retry, broader acceptance or merge authority is added.
 
@@ -82,7 +90,7 @@ Historical revision96: **A1G_SOURCE_ADOPTED_FRESH_BINDINGS_PENDING**. The dedica
 
 Current A1E status at revision 95 is **BOUNDED_E04_A1E_ACCEPTANCE_RECORDED**.
 [Final review provenance](evidence/2026-10-21-e04a-editor-final-review-provenance.json); [CODE](research/2026-10-21-e04a-editor-final-code.md), [initial REQ](research/2026-10-21-e04a-editor-final-requirements.md), [limited supplement](research/2026-10-21-e04a-editor-requirements-supplement.md) and [focused SOURCE](research/2026-10-21-e04a-editor-source-review.md).
-CODE PASS plus the valid initial REQ technical findings and limited supplement PASS close only the Windows Editor subset. The initial raw BLOCKED verdict and ordering failure remain unchanged. Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G/A2-P0 work follows revision 132 above; no old review or native authority transfers.
+CODE PASS plus the valid initial REQ technical findings and limited supplement PASS close only the Windows Editor subset. The initial raw BLOCKED verdict and ordering failure remain unchanged. Revision95 metadata was checkpointed and its exact remote backup verified at 2651a86. Current A1G/A2-P0 work follows revision 133 above; no old review or native authority transfers.
 
 Historical A1E status at revision 75 was **NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING**.
 The [repair checkpoint](research/2026-10-20-e04a-null-response-env-repair-checkpoint.md)
