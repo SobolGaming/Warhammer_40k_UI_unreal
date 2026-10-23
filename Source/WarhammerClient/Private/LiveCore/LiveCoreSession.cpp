@@ -22,7 +22,7 @@ const TCHAR* Contract = TEXT("44.3.33");
 bool Exact(const FString& A, const FString& B) { return A.Equals(B, ESearchCase::CaseSensitive); }
 TSharedPtr<FJsonValue> Field(const TSharedPtr<FJsonObject>& O, const TCHAR* Name)
 {
-    if (O.IsValid()) { for (const auto& Pair : O->Values) { if (Exact(Pair.Key, Name)) { return Pair.Value; } } }
+    if (O.IsValid()) { for (const auto& Pair : O->Values) { if (FStringView(*Pair.Key, Pair.Key.Len()).Equals(Name, ESearchCase::CaseSensitive)) { return Pair.Value; } } }
     return nullptr;
 }
 TSharedPtr<FJsonObject> Object(const TSharedPtr<FJsonObject>& O, const TCHAR* Name)
@@ -213,7 +213,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
         const auto T = Pair.Value->Type == EJson::Object ? Pair.Value->AsObject() : nullptr;
         FLiveCoreTerrain Item; const auto Footprint = Object(T, TEXT("footprint"));
         const TArray<TSharedPtr<FJsonValue>>* Vertices = nullptr;
-        if (!String(T, TEXT("terrain_feature_id"), Item.Id) || !Exact(Pair.Key, Item.Id) || !IsString(Footprint, TEXT("kind"), TEXT("polygon")) ||
+        if (!String(T, TEXT("terrain_feature_id"), Item.Id) || !FStringView(*Pair.Key, Pair.Key.Len()).Equals(Item.Id, ESearchCase::CaseSensitive) || !IsString(Footprint, TEXT("kind"), TEXT("polygon")) ||
             !Array(Footprint, TEXT("vertices"), Vertices) || Vertices->Num() < 3)
         { OutError = TEXT("Unsupported Core terrain footprint; no replacement geometry was invented."); return false; }
         for (const auto& V : *Vertices)
@@ -236,7 +236,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     {
         const auto Objective = Pair.Value->Type == EJson::Object ? Pair.Value->AsObject() : nullptr;
         FLiveCoreObjective Item; double Diameter;
-        if (!String(Objective, TEXT("objective_id"), Item.Id) || !Exact(Pair.Key, Item.Id) ||
+        if (!String(Objective, TEXT("objective_id"), Item.Id) || !FStringView(*Pair.Key, Pair.Key.Len()).Equals(Item.Id, ESearchCase::CaseSensitive) ||
             !Position(Object(Objective, TEXT("position")), Item.PositionInches) || !Number(Objective, TEXT("marker_diameter_inches"), Diameter) || Diameter <= 0)
         { OutError = TEXT("Invalid Core objective marker."); return false; }
         Item.RadiusInches = Diameter / 2.0; Candidate.Objectives.Add(MoveTemp(Item));
@@ -249,7 +249,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
         if (!Exact(ModelState, TEXT("placed"))) { continue; }
         FLiveCoreModel Item;
         const auto Shape = Object(Object(Model, TEXT("geometry")), TEXT("support_shape"));
-        if (!String(Model, TEXT("model_instance_id"), Item.Id) || !Exact(Pair.Key, Item.Id) ||
+        if (!String(Model, TEXT("model_instance_id"), Item.Id) || !FStringView(*Pair.Key, Pair.Key.Len()).Equals(Item.Id, ESearchCase::CaseSensitive) ||
             !String(Model, TEXT("owner_player_id"), Item.OwnerPlayerId) || !Position(Object(Object(Model, TEXT("pose")), TEXT("position")), Item.PositionInches) ||
             !IsString(Shape, TEXT("kind"), TEXT("circle")) || !Number(Shape, TEXT("radius_inches"), Item.RadiusInches) || Item.RadiusInches <= 0)
         { OutError = TEXT("Placed model lacks supported actual pose/base geometry."); return false; }

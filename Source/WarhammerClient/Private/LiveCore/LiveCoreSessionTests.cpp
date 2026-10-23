@@ -12,7 +12,7 @@
 namespace
 {
 namespace E01 = Warhammer::Migration::E01;
-constexpr EAutomationTestFlags Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::EngineFilter;
+constexpr EAutomationTestFlags Flags = EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::EngineFilter;
 FString FixturePath(const TCHAR* Relative)
 {
     return FPaths::Combine(FPaths::ProjectDir(), TEXT("tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91"), Relative);
