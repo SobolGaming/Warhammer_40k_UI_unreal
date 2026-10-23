@@ -1,0 +1,532 @@
+{
+  "recordKind": "A2P0_CANONICAL_PAYLOAD_REFERENCE_DATA_TEMPLATE",
+  "state": "UNBOUND_NOT_EXECUTION_AUTHORITY",
+  "captureScope": "PAYLOAD_SEMANTICS_ONLY",
+  "historicalArcadeBaseline": "5088c1c49dcaff29eb59fb64b3063d30214dde73",
+  "outputRoot": "__UNBOUND_CREATE_NEW_CAPTURE_CHILD__",
+  "limits": {
+    "seconds": 60,
+    "jsonBytes": 2093056,
+    "maximumDepth": 64,
+    "maximumProjectionNodes": 100000
+  },
+  "runtime": {
+    "version": "3.14.5",
+    "requiredFlags": [
+      "-I",
+      "-B",
+      "-S"
+    ],
+    "python": {
+      "path": "C:\\Users\\Rabid\\AppData\\Roaming\\uv\\python\\cpython-3.14.5-windows-x86_64-none\\python.exe",
+      "bytes": 91648,
+      "sha256": "5556F2048A17B14693FFADEB25DC0ADD537933873CEE2CA623CF981CA65A6168"
+    },
+    "venvConfiguration": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\pyvenv.cfg",
+      "bytes": 212,
+      "sha256": "B4E9C1DADE3429281B15DE9C7D07D58F705E58B7679067658D7C98102B3D724F"
+    },
+    "stdlibHome": "C:\\Users\\Rabid\\AppData\\Roaming\\uv\\python\\cpython-3.14.5-windows-x86_64-none",
+    "stdlibWholeClosureCertified": false
+  },
+  "originalModules": [
+    {
+      "name": "warhammer40k_arcade_ui",
+      "isPackage": true,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\__init__.py",
+        "bytes": 141,
+        "sha256": "5C2B81B31C2A94752312838175A65B6DECAB0A399BCF335B54219F9B75E0B888"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    },
+    {
+      "name": "warhammer40k_arcade_ui.config",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\config.py",
+        "bytes": 631,
+        "sha256": "2267168132C7D54655B1229639E8356EFD9FD2C246EDFE429F5AA7DDF028EB32"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    },
+    {
+      "name": "warhammer40k_arcade_ui.preferences.diagnostics",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\preferences\\diagnostics.py",
+        "bytes": 1146,
+        "sha256": "8DD541209CB16B57D9F37443BD115F032364376B3B215D8E66348F6D60F4EDFA"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    },
+    {
+      "name": "warhammer40k_arcade_ui.preferences.registries",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\preferences\\registries.py",
+        "bytes": 6483,
+        "sha256": "A82ECFBD8E839FD60B74D09CC81DBAFB3009266E76A9DD0E9C0D6285A6322723"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    },
+    {
+      "name": "warhammer40k_arcade_ui.preferences.schema",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\preferences\\schema.py",
+        "bytes": 40697,
+        "sha256": "9C7B1C08D7053D5D5376DF1DA5FF53C11BDF597A52EFC18CDC0BF3388D9C309F"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    },
+    {
+      "name": "warhammer40k_arcade_ui.hud.toolkit",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\hud\\toolkit.py",
+        "bytes": 38617,
+        "sha256": "5C785A01912DA99C2A33789FC78124E59799E1B5A511E6046FD3EA415FF55807"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    },
+    {
+      "name": "warhammer40k_arcade_ui.hud.composition",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\hud\\composition.py",
+        "bytes": 36981,
+        "sha256": "C8A5CAA974AE6A278E08961ECD248E3C0855784DA24920B65975E8664E749216"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    },
+    {
+      "name": "warhammer40k_arcade_ui.resources",
+      "isPackage": true,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\resources\\__init__.py",
+        "bytes": 63,
+        "sha256": "4634CE5F0F5AD8D28B06F660BB91A1CDA10D4116A095B7266A4108D2A482960E"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    },
+    {
+      "name": "warhammer40k_arcade_ui.resources.source",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\resources\\source.py",
+        "bytes": 5030,
+        "sha256": "419635D732499F6CCD8C591FC783567D452E429CCB131BD2FBCD578F3D07A372"
+      },
+      "executionRole": "ORIGINAL_FULL_SOURCE_BYTES"
+    }
+  ],
+  "namespacePackages": [
+    "warhammer40k_arcade_ui.hud",
+    "warhammer40k_arcade_ui.preferences",
+    "warhammer40k_arcade_ui.render"
+  ],
+  "colorProjection": {
+    "name": "warhammer40k_arcade_ui.render.primitives",
+    "sourceDescriptor": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\render\\primitives.py",
+      "bytes": 35271,
+      "sha256": "A50155FCA9136EE0B551D94A352DD02B5787CE5B75EAF947A6615BD7BF83899E"
+    },
+    "physicalLine": 25,
+    "exactUtf8Text": "type Color = tuple[int, int, int, int]\r\n",
+    "excerptBytes": 40,
+    "excerptSha256": "CF4DCDE5774E738B6C5803782E070B8399EAD7F1CD3DA3C47A8CAC283871287D",
+    "exports": [
+      "Color"
+    ],
+    "executionRole": "SOURCE_EXACT_TYPE_ALIAS_ONLY_NOT_ORIGINAL_MODULE",
+    "limitations": [
+      "No other primitives exports",
+      "Projected filename/line metadata",
+      "No full render/package equivalence"
+    ]
+  },
+  "yamlVersion": "6.0.3",
+  "yamlModules": [
+    {
+      "name": "yaml",
+      "isPackage": true,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\__init__.py",
+        "bytes": 12311,
+        "sha256": "B19DFCC333D6A75DFD73073901164507252F271B41D3B5F7D85510033A0547A7"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.composer",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\composer.py",
+        "bytes": 4883,
+        "sha256": "FCAA37D16AFA783594794A5AB94193DCB720F503C19CE3D59539C8311189F453"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.constructor",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\constructor.py",
+        "bytes": 28639,
+        "sha256": "90D8247DA78B524C10618FD0E857F54F3D97570FE91B5C5513D024EF3FAF88B0"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.dumper",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\dumper.py",
+        "bytes": 2837,
+        "sha256": "3CB72D66563064BA7B5E679477046EBF89D8399D940670C8532F3E94A7CB17EA"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.emitter",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\emitter.py",
+        "bytes": 43006,
+        "sha256": "8E086D694EDE170837D5B1B407B45979AFF6F40762F422A65EAFD08E04290A44"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.error",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\error.py",
+        "bytes": 2533,
+        "sha256": "021F73FADA072546C4F63F8CF18A7181244CE4280B09CC15CC980B2D1176171A"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.events",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\events.py",
+        "bytes": 2445,
+        "sha256": "E74FD392C810884E2EA7E94AA3F57E9C1CBEB402319083D0C58E6A0E1282787C"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.loader",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\loader.py",
+        "bytes": 2061,
+        "sha256": "5156BECC8AA6905482218ABF3E04869B835226DB4763645FFF3438FDBD5F1CDD"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.nodes",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\nodes.py",
+        "bytes": 1440,
+        "sha256": "80F28D8FCA4A09D87677882BDE021820D9CF39A3B11A12405226211919CF13CE"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.parser",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\parser.py",
+        "bytes": 25495,
+        "sha256": "8A55A9E6FBE0A07146CEF3990C8B45A068C3E83E369E1959AD9CA30306B4A09A"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.reader",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\reader.py",
+        "bytes": 6794,
+        "sha256": "D1D9B38AB3A20C6E17A38D519EE412ECAF6B918DF18C78956AC7C330D4EA08DC"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.representer",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\representer.py",
+        "bytes": 14190,
+        "sha256": "22E58FF9C016F6C1CA1274B4802A926BCF78935060E1C813C5A0F021C6D143E6"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.resolver",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\resolver.py",
+        "bytes": 9004,
+        "sha256": "F4BF9561F9B89961F1503D558385FBAE30D12BFED565DE9BF76C33ABB63620A6"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.scanner",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\scanner.py",
+        "bytes": 51279,
+        "sha256": "60433788B652690C17710460DA5D91E0C753D3318FD85F5E1E42862A71F25906"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.serializer",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\serializer.py",
+        "bytes": 4165,
+        "sha256": "0A1B85826854D35863E31808F0668ABFABDF33606E8F06BD8BB7761401E3EDC0"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    },
+    {
+      "name": "yaml.tokens",
+      "isPackage": false,
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\.venv\\Lib\\site-packages\\yaml\\tokens.py",
+        "bytes": 2573,
+        "sha256": "953408CD2570F0C83DC2FE39F7E4E388E41EEB05738AA69196A5F6FFCF6BA79E"
+      },
+      "executionRole": "ORIGINAL_PYYAML_PYTHON_SOURCE"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "C01",
+      "originalId": "A1-C01",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\resources\\preferences\\default.yaml",
+        "bytes": 2426,
+        "sha256": "7EAF7EF3B36347661E74F1E2C3D983A9BF9727C5A2210C861B56FC45DE95CA6C"
+      },
+      "lane": "preferences",
+      "preview": false,
+      "origin": {
+        "kind": "builtin",
+        "name": "preferences/default.yaml",
+        "path": null
+      }
+    },
+    {
+      "id": "C02",
+      "originalId": "A1-C02",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\resources\\preferences\\dense-debug.yaml",
+        "bytes": 2594,
+        "sha256": "CDF1F0AE216184B546E09D2C2149468FED4A225D1795CD47923EDEF308AAA966"
+      },
+      "lane": "preferences",
+      "preview": false,
+      "origin": {
+        "kind": "builtin",
+        "name": "preferences/dense-debug.yaml",
+        "path": null
+      }
+    },
+    {
+      "id": "C03",
+      "originalId": "A1-C03",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\resources\\preferences\\keyboard-heavy.yaml",
+        "bytes": 2663,
+        "sha256": "FD95C4AC90AFAAAF3648DF6B687B74E1CB482F2A1551F6F0B7078996D149C2F1"
+      },
+      "lane": "preferences",
+      "preview": false,
+      "origin": {
+        "kind": "builtin",
+        "name": "preferences/keyboard-heavy.yaml",
+        "path": null
+      }
+    },
+    {
+      "id": "C04",
+      "originalId": "A1-C04",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\resources\\preferences\\command-bench.yaml",
+        "bytes": 2439,
+        "sha256": "99836D136B39EA95B903FD62B96A97F0E7C791D2764B351BB939DFA368512DC7"
+      },
+      "lane": "preferences",
+      "preview": false,
+      "origin": {
+        "kind": "builtin",
+        "name": "preferences/command-bench.yaml",
+        "path": null
+      }
+    },
+    {
+      "id": "C05",
+      "originalId": "A1-C05",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\resources\\hud\\default-hud.yaml",
+        "bytes": 3051,
+        "sha256": "7ECB00781BB0C67C9412F2979E909A82B31941AF530583388094D60BD8FCF96A"
+      },
+      "lane": "hud",
+      "preview": false,
+      "origin": {
+        "kind": "builtin",
+        "name": "hud/default-hud.yaml",
+        "path": null
+      }
+    },
+    {
+      "id": "C06",
+      "originalId": "A1-C06",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\src\\warhammer40k_arcade_ui\\resources\\hud\\command-bench-hud.yaml",
+        "bytes": 2996,
+        "sha256": "FE6C62F92146AC2866564C379966F4E5DEB9EC5D07900C2EAD5009EEC46CA883"
+      },
+      "lane": "hud",
+      "preview": false,
+      "origin": {
+        "kind": "builtin",
+        "name": "hud/command-bench-hud.yaml",
+        "path": null
+      }
+    },
+    {
+      "id": "C07",
+      "originalId": "A1-C07",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\unit-datasheet-preview.yaml",
+        "bytes": 1074,
+        "sha256": "1FE643A2A553CE09906281283CD7831B0475429E67CFA9A180986CE41CD0E056"
+      },
+      "lane": "hud",
+      "preview": true,
+      "origin": {
+        "kind": "explicit_path",
+        "name": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\unit-datasheet-preview.yaml",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\unit-datasheet-preview.yaml"
+      }
+    },
+    {
+      "id": "C08",
+      "originalId": "A1-C08",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\workbench-preview.yaml",
+        "bytes": 2833,
+        "sha256": "866CEC3B6BF49DCD45855B0F821F564866A56284F80268D1DD0F580BDD07DE56"
+      },
+      "lane": "hud",
+      "preview": true,
+      "origin": {
+        "kind": "explicit_path",
+        "name": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\workbench-preview.yaml",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\workbench-preview.yaml"
+      }
+    },
+    {
+      "id": "C09",
+      "originalId": "A1-C09",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\overflow-stress-preview.yaml",
+        "bytes": 2934,
+        "sha256": "52D0A9F5E8FDF134B6566CD6E9D02A01B0CDB6E1C186D065865950DB5851A728"
+      },
+      "lane": "hud",
+      "preview": true,
+      "origin": {
+        "kind": "explicit_path",
+        "name": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\overflow-stress-preview.yaml",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\overflow-stress-preview.yaml"
+      }
+    },
+    {
+      "id": "C10",
+      "originalId": "A1-C10",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\player-units-roster-preview.yaml",
+        "bytes": 4259,
+        "sha256": "B7BE9ADD6A07137E09F8FA29D64850D7AD0BCFAFAAD5E4F5AFA891E3261CF6AF"
+      },
+      "lane": "hud",
+      "preview": true,
+      "origin": {
+        "kind": "explicit_path",
+        "name": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\player-units-roster-preview.yaml",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\examples\\player-units-roster-preview.yaml"
+      }
+    }
+  ],
+  "documentCopies": [
+    {
+      "canonicalId": "C01",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\preferences\\default.yaml",
+        "bytes": 2426,
+        "sha256": "7EAF7EF3B36347661E74F1E2C3D983A9BF9727C5A2210C861B56FC45DE95CA6C"
+      },
+      "expectedByteEqual": true
+    },
+    {
+      "canonicalId": "C02",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\preferences\\dense-debug.yaml",
+        "bytes": 2594,
+        "sha256": "CDF1F0AE216184B546E09D2C2149468FED4A225D1795CD47923EDEF308AAA966"
+      },
+      "expectedByteEqual": true
+    },
+    {
+      "canonicalId": "C03",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\preferences\\keyboard-heavy.yaml",
+        "bytes": 2663,
+        "sha256": "FD95C4AC90AFAAAF3648DF6B687B74E1CB482F2A1551F6F0B7078996D149C2F1"
+      },
+      "expectedByteEqual": true
+    },
+    {
+      "canonicalId": "C04",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\preferences\\command-bench.yaml",
+        "bytes": 2439,
+        "sha256": "99836D136B39EA95B903FD62B96A97F0E7C791D2764B351BB939DFA368512DC7"
+      },
+      "expectedByteEqual": true
+    },
+    {
+      "canonicalId": "C05",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\default-hud.yaml",
+        "bytes": 3051,
+        "sha256": "7ECB00781BB0C67C9412F2979E909A82B31941AF530583388094D60BD8FCF96A"
+      },
+      "expectedByteEqual": true
+    },
+    {
+      "canonicalId": "C06",
+      "descriptor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_arcade\\docs\\hud\\command-bench-hud.yaml",
+        "bytes": 2996,
+        "sha256": "FE6C62F92146AC2866564C379966F4E5DEB9EC5D07900C2EAD5009EEC46CA883"
+      },
+      "expectedByteEqual": true
+    }
+  ]
+}

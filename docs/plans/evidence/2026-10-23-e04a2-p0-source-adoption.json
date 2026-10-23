@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_E04_A2P0_MINIMUM_GUARDED_SOURCE_AND_PACKET_ADOPTION",
+  "recordedUtc": "2026-10-23T18:45:12.3754142Z",
+  "status": "SOURCE_ADOPTED_EXECUTION_NOT_RUN_FRESH_SOURCE_PENDING",
+  "sourceBase": "acb1cca2cda0eba6a44254da98bd172128cb40bb",
+  "adoptedFiles": [
+    {
+      "canonicalPath": "scripts/migration/a2p0/collect_canonical_reference.py",
+      "sha256": "22F67DF718E5402D27BE64453008FD0C615EA79DD53C57BA7D2103506F4C837B",
+      "bytes": 13412
+    },
+    {
+      "canonicalPath": "scripts/migration/a2p0/A2P0OwnedJobSupervisor.cs",
+      "sha256": "0E212A03732BEF7ABBD0C1639A644D4A81A7FDAF241337E89517055A3793154A",
+      "bytes": 27948
+    },
+    {
+      "canonicalPath": "scripts/migration/a2p0/Invoke-A2P0CanonicalReferenceWorker.ps1",
+      "sha256": "612C474B566FAF51565C614853D579CA926B51D764D134F27B789A52718E4EC6",
+      "bytes": 14054
+    },
+    {
+      "canonicalPath": "scripts/migration/a2p0/Invoke-A2P0OuterWatchdog.ps1",
+      "sha256": "BFB020843D87E073C97655C5D16D05A249E3A793339AC588FC8D3B376112F986",
+      "bytes": 15154
+    },
+    {
+      "canonicalPath": "scripts/migration/a2p0/reference-dependencies.template.json",
+      "sha256": "B79B61F2E99F9BF8C8CA60CC4A408108F4541267403C5F4A0D274793EF620D37",
+      "bytes": 19792
+    }
+  ],
+  "packet": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-canonical-reference-packet.md",
+    "sha256": "20EEFF90C7B5BD6B0D51E0299E3DE0B265341EA17D26E7BAE82B6DCBCC3505E1",
+    "bytes": 13730
+  },
+  "authorityBasis": "Existing OWN13 migration continuation, plan G-EXPERIMENT; prepare exact bounded scope and fresh SOURCE before any one-shot capture GO. Standing private source/API review consent is separate.",
+  "priorBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-limited-admin-root-20261023T181509Z-304687ce\\root-rev131-bounded-acceptance-checkpoint-backup.original.json",
+    "bytes": 760,
+    "sha256": "9C9BABCBAA327E3BDF31DBDCB216B7B40F249E5FACC2684C600B19A602A794BA"
+  },
+  "scope": {
+    "captureScope": "PAYLOAD_SEMANTICS_ONLY",
+    "canonicalInputs": 10,
+    "documentationCopyRelations": 6,
+    "originalUiModules": 9,
+    "purePyYamlModules": 16,
+    "synthesizedNamespacePackages": 3,
+    "projection": "Exact original Color-only alias, not full render module",
+    "declaredDataDescriptorOccurrences": 44,
+    "interpreter": "Fixed direct installed CPython3.14.5 -I -B -S; no venv launcher or fallback",
+    "sourceDataState": "UNBOUND_NOT_EXECUTION_AUTHORITY",
+    "runId": "UNBOUND",
+    "runtimeBindings": "NOT_CREATED",
+    "runtimeGo": "NOT_CREATED"
+  },
+  "sourceDerivation": {
+    "supervisor": "P0-only derivative of existing26412-byte supervisor, seven hunks; original CRLF fully recovered by root inverse",
+    "originalProposalsPreserved": true,
+    "collector": "Frozen R2 proposal with two prose header edits only; binding constants remain UNBOUND",
+    "data": "Clean exact-field subset of frozen R2 dependency manifest, fixed direct-base Python from R3; state/output remain UNBOUND",
+    "workerOuter": "Frozen guarded proposals, prose header edits and explicit retained receipt identity/start/close fields; no behavior execution"
+  },
+  "inertChecks": {
+    "sourceBodies": "Root read complete collector, CSharp, worker, outer and direct-source/API ledger",
+    "supervisorWholeForwardAndOriginalCrLfInverse": "PASS",
+    "workerWholeAdditionInverse": "PASS",
+    "outerR2LiteralForwardInverse": "PASS",
+    "headerAndReceiptIdentityEditWholeInverses": "PASS",
+    "dataDescriptorOccurrencesMatched": 44,
+    "copyRelationsMatched": 6,
+    "jsonTemplateParse": "PASS",
+    "powerShellParse": {
+      "host": "Pinned PowerShell7.6.5",
+      "outerFunctions": 9,
+      "workerFunctions": 10,
+      "actualConsole": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\powershell-inert-ast.after-receipt-joins.actual-console.original.txt",
+        "bytes": 929,
+        "sha256": "994B14853EC9FA09740631D515038E57151E60C391E2E99EB098E6C36C5E564B"
+      },
+      "errors": 0
+    },
+    "candidateScriptsExecuted": false,
+    "pythonImportedOrExecuted": false,
+    "csharpCompiled": false,
+    "captureTestsOrControls": "NOT_RUN",
+    "affectedIndependentSource": "NOT_RUN",
+    "finalCodeAndDifferentReq": "NOT_RUN"
+  },
+  "prospectiveBounds": {
+    "childLaunches": 0,
+    "cleanupSeconds": 5,
+    "retryMaximum": 0,
+    "pythonApplicationRoots": 1,
+    "childSeconds": 60,
+    "aggregateCeiling": 4194304,
+    "extraPathsOrLargerFilesFromSlack": false,
+    "outerMonitoredSeconds": 75,
+    "retainedPaths": {
+      "captureReferenceJson": 2093056,
+      "processReceipt": 131072,
+      "outerExecutionReceipt": 65536,
+      "stdout": 16384,
+      "stderr": 65536
+    },
+    "workerCooperativeSeconds": 70,
+    "allUncertainty": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "sumIndividualCaps": 2371584
+  },
+  "independentReviewRequirements": "Freeze exact subject/source/run/data/runtime/API/permission bindings, fresh unprimed read-only SOURCE and root admission before capture. Initial bodies exclude author notes, peer verdicts, mixed history and credentials. Actual closed raw12/selected8 plus independent before-body rehash required.",
+  "notMeasured": [
+    "Actual parser normalization/diagnostics from a Python capture",
+    "Public text/file/default IO, JSON/orjson, export/reimport",
+    "Unreal compatibility/HUD/input/rendering",
+    "727 materialized fixtures or full A2/E04/M02/playable slice",
+    "Native marshalling/deadline/cap/cleanup behavior",
+    "Universal preemption/effect absence or failed-child-attempt attribution",
+    "Linux execution"
+  ],
+  "preserved": {
+    "visible": "HOLD_UNTIL_FRESH_OWNER_APPROVAL",
+    "linux": "UNTESTED_HOST_LATER",
+    "remainingVisibleLaunches": 0,
+    "own17": "DEFERRED_UNPROVEN",
+    "allEarlierRawFailuresAndUnknowns": "UNCHANGED",
+    "boundedA1gAcceptance": "UNCHANGED",
+    "gImplement": "NOT_GRANTED",
+    "gResearch": "RESEARCH_INCOMPLETE",
+    "siblings": "REFERENCE_ONLY_NOT_EDITED"
+  },
+  "next": "Checkpoint/push/exact-gh verify source and packet, bind fresh private data/collector/material review controls and obtain fresh affected SOURCE. No capture or broader acceptance from this adoption."
+}
