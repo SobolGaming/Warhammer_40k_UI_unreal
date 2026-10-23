@@ -11,8 +11,9 @@ using System.Threading;
 namespace Warhammer.A2P0 {
 public static class Supervisor {
     const uint QUERY=0x0400, SYNCHRONIZE=0x00100000, CREATE_SUSPENDED=4,
-        UNICODE_ENV=0x400, EXTENDED=0x80000, NO_WINDOW=0x08000000,
+        UNICODE_ENV=0x400, EXTENDED=0x80000, DETACHED_PROCESS=0x00000008,
         KILL_ON_CLOSE=0x2000, WAIT_OBJECT_0=0, WAIT_TIMEOUT=258;
+    const uint CREATE_FLAGS=CREATE_SUSPENDED|UNICODE_ENV|EXTENDED|DETACHED_PROCESS;
     const uint INVALID=0xffffffff;
     static readonly IntPtr InvalidHandle=new IntPtr(-1);
     [StructLayout(LayoutKind.Sequential)] struct SA { public int n; public IntPtr sd; [MarshalAs(UnmanagedType.Bool)] public bool inherit; }
@@ -405,6 +406,8 @@ public static class Supervisor {
             {"timedOut",false},{"cleanupConfirmed",false},{"technicalBlocked",false},{"rootExitWhileMembersActive",false},{"jobAccounting",samples},
             {"shutdownRequests",shutdown},{"secondaryErrors",errors},{"primaryError",null},{"syntheticFault",syntheticFault},
             {"visibleWindowRequested",false},{"childCreationAttempts","NOT_OBSERVED_OR_ATTRIBUTED"},
+            {"consoleModeRequested","DETACHED_PROCESS"},{"creationFlagsRequested",CREATE_FLAGS},
+            {"consoleModeEffectiveness","NOT_QUERIED"},
             {"cleanupBudgetSeconds",5},{"operatorRemainingMilliseconds",operatorRemainingMilliseconds},
             {"outerHardWall","REQUIRED_EXTERNAL_WATCHDOG_NOT_IMPLEMENTED_BY_THIS_CLASS"},
             {"deadlineOrigin","MONOTONIC_CREATEPROCESS_CALL_START_CONSERVATIVE_OF_ACTUAL_CREATION"}};
@@ -457,7 +460,7 @@ public static class Supervisor {
             r["creationCallStartedElapsedSeconds"]=creationCallStart;
             double runDeadline=creationCallStart+60;
             PI created=new PI();
-            WinCheck(CreateProcessW(exe,command,IntPtr.Zero,IntPtr.Zero,true,CREATE_SUSPENDED|UNICODE_ENV|EXTENDED|NO_WINDOW,env,cwd,ref startup,out created),"CreateProcess(suspended/job-list)");
+            WinCheck(CreateProcessW(exe,command,IntPtr.Zero,IntPtr.Zero,true,CREATE_FLAGS,env,cwd,ref startup,out created),"CreateProcess(suspended/job-list)");
             process=created; assigned=true;
             r["creationJobAssociation"]="PROC_THREAD_ATTRIBUTE_JOB_LIST";
             r["pid"]=process.pid;
