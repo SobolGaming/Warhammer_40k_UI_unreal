@@ -28,13 +28,20 @@ enum class EInputProofStep : uint8 { Wait, Done };
 class FLiveCameraInputCommand final : public IAutomationLatentCommand
 {
 public:
-    explicit FLiveCameraInputCommand(FAutomationTestBase* InTest)
-        : Test(InTest), Started(FPlatformTime::Seconds()) {}
+    FLiveCameraInputCommand(FAutomationTestBase* InTest, bool bInOwnedProcessOptIn)
+        : Test(InTest), Started(FPlatformTime::Seconds()), bOwnedProcessOptIn(bInOwnedProcessOptIn) {}
 
     virtual ~FLiveCameraInputCommand() override
     {
-        // Also restore owned state if shutdown abandons the latent command.
-        Restore();
+        if (bOwnedProcessOptIn && !bCleanupCompleted && (bOwnsSetup || bOwnsDriver))
+        {
+            // Only the explicitly opted-in, dedicated supervised proof process may
+            // terminate here. Do not restore handlers or discard pending work in a
+            // still-running host. Flags express owner intent, not security isolation.
+            // The retained launch harness also has a 600-second forced watchdog.
+            UE_LOG(LogTemp, Error, TEXT("Live camera input abandoned before cleanup; terminating its dedicated proof process."));
+            FPlatformMisc::RequestExitWithStatus(true, 1, TEXT("LiveCameraInput.AbandonedOwnedProcess"));
+        }
     }
 
     virtual bool Update() override
@@ -267,12 +274,12 @@ private:
         {
             if (CleanupStarted == 0) { CleanupStarted = FPlatformTime::Seconds(); }
             if (FPlatformTime::Seconds() - CleanupStarted < 5) { return false; }
-            if (!bExitRequested)
-            {
-                Check(false, TEXT("Driver did not quiesce; owned proof process must close"));
-                bExitRequested = true; FPlatformMisc::RequestExit(false, TEXT("LiveCameraInput.DriverDidNotQuiesce"));
-            }
-            return false; // No cancellation API: retain the command until owned process shutdown.
+            Check(false, TEXT("Driver did not quiesce; terminating the dedicated proof process with failure"));
+            // No cancellation API is available. Only RunTest's dedicated-process
+            // opt-in permits forced failure exit; never Restore while work is pending.
+            // The outer retained watchdog covers a stall in platform exit callbacks.
+            FPlatformMisc::RequestExitWithStatus(true, 1, TEXT("LiveCameraInput.DriverDidNotQuiesce"));
+            return true; // Failure, not a cleanup success; force termination precedes destruction.
         }
         if (Future.IsValid())
         { Check(Future->GetFuture().Get(), TEXT("Pending/cleanup driver sequence completed")); Future.Reset(); Sequence.Reset(); }
@@ -301,6 +308,7 @@ private:
             if (const auto Focus = OriginalFocus.Pin())
             { Check(FSlateApplication::Get().GetKeyboardFocusedWidget() == Focus, TEXT("Original Slate keyboard focus restored")); }
         }
+        bCleanupCompleted = true;
         Test->AddInfo(FString::Printf(TEXT("LiveCoreCamera.Input assertions=%d elapsed=%.3fs status=%s; available Core state unchanged is not a zero-HTTP-attempt proof."),
             Assertions, FPlatformTime::Seconds() - Started, bFailed ? TEXT("FAIL") : TEXT("PASS")));
         return true;
@@ -319,7 +327,8 @@ private:
     uint64 UiKeys = 0, FrameKeys = 0;
     int32 Index = 0, Assertions = 0;
     bool bInitialized = false, bOwnsSetup = false, bOwnsDriver = false, bFailed = false;
-    bool bFinishing = false, bCleanupQueued = false, bExitRequested = false;
+    bool bFinishing = false, bCleanupQueued = false, bCleanupCompleted = false;
+    const bool bOwnedProcessOptIn;
 };
 }
 
@@ -327,13 +336,19 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreCameraRenderedInputTest, "Warhammer.Re
     EAutomationTestFlags::ClientContext | EAutomationTestFlags::NonNullRHI | EAutomationTestFlags::EngineFilter)
 bool FLiveCoreCameraRenderedInputTest::RunTest(const FString&)
 {
-    FString CoreUrl;
+    FString CoreUrl, TestExit;
     if (!FParse::Param(FCommandLine::Get(), TEXT("LiveCoreCameraInputProof")) ||
+        !FParse::Param(FCommandLine::Get(), TEXT("LiveCoreCameraInputProofOwnedProcess")) ||
+        !FParse::Param(FCommandLine::Get(), TEXT("game")) || !FParse::Param(FCommandLine::Get(), TEXT("unattended")) ||
+        !FParse::Value(FCommandLine::Get(), TEXT("TestExit="), TestExit) ||
+        !TestExit.Equals(TEXT("Automation Test Queue Empty"), ESearchCase::CaseSensitive) ||
         FParse::Value(FCommandLine::Get(), TEXT("CoreUrl="), CoreUrl) ||
         !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_ADMIN_TOKEN")).IsEmpty() ||
         !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN")).IsEmpty())
-    { AddError(TEXT("Requires -LiveCoreCameraInputProof with no CoreUrl or Core credentials.")); return false; }
-    FAutomationTestFramework::Get().EnqueueLatentCommand(MakeShared<FLiveCameraInputCommand>(this));
+    { AddError(TEXT("Requires both camera-proof opt-ins, -game -unattended -TestExit=\"Automation Test Queue Empty\", no CoreUrl and no Core credentials.")); return false; }
+    // This invocation authorizes failure termination of its dedicated supervised
+    // proof process. It is not a security/authentication or process-ownership proof.
+    FAutomationTestFramework::Get().EnqueueLatentCommand(MakeShared<FLiveCameraInputCommand>(this, true));
     return true;
 }
 #endif

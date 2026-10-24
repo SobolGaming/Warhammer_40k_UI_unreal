@@ -75,7 +75,7 @@ public:
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 #if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
-    // Explicit opt-in, disconnected-only synthetic presentation setup; no Core state injection.
+    // Dedicated supervised-process opt-ins and disconnected-only synthetic setup; no Core state injection.
     bool BeginCameraInputProofForTests(FString& OutError);
     void EndCameraInputProofForTests();
     bool ObserveCameraInputProofForTests(FLiveCoreCameraInputObservation& Out) const;

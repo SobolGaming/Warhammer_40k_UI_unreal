@@ -670,12 +670,16 @@ void FLiveCoreScene::FrameBoard()
 bool AWarhammerClientGameMode::BeginCameraInputProofForTests(FString& OutError)
 {
     check(IsInGameThread());
-    FString SuppliedCoreUrl;
+    FString SuppliedCoreUrl, TestExit;
     if (!FParse::Param(FCommandLine::Get(), TEXT("LiveCoreCameraInputProof")) ||
+        !FParse::Param(FCommandLine::Get(), TEXT("LiveCoreCameraInputProofOwnedProcess")) ||
+        !FParse::Param(FCommandLine::Get(), TEXT("game")) || !FParse::Param(FCommandLine::Get(), TEXT("unattended")) ||
+        !FParse::Value(FCommandLine::Get(), TEXT("TestExit="), TestExit) ||
+        !TestExit.Equals(TEXT("Automation Test Queue Empty"), ESearchCase::CaseSensitive) ||
         FParse::Value(FCommandLine::Get(), TEXT("CoreUrl="), SuppliedCoreUrl) ||
         !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_ADMIN_TOKEN")).IsEmpty() ||
         !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN")).IsEmpty())
-    { OutError = TEXT("Camera input proof requires explicit opt-in, no CoreUrl and no Core credentials."); return false; }
+    { OutError = TEXT("Camera input proof requires both dedicated-process opt-ins, -game -unattended, exact TestExit, no CoreUrl and no Core credentials."); return false; }
     if (!Scene || !Scene->bAttached || !Scene->Camera.IsValid() || !Scene->CameraSurface.IsValid() ||
         !Scene->Panel.IsValid() || Scene->NavigationBeforeInputProof.IsSet())
     { OutError = TEXT("Live camera surface is unavailable or already owned by an input proof."); return false; }
