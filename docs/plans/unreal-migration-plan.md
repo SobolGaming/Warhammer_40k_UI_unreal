@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 152 — owner startup guide and tabletop camera source checked; visible HOLD active, 2026-10-24 UTC / 2026-10-23 EDT.**
+**Revision 153 — bounded visible testing resumed; manual launcher and camera subset observed, native input regression in progress, 2026-10-24 UTC / EDT.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -19,7 +19,7 @@ The owner prioritizes a useful client driving the existing Core over exhaustive 
 
 Owner direction at 23:08 UTC supersedes earlier exhaustive proof sequencing. Historical gate labels do not prevent ordinary slice implementation/builds/focused checks. No new tool installation, Core edit or production-host development is included. Independent CODE and separate requirements review still precede acceptance; do not call unchecked work complete.
 
-The earlier bounded visible real-Core test completed and is closed. The latest relayed human instruction returns visible testing to **HOLD at 10:15 p.m. America/New_York on October 23 (02:15 UTC October 24)** until explicit resumption. No owned visible test remains active; this increment proceeds in the background now. Relayed human approvals may be accepted until revoked, preserving their scope and bounds. Neither this feature request nor source-review consent grants blanket desktop authority.
+The owner directly resumed bounded visible testing on October 24, approving camera controls, board framing, UI isolation, startup focus and the manual launcher. This supersedes the earlier October 23 HOLD for that scope. Use one game window at a time, at most ten minutes per launch, with owned-process cleanup; preserve actual results and remaining gaps. Source-review consent does not grant unrelated desktop authority.
 
 ## Project references and boundaries
 
@@ -54,7 +54,8 @@ The owner wants to launch the existing client/server personally on Windows and L
 - [x] Pass ten stubbed manual-launcher tests and CLI help; verify the actual installed Windows Core identity through the new wrapper without reading credentials or opening a client. Preserve the first sandbox Temp-permission failure and the same-source workspace-temp rerun.
 - [x] Pass non-graphical default-GameMode startup at `721d229` / camera source `1193cb6`: exit 0 in 8.24 seconds, intended GameMode and normal benchmark exit, no original focus error or Error/Fatal lines, unchanged Config. This is not positive focus/input proof.
 - [x] Obtain fresh independent CODE and distinct requirements review of frozen `721d229`: both PASS for affected source/documentation; all 43 inputs matched after review. [Evidence and provenance](evidence/2026-10-23-live-core-ergonomics.json).
-- [ ] Observe camera controls, framing/resize, UI isolation and repaired startup focus in an applicable approved visible workflow. **Pending HOLD resumption; no new visible run is being started now.**
+- [x] Observe a [bounded actual Python manual-launcher workflow](evidence/2026-10-24-live-core-camera-visible.md) at `a3ededb`: keyboard startup navigation, real Core board, wheel zoom, Frame board, full-board fit across four observed window sizes, UI wheel isolation, refresh preservation and one accepted choice. Client/launcher exited 0; Core remained healthy after client close, then owned Stop completed without force; four Config files stayed unchanged.
+- [ ] Finish held RMB orbit/MMB pan and F verification. The desktop helper has no held-button drag API; F attempts in the manual run did not restore framing. Add a focused opt-in Unreal AutomationDriver regression using the actual live widgets/CameraActor and labelled synthetic camera bounds, then build, independently review and execute it within the approved bounds. Synthetic results must not claim live-Core or full rendered-board fidelity.
 - [x] Record actual results/limits and push/exact-ref-verify plan `d0af1a8`, camera `1193cb6` and startup guide/manual launcher `721d229`. Publish the final evidence checkpoint and update existing PR #3 without merging.
 - [ ] Execute native Linux build/render/package when a host is arranged (**UNTESTED**).
 
@@ -95,10 +96,10 @@ Implementation and verification remain separate. The observed visible result bel
 - [x] Compile/link startup-focus repair `d2c242d`: four Windows Editor build actions passed in 7.56 seconds.
 - [x] Complete fresh independent CODE and separate requirements reviews of `d2c242d`: both PASS for the affected source; all ten frozen inputs matched after review.
 - [x] Run the default GameMode non-graphically at `f5e8180` / runtime `d2c242d`: NullRHI/offscreen startup exited 0 in 17.34 seconds, logged the intended GameMode and normal benchmark exit, with zero original focus errors or Error/Fatal lines and unchanged Config. This is startup smoke, not positive focus/navigation proof. [Repair evidence](evidence/2026-10-23-live-core-focus-repair.json).
-- [ ] Observe repaired startup focus/navigation under applicable visible-test approval. The earlier rendered result does not verify `d2c242d`.
+- [x] Observe repaired startup focus/navigation in the resumed manual-launcher run at `a3ededb`: Tab reached the endpoint then Connect, Space connected, and no native Error/Fatal lines were recorded. This is the observed keyboard sequence, not exhaustive accessibility coverage.
 - [x] Publish source/headless checkpoints, exact-GitHub-verify each commit and update PR #3.
 - [x] Publish bounded visible result/checklist checkpoint `f5e8180e4da955b8ed4aaaac9ff62430da3ff3ee`, push and exact-GitHub-verify it; keep PR #3 open without merge.
-- [ ] Improve camera framing/responsive sizing and obtain owner feedback. The observed 3840×2160 view cropped the near board edge; fixed-camera setup proof is not full-board-fit proof.
+- [x] Observe corrected full-board framing at initial 3840×2160 and resized 2289×1335, 1602×948 and 1269×762 outer captures. Frame board restored fit after zoom; resize reframed. Owner ergonomics feedback and broader DPI/readability coverage remain open.
 - [ ] Run native Linux build/render/package checks when a host becomes available (**UNTESTED**).
 
 ### Checkpoints and next sequence
@@ -107,7 +108,7 @@ Implementation and verification remain separate. The observed visible result bel
 2. **Connection/state:** implement native transport, board and viewer-state UI. Push source with actual checks and pending verification clearly recorded.
 3. **Action/result:** wire a real offered setup choice, authoritative refresh, explicit errors and same-command reconciliation. Add easy managed-launch/attach instructions; push.
 4. **Focused validation:** build, execute protocol checks and independent reviews. Push findings/fixes and evidence at coherent checkpoints.
-5. **Rendered feedback:** the bounded local setup workflow is observed and published. Camera controls/framing and owner startup instructions now pass affected build/background checks and independent source/documentation reviews. Actual new camera input/framing, repaired focus and real manual-launcher integration remain unchecked during HOLD. Next is that bounded visible workflow after owner resumption, then ergonomics feedback; Linux still needs a native host.
+5. **Rendered feedback:** the resumed manual-launcher workflow now observes repaired startup navigation, real-Core framing/zoom/UI isolation and lifecycle behavior. Complete the focused native Slate regression for held-button orbit/pan and the unresolved F path; build/review it before a bounded visible execution. Then obtain owner ergonomics feedback. Linux still needs a native host.
 
 Combine adjacent implementation steps when they form one coherent runnable increment. Do not create bureaucratic checkpoints for individual lines; every actual checkpoint must be pushed and exact-ref verified. Never force push or upload credentials, private sessions, generated outputs or ignored evidence.
 
@@ -136,13 +137,14 @@ Selected host: checked-out `Warhammer_40k_AI/scripts/run_phase18m_reference_serv
 - Profile preservation remains a product requirement; defer migration proof until a usable client can be prioritized.
 - Linux x86-64 build/render/package remains **UNTESTED**. Windows success cannot stand in for it.
 - External distribution, content provenance/clearance, runtime redistribution and production hosting remain later gates.
-- Existing reference evidence retains its original bounds. The new visible evidence proves one local real-Core setup choice; it does not establish full gameplay, full board fit or later source repairs.
+- Existing reference evidence retains its original bounds. The resumed visible evidence adds actual manual-launcher/startup/board-fit/zoom/Frame/UI observations at `a3ededb`; it does not establish full gameplay, held-button drags, effective F routing, exhaustive DPI/readability or later source repairs.
 
 ## Evidence and history
 
 - [Bounded live-Core visible setup](evidence/2026-10-23-live-core-visible.md), [structured result](evidence/2026-10-23-live-core-visible.json), and [chronological slice progress](evidence/2026-10-23-live-core-slice.md).
 - [Startup-focus repair checks and independent review provenance](evidence/2026-10-23-live-core-focus-repair.json); affected source only, repaired rendering untested.
-- [Owner startup/camera checks and independent review provenance](evidence/2026-10-23-live-core-ergonomics.json); new graphical workflow pending HOLD resumption, Linux UNTESTED.
+- [Owner startup/camera checks and independent review provenance](evidence/2026-10-23-live-core-ergonomics.json); source/background checks at their recorded revision.
+- [Resumed camera/manual-launcher observations](evidence/2026-10-24-live-core-camera-visible.md), [structured result](evidence/2026-10-24-live-core-camera-visible.json); F unresolved, held-button native input follow-up pending, Linux UNTESTED.
 
 - [BOOT01](evidence/2026-10-16-boot01.md).
 - [Original E01 boundary](evidence/2026-10-16-e01-boundary.md), [SLOW120 provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json).

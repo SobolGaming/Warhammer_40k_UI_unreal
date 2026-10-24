@@ -50,7 +50,7 @@ Current client endpoints must be **`http://127.0.0.1:<port>`**, optionally with 
 
 The board's advisory terrain outlines and omission of undeployed models are intentional current limits. A full playable battle is not available yet.
 
-The camera controls are implemented and compiled. Their new rendered/input check is pending the screen HOLD; the earlier fixed-camera run did not verify them. Click the board to give it keyboard focus, then use:
+The camera controls are implemented and compiled. The bounded Windows manual run verified wheel zoom, the Frame board button, full-board framing across window sizes and UI focus isolation. Held-button orbit/pan and the F key are still being checked separately. Click the board to give it keyboard focus, then use:
 
 | Control | Effect |
 |---|---|
@@ -157,4 +157,4 @@ Additional startup/authentication details and package recipes are in [Core devel
 
 The [active migration checklist](docs/plans/unreal-migration-plan.md) separates source implementation, checks, independent reviews and rendered behavior. The [bounded visible Windows setup check](docs/plans/evidence/2026-10-23-live-core-visible.md) at `4dacce3` (runtime `ca315fb`) created a real session and accepted/committed an offered mission choice at revision 2. It exposed the startup-focus error and cropped board edge addressed by later source repairs. The [new camera/startup increment](docs/plans/evidence/2026-10-23-live-core-ergonomics.json) passed the Windows Editor build, 13 native checks, ten stubbed launcher tests, non-graphical startup and fresh independent CODE/requirements reviews. These are source/background results: actual new camera/UI routing, repaired visual focus, real Python-launcher integration and fresh-install execution remain unchecked. All native Linux execution is UNTESTED. Full gameplay, profile/HUD migration, remote participant/spectator completion, production hosting and exhaustive compatibility remain later work.
 
-Agent desktop work is on **HOLD from 10:15 p.m. EDT on 2026-10-23 (02:15 UTC on 2026-10-24)** under the latest owner instruction; until new approval, work remains in the background. Development continues in [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3), without merge. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts; their former current-status sequencing is historical.
+The owner directly resumed bounded camera/UI/startup/manual-launcher testing on 2026-10-24. Each test uses one game window, a ten-minute limit and owned-process cleanup. Development continues in [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3), without merge. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts; their former current-status sequencing is historical.
