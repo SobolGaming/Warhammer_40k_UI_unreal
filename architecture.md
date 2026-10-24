@@ -144,6 +144,14 @@ The currently demonstrated action is `select_secondary_missions`; this is a fini
 
 An uncertain command retains its exact envelope, ID and credential scope for explicit reconciliation. **Uncertain session creation is different:** the create operation has no retry identity in this client, so it blocks automatic retry/recreation. HTTP status and available Core messages remain visible; a timeout or generic error envelope is not treated as proof of rollback.
 
+### Open an existing active session
+
+`OpenExistingSession(endpoint, sessionId)` is a separate read path. It validates the loopback endpoint and bounded path-token ID before credential access/HTTP, retains only the existing player-a credential, reads player-scoped metadata at `GET /sessions/{id}`, then reads that player's projection. `ReadExistingSession` binds exact selected Core/schema, requested ID, active lifecycle, nonnegative revision and the complete current player visibility policy. Creation's administrator/revision0 parser remains strict and separate. Projection revision may advance concurrently but cannot precede the metadata minimum.
+
+The method rejects busy, stopped, already attached or UNKNOWN/pending-command state and never discards uncertain commands. A fresh open clears derived state; an invalid read cannot publish invented scene/options. No POST/start/reset/gameplay request is sent by opening. Core may touch read-side activity timestamps, so this is gameplay/revision invariance rather than byte-identical server metadata. The Slate ID field is editable before attachment and remains read-only/selectable afterward for ordinary copying; Open uses the same guarded session method. Local accepted-action count begins at0 in a fresh client.
+
+Cross-client reopen requires a separately kept-alive Core with client Attach mode. A Managed client stops its in-memory host on exit. Reopening does not restore a lost uncertain-command envelope, provide durable persistence or add session listing/new-principal joining. Those remain later slices. The canonical plan's P2A-V1/V2 require actual visible control/input/error verification in addition to native protocol checks.
+
 ## Unreal startup, UI and world presentation
 
 [WarhammerClient.cpp](Source/WarhammerClient/Private/WarhammerClient.cpp) registers the runtime module. [DefaultEngine.ini](Config/DefaultEngine.ini) selects `/Engine/Maps/Entry` and `AWarhammerClientGameMode`; the project currently has no authored gameplay map dependency.
@@ -152,7 +160,7 @@ An uncertain command retains its exact envelope, ID and credential scope for exp
 
 
 - `BeginPlay` initializes the session object, required meshes/material, transient camera and light. Tick attaches the Slate overlay when the viewport/controller is available.
-- `SLiveCorePanel` contains endpoint, create, typed decision explanations, immediate-submit options, outcome/errors, refresh, reconcile and Frame board controls. The board occupies a separate hit-testable camera surface beside the panel.
+- `SLiveCorePanel` contains endpoint, create, known-session ID/Open, typed decision explanations, immediate-submit options, outcome/errors, refresh, reconcile and Frame board controls. The board occupies a separate hit-testable camera surface beside the panel.
 - `Changed` rebuilds presentation actors only for a newly applied session/projection delivery. The board is a flat display mesh; real terrain polygon boundaries are thin raised outlines; objectives and placed models use discs. These meshes have no gameplay collision and do not define legality.
 - Core coordinates are inches. `DisplayPoint` recenters the board, converts to centimetres and reverses the table Y axis for Unreal display. Models without authoritative poses stay absent; no deployment position is fabricated.
 - Teardown unbinds session/application callbacks, detaches widgets before freeing their scene, cancels active HTTP, releases owned input and destroys transient actors. Mesh/material references are held strongly while the scene needs them.

@@ -55,6 +55,17 @@ The PowerShell launcher does not automatically read `UE_ROOT`. Its other options
 
 Current client endpoints must be **`http://127.0.0.1:<port>`**, optionally with a trailing slash. HTTPS, IPv6, hostnames, other addresses, URL paths and credentials in URLs are unsupported by the current client.
 
+### Reopen a known active session (P2a)
+
+Keep the same selected Core process alive and use the client in **Attach** mode. Managed stops its owned in-memory Core when the client closes, so it cannot preserve sessions between launches. To reopen:
+
+1. Create/start a session, select and copy its current ID from the session-ID field, then close the client normally with no uncertain command outstanding.
+2. Launch a fresh client against that still-running Core using `Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe`.
+3. Paste the ID and press **Open existing session**. The client reads player-a metadata/projection with the player credential; it sends no create/start/gameplay command. The current ID remains selectable/copyable after opening.
+4. Check the same session, authoritative revision and offered state. **Accepted actions in this client** starts at0 because it is a local counter, not the session's historical total. Submit an offered option and Refresh normally.
+
+Only known active sessions on exact selected44.5 Core are supported. IDs must be bounded ASCII path tokens; invalid paths/escaped IDs are rejected before HTTP. A missing ID shows the actual HTTP404 error without invented scene/options or automatic creation. Created/terminal/closed sessions get an explicit unsupported-lifecycle message. Metadata/projection reads may update Core's activity timestamp; they do not advance the game revision. This is not session listing, new-user joining, hotseat or durable/unknown-command restart recovery. Do not close a client with an UNKNOWN outcome to bypass its same-command reconciliation.
+
 ### In the window
 
 1. A black viewport before connection is expected. Click **Connect / create session**.
@@ -111,7 +122,7 @@ $taskCopiedExe = Join-Path $taskCopy 'WarhammerClient/Binaries/Win64/WarhammerCl
 & ./scripts/Test-ClientPackage.ps1 -ClientExecutable $taskCopiedExe -Mode Core -CoreMode Managed -Port 19084
 ```
 
-Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects exactly one real session/action/refresh check and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. Use ordinary absolute local-drive paths; extended/device/UNC namespaces, short-name aliases, paths through reparse points and executables inside the checkout are rejected. The result records the accepted absolute path. These checks do not establish visible rendering or controls. The source checkout hosts only the test tooling.
+Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects two real integration checks (retained create/action/refresh and fresh-client reopen/action/refresh) and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. Use ordinary absolute local-drive paths; extended/device/UNC namespaces, short-name aliases, paths through reparse points and executables inside the checkout are rejected. The result records the accepted absolute path. These checks do not establish visible rendering or controls. The source checkout hosts only the test tooling.
 
 ### Linux x86-64: routine launch — UNTESTED
 

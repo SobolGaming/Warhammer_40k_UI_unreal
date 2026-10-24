@@ -166,7 +166,11 @@ struct FOutcome
 };
 
 bool ValidateEndpoint(const FString& Input, FString& OutEndpoint, FString& OutError);
+// User-entered identifiers are used as one literal URL path segment, never normalized.
+bool ValidateSessionId(const FString& Input, FString& OutError);
 bool ReadCreatedSession(const FString& Text, FMetadata& OutMetadata, FString& OutError);
+// Reopening reads the current player-a metadata; it never starts a created session.
+bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, FMetadata& OutMetadata, FString& OutError);
 bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreState& OutState, FString& OutError);
 // Clear local decision controls while a fresh projection or command outcome is unavailable.
 // The separately retained command envelope and authoritative revision are unchanged.
@@ -194,6 +198,8 @@ public:
     void InitializeEndpoint(const FString& Endpoint);
     void NewSession();
     void CreateAndStart(const FString& Endpoint);
+    // Attach a fresh client to a known active session using player-scoped GETs only.
+    void OpenExistingSession(const FString& Endpoint, const FString& SessionId);
     void SelectOfferedOption(const FString& OptionId);
     void SubmitOption(const FString& OptionId) { SelectOfferedOption(OptionId); }
     void Refresh();
@@ -226,8 +232,12 @@ private:
     FString CreatingGameId;
 #if WITH_DEV_AUTOMATION_TESTS
     friend struct FLiveCoreSessionCreationTestAccess;
+    friend struct FLiveCoreSessionIntegrationTestAccess;
     // A focused test can count/block requests before HTTP or credentials are touched.
-    TFunction<void()> RequestAttemptForTests;
+    TFunction<void(const FString&, const FString&, bool, bool)> RequestAttemptForTests;
+    // Nonblocking real-integration observation: verb/path, mutation and admin flags only.
+    // No credential/body or response content is exposed to the observer.
+    TFunction<void(const FString&, const FString&, bool, bool)> RequestObserverForTests;
 #endif
     void Changed();
     void Fail(const FString& Message);
@@ -236,6 +246,7 @@ private:
         const FString& Body, bool bMutation, FReadReply&& OnReply);
     void CreateCanonicalSession();
     void HandleCreateReply(int32 Status, const FString& Response);
+    void HandleExistingReply(int32 Status, const FString& Response, const FString& ExpectedSessionId);
     void SendPendingCommand();
     void FetchProjection();
 };

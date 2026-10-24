@@ -8,7 +8,7 @@ This document owns scope, priorities, baselines, milestone checklists and featur
 
 ## Current bounded increment: P2a reopen an existing active session
 
-Branch: `codex/p2a-reopen-session`, from verified PR #6 merge `dbe186ff99a5369fd8e8dcf0b82ddd0b1f1bcfbd` (2026-10-24T19:57:28Z), exact head `c1b3035f38eccdbad7dd8659585793bf6bfaf0c0`. The owner authorized normal-gates merge and continuation when no manual P1c gate remained. The manual-verification checklist and durable AGENTS rule were committed before merging. GitHub reported MERGEABLE/CLEAN with no remote checks/formal reviews. P1c has no outstanding human-only gate within its finite scope.
+Branch: `codex/p2a-reopen-session`, [PR #7](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/7), from verified PR #6 merge `dbe186ff99a5369fd8e8dcf0b82ddd0b1f1bcfbd` (2026-10-24T19:57:28Z), exact head `c1b3035f38eccdbad7dd8659585793bf6bfaf0c0`. The owner authorized normal-gates merge and continuation when no manual P1c gate remained. The manual-verification checklist and durable AGENTS rule were committed before merging. GitHub reported MERGEABLE/CLEAN with no remote checks/formal reviews. P1c has no outstanding human-only gate within its finite scope.
 
 Finite deliverable: reopen one known **active** session on the existing selected44.5 service as the existing authenticated **player-a**, through player metadata/projection GETs. Add an existing-session ID field/Open control and make the displayed session ID copyable. Opening must not create/start/reset a session or submit a gameplay command. Current session, busy and UNKNOWN/pending-command guards remain intact. Keep creation's strict administrator/revision0 parser separate from existing-session metadata validation.
 
@@ -17,13 +17,13 @@ This is a known-ID read/reattach feature, not session listing, a new join/princi
 Implementation:
 
 - [x] Merge PR #6 at its verified head and create a separate next-milestone branch.
-- [ ] Add exact selected-Core, requested-session, active lifecycle, player-a scope and nonnegative-revision metadata validation. Validate endpoint/session ID before credential access/HTTP; reject path/query/escape/whitespace and dot-segment IDs.
-- [ ] Add guarded player-only read/open state flow, clear derived state before a fresh read and require the resulting projection revision to meet the metadata minimum. Preserve unknown command reconciliation and reject in-process session replacement.
-- [ ] Add usable known-ID/Open controls, copyable current ID and a clearly local accepted-action count; update README/architecture with supported workflow and in-memory limits.
+- [x] Add exact selected-Core, requested-session, active lifecycle, player-a scope and nonnegative-revision metadata validation. Validate endpoint/session ID before credential access/HTTP; reject path/query/escape/whitespace and dot-segment IDs.
+- [x] Add guarded player-only read/open state flow, clear derived state before a fresh read and require the resulting projection revision to meet the metadata minimum. Preserve unknown command reconciliation and reject in-process session replacement.
+- [x] Add usable known-ID/Open controls, copyable current ID and a clearly local accepted-action count; update README/architecture with supported workflow and in-memory limits.
 
 Verification:
 
-- [ ] Run focused protocol and request controls: wrong Core/schema/session/scope/lifecycle, malformed revision/ID, atomic failures, zero requests for invalid input and zero POST/start/mutation while opening; retain current busy/attached/UNKNOWN/stopped protections.
+- [ ] Run focused protocol and request controls: wrong Core/schema/session/scope/lifecycle, malformed revision/ID, atomic failures, zero requests for invalid input and zero POST/start/gameplay mutation while opening; retain current busy/attached/UNKNOWN/stopped protections.
 - [ ] Build the affected Windows Game/Editor package, run Unit/resources and real Core create A → close A → open same ID in fresh B → one offered choice → authoritative refresh. Check unchanged authoritative revision during opening, exact viewer/request, zero local accepted actions on entry and correct Managed/Attach cleanup. Repeat the retained create workflow as a regression.
 - [ ] Obtain fresh independent CODE and separate requirements SOURCE reviews, publish exact source/runtime results/limits, and commit/push checkpoints.
 

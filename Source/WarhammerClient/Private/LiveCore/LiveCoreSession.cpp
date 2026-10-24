@@ -260,6 +260,16 @@ bool ValidateEndpoint(const FString& Input, FString& OutEndpoint, FString& OutEr
     OutEndpoint = Prefix + FString::FromInt(Port); OutError.Reset(); return true;
 }
 
+bool ValidateSessionId(const FString& Input, FString& OutError)
+{
+    if (!SafeId(Input) || Exact(Input, TEXT(".")) || Exact(Input, TEXT("..")))
+    {
+        OutError = TEXT("Enter the exact Core session ID (up to 256 letters, digits, '-', '_', '.', or ':'); spaces and URL syntax are unsupported.");
+        return false;
+    }
+    OutError.Reset(); return true;
+}
+
 bool ReadCreatedSession(const FString& Text, FMetadata& OutMetadata, FString& OutError)
 {
     TSharedPtr<FJsonObject> O; FMetadata Candidate;
@@ -269,6 +279,37 @@ bool ReadCreatedSession(const FString& Text, FMetadata& OutMetadata, FString& Ou
         Candidate.Revision != 0 || !IsString(O, TEXT("session_state"), TEXT("created")) || !Scope(Object(O, TEXT("visibility")), true))
     {
         OutError = TEXT("Created session identity, revision or administrator scope differs from the selected Core 44.5.0 build."); return false;
+    }
+    OutMetadata = MoveTemp(Candidate); OutError.Reset(); return true;
+}
+
+bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, FMetadata& OutMetadata, FString& OutError)
+{
+    if (!ValidateSessionId(ExpectedSessionId, OutError)) { return false; }
+    TSharedPtr<FJsonObject> O; FMetadata Candidate;
+    if (!Parse(Text, O, OutError)) { return false; }
+    const auto Visibility = Object(O, TEXT("visibility"));
+    bool bMayMutateLifecycle, bMaySubmitDecision, bOmniscient;
+    int64 DelayRevisions;
+    if (!Identity(O) || !String(O, TEXT("session_id"), Candidate.SessionId) || !Exact(Candidate.SessionId, ExpectedSessionId) ||
+        !String(O, TEXT("game_id"), Candidate.GameId) || !Revision(O, TEXT("session_revision"), Candidate.Revision) ||
+        !Scope(Visibility, false) || !Revision(Visibility, TEXT("delay_revisions"), DelayRevisions) || DelayRevisions != 0 ||
+        !Boolean(Visibility, TEXT("may_mutate_lifecycle"), bMayMutateLifecycle) || bMayMutateLifecycle ||
+        !Boolean(Visibility, TEXT("may_submit_decision"), bMaySubmitDecision) || !bMaySubmitDecision ||
+        !Boolean(Visibility, TEXT("omniscient"), bOmniscient) || bOmniscient)
+    {
+        OutError = TEXT("Existing session identity, revision or authenticated player-a scope differs from the selected Core 44.5.0 build.");
+        return false;
+    }
+    FString Lifecycle;
+    if (!String(O, TEXT("session_state"), Lifecycle))
+    { OutError = TEXT("Existing session metadata has no supported lifecycle state."); return false; }
+    if (!Exact(Lifecycle, TEXT("active")))
+    {
+        if (Exact(Lifecycle, TEXT("created")) || Exact(Lifecycle, TEXT("terminal")) || Exact(Lifecycle, TEXT("closed")))
+        { OutError = TEXT("Core reports session state '") + Lifecycle + TEXT("'. This preview opens active sessions only; it never starts or closes an existing session."); }
+        else { OutError = TEXT("Existing session metadata has an unsupported lifecycle state."); }
+        return false;
     }
     OutMetadata = MoveTemp(Candidate); OutError.Reset(); return true;
 }
@@ -554,6 +595,48 @@ void FLiveCoreSession::CreateAndStart(const FString& Endpoint)
     if (!LiveCoreProtocol::ValidateEndpoint(Endpoint, Valid, Error)) { Fail(Error); return; }
     InitializeEndpoint(Valid); NewSession();
 }
+void FLiveCoreSession::OpenExistingSession(const FString& Endpoint, const FString& SessionId)
+{
+    check(IsInGameThread());
+    if (bStopped || State.bBusy || State.bUnknown || State.bHasSession || PendingCommand.IsSet()) { return; }
+    FString Valid, Error;
+    // Validate both inputs before reading credentials or touching the prior endpoint.
+    if (!LiveCoreProtocol::ValidateEndpoint(Endpoint, Valid, Error) || !LiveCoreProtocol::ValidateSessionId(SessionId, Error))
+    { Fail(Error); return; }
+    const FString Player = FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN"));
+    if (!CredentialValid(Player))
+    { Fail(TEXT("Set WH_CORE_PLAYER_TOKEN for the approved development registry before opening a session. Its value is never logged.")); return; }
+    // No administrator credential or catalog/start operation is needed for these reads.
+    PlayerToken = Player; AdministratorToken.Reset();
+    State = FLiveCoreState(); State.Endpoint = Valid; PendingCommand.Reset(); CreatingGameId.Reset();
+    State.Status = TEXT("Reading the existing active session as player-a…");
+    const TWeakPtr<FLiveCoreSession> Weak = AsShared();
+    Request(TEXT("GET"), TEXT("/sessions/") + SessionId, ECredential::PlayerA, FString(), false,
+        [Weak, SessionId](int32 Status, const FString& Text)
+        {
+            if (const auto Self = Weak.Pin()) { Self->HandleExistingReply(Status, Text, SessionId); }
+        });
+}
+void FLiveCoreSession::HandleExistingReply(int32 Status, const FString& Response, const FString& ExpectedSessionId)
+{
+    check(IsInGameThread()); State.LastHttpStatus = Status;
+    if (Status != 200)
+    {
+        LiveCoreProtocol::FOutcome Received; FString Error;
+        if (LiveCoreProtocol::ReadOutcome(Response, Status, FString(), FString(), 0, false, FString(), Received, Error) && Received.bError)
+        { Fail(ErrorText(Status, Received.Code, Received.Message)); }
+        else { Fail(ErrorText(Status, TEXT("session_read_failed"), TEXT("No usable authenticated session metadata was supplied."))); }
+        return;
+    }
+    LiveCoreProtocol::FMetadata Metadata; FString Error;
+    if (!LiveCoreProtocol::ReadExistingSession(Response, ExpectedSessionId, Metadata, Error)) { Fail(Error); return; }
+    State.SessionId = Metadata.SessionId; State.SessionRevision = Metadata.Revision; State.bHasSession = true;
+    State.Status = TEXT("Existing session verified. Reading its current player-a projection…");
+    // The service may advance between the two reads. ReadProjection accepts only
+    // a matching session/viewer at this metadata revision or a later revision.
+    FetchProjection();
+}
+
 void FLiveCoreSession::NewSession()
 {
     check(IsInGameThread()); if (bStopped) { return; }
@@ -594,7 +677,7 @@ void FLiveCoreSession::Request(const FString& Verb, const FString& Path, ECreden
 {
     check(IsInGameThread()); if (bStopped || ActiveRequest.IsValid()) { return; }
 #if WITH_DEV_AUTOMATION_TESTS
-    if (RequestAttemptForTests) { RequestAttemptForTests(); return; }
+    if (RequestAttemptForTests) { RequestAttemptForTests(Verb, Path, bMutation, Credential == ECredential::Administrator); return; }
 #endif
     const FString& Token = Credential == ECredential::Administrator ? AdministratorToken : PlayerToken;
     if (!CredentialValid(Token)) { Fail(TEXT("The required development credential is unavailable.")); return; }
@@ -624,6 +707,9 @@ void FLiveCoreSession::Request(const FString& Verb, const FString& Path, ECreden
         });
     ActiveRequest = Http; State.bBusy = true; Changed();
     if (bStopped || Generation != ExpectedGeneration) { return; }
+#if WITH_DEV_AUTOMATION_TESTS
+    if (RequestObserverForTests) { RequestObserverForTests(Verb, Path, bMutation, Credential == ECredential::Administrator); }
+#endif
     if (!Http->ProcessRequest() && ActiveRequest == Http)
     {
         Http->OnProcessRequestComplete().Unbind(); ActiveRequest.Reset();
