@@ -1,0 +1,358 @@
+{
+  "schemaVersion": 1,
+  "ownerLocalDate": "2026-10-23",
+  "ownerTimeZone": "America/New_York",
+  "scope": "One-line startup keyboard-focus repair; affected source and bounded default-GameMode startup checks only",
+  "sourceCommit": "d2c242d989213dc06de5a4fbb3a9ae7f493166d1",
+  "parentCommit": "4dacce319a17cdd37e714c52b10d70e6f88ac70c",
+  "visibleEvidenceCheckpoint": "f5e8180e4da955b8ed4aaaac9ff62430da3ff3ee",
+  "change": "SLiveCorePanel explicitly overrides SupportsKeyboardFocus to return true for the existing UIOnly focus target. No transport, camera, rules or action path changes.",
+  "originalVisibleResult": "2026-10-23-live-core-visible.json",
+  "sourceFiles": [
+    {
+      "path": "Source/WarhammerClient/Private/WarhammerClientGameMode.cpp",
+      "gitBlob": "e09891e3df884231388c3fe66325ae82e496c898",
+      "bytes": 20368,
+      "sha256": "D6484C6C101B04FC01EF919CCE4EC079C855FD7E5B84EB3DA5C035B65967762B"
+    },
+    {
+      "path": "Source/WarhammerClient/Public/WarhammerClientGameMode.h",
+      "gitBlob": "de0b0cd0f8d95b4a901a22f2e630508052db8301",
+      "bytes": 739,
+      "sha256": "9E9D5867571A09C8BDF98F47FF3FE77FB7407969147D79C9368E4970B9437C7E"
+    }
+  ],
+  "build": {
+    "target": "WarhammerClientEditor Win64 Development",
+    "status": "PASS",
+    "actions": 4,
+    "executionSeconds": 7.56,
+    "console": {
+      "privatePath": ".local/development/live-core-startup-focus/d2c242d/editor-build-console.log",
+      "bytes": 2330,
+      "sha256": "F880D3C550D708380B2832AB77C90936799EF74A85CEE311BB56EEF2D1FD3EAB"
+    },
+    "bindingLimit": "Root compiled the clean committed runtime source and froze matching source/build inputs; the native console itself does not embed a Git commit attestation."
+  },
+  "reviews": {
+    "scope": "Affected startup-focus SOURCE only; the later non-graphical smoke was not part of these frozen review inputs",
+    "manifest": {
+      "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/manifest.json",
+      "bytes": 5992,
+      "sha256": "779F3897373F2855260CB79C7E212576A04BF818384A481A334643EBC55D73A3"
+    },
+    "inputs": [
+      {
+        "path": "Source/WarhammerClient/Private/WarhammerClientGameMode.cpp",
+        "bytes": 20368,
+        "sha256": "D6484C6C101B04FC01EF919CCE4EC079C855FD7E5B84EB3DA5C035B65967762B",
+        "kind": "WHOLE_COMMITTED_SOURCE",
+        "gitBlob": "e09891e3df884231388c3fe66325ae82e496c898"
+      },
+      {
+        "path": "Source/WarhammerClient/Public/WarhammerClientGameMode.h",
+        "bytes": 739,
+        "sha256": "9E9D5867571A09C8BDF98F47FF3FE77FB7407969147D79C9368E4970B9437C7E",
+        "kind": "WHOLE_COMMITTED_SOURCE",
+        "gitBlob": "de0b0cd0f8d95b4a901a22f2e630508052db8301"
+      },
+      {
+        "path": "installed-api/SWidget-focus-declaration.txt",
+        "bytes": 486,
+        "sha256": "913B28493145AF689463295FAE013A10D53889233D9C5DF476C8B65DF5415420",
+        "kind": "NUMBERED_INSTALLED_API_RANGE"
+      },
+      {
+        "path": "installed-api/SWidget-constructor-focus.txt",
+        "bytes": 1194,
+        "sha256": "0C327CFCA6EE0F83D5110B01E96AB4F67A203233B4A3A6FA90FAFB6E7C781738",
+        "kind": "NUMBERED_INSTALLED_API_RANGE"
+      },
+      {
+        "path": "installed-api/SWidget-default-focus.txt",
+        "bytes": 83,
+        "sha256": "C74EFA5D8A291147BCDCED36EE9BB200D4120206B1F6899DE9FAD108CE444956",
+        "kind": "NUMBERED_INSTALLED_API_RANGE"
+      },
+      {
+        "path": "installed-api/PlayerController-ui-focus-routing.txt",
+        "bytes": 2792,
+        "sha256": "3B1EA5D8E02EED4517A48F57C9FEB232184B03891D3D29AF1CC85CE55BC72CB7",
+        "kind": "NUMBERED_INSTALLED_API_RANGE"
+      },
+      {
+        "path": "verification/editor-build-console.log",
+        "bytes": 2330,
+        "sha256": "F880D3C550D708380B2832AB77C90936799EF74A85CEE311BB56EEF2D1FD3EAB",
+        "kind": "WHOLE_RAW_BUILD_CONSOLE",
+        "origin": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\live-core-startup-focus\\d2c242d\\editor-build-console.log",
+          "bytes": 2330,
+          "sha256": "F880D3C550D708380B2832AB77C90936799EF74A85CEE311BB56EEF2D1FD3EAB"
+        }
+      },
+      {
+        "path": "verification/original-startup-focus-error.txt",
+        "bytes": 170,
+        "sha256": "25F6051EFC4E99ABEAA5866C7F3F9D2F4CCF51143945CD00CF587B21D0679B21",
+        "kind": "SINGLE_ORIGINAL_ERROR_LINE",
+        "origin": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\live-core-startup-focus\\observed-focus-error.log",
+          "bytes": 170,
+          "sha256": "25F6051EFC4E99ABEAA5866C7F3F9D2F4CCF51143945CD00CF587B21D0679B21"
+        }
+      },
+      {
+        "path": "verification/focus-change.diff",
+        "bytes": 576,
+        "sha256": "3F3D05B01FA88A6CE276E3F6FFADBC7D8A583A763B464E15EC10875D5F0A16A0",
+        "kind": "RAW_PARENT_CANDIDATE_SOURCE_DIFF"
+      },
+      {
+        "path": "criteria.md",
+        "bytes": 2056,
+        "sha256": "4F8AA7BFDE965E39E7E0EF65397D66308E92AD0CB99B06009F379EB1F7C5E277",
+        "kind": "CLEAN_IMMUTABLE_SLICE_CRITERIA"
+      }
+    ],
+    "apiOrigins": [
+      {
+        "excerpt": "installed-api/SWidget-focus-declaration.txt",
+        "origin": {
+          "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\SlateCore\\Public\\Widgets\\SWidget.h",
+          "bytes": 89962,
+          "sha256": "55ED695707F28BD31852710E5290FB6F09EF72B44F9F428216F66F0AEE59987D"
+        },
+        "firstLine": 917,
+        "lastLine": 929,
+        "originAccess": "IDENTITY_ONLY_OUTSIDE_SELECTED_RANGE"
+      },
+      {
+        "excerpt": "installed-api/SWidget-constructor-focus.txt",
+        "origin": {
+          "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\SlateCore\\Private\\Widgets\\SWidget.cpp",
+          "bytes": 82643,
+          "sha256": "F58E34B3D143BE1EC968870AD1C2EDB4C43362F83BE7E7588AB8FA1617ECA656"
+        },
+        "firstLine": 197,
+        "lastLine": 225,
+        "originAccess": "IDENTITY_ONLY_OUTSIDE_SELECTED_RANGE"
+      },
+      {
+        "excerpt": "installed-api/SWidget-default-focus.txt",
+        "origin": {
+          "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\SlateCore\\Private\\Widgets\\SWidget.cpp",
+          "bytes": 82643,
+          "sha256": "F58E34B3D143BE1EC968870AD1C2EDB4C43362F83BE7E7588AB8FA1617ECA656"
+        },
+        "firstLine": 977,
+        "lastLine": 980,
+        "originAccess": "IDENTITY_ONLY_OUTSIDE_SELECTED_RANGE"
+      },
+      {
+        "excerpt": "installed-api/PlayerController-ui-focus-routing.txt",
+        "origin": {
+          "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\PlayerController.cpp",
+          "bytes": 220872,
+          "sha256": "D2946876BC3C3BAD60E3EB833C1CFD034A55574E420841E60B72298A8E5A5EAD"
+        },
+        "firstLine": 6313,
+        "lastLine": 6385,
+        "originAccess": "IDENTITY_ONLY_OUTSIDE_SELECTED_RANGE"
+      }
+    ],
+    "postReviewAllInputHashesVerified": true,
+    "reports": [
+      {
+        "role": "CODE",
+        "verdict": "PASS_AFFECTED_SOURCE_ONLY",
+        "contextIds": [
+          "01a16ba6-77ad-7963-8848-a8541eacf3ee"
+        ],
+        "sourceCommit": "d2c242d989213dc06de5a4fbb3a9ae7f493166d1",
+        "exitCode": 0,
+        "timedOut": false,
+        "startedUtc": "2026-10-24T02:03:53.8957856Z",
+        "finishedUtc": "2026-10-24T02:05:19.6545037Z",
+        "requestedSettings": {
+          "sandbox": "read-only",
+          "approval": "never",
+          "ephemeral": true,
+          "memoryDisabled": true,
+          "freshProcess": true,
+          "resumeOrFork": false
+        },
+        "settingsLimit": "Invocation and exposed reviewer configuration support requested read-only/approval-never settings. Ephemeral lifecycle and lower-level memory enforcement were not independently established.",
+        "observedOperations": {
+          "shellCommands": 5,
+          "failedShellCommands": 0,
+          "mcpCalls": 0,
+          "candidateExecution": false,
+          "mutations": false,
+          "networkRequests": false,
+          "guiActions": false,
+          "peerReportsRead": false
+        },
+        "toolLimit": "No failed shell command.",
+        "cliWarnings": "Unsupported PowerShell shell snapshot and ignored plugin-icon paths. No failed internal subagent initialization in these two logs.",
+        "privateArtifacts": [
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/CODE/AGENTS.md",
+            "bytes": 798,
+            "sha256": "900AED5EC6D0BA2E9623BB136466951117E46F3D126E9F53121DE859B15C139D"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/CODE/prompt.txt",
+            "bytes": 1457,
+            "sha256": "90393D09BD56C1206A91B8C4EB5141FE5926D5071A490933D7FDAF4C16656676"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/CODE/invocation.json",
+            "bytes": 876,
+            "sha256": "85C2650531D9EC01989FF173B8BCDC027FA11BACCE68C89F3216398F181D79D8"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/CODE/completion.json",
+            "bytes": 156,
+            "sha256": "B5D7DBA08FC1BB5DAFE68FBDF6EEB57D2C697ADA352E8DDE0C4069BD23709F6B"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/CODE/events.jsonl",
+            "bytes": 59963,
+            "sha256": "78CB2470E5D0C31E32BF03D60E21CA5AD09BC0B5B4837C7575AF66A04794D818"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/CODE/stderr.log",
+            "bytes": 734,
+            "sha256": "78AB822E7C80DE2B3D6F8E15CA154BB981F4F45ECE56E2E4F35DB10825ABE773"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/CODE/report.txt",
+            "bytes": 5202,
+            "sha256": "ED0F953ABA68B1EBB65F7C334DF5E0BC09912EC7B0F18ABB3A79196DAF94E34E"
+          }
+        ]
+      },
+      {
+        "role": "REQ",
+        "verdict": "PASS_AFFECTED_SOURCE_ONLY",
+        "contextIds": [
+          "01a16ba6-777f-7493-a8a9-479badee944b"
+        ],
+        "sourceCommit": "d2c242d989213dc06de5a4fbb3a9ae7f493166d1",
+        "exitCode": 0,
+        "timedOut": false,
+        "startedUtc": "2026-10-24T02:03:53.8201516Z",
+        "finishedUtc": "2026-10-24T02:05:45.0196755Z",
+        "requestedSettings": {
+          "sandbox": "read-only",
+          "approval": "never",
+          "ephemeral": true,
+          "memoryDisabled": true,
+          "freshProcess": true,
+          "resumeOrFork": false
+        },
+        "settingsLimit": "Invocation and exposed reviewer configuration support requested read-only/approval-never settings. Ephemeral lifecycle and lower-level memory enforcement were not independently established.",
+        "observedOperations": {
+          "shellCommands": 13,
+          "failedShellCommands": 1,
+          "mcpCalls": 0,
+          "candidateExecution": false,
+          "mutations": false,
+          "networkRequests": false,
+          "guiActions": false,
+          "peerReportsRead": false
+        },
+        "toolLimit": "One PowerShell pipeline parse error during hash-table formatting; corrected read-only command then verified every input. No material remained unread.",
+        "cliWarnings": "Unsupported PowerShell shell snapshot and ignored plugin-icon paths. No failed internal subagent initialization in these two logs.",
+        "privateArtifacts": [
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/REQ/AGENTS.md",
+            "bytes": 797,
+            "sha256": "5E1699660B2AD1956DB88F8D92FC22C19B8F72637342B69883B2F2ED5F4963BE"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/REQ/prompt.txt",
+            "bytes": 1484,
+            "sha256": "CA586C762C6C2C3AF47DD434FFCC489687F14A8EBF5ACA9E85CC3D7CF731AB77"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/REQ/invocation.json",
+            "bytes": 873,
+            "sha256": "3B3C5BF0B9EFC59C2E8B89CF4E1431A1581E8E62EF20FFFC903B1270B98062AE"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/REQ/completion.json",
+            "bytes": 155,
+            "sha256": "47035925E9BA0E5A44DE5B9F91DCDBA46A8174DEA6828B67E0979A6BE3DA6024"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/REQ/events.jsonl",
+            "bytes": 67587,
+            "sha256": "A326C68DD7C95626B943F4865D6B816A0A5E0DEAE3AA24E58AEB17489BB51BA2"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/REQ/stderr.log",
+            "bytes": 734,
+            "sha256": "772CA98386661D9CCF3D5B41BD6350620CBBF9CFAABD97408D52F7121D26F4F3"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreFocus\\d2c242d/REQ/report.txt",
+            "bytes": 6576,
+            "sha256": "A2CD0265126ED73D040BEE3C3435AF365DD9B05FB4F7BADCC4E5F7A0332CE198"
+          }
+        ]
+      }
+    ],
+    "standingPrivateSourceConsent": true,
+    "credentialsAndPrivateSessionsExcluded": true,
+    "authorNotesAndPeerVerdictsExcluded": true
+  },
+  "startupSmoke": {
+    "status": "PASS_BOUNDED_DEFAULT_GAMEMODE_SMOKE",
+    "sourceHead": "f5e8180e4da955b8ed4aaaac9ff62430da3ff3ee",
+    "runtimeSource": "d2c242d989213dc06de5a4fbb3a9ae7f493166d1",
+    "elapsedSeconds": 17.3397988,
+    "outerDeadlineSeconds": 60,
+    "timedOut": false,
+    "exitCode": 0,
+    "expectedGameModeObserved": true,
+    "normalBenchmarkExitObserved": true,
+    "originalFocusErrorCount": 0,
+    "errorOrFatalCount": 0,
+    "configUnchanged": true,
+    "coreHostLaunched": false,
+    "flags": "-game -NullRHI -RenderOffScreen -unattended -nosound -nosplash -benchmark -fps=30 -seconds=10 -nowrite",
+    "windowAbsenceObserved": false,
+    "coverageLimit": "NullRHI/offscreen GameMode startup only. No positive Attach/focus marker, keyboard navigation, visible rendering or real Core action is proven.",
+    "privateArtifacts": [
+      {
+        "privatePath": ".local/development/live-core-startup-focus/smoke-20261024T020512Z/result.json",
+        "bytes": 2165,
+        "sha256": "9B20B4FACCD929AB9F3819B342449B037DC7CCE5D35B0E2765ACE25180C639CE"
+      },
+      {
+        "privatePath": ".local/development/live-core-startup-focus/smoke-20261024T020512Z/native.log",
+        "bytes": 179330,
+        "sha256": "B3731EE57F2E3E70EBDCD2E297482BD06168167F48900EB49E13503EC7AC1DBB"
+      },
+      {
+        "privatePath": ".local/development/live-core-startup-focus/smoke-20261024T020512Z/stdout.log",
+        "bytes": 179202,
+        "sha256": "32E413F51F1D91B7D460F71DC4D05EE663A3C33C0E870BA396F48BBB706B76A4"
+      },
+      {
+        "privatePath": ".local/development/live-core-startup-focus/smoke-20261024T020512Z/stderr.log",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      }
+    ]
+  },
+  "renderedRepairVerification": "NOT_RUN",
+  "remaining": [
+    "Actual repaired initial focus, Tab/text/button navigation and teardown focus require an applicable visible check.",
+    "Camera framing/responsive sizing remain follow-up; near-edge crop persists in the observed earlier source.",
+    "The earlier real-Core result remains tied to 4dacce3/runtime ca315fb; no later rendered result is inferred.",
+    "Linux, full gameplay, remote/spectator UX, packages and profiles remain unverified or deferred."
+  ]
+}

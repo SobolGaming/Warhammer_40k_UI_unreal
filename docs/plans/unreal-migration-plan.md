@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 149 — bounded rendered local setup observed, 2026-10-24 UTC / 2026-10-23 EDT.**
+**Revision 150 — rendered setup recorded; startup-focus repair source checks passed, 2026-10-24 UTC / 2026-10-23 EDT.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -67,9 +67,11 @@ Implementation and verification remain separate. The observed visible result bel
 - [x] Click an offered Fixed choice with the mouse; observe accepted/committed, revision 2, one accepted player action and the selected missions. Mouse Refresh retained that state; a separate read-only player projection confirmed it.
 - [x] Close the visible client normally; Editor and launcher exited 0, owned Core stopped without force, four Config files stayed byte-identical and final target-window count was zero. Preserve the startup-focus error and cropped board edge in [visible evidence](evidence/2026-10-23-live-core-visible.md).
 - [x] Compile/link startup-focus repair `d2c242d`: four Windows Editor build actions passed in 7.56 seconds.
-- [ ] Complete fresh independent CODE and separate requirements reviews of the focus repair. No new rendered check has run for this candidate.
+- [x] Complete fresh independent CODE and separate requirements reviews of `d2c242d`: both PASS for the affected source; all ten frozen inputs matched after review.
+- [x] Run the default GameMode non-graphically at `f5e8180` / runtime `d2c242d`: NullRHI/offscreen startup exited 0 in 17.34 seconds, logged the intended GameMode and normal benchmark exit, with zero original focus errors or Error/Fatal lines and unchanged Config. This is startup smoke, not positive focus/navigation proof. [Repair evidence](evidence/2026-10-23-live-core-focus-repair.json).
+- [ ] Observe repaired startup focus/navigation under applicable visible-test approval. The earlier rendered result does not verify `d2c242d`.
 - [x] Publish source/headless checkpoints, exact-GitHub-verify each commit and update PR #3.
-- [ ] Publish this bounded visible result/checklist checkpoint, push and exact-GitHub-verify it; keep PR #3 open without merge.
+- [x] Publish bounded visible result/checklist checkpoint `f5e8180e4da955b8ed4aaaac9ff62430da3ff3ee`, push and exact-GitHub-verify it; keep PR #3 open without merge.
 - [ ] Improve camera framing/responsive sizing and obtain owner feedback. The observed 3840×2160 view cropped the near board edge; fixed-camera setup proof is not full-board-fit proof.
 - [ ] Run native Linux build/render/package checks when a host becomes available (**UNTESTED**).
 
@@ -79,7 +81,7 @@ Implementation and verification remain separate. The observed visible result bel
 2. **Connection/state:** implement native transport, board and viewer-state UI. Push source with actual checks and pending verification clearly recorded.
 3. **Action/result:** wire a real offered setup choice, authoritative refresh, explicit errors and same-command reconciliation. Add easy managed-launch/attach instructions; push.
 4. **Focused validation:** build, execute protocol checks and independent reviews. Push findings/fixes and evidence at coherent checkpoints.
-5. **Rendered feedback:** the bounded local setup workflow is observed. Publish its actual result and limits; then check the small startup-focus repair separately and prioritize camera/responsive sizing with owner feedback. Any further agent desktop activity requires applicable approval.
+5. **Rendered feedback:** the bounded local setup workflow is observed and published. The startup-focus repair passed build, affected source reviews and non-graphical startup smoke; actual repaired focus/navigation remains unchecked. Prioritize camera/responsive sizing with owner feedback. Any further agent desktop activity requires applicable approval.
 
 Combine adjacent implementation steps when they form one coherent runnable increment. Do not create bureaucratic checkpoints for individual lines; every actual checkpoint must be pushed and exact-ref verified. Never force push or upload credentials, private sessions, generated outputs or ignored evidence.
 
@@ -113,6 +115,7 @@ Selected host: checked-out `Warhammer_40k_AI/scripts/run_phase18m_reference_serv
 ## Evidence and history
 
 - [Bounded live-Core visible setup](evidence/2026-10-23-live-core-visible.md), [structured result](evidence/2026-10-23-live-core-visible.json), and [chronological slice progress](evidence/2026-10-23-live-core-slice.md).
+- [Startup-focus repair checks and independent review provenance](evidence/2026-10-23-live-core-focus-repair.json); affected source only, repaired rendering untested.
 
 - [BOOT01](evidence/2026-10-16-boot01.md).
 - [Original E01 boundary](evidence/2026-10-16-e01-boundary.md), [SLOW120 provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json).

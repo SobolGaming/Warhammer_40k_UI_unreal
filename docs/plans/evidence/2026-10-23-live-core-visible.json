@@ -83,7 +83,7 @@
       "id": "STARTUP_FOCUS",
       "status": "OBSERVED_ERROR",
       "message": "InputMode:UIOnly - Attempting to focus Non-Focusable widget SLiveCorePanel [WarhammerClientGameMode.cpp(348)]!",
-      "repair": "Pending separate candidate, compile and affected independent reviews; no later rendered verification awarded by this run"
+      "repair": "Separate repair d2c242d passed build, affected CODE/requirements reviews and non-graphical startup smoke. Actual repaired rendered focus/navigation remains NOT_RUN; see 2026-10-23-live-core-focus-repair.json."
     },
     {
       "id": "CAMERA_FRAMING",
