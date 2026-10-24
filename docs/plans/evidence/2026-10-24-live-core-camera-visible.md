@@ -12,6 +12,6 @@ The manual launcher began with both development credential environment names abs
 
 Core stderr was not empty: it retained a pre-client readiness canceled-connection traceback with one `WinError 10053` marker. This record does not claim a completely clean server log. The launcher stderr was empty.
 
-RMB/MMB drag, capture cancellation with Esc or application deactivation, and keyboard focus-loss cancellation have no positive graphical observation recorded in this run. A separate synthetic native Slate camera check is additional work and is not evidence for this run. The F result must remain unresolved until a proportionate follow-up establishes its behavior.
+RMB/MMB drag, capture cancellation with Esc or application deactivation, and keyboard focus-loss cancellation have no positive graphical observation recorded in this run. A later, separate [synthetic native Slate camera check](2026-10-24-live-core-native-camera-input.md) passed held-button controls and F routing; it is not incorporated into this manual run. This manual F result remains unresolved with no established source cause.
 
 The 17 screenshots and their associated session metadata remain private. This public-safe account combines the root's direct visual observations with selected inert metadata and finite log counts; the auxiliary drafter did not inspect screenshots. It is a bounded Windows observation, with no Linux or broader migration acceptance claim. The companion JSON preserves the fact/provenance distinction and private original digests without publishing their bodies.

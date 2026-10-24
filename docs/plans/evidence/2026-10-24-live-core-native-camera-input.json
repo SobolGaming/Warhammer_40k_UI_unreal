@@ -1,0 +1,925 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_NATIVE_LIVE_CAMERA_INPUT",
+  "publicationState": "ADOPTED_ROOT_RESULT_WITH_AUXILIARY_METADATA_AUDIT",
+  "status": "PASS_FINITE_WINDOWS_SYNTHETIC_INPUT_SCOPE",
+  "platform": "Windows x64 D3D12",
+  "sourceHead": "4e6518b5439aadde6faadd20f89727ba5961213f",
+  "scope": {
+    "observations": "Actual CameraActor, navigation, focus/capture and exposed session/request/choice/command fields",
+    "bounds": "Synthetic advisory camera bounds only",
+    "linux": "UNTESTED",
+    "renderedBoardFidelityProof": false,
+    "coreCredentialValuesSupplied": false,
+    "coreServiceLaunched": false,
+    "zeroHttpAttemptProof": false,
+    "input": "Actual in-application AutomationDriver events through ordinary live GameMode Slate handlers"
+  },
+  "timing": {
+    "startedUtc": "2026-10-24T04:45:51.2181513Z",
+    "automationSeconds": 0.7494055032730103,
+    "finishedUtc": "2026-10-24T04:46:12.7850334Z",
+    "processSeconds": 20.4922648,
+    "maximumProcessSeconds": 600
+  },
+  "automation": {
+    "inProcess": 0,
+    "cleanupAssertions": "Normal completion passed source-defined navigation/actor/zoom-bound, Slate-focus and owned-driver restoration assertions; no independently enumerated per-field PASS log rows.",
+    "engineSelectedExactlyOneTest": true,
+    "reportedAssertionCount": 92,
+    "infoEntryCount": 40,
+    "testPath": "Warhammer.Rendered.LiveCoreCamera.Input",
+    "notRun": 0,
+    "failed": 0,
+    "queueEmptyExitObserved": true,
+    "state": "Success",
+    "succeededWithWarnings": 0,
+    "exactTestExitGuardPassed": true,
+    "unrealValueQuoting": "Quotes immediately after = in ExecCmds and TestExit",
+    "assertionCountBasis": "The retained test summary reports 92 evaluated assertions and PASS; the export contains Info entries, not 92 individual successful-assertion rows.",
+    "succeeded": 1,
+    "inputCases": [
+      "RMB hold/orbit/release/post-release move stability",
+      "MMB hold/pan/release/post-release move stability",
+      "Wheel zoom and minimum/maximum clamps",
+      "Endpoint UI focus with isolated F/wheel",
+      "Board focus and F restoring saved fitted reference; repeated F stable"
+    ]
+  },
+  "lifecycle": {
+    "nativeErrorFatalLineCount": 0,
+    "configFileCount": 4,
+    "forcedTerminationObserved": false,
+    "finalTargetWindowCount": 0,
+    "stderrBytes": 0,
+    "watchdogPathExercised": false,
+    "finalWindowObservationUtc": "2026-10-24T04:46:22.055Z",
+    "exitCode": 0,
+    "forcedFailurePathExercised": false,
+    "configFilesExactAfterRun": true
+  },
+  "passiveDesktopObservation": {
+    "screenshotRetainedPrivately": true,
+    "operatingSystemInputIssued": false,
+    "screenshotOuterHeight": 1128,
+    "requestedClientSizeIsNotMeasuredSize": true,
+    "observation": "Expected unconnected black viewport; no optical camera-motion or board-fit claim",
+    "screenshotOuterWidth": 1922,
+    "uniqueVisibleGameWindowObserved": true,
+    "timestampQualification": "The private screenshot metadata observedUtc was written at save time after capture; it is not an exact capture timestamp or ordering proof relative to driver events."
+  },
+  "manualWorkflow": {
+    "nativeFPassDoesNotOverwriteManualFailure": true,
+    "sourceCause": "NOT_ESTABLISHED",
+    "fShortcut": "UNRESOLVED",
+    "evidence": "2026-10-24-live-core-camera-visible.md"
+  },
+  "remainingUnverified": [
+    "Active-drag cancellation on Escape, capture/focus loss, deactivation, resize or teardown",
+    "Mismatched user/pointer delivery",
+    "Panel RMB/MMB gestures",
+    "Ordinary assertion-failure cleanup and forced failure/watchdog execution",
+    "Fresh install, broad DPI/readability and packaging",
+    "Linux native build/render/package",
+    "Full gameplay and wider migration acceptance"
+  ],
+  "builds": [
+    {
+      "automaticMemoryPressureRetry": true,
+      "executionSeconds": 21.94,
+      "candidateCommit": "c3a751e21d5e7070a0ca6ec7ef674b3b9390bea0",
+      "target": "WarhammerClientEditor Win64 Development",
+      "status": "Succeeded",
+      "privateOriginalDigests": [
+        {
+          "leaf": "editor-build-console.log",
+          "bytes": 2693,
+          "sha256": "5FF8BF3102B092544EBDE492A5CAE6BF12DF9932C0906324CA042380A2B726C6"
+        },
+        {
+          "leaf": "source-before.json",
+          "bytes": 745,
+          "sha256": "9EDFBFA5DABE7A5D4609ED2D86E6DAE343BF4680F578A1CCE9B184C067A59E9B"
+        }
+      ],
+      "actions": 6
+    },
+    {
+      "automaticMemoryPressureRetry": false,
+      "executionSeconds": 13.72,
+      "candidateCommit": "91174a87da0704c2f757340f99ef954e438f03a7",
+      "target": "WarhammerClientEditor Win64 Development",
+      "status": "Succeeded",
+      "privateOriginalDigests": [
+        {
+          "leaf": "editor-build-console.log",
+          "bytes": 2572,
+          "sha256": "39AC593EEF3128CADF55FAC7E8A6A8E2310B14082F6C4BF4BC0E52FEF89E99C1"
+        },
+        {
+          "leaf": "source-before.json",
+          "bytes": 745,
+          "sha256": "4F6FD45CC52358369F8470C3365DCD8F5C2FEF157174C4131823CFBCD1740CBB"
+        }
+      ],
+      "actions": 6
+    },
+    {
+      "automaticMemoryPressureRetry": false,
+      "executionSeconds": 12.79,
+      "candidateCommit": "08f5c6938dbb10a5015f9e3c309ceb70c123de56",
+      "target": "WarhammerClientEditor Win64 Development",
+      "status": "Succeeded",
+      "privateOriginalDigests": [
+        {
+          "leaf": "editor-build-console.log",
+          "bytes": 2571,
+          "sha256": "E366A11D8A5F04E07FB4708BA6F6BEFC18C29FD878E9D345B87A0F4608D43982"
+        },
+        {
+          "leaf": "source-before.json",
+          "bytes": 745,
+          "sha256": "7D711306BAD483DEAD981872E632F285AFC6406506D49B1DA4FF8391771AE047"
+        }
+      ],
+      "actions": 6
+    },
+    {
+      "automaticMemoryPressureRetry": false,
+      "executionSeconds": 6.3,
+      "candidateCommit": "4e6518b5439aadde6faadd20f89727ba5961213f",
+      "target": "WarhammerClientEditor Win64 Development",
+      "status": "Succeeded",
+      "privateOriginalDigests": [
+        {
+          "leaf": "editor-build-console.log",
+          "bytes": 2384,
+          "sha256": "EDDD74A6CFEBD6391543D22877A000DC3DE7E6847D2CBC5BF859E97C2F7E4384"
+        },
+        {
+          "leaf": "source-before.json",
+          "bytes": 745,
+          "sha256": "C488D21FB275DB870AF5E381267D1FC9F8E0FBBBDCFF87B151E2B4AFA330B0EE"
+        }
+      ],
+      "actions": 4
+    }
+  ],
+  "sourceReviews": {
+    "requestedConstraints": {
+      "sandbox": "read-only",
+      "approval": "never",
+      "memoryDisabledRequested": true,
+      "ephemeralRequested": true,
+      "freshExecRequested": true,
+      "resumeRequested": false,
+      "timeoutSeconds": 600,
+      "jsonEventsRequested": true,
+      "modelExplicitlySelected": false,
+      "reasoningEffortExplicitlySelected": false
+    },
+    "rounds": [
+      {
+        "candidateCommit": "c3a751e21d5e7070a0ca6ec7ef674b3b9390bea0",
+        "manifest": {
+          "leaf": "manifest.json",
+          "bytes": 4925,
+          "sha256": "57DD02FA9AA3D6D1A94179AB0C5733D3F2DE3F4EF61DCBE6FC0AE36E00985348"
+        },
+        "postReviewIntegrity": {
+          "inputCount": 24,
+          "byteAndSha256Matches": 24,
+          "gitBlobCount": 10,
+          "rawInputGitBlobMatches": 10,
+          "committedSourceGitBlobBindingsMatch": 10
+        },
+        "roles": [
+          {
+            "identity": {
+              "inputCount": 24,
+              "byteAndSha256Matches": 24,
+              "gitBlobMatches": 10,
+              "gitBlobChecksAfterInitialSourceReads": true,
+              "strictAllHashesIncludingBlobsBeforeSource": false,
+              "rawReportInputCount": 23,
+              "countQualification": "The raw CODE report says23; retained event metadata records24 matching SHA256/size rows. The original report remains unchanged."
+            },
+            "role": "CODE",
+            "warnings": {
+              "pluginIconPathWarnings": 4,
+              "unsupportedPowerShellSnapshotWarnings": 1,
+              "errorLevelCount": "NOT_RECORDED_IN_THIS_PROVENANCE",
+              "retrySamplingFailureObserved": false
+            },
+            "verdict": "CHANGES_REQUESTED",
+            "findings": [
+              "Failed driver enable can dereference an absent driver during cleanup.",
+              "Post-MMB-release movement is combined with wheel input, masking unwanted continued pan.",
+              "F assertions do not establish restoration of fitted pose/distance; explicit zoom-bound assertions are missing."
+            ],
+            "scope": "affected SOURCE only",
+            "privateOriginalDigests": [
+              {
+                "leaf": "report.txt",
+                "bytes": 3089,
+                "sha256": "93556EF15089A53EB7B4936CBAFD306AE33A5633373E6D9B1310CF572F0660BF"
+              },
+              {
+                "leaf": "invocation.json",
+                "bytes": 888,
+                "sha256": "DC0EE1010F374A5551CE2CA2477DBC197C3D71F0E3CDBAF57A80F3598C1DAEC8"
+              },
+              {
+                "leaf": "completion.json",
+                "bytes": 156,
+                "sha256": "CF8ABFBA3123CDE82D1A025352BF24A28B10C5B6AAF340D6493B9A037B42B50B"
+              },
+              {
+                "leaf": "events.jsonl",
+                "bytes": 243403,
+                "sha256": "42919C817272D90D715C281E25EA856407A03C4A41A1CCBED9F61783D309CB41"
+              },
+              {
+                "leaf": "stderr.log",
+                "bytes": 734,
+                "sha256": "4EFF49C525A948E887F0170594868BE553E595229D3A11A536CB8AA87A8BC2F7"
+              },
+              {
+                "leaf": "prompt.txt",
+                "bytes": 1711,
+                "sha256": "2DECD6F99F1FC7718EB0E0304A819874737C0FA4BA86E3673B02CB56654EBD0B"
+              },
+              {
+                "leaf": "AGENTS.md",
+                "bytes": 283,
+                "sha256": "5FDFBD1E6F588C6CDB8E2BB825CB1C7A1309839B8D409E6D101C1E671FFBB6B0"
+              }
+            ],
+            "completion": {
+              "startedUtc": "2026-10-24T04:21:05.0899481Z",
+              "finishedUtc": "2026-10-24T04:24:27.6170633Z",
+              "processExitCode": 0,
+              "timedOut": false,
+              "reportExists": true,
+              "commandsStarted": 17,
+              "commandsCompleted": 17,
+              "failedCommandCount": 0,
+              "allCompletedCommandExitCodesZero": true,
+              "startedCompletedCommandsJoined": true,
+              "freshContextsObserved": 1,
+              "turnsStarted": 1,
+              "turnsCompleted": 1
+            }
+          },
+          {
+            "identity": {
+              "inputCount": 24,
+              "byteAndSha256Matches": 24,
+              "gitBlobMatches": 10,
+              "gitBlobChecksAfterInitialSourceReads": true,
+              "strictAllHashesIncludingBlobsBeforeSource": false,
+              "rawReportInputCount": 24
+            },
+            "role": "REQ",
+            "warnings": {
+              "pluginIconPathWarnings": 4,
+              "unsupportedPowerShellSnapshotWarnings": 1,
+              "errorLevelCount": "NOT_RECORDED_IN_THIS_PROVENANCE",
+              "retrySamplingFailureObserved": false
+            },
+            "verdict": "CHANGES_REQUESTED",
+            "findings": [
+              "Failed driver-enable cleanup can dereference an absent driver.",
+              "Require separate post-release movement invariance checks.",
+              "F must compare against the fitted actor/navigation reference and exercise zoom bounds.",
+              "Pending-choice snapshot omits request type and offered options."
+            ],
+            "scope": "affected SOURCE only",
+            "privateOriginalDigests": [
+              {
+                "leaf": "report.txt",
+                "bytes": 6670,
+                "sha256": "63656F3FB3C4E375584DB9AD5CDE20B824F05514572CEBB86FB5CC4B68CA07B4"
+              },
+              {
+                "leaf": "invocation.json",
+                "bytes": 885,
+                "sha256": "9B485380808E7D3EF0DD28CF047CFCFA249374D774B15D333B1E5273D497219F"
+              },
+              {
+                "leaf": "completion.json",
+                "bytes": 155,
+                "sha256": "C44231194DFF81EEA808DFFEC1907D5199C2D13AA347B701C6201A8FCB5B0611"
+              },
+              {
+                "leaf": "events.jsonl",
+                "bytes": 252495,
+                "sha256": "5F2FAF603503670438B06D0DBADFDDB7948D64D950D2E0256729C7F71C0CDC36"
+              },
+              {
+                "leaf": "stderr.log",
+                "bytes": 734,
+                "sha256": "7C1B19E060BF0C712621465B23B7A490E1442E13AE2B1B0643CE0A6F05BB2BF8"
+              },
+              {
+                "leaf": "prompt.txt",
+                "bytes": 1714,
+                "sha256": "08B7A439EA55240DA45D4B3E6AA9C0D54FF27ABA92EB0484C9074714124B39CB"
+              },
+              {
+                "leaf": "AGENTS.md",
+                "bytes": 282,
+                "sha256": "EE5483989AD38BFB66EE3002CDD01135B46DD08E470362BA80197730FEAE6B86"
+              }
+            ],
+            "completion": {
+              "startedUtc": "2026-10-24T04:21:06.1829748Z",
+              "finishedUtc": "2026-10-24T04:24:16.4652322Z",
+              "processExitCode": 0,
+              "timedOut": false,
+              "reportExists": true,
+              "commandsStarted": 20,
+              "commandsCompleted": 20,
+              "failedCommandCount": 0,
+              "allCompletedCommandExitCodesZero": true,
+              "startedCompletedCommandsJoined": true,
+              "freshContextsObserved": 1,
+              "turnsStarted": 1,
+              "turnsCompleted": 1
+            }
+          }
+        ],
+        "nativeVisibleRunPerformed": false
+      },
+      {
+        "candidateCommit": "91174a87da0704c2f757340f99ef954e438f03a7",
+        "manifest": {
+          "leaf": "manifest.json",
+          "bytes": 5258,
+          "sha256": "C4299DFE191865397F14DDE10BDF83CE3B47164FA2E85535E46197D8E73D0318"
+        },
+        "postReviewIntegrity": {
+          "inputCount": 26,
+          "byteAndSha256Matches": 26,
+          "rawGitBlobMatches": 10
+        },
+        "roles": [
+          {
+            "identity": {
+              "inputCount": 26,
+              "byteCountMatches": 26,
+              "sha256Matches": 26,
+              "gitBlobMatches": 10,
+              "allInputAndBlobVerificationBeforeSource": true,
+              "repeatedExcerptMetadataJoins": 12,
+              "installedOriginalIdentityHashCalls": 12,
+              "buildSourceIdentityHashCalls": 3,
+              "outsideOriginalBodiesReadObserved": false
+            },
+            "role": "CODE",
+            "warnings": {
+              "pluginIconPathWarnings": 4,
+              "unsupportedPowerShellSnapshotWarnings": 1,
+              "errorLevelCount": 0,
+              "retrySamplingOrResumeObserved": false
+            },
+            "verdict": "CHANGES_REQUESTED",
+            "findings": [
+              "Abandonment restores scene/driver state without releasing held input or quiescing pending asynchronous work.",
+              "Stalled work requests graceful exit indefinitely and does not establish a bounded dedicated-process completion path."
+            ],
+            "scope": "affected SOURCE only",
+            "privateOriginalDigests": [
+              {
+                "leaf": "report.txt",
+                "bytes": 3966,
+                "sha256": "B2DA3AC30AEAE3C33376BE29777171276BC8578863BF19527348E45E00D16D1D"
+              },
+              {
+                "leaf": "events.jsonl",
+                "bytes": 245648,
+                "sha256": "1FB0308531BEA055C9F42AB775D5497CAA2C11E4E0FC5A3DCAB5DBFD8FB0F0D7"
+              },
+              {
+                "leaf": "stderr.log",
+                "bytes": 734,
+                "sha256": "8AD1FBC821F03E8DCCDAAE3D8B69D760B973C4AE0752027B21892924CD61C887"
+              },
+              {
+                "leaf": "invocation.json",
+                "bytes": 888,
+                "sha256": "5BBC12B46089972DA0AD006CD8CEEEE317770A3BD2FDF37811DDB97F3E7D1A0E"
+              },
+              {
+                "leaf": "completion.json",
+                "bytes": 156,
+                "sha256": "9C9BB04B5C796BDBB1CF48E1A7AC8E0C3A632D178F0E56ED50912239FA4CAA01"
+              },
+              {
+                "leaf": "prompt.txt",
+                "bytes": 1859,
+                "sha256": "3F29124EC373B06BC34E2DED299E53F97A5B0219C72370205C5B1CB2711C895B"
+              },
+              {
+                "leaf": "AGENTS.md",
+                "bytes": 283,
+                "sha256": "5FDFBD1E6F588C6CDB8E2BB825CB1C7A1309839B8D409E6D101C1E671FFBB6B0"
+              }
+            ],
+            "completion": {
+              "startedUtc": "2026-10-24T04:28:10.8315549Z",
+              "finishedUtc": "2026-10-24T04:30:46.017532Z",
+              "processExitCode": 0,
+              "timedOut": false,
+              "reportExists": true,
+              "commandsStarted": 18,
+              "commandsCompleted": 18,
+              "failedCommandCount": 0,
+              "allCompletedCommandExitCodesZero": true,
+              "startedCompletedCommandsJoined": true,
+              "freshContextsObserved": 1,
+              "turnsStarted": 1,
+              "turnsCompleted": 1
+            }
+          },
+          {
+            "identity": {
+              "inputCount": 26,
+              "byteCountMatches": 26,
+              "sha256Matches": 26,
+              "gitBlobMatches": 10,
+              "allInputAndBlobVerificationBeforeSource": true,
+              "repeatedExcerptMetadataJoins": 12,
+              "installedOriginalIdentityHashCalls": 0,
+              "buildSourceIdentityHashCalls": 0,
+              "outsideOriginalBodiesReadObserved": false
+            },
+            "role": "REQ",
+            "warnings": {
+              "pluginIconPathWarnings": 4,
+              "unsupportedPowerShellSnapshotWarnings": 1,
+              "errorLevelCount": 0,
+              "retrySamplingOrResumeObserved": false
+            },
+            "verdict": "PASS",
+            "findings": [],
+            "scope": "affected SOURCE readiness only",
+            "privateOriginalDigests": [
+              {
+                "leaf": "report.txt",
+                "bytes": 6436,
+                "sha256": "0B912E806C826EB3A1B7B265767FE598BE5F94C26179D6288536B4EC492A1A0F"
+              },
+              {
+                "leaf": "events.jsonl",
+                "bytes": 253350,
+                "sha256": "7DD533E87169193BD5556B90AE44E32BC2C715353ECE03912455E569FF139169"
+              },
+              {
+                "leaf": "stderr.log",
+                "bytes": 734,
+                "sha256": "0E367C2718433B07DC64A2ACA5B2538B7DCF5D7A0A4E7CBD1F5F8A1CEA9A50EB"
+              },
+              {
+                "leaf": "invocation.json",
+                "bytes": 885,
+                "sha256": "3D9F5C5818057C345AE9490B8727ED53ADC042F4C8CF248B60003A2EAAEC3CEA"
+              },
+              {
+                "leaf": "completion.json",
+                "bytes": 155,
+                "sha256": "52333EE2CBF231A539119AB45399F733CF6F8BC1405D3740AC9AE961E0922324"
+              },
+              {
+                "leaf": "prompt.txt",
+                "bytes": 1862,
+                "sha256": "66EB4E936C82D1EED92B32483EA563B661A09B3D4F1D46AC63C6F2C04E1526BE"
+              },
+              {
+                "leaf": "AGENTS.md",
+                "bytes": 282,
+                "sha256": "EE5483989AD38BFB66EE3002CDD01135B46DD08E470362BA80197730FEAE6B86"
+              }
+            ],
+            "completion": {
+              "startedUtc": "2026-10-24T04:28:11.2902667Z",
+              "finishedUtc": "2026-10-24T04:30:40.0302854Z",
+              "processExitCode": 0,
+              "timedOut": false,
+              "reportExists": true,
+              "commandsStarted": 14,
+              "commandsCompleted": 14,
+              "failedCommandCount": 0,
+              "allCompletedCommandExitCodesZero": true,
+              "startedCompletedCommandsJoined": true,
+              "freshContextsObserved": 1,
+              "turnsStarted": 1,
+              "turnsCompleted": 1
+            }
+          }
+        ],
+        "nativeVisibleRunPerformed": false,
+        "sourceRepresentationQualification": "The test source matches raw build bytes directly. Two GameMode raw-hash differences are exactly LF-to-CRLF representation differences according to the frozen source/build record comparison; preserve the CODE report wording and this qualification separately."
+      },
+      {
+        "candidateCommit": "08f5c6938dbb10a5015f9e3c309ceb70c123de56",
+        "manifest": {
+          "leaf": "manifest.json",
+          "bytes": 7514,
+          "sha256": "60907AC29C40744E2D8D1A245E90B67EC8D195525C74A939976C485A832D8C2C"
+        },
+        "postReviewIntegrity": {
+          "inputCount": 38,
+          "byteAndSha256Matches": 38,
+          "rawGitBlobMatches": 10
+        },
+        "roles": [
+          {
+            "identity": {
+              "inputCount": 38,
+              "byteCountMatchesBeforeSource": 38,
+              "sha256MatchesBeforeSource": 38,
+              "gitBlobMatchesBeforeSource": 10,
+              "recordedInstalledOriginReferences": 20,
+              "uniqueInstalledOrigins": 18,
+              "successfulOriginIdentityHashCalls": 18,
+              "allOriginReferencesCovered": true,
+              "buildSourceHashMatches": 3,
+              "rawAndCrlfMappingMatches": 3,
+              "outsideBodiesObserved": false
+            },
+            "role": "CODE",
+            "warnings": {
+              "pluginIconPathWarnings": 4,
+              "unsupportedPowerShellSnapshotWarnings": 1,
+              "errorLevelCount": 0,
+              "retrySamplingOrResumeObserved": false
+            },
+            "verdict": "CHANGES_REQUESTED",
+            "findings": [
+              "Runner ArgumentList quoting is incompatible with Unreal spaced TestExit/ExecCmds values; no separate concrete native lifetime defect reported."
+            ],
+            "scope": "affected SOURCE and required runner integration only",
+            "privateOriginalDigests": [
+              {
+                "leaf": "report.txt",
+                "bytes": 3614,
+                "sha256": "F3D67A83D7C524008D9173067AE769309A6BBD7F244C9E3417D34083A52B9409"
+              },
+              {
+                "leaf": "events.jsonl",
+                "bytes": 332332,
+                "sha256": "D7E4164D5AD6D82AD5E7572AE073D2B07A01664B5675B5E0AE42FE6DD4B95F9D"
+              },
+              {
+                "leaf": "stderr.log",
+                "bytes": 734,
+                "sha256": "D512B1DD3FDA046A7BCA07BC98C4ACBD1BC18224D60A0FB6EFB084021AFA65B1"
+              },
+              {
+                "leaf": "invocation.json",
+                "bytes": 888,
+                "sha256": "787A0C27C4784184F621B9863E1A47E6B99C1849654217B751FF7ABF6DD6FA60"
+              },
+              {
+                "leaf": "completion.json",
+                "bytes": 156,
+                "sha256": "6483BEA6ED25455CB2B678D61D914315A4AD50048461E45A7D8BBCD235C889A3"
+              },
+              {
+                "leaf": "prompt.txt",
+                "bytes": 1977,
+                "sha256": "57048C819649C49056105F993D5C579758D492B71C5D9A18132FACC7A9B92D59"
+              },
+              {
+                "leaf": "AGENTS.md",
+                "bytes": 283,
+                "sha256": "5FDFBD1E6F588C6CDB8E2BB825CB1C7A1309839B8D409E6D101C1E671FFBB6B0"
+              }
+            ],
+            "completion": {
+              "startedUtc": "2026-10-24T04:35:47.2079928Z",
+              "finishedUtc": "2026-10-24T04:39:53.223949Z",
+              "processExitCode": 0,
+              "timedOut": false,
+              "reportExists": true,
+              "commandsStarted": 17,
+              "commandsCompleted": 17,
+              "failedCommandCount": 0,
+              "allCompletedCommandExitCodesZero": true,
+              "startedCompletedCommandsJoined": true,
+              "freshContextsObserved": 1,
+              "turnsStarted": 1,
+              "turnsCompleted": 1
+            }
+          },
+          {
+            "identity": {
+              "inputCount": 38,
+              "byteCountMatchesBeforeSource": 38,
+              "sha256MatchesBeforeSource": 38,
+              "gitBlobMatchesBeforeSource": 10,
+              "recordedInstalledOriginReferences": 20,
+              "uniqueInstalledOrigins": 18,
+              "successfulOriginIdentityHashCalls": 20,
+              "allOriginReferencesCovered": true,
+              "buildSourceHashMatches": 3,
+              "rawAndCrlfMappingMatches": 3,
+              "outsideBodiesObserved": false
+            },
+            "role": "REQ",
+            "warnings": {
+              "pluginIconPathWarnings": 4,
+              "unsupportedPowerShellSnapshotWarnings": 1,
+              "errorLevelCount": 0,
+              "retrySamplingOrResumeObserved": false
+            },
+            "verdict": "CHANGES_REQUESTED",
+            "findings": [
+              "Runner quoting conflicts with exact TestExit guard; restoration assertions omit azimuth/elevation and min/max distance."
+            ],
+            "scope": "affected SOURCE readiness only",
+            "privateOriginalDigests": [
+              {
+                "leaf": "report.txt",
+                "bytes": 5817,
+                "sha256": "84835DE5CD813EEAD1F0FBA2D2702A4BAF4A29DF29EF743F3D8363A415407B7A"
+              },
+              {
+                "leaf": "events.jsonl",
+                "bytes": 373696,
+                "sha256": "1C8C5C74E54B41F87B2CB918E83FE2961340A9C9A35628238A46D356C8128768"
+              },
+              {
+                "leaf": "stderr.log",
+                "bytes": 734,
+                "sha256": "7D8EAABA8C2182840BCE6E22F30E90A71E800BC54076EFB2D9D80C79503BF1BB"
+              },
+              {
+                "leaf": "invocation.json",
+                "bytes": 885,
+                "sha256": "0CF553C9AD27E48A853B0972B653179675EBE34D8A5263EFC2DB7F8D30B7CBF2"
+              },
+              {
+                "leaf": "completion.json",
+                "bytes": 155,
+                "sha256": "EB54C0D689E4F92032CE74D5FBB0D8407665A5059B7E868AC5100A1B48B3EE4E"
+              },
+              {
+                "leaf": "prompt.txt",
+                "bytes": 1980,
+                "sha256": "970BE24F83954CF32CA99CAC5B2D90A3AE2E260F744EACB769E8A0A695B9751C"
+              },
+              {
+                "leaf": "AGENTS.md",
+                "bytes": 282,
+                "sha256": "EE5483989AD38BFB66EE3002CDD01135B46DD08E470362BA80197730FEAE6B86"
+              }
+            ],
+            "completion": {
+              "startedUtc": "2026-10-24T04:35:47.823369Z",
+              "finishedUtc": "2026-10-24T04:39:03.4024455Z",
+              "processExitCode": 0,
+              "timedOut": false,
+              "reportExists": true,
+              "commandsStarted": 16,
+              "commandsCompleted": 16,
+              "failedCommandCount": 0,
+              "allCompletedCommandExitCodesZero": true,
+              "startedCompletedCommandsJoined": true,
+              "freshContextsObserved": 1,
+              "turnsStarted": 1,
+              "turnsCompleted": 1
+            }
+          }
+        ],
+        "nativeVisibleRunPerformed": false,
+        "sourceRepresentationQualification": "Recorded raw/CRLF variants explain the three frozen source/build identities; this relation is not an independent runtime result."
+      },
+      {
+        "postReviewIntegrity": {
+          "gitBlobCount": 10,
+          "byteAndSha256Matches": 38,
+          "rawInputGitBlobMatches": 10,
+          "inputCount": 38
+        },
+        "nativeVisibleRunPerformed": true,
+        "candidateCommit": "4e6518b5439aadde6faadd20f89727ba5961213f",
+        "sourceRepresentationQualification": "Test bytes match the recorded raw working source; GameMode header and implementation working/build hashes match the exact CRLF variants of frozen Git bytes. These source identity records do not attest binaries or native results.",
+        "manifest": {
+          "bytes": 7514,
+          "leaf": "manifest.json",
+          "sha256": "F03827806BAFEE64F83C9BDF9413F3B6A4B72625DEEF95DFA0099DC962293284"
+        },
+        "roles": [
+          {
+            "allCompletedCommandExitsZero": true,
+            "commandsCompleted": 11,
+            "completion": {
+              "startedUtc": "2026-10-24T04:41:45.1254428Z",
+              "finishedUtc": "2026-10-24T04:44:50.4962806Z",
+              "exitCode": 0,
+              "timedOut": false,
+              "reportExists": true
+            },
+            "freshContextsObserved": 1,
+            "role": "CODE",
+            "turnsCompleted": 1,
+            "verdict": "PASS",
+            "identity": {
+              "inputSha256MatchesBeforeSource": 38,
+              "sourceCommitTreeMembershipIndependentlyInspected": false,
+              "inputByteCountMatchesBeforeSource": 38,
+              "recordedGitBlobMatchesBeforeSource": 10,
+              "outsideFilesUsedForIdentityOnly": true
+            },
+            "errorEvents": 0,
+            "scope": "affected SOURCE only",
+            "warnings": {
+              "iconPathWarnings": 4,
+              "unsupportedPowerShellSnapshotWarnings": 1,
+              "errorLevelLines": 0,
+              "samplingRetryOrResumeObserved": false
+            },
+            "privateOriginalDigests": [
+              {
+                "bytes": 3430,
+                "leaf": "report.txt",
+                "sha256": "DAB39900FB0E74986E111EEB19740952FEBAE0013197E95209DE23D9D89E7BB9"
+              },
+              {
+                "bytes": 272525,
+                "leaf": "events.jsonl",
+                "sha256": "F76425DF30BAB66B72EA22CA754AC4C9194F97EA300618BDB05C4143A25F7EB7"
+              },
+              {
+                "bytes": 734,
+                "leaf": "stderr.log",
+                "sha256": "0AB33E203B37BD5989C27A3D5ABD38F8941AF36F434401409A3F6DE624A44DB2"
+              },
+              {
+                "bytes": 888,
+                "leaf": "invocation.json",
+                "sha256": "65DF8545BA17A9D370C94A39F481CD16470EF81EEC619840769A85265421D3C4"
+              },
+              {
+                "bytes": 156,
+                "leaf": "completion.json",
+                "sha256": "6FFADAFE5438E1BF9EB6949EB7D615B43BE30965FFEACC7218DC704B2B08C668"
+              },
+              {
+                "bytes": 1977,
+                "leaf": "prompt.txt",
+                "sha256": "1816BA9AFCB94BDA23E1242C85A9D948D4CFD89F44C51F211B361B1E737A1CFB"
+              },
+              {
+                "bytes": 283,
+                "leaf": "AGENTS.md",
+                "sha256": "5FDFBD1E6F588C6CDB8E2BB825CB1C7A1309839B8D409E6D101C1E671FFBB6B0"
+              }
+            ]
+          },
+          {
+            "allCompletedCommandExitsZero": true,
+            "commandsCompleted": 48,
+            "completion": {
+              "startedUtc": "2026-10-24T04:41:50.315174Z",
+              "finishedUtc": "2026-10-24T04:45:37.2715861Z",
+              "exitCode": 0,
+              "timedOut": false,
+              "reportExists": true
+            },
+            "freshContextsObserved": 1,
+            "role": "REQ",
+            "turnsCompleted": 1,
+            "verdict": "PASS",
+            "identity": {
+              "inputSha256MatchesBeforeSource": 38,
+              "sourceCommitTreeMembershipIndependentlyInspected": false,
+              "inputByteCountMatchesBeforeSource": 38,
+              "recordedGitBlobMatchesBeforeSource": 10,
+              "outsideFilesUsedForIdentityOnly": true
+            },
+            "errorEvents": 0,
+            "scope": "affected SOURCE readiness only",
+            "warnings": {
+              "iconPathWarnings": 4,
+              "unsupportedPowerShellSnapshotWarnings": 1,
+              "errorLevelLines": 0,
+              "samplingRetryOrResumeObserved": false
+            },
+            "privateOriginalDigests": [
+              {
+                "bytes": 5386,
+                "leaf": "report.txt",
+                "sha256": "8C9C70865F47E34FEECCB6AD1EF57D49660310B84A9B4582DBD7179CF20C2CD7"
+              },
+              {
+                "bytes": 337455,
+                "leaf": "events.jsonl",
+                "sha256": "BDFF2F2146482888DAFB8A44D0915B0DBEEB805B233ED304D50EC68B9E3C6998"
+              },
+              {
+                "bytes": 734,
+                "leaf": "stderr.log",
+                "sha256": "5F051304B01AC9A8198C397285FED54B9083B6E1246B761B0DCD5D44CF49FDCA"
+              },
+              {
+                "bytes": 885,
+                "leaf": "invocation.json",
+                "sha256": "A4C7F9B08B8EA6147F6272DD8FC043AD282058D9ED616887BD5C4CAF2F888BFC"
+              },
+              {
+                "bytes": 155,
+                "leaf": "completion.json",
+                "sha256": "94FA41CE3D57EFCD0F0CE3C9097CFDEF0514D8DCD76DBB45E6D37A16E23A23E7"
+              },
+              {
+                "bytes": 1980,
+                "leaf": "prompt.txt",
+                "sha256": "39120CFD09EF48F64FDD662B8A009A80DE6DA7BECF21D17D3054084E8464211A"
+              },
+              {
+                "bytes": 282,
+                "leaf": "AGENTS.md",
+                "sha256": "EE5483989AD38BFB66EE3002CDD01135B46DD08E470362BA80197730FEAE6B86"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "sourcePassIsSeparateFromRuntime": true,
+    "actualEnforcementLimits": [
+      "Retained invocations record requested controls; OS sandbox/process/network isolation and host retention/no-memory internals were not independently attested.",
+      "Observed commands were packet listing/read/hash/display and, where recorded, identity-only original-file hashes; no candidate/helper/build/test/runner execution or GUI/network/credential/peer-report access was observed.",
+      "Read-only review used metadata shell commands; it does not imply a blanket process-execution prohibition.",
+      "SOURCE findings and source-readiness PASS do not establish native input execution, full-board fit, actual Core semantics, zero attempted HTTP or Linux acceptance."
+    ],
+    "originalReportsUnchanged": true
+  },
+  "privateOriginalDigests": [
+    {
+      "leaf": "result.json",
+      "bytes": 3675,
+      "sha256": "E54EDB1AFE245227EFDEEA7FF70A28717553ED4879DDB9A6F722AFC8912C5AC4"
+    },
+    {
+      "leaf": "index.json",
+      "bytes": 12712,
+      "sha256": "95E10385672C03C887EA84D4B8683F47ECD01E1E2DE3E39FC4D82F0855C9CBA7"
+    },
+    {
+      "leaf": "native.log",
+      "bytes": 197814,
+      "sha256": "C15F6FD82A90F0C1E6C10EE7DACBBB51AA0723FD1C25FAD02D7CAFD63F98953D"
+    },
+    {
+      "leaf": "stdout.log",
+      "bytes": 197783,
+      "sha256": "41B5B2120A6AB8688B6D0E64010EF6F0B7974DC4D72940BF89FA150166D98722"
+    },
+    {
+      "leaf": "stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "leaf": "final-window-count.json",
+      "bytes": 73,
+      "sha256": "B2C43B2DB1E85CD26A13A7C69B91490778661D530C10C9F526FE9B59095E88AD"
+    },
+    {
+      "leaf": "01-passive-visible.jpg",
+      "bytes": 80683,
+      "sha256": "B6BE8B58624D4AA6A3E5B1288E47EC4887586CBD60618BF03DD7A982AD18679E"
+    },
+    {
+      "leaf": "01-passive-visible-metadata.json",
+      "bytes": 383,
+      "sha256": "6386B71A2D237E1244B7EF296161504A1896F79241BD3F6A13C4D6B43F0946D9"
+    }
+  ],
+  "provenance": {
+    "runtimeObservation": "Root launched/supervised the owned process, passively observed the visible window and checked the exact automation export and closure",
+    "privateAuditDigests": [
+      {
+        "leaf": "draft-native-camera-runtime-20261024T044826Z-93feaa02.PRIVATE_PROPOSED.json",
+        "bytes": 7071,
+        "sha256": "B2CD77E42AD4B268907949E25D63F9B08F3AF0C81453256B96E35F46F350DF67"
+      },
+      {
+        "leaf": "review-provenance.PRIVATE_PROPOSED.json",
+        "bytes": 24866,
+        "sha256": "E83420CC48FE03D348505FADD585F9E40BDFEB115F2EB141FCDB337C5BBF0CFC"
+      }
+    ],
+    "auxiliaryAudit": "Factual inert metadata/hash audit, not a new independent merits verdict or separate runtime execution"
+  },
+  "exclusions": [
+    "Credential values",
+    "Private session/process/thread/window identifiers",
+    "Raw source/API review bodies",
+    "Raw logs/reports/screenshots"
+  ]
+}

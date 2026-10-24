@@ -121,7 +121,7 @@
     "Application deactivation capture cancellation",
     "Keyboard focus-loss cancellation"
   ],
-  "separateSyntheticSlateCameraCheck": "Additional work; no result incorporated into this completed run.",
+  "separateSyntheticSlateCameraCheck": "Later separate result: 2026-10-24-live-core-native-camera-input.md; held-button controls and F routing passed with synthetic bounds. No result is incorporated into this completed manual run; its F failure remains unresolved.",
   "privateEvidencePolicy": {
     "screenshotCountRetainedPrivately": 17,
     "screenshotsPublished": false,

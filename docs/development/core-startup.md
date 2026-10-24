@@ -177,3 +177,5 @@ Inspect the manual launcher's options without launching a client:
 - A startup timeout is not a gameplay rejection. Inspect the retained managed logs and receipt; do not repeatedly launch on an uncertain receipt or kill an unrelated process. The [README troubleshooting table](../../README.md#troubleshooting) covers missing builds, black-before-Connect, credentials, unknown commands and lost sessions.
 
 The owner directly resumed bounded camera/UI/startup/manual-launcher tests on 2026-10-24. Each launch uses one game window, a ten-minute limit and owned-process cleanup. This bounded test authority does not change the manual setup/run instructions for the owner.
+
+The [actual manual-launcher observations](../plans/evidence/2026-10-24-live-core-camera-visible.md) cover Windows startup, board framing and a Core choice. The separate [native input test](../plans/evidence/2026-10-24-live-core-native-camera-input.md) passed 92 assertions for actual Slate/CameraActor input with synthetic bounds. Both processes are closed; neither result verifies Linux execution or removes the earlier manual F workflow failure.

@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 153 — bounded visible testing resumed; manual launcher and camera subset observed, native input regression in progress, 2026-10-24 UTC / EDT.**
+**Revision 154 — bounded Windows manual-launcher and native camera checks completed; earlier manual F failure retained, Linux UNTESTED, 2026-10-24 UTC / EDT.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -52,7 +52,7 @@ The owner wants to launch the existing client/server personally on Windows and L
 ### Verification
 
 - [x] Publish plan checkpoint `d0af1a8a036d074eca32014dc44c58005efa6f84` before source implementation; push and verify the exact GitHub ref.
-- [x] Build camera source `1193cb6`: Windows Editor compile/link passed (six actions, 11.54 seconds; UBA retried a compile after memory pressure). Thirteen native checks passed, including three camera geometry/shared-input cases and the retained real-Core action; Config remained unchanged. Actual Slate input/rendering remains unverified.
+- [x] Build camera source `1193cb6`: Windows Editor compile/link passed (six actions, 11.54 seconds; UBA retried a compile after memory pressure). Thirteen native checks passed, including three camera geometry/shared-input cases and the retained real-Core action; Config remained unchanged. That background run did not verify actual Slate input/rendering; later bounded observations are separate below.
 - [x] Validate documentation paths/links and parse 15 PowerShell plus seven Bash blocks without executing their setup/run commands. Windows Git Bash syntax checks do not establish Linux execution. No tools or packages were installed.
 - [x] Pass ten stubbed manual-launcher tests and CLI help; verify the actual installed Windows Core identity through the new wrapper without reading credentials or opening a client. Preserve the first sandbox Temp-permission failure and the same-source workspace-temp rerun.
 - [x] Pass non-graphical default-GameMode startup at `721d229` / camera source `1193cb6`: exit 0 in 8.24 seconds, intended GameMode and normal benchmark exit, no original focus error or Error/Fatal lines, unchanged Config. This is not positive focus/input proof.
@@ -60,10 +60,10 @@ The owner wants to launch the existing client/server personally on Windows and L
 - [x] Observe a [bounded actual Python manual-launcher workflow](evidence/2026-10-24-live-core-camera-visible.md) at `a3ededb`: keyboard startup navigation, real Core board, wheel zoom, Frame board, full-board fit across four observed window sizes, UI wheel isolation, refresh preservation and one accepted choice. Client/launcher exited 0; Core remained healthy after client close, then owned Stop completed without force; four Config files stayed unchanged.
 - [x] Build initial opt-in native input regression `c3a751e`: six Windows Editor actions passed in 21.94 seconds, including an automatic UBA retry after memory pressure. Fresh CODE and REQ both requested changes to test failure cleanup and assertion completeness; preserve those reports and repair before any native visible run. This is not a production camera defect finding or runtime acceptance.
 - [x] Build repaired regression `91174a8`: six Windows Editor actions passed in 13.72 seconds with one compiler action at a time and no retry. Fresh REQ passed affected SOURCE; CODE requested abandonment/stalled-work lifecycle changes. Preserve both review rounds; no native visible run occurred at those revisions.
-- [x] Build the dedicated-process lifecycle repair: six Windows Editor actions passed in 12.79 seconds with one compiler action at a time and no retry; the three working source hashes remained unchanged across the build. Fresh CODE/REQ reviews and actual native input execution remain pending.
+- [x] Build dedicated-process lifecycle repair `08f5c69`: six Windows Editor actions passed in 12.79 seconds with one compiler action at a time and no retry; the three working source hashes remained unchanged across the build. Its later review findings are preserved below.
 - [x] Preserve fresh `08f5c69` CODE/REQ CHANGES_REQUESTED: both identified Unreal value-quoting in the private runner; REQ also required full navigation/zoom-limit restoration assertions. Correct the runner and assertions before execution; no native visible run occurred at this revision.
-- [x] Build the full-restoration assertion repair: four Windows Editor actions passed in 6.30 seconds, without retry; all three build-source hashes remained unchanged. Freeze the corrected runner with explicit Unreal value quoting for fresh CODE/REQ reviews before native execution.
-- [ ] Finish held RMB orbit/MMB pan and F verification. The desktop helper has no held-button drag API; F attempts in the manual run did not restore framing. Add a focused opt-in Unreal AutomationDriver regression using the actual live widgets/CameraActor and labelled synthetic camera bounds, then build, independently review and execute it within the approved bounds. Synthetic results must not claim live-Core or full rendered-board fidelity.
+- [x] Build full-restoration assertion repair `4e6518b`: four Windows Editor actions passed in 6.30 seconds, without retry; all three build-source hashes remained unchanged. Fresh independent CODE and distinct REQ both passed affected SOURCE; all 38 frozen inputs and ten Git blobs matched before source inspection and after review.
+- [x] Execute [bounded native camera input verification](evidence/2026-10-24-live-core-native-camera-input.md) at `4e6518b5439aadde6faadd20f89727ba5961213f`: one test passed 92 assertions, no warnings/failures. Actual live widgets/CameraActor verified held RMB orbit, MMB pan, matching release/post-release stability, wheel clamps, F restoration/idempotence and endpoint UI isolation using labelled synthetic bounds. Process exited 0 in 20.49 seconds; Config unchanged, final game-window count zero. This does not establish live-Core or rendered-board fidelity, zero HTTP attempts or active-drag cancellation. The separate manual F workflow failure remains unresolved with no established source cause.
 - [x] Record actual results/limits and push/exact-ref-verify plan `d0af1a8`, camera `1193cb6` and startup guide/manual launcher `721d229`. Publish the final evidence checkpoint and update existing PR #3 without merging.
 - [ ] Execute native Linux build/render/package when a host is arranged (**UNTESTED**).
 
@@ -116,7 +116,7 @@ Implementation and verification remain separate. The observed visible result bel
 2. **Connection/state:** implement native transport, board and viewer-state UI. Push source with actual checks and pending verification clearly recorded.
 3. **Action/result:** wire a real offered setup choice, authoritative refresh, explicit errors and same-command reconciliation. Add easy managed-launch/attach instructions; push.
 4. **Focused validation:** build, execute protocol checks and independent reviews. Push findings/fixes and evidence at coherent checkpoints.
-5. **Rendered feedback:** the resumed manual-launcher workflow now observes repaired startup navigation, real-Core framing/zoom/UI isolation and lifecycle behavior. Complete the focused native Slate regression for held-button orbit/pan and the unresolved F path; build/review it before a bounded visible execution. Then obtain owner ergonomics feedback. Linux still needs a native host.
+5. **Rendered feedback:** the resumed manual-launcher workflow observes repaired startup navigation, real-Core framing/zoom/UI isolation and lifecycle behavior. The separately reviewed native Slate regression passed held orbit/pan, release, zoom clamps, F routing and UI isolation with synthetic bounds. Obtain owner ergonomics feedback; retain the earlier manual F failure and unverified active-drag cancellation cases. Linux still needs a native host.
 
 Combine adjacent implementation steps when they form one coherent runnable increment. Do not create bureaucratic checkpoints for individual lines; every actual checkpoint must be pushed and exact-ref verified. Never force push or upload credentials, private sessions, generated outputs or ignored evidence.
 
@@ -145,14 +145,15 @@ Selected host: checked-out `Warhammer_40k_AI/scripts/run_phase18m_reference_serv
 - Profile preservation remains a product requirement; defer migration proof until a usable client can be prioritized.
 - Linux x86-64 build/render/package remains **UNTESTED**. Windows success cannot stand in for it.
 - External distribution, content provenance/clearance, runtime redistribution and production hosting remain later gates.
-- Existing reference evidence retains its original bounds. The resumed visible evidence adds actual manual-launcher/startup/board-fit/zoom/Frame/UI observations at `a3ededb`; it does not establish full gameplay, held-button drags, effective F routing, exhaustive DPI/readability or later source repairs.
+- Existing reference evidence retains its original bounds. The resumed manual observations at `a3ededb` and separate synthetic native input check at `4e6518b` cover only their stated workflows. Neither proves full gameplay, exhaustive DPI/readability, active-drag cancellation on Escape/deactivation/focus loss/resize, mismatched user/pointer events, failure/watchdog paths, later source repairs or native Linux behavior. Native F routing passed; the manual F failure remains historical and unresolved.
 
 ## Evidence and history
 
 - [Bounded live-Core visible setup](evidence/2026-10-23-live-core-visible.md), [structured result](evidence/2026-10-23-live-core-visible.json), and [chronological slice progress](evidence/2026-10-23-live-core-slice.md).
 - [Startup-focus repair checks and independent review provenance](evidence/2026-10-23-live-core-focus-repair.json); affected source/background scope at that date, followed by the resumed visible observations below.
 - [Owner startup/camera checks and independent review provenance](evidence/2026-10-23-live-core-ergonomics.json); source/background checks at their recorded revision.
-- [Resumed camera/manual-launcher observations](evidence/2026-10-24-live-core-camera-visible.md), [structured result](evidence/2026-10-24-live-core-camera-visible.json); F unresolved, held-button native input follow-up pending, Linux UNTESTED.
+- [Resumed camera/manual-launcher observations](evidence/2026-10-24-live-core-camera-visible.md), [structured result](evidence/2026-10-24-live-core-camera-visible.json); manual F unresolved, Linux UNTESTED.
+- [Bounded native camera input check](evidence/2026-10-24-live-core-native-camera-input.md), [structured result and source-review history](evidence/2026-10-24-live-core-native-camera-input.json); 92 assertions passed on actual Slate/CameraActor with synthetic bounds, no Core/rendered-board/Linux claim.
 
 - [BOOT01](evidence/2026-10-16-boot01.md).
 - [Original E01 boundary](evidence/2026-10-16-e01-boundary.md), [SLOW120 provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json).

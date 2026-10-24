@@ -8,6 +8,8 @@ The owner's latest increment is comprehensive Windows/Linux **Get started playin
 
 **The owner directly resumed bounded visible testing on 2026-10-24**, approving camera controls, board framing, UI isolation, startup focus and the manual launcher. This supersedes the October 23 screen HOLD for those tests. Use one game window at a time, at most ten minutes per launch, with owned-process cleanup and private screenshots/logs. Close each run normally when possible; no blanket unrelated desktop authority is implied. Private-source review consent remains separate from desktop authority. The earlier [visible setup workflow](docs/plans/evidence/2026-10-23-live-core-visible.md) remains a closed historical run.
 
+The resumed [manual launcher check](docs/plans/evidence/2026-10-24-live-core-camera-visible.md) and separate [native camera input check](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) are closed with no game window remaining. Preserve the manual F failure with cause unestablished; the native synthetic-bound F route passed separately. Linux and active-drag cancellation coverage remain unverified. Proceed from the active plan's owner-feedback step; do not imply broader acceptance.
+
 ## Repository boundaries
 
 - This repository is a C++ first Unreal presentation client. Python Core remains a separately maintained authority.
