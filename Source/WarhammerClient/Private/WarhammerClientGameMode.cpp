@@ -122,6 +122,7 @@ class SLiveCorePanel : public SCompoundWidget
 {
 public:
     SLATE_BEGIN_ARGS(SLiveCorePanel) {} SLATE_END_ARGS()
+    virtual bool SupportsKeyboardFocus() const override { return true; }
 
     void Construct(const FArguments&, FLiveCoreScene* InScene)
     {
