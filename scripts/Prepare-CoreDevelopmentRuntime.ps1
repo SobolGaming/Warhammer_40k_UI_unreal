@@ -48,33 +48,52 @@ $run = Join-Path $repo ('.local/development/core-prepare/' + [DateTime]::UtcNow.
 Assert-PlainPath $run
 [IO.Directory]::CreateDirectory($run) | Out-Null
 function Invoke-PreparationTool([string]$Executable, [string[]]$Arguments, [string]$Stage, [int]$Seconds = 900) {
+    if (-not ('Warhammer.Tools.OwnedBuildProcess' -as [type])) { Add-Type -Path (Join-Path $repo 'scripts/OwnedBuildProcess.cs') }
     $info = [Diagnostics.ProcessStartInfo]::new()
     $info.FileName = $Executable; $info.WorkingDirectory = $run
     $info.UseShellExecute = $false; $info.CreateNoWindow = $true
     $info.RedirectStandardOutput = $true; $info.RedirectStandardError = $true
     foreach ($argument in $Arguments) { $info.ArgumentList.Add($argument) }
-    $process = [Diagnostics.Process]::new(); $process.StartInfo = $info
-    $output = [IO.File]::Create((Join-Path $run ($Stage + '.stdout.log')))
-    $errors = [IO.File]::Create((Join-Path $run ($Stage + '.stderr.log')))
-    $started = $false
+    $stdoutPath = Join-Path $run ($Stage + '.stdout.log')
+    $stderrPath = Join-Path $run ($Stage + '.stderr.log')
+    $process = $null; $failure = $null; $cleanupFailure = $null
+    $cleanup = [ordered]@{ ownership = 'Windows job assigned before resume; kill on job close'; parentExited = $false; totalProcesses = $null; confirmed = $false; finalActiveProcesses = $null }
     try {
-        if (!$process.Start()) { throw ('Could not start preparation stage ' + $Stage) }
-        $started = $true
-        $stdout = $process.StandardOutput.BaseStream.CopyToAsync($output)
-        $stderr = $process.StandardError.BaseStream.CopyToAsync($errors)
-        if (!$process.WaitForExit($Seconds * 1000)) {
-            $process.Kill($true); $null = $process.WaitForExit(5000)
-            throw ('Preparation stage exceeded its bounded deadline: ' + $Stage)
+        $process = [Warhammer.Tools.OwnedBuildProcess]::Start($info, $stdoutPath, $stderrPath, 5000)
+        $clock = [Diagnostics.Stopwatch]::StartNew()
+        while (!$process.WaitForExit(100)) {
+            if ($clock.Elapsed.TotalSeconds -gt $Seconds) { throw ('Preparation stage exceeded its bounded deadline: ' + $Stage) }
+            if ([IO.FileInfo]::new($stdoutPath).Length -gt 64MB -or [IO.FileInfo]::new($stderrPath).Length -gt 64MB) { throw ('Preparation output exceeded its 64 MiB per-stream budget: ' + $Stage) }
         }
-        if (![Threading.Tasks.Task]::WaitAll([Threading.Tasks.Task[]]@($stdout, $stderr), 5000)) { throw ('Preparation streams exceeded the five-second drain limit: ' + $Stage) }
-        $null = $stdout.GetAwaiter().GetResult(); $null = $stderr.GetAwaiter().GetResult()
+        # Parent exit does not release the job or establish descendant exit.
+        # Keep ownership through a bounded drain, even if a child retains output.
+        $drain = [Diagnostics.Stopwatch]::StartNew()
+        while (!$process.WaitJobEmpty(100)) {
+            if ($drain.Elapsed.TotalSeconds -gt 5) { throw ('Preparation descendants survived the parent beyond five seconds: ' + $Stage) }
+            if ($clock.Elapsed.TotalSeconds -gt $Seconds) { throw ('Preparation stage exceeded its bounded deadline: ' + $Stage) }
+            if ([IO.FileInfo]::new($stdoutPath).Length -gt 64MB -or [IO.FileInfo]::new($stderrPath).Length -gt 64MB) { throw ('Preparation output exceeded its 64 MiB per-stream budget: ' + $Stage) }
+        }
+        if ($clock.Elapsed.TotalSeconds -gt $Seconds) { throw ('Preparation stage exceeded its bounded deadline: ' + $Stage) }
+        if ([IO.FileInfo]::new($stdoutPath).Length -gt 64MB -or [IO.FileInfo]::new($stderrPath).Length -gt 64MB) { throw ('Preparation output exceeded its 64 MiB per-stream budget: ' + $Stage) }
         if ($process.ExitCode -ne 0) { throw ('Preparation failed at ' + $Stage + '; inspect private output under ' + $run) }
-        $output.Dispose(); $errors.Dispose()
-        return [IO.File]::ReadAllText((Join-Path $run ($Stage + '.stdout.log')), $utf8).Trim()
+    } catch { $failure = $_
     } finally {
-        if ($started -and !$process.HasExited) { $process.Kill($true); $null = $process.WaitForExit(5000) }
-        $process.Dispose(); $output.Dispose(); $errors.Dispose()
+        if ($null -ne $process) {
+            try { $cleanup.parentExited = $process.HasExited; $cleanup.totalProcesses = $process.TotalProcessCount }
+            catch { $cleanupFailure = $_ }
+            try { $process.Dispose() } catch { if (!$cleanupFailure) { $cleanupFailure = $_ } }
+            $cleanup.confirmed = $process.CleanupConfirmed
+            $cleanup.finalActiveProcesses = $process.FinalActiveProcessCount
+            if (!$cleanup.confirmed -and !$cleanupFailure) { $cleanupFailure = [Management.Automation.ErrorRecord]::new([InvalidOperationException]::new('Preparation job cleanup could not be confirmed.'), 'PreparationCleanup', [Management.Automation.ErrorCategory]::CloseError, $null) }
+        }
+        if ($failure) {
+            $failure.Exception.Data['PreparationCleanup'] = [pscustomobject]$cleanup
+            if ($cleanupFailure) { $failure.Exception.Data['PreparationCleanupFailure'] = $cleanupFailure.Exception.GetType().FullName }
+        }
     }
+    if ($failure) { throw $failure }
+    if ($cleanupFailure) { throw $cleanupFailure }
+    return [IO.File]::ReadAllText($stdoutPath, $utf8).Trim()
 }
 $gitOptions = @('--no-optional-locks', '-c', 'core.fsmonitor=false', '-c', 'core.untrackedCache=false', '-c', 'core.hooksPath=NUL', '-C', $reference)
 $beforeHead = Invoke-PreparationTool $git ($gitOptions + @('rev-parse', 'HEAD')) 'reference-head' 30

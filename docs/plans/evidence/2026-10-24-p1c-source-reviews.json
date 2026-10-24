@@ -69,16 +69,34 @@
         {
           "id": "P1C-CODE-1",
           "priority": "P2",
-          "status": "REPAIR_PENDING",
+          "status": "REPAIRED_FRESH_REVIEW_PENDING",
           "summary": "Preparation must own descendants after parent exit; use existing Windows job and real child-outlives-parent control."
         },
         {
           "id": "P1C-CODE-2",
           "priority": "P2",
-          "status": "INTERFACE_SUPPLEMENT_PENDING",
+          "status": "EXACT_PRODUCER_SUPPLEMENT_READY_FRESH_REVIEW_PENDING",
           "summary": "Provide exact selected-Core nonempty roster producer serialization and representative data. Evidence blocker, not an established mismatch."
         }
       ]
     }
-  ]
+  ],
+  "repairChecks": {
+    "processCases": 5,
+    "status": "PASS_INERT_NATIVE",
+    "outlivingChild": {
+      "outputMutationStopped": true,
+      "cleanupConfirmed": true,
+      "finalActiveProcesses": 0,
+      "inheritedBothStreams": true,
+      "parentExited": true,
+      "jobTotalProcesses": 4,
+      "descendantAbsentAfterFailure": true
+    },
+    "rawResultSha256": "897d9134891cc3f1c7aca2c9e582796e58718ecc483b3b36c366e5e0af003392",
+    "miniatureGitCases": 3,
+    "profileCases": 8,
+    "cppConfigContentChanged": false,
+    "scope": "Actual hidden inert processes plus private miniature Git and offline profile controls; no Core/UI/native client launch."
+  }
 }
