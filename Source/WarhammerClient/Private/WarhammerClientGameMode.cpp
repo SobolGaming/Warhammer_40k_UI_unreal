@@ -733,7 +733,9 @@ bool AWarhammerClientGameMode::ObserveCameraInputProofForTests(FLiveCoreCameraIn
     Out.ActorLocation = Scene->Camera->GetActorLocation(); Out.ActorRotation = Scene->Camera->GetActorRotation();
     const auto* Controller = Scene->World()->GetFirstPlayerController();
     Out.bViewTarget = Controller && Controller->GetViewTarget() == Scene->Camera.Get();
-    if (const auto Endpoint = Scene->Panel->EndpointForInputProof().Pin()) { Out.bEndpointFocused = Endpoint->HasKeyboardFocus(); }
+    if (const auto Endpoint = Scene->Panel->EndpointForInputProof().Pin())
+    { Out.bEndpointFocused = Endpoint->HasKeyboardFocus(); Out.EndpointText = Endpoint->GetText().ToString(); }
+    Out.CameraError = Scene->CameraError;
     Out.Focus = Scene->CameraNavigation.GetFocus(); Out.Distance = Scene->CameraNavigation.GetDistance();
     Out.MinimumDistance = Scene->CameraNavigation.GetMinimumDistance();
     Out.MaximumDistance = Scene->CameraNavigation.GetMaximumDistance();

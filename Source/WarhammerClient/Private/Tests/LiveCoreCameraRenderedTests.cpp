@@ -157,6 +157,13 @@ private:
             FMath::IsNearlyEqual(A.Distance, B.Distance, 1.e-3) &&
             FMath::IsNearlyEqual(A.Azimuth, B.Azimuth, 1.e-3) && FMath::IsNearlyEqual(A.Elevation, B.Elevation, 1.e-3);
     }
+    static bool ActualDragMoved(const FLiveCoreCameraInputObservation& A, const FLiveCoreCameraInputObservation& B, bool bOrbit)
+    {
+        return bOrbit ? !A.ActorRotation.Equals(B.ActorRotation, 1.e-3) &&
+            A.Focus.Equals(B.Focus, 1.e-3) && FMath::IsNearlyEqual(A.Distance, B.Distance, 1.e-3) :
+            !A.ActorLocation.Equals(B.ActorLocation, 1.e-3) && !A.Focus.Equals(B.Focus, 1.e-3) &&
+            A.ActorRotation.Equals(B.ActorRotation, 1.e-3) && FMath::IsNearlyEqual(A.Distance, B.Distance, 1.e-3);
+    }
     static bool WithinDistanceBounds(const FLiveCoreCameraInputObservation& O)
     {
         return FMath::IsFinite(O.Distance) && FMath::IsFinite(O.MinimumDistance) && FMath::IsFinite(O.MaximumDistance) &&
@@ -247,11 +254,11 @@ private:
         });
         Input(TEXT("Establish an actual held drag before cancellation"), [this, Button](IAsyncActionSequence& S)
         { S.MoveToPosition(Board).Click(EMouseButtons::Left).Press(Button).MoveToPosition(OrbitEnd); });
-        Do(TEXT("Observe the live actor and matching held capture"), [this, Owner]()
+        Do(TEXT("Observe the live actor and matching held capture"), [this, Owner, bOrbit]()
         {
             Read(Before);
             Check(Before.bFocused && Before.bPolicyCapture && Before.bSlateCapture && Before.CaptureOwner == Owner &&
-                !SameNavigation(Before, CancelStart), TEXT("Cancellation starts from an actual mutated live camera with matching owned capture"));
+                ActualDragMoved(Before, CancelStart, bOrbit), TEXT("Cancellation starts from an actual mutated live camera with matching owned capture"));
         });
         if (Reason == EDragCancellation::Escape)
         { Input(TEXT("Route Escape while the camera button is held"), [](IAsyncActionSequence& S) { S.Type(EKeys::Escape); }); }
@@ -333,8 +340,8 @@ private:
         Do(TEXT("Save the settled navigation before recovery"), [this]() { Read(Before); });
         Input(TEXT("A fresh focused press can start a new camera gesture"), [this, Button](IAsyncActionSequence& S)
         { S.MoveToPosition(Board).Click(EMouseButtons::Left).Press(Button).MoveToPosition(OrbitEnd); });
-        Do(TEXT("Observe fresh-gesture recovery after cancellation"), [this, Owner]()
-        { FLiveCoreCameraInputObservation O; Read(O); Check(O.bPolicyCapture && O.bSlateCapture && O.CaptureOwner == Owner && !SameNavigation(O, Before), TEXT("Fresh board press recovers actual camera navigation and matching capture")); });
+        Do(TEXT("Observe fresh-gesture recovery after cancellation"), [this, Owner, bOrbit]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(O.bPolicyCapture && O.bSlateCapture && O.CaptureOwner == Owner && ActualDragMoved(O, Before, bOrbit), TEXT("Fresh board press recovers actual camera navigation and matching capture")); });
         Input(TEXT("Release the recovered camera gesture"), [Button](IAsyncActionSequence& S) { S.Release(Button); });
         Do(TEXT("Observe recovered capture fully released"), [this]()
         { FLiveCoreCameraInputObservation O; Read(O); Check(!O.bPolicyCapture && !O.bSlateCapture, TEXT("Recovery leaves no capture")); });
@@ -480,6 +487,9 @@ private:
             { Check(SameNavigation(O, Baseline) && O.bReady == Baseline.bReady &&
                 FMath::IsNearlyEqual(O.MinimumDistance, Baseline.MinimumDistance, 1.e-3) &&
                 FMath::IsNearlyEqual(O.MaximumDistance, Baseline.MaximumDistance, 1.e-3), TEXT("Original navigation, zoom bounds and actor pose restored")); }
+            Check(O.EndpointText.Equals(Baseline.EndpointText, ESearchCase::CaseSensitive) &&
+                O.CameraError.Equals(Baseline.CameraError, ESearchCase::CaseSensitive),
+                TEXT("Original endpoint text and camera diagnostic restored; values are not logged"));
         }
         if (bVerifyDriver && FSlateApplication::IsInitialized())
         {

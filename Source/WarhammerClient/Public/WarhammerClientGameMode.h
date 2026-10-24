@@ -22,6 +22,8 @@ struct FLiveCoreCameraInputObservation
     TWeakPtr<SWidget> Surface;
     TWeakPtr<SWidget> Endpoint;
     TWeakPtr<SWidget> Viewport;
+    FString EndpointText;
+    FString CameraError;
     FVector ActorLocation = FVector::ZeroVector;
     FRotator ActorRotation = FRotator::ZeroRotator;
     FVector Focus = FVector::ZeroVector;
