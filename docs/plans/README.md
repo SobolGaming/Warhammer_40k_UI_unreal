@@ -2,7 +2,7 @@
 
 [unreal-migration-plan.md](unreal-migration-plan.md) is the **single canonical root plan** for current scope, all feature-parity milestones and implementation/verification status. `unreal-development-plan.md` preserves old links as a pointer only. The owner has confirmed `Warhammer_40k_UI_arcade` as the Python UI baseline.
 
-Current finite increment: **P1c Core44.5 adoption**, [PR #6](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/6), on `codex/p1c-core-44-5-adoption` from PR #5 merge `062863c1`. The [native results](evidence/2026-10-24-p1c-core-adoption.md) and [machine-readable identities](evidence/2026-10-24-p1c-core-adoption.json) record the separate selected4f9 runtime, build, focused checks and real Managed/Attach setup workflow. Independent source reviews and closing status remain separate in the canonical plan. No new rendered44.5 claim is made. P1b/PR #5 is merged; its visible results remain exact44.3 evidence.
+Current finite increment: **P1c Core44.5 adoption**, [PR #6](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/6), on `codex/p1c-core-44-5-adoption` from PR #5 merge `062863c1`. The [native results](evidence/2026-10-24-p1c-core-adoption.md) and [machine-readable identities](evidence/2026-10-24-p1c-core-adoption.json) record the separate selected4f9 runtime, build, focused checks and real Managed/Attach setup workflow. Fresh independent CODE and REQ [SOURCE reviews](evidence/2026-10-24-p1c-source-reviews.json) passed at a31f64f. This finite PR is ready for review; closing status is in the canonical plan. No new rendered44.5 claim is made. P1b/PR #5 is merged; its visible results remain exact44.3 evidence.
 
 P1b supporting evidence:
 

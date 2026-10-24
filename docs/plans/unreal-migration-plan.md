@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 164, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 165, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -25,7 +25,9 @@ Verification:
 
 - [x] Run focused launcher/projection/identity/malformed-field/viewer-disclosure controls and build the affected native client. The [actual results](evidence/2026-10-24-p1c-core-adoption.md) record12 Unit +4 resources +Managed/Attach real integration,18 executions/17 names; native input and source bindings remain explicit.
 - [x] Run actual44.5 create → offered setup action → refresh in Managed and Attach modes; record runtime/input identities and owned/attached cleanup. One offered setup choice committed before authoritative refresh; Managed stopped normally, attached host remained HTTP200 then its separate owner stopped it.
-- [ ] Obtain independent CODE and separate requirements reviews, publish results/limits and close this finite PR scope. Initial REQ passed at de95717; CODE requested prep descendant ownership and narrow nonempty-roster producer evidence. [Findings](evidence/2026-10-24-p1c-source-reviews.json) remain open until repaired and freshly reviewed.
+- [x] Obtain independent CODE and separate requirements reviews, publish results/limits and close this finite PR scope. Fresh CODE and separate REQ both passed at `a31f64f5247c382a74ffd89ad45d4094308956de` after the preparation-job repair and exact roster-producer supplement. The [review record](evidence/2026-10-24-p1c-source-reviews.json) retains both rounds. The full repaired preparation recipe also passed from exact copied scripts in a short isolated root; its deeper Git path-limit failure remains recorded.
+
+**P1c is complete within this finite boundary; PR #6 is OPEN and ready for review**, observed MERGEABLE/CLEAN with no remote CI checks/formal GitHub reviews reported. Stop implementation scope here. The native build uses cc494c3, final preparation/source review uses a31f64f, and subsequent commits publish documentation/evidence with unchanged runtime inputs. No new rendered44.5, Linux, full-battle or roster-editor claim is made. The next implementation slice is the thin P2 public session/decision shell in a separate branch/PR.
 
 ## Closed P1b Windows packaged interactive preview
 
@@ -180,7 +182,7 @@ Verification:
 
 - [ ] Build the adapted client and run a representative real create â†’ offered action â†’ refresh workflow against the exact new runtime, plus focused identity, malformed/new-field and viewer-disclosure controls.
 - [ ] Record reachable new-family workflows as their editors land, or a concrete Core/public-service exposure gap. Do not require all89 families or all internal rules before accepting the narrow adoption slice. **Deferred to P4 editor slices:** P1c adds no family editor or fabricated start/mutation route. `select_coherency_casualty` preserves the offered physical model and per-casualty/final `completes_boundary` distinction; Core supplies legal offers and validates/applies removal. `select_source_reposition` retains its exact request/context. This is an acknowledged editor/workflow gap, not a claimed Core defect or a P1c runtime-adoption gate.
-- [ ] Independently review affected changes, publish exact source/runtime/input identities and actual limits, and commit/push checkpoints. Full latest-Core coverage remains P2â€“P10 work.
+- [x] Independently review affected changes, publish exact source/runtime/input identities and actual limits, and commit/push checkpoints. Full latest-Core coverage remains P2â€“P10 work.
 
 ### P2 â€” General public session and decision application shell
 

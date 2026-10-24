@@ -79,6 +79,81 @@
           "summary": "Provide exact selected-Core nonempty roster producer serialization and representative data. Evidence blocker, not an established mismatch."
         }
       ]
+    },
+    {
+      "sourceHead": "a31f64f5247c382a74ffd89ad45d4094308956de",
+      "declaredInputs": 62,
+      "declaredInputBytes": 728163,
+      "reviews": [
+        {
+          "role": "CODE",
+          "verdict": "PASS",
+          "sourceHead": "a31f64f5247c382a74ffd89ad45d4094308956de",
+          "startedUtc": "2026-10-24T19:00:37.3341532Z",
+          "finishedUtc": "2026-10-24T19:04:29.3216708Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "approval": "never",
+          "sandbox": "read-only",
+          "memoryDisabledRequested": true,
+          "ephemeral": true,
+          "timeoutSeconds": 600,
+          "manifestSha256": "F111A0A1298B7AAF07FF58452339A2261AE025A4BEE7E8FB3BFCB2DC21DD525B",
+          "promptSha256": "C5BEB91708A4673645B82636F1B078F948756C589C16BF60C3E1EC5EE75A0CB3",
+          "rawReport": {
+            "bytes": 1964,
+            "sha256": "1b734466aaedd69155ea3a3eb48ea611c3f130b11bdcb3ebe9875f6c0c88593d"
+          },
+          "invocation": {
+            "bytes": 982,
+            "sha256": "f40507aff13f32bd4d40eabaf1efc81ef091fe496ebdf9057992d91d903c3bbd"
+          },
+          "completion": {
+            "bytes": 155,
+            "sha256": "5d080a8f742967a501125e9218ec448afe435a4dfedc988bf2cf8f29c2cbadad"
+          }
+        },
+        {
+          "role": "REQ",
+          "verdict": "PASS",
+          "sourceHead": "a31f64f5247c382a74ffd89ad45d4094308956de",
+          "startedUtc": "2026-10-24T19:00:37.2157769Z",
+          "finishedUtc": "2026-10-24T19:04:35.5014214Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "approval": "never",
+          "sandbox": "read-only",
+          "memoryDisabledRequested": true,
+          "ephemeral": true,
+          "timeoutSeconds": 600,
+          "manifestSha256": "F111A0A1298B7AAF07FF58452339A2261AE025A4BEE7E8FB3BFCB2DC21DD525B",
+          "promptSha256": "4E4523922202C18F1E0DA418F3F38F46B250389F99BD6DF1E9A44506B9636692",
+          "rawReport": {
+            "bytes": 4006,
+            "sha256": "22f56051b8093c3ce899a0d36b85d87ed5218e7049aeb09fb44698c16f451a2a"
+          },
+          "invocation": {
+            "bytes": 979,
+            "sha256": "f5e1c1730f50014dbeb23a17b9deaf76fd2eba1e07ce651d988b38294fdc9f0c"
+          },
+          "completion": {
+            "bytes": 155,
+            "sha256": "5a2eb61eab1eb43687b4870dcc5ed9acdc6fec6ea1182029a2d43d127da652a2"
+          }
+        }
+      ],
+      "resolutions": [
+        {
+          "id": "P1C-CODE-1",
+          "status": "CLOSED",
+          "basis": "Fresh CODE confirms job ownership through cleanup; actual outliving-child and full repaired preparation checks are separate runtime evidence."
+        },
+        {
+          "id": "P1C-CODE-2",
+          "status": "CLOSED",
+          "basis": "Exact selected-Core payload/producer/serializer/positive-index/disclosure definitions and representative source data support the roster field mapping; no mismatch was established."
+        }
+      ]
     }
   ],
   "repairChecks": {
@@ -98,5 +173,7 @@
     "profileCases": 8,
     "cppConfigContentChanged": false,
     "scope": "Actual hidden inert processes plus private miniature Git and offline profile controls; no Core/UI/native client launch."
-  }
+  },
+  "status": "PASS_FINITE_SOURCE",
+  "settingsLimits": "Separate fresh ephemeral CLI sessions requested read-only, approval-never and memories disabled. Reviewers observed advertised sandbox/approval controls and inert behavior; serving model, host disposal and platform memory enforcement were not independently attested."
 }

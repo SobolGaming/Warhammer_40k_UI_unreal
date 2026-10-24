@@ -4,6 +4,8 @@ This repository is a C++ Unreal Engine 5.8 presentation client for the separatel
 
 This guide describes the source tree and current component boundaries. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns scope, priorities and implementation/verification status. P1b completed bounded Windows build, affected-source review, non-visible checks and visible packaged Managed/Attach workflows for typed decision presentation/invalidation, immediate-submission labels and focus guidance. These results cover the limited setup-choice preview. Use the [README](README.md) for commands and the [evidence index](docs/plans/README.md) for exact results and remaining limits.
 
+P1c completed explicit selected44.5 protocol/runtime adoption with a narrow typed public-roster seam. The [native results](docs/plans/evidence/2026-10-24-p1c-core-adoption.md) cover the affected build, focused tests, real Managed/Attach setup workflow and repaired preparation recipe. Fresh CODE/REQ SOURCE reviews passed separately at a31f64f. This adds no roster editor or new rendered/Linux result.
+
 ## Repository map
 
 ```text

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "milestone": "P1c bounded Core44.5 adoption",
-  "status": "NATIVE_PASS_SOURCE_CHANGES_REQUESTED",
+  "status": "BOUNDED_P1C_PASS",
   "implementationHead": "cc494c3ca5a9b4c98acddf189bf497c5eb3af1fc",
   "launcherRepairHead": "de95717262d4db5d37b308a940cc2df802cf40d4",
   "runtime": {
@@ -323,7 +323,8 @@
   ],
   "nativeInputBinding": {
     "sourceConfigContentUnchangedThroughRepair": true,
-    "sourceConfigContentUnchangedThroughFinalPreparationRepair": true
+    "sourceConfigContentUnchangedThroughFinalPreparationRepair": true,
+    "reviewedSourceScriptsConfigContentUnchangedThroughClosingEvidence": true
   },
   "scriptChecks": {
     "cases": 111,
@@ -412,5 +413,20 @@
     ],
     "rawResultSha256": "9bbd11819657a7c64e5576eed5a31ebd25471775acec17c66bc6802965d50776",
     "scope": "Full actual clone, frozen dependency install, package install, identity verification and provenance from exact copied scripts in a short fresh isolated workspace root; neither working runtime replaced."
+  },
+  "reviewedSourceHead": "a31f64f5247c382a74ffd89ad45d4094308956de",
+  "sourceReviewVerdicts": {
+    "CODE": "PASS_FINITE_SOURCE",
+    "REQ": "PASS_FINITE_SOURCE"
+  },
+  "prAtReadiness": {
+    "number": 6,
+    "state": "OPEN",
+    "isDraft": false,
+    "headRefOid": "34b1d92674cf168fc7291e414c8d674613c088b0",
+    "mergeable": "MERGEABLE",
+    "mergeStateStatus": "CLEAN",
+    "statusCheckRollup": [],
+    "latestReviews": []
   }
 }
