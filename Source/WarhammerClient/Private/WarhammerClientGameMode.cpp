@@ -730,6 +730,8 @@ bool AWarhammerClientGameMode::ObserveCameraInputProofForTests(FLiveCoreCameraIn
     Out.bViewTarget = Controller && Controller->GetViewTarget() == Scene->Camera.Get();
     if (const auto Endpoint = Scene->Panel->EndpointForInputProof().Pin()) { Out.bEndpointFocused = Endpoint->HasKeyboardFocus(); }
     Out.Focus = Scene->CameraNavigation.GetFocus(); Out.Distance = Scene->CameraNavigation.GetDistance();
+    Out.MinimumDistance = Scene->CameraNavigation.GetMinimumDistance();
+    Out.MaximumDistance = Scene->CameraNavigation.GetMaximumDistance();
     Out.Azimuth = Scene->CameraNavigation.GetAzimuth(); Out.Elevation = Scene->CameraNavigation.GetElevation();
     Out.bReady = Scene->CameraNavigation.IsReady(); Scene->CameraSurface->ObserveInputProof(Out);
     const auto& State = Scene->Session->GetState();
@@ -737,6 +739,13 @@ bool AWarhammerClientGameMode::ObserveCameraInputProofForTests(FLiveCoreCameraIn
     Out.bHasCommandOutcome = State.bLastCommandHasOutcome; Out.bCommandAccepted = State.bLastCommandAccepted;
     Out.bCommandCommitted = State.bLastCommandCommitted; Out.LastHttpStatus = State.LastHttpStatus;
     Out.SessionId = State.SessionId; Out.RequestId = State.RequestId;
+    Out.RequestType = State.RequestType;
+    for (const auto& Option : State.Options)
+    {
+        FLiveCoreCameraChoiceObservation Choice;
+        Choice.Id = Option.Id; Choice.Label = Option.Label; Choice.bAvailable = Option.bAvailable;
+        Out.Options.Add(MoveTemp(Choice));
+    }
     Out.SessionStatus = State.Status; Out.SessionError = State.Error; Out.LastOutcomeCode = State.LastOutcomeCode;
     Out.SessionRevision = State.SessionRevision; Out.ProjectionRevision = State.ProjectionRevision;
     Out.ProjectionVersion = State.ProjectionVersion; Out.AcceptedActionCount = State.AcceptedActionCount;

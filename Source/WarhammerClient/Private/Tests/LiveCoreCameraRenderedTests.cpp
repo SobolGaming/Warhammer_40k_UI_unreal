@@ -75,11 +75,12 @@ public:
             if (!Check(OriginalFocus.IsValid(), TEXT("Original Slate keyboard focus is available for restoration"))) { return Finish(); }
             auto& Module = IAutomationDriverModule::Get();
             if (!Check(!Module.IsEnabled(), TEXT("Do not borrow a pre-existing AutomationDriver"))) { return Finish(); }
-            Module.Enable(); bOwnsDriver = true;
-            if (!Check(Module.IsEnabled(), TEXT("AutomationDriver enabled"))) { return Finish(); }
+            Module.Enable(); bOwnsDriver = Module.IsEnabled();
+            if (!Check(bOwnsDriver, TEXT("AutomationDriver enabled"))) { return Finish(); }
             auto Configuration = MakeShared<FDriverConfiguration, ESPMode::ThreadSafe>();
             Configuration->ImplicitWait = FTimespan::FromSeconds(2);
             Driver = Module.CreateAsyncDriver(Configuration);
+            if (!Check(Driver.IsValid(), TEXT("Owned async AutomationDriver created"))) { return Finish(); }
             bInitialized = true; BuildSteps(); StepStarted = FPlatformTime::Seconds();
             Test->AddInfo(TEXT("Synthetic/advisory bounds only; actual live GameMode/Slate input. No Core session or rendered-board fidelity proof."));
             return false;
@@ -105,6 +106,17 @@ private:
     }
     static bool Disconnected(const FLiveCoreCameraInputObservation& O)
     { return !O.bBusy && !O.bHasSession && !O.bUnknown && O.SessionId.IsEmpty() && O.RequestId.IsEmpty() && O.AcceptedActionCount == 0; }
+    static bool SameChoices(const FLiveCoreCameraInputObservation& A, const FLiveCoreCameraInputObservation& B)
+    {
+        if (!A.RequestType.Equals(B.RequestType, ESearchCase::CaseSensitive) || A.Options.Num() != B.Options.Num()) { return false; }
+        for (int32 I = 0; I < A.Options.Num(); ++I)
+        {
+            if (!A.Options[I].Id.Equals(B.Options[I].Id, ESearchCase::CaseSensitive) ||
+                !A.Options[I].Label.Equals(B.Options[I].Label, ESearchCase::CaseSensitive) ||
+                A.Options[I].bAvailable != B.Options[I].bAvailable) { return false; }
+        }
+        return true;
+    }
     bool Read(FLiveCoreCameraInputObservation& O)
     {
         if (!Check(World.IsValid() && World->ObserveCameraInputProofForTests(O), TEXT("Read actual live camera observations"))) { return false; }
@@ -113,11 +125,23 @@ private:
             O.ConfirmAttempts == Baseline.ConfirmAttempts && O.bHasCommandOutcome == Baseline.bHasCommandOutcome &&
             O.bCommandAccepted == Baseline.bCommandAccepted && O.bCommandCommitted == Baseline.bCommandCommitted &&
             O.LastHttpStatus == Baseline.LastHttpStatus && O.LastOutcomeCode == Baseline.LastOutcomeCode &&
-            O.SessionStatus == Baseline.SessionStatus && O.SessionError == Baseline.SessionError,
+            O.SessionStatus == Baseline.SessionStatus && O.SessionError == Baseline.SessionError && SameChoices(O, Baseline),
             TEXT("Available session/command state stayed unchanged; no accepted Core action"));
     }
     static bool SamePose(const FLiveCoreCameraInputObservation& A, const FLiveCoreCameraInputObservation& B)
     { return A.ActorLocation.Equals(B.ActorLocation, 1.e-3) && A.ActorRotation.Equals(B.ActorRotation, 1.e-3); }
+    static bool SameNavigation(const FLiveCoreCameraInputObservation& A, const FLiveCoreCameraInputObservation& B)
+    {
+        return SamePose(A, B) && A.Focus.Equals(B.Focus, 1.e-3) &&
+            FMath::IsNearlyEqual(A.Distance, B.Distance, 1.e-3) &&
+            FMath::IsNearlyEqual(A.Azimuth, B.Azimuth, 1.e-3) && FMath::IsNearlyEqual(A.Elevation, B.Elevation, 1.e-3);
+    }
+    static bool WithinDistanceBounds(const FLiveCoreCameraInputObservation& O)
+    {
+        return FMath::IsFinite(O.Distance) && FMath::IsFinite(O.MinimumDistance) && FMath::IsFinite(O.MaximumDistance) &&
+            O.MinimumDistance > 0 && O.MaximumDistance >= O.MinimumDistance &&
+            O.Distance >= O.MinimumDistance - 1.e-3 && O.Distance <= O.MaximumDistance + 1.e-3;
+    }
     bool Points(const FLiveCoreCameraInputObservation& O)
     {
         const auto Surface = O.Surface.Pin(), Endpoint = O.Endpoint.Pin(), Viewport = O.Viewport.Pin();
@@ -173,8 +197,14 @@ private:
         Do(TEXT("Observe orbit actor mutation"), [this]()
         { FLiveCoreCameraInputObservation O; Read(O); Check(O.bSlateCapture && !O.ActorRotation.Equals(Before.ActorRotation, 1.e-3) && O.Focus.Equals(Before.Focus, 1.e-3) && FMath::IsNearlyEqual(O.Distance, Before.Distance, 1.e-3), TEXT("Routed held RMB changes actual camera rotation only")); });
         Input(TEXT("Release right button"), [](IAsyncActionSequence& S) { S.Release(EMouseButtons::Right); });
-        Do(TEXT("Observe release before pan"), [this]()
+        Do(TEXT("Observe RMB release"), [this]()
         { Read(Before); Check(!Before.bPolicyCapture && !Before.bSlateCapture, TEXT("RMB capture fully released")); });
+        Input(TEXT("Move without any button after RMB release"), [this](IAsyncActionSequence& S) { S.MoveToPosition(Board); });
+        Do(TEXT("Observe no post-release orbit"), [this]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(!O.bPolicyCapture && !O.bSlateCapture && SameNavigation(O, Before), TEXT("Move-only after RMB release preserves actual pose, focus and distance")); FrameKeys = O.FrameKeyEvents; });
+        Input(TEXT("Establish a routed-F fitted view at the retained orbit"), [](IAsyncActionSequence& S) { S.Type(EKeys::F); });
+        Do(TEXT("Save the observed fitted pose and distance"), [this]()
+        { Read(Fitted); Check(Fitted.FrameKeyEvents == FrameKeys + 1 && Fitted.Focus.Equals(FVector::ZeroVector, 1.e-3) && WithinDistanceBounds(Fitted), TEXT("Actual F establishes a finite fitted reference at the current orbit")); Before = Fitted; });
         Input(TEXT("Hold middle button"), [this](IAsyncActionSequence& S) { S.MoveToPosition(Board).Press(EMouseButtons::Middle); });
         Do(TEXT("Observe real middle-button capture"), [this]()
         { FLiveCoreCameraInputObservation O; Read(O); Check(O.bPolicyCapture && O.bSlateCapture && O.CaptureOwner == static_cast<int32>(EInputOwner::Pan) && SamePose(O, Before), TEXT("MMB press owns pan capture without moving camera")); });
@@ -182,11 +212,27 @@ private:
         Do(TEXT("Observe pan actor mutation"), [this]()
         { FLiveCoreCameraInputObservation O; Read(O); Check(O.bSlateCapture && !O.Focus.Equals(Before.Focus, 1.e-3) && !O.ActorLocation.Equals(Before.ActorLocation, 1.e-3) && O.ActorRotation.Equals(Before.ActorRotation, 1.e-3), TEXT("Routed held MMB changes focus/actual position without orbit")); });
         Input(TEXT("Release middle button"), [](IAsyncActionSequence& S) { S.Release(EMouseButtons::Middle); });
-        Do(TEXT("Observe zoom and release"), [this]()
+        Do(TEXT("Observe MMB release"), [this]()
         { Read(Before); Check(!Before.bSlateCapture && !Before.bPolicyCapture, TEXT("MMB capture fully released")); });
-        Input(TEXT("Zoom the focused board"), [this](IAsyncActionSequence& S) { S.MoveToPosition(Board).ScrollBy(1); });
+        Input(TEXT("Move without any button after MMB release"), [this](IAsyncActionSequence& S) { S.MoveToPosition(Board); });
+        Do(TEXT("Observe no post-release pan"), [this]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(!O.bPolicyCapture && !O.bSlateCapture && SameNavigation(O, Before), TEXT("Move-only after MMB release preserves actual pose, focus and distance")); Before = O; });
+        Input(TEXT("Zoom the focused board"), [](IAsyncActionSequence& S) { S.ScrollBy(1); });
         Do(TEXT("Observe actual wheel zoom"), [this]()
-        { FLiveCoreCameraInputObservation O; Read(O); Check(O.Distance < Before.Distance && !SamePose(O, Before), TEXT("Actual board wheel reduces distance and moves camera")); Before = O; });
+        { FLiveCoreCameraInputObservation O; Read(O); Check(WithinDistanceBounds(O) && O.Distance < Before.Distance && !SamePose(O, Before), TEXT("Actual board wheel moves camera within observed finite distance bounds")); Before = O; });
+        Input(TEXT("Finite inward wheel sequence reaches the lower bound"), [](IAsyncActionSequence& S)
+        { for (int32 I = 0; I < 8; ++I) { S.ScrollBy(8); } });
+        Do(TEXT("Observe lower zoom clamp"), [this]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(WithinDistanceBounds(O) && FMath::IsNearlyEqual(O.Distance, O.MinimumDistance, 1.e-3), TEXT("Routed inward wheel clamps at the camera's observed minimum distance")); });
+        Input(TEXT("Finite outward wheel sequence reaches the upper bound"), [](IAsyncActionSequence& S)
+        { for (int32 I = 0; I < 8; ++I) { S.ScrollBy(-8); } });
+        Do(TEXT("Observe upper zoom clamp"), [this]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(WithinDistanceBounds(O) && FMath::IsNearlyEqual(O.Distance, O.MaximumDistance, 1.e-3), TEXT("Routed outward wheel clamps at the camera's observed maximum distance")); });
+        Input(TEXT("Return to an interior zoom for UI isolation"), [](IAsyncActionSequence& S) { S.ScrollBy(1); });
+        Do(TEXT("Observe an interior perturbed view"), [this]()
+        { Read(Before); Check(WithinDistanceBounds(Before) && Before.Distance > Before.MinimumDistance && Before.Distance < Before.MaximumDistance &&
+            !Before.Focus.Equals(Fitted.Focus, 1.e-3) && !FMath::IsNearlyEqual(Before.Distance, Fitted.Distance, 1.e-3) &&
+            Before.ActorRotation.Equals(Fitted.ActorRotation, 1.e-3), TEXT("Pan and zoom perturb the fitted reference while retaining its orbit")); });
         Input(TEXT("Focus the endpoint UI"), [this](IAsyncActionSequence& S) { S.MoveToPosition(EndpointPoint).Click(EMouseButtons::Left); });
         Do(TEXT("Observe UI keyboard ownership"), [this]()
         { FLiveCoreCameraInputObservation O; Read(O); Check(!O.bFocused && O.bEndpointFocused && SamePose(O, Before), TEXT("Endpoint owns actual keyboard focus without moving camera")); UiKeys = O.FrameKeyEvents; });
@@ -198,10 +244,10 @@ private:
         { Read(Before); Check(Before.bFocused && Before.bPolicyActive && !Before.bPolicyCapture, TEXT("Actual board focus restored after scrolling UI")); FrameKeys = Before.FrameKeyEvents; });
         Input(TEXT("Send unmodified F key-down through AutomationDriver"), [](IAsyncActionSequence& S) { S.Type(EKeys::F); });
         Do(TEXT("Observe F framing the actual actor"), [this]()
-        { Read(Framed); Check(Framed.FrameKeyEvents == FrameKeys + 1 && Framed.Focus.Equals(FVector::ZeroVector, 1.e-3) && !SamePose(Framed, Before), TEXT("Actual surface F handler recenters synthetic bounds and moves camera")); });
+        { Read(Framed); Check(Framed.FrameKeyEvents == FrameKeys + 1 && SameNavigation(Framed, Fitted) && WithinDistanceBounds(Framed) && !SamePose(Framed, Before), TEXT("Actual surface F restores the earlier fitted actor pose, focus and distance at the retained orbit")); });
         Input(TEXT("Send F again"), [](IAsyncActionSequence& S) { S.Type(EKeys::F); });
         Do(TEXT("Observe idempotent second F and unchanged Core state"), [this]()
-        { FLiveCoreCameraInputObservation O; Read(O); Check(O.FrameKeyEvents == FrameKeys + 2 && SamePose(O, Framed), TEXT("Second routed F preserves the fitted actor pose")); });
+        { FLiveCoreCameraInputObservation O; Read(O); Check(O.FrameKeyEvents == FrameKeys + 2 && SameNavigation(O, Framed), TEXT("Second routed F preserves the fitted actor pose, focus and distance")); });
     }
     void Restore()
     {
@@ -230,7 +276,7 @@ private:
         }
         if (Future.IsValid())
         { Check(Future->GetFuture().Get(), TEXT("Pending/cleanup driver sequence completed")); Future.Reset(); Sequence.Reset(); }
-        if (bOwnsDriver && !bCleanupQueued)
+        if (bOwnsDriver && Driver.IsValid() && !bCleanupQueued)
         {
             bCleanupQueued = true; Sequence = Driver->CreateSequence();
             Sequence->Actions().Release(EMouseButtons::Left).Release(EMouseButtons::Right).Release(EMouseButtons::Middle)
@@ -267,7 +313,7 @@ private:
     TSharedPtr<IAsyncDriverSequence, ESPMode::ThreadSafe> Sequence;
     TUniquePtr<TAsyncResult<bool>> Future;
     TArray<TFunction<EInputProofStep()>> Steps;
-    FLiveCoreCameraInputObservation Baseline, Before, Framed;
+    FLiveCoreCameraInputObservation Baseline, Before, Fitted, Framed;
     FVector2D Board, OrbitEnd, PanEnd, EndpointPoint;
     double Started, StepStarted = 0, CleanupStarted = 0;
     uint64 UiKeys = 0, FrameKeys = 0;

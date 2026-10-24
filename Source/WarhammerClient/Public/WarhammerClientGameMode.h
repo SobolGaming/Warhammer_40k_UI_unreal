@@ -9,6 +9,13 @@ struct FLiveCoreScene;
 #if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
 class SWidget;
 
+struct FLiveCoreCameraChoiceObservation
+{
+    FString Id;
+    FString Label;
+    bool bAvailable = false;
+};
+
 /** Test observations only; these contain no credentials or authoritative Core DTOs. */
 struct FLiveCoreCameraInputObservation
 {
@@ -19,6 +26,8 @@ struct FLiveCoreCameraInputObservation
     FRotator ActorRotation = FRotator::ZeroRotator;
     FVector Focus = FVector::ZeroVector;
     double Distance = 0;
+    double MinimumDistance = 0;
+    double MaximumDistance = 0;
     double Azimuth = 0;
     double Elevation = 0;
     bool bReady = false;
@@ -39,6 +48,8 @@ struct FLiveCoreCameraInputObservation
     bool bCommandCommitted = false;
     FString SessionId;
     FString RequestId;
+    FString RequestType;
+    TArray<FLiveCoreCameraChoiceObservation> Options;
     FString SessionStatus;
     FString SessionError;
     FString LastOutcomeCode;
