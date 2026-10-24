@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 161, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 162, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -8,7 +8,9 @@ This document owns scope, priorities, baselines, milestone checklists and featur
 
 ## Current bounded increment: P1b Windows packaged interactive preview
 
-Branch: `codex/p1-playable-preview`, from verified PR #4 merge `7ba2c1179416efc6d992d49540aeb165631cb697`. PR #4 merged normally on 2026-10-24 with no protection bypass; GitHub reported no remote checks or formal reviews, while its recorded independent local reviews and bounded checks passed within their stated scopes.
+Branch: `codex/p1-playable-preview`, [PR #5](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/5), from verified PR #4 merge `7ba2c1179416efc6d992d49540aeb165631cb697`. PR #4 merged normally on 2026-10-24 with no protection bypass; GitHub reported no remote checks or formal reviews, while its recorded independent local reviews and bounded checks passed within their stated scopes.
+
+P1b implementation and bounded runtime verification passed at source **`388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee`**. The [native results](evidence/2026-10-24-p1b-native-checks.md), [independent source reviews](evidence/2026-10-24-p1b-source-reviews.json) and [visible results](evidence/2026-10-24-p1b-visible-preview.md) preserve actual identities, failures and limits. This closes the preview feature set, not full P1 or a playable battle. Final documentation/checkpoint publication is tracked below.
 
 **Visible testing is permitted until the owner revokes it**, replacing the previous screen HOLD. Use the computer-use skill for Windows input, one owned game window at a time, bounded launches and exact owned Core cleanup. Record actual manual F/camera/UI outcomes; historical failures remain failures. Do not invent unsupported held-button automation or claim Linux/clean-machine verification.
 
@@ -19,14 +21,14 @@ Implementation:
 - [x] Update this roadmap and supporting source inventory for latest-Core capabilities beyond Arcade, preserving the fast playable path and separate implementation/verification checkboxes.
 - [x] Show actual board keyboard-focus guidance and label option buttons as immediate Core submissions. Native/rendered verification remains separate below.
 - [x] Explain no pending, hidden, visible-but-unsupported and actionable decisions using typed viewer-scoped presentation state; preserve Core authority, command identity and public request/option IDs. Focused regression source is authored; execution and review remain below.
-- [ ] Build/package the affected Windows client and document a usable preview launch. This preview remains player-a and one offered setup action; session joining/handoff and general gameplay editors are subsequent bounded work.
+- [x] Build/package the affected Windows client and document a usable preview launch. Game/Editor build, cook/stage/archive passed in 83.44 seconds; the complete initial 50-file copy outside the checkout matched all declared hashes. Runtime-created Saved files are separate. This preview remains player-a and one offered setup action; session joining/handoff and general gameplay editors are subsequent bounded work.
 
 Verification:
 
-- [ ] Run focused projection/presentation regressions, the affected native build and packaged resource/Core checks.
-- [ ] Use the actual packaged manual launcher outside the checkout for Managed and Attach workflows: connect/create → offered mission submission → accepted/committed result → authoritative refresh; readable board/fonts/materials, wheel, Frame button/F, UI isolation, actual HTTP error and normal close.
-- [ ] Verify the owned Managed host stops and the attached service survives; preserve configuration and report actual input/tool limitations. Real held RMB/MMB, OS switching, clean-machine delivery and Linux stay open wherever not observed.
-- [ ] Obtain proportionate independent CODE and separate requirements review, record results/limits, commit/push/exact-ref-verify every coherent checkpoint and close one bounded PR.
+- [x] Run focused projection/presentation regressions, the affected native build and packaged resource/Core checks. Eleven unit tests, four resource tests and the real integration test in each Managed/Attach mode passed: 17 test executions, 16 distinct names, four native launches. The original private validator's expected-nine mismatch is preserved; the same successful eleven-test report was revalidated without another execution. Preserve the earlier sandbox-blocked build and the native packaged report-template diagnostic.
+- [x] Use the actual packaged manual launcher outside the checkout for Managed and Attach workflows: connect/create → offered mission submission → accepted/committed result → authoritative refresh; readable board/fonts/materials, wheel, Frame button/F, UI isolation, actual HTTP error and normal close. Managed fixed missions and Attach Tactical each reached revision2/one accepted player action and a correctly explained hidden pending decision. A separate invalid-player-credential diagnostic displayed actual HTTP401/`authentication_required`, with no invented projection. F used the supported key-input API with observed board focus; native Maximize/Restore framing passed at the observed window sizes. The initial corner-drag resize attempt changed no size and is not a resize PASS.
+- [x] Verify the owned Managed host stops and the attached service survives; preserve configuration and report actual input/tool limitations. All three completed visible workflows exited Game/launcher0 with Config4, parent environment and binary unchanged, normal owned Core cleanup and no remaining Game window. The earlier receipt-observer failure and app-access approval timeout remain failed runs. Real held RMB/MMB, OS switching, clean-machine delivery and Linux stay open wherever not observed.
+- [ ] Publish final evidence/documentation, commit/push/exact-ref-verify the closing checkpoint and mark this one bounded PR ready for review. Fresh independent CODE and different requirements SOURCE reviews both passed at388b4fd within their finite scope; runtime verification is recorded separately. PR merge is a separate normal-gates action, not an implied extension into P1c.
 
 Stop this PR at the interactive-preview boundary. Core44.5 runtime adoption, hotseat/join, deployment/movement/attack editors, full latest-Core feature coverage and Linux execution are not additions to this PR. P1c/P2–P10 below own those next slices.
 

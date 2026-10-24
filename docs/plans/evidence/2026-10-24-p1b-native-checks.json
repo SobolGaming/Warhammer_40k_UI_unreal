@@ -1,0 +1,602 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "P1B_NONVISIBLE_NATIVE_CHECKS",
+  "status": "BOUNDED_CHECKS_PASS_WITH_RECORDED_FAILURES_AND_DIAGNOSTICS",
+  "recordedUtc": "2026-10-24T17:07:48.0911138Z",
+  "subject": {
+    "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+    "runtimeCoreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+    "runtimeCoreContract": "44.3.33",
+    "planningCoreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "planningCoreContract": "44.5.0",
+    "planningCoreUnmerged": true,
+    "planningCoreRuntimeAdopted": false
+  },
+  "scope": {
+    "nonVisible": true,
+    "guiPerformed": false,
+    "renderingVerified": false,
+    "nativeLaunches": 4,
+    "testExecutions": 17.0,
+    "distinctTestNames": 16,
+    "assertionCount": "Not inferred",
+    "independentReviews": "Pending at preparation of this supporting record",
+    "p1bAccepted": false
+  },
+  "build": {
+    "status": "PACKAGE_CREATED_RUNTIME_UNVERIFIED",
+    "startedUtc": "2026-10-24T16:57:48.9295981Z",
+    "finishedUtc": "2026-10-24T16:59:12.9596121Z",
+    "elapsedSeconds": 83.4390593,
+    "exitCode": 0,
+    "timeoutMinutes": 60,
+    "targets": [
+      "WarhammerClient",
+      "WarhammerClientEditor"
+    ],
+    "buildActions": 15,
+    "buildLogExecutionSeconds": 47.92,
+    "nonVisibleCook": true,
+    "gameLaunched": false,
+    "prerequisiteInstallerExecuted": false,
+    "ownedJobEmpty": true,
+    "ownedJobTotalProcesses": 59,
+    "ownedBuildTreeTerminated": false,
+    "cleanupErrors": [],
+    "jobCountLimit": "Job accounting total, not an attributed process list.",
+    "artifacts": {
+      "result": {
+        "leaf": "p1b-package-result.json",
+        "bytes": 2524,
+        "sha256": "837D623713810B33292B65DED1A083D4F76DCB4B89F1EF3688608521C9273F22"
+      },
+      "stdout": {
+        "leaf": "uat-stdout.log",
+        "bytes": 67027,
+        "sha256": "4CC6378EFF15FF2779EC52C865F83FF9E4252A1834372E203B27AE93DD1909CC"
+      },
+      "stderr": {
+        "leaf": "uat-stderr.log",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      }
+    }
+  },
+  "retainedBuildFailure": {
+    "status": "FAILED",
+    "elapsedSeconds": 68.0286244,
+    "exitCode": -1,
+    "nativeGameLaunched": false,
+    "ownedJobEmpty": true,
+    "ownedJobTotalProcesses": 2,
+    "ownedBuildTreeTerminated": false,
+    "cleanupErrors": [],
+    "failure": "Sandbox denied AutomationTool AppData log deletion/write access; operator intentionally stopped the attempt.",
+    "operatorStopBasis": "Coordinator observation retained separately from result flags; no forced-tree-termination flag inferred.",
+    "artifacts": {
+      "result": {
+        "leaf": "package-result.json",
+        "bytes": 2230,
+        "sha256": "6E8C48FCD05284DF4C61822C1E2CECB1E3DF5720ABED1BEAFFF36CEE0EDF7C7B"
+      },
+      "stdout": {
+        "leaf": "uat-stdout.log",
+        "bytes": 6016,
+        "sha256": "08E68CA7CF4B028A637AD47AF5C491EB1F4CC2499A3F5745D8F3D47FE1CE578F"
+      },
+      "stderr": {
+        "leaf": "uat-stderr.log",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      }
+    }
+  },
+  "package": {
+    "filesPerTree": 50,
+    "totalBytesPerTree": 975194745,
+    "outsideCheckout": true,
+    "recordedExactMembershipAndHashes": true,
+    "independentlyRecheckedSourceFiles": 50,
+    "independentlyRecheckedFileDigests": 100,
+    "copyReceipt": {
+      "leaf": "p1b-outside-copy.json",
+      "bytes": 10602,
+      "sha256": "4B9257A67E1A0729559EAE3744E553F68FA2E937C955CB50F42942F0CA121E43"
+    },
+    "binary": {
+      "leaf": "WarhammerClient.exe",
+      "bytes": 332414464,
+      "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+    },
+    "independentlyRecheckedDeclaredDestinationFiles": 50,
+    "currentDeclaredFileHashesMatch": true,
+    "currentWholeTreeMembershipMatchesCopySnapshot": false,
+    "currentDestinationTreeFileCount": 55,
+    "laterGeneratedFileCount": 5,
+    "laterGeneratedFileKinds": [
+      "One Engine Saved configuration manifest",
+      "Two generated CrashReportClient configurations; no crash inference",
+      "Two client Saved logs"
+    ],
+    "temporalQualification": "The original exact copy snapshot contained fifty files. All fifty declared source and destination file digests were rechecked (one hundred hashes). Five later Saved outputs are outside that snapshot; their private bodies were not read for this record. Generated crash-report configuration alone is not a crash result."
+  },
+  "retainedUnitHarnessFailure": {
+    "originalStatus": "FAILED",
+    "originalError": "Unexpected report counts",
+    "originalExpectedCount": 9,
+    "actualNativeSuccessCount": 11,
+    "nativeExitCode": 0,
+    "revalidationStatus": "PASS_REVALIDATED_EXISTING_NATIVE_REPORT",
+    "nativeRerunPerformed": false,
+    "reason": "Unit prefix includes nine tests in the main file plus two existing creation tests; original failure is preserved and the same eleven-success JSON report was revalidated."
+  },
+  "unit": {
+    "label": "Unit",
+    "nativeTarget": "UnrealEditor-Cmd",
+    "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+    "nativeExitCode": 0,
+    "elapsedSeconds": 17.8834782,
+    "timeoutSeconds": 180,
+    "forcedTermination": false,
+    "ownedJobEmpty": true,
+    "nonVisible": true,
+    "testCount": 11,
+    "tests": [
+      {
+        "name": "Warhammer.LiveCore.Unit.Creation.ErrorEnvelopeRemainsUnknown",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.Creation.InvalidEndpointDoesNotRequest",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.CreatedIdentity",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.DecisionPresentationInvalidation",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.DecisionPresentationTransitions",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.Endpoint",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.Envelope",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.OutcomeAndUncertainErrors",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.ProjectionPrivacyAndGeometry",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.ProjectionVersionAndReadRecovery",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "name": "Warhammer.LiveCore.Unit.ReturnedRejectionDiagnostics",
+        "state": "Success",
+        "warnings": 0,
+        "errors": 0
+      }
+    ],
+    "structuredWarnings": 0,
+    "structuredErrors": 0,
+    "rawDiagnostics": {
+      "warningLines": 0,
+      "errorLines": 0,
+      "fatalLines": 0,
+      "htmlReportTemplateError": false,
+      "method": "Counts of physical native-log lines with severity labels; not assertion counts."
+    },
+    "configEnvironmentSnapshot": "Not present in this small unit result; no per-launch Config/environment assertion inferred.",
+    "artifacts": {
+      "originalHarnessResult": {
+        "leaf": "result.json",
+        "bytes": 496,
+        "sha256": "E8FBEC85DA7DBD7A18D971E9C2E6D5D40BF5A683932EF86B859F0EC990FEF6E6"
+      },
+      "report": {
+        "leaf": "index.json",
+        "bytes": 5117,
+        "sha256": "DDB9DA28A1E98A54C7FB434BD7F7BD3E96AA2B21C16E9602467F6A81BA44675C"
+      },
+      "revalidation": {
+        "leaf": "p1b-unit-revalidated.json",
+        "bytes": 2352,
+        "sha256": "690BB77486F4FCAC2384487550265B083A5F37BE3746128F7ADF49F0BDD44363"
+      },
+      "stdout": {
+        "leaf": "stdout.log",
+        "bytes": 262593,
+        "sha256": "25A6F8CB9F57B53B085E60FEB4578686DD9F4F1524BE1BC513D3776D69851D62"
+      },
+      "stderr": {
+        "leaf": "stderr.log",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      },
+      "nativeLog": {
+        "leaf": "native.log",
+        "bytes": 261501,
+        "sha256": "1DE0A12B26D6E0D2D2BA90149E9F84195176E9CF6F4A9385289480DBC9E3E6FD"
+      }
+    }
+  },
+  "packagedRuns": [
+    {
+      "label": "Resources",
+      "nativeTarget": "Copied Windows Development Game",
+      "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+      "status": "PASS",
+      "nativeExitCode": 0,
+      "elapsedSeconds": 5.989623,
+      "timeoutSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "forcedTermination": false,
+      "stdoutComplete": true,
+      "stderrComplete": true,
+      "streamsCapped": false,
+      "renderingVerified": false,
+      "testCount": 4,
+      "automation": {
+        "expectedCount": 4,
+        "succeeded": 4,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.CanonicalSession",
+            "errors": 0,
+            "state": "Success"
+          },
+          {
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.MissingSessionFails",
+            "errors": 0,
+            "state": "Success"
+          },
+          {
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.CorruptSessionFails",
+            "errors": 0,
+            "state": "Success"
+          },
+          {
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.StartupResources",
+            "errors": 0,
+            "state": "Success"
+          }
+        ]
+      },
+      "rawDiagnostics": {
+        "warningLines": 2,
+        "errorLines": 1,
+        "fatalLines": 0,
+        "htmlReportTemplateError": true,
+        "method": "Counts of physical native-log lines with severity labels; not assertion counts."
+      },
+      "configUnchanged": true,
+      "configBefore": {
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D"
+      },
+      "configAfter": {
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D"
+      },
+      "parentEnvironmentRestored": true,
+      "host": null,
+      "hostStop": null,
+      "cleanupErrors": [],
+      "artifacts": {
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5289,
+          "sha256": "D7AFFD0CD77FA64E66DB336B4F784D42A364FB8708379B8B4C8D7316ECEE665B"
+        },
+        "stdout": {
+          "leaf": "stdout.log",
+          "bytes": 71156,
+          "sha256": "499D6B374BA717E3F07F0AA14969E39FF3F38EADF9B03300944ACD0C15AB6F41"
+        },
+        "stderr": {
+          "leaf": "stderr.log",
+          "bytes": 0,
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "nativeLog": {
+          "leaf": "native.log",
+          "bytes": 71191,
+          "sha256": "7B365C7DB7CA80590443D8E226B76F54CBF67C206E02F0273592DDE9776900FC"
+        },
+        "report": {
+          "leaf": "index.json",
+          "bytes": 2667,
+          "sha256": "85355D9A6EBB2A72267E66BEE1C53A9521F3574BB4AFCE2000F9D54FA83DF7FA"
+        }
+      }
+    },
+    {
+      "label": "Managed",
+      "nativeTarget": "Copied Windows Development Game",
+      "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+      "status": "PASS",
+      "nativeExitCode": 0,
+      "elapsedSeconds": 15.6212205,
+      "timeoutSeconds": 240,
+      "streamLimitBytes": 67108864,
+      "forcedTermination": false,
+      "stdoutComplete": true,
+      "stderrComplete": true,
+      "streamsCapped": false,
+      "renderingVerified": false,
+      "testCount": 1,
+      "automation": {
+        "expectedCount": 1,
+        "succeeded": 1,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "warnings": 0,
+            "errors": 0,
+            "state": "Success",
+            "name": "Warhammer.LiveCore.Integration.RealSessionAction"
+          }
+        ]
+      },
+      "rawDiagnostics": {
+        "warningLines": 2,
+        "errorLines": 1,
+        "fatalLines": 0,
+        "htmlReportTemplateError": true,
+        "method": "Counts of physical native-log lines with severity labels; not assertion counts."
+      },
+      "configUnchanged": true,
+      "configBefore": {
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1"
+      },
+      "configAfter": {
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1"
+      },
+      "parentEnvironmentRestored": true,
+      "host": {
+        "status": "READY",
+        "owned": true,
+        "mode": "Managed"
+      },
+      "hostStop": {
+        "forcedTermination": false,
+        "status": "STOPPED",
+        "owned": true
+      },
+      "cleanupErrors": [],
+      "artifacts": {
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5205,
+          "sha256": "CE4E5C10A0B28D6B8824C5BDFF26B97FE97F64761AE7118DEE94F1461CA37B4D"
+        },
+        "stdout": {
+          "leaf": "stdout.log",
+          "bytes": 68394,
+          "sha256": "307239D1A064FB236AA68F8E6F6099965367DFC6389BF74682682960C7A80EBF"
+        },
+        "stderr": {
+          "leaf": "stderr.log",
+          "bytes": 0,
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "nativeLog": {
+          "leaf": "native.log",
+          "bytes": 68429,
+          "sha256": "9E43751DDE9D587375849AAEBF08FD7B7650578635439995EFF0CF28CD62BCD1"
+        },
+        "report": {
+          "leaf": "index.json",
+          "bytes": 1109,
+          "sha256": "37BB1F6A374295A0CBE88675717ADE6CAFD048075649F60FB581FD161B326268"
+        }
+      }
+    },
+    {
+      "label": "Attach",
+      "nativeTarget": "Copied Windows Development Game",
+      "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+      "status": "PASS",
+      "nativeExitCode": 0,
+      "elapsedSeconds": 15.4204695,
+      "timeoutSeconds": 240,
+      "streamLimitBytes": 67108864,
+      "forcedTermination": false,
+      "stdoutComplete": true,
+      "stderrComplete": true,
+      "streamsCapped": false,
+      "renderingVerified": false,
+      "testCount": 1,
+      "automation": {
+        "expectedCount": 1,
+        "succeeded": 1,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "state": "Success",
+            "errors": 0,
+            "warnings": 0,
+            "name": "Warhammer.LiveCore.Integration.RealSessionAction"
+          }
+        ]
+      },
+      "rawDiagnostics": {
+        "warningLines": 2,
+        "errorLines": 1,
+        "fatalLines": 0,
+        "htmlReportTemplateError": true,
+        "method": "Counts of physical native-log lines with severity labels; not assertion counts."
+      },
+      "configUnchanged": true,
+      "configBefore": {
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D"
+      },
+      "configAfter": {
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D"
+      },
+      "parentEnvironmentRestored": true,
+      "host": {
+        "status": "ATTACHED_HEALTHY",
+        "owned": false,
+        "mode": "Attach"
+      },
+      "hostStop": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false
+      },
+      "cleanupErrors": [],
+      "artifacts": {
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5195,
+          "sha256": "53FA76480185B572679B31BF83BABE1F84614A1253133EFB5F2C433A97BB6493"
+        },
+        "stdout": {
+          "leaf": "stdout.log",
+          "bytes": 68724,
+          "sha256": "B21754501D24D4DE5E0FDA8A764763657D17A43701B188C9EF37F26799BD1288"
+        },
+        "stderr": {
+          "leaf": "stderr.log",
+          "bytes": 0,
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "nativeLog": {
+          "leaf": "native.log",
+          "bytes": 68789,
+          "sha256": "34FDC2A4498885EAB1D7BB8E6EEC3FAD1CEC00093EA6461D202539132D8D96F7"
+        },
+        "report": {
+          "leaf": "index.json",
+          "bytes": 1109,
+          "sha256": "D024B1EF285A93949FC4E99C9595B18F2D123AB0802E2670BD29DC6C03995D79"
+        }
+      }
+    }
+  ],
+  "attachLifecycle": {
+    "status": "PASS",
+    "attachedServiceHealthyAfterClient": true,
+    "healthHttpStatus": 200,
+    "separateOwnerStop": {
+      "owned": true,
+      "forcedTermination": false,
+      "status": "STOPPED"
+    },
+    "environmentRestored": true,
+    "cleanupErrors": [],
+    "artifact": {
+      "leaf": "p1b-attach-lifecycle.json",
+      "bytes": 775,
+      "sha256": "B7A350838775BC66754BAB9AFB43E898826DC82912288AC8748264EF5F2AFF8C"
+    }
+  },
+  "wrapperArtifacts": {
+    "resources": {
+      "leaf": "p1b-resources-result.json",
+      "bytes": 375,
+      "sha256": "79A1009259B61721041EEE00136C49A631EB417A90E982375A1EEA98BE7D3003"
+    },
+    "managed": {
+      "leaf": "p1b-managed-result.json",
+      "bytes": 370,
+      "sha256": "AF2A6CCE90EBD34196574467D686A4F689039C9990827501571FFB6983BD820C"
+    }
+  },
+  "commands": [
+    "PowerShell7: & ./scripts/Build-ClientPackage.ps1",
+    "Editor commandlet: -NullRHI -RenderOffScreen -unattended -nosplash -nosound -NoCrashDialog -NoLiveCoding -stdout -FullStdOutLogOutput -ExecCmds=\"Automation RunTests Warhammer.LiveCore.Unit\" -TestExit=\"Automation Test Queue Empty\"; report/log paths are owned outputs.",
+    "& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $CopiedExecutable -Mode Resources",
+    "& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $CopiedExecutable -Mode Core -CoreMode Managed -Port $OwnedCorePort",
+    "& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $CopiedExecutable -Mode Core -CoreMode Attach -Endpoint $OwnedCoreEndpoint; separately supervised owner checks HTTP200 after client and then stops its service."
+  ],
+  "commandQualification": "Public command forms retain exact test selectors and modes; absolute output/executable paths and ephemeral loopback port are represented by variables. No environment values or private command bodies are included.",
+  "architectureSyntax": {
+    "status": "PASS",
+    "blockCount": 2,
+    "blockStatuses": [
+      "PASS",
+      "PASS"
+    ],
+    "tools": {
+      "node": "v24.19.0",
+      "mermaid": "11.12.0",
+      "jsdom": "26.1.0"
+    },
+    "artifact": {
+      "leaf": "p1b-architecture-parser.json",
+      "bytes": 1652,
+      "sha256": "5DF9A60E8F968E1DC77B685A5FE4932FDD51FBC51C5CEF91F000F51DF8837678"
+    },
+    "limits": "Mermaid syntax parsing only; no SVG/layout/client rendering claim."
+  },
+  "limits": [
+    "Non-visible build/Editor-commandlet/package automation only; no new GUI, pixels, fonts, shaders, physical input or visible P1b acceptance.",
+    "No clean-machine, Linux, general gameplay, remote/spectator completion or latest-Core runtime adoption.",
+    "Structured native JSON tests have zero per-test warnings/errors; each packaged native log retains two startup warnings and one HTML-template error. Unit native log severity scan found zero warning/error/fatal lines.",
+    "The three packaged runs record all four Config files unchanged and parent environment restored. The original unit result has no separate Config/environment snapshot.",
+    "Raw logs/reports and ownership receipts remain private; safe leaf/byte/SHA256 descriptors are published without process/session identifiers, accounts, credentials or raw host metadata."
+  ]
+}
