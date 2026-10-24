@@ -431,6 +431,7 @@ public:
         Out.bPolicyCapture = State.Capture.IsSet();
         Out.bSlateCapture = HasMouseCaptureByUser(CaptureUser, CapturePointer);
         Out.CaptureOwner = State.Capture.IsSet() ? static_cast<int32>(State.Capture->Owner) : -1;
+        Out.CaptureUser = CaptureUser; Out.CapturePointer = CapturePointer;
         Out.FrameKeyEvents = FrameKeyEventsForTests; Out.ConfirmAttempts = State.ConfirmAttempts;
     }
 #endif
@@ -737,6 +738,9 @@ bool AWarhammerClientGameMode::ObserveCameraInputProofForTests(FLiveCoreCameraIn
     Out.MinimumDistance = Scene->CameraNavigation.GetMinimumDistance();
     Out.MaximumDistance = Scene->CameraNavigation.GetMaximumDistance();
     Out.Azimuth = Scene->CameraNavigation.GetAzimuth(); Out.Elevation = Scene->CameraNavigation.GetElevation();
+    const auto& Layout = Scene->CameraNavigation.GetLayout();
+    Out.LayoutViewportPixels = Layout.ViewportPixels;
+    Out.LayoutSurfaceMin = Layout.SurfacePixels.Min; Out.LayoutSurfaceMax = Layout.SurfacePixels.Max;
     Out.bReady = Scene->CameraNavigation.IsReady(); Scene->CameraSurface->ObserveInputProof(Out);
     const auto& State = Scene->Session->GetState();
     Out.bBusy = State.bBusy; Out.bHasSession = State.bHasSession; Out.bUnknown = State.bUnknown;

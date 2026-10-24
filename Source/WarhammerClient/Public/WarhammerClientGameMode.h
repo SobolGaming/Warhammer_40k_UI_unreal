@@ -30,6 +30,9 @@ struct FLiveCoreCameraInputObservation
     double MaximumDistance = 0;
     double Azimuth = 0;
     double Elevation = 0;
+    FVector2D LayoutViewportPixels = FVector2D::ZeroVector;
+    FVector2D LayoutSurfaceMin = FVector2D::ZeroVector;
+    FVector2D LayoutSurfaceMax = FVector2D::ZeroVector;
     bool bReady = false;
     bool bViewTarget = false;
     bool bFocused = false;
@@ -38,6 +41,8 @@ struct FLiveCoreCameraInputObservation
     bool bPolicyCapture = false;
     bool bSlateCapture = false;
     int32 CaptureOwner = -1;
+    int32 CaptureUser = 0;
+    int32 CapturePointer = 0;
     uint64 FrameKeyEvents = 0;
     uint64 ConfirmAttempts = 0;
     bool bBusy = false;

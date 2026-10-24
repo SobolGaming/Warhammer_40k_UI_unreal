@@ -2,7 +2,7 @@
 
 ## Active work
 
-Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md`, and [active migration plan](docs/plans/unreal-migration-plan.md) before work.
+Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md`, the [forward development plan](docs/plans/unreal-development-plan.md) and the [migration/closing record](docs/plans/unreal-migration-plan.md) before work. The development plan owns future feature-parity sequencing; the migration record preserves this increment and historical evidence.
 
 The owner's latest increment is to finish the bounded visible active-drag cancellation checks, complete `docs/plans/unreal-development-plan.md` as a forward feature-parity roadmap, then commit, push and merge existing PR #3 after affected checks and independent reviews pass. This direct October 24 instruction supersedes the earlier leave-open/no-merge direction. Keep the working client usable; do not implement the entire future parity roadmap in this closing increment. Preserve the bounded real-Core setup workflow and all historical failures.
 

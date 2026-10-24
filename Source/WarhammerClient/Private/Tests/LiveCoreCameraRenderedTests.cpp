@@ -9,20 +9,24 @@
 #include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "Framework/Application/SlateApplication.h"
+#include "Framework/Application/SlateUser.h"
 #include "HAL/PlatformMisc.h"
 #include "HAL/PlatformTime.h"
 #include "IAutomationDriver.h"
 #include "IAutomationDriverModule.h"
 #include "IDriverSequence.h"
 #include "InputCoreTypes.h"
+#include "Input/Events.h"
 #include "Misc/App.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
 #include "Widgets/SWidget.h"
+#include "Widgets/SWindow.h"
 
 namespace
 {
 enum class EInputProofStep : uint8 { Wait, Done };
+enum class EDragCancellation : uint8 { Escape, KeyboardFocus, PointerCapture, ApplicationEvent, WindowResize };
 
 /** Actual live Slate routing, with synthetic advisory camera bounds and no Core setup. */
 class FLiveCameraInputCommand final : public IAutomationLatentCommand
@@ -73,6 +77,16 @@ public:
             Baseline = Initial;
             if (!Check(Disconnected(Initial) && !Initial.bPolicyCapture && !Initial.bSlateCapture,
                 TEXT("Refuse any real, busy or unknown Core session or pre-existing camera capture"))) { return Finish(); }
+            const auto Surface = Initial.Surface.Pin();
+            ProofWindow = Surface.IsValid() ? FSlateApplication::Get().FindWidgetWindow(Surface.ToSharedRef()) : nullptr;
+            const auto Window = ProofWindow.Pin();
+            if (!Check(Window.IsValid() && Window->GetNativeWindow().IsValid() && Window->GetWindowMode() == EWindowMode::Windowed &&
+                FSlateApplication::Get().IsActive() && FSlateApplication::Get().GetActiveTopLevelWindow() == Window,
+                TEXT("Cancellation proof requires its active ordinary windowed game window"))) { return Finish(); }
+            OriginalWindowClientSize = Window->GetClientSizeInScreen();
+            OriginalSurfaceSize = Surface->GetCachedGeometry().GetLocalSize();
+            if (!Check(OriginalWindowClientSize.X >= 900 && OriginalWindowClientSize.Y >= 600,
+                TEXT("Owned game window has room for a bounded resize"))) { return Finish(); }
             FString Error;
             const bool bSetup = World->BeginCameraInputProofForTests(Error);
             if (!Check(bSetup, Error.IsEmpty() ? TEXT("Synthetic camera setup") : Error))
@@ -149,6 +163,26 @@ private:
             O.MinimumDistance > 0 && O.MaximumDistance >= O.MinimumDistance &&
             O.Distance >= O.MinimumDistance - 1.e-3 && O.Distance <= O.MaximumDistance + 1.e-3;
     }
+    bool OriginalLayoutReady() const
+    {
+        const auto Window = ProofWindow.Pin();
+        FLiveCoreCameraInputObservation O;
+        if (!Window.IsValid() || !World.IsValid() || !World->ObserveCameraInputProofForTests(O)) { return false; }
+        const auto Surface = O.Surface.Pin();
+        return Surface.IsValid() && FVector2D(Window->GetClientSizeInScreen()).Equals(OriginalWindowClientSize, 1.0) &&
+            FVector2D(Surface->GetCachedGeometry().GetLocalSize()).Equals(OriginalSurfaceSize, 1.0) &&
+            O.LayoutViewportPixels.Equals(Baseline.LayoutViewportPixels, 1.0) &&
+            O.LayoutSurfaceMin.Equals(Baseline.LayoutSurfaceMin, 1.0) && O.LayoutSurfaceMax.Equals(Baseline.LayoutSurfaceMax, 1.0);
+    }
+    void RestoreApplicationActivation()
+    {
+        if (!bOwnsApplicationDeactivation || !FSlateApplication::IsInitialized()) { return; }
+        auto& Slate = FSlateApplication::Get();
+        Slate.ProcessApplicationActivationEvent(true);
+        if (const auto Window = ProofWindow.Pin())
+        { Slate.ProcessWindowActivatedEvent(FWindowActivateEvent(FWindowActivateEvent::EA_Activate, Window.ToSharedRef())); }
+        bOwnsApplicationDeactivation = false;
+    }
     bool Points(const FLiveCoreCameraInputObservation& O)
     {
         const auto Surface = O.Surface.Pin(), Endpoint = O.Endpoint.Pin(), Viewport = O.Viewport.Pin();
@@ -190,6 +224,120 @@ private:
             Check(Future->GetFuture().Get(), TEXT("Actual AutomationDriver sequence completed"));
             Future.Reset(); Sequence.Reset(); return EInputProofStep::Done;
         });
+    }
+    void WaitFor(const TCHAR* Label, TFunction<bool()> Predicate)
+    {
+        Steps.Add([this, Label, Predicate = MoveTemp(Predicate)]()
+        {
+            if (Predicate()) { Test->AddInfo(Label); return EInputProofStep::Done; }
+            if (FPlatformTime::Seconds() - StepStarted > 3)
+            { Check(false, FString::Printf(TEXT("%s did not settle within three seconds"), Label)); }
+            return EInputProofStep::Wait;
+        });
+    }
+    void AddCancellationCase(EMouseButtons::Type Button, EDragCancellation Reason)
+    {
+        using Warhammer::Migration::E02::EInputOwner;
+        const bool bOrbit = Button == EMouseButtons::Right;
+        const int32 Owner = static_cast<int32>(bOrbit ? EInputOwner::Orbit : EInputOwner::Pan);
+        Do(TEXT("Save navigation before a cancellation gesture"), [this, bOrbit, Reason]()
+        {
+            Test->AddInfo(FString::Printf(TEXT("Active-drag cancellation button=%s cause=%d"), bOrbit ? TEXT("RMB") : TEXT("MMB"), static_cast<int32>(Reason)));
+            Read(CancelStart);
+        });
+        Input(TEXT("Establish an actual held drag before cancellation"), [this, Button](IAsyncActionSequence& S)
+        { S.MoveToPosition(Board).Click(EMouseButtons::Left).Press(Button).MoveToPosition(OrbitEnd); });
+        Do(TEXT("Observe the live actor and matching held capture"), [this, Owner]()
+        {
+            Read(Before);
+            Check(Before.bFocused && Before.bPolicyCapture && Before.bSlateCapture && Before.CaptureOwner == Owner &&
+                !SameNavigation(Before, CancelStart), TEXT("Cancellation starts from an actual mutated live camera with matching owned capture"));
+        });
+        if (Reason == EDragCancellation::Escape)
+        { Input(TEXT("Route Escape while the camera button is held"), [](IAsyncActionSequence& S) { S.Type(EKeys::Escape); }); }
+        else if (Reason == EDragCancellation::KeyboardFocus)
+        {
+            Do(TEXT("Transfer actual Slate keyboard focus while the button is held"), [this]()
+            {
+                const auto Endpoint = Before.Endpoint.Pin();
+                Check(Endpoint.IsValid() && FSlateApplication::Get().SetKeyboardFocus(Endpoint, EFocusCause::SetDirectly),
+                    TEXT("Actual endpoint focus transfer was accepted"));
+            });
+        }
+        else if (Reason == EDragCancellation::PointerCapture)
+        {
+            Do(TEXT("Release exactly the captured Slate user/pointer while the button is held"), [this]()
+            {
+                const auto Surface = Before.Surface.Pin();
+                const auto User = FSlateApplication::Get().GetUser(Before.CaptureUser);
+                if (Check(Surface.IsValid() && User.IsValid() && Surface->HasMouseCaptureByUser(Before.CaptureUser, Before.CapturePointer),
+                    TEXT("Unexpected capture loss targets the actual live surface's owned pointer")))
+                { User->ReleaseCapture(Before.CapturePointer); }
+            });
+        }
+        else if (Reason == EDragCancellation::ApplicationEvent)
+        {
+            Do(TEXT("Deliver deliberate in-app application deactivation; this is not an OS focus test"), [this]()
+            {
+                bOwnsApplicationDeactivation = true;
+                FSlateApplication::Get().ProcessApplicationActivationEvent(false);
+                FLiveCoreCameraInputObservation O;
+                if (Read(O))
+                { Check(!FSlateApplication::Get().IsActive() && !O.bPolicyActive && !O.bPolicyCapture && !O.bSlateCapture && SameNavigation(O, Before),
+                    TEXT("Actual Slate application event entry deactivates camera policy and releases capture without moving the actor")); }
+                RestoreApplicationActivation();
+                Check(FSlateApplication::Get().IsActive() && FSlateApplication::Get().GetActiveTopLevelWindow() == ProofWindow.Pin(),
+                    TEXT("Owned application/window activation event state restored"));
+            });
+        }
+        else
+        {
+            Do(TEXT("Resize the actual owned SWindow while the camera button is held"), [this]()
+            {
+                if (const auto Window = ProofWindow.Pin())
+                { bWindowSizeChanged = true; Window->Resize(OriginalWindowClientSize - FVector2D(120, 80)); }
+                else { Check(false, TEXT("Owned game window disappeared before resize")); }
+            });
+            WaitFor(TEXT("Actual resized geometry and camera cancellation observed"), [this]()
+            {
+                FLiveCoreCameraInputObservation O;
+                if (!World.IsValid() || !World->ObserveCameraInputProofForTests(O)) { return false; }
+                const auto Surface = O.Surface.Pin();
+                return Surface.IsValid() && !FVector2D(Surface->GetCachedGeometry().GetLocalSize()).Equals(OriginalSurfaceSize, 8.0) &&
+                    !O.LayoutViewportPixels.Equals(Baseline.LayoutViewportPixels, 8.0) && O.bReady && !O.bPolicyCapture && !O.bSlateCapture;
+            });
+        }
+        Do(TEXT("Observe cancellation and save its post-event navigation"), [this, Reason]()
+        {
+            FLiveCoreCameraInputObservation O;
+            if (!Read(O)) { return; }
+            Check(!O.bPolicyCapture && !O.bSlateCapture && O.bReady && WithinDistanceBounds(O) &&
+                (Reason == EDragCancellation::WindowResize || SameNavigation(O, Before)),
+                TEXT("Cancellation releases policy and actual Slate capture; only resize may legitimately reframe"));
+            if (Reason == EDragCancellation::KeyboardFocus)
+            { Check(O.bEndpointFocused && !O.bFocused && !O.bPolicyActive, TEXT("Actual endpoint focus loss deactivates the board")); }
+            Before = O;
+        });
+        Input(TEXT("Move after cancellation with the original button still held"), [this](IAsyncActionSequence& S) { S.MoveToPosition(Board); });
+        Do(TEXT("Observe no stale held-drag navigation"), [this]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(!O.bPolicyCapture && !O.bSlateCapture && SameNavigation(O, Before), TEXT("Move with the cancelled button still held cannot resume navigation")); });
+        Input(TEXT("Release the stale camera button and move again"), [this, Button](IAsyncActionSequence& S) { S.Release(Button).MoveToPosition(OrbitEnd); });
+        Do(TEXT("Observe no stale release or subsequent move effect"), [this]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(!O.bPolicyCapture && !O.bSlateCapture && SameNavigation(O, Before), TEXT("Stale release and move preserve the post-cancellation actor/navigation")); });
+        if (Reason == EDragCancellation::WindowResize)
+        {
+            Do(TEXT("Restore original owned window client size"), [this]()
+            { if (const auto Window = ProofWindow.Pin()) { Window->Resize(OriginalWindowClientSize); } });
+            WaitFor(TEXT("Original actual geometry and camera layout restored"), [this]() { return OriginalLayoutReady(); });
+        }
+        Do(TEXT("Save the settled navigation before recovery"), [this]() { Read(Before); });
+        Input(TEXT("A fresh focused press can start a new camera gesture"), [this, Button](IAsyncActionSequence& S)
+        { S.MoveToPosition(Board).Click(EMouseButtons::Left).Press(Button).MoveToPosition(OrbitEnd); });
+        Do(TEXT("Observe fresh-gesture recovery after cancellation"), [this, Owner]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(O.bPolicyCapture && O.bSlateCapture && O.CaptureOwner == Owner && !SameNavigation(O, Before), TEXT("Fresh board press recovers actual camera navigation and matching capture")); });
+        Input(TEXT("Release the recovered camera gesture"), [Button](IAsyncActionSequence& S) { S.Release(Button); });
+        Do(TEXT("Observe recovered capture fully released"), [this]()
+        { FLiveCoreCameraInputObservation O; Read(O); Check(!O.bPolicyCapture && !O.bSlateCapture, TEXT("Recovery leaves no capture")); });
     }
     void BuildSteps()
     {
@@ -255,9 +403,19 @@ private:
         Input(TEXT("Send F again"), [](IAsyncActionSequence& S) { S.Type(EKeys::F); });
         Do(TEXT("Observe idempotent second F and unchanged Core state"), [this]()
         { FLiveCoreCameraInputObservation O; Read(O); Check(O.FrameKeyEvents == FrameKeys + 2 && SameNavigation(O, Framed), TEXT("Second routed F preserves the fitted actor pose, focus and distance")); });
+        // Retain the original input/F/UI cases above; append actual held-gesture
+        // cancellation checks. App activation is deliberate event-entry delivery,
+        // not an OS focus change; Resize really changes the owned native SWindow.
+        for (EMouseButtons::Type Button : { EMouseButtons::Right, EMouseButtons::Middle })
+        {
+            for (EDragCancellation Reason : { EDragCancellation::Escape, EDragCancellation::KeyboardFocus,
+                EDragCancellation::PointerCapture, EDragCancellation::ApplicationEvent, EDragCancellation::WindowResize })
+            { AddCancellationCase(Button, Reason); }
+        }
     }
     void Restore()
     {
+        RestoreApplicationActivation();
         if (bOwnsSetup && World.IsValid()) { World->EndCameraInputProofForTests(); }
         bOwnsSetup = false;
         if (bOwnsDriver && FSlateApplication::IsInitialized())
@@ -292,6 +450,26 @@ private:
         }
         if (bInitialized)
         { FLiveCoreCameraInputObservation O; Read(O); Check(!O.bPolicyCapture && !O.bSlateCapture, TEXT("No owned capture remains before restoration")); }
+        RestoreApplicationActivation();
+        if (bWindowSizeChanged)
+        {
+            if (!bWindowRestoreQueued)
+            {
+                bWindowRestoreQueued = true; WindowRestoreStarted = FPlatformTime::Seconds();
+                if (const auto Window = ProofWindow.Pin()) { Window->Resize(OriginalWindowClientSize); }
+                else { Check(false, TEXT("Owned game window unavailable for size restoration")); }
+                return false;
+            }
+            if (!OriginalLayoutReady())
+            {
+                if (FPlatformTime::Seconds() - WindowRestoreStarted < 5) { return false; }
+                Check(false, TEXT("Owned window/actual camera layout failed restoration; terminating dedicated process"));
+                FPlatformMisc::RequestExitWithStatus(true, 1, TEXT("LiveCameraInput.WindowRestoreDidNotSettle"));
+                return true;
+            }
+            Check(OriginalLayoutReady(), TEXT("Original native window client size, cached geometry and camera layout restored before navigation"));
+            bWindowSizeChanged = false;
+        }
         const bool bVerifyRestoration = bOwnsSetup;
         const bool bVerifyDriver = bOwnsDriver;
         Restore();
@@ -306,29 +484,36 @@ private:
         if (bVerifyDriver && FSlateApplication::IsInitialized())
         {
             Check(!IAutomationDriverModule::Get().IsEnabled(), TEXT("Owned AutomationDriver platform handler restored"));
+            Check(FSlateApplication::Get().IsActive() && FSlateApplication::Get().GetActiveTopLevelWindow() == ProofWindow.Pin(),
+                TEXT("Owned application/window activation state remains restored"));
             if (const auto Focus = OriginalFocus.Pin())
             { Check(FSlateApplication::Get().GetKeyboardFocusedWidget() == Focus, TEXT("Original Slate keyboard focus restored")); }
         }
         bCleanupCompleted = true;
         Test->AddInfo(FString::Printf(TEXT("LiveCoreCamera.Input assertions=%d elapsed=%.3fs status=%s; available Core state unchanged is not a zero-HTTP-attempt proof."),
             Assertions, FPlatformTime::Seconds() - Started, bFailed ? TEXT("FAIL") : TEXT("PASS")));
+        Test->AddInfo(TEXT("Active-drag cases cover actual routed Escape/focus/capture loss and owned native resize; application deactivation is deliberate Slate event-entry delivery. OS deactivation and world teardown remain unverified."));
         return true;
     }
 
     FAutomationTestBase* Test;
     TWeakObjectPtr<AWarhammerClientGameMode> World;
     TWeakPtr<SWidget> OriginalFocus;
+    TWeakPtr<SWindow> ProofWindow;
     TSharedPtr<IAsyncAutomationDriver, ESPMode::ThreadSafe> Driver;
     TSharedPtr<IAsyncDriverSequence, ESPMode::ThreadSafe> Sequence;
     TUniquePtr<TAsyncResult<bool>> Future;
     TArray<TFunction<EInputProofStep()>> Steps;
-    FLiveCoreCameraInputObservation Baseline, Before, Fitted, Framed;
+    FLiveCoreCameraInputObservation Baseline, Before, Fitted, Framed, CancelStart;
     FVector2D Board, OrbitEnd, PanEnd, EndpointPoint;
+    FVector2D OriginalWindowClientSize, OriginalSurfaceSize;
     double Started, StepStarted = 0, CleanupStarted = 0;
+    double WindowRestoreStarted = 0;
     uint64 UiKeys = 0, FrameKeys = 0;
     int32 Index = 0, Assertions = 0;
     bool bInitialized = false, bOwnsSetup = false, bOwnsDriver = false, bFailed = false;
     bool bFinishing = false, bCleanupQueued = false, bCleanupCompleted = false;
+    bool bOwnsApplicationDeactivation = false, bWindowSizeChanged = false, bWindowRestoreQueued = false;
     const bool bOwnedProcessOptIn;
 };
 }

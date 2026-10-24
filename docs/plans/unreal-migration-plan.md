@@ -2,14 +2,14 @@
 
 **Revision 155 — close visible cancellation coverage, establish the full feature-parity roadmap, then merge PR #3; checks pending, 2026-10-24 UTC / EDT.**
 
-The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. The latest request is to finish the remaining bounded visible active-drag cancellation tests, complete `docs/plans/unreal-development-plan.md` as the forward feature-parity roadmap, then commit, push and merge [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) after affected verification and independent reviews pass. This direct request supersedes the earlier no-merge direction. Future feature parity is to be planned here, not falsely claimed implemented by this increment.
+The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. The latest request is to finish the remaining bounded visible active-drag cancellation tests, complete the [forward feature-parity roadmap](unreal-development-plan.md), then commit, push and merge [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) after affected verification and independent reviews pass. This direct request supersedes the earlier no-merge direction. The development plan owns future implementation sequencing; this record owns closing verification/history. Full parity is not claimed by this increment.
 
 ### Current closing increment
 
 - [x] Record the owner's direct visible-test and merge authorization; retain one game window and a 600-second limit per launch.
-- [ ] Extend the existing native camera regression to cover cancellation during held orbit/pan; build and independently review the affected source before visible execution.
+- [x] Extend the existing native camera regression with ten cancellation cases: RMB/MMB × Escape, focus transfer, captured-pointer release, deliberate application event entry and actual owned-window resize. Windows Editor build passed six actions in 13.51 seconds, with unchanged three source hashes. Independent reviews and visible execution remain pending.
 - [ ] Execute the bounded visible check, record actual events, assertions, restoration/closure and remaining limits; preserve prior failed or unverified results.
-- [ ] Inventory the Python UI baseline and publish a complete, ordered development roadmap with concrete parity criteria, source/test pointers, Core dependencies, packaging and Windows/Linux verification.
+- [x] Inventory the Python UI baseline and author a complete, ordered development roadmap with concrete parity criteria, source/test pointers, Core dependencies, packaging and Windows/Linux verification. The 33 feature families and all CAP01–CAP36 rows are represented; fresh requirements review is pending.
 - [ ] Commit/push/exact-ref-verify coherent checkpoints; update and merge existing PR #3 after required checks pass.
 
 ## Section 0 — settled scope and current decisions
