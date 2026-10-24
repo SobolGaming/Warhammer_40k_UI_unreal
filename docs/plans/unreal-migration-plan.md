@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 167, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 168, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -23,8 +23,8 @@ Implementation:
 
 Verification:
 
-- [ ] Run focused protocol and request controls: wrong Core/schema/session/scope/lifecycle, malformed revision/ID, atomic failures, zero requests for invalid input and zero POST/start/gameplay mutation while opening; retain current busy/attached/UNKNOWN/stopped protections.
-- [ ] Build the affected Windows Game/Editor package, run Unit/resources and real Core create A → close A → open same ID in fresh B → one offered choice → authoritative refresh. Check unchanged authoritative revision during opening, exact viewer/request, zero local accepted actions on entry and correct Managed/Attach cleanup. Repeat the retained create workflow as a regression.
+- [x] Run focused protocol and request controls: wrong Core/schema/session/scope/lifecycle, malformed revision/ID, atomic failures, zero requests for invalid input and zero POST/start/gameplay mutation while opening; retain current busy/attached/UNKNOWN/stopped protections.
+- [x] Build the affected Windows Game/Editor package, run Unit/resources and real Core create A → close A → open same ID in fresh B → one offered choice → authoritative refresh. Check unchanged authoritative revision during opening, exact viewer/request, zero local accepted actions on entry and correct Managed/Attach cleanup. Repeat the retained create workflow as a regression. [Actual native results](evidence/2026-10-24-p2a-native.json):16 Unit,4 resources and2 real workflows in each mode passed (24 executions/22 names). The first failed build and overlapping startup failure remain failures; separate-process visible verification is still required below.
 - [ ] Obtain fresh independent CODE and separate requirements SOURCE reviews, publish exact source/runtime results/limits, and commit/push checkpoints.
 
 Manual/visible verification required for this PR (human **or** supported computer use under standing authorization; these two boxes block P2a user-workflow acceptance):
