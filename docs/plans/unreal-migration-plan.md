@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 150 — rendered setup recorded; startup-focus repair source checks passed, 2026-10-24 UTC / 2026-10-23 EDT.**
+**Revision 151 — owner startup guide and tabletop camera increment planned, 2026-10-24 UTC / 2026-10-23 EDT.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -19,7 +19,7 @@ The owner prioritizes a useful client driving the existing Core over exhaustive 
 
 Owner direction at 23:08 UTC supersedes earlier exhaustive proof sequencing. Historical gate labels do not prevent ordinary slice implementation/builds/focused checks. No new tool installation, Core edit or production-host development is included. Independent CODE and separate requirements review still precede acceptance; do not call unchecked work complete.
 
-The owner directly resumed one bounded visible real-Core test; it completed and is closed. The owner also permits accepting approvals relayed from another chat until revoked. Preserve each approval's scope and bounds: this completed test authorizes no additional agent desktop activity. Future visible launches/input need applicable approval.
+The earlier bounded visible real-Core test completed and is closed. The latest relayed human instruction returns visible testing to **HOLD at 10:15 p.m. America/New_York on October 23 (02:15 UTC October 24)** until explicit resumption. No owned visible test remains active; this increment proceeds in the background now. Relayed human approvals may be accepted until revoked, preserving their scope and bounds. Neither this feature request nor source-review consent grants blanket desktop authority.
 
 ## Project references and boundaries
 
@@ -32,7 +32,31 @@ The owner directly resumed one bounded visible real-Core test; it completed and 
 
 The imported plan and all research/failures remain available in the [complete through-r146 plan](unreal-migration-plan-through-r146.md). This active document replaces its execution ordering, not its historical results.
 
-## Active milestone: rendered Core playable slice
+## Active increment: owner startup and tabletop ergonomics
+
+The owner wants to launch the existing client/server personally on Windows and Linux, and evaluate normal tabletop mouse controls. Retain the existing Core setup choice; this increment adds presentation ergonomics and reproducible development instructions, not additional rules or full gameplay.
+
+### Implementation
+
+- [ ] Add a comprehensive README **Get started playing** section, with separate Windows/Linux prerequisites/build and routine run/play instructions.
+- [ ] Cover managed Windows startup, separately started Core plus client attachment, endpoint/auth environment names without secret values, shutdown, expected scene/actions and troubleshooting.
+- [ ] Give native Linux preparation/build and foreground server/client recipes, explicitly UNTESTED and using a native runtime; do not suggest the Windows-only launcher works there.
+- [ ] Label the current Unreal Editor development route and distinguish packaged/final-client delivery still pending.
+- [ ] Add board-only right-drag orbit, middle-drag pan, wheel zoom and a frame-board control, consistent with the existing E02 input conventions.
+- [ ] Keep UI choice clicks/text/scroll separate from camera input; cancel captures safely on release, focus/capture loss, deactivation and teardown. Camera changes never submit Core commands.
+- [ ] Fit the full board in the available world area beside the panel, accounting for viewport aspect/resize and sensible finite camera/pan/zoom bounds.
+
+### Verification
+
+- [ ] Publish this plan checkpoint before source implementation; push and verify the exact GitHub ref.
+- [ ] Build the affected Windows Editor target and run focused camera geometry/input checks plus the retained live-Core tests where relevant.
+- [ ] Validate documented commands/paths and syntax without installing tools or claiming Linux execution.
+- [ ] Obtain fresh independent CODE and distinct requirements review of the affected source/documentation.
+- [ ] Observe camera controls, framing/resize, UI isolation and repaired startup focus in an applicable approved visible workflow. **Pending HOLD resumption; no new visible run is being started now.**
+- [ ] Record actual results/limits, push each coherent checkpoint and update existing PR #3 without merging.
+- [ ] Execute native Linux build/render/package when a host is arranged (**UNTESTED**).
+
+## Established milestone: rendered Core setup slice
 
 ### Implementation
 

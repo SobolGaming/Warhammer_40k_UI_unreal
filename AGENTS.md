@@ -4,9 +4,9 @@
 
 Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md`, and [active migration plan](docs/plans/unreal-migration-plan.md) before work.
 
-The owner's latest priority is the smallest useful rendered client driving the existing Core: startup board, real session/state, one meaningful player action and visible authoritative result. The active plan supersedes the exhaustive historical proof sequence. Implement and check coherent increments; do not reopen deferred profile/727/transitive-certification campaigns.
+The owner's latest increment is comprehensive Windows/Linux **Get started playing** documentation plus tabletop mouse orbit, pan, zoom and corrected board framing. Keep prerequisites/build separate from routine play; label Editor development delivery and untested Linux recipes honestly. Preserve the bounded real-Core setup workflow. The active plan supersedes the exhaustive historical proof sequence; do not reopen deferred profile/727/transitive-certification campaigns.
 
-The owner directly resumed one bounded visible real-Core test; it completed and is closed. The [observed setup workflow](docs/plans/evidence/2026-10-23-live-core-visible.md) succeeded, with a startup-focus error and camera-edge crop retained as limits. The owner also permits accepting approvals relayed from another chat until explicitly revoked. Preserve each approval's bounds: this completed test grants no additional desktop launches, focus changes or input. Future agent desktop work needs applicable owner approval; source-review consent alone does not authorize it.
+**Screen HOLD from 2026-10-23 10:15 p.m. America/New_York (2026-10-24 02:15 UTC) until explicit owner resumption.** Finish/close any owned visible work before that deadline and preserve the owner's screen. This increment is proceeding in the background now; no owned visible test is active. Background edits, builds and non-graphical checks may continue. The owner permits accepting relayed human approvals until revoked, with provenance and bounds retained; private-source review consent does not authorize desktop activity. The earlier [visible setup workflow](docs/plans/evidence/2026-10-23-live-core-visible.md) is closed and grants no repeat authority.
 
 ## Repository boundaries
 
