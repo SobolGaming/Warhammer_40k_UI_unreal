@@ -129,7 +129,7 @@ sequenceDiagram
     end
 ```
 
-A current offered option's original request/option IDs and revision are preserved. The client never creates a legal choice or a movement witness merely to satisfy its UI. Known rejection diagnostics remain distinct from transient projection-read errors. A failed refresh clears actionable options; stale choices are not re-enabled.
+The currently demonstrated action is `select_secondary_missions`; this is a finite setup choice, not general gameplay. A current offered option's original request/option IDs and revision are preserved. The client never creates a legal choice or a movement witness merely to satisfy its UI. Known rejection diagnostics remain distinct from transient projection-read errors. A failed refresh clears actionable options; stale choices are not re-enabled.
 
 An uncertain command retains its exact envelope, ID and credential scope for explicit reconciliation. **Uncertain session creation is different:** the create operation has no retry identity in this client, so it blocks automatic retry/recreation. HTTP status and available Core messages remain visible; a timeout or generic error envelope is not treated as proof of rollback.
 
@@ -137,7 +137,8 @@ An uncertain command retains its exact envelope, ID and credential scope for exp
 
 [WarhammerClient.cpp](Source/WarhammerClient/Private/WarhammerClient.cpp) registers the runtime module. [DefaultEngine.ini](Config/DefaultEngine.ini) selects `/Engine/Maps/Entry` and `AWarhammerClientGameMode`; the project currently has no authored gameplay map dependency.
 
-[WarhammerClientGameMode.cpp](Source/WarhammerClient/Private/WarhammerClientGameMode.cpp) owns `FLiveCoreScene`:
+[WarhammerClientGameMode.cpp](Source/WarhammerClient/Private/WarhammerClientGameMode.cpp) owns `FLiveCoreScene`. Session lifetime is world/GameMode-scoped, not a GameInstance subsystem that survives level travel. The live UI is C++ Slate rather than an implemented UMG/Blueprint application layer:
+
 
 - `BeginPlay` initializes the session object, required meshes/material, transient camera and light. Tick attaches the Slate overlay when the viewport/controller is available.
 - `SLiveCorePanel` contains endpoint, create, current options, outcome/errors, refresh, reconcile and Frame board controls. The board occupies a separate hit-testable camera surface beside the panel.
@@ -151,7 +152,7 @@ The renderer loads `/Engine/BasicShapes/Cube`, `Cylinder` and `BasicShapeMateria
 
 [LiveCoreCamera.h/.cpp](Source/WarhammerClient/Private/LiveCore/LiveCoreCamera.h) implements `FTabletopCamera`, a pure local navigation model with no session/HTTP interface. It solves perspective framing from board bounds, the full viewport and the arranged board surface. The camera's lateral shift keeps the full board beside the panel without changing its orientation back toward the unshifted center. Invalid or too-small layouts produce a diagnostic instead of an invalid projection.
 
-The live Slate surface reuses [E02InputPolicy](Source/WarhammerClient/Private/Migration/E02InputPolicy.h) as a local input reducer. Slate owns hit testing, focus and actual capture; the reducer returns orbit/pan/zoom/frame effects. RMB orbits, MMB pans, focused-board wheel zooms, and F or the panel button frames the board. UI clicks/text/scroll do not submit camera actions or game commands. Capture is tracked by exact Slate user and pointer, and cancellation handles Escape, focus/capture loss, application events and layout changes.
+The live Slate surface reuses [E02InputPolicy](Source/WarhammerClient/Private/Migration/E02InputPolicy.h) as a local input reducer. Slate owns hit testing, focus and actual capture; the reducer returns orbit/pan/zoom/frame effects. RMB orbits, MMB pans, focused-board wheel zooms, and F or the panel button frames the board. Panel input stays with its controls; only explicit action controls submit Core requests. Camera gestures never submit game commands. Capture is tracked by exact Slate user and pointer, and cancellation handles Escape, focus/capture loss, application events and layout changes.
 
 Same-bounds HTTP refresh preserves navigation; a layout resize may deliberately reframe. The current input implementation is `UIOnly` with an explicit camera surface, not a global input preprocessor or new player pawn.
 
