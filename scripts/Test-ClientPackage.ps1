@@ -31,6 +31,17 @@ function Assert-PlainPath([string]$Path) {
     }
 }
 function Assert-OutsideCheckoutPath([string]$Path, [string]$CheckoutRoot) {
+    # Compare only ordinary absolute drive paths. Device/UNC namespaces and DOS
+    # aliases can name the same file using a different lexical checkout prefix.
+    foreach ($candidate in @($Path, $CheckoutRoot)) {
+        if ($candidate -cnotmatch '^[A-Za-z]:[\\/]') { throw 'Only ordinary local absolute drive paths are supported; Windows namespace aliases are not supported.' }
+        foreach ($part in $candidate.Substring(3).Split([char[]]@('\', '/'))) {
+            if ($part -in @('', '.', '..')) { continue }
+            if ($part.EndsWith('.') -or $part.EndsWith(' ') -or $part -match '~[0-9]' -or $part.Contains(':')) {
+                throw 'Windows path aliases, trailing dot/space components and alternate data streams are not supported.'
+            }
+        }
+    }
     $resolved = [IO.Path]::GetFullPath($Path)
     $checkout = [IO.Path]::GetFullPath($CheckoutRoot).TrimEnd('\', '/')
     Assert-PlainPath $resolved
@@ -130,9 +141,9 @@ $record = [ordered]@{
 $hostInfo = $null; $native = $null; $started = $false; $outFile = $null; $errFile = $null; $outReader = $null; $errReader = $null
 $timer = $null; $stage = 'INPUTS'; $validated = $false
 try {
-    $binary = [IO.Path]::GetFullPath($ClientExecutable)
+    $record.selectedExecutable = $ClientExecutable
+    $binary = Assert-OutsideCheckoutPath $ClientExecutable $repo
     $record.selectedExecutable = $binary
-    $binary = Assert-OutsideCheckoutPath $binary $repo
     if ($binary.Replace('\', '/') -inotmatch '/WarhammerClient/Binaries/Win64/WarhammerClient\.exe$' -or ![IO.File]::Exists($binary)) {
         throw 'Select the actual nested WarhammerClient/Binaries/Win64/WarhammerClient.exe, not the bootstrap executable.'
     }

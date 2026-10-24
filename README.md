@@ -97,7 +97,7 @@ $taskCopiedExe = Join-Path $taskCopy 'WarhammerClient/Binaries/Win64/WarhammerCl
 & ./scripts/Test-ClientPackage.ps1 -ClientExecutable $taskCopiedExe -Mode Core -CoreMode Managed -Port 19084
 ```
 
-Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects exactly one real session/action/refresh check and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. They reject executables inside the checkout and paths through reparse points, and record the selected absolute path. They do not establish visible rendering or controls. The source checkout hosts only the test tooling.
+Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects exactly one real session/action/refresh check and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. Use ordinary absolute local-drive paths; extended/device/UNC namespaces, short-name aliases, paths through reparse points and executables inside the checkout are rejected. The result records the accepted absolute path. These checks do not establish visible rendering or controls. The source checkout hosts only the test tooling.
 
 ### Linux x86-64: routine launch — UNTESTED
 
@@ -182,7 +182,7 @@ This command is documented for the future native host; it has not been executed 
 | Sessions disappear after Core restarts | This development server has in-memory state. Confirm the restart and begin a fresh client/session; durable save/resume is not provided. |
 | **Reconcile unknown command** appears | The client retains one uncertain command envelope/ID in memory and blocks new actions. Reconcile that same command; do not submit a replacement/new ID. Restart recovery and injected response loss remain unverified. Unknown session creation cannot be retried safely. |
 
-Additional startup/authentication details and package recipes are in [Core development startup](docs/development/core-startup.md).
+Additional startup/authentication details and **Python Core installation** recipes are in [Core development startup](docs/development/core-startup.md). Windows Game packaging is documented above. Native Linux Game packaging commands and execution remain future P1/P8 work.
 
 ## Related projects
 

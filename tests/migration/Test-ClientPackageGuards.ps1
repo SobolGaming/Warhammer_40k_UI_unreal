@@ -79,6 +79,27 @@ try {
     Invoke-PathCase 'outside path with spaces' $spaces $checkout
     Invoke-PathCase 'normalized dot-dot resolves outside' (Join-Path $checkout '../checkout-packaged/WarhammerClient/Binaries/Win64/WarhammerClient.exe') $checkout
 
+    # These are strings only: unsupported namespaces must fail before a file,
+    # network share or process is consulted, even when they name an existing file.
+    Invoke-PathCase 'extended namespace inside checkout' ('\\?\' + $inside) $checkout 'namespace aliases'
+    Invoke-PathCase 'extended namespace inside .local' ('\\?\' + $localInside) $checkout 'namespace aliases'
+    Invoke-PathCase 'device namespace inside checkout' ('\\.\' + $inside) $checkout 'namespace aliases'
+    Invoke-PathCase 'extended namespace outside checkout' ('\\?\' + $spaces) $checkout 'namespace aliases'
+    Invoke-PathCase 'device namespace outside checkout' ('\\.\' + $spaces) $checkout 'namespace aliases'
+    Invoke-PathCase 'slash extended namespace' ('//?/' + $inside.Replace('\', '/')) $checkout 'namespace aliases'
+    Invoke-PathCase 'UNC path' '\\stub.invalid\share\WarhammerClient\Binaries\Win64\WarhammerClient.exe' $checkout 'namespace aliases'
+    Invoke-PathCase 'extended UNC path' '\\?\UNC\stub.invalid\share\WarhammerClient\Binaries\Win64\WarhammerClient.exe' $checkout 'namespace aliases'
+    Invoke-PathCase 'volume namespace path' '\\?\Volume{00000000-0000-0000-0000-000000000000}\WarhammerClient\Binaries\Win64\WarhammerClient.exe' $checkout 'namespace aliases'
+    Invoke-PathCase 'drive-relative path' 'C:WarhammerClient\Binaries\Win64\WarhammerClient.exe' $checkout 'absolute drive paths'
+    Invoke-PathCase 'root-relative path' '\WarhammerClient\Binaries\Win64\WarhammerClient.exe' $checkout 'absolute drive paths'
+    Invoke-PathCase 'relative path' 'WarhammerClient\Binaries\Win64\WarhammerClient.exe' $checkout 'absolute drive paths'
+    Invoke-PathCase 'extended namespace checkout root' $spaces ('\\?\' + $checkout) 'namespace aliases'
+    Invoke-PathCase 'checkout trailing dot alias' ($checkout + '.\WarhammerClient\Binaries\Win64\WarhammerClient.exe') $checkout 'path aliases'
+    Invoke-PathCase 'checkout trailing space alias' ($checkout + ' \WarhammerClient\Binaries\Win64\WarhammerClient.exe') $checkout 'path aliases'
+    Invoke-PathCase 'DOS short-name alias component' (Join-Path $fixtureRoot 'CHECKO~1/WarhammerClient/Binaries/Win64/WarhammerClient.exe') $checkout 'path aliases'
+    Invoke-PathCase 'alternate data stream component' ($spaces + ':stream') $checkout 'alternate data streams'
+    Invoke-PathCase 'ordinary forward-slash outside path' $spaces.Replace('\', '/') $checkout
+
     # A narrow attribute shim exercises the reparse refusal without requesting
     # symlink/junction privileges or creating any real link. Other reads stay real.
     $script:reparseFixture = [IO.Path]::GetDirectoryName($spaces)
