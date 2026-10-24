@@ -579,12 +579,14 @@ bool FLiveCoreExplicitPlayerScopeTest::RunTest(const FString& Parameters)
     const auto ReceiptMetadata = Receipt->GetObjectField(TEXT("session"));
     const FString ReceiptSessionId = ReceiptMetadata->GetStringField(TEXT("session_id"));
     ReceiptMetadata->GetObjectField(TEXT("visibility"))->SetStringField(TEXT("player_id"), TEXT("player-b"));
+    Receipt->GetObjectField(TEXT("checkpoint"))->SetStringField(TEXT("viewer_player_id"), TEXT("player-b"));
     LiveCoreProtocol::FOutcome Outcome;
     TestTrue(TEXT("Receipt is bound to retained player-b command scope"), LiveCoreProtocol::ReadOutcome(Serialize(Receipt.ToSharedRef()),
         200, CommandId, ReceiptSessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error, TEXT("player-b")));
     TestFalse(TEXT("Player-b receipt is refused for retained player-a scope"), LiveCoreProtocol::ReadOutcome(Serialize(Receipt.ToSharedRef()),
         200, CommandId, ReceiptSessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
     ReceiptMetadata->GetObjectField(TEXT("visibility"))->SetStringField(TEXT("player_id"), TEXT("player-a"));
+    Receipt->GetObjectField(TEXT("checkpoint"))->SetStringField(TEXT("viewer_player_id"), TEXT("player-a"));
     TestFalse(TEXT("Old player's valid receipt cannot satisfy new player's command"), LiveCoreProtocol::ReadOutcome(Serialize(Receipt.ToSharedRef()),
         200, CommandId, ReceiptSessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error, TEXT("player-b")));
     return true;
