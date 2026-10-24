@@ -34,6 +34,18 @@ struct FLiveCoreModel
     double RadiusInches = 0.0;
 };
 
+// Presentation of the authenticated projection only; never a second legality path.
+enum class ELiveCoreDecisionPresentation : uint8
+{
+    Unavailable,
+    NoPending,
+    Hidden,
+    ParameterizedUnsupported,
+    OtherActor,
+    UnsupportedActor,
+    FiniteOptions
+};
+
 struct FLiveCoreState
 {
     bool bBusy = false;
@@ -53,6 +65,7 @@ struct FLiveCoreState
     FString ViewerPlayerId = TEXT("player-a");
     FString RequestId;
     FString RequestType;
+    ELiveCoreDecisionPresentation DecisionPresentation = ELiveCoreDecisionPresentation::Unavailable;
     FString MissionSummary;
     FString LastOutcomeCode;
     // Latest verified command/session revision; also the minimum acceptable projection.
@@ -105,6 +118,9 @@ struct FOutcome
 bool ValidateEndpoint(const FString& Input, FString& OutEndpoint, FString& OutError);
 bool ReadCreatedSession(const FString& Text, FMetadata& OutMetadata, FString& OutError);
 bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreState& OutState, FString& OutError);
+// Clear local decision controls while a fresh projection or command outcome is unavailable.
+// The separately retained command envelope and authoritative revision are unchanged.
+void InvalidateDecisionPresentation(FLiveCoreState& State);
 bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId,
     const FString& SessionId, int64 ExpectedRevision, bool bAdministrator,
     const FString& Operation, FOutcome& OutOutcome, FString& OutError);

@@ -16,9 +16,9 @@ Implementation:
 
 - [x] Merge PR #4 after verifying its exact head/gates; create this separate P1 branch from the merged base.
 - [x] Fetch Core main and its newer development branch without moving or editing the reference checkout; record source targets separately from the tested runtime below.
-- [ ] Update this roadmap and supporting source inventory for latest-Core capabilities beyond Arcade, preserving the fast playable path and separate implementation/verification checkboxes.
-- [ ] Show actual board keyboard-focus guidance and label option buttons as immediate Core submissions.
-- [ ] Explain no pending, hidden, visible-but-unsupported and actionable decisions using typed viewer-scoped presentation state; preserve Core authority, command identity and public request/option IDs.
+- [x] Update this roadmap and supporting source inventory for latest-Core capabilities beyond Arcade, preserving the fast playable path and separate implementation/verification checkboxes.
+- [x] Show actual board keyboard-focus guidance and label option buttons as immediate Core submissions. Native/rendered verification remains separate below.
+- [x] Explain no pending, hidden, visible-but-unsupported and actionable decisions using typed viewer-scoped presentation state; preserve Core authority, command identity and public request/option IDs. Focused regression source is authored; execution and review remain below.
 - [ ] Build/package the affected Windows client and document a usable preview launch. This preview remains player-a and one offered setup action; session joining/handoff and general gameplay editors are subsequent bounded work.
 
 Verification:

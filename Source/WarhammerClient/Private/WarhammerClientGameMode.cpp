@@ -248,9 +248,26 @@ public:
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 4, 0, 8)
                 [SNew(STextBlock).AutoWrapText(true).Text_Lambda([this]()
                     {
-                        return FText::FromString(State().RequestId.IsEmpty()
-                            ? TEXT("No decision is visible to this viewer.")
-                            : State().RequestType + TEXT("\n") + State().RequestId);
+                        const auto& Value = State();
+                        switch (Value.DecisionPresentation)
+                        {
+                        case ELiveCoreDecisionPresentation::NoPending:
+                            return FText::FromString(TEXT("Core reports no pending decision."));
+                        case ELiveCoreDecisionPresentation::Hidden:
+                            return FText::FromString(TEXT("Core has hidden the pending decision from this viewer. No hidden details are displayed."));
+                        case ELiveCoreDecisionPresentation::ParameterizedUnsupported:
+                            return FText::FromString(TEXT("This visible decision needs an editor that this preview does not yet support.\nDecision: ") + Value.RequestType);
+                        case ELiveCoreDecisionPresentation::OtherActor:
+                            return FText::FromString(TEXT("This visible decision belongs to a different actor. This preview cannot submit it."));
+                        case ELiveCoreDecisionPresentation::UnsupportedActor:
+                            return FText::FromString(TEXT("This visible decision has no supported player actor for this preview."));
+                        case ELiveCoreDecisionPresentation::FiniteOptions:
+                            return FText::FromString((Value.Options.IsEmpty()
+                                ? FString(TEXT("Core currently offers no finite options for this decision."))
+                                : FString(TEXT("Choose a Core-offered option below. Submit now sends the choice immediately."))) + TEXT("\n") + Value.RequestType);
+                        default:
+                            return FText::FromString(TEXT("Decision information is unavailable until an authoritative projection arrives."));
+                        }
                     })]
                 + SVerticalBox::Slot().AutoHeight()
                 [SAssignNew(Options, SVerticalBox)]
@@ -280,7 +297,7 @@ public:
                     if (Scene && Scene->Session.IsValid()) { Scene->Session->SelectOfferedOption(Id); }
                     return FReply::Handled();
                 })
-                [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(Option.Label))]];
+                [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(TEXT("Submit now: ") + Option.Label))]];
         }
     }
 
@@ -326,8 +343,11 @@ public:
     virtual int32 OnPaint(const FPaintArgs&, const FGeometry& G, const FSlateRect&,
         FSlateWindowElementList& Elements, int32 Layer, const FWidgetStyle&, bool) const override
     {
+        const FString Help = HasKeyboardFocus()
+            ? TEXT("Board has keyboard focus  |  RMB: orbit  MMB: pan  Wheel: zoom  F: frame")
+            : TEXT("Click board for keyboard focus  |  RMB: orbit  MMB: pan  Wheel: zoom  F: frame");
         FSlateDrawElement::MakeText(Elements, Layer, G.ToPaintGeometry(FVector2D(G.GetLocalSize().X, CameraHelpHeight),
-            FSlateLayoutTransform(FVector2D(8, 8))), TEXT("Click board: focus  |  RMB: orbit  MMB: pan  Wheel: zoom  F: frame"),
+            FSlateLayoutTransform(FVector2D(8, 8))), Help,
             FCoreStyle::GetDefaultFontStyle(TEXT("Regular"), 11), ESlateDrawEffect::None, FLinearColor::White);
         return Layer + 1;
     }
@@ -413,8 +433,8 @@ public:
         return FReply::Unhandled();
     }
     virtual FReply OnFocusReceived(const FGeometry&, const FFocusEvent&) override
-    { Policy.FocusChanged(true); return FReply::Handled(); }
-    virtual void OnFocusLost(const FFocusEvent&) override { Cancel(); }
+    { Policy.FocusChanged(true); Invalidate(EInvalidateWidgetReason::Paint); return FReply::Handled(); }
+    virtual void OnFocusLost(const FFocusEvent&) override { Cancel(); Invalidate(EInvalidateWidgetReason::Paint); }
     virtual void OnMouseCaptureLost(const FCaptureLostEvent&) override
     { if (Policy.Snapshot().Capture.IsSet()) { Policy.FocusChanged(false); } }
 #if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
