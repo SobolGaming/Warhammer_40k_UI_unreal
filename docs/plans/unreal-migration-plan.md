@@ -25,7 +25,7 @@ Verification:
 
 - [x] Run focused launcher/projection/identity/malformed-field/viewer-disclosure controls and build the affected native client. The [actual results](evidence/2026-10-24-p1c-core-adoption.md) record12 Unit +4 resources +Managed/Attach real integration,18 executions/17 names; native input and source bindings remain explicit.
 - [x] Run actual44.5 create → offered setup action → refresh in Managed and Attach modes; record runtime/input identities and owned/attached cleanup. One offered setup choice committed before authoritative refresh; Managed stopped normally, attached host remained HTTP200 then its separate owner stopped it.
-- [ ] Obtain independent CODE and separate requirements reviews, publish results/limits and close this finite PR scope.
+- [ ] Obtain independent CODE and separate requirements reviews, publish results/limits and close this finite PR scope. Initial REQ passed at de95717; CODE requested prep descendant ownership and narrow nonempty-roster producer evidence. [Findings](evidence/2026-10-24-p1c-source-reviews.json) remain open until repaired and freshly reviewed.
 
 ## Closed P1b Windows packaged interactive preview
 

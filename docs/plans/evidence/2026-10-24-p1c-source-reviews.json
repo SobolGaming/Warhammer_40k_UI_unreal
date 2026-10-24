@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "scope": "Finite affected SOURCE review; actual native runtime results are separate. No full SDK, GUI, Linux, portability or all-rule certification.",
+  "standingPrivateSourceApiConsent": true,
+  "rounds": [
+    {
+      "sourceHead": "de95717262d4db5d37b308a940cc2df802cf40d4",
+      "declaredInputs": 48,
+      "declaredInputBytes": 695597,
+      "reviews": [
+        {
+          "role": "CODE",
+          "verdict": "CHANGES_REQUESTED",
+          "sourceHead": "de95717262d4db5d37b308a940cc2df802cf40d4",
+          "startedUtc": "2026-10-24T18:50:57.3639480Z",
+          "finishedUtc": "2026-10-24T18:57:11.6185279Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "approval": "never",
+          "sandbox": "read-only",
+          "memoryDisabledRequested": true,
+          "ephemeral": true,
+          "timeoutSeconds": 600,
+          "manifestSha256": "B9E54456BDC736AF215439F591E11184026886E2A375A1A74AC849AEA6422105",
+          "promptSha256": "713BAA7C7D0DC585F7655669447958E2B96A12AC6E0D721288FB1718F2A9286D",
+          "rawReport": {
+            "bytes": 2556,
+            "sha256": "b793fffb3528ea4f3514456f9c28df2c668db6392dfd23dc11155a851b390d92"
+          },
+          "invocation": {
+            "bytes": 982,
+            "sha256": "d79f4be354078a4fbbd8f1f2c9275ea1358c2787de1e0a5eef6d1e6f440a239a"
+          },
+          "completion": {
+            "bytes": 156,
+            "sha256": "383849dce1d793999e5bfb716e3e7f0e9421169fc20ecbc2a94dd90b290bdd7f"
+          }
+        },
+        {
+          "role": "REQ",
+          "verdict": "PASS",
+          "sourceHead": "de95717262d4db5d37b308a940cc2df802cf40d4",
+          "startedUtc": "2026-10-24T18:50:57.8402635Z",
+          "finishedUtc": "2026-10-24T18:53:39.0775314Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "approval": "never",
+          "sandbox": "read-only",
+          "memoryDisabledRequested": true,
+          "ephemeral": true,
+          "timeoutSeconds": 600,
+          "manifestSha256": "B9E54456BDC736AF215439F591E11184026886E2A375A1A74AC849AEA6422105",
+          "promptSha256": "C1A38B6AB3DFB89794075B49773E097D98757BD0DC7D302158046BDE56BD4027",
+          "rawReport": {
+            "bytes": 3570,
+            "sha256": "7bff54edcc405994d482c742ebe5f0e93f1eefdfa2ddd8bed8a91d70afe55936"
+          },
+          "invocation": {
+            "bytes": 979,
+            "sha256": "f138256c31d207a90d64428ab17268877df0af1df1efb571aca1031e65bec1c4"
+          },
+          "completion": {
+            "bytes": 155,
+            "sha256": "d14f69fe977158a8e001aa43a662463745a760fe6a12f0321c6322e3acd0fe6f"
+          }
+        }
+      ],
+      "findings": [
+        {
+          "id": "P1C-CODE-1",
+          "priority": "P2",
+          "status": "REPAIR_PENDING",
+          "summary": "Preparation must own descendants after parent exit; use existing Windows job and real child-outlives-parent control."
+        },
+        {
+          "id": "P1C-CODE-2",
+          "priority": "P2",
+          "status": "INTERFACE_SUPPLEMENT_PENDING",
+          "summary": "Provide exact selected-Core nonempty roster producer serialization and representative data. Evidence blocker, not an established mismatch."
+        }
+      ]
+    }
+  ]
+}

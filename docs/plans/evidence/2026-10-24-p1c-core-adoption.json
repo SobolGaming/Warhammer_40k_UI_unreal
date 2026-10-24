@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "milestone": "P1c bounded Core44.5 adoption",
-  "status": "NATIVE_PASS_SOURCE_REVIEWS_PENDING",
+  "status": "NATIVE_PASS_SOURCE_CHANGES_REQUESTED",
   "implementationHead": "cc494c3ca5a9b4c98acddf189bf497c5eb3af1fc",
   "launcherRepairHead": "de95717262d4db5d37b308a940cc2df802cf40d4",
   "runtime": {
@@ -383,5 +383,6 @@
       }
     ],
     "privateSummarySha256": "6d1f29aa69a43b2fa415c4f008eefc7c4880359b11856a8acc801fb638ac3771"
-  }
+  },
+  "sourceReviews": "2026-10-24-p1c-source-reviews.json"
 }
