@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 158, 2026-10-24. This is the single canonical root plan. Full feature parity is not implemented or accepted.**
+**Revision 159, 2026-10-24. This is the single canonical root plan. Full feature parity is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -23,9 +23,11 @@ Implementation above is authored, not runtime acceptance. The launcher-only stub
 
 Initial package attempt at `8f8c010` failed in 4.19 seconds before compilation/cooking because the ordinary and historical proof Editor targets were ambiguous. Preserve that failure. `DefaultEngine.ini` now explicitly selects the ordinary Game/Editor targets; the next package attempt must validate the repair. No game or cooker window was launched.
 
+Package creation at `9233bb6` succeeded in 199.16 seconds (36 Game/Editor build actions, 144.25 seconds), validating the target-default repair. The runnable folder contains 50 files / 975,120,505 bytes. Runtime remains unverified. Suppress two incidental PowerShell task-result objects before validating the build wrapper's single result interface again; this does not change the compiled client. The new offscreen test runner is authored with exact report acceptance; 23 isolated quoting/stream/report checks passed, without launching a native client/Core.
+
 Non-visible verification and PR exit criteria:
 
-- [ ] Windows Game build/cook/stage succeeds; verify runnable folder, required assets and runtime data without claiming a portable single executable.
+- [x] Windows Game build/cook/stage succeeds and the runnable folder exists. Actual asset/data loading is verified separately below; this is not a portable single executable or a runtime PASS.
 - [ ] Execute an owned packaged binary outside the source checkout using NullRHI/RenderOffScreen; check intended map/GameMode, runtime data/assets and a real selected-Core create/action/refresh workflow, with normal bounded exit and unchanged Config.
 - [ ] Exercise missing/corrupt runtime-data failure and focused launcher regressions; preserve actual failures before repairs.
 - [ ] Complete fresh independent CODE and different requirements review for affected source, record exact results/limits, commit/push/exact-ref-verify and publish the bounded PR.

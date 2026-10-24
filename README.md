@@ -87,6 +87,15 @@ The manual Python launcher supports `--client-executable /absolute/path/to/Warha
 
 P1a's allowed verification is non-visible only. Rendered package controls/fonts/shaders, a machine without an Unreal installation and native Linux remain separate unverified acceptance work.
 
+For the fixed offscreen checks, use the actual nested executable (not the root bootstrap):
+
+```powershell
+& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $package.clientExecutable -Mode Resources
+& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $package.clientExecutable -Mode Core -CoreMode Managed -Port 19084
+```
+
+Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects exactly one real session/action/refresh check and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. They do not establish visible rendering or controls. The runner's source checkout hosts the tooling; P1a runtime independence is checked by copying the runnable Windows folder outside that checkout before execution.
+
 ### Linux x86-64: routine launch — UNTESTED
 
 All Linux setup, compilation, Core startup, client input/rendering and packaging remain **UNTESTED** until a native host is arranged. The PowerShell `Start-Client.ps1` launcher is Windows-only; there is no Linux Managed mode.

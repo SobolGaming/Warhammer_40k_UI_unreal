@@ -175,6 +175,8 @@ The ordinary [Game target](Source/WarhammerClient.Target.cs) is the standalone t
 
 Current launcher source adds explicit packaged executable selection. [Start-Client.ps1](scripts/Start-Client.ps1) accepts `-ClientExecutable`; [Start-Client.py](scripts/Start-Client.py) accepts `--client-executable`. Packaged execution omits the Editor's `.uproject -game` arguments and uses the executable's directory. Editor launch remains available. These code paths and the package build remain subject to P1a review/testing; they do not establish fresh-machine portability or rendered packaged-client acceptance.
 
+[Test-ClientPackage.ps1](scripts/Test-ClientPackage.ps1) is separate non-visible verification tooling. It runs the actual nested Development Game executable with fixed NullRHI/RenderOffScreen flags, validates an exact automation report, and records binary/config/stream/lifecycle evidence. Resources mode has no Core credentials; Core mode uses the existing managed/attached development-host helpers, restores the parent environment and stops only an owned host. It does not automate player input or certify rendered behavior.
+
 ## Core process ownership
 
 The C++ process attaches to a service; closing its GameMode does not stop Core or close server sessions. Ownership belongs to the launcher layer, documented in [Core startup](docs/development/core-startup.md):

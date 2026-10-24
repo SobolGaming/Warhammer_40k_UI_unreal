@@ -69,7 +69,7 @@ try {
     }
     $record.elapsedSeconds = $timer.Elapsed.TotalSeconds; $record.exitCode = $process.ExitCode
     if (!$stdout.Wait(10000) -or !$stderr.Wait(10000)) { throw 'Package output did not drain within ten seconds.' }
-    $stdout.GetAwaiter().GetResult(); $stderr.GetAwaiter().GetResult()
+    $null = $stdout.GetAwaiter().GetResult(); $null = $stderr.GetAwaiter().GetResult()
     if ($timer.Elapsed.TotalMinutes -gt $TimeoutMinutes -or $outStream.Length -gt 64MB -or $errStream.Length -gt 64MB) { throw 'Package exceeded its time or output budget.' }
     if ($process.ExitCode -ne 0) { throw ('AutomationTool failed with exit code ' + $process.ExitCode + '; inspect the retained logs.') }
     $binary = Join-Path $archive 'Windows/WarhammerClient/Binaries/Win64/WarhammerClient.exe'
