@@ -117,7 +117,7 @@ private:
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreSessionIntegrationTest,
     "Warhammer.LiveCore.Integration.RealSessionAction",
-    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::ClientContext | EAutomationTestFlags::EngineFilter)
 
 bool FLiveCoreSessionIntegrationTest::RunTest(const FString& Parameters)
 {

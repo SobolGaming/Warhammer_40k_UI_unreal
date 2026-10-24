@@ -33,6 +33,10 @@ The [manual launcher](docs/plans/evidence/2026-10-24-live-core-camera-visible.md
 - Preserve E02 synthetic modes/proofs and their zero-Core-command assertions.
 - Retain Linux-capable seams/targets; Linux execution remains UNTESTED until a native host is arranged.
 
+## Architecture maintenance
+
+Read [architecture.md](architecture.md) before changing code. Assess the architecture impact of every code change and update that guide in the same change whenever directories/components, responsibilities, interfaces/dependencies, startup or data flow, or deployment shape changes. Keep its diagrams and source links consistent with the implementation. Architecture-neutral changes need no cosmetic edit. Clearly distinguish implemented behavior from planned/deferred features, development/proof tooling from the client, and tested platforms from unverified ones.
+
 ## Verification and reviews
 
 Run commands in this repository. For docs, check whitespace and referenced paths/commands. For behavior, build the affected target and run focused functional/regression checks covering changed seams and concrete risks. Use actual Core for integration evidence where possible; mocked/synthetic results must be labelled.

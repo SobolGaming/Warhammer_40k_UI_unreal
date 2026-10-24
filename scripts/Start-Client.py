@@ -1,4 +1,6 @@
-"""Launch only the development client against an already running local Core."""
+"""Launch an Editor or packaged client against an already running local Core."""
+
+# Interactive user entry point. Do not invoke during an owner screen HOLD.
 
 from __future__ import annotations
 
@@ -95,32 +97,54 @@ def editor_path(engine: Path) -> Path:
     return editor
 
 
+def packaged_path(executable: Path) -> Path:
+    if sys.platform == "win32":
+        valid = executable.suffix.lower() == ".exe" and executable.is_file()
+    elif sys.platform.startswith("linux"):
+        valid = executable.is_file() and os.access(executable, os.X_OK)
+    else:
+        raise StartupError("This manual launcher supports Windows and Linux only; Linux remains untested.")
+    if not valid:
+        raise StartupError("The packaged client executable is missing, has the wrong native file type or is not executable.")
+    return executable
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--engine-root", type=Path, default=os.environ.get("UE_ROOT"), help="Native UE 5.8 root; defaults to UE_ROOT.")
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--engine-root", type=Path, help="Native UE 5.8 root; defaults to UE_ROOT when no packaged executable is selected.")
+    selection.add_argument("--client-executable", type=Path, help="Explicit packaged native client executable; ignores UE_ROOT and runs from its containing folder.")
     parser.add_argument("--endpoint", required=True, type=local_endpoint, help="Already running http://127.0.0.1:<port> origin; no credentials in URLs.")
     parser.add_argument("--core-root", type=Path, help="Optional pinned clean checkout to verify as the manual server's script reference.")
     args = parser.parse_args(argv)
     try:
-        if args.engine_root is None:
-            raise StartupError("Set UE_ROOT or pass --engine-root.")
-        editor = editor_path(args.engine_root.expanduser().resolve())
-        project = REPO_ROOT / "WarhammerClient.uproject"
-        if not project.is_file():
-            raise StartupError("WarhammerClient.uproject is missing beside the scripts directory.")
+        if args.client_executable is not None:
+            executable = packaged_path(args.client_executable.expanduser().resolve())
+            arguments = [str(executable)]
+            working_directory = executable.parent
+        else:
+            engine = args.engine_root or os.environ.get("UE_ROOT")
+            if engine is None:
+                raise StartupError("Set UE_ROOT, pass --engine-root or select --client-executable.")
+            executable = editor_path(Path(engine).expanduser().resolve())
+            project = REPO_ROOT / "WarhammerClient.uproject"
+            if not project.is_file():
+                raise StartupError("WarhammerClient.uproject is missing beside the scripts directory.")
+            arguments = [str(executable), str(project), "-game"]
+            working_directory = REPO_ROOT
         if args.core_root:
             verify_core_reference(args.core_root.expanduser().resolve())
         verify_installed_core()  # Verify before importing development credential constants.
         environment = development_environment(args.endpoint)
-        print(f"Opening development client at {args.endpoint}. Core remains running when the client closes.")
-        result = subprocess.run([str(editor), str(project), "-game", "-windowed", "-CoreUrl=" + args.endpoint], cwd=REPO_ROOT, env=environment, check=False)
+        print(f"Opening Unreal client at {args.endpoint}. Core remains running when the client closes.")
+        result = subprocess.run(arguments + ["-windowed", "-CoreUrl=" + args.endpoint], cwd=working_directory, env=environment, check=False)
         if result.returncode:
             print(f"Unreal client exited with code {result.returncode}.", file=sys.stderr)
         return result.returncode if result.returncode >= 0 else 1
     except StartupError as error:
         parser.exit(2, f"Client startup failed: {error}\n")
     except OSError:
-        parser.exit(2, "Client startup failed: check required file paths, permissions and native UnrealEditor availability.\n")
+        parser.exit(2, "Client startup failed: check required file paths, permissions and selected native client availability.\n")
 
 
 if __name__ == "__main__":

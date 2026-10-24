@@ -6,17 +6,20 @@ This document owns scope, priorities, baselines, milestone checklists and featur
 
 ## Current bounded increment: P1a Windows standalone package, non-visible checks
 
-Branch: `codex/p1-windows-standalone`, based on merged PR #3 / main `2f9e0c11cee65f531be2d4eebe8e7e29532ebf64`. Create one new PR for this finite deliverable; do not roll later gameplay or remaining P1 acceptance into it.
+Branch: `codex/p1-windows-standalone`, based on merged PR #3 / main `2f9e0c11cee65f531be2d4eebe8e7e29532ebf64`. [PR #4](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4) owns this finite deliverable; do not roll later gameplay or remaining P1 acceptance into it. The owner's additional architecture-guide request is included as supporting documentation for this deployment change.
 
 **The owner is using the desktop: visible launches, rendered/input tests, focus changes and GUI automation are on HOLD.** Only builds, cooking and explicitly offscreen/NullRHI checks may run. The closed visible approvals are not reused. No Core/Arcade edits, installation or new host implementation are included.
 
 Implementation:
 
 - [x] Consolidate the reviewed full roadmap into this original migration-plan path; retain historical evidence and a pointer from the former development-plan path. Record the owner's confirmed Arcade baseline.
-- [ ] Stage pinned canonical session-create runtime data independently of the source-test tree, retaining checksum validation and explicit missing/corrupt-data failure.
-- [ ] Cook the startup map and dynamically loaded Cube/Cylinder/material; provide a reproducible Windows Development Game build/cook/stage/package command with ignored output and bounded process supervision.
-- [ ] Add explicit packaged-executable selection to both launchers while preserving Editor mode, Core identity, process-only credentials and managed/attached cleanup.
-- [ ] Document package contents, first build versus launch and retained runtime/Core prerequisites.
+- [x] Stage pinned canonical session-create runtime data independently of the source-test tree, retaining checksum validation and explicit missing/corrupt-data failure.
+- [x] Cook the startup map and dynamically loaded Cube/Cylinder/material; provide a reproducible Windows Development Game build/cook/stage/package command with ignored output and bounded process supervision.
+- [x] Add explicit packaged-executable selection to both launchers while preserving Editor mode, Core identity, process-only credentials and managed/attached cleanup.
+- [x] Document package contents, first build versus launch and retained runtime/Core prerequisites.
+- [x] Add a source-grounded root architecture guide with useful Mermaid diagrams, source links, implemented/planned distinctions and a durable same-change maintenance rule in AGENTS.md.
+
+Implementation above is authored, not runtime acceptance. The launcher-only stub checks passed 19 Python tests and ten PowerShell cases; no client/Core/GUI was launched by those tests. Native build/package/runtime and independent source reviews remain pending below.
 
 Non-visible verification and PR exit criteria:
 

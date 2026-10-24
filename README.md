@@ -2,6 +2,8 @@
 
 A C++ first 3D client for the separate authoritative Python Core. This is a personal/internal development preview, launched through **UnrealEditor**, not a packaged game.
 
+Read [architecture.md](architecture.md) for the source-tree map, component boundaries and runtime/session flows. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns all milestone scope and acceptance.
+
 ## Get started playing
 
 The current preview can connect/create a real Core session, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. Full deployment, movement, turns and complete gameplay are still being developed.
@@ -62,6 +64,28 @@ The bounded Windows manual run verified wheel zoom, the Frame board button, full
 | **Escape**, focus loss or application deactivation | Cancel the current camera drag. |
 
 UI clicks, text entry and panel scrolling retain their own input. Camera gestures do not submit game actions. Resizing deliberately reframes the board; a normal state Refresh preserves your view. See the [current verification checklist](docs/plans/unreal-migration-plan.md).
+
+### Windows standalone Development package (P1a)
+
+The packaging source is authored; its initial build/runtime verification is tracked in [P1a of the canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client, not full gameplay. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
+
+```powershell
+$package = & ./scripts/Build-ClientPackage.ps1
+```
+
+The command builds the Game and required Editor/cook targets, cooks the startup resources and runtime input, stages a runnable Windows folder and archives it under a fresh `.local/packages/<run>/archive/Windows`. It never opens a game window or runs the staged prerequisite installer. Its default time limit is 60 minutes (`-TimeoutMinutes`, range5–120); `-EngineRoot` selects another matching native installation. Inspect `package-result.json` and `uat-stdout.log`/`uat-stderr.log` in the returned output root on failure. A successful build is separate from startup or rendering verification.
+
+The folder contains a root bootstrap executable, `WarhammerClient/Binaries/Win64/WarhammerClient.exe`, cooked content/engine dependencies and a separate prerequisite installer. Keep the entire folder together. Python Core remains separately installed/checked out; it is not embedded in this package. From this checkout, use the existing prepared Managed route with explicit packaged selection:
+
+```powershell
+& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $package.clientExecutable
+# Or attach to an existing matching development Core:
+& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $package.clientExecutable
+```
+
+The manual Python launcher supports `--client-executable /absolute/path/to/WarhammerClient.exe` instead of `--engine-root`, with the same `--endpoint` and selected installed Core runtime requirements. Packaged launches omit the Editor `.uproject -game` arguments, use the executable's directory and retain process-only credentials. PowerShell still supervises only an owned Managed Core; Python remains Attach and leaves the server running. These interactive commands must not be executed during the owner screen HOLD.
+
+P1a's allowed verification is non-visible only. Rendered package controls/fonts/shaders, a machine without an Unreal installation and native Linux remain separate unverified acceptance work.
 
 ### Linux x86-64: routine launch — UNTESTED
 
