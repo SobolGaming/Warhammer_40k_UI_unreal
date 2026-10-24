@@ -2,7 +2,7 @@
 
 The [Unreal migration plan](unreal-migration-plan.md), revision148, is the active plan. It prioritizes the smallest useful rendered client driving the existing Core: board, real session/state, one offered action and authoritative result.
 
-Candidate `160b510` passed the Windows Editor compile/link and nine native checks, including actual Core session/action/refresh and the initial review corrections. Fresh CODE and separate requirements reviews are pending. See [slice progress](evidence/2026-10-23-live-core-slice.md) and [headless results](evidence/2026-10-23-live-core-headless.json).
+Candidate `ca315fb` passed the Windows Editor compile/link and ten native checks, including actual Core session/action/refresh and rejection-diagnostic fidelity. Initial review findings were corrected; fresh affected CODE and separate requirements reviews passed. See [slice progress](evidence/2026-10-23-live-core-slice.md), [headless results](evidence/2026-10-23-live-core-headless.json) and [review provenance](evidence/2026-10-23-live-core-reviews.json). Rendered slice acceptance remains pending.
 
 Implementation and verification have separate Markdown checklists. Publish the plan checkpoint before implementation; commit, push and exact-GitHub-verify every checkpoint. Continue [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) without merging.
 

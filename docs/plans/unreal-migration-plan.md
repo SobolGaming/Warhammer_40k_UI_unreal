@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 148 — nine native checks passed; diagnostic fidelity repair authored, 2026-10-23.**
+**Revision 148 — source/headless checks ready; rendered interaction pending, 2026-10-23.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -59,10 +59,10 @@ Source implementation above is authored. Checkboxes do not claim successful comp
 - [x] Obtain initial independent CODE and separate requirements assessments: both **CHANGES_REQUESTED**; findings are recorded in [slice evidence](evidence/2026-10-23-live-core-slice.md).
 - [x] Build repaired `160b510`: Windows Editor compile/link passed (21.88 seconds); all nine native checks passed, including invalid endpoint/no request, creation 4xx/5xx UNKNOWN, projection recovery and receipt-before-projection cache identity.
 - [x] Repeat the actual-Core session/action/refresh and host-lifecycle check against `160b510`: passed, four Config files unchanged. See [headless results](evidence/2026-10-23-live-core-headless.json).
-- [ ] Build and run the diagnostic fidelity repair, including exact supplied-message/violation assertions; both `160b510` reviews identified this sole remaining code defect.
-- [ ] Obtain focused independent CODE and different-reviewer requirements assessments of the frozen changed candidate; resolve concrete blockers.
+- [x] Build and run diagnostic repair `ca315fb`: Editor compile/link passed (22.20 seconds), all ten native checks passed, including actual supplied-message/violation assertions.
+- [x] Resolve initial independent CODE/REQ findings; fresh CODE and different-reviewer REQ both passed the affected diagnostic seam at `ca315fb`. [Review provenance](evidence/2026-10-23-live-core-reviews.json) preserves earlier CHANGES_REQUESTED reports and bounded final coverage.
 - [ ] After explicit screen resumption, observe the startup board, connection/session, player click and visible authoritative result. Record actual source/Core/session/action and limits.
-- [ ] Publish the slice checkpoint, exact-GitHub-verify its commit, update PR #3 and record acceptance only for demonstrated behavior.
+- [x] Publish source/headless checkpoints, exact-GitHub-verify each commit and update PR #3. Full rendered-slice acceptance remains pending the visible check above.
 - [ ] Run native Linux build/render/package checks when a host becomes available (**UNTESTED**).
 
 ### Checkpoints and next sequence
