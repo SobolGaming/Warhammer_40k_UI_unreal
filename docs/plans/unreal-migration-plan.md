@@ -25,7 +25,7 @@ Verification:
 
 - [x] Run focused protocol and request controls: wrong Core/schema/session/scope/lifecycle, malformed revision/ID, atomic failures, zero requests for invalid input and zero POST/start/gameplay mutation while opening; retain current busy/attached/UNKNOWN/stopped protections.
 - [x] Build the affected Windows Game/Editor package, run Unit/resources and real Core create A → close A → open same ID in fresh B → one offered choice → authoritative refresh. Check unchanged authoritative revision during opening, exact viewer/request, zero local accepted actions on entry and correct Managed/Attach cleanup. Repeat the retained create workflow as a regression. [Actual native results](evidence/2026-10-24-p2a-native.json):16 Unit,4 resources and2 real workflows in each mode passed (24 executions/22 names). The first failed build and overlapping startup failure remain failures; separate-process visible verification is still required below.
-- [ ] Obtain fresh independent CODE and separate requirements SOURCE reviews, publish exact source/runtime results/limits, and commit/push checkpoints.
+- [x] Obtain fresh independent CODE and separate requirements SOURCE reviews, publish exact source/runtime results/limits, and commit/push checkpoints. Both fresh roles passed at20600a5 in their finite SOURCE scope; [review records](evidence/2026-10-24-p2a-source-reviews.json) preserve both candidates. P2A-V1/V2 remain separate, required visible checks below.
 
 Manual/visible verification required for this PR (human **or** supported computer use under standing authorization; these two boxes block P2a user-workflow acceptance):
 

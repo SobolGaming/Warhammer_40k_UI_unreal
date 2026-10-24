@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "milestone": "P2a known active session reopen",
-  "status": "NATIVE_PASS_VISIBLE_AND_CURRENT_SOURCE_REVIEWS_PENDING",
+  "status": "NATIVE_AND_SOURCE_PASS_VISIBLE_PENDING",
   "sourceHead": "20600a5b37ab2cf443d884fe8e2f86b71388d534",
   "core": {
     "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
@@ -338,5 +338,6 @@
     "Player-a known-ID active-session read/reattach only; no listing/newprincipal/hotseat/general editor/durable or uncertain-command restart recovery.",
     "Real integration uses fresh client objects in one non-visible process; separate-process UI copy/paste/reopen is a distinct required visible criterion.",
     "No new rendered/input, Linux, clean-machine or full P2 acceptance yet."
-  ]
+  ],
+  "sourceReviews": "2026-10-24-p2a-source-reviews.json"
 }

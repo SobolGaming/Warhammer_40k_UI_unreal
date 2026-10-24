@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS_FINITE_SOURCE",
+  "originalCriteriaHead": "b84a3741edb6767cbb012b2533d863d82a108acf",
+  "reviewedCandidate": "20600a5b37ab2cf443d884fe8e2f86b71388d534",
+  "rounds": [
+    {
+      "sourceHead": "233381493ecdf509dadc5abec4bd56703970b27b",
+      "inputs": 35,
+      "inputBytes": 431865,
+      "reviews": [
+        {
+          "role": "CODE",
+          "verdict": "PASS_FINITE_SOURCE",
+          "sourceHead": "233381493ecdf509dadc5abec4bd56703970b27b",
+          "startedUtc": "2026-10-24T20:04:19.8001884Z",
+          "finishedUtc": "2026-10-24T20:06:51.9449123Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "approval": "never",
+          "sandbox": "read-only",
+          "memoryDisabledRequested": true,
+          "ephemeral": true,
+          "timeoutSeconds": 600,
+          "manifestSha256": "7249E5512FD12D5B5029D4A159521183D5CC773B671A4FCBF660ECF03637EE5D",
+          "promptSha256": "E5E2A7376535A1316F461FF1DDB1D8A04EAA6D592A5F01ACADCECEB0635590F5",
+          "rawReport": {
+            "bytes": 1899,
+            "sha256": "c10baf587ec0eef844674f0135d0f57348c9b08733d99961d860973bc74d4cd9"
+          }
+        },
+        {
+          "role": "REQ",
+          "verdict": "PASS_FINITE_SOURCE",
+          "sourceHead": "233381493ecdf509dadc5abec4bd56703970b27b",
+          "startedUtc": "2026-10-24T20:04:21.3510590Z",
+          "finishedUtc": "2026-10-24T20:07:48.0471136Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "approval": "never",
+          "sandbox": "read-only",
+          "memoryDisabledRequested": true,
+          "ephemeral": true,
+          "timeoutSeconds": 600,
+          "manifestSha256": "7249E5512FD12D5B5029D4A159521183D5CC773B671A4FCBF660ECF03637EE5D",
+          "promptSha256": "23103EAF5250F6C69F44349C97210CF6119571D558AF0422E8909E226E69E92F",
+          "rawReport": {
+            "bytes": 3424,
+            "sha256": "396107fd41294218967c8ca1e3260c6d4a64916535f63dc8741e2e69ea66dec3"
+          }
+        }
+      ],
+      "limits": "Finite SOURCE only. No native/visible execution or full P2 acceptance; original233 source subsequently failed compilation and was repaired."
+    },
+    {
+      "sourceHead": "20600a5b37ab2cf443d884fe8e2f86b71388d534",
+      "inputs": 35,
+      "inputBytes": 431855,
+      "reviews": [
+        {
+          "role": "CODE",
+          "verdict": "PASS_FINITE_SOURCE",
+          "sourceHead": "20600a5b37ab2cf443d884fe8e2f86b71388d534",
+          "startedUtc": "2026-10-24T20:07:00.5760854Z",
+          "finishedUtc": "2026-10-24T20:10:46.8187508Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "approval": "never",
+          "sandbox": "read-only",
+          "memoryDisabledRequested": true,
+          "ephemeral": true,
+          "timeoutSeconds": 600,
+          "manifestSha256": "8BB041239D8FC7B6CB040A0304FD3370F8E3AA85BDFD8AA12897B92B735778B8",
+          "promptSha256": "8FB1E7D0A1C0C1BCB082B6BEE6A809342EA2A19E32B64F81E39B7FEC5DAD7277",
+          "rawReport": {
+            "bytes": 2324,
+            "sha256": "62ca9e030f6832282bfb13cd548d3ed15e57fb5601b1962bcd78bff4076d4b34"
+          }
+        },
+        {
+          "role": "REQ",
+          "verdict": "PASS_FINITE_SOURCE",
+          "sourceHead": "20600a5b37ab2cf443d884fe8e2f86b71388d534",
+          "startedUtc": "2026-10-24T20:07:02.4085230Z",
+          "finishedUtc": "2026-10-24T20:09:58.1626157Z",
+          "exitCode": 0,
+          "timedOut": false,
+          "approval": "never",
+          "sandbox": "read-only",
+          "memoryDisabledRequested": true,
+          "ephemeral": true,
+          "timeoutSeconds": 600,
+          "manifestSha256": "8BB041239D8FC7B6CB040A0304FD3370F8E3AA85BDFD8AA12897B92B735778B8",
+          "promptSha256": "7641912385C9C45685F78822F6CC721D126619668C8B26A7E75020C5576457DF",
+          "rawReport": {
+            "bytes": 3402,
+            "sha256": "a05a37797c57840d60e0c9278813097dc7e25517e6973f676430aac9086ad1c2"
+          }
+        }
+      ],
+      "limits": "Finite SOURCE only. Required P2A-V1/V2 visible evidence remains separate."
+    }
+  ],
+  "settingsLimits": "Independent fresh ephemeral CLI roles, requested read-only/approval-never/no-memory,600-second bounds. Reviewers observed exposed sandbox/approval controls and inert behavior; serving model, platform memory enforcement and host disposal not independently attested."
+}
