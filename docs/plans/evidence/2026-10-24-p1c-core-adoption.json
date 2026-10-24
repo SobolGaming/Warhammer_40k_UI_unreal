@@ -311,7 +311,8 @@
     "Initial physical-path preparation failed on incidental async task return values; its false reference-change classification is retained, not accepted as an actual reference mutation. Four inert process controls cover the repair.",
     "Next preparation verified installed build/resources but failed Git cleanliness on38 unchanged raw JSON blobs with conflicting committed line-ending attributes. Failed runtime/source moved to a checked private archive; fresh clone-local literal-byte policy and3 real Git controls repaired preparation.",
     "Initial Python test TEMP permission errors and inert Git MSYS sandbox error were retained; successful checks used private workspace TEMP and authorized native Git execution respectively.",
-    "Private preserved-profile helper Boolean typo failed before any host startup; corrected check passed."
+    "Private preserved-profile helper Boolean typo failed before any host startup; corrected check passed.",
+    "The first full repaired-recipe harness used a deeper nested test root and Git refused a Core audit directory with Filename too long during checkout, before dependency installation. It remains failed; byte-identical scripts passed in a new short isolated root. No global path policy was changed."
   ],
   "limits": [
     "No rendered44.5/input proof; P1b visible results remain44.3 only.",
@@ -321,7 +322,8 @@
     "Linux build/runtime/render/package UNTESTED."
   ],
   "nativeInputBinding": {
-    "sourceConfigContentUnchangedThroughRepair": true
+    "sourceConfigContentUnchangedThroughRepair": true,
+    "sourceConfigContentUnchangedThroughFinalPreparationRepair": true
   },
   "scriptChecks": {
     "cases": 111,
@@ -384,5 +386,31 @@
     ],
     "privateSummarySha256": "6d1f29aa69a43b2fa415c4f008eefc7c4880359b11856a8acc801fb638ac3771"
   },
-  "sourceReviews": "2026-10-24-p1c-source-reviews.json"
+  "sourceReviews": "2026-10-24-p1c-source-reviews.json",
+  "repairedFullPreparationRecipe": {
+    "sourceHead": "a31f64f5247c382a74ffd89ad45d4094308956de",
+    "status": "INSTALLED_RUNTIME_PASS",
+    "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba",
+    "runtimeResourceCount": 3130,
+    "referenceUnchanged": true,
+    "startedUtc": "2026-10-24T19:00:50.6458226Z",
+    "finishedUtc": "2026-10-24T19:01:16.6932005Z",
+    "exactScriptBytes": [
+      {
+        "path": "Prepare-CoreDevelopmentRuntime.ps1",
+        "sha256": "6e6391b3a15179f83907213941b37cd56f475f2385ac2d5c2b75a022f46f765f"
+      },
+      {
+        "path": "CoreRuntimeProfile.ps1",
+        "sha256": "54e7d8578ba7d627da47fa5973bf4427c2495b61d64726eacd694819405da893"
+      },
+      {
+        "path": "OwnedBuildProcess.cs",
+        "sha256": "d8d1c784ac3961b014a970c5e28d97238b617546769fbfb8c18eb0eb76b6d477"
+      }
+    ],
+    "rawResultSha256": "9bbd11819657a7c64e5576eed5a31ebd25471775acec17c66bc6802965d50776",
+    "scope": "Full actual clone, frozen dependency install, package install, identity verification and provenance from exact copied scripts in a short fresh isolated workspace root; neither working runtime replaced."
+  }
 }
