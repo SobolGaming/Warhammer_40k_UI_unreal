@@ -104,7 +104,7 @@ Without `-ReceiptPath`, Stop uses the current Managed receipt:
 & ./scripts/Stop-CoreDevelopmentServer.ps1
 ```
 
-Logs, bootstrap, unique shutdown marker and ownership receipt are under `.local/development/core-host/<run>/`; `current.json` refers only to Managed ownership. Stop verifies PID, creation time and executable, requests shutdown, waits 10 seconds and may terminate only verified owned processes with a further 5-second exit budget. It never kills by port/name or an unverified process tree. If identity is unavailable or changed, it refuses and retains the receipt/logs. Passing a valid Attach receipt returns `ATTACHED_NOT_STOPPED` without shutdown/termination.
+Logs, bootstrap, unique shutdown marker and ownership receipt are under `.local/development/core-host/<run>/`; `current.json` refers only to Managed ownership. Stop verifies every PID, creation time and executable before requesting shutdown. Its shared grace budget defaults to 5 seconds (`-GraceSeconds`, range1–5), followed by termination of only verified owned processes and a shared 3-second exit budget (`-CleanupSeconds`, range1–3). Marker-write, another process's termination and receipt-persistence errors do not skip the remaining cleanup attempts; STOPPED requires confirmed exit. It never kills by port/name or an unverified process tree. If identity is unavailable or changed, it refuses and retains the receipt/logs. Passing a valid Attach receipt returns `ATTACHED_NOT_STOPPED` without shutdown/termination.
 
 ## Prepare native Linux Core — UNTESTED
 

@@ -83,11 +83,13 @@ try {
         Assert-True ($uri.AbsoluteUri -ceq "http://127.0.0.1:$port/") 'Valid Attach origin was not canonicalized'
         $caseCount++
     }
-    $failure = $null
-    try { $null = Resolve-CoreEndpoint ([uri]'http://127.0.0.1:8766/') 'Managed' 8765 } catch { $failure = $_ }
-    Assert-True ($null -ne $failure) 'Managed endpoint may not change the dedicated port'
-    Assert-True ((Resolve-CoreEndpoint $null 'Managed' 8765).AbsoluteUri -ceq 'http://127.0.0.1:8765/') 'Managed default origin changed'
-    $caseCount += 2
+    foreach ($managedMode in @('Managed', 'managed', 'mAnAgEd')) {
+        $failure = $null
+        try { $null = Resolve-CoreEndpoint ([uri]'http://127.0.0.1:8766/') $managedMode 8765 } catch { $failure = $_ }
+        Assert-True ($null -ne $failure) 'Every accepted Managed casing must preserve the dedicated port'
+        Assert-True ((Resolve-CoreEndpoint $null $managedMode 8765).AbsoluteUri -ceq 'http://127.0.0.1:8765/') 'Managed default origin changed'
+        $caseCount += 2
+    }
 
     function Invoke-InertStartupFault([bool]$IdentityFails, [bool]$Graceful, [bool]$WithServer, [bool]$HasLauncher = $true, [bool]$CleanupFails = $false) {
         $global:WarhammerCoreStartupProbe = [pscustomobject]@{ IdentityFails = $IdentityFails; ReceiptCalls = 0; Events = [Collections.Generic.List[string]]::new() }

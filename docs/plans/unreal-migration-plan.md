@@ -33,6 +33,8 @@ At `71f5ced`, the job-owned package build succeeded in 25.23 seconds, returned o
 
 The second repair preserves the existing process identity checks, attempts stopping every verified process independently of marker/persistence/other-process failures, and marks STOPPED only after confirmed exit. Ten offline stop controls passed. The runner rejects unsupported namespace/short-name aliases before normalization; 32 focused path/wiring controls passed. Both repairs await affected native checks and fresh source review. Game/Config/Content inputs have not changed since the successful package build.
 
+All six affected native executions passed at `2cad5f4`. Its full source reviews both requested changes: CODE found a case-sensitive Managed-port comparison, and both roles found the startup guide still described the old shutdown budgets. The final narrow repair uses the same case-insensitive mode comparison as parameter dispatch, extends controls to Managed/lowercase/mixed-case inputs, and documents the implemented5+3-second bounds. These final changes require focused closing review; unchanged native/package behavior is covered by the retained `2cad5f4` results.
+
 Non-visible verification and PR exit criteria:
 
 - [x] Windows Game build/cook/stage succeeds and the runnable folder exists. Actual asset/data loading is verified separately below; this is not a portable single executable or a runtime PASS.

@@ -25,7 +25,7 @@ function Resolve-CoreEndpoint([uri]$Requested, [string]$RequestedMode, [int]$Req
     if (!$Requested.IsAbsoluteUri -or !$match.Success) { throw 'Endpoint must be http://127.0.0.1:<1024-65535>/ with no credentials, path, query or fragment.' }
     $endpointPort = [int]$match.Groups[1].Value
     if ($endpointPort -lt 1024 -or $endpointPort -gt 65535) { throw 'Endpoint port must be 1024-65535.' }
-    if ($RequestedMode -ceq 'Managed' -and $endpointPort -ne $RequestedPort) { throw 'Managed endpoint must match the selected dedicated port.' }
+    if ($RequestedMode -eq 'Managed' -and $endpointPort -ne $RequestedPort) { throw 'Managed endpoint must match the selected dedicated port.' }
     return [uri]("http://127.0.0.1:$endpointPort/")
 }
 
