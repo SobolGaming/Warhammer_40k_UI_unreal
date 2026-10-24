@@ -1,12 +1,40 @@
 # Unreal client migration and development plan
 
-**Revision 166, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 167, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
 **Product goal:** support all capabilities supported by the latest selected Core source, including capabilities beyond the Arcade client. Arcade parity is the initial useful milestone and reuse/reference baseline, not the feature ceiling. A useful rendering client that connects to and drives Core comes before exhaustive coverage; close small working slices, then let observed gameplay priorities guide the next slice. Do not postpone that client behind an exhaustive proof campaign.
 
-## Current bounded increment: P1c Core 44.5 adoption
+## Current bounded increment: P2a reopen an existing active session
+
+Branch: `codex/p2a-reopen-session`, from verified PR #6 merge `dbe186ff99a5369fd8e8dcf0b82ddd0b1f1bcfbd` (2026-10-24T19:57:28Z), exact head `c1b3035f38eccdbad7dd8659585793bf6bfaf0c0`. The owner authorized normal-gates merge and continuation when no manual P1c gate remained. The manual-verification checklist and durable AGENTS rule were committed before merging. GitHub reported MERGEABLE/CLEAN with no remote checks/formal reviews. P1c has no outstanding human-only gate within its finite scope.
+
+Finite deliverable: reopen one known **active** session on the existing selected44.5 service as the existing authenticated **player-a**, through player metadata/projection GETs. Add an existing-session ID field/Open control and make the displayed session ID copyable. Opening must not create/start/reset a session or submit a gameplay command. Current session, busy and UNKNOWN/pending-command guards remain intact. Keep creation's strict administrator/revision0 parser separate from existing-session metadata validation.
+
+This is a known-ID read/reattach feature, not session listing, a new join/principal authorization flow, local handoff, remote/spectator support or durable recovery. General decision editors/roster rendering remain later slices. The in-memory development host must stay alive: cross-client reopen uses **Attach** against a separately owned Core; closing Managed stops Core and loses its sessions. Reopening does not recover a lost uncertain-command envelope after client restart.
+
+Implementation:
+
+- [x] Merge PR #6 at its verified head and create a separate next-milestone branch.
+- [ ] Add exact selected-Core, requested-session, active lifecycle, player-a scope and nonnegative-revision metadata validation. Validate endpoint/session ID before credential access/HTTP; reject path/query/escape/whitespace and dot-segment IDs.
+- [ ] Add guarded player-only read/open state flow, clear derived state before a fresh read and require the resulting projection revision to meet the metadata minimum. Preserve unknown command reconciliation and reject in-process session replacement.
+- [ ] Add usable known-ID/Open controls, copyable current ID and a clearly local accepted-action count; update README/architecture with supported workflow and in-memory limits.
+
+Verification:
+
+- [ ] Run focused protocol and request controls: wrong Core/schema/session/scope/lifecycle, malformed revision/ID, atomic failures, zero requests for invalid input and zero POST/start/mutation while opening; retain current busy/attached/UNKNOWN/stopped protections.
+- [ ] Build the affected Windows Game/Editor package, run Unit/resources and real Core create A → close A → open same ID in fresh B → one offered choice → authoritative refresh. Check unchanged authoritative revision during opening, exact viewer/request, zero local accepted actions on entry and correct Managed/Attach cleanup. Repeat the retained create workflow as a regression.
+- [ ] Obtain fresh independent CODE and separate requirements SOURCE reviews, publish exact source/runtime results/limits, and commit/push checkpoints.
+
+Manual/visible verification required for this PR (human **or** supported computer use under standing authorization; these two boxes block P2a user-workflow acceptance):
+
+- [ ] **P2A-V1 — Reopen through the actual controls.** Prerequisites: exact copied P2a package outside the checkout and separately owned selected44.5 Core on a dedicated loopback port; use `Start-Client.ps1 -CoreMode Attach -Endpoint <that loopback URL> -ClientExecutable $taskExe`. (1) In one client window, Connect/create and copy the displayed session ID; record its revision/offered setup decision privately, then close normally without stopping Core. (2) Launch a fresh client, paste that ID and press Open existing session. Confirm same session/revision/viewer, readable board/options and local accepted-action count0, with no new/start command. (3) Submit one offered mission option, Refresh, verify authoritative revision advance/known outcome, close normally and confirm the separately owned host survives before its owner stops it. Record source/package/Core/platform, tester/time and private captures/logs. Native transport instrumentation supplies the zero-mutation assertion; appearance alone is insufficient.
+- [ ] **P2A-V2 — Input isolation and real read failure.** With a fresh client and the same retained host, (1) focus the ID field, type/edit an invalid path-style ID and press Open; expect validation before any HTTP, no session/board/options, and field typing/F/wheel must stay with UI rather than camera navigation. (2) Enter a syntactically valid nonexistent ID; expect actual HTTP404/code/message, no invented board/options or automatic creation. (3) Correct the field to a known active ID and reopen successfully; confirm usable focus/scroll/layout and normal Attach cleanup. Keep real session IDs/credentials out of tracked evidence. Use at most one owned game window and a ten-minute launch budget.
+
+The deferred HV-01–HV-06 checks below retain their broader P1/P3/P8 scope and do not become owner-only blockers for P2a. Required physical-input and native-host capabilities remain explicit.
+
+## Closed P1c Core 44.5 adoption
 
 Branch: `codex/p1c-core-44-5-adoption`, [PR #6](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/6), from verified PR #5 merge `062863c1a13b6fb5597ec360b1e2f4510f5a0860` (2026-10-24T18:43:15Z). The owner authorized that normal-gates merge and a separate next-milestone PR. GitHub reported MERGEABLE/CLEAN before merging, with no remote checks/formal reviews; retained independent local reviews and actual bounded results remain scoped to P1b.
 
@@ -27,7 +55,7 @@ Verification:
 - [x] Run actual44.5 create → offered setup action → refresh in Managed and Attach modes; record runtime/input identities and owned/attached cleanup. One offered setup choice committed before authoritative refresh; Managed stopped normally, attached host remained HTTP200 then its separate owner stopped it.
 - [x] Obtain independent CODE and separate requirements reviews, publish results/limits and close this finite PR scope. Fresh CODE and separate REQ both passed at `a31f64f5247c382a74ffd89ad45d4094308956de` after the preparation-job repair and exact roster-producer supplement. The [review record](evidence/2026-10-24-p1c-source-reviews.json) retains both rounds. The full repaired preparation recipe also passed from exact copied scripts in a short isolated root; its deeper Git path-limit failure remains recorded.
 
-**P1c is complete within this finite boundary; PR #6 is OPEN and ready for review**, observed MERGEABLE/CLEAN with no remote CI checks/formal GitHub reviews reported. Stop implementation scope here. The native build uses cc494c3, final preparation/source review uses a31f64f, and subsequent commits publish documentation/evidence with unchanged runtime inputs. No new rendered44.5, Linux, full-battle or roster-editor claim is made. The next implementation slice is the thin P2 public session/decision shell in a separate branch/PR.
+**P1c is complete within this finite boundary; PR #6 merged normally as `dbe186ff99a5369fd8e8dcf0b82ddd0b1f1bcfbd`**, after exact-head MERGEABLE/CLEAN inspection with no remote CI checks/formal GitHub reviews reported. Stop implementation scope here. The native build uses cc494c3, final preparation/source review uses a31f64f, and subsequent commits publish documentation/evidence with unchanged runtime inputs. No new rendered44.5, Linux, full-battle or roster-editor claim is made. The next implementation slice is the thin P2 public session/decision shell in a separate branch/PR.
 
 ## Outstanding visible and human verification
 
