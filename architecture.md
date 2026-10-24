@@ -124,7 +124,7 @@ sequenceDiagram
         Session-->>UI: Outcome, revision and diagnostics
         Session-->>Scene: Applied projection version
     else Missing, incomplete or flagless outcome
-        Session-->>UI: UNKNOWN; new mutations disabled
+        Session-->>UI: UNKNOWN, new mutations disabled
         Note over UI,Session: Explicit reconcile resends the same retained command bytes and ID
     end
 ```

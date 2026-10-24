@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "LOCAL_MERMAID_ACTUAL_PARSER_VALIDATION",
+  "status": "PASS",
+  "checkedUtc": "2026-10-24T15:58:06.356Z",
+  "tools": {
+    "node": "v24.19.0",
+    "npm": "10.9.4",
+    "mermaid": "11.12.0",
+    "jsdom": "26.1.0",
+    "packageLock": {
+      "leaf": "package-lock.json",
+      "bytes": 65368,
+      "sha256": "23C03DE6C7E28BECCA1671E130B04CBEAED81ECC8B6C4AB11F0D26D6F3BBB924"
+    },
+    "npmBootstrapArchive": {
+      "leaf": "npm-10.9.4.tgz",
+      "bytes": 2714849,
+      "sha256": "4BFBA8A0C823024D1926EC9D97A37A00EB60FD2ADF44B3D34A686FC32E8F51E4"
+    },
+    "validator": {
+      "leaf": "validate-mermaid.mjs",
+      "bytes": 4491,
+      "sha256": "D7358139429569325A062F504F0B625BECE2D8B9728A02D9A877774631532C41"
+    }
+  },
+  "method": "Await mermaid.parse for both extracted Markdown blocks under jsdom; startOnLoad=false, strict security; no render API/browser.",
+  "dependencySetup": "Official npm registry downloads only; task-local prefix/cache/blank user and global configs; pinned direct versions; --ignore-scripts --no-audit --no-fund --omit=optional.",
+  "sourceUploadPerformed": false,
+  "original": {
+    "descriptor": {
+      "leaf": "architecture-before.md",
+      "bytes": 22949,
+      "sha256": "1B420D8BA40FE9390409F09A9FE8DDB60EA834089F5B7B455398742F646846CB"
+    },
+    "blocks": [
+      {
+        "block": 1,
+        "header": "flowchart LR",
+        "status": "PASS",
+        "diagramType": "flowchart-v2"
+      },
+      {
+        "block": 2,
+        "header": "sequenceDiagram",
+        "status": "SYNTAX_ERROR",
+        "error": "Parse error on line 32:\n...w mutations disabled        Note over U\n-----------------------^\nExpecting 'SOLID_OPEN_ARROW', 'DOTTED_OPEN_ARROW', 'SOLID_ARROW', 'BIDIRECTIONAL_SOLID_ARROW', 'DOTTED_ARROW', 'BIDIRECTIONAL_DOTTED_ARROW', 'SOLID_CROSS', 'DOTTED_CROSS', 'SOLID_POINT', 'DOTTED_POINT', got 'NEWLINE'"
+      }
+    ]
+  },
+  "repaired": {
+    "descriptor": {
+      "leaf": "architecture.md",
+      "bytes": 22949,
+      "sha256": "801DADA88EF07186FA3C17A537E9C3CF5131A7CB75912B7828200997CBD991D0"
+    },
+    "blocks": [
+      {
+        "block": 1,
+        "header": "flowchart LR",
+        "status": "PASS",
+        "diagramType": "flowchart-v2"
+      },
+      {
+        "block": 2,
+        "header": "sequenceDiagram",
+        "status": "PASS",
+        "diagramType": "sequence"
+      }
+    ]
+  },
+  "exactOneLineRepair": true,
+  "originalFailureReproduced": true,
+  "bothRepairedPassed": true,
+  "limits": "Syntax parsing only. No browser/SVG/layout/visual rendering or platform renderer-version equivalence is claimed.",
+  "primaryApiReference": "https://mermaid.js.org/config/usage.html#syntax-validation-without-rendering"
+}
