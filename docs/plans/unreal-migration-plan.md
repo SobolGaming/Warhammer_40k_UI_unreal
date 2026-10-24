@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 151 — owner startup guide and tabletop camera increment planned, 2026-10-24 UTC / 2026-10-23 EDT.**
+**Revision 152 — owner startup guide and tabletop camera source checked; visible HOLD active, 2026-10-24 UTC / 2026-10-23 EDT.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -50,10 +50,12 @@ The owner wants to launch the existing client/server personally on Windows and L
 
 - [x] Publish plan checkpoint `d0af1a8a036d074eca32014dc44c58005efa6f84` before source implementation; push and verify the exact GitHub ref.
 - [x] Build camera source `1193cb6`: Windows Editor compile/link passed (six actions, 11.54 seconds; UBA retried a compile after memory pressure). Thirteen native checks passed, including three camera geometry/shared-input cases and the retained real-Core action; Config remained unchanged. Actual Slate input/rendering remains unverified.
-- [ ] Validate documented commands/paths and syntax without installing tools or claiming Linux execution.
-- [ ] Obtain fresh independent CODE and distinct requirements review of the affected source/documentation.
+- [x] Validate documentation paths/links and parse 15 PowerShell plus seven Bash blocks without executing their setup/run commands. Windows Git Bash syntax checks do not establish Linux execution. No tools or packages were installed.
+- [x] Pass ten stubbed manual-launcher tests and CLI help; verify the actual installed Windows Core identity through the new wrapper without reading credentials or opening a client. Preserve the first sandbox Temp-permission failure and the same-source workspace-temp rerun.
+- [x] Pass non-graphical default-GameMode startup at `721d229` / camera source `1193cb6`: exit 0 in 8.24 seconds, intended GameMode and normal benchmark exit, no original focus error or Error/Fatal lines, unchanged Config. This is not positive focus/input proof.
+- [x] Obtain fresh independent CODE and distinct requirements review of frozen `721d229`: both PASS for affected source/documentation; all 43 inputs matched after review. [Evidence and provenance](evidence/2026-10-23-live-core-ergonomics.json).
 - [ ] Observe camera controls, framing/resize, UI isolation and repaired startup focus in an applicable approved visible workflow. **Pending HOLD resumption; no new visible run is being started now.**
-- [ ] Record actual results/limits, push each coherent checkpoint and update existing PR #3 without merging.
+- [x] Record actual results/limits and push/exact-ref-verify plan `d0af1a8`, camera `1193cb6` and startup guide/manual launcher `721d229`. Publish the final evidence checkpoint and update existing PR #3 without merging.
 - [ ] Execute native Linux build/render/package when a host is arranged (**UNTESTED**).
 
 ## Established milestone: rendered Core setup slice
@@ -105,7 +107,7 @@ Implementation and verification remain separate. The observed visible result bel
 2. **Connection/state:** implement native transport, board and viewer-state UI. Push source with actual checks and pending verification clearly recorded.
 3. **Action/result:** wire a real offered setup choice, authoritative refresh, explicit errors and same-command reconciliation. Add easy managed-launch/attach instructions; push.
 4. **Focused validation:** build, execute protocol checks and independent reviews. Push findings/fixes and evidence at coherent checkpoints.
-5. **Rendered feedback:** the bounded local setup workflow is observed and published. The startup-focus repair passed build, affected source reviews and non-graphical startup smoke; actual repaired focus/navigation remains unchecked. Prioritize camera/responsive sizing with owner feedback. Any further agent desktop activity requires applicable approval.
+5. **Rendered feedback:** the bounded local setup workflow is observed and published. Camera controls/framing and owner startup instructions now pass affected build/background checks and independent source/documentation reviews. Actual new camera input/framing, repaired focus and real manual-launcher integration remain unchecked during HOLD. Next is that bounded visible workflow after owner resumption, then ergonomics feedback; Linux still needs a native host.
 
 Combine adjacent implementation steps when they form one coherent runnable increment. Do not create bureaucratic checkpoints for individual lines; every actual checkpoint must be pushed and exact-ref verified. Never force push or upload credentials, private sessions, generated outputs or ignored evidence.
 
@@ -140,6 +142,7 @@ Selected host: checked-out `Warhammer_40k_AI/scripts/run_phase18m_reference_serv
 
 - [Bounded live-Core visible setup](evidence/2026-10-23-live-core-visible.md), [structured result](evidence/2026-10-23-live-core-visible.json), and [chronological slice progress](evidence/2026-10-23-live-core-slice.md).
 - [Startup-focus repair checks and independent review provenance](evidence/2026-10-23-live-core-focus-repair.json); affected source only, repaired rendering untested.
+- [Owner startup/camera checks and independent review provenance](evidence/2026-10-23-live-core-ergonomics.json); new graphical workflow pending HOLD resumption, Linux UNTESTED.
 
 - [BOOT01](evidence/2026-10-16-boot01.md).
 - [Original E01 boundary](evidence/2026-10-16-e01-boundary.md), [SLOW120 provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json).

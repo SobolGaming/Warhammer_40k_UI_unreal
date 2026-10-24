@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 1,
+  "ownerLocalDate": "2026-10-23",
+  "ownerTimeZone": "America/New_York",
+  "scope": "Owner startup instructions and local tabletop camera; source/background checks only",
+  "planCommit": "d0af1a8a036d074eca32014dc44c58005efa6f84",
+  "cameraCommit": "1193cb604113d08e9f66789c8e365a3ee50101ff",
+  "startupGuideAndReviewedCommit": "721d229a16a4a9b977e4508cfcec7b5ae96a6ef8",
+  "coreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+  "coreContract": "44.3.33",
+  "implementation": {
+    "readmeSection": "README.md#get-started-playing",
+    "startupGuide": "docs/development/core-startup.md",
+    "manualLauncher": "scripts/Start-Client.py",
+    "delivery": "UnrealEditor development route, no packaged/final-client claim",
+    "controls": [
+      "Right-drag orbit",
+      "Middle-drag pan",
+      "Wheel zoom over focused board",
+      "F with board focus or Frame board button",
+      "Escape/focus/capture loss/application deactivation/layout change/teardown cancel gesture"
+    ],
+    "inputOwnership": "Separate board/panel Slate regions; tracked user and pointer capture; camera handlers have no session-creation or game-command call",
+    "framing": "Perspective corner fit to actual available board rectangle; viewport/DPI-aware; 20-85 degree pitch and finite pan/zoom bounds; same-bounds refresh preserves view, resize reframes"
+  },
+  "windowsBuild": {
+    "target": "WarhammerClientEditor Win64 Development",
+    "status": "PASS",
+    "actions": 6,
+    "executionSeconds": 11.54,
+    "limit": "UBA automatically retried one compile after memory pressure; final compile/link succeeded",
+    "console": {
+      "privatePath": ".local/development/live-core-ergonomics/1193cb6/editor-build-console.log",
+      "bytes": 2567,
+      "sha256": "F25659AC5A08DEA5211B354D72557C7C3F328C34DBE4B8E8375A8A44CFAC62F5"
+    }
+  },
+  "nativeChecks": {
+    "sourceHead": "1193cb604113d08e9f66789c8e365a3ee50101ff",
+    "exitCode": 0,
+    "succeeded": 13,
+    "failed": 0,
+    "succeededWithWarnings": 0,
+    "notRun": 0,
+    "testDurationSeconds": 10.017830848693848,
+    "tests": [
+      {
+        "testDisplayName": "FrameCornersAndLayout",
+        "state": "Success",
+        "duration": 0.007791299372911453
+      },
+      {
+        "testDisplayName": "InputOwnershipAndCancellation",
+        "state": "Success",
+        "duration": 0.007435299456119537
+      },
+      {
+        "testDisplayName": "NavigationAndRefresh",
+        "state": "Success",
+        "duration": 0.00808669999241829
+      },
+      {
+        "testDisplayName": "RealSessionAction",
+        "state": "Success",
+        "duration": 9.750361442565918
+      },
+      {
+        "testDisplayName": "ErrorEnvelopeRemainsUnknown",
+        "state": "Success",
+        "duration": 0.00827379897236824
+      },
+      {
+        "testDisplayName": "InvalidEndpointDoesNotRequest",
+        "state": "Success",
+        "duration": 0.0074235983192920685
+      },
+      {
+        "testDisplayName": "CreatedIdentity",
+        "state": "Success",
+        "duration": 0.00967869907617569
+      },
+      {
+        "testDisplayName": "Endpoint",
+        "state": "Success",
+        "duration": 0.008268401026725769
+      },
+      {
+        "testDisplayName": "Envelope",
+        "state": "Success",
+        "duration": 0.008427400141954422
+      },
+      {
+        "testDisplayName": "OutcomeAndUncertainErrors",
+        "state": "Success",
+        "duration": 0.007857102900743484
+      },
+      {
+        "testDisplayName": "ProjectionPrivacyAndGeometry",
+        "state": "Success",
+        "duration": 0.10574169456958771
+      },
+      {
+        "testDisplayName": "ProjectionVersionAndReadRecovery",
+        "state": "Success",
+        "duration": 0.0810353010892868
+      },
+      {
+        "testDisplayName": "ReturnedRejectionDiagnostics",
+        "state": "Success",
+        "duration": 0.007449597120285034
+      }
+    ],
+    "scope": "Three pure camera geometry/shared-input reducer checks plus ten retained protocol/actual-Core checks. Does not prove actual Slate event routing.",
+    "managedReadiness": "READY",
+    "attach": "ATTACHED_HEALTHY",
+    "attachedStop": "ATTACHED_NOT_STOPPED",
+    "ownedStop": "STOPPED",
+    "configUnchanged": true,
+    "finiteOwnedWindowSamples": 72,
+    "maximumObservedVisibleWindows": 0.0,
+    "continuousWindowAbsenceClaimed": false,
+    "privateArtifacts": [
+      {
+        "privatePath": ".local/development/live-core-ergonomics-functional-20261024T021759Z/result.json",
+        "bytes": 8441,
+        "sha256": "4044754DD66C5FFCD87C433CB7ABFCD65528CBFAFC9E9F00663E1638AE346DC9"
+      },
+      {
+        "privatePath": ".local/development/live-core-ergonomics-functional-20261024T021759Z/native.log",
+        "bytes": 262818,
+        "sha256": "01930FC5B9B118ACC2DAD1D772640692F39BA240988EDEFF14B56F21C5F050C1"
+      },
+      {
+        "privatePath": ".local/development/live-core-ergonomics-functional-20261024T021759Z/report/index.json",
+        "bytes": 5874,
+        "sha256": "30EBB28E5F81DEBF61F225C83EBE6A08F68318F2BD186CD7E51291A7A5178FF4"
+      }
+    ]
+  },
+  "startupSmoke": {
+    "sourceHead": "721d229a16a4a9b977e4508cfcec7b5ae96a6ef8",
+    "runtimeSource": "1193cb604113d08e9f66789c8e365a3ee50101ff",
+    "status": "PASS_BOUNDED_DEFAULT_GAMEMODE_SMOKE",
+    "elapsedSeconds": 8.2386947,
+    "exitCode": 0,
+    "outerDeadlineSeconds": 60,
+    "expectedGameModeObserved": true,
+    "normalBenchmarkExitObserved": true,
+    "originalFocusErrorCount": 0,
+    "errorOrFatalCount": 0,
+    "configUnchanged": true,
+    "windowAbsenceObserved": false,
+    "coverageLimit": "NullRHI/offscreen default GameMode startup, not positive Attach/focus/navigation or rendering evidence",
+    "privateArtifacts": [
+      {
+        "privatePath": ".local/development/live-core-ergonomics/smoke-20261024T021958Z/result.json",
+        "bytes": 2161,
+        "sha256": "FB881C36093F93AFB01A3D2EA0D4F8D8919686C642E82290E198D341A0720988"
+      },
+      {
+        "privatePath": ".local/development/live-core-ergonomics/smoke-20261024T021958Z/native.log",
+        "bytes": 179322,
+        "sha256": "8EF5DA352D4FBA9A1762ECE5C98A3F65BF52964F175EF704A395D63BC2A1EF26"
+      }
+    ]
+  },
+  "launcherChecks": {
+    "platform": "Windows",
+    "stubbedUnitTests": 10,
+    "status": "PASS",
+    "actualInstalledCoreVerification": "PASS_NO_CREDENTIAL_OR_CLIENT_LAUNCH",
+    "help": "PASS_NO_CLIENT_LAUNCH",
+    "earlierFailure": "The first sandboxed unit attempt hit OS Temp PermissionError; same source passed using workspace TMP/TEMP. Original failed log retained.",
+    "linuxPathTest": "Stubbed platform/path-selection logic only, not Linux execution",
+    "privateArtifacts": [
+      {
+        "privatePath": ".local/development/live-core-ergonomics/launcher-source-checks/unittest-sandbox-temp-failed.log",
+        "bytes": 5344,
+        "sha256": "C96EEF91E5F0D34CE99E633B78FF238A84102171F3464FFD84F8082F1254A410"
+      },
+      {
+        "privatePath": ".local/development/live-core-ergonomics/launcher-source-checks/unittest-workspace-temp.log",
+        "bytes": 1714,
+        "sha256": "CA96A2031A5DF2E6EBB5C209F8F8BD852D91F5578CDA5A73FA154BC8E2099556"
+      },
+      {
+        "privatePath": ".local/development/live-core-ergonomics/launcher-source-checks/help.log",
+        "bytes": 645,
+        "sha256": "99F56BE3D81B511C6C1F37DE886C1910941CE9CA303AC0F982E9A08CD4B2008B"
+      },
+      {
+        "privatePath": ".local/development/live-core-ergonomics/launcher-source-checks/installed-runtime-check.log",
+        "bytes": 111,
+        "sha256": "963E5E63CACD358591BB41575050FADE77704282C998B3D1258BCA4D57D444CC"
+      }
+    ]
+  },
+  "documentationChecks": {
+    "powershellBlocksParsed": 15,
+    "bashBlocksParsed": 7,
+    "status": "PASS_SYNTAX_ONLY",
+    "parser": "PowerShell AST and Windows Git Bash -n",
+    "snippetsExecuted": false,
+    "afterReviewFreeze": true,
+    "earlierFailure": "The sandbox blocked MSYS named-object initialization before Bash parsing; a permitted non-graphical parser-only retry passed.",
+    "artifact": {
+      "privatePath": ".local/development/live-core-ergonomics/document-syntax/result.json",
+      "bytes": 186,
+      "sha256": "55365B95752D1DE8F3FAED902E592D7B400CA6D4C90F0EF4E12608DCACD1979E"
+    },
+    "linuxRuntimeStill": "UNTESTED"
+  },
+  "sourceBindings": {
+    "frozenSource": "721d229a16a4a9b977e4508cfcec7b5ae96a6ef8",
+    "cameraBuildAndNativeTestsSource": "1193cb604113d08e9f66789c8e365a3ee50101ff",
+    "cameraBindings": [
+      {
+        "path": "Source/WarhammerClient/Private/WarhammerClientGameMode.cpp",
+        "executedGitBlob": "92411b43c837477f42196828276f76d9ee01fb59",
+        "frozenGitBlob": "92411b43c837477f42196828276f76d9ee01fb59",
+        "equal": true
+      },
+      {
+        "path": "Source/WarhammerClient/Private/LiveCore/LiveCoreCamera.h",
+        "executedGitBlob": "ab695ae44160c79124faf1ce7c649e729036076d",
+        "frozenGitBlob": "ab695ae44160c79124faf1ce7c649e729036076d",
+        "equal": true
+      },
+      {
+        "path": "Source/WarhammerClient/Private/LiveCore/LiveCoreCamera.cpp",
+        "executedGitBlob": "baf1a72751fc2897b02a9565f8339c7dd95c88d0",
+        "frozenGitBlob": "baf1a72751fc2897b02a9565f8339c7dd95c88d0",
+        "equal": true
+      },
+      {
+        "path": "Source/WarhammerClient/Private/Tests/LiveCoreCameraTests.cpp",
+        "executedGitBlob": "31c5a1777467760d26eb2e73d3bc7c0a5b592c34",
+        "frozenGitBlob": "31c5a1777467760d26eb2e73d3bc7c0a5b592c34",
+        "equal": true
+      }
+    ],
+    "startupSmokeHead": "721d229a16a4a9b977e4508cfcec7b5ae96a6ef8",
+    "pythonChecks": "Ten stubbed unittest cases and --help only, no real client/Core execution; source logs do not embed an independent code attestation",
+    "pythonSourceHashes": [
+      {
+        "path": "scripts/Start-Client.py",
+        "bytes": 7046,
+        "workingSha256": "A3EFE1CE01D51B9628B645883388E83FFC00FC91B9E425B0E0E256833CD2F4C4",
+        "gitBlob": "b9f3dff807b5b41db59026dd352e4faf1079a84e"
+      },
+      {
+        "path": "tests/migration/test_start_client.py",
+        "bytes": 7300,
+        "workingSha256": "E19EB7273C53E62E8CEDA0B32CE4E57D6AB041AB4C7408B9E010183796AF189C",
+        "gitBlob": "0b440efd5fec6c4dcedb3e84945402dd518d7697"
+      }
+    ],
+    "nativeConsoleLimit": "Root execution/binding metadata, not a native binary attestation. Build log records UBA retry after memory pressure, then success."
+  },
+  "independentReviews": {
+    "scope": "Affected camera/launcher/startup documentation source; no candidate execution by reviewers",
+    "packetManifest": {
+      "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/manifest.json",
+      "bytes": 8705,
+      "sha256": "365F0AC24767686F39BA3E15F22EA7B41C0C29BD915C4157A6F02E6C740F90D3"
+    },
+    "inputs": 43,
+    "wholeGitSources": 16,
+    "installedApiRanges": 15,
+    "postReviewAllInputHashesMatched": true,
+    "reports": [
+      {
+        "role": "CODE",
+        "verdict": "PASS_AFFECTED_SOURCE_ONLY",
+        "contextIds": [
+          "01a16bb6-a416-7880-8505-9b5f197ed9e2"
+        ],
+        "sourceHead": "721d229a16a4a9b977e4508cfcec7b5ae96a6ef8",
+        "startedUtc": "2026-10-24T02:21:33.8421699Z",
+        "finishedUtc": "2026-10-24T02:24:37.9589875Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "shellCommands": 22,
+        "failedShellCommands": 1,
+        "mcpCalls": 0,
+        "privateArtifacts": [
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/CODE/AGENTS.md",
+            "bytes": 328,
+            "sha256": "7B59C952FD92A45D7BB74B986A1425F5493CB75760492BA5B017169C994B1074"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/CODE/prompt.txt",
+            "bytes": 2021,
+            "sha256": "5905FD194B4301873A5E1F313A1A5EEE685EEC695D5CC174C7C581FCEB3CCFA5"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/CODE/invocation.json",
+            "bytes": 886,
+            "sha256": "5EAB2FF717028287453F381D924362597E0FCBA47F3ECA120D7B672D169140D1"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/CODE/completion.json",
+            "bytes": 156,
+            "sha256": "661B0694D806F26543D394A55A0FDB4B9E6B89C7395BBEB37D8490C7247046FA"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/CODE/events.jsonl",
+            "bytes": 403228,
+            "sha256": "1CF07EE023E8D227408D6375E8A763F34DF6B70A6F906E09E7C96183351099DC"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/CODE/stderr.log",
+            "bytes": 734,
+            "sha256": "2136C83721AB43003A71EB00505860BE8D2B6CC88E4DCB7652AB3872B5D4D058"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/CODE/report.txt",
+            "bytes": 4134,
+            "sha256": "8A0C8E351B2DA50F7B37BBD5F94A52B61AB9542D25E427B2E0574A5002A62A09"
+          }
+        ]
+      },
+      {
+        "role": "REQ",
+        "verdict": "PASS_AFFECTED_SOURCE_ONLY",
+        "contextIds": [
+          "01a16bb6-a6c3-7133-9e6f-4d20c5403004"
+        ],
+        "sourceHead": "721d229a16a4a9b977e4508cfcec7b5ae96a6ef8",
+        "startedUtc": "2026-10-24T02:21:34.5418394Z",
+        "finishedUtc": "2026-10-24T02:25:02.5568858Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "shellCommands": 47,
+        "failedShellCommands": 2,
+        "mcpCalls": 0,
+        "privateArtifacts": [
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/REQ/AGENTS.md",
+            "bytes": 327,
+            "sha256": "4FD899C1E0096587C763C48B972F6FEC26D8DABA5AE4CFBE98C5AE765BCBB338"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/REQ/prompt.txt",
+            "bytes": 2054,
+            "sha256": "89E218B9E6E43624B47C22806B2DE6497A1E339A0E36626E4023DA16B52631AD"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/REQ/invocation.json",
+            "bytes": 883,
+            "sha256": "B856184B071AE9EBEF80C58D0274137697011A8C02E36B589120D01C3EE49975"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/REQ/completion.json",
+            "bytes": 155,
+            "sha256": "0E6624E35E076E053143694AFF83D5DBE1E08A06B6763FB4C77A8F74FFB0339A"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/REQ/events.jsonl",
+            "bytes": 377812,
+            "sha256": "35BD0E8E13178CC4E5302CDEA3279E6506FDF2914780C7B51C454E62A86735F3"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/REQ/stderr.log",
+            "bytes": 734,
+            "sha256": "5D46536272D278DCF43739E51C536A74B84244DA8245AC526B22348FC625FF2D"
+          },
+          {
+            "privatePath": "C:\\SWDev\\warhammer\\.local\\reviews\\LiveCoreErgonomics\\721d229/REQ/report.txt",
+            "bytes": 6364,
+            "sha256": "CADA6D8B6B04E87504041D2F635E9B2C35698C4B2A6E950BEA4E34DE7EE458B7"
+          }
+        ]
+      }
+    ],
+    "requestedSettings": {
+      "approval": "never",
+      "freshProcess": true,
+      "ephemeral": true,
+      "memoryDisabled": true,
+      "sandbox": "read-only",
+      "resumeOrFork": false
+    },
+    "settingsLimit": "Requested invocation and actual read-only tool activity recorded; lower-level memory/ephemeral enforcement not independently proven",
+    "credentialsPrivateSessionsAuthorNotesPeerVerdictsExcluded": true,
+    "actualInstalledRuntimeWrapperCheckWasAfterFreeze": true,
+    "observedToolLimits": "CODE: one corrected pipeline parse failure in read-only hash formatting; REQ: one corrected relative criteria-path miss and one pipeline parse failure. All 43 input hashes/bytes were subsequently verified; no material remained unread.",
+    "cliWarnings": "Unsupported PowerShell shell snapshot and ignored plugin-icon paths; no failed internal subagent initialization in these two logs."
+  },
+  "desktop": {
+    "holdFromUtc": "2026-10-24T02:15:00Z",
+    "holdUntil": "Explicit owner resumption",
+    "interactiveLaunchesForThisIncrement": 0,
+    "desktopFocusInputActions": 0,
+    "priorOwnedVisibleEditorVerifiedAbsentUtc": "2026-10-24T02:14:29.0916629Z",
+    "priorOwnedCoreStatus": "STOPPED",
+    "graphicalCameraAndRepairedFocus": "NOT_RUN",
+    "priorVisibleEvidence": "2026-10-23-live-core-visible.json"
+  },
+  "linux": {
+    "nativeBuild": "UNTESTED",
+    "nativeRuntime": "UNTESTED",
+    "graphicsInput": "UNTESTED",
+    "packages": "UNTESTED",
+    "host": "Still to be arranged"
+  },
+  "remaining": [
+    "Observe actual new camera orbit/pan/zoom/frame/resize/UI isolation and repaired focus in an applicable approved visible workflow.",
+    "Run native Linux setup/build/runtime/render/package checks when a host is arranged.",
+    "Full deployment/movement/gameplay, remote/spectator product completion, profiles, durable recovery and final packaged delivery remain later work."
+  ]
+}
