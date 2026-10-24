@@ -7,7 +7,8 @@ param(
     [ValidateSet('Managed', 'Attach')][string]$CoreMode = 'Managed',
     [ValidateRange(1024, 65535)][int]$Port = 19084,
     [string]$Endpoint,
-    [string]$CoreRoot = (Join-Path $PSScriptRoot '../../Warhammer_40k_AI')
+    [ValidateSet('44.5.0', '44.3.33')][string]$CoreVersion = '44.5.0',
+    [string]$CoreRoot
 )
 
 Set-StrictMode -Version Latest
@@ -162,7 +163,7 @@ try {
     $record.configBefore = Config-Snapshot
     if ($Mode -eq 'Core') {
         $stage = 'CORE_START'
-        $hostInfo = & (Join-Path $PSScriptRoot 'Start-CoreDevelopmentServer.ps1') -Mode $CoreMode -Port $Port -Endpoint ([uri]$coreEndpoint) -CoreRoot $CoreRoot
+        $hostInfo = & (Join-Path $PSScriptRoot 'Start-CoreDevelopmentServer.ps1') -Mode $CoreMode -Port $Port -Endpoint ([uri]$coreEndpoint) -CoreVersion $CoreVersion -CoreRoot $CoreRoot
         if (!$hostInfo -or $hostInfo.owned -isnot [bool] -or $hostInfo.owned -ne ($CoreMode -eq 'Managed') -or $hostInfo.endpoint -cne $coreEndpoint -or !$hostInfo.receiptPath) { throw 'Core helper returned inconsistent ownership or endpoint.' }
         $record.host = @{ mode = $CoreMode; owned = $hostInfo.owned; status = $hostInfo.status; receipt = (File-Descriptor $hostInfo.receiptPath) }
     }

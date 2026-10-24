@@ -15,8 +15,8 @@ namespace
 namespace E01 = Warhammer::Migration::E01;
 constexpr int32 MaximumResponseBytes = 4 * 1024 * 1024;
 constexpr int32 MaximumEntities = 4096;
-const TCHAR* CoreBuild = TEXT("warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a");
-const TCHAR* Contract = TEXT("44.3.33");
+const TCHAR* CoreBuild = TEXT("warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba");
+const TCHAR* Contract = TEXT("44.5.0");
 
 bool Exact(const FString& A, const FString& B) { return A.Equals(B, ESearchCase::CaseSensitive); }
 TSharedPtr<FJsonValue> Field(const TSharedPtr<FJsonObject>& O, const TCHAR* Name)
@@ -71,6 +71,7 @@ bool SafeId(const FString& S)
 }
 bool Parse(const FString& Text, TSharedPtr<FJsonObject>& Out, FString& Error)
 {
+    if (Text.Len() > MaximumResponseBytes) { Error = TEXT("JSON exceeds this live client's response limit."); return false; }
     E01::FReadError E;
     if (!E01::ParseObject(Text, Out, E)) { Error = TEXT("Invalid bounded JSON: ") + E.Code; return false; }
     return true;
@@ -135,6 +136,112 @@ bool CredentialValid(const FString& Token)
     for (TCHAR C : Token) { if (C <= 32 || C >= 127) { return false; } }
     return true;
 }
+
+bool StringIds(const TSharedPtr<FJsonObject>& O, const TCHAR* Name, TArray<FString>& Out)
+{
+    const TArray<TSharedPtr<FJsonValue>>* Values = nullptr;
+    if (!Array(O, Name, Values)) { return false; }
+    TSet<FString> Ids;
+    for (const auto& Value : *Values)
+    {
+        FString Id;
+        if (!Value.IsValid() || Value->Type != EJson::String || !Value->TryGetString(Id) || Id.IsEmpty() || Id.Len() > 4096 || Ids.Contains(Id)) { return false; }
+        Ids.Add(Id); Out.Add(MoveTemp(Id));
+    }
+    return true;
+}
+
+bool RosterBearer(const TSharedPtr<FJsonObject>& O, const TCHAR* UnitField, FLiveCoreRosterBearer& Out)
+{
+    return String(O, UnitField, Out.UnitSelectionId) && String(O, TEXT("model_profile_id"), Out.ModelProfileId) &&
+        Revision(O, TEXT("model_index"), Out.ModelIndex) && Out.ModelIndex > 0 && String(O, TEXT("source_id"), Out.SourceId);
+}
+
+bool PublicRosters(const TSharedPtr<FJsonObject>& Projection, FLiveCoreState& Candidate, FString& Error)
+{
+    Candidate.bHasPublicArmyRosters = false;
+    Candidate.PublicArmyRosters.Reset();
+    if (!Field(Projection, TEXT("public_army_rosters")).IsValid()) { return true; }
+    const TArray<TSharedPtr<FJsonValue>>* Rosters = nullptr;
+    if (!Array(Projection, TEXT("public_army_rosters"), Rosters))
+    { Error = TEXT("Invalid public army roster inventory."); return false; }
+    TSet<FString> ArmyIds;
+    for (const auto& Value : *Rosters)
+    {
+        const auto Roster = Value.IsValid() && Value->Type == EJson::Object ? Value->AsObject() : nullptr;
+        FLiveCorePublicArmyRoster Item;
+        const auto Detachment = Object(Roster, TEXT("detachment_selection"));
+        const TArray<TSharedPtr<FJsonValue>>* Units = nullptr;
+        const TArray<TSharedPtr<FJsonValue>>* Enhancements = nullptr;
+        if (!String(Roster, TEXT("army_id"), Item.ArmyId) || !String(Roster, TEXT("player_id"), Item.PlayerId) || ArmyIds.Contains(Item.ArmyId) ||
+            !String(Detachment, TEXT("faction_id"), Item.FactionId) || !StringIds(Detachment, TEXT("detachment_ids"), Item.DetachmentIds) ||
+            !Array(Roster, TEXT("unit_selections"), Units) || !Array(Roster, TEXT("enhancement_assignments"), Enhancements))
+        { Error = TEXT("Invalid public army roster selection identities."); return false; }
+        ArmyIds.Add(Item.ArmyId);
+        TSet<FString> UnitIds;
+        for (const auto& UnitValue : *Units)
+        {
+            const auto Unit = UnitValue.IsValid() && UnitValue->Type == EJson::Object ? UnitValue->AsObject() : nullptr;
+            FString Id;
+            if (!String(Unit, TEXT("unit_selection_id"), Id) || UnitIds.Contains(Id))
+            { Error = TEXT("Invalid or duplicate public roster unit-selection ID."); return false; }
+            UnitIds.Add(Id); Item.UnitSelectionIds.Add(MoveTemp(Id));
+        }
+        const auto Warlord = Field(Roster, TEXT("warlord_selection"));
+        if (!Warlord.IsValid()) { Error = TEXT("Missing public roster Warlord disclosure."); return false; }
+        if (Warlord->Type != EJson::Null)
+        {
+            FLiveCoreRosterBearer Bearer;
+            if (Warlord->Type != EJson::Object || !RosterBearer(Warlord->AsObject(), TEXT("unit_selection_id"), Bearer))
+            { Error = TEXT("Invalid public roster Warlord bearer."); return false; }
+            Item.Warlord = MoveTemp(Bearer);
+        }
+        for (const auto& EnhancementValue : *Enhancements)
+        {
+            const auto Enhancement = EnhancementValue.IsValid() && EnhancementValue->Type == EJson::Object ? EnhancementValue->AsObject() : nullptr;
+            FLiveCoreRosterEnhancement Assignment;
+            if (!RosterBearer(Enhancement, TEXT("target_unit_selection_id"), Assignment.Bearer) ||
+                !String(Enhancement, TEXT("enhancement_id"), Assignment.EnhancementId))
+            { Error = TEXT("Invalid public roster Enhancement bearer."); return false; }
+            Item.Enhancements.Add(MoveTemp(Assignment));
+        }
+        const TArray<TSharedPtr<FJsonValue>>* Attachments = nullptr;
+        if (!Null(Roster, TEXT("attachment_declarations")))
+        {
+            if (!Array(Roster, TEXT("attachment_declarations"), Attachments))
+            { Error = TEXT("Invalid public roster attachment disclosure."); return false; }
+            Item.bAttachmentsDisclosed = true;
+            for (const auto& AttachmentValue : *Attachments)
+            {
+                const auto Attachment = AttachmentValue.IsValid() && AttachmentValue->Type == EJson::Object ? AttachmentValue->AsObject() : nullptr;
+                FLiveCoreRosterAttachment Declaration;
+                if (!String(Attachment, TEXT("source_unit_selection_id"), Declaration.SourceUnitSelectionId) ||
+                    !String(Attachment, TEXT("bodyguard_unit_selection_id"), Declaration.BodyguardUnitSelectionId))
+                { Error = TEXT("Invalid public roster attachment identities."); return false; }
+                Item.Attachments.Add(MoveTemp(Declaration));
+            }
+        }
+        const TArray<TSharedPtr<FJsonValue>>* Cargo = nullptr;
+        if (!Null(Roster, TEXT("dedicated_transport_manifests")))
+        {
+            if (!Array(Roster, TEXT("dedicated_transport_manifests"), Cargo))
+            { Error = TEXT("Invalid public roster starting-cargo disclosure."); return false; }
+            Item.bStartingCargoDisclosed = true;
+            for (const auto& CargoValue : *Cargo)
+            {
+                const auto Manifest = CargoValue.IsValid() && CargoValue->Type == EJson::Object ? CargoValue->AsObject() : nullptr;
+                FLiveCoreRosterStartingCargo StartingCargo;
+                if (!String(Manifest, TEXT("transport_unit_selection_id"), StartingCargo.TransportUnitSelectionId) ||
+                    !StringIds(Manifest, TEXT("embarked_unit_selection_ids"), StartingCargo.EmbarkedUnitSelectionIds))
+                { Error = TEXT("Invalid public roster starting-cargo identities."); return false; }
+                Item.StartingCargo.Add(MoveTemp(StartingCargo));
+            }
+        }
+        Candidate.PublicArmyRosters.Add(MoveTemp(Item));
+    }
+    Candidate.bHasPublicArmyRosters = true;
+    return true;
+}
 }
 
 namespace LiveCoreProtocol
@@ -161,7 +268,7 @@ bool ReadCreatedSession(const FString& Text, FMetadata& OutMetadata, FString& Ou
         !String(O, TEXT("game_id"), Candidate.GameId) || !Revision(O, TEXT("session_revision"), Candidate.Revision) ||
         Candidate.Revision != 0 || !IsString(O, TEXT("session_state"), TEXT("created")) || !Scope(Object(O, TEXT("visibility")), true))
     {
-        OutError = TEXT("Created session identity, revision or administrator scope differs from the selected Core 44.3.33 build."); return false;
+        OutError = TEXT("Created session identity, revision or administrator scope differs from the selected Core 44.5.0 build."); return false;
     }
     OutMetadata = MoveTemp(Candidate); OutError.Reset(); return true;
 }
@@ -257,6 +364,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
         { OutError = TEXT("Placed model lacks supported actual pose/base geometry."); return false; }
         Candidate.Models.Add(MoveTemp(Item));
     }
+    if (!PublicRosters(P, Candidate, OutError)) { return false; }
     const TArray<TSharedPtr<FJsonValue>>* Choices = nullptr;
     if (!Array(P, TEXT("public_secondary_mission_choices"), Choices)) { OutError = TEXT("Missing scoped mission choices."); return false; }
     for (const auto& V : *Choices)
@@ -320,6 +428,13 @@ void InvalidateDecisionPresentation(FLiveCoreState& State)
 {
     State.Options.Reset(); State.RequestId.Reset(); State.RequestType.Reset();
     State.DecisionPresentation = ELiveCoreDecisionPresentation::Unavailable;
+}
+
+void InvalidateProjectionPresentation(FLiveCoreState& State)
+{
+    InvalidateDecisionPresentation(State);
+    State.bHasPublicArmyRosters = false;
+    State.PublicArmyRosters.Reset();
 }
 
 bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId, const FString& SessionId,
@@ -416,7 +531,7 @@ void FLiveCoreSession::Fail(const FString& Message) { State.bBusy = false; State
 void FLiveCoreSession::MarkUnknown(const FString& Message, bool bCreation)
 {
     State.bBusy = false; State.bUnknown = true; State.bCanReconcile = !bCreation && PendingCommand.IsSet();
-    LiveCoreProtocol::InvalidateDecisionPresentation(State); State.Error = Message;
+    LiveCoreProtocol::InvalidateProjectionPresentation(State); State.Error = Message;
     State.Status = bCreation ? TEXT("Session creation UNKNOWN. No retry or recreation is safe in this client.") :
         TEXT("Command outcome UNKNOWN. No new action is allowed; explicitly reconcile the retained command.");
     Changed();
@@ -565,7 +680,7 @@ void FLiveCoreSession::SelectOfferedOption(const FString& OptionId)
     FPendingCommand Command; Command.Id = TEXT("unreal-choice-") + FGuid::NewGuid().ToString(EGuidFormats::Digits);
     Command.ExpectedRevision = State.SessionRevision; Command.Operation = TEXT("submit_finite_decision"); Command.bFiniteAction = true;
     Command.Body = LiveCoreProtocol::MakeFiniteCommand(State.SessionId, Command.Id, State.SessionRevision, State.RequestId, OptionId);
-    PendingCommand = MoveTemp(Command); LiveCoreProtocol::InvalidateDecisionPresentation(State); State.Error.Reset(); State.RecordedCommandError.Reset(); State.bLastCommandHasOutcome = false;
+    PendingCommand = MoveTemp(Command); LiveCoreProtocol::InvalidateProjectionPresentation(State); State.Error.Reset(); State.RecordedCommandError.Reset(); State.bLastCommandHasOutcome = false;
     SendPendingCommand();
 }
 void FLiveCoreSession::SendPendingCommand()
@@ -599,8 +714,8 @@ void FLiveCoreSession::SendPendingCommand()
 }
 void FLiveCoreSession::FetchProjection()
 {
-    // No old offered action becomes enabled if a refresh fails.
-    LiveCoreProtocol::InvalidateDecisionPresentation(State);
+    // No old offered action or roster disclosure survives a pending/failed refresh.
+    LiveCoreProtocol::InvalidateProjectionPresentation(State);
     const TWeakPtr<FLiveCoreSession> Weak = AsShared();
     Request(TEXT("GET"), TEXT("/sessions/") + State.SessionId + TEXT("/projection"), ECredential::PlayerA, FString(), false,
         [Weak](int32 Status, const FString& Text)
@@ -616,7 +731,7 @@ void FLiveCoreSession::FetchProjection()
                     return;
                 }
                 FString Error;
-                if (!LiveCoreProtocol::ReadProjection(Text, Self->State.SessionId, Self->State, Error)) { LiveCoreProtocol::InvalidateDecisionPresentation(Self->State); Self->Fail(Error); return; }
+                if (!LiveCoreProtocol::ReadProjection(Text, Self->State.SessionId, Self->State, Error)) { LiveCoreProtocol::InvalidateProjectionPresentation(Self->State); Self->Fail(Error); return; }
                 Self->State.Status = !Self->State.RecordedCommandError.IsEmpty() ? TEXT("Core recorded a rejected command; authoritative state refreshed.") :
                     Self->State.AcceptedActionCount > 0 ? TEXT("Core accepted the player action; authoritative state refreshed.") : TEXT("Connected. Choose an option offered by Core.");
                 Self->Changed();

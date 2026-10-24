@@ -1,5 +1,7 @@
 # Latest Core capabilities — supporting source inventory
 
+**Later runtime status:** this source inventory was captured during P1b. The separate [P1c adoption](../evidence/2026-10-24-p1c-core-adoption.md) subsequently prepared/verified the same exact4f9 /44.5.0 source. Earlier44.3 evidence below remains historical and is not relabelled. The canonical plan owns current status.
+
 Research date: 2026-10-24. This document supports the [single canonical migration plan](../unreal-migration-plan.md); it does not set a second roadmap, accept a runtime upgrade, or claim complete gameplay. Its scope is the latest supported public Core capabilities, including work beyond the owner-confirmed Arcade baseline. The [CAP01–36 checklist](2026-10-16-capability-checklist.md) remains the UI/product reference rather than the ceiling for Core coverage.
 
 Method: read-only Git-object, schema, catalogue, source and test-definition inspection. No Core/Arcade files or environments were changed; no imports, generators, tests, servers, clients or review sessions were run for this inventory. The latest development candidate is unmerged; current Unreal runtime evidence remains bound to Core 44.3.33.

@@ -34,6 +34,52 @@ struct FLiveCoreModel
     double RadiusInches = 0.0;
 };
 
+// Original pre-session selection identities, not inferred current formation or
+// placement. Core owns the one-based physical bearer mapping and all legality.
+struct FLiveCoreRosterBearer
+{
+    FString UnitSelectionId;
+    FString ModelProfileId;
+    int64 ModelIndex = 0;
+    FString SourceId;
+};
+
+struct FLiveCoreRosterEnhancement
+{
+    FLiveCoreRosterBearer Bearer;
+    FString EnhancementId;
+};
+
+struct FLiveCoreRosterAttachment
+{
+    FString SourceUnitSelectionId;
+    FString BodyguardUnitSelectionId;
+};
+
+struct FLiveCoreRosterStartingCargo
+{
+    FString TransportUnitSelectionId;
+    TArray<FString> EmbarkedUnitSelectionIds;
+};
+
+// A narrow, viewer-scoped selection/disclosure seam, not a roster editor or
+// complete roster display. No arbitrary JSON/private config is retained.
+struct FLiveCorePublicArmyRoster
+{
+    FString ArmyId;
+    FString PlayerId;
+    FString FactionId;
+    TArray<FString> DetachmentIds;
+    TArray<FString> UnitSelectionIds;
+    TOptional<FLiveCoreRosterBearer> Warlord;
+    TArray<FLiveCoreRosterEnhancement> Enhancements;
+    // Null means undisclosed; visible empty arrays mean disclosed with no entries.
+    bool bAttachmentsDisclosed = false;
+    bool bStartingCargoDisclosed = false;
+    TArray<FLiveCoreRosterAttachment> Attachments;
+    TArray<FLiveCoreRosterStartingCargo> StartingCargo;
+};
+
 // Presentation of the authenticated projection only; never a second legality path.
 enum class ELiveCoreDecisionPresentation : uint8
 {
@@ -81,6 +127,10 @@ struct FLiveCoreState
     TArray<FLiveCoreObjective> Objectives;
     // Only actual placed models with supplied poses; undeployed/reserve models stay absent.
     TArray<FLiveCoreModel> Models;
+    // Optional in the unchanged v13 GameView family. Absence is unavailable,
+    // distinct from a supported empty inventory. Only the player projection feeds it.
+    bool bHasPublicArmyRosters = false;
+    TArray<FLiveCorePublicArmyRoster> PublicArmyRosters;
 };
 
 namespace LiveCoreProtocol
@@ -121,6 +171,9 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
 // Clear local decision controls while a fresh projection or command outcome is unavailable.
 // The separately retained command envelope and authoritative revision are unchanged.
 void InvalidateDecisionPresentation(FLiveCoreState& State);
+// Also clear optional roster disclosure while a new/uncertain snapshot is pending.
+// Geometry and the applied projection identity remain the last validated snapshot.
+void InvalidateProjectionPresentation(FLiveCoreState& State);
 bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId,
     const FString& SessionId, int64 ExpectedRevision, bool bAdministrator,
     const FString& Operation, FOutcome& OutOutcome, FString& OutError);

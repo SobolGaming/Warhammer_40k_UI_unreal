@@ -7,7 +7,8 @@ param(
     [uri]$Endpoint,
     [Parameter(ParameterSetName = 'Editor')][string]$EngineRoot = 'C:/Program Files/Epic Games/UE_5.8',
     [Parameter(Mandatory, ParameterSetName = 'Packaged')][ValidateNotNullOrEmpty()][string]$ClientExecutable,
-    [string]$CoreRoot = (Join-Path $PSScriptRoot '../../Warhammer_40k_AI'),
+    [ValidateSet('44.5.0', '44.3.33')][string]$CoreVersion = '44.5.0',
+    [string]$CoreRoot,
     [ValidateRange(5, 120)][int]$ReadinessSeconds = 60
 )
 
@@ -29,7 +30,7 @@ if ($PSCmdlet.ParameterSetName -eq 'Packaged') {
     $requiredFiles = @($clientPath, $project)
 }
 foreach ($path in $requiredFiles) { if (!(Test-Path -LiteralPath $path -PathType Leaf)) { throw ('Required client file is missing: ' + $path) } }
-$hostArguments = @{ Mode = $CoreMode; Port = $Port; CoreRoot = $CoreRoot; ReadinessSeconds = $ReadinessSeconds }
+$hostArguments = @{ Mode = $CoreMode; Port = $Port; CoreVersion = $CoreVersion; CoreRoot = $CoreRoot; ReadinessSeconds = $ReadinessSeconds }
 if ($Endpoint) { $hostArguments.Endpoint = $Endpoint }
 $environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
 $savedEnvironment = @{}
