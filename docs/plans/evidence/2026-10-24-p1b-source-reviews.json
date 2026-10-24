@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "P1B_FINITE_SOURCE_REVIEW_PROVENANCE",
+  "recordedUtc": "2026-10-24T17:05:29.0573723Z",
+  "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+  "sourceBase": "7ba2c1179416efc6d992d49540aeb165631cb697",
+  "coreHead": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+  "coreContract": "44.3.33",
+  "disposition": "BOTH_PASS_FINITE_SOURCE_ONLY",
+  "runtimeAcceptanceGranted": false,
+  "packet": {
+    "scope": "P1B_FOCUSED_SOURCE_ONLY",
+    "inputCount": 26,
+    "inputBytes": 216194,
+    "manifest": {
+      "artifact": "manifest.json",
+      "bytes": 24817,
+      "sha256": "FF9B4322B0225B2EE24DC7927A25C77878EE87987EEC4F11436258F8D2C3DBB2"
+    },
+    "allInputAndRoleControlDescriptorsMatchedAfterReviews": true,
+    "wholeUiSourceFiles": 15,
+    "changedUiSourceFiles": 4,
+    "originalRequirementExcerpts": 2,
+    "selectedCorePublicSchemaAndContractInputs": 5,
+    "committedPendingDecisionFragments": 2,
+    "installedSlateFocusAndInvalidationExcerpts": 2,
+    "runtimeEvidenceIncluded": false
+  },
+  "independence": {
+    "freshContexts": 2,
+    "distinctFreshContextsObserved": true,
+    "separateCodeAndRequirementsRoles": true,
+    "contextIdentifiersPublished": false,
+    "peerVerdictsSuppliedInPacket": false,
+    "authorConclusionsSuppliedInPacket": false
+  },
+  "reviews": [
+    {
+      "role": "CODE",
+      "verdict": "PASS",
+      "verdictScope": "FINITE_SOURCE_ASSESSMENT",
+      "actionableFindings": 0,
+      "assessment": "Correctness, lifetime/input, viewer isolation and submission blockers in the four changed files and directly supplied dependencies.",
+      "artifacts": {
+        "instructions": {
+          "artifact": "CODE/AGENTS.md",
+          "bytes": 778,
+          "sha256": "FB25B0951E27F6EEDE21D0A2C9D06EEF94CFB43A2F9F7EA3ECFF2C6A8B843F52"
+        },
+        "prompt": {
+          "artifact": "CODE/prompt.txt",
+          "bytes": 1688,
+          "sha256": "9BB0F60F394C648CB72BAB4F7D08F69A39441D5E4D8087462B169117677CBDF0"
+        },
+        "report": {
+          "artifact": "CODE/report.txt",
+          "bytes": 1413,
+          "sha256": "7516F63A3E85EF1D73C29D9A00A3A3773A20AE286741B937EC681CC906D86EC8"
+        },
+        "invocation": {
+          "artifact": "CODE/invocation.json",
+          "bytes": 986,
+          "sha256": "8373783002B89685AD103ED129D84F6600DBFF2CCF44ABB7B7E26113621F1310"
+        },
+        "completion": {
+          "artifact": "CODE/completion.json",
+          "bytes": 156,
+          "sha256": "2DD6A3D225D3345F5BDBEC02D246822F7DAC56C01C8D371AAC108A49C8F95652"
+        }
+      },
+      "requestedSettings": {
+        "sandbox": "read-only",
+        "approvalPolicy": "never",
+        "memoryDisabled": true,
+        "ephemeral": true,
+        "timeoutSeconds": 600,
+        "resumeOrFork": false,
+        "modelOverride": false
+      },
+      "observedCompletion": {
+        "exitCode": 0,
+        "timedOut": false,
+        "reportExists": true,
+        "freshContextCount": 1,
+        "finishedUtc": "2026-10-24T17:02:39.9823718Z"
+      }
+    },
+    {
+      "role": "REQ",
+      "verdict": "PASS",
+      "verdictScope": "FINITE_SOURCE_ASSESSMENT",
+      "actionableFindings": 0,
+      "assessment": "Original finite P1b criteria: actual keyboard-focus guidance, typed viewer-scoped pending-decision presentation, immediate-submission labels, retained invariants and authored regressions.",
+      "artifacts": {
+        "instructions": {
+          "artifact": "REQ/AGENTS.md",
+          "bytes": 778,
+          "sha256": "FB25B0951E27F6EEDE21D0A2C9D06EEF94CFB43A2F9F7EA3ECFF2C6A8B843F52"
+        },
+        "prompt": {
+          "artifact": "REQ/prompt.txt",
+          "bytes": 1849,
+          "sha256": "E2DC5B072FD374C3156F976449B0DFE4FBEEA37D8E26A24B1F7263F736F2744F"
+        },
+        "report": {
+          "artifact": "REQ/report.txt",
+          "bytes": 2334,
+          "sha256": "743EEC7603868A5E9581366DD5352185CED593DCF6DEDFFC3CABAC111129E3C1"
+        },
+        "invocation": {
+          "artifact": "REQ/invocation.json",
+          "bytes": 983,
+          "sha256": "2BE5712AE94B787AF51BF6456A5844028B4F1E8E5570D8616FB9F5F67E9A0238"
+        },
+        "completion": {
+          "artifact": "REQ/completion.json",
+          "bytes": 155,
+          "sha256": "8801871C1FA9DFD47F7366760C32A9A2CA6470B41D59180ED0A44AED2D43EAA3"
+        }
+      },
+      "requestedSettings": {
+        "sandbox": "read-only",
+        "approvalPolicy": "never",
+        "memoryDisabled": true,
+        "ephemeral": true,
+        "timeoutSeconds": 600,
+        "resumeOrFork": false,
+        "modelOverride": false
+      },
+      "observedCompletion": {
+        "exitCode": 0,
+        "timedOut": false,
+        "reportExists": true,
+        "freshContextCount": 1,
+        "finishedUtc": "2026-10-24T17:02:14.4298285Z"
+      }
+    }
+  ],
+  "scopeLimits": [
+    "Source and authored tests only; no runtime, packaging, rendering, font/shader, physical-input, Managed/Attach workflow, Linux, clean-machine or full-P1 acceptance is awarded by these verdicts.",
+    "The reviewers reported no actionable blocker in the supplied finite scope; omitted full fixture envelopes, older fixtures and transitive interfaces were neither inferred nor certified.",
+    "Packet hashes establish supplied-byte integrity, not independent verification of original Git/installed-source provenance.",
+    "Read-only, approval-never, no-memory, ephemeral and timeout settings are retained transport requests; launcher enforcement, lower-level isolation and memory persistence were not independently audited.",
+    "The packet excluded runtime results, prior or peer review conclusions, author notes, private sessions and credentials; no global SDK/Core/architecture certification is claimed.",
+    "Only safe artifact descriptors and bounded summaries are published; raw reports, private source, absolute private paths, context/process identities, credentials and account metadata are excluded."
+  ]
+}

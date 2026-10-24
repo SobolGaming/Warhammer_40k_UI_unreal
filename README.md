@@ -1,21 +1,24 @@
 # Warhammer 40k Unreal client
 
-A C++ first 3D client for the separate authoritative Python Core. This personal/internal development preview supports the Editor route and a Windows Development Game folder. The packaged client has non-visible startup/Core checks; visible package testing and clean-machine delivery remain open.
+A C++ first 3D client for the separate authoritative Python Core. This personal/internal development preview supports the Editor route and a Windows Development Game folder. P1b completed bounded Windows build, source-review, non-visible and visible packaged checks for clearer decision status, immediate-submission labels and keyboard-focus help. It remains a setup-choice preview, not a complete game.
 
 Read [architecture.md](architecture.md) for the source-tree map, component boundaries and runtime/session flows. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns all milestone scope and acceptance.
 
 ## Get started playing
 
-The current preview can connect/create a real Core session, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. Full deployment, movement, turns and complete gameplay are still being developed.
+The current preview can connect/create a real Core session, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. It remains player-a/setup-choice only; full deployment, movement, turns and complete gameplay are still being developed. Arcade parity is the initial useful milestone. The ultimate goal is all capabilities supported by the latest explicitly selected Core, including public/editor/data/service features beyond Arcade and faithful presentation of automatic rules.
+
+The tested runtime remains Core `5f509724da25a2f6ded0c2739a8e7c84bdf59c91` / **44.3.33**. Fetched development source `4f9bef0df2fb974d1285232a1009b8781926361d` / **44.5.0**, from open unmerged Core PR #591, is a planning/adoption candidate. It has not replaced this runtime or inherited its test results. See the [source capability inventory](docs/plans/research/2026-10-24-latest-core-capabilities.md).
 
 Run every command below from the `Warhammer_40k_UI_unreal` repository root. Complete [first-time setup and build](#first-time-setup-and-build) once before using the routine launch commands.
 
 ### Windows: routine launch
 
-On this workstation, the prepared Core environment and Editor build already exist. In **PowerShell 7**:
+On this workstation, the prepared Core environment already exists. Keep the complete runnable Windows folder together outside the source checkout. In **PowerShell 7**, replace this absolute example with your copied folder's nested executable:
 
 ```powershell
-& ./scripts/Start-Client.ps1 -CoreMode Managed
+$taskExe = 'C:\path\to\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
+& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $taskExe
 ```
 
 This starts the existing checked-out development Core hidden, waits for authenticated readiness, then opens the client. Close the client window normally to stop that exact managed Core. It does not build or install anything.
@@ -23,19 +26,25 @@ This starts the existing checked-out development Core hidden, waits for authenti
 For an already running Core, keep it running and use:
 
 ```powershell
-& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/'
+& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe
 ```
 
 **Fresh Windows machines:** a new pip-installed environment does not create the prepared Managed provenance. Use the [foreground Core + Attach route](docs/development/core-startup.md#windows-foreground-core-and-attach) after setting up your own native environment.
 
-The default engine location is `C:\Program Files\Epic Games\UE_5.8`. To use another installation, optionally set its location once in your shell and explicitly pass it to the PowerShell launcher:
+For Editor development, omit `-ClientExecutable`:
+
+```powershell
+& ./scripts/Start-Client.ps1 -CoreMode Managed
+```
+
+The Editor route defaults to `C:\Program Files\Epic Games\UE_5.8`. To use another installation, optionally set its location once in your shell and explicitly pass it to the PowerShell launcher:
 
 ```powershell
 $env:UE_ROOT = 'D:\Unreal\UE_5.8'
 & ./scripts/Start-Client.ps1 -CoreMode Managed -EngineRoot $env:UE_ROOT
 ```
 
-The PowerShell launcher does not automatically read `UE_ROOT`. Its other options are `-CoreRoot` (default sibling `../Warhammer_40k_AI`), `-Port` (default 8765), `-Endpoint` for Attach, and `-ReadinessSeconds` (default 60, maximum 120) for Managed startup. For example:
+The PowerShell launcher does not automatically read `UE_ROOT`. Its other options are `-CoreRoot` (default sibling `../Warhammer_40k_AI`), `-Port` (default 8765), `-Endpoint` for Attach, and `-ReadinessSeconds` (default 60, maximum 120) for Managed startup. These examples use the **Editor route**; add `-ClientExecutable $taskExe` to select your packaged executable instead:
 
 ```powershell
 & ./scripts/Start-Client.ps1 -CoreMode Managed -CoreRoot '../Warhammer_40k_AI' -Port 8766 -ReadinessSeconds 120
@@ -47,12 +56,14 @@ Current client endpoints must be **`http://127.0.0.1:<port>`**, optionally with 
 ### In the window
 
 1. A black viewport before connection is expected. Click **Connect / create session**.
-2. Once the Core projection arrives, select one of the **Core-offered secondary-mission options**.
+2. Once the Core projection arrives, click **Submit now: …** for one of the **Core-offered secondary-mission options**. This sends the choice immediately; there is no separate confirmation step.
 3. Use **Refresh** to reread the state and inspect the accepted/committed result, revision and selected missions. Only the current viewer's private options should be visible.
 
-The board's advisory terrain outlines and omission of undeployed models are intentional current limits. A full playable battle is not available yet.
+The client distinguishes no pending decision, a hidden decision, a visible unsupported editor, another/unsupported actor and a finite request with or without options. Only the viewer's own finite choices become buttons. While refreshing, submitting or reconciling an unknown outcome, local decision controls are unavailable until authoritative data restores them. A visible unsupported request is not described as an absent or hidden decision.
 
-The bounded Windows manual run verified wheel zoom, the Frame board button, full-board framing across window sizes and UI focus isolation. A separate [native input test](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) passed held-button orbit/pan, release stability, zoom limits and F routing on the actual live widgets and CameraActor with synthetic bounds. The later [cancellation check](docs/plans/evidence/2026-10-24-live-core-cancellation.md) passed 386 assertions, including Escape, focus/capture loss and actual resize during orbit/pan; application deactivation was tested by deliberate event delivery only. Click the board to give it keyboard focus, then use:
+The board's advisory terrain outlines and omission of undeployed models are intentional current limits. A full playable battle is not available yet. The board overlay switches between **Click board for keyboard focus** and **Board has keyboard focus**; that actual focus guidance was observed in the packaged P1b run.
+
+The [P1b packaged check](docs/plans/evidence/2026-10-24-p1b-visible-preview.md) observed wheel zoom, **F** restoring the frame after board focus, the Frame board button, refresh preserving the view and panel F/wheel isolation. Native Maximize and Restore produced window captures of 3840×2088 and 2882×1668 with the board fitting; the initial corner drag did not change size and is not a successful resize test. The [older native input test](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) passed held-button orbit/pan, release stability, zoom limits and F routing on live widgets/CameraActor with synthetic bounds. Its [cancellation check](docs/plans/evidence/2026-10-24-live-core-cancellation.md) passed 386 assertions; application deactivation used deliberate event delivery. Packaged held-button gestures and actual OS app switching were not retested in P1b. Click the board to give it keyboard focus, then use:
 
 | Control | Effect |
 |---|---|
@@ -60,14 +71,14 @@ The bounded Windows manual run verified wheel zoom, the Frame board button, full
 | Middle-drag over the board | Pan within the board's vicinity. |
 | Wheel over the focused board | Zoom within extent-based limits. After editing a UI field, click the board again first. |
 | **Frame board** in the panel | Fit the full board into the available area beside the panel; observed in the manual run. |
-| **F** with board focus | Frame the board; the native routed-key test passed. The earlier manual F workflow remains unresolved with no established source cause. |
+| **F** with board focus | Frame the board; observed working in the current packaged P1b run. The earlier manual F failure remains historical with cause unestablished. |
 | **Escape**, focus loss or application deactivation | Cancel the current camera drag. |
 
 UI clicks, text entry and panel scrolling retain their own input. Camera gestures do not submit game actions. Resizing deliberately reframes the board; a normal state Refresh preserves your view. See the [current verification checklist](docs/plans/unreal-migration-plan.md).
 
-### Windows standalone Development package (P1a)
+### Build a Windows standalone Development package
 
-The packaging source and its bounded verification are tracked in [P1a of the canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
+The packaging source and its bounded verification are tracked in the [canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
 
 ```powershell
 $package = & ./scripts/Build-ClientPackage.ps1
@@ -75,17 +86,18 @@ $package = & ./scripts/Build-ClientPackage.ps1
 
 The command builds the Game and required Editor/cook targets, cooks the startup resources and runtime input, stages a runnable Windows folder and archives it under a fresh `.local/packages/<run>/archive/Windows`. It never opens a game window or runs the staged prerequisite installer. Its default time limit is 60 minutes (`-TimeoutMinutes`, range5–120); `-EngineRoot` selects another matching native installation. Inspect `package-result.json` and `uat-stdout.log`/`uat-stderr.log` in the returned output root on failure. A successful build is separate from startup or rendering verification.
 
-The folder contains a root bootstrap executable, `WarhammerClient/Binaries/Win64/WarhammerClient.exe`, cooked content/engine dependencies and a separate prerequisite installer. Keep the entire folder together. Python Core remains separately installed/checked out; it is not embedded in this package. From this checkout, use the existing prepared Managed route with explicit packaged selection:
+The folder contains a root bootstrap executable, `WarhammerClient/Binaries/Win64/WarhammerClient.exe`, cooked content/engine dependencies and a separate prerequisite installer. Keep the entire folder together. Python Core remains separately installed/checked out; it is not embedded in this package. After copying the entire runnable folder outside the checkout, use its saved absolute path for routine launch; this does not depend on a prior build command's PowerShell variables:
 
 ```powershell
-& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $package.clientExecutable
+$taskExe = 'C:\path\to\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
+& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $taskExe
 # Or attach to an existing matching development Core:
-& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $package.clientExecutable
+& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe
 ```
 
-The manual Python launcher supports `--client-executable /absolute/path/to/WarhammerClient.exe` instead of `--engine-root`, with the same `--endpoint` and selected installed Core runtime requirements. Packaged launches omit the Editor `.uproject -game` arguments, use the executable's directory and retain process-only credentials. PowerShell still supervises only an owned Managed Core; Python remains Attach and leaves the server running. These interactive commands must not be executed during the owner screen HOLD.
+The manual Python launcher supports `--client-executable /absolute/path/to/WarhammerClient.exe` instead of `--engine-root`, with the same `--endpoint` and selected installed Core runtime requirements. Packaged launches omit the Editor `.uproject -game` arguments, use the executable's directory and retain process-only credentials. PowerShell supervises only an owned Managed Core; Python remains Attach and leaves the server running. Rebuild/package after client source changes.
 
-P1a's allowed verification is non-visible only. Rendered package controls/fonts/shaders, a machine without an Unreal installation and native Linux remain separate unverified acceptance work.
+P1b verified three bounded visible packaged launches on this workstation: Managed, Attach and an intentional player-authentication error. All three Game/launcher pairs closed normally with exit 0, unchanged binary/four Config files and restored parent environment. Managed stopped its own Core; attached services survived client closure with HTTP200 health before their separate owner stopped them. This establishes the observed preview rendering/controls and lifecycle only. A Windows machine without Unreal installed, native Linux, general gameplay and packaged held-button/OS-switch behavior remain unverified.
 
 For the fixed offscreen checks, first copy the **entire** runnable Windows folder outside this repository. Use a fresh destination and select its actual nested executable (not the root bootstrap):
 
@@ -186,16 +198,20 @@ Additional startup/authentication details and **Python Core installation** recip
 
 ## Related projects
 
-- [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Selected commit `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract 44.3.33, Python package `warhammer40k-core-v2`.
+- [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Tested runtime `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract 44.3.33, Python package `warhammer40k-core-v2`. Development 44.5.0 is an unmerged source planning target, not the checked-out/tested runtime.
 - [Warhammer_40k_UI_arcade](../Warhammer_40k_UI_arcade/README.md): existing Arcade client and behavioral/configuration reference; [original migration plan](../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md).
 - `Warhammer_40k_UI` is the owner's reference name mapped to that local Arcade checkout. [Import provenance](docs/plans/unreal-migration-plan-through-r146.md#repository-routes-and-provenance) records the mapping.
 
 ## Status and evidence
 
-The [Unreal migration plan](docs/plans/unreal-migration-plan.md) is the single canonical root roadmap and milestone checklist, using the owner-confirmed Arcade client as the Python UI baseline. The former development-plan filename is only a compatibility pointer. It covers standalone packaging, the full supported interaction families, geometry/selection, profiles/HUD, viewer modes, recovery, native Linux and release criteria. Its unchecked milestones remain future work; this preview is not full parity.
+The [Unreal migration plan](docs/plans/unreal-migration-plan.md) is the single canonical root roadmap and milestone checklist. Owner-confirmed Arcade parity is its initial useful milestone; the ultimate target covers the latest selected Core's supported capabilities beyond Arcade. The former development-plan filename is only a compatibility pointer. The plan covers standalone packaging, public interactions and data/services, automatic-rule presentation, geometry/selection, profiles/HUD, viewer modes, recovery, native Linux and release criteria. Its unchecked milestones remain future work; this preview is not full parity or full Core coverage.
 
-The [active migration checklist](docs/plans/unreal-migration-plan.md) separates source implementation, checks, independent reviews and rendered behavior. The [earlier visible Windows setup check](docs/plans/evidence/2026-10-23-live-core-visible.md) exposed the startup-focus error and cropped board edge. The [camera/startup increment](docs/plans/evidence/2026-10-23-live-core-ergonomics.json) then passed the Windows Editor build, 13 native checks, ten stubbed launcher tests, non-graphical startup and fresh independent CODE/requirements reviews. The resumed [actual manual-launcher check](docs/plans/evidence/2026-10-24-live-core-camera-visible.md) observed repaired keyboard navigation, real-board fit across window sizes, wheel zoom, Frame board, UI wheel isolation, refresh preservation and an accepted/committed mission choice at revision 2. The separate [native camera input check](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) passed 92 assertions for held orbit/pan, release, zoom clamps, F routing and UI isolation with synthetic bounds; its owned process closed normally. The earlier manual F failure remains recorded. The later [cancellation check](docs/plans/evidence/2026-10-24-live-core-cancellation.md) passed 386 assertions covering Escape, focus/capture loss and actual resize; application deactivation was deliberate event entry only. Actual OS app switching, teardown and fresh-install execution remain unverified. All native Linux execution is UNTESTED. Full gameplay, profile/HUD migration, remote participant/spectator completion, production hosting and exhaustive compatibility remain later work.
+The [active migration checklist](docs/plans/unreal-migration-plan.md) separates source implementation, checks, independent reviews and rendered behavior. At source `388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee`, the [P1b build/native checks](docs/plans/evidence/2026-10-24-p1b-native-checks.md) passed an 83.439-second package build and 17 test executions across four native launches/16 distinct names: eleven unit tests, four resource tests and one real-Core integration test in each mode. [Independent CODE and requirements reviews](docs/plans/evidence/2026-10-24-p1b-source-reviews.json) passed their finite affected-source scope; this is not full-source certification. Native logs retain their recorded startup warnings and HTML-report-template error.
 
-[PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) is merged. Open [PR #4](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4) completes the bounded P1a Windows package increment: [six non-visible resource/Core test executions, lifecycle controls and source-review history](docs/plans/evidence/2026-10-24-p1a-windows-package.md). Native logs retain two startup warnings and a missing HTML-report-template error per run, while the exact JSON tests passed. Full P1, visible package/clean-machine testing and native Linux remain open. Both architecture diagrams passed actual Mermaid 11.12.0 parsing after the [sequence-label correction](docs/plans/evidence/2026-10-24-architecture-mermaid.json).
+The [visible P1b results](docs/plans/evidence/2026-10-24-p1b-visible-preview.md) record one accepted/committed mission choice at revision 2 in each normal mode, explicit refresh into an honestly explained hidden decision, focus guidance, F/frame/zoom/UI isolation and normal lifecycle. An intentionally invalid child player credential produced actual **HTTP401**, `authentication_required`, and **“A valid bearer credential is required.”** Admin start had committed before the viewer projection failed; the client displayed unavailable projection state without inventing a board or options. Earlier supervisor failure and the subsequent 600-second approval/access timeout remain failed attempts, separate from the three completed runs.
 
-The owner is using the screen: visible launches/input/focus changes remain on HOLD. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts; their former current-status sequencing is historical. Later features require separate bounded work.
+The [older manual-camera record](docs/plans/evidence/2026-10-24-live-core-camera-visible.md), [synthetic native input](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) and [cancellation check](docs/plans/evidence/2026-10-24-live-core-cancellation.md) retain their original scopes. The earlier manual F failure has no established cause; the current packaged key success does not rewrite that history. Actual OS app switching/teardown, clean-machine execution and native Linux remain unverified. Full gameplay, profile/HUD migration, remote participants/spectators and production hosting remain later work.
+
+[PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) and [PR #4](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4) are merged. PR #4's [bounded P1a evidence](docs/plans/evidence/2026-10-24-p1a-windows-package.md) remains historical. P1b's completed checks do not close full P1, clean-machine or Linux requirements. The [earlier sequence-label correction](docs/plans/evidence/2026-10-24-architecture-mermaid.json) retains its original Mermaid parser evidence.
+
+The owner's standing visible-testing authorization is active until explicitly revoked; previous HOLD statements and consumed run scopes remain historical. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts. Later features, including latest-Core runtime adoption and general gameplay, remain separate bounded work.

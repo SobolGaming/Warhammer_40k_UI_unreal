@@ -189,6 +189,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     Candidate.ProjectionVersion = OutState.ProjectionVersion + 1;
     Candidate.Terrain.Reset(); Candidate.Objectives.Reset(); Candidate.Models.Reset();
     Candidate.Options.Reset(); Candidate.RequestId.Reset(); Candidate.RequestType.Reset(); Candidate.MissionSummary.Reset();
+    Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::NoPending;
     FString Stage;
     if (!String(P, TEXT("stage"), Stage)) { OutError = TEXT("Projection stage is missing."); return false; }
     Candidate.Phase = Stage;
@@ -279,13 +280,23 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
         const auto Pending = PendingValue->Type == EJson::Object ? PendingValue->AsObject() : nullptr;
         if (!IsString(Pending, TEXT("schema_version"), TEXT("decision-request-view-v5-phase17n-step4")) || !String(Pending, TEXT("decision_type"), Candidate.RequestType))
         { OutError = TEXT("Invalid current DecisionRequest schema/type."); return false; }
-        if (!Exact(Candidate.RequestType, TEXT("hidden_decision")))
+        if (Exact(Candidate.RequestType, TEXT("hidden_decision")))
+        {
+            // The placeholder does not expose an actor, request identity or legal options.
+            Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::Hidden;
+        }
+        else
         {
             FString Actor; bool Parameterized = true;
-            if (!String(Pending, TEXT("request_id"), Candidate.RequestId) || !String(Pending, TEXT("actor_id"), Actor) || !Boolean(Pending, TEXT("is_parameterized"), Parameterized))
+            const bool bHasActor = String(Pending, TEXT("actor_id"), Actor);
+            if (!String(Pending, TEXT("request_id"), Candidate.RequestId) || (!bHasActor && !Null(Pending, TEXT("actor_id"))) || !Boolean(Pending, TEXT("is_parameterized"), Parameterized))
             { OutError = TEXT("Incomplete offered DecisionRequest."); return false; }
-            if (Exact(Actor, TEXT("player-a")) && !Parameterized)
+            if (!bHasActor) { Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::UnsupportedActor; }
+            else if (!Exact(Actor, TEXT("player-a"))) { Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::OtherActor; }
+            else if (Parameterized) { Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::ParameterizedUnsupported; }
+            else
             {
+                Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::FiniteOptions;
                 const TArray<TSharedPtr<FJsonValue>>* Options = nullptr;
                 if (!Array(Pending, TEXT("options"), Options)) { OutError = TEXT("Missing offered finite options."); return false; }
                 TSet<FString> Ids;
@@ -303,6 +314,12 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     // command rejection remains visible until a subsequent command resolves it.
     Candidate.Error = Candidate.RecordedCommandError;
     OutState = MoveTemp(Candidate); OutError.Reset(); return true;
+}
+
+void InvalidateDecisionPresentation(FLiveCoreState& State)
+{
+    State.Options.Reset(); State.RequestId.Reset(); State.RequestType.Reset();
+    State.DecisionPresentation = ELiveCoreDecisionPresentation::Unavailable;
 }
 
 bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId, const FString& SessionId,
@@ -399,7 +416,7 @@ void FLiveCoreSession::Fail(const FString& Message) { State.bBusy = false; State
 void FLiveCoreSession::MarkUnknown(const FString& Message, bool bCreation)
 {
     State.bBusy = false; State.bUnknown = true; State.bCanReconcile = !bCreation && PendingCommand.IsSet();
-    State.Options.Reset(); State.Error = Message;
+    LiveCoreProtocol::InvalidateDecisionPresentation(State); State.Error = Message;
     State.Status = bCreation ? TEXT("Session creation UNKNOWN. No retry or recreation is safe in this client.") :
         TEXT("Command outcome UNKNOWN. No new action is allowed; explicitly reconcile the retained command.");
     Changed();
@@ -548,7 +565,7 @@ void FLiveCoreSession::SelectOfferedOption(const FString& OptionId)
     FPendingCommand Command; Command.Id = TEXT("unreal-choice-") + FGuid::NewGuid().ToString(EGuidFormats::Digits);
     Command.ExpectedRevision = State.SessionRevision; Command.Operation = TEXT("submit_finite_decision"); Command.bFiniteAction = true;
     Command.Body = LiveCoreProtocol::MakeFiniteCommand(State.SessionId, Command.Id, State.SessionRevision, State.RequestId, OptionId);
-    PendingCommand = MoveTemp(Command); State.Options.Reset(); State.Error.Reset(); State.RecordedCommandError.Reset(); State.bLastCommandHasOutcome = false;
+    PendingCommand = MoveTemp(Command); LiveCoreProtocol::InvalidateDecisionPresentation(State); State.Error.Reset(); State.RecordedCommandError.Reset(); State.bLastCommandHasOutcome = false;
     SendPendingCommand();
 }
 void FLiveCoreSession::SendPendingCommand()
@@ -583,7 +600,7 @@ void FLiveCoreSession::SendPendingCommand()
 void FLiveCoreSession::FetchProjection()
 {
     // No old offered action becomes enabled if a refresh fails.
-    State.Options.Reset();
+    LiveCoreProtocol::InvalidateDecisionPresentation(State);
     const TWeakPtr<FLiveCoreSession> Weak = AsShared();
     Request(TEXT("GET"), TEXT("/sessions/") + State.SessionId + TEXT("/projection"), ECredential::PlayerA, FString(), false,
         [Weak](int32 Status, const FString& Text)
@@ -599,7 +616,7 @@ void FLiveCoreSession::FetchProjection()
                     return;
                 }
                 FString Error;
-                if (!LiveCoreProtocol::ReadProjection(Text, Self->State.SessionId, Self->State, Error)) { Self->State.Options.Reset(); Self->Fail(Error); return; }
+                if (!LiveCoreProtocol::ReadProjection(Text, Self->State.SessionId, Self->State, Error)) { LiveCoreProtocol::InvalidateDecisionPresentation(Self->State); Self->Fail(Error); return; }
                 Self->State.Status = !Self->State.RecordedCommandError.IsEmpty() ? TEXT("Core recorded a rejected command; authoritative state refreshed.") :
                     Self->State.AcceptedActionCount > 0 ? TEXT("Core accepted the player action; authoritative state refreshed.") : TEXT("Connected. Choose an option offered by Core.");
                 Self->Changed();

@@ -4,6 +4,7 @@
 
 #include "Migration/CoreBoundaryEvidence.h"
 #include "Dom/JsonObject.h"
+#include "Dom/JsonValue.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
@@ -103,6 +104,114 @@ bool FLiveCoreProjectionTest::RunTest(const FString& Parameters)
     Root->GetObjectField(TEXT("projection"))->GetObjectField(TEXT("battlefield_view"))->GetObjectField(TEXT("bounds"))->RemoveField(TEXT("max_x_inches"));
     TestFalse(TEXT("Missing dimensions fail without defaults"), LiveCoreProtocol::ReadProjection(Serialize(Root.ToSharedRef()), Session, State, Error));
     TestEqual(TEXT("Failed parse preserves previously valid board"), State.BoardBoundsInches.GetSize().X, 44.0);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreDecisionPresentationTest, "Warhammer.LiveCore.Unit.DecisionPresentationTransitions", Flags)
+bool FLiveCoreDecisionPresentationTest::RunTest(const FString& Parameters)
+{
+    FString Text, HiddenText, Error;
+    if (!Load(*this, TEXT("wire/view_initial/playerA.json"), Text) || !Load(*this, TEXT("wire/view_initial/playerB.json"), HiddenText)) { return false; }
+    E01::FReadError ReadError; TSharedPtr<FJsonObject> Root, HiddenRoot;
+    if (!E01::ParseObject(Text, Root, ReadError) || !E01::ParseObject(HiddenText, HiddenRoot, ReadError)) { AddError(TEXT("Committed projection fixture is invalid.")); return false; }
+    const FString Session = Root->GetStringField(TEXT("session_id"));
+    const auto Projection = Root->GetObjectField(TEXT("projection"));
+    const auto Finite = Projection->GetObjectField(TEXT("pending_decision"));
+    const auto Hidden = HiddenRoot->GetObjectField(TEXT("projection"))->GetObjectField(TEXT("pending_decision"));
+    const FString OfferedRequest = Finite->GetStringField(TEXT("request_id"));
+    FLiveCoreState State;
+    auto ReadPending = [&](const TCHAR* Label, const TSharedPtr<FJsonValue>& Pending)
+    {
+        // Derived parser controls use the real projection envelope/geometry, not
+        // fabricated gameplay or a claim about reachable live Core transitions.
+        Projection->SetField(TEXT("pending_decision"), Pending);
+        return TestTrue(Label, LiveCoreProtocol::ReadProjection(Serialize(Root.ToSharedRef()), Session, State, Error));
+    };
+    if (!ReadPending(TEXT("Own real finite request parsed"), MakeShared<FJsonValueObject>(Finite))) { return false; }
+    TestTrue(TEXT("Own finite request has its explicit presentation"), State.DecisionPresentation == ELiveCoreDecisionPresentation::FiniteOptions);
+    TestEqual(TEXT("Own original request ID retained"), State.RequestId, OfferedRequest);
+    TestEqual(TEXT("Only actual finite options retained"), State.Options.Num(), 4);
+
+    if (!ReadPending(TEXT("Actual Core-redacted pending shape parsed"), MakeShared<FJsonValueObject>(Hidden))) { return false; }
+    TestTrue(TEXT("Hidden differs from no pending"), State.DecisionPresentation == ELiveCoreDecisionPresentation::Hidden);
+    TestTrue(TEXT("Hidden placeholder does not expose a request ID"), State.RequestId.IsEmpty());
+    TestEqual(TEXT("Hidden exposes only the public hidden type"), State.RequestType, FString(TEXT("hidden_decision")));
+    TestEqual(TEXT("Hidden clears previous own options"), State.Options.Num(), 0);
+
+    if (!ReadPending(TEXT("Explicit null pending parsed"), MakeShared<FJsonValueNull>())) { return false; }
+    TestTrue(TEXT("Null pending has its own presentation"), State.DecisionPresentation == ELiveCoreDecisionPresentation::NoPending);
+    TestTrue(TEXT("No pending clears prior request identity and type"), State.RequestId.IsEmpty() && State.RequestType.IsEmpty());
+    TestEqual(TEXT("No pending has no stale options"), State.Options.Num(), 0);
+
+    for (bool bParameterized : { false, true })
+    {
+        const auto Other = MakeShared<FJsonObject>(*Finite);
+        Other->SetStringField(TEXT("actor_id"), TEXT("player-b"));
+        Other->SetBoolField(TEXT("is_parameterized"), bParameterized);
+        if (!ReadPending(TEXT("Visible other-actor request parsed"), MakeShared<FJsonValueObject>(Other))) { return false; }
+        TestTrue(TEXT("Visible other actor is neither hidden nor an own editor request"), State.DecisionPresentation == ELiveCoreDecisionPresentation::OtherActor);
+        TestEqual(TEXT("Other actor never offers this preview submission controls"), State.Options.Num(), 0);
+        TestEqual(TEXT("Visible public request identity is not replaced"), State.RequestId, OfferedRequest);
+    }
+    const auto Parameterized = MakeShared<FJsonObject>(*Finite);
+    Parameterized->SetBoolField(TEXT("is_parameterized"), true);
+    if (!ReadPending(TEXT("Own parameterized request parsed as unsupported presentation"), MakeShared<FJsonValueObject>(Parameterized))) { return false; }
+    TestTrue(TEXT("Own editor absence is explicit"), State.DecisionPresentation == ELiveCoreDecisionPresentation::ParameterizedUnsupported);
+    TestEqual(TEXT("Parameterized request never exposes finite submit buttons"), State.Options.Num(), 0);
+
+    const auto NoActor = MakeShared<FJsonObject>(*Finite);
+    NoActor->SetField(TEXT("actor_id"), MakeShared<FJsonValueNull>());
+    if (!ReadPending(TEXT("Public nullable actor accepted without inventing an owner"), MakeShared<FJsonValueObject>(NoActor))) { return false; }
+    TestTrue(TEXT("Null actor is not described as another actor"), State.DecisionPresentation == ELiveCoreDecisionPresentation::UnsupportedActor);
+    TestEqual(TEXT("Null actor has no submission controls"), State.Options.Num(), 0);
+
+    const auto EmptyFinite = MakeShared<FJsonObject>(*Finite);
+    EmptyFinite->SetArrayField(TEXT("options"), TArray<TSharedPtr<FJsonValue>>());
+    if (!ReadPending(TEXT("Schema-valid empty finite inventory parsed"), MakeShared<FJsonValueObject>(EmptyFinite))) { return false; }
+    TestTrue(TEXT("Empty inventory remains a visible finite request"), State.DecisionPresentation == ELiveCoreDecisionPresentation::FiniteOptions);
+    TestEqual(TEXT("No available option is invented for an empty inventory"), State.Options.Num(), 0);
+    if (!ReadPending(TEXT("Fresh own finite request recovers presentation"), MakeShared<FJsonValueObject>(Finite))) { return false; }
+    TestTrue(TEXT("Own finite presentation recovers after unsupported requests"), State.DecisionPresentation == ELiveCoreDecisionPresentation::FiniteOptions);
+    TestEqual(TEXT("Fresh finite inventory replaces the empty inventory"), State.Options.Num(), 4);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreDecisionInvalidationTest, "Warhammer.LiveCore.Unit.DecisionPresentationInvalidation", Flags)
+bool FLiveCoreDecisionInvalidationTest::RunTest(const FString& Parameters)
+{
+    FString Text, Other, Error;
+    if (!Load(*this, TEXT("wire/view_initial/playerA.json"), Text) || !Load(*this, TEXT("wire/view_initial/playerB.json"), Other)) { return false; }
+    E01::FReadError ReadError; TSharedPtr<FJsonObject> Root;
+    if (!E01::ParseObject(Text, Root, ReadError)) { AddError(TEXT("Committed projection fixture is invalid.")); return false; }
+    const FString Session = Root->GetStringField(TEXT("session_id"));
+    FLiveCoreState State;
+    if (!TestTrue(TEXT("Seed real actionable snapshot"), LiveCoreProtocol::ReadProjection(Text, Session, State, Error))) { return false; }
+    const FString Request = State.RequestId;
+    const uint64 Version = State.ProjectionVersion;
+    TestFalse(TEXT("Foreign session cannot publish a presentation"), LiveCoreProtocol::ReadProjection(Text, TEXT("foreign-session"), State, Error));
+    TestFalse(TEXT("Foreign viewer cannot publish a presentation"), LiveCoreProtocol::ReadProjection(Other, Session, State, Error));
+    State.SessionRevision = 2;
+    TestFalse(TEXT("Stale projection cannot publish a presentation"), LiveCoreProtocol::ReadProjection(Text, Session, State, Error));
+    TestTrue(TEXT("Rejected projections preserve the last atomic presentation"), State.DecisionPresentation == ELiveCoreDecisionPresentation::FiniteOptions);
+    TestEqual(TEXT("Rejected projections preserve original request identity"), State.RequestId, Request);
+    TestEqual(TEXT("Rejected projections do not advance delivery version"), State.ProjectionVersion, Version);
+
+    LiveCoreProtocol::InvalidateDecisionPresentation(State);
+    TestTrue(TEXT("Production refresh/unknown invalidation is not no-pending"), State.DecisionPresentation == ELiveCoreDecisionPresentation::Unavailable);
+    TestTrue(TEXT("Invalidation clears stale request identity and type"), State.RequestId.IsEmpty() && State.RequestType.IsEmpty());
+    TestEqual(TEXT("Invalidation clears actionable options"), State.Options.Num(), 0);
+    TestEqual(TEXT("Local invalidation does not change authoritative revision"), State.SessionRevision, int64(2));
+    TestEqual(TEXT("Local invalidation does not pretend a new projection arrived"), State.ProjectionVersion, Version);
+    State.SessionRevision = 1;
+    const auto Pending = Root->GetObjectField(TEXT("projection"))->GetObjectField(TEXT("pending_decision"));
+    Pending->SetStringField(TEXT("decision_type"), TEXT("hidden_decision"));
+    Pending->SetStringField(TEXT("schema_version"), TEXT("invalid-hidden-schema"));
+    TestFalse(TEXT("Malformed hidden projection cannot replace cleared controls"), LiveCoreProtocol::ReadProjection(Serialize(Root.ToSharedRef()), Session, State, Error));
+    TestTrue(TEXT("Failed parse leaves decision information unavailable"), State.DecisionPresentation == ELiveCoreDecisionPresentation::Unavailable);
+    TestTrue(TEXT("Failed parse cannot restore old or hidden identities"), State.RequestId.IsEmpty() && State.RequestType.IsEmpty() && State.Options.IsEmpty());
+    TestTrue(TEXT("Fresh authenticated projection recovers after invalidation"), LiveCoreProtocol::ReadProjection(Text, Session, State, Error));
+    TestTrue(TEXT("Recovered controls use current finite presentation"), State.DecisionPresentation == ELiveCoreDecisionPresentation::FiniteOptions);
+    TestEqual(TEXT("Recovered original request identity"), State.RequestId, Request);
     return true;
 }
 

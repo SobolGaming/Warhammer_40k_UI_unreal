@@ -1,0 +1,944 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "P1B_VISIBLE_PACKAGED_PREVIEW_EVIDENCE",
+  "status": "BOUNDED_VISIBLE_PREVIEW_PASS_WITH_LIMITS",
+  "recordedUtc": "2026-10-24T18:26:11.4779592Z",
+  "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+  "runtimeCore": {
+    "commit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+    "contract": "44.3.33"
+  },
+  "planningCore": {
+    "commit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "contract": "44.5.0",
+    "unmerged": true,
+    "runtimeAdopted": false
+  },
+  "method": {
+    "visualObserver": "Coordinator using supported Sky/ComputerUse APIs",
+    "authorWork": "Read-only saved-observation/result reconciliation and public evidence authoring; no GUI or process control.",
+    "successfulWorkflows": 3,
+    "failedAttempts": 2,
+    "standingVisibleAuthorizationActive": true,
+    "appAccessInitiallyTimedOutThenApproved": true,
+    "keyInput": "OS-injected press_key(f), not a human physical keyboard claim.",
+    "imagesReadOrPublishedByEvidenceAuthor": false,
+    "pngHashesComputed": false,
+    "fullP1Accepted": false
+  },
+  "attempts": [
+    {
+      "label": "Initial supervisor failure",
+      "status": "FAILED_PRESERVE_PRIVATE_EVIDENCE",
+      "startedUtc": "2026-10-24T17:03:00.6162760Z",
+      "finishedUtc": "2026-10-24T17:03:11.7667551Z",
+      "mode": "Managed",
+      "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+      "gameIdentityCaptured": false,
+      "gameExit": null,
+      "launcherExit": null,
+      "gameLifetimeSeconds": null,
+      "nominalVisibleTimeoutSeconds": 600,
+      "startupTimeoutSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": true,
+      "binaryBefore": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryAfter": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "configBefore": {
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934"
+      },
+      "configAfter": {
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934"
+      },
+      "configPairsIndependentlyCompared": true,
+      "parentEnvironmentRestored": false,
+      "stdoutComplete": true,
+      "stderrComplete": true,
+      "managedStopObserved": null,
+      "attachedHealthyAfterClient": null,
+      "attachedStopNoOp": null,
+      "attachedOwnedServerSurvived": null,
+      "ownedStop": null,
+      "coreCleanupConfirmed": false,
+      "failureStage": "OWNED_GAME_OBSERVATION",
+      "errorType": "System.Management.Automation.RuntimeException",
+      "cleanupErrors": [],
+      "nativeDiagnostics": {
+        "warningLines": null,
+        "errorLines": null,
+        "fatalLines": null,
+        "qualification": "No fresh native log was captured; zero diagnostics is not inferred."
+      },
+      "coreReceiptFinalObservations": {},
+      "artifacts": {
+        "result": {
+          "leaf": "result.json",
+          "bytes": 3985,
+          "sha256": "744E07CD4E91D6B9E00AF2D5B8086598EAFB9C5D4B89A36572C4DFBF8F98C274"
+        },
+        "launcherScript": {
+          "leaf": "Start-Client.ps1",
+          "bytes": 3661,
+          "sha256": "3F6056017083E7F571906026DA4D2CE2A5DC4EEBA5F452B970270C732D9420EC"
+        },
+        "supervisor": {
+          "leaf": "Invoke-P1bVisible.ps1",
+          "bytes": 25157,
+          "sha256": "4861A0BB459A89489DC5950C8B4CD1B9D74F032CF258814E799A7FF62A4DC8BB"
+        },
+        "raw": {
+          "stderr": {
+            "leaf": "launcher.stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          },
+          "stdout": {
+            "leaf": "launcher.stdout.log",
+            "bytes": 97,
+            "sha256": "853256F1D7C692E32FF8F3C6817A5C89FCD0D9075FF40702B25496FB1CAFB502"
+          }
+        }
+      }
+    },
+    {
+      "label": "Application-access timeout",
+      "status": "FAILED_PRESERVE_PRIVATE_EVIDENCE",
+      "startedUtc": "2026-10-24T17:06:17.6563957Z",
+      "finishedUtc": "2026-10-24T17:16:29.6400268Z",
+      "mode": "Managed",
+      "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+      "gameIdentityCaptured": true,
+      "gameExit": null,
+      "launcherExit": null,
+      "gameLifetimeSeconds": 600.3487009,
+      "nominalVisibleTimeoutSeconds": 600,
+      "startupTimeoutSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "forcedGameCleanup": true,
+      "forcedLauncherCleanup": false,
+      "binaryBefore": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryAfter": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "configBefore": {
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D"
+      },
+      "configAfter": {
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D"
+      },
+      "configPairsIndependentlyCompared": true,
+      "parentEnvironmentRestored": true,
+      "stdoutComplete": true,
+      "stderrComplete": true,
+      "managedStopObserved": null,
+      "attachedHealthyAfterClient": null,
+      "attachedStopNoOp": null,
+      "attachedOwnedServerSurvived": null,
+      "ownedStop": {
+        "status": "ALREADY_STOPPED",
+        "owned": true
+      },
+      "coreCleanupConfirmed": true,
+      "failureStage": "OWNED_GAME_OBSERVATION",
+      "errorType": "System.TimeoutException",
+      "cleanupErrors": [],
+      "nativeDiagnostics": {
+        "warningLines": 2,
+        "errorLines": 0,
+        "fatalLines": 0,
+        "warningCategories": [
+          "Unspecified actor class at spawn",
+          "Light mobility"
+        ],
+        "qualification": "Physical native-log severity-line scan; no raw log body published."
+      },
+      "coreReceiptFinalObservations": {
+        "managedReceiptPath": {
+          "status": "STOPPED",
+          "owned": true,
+          "forcedTermination": false,
+          "descriptor": {
+            "leaf": "receipt.json",
+            "bytes": 2328,
+            "sha256": "1194DB8CD4E1484CB623420E9363F1640A512D6A3099FC5A17088F07F9395427"
+          }
+        }
+      },
+      "artifacts": {
+        "result": {
+          "leaf": "result.json",
+          "bytes": 6303,
+          "sha256": "52B966097771DA97202A2812DA98A0BC8B7E3F925440DFD52A4F891608242971"
+        },
+        "launcherScript": {
+          "leaf": "Start-Client.ps1",
+          "bytes": 3661,
+          "sha256": "3F6056017083E7F571906026DA4D2CE2A5DC4EEBA5F452B970270C732D9420EC"
+        },
+        "supervisor": {
+          "leaf": "Invoke-P1bVisible.ps1",
+          "bytes": 28123,
+          "sha256": "0FFAB656133C056E2213985052BF8B6DA16661B94A1729503C1307602029FC6A"
+        },
+        "raw": {
+          "nativeLog": {
+            "leaf": "native.log",
+            "bytes": 86649,
+            "sha256": "3BC77B8D6CAFBD87ABE2EBB32D401D9E71E51D7BC743EA20886B90CB8A48BD11"
+          },
+          "stdout": {
+            "leaf": "launcher.stdout.log",
+            "bytes": 97,
+            "sha256": "853256F1D7C692E32FF8F3C6817A5C89FCD0D9075FF40702B25496FB1CAFB502"
+          },
+          "running": {
+            "leaf": "running.json",
+            "bytes": 3520,
+            "sha256": "91F0D39CF3AD5BA4FEEF29238B39E281237520A6B28A897920F40E92F3E6F870"
+          },
+          "stderr": {
+            "leaf": "launcher.stderr.log",
+            "bytes": 298,
+            "sha256": "87CF327AF1380BF1EDD07A440D0904BEACE1952D4BD979699C26F8CEBC35CB99"
+          },
+          "managedCoreReceipt": {
+            "leaf": "managedCoreReceipt.json",
+            "bytes": 2328,
+            "sha256": "1194DB8CD4E1484CB623420E9363F1640A512D6A3099FC5A17088F07F9395427"
+          }
+        }
+      }
+    },
+    {
+      "label": "Managed preview",
+      "status": "NORMAL_MANUAL_LAUNCHER_ROUTE_CLOSED_UI_RESULTS_SEPARATE",
+      "startedUtc": "2026-10-24T18:16:29.6974893Z",
+      "finishedUtc": "2026-10-24T18:19:25.4997545Z",
+      "mode": "Managed",
+      "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+      "gameIdentityCaptured": true,
+      "gameExit": 0,
+      "launcherExit": 0,
+      "gameLifetimeSeconds": 164.3269328,
+      "nominalVisibleTimeoutSeconds": 600,
+      "startupTimeoutSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "binaryBefore": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryAfter": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "configBefore": {
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1"
+      },
+      "configAfter": {
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1"
+      },
+      "configPairsIndependentlyCompared": true,
+      "parentEnvironmentRestored": true,
+      "stdoutComplete": true,
+      "stderrComplete": true,
+      "managedStopObserved": {
+        "status": "STOPPED",
+        "owned": true,
+        "forcedTermination": false
+      },
+      "attachedHealthyAfterClient": null,
+      "attachedStopNoOp": null,
+      "attachedOwnedServerSurvived": null,
+      "ownedStop": {
+        "status": "ALREADY_STOPPED",
+        "owned": true
+      },
+      "coreCleanupConfirmed": true,
+      "failureStage": null,
+      "errorType": null,
+      "cleanupErrors": [],
+      "nativeDiagnostics": {
+        "warningLines": 2,
+        "errorLines": 0,
+        "fatalLines": 0,
+        "warningCategories": [
+          "Unspecified actor class at spawn",
+          "Light mobility"
+        ],
+        "qualification": "Physical native-log severity-line scan; no raw log body published."
+      },
+      "coreReceiptFinalObservations": {
+        "managedReceiptPath": {
+          "status": "STOPPED",
+          "owned": true,
+          "forcedTermination": false,
+          "descriptor": {
+            "leaf": "receipt.json",
+            "bytes": 2329,
+            "sha256": "E2B97D090FAD82D5B1B96A6D2830A048B7E4D9062E233A86E831CC5D5B25D082"
+          }
+        }
+      },
+      "artifacts": {
+        "result": {
+          "leaf": "result.json",
+          "bytes": 6050,
+          "sha256": "F81357D9A06709F0CF49DAC9060DD4A810DC62296F7D284B2B40359DB863F0A7"
+        },
+        "launcherScript": {
+          "leaf": "Start-Client.ps1",
+          "bytes": 3661,
+          "sha256": "3F6056017083E7F571906026DA4D2CE2A5DC4EEBA5F452B970270C732D9420EC"
+        },
+        "supervisor": {
+          "leaf": "Invoke-P1bVisible.ps1",
+          "bytes": 28123,
+          "sha256": "0FFAB656133C056E2213985052BF8B6DA16661B94A1729503C1307602029FC6A"
+        },
+        "raw": {
+          "stderr": {
+            "leaf": "launcher.stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          },
+          "stdout": {
+            "leaf": "launcher.stdout.log",
+            "bytes": 97,
+            "sha256": "853256F1D7C692E32FF8F3C6817A5C89FCD0D9075FF40702B25496FB1CAFB502"
+          },
+          "nativeLog": {
+            "leaf": "native.log",
+            "bytes": 91455,
+            "sha256": "82EBED790732A52B33161E9B43677DFEE633F8088954966DD882B70BEAE210D0"
+          },
+          "running": {
+            "leaf": "running.json",
+            "bytes": 3520,
+            "sha256": "3A0F87D78FB6E162CBA27DFCFC0ED2ED159155EBCA117F9860C68CA3F5380BB8"
+          },
+          "managedCoreReceipt": {
+            "leaf": "managedCoreReceipt.json",
+            "bytes": 2329,
+            "sha256": "E2B97D090FAD82D5B1B96A6D2830A048B7E4D9062E233A86E831CC5D5B25D082"
+          }
+        }
+      }
+    },
+    {
+      "label": "Attach preview",
+      "status": "NORMAL_MANUAL_LAUNCHER_ROUTE_CLOSED_UI_RESULTS_SEPARATE",
+      "startedUtc": "2026-10-24T18:19:43.2170477Z",
+      "finishedUtc": "2026-10-24T18:20:52.3556076Z",
+      "mode": "Attach",
+      "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+      "gameIdentityCaptured": true,
+      "gameExit": 0,
+      "launcherExit": 0,
+      "gameLifetimeSeconds": 57.2529535,
+      "nominalVisibleTimeoutSeconds": 600,
+      "startupTimeoutSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "binaryBefore": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryAfter": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "configBefore": {
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404"
+      },
+      "configAfter": {
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404"
+      },
+      "configPairsIndependentlyCompared": true,
+      "parentEnvironmentRestored": true,
+      "stdoutComplete": true,
+      "stderrComplete": true,
+      "managedStopObserved": null,
+      "attachedHealthyAfterClient": {
+        "status": "ATTACHED_HEALTHY",
+        "owned": false
+      },
+      "attachedStopNoOp": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false
+      },
+      "attachedOwnedServerSurvived": true,
+      "ownedStop": {
+        "status": "STOPPED",
+        "owned": true,
+        "forcedTermination": false
+      },
+      "coreCleanupConfirmed": true,
+      "failureStage": null,
+      "errorType": null,
+      "cleanupErrors": [],
+      "nativeDiagnostics": {
+        "warningLines": 2,
+        "errorLines": 0,
+        "fatalLines": 0,
+        "warningCategories": [
+          "Unspecified actor class at spawn",
+          "Light mobility"
+        ],
+        "qualification": "Physical native-log severity-line scan; no raw log body published."
+      },
+      "coreReceiptFinalObservations": {
+        "separateCoreReceiptPath": {
+          "status": "STOPPED",
+          "owned": true,
+          "forcedTermination": false,
+          "descriptor": {
+            "leaf": "receipt.json",
+            "bytes": 2329,
+            "sha256": "0AA91D83F2069455E2D0A5C79D2DBD36F81810BB57A9900B72B6463FA6B8EBC7"
+          }
+        }
+      },
+      "artifacts": {
+        "result": {
+          "leaf": "result.json",
+          "bytes": 6695,
+          "sha256": "817A01AA9B2850E761AF746E5BF109A74E6519CBFE81361C7E65F88FFA5B6872"
+        },
+        "launcherScript": {
+          "leaf": "Start-Client.ps1",
+          "bytes": 3661,
+          "sha256": "3F6056017083E7F571906026DA4D2CE2A5DC4EEBA5F452B970270C732D9420EC"
+        },
+        "supervisor": {
+          "leaf": "Invoke-P1bVisible.ps1",
+          "bytes": 28123,
+          "sha256": "0FFAB656133C056E2213985052BF8B6DA16661B94A1729503C1307602029FC6A"
+        },
+        "raw": {
+          "running": {
+            "leaf": "running.json",
+            "bytes": 3817,
+            "sha256": "A4F27F3EB9D81D06F93099546E65BE49DAD40969236F1B8389D167EF76E7F5AB"
+          },
+          "nativeLog": {
+            "leaf": "native.log",
+            "bytes": 90513,
+            "sha256": "29E9602F43EA10B4D74F1DDFBB8ED93CE31D387E13118DE1835CF2455404E69E"
+          },
+          "separateCoreReceipt": {
+            "leaf": "separateCoreReceipt.json",
+            "bytes": 2329,
+            "sha256": "0AA91D83F2069455E2D0A5C79D2DBD36F81810BB57A9900B72B6463FA6B8EBC7"
+          },
+          "stderr": {
+            "leaf": "launcher.stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          },
+          "stdout": {
+            "leaf": "launcher.stdout.log",
+            "bytes": 96,
+            "sha256": "B0734CA26D0DB8A588FE2F3EF2AD3CB79D48065D042CC277EAC62D61D786E16C"
+          }
+        }
+      }
+    },
+    {
+      "label": "Attach HTTP401 diagnostic",
+      "status": "NORMAL_MANUAL_LAUNCHER_ROUTE_CLOSED_UI_RESULTS_SEPARATE",
+      "startedUtc": "2026-10-24T18:21:04.9055714Z",
+      "finishedUtc": "2026-10-24T18:22:13.0614735Z",
+      "mode": "Attach",
+      "sourceHead": "388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee",
+      "gameIdentityCaptured": true,
+      "gameExit": 0,
+      "launcherExit": 0,
+      "gameLifetimeSeconds": 56.2751614,
+      "nominalVisibleTimeoutSeconds": 600,
+      "startupTimeoutSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "binaryBefore": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryAfter": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332414464,
+        "sha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A"
+      },
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "configBefore": {
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934"
+      },
+      "configAfter": {
+        "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+        "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+        "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+        "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934"
+      },
+      "configPairsIndependentlyCompared": true,
+      "parentEnvironmentRestored": true,
+      "stdoutComplete": true,
+      "stderrComplete": true,
+      "managedStopObserved": null,
+      "attachedHealthyAfterClient": {
+        "status": "ATTACHED_HEALTHY",
+        "owned": false
+      },
+      "attachedStopNoOp": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false
+      },
+      "attachedOwnedServerSurvived": true,
+      "ownedStop": {
+        "status": "STOPPED",
+        "owned": true,
+        "forcedTermination": false
+      },
+      "coreCleanupConfirmed": true,
+      "failureStage": null,
+      "errorType": null,
+      "cleanupErrors": [],
+      "nativeDiagnostics": {
+        "warningLines": 2,
+        "errorLines": 0,
+        "fatalLines": 0,
+        "warningCategories": [
+          "Unspecified actor class at spawn",
+          "Light mobility"
+        ],
+        "qualification": "Physical native-log severity-line scan; no raw log body published."
+      },
+      "coreReceiptFinalObservations": {
+        "separateCoreReceiptPath": {
+          "status": "STOPPED",
+          "owned": true,
+          "forcedTermination": false,
+          "descriptor": {
+            "leaf": "receipt.json",
+            "bytes": 2327,
+            "sha256": "1F34809D29106C7AF8E0A328801DA3B5AE5EEBC1C37BE767B40314231929C63D"
+          }
+        }
+      },
+      "artifacts": {
+        "result": {
+          "leaf": "result.json",
+          "bytes": 6712,
+          "sha256": "C5A24276DBD69588B3BB35FC318F4B58E4CB5D0595DD21C0B9A932C633C7BBD1"
+        },
+        "launcherScript": {
+          "leaf": "Start-Client.ps1",
+          "bytes": 3661,
+          "sha256": "3F6056017083E7F571906026DA4D2CE2A5DC4EEBA5F452B970270C732D9420EC"
+        },
+        "supervisor": {
+          "leaf": "Invoke-P1bVisible.ps1",
+          "bytes": 28123,
+          "sha256": "0FFAB656133C056E2213985052BF8B6DA16661B94A1729503C1307602029FC6A"
+        },
+        "raw": {
+          "stderr": {
+            "leaf": "launcher.stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          },
+          "stdout": {
+            "leaf": "launcher.stdout.log",
+            "bytes": 96,
+            "sha256": "0727CA44F1181AF0D66A46D14287E4989763DF2A63500D4629FD84CDCBE9CF18"
+          },
+          "separateCoreReceipt": {
+            "leaf": "separateCoreReceipt.json",
+            "bytes": 2327,
+            "sha256": "1F34809D29106C7AF8E0A328801DA3B5AE5EEBC1C37BE767B40314231929C63D"
+          },
+          "nativeLog": {
+            "leaf": "native.log",
+            "bytes": 90395,
+            "sha256": "8697309E2047A85308D3111A1AB5158A99BFDFC7344662D3C934037FBFF7205E"
+          },
+          "running": {
+            "leaf": "running.json",
+            "bytes": 3834,
+            "sha256": "790CEA72B8899751AF79EA547F30BEE37D7707C75A942464BFA936FECE6A2E01"
+          }
+        }
+      }
+    }
+  ],
+  "firstFailureFollowup": {
+    "originalResultFlagsPreserved": true,
+    "originalCoreCleanupConfirmed": false,
+    "originalParentEnvironmentRestored": false,
+    "laterAgentObservation": "Original retained process identities/start times were checked and already absent; existing Stop helper then returned STOPPED without forced termination.",
+    "laterReceiptStatus": "STOPPED",
+    "laterReceiptOwned": true,
+    "laterReceiptForcedTermination": false,
+    "laterStoppedUtc": "2026-10-24T17:04:34.5597313Z",
+    "artifact": {
+      "leaf": "receipt.json",
+      "bytes": 2327,
+      "sha256": "681A4CBD0B2EE9D2E6137A046F6FD20C154880B3544F1228E9087CAD9975761C"
+    },
+    "limit": "Later Core cleanup is separate from the original failed supervisor flags; no new process query or environment-restoration claim is inferred."
+  },
+  "timeoutQualification": {
+    "nominalSeconds": 600,
+    "observedGameLifetimeSeconds": 600.3487009,
+    "pollingOvershootSeconds": 0.3487009,
+    "result": "FAILED, Game forced closed and Core cleanup confirmed; application-access approval timed out before useful observation."
+  },
+  "managedUi": {
+    "connectCreate": true,
+    "displayedChoice": "First offered fixed secondary-mission choice",
+    "acceptedCommitted": true,
+    "acceptedPlayerActions": 1,
+    "revisionAfter": 2,
+    "explicitRefresh": true,
+    "hiddenDecisionExplained": true,
+    "readableBoardFontsTerrainObjectives": true,
+    "boardFocusHelpUpdates": true,
+    "wheelZoom": true,
+    "injectedFRestoredFrame": true,
+    "uiFocusedFDoesNotFrame": true,
+    "panelWheelDoesNotZoom": true,
+    "refreshPreservesView": true,
+    "frameButtonRestoresFrame": true,
+    "captureDimensionsObserved": [
+      [
+        2882,
+        1668
+      ],
+      [
+        3840,
+        2088
+      ],
+      [
+        2882,
+        1668
+      ]
+    ],
+    "cornerDragChangedSize": false,
+    "nativeMaximizeRestoreObserved": true,
+    "transitionFrameExcluded": true,
+    "originalObservationCloseStatus": "REQUESTED_NEXT",
+    "normalCloseEvidence": "Later closed Game/launcher results, not the earlier REQUESTED_NEXT field.",
+    "observationArtifact": {
+      "leaf": "managed-observations.json",
+      "bytes": 1016,
+      "sha256": "7609774027855E3CA7B221CE74C9920151C7F33C61FE9F4DD86EC857C0949BAD"
+    }
+  },
+  "attachUi": {
+    "connectCreate": true,
+    "displayedChoice": "Offered Tactical secondary-mission choice",
+    "acceptedCommitted": true,
+    "acceptedPlayerActions": 1,
+    "revisionAfter": 2,
+    "explicitRefresh": true,
+    "hiddenDecisionExplained": true,
+    "readableBoardFonts": true,
+    "originalObservationCloseStatus": "REQUESTED_NEXT",
+    "normalCloseEvidence": "Later closed Game/launcher results.",
+    "serverHealthAfterClientHttpStatus": 200,
+    "healthProvenance": "Coordinator observation plus ATTACHED_HEALTHY helper outcome.",
+    "observationArtifact": {
+      "leaf": "attach-observations.json",
+      "bytes": 390,
+      "sha256": "C88C0301BDB961A803D20FA4DC9764673799943592723CE6EF912022D093AEC6"
+    }
+  },
+  "httpDiagnostic": {
+    "intentionalInvalidChildViewerCredential": true,
+    "credentialValueRetained": false,
+    "actualHttpStatus": 401,
+    "actualErrorCode": "authentication_required",
+    "displayedMessage": "A valid bearer credential is required.",
+    "startCommandCommittedBeforeProjectionFailure": true,
+    "acceptedPlayerActions": 0,
+    "projectionUnavailable": true,
+    "noBoardInvented": true,
+    "noFiniteOptions": true,
+    "originalObservationCloseStatus": "REQUESTED_NEXT",
+    "normalCloseEvidence": "Later closed Game/launcher results.",
+    "serverHealthAfterClientHttpStatus": 200,
+    "observationArtifact": {
+      "leaf": "http-observations.json",
+      "bytes": 587,
+      "sha256": "CAAAD3759891281015E237D7864647C357670E06722DC0C9E17E428008791604"
+    }
+  },
+  "captures": {
+    "count": 20,
+    "manifestArtifact": {
+      "leaf": "captures.json",
+      "bytes": 4220,
+      "sha256": "F2F939B608F37628262199BB99257D142E4FFE8C4509320E8691B593A68C4BAA"
+    },
+    "privateDescriptors": [
+      {
+        "label": "managed-startup",
+        "privateLeaf": "01-managed-startup.png",
+        "bytesFromFileMetadata": 151403,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:16:58.219Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-connected-offers",
+        "privateLeaf": "02-managed-connected-offers.png",
+        "bytesFromFileMetadata": 232469,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:17:25.008Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-choice-pending-controls-cleared",
+        "privateLeaf": "03-managed-choice-pending-controls-cleared.png",
+        "bytesFromFileMetadata": 212453,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:17:34.592Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-accepted-hidden-board-focus",
+        "privateLeaf": "04-managed-accepted-hidden-board-focus.png",
+        "bytesFromFileMetadata": 219653,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:17:40.102Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-wheel-zoom",
+        "privateLeaf": "05-managed-wheel-zoom.png",
+        "bytesFromFileMetadata": 254274,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:17:45.206Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-f-restored-frame",
+        "privateLeaf": "06-managed-f-restored-frame.png",
+        "bytesFromFileMetadata": 219309,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:17:58.826Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-zoom-before-refresh",
+        "privateLeaf": "07-managed-zoom-before-refresh.png",
+        "bytesFromFileMetadata": 241135,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:18:02.573Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-ui-f-does-not-frame",
+        "privateLeaf": "08-managed-ui-f-does-not-frame.png",
+        "bytesFromFileMetadata": 242264,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:18:08.134Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-panel-wheel-isolated",
+        "privateLeaf": "09-managed-panel-wheel-isolated.png",
+        "bytesFromFileMetadata": 242312,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:18:12.637Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-frame-button",
+        "privateLeaf": "10-managed-frame-button.png",
+        "bytesFromFileMetadata": 220212,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:18:17.152Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "managed-resized-frame",
+        "privateLeaf": "11-managed-resized-frame.png",
+        "bytesFromFileMetadata": 219423,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:18:23.402Z",
+        "qualification": "Corner-drag attempt did not change size; not resize proof."
+      },
+      {
+        "label": "managed-maximized-native-resize",
+        "privateLeaf": "12-managed-maximized-native-resize.png",
+        "bytesFromFileMetadata": 340780,
+        "widthFromCaptureRecord": 3840,
+        "heightFromCaptureRecord": 2088,
+        "observedUtc": "2026-10-24T18:18:57.825Z",
+        "qualification": "Transition frame; excluded from stable-render evidence."
+      },
+      {
+        "label": "managed-maximized-stable",
+        "privateLeaf": "13-managed-maximized-stable.png",
+        "bytesFromFileMetadata": 304537,
+        "widthFromCaptureRecord": 3840,
+        "heightFromCaptureRecord": 2088,
+        "observedUtc": "2026-10-24T18:19:03.599Z",
+        "qualification": "Separate stable maximized observation."
+      },
+      {
+        "label": "managed-restored-size-before-close",
+        "privateLeaf": "14-managed-restored-size-before-close.png",
+        "bytesFromFileMetadata": 200185,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:19:22.967Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "attach-startup",
+        "privateLeaf": "15-attach-startup.png",
+        "bytesFromFileMetadata": 152516,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:19:59.487Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "attach-connected-offers",
+        "privateLeaf": "16-attach-connected-offers.png",
+        "bytesFromFileMetadata": 232499,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:20:24.308Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "attach-action-result",
+        "privateLeaf": "17-attach-action-result.png",
+        "bytesFromFileMetadata": 219063,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:20:39.367Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "attach-explicit-refresh-hidden",
+        "privateLeaf": "18-attach-explicit-refresh-hidden.png",
+        "bytesFromFileMetadata": 218293,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:20:50.032Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "http-diagnostic-startup",
+        "privateLeaf": "19-http-diagnostic-startup.png",
+        "bytesFromFileMetadata": 152830,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:21:32.726Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      },
+      {
+        "label": "http-401-authentication-required",
+        "privateLeaf": "20-http-401-authentication-required.png",
+        "bytesFromFileMetadata": 165656,
+        "widthFromCaptureRecord": 2882,
+        "heightFromCaptureRecord": 1668,
+        "observedUtc": "2026-10-24T18:22:10.148Z",
+        "qualification": "Private observation capture; no public image or independent image-body inspection."
+      }
+    ],
+    "imageBodies": "Not read, rehashed, embedded or published by this author. Dimensions/labels come from the existing capture record; byte lengths come from file metadata."
+  },
+  "supportingArtifacts": {
+    "sourceReviewRecord": {
+      "leaf": "2026-10-24-p1b-source-reviews.json",
+      "bytes": 6122,
+      "sha256": "F16AE934A75783A372C2F10F835B48E19F935EADA0FDABA7E59F8C7196F4D6EF"
+    },
+    "nativeCheckRecord": {
+      "leaf": "2026-10-24-p1b-native-checks.json",
+      "bytes": 22419,
+      "sha256": "F7267A7726DDA9B4AD490EC48975F0C4F0EF994FF6F5A8E3187E6A9BC7D64996"
+    }
+  },
+  "limits": [
+    "Pass is bounded to the three observed packaged Windows workflows, not full P1 or a full battle.",
+    "No held RMB/MMB API was available; no real held-drag orbit/pan claim. OS application switching, adversarial/world teardown acceptance, Linux and clean-machine delivery remain unverified.",
+    "No gameplay unit was placed or moved; initial undeployed models remain unplaced.",
+    "The first corner-drag capture label does not prove resize. The maximization transition frame is not stable-render evidence; a separate stable capture was used.",
+    "Historical manual F failure remains unchanged. Current injected-F success is new bounded evidence, not a retroactive correction.",
+    "Raw logs, receipt bodies, private identities, credentials, accounts and images remain private."
+  ]
+}

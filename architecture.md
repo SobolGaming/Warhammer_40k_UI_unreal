@@ -2,7 +2,7 @@
 
 This repository is a C++ Unreal Engine 5.8 presentation client for the separately maintained Python rules Core. It displays authenticated projections and collects player intent; **Core alone validates rules and changes authoritative game state**.
 
-This guide describes the source tree and current component boundaries. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns scope, priorities and implementation/verification status. The current P1a increment is adding Windows standalone packaging and non-visible checks; source described here is not, by itself, evidence that a package was built or accepted. Use the [README](README.md) for supported commands and the [evidence index](docs/plans/README.md) for observed results.
+This guide describes the source tree and current component boundaries. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns scope, priorities and implementation/verification status. P1b completed bounded Windows build, affected-source review, non-visible checks and visible packaged Managed/Attach workflows for typed decision presentation/invalidation, immediate-submission labels and focus guidance. These results cover the limited setup-choice preview. Use the [README](README.md) for commands and the [evidence index](docs/plans/README.md) for exact results and remaining limits.
 
 ## Repository map
 
@@ -34,7 +34,7 @@ docs/plans/                         Canonical plan, supporting research and publ
 
 `Binaries/`, `Intermediate/`, `Saved/`, `DerivedDataCache/` and IDE output are generated and ignored. Authored `Source/`, `Config/`, `Content/` and `Plugins/` are tracked. A runnable package is generated output, not a second source tree.
 
-The sibling [Warhammer_40k_AI](../Warhammer_40k_AI/) checkout is reference-only. The selected Core source is `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract **44.3.33**. The sibling [Warhammer_40k_UI_arcade](../Warhammer_40k_UI_arcade/) is the confirmed Python UI parity reference at `5088c1c49dcaff29eb59fb64b3063d30214dde73`; its older Core contract requires explicit adaptation. Neither sibling is edited as a side effect of client work.
+The sibling [Warhammer_40k_AI](../Warhammer_40k_AI/) checkout is reference-only. The tested runtime remains `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract **44.3.33**. Fetched development source `4f9bef0df2fb974d1285232a1009b8781926361d`, contract **44.5.0**, is an unmerged Core PR #591 planning/adoption candidate; it has not replaced the runtime or inherited its results. The [capability inventory](docs/plans/research/2026-10-24-latest-core-capabilities.md) links that exact source rather than treating the local checkout as the newer code. The sibling [Warhammer_40k_UI_arcade](../Warhammer_40k_UI_arcade/) is the confirmed Python UI baseline at `5088c1c49dcaff29eb59fb64b3063d30214dde73`. Arcade parity is the initial useful milestone; the ultimate target includes all latest-selected Core-supported public/editor/data/service capabilities and automatic-rule presentation. Neither sibling is edited as a side effect of client work.
 
 ## Components and authority
 
@@ -45,7 +45,7 @@ flowchart LR
         Panel[Slate session and choices panel]
         Surface[Slate board input surface]
         Session[FLiveCoreSession and LiveCoreProtocol]
-        State[Viewer-scoped FLiveCoreState]
+        State[Viewer-scoped state and typed decision status]
         Scene[FLiveCoreScene and world actors]
         Camera[FTabletopCamera]
         Data[Pinned runtime JSON loader]
@@ -80,13 +80,15 @@ The live client currently uses one development principal, **player-a**, and a lo
 |---|---|
 | `LiveCoreProtocol` | Validate the supported endpoint, metadata/build/contract identity, exact revisions, receipts and viewer-scoped projections; construct public command envelopes. |
 | `FLiveCoreSession` | Serialize asynchronous HTTP operations, retain command identity, manage busy/unknown/error state and publish `OnChanged` on the game thread. |
-| `FLiveCoreState` | Hold the current viewer's offered choices, board/terrain/objective/placed-model DTOs, known outcome and applied projection identity. It is a presentation snapshot, not a game rules model. |
+| `FLiveCoreState` | Hold the current viewer's offered choices, typed decision presentation, board/terrain/objective/placed-model DTOs, known outcome and applied projection identity. It is a presentation snapshot, not a game rules model. |
 
 The code reuses strict JSON/revision/receipt helpers from [Migration/CoreBoundaryEvidence](Source/WarhammerClient/Private/Migration/CoreBoundaryEvidence.h). The `Migration` directory therefore contains some live dependencies as well as proof code; it cannot be removed wholesale as test-only material.
 
 Only one request is active at a time. HTTP completion is delivered on the game thread, and weak callbacks plus generation/request checks discard obsolete completions after shutdown. Credentials stay in memory/environment and are not rendered or written into command logs. Current reads have a 30-second request timeout and mutations 120 seconds; these are transport budgets, not a Core responsiveness guarantee. Response decoding/parsing rejects unsupported or incompatible content rather than inventing state.
 
 `SessionRevision` can advance when a valid command receipt arrives. `ProjectionRevision` advances only after the corresponding projection is validated. `ProjectionVersion` is a local delivery counter for successfully applied snapshots, including a same-revision refresh. The scene uses that delivery counter to refresh its world cache; a receipt alone never pretends that new geometry has arrived.
+
+`ELiveCoreDecisionPresentation` separates unavailable data, no pending decision, a hidden placeholder, an unsupported parameterized editor, another actor, an unsupported actor and own finite options. Empty finite inventories stay distinct from no pending decision. Only a validated player-a finite request supplies buttons. Hidden placeholders yield no actor, request identity or options for display. `InvalidateDecisionPresentation` clears local options/request identity/type together before refresh, on finite dispatch and on unknown completion or projection-parse failure; it preserves the separately retained command and authoritative revision. A valid atomic snapshot restores the current presentation. These are UI states, not inferred legality or permission to fetch another viewer's data.
 
 ### Create, submit and refresh
 
@@ -114,8 +116,9 @@ sequenceDiagram
     Core-->>Session: Viewer-scoped state and offered options
     Session-->>UI: OnChanged
     Session-->>Scene: Applied projection version
-    Player->>UI: Select a currently offered option
+    Player->>UI: Press Submit now for an offered option
     UI->>Session: Submit original option ID
+    Session->>Session: Invalidate local decision controls
     Session->>Core: POST exact command envelope and revision
     alt Known receipt with authoritative outcome flags
         Core-->>Session: Accepted or rejected recorded outcome
@@ -129,7 +132,7 @@ sequenceDiagram
     end
 ```
 
-The currently demonstrated action is `select_secondary_missions`; this is a finite setup choice, not general gameplay. A current offered option's original request/option IDs and revision are preserved. The client never creates a legal choice or a movement witness merely to satisfy its UI. Known rejection diagnostics remain distinct from transient projection-read errors. A failed refresh clears actionable options; stale choices are not re-enabled.
+The currently demonstrated action is `select_secondary_missions`; this is a finite setup choice, not general gameplay. P1b labels each button **Submit now: …** because clicking dispatches immediately without a second confirmation step. A current offered option's original request/option IDs and revision are preserved. The client never creates a legal choice or a movement witness merely to satisfy its UI. Known rejection diagnostics remain distinct from transient projection-read errors. A failed refresh clears actionable options and request presentation; stale choices are not re-enabled.
 
 An uncertain command retains its exact envelope, ID and credential scope for explicit reconciliation. **Uncertain session creation is different:** the create operation has no retry identity in this client, so it blocks automatic retry/recreation. HTTP status and available Core messages remain visible; a timeout or generic error envelope is not treated as proof of rollback.
 
@@ -141,7 +144,7 @@ An uncertain command retains its exact envelope, ID and credential scope for exp
 
 
 - `BeginPlay` initializes the session object, required meshes/material, transient camera and light. Tick attaches the Slate overlay when the viewport/controller is available.
-- `SLiveCorePanel` contains endpoint, create, current options, outcome/errors, refresh, reconcile and Frame board controls. The board occupies a separate hit-testable camera surface beside the panel.
+- `SLiveCorePanel` contains endpoint, create, typed decision explanations, immediate-submit options, outcome/errors, refresh, reconcile and Frame board controls. The board occupies a separate hit-testable camera surface beside the panel.
 - `Changed` rebuilds presentation actors only for a newly applied session/projection delivery. The board is a flat display mesh; real terrain polygon boundaries are thin raised outlines; objectives and placed models use discs. These meshes have no gameplay collision and do not define legality.
 - Core coordinates are inches. `DisplayPoint` recenters the board, converts to centimetres and reverses the table Y axis for Unreal display. Models without authoritative poses stay absent; no deployment position is fabricated.
 - Teardown unbinds session/application callbacks, detaches widgets before freeing their scene, cancels active HTTP, releases owned input and destroys transient actors. Mesh/material references are held strongly while the scene needs them.
@@ -155,6 +158,8 @@ The renderer loads `/Engine/BasicShapes/Cube`, `Cylinder` and `BasicShapeMateria
 The live Slate surface reuses [E02InputPolicy](Source/WarhammerClient/Private/Migration/E02InputPolicy.h) as a local input reducer. Slate owns hit testing, focus and actual capture; the reducer returns orbit/pan/zoom/frame effects. RMB orbits, MMB pans, focused-board wheel zooms, and F or the panel button frames the board. Panel input stays with its controls; only explicit action controls submit Core requests. Camera gestures never submit game commands. Capture is tracked by exact Slate user and pointer, and cancellation handles Escape, focus/capture loss, application events and layout changes.
 
 Same-bounds HTTP refresh preserves navigation; a layout resize may deliberately reframe. The current input implementation is `UIOnly` with an explicit camera surface, not a global input preprocessor or new player pawn.
+
+The board help overlay reads actual Slate keyboard focus: **Click board for keyboard focus** changes to **Board has keyboard focus**. Focus arrival/loss invalidates its paint so the help follows the surface rather than relying on remembered clicks. This guidance does not transfer panel focus or change camera/Core ownership.
 
 ## Configuration, runtime input and packaging
 
@@ -173,7 +178,7 @@ The ordinary [Game target](Source/WarhammerClient.Target.cs) is the standalone t
 
 [DefaultEngine.ini](Config/DefaultEngine.ini) explicitly selects `WarhammerClientEditor` and `WarhammerClient` as the ordinary build defaults. Historical proof targets remain separate and must not make AutomationTool choose an ambiguous Editor target.
 
-Current launcher source adds explicit packaged executable selection. [Start-Client.ps1](scripts/Start-Client.ps1) accepts `-ClientExecutable`; [Start-Client.py](scripts/Start-Client.py) accepts `--client-executable`. Packaged execution omits the Editor's `.uproject -game` arguments and uses the executable's directory. Editor launch remains available. These code paths and the package build remain subject to P1a review/testing; they do not establish fresh-machine portability or rendered packaged-client acceptance.
+The launchers support explicit packaged executable selection. [Start-Client.ps1](scripts/Start-Client.ps1) accepts `-ClientExecutable`; [Start-Client.py](scripts/Start-Client.py) accepts `--client-executable`. Packaged execution omits the Editor's `.uproject -game` arguments and uses the executable's directory. Editor launch remains available. P1b rebuilt source `388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee`, copied the complete runnable folder outside the checkout and exercised the actual PowerShell launcher in Managed/Attach modes. The [visible results](docs/plans/evidence/2026-10-24-p1b-visible-preview.md) establish only the observed Windows preview; [earlier P1a evidence](docs/plans/evidence/2026-10-24-p1a-windows-package.md) and clean-machine/Linux gaps retain their separate scopes.
 
 [Test-ClientPackage.ps1](scripts/Test-ClientPackage.ps1) is separate non-visible verification tooling. It requires a complete bundle outside the source checkout, accepts ordinary absolute local-drive paths and rejects extended/device/UNC namespaces, short-name aliases and reparse paths before startup. It records the selected accepted absolute executable and runs the actual nested Development Game executable with fixed NullRHI/RenderOffScreen flags. It validates an exact automation report and records binary/config/stream/lifecycle evidence. Resources mode has no Core credentials; Core mode uses the existing managed/attached development-host helpers, restores the parent environment and stops only an owned host. It does not automate player input or certify rendered behavior.
 
@@ -190,11 +195,13 @@ The C++ process attaches to a service; closing its GameMode does not stop Core o
 
 Credentials are inherited through named environment variables, never command-line tokens or content assets. The Windows interactive launcher snapshots and restores all four Core variables independently of client disposal or host-stop failures. The Core startup helper rejects unsupported endpoint origins before reading credentials or making requests; this client currently supports only numeric IPv4 loopback HTTP ports1024–65535. Failed owned startup uses retained process handles for bounded cleanup even when identity or receipt writing fails; receipts are evidence, not the prerequisite for cleanup. Ordinary owned shutdown first verifies every process identity, then attempts each retained process independently even if marker writing, another stop or receipt persistence fails. A STOPPED outcome requires confirmed exit. The development host has development credentials, in-memory state and limited remote guarantees; it is not a production hosting architecture. The prepared Windows environment is not portable to a new machine, and a pinned package install alone does not create its ownership/provenance receipts.
 
+Three completed P1b visible launches used the actual packaged manual route: Managed, Attach and an Attach player-authentication diagnostic. Each Game/launcher exited normally with code 0, unchanged binary/four Config files and restored parent environment. Managed stopped its owned host. Attached hosts remained alive and returned authenticated HTTP200 after client close, then their separate owner stopped them. The diagnostic changed only the child's player credential: admin start committed, but the viewer projection returned HTTP401 `authentication_required`. The UI displayed the actual message and unavailable projection without inventing scene data or finite options. This is a bounded failure-path observation, not an additional supported hosting mode.
+
 ## Tests, experiments and evidence
 
 | Area | What it establishes, within its recorded scope |
 |---|---|
-| [LiveCore tests](Source/WarhammerClient/Private/LiveCore/) | Protocol/identity/visibility/uncertainty regressions, creation safety, runtime-data failure handling and an explicitly opted-in real-Core create/action/refresh check. |
+| [LiveCore tests](Source/WarhammerClient/Private/LiveCore/) | Protocol/identity/visibility/uncertainty regressions, creation safety, runtime-data failure handling and an explicitly opted-in real-Core create/action/refresh check. P1b's eleven unit tests include decision-transition/invalidation controls; real-Core integration passed separately in Managed and Attach modes. |
 | [LiveCoreCameraTests](Source/WarhammerClient/Private/Tests/LiveCoreCameraTests.cpp) | Pure framing, finite bounds, navigation preservation and local input policy. |
 | [LiveCoreCameraRenderedTests](Source/WarhammerClient/Private/Tests/LiveCoreCameraRenderedTests.cpp) | Dedicated ordinary live Slate/CameraActor input checks with synthetic advisory bounds; requires eligible Editor AutomationDriver support and a real RHI. |
 | [Migration tests](Source/WarhammerClient/Private/Tests/) and [script tests](tests/migration/) | Versioned contract/fixture checks, geometry/input and launcher/tool regressions. A parser fixture is not a completed gameplay workflow. |
@@ -206,8 +213,12 @@ Development automation is conditional on `WITH_DEV_AUTOMATION_TESTS`; fixture-de
 
 ## Extension points and current limits
 
-Extend the protocol/session layer for new public Core request families and typed presentation DTOs, then add user-operable controls and scene rendering. Keep rules/visibility in Core, camera/drafts local, and mutation identity/reconciliation centralized. General deployment/movement/turn flows, roster/selection synchronization, adaptive profiles/HUD, remote/spectator UI and durable recovery remain open in the [canonical plan](docs/plans/unreal-migration-plan.md).
+Extend the protocol/session layer for new public Core request families and typed presentation DTOs, then add user-operable controls and scene rendering. Keep rules/visibility in Core, camera/drafts local, and mutation identity/reconciliation centralized. Work toward all capabilities supported by the latest explicitly selected Core; Arcade behavior is a reference milestone, not a ceiling. Record unsupported or unexposed Core features as external gaps rather than implementing rules in Unreal. General deployment/movement/turn flows, roster/selection synchronization, adaptive profiles/HUD, remote/spectator UI and durable recovery remain open in the [canonical plan](docs/plans/unreal-migration-plan.md).
 
-Windows has bounded Editor/runtime evidence; standalone package work is in progress. Native Linux build/render/package and a Windows machine without Unreal installed remain unverified. Earlier manual F framing failed with cause unestablished; later synthetic native F checks do not rewrite that historical outcome.
+At source `388b4fda24ad3bbdb5b5d92c799de9a2c2a71cee`, P1b's [build/native checks](docs/plans/evidence/2026-10-24-p1b-native-checks.md) passed the 83.439-second package build and 17 test executions across four native launches/16 distinct names. [CODE and separate requirements reviews](docs/plans/evidence/2026-10-24-p1b-source-reviews.json) passed their finite affected-source scope, not a full-source certification. The native record retains the original failed build/harness attempts and nonfatal log diagnostics.
+
+The [packaged visible checks](docs/plans/evidence/2026-10-24-p1b-visible-preview.md) observed one accepted/committed mission choice at revision 2 and explicit refresh to a hidden decision in each normal mode, readable board/fonts, actual focus help, wheel zoom, F/Frame board, refresh preservation and panel F/wheel isolation. Native Maximize/Restore changed outer window dimensions to 3840×2088 and 2882×1668 with the board fitting; the initial corner drag did not resize and supplies no resize PASS. Earlier supervisor failure and the approval/access timeout remain failed attempts. The earlier manual F failure has cause unestablished; current packaged F success does not explain or rewrite it.
+
+The owner's standing visible-test permission remains active until explicitly revoked; each launch still uses one owned window and exact Core cleanup. Packaged held-button orbit/pan, actual OS switching/teardown, native Linux build/render/package, a Windows machine without Unreal installed and general gameplay remain unverified. Earlier synthetic native input/cancellation evidence is not transferred to these unexecuted packaged cases. Full P1 and latest-Core runtime adoption remain separate work in the canonical plan.
 
 When components, directory responsibilities, dependencies, startup/data flow or package ownership change, update this guide with the code and keep its diagrams/links accurate. Record implementation and observed verification separately in the canonical plan; do not turn an architecture description into an acceptance claim.
