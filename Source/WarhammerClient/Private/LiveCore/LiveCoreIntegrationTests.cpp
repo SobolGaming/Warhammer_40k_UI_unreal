@@ -65,7 +65,7 @@ public:
                 ExistingTerrainCount = State.Terrain.Num(); ExistingObjectiveCount = State.Objectives.Num();
                 ExistingRosterCount = State.PublicArmyRosters.Num(); bExistingRostersAvailable = State.bHasPublicArmyRosters;
                 Session->Shutdown(); Session = FLiveCoreSession::Create(); bReopened = true; bObserveOpening = true;
-                FLiveCoreSessionIntegrationTestAccess::ObserveRequests(Session.Get(),
+                FLiveCoreSessionIntegrationTestAccess::ObserveRequests(*Session,
                     [this](const FString& Verb, const FString& Path, bool bMutation, bool bAdministrator)
                     {
                         if (!bObserveOpening) { return; }
