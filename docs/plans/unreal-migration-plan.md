@@ -1,6 +1,6 @@
 # Unreal client migration plan
 
-**Revision 148 — source/headless checks ready; rendered interaction pending, 2026-10-23.**
+**Revision 149 — bounded rendered local setup observed, 2026-10-24 UTC / 2026-10-23 EDT.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
 
@@ -14,12 +14,12 @@ The owner prioritizes a useful client driving the existing Core over exhaustive 
 - [x] Record local play, remote participants and spectators as product modes; first working feedback comes from the local development session.
 - [x] Record personal/internal development first, preserved preferences/HUD profiles, exact-Core sessions and no midgame switching requirement.
 - [x] Record explicit HTTP errors and missing diagnostic fidelity; Core issues are external dependencies.
-- [x] Inventory the shortest live path: default GameMode is empty; E02 has reusable board/camera patterns; native HTTP transport is missing.
+- [x] Inventory the original empty default GameMode, reusable E02 board/camera patterns and missing native HTTP route; the live implementation is now present.
 - [x] Publish revised-plan checkpoint a5c8db9 and verify the exact GitHub branch ref before implementation.
 
 Owner direction at 23:08 UTC supersedes earlier exhaustive proof sequencing. Historical gate labels do not prevent ordinary slice implementation/builds/focused checks. No new tool installation, Core edit or production-host development is included. Independent CODE and separate requirements review still precede acceptance; do not call unchecked work complete.
 
-**Screen HOLD:** the owner's 22:29 UTC instruction remains active: no visible tests, Editor/Game windows or desktop input until explicit human resumption. Background implementation, builds and non-graphical checks may proceed. No GUI is currently active.
+The owner directly resumed one bounded visible real-Core test; it completed and is closed. The owner also permits accepting approvals relayed from another chat until revoked. Preserve each approval's scope and bounds: this completed test authorizes no additional agent desktop activity. Future visible launches/input need applicable approval.
 
 ## Project references and boundaries
 
@@ -49,7 +49,9 @@ The imported plan and all research/failures remain available in the [complete th
 - [x] Separate command-receipt revision from applied projection identity so the renderer waits for refreshed board DTOs.
 - [x] Preserve supplied scoped lifecycle messages/violation details on known rejection; label them as returned status and state missing fidelity only when details are absent.
 
-Source implementation above is authored. Checkboxes do not claim successful compilation, live execution or rendered behavior; see verification below.
+- [x] Repair the observed non-focusable startup-widget error by making the existing UI-only panel focusable at `d2c242d`; rendered verification remains separate.
+
+Implementation and verification remain separate. The observed visible result belongs to `4dacce3` / runtime `ca315fb`; it does not verify a later focus repair.
 
 ### Verification
 
@@ -61,8 +63,14 @@ Source implementation above is authored. Checkboxes do not claim successful comp
 - [x] Repeat the actual-Core session/action/refresh and host-lifecycle check against `160b510`: passed, four Config files unchanged. See [headless results](evidence/2026-10-23-live-core-headless.json).
 - [x] Build and run diagnostic repair `ca315fb`: Editor compile/link passed (22.20 seconds), all ten native checks passed, including actual supplied-message/violation assertions.
 - [x] Resolve initial independent CODE/REQ findings; fresh CODE and different-reviewer REQ both passed the affected diagnostic seam at `ca315fb`. [Review provenance](evidence/2026-10-23-live-core-reviews.json) preserves earlier CHANGES_REQUESTED reports and bounded final coverage.
-- [ ] After explicit screen resumption, observe the startup board, connection/session, player click and visible authoritative result. Record actual source/Core/session/action and limits.
-- [x] Publish source/headless checkpoints, exact-GitHub-verify each commit and update PR #3. Full rendered-slice acceptance remains pending the visible check above.
+- [x] Observe the approved visible run at `4dacce319a17cdd37e714c52b10d70e6f88ac70c` / runtime `ca315fb317015c701d4bae894af341a30e721edd`: keyboard Connect displayed player-a's board at revision 1 with four offered choices.
+- [x] Click an offered Fixed choice with the mouse; observe accepted/committed, revision 2, one accepted player action and the selected missions. Mouse Refresh retained that state; a separate read-only player projection confirmed it.
+- [x] Close the visible client normally; Editor and launcher exited 0, owned Core stopped without force, four Config files stayed byte-identical and final target-window count was zero. Preserve the startup-focus error and cropped board edge in [visible evidence](evidence/2026-10-23-live-core-visible.md).
+- [x] Compile/link startup-focus repair `d2c242d`: four Windows Editor build actions passed in 7.56 seconds.
+- [ ] Complete fresh independent CODE and separate requirements reviews of the focus repair. No new rendered check has run for this candidate.
+- [x] Publish source/headless checkpoints, exact-GitHub-verify each commit and update PR #3.
+- [ ] Publish this bounded visible result/checklist checkpoint, push and exact-GitHub-verify it; keep PR #3 open without merge.
+- [ ] Improve camera framing/responsive sizing and obtain owner feedback. The observed 3840×2160 view cropped the near board edge; fixed-camera setup proof is not full-board-fit proof.
 - [ ] Run native Linux build/render/package checks when a host becomes available (**UNTESTED**).
 
 ### Checkpoints and next sequence
@@ -71,7 +79,7 @@ Source implementation above is authored. Checkboxes do not claim successful comp
 2. **Connection/state:** implement native transport, board and viewer-state UI. Push source with actual checks and pending verification clearly recorded.
 3. **Action/result:** wire a real offered setup choice, authoritative refresh, explicit errors and same-command reconciliation. Add easy managed-launch/attach instructions; push.
 4. **Focused validation:** build, execute protocol checks and independent reviews. Push findings/fixes and evidence at coherent checkpoints.
-5. **Rendered feedback:** wait for screen resumption, then demonstrate the bounded live interaction; push actual results and let owner prioritize subsequent gameplay.
+5. **Rendered feedback:** the bounded local setup workflow is observed. Publish its actual result and limits; then check the small startup-focus repair separately and prioritize camera/responsive sizing with owner feedback. Any further agent desktop activity requires applicable approval.
 
 Combine adjacent implementation steps when they form one coherent runnable increment. Do not create bureaucratic checkpoints for individual lines; every actual checkpoint must be pushed and exact-ref verified. Never force push or upload credentials, private sessions, generated outputs or ignored evidence.
 
@@ -84,7 +92,7 @@ Combine adjacent implementation steps when they form one coherent runnable incre
 - Show actual HTTP code/message and distinguish missing fidelity from a successful detailed validation. Original E01 30-second timeout remains a failure even though the separate 120-second diagnostic passed.
 - UI controls own input; camera input must not consume UI clicks. Keep world units/handedness explicit; do not synthesize unplaced poses.
 - Preserve exact Core identity per session, reject incompatible versions visibly, and keep shared checkouts untouched.
-- Use owned output directories, bounded background processes and reliable cleanup. A background test must not launch a window during HOLD.
+- Use owned output directories, bounded background processes and reliable cleanup. Background tests must stay non-graphical; visible tests/input must remain within applicable owner approval.
 
 ## Toolchain and startup foundation
 
@@ -96,13 +104,15 @@ Selected host: checked-out `Warhammer_40k_AI/scripts/run_phase18m_reference_serv
 
 - Exhaustive profile/HUD import/export/reimport compatibility, 727 recipes, full A2/G-IMPLEMENT parity, broad transitive SDK certification (OWN17 **DEFERRED_UNPROVEN**).
 - Source at `0719125c3eacce896475611d621365ac28d2febd` for canonical profile roundtrip remains committed but **DEFERRED, unreviewed and unexecuted**. Its prepared 175-file freeze/119 whole-source grants/51 API ranges has no review GO, CLI assessment or runtime result. Do not resume that pipeline for this slice.
-- Full gameplay/deployment/movement, robust reconnect/recovery, remote participant/spectator product UX/security and persistence remain later work. The local milestone does not claim those product modes complete.
+- Full gameplay/deployment/movement, robust reconnect/recovery, remote participant/spectator product UX/security and persistence remain later work. Unknown-command state is in memory only; restart recovery and actual response-loss injection remain unverified. The local milestone does not claim those product modes complete.
 - Profile preservation remains a product requirement; defer migration proof until a usable client can be prioritized.
 - Linux x86-64 build/render/package remains **UNTESTED**. Windows success cannot stand in for it.
 - External distribution, content provenance/clearance, runtime redistribution and production hosting remain later gates.
-- Existing reference evidence is bounded; synthetic scenes, parser tests and P0 payload capture are not proof of a rendered real-Core workflow.
+- Existing reference evidence retains its original bounds. The new visible evidence proves one local real-Core setup choice; it does not establish full gameplay, full board fit or later source repairs.
 
 ## Evidence and history
+
+- [Bounded live-Core visible setup](evidence/2026-10-23-live-core-visible.md), [structured result](evidence/2026-10-23-live-core-visible.json), and [chronological slice progress](evidence/2026-10-23-live-core-slice.md).
 
 - [BOOT01](evidence/2026-10-16-boot01.md).
 - [Original E01 boundary](evidence/2026-10-16-e01-boundary.md), [SLOW120 provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json).

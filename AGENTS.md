@@ -6,7 +6,7 @@ Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md`, and [act
 
 The owner's latest priority is the smallest useful rendered client driving the existing Core: startup board, real session/state, one meaningful player action and visible authoritative result. The active plan supersedes the exhaustive historical proof sequence. Implement and check coherent increments; do not reopen deferred profile/727/transitive-certification campaigns.
 
-**Screen HOLD (2026-10-23 22:29 UTC) remains active until explicit human resumption:** no visible tests, Editor/Game windows, focus changes or desktop input. Background edits/builds/non-graphical checks are permitted. No approval for source review waives this hold.
+The owner directly resumed one bounded visible real-Core test; it completed and is closed. The [observed setup workflow](docs/plans/evidence/2026-10-23-live-core-visible.md) succeeded, with a startup-focus error and camera-edge crop retained as limits. The owner also permits accepting approvals relayed from another chat until explicitly revoked. Preserve each approval's bounds: this completed test grants no additional desktop launches, focus changes or input. Future agent desktop work needs applicable owner approval; source-review consent alone does not authorize it.
 
 ## Repository boundaries
 
@@ -35,7 +35,7 @@ The owner's latest priority is the smallest useful rendered client driving the e
 
 Run commands in this repository. For docs, check whitespace and referenced paths/commands. For behavior, build the affected target and run focused functional/regression checks covering changed seams and concrete risks. Use actual Core for integration evidence where possible; mocked/synthetic results must be labelled.
 
-Separate implementation completion from verification in the plan's Markdown checklists. Record exact commit/Core version, commands, results and relevant limits. Do not mark rendered verification passed without observing it; HOLD means that part is pending.
+Separate implementation completion from verification in the plan's Markdown checklists. Record exact commit/Core version, commands, results and relevant limits. Mark rendered verification complete only for the observed source and workflow. Later source repairs need their own affected checks; the completed visible run does not verify them.
 
 Retain the independent three-role discipline: implementer, fresh independent CODE reviewer and different fresh requirements auditor. Before acceptance, freeze the candidate, provide original slice criteria plus necessary source/interfaces/tests/raw results, exclude author notes and peer verdicts, request read-only/approval-never/no-memory execution, and record actual settings/limits. Prefer fresh `codex exec` sessions. Findings are PASS/CHANGES_REQUESTED/BLOCKED; preserve raw reports, fix actionable blockers and refresh affected reviews after material changes. Standing consent for private source/API reviews to the configured OpenAI Codex service persists until explicitly revoked; do not ask again.
 

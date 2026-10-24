@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "ownerLocalDate": "2026-10-23",
+  "ownerTimeZone": "America/New_York",
+  "scope": "One bounded local Windows rendered setup interaction, not full gameplay",
+  "sourceHead": "4dacce319a17cdd37e714c52b10d70e6f88ac70c",
+  "runtimeSource": "ca315fb317015c701d4bae894af341a30e721edd",
+  "coreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+  "coreContract": "44.3.33",
+  "coreBuild": "warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a",
+  "approval": {
+    "authority": "Direct human instruction and direct answer in this chat: Approve this visible test now",
+    "bounds": "One window, at most 600 seconds, actual UI interaction/screenshots, then close client and owned host",
+    "status": "CONSUMED_AND_CLOSED",
+    "priorRelayAttempts": "Two automatic approval rejections before any launch or input",
+    "rawMetadataCorrection": "The private wrapper result retained stale relay-approval wording. That string is not the authority for the completed run; direct human approval authorized it.",
+    "futureRelays": "Owner directly permits human approvals relayed from another chat, with provenance and action bounds retained; no unlimited desktop authority inferred"
+  },
+  "invocation": "PowerShell 7: ./scripts/Start-Client.ps1 -CoreMode Managed -Port 18765",
+  "platform": {
+    "os": "Windows x64",
+    "engine": "UE5.8.3/CL58210709",
+    "rhi": "D3D12",
+    "shaderPlatform": "SM5",
+    "observedCaptureWidth": 3840,
+    "observedCaptureHeight": 2160
+  },
+  "interval": {
+    "startedUtc": "2026-10-24T01:51:59.8271595Z",
+    "finishedUtc": "2026-10-24T01:55:31.0975868Z",
+    "clientObservedSeconds": 211.1702822,
+    "maximumSeconds": 600
+  },
+  "observations": [
+    "Disconnected startup panel had a black viewport until explicit Connect.",
+    "Endpoint received mouse focus; Tab and Space activated Connect. Mouse-only Connect was not proven.",
+    "Connected player-a projection: revision 1, setup/select_secondary_missions, four Core-offered options, HTTP 200.",
+    "Mouse selected the first Fixed option. Authoritative UI result: revision 2, accepted actions 1, fixed assassination and bring_it_down, command_committed, accepted=true, committed=true, HTTP 200.",
+    "No decision/choice remained visible to this viewer after submission. This is not a broad privacy certification.",
+    "Mouse Refresh retained revision 2 and the same mission result without another player command.",
+    "A separate authenticated read-only player-a projection GET confirmed HTTP 200, revision 2, matching session binding and the same two mission IDs."
+  ],
+  "requestsBeforeIndependentRead": {
+    "sessionCreates": 1,
+    "commands": 2,
+    "commandKinds": [
+      "start",
+      "one finite player choice"
+    ],
+    "projectionGets": 3,
+    "projectionPurposes": [
+      "initial",
+      "automatic after choice",
+      "explicit UI Refresh"
+    ]
+  },
+  "independentRead": {
+    "addedProjectionGets": 1,
+    "http": 200,
+    "viewer": "player-a",
+    "revision": 2,
+    "missionMode": "fixed",
+    "missionIds": [
+      "assassination",
+      "bring_it_down"
+    ],
+    "sessionBindingMatched": true,
+    "submittedCommand": false
+  },
+  "cleanup": {
+    "editorExit": 0,
+    "launcherExit": 0,
+    "coreStatus": "STOPPED",
+    "coreForcedTermination": false,
+    "followupOwnedStop": "ALREADY_STOPPED",
+    "trackedConfigCount": 4,
+    "configUnchanged": true,
+    "finalTargetWindowCount": 0,
+    "continuousWindowAbsenceClaimed": false
+  },
+  "findings": [
+    {
+      "id": "STARTUP_FOCUS",
+      "status": "OBSERVED_ERROR",
+      "message": "InputMode:UIOnly - Attempting to focus Non-Focusable widget SLiveCorePanel [WarhammerClientGameMode.cpp(348)]!",
+      "repair": "Pending separate candidate, compile and affected independent reviews; no later rendered verification awarded by this run"
+    },
+    {
+      "id": "CAMERA_FRAMING",
+      "status": "FOLLOW_UP",
+      "message": "Near board edge cropped below the observed viewport; fixed camera and responsive framing need follow-up"
+    }
+  ],
+  "limits": [
+    "This demonstrates one local secondary-mission setup interaction, not deployment, model movement, a full game or full-board fit.",
+    "The startup log was not error-free.",
+    "Unknown-response fault injection and durable recovery were not exercised.",
+    "No remote/spectator, profile, package or native Linux acceptance.",
+    "Unplaced models were omitted. Camera movement and other resolutions were not tested.",
+    "Private session-bearing screenshots and native logs remain ignored and are not published."
+  ],
+  "privateArtifacts": [
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/result.json",
+      "bytes": 2136,
+      "sha256": "9E1FAA099D4348CAE74EBF5F7EE9D986D09EFABBEAC496EDFDCAA9687537D48A"
+    },
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/native.log",
+      "bytes": 204387,
+      "sha256": "6BE72E5B3BFED911DD08505013FB7527C779D68A0FB724AEC47C7B837550E7E8"
+    },
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/authoritative-check.json",
+      "bytes": 433,
+      "sha256": "CC4761F94C5894AFD603465C45684AB0CA630BC03ED4167095D0D9DD9C02232B"
+    },
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/ui-request-counts-before-audit.json",
+      "bytes": 68,
+      "sha256": "83C8BD3C04CDFD3F7A9DBFED5B250B88F9AF46A64B39A10975778E0C74C015BF"
+    },
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/screenshots/01-disconnected.jpg",
+      "bytes": 197661,
+      "sha256": "7E58ED61491A105A96A9CB9EA88564DF08ACC246754F4F3DA9A359130846A506"
+    },
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/screenshots/02-connection-state.jpg",
+      "bytes": 349214,
+      "sha256": "F6FB0EF6D31AF957DB5CC2C7FAC90115DAC0D3C30335A5C714C2CF4C6EBC3CAD"
+    },
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/screenshots/03-choice-submitted.jpg",
+      "bytes": 322270,
+      "sha256": "7F2E3B2175E8C9B1B3C20D5CA1287B2E912751B9730DB51566E80A40F708BC7E"
+    },
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/screenshots/04-authoritative-result.jpg",
+      "bytes": 331830,
+      "sha256": "64C52F9D9EE763678ACDF90F145D39D005F0241F44D97F887E181F3CEC128670"
+    },
+    {
+      "privatePath": ".local/development/live-core-visible-20261024T015131Z/screenshots/05-explicit-refresh.jpg",
+      "bytes": 332111,
+      "sha256": "1AEF273F16FD94F830BDB451F08CF0F54CB9CE891E1FB2DD5A9F97FCD142425C"
+    }
+  ]
+}

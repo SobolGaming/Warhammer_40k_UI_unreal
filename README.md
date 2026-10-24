@@ -2,9 +2,9 @@
 
 C++ first 3D Unreal client for the external Python rules Core. The active goal is a board connected to a real Core session, one player action and its authoritative visible result. Follow the [migration checklist](docs/plans/unreal-migration-plan.md).
 
-The default GameMode now has a live HTTP session adapter, board and offered-choice UI. The first slice creates a canonical session as administrator, displays only player-a's projection, submits an offered secondary-mission choice and refreshes the authoritative result. Candidate `ca315fb` passed the Windows Editor compile/link and all ten focused native checks, including a real Core action and rejection-diagnostic fidelity. Initial independent review findings were corrected; fresh CODE and separate requirements reviews passed the affected diagnostic repair. Rendered board/input and the interactive launcher remain unverified. This is personal/internal development. Linux x86-64 plumbing exists but native builds/rendering/packages are **UNTESTED**.
+The default GameMode has a live HTTP session adapter, board and offered-choice UI. The [bounded visible setup check](docs/plans/evidence/2026-10-23-live-core-visible.md) at `4dacce3` (runtime `ca315fb`) created a real session, displayed player-a's board, submitted a mouse-selected offered secondary-mission choice and showed Core's accepted/committed result at revision 2. The Windows build, ten focused native checks and affected independent CODE/requirements reviews had passed. The visible run also exposed a startup-focus error and cropped board edge. Focus repair `d2c242d` compiled and linked; its fresh affected reviews are pending and it has no repeated rendered result. This is personal/internal development and one local setup interaction. Linux x86-64 builds/rendering/packages remain **UNTESTED**.
 
-**Desktop testing is on HOLD until the owner explicitly resumes it.** Background development/builds continue. Every checkpoint is committed, pushed and exact-ref verified in [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3), which stays open without merge.
+The owner-approved single visible test is complete. Future agent desktop tests need applicable approval; the owner permits relaying approvals from another chat until revoked, with their original bounds preserved. Every checkpoint is committed, pushed and exact-ref verified in [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3), which stays open without merge.
 
 ## Related projects
 
@@ -14,7 +14,7 @@ The default GameMode now has a live HTTP session adapter, board and offered-choi
 
 ## Start the client
 
-When desktop testing is resumed, run in PowerShell7 from this repository:
+Run in PowerShell 7 from this repository:
 
 ```powershell
 & ./scripts/Start-Client.ps1 -CoreMode Managed
@@ -24,9 +24,9 @@ When desktop testing is resumed, run in PowerShell7 from this repository:
 
 The managed route launches the existing checked-out Core server hidden, verifies its own readiness, supplies development credentials only through process environment and opens the client. Closing the client stops only that owned server. Attach leaves the existing service running. See [startup and runtime details](docs/development/core-startup.md).
 
-In the client, click **Connect / create session**, then choose a Core-offered secondary-mission option. The panel shows the authoritative revision, mission choice and accepted/committed outcome. The next player's private options remain hidden. Camera is fixed, terrain is shown as advisory outlines, and undeployed models are omitted. This is a first setup interaction, not full deployment/movement or a packaged game.
+The client starts disconnected with a black viewport. Activate **Connect / create session**, then choose a Core-offered secondary-mission option and use **Refresh** to reread the result. In the observed run, Tab/Space activated Connect after the endpoint field received focus; the offered choice and Refresh were clicked with the mouse. The panel showed revision 2, the selected missions and accepted/committed outcome while the next player's private options stayed hidden. The logged non-focusable-widget error prompted the separate focus repair above. Camera is fixed, the near board edge was cropped at 3840×2160, terrain uses advisory outlines and undeployed models are omitted. Full deployment/movement and responsive camera framing remain later work.
 
-If a command response is lost or unusable, the client blocks new actions and offers **Reconcile unknown command**, sending the same retained envelope/ID. Unknown session creation cannot be retried safely. Actual HTTP codes/messages and diagnostic fidelity gaps are shown explicitly.
+If a command response is lost or unusable, the client blocks new actions and offers **Reconcile unknown command**, sending the same retained envelope/ID. This retained state is in memory only; restart recovery and actual response-loss injection remain unverified. Unknown session creation cannot be retried safely. Actual HTTP codes/messages and diagnostic fidelity gaps are shown explicitly.
 
 ## Windows build
 
@@ -72,6 +72,6 @@ This is an alternative environment-preparation recipe, not a request to reinstal
 
 ## Status and evidence
 
-[Active checklist](docs/plans/unreal-migration-plan.md) separates implemented code from verified behavior. [Evidence index](docs/plans/README.md) links retained results. BOOT01, the separately labelled120-second E01 diagnostic, synthetic E02 and bounded parser/P0 proofs do not establish a live rendered client.
+[Active checklist](docs/plans/unreal-migration-plan.md) separates implemented code from verified behavior. [Visible evidence](docs/plans/evidence/2026-10-23-live-core-visible.md) records the bounded local setup workflow and its limits; the [evidence index](docs/plans/README.md) retains earlier results. BOOT01, the separately labelled 120-second E01 diagnostic, synthetic E02 and bounded parser/P0 proofs keep their original scopes.
 
 Profile/HUD migration, full gameplay, remote participant/spectator completion, production hosting and exhaustive compatibility proof follow usable local feedback. The [full prior README](README-through-r146.md) preserves original commands, failed attempts and detailed evidence; its former current-status sequencing is historical.
