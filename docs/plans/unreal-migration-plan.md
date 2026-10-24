@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 157, 2026-10-24. This is the single canonical root plan. Full feature parity is not implemented or accepted.**
+**Revision 158, 2026-10-24. This is the single canonical root plan. Full feature parity is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -20,6 +20,8 @@ Implementation:
 - [x] Add a source-grounded root architecture guide with useful Mermaid diagrams, source links, implemented/planned distinctions and a durable same-change maintenance rule in AGENTS.md.
 
 Implementation above is authored, not runtime acceptance. The launcher-only stub checks passed 19 Python tests and ten PowerShell cases; no client/Core/GUI was launched by those tests. Native build/package/runtime and independent source reviews remain pending below.
+
+Initial package attempt at `8f8c010` failed in 4.19 seconds before compilation/cooking because the ordinary and historical proof Editor targets were ambiguous. Preserve that failure. `DefaultEngine.ini` now explicitly selects the ordinary Game/Editor targets; the next package attempt must validate the repair. No game or cooker window was launched.
 
 Non-visible verification and PR exit criteria:
 
