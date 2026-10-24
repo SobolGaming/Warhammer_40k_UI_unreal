@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 163, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 164, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -18,13 +18,13 @@ Implementation:
 
 - [x] Merge PR #5 at its verified head and start a separate branch from the exact merge.
 - [x] Fetch/freeze the selected Core branch/SHA/contract/unmerged status without changing the reference checkout.
-- [ ] Prepare a separate exact-source Python runtime, canonical data and explicit launch selection; preserve the old runtime/preview.
+- [x] Prepare a separate exact-source Python runtime, canonical data and explicit launch selection; preserve the old runtime/preview. Exact installed44.5 build/3130 resources verified; explicit44.3 profile still reaches READY/normal STOP and its copied preview hash is unchanged.
 - [x] Adapt selected client identity/resources and optional public-roster projection, retaining viewer disclosure and physical IDs. The narrow typed DTO keeps original selection/bearer IDs and nullable attachment/cargo disclosure; points/options/composition/roster rendering and physical-instance joins remain later work. Native checks and independent review are separate below.
 
 Verification:
 
-- [ ] Run focused launcher/projection/identity/malformed-field/viewer-disclosure controls and build the affected native client.
-- [ ] Run actual44.5 create → offered setup action → refresh in Managed and Attach modes; record runtime/input identities and owned/attached cleanup.
+- [x] Run focused launcher/projection/identity/malformed-field/viewer-disclosure controls and build the affected native client. The [actual results](evidence/2026-10-24-p1c-core-adoption.md) record12 Unit +4 resources +Managed/Attach real integration,18 executions/17 names; native input and source bindings remain explicit.
+- [x] Run actual44.5 create → offered setup action → refresh in Managed and Attach modes; record runtime/input identities and owned/attached cleanup. One offered setup choice committed before authoritative refresh; Managed stopped normally, attached host remained HTTP200 then its separate owner stopped it.
 - [ ] Obtain independent CODE and separate requirements reviews, publish results/limits and close this finite PR scope.
 
 ## Closed P1b Windows packaged interactive preview
@@ -172,14 +172,14 @@ This follows the P1b preview and can overlap the P2 shell foundation. It is a se
 Implementation:
 
 - [x] Freeze the adoption target's exact branch/SHA/contract, including whether its upstream PR is still unmerged. Review source/schema/identity/redaction deltas against the current runtime; overlapping envelope versions do not establish compatibility.
-- [ ] Prepare a separate runtime and canonical input from the selected source without editing the reference checkout or replacing the working 44.3.33 environment. Update client expected identity/resources only with an explicit adaptation.
-- [ ] Add the new public army-roster projection and coherency-choice semantics to the appropriate DTO/editor backlog, preserving actual disclosure and physical bearer/model IDs. Do not infer new mutation routes from projection fields.
-- [ ] Keep the previous exact-Core preview available while upgrading; never relabel its session or test evidence as a newer-Core result.
+- [x] Prepare a separate runtime and canonical input from the selected source without editing the reference checkout or replacing the working 44.3.33 environment. Update client expected identity/resources only with an explicit adaptation.
+- [x] Add the new public army-roster projection and coherency-choice semantics to the appropriate DTO/editor backlog, preserving actual disclosure and physical bearer/model IDs. Do not infer new mutation routes from projection fields.
+- [x] Keep the previous exact-Core preview available while upgrading; never relabel its session or test evidence as a newer-Core result.
 
 Verification:
 
 - [ ] Build the adapted client and run a representative real create â†’ offered action â†’ refresh workflow against the exact new runtime, plus focused identity, malformed/new-field and viewer-disclosure controls.
-- [ ] Record reachable new-family workflows as their editors land, or a concrete Core/public-service exposure gap. Do not require all 89 families or all internal rules before accepting the narrow adoption slice.
+- [ ] Record reachable new-family workflows as their editors land, or a concrete Core/public-service exposure gap. Do not require all89 families or all internal rules before accepting the narrow adoption slice. **Deferred to P4 editor slices:** P1c adds no family editor or fabricated start/mutation route. `select_coherency_casualty` preserves the offered physical model and per-casualty/final `completes_boundary` distinction; Core supplies legal offers and validates/applies removal. `select_source_reposition` retains its exact request/context. This is an acknowledged editor/workflow gap, not a claimed Core defect or a P1c runtime-adoption gate.
 - [ ] Independently review affected changes, publish exact source/runtime/input identities and actual limits, and commit/push checkpoints. Full latest-Core coverage remains P2â€“P10 work.
 
 ### P2 â€” General public session and decision application shell

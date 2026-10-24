@@ -2,6 +2,8 @@
 
 A C++ first 3D client for the separate authoritative Python Core. This personal/internal development preview supports the Editor route and a Windows Development Game folder. P1b completed bounded Windows build, source-review, non-visible and visible packaged checks for clearer decision status, immediate-submission labels and keyboard-focus help. It remains a setup-choice preview, not a complete game.
 
+P1c's [current native results](docs/plans/evidence/2026-10-24-p1c-core-adoption.md) verify the separate selected44.5 runtime, affected Windows build and real Managed/Attach setup workflow. Source-review closure is tracked in the canonical plan; old visible results remain bound to44.3.
+
 Read [architecture.md](architecture.md) for the source-tree map, component boundaries and runtime/session flows. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns all milestone scope and acceptance.
 
 ## Get started playing

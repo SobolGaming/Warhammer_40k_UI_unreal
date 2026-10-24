@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "milestone": "P1c bounded Core44.5 adoption",
+  "status": "NATIVE_PASS_SOURCE_REVIEWS_PENDING",
+  "implementationHead": "cc494c3ca5a9b4c98acddf189bf497c5eb3af1fc",
+  "launcherRepairHead": "de95717262d4db5d37b308a940cc2df802cf40d4",
+  "runtime": {
+    "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "contractVersion": "44.5.0",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba",
+    "runtimeResourceCount": 3130,
+    "referenceUnchanged": true,
+    "lockSha256": "51896FA6800D7BBB5C6DFE08A8C7155640EC71842FAFE9D78020B6A36B43E0AA",
+    "requirementsSha256": "AE09F447E894620C3971638038EA7CFF3E8AC5521B05A341168995825C4862A4",
+    "sourceCheckoutPolicy": "RAW_GIT_BLOBS",
+    "sourceCheckoutAttributesSha256": "ECE797F716E9BE49128549FE7E26F19CB04BD65DD20BCB3AE3B07910C38542C4",
+    "pythonSha256": "8E0C2B85DAD09707B0DC6A9561F8E7AF0C303A59F9C00A6C0FE6E5829B48018E",
+    "basePythonSha256": "5556F2048A17B14693FFADEB25DC0ADD537933873CEE2CA623CF981CA65A6168"
+  },
+  "upstream": {
+    "pr": "https://github.com/SobolGaming/Warhammer_40k_AI/pull/591",
+    "stateAtSelection": "OPEN_UNMERGED",
+    "referenceHead": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+    "referenceWorktreeChanged": false
+  },
+  "canonicalInput": {
+    "purpose": "Canonical development session-create input; Core alone validates and creates authoritative state.",
+    "core_repository": "https://github.com/SobolGaming/Warhammer_40k_AI",
+    "core_revision": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "contract_version": "44.5.0",
+    "upstream_status": "Unmerged development PR #591, selected and fetched 2026-10-24.",
+    "source": "contracts/examples/sessions/session-create.json",
+    "file": "session-create.json",
+    "bytes": 223996,
+    "sha256": "17a4491eec3ab0fd099acb17b2bd9f9b50e7bcdba901ab7d85f93fb3bf463a8a",
+    "runtime_consistency_sha1": "be2ff8a2be9b9f5473ddfd238eef327bb90bffa6",
+    "runtime_change": "The client replaces only config.game_id with a fresh development game identity before the existing public create request."
+  },
+  "build": {
+    "elapsedSeconds": 64.4997064,
+    "exitCode": 0,
+    "ownedJobEmpty": true,
+    "ownedBuildTreeTerminated": false,
+    "ownedJobTotalProcesses": 65,
+    "rawResult": {
+      "privatePath": ".local\\packages\\20261024T184808Z-cf6a7a1b\\package-result.json",
+      "bytes": 2524,
+      "sha256": "cd8ed2d8783df43ea4f7427dedbaf90f6f3ade3ce7b7835a75045699bf5f140c"
+    }
+  },
+  "initialOutsideCopy": {
+    "files": 50,
+    "bytes": 975380089,
+    "exactMembershipAndHashes": true,
+    "executable": {
+      "path": "WarhammerClient/Binaries/Win64/WarhammerClient.exe",
+      "bytes": 332452352,
+      "sha256": "92925c4da9f52fecc1fe39ea9282fa8ec0a36470c544bc32e175846b62bd7b22"
+    }
+  },
+  "unit": {
+    "sourceHead": "cc494c3ca5a9b4c98acddf189bf497c5eb3af1fc",
+    "status": "PASS",
+    "elapsedSeconds": 15.9757091,
+    "tests": [
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Creation.ErrorEnvelopeRemainsUnknown",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Creation.InvalidEndpointDoesNotRequest",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.CreatedIdentity",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.DecisionPresentationInvalidation",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.DecisionPresentationTransitions",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Endpoint",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Envelope",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.OutcomeAndUncertainErrors",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ProjectionPrivacyAndGeometry",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ProjectionVersionAndReadRecovery",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.PublicRosterDisclosure",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ReturnedRejectionDiagnostics",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      }
+    ],
+    "ownedJobEmpty": true,
+    "forcedTermination": false,
+    "rawResult": {
+      "privatePath": ".local\\development\\p1c-unit-20261024T184934Z\\result.json",
+      "bytes": 2384,
+      "sha256": "a7f9247f738add7c627a390c4fb9620bbee936be11d19d6918945a54723415f8"
+    }
+  },
+  "packageChecks": [
+    {
+      "mode": "resources",
+      "sourceHead": "cc494c3ca5a9b4c98acddf189bf497c5eb3af1fc",
+      "status": "PASS",
+      "elapsedSeconds": 6.1679762,
+      "nativeExitCode": 0,
+      "automation": {
+        "expectedCount": 4,
+        "succeeded": 4,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "errors": 0,
+            "state": "Success",
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.CanonicalSession"
+          },
+          {
+            "errors": 0,
+            "state": "Success",
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.MissingSessionFails"
+          },
+          {
+            "errors": 0,
+            "state": "Success",
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.CorruptSessionFails"
+          },
+          {
+            "errors": 0,
+            "state": "Success",
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.StartupResources"
+          }
+        ]
+      },
+      "parentEnvironmentRestored": true,
+      "configUnchanged": true,
+      "binaryUnchanged": true,
+      "forcedTermination": false,
+      "hostStop": null,
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 1,
+        "Fatal": 0
+      },
+      "rawResult": {
+        "privatePath": ".local\\testpackage\\20261024T184934Z-0fb56d3ada204706ade868d1b3eef8b3\\result.json",
+        "bytes": 5281,
+        "sha256": "455401e05b5989bfb96b4a2a8b63fd791d4d7dfb4703373ef02e6c495d5a6cbb"
+      }
+    },
+    {
+      "mode": "managed",
+      "sourceHead": "de95717262d4db5d37b308a940cc2df802cf40d4",
+      "status": "PASS",
+      "elapsedSeconds": 15.5313884,
+      "nativeExitCode": 0,
+      "automation": {
+        "expectedCount": 1,
+        "succeeded": 1,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "warnings": 0,
+            "errors": 0,
+            "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+            "state": "Success"
+          }
+        ]
+      },
+      "parentEnvironmentRestored": true,
+      "configUnchanged": true,
+      "binaryUnchanged": true,
+      "forcedTermination": false,
+      "hostStop": {
+        "forcedTermination": false,
+        "status": "STOPPED",
+        "owned": true
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 1,
+        "Fatal": 0
+      },
+      "rawResult": {
+        "privatePath": ".local\\testpackage\\20261024T185039Z-760ec31f7b9a402ba5087bd4231c057f\\result.json",
+        "bytes": 5196,
+        "sha256": "ad325851804bb6256ba3eab84a44fe2204f66b1e12c55bb8cd222f7618ad957b"
+      }
+    },
+    {
+      "mode": "attach",
+      "sourceHead": "de95717262d4db5d37b308a940cc2df802cf40d4",
+      "status": "PASS",
+      "elapsedSeconds": 15.564291,
+      "nativeExitCode": 0,
+      "automation": {
+        "expectedCount": 1,
+        "succeeded": 1,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+            "errors": 0,
+            "state": "Success",
+            "warnings": 0
+          }
+        ]
+      },
+      "parentEnvironmentRestored": true,
+      "configUnchanged": true,
+      "binaryUnchanged": true,
+      "forcedTermination": false,
+      "hostStop": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 1,
+        "Fatal": 0
+      },
+      "rawResult": {
+        "privatePath": ".local\\testpackage\\20261024T185120Z-6e03c97eac354e1fae34b2529b5ae05e\\result.json",
+        "bytes": 5185,
+        "sha256": "a722261aa05a4e2899bbec8878114990e97fd74bda25ee5d814f7d792fa5fcde"
+      }
+    }
+  ],
+  "attachLifecycle": {
+    "status": "PASS",
+    "healthHttpStatus": 200,
+    "attachedHostRemainedHealthy": true,
+    "ownedStop": {
+      "forcedTermination": false,
+      "owned": true,
+      "status": "STOPPED"
+    },
+    "environmentRestored": true
+  },
+  "preservedOldProfile": {
+    "status": "PASS",
+    "oldExecutableSha256": "64EC651358C60880B24841FFF3B5818CABFDC7CB3865E2F3462D2D13AE2EDD9A",
+    "ready": "READY",
+    "coreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a",
+    "resourceCount": 3116,
+    "environmentRestored": true,
+    "oldClientLaunched": false
+  },
+  "failuresPreserved": [
+    "Interpreter alias junction rejected before preparation.",
+    "Initial physical-path preparation failed on incidental async task return values; its false reference-change classification is retained, not accepted as an actual reference mutation. Four inert process controls cover the repair.",
+    "Next preparation verified installed build/resources but failed Git cleanliness on38 unchanged raw JSON blobs with conflicting committed line-ending attributes. Failed runtime/source moved to a checked private archive; fresh clone-local literal-byte policy and3 real Git controls repaired preparation.",
+    "Initial Python test TEMP permission errors and inert Git MSYS sandbox error were retained; successful checks used private workspace TEMP and authorized native Git execution respectively.",
+    "Private preserved-profile helper Boolean typo failed before any host startup; corrected check passed."
+  ],
+  "limits": [
+    "No rendered44.5/input proof; P1b visible results remain44.3 only.",
+    "Public roster support is a typed subset, with no roster GUI/editor, detailed composition/points/options or physical-instance join.",
+    "New coherency/source-reposition family workflows are deferred to appropriate P4 editors; no private Core mutation or invented casualty policy.",
+    "No full battle/join/hotseat/remote/spectator/production/clean-machine acceptance.",
+    "Linux build/runtime/render/package UNTESTED."
+  ],
+  "nativeInputBinding": {
+    "sourceConfigContentUnchangedThroughRepair": true
+  },
+  "scriptChecks": {
+    "cases": 111,
+    "attribution": "The component checks ran against evolving uncommitted working-tree edits before the final candidate commit. Their exact HEADs were not captured. They are not relabelled as a full rerun against de95717262d4db5d37b308a940cc2df802cf40d4.",
+    "suites": [
+      {
+        "name": "PowerShell changed-script parsing",
+        "status": "PASS",
+        "command": "[Management.Automation.Language.Parser]::ParseFile(...) for scripts/CoreRuntimeProfile.ps1, scripts/Prepare-CoreDevelopmentRuntime.ps1, scripts/Start-CoreDevelopmentServer.ps1, scripts/Start-Client.ps1, scripts/Test-ClientPackage.ps1"
+      },
+      {
+        "name": "Python Attach launcher logic",
+        "status": "PASS",
+        "command": "& ./.local/core-44.3.33/Scripts/python.exe -I -B -m unittest discover -s tests/migration -p test_start_client.py",
+        "cases": 21,
+        "limits": "Core, service and GUI mocked/not launched; Linux cases test path-selection logic only."
+      },
+      {
+        "name": "PowerShell interactive launcher control flow",
+        "status": "PASS_STUB_ONLY",
+        "command": "& ./tests/migration/Test-StartClient.ps1",
+        "cases": 15,
+        "limits": "Core helpers and process launch stubbed; includes explicit 44.3.33 propagation and default44.5.0."
+      },
+      {
+        "name": "Startup failure/ownership controls",
+        "status": "PASS",
+        "command": "& ./tests/migration/Test-CoreStartupControls.ps1",
+        "cases": 28,
+        "limits": "Production AST/function bodies with inert retained-process objects; no host, client or network."
+      },
+      {
+        "name": "Packaged executable path guards",
+        "status": "PASS_PATH_FUNCTIONS_ONLY",
+        "command": "& ./tests/migration/Test-ClientPackageGuards.ps1",
+        "cases": 32,
+        "limits": "Extracted production path functions only; runner top-level not executed; no native process, runtime or actual reparse point."
+      },
+      {
+        "name": "Exact runtime profiles and destination controls",
+        "status": "PASS_OFFLINE",
+        "command": "& ./tests/migration/Test-CoreRuntimeProfiles.ps1",
+        "cases": 8,
+        "limits": "No clone, install, host or network; rejects existing/outside destinations without creating one."
+      },
+      {
+        "name": "Preparation process output/deadline controls",
+        "status": "PASS_INERT_NATIVE",
+        "command": "& ./tests/migration/Test-CorePreparationProcess.ps1 -PythonExecutable 'C:/Users/Rabid/AppData/Roaming/uv/python/cpython-3.14.5-windows-x86_64-none/python.exe'",
+        "cases": 4,
+        "limits": "Extracted production process wrapper; inert hidden Python only. Verifies one stdout string without VoidTaskResult contamination, empty stdout, separately retained stderr, sanitized nonzero exit, and one-second timeout/owned kill."
+      },
+      {
+        "name": "Exact committed checkout bytes",
+        "status": "PASS_MINIATURE_GIT",
+        "command": "& ./tests/migration/Test-CoreCheckoutBytes.ps1",
+        "cases": 3,
+        "limits": "Real private miniature Git fixture, not either sibling. CRLF JSON blob plus conflicting tracked eol=lf; proves literal bytes, initial clean status and detection of a real edit. No Core installation/service/UI or network."
+      }
+    ],
+    "privateSummarySha256": "6d1f29aa69a43b2fa415c4f008eefc7c4880359b11856a8acc801fb638ac3771"
+  }
+}

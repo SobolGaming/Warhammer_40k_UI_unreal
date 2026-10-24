@@ -18,17 +18,19 @@ A new 44.5 client requires44.5 Core. Selecting an old launcher profile does not 
 Prerequisites: installed native Python 3.14 (workspace 3.14.5), PowerShell 7, Git, `uv`, and the selected Git object available in the reference repository. Safe-fetch that branch if necessary using normal private Git authentication; never reset the reference checkout. The preparation script requires fresh destinations and never deletes/replaces an existing environment:
 
 ```powershell
+git -C ../Warhammer_40k_AI fetch origin codex/static-successor48
+if ($LASTEXITCODE -ne 0) { throw 'Selected Core source fetch failed' }
 $taskPython = 'C:\path\to\physical-native-python-3.14\python.exe'
 & ./scripts/Prepare-CoreDevelopmentRuntime.ps1 -PythonExecutable $taskPython
 ```
 
 Use the interpreter's physical directory; version-alias junctions are rejected by the path guard. [Preparation](../../scripts/Prepare-CoreDevelopmentRuntime.ps1) independently clones committed Git objects without hardlinks, uses clone-local literal-byte attributes (Core contains CRLF blobs under conflicting LF attributes), checks out the exact pin under `.local/core-source-44.5.0`, creates `.local/core-44.5.0`, installs dependencies from that source's frozen `uv.lock` with hashes, installs the Core package, verifies its exact build/resource identity and writes fresh `.development-provenance.json`. It records reference HEAD/status before/after and refuses changed source or mismatched identity. No historical E01 receipt is needed for 44.5. Failed output is retained under `.local/development/core-prepare/<run>` for inspection; choose a reviewed repair rather than deleting it blindly.
 
-[Runtime profiles](../../scripts/CoreRuntimeProfile.ps1) contain exact source/build/resource identities and default paths.44.5 uses build `warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba`,3130 resources.44.3.33 retains its previous build,3116 resources, sibling source and `.e01-provenance.json`; preparation does not modify it.
+[Runtime profiles](../../scripts/CoreRuntimeProfile.ps1) contain exact source/build/resource identities and default paths. 44.5 uses build `warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba`, 3130 resources. 44.3.33 retains its previous build, 3116 resources, sibling source and `.e01-provenance.json`; preparation does not modify it.
 
 ### Install the Python package from Git instead
 
-Core is a real installable package named `warhammer40k-core-v2`, Python `>=3.14,<3.15`, using Hatchling/native dependencies. Package version0.1.0 alone is not the build identity. In a **separate disposable native environment**, normal pip supports:
+Core is a real installable package named `warhammer40k-core-v2`, Python `>=3.14,<3.15`, using Hatchling/native dependencies. Package version 0.1.0 alone is not the build identity. In a **separate disposable native environment**, normal pip supports:
 
 ```powershell
 $taskPython = 'C:\path\to\separate-environment\Scripts\python.exe'
@@ -114,6 +116,8 @@ From this UI repository, after obtaining the selected Git object in the referenc
 task_core="$PWD/.local/core-source-44.5.0"
 test ! -e "$task_core" || exit 1
 git -c core.autocrlf=false clone --no-hardlinks --no-checkout ../Warhammer_40k_AI "$task_core" || exit 1
+mkdir -p "$task_core/.git/info" || exit 1
+printf '%s\n' '* -text -filter -ident -working-tree-encoding' > "$task_core/.git/info/attributes" || exit 1
 git -C "$task_core" checkout --detach 4f9bef0df2fb974d1285232a1009b8781926361d || exit 1
 task_venv="$PWD/.local/core-dev-linux"
 test ! -e "$task_venv" || exit 1
