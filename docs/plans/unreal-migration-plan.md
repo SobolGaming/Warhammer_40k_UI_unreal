@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 165, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 166, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -29,6 +29,28 @@ Verification:
 
 **P1c is complete within this finite boundary; PR #6 is OPEN and ready for review**, observed MERGEABLE/CLEAN with no remote CI checks/formal GitHub reviews reported. Stop implementation scope here. The native build uses cc494c3, final preparation/source review uses a31f64f, and subsequent commits publish documentation/evidence with unchanged runtime inputs. No new rendered44.5, Linux, full-battle or roster-editor claim is made. The next implementation slice is the thin P2 public session/decision shell in a separate branch/PR.
 
+## Outstanding visible and human verification
+
+**These are deferred full-P1/P3/P8 criteria, not P1c/PR #6 merge blockers.** P1c changed protocol/runtime inputs and made no new rendered, physical-input, clean-machine or Linux acceptance claim. A routine PR review opportunity does not require another owner approval. Each future bounded slice must identify which criteria apply to it and add its own manual checks when it changes a user workflow.
+
+For every checked result record the tester (human or agent), UTC date, source commit, package/executable SHA256, exact Core SHA/build, platform/host, actions, expected versus actual result and private evidence location. Link the public sanitized result from this plan. Keep failed, blocked and not-run boxes unchecked. Use a fresh disposable session; never publish credentials or real session IDs. Perform visible tests under the existing applicable authorization, one owned game window at a time, normally limited to ten minutes. A criterion needing physical input or a separate native host must wait for that capability; do not replace it with injected events or syntax checks.
+
+Common Windows prerequisites: build using [README](../../README.md#build-a-windows-standalone-development-package), copy the complete runnable folder outside the source checkout, prepare the exact matching Core using [startup instructions](../development/core-startup.md), then set `$taskExe` to the copied nested executable. These commands are for the current selected44.5 profile; retained44.3 packages require explicit matching profile selection.
+
+```powershell
+$taskExe = 'C:\path\to\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
+& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $taskExe
+```
+
+For Attach, first run the matching foreground Core using the startup guide, then use `-CoreMode Attach -Endpoint 'http://127.0.0.1:8765/'` instead. Closing an attached client must leave that separately owned service alive.
+
+- [ ] **HV-01 — Current packaged rendering and setup workflow (P1; human or supported computer use).** Launch the selected package with the common command. (1) Connect/create; confirm readable text/materials, complete board framing and accurate keyboard-focus guidance. (2) Submit one offered secondary-mission option, then Refresh; confirm an accepted/committed outcome and authoritative revision without opposing private options. (3) Check wheel zoom, board-focused F, Frame board and panel keyboard/wheel isolation. (4) Close normally; verify owned Core stops, while an Attach service survives. Earlier44.3 visible evidence cannot check a current44.5 box.
+- [ ] **HV-02 — Physical held-button gestures (P1/P3; real RMB/MMB input).** After connecting, (1) hold RMB and move to orbit, then release over the board; repeat MMB to pan. (2) Repeat release outside the board and over the panel. (3) Confirm motion stops, fresh gestures work, panel controls retain input, and navigation causes no Core action submission. Requires physical input or a supported API with actual held RMB/MMB; left-only drag or injected reducer events do not qualify.
+- [ ] **HV-03 — Actual OS switching during a drag (P1/P3; physical operator or supported actual switching/input API).** With an ordinary approved application available, (1) hold RMB and begin orbiting; switch to that app, release there, then return. (2) Repeat for MMB. (3) Move the mouse without a button and start a fresh gesture; expect no continued motion/jump, no stuck capture and normal new input. Delivered application-deactivation events are not this test.
+- [ ] **HV-04 — Actual teardown during a drag (P1/P3; actual held input and normal close).** (1) Begin a held camera gesture, close the client normally (for example Alt+F4), then release the button. (2) Confirm normal client exit without crash/stuck input and owned Managed Core cleanup. (3) Repeat with a separately owned Attach host and confirm it survives. Record each mode separately; do not terminate unrelated processes to simulate success.
+- [ ] **HV-05 — Windows without Unreal installed (P8; separate suitable host/operator).** On a Windows x64 host without an Editor installation, (1) follow documented native prerequisites and transfer the complete package plus separately prepared matching Core. (2) Run Managed/Attach startup, create → offered action → refresh, an actual HTTP error and the applicable camera/UI checks. (3) Confirm normal exit/ownership cleanup and retained configuration. Do not uninstall this workstation's Unreal to simulate a clean host; record absent prerequisites or installation failures explicitly.
+- [ ] **HV-06 — Native Linux graphics/package workflow (P8; Linux x86-64 host, matching native UE/Core and graphics access).** After arranging the host, (1) follow [native setup/build instructions](../../README.md#linux-native-prerequisites-and-editor-build--untested), establish and record a native Game packaging recipe, and build/copy the complete native bundle. (2) Run foreground Core and the Python Attach launcher, then perform real create/action/refresh, rendering/input and actual-error checks. (3) Close the client and verify Attach leaves Core alive before its operator stops it. Record exact native toolchain/GPU/runtime and diagnostics; Windows, Git Bash or parser tests cannot satisfy this box.
+
 ## Closed P1b Windows packaged interactive preview
 
 Branch: `codex/p1-playable-preview`, [PR #5](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/5), from verified PR #4 merge `7ba2c1179416efc6d992d49540aeb165631cb697`. PR #4 merged normally on 2026-10-24 with no protection bypass; GitHub reported no remote checks or formal reviews, while its recorded independent local reviews and bounded checks passed within their stated scopes.
@@ -49,11 +71,11 @@ Implementation:
 Verification:
 
 - [x] Run focused projection/presentation regressions, the affected native build and packaged resource/Core checks. Eleven unit tests, four resource tests and the real integration test in each Managed/Attach mode passed: 17 test executions, 16 distinct names, four native launches. The original private validator's expected-nine mismatch is preserved; the same successful eleven-test report was revalidated without another execution. Preserve the earlier sandbox-blocked build and the native packaged report-template diagnostic.
-- [x] Use the actual packaged manual launcher outside the checkout for Managed and Attach workflows: connect/create â†’ offered mission submission â†’ accepted/committed result â†’ authoritative refresh; readable board/fonts/materials, wheel, Frame button/F, UI isolation, actual HTTP error and normal close. Managed fixed missions and Attach Tactical each reached revision2/one accepted player action and a correctly explained hidden pending decision. A separate invalid-player-credential diagnostic displayed actual HTTP401/`authentication_required`, with no invented projection. F used the supported key-input API with observed board focus; native Maximize/Restore framing passed at the observed window sizes. The initial corner-drag resize attempt changed no size and is not a resize PASS.
+- [x] Use the actual packaged manual launcher outside the checkout for Managed and Attach workflows: connect/create → offered mission submission → accepted/committed result → authoritative refresh; readable board/fonts/materials, wheel, Frame button/F, UI isolation, actual HTTP error and normal close. Managed fixed missions and Attach Tactical each reached revision2/one accepted player action and a correctly explained hidden pending decision. A separate invalid-player-credential diagnostic displayed actual HTTP401/`authentication_required`, with no invented projection. F used the supported key-input API with observed board focus; native Maximize/Restore framing passed at the observed window sizes. The initial corner-drag resize attempt changed no size and is not a resize PASS.
 - [x] Verify the owned Managed host stops and the attached service survives; preserve configuration and report actual input/tool limitations. All three completed visible workflows exited Game/launcher0 with Config4, parent environment and binary unchanged, normal owned Core cleanup and no remaining Game window. The earlier receipt-observer failure and app-access approval timeout remain failed runs. Real held RMB/MMB, OS switching, clean-machine delivery and Linux stay open wherever not observed.
 - [x] Publish final evidence/documentation, commit/push/exact-ref-verify the closing checkpoint and mark this one bounded PR ready for review. PR #5 merged normally as `062863c1a13b6fb5597ec360b1e2f4510f5a0860` on 2026-10-24T18:43:15Z after MERGEABLE/CLEAN inspection, with no remote CI checks reported. Fresh independent CODE and different requirements SOURCE reviews both passed at388b4fd within their finite scope; runtime verification is recorded separately. PR merge is a separate normal-gates action, not an implied extension into P1c.
 
-Stop this PR at the interactive-preview boundary. Core44.5 runtime adoption, hotseat/join, deployment/movement/attack editors, full latest-Core feature coverage and Linux execution are not additions to this PR. P1c/P2â€“P10 below own those next slices.
+Stop this PR at the interactive-preview boundary. Core44.5 runtime adoption, hotseat/join, deployment/movement/attack editors, full latest-Core feature coverage and Linux execution are not additions to this PR. P1c/P2–P10 below own those next slices.
 
 ## Closed P1a: Windows standalone package, non-visible checks
 
@@ -95,7 +117,7 @@ Non-visible verification and PR exit criteria:
 - [x] Exercise missing/corrupt runtime-data failure and focused launcher regressions; preserve actual failures before repairs. Actual in-checkout and namespace rejection controls ran before any client/Core launch.
 - [x] Complete fresh independent CODE and different requirements review for affected source, record exact results/limits, commit/push/exact-ref-verify and publish the bounded PR. Full assessments and focused closing correction reviews retain their actual separate scopes and dispositions.
 
-**Stop this PR at these criteria.** Actual visible packaged-client controls/rendering, a Windows host without Unreal installed, native Linux, Python runtime bundling, production distribution and new gameplay/profile/viewer/recovery features are out of this PR. They remain separate P1/P2â€“P9 work. A headless result cannot close their acceptance boxes.
+**Stop this PR at these criteria.** Actual visible packaged-client controls/rendering, a Windows host without Unreal installed, native Linux, Python runtime bundling, production distribution and new gameplay/profile/viewer/recovery features are out of this PR. They remain separate P1/P2–P9 work. A headless result cannot close their acceptance boxes.
 
 ## Baselines and settled decisions
 
@@ -124,9 +146,9 @@ It does not yet provide general parameterized gameplay editors, complete roster/
 
 ## Parity ledger and completion rules
 
-Use the source-backed [CAP01â€“CAP36 checklist](research/2026-10-16-capability-checklist.md), its catalogue/preferences/HUD tables as the initial UI/product requirements index. Extend it with the latest selected Core's complete public decision/data/service and automatic rule/content obligations. [Parity/data characterization](research/2026-10-16-parity-and-data.md) and the [44.3.33 adaptation review](research/2026-10-16-contract-44-3-33-adaptation.md) remain historical inputs. Their **97 Core44.1 conformance cases are inventory/parser characterization, not completed gameplay or a limit on target features**.
+Use the source-backed [CAP01–CAP36 checklist](research/2026-10-16-capability-checklist.md), its catalogue/preferences/HUD tables as the initial UI/product requirements index. Extend it with the latest selected Core's complete public decision/data/service and automatic rule/content obligations. [Parity/data characterization](research/2026-10-16-parity-and-data.md) and the [44.3.33 adaptation review](research/2026-10-16-contract-44-3-33-adaptation.md) remain historical inputs. Their **97 Core44.1 conformance cases are inventory/parser characterization, not completed gameplay or a limit on target features**.
 
-For each family/variant and Core capability, maintain a row containing: stable ID; exact Core SHA/path/symbol and source/test; preserve/redesign/new/unsupported disposition; public entry/contract/request/variant; reachable setup recipe or explicit exposure gap; separate Unreal implementation/verification states; representative accepted/rejected/stale/cancel outcomes; viewer/platform coverage and remaining Core dependency. Track public editors, public data/services, automatic rule/content consumers and CAP01â€“36 product behavior separately. A registered/envelope-only family, loadable army or unchanged support-matrix artifact is not proof of a reachable supported battle. Do not recreate missing Core rules in Unreal.
+For each family/variant and Core capability, maintain a row containing: stable ID; exact Core SHA/path/symbol and source/test; preserve/redesign/new/unsupported disposition; public entry/contract/request/variant; reachable setup recipe or explicit exposure gap; separate Unreal implementation/verification states; representative accepted/rejected/stale/cancel outcomes; viewer/platform coverage and remaining Core dependency. Track public editors, public data/services, automatic rule/content consumers and CAP01–36 product behavior separately. A registered/envelope-only family, loadable army or unchanged support-matrix artifact is not proof of a reachable supported battle. Do not recreate missing Core rules in Unreal.
 
 The source-backed [latest Core capability inventory](research/2026-10-24-latest-core-capabilities.md) maps all 89 decision families, 16 HTTP paths and 26 rule sections to immutable source references, baseline differences and current Unreal gaps. The [fetch and merge receipt](evidence/2026-10-24-p1b-source-targets.json) records the exact observed identities without upgrading the runtime.
 
@@ -138,7 +160,7 @@ Every milestone has separate implementation and verification checklists. Before 
 
 **Fast playable lane:** P1b gives the owner the packaged interactive preview now. P1c explicitly adopts the selected newer Core with a small real workflow. Then take a thin P2 session/join/local-handoff slice and enough P3/P4 picking, placement and one movement workflow to make the next game interaction usable. Complete the other variants, viewer modes, HUD and rule/content coverage incrementally. Whole-milestone exhaustive certification is not a serial gate before this lane; each bounded PR still needs working behavior, focused checks and honest remaining gaps.
 
-### P0 â€” Closed camera increment (PR #3 merged)
+### P0 — Closed camera increment (PR #3 merged)
 
 Implementation:
 
@@ -149,9 +171,9 @@ Verification:
 
 - [x] Build and independently review the cancellation source and affected supervisor repair; execute the bounded visible run at `76297e2`. One test passed 386 assertions, including ten cancellation cases. The process exited 0 in 23.898 seconds; all four Config files stayed unchanged and no game window remained. [Results and review dispositions](evidence/2026-10-24-live-core-cancellation.md).
 - [x] Preserve the earlier manual F failure separately from the passed native F route. Eight cases cover actual Escape/focus/capture/resize operations; the two application-deactivation cases cover deliberately delivered events only. Real OS app switching and teardown remain unverified.
-- [x] Record this increment's closing implementation, verification and review dispositions for the owner's authorized PR #3 merge. [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) merged on 2026-10-24 as `2f9e0c11cee65f531be2d4eebe8e7e29532ebf64`; this milestone does not close P1â€“P9.
+- [x] Record this increment's closing implementation, verification and review dispositions for the owner's authorized PR #3 merge. [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) merged on 2026-10-24 as `2f9e0c11cee65f531be2d4eebe8e7e29532ebf64`; this milestone does not close P1–P9.
 
-### P1 â€” Deliver a standalone internal client early
+### P1 — Deliver a standalone internal client early
 
 Implementation:
 
@@ -167,7 +189,7 @@ Verification:
 - [ ] Verify managed versus attached Core cleanup, missing runtime data/config/credentials and incompatible Core behavior. Record the first real packaged-client result; earlier parser/caller staging is not a substitute.
 - [ ] Repeat on a Windows host without an editor installation before claiming portable/clean-machine delivery. Native Linux execution remains open until P8; packaging is a runnable folder, not a promise of a single self-contained file or a bundled Python installer.
 
-### P1c â€” Explicit latest-Core adoption, before broad coverage
+### P1c — Explicit latest-Core adoption, before broad coverage
 
 This follows the P1b preview and can overlap the P2 shell foundation. It is a separate bounded increment, not an automatic pin change in P1b.
 
@@ -180,11 +202,11 @@ Implementation:
 
 Verification:
 
-- [ ] Build the adapted client and run a representative real create â†’ offered action â†’ refresh workflow against the exact new runtime, plus focused identity, malformed/new-field and viewer-disclosure controls.
+- [x] Build the adapted client and run a representative real create → offered action → refresh workflow against the exact new runtime, plus focused identity, malformed/new-field and viewer-disclosure controls. See the [P1c native results](evidence/2026-10-24-p1c-core-adoption.md); this records the already performed checks, not a rerun.
 - [ ] Record reachable new-family workflows as their editors land, or a concrete Core/public-service exposure gap. Do not require all89 families or all internal rules before accepting the narrow adoption slice. **Deferred to P4 editor slices:** P1c adds no family editor or fabricated start/mutation route. `select_coherency_casualty` preserves the offered physical model and per-casualty/final `completes_boundary` distinction; Core supplies legal offers and validates/applies removal. `select_source_reposition` retains its exact request/context. This is an acknowledged editor/workflow gap, not a claimed Core defect or a P1c runtime-adoption gate.
-- [x] Independently review affected changes, publish exact source/runtime/input identities and actual limits, and commit/push checkpoints. Full latest-Core coverage remains P2â€“P10 work.
+- [x] Independently review affected changes, publish exact source/runtime/input identities and actual limits, and commit/push checkpoints. Full latest-Core coverage remains P2–P10 work.
 
-### P2 â€” General public session and decision application shell
+### P2 — General public session and decision application shell
 
 Implementation:
 
@@ -199,13 +221,13 @@ Verification:
 - [ ] Exercise representative real public sessions plus every supported request/variant as its editor lands. Check wrong Core/schema/revision, malformed/unknown descriptors, stale IDs, rejection, delayed/duplicate/lost replies, projection drift and viewer change.
 - [ ] Demonstrate that a rejection is distinct from unknown completion and that commands cannot double-submit. Exposed snapshot invariance alone is not zero-HTTP-attempt proof.
 
-### P3 â€” Complete battlefield presentation, picking and selection
+### P3 — Complete battlefield presentation, picking and selection
 
 Implementation:
 
 - [ ] Expand typed projection geometry: board bounds/origin, deployment zones/cutouts, objectives/linked terrain, area/feature types, facing, actual nonzero Z and supported circular/rectangular/elliptical/capsule/polygon bases.
 - [ ] Consume latest-Core public army-roster disclosure and physical bearer joins as available in the adopted contract. Preserve per-viewer attachment/cargo reveal rules; show supported army/content status without claiming a complete playable faction from loadable data alone.
-- [ ] Keep display meshes, support surfaces, measurement shapes and authoritative footprints distinct. Make Core inches â†” Unreal centimeters/handedness conversion explicit and invertible. Never invent undeployed poses or new elevation/gravity rules.
+- [ ] Keep display meshes, support surfaces, measurement shapes and authoritative footprints distinct. Make Core inches ↔ Unreal centimeters/handedness conversion explicit and invertible. Never invent undeployed poses or new elevation/gravity rules.
 - [ ] Add camera-aware picking, overlap cycling, unit/model/physical-component aliases, hover/selection and synchronized world/roster/Current Action focus, including collapsed/hidden panels and stale viewer teardown.
 - [ ] Add advisory paths/waypoints/ghosts/targets/ranges, Core-supplied measurements, readable annotations, optional nonsnapping grid, stable icons and minimal visual fallbacks. Support shallow tokens and ordinary meshes with the same IDs and query semantics.
 
@@ -214,7 +236,7 @@ Verification:
 - [ ] Compare semantic geometry and intended selection across camera angles, asymmetric/elevated/overlapping entities, hidden UI and mesh substitutions. Test malformed/missing geometry separately from missing optional art.
 - [ ] Verify input ownership, click/drag thresholds, release outside the viewport and cancellation; prove local camera/hover/selection/grid changes cause no gameplay submissions using appropriate instrumentation.
 
-### P4 â€” Play setup, placement and movement through Core
+### P4 — Play setup, placement and movement through Core
 
 Implementation:
 
@@ -228,13 +250,13 @@ Verification:
 - [ ] Record a real reachable start recipe and accepted authoritative before/after state for each supported family, then execute its variant ledger. Cover attached/physical membership, unchanged paths, unsupported variants, stale requests and viewer changes.
 - [ ] Separately verify invalid same-context retry/draft retention versus changed-context draft teardown. Do not replace deployment/movement with a private Core mutation or fabricated start state.
 
-### P5 â€” Complete remaining supported interactions and progression
+### P5 — Complete remaining supported interactions and progression
 
 Implementation:
 
 - [ ] Deliver the three implemented assignment workspaces: shooting declaration, melee declaration and stratagem target binding. Preserve duplicate physical weapon copies, shared/multiple profiles, borrowed/Firing Deck sources, nullable/empty/targetless choices and permitted decline payloads.
 - [ ] Complete supported finite/dice/quantity/entity/confirmation/opportunity/reaction flows, source disambiguation, phase/current-action explanations, scrollable roster and synchronized HUD/world action controls.
-- [ ] Traverse supported setup â†’ prebattle â†’ movement â†’ shooting and dedicated charge/fight workflows through public Core requests; surface terminal/unsupported/unreachable states honestly.
+- [ ] Traverse supported setup → prebattle → movement → shooting and dedicated charge/fight workflows through public Core requests; surface terminal/unsupported/unreachable states honestly.
 - [ ] Cover source-current Action/secondary completion, sequencing and attack model-versus-unit completion changes even where family names are unchanged. Display permitted outcomes/events and retain internal completion evidence redaction.
 - [ ] Extend beyond Arcade where Core supports it: Cult Ambush/placement variants, melee allocation/split/extra attacks and pre-session roster/mustering inputs. Use the public `PlayerArmyList`/`ArmyMusterRequest` path where the selected host exposes it; otherwise record the Core service dependency, not a fabricated `roster_construction` request or client rules implementation.
 
@@ -243,7 +265,7 @@ Verification:
 - [ ] Check each supported family/variant through user-operable controls, real-Core outcomes and negative/stale/cancel cases. Parser conformance or synthetic charge/fight fixtures do not prove an entire reachable battle.
 - [ ] Preserve baseline highlight-then-confirm versus direct context-action semantics. Keep roster selection local; validate new roster/mustering inputs through the supported Core path and distinguish supported pre-session APIs from absent service/editor routes.
 
-### P6 â€” Preserve profiles, adaptive HUD, preview and diagnostics
+### P6 — Preserve profiles, adaptive HUD, preview and diagnostics
 
 Start shared presentation/view-model and composition interfaces alongside P2/P3; do not wait until all gameplay is complete to design profile compatibility.
 
@@ -261,7 +283,7 @@ Verification:
 - [ ] Cover long labels, narrow/high-DPI windows, overflow, stale/unknown fields, malformed files, active/inactive/extension preservation and safe recovery. Keep viewer-private data out of previews, traces and crash output.
 - [ ] Review and test any reused deferred profile code before product integration. Historical 727 recipes remain a coverage inventory until materialized and executed, not a blanket gate before ordinary feature progress.
 
-### P7 â€” Required viewer modes, reconnect and exact-Core continuity
+### P7 — Required viewer modes, reconnect and exact-Core continuity
 
 Implementation:
 
@@ -275,7 +297,7 @@ Verification:
 - [ ] Inject response loss/reconnect, restart and permission changes; demonstrate exact-command reconciliation and supported persistence/recovery behavior. Current in-memory UI reconciliation and the development host do not prove durability.
 - [ ] Track missing Core authentication, remote-service or persistence support as explicit external Core issues. The UI must not implement a new authority/host, claim unsupported save/resume, or invent cross-Core/midgame client conversion.
 
-### P8 â€” Native Linux, performance, release and cutover
+### P8 — Native Linux, performance, release and cutover
 
 Implementation:
 
@@ -289,18 +311,18 @@ Verification:
 - [ ] Close practical performance/accessibility/reliability findings and all required parity-ledger variants. Record any agreed intentional difference or remaining waiver explicitly.
 - [ ] Approve a default-client switch only after the required feature/platform evidence is complete. Preserve separate profiles/session stores and rollback to compatible exact-Core client bundles; retiring Arcade is a separate decision.
 
-### P9 â€” Retained presentation-reuse extension
+### P9 — Retained presentation-reuse extension
 
 - [ ] After P3/P6 interfaces stabilize, demonstrate shared safe tabletop presentation/composition in a separate synthetic observation host: resolved/ambiguous/stale/lost/duplicate IDs and manual correction, with explicit intent still using current Core requests.
-- [ ] Label this CAP34 extension as new work beyond Python UI parity. Production computer vision/projector calibration, detailed miniature libraries/rigs/paid art and new rules/physics are outside parity prerequisites (CAP35â€“36).
+- [ ] Label this CAP34 extension as new work beyond Python UI parity. Production computer vision/projector calibration, detailed miniature libraries/rigs/paid art and new rules/physics are outside parity prerequisites (CAP35–36).
 
-### P10 â€” Source-current Core coverage beyond the Arcade milestone
+### P10 — Source-current Core coverage beyond the Arcade milestone
 
 This is the long-term target ledger, not a gate ahead of P1b or the thin gameplay lane. Bring an individual requirement forward when it enables the next useful interaction; do not wait for P9 to start Core extensions.
 
 Implementation:
 
-- [ ] Maintain the complete selected-Core public family/variant inventory, public data/service inventory and rule/content consumer obligations alongside CAP01â€“36. Every supported capability needs an editor, faithful automatic-result presentation, or an explicit Core/public-exposure dependency.
+- [ ] Maintain the complete selected-Core public family/variant inventory, public data/service inventory and rule/content consumer obligations alongside CAP01–36. Every supported capability needs an editor, faithful automatic-result presentation, or an explicit Core/public-exposure dependency.
 - [ ] Implement source-supported capabilities absent or incomplete in Arcade, including the pre-session roster/mustering, public roster disclosure and newer finite/parameterized contexts above. Unsupported Core behavior remains a Core gap; it is not a license for a private Unreal rules path.
 - [ ] Diff each subsequent Core target for schema constraints, family/proposal variants, sequencing/identity/idempotency, redaction, source/resource identity, rule-consumer repairs and support-status changes. Freeze the actual target before adaptation instead of chasing a moving HEAD at runtime.
 - [ ] Keep automatic rule/content support separate from UI controls: engine movement/attack/death/reserve/mission/faction effects must be reflected faithfully, not reimplemented in the client. Cross-check source/section coverage when older capability manifests/support matrices have not changed.
@@ -327,7 +349,7 @@ Every CAP ID remains traceable to its detailed variant/source/test checklist; gr
 | CAP23, CAP24, CAP25, CAP26, CAP27 | Composition/schema, layouts, accessibility, preference preservation and shared live/preview renderer: P6; interfaces start P2/P3. |
 | CAP28 | Actual HTTP/error/uncertainty diagnostics: P2; trace/config/crash product behavior: P6. |
 | CAP29, CAP30 | Viewer/actor/cache isolation and exact-Core recovery/coexistence: P2/P7/P8. Remote/spectator product support is required new work. |
-| CAP31 | 44.1â†’tested44.3.33â†’selected44.5/beyond adaptation, source/inventory/copy/nullable/membership/committed-target semantics: P1c/P2/P4/P5/P10, per-variant ledger. |
+| CAP31 | 44.1→tested44.3.33→selected44.5/beyond adaptation, source/inventory/copy/nullable/membership/committed-target semantics: P1c/P2/P4/P5/P10, per-variant ledger. |
 | CAP32, CAP33 | Executable bundles, native Windows/Linux and measured performance: P1/P8. |
 | CAP34 | Shared synthetic tabletop presentation reuse: P9, distinct from parity acceptance. |
 | CAP35, CAP36 | Detailed art, new rules/gravity and production recognition exclusions: all milestones; no completion claim by omission. |
