@@ -32,7 +32,7 @@ function Initialize-DevelopmentCredentials([string]$Registry) {
             if ($credentialMatches.Count -ne 1) { throw 'Pinned development credential declaration was not found in the expected form.' }
             $value = $credentialMatches[0].Groups[1].Value
         }
-        if ($value.Length -gt 256 -or $value -cnotmatch '^[A-Za-z0-9._~+/\-]+=*$') {
+        if ($value.Length -gt 256 -or $value -cnotmatch '\A[A-Za-z0-9._~+/\-]+=*\z') {
             throw ($entry[0] + ' must contain a valid bearer token of at most 256 ASCII characters; its value is not displayed.')
         }
         $credentials[$entry[0]] = $value

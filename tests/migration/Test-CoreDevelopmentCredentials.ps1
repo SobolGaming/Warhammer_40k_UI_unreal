@@ -63,7 +63,8 @@ DEV_PLAYER_B_TOKEN = "synthetic-default-player-b"
     Assert-True ($output.Count -eq 0 -and $env:WH_CORE_ADMIN_TOKEN -ceq 'synthetic-override-admin' -and $env:WH_CORE_PLAYER_TOKEN -ceq 'synthetic-override-player-a' -and $env:WH_CORE_PLAYER_B_TOKEN -ceq 'synthetic-default-player-b') 'Missing player-b did not use only its own default'
     $cases++
 
-    foreach ($invalid in @('synthetic private bad token', ('x' * 257), ('non-ascii-' + [char]0xE9))) {
+    foreach ($invalid in @('synthetic private bad token', ('x' * 257), ('non-ascii-' + [char]0xE9),
+        "synthetic-final-lf`n", "synthetic-final-crlf`r`n", "synthetic-embedded`nlf")) {
         Test-ExpectedFailure $registry @{ WH_CORE_PLAYER_B_TOKEN = $invalid } 'WH_CORE_PLAYER_B_TOKEN must contain a valid bearer token'
     }
     $missing = $registry -replace '(?m)^DEV_PLAYER_B_TOKEN[^\r\n]*', ''
