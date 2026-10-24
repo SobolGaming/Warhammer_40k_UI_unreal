@@ -1,0 +1,212 @@
+{
+  "verdict": "SOURCE_PASS",
+  "qualification": "Local scoped SOURCE assessment only. This is not the aggregate SOURCE gate, phase authority, native acceptance or final acceptance.",
+  "subject": {
+    "sourceHead": "4a4f107f316456c8eac7935c0ef8d785a1f4e48e",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "campaignId": "E04A1E-SCOPED-4a4f107-20261020T061255Z-f9eae715",
+    "plannedRunId": "20261020T061255Z-f9eae715",
+    "scopeId": "D_SELECTORS_603_902",
+    "assessmentKind": "BLIND_SELECTED_DATA_INITIAL"
+  },
+  "bindingVerification": {
+    "result": "MATCH",
+    "scopeContract": {
+      "bytes": 52294,
+      "sha256": "e3bec3b32c04e2495084dbd393ba67b81e3b339a91da7f5fd7b30eafb1e446fb"
+    },
+    "bootstrapSha256": "40bfbaa9155b34c2232e4fd43ac55d209ffef7531846c732536a05aa729a6669",
+    "coverageSha256": "a33b86ae41a9515977637dae5f68105682a1a373cceb8a19b646624aa795b506",
+    "inputManifestSha256": "e731215c73e6505d3312b5e1416a143584724ae111b95e6fedefa3bbe20687be",
+    "runtimeFreezeSha256": "430c806c4b82214e4b51a570c0d7bc27ba9e3257e4f14ebadd90f076e52d50bc",
+    "launchPermissionSha256": "750109a7aabdb8375109665008814e0e2024949965b1de970061e536c82506e8",
+    "preparedPrompt": {
+      "bytes": 23679,
+      "sha256": "fb362d84407ab4997706edc85d2de490bf19a897cc716999aeb9379bec0a03f7"
+    },
+    "actualPromptArtifact": {
+      "bytes": 24919,
+      "sha256": "ccaaf52bf8542d71658c8d18aeabd84952272c4ba1b02f6aa26f5f8a68c030b7",
+      "startsWithCompletePreparedPrompt": true,
+      "completeEmbeddedCriteriaMatch": true,
+      "matchingActualGoTail": true
+    },
+    "details": [
+      "Head, base, run, campaign, scope and assessment kind agree across bootstrap, manifest, local scope, policies and coverage.",
+      "The local scope and subject match the pure contract exactly; all supplied prompt composition criteria match the bound records.",
+      "The three exact common criteria records were read and parsed only after verifying their bound paths, byte counts and complete hashes. Their descriptors occur in both panel inputFiles and frozenFiles.",
+      "The common and local ordered 96 BODY grants match. Metadata policy record 4 uses different common/panel catalog paths with identical bytes and SHA256.",
+      "All 96 BODY identities and physical line counts were independently verified: 42,986 rows. This does not imply substantive inspection of all 96 bodies.",
+      "End-of-assessment rechecks of mandatory bindings found no changes."
+    ]
+  },
+  "completeLocalCoverage": {
+    "mandatoryEntireBodies": [
+      "SOURCE-BODY-054:1-294",
+      "SOURCE-BODY-055:1-142",
+      "SOURCE-BODY-056:1-14",
+      "SOURCE-BODY-057:1-196",
+      "SOURCE-BODY-095:1-50",
+      "SOURCE-BODY-096:1-88"
+    ],
+    "mandatoryBodyFiles": 6,
+    "mandatoryPhysicalRows": 784,
+    "requiredCompleteUnitRanges": [],
+    "metadataFullSelectedRecords": [9, 10],
+    "metadataAssignedPartition": {
+      "recordOrdinal": 8,
+      "physicalRows": "603-902 inclusive",
+      "rowsAssessed": 300,
+      "uniqueOrderedOrigins": 300,
+      "rowsMatchedExactlyOnce": true,
+      "permittedOriginFieldsPerRow": 49,
+      "originByteHashOrSelectedValueMismatches": 0
+    },
+    "relationshipRecords": [7, 11, 12],
+    "relationshipWork": [
+      "Compared complete ordered descriptor membership arrays in records 7 and 12; all 245 identities agree.",
+      "Matched every assigned origin to frozenFiles and freeze.files with exact path, byte count and SHA256.",
+      "Compared all 901 installed catalog origin identities against record 7 catalog roots; row 902 is the separately bound project proof plugin.",
+      "Checked project record 11 against complete SOURCE-BODY-016 and proof row 902 against complete SOURCE-BODY-002.",
+      "Assessed all assigned selector values, absences, ordered other-present field-name arrays, 668 ordered module entries, 497 outgoing Plugin references, localization values and PythonRequirements."
+    ]
+  },
+  "substantiveAssessment": [
+    {
+      "conclusion": "The assigned projection faithfully preserves permitted origin values without inserting defaults or normalizing case, types or arrays. No selected-field correspondence defect was found.",
+      "evidence": [
+        "Record 8 physical rows 603-902, all four permitted row fields",
+        "Record 9: representation and selectorFields",
+        "Record 10: valueRepresentation, absentRepresentation, originIdentity and fields",
+        "scope.selected.json#/scope/duties/0",
+        "scope.selected.json#/scope/duties/2"
+      ]
+    },
+    {
+      "conclusion": "Absence remains distinct from false, zero and empty arrays. No explicit null occurred in assigned selector values. Empty Plugins arrays at rows 706, 725, 727, 751, 776 and 900 and empty module deny lists at rows 676, 701 and 749 were retained. Fractional Version values, string-valued Hidden at rows 879-881, and ProgramAllowList versus ProgramAllowlist remain literal distinctions.",
+      "evidence": [
+        "Record 8 assigned rows",
+        "SOURCE-BODY-069:262-418",
+        "SOURCE-BODY-065:165-256",
+        "SOURCE-BODY-081:283-437,1115-1269"
+      ]
+    },
+    {
+      "conclusion": "Missing EnabledByDefault is not equivalent to false: runtime defaults depend on engine/project provenance. Plugin platform support, module platform/architecture/target/configuration filters and program exceptions are separate conditions. UBT module filtering also distinguishes an absent platform allow list from a present empty list. Top-level PlatformAllowList at rows 820-821 was not substituted for SupportedTargetPlatforms or module filters.",
+      "evidence": [
+        "SOURCE-BODY-073:424-450",
+        "SOURCE-BODY-069:433-443",
+        "SOURCE-BODY-065:281-537",
+        "SOURCE-BODY-081:283-437,490-500,1115-1445"
+      ]
+    },
+    {
+      "conclusion": "Enabled=false references remain disabled; Optional does not enable them. In particular, row 608 retains its disabled optional OnlineSubsystemGDK reference and its literal platform array, although UBT parses reference platform information only when enabled.",
+      "evidence": [
+        "Record 8 row 608 Plugins[5], using one-based occurrence numbering",
+        "SOURCE-BODY-078:35-185",
+        "SOURCE-BODY-081:712-850"
+      ]
+    },
+    {
+      "conclusion": "ExplicitlyLoaded=true at rows 605, 606, 813 and 814 excludes normal enabled-plugin module dispatch. Loading phases, host type and current configuration remain additional conditions. Module load failures propagate through the inspected dispatch path, subject to its all-plugins command-line exception.",
+      "evidence": [
+        "Record 8 rows 605,606,813,814",
+        "SOURCE-BODY-068:156-160",
+        "SOURCE-BODY-065:539-566",
+        "SOURCE-BODY-075:4-65,70-165"
+      ]
+    },
+    {
+      "conclusion": "The concrete proof target pins bBuildAllModules=false and enables E04ProfileProof. Row 902 retains Runtime/Default parser and DeveloperTool/Default/Editor probe selectors. These support conditional source routes; effective configuration, developer-tool availability, derived construction/finalization and actual loading were not established here.",
+      "evidence": [
+        "SOURCE-BODY-001:1-16",
+        "SOURCE-BODY-002:1-17",
+        "Record 8 row 902",
+        "SOURCE-BODY-065:281-537",
+        "SOURCE-BODY-081:1307-1445"
+      ]
+    },
+    {
+      "conclusion": "Record 12 retains sourceHead c6a9410a524649147f157c3c17a2b838c7e0fc81 and runId 20261020T010406Z-a7dec142. Its ordered membership identities match current record 7; 65 assigned descriptors occur in each. This is reused membership metadata, not evidence that those plugins executed in the current run.",
+      "evidence": [
+        "Records 7 and 12: descriptors",
+        "Record 12: sourceHead, runId and originClosure",
+        "scope.selected.json#/scope/duties/3"
+      ]
+    }
+  ],
+  "incidentReferenceAssessment": {
+    "catalogOccurrencesExamined": 1561,
+    "catalogOccurrencesIncidentToAssignedRows": 745,
+    "assignedOutgoingOccurrences": 497,
+    "incomingOccurrencesFromOtherCatalogPartitions": 248,
+    "additionalIncomingProjectOccurrence": 1,
+    "exactInternalJoins": 299,
+    "additionalCaseOnlyInternalCandidate": 1,
+    "assignedOutgoingCrossPartitionOccurrences": 197,
+    "preservation": "Original source row, one-based occurrence ordinal, literal reference object and target-origin identity were retained. No peer graph or report was used.",
+    "caseOnlyCondition": {
+      "sourceRow": 667,
+      "sourcePath": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Plugins\\Runtime\\AudioModulation\\AudioModulation.uplugin",
+      "sourceSha256": "B1BE3999B98F18DD2F4F48223DB13501D397A2178BB8B608CB61BDF3CF76F459",
+      "occurrence": 1,
+      "literalReference": {
+        "Name": "MetaSound",
+        "Enabled": true
+      },
+      "exactNameMatch": false,
+      "caseOnlyCandidateRow": 715,
+      "candidatePath": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Plugins\\Runtime\\Metasound\\Metasound.uplugin",
+      "candidateSha256": "DA4A4EBAF2E26447C99A2742D008E1B799D5FC7C28FC154CA8732B4991C86E1E",
+      "disposition": "Literal mismatch preserved. No runtime-resolution claim is made; consumer-specific resolution remains part of the independently owned full graph assessment."
+    },
+    "requirementCitation": "scope.selected.json#/scope/duties/3"
+  },
+  "additionalSourceInspection": {
+    "entireBodies": [
+      "SOURCE-BODY-001:1-16",
+      "SOURCE-BODY-002:1-17",
+      "SOURCE-BODY-016:1-8",
+      "SOURCE-BODY-064:1-271",
+      "SOURCE-BODY-065:1-567",
+      "SOURCE-BODY-068:1-267",
+      "SOURCE-BODY-069:1-445",
+      "SOURCE-BODY-075:1-166",
+      "SOURCE-BODY-077:1-134",
+      "SOURCE-BODY-078:1-211",
+      "SOURCE-BODY-081:1-1725"
+    ],
+    "partialBody": "SOURCE-BODY-073:378-466",
+    "totalEntireBodiesIncludingMandatory": 17,
+    "totalEntireBodyPhysicalRows": 4611,
+    "additionalPartialPhysicalRows": 89
+  },
+  "unreadOrUnassessedScope": [
+    "No mandatory local body, unit, assigned row or material incident-reference enumeration remains incomplete.",
+    "Rows 1-602 received Plugin-reference and origin/catalog relationship examination only, not complete selector assessment.",
+    "BODY073 outside physical rows 378-466 remains substantively unassessed.",
+    "Other BODY IDs substantively unassessed beyond identity verification: 003-015,017-053,058-063,066-067,070-072,074,076,079-080,082-094.",
+    "Record 7 sourceBindings were used for relevant inspected source routes; unrelated implementation duties and full runtime/build/cross-system graph semantics were not assessed.",
+    "Metadata records 2,3,5,6,13 were not substantively assessed. Records 1 and 4 received binding-related selected-field queries only.",
+    "Complete Default startup/explicit-mount callers and effective all-modules/prebuild routes in BODY092-094 remain assigned to their owning scopes."
+  ],
+  "errorsAndRecoveries": [
+    "Six oversized metadata/identity outputs were truncated. Mandatory criteria and material results were recovered through smaller named-field reads, complete exact comparisons, ordered profile reconstruction and lossless inclusive row ranges. Mandatory source-body rendering was complete.",
+    "Initial prompt JSON extraction included trailing prose. A string-aware object-boundary scan recovered the complete criteria object; every supplied composition field matched.",
+    "Strict origin JSON parsing stopped at a trailing comma in row 618 and subsequently at a UTF-8 BOM in row 672. Inert lexical handling of comments/trailing commas and a leading BOM completed all 300 comparisons without changing files or selected values; 22 origins required permissive syntax handling.",
+    "An overbroad flat inputFiles membership query found raw origins absent there. Recovery established that every assigned origin instead matches both frozenFiles and freeze.files, under the explicit record-8 origin-query grant. No origin identity mismatch remained."
+  ],
+  "independenceAndRuntimeLimits": {
+    "observed": "This assessment used the supplied blind context and read-only tools. No implementation was authored; no files were saved or mutated; no delegation, stored-command execution, implementation import, YAML parsing, build/test/native/GUI/network/GitHub action or credential access occurred.",
+    "runtimeEvidence": "The supplied environment declares read-only filesystem access and approval policy never. No prohibited generated runtime, invocation, receipt, ledger, stdout/stderr or last-message file was inspected.",
+    "unverified": "Actual CLI/session/model/isolation provenance, transmitted-input byte provenance and independently enforced memory disabling remain root verification responsibilities. Requested memory disabling is not reported as independently verified.",
+    "requirementCitations": [
+      "SOURCE-BODY-054:89-125,150-186",
+      "SOURCE-BODY-056:9",
+      "scope.selected.json#/reviewDiscipline/generatedRuntimeAndInvocation"
+    ]
+  },
+  "findingsRequiringLocalSourceChanges": [],
+  "remainingGates": "Root must compose all ten independently valid assessments and resolve full graph, runtime/isolation and other owned conditions. A1G, A2, Linux, rendering/HUD, packaging, separate phase GOs and final independent CODE/REQ acceptance remain open. No actual activation or native result is claimed."
+}

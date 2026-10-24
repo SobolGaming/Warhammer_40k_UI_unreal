@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "kind": "ROOT_OWNED_BOUNDED_PURE_CONTROL_HOST_RECEIPT",
+  "pid": 8924,
+  "startedUtc": "2026-10-20T12:05:34.9170782+00:00",
+  "completedUtc": "2026-10-20T12:06:06.3082092+00:00",
+  "elapsedSeconds": 31.391131,
+  "exitCode": 0,
+  "timedOut": false,
+  "hostExitConfirmed": true,
+  "maximumRuntimeSeconds": 120,
+  "adoptionPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-repair-v3-PROPOSED/root-pure-controls-source-adoption.original.json",
+  "controlRoot": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-controls-01",
+  "nativePhaseInvoked": false,
+  "visibleWindow": false,
+  "limits": "CreateNoWindow pure PowerShell child; no OS descendant inventory collected. Adopted source path and throwing seam exclude actual implementation/native process launch. Selected wrapper functions were executed; full CLI/supervisor/PEReader were not."
+}

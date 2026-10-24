@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_FOCUSED_SOURCE_F13_CLOSURE",
+  "planRevision": 78,
+  "status": "FOCUSED_SOURCE_CLOSED_F13_REPAIR_REQUIRED",
+  "subject": {
+    "sourceHead": "9e8340878ca1ac417e81ca2b967a0ae5dcb4e1b0",
+    "technicalSourceHead": "9e8340878ca1ac417e81ca2b967a0ae5dcb4e1b0",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261021T002433Z-ba2ef0ff"
+  },
+  "assessment": {
+    "scopeId": "E04_COMPONENT_SOURCE",
+    "assessmentKind": "BLIND_JOINED_SOURCE_INITIAL",
+    "rawVerdict": "CHANGES_REQUESTED",
+    "closedUtc": "2026-10-21T00:46:54.1957464Z",
+    "declaredMandatoryCoverage": "COMPLETE_IN_RAW_REPORT_NOT_AN_INDEPENDENT_DELIVERY_AUDIT",
+    "findingCount": 1
+  },
+  "finding": {
+    "priority": "P2",
+    "id": "F13_DIAGNOSTIC_OBSERVED_COUNT",
+    "expectedObserved": 2,
+    "pinnedScannerSourceDerivedObserved": 3,
+    "qualification": "Static source trace, not parser/native execution; outer flow sequence remains unclosed, provisional mapping/sequence starts precede null, and the fresh bounded probe restores that original diagnostic.",
+    "repairStatus": "NOT_APPLIED",
+    "requiredDisposition": "Reconcile the fixed native expectation and generated manifest, or explicitly change the fixture construction while preserving its bounded-probe regression; rebind changed inputs and obtain fresh affected SOURCE."
+  },
+  "transport": {
+    "deadlineSeconds": 1800,
+    "elapsedSeconds": 786.3291325,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "hidden": true,
+    "reviewProcessOnly": true
+  },
+  "capture": {
+    "pairs": 65,
+    "anomalies": 0,
+    "rawSealMembers": 12,
+    "extractionSealMembers": 262,
+    "rootRehashedAllBeforeFirstReportBodyRead": true,
+    "preBodyObservationUtc": "2026-10-21T00:48:15.7421918Z",
+    "identityQualification": "Point-in-time seal observations; no continuous immutability claim."
+  },
+  "selectedRuntime": {
+    "sessionCount": 1,
+    "turnContextCount": 1,
+    "sandbox": "read-only",
+    "approvalPolicy": "never",
+    "provider": "openai",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "memoryMode": "disabled",
+    "exactActualPromptPlusCrLf": true,
+    "additionalTrailingBytes": 2,
+    "limits": "Selected runtime metadata, not an independent lower-level isolation or OS ancestry proof; private instruction/configuration/session bodies remain excluded."
+  },
+  "phaseAuthority": {
+    "sourceAdmissions": 0,
+    "sourcePass": false,
+    "nativePhaseGo": false,
+    "nativeRunRootCreated": false,
+    "allEightNativePhases": "NOT_RUN",
+    "visibleCount": 0,
+    "focusedLegacyAuthorityMeaning": "Raw report supports focused acknowledgments only when reviewScope, exact norm and DEFERRED_UNPROVEN_OWN17 qualifier are bound; Check-Authority does not enforce these extra qualifiers. CHANGES_REQUESTED grants no phase authority."
+  },
+  "planned": {
+    "inputs": 43,
+    "generatedRecipes": 33,
+    "attempts": 50,
+    "suites": 8
+  },
+  "unchanged": {
+    "standingPrivateSourceApiConsent": "PERPETUAL_UNLESS_REVOKED",
+    "own17": "ACTIVE_SPECIAL_ASSURANCE_DEFERRED_UNPROVEN",
+    "runtimeAssertions": "FAIL_CLOSED_DO_NOT_IGNORE_FAILURE",
+    "rules86": "86/86 matched separately; not rerun and not SOURCE/native proof.",
+    "csharp4": "NOT_RUN",
+    "whole18": "NOT_RUN",
+    "fullSupervisorControls": "NOT_RUN",
+    "finalCodeAndDifferentReq": "REQUIRED_AFTER_ACTUAL_EXECUTION_AND_EVIDENCE_FREEZE",
+    "laterGates": [
+      "A1G genuinely exception-disabled caller",
+      "A2/full lexical and fidelity, including context-sensitive plain DEL",
+      "HUD",
+      "Linux UNTESTED",
+      "packaging",
+      "full acceptance"
+    ]
+  },
+  "evidence": {
+    "rawReport": {
+      "path": ".local/reviews/E04A1-source-review/focused-9e83408-002433-E04_COMPONENT_SOURCE/last-message.txt",
+      "bytes": 6812,
+      "sha256": "F20E2B4539E7040444A10109EFB786B0683F2EED8D5345D90464797F9F3DD417"
+    },
+    "finalRuntime": {
+      "path": ".local/reviews/E04A1-source-review/focused-9e83408-002433-E04_COMPONENT_SOURCE/runtime-evidence.final.selected.json",
+      "bytes": 8595,
+      "sha256": "5B3AAE96301FF628FB5243779EE713AF346DE2C42B30EAE9AE9AE8ED7F7C5093"
+    },
+    "rawPreBodySeal": {
+      "path": ".local/planning/E04/focused-component-source-9e83408/closure-observation/watch-20261021T003528Z-48c70b/E04_COMPONENT_SOURCE.before-report-body-read-seal.original.json",
+      "bytes": 4656,
+      "sha256": "68B49192E37BCD942B679DA6CD245E7CCC50062AF52094A3E8D2626936CFF65D"
+    },
+    "extractionSeal": {
+      "path": ".local/planning/E04/focused-component-source-9e83408/closure-observation/watch-20261021T003528Z-48c70b/E04_COMPONENT_SOURCE.closed-extraction-seal.original.json",
+      "bytes": 84705,
+      "sha256": "197E95D9705ADD23C9BCBFDF64FADC4186A3AC30842E2F6F809606A5C6D0A273"
+    },
+    "toolLedger": {
+      "path": ".local/reviews/E04A1-source-review/focused-9e83408-002433-E04_COMPONENT_SOURCE/actual-complete-tool-input-output-ledger.json",
+      "bytes": 1448968,
+      "sha256": "BD739A5B256ECB39C94259F26480976320F924A52DE4F9A4045A0267CF2BFCFA"
+    },
+    "beforeFirstReportRead": {
+      "path": ".local/planning/E04/focused-component-source-9e83408/root-before-first-source-report-read.original.json",
+      "bytes": 1420,
+      "sha256": "A8939372F7541CEDC26C19D66DFD932944D9998BF3E0A3CD855A1EE96E8A8442"
+    },
+    "completion": {
+      "path": ".local/reviews/E04A1-source-review/focused-9e83408-002433-E04_COMPONENT_SOURCE/completion.json",
+      "bytes": 4007,
+      "sha256": "B3FDDE1999457FD8EC451FB6A8DDF6419D411EEE9919C94630F9ACB9AA6E857B"
+    },
+    "ownedJobReceipt": {
+      "path": ".local/reviews/E04A1-source-review/focused-9e83408-002433-E04_COMPONENT_SOURCE/owned-job-receipt.json",
+      "bytes": 149578,
+      "sha256": "08EA2D7BD1851B25668D13683035A9BCFB52B64CDFBA801D4A6A266D35ED70EE"
+    },
+    "inputIndex": {
+      "path": ".local/reviews/E04A1-source-review/focused-9e83408-002433-E04_COMPONENT_SOURCE/input-index.json",
+      "bytes": 48437,
+      "sha256": "DD966EFFDF1ED542E79C34FDEAF307FCF5017A9594E544052909CF822A276083"
+    },
+    "freezeManifest": {
+      "path": ".local/reviews/E04A1-source-review/practical-common-9e83408-20261021T002433Z-ba2ef0ff/runtime-freeze/freeze-manifest.PROPOSED.json",
+      "bytes": 702003,
+      "sha256": "7EAB8426EE3D32FEF95BC079457FD85B81AFC68BD1194521DFFF5FF988E67ACF"
+    },
+    "functionalNorm": {
+      "path": "docs/plans/research/2026-10-21-e04a-functional-proof-packet.md",
+      "bytes": 4763,
+      "sha256": "253EF93B8D620656A7065EF72E672A688F5D7E78BC1BC68C2052A0F2EFC6FD05"
+    }
+  },
+  "limits": "Factual closure metadata and the preserved raw report; no tool-value delivery/conduct re-audit, fresh SOURCE approval, candidate/build/parser/native execution or acceptance. No private raw bodies published."
+}

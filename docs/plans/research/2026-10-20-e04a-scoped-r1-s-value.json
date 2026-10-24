@@ -1,0 +1,256 @@
+{
+  "verdict": "SOURCE_PASS",
+  "qualification": "LOCAL S_VALUE SOURCE assessment only. This is not the aggregate SOURCE gate, phase authority, native acceptance or final acceptance.",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-f7f77eb-20261020T044205Z-14143fc0",
+  "scopeId": "S_VALUE",
+  "sourceHead": "f7f77eb281c0629fba12fa5a352e5301bf43e738",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T044205Z-14143fc0",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "requiredLaterSubset": "E04-A1G",
+  "bindings": {
+    "reviewDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-f7f77eb-20261020T044205Z-14143fc0-S_VALUE",
+    "directoryRelativeDescriptors": {
+      "source-review-input-manifest.json": {
+        "bytes": 554661,
+        "sha256": "25851351b8708334400892a19da5a10b06951c4cec78b4aa8f68ae70278dee0d"
+      },
+      "scope-contract.original.json": {
+        "bytes": 43807,
+        "sha256": "3f7b477a836e770cd7a8df90c1fe31ce53ab2bdc6438112c48519d694d470edb"
+      },
+      "review-bootstrap.json": {
+        "bytes": 4076,
+        "sha256": "6468c92fbd2fac707b90e50e8f706431db90be875aa025aef484f94531b9d1ae"
+      },
+      "coverage-plan.json": {
+        "bytes": 31006,
+        "sha256": "5dad75b0c3ee5ede2e00569db48a839ee889095a506a884e585eea9408e5504b"
+      },
+      "scope.selected.json": {
+        "bytes": 11948,
+        "sha256": "a84a16e72c463419d2f866883747a02301e88a2555bd689b50a10628c1f9854b"
+      },
+      "body-access-policy.json": {
+        "bytes": 53374,
+        "sha256": "64344366a99816d721af804b300a2deae3ce29a2049a02ebb6665be21cd98429"
+      },
+      "metadata-selection-policy.json": {
+        "bytes": 14693,
+        "sha256": "6cb51ad3dfc08d9205a797230267f2d7d7a255aa54690bda636fbc33d37e9b66"
+      },
+      "launch-permission-go.original.json": {
+        "bytes": 2005,
+        "sha256": "42be0a6b51bca409a8dbe0a35ea92bfc967ca698c84df11596dc2f6b085db7f1"
+      },
+      "prepared-review.prompt.original.txt": {
+        "bytes": 20687,
+        "sha256": "1db8c80bb612ada54501df7cdb4933e339c03a0a8f917a01d695097609b4f1b1"
+      },
+      "actual-launch.prompt.original.txt": {
+        "bytes": 21903,
+        "sha256": "694e646b174e63f7fff79d59399a31e89bcc40fa6e7eada410b5057c214057be"
+      },
+      "owner-review-transmission-approval.json": {
+        "bytes": 719,
+        "sha256": "be6775a9391b491e61b9150d5d0da0e52e0942d454a1aad3c7e40a05cdbda592"
+      }
+    },
+    "commonDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-f7f77eb-20261020T044205Z-14143fc0",
+    "commonDirectoryRelativeDescriptors": {
+      "runtime-freeze\\freeze-manifest.PROPOSED.json": {
+        "bytes": 548601,
+        "sha256": "a0a5375cd24f72aeb8a8c14fd89bbd9b541507d693fabe0686c0f186fb2551e2"
+      },
+      "body-access-policy.json": {
+        "bytes": 52397,
+        "sha256": "7008d21165ff2d657c98daf31646375cedc7dc1c302bcf2710e1dfd3c8ab75bc"
+      },
+      "metadata-selection-policy.json": {
+        "bytes": 13944,
+        "sha256": "cb808ca909ef0b7176d1a323f12e402295f1d9c6946ec8b6db8a111055e0433a"
+      },
+      "coverage-plan.json": {
+        "bytes": 64021,
+        "sha256": "abc393c499be3558333feb002f18059eb7acf01794c9308013a86caeea6c2744"
+      },
+      "primary-catalog.integrated.json": {
+        "bytes": 135400,
+        "sha256": "0e677eef666ac98d9dae453ad53b973cb6fc94c8db4fb63d3bafb115f926d35d"
+      },
+      "source-review-input-manifest.json": {
+        "bytes": 550087,
+        "sha256": "999a4decffc4f3a95f42de057f21ad63fff5e00b1d5486bef442096910b8e4b2"
+      }
+    },
+    "verification": [
+      "Listed descriptor byte lengths and hashes matched actual files.",
+      "Actual prompt begins with the exact prepared prompt. Its subject and local scope exactly match scope.selected.json and the S_VALUE contract entry; all supplied common contract fields were compared exactly. The actual GO tail matches the authorized head/base/run/manifest/freeze/permission bindings.",
+      "Current root-launch-go.original.json carries the matching campaign, scope, assessment kind, actual prompt and review-only authorization.",
+      "The pure contract retains actualGo=false and launch/native/phase authority=false. Those values were not substituted for the separate actual ROOT GO.",
+      "Own and global BODY grant arrays match exactly. The scoped and common integrated catalogs have different declared paths but identical bound bytes and SHA256.",
+      "Manifest-bound CLI, PowerShell, Git executable and supervisor/worker/launcher source descriptors were hash-checked only; none was invoked as review implementation.",
+      "Source-head and comparison-base identities are root-supplied. Git verification was not performed."
+    ]
+  },
+  "independenceAndRuntime": {
+    "observed": "This assessment used the supplied fresh scoped context and read-only/never runtime constraints. No implementation edits, delegation, resume/fork, memory retrieval, peer reports, author/operator notes, credential access, network, Git/GitHub, YAML parsing, build, test, engine or GUI execution occurred. No files were saved.",
+    "model": "The supplied runtime identifies Codex based on GPT-6; an exact model checkpoint and actual CLI launch/session identifiers were not independently established.",
+    "memory": "Disabled use was requested. No memory facility was used; the backend memories.use_memories setting was not independently verified.",
+    "limit": "Bound launcher files and requested launch settings do not independently prove this context's process ancestry or all isolation properties. Root must retain and validate actual invocation/runtime/isolation evidence before aggregation."
+  },
+  "coverage": {
+    "mandatoryStatus": "COMPLETE",
+    "inventoryIdentityChecks": {
+      "bodyFiles": 93,
+      "physicalRows": 32460,
+      "allBodyDescriptorsAndPhysicalLineCountsMatched": true
+    },
+    "mandatoryEntireFiles": 34,
+    "mandatoryEntirePhysicalRows": 8887,
+    "completeMandatoryPhysicalRangesByBody": {
+      "SOURCE-BODY-001": [1, 15],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-003": [1, 326],
+      "SOURCE-BODY-004": [1, 15],
+      "SOURCE-BODY-005": [1, 50],
+      "SOURCE-BODY-006": [1, 58],
+      "SOURCE-BODY-007": [1, 52],
+      "SOURCE-BODY-008": [1, 48],
+      "SOURCE-BODY-009": [1, 276],
+      "SOURCE-BODY-010": [1, 18],
+      "SOURCE-BODY-011": [1, 3],
+      "SOURCE-BODY-012": [1, 608],
+      "SOURCE-BODY-014": [1, 260],
+      "SOURCE-BODY-015": [1, 510],
+      "SOURCE-BODY-037": [1, 109],
+      "SOURCE-BODY-038": [1, 116],
+      "SOURCE-BODY-039": [1, 118],
+      "SOURCE-BODY-040": [1, 109],
+      "SOURCE-BODY-041": [1, 103],
+      "SOURCE-BODY-042": [1, 96],
+      "SOURCE-BODY-043": [1, 40],
+      "SOURCE-BODY-044": [1, 83],
+      "SOURCE-BODY-045": [1, 78],
+      "SOURCE-BODY-046": [1, 150],
+      "SOURCE-BODY-049": [1, 818],
+      "SOURCE-BODY-050": [1, 367],
+      "SOURCE-BODY-051": [1, 1145],
+      "SOURCE-BODY-052": [1, 2515],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-092": [1, 50],
+      "SOURCE-BODY-093": [1, 88]
+    },
+    "mandatoryInterface": {
+      "body": "SOURCE-BODY-013",
+      "sha256": "642fd17ae0e46f179c694cbf593365446f989e7754f01d37bd7cb4942eb08e14",
+      "physicalRanges": [[1162, 1196], [1591, 1620]],
+      "completeAstUnits": {
+        "Bytes-Hash": [1162, 1164],
+        "Expand-Recipe": [1165, 1176],
+        "Prepare-Fixtures": [1177, 1195],
+        "Fixture-Snapshot": [1196, 1196],
+        "Expected-Attempts": [1591, 1593],
+        "Check-Native": [1594, 1620]
+      },
+      "verification": "Complete text read; independently inspected PowerShell AST spans match these ranges. Parsing reported no syntax errors. No wrapper function was executed."
+    },
+    "additionalCompleteBodies": {
+      "SOURCE-BODY-047": [1, 398],
+      "SOURCE-BODY-053": [1, 293],
+      "SOURCE-BODY-085": [1, 24],
+      "SOURCE-BODY-086": [1, 675],
+      "SOURCE-BODY-087": [1, 680],
+      "SOURCE-BODY-088": [1, 521],
+      "SOURCE-BODY-089": [1, 63],
+      "SOURCE-BODY-090": [1, 9],
+      "SOURCE-BODY-091": [1, 46]
+    },
+    "additionalBody013Ranges": [[1149, 1161], [1391, 1547]],
+    "totals": {
+      "completeEntireBodies": 43,
+      "completeEntirePhysicalRows": 11596,
+      "body013PhysicalRowsInspected": 235,
+      "distinctSourcePhysicalRowsInspected": 11831
+    },
+    "selectedMetadata": {
+      "fullRecord13": "Complete permitted scalar and structured fields assessed. All 394 file paths/modes/lengths/SHA256/Git blob identities were independently compared against actual bytes; all 47 trees were reconstructed; all 12 Git-store descriptors and the retained license copy matched. Original array order was retained during traversal.",
+      "record13Sha256": "cf00e40cc3eefb166177d745cf96e0be85cf93a6804db63928f4e77958e0a8df",
+      "rootTree": "faa8e3bce9b1b8a3391d4eae90f9ff58655571ac",
+      "rootExpectedOid": null,
+      "rootDerivedFromPinnedLsTree": true,
+      "relationshipRecords": [1, 2, 3, 4, 6],
+      "relationshipAssessment": "Assessed relevant freeze/dependency/tool selections, all 15 canonical-to-BODY source routes, all ten legacy fixture routes, relevant primary API/excerpt bindings, integrated BODY routes and response/PCH source relationships. Verified 68 relevant catalog source-descriptor occurrences and all 33 record-6 source-descriptor occurrences.",
+      "rowPartitionsAssigned": []
+    },
+    "unread": "No mandatory source, complete unit or assigned selected-data duty remains unread. BODY013 outside the reported ranges was not substantively reviewed. BODY016-036, BODY048 and BODY058-084 received inventory identity/count checks only. Unassigned metadata portions, selector rows and other scopes' graphs were not comprehensively assessed. No whole-origin or transitive-engine review is claimed from selected excerpts."
+  },
+  "assessment": [
+    {
+      "requirement": "S_VALUE duty 1; VALUE_FIXTURE; SOURCE-BODY-057:58-90,121-145",
+      "sources": [
+        "SOURCE-BODY-005:25-49",
+        "SOURCE-BODY-006:9-57",
+        "SOURCE-BODY-007:7-46",
+        "SOURCE-BODY-008:9-46",
+        "SOURCE-BODY-009:25-269",
+        "SOURCE-BODY-049:4-450"
+      ],
+      "conclusion": "The exported synchronous noexcept boundary returns UE-owned arrays and indices. Vendor/std objects, callbacks, exceptions and retained input views do not enter the public result. Private FRefusal and YAML::ParserException catches preserve typed refusals; unexpected exceptions terminate at noexcept. Publication follows complete parsing, so refusals leave an empty document. Successful results retain exact original bytes. Mapping pairs preserve order and duplicate/case-distinct keys; aliases retain occurrence-to-target links without expansion. Anchor rebinding, collection registration before children and references acquired after array growth are consistent with the inspected vendor callbacks. UE container source supports the copy/move/destruction design."
+    },
+    {
+      "requirement": "S_VALUE duty 1; SOURCE-BODY-057:76-90,121-132",
+      "sources": [
+        "SOURCE-BODY-007:20-46",
+        "SOURCE-BODY-008:20-30",
+        "SOURCE-BODY-009:25-31,82-126,141-149,162-168,218-235",
+        "SOURCE-BODY-051:582-681,904-965",
+        "SOURCE-BODY-052:45-45,287-329,435-440,2241-2346"
+      ],
+      "conclusion": "All five limits use the required inclusive units: 1048576 input bytes, 64 simultaneous collections, 100000 raw nodes including mapping keys and aliases, 10000 alias occurrences and 65536 decoded scalar UTF-8 bytes. Input size is checked before copying/vendor construction. Raw NUL/EOT and malformed source UTF-8 are refused before vendor encoding/sentinel handling. Every OnNull refuses property loss. Supported tags form the declared finite set and are checked before adapter copying. Invalid vendor callback UTF-8 from backslash-N/backslash-underscore returns InvalidEventStream. These are documented subset restrictions, not full compatibility or vendor allocation-ceiling claims."
+    },
+    {
+      "requirement": "S_VALUE duty 2; VALUE_FIXTURE; SOURCE-BODY-057:94-145",
+      "sources": [
+        "SOURCE-BODY-012:49-161,193-414,417-607",
+        "SOURCE-BODY-013:1162-1196,1591-1620",
+        "SOURCE-BODY-014:1-260",
+        "SOURCE-BODY-015:1-510",
+        "SOURCE-BODY-037 through SOURCE-BODY-046: complete bodies"
+      ],
+      "conclusion": "All 38 IDs and all eight suite contracts were assessed. Attempt counts in suite order are [1,2,1,10,4,9,15,3], totaling 45; the repeated K03 attempt remains distinct. Independent inert byte reconstructions matched every generated recipe, expected code, byte length, SHA256 and auxiliary SHA1. All ten canonical byte identities matched the bound legacy bodies and manifest expectations. Literal root-key order, profile identity, schema tag provenance, Unicode/case distinctions, duplicate keys, alias targets and decoded 78007900 bytes agree with the source-authored checks. All nine lexical failures and fifteen quota cases have consistent typed expectations. Check accounting increments on evaluated Check calls; ledger publication, exact artifact membership, attempt labels and primary SHA256 verification remain separate from UE assertion totals. No evaluated native check count or parser success was fabricated."
+    },
+    {
+      "requirement": "S_VALUE duty 3; DEPENDENCY_COMPILER_ABI; SOURCE-BODY-057:168-195",
+      "sources": [
+        "SOURCE-BODY-003:16-191,208-324",
+        "SOURCE-BODY-004:7-13",
+        "SOURCE-BODY-010:7-16",
+        "SOURCE-BODY-013:1149-1161,1391-1547",
+        "SOURCE-BODY-047:30-64,203-219",
+        "SOURCE-BODY-050:4-217,267-367",
+        "SOURCE-BODY-053:4-125",
+        "SOURCE-BODY-085 through SOURCE-BODY-091: complete bodies",
+        "selected metadata record 13: permitted complete record"
+      ],
+      "conclusion": "The selected dependency pin is 56e3bb550c91fd7005566f19c079cb7a503223cf. Acquisition identity, source/header membership, same-run build receipt, copied static library/header identities and selected compiler/SDK tools are explicitly joined. ModuleRules refuses fallback artifacts and holds verified files through UBT exit. The CMake contract requests static Release/C++20/MD/EHsc with tests/tools/contrib/format/install disabled; RC path normalization matches the inspected installed CMake behavior. Parser-private dependency exposure and compile/link checks distinguish parser consumption from probe isolation. NoPCHs bypasses PCH selection while generated forced definitions remain inspectable. NoVFS and installed path normalization support the stage-owned response/FI paths. Editor exception inheritance uses OR semantics, so the probe's local false does not establish disabled exceptions; compiler guards and response checks correctly require enabled A1E mode."
+    }
+  ],
+  "materialFindings": [],
+  "errorsAndRecoveries": [
+    "Five oversized combined outputs were truncated. Mandatory source recovery covered BODY054:175-235. Prompt/contract recovery used a separate complete current GO read and exact complete subject/scope/common-field comparisons. Compiler-reference recovery compared every one of the 167 descriptors. Material catalog recovery used smaller named projections, complete relevant BODY reads and complete descriptor comparisons. No truncated output was accepted as complete mandatory coverage.",
+    "A shared metadata projection requested fields outside some records' positive field lists and synthesized nulls for absent properties. That projection was discarded. Authorized per-record fields were reread with explicit presence handling; no identity, authority or absence conclusion relies on those synthetic nulls.",
+    "No shell read failure, EOF-range failure, unresolved parser/query error or incomplete mandatory range remains."
+  ],
+  "remainingUncertaintyAndOpenGates": [
+    "This is source support, not observed compilation, ABI behavior, module loading or native execution. Actual generated flags, receipts, process results and check totals still require authorized execution.",
+    "Acquisition file/tree consistency was independently checked; the historical commit-to-tree acquisition operation was not reexecuted or independently Git-verified.",
+    "Actual review launch/session/model-checkpoint and backend memory-setting evidence remains independently unverified here and must be handled explicitly by root aggregation.",
+    "A1G exception-disabled caller proof, A2 compatibility/null and escape fidelity, Linux, HUD/rendering/input, packaging and final independent CODE/different REQ gates remain open."
+  ]
+}

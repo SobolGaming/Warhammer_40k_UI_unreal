@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_EDITOR_ACTION_SUFFIX_SOURCE_REPAIR_ADOPTION",
+  "status": "GAME_EDITOR_ACTION_SUFFIX_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "asOfUtc": "2026-10-21T11:38:38.9739915Z",
+  "failureCheckpoint": "668c8aaba712ddf62eb15b99740f47a7a4599109",
+  "failureBackup": {
+    "path": ".local/planning/E04/A1G-editor-action-failure-PROPOSED/root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "EFE89554C4D8A91EBD642F7B36958042FACCB0621B786E07DACEBA480FA97315"
+  },
+  "rootAdoption": {
+    "path": ".local/planning/E04/A1G-editor-action-repair-PROPOSED/root-source-adoption.original.json",
+    "bytes": 2405,
+    "sha256": "641323233E236DCA3E1215715A67307F0DD17DCCE0C58C19A4E6B54690D81840"
+  },
+  "change": {
+    "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+    "symbol": "Require-A1GBuildAction",
+    "lines": "1152-1155",
+    "before": {
+      "path": ".local/planning/E04/A1G-editor-action-repair-PROPOSED/wrapper.before-editor-action-repair.original",
+      "bytes": 182340,
+      "sha256": "242A61112500129C661115F3C09B9F75DBC0BEA47B8128CABBAFDDAE9FE99770"
+    },
+    "after": {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "bytes": 182435,
+      "sha256": "EEE12E27367F942DC21E081623B552C2D98856F61A4C8EC4D70B8FE2B831EAC8"
+    },
+    "behavior": "Permit only an exact optional space plus literal [NoUba] after the already exact numbered x64 action/basename. Preserve escaped action/leaf, numbered/x64/end anchors and exactly-one match. Comments name the bounded supported form and rejection of other suffixes.",
+    "broaderSuffixes": "UNSUPPORTED; cache, remote, timing and unknown forms are not accepted"
+  },
+  "unchanged": {
+    "norm": {
+      "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "bytes": 16226,
+      "sha256": "C3D17762FDE8DCBFD2DE7287BF8D2A3AF668F5D0D0FE488F3A31A71A7A91929C"
+    },
+    "rules": {
+      "path": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "bytes": 87636,
+      "sha256": "CD9C8424E543BD40A0FAE209837EE9EA2AFC0351ECF929BDC7F5F0786313D939"
+    },
+    "scope": "No other candidate source, canonical authored Config, target, native caller/parser, vendor acquisition or runtime behavior is changed by this repair."
+  },
+  "rootStaticChecks": {
+    "rootInspectedWholeFunctionalDiff": true,
+    "wholeWrapperInverseMatched": true,
+    "oldCrBytes": 169,
+    "newCrBytes": 169,
+    "wrapperAstErrors": 0,
+    "wrapperFunctionCount": 112,
+    "adoptionTool": "c1faaa",
+    "limits": "Static/source-only observations. No fresh behavior, native compilation, SOURCE approval or execution PASS is inferred."
+  },
+  "asOfAdoption": {
+    "behavioralControls": "NOT_RUN",
+    "freshSource": "NOT_RUN",
+    "newRun": "UNBOUND",
+    "nativePhases": {
+      "Preflight": "NOT_RUN",
+      "DependencyConfigure": "NOT_RUN",
+      "DependencyBuild": "NOT_RUN",
+      "EditorPrerequisiteBuild": "NOT_RUN",
+      "GameBuild": "NOT_RUN",
+      "Cook": "NOT_RUN",
+      "Stage": "NOT_RUN",
+      "Native": "NOT_RUN",
+      "Audit": "NOT_RUN"
+    },
+    "gameAttempts": 0,
+    "evaluatedCustomChecks": 0,
+    "sourceAdmission": "NONE_FOR_REPAIRED_SOURCE",
+    "phaseAuthority": "NONE_FOR_REPAIRED_SOURCE"
+  },
+  "preservedOldRun": {
+    "sourceHead": "71ce1311619f1948faad76027b3156179d61134d",
+    "runId": "20261021T111548Z-2b6d9f0b",
+    "status": "CLOSED_NO_RETRY_NO_SUCCESSOR_GO",
+    "source": "PASS_ADMITTED_FOR_OLD_EXACT_HEAD",
+    "Preflight": "PASS_ADMITTED",
+    "DependencyConfigure": "PASS_ADMITTED",
+    "DependencyBuild": "PASS_ADMITTED",
+    "EditorPrerequisiteBuild": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "remainingFivePhases": "NOT_RUN",
+    "gameAttempts": 0,
+    "evaluatedCustomChecks": 0,
+    "closure": "docs/plans/research/2026-10-21-e04a-game-editor-action-failure-closure.md",
+    "receipt": "docs/plans/evidence/2026-10-21-e04a-game-editor-action-failure.json",
+    "approvalTransfer": false,
+    "limits": "Old native UBT exit0, 16 actions, retained compiler warnings and failed wrapper gate remain historical facts; no failed phase is rewritten as PASS."
+  },
+  "nextRequired": "Checkpoint this repaired source and factual overlay, push and gh-verify exact OWN18 remote backup before fresh head/base/run/freeze/tool/config/input/command/norm bindings and affected SOURCE. Only positive root SOURCE admission permits separately ordered native phase GOs. Final CODE and a different REQ follow actual successful closed execution.",
+  "optionalRegexControlsOrHarnessCertificationPrerequisite": false,
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "standingReviewTransmissionConsent": "APPROVED_UNTIL_EXPLICIT_HUMAN_REVOCATION_WITHIN_ESTABLISHED_SCOPE_AND_DESTINATION",
+  "limits": [
+    "All NOT_RUN/UNBOUND statements describe the repaired candidate as of adoption, not the old closed run or any later evidence.",
+    "This adoption record grants no SOURCE admission, native execution, GUI interaction, Core-host action, review acceptance, merge or migration acceptance.",
+    "No old source or phase approval transfers to changed source; preserve all historical raw failures and bounded A1E acceptance.",
+    "OWN17 optional harness/generated-response/transitive Rules/cache/witness/repeated certification remains deferred/unproven; ordinary runtime assertions remain fail-closed. No optional regex-control or harness campaign becomes a new prerequisite.",
+    "The later factual metadata overlay lies outside any old reviewed candidate. Auxiliary drafting supplies no formal gate approval and performs no canonical/sibling edit, Git operation, candidate test/runtime/review execution or authority admission."
+  ]
+}

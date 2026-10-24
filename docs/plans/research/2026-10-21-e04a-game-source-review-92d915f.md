@@ -1,0 +1,13 @@
+**FAIL — E04-A1G SOURCE prerequisite only.**
+
+Reviewed SourceHead `92d915fc11679e8ba4f7ec4346d24fa5c67adf81` against ComparisonBase `e43ec1d3f451d2a8d33b1a526141a15f9e1d64e5`, RunId `20261021T132014Z-5daec77b`.
+
+1. **[P2] Dependency fact comparisons still depend on dictionary property order.**  
+   [Invoke-E04A1GProfileProof.ps1:566](/C:/SWDev/warhammer/Warhammer_40k_UI_unreal/scripts/migration/Invoke-E04A1GProfileProof.ps1:566), [line 578](/C:/SWDev/warhammer/Warhammer_40k_UI_unreal/scripts/migration/Invoke-E04A1GProfileProof.ps1:578) and [line 618](/C:/SWDev/warhammer/Warhammer_40k_UI_unreal/scripts/migration/Invoke-E04A1GProfileProof.ps1:618) compare `ConvertTo-Json` strings directly. Identical descriptor/reference facts enumerated in a different property order therefore compare unequal and can refuse DependencyBuild before launch or during postbuild validation. This violates the [packet’s structural comparison requirement at line 176](/C:/SWDev/warhammer/Warhammer_40k_UI_unreal/docs/plans/research/2026-10-21-e04a-game-proof-packet.md:176).  
+   **Minimal correction:** use the existing `Equal-Data` helper for these three comparisons, preserving reference arrays and their order/cardinality. Retain the independent descriptor/hash checks. This finding is established by source inspection; no runtime failure was reproduced.
+
+Coverage: read all **43 required whole-source bodies** and the supplied installed API excerpts. All **125 whole-file grant identities** and **63 installed-origin identities** matched; the closing check found no required-source drift. Pinned Git confirmed HEAD and no working-tree differences in the granted tracked sources. Review covered target/module boundaries, exception modes and lifetime, fresh vendor correspondence, Cook/Stage joins, result/exit joins, phase bounds, sampled window observation, cleanup and preservation.
+
+No candidate, helper, build, test, GUI or native execution occurred. Installed-source/binary correspondence and actual execution outcomes remain unproved. This establishes no native, graphical, build, Linux, semantic-delivery, comprehension or universal-isolation proof. OWN17 remains `DEFERRED_UNPROVEN_OWN17`; Linux remains untested. Root retains admission and all later authority.
+
+Read-only/approval-never policy was supplied. Apps/network/agent capabilities remained exposed but unused; disabling those capabilities and memory was **UNVERIFIED**. Actual session/CLI/model identity was not independently verified.

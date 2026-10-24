@@ -1,145 +1,59 @@
 # Unreal client repository instructions
 
-## Scope and current authority
+## Active work
 
-This repository is the C++ first Unreal client for the separately maintained Python
-rules engine. Read `../AGENTS.md` and `docs/plans/unreal-migration-plan.md` before work.
-The canonical migration plan and its Section 0 research register govern sequencing.
-The owner approved BOOT01 on 2026-10-16: minimal textual C++ project, Linux-capable
-Game/Editor targets, Windows Development Editor probe/final builds and VS Code plus
-VS2022 generation. Follow the bounded packet in `docs/plans/research/2026-10-16-bootstrap-and-native-parser.md`.
-BOOT01 is complete; actual results/limits are in `docs/plans/evidence/2026-10-16-boot01.md`.
-Use README commands to rebuild/regenerate this existing project; the creation
-wrapper intentionally refuses it. Do not repeat bootstrap or broaden its scope.
-Normal per-user build caches and creation of the absent empty default UBT XML are
-covered; preserve existing settings. Linux execution stays UNTESTED. Dependency/tool
-installation, gameplay/transport features, new Python hosts and binary art were
-outside BOOT01. The owner subsequently authorized committing, pushing, opening and
-merging its PR, then continuing the migration plan (OWN13, 2026-10-16). Continue
-through the next bounded plan gate; record its files, runtime/output ownership and
-pass/fail before execution. Do not infer Core edits, new host implementation or
-broader feature acceptance from that continuation. The Core diagnostic issue is
-already filed. Record subsequent authority without asking again.
+Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md`, the [forward development plan](docs/plans/unreal-development-plan.md) and the [migration/closing record](docs/plans/unreal-migration-plan.md) before work. The development plan owns future feature-parity sequencing; the migration record preserves this increment and historical evidence.
 
-Repository names are explicit:
+The owner's latest increment is to finish the bounded visible active-drag cancellation checks, complete `docs/plans/unreal-development-plan.md` as a forward feature-parity roadmap, then commit, push and merge existing PR #3 after affected checks and independent reviews pass. This direct October 24 instruction supersedes the earlier leave-open/no-merge direction. Keep the working client usable; do not implement the entire future parity roadmap in this closing increment. Preserve the bounded real-Core setup workflow and all historical failures.
 
-- `Warhammer_40k_UI_unreal` (this repository): new Unreal client and migration evidence.
-- `../Warhammer_40k_UI_arcade`: legacy client and behavior/reference baseline. The
-  owner's shorthand `Warhammer_40k_UI` means this checkout unless they identify a
-  different repository. Read its `AGENTS.md` before inspecting or working there.
-- `../Warhammer_40k_AI`: authoritative external core; reference only. Never change
-  its files, tests, data, dependencies, history, branch, or release artifacts here.
+**The owner directly resumed bounded visible testing on 2026-10-24**, approving camera controls, board framing, UI isolation, startup focus and the manual launcher. This supersedes the October 23 screen HOLD for those tests. Use one game window at a time, at most ten minutes per launch, with owned-process cleanup and private screenshots/logs. Close each run normally when possible; no blanket unrelated desktop authority is implied. Private-source review consent remains separate from desktop authority. The earlier [visible setup workflow](docs/plans/evidence/2026-10-23-live-core-visible.md) remains a closed historical run.
 
-Do not change either sibling as a side effect of Unreal work. Missing external APIs,
-fixtures or host/runtime artifacts need a dependency record with owner and unblock
-condition. A client packaging task does not authorize writing a new Python host.
+The resumed [manual launcher check](docs/plans/evidence/2026-10-24-live-core-camera-visible.md), separate [native camera input check](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) and later [cancellation check](docs/plans/evidence/2026-10-24-live-core-cancellation.md) are closed; no game window remains. The cancellation run at `76297e2` passed 386 assertions: eight actual Escape/focus/capture/resize cases and two deliberately delivered application-event cases. Actual OS app switching, teardown and Linux remain unverified. Preserve the earlier manual F failure with cause unestablished; native synthetic-bound F passed separately. The consumed visible run does not grant unrelated desktop authority.
 
-## Authority, identity and privacy invariants
+## Repository boundaries
 
-- The core alone generates legal choices, validates rules, mutates authoritative
-  state, controls randomness, and owns replay/persistence formats. Local selections,
-  draft poses, camera state, support hits, previews and meshes are advisory.
-- Every game effect uses the current public `DecisionRequest` / `DecisionResult`
-  path. Preserve engine request/option/entity IDs, selected variant, spatial context,
-  command identity and typed JSON payloads. Never invent legal options, private
-  lifecycle calls, movement witnesses or a second rules path.
-- Freeze one exact core commit, runtime build ID, contract, schema and fixture set.
-  Read the matching `docs/ADAPTER_DECISION_CONTRACT.md` and schemas before changing
-  protocol handling. A sibling branch tip or package version `0.1.0` is insufficient.
-  Never reset the shared sibling to make tests pass. Use approved isolated fixtures.
-- Keep presentation, decisions, events, caches, diagnostics and traces scoped to
-  the authenticated viewer. A player ID parameter is not authorization. Viewer or
-  session changes discard caches and invalidate older async callbacks.
-- Separate command, session revision, projection, spatial-context and catalog
-  identities. On uncertain completion retain the same command ID/envelope and
-  reconcile through the public protocol; do not blindly submit a new action.
-- Fail visibly on missing/incompatible data. Use typed errors and bounded requests.
-  No broad catches, invented default poses, permissive schema fallbacks, hidden
-  opponent data or credentials in logs/fixtures. Keep unknown outcomes unknown.
+- This repository is a C++ first Unreal presentation client. Python Core remains a separately maintained authority.
+- `../Warhammer_40k_AI` is reference-only: never edit/reset its code, schemas, tests, data, lockfiles or environment. Use its exact selected commit `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract44.3.33 and existing reference development server.
+- Read the public adapter decision contract and matching schemas/callers before integration changes. A missing Core capability is an external issue, not a private UI rules path or new host implementation.
+- `../Warhammer_40k_UI_arcade` is the legacy client and parity reference. Do not change it as a migration side effect. `Warhammer_40k_UI` in the owner request maps to that local Arcade baseline per the imported provenance; no separate checkout with that name exists here.
+- Preserve unrelated user changes. Do not install/upgrade tools or assets without applicable authority.
+- Existing UE5.8.3 project/targets already exist; use README build commands, never rerun the creation script over this project.
 
-## Unreal architecture and presentation
+## Runtime invariants
 
-The BOOT01 project descriptor is `WarhammerClient.uproject` at this repository root;
-the plan records actual bootstrap status. Keep runtime/editor dependencies separate. The planned
-`TabletopPresentation` plugin owns reusable presentation types and HUD; the
-application, core transport and battlefield modules have separate responsibilities.
-Do not create all proposed modules before their authorized milestone needs them.
+- Only Core validates legality and mutates authoritative game state. Local drafts, geometry and previews are advisory.
+- Preserve original request/option/entity/command IDs and revision semantics. Use typed JSON-safe payloads through public DecisionRequest/DecisionResult/session APIs.
+- Scope projections, pending decisions, events, errors and traces to the authenticated viewer. Never fetch admin/private opposing state for display convenience.
+- Serialize state-changing submissions. Retain the exact command on uncertain completion and reconcile the same command ID before another action. No blind retry/new-ID duplicate.
+- Display actual HTTP status/error. Do not turn missing detail into invented violations or report a timeout as rejection.
+- Treat development credentials as development-only. Do not put credentials/private sessions into logs, tracked fixtures, reports or reviews.
+- Keep unplaced models unplaced; never fabricate Core poses. Keep inches/centimeters/handedness explicit.
+- UI controls own UI input; camera bindings must not intercept their clicks. Handle teardown/async callbacks safely.
+- Managed Core launch is client supervision of the existing approved runtime, not Core implementation. Use dedicated loopback port, owned process/readiness/shutdown, bounded waits and cleanup; never terminate an attached service or unrelated process.
+- Preserve E02 synthetic modes/proofs and their zero-Core-command assertions.
+- Retain Linux-capable seams/targets; Linux execution remains UNTESTED until a native host is arranged.
 
-- C++ owns application behavior, reducers, interaction editors, bindings and layout
-  policy. UMG/Slate and editor content provide visual authoring. Blueprint graphs
-  must not own rules, protocol submission, or a parallel application state machine.
-- Runtime modules must not depend on editor modules, editor Python, an embedded
-  rules implementation, or a future computer-vision SDK. Apply UObject/world/widget
-  changes on the game thread; scope subscriptions and async work to owner lifetime.
-- Preserve domain inches, facing, Z, support and measurement geometry. Use explicit,
-  invertible handedness/unit transforms at the boundary. Keep display tessellation,
-  visual bounds, query proxies, support queries and authoritative geometry distinct.
-- Genuine 3D is required from the first playable slice: perspective runtime camera,
-  world picking, nonzero elevation proof and ordinary mesh substitution. Camera
-  gestures issue zero game commands. Cosmetic substitution preserves IDs and intent.
-- HUD/modal/text focus has explicit input ownership. Capture/release, Escape, focus
-  loss, camera drag and UI clicks cannot leak into world submissions. Keep roster,
-  battlefield and Current Action selection synchronized even while panels are hidden.
-- Preserve supported JSON/YAML preferences, named HUD composition, preview reuse,
-  recognized inactive values and extension round-trips. Profiles change presentation
-  only; they cannot execute code or override authorization/legality. Label previews.
+## Verification and reviews
 
-## Sources, assets and outputs
+Run commands in this repository. For docs, check whitespace and referenced paths/commands. For behavior, build the affected target and run focused functional/regression checks covering changed seams and concrete risks. Use actual Core for integration evidence where possible; mocked/synthetic results must be labelled.
 
-Keep authored `Source/`, `Config/`, `Content/`, `Plugins/`, scripts and textual
-generation/import inputs reviewable. Pair binary assets with provenance, import
-settings, semantic metadata and visual evidence; give each binary one writer.
-Get owner approval before changing Git LFS, remote storage or locking commitments.
-Do not commit `Binaries/`, `Intermediate/`, `Saved/`, `DerivedDataCache/`, generated
-IDE files, SDKs/engines, downloaded runtime bundles, credentials or private sessions.
-The approved ignore rules are present. Keep generated `.ignore` and `.vsconfig`
-protected during creation and ignored with the other generated IDE files.
+Separate implementation completion from verification in the plan's Markdown checklists. Record exact commit/Core version, commands, results and relevant limits. Mark rendered verification complete only for the observed source and workflow. Later source repairs need their own affected checks; the completed visible run does not verify them.
 
-Use explicit cook references for dynamically selected assets; packaged execution
-must not depend on sibling checkouts, developer `docs/` paths, system Python, or
-runtime package installation. Keep legacy preferences/saves unchanged. Import into
-versioned copies and preserve exact-core routing; never promise cross-version resume
-or reverse migration without evidence.
+Retain the independent three-role discipline: implementer, fresh independent CODE reviewer and different fresh requirements auditor. Before acceptance, freeze the candidate, provide original slice criteria plus necessary source/interfaces/tests/raw results, exclude author notes and peer verdicts, request read-only/approval-never/no-memory execution, and record actual settings/limits. Prefer fresh `codex exec` sessions. Findings are PASS/CHANGES_REQUESTED/BLOCKED; preserve raw reports, fix actionable blockers and refresh affected reviews after material changes. Standing consent for private source/API reviews to the configured OpenAI Codex service persists until explicitly revoked; do not ask again.
 
-## Verification and evidence
+Keep review scope proportionate: changed code, directly used contracts and slice requirements. Expand for concrete findings. Broad transitive SDK and exhaustive profile certification are deferred, not PASS. Ordinary implementation/builds/focused checks do not require elaborate historical packet/phase-GO machinery. Historical failed runs remain failures; closed run authorities do not transfer.
 
-Read the active plan before a change and update affected requirements and status.
-Distinguish source support, owner choice, a check actually run, and future proof.
-Use immutable `repository@commit:path:symbol` references and relevant line ranges;
-hash relevant dirty source. Never mark a blocked or unexecuted check PASS.
+## Checkpoints and GitHub
 
-For documentation, check whitespace, local links, IDs, source identities and command
-paths. In this initially uncommitted repository, `git diff --check` alone does not
-inspect untracked files; inspect added content directly or use a no-index check.
-Run Git/checks from the repository they concern. Python/Arcade checks belong in
-`../Warhammer_40k_UI_arcade`; they are not Unreal build gates.
+- Commit **and push every coherent checkpoint**, including plan, implementation, fixes and actual verification records. Record actual tests and pending reviews; checkpoints are not acceptance.
+- Verify exact GitHub branch ref equals the committed SHA after each push.
+- Use `gh` for normal GitHub actions and PR updates, with process-only `GH_TOKEN` loaded from `../github-full-access`. Keep `github_token` separate. Never display/log/commit either credential.
+- Finish branch `codex/e02-world-input-proof` and existing [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3). Verify its identity; no duplicate PR. The owner authorizes merging after this closing increment's checks, reviews and evidence are complete; preserve the branch and history. Once GitHub records it merged, begin subsequent feature work from current main on a fresh scoped branch and follow the forward development plan.
+- No force push/history rewrite/new remote/unrelated branch mutation. Exclude ignored/private evidence, generated binaries/caches and tokens.
+- Workspace-root AGENTS is local guidance, not a file for this repository's PR.
 
-After execution is authorized, verify the smallest meaningful affected layer:
-strict protocol/reducer/transform/profile checks, then relevant rendered interaction
-and packaged real-core tests. Record exact engine/build/compiler/SDK/host, fixtures,
-commands, executed test counts and artifacts. NullRHI does not prove rendering,
-an Editor target build does not prove packaging, and an empty automation suite is
-failure. Do not invent an existing `Warhammer.Migration` suite. Do not repeat costly
-checks without a relevant change or unresolved concern.
+## History
 
-Before accepting a code milestone, freeze the candidate and obtain separate code
-review and acceptance audit against plan criteria. Report actual session isolation
-and evidence limits; reviewer configuration files alone prove neither invocation
-nor independence. Resolve actionable findings before completion.
+[Through-r146 guidance](AGENTS-through-r146.md) and [through-r146 plan](docs/plans/unreal-migration-plan-through-r146.md) preserve original evidence/constraints in context. They are historical references, not active sequencing instructions. Keep accepted BOOT01/E01-SLOW120/bounded E02/A1E/A1G/P0 records and all failures intact.
 
-## Collaboration and GitHub
-
-Preserve unrelated work, assign parallel agents distinct files, and never share a
-mutable game session or binary asset between writers. Research may continue while
-owner questions are pending; stop only dependent work at the applicable gate.
-Do not move shared checkouts or silently install/upgrade tools. OWN13 authorizes
-publication and merge of the imported plan/BOOT01 PR. Use a scoped branch and `gh`
-for GitHub actions;
-read `../github-full-access` into `GH_TOKEN` without displaying it. Keep the separate
-`../github_token` credential unchanged. Never print, log, commit or place tokens in
-arguments, documentation, review packets or URLs. Wait for required PR checks and
-investigate actionable failures; merging needs its own applicable authorization.
-
-Handoffs state what changed, evidence/tests passed or failed or not run, remaining
-RQ/external blockers, and the next concrete authorized step. Do not equate imported
-planning documents with a working Unreal application or completed research gate.
+Canonical profile-roundtrip source at0719125 and its review preparation are DEFERRED, unreviewed/unexecuted. No new profile review/runtime should be launched for the current slice. Personal/internal development first; production hosting, external distribution and full compatibility remain later work.

@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PUBLISHED_ORDINARY_TRUSTED_SYNTHETIC_METADATA_READER_FACTUAL_BINDING",
+  "preparedUtc": "2026-10-20T10:36:23.4812053Z",
+  "proposalOnly": false,
+  "publicPromotionPerformed": true,
+  "canonicalWritePerformed": true,
+  "newTestingByThisWriter": false,
+  "sourceReviewOrNativeAcceptance": false,
+  "attempts": [
+    {
+      "version": "v2",
+      "status": "SETUP_FAILED_ZERO_CASES_NO_EMIT_NO_READER",
+      "recordedSourceHead": "f0054cbaffa7025ea0ce3647e7e06216315522d2",
+      "rootSourceAdoption": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v2\\root-source-adoption.original.json",
+        "bytes": 1599,
+        "physicalRows": 23,
+        "sha256": "86CBA6887CC187D6877FED87757368F0086B1C6EB481A42E9108163481DF6C96"
+      },
+      "inputManifest": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v2\\metadata-reader-fixture-manifest.PROPOSED.json",
+        "bytes": 49298,
+        "physicalRows": 906,
+        "sha256": "107D201E72C33FA719BE85C021158F235DAD77F79CE934F814E3210C904D4BBE"
+      },
+      "outerSource": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v2\\Invoke-TrustedRulesMetadataReaderCheck.PROPOSED.ps1",
+        "bytes": 12522,
+        "sha256": "5513C83B7848440AA93D61CA9850C27588EDAB352652DA094FD3052BDB354BBE"
+      },
+      "trustedEmitterSource": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v2\\TrustedMetadataFixtureEmitter.PROPOSED.cs",
+        "bytes": 3991,
+        "sha256": "DF1F29139BC38A13288D4D32F9345D81BDAB2D6D8FC6A47D0B4E67677E224C5F"
+      },
+      "wrapperImplementation": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+        "bytes": 202111,
+        "sha256": "141800CD5D87574EC634FF0D423AE95D2AEB260DB361F376D8EE9B55C64DEAF9"
+      },
+      "wrapperFunctionBindings": [],
+      "rawOutputs": [
+        {
+          "copy": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-metadata-reader-v2-setup-failure.json",
+            "bytes": 2339,
+            "sha256": "B28959992F28A5078425C9B4DE0F2577765984A82A1FDEB950FD04892E849671"
+          },
+          "transformation": "NONE",
+          "byteExact": true,
+          "original": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v2\\after-root-adoption-reader-01\\metadata-reader-controls.json",
+            "bytes": 2339,
+            "physicalRows": 39,
+            "sha256": "B28959992F28A5078425C9B4DE0F2577765984A82A1FDEB950FD04892E849671"
+          },
+          "proposedCopy": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-reader-public-promotion-PROPOSED\\raw\\rules-metadata-reader-v2-setup-failure.report.raw.json",
+            "bytes": 2339,
+            "physicalRows": 39,
+            "sha256": "B28959992F28A5078425C9B4DE0F2577765984A82A1FDEB950FD04892E849671"
+          }
+        },
+        {
+          "copy": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-metadata-reader-v2-setup-failure-process.json",
+            "bytes": 824,
+            "sha256": "507B884C54D17AAAA152C40B417F4801935DF08864B9B0BAC91795162E435FCC"
+          },
+          "transformation": "NONE",
+          "byteExact": true,
+          "original": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v2\\after-root-adoption-reader-01\\completion.json",
+            "bytes": 824,
+            "physicalRows": 22,
+            "sha256": "507B884C54D17AAAA152C40B417F4801935DF08864B9B0BAC91795162E435FCC"
+          },
+          "proposedCopy": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-reader-public-promotion-PROPOSED\\raw\\rules-metadata-reader-v2-setup-failure.completion.raw.json",
+            "bytes": 824,
+            "physicalRows": 22,
+            "sha256": "507B884C54D17AAAA152C40B417F4801935DF08864B9B0BAC91795162E435FCC"
+          }
+        }
+      ],
+      "completion": {
+        "timedOut": false,
+        "pid": 35236,
+        "elapsedMilliseconds": 1488,
+        "workerBudgetMilliseconds": 45000,
+        "cleanupConfirmed": true,
+        "exitCode": 1,
+        "outerFailure": null
+      },
+      "worker": {
+        "emittedFixtureAssemblyLoadObserved": null,
+        "elapsedMilliseconds": 400,
+        "failedCount": 0,
+        "loadedAssemblyCheckCompleted": false,
+        "caseCount": 0,
+        "failure": {
+          "message": "error CS1701: Assuming assembly reference 'System.Runtime, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'Microsoft.CodeAnalysis' matches identity 'System.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.Runtime', you may need to supply runtime policy",
+          "type": "System.Exception"
+        },
+        "trustedEmitterBridgeCompiledAndLoaded": false
+      },
+      "cases": []
+    },
+    {
+      "version": "v3",
+      "status": "SIX_MATCHED_SYNTHETIC_CONTROLS_FIVE_READER_CALLS_NOT_NATIVE_PROOF",
+      "recordedSourceHead": "f0054cbaffa7025ea0ce3647e7e06216315522d2",
+      "rootSourceAdoption": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v3\\root-source-adoption.original.json",
+        "bytes": 2070,
+        "physicalRows": 33,
+        "sha256": "E0101F3B0C1D8ED425F84770C0AD845D32EE94AE42091AE9198710C1DE7464BF"
+      },
+      "inputManifest": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v3\\metadata-reader-fixture-manifest.PROPOSED.json",
+        "bytes": 51958,
+        "physicalRows": 971,
+        "sha256": "F30A2A62E80B79972350C4F4E348E55B53B5628F7C1216BF92CB37F2D966A070"
+      },
+      "outerSource": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v3\\Invoke-TrustedRulesMetadataReaderCheck.PROPOSED.ps1",
+        "bytes": 16960,
+        "sha256": "C7002AA00DBFE741235783473C62497C16EF228347A5542530E9817E7AF12A62"
+      },
+      "trustedEmitterSource": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v3\\TrustedMetadataFixtureEmitter.PROPOSED.cs",
+        "bytes": 3991,
+        "sha256": "DF1F29139BC38A13288D4D32F9345D81BDAB2D6D8FC6A47D0B4E67677E224C5F"
+      },
+      "wrapperImplementation": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+        "bytes": 202111,
+        "sha256": "141800CD5D87574EC634FF0D423AE95D2AEB260DB361F376D8EE9B55C64DEAF9"
+      },
+      "wrapperFunctionBindings": [
+        {
+          "name": "Assert-Path",
+          "lastLineInclusive": 102,
+          "sha256": "93A9B93B0F8FB8F820A1BA0263661E991D088347A811AC1AA40EF8036C731E0B",
+          "firstLine": 89
+        },
+        {
+          "name": "Under",
+          "lastLineInclusive": 109,
+          "sha256": "58D77B2E28DDA4A175B0AA9BBE70BF88F0F18EF61C3F6E4C88C65642FE7972AD",
+          "firstLine": 104
+        },
+        {
+          "name": "Owned",
+          "lastLineInclusive": 114,
+          "sha256": "0DF4EE43A173B67447C55CD0F0C5F4E3C640F5F7CBBB77CFDF0B4404116ECDF9",
+          "firstLine": 111
+        },
+        {
+          "name": "Need-File",
+          "lastLineInclusive": 123,
+          "sha256": "E7A4C4AC8A77B0BD7DDA9F1F9716EA1CFFBA4211DA4456C2D7F8042BC59FA7D2",
+          "firstLine": 116
+        },
+        {
+          "name": "Digest",
+          "lastLineInclusive": 125,
+          "sha256": "8B187B58E6DC4219967EACEDD23C15CF3EFD77BA1671DE659A955FA605A901F2",
+          "firstLine": 125
+        },
+        {
+          "name": "Descriptor",
+          "lastLineInclusive": 127,
+          "sha256": "C1E8E2472A2DE317ADB51A15AB28E4E45FCB09B7BE19FC3E1E1CC98E2DC99178",
+          "firstLine": 127
+        },
+        {
+          "name": "Bytes-Hash",
+          "lastLineInclusive": 1165,
+          "sha256": "200209577C233BA40E96A867393C68EAB1C51DA8E9460A37F52132BA292B8692",
+          "firstLine": 1163
+        },
+        {
+          "name": "Read-RulesMetadata",
+          "lastLineInclusive": 1591,
+          "sha256": "06E6734B47503522CE25C75C8F219062BB6922DFD8A53DEDE3340ADB50288F10",
+          "firstLine": 1564
+        }
+      ],
+      "rawOutputs": [
+        {
+          "copy": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-metadata-reader-v3.json",
+            "bytes": 19898,
+            "sha256": "CC34FF3F216D1465564981B1BE6F718A5CDA93EF264DAE9B269FF8FCD776B77C"
+          },
+          "transformation": "NONE",
+          "byteExact": true,
+          "original": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v3\\after-root-adoption-reader-01\\metadata-reader-controls.json",
+            "bytes": 19898,
+            "physicalRows": 388,
+            "sha256": "CC34FF3F216D1465564981B1BE6F718A5CDA93EF264DAE9B269FF8FCD776B77C"
+          },
+          "proposedCopy": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-reader-public-promotion-PROPOSED\\raw\\rules-metadata-reader-v3-trusted-fixture.report.raw.json",
+            "bytes": 19898,
+            "physicalRows": 388,
+            "sha256": "CC34FF3F216D1465564981B1BE6F718A5CDA93EF264DAE9B269FF8FCD776B77C"
+          }
+        },
+        {
+          "copy": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-metadata-reader-v3-process.json",
+            "bytes": 823,
+            "sha256": "1C8356D8FD2A7BDFFB2FF7C3991C8BE7B24F5328390AD4A82BA62A611CFABDA7"
+          },
+          "transformation": "NONE",
+          "byteExact": true,
+          "original": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v3\\after-root-adoption-reader-01\\completion.json",
+            "bytes": 823,
+            "physicalRows": 22,
+            "sha256": "1C8356D8FD2A7BDFFB2FF7C3991C8BE7B24F5328390AD4A82BA62A611CFABDA7"
+          },
+          "proposedCopy": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-reader-public-promotion-PROPOSED\\raw\\rules-metadata-reader-v3-trusted-fixture.completion.raw.json",
+            "bytes": 823,
+            "physicalRows": 22,
+            "sha256": "1C8356D8FD2A7BDFFB2FF7C3991C8BE7B24F5328390AD4A82BA62A611CFABDA7"
+          }
+        }
+      ],
+      "completion": {
+        "timedOut": false,
+        "pid": 4928,
+        "elapsedMilliseconds": 2693,
+        "workerBudgetMilliseconds": 45000,
+        "cleanupConfirmed": true,
+        "exitCode": 0,
+        "outerFailure": null
+      },
+      "worker": {
+        "emittedFixtureAssemblyLoadObserved": false,
+        "elapsedMilliseconds": 1631,
+        "failedCount": 0,
+        "loadedAssemblyCheckCompleted": true,
+        "caseCount": 6,
+        "failure": null,
+        "trustedEmitterBridgeCompiledAndLoaded": true
+      },
+      "cases": [
+        {
+          "name": "actual-positive-absolute-codeview-path-seven-sha256-documents",
+          "matched": true,
+          "readerCall": true,
+          "observedPass": true,
+          "expectedPass": true,
+          "expectedError": ""
+        },
+        {
+          "name": "actual-positive-basename-codeview-path-seven-sha256-documents",
+          "matched": true,
+          "readerCall": true,
+          "observedPass": true,
+          "expectedPass": true,
+          "expectedError": ""
+        },
+        {
+          "name": "actual-wrong-portable-pdb-pair",
+          "matched": true,
+          "readerCall": true,
+          "observedPass": false,
+          "expectedPass": false,
+          "expectedError": "E04A1_RULES_DLL_PDB_DEBUG_ID_MISMATCH"
+        },
+        {
+          "name": "actual-source-checksum-drift",
+          "matched": true,
+          "readerCall": true,
+          "observedPass": false,
+          "expectedPass": false,
+          "expectedError": "E04A1_RULES_PDB_SOURCE_CHECKSUM_MISMATCH"
+        },
+        {
+          "name": "actual-missing-pdb",
+          "matched": true,
+          "readerCall": true,
+          "observedPass": false,
+          "expectedPass": false,
+          "expectedError": "System.IO.FileNotFoundException"
+        },
+        {
+          "name": "no-emitted-or-engine-assembly-loaded",
+          "matched": true,
+          "readerCall": false,
+          "observedPass": null,
+          "expectedPass": null,
+          "expectedError": null
+        }
+      ]
+    }
+  ],
+  "compilerWarningQualification": {
+    "onlyAddedCompilerOption": "/nowarn:1701",
+    "diagnosticCodeWideNotMessageWhitelist": true,
+    "knownCompilerIdentities": "Microsoft.CodeAnalysis and Microsoft.CodeAnalysis.CSharp5.0.0.0 reference System.Runtime9.0.0.0; selected System.Runtime10.0.0.0/CoreLib10.0.0.0 checked by exact pinned metadata.",
+    "apiEquivalenceClaim": false,
+    "actualChecks": "Finite trusted synthetic Emit/actual reader behavior only."
+  },
+  "factualCaseBreakdown": {
+    "sourceDocumentsPerPositivePair": 7,
+    "expectedNegativeReaderCalls": 3,
+    "positiveReaderCalls": 2,
+    "loadedAssemblyInventoryControls": 1
+  },
+  "limits": [
+    "Neither attempt is a formal SOURCE assessment, acceptance, native phase or actual candidate Rules/UBT/cache/source-order proof.",
+    "V2 zero failedCount is a raw producer field alongside zero cases; it does not mean test success.",
+    "V3 emitted tiny trusted synthetic fixture DLL/PDBs; the loaded bridge is distinct from emitted fixtures, which were not loaded/executed.",
+    "Absence of listed engine/fixture assemblies is the finite source-defined loaded-assembly inventory control; no universal loader/isolation claim.",
+    "PDB document membership/enumeration is not Roslyn syntax-tree order; hostile malformed-PE hardening remains untested.",
+    "Original raw bytes are preserved; source/adoption links remain original local provenance, not new review/native authority."
+  ],
+  "researchAddendum": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-reader-public-promotion-PROPOSED\\research-addendum.PROPOSED.md",
+    "bytes": 2158,
+    "physicalRows": 9,
+    "sha256": "40F10DAD2E20505DE3F14F57AF0E94A376FE41D86FDDC84A80D1013B2BA67815"
+  },
+  "rootRecordedUtc": "2026-10-20T10:37:19.6153943Z",
+  "proposalSource": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-reader-public-promotion-PROPOSED\\metadata-reader-controls.factual-binding.PROPOSED.json",
+    "bytes": 14322,
+    "sha256": "5293CC62809C3A764F285CA8EEE6CE7FA978108CF27A1F428937BFF3EBE408A0"
+  },
+  "rootInspection": "Complete v3 outer source, unchanged emitter, actual six case objects, wrapper function bindings, process receipt and v2 setup failure inspected separately. Original source/result descriptor joins verified; no formal SOURCE or native approval."
+}

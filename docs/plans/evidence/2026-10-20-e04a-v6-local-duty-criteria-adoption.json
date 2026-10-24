@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_E04A_V6_LOCAL_DUTY_CRITERIA_ADOPTION",
+  "planRevision": 65,
+  "status": "LOCAL_DUTY_CRITERIA_ADOPTED_BINDINGS_PENDING",
+  "preparedUtc": "2026-10-20T12:05:27.4970545Z",
+  "actualAdoptionRecordedUtc": "2026-10-20T12:12:36.9806180+00:00",
+  "rootAdoption": true,
+  "metadataSourcesAdopted": true,
+  "preparationHead": "88f99b5f552e0878d031cb2433ea3a9e698ad8de",
+  "futureHead": null,
+  "futureRunId": null,
+  "futureCampaignId": null,
+  "actualFutureBindingsReady": false,
+  "READYSubject": null,
+  "priorV5Adoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-witness-amendment-adoption.json",
+    "bytes": 9752,
+    "sha256": "D95C679CB82ED821DD7E98FA3CCF0FDA71AAF2B5A2BD3C49A18DAEA7D2787727",
+    "lineCount": 186
+  },
+  "criteria": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-20-e04a-source-composition-packet-v6.md",
+    "bytes": 36781,
+    "sha256": "21858F042A480AE7048A60405E87A2D13922D74907F71D887F6BC990BDBB631D",
+    "lineCount": 462
+  },
+  "criteriaProposalSource": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\v2\\2026-10-20-e04a-source-composition-packet-v6.PROPOSED.md",
+    "bytes": 36783,
+    "sha256": "26EE73ADA2A0EEE10DE4B92B758027650C0FC04948CD8AC3DE4C1BFCE63D9634",
+    "lineCount": 462
+  },
+  "unboundTemplate": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-20-e04a-source-scope-contract-v6.template.json",
+    "bytes": 130035,
+    "sha256": "538AB3AAF4AB8DE241F5D53DE32DEEB6EB34C09536227A3301BC1A7CC3BE0DF0",
+    "lineCount": 2010
+  },
+  "unboundTemplateProposalSource": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\v2\\source-scope-contract.local-duties-v6.UNBOUND.TEMPLATE.json",
+    "bytes": 130035,
+    "sha256": "538AB3AAF4AB8DE241F5D53DE32DEEB6EB34C09536227A3301BC1A7CC3BE0DF0",
+    "lineCount": 2010
+  },
+  "jsonContractSchemaVersion": 5,
+  "criteriaAmendmentVersion": 6,
+  "metadataConstructionHelpers": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Refresh-E04SourcePacket42.RulesWitness.PROPOSED.ps1",
+      "bytes": 17850,
+      "sha256": "DD339086FE30D3BF338EFD8E85D1054A8B6415EE1E5B63DAB351BF1674413ACF",
+      "lineCount": 191
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Prepare-E04RuntimeMetadata.RulesWitness.v2.PROPOSED.ps1",
+      "bytes": 12475,
+      "sha256": "F55E0B7F2B112EAF73762C99C0AD6A21F3B812D06BC608214504854AAE2F3898",
+      "lineCount": 134
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-freeze-constructor-PROPOSED\\New-E04A1EFreezeMetadata.RulesWitness.PROPOSED.ps1",
+      "bytes": 24524,
+      "sha256": "55864AB7C5BF8349DE71AD29DFAD335584F623B26F71653C570816F75EC079EE",
+      "lineCount": 257
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Add-E04StagedProjectBodyCoverage.RulesWitness.PROPOSED.ps1",
+      "bytes": 9286,
+      "sha256": "BAAF4E388BF0315FAFBC8ECA6CF28671561BE2EEAE2EF7617AFC3AC8A322D429",
+      "lineCount": 99
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Assemble-RootSourcePacket.RulesWitness.v3.PROPOSED.ps1",
+      "bytes": 49489,
+      "sha256": "4D17C907563B0D0E321191EF1E193E7A251976C24DEAF82493FCADB56A3DE50B",
+      "lineCount": 354
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\v5\\Root-Bind-LocalDuties98-Contract-And-Panels.v5.PROPOSED.ps1",
+      "bytes": 15779,
+      "sha256": "07AE4C4A75A1DF7EECE21908C0B988D60C224D4B31D4BC2560C7D07932F60D54",
+      "lineCount": 124
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\New-ScopedSourcePanelPacket.LocalDuties.v3.PROPOSED.ps1",
+      "bytes": 56391,
+      "sha256": "6005E2199849DD4ACC29D3426D43EF3608913C86A04D29AC9D9B61C5D901FD2A",
+      "lineCount": 381
+    }
+  ],
+  "reviewGoValidatorSources": {
+    "initial": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\New-InitialScopedSourceReviewGo.LocalDuties.v3.PROPOSED.ps1",
+      "bytes": 39603,
+      "sha256": "F92DA0D113F9EF0457E9937D729DE109C50E0859BF2EED66F578B35888D94156",
+      "lineCount": 261
+    },
+    "integration": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\New-IntegrationScopedSourceReviewGo.LocalDuties.v3.PROPOSED.ps1",
+      "bytes": 47639,
+      "sha256": "291CD7D43CCF9FB5B0617953450E96527D50F70BD87F89EC9579D03EDED2B763",
+      "lineCount": 324
+    }
+  },
+  "fivePipelineSourcesUnchangedFromV5": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Refresh-E04SourcePacket42.RulesWitness.PROPOSED.ps1",
+      "bytes": 17850,
+      "sha256": "DD339086FE30D3BF338EFD8E85D1054A8B6415EE1E5B63DAB351BF1674413ACF",
+      "lineCount": 191
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Prepare-E04RuntimeMetadata.RulesWitness.v2.PROPOSED.ps1",
+      "bytes": 12475,
+      "sha256": "F55E0B7F2B112EAF73762C99C0AD6A21F3B812D06BC608214504854AAE2F3898",
+      "lineCount": 134
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-freeze-constructor-PROPOSED\\New-E04A1EFreezeMetadata.RulesWitness.PROPOSED.ps1",
+      "bytes": 24524,
+      "sha256": "55864AB7C5BF8349DE71AD29DFAD335584F623B26F71653C570816F75EC079EE",
+      "lineCount": 257
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Add-E04StagedProjectBodyCoverage.RulesWitness.PROPOSED.ps1",
+      "bytes": 9286,
+      "sha256": "BAAF4E388BF0315FAFBC8ECA6CF28671561BE2EEAE2EF7617AFC3AC8A322D429",
+      "lineCount": 99
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-packet-binding-PROPOSED\\Assemble-RootSourcePacket.RulesWitness.v3.PROPOSED.ps1",
+      "bytes": 49489,
+      "sha256": "4D17C907563B0D0E321191EF1E193E7A251976C24DEAF82493FCADB56A3DE50B",
+      "lineCount": 354
+    }
+  ],
+  "changedMetadataSources": {
+    "binder": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\v5\\Root-Bind-LocalDuties98-Contract-And-Panels.v5.PROPOSED.ps1",
+      "bytes": 15779,
+      "sha256": "07AE4C4A75A1DF7EECE21908C0B988D60C224D4B31D4BC2560C7D07932F60D54",
+      "lineCount": 124
+    },
+    "panel": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\New-ScopedSourcePanelPacket.LocalDuties.v3.PROPOSED.ps1",
+      "bytes": 56391,
+      "sha256": "6005E2199849DD4ACC29D3426D43EF3608913C86A04D29AC9D9B61C5D901FD2A",
+      "lineCount": 381
+    }
+  },
+  "localDutyShape": {
+    "globalJoins": 7,
+    "globalCompleteDutyAndOwnerArraysPreserved": true,
+    "atomicDuties": 16,
+    "scopeDuties": 29,
+    "topContractKeys": 24,
+    "scopeKeys": 13,
+    "scopes": 10,
+    "clientAdditionalEntireBody": "SOURCE-BODY-003",
+    "valueNamedWrapperUnits": 13,
+    "clientNamedWrapperUnits": 27,
+    "pluginNamedWrapperUnits": 6,
+    "rootAggregateChecks": [
+      "Complete atomic duty union",
+      "Each explicit primary and independent integration owner",
+      "Complete49 origin-field duties",
+      "All13 selected-record owners",
+      "Complete902 row union and all1561 graph/reference duties"
+    ]
+  },
+  "referenceShape": {
+    "entireBodyFiles": 98,
+    "entirePhysicalRows": null,
+    "primaryDomainFiles": 92,
+    "commonEntireFiles": 6,
+    "selectedMetadataRecords": 13,
+    "indexedDescriptorRows": 902,
+    "permittedOriginFieldNames": 49,
+    "PluginReferenceOccurrences": 1561,
+    "stagedAuthoredMembers": 33,
+    "authoredPaths": 19,
+    "authoredBodyRoutes": 16,
+    "reusedBodyRoutes": 21,
+    "legacyBodyRoutes": 10,
+    "countsRequireNewFreezeVerification": true,
+    "sourceBindingDerivation": {
+      "state": "UNRESOLVED_REPAIRED_SOURCE_AND_NORMS",
+      "wrapper": {
+        "body": "SOURCE-BODY-013",
+        "descriptor": null,
+        "physicalRows": null
+      },
+      "validatorTest": {
+        "body": "SOURCE-BODY-098",
+        "descriptor": null,
+        "physicalRows": null
+      },
+      "topLevelControlBoundary": {
+        "physicalRange": null,
+        "tryPhysicalRange": null,
+        "sourceTextSha256": null
+      },
+      "rootAdoptedSource": null
+    }
+  },
+  "reviewDeadlineSecondsByScope": {
+    "S_VALUE": 1800,
+    "S_BUILD_HOST": 5400,
+    "S_TARGET_RECEIPT": 5400,
+    "S_PLUGIN": 5400,
+    "S_CLIENT": 1800,
+    "I_ABI_BUILD": 5400,
+    "I_ACTIVATION": 5400,
+    "D_SELECTORS_001_301": 1800,
+    "D_SELECTORS_302_602": 1800,
+    "D_SELECTORS_603_902": 1800
+  },
+  "bindingState": {
+    "wrapper": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+      "bytes": 209830,
+      "sha256": "FFE36D92F9CBFE1BA4609C2586FEEA0134260EFB6742A78E2CE09AFBAD3B8329",
+      "physicalRows": 2100
+    },
+    "validatorTest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\Test-E04RulesWitness.ps1",
+      "bytes": 45504,
+      "sha256": "2A4C7C18EDB8CB63A8969F33B9C818682D5FED021B7003CD2284DD763FA7306E",
+      "physicalRows": 308
+    },
+    "actualUnitRangesAndHashes": null,
+    "actualGlobalPhysicalRows": null,
+    "actualScopePhysicalRows": null,
+    "actualReadyTemplate": null,
+    "actualSourceHead": null,
+    "actualFreeze": null,
+    "canonicalRepairAndCurrentControls": "ROOT_ADOPTED_80_OF_80_PURE_CONTROLS_PASSED",
+    "historicalPrivate8B543_5468BasisNotReady": true,
+    "sourceOnlyBody098": true,
+    "stagedMembers": 33,
+    "gate": "UNRESOLVED must refuse. No binder may silently fill unresolved source/unit/count bindings."
+  },
+  "correctionHistory": {
+    "twoLocationOverstatementCorrection": "Only v6 prose132-133 and finiteRulesWitnessCriteria[0] were corrected: recheck approved source bytes/topology immediately before owned root; retain existing exact challenge/input/process joins at their existing validation points.",
+    "binderAggregateOverrideCorrection": "Latest binder v5 changes only its actual-row aggregate override to retain49 origin-field plus complete atomic-duty union and every explicit primary/independent integration owner audit requirements.",
+    "malformedManualDiffHistory": "First manualdiff header/line assembly failed because PowerShell array-expression precedence collapsed lines. Originals and failed-data diagnostics remain preserved; corrected v2 diffs/proofs are the intended references. Binder/source bytes were unaffected and no helper/Git executed.",
+    "allV1V4AndFailedArtifactsPreserved": true,
+    "descriptors": {
+      "originalV6Prose": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\2026-10-20-e04a-source-composition-packet-v6.PROPOSED.md",
+        "bytes": 36738,
+        "sha256": "7457B2314FF9893A9E1E6D8E9B939DD69C9E8006061275028404AE9A5F2F0899",
+        "lineCount": 463
+      },
+      "originalV6Template": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\source-scope-contract.local-duties-v6.UNBOUND.TEMPLATE.json",
+        "bytes": 129993,
+        "sha256": "A3A0A2AF75001A49311C7186B6F27082BC537D1A7F52EEB4309565344FF01FE6",
+        "lineCount": 2010
+      },
+      "v2WordingCorrection": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\v2\\handoff-v2.PROPOSED.OPERATOR_ONLY.json",
+        "bytes": 5704,
+        "sha256": "D2C6C16979DF6C0C3B1B84468572D5B147D0EE3B3E8E8207C692553D6048EB86",
+        "lineCount": 100
+      },
+      "v2ReverseAndV1SealPreservation": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\v2\\writer-seal-v2.PROPOSED.OPERATOR_ONLY.json",
+        "bytes": 3192,
+        "sha256": "1EF10BF98320A6DE9F734658580CAABFF1829F63F81400B84076EBFB2DEEF673",
+        "lineCount": 57
+      },
+      "supersededBinderV4": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\Root-Bind-LocalDuties98-Contract-And-Panels.v4.PROPOSED.ps1",
+        "bytes": 15660,
+        "sha256": "461B7362840415E757DDC78474092D13A73761A737117BD65F6833D7D874A6E2",
+        "lineCount": 124
+      },
+      "latestBinderV5CorrectedProof": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\v5\\handoff-binder-v5.CORRECTED-v2.PROPOSED.OPERATOR_ONLY.json",
+        "bytes": 3367,
+        "sha256": "80F8192C7D08B02A62E7D51A5CDB4ED9B80964058EFE7F2D81F26B2EE1C93B03",
+        "lineCount": 59
+      },
+      "preservedMalformedBinderManualDiff": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\v5\\binder-v4-to-v5.EXACT.diff",
+        "bytes": 2345,
+        "sha256": "EB41F0900E03CD08CAB115C2A419CE092B1BB547CCBEF121DC09335F6A32F2DB",
+        "lineCount": 9
+      },
+      "correctedBinderDiff": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\v5\\binder-v4-to-v5.CORRECTED-v2.EXACT.diff",
+        "bytes": 2345,
+        "sha256": "268C235EFA71937E31AAD4204663A794A50DFC6F895E9743B171D87AAA2E741C",
+        "lineCount": 11
+      },
+      "preservedMalformedOrchestrationManualDiff": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r6-metadata-orchestration-rebinding-PROPOSED\\known-helper-selection-and-refusal.PROPOSED.INERT.diff",
+        "bytes": 3389,
+        "sha256": "DF1CB5502266BEDFBB6AFAC67D6BD61A018CD0129DFB2C48E0B4B0B94CCD0A73",
+        "lineCount": 1
+      },
+      "correctedOrchestrationMap": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r6-metadata-orchestration-rebinding-PROPOSED\\R6-orchestration-edit-map.CORRECTED-v2.PROPOSED.OPERATOR_ONLY.json",
+        "bytes": 8296,
+        "sha256": "388A87E298B17ED0EBD3EAA44814E3EB909646EFDCA28F1E9B1264F73477B306",
+        "lineCount": 125
+      }
+    }
+  },
+  "ordinarySourceInspectionPreparation": {
+    "rootReportedFullInspection": "Root reports full v2 wording,16 atomic/29 local duties, changed criteria/binding discipline, four helper diffs and entire binder source inspected; AST0/function/parameter/v2 reverse-byte checks independently verified.",
+    "ordinaryR3StructureAudit": "Root reports ordinary audit confirmed all7 global complete duties and owner arrays preserved.",
+    "formalIndependentSourceAssessment": false,
+    "actualAdoption": true,
+    "sourceOnlyChecks": [
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\New-ScopedSourcePanelPacket.LocalDuties.v3.PROPOSED.ps1",
+          "bytes": 56391,
+          "sha256": "6005E2199849DD4ACC29D3426D43EF3608913C86A04D29AC9D9B61C5D901FD2A",
+          "lineCount": 381
+        },
+        "errors": [],
+        "functions": 16
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\New-InitialScopedSourceReviewGo.LocalDuties.v3.PROPOSED.ps1",
+          "bytes": 39603,
+          "sha256": "F92DA0D113F9EF0457E9937D729DE109C50E0859BF2EED66F578B35888D94156",
+          "lineCount": 261
+        },
+        "errors": [],
+        "functions": 15
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\New-IntegrationScopedSourceReviewGo.LocalDuties.v3.PROPOSED.ps1",
+          "bytes": 47639,
+          "sha256": "291CD7D43CCF9FB5B0617953450E96527D50F70BD87F89EC9579D03EDED2B763",
+          "lineCount": 324
+        },
+        "errors": [],
+        "functions": 18
+      },
+      {
+        "source": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v6-local-duties-PROPOSED\\metadata-helper-proposals\\v5\\Root-Bind-LocalDuties98-Contract-And-Panels.v5.PROPOSED.ps1",
+          "bytes": 15779,
+          "sha256": "07AE4C4A75A1DF7EECE21908C0B988D60C224D4B31D4BC2560C7D07932F60D54",
+          "lineCount": 124
+        },
+        "errors": [],
+        "functions": 4
+      }
+    ],
+    "limitation": "These source/structure/diff checks are not fresh formal SOURCE approval, runtime/UBT/native evidence or admission."
+  },
+  "orchestration": {
+    "broadR6ExecutorWritten": false,
+    "driverAdopted": false,
+    "orderedRebindingMap": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r6-metadata-orchestration-rebinding-PROPOSED\\R6-orchestration-edit-map.CORRECTED-v2.PROPOSED.OPERATOR_ONLY.json",
+      "bytes": 8296,
+      "sha256": "388A87E298B17ED0EBD3EAA44814E3EB909646EFDCA28F1E9B1264F73477B306",
+      "lineCount": 125
+    },
+    "requirement": "Keep manual ordered rebind map. Exact future adoption/recipe/final canonical repair and independently derived READY source/norm/common bindings are pending; do not invoke old R5-specific orchestration with substituted hashes."
+  },
+  "futureRootRequirements": [
+    "Canonical source repair and80controls are complete under the separate64receipt; independently derive all current body/unit/count/common/freeze bindings before new reviews.",
+    "Resolve actual wrapper/test identities, every complete unit/global/scope row count and READY-template/common/freeze bindings; preserve98/13/902/49/1561/stage33/source-only098.",
+    "Separately adopt every new metadata source and exact future input/recipe/adoption binding before operations.",
+    "Obtain all10 fresh valid complete scoped PASS plus root runtime/input/coverage/substantive-relationship audits and labelled aggregate before phases; no prior report/admission/GO transfers."
+  ],
+  "limits": [
+    "Root prospective criteria and metadata-source adoption only; exact future common/template/subject bindings remain unresolved and no SOURCE assessment or phase result follows.",
+    "No new metadata helper, review, UBT, Core, build or visible-window invocation for this adoption. Prior80 pure controls and source repair remain separately bound.",
+    "Clean criteria preserve the selected v2 normative content; only the public adoption-state sentence changes. Template bytes are exact538AB3. Operator/correction/history records are excluded from blind initial reviewer inputs; descriptors grant no implicit BODY access.",
+    "Phase/finalCODE+differentREQ/A1G/A2/HUD/Linux/packaging/acceptance/merge gates unchanged."
+  ],
+  "actualSourceReviewGo": false,
+  "sourceReviewLaunched": false,
+  "sourceAcceptance": false,
+  "aggregateSourcePass": false,
+  "nativePhaseGo": false,
+  "nativePhasesRun": 0,
+  "rootSourceAdoption64": {
+    "receipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-source-preservation-result.json",
+      "bytes": 11243,
+      "sha256": "F3F43DEA08B5D28384C7BC61BEA34B004BEC5181851EF379CF3078374472F2D3",
+      "lineCount": 220
+    },
+    "wrapper": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+      "bytes": 209830,
+      "sha256": "FFE36D92F9CBFE1BA4609C2586FEEA0134260EFB6742A78E2CE09AFBAD3B8329",
+      "physicalRows": 2100
+    },
+    "test": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\Test-E04RulesWitness.ps1",
+      "bytes": 45504,
+      "sha256": "2A4C7C18EDB8CB63A8969F33B9C818682D5FED021B7003CD2284DD763FA7306E",
+      "physicalRows": 308
+    }
+  },
+  "reviewTransportSelection": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-review-capacity-PROPOSED\\tool-transport-selection.review-capacity.PROPOSED.json",
+    "bytes": 3105,
+    "sha256": "2CF9EF45F8ACB7C7253C9EBD250C586DCB9C05BA7898FAF580DA2DA09969A5D4",
+    "lineCount": 69
+  },
+  "rulesWitnessProposedValues": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-freeze-constructor-PROPOSED\\freeze.rulesWitness.bound-values.v3b.PROPOSED.json",
+    "bytes": 98733,
+    "sha256": "AC8F2A86189AC32CAF8C6553F96CB08FFC7A87AF8E83B27932FCC2B01D040F85",
+    "lineCount": 1732
+  },
+  "rulesWitnessSourceBasis": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-freeze-constructor-PROPOSED\\expected-selector-source-basis.v3b.PROPOSED.json",
+    "bytes": 18219,
+    "sha256": "A95BB92C64516B2E8C856FE38AF4618087AE3132B484A2DD489FAE5C3897F1BE",
+    "lineCount": 390
+  },
+  "rulesWitnessFlatInputs": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-freeze-constructor-PROPOSED\\flat-freeze-membership.v3b.PROPOSED.json",
+    "bytes": 179000,
+    "sha256": "CBDA670A1B0F62224EF400E5A1FCE43194C4806AE536BA0E3CD45900A11F232A",
+    "lineCount": 3170
+  },
+  "primaryInput": {
+    "catalog": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-enum-primary-supplement-PROPOSED\\primary-catalog.WITNESS-v3.ENUMS.PROPOSED.json",
+      "bytes": 20589,
+      "sha256": "3582AFB2F18837C55C9A5843C3F31FB947E9C1424F70B742BBFBEF61F624C83F",
+      "lineCount": 580
+    },
+    "id": "SOURCE-BODY-095",
+    "sourceRanges": 50,
+    "prior235053BytePrefixExact": true,
+    "rootFullyReadNewRows": true,
+    "physicalRows": 5751,
+    "originFiles": 21,
+    "literalSourceRows": 5551,
+    "artifact": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-enum-primary-supplement-PROPOSED\\normal-target-rules-discovery-and-assembly.WITNESS-v3.ENUMS.PROPOSED.primary.txt",
+      "bytes": 245979,
+      "sha256": "E2FB07477B351DC7414BC2682BB840176BA245A1361DD13D4EB1F128566C44C2",
+      "lineCount": 5751
+    },
+    "rootIndependentReconstruction": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-enum-primary-supplement-PROPOSED\\root-independent-v3-literal-reconstruction.original.json",
+      "bytes": 565,
+      "sha256": "585D079FE6C03E2704AAAF3E8C0CAABD57F714C2252FCBA0C4EAA434FE2AA1EB",
+      "lineCount": 19
+    }
+  },
+  "publicationStateLineOnlyChange": {
+    "old": "**State:** clean prospective criteria, UNBOUND and not yet adopted. Exact repaired source, complete-unit, candidate/base, campaign, freeze and scope bindings remain unresolved until separately adopted and derived. This document creates no launch, phase/native, acceptance or merge authority.",
+    "new": "**Adoption:** root prospectively adopted these criteria in the separate v6 adoption record. Exact complete-unit, candidate/base, campaign, freeze and scope bindings remain unresolved until independently derived. This document creates no launch, phase/native, acceptance or merge authority.",
+    "allOtherCriteriaBytesPreserved": true
+  },
+  "publicationChecks": {
+    "templateHashUnchanged": "538AB3AAF4AB8DE241F5D53DE32DEEB6EB34C09536227A3301BC1A7CC3BE0DF0",
+    "correction": "Add whitespace=cr-at-eol alongside -text for this exact SHA-bound template",
+    "firstStagedWhitespaceCheck": "FAILED because exact preserved CRLF template lacked cr-at-eol attribute; no source/template bytes changed"
+  }
+}

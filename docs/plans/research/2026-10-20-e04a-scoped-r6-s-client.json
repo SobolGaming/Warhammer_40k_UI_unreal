@@ -1,0 +1,255 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+  "scopeId": "S_CLIENT",
+  "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T122137Z-3498b937",
+  "disposition": "No material source defect or unresolved local coverage gap found. This PASS applies only to S_CLIENT.",
+  "bindings": {
+    "inputManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-73bc2c0-20261020T122137Z-3498b937-S_CLIENT\\source-review-input-manifest.json",
+      "bytes": 663065,
+      "sha256": "fb6ec7b90c74dc6c87659b121a72ff3a0bca98ef00e9d5e9122b69a6a4f58b5f"
+    },
+    "runtimeFreezeManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-73bc2c0-20261020T122137Z-3498b937\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+      "bytes": 746749,
+      "sha256": "e4c776c0c0aca5cf09995bcf7484260c6ad20b039c1791523060d35384b3dcb6"
+    },
+    "scopeContractSHA256": "99cebdde29f1544efa3fdb03a70ba59d584ee5b3153846d82e486d6fa274b49b",
+    "bootstrapSHA256": "e9de90e4ccfa72e5870c64185c9b6f723328e7577d0962e517aa7ed260b38a4c",
+    "ownCoverageSHA256": "f8a2513d7af4e09c3492a7021e59db7118f3b44a4891dcdcff89b8f7ec30bf2d",
+    "launchPermissionSHA256": "02bb1fdbf732e5a81354b07e940df038257ab3629a6854dbfc3817a82781e692",
+    "preparedPrompt": {
+      "bytes": 55409,
+      "sha256": "b7723c58861af6c0d7b9dadadbdb15db62efad328b4e2ae37e2ccad8b74ca023"
+    },
+    "storedActualPrompt": {
+      "bytes": 56627,
+      "sha256": "843E1E975B417BCC6B3E21D4A78C35BF8359A50E19178699FD78982B985FFB96"
+    },
+    "verification": [
+      "The actual GO identifiers and descriptors matched the bootstrap, own manifest, pure contract and local scope.",
+      "The stored actual prompt contains the exact prepared prompt followed by the supplied actual GO. Its complete local scope and common criteria matched the bound records.",
+      "Both local duty projections and owned atoms matched the global contract and own coverage. Aggregate context was not treated as an additional local assignment.",
+      "All three common criteria records were verified by exact absolute path, byte count and SHA256 before parsing. Each is present in both own inputFiles and frozenFiles.",
+      "sourceBindingDerivation is ADOPTED_AND_DERIVED. Wrapper/test descriptors, physical counts and all 27 complete-unit ranges/text hashes matched. The top-level boundary hash preserved original terminators and final newline.",
+      "All 98 BODY descriptors and their 50,001 physical rows matched disk. This establishes inventory identity, not substantive review of all 98 bodies.",
+      "Head/base are root-supplied identities; Git identity was not independently verified."
+    ]
+  },
+  "actualCoverage": {
+    "citationConvention": "BODY numbers below mean SOURCE-BODY-NNN under the bound BODY policy; ranges are inclusive physical rows.",
+    "mandatoryEntireFiles": [
+      "001:1-88",
+      "002:1-17",
+      "003:1-806",
+      "004:1-15",
+      "010:1-18",
+      "011:1-3",
+      "016:1-8",
+      "017:1-12",
+      "018:1-12",
+      "019:1-288",
+      "020:1-3",
+      "021:1-12",
+      "022:1-1",
+      "023:1-8",
+      "024:1-4",
+      "025:1-2",
+      "026:1-681",
+      "027:1-60",
+      "028:1-683",
+      "029:1-167",
+      "030:1-260",
+      "031:1-111",
+      "032:1-1411",
+      "033:1-75",
+      "034:1-861",
+      "035:1-500",
+      "036:1-1095",
+      "054:1-294",
+      "055:1-142",
+      "056:1-14",
+      "057:1-196",
+      "096:1-50",
+      "097:1-88"
+    ],
+    "mandatoryEntireFileCount": 33,
+    "mandatoryEntirePhysicalRows": 7985,
+    "mandatoryBODY013CompleteUnitRangeUnions": [
+      [1066, 1113],
+      [1198, 1231],
+      [1454, 1885],
+      [1947, 1953],
+      [2041, 2100]
+    ],
+    "mandatoryCompleteUnits": 27,
+    "mandatoryCompleteUnitPhysicalRows": 581,
+    "totalMandatoryPhysicalRows": 8566,
+    "additionalEntireFiles": [
+      "005:1-50",
+      "006:1-58",
+      "007:1-52",
+      "008:1-48",
+      "009:1-276",
+      "012:1-608",
+      "098:1-308"
+    ],
+    "additionalBODY013Ranges": [
+      [1, 178],
+      [1057, 1065],
+      [1114, 1141],
+      [1232, 1235],
+      [2020, 2029]
+    ],
+    "supplementalAPIPhysicalRanges": {
+      "092": [
+        [155, 185],
+        [678, 770]
+      ],
+      "095": [
+        [1385, 1418],
+        [3980, 4223],
+        [4584, 4775]
+      ]
+    },
+    "metadata": [
+      "Record 2: all positively selected fields read completely, including authored, source-only, reused and legacy routes.",
+      "Record 1: local source/plugin membership and material rules-witness relationships assessed; complete exact17-key object preserved. All 321 descriptor occurrences, representing 318 distinct descriptors, were joined to flat freeze.files.",
+      "Records 4, 7, 11 and 12: material catalog, project, proof-plugin, ProceduralMeshComponent, target and environment relationships assessed.",
+      "Record 12 retains its actual historical sourceHead/runId; it was not treated as current execution or approval.",
+      "No selector-row partition or complete global plugin graph was assigned or credited."
+    ],
+    "unreadScope": "No mandatory local file, complete unit, selected-record obligation or material local duty remains unread. Forty BODY files were substantively read in full. BODY013, BODY092 and BODY095 were additionally read only at the ranges reported above. The other 55 BODY files received inventory identity checks, not substantive assessment. Unassigned catalog entries and global graph semantics are not credited by this report."
+  },
+  "substantiveAssessment": [
+    {
+      "area": "Existing client and Core authority",
+      "result": "Complete",
+      "assessment": "CoreBoundary retains typed envelope/outcome handling, exact revision limits, explicit nulls and case-sensitive identities, and rejects duplicate or unsupported case-colliding keys. E02 geometry, selection and review remain synthetic/advisory with no Core/session submission route. The complete headers and all three client test translation units were assessed.",
+      "sourceCitations": [
+        "BODY026:419-669",
+        "BODY027:1-60",
+        "BODY028:180-464",
+        "BODY030:164-260",
+        "BODY034:1-861",
+        "BODY035:1-500",
+        "BODY036:1-1095"
+      ],
+      "requirementCitations": [
+        "scope.selected.json#/scope/duties/0",
+        "BODY054:2-29",
+        "BODY056:4"
+      ]
+    },
+    {
+      "area": "All33 staged members, includes, UHT and build paths",
+      "result": "Complete",
+      "assessment": "Every frozen staged member joined uniquely to its canonical descriptor and positive BODY route with matching bytes and digest. The complete staged source/header/config set was read, including the supplementary parser/probe bodies. The seven C# Rules members remain distinct from all33 authored members. Conditional automation dependencies and translation-unit guards agree; generated-header placement and complete-type destructor placement are preserved. BODY098 is source-only and absent from staged membership.",
+      "sourceCitations": [
+        "BODY001-012:complete",
+        "BODY016-036:complete",
+        "BODY019:21-38",
+        "BODY033:1-75",
+        "BODY036:1-24",
+        "BODY013:1542-1611",
+        "selected metadata record 1:sourceMembership",
+        "selected metadata record 2:sourceBodies,reusedEntrypointBodies,sourceOnlyBodyInputs"
+      ],
+      "requirementCitations": [
+        "scope.selected.json#/scope/duties/1",
+        "scope.selected.json#/materialJoins/0"
+      ]
+    },
+    {
+      "area": "Dedicated target, startup and effective selector bridge",
+      "result": "Complete at the assigned client interface",
+      "assessment": "The dedicated target pins bBuildAllModules=false and explicitly enables E04ProfileProof. AdditionalData refuses an occupied bridge and retains the actual target instance/type. CaptureSelectors checks the live read-only view, bridge identity, process/type and finite selector expectations; the three repaired enum tags use guarded nameof values. Installed API excerpts support the existing-instance ReadOnlyTargetRules bridge and constructor parameter flow. Ordinary targets and Config retain the shell entry behavior. Parser/probe module startup is inert; E02 requires explicit game mode and opt-in arguments. Native arguments select only E04 tests, use NullRHI and omit E02 activation arguments. No actual selector value or activation is established here.",
+      "sourceCitations": [
+        "BODY001:10-86",
+        "BODY002:8-16",
+        "BODY008:1-9",
+        "BODY011:1-3",
+        "BODY016-025:complete",
+        "BODY032:1063-1094",
+        "BODY013:1198-1227",
+        "BODY013:1947-1953",
+        "BODY092:172-178,678-749",
+        "BODY095:4038-4196,4584-4768"
+      ],
+      "requirementCitations": [
+        "scope.selected.json#/scope/duties/2",
+        "scope.selected.json#/reviewDiscipline/finiteRulesWitnessCriteria"
+      ]
+    },
+    {
+      "area": "Held source, direct process and preservation interfaces",
+      "result": "Complete",
+      "assessment": "The real preparation route acquires all66 member streams before deriving held-stream hashes, validates approved canonical/staged bytes, and rechecks complete membership/topology immediately before the direct frozen dotnet/UBT root. Existing-file locks remain held through process completion and retention, with partial-acquisition cleanup in finally. Process joins require PID plus creation FILETIME, CWD, literal argv, controlled environment, challenge/run/source/freeze identity and successful cleanup. The module producer refuses unsupported types, selectors, cache shapes, missing materialized roots and source/artifact mismatches. Retention and dependent-phase checks preserve and recheck DLL/PDB/manifest and witness/input/topology records. Primary failures remain primary when retention also fails. Generic supervisor/compiler internals were not credited as locally reviewed.",
+      "sourceCitations": [
+        "BODY003:340-801",
+        "BODY013:1517-1643",
+        "BODY013:1644-1885",
+        "BODY013:2020-2029",
+        "BODY013:2041-2100"
+      ],
+      "requirementCitations": [
+        "scope.selected.json#/scope/duties/3",
+        "scope.selected.json#/scope/duties/4",
+        "scope.selected.json#/materialJoins/1"
+      ]
+    },
+    {
+      "area": "Controls and inference limits",
+      "result": "Source assessment complete; controls unexecuted",
+      "assessment": "BODY098 contains complete synthetic join/refusal controls and meaningful real preparation-route controls for byte changes, extra topology inputs, partial acquisition, held-write refusal, launch-boundary handles and primary/secondary failure preservation. Its preparation functions are not stubbed in those controls. Pure fixtures and static source inspection establish no installed UBT run or actual private-cache accessibility. Cache/name-map enumeration, AssemblySourceFiles, manifest order and PDB association remain distinct. The implementation explicitly limits first-population inference and disclaims scan chronology, continuous directory monitoring, native flags and activation.",
+      "sourceCitations": [
+        "BODY098:1-308",
+        "BODY003:510-517",
+        "BODY013:1609-1610",
+        "BODY013:1788-1791",
+        "BODY013:1864"
+      ],
+      "requirementCitations": [
+        "scope.selected.json#/reviewDiscipline/finiteRulesWitnessCriteria",
+        "BODY057:147-184"
+      ]
+    }
+  ],
+  "localAtomicDuties": [
+    {
+      "join": "STAGED_CLIENT",
+      "dutyKind": "LOCAL_PRIMARY",
+      "atomicDutyId": "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+      "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion.",
+      "status": "SUBSTANTIVELY_COMPLETE"
+    },
+    {
+      "join": "PROCESS_PRESERVATION",
+      "dutyKind": "LOCAL_PRIMARY",
+      "atomicDutyId": "PROCESS_CLIENT_BOUND_INTERFACES",
+      "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess CLIENT interface units for Snapshot-Source, Snapshot-ProjectPlugins, Check-ProjectPluginMembership, Child-Environment, Invoke-Root, Require-RootPass, all required witness/source/held-stream/prelaunch/retention validators, Editor-Build, Native-Arguments and the complete initialization/dispatch/catch/finally/final-exit boundary. Follow exact bound inputs, source/run/phase/nonce/process identity, controlled environment and call order into and out of the owned root; verify failure propagation, lock lifetime/finally release and retained/live predecessor use. Full generic job/supervisor/catalog/compiler engine internals remain the complete-harness owners; the local interfaces must not assume their unverified success.",
+      "status": "SUBSTANTIVELY_COMPLETE"
+    }
+  ],
+  "findings": [],
+  "errorsAndRecoveries": [
+    "Several policy/scope/metadata displays truncated. Required source bodies and units were subsequently displayed in complete numbered ranges. Metadata was recovered through smaller projections and complete typed comparisons; truncated displays were not credited as complete semantic readings.",
+    "One JsonElement projection rendered artifact objects as ValueKind. All affected artifact values were reread using JSON serialization.",
+    "An independent ordinal hash-string comparison stopped on spelling differences. All321 rules descriptor occurrences use different SHA256 letter case from flat freeze.files. Complete paths, byte counts and hexadecimal digest identities match; the spelling differences were retained and mapped rather than reported as identical strings.",
+    "Two combined verification commands returned exit1 without diagnostic output. Simplified independent reads subsequently verified all16 canonical/source-only copies and all three criteria inventory bindings.",
+    "Complete selected-value recovery comparisons preserved names, JSON types, null/false values, empty/singleton arrays, order and opaque strings across 6016 JSON occurrences with zero serialization differences. These comparisons establish data integrity only.",
+    "No mandatory EOF gap or unresolved parser/query failure remains."
+  ],
+  "independenceAndRuntimeLimits": {
+    "conduct": "Read-only assessment with no delegation, mutation, saved files, stored-command execution, implementation import, YAML parsing, build/test/engine/GUI/network/GitHub execution, peer report or previous verdict use.",
+    "permissions": "The supplied environment declares read-only filesystem permissions and approval policy never.",
+    "unverifiedByReviewer": "Actual launcher/session/model-selector isolation, memory-disable enforcement and received-input provenance remain root-attested. Generated runtime/invocation/session/output bodies were not inspected.",
+    "executionEvidence": "No implementation tests or native phases were run. Inert source parsing, descriptor hashing and independently authored data comparisons were performed."
+  },
+  "acceptanceBoundary": "SOURCE_PASS is local only. It supplies neither the aggregate SOURCE gate nor phase/native/final acceptance. Actual CLR/cache/type/assembly observations, compiler/native flags, activation and execution results remain later obligations. A1G, A2 compatibility, Linux, rendering/HUD, packaging and separate final CODE/REQ gates remain open."
+}

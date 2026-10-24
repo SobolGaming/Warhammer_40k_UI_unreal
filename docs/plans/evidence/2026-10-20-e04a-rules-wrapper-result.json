@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_RULES_WRAPPER_PURE_CONTROLS_SOURCE_CHECKPOINT",
+  "createdUtc": "2026-10-20T10:11:49.4037846Z",
+  "status": "RULES_WITNESS_SOURCE_CHECKED_PACKETS_NOT_READY",
+  "previousHead": "32f3d257742636258f4640acd4394ded9e53e4b7",
+  "sourcePromotion": [
+    {
+      "executedSource": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-wrapper-repair-PROPOSED\\Invoke-E04AProfileProof.RulesWitness.PROPOSED.ps1",
+        "bytes": 202111,
+        "sha256": "141800CD5D87574EC634FF0D423AE95D2AEB260DB361F376D8EE9B55C64DEAF9"
+      },
+      "repositoryPath": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "canonical": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+        "bytes": 202111,
+        "sha256": "141800CD5D87574EC634FF0D423AE95D2AEB260DB361F376D8EE9B55C64DEAF9"
+      }
+    },
+    {
+      "executedSource": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-wrapper-repair-PROPOSED\\Test-E04RulesWitness.CANONICAL-PATH.PROPOSED.ps1",
+        "bytes": 26104,
+        "sha256": "67802E59B7340908D2FD9F70EB1B9ED5A4CCB7A6E9256FC52D89B6B59951C11E"
+      },
+      "repositoryPath": "tests/migration/Test-E04RulesWitness.ps1",
+      "canonical": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\Test-E04RulesWitness.ps1",
+        "bytes": 26104,
+        "sha256": "67802E59B7340908D2FD9F70EB1B9ED5A4CCB7A6E9256FC52D89B6B59951C11E"
+      }
+    }
+  ],
+  "rootSourceAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-wrapper-repair-PROPOSED\\root-source-adoption.original.json",
+    "bytes": 2282,
+    "sha256": "7DFA76398EB9DF7B182D1B9B75B6CC737C3D23553C0DE7DF7256C60C9A543F42"
+  },
+  "controls": {
+    "wrapperSourceHash": "141800CD5D87574EC634FF0D423AE95D2AEB260DB361F376D8EE9B55C64DEAF9",
+    "testSourceHash": "67802E59B7340908D2FD9F70EB1B9ED5A4CCB7A6E9256FC52D89B6B59951C11E",
+    "matchedCount": 51,
+    "caseCount": 51,
+    "failedCount": 0,
+    "rootInspectedAll51CaseDispositions": true,
+    "outerElapsedSeconds": 3.7644937,
+    "published": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-wrapper-controls.json",
+      "bytes": 14570,
+      "sha256": "A6EB1F889855EA380DF0A4243D86C09584BBCC02F4D0772B1647AF53668C3091"
+    },
+    "processExitCode": 0,
+    "original": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-wrapper-repair-PROPOSED\\after-root-adoption-controls-01\\pure-control-report.json",
+      "bytes": 14570,
+      "sha256": "A6EB1F889855EA380DF0A4243D86C09584BBCC02F4D0772B1647AF53668C3091"
+    }
+  },
+  "sourceOnlyChecks": {
+    "allEightPhaseBudgetsAndRootCountsUnchanged": true,
+    "newWrapperFunctions": 15,
+    "fourNativeOutputFreshnessGuardsPreserved": true,
+    "changedOriginalWrapperFunctions": 5,
+    "unchangedOriginalWrapperFunctions": 65,
+    "nativeSupervisorUnchanged": true,
+    "identicalControlFunctionExtents": 10
+  },
+  "limits": [
+    "Synthetic data/owned-file controls with the real EditorBuild failure-finally path stubbed before native launch.",
+    "No full wrapper entry, PE reader, candidate emit/load, Rules construction, UBT/native/GUI/Core process or build.",
+    "Concrete runtime/selector metadata, new full source/test/API grants and complete-unit/count freeze bindings remain pending.",
+    "No old scoped admission/GO transfers. All ten fresh scoped SOURCE/root audits/aggregate and final CODE/different REQ remain required."
+  ],
+  "nativePhases": "ALL_EIGHT_NOT_RUN",
+  "sourceAggregate": false,
+  "phaseAuthority": false,
+  "finalAcceptance": false
+}

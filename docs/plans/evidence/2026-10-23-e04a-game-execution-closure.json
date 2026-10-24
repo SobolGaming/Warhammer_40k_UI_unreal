@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "PUBLIC_E04_A1G_NINE_PHASE_EXECUTION_CLOSURE",
+  "status": "NINE_PHASES_CLOSED_FINAL_REVIEWS_PENDING",
+  "sourceHead": "c329a3a32dca48272e29bad46af616bcc6bdebd4",
+  "runId": "20261023T154418Z-ce672e5f",
+  "closedUtc": "2026-10-23T16:44:44.5047354Z",
+  "finalReviewBase": "2651a8652915824fe339a958ca5afc1a835f5731",
+  "originalClosure": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\all-nine-closure\\actual-closure\\root-execution-closed.original.json",
+    "bytes": 613522,
+    "sha256": "647CD263D2768746C2E5B32355B36F1BACA8DF2EE6A4A42EC6652496134F7B0D"
+  },
+  "closureTool": "d553f3",
+  "rootPrimaryClosureInspection": "337f72",
+  "phases": [
+    {
+      "phase": "Preflight",
+      "status": "PREFLIGHT_PASS_NO_NATIVE_ROOT",
+      "executionPassed": true,
+      "elapsedSeconds": 6.3329866,
+      "nativeRoots": 0,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\preflight\\result.json",
+        "bytes": 79813,
+        "sha256": "05F38AD1965096BF675CDCB3E6DDE0D303EA5593ADF44AFA8F6177BDC6583C82"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\preflight\\completion.json",
+        "bytes": 771,
+        "sha256": "31036497EF4A32B8C6DDC445B00FBCFFA5F4F4804D4FA3A091BEFDBAFDB0E573"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\preflight.root-admission.original.json",
+        "bytes": 2683,
+        "sha256": "A78D3C7FCD88BD73CDFBA1BB573E0D9493BF94F51396EC4CCD8CBF5C79B425E4"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\preflight\\completion.original.json",
+        "bytes": 1564,
+        "sha256": "A548FB6FAA6D7A263EBAE7EB77D73F7D43A92E9619FED92CD843BA2C7FBF80DC"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    },
+    {
+      "phase": "DependencyConfigure",
+      "status": "DEPENDENCY_CONFIGURE_PASS_NO_INSTALL",
+      "executionPassed": true,
+      "elapsedSeconds": 14.2944214,
+      "nativeRoots": 1,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\dependencyconfigure\\result.json",
+        "bytes": 190485,
+        "sha256": "E5562A26BAFF0CC7A4DDBED83B7F43CBBD6F231F5EA7C31C3462D9650E337043"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\dependencyconfigure\\completion.json",
+        "bytes": 792,
+        "sha256": "92DBCE25749AC1192CAF4FD8AE4B12E9BA352F7B164AAEC9248D4A47F343E144"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\dependencyconfigure.root-admission.original.json",
+        "bytes": 2876,
+        "sha256": "C918EE720DD8109A7D35DB9659EBD10E0C10269C3F201B517A946AD66391329D"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\dependencyconfigure\\completion.original.json",
+        "bytes": 1604,
+        "sha256": "7911DC47851CB83774600AD978B41EC6FC9EBC3344FA9D5027637FE1DAB5819D"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    },
+    {
+      "phase": "DependencyBuild",
+      "status": "DEPENDENCY_BUILD_AND_EXPLICIT_GAME_ARTIFACT_COPY_PASS",
+      "executionPassed": true,
+      "elapsedSeconds": 23.1968687,
+      "nativeRoots": 1,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\dependencybuild\\result.json",
+        "bytes": 199115,
+        "sha256": "B67B82044D6E9249548B479CFE6E8C0F75E96DDE1BAA47169DA6B8D82F2FB864"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\dependencybuild\\completion.json",
+        "bytes": 784,
+        "sha256": "BF4BE73CC77CFD00C81C25A01A0C93BFF0D716DF13E7EFB8C5C7AAFCB6EB6B22"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\dependencybuild.root-admission.original.json",
+        "bytes": 3201,
+        "sha256": "E2EAE390683C32A003E055DF42AE354E49DFE2539B72A415E65C8A678D68F5F1"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\dependencybuild\\completion.original.json",
+        "bytes": 1588,
+        "sha256": "A694699091EE2727C747658607D460516A13A9AFF2C3E400985540D7D2F839EE"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    },
+    {
+      "phase": "EditorPrerequisiteBuild",
+      "status": "EDITOR_PREREQUISITE_BUILD_PASS_NORMAL_RECEIPT_AND_PROJECT_MODULE",
+      "executionPassed": true,
+      "elapsedSeconds": 165.6825243,
+      "nativeRoots": 1,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\editorprerequisitebuild\\result.json",
+        "bytes": 5609518,
+        "sha256": "5C6BB11D65E7BC13023C178A4F52A194A28EB7048D9483D0CB545E18EEC9E3DA"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\editorprerequisitebuild\\completion.json",
+        "bytes": 801,
+        "sha256": "A94C5AE89A6ABF78461E66606747E52E955FEF39A6FD69427DF511BF3D4962F8"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\editorprerequisitebuild.root-admission.original.json",
+        "bytes": 3773,
+        "sha256": "4B6DCA1131F44A8692D8AE58E62A0E0AE4E9C380B196E9DC667A68208EDAF674"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\editorprerequisitebuild\\completion.original.json",
+        "bytes": 1620,
+        "sha256": "6259CCB33E46DE4211EF64E3B667331562F7B9B6747B82C2EB21393380FEBD87"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    },
+    {
+      "phase": "GameBuild",
+      "status": "GAME_BUILD_PASS_ACTUAL_CALLER_PARSER_FLAGS_AND_MONOLITHIC_LINK",
+      "executionPassed": true,
+      "elapsedSeconds": 75.6530914,
+      "nativeRoots": 1,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\gamebuild\\result.json",
+        "bytes": 1127368,
+        "sha256": "CF91A5723081FE1636BC322357478F5241D692187D6C670DA740B96399E137B5"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\gamebuild\\completion.json",
+        "bytes": 773,
+        "sha256": "856258F4456B0456CC93043489FF26BF0F58D4F40FD34089D502B6F57A8BCFF7"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\gamebuild.root-admission.original.json",
+        "bytes": 3993,
+        "sha256": "CFD61C3DFB95874D58E48289D214B961D425A5792A8D01AF5B16EEBAFD6ED42E"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\gamebuild\\completion.original.json",
+        "bytes": 1563,
+        "sha256": "E3554B9BF38263194E57F05FC3BC220FD47D43F6971FEC61F38BE24A40BEFD58"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    },
+    {
+      "phase": "Cook",
+      "status": "COOK_PASS_NORMAL_COPIED_LOG_AND_LOOSE_PRIMARY_OUTPUTS",
+      "executionPassed": true,
+      "elapsedSeconds": 419.0643539,
+      "nativeRoots": 1,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\cook\\result.json",
+        "bytes": 815682,
+        "sha256": "0D4F456D25904E941057FE072FB8C5D160C35960DBEABCE81DCA3CBC6C02E273"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\cook\\completion.json",
+        "bytes": 762,
+        "sha256": "C0D11B1AC2CE338C71C250F6644EB8207968F0A7245DD5DE5ED93EE2C2CD6658"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\cook.root-admission.original.json",
+        "bytes": 4471,
+        "sha256": "468A81560CAF45607E8A3622CEB5619121CF24DC5D26D84D95A46AC3ECFAC5A6"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\cook\\completion.original.json",
+        "bytes": 1544,
+        "sha256": "CE0AEDA2097A510DD1457358C05C88E02472A8DE28F7462DA665CF54748D73D8"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    },
+    {
+      "phase": "Stage",
+      "status": "STAGE_PASS_ACTUAL_LOOSE_MANIFESTS_AND_GAME_EXECUTABLE_MAPPING",
+      "executionPassed": true,
+      "elapsedSeconds": 224.3371522,
+      "nativeRoots": 1,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\stage\\result.json",
+        "bytes": 5400033,
+        "sha256": "6DDB6AD21781D1D7F38636E27719ABF735A3AEDCE1B6510344332B974073D4EC"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\stage\\completion.json",
+        "bytes": 765,
+        "sha256": "53254AFED8C66DF00A1C2E983A56003F9A83C97AFF9914D2CDA2C71287613581"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\stage.root-admission.original.json",
+        "bytes": 4236,
+        "sha256": "0F432CFAB4A1D116F1D7E8676754CA47EA494D9DBE7BCED0085B3EE75C368DE1"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\stage\\completion.original.json",
+        "bytes": 1548,
+        "sha256": "A616CDD2FD2764EA3CB31215C425317A781714141787B848A97AB869162ECEA5"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    },
+    {
+      "phase": "Native",
+      "status": "NATIVE_PASS_COOKED_GAME_FINITE_RESULT_AND_ZERO_OBSERVED_WINDOWS",
+      "executionPassed": true,
+      "elapsedSeconds": 194.6656999,
+      "nativeRoots": 1,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\native\\result.json",
+        "bytes": 131913,
+        "sha256": "85788A847A77200BA9977B376EC4387D8ED85317F14EEF0DAAD31DFFE44F2D09"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\native\\completion.json",
+        "bytes": 766,
+        "sha256": "3D761B56F7ECA30B49BB3C47AD53BFB66EA3F6F37C4E2CFAD3842776F084475D"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\native.root-admission.original.json",
+        "bytes": 3978,
+        "sha256": "FF8061F6F9F799E518A1B2482F8DCAA497ABBAEA27C1ACAB9A5BFA11D2F11912"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\native\\completion.original.json",
+        "bytes": 1552,
+        "sha256": "A4B5D2F9F86803B201BB2409CF9DDF2E1C8E01A435F973FFD16E5AD52666D018"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    },
+    {
+      "phase": "Audit",
+      "status": "AUDIT_PASS_SAME_RUN_SOURCE_SETTINGS_STAGE_BINARY_RESULT_RECONCILED",
+      "executionPassed": true,
+      "elapsedSeconds": 110.0584551,
+      "nativeRoots": 0,
+      "result": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\audit\\result.json",
+        "bytes": 1652713,
+        "sha256": "6E61317FDEEA42787B4115C9A743F9E3CE4320D13A2C502FFB8789B0A15D66CC"
+      },
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\audit\\completion.json",
+        "bytes": 765,
+        "sha256": "BC252459AA8AA85512352A10EF6B4FC472FA6E58185BD3325DF4E46A5C72F597"
+      },
+      "rootAdmission": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-evidence\\audit.root-admission.original.json",
+        "bytes": 2831,
+        "sha256": "CD19FEDBC5627975C3B64F74D2D8C54F49165401D789CD448075D48516C55AC0"
+      },
+      "outerClosure": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\phase-operators\\phase-hosts\\audit\\completion.original.json",
+        "bytes": 1548,
+        "sha256": "1889805DFAE7D0A7EB199E4CDA05B5960FDDCC0B20C353A19F3B0682814F09E6"
+      },
+      "outerExitCode": 0,
+      "outerExitConfirmed": true,
+      "outerTimedOut": false
+    }
+  ],
+  "phaseCount": 9,
+  "nativeRoots": 7,
+  "executionAuthority": "CLOSED_DO_NOT_REUSE",
+  "visibleWindowsRemaining": 0,
+  "sourcePrerequisite": {
+    "rawVerdict": "PASS",
+    "report": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-c329a3a-20261023T154430Z-db97fb\\last-message.txt",
+      "bytes": 2637,
+      "sha256": "C27754D3723981DDC1BE8D4E999CC3595CC1765974EADB438B5C031232D26E31"
+    },
+    "rootAdmission": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-c329a3a-20261023T154430Z-db97fb\\root-source-admission.original.json",
+      "bytes": 6261,
+      "sha256": "0B1DB81F13D1F1B7918A362C521EDD44B29E14D62F9082285F41871627E404D7"
+    },
+    "actualPostSourceControls": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\post-source-controls\\root-actual-post-source-controls-execution.original.json",
+      "bytes": 2085,
+      "sha256": "51ED1BA2D5DA56BDF129EE789BBB3D5D1CA61DA6C7CF89E5EF3BEA291496A7E7"
+    },
+    "metadataControlCases": 14,
+    "observerQueryFailureBranch": "UNFORCED_NOT_COVERED_BY_14_METADATA_CONTROLS"
+  },
+  "actualGame": {
+    "processes": 1,
+    "pid": 32728,
+    "elapsedSeconds": 2.2204133,
+    "exitCode": 0,
+    "receipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\phases\\native\\a1g-native.process.json",
+      "bytes": 12970,
+      "sha256": "0cca30431df061750320ecc9ca48fa673e850f1ef9ff538bd2fb1f7598874f12"
+    },
+    "rawResult": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\reports\\game-probe\\result.json",
+      "bytes": 8402,
+      "sha256": "58aca92edf392ec7742bfb5c671ec946ac9466762119b8b9fdf1fd8a98cf6b14"
+    },
+    "nativeLog": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\logs\\native-game.log",
+      "bytes": 52456,
+      "sha256": "f088221dabc2668ef77c75558efe665b181dc3b815dba540e5b34d95a84d2397"
+    },
+    "executable": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\stage\\Windows\\WarhammerClient\\Binaries\\Win64\\WarhammerClientE04A1G.exe",
+      "bytes": 332392448,
+      "sha256": "13a6ddeaff398638897234a3c1dd660c73fd16e9d87bec81ec7fb05f8994c21e"
+    },
+    "parserCalls": 2,
+    "evaluatedPositiveChecks": 52,
+    "orderedCheckIds": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06",
+      "M07",
+      "M08",
+      "M09",
+      "M10",
+      "M11",
+      "M12",
+      "M13",
+      "M14",
+      "M15",
+      "M16",
+      "M17",
+      "M18",
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "G01",
+      "G02",
+      "G03",
+      "G04",
+      "G05",
+      "G06",
+      "G07",
+      "G08",
+      "G09",
+      "G10",
+      "G11",
+      "G12",
+      "G13",
+      "G23",
+      "G14",
+      "G15",
+      "G16",
+      "G17",
+      "G18",
+      "G19",
+      "G20",
+      "G21",
+      "G22",
+      "L01",
+      "L02"
+    ],
+    "requiresCookedData": true,
+    "existingLegacyDerivedDataCacheIsNull": true,
+    "legacyDdcLogRowCount": 0,
+    "ownedNativeDdcFileCount": 0,
+    "ownedNativeDdcDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\ddc\\native",
+    "auditDdcReconciled": true,
+    "nativeAssertionTotal": "NOT_INFERRED",
+    "scope": "Separate direct M06 facts and finite closed-log/owned-directory observations only; no universal DDC/write absence or selected Native writer; runtime DerivedData IoStore is separate"
+  },
+  "windowObservations": {
+    "sampleCount": 6,
+    "periodicSampleCount": 3,
+    "visibleWindowObservationCount": 0,
+    "maximumStartToStartGapSeconds": 0.5597158000000001,
+    "status": "PASS_ZERO_OBSERVED",
+    "continuousAbsenceEstablished": false,
+    "limits": [
+      "Periodic current-desktop top-level WS_VISIBLE samples; brief windows between samples are not excluded.",
+      "IsWindowVisible checks style, not pixels; obscured windows may count. Other desktops/sessions, child-only and message-only windows are outside these observations.",
+      "Job-PID and HWND queries are non-atomic; no universal PID/handle-race or descendant-inventory claim.",
+      "EnumWindows transiently identifies unrelated owner PIDs for filtering; no unrelated PID/handle, title, text, class, input or pixel data is retained.",
+      "Hidden flags/requested visibility are separate from these actual sample receipts."
+    ]
+  },
+  "finitePreservation": {
+    "observedStates": 84,
+    "matched": 84,
+    "changed": 0,
+    "counts": {
+      "source": 36,
+      "stage": 36,
+      "fixtures": 2,
+      "settings": 9,
+      "gameSettings": 1
+    },
+    "observations": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-window-query-repair-root-20261023\\bindings-c329a3a-20261023T154418Z-ce672e5f\\all-nine-closure\\actual-closure\\root-current-preservation-observations.original.json",
+      "bytes": 38956,
+      "sha256": "2B730D47CA09DAA6D4BEEC53E5E55723D111A8EA135FFABABD7FA86D04D224AF"
+    },
+    "scope": "All nine recorded before/after arrays match Preflight and finite current identities; no continuous preservation proof"
+  },
+  "retainedArtifactDescriptorOccurrencesMatched": 966,
+  "predecessorDescriptorOccurrencesMatched": 72,
+  "cook": {
+    "files": 1048,
+    "bytes": 206699819,
+    "sdkLog": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\ue-user\\cook\\Saved\\Logs\\AutoSDKInfo.txt",
+      "bytes": 4404,
+      "sha256": "2b13548514c3c156fbb1f7cf97a15d0707eb72d2e9aba0efbc8b2891ba902012"
+    },
+    "actualSdkWriterPid": "UNVERIFIED",
+    "emittedRouteSourceLiteralCorrespondence": "NOT_ESTABLISHED",
+    "installedBinarySourceCorrespondence": "UNVERIFIED_TRUSTED_LEAF"
+  },
+  "stage": {
+    "files": 2800,
+    "bytes": 1011089124,
+    "runtimeDeclarations": 995,
+    "runtimeCopies": 995,
+    "exactByteCopyRows": 2718,
+    "qualifiedIniNonidentityCopyRows": 79,
+    "executable": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261023T154418Z-ce672e5f\\stage\\Windows\\WarhammerClient\\Binaries\\Win64\\WarhammerClientE04A1G.exe",
+      "bytes": 332392448,
+      "sha256": "13a6ddeaff398638897234a3c1dd660c73fd16e9d87bec81ec7fb05f8994c21e"
+    }
+  },
+  "ubtTrace": {
+    "policy": "OWNER_APPROVED_BUILD_AND_COOK_SDK_FINITE_UBT_TRACE_EXCEPTION",
+    "boundaryCount": 9,
+    "writerPhases": [
+      "EditorPrerequisiteBuild",
+      "GameBuild",
+      "Cook"
+    ],
+    "ownedRecoverySets": 9,
+    "unexplainedDeltas": 0,
+    "recoveryBodies": "OPAQUE_NO_BODY_GRANT",
+    "historicalLiveTracePathsOpenedOrRehashedByClosure": false,
+    "continuousOrUniversalAttribution": false
+  },
+  "publicClosureNote": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-23-e04a-game-execution-closure.md",
+    "bytes": 4351,
+    "sha256": "7D65423DFEBD8CB25097252AF7C17490FA275009A8888C71C337C7269C37D458"
+  },
+  "finalCode": "NOT_RUN",
+  "finalReq": "NOT_RUN",
+  "finalAcceptanceGranted": false,
+  "linux": "UNTESTED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "limits": "Finite recorded/current comparisons only. Lifetime milestone is not destructor instrumentation; window observations are sampled/non-atomic; INI nonidentity is not a content certificate. No retry/successor/visible launch/broader migration acceptance or merge authority. Later postexecution checkpoint and exact OWN18 backup precede final packet binding. Receipt identity is retained externally to avoid a self/mutual hash cycle."
+}

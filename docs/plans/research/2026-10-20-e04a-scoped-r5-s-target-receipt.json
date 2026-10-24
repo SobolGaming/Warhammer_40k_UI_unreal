@@ -1,0 +1,221 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-4c99318-20261020T104640Z-54a3b913",
+  "scopeId": "S_TARGET_RECEIPT",
+  "subject": {
+    "sourceHead": "4c993181287e18e92da614af0e09a8d8ea92378a",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T104640Z-54a3b913",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+    "inputManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\source-review-input-manifest.json",
+      "bytes": 663082,
+      "sha256": "48af09f3beb6d98e2e6c5675456c69553c241ffadbda5773e6feba52ddae084e"
+    },
+    "runtimeFreezeManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4c99318-20261020T104640Z-54a3b913\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+      "bytes": 747173,
+      "sha256": "aa95f7b04cfb75458fa516a2add3fcff6c032f0fce51545436649baef9edabd3"
+    }
+  },
+  "bindingVerification": {
+    "result": "Bound identities and criteria verified before dependent assessment; final BODY and selected-metadata hash rechecks found no drift.",
+    "scopeContract": {
+      "bytes": 86142,
+      "sha256": "d085775971ab49efecce56430edf88fbfa13bb04fd3421bd89a58fe5c97f5ceb"
+    },
+    "ownBootstrap": {
+      "bytes": 5438,
+      "sha256": "7e57226869ae6664b8f721a7ed2d2cb060b8220253fc8a2b459c755dbe95a025"
+    },
+    "ownCoverage": {
+      "bytes": 32908,
+      "sha256": "28e4ccf56d700decc047050409f6c171041f0e8dba8eca68043a076f330d1665"
+    },
+    "actualGo": {
+      "bytes": 2041,
+      "sha256": "009d3124846375b90b15dbbe316d86759fa1fcc2db5e092e436890eb4ee66e1f",
+      "explicitRootGo": true,
+      "allowedAction": "ONE_NEW_INDEPENDENT_E04A1E_READ_ONLY_SOURCE_REVIEW"
+    },
+    "preparedPrompt": {
+      "file": "prepared-review.prompt.original.txt",
+      "bytes": 42871,
+      "sha256": "fb8bad14368c4e1c561f6bf629652db81221488b0da17cb9ccddfdd51a417778"
+    },
+    "storedActualPrompt": {
+      "file": "actual-launch.prompt.original.txt",
+      "bytes": 44105,
+      "sha256": "744C711F35F4CACEDAB390B204FDAF3E9887B62AD459985737461FB8C422A03F"
+    },
+    "promptComparison": "The stored actual prompt contains the complete prepared prompt followed by the matching ROOT ACTUAL GO. All eleven binding requirements, nine finite-rules criteria and seven local duties were checked for exact inclusion.",
+    "criteriaMetadata": [
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4c99318-20261020T104640Z-54a3b913\\body-access-policy.json",
+        "bytes": 55392,
+        "sha256": "3CE9BCBD9AEECB659EBCA73D6B2C86CF2AE12959DAEA496B9856884081D7014C"
+      },
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4c99318-20261020T104640Z-54a3b913\\coverage-plan.json",
+        "bytes": 67814,
+        "sha256": "E3620953D36412CF84D101873C2D708BB9B69F7FB3711C32CF98416C4FD07D22"
+      },
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4c99318-20261020T104640Z-54a3b913\\metadata-selection-policy.json",
+        "bytes": 14547,
+        "sha256": "96F1E1E254EB8E4669D824D03FD21AEA0BD881AE04E3EF985E9C35A60DA06603"
+      }
+    ],
+    "qualification": "The pure contract's false launch-authority fields were kept separate from the current actual review GO. Campaign/scope identities were compared across the supplied prompt, bootstrap, selected scope, contract and manifest. Generic transport was not credited with semantic validation of added fields. Git ancestry, actual prompt transmission and runtime/isolation remain root-owned attestations."
+  },
+  "findings": [
+    {
+      "id": "S_TARGET_RECEIPT-001",
+      "priority": "P2",
+      "title": "Finite name-map validation accepts a source from the wrong rules category",
+      "sourceCitations": [
+        "SOURCE-BODY-013, physical rows 1671-1675, Check-RulesWitnessData",
+        "SOURCE-BODY-003, physical rows 665-699, actual name-map capture",
+        "SOURCE-BODY-095, physical rows 1218-1240, separate module and target map construction",
+        "SOURCE-BODY-098, physical rows 110-118, existing map/cache controls"
+      ],
+      "requirementCitations": [
+        "scope.duties[6]: exact source/map/manifest joins and strict failure behavior",
+        "reviewDiscipline.finiteRulesWitnessCriteria[3]: completed project assembly and finite discovery/name-map poststate",
+        "reviewDiscipline.finiteRulesWitnessCriteria[6]: EditorBuild requires every applicable cache/source join",
+        "reviewDiscipline.finiteRulesWitnessCriteria[7]: rejection controls for unexpected cache shapes"
+      ],
+      "finding": "The validator computes the expected target/module subset but uses it only for the map count. Each entry's membership is then checked against the combined seven-source dictionary. It never requires the entry path to belong to that map's expected subset or to have the corresponding suffix.",
+      "staticCounterexample": "Starting with the complete synthetic fixture, replace the unselected ordinary target-map entry with the approved YamlCpp.Build.cs path and name YamlCp, the basename produced by the validator after removing ten characters for '.Target.cs'. The target-map count remains three, the name is unique, the path belongs to the combined approved source set, and the validator's calculated stem matches. The selected E04 target/module identities, source union, manifest, PDB associations and remaining joins can remain unchanged. No check in this function rejects that wrong-kind association.",
+      "impact": "The VALIDATED_FINITE_OWNED_PROCESS_RULES_POSTSTATE result can cover less than the required complete finite name-map association.",
+      "requestedChange": "Validate each map against its exact expected path subset, suffix and name mapping while retaining observed enumeration order. Add a pure rejection fixture for cross-category substitution.",
+      "evidenceQualification": "Static control-flow conclusion only; neither the implementation validator nor the fixture suite was executed."
+    },
+    {
+      "id": "S_TARGET_RECEIPT-002",
+      "priority": "P2",
+      "title": "Required missing-manifest rejection control is absent",
+      "sourceCitations": [
+        "SOURCE-BODY-098, physical rows 81-120 and 125-134",
+        "SOURCE-BODY-013, physical rows 1649-1664 and 1712-1733"
+      ],
+      "requirementCitations": [
+        "reviewDiscipline.finiteRulesWitnessCriteria[7]: meaningful pure controls must cover missing PDB/manifest evidence",
+        "scopeReportRequirements[6]: complete BODY098 validator-control assessment"
+      ],
+      "finding": "The suite tests a null PDB debug pair and divergent manifest source order, but has no missing-manifest control. Its generic missing-role case removes the first retention item, which is the DLL; it does not remove the manifest.",
+      "requestedChange": "Add explicit pure controls for absent manifest data and missing manifest retention/preservation evidence, retaining the existing positive complete join and primary-plus-secondary failure controls.",
+      "qualification": "Production missing-file and required-role guards exist. This finding concerns the explicitly required control coverage, not an observed native acceptance of a missing manifest."
+    }
+  ],
+  "coverage": {
+    "mandatoryEntireBodiesComplete": 36,
+    "mandatoryPhysicalRowsComplete": 27832,
+    "mandatoryUnread": [],
+    "requiredCompleteUnitRanges": [],
+    "completeMandatoryPhysicalRanges": [
+      "SOURCE-BODY-001:1-88",
+      "SOURCE-BODY-002:1-17",
+      "SOURCE-BODY-003:1-806",
+      "SOURCE-BODY-004:1-15",
+      "SOURCE-BODY-010:1-18",
+      "SOURCE-BODY-013:1-2002",
+      "SOURCE-BODY-016:1-8",
+      "SOURCE-BODY-017:1-12",
+      "SOURCE-BODY-018:1-12",
+      "SOURCE-BODY-019:1-288",
+      "SOURCE-BODY-020:1-3",
+      "SOURCE-BODY-021:1-12",
+      "SOURCE-BODY-022:1-1",
+      "SOURCE-BODY-023:1-8",
+      "SOURCE-BODY-024:1-4",
+      "SOURCE-BODY-025:1-2",
+      "SOURCE-BODY-054:1-294",
+      "SOURCE-BODY-055:1-142",
+      "SOURCE-BODY-056:1-14",
+      "SOURCE-BODY-057:1-196",
+      "SOURCE-BODY-058:1-2257",
+      "SOURCE-BODY-059:1-407",
+      "SOURCE-BODY-060:1-67",
+      "SOURCE-BODY-061:1-292",
+      "SOURCE-BODY-062:1-151",
+      "SOURCE-BODY-081:1-1725",
+      "SOURCE-BODY-082:1-998",
+      "SOURCE-BODY-083:1-971",
+      "SOURCE-BODY-084:1-454",
+      "SOURCE-BODY-092:1-2968",
+      "SOURCE-BODY-093:1-2018",
+      "SOURCE-BODY-094:1-5539",
+      "SOURCE-BODY-095:1-5751",
+      "SOURCE-BODY-096:1-50",
+      "SOURCE-BODY-097:1-88",
+      "SOURCE-BODY-098:1-154"
+    ],
+    "additionalCompleteBodies": [
+      "SOURCE-BODY-008:1-48",
+      "SOURCE-BODY-011:1-3"
+    ],
+    "totalSubstantivelyReadBodies": 38,
+    "totalSubstantivelyReadPhysicalRows": 27883,
+    "globallyGrantedBodiesNotSubstantivelyRead": "SOURCE-BODY-005..007, 009, 012, 014..015, 026..053, 063..080, 085..091: 60 bodies / 21866 physical rows. No pass is asserted for these bodies.",
+    "inventoryVerification": "All 98 positive BODY descriptors independently matched their bytes/hashes and recalculated total of 49749 physical rows, including a final recheck. This is identity evidence, not substantive review of all 98.",
+    "selectedMetadata": {
+      "all13DescriptorsVerified": true,
+      "fullOwnedRecordsAssessed": [4, 5, 7, 11, 12],
+      "materialRelationshipsAssessed": [1, 2, 3, 6, 8, 9, 10, 13],
+      "descriptorRowsAssessed": 902,
+      "pluginReferenceOccurrencesAssessed": 1561,
+      "moduleOccurrencesAssessed": 1774,
+      "valueIntegrity": "Complete selected values, types, exact-case keys, absence vectors and array order were independently compared with the positively granted originals. All 44198 top-level selector-presence comparisons matched; no selected-value/key case collision was found.",
+      "identityComparisons": "Complete opaque comparisons included 245 ordered closure/membership descriptors, 901 engine catalog descriptors, 154 integrated unique sources, all 318 distinct rules-witness descriptors in flat freeze.files, 169 compiler-input descriptors and 394 acquisition-file descriptors."
+    }
+  },
+  "substantiveAssessment": [
+    {
+      "area": "Target initialization, configuration and compiler route",
+      "assessment": "BODY001 explicitly pins bBuildAllModules=false after base construction. Complete BODY092/093 tracing covers annotation-gated configuration assignments, derived construction, ReadOnlyTargetRules forwarding, the inherited false ShouldIgnorePluginDependency hook, target-type finalization and platform validation. The normal explicit project/name invocation is non-test. Its false pin excludes AddAllValidModulesToTarget; alternate all-modules/prebuild routes remain conditional. Constructor values were not substituted for actual effective configuration: the live32 observation remains required. Canonical Cpp20/V7/Unreal5_8 tags follow exact enum equality guards and nameof, consistent with complete BODY095 enum declarations.",
+      "citations": "BODY001; BODY003; BODY004; BODY010; BODY019; BODY092; BODY093; BODY095"
+    },
+    {
+      "area": "Complete descriptor and dependency relationships",
+      "assessment": "All 902 descriptor identities and all 1561 reference occurrences were assessed. There are no competing plugin basenames or duplicate same-plugin reference names. Four literal reference-name case differences resolve through UBT's InvariantCultureIgnoreCase name dictionary. Extension rows 1..5 bind ACLPlugin, RigLogic, OodleNetwork and AudioCapture parents; their selected bodies contain no module/reference additions. PregenContent row467 is below USDPregen's descriptor boundary and is not an ordinary recursive discovery candidate. Its one reference was retained in the full graph assessment. The complete enabled literal graph has 1554 edges and no cycle.",
+      "citations": "Metadata8 rows1..902, including Plugins indices; BODY081; BODY082; BODY084"
+    },
+    {
+      "area": "Selectors, defaults and conditional closure",
+      "assessment": "All 310 complete module-selector combinations were read with their occurrence mappings. Under expected Win64/x64 Editor Development, developer-tools=true and cooked-data=false conditions, 1737 of 1774 module occurrences are descriptor-eligible; 36 fail platform allow lists and one is Program-only. Thirteen duplicate module-name groups remain explicit; repeated descriptor entries are not additional module instances. For ordinary plugin candidates, 1550 references are eligible for a new instance, seven are disabled and three fail platform allow lists. Existing-instance handling precedes filters and was separately considered. The independent conservative runtime closure exactly matches the listed 245 plugins. The conditional descriptor build closure reaches 246: TcpMessaging and UdpMessaging lie outside the runtime closure, while LowLevelNetTrace is retained conservatively but excluded by its synthesized explicit empty platform list. These conclusions depend on expected live selectors and applicable discovery, not constructor defaults or actual execution.",
+      "citations": "Metadata7; Metadata8; Metadata11; Metadata12; BODY081; BODY082; BODY084; BODY092; BODY093"
+    },
+    {
+      "area": "Receipt, launch and startup",
+      "assessment": "BuildPlugins serialization and optional-dependency filtering were distinguished from runtime enable roots. Receipt project/target/platform/configuration and Launch/LaunchCmd bindings, E04 override and engine-default policy were joined to wrapper checks and runtime consumers. Environment insertion precedes relevant parsing; the wrapper explicitly clears UE-CmdLineArgs and UE_ADDITIONAL_PLUGIN_PATHS. Complete Default startup dispatch propagates normal load failure. Normal dispatch excludes ExplicitlyLoaded plugins. Explicit mount defaults are ELoadingPhase::Max; the implementation iterates eligible phases but does not propagate every TryLoadModulesForPlugin failure through mount success. PluginUtils, Fab, Pak, GDK, GameFeatures and low-level-test callers were assessed with their finite gates. Neither mount success nor catalog membership establishes activation. The authored parser/probe entrypoints use FDefaultModuleImpl.",
+      "citations": "BODY002; BODY008; BODY011; BODY013:1239-1393,1849-1881; BODY016-025; BODY058-062; BODY083; BODY084; complete BODY094"
+    },
+    {
+      "area": "Normal rules discovery and assembly production",
+      "assessment": "Complete BODY095 and reused BODY081/082/092/093 were joined to the frozen direct dotnet/UBT argv. Source, extensions, additional roots, Mods, plugin Tests and Intermediate/Source routes; filename/type/platform/group competition; Rules/DirectoryItem/file/assembly caches; source-union compilation; parent lineage; and foreign/no-project/no-code/test guards were assessed. The source-supported parent order is UE5ProgramRules then UE5Rules. The 33 staged members independently equal twelve authored Source/Plugins members plus twenty-one reused entrypoint/config members. BODY098 is outside that stage. Source-array enumeration, name-map enumeration, manifest order, PDB document order and source-derived Roslyn FilePath sorting remain distinct facts.",
+      "citations": "Metadata1-4; BODY013:1454-1787; BODY081; BODY082; BODY092; BODY093; complete BODY095"
+    },
+    {
+      "area": "Finite witness and preservation",
+      "assessment": "The producer/consumer design binds fresh challenge/topology, direct root PID and creation FILETIME, CWD/literal argv, supported AdditionalData bridge, concrete types, live32 selectors, completed Lazy/private shapes, read locking, source maps, assembly identities and retained DLL/PDB/manifest evidence. Metadata-only PE/PDB validation does not load the generated assembly. Two existing cache roots are required separately from eight optional disk absences. Source locks, bounded poststate and preabsence support a qualified first-population inference; they do not establish chronological scan tracing or prevent directory insertion. Eight retained roles and dependent live preservation, primary failure retention and secondary-error handling were reviewed. The two findings above limit the required validator/control completeness.",
+      "citations": "BODY001; complete BODY003; BODY013:863-995,1454-1787,1922-2002; BODY095; complete BODY098; finiteRulesWitnessCriteria"
+    }
+  ],
+  "errorsAndRecoveries": [
+    "Several oversized metadata/table renderings truncated. Affected portions were reread in complete bounded groups or recovered through complete independently authored identity/value comparisons. No mandatory source range remains incomplete.",
+    "Python was unavailable; an ambiguous JsonDocument byte-array overload and an independently authored PowerShell syntax error were corrected. Raw-origin BOM/trailing-comma parsing errors were recovered by rereading all 902 origins with explicit reader options, then completing exact selected-value comparisons.",
+    "Record ordinals were initially treated as properties instead of array positions; an object was indexed as an array; and a policy string-array element was treated as an object. These query-shape errors were corrected without treating defaults/nulls as source values.",
+    "Two unsupported record7 field names, requiredAbsences and environment, were queried and reported absent. No values were exposed. The positive policy was reread and the correct requiredAbsentPaths and emptyEnvironmentVariables fields were read completely. This query deviation is disclosed; the earlier output is not erased or treated as a grant.",
+    "A comparison initially assumed one access annotation and later overlabelled lineCount presence. Exact annotation values, actual per-record presence and complete occurrence mappings were reread. Hash spelling differences and genuinely absent lineCount fields were retained separately; normalized digest identity comparisons completed without mismatch."
+  ],
+  "independenceAndLimits": {
+    "reviewActivity": "Read-only source/data inspection and independently authored inert-data analysis. No implementation helper, stored command, fixture suite, build, native process, GUI, network or Git operation was executed; no files were saved and no delegation was used.",
+    "excludedInputs": "No peer reports/graphs, prior verdicts, author/operator notes, private session/configuration/credential bodies or generated own runtime/invocation/output bodies were inspected.",
+    "runtimeAttestation": "Actual reviewer isolation/settings, memory disabling and received-input provenance were not independently verified through forbidden runtime artifacts. Memory disabling was requested; root retains the separate attestation responsibility.",
+    "materialUncertainty": "Actual staged topology, effective configuration, first-scan/cache/process lineage, loaded assembly/type, CLR/API accessibility, compiler outputs, native flags, receipts and activation remain unexecuted observations. Framework/.NET/Roslyn/OS/library leaves and inapplicable branches remain conditioned.",
+    "authorityBoundary": "This is one local scoped source disposition. It supplies no aggregate SOURCE pass, phase/native authority or final acceptance. Required A1G, A2, Linux, rendering/HUD and other gates remain open. Changes require refreeze/rebinding and current affected assessments."
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "CLOSED_E04_A1G_DEPENDENCY_BUILD_ARCHIVE_ACTION_EVIDENCE_FAILURE",
+  "recordedUtc": "2026-10-21T10:42:27.6282394Z",
+  "status": "FOCUSED_SOURCE_PASSED_GAME_DEPENDENCY_BUILD_ARCHIVE_ACTION_FAILURE_CLOSED",
+  "sourceHead": "3201552db315e5b8fbe460b9d0984bf6b81ea71a",
+  "comparisonBase": "38b9c668bdbfb4ea331a9ec89746bb6e9735d3df",
+  "runId": "20261021T101933Z-40d00c7c",
+  "sourceFreezeManifest": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\common-3201552-20261021T101933Z-40d00c7c\\runtime-freeze\\source-freeze-manifest.json",
+    "bytes": 213097,
+    "sha256": "F74C18BAF91CAD7AFF1F1FFC4D0387D0C8A112786F0BE36D56B5B142D42E7302"
+  },
+  "normativeRequirement": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 15842,
+    "sha256": "0cd9a9a2f57e1c8da73307c48e840a62e5e298b41922b04c3e2a5ece0dd7bbff"
+  },
+  "sourceReview": {
+    "role": "E04_GAME_COMPONENT_SOURCE",
+    "rawVerdict": "PASS",
+    "rootAdmission": "PASS_ADMITTED",
+    "report": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-3201552-20261021T102009Z-445707\\last-message.txt",
+      "bytes": 1964,
+      "sha256": "80BF9B4412D3784BF7D1DB5F334C9BD3C97216B405AE37FD33592929D142C01E"
+    },
+    "publishedRelativePath": "docs/plans/research/2026-10-21-e04a-game-source-review-3201552.md",
+    "exactReportBytesPreserved": true,
+    "sessionId": "01a15dfa-4d38-73c0-bd72-a5dd4d4efde7",
+    "turnIds": [
+      "01a15dfa-4ed8-79d2-ad7e-881af5709b84"
+    ],
+    "runtimeLimits": {
+      "freshExec": true,
+      "resume": false,
+      "fork": false,
+      "modelOverride": null,
+      "contexts": 1,
+      "contextMismatchCount": 0,
+      "actualSandbox": "read-only",
+      "actualApproval": "never",
+      "actualMemoryMode": "disabled",
+      "internalFeatureMemoryEnforcement": "UNVERIFIED",
+      "exposedHelperConnectorTools": "RETAINED_UNVERIFIED_RESTRICTION_NO_USE_OBSERVED"
+    },
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-3201552-20261021T102009Z-445707\\closed-raw-output-seal.before-body.original.json",
+      "bytes": 4920,
+      "sha256": "5CE43FB20FDBD112B31AFF9B1DE6879D5D0AE10FDACE47194B12759757391555"
+    },
+    "selectedSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-3201552-20261021T102009Z-445707\\closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 3996,
+      "sha256": "851C8C0456B8EB72EFACD0608E6EDA65FC164180D0C4ACF9484C3A0546280103"
+    },
+    "rootBeforeBodyRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-3201552-20261021T102009Z-445707\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 1852,
+      "sha256": "FCC9988BC0D3EB5628FC6D2B910EB7A9F4897C9F70E1C80BD276A5B0886FC114"
+    },
+    "allRehashedBeforeFirstReportOrToolValueBody": true,
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "frozenAndControlIdentities": 772,
+    "inputCount": 40,
+    "outputCount": 40,
+    "limits": [
+      "SOURCE prerequisite only; no build/runtime/graphics/installed-source-binary/migration acceptance.",
+      "Coverage statements are reviewer reported; finite root conduct and identity observations are not universal isolation or comprehension proof.",
+      "Historical FAIL reports/closed runs remain unchanged. Final CODE and different REQ follow actual closed execution."
+    ]
+  },
+  "phases": {
+    "Preflight": "PASS_ADMITTED",
+    "DependencyConfigure": "PASS_ADMITTED",
+    "DependencyBuild": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "EditorPrerequisiteBuild": "NOT_RUN",
+    "GameBuild": "NOT_RUN",
+    "Cook": "NOT_RUN",
+    "Stage": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "failedPhase": {
+    "executionPassed": false,
+    "primaryFailure": {
+      "stage": "DependencyBuild",
+      "type": "System.Management.Automation.RuntimeException",
+      "message": "A1G_VENDOR_STATIC_ARCHIVE_ACTION_NOT_OBSERVED"
+    },
+    "secondaryErrors": [],
+    "startedUtc": "2026-10-21T10:39:05.8296986Z",
+    "completedUtc": "2026-10-21T10:39:25.4992254Z",
+    "completionExists": false,
+    "classification": "Wrapper archive-action evidence recognition failure after native CMake exit0; stdout uses direct pinned lib.exe while the assertion requires cmake -E vs_link_lib. No Core engine fault established.",
+    "sourceRepairApplied": false
+  },
+  "nativeProcess": {
+    "pid": 43504,
+    "creationUtc": "2026-10-21T10:39:07.7571449Z",
+    "exitUtc": "2026-10-21T10:39:16.5172238Z",
+    "elapsedSeconds": 13.8238672,
+    "budgetSeconds": 1194,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "primaryFailure": null,
+    "secondaryErrors": [],
+    "completionCleanupMode": "PostSuccessfulRootCleanup",
+    "postRootGraceSeconds": 5,
+    "shutdownRequests": [
+      {
+        "operation": "TerminateJobObject",
+        "reason": "POST_ROOT_COMPLETION",
+        "succeeded": true,
+        "observedUtc": "2026-10-21T10:39:21.54206Z",
+        "elapsedSeconds": 13.79248,
+        "rootExitElapsedSeconds": 8.7699241,
+        "naturalGraceSeconds": 5,
+        "activeProcessesBefore": 1,
+        "rootExitCode": 0,
+        "terminationExitCode": 3760193539,
+        "win32Error": null
+      }
+    ],
+    "finalJob": {
+      "stage": "progress",
+      "observedUtc": "2026-10-21T10:39:21.5732678Z",
+      "querySucceeded": true,
+      "totalProcesses": 38,
+      "activeProcesses": 0,
+      "totalTerminatedProcesses": 0,
+      "totalUserTime100ns": 183437500,
+      "totalKernelTime100ns": 47031250,
+      "thisPeriodUserTime100ns": 183437500,
+      "thisPeriodKernelTime100ns": 47031250,
+      "totalPageFaultCount": 1066508
+    }
+  },
+  "outerProcess": {
+    "pid": 31944,
+    "creationUtc": "2026-10-21T10:39:02.4025195Z",
+    "exitUtc": "2026-10-21T10:39:25.6088371Z",
+    "closedUtc": "2026-10-21T10:39:25.6404865Z",
+    "exitCode": 1,
+    "exitConfirmed": true,
+    "timedOut": false,
+    "failure": {
+      "type": "System.Management.Automation.RuntimeException",
+      "message": "OUTER_PHASE_HOST_NONZERO_EXIT"
+    }
+  },
+  "rootClosure": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-archive-action-failure-PROPOSED\\root-closed-run.original.json",
+    "bytes": 3877,
+    "sha256": "3D934F026CDD82BEFA1763A73941BFABB848F8E0D3943EF026251B65D0A3CC94"
+  },
+  "actualEvidence": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-archive-action-failure-PROPOSED\\root-closed-run.original.json",
+      "bytes": 3877,
+      "sha256": "3D934F026CDD82BEFA1763A73941BFABB848F8E0D3943EF026251B65D0A3CC94"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-3201552-20261021T102009Z-445707\\last-message.txt",
+      "bytes": 1964,
+      "sha256": "80BF9B4412D3784BF7D1DB5F334C9BD3C97216B405AE37FD33592929D142C01E"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-3201552-20261021T102009Z-445707\\root-source-admission.original.json",
+      "bytes": 5062,
+      "sha256": "EFAAF9A3287E20C39FB66A83073DDA218924A49072FB258CF1E5881244AE34D1"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T101933Z-40d00c7c\\phases\\dependencybuild\\result.json",
+      "bytes": 144959,
+      "sha256": "2EA479FCF053D872A902779EBC82ECB4583B6C35A32AF41EC5FDF33BD56D2EC6"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T101933Z-40d00c7c\\phases\\dependencybuild\\a1g-cmake-build.process.json",
+      "bytes": 80066,
+      "sha256": "B2C6555F8D3C40152958FA9F787B0D610FAB415801CDAA8319B34C49D840C3E7"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T101933Z-40d00c7c\\logs\\a1g-cmake-build.stdout.log",
+      "bytes": 45338,
+      "sha256": "7E3855E9D6092CF4CE74EFE08EB9D81FA283D6437A31A7F9D5D90E17097903FB"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T101933Z-40d00c7c\\logs\\a1g-cmake-build.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-2b52bbc-PROPOSED\\phase-execution-3201552-20261021T101933Z-40d00c7c\\dependencybuild.outer\\completion.original.json",
+      "bytes": 1665,
+      "sha256": "3AEEF13D9876C4E2920AE24D4A3B27BE4D0B242ED28AC42712EDE1884E56B0BF"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-2b52bbc-PROPOSED\\phase-execution-3201552-20261021T101933Z-40d00c7c\\preflight.root-admission.original.json",
+      "bytes": 1842,
+      "sha256": "1D442454A3EC0EBD840303690DCCB5C8A103C2548B199FB7344C78658D985080"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-2b52bbc-PROPOSED\\phase-execution-3201552-20261021T101933Z-40d00c7c\\dependencyconfigure.root-admission.original.json",
+      "bytes": 3854,
+      "sha256": "FCA338D0FB33E81FE9AAFED171F0C4A7D9E281BC3AD0F5CE722F9A4838C49F84"
+    }
+  ],
+  "retention": {
+    "failedResultRetainedArtifactCount": 41,
+    "generatedBuildInputFailureEvidence": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T101933Z-40d00c7c\\logs\\configured-build-input-partials-dependencybuild\\retention.json",
+      "bytes": 8362,
+      "sha256": "73e8fe36ab34e23294e60b1d84d90a4b3279c2d9210f4e05ee3ac7f33b0126a2"
+    },
+    "storage": {
+      "observedUtc": "2026-10-21T10:39:25.185707Z",
+      "runBytes": 12229495,
+      "reportBytes": 0,
+      "cookBytes": 0,
+      "stageBytes": 0,
+      "availableFreeSpace": 779523698688,
+      "qualification": "Synchronous operation-boundary observations; not a live filesystem quota."
+    },
+    "limits": "Root finite preservation and selected archive observations are recorded in the bound root closure. No successful DependencyBuild completion, vendor-build/artifact receipt or copied Game artifact is claimed."
+  },
+  "execution": {
+    "runRootAllocated": true,
+    "phasesPassed": 2,
+    "phasesFailed": 1,
+    "downstreamPhasesNotRun": 6,
+    "gameAttemptsPlanned": 2,
+    "customChecksPlanned": 52,
+    "gameAttemptsExecuted": 0,
+    "customChecksExecuted": 0,
+    "visibleAuthority": 0,
+    "linux": "UNTESTED",
+    "runClosedForNativeAuthority": true,
+    "retryAuthority": false,
+    "finalCode": "NOT_RUN",
+    "finalDifferentReq": "NOT_RUN",
+    "a1gAcceptance": "NOT_ACCEPTED"
+  },
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "unaffected": "Bounded A1E acceptance, all earlier raw reports/failures and perpetual private source/API review consent remain unchanged. This later metadata/report overlay lies outside the exact source head assessed and executed.",
+  "next": "Checkpoint this closed failure/report overlay, push and gh-verify OWN18 exact remote backup before narrow archive-action source repair. Then checkpoint/verify repaired-source backup, fresh exact bindings and affected SOURCE before a new ordered phase chain. No retry or downstream GO for this run.",
+  "preSourcePureComparisonControls": {
+    "runId": "20261021T101901Z-7e37c239",
+    "expectedCases": 22,
+    "passedCases": 22,
+    "method": "Two fresh hidden pinned pwsh producer/consumer processes; no UE or Core process",
+    "summary": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-source-failure-2b52bbc-PROPOSED\\cross-host-control-runs\\20261021T101901Z-7e37c239\\root-controls-summary.original.json",
+      "bytes": 4200,
+      "sha256": "B342C462A94354C2B2D8B2A72A52DB7856F8186059E26BA5F934F6FDB55D6DB5"
+    },
+    "qualification": "Separate finite key-order comparison controls before SOURCE; not Game runtime attempts/checks, native phase PASS or broad semantic certification."
+  }
+}

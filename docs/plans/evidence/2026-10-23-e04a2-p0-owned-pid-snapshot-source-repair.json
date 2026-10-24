@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A2P0_OWNED_PID_SNAPSHOT_SOURCE_ADOPTION",
+  "status": "PID_SNAPSHOT_SOURCE_ADOPTED_FRESH_SOURCE_PENDING",
+  "predecessorHead": "ce450fbdd5242ccb16e723f904613e316a63482e",
+  "adoptedUtc": "2026-10-23T20:29:20.3713284Z",
+  "rootAdoption": {
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-root-20261023T-background-preparation/root-rev137-owned-pid-source-adoption.original.json",
+      "bytes": 3861,
+      "sha256": "AA66AD6D96C9CCEE62E1255A0A2CF40C86C1A97FF62053D0E8FA078941E41F51"
+    },
+    "actualTool": "975ac9",
+    "executionAuthorityReleased": false
+  },
+  "completedFailureCheckpointBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-rev136-exact-trigger-failure-checkpoint-backup.original.json",
+    "bytes": 1189,
+    "sha256": "4200F9F675D9B80421B733144131B8988139809A6A62E12D1010E0CDBEAACC34"
+  },
+  "currentSource": {
+    "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/scripts/migration/a2p0/A2P0OwnedJobSupervisor.cs",
+    "bytes": 35478,
+    "sha256": "F474A85EFC487C97FFA9A24847A6BAC47609F2FF530B5579751925D2D04B1AD6"
+  },
+  "currentPacket": {
+    "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/docs/plans/research/2026-10-23-e04a2-p0-canonical-reference-packet.md",
+    "bytes": 15690,
+    "sha256": "4F5B1F1C2AD8782ACB6EB1F3713870F1E68C11755C78CE42A98534C31AC7F7DC"
+  },
+  "previousSourceIdentityHistory": {
+    "bytes": 29365,
+    "sha256": "5A86A94BEEA4141A6F3F6F78DB0367C1E2D45488DDE90078C79F11B5E8E36D79",
+    "qualification": "Historical scalar identity, not a live descriptor"
+  },
+  "previousPacketIdentityHistory": {
+    "bytes": 14439,
+    "sha256": "02099B4272C1FCE3F74D09DAB01ACBDFA8F95BFCBAD5EF261E1C462E73405579",
+    "qualification": "Historical scalar identity, not a live descriptor"
+  },
+  "note": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-owned-pid-snapshot-source-repair.md",
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-owned-pid-snapshot-rev137-PRIVATE-PROPOSED-20261023-fd07c8e4/final-r2/2026-10-23-e04a2-p0-owned-pid-snapshot-source-repair.md",
+      "bytes": 2013,
+      "sha256": "F752DFB2726CAD689B27BE57057CABCCC563820EFF306FBCC81D920483C0312A"
+    }
+  },
+  "sourceChecks": {
+    "exactGuardPrefixRemovedBytes": 143,
+    "exactForwardReplacements": 4,
+    "wholeInverseMatchesOriginal": true,
+    "packetExactRows": [
+      "P0-S06",
+      "P0-S07",
+      "P0-S08",
+      "P0-S09"
+    ],
+    "packetWholeInverseMatchesOriginal": true,
+    "criteriaPhysicalRange": "5-41"
+  },
+  "rootStaticInspection": {
+    "sourceDiffReadTool": "ea2574",
+    "sourcePacketLedgerAndCleanupReadTools": [
+      "ff77ef",
+      "263724"
+    ],
+    "apiCleanSelectionsReadTool": "ea2574",
+    "boundedUnsignedHeaderAndIds": true,
+    "failedNativeOutputsUnreadNull": true,
+    "cleanApiMaterialsRemainUnbound": true
+  },
+  "scope": {
+    "mode": "PID_LIST_ONLY",
+    "informationClass": 3,
+    "retainedPrivateJobHandleOnly": true,
+    "maximumQueryCalls": 1,
+    "bufferBytes": 136,
+    "rawPidCapacity": 16,
+    "outputInterpretation": "SUCCESSFUL_BOUNDS_AND_COMPLETE_COUNTS_ONLY",
+    "incompleteOutput": "UNVERIFIED",
+    "newJobs": 0,
+    "nullJobQueries": 0,
+    "globalProcessEnumeration": 0,
+    "pidReopens": 0,
+    "imageQueries": 0,
+    "newProcesses": 0,
+    "resizeOrRetry": 0,
+    "snapshot": "DISTINCT_NONATOMIC_NO_CREATOR_OR_CAUSE_ATTRIBUTION",
+    "optionalImagePidOpenLane": "DEFERRED"
+  },
+  "cleanup": {
+    "absoluteDeadline": "ANCHORED_AT_GUARD_BEFORE_DIAGNOSTIC",
+    "finally": "HONORS_SAME_DEADLINE",
+    "blockingQueryIndependentTimeout": "NOT_PROMISED",
+    "backstop": "EXISTING_OUTER_WATCHDOG",
+    "fatalGuardOriginalErrorTerminationCapsPaths": "UNCHANGED",
+    "budgetsSeconds": [
+      60,
+      5,
+      70,
+      75
+    ]
+  },
+  "successor": {
+    "compilation": "NOT_RUN",
+    "controls": "NOT_RUN",
+    "affectedSourceReview": "NOT_RUN",
+    "runtime": "NOT_RUN",
+    "head": "UNBOUND",
+    "run": "UNBOUND",
+    "bindings": "NOT_CREATED",
+    "executionGo": "NOT_CREATED",
+    "cleanApiMaterials": "UNBOUND_REQUIRE_FRESH_COMPLETE_BINDINGS"
+  },
+  "next": "Repaired-source checkpoint/push/exact-gh backup, then fresh complete API bindings/affected SOURCE and root admission before separate execution GO",
+  "history": {
+    "c62SourcePass": "PRESERVED_ORIGINAL_SOURCE_ONLY",
+    "c62NativeFailAndExactTrigger": "CLOSED_UNCHANGED_DIAGNOSTIC_GAP_ONLY_CLOSED",
+    "c62FailureEvidence": "docs/plans/evidence/2026-10-23-e04a2-p0-exact-trigger-capture-failure.json",
+    "d0NativeFailure": "CLOSED_UNCHANGED",
+    "boundedA1gAcceptance": "REV131_PRESERVED",
+    "visible": "HOLD_UNTIL_EXPLICIT_OWNER_APPROVAL_20261023T1935",
+    "own17": "DEFERRED_UNPROVEN",
+    "linux": "UNTESTED",
+    "broaderA2And727AndGImplementAndFinalCodeReq": "OPEN_NOT_GRANTED"
+  },
+  "qualifications": [
+    "Exact byte/inverse checks are data transformations, not compilation or runtime proof.",
+    "One later snapshot identifies no actor, image, creation attempt or cause.",
+    "Fresh repaired-source checkpoint/push/exact-gh backup precedes bindings and SOURCE.",
+    "Fresh SOURCE/root admission precedes separately bound one-shot hidden GO. No prior authority transfers."
+  ],
+  "publisherCanonicalWritesPerformed": false
+}

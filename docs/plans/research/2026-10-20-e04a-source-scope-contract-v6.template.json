@@ -1,0 +1,2010 @@
+{
+  "schemaVersion": 5,
+  "recordKind": "E04A1E_BLIND_SCOPED_SOURCE_DUTY_CONTRACT_TEMPLATE",
+  "templateState": "UNBOUND",
+  "role": "SOURCE",
+  "subject": {
+    "sourceHead": null,
+    "comparisonBase": null,
+    "campaignId": null,
+    "plannedRunId": null,
+    "runtimeFreezeManifest": null,
+    "globalBodyAccessPolicy": null,
+    "globalSelectedMetadataPolicy": null,
+    "globalCoverageInventory": null,
+    "primaryCatalog": null,
+    "commonSourceInputManifest": null
+  },
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "requiredLaterSubset": "E04-A1G",
+  "bindingRequirements": [
+    "Bind all subject fields and exact descriptors/hashes before a launch; no template null becomes an inferred identity.",
+    "Recalculate actual body/range/row counts from the new freeze. Stable IDs resolve through the bound global inventory, not filename guessing.",
+    "Repaired BODY013 wrapper and source-only BODY098 validator-test identities, byte/physical-row counts and every complete-unit range/text hash are unresolved in this UNBOUND template. Preserve the named obligations, including every earlier unit and the explicit VALUE terminal flag units and CLIENT held-source/prelaunch/root-call interfaces. No old wrapper/test hash or physical position is valid for repaired bytes; do not bind, publish a panel or launch until root has separately adopted exact source and all bindings have been independently rederived.",
+    "Resolve the three common criteria metadata grants only from their exact bound subject descriptors and retain those exact files in the panel frozen/input inventory. Descriptor references in those criteria do not create additional origin BODY grants.",
+    "Bind complete selector/default/hook/initialization BODY092, all-modules creation/finalization/prebuild BODY093, startup/explicit-loading BODY094 and normal target-rules discovery/cache/assembly producer BODY095. Preserve stable BODY001-097 IDs, update095 in place, retain neutral096/Arcade097, append098, and derive every actual identity/count from the new inventory before launch. TARGET, BUILD and both integrations must inspect BODY095 and full reused BODY081/082/092/093; keep finite conditional and framework leaves explicit.",
+    "Supply every composition criterion directly in the bound pure contract, own scope and complete prepared/actual prompt. The workflow document is not an extra implementation BODY and a navigation link alone supplies no criterion.",
+    "SOURCE assesses the exact frozen source, textual argv/selection/membership and prospective implementation contracts. Native stage topology, effective configuration, first-scan/cache/process lineage, selected loaded assembly/type, compiler outputs and activation are later phase/final-acceptance observations. Their absence before an authorized native run is not by itself a SOURCE failure. Review must still find source-supported observation/preservation checks for each material applicable path, report concrete implementation/input gaps, and preserve unsupported/unexecuted states; no runtime obligation or acceptance criterion is waived.",
+    "Directly supply the complete finiteRulesWitnessCriteria, applicable own duties and exact source/API/test grants in the full prepared and actual prompt. Bind freeze.rulesWitness exact17-key values and every distinct flat descriptor to the next reviewed freeze; the proposed values alone grant no authority. Source-only validator controls prove only their claimed pure behavior; static semantic diagnostics do not establish Rules construction, an actual UBT run, native flags or acceptance.",
+    "Positively select the complete exact17-key freeze.rulesWitness object under existing selected metadata record1; BUILD owns the entire record, TARGET and both integrations retain material witness relationships. Include all318 distinct source/runtime descriptors in flat freeze.files. Preserve13 selected records and33 staged members; descriptor references/HASH_ONLY never imply origin BODY access. Derive actual inventory and scope row counts from every future bound body after clean norm refresh; prospective reference counts cannot silently accept changed bytes.",
+    "Complete-unit sourceTextSha256 uses the exact UTF8 literal FunctionDefinitionAst.Extent.Text for named functions, preserving original line terminators. The explicitly named top-level initialization/control-flow/final-exit boundary instead hashes the exact inclusive physical rows with their original terminators, including the final newline. Full BODY013 SHA256 independently binds the entire original file; no line-ending normalization is permitted for these unit hashes.",
+    "Bind BODY095 complete finite rules/discovery/assembly/API excerpt SHA256 E2FB07477B351DC7414BC2682BB840176BA245A1361DD13D4EB1F128566C44C2:5751 physical rows/5551 installed literal rows/50 complete ranges/21 origins. Its complete emitted enum declarations cover CppStandard, build/include versions and configuration/link/build-environment values; TargetType remains complete in BODY092. Assess these against the guarded canonical nameof tags and typed selector producer, not an assumed Enum.ToString alias spelling. No earlier duty, data grant, complete-unit binding or later observation obligation is reduced.",
+    "Each of the seven materialJoins retains its completeDuty as global aggregate context, exact primary/integration owner arrays, atomicDuties and scopeDuties. The exact scopeDuties key set equals the union of global owners; each owned atom has at least one explicit primary and independent integration owner. The local mandatory projection supplies own exactDuty and all owned atomic duties directly. The global completeDuty creates no extra per-primary assignment. Root verifies the complete atomic union, primary and independent integration ownership without relying on peer conclusions.",
+    "Before binding, sourceBindingDerivation.state must be ADOPTED_AND_DERIVED with exact adopted-source record descriptor, actual wrapper/test descriptors and positive physical counts, exact top-level physical/try boundaries and text hash; every named complete-unit range/hash and every actual scope/global row count must be resolved and checked against the new bodies. UNRESOLVED/null placeholders are deliberate refusal conditions and cannot be silently replaced by binder count recalculation.",
+    "Supply the local atomic duty, owned interface units and all clean criteria directly in own scope/coverage/complete prepared and actual prompt. Existing full BUILD/TARGET/PLUGIN/ABI/ACT responsibilities and all98 BODY primary/common union,13 selected records,902 rows,49 origin fields,1561 reference occurrences,33 staged members and BODY098 source-only status remain required. Local partitioning supplies no old-pass transfer or phase authority."
+  ],
+  "globalAccess": {
+    "bodyIds": [
+      "SOURCE-BODY-001",
+      "SOURCE-BODY-002",
+      "SOURCE-BODY-003",
+      "SOURCE-BODY-004",
+      "SOURCE-BODY-005",
+      "SOURCE-BODY-006",
+      "SOURCE-BODY-007",
+      "SOURCE-BODY-008",
+      "SOURCE-BODY-009",
+      "SOURCE-BODY-010",
+      "SOURCE-BODY-011",
+      "SOURCE-BODY-012",
+      "SOURCE-BODY-013",
+      "SOURCE-BODY-014",
+      "SOURCE-BODY-015",
+      "SOURCE-BODY-016",
+      "SOURCE-BODY-017",
+      "SOURCE-BODY-018",
+      "SOURCE-BODY-019",
+      "SOURCE-BODY-020",
+      "SOURCE-BODY-021",
+      "SOURCE-BODY-022",
+      "SOURCE-BODY-023",
+      "SOURCE-BODY-024",
+      "SOURCE-BODY-025",
+      "SOURCE-BODY-026",
+      "SOURCE-BODY-027",
+      "SOURCE-BODY-028",
+      "SOURCE-BODY-029",
+      "SOURCE-BODY-030",
+      "SOURCE-BODY-031",
+      "SOURCE-BODY-032",
+      "SOURCE-BODY-033",
+      "SOURCE-BODY-034",
+      "SOURCE-BODY-035",
+      "SOURCE-BODY-036",
+      "SOURCE-BODY-037",
+      "SOURCE-BODY-038",
+      "SOURCE-BODY-039",
+      "SOURCE-BODY-040",
+      "SOURCE-BODY-041",
+      "SOURCE-BODY-042",
+      "SOURCE-BODY-043",
+      "SOURCE-BODY-044",
+      "SOURCE-BODY-045",
+      "SOURCE-BODY-046",
+      "SOURCE-BODY-047",
+      "SOURCE-BODY-048",
+      "SOURCE-BODY-049",
+      "SOURCE-BODY-050",
+      "SOURCE-BODY-051",
+      "SOURCE-BODY-052",
+      "SOURCE-BODY-053",
+      "SOURCE-BODY-054",
+      "SOURCE-BODY-055",
+      "SOURCE-BODY-056",
+      "SOURCE-BODY-057",
+      "SOURCE-BODY-058",
+      "SOURCE-BODY-059",
+      "SOURCE-BODY-060",
+      "SOURCE-BODY-061",
+      "SOURCE-BODY-062",
+      "SOURCE-BODY-063",
+      "SOURCE-BODY-064",
+      "SOURCE-BODY-065",
+      "SOURCE-BODY-066",
+      "SOURCE-BODY-067",
+      "SOURCE-BODY-068",
+      "SOURCE-BODY-069",
+      "SOURCE-BODY-070",
+      "SOURCE-BODY-071",
+      "SOURCE-BODY-072",
+      "SOURCE-BODY-073",
+      "SOURCE-BODY-074",
+      "SOURCE-BODY-075",
+      "SOURCE-BODY-076",
+      "SOURCE-BODY-077",
+      "SOURCE-BODY-078",
+      "SOURCE-BODY-079",
+      "SOURCE-BODY-080",
+      "SOURCE-BODY-081",
+      "SOURCE-BODY-082",
+      "SOURCE-BODY-083",
+      "SOURCE-BODY-084",
+      "SOURCE-BODY-085",
+      "SOURCE-BODY-086",
+      "SOURCE-BODY-087",
+      "SOURCE-BODY-088",
+      "SOURCE-BODY-089",
+      "SOURCE-BODY-090",
+      "SOURCE-BODY-091",
+      "SOURCE-BODY-092",
+      "SOURCE-BODY-093",
+      "SOURCE-BODY-094",
+      "SOURCE-BODY-095",
+      "SOURCE-BODY-096",
+      "SOURCE-BODY-097",
+      "SOURCE-BODY-098"
+    ],
+    "selectedMetadataRecordOrdinals": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "defaultAccess": "HASH_ONLY",
+    "positiveBodyAndMetadataPoliciesMustBeBound": true,
+    "additionalOriginBodiesImplied": false,
+    "mandatoryCoverage": "Only each scope requiredEntireBodyIds, complete-unit ranges, full metadata records/row partitions and material relationship duties are mandatory locally; every globally granted relevant source/data item remains available as needed.",
+    "commonCriteriaMetadata": {
+      "subjectDescriptorFields": [
+        "globalBodyAccessPolicy",
+        "globalCoverageInventory",
+        "globalSelectedMetadataPolicy"
+      ],
+      "descriptorCount": 3,
+      "access": "ENTIRE_BOUND_CRITERIA_METADATA_RECORD",
+      "followReferencedDescriptorsAsBody": false
+    }
+  },
+  "commonEntireBodyIds": [
+    "SOURCE-BODY-054",
+    "SOURCE-BODY-055",
+    "SOURCE-BODY-056",
+    "SOURCE-BODY-057",
+    "SOURCE-BODY-096",
+    "SOURCE-BODY-097"
+  ],
+  "referenceInventoryShape": {
+    "entireBodyFiles": 98,
+    "entirePhysicalRows": null,
+    "primaryDomainFiles": 92,
+    "commonEntireFiles": 6,
+    "selectedMetadataRecords": 13,
+    "indexedDescriptorRows": 902,
+    "permittedOriginFieldNames": 49,
+    "PluginReferenceOccurrences": 1561,
+    "stagedAuthoredMembers": 33,
+    "authoredPaths": 19,
+    "authoredBodyRoutes": 16,
+    "reusedBodyRoutes": 21,
+    "legacyBodyRoutes": 10,
+    "countsRequireNewFreezeVerification": true,
+    "sourceBindingDerivation": {
+      "state": "UNRESOLVED_REPAIRED_SOURCE_AND_NORMS",
+      "wrapper": {
+        "body": "SOURCE-BODY-013",
+        "descriptor": null,
+        "physicalRows": null
+      },
+      "validatorTest": {
+        "body": "SOURCE-BODY-098",
+        "descriptor": null,
+        "physicalRows": null
+      },
+      "topLevelControlBoundary": {
+        "physicalRange": null,
+        "tryPhysicalRange": null,
+        "sourceTextSha256": null
+      },
+      "rootAdoptedSource": null
+    }
+  },
+  "scopes": [
+    {
+      "scopeId": "S_VALUE",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "primaryEntireBodyIds": [
+        "SOURCE-BODY-004",
+        "SOURCE-BODY-005",
+        "SOURCE-BODY-006",
+        "SOURCE-BODY-007",
+        "SOURCE-BODY-008",
+        "SOURCE-BODY-009",
+        "SOURCE-BODY-010",
+        "SOURCE-BODY-011",
+        "SOURCE-BODY-012",
+        "SOURCE-BODY-014",
+        "SOURCE-BODY-015",
+        "SOURCE-BODY-037",
+        "SOURCE-BODY-038",
+        "SOURCE-BODY-039",
+        "SOURCE-BODY-040",
+        "SOURCE-BODY-041",
+        "SOURCE-BODY-042",
+        "SOURCE-BODY-043",
+        "SOURCE-BODY-044",
+        "SOURCE-BODY-045",
+        "SOURCE-BODY-046",
+        "SOURCE-BODY-049",
+        "SOURCE-BODY-050",
+        "SOURCE-BODY-051",
+        "SOURCE-BODY-052"
+      ],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-002",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-004",
+        "SOURCE-BODY-005",
+        "SOURCE-BODY-006",
+        "SOURCE-BODY-007",
+        "SOURCE-BODY-008",
+        "SOURCE-BODY-009",
+        "SOURCE-BODY-010",
+        "SOURCE-BODY-011",
+        "SOURCE-BODY-012",
+        "SOURCE-BODY-014",
+        "SOURCE-BODY-015",
+        "SOURCE-BODY-037",
+        "SOURCE-BODY-038",
+        "SOURCE-BODY-039",
+        "SOURCE-BODY-040",
+        "SOURCE-BODY-041",
+        "SOURCE-BODY-042",
+        "SOURCE-BODY-043",
+        "SOURCE-BODY-044",
+        "SOURCE-BODY-045",
+        "SOURCE-BODY-046",
+        "SOURCE-BODY-049",
+        "SOURCE-BODY-050",
+        "SOURCE-BODY-051",
+        "SOURCE-BODY-052",
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097"
+      ],
+      "requiredCompleteUnitRanges": [
+        {
+          "body": "SOURCE-BODY-013",
+          "bodySha256": null,
+          "physicalRanges": null,
+          "completeUnits": [
+            "Bytes-Hash",
+            "Expand-Recipe",
+            "Prepare-Fixtures",
+            "Fixture-Snapshot",
+            "Expected-Attempts",
+            "Check-Native",
+            "CMake-Path",
+            "CMake-Options",
+            "Check-CMake",
+            "Response-Chain",
+            "Forced-DefinitionHeaders",
+            "Macro-Values",
+            "Check-EditorFlags"
+          ],
+          "completeUnitBindings": [
+            {
+              "name": "Bytes-Hash",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Expand-Recipe",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Prepare-Fixtures",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Fixture-Snapshot",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Expected-Attempts",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-Native",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "CMake-Path",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "CMake-Options",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-CMake",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Response-Chain",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Forced-DefinitionHeaders",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Macro-Values",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-EditorFlags",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            }
+          ]
+        }
+      ],
+      "metadataFullRecordOrdinals": [
+        13
+      ],
+      "metadataRelationshipRecordOrdinals": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "metadataRowPartitions": [],
+      "duties": [
+        "Assess the complete UE-owned raw document/value graph, no-borrow/no-vendor-public ownership, noexcept/typed private exception boundary, failed-empty result, original accepted bytes, aliases/tags/UTF8/null restrictions, copy/move/destruction and five inclusive quota units.",
+        "Assess all 38 input IDs, 45 planned attempts and eight suite contracts, complete canonical and generated definitions, independent recipes/byte expectations/keys/embedded NUL, exact typed failures and evaluated check accounting.",
+        "Assess actual used vendor public Parser/EventHandler/scanner/escape and owned UE APIs, selected source/header/static ownership lineage and bounded A1E versus required A1G/A2 claims.",
+        "Assess the complete terminal ABI/flag wrapper units CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags with full assigned ModuleRules/public/private parser sources. Keep their selected-artifact/CRT/C++/exception/definition/include/link assumptions explicit; local duties do not import the complete upstream target/configuration/catalog/compiler engine domain."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 25,
+        "requiredEntireFiles": 34,
+        "requiredEntirePhysicalRows": null,
+        "requiredCompleteUnitPhysicalRows": null,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "S_BUILD_HOST",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "primaryEntireBodyIds": [
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-013",
+        "SOURCE-BODY-047",
+        "SOURCE-BODY-048",
+        "SOURCE-BODY-053",
+        "SOURCE-BODY-085",
+        "SOURCE-BODY-086",
+        "SOURCE-BODY-087",
+        "SOURCE-BODY-088",
+        "SOURCE-BODY-089",
+        "SOURCE-BODY-090",
+        "SOURCE-BODY-091",
+        "SOURCE-BODY-098"
+      ],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-002",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-004",
+        "SOURCE-BODY-005",
+        "SOURCE-BODY-006",
+        "SOURCE-BODY-010",
+        "SOURCE-BODY-011",
+        "SOURCE-BODY-012",
+        "SOURCE-BODY-013",
+        "SOURCE-BODY-014",
+        "SOURCE-BODY-015",
+        "SOURCE-BODY-016",
+        "SOURCE-BODY-017",
+        "SOURCE-BODY-018",
+        "SOURCE-BODY-019",
+        "SOURCE-BODY-047",
+        "SOURCE-BODY-048",
+        "SOURCE-BODY-053",
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-060",
+        "SOURCE-BODY-061",
+        "SOURCE-BODY-062",
+        "SOURCE-BODY-081",
+        "SOURCE-BODY-082",
+        "SOURCE-BODY-085",
+        "SOURCE-BODY-086",
+        "SOURCE-BODY-087",
+        "SOURCE-BODY-088",
+        "SOURCE-BODY-089",
+        "SOURCE-BODY-090",
+        "SOURCE-BODY-091",
+        "SOURCE-BODY-092",
+        "SOURCE-BODY-093",
+        "SOURCE-BODY-095",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097",
+        "SOURCE-BODY-098"
+      ],
+      "requiredCompleteUnitRanges": [],
+      "metadataFullRecordOrdinals": [
+        1,
+        3,
+        6
+      ],
+      "metadataRelationshipRecordOrdinals": [
+        2,
+        4,
+        5,
+        7,
+        13
+      ],
+      "metadataRowPartitions": [],
+      "duties": [
+        "Assess the complete wrapper and native supervisor, all six controls, phase authority/predecessors/budgets, root/member/job/pipe/exit/timeout/cleanup paths and receiptArtifact/result schemas.",
+        "Assess all nine settings roles and source/stage/fixture/project-plugin preservation, owned environment/DDC/output paths, retained partial failure evidence and resource limits.",
+        "Assess selected dependency/CMake RC serialization/compiler/SDK/CRT/C++/static artifact/copy/response/forced-definition contracts, NoPCHs/NoVFS, actual Editor exception mode and measurement support.",
+        "Assess the concrete dedicated target bBuildAllModules=false assignment, applicable TargetRules creation/configuration/finalization and normal non-test target-discovery route through complete BODY093. Distinguish source assignments and configuration gates from an actual unexecuted effective-target receipt.",
+        "Independently inspect complete BODY095 and join the frozen explicit project/name invocation and source-derived non-test descriptor parsing route, Source/extensions/additional-root/Mods/plugin-Tests/Intermediate/Source discovery, source order and competing filename/type/platform/group candidates, Rules/DirectoryItem/file/assembly caches, source-union compilation/load and parent/foreign-plugin guards to the concrete target/module/compiler/receipt route. Reuse full BODY081/082/092/093. Distinguish current literal/static source correspondence from future actual staged topology, first-scan/process lineage and selected loaded assembly/type evidence; no universal all-UBT or actual-execution conclusion follows. .NET/Roslyn/OS/library leaves and inapplicable no-project/foreign-plugin/no-code/test branches remain explicit and conditioned.",
+        "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 13,
+        "requiredEntireFiles": 41,
+        "requiredEntirePhysicalRows": null,
+        "requiredCompleteUnitPhysicalRows": 0,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "S_TARGET_RECEIPT",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "primaryEntireBodyIds": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-002",
+        "SOURCE-BODY-016",
+        "SOURCE-BODY-017",
+        "SOURCE-BODY-018",
+        "SOURCE-BODY-019",
+        "SOURCE-BODY-020",
+        "SOURCE-BODY-021",
+        "SOURCE-BODY-022",
+        "SOURCE-BODY-023",
+        "SOURCE-BODY-024",
+        "SOURCE-BODY-025",
+        "SOURCE-BODY-058",
+        "SOURCE-BODY-059",
+        "SOURCE-BODY-060",
+        "SOURCE-BODY-061",
+        "SOURCE-BODY-062",
+        "SOURCE-BODY-081",
+        "SOURCE-BODY-082",
+        "SOURCE-BODY-083",
+        "SOURCE-BODY-084",
+        "SOURCE-BODY-092",
+        "SOURCE-BODY-093",
+        "SOURCE-BODY-095"
+      ],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-002",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-004",
+        "SOURCE-BODY-010",
+        "SOURCE-BODY-013",
+        "SOURCE-BODY-016",
+        "SOURCE-BODY-017",
+        "SOURCE-BODY-018",
+        "SOURCE-BODY-019",
+        "SOURCE-BODY-020",
+        "SOURCE-BODY-021",
+        "SOURCE-BODY-022",
+        "SOURCE-BODY-023",
+        "SOURCE-BODY-024",
+        "SOURCE-BODY-025",
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-058",
+        "SOURCE-BODY-059",
+        "SOURCE-BODY-060",
+        "SOURCE-BODY-061",
+        "SOURCE-BODY-062",
+        "SOURCE-BODY-081",
+        "SOURCE-BODY-082",
+        "SOURCE-BODY-083",
+        "SOURCE-BODY-084",
+        "SOURCE-BODY-092",
+        "SOURCE-BODY-093",
+        "SOURCE-BODY-094",
+        "SOURCE-BODY-095",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097",
+        "SOURCE-BODY-098"
+      ],
+      "requiredCompleteUnitRanges": [],
+      "metadataFullRecordOrdinals": [
+        4,
+        5,
+        7,
+        11,
+        12
+      ],
+      "metadataRelationshipRecordOrdinals": [
+        1,
+        2,
+        3,
+        6,
+        8,
+        9,
+        10,
+        13
+      ],
+      "metadataRowPartitions": [],
+      "duties": [
+        "Assess complete project/target/UBT plugin descriptor/discovery/setup/enablement/build/receipt routes, roots/extensions and target/platform/configuration/program/module selectors.",
+        "Assess receipt serialization and runtime receipt consumers, launch/environment insertion and module startup ordering, exact stage/target/project membership and conservative-closure versus runtime-enable distinction.",
+        "Independently assess complete build-selection relationships across every902 indexed descriptor and all1561 Plugin-reference occurrences using actual selected data, including every material duplicate/extension/collision/default/filter/dependency edge disposition.",
+        "Assess the inherited ShouldIgnorePluginDependency hook and exact ReadOnlyTargetRules forwarding; plugin list and selector defaults, actual derived TargetRules construction, annotation-gated INI/XML/CLI assignments, target-type and platform finalization, and the concrete descriptor-to-target field mapping before plugin build/receipt selection. Join these exact used values and any unresolved configuration conditions with every material build-selection edge; do not substitute constructor defaults for the actual applicable configuration path.",
+        "Assess complete BODY093 and BODY094: effective bBuildAllModules pin after applicable configuration/derived construction/platform finalization; normal non-test target discovery; PreBuildSetup/AddAllValidModulesToTarget alternatives; complete Default-phase startup dispatcher; explicit load/mount implementation and finite material caller routes. Join each applicable condition with build/receipt/runtime selection without assuming all catalog plugins or conditional callers execute. Include the applicable public/private loading declarations and exact default arguments in the implementation/caller/phase join; do not infer an omitted argument value.",
+        "Independently inspect complete BODY095 and join the frozen explicit project/name invocation and source-derived non-test descriptor parsing route, Source/extensions/additional-root/Mods/plugin-Tests/Intermediate/Source discovery, source order and competing filename/type/platform/group candidates, Rules/DirectoryItem/file/assembly caches, source-union compilation/load and parent/foreign-plugin guards to the concrete target/module/compiler/receipt route. Reuse full BODY081/082/092/093. Distinguish current literal/static source correspondence from future actual staged topology, first-scan/process lineage and selected loaded assembly/type evidence; no universal all-UBT or actual-execution conclusion follows. .NET/Roslyn/OS/library leaves and inapplicable no-project/foreign-plugin/no-code/test branches remain explicit and conditioned.",
+        "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 24,
+        "requiredEntireFiles": 36,
+        "requiredEntirePhysicalRows": null,
+        "requiredCompleteUnitPhysicalRows": 0,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "S_PLUGIN",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "primaryEntireBodyIds": [
+        "SOURCE-BODY-063",
+        "SOURCE-BODY-064",
+        "SOURCE-BODY-065",
+        "SOURCE-BODY-066",
+        "SOURCE-BODY-067",
+        "SOURCE-BODY-068",
+        "SOURCE-BODY-069",
+        "SOURCE-BODY-070",
+        "SOURCE-BODY-071",
+        "SOURCE-BODY-072",
+        "SOURCE-BODY-073",
+        "SOURCE-BODY-074",
+        "SOURCE-BODY-075",
+        "SOURCE-BODY-076",
+        "SOURCE-BODY-077",
+        "SOURCE-BODY-078",
+        "SOURCE-BODY-079",
+        "SOURCE-BODY-080",
+        "SOURCE-BODY-094"
+      ],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-002",
+        "SOURCE-BODY-016",
+        "SOURCE-BODY-019",
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-059",
+        "SOURCE-BODY-060",
+        "SOURCE-BODY-061",
+        "SOURCE-BODY-062",
+        "SOURCE-BODY-063",
+        "SOURCE-BODY-064",
+        "SOURCE-BODY-065",
+        "SOURCE-BODY-066",
+        "SOURCE-BODY-067",
+        "SOURCE-BODY-068",
+        "SOURCE-BODY-069",
+        "SOURCE-BODY-070",
+        "SOURCE-BODY-071",
+        "SOURCE-BODY-072",
+        "SOURCE-BODY-073",
+        "SOURCE-BODY-074",
+        "SOURCE-BODY-075",
+        "SOURCE-BODY-076",
+        "SOURCE-BODY-077",
+        "SOURCE-BODY-078",
+        "SOURCE-BODY-079",
+        "SOURCE-BODY-080",
+        "SOURCE-BODY-083",
+        "SOURCE-BODY-084",
+        "SOURCE-BODY-094",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097"
+      ],
+      "requiredCompleteUnitRanges": [
+        {
+          "body": "SOURCE-BODY-013",
+          "bodySha256": null,
+          "physicalRanges": null,
+          "completeUnits": [
+            "Catalog-Descriptors",
+            "Check-PluginDiscoveryCatalog",
+            "Resolve-ReceiptPath",
+            "Check-TargetReceipt",
+            "Check-StagedPluginClosure",
+            "Native-Arguments"
+          ],
+          "completeUnitBindings": [
+            {
+              "name": "Catalog-Descriptors",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-PluginDiscoveryCatalog",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Resolve-ReceiptPath",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-TargetReceipt",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-StagedPluginClosure",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Native-Arguments",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            }
+          ]
+        }
+      ],
+      "metadataFullRecordOrdinals": [
+        9,
+        10
+      ],
+      "metadataRelationshipRecordOrdinals": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        11,
+        12
+      ],
+      "metadataRowPartitions": [],
+      "duties": [
+        "Assess complete runtime descriptor read/discovery/default/filter/root/extension/dependency/module/explicit-loading routes and their callers.",
+        "Independently assess the full902-node/1561-reference runtime graph and every material selector/default/platform/program/target/configuration/module/dependency relationship using raw selected data; no partition report, graph or PASS is an input.",
+        "Assess the complete catalog/schema/field policy in records9/10 and join project/receipt/selected245 membership with actual discovery semantics. Literal/absence/opaque-identity completeness for record8 is owned by the three D_SELECTORS scopes; necessary runtime semantic values remain independently inspected here.",
+        "Assess complete BODY094, including PreInitPostStartupScreen and LoadStartupModules through Default dispatch, normal ExplicitlyLoaded exclusions, explicit mount/load/phase iteration and error propagation, plus finite material callers and their platform/configuration/test or feature gates. Distinguish source-supported conditional routes from actual activation; no universal all-plugins execution claim is permitted. Include the applicable public/private loading declarations and exact default arguments in the implementation/caller/phase join; do not infer an omitted argument value."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 19,
+        "requiredEntireFiles": 35,
+        "requiredEntirePhysicalRows": null,
+        "requiredCompleteUnitPhysicalRows": null,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "S_CLIENT",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "primaryEntireBodyIds": [
+        "SOURCE-BODY-026",
+        "SOURCE-BODY-027",
+        "SOURCE-BODY-028",
+        "SOURCE-BODY-029",
+        "SOURCE-BODY-030",
+        "SOURCE-BODY-031",
+        "SOURCE-BODY-032",
+        "SOURCE-BODY-033",
+        "SOURCE-BODY-034",
+        "SOURCE-BODY-035",
+        "SOURCE-BODY-036"
+      ],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-002",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-004",
+        "SOURCE-BODY-010",
+        "SOURCE-BODY-011",
+        "SOURCE-BODY-016",
+        "SOURCE-BODY-017",
+        "SOURCE-BODY-018",
+        "SOURCE-BODY-019",
+        "SOURCE-BODY-020",
+        "SOURCE-BODY-021",
+        "SOURCE-BODY-022",
+        "SOURCE-BODY-023",
+        "SOURCE-BODY-024",
+        "SOURCE-BODY-025",
+        "SOURCE-BODY-026",
+        "SOURCE-BODY-027",
+        "SOURCE-BODY-028",
+        "SOURCE-BODY-029",
+        "SOURCE-BODY-030",
+        "SOURCE-BODY-031",
+        "SOURCE-BODY-032",
+        "SOURCE-BODY-033",
+        "SOURCE-BODY-034",
+        "SOURCE-BODY-035",
+        "SOURCE-BODY-036",
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097"
+      ],
+      "requiredCompleteUnitRanges": [
+        {
+          "body": "SOURCE-BODY-013",
+          "bodySha256": null,
+          "physicalRanges": null,
+          "completeUnits": [
+            "Snapshot-Source",
+            "Snapshot-ProjectPlugins",
+            "Check-ProjectPluginMembership",
+            "Child-Environment",
+            "Require-RulesKeys",
+            "Assert-RulesValue",
+            "Assert-RulesDescriptor",
+            "Rules-FrozenInput",
+            "Check-RulesFreeze",
+            "Rules-GeneratedPaths",
+            "Rules-SourceFiles",
+            "Rules-Topology",
+            "Prepare-RulesChallenge",
+            "Read-RulesMetadata",
+            "Collect-RulesCacheSources",
+            "Check-RulesWitnessData",
+            "Retain-RulesArtifacts",
+            "Check-RulesRetentionData",
+            "Check-RulesPreservation",
+            "Editor-Build",
+            "Native-Arguments",
+            "Read-RulesHeldDescriptor",
+            "Confirm-RulesHeldSources",
+            "Confirm-RulesPrelaunchInputs",
+            "Invoke-Root",
+            "Require-RootPass",
+            "initialization boundary plus complete top-level try/dispatch/catch/finally and final exit"
+          ],
+          "completeUnitBindings": [
+            {
+              "name": "Snapshot-Source",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Snapshot-ProjectPlugins",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-ProjectPluginMembership",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Child-Environment",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Require-RulesKeys",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Assert-RulesValue",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Assert-RulesDescriptor",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Rules-FrozenInput",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-RulesFreeze",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Rules-GeneratedPaths",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Rules-SourceFiles",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Rules-Topology",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Prepare-RulesChallenge",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Read-RulesMetadata",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Collect-RulesCacheSources",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-RulesWitnessData",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Retain-RulesArtifacts",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-RulesRetentionData",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Check-RulesPreservation",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Editor-Build",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Native-Arguments",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Read-RulesHeldDescriptor",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Confirm-RulesHeldSources",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Confirm-RulesPrelaunchInputs",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Invoke-Root",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "Require-RootPass",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            },
+            {
+              "name": "initialization boundary plus complete top-level try/dispatch/catch/finally and final exit",
+              "physicalRange": null,
+              "sourceTextSha256": null
+            }
+          ]
+        }
+      ],
+      "metadataFullRecordOrdinals": [
+        2
+      ],
+      "metadataRelationshipRecordOrdinals": [
+        1,
+        4,
+        7,
+        11,
+        12
+      ],
+      "metadataRowPartitions": [],
+      "duties": [
+        "Assess full existing client CoreBoundary/E02 implementation, headers and all three test translation units, source includes/UHT/build and conditional automation paths, project/entry/Config routes.",
+        "Match all33 frozen staged authored members to complete positive BODY paths and exact source copies, including every compiled client/test/settings member.",
+        "Assess dedicated A1E target/plugin/startup and cleared E02 environment behavior, preserving existing client/Core-authority/entry behavior and preventing unintended host/window or other experiment activation.",
+        "Assess complete required wrapper witness initialization/challenge/process/retention/preservation units together with the dedicated target AdditionalData bridge and staged client/source paths; preserve all33 staged members. The source-only validator test is not a staged member; read globally granted BODY098 as needed for a material interface.",
+        "Read complete BODY003 module-side witness producer and every required complete wrapper source/held-descriptor/prelaunch/environment/owned-root-call/witness-validator/retained-live/control-flow interface. Verify all33 canonical/staged memberships and approved bytes after handles are held, the complete prelaunch topology, actual direct root call and release/failure ordering; preserved generic job/catalog/compiler internals have explicit complete owners and are not duplicated by this local interface obligation."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 11,
+        "requiredEntireFiles": 33,
+        "requiredEntirePhysicalRows": null,
+        "requiredCompleteUnitPhysicalRows": null,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "I_ABI_BUILD",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "primaryEntireBodyIds": [],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-002",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-004",
+        "SOURCE-BODY-005",
+        "SOURCE-BODY-006",
+        "SOURCE-BODY-007",
+        "SOURCE-BODY-008",
+        "SOURCE-BODY-009",
+        "SOURCE-BODY-010",
+        "SOURCE-BODY-011",
+        "SOURCE-BODY-012",
+        "SOURCE-BODY-013",
+        "SOURCE-BODY-014",
+        "SOURCE-BODY-015",
+        "SOURCE-BODY-016",
+        "SOURCE-BODY-017",
+        "SOURCE-BODY-018",
+        "SOURCE-BODY-019",
+        "SOURCE-BODY-047",
+        "SOURCE-BODY-049",
+        "SOURCE-BODY-050",
+        "SOURCE-BODY-051",
+        "SOURCE-BODY-053",
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-060",
+        "SOURCE-BODY-061",
+        "SOURCE-BODY-062",
+        "SOURCE-BODY-081",
+        "SOURCE-BODY-082",
+        "SOURCE-BODY-085",
+        "SOURCE-BODY-086",
+        "SOURCE-BODY-087",
+        "SOURCE-BODY-088",
+        "SOURCE-BODY-089",
+        "SOURCE-BODY-090",
+        "SOURCE-BODY-091",
+        "SOURCE-BODY-092",
+        "SOURCE-BODY-093",
+        "SOURCE-BODY-094",
+        "SOURCE-BODY-095",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097",
+        "SOURCE-BODY-098"
+      ],
+      "requiredCompleteUnitRanges": [],
+      "metadataFullRecordOrdinals": [],
+      "metadataRelationshipRecordOrdinals": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        13
+      ],
+      "metadataRowPartitions": [],
+      "duties": [
+        "Independently close public input lifetime through private vendor callbacks, UE-owned returned values, typed/noexcept/failed-empty semantics and actual caller/test/fixture contracts.",
+        "Independently join acquired source/header/license/tree, selected tools/CMake normalization/static copied artifact, ModuleRules and actual response/CRT/exception/macro contracts across target/parser/probe.",
+        "Independently reconcile all input IDs/attempt labels/expected bytes/quotas/paths/measurements/results and receipts across native test and harness source. Preserve the explicit A1E subset and unresolved A1G/A2 obligations.",
+        "Independently join the inherited hook/defaults and complete derived-construction, configuration-assignment gates, target-type and platform-finalization routes with the concrete target/module/compiler/Editor exception/ABI contracts. Inspect BODY092 in full and preserve unresolved actual configuration or invocation claims without inventing values.",
+        "Independently inspect complete BODY093 and BODY094 and join concrete bBuildAllModules assignment, actual applicable creation/configuration/finalization, normal non-test discovery, alternate all-modules setup and complete Default/explicit startup routes with target/compiler/module/ABI and test/harness interfaces. Preserve unexecuted effective configuration and activation limits. Include the applicable public/private loading declarations and exact default arguments in the implementation/caller/phase join; do not infer an omitted argument value.",
+        "Independently inspect complete BODY095 and join the frozen explicit project/name invocation and source-derived non-test descriptor parsing route, Source/extensions/additional-root/Mods/plugin-Tests/Intermediate/Source discovery, source order and competing filename/type/platform/group candidates, Rules/DirectoryItem/file/assembly caches, source-union compilation/load and parent/foreign-plugin guards to the concrete target/module/compiler/receipt route. Reuse full BODY081/082/092/093. Distinguish current literal/static source correspondence from future actual staged topology, first-scan/process lineage and selected loaded assembly/type evidence; no universal all-UBT or actual-execution conclusion follows. .NET/Roslyn/OS/library leaves and inapplicable no-project/foreign-plugin/no-code/test branches remain explicit and conditioned.",
+        "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 0,
+        "requiredEntireFiles": 47,
+        "requiredEntirePhysicalRows": null,
+        "requiredCompleteUnitPhysicalRows": 0,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "I_ACTIVATION",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_INTEGRATION_INITIAL",
+      "primaryEntireBodyIds": [],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-001",
+        "SOURCE-BODY-002",
+        "SOURCE-BODY-003",
+        "SOURCE-BODY-004",
+        "SOURCE-BODY-008",
+        "SOURCE-BODY-010",
+        "SOURCE-BODY-011",
+        "SOURCE-BODY-013",
+        "SOURCE-BODY-016",
+        "SOURCE-BODY-017",
+        "SOURCE-BODY-018",
+        "SOURCE-BODY-019",
+        "SOURCE-BODY-020",
+        "SOURCE-BODY-021",
+        "SOURCE-BODY-022",
+        "SOURCE-BODY-023",
+        "SOURCE-BODY-024",
+        "SOURCE-BODY-025",
+        "SOURCE-BODY-027",
+        "SOURCE-BODY-029",
+        "SOURCE-BODY-031",
+        "SOURCE-BODY-033",
+        "SOURCE-BODY-048",
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-058",
+        "SOURCE-BODY-059",
+        "SOURCE-BODY-060",
+        "SOURCE-BODY-061",
+        "SOURCE-BODY-062",
+        "SOURCE-BODY-075",
+        "SOURCE-BODY-076",
+        "SOURCE-BODY-078",
+        "SOURCE-BODY-080",
+        "SOURCE-BODY-081",
+        "SOURCE-BODY-082",
+        "SOURCE-BODY-083",
+        "SOURCE-BODY-084",
+        "SOURCE-BODY-092",
+        "SOURCE-BODY-093",
+        "SOURCE-BODY-094",
+        "SOURCE-BODY-095",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097",
+        "SOURCE-BODY-098"
+      ],
+      "requiredCompleteUnitRanges": [],
+      "metadataFullRecordOrdinals": [],
+      "metadataRelationshipRecordOrdinals": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "metadataRowPartitions": [],
+      "duties": [
+        "Independently join all33 staged source routes and public client/entry interfaces with target/module selection, stage/plugin roots, environment/command insertion, receipt producer/consumer and startup order.",
+        "Independently assess every material cross-system build-to-runtime/default/filter/dependency/receipt/project-membership relationship across full902 nodes and all1561 reference occurrences using raw selected data and complete relevant source functions.",
+        "Independently assess same-candidate phase authority/predecessor/process/receipt/cleanup/settings/source/stage/plugin/fixture/DDC contracts, all nine settings roles and all six expected controls. No peer data table, graph or report is an input.",
+        "Independently join the inherited hook/defaults, concrete derived-target initialization, annotation-gated configuration assignment and platform finalization with complete plugin build selection, receipt serialization/consumption, runtime activation and every material cross-system selector/dependency edge. Inspect BODY092 in full; distinguish source-supported defaults from actual configured/runtime state.",
+        "Independently inspect complete BODY093 and BODY094; join effective configuration/pin and normal non-test target discovery/alternate build setup with receipt production/consumption, full Default startup dispatch, explicit load/mount phase/error semantics and finite material callers across all material graph relationships. Distinguish conditional source reachability, selected membership and observed activation; do not claim universal all-plugins execution. Include the applicable public/private loading declarations and exact default arguments in the implementation/caller/phase join; do not infer an omitted argument value.",
+        "Independently inspect complete BODY095 and join the frozen explicit project/name invocation and source-derived non-test descriptor parsing route, Source/extensions/additional-root/Mods/plugin-Tests/Intermediate/Source discovery, source order and competing filename/type/platform/group candidates, Rules/DirectoryItem/file/assembly caches, source-union compilation/load and parent/foreign-plugin guards to the concrete target/module/compiler/receipt route. Reuse full BODY081/082/092/093. Distinguish current literal/static source correspondence from future actual staged topology, first-scan/process lineage and selected loaded assembly/type evidence; no universal all-UBT or actual-execution conclusion follows. .NET/Roslyn/OS/library leaves and inapplicable no-project/foreign-plugin/no-code/test branches remain explicit and conditioned.",
+        "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented.",
+        "Inspect complete BODY003 module-side rules witness producer as a mandatory independent activation/process/AdditionalData/cache/loaded-assembly join, together with BODY001/013/095/098 and applicable complete primary interfaces. Its optional global availability does not discharge this duty."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 0,
+        "requiredEntireFiles": 47,
+        "requiredEntirePhysicalRows": null,
+        "requiredCompleteUnitPhysicalRows": 0,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "D_SELECTORS_001_301",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+      "primaryEntireBodyIds": [],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097"
+      ],
+      "requiredCompleteUnitRanges": [],
+      "metadataFullRecordOrdinals": [
+        9,
+        10
+      ],
+      "metadataRelationshipRecordOrdinals": [
+        7,
+        11,
+        12
+      ],
+      "metadataRowPartitions": [
+        {
+          "recordOrdinal": 8,
+          "rowOrder": "ORIGINAL_BOUND_JSONL_PHYSICAL_ROW_ORDER",
+          "firstRowInclusive": 1,
+          "lastRowInclusive": 301,
+          "requirement": "EVERY_SELECTED_FIELD_VALUE_ABSENCE_AND_ORIGIN_IDENTITY_IN_EVERY_ASSIGNED_ROW"
+        }
+      ],
+      "duties": [
+        "Assess every assigned complete row, its ordered original origin identity, all selected literal field values/presence/absence/other-present names, exact case/null/false/empty and singleton arrays, full opaque strings and all applicable source-field correspondence.",
+        "Read the complete catalog and field/schema data in records9/10; query any needed original descriptors only through the positive49-field origin policy. No descriptor-origin BODY grant is implied.",
+        "Independently perform complete exact identity/value comparisons where suitable and substantively interpret material selector values in assigned rows; preserve full unequal/unresolved values. Match every assigned row exactly once without samples or shortened hashes.",
+        "Identify all incoming/outgoing Plugin-reference occurrences incident to assigned rows using globally accessible raw data and preserve cross-partition identities. Full runtime/build/cross-system graph semantics are independently owned by S_PLUGIN/S_TARGET_RECEIPT/I_ACTIVATION; their peer graphs/reports are not inputs."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 0,
+        "requiredEntireFiles": 6,
+        "requiredEntirePhysicalRows": null,
+        "assignedRows": 301,
+        "requiredCompleteUnitPhysicalRows": 0,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "D_SELECTORS_302_602",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+      "primaryEntireBodyIds": [],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097"
+      ],
+      "requiredCompleteUnitRanges": [],
+      "metadataFullRecordOrdinals": [
+        9,
+        10
+      ],
+      "metadataRelationshipRecordOrdinals": [
+        7,
+        11,
+        12
+      ],
+      "metadataRowPartitions": [
+        {
+          "recordOrdinal": 8,
+          "rowOrder": "ORIGINAL_BOUND_JSONL_PHYSICAL_ROW_ORDER",
+          "firstRowInclusive": 302,
+          "lastRowInclusive": 602,
+          "requirement": "EVERY_SELECTED_FIELD_VALUE_ABSENCE_AND_ORIGIN_IDENTITY_IN_EVERY_ASSIGNED_ROW"
+        }
+      ],
+      "duties": [
+        "Assess every assigned complete row, its ordered original origin identity, all selected literal field values/presence/absence/other-present names, exact case/null/false/empty and singleton arrays, full opaque strings and all applicable source-field correspondence.",
+        "Read the complete catalog and field/schema data in records9/10; query any needed original descriptors only through the positive49-field origin policy. No descriptor-origin BODY grant is implied.",
+        "Independently perform complete exact identity/value comparisons where suitable and substantively interpret material selector values in assigned rows; preserve full unequal/unresolved values. Match every assigned row exactly once without samples or shortened hashes.",
+        "Identify all incoming/outgoing Plugin-reference occurrences incident to assigned rows using globally accessible raw data and preserve cross-partition identities. Full runtime/build/cross-system graph semantics are independently owned by S_PLUGIN/S_TARGET_RECEIPT/I_ACTIVATION; their peer graphs/reports are not inputs."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 0,
+        "requiredEntireFiles": 6,
+        "requiredEntirePhysicalRows": null,
+        "assignedRows": 301,
+        "requiredCompleteUnitPhysicalRows": 0,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    },
+    {
+      "scopeId": "D_SELECTORS_603_902",
+      "role": "SOURCE",
+      "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+      "primaryEntireBodyIds": [],
+      "requiredEntireBodyIds": [
+        "SOURCE-BODY-054",
+        "SOURCE-BODY-055",
+        "SOURCE-BODY-056",
+        "SOURCE-BODY-057",
+        "SOURCE-BODY-096",
+        "SOURCE-BODY-097"
+      ],
+      "requiredCompleteUnitRanges": [],
+      "metadataFullRecordOrdinals": [
+        9,
+        10
+      ],
+      "metadataRelationshipRecordOrdinals": [
+        7,
+        11,
+        12
+      ],
+      "metadataRowPartitions": [
+        {
+          "recordOrdinal": 8,
+          "rowOrder": "ORIGINAL_BOUND_JSONL_PHYSICAL_ROW_ORDER",
+          "firstRowInclusive": 603,
+          "lastRowInclusive": 902,
+          "requirement": "EVERY_SELECTED_FIELD_VALUE_ABSENCE_AND_ORIGIN_IDENTITY_IN_EVERY_ASSIGNED_ROW"
+        }
+      ],
+      "duties": [
+        "Assess every assigned complete row, its ordered original origin identity, all selected literal field values/presence/absence/other-present names, exact case/null/false/empty and singleton arrays, full opaque strings and all applicable source-field correspondence.",
+        "Read the complete catalog and field/schema data in records9/10; query any needed original descriptors only through the positive49-field origin policy. No descriptor-origin BODY grant is implied.",
+        "Independently perform complete exact identity/value comparisons where suitable and substantively interpret material selector values in assigned rows; preserve full unequal/unresolved values. Match every assigned row exactly once without samples or shortened hashes.",
+        "Identify all incoming/outgoing Plugin-reference occurrences incident to assigned rows using globally accessible raw data and preserve cross-partition identities. Full runtime/build/cross-system graph semantics are independently owned by S_PLUGIN/S_TARGET_RECEIPT/I_ACTIVATION; their peer graphs/reports are not inputs."
+      ],
+      "referenceCounts": {
+        "primaryEntireFiles": 0,
+        "requiredEntireFiles": 6,
+        "requiredEntirePhysicalRows": null,
+        "assignedRows": 300,
+        "requiredCompleteUnitPhysicalRows": 0,
+        "requiredTotalMandatoryPhysicalRows": null
+      },
+      "assessmentStatus": "PENDING",
+      "report": null
+    }
+  ],
+  "metadataOwnership": [
+    {
+      "recordOrdinal": 1,
+      "fullOwners": [
+        "S_BUILD_HOST"
+      ]
+    },
+    {
+      "recordOrdinal": 2,
+      "fullOwners": [
+        "S_CLIENT"
+      ]
+    },
+    {
+      "recordOrdinal": 3,
+      "fullOwners": [
+        "S_BUILD_HOST"
+      ]
+    },
+    {
+      "recordOrdinal": 4,
+      "fullOwners": [
+        "S_TARGET_RECEIPT"
+      ]
+    },
+    {
+      "recordOrdinal": 5,
+      "fullOwners": [
+        "S_TARGET_RECEIPT"
+      ]
+    },
+    {
+      "recordOrdinal": 6,
+      "fullOwners": [
+        "S_BUILD_HOST"
+      ]
+    },
+    {
+      "recordOrdinal": 7,
+      "fullOwners": [
+        "S_TARGET_RECEIPT"
+      ]
+    },
+    {
+      "recordOrdinal": 8,
+      "fullOwners": [
+        "D_SELECTORS_001_301",
+        "D_SELECTORS_302_602",
+        "D_SELECTORS_603_902"
+      ],
+      "partitionKey": "metadataRowPartitions",
+      "partitionsFormCompleteDisjointRowUnion": true,
+      "runtimeGraphOwner": "S_PLUGIN",
+      "buildGraphOwner": "S_TARGET_RECEIPT",
+      "independentCrossSystemGraphOwner": "I_ACTIVATION"
+    },
+    {
+      "recordOrdinal": 9,
+      "fullOwners": [
+        "S_PLUGIN",
+        "D_SELECTORS_001_301",
+        "D_SELECTORS_302_602",
+        "D_SELECTORS_603_902"
+      ]
+    },
+    {
+      "recordOrdinal": 10,
+      "fullOwners": [
+        "S_PLUGIN",
+        "D_SELECTORS_001_301",
+        "D_SELECTORS_302_602",
+        "D_SELECTORS_603_902"
+      ]
+    },
+    {
+      "recordOrdinal": 11,
+      "fullOwners": [
+        "S_TARGET_RECEIPT"
+      ]
+    },
+    {
+      "recordOrdinal": 12,
+      "fullOwners": [
+        "S_TARGET_RECEIPT"
+      ]
+    },
+    {
+      "recordOrdinal": 13,
+      "fullOwners": [
+        "S_VALUE"
+      ]
+    }
+  ],
+  "materialJoins": [
+    {
+      "id": "VALUE_FIXTURE",
+      "primaryScopes": [
+        "S_VALUE",
+        "S_BUILD_HOST"
+      ],
+      "independentIntegrationScopes": [
+        "I_ABI_BUILD"
+      ],
+      "completeDuty": "All38 IDs/45 planned attempts/eight suites; UE-owned/typed/noexcept input-output lifetime, five quotas and actual fixture/hash/path/check/result contracts.",
+      "atomicDuties": [
+        {
+          "id": "VALUE_FIXTURE_COMPLETE",
+          "completeDuty": "All38 IDs/45 planned attempts/eight suites; complete raw input/value/caller/fixture/result interfaces, UE-owned lifetimes, typed/noexcept and failed-empty semantics, five inclusive quotas, exact recipes/bytes/hash/path/check accounting and source-supported A1E limits.",
+          "primaryScopes": [
+            "S_VALUE",
+            "S_BUILD_HOST"
+          ],
+          "independentIntegrationScopes": [
+            "I_ABI_BUILD"
+          ]
+        }
+      ],
+      "scopeDuties": {
+        "S_VALUE": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "VALUE_FIXTURE_COMPLETE"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. All38 IDs/45 planned attempts/eight suites; complete raw input/value/caller/fixture/result interfaces, UE-owned lifetimes, typed/noexcept and failed-empty semantics, five inclusive quotas, exact recipes/bytes/hash/path/check accounting and source-supported A1E limits."
+        },
+        "S_BUILD_HOST": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "VALUE_FIXTURE_COMPLETE"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. All38 IDs/45 planned attempts/eight suites; complete raw input/value/caller/fixture/result interfaces, UE-owned lifetimes, typed/noexcept and failed-empty semantics, five inclusive quotas, exact recipes/bytes/hash/path/check accounting and source-supported A1E limits."
+        },
+        "I_ABI_BUILD": {
+          "dutyKind": "INDEPENDENT_INTEGRATION",
+          "atomicDutyIds": [
+            "VALUE_FIXTURE_COMPLETE"
+          ],
+          "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. All38 IDs/45 planned attempts/eight suites; complete raw input/value/caller/fixture/result interfaces, UE-owned lifetimes, typed/noexcept and failed-empty semantics, five inclusive quotas, exact recipes/bytes/hash/path/check accounting and source-supported A1E limits."
+        }
+      }
+    },
+    {
+      "id": "DEPENDENCY_COMPILER_ABI",
+      "primaryScopes": [
+        "S_VALUE",
+        "S_BUILD_HOST",
+        "S_TARGET_RECEIPT"
+      ],
+      "independentIntegrationScopes": [
+        "I_ABI_BUILD"
+      ],
+      "completeDuty": "Pinned source/header/static artifact to CMake/RC normalization/toolchain/CRT/link/module/response/definition/NoPCHs/NoVFS/Editor-EH contracts. Include the inherited target-selector/default/hook, derived construction, applicable configuration assignment gates and platform finalization in the target-to-compiler/module/ABI join. Independently join the concrete bBuildAllModules pin and full target creation/configuration/finalization/normal non-test discovery/alternate prebuild routes with ABI and module selection, preserving unknown unexecuted effective configuration. Include the complete normal RulesCompiler discovery/cache/assembly producer BODY095 with reused081/082/092/093, prospective contracts for later actual staged-source/type/order/cache/load witnesses and finite conditional/framework leaves; source visibility and static matches are not actual execution.",
+      "atomicDuties": [
+        {
+          "id": "DEPENDENCY_TERMINAL_VALUE_ABI",
+          "completeDuty": "Join public Core-only UE-owned input/output ABI, private yaml headers/callbacks/exception containment/static artifact, copied source/header/license identity and parser/probe include/definition/link isolation to the terminal CRT/C++/exception/static-definition flags. S_VALUE inspects complete BODY001-012/014-015 as assigned and complete wrapper CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags alongside its existing fixture/native units. Assess the literal terminal checks and their interface assumptions; full inherited target/configuration/catalog/compiler engine internals are separately owned below.",
+          "primaryScopes": [
+            "S_VALUE",
+            "S_BUILD_HOST"
+          ],
+          "independentIntegrationScopes": [
+            "I_ABI_BUILD"
+          ]
+        },
+        {
+          "id": "DEPENDENCY_BUILD_TOOLCHAIN",
+          "completeDuty": "Completely assess acquired source/header/license/tree to selected tools, CMake/RC path serialization, compiler/SDK/CRT/C++ selection, supervised dependency build, copied private static library, ModuleRules, actual response/shared-response/forced-definition/link contracts, NoPCHs/NoVFS and measured Editor exception mode. Preserve mismatch/refusal, provenance, failure and later actual output obligations.",
+          "primaryScopes": [
+            "S_BUILD_HOST"
+          ],
+          "independentIntegrationScopes": [
+            "I_ABI_BUILD"
+          ]
+        },
+        {
+          "id": "DEPENDENCY_TARGET_DISCOVERY_SELECTION",
+          "completeDuty": "Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state.",
+          "primaryScopes": [
+            "S_BUILD_HOST",
+            "S_TARGET_RECEIPT"
+          ],
+          "independentIntegrationScopes": [
+            "I_ABI_BUILD"
+          ]
+        }
+      ],
+      "scopeDuties": {
+        "S_VALUE": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "DEPENDENCY_TERMINAL_VALUE_ABI"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Join public Core-only UE-owned input/output ABI, private yaml headers/callbacks/exception containment/static artifact, copied source/header/license identity and parser/probe include/definition/link isolation to the terminal CRT/C++/exception/static-definition flags. S_VALUE inspects complete BODY001-012/014-015 as assigned and complete wrapper CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags alongside its existing fixture/native units. Assess the literal terminal checks and their interface assumptions; full inherited target/configuration/catalog/compiler engine internals are separately owned below."
+        },
+        "S_BUILD_HOST": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "DEPENDENCY_TERMINAL_VALUE_ABI",
+            "DEPENDENCY_BUILD_TOOLCHAIN",
+            "DEPENDENCY_TARGET_DISCOVERY_SELECTION"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Join public Core-only UE-owned input/output ABI, private yaml headers/callbacks/exception containment/static artifact, copied source/header/license identity and parser/probe include/definition/link isolation to the terminal CRT/C++/exception/static-definition flags. S_VALUE inspects complete BODY001-012/014-015 as assigned and complete wrapper CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags alongside its existing fixture/native units. Assess the literal terminal checks and their interface assumptions; full inherited target/configuration/catalog/compiler engine internals are separately owned below. Completely assess acquired source/header/license/tree to selected tools, CMake/RC path serialization, compiler/SDK/CRT/C++ selection, supervised dependency build, copied private static library, ModuleRules, actual response/shared-response/forced-definition/link contracts, NoPCHs/NoVFS and measured Editor exception mode. Preserve mismatch/refusal, provenance, failure and later actual output obligations. Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state."
+        },
+        "S_TARGET_RECEIPT": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "DEPENDENCY_TARGET_DISCOVERY_SELECTION"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state."
+        },
+        "I_ABI_BUILD": {
+          "dutyKind": "INDEPENDENT_INTEGRATION",
+          "atomicDutyIds": [
+            "DEPENDENCY_TERMINAL_VALUE_ABI",
+            "DEPENDENCY_BUILD_TOOLCHAIN",
+            "DEPENDENCY_TARGET_DISCOVERY_SELECTION"
+          ],
+          "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Join public Core-only UE-owned input/output ABI, private yaml headers/callbacks/exception containment/static artifact, copied source/header/license identity and parser/probe include/definition/link isolation to the terminal CRT/C++/exception/static-definition flags. S_VALUE inspects complete BODY001-012/014-015 as assigned and complete wrapper CMake-Path, CMake-Options, Check-CMake, Response-Chain, Forced-DefinitionHeaders, Macro-Values and Check-EditorFlags alongside its existing fixture/native units. Assess the literal terminal checks and their interface assumptions; full inherited target/configuration/catalog/compiler engine internals are separately owned below. Completely assess acquired source/header/license/tree to selected tools, CMake/RC path serialization, compiler/SDK/CRT/C++ selection, supervised dependency build, copied private static library, ModuleRules, actual response/shared-response/forced-definition/link contracts, NoPCHs/NoVFS and measured Editor exception mode. Preserve mismatch/refusal, provenance, failure and later actual output obligations. Completely assess inherited selector/default/dependency-hook forwarding, derived TargetRules construction, annotation-gated configuration assignments and platform finalization; concrete bBuildAllModules=false, normal non-test and alternate prebuild routes; complete BODY081/082/092/093/095 producer/scanner/cache/assembly and finite conditional/framework leaves to compiler/module/ABI selection. Assess prospective stage/process/type/source/order/cache/load witness support while retaining unexecuted actual configuration and native state."
+        }
+      }
+    },
+    {
+      "id": "STAGED_CLIENT",
+      "primaryScopes": [
+        "S_CLIENT",
+        "S_TARGET_RECEIPT",
+        "S_BUILD_HOST"
+      ],
+      "independentIntegrationScopes": [
+        "I_ACTIVATION"
+      ],
+      "completeDuty": "Every33 staged member/full body/include/UHT/build/test/config/entry route and preserved client/Core-authority behavior. Include the complete normal RulesCompiler discovery/cache/assembly producer BODY095 with reused081/082/092/093, prospective contracts for later actual staged-source/type/order/cache/load witnesses and finite conditional/framework leaves; source visibility and static matches are not actual execution.",
+      "atomicDuties": [
+        {
+          "id": "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+          "completeDuty": "Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion.",
+          "primaryScopes": [
+            "S_CLIENT",
+            "S_BUILD_HOST",
+            "S_TARGET_RECEIPT"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        },
+        {
+          "id": "STAGED_NORMAL_DISCOVERY_PRODUCER",
+          "completeDuty": "Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations.",
+          "primaryScopes": [
+            "S_BUILD_HOST",
+            "S_TARGET_RECEIPT"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        }
+      ],
+      "scopeDuties": {
+        "S_CLIENT": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion."
+        },
+        "S_TARGET_RECEIPT": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+            "STAGED_NORMAL_DISCOVERY_PRODUCER"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion. Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations."
+        },
+        "S_BUILD_HOST": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+            "STAGED_NORMAL_DISCOVERY_PRODUCER"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion. Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations."
+        },
+        "I_ACTIVATION": {
+          "dutyKind": "INDEPENDENT_INTEGRATION",
+          "atomicDutyIds": [
+            "STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES",
+            "STAGED_NORMAL_DISCOVERY_PRODUCER"
+          ],
+          "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely join all33 frozen staged members to canonical/staged full source/header/include/UHT/conditional build/automation/test/config/entry paths and preserved external Core authority. CLIENT inspects full BODY003 module witness producer with its full client bodies and complete wrapper source/topology/held-descriptor/prelaunch/process-call/environment/witness-validator/retained-live/control-flow interfaces. Match actual parameter, descriptor, phase/run/source identity, call order, error propagation and retained predecessor contracts across those interfaces. No local handoff can rely only on another reviewer conclusion. Completely assess normal RulesCompiler discovery/cache/assembly producer BODY095 with full081/082/092/093, applicable configuration/source/extension/additional-root/Mods/Tests/Intermediate boundaries and finite leaves. Join scanner/source/type/order/cache/assembly selection to the exact33 staged paths and prospective loaded target/module source witnesses. Static source correspondence is separate from later actual staging/process/cache/load observations."
+        }
+      }
+    },
+    {
+      "id": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+      "primaryScopes": [
+        "D_SELECTORS_001_301",
+        "D_SELECTORS_302_602",
+        "D_SELECTORS_603_902",
+        "S_PLUGIN",
+        "S_TARGET_RECEIPT"
+      ],
+      "independentIntegrationScopes": [
+        "I_ACTIVATION"
+      ],
+      "completeDuty": "Complete disjoint literal/absence/identity row union1..902; all1561 reference occurrences; every material runtime/build/cross-system/default/filter/dependency/root/extension/receipt relationship over full raw inputs, including cross-partition edges and unresolved conditions.",
+      "atomicDuties": [
+        {
+          "id": "SELECTOR_LITERAL_ROWS_001_301",
+          "completeDuty": "Completely assess original record8 ordered rows1-301, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs.",
+          "primaryScopes": [
+            "D_SELECTORS_001_301"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        },
+        {
+          "id": "SELECTOR_LITERAL_ROWS_302_602",
+          "completeDuty": "Completely assess original record8 ordered rows302-602, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs.",
+          "primaryScopes": [
+            "D_SELECTORS_302_602"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        },
+        {
+          "id": "SELECTOR_LITERAL_ROWS_603_902",
+          "completeDuty": "Completely assess original record8 ordered rows603-902, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs.",
+          "primaryScopes": [
+            "D_SELECTORS_603_902"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        },
+        {
+          "id": "SELECTOR_COMPLETE_RUNTIME_GRAPH",
+          "completeDuty": "Independently assess complete runtime selection semantics over all902 nodes and1561 Plugin-reference occurrences: defaults, exact consumer-specific name/key resolution, platform/target/configuration/Program/module filters, dependency and collision/extension/root handling, project/receipt membership and conditional explicit loading. Full record9/10 catalog/field schema and every material runtime value/relationship remain required; literal partitions do not replace this assessment.",
+          "primaryScopes": [
+            "S_PLUGIN"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        },
+        {
+          "id": "SELECTOR_COMPLETE_BUILD_GRAPH",
+          "completeDuty": "Independently assess complete build-selection semantics over all902 nodes and1561 Plugin-reference occurrences, including inherited hook/defaults/configuration/target/platform initialization and every material selector/filter/dependency/default/collision/root/extension/receipt edge. Reconcile build/runtime/cross-system differences against raw data and complete applicable source; conservative closure, selected membership and actual enablement remain distinct.",
+          "primaryScopes": [
+            "S_TARGET_RECEIPT"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        }
+      ],
+      "scopeDuties": {
+        "D_SELECTORS_001_301": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "SELECTOR_LITERAL_ROWS_001_301"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess original record8 ordered rows1-301, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs."
+        },
+        "D_SELECTORS_302_602": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "SELECTOR_LITERAL_ROWS_302_602"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess original record8 ordered rows302-602, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs."
+        },
+        "D_SELECTORS_603_902": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "SELECTOR_LITERAL_ROWS_603_902"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess original record8 ordered rows603-902, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs."
+        },
+        "S_PLUGIN": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "SELECTOR_COMPLETE_RUNTIME_GRAPH"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Independently assess complete runtime selection semantics over all902 nodes and1561 Plugin-reference occurrences: defaults, exact consumer-specific name/key resolution, platform/target/configuration/Program/module filters, dependency and collision/extension/root handling, project/receipt membership and conditional explicit loading. Full record9/10 catalog/field schema and every material runtime value/relationship remain required; literal partitions do not replace this assessment."
+        },
+        "S_TARGET_RECEIPT": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "SELECTOR_COMPLETE_BUILD_GRAPH"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Independently assess complete build-selection semantics over all902 nodes and1561 Plugin-reference occurrences, including inherited hook/defaults/configuration/target/platform initialization and every material selector/filter/dependency/default/collision/root/extension/receipt edge. Reconcile build/runtime/cross-system differences against raw data and complete applicable source; conservative closure, selected membership and actual enablement remain distinct."
+        },
+        "I_ACTIVATION": {
+          "dutyKind": "INDEPENDENT_INTEGRATION",
+          "atomicDutyIds": [
+            "SELECTOR_LITERAL_ROWS_001_301",
+            "SELECTOR_LITERAL_ROWS_302_602",
+            "SELECTOR_LITERAL_ROWS_603_902",
+            "SELECTOR_COMPLETE_RUNTIME_GRAPH",
+            "SELECTOR_COMPLETE_BUILD_GRAPH"
+          ],
+          "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely assess original record8 ordered rows1-301, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs. Completely assess original record8 ordered rows302-602, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs. Completely assess original record8 ordered rows603-902, every selected origin identity and all49 permitted origin fields through positive policy, exact selected values/types/presence/absence/other-present names/full opaque strings/arrays/order/case. Inspect complete9/10 and relationship7/11/12; identify every incoming/outgoing Plugin-reference occurrence incident to those rows, including cross-partition edges, without importing peer tables or graphs. Independently assess complete runtime selection semantics over all902 nodes and1561 Plugin-reference occurrences: defaults, exact consumer-specific name/key resolution, platform/target/configuration/Program/module filters, dependency and collision/extension/root handling, project/receipt membership and conditional explicit loading. Full record9/10 catalog/field schema and every material runtime value/relationship remain required; literal partitions do not replace this assessment. Independently assess complete build-selection semantics over all902 nodes and1561 Plugin-reference occurrences, including inherited hook/defaults/configuration/target/platform initialization and every material selector/filter/dependency/default/collision/root/extension/receipt edge. Reconcile build/runtime/cross-system differences against raw data and complete applicable source; conservative closure, selected membership and actual enablement remain distinct."
+        }
+      }
+    },
+    {
+      "id": "BUILD_RECEIPT_STARTUP",
+      "primaryScopes": [
+        "S_TARGET_RECEIPT",
+        "S_PLUGIN",
+        "S_BUILD_HOST"
+      ],
+      "independentIntegrationScopes": [
+        "I_ACTIVATION"
+      ],
+      "completeDuty": "Source/target/project/catalog/receipt serialization and consumption, source behavior and prospective observation of startup/environment/module loading; selected membership is not runtime enablement. Join the inherited hook and concrete target selector initialization/configuration/finalization with every material build-to-receipt-to-runtime selection edge; unknown actual configuration remains explicit. Include the complete Default startup dispatcher, ExplicitlyLoaded normal-dispatch exclusions, explicit load/mount implementation, phase iteration/error propagation and finite material callers with their applicable gates. No catalog-wide actual execution or unconditional activation follows from available source. Include the complete normal RulesCompiler discovery/cache/assembly producer BODY095 with reused081/082/092/093, prospective contracts for later actual staged-source/type/order/cache/load witnesses and finite conditional/framework leaves; source visibility and static matches are not actual execution.",
+      "atomicDuties": [
+        {
+          "id": "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+          "completeDuty": "Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state.",
+          "primaryScopes": [
+            "S_BUILD_HOST",
+            "S_TARGET_RECEIPT"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        },
+        {
+          "id": "BUILD_RECEIPT_RUNTIME_STARTUP",
+          "completeDuty": "Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source.",
+          "primaryScopes": [
+            "S_TARGET_RECEIPT",
+            "S_PLUGIN"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        }
+      ],
+      "scopeDuties": {
+        "S_TARGET_RECEIPT": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+            "BUILD_RECEIPT_RUNTIME_STARTUP"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state. Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source."
+        },
+        "S_PLUGIN": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "BUILD_RECEIPT_RUNTIME_STARTUP"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source."
+        },
+        "S_BUILD_HOST": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "BUILD_RECEIPT_UPSTREAM_PRODUCER"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state."
+        },
+        "I_ACTIVATION": {
+          "dutyKind": "INDEPENDENT_INTEGRATION",
+          "atomicDutyIds": [
+            "BUILD_RECEIPT_UPSTREAM_PRODUCER",
+            "BUILD_RECEIPT_RUNTIME_STARTUP"
+          ],
+          "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely join exact source/project/target membership, inherited hook and selector initialization/configuration/finalization, complete normal discovery/cache/assembly BODY095 with081/082/092/093, alternate all-modules setup, build-time plugin/module selection and receipt serialization to the downstream receipt contract. Preserve finite branch/framework leaves and prospective observation of actual effective target/source/type/cache/order state. Completely assess receipt consumption, launch/environment/command insertion, project/catalog/receipt/runtime module selection and complete BODY094 Default dispatcher, normal ExplicitlyLoaded exclusions, explicit load/mount implementation, applicable public/private declarations/default arguments, phase iteration/error propagation and finite material callers with their platform/configuration/test/feature gates. Join actual upstream receipt fields at the interface; upstream compiler/discovery internals remain the explicit upstream atom. No unconditional activation or catalog-wide actual execution follows from available source."
+        }
+      }
+    },
+    {
+      "id": "PROCESS_PRESERVATION",
+      "primaryScopes": [
+        "S_BUILD_HOST",
+        "S_CLIENT",
+        "S_TARGET_RECEIPT"
+      ],
+      "independentIntegrationScopes": [
+        "I_ACTIVATION"
+      ],
+      "completeDuty": "Single-phase source authority/predecessors/process/job/exit/timeout/cleanup/receiptArtifact, nine settings, six expected supervisor controls, owned DDC/source/stage/plugin/fixture/output preservation.",
+      "atomicDuties": [
+        {
+          "id": "PROCESS_COMPLETE_HARNESS_PRESERVATION",
+          "completeDuty": "Completely assess one-phase authority and predecessor binding; actual root/member/job/pipe/PID/creation/exit/timeout/cleanup and receiptArtifact contracts; all9 settings roles, all6 expected supervisor controls, owned DDC/environment/output behavior and every source/stage/project-plugin/fixture/output/partial-failure/retained-live preservation path.",
+          "primaryScopes": [
+            "S_BUILD_HOST",
+            "S_TARGET_RECEIPT"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        },
+        {
+          "id": "PROCESS_CLIENT_BOUND_INTERFACES",
+          "completeDuty": "Completely assess CLIENT interface units for Snapshot-Source, Snapshot-ProjectPlugins, Check-ProjectPluginMembership, Child-Environment, Invoke-Root, Require-RootPass, all required witness/source/held-stream/prelaunch/retention validators, Editor-Build, Native-Arguments and the complete initialization/dispatch/catch/finally/final-exit boundary. Follow exact bound inputs, source/run/phase/nonce/process identity, controlled environment and call order into and out of the owned root; verify failure propagation, lock lifetime/finally release and retained/live predecessor use. Full generic job/supervisor/catalog/compiler engine internals remain the complete-harness owners; the local interfaces must not assume their unverified success.",
+          "primaryScopes": [
+            "S_CLIENT"
+          ],
+          "independentIntegrationScopes": [
+            "I_ACTIVATION"
+          ]
+        }
+      ],
+      "scopeDuties": {
+        "S_BUILD_HOST": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "PROCESS_COMPLETE_HARNESS_PRESERVATION"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess one-phase authority and predecessor binding; actual root/member/job/pipe/PID/creation/exit/timeout/cleanup and receiptArtifact contracts; all9 settings roles, all6 expected supervisor controls, owned DDC/environment/output behavior and every source/stage/project-plugin/fixture/output/partial-failure/retained-live preservation path."
+        },
+        "S_CLIENT": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "PROCESS_CLIENT_BOUND_INTERFACES"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess CLIENT interface units for Snapshot-Source, Snapshot-ProjectPlugins, Check-ProjectPluginMembership, Child-Environment, Invoke-Root, Require-RootPass, all required witness/source/held-stream/prelaunch/retention validators, Editor-Build, Native-Arguments and the complete initialization/dispatch/catch/finally/final-exit boundary. Follow exact bound inputs, source/run/phase/nonce/process identity, controlled environment and call order into and out of the owned root; verify failure propagation, lock lifetime/finally release and retained/live predecessor use. Full generic job/supervisor/catalog/compiler engine internals remain the complete-harness owners; the local interfaces must not assume their unverified success."
+        },
+        "S_TARGET_RECEIPT": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "PROCESS_COMPLETE_HARNESS_PRESERVATION"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Completely assess one-phase authority and predecessor binding; actual root/member/job/pipe/PID/creation/exit/timeout/cleanup and receiptArtifact contracts; all9 settings roles, all6 expected supervisor controls, owned DDC/environment/output behavior and every source/stage/project-plugin/fixture/output/partial-failure/retained-live preservation path."
+        },
+        "I_ACTIVATION": {
+          "dutyKind": "INDEPENDENT_INTEGRATION",
+          "atomicDutyIds": [
+            "PROCESS_COMPLETE_HARNESS_PRESERVATION",
+            "PROCESS_CLIENT_BOUND_INTERFACES"
+          ],
+          "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Completely assess one-phase authority and predecessor binding; actual root/member/job/pipe/PID/creation/exit/timeout/cleanup and receiptArtifact contracts; all9 settings roles, all6 expected supervisor controls, owned DDC/environment/output behavior and every source/stage/project-plugin/fixture/output/partial-failure/retained-live preservation path. Completely assess CLIENT interface units for Snapshot-Source, Snapshot-ProjectPlugins, Check-ProjectPluginMembership, Child-Environment, Invoke-Root, Require-RootPass, all required witness/source/held-stream/prelaunch/retention validators, Editor-Build, Native-Arguments and the complete initialization/dispatch/catch/finally/final-exit boundary. Follow exact bound inputs, source/run/phase/nonce/process identity, controlled environment and call order into and out of the owned root; verify failure propagation, lock lifetime/finally release and retained/live predecessor use. Full generic job/supervisor/catalog/compiler engine internals remain the complete-harness owners; the local interfaces must not assume their unverified success."
+        }
+      }
+    },
+    {
+      "id": "FINITE_RULES_RUNTIME_WITNESS",
+      "primaryScopes": [
+        "S_BUILD_HOST",
+        "S_TARGET_RECEIPT"
+      ],
+      "independentIntegrationScopes": [
+        "I_ABI_BUILD",
+        "I_ACTIVATION"
+      ],
+      "completeDuty": "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented.",
+      "atomicDuties": [
+        {
+          "id": "FINITE_RULES_RUNTIME_WITNESS_COMPLETE",
+          "completeDuty": "Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented.",
+          "primaryScopes": [
+            "S_BUILD_HOST",
+            "S_TARGET_RECEIPT"
+          ],
+          "independentIntegrationScopes": [
+            "I_ABI_BUILD",
+            "I_ACTIVATION"
+          ]
+        }
+      ],
+      "scopeDuties": {
+        "S_BUILD_HOST": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+        },
+        "S_TARGET_RECEIPT": {
+          "dutyKind": "LOCAL_PRIMARY",
+          "atomicDutyIds": [
+            "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+          ],
+          "exactDuty": "Assess every owned atomic duty in full at the explicitly assigned local domain/interface. Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+        },
+        "I_ABI_BUILD": {
+          "dutyKind": "INDEPENDENT_INTEGRATION",
+          "atomicDutyIds": [
+            "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+          ],
+          "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+        },
+        "I_ACTIVATION": {
+          "dutyKind": "INDEPENDENT_INTEGRATION",
+          "atomicDutyIds": [
+            "FINITE_RULES_RUNTIME_WITNESS_COMPLETE"
+          ],
+          "exactDuty": "Independently assess every owned atomic duty in full from raw positively granted source/data, without peer findings or tables. Assess the finite rules witness source producer/consumer and BODY098 validator controls in full where assigned: exact direct owned UBT root PID/creation FILETIME/CWD/literal argv/challenge/source-lock/topology joins, supported AdditionalData bridge and live32 selectors, strict completed-Lazy/private shape/read-lock guards, actual source/map/manifest orders, retained DLL/PDB/source/MVID/debug/checksum joins and dependent live preservation. Keep the two existing required source-cache roots separate from eight optional disk absences; unobserved cache layers/chronology and source-derived first-population/FilePath-sort inferences stay explicit. Missing or unsupported material observation/preservation design blocks SOURCE; future native observations are not invented."
+        }
+      }
+    }
+  ],
+  "reviewDiscipline": {
+    "freshIndependentContextPerScope": true,
+    "resumeForkInheritedImplementationTranscript": false,
+    "privateSessionsCredentialsUnrelatedConfigs": false,
+    "authorNotesPeerReportsDataOrGraphsAsInitialInputs": false,
+    "readOnly": true,
+    "approvalPolicy": "never",
+    "memoryRequest": "disabled; requested versus actually verified recorded",
+    "scopeAccess": "Full positive global BODY/selected data; no unlisted origins or stored-command evaluation.",
+    "reading": "Complete mandatory scope, truthful substantive assessment, no sampling/arbitrary row/byte/array cap; avoid and recover truncation/EOF/parser/query errors.",
+    "delivery": "No codec is mandatory. Independently authored complete exact identity/value comparisons are permitted evidence for opaque identity strings. Full semantic selectors/absence/arrays/order/default/filter/dependency relationships require substantive interpretation, not hashes/counts alone.",
+    "materialGap": "Read necessary globally granted source/callers/data. A necessary ungranted primary requires amendment/refreeze or precise BLOCKED.",
+    "metadataPresence": "Query each selected metadata record only through its own positive field list. Test actual property presence before rendering; preserve absent, explicit null, false, arrays/order/case and complete opaque values. Neutral recovery identifies a query/rendering error and rereads permitted data accurately; discarding an earlier output does not make it unexposed or grant unselected fields.",
+    "exactCaseDataRead": "Use Ordinal (or explicitly equivalent case-sensitive) keys for any literal field-name or string-value grouping, with complete occurrence mappings back to the original selected row, array index and key. Do not merge case-different field names or string values. Before crediting a projection, independently verify complete selected values, JSON types, key presence/absence and occurrence coverage against the positively granted originals; preserve null, false, empty and singleton arrays, order, full strings and every difference or query/rendering loss. Identity/value comparisons establish data integrity only and do not by themselves establish substantive semantic review; consumer-specific case resolution needs its own source-supported interpretation.",
+    "generatedRuntimeAndInvocation": "Generated reviewer runtime, invocation, stdout, private sessions and transport outputs have no reviewer BODY grant. Root independently records actual selector/isolation, prompt/GO transmission and closed execution evidence; panel records limits of root-supplied attestation rather than inspecting ungranted generated artifacts. Existing source transport code may be inspected only through its positive BODY grants.",
+    "finiteRulesWitnessCriteria": [
+      "Before the one owned EditorBuild process, retain exact fresh staged topology, all33 canonical/staged source-member pairs and relevant scanner boundary files/absences. Acquire the approved member handles before deriving their descriptors, independently compare complete membership and frozen bytes while held. Recheck the approved source bytes and topology immediately before the owned root; retain the existing exact challenge/input/process joins. Hold all66 canonical/staged member streams against writes/deletion through exit; those handles do not prevent directory insertion or establish continuous monitoring. Keep the exact7 C# rules-source sequence distinct from the full33 member topology, retain the required cache-root/optional-absence policy, reject unexpected source/extension/additional-root/Mods/Tests/pruning inputs, and create same-run CreateNew input/topology/nonce records. The full source, hold, hash, challenge, launch and finally-release failure paths require meaningful tests of the real preparation route; stubbing that route cannot substantiate its preservation guards.",
+      "Launch the exact frozen dotnet host and UBT DLL directly as the existing owned EditorBuild root. Retain suspended creation, private-job assignment before resume, PID and creation FILETIME, bounded execution, final cleanup and failure preservation. Bind the actual CWD, literal argv, controlled host environment and runtime assembly identities. An ancestor process or aggregate final job zero cannot substitute for the actual observed CLR process identity. A direct UBT invocation bypasses batch rebuilding/SDK-selection branches; do not claim those branches or `dotnet --version` executed. Keep actual CLR/runtime observations distinct from hash-bound installed SDK metadata.",
+      "The dedicated target retains its actual object/type and constructor-stage values through the supported AdditionalData bridge. At module construction after CreateTargetRules validation, observe that same target object and its live finite selector vector, including bBuildAllModules=false. Bind exact concrete target and module CLR types, their loaded assembly identity/location/MVID and source maps. Constructor values alone do not establish the later selector values or native compile environment. Refuse unexpected specialization, object/process mismatch, occupied/replaced bridge, unsupported selector or nonfrozen source.",
+      "Observe the already completed project RulesAssembly and its finite discovery cache poststate without constructing another assembly, forcing another Lazy, populating or invalidating caches, or running discovery again. Guard exact pinned private field/type shapes and read synchronization. Preserve actual project name maps, source arrays, roots, pruning/scan state and parent assembly lineage. An uncreated, absent, ambiguous or unsupported required state fails the proof.",
+      "Keep observed orders distinct: finite cache/name-map enumeration, actual AssemblySourceFiles enumeration and raw manifest SourceFiles array are separate facts. The compiler's FilePath sort is a source-derived expectation with its runtime comparer/culture inputs; it is not a captured internal syntax-tree event. Fresh owned process plus preabsence, materialized cache state and exact produced assembly/source identities support a bounded, source-supported first-population inference for this finite normal invocation. Do not label this chronological scan tracing or an observation of every cache hit, invalidation, temporary member or internal traversal. Unobserved cache layers remain explicit. No universal UBT/process/filesystem isolation claim follows.",
+      "Retain the actual project BuildRules DLL, portable PDB and ModuleRulesManifest bytes, their ordered source membership and exact input checksums. Validate the loaded MVID against metadata-only PE parsing of retained bytes, the DLL/PDB debug identity and every PDB document/checksum against the approved source. Never load the generated assembly into the wrapper to validate it. Observe the compiled source association without relabelling PDB document order as private compiler order. Preserve exact original/copy bindings and independently recheck the live named stage outputs in subsequent dependent phases.",
+      "EditorBuild success requires all process/input/challenge/type/selector/cache/ source/artifact/retention joins and the existing vendor/compiler/native-flag/ target-receipt checks. Missing, truncated, unsupported, mismatched or drifting evidence fails visibly. Preserve partial witnesses and generated artifacts after failure; a retention error is secondary to an existing primary failure. No completion or dependent phase follows an uncertain chain. A local producer witness is not cryptographic hostile-user attestation, native parser success, plugin activation or final acceptance.",
+      "Meaningful pure validator fixtures must cover positive complete joins and rejection of PID reuse/creation mismatch, wrong process/CWD/argv, challenge or cross-run swaps, wrong type/assembly/MVID, missing PDB/manifest, checksum/source/ order/selector mismatch, case-colliding JSON keys, unexpected topology/cache shapes, retained/live drift and primary-plus-secondary failure preservation. Pure fixtures prove validator behavior; they do not establish an installed UBT run, native execution or actual cache/API accessibility.",
+      "cppStandard/defaultBuildSettings/includeOrderVersion use canonical nameof tags only after exact live enum equality guards; do not presume Enum.ToString chooses a unique alias name. Bind repaired BODY001 SHA256 F2FDB5F36BCAE08FFCCF5A2B74C65A9F26062BE31626F0869C83714EF504D23C /88 rows."
+    ],
+    "localJoinAssignment": "For each join, scopeDuties[own scopeId].exactDuty and the complete owned atomicDuties are the applicable local mandatory relationship duties. The global completeDuty is nonassigning aggregate context; ownership is explicit, not inherited through membership in a global join. Mandatory full bodies, complete units and selected-data duties remain cumulative. Follow necessary globally granted raw interfaces and report a material gap; another scope report or conclusion cannot establish the local interface."
+  },
+  "launchBinding": {
+    "transport": "Use hash-bound selected launcher/runtime full-prompt enforcement and the exact per-scope review deadlines below; actual runtime/isolation remains separately verified.",
+    "requiredRootPrelaunchChecks": [
+      "Exact subject/freeze/campaign/scope IDs match root-authorized manifest, policy, coverage, bootstrap and complete actual prompt hashes.",
+      "Actual prompt supplies this scope complete local duties/global access and matching ROOT GO without peer/author context.",
+      "Fresh exact scope directory/context and clean instruction entry, actual runtime/isolation/settings captured, no inherited context or retry.",
+      "Root prospectively binds the exact three common criteria metadata files and supplies a neutral own-runtime/isolation attestation if needed. Generated runtime/invocation/session/output BODY remains ungranted; later root postclose verification is separate from panel source assessment.",
+      "Deliver the SOURCE-stage boundary and all bindingRequirements directly in the complete actual prompt with the own scope and full contract; a link or hash alone is insufficient. Preserve every later native observation and acceptance obligation.",
+      "Validate the exact global-to-local atomic duty projection in own scope, coverage and complete actual prompt; no global completeDuty is silently assigned as every primary local obligation. Reject unresolved sourceBindingDerivation, any pending complete unit/hash/count, missing atom/owner/interface or mismatching scope projection."
+    ],
+    "reviewDeadlineSecondsByScope": {
+      "S_VALUE": 1800,
+      "S_BUILD_HOST": 5400,
+      "S_TARGET_RECEIPT": 5400,
+      "S_PLUGIN": 5400,
+      "S_CLIENT": 1800,
+      "I_ABI_BUILD": 5400,
+      "I_ACTIVATION": 5400,
+      "D_SELECTORS_001_301": 1800,
+      "D_SELECTORS_302_602": 1800,
+      "D_SELECTORS_603_902": 1800
+    },
+    "reviewLaunchAuthority": false,
+    "actualGo": false
+  },
+  "aggregateSourceGate": {
+    "requiredScopeIds": [
+      "S_VALUE",
+      "S_BUILD_HOST",
+      "S_TARGET_RECEIPT",
+      "S_PLUGIN",
+      "S_CLIENT",
+      "I_ABI_BUILD",
+      "I_ACTIVATION",
+      "D_SELECTORS_001_301",
+      "D_SELECTORS_302_602",
+      "D_SELECTORS_603_902"
+    ],
+    "requirement": "Every one of the ten independently valid complete scoped assessments must PASS without unresolved material or administrative blockers; all primary/common/interface/data/graph duties complete.",
+    "reportRecordKind": "ROOT_AGGREGATED_SCOPED_SOURCE_DISPOSITION",
+    "reportDescription": "Labelled root aggregate JSON, not a single independent all-source reviewer report.",
+    "requiredAggregateEvidence": [
+      "Every immutable raw scoped report and exact subject/scope/prompt/runtime/isolation evidence.",
+      "Actual substantive primary/interface/selected-value/partition/material-relationship assessment and disclosure/error/truncation recovery evidence.",
+      "Complete98 primary/common BODY union; exact actual physical rows remain unresolved until repaired wrapper/test and refreshed clean norms are adopted and derived. Complete13 selected-record ownership,902 disjoint-row union,49 origin-field and all1561 full-graph reference duties remain required. Validate the complete atomic duty union and every explicit primary plus independent integration owner; count/hash matches do not establish substantive assessment.",
+      "Explicit unresolved finding dispositions and current affected-approval bindings."
+    ],
+    "enforcement": "ROOT_ENFORCED_BEFORE_ANY_PHASE",
+    "automaticWrapperChildValidationClaimed": false,
+    "wrapperChangeRequiredByThisContract": false,
+    "sourceReviewedMapping": {
+      "status": "PENDING",
+      "sourceHead": null,
+      "freezeManifestSha256": null,
+      "report": null,
+      "reportMeaning": "Descriptor of the labelled root aggregate JSON, containing all raw reports/isolation/coverage evidence.",
+      "pluginClosureReviewed": null,
+      "dependencyAndHarnessReviewed": null
+    },
+    "materialChange": "Rebind/refreeze and obtain current affected primary/data/integration assessments; no inconsistent scope or stale report can enter the aggregate."
+  },
+  "scopeReportRequirements": [
+    "Exact subject, campaign/scope identity, raw verdict, independence/runtime evidence, actual complete versus unread scope and material findings/limitations.",
+    "A local scoped PASS is not an aggregate SOURCE gate or native/final acceptance.",
+    "Preserve raw reports; root aggregation records composition, never rewrites a raw verdict.",
+    "Report substantive assessment of the concrete bBuildAllModules pin, applicable effective configuration/derived construction/finalization, normal non-test target discovery and alternate prebuild/all-modules routes where assigned. State unsupported or unexecuted actual-value claims explicitly.",
+    "Report substantive complete Default startup and explicit load/mount phase/error behavior and finite material caller/gate assessment where assigned. Separate source-supported conditional routes, selected membership and actual observed activation; no universal all-plugins execution claim.",
+    "Explicitly separate source design/support conclusions and future native observation obligations. A SOURCE PASS permits only the bounded prospective design to proceed through the separate root gate; it proves no runtime result. Concrete missing source, unsafe or inadequate observation design, unassessed material duties and contradictory source remain blockers.",
+    "Where assigned, report substantive finite rules witness producer/validator/test assessment including all strict failure/preservation paths, fresh direct-process and artifact/source joins, two materialized cache roots versus optional disk absences, and every source-supported inference/unobserved layer. Distinguish pure validator/static semantic evidence from actual Rules/UBT/native observations. BODY098 must receive complete BUILD primary assessment and TARGET/both integration overlap.",
+    "Report each applicable scopeDuties exact local duty and owned atomic obligation as substantively complete or explicitly incomplete. Distinguish local interfaces from separately owned full domains without claiming another report supplied their evidence. The root aggregate must still establish every complete global join with its primary and independent integration owners."
+  ],
+  "separateGates": "Actual single-phase GO and runtime evidence remain separate. Final independent CODE and a different REQ, A1G/A2/HUD/Linux/packaging requirements remain unchanged.",
+  "rootAdoption": false,
+  "reviewLaunchAuthority": false,
+  "phaseAuthority": false,
+  "nativeExecutionAuthority": false,
+  "actualGo": false
+}

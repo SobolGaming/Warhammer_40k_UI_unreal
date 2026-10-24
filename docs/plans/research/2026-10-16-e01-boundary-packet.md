@@ -1,20 +1,368 @@
 # E01-WIN-BOUNDARY: selected Core boundary proof packet
 
-Date: 2026-10-16. Disposition: **PREPARED; executable phases NOT RUN**.
+Date: 2026-10-16. Packet revision: **7; complete current editor-settings preservation evidence**.
 This packet refines Section 0 RQ03/RQ06/RQ08/RQ15/RQ17/RQ20/RQ23 of the
 [canonical plan](../unreal-migration-plan.md). It credits completed BOOT01 and
 defines the next bounded Windows proof. It does not claim full E01, M01,
 G-RESEARCH, G-IMPLEMENT, rendering, packaging or cross-platform acceptance.
+
+## Revision 7: required current editor-settings observations
+
+The same OWN14/OWN15 scope, budgets and file contract apply. Normal run
+`20261017T030835Z-0d4af4e2` passed its actual tests but omitted the six-path
+editor-settings before/after observations required below. Its raw Native PASS
+does not establish that missing preservation criterion. Keep that result and gap
+unchanged; historical snapshots cannot substitute for current observations.
+
+Complete the maintained Native guard in `Invoke-E01BoundaryProof.ps1`: record
+all six editor-setting existence/hash observations before the build and after
+Native work. Derive the configured engine, project and user roots; retain both
+profile Documents and the actual known Documents observations. Give observations
+stable identities so coincident paths do not discard a required observation.
+Reject changed path, existence, hash or membership. Do not create or modify any
+observed global path. Keep the existing authored Config and UBT guards, ABSLOG,
+nowrite, owned DDC and process limits. Preserve the primary phase failure and
+available after-observations if native execution fails.
+
+Retain credential-safe error type, inspection stage and specific secondary
+details for unavailable observations and failed after-observation providers or
+comparisons. A generic replacement alone is insufficient evidence. The adjacent
+owned-process caller must preserve its original timeout/read/phase error through
+termination, waiting and finalization faults, recording those secondary failures
+separately. Final process records must distinguish confirmed exit from unavailable
+exit evidence. Test the caller-level failure path with synthetic owned handles;
+do not start a real host, compiler or editor for these guard controls.
+Check raw diagnostic and export string values before JSON escaping, including
+nested values and keys. Escaped representation alone cannot establish that an
+exact known credential is absent. Include quote, backslash and control-character
+secret controls and inspect decoded retained values.
+Outer result export and each lock finalizer must also be independent: preserve
+the primary disposition and safe secondary context through a surviving channel
+when export fails. Retain partial/failed artifacts, and prevent a failed
+finalization from leaving a PASS artifact usable as a successful predecessor.
+Synthetic export, lock and log-factory faults must verify these paths without
+invoking the real phase dispatcher or altering global settings.
+
+Extend only the maintained pure PowerShell guard tests with synthetic unchanged,
+changed, appeared/disappeared, missing/duplicate and substituted-path controls.
+They must not mutate actual settings or invoke the phase dispatcher/Core/Unreal.
+Retain genuine process/exit/log provenance for their new execution. Freeze and
+obtain a fresh affected code review before a **new full normal phase chain**;
+do not add a Capture-link exception or rerun over an existing phase. Independent
+privacy inspection/promotion and final separate CODE/REQ reviews remain required.
+This completes an existing preservation requirement; it changes no Core behavior,
+runtime ownership, budgets, platform scope or production acceptance criteria.
+
+## Revision 6: all command lanes and current-Capture native binding
+
+The same OWN14/OWN15 scope and budgets apply. Route the HTTP-only attach-worker
+finite action and supervisor lifecycle start/close through guarded submissions,
+as well as the paired main scenario. Validate before send and retain exact
+credential-free envelope, submitted role and session in ignored private control
+evidence. For the attach worker, retain the authorized actor's actual request/view
+before submission. Never export that view under a denied principal or as public
+wire. A possibly submitted command without a complete receipt is UNKNOWN; latch
+the lane abandoned and do not send another command or automatic retry.
+
+The worker must communicate a typed terminal result distinguishing accepted,
+known rejected/preparation failure and unknown completion. Preserve actual
+received outcomes privately; the parent's result must propagate UNKNOWN rather
+than treating a possibly committed action as an ordinary known failure. A killed
+worker or absent terminal receipt cannot establish rollback. Abandon the session
+and retain ownership/cleanup evidence. Add a complete safe attach-worker process
+record (executable/script identities, arguments, PID, start/exit, exit/timeout,
+limits and cleanup) to the actual owned-process inventory. Earlier captures lack
+that structured worker record; do not invent a historical PID or retrofit them.
+
+The terminal-result trust boundary includes missing, unreadable, truncated,
+invalidly typed or inconsistent JSON, identity/status/receipt fields and artifact
+descriptors. Preserve a safe raw-file descriptor/hash where possible and classify
+unusable terminal evidence UNKNOWN unless a complete validated receipt already
+establishes a known outcome. Retain that known outcome through a later evidence
+failure; an artifact-write failure does not erase an already validated receipt.
+Test malformed syntax, wrong identities/statuses/flags, artifact failures paired
+with UNKNOWN and valid known outcomes, with zero downstream submissions.
+
+A complete command receipt must have coherent session/checkpoint revision,
+projection hash and cursor and match the retained command/session/operation.
+Perform this validation inside every submission guard; identical unusable
+local/HTTP responses do not establish completion. Preserve a validated worker
+outcome when later receipt-file persistence leaves an absent, partially written
+or unreadable artifact, while reporting the evidence failure and stopping.
+Keep Python/native classification aligned for both proposal_invalid and
+rule_path_unsupported HTTP422 error envelopes. Add focused negative/known controls
+and corresponding native classifier assertions within the existing test case.
+
+Apply the same receipt discipline to the two existing session-create calls:
+retain their exact generated configuration and submitted administrator scope
+privately before send, mark possible response loss UNKNOWN, and stop without
+downstream start/action/retry. This API has no supported creation idempotency;
+do not invent a command ID/key or recreate the session to conceal uncertainty.
+Validate the complete actual creation metadata against the frozen schema,
+configured game, submitted ruleset descriptor hash and pinned build/contract/admin
+scope before any later command.
+This adjacent failure-control repair changes no Core API or hosting capability.
+
+Native receipt consistency includes event-range end and session/checkpoint viewer
+scope, matching the Python guard. Keep known valid controls and reject mismatches.
+Owned host stop must retain handle-based cleanup, closed logs and a finalized
+process ledger even if writing its shutdown marker fails. Test marker failure
+without a real host. Deeply nested unusable terminal JSON must become a typed
+UNKNOWN with process evidence retained and no dependent submission; use a real
+parser failure control. These repairs add no host or game capabilities.
+Apply the same primary-UNKNOWN and final-ledger discipline to every attach-worker
+poll, terminate, kill and wait path, including timeout cleanup and finally cleanup.
+Record safe cleanup errors separately; they cannot erase the original unknown
+outcome or permit dependent commands. Test each affected owned-handle boundary.
+
+For the normal fresh chain, Native must bind its reviewed versioned wire index
+and every body to **this run's** successful Capture report/artifact hashes before
+building. Verify exact predecessor, child-report, runtime/source identities,
+nonempty required case counts, safe paths and complete case/role/metadata/body
+membership. Matching a versioned index only against itself is insufficient.
+Persist the Capture→promotion→Native binding, recheck it after Native, and require
+Audit to revalidate that same binding before/after its work. Reject a stale index,
+substituted body or changed Capture artifact even when its own index is coherent.
+Retain independent privacy approval before promotion and Native execution.
+
+The historical explicit revision4 link remains restricted to its original inputs
+and cannot bypass current-source guards. The current candidate must use a fresh
+full chain without `-CaptureRunId`. Add focused response-loss worker/lifecycle
+tests and matching/stale/mutated fixture-binding regressions using owned isolated
+test fixtures only. No new Core host, production transport or broader gameplay
+work is authorized. Re-freeze and obtain fresh source review before execution;
+final code/requirements reviews cover the final promoted fixtures and evidence.
+`tests/migration/Test-E01CaptureWireBinding.ps1` extends the bounded file contract
+only for maintained standard-PowerShell guard regressions. It may use immutable
+versioned wire and isolated synthetic metadata/copies, execute read-only guard
+functions and write a unique ignored test receipt. It must not invoke the actual
+phase dispatcher, Core host, compiler, Unreal or global-setting/cache mutation.
+Label its counts as guard tests, never real-Core or native Automation cases.
+
+## Revision 5: bounded failure-path repairs and fresh full proof
+
+OWN14's 120-second diagnostic and OWN15's independent reviews remain the
+authority. The initial independent code review requested two repairs: retain the
+finite command's complete actor-scoped envelope before submission and abandon a
+failed/uncertain session before any dependent group runs; enforce the absolute
+HTTP deadline on every underlying status/header/body receive and send operation.
+Do not infer that a lost receipt means rollback. Mark command completion UNKNOWN
+when submission may have reached a transport, retain its original command identity
+and authorized scope, and mark subsequent groups BLOCKED without invoking them.
+There is no automatic new-ID retry or private reconciliation path.
+Retain a credential-free pre-send control ledger for every schema-valid submitted
+envelope, including lifecycle/denied/stale lanes, under the run's ignored private
+output. It records only the envelope, submitted role and session; it grants no
+viewer access and cannot enter public wire fixtures. Full projection snapshots
+remain restricted to the bound authorized actor. Explicitly close the acquired
+HTTP response and connection on success or failure, including detached HTTP/1.0
+response-file ownership.
+
+The permitted implementation paths remain the existing Python harness and unit
+tests. Add short-budget loopback transport tests for partial/trickled headers,
+informational responses, HTTP/1.0 bodies, chunks and the readiness override, plus a
+commit-before-timeout regression proving zero later group callbacks/submissions.
+These test-only responders exercise HTTP transport; they are not a new Core host
+or live-Core integration evidence. Keep production request/connect/readiness,
+body/submission/process limits and credential/path/cleanup guards unchanged.
+Local isolated unit verification may run during remediation; review the frozen
+changed source before a new Core Capture or native phase.
+
+Changing harness/test bytes invalidates their affected Capture binding. After
+review, use a **fresh full Preflight → PrepareRuntime → Capture → Native → Audit
+chain**, with a new RunId and verified reuse of the same owned runtime. Do not use
+`-CaptureRunId` for this candidate. Revision4's historical supplement remains
+immutable evidence for its old source; its unchanged-harness guard must reject
+reuse against the repaired source. Preserve all earlier failed and successful
+records, including the original30-second FAIL/UNKNOWN. Independently review the
+new non-admin original-byte wire set before promotion and Native execution.
+
+The initial requirements auditor independently corroborated the earlier bounded
+protocol/native/configuration evidence but lacked the raw process ledgers in its
+selected review packet. Supply provenance-bound, credential-free extracts of the
+original wrapper and owned-host process records: executable/script identities,
+argument arrays, PID, start/exit, exit code, timeout, readiness and shutdown facts.
+Record the source path/SHA and selection method; derived extracts are not original
+bytes. Include complete phase process inventories. Never expose credentials,
+privileged bodies or quarantined generated configuration. Correct the canonical
+plan's mixed line endings and bind the new hash. This evidence correction alone
+does not require runtime reruns; the source repairs above require the new chain.
+
+Save the initial CHANGES_REQUESTED and BLOCKED reports unchanged. Obtain fresh
+independent code and requirements reviews of the repaired final candidate under
+OWN15; neither prior runtime success nor auxiliary inspection supplies acceptance.
+The additional documentation outputs `2026-10-17-e01-slow120-code-review-rN.md`
+and `2026-10-17-e01-slow120-requirements-rN.md` in this research directory preserve
+the respective original CLI report bytes for each review round, with invocation/
+runtime provenance recorded separately. Copying a report is not a recorder's
+independent verdict. Do not supply earlier reports to a new initial assessment.
+The root `.gitattributes` may bind only these review report patterns to `-text`
+so Git preserves their original bytes, and the canonical plan to `text eol=lf`
+so the audited line-ending correction stays consistent. No broader storage or
+asset policy change is permitted by this amendment.
+The original code-review report includes intentional Markdown two-space hard
+breaks. Preserve those bytes with a `whitespace=-blank-at-eol` attribute limited
+to that report pattern; implementation and other documentation checks retain
+their ordinary whitespace checks.
+The result remains a bounded slow-host diagnostic, with production responsiveness,
+UE transport, rendering, packaging, Linux and full E01 explicitly unaccepted.
+
+## Revision 4: native-only supplement linked to immutable Capture
+
+OWN14 covers completing this same diagnostic. Run
+`20261017T002136Z-8dad7f29` passed Capture (40 Python tests and all14 boundary
+cases). Native then built successfully and actually exported132 successful
+Automation cases, with zero failed/incomplete cases and child exits0. Its
+wrapper result remains **FAIL** because `-LOG=<absolute>` did not create the
+expected main log. Do not rewrite that result or infer direct DDC log evidence.
+
+The separately reviewed correction permits a **fresh Native/Audit supplement**
+with its own RunId, Preflight and verified-runtime preparation, and optional
+`-CaptureRunId 20261017T002136Z-8dad7f29` on Native and Audit only. This mode reads
+the successful old Capture as immutable evidence. It creates no replacement
+Capture result, launches no Core host and submits no game commands. It is not a
+general resume mechanism or a reuse of the stopped mutable session. Retain the
+normal full phase chain when this explicit parameter is absent.
+
+The link is restricted to these exact inputs:
+
+| Input | Required SHA256 |
+| --- | --- |
+| Successful Capture `capture/result.json` | `137CEAAA5A3B85F3A49193525EEB198AEDAF28A113B7F760DA66081D5983E699` |
+| Python Capture `report.json` | `C99109764C6708889F2DC365696D03A9FD987465DD6E5D71F108A794223530A0` |
+| Independently approved original-byte wire index | `E1658B116E6ED53F84CEE84B3D8A5C1ADFD3DED3FA225DB61D80D21D9953DF0A` |
+| Historical revision3 packet recorded by Capture | `D540CF96F8513833C4C708A7104F520554E8244B4502ED7A49D5F695EBE90C76` |
+| Historical wrapper recorded by Capture | `F3B2A938A1F314EE5FF6D39B77FADB73CB3D5E1D5E92A562957305759ACBA2DC` |
+
+Validate the linked result/status/run identity,40-unit and14-case PASS counts,
+child-report hashes, reviewed index and bodies, exact clean siblings and installed
+runtime provenance/tree. The linked candidate contains exactly the historical
+wrapper/packet plus the unchanged harness, tests and source manifest. Only the
+two explicitly historical wrapper/packet hashes may differ from current files;
+the other three must still match. Freeze and independently review the current
+packet/wrapper before the new Preflight. Native freezes current C++/descriptor/
+target/fixture bytes and rechecks all ordinary toolchain, runtime, ownership,
+positive-count and post-execution guards. Audit revalidates the same explicit
+Capture link and writes its new report only beneath the new run. It must not
+silently fall back to a different input or overwrite an earlier report.
+
+Use `-ABSLOG=<new-run>/native-automation.log` and `-nowrite` for Native. In the
+installed UE5.8.3/CL58210709 source, `GenericPlatformOutputDevices.cpp:75–129`
+concatenates `LOG=` to ProjectLogDir but clears that prefix for `ABSLOG=`;
+`ConfigCacheIni.cpp:1320–1332,2682` suppresses configuration saves for `nowrite`.
+Raw source SHA256 respectively:
+`AB8D8B6B5145A76AD8420BA6744A4395001E3F281E795162FC7B08345358D2DF`
+and `7F4871539400DB4CF9F60CD08D8B3515E3F077D75D255305A2700799FD622DBF`.
+These flags do not confine all settings reads or build/cache writes. Inspect the
+actual new main log for the owned Local DDC path and reject fallback. Keep all
+existing process/body/output bounds and nonempty132-case expectations.
+
+The failed Native attempt created previously absent
+`C:/Users/Rabid/AppData/Local/UnrealEngine/5.8/Saved/Config/WindowsEditor/EditorSettings.ini`,
+SHA256 `B7E47645C8169E0C05AB6AD43F99F4529D33CD12EF019432FA56BD9F994B464E`.
+It records the recent project and empty DDC overrides. Preserve it; do not delete
+it to hide the side effect. `EditorEngine.cpp:5861–5893` updates recent projects
+and invokes PostEditChange; source SHA256
+`89BD1C17FA9DA8463F0039BE8F3E483238C025E726C4274221D6FF51DCD6EF6A`.
+The other five observed editor configurations were unchanged. Before the new
+Native run, freeze all six current existence/hash observations, including this
+new file, and require them unchanged afterward. Preserve existing UBT settings
+and verify the ordinary before/after guard too. No global setting edit is an
+authorized repair.
+
+The same first Editor startup also added default Android file-server settings
+with a generated credential to `Config/DefaultEngine.ini` and created
+`Config/DefaultInput.ini`. Their original bytes are quarantined only under the
+failed run's ignored `native-generated-config/`; exclude their contents from
+public evidence and commits. After verifying those copies, restore only the
+attempt's changes: tracked DefaultEngine from HEAD and the previously absent
+DefaultInput to absence. Record that recovery without removing failure evidence.
+For the supplement, freeze every authored Config INI and its exact file set,
+then require all bytes and membership unchanged after execution. `-nowrite`
+must be checked in actual execution, rather than assumed from source support.
+
+Example from the repository root, after freezing/reviewing the supplement:
+
+```powershell
+$taskNativeRunId = (Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssZ') + '-' + [guid]::NewGuid().ToString('N').Substring(0, 8)
+& ./scripts/migration/Invoke-E01BoundaryProof.ps1 -Phase Preflight -RunId $taskNativeRunId
+& ./scripts/migration/Invoke-E01BoundaryProof.ps1 -Phase PrepareRuntime -RunId $taskNativeRunId
+& ./scripts/migration/Invoke-E01BoundaryProof.ps1 -Phase Native -RunId $taskNativeRunId -CaptureRunId 20261017T002136Z-8dad7f29
+& ./scripts/migration/Invoke-E01BoundaryProof.ps1 -Phase Audit -RunId $taskNativeRunId -CaptureRunId 20261017T002136Z-8dad7f29
+```
+
+Record actual command/status/counts and explicit linked provenance in the new
+result/audit. Prior Native FAIL, original30-second FAIL/UNKNOWN and first
+SLOW120 attempt remain unchanged. This supplement does not grant production
+transport, rendering, packaging, Linux or broader implementation acceptance.
+
+## Revision 3: separately labelled 120-second diagnostic
+
+**OWN14, 2026-10-16:** the owner instructed, “Please go ahead with the increased
+120 diagnostic,” after the coordinator explained the late Core response and
+unknown client-visible outcome. This authorizes a fresh **E01-SLOW120** run of
+this same public-protocol recipe, with a **120-second total HTTP request budget**
+and socket waits capped by its remaining time. Keep the three-second connect cap,
+30-second managed-host readiness budget, 30-minute process limits, request/response
+size caps, submission limits, credential isolation and owned cleanup unchanged.
+No Core edits, new host, private rules path, uncertain-session reuse or automatic
+new-ID retry is authorized. Freeze and independently review the affected source
+before execution; use a new RunId and verified reuse of the existing runtime.
+
+Revision 2 SHA256 was
+`DA568F9BFAE7666C1CECB549B2A05B7930F5341541E25FDB96A6F08CF27B7C1F`.
+Run `20261016T231112Z-f8ef82ca` remains **FAIL**, with its missing command receipt
+**UNKNOWN**. Its [result JSON](../evidence/2026-10-16-e01-boundary-result.json) and
+[NOT_ACCEPTED audit](2026-10-16-e01-boundary-acceptance-audit.md) are immutable
+evidence for that earlier candidate. A slow-host success must never be reported
+as satisfying the 30-second budget or resolving Core #590's latency concerns.
+
+Label the new Python reports and transport measurements **E01-SLOW120**. Record
+new outcomes separately in the execution journal, with any final machine-readable
+summary at `docs/plans/evidence/2026-10-16-e01-slow120-result.json` and a renewed
+independent audit at
+`docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md`. These two added
+documentation outputs extend the bounded file contract below; they do not permit
+rewriting old failed results. A successful Capture still needs independent
+viewer/privacy approval of the concrete non-admin original-byte wire fixtures
+before promotion and Native execution. Native/Audit retain their positive-count,
+frozen-source, actual-cache-path and settings-preservation requirements. Render,
+UE HTTP, packaging, Linux, RISK19 and robust live Windows exclusivity remain open.
+
+## Revision 2 execution amendments
+
+The original reviewed packet SHA256 was
+`B263A3AE8567FBDE8E6CAB0F2A7C3024F1F0D4E7516DEAA875DAECB6681775C0`.
+Earlier runs retain that identity and their failures in the
+[execution journal](../evidence/2026-10-16-e01-boundary.md). The runtime is now
+installed and verified, PR1 is merged, and proposed source files exist. Initial
+preparation/future-tense descriptions below describe the experiment design, not
+the current execution result; the journal governs actual results.
+
+Run `20261016T230019Z-9a9e3232` passed 34 Python unit tests but its movement group
+timed out at the 10-second socket-read limit. The development host later logged
+HTTP 200 and a disconnected-client write error; action completion was not proved
+by that failed request. Revision 2 raised the read cap to **30 seconds**,
+bounded by its **30-second total request deadline** and 3-second
+connect cap. It does not retry the uncertain action in the old session, change
+Core or relax size/submission limits. Review the changed source before execution.
+
+Independent [source review](2026-10-16-e01-boundary-review.md) also requires the
+Python classifier to preserve valid `accepted:false, committed:false` command
+outcomes and route their schema separately from error envelopes. Refuse any
+`.pyc` found in the owned runtime rather than omit loadable bytecode from its
+fingerprint. Preserve the existing zero-bytecode environment and its provenance.
+These repairs remain within this packet's protocol/runtime verification scope.
 
 The owner instructed: “open the PR, commit, push, and merge the PR, then continue
 with the migration plan.” **OWN13 covers this next bounded E01 continuation after
 the requested PR/merge sequence; do not request repeated approval for that recorded
 scope.** The coordinator owns publication and the dated authority record in the
 canonical plan/AGENTS. Review this packet and its implementation before execution.
-The current GitHub 403 blocks the requested publication sequence; source preparation
-and packet review may proceed meanwhile. Preparation of this packet is documentation
-work; its proposed scripts, native tests, environment and hosts do not yet exist
-as executed evidence. Do not ask again about settled target, user modes,
+The initial GitHub 403 was resolved by the owner's token update and PR1 merged;
+that historical access failure is not an execution failure. Initial preparation
+of this packet was documentation work; actual script/runtime/host evidence is now
+recorded separately in the journal. Do not ask again about settled target, user modes,
 topologies, diagnostic policy or deferred Linux hardware. A repository/permission
 failure is a publication blocker, not evidence of runtime failure.
 
@@ -97,6 +445,10 @@ Generated/install outputs are limited to:
 - A fresh `.local/core-44.3.33/` environment and provenance record. Refuse a
   preexisting unverified environment; a subsequent phase may reuse only the same
   verified one with unchanged installed identity/lock/source hashes.
+- `.local/core-44.3.33.e01-reservation.json`: atomic first-install ownership and
+  interruption record beside that runtime; refuse conflicting reservations and
+  preserve failed ownership evidence. It never grants ownership of a preexisting
+  unrelated environment.
 - `.local/experiments/E01-target/<UTC-yyyyMMddTHHmmssZ>-<8-hex>/`: source archive
   and extracted source copy, package/build/HTTP/native logs, temporary files,
   private role-separated raw responses, shutdown markers, cache, result manifest
@@ -132,6 +484,15 @@ Each phase checks its predecessor's explicit success, source/candidate/fixture
 hashes and environment provenance. A failure does not start subsequent phases.
 `Audit` gathers and verifies evidence; it does not substitute for independent
 human/agent code review or acceptance audit.
+
+Implementation sequencing clarification after PR1 merged: the wrapper's complete
+source/inventory checks may establish `SOURCE_INVENTORY_PASS` before the Python
+harness is finished. Missing Python preflight is explicitly `NOT_RUN` at that
+point; it is mandatory before Capture. This permits independently reviewed runtime
+preparation while Python/native code is authored. Freeze wrapper/packet/source
+inventory for preparation, Python code for Capture and native code/accepted fixture
+outputs for Native; authorized fixture outputs do not silently alter an earlier
+authored-source freeze. No phase gains an unexecuted test result from this split.
 
 1. **Preflight:** verify clean selected Core HEAD and frozen inventory; preserve
    Arcade status without changing it; inspect actual Python/uv/UE/compiler paths,
@@ -183,13 +544,16 @@ failure; never fall back to a mismatched installed Core or private source import
    fixture/output/core-launcher paths, not the process working directory. Validate
    JSON Schema references through the frozen local registry, with no network
    schema resolution. Do not execute/import Core tests or fixture generators.
+   Establish positive unit execution from the successful child exit and complete
+   anchored final Ran/OK summary, rejecting skips/failure annotations, absent or
+   ambiguous summaries. Words inside successful verbose test names are not results.
 7. **Native:** build once after native source is frozen, using the existing README
    Build.bat command and packet-local log/UBA paths. The equivalent automation
    invocation is below; the suite must first exist and enumerate a positive count.
 
 ```text
 <UE>/Engine/Build/BatchFiles/Build.bat WarhammerClientEditor Win64 Development -Project=<Unreal>/WarhammerClient.uproject -WaitMutex -NoUBA -UBARootDir=<run>/uba -Log=<run>/native-build.log
-<UE>/Engine/Binaries/Win64/UnrealEditor-Cmd.exe <Unreal>/WarhammerClient.uproject -unattended -nop4 -NullRHI -nosplash -ExecCmds="Automation RunTests Warhammer.Migration.E01Boundary" -TestExit="Automation Test Queue Empty" -ReportExportPath=<run>/automation -log=<run>/native-automation.log
+<UE>/Engine/Binaries/Win64/UnrealEditor-Cmd.exe <Unreal>/WarhammerClient.uproject -unattended -nop4 -NullRHI -nosplash -ExecCmds="Automation RunTests Warhammer.Migration.E01Boundary" -TestExit="Automation Test Queue Empty" -ReportExportPath=<run>/automation -ABSLOG=<run>/native-automation.log -nowrite -UserDir=<run>/ue-user -DDC=(EnginePak=InstalledEnginePak,Local) -DDC-NoDefaultGraph -LocalDataCachePath=<run>/ddc
 ```
 
 The installed UE5.8 AutomationCommandline.cpp accepts `RunTests`/`RunTest`
@@ -202,12 +566,20 @@ root through one documented test argument/config field; no hardcoded sibling
 dependency in normal application startup. Native test entry points remain behind
 the applicable development automation guard.
 
+Installed UE5.8 `Paths.cpp:1940–1963` supports the supplied user directory, and
+`DerivedDataBackends.cpp:698–725` accepts an inline DDC graph with default fallback
+suppressed. `BaseEngine.ini:2770–2776,2866–2878` supplies the read-only installed
+engine pak and filesystem Local store with `LocalDataCachePath` override. Record
+these actual flags and owned cache paths; no default Zen service, shared/cloud
+cache or global preference edit is needed for this logical JSON test lane.
+
 ## Sessions, ownership and bounded execution
 
 Every install/build/test/owned-host process has a **30-minute maximum** measured
 by the coordinator. Use redirected live logs and periodic progress; do not block
 communication on one long uninterruptible wait. HTTP defaults for this proof:
-3-second connect, 10-second socket read, 30-second total request deadline,
+3-second connect, at most 120-second socket read capped by remaining time in the
+120-second total request deadline for the separately labelled E01-SLOW120 diagnostic,
 16 MiB request and 64 MiB response ceilings, one authoritative command in flight,
 at most 256 setup/action submissions per scenario and eight event pages of at
 most 100 visible events each. Record actual largest bodies and latency; exceeding

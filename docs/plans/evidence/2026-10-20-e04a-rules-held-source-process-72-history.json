@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "kind": "ROOT_BOUNDED_PRIVATE_PURE_CONTROL_HOST_RECEIPT",
+  "startedUtc": "2026-10-20T11:36:12.9153459Z",
+  "completedUtc": "2026-10-20T11:36:44.4793702Z",
+  "pid": 34148,
+  "elapsedSeconds": 31.5641279,
+  "exitCode": 0,
+  "exitConfirmed": true,
+  "timedOut": false,
+  "hostCleanupConfirmed": true,
+  "childTreeInventory": "No child-process path in adopted test; OS descendant inventory not collected.",
+  "adoptionPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-repair-PROPOSED\\root-pure-controls-source-adoption.original.json",
+  "controlDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-controls-01",
+  "stdoutPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-repair-PROPOSED\\pure-control-run-01.stdout.original.txt",
+  "stderrPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-repair-PROPOSED\\pure-control-run-01.stderr.original.txt",
+  "nativePhaseInvoked": false,
+  "visibleWindowRequested": false
+}

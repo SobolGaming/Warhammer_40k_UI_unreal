@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_ADOPTED_PROSPECTIVE_E04A1E_METHOD_SELECTION_AMENDMENT_NOT_ACTUAL_BINDINGS",
+  "adoptedUtc": "2026-10-20T17:16:24.5383794+00:00",
+  "compositionVersion": 7,
+  "criteriaRevision": "7.2",
+  "currentFrozenPublicationHead": "93659c5d409a2101cce9a27a9a878cbd6e0c7b56",
+  "currentFrozenPlannedRunId": "20261020T145014Z-0c80c9c7",
+  "appliesTo": "A separately derived successor planned chain; existing P/C/E/GO artifacts retain their literal v7.1 subjects and criteria.",
+  "authority": {
+    "prospectiveMethodAndUnboundTemplateChoiceAdopted": true,
+    "cleanNormTemplateChoiceAdopted": true,
+    "actualCurrentSourceApiScopeHelperBindingsAdopted": false,
+    "successorSourceHelperChoiceAdopted": false,
+    "successorP": false,
+    "successorF": false,
+    "ownPanel": false,
+    "reviewGo": false,
+    "conditionalRetention": false,
+    "rootSourceAdmission": false,
+    "sourceVerdict": false,
+    "phaseGo": false,
+    "native": false,
+    "visibleWindows": 0,
+    "publication": false,
+    "merge": false
+  },
+  "method": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-replacement-amendment-PROPOSED\\source-composition-v7.2.PROPOSED.md",
+    "bytes": 10355,
+    "sha256": "40E1F0ECEC96FF280390EC0D710F8A9D237745CFB3FAA0847137A694A8ECFE15"
+  },
+  "cleanNormCurrentSnapshotTemplate": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-replacement-amendment-PROPOSED\\fresh-source-norms-v7.2.CURRENT-SNAPSHOT.PROPOSED.md",
+    "bytes": 20962,
+    "sha256": "DFF4C48C985E0FC6CDA36836460222E772B34AECB668EE40BFCCDEA4EABC3128"
+  },
+  "normTwoLineProvenance": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-replacement-amendment-PROPOSED\\clean-norm-amendment-provenance.PROPOSED.json",
+    "bytes": 3610,
+    "sha256": "D4EB3D69D247FD15209A34337FA1F06DA8972A57FBA4570AD3255011AFC645E0"
+  },
+  "unchangedRetainedEligibilityAndCompositionMethod": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v7.1-PROPOSED\\source-composition-v7.1.criteria.PROPOSED.md",
+    "bytes": 29955,
+    "sha256": "3339A615FDC1C322C087FAB8B64ABA78120C267AE651FA8A53C0A25D168A26C2"
+  },
+  "immutableDutyBaseline": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v7.1-PROPOSED\\v6-duty-obligation-baseline.IMMUTABLE.PROPOSED.json",
+    "bytes": 180731,
+    "sha256": "CD5473DF1A2AC49623A49441915184F545B04CF69E100A798BE62F0087609497"
+  },
+  "stoppedRouteProposalSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-targeted-fresh-fallback-route-PROPOSED\\stopped-proposal.seal.original.json",
+    "bytes": 3303,
+    "sha256": "6BFA5E6AB530A94DF630BE1D9BD7FC4CFEA7FEAACCEE1603480A08C2434738DD"
+  },
+  "stoppedInterfaceDesignSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-fresh-fallback-transport-interface-PROPOSED\\seal.PROPOSED.json",
+    "bytes": 3042,
+    "sha256": "CF24E47B53062D391B30BC3BC328A188FF11B973DF3A1223DF91323859EB608D"
+  },
+  "ordinaryMethodAudit": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-method-amendment-ordinary-audit-PROPOSED\\ordinary-method-amendment-audit.PROPOSED.md",
+    "bytes": 4440,
+    "sha256": "C0654AFE63550ABD1B9E9FE237D7D38718EE07A29C0BE9B17FE0D4BAC15C79C1"
+  },
+  "ordinaryMethodAuditSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-method-amendment-ordinary-audit-PROPOSED\\stopped-method-amendment-audit.seal.PROPOSED.json",
+    "bytes": 3183,
+    "sha256": "7A160EF2CF3ADA3E082C501152B64744658B34E1018CECF5C244FE87EE6567A8"
+  },
+  "rootDecision": [
+    "Adopt the exact prospective three-BUILD-domain and three-literal-partition replacement method, preserving all7joins/16wholeatoms/29literaloldlocalduties, cumulative whole-body/unit/data obligations, duplicate primary scrutiny and both independent witnesses.",
+    "Adopt the two-line clean fresh norm template change; its current-snapshot source/data identities are not a future actual subject. Derive the actual current norm, exact source/helper/schema/policy/spec/count/freeze/grant bindings separately before a successor P or panel.",
+    "Retain v7.1 seven-clause conditional eligibility unchanged for any actually retained VALUE/CLIENT. Missing or incomplete independent C cannot support favorable retention. With no retained selection, no new historical-C job or favorable E is required; preserve closed old C and root negative/unknown decisions as separate lineage.",
+    "Select exact5400 deadlines prospectively for the eight new names below, overriding the prior1800defaults without extending or retrying any closed launch. Existing nine complex fresh domains retain5400.",
+    "Only twelve exactly selected primary/retained predecessors may precede the five independent integrations; exactly one retained-or-fresh VALUE and CLIENT alternative is resolved before new P/F. No integration-peer dependency, C/E findings or peer report body enters the fresh blind input.",
+    "The current running VALUE_CLIENT C and all old bound artifacts are unchanged; no source or canonical file is edited by this adoption. SOURCE, aggregate, native and final CODE/different REQ remain actual later gates."
+  ],
+  "exactNewAvailableDefinitions": [
+    {
+      "scopeId": "F_B_VALUE_TOOLCHAIN",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "deadlineSeconds": 5400,
+      "availableChoiceOnly": true,
+      "actualRegisteredOrSelectedBindingEstablished": false
+    },
+    {
+      "scopeId": "F_B_RULES_WITNESS",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "deadlineSeconds": 5400,
+      "availableChoiceOnly": true,
+      "actualRegisteredOrSelectedBindingEstablished": false
+    },
+    {
+      "scopeId": "F_B_STAGE_PROCESS",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "deadlineSeconds": 5400,
+      "availableChoiceOnly": true,
+      "actualRegisteredOrSelectedBindingEstablished": false
+    },
+    {
+      "scopeId": "F_D_SELECTORS_001_301",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "deadlineSeconds": 5400,
+      "availableChoiceOnly": true,
+      "actualRegisteredOrSelectedBindingEstablished": false
+    },
+    {
+      "scopeId": "F_D_SELECTORS_302_602",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "deadlineSeconds": 5400,
+      "availableChoiceOnly": true,
+      "actualRegisteredOrSelectedBindingEstablished": false
+    },
+    {
+      "scopeId": "F_D_SELECTORS_603_902",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "deadlineSeconds": 5400,
+      "availableChoiceOnly": true,
+      "actualRegisteredOrSelectedBindingEstablished": false
+    },
+    {
+      "scopeId": "F_S_VALUE_CURRENT",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "deadlineSeconds": 5400,
+      "availableChoiceOnly": true,
+      "actualRegisteredOrSelectedBindingEstablished": false
+    },
+    {
+      "scopeId": "F_S_CLIENT_CURRENT",
+      "assessmentKind": "BLIND_SCOPED_INITIAL",
+      "nodeRole": "PRIMARY_RAW_SOURCE",
+      "deadlineSeconds": 5400,
+      "availableChoiceOnly": true,
+      "actualRegisteredOrSelectedBindingEstablished": false
+    }
+  ],
+  "referenceConservation": {
+    "globalJoins": 7,
+    "wholeAtoms": 16,
+    "literalOldLocalDuties": 29,
+    "oldBuildAtoms": 9,
+    "oldBuildRequiredWholeBodies": 41,
+    "selectedPredecessors": 12,
+    "independentIntegrations": 5,
+    "possibleNewSourceContexts": [
+      15,
+      16,
+      17
+    ],
+    "referenceWorkloadsNotFinalCounts": true
+  },
+  "rootReview": {
+    "completeMethodAndAuditNarrativesRead": true,
+    "stoppedRouteAndInterfaceHandoffsRead": true,
+    "allProposalSealMembersRehashed": true,
+    "methodAuditFinding": "NO_ACTIONABLE_FINDING_AT_METHOD_TEMPLATE_STAGE",
+    "actualSourceInterfaceAndAssignmentsPending": true
+  },
+  "standingConsent": "Owner approval for necessary private source/API reviews to the established configured OpenAI Codex destination persists until explicitly revoked. Credentials/unrelated sessions remain excluded; no new consent request is created.",
+  "nextRequiredWork": [
+    "Complete and independently inspect successor source/schema and exact raw assignments; adopt actual source choices separately.",
+    "Finish and preserve the current C operation and root decisions without changing frozen inputs.",
+    "Checkpoint coherent canonical facts after the frozen operation closes; derive actual successor current source/freeze/common/own/policy/count/grant identities.",
+    "Seal new P and exact F before selected fresh blind panels/GO; require actual post-review/runtime/reading/integration/root evidence before any phase."
+  ],
+  "immutable": true
+}

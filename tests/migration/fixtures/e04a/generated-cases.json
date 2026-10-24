@@ -1,0 +1,616 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "generated": [
+    {
+      "id": "A1-K01",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "A: {Value: upper, value: lower}\na: {ключ: one, Ключ: two}\n"
+      },
+      "inputBytes": 66,
+      "inputSha256": "A6BE2B8D50C9AF8073E8EEFD6DA1ADEF93013532E5736E09D7E253A395E6FC91",
+      "expectedCode": "Success",
+      "expected": {
+        "kind": "CaseDistinctUnicode",
+        "rawNodes": 13,
+        "depth": 2,
+        "aliases": 0,
+        "rootKeys": [
+          "A",
+          "a"
+        ],
+        "nestedKeys": [
+          [
+            "Value",
+            "value"
+          ],
+          [
+            "ключ",
+            "Ключ"
+          ]
+        ]
+      },
+      "inputSha1": "542D7FA3ED1A156C4B96B833DB3FEAF98E98E550"
+    },
+    {
+      "id": "A1-K02",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "a: first\na: second\n"
+      },
+      "inputBytes": 19,
+      "inputSha256": "A3400590B47585495B178771D1A80E8C984299E03FB94611CC4E893E7DCBEDD2",
+      "expectedCode": "Success",
+      "expected": {
+        "kind": "OrderedDuplicate",
+        "rawNodes": 5,
+        "depth": 1,
+        "aliases": 0,
+        "keys": [
+          "a",
+          "a"
+        ],
+        "values": [
+          "first",
+          "second"
+        ]
+      },
+      "inputSha1": "D051967C8D252388A7B0004EECA7E61853DA240D"
+    },
+    {
+      "id": "A1-K03",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "[&a [x], *a, &a y, *a]\n"
+      },
+      "inputBytes": 23,
+      "inputSha256": "E0170B8F815244D5BDD270BFB16600776C8B06447471E468347D15BEC8CFAF20",
+      "expectedCode": "Success",
+      "expected": {
+        "kind": "ReboundAnchor",
+        "rawNodes": 6,
+        "depth": 2,
+        "aliases": 2,
+        "rootChildren": [
+          1,
+          3,
+          4,
+          5
+        ],
+        "aliasNodes": [
+          3,
+          5
+        ],
+        "aliasTargets": [
+          1,
+          4
+        ]
+      },
+      "inputSha1": "6366A9255B3F44B573EAD9A746331714D25030CF"
+    },
+    {
+      "id": "A1-K04",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "plain: yes\nquoted: \"yes\"\nexplicit: !!str 123\nescaped: \"x\\0y\\0\"\n"
+      },
+      "inputBytes": 63,
+      "inputSha256": "2843248B938AF88EDA8F4DEA0D70875DDFCB56F3BF5DD7112F7B8C2C9824235A",
+      "expectedCode": "Success",
+      "expected": {
+        "kind": "ScalarTags",
+        "rawNodes": 9,
+        "depth": 1,
+        "aliases": 0,
+        "keys": [
+          "plain",
+          "quoted",
+          "explicit",
+          "escaped"
+        ],
+        "values": [
+          "yes",
+          "yes",
+          "123",
+          "(decoded bytes 78 00 79 00)"
+        ],
+        "tags": [
+          "?",
+          "!",
+          "tag:yaml.org,2002:str",
+          "!"
+        ],
+        "valueUtf8Hex": [
+          "796573",
+          "796573",
+          "313233",
+          "78007900"
+        ]
+      },
+      "inputSha1": "16A682A8DADA79B6ED9D1A54F613EA17739EB4A1"
+    },
+    {
+      "id": "A1-K05",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "escaped: \"\\x01\"\nquoted: \"\u007F\u0080\u009F\"\n"
+      },
+      "inputBytes": 32,
+      "inputSha256": "454EAAE473C179254F4404459416DCC017A06265330AA297EF33F1FFD38FF6EA",
+      "inputSha1": "94C8C88C7EDCC6E441B2612E250D93552F656C74",
+      "expectedCode": "Success",
+      "expected": {
+        "kind": "EscapedControlAndQuotedNonC0",
+        "rawNodes": 5,
+        "depth": 1,
+        "aliases": 0,
+        "keys": [
+          "escaped",
+          "quoted"
+        ],
+        "values": [
+          "\u0001",
+          "\u007F\u0080\u009F"
+        ],
+        "valueUtf8Hex": [
+          "01",
+          "7FC280C29F"
+        ]
+      }
+    },
+    {
+      "id": "A1-F01",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "a: [unterminated\n"
+      },
+      "inputBytes": 17,
+      "inputSha256": "CA15BE3A44E31C173E9697942EA8AE1F1988C902954AB10E74EAFE9F4E98B93C",
+      "expectedCode": "MalformedYaml",
+      "expected": null,
+      "inputSha1": "CD8D5C974FBB4B9559268F1E7371EF4305633F04"
+    },
+    {
+      "id": "A1-F02",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "a: *missing\n"
+      },
+      "inputBytes": 12,
+      "inputSha256": "6C4F3A79E1DB4895DEB21C13C619684C03C3AA47FD06D2C8788BD06DEC1E1F7E",
+      "expectedCode": "MalformedYaml",
+      "expected": null,
+      "inputSha1": "921581F10DB1F6FFC5907110202C028FB5A804AF"
+    },
+    {
+      "id": "A1-F03",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "a: one\n---\nb: two\n"
+      },
+      "inputBytes": 18,
+      "inputSha256": "AA46ECB90992DC14892458FED017A3C54797C1F21EDCFB110E5F914B6C7A50A1",
+      "expectedCode": "MultipleDocuments",
+      "expected": null,
+      "inputSha1": "E2E60AF78D3043B1F048A5A9E1A1251AF87EE758"
+    },
+    {
+      "id": "A1-F04",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "a: !unsupported value\n"
+      },
+      "inputBytes": 22,
+      "inputSha256": "10C1C6CF3D9660BE7E783197BAE3660891D1E366DBECB0985ED54E57392AF076",
+      "expectedCode": "UnsupportedTag",
+      "expected": null,
+      "inputSha1": "66BB30440243051ABFE178260CBFAAEFBB0A0279"
+    },
+    {
+      "id": "A1-F05",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "!unsupported"
+      },
+      "inputBytes": 12,
+      "inputSha256": "4148676437875242937C191187121F69598625DCF416DBBB2BB68ED03C258E28",
+      "expectedCode": "NullPropertiesUnavailable",
+      "expected": null,
+      "inputSha1": "A857B6C6A64863A0FBB12F971ECEC27E368EFB17"
+    },
+    {
+      "id": "A1-F06",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "a\u0000:\u0000 \u0000x\u0000"
+      },
+      "inputBytes": 8,
+      "inputSha256": "25D136A74920A119808AB6CCD569E816418F761495967AFF24B2F3D1B612441F",
+      "inputSha1": "B1FC3B4572EB4A49600B3EF5F817DDD52B13BA2D",
+      "expectedCode": "MalformedYaml",
+      "expected": null
+    },
+    {
+      "id": "A1-F07",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "a: x\u0004b: y\n"
+      },
+      "inputBytes": 10,
+      "inputSha256": "2287DC54A7C715F598D776E05BF9543C2265E23B32C9DC3612EA9E41E77A8423",
+      "inputSha1": "43EA0C7CC6E34A17D685EB5D6AFC94D5258778DB",
+      "expectedCode": "MalformedYaml",
+      "expected": null
+    },
+    {
+      "id": "A1-F08",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "\"\\N\"\n"
+      },
+      "inputBytes": 5,
+      "inputSha256": "74FBCC37B792AA30C1CE137121E60FF604E162BE1102EA4171C3FD4E7D5F8F19",
+      "inputSha1": "DC741567DA0323B91CE337DE289744841F200EA4",
+      "expectedCode": "InvalidEventStream",
+      "expected": null
+    },
+    {
+      "id": "A1-F09",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "\"\\_\"\n"
+      },
+      "inputBytes": 5,
+      "inputSha256": "CF458FF1AB2B694EB1DB36E2B2D7EDA06FC98857C64FF6347F92C8CF0F0E57A1",
+      "inputSha1": "69C271E5FC5AD92E0F9026894A3BE77226E7996C",
+      "expectedCode": "InvalidEventStream",
+      "expected": null
+    },
+    {
+      "id": "A1-F10",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "\"\u0001\"\n"
+      },
+      "inputBytes": 4,
+      "inputSha256": "0EB4A4BF3ACD34AD8E86A4FDF3513252BB8B0D53CDE2F6A7E8D008F417683E03",
+      "inputSha1": "704D5E9B77785F88FDB8C028BF6893BB3C7E046C",
+      "expectedCode": "MalformedYaml",
+      "expected": null
+    },
+    {
+      "id": "A1-L.file.below",
+      "recipe": {
+        "kind": "file",
+        "count": 1048575
+      },
+      "inputBytes": 1048575,
+      "inputSha256": "2319E766190C32BCC9AE73985EFF2413120F5F7B187C106BE942D74869A4FFE4",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 3,
+        "depth": 1,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "15E827BCD3D4984CCA5C397DD36B022429986FD1"
+    },
+    {
+      "id": "A1-L.file.at",
+      "recipe": {
+        "kind": "file",
+        "count": 1048576
+      },
+      "inputBytes": 1048576,
+      "inputSha256": "E4E7825A388FF4B0E688B76E00EAE1C441FD586D944D20A3C1E75D47CAAD6BB1",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 3,
+        "depth": 1,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "27091CED78BDE8334B1D31DA0382643ACF75E500"
+    },
+    {
+      "id": "A1-L.file.above",
+      "recipe": {
+        "kind": "file",
+        "count": 1048577
+      },
+      "inputBytes": 1048577,
+      "inputSha256": "C6EAA57E3EA5CBA2D494E2A7BCE087FF07999A31E5FE75A6919E6F61F5564473",
+      "expectedCode": "InputTooLarge",
+      "expected": {
+        "rawNodes": 3,
+        "depth": 1,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "3B78792B71D577BA410BD914B99AB3813954D2F3"
+    },
+    {
+      "id": "A1-L.depth.below",
+      "recipe": {
+        "kind": "depth",
+        "count": 63
+      },
+      "inputBytes": 128,
+      "inputSha256": "B11317552747D0330A1C1AAA4C2E0B3AF7732CF08C123F3F852D4C9B60E91308",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 64,
+        "depth": 63,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "7B7D0099AB591653BF52F2C4A73667C0F6C58C62"
+    },
+    {
+      "id": "A1-L.depth.at",
+      "recipe": {
+        "kind": "depth",
+        "count": 64
+      },
+      "inputBytes": 130,
+      "inputSha256": "57CF994D549A8D829DC56A4A747D7D87396C591CD059FC2BE322A5B94DDEBA8E",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 65,
+        "depth": 64,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "87C6A24C4848F9D63D2951974BFEBAD357F82CE5"
+    },
+    {
+      "id": "A1-L.depth.above",
+      "recipe": {
+        "kind": "depth",
+        "count": 65
+      },
+      "inputBytes": 132,
+      "inputSha256": "6511FB536B0F2E2288A75B00DB5B9DCAF7612E2A58BB01A44A34C7CF25740A56",
+      "expectedCode": "DepthLimit",
+      "expected": {
+        "rawNodes": 66,
+        "depth": 65,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "C2A6684AFC0D9A31B15D1248FDA852E1FAE762D7"
+    },
+    {
+      "id": "A1-L.nodes.below",
+      "recipe": {
+        "kind": "nodes",
+        "count": 99999
+      },
+      "inputBytes": 199998,
+      "inputSha256": "C0462979B23BB042897E57E3B54CD1057ACDE817D9CDCAC4F407A7A79562BBC3",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 99999,
+        "depth": 1,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "4508533EEAF022ED65EE10D916F77BE91DD2F102"
+    },
+    {
+      "id": "A1-L.nodes.at",
+      "recipe": {
+        "kind": "nodes",
+        "count": 100000
+      },
+      "inputBytes": 200000,
+      "inputSha256": "AF1DDE978F3C1717907139E1A4E5C676954794F5BE5B95D746F176EEEBDAC07A",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 100000,
+        "depth": 1,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "A129B8D50350006B0318E5C9B9F213263A110226"
+    },
+    {
+      "id": "A1-L.nodes.above",
+      "recipe": {
+        "kind": "nodes",
+        "count": 100001
+      },
+      "inputBytes": 200002,
+      "inputSha256": "EF150C25511BCDB93E7C32DB80944E89DA8AC6806AE92558BFE6C45449B89BE4",
+      "expectedCode": "NodeLimit",
+      "expected": {
+        "rawNodes": 100001,
+        "depth": 1,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "DD5A060B19652956317A8F9A414C25D8EB253442"
+    },
+    {
+      "id": "A1-L.aliases.below",
+      "recipe": {
+        "kind": "aliases",
+        "count": 9999
+      },
+      "inputBytes": 40003,
+      "inputSha256": "14FF02CDD24B08C9F34586D7F38FF46BF920A51065FC6A892BB01047A8E0D968",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 10001,
+        "depth": 1,
+        "aliases": 9999,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "A6AF378A79987A941ADD366F504010FF1C61F6A9"
+    },
+    {
+      "id": "A1-L.aliases.at",
+      "recipe": {
+        "kind": "aliases",
+        "count": 10000
+      },
+      "inputBytes": 40007,
+      "inputSha256": "D4724DE31FB14203DDF264DB147FEC9DCEEE27C7707C49C2FFD8D03AED10BCCE",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 10002,
+        "depth": 1,
+        "aliases": 10000,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "6A571BCBB866A513ACAF24FB55539D0847F9C5E9"
+    },
+    {
+      "id": "A1-L.aliases.above",
+      "recipe": {
+        "kind": "aliases",
+        "count": 10001
+      },
+      "inputBytes": 40011,
+      "inputSha256": "688E7F946F32BFB9838FF796C68C17B60D3B5633D4179AF738A8437FA0A50C9C",
+      "expectedCode": "AliasLimit",
+      "expected": {
+        "rawNodes": 10003,
+        "depth": 1,
+        "aliases": 10001,
+        "maximumDecodedScalarUtf8Bytes": 1
+      },
+      "inputSha1": "CFB8CF987562DACF1A71BA2069CC8CBE09EA9654"
+    },
+    {
+      "id": "A1-L.scalar.below",
+      "recipe": {
+        "kind": "scalar",
+        "count": 65535
+      },
+      "inputBytes": 65538,
+      "inputSha256": "6A1F7FED4F6F15A8547B0C6B60D3C24113AD88451B33757980D751D8750744F8",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 1,
+        "depth": 0,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 65535
+      },
+      "inputSha1": "2A92C54985B90242FAA3E02190C8A2498D608885"
+    },
+    {
+      "id": "A1-L.scalar.at",
+      "recipe": {
+        "kind": "scalar",
+        "count": 65536
+      },
+      "inputBytes": 65539,
+      "inputSha256": "33B7D789BEADA163938092BE42BE20822066D233983B01D11602DA56C94004B2",
+      "expectedCode": "Success",
+      "expected": {
+        "rawNodes": 1,
+        "depth": 0,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 65536
+      },
+      "inputSha1": "648BAE11734734E76D931C4717B208090F070FD4"
+    },
+    {
+      "id": "A1-L.scalar.above",
+      "recipe": {
+        "kind": "scalar",
+        "count": 65537
+      },
+      "inputBytes": 65540,
+      "inputSha256": "2ECA675C61122B1FA81B48980A967B2B487F834E9AFFD87E1B3030A857A627DA",
+      "expectedCode": "ScalarLimit",
+      "expected": {
+        "rawNodes": 1,
+        "depth": 0,
+        "aliases": 0,
+        "maximumDecodedScalarUtf8Bytes": 65537
+      },
+      "inputSha1": "3EAD2AED704DC0B1A8D3B8B91A769A71B2BBCF40"
+    },
+    {
+      "id": "A1-F11",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "[null, x]\n"
+      },
+      "inputBytes": 10,
+      "inputSha256": "76E738B0B19E4ED1AD8B809B0F5BB26619A568B50449317B23BFD28FC7D0D061",
+      "expectedCode": "NullPropertiesUnavailable",
+      "expected": {
+        "refusedDocumentEmpty": true,
+        "diagnosticMark": {
+          "available": true,
+          "position": 1,
+          "line": 0,
+          "column": 1
+        },
+        "diagnosticObserved": 2,
+        "diagnosticLimit": 0
+      },
+      "inputSha1": "CBB917091BBCA5C842CCF66C9BBF15847C63D18C"
+    },
+    {
+      "id": "A1-F12",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "[null, a: [unterminated\n"
+      },
+      "inputBytes": 24,
+      "inputSha256": "9B8535A5B6636DE06F3B4F7517EBBA0A48FF46C1140231DA6C549743FD7533D9",
+      "expectedCode": "MalformedYaml",
+      "expected": {
+        "refusedDocumentEmpty": true
+      },
+      "inputSha1": "E348E753C700C43D9B1C4CF8791BB993A89AFC64"
+    },
+    {
+      "id": "A1-F13",
+      "recipe": {
+        "kind": "LiteralUtf8",
+        "text": "[null,[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[x]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]], [unterminated\n"
+      },
+      "inputBytes": 151,
+      "inputSha256": "D59EFB83D1A70F15B58DF2A4CA1FA7B7AE0BD4BF8869EAA61BE5B8F20DC96E7D",
+      "expectedCode": "NullPropertiesUnavailable",
+      "expected": {
+        "refusedDocumentEmpty": true,
+        "diagnosticMark": {
+          "available": true,
+          "position": 1,
+          "line": 0,
+          "column": 1
+        },
+        "diagnosticObserved": 3,
+        "diagnosticLimit": 0,
+        "syntaxCompletionClaimed": false,
+        "fullInputCollectionDepth": 65,
+        "requiredProbeBoundStopBeforeMalformedTail": true
+      },
+      "inputSha1": "B10B24A5944CCAC497396734D29F5979F8A03934"
+    }
+  ],
+  "expectedCount": 33,
+  "totalWithCanonical": 43,
+  "recipeEncoding": "UTF-8 without BOM; exact LF and literal text as authored",
+  "recipeDefinitions": {
+    "file": "a: x + LF + # + p repeated(count-7) + LF",
+    "depth": "[ repeated(count) + x + ] repeated(count) + LF",
+    "nodes": "[ + x, repeated(count-2) + x] + LF",
+    "aliases": "[&a x + comma-space-*a repeated(count) + ] + LF",
+    "scalar": "double-quote + x repeated(count) + double-quote + LF"
+  },
+  "qualification": "Deterministic input identities were computed during inert fixture-data authoring using built-in UTF8/SHA256, independently of the future parser. No parser, test, candidate source generator, vendor code or native tool was run. The successor additionally used an independently authored inert Python byte/text comparison; no candidate function was invoked. Expected full-input metrics are not claims that a refused parser returned partial nodes.",
+  "nativeHashQualification": "Auxiliary inputSha1 is the native Core FSHA1 observation; primary fixture/source/run SHA256 bindings remain required before/after native execution. No production cryptography or protocol identity is implemented.",
+  "rawC0BoundaryAmendment": "Two focused prospective regressions: K05 preserves escaped C0 and legal quoted DEL/C1 bytes; F10 rejects raw quoted U+0001. Original28 generated records and10 canonical inputs remain unchanged;30 generated/40 unique inputs/47 attempts/same8 native suites. No parser/native result is claimed.",
+  "authoringAmendment": "Four focused source-derived regressions added before any SOURCE/build/test freeze: raw literal NUL/EOT refusal and invalid vendor UTF8 from valid YAML backslash-N/backslash-underscore. Existing K04 now proves embedded and terminal decoded NUL bytes via full hex. Same8native suites/5quotas/18source paths; older34input proposal retained as history.",
+  "expectedAttemptCount": 50,
+  "nativeSuiteCount": 8,
+  "nullSyntaxProbeAmendment": "Append-only F11/F12/F13 exercise valid null refusal, later first-document syntax error, and restoration of the original null refusal when a local probe work bound stops reading. Original30 generated records/order/expectations and all40 prior input bytes remain unchanged. Current totals are33 generated/43 unique inputs/50 planned attempts/same8 native suites. The rawC0BoundaryAmendment and authoringAmendment strings retain historical earlier-authoring counts, not the current counts stated here. No parser/native result or whole-stream syntax completion is claimed."
+}

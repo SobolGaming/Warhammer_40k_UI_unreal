@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_NORMAL_RULES_COUNT_TEXT_CORRECTION",
+  "planRevision": 56,
+  "recordedUtc": "2026-10-20T08:35:08.1812750Z",
+  "parentAdoption": {
+    "path": "docs/plans/evidence/2026-10-20-e04a-normal-rules-amendment-adoption.json",
+    "bytes": 9365,
+    "sha256": "E27758A2B34389824FC7B53437ABCFF0D9FCA60C596D417DF66F13A910A3765D"
+  },
+  "status": "NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY",
+  "correction": "Replace only two stale prose numbers in aggregateSourceGate.requiredAggregateEvidence[2]:47,403→47,410 and4,417→4,424. Numeric counts/source inputs/duties/native boundary and selected review budgets are unchanged.",
+  "supersedesOnlyParentUnboundTemplate": true,
+  "correctedUnboundTemplate": {
+    "path": ".local/planning/E04/normal-rules-prose-count-correction-PROPOSED/source-scope-contract.normal-rules.FileItemV3.prose-v2.TEMPLATE.json",
+    "bytes": 56586,
+    "sha256": "E8AF653699AF2886426BB3134D5D7280B2B9A51621EB8278F7ED30AC380EA17A"
+  },
+  "selectedBinder": {
+    "path": ".local/planning/E04/normal-rules-prose-count-correction-PROPOSED/Root-Bind-Fresh97-Contract-And-Panels.ProseV2.PROPOSED.ps1",
+    "bytes": 7522,
+    "sha256": "30F55BD91819D86E1E8651039DF70FBFFB49F67A8D69B1293B0D353071A6C5D7"
+  },
+  "rootReadExactDiffsAndIndependentlyReconstructedAllChangedBytes": true,
+  "rootAdoptsCorrectedTemplateAndBinderForFutureMetadata": true,
+  "unusedCampaignClosure": {
+    "path": ".local/reviews/E04A1-source-preparation-20261020/scoped-contract-354cab7-20261020T082729Z-26fda962/root-unused-campaign-prose-count-closure.original.json",
+    "bytes": 41267,
+    "sha256": "729C37C20F3289C89DDD72B5C406A01CE6BE026051BA03037313EC7564E51B7D"
+  },
+  "unusedCampaign": {
+    "sourceHead": "354cab70b14be15f510267b2daac4e16871b913d",
+    "runId": "20261020T082729Z-26fda962",
+    "metadataPipelineExitCode": 0,
+    "metadataBinderExitCode": 0,
+    "commonBodyFiles": 97,
+    "commonPhysicalRows": 47410,
+    "panels": 10,
+    "actualGoOrLaunchAbsencesObserved": 121,
+    "disposition": "SUPERSEDED_UNUSED_DO_NOT_LAUNCH",
+    "sourceReviewLaunched": false,
+    "nativeRunRootAbsent": true,
+    "anyBindingsOrAdmissionsTransfer": false
+  },
+  "ordinaryCommonAudit": {
+    "path": ".local/planning/E04/common-prelaunch-audit-354cab7-20261020T082729Z-26fda962/common-prelaunch-audit.OPERATOR_ONLY.json",
+    "bytes": 3896,
+    "sha256": "E2D9DA9B5DAC0352DBA6AF500A04013394A4C3357E18D88C885639B9200A9541"
+  },
+  "ordinaryAuditCorrection": {
+    "path": ".local/planning/E04/common-prelaunch-audit-354cab7-20261020T082729Z-26fda962/empty-projection-correction-and-scope-limit.OPERATOR_ONLY.json",
+    "bytes": 3385,
+    "sha256": "03B635B125C569FD3CD81D95CD4EA53A280C3F4E1886D67995EBB073D3B08D30"
+  },
+  "ordinaryStaticFacts": "1944 actual frozen files rehashed/zero drift,97BODY47410rows,33members,13records902rows1561references,all4332literal rows of new095 reconstructed. These are source/data identity checks, not formal SOURCE merits or admission.",
+  "futureSubject": null,
+  "futureRunId": null,
+  "actualFutureBindingsReady": false,
+  "actualGoCreated": false,
+  "reviewLaunched": false,
+  "sourceVerdict": "NOT_ASSESSED",
+  "aggregateCreated": false,
+  "phaseAuthority": false,
+  "nativeExecutionAuthority": false,
+  "allEightNativePhases": "NOT_RUN",
+  "remaining": "Checkpoint correction, derive/refreeze a fresh exact campaign, inspect prepared and actual prompts, then obtain all ten valid complete PASS/root admissions/labelled aggregate before any phase."
+}

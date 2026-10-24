@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_MODULE_SCAN_CONFIGURATION_SOURCE_REPAIR_ONLY",
+  "createdUtc": "2026-10-21T03:46:20.3994150Z",
+  "planRevision": 87,
+  "status": "MODULE_SCAN_CONFIGURATION_REPAIRED_SOURCE_PENDING",
+  "closureCommit": "c71c7bbe429c2cc132c8ced2eeebc07a83e16148",
+  "closureRemoteBackup": {
+    "recordKind": "OWN18_EXACT_REMOTE_CHECKPOINT_BACKUP",
+    "verifiedUtc": "2026-10-21T03:45:36.1695898Z",
+    "repository": "SobolGaming/Warhammer_40k_UI_unreal",
+    "branch": "codex/e02-world-input-proof",
+    "localCommit": "c71c7bbe429c2cc132c8ced2eeebc07a83e16148",
+    "remoteCommit": "c71c7bbe429c2cc132c8ced2eeebc07a83e16148",
+    "match": true,
+    "credentialSource": "workspace/github-full-access",
+    "credentialValueRecorded": false
+  },
+  "closedExecutedHead": "6e2262dfe77deea171b12c742351efaa68a27cbc",
+  "closedRunId": "20261021T025602Z-f6f74902",
+  "closedFailure": "E04A1_GENERATED_INPUT_UNSUPPORTED_DYNDEP",
+  "wrapperBefore": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+    "bytes": 271077,
+    "sha256": "3B11C885FE2330AB81754A2FE2568A43C821AA8086E05DD357A8A5B25F289D88"
+  },
+  "wrapperAfter": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+    "bytes": 271145,
+    "sha256": "666C155DF0A5CB7C78B6C6B9978C54D75C67A7186798626EAC4D9008E4D9867F"
+  },
+  "normBefore": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-functional-proof-packet.md",
+    "bytes": 6735,
+    "sha256": "155E43DFEEF152F028CC192EA1DC003AED15476F9CAC2F14CDF5B45C4E244442"
+  },
+  "normAfter": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-functional-proof-packet.md",
+    "bytes": 7443,
+    "sha256": "39B9852CDCAEC6842361FA3E4FF730D5958469913C713FC09711DFE548EAAF86"
+  },
+  "sourceChange": "Add -DCMAKE_CXX_SCAN_FOR_MODULES=OFF to existing CMake-Options and exact OFF cache expectation to Check-CMake; exact inverse recovers the entire preceding wrapper. No other code change.",
+  "normChange": "Document this pinned nonmodule configuration and its fail-closed/future-pin limits with installed primary-source binding.",
+  "powerShellAstErrors": 0,
+  "sourceApplicability": {
+    "selectedCppFiles": 30,
+    "includeAndPrivateHeaders": 61,
+    "wholeWordModuleOrImportMatches": 0,
+    "qualification": "Finite source text observation for the exact pin, not general compiler or future dependency conformance."
+  },
+  "retainedRequirements": [
+    "Existing unsupported-dyndep refusal and generated-input capture remain fail-closed.",
+    "Release real ABI compile/executable link; actual full static build, C++20/MD/EHsc/GR-/static/pinned-tool/source checks unchanged.",
+    "Fixed scoped successful-root cleanup and phase bounds unchanged.",
+    "43 inputs,33 generated,50 attempts,eight suites and exact bytes/expectations unchanged."
+  ],
+  "primarySources": [
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\variable\\CMAKE_CXX_SCAN_FOR_MODULES.rst",
+      "bytes": 304,
+      "sha256": "40EE10B0A9DDB323854848A40BD341DE746CFB36143B8430F2816FF1AA9C55B9",
+      "lineCount": 10,
+      "wholeLineRanges": "1-10"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\prop_tgt\\CXX_SCAN_FOR_MODULES.rst",
+      "bytes": 944,
+      "sha256": "D0B22264EFE6E529184D0ED2B2AA5158CEA8F3ABD7DB8D08F804C08A472B93E1",
+      "lineCount": 22,
+      "wholeLineRanges": "1-22"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\prop_sf\\CXX_SCAN_FOR_MODULES.rst",
+      "bytes": 817,
+      "sha256": "C95ABA673A1C0D6BFC757F8081E1871428B2B3F202B99528526256ED0953E8A8",
+      "lineCount": 18,
+      "wholeLineRanges": "1-18"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\policy\\CMP0155.rst",
+      "bytes": 1148,
+      "sha256": "AC582964F2506C831D6F998F2076CBF862687EE5B263872E823F2A304B4045AF",
+      "lineCount": 27,
+      "wholeLineRanges": "1-27"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\manual\\cmake-cxxmodules.7.rst",
+      "bytes": 5961,
+      "sha256": "F1105808662125864FB111410E5F594AD2B3540333006BE8A192F9631D8874AC",
+      "lineCount": 141,
+      "wholeLineRanges": "59-86;109-127"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\command\\cmake_minimum_required.rst",
+      "bytes": 3395,
+      "sha256": "FCFF52D4CD965324DFBAA131A5AEAE4CA12F2849B464D6566A61B010534E0054",
+      "lineCount": 88,
+      "wholeLineRanges": "52-64"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\dependencies\\E04A1\\20261020T001330Z-29e97b84\\yaml-cpp\\CMakeLists.txt",
+      "bytes": 7197,
+      "sha256": "1B1B0B9D346F68976873E8E4F3FDD71DD6AE0FF62D47B7FD83A18A69410F8A29",
+      "lineCount": 213,
+      "wholeLineRanges": "1-11;64-109;138-141"
+    }
+  ],
+  "diagnosisIdentity": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-6e2262d\\cmake-module-scan-off.PROPOSED.OPERATOR_ONLY.json",
+    "bytes": 15025,
+    "sha256": "AA684B0CC4CC037BCAF8E1D2BE492E39ECFBA3326D83C8E1589DFC6D43E2115D"
+  },
+  "actualScanningOffConfigure": "NOT_RUN",
+  "actualFreshSourceReview": "NOT_RUN",
+  "allEightFreshPhases": "NOT_RUN",
+  "nativeRootsAfterRepair": 0,
+  "visibleWindows": 0,
+  "nativeAuthority": false,
+  "oldApprovalTransfer": false,
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "a1eAcceptance": "NOT_ESTABLISHED",
+  "broaderGates": "A1G,A2,727compatibility,plainDEL,HUD,input,rendering,Linux,packaging,realCore,fullmigration remain open",
+  "standingPrivateSourceApiConsent": "IN_FORCE_UNTIL_EXPLICITLY_REVOKED",
+  "next": "Checkpoint/push/verify OWN18 exact backup, derive fresh exact head/run/freeze/current source bindings, obtain affected focused SOURCE then each ordered exact phase GO. No native retry of the closed run."
+}

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_RUNTIME_LOOKUP_API_INPUT_DEFINITION_CHOICE_NOT_BOUND_SCOPE_ADOPTION",
+  "adoptedUtc": "2026-10-20T14:19:18.7948321Z",
+  "publicationHeadAtChoice": "36740bf4623fb9c589c2dec60207eadf6c3bb789",
+  "basis": "Routine source research and prospective review-input engineering under continued migration; standing private-source/API transmission consent persists until explicitly revoked. OWN15 separate final roles and all execution gates remain.",
+  "apiInputDefinitionChoiceAdopted": true,
+  "rootCompleteSelectedSourceReading": "All3934v2selected literal rows read through complete earlier v1+literal delta; all14v3new units/131rows directly read;125 complete ranges independently captured/hashed from installedsource; normalPluginDescriptor206-252 read directly.",
+  "inputs": {
+    "body": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r7-runtime-lookup-input-v3-PROPOSED\\runtime-lookup-primary.PROPOSED.txt",
+      "bytes": 186777,
+      "sha256": "3D19C7BE7BBA50E1FD15CE9F10FF674C239715C0914FAC154CE4D5BD97495457"
+    },
+    "capture": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r7-runtime-lookup-input-v3-PROPOSED\\primary-capture.PROPOSED.json",
+      "bytes": 77630,
+      "sha256": "81D5429A48205C4995FB3BD63820BB8EFDB7FC8ADDD78F7668900580F37F4D5B"
+    },
+    "record14Template": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\proposed-runtime-lookup-api-v3-SUPPLEMENT-20261020T140500Z-bootstrap-code-review\\record14.data.PROPOSED.json",
+      "bytes": 97516,
+      "sha256": "98838089F0A0CA70F3D36E955407B5780FEEDCC3E156B09FCCCC3E5ED73D7DE4"
+    },
+    "record14SchemaTemplate": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\proposed-runtime-lookup-api-v3-SUPPLEMENT-20261020T140500Z-bootstrap-code-review\\record14.schema.PROPOSED.json",
+      "bytes": 11388,
+      "sha256": "E644C42795B4DC417D3E9A7A5243EB34F394E4C789678EAA9339A58771D1EFE1"
+    },
+    "independentAuditSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\runtime-api-independent-audit-PROPOSED\\seal.PROPOSED.json",
+      "bytes": 2432,
+      "sha256": "BA6D5B45E298ABCDEF624E810A0C987034CF27375553127067C25917B127BD21"
+    }
+  },
+  "wholeOriginCount": 38,
+  "typedCompleteOrExplicitBindingUnits": 125,
+  "literalSourceRows": 4065,
+  "framedBodyPhysicalRows": 4315,
+  "sourceBodyIdChoice": "SOURCE-BODY-099",
+  "supplementalSelectedRecordOrdinalChoice": 14,
+  "original13CatalogSchemasAndGroupsRetained": true,
+  "noNewApiGroupsInsertedIntoOriginalRecord4": true,
+  "finiteFrameworkFrontierAcceptedForInputPreparation": [
+    "C++ standard library contracts: std::memcmp, std::multimap::find/end with the explicitly bound comparator, type traits and ordinary scalar casts. No standard-library implementation audit.",
+    "UE generic container/pointer/optional/range/allocator/string-storage/lifetime/intern-pool allocation and logging/ensure/assert APIs remain explicit framework leaves. Their callers and key comparison/hash contracts are bound; arbitrary mutation, iteration-order or memory-safety proofs are not supplied.",
+    "Numeric parsing/formatting, localized FText true/false spellings and general Unicode/encoding behavior remain framework leaves outside the concrete ASCII bool/case examples. No equivalence to .NET Unicode OrdinalIgnoreCase.",
+    "Roslyn/.NET/OS/process and unrelated descriptor/parser grammar APIs remain outside this finite lookup/conversion proposal. No whole-engine or all-platform recursion.",
+    "RapidJSON generic parsing/serialization, value construction/mutation/copy/move, member/array iterator and allocator contracts remain explicit framework APIs beyond the selected exact member/type lookup functions. No arbitrary lexical-order, duplicate/case-colliding key, embedded-NUL preservation, precision or custom allocator proof.",
+    "Compact/sparse storage allocation, hash bucket/index memory layout, GetData/GetHashTableMemory/GetSetLayout, insertion/removal/rehash and allocator internals remain explicit framework APIs. Only exact key equality/hash, caller binding, lookup control and compact dispatch are supplemented.",
+    "Runtime compile choices UE_USE_COMPACT_SET_AS_DEFAULT, UE_JSONOBJECT_LEGACY_STRING_KEYS, RAPIDJSON_USE_MEMBERSMAP and TCHAR/platform choices remain source-conditioned and unobserved in installed binaries. Both selected comparison/lookup branches are supplied without asserting an actual runtime selection."
+  ],
+  "scopeOfChoice": "Exact source input definition, typed boundaries and finite framework frontier only. Fresh independent SOURCE must still assess actual scoped claims/consumer interfaces; this supplies no SOURCE verdict.",
+  "record14SourceMetadataSelection": "FULL_RECORD ALL_FIELDS_RECURSIVELY; separate source BODY grant required; descriptor references do not grant research/origin bodies",
+  "record14TemplateCandidateAndOwnershipRemainUnbound": true,
+  "actualCurrentSourceScopePolicyCountBindingsAdopted": false,
+  "beforePlannedP": "Separately derive and adopt actual current head/base/run, typed planned primary/integration/affected/cohort owners, all per-scope raw interfaces/units/counts and explicit data/NORM grants. Refuse all UNBOUND fields before P or ownpanel/GO.",
+  "noRuntimeBinaryMacroOrActivationEvidence": true,
+  "newSourceReviewInvoked": false,
+  "helperInvoked": false,
+  "reviewGo": false,
+  "nativePhaseGo": false,
+  "rootAdmissions": 0,
+  "visibleAuthority": 0,
+  "rawPluginBlockedUnchanged": true
+}

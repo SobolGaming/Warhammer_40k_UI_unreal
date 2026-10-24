@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_E04A_STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTION",
+  "planRevision": 54,
+  "status": "STARTUP_TARGET_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY",
+  "recordedUtc": "2026-10-20T06:07:44.9547719Z",
+  "preparationHead": "27bed104c10d938888c02b2676d1f6cc99dc352c",
+  "futureHead": null,
+  "futureRunId": null,
+  "futureCampaignId": null,
+  "actualFutureBindingsReady": false,
+  "consent": "Direct owner standing perpetual consent for necessary migration reviews containing private project source/API to the existing configured OpenAI Codex destination, until explicit revocation. Credentials and unrelated private data remain excluded.",
+  "criteria": {
+    "path": "docs/plans/research/2026-10-20-e04a-source-composition-packet-v3.md",
+    "bytes": 18064,
+    "sha256": "BD800266D16713EC21697D2AEAA1C87DFAEB421974F67C9BC1CF99576A25AA86",
+    "lineCount": 262
+  },
+  "unboundTemplate": {
+    "path": ".local/planning/E04/source-scope-contract-startup-allmodules-20261020-PROPOSED/source-scope-contract.startup-allmodules.v2.TEMPLATE.json",
+    "bytes": 50343,
+    "sha256": "855DDF5DDDA004903147A602F49AE2002ED31708061D89F254B087DEE65F7881",
+    "lineCount": 1245
+  },
+  "rootDesignAndHelperInspection": {
+    "path": ".local/planning/E04/source-scope-contract-startup-allmodules-20261020-PROPOSED/root-source-inspection-and-future-design-adoption.original.json",
+    "bytes": 5138,
+    "sha256": "4303112C5658DB6C7CABA8C923EC8A75420C652DD7DAD860CA2A91E17D5364B3",
+    "lineCount": 127
+  },
+  "implementation": {
+    "target": {
+      "path": "Source/WarhammerClientE04AEditor.Target.cs",
+      "bytes": 593,
+      "sha256": "1FE8F99EC560DD6C592C5DAB3434092E0A7AE313B2597BE6126C5212C25C1991",
+      "lineCount": 16
+    },
+    "change": "One explicit bBuildAllModules=false assignment in the dedicated E04A Editor target after TargetType selection. No wrapper/parser/client behavior change.",
+    "authored": true,
+    "freshSourceApproved": false,
+    "built": false,
+    "nativeTested": false
+  },
+  "primaryInputs": [
+    {
+      "id": "SOURCE-BODY-093",
+      "group": "UE_TARGET_ALL_MODULES_CREATION_FINALIZATION_AND_PREBUILD",
+      "catalog": {
+        "path": ".local/planning/E04/all-modules-selector-repair-20261020-PROPOSED/v2/primary-catalog.PROPOSED.json",
+        "bytes": 8740,
+        "sha256": "F496BC42F9AE4EFB9DA32137FA4CA21CAE35A4D57B736C52E9DCC74942C3A8A2",
+        "lineCount": 247
+      },
+      "artifact": {
+        "path": ".local/planning/E04/all-modules-selector-repair-20261020-PROPOSED/v2/target-all-modules-creation-and-prebuild.primary.txt",
+        "bytes": 101091,
+        "sha256": "AC23CAC2273C9F95B3334D0A1568D8C175F48ED9B4A6D4EE9AE31B9894FF8AE0",
+        "lineCount": 2018
+      },
+      "rootIndependentReconstruction": {
+        "path": ".local/planning/E04/all-modules-selector-repair-20261020-PROPOSED/v2/root-independent-reconstruction-and-future-input-adoption.original.json",
+        "bytes": 5105,
+        "sha256": "BC5677CF1E97D9509A2FF7F5C504B93588F0132AF1939BA677C4A2DCCC2F8431",
+        "lineCount": 93
+      },
+      "literalSourceRows": 1958,
+      "sourceRanges": 22,
+      "originFiles": 8,
+      "rootFullyRead": true,
+      "futureInputAdopted": true
+    },
+    {
+      "id": "SOURCE-BODY-094",
+      "group": "UE_STARTUP_EXPLICIT_PLUGIN_LOADING_PRIMARY",
+      "catalog": {
+        "path": ".local/planning/E04/startup-explicit-loading-primary-repair-20261020-PROPOSED/v2/primary-catalog.PROPOSED.json",
+        "bytes": 19545,
+        "sha256": "262DE03E2D6928F25B1B166CDA15DE005B82672E48DFF946591326D2F87136AA",
+        "lineCount": 545
+      },
+      "artifact": {
+        "path": ".local/planning/E04/startup-explicit-loading-primary-repair-20261020-PROPOSED/v2/startup-explicit-loading.primary.txt",
+        "bytes": 241846,
+        "sha256": "612B7D20C536B9530FC8D501017E8CC4AFF933269CD3B8D13A130A1651615517",
+        "lineCount": 5539
+      },
+      "rootIndependentReconstruction": {
+        "path": ".local/planning/E04/startup-explicit-loading-primary-repair-20261020-PROPOSED/v2/root-independent-reconstruction-and-future-input-adoption.original.json",
+        "bytes": 8980,
+        "sha256": "A9348533842A9BC4A21882A125DFD8825D6686E48D0CD34834771522D2EBDF71",
+        "lineCount": 174
+      },
+      "ordinaryIndependentAddendum": {
+        "path": ".local/planning/E04/startup-explicit-loading-primary-repair-20261020-PROPOSED/v2/independent-pre-adoption-completeness-audit.v2.20261020.PROPOSED.OPERATOR_ONLY.json",
+        "bytes": 6342,
+        "sha256": "A586E396D6D3A1950CA08186E786D7A8A89FDCC94B6576A468B1CB6BDA2F0CC7",
+        "lineCount": 120
+      },
+      "literalSourceRows": 5463,
+      "sourceRanges": 37,
+      "originFiles": 22,
+      "rootFullyRead": true,
+      "futureInputAdopted": true
+    }
+  ],
+  "metadataHelpers": [
+    {
+      "path": ".local/planning/E04/startup-allmodules-packet-integration-20261020-PROPOSED/v2/Assemble-RootSourcePacket.StartupAllModules.PROPOSED.ps1",
+      "bytes": 44709,
+      "sha256": "A037AF6286FCE8D7614CC5996122D0DF2809F910A15E2ECF7D8F9926CDA3A2E5",
+      "lineCount": 315
+    },
+    {
+      "path": ".local/planning/E04/startup-allmodules-packet-integration-20261020-PROPOSED/v2/Build-NewScopedCommonPacket.StartupAllModules.PROPOSED.ps1",
+      "bytes": 17996,
+      "sha256": "1DA185B2C7428854BDF669A5E2ED8BB1634B208AE1D63DE71821CF67D584A75A",
+      "lineCount": 100
+    }
+  ],
+  "staticEvidence": {
+    "schema5Exact24Keys": true,
+    "allTenRolesAndOldDutiesUnitsDataOwnersPartitionsPreserved": true,
+    "all12AssemblerAnd4PipelineFunctionsByteExact": true,
+    "helperParseErrors": 0,
+    "rootOwnLiteralReconstructionByteExact": true,
+    "startupV1Entire5018RowBytePrefixPreserved": true,
+    "helpersSourceInspectedAndProspectivelyAdopted": true,
+    "metadataHelpersInvoked": false
+  },
+  "referenceInventory": {
+    "bodyFiles": 96,
+    "physicalRows": 42986,
+    "equation": "35428 + target1 + allModules2018 + startup5539",
+    "selectedMetadataRecords": 13,
+    "descriptorRows": 902,
+    "pluginReferenceOccurrences": 1561,
+    "stagedMembers": 33,
+    "authoredPaths": 18,
+    "commonBodies": [
+      "054",
+      "055",
+      "056",
+      "057",
+      "095",
+      "096"
+    ],
+    "actualNextFreezeCounts": "Derive from actual refreshed descriptors; four existing clean norm artifacts remain unchanged. Workflow criteria are supplied by complete contract/own scope/prompt and are not a new implementation BODY."
+  },
+  "priorCampaign": {
+    "head": "7ef9358d836ed75b9d8ebc40b26c1b8f74af6ac4",
+    "runId": "20261020T052654Z-6fe9feeb",
+    "status": "CLOSED_BLOCKED",
+    "rawPasses": 6,
+    "rawBlocked": 2,
+    "aggregateAdmittedPasses": 0,
+    "facts": {
+      "path": "docs/plans/evidence/2026-10-20-e04a-scoped-r2-result.json",
+      "bytes": 28223,
+      "sha256": "F8275CFA954F83B3A8FE79367671FDB9578BD026BA83BAE657BDA717BD19D7F8",
+      "lineCount": 550
+    },
+    "rawReportsUnchanged": true,
+    "priorPassesTransferred": false
+  },
+  "prospectiveDispositions": [
+    "Complete target configuration/creation/finalization/normal non-test discovery/alternate all-modules source is supplied. Actual future effective values and receipts remain independently assessed; arbitrary SDK/OS/transitive behavior is not claimed.",
+    "Complete Default startup dispatcher and explicit plugin mount implementations/finite material direct callers now include public/private declarations and exact omitted-argument defaults. Source-supported conditions, selected245 membership and observed runtime activation remain distinct.",
+    "Private default and PluginUtils parameter declaration gaps found during preparation were repaired in a new v2 input; originals remain preserved. Conditional GameFeatures/Fab/GDK/download/low-level-test behavior is retained with limits, not claimed executed or universally closed."
+  ],
+  "requiredNext": [
+    "Checkpoint the coherent target/criteria/status change, bind a fresh exact clean head/base/run and derive complete new freeze/common inventory.",
+    "Bind pure contract after common manifest; explicitly inspect every actual scope/campaign/subject/policy/bootstrap/full prompt/GO.",
+    "Obtain all ten fresh blind complete independently valid SOURCE PASS assessments, with the integrations after all eight primary/data raw reports are sealed.",
+    "Root separately audits runtime/input/output/access/completeness/error recovery/semantic relationships and records a labelled aggregate before any individual phase GO.",
+    "Complete the separately bounded phase chain, then fresh independent final CODE and different REQ. A1G/A2/HUD/Linux/packages and broader plan acceptance remain separate."
+  ],
+  "sourceApproval": false,
+  "aggregateSourceDisposition": null,
+  "reviewLaunchAuthority": false,
+  "actualGo": false,
+  "nativePhaseGo": false,
+  "acceptance": false,
+  "publicationMergeAuthorityAdded": false,
+  "newNativeRunRoot": null,
+  "allEightPhases": "NOT_RUN",
+  "historicalControlsRerun": false
+}

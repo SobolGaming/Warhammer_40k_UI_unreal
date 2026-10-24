@@ -1,0 +1,160 @@
+{
+  "verdict": "BLOCKED",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-4c99318-20261020T104640Z-54a3b913",
+  "scopeId": "S_BUILD_HOST",
+  "subject": {
+    "sourceHead": "4c993181287e18e92da614af0e09a8d8ea92378a",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T104640Z-54a3b913",
+    "inputManifestSHA256": "fc960ed3c17e383ea0f87f9d3306e7f295e88548c12459b15aaaf67b827596aa",
+    "runtimeFreezeSHA256": "aa95f7b04cfb75458fa516a2add3fcff6c032f0fce51545436649baef9edabd3",
+    "scopeContractSHA256": "d085775971ab49efecce56430edf88fbfa13bb04fd3421bd89a58fe5c97f5ceb",
+    "bootstrapSHA256": "9b9eff61603f4b0dc1e585520011e423c3f664f516e9009d059e60159cf2b66d",
+    "ownCoverageSHA256": "0927119f37b654bfaa308cb02984f64392db14501971a66a022e460dd425df95",
+    "launchPermissionSHA256": "2189500f1b3d75dac1cc4aeefb1d04a90c9a0671641311a802315844f65002e1",
+    "preparedPromptSHA256": "ca3aa18b14ebc282be826dd5fa09e9bb356ad909c9aae4723189d003c03381a6",
+    "actualPromptSHA256": "24b34395f226ccb083788eabaec64ffc64dc375da8e6482c419094f6ffa3d625"
+  },
+  "bindingAssessment": {
+    "result": "MATCHED_FOR_INSPECTED_BINDINGS",
+    "details": [
+      "Verified actual bytes and SHA256 of the supplied bootstrap, pure scope contract, own coverage, input manifest and launch permission.",
+      "Verified all six subject descriptors, including the freeze and common manifest.",
+      "Read and parsed the three common criteria records through their exact bound paths, byte counts and SHA256 values.",
+      "Own selected subject and scope exactly match the pure contract. Prepared prompt criteria match the contract, with materialJoins correctly restricted to the six applicable S_BUILD_HOST relationships.",
+      "Actual prompt begins with the exact prepared prompt and carries the matching ROOT ACTUAL GO bindings.",
+      "The contract actualGo=false and freeze explicitRootGo=false remain template/proposal values; neither was inferred to grant execution authority."
+    ]
+  },
+  "findings": [
+    {
+      "id": "S_BUILD_HOST-F01",
+      "severity": "HIGH",
+      "disposition": "SOURCE_CHANGE_REQUIRED",
+      "title": "Approved C# bytes are not revalidated after acquiring their prelaunch read locks",
+      "sourceCitations": [
+        "SOURCE-BODY-013, Invoke-E04AProfileProof.ps1, physical lines 1517-1527: Rules-SourceFiles hashes and compares source/stage files before lock acquisition.",
+        "SOURCE-BODY-013, physical lines 1551-1562: Prepare-RulesChallenge subsequently opens read locks, records a fresh topology and publishes the challenge without checking the held bytes against the approved descriptors.",
+        "SOURCE-BODY-013, physical lines 1211-1226 and 1736-1748: launch checks the executable identity but performs no intervening approved-source revalidation.",
+        "SOURCE-BODY-003, physical lines 434-447: source descriptor verification occurs inside the module-time witness, after project rules compilation/loading and target construction.",
+        "SOURCE-BODY-095, physical lines 367-408 and 1194-1215: project discovery supplies the module/target source union to CompileAndLoadAssembly.",
+        "SOURCE-BODY-098, physical lines 30 and 135-147: controls replace Prepare-RulesChallenge with a stub and do not exercise this acquisition window."
+      ],
+      "requirementCitations": [
+        "scope-contract.original.json: reviewDiscipline.finiteRulesWitnessCriteria[0], requiring approved C# bytes to be held before the owned EditorBuild process and unexpected source inputs rejected before launch.",
+        "scope-contract.original.json: S_BUILD_HOST finite rules witness duty and FINITE_RULES_RUNTIME_WITNESS material relationship."
+      ],
+      "analysis": "A staged target file can change after Rules-SourceFiles hashes version A but before File.Open acquires its lock. The lock then holds version B. Rules-Topology records B without comparing that snapshot to the approved descriptors, and the direct UBT root can start. The later producer check may refuse the mismatch, but it occurs after the changed target source can be compiled and its constructor executed. This is a prelaunch validation gap, independent of the expressly unclaimed continuous directory monitoring.",
+      "requiredRemediation": "After acquiring each source lock, validate the approved length and SHA256 using the held stream, and validate the final prelaunch source/topology snapshot against the frozen approved membership before Invoke-Root. Add a controlled fixture covering mutation between the earlier hash and lock acquisition, requiring refusal before launch. Refreeze and obtain affected fresh review.",
+      "executionQualification": "Static source finding only; no mutation fixture, UBT invocation or native execution was performed."
+    }
+  ],
+  "coverage": {
+    "assessmentComplete": false,
+    "inventoryIntegrity": {
+      "verifiedBodyFiles": 98,
+      "actualEntirePhysicalRows": 49749,
+      "mandatoryBodyFiles": 41,
+      "actualMandatoryPhysicalRows": 22936,
+      "mandatoryCompleteUnitRanges": 0,
+      "qualification": "All BODY descriptor byte/hash/line-count checks matched. Integrity checks do not establish substantive review."
+    },
+    "completeBodiesSubstantivelyRead": [
+      "SOURCE-BODY-001",
+      "SOURCE-BODY-002",
+      "SOURCE-BODY-003",
+      "SOURCE-BODY-004",
+      "SOURCE-BODY-005",
+      "SOURCE-BODY-006",
+      "SOURCE-BODY-010",
+      "SOURCE-BODY-011",
+      "SOURCE-BODY-016",
+      "SOURCE-BODY-017",
+      "SOURCE-BODY-018",
+      "SOURCE-BODY-054",
+      "SOURCE-BODY-055",
+      "SOURCE-BODY-056",
+      "SOURCE-BODY-057",
+      "SOURCE-BODY-096",
+      "SOURCE-BODY-097",
+      "SOURCE-BODY-098"
+    ],
+    "completeBodyPhysicalRows": 2025,
+    "completeBodyRangeQualification": "Each listed body was read from physical line 1 through its verified final physical line.",
+    "partialBodies": {
+      "SOURCE-BODY-013": [
+        "1-407",
+        "1053-1238",
+        "1454-1787",
+        "1922-2002"
+      ],
+      "SOURCE-BODY-095": [
+        "284-421",
+        "1180-1245"
+      ]
+    },
+    "partialBodyQualification": "Additional BODY095 keyword-search occurrences were navigation only and receive no completeness credit.",
+    "mandatoryBodiesWithoutCompleteAssessment": [
+      "SOURCE-BODY-012",
+      "SOURCE-BODY-013",
+      "SOURCE-BODY-014",
+      "SOURCE-BODY-015",
+      "SOURCE-BODY-019",
+      "SOURCE-BODY-047",
+      "SOURCE-BODY-048",
+      "SOURCE-BODY-053",
+      "SOURCE-BODY-060",
+      "SOURCE-BODY-061",
+      "SOURCE-BODY-062",
+      "SOURCE-BODY-081",
+      "SOURCE-BODY-082",
+      "SOURCE-BODY-085",
+      "SOURCE-BODY-086",
+      "SOURCE-BODY-087",
+      "SOURCE-BODY-088",
+      "SOURCE-BODY-089",
+      "SOURCE-BODY-090",
+      "SOURCE-BODY-091",
+      "SOURCE-BODY-092",
+      "SOURCE-BODY-093",
+      "SOURCE-BODY-095"
+    ],
+    "metadataAssessment": {
+      "record1": "PARTIAL",
+      "details": [
+        "Inspected selected freeze identity, source/plugin membership, tool paths, Windows/dependency values, SDK metadata and the finite selector expectations.",
+        "Confirmed the exact 17 rulesWitness keys, 32 expected selectors, two required discovery roots and eight optional absence paths.",
+        "Independently compared all 318 distinct witness descriptors against flat freeze.files: exact-case paths and byte counts match, with complete SHA256 digests equal under explicit hexadecimal case-insensitive comparison. All 318 have literal hash-letter-case differences.",
+        "Complete semantic assessment of record1, mandatory full records3/6 and relationship records2/4/5/7/13 remains unfinished."
+      ]
+    },
+    "consequence": "This is an incomplete scoped assessment and cannot satisfy the mandatory S_BUILD_HOST coverage requirement or enter the aggregate as a complete passing assessment."
+  },
+  "boundedSourceObservations": [
+    "BODY001 explicitly assigns bBuildAllModules=false. Its bridge guards the concrete target type, bridge identity and selected live values, and emits canonical nameof tags after enum equality checks. Full initialization/configuration/finalization and discovery-route assessment remains incomplete.",
+    "BODY003 supports fail-visible module-time process, source, assembly, completed-Lazy, cache poststate and artifact observations, with guarded private shapes and read-lock handling. Its limitations distinguish poststate from chronology and native activation.",
+    "BODY098 contains positive synthetic joins, identity/selector/order/cache rejection controls, retained/live drift controls and primary-plus-secondary failure preservation. These controls were read, not executed.",
+    "Parser/probe source requests NoPCHs and C++20. The probe documents that its local exception flag does not prove an exception-disabled Editor caller."
+  ],
+  "errorsAndRecoveries": [
+    "A combined policy/coverage rendering was truncated. Subsequent focused reads and complete descriptor comparisons recovered the binding/count information used here; the truncated rendering receives no completeness credit.",
+    "An exact-literal witness-to-flat hash-string comparison produced a large truncated diagnostic because uppercase witness hashes differ from lowercase flat hashes. Recomputed every complete descriptor using exact-case paths, exact byte counts and explicit OrdinalIgnoreCase hexadecimal comparison: no material descriptor join differences. No missing-descriptor finding is asserted.",
+    "A whole-contract materialJoins comparison differed because the contract also contains an inapplicable selector-graph relationship. Comparing the complete six applicable relationships recovered an exact match.",
+    "No EOF or JSON parsing failure occurred in the reads used for conclusions."
+  ],
+  "independenceAndRuntime": {
+    "actions": "Read-only shell data reads, inert JSON parsing, hashing and source searches only.",
+    "prohibitedActionsPerformed": false,
+    "details": "No implementation/helper import, stored-command execution, YAML parsing, build/test/engine/GUI/network/GitHub action, file mutation, delegation, resume/fork or memory tool use.",
+    "generatedRuntimeBodiesRead": false,
+    "runtimeQualification": "The supplied environment states read-only permissions and approval policy never. Actual session isolation, model/settings, memory configuration and received-input provenance remain separately root-attested; prohibited generated runtime/invocation bodies were not inspected."
+  },
+  "materialUncertainty": [
+    "The complete supervisor, six controls, compiler/CMake/response contracts, target configuration/finalization, normal discovery/cache/assembly route and all assigned metadata relationships have not received complete substantive assessment.",
+    "No actual staged topology, effective target receipt, CLR/cache accessibility, selected loaded assembly/type, native flags, compiled artifacts or plugin activation was observed.",
+    "A1G, A2, Linux, rendering/HUD, packaging and final independent CODE/REQ obligations remain open."
+  ],
+  "authority": "No SOURCE_PASS, aggregate SOURCE gate, phase/native execution permission or final acceptance is established."
+}

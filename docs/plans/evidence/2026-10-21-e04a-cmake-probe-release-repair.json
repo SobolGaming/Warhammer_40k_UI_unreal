@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "NARROW_CMAKE_TRY_COMPILE_RELEASE_SOURCE_REPAIR_NOT_EXECUTED",
+  "createdUtc": "2026-10-21T01:36:56.6620394Z",
+  "status": "CMAKE_PROBE_RELEASE_REPAIRED_SOURCE_PENDING",
+  "planRevision": 81,
+  "precedingClosureCommit": "3995baff65616242b3e60c26477c235343bfec1e",
+  "precedingRemoteBackup": {
+    "verifiedHash": "3995baff65616242b3e60c26477c235343bfec1e",
+    "branch": "codex/e02-world-input-proof",
+    "remote": "SobolGaming/Warhammer_40k_UI_unreal",
+    "verifiedUtc": "2026-10-21T01:35:54.1021157Z"
+  },
+  "futureSourceHead": null,
+  "futureRunId": null,
+  "changes": {
+    "reason": "The main dependency build is Release but default ABI try_compile used Debug; its successful compile/link used Zi and debug incremental linking while the owned job lingered until timeout.",
+    "wrapper": "CMake-Options selects CMAKE_TRY_COMPILE_CONFIGURATION=Release; Check-CMake requires its exact cache value; one explanatory comment.",
+    "functionalNorm": "Require real Release ABI compile/link, complete configure log and empirical exit/cleanup; preserve existing bounds and no skip/forced-works/static-only substitution."
+  },
+  "sourceOnlyChecks": {
+    "selectedOption": "-DCMAKE_TRY_COMPILE_CONFIGURATION=Release",
+    "cacheExpectedValue": "Release",
+    "newSourceReview": "NOT_RUN",
+    "powerShellAstErrors": 0,
+    "cleanupFix": "UNPROVEN_UNTIL_FRESH_RUN",
+    "actualCompilerProbe": "NOT_RUN",
+    "nativePhases": "ALL_NOT_RUN"
+  },
+  "preserved": [
+    "Real ABI compiler/linker check",
+    "Existing /MD, C++20, /EHsc, /GR- and static target options",
+    "Parser/test/fixture/vendor bytes and all five quotas",
+    "43 unique input IDs /33 recipes /50 attempts /eight suites",
+    "Existing supervisor/cleanup/settings/failure runtime assertions",
+    "Closed failed9972/run005502 result, raw SOURCE and prior histories"
+  ],
+  "claimsNotMade": [
+    "No mspdbsrv/process absence or guaranteed cleanup from source selection",
+    "No deferred special harness/transitive certification",
+    "No parser or full A1E acceptance",
+    "No new final CODE or different REQ",
+    "No Linux/GUI/package/Core execution"
+  ],
+  "next": "Checkpoint and verify OWN18 remote backup; fresh exact head/run/freeze/input bindings and affected independent focused SOURCE before a new ordered native sequence. Final CODE/different REQ only after actual completed execution/evidence freeze.",
+  "standingReviewConsent": "PERPETUAL_UNLESS_EXPLICITLY_REVOKED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "assertions": "FAIL_CLOSED_UNCHANGED",
+  "files": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+      "bytes": 265190,
+      "sha256": "2388EC4086C6CD518873B7FD30697564CF2C0B94147653B94D5E4205CFE81E93"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-functional-proof-packet.md",
+      "bytes": 5600,
+      "sha256": "D4861D9EE11AFB65BDB11BBCE113BBF1DD87C9BAD0CD1B403DD4BDB71BA899CF"
+    }
+  ],
+  "primarySourcePointers": [
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\variable\\CMAKE_TRY_COMPILE_CONFIGURATION.rst",
+      "bytes": 412,
+      "sha256": "39D1DEE2A37401BEE3CD65A4E2CA7BF6E487CA77AE9F9FD801CED457626A9DD9"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\command\\try_compile.rst",
+      "bytes": 15696,
+      "sha256": "DEC1E79BD2FCB8909EB8F80610F2EA911E33806BA43A118D43EC5CD73AD2246D"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeDetermineCompilerABI.cmake",
+      "bytes": 12942,
+      "sha256": "C41BD491AD3D8DCDAD56D4EB44CCC832BE0122CCCC375A666D535E8885B2C3AA"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\Platform\\Windows-MSVC.cmake",
+      "bytes": 22973,
+      "sha256": "D1943336D03FB6DDA427EBC53B44553252EBC7F48E85A9A04323A0B9016F239E"
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Help\\variable\\CMAKE_MSVC_DEBUG_INFORMATION_FORMAT.rst",
+      "bytes": 1479,
+      "sha256": "5239B8E58FEFA0A5C921837AAFC199F754C9BEE261F2B491F8041061A8EE3459"
+    }
+  ]
+}

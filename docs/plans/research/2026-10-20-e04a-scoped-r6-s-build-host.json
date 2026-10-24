@@ -1,0 +1,201 @@
+{
+  "verdict": "BLOCKED",
+  "blockingReason": "This assessment cannot certify strict positive-field input discipline. The deviation below prevents an unqualified local SOURCE_PASS; it is not a confirmed implementation defect.",
+  "subject": {
+    "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T122137Z-3498b937",
+    "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+    "scopeId": "S_BUILD_HOST",
+    "assessmentKind": "BLIND_SCOPED_INITIAL"
+  },
+  "bindings": {
+    "scopeContractSHA256": "99cebdde29f1544efa3fdb03a70ba59d584ee5b3153846d82e486d6fa274b49b",
+    "bootstrapSHA256": "20300a1887e6cf97688baddbeb803077119657a0fd086750fab758e61018b862",
+    "coverageSHA256": "28ca7ab6f121757c852238e27d18ca7cdfdaa7fe887fecbf55f71942c28ac4af",
+    "inputManifestSHA256": "e92cf7b8554f03fdad8fbc58a52bab90b028732826fd32dae7193499a5efa6b3",
+    "runtimeFreezeSHA256": "e4c776c0c0aca5cf09995bcf7484260c6ad20b039c1791523060d35384b3dcb6",
+    "launchPermissionSHA256": "331de22ad50abe3854e32cbcef5a20e5b7a2a8e009e04d7cf4ce35caa195393e",
+    "preparedPromptSHA256": "0fb6417a61bd877a913a813f403b31c7e5a074959a8dab61875850acfc61d976",
+    "storedActualPromptSHA256": "6c69d15a59998c134beaaedd51cf95f6f5eda30700406418126e6a3bdfadd4f5",
+    "verification": [
+      "Verified the bound files' byte counts and complete SHA256 values.",
+      "The stored actual prompt contains the exact prepared prompt followed by the matching ROOT ACTUAL GO.",
+      "The embedded subject, own scope, common criteria and local material-join projections match the bound contract through exact typed, ordered comparisons.",
+      "Verified ADOPTED_AND_DERIVED wrapper/test identities, all 44 distinct declared function Extent.Text hashes/ranges and the separate original-byte physical boundary at BODY013 rows2041–2100.",
+      "Read the three common criteria records through their exact bound absolute descriptors. Their BODY grants match the local policy. Metadata record4 uses the expressly bound panel copy with identical bytes/hash.",
+      "Head/base strings were checked against the authorized records; no Git command independently established repository state."
+    ]
+  },
+  "findings": [
+    {
+      "id": "BUILD-REVIEW-ADMIN-01",
+      "classification": "BLOCKING_ASSESSMENT_DISCIPLINE",
+      "requirementCitations": [
+        "Actual prompt: query only positively named exact-case fields.",
+        "review-bootstrap.json: initialManifestScalarFields, initialManifestDescriptorFields and manifestDescriptorArrayFields.",
+        "scope-contract.original.json: reviewDiscipline.metadataPresence and reviewDiscipline.exactCaseDataRead."
+      ],
+      "observation": "A schema-discovery query enumerated the own input manifest's top-level property names, exposing the unselected names candidateBinding, reviewScope and panelConstructor. Earlier generic probes also queried unselected absent field names. No values of those three present unselected properties were projected, and no referenced bodies were followed.",
+      "disposition": "Later restricted queries recovered accurate permitted data but cannot undo that exposure. I cannot certify literal compliance with the closed positive-field protocol. Root must dispose of this deviation or obtain a newly authorized clean assessment before counting this scope."
+    }
+  ],
+  "actualCoverage": {
+    "mandatoryEntireBodies": {
+      "completeFiles": 41,
+      "completePhysicalRows": 23188,
+      "unreadMandatoryFiles": [],
+      "requiredCompleteUnitRanges": []
+    },
+    "additionalEntireBodies": [
+      "SOURCE-BODY-007",
+      "SOURCE-BODY-008",
+      "SOURCE-BODY-009",
+      "SOURCE-BODY-020",
+      "SOURCE-BODY-021",
+      "SOURCE-BODY-022",
+      "SOURCE-BODY-023",
+      "SOURCE-BODY-024",
+      "SOURCE-BODY-025",
+      "SOURCE-BODY-027",
+      "SOURCE-BODY-029",
+      "SOURCE-BODY-031",
+      "SOURCE-BODY-033",
+      "SOURCE-BODY-049",
+      "SOURCE-BODY-050",
+      "SOURCE-BODY-083",
+      "SOURCE-BODY-084"
+    ],
+    "totalEntireBodiesRead": 58,
+    "totalEntirePhysicalRowsRead": 26617,
+    "globalIdentityInventory": "Independently checked all98 granted BODY byte/hash/physical-row identities: 50001 physical rows. Identity checking is separate from substantive reading.",
+    "bodiesNotReadInEntirety": [
+      "SOURCE-BODY-026",
+      "SOURCE-BODY-028",
+      "SOURCE-BODY-030",
+      "SOURCE-BODY-032",
+      "SOURCE-BODY-034 through SOURCE-BODY-046",
+      "SOURCE-BODY-051 through SOURCE-BODY-052",
+      "SOURCE-BODY-058 through SOURCE-BODY-059",
+      "SOURCE-BODY-063 through SOURCE-BODY-080",
+      "SOURCE-BODY-094"
+    ],
+    "selectedMetadata": {
+      "fullSelectedRecordsAssessed": [1, 3, 6],
+      "localRelationshipsAssessed": [2, 4, 5, 7, 13],
+      "additionalSelectedRecordRead": 11,
+      "rowPartitionsAssigned": [],
+      "details": [
+        "Checked all2252 freeze.files descriptors against the manifest inventory, all318 distinct rules-witness descriptors against the flat freeze, and complete compiler/reference descriptor joins.",
+        "Joined all33 frozen source members to their granted BODY identities and distinguished their seven C# member sequence from future observed source/map/manifest orders.",
+        "Assessed record3's42 groups/110 unique primary descriptors and record6's four response/PCH groups. Checked related integrated-catalog, source-binding and acquisition identities.",
+        "Recomputed all28 generated UTF8 recipe identities and all10 canonical fixture byte/SHA256/SHA1 identities without parsing YAML or invoking implementation.",
+        "Recovered selected-value projections and checked recursive type, case, string and array-order fidelity. These comparisons were not used as substitutes for source interpretation.",
+        "No claim is made to the global902-row selector assessment,49-origin-field union or1561-reference graph duties."
+      ]
+    },
+    "citationConvention": "BODY identifiers and positive physical ranges below resolve through the exact bound body-access-policy.json; criteria citations resolve through the hash-bound scope contract and exact common records."
+  },
+  "substantiveLocalAssessment": [
+    {
+      "atomicDutyIds": [
+        "VALUE_FIXTURE_COMPLETE",
+        "DEPENDENCY_TERMINAL_VALUE_ABI"
+      ],
+      "assessment": "Assessed the Core-owned public value/input boundary, private vendor use, ordinary typed refusals, failed-empty publication, ownership/copy/move tests, five inclusive quotas and all38 IDs/45 attempts/eight suites. The caller deliberately measures enabled Editor exceptions. Unexpected exceptions/fatal allocations terminate at noexcept, as the supplied A1E criteria expressly allow.",
+      "citations": [
+        "BODY004–012, complete",
+        "BODY014–015, complete",
+        "BODY049, physical1–818",
+        "BODY013, physical1163–1197 and1990–2019",
+        "BODY057, physical58–65 and associated fixture/ledger criteria"
+      ]
+    },
+    {
+      "atomicDutyIds": ["DEPENDENCY_BUILD_TOOLCHAIN"],
+      "assessment": "Assessed acquisition/source/header/license identity, static CMake configuration, forward-slash RC serialization, explicit compiler/SDK/Release dynamic CRT/C++20 selection, supervised dependency build and copied-library checks. Joined private parser/probe include/definition/link isolation to recursive response files, shared responses, forced definitions, NoPCHs/NoVFS and required actual Editor EH evidence. No configure, compiler or native result was observed.",
+      "citations": [
+        "BODY003, physical1–806",
+        "BODY013, physical1150–1162,1394–1453 and1886–1946",
+        "BODY047, physical1–398",
+        "BODY050, physical1–367",
+        "BODY053 and085–091, complete",
+        "Selected records1,3,6 and13"
+      ]
+    },
+    {
+      "atomicDutyIds": [
+        "DEPENDENCY_TARGET_DISCOVERY_SELECTION",
+        "STAGED_NORMAL_DISCOVERY_PRODUCER"
+      ],
+      "assessment": "Assessed the concrete bBuildAllModules=false assignment, supported AdditionalData bridge, inherited selectors/defaults/hooks, annotation-gated configuration, derived construction and platform finalization. Assessed normal explicit-project/non-test discovery and competing filename/type/platform/group candidates, extensions/additional roots/Mods/Tests/Intermediate boundaries, caches, source union, compilation/load, parents and foreign-plugin guards. The alternate all-modules/prebuild route was inspected as a conditional route, not claimed executed.",
+      "citations": [
+        "BODY001, physical1–88",
+        "BODY081–082, complete",
+        "BODY092–093, complete",
+        "BODY095, physical1–5751"
+      ],
+      "qualification": "BODY095's complete50 ranges,21 origins and5551 installed literal rows were independently reconciled with the integrated catalog. .NET/Roslyn/OS/library leaves and inapplicable no-project, no-code, test and foreign-plugin branches remain conditioned."
+    },
+    {
+      "atomicDutyIds": ["STAGED_CLIENT_SOURCE_AND_LOCAL_INTERFACES"],
+      "assessment": "Joined all33 frozen members and seven C# members to canonical BODY identities and the local build/header/UHT/config/entry/harness interfaces. Assessed module ancestry, E02-environment exclusion, source/stage membership, held-descriptor acquisition, prelaunch rechecks, error propagation and retained predecessor contracts. The reused client implementation and automation domains listed as unread were not independently re-reviewed in full; no peer conclusion supplies their behavior here.",
+      "citations": [
+        "BODY001–012 and016–025, as covered above",
+        "BODY027,029,031,033, complete",
+        "BODY013, physical1060–1149,1198–1228,1517–1643 and2020–2100",
+        "Selected records1 and2"
+      ]
+    },
+    {
+      "atomicDutyIds": ["BUILD_RECEIPT_UPSTREAM_PRODUCER"],
+      "assessment": "Assessed target/project/module/plugin selection through receipt construction and serialization to the downstream receipt schema. Target overrides, project/default enablement, optional dependencies, module configuration gates and BuildPlugins remain distinct. Receipt membership does not establish activation.",
+      "citations": [
+        "BODY060–062, complete",
+        "BODY081–084, complete",
+        "BODY092–093 and095, complete",
+        "Selected records4,5,7 and11"
+      ],
+      "qualification": "Complete startup dispatcher/explicit-loading behavior and catalog-wide activation are separately owned duties; this local upstream assessment supplies no aggregate disposition."
+    },
+    {
+      "atomicDutyIds": ["PROCESS_COMPLETE_HARNESS_PRESERVATION"],
+      "assessment": "Assessed one-phase authority, predecessors and budgets; suspended root creation/job assignment; original PID/creation/exit identity; inherited handles/output paths; timeout, cleanup and receiptArtifact handling; all six supervisor controls; all nine settings roles; owned environment/DDC/output behavior; and source/stage/plugin/fixture/partial-failure preservation. Aggregate job zero is not universal descendant identity or OS isolation. Output caps are retained-output acceptance checks, not hard OS allocation ceilings.",
+      "citations": [
+        "BODY013, complete; particularly physical331–361,405–1051,1198–1228 and2020–2100",
+        "BODY048, physical1–564",
+        "BODY054–057, complete"
+      ]
+    },
+    {
+      "atomicDutyIds": ["FINITE_RULES_RUNTIME_WITNESS_COMPLETE"],
+      "assessment": "Assessed producer, consumer and all BODY098 source-only controls: direct UBT root/process/CWD/argv/challenge joins;66 held canonical/staged streams; topology and source rechecks; supported bridge/live32 selectors; completed-Lazy/private-shape/read-lock guards; separate actual map/source/manifest orders; retained DLL/PDB/manifest/source/MVID/debug/checksum joins; dependent live preservation; and primary-plus-secondary failure handling. The real preparation-route controls are distinguished from later isolated validator fixtures.",
+      "citations": [
+        "BODY001, physical28–88",
+        "BODY003, physical341–806",
+        "BODY013, physical1454–1885",
+        "BODY095, complete",
+        "BODY098, physical1–308",
+        "scope-contract.original.json: reviewDiscipline.finiteRulesWitnessCriteria"
+      ],
+      "qualification": "The two required materialized cache roots are separate from eight optional disk absences. Chronological scanning, temporary directory insertion, every cache layer/hit/invalidation and internal syntax-tree order are unobserved. First-population and FilePath-sort conclusions remain bounded source-derived inferences. Pure fixtures were inspected, not executed."
+    }
+  ],
+  "errorsAndRecoveries": [
+    "The positive-field discipline deviation is the blocking finding above; it is not claimed recovered.",
+    "An attempted Python data read failed because Python was unavailable. Subsequent reads used independently authored .NET JSON queries.",
+    "A mistyped expected manifest digest in an early comparison was corrected against the bound GO; the complete actual digest matched.",
+    "Several policy/metadata projections exceeded tool output limits. Lost selected portions were reread in smaller complete units or recovered through complete descriptor/value comparisons. BODY095's affected physical rows were reread.",
+    "A JsonDocument byte-array overload ambiguity was corrected by explicit UTF8 decoding.",
+    "Incorrect assumptions about reference-row shape were replaced by the actual relativePath/bytes/sha256 shape; all167 reference joins subsequently passed.",
+    "An overstrict common/local coverage-row comparison was corrected after observing the local fullBodyRequired addition. All41 shared records, complete ranges and actual row counts then matched.",
+    "A mistaken inputFiles-only retention assumption was corrected to the inputFiles/frozenFiles union; all13 selected records and all three exact criteria descriptors were retained.",
+    "The non-function top-level boundary was checked using its original physical bytes, separately from function AST text."
+  ],
+  "independenceAndLimits": {
+    "actions": "Read-only assessment. No files saved or mutated; no implementation/helper import, YAML parse, build, test, engine, GUI, network, GitHub, delegation, resume/fork or memory use.",
+    "runtimeEvidence": "Observed the supplied read-only/never-approval tool policy. Verified stored prompt and current own GO records. Actual CLI isolation/settings, received-input provenance and memory configuration remain root-attested matters; prohibited generated runtime/invocation/output bodies were not inspected.",
+    "implementationFindings": "No confirmed material implementation defect was identified in the completed inspected local source contracts. This statement does not override the blocking assessment-discipline finding.",
+    "authority": "No local SOURCE_PASS, aggregate SOURCE approval, phase GO, native result or final acceptance is supplied. A1G, A2 compatibility, Linux, rendering/HUD, packaging and other required gates remain open."
+  }
+}

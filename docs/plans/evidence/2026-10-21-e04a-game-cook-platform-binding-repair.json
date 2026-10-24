@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_NARROW_E04_A1G_COOK_PLATFORM_FREEZE_METADATA_REPAIR",
+  "status": "COOK_PLATFORM_FREEZE_METADATA_REPAIRED_FRESH_BINDINGS_SOURCE_PENDING",
+  "asOfUtc": "2026-10-21T13:16:50.9979568Z",
+  "failureCheckpoint": "e43ec1d3f451d2a8d33b1a526141a15f9e1d64e5",
+  "verifiedFailureBackup": {
+    "path": ".local/planning/E04/A1G-cook-platform-binding-failure-PROPOSED/root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 475,
+    "sha256": "070241B97032AE631D2559647D5EBE3D46D2DCC35171F727A124D7A8C97BBB76"
+  },
+  "failedSource": "073826d8ad061302343ad3cb02a3b449086f1451",
+  "failedRun": "20261021T123959Z-657332ad",
+  "cause": "Both strict platform-primary checks matched installed hashes but had zero path entries in the failed runtime freeze.files. The failed run/freeze are preserved unchanged.",
+  "adoptedFreezeBuilder": {
+    "path": ".local/planning/E04/A1G-cook-platform-binding-repair-PROPOSED/New-E04A1GSourceFreeze.root-PROPOSED.ps1",
+    "bytes": 17881,
+    "sha256": "60E66FE7263DE5C5D6B6C45FAE9B446CCE129F3136D33339365AC71A2E2C3613"
+  },
+  "previousFreezeBuilder": {
+    "path": ".local/planning/E04/A1G-shared-plugin-diagnosis-PROPOSED-20261021-94b08f5a/New-E04A1GSourceFreeze.PROPOSED.ps1",
+    "bytes": 17213,
+    "sha256": "3E2A5F06B2CE2811F969EC1B88F10947858B8E10058AE73823CCB44FEA1D3DC6"
+  },
+  "adoptedTechnicalBuilder": {
+    "path": ".local/planning/E04/A1G-cook-platform-binding-repair-PROPOSED/New-FreshA1GTechnicalPacket.root-v7.PROPOSED.ps1",
+    "bytes": 20603,
+    "sha256": "827F9A711A1B43F29DBEE9C22D1ED9AEA4AC0CAEEA24BEA5C6187DD0E07096C7"
+  },
+  "previousTechnicalBuilder": {
+    "path": ".local/planning/E04/A1G-gameprobe-else-repair-PROPOSED/New-FreshA1GTechnicalPacket.root-v6.PROPOSED.ps1",
+    "bytes": 20434,
+    "sha256": "8BA5E4FEC38B1EF794D5F70CAD8C00704D4F5EB9A85138F904D87A2F42CAAABC"
+  },
+  "newRuntimeFreezeMembers": [
+    {
+      "sha256": "F90A31FDE3A396FE7AF084F16B6A1B8FFBB506F0434EA0EE2AE8637397775397",
+      "bytes": 35248,
+      "relativeToEngineSource": "Programs/AutomationTool/AutomationUtils/Platform.cs"
+    },
+    {
+      "sha256": "FB0A1E8E294AA48D29C2455FE0D0F23F9F2B71A567CD42C5EC62BB7BE1147C45",
+      "bytes": 44155,
+      "relativeToEngineSource": "Programs/AutomationTool/Win/WinPlatform.Automation.cs"
+    }
+  ],
+  "reviewPrimaryAdditions": {
+    "platformDefaultPakPolicy": "Platform.cs733-741",
+    "format": "Numbered physical source excerpts; existing overlap removed by unchanged extraction logic",
+    "limits": "Installed-source policy only; compiled UAT/source correspondence remains a trusted installed-tool leaf. Actual resolved Cook/Stage intent and loose output proof remain required.",
+    "win64PlatformSource": "WinPlatform.Automation.cs1-1079"
+  },
+  "staticChecks": {
+    "technicalBuilderFunctions": 9,
+    "metadataAstErrors": 0,
+    "wholeInverseMatchesBoth": true,
+    "freezeBuilderFunctions": 10,
+    "rootDiffTool": "0f191d",
+    "fullFunctionalDiffInspected": true,
+    "behaviorOrNativeProof": false
+  },
+  "rootAdoption": {
+    "bytes": 3228,
+    "sha256": "E531C17FE4E13143E7C438B47508998C4277675C4E327CB62BA3715AD09EFC04",
+    "path": ".local/planning/E04/A1G-cook-platform-binding-repair-PROPOSED/root-binding-repair-adoption.original.json"
+  },
+  "unchanged": "Canonical C++/wrapper/norm/Rules/targets/project/config/fixtures/supervisor and failed freeze/run",
+  "newRunId": "UNBOUND",
+  "actualNewBindings": "NOT_CREATED",
+  "freshSource": "NOT_RUN",
+  "allNineRepairedBindingPhases": "NOT_RUN",
+  "repairExecutedNativeOrReview": false,
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "next": "Checkpoint/push/gh-verify this metadata repair, derive fresh exact head/base/run/freeze/tool/config/input/command/norm bindings, obtain fresh affected SOURCE, then separate ordered phase GOs. No old SOURCE or phase authority transfers.",
+  "limits": [
+    "Metadata binding repair only; no canonical product, wrapper assertion or norm was weakened.",
+    "No new frozen manifest, staged run, SOURCE verdict, phase completion or Game-runtime result is established by adoption.",
+    "Previous SOURCE/five predecessor passes and pre-native Cook failure retain their actual facts.",
+    "Final CODE and different REQ remain after successful closed execution; A2/full fidelity/Core play/rendering/Linux/distribution stay open.",
+    "Standing private source/API review consent remains approved until explicit human revocation; credentials and unrelated private data stay excluded."
+  ]
+}

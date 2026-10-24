@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A2P0_SOURCE_PREREQUISITE_PROVENANCE",
+  "status": "SOURCE_PASS_ADMITTED_EXACT_SOURCE_ONLY",
+  "role": "E04_A2_P0_SOURCE",
+  "sourceHead": "c62c5a83900f2da984b5a41303c2a672d6f3d8ec",
+  "comparisonBase": "acb1cca2cda0eba6a44254da98bd172128cb40bb",
+  "runId": "20261023T195853Z-637ad147",
+  "sessionId": "01a16a59-265b-7f50-ae82-c6ddbec620a9",
+  "rawVerdict": "PASS",
+  "exactReport": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-source-review-c62c5a8.json",
+    "original": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A2P0-source-review/source-c62c5a8-20261023T195853Z-637ad147/last-message.txt",
+      "bytes": 8841,
+      "sha256": "55E1774767BCFB701AE2EAD0B8C5F8048063B00BC9282AC5C5E0DFAE6DF46FC4"
+    },
+    "utf8AndBase64RoundtripsMatched": true,
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-exact-trigger-failure-publication-PRIVATE-PROPOSED-20261023-a83d6c21/final-r2/2026-10-23-e04a2-p0-source-review-c62c5a8.json",
+      "bytes": 21348,
+      "sha256": "F74C2A4D2CEE67F870FC7BBBCDF9749F2BC277B0CF85E65E0461418AAD43395E"
+    }
+  },
+  "note": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-source-prerequisite-c62c5a8.md",
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-exact-trigger-failure-publication-PRIVATE-PROPOSED-20261023-a83d6c21/final-r2/2026-10-23-e04a2-p0-source-prerequisite-c62c5a8.md",
+      "bytes": 2022,
+      "sha256": "E9BCC758FA94A47B51D3A7FB4E6E735F3FEF5571FA1FB016D0166B2303E9F89F"
+    }
+  },
+  "rootSourceAdmission": {
+    "status": "PASS",
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A2P0-source-review/source-c62c5a8-20261023T195853Z-637ad147/root-source-admission.original.json",
+      "bytes": 8325,
+      "sha256": "BE5437F2F4EB0B85166C7C1A02E94E6BDFCFEBAE173659E123EA84445667133C"
+    },
+    "admittedUtc": "2026-10-23T20:13:00.4612153Z",
+    "rootTool": "b6a8d7",
+    "positiveSourceAdmissionEstablished": true,
+    "runtimeAuthorityFromAdmission": false,
+    "scope": "Exact focused SOURCE only, ten canonical payload reference captures with same-query guard diagnostic"
+  },
+  "strictBeforeFirstBody": {
+    "foregroundClosedExitCode": 0,
+    "foregroundTool": "85d596",
+    "rootClosureTool": "242a85",
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-c62c5a8-20261023T195853Z-637ad147\\closed-raw-output-seal.before-body.original.json",
+      "bytes": 4947,
+      "sha256": "91BA34B476F1885AD2014998E141C7582E62F01B5E8D37195C78B5B8BE9598BD"
+    },
+    "selectedSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-c62c5a8-20261023T195853Z-637ad147\\closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 4014,
+      "sha256": "3B776EEEB7B90D3E4E92307906CBD92816974214B7D92C79CF99CFA59833E7B0"
+    },
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "actualConsoleTool": "a7705a",
+    "independentRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-c62c5a8-20261023T195853Z-637ad147\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 2061,
+      "sha256": "56D39C739A4F3EABE4EF527C0BB51229B516B3AACE591CF0D111613554272330"
+    },
+    "independentUniqueRehashIdentities": 162,
+    "independentRehashTool": "d4ed24",
+    "firstBody": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-c62c5a8-20261023T195853Z-637ad147\\root-first-body-read.original.json",
+      "bytes": 730,
+      "sha256": "82C876885A3D889154DE95AB45FA0C08206C1BCD59227F0090F08B024E4C08CD"
+    },
+    "firstBodyTool": "b74c44",
+    "strictBeforeBodyOrder": true,
+    "qualification": "Point-in-time sealing and identity ordering; separate root conduct audit/admission is recorded"
+  },
+  "rootConduct": {
+    "audit": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A2P0-source-review/source-c62c5a8-20261023T195853Z-637ad147/root-conduct-audit-and-disposition.original.json",
+      "bytes": 7468,
+      "sha256": "914AC80503465779EBC5D38F5E169BE55A867625F8138E1AD017BADE5CF07570"
+    },
+    "createdUtc": "2026-10-23T20:13:00.4282592Z",
+    "status": "ADMISSIBLE_FOR_EXACT_SOURCE_ONLY",
+    "actualCounts": {
+      "inputs": 36,
+      "outputs": 36,
+      "unmatched": 0,
+      "orphans": 0,
+      "valueHashesMatched": 72,
+      "inputJoinsMatched": 36,
+      "reviewerVerificationIdentities": 136,
+      "reviewerIndependentRehashPasses": 2,
+      "presentationMapJoins": 18,
+      "fullOriginalUiBodies": 9,
+      "fullPyYamlBodies": 16,
+      "canonicalPayloadBodies": 10,
+      "documentCopyByteEqualities": 6,
+      "numberedApiExcerpts": 45
+    },
+    "reviewerInventoryRecovery": "Inputcall6(globalcompleteordinal11), corrected7; failedcall6 doesnotcount as verification",
+    "inventoryFormattingRecovery": "Call1 table formatting obscured metadata rows; bounded inventories2-4 recovered",
+    "reviewerTransportClips": 0,
+    "accessDenials": 0,
+    "remainingMaterialDeliveryGap": "NONE_OBSERVED",
+    "rootDisplayRecovery": "797812 boundedcritical tails, all36originalinputs read, all72valuehashes joined, AUX exact assigned output comparisons; root doesnotclaim personalsemanticreading of every entire output",
+    "auxiliaryFactualRoles": "NOT_INDEPENDENT_SOURCE_CODE_OR_REQ_VERDICTS",
+    "serializedContext": "One new read-only/approval-never/memory-disabled context; no resume/fork or model override; exact prompt plus one CRLF",
+    "lowerLevelIsolation": "UNVERIFIED",
+    "rootPersonalSemanticReadingOfEveryOutputClaimed": false
+  },
+  "accessAndCoverage": {
+    "wholeInputs": 101,
+    "frozenFiles": 154,
+    "reviewerVerificationIdentities": 136,
+    "reviewerVerificationPasses": 2,
+    "presentationMapJoins": 18,
+    "presentationCopies": 18,
+    "presentationBytes": 6877335,
+    "wholePresentationBodies": 16,
+    "hashOnlyPresentationBinaries": 2,
+    "originalReviewerDirectAccess": "UNVERIFIED_NOT_READ_HASHED_STAT_ED_OR_RETRIED",
+    "originalToCopyEquality": "ROOT_PROVENANCE",
+    "uiModules": 9,
+    "pyYamlBodies": 16,
+    "canonicalYamlBodies": 10,
+    "byteCopyRelations": 6,
+    "numberedExcerptRanges": 45,
+    "identitySetQualification": "Overlapping grant/identity/verification sets; not additive coverage or universal comprehension"
+  },
+  "qualifications": [
+    "Exact source assessment only; raw verdict remains unchanged. AUX factual work is not an independent SOURCE/code/REQ approval.",
+    "Eighteen original direct reviewer paths UNVERIFIED/metadata-only/no retry; sixteen identical source presentations read and two binary presentations stat/hash only. Original-to-copy byte equality is root provenance.",
+    "Serialized read-only/never/memory-disabled context and observed conduct retained; lower-level OS/backend memory/features/isolation and universal comprehension UNVERIFIED.",
+    "Source/stdlib/runtime dependency and source-binary correspondence are ordinary qualified dependencies; OWN17 DEFERRED_UNPROVEN, Linux UNTESTED.",
+    "Observed reviewer inventory syntax/formatting errors and root display errors remain preserved; no semantic coverage or runtime success is inferred from process exit or hashes alone.",
+    "No native capture, compiler result, finalCODE/REQ acceptance or execution authority follows from this admission."
+  ],
+  "captureAsOfSourceAdmission": {
+    "status": "NOT_RUN",
+    "runtimeAuthorityFromAdmission": false
+  },
+  "subsequentCapture": {
+    "status": "FAIL_CLOSED",
+    "failureEvidence": "docs/plans/evidence/2026-10-23-e04a2-p0-exact-trigger-capture-failure.json",
+    "rootFailureDisposition": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-root-20261023T-background-preparation/bindings-c62c5a8-20261023T195853Z-637ad147/root-native-failure-disposition.original.json",
+      "bytes": 10637,
+      "sha256": "3994C8BBD9EDAA2CCEA330FA641233918B48B34F7462A6DAF141C6C152A87BBC"
+    },
+    "captureFilePresent": false,
+    "capturedProfiles": 0,
+    "sourceVerdict": "PASS_UNCHANGED"
+  },
+  "preserved": {
+    "firstSourceBlocked": "4b1e038_RAW_BLOCKED",
+    "originalD0NativeFailure": "CLOSED_FAIL_UNCHANGED",
+    "boundedA1gAcceptance": "REV131_PRESERVED",
+    "own17": "DEFERRED_UNPROVEN",
+    "linux": "UNTESTED",
+    "broaderA2And727AndGImplementAndFinalCodeReq": "OPEN_NOT_GRANTED",
+    "visible": "HOLD_UNTIL_EXPLICIT_OWNER_APPROVAL_20261023T1935"
+  },
+  "publisherCanonicalWritesPerformed": false
+}

@@ -1,0 +1,18 @@
+{
+  "recordKind": "PURE_STATIC_DIAGNOSTIC_DRIVER_COMPLETION",
+  "manifestSha256": "DBE2B1BD50C2EB28EBFCC9CEF68254EDAB7434257A3EB4F547A10602DA233561",
+  "processId": 41304,
+  "timedOut": false,
+  "cleanupConfirmed": true,
+  "exitCode": 0,
+  "elapsedMilliseconds": 3578,
+  "workerRuntimeBudgetMilliseconds": 45000,
+  "cleanupBudgetMilliseconds": 5000,
+  "candidateEmitted": false,
+  "candidateExecuted": false,
+  "ubtExecuted": false,
+  "rulesConstructed": false,
+  "nativeBuild": false,
+  "sourceReviewPassed": false,
+  "admission": false
+}

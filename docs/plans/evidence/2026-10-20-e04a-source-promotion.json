@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A1E_CANONICAL_SOURCE_PROMOTION_NOT_EXECUTION",
+  "status": "CANONICAL_SOURCE_AUTHORED_PENDING_INDEPENDENT_SOURCE",
+  "recordedUtc": "2026-10-20T00:54:01.8169455Z",
+  "sourcePreparationParent": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "candidateHead": "BOUND_BY_SUBSEQUENT_LOCAL_CHECKPOINT_AND_PRIVATE_FREEZE",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "sourceFiles": [
+    {
+      "relativePath": "docs/plans/evidence/2026-10-19-e04a-profile-result.json",
+      "bytes": 2703,
+      "sha256": "F22C6077A10AC7497AB5ACAF263DE7C20047118CF560DA25882A1F4946DBE4F7"
+    },
+    {
+      "relativePath": "docs/plans/evidence/2026-10-19-e04a-profile.md",
+      "bytes": 4914,
+      "sha256": "B5C1151242E0FC256BBDB92CEF19E9230CAD89E54738C739FF2E5DB9D6DBB494"
+    },
+    {
+      "relativePath": "docs/plans/research/2026-10-19-e04a-profile-packet.md",
+      "bytes": 12093,
+      "sha256": "1AF5AD640B92FA5CE1440ABCA6BE7D8714A6A376EBF17AE09F135888F2A23D5B"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/E04ProfileProof.uplugin",
+      "bytes": 745,
+      "sha256": "8AC5C6FD453867D7402FF9C77E88126175968F35DB98BF9796FDCD725B539C64"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileParser/E04ProfileParser.Build.cs",
+      "bytes": 423,
+      "sha256": "13A5BBE81F47681F0B7FFCC295D9B7A30723A0B163F0B69935CC4F87914C7479"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileParser/Private/E04ProfileInternals.h",
+      "bytes": 1748,
+      "sha256": "C0522F51DC16B4B07232DA54B01FE60B1CDA09CFCFDA52BD598A6D55DFA61030"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileParser/Private/E04ProfileParserModule.cpp",
+      "bytes": 1906,
+      "sha256": "F5F0D521060065CC5B9CD4A6CD823FFBD363870F5084836E901CD4256EE6617E"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileParser/Private/E04YamlEventReader.cpp",
+      "bytes": 10689,
+      "sha256": "A38AADD0290B138B8F943B13E4D12A91BABFE3361708843F13BD96527FE76245"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileParser/Public/E04ProfileFormat.h",
+      "bytes": 1444,
+      "sha256": "A078BF55B61D978A134AF1F2F755BC501E909A511B17A97692F0E54477DC75BD"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileParser/Public/E04ProfileValue.h",
+      "bytes": 1269,
+      "sha256": "F1EE69862BD487C4776CFC93BA6AEF53A6FEB5CA64A24096C7C49B3691D5BAE8"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileProbe/E04ProfileProbe.Build.cs",
+      "bytes": 736,
+      "sha256": "FE1D122EF86635CBA5A96983B965379D5DFE3EDC07F4AC238AB73BA8BA1EA31D"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/E04ProfileProbeModule.cpp",
+      "bytes": 90,
+      "sha256": "2B6C62F0050385E172BD2ACCADED8184E274C19AC4106A60FFD2CF1719FAC129"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/Tests/E04ProfileAbiTests.cpp",
+      "bytes": 36617,
+      "sha256": "99C26E8DCF6296D75709DB66F83D7B13B990AA3A80E879EADC2D4E092A16FC10"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "bytes": 23587,
+      "sha256": "871F1E8A9D2AA1709428BCB368130ACEA8E0A651A4CA3CD6CCB13AA759ED2A44"
+    },
+    {
+      "relativePath": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "bytes": 157022,
+      "sha256": "D09E07F7BD638BEE7E39F6AC85F26B6E7794CB475C049450E380DAD8DFA67B80"
+    },
+    {
+      "relativePath": "Source/WarhammerClientE04AEditor.Target.cs",
+      "bytes": 559,
+      "sha256": "77DFF79425AD17ECFEC3F3479847470ABE8A96236F7F00B11BB766A4F8751D3F"
+    },
+    {
+      "relativePath": "tests/migration/fixtures/e04a/corpus-manifest.json",
+      "bytes": 8031,
+      "sha256": "959A44EE846F81D13E46B22A4885A10A06F767B5D03CEC34A6790C7ED65B5D40"
+    },
+    {
+      "relativePath": "tests/migration/fixtures/e04a/generated-cases.json",
+      "bytes": 15433,
+      "sha256": "ADE0E9B0CF9EA5DEFB31519EB281BAB325751437BB150E54A2586BA4D9784D13"
+    }
+  ],
+  "authoredPaths": 18,
+  "plannedNativeSuites": 8,
+  "plannedUniqueInputs": 38,
+  "plannedInputAttempts": 45,
+  "sourceReview": "NOT_RUN_PENDING_FRESH_FREEZE",
+  "configure": "NOT_RUN",
+  "dependencyBuild": "NOT_RUN",
+  "editorBuild": "NOT_RUN",
+  "discovery": "NOT_RUN",
+  "native": "NOT_RUN",
+  "audit": "NOT_RUN",
+  "finalCode": "NOT_RUN",
+  "finalRequirements": "NOT_RUN",
+  "acceptanceEstablished": false,
+  "executionAuthority": false,
+  "visibleWindows": 0,
+  "publicationOrMergeAuthority": false,
+  "sourceClosure": {
+    "sha256": "F9D1E215C68A9794C3AF57A26D01A5D8959BA7B774D03DB828D9AC825F9BF904",
+    "bytes": 24673,
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\e04a1-root-ready-20261019\\authoring-draft\\20261020T000429Z-aaecfce4\\root-a1e-source-authoring-closure.v2.plugin-membership.original.json"
+  },
+  "promotionGo": {
+    "sha256": "0CA828BD2A8F8AB535B0B69D0C6CFD747D827993D25441A325DF7704E562A508",
+    "bytes": 2639,
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\e04a1-root-ready-20261019\\authoring-draft\\20261020T000429Z-aaecfce4\\root-canonical-promotion-go.original.json"
+  },
+  "limits": [
+    "The 18 copied files retain their original dated source-preparation state, not current execution evidence.",
+    "Editor exceptions enabled in A1E; genuine exception-disabled A1G runtime caller still required before full A1/RQ11/production adoption.",
+    "Full A2 retains 727 compatibility scenarios; E04-B shared HUD/render/input, Linux, packages and real Core remain open.",
+    "Ordinary targets keep the opt-in content-free plugin disabled. No sibling edit or vendor source/native execution occurred.",
+    "Source freeze and affected independent SOURCE review precede separate phase authority; no phase authorized by promotion."
+  ]
+}

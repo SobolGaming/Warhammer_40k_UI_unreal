@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_CLOSED_GAME_PROBE_COMPILATION_FAILURE",
+  "status": "CLOSED_GAME_PROBE_COMPILATION_FAILED_REPAIR_REQUIRED",
+  "asOfUtc": "2026-10-21T12:33:53.4735836Z",
+  "sourceHead": "03fb024d94c944122b8ff34a317143e06bb77b5e",
+  "comparisonBase": "3d6d5ffb33fd3f901ead6af0d7394da04f5959ff",
+  "runId": "20261021T121210Z-65f77563",
+  "runStatus": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+  "authority": "CLOSED_NO_RETRY_NO_SUCCESSOR_GO",
+  "sourcePrerequisite": {
+    "status": "PASS_ADMITTED",
+    "rawVerdict": "PASS",
+    "exactHeadOnly": true,
+    "rootAdmission": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/root-source-admission.original.json",
+      "bytes": 5108,
+      "sha256": "9794B9FA7B087D53D4538FE28CB31D484425DE8DACE95256CAD5F4BF5E771241"
+    },
+    "publicationReceipt": "docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-03fb024.json",
+    "note": "docs/plans/research/2026-10-21-e04a-game-source-prerequisite-03fb024.md",
+    "rawReport": "docs/plans/research/2026-10-21-e04a-game-source-review-03fb024.md",
+    "scope": "SOURCE prerequisite only; no approval transfer to a repaired candidate or acceptance of failed GameBuild"
+  },
+  "normativeRequirement": {
+    "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 17266,
+    "sha256": "E4F3FA8E117D4FC4C23DBAB9D70AEE09411B8C78F0302EF945823A60BB5B9692"
+  },
+  "sourceFreezeManifest": {
+    "path": ".local/reviews/E04A1G-source-review/common-03fb024-20261021T121210Z-65f77563/runtime-freeze/source-freeze-manifest.json",
+    "bytes": 213383,
+    "sha256": "F151002B61C3273E6B0E735493ECF475C02E86A33219BF1A2F2063D74BCC3F5A"
+  },
+  "sourceBindings": {
+    "wrapper": {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "bytes": 183417,
+      "sha256": "6C0F250D59EE34C575EEAC055CE2A058198E3F27F9A689AD3897B15778CCDCF7"
+    },
+    "rules": {
+      "path": "Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs",
+      "bytes": 87636,
+      "sha256": "CD9C8424E543BD40A0FAE209837EE9EA2AFC0351ECF929BDC7F5F0786313D939"
+    },
+    "gameProbe": {
+      "path": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+      "bytes": 20592,
+      "sha256": "0B127BA256912A4B388EB476A3429BAB3663D0C4F0467F76DDD4F64A925F22D4"
+    }
+  },
+  "phaseStatuses": {
+    "Preflight": "PASS_ADMITTED",
+    "DependencyConfigure": "PASS_ADMITTED",
+    "DependencyBuild": "PASS_ADMITTED",
+    "EditorPrerequisiteBuild": "PASS_ADMITTED",
+    "GameBuild": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "Cook": "NOT_RUN",
+    "Stage": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "predecessors": [
+    {
+      "phase": "Preflight",
+      "status": "PASS_ADMITTED",
+      "completion": {
+        "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/preflight/completion.json",
+        "bytes": 771,
+        "sha256": "69521DA89DA26B51DDABA1AB5030F93FCA81EE6F302EB4A0130757D68ED8E200"
+      },
+      "result": {
+        "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/preflight/result.json",
+        "bytes": 40630,
+        "sha256": "8F28B533DFEF595E26FC022BD1A4A805E3629610378C8A0A29C225D221D46F40"
+      }
+    },
+    {
+      "phase": "DependencyConfigure",
+      "status": "PASS_ADMITTED",
+      "completion": {
+        "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/dependencyconfigure/completion.json",
+        "bytes": 792,
+        "sha256": "4C58BF9E750C1960D24C81E34C19DA408C43B85B1A677AF0848E4C61E8954B37"
+      },
+      "result": {
+        "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/dependencyconfigure/result.json",
+        "bytes": 170507,
+        "sha256": "C34694421252AD5A6865B32813F77D6F8F57BA3C466EE0FDE8592CD6D6E22379"
+      }
+    },
+    {
+      "phase": "DependencyBuild",
+      "status": "PASS_ADMITTED",
+      "completion": {
+        "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/dependencybuild/completion.json",
+        "bytes": 784,
+        "sha256": "0B4828F40AFB85A1BC17FF1B12F3A5119A727D36BF8B418A9780E90F16295CB1"
+      },
+      "result": {
+        "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/dependencybuild/result.json",
+        "bytes": 179124,
+        "sha256": "1ABBC24B65141346C3FAF8A25D0E4AB48CEF794D1DBD62684CBE73054B82A761"
+      }
+    },
+    {
+      "phase": "EditorPrerequisiteBuild",
+      "status": "PASS_ADMITTED",
+      "completion": {
+        "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/editorprerequisitebuild/completion.json",
+        "bytes": 801,
+        "sha256": "B10978A5F344EC2FB9109512F469402631846F300FB20EF141D45E2CBAA5897E"
+      },
+      "result": {
+        "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/editorprerequisitebuild/result.json",
+        "bytes": 5547448,
+        "sha256": "BC7EDD1E3360D1ABFC6810DAD897B462707A04C47C577AD679354F832F8539F0"
+      }
+    }
+  ],
+  "failedPhase": {
+    "phase": "GameBuild",
+    "status": "FAIL_CLOSED_PRESERVE_PARTIALS_NO_RETRY",
+    "executionPassed": false,
+    "startedUtc": "2026-10-21T12:31:32.0127850Z",
+    "completedUtc": "2026-10-21T12:32:23.8288762Z",
+    "elapsedSeconds": 55.0310678,
+    "primaryFailure": {
+      "stage": "GameBuild",
+      "type": "System.Management.Automation.RuntimeException",
+      "message": "E04A1_ROOT_FAILED_OR_CLEANUP_UNVERIFIED"
+    },
+    "secondaryErrorCount": 0,
+    "completionAbsent": true,
+    "result": {
+      "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/gamebuild/result.json",
+      "bytes": 75433,
+      "sha256": "3B33403C5ECE086A063334E76A51CBCFC9BC6C378AD3844B21D68EB11AF0D78A"
+    }
+  },
+  "nativeUbt": {
+    "status": "FAIL",
+    "pid": 38304,
+    "elapsedSeconds": 39.8747415,
+    "exitCode": 6,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "resultLine": "Result: Failed (OtherCompilationError)",
+    "loggedExecutionSeconds": 39.62,
+    "declaredTotalActionCount": 23,
+    "lastLoggedActionOrdinal": 21,
+    "finalJobTotalProcesses": 35,
+    "finalJobActiveProcesses": 0,
+    "receipt": {
+      "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/phases/gamebuild/a1g-game-build.process.json",
+      "bytes": 15111,
+      "sha256": "E7ED7E0A6943CF725C6FF233DC130229F0797C30B20246479E6E124292794E97"
+    },
+    "stdout": {
+      "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/logs/a1g-game-build.stdout.log",
+      "bytes": 3502,
+      "sha256": "5953C41782C5C1A7F2D682BD6B7688BD1AD11ACDE2856BFAE9C4CDE45E8CEAA1"
+    },
+    "textLog": {
+      "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/logs/gamebuild.log",
+      "bytes": 15162,
+      "sha256": "F92A8C4FFE9FDB56ED045B5DA1716FFEC3F5DD592391F7E304EAB387CBA3E703"
+    },
+    "jsonLog": {
+      "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/logs/gamebuild.json",
+      "bytes": 47418,
+      "sha256": "5D43FDB60C0AB86A658C4615DD00B2BD42B0951A0DC5E37D777E773606467E91"
+    },
+    "moduleSelection": {
+      "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/logs/a1g-yaml-module-selection.json",
+      "bytes": 5898,
+      "sha256": "CC8E6DE7945D08FF7E2B563F2C030DE6DDDA3ED38F98A03BA744816B5CF1D388"
+    },
+    "targetReceiptObservation": {
+      "path": ".local/experiments/E04A1G/20261021T121210Z-65f77563/project/Binaries/Win64/WarhammerClientE04A1G.target",
+      "exists": false
+    },
+    "gameCompilationAttempted": true,
+    "successfulGameBuild": false,
+    "gameLinkActionObserved": false,
+    "meaning": "Game compilation was attempted. Compiler C2181 stopped the Game build; no successful Game build, final link, caller/parser flag proof or runtime result is established."
+  },
+  "compilerFailure": {
+    "code": "C2181",
+    "source": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+    "line": 342,
+    "column": 9,
+    "message": "illegal else without matching if",
+    "observedAction": "[10/23] Compile [x64] E04ProfileGameProbeModule.cpp [NoUba]",
+    "scope": "Actual retained compiler diagnostic. This failure checkpoint adopts no source correction and does not pass any Game proof criterion."
+  },
+  "retainedCompilerWarnings": [
+    {
+      "code": "C4996",
+      "source": "Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp",
+      "line": 25,
+      "message": "PLATFORM_64BITS is deprecated as UE only supports 64-bit",
+      "classification": "NONFATAL_WARNING_RETAINED"
+    },
+    {
+      "code": "C4701",
+      "source": "Source/WarhammerClient/Private/Migration/E02WorldProofGameMode.cpp",
+      "line": 544,
+      "variable": "Origin",
+      "message": "potentially uninitialized local variable 'Origin' used",
+      "classification": "HISTORICAL_NONFATAL_WARNING_RETAINED"
+    }
+  ],
+  "selectionQualification": "The scoped-project source reached actual parser and GameProbe compilation, beyond the previous Shared/EnablePlugins rejection. This is an observed progression only; it does not establish successful GameBuild or complete selection, compiler-response, link, cook, stage or runtime proof.",
+  "outerClosure": {
+    "pid": 42076,
+    "exitCode": 1,
+    "exitConfirmed": true,
+    "timedOut": false,
+    "rootKillRequested": false,
+    "streamsDrained": true,
+    "receipt": {
+      "path": ".local/planning/E04/A1G-shared-plugin-repair-PROPOSED/phase-execution-03fb024-20261021T121210Z-65f77563/gamebuild.outer/completion.original.json",
+      "bytes": 1637,
+      "sha256": "7727D167C87C6B815C468D7F751CCE00F9FB8ACF7797D7B4D468581D24D582E6"
+    }
+  },
+  "rootFinitePreservation": {
+    "source": 36,
+    "stage": 36,
+    "fixtures": 2,
+    "settings": 9,
+    "gameSettings": 1,
+    "selectedCurrentMemberStatesMatched": 84,
+    "retainedArtifactsMatched": 52,
+    "predecessorDescriptorsMatched": 8,
+    "rootClosedRecord": {
+      "path": ".local/planning/E04/A1G-gameprobe-else-failure-PROPOSED/root-closed-run.original.json",
+      "bytes": 5164,
+      "sha256": "195BEC80019C8D28B2E9B65D750D74420133CBEFF26790C8B9E86D8125A1A0DD"
+    },
+    "limits": "Finite actual closed observations only; no continuous preservation, Rules certificate, reconstruction of omitted observations or promotion of failed phase."
+  },
+  "remainingPhases": 4,
+  "plannedInputs": 2,
+  "plannedGameAttempts": 2,
+  "plannedOrderedCustomChecks": 52,
+  "gameAttempts": 0,
+  "evaluatedCustomChecks": 0,
+  "repairAdopted": false,
+  "nextRequired": "Checkpoint this closed compilation failure and SOURCE publication, push and gh-verify exact OWN18 remote backup before narrow source repair. Then checkpoint/verify repaired-source backup, derive fresh exact bindings and obtain fresh affected SOURCE before a new ordered phase chain. Never retry the closed run or transfer its SOURCE admission to changed source.",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "standingReviewTransmissionConsent": "APPROVED_UNTIL_EXPLICIT_HUMAN_REVOCATION_WITHIN_ESTABLISHED_SCOPE_AND_DESTINATION",
+  "limits": [
+    "SOURCE and four predecessor admissions do not pass actual failed GameBuild or supply final CODE/REQ acceptance.",
+    "Game compilation was attempted, but no successful Game build, final static link, complete caller/parser flag proof or Game runtime result was established.",
+    "No successor GO, retry, new run, source repair, GUI interaction, Core-host action or Core error issue is supplied by this record.",
+    "Final CODE and a different REQ follow actual successful closed execution; A2, full fidelity/HUD, Linux and migration acceptance remain open.",
+    "OWN17 optional harness/generated-response/transitive Rules/cache/witness/repeated certification stays deferred and unproven. Ordinary runtime assertions remain fail-closed; no optional harness campaign is required.",
+    "This later factual metadata/report overlay is outside the exact reviewed candidate. Bounded A1E acceptance and all historical raw failures remain unchanged.",
+    "Auxiliary metadata drafting performs no canonical/sibling edits, Git operation, test/runtime/review execution or authority admission."
+  ]
+}

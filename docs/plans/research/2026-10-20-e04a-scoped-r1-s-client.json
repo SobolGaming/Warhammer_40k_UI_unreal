@@ -1,0 +1,214 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "scopeId": "S_CLIENT",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-f7f77eb-20261020T044205Z-14143fc0",
+  "sourceHead": "f7f77eb281c0629fba12fa5a352e5301bf43e738",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T044205Z-14143fc0",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "disposition": "Local scoped source assessment only. No actionable finding identified in the completed S_CLIENT scope.",
+  "bindings": {
+    "reviewDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-f7f77eb-20261020T044205Z-14143fc0-S_CLIENT",
+    "inputManifestSHA256": "cdf1178bded188e0e17f89f07535dcbe7cec2087e907b97f13ae1ae50a648006",
+    "runtimeFreezeManifestSHA256": "a0a5375cd24f72aeb8a8c14fd89bbd9b541507d693fabe0686c0f186fb2551e2",
+    "scopeContractSHA256": "3f7b477a836e770cd7a8df90c1fe31ce53ab2bdc6438112c48519d694d470edb",
+    "selectedScopeSHA256": "cd4fa07f0a8f606d3a8558510699b447e6f2877b61166b48a04a459c2a8dc971",
+    "bootstrapSHA256": "ae6154a7ba106695942505163ef2baa3ba978f1d6a4b524a56fe503cc8b1d467",
+    "coveragePlanSHA256": "7a450284341dd2b54e35f8514ddd9ac451b17aeca0f8639c08b67258e83bdb62",
+    "bodyAccessPolicySHA256": "19c39e571c0755c3fa824c13537f5ce6b3f465bb77e1cd471bbb390c22c2d48e",
+    "metadataSelectionPolicySHA256": "c4993bf4a3f1faa4d470752bf5e6dd423cc15f8c34e8849d4c2fcc8650d3fbb3",
+    "launchPermissionSHA256": "ad5acc939b7a7ba0ff77cd2d8068461679e536dcc8dad80f5875ae1d618f7b78",
+    "preparedPromptSHA256": "5d979db61912595912c9d6c98404918c5273693c7f4f38ad4199036f7d9e3d40",
+    "actualPromptSHA256": "40d060c2c4746ade7a44f118b56dbee3116a64b1ace02f79908d50e6a2f1901e",
+    "globalBodyAccessPolicySHA256": "7008d21165ff2d657c98daf31646375cedc7dc1c302bcf2710e1dfd3c8ab75bc",
+    "globalSelectedMetadataPolicySHA256": "cb808ca909ef0b7176d1a323f12e402295f1d9c6946ec8b6db8a111055e0433a",
+    "globalCoverageInventorySHA256": "abc393c499be3558333feb002f18059eb7acf01794c9308013a86caeea6c2744",
+    "primaryCatalogSHA256": "0e677eef666ac98d9dae453ad53b973cb6fc94c8db4fb63d3bafb115f926d35d",
+    "commonSourceInputManifestSHA256": "999a4decffc4f3a95f42de057f21ad63fff5e00b1d5486bef442096910b8e4b2",
+    "verification": [
+      "Verified descriptor lengths and hashes, exact own identity fields, and the selected S_CLIENT scope against the pure contract.",
+      "Verified the bound actual prompt's prepared prefix and compared its local subject, scope, access, common-body and discipline payload with the selected scope.",
+      "Read the current ROOT launch authority, permission and consent records. Their review authority is distinct from the freeze's explicitRootGo:false and the contract's actualGo:false.",
+      "Source head and comparison base are exact bound identities; Git ancestry was not independently verified."
+    ]
+  },
+  "coverage": {
+    "verifiedAvailableBodyFiles": 93,
+    "verifiedAvailablePhysicalRows": 32460,
+    "mandatoryEntireFilesCompleted": 32,
+    "mandatoryEntirePhysicalRowsCompleted": 7106,
+    "mandatoryInterfacePhysicalRowsCompleted": 164,
+    "mandatoryUnread": [],
+    "actualEntireFilesRead": 41,
+    "actualEntirePhysicalRowsRead": 10618,
+    "rangeConvention": "Inclusive positive physical lines in the BODY file resolved through the bound inventory.",
+    "completeBodies": {
+      "SOURCE-BODY-001": [1, 15],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-003": [1, 326],
+      "SOURCE-BODY-004": [1, 15],
+      "SOURCE-BODY-005": [1, 50],
+      "SOURCE-BODY-006": [1, 58],
+      "SOURCE-BODY-007": [1, 52],
+      "SOURCE-BODY-008": [1, 48],
+      "SOURCE-BODY-009": [1, 276],
+      "SOURCE-BODY-010": [1, 18],
+      "SOURCE-BODY-011": [1, 3],
+      "SOURCE-BODY-012": [1, 608],
+      "SOURCE-BODY-013": [1, 1696],
+      "SOURCE-BODY-016": [1, 8],
+      "SOURCE-BODY-017": [1, 12],
+      "SOURCE-BODY-018": [1, 12],
+      "SOURCE-BODY-019": [1, 288],
+      "SOURCE-BODY-020": [1, 3],
+      "SOURCE-BODY-021": [1, 12],
+      "SOURCE-BODY-022": [1, 1],
+      "SOURCE-BODY-023": [1, 8],
+      "SOURCE-BODY-024": [1, 4],
+      "SOURCE-BODY-025": [1, 2],
+      "SOURCE-BODY-026": [1, 681],
+      "SOURCE-BODY-027": [1, 60],
+      "SOURCE-BODY-028": [1, 683],
+      "SOURCE-BODY-029": [1, 167],
+      "SOURCE-BODY-030": [1, 260],
+      "SOURCE-BODY-031": [1, 111],
+      "SOURCE-BODY-032": [1, 1411],
+      "SOURCE-BODY-033": [1, 75],
+      "SOURCE-BODY-034": [1, 861],
+      "SOURCE-BODY-035": [1, 500],
+      "SOURCE-BODY-036": [1, 1095],
+      "SOURCE-BODY-047": [1, 398],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-092": [1, 50],
+      "SOURCE-BODY-093": [1, 88]
+    },
+    "declaredInterfaceVerification": {
+      "body": "SOURCE-BODY-013",
+      "sha256": "642fd17ae0e46f179c694cbf593365446f989e7754f01d37bd7cb4942eb08e14",
+      "requiredRanges": [
+        [1065, 1112],
+        [1197, 1209],
+        [1451, 1486],
+        [1548, 1554],
+        [1637, 1696]
+      ],
+      "result": "Read completely, subsequently expanded to the entire wrapper. Syntax-only PowerShell AST inspection found no parse errors and confirmed all six named function boundaries."
+    },
+    "metadata": {
+      "all13SelectedDescriptorHashesVerified": true,
+      "mandatoryFullRecordCompleted": 2,
+      "additionalFullSelectedRecordRead": 11,
+      "scopedRelationshipsAssessed": [1, 4, 7, 11, 12],
+      "assignedRowPartitions": [],
+      "qualification": "Relationship assessment covered local staging, project, target, plugin, environment and source bindings. It does not claim complete review of every field in relationship records."
+    },
+    "unreadBeyondLocalScope": {
+      "bodyFileCount": 52,
+      "bodyIds": "SOURCE-BODY-014..015, 037..046, 048..053, 058..091",
+      "metadata": "Records 3,5,6,8,9,10,13 were not substantively assessed. Unused fields and complete catalog/graph arrays in relationship records were not fully assessed.",
+      "qualification": "All93 BODY hashes and physical row counts were verified. Hash/count verification is separate from substantive reading. No complete902-selector or1561-reference graph review is claimed."
+    }
+  },
+  "assessment": [
+    {
+      "requirement": "scope.selected.json /scope/duties/0; SOURCE-BODY-054:2-21; SOURCE-BODY-093:8-34",
+      "conclusion": "The existing CoreBoundary reader preserves its explicit typed failures, opaque identity comparisons, numeric-token handling and outcome-context checks. The E02 geometry and input paths remain advisory and contain no Core submission port.",
+      "sourceCitations": [
+        "SOURCE-BODY-026:419-668",
+        "SOURCE-BODY-027:6-58",
+        "SOURCE-BODY-028:218-464",
+        "SOURCE-BODY-030:164-258",
+        "SOURCE-BODY-031:81-103"
+      ]
+    },
+    {
+      "requirement": "scope.selected.json /scope/duties/0 and /scope/duties/1",
+      "conclusion": "Read every client implementation/header and all three client test translation units. The reflected headers retain their generated-header routes and module declarations. Build dependencies cover the used client facilities; AutomationDriver dependencies and world-input tests remain conditional. Discovery registration does not itself run those test bodies.",
+      "sourceCitations": [
+        "SOURCE-BODY-019:21-78",
+        "SOURCE-BODY-021:1-12",
+        "SOURCE-BODY-033:1-75",
+        "SOURCE-BODY-034:1-861",
+        "SOURCE-BODY-035:1-500",
+        "SOURCE-BODY-036:1-1095"
+      ]
+    },
+    {
+      "requirement": "scope.selected.json /scope/duties/1; material join STAGED_CLIENT",
+      "conclusion": "All33 ordered frozen sourceMembership entries resolve uniquely through selected metadata record2 to positive complete BODY routes. Each relative path, length and digest matches its source-copy identity. Every staged authored member was subsequently read completely, including compiled client/plugin tests and all three Config files.",
+      "sourceCitations": [
+        "Selected metadata record1 /sourceMembership and /projectPluginMembership",
+        "Selected metadata record2 /sourceBodies and /reusedEntrypointBodies",
+        "SOURCE-BODY-013:1065-1114",
+        "SOURCE-BODY-013:1651-1661"
+      ]
+    },
+    {
+      "requirement": "scope.selected.json /scope/duties/2; SOURCE-BODY-057:48-65",
+      "conclusion": "Config retains the shell GameMode. The ordinary targets do not opt into E04; the plugin defaults disabled and the dedicated Editor target enables it. E02 world activation requires both its explicit GameMode URL and -E02Proof. E04 module entrypoints introduce no custom startup host/window work. Native selection is restricted to the eight E04 names.",
+      "sourceCitations": [
+        "SOURCE-BODY-001:3-14",
+        "SOURCE-BODY-002:8-15",
+        "SOURCE-BODY-008:1-9",
+        "SOURCE-BODY-011:1-3",
+        "SOURCE-BODY-016:6-7",
+        "SOURCE-BODY-017:3-11",
+        "SOURCE-BODY-018:3-11",
+        "SOURCE-BODY-023:1-8",
+        "SOURCE-BODY-032:1063-1094",
+        "SOURCE-BODY-013:1548-1554"
+      ]
+    },
+    {
+      "requirement": "material join PROCESS_PRESERVATION; SOURCE-BODY-057:147-176",
+      "conclusion": "The wrapper binds single-phase authority and predecessors, stages exact source membership, checks nine settings roles and preserves source/stage/plugin/fixture/output identities. It clears inherited E02/compiler-control variables for child launch and restores the parent values afterward. Six supervisor controls use five roots. Retained process receipts, timeout/exit/job-cleanup checks and publication failure paths remain explicit. These are source-supported mechanisms, not observed execution results or universal OS isolation.",
+      "sourceCitations": [
+        "SOURCE-BODY-013:283-361",
+        "SOURCE-BODY-013:404-742",
+        "SOURCE-BODY-013:862-993",
+        "SOURCE-BODY-013:1141-1147",
+        "SOURCE-BODY-013:1197-1227",
+        "SOURCE-BODY-013:1555-1581",
+        "SOURCE-BODY-013:1621-1696"
+      ]
+    },
+    {
+      "requirement": "SOURCE-BODY-057:11-17,56-65,141-145",
+      "conclusion": "The dedicated target is consistent with the installed exception-enabled Editor subset. Module-local false does not disable inherited global exceptions. Probe guards and wrapper flag checks preserve that distinction; Linux fails its unmet native prerequisite rather than selecting a Windows artifact.",
+      "sourceCitations": [
+        "SOURCE-BODY-003:26-36",
+        "SOURCE-BODY-010:7-16",
+        "SOURCE-BODY-012:16-33",
+        "SOURCE-BODY-013:1524-1546",
+        "SOURCE-BODY-047:30-77",
+        "SOURCE-BODY-047:203-219"
+      ]
+    }
+  ],
+  "findings": [],
+  "errorsAndRecoveries": [
+    "The initial combined contract/coverage output was truncated. The complete local coverage record was re-read without truncation before reliance.",
+    "A body-policy schema probe selected nonexistent property names and emitted nulls. Those probe nulls were discarded; actual bodyGrants and policy fields were located and used. They were not treated as source null values.",
+    "Two optional metadata queries expanded large closure/source-binding arrays and were truncated. Relevant local fields, descriptor relationships and source-binding identities were recovered through narrower explicit queries. Remaining complete catalog/graph data is disclosed as unread and was not used to claim graph completeness.",
+    "No mandatory source read remained truncated or incomplete. No EOF, JSON parse or wrapper AST parse error remained unresolved."
+  ],
+  "independenceAndRuntime": {
+    "observedContext": "This assessment context supplied workspace instructions and the current scoped assignment; no implementation transcript or peer verdict was supplied or accessed.",
+    "permissions": "Current runtime instructions specify read-only filesystem access and approval policy never.",
+    "reviewerActions": "No delegation, resume/fork, memory access, file mutation, stored-command execution, implementation import, YAML parsing, build/test/engine/GUI/network/GitHub action occurred. Stored commands remained inert.",
+    "memory": "Disabled use was requested and no memory capability was used. Backend memory configuration was not independently verified.",
+    "unverifiedLaunchProvenance": "Actual CLI/model/session identity and external launch-history evidence were not independently established here. Root must validate its captured invocation/isolation evidence; configuration and GO records alone do not prove those properties."
+  },
+  "materialUncertaintyAndLimits": [
+    "No unresolved material source gap was identified within S_CLIENT.",
+    "Selected metadata record12 retains sourceHead c6a9410a524649147f157c3c17a2b838c7e0fc81 and runId 20261020T010406Z-a7dec142. It was treated as reused membership metadata; relevant local descriptor identities were compared with the current bound closure, not promoted into current runtime evidence.",
+    "Compilation/UHT success, actual compiler flags, target receipts, module loading, runtime preservation and cleanup were not executed or empirically established.",
+    "A1G exception-disabled caller proof, A2 compatibility, Linux, rendering/HUD, packaging and separate final CODE/REQ gates remain open.",
+    "SOURCE_PASS applies only to this local assessment. It is not the aggregate SOURCE gate, phase GO, native authority or final acceptance."
+  ]
+}

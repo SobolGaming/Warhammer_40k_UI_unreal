@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A2P0_WORKER_RECEIPT_SOURCE_ADOPTION",
+  "status": "WORKER_RECEIPT_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "predecessorHead": "f805547c56b97ae6e15a9e7437395122af0c7a80",
+  "adoptedUtc": "2026-10-23T20:49:44.1760785Z",
+  "rootAdoption": {
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-root-20261023T-background-preparation/root-rev139-worker-receipt-source-adoption.original.json",
+      "bytes": 3687,
+      "sha256": "5ED250589688A7FF2B2EC35A46C5379C983342F8C17AEE83355E10809A694989"
+    },
+    "actualRootTool": "dc8bd5",
+    "executionAuthorityReleased": false
+  },
+  "completedFailureCheckpointBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-rev138-worker-receipt-source-failure-checkpoint-backup.original.json",
+    "bytes": 1266,
+    "sha256": "0BAF1CF1DB32BBC7174AB808E573D28A749A8EBD8F3BA2326A6E54E016FF418F"
+  },
+  "currentWorker": {
+    "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/scripts/migration/a2p0/Invoke-A2P0CanonicalReferenceWorker.ps1",
+    "bytes": 14487,
+    "sha256": "BCE29A8C5CFC46737863B2E5084956ECAEC092DDEC751F800670336224755A5F"
+  },
+  "currentPacket": {
+    "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/docs/plans/research/2026-10-23-e04a2-p0-canonical-reference-packet.md",
+    "bytes": 16456,
+    "sha256": "6341EE1F9A9D730DFBABB98050D6AFF40DF7FF3CA3F0EDB3A33F0CE2E51744DD"
+  },
+  "previousWorkerIdentityHistory": {
+    "bytes": 14054,
+    "sha256": "612C474B566FAF51565C614853D579CA926B51D764D134F27B789A52718E4EC6",
+    "qualification": "Historical scalar identity, not a live descriptor"
+  },
+  "previousPacketIdentityHistory": {
+    "bytes": 15690,
+    "sha256": "4F5B1F1C2AD8782ACB6EB1F3713870F1E68C11755C78CE42A98534C31AC7F7DC",
+    "qualification": "Historical scalar identity, not a live descriptor"
+  },
+  "note": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-worker-receipt-source-repair.md",
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-worker-receipt-rev139-PRIVATE-PROPOSED-20261023-2e8f1c45/final-r2/2026-10-23-e04a2-p0-worker-receipt-source-repair.md",
+      "bytes": 2100,
+      "sha256": "CAE5C9575493F2E91DCA42970EAA321BC305078374B7BB6D26B67CEF79A0275A"
+    }
+  },
+  "sourceChecks": {
+    "exactGuardRemovedBytes": 147,
+    "forwardReplacements": 4,
+    "wholeWorkerInverseMatched": true,
+    "normRows": [
+      "P0-S07",
+      "P0-S08"
+    ],
+    "wholeNormInverseMatched": true,
+    "criteriaPhysicalRange": "5-41",
+    "rootProposalReadTools": [
+      "59e467",
+      "222f6d"
+    ]
+  },
+  "finiteBehavior": {
+    "finalizationReserveSeconds": 2,
+    "cooperativeWorkerSeconds": 70,
+    "supervisorWorkDeadlineFromWorkerStartSeconds": 68,
+    "minimumSupervisorMilliseconds": 65000,
+    "childSeconds": 60,
+    "cleanupSeconds": 5,
+    "outerSeconds": 75,
+    "receiptAttempt": "ONE_CREATE_NEW_BOUNDED_BEFORE_TICK",
+    "receiptCap": 131072,
+    "completionCap": 4096,
+    "dedicatedReceiptStatHashHasNoTick": true,
+    "supervisorPrimaryError": "SEPARATE_COMPLETION_METADATA",
+    "workerFailure": "EXISTING_FAILURE_FIELD",
+    "ioSuccessOrPreemption": "NOT_PROMISED",
+    "pathsProcessesRetryGuardPolicy": "UNCHANGED"
+  },
+  "futureBindingRefresh": [
+    "worker descriptor in canonical binding",
+    "worker SHA pin in MapD",
+    "fresh packet norm/source freeze/control identities"
+  ],
+  "retention": {
+    "supervisorResult": "UNCHANGED_ORIGINAL_PRIMARY_ERROR_ACCOUNTING_AND_PID_DATA",
+    "processReceipt": "ONE_BEST_EFFORT_BOUNDED_CREATE_NEW_ATTEMPT_BEFORE_TICK",
+    "receiptStatHash": "NO_DEADLINE_REENTRY",
+    "processReceiptCapBytes": 131072,
+    "incompleteReceipt": "FAIL_CLOSED",
+    "subsequentWorkerErrors": "EXISTING_COMPLETION_FAILURE_FIELD",
+    "originalSupervisorPrimaryError": "SEPARATE_COMPLETION_METADATA",
+    "completionCapBytes": 4096,
+    "ioSuccess": "NOT_PROMISED",
+    "synchronousIoPreemption": "NOT_PROMISED",
+    "pathsProcessesRetryGuardPolicy": "UNCHANGED"
+  },
+  "successor": {
+    "compilation": "NOT_RUN",
+    "controls": "NOT_RUN",
+    "affectedSourceReview": "NOT_RUN",
+    "runtime": "NOT_RUN",
+    "head": "UNBOUND",
+    "run": "UNBOUND",
+    "bindings": "NOT_CREATED",
+    "runtimeGo": "NOT_CREATED",
+    "executionAuthorityReleased": false
+  },
+  "next": "Repaired-source checkpoint/push/exact-gh backup; refresh worker descriptor/MapD pin and complete API/packet/freeze/control bindings; fresh affected SOURCE and positive root admission before separate GO",
+  "history": {
+    "rawChangesRequestedSourceHead": "bfbc38382f43c310524d5819f78c98f248e2019a",
+    "failureCheckpointHead": "f805547c56b97ae6e15a9e7437395122af0c7a80",
+    "rev138ChangesRequested": "PRESERVED_STATIC_FINDING_UNFORCED",
+    "rev138FailureEvidence": "docs/plans/evidence/2026-10-23-e04a2-p0-source-worker-receipt-retention-failure.json",
+    "c62SourcePass": "ORIGINAL_EXACT_SOURCE_ONLY",
+    "c62NativeFailureAndExactTrigger": "CLOSED_UNCHANGED",
+    "d0NativeFailure": "CLOSED_UNCHANGED",
+    "boundedA1gAcceptance": "REV131_PRESERVED",
+    "visible": "HOLD_UNTIL_EXPLICIT_OWNER_APPROVAL_20261023T1935",
+    "own17": "DEFERRED_UNPROVEN",
+    "linux": "UNTESTED",
+    "broaderA2And727AndGImplementAndFinalCodeReq": "OPEN_NOT_GRANTED"
+  },
+  "qualifications": [
+    "Exact guarded byte transformations and static inspection only, not compilation or runtime proof.",
+    "f805547 failure/raw CHANGES_REQUESTED remain unchanged.",
+    "Repaired-source checkpoint/push/exact-gh backup precedes new bindings and fresh affected SOURCE; positive root admission precedes separate one-shot GO."
+  ],
+  "publisherCanonicalWritesPerformed": false
+}

@@ -1,0 +1,145 @@
+{
+  "recordKind": "PURE_ROSLYN_STATIC_SEMANTIC_DIAGNOSTICS_ONLY",
+  "schemaVersion": 1,
+  "driverHostFramework": ".NET 10.0.11",
+  "compilerAssemblies": [
+    "Microsoft.CodeAnalysis, Version=4.13.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+    "Microsoft.CodeAnalysis.CSharp, Version=4.13.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+  ],
+  "parse": {
+    "languageVersion": "CSharp12",
+    "documentationMode": "None",
+    "kind": "Regular",
+    "preprocessorSymbols": [
+      "WITH_FORWARDED_MODULE_RULES_CTOR",
+      "WITH_FORWARDED_TARGET_RULES_CTOR",
+      "UE_4_17_OR_LATER",
+      "UE_4_18_OR_LATER",
+      "UE_4_19_OR_LATER",
+      "UE_4_20_OR_LATER",
+      "UE_4_21_OR_LATER",
+      "UE_4_22_OR_LATER",
+      "UE_4_23_OR_LATER",
+      "UE_4_24_OR_LATER",
+      "UE_4_25_OR_LATER",
+      "UE_4_26_OR_LATER",
+      "UE_4_27_OR_LATER",
+      "UE_4_28_OR_LATER",
+      "UE_4_29_OR_LATER",
+      "UE_4_30_OR_LATER",
+      "UE_5_0_OR_LATER",
+      "UE_5_1_OR_LATER",
+      "UE_5_2_OR_LATER",
+      "UE_5_3_OR_LATER",
+      "UE_5_4_OR_LATER",
+      "UE_5_5_OR_LATER",
+      "UE_5_6_OR_LATER",
+      "UE_5_7_OR_LATER",
+      "UE_5_8_OR_LATER"
+    ]
+  },
+  "options": {
+    "outputKind": "DynamicallyLinkedLibrary",
+    "optimizationLevel": "Release",
+    "warningLevel": 4,
+    "deterministic": true,
+    "reportSuppressedDiagnostics": true,
+    "nullableContextOptions": "Disable",
+    "assemblyIdentityComparer": "DesktopAssemblyIdentityComparer.Default"
+  },
+  "orderedLogicalSources": [
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\E04ProfileParser\\E04ProfileParser.Build.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\E04ProfileProbe\\E04ProfileProbe.Build.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClient.Target.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClient\\WarhammerClient.Build.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClientE04AEditor.Target.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClientEditor.Target.cs"
+  ],
+  "metadataReferenceCount": 31,
+  "diagnostics": [
+    {
+      "id": "CS0012",
+      "severity": "Error",
+      "warningLevel": 0,
+      "isSuppressed": false,
+      "message": "The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027.",
+      "span": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+        "startLine": 263,
+        "startColumn": 33,
+        "endLine": 263,
+        "endColumn": 51
+      },
+      "literal": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs(263,33): error CS0012: The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027."
+    },
+    {
+      "id": "CS0012",
+      "severity": "Error",
+      "warningLevel": 0,
+      "isSuppressed": false,
+      "message": "The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027.",
+      "span": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+        "startLine": 349,
+        "startColumn": 42,
+        "endLine": 349,
+        "endColumn": 60
+      },
+      "literal": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs(349,42): error CS0012: The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027."
+    },
+    {
+      "id": "CS0012",
+      "severity": "Error",
+      "warningLevel": 0,
+      "isSuppressed": false,
+      "message": "The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027.",
+      "span": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+        "startLine": 395,
+        "startColumn": 46,
+        "endLine": 395,
+        "endColumn": 64
+      },
+      "literal": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs(395,46): error CS0012: The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027."
+    },
+    {
+      "id": "CS0012",
+      "severity": "Error",
+      "warningLevel": 0,
+      "isSuppressed": false,
+      "message": "The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027.",
+      "span": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+        "startLine": 418,
+        "startColumn": 36,
+        "endLine": 418,
+        "endColumn": 54
+      },
+      "literal": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs(418,36): error CS0012: The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027."
+    },
+    {
+      "id": "CS0012",
+      "severity": "Error",
+      "warningLevel": 0,
+      "isSuppressed": false,
+      "message": "The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027.",
+      "span": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+        "startLine": 468,
+        "startColumn": 39,
+        "endLine": 468,
+        "endColumn": 57
+      },
+      "literal": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs(468,39): error CS0012: The type \u0027ReadOnlySequence\u003C\u003E\u0027 is defined in an assembly that is not referenced. You must add a reference to assembly \u0027System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51\u0027."
+    }
+  ],
+  "candidateEmitted": false,
+  "candidateAssemblyLoaded": false,
+  "rulesConstructed": false,
+  "ubtExecuted": false,
+  "nativeExecuted": false,
+  "sourceReviewPassed": false,
+  "accepted": false,
+  "limitation": "Static source/type diagnostics; host framework differs from target metadata runtime. No rules construction, cache witness, build, native or acceptance result."
+}

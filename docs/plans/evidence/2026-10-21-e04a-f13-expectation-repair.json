@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_F13_EXPECTATION_REPAIR",
+  "planRevision": 79,
+  "status": "F13_EXPECTATION_REPAIRED_FOCUSED_SOURCE_PENDING",
+  "priorClosure": {
+    "commit": "584a33916040a971bb721bcfec2d1125fe1c25ec",
+    "remoteVerifiedUtc": "2026-10-21T00:51:43Z",
+    "backupObservation": "Root verified the exact remote checkpoint before this narrow repair.",
+    "reviewedSourceHead": "9e8340878ca1ac417e81ca2b967a0ae5dcb4e1b0",
+    "reviewedRunId": "20261021T002433Z-ba2ef0ff",
+    "rawVerdict": "CHANGES_REQUESTED",
+    "rawVerdictUnchanged": true
+  },
+  "repair": {
+    "scope": "F13_EXPECTATION_ONLY",
+    "native": "Add comment and int64 ExpectedObservedNodes using F13 ? 3 : 2; change only the exact equality operand.",
+    "manifest": "A1-F13.expected.diagnosticObserved: 2 -> 3",
+    "f11Observed": 2,
+    "f13Observed": 3,
+    "parserBehaviorChanged": false,
+    "wrapperBehaviorChanged": false,
+    "inputBytesAndRecipesUnchanged": true,
+    "original40InputsPreserved": true,
+    "f13Input": {
+      "bytes": 151,
+      "sha256": "D59EFB83D1A70F15B58DF2A4CA1FA7B7AE0BD4BF8869EAA61BE5B8F20DC96E7D"
+    },
+    "plannedCounts": {
+      "inputs": 43,
+      "generatedRecipes": 33,
+      "attempts": 50,
+      "suites": 8
+    }
+  },
+  "norm": {
+    "current": {
+      "path": "docs/plans/research/2026-10-21-e04a-functional-proof-packet.md",
+      "bytes": 5056,
+      "sha256": "839A1FE8B90270ECE50B2FFD033844D835273D97F0AD436E7474E2C0C04759AF"
+    },
+    "supersession": "Explicit F13 diagnostic correction only: F13 Observed 3, F11 2; earlier operational packet shared value 2 is historical. Refusal type, mark, limit, bytes and bounded-probe behavior remain required.",
+    "historicalOperationalPacket": {
+      "path": "docs/plans/research/2026-10-19-e04a-profile-packet.md",
+      "bytes": 28571,
+      "sha256": "C7C704BDBD2C720824CA40ADB77AA746E6D4EDFA54118AD35B6E7AE63588ECA7"
+    }
+  },
+  "changedSource": [
+    {
+      "path": "Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/Tests/E04ProfileAbiTests.cpp",
+      "bytes": 40054,
+      "sha256": "69CF7548DDF5061EA0D97318B9B7EF1B3F6BC5F947B774FD2A22F391008C5863"
+    },
+    {
+      "path": "tests/migration/fixtures/e04a/generated-cases.json",
+      "bytes": 19667,
+      "sha256": "2CDDF7649449D2BD96D38E616865931CF3192B2747CE8CFAE30D678C9EEB8265"
+    }
+  ],
+  "inertDataChecks": {
+    "record": {
+      "path": ".local/planning/E04/focused-component-source-9e83408/root-inert-F13-expectation-checks.original.json",
+      "bytes": 693,
+      "sha256": "0F5200BBA837A29365ED1D184DB8344D136ACB4A5DF8B43F31AFBA2FDA5F39DC"
+    },
+    "observedUtc": "2026-10-21T00:52:44.2264537Z",
+    "jsonParsedGeneratedRecords": 33,
+    "onlyManifestSemanticEdit": "A1-F13.expected.diagnosticObserved:2->3",
+    "other32GeneratedRecordsAndMetadataUnchangedAfterEolNormalization": true,
+    "nativeLiteralExactlyMatchesManifest": true,
+    "inputAndRecipeCountsUnchanged": true,
+    "qualification": "Inert literal/data comparison only, not parser, compiler, native test or SOURCE execution."
+  },
+  "preserved": {
+    "wrapper": {
+      "path": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "bytes": 265025,
+      "sha256": "500C814859FC80705F99936A232D88ACDF3E1DDCB8FC5E8471FADD9C1D360873"
+    },
+    "closureResearch": {
+      "path": "docs/plans/research/2026-10-21-e04a-focused-source-f13-closure.md",
+      "bytes": 3090,
+      "sha256": "8F8C9BB8A3C5B877AC75E62C6F6C6660014B73976B943B21C63B20955EF54F22"
+    },
+    "closureResult": {
+      "path": "docs/plans/evidence/2026-10-21-e04a-focused-source-f13-result.json",
+      "bytes": 6901,
+      "sha256": "33643FD2ACB75970126ACBAAC06CC9CC6D4C5E936528559AA449A76BA0630FA2"
+    }
+  },
+  "remaining": {
+    "successorSourceHead": null,
+    "successorRunId": null,
+    "successorFreeze": null,
+    "freshFocusedSource": "PENDING",
+    "compile": "NOT_RUN",
+    "candidateOrParserExecuted": false,
+    "nativeTests": "NOT_RUN",
+    "allEightNativePhases": "NOT_RUN",
+    "nativePhaseGo": false,
+    "nativeRunRootCreated": false,
+    "sourceAdmissions": 0,
+    "visibleCount": 0,
+    "finalCodeAndDifferentReq": "REQUIRED_AFTER_ACTUAL_EXECUTION_AND_EVIDENCE_FREEZE",
+    "own17": "ACTIVE_SPECIAL_ASSURANCE_DEFERRED_UNPROVEN",
+    "runtimeAssertions": "FAIL_CLOSED_DO_NOT_IGNORE_FAILURE",
+    "standingPrivateSourceApiConsent": "PERPETUAL_UNLESS_REVOKED",
+    "laterGates": "A1G; A2/full lexical and fidelity including plain DEL; HUD; Linux UNTESTED; packaging; full acceptance remain open."
+  },
+  "limits": "Narrow expectation and normative correction, not a parser fix, passing SOURCE, compilation/native result or acceptance. New actual bindings are separate future records; no old report/GO transfer."
+}

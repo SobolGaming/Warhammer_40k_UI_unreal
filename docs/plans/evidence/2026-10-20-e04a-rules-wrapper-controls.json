@@ -1,0 +1,489 @@
+{
+  "kind": "PURE_SYNTHETIC_RULES_VALIDATOR_CONTROLS_NOT_NATIVE_PROOF",
+  "limits": [
+    "Synthetic validator/owned-file rejection controls, not a real UBT witness or compiled PE/PDB/native proof.",
+    "Metadata-reader APIs and actual CLR/cache/toolchain/selector observations remain unexecuted.",
+    "No full wrapper initialization, phase entry, Add-Type, process launch, credentials, network, engine or sibling mutation."
+  ],
+  "matchedCount": 51,
+  "cases": [
+    {
+      "observedPass": true,
+      "name": "complete-synthetic-seven-source-join",
+      "diagnostic": null,
+      "expectedPass": true,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "same-pid-wrong-creation-filetime",
+      "diagnostic": "E04A1_RULES_ROOT_PID_CREATION_IDENTITY_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "different-ubt-pid",
+      "diagnostic": "E04A1_RULES_ROOT_PID_CREATION_IDENTITY_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-cwd",
+      "diagnostic": "E04A1_RULES_ROOT_PATH_OR_CWD_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-host-path",
+      "diagnostic": "E04A1_RULES_ROOT_PATH_OR_CWD_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "managed-argv-reordered",
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: literalManagedArgv",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "both-root-and-managed-wrong-argv",
+      "diagnostic": "E04A1_RULES_ARRAY_MISMATCH: exactDirectRootArgv",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "cleanup-unverified",
+      "diagnostic": "E04A1_RULES_OWNED_ROOT_NOT_COMPLETE",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "timeout",
+      "diagnostic": "E04A1_RULES_OWNED_ROOT_NOT_COMPLETE",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "boolean-string-rejected",
+      "diagnostic": "E04A1_RULES_BOOL_MISMATCH: ownedRoot.exitConfirmed",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-challenge",
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: attemptNonce",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-run",
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: runId",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-source-head",
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: sourceHead",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-freeze",
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "case-different-required-key",
+      "diagnostic": "E04A1_RULES_EXACT_KEYS_REQUIRED",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-runtime-vs-sdk",
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: actualCLR.runtimeVersion",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "startup-hook-channel",
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: explicitChildEnvironment.DOTNET_STARTUP_HOOKS",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "constructor-false-finalized-true",
+      "diagnostic": "E04A1_RULES_BOOL_MISMATCH: effectiveSelectors.bBuildAllModules",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "unsupported-specialized-type",
+      "diagnostic": "E04A1_RULES_SELECTED_TYPE_OR_FINAL_SELECTOR_UNSUPPORTED",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "selector-null-not-empty",
+      "diagnostic": "E04A1_RULES_NULL_MISMATCH: effectiveSelectors.optedInModulePlatforms",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "selector-key-absent",
+      "diagnostic": "E04A1_RULES_EXACT_KEYS_REQUIRED",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "plugin-selector-array-order",
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: effectiveSelectors.enablePlugins[0]",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-target-source",
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-loaded-mvid",
+      "diagnostic": "E04A1_RULES_RETAINED_MVID_OR_PDB_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "missing-pdb-debug-pair",
+      "diagnostic": "E04A1_RULES_RETAINED_MVID_OR_PDB_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "manifest-order-diverges",
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: rawManifestSourceOrder[0]",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "extra-source",
+      "diagnostic": "E04A1_RULES_COMPILED_SOURCE_COUNT",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "source-byte-identity-drift",
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "pdb-source-association-drift",
+      "diagnostic": "E04A1_RULES_DESCRIPTOR_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "target-name-map-wrong-case",
+      "diagnostic": "E04A1_RULES_NAME_MAP_SOURCE_OR_CASE",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "uncreated-project-lazy",
+      "diagnostic": "E04A1_RULES_COMPLETED_PROJECT_CACHE_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "extra-project-cache-entry",
+      "diagnostic": "E04A1_RULES_PROJECT_CACHE_ENTRY_REQUIRED",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "parent-order-swap",
+      "diagnostic": "E04A1_RULES_PARENT_MVID_OR_ORDER",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "parent-mvid-drift",
+      "diagnostic": "E04A1_RULES_PARENT_MVID_OR_ORDER",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "raw-parent-mismatch",
+      "diagnostic": "E04A1_RULES_RAW_TRANSFORMED_PARENT_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "cache-root-absent",
+      "diagnostic": "E04A1_RULES_CACHE_ROOT_UNSCANNED",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "cache-root-unscanned",
+      "diagnostic": "E04A1_RULES_CACHE_ROOT_UNSCANNED",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "cache-source-extra",
+      "diagnostic": "E04A1_RULES_CACHE_SOURCE_SET_MISMATCH",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "optional-absence-order-or-value-drift",
+      "diagnostic": "E04A1_RULES_STRING_MISMATCH: optionalDiscoveryAbsences[0]",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "chronological-cache-claim-forbidden",
+      "diagnostic": "E04A1_RULES_BOOL_MISMATCH: lineageQualification.chronologicalScanEventsObserved",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "nested-case-key-collision",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "nested-duplicate-key",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "malformed-json",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": true,
+      "name": "actual-synthetic-live-retained-positive",
+      "expectedPass": true,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "copy-mismatch",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "missing-role",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "partial-retention",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-original-path",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "wrong-retained-path",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "observedPass": false,
+      "name": "later-live-dll-byte-drift",
+      "expectedPass": false,
+      "matched": true
+    },
+    {
+      "primary": "SYNTHETIC_PRIMARY_BUILD_FAILURE",
+      "matched": true,
+      "expectedPass": true,
+      "observedPass": true,
+      "name": "primary-failure-preserved-secondary-retention-and-lock-close",
+      "secondary": [
+        {
+          "message": "SYNTHETIC_SECONDARY_RETENTION_FAILURE",
+          "stage": "rules-failure-retention"
+        }
+      ]
+    }
+  ],
+  "wrapper": {
+    "sha256": "141800CD5D87574EC634FF0D423AE95D2AEB260DB361F376D8EE9B55C64DEAF9",
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-wrapper-repair-PROPOSED\\Invoke-E04AProfileProof.RulesWitness.PROPOSED.ps1"
+  },
+  "peReaderInvoked": false,
+  "schemaVersion": 1,
+  "caseCount": 51,
+  "functionBindings": [
+    {
+      "sha256": "0FB40C26F2FE319E20BCF24752937658EDF2E5FDFB80DBF3F5DFA9818476F183",
+      "name": "Require-RulesKeys",
+      "firstLine": 1454,
+      "lastLineInclusive": 1459
+    },
+    {
+      "sha256": "C2C3BBF13BE8E16472041034812C462D3751CC8C25F5E1760BC1C88C2EA47392",
+      "name": "Assert-RulesValue",
+      "firstLine": 1460,
+      "lastLineInclusive": 1474
+    },
+    {
+      "sha256": "B17063F02955AFA30048D1A519B89561916D7BE7704F063B877811CAF4682153",
+      "name": "Assert-RulesDescriptor",
+      "firstLine": 1475,
+      "lastLineInclusive": 1482
+    },
+    {
+      "sha256": "49C1510611D5A88E2E2763F1A06FA5CD793A83DD94B918E8808B531EE53CB85E",
+      "name": "Collect-RulesCacheSources",
+      "firstLine": 1592,
+      "lastLineInclusive": 1607
+    },
+    {
+      "sha256": "3C6E2FC72C5DFCBCB03A6B3F38B828530F3BBE6E6BAA01C49E8D895ADE3B8994",
+      "name": "Check-RulesWitnessData",
+      "firstLine": 1608,
+      "lastLineInclusive": 1696
+    },
+    {
+      "sha256": "3C9DD089F7C8C56F21B1E9C686DB548552829DC588A37B2F663C39BCC0C05D97",
+      "name": "Check-RulesRetentionData",
+      "firstLine": 1712,
+      "lastLineInclusive": 1725
+    },
+    {
+      "sha256": "C37FF40CE1AAD536A737E2E6EDFAF16DD6E53FF0C2CF5B36C63B87D9B47AE078",
+      "name": "Safe-Text",
+      "firstLine": 137,
+      "lastLineInclusive": 140
+    },
+    {
+      "sha256": "D35616DEACA2D0A7560120C407D3BC5920885530559B6C6A8D53654D5BC3E454",
+      "name": "Check-JsonElement",
+      "firstLine": 142,
+      "lastLineInclusive": 155
+    },
+    {
+      "sha256": "8BCD14006DB0EB5D4C2AAF9E06AF86F1D78373C298A0BBC2366E7AB526128725",
+      "name": "Parse-JsonLine",
+      "firstLine": 172,
+      "lastLineInclusive": 178
+    },
+    {
+      "sha256": "93A9B93B0F8FB8F820A1BA0263661E991D088347A811AC1AA40EF8036C731E0B",
+      "name": "Assert-Path",
+      "firstLine": 89,
+      "lastLineInclusive": 102
+    },
+    {
+      "sha256": "58D77B2E28DDA4A175B0AA9BBE70BF88F0F18EF61C3F6E4C88C65642FE7972AD",
+      "name": "Under",
+      "firstLine": 104,
+      "lastLineInclusive": 109
+    },
+    {
+      "sha256": "0DF4EE43A173B67447C55CD0F0C5F4E3C640F5F7CBBB77CFDF0B4404116ECDF9",
+      "name": "Owned",
+      "firstLine": 111,
+      "lastLineInclusive": 114
+    },
+    {
+      "sha256": "E7A4C4AC8A77B0BD7DDA9F1F9716EA1CFFBA4211DA4456C2D7F8042BC59FA7D2",
+      "name": "Need-File",
+      "firstLine": 116,
+      "lastLineInclusive": 123
+    },
+    {
+      "sha256": "8B187B58E6DC4219967EACEDD23C15CF3EFD77BA1671DE659A955FA605A901F2",
+      "name": "Digest",
+      "firstLine": 125,
+      "lastLineInclusive": 125
+    },
+    {
+      "sha256": "C1E8E2472A2DE317ADB51A15AB28E4E45FCB09B7BE19FC3E1E1CC98E2DC99178",
+      "name": "Descriptor",
+      "firstLine": 127,
+      "lastLineInclusive": 127
+    },
+    {
+      "sha256": "4B5572B9FA05319F360F5B92763261095D2972CE9D7B16E39F8BB1357F49D705",
+      "name": "Check-Descriptor",
+      "firstLine": 129,
+      "lastLineInclusive": 135
+    },
+    {
+      "sha256": "4E894AD7072F1BC531E76F2FAB21B0E5344666D9016B75DBAABB477A238919E5",
+      "name": "Rules-GeneratedPaths",
+      "firstLine": 1513,
+      "lastLineInclusive": 1516
+    },
+    {
+      "sha256": "65DB2C95A434CFC905BC64A34B8EABBC2790DDB65ED64FB80FEE17CDCFE9C81F",
+      "name": "Check-RulesPreservation",
+      "firstLine": 1726,
+      "lastLineInclusive": 1735
+    },
+    {
+      "sha256": "AE1DDEB7F99A80FA81703A99073DCD472C322CFF305427F4E9FF32840F587C9F",
+      "name": "Editor-Build",
+      "firstLine": 1736,
+      "lastLineInclusive": 1787
+    }
+  ],
+  "failedCount": 0,
+  "nativeOrImplementationProcessInvoked": false
+}

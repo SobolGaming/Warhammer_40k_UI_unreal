@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A2P0_SOURCE_WORKER_RECEIPT_RETENTION_FAILURE_PROVENANCE",
+  "proposalState": "ROOT_CHANGES_REQUESTED_DISPOSITION_BOUND_FOR_PUBLICATION",
+  "status": "SOURCE_CHANGES_REQUESTED_WORKER_RECEIPT_RETENTION",
+  "sourceHead": "bfbc38382f43c310524d5819f78c98f248e2019a",
+  "comparisonBase": "acb1cca2cda0eba6a44254da98bd172128cb40bb",
+  "runId": "20261023T203123Z-2625b66f",
+  "sessionId": "01a16a76-fb7e-7b12-a60b-e17782cba7b3",
+  "rawVerdict": "CHANGES_REQUESTED",
+  "exactReport": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-source-review-bfbc383.json",
+    "original": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A2P0-source-review/source-bfbc383-20261023T203123Z-2625b66f/last-message.txt",
+      "bytes": 5703,
+      "sha256": "E53D01CF68214B99221DC3AAEECDDD55482B4F5926570FC3B4E8F8E81E0FC028"
+    },
+    "utf8AndBase64RoundtripsMatched": true,
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-worker-receipt-source-failure-PRIVATE-PROPOSED-20261023-f6c09a7e/final-r2/2026-10-23-e04a2-p0-source-review-bfbc383.json",
+      "bytes": 13997,
+      "sha256": "395277E98F0EE1EE922B90F7BEAFBD0D5E8B70DB1850C26E1C2377D1585438B5"
+    }
+  },
+  "note": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-source-worker-receipt-retention-failure.md",
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-worker-receipt-source-failure-PRIVATE-PROPOSED-20261023-f6c09a7e/final-r2/2026-10-23-e04a2-p0-source-worker-receipt-retention-failure.md",
+      "bytes": 2710,
+      "sha256": "3FF58AE54FA607893B29A653E6A504ADB147D216E6F84304CC6A79D53BAED09B"
+    }
+  },
+  "rootConductAudit": {
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A2P0-source-review/source-bfbc383-20261023T203123Z-2625b66f/root-conduct-audit-and-disposition.original.json",
+      "bytes": 9327,
+      "sha256": "6F6D7EE40F2F703A4E9E73CFDF83E1D84BB35B4D7CB4FC7E5E04766EAB412F83"
+    },
+    "createdUtc": "2026-10-23T20:46:46.3603593Z",
+    "status": "ADMISSIBLE_FOR_EXACT_SOURCE_FINDING"
+  },
+  "rootDisposition": {
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/reviews/E04A2P0-source-review/source-bfbc383-20261023T203123Z-2625b66f/root-source-disposition.original.json",
+      "bytes": 3084,
+      "sha256": "C2C48388E45EDB140C2635A882CBAD3F97EF2539A6103F19192EF2D44EB1A598"
+    },
+    "createdUtc": "2026-10-23T20:46:46.4112578Z",
+    "status": "CHANGES_REQUESTED",
+    "actualRootTool": "392c75",
+    "executionAuthorityReleased": false,
+    "positiveSourceAdmission": "NOT_CREATED"
+  },
+  "positiveSourceAdmission": false,
+  "strictRootReportedChronology": {
+    "foregroundClosedExitCode": 0,
+    "foregroundTool": "48c0a6",
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "sealTool": "f84a31",
+    "independentUniqueRehashIdentities": 165,
+    "independentRehashTool": "430625",
+    "firstBodyTool": "52194d",
+    "sealsAndRehashBeforeFirstBody": true,
+    "qualification": "Point-in-time seals and separate rehash precede first body; independent root conduct/static-finding audit is recorded separately",
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-bfbc383-20261023T203123Z-2625b66f\\closed-raw-output-seal.before-body.original.json",
+      "bytes": 4948,
+      "sha256": "A3254D04E5B3283A8B691E476B31BC783733567B2B5635E23F4CCD8967CC5BA4"
+    },
+    "selectedSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-bfbc383-20261023T203123Z-2625b66f\\closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 4014,
+      "sha256": "F07AE47AD409DEBB347FE724206A10701AC66FF36B6F34C127990F2E2C236654"
+    },
+    "independentRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-bfbc383-20261023T203123Z-2625b66f\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 2061,
+      "sha256": "36FCBB8BBA068418D0233387404F7AD4DA07890E61A3DF046BA9F641F45FA318"
+    },
+    "firstBodyMarker": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-bfbc383-20261023T203123Z-2625b66f\\root-first-body-read.original.json",
+      "bytes": 579,
+      "sha256": "C810C72C9A65CAB56F7CF3E4499EEC104A3C54ED15B7343F0410AA296ACEE33C"
+    },
+    "foregroundSessionId": 24354
+  },
+  "finding": {
+    "severity": "P2",
+    "kind": "STATIC_UNFORCED_FAILURE_EVIDENCE_RETENTION",
+    "workerPhysicalRanges": [
+      "58-66",
+      "119-128",
+      "157-168"
+    ],
+    "rootWorkerFullBodyReadTool": "8d42f8",
+    "mechanism": "Task-Tick before process receipt plus no reserved finalization time can discard a returned supervisor failure record after cooperative budget exhaustion",
+    "droppedFields": [
+      "primaryError",
+      "accounting observations",
+      "PID snapshot"
+    ],
+    "executionStillFailsClosed": true,
+    "triggeringPathExecuted": false,
+    "runtimeReproduction": "NOT_RUN",
+    "requestedRepair": "Bounded finalization reservation within existing deadlines/caps; preserve original supervisor failure/observations and separately retain later deadline/write failures",
+    "rootConfirmedStaticFinding": {
+      "severity": "P2",
+      "file": "scripts/migration/a2p0/Invoke-A2P0CanonicalReferenceWorker.ps1",
+      "ranges": [
+        "58-66",
+        "119-128",
+        "157-168"
+      ],
+      "problem": "Task-Tick before receipt creation and descriptor gating can discard returned supervisor failure/accounting/PID observations when the supervisor consumes the cooperative budget.",
+      "rootSourceReadTool": "8d42f8",
+      "actualCapturedFocusedSourceReadTool": "915b30",
+      "rootAssessment": "CONFIRMED_STATIC_SOURCE_FINDING",
+      "runtimeBranch": "NOT_EXECUTED_UNFORCED",
+      "resolution": "Reserve finite finalization time within existing deadlines; best-effort retain returned record before deadline recheck; keep later worker/write failures separate."
+    }
+  },
+  "reviewerReportedCoverage": {
+    "wholeBodyGrants": 104,
+    "materialInstructionMetadataFiles": 58,
+    "numberedExcerpts": 46,
+    "verificationIdentities": 139,
+    "verificationPasses": 2,
+    "mismatches": 0,
+    "frozenDescriptors": 157,
+    "presentationMapJoins": 18,
+    "uiModules": 9,
+    "pyYamlBodies": 16,
+    "canonicalPayloads": 10,
+    "byteCopyRelations": 6,
+    "directMappedOriginalAccess": "UNVERIFIED",
+    "originalToCopyEquality": "ROOT_PROVENANCE",
+    "binaryPresentationAccess": "STAT_HASH_ONLY",
+    "earlyMetadataClipping": "RECOVERED_NO_UNRESOLVED_MATERIAL_CLIPPING_REPORTED",
+    "identitySetQualification": "Overlapping identity/grant/verification sets; not additive coverage or universal comprehension"
+  },
+  "execution": {
+    "runtimeGo": "NOT_CREATED",
+    "runRoot": "ABSENT",
+    "compilation": "NOT_RUN",
+    "capture": "NOT_RUN",
+    "runtime": "NOT_RUN",
+    "repair": "NOT_ADOPTED",
+    "newDiagnosticExecution": "NOT_RUN",
+    "oldPassOrGoTransfer": false,
+    "positiveSourceAdmission": "NOT_CREATED",
+    "executionAuthorityReleased": false,
+    "actualRepair": "NOT_RUN_OWN18_FAILURE_BACKUP_REQUIRED"
+  },
+  "next": "OWN18 publish/checkpoint/push/exact-gh backup before actual worker repair; repaired-source checkpoint/backup then fresh bindings/affected SOURCE before separate GO",
+  "preserved": {
+    "c62SourcePass": "ORIGINAL_EXACT_SOURCE_ONLY",
+    "c62NativeFailAndExactTrigger": "CLOSED_UNCHANGED",
+    "d0NativeFailure": "CLOSED_UNCHANGED",
+    "boundedA1gAcceptance": "REV131_PRESERVED",
+    "visible": "HOLD_UNTIL_EXPLICIT_OWNER_APPROVAL_20261023T1935",
+    "own17": "DEFERRED_UNPROVEN",
+    "linux": "UNTESTED",
+    "broaderA2And727AndGImplementAndFinalCodeReq": "OPEN_NOT_GRANTED"
+  },
+  "publisherCanonicalWritesPerformed": false,
+  "rootRecordedConduct": {
+    "allValueRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-bfbc383-20261023T203123Z-2625b66f\\root-all-tool-value-rehash.original.json",
+      "bytes": 21391,
+      "sha256": "7921196EF743AC8058CFAC7FA2C93EBE571828E8BA6CE4F5A6C6DCE25188DC4B"
+    },
+    "matchedRetainedValueHashes": 58,
+    "matchedOriginalInputJoins": 29,
+    "allOriginalInputsPersonallyInspected": {
+      "count": 29,
+      "tools": [
+        "40c022",
+        "c1765e",
+        "60c130"
+      ],
+      "observed": "Only inert permitted source/data/JSON/stat/hash/byte comparisons, rg declarations and call8 fixed-five-file raw Git head/stat/worktree diff. No candidate/helper/import/AST/compiler/test/native/Core/GUI/network/delegation/mutation/credentials/peer or session-body action."
+    },
+    "closure": {
+      "cliExit": 0,
+      "cleanupConfirmed": true,
+      "reviewRootPid": 30480,
+      "elapsedSeconds": 472.9925063,
+      "lastJobTotal": 401,
+      "lastJobActive": 0,
+      "secondaryErrors": 0,
+      "stderr": "Four plugin-icon warnings and unsupported PowerShell shell snapshot warning only",
+      "rootMetadataReadTools": [
+        "60c130",
+        "d49d3c"
+      ]
+    },
+    "actualRuntime": {
+      "evidence": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A2P0-source-review\\source-bfbc383-20261023T203123Z-2625b66f\\runtime-evidence.final.selected.json",
+        "bytes": 5219,
+        "sha256": "6AA91B856017ED16A71791A6C43F678CBB4CBA9AA472A7CB39D97DDD3D7660E7"
+      },
+      "rootReadTool": "60c130",
+      "contexts": 1,
+      "turns": 1,
+      "sandbox": "read-only",
+      "approval": "never",
+      "memoryMode": "disabled",
+      "provider": "openai",
+      "cliVersion": "0.163.0-alpha.10.2",
+      "modelObserved": "gpt-6.1-sol",
+      "modelOverride": null,
+      "resume": false,
+      "fork": false,
+      "receivedPromptBytes": 4926,
+      "receivedPromptSha256": "11A885BE92999770E26697215D6FD89945B4F83FEB4E01CE7E12CAF50AA6394A",
+      "exactPromptPlusOneCrlf": true,
+      "actualToolNames": [
+        "exec"
+      ],
+      "appsMultiagentMemoryLowerLevelEnforcement": "UNVERIFIED",
+      "actualForbiddenActionsObserved": 0
+    },
+    "finiteCoverage": {
+      "requiredWholeGrants": 104,
+      "numberedRanges": 46,
+      "rootFrozenInputsRechecked": 157,
+      "reviewerReportedInitialAndFinalHashes": 139,
+      "reviewerRecordedMismatches": 0,
+      "originalMappedDirectReviewerAccess": "UNVERIFIED_METADATA_ONLY_DO_NOT_RETRY",
+      "rootOriginalPresentationEquality": "SEPARATE_PROVENANCE_18_BYTE_IDENTICAL_COPIES",
+      "sourceDelivery": "65first-half exact selected sections +27second-half whole bodies and2tails; six canonical/documentation byte comparisons true; bound substitutions compared",
+      "comprehensionCertification": false
+    },
+    "clippingAndRecovery": [
+      "Call2 outer15797 and inner13130-token metadata clipping/splice retained; not credited as complete nested original policy. Counts/rules3,map18joins5,criteria1-42 exact3+43-53 exact28,full182instructions2retainedblock+4tail.",
+      "Call4 map metadata260token clip recovered with18explicitjoins5.",
+      "Call11 outer10574/574-token splice is range inventory7-23 after all46exact excerpt bodies;12 rereads inventory. One-line resources init scalar display recovers with explicit raw12.",
+      "Call13 rg inventory1134token clip is not credited complete; whole schema/composition/toolkit delivered in14-19.",
+      "Root3314a1 accidentally over-displayed AUX arrays/clipped root display; ed8433 narrower counts/limits and prior3314a1 retained clipping dispositions complete root factual inspection. This is not reviewer clipping."
+    ],
+    "auxiliaryContribution": "65 exact selected first-half sections; 27 complete second-half source bodies plus two tails; factual delivery/conduct only, not independent SOURCE/CODE/REQ verdicts"
+  },
+  "qualifications": [
+    "Raw report and CHANGES_REQUESTED preserved literally; auxiliary checks are factual, author-adjacent and supply no independent correctness verdict.",
+    "No complete transitive closure, binary/source correspondence, comprehension or universal isolation certificate.",
+    "No candidate native/compile/capture ran and no runtime GO exists. No passing SOURCE admission follows.",
+    "Publish/checkpoint/push/exact-gh this failure BEFORE actual worker repair/rebinding; then repaired-source backup and fresh affected SOURCE before separately bound execution."
+  ]
+}

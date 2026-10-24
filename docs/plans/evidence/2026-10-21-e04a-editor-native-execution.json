@@ -1,0 +1,562 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_EDITOR_NATIVE_EXECUTION_FACTS_PENDING_FINAL_REVIEWS",
+  "recordedUtc": "2026-10-21T07:25:32.2112667Z",
+  "planRevision": 94,
+  "status": "EIGHT_PHASES_PASSED_FINAL_REVIEWS_PENDING",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "executedSourceHead": "0bbbf884308a9d896cf19a2e2cf42614481559e8",
+  "runId": "20261021T062742Z-6f13b8a2",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "functionalNorm": {
+    "bytes": 8293,
+    "path": "docs/plans/research/2026-10-21-e04a-functional-proof-packet.md",
+    "sha256": "57410E0F5666D4BCFF88CFACD9EBBD1E640F8B1A8D00A00F93EE2422386A5172"
+  },
+  "executionFreeze": {
+    "bytes": 701994,
+    "path": ".local/reviews/E04A1-source-review/practical-common-0bbbf88-20261021T062742Z-6f13b8a2/runtime-freeze/freeze-manifest.PROPOSED.json",
+    "sha256": "51FC956B9A4754A0EB450778B8B22B284F25AEE98E1D6E44F16AD6672DA03B16"
+  },
+  "closedExecution": {
+    "bytes": 21042,
+    "path": ".local/planning/E04/focused-component-source-0bbbf88/root-execution-closed.original.json",
+    "sha256": "E384B2DB0D3C12BF9E4CFCB021E680B5387C068ED479057EB0D841D0DBBFAC5D"
+  },
+  "technicalInputs": {
+    "wrapper": {
+      "bytes": 275014,
+      "path": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "sha256": "FE278EA12C3C6D474F1F59A360E352BB3FD4023216F09C9267F73A27DA59DB48"
+    },
+    "editorTarget": {
+      "bytes": 4988,
+      "path": "Source/WarhammerClientE04AEditor.Target.cs",
+      "sha256": "9BF62B762133CBCA44D72741B1151B7CAB89B90E78E4F969ACC217674608CE80"
+    },
+    "abiTests": {
+      "bytes": 40127,
+      "path": "Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/Tests/E04ProfileAbiTests.cpp",
+      "sha256": "F6417DE865F9C75B565D855036DA9A0FD4123505916D2966EC0F50273292B62E"
+    }
+  },
+  "sourceReview": {
+    "toolInputOutputPairs": 86,
+    "rawVerdict": "PASS",
+    "report": {
+      "bytes": 8781,
+      "path": ".local/reviews/E04A1-source-review/focused-0bbbf88-062742-E04_COMPONENT_SOURCE/last-message.txt",
+      "sha256": "1867ED800BF800F2F6118C754931DF011E43ACC3547211C19F14A8B7D00909D6"
+    },
+    "lowerLevelMemoryFeatureOsPidIsolation": "UNVERIFIED",
+    "actualMemoryMode": "disabled",
+    "qualification": "Focused component/material direct-interface/build-process assessment under OWN17; no broad special-assurance certification.",
+    "rootAdmitted": true,
+    "closedReviewProcess": true,
+    "sessionId": "01a15d28-fb7a-7360-8730-21bb688b1317",
+    "scope": "E04_COMPONENT_SOURCE",
+    "rootAdmission": {
+      "bytes": 7779,
+      "path": ".local/reviews/E04A1-source-review/focused-0bbbf88-062742-E04_COMPONENT_SOURCE/root-focused-source-admission.original.json",
+      "sha256": "3DCDB82D7B1B011E2CEB2E0520F5557533038A9835E830BA8773831598AE2068"
+    },
+    "actualApproval": "never",
+    "actualSandbox": "read-only"
+  },
+  "sourceSealOrdering": {
+    "relaunch": false,
+    "operatorMemberFilesRehashedAfterFirstReportBodyRead": 15,
+    "extractionMemberFilesRehashedBeforeFirstReportBodyRead": 346,
+    "reportInputAndSealBytesChanged": false,
+    "all373UltimatelyMatched": true,
+    "receipt": {
+      "bytes": 2791,
+      "path": ".local/planning/E04/focused-component-source-0bbbf88/root-closed-source-seals-rehash-and-ordering-gap.original.json",
+      "sha256": "EEFBFF61F864D8CC1E08AF5856405295DB02A41D4636DDCFC9C6406332F0931E"
+    },
+    "disposition": "Preserved administrative limitation for final REQ; do not claim all373 were verified before first report read.",
+    "strictPreBodyOrderingMet": false,
+    "rawMemberFilesRehashedBeforeFirstReportBodyRead": 12
+  },
+  "preallocationRefusal": {
+    "record": {
+      "bytes": 3154,
+      "path": ".local/planning/E04/focused-component-source-0bbbf88/pregate-context-refusal/root-preallocation-host-refusal.original.json",
+      "sha256": "8D0E7C039A4748D89AD5BF12B77CBBBE75A608F6C24BB2C5B006BE3B98BFD905"
+    },
+    "oldGo": "CLOSED_DO_NOT_REUSE",
+    "exitCode": 1,
+    "beforeRunPhaseAllocation": true,
+    "hostPid": 22904,
+    "diagnostic": "BLOCKED_E02_REDIRECTED_LOCAL_SETTINGS_CONTEXT_USE_APPROVED_NORMAL_DESKTOP_ROUTE",
+    "beforePhaseAuthorityCheck": true,
+    "nativeRoots": 0,
+    "normalRoute": "Separate explicit normal-desktop GO after unchanged bindings and absent RunRoot were verified; same previously unused frozen planned run. No environment spoof or guard bypass.",
+    "runIdInterpretation": "A1E has no express RunId-consumption clause for this pre-allocation context refusal; preserve this as interpretation, not an explicit exception."
+  },
+  "phases": [
+    {
+      "hostCompletion": {
+        "bytes": 860,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/native-phase-invocations-normal-desktop/Preflight.host-completion.original.json",
+        "sha256": "177240C1DDA62B53E4B7BF8C48B39FA795FFBA747FAA61A0E5A0FAE909FF6F23"
+      },
+      "phaseAuthority": {
+        "bytes": 3790,
+        "path": ".local/reviews/E04A1-native-execution/0bbbf88-20261021T062742Z-6f13b8a2/Preflight.normal-desktop.root-go.original.json",
+        "sha256": "65B1AD2C8FCF9E5A28F6AF626B630551BCB482E69B49D5C86C93484D54974217"
+      },
+      "status": "PREFLIGHT_PASS_NO_NATIVE_ROOT",
+      "supervisedRoots": 0,
+      "rootInspection": {
+        "bytes": 1882,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/root-Preflight-inspection.original.json",
+        "sha256": "8780DA64E6CF34940355405E0CEAA718FEF871DCA3449263D7A8A0EF0913838D"
+      },
+      "executionPassed": true,
+      "phaseBudgetSeconds": 300,
+      "result": {
+        "bytes": 96906,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/preflight/result.json",
+        "sha256": "ECFF56933980B7A71C52ECF2B228F81EFCE92F7C9FD4CBD567A95B75501420C8"
+      },
+      "phase": "Preflight",
+      "elapsedSeconds": 32.0602097,
+      "completion": {
+        "bytes": 876,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/preflight/completion.json",
+        "sha256": "379556AC9B4E28ACC632350A48365474AB55EECDDA0350E3F6991B778AEF1B49"
+      }
+    },
+    {
+      "hostCompletion": {
+        "bytes": 887,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/native-phase-invocations-normal-desktop/SupervisorControls.host-completion.original.json",
+        "sha256": "C422C53C2ADB05D6A778D7C75E2772C5EF87521BED422C04503DE61DBBFB80F3"
+      },
+      "phaseAuthority": {
+        "bytes": 3207,
+        "path": ".local/reviews/E04A1-native-execution/0bbbf88-20261021T062742Z-6f13b8a2/SupervisorControls.root-go.original.json",
+        "sha256": "C26C8D6247426B87C9EEDAEAD4F46B694A1EFCB3260B4966DFEC87BE188771C0"
+      },
+      "status": "SUPERVISOR_CONTROLS_PASS_6_AND_OBJ_SRC_MAP_TARGET_REFUSAL_PASS",
+      "supervisedRoots": 6,
+      "rootInspection": {
+        "bytes": 5066,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/root-SupervisorControls-inspection.original.json",
+        "sha256": "8546A8DAC8ACA29FC7788D7D7E8DD90F1879540BACCD28280C6BB6E7FAB99FD3"
+      },
+      "executionPassed": true,
+      "phaseBudgetSeconds": 600,
+      "result": {
+        "bytes": 359880,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/supervisorcontrols/result.json",
+        "sha256": "387E0D0DEA4C378E7618485CA89778960F2026C4770770BCB57D3C5D1AD60911"
+      },
+      "phase": "SupervisorControls",
+      "elapsedSeconds": 52.3322303,
+      "completion": {
+        "bytes": 928,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/supervisorcontrols/completion.json",
+        "sha256": "7CDA941789E6ED3890DD36B055FF4DEC08CE951053E2E8562A1B5D485302DFAC"
+      }
+    },
+    {
+      "hostCompletion": {
+        "bytes": 859,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/native-phase-invocations-normal-desktop/Configure.host-completion.original.json",
+        "sha256": "F729150594576485C666BEDF69FF1DEBFD03A52D4F93A7B61B5DA81E7ED0056A"
+      },
+      "phaseAuthority": {
+        "bytes": 3326,
+        "path": ".local/reviews/E04A1-native-execution/0bbbf88-20261021T062742Z-6f13b8a2/Configure.root-go.original.json",
+        "sha256": "4FFBA0D939D0C2DBE258FF36329F35C9D09C9A592CC8360107555EAD0A249580"
+      },
+      "status": "CONFIGURE_PASS_NO_INSTALL",
+      "supervisedRoots": 1,
+      "rootInspection": {
+        "bytes": 7121,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/root-Configure-inspection.original.json",
+        "sha256": "357AAB79508DAA61917A1A70C97A67AC8F4A4697006CBC5D4F8C23A471BA69FC"
+      },
+      "executionPassed": true,
+      "phaseBudgetSeconds": 600,
+      "result": {
+        "bytes": 316262,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/configure/result.json",
+        "sha256": "D6A18EABAF6E76CE4BD96329F641EDC00CF97A16F6737D1D9448396487BFCE5A"
+      },
+      "phase": "Configure",
+      "elapsedSeconds": 39.1474452,
+      "completion": {
+        "bytes": 873,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/configure/completion.json",
+        "sha256": "531D7F256C5DCC672998C89AEF47569A382FB2CA7D8AF9D0577FBEC3965AC8DD"
+      }
+    },
+    {
+      "hostCompletion": {
+        "bytes": 878,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/native-phase-invocations-normal-desktop/DependencyBuild.host-completion.original.json",
+        "sha256": "D2260AFA63F7722795EEDDFDA8AE5D06B96CF6FA3EFAB99654828A90F7C8FC48"
+      },
+      "phaseAuthority": {
+        "bytes": 3281,
+        "path": ".local/reviews/E04A1-native-execution/0bbbf88-20261021T062742Z-6f13b8a2/DependencyBuild.root-go.original.json",
+        "sha256": "E1EA321530F28C303725B4820A2C290A1B99B7FD6CA539DCBEF62C2AC5CF69A5"
+      },
+      "status": "DEPENDENCY_BUILD_AND_EXPLICIT_COPY_PASS",
+      "supervisedRoots": 1,
+      "rootInspection": {
+        "bytes": 5531,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/root-DependencyBuild-inspection.original.json",
+        "sha256": "3B6BC27A7316EFDFD541C5A4C4D213CBD7A80F02B653BBA4043BDB73F5677B8B"
+      },
+      "executionPassed": true,
+      "phaseBudgetSeconds": 1200,
+      "result": {
+        "bytes": 339301,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/dependencybuild/result.json",
+        "sha256": "23C51EA93B433308EC9275ABFB2661A11748F5D2C5618DE5A32957EED6550658"
+      },
+      "phase": "DependencyBuild",
+      "elapsedSeconds": 49.0146437,
+      "completion": {
+        "bytes": 899,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/dependencybuild/completion.json",
+        "sha256": "0C8EE2253B59379771A3B10834D8642A6C3B869C56C1CBB3AAFA08C2DAC9EA7E"
+      }
+    },
+    {
+      "hostCompletion": {
+        "bytes": 866,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/native-phase-invocations-normal-desktop/EditorBuild.host-completion.original.json",
+        "sha256": "07C4E2D5D325FAB26E52AA811FA5C2BAEAB1E7AD23A360E23A0D07C276DC7764"
+      },
+      "phaseAuthority": {
+        "bytes": 3266,
+        "path": ".local/reviews/E04A1-native-execution/0bbbf88-20261021T062742Z-6f13b8a2/EditorBuild.root-go.original.json",
+        "sha256": "C535BEB7A6D892D5E62A79F817D637E2C2CE291CC2543465867ED8D74FE5E5B9"
+      },
+      "status": "EDITOR_BUILD_PASS_SELECTED_NATIVE_FLAGS_OBSERVED",
+      "supervisedRoots": 1,
+      "rootInspection": {
+        "bytes": 3345,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/root-EditorBuild-inspection.original.json",
+        "sha256": "DCFC7A1070E940FEEAA97ECF2BF2DE7FA991B6921186B05229A057893617C75A"
+      },
+      "executionPassed": true,
+      "phaseBudgetSeconds": 1800,
+      "result": {
+        "bytes": 339887,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/editorbuild/result.json",
+        "sha256": "877DB7C2915007A1BF73DAE1DCCE6CCD0844657B6CCC0DDF2EE64B469BA22BC0"
+      },
+      "phase": "EditorBuild",
+      "elapsedSeconds": 118.0172809,
+      "completion": {
+        "bytes": 900,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/editorbuild/completion.json",
+        "sha256": "B92D84C0D37503800C325924854E7058B695E57E698911DA3FE04E1C2FE40EF1"
+      }
+    },
+    {
+      "hostCompletion": {
+        "bytes": 860,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/native-phase-invocations-normal-desktop/Discovery.host-completion.original.json",
+        "sha256": "62B771A6986146D86D4398DFB9EEFCAB6896FD5922E81E7AD2757C1DA70AEA3B"
+      },
+      "phaseAuthority": {
+        "bytes": 3194,
+        "path": ".local/reviews/E04A1-native-execution/0bbbf88-20261021T062742Z-6f13b8a2/Discovery.root-go.original.json",
+        "sha256": "7C6AC8BB967379890ACD8D40EAB7AD0A83AEEB8C7D5402EC39A14BA1EC42F612"
+      },
+      "status": "DISCOVERY_PASS_EXACT_8",
+      "supervisedRoots": 1,
+      "rootInspection": {
+        "bytes": 3892,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/root-Discovery-inspection.original.json",
+        "sha256": "1D75CA0E0E084C57A2AFEB70664119F97A5B8045107D35631E7406166D92505E"
+      },
+      "executionPassed": true,
+      "phaseBudgetSeconds": 600,
+      "result": {
+        "bytes": 273349,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/discovery/result.json",
+        "sha256": "9CBB235CD9E44334C8B814AFC40B4DDD47D6E937025FD8A4A91E60876C3BB851"
+      },
+      "phase": "Discovery",
+      "elapsedSeconds": 66.9221937,
+      "completion": {
+        "bytes": 870,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/discovery/completion.json",
+        "sha256": "874A866F3BD58E49723BB5DA97521CD4FE3A2317054307F844A4D93B798BE7A2"
+      }
+    },
+    {
+      "hostCompletion": {
+        "bytes": 851,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/native-phase-invocations-normal-desktop/Native.host-completion.original.json",
+        "sha256": "74BD2B0B0E8CF35EFEEF745DA31AE79B9CF479B75C0FF16D8B2EEF9A3AF53930"
+      },
+      "phaseAuthority": {
+        "bytes": 3261,
+        "path": ".local/reviews/E04A1-native-execution/0bbbf88-20261021T062742Z-6f13b8a2/Native.root-go.original.json",
+        "sha256": "DAB720DE431D56D69B515B980CA1B63FCAC555EFEEA1BF7FD97407C718B4EF52"
+      },
+      "status": "NATIVE_A1E_EDITOR_SUBSET_EXECUTION_PASS_NO_A1G_NO_FULL_A1_ACCEPTANCE",
+      "supervisedRoots": 1,
+      "rootInspection": {
+        "bytes": 3862,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/root-Native-inspection.original.json",
+        "sha256": "82A110C0242B9AED7FB55DBCEF265E9A56C1C6605D5106ECF40098AEF0FFAE45"
+      },
+      "executionPassed": true,
+      "phaseBudgetSeconds": 600,
+      "result": {
+        "bytes": 369006,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/native/result.json",
+        "sha256": "4B363769A5543AD0A2B0C3FB023EAE86F8FBED929E07D6579B78EFE6CE521F52"
+      },
+      "phase": "Native",
+      "elapsedSeconds": 53.1188738,
+      "completion": {
+        "bytes": 910,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/native/completion.json",
+        "sha256": "DCEB65FB9E0B82E61613EBBF801E40A640123BC2F67BDE34DAA0F1F8D5303D12"
+      }
+    },
+    {
+      "hostCompletion": {
+        "bytes": 848,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/native-phase-invocations-normal-desktop/Audit.host-completion.original.json",
+        "sha256": "57C69D8B77A704B6B0B5E3FD053342EDFEE183E764F1555C8F338B2CC9587BED"
+      },
+      "phaseAuthority": {
+        "bytes": 3207,
+        "path": ".local/reviews/E04A1-native-execution/0bbbf88-20261021T062742Z-6f13b8a2/Audit.root-go.original.json",
+        "sha256": "4756E67BDACC605B034E17D326F8B372FAD297B456DCDAEBBE6323752A8F8841"
+      },
+      "status": "EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT",
+      "supervisedRoots": 0,
+      "rootInspection": {
+        "bytes": 2619,
+        "path": ".local/planning/E04/focused-component-source-0bbbf88/root-Audit-inspection.original.json",
+        "sha256": "DC534203E7EF0AD0A4612BC56C65020935E8E4FDB0ECC5951DCBE29F0B798DAF"
+      },
+      "executionPassed": true,
+      "phaseBudgetSeconds": 300,
+      "result": {
+        "bytes": 413087,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/audit/result.json",
+        "sha256": "F3AAA56CA12ED3F6F6273FBF7FEFECA1CF13ED32AA08217C4F9E58ACEB68E637"
+      },
+      "phase": "Audit",
+      "elapsedSeconds": 38.31898,
+      "completion": {
+        "bytes": 884,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/audit/completion.json",
+        "sha256": "86092F461C891F2048B3F8A21F9E979ADCF6037752B765CF440D3623FE15BE5A"
+      }
+    }
+  ],
+  "builds": {
+    "editor": {
+      "vendorPrivateConsumer": "E04ProfileParser_ONLY",
+      "retainedRulesRoles": 8,
+      "moduleBinaries": 2,
+      "newE04CompileErrors": 0,
+      "engine": "5.8.3 CL58210709",
+      "selectedCompileResponses": 4,
+      "moduleLinkResponses": 2,
+      "platformExceptionsDisabled": 0,
+      "exceptionsEnabled": true,
+      "inheritedPluginSupport": false,
+      "compiler": "MSVC14.44.35229",
+      "warningNotes": [
+        "Existing E02WorldInputTests C4701 Pixel",
+        "Existing E02WorldProofGameMode C4701 Origin"
+      ],
+      "windowsSdk": "10.0.22621.0",
+      "effectiveSelectors": 32
+    },
+    "yamlCpp": {
+      "compilerLinkerErrors": 0,
+      "installInvoked": false,
+      "exceptions": "EHsc",
+      "copiedHeaders": 38,
+      "actualCompileActions": 30,
+      "runtime": "MD",
+      "library": {
+        "bytes": 5706624,
+        "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/vendor-artifact/Win64/Development/x64/lib/yaml-cpp.lib",
+        "sha256": "B60A72EF8F77F415D93C1B745904498F53D773F4A93BB66FFF34B77C8A2AAB35"
+      },
+      "pin": "56e3bb550c91fd7005566f19c079cb7a503223cf",
+      "warnings": 6,
+      "standard": "C++20",
+      "warningKind": "C4267",
+      "sourceCount": 30,
+      "rtti": "GR-",
+      "actualArchiveActions": 1
+    }
+  },
+  "discovery": {
+    "listedAutomationTests": 6350,
+    "selectedSuites": 8
+  },
+  "native": {
+    "attempts": 50,
+    "notRun": 0,
+    "evaluatedCustomChecks": 1745,
+    "retainedYamlFiles": 50,
+    "inProcess": 0,
+    "succeededWithWarnings": 0,
+    "distinctInputIds": 43,
+    "ledgerFiles": 8,
+    "ueAssertionTotal": "NOT_ESTABLISHED_BY_EXPORT_DO_NOT_EQUATE_WITH_CUSTOM_CHECK_COUNT",
+    "canonicalInputs": 10,
+    "generatedDefinitions": 33,
+    "failed": 0,
+    "suiteFacts": [
+      {
+        "evaluatedCustomChecks": 115,
+        "attempts": 1,
+        "ledger": {
+          "bytes": 1422,
+          "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/artifacts/native/abi-load-boundary/input-ledger.json",
+          "sha256": "001ED532F60FC80D1D0FF2F33CB6349743BA00F0410ADC05D3A1D78C7E640453"
+        },
+        "rowChecks": 13,
+        "suite": "Warhammer.Migration.E04A1.Abi.LoadAndBoundary"
+      },
+      {
+        "evaluatedCustomChecks": 127,
+        "attempts": 2,
+        "ledger": {
+          "bytes": 2109,
+          "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/artifacts/native/abi-typed-refusal/input-ledger.json",
+          "sha256": "47BD0D17C5889D66C0F65E5B5A7A294253BB9849D31CF5A2F6C6C218AF1F255A"
+        },
+        "rowChecks": 26,
+        "suite": "Warhammer.Migration.E04A1.Abi.TypedRefusal"
+      },
+      {
+        "evaluatedCustomChecks": 118,
+        "attempts": 1,
+        "ledger": {
+          "bytes": 1421,
+          "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/artifacts/native/abi-value-lifetime/input-ledger.json",
+          "sha256": "142898EB955E54832F9598E4E6A2508B1101AFF03340B594819068AC05957AF9"
+        },
+        "rowChecks": 17,
+        "suite": "Warhammer.Migration.E04A1.Abi.ValueLifetime"
+      },
+      {
+        "evaluatedCustomChecks": 391,
+        "attempts": 10,
+        "ledger": {
+          "bytes": 7554,
+          "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/artifacts/native/parser-canonical-syntax/input-ledger.json",
+          "sha256": "BC824E005BEABA9C7C8CE28B08C6869340F01785408A8B50156E58703CA3E936"
+        },
+        "rowChecks": 290,
+        "suite": "Warhammer.Migration.E04A1.Parser.CanonicalSyntax"
+      },
+      {
+        "evaluatedCustomChecks": 248,
+        "attempts": 5,
+        "ledger": {
+          "bytes": 4157,
+          "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/artifacts/native/parser-ordered-case-values/input-ledger.json",
+          "sha256": "12FA10048F1D76E0218D200CE190EBB888536A0F59D71984A6261660B4D40EDD"
+        },
+        "rowChecks": 147,
+        "suite": "Warhammer.Migration.E04A1.Parser.OrderedCaseValues"
+      },
+      {
+        "evaluatedCustomChecks": 279,
+        "attempts": 13,
+        "ledger": {
+          "bytes": 9945,
+          "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/artifacts/native/parser-lexical-failures/input-ledger.json",
+          "sha256": "0B93AFB015FC42F6209EB807C3B703ED7EF419EF888666EA4DE28D5F2FFE65ED"
+        },
+        "rowChecks": 178,
+        "suite": "Warhammer.Migration.E04A1.Parser.LexicalFailures"
+      },
+      {
+        "evaluatedCustomChecks": 326,
+        "attempts": 15,
+        "ledger": {
+          "bytes": 11283,
+          "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/artifacts/native/parser-resource-bounds/input-ledger.json",
+          "sha256": "FF28F18EF856255E99027F0A2AD403B3E4B64F224A3961E2A09B58C1E003DBB2"
+        },
+        "rowChecks": 225,
+        "suite": "Warhammer.Migration.E04A1.Parser.ResourceBounds"
+      },
+      {
+        "evaluatedCustomChecks": 141,
+        "attempts": 3,
+        "ledger": {
+          "bytes": 2823,
+          "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/artifacts/native/integration-repeat-isolation/input-ledger.json",
+          "sha256": "BC6F9C5EDF44D9FBC47D57086C2798A7DF37DA829C442EBF77BF022FB346FE1C"
+        },
+        "rowChecks": 40,
+        "suite": "Warhammer.Migration.E04A1.Integration.RepeatIsolation"
+      }
+    ],
+    "f11Observed": 2,
+    "succeeded": 8,
+    "f13Observed": 3,
+    "automationReport": {
+      "bytes": 3823,
+      "path": ".local/experiments/E04A1/20261021T062742Z-6f13b8a2/reports/native/index.json",
+      "sha256": "A3AE30F38EC8B4D3D34DDF00DC907D04FABC6A2E4F83972EB04923EF0B4F15FB"
+    },
+    "totalNativeArtifacts": 58
+  },
+  "preservation": {
+    "ownedProcessCleanupConfirmed": true,
+    "settingsRoles": 9,
+    "stagedFiles": 33,
+    "sourceStageFixtureBytesUnchanged": true,
+    "canonicalFiles": 33,
+    "qualification": "Finite actual path/hash/current-byte observations and private-job accounting; not continuous preservation or universal OS isolation.",
+    "protectedSettingsFieldsUnchanged": true,
+    "fixtureFiles": 56,
+    "visibleWindows": 0
+  },
+  "ordinaryInspectionCorrection": {
+    "correction": "Normalize both complete absolute paths in the separate data-only inspector",
+    "actualNativeTestsRetried": false,
+    "receipt": {
+      "bytes": 3711,
+      "path": ".local/planning/E04/focused-component-source-0bbbf88/native-inspection-PROPOSED/root-windows-path-inspection-correction.original.json",
+      "sha256": "B47EE8A1C98CFA0339EEE3F7F01E6C5C57EF1B2819B1223C8C021227E82B3C10"
+    },
+    "firstDataInspectionExitCode": 1,
+    "componentWrapperSourceChanged": false,
+    "diagnostic": "SUITE_LEDGER_IDENTITY_OR_COUNTS_MISMATCH",
+    "cause": "Direct comparison of UE forward-slash paths against Windows backslash paths"
+  },
+  "allExecutionAuthority": "CLOSED_DO_NOT_REUSE",
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "boundedA1eAcceptance": "NOT_ESTABLISHED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "openGates": [
+    "Final independent CODE and different REQ including recorded administration limits",
+    "A1G exception-disabled runtime caller",
+    "A2 and all727 compatibility scenarios",
+    "Full YAML/null/property/plain-DEL fidelity",
+    "HUD/input/rendering and packaging",
+    "Linux native host/build/graphics tests UNTESTED",
+    "Real-Core play and full migration"
+  ],
+  "standingReviewConsent": "All private source/API reviews approved in perpetuity unless explicitly revoked, within the configured OpenAI Codex destination and necessary project scope; credentials and unrelated private sessions excluded.",
+  "nextStep": "Checkpoint/push/verify OWN18 exact result backup; freeze final evidence and source-to-final correspondence; obtain fresh separate independent CODE and different REQ. No further native or merge authority follows from this receipt."
+}

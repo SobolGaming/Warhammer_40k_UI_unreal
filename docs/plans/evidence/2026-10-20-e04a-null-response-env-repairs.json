@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_NULL_RESPONSE_ENV_REPAIR_CHECKPOINT",
+  "status": "NULL_RESPONSE_ENV_REPAIRS_APPLIED_SOURCE_REFRESH_PENDING",
+  "closureCheckpointCommit": "b7c7ce103096be91290ff34c931160772734592f",
+  "closedRoundRecord": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-value-build-source-closure-result.json",
+    "bytes": 24911,
+    "sha256": "935F03A4817746E49F96ED763F76E16E2DC47661ACF3F27DA8E815F6D46885D0"
+  },
+  "closedRoundQualification": "Five raw reports/437 pairs/zero admissions stay unchanged. The reviewed publication/technical beef566/run220644 is not a review of these later uncommitted repair bytes.",
+  "newTechnicalCommit": null,
+  "newPublicationCommit": null,
+  "futureSourceRun": null,
+  "currentCodeAndPacket": [
+    {
+      "relativePath": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+      "bytes": 264975,
+      "sha256": "AAEF3EF33C3FD6115010F1153529308B3C82695754DE2982852E41141EFA9370"
+    },
+    {
+      "relativePath": "tests/migration/Test-E04RulesWitness.ps1",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\Test-E04RulesWitness.ps1",
+      "bytes": 46494,
+      "sha256": "194648FA854DA465D41D932AC45331E733EA1F2753DF61257D47FADB493922FF"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileParser/Private/E04YamlEventReader.cpp",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\E04ProfileParser\\Private\\E04YamlEventReader.cpp",
+      "bytes": 14947,
+      "sha256": "E4354753283A135E9ED7054F29A399179DD863206B2BD4B0785B24E72B8650D1"
+    },
+    {
+      "relativePath": "Plugins/E04ProfileProof/Source/E04ProfileProbe/Private/Tests/E04ProfileAbiTests.cpp",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\E04ProfileProbe\\Private\\Tests\\E04ProfileAbiTests.cpp",
+      "bytes": 39850,
+      "sha256": "B2F2A45C7490B92E9069993C9D1ED7F2E488B9C0ED7D730296AE4178A6278075"
+    },
+    {
+      "relativePath": "tests/migration/fixtures/e04a/generated-cases.json",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\fixtures\\e04a\\generated-cases.json",
+      "bytes": 19667,
+      "sha256": "363ED4BA0B9E7412AD7F525220780EDB6FBAB9B0FADE923D1FCCF6F38E7560CF"
+    },
+    {
+      "relativePath": "docs/plans/research/2026-10-19-e04a-profile-packet.md",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-19-e04a-profile-packet.md",
+      "bytes": 28571,
+      "sha256": "C7C704BDBD2C720824CA40ADB77AA746E6D4EDFA54118AD35B6E7AE63588ECA7"
+    },
+    {
+      "relativePath": "docs/plans/evidence/2026-10-19-e04a-profile-result.json",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-19-e04a-profile-result.json",
+      "bytes": 4114,
+      "sha256": "BBF9A1348088092262B2804136D23FE8C46BC18D1791B55286443AD2A4434356"
+    }
+  ],
+  "appliedSourceRepairs": [
+    {
+      "finding": "I F01 diagnostic conflict",
+      "repair": "Only a private NullPropertiesUnavailable refusal triggers a fresh, nonpublishing, same-owned-input first-document syntax probe. Reached ParserException becomes MalformedYaml; completed or locally stopped probe restores the exact saved null diagnostic. Other refusal ordering, five inclusive limits, failed-empty ownership/noexcept boundary remain.",
+      "executionQualification": "Source implementation only; no parser/native result."
+    },
+    {
+      "finding": "I generatedInputCount total/generated label",
+      "repair": "Preflight source now distinguishes materializedInputCount43, canonicalInputCount10 and generatedInputCount33.",
+      "executionQualification": "Source fields only; no Preflight result."
+    },
+    {
+      "finding": "W_B inherited UBT_EXTRA_ARGS",
+      "repair": "The actual supervisor Run source uses BuildEnvironmentBlock, discards inherited UBT_EXTRA_ARGS and forces the reserved empty key. Child-Environment, Invoke-Root and Rules-validator expected/root bindings require explicit empty typed values.",
+      "executionQualification": "Four C# effective-block checks remain NOT_RUN pending source approval; no actual child environment/native observation."
+    },
+    {
+      "finding": "D response-file validation cross-branch cycle",
+      "repair": "Response-file validation reads whole reachable files with BFS and validates graph edges by Kahn cycle accounting.",
+      "executionQualification": "Ten actual PS-only response cases matched; effective toolchain/compiler inputs remain unobserved."
+    },
+    {
+      "finding": "D inline @ response forms",
+      "repair": "Response-file validation supports only its declared exact standalone reference subset and refuses residual inline/quoted @ forms.",
+      "executionQualification": "Conservative source refusal, not universal response grammar support or observed compiler inputs."
+    }
+  ],
+  "fixtures": {
+    "canonicalInputs": 10,
+    "generatedRecipes": 33,
+    "uniqueInputs": 43,
+    "plannedAttempts": 50,
+    "nativeSuites": 8,
+    "original38ExpectationsPreserved": true,
+    "preceding40InputBytesPreserved": true,
+    "preceding30GeneratedRecordsOrderAndExpectationsPreserved": true,
+    "appendedIds": [
+      "A1-F11",
+      "A1-F12",
+      "A1-F13"
+    ],
+    "resourceNativeIndicesInclusive": [
+      15,
+      29
+    ],
+    "F01ExpectedCode": "MalformedYaml",
+    "F05ExpectedCode": "NullPropertiesUnavailable",
+    "F13": {
+      "inputBytes": 151,
+      "inputSha256": "D59EFB83D1A70F15B58DF2A4CA1FA7B7AE0BD4BF8869EAA61BE5B8F20DC96E7D",
+      "expectedCode": "NullPropertiesUnavailable",
+      "firstDocumentMalformedTailBeyondDepth65": true,
+      "originalNullDiagnosticPreservedOnWorkStop": true,
+      "actualParserResult": "NOT_RUN"
+    }
+  },
+  "ordinaryReviewQualification": {
+    "initialF13Weakness": "Balanced F13 could not distinguish a completed valid probe from a work-bound stop; this was a test-observability issue, not an implementation defect.",
+    "strengthening": "F13 now adds a malformed tail later in the same first document, so incorrect continuation reaches MalformedYaml whereas a correct64-depth stop retains the original null refusal. Root independently checked the strengthened source/data.",
+    "earlierNote": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\null-syntax-three-file-ordinary-check\\ordinary-three-file-source-check.OPERATOR_ONLY.md",
+      "bytes": 4162,
+      "sha256": "F9E827746BC8268C76AA68FEC7A7C0B01851E034AD458F9E017FEAE8E8DAC918"
+    },
+    "wordingQualification": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\null-syntax-three-file-ordinary-check\\root-assigned-fix-and-wording-qualification.OPERATOR_ONLY.md",
+      "bytes": 1039,
+      "sha256": "98EB003A389F885BD80B0AFF24F5DA33A403B0D5B5F7FDDDEAB65ED32BAC9F86"
+    },
+    "formalSourceApproval": false
+  },
+  "plannedOfflineControls": {
+    "rulesWitnessValidator": {
+      "historicalBaselineCases": 80,
+      "addedNegativeCases": 6,
+      "plannedTotal": 86,
+      "currentActualResult": "NOT_RUN"
+    },
+    "buildBoundary": {
+      "plannedCases": 18,
+      "responseCases": 10,
+      "powerShellChildEnvironmentCases": 4,
+      "cSharpEffectiveEnvironmentBlockCases": 4,
+      "currentActualResult": "PARTIAL_PS14_MATCHED_CSHARP4_NOT_RUN",
+      "whole18CaseControlResult": "NOT_RUN"
+    },
+    "powerShellOnlySubset": {
+      "plannedCases": 14,
+      "actualResult": "PS_PREFIX_14_MATCHED_ONLY",
+      "actualCases": 14,
+      "actualMatched": 14,
+      "actualResponseCases": 10,
+      "actualChildEnvironmentCases": 4,
+      "secondaryErrorCount": 0,
+      "actualInternalElapsedSeconds": 1.1780307,
+      "actualOuterHostElapsedSeconds": 1.5770549,
+      "outerHostDeadlineSeconds": 120,
+      "outerHostExitCode": 0,
+      "outerHostExitConfirmed": true,
+      "outerHostTimedOut": false,
+      "infrastructurePowerShellHosts": 1,
+      "proofNativeRoots": 0,
+      "cSharpAddTypeRun": false,
+      "sourceApproval": false,
+      "nativePhasePass": false,
+      "wholeBuildBoundaryControlsPass": false,
+      "parentProcessEnvironmentReadOrMutated": false,
+      "qualification": "Actual selected PowerShell helper-prefix execution over owned inert inputs. Not the whole18-case control, Rules86 run, SupervisorControls phase, C#/UBT/compiler/UE/parser/native execution or SOURCE approval.",
+      "actualFailureCount": 0,
+      "primaryFailure": null
+    },
+    "cSharpFourChecks": {
+      "actualResult": "NOT_RUN_PENDING_SOURCE",
+      "AddTypeExecuted": false
+    },
+    "historicalGeneratedInputControls": {
+      "cases": 7,
+      "historicalResult": "PASS",
+      "historicalElapsedSeconds": 5.9663258,
+      "externalRoots": 0,
+      "qualification": "Earlier owned inert-data helper evidence; unchanged controls, not a new run or native proof."
+    }
+  },
+  "controlRootsAndBudgets": {
+    "originalSupervisorCases": 6,
+    "originalSupervisorGroups": 3,
+    "originalSupervisorRoots": 5,
+    "objSrcMapTargetRefusalRoots": 1,
+    "objSrcMapRootDeadlineSeconds": 60,
+    "totalSupervisorPhaseExternalRoots": 6,
+    "supervisorPhaseDeadlineSeconds": 600,
+    "pureControlExternalRoots": 0,
+    "phaseBudgetsSeconds": [
+      300,
+      600,
+      600,
+      1200,
+      1800,
+      600,
+      600,
+      300
+    ],
+    "phaseBudgetChange": false
+  },
+  "authoringScope": {
+    "packetAllowlistPaths": 19,
+    "separateProofControl": "tests/migration/Test-E04RulesWitness.ps1",
+    "stagedUEAuthoredMembers": 33,
+    "proofControlAddsUEStagedMember": false
+  },
+  "native": {
+    "phaseCount": 8,
+    "allPhaseResults": "NOT_RUN",
+    "nativeRunRoot": false,
+    "visibleCount": 0,
+    "parserTestsExecuted": false,
+    "buildCompilerOrUEExecuted": false
+  },
+  "openGates": [
+    "Root final checkpoint/source review and new exact successor bindings; actual PS14 result is recorded with its limited scope",
+    "New exact successor source/run/common/index/assignment/unit/data binding",
+    "Affected independent SOURCE duties, both complete finite witnesses and raw seams",
+    "Applicable bounded native observations/evidence freeze",
+    "Final independent CODE and different REQ after execution/evidence freeze",
+    "A1G genuine exception-disabled runtime caller",
+    "A2/full lexical/fidelity and production conformance",
+    "HUD/input/rendering",
+    "Linux UNTESTED",
+    "Packaging and full acceptance"
+  ],
+  "lexicalLimits": "Null-only first-document/bounded work does not establish complete-stream syntax or universal YAML conformance. Plain DEL/context-sensitive lexical/A2 production risk stays open; no applicable A1 criterion is waived.",
+  "standingPerpetualSourceApiConsent": "UNCHANGED",
+  "authority": {
+    "newMethod": false,
+    "retentionCampaign": false,
+    "sourceApproval": false,
+    "newGo": false,
+    "native": false,
+    "visible": false,
+    "GitHubPublicationOrMerge": false
+  },
+  "revision": 75,
+  "offlinePowerShellEvidence": {
+    "runLabel": "20261020T232343Z-7b635835",
+    "runner": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\build-boundary-offline-ps-runner-PROPOSED\\Invoke-BuildBoundaryPsPrefix.PROPOSED.ps1",
+      "bytes": 15704,
+      "sha256": "67FAC389055268A1AFB6F51DEB82F083827A98F076DCD3D24FED1BA131D8AA43"
+    },
+    "rootSourceAdoption": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\value-build-source-refresh-beef566\\offline-ps-14-run-control-20261020T232343Z-7b635835\\root-source-adoption.original.json",
+      "bytes": 1120,
+      "sha256": "AE33287610CAD05452405403A011D94F11DC113464AA2F2316C5DC58D17511F2"
+    },
+    "report": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\offline-build-boundary-ps-controls-runs\\20261020T232343Z-7b635835\\offline-ps-prefix-report.original.json",
+      "bytes": 17357,
+      "sha256": "22DDDD44DD4890EC384D295635F988FB87A1FD3EDB54F6EDCDCDE58F0D1C954D"
+    },
+    "outerHostCompletion": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\value-build-source-refresh-beef566\\offline-ps-14-run-control-20261020T232343Z-7b635835\\completion.original.json",
+      "bytes": 793,
+      "sha256": "FC4ECB2C583794F307250562BD31E73C09B9614B17A8CF124AB47F020A393AFC"
+    },
+    "stdout": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\value-build-source-refresh-beef566\\offline-ps-14-run-control-20261020T232343Z-7b635835\\stdout.original.txt",
+      "bytes": 279,
+      "sha256": "C23DD20D012106FB0BF2D74E58E34EBFAC6712EF032C275F34E4DF639DC8E09B"
+    },
+    "stderr": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\value-build-source-refresh-beef566\\offline-ps-14-run-control-20261020T232343Z-7b635835\\stderr.original.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "completeRunArtifactsSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\value-build-source-refresh-beef566\\offline-ps-14-run-control-20261020T232343Z-7b635835\\complete-run-artifacts.seal.original.json",
+      "bytes": 9062,
+      "sha256": "5C5148367E0D6ED9AF752CCE6EABA27E38AB8927A3696B2C8F51F9BA665A747B"
+    },
+    "sealedMembers": 27,
+    "rootSealedAllMembersBeforeCaseBodyRead": true,
+    "independentMetadataRehashDifferences": 0,
+    "outerHostCreationUtc": "2026-10-20T23:23:43.6952526Z",
+    "outerHostCompletedUtc": "2026-10-20T23:23:45.2753866Z",
+    "actualInternalReportHasExplicitStartFinishUtc": false,
+    "sourceBeforeSha256": "AAEF3EF33C3FD6115010F1153529308B3C82695754DE2982852E41141EFA9370",
+    "sourceAfterSha256": "AAEF3EF33C3FD6115010F1153529308B3C82695754DE2982852E41141EFA9370",
+    "executedPrefixControlName": "Build-BoundaryControls",
+    "executedPrefixSha256": "106B83004F240EC38FA453C167AE5E63B8AB79378173F7022855306741B76623",
+    "helperBindingsCount": 12,
+    "privateRawToolsOrDataPublished": false
+  }
+}

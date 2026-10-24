@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_E04_A1G_CLOSED_COOK_TRACE_FAILURE_PUBLICATION",
+  "status": "COOK_TRACE_VALIDATION_FAILURE_SCOPE_REVIEW_PENDING",
+  "sourceHead": "a8980572ca05e9b1a32880915e7b8cbf5cb0d337",
+  "runId": "20261022T192551Z-711fa6f6",
+  "closedUtc": "2026-10-22T20:03:49.1086919Z",
+  "rootFailureClosure": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-a898057-cook-failure-root-20261022\\root-closed-cook-failure.original.json",
+    "bytes": 60474,
+    "sha256": "0014F77BE7E7F21E94C33D2722BCB40090046508436E20FBA294B218EDC96614"
+  },
+  "rootFailureClosureTool": "92742a",
+  "sourceAdmission": {
+    "bytes": 5678,
+    "sha256": "91B425FF83F0BF4FAFC378B94FC6D30BB677D5AAC7366A6765E5400F7697470C",
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\root-source-admission.original.json"
+  },
+  "sourceReviewVerdictUnchanged": "PASS_PREREQUISITE_ONLY",
+  "sourcePublicationRelativePath": "docs/plans/research/2026-10-22-e04a-game-source-prerequisite-a898057.md",
+  "normativeRequirementRelativePath": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+  "successfulRootAdmittedPredecessors": 5,
+  "phaseAttemptCount": 6,
+  "phases": [
+    {
+      "phase": "Preflight",
+      "producerStatus": "PREFLIGHT_PASS_NO_NATIVE_ROOT",
+      "executionPassed": true,
+      "rootAdmitted": true,
+      "completionAbsent": false,
+      "supervisedRoots": 0
+    },
+    {
+      "phase": "DependencyConfigure",
+      "producerStatus": "DEPENDENCY_CONFIGURE_PASS_NO_INSTALL",
+      "executionPassed": true,
+      "rootAdmitted": true,
+      "completionAbsent": false,
+      "supervisedRoots": 1
+    },
+    {
+      "phase": "DependencyBuild",
+      "producerStatus": "DEPENDENCY_BUILD_AND_EXPLICIT_GAME_ARTIFACT_COPY_PASS",
+      "executionPassed": true,
+      "rootAdmitted": true,
+      "completionAbsent": false,
+      "supervisedRoots": 1
+    },
+    {
+      "phase": "EditorPrerequisiteBuild",
+      "producerStatus": "EDITOR_PREREQUISITE_BUILD_PASS_NORMAL_RECEIPT_AND_PROJECT_MODULE",
+      "executionPassed": true,
+      "rootAdmitted": true,
+      "completionAbsent": false,
+      "supervisedRoots": 1
+    },
+    {
+      "phase": "GameBuild",
+      "producerStatus": "GAME_BUILD_PASS_ACTUAL_CALLER_PARSER_FLAGS_AND_MONOLITHIC_LINK",
+      "executionPassed": true,
+      "rootAdmitted": true,
+      "completionAbsent": false,
+      "supervisedRoots": 1
+    },
+    {
+      "phase": "Cook",
+      "producerStatus": "FAIL_UBT_TRACE_EXCEPTION_OBSERVATION_OR_RECOVERY",
+      "executionPassed": false,
+      "rootAdmitted": false,
+      "completionAbsent": true,
+      "supervisedRoots": 1
+    }
+  ],
+  "cook": {
+    "phaseStatus": "FAIL_UBT_TRACE_EXCEPTION_OBSERVATION_OR_RECOVERY",
+    "executionPassed": false,
+    "phaseElapsedSeconds": 440.0249346,
+    "primaryFailure": null,
+    "secondaryFailures": [
+      {
+        "stage": "ubt-trace-observation-recovery",
+        "type": "System.Management.Automation.RuntimeException",
+        "message": "A1G_DATA_CHANGED: trace unchanged outside the two approved UBT roots"
+      }
+    ],
+    "completion": "ABSENT_FAILED_PHASE",
+    "result": {
+      "bytes": 645711,
+      "sha256": "DF2ACEC2294183935BAB4115BEDE1E9BB100425D4764BC332AD14A5E30BF0A41",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261022T192551Z-711fa6f6\\phases\\cook\\result.json"
+    },
+    "outerCompletion": {
+      "bytes": 1695,
+      "sha256": "98582EB8290876825DAE6D22887BC14FB61335422B3298726BE26BE1B19828B5",
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-a898057-post-source-helpers-UNBOUND-PROPOSED-20261022-4c2f9b80-r2\\phase-execution-a898057-20261022T192551Z-711fa6f6\\cook.operator\\completion.original.json"
+    },
+    "rootAdmission": null,
+    "supervisedProcess": {
+      "cleanupConfirmed": true,
+      "exitConfirmed": true,
+      "timedOut": false,
+      "exitCode": 0,
+      "finalJobActive": 0,
+      "receipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261022T192551Z-711fa6f6\\phases\\cook\\a1g-cook.process.json",
+        "bytes": 27439,
+        "sha256": "d5b7c0bd273d72a10d8af5b6ef270f1e4cee77b850221adec1d9aff6064ed0ec"
+      },
+      "pid": 29992
+    },
+    "rootInspectedChildAndOuterFacts": {
+      "uatChildExitCode": 0,
+      "commandletSecondsRounded": 308.32,
+      "buildCookRunSecondsRounded": 328.66,
+      "cookErrorCount": 0,
+      "cookWarningCount": 0,
+      "outerExitCode": 1,
+      "outerTimedOut": false,
+      "outerFullStreamCopiesCompleted": true,
+      "scope": "Root primary-output inspection supplied for this publication; child success does not pass the whole phase. Auxiliary preparer did not reread native logs/results."
+    }
+  },
+  "trace": {
+    "prepared": true,
+    "complete": false,
+    "unchangedGuardError": "A1G_DATA_CHANGED: trace unchanged outside the two approved UBT roots",
+    "actualLoggedUbtInvocation": "-Mode=ValidatePlatforms -OutputSDKs -AllPlatforms",
+    "beforeFileCount": 11,
+    "beforeTotalBytes": 76584,
+    "afterFileCount": 11,
+    "afterTotalBytes": 67675,
+    "beforeTrace": {
+      "name": "Trace.uba",
+      "path": "C:\\Users\\Rabid\\AppData\\Local\\UnrealBuildTool\\Trace.uba",
+      "bytes": 9917,
+      "sha256": "2a54593df3eb25b5cc1ea7076eade23fac193e4e81733a1a3625882fdaf25591",
+      "creationTimeUtc": "2026-10-22T19:53:51.8732633Z",
+      "lastWriteTimeUtc": "2026-10-22T19:53:51.8732633Z"
+    },
+    "afterTrace": {
+      "name": "Trace.uba",
+      "path": "C:\\Users\\Rabid\\AppData\\Local\\UnrealBuildTool\\Trace.uba",
+      "bytes": 319,
+      "sha256": "28eb41f67733a791493cbde6197610311a3e2afd4d90657d20114190ba0c2bd4",
+      "creationTimeUtc": "2026-10-22T19:53:51.8732633Z",
+      "lastWriteTimeUtc": "2026-10-22T19:54:57.7028080Z"
+    },
+    "removedBackup": {
+      "name": "Trace-backup-2026.10.21-13.56.19.uba",
+      "path": "C:\\Users\\Rabid\\AppData\\Local\\UnrealBuildTool\\Trace-backup-2026.10.21-13.56.19.uba",
+      "bytes": 9228,
+      "sha256": "91df3be4919e7190a984fcdb7c518cb1e3b8aecbc337139239cc872db8a12272",
+      "creationTimeUtc": "2026-10-21T13:56:19.1503615Z",
+      "lastWriteTimeUtc": "2026-10-21T13:56:19.1503615Z"
+    },
+    "newBackup": {
+      "name": "Trace-backup-2026.10.22-19.53.51.uba",
+      "path": "C:\\Users\\Rabid\\AppData\\Local\\UnrealBuildTool\\Trace-backup-2026.10.22-19.53.51.uba",
+      "bytes": 9917,
+      "sha256": "2a54593df3eb25b5cc1ea7076eade23fac193e4e81733a1a3625882fdaf25591",
+      "creationTimeUtc": "2026-10-22T19:53:51.8732633Z",
+      "lastWriteTimeUtc": "2026-10-22T19:53:51.8732633Z"
+    },
+    "newBackupMatchesPriorRecordedTraceBytes": true,
+    "investigation": "Root read installed TargetPlatformManagerModule.cpp lines 221..238 and 366..408, which launch SDK ValidatePlatforms from the Cook Editor child; actual closed child stdout lines 42/61 record that invocation. The installed source explains the observed route but does not establish installed-source/binary correspondence or universal writer attribution.",
+    "scope": "Historical recorded metadata only. No global original trace file was opened or rehashed by this publication preparation.",
+    "installedPrimarySource": {
+      "path": "C:/Program Files/Epic Games/UE_5.8/Engine/Source/Developer/TargetPlatform/Private/TargetPlatformManagerModule.cpp",
+      "bytes": 61188,
+      "sha256": "E86827925AECB8ED2250F5D7AB655269ED7FE6A83D6691B244FA36FAAD5A4E17",
+      "rootIdentityTool": "902363",
+      "rootBoundedReadTool": "f58e33",
+      "ranges": [
+        [
+          221,
+          238
+        ],
+        [
+          366,
+          408
+        ],
+        [
+          573,
+          579
+        ]
+      ],
+      "qualification": "Exact root-supplied installed-source identity/ranges. This auxiliary publication preparation did not independently reopen installed source or native logs. Installed-binary correspondence is not established."
+    },
+    "scopeInvestigation": {
+      "skipEnvironment": "Supported skip route assumes all platforms valid; it is not a neutral output-routing change.",
+      "multiprocess": "Changes semantics.",
+      "noAutoSdk": "Does not bypass native SDK validation.",
+      "stage": "Finite installed-source investigation found no known SDK writer under Build=False/skipcook/defaultRunChunkAssigner=false. Stage scope remains unchanged; this is not universal absence proof."
+    }
+  },
+  "preservation": {
+    "allOwnedProcessesClosed": true,
+    "actualSupervisedRoots": 5,
+    "finalActiveJobCounts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "matchedStates": 84,
+    "changedStates": 0,
+    "allSixRecordedBeforeAfterArraysMatched": true,
+    "retainedArtifactDescriptorOccurrencesMatched": 456,
+    "predecessorDescriptorOccurrencesMatched": 30,
+    "postFailureTraceRecovery": {
+      "record": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-a898057-cook-failure-root-20261022\\root-postfailure-trace-recovery.original.json",
+        "bytes": 10464,
+        "sha256": "1DE608298FAF9B147DF14BD6EF204E32A26A1D10BD937EB44955D90C98DEAA94"
+      },
+      "tool": "52ff21",
+      "createdUtc": "2026-10-22T20:02:58.6450492Z",
+      "copiedFiles": 11,
+      "copiedBytes": 67675,
+      "opaqueBodies": true,
+      "globalPathsModifiedByRecovery": false,
+      "reconstructsMissingPhaseAfterRecovery": false,
+      "passesFailedGuard": false,
+      "scope": "Prospective failure preservation after actual foreground close. This later recovery is not a missing phase-boundary before/after copy, does not pass the failed trace guard and grants no new writer/retry authority."
+    },
+    "qualification": "Finite preservation and process facts are attributed to the exact root closure/recovery records. No continuous preservation, universal isolation, reconstruction of missing phase evidence or expanded scope is established."
+  },
+  "notRun": [
+    "Stage",
+    "Native",
+    "Audit",
+    "FINAL_CODE",
+    "FINAL_REQ"
+  ],
+  "laterPhaseGos": "NONE",
+  "allRunAuthority": "CLOSED_DO_NOT_RETRY_OR_REUSE",
+  "separatePureControls": "Seven synthetic metadata controls passed separately after SOURCE admission; unchanged, not SOURCE reviewer/native/end-to-end execution.",
+  "repairAdopted": false,
+  "retryAuthorized": false,
+  "expandedTraceScopeApproved": false,
+  "requiredNextStep": "Checkpoint, push and exact gh-verify this failure under OWN18 before repair. Then resolve source causality/scope and separately checkpoint/verify any adopted repair before fresh bindings, affected SOURCE and new exact ordered phase GOs. No old authority transfers.",
+  "finalAcceptanceGranted": false,
+  "visibleWindowsRemaining": 0,
+  "linux": "UNTESTED",
+  "specialAssurance": "DEFERRED_UNPROVEN_OWN17",
+  "history": "Preserve revision122, all historical failures/raw evidence/settings restoration and bounded A1E acceptance. The unexecuted success-closure proposals remain unexecuted.",
+  "reviewConsent": "Perpetual private source/API review consent unchanged.",
+  "ownerChoiceProposal": {
+    "relativePath": "docs/plans/research/2026-10-22-e04a-game-cook-sdk-trace-owner-choice.md",
+    "bytes": 12929,
+    "sha256": "89743B06E9A6658BE1B6E7531F232EE4D3742B1EF134CB4B0191159F32CA32A8",
+    "status": "UNADOPTED_NO_EXECUTION_OR_SCOPE_AUTHORITY"
+  }
+}

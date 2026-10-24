@@ -1,0 +1,472 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "POSTSEALED_E04A1E_REPORT_PUBLICATION_METADATA_OVERLAY",
+  "createdUtc": "2026-10-21T08:54:54.2802022Z",
+  "status": "BOUNDED_E04_A1E_ACCEPTANCE_RECORDED",
+  "reviewedHead": "3bfd22d0018dbda285a3db4184c8509dbc3783f1",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "executedHead": "0bbbf884308a9d896cf19a2e2cf42614481559e8",
+  "runId": "20261021T062742Z-6f13b8a2",
+  "finalAcceptance": true,
+  "rootCoordinatorDisposition": {
+    "schemaVersion": 1,
+    "recordKind": "ROOT_BOUNDED_E04_A1E_ACCEPTANCE_AND_METADATA_PUBLICATION_GO",
+    "createdUtc": "2026-10-21 08:54:35 UTC",
+    "status": "BOUNDED_E04_A1E_ACCEPTANCE_RECORDED",
+    "explicitRootGo": true,
+    "boundedAcceptance": true,
+    "recordedBy": "Root implementer/coordinator combining independent reports; not a new independent reviewer verdict",
+    "finalHead": "3bfd22d0018dbda285a3db4184c8509dbc3783f1",
+    "executedHead": "0bbbf884308a9d896cf19a2e2cf42614481559e8",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "runId": "20261021T062742Z-6f13b8a2",
+    "reportsPersonallyReadAfterSealing": true,
+    "noOutstandingBoundedAcceptanceBlocker": true,
+    "codeRawVerdict": "PASS",
+    "initialReqRawVerdict": "BLOCKED",
+    "supplementRawVerdict": "PASS",
+    "requirementsDisposition": "Valid initial technical acceptance map plus the separate limited postsealed supplement resolve the bounded requirements. The initial raw BLOCKED verdict stays immutable.",
+    "resolvedItems": [
+      "H38/H40 historical recipe/byte/hash/expectation/order preservation",
+      "Original focused SOURCE semantic prerequisite, admission and eight exact phase GO/host/predecessor joins",
+      "Disclosed SOURCE ordering nonconformance interpreted as a nonblocking administrative qualification",
+      "Preallocation refused host and separate same-unused-planned-RunId normal route interpretation"
+    ],
+    "acceptedScope": "Actual Windows exception-enabled Editor raw-document subset only: eight suites,43 input IDs,33 generated definitions,50 attempts,58 native files,1745 evaluated custom checks. UE assertion total is NOT_ESTABLISHED.",
+    "initialReviewBeforeBodyValidation": {
+      "toolChunk": "a01125",
+      "roles": [
+        {
+          "role": "FINAL_CODE",
+          "beforeBodyRehash": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-final-review\\final_code-3bfd22d-062742-20261021T073518Z-2c337d\\root-all-sealed-members-rehashed.before-first-body.original.json",
+            "bytes": 1425,
+            "sha256": "09F64ED481D56326CDA507C22C58659D78B1657D6514911B7D498D5A393A2205"
+          }
+        },
+        {
+          "role": "FINAL_REQ",
+          "beforeBodyRehash": {
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-final-review\\final_req-3bfd22d-062742-20261021T073518Z-2c337d\\root-all-sealed-members-rehashed.before-first-body.original.json",
+            "bytes": 1422,
+            "sha256": "E31FA99C0BE3035FA03EEF738A4F5ED9C9C1D0417790C08769D5234018521E31"
+          }
+        }
+      ],
+      "rawEach": 12,
+      "selectedEach": 7,
+      "reportBodiesStillUnread": true
+    },
+    "initialReviewFirstBodyRead": {
+      "toolChunk": "3408f4",
+      "completeOutputNotTruncated": true,
+      "bothReportsRead": true,
+      "priorBodyGate": {
+        "toolChunk": "a01125",
+        "roles": [
+          {
+            "role": "FINAL_CODE",
+            "beforeBodyRehash": {
+              "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-final-review\\final_code-3bfd22d-062742-20261021T073518Z-2c337d\\root-all-sealed-members-rehashed.before-first-body.original.json",
+              "bytes": 1425,
+              "sha256": "09F64ED481D56326CDA507C22C58659D78B1657D6514911B7D498D5A393A2205"
+            }
+          },
+          {
+            "role": "FINAL_REQ",
+            "beforeBodyRehash": {
+              "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-final-review\\final_req-3bfd22d-062742-20261021T073518Z-2c337d\\root-all-sealed-members-rehashed.before-first-body.original.json",
+              "bytes": 1422,
+              "sha256": "E31FA99C0BE3035FA03EEF738A4F5ED9C9C1D0417790C08769D5234018521E31"
+            }
+          }
+        ],
+        "rawEach": 12,
+        "selectedEach": 7,
+        "reportBodiesStillUnread": true
+      }
+    },
+    "supplementBeforeFirstBody": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-final-review\\final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856\\root-all-sealed-members-rehashed.before-first-body.original.json",
+      "bytes": 1444,
+      "sha256": "2F133F8A0A4BF8D5D5CDE7E3FC88A54631404B4E8692C15C49CFFDA71FE08614"
+    },
+    "supplementBeforeBodyValidation": {
+      "tool": "35dedf",
+      "exitCode": 0
+    },
+    "supplementFirstBodyRead": {
+      "tool": "7ef639",
+      "complete": true
+    },
+    "conductEvidence": [
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-final-review\\common-req-supplement-3bfd22d-062742-20261021T083504Z-16e856\\closed-conduct-runtime-metadata.OPERATOR_ONLY.20261021T085322Z-ef31ef82.original.json",
+        "bytes": 43348,
+        "sha256": "4ADF1F1C158920A4B583CBF115B30C7B3C5F47C3405C4F5CCEDA31A3AA65258E"
+      },
+      {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-final-review\\common-3bfd22d-062742-20261021T073518Z-2c337d\\closed-final-conduct-audit.OPERATOR_ONLY.original.json",
+        "bytes": 125406,
+        "sha256": "C65C3AABBF9496979442A3954743E26E19E66BAC39B5557BCA14952F8D828F6B"
+      }
+    ],
+    "reviewRuntime": "Three distinct fresh exec contexts; selected parent runtime read-only/never,session memory_mode disabled,gpt-6.1-sol/ultra,no model override/resume/fork. Exact saved prompts plus one CRLF observed. All reviewer process groups closed0 with confirmed cleanup.",
+    "supplementConductQualification": {
+      "parentToolPairs": 29,
+      "execInputs": 25,
+      "spawn": 1,
+      "send": 3,
+      "matchedInputHashes": true,
+      "unmatchedPairs": 0,
+      "observedParentForbiddenCodeOrCredentialOrCandidateExecution": 0,
+      "helperDeclaredPurpose": "Descriptor identity arithmetic only; parent report states substantive acceptance comparisons performed by parent.",
+      "helperObservedForkTurns": "none",
+      "helperObservedTaskName": "identity_arithmetic",
+      "helperTaskPlaintextAndChildPermissions": "UNVERIFIED; parent collaboration messages opaque and spawn output provides no child UUID/path.",
+      "requestedMultiAgentDisabling": "NOT_ESTABLISHED; helper actually available.",
+      "acceptanceReason": "Parent performed material acceptance comparisons in its own isolated role; no helper verdict is used. No affirmative parent contamination or material scope violation was observed. The unavailable child/feature properties remain UNVERIFIED under the standing protocol, not claimed equivalent or certified."
+    },
+    "retainedQualifications": [
+      "Original strict SOURCE all373-before-report-read ordering remains FALSE:358 before,15 after. No retroactive ordering PASS or owner waiver.",
+      "Same-unused-planned-RunId continuation remains a bounded acceptance interpretation, not an express normative exception; initial restricted host exit1 stays failed/closed.",
+      "Current root factual check matched all373 original seal members; supplement independently rehashed only eight explicitly granted members and does not claim all373.",
+      "Lower-level memory/features/OS/PID/network and child helper enforcement remain UNVERIFIED; tool truncation recovery is material/finite, not all-byte comprehension certification.",
+      "Wrapper stale C# provenance comment and vendor/old build warnings remain disclosed; actual pinned bytes and current process/source identities govern."
+    ],
+    "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+    "authorizedNextActions": "Attach exact four raw report bytes and faithful metadata/status overlay; validate/checkpoint/push/verify OWN18 backup; then adopt a separate bounded Game-caller candidate and clean norm, checkpoint/verify backup and obtain fresh affected SOURCE before any exact phase GO.",
+    "laterPublicationCommitPolicy": "These reports assess finalHead above, not the later metadata/report publication commit.",
+    "allCurrentExecutionAuthority": "CLOSED_DO_NOT_REUSE",
+    "newNativeOrGuiAuthority": false,
+    "mergeAuthority": false,
+    "stillOpen": [
+      "A1G exception-disabled real Game caller",
+      "A2/727 compatibility scenarios and general YAML fidelity",
+      "Production profile/HUD/input/rendering/Core play",
+      "Linux execution UNTESTED",
+      "Distribution and full migration"
+    ]
+  },
+  "rootDispositionOriginal": {
+    "path": ".local/reviews/E04A1-final-review/common-req-supplement-3bfd22d-062742-20261021T083504Z-16e856/root-bounded-a1e-disposition.original.json",
+    "bytes": 8134,
+    "sha256": "74B6A9E818E005443B0A5CD81C9D9FD117012629A7AE009A418F24BEFCF293EC"
+  },
+  "reports": [
+    {
+      "role": "FINAL_CODE",
+      "rawVerdict": "PASS",
+      "report": {
+        "path": "docs/plans/research/2026-10-21-e04a-editor-final-code.md",
+        "bytes": 11265,
+        "sha256": "D1ECE386D91F78D53EE360A919B86E8362A21D63A4FFC0A1D5270625ABCB0AC0"
+      },
+      "originalReport": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/last-message.txt",
+        "bytes": 11265,
+        "sha256": "D1ECE386D91F78D53EE360A919B86E8362A21D63A4FFC0A1D5270625ABCB0AC0"
+      },
+      "sessionId": "01a15d78-ddf7-7b00-a040-9c6180237b71",
+      "actualRuntime": {
+        "source": "exec",
+        "provider": "openai",
+        "cliVersion": "0.163.0-alpha.10.2",
+        "model": "gpt-6.1-sol",
+        "effort": "ultra",
+        "memoryMode": "disabled",
+        "sandbox": {
+          "type": "read-only"
+        },
+        "approvalPolicy": "never",
+        "actualUserPayload": {
+          "utf8Bytes": 7325,
+          "sha256": "CB4918F2ACF794AA27BC819C5B90C9CBCE7345621464862160F76E5F29DDACDA"
+        },
+        "originalPayload": {
+          "utf8Bytes": 7323,
+          "sha256": "B20A9A5E3A7FFADF9C64AB35FC7AC5B94159180113D731B81AB8BFF1F9D92F66"
+        },
+        "byteIdenticalTransport": false,
+        "explicitFullGo": true
+      },
+      "process": {
+        "completedUtc": "2026-10-21T08:12:25.1135459Z",
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "deadlineSeconds": 2700,
+        "retries": 0
+      },
+      "runtime": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/runtime-evidence.final.selected.json",
+        "bytes": 4652,
+        "sha256": "57D676143089795E1F0EEC4998895D8C25570F45ACAB25971FECDEFE14AB6110"
+      },
+      "invocation": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/invocation.json",
+        "bytes": 4676,
+        "sha256": "CB195BF2F8F1BB45806A3EBFB474A7F1A55CA1E0AFF91DC64DF832903F213DB5"
+      },
+      "completion": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/completion.json",
+        "bytes": 2732,
+        "sha256": "8D39EC2CF10D20EA3F4724130EDEC9A33A65A4C117CA8012F1BEE5CDD4092ED6"
+      },
+      "rawSeal": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/closed-raw-output-seal.before-body.original.json",
+        "bytes": 4052,
+        "sha256": "74A420EB3E340E8FA233063A4B9776CD9C843E9D2165E84C961C59CF8A85E613"
+      },
+      "selectedSeal": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/closed-selected-extraction-seal.before-body.original.json",
+        "bytes": 2690,
+        "sha256": "1E137AC23B78D2A29327A08F596DBC687BEF857E486CF997394812FED7964E3B"
+      },
+      "beforeFirstBodyRehash": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/root-all-sealed-members-rehashed.before-first-body.original.json",
+        "bytes": 1425,
+        "sha256": "09F64ED481D56326CDA507C22C58659D78B1657D6514911B7D498D5A393A2205"
+      },
+      "inputManifest": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/input-manifest.original.json",
+        "bytes": 290527,
+        "sha256": "E63D317EA331A4F87D58B4D8BAFD36F7322B473AF6FA3C3924D00E94AFFD5BC2"
+      },
+      "launchAuthority": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/root-launch-go.original.json",
+        "bytes": 5162,
+        "sha256": "BFC6D187B2E24EFBECD3A84D76F7C894F391B03005DDDF85034C79576846EFFB"
+      },
+      "actualPromptIdentityOnly": {
+        "path": ".local/reviews/E04A1-final-review/final_code-3bfd22d-062742-20261021T073518Z-2c337d/actual-launch.prompt.original.txt",
+        "bytes": 7323,
+        "sha256": "B20A9A5E3A7FFADF9C64AB35FC7AC5B94159180113D731B81AB8BFF1F9D92F66"
+      },
+      "lowerLevelMemoryFeaturesOsPidNetworkIsolation": "UNVERIFIED"
+    },
+    {
+      "role": "INITIAL_FINAL_REQ",
+      "rawVerdict": "BLOCKED",
+      "report": {
+        "path": "docs/plans/research/2026-10-21-e04a-editor-final-requirements.md",
+        "bytes": 17884,
+        "sha256": "58EDC2A137668F10D891DAF1622E90BD360AEDCA1F19245C98BAF9A81D36F015"
+      },
+      "originalReport": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/last-message.txt",
+        "bytes": 17884,
+        "sha256": "58EDC2A137668F10D891DAF1622E90BD360AEDCA1F19245C98BAF9A81D36F015"
+      },
+      "sessionId": "01a15d79-2afb-72f1-bb98-633d2f361b5c",
+      "actualRuntime": {
+        "source": "exec",
+        "provider": "openai",
+        "cliVersion": "0.163.0-alpha.10.2",
+        "model": "gpt-6.1-sol",
+        "effort": "ultra",
+        "memoryMode": "disabled",
+        "sandbox": {
+          "type": "read-only"
+        },
+        "approvalPolicy": "never",
+        "actualUserPayload": {
+          "utf8Bytes": 7513,
+          "sha256": "F3AA18748FD152BA572BB789FAFDD1B82A8075DF3DBCB8ACDDB6E3C65B927EBF"
+        },
+        "originalPayload": {
+          "utf8Bytes": 7511,
+          "sha256": "14AA678AB0EB93051EAC66BF034FED3F5B338CE694372C528206E0AC02A3A136"
+        },
+        "byteIdenticalTransport": false,
+        "explicitFullGo": true
+      },
+      "process": {
+        "completedUtc": "2026-10-21T08:13:44.6637306Z",
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "deadlineSeconds": 2700,
+        "retries": 0
+      },
+      "runtime": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/runtime-evidence.final.selected.json",
+        "bytes": 4651,
+        "sha256": "3F9ECEAC41278F941E9408025990DED969E1A3431ECED3BEBA4743136C08EF3D"
+      },
+      "invocation": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/invocation.json",
+        "bytes": 4668,
+        "sha256": "89C83FA1EEDDB4ECF3D6AF7D3BB41563EA740F89E5A99FAFA629C8828409E3DB"
+      },
+      "completion": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/completion.json",
+        "bytes": 2723,
+        "sha256": "CA293A8EF5AEDCF64C669CD2B95F4855AA03AA4140DA9FEA43EE1A941E8149FE"
+      },
+      "rawSeal": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/closed-raw-output-seal.before-body.original.json",
+        "bytes": 4039,
+        "sha256": "978022B85FDA3C4A76796C0A54A8CDB2721F3827DACF075FF167C776A2A8E146"
+      },
+      "selectedSeal": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/closed-selected-extraction-seal.before-body.original.json",
+        "bytes": 2682,
+        "sha256": "191265E4EB619CC91627324B290D772EA22604CB131CC19DAE775AEFE5C2AB8A"
+      },
+      "beforeFirstBodyRehash": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/root-all-sealed-members-rehashed.before-first-body.original.json",
+        "bytes": 1422,
+        "sha256": "E31FA99C0BE3035FA03EEF738A4F5ED9C9C1D0417790C08769D5234018521E31"
+      },
+      "inputManifest": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/input-manifest.original.json",
+        "bytes": 290515,
+        "sha256": "D1E8BAB2E536380A028B6D705F972FECDD34AC55005DE79B221F4CCC13180F5C"
+      },
+      "launchAuthority": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/root-launch-go.original.json",
+        "bytes": 5152,
+        "sha256": "906C799359E055A60B6CA77E44557B9A209C015F0CA606838D6EF373AD4112CF"
+      },
+      "actualPromptIdentityOnly": {
+        "path": ".local/reviews/E04A1-final-review/final_req-3bfd22d-062742-20261021T073518Z-2c337d/actual-launch.prompt.original.txt",
+        "bytes": 7511,
+        "sha256": "14AA678AB0EB93051EAC66BF034FED3F5B338CE694372C528206E0AC02A3A136"
+      },
+      "lowerLevelMemoryFeaturesOsPidNetworkIsolation": "UNVERIFIED"
+    },
+    {
+      "role": "LIMITED_POSTSEALED_REQ_SUPPLEMENT",
+      "rawVerdict": "PASS",
+      "report": {
+        "path": "docs/plans/research/2026-10-21-e04a-editor-requirements-supplement.md",
+        "bytes": 9888,
+        "sha256": "2EEEF63253F35B7C363D791EDC015A68D7F74724A1C31D1787A4B4E39D5A9FAE"
+      },
+      "originalReport": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/last-message.txt",
+        "bytes": 9888,
+        "sha256": "2EEEF63253F35B7C363D791EDC015A68D7F74724A1C31D1787A4B4E39D5A9FAE"
+      },
+      "sessionId": "01a15d99-cf37-7e71-81e5-8c441cdf8194",
+      "actualRuntime": {
+        "source": "exec",
+        "provider": "openai",
+        "cliVersion": "0.163.0-alpha.10.2",
+        "model": "gpt-6.1-sol",
+        "effort": "ultra",
+        "memoryMode": "disabled",
+        "sandbox": {
+          "type": "read-only"
+        },
+        "approvalPolicy": "never",
+        "actualUserPayload": {
+          "utf8Bytes": 4462,
+          "sha256": "6102BAF7F0C20EA190F4C2DA280E40D6868B4F5B056E379463431A600C7DE815"
+        },
+        "originalPayload": {
+          "utf8Bytes": 4460,
+          "sha256": "62EBCEC99C6FD4A850416FA5CC4FC07967C1856BE8626C9E5FC610C9B1496BEB"
+        },
+        "byteIdenticalTransport": false,
+        "explicitFullGo": true
+      },
+      "process": {
+        "completedUtc": "2026-10-21T08:44:56.4046265Z",
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "deadlineSeconds": 1800,
+        "retries": 0
+      },
+      "runtime": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/runtime-evidence.final.selected.json",
+        "bytes": 4692,
+        "sha256": "D3FF7F5F1143CAAB8AE47DAE3E0AA67FE13F86B9784311E046DB70723F6A988E"
+      },
+      "invocation": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/invocation.json",
+        "bytes": 4756,
+        "sha256": "AC047D60B1B8E9FC778FB6B1BD7464A4E6E8866FD9E19CF900091D24BDA3D6A0"
+      },
+      "completion": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/completion.json",
+        "bytes": 2799,
+        "sha256": "6B06E6341C6DD32812AA3AAD8BF12C3EFED087612274B941ED3BE8031A6116CE"
+      },
+      "rawSeal": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/closed-raw-output-seal.before-body.original.json",
+        "bytes": 4159,
+        "sha256": "CDBB59CDBE23FF799EC259B14D03563C3742311381AB4BD1B00CF0DB2D6C99B7"
+      },
+      "selectedSeal": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/closed-selected-extraction-seal.before-body.original.json",
+        "bytes": 2758,
+        "sha256": "D6906AC3F6E58E4AF84C69BCD2488BFE153CCD173DC2CF29C374BAA68E6613B5"
+      },
+      "beforeFirstBodyRehash": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/root-all-sealed-members-rehashed.before-first-body.original.json",
+        "bytes": 1444,
+        "sha256": "2F133F8A0A4BF8D5D5CDE7E3FC88A54631404B4E8692C15C49CFFDA71FE08614"
+      },
+      "inputManifest": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/input-manifest.original.json",
+        "bytes": 322448,
+        "sha256": "28B5DFD5B43E764283E73A0C64D962CB1AFA767E28E19DA58C668CCAFA6C8E45"
+      },
+      "launchAuthority": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/root-launch-go.original.json",
+        "bytes": 5269,
+        "sha256": "E9ECFA069757388A7231DA90100BF7679E78C832EEF4D1DC1982DE334B4FBCE8"
+      },
+      "actualPromptIdentityOnly": {
+        "path": ".local/reviews/E04A1-final-review/final_req-supplement-3bfd22d-062742-20261021T083504Z-16e856/actual-launch.prompt.original.txt",
+        "bytes": 4460,
+        "sha256": "62EBCEC99C6FD4A850416FA5CC4FC07967C1856BE8626C9E5FC610C9B1496BEB"
+      },
+      "lowerLevelMemoryFeaturesOsPidNetworkIsolation": "UNVERIFIED"
+    }
+  ],
+  "focusedSourceReport": {
+    "path": "docs/plans/research/2026-10-21-e04a-editor-source-review.md",
+    "bytes": 8781,
+    "sha256": "1867ED800BF800F2F6118C754931DF011E43ACC3547211C19F14A8B7D00909D6"
+  },
+  "originalSourceReport": {
+    "path": ".local/reviews/E04A1-source-review/focused-0bbbf88-062742-E04_COMPONENT_SOURCE/last-message.txt",
+    "bytes": 8781,
+    "sha256": "1867ED800BF800F2F6118C754931DF011E43ACC3547211C19F14A8B7D00909D6"
+  },
+  "executionReceipt": {
+    "path": "docs/plans/evidence/2026-10-21-e04a-editor-native-execution.json",
+    "bytes": 25264,
+    "sha256": "172F31FCF790D74AF334A830834F4AB3A3659D7D89E17A797D93A917C3188341"
+  },
+  "historicalPreservation": {
+    "path": ".local/planning/E04/focused-component-source-0bbbf88/final-supplement-history-38-40-20261021T0820/historical-primary-index.original.json",
+    "bytes": 55745,
+    "sha256": "A81F00C59467B2BCFF7C49622A2FED317FDF5BB66B03EB29B330CDABB1085780"
+  },
+  "originalSourceOrdering": {
+    "rawAndExtractionMembersRehashedBeforeFirstReportRead": 358,
+    "operatorMembersRehashedAfterward": 15,
+    "all373UltimatelyMatched": true,
+    "strictAllBeforeFirstRead": false,
+    "retroactiveOrderingPassOrOwnerWaiver": false
+  },
+  "initialRequirementsVerdictRemains": "BLOCKED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "executionAuthority": "CLOSED_DO_NOT_REUSE",
+  "visibleLaunchAuthority": 0,
+  "linux": "UNTESTED",
+  "limits": [
+    "Reports assess the exact frozen head above, not this later report/documentation publication commit.",
+    "The limited supplement is a fresh postsealed context; it does not replace the immutable valid initial requirements report or represent another blind initial assessment.",
+    "The original SOURCE ordering nonconformance remains false and cannot be cured by later matching hashes.",
+    "Preallocation same-unused-RunId continuation remains a recorded interpretation, not an express normative exception.",
+    "No raw private session, credential, tool-value ledger, generated native output or binary artifact is attached.",
+    "Lower-level isolation and comprehensive special harness/transitive certification remain unverified/deferred.",
+    "A1G, A2/727 scenarios, full fidelity/HUD/input/rendering/Core play, Linux and distribution remain separate."
+  ],
+  "sourceCanonicalBehaviorChanged": false,
+  "nativeRetry": false,
+  "mergeAuthority": false
+}

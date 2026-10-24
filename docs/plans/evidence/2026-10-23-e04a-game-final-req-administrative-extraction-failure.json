@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FINAL_REQ_ADMINISTRATIVE_EXTRACTION_FAILURE_PRESERVATION",
+  "status": "FINAL_REQ_ADMIN_EVIDENCE_INADMISSIBLE_CODE_AUDIT_PENDING",
+  "dateUtc": "2026-10-23",
+  "finalReviewCandidate": "cb9e4588408b142c5b3908e7061b58a350b26376",
+  "executionSource": "c329a3a32dca48272e29bad46af616bcc6bdebd4",
+  "runId": "20261023T154418Z-ce672e5f",
+  "scope": "Administrative evidence only. No component verdict, source repair, formal review admission or acceptance is supplied.",
+  "factProvenance": "Exact administrative facts and immutable root-record descriptor supplied by root; canonical route/source metadata inspected. Current review outputs, reports and ledgers were not read for this proposal. Root subsequently reported the CODE raw PASS body read and its audit in progress; no formal admission is inferred.",
+  "rootAdministrativeRecord": {
+    "path": ".local/reviews/E04A1G-final-review/final_req-cb9e458-20261023t170000z-9b82ac61/root-administrative-extraction-failure.original.json",
+    "bytes": 1757,
+    "sha256": "007C6EC29683E5AC186496D3378610E6FBFA7300003B879AD33D919FC920F520",
+    "descriptorSource": "Supplied by root; proposal author did not read this file."
+  },
+  "finalReq": {
+    "role": "FINAL_REQ",
+    "foreground": {
+      "closed": true,
+      "exitCode": 0,
+      "rootObservedUtc": "2026-10-23T17:21:25.0589005Z",
+      "closureTool": "f4a872"
+    },
+    "rawSeal": {
+      "members": 12,
+      "completed": true,
+      "tool": "f35515"
+    },
+    "finalSelector": {
+      "ran": true,
+      "selectedRuntimeCreated": true,
+      "failureCause": "Root incorrectly checked native $LASTEXITCODE after an in-process PowerShell script and threw before saving actual selector console stdout.",
+      "actualConsoleStdout": "UNRECOVERABLE_NOT_SAVED",
+      "reconstructionPermitted": false,
+      "selectorRerunPermitted": false
+    },
+    "reportBody": "UNREAD",
+    "rawComponentVerdict": "UNREAD",
+    "selectedSeal": {
+      "members": 8,
+      "completed": false
+    },
+    "rootIndependentBeforeFirstBodyRehash": "NOT_COMPLETED",
+    "administrativeEvidence": "INADMISSIBLE",
+    "componentFailureEstablished": false,
+    "freshReqNeeded": true
+  },
+  "finalCode": {
+    "strictClosure": "COMPLETE_ROOT_REPORTED",
+    "seal": "COMPLETE_ROOT_REPORTED",
+    "independentBeforeFirstBodyRehash": "COMPLETE_ROOT_REPORTED",
+    "firstBodyRead": "COMPLETE_ROOT_REPORTED",
+    "rootAudit": "IN_PROGRESS_ROOT_REPORTED",
+    "componentVerdict": "PASS_ROOT_REPORTED_NOT_INDEPENDENTLY_READ_BY_PROPOSAL_AUTHOR",
+    "admission": "PENDING_ROOT_AUDIT"
+  },
+  "preservation": {
+    "candidateSource": "UNCHANGED",
+    "currentReviewRawArtifacts": "PRESERVE_UNCHANGED",
+    "revision128AndEarlierHistory": "PRESERVE",
+    "existingNinePhaseExecutionEvidence": "PRESERVE_UNCHANGED",
+    "candidateRepairAuthorized": false,
+    "authorityExpanded": false,
+    "visibleHold": "IN_EFFECT",
+    "visibleAuthority": 0,
+    "execution": "CLOSED_NO_RETRY_OR_SUCCESSOR_GO",
+    "a1gAcceptance": "WITHHELD",
+    "own17": "DEFERRED_UNPROVEN",
+    "linux": "UNTESTED",
+    "a2": "DEFERRED",
+    "perpetualPrivateSourceApiReviewConsent": "UNCHANGED"
+  },
+  "nextStep": "Publish and checkpoint/push/gh-verify this administrative failure before fresh REQ preparation. Complete the separately sealed CODE root audit; its raw PASS is root-reported and admission remains pending. Obtain a fresh independent REQ through properly captured extraction and complete seals/rehash before any first body read. This record creates no launch bindings or execution authority."
+}

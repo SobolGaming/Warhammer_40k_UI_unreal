@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FRESH_FINAL_REQ_BLOCKED_TECHNICAL_MAP_AND_ADMINISTRATIVE_PENDING_PROVENANCE",
+  "status": "FINAL_REQ_TECHNICAL_MAP_RETAINED_ADMINISTRATIVE_SUPPLEMENT_PENDING",
+  "role": "FINAL_REQ",
+  "reviewedFinalHead": "5e5dbd166bda8b688891219411c768dc3c2b3292",
+  "executedHead": "c329a3a32dca48272e29bad46af616bcc6bdebd4",
+  "comparisonBase": "2651a8652915824fe339a958ca5afc1a835f5731",
+  "runId": "20261023T154418Z-ce672e5f",
+  "rawVerdict": "BLOCKED",
+  "exactReport": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a-game-final-requirements-5e5dbd1.json",
+    "originalBytes": 16712,
+    "originalSha256": "3DC15E410C5DD9CE247B13D5D9FC71C50C28971C289EAE6881ECAEE2EBCA21DD",
+    "encoding": "UTF-8 and base64",
+    "roundtripMatched": true,
+    "proposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-final-req-blocked-publication-UNADOPTED-PROPOSED-20261023-aux-5ec279a4\\2026-10-23-e04a-game-final-requirements-5e5dbd1.json",
+      "bytes": 39828,
+      "sha256": "90F6068275599E67B341ADDACEBCE3EC5C63409ACCA569302A23FE4A54DEFCFD"
+    }
+  },
+  "requirementsNote": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a-game-final-requirements-5e5dbd1.md",
+    "proposal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-final-req-blocked-publication-UNADOPTED-PROPOSED-20261023-aux-5ec279a4\\2026-10-23-e04a-game-final-requirements-5e5dbd1.md",
+      "bytes": 2344,
+      "sha256": "5F52796DC9B3CF7C4027C0D90372419D68C9B94F25D834EE212671F31499D27F"
+    }
+  },
+  "foreground": {
+    "exitCode": 0,
+    "completionUtc": "2026-10-23T17:51:12.4916354Z",
+    "rootObservedClosedUtc": "2026-10-23T17:52:17.6274717Z",
+    "tool": "0505f1"
+  },
+  "strictBeforeFirstBody": {
+    "rawMembers": 12,
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-final-review\\final_req-5e5dbd1-req-refresh-20261023-cf89da71\\closed-raw-output-seal.before-body.original.json",
+      "bytes": 5164,
+      "sha256": "0B448453970E7D8C311AD481FBEC4B8A6D50E1AAE2E6FBE54314A0BCC9B06612"
+    },
+    "selectedMembers": 8,
+    "selectedSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-final-review\\final_req-5e5dbd1-req-refresh-20261023-cf89da71\\closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 4214,
+      "sha256": "EEB9C698D2F666D38C8BF06119F746FDEF3BC4F0CAD0087AA32006A51EC5435B"
+    },
+    "uniqueFrozenAndControlFiles": 1185,
+    "independentRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-final-review\\final_req-5e5dbd1-req-refresh-20261023-cf89da71\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 1938,
+      "sha256": "FA5A1861C8B4491C7C81A86435CCDFB86C90D779DF6319CC6DBE59609F478F23"
+    },
+    "completionTool": "750e07",
+    "rootMetadataTools": [
+      "49ae3f",
+      "d853c4"
+    ],
+    "firstBodyTool": "9f6178",
+    "allBeforeFirstBody": "ROOT_REPORTED_COMPLETED",
+    "limits": "Point-in-time strict sealing/rehash ordering, not reviewer comprehension, completed root conduct audit or acceptance."
+  },
+  "criteria": [
+    {
+      "id": "A1G-01",
+      "technical": "PASS",
+      "qualification": "Finite Game compile/link proof"
+    },
+    {
+      "id": "A1G-02",
+      "technical": "PASS",
+      "qualification": "Finite dependency/action proof"
+    },
+    {
+      "id": "A1G-03",
+      "technical": "PASS",
+      "administrative": "BLOCKED",
+      "qualification": "Exact GO verification remains required"
+    },
+    {
+      "id": "A1G-04",
+      "technical": "PASS",
+      "qualification": "Combined source/primary-evidence route with stated preabsence inference and installed-tool limits"
+    },
+    {
+      "id": "A1G-05",
+      "technical": "PASS",
+      "qualification": "52 evaluated typed Boolean checks; lexical lifetime milestone, no UE assertion total"
+    },
+    {
+      "id": "A1G-06",
+      "technical": "PASS",
+      "qualification": "Finite cooked Game/DDC/window observations only"
+    },
+    {
+      "id": "A1G-07",
+      "administrative": "BLOCKED",
+      "qualification": "Reserved coordinator post-seal prerequisite verification"
+    },
+    {
+      "id": "A1G-08",
+      "technical": "PASS_SCOPE_APPLICATION",
+      "qualification": "OWN17 special assurance remains deferred/unproven"
+    }
+  ],
+  "reviewerReportedNoUnresolvedSubstantiveDiscrepancy": true,
+  "reservedAdministrativePrerequisites": [
+    "Original SOURCE admission",
+    "Authority/sourceReviewed bindings",
+    "Exact phase GOs",
+    "Chronology and independent administrative provenance"
+  ],
+  "rootConductAudit": "IN_PROGRESS_ROOT_REPORTED",
+  "limitedNewPostSealReqSupplement": "NEEDED_NOT_YET_COMPLETED",
+  "initialBlindAssessmentOriginalAdministrativeBodies": "INTENTIONALLY_OPAQUE",
+  "reviewerSelfReportedRuntime": "Supplied read-only/approval-never context; no implementation/helper/native/engine execution, peer verdict read, resume/fork or subagents/apps. Independent serialized final-session identity/delivery and memory/app feature enforcement remained UNVERIFIED in the raw report; root conduct audit remains separate.",
+  "originalCode": {
+    "path": ".local/reviews/E04A1G-final-review/final_code-cb9e458-20261023t170000z-9b82ac61/root-final-code-admission.original.json",
+    "bytes": 6390,
+    "sha256": "BED7E061FACD4D3EE14978F6585C8E54D12AEBFC24590567C593960F1E178B15",
+    "reviewedFinalHead": "cb9e4588408b142c5b3908e7061b58a350b26376",
+    "rawVerdict": "PASS",
+    "status": "PASS_ADMITTED_WITH_STATED_QUALIFICATIONS"
+  },
+  "materialCanonicalMappingsUnchangedBetweenCodeAndFreshReq": 46,
+  "originalInadmissibleReq": {
+    "head": "cb9e4588408b142c5b3908e7061b58a350b26376",
+    "administrativeEvidence": "INADMISSIBLE",
+    "body": "UNREAD",
+    "rawVerdict": "UNREAD",
+    "preserve": "UNCHANGED"
+  },
+  "substantiveLimits": [
+    "Finite Win64 cooked Game route; no full-catalog/transitive certificate",
+    "Windows: zero OBSERVED owned top-level visible windows at retained samples, not continuous/between-sample/other-desktop/child-only absence",
+    "Direct legacy-cache null snapshot and zero Native/Audit rows/owned files do not establish universal DDC/write absence; graph effectiveness unproven",
+    "SDK writer PID and installed-source/binary correspondence UNVERIFIED",
+    "Staged INI sanitization is qualified nonidentity, not a content certificate"
+  ],
+  "nextStep": "Publish/checkpoint/push/gh-verify this immutable BLOCKED closure before preparing a limited new post-seal REQ administrative supplement. Preserve technical map and raw verdict; later supplement remains a separate disposition.",
+  "a1gAccepted": false,
+  "candidateSourceChanged": false,
+  "nativeRepeated": false,
+  "authorityExpanded": false,
+  "oldReqBodyReadForProposal": false,
+  "currentReqToolLedgersReadForProposal": false,
+  "visible": "HOLD_NO_VISIBLE_TESTING_UNTIL_FRESH_OWNER_APPROVAL",
+  "own17": "DEFERRED_UNPROVEN",
+  "linux": "UNTESTED",
+  "a2": "DEFERRED",
+  "perpetualPrivateSourceApiReviewConsent": "UNCHANGED"
+}

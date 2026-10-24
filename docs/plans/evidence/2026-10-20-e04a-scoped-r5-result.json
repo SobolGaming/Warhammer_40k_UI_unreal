@@ -1,0 +1,1877 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_FACTUAL_E04_A1E_SCOPED_SOURCE_R5_CLOSED_CAMPAIGN",
+  "draftOnly": false,
+  "canonicalFilesWritten": true,
+  "planRevision": 63,
+  "rootMustSupplyFinalRecordedUtcAndRevision": false,
+  "draftedUtc": "2026-10-20T11:59:13.112296+00:00",
+  "status": "CLOSED_SCOPED_SOURCE_CHANGES_REQUIRED_PRELAUNCH_SOURCE_AND_FINITE_MAP_CONTROLS",
+  "sourceHead": "4c993181287e18e92da614af0e09a8d8ea92378a",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "runId": "20261020T104640Z-54a3b913",
+  "campaignId": "E04A1E-SCOPED-4c99318-20261020T104640Z-54a3b913",
+  "actualInventory": {
+    "bodyFiles": 98,
+    "physicalRows": 49749,
+    "selectedMetadataRecords": 13,
+    "selectorRows": 902,
+    "pluginReferenceOccurrences": 1561,
+    "stagedMembers": 33,
+    "authoredSourceInputs": 19,
+    "sourceOnlyNotStagedTest": "tests/migration/Test-E04RulesWitness.ps1"
+  },
+  "closedRootRecord": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\root-r5-closure-4c99318-20261020T104640Z-54a3b913\\root-closed-campaign.original.json",
+    "bytes": 9295,
+    "sha256": "7A94BF02E96EB3F16213BB2BFDA238D4F93DAC2721EC9EE44644F1D0503826C1"
+  },
+  "initialInvocations": {
+    "rootReportedInitialLaunches": 8,
+    "closedPanelsReadForDraft": 8,
+    "activePanels": [],
+    "allEightCleanupConfirmed": true,
+    "qualification": "All eight launcher/owned-job receipts and sealed/raw-first-read metadata checked; process closure is not SOURCE approval or proof of lower-level isolation."
+  },
+  "pairCountQualification": "Only the eight actually captured initial contexts:31+50+42+44+38+38+71+176=490. Ledger pairing metadata is not process count, comprehension or complete access/fidelity/semantic assessment. No integrations launched.",
+  "rootAdjudication": {
+    "currentAdmissions": 0,
+    "priorAdmissionsInherited": false,
+    "allTenCompleteScopeGate": false,
+    "rootFindingConfirmationSeparateFromRawVerdicts": true,
+    "actualToolAndScopeAudits": "Only bounded BUILD support complete to its stated limits; all other scope acceptance audits remain unfinished, despite four raw SOURCE_PASS results."
+  },
+  "ordinarySupport": {
+    "boundedBuildSummary": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r5-S_BUILD_HOST-closed-support-OPERATOR_ONLY\\support-summary.v2.OPERATOR_ONLY.md",
+      "bytes": 4267,
+      "sha256": "0D0C1FCD360DF7DF82D3D6CF932A97D0BC66E2409D6233539401A88F7B2B33DE"
+    },
+    "boundedBuildFacts": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r5-S_BUILD_HOST-closed-support-OPERATOR_ONLY\\support-facts.OPERATOR_ONLY.json",
+      "bytes": 15412,
+      "sha256": "2243E04682F90B35425124F81F687E64BD03060EDFC3A709981F078DEB35F625"
+    },
+    "boundedBuildPerCall": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r5-S_BUILD_HOST-closed-support-OPERATOR_ONLY\\per-call-dispositions.COMPACT.OPERATOR_ONLY.jsonl",
+      "bytes": 31790,
+      "sha256": "9C3BE9C774719448445F66C905F0468255F56C9FD7BF8F64137F12E1C415317E"
+    },
+    "boundedBuildSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\r5-S_BUILD_HOST-closed-support-OPERATOR_ONLY\\support-audit-seal.v2.OPERATOR_ONLY.json",
+      "bytes": 1663,
+      "sha256": "03710604155EDA3DA4B9D7DAEB4BC6BAD14F57819D00D111FCEAC7C093137D7A"
+    },
+    "allOtherClosedScopeAudits": "UNFINISHED_NOT_WAIVED",
+    "qualification": "No raw SOURCE_PASS is promoted to admission by copying, counting, closure receipts or this private draft."
+  },
+  "runtimeAndCleanupQualifications": [
+    "Eight launcher completions and actual job receipts separately report exit0, confirmed root exit, no timeout, cleanupConfirmed, null primaryFailure and empty secondaryErrors. Last successful per-job accounting queries each record activeProcesses0 at their exact times. Supervisor statusPASS is process status, not raw review verdict.",
+    "All eight selected own-session initial/final runtimes contain one sessionMeta and one matching full GO payload; read-only/never/restricted-root-read/restricted-network/gpt-6.1-sol/ultra/openai/memoryMode disabled values are recorded. Root inspected selected evidence only; unselected private instruction/session/configuration bodies were not inspected or exported.",
+    "Final context records: six scopes1, PLUGIN2 same turnId, TARGET3 same turnId; repeated selected context values are exact. They are not fresh turns/independent contexts, and no cause or compaction/equivalence narrative is inferred.",
+    "The first developer text-part descriptor has two observed initial structure variants,4934B and8238B, across different sessions. These descriptor differences remain unexplained; hidden instruction bodies were not read or compared.",
+    "Within each session, initial/final selected sessionMeta and initial-message-structure values are equal under exact keys/presence/types/array order/value comparison ignoring only object property order. Dynamic capture stage/time, context counts and session/output descriptors naturally differ; entire runtime files are not claimed equal.",
+    "Received full GO payloads add two trailing CR/LF bytes relative to saved actual prompts; byteIdenticalTransport=false, equal only after removal.",
+    "Lower app/multi-agent enforcement, memory internals, OS PID/session linkage, extractor provenance and lower isolation remain UNVERIFIED. Stable root-selected captures and process cleanup do not prove those properties.",
+    "All non-BUILD actual input/output/access/error-recovery/semantic completeness audits remain unfinished. Original raw claims/limits remain unchanged, and no PASS/admission is inherited."
+  ],
+  "unusedIntegrations": {
+    "I_ABI_BUILD": "UNUSED_NO_ROOT_GO_NO_LAUNCH",
+    "I_ACTIVATION": "UNUSED_NO_ROOT_GO_NO_LAUNCH",
+    "basis": "Root checked both prepared directories: no root GO, launch-started or last-message artifacts; no integration launch.",
+    "independentIntegrationsLaunched": 0,
+    "rootFinalAbsenceReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\root-r5-closure-4c99318-20261020T104640Z-54a3b913\\root-closed-campaign.original.json",
+      "bytes": 9295,
+      "sha256": "7A94BF02E96EB3F16213BB2BFDA238D4F93DAC2721EC9EE44644F1D0503826C1"
+    }
+  },
+  "native": {
+    "nativeRunRoot": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T104640Z-54a3b913",
+    "state": "ABSENT_CHECKED_BY_ROOT_AT_FACTUAL_PUBLICATION",
+    "visibleWindows": 0,
+    "phases": [
+      {
+        "phase": "Preflight",
+        "status": "NOT_RUN"
+      },
+      {
+        "phase": "SupervisorControls",
+        "status": "NOT_RUN"
+      },
+      {
+        "phase": "Configure",
+        "status": "NOT_RUN"
+      },
+      {
+        "phase": "DependencyBuild",
+        "status": "NOT_RUN"
+      },
+      {
+        "phase": "EditorBuild",
+        "status": "NOT_RUN"
+      },
+      {
+        "phase": "Discovery",
+        "status": "NOT_RUN"
+      },
+      {
+        "phase": "Native",
+        "status": "NOT_RUN"
+      },
+      {
+        "phase": "Audit",
+        "status": "NOT_RUN"
+      }
+    ],
+    "basis": "All eight phase states NOT_RUN; native RunRoot absent; no native/GUI invocation in this campaign.",
+    "rootClosure": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\root-r5-closure-4c99318-20261020T104640Z-54a3b913\\root-closed-campaign.original.json",
+      "bytes": 9295,
+      "sha256": "7A94BF02E96EB3F16213BB2BFDA238D4F93DAC2721EC9EE44644F1D0503826C1"
+    }
+  },
+  "aggregateCreated": false,
+  "actualPhaseGo": false,
+  "nativeExecution": false,
+  "acceptance": false,
+  "publicationOrMergeAuthority": false,
+  "standingOwnerReviewConsent": "Already canonical, perpetual within approved source/API scope and destination unless explicitly revoked. No repeat transmission request.",
+  "next": "Root inspects/adopts closure artifacts, publishes exact raw bytes and revision63 factual status, then separately completes source/controls/local-duty criteria repair under fresh clean identities and freezes. Fresh affected complete SOURCE and both independent integrations remain required before native phases.",
+  "rootFinalizationRequired": [],
+  "draftPreparationLimits": [
+    "Only current closed campaign artifacts, earlier private draft, bounded BUILD support and prior public R4 format used. No active review artifacts remain, but no broader private-session/configuration body was read.",
+    "No implementation helper, reviewer, GO, native, GUI, network, Git action or canonical copy/edit invoked by this task.",
+    "The six-closed/two-active initial draft remains untouched. This distinct v2 replaces its pending placeholders only from actual closed metadata.",
+    "Pre-handoff validation caught one default prose qualifier on CLIENT in unadopted v2 facts; distinct v2b corrects it to the unchanged raw BLOCKED and incomplete relationships. Original v2 is preserved but superseded; no raw report or source fact changed."
+  ],
+  "recordedUtc": "2026-10-20T12:02:27.8198223+00:00",
+  "rootMustSupplyFinalPublicationTimestamp": false,
+  "rawReportCount": 8,
+  "rawVerdictCounts": {
+    "BLOCKED": 3,
+    "CHANGES_REQUESTED": 1,
+    "SOURCE_PASS": 4
+  },
+  "capturedPairedTools": 490,
+  "rawReports": [
+    {
+      "scopeId": "S_VALUE",
+      "closureState": "CLOSED_SEALED_ROOT_BODY_READ",
+      "rawVerdictLiteral": "BLOCKED",
+      "reportAssessmentQualification": "Raw BLOCKED: mandatory physical-file/unit completion claimed, but DEPENDENCY_COMPILER_ABI relationship incomplete. No additional implementation defect follows from this coverage blocker.",
+      "rootAdmission": "NOT_ADMITTED_NONE_INHERITED",
+      "rawPublicCopy": {
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-value.md",
+        "state": "EXACT_SOURCE_DESTINATION_STAGED_BYTES_VERIFIED",
+        "bytes": 10058,
+        "sha256": "4B00DB26F5527C38EF491D581AD1F2E440EA0C99F3EA3758EC6F30C30C2AF05D"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\last-message.txt",
+        "bytes": 10058,
+        "sha256": "4B00DB26F5527C38EF491D581AD1F2E440EA0C99F3EA3758EC6F30C30C2AF05D"
+      },
+      "beforeReadSeal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\root-raw-report-before-body-read.seal.original.json",
+        "bytes": 1966,
+        "sha256": "7D3D1E1778B3D1351F638E82C1923EAA2CE095E78F1CECAC9E0CC1C76A0DAA65"
+      },
+      "firstRead": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\root-first-raw-report-body-read.original.json",
+        "bytes": 900,
+        "sha256": "AED90EA42272CC99C2175D2CB3E05236BC8A1198CBD173E51B03710AEE76F0B6"
+      },
+      "sealedUtc": "2026-10-20T11:15:11.3406282Z",
+      "rootFirstBodyReadUtc": "2026-10-20T11:15:25.4883104Z",
+      "sealBeforeRootBodyReadVerified": true,
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\completion.json",
+        "bytes": 2652,
+        "sha256": "203AF1C9C50B6F44323F6B89190828F26F6B04A776F1E50586D86942F6AD8DFB"
+      },
+      "ownedJobReceipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\owned-job-receipt.json",
+        "bytes": 93570,
+        "sha256": "91ECEC3F36E46BE6029C9A7FF8AB67D5EDFE83609CF52057B3E11A0BCAE21D5B"
+      },
+      "inputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\actual-tool-input-ledger.json",
+        "bytes": 69209,
+        "sha256": "40FD2CE39A59DE679BF8505202F3B1A73F92B817F5C269DD609F084635051217"
+      },
+      "completeInputOutputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\actual-complete-tool-input-output-ledger.json",
+        "bytes": 1198560,
+        "sha256": "7533EEE1C972B4AF29FACED292360DFB0F32038E7F8F37FB8F82222B4FFAC19C"
+      },
+      "initialRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\runtime-evidence.initial.selected.json",
+        "bytes": 8001,
+        "sha256": "E8F0AD31064CCC7753878533BF3CEE2778DD41CE1E7736A9EF3649D46479FFF8"
+      },
+      "finalRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\runtime-evidence.final.selected.json",
+        "bytes": 8518,
+        "sha256": "968F77FFA29FE1D89EB31369BF69B94A17BB5FD68C8B9C88F037DF2C8BB7512D"
+      },
+      "rootGo": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\root-launch-go.original.json",
+        "bytes": 4751,
+        "sha256": "A849C05A7C129F19A4C99F6E8CA384CB6C5953BAE1AEDABCA78E45A2CCA0AC34"
+      },
+      "actualPrompt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_VALUE\\actual-launch.prompt.original.txt",
+        "bytes": 39769,
+        "sha256": "F48A0210875189EC1705EB06D0A56CE0E3C39E997F0F1F394DCE87F24BD83F26"
+      },
+      "sessionId": "01a158f9-529c-7841-b099-2a984fa3291a",
+      "recordedToolPairFacts": {
+        "inputCount": 42,
+        "outputCount": 42,
+        "inputLedgerCount": 42,
+        "pairingAnomalies": {
+          "unmatchedInputIds": [],
+          "orphanOutputIds": [],
+          "duplicateInputIds": [],
+          "duplicateOutputIds": [],
+          "emptyCallIdOrdinals": []
+        },
+        "qualification": "Header/anomaly facts and exact artifact descriptors only. Except bounded BUILD audit, this is not a complete actual-call/access/error-recovery/semantic audit."
+      },
+      "processReceiptObservations": {
+        "status": "PASS",
+        "pid": 45240,
+        "creationFileTime": 134369676961236189,
+        "exitCode": 0,
+        "exitConfirmed": true,
+        "assignedBeforeResume": true,
+        "resumed": true,
+        "timedOut": false,
+        "cleanupConfirmed": true,
+        "technicalBlocked": false,
+        "rootExitWhileMembersActive": false,
+        "primaryFailure": null,
+        "secondaryErrors": [],
+        "visibleWindowRequested": false,
+        "elapsedSeconds": 761.9598199,
+        "lastSuccessfulJobQuery": {
+          "stage": "progress",
+          "observedUtc": "2026-10-20T11:14:18.0739483Z",
+          "querySucceeded": true,
+          "totalProcesses": 305,
+          "activeProcesses": 0
+        }
+      },
+      "launcherCompletionObservations": {
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "failure": null,
+        "retries": 0,
+        "completedUtc": "2026-10-20T11:14:18.1404312Z"
+      },
+      "selectedRuntimeObservations": {
+        "sessionMetaCount": 1,
+        "initialTurnContextCount": 1,
+        "finalTurnContextCount": 1,
+        "finalDistinctTurnIds": [
+          "01a158f9-5433-72e2-b23d-6ea5edc39ecb"
+        ],
+        "finalRepeatedContextSelectedValuesExact": true,
+        "memoryMode": "disabled",
+        "origin": "exec",
+        "modelProvider": "openai",
+        "turns": [
+          {
+            "turnId": "01a158f9-5433-72e2-b23d-6ea5edc39ecb",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          }
+        ],
+        "explicitFullActualGoObserved": true,
+        "matchingPayloadCount": 1,
+        "actualPayloadByteLengthDifference": 2,
+        "byteIdenticalTransport": false,
+        "equalAfterTrailingCrLfRemoval": true,
+        "actualToolNames": [
+          "exec"
+        ],
+        "firstDeveloperTextPartDescriptors": [
+          {
+            "utf8Bytes": 8238,
+            "sha256": "c983daa2f3f321e04c0fc83dec959d2184bd6e1f2bb0ab2bd555850bc9455d50"
+          },
+          {
+            "utf8Bytes": 342,
+            "sha256": "4103287cd2f8e02c0c606bbbae018671bd04d7e7eeca9cbf862f8b53f9275313"
+          },
+          {
+            "utf8Bytes": 1056,
+            "sha256": "7f45d7d6986a761101d46d185824ce65c321ca0f02cea7497fc46d60ffae417b"
+          }
+        ],
+        "initialFinalSessionMetaSelectedValuesExact": true,
+        "initialFinalMessageStructureSelectedValuesExact": true,
+        "comparisonRule": "Recursive exact key presence, JSON types, ordered arrays and values; object property order alone ignored. Whole runtime captures were not declared equal: capture stage/time, contexts and descriptors naturally differ. Hidden bodies were not read or compared.",
+        "limitsUnchanged": "Selected exact own runtime and instruction/prompt hashes only; no raw initial-role/base-instruction/configuration/rollout bodies exported. Actual read-only/never/model/provider/memory settings require root comparison. App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED. Complete tool inputs/outputs/scope/coverage need separate closed-session audit. No SOURCE or execution verdict inferred."
+      },
+      "auditState": "UNFINISHED_NOT_WAIVED",
+      "reportErrorRecoveryQualification": "Raw errors/recoveries retained unchanged. Except bounded BUILD checks, report claims have not been fully verified by an actual-call audit or root admission."
+    },
+    {
+      "scopeId": "S_BUILD_HOST",
+      "closureState": "CLOSED_SEALED_ROOT_BODY_READ",
+      "rawVerdictLiteral": "BLOCKED",
+      "reportAssessmentQualification": "Raw BLOCKED/incomplete; S_BUILD_HOST-F01 is separately root source-confirmed. Bounded ordinary actual input/access/pair/literal-fidelity audit stopped without admission.",
+      "rootAdmission": "NOT_ADMITTED_NONE_INHERITED",
+      "rawPublicCopy": {
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-build-host.json",
+        "state": "EXACT_SOURCE_DESTINATION_STAGED_BYTES_VERIFIED",
+        "bytes": 11245,
+        "sha256": "D35113EFD4042D5F4CCCA9AB413C0EE1F13408876FB83138128788BEE27B48F7"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\last-message.txt",
+        "bytes": 11245,
+        "sha256": "D35113EFD4042D5F4CCCA9AB413C0EE1F13408876FB83138128788BEE27B48F7"
+      },
+      "beforeReadSeal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\root-raw-report-before-body-read.seal.original.json",
+        "bytes": 1996,
+        "sha256": "50344ED21D7C508B1FB783B949700FA4E54DFFEDB2038472E3D990AD130BFA86"
+      },
+      "firstRead": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\root-first-raw-report-body-read.original.json",
+        "bytes": 921,
+        "sha256": "820EDF044489930D79AAA5BFAB63C92A6E88C744577939BF6739A096CB8243E3"
+      },
+      "sealedUtc": "2026-10-20T11:10:39.6339328Z",
+      "rootFirstBodyReadUtc": "2026-10-20T11:11:01.2278479Z",
+      "sealBeforeRootBodyReadVerified": true,
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\completion.json",
+        "bytes": 2686,
+        "sha256": "C8A5049B7203E160AC11F51F503285581B7DAA5834D28D44B8C803FAC899A7E8"
+      },
+      "ownedJobReceipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\owned-job-receipt.json",
+        "bytes": 74711,
+        "sha256": "81D87902C7BBCE83379A1AA069980C5D5359AFF364F35C4E1DFBD6E5B10213CC"
+      },
+      "inputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\actual-tool-input-ledger.json",
+        "bytes": 42698,
+        "sha256": "79CF92045C92D75583FF0B2F6BD8F72E78D791EF64B99190EA964A84765E1C32"
+      },
+      "completeInputOutputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\actual-complete-tool-input-output-ledger.json",
+        "bytes": 629959,
+        "sha256": "920FD032C786DFB25ED6F57E3ABF8C3D6657B818D4C62AE099433B2571AA4C79"
+      },
+      "initialRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\runtime-evidence.initial.selected.json",
+        "bytes": 8026,
+        "sha256": "8199146F6F7CAC46C0C0ADC167980D0518621F7E64F7AF53B4CFCEE44DAD9196"
+      },
+      "finalRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\runtime-evidence.final.selected.json",
+        "bytes": 8548,
+        "sha256": "23AF3646F002817C9A6F17CF18E6B8078DFE77B2A1AD44D238FEE302BAEAC855"
+      },
+      "rootGo": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\root-launch-go.original.json",
+        "bytes": 4806,
+        "sha256": "4C8CC5BC641229A1790ADB5BA48535DDFDFD96039EF7A73314747B744D2AB734"
+      },
+      "actualPrompt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_BUILD_HOST\\actual-launch.prompt.original.txt",
+        "bytes": 42630,
+        "sha256": "24B34395F226CCB083788EABAEC64FFC64DC375DA8E6482C419094F6FFA3D625"
+      },
+      "sessionId": "01a158f9-6401-7b40-ad7c-fb2ea4e5905e",
+      "recordedToolPairFacts": {
+        "inputCount": 31,
+        "outputCount": 31,
+        "inputLedgerCount": 31,
+        "pairingAnomalies": {
+          "unmatchedInputIds": [],
+          "orphanOutputIds": [],
+          "duplicateInputIds": [],
+          "duplicateOutputIds": [],
+          "emptyCallIdOrdinals": []
+        },
+        "qualification": "Header/anomaly facts and exact artifact descriptors only. Except bounded BUILD audit, this is not a complete actual-call/access/error-recovery/semantic audit."
+      },
+      "processReceiptObservations": {
+        "status": "PASS",
+        "pid": 2228,
+        "creationFileTime": 134369677006896227,
+        "exitCode": 0,
+        "exitConfirmed": true,
+        "assignedBeforeResume": true,
+        "resumed": true,
+        "timedOut": false,
+        "cleanupConfirmed": true,
+        "technicalBlocked": false,
+        "rootExitWhileMembersActive": false,
+        "primaryFailure": null,
+        "secondaryErrors": [],
+        "visibleWindowRequested": false,
+        "elapsedSeconds": 467.6442035,
+        "lastSuccessfulJobQuery": {
+          "stage": "progress",
+          "observedUtc": "2026-10-20T11:09:28.3250639Z",
+          "querySucceeded": true,
+          "totalProcesses": 229,
+          "activeProcesses": 0
+        }
+      },
+      "launcherCompletionObservations": {
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "failure": null,
+        "retries": 0,
+        "completedUtc": "2026-10-20T11:09:28.3509665Z"
+      },
+      "selectedRuntimeObservations": {
+        "sessionMetaCount": 1,
+        "initialTurnContextCount": 1,
+        "finalTurnContextCount": 1,
+        "finalDistinctTurnIds": [
+          "01a158f9-6527-75f0-88b3-29d7a33cd82a"
+        ],
+        "finalRepeatedContextSelectedValuesExact": true,
+        "memoryMode": "disabled",
+        "origin": "exec",
+        "modelProvider": "openai",
+        "turns": [
+          {
+            "turnId": "01a158f9-6527-75f0-88b3-29d7a33cd82a",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          }
+        ],
+        "explicitFullActualGoObserved": true,
+        "matchingPayloadCount": 1,
+        "actualPayloadByteLengthDifference": 2,
+        "byteIdenticalTransport": false,
+        "equalAfterTrailingCrLfRemoval": true,
+        "actualToolNames": [
+          "exec"
+        ],
+        "firstDeveloperTextPartDescriptors": [
+          {
+            "utf8Bytes": 4934,
+            "sha256": "f3de0f3fde0b08dac387cc1424fc7e06f6a8ff8ec371d99ec1a5813cd1804c0b"
+          },
+          {
+            "utf8Bytes": 342,
+            "sha256": "4103287cd2f8e02c0c606bbbae018671bd04d7e7eeca9cbf862f8b53f9275313"
+          },
+          {
+            "utf8Bytes": 1056,
+            "sha256": "7f45d7d6986a761101d46d185824ce65c321ca0f02cea7497fc46d60ffae417b"
+          }
+        ],
+        "initialFinalSessionMetaSelectedValuesExact": true,
+        "initialFinalMessageStructureSelectedValuesExact": true,
+        "comparisonRule": "Recursive exact key presence, JSON types, ordered arrays and values; object property order alone ignored. Whole runtime captures were not declared equal: capture stage/time, contexts and descriptors naturally differ. Hidden bodies were not read or compared.",
+        "limitsUnchanged": "Selected exact own runtime and instruction/prompt hashes only; no raw initial-role/base-instruction/configuration/rollout bodies exported. Actual read-only/never/model/provider/memory settings require root comparison. App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED. Complete tool inputs/outputs/scope/coverage need separate closed-session audit. No SOURCE or execution verdict inferred."
+      },
+      "auditState": "BOUNDED_BUILD_ACCESS_PAIR_LITERAL_FIDELITY_AUDIT_STOPPED_NOT_ACCEPTANCE",
+      "reportErrorRecoveryQualification": "Raw errors/recoveries retained unchanged. Except bounded BUILD checks, report claims have not been fully verified by an actual-call audit or root admission."
+    },
+    {
+      "scopeId": "S_TARGET_RECEIPT",
+      "closureState": "CLOSED_SEALED_ROOT_BODY_READ",
+      "rawVerdictLiteral": "CHANGES_REQUESTED",
+      "reportAssessmentQualification": "Raw CHANGES_REQUESTED; both S_TARGET_RECEIPT-001 and002 are separately root source-confirmed. Full tool/access/fidelity/semantic completeness audit and root admission remain unperformed.",
+      "rootAdmission": "NOT_ADMITTED_NONE_INHERITED",
+      "rawPublicCopy": {
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-target-receipt.json",
+        "state": "EXACT_SOURCE_DESTINATION_STAGED_BYTES_VERIFIED",
+        "bytes": 19708,
+        "sha256": "C0C5341CF26516C28DC3F6B41D5A056E7529C88FA9896BA086DE2340B177E3BD"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\last-message.txt",
+        "bytes": 19708,
+        "sha256": "C0C5341CF26516C28DC3F6B41D5A056E7529C88FA9896BA086DE2340B177E3BD"
+      },
+      "beforeReadSeal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\root-raw-report-before-body-read.seal.original.json",
+        "bytes": 2027,
+        "sha256": "27522C5ADB6DCAB8A6AA810E22E898E7EADE9E4A37F52BBBBD304486284F39C7"
+      },
+      "firstRead": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\root-first-raw-report-body-read.original.json",
+        "bytes": 943,
+        "sha256": "870CC28751C10B76BDFAC2C227B28130A7F38683E1231EDEAFB5148AF1A9F555"
+      },
+      "sealedUtc": "2026-10-20T11:55:40.3548840+00:00",
+      "rootFirstBodyReadUtc": "2026-10-20T11:56:10.3330385+00:00",
+      "sealBeforeRootBodyReadVerified": true,
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\completion.json",
+        "bytes": 2716,
+        "sha256": "FB3D34B683237DB540DB9A1911C69733880318FD743FC99AA1D62B9A78C87C21"
+      },
+      "ownedJobReceipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\owned-job-receipt.json",
+        "bytes": 383041,
+        "sha256": "D82A53F54964017CF9EC133F1FD1387BF86601E99E7660350F1F5EEBDCD4CD02"
+      },
+      "inputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\actual-tool-input-ledger.json",
+        "bytes": 240451,
+        "sha256": "313D44DEAD694A2C3303E7BD633A1BCD3C4C82D9E275BB09C8005AA66A6A6019"
+      },
+      "completeInputOutputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\actual-complete-tool-input-output-ledger.json",
+        "bytes": 3703932,
+        "sha256": "61230505AB69CCEEE8CEFC76572E06E344AB22D75609E211AE12A240913BE191"
+      },
+      "initialRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\runtime-evidence.initial.selected.json",
+        "bytes": 8046,
+        "sha256": "35BA0B22CEEC2C9F5884CE8A6A3AE951CF3A509DC415E22626F59C7754A03D84"
+      },
+      "finalRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\runtime-evidence.final.selected.json",
+        "bytes": 10451,
+        "sha256": "998153AB2E3888700CCE6B483F0555BA2632D4E2C43C44B160440D6184D7DEA2"
+      },
+      "rootGo": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\root-launch-go.original.json",
+        "bytes": 4850,
+        "sha256": "D2A907AF88A9819FFE770F1E86BE0C4613D973936BCB95AB336FF43E1716C358"
+      },
+      "actualPrompt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_TARGET_RECEIPT\\actual-launch.prompt.original.txt",
+        "bytes": 44105,
+        "sha256": "744C711F35F4CACEDAB390B204FDAF3E9887B62AD459985737461FB8C422A03F"
+      },
+      "sessionId": "01a158f9-4d9a-75b1-963a-1e27bbf7e927",
+      "recordedToolPairFacts": {
+        "inputCount": 176,
+        "outputCount": 176,
+        "inputLedgerCount": 176,
+        "pairingAnomalies": {
+          "unmatchedInputIds": [],
+          "orphanOutputIds": [],
+          "duplicateInputIds": [],
+          "duplicateOutputIds": [],
+          "emptyCallIdOrdinals": []
+        },
+        "qualification": "Header/anomaly facts and exact artifact descriptors only. Except bounded BUILD audit, this is not a complete actual-call/access/error-recovery/semantic audit."
+      },
+      "processReceiptObservations": {
+        "status": "PASS",
+        "pid": 40764,
+        "creationFileTime": 134369676948625740,
+        "exitCode": 0,
+        "exitConfirmed": true,
+        "assignedBeforeResume": true,
+        "resumed": true,
+        "timedOut": false,
+        "cleanupConfirmed": true,
+        "technicalBlocked": false,
+        "rootExitWhileMembersActive": false,
+        "primaryFailure": null,
+        "secondaryErrors": [],
+        "visibleWindowRequested": false,
+        "elapsedSeconds": 2856.0533427,
+        "lastSuccessfulJobQuery": {
+          "stage": "progress",
+          "observedUtc": "2026-10-20T11:49:10.9064017Z",
+          "querySucceeded": true,
+          "totalProcesses": 1230,
+          "activeProcesses": 0
+        }
+      },
+      "launcherCompletionObservations": {
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "failure": null,
+        "retries": 0,
+        "completedUtc": "2026-10-20T11:49:10.9624244Z"
+      },
+      "selectedRuntimeObservations": {
+        "sessionMetaCount": 1,
+        "initialTurnContextCount": 1,
+        "finalTurnContextCount": 3,
+        "finalDistinctTurnIds": [
+          "01a158f9-4e9e-7f82-b98f-3863b1a64a90"
+        ],
+        "finalRepeatedContextSelectedValuesExact": true,
+        "memoryMode": "disabled",
+        "origin": "exec",
+        "modelProvider": "openai",
+        "turns": [
+          {
+            "turnId": "01a158f9-4e9e-7f82-b98f-3863b1a64a90",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          },
+          {
+            "turnId": "01a158f9-4e9e-7f82-b98f-3863b1a64a90",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          },
+          {
+            "turnId": "01a158f9-4e9e-7f82-b98f-3863b1a64a90",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          }
+        ],
+        "explicitFullActualGoObserved": true,
+        "matchingPayloadCount": 1,
+        "actualPayloadByteLengthDifference": 2,
+        "byteIdenticalTransport": false,
+        "equalAfterTrailingCrLfRemoval": true,
+        "actualToolNames": [
+          "exec"
+        ],
+        "firstDeveloperTextPartDescriptors": [
+          {
+            "utf8Bytes": 4934,
+            "sha256": "f3de0f3fde0b08dac387cc1424fc7e06f6a8ff8ec371d99ec1a5813cd1804c0b"
+          },
+          {
+            "utf8Bytes": 342,
+            "sha256": "4103287cd2f8e02c0c606bbbae018671bd04d7e7eeca9cbf862f8b53f9275313"
+          },
+          {
+            "utf8Bytes": 1056,
+            "sha256": "7f45d7d6986a761101d46d185824ce65c321ca0f02cea7497fc46d60ffae417b"
+          }
+        ],
+        "initialFinalSessionMetaSelectedValuesExact": true,
+        "initialFinalMessageStructureSelectedValuesExact": true,
+        "comparisonRule": "Recursive exact key presence, JSON types, ordered arrays and values; object property order alone ignored. Whole runtime captures were not declared equal: capture stage/time, contexts and descriptors naturally differ. Hidden bodies were not read or compared.",
+        "limitsUnchanged": "Selected exact own runtime and instruction/prompt hashes only; no raw initial-role/base-instruction/configuration/rollout bodies exported. Actual read-only/never/model/provider/memory settings require root comparison. App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED. Complete tool inputs/outputs/scope/coverage need separate closed-session audit. No SOURCE or execution verdict inferred."
+      },
+      "auditState": "UNFINISHED_NOT_WAIVED",
+      "reportErrorRecoveryQualification": "Raw errors/recoveries retained unchanged. Except bounded BUILD checks, report claims have not been fully verified by an actual-call audit or root admission."
+    },
+    {
+      "scopeId": "S_PLUGIN",
+      "closureState": "CLOSED_SEALED_ROOT_BODY_READ",
+      "rawVerdictLiteral": "SOURCE_PASS",
+      "reportAssessmentQualification": "Raw SOURCE_PASS only; full tool/access/fidelity/semantic completeness audit and root admission remain unperformed; no prior admission inherited.",
+      "rootAdmission": "NOT_ADMITTED_NONE_INHERITED",
+      "rawPublicCopy": {
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-plugin.json",
+        "state": "EXACT_SOURCE_DESTINATION_STAGED_BYTES_VERIFIED",
+        "bytes": 19149,
+        "sha256": "7AF3199C61EC0F1F6ADC19A7FD51B0B3A7E5F6444B613BA3EEA4D040FB007E74"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\last-message.txt",
+        "bytes": 19149,
+        "sha256": "7AF3199C61EC0F1F6ADC19A7FD51B0B3A7E5F6444B613BA3EEA4D040FB007E74"
+      },
+      "beforeReadSeal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\root-raw-report-before-body-read.seal.original.json",
+        "bytes": 1972,
+        "sha256": "FABF2C92A5CEC92778554078BC72B3E17071E9351F4A8CC2342C1A63B7C22F6C"
+      },
+      "firstRead": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\root-first-raw-report-body-read.original.json",
+        "bytes": 903,
+        "sha256": "C1519196CE7722FAD912BF75F6BE00C4E9F30C9E725C91288A72A50469E765FD"
+      },
+      "sealedUtc": "2026-10-20T11:24:43.3025355Z",
+      "rootFirstBodyReadUtc": "2026-10-20T11:24:55.0546312Z",
+      "sealBeforeRootBodyReadVerified": true,
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\completion.json",
+        "bytes": 2661,
+        "sha256": "C0D5349EE426DF47460A2BCEB40D49BA0C4FDDB10026C19009B0B6154CCC8E5C"
+      },
+      "ownedJobReceipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\owned-job-receipt.json",
+        "bytes": 161036,
+        "sha256": "FAE4FEDF2291DF47D61C7841E6EBD140C0A801D05F5195D5A760AC1A903A1C43"
+      },
+      "inputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\actual-tool-input-ledger.json",
+        "bytes": 122283,
+        "sha256": "A0DA827AB1EACA561E9878C525CFE4E17C0D498288C78410DC87D44037E9EED3"
+      },
+      "completeInputOutputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\actual-complete-tool-input-output-ledger.json",
+        "bytes": 2011260,
+        "sha256": "4DEAE109C11C383DB5B20F08966ED50EA7C623E4B3732E8742E1E5FC8ACDBBDE"
+      },
+      "initialRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\runtime-evidence.initial.selected.json",
+        "bytes": 8006,
+        "sha256": "88F9382704623076ACADB7DD68902D59CE3E6EC9864E1A32F409789F50992E79"
+      },
+      "finalRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\runtime-evidence.final.selected.json",
+        "bytes": 9463,
+        "sha256": "CC245DE2DA988BBEC142DF8781EAE2FF4AD785AD1A900F72C21ED26D3C1E5DC0"
+      },
+      "rootGo": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\root-launch-go.original.json",
+        "bytes": 4762,
+        "sha256": "03D1EBCD6A7B66CD6858BC7CC06E6381A398D1D76A84BD045FBC9334B2CB5345"
+      },
+      "actualPrompt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_PLUGIN\\actual-launch.prompt.original.txt",
+        "bytes": 40780,
+        "sha256": "A99AA1B5BF65DCD8D3F6DC6BE05F9749392DE69D5B4094CFCE495ADE205180E2"
+      },
+      "sessionId": "01a158f9-4f7d-70c1-8963-ccef22f588a4",
+      "recordedToolPairFacts": {
+        "inputCount": 71,
+        "outputCount": 71,
+        "inputLedgerCount": 71,
+        "pairingAnomalies": {
+          "unmatchedInputIds": [],
+          "orphanOutputIds": [],
+          "duplicateInputIds": [],
+          "duplicateOutputIds": [],
+          "emptyCallIdOrdinals": []
+        },
+        "qualification": "Header/anomaly facts and exact artifact descriptors only. Except bounded BUILD audit, this is not a complete actual-call/access/error-recovery/semantic audit."
+      },
+      "processReceiptObservations": {
+        "status": "PASS",
+        "pid": 24716,
+        "creationFileTime": 134369676953167514,
+        "exitCode": 0,
+        "exitConfirmed": true,
+        "assignedBeforeResume": true,
+        "resumed": true,
+        "timedOut": false,
+        "cleanupConfirmed": true,
+        "technicalBlocked": false,
+        "rootExitWhileMembersActive": false,
+        "primaryFailure": null,
+        "secondaryErrors": [],
+        "visibleWindowRequested": false,
+        "elapsedSeconds": 1186.2105399,
+        "lastSuccessfulJobQuery": {
+          "stage": "progress",
+          "observedUtc": "2026-10-20T11:21:21.5183445Z",
+          "querySucceeded": true,
+          "totalProcesses": 514,
+          "activeProcesses": 0
+        }
+      },
+      "launcherCompletionObservations": {
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "failure": null,
+        "retries": 0,
+        "completedUtc": "2026-10-20T11:21:21.6578704Z"
+      },
+      "selectedRuntimeObservations": {
+        "sessionMetaCount": 1,
+        "initialTurnContextCount": 1,
+        "finalTurnContextCount": 2,
+        "finalDistinctTurnIds": [
+          "01a158f9-50df-7f20-849f-7e63039d4602"
+        ],
+        "finalRepeatedContextSelectedValuesExact": true,
+        "memoryMode": "disabled",
+        "origin": "exec",
+        "modelProvider": "openai",
+        "turns": [
+          {
+            "turnId": "01a158f9-50df-7f20-849f-7e63039d4602",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          },
+          {
+            "turnId": "01a158f9-50df-7f20-849f-7e63039d4602",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          }
+        ],
+        "explicitFullActualGoObserved": true,
+        "matchingPayloadCount": 1,
+        "actualPayloadByteLengthDifference": 2,
+        "byteIdenticalTransport": false,
+        "equalAfterTrailingCrLfRemoval": true,
+        "actualToolNames": [
+          "exec"
+        ],
+        "firstDeveloperTextPartDescriptors": [
+          {
+            "utf8Bytes": 4934,
+            "sha256": "f3de0f3fde0b08dac387cc1424fc7e06f6a8ff8ec371d99ec1a5813cd1804c0b"
+          },
+          {
+            "utf8Bytes": 342,
+            "sha256": "4103287cd2f8e02c0c606bbbae018671bd04d7e7eeca9cbf862f8b53f9275313"
+          },
+          {
+            "utf8Bytes": 1056,
+            "sha256": "7f45d7d6986a761101d46d185824ce65c321ca0f02cea7497fc46d60ffae417b"
+          }
+        ],
+        "initialFinalSessionMetaSelectedValuesExact": true,
+        "initialFinalMessageStructureSelectedValuesExact": true,
+        "comparisonRule": "Recursive exact key presence, JSON types, ordered arrays and values; object property order alone ignored. Whole runtime captures were not declared equal: capture stage/time, contexts and descriptors naturally differ. Hidden bodies were not read or compared.",
+        "limitsUnchanged": "Selected exact own runtime and instruction/prompt hashes only; no raw initial-role/base-instruction/configuration/rollout bodies exported. Actual read-only/never/model/provider/memory settings require root comparison. App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED. Complete tool inputs/outputs/scope/coverage need separate closed-session audit. No SOURCE or execution verdict inferred."
+      },
+      "auditState": "UNFINISHED_NOT_WAIVED",
+      "reportErrorRecoveryQualification": "Raw errors/recoveries retained unchanged. Except bounded BUILD checks, report claims have not been fully verified by an actual-call audit or root admission."
+    },
+    {
+      "scopeId": "S_CLIENT",
+      "closureState": "CLOSED_SEALED_ROOT_BODY_READ",
+      "rawVerdictLiteral": "BLOCKED",
+      "reportAssessmentQualification": "Raw BLOCKED: mandatory32-body7179-row and462-unit-row7641-total completion claimed, but STAGED_CLIENT/discovery/catalog/membership/process relationships incomplete. No additional implementation defect follows from this coverage blocker. Full acceptance audit unfinished; not admitted.",
+      "rootAdmission": "NOT_ADMITTED_NONE_INHERITED",
+      "rawPublicCopy": {
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-client.json",
+        "state": "EXACT_SOURCE_DESTINATION_STAGED_BYTES_VERIFIED",
+        "bytes": 11700,
+        "sha256": "69D7F21AC9227AFB2BB0B9B02E2B800AA64B925E71A44D0FD356AF1F23360F30"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\last-message.txt",
+        "bytes": 11700,
+        "sha256": "69D7F21AC9227AFB2BB0B9B02E2B800AA64B925E71A44D0FD356AF1F23360F30"
+      },
+      "beforeReadSeal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\root-raw-report-before-body-read.seal.original.json",
+        "bytes": 1972,
+        "sha256": "08E2F10A32A6EBF20FE3E710CA988A56704442A55056AB36C66918CCCC6E1B7A"
+      },
+      "firstRead": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\root-first-raw-report-body-read.original.json",
+        "bytes": 903,
+        "sha256": "EB5DDDBBAE09521F09C78817566A2C9CF42FCCA531C4C6537EE2EC4CB4035D3E"
+      },
+      "sealedUtc": "2026-10-20T11:13:35.5556524Z",
+      "rootFirstBodyReadUtc": "2026-10-20T11:13:46.6616355Z",
+      "sealBeforeRootBodyReadVerified": true,
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\completion.json",
+        "bytes": 2660,
+        "sha256": "FD843BF14B947B320518DB9E7BB63E41DE7C4BFFEB1AF86E4E577482BCC9ED45"
+      },
+      "ownedJobReceipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\owned-job-receipt.json",
+        "bytes": 111995,
+        "sha256": "E5B297F85C5F045D2A1A95EFE6F24B55BB57C680FEDA07D0B52C2AC250DD2A0F"
+      },
+      "inputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\actual-tool-input-ledger.json",
+        "bytes": 72593,
+        "sha256": "336D9DD9E62BF988C4FD692E49600B351C16F51BE72053CAAC21F1FD4E7253BD"
+      },
+      "completeInputOutputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\actual-complete-tool-input-output-ledger.json",
+        "bytes": 1132162,
+        "sha256": "52157DD9A2E512762880AEE8F2D945D86D09FA934F958493C6D80EFA277147D0"
+      },
+      "initialRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\runtime-evidence.initial.selected.json",
+        "bytes": 8006,
+        "sha256": "F364A7AF8D288DF806689AC2F4A34332CEE4B56F930924C7C387178D593CD16E"
+      },
+      "finalRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\runtime-evidence.final.selected.json",
+        "bytes": 8524,
+        "sha256": "6AB02C23629D218D50AD044786598C938B060DFD43EC75911526EE2EA44ABE9E"
+      },
+      "rootGo": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\root-launch-go.original.json",
+        "bytes": 4762,
+        "sha256": "4B98382891BBAC44FA87E0C2E193D4214FAEC877DFCBBA1D4621D2A57A2A2790"
+      },
+      "actualPrompt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-S_CLIENT\\actual-launch.prompt.original.txt",
+        "bytes": 45161,
+        "sha256": "4BFC0E75F7D0CE5606BA1CF613B8A3CBD2BF395523FE5AF9CF0BE134BE0EDDD5"
+      },
+      "sessionId": "01a158f9-5757-7780-a2ef-7e8014d84a6c",
+      "recordedToolPairFacts": {
+        "inputCount": 50,
+        "outputCount": 50,
+        "inputLedgerCount": 50,
+        "pairingAnomalies": {
+          "unmatchedInputIds": [],
+          "orphanOutputIds": [],
+          "duplicateInputIds": [],
+          "duplicateOutputIds": [],
+          "emptyCallIdOrdinals": []
+        },
+        "qualification": "Header/anomaly facts and exact artifact descriptors only. Except bounded BUILD audit, this is not a complete actual-call/access/error-recovery/semantic audit."
+      },
+      "processReceiptObservations": {
+        "status": "PASS",
+        "pid": 43636,
+        "creationFileTime": 134369676974279201,
+        "exitCode": 0,
+        "exitConfirmed": true,
+        "assignedBeforeResume": true,
+        "resumed": true,
+        "timedOut": false,
+        "cleanupConfirmed": true,
+        "technicalBlocked": false,
+        "rootExitWhileMembersActive": false,
+        "primaryFailure": null,
+        "secondaryErrors": [],
+        "visibleWindowRequested": false,
+        "elapsedSeconds": 624.1376821,
+        "lastSuccessfulJobQuery": {
+          "stage": "progress",
+          "observedUtc": "2026-10-20T11:12:01.5565536Z",
+          "querySucceeded": true,
+          "totalProcesses": 365,
+          "activeProcesses": 0
+        }
+      },
+      "launcherCompletionObservations": {
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "failure": null,
+        "retries": 0,
+        "completedUtc": "2026-10-20T11:12:01.5873122Z"
+      },
+      "selectedRuntimeObservations": {
+        "sessionMetaCount": 1,
+        "initialTurnContextCount": 1,
+        "finalTurnContextCount": 1,
+        "finalDistinctTurnIds": [
+          "01a158f9-5979-7762-939b-1151d2f5911a"
+        ],
+        "finalRepeatedContextSelectedValuesExact": true,
+        "memoryMode": "disabled",
+        "origin": "exec",
+        "modelProvider": "openai",
+        "turns": [
+          {
+            "turnId": "01a158f9-5979-7762-939b-1151d2f5911a",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          }
+        ],
+        "explicitFullActualGoObserved": true,
+        "matchingPayloadCount": 1,
+        "actualPayloadByteLengthDifference": 2,
+        "byteIdenticalTransport": false,
+        "equalAfterTrailingCrLfRemoval": true,
+        "actualToolNames": [
+          "exec"
+        ],
+        "firstDeveloperTextPartDescriptors": [
+          {
+            "utf8Bytes": 8238,
+            "sha256": "c983daa2f3f321e04c0fc83dec959d2184bd6e1f2bb0ab2bd555850bc9455d50"
+          },
+          {
+            "utf8Bytes": 342,
+            "sha256": "4103287cd2f8e02c0c606bbbae018671bd04d7e7eeca9cbf862f8b53f9275313"
+          },
+          {
+            "utf8Bytes": 1056,
+            "sha256": "7f45d7d6986a761101d46d185824ce65c321ca0f02cea7497fc46d60ffae417b"
+          }
+        ],
+        "initialFinalSessionMetaSelectedValuesExact": true,
+        "initialFinalMessageStructureSelectedValuesExact": true,
+        "comparisonRule": "Recursive exact key presence, JSON types, ordered arrays and values; object property order alone ignored. Whole runtime captures were not declared equal: capture stage/time, contexts and descriptors naturally differ. Hidden bodies were not read or compared.",
+        "limitsUnchanged": "Selected exact own runtime and instruction/prompt hashes only; no raw initial-role/base-instruction/configuration/rollout bodies exported. Actual read-only/never/model/provider/memory settings require root comparison. App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED. Complete tool inputs/outputs/scope/coverage need separate closed-session audit. No SOURCE or execution verdict inferred."
+      },
+      "auditState": "UNFINISHED_NOT_WAIVED",
+      "reportErrorRecoveryQualification": "Raw errors/recoveries retained unchanged. Except bounded BUILD checks, report claims have not been fully verified by an actual-call audit or root admission."
+    },
+    {
+      "scopeId": "D_SELECTORS_001_301",
+      "closureState": "CLOSED_SEALED_ROOT_BODY_READ",
+      "rawVerdictLiteral": "SOURCE_PASS",
+      "reportAssessmentQualification": "Raw local SOURCE_PASS only. Full tool/access/fidelity/semantic completeness audit and root admission remain unperformed; no prior admission inherited.",
+      "rootAdmission": "NOT_ADMITTED_NONE_INHERITED",
+      "rawPublicCopy": {
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-d-selectors-001-301.json",
+        "state": "EXACT_SOURCE_DESTINATION_STAGED_BYTES_VERIFIED",
+        "bytes": 15565,
+        "sha256": "67FC05355C112C00F5FC1E27EAEF60A0E417FDD1E3034D500FB8D37583B07031"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\last-message.txt",
+        "bytes": 15565,
+        "sha256": "67FC05355C112C00F5FC1E27EAEF60A0E417FDD1E3034D500FB8D37583B07031"
+      },
+      "beforeReadSeal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\root-raw-report-before-body-read.seal.original.json",
+        "bytes": 2045,
+        "sha256": "AABBF99F534742A248B809ED31F538B06EE4500DD1DD6F247B105B5E8AA13E88"
+      },
+      "firstRead": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\root-first-raw-report-body-read.original.json",
+        "bytes": 936,
+        "sha256": "16416765794C17D423522062A31F107133BBEE0C3D20B7AFDD2C07C1186342E0"
+      },
+      "sealedUtc": "2026-10-20T11:18:19.3309657Z",
+      "rootFirstBodyReadUtc": "2026-10-20T11:18:29.2930432Z",
+      "sealBeforeRootBodyReadVerified": true,
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\completion.json",
+        "bytes": 2737,
+        "sha256": "363AE810D26A49AB714B56A79E17A7689A71C895499EC72B2DCB03CE0DB13446"
+      },
+      "ownedJobReceipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\owned-job-receipt.json",
+        "bytes": 104609,
+        "sha256": "28DA26C462C5F70D7C79EC9FF452921F224F01B4AF019B795A4C4021488F7605"
+      },
+      "inputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\actual-tool-input-ledger.json",
+        "bytes": 98712,
+        "sha256": "D4CFA3B1F8014580D4C16B8804AE5CB8C38386B111953365C7C882B204C6177F"
+      },
+      "completeInputOutputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\actual-complete-tool-input-output-ledger.json",
+        "bytes": 846660,
+        "sha256": "508AB915E03F0EDF2855AFFCDBCE5A100D48907A3A96B367A709B3922A1EB12C"
+      },
+      "initialRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\runtime-evidence.initial.selected.json",
+        "bytes": 8061,
+        "sha256": "07D40F238362D19C054F51EF0A70FDFF4B8DAA9D045A7C9A2B5F923479F9142A"
+      },
+      "finalRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\runtime-evidence.final.selected.json",
+        "bytes": 8590,
+        "sha256": "F75B6248388EEF4A06ED641DE05291E240A3CE2AB04D493F5A3B9D948E93FB89"
+      },
+      "rootGo": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\root-launch-go.original.json",
+        "bytes": 4890,
+        "sha256": "BC58997AFB0B0B2B2D634A4B1F716E93EB1348EDE41F1F8EBD2C60FD223B21A9"
+      },
+      "actualPrompt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_001_301\\actual-launch.prompt.original.txt",
+        "bytes": 35906,
+        "sha256": "718D6B7975B2DB1DB086342529A69E213D690883F568D4F248922341EDEA38AF"
+      },
+      "sessionId": "01a158f9-399c-7ce0-99d4-7e046a8202fd",
+      "recordedToolPairFacts": {
+        "inputCount": 44,
+        "outputCount": 44,
+        "inputLedgerCount": 44,
+        "pairingAnomalies": {
+          "unmatchedInputIds": [],
+          "orphanOutputIds": [],
+          "duplicateInputIds": [],
+          "duplicateOutputIds": [],
+          "emptyCallIdOrdinals": []
+        },
+        "qualification": "Header/anomaly facts and exact artifact descriptors only. Except bounded BUILD audit, this is not a complete actual-call/access/error-recovery/semantic audit."
+      },
+      "processReceiptObservations": {
+        "status": "PASS",
+        "pid": 36208,
+        "creationFileTime": 134369676895772113,
+        "exitCode": 0,
+        "exitConfirmed": true,
+        "assignedBeforeResume": true,
+        "resumed": true,
+        "timedOut": false,
+        "cleanupConfirmed": true,
+        "technicalBlocked": false,
+        "rootExitWhileMembersActive": false,
+        "primaryFailure": null,
+        "secondaryErrors": [],
+        "visibleWindowRequested": false,
+        "elapsedSeconds": 909.6696573,
+        "lastSuccessfulJobQuery": {
+          "stage": "progress",
+          "observedUtc": "2026-10-20T11:16:39.2378815Z",
+          "querySucceeded": true,
+          "totalProcesses": 333,
+          "activeProcesses": 0
+        }
+      },
+      "launcherCompletionObservations": {
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "failure": null,
+        "retries": 0,
+        "completedUtc": "2026-10-20T11:16:39.2645721Z"
+      },
+      "selectedRuntimeObservations": {
+        "sessionMetaCount": 1,
+        "initialTurnContextCount": 1,
+        "finalTurnContextCount": 1,
+        "finalDistinctTurnIds": [
+          "01a158f9-3b80-7740-8a0c-deb2b12bda63"
+        ],
+        "finalRepeatedContextSelectedValuesExact": true,
+        "memoryMode": "disabled",
+        "origin": "exec",
+        "modelProvider": "openai",
+        "turns": [
+          {
+            "turnId": "01a158f9-3b80-7740-8a0c-deb2b12bda63",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          }
+        ],
+        "explicitFullActualGoObserved": true,
+        "matchingPayloadCount": 1,
+        "actualPayloadByteLengthDifference": 2,
+        "byteIdenticalTransport": false,
+        "equalAfterTrailingCrLfRemoval": true,
+        "actualToolNames": [
+          "exec"
+        ],
+        "firstDeveloperTextPartDescriptors": [
+          {
+            "utf8Bytes": 8238,
+            "sha256": "c983daa2f3f321e04c0fc83dec959d2184bd6e1f2bb0ab2bd555850bc9455d50"
+          },
+          {
+            "utf8Bytes": 342,
+            "sha256": "4103287cd2f8e02c0c606bbbae018671bd04d7e7eeca9cbf862f8b53f9275313"
+          },
+          {
+            "utf8Bytes": 1056,
+            "sha256": "7f45d7d6986a761101d46d185824ce65c321ca0f02cea7497fc46d60ffae417b"
+          }
+        ],
+        "initialFinalSessionMetaSelectedValuesExact": true,
+        "initialFinalMessageStructureSelectedValuesExact": true,
+        "comparisonRule": "Recursive exact key presence, JSON types, ordered arrays and values; object property order alone ignored. Whole runtime captures were not declared equal: capture stage/time, contexts and descriptors naturally differ. Hidden bodies were not read or compared.",
+        "limitsUnchanged": "Selected exact own runtime and instruction/prompt hashes only; no raw initial-role/base-instruction/configuration/rollout bodies exported. Actual read-only/never/model/provider/memory settings require root comparison. App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED. Complete tool inputs/outputs/scope/coverage need separate closed-session audit. No SOURCE or execution verdict inferred."
+      },
+      "auditState": "UNFINISHED_NOT_WAIVED",
+      "reportErrorRecoveryQualification": "Raw errors/recoveries retained unchanged. Except bounded BUILD checks, report claims have not been fully verified by an actual-call audit or root admission."
+    },
+    {
+      "scopeId": "D_SELECTORS_302_602",
+      "closureState": "CLOSED_SEALED_ROOT_BODY_READ",
+      "rawVerdictLiteral": "SOURCE_PASS",
+      "reportAssessmentQualification": "Raw local SOURCE_PASS only. Full tool/access/fidelity/semantic completeness audit and root admission remain unperformed; no prior admission inherited.",
+      "rootAdmission": "NOT_ADMITTED_NONE_INHERITED",
+      "rawPublicCopy": {
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-d-selectors-302-602.json",
+        "state": "EXACT_SOURCE_DESTINATION_STAGED_BYTES_VERIFIED",
+        "bytes": 12563,
+        "sha256": "14B8CF7ECA4E0BB6894530C535AFBEC9B3E37E46838012220BEA765C8F092F0A"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\last-message.txt",
+        "bytes": 12563,
+        "sha256": "14B8CF7ECA4E0BB6894530C535AFBEC9B3E37E46838012220BEA765C8F092F0A"
+      },
+      "beforeReadSeal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\root-raw-report-before-body-read.seal.original.json",
+        "bytes": 2045,
+        "sha256": "6392B13BD5C1B6A371CEB7077FF0EE0FD7D909CC1B715F827751EB35CA08607C"
+      },
+      "firstRead": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\root-first-raw-report-body-read.original.json",
+        "bytes": 936,
+        "sha256": "6F80527903AFE93D2D491BC4CDCC9F80B11E534387B52EF02572EAFD905B6461"
+      },
+      "sealedUtc": "2026-10-20T11:15:08.3358109Z",
+      "rootFirstBodyReadUtc": "2026-10-20T11:15:24.8510604Z",
+      "sealBeforeRootBodyReadVerified": true,
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\completion.json",
+        "bytes": 2736,
+        "sha256": "C2A014A4BEF15755273C818A783E3C9EA1A80D88C989E137E698CA0AFE0F81B4"
+      },
+      "ownedJobReceipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\owned-job-receipt.json",
+        "bytes": 98087,
+        "sha256": "4F464EA4EAB18334715D4FFA70107D4FB87C334A8A63F45C222691522EDF7379"
+      },
+      "inputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\actual-tool-input-ledger.json",
+        "bytes": 97796,
+        "sha256": "55C5A27117EDE9D40F9427DDF66F07BFAE9E24ABFC53F9FC275912AF756C347F"
+      },
+      "completeInputOutputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\actual-complete-tool-input-output-ledger.json",
+        "bytes": 832111,
+        "sha256": "6520394B7A5EE4A110669D6C77FB377F8CB4B1943CD3D2C07CFE95479BB28617"
+      },
+      "initialRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\runtime-evidence.initial.selected.json",
+        "bytes": 8061,
+        "sha256": "9546D26E528A5E85A889C547B76309633931A64DC69F031DCDDD34EE193DC5D0"
+      },
+      "finalRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\runtime-evidence.final.selected.json",
+        "bytes": 8590,
+        "sha256": "5F7CE2B15FDDD71571037BF431CD4A1CC1926762CE967B76907421FE6A7E292B"
+      },
+      "rootGo": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\root-launch-go.original.json",
+        "bytes": 4890,
+        "sha256": "0725AC8891B9BC21E43E646F91BC509884767D5F363DAB210142609A4D0ABC29"
+      },
+      "actualPrompt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_302_602\\actual-launch.prompt.original.txt",
+        "bytes": 35908,
+        "sha256": "097BDF1573E1F4A716B73264F09D75D5BB007065B4C7E1AC22A2366BE7FEC070"
+      },
+      "sessionId": "01a158f9-399c-7d83-8bc5-78e756eb06f9",
+      "recordedToolPairFacts": {
+        "inputCount": 38,
+        "outputCount": 38,
+        "inputLedgerCount": 38,
+        "pairingAnomalies": {
+          "unmatchedInputIds": [],
+          "orphanOutputIds": [],
+          "duplicateInputIds": [],
+          "duplicateOutputIds": [],
+          "emptyCallIdOrdinals": []
+        },
+        "qualification": "Header/anomaly facts and exact artifact descriptors only. Except bounded BUILD audit, this is not a complete actual-call/access/error-recovery/semantic audit."
+      },
+      "processReceiptObservations": {
+        "status": "PASS",
+        "pid": 45124,
+        "creationFileTime": 134369676895720844,
+        "exitCode": 0,
+        "exitConfirmed": true,
+        "assignedBeforeResume": true,
+        "resumed": true,
+        "timedOut": false,
+        "cleanupConfirmed": true,
+        "technicalBlocked": false,
+        "rootExitWhileMembersActive": false,
+        "primaryFailure": null,
+        "secondaryErrors": [],
+        "visibleWindowRequested": false,
+        "elapsedSeconds": 780.1026109,
+        "lastSuccessfulJobQuery": {
+          "stage": "progress",
+          "observedUtc": "2026-10-20T11:14:29.6653733Z",
+          "querySucceeded": true,
+          "totalProcesses": 308,
+          "activeProcesses": 0
+        }
+      },
+      "launcherCompletionObservations": {
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "failure": null,
+        "retries": 0,
+        "completedUtc": "2026-10-20T11:14:29.7407961Z"
+      },
+      "selectedRuntimeObservations": {
+        "sessionMetaCount": 1,
+        "initialTurnContextCount": 1,
+        "finalTurnContextCount": 1,
+        "finalDistinctTurnIds": [
+          "01a158f9-3bd6-7f01-9367-0110c9477fda"
+        ],
+        "finalRepeatedContextSelectedValuesExact": true,
+        "memoryMode": "disabled",
+        "origin": "exec",
+        "modelProvider": "openai",
+        "turns": [
+          {
+            "turnId": "01a158f9-3bd6-7f01-9367-0110c9477fda",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          }
+        ],
+        "explicitFullActualGoObserved": true,
+        "matchingPayloadCount": 1,
+        "actualPayloadByteLengthDifference": 2,
+        "byteIdenticalTransport": false,
+        "equalAfterTrailingCrLfRemoval": true,
+        "actualToolNames": [
+          "exec"
+        ],
+        "firstDeveloperTextPartDescriptors": [
+          {
+            "utf8Bytes": 8238,
+            "sha256": "c983daa2f3f321e04c0fc83dec959d2184bd6e1f2bb0ab2bd555850bc9455d50"
+          },
+          {
+            "utf8Bytes": 342,
+            "sha256": "4103287cd2f8e02c0c606bbbae018671bd04d7e7eeca9cbf862f8b53f9275313"
+          },
+          {
+            "utf8Bytes": 1056,
+            "sha256": "7f45d7d6986a761101d46d185824ce65c321ca0f02cea7497fc46d60ffae417b"
+          }
+        ],
+        "initialFinalSessionMetaSelectedValuesExact": true,
+        "initialFinalMessageStructureSelectedValuesExact": true,
+        "comparisonRule": "Recursive exact key presence, JSON types, ordered arrays and values; object property order alone ignored. Whole runtime captures were not declared equal: capture stage/time, contexts and descriptors naturally differ. Hidden bodies were not read or compared.",
+        "limitsUnchanged": "Selected exact own runtime and instruction/prompt hashes only; no raw initial-role/base-instruction/configuration/rollout bodies exported. Actual read-only/never/model/provider/memory settings require root comparison. App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED. Complete tool inputs/outputs/scope/coverage need separate closed-session audit. No SOURCE or execution verdict inferred."
+      },
+      "auditState": "UNFINISHED_NOT_WAIVED",
+      "reportErrorRecoveryQualification": "Raw errors/recoveries retained unchanged. Except bounded BUILD checks, report claims have not been fully verified by an actual-call audit or root admission."
+    },
+    {
+      "scopeId": "D_SELECTORS_603_902",
+      "closureState": "CLOSED_SEALED_ROOT_BODY_READ",
+      "rawVerdictLiteral": "SOURCE_PASS",
+      "reportAssessmentQualification": "Raw local SOURCE_PASS only. Full tool/access/fidelity/semantic completeness audit and root admission remain unperformed; no prior admission inherited.",
+      "rootAdmission": "NOT_ADMITTED_NONE_INHERITED",
+      "rawPublicCopy": {
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-d-selectors-603-902.json",
+        "state": "EXACT_SOURCE_DESTINATION_STAGED_BYTES_VERIFIED",
+        "bytes": 12379,
+        "sha256": "5C5486408195EBC2E31726A19CD9FE6FEDBE03223A0800C2DC0F9C6B1EF158DF"
+      },
+      "original": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\last-message.txt",
+        "bytes": 12379,
+        "sha256": "5C5486408195EBC2E31726A19CD9FE6FEDBE03223A0800C2DC0F9C6B1EF158DF"
+      },
+      "beforeReadSeal": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\root-raw-report-before-body-read.seal.original.json",
+        "bytes": 2045,
+        "sha256": "2B5B4AA1DDB9E4C32EB21B0AD95B6812AD6FC14E18FE065A1989325B59CC1580"
+      },
+      "firstRead": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\root-first-raw-report-body-read.original.json",
+        "bytes": 936,
+        "sha256": "8897FA86ED1A81C6D8DC054842C60215238D147502DC4FF66DB276077257BEEC"
+      },
+      "sealedUtc": "2026-10-20T11:15:05.4065389Z",
+      "rootFirstBodyReadUtc": "2026-10-20T11:15:24.2184743Z",
+      "sealBeforeRootBodyReadVerified": true,
+      "completion": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\completion.json",
+        "bytes": 2736,
+        "sha256": "6C0B9E0C9629126443E4DF0A98A16F772B779E4CDC089F2F585748A9A47E383A"
+      },
+      "ownedJobReceipt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\owned-job-receipt.json",
+        "bytes": 86231,
+        "sha256": "C97B83A4AC3942F18746E3E322715F3EE62716B86E8FC352A78743253916D55B"
+      },
+      "inputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\actual-tool-input-ledger.json",
+        "bytes": 87963,
+        "sha256": "9D2672E2B3313DAA6DDC7341BCC5FFEED481735E2FE7D235CB3A77347A9C1CAA"
+      },
+      "completeInputOutputLedger": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\actual-complete-tool-input-output-ledger.json",
+        "bytes": 803283,
+        "sha256": "2B5E40D917AE29A3C0B64F070236F0EBB0BAC16272A0F938B98882ADBCBD77A8"
+      },
+      "initialRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\runtime-evidence.initial.selected.json",
+        "bytes": 8061,
+        "sha256": "D585F990965087D7FEFD04224E8592587BC2DEEE21290CB58DC3D58F26140013"
+      },
+      "finalRuntime": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\runtime-evidence.final.selected.json",
+        "bytes": 8590,
+        "sha256": "1B029FFFACCEAFC28E8FE241CA244CE77AFE9B9687974AD09F3F5A8F638C6F72"
+      },
+      "rootGo": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\root-launch-go.original.json",
+        "bytes": 4890,
+        "sha256": "54DDAE5A4D2DFED86F97750B86DA03A4C2761407C085BBDDA8EA45F45A46559C"
+      },
+      "actualPrompt": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4c99318-20261020T104640Z-54a3b913-D_SELECTORS_603_902\\actual-launch.prompt.original.txt",
+        "bytes": 35908,
+        "sha256": "449DB5673F4B20FF42C92C3C33CD3FE755D46865E19D2A012E5C2089D5C0E19B"
+      },
+      "sessionId": "01a158f9-3969-7d50-878f-f007d6f68a17",
+      "recordedToolPairFacts": {
+        "inputCount": 38,
+        "outputCount": 38,
+        "inputLedgerCount": 38,
+        "pairingAnomalies": {
+          "unmatchedInputIds": [],
+          "orphanOutputIds": [],
+          "duplicateInputIds": [],
+          "duplicateOutputIds": [],
+          "emptyCallIdOrdinals": []
+        },
+        "qualification": "Header/anomaly facts and exact artifact descriptors only. Except bounded BUILD audit, this is not a complete actual-call/access/error-recovery/semantic audit."
+      },
+      "processReceiptObservations": {
+        "status": "PASS",
+        "pid": 36912,
+        "creationFileTime": 134369676895116321,
+        "exitCode": 0,
+        "exitConfirmed": true,
+        "assignedBeforeResume": true,
+        "resumed": true,
+        "timedOut": false,
+        "cleanupConfirmed": true,
+        "technicalBlocked": false,
+        "rootExitWhileMembersActive": false,
+        "primaryFailure": null,
+        "secondaryErrors": [],
+        "visibleWindowRequested": false,
+        "elapsedSeconds": 734.2083857,
+        "lastSuccessfulJobQuery": {
+          "stage": "progress",
+          "observedUtc": "2026-10-20T11:13:43.7100689Z",
+          "querySucceeded": true,
+          "totalProcesses": 276,
+          "activeProcesses": 0
+        }
+      },
+      "launcherCompletionObservations": {
+        "exitCode": 0,
+        "cleanupConfirmed": true,
+        "failure": null,
+        "retries": 0,
+        "completedUtc": "2026-10-20T11:13:43.8729418Z"
+      },
+      "selectedRuntimeObservations": {
+        "sessionMetaCount": 1,
+        "initialTurnContextCount": 1,
+        "finalTurnContextCount": 1,
+        "finalDistinctTurnIds": [
+          "01a158f9-3ba1-73c2-bc1e-b8e9924937ec"
+        ],
+        "finalRepeatedContextSelectedValuesExact": true,
+        "memoryMode": "disabled",
+        "origin": "exec",
+        "modelProvider": "openai",
+        "turns": [
+          {
+            "turnId": "01a158f9-3ba1-73c2-bc1e-b8e9924937ec",
+            "approvalPolicy": "never",
+            "sandboxPolicy": {
+              "type": "read-only"
+            },
+            "permissionProfile": {
+              "type": "managed",
+              "file_system": {
+                "type": "restricted",
+                "entries": [
+                  {
+                    "path": {
+                      "type": "special",
+                      "value": {
+                        "kind": "root"
+                      }
+                    },
+                    "access": "read"
+                  }
+                ]
+              },
+              "network": "restricted"
+            },
+            "model": "gpt-6.1-sol",
+            "effort": "ultra",
+            "collaborationMode": "default"
+          }
+        ],
+        "explicitFullActualGoObserved": true,
+        "matchingPayloadCount": 1,
+        "actualPayloadByteLengthDifference": 2,
+        "byteIdenticalTransport": false,
+        "equalAfterTrailingCrLfRemoval": true,
+        "actualToolNames": [
+          "exec"
+        ],
+        "firstDeveloperTextPartDescriptors": [
+          {
+            "utf8Bytes": 4934,
+            "sha256": "f3de0f3fde0b08dac387cc1424fc7e06f6a8ff8ec371d99ec1a5813cd1804c0b"
+          },
+          {
+            "utf8Bytes": 342,
+            "sha256": "4103287cd2f8e02c0c606bbbae018671bd04d7e7eeca9cbf862f8b53f9275313"
+          },
+          {
+            "utf8Bytes": 1056,
+            "sha256": "7f45d7d6986a761101d46d185824ce65c321ca0f02cea7497fc46d60ffae417b"
+          }
+        ],
+        "initialFinalSessionMetaSelectedValuesExact": true,
+        "initialFinalMessageStructureSelectedValuesExact": true,
+        "comparisonRule": "Recursive exact key presence, JSON types, ordered arrays and values; object property order alone ignored. Whole runtime captures were not declared equal: capture stage/time, contexts and descriptors naturally differ. Hidden bodies were not read or compared.",
+        "limitsUnchanged": "Selected exact own runtime and instruction/prompt hashes only; no raw initial-role/base-instruction/configuration/rollout bodies exported. Actual read-only/never/model/provider/memory settings require root comparison. App/multi-agent enforcement, memory internals, OS PID linkage and lower-level isolation remain UNVERIFIED. Complete tool inputs/outputs/scope/coverage need separate closed-session audit. No SOURCE or execution verdict inferred."
+      },
+      "auditState": "UNFINISHED_NOT_WAIVED",
+      "reportErrorRecoveryQualification": "Raw errors/recoveries retained unchanged. Except bounded BUILD checks, report claims have not been fully verified by an actual-call audit or root admission."
+    }
+  ],
+  "confirmedSourceFindings": [
+    {
+      "id": "S_BUILD_HOST-F01",
+      "rawVerdict": "BLOCKED",
+      "rootStaticConfirmation": "CONFIRMED_BY_ROOT_SOURCE_READ",
+      "description": "Approved C# source bytes are hashed before lock acquisition; held bytes/topology are not revalidated against approved descriptors before UBT launch. Later module checks can occur after changed rules compile/construction.",
+      "requiredFollowup": "Held-stream approved length/hash and final membership/topology comparison before launch; meaningful mutation-window refusal control; fresh source identity and affected reviews.",
+      "actualMutationOrNativeCounterexampleExecuted": false
+    },
+    {
+      "id": "S_TARGET_RECEIPT-001",
+      "rawVerdict": "CHANGES_REQUESTED",
+      "rootStaticConfirmation": "CONFIRMED_BY_ROOT_SOURCE_READ",
+      "description": "Name-map validator computes category-specific wanted subsets for counts but checks entry membership against the combined seven-source set, without enforcing exact per-map subset/suffix. A wrong-category source can satisfy those checks.",
+      "requiredFollowup": "Exact map subset, suffix and name association validation plus cross-category substitution rejection control; fresh affected source/review.",
+      "actualFixtureOrNativeCounterexampleExecuted": false
+    },
+    {
+      "id": "S_TARGET_RECEIPT-002",
+      "rawVerdict": "CHANGES_REQUESTED",
+      "rootStaticConfirmation": "CONFIRMED_BY_ROOT_SOURCE_AND_TEST_READ",
+      "description": "Explicit required missing-manifest data and manifest-retention controls are absent. Existing null-PDB, manifest-order and generic missing-DLL-role controls do not cover those cases.",
+      "qualification": "Production missing-file and required-role guards exist. No actual acceptance of missing native manifest evidence is established.",
+      "requiredFollowup": "Explicit absent-manifest data and manifest-retention/preservation rejection controls; preserve positive join and failure controls; fresh affected source/review."
+    }
+  ],
+  "coverageBlockersSeparateFromImplementationFindings": [
+    "CLIENT raw BLOCKED despite32 full mandatory bodies7179 rows plus462 complete-unit rows7641: STAGED_CLIENT/discovery/catalog/membership/process relationships incomplete.",
+    "VALUE raw BLOCKED despite34 full mandatory bodies9440 rows plus65 complete-unit rows9505: DEPENDENCY_COMPILER_ABI relationship incomplete.",
+    "Physical inventory/descriptor checks and reported completeness are not actual root semantic admission."
+  ],
+  "runtimeContextCounts": {
+    "S_VALUE": 1,
+    "S_BUILD_HOST": 1,
+    "S_TARGET_RECEIPT": 3,
+    "S_PLUGIN": 2,
+    "S_CLIENT": 1,
+    "D_SELECTORS_001_301": 1,
+    "D_SELECTORS_302_602": 1,
+    "D_SELECTORS_603_902": 1
+  },
+  "developerStructureVariants": [
+    {
+      "firstTextPartUtf8Bytes": 8238,
+      "firstTextPartSha256": "c983daa2f3f321e04c0fc83dec959d2184bd6e1f2bb0ab2bd555850bc9455d50",
+      "scopes": [
+        "S_VALUE",
+        "S_CLIENT",
+        "D_SELECTORS_001_301",
+        "D_SELECTORS_302_602"
+      ],
+      "explanation": "UNEXPLAINED_DESCRIPTOR_DIFFERENCE_HIDDEN_BODIES_UNREAD"
+    },
+    {
+      "firstTextPartUtf8Bytes": 4934,
+      "firstTextPartSha256": "f3de0f3fde0b08dac387cc1424fc7e06f6a8ff8ec371d99ec1a5813cd1804c0b",
+      "scopes": [
+        "S_BUILD_HOST",
+        "S_TARGET_RECEIPT",
+        "S_PLUGIN",
+        "D_SELECTORS_603_902"
+      ],
+      "explanation": "UNEXPLAINED_DESCRIPTOR_DIFFERENCE_HIDDEN_BODIES_UNREAD"
+    }
+  ],
+  "closedRootRecordRecordedUtc": "2026-10-20T11:59:27.2035025+00:00",
+  "closedRootRecordQualification": "Fully read immutable root closure; exact8 raw/final-runtime descriptors, subject/counts/cleanup/seal/first-read/zero-admission statements match factual draft. This is closure, not semantic admission.",
+  "rootPublicationChecks": {
+    "rawCopies": [
+      {
+        "scopeId": "S_VALUE",
+        "sourceDestinationStagedBytesEqual": true,
+        "sha256": "4B00DB26F5527C38EF491D581AD1F2E440EA0C99F3EA3758EC6F30C30C2AF05D",
+        "bytes": 10058,
+        "stagedBlobOid": "4bce98c6db4af20921232dee0faa49a6e73d183f",
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-value.md"
+      },
+      {
+        "scopeId": "S_BUILD_HOST",
+        "sourceDestinationStagedBytesEqual": true,
+        "sha256": "D35113EFD4042D5F4CCCA9AB413C0EE1F13408876FB83138128788BEE27B48F7",
+        "bytes": 11245,
+        "stagedBlobOid": "701b69c2e0250cf9f67b2de60025e1a392977ca8",
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-build-host.json"
+      },
+      {
+        "scopeId": "S_TARGET_RECEIPT",
+        "sourceDestinationStagedBytesEqual": true,
+        "sha256": "C0C5341CF26516C28DC3F6B41D5A056E7529C88FA9896BA086DE2340B177E3BD",
+        "bytes": 19708,
+        "stagedBlobOid": "b970a5d1860e9327e09b2001aec48523c20de9f9",
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-target-receipt.json"
+      },
+      {
+        "scopeId": "S_PLUGIN",
+        "sourceDestinationStagedBytesEqual": true,
+        "sha256": "7AF3199C61EC0F1F6ADC19A7FD51B0B3A7E5F6444B613BA3EEA4D040FB007E74",
+        "bytes": 19149,
+        "stagedBlobOid": "9c479ac3df97245c0112fffff5a274bc80127457",
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-plugin.json"
+      },
+      {
+        "scopeId": "S_CLIENT",
+        "sourceDestinationStagedBytesEqual": true,
+        "sha256": "69D7F21AC9227AFB2BB0B9B02E2B800AA64B925E71A44D0FD356AF1F23360F30",
+        "bytes": 11700,
+        "stagedBlobOid": "2f580736e2e502db1f45b54fcc24e50b8c302b3c",
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-s-client.json"
+      },
+      {
+        "scopeId": "D_SELECTORS_001_301",
+        "sourceDestinationStagedBytesEqual": true,
+        "sha256": "67FC05355C112C00F5FC1E27EAEF60A0E417FDD1E3034D500FB8D37583B07031",
+        "bytes": 15565,
+        "stagedBlobOid": "7982f717aac86a19e8c5450ab4a1c73e34f6803d",
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-d-selectors-001-301.json"
+      },
+      {
+        "scopeId": "D_SELECTORS_302_602",
+        "sourceDestinationStagedBytesEqual": true,
+        "sha256": "14B8CF7ECA4E0BB6894530C535AFBEC9B3E37E46838012220BEA765C8F092F0A",
+        "bytes": 12563,
+        "stagedBlobOid": "9ba3e6a369eae3e96913b220bd04dfcdc0f678cb",
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-d-selectors-302-602.json"
+      },
+      {
+        "scopeId": "D_SELECTORS_603_902",
+        "sourceDestinationStagedBytesEqual": true,
+        "sha256": "5C5486408195EBC2E31726A19CD9FE6FEDBE03223A0800C2DC0F9C6B1EF158DF",
+        "bytes": 12379,
+        "stagedBlobOid": "341ad23ab2202d4ae4260845ca200df5644d0eae",
+        "path": "docs/plans/research/2026-10-20-e04a-scoped-r5-d-selectors-603-902.json"
+      }
+    ],
+    "rootAdoptedConfirmedFindings": [
+      "S_BUILD_HOST-F01",
+      "S_TARGET_RECEIPT-001",
+      "S_TARGET_RECEIPT-002"
+    ],
+    "draftSourceSha256": "BAFCB11B572FC80F844A88A956970717CBC7B845409040E891AF00FD3011418C",
+    "descriptorChecks": 95,
+    "rawCopyAndStagedChecks": 8,
+    "nativeRunRootAbsent": true,
+    "integrationsRemainUnused": true,
+    "scopeAcceptanceAuditsStillUnfinished": true
+  }
+}

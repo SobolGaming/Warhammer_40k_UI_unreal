@@ -1,0 +1,267 @@
+{
+  "recordKind": "CANONICAL_ROUNDTRIP_SOURCE_BOUND_DIAGNOSTIC_EXPECTATIONS",
+  "vectorFieldOrder": [
+    "severity",
+    "code",
+    "field",
+    "message",
+    "value"
+  ],
+  "sourceCommit": "5088c1c49dcaff29eb59fb64b3063d30214dde73",
+  "acceptedReferenceIdentityOnly": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\A2P0\\20261023T215640Z-e969ee8d\\capture\\reference-capture.json",
+    "bytes": 108383,
+    "sha256": "8035EBEFCAE2620C5EDE2C4072BE882A34E6725BE7428B9CCA1FBC40C7C512C8"
+  },
+  "scope": "Before vectors are exact accepted canonical payload data; after vectors require the declared unchanged original identifiers/values/order, accepted HUD inverse and same context. Any mismatch fails; no warning suppression.",
+  "rows": [
+    {
+      "id": "C01",
+      "beforeDiagnostics": [],
+      "afterDiagnostics": [],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "PREF_ORIGINAL_MODEL_VALID",
+        "PREF_SERIALIZER_FIELDS_PRESERVED"
+      ]
+    },
+    {
+      "id": "C02",
+      "beforeDiagnostics": [
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_model_selection",
+          "coherency is recognized but not active in this build.",
+          "coherency"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_model_selection",
+          "engagement_range is recognized but not active in this build.",
+          "engagement_range"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_unit_selection",
+          "objective_control_context is recognized but not active in this build.",
+          "objective_control_context"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_unit_selection",
+          "cover is recognized but not active in this build.",
+          "cover"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_movement_draft",
+          "coherency is recognized but not active in this build.",
+          "coherency"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "experimental.planned_settings.hud.minimap_enabled",
+          "hud.minimap_enabled is recognized but not active in this build.",
+          "hud.minimap_enabled"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "experimental.planned_settings.render.cached_text_objects",
+          "render.cached_text_objects is recognized but not active in this build.",
+          "render.cached_text_objects"
+        ]
+      ],
+      "afterDiagnostics": [
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_model_selection",
+          "coherency is recognized but not active in this build.",
+          "coherency"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_model_selection",
+          "engagement_range is recognized but not active in this build.",
+          "engagement_range"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_unit_selection",
+          "objective_control_context is recognized but not active in this build.",
+          "objective_control_context"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_unit_selection",
+          "cover is recognized but not active in this build.",
+          "cover"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "overlays.default_on_movement_draft",
+          "coherency is recognized but not active in this build.",
+          "coherency"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "experimental.planned_settings.hud.minimap_enabled",
+          "hud.minimap_enabled is recognized but not active in this build.",
+          "hud.minimap_enabled"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "experimental.planned_settings.render.cached_text_objects",
+          "render.cached_text_objects is recognized but not active in this build.",
+          "render.cached_text_objects"
+        ]
+      ],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "PREF_PARSE_ORDER",
+        "PREF_PLANNED_IDS_PRESERVED",
+        "PREF_INACTIVE_WARNING_TEMPLATE"
+      ]
+    },
+    {
+      "id": "C03",
+      "beforeDiagnostics": [
+        [
+          "warning",
+          "inactive_planned_setting",
+          "hotkeys[11].overlay_id",
+          "objective_control_context is recognized but not active in this build.",
+          "objective_control_context"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "experimental.planned_settings.input.keyboard_first_mode",
+          "input.keyboard_first_mode is recognized but not active in this build.",
+          "input.keyboard_first_mode"
+        ]
+      ],
+      "afterDiagnostics": [
+        [
+          "warning",
+          "inactive_planned_setting",
+          "hotkeys[11].overlay_id",
+          "objective_control_context is recognized but not active in this build.",
+          "objective_control_context"
+        ],
+        [
+          "warning",
+          "inactive_planned_setting",
+          "experimental.planned_settings.input.keyboard_first_mode",
+          "input.keyboard_first_mode is recognized but not active in this build.",
+          "input.keyboard_first_mode"
+        ]
+      ],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "PREF_PARSE_ORDER",
+        "PREF_PLANNED_IDS_PRESERVED",
+        "PREF_INACTIVE_WARNING_TEMPLATE"
+      ]
+    },
+    {
+      "id": "C04",
+      "beforeDiagnostics": [],
+      "afterDiagnostics": [],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "PREF_ORIGINAL_MODEL_VALID",
+        "PREF_SERIALIZER_FIELDS_PRESERVED"
+      ]
+    },
+    {
+      "id": "C05",
+      "beforeDiagnostics": [],
+      "afterDiagnostics": [],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "HUD_MODEL_FIELDS_AND_REGISTRY_PRESERVED",
+        "HUD_LAYOUT_EFFECTIVE_VALUES_MATERIALIZED",
+        "HUD_SOURCE_PREVIEW_CONTEXT_IDENTICAL"
+      ]
+    },
+    {
+      "id": "C06",
+      "beforeDiagnostics": [],
+      "afterDiagnostics": [],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "HUD_MODEL_FIELDS_AND_REGISTRY_PRESERVED",
+        "HUD_LAYOUT_EFFECTIVE_VALUES_MATERIALIZED",
+        "HUD_SOURCE_PREVIEW_CONTEXT_IDENTICAL"
+      ]
+    },
+    {
+      "id": "C07",
+      "beforeDiagnostics": [],
+      "afterDiagnostics": [],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "HUD_MODEL_FIELDS_AND_REGISTRY_PRESERVED",
+        "HUD_LAYOUT_EFFECTIVE_VALUES_MATERIALIZED",
+        "HUD_SOURCE_PREVIEW_CONTEXT_IDENTICAL"
+      ]
+    },
+    {
+      "id": "C08",
+      "beforeDiagnostics": [],
+      "afterDiagnostics": [],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "HUD_MODEL_FIELDS_AND_REGISTRY_PRESERVED",
+        "HUD_LAYOUT_EFFECTIVE_VALUES_MATERIALIZED",
+        "HUD_SOURCE_PREVIEW_CONTEXT_IDENTICAL"
+      ]
+    },
+    {
+      "id": "C09",
+      "beforeDiagnostics": [],
+      "afterDiagnostics": [],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "HUD_MODEL_FIELDS_AND_REGISTRY_PRESERVED",
+        "HUD_LAYOUT_EFFECTIVE_VALUES_MATERIALIZED",
+        "HUD_SOURCE_PREVIEW_CONTEXT_IDENTICAL"
+      ]
+    },
+    {
+      "id": "C10",
+      "beforeDiagnostics": [],
+      "afterDiagnostics": [],
+      "beforeHasErrors": false,
+      "afterHasErrors": false,
+      "sourceRuleIds": [
+        "HUD_MODEL_FIELDS_AND_REGISTRY_PRESERVED",
+        "HUD_LAYOUT_EFFECTIVE_VALUES_MATERIALIZED",
+        "HUD_SOURCE_PREVIEW_CONTEXT_IDENTICAL"
+      ]
+    }
+  ]
+}

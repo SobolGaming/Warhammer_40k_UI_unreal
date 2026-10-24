@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_E04A_V7_1_METHOD_AND_UNBOUND_TEMPLATE_ADOPTION",
+  "adoptedUtc": "2026-10-20T14:33:50.3032383Z",
+  "publicationHeadBeforeAdoption": "36740bf4623fb9c589c2dec60207eadf6c3bb789",
+  "plannedPlanRevision": 67,
+  "applicableAuthority": "OWN13 continued migration permits routine prospective review engineering; OWN15 final distinct independent CODE/REQ and exact execution gates remain unchanged. Human private-source/API review transmission consent persists until explicitly revoked; no method waiver is inferred.",
+  "methodCriteriaAdopted": true,
+  "unboundTemplateAndImmutableDutiesAdopted": true,
+  "exactInputs": {
+    "criteria": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v7.1-PROPOSED\\source-composition-v7.1.criteria.PROPOSED.md",
+      "bytes": 29955,
+      "sha256": "3339A615FDC1C322C087FAB8B64ABA78120C267AE651FA8A53C0A25D168A26C2"
+    },
+    "cleanNorm": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.1-neutral-attestation-repair-PROPOSED\\fresh-source-norms-v7.1.PROPOSED.md",
+      "bytes": 20921,
+      "sha256": "1259AFC63438838FF7B671A725D99631F352879BFC59C43530CBF22BFCFCE59E"
+    },
+    "unboundTemplate": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.1-neutral-attestation-repair-PROPOSED\\source-scope-contract-v7.1.UNBOUND.PROPOSED.json",
+      "bytes": 192408,
+      "sha256": "7825D1022D786F51B11E59BF0229590A191724A958405E84D6CF1BBD936CB6C2"
+    },
+    "immutableDutyBaseline": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-composition-v7.1-PROPOSED\\v6-duty-obligation-baseline.IMMUTABLE.PROPOSED.json",
+      "bytes": 180731,
+      "sha256": "CD5473DF1A2AC49623A49441915184F545B04CF69E100A798BE62F0087609497"
+    },
+    "ordinaryIndependentRecheckSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.1-criteria-independent-recheck-PROPOSED\\stopped-recheck.seal.PROPOSED.json",
+      "bytes": 3202,
+      "sha256": "DF92A18C54A237C7D87773B10A5570B3E101F9E689E2DEEBA164AE62347D1C6E"
+    },
+    "wordingRepair": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.1-neutral-attestation-repair-PROPOSED\\root-neutral-attestation-wording-repair.original.json",
+      "bytes": 3302,
+      "sha256": "3BF61BD012071C6D89696AEA6B1C14A2866AD91D629408B29AE57D7ECD5571FB"
+    },
+    "apiInputDefinitionChoice": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-root-runtime-api-input-adoption\\input-definition-choice.original.json",
+      "bytes": 5721,
+      "sha256": "3CD4AAE3E8017D634883371164A739942E674256D997519E91DDA2C0C1C7A64A"
+    },
+    "transportSourceChoice": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7-root-transport-source-adoption\\source-choice-adoption.original.json",
+      "bytes": 6264,
+      "sha256": "3E80CE6B3580CCC1631D148FF542239207517730BEF125F481968F9B202C684D"
+    }
+  },
+  "copiedProposalStatusLabels": "The exact authored documents retain their PROPOSED/NOT_ADOPTED labels as provenance. This later root record adopts only the method, immutable duties and UNBOUND design tuple; actual current bindings remain unresolved. Derive explicitly current clean own projections before any P/panel/GO.",
+  "rootRead": "Complete criteria, clean normative text, checklist, all90typed template corrections and exact one-paragraph/three-descriptor repair read; unchanged technical obligations independently compared with frozen ancestors. No new approval inferred from checks alone.",
+  "ordinaryIndependentRecheck": {
+    "scope": "Method and exact repaired norm/template only",
+    "checks": 96,
+    "failures": 0,
+    "noFormalSourceCodeReqVerdict": true
+  },
+  "retainedAssessmentPolicy": {
+    "sevenConjunctivePreEClauses": true,
+    "favorableStatus": "ELIGIBLE_FOR_CONDITIONAL_RETENTION",
+    "completeOriginalValidityAndCurrentExactTechnicalAdminProofRequired": true,
+    "futurePlansAreNotExecutedEvidence": true,
+    "actualFreshCurrentVectorIntegrationAndRuntimeDutyDischargeBeforeAggregateRequired": true,
+    "contradictionInvalidatesAffectedEUseAdmissionsAndGate": true,
+    "noOldRawVerdictOrTechnicalSubjectRewrite": true
+  },
+  "selectedTopology": {
+    "potentialRetained": 6,
+    "freshPrimaries": 4,
+    "freshIndependentIntegrations": 5,
+    "nonblindCompatibilityCohorts": 3,
+    "conditionalNewContexts": 12,
+    "conditionalLabelledNodes": 18,
+    "actualSelectionNotBound": true
+  },
+  "conservedDuties": {
+    "globalJoins": 7,
+    "wholeAtoms": 16,
+    "literalLocalEntries": 29,
+    "oldScopes": 10,
+    "originalMetadataRecords": 13,
+    "descriptorRows": 902,
+    "originFields": 49,
+    "referenceOccurrences": 1561,
+    "bothCompleteIndependentWitnessAssessments": true,
+    "allOriginalWholeBodyUnitDataInterfaceDutiesRemain": true
+  },
+  "inputSeparation": "Root/nonblind method and historical facts are excluded from initial fresh SOURCE. Root checks E; initial integration receives own neutral launch permission/identities only, E/F HASH_ONLY and no C/E status/result/conclusion fields.",
+  "buildRawBlockedAndOldV6FailedGatePreserved": true,
+  "narrowBuildAlternativeIsNotAnActualDisposition": true,
+  "d001SeparateDispositionStillRequired": true,
+  "v6FreshTenPassOnlyMethodProspectivelySuperseded": true,
+  "allHistoricalFailedGatesAndReportsUnchanged": true,
+  "apiSourceChoiceOnly": "38 origins/125units/4065literal/4315physical; BODY099 plus selected14; original13/record4 arrays stay separate; actual per-scope ownership/bindings pending.",
+  "metadataSourceStatus": "First4 prior helpers unchanged in proposed route; final assembler has a newly identified typed-interface refusal gap under separate repair/recheck. Own-panel local interface exists only as proposal. No final-assembler/binder/panel/GO/aggregate constructor invocation is adopted here.",
+  "completeCurrentSourceScopeHelperBindingsAdopted": false,
+  "beforePOrOwnPanelOrGo": "Complete and adopt actual current source/API/scope/helper definitions; derive exact complete raw interfaces/units/typed owner sets/counts/grants/current clean own projections. Inspect/adopt metadata sources and independently audit outputs before GO. No unresolved required input is allowed.",
+  "currentEligibility": [],
+  "rootAdmissions": 0,
+  "aggregateGatePassed": false,
+  "PAllocated": false,
+  "ownPanelsAllocated": false,
+  "reviewGo": false,
+  "reviewLaunched": false,
+  "nativePhaseGo": false,
+  "nativePhasesRun": 0,
+  "visibleAuthority": 0,
+  "finalExactCandidateFreshCodeAndDifferentReqStillRequired": true,
+  "sourceCodeChanged": false,
+  "linuxRuntimeUntested": true
+}

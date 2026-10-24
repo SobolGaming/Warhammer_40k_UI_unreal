@@ -1,0 +1,87 @@
+{
+  "actor_id": "player-a",
+  "decision_type": "submit_movement_proposal",
+  "interaction": {
+    "constraints": {
+      "candidate_option_ids": [
+        "submit_parameterized_payload"
+      ],
+      "entity_kinds": [
+        "unit",
+        "model"
+      ],
+      "exact_model_count": null,
+      "maximum_distance_in": null,
+      "maximum_selections": null,
+      "may_enter_engagement_range": false,
+      "minimum_enemy_distance_in": null,
+      "minimum_selections": null,
+      "must_preserve_coherency": true,
+      "placement_kinds": [],
+      "proposal_schema_ref": "proposal-payload.schema.json#/$defs/movement",
+      "submission_schema_ref": "parameterized-submission.schema.json"
+    },
+    "display_hints": {
+      "confirm_label": "Submit Paths",
+      "decline_label": null
+    },
+    "interaction_kind": "path_editor",
+    "proposal_kind": "normal_move",
+    "required_inputs": [
+      "model_paths",
+      "final_poses"
+    ],
+    "schema_version": "interaction-descriptor-v2-variants",
+    "selected_entity_ids": [
+      "army-alpha:intercessor-unit-1"
+    ],
+    "submission_kind": "parameterized",
+    "submission_variants": [
+      {
+        "display_label": "Submit Paths",
+        "interaction_kind": "path_editor",
+        "proposal_schema_ref": "proposal-payload.schema.json#/$defs/movement",
+        "required_inputs": [
+          "model_paths",
+          "final_poses"
+        ],
+        "variant_id": "normal_move"
+      }
+    ]
+  },
+  "is_parameterized": true,
+  "options": [
+    {
+      "label": "Submit Parameterized Payload",
+      "option_id": "submit_parameterized_payload",
+      "payload": {
+        "submission_kind": "parameterized"
+      }
+    }
+  ],
+  "payload": {
+    "proposal_request": {
+      "actor_id": "player-a",
+      "battle_round": 1,
+      "context": {
+        "movement_mode": "normal",
+        "selected_movement_action_grant_hook_ids": [],
+        "selected_movement_action_grants": [],
+        "source_selected_option_id": "normal_move"
+      },
+      "decision_type": "submit_movement_proposal",
+      "game_id": "phase18d-decision-family-contract",
+      "movement_phase_action": "normal_move",
+      "phase": "movement",
+      "placement_kinds": [],
+      "proposal_kind": "normal_move",
+      "request_id": "decision-request-000009",
+      "source_decision_request_id": "decision-request-000008",
+      "source_decision_result_id": "phase18d-family-select-normal-move",
+      "spatial_context_hash": "e9b99ed952efbcc5d1e63cc3dfecfccacaf11753b0147c25cad07f9e3ed011a1",
+      "unit_instance_id": "army-alpha:intercessor-unit-1"
+    }
+  },
+  "request_id": "decision-request-000009",
+  "schema_version": "decision-request-view-v5-phase17n-step4"
+}

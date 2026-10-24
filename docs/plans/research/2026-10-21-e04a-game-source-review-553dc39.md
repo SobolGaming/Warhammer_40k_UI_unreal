@@ -1,0 +1,11 @@
+**FAIL — E04-A1G SOURCE prerequisite only.**
+
+Reviewed head `553dc392e97c8cf3e81b2e05a6ec77b7e8f55bc3` against base `2b9faae9d12e7d972a9c276873521891f7c9f917`, RunId `20261021T105009Z-0a4b58ea`.
+
+- **Required dependency-phase closure is absent from the Game vendor rule.** [YamlCpp.Build.cs:377](C:/SWDev/warhammer/Warhammer_40k_UI_unreal/Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs:377) validates configure/build process receipts through `RequireA1GCMakeRoot` at line 429, then selects the library at line 423. It never validates either dependency phase’s completion/result records. Consequently, those receipts and copied artifacts remain acceptable to this branch if subsequent phase preservation fails. The [clean requirement at line 57](C:/SWDev/warhammer/Warhammer_40k_UI_unreal/docs/plans/research/2026-10-21-e04a-game-proof-packet.md:57) explicitly requires the Game branch to bind closed phases. The wrapper’s `Check-Previous` protects its normal entry, but the specified ModuleRules binding remains missing. **Minimal correction:** validate the exact same-run configure/build completion and result records, including their subject, freeze and receipt joins, before selecting the library; preserve the Editor branch.
+
+I read all **42 required whole bodies**, including both complete wrapper/supervisor files, and inspected the **63 granted API excerpt bodies**. Required-file hashes, supplied manifest/policy/permission/freeze hashes and installed excerpt-origin identities matched. Pinned Git inspection confirmed the head and granted working-tree correspondence. No other concrete source incompatibility was identified.
+
+No candidate, build, test, native, GUI or Core execution occurred; no files were written, network used, helpers invoked or peer reports inspected. Agent/app tools remained advertised, so their disablement—and memory/launch-isolation enforcement—are **UNVERIFIED**.
+
+This establishes no build, native, graphical, semantic-delivery, comprehension or universal-isolation proof. Installed-binary/source correspondence remains unproved, Linux remains untested, and OWN17 remains deferred/unproven. Root retains admission and all later CODE/REQ, native and migration authority.

@@ -1,0 +1,22 @@
+{
+  "exitCode": 0,
+  "kind": "TRUSTED_METADATA_FIXTURE_WORKER_COMPLETION_NOT_NATIVE_VERDICT",
+  "outerFailure": null,
+  "candidateExecuted": false,
+  "schemaVersion": 1,
+  "cleanupConfirmed": true,
+  "requestedTotalCeilingMilliseconds": 55000,
+  "nativeOrUbtExecuted": false,
+  "candidateRulesEmitted": false,
+  "workerBudgetMilliseconds": 45000,
+  "manifest": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-witness-metadata-reader-controls-PROPOSED\\v3\\metadata-reader-fixture-manifest.PROPOSED.json",
+    "bytes": 51958,
+    "sha256": "F30A2A62E80B79972350C4F4E348E55B53B5628F7C1216BF92CB37F2D966A070"
+  },
+  "timedOut": false,
+  "sourceReviewOrAcceptance": false,
+  "processId": 4928,
+  "cleanupBudgetMilliseconds": 5000,
+  "elapsedMilliseconds": 2693
+}

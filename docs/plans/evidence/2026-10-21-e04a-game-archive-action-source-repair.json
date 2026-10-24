@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A1G_NARROW_ARCHIVE_ACTION_SOURCE_REPAIR_ADOPTION",
+  "recordedUtc": "2026-10-21T10:47:23.5362002Z",
+  "status": "GAME_ARCHIVE_ACTION_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "validationAsOfUtc": "2026-10-21T10:46:05.1125815Z",
+  "failureCheckpoint": "2b9faae9d12e7d972a9c276873521891f7c9f917",
+  "failureBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-archive-action-failure-PROPOSED\\root-failure-checkpoint-remote-backup.original.json",
+    "bytes": 871,
+    "sha256": "A1CDE51E3E662D1E069347914E954C37B9C2E8D8E626924B62D9B48191D965D1"
+  },
+  "rootAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-archive-action-repair-PROPOSED\\root-source-adoption.original.json",
+    "bytes": 2265,
+    "sha256": "554C916D1BD0A7D17EBA5145587D7EC4AA739F298055E5206910C2052D643579"
+  },
+  "sourceState": "Source/norm changes are applied after the verified failure checkpoint; this adoption record does not invent a future commit SHA.",
+  "changedFiles": [
+    {
+      "path": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "before": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-archive-action-repair-PROPOSED\\wrapper.before-archive-repair.original",
+        "bytes": 179067,
+        "sha256": "D4AB1608597A79897677FDE76A3862CC6C41DDE13BCC05323EB56F30DCF18AEB"
+      },
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04A1GProfileProof.ps1",
+        "bytes": 182184,
+        "sha256": "078E7A42A35B7769500652F42D89E946E72389F468EA5429CE763AFE31835689"
+      },
+      "changes": [
+        "Adds Confirm-A1GDirectArchiveAction for the one observed direct MSVC archive action",
+        "Replaces the previous cmake -E vs_link_lib substring assertion with the narrow validator",
+        "Retains the observed action and pinned tool/object facts in the build receipt"
+      ]
+    },
+    {
+      "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "before": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-archive-action-repair-PROPOSED\\norm.before-archive-repair.original",
+        "bytes": 15842,
+        "sha256": "0CD9A9A2F57E1C8DA73307C48E840A62E5E298B41922B04C3E2A5ECE0DD7BBFF"
+      },
+      "after": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+        "bytes": 16226,
+        "sha256": "C3D17762FDE8DCBFD2DE7287BF8D2A3AF668F5D0D0FE488F3A31A71A7A91929C"
+      },
+      "changes": [
+        "Adds five normative lines requiring the finite direct-archive action observation and receipt retention"
+      ]
+    }
+  ],
+  "proposal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-archive-action-repair-PROPOSED\\Confirm-A1GDirectArchiveAction.PROPOSED.v2.ps1",
+    "bytes": 3883,
+    "sha256": "B75CCE5B2678F6D65315221EB268027CDE90925B90196878443C866D1D250792"
+  },
+  "sourceCriteria": [
+    "Exactly one matching action; reject ninja no-work and unsupported command shape",
+    "Selected cmd shell and canonical librarian path, frozen librarian bytes/hash",
+    "x64 yaml-cpp.lib output and exact ordinal acquired src/*.cpp object sequence inside the build root",
+    "Retain the action in the vendor build receipt; finite observation only"
+  ],
+  "validationAtAdoption": {
+    "wholeWrapperInverseMatched": true,
+    "astErrors": 0,
+    "functionCount": 112,
+    "behavioralControls": "NOT_RUN_AT_ADOPTION",
+    "freshSourceReview": "NOT_RUN_AT_ADOPTION",
+    "newRun": "NOT_BOUND_AT_ADOPTION",
+    "allNineNativePhases": "NOT_RUN_FOR_REPAIRED_CANDIDATE_AT_ADOPTION",
+    "gameAttemptsExecuted": 0,
+    "customChecksExecuted": 0,
+    "qualification": "Inverse/AST diagnostics are static adoption checks, not semantic behavior, independent SOURCE or native PASS. This section is explicitly historical as of validationAsOfUtc; later controls and reviews require their own records."
+  },
+  "previousRun": {
+    "runId": "20261021T101933Z-40d00c7c",
+    "sourceHead": "3201552db315e5b8fbe460b9d0984bf6b81ea71a",
+    "status": "CLOSED_PRESERVED_NO_RETRY",
+    "sourceReview": "RAW_PASS_FOR_OLD_CANDIDATE_ONLY",
+    "failedPhase": "DependencyBuild",
+    "primaryFailure": "A1G_VENDOR_STATIC_ARCHIVE_ACTION_NOT_OBSERVED",
+    "repairDoesNotRetroactivelyPassOldRun": true,
+    "oldApprovalTransfers": false
+  },
+  "unaffected": "Canonical product Config, C++/parser/vendor acquisition and earlier bounded A1E acceptance are unchanged. Earlier raw reports and failed results remain preserved.",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "standingPrivateSourceApiReviewConsent": "Until explicit human revocation; credentials and unrelated private data excluded.",
+  "next": "Checkpoint the repaired source/norm and this factual metadata overlay, push and gh-verify OWN18 exact remote backup before finite pure controls. Then derive fresh exact head/base/run/freeze/tool/config/input/command/norm bindings and obtain fresh affected SOURCE before any of the nine ordered phase GOs. Final CODE and different REQ follow actual successful closed execution."
+}

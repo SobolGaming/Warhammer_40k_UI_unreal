@@ -1,0 +1,13 @@
+# A2-P0 PID-list capture failure
+
+Capture status is FAIL_CAPTURE_NOT_ACCEPTED for a68ceea89d72fab2437df04a383d220e69d84130 / run 20261023T205222Z-b5f52bb4. Exact SOURCE PASS remains root-admitted. The separately authorized hidden native capture closed exit 1 with no capture file or profile. [SOURCE prerequisite](2026-10-23-e04a2-p0-source-prerequisite-a68ceea.md); [failure evidence](../evidence/2026-10-23-e04a2-p0-pid-list-capture-failure.json).
+
+The unchanged fatal guard retained its same successful complete-size accounting query: total/active/terminated 2/2/0, 48 bytes requested/returned, monotonic interval 0.0636261–0.0636401 seconds. One later class-3 query on the retained private job succeeded completely: 136-byte buffer, 24 bytes returned, assigned 2/listed 2, raw PIDs 39448 (launched root) and 23108 (additional listed ID). No image lookup or PID reopening occurred.
+
+The later list is separate and non-atomic with the accounting query. It closes the PID-only observation gap; creator, image and cause remain UNATTRIBUTED or unverified, and collector entry remains UNPROVEN. Job accounting can include failed associations, which is a documented possible interpretation rather than an attributed event. The observations establish neither two executing payloads nor a cause for the guard failure. [Windows job accounting](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_accounting_information).
+
+The guard stayed fatal. Root PID 39448 exited 0xA2F00001 with confirmed cleanup/final active 0; cleanup took 0.0044472 seconds and process elapsed 0.0680894 seconds. Both Python streams were complete and empty. Worker exit 1 was confirmed; outer elapsed 1.7523911 seconds, with no timeout or forced outer termination.
+
+The worker retained the complete 6,813-byte original process receipt and separate supervisorPrimaryError beside worker failure in its 1,060-byte completion. This verifies retention in the observed early-failure branch only; late/deadline/IO failure paths remain unforced. Four retained files total 11,870 bytes, all within caps, with no unexpected paths. Root rechecked 157 frozen source inputs. No reference fidelity or broader runtime acceptance follows.
+
+OWN18 requires publication/checkpoint/push/exact-gh backup before actual repair, rebinding or new diagnostic execution. Authority is closed: no retry, relaxed guard or transfer of old authority. Preserve Rev138 CHANGES_REQUESTED, c62/d0 failures and revision 131 bounded A1G acceptance/history. The 19:35 visible HOLD, OWN17 deferred/unproven, Linux UNTESTED and full A2/727/G-IMPLEMENT/final CODE/REQ limits remain.

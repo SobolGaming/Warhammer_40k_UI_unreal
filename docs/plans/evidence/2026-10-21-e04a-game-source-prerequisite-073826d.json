@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_SOURCE_PREREQUISITE_PUBLICATION",
+  "scope": "SOURCE only, as of root admission; subsequent native execution is outside this record",
+  "asOfUtc": "2026-10-21T12:54:48.9682132Z",
+  "status": "PASS_ADMITTED",
+  "rawVerdict": "PASS",
+  "sourceHead": "073826d8ad061302343ad3cb02a3b449086f1451",
+  "comparisonBase": "47de39639f6ec7844e2c6f62cfd82fa85aefbefc",
+  "runId": "20261021T123959Z-657332ad",
+  "role": "E04_GAME_COMPONENT_SOURCE",
+  "sessionId": "01a15e7e-ebeb-7c03-b492-289ba8897518",
+  "turnIds": [
+    "01a15e7e-eec6-7371-b82c-b6fb5d2d2767"
+  ],
+  "sourceFreezeManifest": {
+    "path": ".local/reviews/E04A1G-source-review/common-073826d-20261021T123959Z-657332ad/runtime-freeze/source-freeze-manifest.json",
+    "bytes": 213383,
+    "sha256": "2970D0ACB0F442EAC07D0C07E9D0DAF17B414A87009D4FE5CD2DF65C5814117D"
+  },
+  "normativeRequirement": {
+    "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 17266,
+    "sha256": "E4F3FA8E117D4FC4C23DBAB9D70AEE09411B8C78F0302EF945823A60BB5B9692"
+  },
+  "reviewProcess": {
+    "cliVersion": "0.163.0-alpha.10.2",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "modelOverride": null,
+    "freshExec": true,
+    "resume": false,
+    "fork": false,
+    "contextCount": 1,
+    "turnCount": 1,
+    "contextRequirementMismatchCount": 0,
+    "actualSandbox": "read-only",
+    "actualApprovalPolicy": "never",
+    "serializedMemoryMode": "disabled",
+    "featureAndLowerMemoryEnforcement": "UNVERIFIED",
+    "helperAndConnectorCapabilities": "EXPOSED; NO USE OBSERVED",
+    "receivedPromptPlusExactlyOneCrlf": true,
+    "actualPromptUtf8Bytes": 5101,
+    "receivedPromptUtf8Bytes": 5103,
+    "receivedPromptSha256": "E79EE86EF1492DA21A5982DD322C339DB23EBAA8E229ACBBC5E075CA9C07CD29",
+    "pid": 30412,
+    "creationUtc": "2026-10-21T12:45:37.6817342Z",
+    "exitUtc": "2026-10-21T12:53:19.2763904Z",
+    "elapsedSeconds": 461.6152322,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "primaryFailure": null,
+    "secondaryErrorCount": 0,
+    "finalJobTotalProcesses": 294,
+    "finalJobActiveProcesses": 0,
+    "foregroundSupervisorPid": 18528,
+    "foregroundClosureUtc": "2026-10-21T12:53:23.9005651Z",
+    "foregroundExitCode": 0,
+    "foregroundClosureToolChunk": "d4b400"
+  },
+  "evidenceOrdering": {
+    "sequence": [
+      "Actual foreground closure",
+      "Raw 12-member seal",
+      "Final runtime/complete tool extraction",
+      "Selected 8-member seal",
+      "Root independent rehash of seals and 786 frozen/control identities",
+      "First root report/tool-value body inspection",
+      "Root SOURCE admission"
+    ],
+    "rawSealCreatedUtc": "2026-10-21T12:53:27.5297999Z",
+    "selectedSealCreatedUtc": "2026-10-21T12:53:29.4160185Z",
+    "rootRehashUtc": "2026-10-21T12:53:30.6176501Z",
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "uniqueFrozenAndControlIdentities": 786,
+    "allMatchedBeforeFirstBody": true,
+    "firstRootReportReadUtc": "2026-10-21T12:53:37.9690898Z",
+    "beforeBodyToolChunk": "b27fec",
+    "firstReadToolChunk": "c6e98f",
+    "initialSelectorConsole": "ACTUAL CAPTURE RETAINED; 528 BYTES"
+  },
+  "coverageAndConduct": {
+    "frozenFiles": 778,
+    "wholeBodyGrants": 123,
+    "requiredWholeSourceFiles": 43,
+    "uniqueInstalledExcerptFiles": 70,
+    "installedRangeGrants": 189,
+    "reviewerReported": "43 required whole source bodies and all 70 supplied installed API excerpt files read; all 123 whole-file grant identities matched; granted tracked sources matched SourceHead; no actionable source defect",
+    "retainedInputs": 35,
+    "retainedOutputs": 35,
+    "unmatchedInputs": 0,
+    "orphanOutputs": 0,
+    "rootInspectedAllActualInputs": true,
+    "rootInputInspectionToolChunks": [
+      "71e467",
+      "e70375"
+    ],
+    "observed": "Inert source/metadata/hash/clock and permitted pinned read-only Git only; no helper/agent/network/connector/candidate/native/build/test/GUI/Core execution observed",
+    "outputClipMarkerOutputOrdinals": [
+      1,
+      2,
+      5,
+      7
+    ],
+    "wholeArcadeInstructionGrant": "EXPLICIT",
+    "gitattributesWholeGrant": "EXPLICIT",
+    "qualification": "Coverage is reviewer-reported. Output clipping markers at ordinals 1, 2, 5 and 7 and targeted later reads remain retained. No all-byte delivery, consumption, comprehension or universal isolation certification."
+  },
+  "stderrRetention": {
+    "skillIconAndUnsupportedPowerShellSnapshotWarningsRetained": true,
+    "finalRolloutFlushWarningRetained": true,
+    "finalRolloutFlushWarning": "Failed to flush rollout after emitting terminal turn event: thread not found",
+    "sealedRawSessionTerminalEvent": "task_complete",
+    "sealedRawSessionTerminalEventUtc": "2026-10-21T12:53:18.025Z",
+    "all35ToolPairsAndExactPayloadRuntimeAndRawReportPreserved": true,
+    "qualification": "The final rollout-flush warning is retained. The sealed raw session contains the terminal task_complete event, all 35 input/output pairs, exact payload/runtime and complete raw report. These finite observations do not establish universal flush or completeness."
+  },
+  "standingTransmissionConsent": {
+    "status": "APPROVED_UNTIL_EXPLICIT_HUMAN_REVOCATION",
+    "destination": "Configured OpenAI Codex service using existing sign-in",
+    "sha256": "1DA9A9275DA640BA5377507E7E29F33494DA210ECDA39B04C34552DF7CA05D46",
+    "bytes": 927,
+    "excluded": "Credentials, unrelated private data, and author/peer bodies in blind initial inputs",
+    "executionPublicationMergeAuthority": false
+  },
+  "retainedArtifacts": {
+    "rawReport": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/last-message.txt",
+      "bytes": 2073,
+      "sha256": "17A62AA6E6777309BAF1BA410961ACEBAA14EB9D39A3912FC39BFB2E6E47D015"
+    },
+    "rootAdmission": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/root-source-admission.original.json",
+      "bytes": 5439,
+      "sha256": "95DAA7719CB69CA8A06B2CF193D14DD96E576FF81000B0EF3BF1EDFE5F5D68EE"
+    },
+    "rawSeal": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/closed-raw-output-seal.before-body.original.json",
+      "bytes": 4920,
+      "sha256": "189ED471407B91B0D48D674A7329BCFC5963D7560D01FAB21D9F710736514130"
+    },
+    "selectedSeal": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 3996,
+      "sha256": "7B6E1CB70FACC93CFCE0D9B668455D96A46CC378AE901E54F94DFD0F219C1AB5"
+    },
+    "rootBeforeBodyRehash": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/root-independent-before-first-body-rehash.original.json",
+      "bytes": 1852,
+      "sha256": "E40F27C9F27170AF8AD52337EB94FA635C88F475571B6C7D4DF7190D663996F5"
+    },
+    "rootFirstBodyRead": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/root-first-body-read.original.json",
+      "bytes": 253,
+      "sha256": "E3984D45E389815F662DD4B8103737A0446E6201D7FD088A0EACE34C505EDC20"
+    },
+    "finalRuntime": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/runtime-evidence.final.selected.json",
+      "bytes": 5224,
+      "sha256": "780F20DCA9D39829E8C5386C019CE51E1F142638A74A5F3EF441864548DE18C2"
+    },
+    "completeTrace": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/actual-complete-tool-input-output-ledger.json",
+      "bytes": 1240508,
+      "sha256": "28C238A828B665D1684080CEC9FD0370DE686749C1175114584F0BAF8F584B14"
+    },
+    "initialSelectorConsole": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/runtime-initial-selector.console.original.txt",
+      "bytes": 528,
+      "sha256": "57D960EA99598C0B1A37139BAEF4ABD28CB4F7032EB7B213FBF1F9AEAFA69D60"
+    },
+    "ownedJob": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/owned-job-receipt.json",
+      "bytes": 87875,
+      "sha256": "DAC9F7AEEA4938F9F02C641875521504922C0C9ACF06E9631E9F0AEEC373A9CD"
+    },
+    "cliStderr": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/stderr.log",
+      "bytes": 907,
+      "sha256": "F70A9FF3F022196F83161ADC8104F4551BF9FC1518FB7328AD0FC90AEF2A5E06"
+    },
+    "foregroundClosure": {
+      "path": ".local/reviews/E04A1G-source-review/source-073826d-20261021T124141Z-02f7ec/root-observed-foreground-completion.original.json",
+      "bytes": 299,
+      "sha256": "56D8E1E7A3CDEF2A060CFF0CA794BFAFC89F5FBE1E044FE7E285A0E15DC84D09"
+    }
+  },
+  "limits": [
+    "SOURCE prerequisite only; native phase outcomes are intentionally not restated. Each exact phase requires its own ordered root GO.",
+    "No compilation, runtime, graphics, continuous window absence, installed-source/binary correspondence, migration acceptance or final CODE/REQ result follows from SOURCE.",
+    "OWN17 special assurance remains DEFERRED_UNPROVEN; ordinary runtime assertions remain fail-closed. Visible authority zero; Linux UNTESTED.",
+    "Bounded A1E acceptance and all prior raw reviews/failures remain unchanged. Final CODE and a different REQ follow actual closed execution.",
+    "The later factual publication overlay lies outside the exact reviewed head. Auxiliary draft preparation supplies no gate approval.",
+    "The retained final rollout-flush warning is not erased by exit 0 or the finite preserved artifacts; no universal flush or completeness claim is made."
+  ]
+}

@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "recordKind": "CLOSED_FIFTH_SOURCE_AND_FAILED_EXECUTION_FACTS_NOT_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T03:44:17.5040833Z",
+  "sourceHead": "c500f210e59e2db193a76e0339d8ca30a31aa1ec",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "runId": "20261020T024733Z-0781e386",
+  "review": {
+    "role": "SOURCE",
+    "status": "SOURCE_PASS",
+    "sessionId": "01a1573f-f7ea-7051-8780-ce4a1611ce9e",
+    "report": {
+      "path": "docs/plans/research/2026-10-20-e04a-source-review-r5.md",
+      "bytes": 4468,
+      "sha256": "3A369799746D6C5D46DC2CAD59A3FD554576E676D3B403DA3F63D55D93978C4C"
+    },
+    "rawReportCopiedByteExact": true,
+    "newCandidateReviewRequiredForMaterialRepair": true
+  },
+  "sourceGateAtCreation": {
+    "schemaVersion": 1,
+    "recordKind": "ROOT_BOUNDED_E04A1E_SOURCE_GATE_WITH_EXPLICIT_EVIDENCE_QUALIFICATIONS",
+    "createdUtc": "2026-10-20T03:26:47.2583275Z",
+    "sourceHead": "c500f210e59e2db193a76e0339d8ca30a31aa1ec",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "runId": "20261020T024733Z-0781e386",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+    "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+    "sourceGate": "PASS_FOR_BOUNDED_A1E_EDITOR_ONLY",
+    "rawReport": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c500f21-20261020T024733Z-0781e386\\last-message.txt",
+      "bytes": 4468,
+      "sha256": "3A369799746D6C5D46DC2CAD59A3FD554576E676D3B403DA3F63D55D93978C4C"
+    },
+    "rawReportVerdict": "SOURCE_PASS_UNCHANGED",
+    "runtime": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c500f21-20261020T024733Z-0781e386\\runtime-evidence.final.selected.json",
+      "bytes": 9415,
+      "sha256": "AA5AA55C39FF2520B30BCFB18B666EB93780CEEE6A67D8CBE52DECE590254285"
+    },
+    "freeze": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c500f21-20261020T024733Z-0781e386\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+      "bytes": 545968,
+      "sha256": "4689FC27C01422BA35726D487E477D0F6A9E0DB4F60C7F86A1BDFBF49F8F0351"
+    },
+    "inputs": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c500f21-20261020T024733Z-0781e386\\actual-tool-input-ledger.json",
+      "bytes": 140696,
+      "sha256": "6CF32682D66FD3FB4C4C302A48ADD0E7FA3EA807FEE4E1ED38BC592E46E9C900"
+    },
+    "completeToolTrace": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c500f21-20261020T024733Z-0781e386\\actual-complete-tool-input-output-ledger.json",
+      "bytes": 2448378,
+      "sha256": "2FFEF60196A1C98846050289158046213AE13FFED0FBC026EC41C586B7291548"
+    },
+    "bodyExposure": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\closed-c500f21-body-output-20261020T031623Z\\body-output-exposure-candidates.OPERATOR_ONLY.json",
+      "bytes": 6348882,
+      "sha256": "1BE99341953B1B87B663E9A761292460E51BDB1FD9CDA03EC0AEEE9991CA0ECB"
+    },
+    "ordinaryScopeAudit": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\closed-c500f21-ordinary-audit-20261020T031623Z\\actual-scope-output-audit.OPERATOR_ONLY.json",
+      "bytes": 347591,
+      "sha256": "B01E65E87F7638C2F8B3DE7269681551F6CD8F24964870E8E6CD4820A1A08E8F"
+    },
+    "structuredAudit": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\closed-c500f21-structured-metadata-audit-20261020\\structured-metadata-audit.PROPOSED.OPERATOR_ONLY.json",
+      "bytes": 63864,
+      "sha256": "F125172AF9D2E587357B20E4F98055A770D7417377EDBD60D8E9976F99DFBA4F"
+    },
+    "rootInspection": {
+      "all902MaterialRelationshipRowsDisclosed": true,
+      "toolPairingAnomalies": 0,
+      "all78BodyFilesExactNumberedExposure": true,
+      "priorVerdictOrUnselectedBodyDisclosureFound": false,
+      "descriptorRows": 902,
+      "bodyDisplayMismatches": [
+        {
+          "recovery": 9,
+          "call": 8
+        },
+        {
+          "recovery": 27,
+          "call": 26
+        }
+      ],
+      "dependencyPatterns": 31,
+      "bodyMissingRows": 0,
+      "exactRows": 26434,
+      "all112ActualInputsRead": true,
+      "selectedMetadataRecords": 13,
+      "modulePatterns": 295
+    },
+    "qualifiedRendering": {
+      "boundedMateriality": "Independent actual100 derives the same245-member conservative upper bound and zero reachable PythonRequirements or disabled-six. Four affected dependency parents and five Python rows are outside it. ProgramAllowList use is guarded by Program target at bound ModuleDescriptor source573/649; A1E is Editor. UBT plugin lookup explicitly ignores case. These facts support the bounded independent material assessment; they do not establish universal runtime JSON-key lookup or full literal text display.",
+      "opaquePythonSha256TokensNotDisplayed": 203,
+      "moduleKeyCaseRows": [
+        146,
+        826,
+        854,
+        856,
+        860
+      ],
+      "noBlanketLiteralLosslessClaim": true,
+      "runtimeJsonKeyLookupCaseSemantics": "UNVERIFIED_OUTSIDE_THIS_BOUNDED_EDITOR_DISPOSITION",
+      "originSelectedLiteralAndPresenceChecks": "All902 compared case-sensitively in85->86; errors[] and explicitNullValues[]",
+      "pythonHashRows": [
+        299,
+        314,
+        315,
+        334,
+        420
+      ],
+      "dependencyNameCaseRows": [
+        195,
+        207,
+        310,
+        667
+      ]
+    },
+    "diagnostics": {
+      "operatorDisplayTruncations": "Retained; no candidate/reviewer input alteration",
+      "universalShellExitStatuses": "UNVERIFIED; actual output/known recovery reviewed instead",
+      "truncatedReviewCalls": [
+        3,
+        5,
+        8,
+        75,
+        81,
+        82,
+        87,
+        88,
+        102,
+        103
+      ],
+      "queryFailures": [
+        {
+          "recovery": [
+            85,
+            86
+          ],
+          "call": 84
+        },
+        {
+          "origin": 105,
+          "recovery": 108,
+          "call": 106
+        },
+        {
+          "recovery": 108,
+          "call": 107
+        }
+      ]
+    },
+    "isolation": {
+      "lowerAppMemoryOsIsolation": "UNVERIFIED",
+      "allObservedReadOnlyNever": true,
+      "byteIdenticalPrompt": false,
+      "equalAfterTrailingCrLfRemoval": true,
+      "freshExec": true,
+      "contexts": 2,
+      "memoryMetadata": "disabled",
+      "configuredProvider": "openai",
+      "additionalTrailingCrLfBytes": 2,
+      "effort": "ultra",
+      "model": "gpt-6.1-sol"
+    },
+    "ownedJob": {
+      "pid": 35908,
+      "aggregateTotal": 761,
+      "exitCode": 0,
+      "finalActive": 0,
+      "elapsedSeconds": 1002.7109132,
+      "cleanupConfirmed": true,
+      "universalDescendantIdentity": "UNVERIFIED"
+    },
+    "rootDecision": "Accept the unchanged independent SOURCE_PASS for this A1E Editor source gate with the exact rendering/diagnostic limits above. No criteria waived, partial report promoted, retrospective policy amendment or runtime proof claimed. The independent material graph assessment already covers the bounded target; final different CODE/REQ and A1G remain required.",
+    "ownerExecutionBasis": "OWN13 continuing the bounded migration plan; each actual phase still requires its own exact root GO",
+    "nativeAuthorityCreated": false,
+    "allEightPhases": "NOT_RUN",
+    "visibleWindows": 0,
+    "publicationOrMergeAuthority": false,
+    "fallbackB": "PROPOSAL_ONLY_NOT_ADOPTED"
+  },
+  "executionClosure": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c500f21-20261020T024733Z-0781e386\\root-execution-closure.original.json",
+    "bytes": 1262755,
+    "sha256": "03A344FB8D2AF6DD65D7562394068EF9B8ED5F2D8708F5F14555458DF1900CC0"
+  },
+  "executionAuthorityState": "CLOSED_FAILED_CONFIGURE_DO_NOT_REUSE",
+  "phases": {
+    "Preflight": "CLOSED_PASS",
+    "SupervisorControls": "CLOSED_PASS_SIX_EXPECTED_RAW_FAILURES_RETAINED",
+    "Configure": "CLOSED_FAIL_NO_COMPLETION",
+    "DependencyBuild": "NOT_RUN",
+    "EditorBuild": "NOT_RUN",
+    "Discovery": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN"
+  },
+  "configure": {
+    "producerResult": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\configure\\result.json",
+      "bytes": 8775683,
+      "sha256": "AD29ABD2460E8946E6D253DA5230AE9F4376F2F71275ADB6FB968CD81B5AFB2C"
+    },
+    "producerStatus": "FAIL_PRESERVATION_OR_OUTPUT_VALIDATION",
+    "producerExecutionPassed": false,
+    "completionExists": false,
+    "elapsedSeconds": 599.9763862,
+    "primaryFailure": {
+      "stage": "Configure",
+      "type": "System.Management.Automation.RuntimeException",
+      "message": "E04A1_ROOT_FAILED_OR_CLEANUP_UNVERIFIED"
+    },
+    "secondaryErrors": [
+      {
+        "stage": "post-phase-preservation",
+        "type": "System.Management.Automation.RuntimeException",
+        "message": "E04A1_PHASE_DEADLINE_EXCEEDED"
+      }
+    ],
+    "process": {
+      "pid": 32412,
+      "creationFileTime": 134369407501949798,
+      "exitCode": 1,
+      "exitConfirmed": true,
+      "assignedBeforeResume": true,
+      "resumed": true,
+      "timedOut": true,
+      "cleanupConfirmed": true,
+      "budgetSeconds": 576,
+      "elapsedSeconds": 571.0514204,
+      "primaryFailure": {
+        "stage": "owned-root",
+        "type": "System.TimeoutException",
+        "message": "Owned execution exceeded its reserved running budget",
+        "win32Error": null,
+        "syntheticFault": false,
+        "observedUtc": "2026-10-20T03:42:01.2379202Z"
+      },
+      "secondaryErrors": [],
+      "lastJobAccounting": {
+        "stage": "progress",
+        "observedUtc": "2026-10-20T03:42:01.2374228Z",
+        "querySucceeded": true,
+        "totalProcesses": 8,
+        "activeProcesses": 0,
+        "totalTerminatedProcesses": 0,
+        "totalUserTime100ns": 6406250,
+        "totalKernelTime100ns": 6093750,
+        "thisPeriodUserTime100ns": 6406250,
+        "thisPeriodKernelTime100ns": 6093750,
+        "totalPageFaultCount": 73018
+      }
+    },
+    "rawReceipt": {
+      "expected": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\configure\\configure.process.json",
+        "bytes": 7773525,
+        "sha256": "5b1d7ecc2bcf0f7179da8e31e9caf8580d0ca191bf5fc5a44878de4f4beed914"
+      },
+      "actual": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\configure\\configure.process.json",
+        "bytes": 7773525,
+        "sha256": "5B1D7ECC2BCF0F7179DA8E31E9CAF8580D0CA191BF5FC5A44878DE4F4BEED914"
+      },
+      "match": true
+    },
+    "stdout": {
+      "expected": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\logs\\configure.stdout.log",
+        "bytes": 101,
+        "sha256": "b13c840c60fb4a08f1ca9e8ab63a7a27dc27d476b329aa70bfc3970803d8a5d8"
+      },
+      "actual": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\logs\\configure.stdout.log",
+        "bytes": 101,
+        "sha256": "B13C840C60FB4A08F1CA9E8AB63A7A27DC27D476B329AA70BFC3970803D8A5D8"
+      },
+      "match": true
+    },
+    "stderr": {
+      "expected": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\logs\\configure.stderr.log",
+        "bytes": 1364,
+        "sha256": "b987f635f2a8232042cee5f541e1797aeff20c3522a9ec321dd829a76196de6a"
+      },
+      "actual": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\logs\\configure.stderr.log",
+        "bytes": 1364,
+        "sha256": "B987F635F2A8232042CEE5F541E1797AEFF20C3522A9EC321DD829A76196DE6A"
+      },
+      "match": true
+    },
+    "rootExitUtc": "2026-10-20T03:32:31.0537393Z",
+    "exitObservedUtc": "2026-10-20T03:32:31.0569183Z",
+    "rootExitWhileMembersActive": true,
+    "rootExitNonzeroObservedBeforeTimeout": true,
+    "lastRemainingMemberIdentity": "UNVERIFIED_NOT_COLLECTED",
+    "diagnosis": "Generated CMakeRCCompiler.cmake rejected unescaped backslashes in the explicit SDK rc.exe path: Invalid character escape \\P. Root exited1 in about0.859 seconds. One private job member remained; supervisor waited for job zero until reserved shutdown, terminated the job, retained root exit1 and timeout, and confirmed cleanup. The phase preservation deadline then failed.",
+    "producerRetainedArtifactCount": 0,
+    "missingProducerPostFields": [
+      "sourceAfter",
+      "stageAfter",
+      "projectPluginCatalogAfter",
+      "fixturesAfter"
+    ],
+    "postCloseObservation": {
+      "freezeFilesChecked": 1885,
+      "freezeMismatches": 0,
+      "stagedSourceFilesChecked": 33,
+      "stageMismatches": 0,
+      "stageExactMembership": true,
+      "fixtureFilesChecked": 51,
+      "fixtureMismatches": 0,
+      "settingsProducerPairsMatchingPreflight": 9,
+      "rawReceiptResultDifferences": [],
+      "partialFilesHashed": 119,
+      "qualifier": "These are root post-close observations, distinct from missing producer preservation fields and its empty retained-artifact inventory. They do not turn the failed phase into PASS."
+    }
+  },
+  "preflight": {
+    "status": "PASS",
+    "completion": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\preflight\\completion.json",
+      "bytes": 876,
+      "sha256": "47466518C1065B58F8683796861C4FD216C1F5E4BA972F84B76D612B9B22F96E"
+    },
+    "result": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\preflight\\result.json",
+      "bytes": 91984,
+      "sha256": "C6D4243B48FFC5AC49052355FB85E115C3225280E73FE45E909C57AC096F326E"
+    },
+    "nativeRoots": 0,
+    "manualInitialContextRefusal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-c500f21-20261020T024733Z-0781e386\\root-preauthorization-context-refusal.original.json",
+      "bytes": 1176,
+      "sha256": "2FBEC3AABB963064EC390AE70D18BDF21F6D7F5F7AF80D724137F50A88F379B5"
+    },
+    "contextRefusalQualifier": "Initial sandbox-localsettings refusal occurred before authority admission/run allocation. One normal-desktop admitted phase then passed; no replay of an admitted phase."
+  },
+  "supervisorControls": {
+    "status": "PASS",
+    "cases": 6,
+    "groups": 3,
+    "ownedRoots": 5,
+    "completion": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\supervisorcontrols\\completion.json",
+      "bytes": 913,
+      "sha256": "0F532014633AB58ACB82D680081BD49BA03778774E74C797767B4811A390D528"
+    },
+    "result": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1\\20261020T024733Z-0781e386\\supervisorcontrols\\result.json",
+      "bytes": 185819,
+      "sha256": "E674198E5F639709CDD5ECA2FE27ADC40B5D9BCFEC02AE418F362B3032D12361"
+    },
+    "rawFailureControlsPreserved": true,
+    "allOwnedRootsExitAndCleanupConfirmed": true,
+    "finalActiveProcessesZero": true,
+    "qualifier": "Six supervisor control cases are separate from the unexecuted native parser suites. Expected raw timeout/injected failures remain raw FAIL."
+  },
+  "repair": {
+    "status": "PATH_REPAIR_AUTHORED_OFFLINE_21_PASS_PENDING_FRESH_SOURCE",
+    "planned": "Normalize explicit CMake path serialization without relaxing frozen absolute tool identity or actual compile flag checks. Assess fail-fast nonzero-root cleanup separately; no timeout-budget increase.",
+    "newRunRequired": true,
+    "affectedSourceReviewRequired": true,
+    "wrapper": {
+      "path": "scripts/migration/Invoke-E04AProfileProof.ps1",
+      "bytes": 158769,
+      "sha256": "642FD17AE0E46F179C694CBF593365446F989E7754F01D37BD7CB4942EB08E14"
+    },
+    "changedFunctions": [
+      "CMake-Options",
+      "Check-CMake"
+    ],
+    "addedFunctions": [
+      "CMake-Path"
+    ],
+    "otherFunctionsByteExact": 67,
+    "supervisorAndBudgetsUnchanged": true,
+    "astErrors": 0,
+    "diagnosis": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/configure-supervisor-diagnostic-20261020/closed-configure-supervisor-facts.PROPOSED.OPERATOR_ONLY.json",
+      "bytes": 36654,
+      "sha256": "45C051B66B327F4B3A4FA3F40121E21806FA9B101646AE13A818752C3B38B395"
+    },
+    "successfulRootLingeringOutcome": "UNVERIFIED_AFTER_PATH_REPAIR",
+    "additionalPrimaryApiScope": [
+      {
+        "path": "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CMakeDetermineRCCompiler.cmake",
+        "bytes": 2341,
+        "sha256": "17F144A94B07F6340A6A382F0762F3118A3902DFBA73D2F563B671131DEE9056",
+        "ranges": [
+          "1-60"
+        ]
+      },
+      {
+        "path": "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CMakeRCCompiler.cmake.in",
+        "bytes": 276,
+        "sha256": "0E19BC399558A8C69A9495BD493A80E3B29FDD3837A1CEA8185EBDD8D40557AF",
+        "ranges": [
+          "1-6"
+        ]
+      },
+      {
+        "path": "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CMakeDetermineCompiler.cmake",
+        "bytes": 7671,
+        "sha256": "B08AB96ABDD4A814A5150968FA88552687974CF17008083EC56C70DA5C90D572",
+        "ranges": [
+          "115-157"
+        ]
+      }
+    ],
+    "supervisorFailFastProposal": "SOURCE_ONLY_RECOMMENDATION_NOT_ADOPTED; current supervisor and normal-root lingering semantics remain unchanged. Original root nonzero, timeout and final-zero cleanup remain separately recorded.",
+    "offlineControls": {
+      "status": "PASS",
+      "cases": 21,
+      "failedCases": 0,
+      "exitCode": 0,
+      "elapsedSeconds": 2.726762,
+      "source": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\configure-path-repair-20261020\\Invoke-PureCMakeGuardControls.PROPOSED.ps1",
+        "bytes": 12019,
+        "sha256": "53905384F1664F7F8066AFA98A2602563E9E5D321F748812EC6B4E0D5BEFECA4"
+      },
+      "report": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\configure-path-repair-20261020\\offline-control-runs\\20261020T035045Z-1d7a592f\\pure-cmake-guard-controls.result.json",
+        "bytes": 8636,
+        "sha256": "C0C5B8B030513981292B11D394A9DAF9CFCECCE4843B56879824AAD726A25051"
+      },
+      "selectedExactFunctions": 13,
+      "nativeProof": false,
+      "qualification": "Full Check-CMake exercised on explicitly synthetic owned cache/commands/ninja fixtures, using unchanged real path/read/hash helpers and the five actual frozen tool hashes. No CMake/compiler/build/phase/native execution; successful-root lingering behavior remains unproved."
+    },
+    "apiExtractionCorrection": "Before the next packet was frozen or launched, root checked physical ReadAllLines counts60/6 and removed proposed split-created phantom terminal rows61/7 from the two new CMake RC excerpts. The old inert proposal is retained; corrected artifacts must be separately bound. Normalization source115-157 is unchanged; actual new excerpt membership/rows derive at assembly."
+  },
+  "nativeSuiteCount": null,
+  "nativeInputCount": null,
+  "nativeAttemptCount": null,
+  "plannedCounts": {
+    "suites": 8,
+    "uniqueInputs": 38,
+    "attempts": 45
+  },
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "a2ScenariosRequired": 727,
+  "fullA1Acceptance": false,
+  "finalCodeReview": "NOT_RUN",
+  "differentFinalRequirementsReview": "NOT_RUN",
+  "visibleWindows": 0,
+  "publicationOrMergeAuthority": false,
+  "limits": [
+    "Raw SOURCE_PASS applies only to executed c500f21 A1E Editor source, not subsequent material repairs.",
+    "A1G genuine exception-disabled runtime caller remains required.",
+    "A2 retains727 compatibility scenarios; full profile/HUD/render/input, Linux and packages remain open.",
+    "No native parser suite ran in this failed run; planned counts are not execution counts.",
+    "No descendant identity, universal OS isolation or production responsiveness is established."
+  ],
+  "checkpointValidation": {
+    "rawReportExactSha256": "3A369799746D6C5D46DC2CAD59A3FD554576E676D3B403DA3F63D55D93978C4C",
+    "wrapperAstErrors": 0,
+    "otherFunctionsByteExact": 67,
+    "localTargetsChecked": 332,
+    "missingLocalTargets": 0,
+    "planCarriageReturns": 0,
+    "factualJsonDuplicateOrCaseCollidingKeys": 0,
+    "newCandidateIndependentSource": "NOT_RUN",
+    "nativeProofAfterRepair": "NOT_RUN",
+    "finalCodeAndDifferentReq": "NOT_RUN"
+  }
+}

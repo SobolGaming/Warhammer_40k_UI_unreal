@@ -1,0 +1,13 @@
+# A2-P0 exact-trigger capture failure
+
+Status: SOURCE_PASS_EXACT_TRIGGER_CAPTURE_FAILED. Source c62c5a83900f2da984b5a41303c2a672d6f3d8ec / run 20261023T195853Z-637ad147 retains its admitted exact-source PASS. The separately authorized hidden, normal-desktop-requested capture closed exit 1; no capture file or profile was produced. [SOURCE prerequisite](2026-10-23-e04a2-p0-source-prerequisite-c62c5a8.md); [failure evidence](../evidence/2026-10-23-e04a2-p0-exact-trigger-capture-failure.json).
+
+The successful complete-size loop query that selected the unchanged guard is retained directly: root PID 35520, total/active/terminated 2/2/0, 48 bytes requested/returned and monotonic interval 0.0491098–0.0491188 seconds. Initial total/active was 1/1; final was 2/0. This closes only the earlier trigger-observation gap. Cause and additional process identity remain UNATTRIBUTED; collector entry is UNPROVEN.
+
+These accounting counters do not prove that two payload processes ran or that the active-process limit failed. Microsoft includes failed associations in lifetime accounting and may temporarily include them in active accounting. [Accounting documentation](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_accounting_information), [limit documentation](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information), retrieved 2026-10-23. No Python, Core or Windows-helper attribution follows without identity evidence.
+
+The strict guard remained fatal. TerminateJobObject yielded confirmed exit 0xA2F00001; process cleanup was confirmed in 0.0030999 seconds, final active 0, process elapsed 0.0528422 seconds. Both Python streams were complete and empty. The outer worker exit 1 was confirmed in 1.4310067 seconds with no timeout or forced outer kill. Its positive joined cleanup-success flag is false because the phase failed; the distinct process receipt confirms cleanup. Add-Type completed and Run reached resume; no broader build proof is implied.
+
+Root retained four files/10,815 bytes, no unexpected paths, and matched all 154 frozen source inputs plus four outputs after closure. Raw receipts, the original d0 failure and SOURCE verdicts remain unchanged. Execution authority is closed, with no retry, guard relaxation, repair or new diagnostic execution.
+
+OWN18 requires publication/checkpoint/push/exact-gh backup before actual repair, rebinding or new diagnostic execution. Finite read-only own-job PID-list design may continue. Revision 131 bounded A1G acceptance/history is preserved; OWN17 deferred/unproven, Linux UNTESTED and full A2/727/G-IMPLEMENT/final CODE/REQ gates remain open. The renewed 19:35 visible HOLD remains operative until explicit owner approval.

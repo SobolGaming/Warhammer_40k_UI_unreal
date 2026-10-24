@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04A1E_ROUTINE_CONSUMER_REPAIRS",
+  "revision": 77,
+  "status": "ROUTINE_CONSUMERS_REPAIRED_FOCUSED_SOURCE_PENDING",
+  "closureCheckpoint": "e07c436c0f067f4c36de372aa5287fe176a405b3",
+  "closureBackup": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\null-response-source-refresh-72af15d\\root-closure-remote-backup-e07c436.original.json",
+      "bytes": 641,
+      "sha256": "1B517DB395C050A7632FBCFEAE34B9CAD0C0FEA5D41FCED9DA98737173EFC5B4"
+    },
+    "verifiedUtc": "2026-10-21T00:20:57.5467895+00:00",
+    "branch": "codex/e02-world-input-proof",
+    "remote": "origin",
+    "remoteRef": "refs/heads/codex/e02-world-input-proof",
+    "verifiedRemoteHash": "e07c436c0f067f4c36de372aa5287fe176a405b3",
+    "qualification": "Verified closure checkpoint before these repairs; not a backup or review of the new uncommitted repair bytes."
+  },
+  "rootAppliedRecord": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\null-response-source-refresh-72af15d\\root-routine-consumer-repairs-applied.original.json",
+    "bytes": 729,
+    "sha256": "1577407B314AD82A8D6FC373949C95B84BE2BE816EE2CBB5D2F37743925A3CBB"
+  },
+  "appliedUtc": "2026-10-21T00:21:13.9312949+00:00",
+  "wrapper": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+    "beforeBytes": 264975,
+    "beforeSha256": "AAEF3EF33C3FD6115010F1153529308B3C82695754DE2982852E41141EFA9370",
+    "afterBytes": 265025,
+    "afterSha256": "500C814859FC80705F99936A232D88ACDF3E1DDCB8FC5E8471FADD9C1D360873",
+    "byteDelta": 50,
+    "changedLines": 2,
+    "changedFunctions": [
+      "Require-ObjSrcMapRulesError",
+      "Check-Native"
+    ],
+    "astErrors": 0,
+    "completeFunctions": 101
+  },
+  "repairs": [
+    {
+      "function": "Check-Native",
+      "change": "Definition count assertion40 to43, matching the current input union."
+    },
+    {
+      "function": "Require-ObjSrcMapRulesError",
+      "change": "Require strict string-empty top-level syntheticFault, consistent with the common producer and ordinary consumer."
+    }
+  ],
+  "scope": "Only two routine wrapper consumers changed. No C++/fixture/producer/root-limit/bypass change; runtime assertions remain fail-closed.",
+  "sourceExecutionOrTestsAfterRepair": false,
+  "newTechnicalHead": null,
+  "newPublicationHead": null,
+  "newRunId": null,
+  "focusedSource": {
+    "contexts": 1,
+    "deadlineSeconds": 1800,
+    "status": "PENDING_NEW_EXACT_FREEZE_AND_PASS",
+    "packet": "docs/plans/research/2026-10-21-e04a-functional-proof-packet.md",
+    "nativePhaseGoStillRequired": true
+  },
+  "componentPlan": {
+    "inputIds": 43,
+    "generatedRecipes": 33,
+    "attempts": 50,
+    "suites": 8
+  },
+  "native": {
+    "phaseCount": 8,
+    "allResults": "NOT_RUN",
+    "nativeRunRoot": false,
+    "visibleCount": 0
+  },
+  "stillNotRun": [
+    "CSharp4",
+    "Whole18 build-boundary controls",
+    "Full SupervisorControls phase"
+  ],
+  "OWN17": "ACTIVE_UNCHANGED; special certification deferred, never PASS. Runtime failures must stop.",
+  "history": "Revision76 closure pair remains immutable: five raw CHANGES_REQUESTED/480 pairs/zero admissions. No old GO/PASS transfers.",
+  "finalGates": "Fresh focused SOURCE before native phase GO; final independent CODE and different REQ after actual execution/evidence freeze; A1G/A2/plain-DEL/Linux/later gates remain open.",
+  "sourceApproval": false,
+  "nativeExecutionGo": false,
+  "finalAcceptance": false
+}

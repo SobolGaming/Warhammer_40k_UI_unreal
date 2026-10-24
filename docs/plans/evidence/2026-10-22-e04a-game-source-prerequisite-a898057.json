@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_E04_A1G_SOURCE_PREREQUISITE_PUBLICATION",
+  "status": "PASS_ADMITTED_SOURCE_PREREQUISITE_ONLY",
+  "sourceHead": "a8980572ca05e9b1a32880915e7b8cbf5cb0d337",
+  "comparisonBase": "2c99fc3288f846593613e899e177ba86f9ee3537",
+  "runId": "20261022T192551Z-711fa6f6",
+  "role": "E04_GAME_COMPONENT_SOURCE",
+  "admittedUtc": "2026-10-22T19:40:04.0701422Z",
+  "rootAdmission": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\root-source-admission.original.json",
+    "bytes": 5678,
+    "sha256": "91B425FF83F0BF4FAFC378B94FC6D30BB677D5AAC7366A6765E5400F7697470C"
+  },
+  "sourceFreezeManifest": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\common-a898057-20261022T192551Z-711fa6f6\\runtime-freeze\\source-freeze-manifest.json",
+    "bytes": 216365,
+    "sha256": "63869A35DB55E90AD2DAE8237205979A8C913C6CAA2527DA97D8A2CCEF1256B0"
+  },
+  "normativeRequirement": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 27522,
+    "sha256": "DF666440AC81B64F3D97430209BB289B401FB447F3A5C55F115655C33668D49C"
+  },
+  "report": {
+    "original": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\last-message.txt",
+      "bytes": 1875,
+      "sha256": "689B97BDFD25B7ADB7ABAAA1DA26CA0E097C801307CBC5475A8EC557D245D64B"
+    },
+    "publishedRelativePath": "docs/plans/research/2026-10-22-e04a-game-source-review-a898057.json",
+    "readableExactCopyRelativePath": "docs/plans/research/2026-10-22-e04a-game-source-review-a898057.md",
+    "rawVerdict": "PASS",
+    "actionableFindings": 0,
+    "coverage": "Reviewer-reported: all 44 required whole-source bodies, clean norm/instructions and relevant granted installed excerpts read. The report states all 152 whole-body grant and 81 installed-origin identities matched, with required-source recheck and no granted repository body differences from SourceHead. These are report claims, not root certification of all-byte delivery, model consumption or comprehension.",
+    "publishedRepresentation": "UTF8Base64_ENCODED_ORIGINAL_REPORT",
+    "textEncoding": "UTF-8",
+    "transportEncoding": "Base64",
+    "exactOriginalBytesRecoverable": true,
+    "publishedFileBytesEqualOriginal": false,
+    "readableMarkdownBytesEqualOriginal": true,
+    "encodingQualification": "The LF JSON wrapper contains the exact original 1875 UTF-8 report bytes as UTF8Base64. Its wrapper bytes differ from the report; the accompanying LF Markdown view copies the raw report bytes unchanged."
+  },
+  "runtime": {
+    "sessionId": "01a16515-15dd-71f0-8e0d-83aa72296a02",
+    "turnId": "01a16515-193c-7a20-9754-aaa42461b6de",
+    "cliVersion": "0.163.0-alpha.10.2",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "contexts": 1,
+    "distinctTurnIds": 1,
+    "contextMismatchCount": 0,
+    "sandbox": "read-only",
+    "approvalPolicy": "never",
+    "memoryMode": "disabled",
+    "lowerMemoryFeatureEnforcement": "UNVERIFIED",
+    "resume": false,
+    "fork": false,
+    "modelOverride": null,
+    "exactPromptPlusOneCrlf": true,
+    "receivedUtf8Bytes": 6128,
+    "receivedSha256": "F6D2AF5F3206A4F1D30326793BD23808D3D62517489A617B655798EA725FF481",
+    "selectedEvidence": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\runtime-evidence.final.selected.json",
+      "bytes": 5224,
+      "sha256": "7B3855129E6BD7DAC8611F7A7E5A20C652D9E3BFF421FE7B65232E16FB43664C"
+    },
+    "limits": "All current own serialized turn contexts and selected metadata, not runtime internals/OS or semantic-delivery certification. Model/effort are observed, not overridden. Initial count is provisional; no changing whole-session hash. No tool input/output values or prompt/base-instruction bodies exported. Requested app/multi-agent/memory settings are not enforcement proof; prior supplement observed delegation despite multi-agent=false. Root must inspect actual tool conduct and preserve all mismatches; any child/helper use is outside this SOURCE assignment."
+  },
+  "reviewClosure": {
+    "workerPid": 37404,
+    "elapsedSeconds": 548.1590703,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "finalJobTotal": 378,
+    "finalJobActive": 0,
+    "processReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\owned-job-receipt.json",
+      "bytes": 112785,
+      "sha256": "2B8AB65C085FB4D094EE4202B365B9D33AA262618A906DBD90E9A9924F793FF1"
+    }
+  },
+  "beforeFirstBody": {
+    "rootRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 1852,
+      "sha256": "89C1ED8FBAAE29603D2E809DD07695E15CAFF53623F5852D422FE5F000A3AEDA"
+    },
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\closed-raw-output-seal.before-body.original.json",
+      "bytes": 4921,
+      "sha256": "1DB9F3735F3E1CD3FE8C5EBAEFB966D409937E078E61534102A821C334423E7B"
+    },
+    "selectedSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 3996,
+      "sha256": "B4BD20F6A55D1EF53AF3B8DCEEB170C9C27B0D31002929886FE634AB00187EBA"
+    },
+    "firstBodyMarker": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\root-first-body-read.original.json",
+      "bytes": 366,
+      "sha256": "EFDAF11DFAFD69C7A02F1535865256B60BB89EBD9945061FA8D4DCC2113A9193"
+    },
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "frozenAndControlIdentities": 835,
+    "allMatched": true,
+    "rehashCreatedUtc": "2026-10-22T19:37:36.6202374Z",
+    "firstRootReportReadUtc": "2026-10-22T19:37:47.3185586Z",
+    "order": "Actual foreground closure; raw 12 seal; final extraction and selected 8 seal; root independent 835 GO/manifest-inclusive identities rehash; first report/tool-value body.",
+    "foregroundClosureTool": "9c94e7",
+    "sealAndRehashTool": "060218",
+    "firstReadTool": "a53a1c"
+  },
+  "conduct": {
+    "rootInspectedAllInputs": true,
+    "inputInspectionTools": [
+      "98e5ea",
+      "09a594",
+      "fead22"
+    ],
+    "metadataInspectionTools": [
+      "30b101",
+      "060218",
+      "5f9382",
+      "fcf6a1",
+      "f571dd"
+    ],
+    "inputs": 51,
+    "outputs": 51,
+    "unmatchedInputs": 0,
+    "orphanOutputs": 0,
+    "observedToolNames": [
+      "exec"
+    ],
+    "clippedOutputOrdinals": [
+      1,
+      3,
+      5,
+      7,
+      8
+    ],
+    "observed": "All51 actual inputs inspected: inert source/data/hash/clock and pinned read-only Git comparisons. No candidate/helper/native/build/test/GUI/Core execution, edit, network/connector, agent or peer-report body access observed.",
+    "stderr": "Retained skill-icon and unsupported PowerShell snapshot warnings only; no final flush warning. Lower-level memory/feature enforcement stays UNVERIFIED.",
+    "rootReadQualification": "Reviewer reports all 44 required source bodies and relevant excerpts read. Transport clipping at input ordinals 1, 3, 5 affected metadata/instruction containers; later selected fields and clean governing03/consent reads are preserved. Material clips at 7/8 affected caller 318..324 and Build.cs 255 onward; exact caller 315..327 and Build 255..end reads at 8/9 recovered them. No all-byte delivery/model consumption/comprehension or universal restriction certificate.",
+    "limits": "Root actual 51-input inspection and selected retained-output observations are attributed to the admission record. This auxiliary publication preparation does not repeat the entire conduct inspection or certify all-byte delivery, source consumption, comprehension, universal completeness or isolation."
+  },
+  "preReviewPreparationFailure": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a898057-20261022T192600Z-8e3e13\\root-pre-launch-file-argument-failure.original.json",
+      "bytes": 631,
+      "sha256": "791BDAC832CE43757E98825227EFC331BEADE47DCDC3F85ABF69E97411A5C5DF"
+    },
+    "stage": "PowerShell -File resolution before launcher script execution",
+    "exitCode": 1,
+    "reviewerStarted": false,
+    "authorityConsumed": false,
+    "correction": "Use the exact absolute launcher path from the existing frozen controls; no control/source changes",
+    "qualification": "Initial relative -File resolution failed before launcher execution. Corrected absolute path launched the one recorded reviewer context; this is not a second SOURCE/native execution or an ignored failed review."
+  },
+  "separatePostAdmissionPureControls": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-trace-output-repair-root-20261022\\trace-policy-controls.stdout.original.json",
+      "bytes": 1071,
+      "sha256": "2C7702FF9CB17348F7B49A71133B3ED2D1CA5587F5F1A0CF4738164038EEC7DD"
+    },
+    "toolChunk": "6c6351",
+    "recordKind": "E04_A1G_PURE_TRACE_DELTA_REGRESSION_CONTROLS",
+    "wrapperSha256": "C1C006E5B51D77AFB6225D149B8B97A3C3089F22AF0B62CEFD6C2B32F71B16F9",
+    "passed": 7,
+    "caseCount": 7,
+    "scope": "Pure synthetic metadata only. No live filesystem capture, recovery-copy, source review, build, process, trace writing or end-to-end assurance.",
+    "timing": "AFTER_SOURCE_ADMISSION",
+    "sourceReviewExecution": false,
+    "nativeExecution": false,
+    "qualification": "Seven synthetic pure metadata controls were run separately after SOURCE admission. They were NOT_RUN at admission and are not SOURCE reviewer execution or native/end-to-end evidence."
+  },
+  "nativeScope": "All native/phase results remain outside this SOURCE-only publication. Each exact phase requires separate root GO. This record grants no phase PASS, runtime acceptance or retroactive review of later metadata.",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "limits": "SOURCE prerequisite only: no build, cook, stage, native, graphics, installed-source/binary correspondence, continuous window-absence or migration acceptance. Historical failures remain unchanged; final fresh CODE and different REQ follow actual successful closed execution. This proposal grants no retry, successor phase, acceptance or permission.",
+  "reviewConsent": "Perpetual private source/API review consent remains unchanged."
+}

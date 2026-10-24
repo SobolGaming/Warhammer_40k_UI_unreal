@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E02_CLOSED_AFFECTED_SOURCE_CHANGES_FACTUAL_RECORD_NOT_ACCEPTANCE",
+  "recordedUtc": "2026-10-19T20:16:43.674497+00:00",
+  "sourceHead": "c9a5ac5e82974d84f4cf12910a3fc67651d66b5d",
+  "comparisonBase": "c9878630c586fc2641c08da8171ce1b969150fd1",
+  "plannedRunId": "20261019T194405Z-a96441c6",
+  "sourceReview": {
+    "role": "Independent affected PRE-EXECUTION SOURCE",
+    "status": "CHANGES_REQUESTED",
+    "sessionId": "01a155be-13eb-7512-867d-f578f4935bf8",
+    "contexts": 1,
+    "contextState": "CLOSED",
+    "completedUtc": "2026-10-19T20:11:55.1072824Z",
+    "cliExitCode": 0,
+    "report": {
+      "path": ".local/reviews/E02-source-review/review-c9a5ac5-20261019T194405Z-a96441c6/last-message.txt",
+      "bytes": 5139,
+      "sha256": "B1F6E6CEC0E5EE310EA863CF6B0EC936042B2A0755F5411C0CDDBA2BDB00A2C0"
+    },
+    "verdictRewritten": false,
+    "usedForExecutionApproval": false,
+    "finding": {
+      "priority": "P2",
+      "summary": "Reject a noninvertible full captured 4x4 view-projection matrix before public deprojection; a finite matrix and nonsingular oracle-plane system do not establish full-matrix invertibility.",
+      "runtimeSingularityOrFalsePassObserved": false
+    }
+  },
+  "closure": {
+    "path": ".local/reviews/E02-source-review/root-c9a5ac5-20261019T194405Z-a96441c6/source-review-changes-and-authority-closure.json",
+    "bytes": 3760,
+    "sha256": "55A95A4BD002167C916B09AFA952E96FAB0C89A1E6615DB3385E53EF8C2B9CE6"
+  },
+  "artifactSeal": {
+    "path": ".local/reviews/E02-source-review/root-c9a5ac5-20261019T194405Z-a96441c6/closed-source-review-artifacts.manifest.json",
+    "bytes": 9806,
+    "sha256": "0B6909E9F91F0B03E18520A98FFDCA21EACFC0004454F1EBE7A750BB22AF18B5"
+  },
+  "sealedArtifacts": 31,
+  "operatorPostchecks": {
+    "sourceIdentity": "Reviewed head clean; zero descriptor/hash drift; 28-member equality",
+    "runtimeSelected": {
+      "model": "gpt-6.1-sol",
+      "effort": "ultra",
+      "sandbox": "read-only",
+      "approvalPolicy": "never",
+      "memoryMode": "disabled",
+      "lowerLevelInternals": "UNVERIFIED",
+      "descriptor": {
+        "path": ".local/reviews/E02-source-review/review-c9a5ac5-20261019T194405Z-a96441c6/runtime-evidence.final.selected.json",
+        "bytes": 4238,
+        "sha256": "E7D10E4C16B2AE27F422F5DE7511B7FC8B9EC6F25863011B4A03D11079C881DA"
+      }
+    },
+    "actualTrace": {
+      "inputs": 166,
+      "outputs": 166,
+      "commands": 166,
+      "hashPairMismatches": 0,
+      "modelTruncationMarkers": 0,
+      "sensitivePatternHits": 0,
+      "priorPeerPatternHits": 0
+    },
+    "boundedObjectShapeErrorAndArrayRecovery": "PRESERVED",
+    "bodyRowCoverage": "NOT_ROOT_COMPLETED",
+    "literalCommandBoundaryAudit": "NOT_ROOT_COMPLETED",
+    "qualityOrAcceptanceConclusion": false
+  },
+  "execution": {
+    "E02RunRootCreated": false,
+    "preflight": "NOT_RUN",
+    "supervisorControls": "NOT_RUN",
+    "build": "NOT_RUN",
+    "native": "NOT_RUN",
+    "GUI": "NOT_RUN",
+    "Audit": "NOT_RUN",
+    "visibleWindowsConsumed": 0,
+    "allAuthority": "CLOSED_DO_NOT_REUSE",
+    "reuseOrTransferPermitted": false
+  },
+  "authoredRemediation": {
+    "state": "UNEXECUTED",
+    "scope": "Full-matrix determinant/invertibility/finite-inverse refusal before projection/query, plus determinant in existing projection log",
+    "source": {
+      "path": "Source/WarhammerClient/Private/Migration/E02WorldProofGameMode.cpp",
+      "bytes": 95541,
+      "sha256": "12DFFF3EAB6A0FFE3A4718285B4A1A8C6D6B1FDAE7B8983E3556E57554E9234A"
+    },
+    "typedRefusals": [
+      "NonfiniteProjectionDeterminant",
+      "SingularProjection",
+      "NonfiniteProjectionInverse"
+    ],
+    "unchanged": [
+      "separate oracle-plane guard",
+      "runtime picker",
+      "fixture",
+      "cases",
+      "existing assertions",
+      "domain/pixel tolerances"
+    ],
+    "independentlyReviewedOrExecuted": false,
+    "checkedInverseUse": "Validity probe only; never used to define the independent expected ray/point"
+  },
+  "historicalRuntime": {
+    "sourceHead": "c9878630c586fc2641c08da8171ce1b969150fd1",
+    "runId": "20261019T130651Z-04449a62",
+    "WorldInput": "FAIL",
+    "facts": "docs/plans/evidence/2026-10-19-e02-c987-result.json",
+    "unchanged": true
+  },
+  "nextGates": [
+    "coherent checkpoint and fresh freeze",
+    "fresh affected SOURCE review",
+    "new RunId and approved hidden checks",
+    "new applicable exact-candidate visible approval",
+    "completed execution/documentation/evidence freeze",
+    "fresh cumulative final CODE and different final REQ"
+  ],
+  "standingReviewPacketConsent": "UNCHANGED; transmission consent adds no native/GUI/test/build/Core-host/publication/merge authority",
+  "limits": [
+    "This record supplies facts and artifact identities, not independent quality or acceptance.",
+    "Mechanical zero hash/truncation/sensitive/peer-pattern counts do not replace body coverage, command-boundary audit or privacy assessment.",
+    "No singular runtime condition, false pass, repaired build, test or native result was observed.",
+    "Historical failures/unknowns, E01 acceptance limits, final CODE/REQ, Linux, packaging and broader research/implementation gates remain unchanged."
+  ]
+}

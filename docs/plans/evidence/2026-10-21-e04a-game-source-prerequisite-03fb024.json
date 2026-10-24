@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "FACTUAL_E04_A1G_SOURCE_PREREQUISITE_PUBLICATION",
+  "scope": "SOURCE only, as of root admission; subsequent native execution is outside this record",
+  "asOfUtc": "2026-10-21T12:24:31.0239814Z",
+  "status": "PASS_ADMITTED",
+  "rawVerdict": "PASS",
+  "sourceHead": "03fb024d94c944122b8ff34a317143e06bb77b5e",
+  "comparisonBase": "3d6d5ffb33fd3f901ead6af0d7394da04f5959ff",
+  "runId": "20261021T121210Z-65f77563",
+  "role": "E04_GAME_COMPONENT_SOURCE",
+  "sessionId": "01a15e61-41e6-7343-aadb-82857e8d8a7e",
+  "turnIds": [
+    "01a15e61-440e-7bd2-b763-11f74ff18569"
+  ],
+  "sourceFreezeManifest": {
+    "path": ".local/reviews/E04A1G-source-review/common-03fb024-20261021T121210Z-65f77563/runtime-freeze/source-freeze-manifest.json",
+    "bytes": 213383,
+    "sha256": "F151002B61C3273E6B0E735493ECF475C02E86A33219BF1A2F2063D74BCC3F5A"
+  },
+  "normativeRequirement": {
+    "path": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 17266,
+    "sha256": "E4F3FA8E117D4FC4C23DBAB9D70AEE09411B8C78F0302EF945823A60BB5B9692"
+  },
+  "reviewProcess": {
+    "cliVersion": "0.163.0-alpha.10.2",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "modelOverride": null,
+    "freshExec": true,
+    "resume": false,
+    "fork": false,
+    "contextCount": 1,
+    "turnCount": 1,
+    "contextRequirementMismatchCount": 0,
+    "actualSandbox": "read-only",
+    "actualApprovalPolicy": "never",
+    "serializedMemoryMode": "disabled",
+    "featureAndLowerMemoryEnforcement": "UNVERIFIED",
+    "helperAndConnectorCapabilities": "EXPOSED; NO USE OBSERVED",
+    "receivedPromptPlusExactlyOneCrlf": true,
+    "actualPromptUtf8Bytes": 5101,
+    "receivedPromptUtf8Bytes": 5103,
+    "receivedPromptSha256": "460C91300B409F2F23A58E329B25F20F8FD95C4FE0CF216B3A947E078A5BA839",
+    "pid": 42696,
+    "creationUtc": "2026-10-21T12:13:13.6259708Z",
+    "exitUtc": "2026-10-21T12:22:25.4504372Z",
+    "elapsedSeconds": 551.8543726,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "primaryFailure": null,
+    "secondaryErrorCount": 0,
+    "finalJobTotalProcesses": 314,
+    "finalJobActiveProcesses": 0,
+    "foregroundSupervisorPid": 38840,
+    "foregroundClosureUtc": "2026-10-21T12:22:44.8590652Z",
+    "foregroundExitCode": 0
+  },
+  "evidenceOrdering": {
+    "sequence": [
+      "Actual foreground closure",
+      "Raw 12-member seal",
+      "Final runtime/complete tool extraction",
+      "Selected 8-member seal",
+      "Root independent rehash of seals and 784 frozen/control identities",
+      "First root report/tool-value body inspection",
+      "Root SOURCE admission"
+    ],
+    "rawSealCreatedUtc": "2026-10-21T12:22:46.1550828Z",
+    "selectedSealCreatedUtc": "2026-10-21T12:22:47.9783610Z",
+    "rootRehashUtc": "2026-10-21T12:22:49.2544645Z",
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "uniqueFrozenAndControlIdentities": 784,
+    "allMatchedBeforeFirstBody": true,
+    "firstRootReportReadUtc": "2026-10-21T12:22:55.9146641Z",
+    "beforeBodyToolChunk": "5e7946",
+    "firstReadToolChunk": "684037",
+    "initialSelectorConsole": "ACTUAL CAPTURE RETAINED; 528 BYTES"
+  },
+  "coverageAndConduct": {
+    "frozenFiles": 776,
+    "wholeBodyGrants": 122,
+    "technicalWholeBodyGrants": 118,
+    "additionalRootWholeBodyGrants": 4,
+    "requiredWholeSourceFiles": 43,
+    "uniqueInstalledExcerptFiles": 69,
+    "installedRangeGrants": 187,
+    "reviewerReported": "43 required whole source bodies and all 69 supplied installed API excerpt files read; frozen hashes matched; granted tracked sources matched SourceHead; no actionable source defect",
+    "retainedInputs": 41,
+    "retainedOutputs": 41,
+    "unmatchedInputs": 0,
+    "orphanOutputs": 0,
+    "rootInspectedAll41Inputs": true,
+    "rootInputInspectionToolChunks": [
+      "cd29b1",
+      "1a8fde"
+    ],
+    "observed": "Inert source/metadata/hash/clock and permitted pinned read-only Git only; no helper/agent/network/connector/candidate/native/build/test/GUI/Core execution observed",
+    "outputClipMarkerOutputOrdinals": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "wholeArcadeInstructionGrant": "EXPLICIT",
+    "gitattributesWholeGrant": "EXPLICIT",
+    "qualification": "Coverage is reviewer-reported. Output clipping markers 1 through 6 and targeted later reads remain retained. One malformed read-only Git path query was corrected later. No all-byte delivery, consumption, comprehension or universal isolation certification."
+  },
+  "standingTransmissionConsent": {
+    "status": "APPROVED_UNTIL_EXPLICIT_HUMAN_REVOCATION",
+    "destination": "Configured OpenAI Codex service using existing sign-in",
+    "sha256": "1DA9A9275DA640BA5377507E7E29F33494DA210ECDA39B04C34552DF7CA05D46",
+    "bytes": 927,
+    "excluded": "Credentials, unrelated private data, and author/peer bodies in blind initial inputs",
+    "executionPublicationMergeAuthority": false
+  },
+  "retainedArtifacts": {
+    "rawReport": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/last-message.txt",
+      "bytes": 1901,
+      "sha256": "3FC8EFC15CF4B34E4655ECDD0E08135D85500BAF6F6FC37544AC8859D7AFFDEB"
+    },
+    "rootAdmission": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/root-source-admission.original.json",
+      "bytes": 5108,
+      "sha256": "9794B9FA7B087D53D4538FE28CB31D484425DE8DACE95256CAD5F4BF5E771241"
+    },
+    "rawSeal": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/closed-raw-output-seal.before-body.original.json",
+      "bytes": 4920,
+      "sha256": "9C39C878D4A102AF732E1612E987CC9911A49E151946C625E1CB3BB5D7232BBA"
+    },
+    "selectedSeal": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/closed-selected-extraction-seal.before-body.original.json",
+      "bytes": 3996,
+      "sha256": "2D4F715DF64A60390BA2A6DEFAF430955B07314B9A9B4F14AD3F4D75D0A4EF45"
+    },
+    "rootBeforeBodyRehash": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/root-independent-before-first-body-rehash.original.json",
+      "bytes": 1852,
+      "sha256": "C6EB81E620926F1C632A4A806706E36C61EAFBF7B5674AD11820C65B4EC480F4"
+    },
+    "rootFirstBodyRead": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/root-first-body-read.original.json",
+      "bytes": 278,
+      "sha256": "E129E54705A3CDF1CBD317329A06A3021DBBEA97101544E64901CB75ED0C9348"
+    },
+    "finalRuntime": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/runtime-evidence.final.selected.json",
+      "bytes": 5224,
+      "sha256": "27DFA0D1B1FFD4E8ADEAD9DD63EA8E4D95F9BDE8A5ED93239605830A2B517C43"
+    },
+    "completeTrace": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/actual-complete-tool-input-output-ledger.json",
+      "bytes": 1200508,
+      "sha256": "118266447B6B12EB602D4D47D7CF81888CAA871E708F37C475389D4A5A07BCC3"
+    },
+    "initialSelectorConsole": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/runtime-initial-selector.console.original.txt",
+      "bytes": 528,
+      "sha256": "D686A2619B0685D3F1F13A573B6BDFDE82DCB1C419336046EAA4FE39546826D8"
+    },
+    "ownedJob": {
+      "path": ".local/reviews/E04A1G-source-review/source-03fb024-20261021T121235Z-4d837f/owned-job-receipt.json",
+      "bytes": 97013,
+      "sha256": "00FEDE98B98084876828DC9A4A0D83F357E389FD36FBB35F72D060A80BB9694A"
+    }
+  },
+  "limits": [
+    "SOURCE prerequisite only; native phase outcomes are intentionally not restated. Each exact phase requires its own ordered root GO.",
+    "No compilation, runtime, graphics, continuous window absence, installed-source/binary correspondence, migration acceptance or final CODE/REQ result follows from SOURCE.",
+    "OWN17 special assurance remains DEFERRED_UNPROVEN; ordinary runtime assertions remain fail-closed. Visible authority zero; Linux UNTESTED.",
+    "Bounded A1E acceptance and all prior raw reviews/failures remain unchanged. Final CODE and a different REQ follow actual closed execution.",
+    "The later factual publication overlay lies outside the exact reviewed head. Auxiliary draft preparation supplies no gate approval."
+  ]
+}

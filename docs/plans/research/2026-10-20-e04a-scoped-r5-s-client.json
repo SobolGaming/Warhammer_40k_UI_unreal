@@ -1,0 +1,222 @@
+{
+  "verdict": "BLOCKED",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-4c99318-20261020T104640Z-54a3b913",
+  "scopeId": "S_CLIENT",
+  "subject": {
+    "sourceHead": "4c993181287e18e92da614af0e09a8d8ea92378a",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T104640Z-54a3b913",
+    "inputManifestSHA256": "c00fc7180f937d929e3978be00580b54039fafe1f2c13d796b590de78e13df00",
+    "runtimeFreezeSHA256": "aa95f7b04cfb75458fa516a2add3fcff6c032f0fce51545436649baef9edabd3",
+    "scopeContractSHA256": "d085775971ab49efecce56430edf88fbfa13bb04fd3421bd89a58fe5c97f5ceb",
+    "bootstrapSHA256": "4d34ee1147f4cab15d40e6d68994d6139c934d0ca25bcb019e341d91655e6bc5",
+    "coverageSHA256": "03c3db07205be7942a9ae96c54d641def8ccd8bcb4d14ee038837971cf9c9552",
+    "launchPermissionSHA256": "6947dd8441a6a5eae056814f614c3f0ae3315c8aa7d52407dc682fb2a46fa377",
+    "preparedPromptSHA256": "0067ad0021ff836b27e9df8274e8f8106d520142bdc2fab9ee9348ba70a62b2d",
+    "actualPromptSHA256": "4bfc0e75f7d0ce5606ba1cf613b8a3cbd2bf395523fe5af9cf0be134be0eddd5"
+  },
+  "bindingAssessment": {
+    "result": "Verified the supplied own-record hashes and exact subject, campaign, scope, run and GO identities. Verified all six subject file descriptors against actual bytes and hashes. The actual prompt contains the complete prepared prompt followed by the matching ROOT ACTUAL GO.",
+    "criteria": "Read and parsed the three common criteria records through their exact bound paths, byte counts and SHA256 values. Compared prepared-prompt subject, bindingRequirements, globalAccess, reviewDiscipline, launchBinding, aggregateSourceGate and report requirements with the pure contract. The prepared local scope and materialJoins match scope.selected.json.",
+    "observedDifferences": [
+      "Own metadata policy record4 points to the own-directory catalog copy; the common policy points to the common-directory copy. Catalog bytes and SHA256 match, and every other record4 policy value matches.",
+      "The own scope contains its assigned material joins rather than the contract's complete cross-scope join collection."
+    ],
+    "qualification": "Source head and comparison base remain root-supplied identities; no Git verification was executed."
+  },
+  "coverage": {
+    "mandatoryEntireBodiesReadCompletely": [
+      "SOURCE-BODY-001",
+      "SOURCE-BODY-002",
+      "SOURCE-BODY-004",
+      "SOURCE-BODY-010",
+      "SOURCE-BODY-011",
+      "SOURCE-BODY-016",
+      "SOURCE-BODY-017",
+      "SOURCE-BODY-018",
+      "SOURCE-BODY-019",
+      "SOURCE-BODY-020",
+      "SOURCE-BODY-021",
+      "SOURCE-BODY-022",
+      "SOURCE-BODY-023",
+      "SOURCE-BODY-024",
+      "SOURCE-BODY-025",
+      "SOURCE-BODY-026",
+      "SOURCE-BODY-027",
+      "SOURCE-BODY-028",
+      "SOURCE-BODY-029",
+      "SOURCE-BODY-030",
+      "SOURCE-BODY-031",
+      "SOURCE-BODY-032",
+      "SOURCE-BODY-033",
+      "SOURCE-BODY-034",
+      "SOURCE-BODY-035",
+      "SOURCE-BODY-036",
+      "SOURCE-BODY-054",
+      "SOURCE-BODY-055",
+      "SOURCE-BODY-056",
+      "SOURCE-BODY-057",
+      "SOURCE-BODY-096",
+      "SOURCE-BODY-097"
+    ],
+    "recomputedMandatoryEntireFiles": 32,
+    "recomputedMandatoryEntirePhysicalRows": 7179,
+    "mandatoryBODY013RangesReadCompletely": [
+      [1066,1079],
+      [1080,1089],
+      [1090,1113],
+      [1198,1210],
+      [1454,1459],
+      [1460,1474],
+      [1475,1482],
+      [1483,1488],
+      [1489,1512],
+      [1513,1516],
+      [1517,1528],
+      [1529,1546],
+      [1547,1563],
+      [1564,1591],
+      [1592,1607],
+      [1608,1696],
+      [1697,1711],
+      [1712,1725],
+      [1726,1735],
+      [1736,1787],
+      [1849,1855],
+      [1943,2002]
+    ],
+    "recomputedCompleteUnitRows": 462,
+    "recomputedMandatoryTotalRows": 7641,
+    "unitVerification": "Parsed BODY013 without executing it. All 21 named FunctionDefinitionAst extents match their declared ranges and original-text SHA256 values. The separate inclusive top-level boundary hash also matches, including original terminators.",
+    "additionalCompleteBodies": {
+      "SOURCE-BODY-003": [1,806],
+      "SOURCE-BODY-008": [1,48]
+    },
+    "additionalBODY013RangesRead": [
+      [139,172],
+      [316,362],
+      [1114,1197],
+      [1211,1231],
+      [1356,1393],
+      [1922,1942]
+    ],
+    "metadata": "Completed the selected record2 assessment and the exact 33-member staging join. Inspected material selections from records1,4,7,11,12, but did not complete their broader semantic relationships.",
+    "identityChecksOnly": "Verified all98 BODY descriptors against actual bytes, hashes and physical row counts: 49749 rows. Verified all13 selected-record descriptor hashes. These checks do not constitute substantive review of unread bodies or selected values."
+  },
+  "sourceAssessment": [
+    {
+      "conclusion": "The inspected client preserves the Core-authority boundary. The evidence reader checks typed wire structure and outcome context; E02 retains synthetic advisory selection and local review without a game-command submission path.",
+      "sourceCitations": [
+        "BODY026:419-668",
+        "BODY027:6-58",
+        "BODY030:164-258",
+        "BODY031:81-102"
+      ],
+      "requirementCitations": [
+        "BODY054:2-21",
+        "BODY097:11-34",
+        "scope.duties[0]"
+      ]
+    },
+    {
+      "conclusion": "Project configuration selects the ordinary client shell. E02 scene construction requires both the explicit proof GameMode and -E02Proof. Its rendered/input automation remains conditionally compiled and separately selected.",
+      "sourceCitations": [
+        "BODY016:1-8",
+        "BODY019:21-38",
+        "BODY021:7-12",
+        "BODY023:1-8",
+        "BODY032:1063-1094",
+        "BODY034:1-861",
+        "BODY035:1-500",
+        "BODY036:1-1095"
+      ],
+      "requirementCitations": [
+        "scope.duties[0]",
+        "scope.duties[2]"
+      ]
+    },
+    {
+      "conclusion": "The dedicated target concretely pins bBuildAllModules=false and enables E04ProfileProof. The bridge retains the actual target object, guards its identity and live selectors, and emits canonical nameof tags after enum equality checks. The proof module startup implementations are inert.",
+      "sourceCitations": [
+        "BODY001:10-85",
+        "BODY002:8-15",
+        "BODY003:403-410",
+        "BODY008:1-5",
+        "BODY011:1-3"
+      ],
+      "requirementCitations": [
+        "scope.duties[2]",
+        "reviewDiscipline.finiteRulesWitnessCriteria[2]",
+        "reviewDiscipline.finiteRulesWitnessCriteria[8]"
+      ]
+    },
+    {
+      "conclusion": "All33 ordered frozen staged members resolve uniquely through record2 to positive BODY paths and matching complete source copies. Actual canonical bytes also match. The source-only BODY098 test is excluded from staging.",
+      "sourceCitations": [
+        "selected record1.sourceMembership",
+        "selected record2.sourceBodies",
+        "selected record2.reusedEntrypointBodies",
+        "selected record2.sourceOnlyBodyInputs",
+        "BODY013:1957-1962"
+      ],
+      "requirementCitations": [
+        "scope.duties[1]",
+        "scope.duties[3]"
+      ]
+    },
+    {
+      "conclusion": "The inspected witness design joins a direct frozen dotnet root, literal argv/CWD, PID and creation identity, actual target/module types, source membership, cache poststate, retained DLL/PDB/manifest and source checksums. It distinguishes two required materialized cache roots from optional disk absences. Failure paths retain partial artifacts and preserve an existing primary failure.",
+      "sourceCitations": [
+        "BODY003:340-802",
+        "BODY013:1454-1787",
+        "BODY013:1922-1939",
+        "BODY013:1979-2002"
+      ],
+      "qualification": "This supports only the inspected prospective design. It establishes no actual Rules construction, UBT execution, cache accessibility, native flags or activation."
+    },
+    {
+      "conclusion": "The wrapper removes inherited E02 startup channels before invoking its owned root and restores the parent environment afterward. Visible launches are rejected. Source, stage, plugin, fixture and nine settings preservation checks are present.",
+      "sourceCitations": [
+        "BODY013:331-362",
+        "BODY013:1066-1115",
+        "BODY013:1198-1231",
+        "BODY013:1980-1996"
+      ],
+      "qualification": "The complete supervisor-control and cross-system preservation relationship was not substantively discharged."
+    }
+  ],
+  "blockers": [
+    {
+      "id": "S_CLIENT-COVERAGE-01",
+      "kind": "INCOMPLETE_MATERIAL_RELATIONSHIP_ASSESSMENT",
+      "description": "The mandatory file/range inventory is complete, but the broader STAGED_CLIENT normal RulesCompiler/discovery/assembly relationship is not. BODY081/082 were not substantively read; BODY092/093/095 received only partial searches, and BODY094 was not substantively read. Full effective-configuration, alternate creation/prebuild/all-modules and relevant startup relationships therefore remain unassessed.",
+      "requirementCitation": "materialJoins[id=STAGED_CLIENT].completeDuty",
+      "disposition": "Unresolved. No local SOURCE_PASS."
+    },
+    {
+      "id": "S_CLIENT-COVERAGE-02",
+      "kind": "INCOMPLETE_MATERIAL_RELATIONSHIP_ASSESSMENT",
+      "description": "Record4 catalog relationships and record7/12 broader membership relationships were not completely interpreted. Complete supervisor-control and process-preservation joins also remain unassessed. Descriptor matches, counts and inspected wrapper checks cannot substitute for those duties.",
+      "requirementCitations": [
+        "scope.metadataRelationshipRecordOrdinals",
+        "materialJoins[id=PROCESS_PRESERVATION].completeDuty",
+        "reviewDiscipline.exactCaseDataRead"
+      ],
+      "disposition": "Unresolved. This is incomplete review coverage, not an established implementation defect."
+    }
+  ],
+  "errorsAndRecoveries": [
+    "One JSON parse call failed because PowerShell could not select a byte-array overload. Repeated the read using an explicit UTF-8 string and successfully parsed it.",
+    "Several policy, coverage, metadata and search displays were truncated. Recovered the mandatory source text, including the BODY026 gap, through explicit positive ranges. Recovered relevant record2 projections and verified all mandatory unit bindings.",
+    "Large record7 catalog/source-binding displays and broad engine searches were not fully recovered as substantive semantic review. They receive no complete-coverage credit and are included in the blockers.",
+    "No EOF error occurred. No stored source command or implementation helper was executed."
+  ],
+  "independenceAndRuntimeLimits": {
+    "observed": "This assessment used read-only data/hash/AST inspection under the supplied read-only and approval-never environment. No files were saved or mutated. No delegation, memory tool, build, test, engine, GUI, network or GitHub action was used.",
+    "excludedInputs": "No peer report, previous verdict, author narrative, credential, private session/configuration or generated reviewer runtime/invocation body was inspected.",
+    "unverifiedHere": "Actual CLI invocation/session/model settings, memory enforcement, isolation and received-input provenance remain for root's separate attestation. Own policy and GO records alone do not prove those runtime properties."
+  },
+  "acceptanceBoundary": "BLOCKED is this raw local S_CLIENT disposition. It supplies no aggregate SOURCE approval or phase/native/final authority. A1G, A2 compatibility, Linux, rendering/HUD, packaging and independent final CODE/REQ gates remain open."
+}

@@ -1,0 +1,69 @@
+{
+  "recordKind": "PURE_ROSLYN_STATIC_SEMANTIC_DIAGNOSTICS_ONLY",
+  "schemaVersion": 1,
+  "driverHostFramework": ".NET 10.0.11",
+  "compilerAssemblies": [
+    "Microsoft.CodeAnalysis, Version=4.13.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+    "Microsoft.CodeAnalysis.CSharp, Version=4.13.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+  ],
+  "parse": {
+    "languageVersion": "CSharp12",
+    "documentationMode": "None",
+    "kind": "Regular",
+    "preprocessorSymbols": [
+      "WITH_FORWARDED_MODULE_RULES_CTOR",
+      "WITH_FORWARDED_TARGET_RULES_CTOR",
+      "UE_4_17_OR_LATER",
+      "UE_4_18_OR_LATER",
+      "UE_4_19_OR_LATER",
+      "UE_4_20_OR_LATER",
+      "UE_4_21_OR_LATER",
+      "UE_4_22_OR_LATER",
+      "UE_4_23_OR_LATER",
+      "UE_4_24_OR_LATER",
+      "UE_4_25_OR_LATER",
+      "UE_4_26_OR_LATER",
+      "UE_4_27_OR_LATER",
+      "UE_4_28_OR_LATER",
+      "UE_4_29_OR_LATER",
+      "UE_4_30_OR_LATER",
+      "UE_5_0_OR_LATER",
+      "UE_5_1_OR_LATER",
+      "UE_5_2_OR_LATER",
+      "UE_5_3_OR_LATER",
+      "UE_5_4_OR_LATER",
+      "UE_5_5_OR_LATER",
+      "UE_5_6_OR_LATER",
+      "UE_5_7_OR_LATER",
+      "UE_5_8_OR_LATER"
+    ]
+  },
+  "options": {
+    "outputKind": "DynamicallyLinkedLibrary",
+    "optimizationLevel": "Release",
+    "warningLevel": 4,
+    "deterministic": true,
+    "reportSuppressedDiagnostics": true,
+    "nullableContextOptions": "Disable",
+    "assemblyIdentityComparer": "DesktopAssemblyIdentityComparer.Default"
+  },
+  "orderedLogicalSources": [
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\E04ProfileParser\\E04ProfileParser.Build.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\E04ProfileProbe\\E04ProfileProbe.Build.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Plugins\\E04ProfileProof\\Source\\ThirdParty\\YamlCpp\\YamlCpp.Build.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClient.Target.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClient\\WarhammerClient.Build.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClientE04AEditor.Target.cs",
+    "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Source\\WarhammerClientEditor.Target.cs"
+  ],
+  "metadataReferenceCount": 31,
+  "diagnostics": [],
+  "candidateEmitted": false,
+  "candidateAssemblyLoaded": false,
+  "rulesConstructed": false,
+  "ubtExecuted": false,
+  "nativeExecuted": false,
+  "sourceReviewPassed": false,
+  "accepted": false,
+  "limitation": "Static source/type diagnostics; host framework differs from target metadata runtime. No rules construction, cache witness, build, native or acceptance result."
+}

@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "experiment": "E04-A1",
+  "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF",
+  "recordKind": "CLOSED_SEVENTH_SOURCE_INCOMPLETE_NOT_EXECUTION_OR_ACCEPTANCE",
+  "recordedUtc": "2026-10-20T04:24:35.3423417Z",
+  "sourceHead": "e505b2168a60ee468b441127164db29c70be7ae6",
+  "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+  "plannedRunId": "20261020T041347Z-5175df78",
+  "review": {
+    "role": "SOURCE",
+    "status": "BLOCKED",
+    "sessionId": "01a15786-2af2-7d43-82c4-c281c529e630",
+    "report": {
+      "path": "docs/plans/research/2026-10-20-e04a-source-review-r7.md",
+      "bytes": 2982,
+      "sha256": "C5FB1AA78B3B203E944041A986911ED31B83B5973B33C7746B7F5C59EFD8F517"
+    },
+    "rawReportCopiedByteExact": true,
+    "requiredBodyFiles": 93,
+    "requiredPhysicalRows": 32460,
+    "reviewerReportedCompleteBodyFiles": 55,
+    "assessedBodyIds": [
+      "001-049",
+      "054-057",
+      "092-093"
+    ],
+    "unassessedBodyIds": [
+      "050-053",
+      "058-091"
+    ],
+    "selectedMetadataRecords": 13,
+    "descriptorRows": 902,
+    "selectedMetadataComplete": false,
+    "scopeAudit": "CLOSED_ORDINARY_SUPPORT_AUDIT_BLOCKED_UNCHANGED",
+    "finding": "Incomplete substantive source and structured metadata assessment; no confirmed implementation defect, packet-binding inconsistency or access denial asserted.",
+    "rawReportLinkQualification": "Original /C:/... spelling retained byte-exact; physical original paths supply navigation without rewriting the raw report.",
+    "completeLiteralPhysicalRows": 13772
+  },
+  "sourceClosure": {
+    "schemaVersion": 1,
+    "kind": "ROOT_SOURCE_INCOMPLETE_CLOSED_NO_PHASE_AUTHORITY",
+    "utc": "2026-10-20T04:24:35.3036189Z",
+    "state": "CLOSED_BLOCKED_DO_NOT_REUSE",
+    "sourceHead": "e505b2168a60ee468b441127164db29c70be7ae6",
+    "runId": "20261020T041347Z-5175df78",
+    "sessionId": "01a15786-2af2-7d43-82c4-c281c529e630",
+    "rawVerdict": "BLOCKED_UNCHANGED",
+    "rawReport": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\last-message.txt",
+      "bytes": 2982,
+      "sha256": "C5FB1AA78B3B203E944041A986911ED31B83B5973B33C7746B7F5C59EFD8F517"
+    },
+    "rawSeal": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\root-raw-report-seal.original.json",
+      "bytes": 1201,
+      "sha256": "4489501B91786001113C2C92A77BCCBFB60B7AE8C2DDA28DAE9BB7CA3484D84F"
+    },
+    "finalRuntime": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\runtime-evidence.final.selected.json",
+      "bytes": 8463,
+      "sha256": "809B8C9D9489030A30023BE2131CBA5B24D99BF5F4A1112B5F383BC1FC94EE76"
+    },
+    "inputCapture": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\actual-tool-input-ledger.json",
+      "bytes": 52410,
+      "sha256": "9833A25C911AEE0FF23258E5D4F4F2DD91AC7A3A5FDBB1EFD2B1085C04907896"
+    },
+    "completeCapture": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\actual-complete-tool-input-output-ledger.json",
+      "bytes": 1290138,
+      "sha256": "A5D3E97DCEB13CE7D629C1073F363881B3C5197D85649050E01A9C785B494BFA"
+    },
+    "completion": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\completion.json",
+      "bytes": 2603,
+      "sha256": "422D8876D11CF5B713A2E9BEAACAC57DEE6A2741B83EBB44C5251E14559E0632"
+    },
+    "processReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\owned-job-receipt.json",
+      "bytes": 112754,
+      "sha256": "7BECEE6C1C346066C49B30EC14C815763B146DD4A35A4F637966B74E503BF8A4"
+    },
+    "process": {
+      "pid": 40548,
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedSeconds": 388.8169177,
+      "budgetSeconds": 1800,
+      "assignedBeforeResume": true,
+      "resumed": true,
+      "timedOut": false,
+      "exitConfirmed": true,
+      "cleanupConfirmed": true,
+      "primaryFailure": null,
+      "secondaryErrors": [],
+      "lastJobAccounting": {
+        "stage": "progress",
+        "observedUtc": "2026-10-20T04:22:41.0528886Z",
+        "querySucceeded": true,
+        "totalProcesses": 362,
+        "activeProcesses": 0,
+        "totalTerminatedProcesses": 0,
+        "totalUserTime100ns": 188437500,
+        "totalKernelTime100ns": 330312500,
+        "thisPeriodUserTime100ns": 188437500,
+        "thisPeriodKernelTime100ns": 330312500,
+        "totalPageFaultCount": 2314558
+      }
+    },
+    "runtime": {
+      "freshExec": true,
+      "provider": "openai",
+      "contexts": 1,
+      "allObservedReadOnlyNever": true,
+      "memoryMetadata": "disabled",
+      "model": "gpt-6.1-sol",
+      "effort": "ultra",
+      "fullActualGoObserved": true,
+      "byteIdenticalPrompt": false,
+      "extraTrailingCrLfBytes": 2,
+      "equalAfterTrailingCrLfRemoval": true,
+      "lowerAppMemoryOsPidIsolation": "UNVERIFIED"
+    },
+    "postCloseFrozenHashes": {
+      "files": 1906,
+      "mismatches": []
+    },
+    "reviewerReportedCompleteBodyFiles": 55,
+    "requiredBodyFiles": 93,
+    "requiredRows": 32460,
+    "selectedMetadataAnd902Complete": false,
+    "implementationDefectAsserted": false,
+    "toolInputOutputPairs": 50,
+    "scopeAudit": "PENDING_ORDINARY_SUPPORT_AUDIT",
+    "nativeRunRootCreated": false,
+    "allEightPhases": "NOT_RUN",
+    "noRetry": true,
+    "authorityClosed": true,
+    "sourceOrNativeApproval": false,
+    "visibleWindows": 0,
+    "publicationOrMergeAuthority": false
+  },
+  "sourceClosureDescriptor": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T041347Z-5175df78\\root-source-closure.original.json",
+    "bytes": 4259,
+    "sha256": "9C7452775C90F20D731BA73B92321D82136ED6C53101B4A8339297CE17BA46D1"
+  },
+  "precedingPreAdmissionRefusal": {
+    "runId": "20261020T040950Z-d763d99b",
+    "sourceHead": "e505b2168a60ee468b441127164db29c70be7ae6",
+    "closure": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\source-e505b21-20261020T040950Z-d763d99b/root-pre-admission-closure.original.json",
+      "bytes": 2351,
+      "sha256": "4F26248C0FC386661A303FC1EB41BEC4973836F4946CA66B037D030218471710"
+    },
+    "sourceVerdict": "NOT_RUN",
+    "reviewerSessionStarted": false,
+    "allEightPhases": "NOT_RUN",
+    "repair": "One metadata category expression changed to existing accepted SOURCE category, preserving all bodies; launcher unchanged.",
+    "helperSha256": "F72011B3367D5F23EC42A0640492B80F833976013A9905D0721DE79F5A0C30B2"
+  },
+  "preparationFilenameRepair": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\source-assembler-proposal-e505b21-20261020T041347Z-5175df78/root-construction-filename-repair.original.json",
+    "bytes": 1182,
+    "sha256": "6611499864A023718C3CC3FA32B2461A71AD5398BE0C44F33F9DD59F282524AD"
+  },
+  "stagedSourceCoverage": {
+    "members": 33,
+    "fullBodyGrants": 33,
+    "totalRequiredBodies": 93,
+    "totalRequiredPhysicalRows": 32460,
+    "missingGrants": 0,
+    "implementationChanged": false
+  },
+  "allEightPhases": "NOT_RUN",
+  "nativeRunRootCreated": false,
+  "plannedNative": {
+    "suites": 8,
+    "uniqueInputs": 38,
+    "attempts": 45,
+    "actualResult": "NOT_RUN"
+  },
+  "runtimeCallerProof": "NOT_RUN_REQUIRED_E04_A1G",
+  "a2ScenariosRequired": 727,
+  "priorPathRepairControls": "PASS21_UNCHANGED_NOT_RERUN",
+  "sourceAuthority": "CLOSED_DO_NOT_REUSE",
+  "reviewDecomposition": "PROSPECTIVE_DESIGN_PREPARING_NOT_ADOPTED",
+  "finalCodeAndDifferentReq": "NOT_RUN",
+  "reviewTransmission": "Standing owner approval until explicit revocation; same necessary data scope and configured OpenAI Codex destination",
+  "acceptanceEstablished": false,
+  "visibleWindows": 0,
+  "publicationOrMergeAuthority": false,
+  "limits": [
+    "Raw BLOCKED remains unchanged. Hashes, row exposure and CLI exit do not supply substantive review.",
+    "All source/metadata/material relationships remain required across any future prospectively adopted review design; no criterion waiver or retroactive reinterpretation.",
+    "Lower app/memory/multi-agent/OS PID isolation remain UNVERIFIED.",
+    "A1G/A2/shared HUD/render/input/Linux/packages and broader gates remain open.",
+    "Prior c500f21 Configure FAIL and manual preservation observations remain unchanged."
+  ],
+  "ordinaryScopeAudit": {
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\closed-e505b21-ordinary-audit-20261020\\ordinary-scope-output-audit-20261020T041347Z-5175df78.PROPOSED.OPERATOR_ONLY.json",
+      "bytes": 68085,
+      "sha256": "1C1FB44AE37A0F66AE2560687B71B2E2025296DC9276AF7DCA9E8DA2F1FDA220"
+    },
+    "status": "SUPPORT_ONLY_NOT_MERITS_OR_APPROVAL",
+    "rootPersonallyReadAll50LiteralInputs": true,
+    "inputOutputPairs": 50,
+    "pairingAnomalies": 0,
+    "zeroExitCalls": 49,
+    "nonzeroExitCalls": [
+      5
+    ],
+    "serializationErrorRecoveredByCalls": [
+      6,
+      7
+    ],
+    "actualTruncatedCall": 29,
+    "geometrySourceRecoveryCall": 30,
+    "allRecoveredRequiredGeometryRowsVisible": true,
+    "completeLiteralFiles": 55,
+    "requiredFiles": 93,
+    "completeLiteralRows": 13772,
+    "requiredRows": 32460,
+    "untouchedFiles": 38,
+    "untouchedRows": 18688,
+    "partialFiles": 0,
+    "selectedRecordValueContentReads": 0,
+    "descriptorRowsInspected": 0,
+    "selectedMetadataAnd902Complete": false,
+    "ungrantedBodyDisclosureObserved": false,
+    "originalClosurePendingFieldPreservedAsSnapshot": true
+  }
+}

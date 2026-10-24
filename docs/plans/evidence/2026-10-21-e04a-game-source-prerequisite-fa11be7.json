@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_E04_A1G_SOURCE_PREREQUISITE_PUBLICATION",
+  "status": "PASS_ADMITTED_SOURCE_PREREQUISITE_ONLY",
+  "sourceHead": "fa11be76cca922006f9bb7eb16f7240bc51925f7",
+  "comparisonBase": "74cba5d14d315ae3200b1002f0c0f6ce48d65633",
+  "runId": "20261021T152810Z-45e572ca",
+  "role": "E04_GAME_COMPONENT_SOURCE",
+  "admittedUtc": "2026-10-21T15:40:27.2866550Z",
+  "rootAdmission": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-fa11be7-20261021T152917Z-1bab97\\root-source-admission.original.json",
+    "bytes": 5815,
+    "sha256": "B9A1479175446A16F58FF3083587F7DCD9553C9EAD442E6B9B1F2ED0157D4355"
+  },
+  "sourceFreezeManifest": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\common-fa11be7-20261021T152810Z-45e572ca\\runtime-freeze\\source-freeze-manifest.json",
+    "bytes": 213886,
+    "sha256": "CC4F42A2CC22E56F28FF9DA9F8B8D41A936C251ACC7F2B48875743FF30C84362"
+  },
+  "normativeRequirement": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-game-proof-packet.md",
+    "bytes": 20608,
+    "sha256": "0480C65DE08F5F397FCEA34F8B35AE2656378B30135626F7D24F4527739A28AC"
+  },
+  "report": {
+    "original": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-fa11be7-20261021T152917Z-1bab97\\last-message.txt",
+      "bytes": 2456,
+      "sha256": "48FC03FCF4C95F846FE9EB7B3795A7D943F9E360B55BCB73DACBBD8DA82B6735"
+    },
+    "publishedRelativePath": "docs/plans/research/2026-10-21-e04a-game-source-review-fa11be7.json",
+    "rawVerdict": "PASS",
+    "actionableFindings": 0,
+    "coverage": "Reviewer-reported: all43 required whole source bodies, clean norm and relevant granted installed excerpts read. Required file identities matched at closure. No root all-byte delivery, source-consumption or comprehension certificate.",
+    "publishedRepresentation": "UTF8Base64_ENCODED_ORIGINAL_REPORT",
+    "textEncoding": "UTF-8",
+    "transportEncoding": "Base64",
+    "exactOriginalBytesRecoverable": true,
+    "publishedFileBytesEqualOriginal": false,
+    "encodingQualification": "The linked LF JSON wrapper contains the exact original2456 report bytes as UTF8Base64. Decode that value to recover the original report and verify its original descriptor; the wrapper itself is not the raw report file."
+  },
+  "runtime": {
+    "sessionId": "01a15f15-354c-7420-b399-ed94029219bf",
+    "turnId": "01a15f15-3889-7163-9575-d362bdbedf2f",
+    "cliVersion": "0.163.0-alpha.10.2",
+    "model": "gpt-6.1-sol",
+    "effort": "ultra",
+    "contexts": 1,
+    "contextMismatchCount": 0,
+    "sandbox": "read-only",
+    "approvalPolicy": "never",
+    "memoryMode": "disabled",
+    "lowerMemoryFeatureEnforcement": "UNVERIFIED",
+    "resume": false,
+    "fork": false,
+    "exactPromptPlusOneCrlf": true,
+    "receivedUtf8Bytes": 5103,
+    "receivedSha256": "85FB06C9DA230B5095D3FE2D9472DD1BFF1A0C1A6E9F30BD0AA074FCF2D36B20",
+    "selectedEvidence": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-fa11be7-20261021T152917Z-1bab97\\runtime-evidence.final.selected.json",
+      "bytes": 5224,
+      "sha256": "835AD75792DF72F7D49E8F521D329AB8117E9B447DC7BFD856352A95D0C3C004"
+    }
+  },
+  "reviewClosure": {
+    "workerPid": 42564,
+    "elapsedSeconds": 476.5905954,
+    "exitCode": 0,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "finalJobTotal": 356,
+    "finalJobActive": 0,
+    "processReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-fa11be7-20261021T152917Z-1bab97\\owned-job-receipt.json",
+      "bytes": 112795,
+      "sha256": "AB629D240EBFCA87DA47B62DF563F4E1D2B92F540659E7B577A78060509DBC26"
+    }
+  },
+  "beforeFirstBody": {
+    "rootRehash": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-fa11be7-20261021T152917Z-1bab97\\root-independent-before-first-body-rehash.original.json",
+      "bytes": 1852,
+      "sha256": "E29B2EDC328C2E845C4F3B5602C7D48821B9211C46452D3D8955FB52C8F31B35"
+    },
+    "rawMembers": 12,
+    "selectedMembers": 8,
+    "frozenAndControlIdentities": 819,
+    "allMatched": true,
+    "order": "Actual foreground closure; raw seal; final extraction and actual console captures; selected seal; root rehash; first report/tool-value body.",
+    "sealAndRehashTool": "dac74f",
+    "firstRootReportReadUtc": "2026-10-21T15:38:32.3411346Z",
+    "firstReadTool": "dd4e7c"
+  },
+  "conduct": {
+    "rootInspectedAllInputs": true,
+    "inputInspectionTools": [
+      "2a4508",
+      "530972",
+      "5407a0"
+    ],
+    "inputs": 48,
+    "outputs": 48,
+    "unmatchedInputs": 0,
+    "orphanOutputs": 0,
+    "clippedOutputOrdinals": [
+      1,
+      3,
+      5,
+      10
+    ],
+    "observed": "All48 actual inputs inspected: inert filesystem/source/hash/clock and pinned read-only Git comparisons only; no helper, agent, connector, network or candidate/native/build/test/GUI/Core execution observed.",
+    "stderr": "Skill-icon and unsupported-PowerShell-snapshot warnings retained. No final rollout-flush warning observed. Raw12 and selected8 were sealed and819 unique frozen/control identities rehashed before first body;48 paired inputs/outputs have0 unmatched or orphan records. Lower-layer feature restriction enforcement remains UNVERIFIED.",
+    "limits": "Tools remained exposed. Identity/conduct checks do not certify all-byte delivery, source consumption, comprehension, universal completeness or isolation.",
+    "metadataInspectionTools": [
+      "dd4e7c",
+      "3b1689",
+      "0952e3"
+    ],
+    "diagnostics": "Retained output clipping at ordinals1,3,5,10. Ordinal24 contains a source string PNG truncated and is not a transport-clip observation.",
+    "rootReadQualification": "Reviewer reports all43 required whole source bodies, clean norm and relevant granted excerpts read. Original output clipping at ordinals1,3,5,10 is preserved; later bounded reads include the affected target sources and wrapper overlap. Ordinal24 contains a source string PNG truncated and is not a transport-clip observation. Root inspected all48 actual inputs and selected retained outputs; no universal all-byte delivery, source-consumption or comprehension certificate."
+  },
+  "nativeScope": "Native results are outside this SOURCE-only publication. Each exact native phase requires separate root GO; this record grants no phase PASS, runtime acceptance or retroactive review of later metadata.",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "limits": "SOURCE prerequisite only: no build, cook, stage, native, graphics, installed-source/binary correspondence or migration acceptance. Historical failures remain unchanged; final fresh CODE and different REQ follow actual successful closed execution.",
+  "reviewConsent": "Perpetual private source/API review consent remains unchanged."
+}

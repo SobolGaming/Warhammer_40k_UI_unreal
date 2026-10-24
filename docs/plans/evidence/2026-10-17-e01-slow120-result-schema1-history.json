@@ -1,0 +1,2147 @@
+{
+  "schemaVersion": 1,
+  "diagnostic": "E01-SLOW120",
+  "executionStatus": "FRESH_CHAIN_WRAPPER_FAILURE_BEFORE_CORE",
+  "recordKind": "FACTUAL_EXECUTION_SUMMARY_NOT_INDEPENDENT_ACCEPTANCE_VERDICT",
+  "recordedUtc": "2026-10-17T00:57:59.5131564Z",
+  "recordedBy": "/root/e01_slow120_acceptance",
+  "scope": {
+    "authority": [
+      "OWN14",
+      "OWN15"
+    ],
+    "captureRunId": "20261017T002136Z-8dad7f29",
+    "nativeSupplementRunId": "20261017T004553Z-ba9995c1",
+    "supplementMode": "Native/Audit only; immutable linked Capture; no Core host or game commands",
+    "fullE01Accepted": false,
+    "thirtySecondBudgetAccepted": false,
+    "productionResponsivenessAccepted": false,
+    "publicationAcceptance": "NOT_ESTABLISHED"
+  },
+  "frozenInputs": {
+    "baseCommit": "0467ee63fe6d4c775f429afae2233d7292787c31",
+    "nativeSupplementHead": "8955112131c8be4c26499325bddbe1d24eaf0260",
+    "captureHead": "6567f805c2e5b64741616c4ee8f0a04b558a88e9",
+    "packetRevision": 4,
+    "packet": {
+      "path": "docs/plans/research/2026-10-16-e01-boundary-packet.md",
+      "sha256": "40ce909d2b4a36638bdc922d9093df8650747b9f0a2deebe09846a86c6205249"
+    },
+    "wrapper": {
+      "path": "scripts/migration/Invoke-E01BoundaryProof.ps1",
+      "sha256": "095ebf4359665e05afcfd864eb33e2d6fa9cb7fd9cfd19be5afcc78db92aab52"
+    },
+    "pythonDriver": {
+      "path": "scripts/migration/e01_boundary.py",
+      "sha256": "0384abc244b1a40d55043d830aabc334fd32d0457fa7810e2d1a0901d552bc2f"
+    },
+    "pythonTests": {
+      "path": "tests/migration/test_e01_boundary.py",
+      "sha256": "316ff378b54566b3052ead3aa13aa660cd1adbf542cef0a9cdf670f03edd6cff"
+    },
+    "sourceManifest": {
+      "path": "tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/manifest.json",
+      "sha256": "bf861b2ec555c81e85a31e4b37e756c5e6b04d343522a95f3235700c2aec43f2"
+    },
+    "nativeCandidateFiles": [
+      {
+        "path": "Config/DefaultEditorSettings.ini",
+        "sha256": "52e28525a0b283949e94652e2c60353c55337ec15cc125f5fa2089d1c509a07d"
+      },
+      {
+        "path": "Config/DefaultEngine.ini",
+        "sha256": "272a93edb3ea1cd87311874a308aaa8e5db1e099d472d72e2b935259a06bcfdc"
+      },
+      {
+        "path": "Config/DefaultGame.ini",
+        "sha256": "dfee0b67a784d67dbaaa8d76f45f7cc8afa3563bf2cd9d3962a5c0282bf01bfb"
+      },
+      {
+        "path": "docs/plans/research/2026-10-16-e01-boundary-packet.md",
+        "sha256": "40ce909d2b4a36638bdc922d9093df8650747b9f0a2deebe09846a86c6205249"
+      },
+      {
+        "path": "scripts/migration/Invoke-E01BoundaryProof.ps1",
+        "sha256": "095ebf4359665e05afcfd864eb33e2d6fa9cb7fd9cfd19be5afcc78db92aab52"
+      },
+      {
+        "path": "Source/WarhammerClient.Target.cs",
+        "sha256": "f3f502a98f95475d3bc8b007e10fd956e0d19c79cf41820345ac062fe0eb5acb"
+      },
+      {
+        "path": "Source/WarhammerClient/Private/Migration/CoreBoundaryEvidence.cpp",
+        "sha256": "217d3ef245aa610ee99fa9e87223f8a9fa844ae1c99da996633d41d28e82dbf8"
+      },
+      {
+        "path": "Source/WarhammerClient/Private/Migration/CoreBoundaryEvidence.h",
+        "sha256": "ada9fa50d1273cb85485cdf998943bd0d0d5617c7743154c16f155bd7808a153"
+      },
+      {
+        "path": "Source/WarhammerClient/Private/Tests/CoreBoundaryEvidenceTests.cpp",
+        "sha256": "c24760c683960ca99376454dd42e3ac657c3a37b79c1bc7b466b622b5b602665"
+      },
+      {
+        "path": "Source/WarhammerClient/WarhammerClient.Build.cs",
+        "sha256": "61286f8f12ffc90ff02f8369392479588374a8cff6b351518ca66386c771fefb"
+      },
+      {
+        "path": "Source/WarhammerClientEditor.Target.cs",
+        "sha256": "8d551a7c57ac5e51a0230f6c1b0b792f23f68b7512d07ad634d8b05b26831a10"
+      },
+      {
+        "path": "tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/manifest.json",
+        "sha256": "bf861b2ec555c81e85a31e4b37e756c5e6b04d343522a95f3235700c2aec43f2"
+      },
+      {
+        "path": "WarhammerClient.uproject",
+        "sha256": "b0b4d82d928188000289ec95964b808cd21c2acd9da5b3765b4b69f65512e3ff"
+      }
+    ],
+    "historicalCaptureCandidate": {
+      "head": "6567f805c2e5b64741616c4ee8f0a04b558a88e9",
+      "files": [
+        {
+          "sha256": "d540cf96f8513833c4c708a7104f520554e8244b4502ed7a49d5f695ebe90c76",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-16-e01-boundary-packet.md"
+        },
+        {
+          "sha256": "0384abc244b1a40d55043d830aabc334fd32d0457fa7810e2d1a0901d552bc2f",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\e01_boundary.py"
+        },
+        {
+          "sha256": "f3b2a938a1f314ee5ff6d39b77fadb73cb3d5e1d5e92a562957305759acba2dc",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E01BoundaryProof.ps1"
+        },
+        {
+          "sha256": "bf861b2ec555c81e85a31e4b37e756c5e6b04d343522a95f3235700c2aec43f2",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\fixtures\\5f509724da25a2f6ded0c2739a8e7c84bdf59c91\\manifest.json"
+        },
+        {
+          "sha256": "316ff378b54566b3052ead3aa13aa660cd1adbf542cef0a9cdf670f03edd6cff",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\test_e01_boundary.py"
+        }
+      ]
+    },
+    "identityScope": "Historical candidate identities for the recorded executed Capture/native evidence; not the unexecuted revision6 replacement candidate."
+  },
+  "dependencyIdentity": {
+    "coreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+    "arcadeCommit": "5088c1c49dcaff29eb59fb64b3063d30214dde73",
+    "contractVersion": "44.3.33",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a",
+    "runtimeResources": 3116,
+    "ownedRuntime": ".local/core-44.3.33",
+    "runtimeTreeSha256": "b01989fc595730d8ea6f1a10c7a5004510fca877a9b69aad9f3285cab357a897",
+    "runtimeProvenanceSha256": "39c485c33e482b158edb157a0ffaa69224c09e15de5655277b64289887f7cf7c",
+    "bytecodePolicy": "REFUSE_ANY_PYC",
+    "sourceInventoryMembers": 127,
+    "normalizedContractHashesVerified": 234,
+    "canonicalEnvelopes": 98,
+    "canonicalShapeCounts": {
+      "topLevelFinite": 73,
+      "nestedFinite": 1,
+      "parameterized": 24
+    },
+    "sourceReferenceOnlySiblings": true
+  },
+  "toolchain": {
+    "engineVersionSha256": "eab58750e84719489f3ee0d42d05a533ceb357eb3ee511777e9408d27a85f43c",
+    "compilerSha256": "fe251ef50a1545b1b0835ee17b1e785459712b38d79e45b5c1d3d28970a36619",
+    "uv": "C:\\Users\\Rabid\\.local\\bin\\uv.exe",
+    "selectedPythonSha256": "5556f2048a17b14693ffadeb25dc0add537933873cee2ca623cf981ca65a6168",
+    "selectedPython": "C:\\Users\\Rabid\\AppData\\Roaming\\uv\\python\\cpython-3.14.5-windows-x86_64-none\\python.exe",
+    "compilerVersion": "14.44.35229",
+    "engineVersion": {
+      "MajorVersion": 5,
+      "MinorVersion": 8,
+      "PatchVersion": 3,
+      "Changelist": 58210709,
+      "CompatibleChangelist": 55116800,
+      "IsLicenseeVersion": 0,
+      "IsPromotedBuild": 1,
+      "BranchName": "++UE5+Release-5.8"
+    },
+    "pythonVersion": "Python 3.14.5",
+    "engineRoot": "C:\\Program Files\\Epic Games\\UE_5.8",
+    "uvSha256": "cd628b46729d01ad110146a647a633a6e5de0e091d73db46afaeee6fcb4ba648",
+    "freeBytes": 792225628160,
+    "uvVersion": "uv 0.11.19 (7b2cff1c3 2026-06-03 x86_64-pc-windows-msvc)",
+    "sdk": "10.0.22621.0",
+    "compiler": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe"
+  },
+  "linkedCapture": {
+    "phase": {
+      "runId": "20261017T002136Z-8dad7f29",
+      "phase": "Capture",
+      "status": "LOCAL_HTTP_BOUNDARY_PASS",
+      "startedUtc": "2026-10-17T00:23:54.514451Z",
+      "completedUtc": "2026-10-17T00:37:21.7596852Z",
+      "result": {
+        "path": ".local/experiments/E01-target/20261017T002136Z-8dad7f29/capture/result.json",
+        "sha256": "137ceaaa5a3b85f3a49193525eeb198aedaf28a113b7f760da66081d5983e699"
+      },
+      "predecessor": {
+        "sha256": "667cb2a61942abe205afc26acd3f9dc1d96d6d1df19c8aa48e4041ce9aa411a1",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T002136Z-8dad7f29\\prepareruntime\\result.json"
+      },
+      "processCount": 15,
+      "failedProcessCount": 0,
+      "timedOutProcessCount": 0,
+      "redaction": {
+        "status": "PASS",
+        "scope": "wrapper outputs; harness scans role/private artifacts separately"
+      },
+      "siblingsBefore": {
+        "core": {
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+          "status": ""
+        },
+        "arcade": {
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73",
+          "status": ""
+        }
+      },
+      "siblingsAfter": {
+        "core": {
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+          "status": ""
+        },
+        "arcade": {
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73",
+          "status": ""
+        }
+      }
+    },
+    "report": {
+      "path": ".local/experiments/E01-target/20261017T002136Z-8dad7f29/capture/python-capture/report.json",
+      "sha256": "c99109764c6708889f2dc365696d03a9fd987465dd6e5d71f108a794223530a0"
+    },
+    "historicalWrapperSha256": "f3b2a938a1f314ee5ff6d39b77fadb73cb3d5e1d5e92a562957305759acba2dc",
+    "historicalPacketRevision": 3,
+    "historicalPacketSha256": "d540cf96f8513833c4c708a7104f520554e8244b4502ed7a49d5f695ebe90c76",
+    "diagnosticBounds": {
+      "connectCapSeconds": 3,
+      "label": "E01-SLOW120",
+      "purpose": "Separately authorized 120-second diagnostic; prior run outcomes remain unchanged",
+      "readinessBudgetSeconds": 30,
+      "requestBudgetSeconds": 120,
+      "socketReadCapSeconds": 120
+    },
+    "unitTests": {
+      "status": "PASS",
+      "executed": 40,
+      "durationSeconds": 0.07,
+      "log": {
+        "path": ".local/experiments/E01-target/20261017T002136Z-8dad7f29/capture/python-unittest.stderr.log",
+        "sha256": "2dd05608d3147f651f1de915458b54a13f4b3903052fcdd47f420ee8f38e3d62"
+      }
+    },
+    "caseCounts": {
+      "blocked": 0,
+      "discovered": 14,
+      "executed": 14,
+      "failed": 0,
+      "notRun": 0,
+      "passed": 14
+    },
+    "caseStatuses": [
+      {
+        "id": "SOURCE-01",
+        "status": "PASS",
+        "expected": "Exact clean Core, 127 source members, 234 canonical hashes, 98 unique envelopes"
+      },
+      {
+        "id": "RUNTIME-01",
+        "status": "PASS",
+        "expected": "Exact installed build + 3116 resources + isolated native imports"
+      },
+      {
+        "id": "SCHEMA-01",
+        "status": "PASS",
+        "expected": "All copied example/schema associations validated through local registry"
+      },
+      {
+        "id": "SCOPE-01",
+        "status": "PASS",
+        "expected": "Switch invalidates drafts/cursors and rejects older generations/revisions"
+      },
+      {
+        "id": "AUTH-01",
+        "status": "PASS",
+        "expected": "All distinct denied credential contexts share scoped errors without hidden request/options"
+      },
+      {
+        "id": "VIEW-01",
+        "status": "PASS",
+        "expected": "Explicit role projections/events; delayed snapshot; replay live denial and scoped cursors"
+      },
+      {
+        "id": "FINITE-01",
+        "status": "PASS",
+        "expected": "Offered finite action applies once and refreshed authorized local/HTTP state agrees"
+      },
+      {
+        "id": "RETRY-01",
+        "status": "PASS",
+        "expected": "Same complete envelope/credential bytes; changed envelope conflicts; no display rollback"
+      },
+      {
+        "id": "STALE-01",
+        "status": "PASS",
+        "expected": "Wrong revision, consumed request and waiting advance typed errors"
+      },
+      {
+        "id": "FIDELITY-01",
+        "status": "PASS",
+        "expected": "Exact wire status/code/message; Core issue #588 fidelity gap explicit"
+      },
+      {
+        "id": "MOVE-01",
+        "status": "PASS",
+        "expected": "Meaningful one-inch normal move accepted; each actual model pose matches its requested endpoints"
+      },
+      {
+        "id": "MOVE-02",
+        "status": "PASS",
+        "expected": "Wrong/missing/duplicate inventories uncommitted; invalid geometry committed; fresh valid retry accepted"
+      },
+      {
+        "id": "ERROR-01",
+        "status": "PASS",
+        "expected": "Actual 400/401/403/404/409 + both422 shapes and strict classifier negatives"
+      },
+      {
+        "id": "LIFETIME-01",
+        "status": "PASS",
+        "expected": "Client busy-port rejection before host launch, scoped attach disconnect, managed stop, explicit restart SessionLost"
+      }
+    ],
+    "transportMeasurements": {
+      "bounds": {
+        "connectSeconds": 3,
+        "maxSubmissionsPerScenario": 256,
+        "readSeconds": 120,
+        "requestBytes": 16777216,
+        "responseBytes": 67108864,
+        "totalSeconds": 120
+      },
+      "http": {
+        "largestRequestBytes": 222671,
+        "largestResponseBytes": 2610120,
+        "maxLatencySeconds": 36.995944599621,
+        "requests": 139
+      },
+      "local": {
+        "largestRequestBytes": 222664,
+        "largestResponseBytes": 4889647,
+        "maxLatencySeconds": 37.51746609993279,
+        "requests": 129
+      }
+    },
+    "movement": {
+      "caseStatus": "PASS",
+      "actual": {
+        "movedModelCount": 5,
+        "numericAbsoluteTolerance": 1e-09,
+        "poseEvidence": [
+          {
+            "afterPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 7.8,
+                "y": 51.0,
+                "z": 0.0
+              }
+            },
+            "beforePose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.8,
+                "y": 51.0,
+                "z": 0.0
+              }
+            },
+            "modelId": "army-alpha:scout-redeploy-unit:core-intercessor-like:004",
+            "requestedFinalPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 7.8,
+                "y": 51.0,
+                "z": 0.0
+              }
+            },
+            "requestedInitialPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.8,
+                "y": 51.0,
+                "z": 0.0
+              }
+            },
+            "xyzChanged": true
+          },
+          {
+            "afterPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 7.8,
+                "y": 52.8,
+                "z": 0.0
+              }
+            },
+            "beforePose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.8,
+                "y": 52.8,
+                "z": 0.0
+              }
+            },
+            "modelId": "army-alpha:scout-redeploy-unit:core-intercessor-like:005",
+            "requestedFinalPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 7.8,
+                "y": 52.8,
+                "z": 0.0
+              }
+            },
+            "requestedInitialPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.8,
+                "y": 52.8,
+                "z": 0.0
+              }
+            },
+            "xyzChanged": true
+          },
+          {
+            "afterPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.0,
+                "y": 51.0,
+                "z": 0.0
+              }
+            },
+            "beforePose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 5.0,
+                "y": 51.0,
+                "z": 0.0
+              }
+            },
+            "modelId": "army-alpha:scout-redeploy-unit:core-intercessor-like:001",
+            "requestedFinalPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.0,
+                "y": 51.0,
+                "z": 0.0
+              }
+            },
+            "requestedInitialPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 5.0,
+                "y": 51.0,
+                "z": 0.0
+              }
+            },
+            "xyzChanged": true
+          },
+          {
+            "afterPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.0,
+                "y": 52.8,
+                "z": 0.0
+              }
+            },
+            "beforePose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 5.0,
+                "y": 52.8,
+                "z": 0.0
+              }
+            },
+            "modelId": "army-alpha:scout-redeploy-unit:core-intercessor-like:002",
+            "requestedFinalPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.0,
+                "y": 52.8,
+                "z": 0.0
+              }
+            },
+            "requestedInitialPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 5.0,
+                "y": 52.8,
+                "z": 0.0
+              }
+            },
+            "xyzChanged": true
+          },
+          {
+            "afterPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.0,
+                "y": 54.6,
+                "z": 0.0
+              }
+            },
+            "beforePose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 5.0,
+                "y": 54.6,
+                "z": 0.0
+              }
+            },
+            "modelId": "army-alpha:scout-redeploy-unit:core-intercessor-like:003",
+            "requestedFinalPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 6.0,
+                "y": 54.6,
+                "z": 0.0
+              }
+            },
+            "requestedInitialPose": {
+              "facing": {
+                "degrees": 0.0
+              },
+              "position": {
+                "x": 5.0,
+                "y": 54.6,
+                "z": 0.0
+              }
+            },
+            "xyzChanged": true
+          }
+        ],
+        "positionChange": true,
+        "requestId": "decision-request-000020",
+        "requestedModelCount": 5
+      },
+      "allFiveModelXDeltaInches": 1,
+      "negativeInventoryAndGeometry": {
+        "historyAdvancedOnceForGeometry": true,
+        "historyUnchangedForInventory": true,
+        "revisionAfter": 21,
+        "revisionBefore": 19
+      },
+      "recordedInvalidResponse": {
+        "path": "tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/wire/movement_recorded_invalid/playerA.json",
+        "sha256": "45dcaa265814f014d42d9e5218147204bb084b6f93467908e209bebc2a522c73"
+      },
+      "acceptedMovementResponse": {
+        "path": "tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/wire/movement_accepted/playerA.json",
+        "sha256": "eac7c68dea398737d706a2ff94f50563f82de6ba7a01813c37fa14b4e4a1021c"
+      }
+    },
+    "ownedHostProcesses": [
+      {
+        "owner": "managed-primary",
+        "pid": 30736,
+        "startUTC": "2026-10-16T20:24:35.322706-04:00",
+        "readyUTC": "2026-10-16T20:24:44.454247-04:00",
+        "exitUTC": "2026-10-16T20:37:20.291268-04:00",
+        "shutdown": "owned-marker",
+        "exitCode": 0,
+        "maximumSeconds": 1800,
+        "readinessRequestBudgetSeconds": 24.668017100077122,
+        "launcherSHA256": "f83f8f4cd5d55da1b5a4a5a8e6f7ceca1666dabf400dd8c4a39b2ace31ffaef5",
+        "portSafetyLimit": "Client prelaunch availability probe only; selected Core development host does not ensure Windows late co-bind exclusivity"
+      },
+      {
+        "owner": "managed-restart",
+        "pid": 5596,
+        "startUTC": "2026-10-16T20:37:10.170679-04:00",
+        "readyUTC": "2026-10-16T20:37:19.422962-04:00",
+        "exitUTC": "2026-10-16T20:37:20.280967-04:00",
+        "shutdown": "owned-marker",
+        "exitCode": 0,
+        "maximumSeconds": 1800,
+        "readinessRequestBudgetSeconds": 24.4661468998529,
+        "launcherSHA256": "f83f8f4cd5d55da1b5a4a5a8e6f7ceca1666dabf400dd8c4a39b2ace31ffaef5",
+        "portSafetyLimit": "Client prelaunch availability probe only; selected Core development host does not ensure Windows late co-bind exclusivity"
+      }
+    ],
+    "executedPythonProcesses": [
+      {
+        "label": "python-preflight",
+        "pid": 14492,
+        "startedUtc": "2026-10-17T00:24:11.1469325Z",
+        "exitedUtc": "2026-10-17T00:24:16.1422845Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "timeoutSeconds": 1800
+      },
+      {
+        "label": "python-runtime",
+        "pid": 10420,
+        "startedUtc": "2026-10-17T00:24:16.1656168Z",
+        "exitedUtc": "2026-10-17T00:24:22.4770511Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "timeoutSeconds": 1800
+      },
+      {
+        "label": "python-unittest",
+        "pid": 33732,
+        "startedUtc": "2026-10-17T00:24:22.4902545Z",
+        "exitedUtc": "2026-10-17T00:24:23.0546034Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "timeoutSeconds": 1800
+      },
+      {
+        "label": "python-capture",
+        "pid": 29480,
+        "startedUtc": "2026-10-17T00:24:23.0790853Z",
+        "exitedUtc": "2026-10-17T00:37:21.187263Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "timeoutSeconds": 1800
+      }
+    ],
+    "excludedCases": [
+      {
+        "id": "VIEW-TERMINAL-REPLAY",
+        "reason": "No reviewed canonical terminal completion procedure in this bounded subset; no private terminal mutation",
+        "status": "NOT_RUN"
+      }
+    ],
+    "comparisonNormalization": "Only operational timestamps and authenticated opaque cursor tokens are ignored for equality; all original captures/hashes retained; IDs, revisions, projections and typed action payloads preserved",
+    "redaction": {
+      "policy": "credential values/fields and authorization-header patterns rejected before export; roles separated",
+      "status": "PASS"
+    },
+    "processProvenanceLimits": {
+      "originalRawReportProcessRecords": 2,
+      "recordedOwners": [
+        "managed-primary",
+        "managed-restart"
+      ],
+      "attachWorkerProcessRecordPresent": false,
+      "attachWorkerPid": null,
+      "scope": "Original Capture002136 raw Python process ledger contains only the two owned hosts; no attach-worker PID can be recovered from that ledger.",
+      "missingActualRecordMustNotBeInvented": true,
+      "replacementExecutedProcessInventory": "REQUIRED_IN_FRESH_CAPTURE"
+    }
+  },
+  "wirePrivacyAndPromotion": {
+    "reviewAgent": "/root/e01_wire_privacy_review",
+    "reportedPrivacyDisposition": "PRIVACY_PASS_EXACT_INDEX_AND_30_RAW_BODIES",
+    "promotionUtc": "2026-10-17T00:39:46.1683767Z",
+    "index": {
+      "path": "tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/wire/index.json",
+      "sha256": "e1658b116e6ed53f84cee84b3d8a5c1adfd3ded3fa225db61d80d21d9953df0a"
+    },
+    "promotionReceipt": {
+      "path": ".local/experiments/E01-target/20261017T002136Z-8dad7f29/wire-promotion.json",
+      "sha256": "e2211d3ff5f3f3c92873be70ef515f92b1ffcd3a2f7a7981d1c23bdc600150f6"
+    },
+    "rawBodyCount": 30,
+    "rawBodyBytes": 2003509,
+    "approvedOriginalBytesPromotedUnchanged": true,
+    "excludes": "All admin, private attempts, private traces and host logs",
+    "priorIndexSha256": "62E6C340405CBBC30EAE8BBD4CDC321222F2DADE51B6A4304C2CE422774F03BA",
+    "priorCorpusPreservedCommit": "6567f805c2e5b64741616c4ee8f0a04b558a88e9",
+    "scope": "Concrete corpus privacy approval; not OWN15 final code/requirements acceptance"
+  },
+  "nativeSupplement": {
+    "preflight": {
+      "runId": "20261017T004553Z-ba9995c1",
+      "phase": "Preflight",
+      "status": "SOURCE_INVENTORY_PASS",
+      "startedUtc": "2026-10-17T00:51:04.9690687Z",
+      "completedUtc": "2026-10-17T00:51:50.7766857Z",
+      "result": {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/preflight/result.json",
+        "sha256": "d897d11ff314a2f3eab741d017cc6928dc6f49177c15155b26495ca030ae1d0b"
+      },
+      "predecessor": null,
+      "processCount": 15,
+      "failedProcessCount": 0,
+      "timedOutProcessCount": 0,
+      "redaction": {
+        "status": "PASS",
+        "scope": "wrapper outputs; harness scans role/private artifacts separately"
+      },
+      "siblingsBefore": {
+        "core": {
+          "status": "",
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91"
+        },
+        "arcade": {
+          "status": "",
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73"
+        }
+      },
+      "siblingsAfter": {
+        "core": {
+          "status": "",
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91"
+        },
+        "arcade": {
+          "status": "",
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73"
+        }
+      }
+    },
+    "prepareRuntime": {
+      "runId": "20261017T004553Z-ba9995c1",
+      "phase": "PrepareRuntime",
+      "status": "INSTALLED_RUNTIME_PASS",
+      "startedUtc": "2026-10-17T00:52:23.0704271Z",
+      "completedUtc": "2026-10-17T00:53:07.4333937Z",
+      "result": {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/prepareruntime/result.json",
+        "sha256": "0a20a841f9f521aa745c98f011936124617472654a5449a0a0960af7aade39e3"
+      },
+      "predecessor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\preflight\\result.json",
+        "sha256": "d897d11ff314a2f3eab741d017cc6928dc6f49177c15155b26495ca030ae1d0b"
+      },
+      "processCount": 10,
+      "failedProcessCount": 0,
+      "timedOutProcessCount": 0,
+      "redaction": {
+        "scope": "wrapper outputs; harness scans role/private artifacts separately",
+        "status": "PASS"
+      },
+      "siblingsBefore": {
+        "core": {
+          "status": "",
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91"
+        },
+        "arcade": {
+          "status": "",
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73"
+        }
+      },
+      "siblingsAfter": {
+        "core": {
+          "status": "",
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91"
+        },
+        "arcade": {
+          "status": "",
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73"
+        }
+      }
+    },
+    "native": {
+      "runId": "20261017T004553Z-ba9995c1",
+      "phase": "Native",
+      "status": "NATIVE_FIXTURE_PASS",
+      "startedUtc": "2026-10-17T00:53:50.6268575Z",
+      "completedUtc": "2026-10-17T00:54:33.8365994Z",
+      "result": {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/native/result.json",
+        "sha256": "58dcdada2aaced2f72d4026cab9a382edcc8c1a513cb09c8f69bdde9dd287ed2"
+      },
+      "predecessor": {
+        "sha256": "0a20a841f9f521aa745c98f011936124617472654a5449a0a0960af7aade39e3",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\prepareruntime\\result.json"
+      },
+      "processCount": 16,
+      "failedProcessCount": 0,
+      "timedOutProcessCount": 0,
+      "redaction": {
+        "status": "PASS",
+        "scope": "wrapper outputs; harness scans role/private artifacts separately"
+      },
+      "siblingsBefore": {
+        "core": {
+          "status": "",
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91"
+        },
+        "arcade": {
+          "status": "",
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73"
+        }
+      },
+      "siblingsAfter": {
+        "core": {
+          "status": "",
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91"
+        },
+        "arcade": {
+          "status": "",
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73"
+        }
+      }
+    },
+    "captureLink": {
+      "runtimeProvenanceSha256": "39c485c33e482b158edb157a0ffaa69224c09e15de5655277b64289887f7cf7c",
+      "captureSha256": "137ceaaa5a3b85f3a49193525eeb198aedaf28a113b7f760da66081d5983e699",
+      "reuse": "Read-only approved Capture evidence; this supplement launches no Core host and submits no commands. The original failed Native remains unchanged.",
+      "capturePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T002136Z-8dad7f29\\capture\\result.json",
+      "runtimeTreeSha256": "b01989fc595730d8ea6f1a10c7a5004510fca877a9b69aad9f3285cab357a897",
+      "wireIndexSha256": "e1658b116e6ed53f84cee84b3d8a5c1adfd3ded3fa225db61d80d21d9953df0a",
+      "historicalCandidate": {
+        "head": "6567f805c2e5b64741616c4ee8f0a04b558a88e9",
+        "files": [
+          {
+            "sha256": "d540cf96f8513833c4c708a7104f520554e8244b4502ed7a49d5f695ebe90c76",
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-16-e01-boundary-packet.md"
+          },
+          {
+            "sha256": "0384abc244b1a40d55043d830aabc334fd32d0457fa7810e2d1a0901d552bc2f",
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\e01_boundary.py"
+          },
+          {
+            "sha256": "f3b2a938a1f314ee5ff6d39b77fadb73cb3d5e1d5e92a562957305759acba2dc",
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E01BoundaryProof.ps1"
+          },
+          {
+            "sha256": "bf861b2ec555c81e85a31e4b37e756c5e6b04d343522a95f3235700c2aec43f2",
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\fixtures\\5f509724da25a2f6ded0c2739a8e7c84bdf59c91\\manifest.json"
+          },
+          {
+            "sha256": "316ff378b54566b3052ead3aa13aa660cd1adbf542cef0a9cdf670f03edd6cff",
+            "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\test_e01_boundary.py"
+          }
+        ]
+      },
+      "childReports": [
+        {
+          "sha256": "e5736d5135817f3fda8324a45f5443795888d32364857a14601aa3af2d5dfc9f",
+          "phase": "preflight",
+          "caseCounts": {
+            "blocked": 0,
+            "discovered": 1,
+            "executed": 1,
+            "failed": 0,
+            "notRun": 0,
+            "passed": 1
+          },
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T002136Z-8dad7f29\\capture\\python-preflight\\report.json",
+          "status": "SOURCE_INVENTORY_PASS"
+        },
+        {
+          "sha256": "4de2b91c7fdc46a8a184070c0c9c8e38a8dc23be6ceaaf919c320806132d5f55",
+          "phase": "verify-runtime",
+          "caseCounts": {
+            "blocked": 0,
+            "discovered": 2,
+            "executed": 2,
+            "failed": 0,
+            "notRun": 0,
+            "passed": 2
+          },
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T002136Z-8dad7f29\\capture\\python-runtime\\report.json",
+          "status": "INSTALLED_RUNTIME_PASS"
+        },
+        {
+          "sha256": "c99109764c6708889f2dc365696d03a9fd987465dd6e5d71f108a794223530a0",
+          "phase": "capture",
+          "caseCounts": {
+            "blocked": 0,
+            "discovered": 14,
+            "executed": 14,
+            "failed": 0,
+            "notRun": 0,
+            "passed": 14
+          },
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T002136Z-8dad7f29\\capture\\python-capture\\report.json",
+          "status": "LOCAL_HTTP_BOUNDARY_PASS"
+        }
+      ],
+      "currentPrepareRuntime": {
+        "sha256": "0a20a841f9f521aa745c98f011936124617472654a5449a0a0960af7aade39e3",
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\prepareruntime\\result.json"
+      },
+      "captureRunId": "20261017T002136Z-8dad7f29"
+    },
+    "processes": [
+      {
+        "label": "native-build",
+        "executable": "C:\\Users\\Rabid\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "executableSha256": "362a356ce7f0940ec74f73a8fc2c990a2cc24a38a11c90bbd8eca947110ad139",
+        "arguments": [
+          "-NoLogo",
+          "-NoProfile",
+          "-NonInteractive",
+          "-Command",
+          "& $env:E01_BUILD_SCRIPT @(\"WarhammerClientEditor\", \"Win64\", \"Development\", (\"-Project=\" + $env:E01_PROJECT), \"-WaitMutex\", \"-NoUBA\", (\"-UBARootDir=\" + $env:E01_UBA), (\"-Log=\" + $env:E01_BUILD_LOG)); if ($null -eq $LASTEXITCODE) { exit 99 }; exit $LASTEXITCODE"
+        ],
+        "pid": 18364,
+        "startedUtc": "2026-10-17T00:54:10.6629556Z",
+        "exitedUtc": "2026-10-17T00:54:13.8074437Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "timeoutSeconds": 1800
+      },
+      {
+        "label": "native-automation",
+        "executable": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Binaries\\Win64\\UnrealEditor-Cmd.exe",
+        "executableSha256": "4dbab2739e7afef7ec96cdfe48a63211742209f9a56af0620cf228913d64fb0c",
+        "arguments": [
+          "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\WarhammerClient.uproject",
+          "-unattended",
+          "-nop4",
+          "-NullRHI",
+          "-nosplash",
+          "-nowrite",
+          "-ExecCmds=Automation RunTests Warhammer.Migration.E01Boundary",
+          "-TestExit=Automation Test Queue Empty",
+          "-ReportExportPath=C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\automation",
+          "-ABSLOG=C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\native-automation.log",
+          "-E01FixtureRoot=C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\fixtures\\5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+          "-UserDir=C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\ue-user",
+          "-DDC=(EnginePak=InstalledEnginePak,Local)",
+          "-DDC-NoDefaultGraph",
+          "-LocalDataCachePath=C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\ddc"
+        ],
+        "pid": 35872,
+        "startedUtc": "2026-10-17T00:54:13.8206892Z",
+        "exitedUtc": "2026-10-17T00:54:32.9671342Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "timeoutSeconds": 1800
+      }
+    ],
+    "automation": {
+      "report": {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/automation/index.json",
+        "sha256": "a469ea4cd41cd6e6c30873ed9871a391fd69b98baef77dc6f328f7afd93b7a24"
+      },
+      "matchingDiscovered": 132,
+      "executed": 132,
+      "uniqueTestNames": 132,
+      "passed": 132,
+      "succeededWithWarnings": 0,
+      "failed": 0,
+      "notRun": 0,
+      "inProcess": 0,
+      "durationSeconds": 1.6587226390838623,
+      "allCaseStates": "Success",
+      "canonicalEnvelopeTests": 98,
+      "wireTests": 30,
+      "otherTests": [
+        "CanonicalInventory",
+        "JsonPreservation",
+        "StrictNegatives",
+        "WireRequiredCoverage"
+      ]
+    },
+    "nativeArtifacts": [
+      {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/native-build.log",
+        "sha256": "db10b075852740d47c7e0c2cd7e54d48f98011cd68b5c8f0e51a078a16bb7786",
+        "redaction": "PASS"
+      },
+      {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/native-automation.log",
+        "sha256": "0978a501b950ac8361d7f5c0b19234a00c2e271475264b3f99f8ee4d65ccde1d",
+        "redaction": "PASS"
+      },
+      {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/automation/index.json",
+        "sha256": "a469ea4cd41cd6e6c30873ed9871a391fd69b98baef77dc6f328f7afd93b7a24",
+        "redaction": "PASS"
+      }
+    ],
+    "ddc": {
+      "mainLog": {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/native-automation.log",
+        "sha256": "0978a501b950ac8361d7f5c0b19234a00c2e271475264b3f99f8ee4d65ccde1d"
+      },
+      "localPath": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/ddc",
+      "localWritableObserved": true,
+      "installedEnginePakOpenedForReading": true,
+      "fallbackObserved": false,
+      "observationScope": "LogDerivedDataCache records in the actual main log; explicit inline graph with default fallback disabled",
+      "logEvidence": [
+        {
+          "line": 941,
+          "text": "[2026.10.17-00.54.16:315][  0]LogDerivedDataCache: Display: ../../../Engine/DerivedDataCache/Compressed.ddp: Opened pak cache for reading. (1670 MiB)"
+        },
+        {
+          "line": 942,
+          "text": "[2026.10.17-00.54.16:315][  0]LogDerivedDataCache: Local: Found command line override LocalDataCachePath=C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\ddc"
+        },
+        {
+          "line": 943,
+          "text": "[2026.10.17-00.54.16:339][  0]LogDerivedDataCache: C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/experiments/E01-target/20261017T004553Z-ba9995c1/ddc: Speed tests took 0.02 seconds."
+        },
+        {
+          "line": 944,
+          "text": "[2026.10.17-00.54.16:339][  0]LogDerivedDataCache: Display: C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/experiments/E01-target/20261017T004553Z-ba9995c1/ddc: Performance: Latency=0.03ms. RandomReadSpeed=121.14MBs, RandomWriteSpeed=111.68MBs. Assigned SpeedClass 'Local'"
+        },
+        {
+          "line": 945,
+          "text": "[2026.10.17-00.54.16:341][  0]LogDerivedDataCache: Local: Using data cache path C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/experiments/E01-target/20261017T004553Z-ba9995c1/ddc: Writable"
+        }
+      ]
+    },
+    "settings": {
+      "editorBefore": {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/native-config-before.json",
+        "sha256": "bb2dcff50fd0984c0392096b7b6aede983d8087b10c93bd0534e27ade710edc5"
+      },
+      "editorAfter": {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/native-config-after.json",
+        "sha256": "49a7308221d8c095d0dc5063029fa27270e637f2404a8eb52eb3f3b9a42bfabb"
+      },
+      "status": "UNCHANGED",
+      "observedPathCount": 6,
+      "changedPaths": [],
+      "observations": [
+        {
+          "path": "C:/Program Files/Epic Games/UE_5.8/Engine/Config/BaseEditorSettings.ini",
+          "exists": true,
+          "sha256": "5272509E0B672E5BF9930A8162AF9707C47DD913E8149627D48EAC086C092C26"
+        },
+        {
+          "path": "C:/Users/Rabid/AppData/Local/Unreal Engine/Engine/Config/UserEditorSettings.ini",
+          "exists": false,
+          "sha256": null
+        },
+        {
+          "path": "C:/Users/Rabid/AppData/Local/UnrealEngine/5.8/Saved/Config/WindowsEditor/EditorSettings.ini",
+          "exists": true,
+          "sha256": "B7E47645C8169E0C05AB6AD43F99F4529D33CD12EF019432FA56BD9F994B464E"
+        },
+        {
+          "path": "C:/Users/Rabid/Documents/Unreal Engine/Engine/Config/UserEditorSettings.ini",
+          "exists": false,
+          "sha256": null
+        },
+        {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Config\\DefaultEditorSettings.ini",
+          "exists": true,
+          "sha256": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D"
+        },
+        {
+          "path": "C:\\Users\\Rabid\\OneDrive\\Documents\\Unreal Engine\\Engine\\Config\\UserEditorSettings.ini",
+          "exists": false,
+          "sha256": null
+        }
+      ],
+      "historicalCreatedGlobalSettingsPreserved": true,
+      "ubtBefore": [
+        {
+          "sha256": null,
+          "path": "C:\\Users\\Rabid\\AppData\\Local\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+          "exists": false
+        },
+        {
+          "sha256": "1e7cd8512dedf37d7b103c5592f5600433e7fe97da23434e69990f8a3370508a",
+          "path": "C:\\Users\\Rabid\\AppData\\Roaming\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+          "exists": true
+        },
+        {
+          "sha256": null,
+          "path": "C:\\Users\\Rabid\\OneDrive\\Documents\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+          "exists": false
+        }
+      ],
+      "ubtAfter": [
+        {
+          "sha256": null,
+          "path": "C:\\Users\\Rabid\\AppData\\Local\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+          "exists": false
+        },
+        {
+          "sha256": "1e7cd8512dedf37d7b103c5592f5600433e7fe97da23434e69990f8a3370508a",
+          "path": "C:\\Users\\Rabid\\AppData\\Roaming\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+          "exists": true
+        },
+        {
+          "sha256": null,
+          "path": "C:\\Users\\Rabid\\OneDrive\\Documents\\Unreal Engine\\UnrealBuildTool\\BuildConfiguration.xml",
+          "exists": false
+        }
+      ],
+      "authoredConfigBefore": [
+        {
+          "sha256": "52e28525a0b283949e94652e2c60353c55337ec15cc125f5fa2089d1c509a07d",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Config\\DefaultEditorSettings.ini",
+          "kind": "file"
+        },
+        {
+          "sha256": "272a93edb3ea1cd87311874a308aaa8e5db1e099d472d72e2b935259a06bcfdc",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Config\\DefaultEngine.ini",
+          "kind": "file"
+        },
+        {
+          "sha256": "dfee0b67a784d67dbaaa8d76f45f7cc8afa3563bf2cd9d3962a5c0282bf01bfb",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Config\\DefaultGame.ini",
+          "kind": "file"
+        }
+      ],
+      "authoredConfigAfter": [
+        {
+          "sha256": "52e28525a0b283949e94652e2c60353c55337ec15cc125f5fa2089d1c509a07d",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Config\\DefaultEditorSettings.ini",
+          "kind": "file"
+        },
+        {
+          "sha256": "272a93edb3ea1cd87311874a308aaa8e5db1e099d472d72e2b935259a06bcfdc",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Config\\DefaultEngine.ini",
+          "kind": "file"
+        },
+        {
+          "sha256": "dfee0b67a784d67dbaaa8d76f45f7cc8afa3563bf2cd9d3962a5c0282bf01bfb",
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\Config\\DefaultGame.ini",
+          "kind": "file"
+        }
+      ],
+      "authoredConfigExactSetAndHashesUnchanged": true,
+      "nowriteUsed": true
+    }
+  },
+  "automatedEvidenceAudit": {
+    "phase": {
+      "runId": "20261017T004553Z-ba9995c1",
+      "phase": "Audit",
+      "status": "EVIDENCE_GATHERED_REQUIRES_INDEPENDENT_AUDIT",
+      "startedUtc": "2026-10-17T00:54:59.7350796Z",
+      "completedUtc": "2026-10-17T00:55:57.9179713Z",
+      "result": {
+        "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/audit/result.json",
+        "sha256": "8d5a0d821b73814043ab16188bd9b72612d1855850ab45157b8cbc14f5fe569d"
+      },
+      "predecessor": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T004553Z-ba9995c1\\native\\result.json",
+        "sha256": "58dcdada2aaced2f72d4026cab9a382edcc8c1a513cb09c8f69bdde9dd287ed2"
+      },
+      "processCount": 11,
+      "failedProcessCount": 0,
+      "timedOutProcessCount": 0,
+      "redaction": {
+        "status": "PASS",
+        "scope": "wrapper outputs; harness scans role/private artifacts separately"
+      },
+      "siblingsBefore": {
+        "core": {
+          "status": "",
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91"
+        },
+        "arcade": {
+          "status": "",
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73"
+        }
+      },
+      "siblingsAfter": {
+        "core": {
+          "status": "",
+          "head": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91"
+        },
+        "arcade": {
+          "status": "",
+          "head": "5088c1c49dcaff29eb59fb64b3063d30214dde73"
+        }
+      }
+    },
+    "childReport": {
+      "path": ".local/experiments/E01-target/20261017T004553Z-ba9995c1/audit/python-audit/report.json",
+      "sha256": "e668e4f2969cf7e8472bd1712032ec30bb3e72fc26a6133e4dacb388233d8f2c"
+    },
+    "childStatus": "EVIDENCE_AUDIT_PASS",
+    "caseCounts": {
+      "blocked": 0,
+      "discovered": 2,
+      "executed": 2,
+      "failed": 0,
+      "notRun": 0,
+      "passed": 2
+    },
+    "caseStatuses": [
+      {
+        "id": "SOURCE-01",
+        "status": "PASS",
+        "expected": "Exact clean Core, 127 source members, 234 canonical hashes, 98 unique envelopes"
+      },
+      {
+        "id": "ARTIFACT-AUDIT",
+        "status": "PASS",
+        "expected": "Nonempty immutable indexed role captures with exact bytes and typed outcomes"
+      }
+    ],
+    "processes": [
+      {
+        "label": "python-audit",
+        "pid": 29300,
+        "startedUtc": "2026-10-17T00:55:44.2421059Z",
+        "exitedUtc": "2026-10-17T00:55:56.380763Z",
+        "exitCode": 0,
+        "timedOut": false,
+        "timeoutSeconds": 1800
+      }
+    ],
+    "independentAcceptance": false
+  },
+  "preservedAttempts": [
+    {
+      "runId": "20261016T231112Z-f8ef82ca",
+      "requestBudgetSeconds": 30,
+      "captureStatus": "FAIL",
+      "independentAuditDisposition": "NOT_ACCEPTED",
+      "expiredCommandOutcome": "UNKNOWN",
+      "result": {
+        "path": "docs/plans/evidence/2026-10-16-e01-boundary-result.json",
+        "sha256": "a90e132b530fb64a53031158857f59712f0677a2186c3828066ac1b09125702d"
+      },
+      "audit": {
+        "path": "docs/plans/research/2026-10-16-e01-boundary-acceptance-audit.md",
+        "sha256": "3071fcb50f67625e0cfcbd01bbd4c2a18376a0b545acc28ff1dbfe022451b4ae"
+      },
+      "immutable": true,
+      "supersededBySlowSuccess": false
+    },
+    {
+      "runId": "20261016T235710Z-fcfefb29",
+      "captureStatus": "LOCAL_HTTP_BOUNDARY_PASS",
+      "capture": {
+        "path": ".local/experiments/E01-target/20261016T235710Z-fcfefb29/capture/result.json",
+        "sha256": "ab6a2eadbbe64886aad080b22cb2ce5b1d62f632d40adf97a075b365892bedc3"
+      },
+      "captureReport": {
+        "path": ".local/experiments/E01-target/20261016T235710Z-fcfefb29/capture/python-capture/report.json",
+        "sha256": "33540a96ee6332f496a12cd233d7ac2f298805b50b2030a043b893f259b4af8a"
+      },
+      "unitTestsPassed": 40,
+      "scenarioCasesPassed": 14,
+      "nativeStatus": "FAIL",
+      "native": {
+        "path": ".local/experiments/E01-target/20261016T235710Z-fcfefb29/native/result.json",
+        "sha256": "c91be7e9692ec7cb2da23076e3aab6e36926e780eed1adab4ed30d87b48b80b1"
+      },
+      "nativeFailure": "Reparse-point path is outside this proof's ownership model: C:\\Users\\Rabid\\OneDrive\\Documents",
+      "nativeBuildLaunched": false,
+      "nativeAutomationLaunched": false,
+      "wrapperAudit": "NOT_RUN"
+    },
+    {
+      "runId": "20261017T002136Z-8dad7f29",
+      "nativeStatus": "FAIL",
+      "native": {
+        "path": ".local/experiments/E01-target/20261017T002136Z-8dad7f29/native/result.json",
+        "sha256": "cd9de29ecb41a68e9482b6e4ab1ba951c2413beab9c79c65496776d29379405a"
+      },
+      "nativeStartedUtc": "2026-10-17T00:39:46.5299848Z",
+      "nativeCompletedUtc": "2026-10-17T00:41:16.5244736Z",
+      "nativeFailure": "Required file absent: C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E01-target\\20261017T002136Z-8dad7f29\\native-automation.log",
+      "nativeBuildExitCode": 0,
+      "nativeAutomationExitCode": 0,
+      "actualAutomationSuccessCount": 132,
+      "automationReport": {
+        "path": ".local/experiments/E01-target/20261017T002136Z-8dad7f29/automation/index.json",
+        "sha256": "02ca7ba7c007db578befb08d88b865cb5ea6f3260eec5d709d16ab642bba3188"
+      },
+      "editorAfter": {
+        "path": ".local/experiments/E01-target/20261017T002136Z-8dad7f29/native-config-after.json",
+        "sha256": "6df637a2346f81fc820ee2061f15f696b4121e17b8657be1fc157607023b21d5"
+      },
+      "editorAfterStatus": "CHANGED",
+      "editorChangedPaths": [
+        "C:/Users/Rabid/AppData/Local/UnrealEngine/5.8/Saved/Config/WindowsEditor/EditorSettings.ini"
+      ],
+      "globalEditorSettingsCreatedSha256": "b7e47645c8169e0c05ab6ad43f99f4529d33cd12ef019432fa56bd9f994b464e",
+      "globalEditorSettingsPreserved": true,
+      "generatedConfigRecovery": {
+        "path": ".local/experiments/E01-target/20261017T002136Z-8dad7f29/native-generated-config-recovery.json",
+        "sha256": "da477ef231f989c272bc30fd86c6f32f1cd22c1c763ac98c9d07e0853a831312"
+      },
+      "generatedConfigRecoveryUtc": "2026-10-17T00:45:45.9334027Z",
+      "privateGeneratedBodiesReadByRecorder": false,
+      "privateGeneratedBodiesExcludedFromPublicEvidence": true,
+      "restoredAuthoredDefaultEngineSha256": "272A93EDB3EA1CD87311874A308AAA8E5DB1E099D472D72E2B935259A06BCFDC",
+      "restoredDefaultInputAbsent": true,
+      "wrapperAudit": "NOT_RUN",
+      "failureUnchanged": true
+    }
+  ],
+  "reviewGate": {
+    "authority": "OWN15",
+    "freshCodeQualityReview": "CHANGES_REQUESTED",
+    "freshRequirementsAcceptanceReview": "BLOCKED",
+    "finalDiagnosticSubsetAcceptance": "BLOCKED_PENDING_REMEDIATION_AND_FRESH_REVIEWS",
+    "finalPublicationAcceptance": "BLOCKED_PENDING_REMEDIATION_AND_FRESH_REVIEWS",
+    "thisRecorderVerdict": null,
+    "preliminaryAudit": "docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md",
+    "preliminaryAuditSatisfiesOWN15": false,
+    "preliminaryAuditLimits": [
+      "Read previous reviewer conclusions",
+      "Persistent helper context",
+      "No enforced read-only/approval-never/no-memory attestation"
+    ],
+    "coordinatorReportedCliProgress": "The r2 fresh code review again requested changes. Revision6 Python candidate passed 59 focused units; wrapper/guard final validation, complete candidate freeze, fresh blind code review and a fresh complete runtime chain remain pending.",
+    "freshFinalReports": [],
+    "initialOwn15Reports": [
+      {
+        "role": "CODE_QUALITY",
+        "disposition": "CHANGES_REQUESTED",
+        "report": {
+          "path": ".local/reviews/E01-SLOW120-final/code-20261017T005624Z-511f61f4/last-message.txt",
+          "sha256": "9c8587b1877a21e14fa1fa33da2c2663f06b63c2a5afcbeb08b3a5ed97f5d9e3"
+        },
+        "reviewedBase": "0467ee63fe6d4c775f429afae2233d7292787c31",
+        "reviewedHead": "8955112131c8be4c26499325bddbe1d24eaf0260",
+        "inputManifestSha256": "817d40f480413ffccc64a6f4812c96e019f07fd520d43b16e638eda6a26282a1",
+        "normativeCriteriaSha256": "c22cb84da41490c0b2f10022487ceaa311a60866d027dbdb3e22718f39f2e1e3",
+        "reviewerObservedSessionId": "01a1475c-2876-78b0-b114-f7a39f291ad1",
+        "runtimeMemorySuppression": "UNVERIFIED",
+        "findings": [
+          {
+            "id": "INITIAL-CODE-P1",
+            "priority": 1,
+            "source": "scripts/migration/e01_boundary.py",
+            "lines": [
+              853,
+              1119,
+              1167
+            ],
+            "summary": "A timed-out command can be followed by dependent submissions on the same uncertain session; the finite submission lacks a complete pre-submission envelope snapshot.",
+            "requiredAction": "Persist every potentially uncertain mutation envelope and scope, record UNKNOWN, stop dependent mutations until same-envelope reconciliation or abandonment, and add multi-group timeout coverage."
+          },
+          {
+            "id": "INITIAL-CODE-P2",
+            "priority": 2,
+            "source": "scripts/migration/e01_boundary.py",
+            "lines": [
+              362
+            ],
+            "summary": "Socket timeout set before getresponse does not recalculate the total remaining deadline throughout status/header processing; gradual headers or repeated informational responses can exceed request/readiness budgets.",
+            "requiredAction": "Enforce the total deadline throughout headers and add short-budget slow-header coverage, including UNKNOWN handling for a possibly submitted mutation."
+          }
+        ]
+      },
+      {
+        "role": "REQUIREMENTS_ACCEPTANCE",
+        "disposition": "BLOCKED",
+        "report": {
+          "path": ".local/reviews/E01-SLOW120-final/audit-20261017T010141Z-a7a5a8f5/last-message.txt",
+          "sha256": "cee6907da5a5ae30d1badde62144912b52ba4ce11503c12213487ce2ea18cc0a"
+        },
+        "reviewedBase": "0467ee63fe6d4c775f429afae2233d7292787c31",
+        "reviewedHead": "8955112131c8be4c26499325bddbe1d24eaf0260",
+        "inputManifestSha256": "f97db1d05523aef394f2f382f245f4be14cf885d3abffd6ea23e4345721d4348",
+        "factualResultOverlaySha256": "648af28b6c1aa88aa5ce265e7b5a86dedeb5686d113f3bac5d02d4a542f9e1f2",
+        "runtimeMemorySuppression": "UNVERIFIED",
+        "findings": [
+          {
+            "id": "INITIAL-AUDIT-PROCESS-PROVENANCE",
+            "kind": "EVIDENCE_BLOCKER",
+            "summary": "Selected review extracts omit original wrapper process ledgers and Capture owned-host process records; the compiled factual summary cannot substitute for provenance-bound raw selections.",
+            "requiredAction": "Supply sanitized original process records with executable/script identity, complete credential-free arguments, PID/start/exit/timeout, readiness/shutdown, and the full supplement process inventory.",
+            "runtimeRerunRequiredForThisGapAlone": false
+          },
+          {
+            "id": "INITIAL-AUDIT-LINE-ENDINGS",
+            "kind": "DOCUMENTATION_CHECK_FAILURE",
+            "source": "docs/plans/unreal-migration-plan.md",
+            "lines": [
+              7,
+              235,
+              403,
+              507,
+              558
+            ],
+            "summary": "Mixed line endings leave terminal CR characters and cause git diff --check to fail on the frozen documentation overlay.",
+            "requiredAction": "Normalize affected line endings, rerun whitespace checks and transparently bind the changed documentation hash.",
+            "runtimeOutcomesInvalidatedByThisCorrectionAlone": false
+          }
+        ]
+      }
+    ],
+    "remediation": {
+      "sourceRepairs": "REVISION6_TERMINAL_TRUST_UNIT_VERIFIED_PENDING_FRESH_CODE_REVIEW_AND_FULL_CHAIN",
+      "replacementCandidate": null,
+      "freshCompleteRun": "PENDING_AFTER_COMPLETE_FREEZE_AND_FRESH_SOURCE_REVIEW",
+      "rawProcessEvidenceSelections": "FRESH_PACKET_AND_ACTUAL_WORKER_LEDGER_PENDING; ORIGINAL002136_WORKER_RECORD_ABSENT",
+      "documentationLineEndingCorrection": "PLAIN_AND_CRLF_AWARE_DIFF_CHECKS_PASSED; FINAL_FREEZE_RECHECK_REQUIRED",
+      "freshAffectedCodeReview": "PENDING",
+      "freshAffectedRequirementsReview": "PENDING",
+      "sourceChangesInvalidateAffectedOldApprovals": true,
+      "historicalRuntimeSuccessesRetained": true,
+      "originalThirtySecondFailureRetained": true,
+      "thisRecorderIsFinalReviewer": false,
+      "revision6Requirements": {
+        "typedGuardEveryCommandLane": true,
+        "existingSessionCreateConfigurationPaths": 2,
+        "sessionCreateUncertainty": "Persist the existing create configuration and record UNKNOWN; no invented Core create idempotency, new request keys or retry.",
+        "actualWorkerProcessInventoryRequired": true,
+        "bindFreshCapturePromotedWireNativeAuditExactHashes": true,
+        "privacyReviewBeforePromotionRequired": true,
+        "wrapperFinalSha256": "a510527ab0300d0514c61b0a2b9477cd9b06b924ad1a2e748f873a8bae436cdd",
+        "wrapperAndGuardRegressionResult": {
+          "status": "PASS",
+          "executed": 37,
+          "passed": 37,
+          "failed": 0,
+          "composition": {
+            "priorBindingGuards": 19,
+            "syntheticUnitSummaryControls": 17,
+            "preservedActual87TestLog": 1
+          },
+          "sourceSnapshotCount": 38,
+          "allSourceSnapshotsUnchanged": true,
+          "result": {
+            "path": ".local/tests/e01-wire-binding-20261017T025951Z-9cc6f684/guard-unit-result.json",
+            "sha256": "79ee5f156a7baeec013ceeecac2d954cc0de8c429e5face9e927b3505c6bbe9b"
+          },
+          "rawLog": {
+            "path": ".local/tests/e01-wire-binding-20261017T025951Z-9cc6f684.raw.log",
+            "sha256": "fd6004bb35677f65d7dd2193d0e45531a57c5964f5f3ac8ce12f89bba3c8c7da"
+          },
+          "unitScriptSha256": "0bc3679ef637627a692eb7ba125b8f619797f9e5237ec19c0e8f2b8ac923c8da",
+          "scope": "Pure read-only wrapper guard functions;19 binding controls,17 synthetic summary controls and exact87-unit producer log. No actual E01 phase/Core/Native/build/install/global setting mutation",
+          "coreOrNativePhaseExecuted": false
+        },
+        "fullRuntimeCaptureBuildAutomation": "NOT_RUN_FOR_THIS_REPLACEMENT_CANDIDATE",
+        "guardVerificationHistory": [
+          {
+            "status": "PASS",
+            "executed": 19,
+            "passed": 19,
+            "failed": 0,
+            "sourceSnapshotCount": 37,
+            "allSourceSnapshotsUnchanged": true,
+            "result": {
+              "path": ".local/tests/e01-wire-binding-20261017T014849Z-4c9b5e50/guard-unit-result.json",
+              "sha256": "2c226b534724b3076f1c40191d3598ddd4463590d24dcc6e4bfdfbea8ad3129c"
+            },
+            "rawLog": {
+              "path": ".local/tests/e01-wire-binding-20261017T014849Z-4c9b5e50.raw.log",
+              "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+            },
+            "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
+            "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+            "coreOrNativePhaseExecuted": false
+          },
+          {
+            "status": "PASS",
+            "executed": 19,
+            "passed": 19,
+            "failed": 0,
+            "sourceSnapshotCount": 37,
+            "allSourceSnapshotsUnchanged": true,
+            "result": {
+              "path": ".local/tests/e01-wire-binding-20261017T020817Z-c6ad709e/guard-unit-result.json",
+              "sha256": "f1e54a404d37cbfee677b2c1cee4ff7beb96e1b04cd41dc1e94798e48eef7454"
+            },
+            "rawLog": {
+              "path": ".local/tests/e01-wire-binding-20261017T020817Z-c6ad709e.raw.log",
+              "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+            },
+            "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
+            "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+            "coreOrNativePhaseExecuted": false
+          },
+          {
+            "status": "PASS",
+            "executed": 19,
+            "passed": 19,
+            "failed": 0,
+            "sourceSnapshotCount": 37,
+            "allSourceSnapshotsUnchanged": true,
+            "result": {
+              "path": ".local/tests/e01-wire-binding-20261017T022936Z-f13a3145/guard-unit-result.json",
+              "sha256": "9d7b33cda03abaf5002739f1fb4c1f4e1f79790940201066678455ef1450eba7"
+            },
+            "rawLog": {
+              "path": ".local/tests/e01-wire-binding-20261017T022936Z-f13a3145.raw.log",
+              "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+            },
+            "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
+            "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+            "coreOrNativePhaseExecuted": false
+          },
+          {
+            "status": "PASS",
+            "executed": 19,
+            "passed": 19,
+            "failed": 0,
+            "sourceSnapshotCount": 37,
+            "allSourceSnapshotsUnchanged": true,
+            "result": {
+              "path": ".local/tests/e01-wire-binding-20261017T024247Z-5be68abb/guard-unit-result.json",
+              "sha256": "9bd59775e7de11bdb650c77d0d3cc8c1af3ef3aeb0ca12071a89208a6a808d26"
+            },
+            "rawLog": {
+              "path": ".local/tests/e01-wire-binding-20261017T024247Z-5be68abb.raw.log",
+              "sha256": "8d4ea925eea6ee5ec15a56cf2a038dd47db05f83caa544de045a60b3a98ae0ad"
+            },
+            "unitScriptSha256": "3dee1f97021643bea2dc51fa1322aed9bdb971a5d273dfe56be8dd1aa126c68d",
+            "scope": "Private simulated source-unit guard checks; no actual E01 phase, Core host, native build, install or global configuration mutation",
+            "coreOrNativePhaseExecuted": false
+          }
+        ],
+        "previousWrapperSha256": "e5fb8305e22398eacc7dfa263373e6c480d7152b0b47dabc7cfdfee18d7ea86e"
+      },
+      "revision6PythonUnits": {
+        "status": "PASS",
+        "executed": 87,
+        "durationSeconds": 22.269,
+        "exitCode": 0,
+        "invocation": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T024150Z-a4e080c9/invocation.json",
+          "sha256": "6ce806c2f69c27dd19ab9be79a45a98550df75d64df0201337589044f968e8dd"
+        },
+        "stdout": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T024150Z-a4e080c9/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T024150Z-a4e080c9/stderr.txt",
+          "sha256": "03ea2e3b1892226b007fc2c817883d9aaa1e7240d232a41fad727c93ded933e1"
+        },
+        "sourceBefore": [
+          {
+            "sha256": "853B241DE93139DB2C665C83ECC503A1F01F6B130F0FC0B78BAB48B83588DC71",
+            "path": "scripts/migration/e01_boundary.py"
+          },
+          {
+            "sha256": "876DF3D105F7525922A2E1DECF80DEABA42607ABC631A6F0BD4C3A91EE7D33DD",
+            "path": "tests/migration/test_e01_boundary.py"
+          }
+        ],
+        "sourceAfter": [
+          {
+            "sha256": "853B241DE93139DB2C665C83ECC503A1F01F6B130F0FC0B78BAB48B83588DC71",
+            "path": "scripts/migration/e01_boundary.py"
+          },
+          {
+            "sha256": "876DF3D105F7525922A2E1DECF80DEABA42607ABC631A6F0BD4C3A91EE7D33DD",
+            "path": "tests/migration/test_e01_boundary.py"
+          }
+        ],
+        "sourceBeforeAfterMatched": true,
+        "scope": "All attach-worker cleanup handle/log faults preserve primary UNKNOWN and final ledger; validated known receipts retained; descriptor hash bound in both creation lanes; restart primary failure preserved. Unit verification only",
+        "coreCaptureBuildOrInstallExecuted": false,
+        "independentSourceReviewPass": false
+      },
+      "previousRevision6PythonUnits": {
+        "status": "PASS",
+        "executed": 59,
+        "durationSeconds": 1.353,
+        "invocation": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T012906Z-b798f3ab/invocation.json",
+          "sha256": "81bb72acee097f1174f688f74103f7bf3a28b9ac00b1f46f7190c15440b77ed4"
+        },
+        "stderr": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T012906Z-b798f3ab/stderr.txt",
+          "sha256": "3a03c2a40f6f5516e0a100aa6accdc37d7e4f5d3ba5b8535e14709b7c853c4c3"
+        },
+        "stdout": {
+          "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T012906Z-b798f3ab/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "executable": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\core-44.3.33\\Scripts\\python.exe",
+        "arguments": [
+          "-I",
+          "-B",
+          "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\test_e01_boundary.py"
+        ],
+        "pid": 32100,
+        "startedUtc": "2026-10-17T01:29:06.1779736Z",
+        "completedUtc": "2026-10-17T01:29:08.0942831Z",
+        "exitCode": 0,
+        "sourceBefore": [
+          {
+            "path": "scripts/migration/e01_boundary.py",
+            "sha256": "8E6B79D7A3D158665E105F5D92653E05BFE53AF63D32D5957263470AD21EB080"
+          },
+          {
+            "path": "tests/migration/test_e01_boundary.py",
+            "sha256": "A3C970E098E345E652616C0882EEB3B1C67527114F63BA220820AFEEFC1BC191"
+          }
+        ],
+        "sourceAfter": [
+          {
+            "path": "scripts/migration/e01_boundary.py",
+            "sha256": "8E6B79D7A3D158665E105F5D92653E05BFE53AF63D32D5957263470AD21EB080"
+          },
+          {
+            "path": "tests/migration/test_e01_boundary.py",
+            "sha256": "A3C970E098E345E652616C0882EEB3B1C67527114F63BA220820AFEEFC1BC191"
+          }
+        ],
+        "sourceBeforeAfterMatched": true,
+        "scope": "r2 direct lifecycle/attach UNKNOWN fixes plus root-origin create retention and worker process inventory",
+        "ownedLoopback": "Test-only ephemeral responders; Core and Popen mocked in lifecycle units; no Core host/capture/build/install",
+        "coreCaptureBuildOrInstallExecuted": false,
+        "independentSourceReviewPass": false
+      },
+      "unitVerificationHistory": [
+        {
+          "status": "PASS",
+          "executed": 60,
+          "durationSeconds": 1.523,
+          "exitCode": 0,
+          "invocation": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T013240Z-f8c75f8c/invocation.json",
+            "sha256": "526ea9c87e9301807371a4ba1729d7112e1aa484f35f2d4728dcbf7de186770f"
+          },
+          "stderr": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T013240Z-f8c75f8c/stderr.txt",
+            "sha256": "fa803acbc8e9bd50fa716cbb15219d75120e6366b0b2bb7582c0329f2b6b1d78"
+          },
+          "stdout": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T013240Z-f8c75f8c/stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "sourceBefore": [
+            {
+              "path": "scripts/migration/e01_boundary.py",
+              "sha256": "5E1F398892D70074A456C689FD23B44F645F5B9AB05C7E4291F02EBA35C020B9"
+            },
+            {
+              "path": "tests/migration/test_e01_boundary.py",
+              "sha256": "B13604B426BF4ADB7225FC35B987F3CA495DAEAD3CD01F43BE85D2A1261DC520"
+            }
+          ],
+          "sourceAfter": [
+            {
+              "path": "scripts/migration/e01_boundary.py",
+              "sha256": "5E1F398892D70074A456C689FD23B44F645F5B9AB05C7E4291F02EBA35C020B9"
+            },
+            {
+              "path": "tests/migration/test_e01_boundary.py",
+              "sha256": "B13604B426BF4ADB7225FC35B987F3CA495DAEAD3CD01F43BE85D2A1261DC520"
+            }
+          ],
+          "sourceBeforeAfterMatched": true,
+          "scope": "Lifecycle/create guards, complete worker inventory and exact absent/false/true wire flags; unit verification only",
+          "coreCaptureBuildOrInstallExecuted": false,
+          "independentSourceReviewPass": false
+        },
+        {
+          "status": "PASS",
+          "executed": 65,
+          "durationSeconds": 5.44,
+          "exitCode": 0,
+          "invocation": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/invocation.json",
+            "sha256": "d8e5db2fc81f427726196e9abbfa89260159cb39f95bddef1c8bcdacc92b667e"
+          },
+          "stderr": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/stderr.txt",
+            "sha256": "3903dfcccce7f635ababb0df9a47b71ea66d245e6e8cadebba9153d327913eb1"
+          },
+          "stdout": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T014740Z-7c94fa2f/stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "sourceBefore": [
+            {
+              "path": "scripts/migration/e01_boundary.py",
+              "sha256": "981C22D4B102AFEBE812EA71B667DCE44E578B73A227F3EBB1DCE14935DC0EC9"
+            },
+            {
+              "path": "tests/migration/test_e01_boundary.py",
+              "sha256": "63C57194AB5F739A2EC8024AB6C861D5B1B2993666B4710D1DA94A78E087DA92"
+            }
+          ],
+          "sourceAfter": [
+            {
+              "path": "scripts/migration/e01_boundary.py",
+              "sha256": "981C22D4B102AFEBE812EA71B667DCE44E578B73A227F3EBB1DCE14935DC0EC9"
+            },
+            {
+              "path": "tests/migration/test_e01_boundary.py",
+              "sha256": "63C57194AB5F739A2EC8024AB6C861D5B1B2993666B4710D1DA94A78E087DA92"
+            }
+          ],
+          "sourceBeforeAfterMatched": true,
+          "scope": "Complete terminal trust boundary, known outcome preservation and malformed receipt matrices; source units only",
+          "coreCaptureBuildOrInstallExecuted": false,
+          "independentSourceReviewPass": false
+        },
+        {
+          "status": "PASS",
+          "executed": 72,
+          "durationSeconds": 6.507,
+          "exitCode": 0,
+          "invocation": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T020746Z-f12129a1/invocation.json",
+            "sha256": "92b8008410762eb2d1edb46e62958157746b30d112f7d222b7e3545b1460f88a"
+          },
+          "stdout": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T020746Z-f12129a1/stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T020746Z-f12129a1/stderr.txt",
+            "sha256": "fd22bd40382af97bbc7f2bddc17198b34adc197fc30bb06cfa535a1a5a91f3da"
+          },
+          "sourceBefore": [
+            {
+              "path": "scripts/migration/e01_boundary.py",
+              "sha256": "551C379C4DD2DF102AC9AB9A68FCF2B1EBD21BB070152A2963076F2783813BB0"
+            },
+            {
+              "path": "tests/migration/test_e01_boundary.py",
+              "sha256": "38D0E21136821F5A0B3A6ECB744C764EE1BA3F70A052DD2A54F9C0F018013A68"
+            }
+          ],
+          "sourceAfter": [
+            {
+              "path": "scripts/migration/e01_boundary.py",
+              "sha256": "551C379C4DD2DF102AC9AB9A68FCF2B1EBD21BB070152A2963076F2783813BB0"
+            },
+            {
+              "path": "tests/migration/test_e01_boundary.py",
+              "sha256": "38D0E21136821F5A0B3A6ECB744C764EE1BA3F70A052DD2A54F9C0F018013A68"
+            }
+          ],
+          "sourceBeforeAfterMatched": true,
+          "scope": "Coherent envelope-bound receipts in every command guard, private validated receipt retained through damaged artifacts and supported HTTP422 parity; unit verification only",
+          "coreCaptureBuildOrInstallExecuted": false,
+          "independentSourceReviewPass": false
+        },
+        {
+          "status": "PASS",
+          "executed": 83,
+          "durationSeconds": 20.161,
+          "exitCode": 0,
+          "invocation": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/invocation.json",
+            "sha256": "222bb7f2fc5b84fa2ddbe62744eaa8fdb460812f097055b39a35b28c2e75493e"
+          },
+          "stdout": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".local/reviews/E01-SLOW120-remediation-units/20261017T022853Z-9a249b0a/stderr.txt",
+            "sha256": "81745cae881883d044af5ca20d3ce69977feb22cee77198dafe0b11d22f22795"
+          },
+          "sourceBefore": [
+            {
+              "sha256": "F0590617E9E30B551B9F7DE58F1B5C22031A0A87ECABB31AFEF8B4A7A27C7B77",
+              "path": "scripts/migration/e01_boundary.py"
+            },
+            {
+              "sha256": "E778B29607B5FC05492D08A5A629E2D6B38D6F20A88B6190ABFA1C387B325EAF",
+              "path": "tests/migration/test_e01_boundary.py"
+            }
+          ],
+          "sourceAfter": [
+            {
+              "sha256": "F0590617E9E30B551B9F7DE58F1B5C22031A0A87ECABB31AFEF8B4A7A27C7B77",
+              "path": "scripts/migration/e01_boundary.py"
+            },
+            {
+              "sha256": "E778B29607B5FC05492D08A5A629E2D6B38D6F20A88B6190ABFA1C387B325EAF",
+              "path": "tests/migration/test_e01_boundary.py"
+            }
+          ],
+          "sourceBeforeAfterMatched": true,
+          "scope": "Complete creation metadata with opaque session ID; owned cleanup/watchdog/log/process evidence; native-compatible depth and typed recursion; original UNKNOWN survives cleanup failure. Unit verification only",
+          "coreCaptureBuildOrInstallExecuted": false,
+          "independentSourceReviewPass": false
+        }
+      ],
+      "nativeClassifierRegression": {
+        "status": "SOURCE_ONLY_NOT_EXECUTED",
+        "testFile": {
+          "path": "Source/WarhammerClient/Private/Tests/CoreBoundaryEvidenceTests.cpp",
+          "sha256": "208ec4402ab87beed977dcf26dab2d8cf122a71124936186e85227a9d15c14ff"
+        },
+        "caseCountChanged": false,
+        "newSyntheticControl": "HTTP422 rule_path_unsupported error envelope; exact status/code/message/absence and fidelity gap",
+        "newBuildOrNativeRun": false
+      },
+      "failedSourceVerificationAttempts": [
+        {
+          "outcome": "FAILED_TEST_ASSUMPTION",
+          "toolChunk": "4121b8",
+          "exitCode": 1,
+          "testsDiscovered": 81,
+          "failures": 2,
+          "elapsedSeconds": 8.861,
+          "reason": "Python 3.14 accepted 2000 nested arrays, contradicting two test assumptions about RecursionError; explicit iterative depth validation replaces that assumption",
+          "rawOutput": "Original tool output only; complete raw stdout/stderr were not separately preserved",
+          "sourceHashes": "Not recorded for that attempt",
+          "countedAsPass": false
+        },
+        {
+          "outcome": "FAILED_UNIT_FIXTURE",
+          "record": ".local/reviews/E01-SLOW120-remediation-units/20261017T022747Z-b373bd95/invocation.json",
+          "exitCode": 1,
+          "testsDiscovered": 83,
+          "failures": 1,
+          "elapsedSeconds": 19.283,
+          "reason": "Windows reset the test responder socket because it closed with unread POST bytes before the new deep-response parser assertion; bounded test responder now drains Content-Length",
+          "rawOutput": "Complete invocation/stdout/stderr preserved at record directory",
+          "countedAsPass": false
+        }
+      ],
+      "nativeReceiptCoherenceRegression": {
+        "status": "SOURCE_ONLY_NOT_EXECUTED",
+        "reader": {
+          "path": "Source/WarhammerClient/Private/Migration/CoreBoundaryEvidence.cpp",
+          "sha256": "1bed4803ba70de5a9a2231d67fe3a4a4e088bcf26ec4c7745f7aeb1c523783ca"
+        },
+        "tests": {
+          "path": "Source/WarhammerClient/Private/Tests/CoreBoundaryEvidenceTests.cpp",
+          "sha256": "813a959fc0190f668af34789ad3b667b563554ffb0c9ca0858fb6fd7b9e9e40d"
+        },
+        "caseCountChanged": false,
+        "newSyntheticControls": "Event range endpoint, exact viewer role and nullable ID coherence; mismatches, null/type/case negatives and coherent controls",
+        "newBuildOrNativeRun": false
+      },
+      "wrapperUnitSummaryRepair": {
+        "status": "SOURCE_AND_PURE_GUARD_CHECKS_ONLY",
+        "pythonAndNativeSourcesChanged": false,
+        "retainedActual87LogParsedAsPass": true,
+        "actualProducerSourceHead": "5456065951fb68d1eb7331d699a38a61529de149",
+        "actualStderrSha256": "760bb490ce33f126e8dbb91cf098a294c3189ea884c5fe223255ec9d71da3d6b",
+        "newAffectedSourceReview": "PENDING",
+        "newFullCoreChain": "NOT_RUN"
+      }
+    },
+    "subsequentOwn15CodeReports": [
+      {
+        "revision": "r2",
+        "role": "CODE_QUALITY",
+        "disposition": "CHANGES_REQUESTED",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r2.md",
+          "sha256": "800b48eab7c605c61a8f772d0f27af0312e70665077403d4e9e57d427ccf8eba"
+        },
+        "reviewedBase": "0467ee63fe6d4c775f429afae2233d7292787c31",
+        "reviewedHead": "f318dc2a78da478867f79af5cb80159408fd5369",
+        "inputManifestSha256": "d06fbeef136f107285510986da941a641a9291cc0327f073aae20e35a16507d6",
+        "allManifestFilesMatchedBeforeAfter": 173,
+        "headAndWorkingTreeClean": true,
+        "reviewedPythonSha256": "3c9a1f57009e070968be82a58f3e839bfcc1ca556d7899cd4585209581248e3b",
+        "reviewedPythonTestsSha256": "c8c8453ffdf01b71e7e7fc2734542271bb3732372843ae8d0e738ad6b8aeeb7e",
+        "reviewedWrapperSha256": "095ebf4359665e05afcfd864eb33e2d6fa9cb7fd9cfd19be5afcc78db92aab52",
+        "sessionId": "01a1476f-83f2-7160-b47b-50634d75e095",
+        "coordinatorReportedCliCompletion": {
+          "exitCode": 0,
+          "completedUtc": "2026-10-17T01:23:55.681524Z",
+          "execCommandCount": 29
+        },
+        "findings": [
+          {
+            "id": "R2-CODE-P1-COMMAND-LANES",
+            "priority": 1,
+            "sources": [
+              "scripts/migration/e01_boundary.py:1142",
+              "scripts/migration/e01_boundary.py:1155",
+              "scripts/migration/e01_boundary.py:1186"
+            ],
+            "summary": "Attach worker decision and supervisor lifecycle commands bypass Pair.submit envelope/schema/UNKNOWN guards, so response loss lacks persisted exact scope and completion uncertainty.",
+            "requiredAction": "Guard all command lanes before send, retain credential-free envelope and scope, record UNKNOWN and abandon affected session; add worker and supervisor commit-before-response-loss regressions."
+          },
+          {
+            "id": "R2-CODE-P1-WIRE-LINK",
+            "priority": 1,
+            "sources": [
+              "scripts/migration/Invoke-E01BoundaryProof.ps1:859",
+              "scripts/migration/Invoke-E01BoundaryProof.ps1:875",
+              "scripts/migration/Invoke-E01BoundaryProof.ps1:913"
+            ],
+            "summary": "Normal Native verifies a self-consistent promoted index without binding it and every body to the current successful Capture artifacts; Audit can separately inspect a different current corpus.",
+            "requiredAction": "Bind privacy-reviewed promoted index and every native-consumed body to exact fresh Capture artifact hashes before build/Automation and through Audit; reject stale-current mismatches."
+          }
+        ]
+      },
+      {
+        "round": 3,
+        "role": "Independent code quality; pre-execution source gate",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r3.md",
+          "sha256": "3b07afd91d399bcd50a2793c5b9f981a93c97e8932c3c1ba8bdabff995aa0f9c"
+        },
+        "verdict": "CHANGES_REQUESTED",
+        "sessionId": "01a14781-3073-7d73-b62c-6525f77095f9",
+        "frozenHead": "6fcd51410b5668ac5a17affb1ed1fbf41c760873",
+        "completedUtc": "2026-10-17T01:42:10.6841217Z",
+        "exitCode": 0,
+        "completedStaticCommands": 35,
+        "findings": [
+          "P2 unusable existing worker terminal evidence loses UNKNOWN classification; preserve validated known outcomes through later evidence failures"
+        ],
+        "all174CandidateAndTwoExternalInstructionsUnchanged": true,
+        "coreOrNativeExecution": false
+      },
+      {
+        "round": 4,
+        "role": "Independent code quality; pre-execution source gate",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r4.md",
+          "sha256": "a20d77fd07a45b16caa0041006a3cfa9b5e528bf688fd6c227b884d164ceaef4"
+        },
+        "verdict": "CHANGES_REQUESTED",
+        "sessionId": "01a14791-e087-7922-9ed9-06e7a3729db8",
+        "frozenHead": "7d56685b39c15df220937584999cc36c1d729e2a",
+        "completedUtc": "2026-10-17T02:01:39.0516964Z",
+        "exitCode": 0,
+        "completedStaticCommands": 33,
+        "all174CandidateHashesUnchanged": true,
+        "coreOrNativeExecution": false,
+        "findings": [
+          "P1 complete coherent envelope-bound receipts in all submission guards; invalid matching paired replies remain UNKNOWN",
+          "P2 preserve validated worker outcomes through damaged/unreadable receipt artifacts",
+          "P2 align Python/native HTTP422 rule_path_unsupported error-envelope classification"
+        ]
+      },
+      {
+        "round": 5,
+        "role": "Independent code quality; pre-execution source gate",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r5.md",
+          "sha256": "6747105f88422c6654dce5b9fb43e9c54ec70780158ebdbd78d78c9d10ae3f70"
+        },
+        "verdict": "CHANGES_REQUESTED",
+        "sessionId": "01a147a0-809c-7033-987b-4bcf4c3b4b3a",
+        "frozenHead": "83815a4a12b049d7ecd537328fd47d201e4e34e2",
+        "completedUtc": "2026-10-17T02:17:07.3701896Z",
+        "exitCode": 0,
+        "completedStaticCommands": 30,
+        "all174CandidateHashesUnchanged": true,
+        "coreOrNativeExecution": false,
+        "findings": [
+          "P2 native event-range-end and viewer coherence",
+          "P2 complete creation metadata and pinned identities before further commands",
+          "P2 host cleanup/log/ledger survive marker-write failure",
+          "P2 deep terminal parser recursion retains typed UNKNOWN and owned evidence"
+        ]
+      },
+      {
+        "round": 6,
+        "role": "Independent code quality; pre-execution source gate",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r6.md",
+          "sha256": "f6e8c298303782d0c665652fb54541b53dfb0b5211af844cfd9c5fac7ee9a6a0"
+        },
+        "verdict": "CHANGES_REQUESTED",
+        "sessionId": "01a147b3-ca18-7310-9872-30199dc0b507",
+        "frozenHead": "db725a786329b01f174820dc1e94d538581db1cc",
+        "completedUtc": "2026-10-17T02:37:36.8225299Z",
+        "exitCode": 0,
+        "completedStaticCommands": 34,
+        "all174CandidateHashesUnchanged": true,
+        "coreOrNativeExecution": false,
+        "findings": [
+          "P2 worker cleanup faults retain primary UNKNOWN and finalized process ledger",
+          "P2 creation receipt ruleset descriptor hash matches retained request"
+        ]
+      },
+      {
+        "round": 7,
+        "role": "Independent code quality; pre-execution source gate",
+        "report": {
+          "path": "docs/plans/research/2026-10-17-e01-slow120-code-review-r7.md",
+          "sha256": "dbcf912b88123fce2d1c7c3407ee18dea3e9a9e71f0bb8c8f274cb64e0577499"
+        },
+        "verdict": "PASS",
+        "sessionId": "01a147bf-e323-76a0-b1f3-100ccba9d9f1",
+        "frozenHead": "5456065951fb68d1eb7331d699a38a61529de149",
+        "completedUtc": "2026-10-17T02:51:53.2638020Z",
+        "exitCode": 0,
+        "completedStaticCommands": 34,
+        "all174CandidateHashesUnchanged": true,
+        "coreOrNativeExecution": false,
+        "findings": []
+      }
+    ]
+  },
+  "remainingLimits": [
+    "Prior 30-second failure and expired-command UNKNOWN remain unchanged",
+    "Core #590 / EXT09 latency and production responsiveness remain open",
+    "Core #589 / EXT08 late Windows co-bind exclusivity NOT_PROVEN",
+    "RISK19 case-colliding JSON keys remains open for production adoption",
+    "Core #588 wire diagnostic detail gap remains explicit",
+    "Source-reposition remains synthetic/envelope-only",
+    "Full terminal replay NOT_RUN outside this subset",
+    "98 canonical envelopes are shape coverage, not 98 live workflows",
+    "Native fixture tests do not prove Unreal HTTP/callback scheduling",
+    "Rendering, genuine 3D/input, packaging, clean-machine/offline delivery and Linux execution remain unverified",
+    "Durable restart/recovery and real production role controls remain unproved",
+    "Full E01/M01, G-RESEARCH and G-IMPLEMENT are not accepted",
+    "Original Capture002136 has no actual attach-worker process record; its missing PID must not be invented",
+    "Current source has87 Python tests passing and37 pure PowerShell guard checks; wrapper repair still requires fresh affected review/new full Core/native chain; failed pre-Core replacement attempt remains FAIL"
+  ],
+  "updatedUtc": "2026-10-17T03:02:03.987874+00:00",
+  "preRemediationSnapshots": {
+    "provenance": {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0130137420423Z.json",
+      "sha256": "c0bad127ec68c245197eaed3a1a0fc41e19c3293ceb93e33b8961565bc4a921f"
+    },
+    "files": [
+      {
+        "source": "docs/plans/evidence/2026-10-16-e01-slow120-result.json",
+        "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-result.0849a26ac09405966abc423fa75e7de3cdc3b73cf8dd9c0d11056f0a2c77a3e3.json",
+        "sha256": "0849a26ac09405966abc423fa75e7de3cdc3b73cf8dd9c0d11056f0a2c77a3e3",
+        "bytes": 57346
+      },
+      {
+        "source": "docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md",
+        "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-acceptance-audit.e36459f42f142d2c11fd150792cdc5db18f348137e367bc18779515559250f2c.md",
+        "sha256": "e36459f42f142d2c11fd150792cdc5db18f348137e367bc18779515559250f2c",
+        "bytes": 38940
+      }
+    ],
+    "overwriteExisting": false,
+    "purpose": "Preserve exact prior records before recording r2 code review and revision6 remediation evidence"
+  },
+  "preRemediationSnapshotHistory": [
+    {
+      "provenance": {
+        "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0109494764325Z.json",
+        "sha256": "22e4da4f8e1e049ae569015f65317a6fa354020c4d0e23a5f5e8f89c0f0673cb"
+      },
+      "files": [
+        {
+          "source": "docs/plans/evidence/2026-10-16-e01-slow120-result.json",
+          "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-result.648af28b6c1aa88aa5ce265e7b5a86dedeb5686d113f3bac5d02d4a542f9e1f2.json",
+          "sha256": "648af28b6c1aa88aa5ce265e7b5a86dedeb5686d113f3bac5d02d4a542f9e1f2",
+          "bytes": 51188
+        },
+        {
+          "source": "docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md",
+          "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-acceptance-audit.476f057248e556b7b776bb17eed998602cc7c182acb0d46dab4903eb5d58b3a7.md",
+          "sha256": "476f057248e556b7b776bb17eed998602cc7c182acb0d46dab4903eb5d58b3a7",
+          "bytes": 33838
+        }
+      ],
+      "overwriteExisting": false,
+      "purpose": "Preserve exact factual records supplied to initial OWN15 reviews before recording their findings"
+    },
+    {
+      "provenance": {
+        "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/provenance-20261017T0130137420423Z.json",
+        "sha256": "c0bad127ec68c245197eaed3a1a0fc41e19c3293ceb93e33b8961565bc4a921f"
+      },
+      "files": [
+        {
+          "source": "docs/plans/evidence/2026-10-16-e01-slow120-result.json",
+          "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-result.0849a26ac09405966abc423fa75e7de3cdc3b73cf8dd9c0d11056f0a2c77a3e3.json",
+          "sha256": "0849a26ac09405966abc423fa75e7de3cdc3b73cf8dd9c0d11056f0a2c77a3e3",
+          "bytes": 57346
+        },
+        {
+          "source": "docs/plans/research/2026-10-16-e01-slow120-acceptance-audit.md",
+          "snapshot": ".local/reviews/E01-SLOW120-final/pre-remediation-records/2026-10-16-e01-slow120-acceptance-audit.e36459f42f142d2c11fd150792cdc5db18f348137e367bc18779515559250f2c.md",
+          "sha256": "e36459f42f142d2c11fd150792cdc5db18f348137e367bc18779515559250f2c",
+          "bytes": 38940
+        }
+      ],
+      "overwriteExisting": false,
+      "purpose": "Preserve exact prior records before recording r2 code review and revision6 remediation evidence"
+    },
+    {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-f0333a70c2dba5e3247bd481f247fea1388f21651d3a24acc72a21bbd3fee339.json",
+      "sha256": "f0333a70c2dba5e3247bd481f247fea1388f21651d3a24acc72a21bbd3fee339",
+      "reason": "Coordinator preserved factual record before appending final60-unit/19-guard verification; prior runtime and review history unchanged"
+    },
+    {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-e1a122a35edc2b9e4bc92064a9682ccf7e75880063294d8059be3ee5a1fb78d1.json",
+      "sha256": "e1a122a35edc2b9e4bc92064a9682ccf7e75880063294d8059be3ee5a1fb78d1",
+      "reason": "Preserved factual60-unit record before65-unit terminal-trust verification/r3 source-gate addendum"
+    },
+    {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-26a9fceb2577a08d4153d53acdf56dcabb6e073bbf2d417cea9fdfe3a8ee10c2.json",
+      "sha256": "26a9fceb2577a08d4153d53acdf56dcabb6e073bbf2d417cea9fdfe3a8ee10c2",
+      "reason": "Preserved65-unit factual record before appending round4 source review; prior runtime records unchanged"
+    },
+    {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-41e1f8d7c40a27c9a0d069cb62ce4fe155633d619656bac37e7183ec3ee3b59c.json",
+      "sha256": "41e1f8d7c40a27c9a0d069cb62ce4fe155633d619656bac37e7183ec3ee3b59c",
+      "reason": "Preserved72-unit factual record before round5 source review addendum"
+    },
+    {
+      "path": ".local/reviews/E01-SLOW120-final/pre-remediation-records/result-ee7165273a59f2c4bd0d1e47de6b6053f211caa97f3d4d3bd87d49d87e3737a5.json",
+      "sha256": "ee7165273a59f2c4bd0d1e47de6b6053f211caa97f3d4d3bd87d49d87e3737a5",
+      "reason": "Preserved83-unit factual record before round6 source review addendum"
+    }
+  ],
+  "freshFullChainAttempts": [
+    {
+      "runId": "20261017T025237Z-da446128",
+      "head": "5456065951fb68d1eb7331d699a38a61529de149",
+      "normalChain": true,
+      "captureRunIdUsed": false,
+      "preflight": {
+        "status": "PASS",
+        "sha256": "247f71d3eac788e98aba629b5c6bfd8b0526bac1f2d2bfd8eda25e984ff337f7"
+      },
+      "prepareRuntime": {
+        "status": "PASS_VERIFIED_REUSE",
+        "sha256": "3a397e2988c6309faa9b31e187cded8d7e35e92b4f5819d6eff0dbaa9cd141a3",
+        "installed": false
+      },
+      "capture": {
+        "status": "FAIL",
+        "exitCode": 1,
+        "sha256": "476872f1b049b23a73ae4db6d419078948dae1840e56758da47a1b5615de93ea",
+        "startedUtc": "2026-10-17T02:55:00.0274515Z",
+        "completedUtc": "2026-10-17T02:55:53.2571968Z",
+        "reason": "Unanchored case-insensitive FAILED pattern matched successful verbose test name before actual Core scenario",
+        "actualWrapperChildren": 14,
+        "allWrapperChildrenExit0": true,
+        "coreHostOrAttachWorkerStarted": false,
+        "liveCasesOrProposedWireCreated": false
+      },
+      "observedUnitProcess": {
+        "reportedBy": "Original child exit and saved stderr, distinct from failed wrapper phase",
+        "pid": 724,
+        "exitCode": 0,
+        "tests": 87,
+        "seconds": 20.829,
+        "stderrSha256": "760bb490ce33f126e8dbb91cf098a294c3189ea884c5fe223255ec9d71da3d6b",
+        "summary": "Ran87 tests / OK"
+      },
+      "nativeOrAuditStarted": false,
+      "sourceOrSiblingChanged": false,
+      "countedAsRuntimePass": false
+    }
+  ]
+}

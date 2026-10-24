@@ -1,0 +1,145 @@
+{
+  "status": "NATIVE_CHECKS_AND_AFFECTED_REVIEWS_PASSED_RENDERED_PENDING",
+  "sourceHead": "ca315fb317015c701d4bae894af341a30e721edd",
+  "coreCommit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+  "contract": "44.3.33",
+  "runtimeBuild": "warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a",
+  "build": {
+    "result": "SUCCESS",
+    "seconds": 22.2,
+    "compileAndLink": true,
+    "target": "WarhammerClientEditor Win64 Development",
+    "actions": 8
+  },
+  "native": {
+    "success": 10,
+    "seconds": 13.006243705749512,
+    "filter": "Warhammer.LiveCore",
+    "flags": [
+      "-nullrhi",
+      "-RenderOffScreen",
+      "-unattended",
+      "-nosplash",
+      "-nosound",
+      "-NoCrashDialog",
+      "-NoLiveCoding"
+    ],
+    "tests": [
+      {
+        "fullTestPath": "Warhammer.LiveCore.Integration.RealSessionAction",
+        "state": "Success",
+        "duration": 12.745137214660645
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Creation.ErrorEnvelopeRemainsUnknown",
+        "state": "Success",
+        "duration": 0.008305501192808151
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Creation.InvalidEndpointDoesNotRequest",
+        "state": "Success",
+        "duration": 0.008581399917602539
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.CreatedIdentity",
+        "state": "Success",
+        "duration": 0.008516699075698853
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Endpoint",
+        "state": "Success",
+        "duration": 0.008051101118326187
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Envelope",
+        "state": "Success",
+        "duration": 0.008233197033405304
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.OutcomeAndUncertainErrors",
+        "state": "Success",
+        "duration": 0.008157599717378616
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ProjectionPrivacyAndGeometry",
+        "state": "Success",
+        "duration": 0.12039840221405029
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ProjectionVersionAndReadRecovery",
+        "state": "Success",
+        "duration": 0.08230820298194885
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ReturnedRejectionDiagnostics",
+        "state": "Success",
+        "duration": 0.008555799722671509
+      }
+    ],
+    "failures": 0,
+    "notRun": 0,
+    "exitCode": 0,
+    "warnings": 0
+  },
+  "host": {
+    "forcedTermination": false,
+    "managedStop": "STOPPED",
+    "attach": "ATTACHED_HEALTHY",
+    "attachmentStop": "ATTACHED_NOT_STOPPED",
+    "managed": "READY"
+  },
+  "config": {
+    "before": {
+      "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+      "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+      "DefaultGame.ini": "DFEE0B67A784D67DBAAA8D76F45F7CC8AFA3563BF2CD9D3962A5C0282BF01BFB",
+      "DefaultEngine.ini": "D9E579CDD48D94633789D6D1B62C20CD53A67C919F14CF78A2566B6466EFFEF1"
+    },
+    "unchanged": true,
+    "after": {
+      "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+      "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+      "DefaultGame.ini": "DFEE0B67A784D67DBAAA8D76F45F7CC8AFA3563BF2CD9D3962A5C0282BF01BFB",
+      "DefaultEngine.ini": "D9E579CDD48D94633789D6D1B62C20CD53A67C919F14CF78A2566B6466EFFEF1"
+    }
+  },
+  "screen": {
+    "finiteOwnedWindowSamples": 59,
+    "maximumSampleGapSeconds": 0.5167335000000008,
+    "positiveSamples": 0,
+    "continuousAbsenceProven": false,
+    "visibleTest": "NOT_RUN_HOLD"
+  },
+  "limits": [
+    "Non-graphical native checks do not establish rendering, UI input or interactive-launch behavior.",
+    "Creation fault cases use a network-blocking test seam; no real response-loss or teardown fault injection.",
+    "Uncertain-command state is retained only in memory; no durable restart recovery.",
+    "Earlier full-slice CODE/REQ findings were corrected. Fresh affected diagnostics CODE/REQ passed; no full rendered-slice acceptance.",
+    "One local player-a setup action; no full gameplay, remote product UX, spectator UX, profile parity or packaging acceptance.",
+    "Linux x86-64 remains UNTESTED until a native host is arranged.",
+    "4 MiB decoded-response validation is after HTTP buffering, not an enforced memory ceiling."
+  ],
+  "rawPrivateArtifacts": [
+    {
+      "path": ".local\\development\\live-core-functional-20261023T235803Z\\result.json",
+      "bytes": 7437,
+      "sha256": "5019FE2299CFBFD74FD880E4239035B8EC2ADF0D92BFE5B85B34BCB800547B67"
+    },
+    {
+      "path": ".local\\development\\live-core-functional-20261023T235803Z\\report\\index.json",
+      "bytes": 4680,
+      "sha256": "919321B1CA663B312A7BC61F398EF994CF7C7231FD377E7F2FD9FED7E6E9B2F8"
+    },
+    {
+      "path": ".local\\development\\live-core-functional-20261023T235803Z\\native.log",
+      "bytes": 260366,
+      "sha256": "63601A42124D3779E80FD4DD1C86A57B7418BE4A3F05C536FD5747E35F5ECCDF"
+    },
+    {
+      "path": ".local/development/live-core-ca315fb/editor-build-console.log",
+      "bytes": 2506,
+      "sha256": "0C8D7FC7C9D53BA999D3BAF53D8A3F0B4C7F9315F082329BF7B14FD80B6E92A8"
+    }
+  ],
+  "reviewEvidence": "2026-10-23-live-core-reviews.json"
+}

@@ -1,0 +1,181 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "assessmentKind": "BLIND_SELECTED_DATA_INITIAL",
+  "campaignId": "E04A1E-SCOPED-73bc2c0-20261020T122137Z-3498b937",
+  "scopeId": "D_SELECTORS_001_301",
+  "subject": {
+    "sourceHead": "73bc2c047aef669595ff5144d285d0d7f10767ef",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T122137Z-3498b937",
+    "subset": "E04-A1E_EDITOR_MODULE_RAW_DOCUMENT_PROOF"
+  },
+  "bindingAssessment": {
+    "result": "MATCH",
+    "inputManifestSha256": "ee16f0b8a743ff88482d59d7810ea00cb56617359a377f288c0577b1e3ab7d55",
+    "runtimeFreezeSha256": "e4c776c0c0aca5cf09995bcf7484260c6ad20b039c1791523060d35384b3dcb6",
+    "scopeContractSha256": "99cebdde29f1544efa3fdb03a70ba59d584ee5b3153846d82e486d6fa274b49b",
+    "bootstrapSha256": "241eaa2e9a6e8a683fc0e65901197eb89772f1bcabff7b4809818cbfc617faee",
+    "coverageSha256": "62177cb43094ca6fe57e84f6ddfda4375b9ef54336c7af1c4a32f16b8e90d2ee",
+    "launchPermissionSha256": "dac300f160924ed8d545158356ce6c2def879b77422158b10fbd0fda915464b9",
+    "preparedPromptSha256": "45a2f6104077b7737b33be84689226f26d7c42114f9b32fbb3d6d965c6e84b75",
+    "actualPromptSha256": "078ae309a19ebf21117b490fb01125309ff609a32665e79eb4b25451adbd027b",
+    "details": [
+      "Verified actual file byte counts and hashes against the supplied bindings, including all six subject descriptor fields.",
+      "The actual prompt contains the complete prepared prompt followed by the matching ROOT ACTUAL GO.",
+      "Independently compared campaign, scope, assessment kind, head, base and run across panel identity records.",
+      "Compared the prompt's subject, local scope, common requirements and local join projection with the bound records. The exactDuty, dutyKind, atomicDutyIds and complete owned atom match the global contract's own-scope assignment.",
+      "Read and parsed all three criteria metadata records through their exact bound descriptors. Their descriptors occur exactly once in both manifest inventories. All 98 BODY grants match; all 13 positive metadata grants agree, with the expected identical-content record4 catalog copy at the panel path.",
+      "Head/base remain root-supplied identities; no Git verification was performed."
+    ]
+  },
+  "coverage": {
+    "mandatoryEntireBodiesComplete": [
+      "SOURCE-BODY-054: physical rows 1–294",
+      "SOURCE-BODY-055: physical rows 1–142",
+      "SOURCE-BODY-056: physical rows 1–14",
+      "SOURCE-BODY-057: physical rows 1–196",
+      "SOURCE-BODY-096: physical rows 1–50",
+      "SOURCE-BODY-097: physical rows 1–88"
+    ],
+    "mandatoryPhysicalRowsVerified": 784,
+    "mandatoryCompleteUnits": 0,
+    "selectedDataComplete": [
+      "Record8 original physical rows 1–301: all four permitted row fields and all 49 permitted origin fields.",
+      "Complete positively selected contents of records9 and 10.",
+      "Applicable relationships in records7, 11 and 12."
+    ],
+    "additionalEntireBodiesComplete": [
+      "SOURCE-BODY-065: physical rows 1–567",
+      "SOURCE-BODY-069: physical rows 1–445",
+      "SOURCE-BODY-078: physical rows 1–211"
+    ],
+    "additionalNumberedSourceRanges": [
+      "SOURCE-BODY-064: 153–215",
+      "SOURCE-BODY-072: 225–407",
+      "SOURCE-BODY-073: 160–215 and 415–445",
+      "SOURCE-BODY-081: 245–390 and 1170–1260",
+      "SOURCE-BODY-082: 250–315"
+    ],
+    "additionalSearchOnly": [
+      "SOURCE-BODY-076",
+      "SOURCE-BODY-077"
+    ],
+    "unreadScope": "No mandatory local scope remains unread. The other 89 BODY files were not completely assessed; seven received the partial inspections or searches identified above. Other metadata records were not fully assessed. Full runtime/build/cross-system graph domains and other scopes' implementation duties are not claimed."
+  },
+  "dataIntegrityAssessment": {
+    "assignedRowsMatchedExactlyOnce": 301,
+    "uniqueAssignedOrigins": 301,
+    "originFieldPresenceValueComparisons": 14749,
+    "differences": 0,
+    "details": [
+      "Independently verified every assigned original path, byte count and complete SHA256.",
+      "Compared exact-case keys and strings, recursive JSON kinds, complete nested objects, arrays and array order. Verified ordered absence lists and complete ordinal-ordered other-present name arrays.",
+      "Reviewed all 519 assigned module occurrences and all 457 outgoing Plugin-reference occurrences, retaining original array indices.",
+      "The selected values contain zero explicit nulls, 23 empty arrays, 400 singleton arrays, 798 false values and three literal numeric zeroes. These remained distinct from absence.",
+      "No exact duplicate or case-colliding keys were found in the selected nested values.",
+      "For incoming-reference identification, additionally verified all 902 origin identities and compared every complete Plugins field against its permitted original; no differences.",
+      "All 901 catalog-root descriptor identities match the row origins; the remaining row is the project proof plugin. Current selected membership contains 245 matching descriptor basenames, including 128 assigned rows."
+    ]
+  },
+  "substantiveAssessment": [
+    {
+      "conclusion": "Literal absence was preserved without inserting consumer defaults. EnabledByDefault absence differs from false; runtime defaults also depend on project versus engine origin and the engine-default permission. HasExplicitPlatforms changes empty-platform-list interpretation.",
+      "citations": [
+        "Record8 rows1–301; records9/10",
+        "SOURCE-BODY-069 physical83–100, 364–381, 433–443",
+        "SOURCE-BODY-073 physical424–438"
+      ]
+    },
+    {
+      "conclusion": "Module membership, compilation eligibility and loading remain separate. Reviewed platform, architecture, target, configuration and program restrictions, host types, omitted versus explicit loading phases, empty module arrays and content-only descriptors. LoadingPhase=None and ExplicitlyLoaded=true were retained without automatic-load claims. ProgramAllowlist at row146 Modules[0] remains distinct from ProgramAllowList; no consumer equivalence was inferred.",
+      "citations": [
+        "Record8 rows1–301, particularly rows24,31,67,103,146,288",
+        "SOURCE-BODY-064 physical207–212",
+        "SOURCE-BODY-065 physical165–255, 281–391, 398–566",
+        "SOURCE-BODY-081 physical1232–1242"
+      ]
+    },
+    {
+      "conclusion": "Plugin-reference Enabled, Optional and filtering fields were assessed as conditional requests. Disabled references remain occurrences; optionality is not activation. Source filters precede dependency acceptance and missing required dependencies fail. No selected-plugin or module-load execution was inferred.",
+      "citations": [
+        "Record8 incident reference occurrence mappings",
+        "SOURCE-BODY-078 physical35–41, 44–123, 125–185",
+        "SOURCE-BODY-072 physical230–405"
+      ]
+    },
+    {
+      "conclusion": "Fractional Version literals, extension flags, localization data, PythonRequirements strings and other selected metadata were preserved as supplied. No integer conversion, command execution, package installation or activation was inferred.",
+      "citations": [
+        "Record8 rows1–301, including rows27,30,42,44,49,269,299",
+        "SOURCE-BODY-069 physical262–418",
+        "SOURCE-BODY-081 physical283–351"
+      ]
+    }
+  ],
+  "incidentReferenceAssessment": {
+    "distinctIncidentOccurrences": 710,
+    "exactSpelling": {
+      "outgoing": 457,
+      "incoming": 523,
+      "internal": 270,
+      "outgoingMatchingOtherPartitions": 185,
+      "incomingFromOtherPartitions": 253,
+      "outgoingCaseVariantNames": 2
+    },
+    "caseVariantsPreserved": [
+      {
+        "source": "Record8 row195 Plugins[2]",
+        "literalName": "DataPrepEditor",
+        "catalogCandidateRow": 190,
+        "catalogName": "DataprepEditor"
+      },
+      {
+        "source": "Record8 row207 Plugins[6]",
+        "literalName": "TensorBoard",
+        "catalogCandidateRow": 420,
+        "catalogName": "Tensorboard"
+      }
+    ],
+    "interpretation": "UBT ToFilteredDictionary explicitly uses StringComparer.OrdinalIgnoreCase. Under that source-supported name resolution, incidence is 457 outgoing, 524 incoming, 271 internal, 186 outbound cross-partition and 253 inbound cross-partition occurrences; the distinct union remains 710. Both requesting parents are absent from current selected membership. Runtime lookup uses its own FString map route; equivalent runtime case resolution or actual activation is not asserted.",
+    "citations": [
+      "SOURCE-BODY-082 physical283–304",
+      "SOURCE-BODY-073 physical160–215",
+      "Record7 enabledPlugins/descriptors",
+      "Record8 rows190,195,207,420"
+    ]
+  },
+  "relationshipObservations": [
+    "Records7 and 12 have identical ordered descriptor paths, byte counts and digest bytes. All 245 SHA256 strings differ textually in letter case; this difference was retained rather than reported as exact string equality.",
+    "Record12 retains sourceHead c6a9410a524649147f157c3c17a2b838c7e0fc81 and runId 20261020T010406Z-a7dec142. It supplies selected membership metadata, not current execution or transferred approval.",
+    "Record7's project identity matches record11's origin descriptor. Its absence/environment/receipt policies remain prospective requirements."
+  ],
+  "ownedDutyDisposition": {
+    "join": "SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+    "dutyKind": "LOCAL_PRIMARY",
+    "atomicDuty": "SELECTOR_LITERAL_ROWS_001_301",
+    "status": "SUBSTANTIVELY_COMPLETE",
+    "qualification": "The global completeDuty is aggregate context. This report supplies no aggregate graph disposition."
+  },
+  "findingsRequiringChanges": [],
+  "errorsAndRecoveries": [
+    "Python was unavailable; switched to self-authored PowerShell/.NET data queries.",
+    "An ambiguous JSON Parse overload failed; recovered using the explicit string overload.",
+    "The temporary function name R resolved to Invoke-History and failed without returning history. Renamed it; no history content was received or executed.",
+    "Strict parsing encountered an original descriptor trailing comma. Repeated the complete comparisons with inert trailing-comma/comment support.",
+    "Large body, relationship and module-attribute outputs truncated. Recovered mandatory text with accurate numbered rereads and material data through complete comparisons and exact-case occurrence projections. No mandatory conclusion relies on truncated output."
+  ],
+  "independenceAndExecutionLimits": [
+    "No delegation, file mutation, saved report, implementation import/helper execution, YAML parsing, build, test, engine, GUI, network or GitHub action.",
+    "No peer reports, author notes, previous verdicts, credentials or ungranted generated runtime/invocation bodies were read.",
+    "Read-only/never permissions were supplied by the environment. Memory disabling was requested; actual memory/runtime/isolation and received-input provenance remain for root's independent attestation.",
+    "No native observations or effective runtime values were established. Full graph semantics, Rules witness execution, activation and phase acceptance remain separately owned obligations."
+  ],
+  "authorityBoundary": "SOURCE_PASS is local to this subject and scope. It is not the aggregate SOURCE gate, phase/native authorization or final acceptance. E04-A1G, A2, Linux, rendering/HUD, packaging and independent final CODE/REQ gates remain open.",
+  "requirementCitations": [
+    "Bound scope contract: scope D_SELECTORS_001_301 duties; SELECTOR_LITERAL_ROWS_001_301; reviewDiscipline.localJoinAssignment; scopeReportRequirements.",
+    "SOURCE-BODY-054 physical89–125: independent review and evidence limits.",
+    "SOURCE-BODY-057 physical1–17 and147–184: A1E subset and remaining gates.",
+    "SOURCE-BODY-096 physical26–49: explicit NOT_RUN and acceptance/authority fields."
+  ]
+}

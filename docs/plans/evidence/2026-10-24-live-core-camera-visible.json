@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "LIVE_CORE_CAMERA_MANUAL_LAUNCHER_VISIBLE_OBSERVATION",
+  "status": "COMPLETED_WITH_UNRESOLVED_F_SHORTCUT",
+  "publicationState": "ADOPTED_ROOT_OBSERVATION",
+  "platform": "Windows x64",
+  "recordedSourceHead": "a3ededb37f884bcd6c301367025420ec57b6bf3f",
+  "core": {
+    "commit": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+    "contractVersion": "44.3.33",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a"
+  },
+  "timing": {
+    "startedUtc": "2026-10-24T04:09:22.7985752Z",
+    "visibleBudgetStartedUtc": "2026-10-24T04:09:39.1746105Z",
+    "finishedUtc": "2026-10-24T04:13:53.5852324Z",
+    "clientObservedSeconds": 253.2399352,
+    "maximumVisibleSeconds": 600
+  },
+  "workflow": {
+    "route": "Separately owned development Core and actual scripts/Start-Client.py manual launcher",
+    "credentialEnvironmentNamesInitiallyAbsent": true,
+    "credentialValuesPublished": false,
+    "startupKeyboardSequence": [
+      "Tab to endpoint",
+      "Tab to Connect",
+      "Space to activate Connect"
+    ],
+    "initialRevision": 1,
+    "initialOfferedOptionCount": 4,
+    "initialBoardCaptureDimensions": [
+      3840,
+      2160
+    ],
+    "initialFullBoardFitObserved": true,
+    "boardClickThenWheelZoomObserved": true,
+    "panelWheelPreservedCameraObserved": true,
+    "boardWheelWhileUiFocusedPreservedCameraObserved": true,
+    "sameBoundsRefreshPreservedZoomObserved": true,
+    "fShortcut": {
+      "status": "UNRESOLVED",
+      "observation": "Repeated attempts after board click and zoom did not visibly frame the board.",
+      "sourceCause": "NOT_ESTABLISHED",
+      "passed": false
+    },
+    "frameBoardButtonRestoredFitObserved": true,
+    "resizedFullBoardFitObservations": [
+      {
+        "outerCaptureWidth": 2289,
+        "outerCaptureHeight": 1335,
+        "fullBoardFitObserved": true
+      },
+      {
+        "outerCaptureWidth": 1602,
+        "outerCaptureHeight": 948,
+        "fullBoardFitObserved": true
+      },
+      {
+        "outerCaptureWidth": 1269,
+        "outerCaptureHeight": 762,
+        "fullBoardFitObserved": true
+      }
+    ],
+    "captureDimensionsAreClientAreaDimensions": false,
+    "offeredAction": {
+      "actuallyOfferedAndClicked": true,
+      "resultRevision": 2,
+      "acceptedActionCount": 1,
+      "accepted": true,
+      "committed": true,
+      "displayedChoice": "Fixed assassination bring_it_down"
+    }
+  },
+  "finiteServerLogCounts": {
+    "commandPostCount": 2,
+    "commandPostInterpretation": "One start command and one offered-choice command, as recorded by root.",
+    "sessionPostCount": 1,
+    "projectionGetCount": 3,
+    "countMethod": "Regex counts over retained stdout plus stderr; request identifiers and raw log bodies are excluded."
+  },
+  "lifecycle": {
+    "recordedStatus": "NORMAL_CLIENT_AND_MANUAL_LAUNCHER_EXIT",
+    "editorExitCode": 0,
+    "launcherExitCode": 0,
+    "coreStartup": {
+      "mode": "Managed",
+      "status": "READY",
+      "owned": true
+    },
+    "coreAfterClientClose": {
+      "mode": "Attach",
+      "status": "ATTACHED_HEALTHY",
+      "owned": false
+    },
+    "attachedStop": {
+      "status": "ATTACHED_NOT_STOPPED",
+      "owned": false
+    },
+    "ownedStop": {
+      "status": "STOPPED",
+      "owned": true,
+      "forcedTermination": false
+    },
+    "configFileCount": 4,
+    "configFilesExactAfterRun": true,
+    "finalTargetWindowCount": 0,
+    "finalWindowCountObservedUtc": "2026-10-24T04:14:16.036Z",
+    "nativeErrorFatalCount": 0,
+    "nativeErrorFatalCountBasis": "Root supplied scan result; no all-server-logs-clean inference."
+  },
+  "serverStderrQualification": {
+    "bytes": 3233,
+    "winError10053MarkerCount": 1,
+    "rootTimingObservation": "Pre-client readiness canceled-connection traceback.",
+    "allServerLogsCleanClaimed": false
+  },
+  "notPositivelyObservedInThisRun": [
+    "RMB orbit drag",
+    "MMB pan drag",
+    "Esc capture cancellation",
+    "Application deactivation capture cancellation",
+    "Keyboard focus-loss cancellation"
+  ],
+  "separateSyntheticSlateCameraCheck": "Later separate result: 2026-10-24-live-core-native-camera-input.md; held-button controls and F routing passed with synthetic bounds. No result is incorporated into this completed manual run; its F failure remains unresolved.",
+  "privateEvidencePolicy": {
+    "screenshotCountRetainedPrivately": 17,
+    "screenshotsPublished": false,
+    "associatedSessionMetadataPublished": false,
+    "sessionIdentifiersPublished": false,
+    "processIdentifiersPublished": false,
+    "credentialsPublished": false,
+    "rawLogBodiesPublished": false
+  },
+  "privateOriginalDigests": [
+    {
+      "role": "Run metadata",
+      "leaf": "result.json",
+      "bytes": 3349,
+      "sha256": "479DA89DF23B09BE3B4178AA31F9D281922F9161FA1C97E68698F31AC7347BA0"
+    },
+    {
+      "role": "Final window count",
+      "leaf": "final-window-count.json",
+      "bytes": 64,
+      "sha256": "413C6B2ED87E185A8F862B0819016F903F941E8D60C6F8EE8125FE73869FBA46"
+    },
+    {
+      "role": "Native log",
+      "leaf": "native.log",
+      "bytes": 203150,
+      "sha256": "98FA38C84A251D56329539FF6D7901FF508E707C7401F610C6D5C88F3EA30EBD"
+    },
+    {
+      "role": "Manual launcher stdout",
+      "leaf": "launcher.stdout.log",
+      "bytes": 100,
+      "sha256": "8311B8CEDF8F9966B34378D61AF64F7A384DF5466593FABF9A833B1EFE579D76"
+    },
+    {
+      "role": "Manual launcher stderr",
+      "leaf": "launcher.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "role": "Core stdout",
+      "bytes": 416,
+      "sha256": "45724ACCD238923CEC173416D1D7F36B2A8FCC2E2D1DBB31FD0DBBFB40414B83"
+    },
+    {
+      "role": "Core stderr",
+      "bytes": 3233,
+      "sha256": "ADD1179A26B2B241C8325329B2809208956616449D665EE73AACD6DC7BAA2CDB"
+    }
+  ],
+  "provenance": {
+    "visualWorkflowAndResult": "Root's direct observations supplied to the auxiliary drafter.",
+    "metadataAndCounts": "Auxiliary inert parsing of selected original metadata, exact Config hash maps, final window-count JSON, and finite server log counts.",
+    "auxiliaryScreenshotInspectionPerformed": false,
+    "auxiliaryExecutionOrGuiPerformed": false,
+    "independentReviewOrAcceptance": "NOT_CLAIMED",
+    "linuxValidation": "NOT_CLAIMED",
+    "broaderMigrationAcceptance": "NOT_CLAIMED"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_E04_A1G_COOK_SDK_TRACE_SOURCE_REPAIR",
+  "status": "COOK_SDK_TRACE_EXTENSION_SOURCE_REPAIRED_FRESH_SOURCE_PENDING",
+  "recordedUtc": "2026-10-23 14:43:16 UTC",
+  "comparisonBase": "cfd2ff3e78e40ce426ce87827d848d7fa464a66b",
+  "ownerApproval": {
+    "answer": "I approve!",
+    "trustedSource": "Direct human reply to the immediately preceding finite Cook-only scope question in this task",
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-sdk-trace-repair-root-20261023\\owner-cook-trace-extension-approval.original.json",
+      "bytes": 2489,
+      "sha256": "6F532AA28B225AC735DBBE6F8DE045CF89AFD342568C74E82ADC882362755F37"
+    },
+    "approvedProposal": "docs/plans/research/2026-10-22-e04a-game-cook-sdk-trace-owner-choice.md"
+  },
+  "priorFailureBackup": {
+    "checkpoint": "cfd2ff3e78e40ce426ce87827d848d7fa464a66b",
+    "remoteSha": "cfd2ff3e78e40ce426ce87827d848d7fa464a66b",
+    "record": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-a898057-cook-failure-root-20261022\\root-failure-remote-backup.original.json",
+      "bytes": 475,
+      "sha256": "662D0B4D44B309C64BACBE93DDB1AC62430792D0272D95327800A56771A514EC"
+    },
+    "verifiedBeforeRepair": true
+  },
+  "files": [
+    {
+      "relativePath": "scripts/migration/Invoke-E04A1GProfileProof.ps1",
+      "bytes": 211429,
+      "sha256": "0837A1958A9FF58131C970578CFA66FF10DCA5551A39F125064936E4A4D7F6DD"
+    },
+    {
+      "relativePath": "scripts/migration/tests/Test-E04A1GTracePolicy.ps1",
+      "bytes": 9238,
+      "sha256": "004FDE14FE8C967B6A17C6E2BCEB518144870C21CCE6077FB203CBE7F013AB80"
+    },
+    {
+      "relativePath": "docs/plans/research/2026-10-21-e04a-game-proof-packet.md",
+      "bytes": 30674,
+      "sha256": "60F6288C1554B39109F7B49E3BF9DD07BE624E4986F03CAC819D6AD8BA58E983"
+    }
+  ],
+  "rootStaticObservations": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-sdk-trace-repair-root-20261023\\root-static-source-observations.original.json",
+    "bytes": 2130,
+    "sha256": "EC38AD7E3B4B9A95BD40F40E600CA33E0FD4E8D15B1B069D76275DBB3598DBA4"
+  },
+  "staticChecks": {
+    "wrapperAstErrors": 0,
+    "controlAstErrors": 0,
+    "wrapperFunctions": 125,
+    "unchangedExistingFunctions": 114,
+    "changedExistingFunctions": [
+      "Invoke-A1GRoot",
+      "Get-A1GUbtTraceStdout",
+      "Start-A1GUbtTracePhase",
+      "Complete-A1GUbtTracePhase",
+      "Get-A1GCookArgumentEvidence",
+      "Complete-A1GCookPhase",
+      "Complete-A1GAuditPhase",
+      "Output-Inventory"
+    ],
+    "newFunctions": [
+      "Assert-A1GCookSdkValidationContext",
+      "Read-A1GCookSdkValidationText",
+      "Get-A1GCookSdkTrace"
+    ],
+    "declaredControlCases": 14,
+    "oldSevenCaseTextUnchanged": true,
+    "oldTraceDeltaHelperUnchanged": true,
+    "auditDdcReturnRetained": true,
+    "inspectionTools": [
+      "ffd43f",
+      "f4d8c8",
+      "7ad7eb",
+      "19d51b",
+      "12a766",
+      "904106"
+    ]
+  },
+  "policy": {
+    "permittedWriterPhases": [
+      "EditorPrerequisiteBuild",
+      "GameBuild",
+      "Cook"
+    ],
+    "cookWriter": "ONE normal SDK-validation UBT descendant of the ordinary Editor Cook child within the supervised UAT root",
+    "stageTraceWritesPermitted": false,
+    "traceFileCap": 32,
+    "tracePerFileBytes": 16777216,
+    "traceAggregateBytes": 67108864,
+    "recovery": "Verified fresh owned before/after copies, normal rotation delta, interphase continuity and final Audit joins",
+    "cookPrelaunchTiming": "Immediately before the UAT root; not atomic or immediate before the nested SDK child",
+    "sdkEvidence": "One exact emitted normal SDK command, owned project/SDK log, frozen Win64 SDK VALID observation, successful SDK file and one authorized closed stdout trace destination",
+    "environment": "Refuse UAT nonzero integer IsBuildMachine, unsafe native SDK-skip selectors and worker/build-machine/validation-bypass arguments without spoofing selectors",
+    "sdkWriterPid": "UNVERIFIED",
+    "sourceBinaryCorrespondence": "UNVERIFIED_TRUSTED_LEAF",
+    "emittedRouteSourceLiteralCorrespondence": "NOT_ESTABLISHED"
+  },
+  "execution": {
+    "freshRunId": "UNBOUND",
+    "bindings": "NOT_CREATED",
+    "freshSource": "NOT_RUN",
+    "pureControls": "NOT_RUN_UNTIL_POSITIVE_AFFECTED_SOURCE",
+    "allNineFreshPhases": "NOT_RUN",
+    "finalCode": "NOT_RUN",
+    "finalReq": "NOT_RUN",
+    "newPhaseGo": false,
+    "finalAcceptance": false
+  },
+  "history": "Preserve a898057 SOURCE prerequisite and the failed Cook run 20261022T192551Z-711fa6f6, all older failures/settings restoration and bounded A1E acceptance; this prospective repair does not waive or reconstruct old evidence.",
+  "attributesUnchangedSha256": "9989A82B410A5EC9115B86D0BAA10015D39420E633AC719675B0952C358FAC23",
+  "limits": "Static source adoption only. Checkpoint/push/exact-gh-verify repaired source before fresh bindings and affected SOURCE; run all 14 declared pure controls afterward, then issue separate exact ordered phase GOs. No runtime correctness, writer-PID, OS argv, source/binary, continuous preservation or acceptance certificate. OWN17 deferred/unproven, visible authority zero, Linux UNTESTED, A2 deferred; perpetual necessary private source/API review consent unchanged."
+}

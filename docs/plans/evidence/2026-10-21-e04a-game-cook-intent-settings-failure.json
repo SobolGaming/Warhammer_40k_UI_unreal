@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "CLOSED_E04_A1G_COOK_INTENT_AND_SETTINGS_FAILURE",
+  "status": "CLOSED_COOK_UAT_INTENT_AND_SETTINGS_PRESERVATION_FAILED_REPAIR_REQUIRED",
+  "recordedUtc": "2026-10-21T14:14:32.3838876Z",
+  "sourceHead": "a00c1420b239c800600122f172e8a384ecb9bb0b",
+  "comparisonBase": "a672ab072fb7ffca237445687eebb667b52c35ba",
+  "runId": "20261021T134112Z-677c4ca5",
+  "sourcePrerequisite": {
+    "rawVerdict": "PASS",
+    "status": "PASS_ADMITTED",
+    "rootAdmission": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1G-source-review\\source-a00c142-20261021T134118Z-667d12\\root-source-admission.original.json",
+      "bytes": 5371,
+      "sha256": "06432D2B8ABB87C9F9AC716FC9BE9FE8DE5FEBA731B9170AC50517F4D21FDAA3"
+    },
+    "publicReceipt": "docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-a00c142.json",
+    "publicNote": "docs/plans/research/2026-10-21-e04a-game-source-prerequisite-a00c142.md",
+    "rawReport": "docs/plans/research/2026-10-21-e04a-game-source-review-a00c142.md"
+  },
+  "passedPredecessors": [
+    "Preflight",
+    "DependencyConfigure",
+    "DependencyBuild",
+    "EditorPrerequisiteBuild",
+    "GameBuild"
+  ],
+  "cook": {
+    "result": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T134112Z-677c4ca5\\phases\\cook\\result.json",
+      "bytes": 59197,
+      "sha256": "FD07592332D5C3CF190EE085F94D3C6495310979A75231A06906A2E75932E032"
+    },
+    "status": "FAIL_PRESERVATION_OR_RETAINED_OUTPUT_CAP",
+    "executionPassed": false,
+    "startedUtc": "2026-10-21T14:01:13.3394301Z",
+    "completedUtc": "2026-10-21T14:07:12.6858245Z",
+    "elapsedSeconds": 362.5700325,
+    "primaryFailure": {
+      "stage": "Cook",
+      "type": "System.Management.Automation.RuntimeException",
+      "message": "A1G_UNEXPECTED_RESOLVED_UAT_INTENT: SkipBuildClient"
+    },
+    "secondaryErrors": [
+      {
+        "stage": "post-phase-preservation",
+        "type": "System.Management.Automation.RuntimeException",
+        "message": "E02_SETTINGS_CHANGED"
+      }
+    ],
+    "processReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\experiments\\E04A1G\\20261021T134112Z-677c4ca5\\phases\\cook\\a1g-cook.process.json",
+      "bytes": 27226,
+      "sha256": "9362093FC9E87904D43B232149D116C923FD31CF9AAAC8C8D7F9AB9A1F93C620"
+    },
+    "nativePid": 36700,
+    "nativeExitCode": 0,
+    "nativeElapsedSeconds": 304.2745012,
+    "exitConfirmed": true,
+    "cleanupConfirmed": true,
+    "timedOut": false,
+    "finalJobTotal": 70,
+    "finalJobActive": 0,
+    "normalCopiedUatLog": "logs/uat-cook/Log.txt:180 SkipBuildClient=False; lines 1286/1288 BUILD SUCCESSFUL and AutomationTool ExitCode=0",
+    "completionExists": false,
+    "outputs": "Retain Cook partial outputs; UAT success does not establish wrapper Cook PASS or Stage acceptance."
+  },
+  "outerClosure": {
+    "receipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-dependency-fact-order-repair-PROPOSED\\phase-execution-a00c142-20261021T134112Z-677c4ca5\\cook.outer\\completion.original.json",
+      "bytes": 1633,
+      "sha256": "8AFEC00E664D2A15999715F210B5965444AE2A8D2BA10346426C9636EFE281AE"
+    },
+    "hostPid": 13852,
+    "exitCode": 1,
+    "closedUtc": "2026-10-21T14:07:12.7629431Z",
+    "timedOut": false,
+    "exactRootTerminationRequested": false,
+    "fullStreamCopiesCompleted": true
+  },
+  "settingsFailure": {
+    "role": "editor-local-versioned",
+    "path": "C:\\Users\\Rabid\\AppData\\Local\\UnrealEngine\\5.8\\Saved\\Config\\WindowsEditor\\EditorSettings.ini",
+    "beforeUtc": "2026-10-21T14:01:17.8013042Z",
+    "beforeSha256": "b7e47645c8169e0c05ab6ad43f99f4529d33cd12ef019432fa56bd9f994b464e",
+    "afterUtc": "2026-10-21T14:07:12.6785378Z",
+    "afterSha256": "8c760872a0475763f55e95d7104eb153361b4ebe4d6593e2ad6d0eb186064aa6",
+    "preservation": "FAILED",
+    "attribution": "NOT_ESTABLISHED; source-only investigation is separate from the observed hash change.",
+    "beforeContentBytes": "NOT_CAPTURED_IN_RAW_PHASE_OR_AS_OF_ROOT_CLOSURE",
+    "laterRecoveryCandidate": "An ignored candidate was subsequently derived by removing one unique this-run recent-project row; 461 bytes matched the recorded before SHA256. Candidate not root-adopted or restored at this failure checkpoint; exclusive writer attribution remains unproved.",
+    "restoration": "NOT_PERFORMED_AS_OF_FAILURE_CHECKPOINT; original settings preservation remains FAILED."
+  },
+  "stagedConfigFailure": {
+    "path": "project/Config/DefaultEngine.ini",
+    "beforeBytes": 375,
+    "beforeSha256": "15E5F0F761C9DD6EFE929062426257904197222AB4A0183BEABC82D24B620A25",
+    "currentBytes": 775,
+    "currentSha256": "13AC61B99D864B31E4B414F28DC4CA47790B9E09E7779B4B1858BFCED01DE4E2",
+    "qualification": "Independent current hash/size delta, including generated editor settings. Raw contents and generated token excluded from public records and review packets."
+  },
+  "finiteClosure": {
+    "rootClosedRun": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-intent-settings-failure-PROPOSED\\root-closed-run.original.json",
+      "bytes": 12251,
+      "sha256": "62E5FC9645A12AB94E54CBC0F5E79AE3C8383BE585E816CC267E649E2BC56DA9"
+    },
+    "rootClosureTool": "482a3d",
+    "currentObservedStates": 84,
+    "matched": 82,
+    "changed": 2,
+    "currentObservations": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A1G-cook-intent-settings-failure-PROPOSED\\root-current-preservation-observations.original.json",
+      "bytes": 58237,
+      "sha256": "07C7C6DBE8896E279665422D03E1AB4067ED38118D71D7894D69653FE63184E1"
+    },
+    "priorRetainedArtifactDescriptorOccurrencesMatched": 157,
+    "predecessorDescriptorsMatched": 10,
+    "rawAfterObservations": {
+      "source": null,
+      "stage": null,
+      "fixtures": null,
+      "gameSettings": null,
+      "settingsObservationCount": 9
+    },
+    "rawRetainedArtifactsCount": 0,
+    "cookPayload": {
+      "exists": true,
+      "files": 1048,
+      "bytes": 206699879.0,
+      "contentValidated": false
+    },
+    "stagePayloadAbsent": true,
+    "qualification": "These are independent later current observations, not 82 wrapper phase-after matches. Wrapper finally source/stage/fixtures/gameSettings fields are null; settings contains nine observations. Rehash count 157 is descriptor occurrences, not unique artifacts. Cook payload count/size does not validate content."
+  },
+  "downstream": {
+    "Stage": "NOT_RUN",
+    "Native": "NOT_RUN",
+    "Audit": "NOT_RUN",
+    "gameAttempts": 0,
+    "evaluatedChecks": 0,
+    "plannedParserCalls": 2,
+    "plannedChecks": 52
+  },
+  "repairAdopted": false,
+  "retryAuthority": false,
+  "successorGo": false,
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "visibleAuthority": 0,
+  "linux": "UNTESTED",
+  "next": "Checkpoint/push/gh-verify OWN18 failure backup before any repair. Investigate resolved UAT intent and settings write path separately; preserve both observed changes, raw evidence and the separately proposed recovery candidate. A changed candidate needs repaired-source backup, fresh bindings and affected SOURCE before a new ordered phase chain.",
+  "unaffected": "Raw SOURCE PASS, five predecessor PASS admissions, bounded A1E acceptance, historical failures and perpetual review consent remain unchanged. No Cook/runtime/milestone acceptance.",
+  "predecessorAdmissionBinding": "Five PASS_ADMITTED admission descriptors are indexed by the exact finiteClosure.rootClosedRun record; their verdicts are preserved."
+}

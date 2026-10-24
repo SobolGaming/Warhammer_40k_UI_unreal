@@ -1,0 +1,363 @@
+{
+  "verdict": "SOURCE_PASS",
+  "role": "SOURCE",
+  "scopeId": "S_PLUGIN",
+  "assessmentKind": "BLIND_SCOPED_INITIAL",
+  "campaignId": "E04A1E-SCOPED-4a4f107-20261020T061255Z-f9eae715",
+  "subject": {
+    "sourceHead": "4a4f107f316456c8eac7935c0ef8d785a1f4e48e",
+    "comparisonBase": "03d28af606fc6c57d20915f746296b0d843211c6",
+    "plannedRunId": "20261020T061255Z-f9eae715",
+    "runtimeFreezeManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4a4f107-20261020T061255Z-f9eae715\\runtime-freeze\\freeze-manifest.PROPOSED.json",
+      "bytes": 556205,
+      "sha256": "430C806C4B82214E4B51A570C0D7BC27BA9E3257E4F14EBADD90F076E52D50BC"
+    },
+    "globalBodyAccessPolicy": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4a4f107-20261020T061255Z-f9eae715\\body-access-policy.json",
+      "bytes": 54132,
+      "sha256": "80473D60F07F95439AE5112EC6E9E459A69CC21E7AC3B02D1F4ADF92C9436219"
+    },
+    "globalSelectedMetadataPolicy": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4a4f107-20261020T061255Z-f9eae715\\metadata-selection-policy.json",
+      "bytes": 14015,
+      "sha256": "D5C20471D8E7693238FDCFC2021258B2298176BDD8EBD750621ACA08E49A88FC"
+    },
+    "globalCoverageInventory": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4a4f107-20261020T061255Z-f9eae715\\coverage-plan.json",
+      "bytes": 66236,
+      "sha256": "EA2AFF1EB5B8A1FD50651D3F2D29396C86C6E263AA4DB9F2A08DCA61B44CA910"
+    },
+    "primaryCatalog": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4a4f107-20261020T061255Z-f9eae715\\primary-catalog.integrated.json",
+      "bytes": 169575,
+      "sha256": "F4DE2F7694381C1FF3BFB9C5796DBFC77F6436E2AD815D4F7242FDEB3E340B5E"
+    },
+    "commonSourceInputManifest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\common-source-4a4f107-20261020T061255Z-f9eae715\\source-review-input-manifest.json",
+      "bytes": 559659,
+      "sha256": "6A90F33B48E79EBB30D47E64A82AC3592B3E0EF3EA6A5CAB0AFA0035B4E72AC1"
+    }
+  },
+  "bindingAssessment": {
+    "panelDirectory": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\E04A1-source-review\\panel-4a4f107-20261020T061255Z-f9eae715-S_PLUGIN-complete-r2",
+    "verifiedPanelFiles": [
+      {
+        "relativePath": "scope-contract.original.json",
+        "bytes": 52294,
+        "sha256": "e3bec3b32c04e2495084dbd393ba67b81e3b339a91da7f5fd7b30eafb1e446fb"
+      },
+      {
+        "relativePath": "review-bootstrap.json",
+        "bytes": 5454,
+        "sha256": "1d6306e73cbc0db8d4f0481a483a6e6ccc9c62ec07af396b7cfcd82bd78c6129"
+      },
+      {
+        "relativePath": "coverage-plan.json",
+        "bytes": 31972,
+        "sha256": "7ec31197ae59de13c40bfc64ea5387d8ba88b5ce79dec06c62c2a67aec2f11e7"
+      },
+      {
+        "relativePath": "scope.selected.json",
+        "bytes": 15191,
+        "sha256": "b8c9c6384d0af93c2224f7de2b1826e3e1884e19f933adca7020422f1a58a594"
+      },
+      {
+        "relativePath": "body-access-policy.json",
+        "bytes": 55213,
+        "sha256": "5d4e60160cc3263fe7f1e1c6e0a73c4b6fd65546dc157a5c17ced3372160fafb"
+      },
+      {
+        "relativePath": "metadata-selection-policy.json",
+        "bytes": 17619,
+        "sha256": "801692249e3c406fc260d09d6c10a5b39315b386fbeb8ab8b96ac66df571f928"
+      },
+      {
+        "relativePath": "source-review-input-manifest.json",
+        "bytes": 566467,
+        "sha256": "bbecaf93c91829cf68f328f6918006a26f56fd8d43fded6235df140accc90d69"
+      },
+      {
+        "relativePath": "launch-permission-go.original.json",
+        "bytes": 2057,
+        "sha256": "750504f453894cfa2c70f8638995f089fd6417aae3a79c85e720cc5f59c39789"
+      },
+      {
+        "relativePath": "prepared-review.prompt.original.txt",
+        "bytes": 26299,
+        "sha256": "9778b61834128c04cafdac8063de812b2d2b0be610dae0ec9c510f3d4f037494"
+      },
+      {
+        "relativePath": "actual-launch.prompt.original.txt",
+        "bytes": 27541,
+        "sha256": "3674764ad2aee802a5ad87a3473735b40b17f90bbe187259dcf4c3056c288ba1"
+      },
+      {
+        "relativePath": "root-launch-go.original.json",
+        "bytes": 4882,
+        "sha256": "911D70D213C83F52A7D5FB742A8CC74C7BBE165AC91F0F8DCBD0BF38F3B1BF05"
+      },
+      {
+        "relativePath": "owner-review-transmission-approval.json",
+        "bytes": 719,
+        "sha256": "be6775a9391b491e61b9150d5d0da0e52e0942d454a1aad3c7e40a05cdbda592"
+      }
+    ],
+    "conclusions": [
+      "Verified the subject descriptors, panel manifest, pure contract, bootstrap, coverage and actual GO bindings before dependent source conclusions.",
+      "The actual prompt artifact begins with the complete prepared prompt. Its embedded subject, scope, common bodies, global access, material joins, review discipline and report requirements compare exactly with the corresponding own-scope records.",
+      "The actual GO supplies the stated head, base, run, manifest, freeze and permission hashes. The contract template's launchBinding.actualGo is present and false; it was not substituted for the separately supplied actual authorization.",
+      "The three complete common criteria metadata records were resolved through their exact bound absolute paths, byte counts and hashes. Their exact descriptors occur in both the panel input and frozen inventories. Referenced descriptors did not confer further BODY access.",
+      "These comparisons do not establish campaign-wide consistency through generic transport behavior. Root retains the separate campaign, scope, received-input and runtime checks.",
+      "The head and base are root-supplied identities. No Git command independently verified commit membership."
+    ]
+  },
+  "independenceAndRuntime": {
+    "observedReviewConduct": [
+      "One read-only assessment using the supplied scope and positively granted source/data.",
+      "No delegation, fork, peer report, previous verdict, author/operator history, private session, credential or unrelated configuration was used.",
+      "No files were saved or mutated. No stored command, implementation helper, import, YAML parser, build, test, engine, GUI, network or GitHub operation was executed.",
+      "Source and fixture command strings remained inert.",
+      "Generated reviewer runtime, invocation, readiness, receipt, ledger, stdout/stderr, completion and last-message bodies were not inspected."
+    ],
+    "memory": "Disabled was requested; no memory facility was used. The external runtime memory selector was not independently inspected.",
+    "rootOwnedVerification": "Actual launch runtime/model/isolation, settings and received-input provenance remain root-owned attestations. This report does not infer them from own-directory artifacts or launcher source."
+  },
+  "coverage": {
+    "integrityVerificationOnly": {
+      "bodyFiles": 96,
+      "physicalRows": 42986,
+      "result": "All actual byte counts, SHA256 digests and physical line counts match the bound global inventory. This is not a claim of substantive review of all 96 bodies."
+    },
+    "mandatoryEntireBodiesCompletelyRead": {
+      "SOURCE-BODY-001": [1, 16],
+      "SOURCE-BODY-002": [1, 17],
+      "SOURCE-BODY-016": [1, 8],
+      "SOURCE-BODY-019": [1, 288],
+      "SOURCE-BODY-054": [1, 294],
+      "SOURCE-BODY-055": [1, 142],
+      "SOURCE-BODY-056": [1, 14],
+      "SOURCE-BODY-057": [1, 196],
+      "SOURCE-BODY-059": [1, 407],
+      "SOURCE-BODY-060": [1, 67],
+      "SOURCE-BODY-061": [1, 292],
+      "SOURCE-BODY-062": [1, 151],
+      "SOURCE-BODY-063": [1, 144],
+      "SOURCE-BODY-064": [1, 271],
+      "SOURCE-BODY-065": [1, 567],
+      "SOURCE-BODY-066": [1, 40],
+      "SOURCE-BODY-067": [1, 63],
+      "SOURCE-BODY-068": [1, 267],
+      "SOURCE-BODY-069": [1, 445],
+      "SOURCE-BODY-070": [1, 51],
+      "SOURCE-BODY-071": [1, 54],
+      "SOURCE-BODY-072": [1, 407],
+      "SOURCE-BODY-073": [1, 545],
+      "SOURCE-BODY-074": [1, 585],
+      "SOURCE-BODY-075": [1, 166],
+      "SOURCE-BODY-076": [1, 621],
+      "SOURCE-BODY-077": [1, 134],
+      "SOURCE-BODY-078": [1, 211],
+      "SOURCE-BODY-079": [1, 212],
+      "SOURCE-BODY-080": [1, 245],
+      "SOURCE-BODY-083": [1, 971],
+      "SOURCE-BODY-084": [1, 454],
+      "SOURCE-BODY-094": [1, 5539],
+      "SOURCE-BODY-095": [1, 50],
+      "SOURCE-BODY-096": [1, 88]
+    },
+    "mandatoryEntireCount": 35,
+    "mandatoryEntirePhysicalRows": 14022,
+    "mandatoryCompleteUnits": {
+      "body": "SOURCE-BODY-013",
+      "sha256": "642FD17AE0E46F179C694CBF593365446F989E7754F01D37BD7CB4942EB08E14",
+      "physicalRanges": [[1236, 1390], [1548, 1554]],
+      "physicalRows": 162,
+      "completeUnits": [
+        "Catalog-Descriptors",
+        "Check-PluginDiscoveryCatalog",
+        "Resolve-ReceiptPath",
+        "Check-TargetReceipt",
+        "Check-StagedPluginClosure",
+        "Native-Arguments"
+      ],
+      "assessment": "The declared complete function bodies, boundaries, callers and receipt/catalog duties were read substantively."
+    },
+    "additionalCompleteBody": {
+      "SOURCE-BODY-093": [1, 2018]
+    },
+    "additionalPartialBody": {
+      "SOURCE-BODY-092": [[1, 669], [834, 1130]]
+    },
+    "completeBodyCountIncludingAdditional": 36,
+    "completeBodyAndDeclaredRangePhysicalRows": 17168,
+    "outsideCompleteRangeAssessment": {
+      "SOURCE-BODY-013": [[1, 1235], [1391, 1547], [1555, 1696]],
+      "SOURCE-BODY-092": [[670, 833], [1131, 2968]]
+    },
+    "otherBodiesNotSubstantivelyRead": [
+      "SOURCE-BODY-003", "SOURCE-BODY-004", "SOURCE-BODY-005", "SOURCE-BODY-006",
+      "SOURCE-BODY-007", "SOURCE-BODY-008", "SOURCE-BODY-009", "SOURCE-BODY-010",
+      "SOURCE-BODY-011", "SOURCE-BODY-012", "SOURCE-BODY-014", "SOURCE-BODY-015",
+      "SOURCE-BODY-017", "SOURCE-BODY-018", "SOURCE-BODY-020", "SOURCE-BODY-021",
+      "SOURCE-BODY-022", "SOURCE-BODY-023", "SOURCE-BODY-024", "SOURCE-BODY-025",
+      "SOURCE-BODY-026", "SOURCE-BODY-027", "SOURCE-BODY-028", "SOURCE-BODY-029",
+      "SOURCE-BODY-030", "SOURCE-BODY-031", "SOURCE-BODY-032", "SOURCE-BODY-033",
+      "SOURCE-BODY-034", "SOURCE-BODY-035", "SOURCE-BODY-036", "SOURCE-BODY-037",
+      "SOURCE-BODY-038", "SOURCE-BODY-039", "SOURCE-BODY-040", "SOURCE-BODY-041",
+      "SOURCE-BODY-042", "SOURCE-BODY-043", "SOURCE-BODY-044", "SOURCE-BODY-045",
+      "SOURCE-BODY-046", "SOURCE-BODY-047", "SOURCE-BODY-048", "SOURCE-BODY-049",
+      "SOURCE-BODY-050", "SOURCE-BODY-051", "SOURCE-BODY-052", "SOURCE-BODY-053",
+      "SOURCE-BODY-058", "SOURCE-BODY-081", "SOURCE-BODY-082", "SOURCE-BODY-085",
+      "SOURCE-BODY-086", "SOURCE-BODY-087", "SOURCE-BODY-088", "SOURCE-BODY-089",
+      "SOURCE-BODY-090", "SOURCE-BODY-091"
+    ],
+    "selectedMetadata": {
+      "completeRequiredRecords": [9, 10],
+      "additionalCompleteProjectRecord": 11,
+      "relationshipRecordsAssessed": [1, 2, 4, 5, 7, 8, 11, 12],
+      "record8": "All 902 rows and all 1561 reference occurrences were independently assessed from raw selected data, including cross-partition relationships. All 1774 module occurrences and their material selector combinations were examined. Independent comparison against the exact indexed origins found no mismatch in the 49 selected fields or their presence states.",
+      "record12": "All 245 descriptors were joined to current selected/catalog identities. Ordered paths and byte counts match current closure descriptors. All 245 hash strings differ lexically in casing; their SHA256 digests agree. Literal strings were not rewritten.",
+      "recordsNotSemanticallyAssessed": [3, 6, 13],
+      "qualification": "Relationship assessment is not a claim of full-record ownership for records assigned to other scopes. Descriptor references were not followed as additional BODY grants."
+    },
+    "mandatoryOrMaterialUnreadGap": "None remaining within this local source assessment."
+  },
+  "substantiveAssessment": [
+    {
+      "requirement": "scope.duties[0]; complete descriptor/discovery/default/filter/root/extension routes",
+      "sources": [
+        "SOURCE-BODY-063 through SOURCE-BODY-080, complete physical ranges above",
+        "SOURCE-BODY-013 physical 1236-1390",
+        "Selected metadata records 7-10"
+      ],
+      "assessment": "Reviewed descriptor constructors, native/custom-reader fallback, required fields, supported file versions, optional defaults, parse failures and dependency/module readers. Missing EnabledByDefault remains Unspecified: project and engine defaults differ. Installed does not substitute for EnabledByDefault. Discovery considers engine/project extension roots, restricted/platform directories, mods, additional project paths, environment/command-line paths, manifests and project-over-engine/version precedence. Actual DDPI availability and custom/platform hooks remain conditional. The wrapper's recursive raw catalog is a bound superset, not the runtime discovery algorithm.",
+      "concreteRelationships": [
+        "The raw inventory contains 902 distinct filename stems. Five bIsPluginExtension descriptors are child inputs for ACLPlugin, RigLogic, OodleNetwork and AudioCapture; they are not independent offered plugins. Their selected values contribute no Modules or Plugins arrays.",
+        "OpenXRVisionOS is the sixth platform-tree descriptor and is an ordinary disabled-by-default plugin, not an extension.",
+        "PregenContent lies beneath USDPregen's plugin directory. Normal recursive discovery stops at the parent descriptor. No indexed Content-directory candidate or same-directory descriptor competition was found.",
+        "Child merges, platform support and optional-array semantics were assessed against actual discovery code, rather than inferred from raw catalog membership."
+      ]
+    },
+    {
+      "requirement": "scope.duties[1]; SELECTOR_PARTITIONS_AND_COMPLETE_GRAPH",
+      "sources": [
+        "SOURCE-BODY-071 through SOURCE-BODY-078",
+        "SOURCE-BODY-072: PluginManager.cpp 2198-2600",
+        "Selected metadata record 8, complete rows 1-902 and all Plugins arrays"
+      ],
+      "assessment": "Independently assessed every reference occurrence, defaults, target/platform/configuration filters, optional allowance, supported-platform bypass, program/enterprise/platform gates, version selection, queue deduplication, already-enabled behavior and error routes. Sealed/disallowed dependency checks precede queued-reference filtering in the implementation; all 902 raw descriptors lack Sealed and DisallowedPlugins. No requested Version or TargetsToExplicitlyLoad value occurs in the raw references. No cyclic component was found in the complete literal graph or its enabled and Win64 Editor reference-filter variants.",
+      "concreteRelationships": [
+        "EnabledByDefault states are present true for 187 nodes, present false for 508, and absent for 207.",
+        "Of 1561 references, seven have Enabled=false. Three further references exclude Win64 through PlatformAllowList. The remaining 1551 pass the Win64/Editor/Development reference tests before optional allowance, plugin support and external gates.",
+        "All nine cross-partition directions were assessed; their counts sum to 1561. No partition report or external graph was used.",
+        "Four reference spellings differ in case from catalog stems: DataPrepEditor/DataprepEditor, TensorBoard/Tensorboard, InterchangeAxFAssets/InterchangeAxfAssets and MetaSound/Metasound. Literal spelling was retained. Conditional graph calculations explicitly used case-insensitive plugin-name equality.",
+        "The PythonScriptPlugin reference's ProgramAllowList is not consumed by FPluginReferenceDescriptor::Read. It was not treated as a runtime reference restriction.",
+        "For the explicit conditional Win64 Editor Development scenario with proof/project roots, the six declared disables, engine defaults permitted and include-target-platforms true, independent traversal reproduces the 245 selected names without missing or extra names. Optional allowances of all, selected245 and none yield the same final candidate set.",
+        "With include-target-platforms false, the corresponding candidate set has 241 names: LowLevelNetTrace, OnlineSubsystemGooglePlay, OnlineSubsystemIOS and XCodeSourceCodeAccess are excluded by plugin-supported-platform semantics.",
+        "These traversals are source/data deductions, not observed runtime enablement. Command-line disables and disabled dependency references are not universal guarantees against other enabling routes."
+      ]
+    },
+    {
+      "requirement": "scope.duties[0-2]; complete module/default/schema relationships",
+      "sources": [
+        "SOURCE-BODY-064 complete",
+        "SOURCE-BODY-065 physical 1-567, including ModuleDescriptor.cpp 521-806",
+        "SOURCE-BODY-068, SOURCE-BODY-069, SOURCE-BODY-077 and SOURCE-BODY-078 complete",
+        "Selected metadata records 8-10"
+      ],
+      "assessment": "The complete field policy and catalog representation were compared with actual descriptor/module consumption. Presence, explicit empty lists, false values and ordered arrays were retained. All 1774 module occurrences use recognized host types. Seventy-four omitted LoadingPhase values take the constructor's Default; six explicit None phases do not join automatic startup loading. Explicit-empty platform lists differ from unrestricted empty lists when HasExplicitPlatforms is true. Architecture, target, configuration, cooked-data, developer-tool, program-name, GIsEditor and commandlet gates were assessed with their actual conjunctions.",
+      "concreteRelationships": [
+        "ProgramAllowList can admit a program module of otherwise different host type after the preceding filters. Plugin SupportedPrograms is a separate runtime plugin gate.",
+        "The two raw module AllowlistPrograms fields are not the consumed ProgramAllowList or deprecated WhitelistPrograms spelling.",
+        "Thirteen duplicate module-name groups are within individual plugins and contain alternative module descriptors. Already-loaded checks prevent treating all eligible occurrences as distinct successful loads.",
+        "Under explicitly assumed Win64/x64/Editor/Development, uncooked, developer-tools-enabled, non-commandlet and GIsEditor=true conditions, the selected 245 contain 459 eligible automatic-phase occurrences representing 455 distinct names. This is an eligibility calculation only.",
+        "All eight x64/arm64, developer-tools and commandlet combinations were evaluated. The complete 50-entry selected conditional exception set was inspected.",
+        "LowLevelNetTrace demonstrates selected membership without module eligibility: its explicit platform list is empty.",
+        "E04ProfileParser is Runtime/Default with Win64 and Linux allowed. E04ProfileProbe additionally requires DeveloperTool eligibility and Editor target allowance. Neither descriptor proves that its module actually loaded."
+      ]
+    },
+    {
+      "requirement": "scope.duties[2]; BUILD_RECEIPT_STARTUP; concrete bBuildAllModules and effective construction",
+      "sources": [
+        "SOURCE-BODY-001 physical 1-16",
+        "SOURCE-BODY-002 physical 1-17",
+        "SOURCE-BODY-016 and SOURCE-BODY-019 complete",
+        "SOURCE-BODY-059 through SOURCE-BODY-062 complete",
+        "SOURCE-BODY-083 and SOURCE-BODY-084 complete",
+        "SOURCE-BODY-092 physical 1-669 and 834-1130",
+        "SOURCE-BODY-093 physical 1-2018",
+        "SOURCE-BODY-013 physical 1236-1390 and 1548-1554",
+        "Selected metadata records 1, 2, 4, 5, 7, 11 and 12"
+      ],
+      "assessment": "The concrete Editor target pins bBuildAllModules=false after base construction, adds WarhammerClient and explicitly enables E04ProfileProof. Reviewed applicable base configuration/default application, derived construction, platform/type selection, test override, validation, read-only forwarding, target construction, PreBuildSetup and AddAllValidModulesToTarget routes. The normal non-test branch remains distinct from test-target construction. No actual Rules object, command-line invocation or effective build configuration was produced.",
+      "concreteRelationships": [
+        "The inherited ShouldIgnorePluginDependency default returns false; the concrete target does not override it.",
+        "The inspected PreBuildSetup path calls AddAllValidModulesToTarget only when the effective bBuildAllModules is true. The alternate all-modules path enumerates and filters additional engine/plugin modules; it does not itself prove runtime plugin activation.",
+        "Shared modular Editor validation permits receipt-based target plugin overrides. Projects.Build.cs selects receipt consumption for shared non-monolithic Editor builds, and compiled target plugin lists for the alternate branch.",
+        "SetupPlugins snapshots EnabledPlugins before processing additional BuildPlugins. Receipt construction, descriptor staging and runtime consumption preserve that distinction. Runtime BuildPlugins is optional-dependency allowance, not a set of enabling roots.",
+        "Receipt selection considers project before engine locations and the executable/default-Editor matching rules. Plugins overrides, default-plugin policy, project references and command-line precedence are separate inputs.",
+        "The wrapper requires the staged Editor/Win64/Development receipt and the proof override, validates project/staged membership, enforces the catalog/absence/environment contract and limits additional receipt data. Its six native disable arguments and explicit proof enable were read as source strings only.",
+        "Twelve of eighteen authored paths are staged compilation-source members. The wrapper, two fixture JSON files and three documentation/result paths are outside that staged-source set; the resulting 33-member staging contract is not an eighteen-authored-path identity claim.",
+        "All 27 record-5 excerpt identities map to current granted bodies. All 81 record-7 source bindings match catalog source digests and granted excerpt digests. These checks do not grant their referenced origin bodies.",
+        "The retained c6a9410a524649147f157c3c17a2b838c7e0fc81 labels in reused metadata were not substituted for the current subject head."
+      ]
+    },
+    {
+      "requirement": "scope.duties[3]; complete BODY094 startup dispatch and failure propagation",
+      "sources": [
+        "SOURCE-BODY-094 physical 1-1010",
+        "SOURCE-BODY-094 physical 983-1009: LaunchEngineLoop.cpp 4669-4695",
+        "SOURCE-BODY-075 complete",
+        "SOURCE-BODY-065: ModuleDescriptor.cpp 779-806"
+      ],
+      "assessment": "Read complete PreInitPostStartupScreen, PreInit and LoadStartupModules. LoadStartupModules dispatches PreDefault, Default and PostDefault in order, project first and plugin second at each phase, with short-circuit failure returning false. The PreInit caller propagates startup failure as failure. Earlier loading-screen branches, early exit, repeated bundle/pak-related loading and later commandlet/PostEngineInit ensure behavior were assessed separately. They do not all have identical error propagation.",
+      "concreteRelationships": [
+        "Normal plugin phase dispatch requires enabled and not ExplicitlyLoaded, then the module's phase and current-configuration eligibility.",
+        "Module failures are collected and normally become plugin/startup failure. The EnableAllPlugins error-tolerance branch is conditional and cannot be generalized to the wrapper's explicit proof-enable arguments.",
+        "Default startup therefore provides a source-supported conditional route to the proof modules. No actual traversal of that route was observed."
+      ]
+    },
+    {
+      "requirement": "scope.duties[3]; explicit mount/load defaults, phase iteration, callers and gates",
+      "sources": [
+        "SOURCE-BODY-094 physical 1011-2136",
+        "SOURCE-BODY-094 physical 1926-2011: PluginManager.cpp 3530-3615",
+        "SOURCE-BODY-094 physical 2179: IPluginManager.h 556",
+        "SOURCE-BODY-094 physical 5220: PluginManager.h 368",
+        "SOURCE-BODY-094 physical 2603-5539"
+      ],
+      "assessment": "Read complete explicit name/file/descriptor/version selection, refresh, mount, localization and unload routes and applicable public/private declarations. Both the public MountExplicitlyLoadedPlugin declaration and private MountPluginFromExternalSource declaration default MaxLoadingPhase to ELoadingPhase::Max. Omitted caller arguments were joined to these declarations, not inferred from implementation signatures. The implementation iterates phases from zero while phase is less than MaxLoadingPhase and skips None.",
+      "concreteRelationships": [
+        "Explicit mount marks enabled, registers applicable content/binary paths, attempts module phases and marks mounted. It ignores TryLoadModulesForPlugin's Boolean result inside the phase loop. A true explicit-mount result or mounted/enabled flag does not establish successful module loading.",
+        "Missing plugins, explicit-loading requirements and conflicting mounted versions have separate failure routes. Unload uses reverse phase checks and failure handling; it was not conflated with mount success.",
+        "Finite material callers were assessed completely: PluginUtils create/load operations; Fab download/install callbacks; virtualization's Perforce initialization; GDK DLC auto-mount callbacks; GameFeature mounting and built-in policy/subsystem routes; and WITH_LOW_LEVEL_TESTS fixtures.",
+        "Caller gates include editor/user operations, successful download or package completion, DLC flags/pak availability, feature URL/path/policy/filter/state and asynchronous completion conditions, commandlet settings, and test compilation. Their presence does not establish actual activation.",
+        "All six ExplicitlyLoaded raw descriptors are disabled by default and outside the selected 245. The tests and feature callers do not supply an E04 native execution result."
+      ]
+    }
+  ],
+  "findings": {
+    "blockingLocalSourceFindings": [],
+    "changesRequested": [],
+    "disposition": "No unresolved local source defect or mandatory/material coverage gap was identified. The conditional routes and limitations above are part of this PASS."
+  },
+  "errorsAndRecoveries": [
+    "Several combined policy/coverage, normative, catalog, selector-distribution, binding and module-analysis displays were truncated. Required source sections were reread with positive physical ranges. Material data was recovered through complete presence-aware state queries, complete identity comparisons, complete graph traversals and complete exception queries; no row sampling or arbitrary input cap supplied coverage.",
+    "An initial header-search pattern returned no match. The wrapper's actual PATH/RANGE header form was then queried successfully. No missing source unit was inferred from that search result.",
+    "A query appended an absent optional grant-category property and failed on ContainsKey(null). It was rerun with category-presence tests. The failure was not reported as source null data.",
+    "An independently authored conditional traversal initially used ContainsKey on an OrderedDictionary root object. It failed before a result and was corrected to a compatible derived root object; all six complete graph scenarios then completed.",
+    "One long analysis command exited without output, and one longer read's output was not collected. Their dependent results were recovered with shorter self-contained reads and queries.",
+    "An initial whole-JSON membership equality check was too coarse. Property-level ordered comparison established zero path or byte-count differences, 245 hash-string casing differences and zero SHA256 digest differences. Earlier wording claiming exact membership identity was corrected.",
+    "An authored-to-staged query initially treated six expected non-staged artifacts as comparison failures. The staging relationship was reread and reported accurately as twelve authored staged paths within thirty-three staged source members.",
+    "Prompt/GO files were not assumed to be ordinary inputFiles members. Their prospective bindings were verified through their dedicated descriptors instead.",
+    "Earlier outputs remain part of the record. Recovery does not erase exposure or enlarge grants. No unselected source value or synthesized missing-member null was adopted as evidence. No unresolved EOF, JSON parse or mandatory-range completeness error remains."
+  ],
+  "materialUncertaintyAndLimits": [
+    "Actual DDPI roots, custom descriptor-reader binding, platform disable hooks, environment, installed binary macros, effective configuration, receipt selection, startup traversal and module activation were not observed. Conditional calculations do not resolve these actual values.",
+    "Actual runtime isolation/settings and received-input provenance remain subject to root's independent verification. Generated transport/runtime bodies were deliberately not inspected.",
+    "This SOURCE_PASS is local to S_PLUGIN and this exact frozen subject. It is not the aggregate SOURCE gate, a phase GO, native/build/test acceptance or final acceptance.",
+    "Root must independently compose all ten valid fresh assessments and their coverage, isolation and finding dispositions. No peer verdict is inferred.",
+    "A1E remains the installed exception-enabled Editor raw-document subset. A1G exception-disabled caller proof, A2 compatibility, Linux, rendering/HUD, packaging, final independent CODE and different REQ gates remain open."
+  ]
+}

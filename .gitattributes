@@ -1,0 +1,134 @@
+# Keep the canonical plan consistent and preserve exact CLI evidence bytes.
+docs/plans/unreal-migration-plan.md text eol=lf
+# Original reviewer Markdown includes intentional two-space hard line breaks.
+docs/plans/research/2026-10-17-e01-slow120-code-review-r*.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-17-e01-slow120-requirements-r*.md -text
+# E02 sealed reviewer reports retain original bytes and intentional hard breaks.
+docs/plans/research/2026-10-20-e02-final-*.md -text whitespace=-blank-at-eol
+# E04 sealed SOURCE reports retain original bytes and Markdown hard breaks.
+docs/plans/research/2026-10-20-e04a-source-review-r*.md -text whitespace=-blank-at-eol
+# E04 scoped raw JSON reports also retain sealed original bytes.
+docs/plans/research/2026-10-20-e04a-scoped-r*-s-*.json -text
+docs/plans/research/2026-10-20-e04a-scoped-r*-d-selectors-*.json -text
+# R3 includes integration JSON and original Markdown reports as sealed bytes.
+docs/plans/research/2026-10-20-e04a-scoped-r3-*.json -text
+docs/plans/research/2026-10-20-e04a-scoped-r3-s-build-host.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-20-e04a-scoped-r3-d-selectors-302-602.md -text whitespace=-blank-at-eol
+# Pure composition criteria are SHA-bound by their adoption records.
+docs/plans/research/2026-10-20-e04a-source-composition-packet*.md text eol=lf
+docs/plans/research/2026-10-20-e04a-source-scope-contract-v6.template.json -text whitespace=cr-at-eol
+# Preserve the previous factual record as exact historical bytes.
+docs/plans/evidence/2026-10-17-e01-slow120-result-schema1-history.json -text
+docs/plans/evidence/2026-10-17-e01-slow120-result-030835-schema2-history.json -text
+
+# R4 sealed Markdown reports preserve exact raw bytes and intentional hard breaks.
+docs/plans/research/2026-10-20-e04a-scoped-r4-*.md -text whitespace=-blank-at-eol
+# R5 sealed VALUE Markdown retains the original report bytes.
+docs/plans/research/2026-10-20-e04a-scoped-r5-s-value.md -text whitespace=-blank-at-eol
+# R6 sealed Markdown reports retain exact original bytes.
+docs/plans/research/2026-10-20-e04a-scoped-r6-s-value.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-20-e04a-scoped-r6-s-target-receipt.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-20-e04a-scoped-r6-d-selectors-603-902.md -text whitespace=-blank-at-eol
+# Preserve the completed pure C# diagnostic and process receipts byte for byte.
+docs/plans/evidence/2026-10-20-e04a-rules-static-check-*.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-rules-wrapper-*.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-rules-metadata-reader-*.json -text whitespace=cr-at-eol
+# Completed source-preservation controls and their separate history retain raw bytes.
+docs/plans/evidence/2026-10-20-e04a-rules-source-preservation-*.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-rules-held-source-*-72-history.json -text whitespace=cr-at-eol
+# Revision67 exact adopted design/source-choice metadata retains original bytes.
+docs/plans/research/2026-10-20-e04a-source-composition-packet-v7.1.md -text
+docs/plans/research/2026-10-20-e04a-fresh-source-norms-v7.1.md -text
+docs/plans/research/2026-10-20-e04a-v7.1-binding-checklist.md -text
+docs/plans/research/2026-10-20-e04a-v7.1-method-recheck.md -text
+docs/plans/research/2026-10-20-e04a-runtime-api-boundary-audit.md -text
+docs/plans/research/2026-10-20-e04a-v7-transport-audit.md -text
+docs/plans/research/2026-10-20-e04a-source-scope-contract-v7.1.template.json -text whitespace=cr-at-eol
+docs/plans/research/2026-10-20-e04a-v6-duty-obligation-baseline.v7.1.json -text whitespace=cr-at-eol
+docs/plans/research/2026-10-20-e04a-runtime-api-record14.*.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-v7.1-method-adoption.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-runtime-api-input-adoption.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-v7-transport-source-adoption.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-v7-common-helper-source-adoption.json -text whitespace=cr-at-eol
+docs/plans/research/2026-10-20-e04a-v7-common-assembler-type-recheck.md -text whitespace=cr-at-eol
+# Revision68 closed-campaign and prospective source choices preserve sealed bytes.
+docs/plans/evidence/2026-10-20-e04a-compat-closed-result.json -text whitespace=cr-at-eol
+docs/plans/evidence/2026-10-20-e04a-v7.2-*.json -text whitespace=cr-at-eol
+docs/plans/research/2026-10-20-e04a-source-composition-packet-v7.2.md -text
+docs/plans/research/2026-10-20-e04a-v7.2-method-audit.md -text
+docs/plans/research/2026-10-20-e04a-v7.2-projector-repair-recheck.md -text
+# Revision69 practical-method adoption is an exact copy of the root record.
+docs/plans/evidence/2026-10-20-e04a-practical-method-adoption.json -text whitespace=cr-at-eol
+# E04-A1E final reports and publication provenance retain their exact bytes.
+docs/plans/research/2026-10-21-e04a-editor-final-code.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-21-e04a-editor-final-requirements.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-21-e04a-editor-requirements-supplement.md -text whitespace=-blank-at-eol
+docs/plans/research/2026-10-21-e04a-editor-source-review.md -text whitespace=-blank-at-eol
+docs/plans/evidence/2026-10-21-e04a-editor-final-review-provenance.json -text whitespace=cr-at-eol
+# Game proof literals and the exact pinned supervisor source must not be normalized.
+scripts/migration/fixtures/e04a1g/A1G_BAD.utf8 -text
+scripts/migration/fixtures/e04a1g/A1G_GOOD.utf8 -text
+scripts/migration/E04A1GOwnedJobSupervisor.cs -text whitespace=cr-at-eol
+scripts/migration/Invoke-E04A1GProfileProof.ps1 -text whitespace=cr-at-eol
+docs/plans/research/2026-10-21-e04a-game-proof-packet.md text eol=lf
+docs/plans/evidence/2026-10-21-e04a-game-source-adoption.json -text whitespace=cr-at-eol
+
+# Preserve exact closed A1G source report and raw metadata bytes.
+/docs/plans/research/2026-10-21-e04a-game-source-review-370bfba.md -text whitespace=-blank-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-failure-370bfba.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-wrapper-source-repair.json -text whitespace=cr-at-eol
+# Retain the exact mixed-ending vendor rule bytes bound by source receipts.
+/Plugins/E04ProfileProof/Source/ThirdParty/YamlCpp/YamlCpp.Build.cs -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-2b52bbc.md -text whitespace=-blank-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-failure-2b52bbc.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-key-order-source-repair.json -text whitespace=cr-at-eol
+
+# Preserve the sealed A1G SOURCE report and failed-run factual metadata.
+/docs/plans/research/2026-10-21-e04a-game-source-review-3201552.md -text whitespace=-blank-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-archive-action-failure.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-archive-action-source-repair.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-553dc39.md -text whitespace=-blank-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-failure-553dc39.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-dependency-phase-closure-source-repair.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-editor-action-failure.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-71ce131.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-71ce131.md -text whitespace=-blank-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-editor-action-source-repair.json -text whitespace=cr-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-shared-plugin-failure.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-10f1d38.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-10f1d38.md -text whitespace=-blank-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-scoped-project-source-repair.json -text whitespace=cr-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-probe-compilation-failure.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-03fb024.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-03fb024.md -text whitespace=-blank-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-probe-publication-braces-source-repair.json -text whitespace=cr-at-eol
+/Plugins/E04ProfileProof/Source/E04ProfileGameProbe/Private/E04ProfileGameProbeModule.cpp -text whitespace=cr-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-cook-platform-binding-failure.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-073826d.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-073826d.md -text whitespace=-blank-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-cook-platform-binding-repair.json -text whitespace=cr-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-source-failure-92d915f.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-dependency-fact-source-failure-closure.md -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-92d915f.md -text whitespace=-blank-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-dependency-fact-source-repair.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-dependency-fact-source-repair.md -text whitespace=cr-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-cook-intent-settings-failure.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-a00c142.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-a00c142.md -text whitespace=-blank-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-cook-intent-settings-source-repair.json -text whitespace=cr-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-native-ddc-failure.json -text whitespace=cr-at-eol
+/docs/plans/evidence/2026-10-21-e04a-game-source-prerequisite-ea7de0c.json -text whitespace=cr-at-eol
+/docs/plans/research/2026-10-21-e04a-game-source-review-ea7de0c.md -text whitespace=-blank-at-eol
+
+/docs/plans/evidence/2026-10-21-e04a-game-cooked-ddc-source-repair.json -text whitespace=cr-at-eol

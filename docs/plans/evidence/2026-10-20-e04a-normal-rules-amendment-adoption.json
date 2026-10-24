@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_PROSPECTIVE_E04A_NORMAL_RULES_SOURCE_AMENDMENT_ADOPTION",
+  "planRevision": 56,
+  "status": "NORMAL_RULES_SOURCE_AMENDMENT_ADOPTED_PACKETS_NOT_READY",
+  "recordedUtc": "2026-10-20T08:23:49.8109387Z",
+  "preparationHead": "85926b600b5b710732f28bc7dde679584fb5f678",
+  "futureHead": null,
+  "futureRunId": null,
+  "futureCampaignId": null,
+  "actualFutureBindingsReady": false,
+  "consent": "Direct owner standing perpetual consent for necessary migration reviews containing private project source/API to the existing configured OpenAI Codex destination, until explicit revocation. Credentials and unrelated private data remain excluded.",
+  "criteria": {
+    "path": "docs/plans/research/2026-10-20-e04a-source-composition-packet-v4.md",
+    "bytes": 21589,
+    "sha256": "A5393EB738B20EEAF4537D54BDD163D0BACAE535F785C98A7042D99060D31949",
+    "lineCount": 313
+  },
+  "unboundTemplate": {
+    "path": ".local/planning/E04/normal-rules-fileitem-bridge-v3-PROPOSED/source-scope-contract.normal-rules.FileItemV3.TEMPLATE.json",
+    "bytes": 56586,
+    "sha256": "8098D2F178A68AA136EFCC22D6E3F9AED7A847A1E6A84FC84084859FE125F47B",
+    "lineCount": 1265
+  },
+  "primaryInput": {
+    "id": "SOURCE-BODY-095",
+    "catalog": {
+      "path": ".local/planning/E04/normal-rules-discovery-source-PROPOSED/v3/primary-catalog.PROPOSED.json",
+      "bytes": 14380,
+      "sha256": "B3DBBB0CEBC3E17735EB16C583BDB922C98DE7DADF0C9D35FE8FDDBD8864FE5D",
+      "lineCount": 387
+    },
+    "artifact": {
+      "path": ".local/planning/E04/normal-rules-discovery-source-PROPOSED/v3/normal-target-rules-discovery-and-assembly.primary.txt",
+      "bytes": 191150,
+      "sha256": "1D40EED33F95D0FAA02E373B35BF2E9099E31D3BC9E77BEABFE3DD58D4D40560",
+      "lineCount": 4424
+    },
+    "physicalRows": 4424,
+    "literalSourceRows": 4332,
+    "sourceRanges": 23,
+    "originFiles": 16,
+    "rootFullyRead": true,
+    "allSelectedLiteralRowsReconstructedAgainstActualOrigins": true,
+    "futureInputAdopted": true,
+    "finiteMaterialRouteOnly": true
+  },
+  "selectedMetadataHelpers": [
+    {
+      "path": ".local/planning/E04/normal-rules-fileitem-bridge-v3-PROPOSED/Build-NewScopedCommonPacket.NormalRules.ReviewBudget.FileItemV3.PROPOSED.ps1",
+      "bytes": 20435,
+      "sha256": "45D2FA0EFA440CC9E08496A382A0740FA3E478615531DA254E1CFB5F227D179D",
+      "lineCount": 114
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-fileitem-bridge-v3-PROPOSED/Assemble-RootSourcePacket.NormalRules.PROPOSED.ps1",
+      "bytes": 46042,
+      "sha256": "8B9554AA8B90D9A192DD3FB9A0AA101047F36909FECD5CC1489B042702CEEF89",
+      "lineCount": 326
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-fileitem-bridge-v3-PROPOSED/New-ApprovedTargetMembershipReference.PROPOSED.ps1",
+      "bytes": 7076,
+      "sha256": "67249274660A40E1C54387C6FDE47209FDEDFDB903EEF78BD21A9800E9809C4A",
+      "lineCount": 67
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-fileitem-bridge-v3-PROPOSED/tool-transport-selection.review-budget.PROPOSED.json",
+      "bytes": 3195,
+      "sha256": "91AB1CA577890CFCF72015792A2412BFBCFB26C3DA959F8EA8439D7A1C892789",
+      "lineCount": 69
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-review-budget-PROPOSED/Invoke-FreshE04A1ESourceReview.bound.ps1",
+      "bytes": 16858,
+      "sha256": "D63F74A7874BADAB5ED363623979140FDA0C8EA9563BE2D6B12057840E30BDBB",
+      "lineCount": 109
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-review-budget-PROPOSED/owned-job-supervisor.reused.cs.txt",
+      "bytes": 26412,
+      "sha256": "13CC5C6C0C5BBF322BC398E3A144AAE45FC33B8065AA205CAE543C221E8C70C4",
+      "lineCount": 305
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-review-budget-PROPOSED/Select-OwnSourceRuntimeEvidence.bound.ps1",
+      "bytes": 14857,
+      "sha256": "C1F73168840A8A8D932CF15EB7EF53A8AD33C907C6222DAE224CFD76DBD42DC6",
+      "lineCount": 81
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-review-budget-PROPOSED/New-ScopedSourcePanelPacket.ReviewBudget.PROPOSED.ps1",
+      "bytes": 44291,
+      "sha256": "CA928D64231A22E94C77418FA9C34086FA6036EBD29F55D61B8443DEDE74F251",
+      "lineCount": 297
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-review-budget-PROPOSED/New-InitialScopedSourceReviewGo.ReviewBudget.PROPOSED.ps1",
+      "bytes": 38805,
+      "sha256": "99D387A1F4B1331EBA88C806AB01E5FF6F4FDE3021BEF4C9348467B2FB47703D",
+      "lineCount": 257
+    },
+    {
+      "path": ".local/planning/E04/normal-rules-review-budget-PROPOSED/New-IntegrationScopedSourceReviewGo.ReviewBudget.PROPOSED.ps1",
+      "bytes": 46841,
+      "sha256": "1027BA0EF2D34F4D0A2ADFAF66DB6D2EB7279FABFD99319AF7B0550B0642D3BA",
+      "lineCount": 320
+    }
+  ],
+  "rootIndependentStaticChecks": {
+    "path": ".local/planning/E04/normal-rules-discovery-root-amendment-PROPOSED/root-independent-static-checks.original.json",
+    "bytes": 29154,
+    "sha256": "2257138F0FCE6B62D0F06FAD935E24682B1AA61358CAC51FAFF2B5C7DB416545",
+    "lineCount": 539
+  },
+  "staticCheckFacts": {
+    "exactHandoffDescriptorsChecked": 36,
+    "exactUnifiedDiffReconstructions": 13,
+    "originHashesChecked": 16,
+    "primaryRowsReconstructed": 4424,
+    "primaryLiteralRows": 4332,
+    "functionExtentComparisonsInChangedDiffs": 86,
+    "csCompiledOrLoaded": false,
+    "formalSourceMerits": false,
+    "localAuditFailureAndRecovery": "Initial root static function comparison used the dictionary Keys member and collided with an actual function named Keys. No result file was produced. Corrected to psbase.Keys/Count and reran the entire audit successfully."
+  },
+  "ordinaryIndependentCriteriaAudit": {
+    "agent": "/root/normal_rules_criteria_audit",
+    "formalReview": false,
+    "result": "No discrepancies. Five count-only substitutions reconstruct root-v3 template byte exactly; source/native boundary, all prior duties/units/graph responsibilities preserved;97-file union and mandatory081/082/092/093/095 on four affected scopes verified."
+  },
+  "referenceInventory": {
+    "entireBodyFiles": 97,
+    "entirePhysicalRows": 47410,
+    "selectedRecords": 13,
+    "descriptorRows": 902,
+    "pluginReferenceOccurrences": 1561,
+    "actualFutureCountsMustBeDerived": true,
+    "mandatoryRowsByAffectedScope": {
+      "S_BUILD_HOST": 20597,
+      "S_TARGET_RECEIPT": 25493,
+      "I_ABI_BUILD": 28278,
+      "I_ACTIVATION": 27438
+    }
+  },
+  "stageBoundary": "SOURCE assesses exact frozen source, textual invocation and prospective observation/preservation design. Actual staged topology, timing/cache/process lineage, selected loaded assembly/type, effective target/compiler state and activation remain later native/final-acceptance observations. Concrete missing inputs, contradictory source, incomplete duties and inadequate observation design still block SOURCE. No runtime criterion is waived.",
+  "prospectiveReviewBudgets": {
+    "largerScopes": [
+      "S_BUILD_HOST",
+      "S_TARGET_RECEIPT",
+      "I_ABI_BUILD",
+      "I_ACTIVATION"
+    ],
+    "largerSeconds": 2700,
+    "otherSeconds": 1800,
+    "maximumLaunchesPerAssessment": 1,
+    "retryAllowed": false,
+    "modelOverride": null,
+    "activeAttemptExtended": false,
+    "requiresExactScopedGo": true
+  },
+  "implementation": {
+    "target": {
+      "path": "Source/WarhammerClientE04AEditor.Target.cs",
+      "bytes": 593,
+      "sha256": "1FE8F99EC560DD6C592C5DAB3434092E0A7AE313B2597BE6126C5212C25C1991",
+      "lineCount": 16
+    },
+    "changedByThisAmendment": false,
+    "freshSourceApproved": false,
+    "built": false,
+    "nativeTested": false
+  },
+  "historicalR3": {
+    "closedInvocations": 11,
+    "rawReports": 10,
+    "rawSourcePass": 8,
+    "rawBlocked": 2,
+    "abiServiceFailureWithoutReport": 1,
+    "toolPairs": 743,
+    "initialRootAdmissions": 8,
+    "withdrawnLocalAdmissions": [
+      "S_TARGET_RECEIPT",
+      "S_BUILD_HOST"
+    ],
+    "remainingAdmissionsForOldScopesOnly": 6,
+    "anyAdmissionTransfers": false,
+    "allTenGate": false,
+    "rawReportsUnchanged": true,
+    "unusedAbiReplacement": "SUPERSEDED_UNUSED_DO_NOT_LAUNCH_FOR_THIS_CAMPAIGN"
+  },
+  "excludedUnusedProposal": "Optional DateKind-only aggregate copy remains bound to old R3 identities/counts and is not adopted or invokable for this future campaign.",
+  "metadataOperationInvoked": false,
+  "actualGoCreated": false,
+  "reviewLaunched": false,
+  "sourceVerdict": "NOT_ASSESSED",
+  "rootAggregateCreated": false,
+  "phaseAuthority": false,
+  "nativeExecutionAuthority": false,
+  "guiAuthority": false,
+  "publicationOrMergeAuthority": false,
+  "allEightNativePhases": "NOT_RUN",
+  "remaining": [
+    "Derive/refreeze exact current head/run/campaign/common inputs and bind the pure contract.",
+    "Inspect exact panels/prompts and separately issue scoped root GOs; independently audit actual runtime and received prompt.",
+    "Obtain all ten fresh valid complete passing assessments, root admissions and labelled aggregate before any phase.",
+    "Final independent CODE and different REQ, A1G, A2/HUD, Linux, packaging and broader acceptance gates remain open."
+  ]
+}

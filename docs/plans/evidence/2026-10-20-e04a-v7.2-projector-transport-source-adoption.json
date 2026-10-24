@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_ADOPTED_V72_SUCCESSOR_PROJECTOR_SCHEMA_AND_TRANSPORT_SOURCE_CHOICE",
+  "adoptedUtc": "2026-10-20T17:31:02.2375246+00:00",
+  "compositionVersion": 7,
+  "criteriaRevision": "7.2",
+  "currentCanonicalHead": "93659c5d409a2101cce9a27a9a878cbd6e0c7b56",
+  "methodAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-root-method-adoption\\method-selection-adoption.original.json",
+    "bytes": 9323,
+    "sha256": "5D9637DD7272434BC7242DA02FFCBD0426B88D0B0B59419ED1276D991F45703D"
+  },
+  "allFreshRouteChoice": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-root-method-adoption\\all-fresh-route-choice.original.json",
+    "bytes": 4494,
+    "sha256": "0F452F6952C4304D03DB4F1C7F9E86DCC9470F3B85B96894A4DEE07BD90B7843"
+  },
+  "sources": [
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\New-OwnSourcePanel.V7.PROPOSED.ps1",
+      "bytes": 72798,
+      "sha256": "B12F0893EDD05B82785D330078BD3A45D8E8E4441625AFACA4697F7998935592"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\input-contract.schema.PROPOSED.json",
+      "bytes": 39284,
+      "sha256": "62E77E5C0C67CE656F7BDE383225035F3532A036381439EFC13BE643B0C7D95C"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\Invoke-FreshE04A1ESourceReview.bound.ps1",
+      "bytes": 19439,
+      "sha256": "BC62AB8190B17A61C9EFE21D5E08658A87FC9EB3C55E15C390E159955089599C"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\Select-OwnSourceRuntimeEvidence.bound.ps1",
+      "bytes": 17341,
+      "sha256": "1758D4844ADDE782D76A752264935529BFEC6D571FF66C8579D550C9451E75DA"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\Invoke-E04A1ESourceCliWorker.bound.ps1",
+      "bytes": 2463,
+      "sha256": "68FB811CF83AD77F798F88F073F2083814122934D4D59C5087AB2F71D9EBAF6B"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\owned-job-supervisor.reused.cs.txt",
+      "bytes": 26412,
+      "sha256": "8C9FAB1A9692B9D02724C9C794F0637373FA0CA0E0F141AA0E4A0CEA6F68FF54"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\Capture-OwnSourceToolInputs.bound.ps1",
+      "bytes": 5873,
+      "sha256": "1E7696AAE901F5BD83063105DA20E9B87D67C778B65825EC5E0FE320A765F068"
+    },
+    {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\Capture-OwnSourceCompleteToolTrace.bound.ps1",
+      "bytes": 7425,
+      "sha256": "17CBDAB8F7BAC8772B9624B218743EF8AAD47425741DCECF119117636109FEED"
+    }
+  ],
+  "sourceSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-fresh-fallback-whole-graph-count-repair-PROPOSED\\seal.PROPOSED.json",
+    "bytes": 5167,
+    "sha256": "F8346F8A8DA0E881BFD900DCC90FA0122492752E89D8C67A1CCC581346047CED"
+  },
+  "firstSourceAudit": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-successor-source-ordinary-audit-PROPOSED\\ordinary-successor-source-audit.PROPOSED.md",
+    "bytes": 6595,
+    "sha256": "16AE1B0BF01DCEFC6B78BFC8E121DCC1140C9C03C43EF577348055F6B62246DB"
+  },
+  "firstSourceAuditSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-successor-source-ordinary-audit-PROPOSED\\seal.PROPOSED.json",
+    "bytes": 3380,
+    "sha256": "5E1BAAC9ABB9B4C77B4CFCB80F903A5C4490E49D306674BE16485D9529D05FE4"
+  },
+  "affectedRepairRecheck": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-successor-source-repair-recheck-PROPOSED\\ordinary-successor-repair-recheck.PROPOSED.md",
+    "bytes": 3615,
+    "sha256": "547DF4E1FA817168D214FAE138986605925E02DF878CB1B566EB0D990CADAF4F"
+  },
+  "affectedRepairRecheckSeal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\v7.2-successor-source-repair-recheck-PROPOSED\\seal.PROPOSED.json",
+    "bytes": 2105,
+    "sha256": "0704BA943653211F446E296B31DA3ED055565CDE21A149FB9FB040A5EB1EE029"
+  },
+  "rootReasoning": [
+    "Adopt these exact successor source bytes and schema as the future metadata/review transport source choice, preserving all original adopted sources and historical closed jobs. PROPOSED labels are literal source provenance, superseded only by this scoped source-choice record.",
+    "Root read the complete author/source-design handoffs, full patch, affected scalar/type guards, original independent F01 audit and complete affected recheck. All sealed source package members and repair-recheck members were rehashed.",
+    "The original F01 source/data incompatibility is statically closed by the exact one-expression +4-byte repair. The first audit/report and first unused source remain unchanged; no dynamic success/refusal result is invented.",
+    "Exact20 definitions comprise17 fresh nodes and3 historical nonblind definitions. Only the17 exactly selected fresh nodes are the successor route; the launcher explicitly refuses NONBLIND relaunch. All exact selected deadlines remain5400, without model override or broader wildcard IDs.",
+    "The D19-key branch requires a complete one-atom literal partition, exact49 ordered names and all raw selected occurrences/incidents, while keeping whole-graph row/reference/field-duty metrics0. Complete902 and relationship cases retain49/0 whole-graph field-duty expectations.",
+    "All six source pins, four byte-identical generic transport sources, strict role/parent/output/source-data separation, one launch/no retry, exact prompt/permission binding and restricted exports remain. Complete root actual-envelope/global binding still supplies the intentionally deferred optional local identity joins.",
+    "Source choice does not decide semantics, adopt future current bindings, emit metadata, create P/F/panels/GO, admit SOURCE or grant any native phase. Invoke only after exact current source/API/scope/policy/count/grant/parent/global definitions and an explicit applicable root metadata or launch authority exist."
+  ],
+  "authority": {
+    "sourceChoiceAdopted": true,
+    "schemaChoiceAdopted": true,
+    "transportSourceChoiceAdopted": true,
+    "actualFutureBindingsAdopted": false,
+    "metadataConstructorInvoked": false,
+    "reviewLauncherInvoked": false,
+    "newP": false,
+    "newF": false,
+    "freshPanels": false,
+    "freshSourceGo": false,
+    "sourceApproval": false,
+    "nativeExecution": false,
+    "visibleWindows": 0
+  },
+  "verification": {
+    "sixPowerShellParserDiagnostics": 0,
+    "schemaParsedAsData": true,
+    "fourGenericCopiesByteIdentical": true,
+    "firstF01StaticallyClosed": true,
+    "dynamicValidPath": "NOT_RUN",
+    "dynamicMalformedRefusal": "NOT_RUN",
+    "ordinarySourceRecheck": "NO_ADDITIONAL_ACTIONABLE_FINDING_IN_BOUNDED_SCOPE",
+    "lowerRuntimeEnforcement": "ACTUAL_FUTURE_EVIDENCE_REQUIRED",
+    "sourceChoiceIsNotFormalSourceVerdict": true
+  },
+  "remaining": [
+    "Complete/adopt selected VALUE/CLIENT raw definition choices and exact typed assignments.",
+    "Close current campaign evidence and checkpoint canonical facts after frozen operation ends.",
+    "Derive actual successor common/freeze/transport literals/NORM/policy/schema/own-spec/count/grant/envelope bindings and exact12-predecessor policy.",
+    "Root complete global binding and metadata checks, new immutable P/F, selected fresh blind reviews and actual post-review audits precede aggregate/native authority."
+  ],
+  "immutable": true
+}

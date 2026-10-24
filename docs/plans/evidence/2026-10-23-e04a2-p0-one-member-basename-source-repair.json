@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "E04_A2P0_ONE_MEMBER_BASENAME_SOURCE_ADOPTION",
+  "status": "ONE_MEMBER_BASENAME_SOURCE_ADOPTED_FRESH_SOURCE_PENDING",
+  "predecessorHead": "1a4c35c74c0c63f3ed310897cde4db28c43d630f",
+  "adoptedUtc": "2026-10-23T21:24:20.3945958Z",
+  "rootSourceAdoption": {
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-root-20261023T-background-preparation/root-rev141-one-member-basename-source-adoption.original.json",
+      "bytes": 4368,
+      "sha256": "24A31F639F3E2FC996CFAEE71B8F6E34306019ABC0231AF992675A2989E60A80"
+    },
+    "actualRootTool": "0a30a9",
+    "executionAuthorityReleased": false
+  },
+  "completedFailureCheckpointBackup": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-rev140-pid-list-capture-failure-checkpoint-backup.original.json",
+    "bytes": 1168,
+    "sha256": "B7963C5DFC69E9188226653FDBE1C027EC257A9FF96B0EE453DA81F1B2942BA3"
+  },
+  "rootDesignSelection": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-root-20261023T-background-preparation\\root-one-member-basename-design-selection.original.json",
+    "bytes": 4175,
+    "sha256": "E988517061E971E7F85A7AEFEB9C6DFCAE7E0D2F4B8A69DE7BEC4F39E937F045"
+  },
+  "frozenProposalManifest": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-one-member-basename-source-GUARDED_PROPOSED-20261023-2a01bc7d\\PROPOSED-manifest.private.json",
+    "bytes": 5219,
+    "sha256": "BE7C0E23F126944D1E8D65056FBAE9DD432BCF11CF899CE8360CFAE3E46DC7A2"
+  },
+  "literalInverseLedger": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-one-member-basename-source-GUARDED_PROPOSED-20261023-2a01bc7d\\PROPOSED-forward-inverse-ledger.private.json",
+    "bytes": 27863,
+    "sha256": "5ADC0BD558E940735C735C63C2FBE205E3D4E451E2C79507ECD4E92BBA5656BA"
+  },
+  "guardedProposal": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\A2P0-one-member-basename-source-GUARDED_PROPOSED-20261023-2a01bc7d\\A2P0OwnedJobSupervisor.PID_PLUS_BASENAME.GUARDED_PROPOSED.cs",
+    "bytes": 45356,
+    "sha256": "629333F8B1D0E21DF26DA1EC20B4CF952BF4FF0093F5E43695A49C18EB002394"
+  },
+  "currentSource": {
+    "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/scripts/migration/a2p0/A2P0OwnedJobSupervisor.cs",
+    "bytes": 45232,
+    "sha256": "32C61E7F5255AB555F091F1AB5AC3F13A331FC6D3433FE68CDCFFC2976FEA4CB"
+  },
+  "currentPacket": {
+    "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/docs/plans/research/2026-10-23-e04a2-p0-canonical-reference-packet.md",
+    "bytes": 18274,
+    "sha256": "0EB1E019DD49E22191DCC6840D0AA489CEFE20D8B347A3F101E795D2EBC165CC"
+  },
+  "previousSourceIdentityHistory": {
+    "canonicalPathAtCapture": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/scripts/migration/a2p0/A2P0OwnedJobSupervisor.cs",
+    "bytes": 35478,
+    "sha256": "F474A85EFC487C97FFA9A24847A6BAC47609F2FF530B5579751925D2D04B1AD6",
+    "role": "HISTORICAL_PREIMAGE_NOT_LIVE_DESCRIPTOR"
+  },
+  "previousPacketIdentityHistory": {
+    "canonicalPathAtCapture": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/docs/plans/research/2026-10-23-e04a2-p0-canonical-reference-packet.md",
+    "bytes": 16456,
+    "sha256": "6341EE1F9A9D730DFBABB98050D6AFF40DF7FF3CA3F0EDB3A33F0CE2E51744DD",
+    "role": "HISTORICAL_PREIMAGE_NOT_LIVE_DESCRIPTOR"
+  },
+  "rootRecordPreimageQualification": "Immutable root baselineCSharp/baselinePacket fields describe preimages, not current path identities; publication records them as explicit scalar history",
+  "note": {
+    "canonicalPath": "docs/plans/research/2026-10-23-e04a2-p0-one-member-basename-source-repair.md",
+    "proposal": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-one-member-basename-rev141-TEMPLATE-PRIVATE-20261023-ae718c05/final-r3/2026-10-23-e04a2-p0-one-member-basename-source-repair.md",
+      "bytes": 2584,
+      "sha256": "3B2DDE7BD6A4C042C7D8D0FE327DC9F73B973902E07F091A19C4993BB7211A8D"
+    }
+  },
+  "sourceChecks": {
+    "csharpLiteralEdits": 6,
+    "packetNormRows": 4,
+    "removedGuardBytes": 124,
+    "removedGuardSha256": "D083BC739F032AF5EB0766E9F82E139748778DA691363780F3B80C125F360324",
+    "fullForwardMatched": true,
+    "fullInverseMatched": true,
+    "rootCodeInspection": "266456",
+    "rootPacketInspection": "c99d45",
+    "criteriaTen": true,
+    "physicalNormSelection": "5-41 unchanged",
+    "meaning": "Root inert exact transformations/static inspection only; no semantic execution check"
+  },
+  "selectedRequirements": {
+    "fatalGuardOnly": true,
+    "freshCompleteListOnly": true,
+    "exactlyTwoDistinctIds": true,
+    "retainedRootExactlyOnce": true,
+    "additionalDwordExactlyOnce": true,
+    "openProcessAttempts": 1,
+    "rights": 4096,
+    "inherit": false,
+    "explicitOwnJobMembershipChecks": 2,
+    "getProcessTimes": 1,
+    "imageQueryAttempts": 1,
+    "imageBufferChars": 512,
+    "retainedBasenameMaxChars": 255,
+    "fullPathRetained": false,
+    "extraHandleCloseBeforeTermination": true,
+    "sameAbsoluteCleanup5Seconds": true,
+    "outer75Unchanged": true,
+    "outputsCapsUnchanged": true,
+    "noRootReopen": true,
+    "noRetry": true,
+    "noGlobalEnumeration": true,
+    "noParentEtw": true,
+    "originalFatalPrecedence": true,
+    "laterNonAtomicObservation": true,
+    "cause": "UNATTRIBUTED"
+  },
+  "scope": "PID_LIST_PLUS_ONE_MEMBER_BASENAME; at most one limited-rights additional-member handle and basename only on already-fatal guard path; same deadline/caps/original failure",
+  "routineDetailAuthority": "Routine finite diagnostic detail under existing OWN13/G-EXPERIMENT continuation, prepared after OWN18 exact failure backup; no new feature/platform/data/commercial/installation commitment and no duplicate owner approval inferred",
+  "preparedCleanApiAddendum": {
+    "artifact": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-one-member-basename-source-GUARDED_PROPOSED-20261023-2a01bc7d/clean/managed-image-buffer-interop.clean.md",
+      "bytes": 2378,
+      "sha256": "C60BB7690FF8C88121B46A888610469B75072BB389F49B85001B2A84E0D2C8D7"
+    },
+    "status": "PREPARED_PENDING_FRESH_EXACT_FREEZE_AND_SOURCE",
+    "rootReadTool": "5c5037",
+    "publisherAccess": "EXACT_DESCRIPTOR_REHASH_ONLY_NO_BODY_FOLLOW",
+    "assessmentFromThisPublication": "NONE"
+  },
+  "successor": {
+    "sourceReview": "NOT_RUN",
+    "compilation": "NOT_RUN",
+    "controls": "NOT_RUN",
+    "controlBindings": "NOT_CREATED",
+    "runtime": "NOT_RUN",
+    "futureHead": "UNBOUND",
+    "futureRun": "UNBOUND",
+    "bindings": "NOT_CREATED",
+    "runtimeGo": "NOT_CREATED",
+    "executionAuthorityReleased": false
+  },
+  "next": "Publish/checkpoint/push/exact-gh verify repaired source before fresh exact bindings and affected SOURCE/root admission; separate GO after positive admission",
+  "limits": [
+    "Only actual root adoption and exact identities/data transformations are recorded; no independent correctness or admission verdict",
+    "One later member observation is non-atomic and proves no creator/cause, historical image identity or absence of PID reuse",
+    "Same absolute cleanup deadline/caps/paths/original fatal precedence; no independent synchronous-call timeout or universal preemption guarantee"
+  ],
+  "history": {
+    "a68SourcePass": "PRESERVED_EXACT_SOURCE_ONLY",
+    "a68CaptureFailure": "CLOSED_FAIL_CAPTURE_NOT_ACCEPTED",
+    "a68FailureEvidence": "docs/plans/evidence/2026-10-23-e04a2-p0-pid-list-capture-failure.json",
+    "priorChangesRequested": "PRESERVED",
+    "c62AndD0Failures": "PRESERVED_CLOSED_UNCHANGED",
+    "boundedA1gAcceptance": "PRESERVED",
+    "own17": "DEFERRED_UNPROVEN",
+    "linux": "UNTESTED",
+    "broaderA2And727AndGImplementAndFinalCodeReq": "OPEN_NOT_GRANTED",
+    "visibilityAtSourceAdoption": "HOLD_1935_AT_20261023T212420_ADOPTION",
+    "previous1935Hold": "PRESERVED_SUPERSEDED_BY_2125_AVAILABILITY"
+  },
+  "publisherCanonicalWritesPerformed": false,
+  "formalCorrectnessVerdictByPublisher": "NOT_SUPPLIED",
+  "visibleAvailability": {
+    "record": {
+      "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/planning/E04/A2P0-root-20261023T-background-preparation/root-visible-test-availability-20261023T2125-relay.original.json",
+      "bytes": 1458,
+      "sha256": "EAA716A1C60090BA0F0C781494D6E3753FA321E4AC8333FF9EBED0C35F66A53D"
+    },
+    "recordedUtc": "2026-10-23T21:26:29.0212458Z",
+    "reportedOwnerTime": "2026-10-23 21:25 UTC",
+    "timePrecision": "MINUTE",
+    "quote": "I'm done with the screen.  Visible checks may resume if needed",
+    "sourceThreadId": "01a15972-8d00-76fb-b21e-78cded2ea00b",
+    "originalDirectOwnerMessageIndependentlyRetrieved": false,
+    "status": "STANDING_PROJECT_VISIBLE_CHECK_AVAILABILITY_AS_NEEDED_UNTIL_OWNER_INTERVENTION",
+    "prior1935Hold": "LIFTED",
+    "unchangedGates": "Source review, exact execution/phase authority, process safety, project scope and unrelated permissions unchanged",
+    "currentP0": "HIDDEN_ONLY_NO_VISIBLE_LAUNCH_ADDED",
+    "visibleGo": "NOT_CREATED",
+    "sourceAdoptionRecord": "IMMUTABLE_HISTORICAL_HOLD_AT_2124_RETAINED"
+  }
+}

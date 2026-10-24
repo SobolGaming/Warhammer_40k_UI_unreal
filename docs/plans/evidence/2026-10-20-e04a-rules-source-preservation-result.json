@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_E04A_RULES_SOURCE_PRESERVATION_REPAIR_AND_PURE_CONTROLS",
+  "createdUtc": "2026-10-20T12:09:01.8335364Z",
+  "status": "RULES_REPAIR_CONTROLS_PASSED_BINDINGS_PENDING",
+  "publicationStatus": "ROOT_ADOPTED_FACTUAL_CHECKPOINT",
+  "rootSourceAdoption": true,
+  "rootSourceAdoptionNote": "Root inspected/adopted the exact repaired source, ran the bounded pure controls and verified canonical/raw copies. This establishes no formal SOURCE or native acceptance.",
+  "preparationHead": "de6a561b9cbb2116fd63fd41a5b91c3c93bc8f7f",
+  "futureHead": null,
+  "canonicalSources": {
+    "wrapper": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1",
+      "bytes": 209830,
+      "sha256": "FFE36D92F9CBFE1BA4609C2586FEEA0134260EFB6742A78E2CE09AFBAD3B8329",
+      "physicalRows": 2100
+    },
+    "validatorTest": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\tests\\migration\\Test-E04RulesWitness.ps1",
+      "bytes": 45504,
+      "sha256": "2A4C7C18EDB8CB63A8969F33B9C818682D5FED021B7003CD2284DD763FA7306E",
+      "physicalRows": 308
+    }
+  },
+  "privateRootSourceAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-repair-v3-PROPOSED\\root-pure-controls-source-adoption.original.json",
+    "bytes": 2786,
+    "sha256": "4777974B7307B46C489D6C61681642A1D7F52B53B08AF46BEC47A2D24AD71746"
+  },
+  "pureControls": {
+    "caseCount": 80,
+    "matchedCount": 80,
+    "failedCount": 0,
+    "report": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-source-preservation-controls.json",
+      "bytes": 33213,
+      "sha256": "CA050C7E36B43D4C5C79C3269A5DF43DC0E7CDF4414A8815542BB149B17BC31E"
+    },
+    "originalReport": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-controls-01\\pure-control-report.json",
+      "bytes": 33213,
+      "sha256": "CA050C7E36B43D4C5C79C3269A5DF43DC0E7CDF4414A8815542BB149B17BC31E"
+    },
+    "hostReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-source-preservation-process.json",
+      "bytes": 985,
+      "sha256": "B430ECACBD8DBDD85C6E5763300EBE12188BB2BDBF51F20B475516EB0288BC77"
+    },
+    "originalHostReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-repair-v3-PROPOSED\\pure-control-run-01.process.original.json",
+      "bytes": 985,
+      "sha256": "B430ECACBD8DBDD85C6E5763300EBE12188BB2BDBF51F20B475516EB0288BC77"
+    },
+    "retainedPriorCaseNames": 72,
+    "newCaseResults": [
+      {
+        "name": "target-map-rejects-approved-module-source",
+        "matched": true,
+        "diagnostic": "E04A1_RULES_NAME_MAP_CATEGORY_OR_SOURCE"
+      },
+      {
+        "name": "module-map-rejects-approved-target-source",
+        "matched": true,
+        "diagnostic": "E04A1_RULES_NAME_MAP_CATEGORY_OR_SOURCE"
+      },
+      {
+        "name": "absent-raw-manifest-data",
+        "matched": true,
+        "diagnostic": "E04A1_RULES_MANIFEST_DATA_REQUIRED"
+      },
+      {
+        "name": "absent-generated-manifest-descriptor",
+        "matched": true,
+        "diagnostic": "E04A1_RULES_OBJECT_REQUIRED"
+      },
+      {
+        "name": "valid-category-maps-retain-observed-order",
+        "matched": true,
+        "diagnostic": null
+      },
+      {
+        "name": "missing-retained-manifest-role",
+        "matched": true,
+        "diagnostic": "E04A1_RULES_RETENTION_REQUIRED_ROLE_SET"
+      },
+      {
+        "name": "missing-live-manifest-preservation",
+        "matched": true,
+        "diagnostic": "Exception calling \"GetAttributes\" with \"1\" argument(s): \"Could not find file 'C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-controls-01\\project\\Intermediate\\Build\\BuildRules\\WarhammerClientModuleRulesManifest.json'.\""
+      },
+      {
+        "name": "missing-retained-manifest-copy-preservation",
+        "matched": true,
+        "diagnostic": "Exception calling \"GetAttributes\" with \"1\" argument(s): \"Could not find file 'C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-controls-01\\artifacts\\rules\\WarhammerClientModuleRulesManifest.json'.\""
+      }
+    ],
+    "trustedFunctionBindings": 30,
+    "rootReportedAll30BindingsMatchedAst": true,
+    "realPreparationCases": 19,
+    "refusalsWithZeroNoProcessSeamCalls": 17,
+    "positiveCasesWithOneThrowingNoProcessSeamCall": 2,
+    "all19AcquiredHandlesClosed": true,
+    "pid": 8924,
+    "startedUtc": "2026-10-20T12:05:34.9170782+00:00",
+    "completedUtc": "2026-10-20T12:06:06.3082092+00:00",
+    "elapsedSeconds": 31.391131,
+    "exitCode": 0,
+    "timedOut": false,
+    "hostExitConfirmed": true,
+    "osDescendantInventoryCollected": false,
+    "nativeOrImplementationProcessInvoked": false,
+    "peReaderInvoked": false,
+    "bothOwnedManifestDeletionsRestoredAndPreservationPassed": true
+  },
+  "historical72": {
+    "report": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-controls-01\\pure-control-report.json",
+      "bytes": 29132,
+      "sha256": "16E1C390692144E6D64C64CDD3D07E185E32F2343199BA58AFEBB43968AA73BF"
+    },
+    "hostReceipt": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-repair-PROPOSED\\pure-control-run-01.process.original.json",
+      "bytes": 1171,
+      "sha256": "E924424A5A0DFCAF329EB25CC238D4A8E5D4560A9F5FB48A7A6124D69E11C6C1"
+    },
+    "wrapperSha256": "8B543B5984790D8A6828EA57F5BA692D00E293DDACB1AD6125B74783B10D8D5E",
+    "testSha256": "5468CF8979F70D0C2260A73A4DBE8A3C1DBC0D5B879071810A28411E99297A2F",
+    "matchedCount": 72,
+    "failedCount": 0,
+    "differentSourceTuple": true,
+    "admissionTransferred": false,
+    "current80ActuallyExecutedAll72RetainedNames": true,
+    "publicReport": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-held-source-controls-72-history.json",
+    "publicHostReceipt": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\evidence\\2026-10-20-e04a-rules-held-source-process-72-history.json"
+  },
+  "preparationHistory": {
+    "v1TestExecuted": false,
+    "v1TestSha256": "FC9022467CDA98BDBFD99CA4F3B4E539358CBEA795FDA2ED355583401AB01C14",
+    "v1Correction": "Missing rulesSourceFiles field in legacy synthetic challenge caught before invocation; sole field added in v2.",
+    "v2StaticComparison": "Expected insertion position differed; first static comparison failed, then exact reverse check passed before invocation.",
+    "v3StaticComparison": "First metadata-only comparison failed on flattened path-array shape before any source/test invocation or adoption write; corrected explicit two-path array gives87 unchanged bodies and1 changed.",
+    "classification": "PRE_INVOCATION_PREPARATION_CHECKS_NOT_FAILED_CONTROL_RUNS_OR_SOURCE_ASSESSMENTS"
+  },
+  "sourceFacts": {
+    "astErrors": 0,
+    "unchangedFunctionsVersusHeldRepair": 87,
+    "changedFunctions": [
+      "Check-RulesWitnessData"
+    ],
+    "newOrRenamedFunctions": 0,
+    "heldAuthoredMembers": 33,
+    "heldCanonicalAndStagedStreams": 66,
+    "returnedCSharpDescriptors": 7,
+    "cppSourcesChanged": false,
+    "priorStaticDiagnostics": 0,
+    "priorSixBinaryReaderCases": "PRESERVED_NOT_RERUN",
+    "priorStaticAndReaderRecordsModified": false
+  },
+  "limits": [
+    "Actual80 proof binds finalprivatev3 source hashes, not oldcandidate4c99318 and not transferred72-case passes.",
+    "Only30 trusted selected functions and owned synthetic files ran, including Editor-Build through an always-throwing no-process seam.",
+    "No full wrapper CLI/supervisor/PEReader/actualRules/privateAPI/UBT/Core/build/GUI result; no OS descendant inventory.",
+    "Finite sequential snapshots do not prevent insertion after the final observation; map enumeration remains distinct from source/manifest/PDB order.",
+    "Ordinary peer support is not formalSOURCE. Fresh fullBODY/unit/API/count/freeze bindings and all required scoped SOURCE/integration/root audits/aggregate precede phases."
+  ],
+  "nativePhases": "ALL_EIGHT_NOT_RUN",
+  "visibleLaunches": 0,
+  "sourceAdmission": false,
+  "sourceAggregate": false,
+  "phaseAuthority": false,
+  "finalAcceptance": false,
+  "planRevision": 64,
+  "recordedUtc": "2026-10-20T12:10:50.8992326+00:00",
+  "rawCopiesVerified": [
+    {
+      "source": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-controls-01\\pure-control-report.json",
+        "bytes": 33213,
+        "sha256": "CA050C7E36B43D4C5C79C3269A5DF43DC0E7CDF4414A8815542BB149B17BC31E"
+      },
+      "repositoryPath": "docs/plans/evidence/2026-10-20-e04a-rules-source-preservation-controls.json",
+      "byteExact": true,
+      "stagedBlobVerification": "BYTE_EXACT_SHA256_MATCH",
+      "stagedBlobSha256": "CA050C7E36B43D4C5C79C3269A5DF43DC0E7CDF4414A8815542BB149B17BC31E"
+    },
+    {
+      "source": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-target-map-manifest-repair-v3-PROPOSED\\pure-control-run-01.process.original.json",
+        "bytes": 985,
+        "sha256": "B430ECACBD8DBDD85C6E5763300EBE12188BB2BDBF51F20B475516EB0288BC77"
+      },
+      "repositoryPath": "docs/plans/evidence/2026-10-20-e04a-rules-source-preservation-process.json",
+      "byteExact": true,
+      "stagedBlobVerification": "BYTE_EXACT_SHA256_MATCH",
+      "stagedBlobSha256": "B430ECACBD8DBDD85C6E5763300EBE12188BB2BDBF51F20B475516EB0288BC77"
+    },
+    {
+      "source": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-controls-01\\pure-control-report.json",
+        "bytes": 29132,
+        "sha256": "16E1C390692144E6D64C64CDD3D07E185E32F2343199BA58AFEBB43968AA73BF"
+      },
+      "repositoryPath": "docs/plans/evidence/2026-10-20-e04a-rules-held-source-controls-72-history.json",
+      "byteExact": true,
+      "stagedBlobVerification": "BYTE_EXACT_SHA256_MATCH",
+      "stagedBlobSha256": "16E1C390692144E6D64C64CDD3D07E185E32F2343199BA58AFEBB43968AA73BF"
+    },
+    {
+      "source": {
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\rules-source-held-stream-repair-PROPOSED\\pure-control-run-01.process.original.json",
+        "bytes": 1171,
+        "sha256": "E924424A5A0DFCAF329EB25CC238D4A8E5D4560A9F5FB48A7A6124D69E11C6C1"
+      },
+      "repositoryPath": "docs/plans/evidence/2026-10-20-e04a-rules-held-source-process-72-history.json",
+      "byteExact": true,
+      "stagedBlobVerification": "BYTE_EXACT_SHA256_MATCH",
+      "stagedBlobSha256": "E924424A5A0DFCAF329EB25CC238D4A8E5D4560A9F5FB48A7A6124D69E11C6C1"
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "ROOT_UNUSED_MODULE_RULE_CLASSIFIER_SOURCE_REPAIR_ONLY",
+  "createdUtc": "2026-10-21T04:40:00.7599484Z",
+  "planRevision": 89,
+  "status": "UNUSED_MODULE_RULE_CLASSIFIER_REPAIRED_SOURCE_PENDING",
+  "backedUpClosureHead": "f7b842990952b31834fabf7e46f2cba4ed3b00b0",
+  "closureBackup": {
+    "sha256": "DC37B675F860A56E2E70452A3691376306EA6252AA30AF9013AD1C745B04F0E6",
+    "bytes": 447,
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\root-unused-module-rule-closure-remote-backup.original.json"
+  },
+  "sourceAdoption": {
+    "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\root-unused-rule-source-adoption.original.json",
+    "bytes": 3953,
+    "sha256": "80564E51831A57CF9FF597C0817E82BBCCF7E4FC3A7B4DDA5EF663AF1D1BE699"
+  },
+  "closedExecutedHead": "e293ea07cfe2a41dccfb8e2e8cf8477002c89159",
+  "closedRunId": "20261021T034847Z-14f6de27",
+  "closedFailure": "E04A1_GENERATED_INPUT_UNSUPPORTED_PREEXISTING_RESPONSE",
+  "closedDisposition": "FAIL_PRESERVE_PARTIALS_NO_RETRY_CLOSED_DO_NOT_REUSE",
+  "adoptedSourceAndNorm": [
+    {
+      "patch": {
+        "sha256": "19EF35597FFEF51E406F861B849DA2B044B41F212559AD8F6FAC0FC42BC02955",
+        "bytes": 5571,
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\unused-cmake-rules-PROPOSED\\v2\\wrapper-unused-rules.PROPOSED.patch.txt"
+      },
+      "current": {
+        "sha256": "FE278EA12C3C6D474F1F59A360E352BB3FD4023216F09C9267F73A27DA59DB48",
+        "bytes": 275014,
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\scripts\\migration\\Invoke-E04AProfileProof.ps1"
+      },
+      "hunks": 3,
+      "prior": {
+        "sha256": "666C155DF0A5CB7C78B6C6B9978C54D75C67A7186798626EAC4D9008E4D9867F",
+        "bytes": 271145,
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\wrapper-before-unused-rule-repair.original.ps1"
+      },
+      "inverseRecoversEntirePriorBytes": true
+    },
+    {
+      "patch": {
+        "sha256": "82DC60EDC7F266F3496AFD368FEBCDC1C29CD1333F5A64CB330FAF0E67C76668",
+        "bytes": 2213,
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\unused-cmake-rules-PROPOSED\\v2\\norm-unused-rules.PROPOSED.patch.txt"
+      },
+      "current": {
+        "sha256": "57410E0F5666D4BCFF88CFACD9EBBD1E640F8B1A8D00A00F93EE2422386A5172",
+        "bytes": 8293,
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\docs\\plans\\research\\2026-10-21-e04a-functional-proof-packet.md"
+      },
+      "hunks": 1,
+      "prior": {
+        "sha256": "39B9852CDCAEC6842361FA3E4FF730D5958469913C713FC09711DFE548EAAF86",
+        "bytes": 7443,
+        "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\focused-component-source-e293ea0\\norm-before-unused-rule-repair.original.md"
+      },
+      "inverseRecoversEntirePriorBytes": true
+    }
+  ],
+  "ast": {
+    "oldFunctionCount": 101,
+    "removedFunctions": 0,
+    "changedFunctions": [
+      "Read-ConfiguredBuildInputBaseline",
+      "Get-GeneratedBuildInputInventory"
+    ],
+    "addedFunctions": [
+      "Assert-UnusedCMakeScanMetadata"
+    ],
+    "otherOldFunctionsByteIdentical": 99,
+    "newFunctionCount": 102,
+    "sevenGeneratedControlsFunctionUnchanged": true,
+    "errors": 0
+  },
+  "newHelper": {
+    "name": "Assert-UnusedCMakeScanMetadata",
+    "physicalLines": 36,
+    "executed": false
+  },
+  "classification": "Exact two stanza shapes and scan-OFF; exactly one raw literal occurrence across all retained Ninja files and one exact raw declaration in owner. Any other occurrence conservatively refuses. No general graph/path/comment/continuation parser.",
+  "rawOccurrenceRequirement": "Exactly one raw literal occurrence globally for each exact special name across retained Ninja files, plus one exact raw declaration in its owner. Any other occurrence, including comments, paths and longer identifiers, refuses.",
+  "newReferenceKind": "unused-cmake-rule-metadata",
+  "boundedConsumer": "Read-ConfiguredBuildInputBaseline accepts the truthful unused-cmake-rule-metadata reference kind under the same bounded producer classification; other response/dyndep/script/byte/reference drift guards remain.",
+  "unchangedRequirements": [
+    "All response/dyndep/script/byte/reference and settings/source/stage/fixture preservation guards.",
+    "Pinned compiler/required-forbidden flags/source checks; real Release ABI/executable link and actual full static build.",
+    "Existing scoped cleanup, phase budgets and failure preservation.",
+    "All seven existing generated controls and expectations are byte-identical and unexecuted by this repair.",
+    "43 inputs,33 generated recipes,50 attempts,eight suites remain unchanged."
+  ],
+  "ninjaPrimary": {
+    "cleanIndex": {
+      "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\clean-primary-excerpt-index.json",
+      "bytes": 7878,
+      "sha256": "41E60DEDE3D33F2FDADDF84D0B9CBD246A2E918C9EDCBFE7A0F71C875A2BF164"
+    },
+    "upstreamTag": "v1.12.1",
+    "immutableCommit": "2daa09ba270b0a43e1929d29b073348aa985dfaa",
+    "excerptFileCount": 5,
+    "selectedPhysicalRows": 60,
+    "wholeOriginalsGrant": "IDENTITY_ONLY_PROVENANCE_NO_BODY_GRANT",
+    "excerpts": [
+      {
+        "id": "PARSE_EDGE_RULE_NAME",
+        "repositoryPath": "src/manifest_parser.cc",
+        "immutableCommit": "2daa09ba270b0a43e1929d29b073348aa985dfaa",
+        "immutableSourceUrl": "https://github.com/ninja-build/ninja/blob/2daa09ba270b0a43e1929d29b073348aa985dfaa/src/manifest_parser.cc",
+        "remoteBlobSha": "c4b298016476e10d90b1ea0b86856f11443b557d",
+        "originIdentity": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\origins\\manifest_parser.cc",
+          "bytes": 12075,
+          "sha256": "57E3AF895B5C6CF0D047A779F82B56B0FBD28B08A07C2CAB03BF3E41740B892D"
+        },
+        "originGrant": "IDENTITY_ONLY_NO_WHOLE_BODY_GRANT",
+        "sourceRanges": [
+          {
+            "firstLine": 247,
+            "lastLine": 253,
+            "physicalRows": 7
+          }
+        ],
+        "physicalRows": 7,
+        "excerpt": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\ninja-parse-edge-rule-name.primary.txt",
+          "bytes": 254,
+          "sha256": "2420908CD1A0AA73823D551A7F4AC129625742E700D0EE54F871FF5B7B623236"
+        },
+        "requiredRead": "WHOLE_EXACT_SELECTED_EXCERPT",
+        "copySemantics": "Exact original UTF8 bytes including original line terminators; no headers, omission markers or analysis added."
+      },
+      {
+        "id": "LEXER_IDENTIFIER_ALPHABET",
+        "repositoryPath": "src/lexer.in.cc",
+        "immutableCommit": "2daa09ba270b0a43e1929d29b073348aa985dfaa",
+        "immutableSourceUrl": "https://github.com/ninja-build/ninja/blob/2daa09ba270b0a43e1929d29b073348aa985dfaa/src/lexer.in.cc",
+        "remoteBlobSha": "6f1d8e7937d580c242a1ef28bb896c2cf1951a81",
+        "originIdentity": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\origins\\lexer.in.cc",
+          "bytes": 6467,
+          "sha256": "C6F41EBA7F1CFCEF242E50F2D10A88BDB7B9A0696CDD131D2B9BA7F4F565E216"
+        },
+        "originGrant": "IDENTITY_ONLY_NO_WHOLE_BODY_GRANT",
+        "sourceRanges": [
+          {
+            "firstLine": 134,
+            "lastLine": 134,
+            "physicalRows": 1
+          }
+        ],
+        "physicalRows": 1,
+        "excerpt": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\ninja-lexer-identifier-alphabet.primary.txt",
+          "bytes": 31,
+          "sha256": "101B4FEFF9BB4C001F0C702464023E0BEAB464F1B1536CEC89BC819CB5D63FD9"
+        },
+        "requiredRead": "WHOLE_EXACT_SELECTED_EXCERPT",
+        "copySemantics": "Exact original UTF8 bytes including original line terminators; no headers, omission markers or analysis added."
+      },
+      {
+        "id": "READ_IDENT_LITERAL",
+        "repositoryPath": "src/lexer.in.cc",
+        "immutableCommit": "2daa09ba270b0a43e1929d29b073348aa985dfaa",
+        "immutableSourceUrl": "https://github.com/ninja-build/ninja/blob/2daa09ba270b0a43e1929d29b073348aa985dfaa/src/lexer.in.cc",
+        "remoteBlobSha": "6f1d8e7937d580c242a1ef28bb896c2cf1951a81",
+        "originIdentity": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\origins\\lexer.in.cc",
+          "bytes": 6467,
+          "sha256": "C6F41EBA7F1CFCEF242E50F2D10A88BDB7B9A0696CDD131D2B9BA7F4F565E216"
+        },
+        "originGrant": "IDENTITY_ONLY_NO_WHOLE_BODY_GRANT",
+        "sourceRanges": [
+          {
+            "firstLine": 187,
+            "lastLine": 207,
+            "physicalRows": 21
+          }
+        ],
+        "physicalRows": 21,
+        "excerpt": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\ninja-read-ident.primary.txt",
+          "bytes": 337,
+          "sha256": "D66D1EFE44E5522382FC824ED828CDBAE899DFCF5C33417E73C1D301642AFE61"
+        },
+        "requiredRead": "WHOLE_EXACT_SELECTED_EXCERPT",
+        "copySemantics": "Exact original UTF8 bytes including original line terminators; no headers, omission markers or analysis added."
+      },
+      {
+        "id": "MANUAL_BUILD_STATEMENTS",
+        "repositoryPath": "doc/manual.asciidoc",
+        "immutableCommit": "2daa09ba270b0a43e1929d29b073348aa985dfaa",
+        "immutableSourceUrl": "https://github.com/ninja-build/ninja/blob/2daa09ba270b0a43e1929d29b073348aa985dfaa/doc/manual.asciidoc",
+        "remoteBlobSha": "3482a1e697494a2ecf1c71db6a5b4307975a6b2b",
+        "originIdentity": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\origins\\manual.asciidoc",
+          "bytes": 48695,
+          "sha256": "899C7AD57DB585E20B3761A3A87C9CCD0AEF3F157FDABD13A90FDBC296B5516F"
+        },
+        "originGrant": "IDENTITY_ONLY_NO_WHOLE_BODY_GRANT",
+        "sourceRanges": [
+          {
+            "firstLine": 444,
+            "lastLine": 459,
+            "physicalRows": 16
+          }
+        ],
+        "physicalRows": 16,
+        "excerpt": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\ninja-manual-build-statements.primary.txt",
+          "bytes": 662,
+          "sha256": "B19B540AC39B53CA3E5E8EA5BD2BEB64B8642A8D5BDCCA744B3E987FFA3FCF1B"
+        },
+        "requiredRead": "WHOLE_EXACT_SELECTED_EXCERPT",
+        "copySemantics": "Exact original UTF8 bytes including original line terminators; no headers, omission markers or analysis added."
+      },
+      {
+        "id": "MANUAL_VARIABLE_EXPANSION",
+        "repositoryPath": "doc/manual.asciidoc",
+        "immutableCommit": "2daa09ba270b0a43e1929d29b073348aa985dfaa",
+        "immutableSourceUrl": "https://github.com/ninja-build/ninja/blob/2daa09ba270b0a43e1929d29b073348aa985dfaa/doc/manual.asciidoc",
+        "remoteBlobSha": "3482a1e697494a2ecf1c71db6a5b4307975a6b2b",
+        "originIdentity": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\origins\\manual.asciidoc",
+          "bytes": 48695,
+          "sha256": "899C7AD57DB585E20B3761A3A87C9CCD0AEF3F157FDABD13A90FDBC296B5516F"
+        },
+        "originGrant": "IDENTITY_ONLY_NO_WHOLE_BODY_GRANT",
+        "sourceRanges": [
+          {
+            "firstLine": 1078,
+            "lastLine": 1092,
+            "physicalRows": 15
+          }
+        ],
+        "physicalRows": 15,
+        "excerpt": {
+          "path": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\planning\\E04\\ninja-literal-rule-primary-PROPOSED\\ninja-manual-variable-expansion.primary.txt",
+          "bytes": 701,
+          "sha256": "EE8D4C171188E0075418BD9EC3E9A1B2D6A01E2386884DDE47908C87375C77E2"
+        },
+        "requiredRead": "WHOLE_EXACT_SELECTED_EXCERPT",
+        "copySemantics": "Exact original UTF8 bytes including original line terminators; no headers, omission markers or analysis added."
+      }
+    ],
+    "earlierRangeLabels": "Use corrected immutable index physical ranges; prior inaccurate labels are not adopted.",
+    "installedNinjaBinarySourceProvenance": "UNVERIFIED_NOT_CLAIMED"
+  },
+  "existingCmakePrimarySourceRows": 525,
+  "freshSourceMaterialBinding": "Bind the corrected five Ninja excerpts/60 rows and existing CMake primary525 rows with fresh exact candidate metadata; no transmission/review/native authority is supplied by this publication.",
+  "helperControlNativeRuns": 0,
+  "observationScope": "AST and exact source/text/byte comparisons only; no helper/control/native execution or new review PASS.",
+  "actualClassifierConfigure": "NOT_RUN",
+  "actualFreshSourceReview": "NOT_RUN",
+  "allEightFreshPhases": "NOT_RUN",
+  "oldApprovalTransfer": false,
+  "visibleWindows": 0,
+  "linux": "UNTESTED",
+  "nativeAuthority": false,
+  "finalCode": "NOT_RUN",
+  "differentFinalReq": "NOT_RUN",
+  "a1eAcceptance": "NOT_ESTABLISHED",
+  "specialAssuranceCertification": "DEFERRED_UNPROVEN_OWN17",
+  "dP2": "DEFERRED_UNPROVEN_OWN17",
+  "standingPrivateSourceApiConsent": "IN_FORCE_UNTIL_EXPLICITLY_REVOKED",
+  "broaderGates": "A1G,A2,727compatibility,fullYAMLfidelity,plainDEL,profiles,HUD,input,rendering,Linux,packaging,realCore,fullmigration remain open",
+  "next": "Checkpoint/push/verify OWN18 exact remote backup, then fresh exact head/run/freeze/current bindings and affected focused SOURCE before ordered phases/all actual tests/evidence freeze/final independent CODE and different REQ. Keep every failed run closed; no old phase GO or approval transfers.",
+  "limits": "Bounded source repair publication only; no general graph/path/comment/continuation parser or broad assurance certification."
+}
