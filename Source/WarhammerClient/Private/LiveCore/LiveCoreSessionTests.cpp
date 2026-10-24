@@ -103,6 +103,62 @@ bool FLiveCoreCreatedIdentityTest::RunTest(const FString& Parameters)
     return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreExistingIdentityTest, "Warhammer.LiveCore.Unit.ExistingSessionIdentity", Flags)
+bool FLiveCoreExistingIdentityTest::RunTest(const FString& Parameters)
+{
+    FString Text, Error;
+    if (!LoadSelected(*this, TEXT("contracts/examples/sessions/session-metadata-created.json"), Text)) { return false; }
+    E01::FReadError ReadError; TSharedPtr<FJsonObject> Root;
+    if (!E01::ParseObject(Text, Root, ReadError)) { AddError(TEXT("Selected metadata example is invalid.")); return false; }
+    AddInfo(TEXT("Synthetic active-player parser controls derive from the selected committed metadata example; no runtime transition is claimed."));
+    const FString SessionId = Root->GetStringField(TEXT("session_id"));
+    Root->SetStringField(TEXT("session_state"), TEXT("active")); Root->SetNumberField(TEXT("session_revision"), 7);
+    const auto Visibility = Root->GetObjectField(TEXT("visibility"));
+    Visibility->SetStringField(TEXT("role"), TEXT("player")); Visibility->SetStringField(TEXT("player_id"), TEXT("player-a"));
+    Visibility->SetNumberField(TEXT("delay_revisions"), 0); Visibility->SetBoolField(TEXT("may_mutate_lifecycle"), false);
+    Visibility->SetBoolField(TEXT("may_submit_decision"), true); Visibility->SetBoolField(TEXT("omniscient"), false);
+    LiveCoreProtocol::FMetadata Metadata;
+    const FString Valid = Serialize(Root.ToSharedRef());
+    if (!TestTrue(TEXT("Active selected-Core player metadata is compatible"), LiveCoreProtocol::ReadExistingSession(Valid, SessionId, Metadata, Error))) { return false; }
+    TestEqual(TEXT("Existing nonzero revision is retained"), Metadata.Revision, int64(7));
+    TestEqual(TEXT("Exact existing identity is retained"), Metadata.SessionId, SessionId);
+    TestFalse(TEXT("Created-session parser is not relaxed for opening"), LiveCoreProtocol::ReadCreatedSession(Valid, Metadata, Error));
+    TestFalse(TEXT("Metadata must match the requested session"), LiveCoreProtocol::ReadExistingSession(Valid, TEXT("different-session"), Metadata, Error));
+    TestFalse(TEXT("Wrong build is not accepted because envelopes overlap"), LiveCoreProtocol::ReadExistingSession(
+        Valid.Replace(TEXT("0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba"), TEXT("65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a")), SessionId, Metadata, Error));
+    TestFalse(TEXT("Wrong contract is rejected"), LiveCoreProtocol::ReadExistingSession(Valid.Replace(TEXT("44.5.0"), TEXT("44.3.33")), SessionId, Metadata, Error));
+    TestFalse(TEXT("Wrong metadata schema is rejected"), LiveCoreProtocol::ReadExistingSession(Valid.Replace(TEXT("session-metadata-v44-contract"), TEXT("session-metadata-v43-contract")), SessionId, Metadata, Error));
+    for (const TCHAR* State : {TEXT("created"), TEXT("terminal"), TEXT("closed"), TEXT("unknown")})
+    {
+        Root->SetStringField(TEXT("session_state"), State);
+        TestFalse(TEXT("Opening does not start or reinterpret another lifecycle"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+        TestEqual(TEXT("Failed parse publishes no partial metadata"), Metadata.Revision, int64(7));
+    }
+    Root->SetStringField(TEXT("session_state"), TEXT("active"));
+    for (double RevisionValue : {-1.0, 1.5, 9007199254740992.0})
+    {
+        Root->SetNumberField(TEXT("session_revision"), RevisionValue);
+        TestFalse(TEXT("Malformed revision is not rounded, clamped or accepted"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+    }
+    Root->SetNumberField(TEXT("session_revision"), 7);
+    Visibility->SetStringField(TEXT("role"), TEXT("administrator"));
+    TestFalse(TEXT("Administrator scope cannot become player display"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+    Visibility->SetStringField(TEXT("role"), TEXT("player")); Visibility->SetStringField(TEXT("player_id"), TEXT("player-b"));
+    TestFalse(TEXT("Foreign player scope cannot become display"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+    Visibility->SetStringField(TEXT("player_id"), TEXT("player-a")); Visibility->SetNumberField(TEXT("delay_revisions"), 1);
+    TestFalse(TEXT("Delayed scope cannot become live player state"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+    Visibility->SetNumberField(TEXT("delay_revisions"), 0); Visibility->SetBoolField(TEXT("omniscient"), true);
+    TestFalse(TEXT("Omniscient scope is refused"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+    Visibility->SetBoolField(TEXT("omniscient"), false); Visibility->SetBoolField(TEXT("may_mutate_lifecycle"), true);
+    TestFalse(TEXT("Lifecycle authority cannot become player scope"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+    Visibility->SetBoolField(TEXT("may_mutate_lifecycle"), false); Visibility->SetBoolField(TEXT("may_submit_decision"), false);
+    TestFalse(TEXT("A non-submitting role is not relabelled as this player slice"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+    Visibility->SetBoolField(TEXT("may_submit_decision"), true);
+    const FString Colliding = Serialize(Root.ToSharedRef()).Replace(TEXT("\"session_revision\": 7"), TEXT("\"session_revision\": 7, \"Session_Revision\": 7"));
+    TestFalse(TEXT("Case-colliding metadata fields fail before map loss"), LiveCoreProtocol::ReadExistingSession(Colliding, SessionId, Metadata, Error));
+    return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreProjectionTest, "Warhammer.LiveCore.Unit.ProjectionPrivacyAndGeometry", Flags)
 bool FLiveCoreProjectionTest::RunTest(const FString& Parameters)
 {

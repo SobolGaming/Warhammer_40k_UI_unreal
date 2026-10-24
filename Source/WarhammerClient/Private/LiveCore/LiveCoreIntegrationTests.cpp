@@ -5,6 +5,12 @@
 #include "HAL/PlatformTime.h"
 #include "Misc/AutomationTest.h"
 
+struct FLiveCoreSessionIntegrationTestAccess
+{
+    static void ObserveRequests(FLiveCoreSession& Client, TFunction<void(const FString&, const FString&, bool, bool)>&& Observer)
+    { Client.RequestObserverForTests = MoveTemp(Observer); }
+};
+
 namespace
 {
 // Explicit opt-in: this test creates one disposable session on an existing development
@@ -12,8 +18,8 @@ namespace
 class FLiveSessionActionCheck final : public IAutomationLatentCommand
 {
 public:
-    FLiveSessionActionCheck(FAutomationTestBase* InTest, FString InEndpoint)
-        : Test(InTest), Endpoint(MoveTemp(InEndpoint)), Started(FPlatformTime::Seconds()) {}
+    FLiveSessionActionCheck(FAutomationTestBase* InTest, FString InEndpoint, bool bInReopenAfterCreate = false)
+        : Test(InTest), Endpoint(MoveTemp(InEndpoint)), Started(FPlatformTime::Seconds()), bReopenAfterCreate(bInReopenAfterCreate) {}
 
     virtual bool Update() override
     {
@@ -48,6 +54,51 @@ public:
             {
                 Session->Shutdown();
                 return true;
+            }
+            if (bReopenAfterCreate && !bReopened)
+            {
+                // Keep the separately managed service alive; shutting this client
+                // cannot stop it or mutate/close the authoritative session.
+                ExistingSessionId = State.SessionId; ExistingRequestId = State.RequestId;
+                ExistingRevision = State.SessionRevision; ExistingOptionId = State.Options[0].Id;
+                ExistingBounds = State.BoardBoundsInches;
+                ExistingTerrainCount = State.Terrain.Num(); ExistingObjectiveCount = State.Objectives.Num();
+                ExistingRosterCount = State.PublicArmyRosters.Num(); bExistingRostersAvailable = State.bHasPublicArmyRosters;
+                Session->Shutdown(); Session = FLiveCoreSession::Create(); bReopened = true; bObserveOpening = true;
+                FLiveCoreSessionIntegrationTestAccess::ObserveRequests(*Session,
+                    [this](const FString& Verb, const FString& Path, bool bMutation, bool bAdministrator)
+                    {
+                        if (!bObserveOpening) { return; }
+                        ++OpenRequestAttempts;
+                        bUnexpectedOpenRequest |= Verb != TEXT("GET") || bMutation || bAdministrator;
+                        if (Path == TEXT("/sessions/") + ExistingSessionId) { ++OpenMetadataAttempts; }
+                        else if (Path == TEXT("/sessions/") + ExistingSessionId + TEXT("/projection")) { ++OpenProjectionAttempts; }
+                        else { bUnexpectedOpenRequest = true; }
+                    });
+                Session->OpenExistingSession(Endpoint, ExistingSessionId);
+                return false;
+            }
+            if (bReopened)
+            {
+                bObserveOpening = false;
+                // Private IDs remain in memory; boolean comparisons avoid writing
+                // their values into a failed automation assertion/log.
+                Test->TestTrue(TEXT("Fresh client reopens the original exact session identity"), State.SessionId == ExistingSessionId);
+                Test->TestEqual(TEXT("Read-only reopen changes no authoritative revision"), State.SessionRevision, ExistingRevision);
+                Test->TestTrue(TEXT("Reopen retains the original offered request"), State.RequestId == ExistingRequestId);
+                Test->TestTrue(TEXT("Reopen retains a Core-offered option ID"), State.Options.ContainsByPredicate(
+                    [this](const FLiveCoreOption& Option) { return Option.Id == ExistingOptionId; }));
+                Test->TestTrue(TEXT("Reopen restores the actual board bounds"), State.BoardBoundsInches == ExistingBounds);
+                Test->TestEqual(TEXT("Reopen restores actual terrain rows"), State.Terrain.Num(), ExistingTerrainCount);
+                Test->TestEqual(TEXT("Reopen restores actual objective rows"), State.Objectives.Num(), ExistingObjectiveCount);
+                Test->TestEqual(TEXT("Reopen restores current roster availability"), State.bHasPublicArmyRosters, bExistingRostersAvailable);
+                Test->TestEqual(TEXT("Reopen restores only supplied roster rows"), State.PublicArmyRosters.Num(), ExistingRosterCount);
+                Test->TestEqual(TEXT("Accepted action count starts at zero in the fresh client"), State.AcceptedActionCount, 0);
+                Test->TestFalse(TEXT("Reopen fabricates no previous command receipt"), State.bLastCommandHasOutcome);
+                Test->TestEqual(TEXT("Exactly two HTTP attempts open the existing session"), OpenRequestAttempts, 2);
+                Test->TestEqual(TEXT("One metadata attempt"), OpenMetadataAttempts, 1);
+                Test->TestEqual(TEXT("One projection attempt"), OpenProjectionAttempts, 1);
+                Test->TestFalse(TEXT("Opening attempted no POST, catalog or administrator request"), bUnexpectedOpenRequest);
             }
             Test->TestEqual(TEXT("Viewer is player-a"), State.ViewerPlayerId, FString(TEXT("player-a")));
             Test->TestTrue(TEXT("Core board has positive dimensions"), State.BoardBoundsInches.bIsValid
@@ -112,6 +163,22 @@ private:
     uint64 BeforeProjectionVersion = 0;
     uint64 AfterProjectionVersion = 0;
     bool bObservedReceiptBeforeProjection = false;
+    bool bReopenAfterCreate = false;
+    bool bReopened = false;
+    bool bObserveOpening = false;
+    bool bUnexpectedOpenRequest = false;
+    int32 OpenRequestAttempts = 0;
+    int32 OpenMetadataAttempts = 0;
+    int32 OpenProjectionAttempts = 0;
+    FString ExistingSessionId;
+    FString ExistingRequestId;
+    FString ExistingOptionId;
+    int64 ExistingRevision = -1;
+    FBox2D ExistingBounds = FBox2D(ForceInit);
+    int32 ExistingTerrainCount = 0;
+    int32 ExistingObjectiveCount = 0;
+    int32 ExistingRosterCount = 0;
+    bool bExistingRostersAvailable = false;
 };
 }
 
@@ -136,4 +203,21 @@ bool FLiveCoreSessionIntegrationTest::RunTest(const FString& Parameters)
     ADD_LATENT_AUTOMATION_COMMAND(FLiveSessionActionCheck(this, ValidEndpoint));
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreSessionReopenIntegrationTest,
+    "Warhammer.LiveCore.Integration.ReopenSessionAction",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::ClientContext | EAutomationTestFlags::EngineFilter)
+
+bool FLiveCoreSessionReopenIntegrationTest::RunTest(const FString& Parameters)
+{
+    const FString Endpoint = FPlatformMisc::GetEnvironmentVariable(TEXT("WH_LIVE_CORE_TEST_URL"));
+    FString ValidEndpoint, Error;
+    if (Endpoint.IsEmpty() || !LiveCoreProtocol::ValidateEndpoint(Endpoint, ValidEndpoint, Error))
+    {
+        AddError(TEXT("Reopen integration requires an opted-in owned loopback Core development service."));
+        return false;
+    }
+    ADD_LATENT_AUTOMATION_COMMAND(FLiveSessionActionCheck(this, ValidEndpoint, true));
+    return true;
+}
+
 #endif

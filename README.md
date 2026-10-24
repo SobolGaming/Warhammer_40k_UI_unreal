@@ -2,13 +2,13 @@
 
 A C++ first 3D client for the separate authoritative Python Core. This personal/internal development preview supports the Editor route and a Windows Development Game folder. P1b completed bounded Windows build, source-review, non-visible and visible packaged checks for clearer decision status, immediate-submission labels and keyboard-focus help. It remains a setup-choice preview, not a complete game.
 
-P1c's [current native results](docs/plans/evidence/2026-10-24-p1c-core-adoption.md) verify the separate selected44.5 runtime, affected Windows build and real Managed/Attach setup workflow. Fresh independent CODE and requirements SOURCE reviews passed at a31f64f. The canonical plan records exact limits; old visible results remain bound to44.3.
+P2a adds known-ID player-a session reopening on the selected44.5 Core. Its [native checks](docs/plans/evidence/2026-10-24-p2a-native.json), [independent source reviews](docs/plans/evidence/2026-10-24-p2a-source-reviews.json) and [visible workflow checks](docs/plans/evidence/2026-10-24-p2a-visible.md) passed at source `20600a5b37ab2cf443d884fe8e2f86b71388d534`. Implementation and bounded verification are complete; [PR #7](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/7) awaits normal merge. P1c's [runtime-adoption results](docs/plans/evidence/2026-10-24-p1c-core-adoption.md) and earlier44.3 visible results retain their original scopes.
 
 Read [architecture.md](architecture.md) for the source-tree map, component boundaries and runtime/session flows. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns all milestone scope and acceptance.
 
 ## Get started playing
 
-The current preview can connect/create a real Core session, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. It remains player-a/setup-choice only; full deployment, movement, turns and complete gameplay are still being developed. Arcade parity is the initial useful milestone. The ultimate goal is all capabilities supported by the latest explicitly selected Core, including public/editor/data/service features beyond Arcade and faithful presentation of automatic rules.
+The current preview can connect/create a real Core session, reopen a known active session on a retained service, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. It remains player-a/setup-choice only; full deployment, movement, turns and complete gameplay are still being developed. Arcade parity is the initial useful milestone. The ultimate goal is all capabilities supported by the latest explicitly selected Core, including public/editor/data/service features beyond Arcade and faithful presentation of automatic rules.
 
 P1c explicitly adopts Core `4f9bef0df2fb974d1285232a1009b8781926361d` / **44.5.0**, from open, unmerged [Core PR #591](https://github.com/SobolGaming/Warhammer_40k_AI/pull/591). Runtime preparation, current client checks and exact limits are tracked separately in the [canonical plan](docs/plans/unreal-migration-plan.md). The previous44.3.33 environment/preview remain available through explicit `-CoreVersion 44.3.33` with the old executable. See the [source capability inventory](docs/plans/research/2026-10-24-latest-core-capabilities.md).
 
@@ -55,6 +55,19 @@ The PowerShell launcher does not automatically read `UE_ROOT`. Its other options
 
 Current client endpoints must be **`http://127.0.0.1:<port>`**, optionally with a trailing slash. HTTPS, IPv6, hostnames, other addresses, URL paths and credentials in URLs are unsupported by the current client.
 
+### Reopen a known active session (P2a)
+
+Keep the same selected Core process alive and use the client in **Attach** mode. Managed stops its owned in-memory Core when the client closes, so it cannot preserve sessions between launches. To reopen:
+
+1. Create/start a session, select and copy its current ID from the session-ID field, then close the client normally with no uncertain command outstanding.
+2. Launch a fresh client against that still-running Core using `Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe`.
+3. Paste the ID and press **Open existing session**. The client reads player-a metadata/projection with the player credential; it sends no create/start/gameplay command. The current ID remains selectable/copyable after opening.
+4. Check the same session, authoritative revision and offered state. **Accepted actions in this client** starts at0 because it is a local counter, not the session's historical total. Submit an offered option and Refresh normally.
+
+Only known active sessions on exact selected44.5 Core are supported. IDs must be bounded ASCII path tokens; invalid paths/escaped IDs are rejected before HTTP. A missing ID shows the actual HTTP404 error without invented scene/options or automatic creation. Created/terminal/closed sessions get an explicit unsupported-lifecycle message. Metadata/projection reads may update Core's activity timestamp; they do not advance the game revision. This is not session listing, new-user joining, hotseat or durable/unknown-command restart recovery. Do not close a client with an UNKNOWN outcome to bypass its same-command reconciliation.
+
+The [P2a visible check](docs/plans/evidence/2026-10-24-p2a-visible.md) used three sequential packaged Attach clients against one retained44.5 Core. Copy/paste reopened the same session at revision1 with a fresh local action count0; one offered mission choice committed at revision2 and Refresh showed the hidden opposing decision. A separate client displayed local path-ID rejection and actual HTTP404 `session_not_found` / “Session was not found.”, then reopened the known session at revision2 with its own mission state and local count0. All three clients closed normally and left Core healthy until its owner stopped it. Native instrumentation separately verifies that reopening uses only two player GETs.
+
 ### In the window
 
 1. A black viewport before connection is expected. Click **Connect / create session**.
@@ -73,7 +86,7 @@ The [P1b packaged check](docs/plans/evidence/2026-10-24-p1b-visible-preview.md) 
 | Middle-drag over the board | Pan within the board's vicinity. |
 | Wheel over the focused board | Zoom within extent-based limits. After editing a UI field, click the board again first. |
 | **Frame board** in the panel | Fit the full board into the available area beside the panel; observed in the manual run. |
-| **F** with board focus | Frame the board; observed working in the current packaged P1b run. The earlier manual F failure remains historical with cause unestablished. |
+| **F** with board focus | Frame the board; observed working in the packaged P1b run. The earlier manual F failure remains historical with cause unestablished. |
 | **Escape**, focus loss or application deactivation | Cancel the current camera drag. |
 
 UI clicks, text entry and panel scrolling retain their own input. Camera gestures do not submit game actions. Resizing deliberately reframes the board; a normal state Refresh preserves your view. See the [current verification checklist](docs/plans/unreal-migration-plan.md).
@@ -111,7 +124,7 @@ $taskCopiedExe = Join-Path $taskCopy 'WarhammerClient/Binaries/Win64/WarhammerCl
 & ./scripts/Test-ClientPackage.ps1 -ClientExecutable $taskCopiedExe -Mode Core -CoreMode Managed -Port 19084
 ```
 
-Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects exactly one real session/action/refresh check and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. Use ordinary absolute local-drive paths; extended/device/UNC namespaces, short-name aliases, paths through reparse points and executables inside the checkout are rejected. The result records the accepted absolute path. These checks do not establish visible rendering or controls. The source checkout hosts only the test tooling.
+Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects two real integration checks (retained create/action/refresh and fresh-client reopen/action/refresh) and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. Use ordinary absolute local-drive paths; extended/device/UNC namespaces, short-name aliases, paths through reparse points and executables inside the checkout are rejected. The result records the accepted absolute path. These checks do not establish visible rendering or controls. The source checkout hosts only the test tooling.
 
 ### Linux x86-64: routine launch — UNTESTED
 
@@ -216,4 +229,4 @@ The [older manual-camera record](docs/plans/evidence/2026-10-24-live-core-camera
 
 [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) [PR #4](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4) and [PR #5](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/5) are merged. PR #4's [bounded P1a evidence](docs/plans/evidence/2026-10-24-p1a-windows-package.md) remains historical. P1b's completed checks do not close full P1, clean-machine or Linux requirements. The [earlier sequence-label correction](docs/plans/evidence/2026-10-24-architecture-mermaid.json) retains its original Mermaid parser evidence.
 
-The owner's standing visible-testing authorization is active until explicitly revoked; previous HOLD statements and consumed run scopes remain historical. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts. Latest-Core runtime adoption is the current bounded P1c/PR #6; general gameplay remains later work.
+The owner's standing visible-testing authorization is active until explicitly revoked; previous HOLD statements and consumed run scopes remain historical. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts. P1c/PR #6 is merged. P2a/PR #7 completes the bounded known-session reopen workflow and awaits normal merge; general gameplay remains later work. Required later human/platform checks have individual instructions and unchecked criteria HV-01–HV-06 in the canonical plan.

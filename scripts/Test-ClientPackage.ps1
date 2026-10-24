@@ -138,7 +138,8 @@ $record = [ordered]@{
 }
 [string[]]$expected = if ($Mode -eq 'Resources') {
     @('Warhammer.RuntimeData.CanonicalSession', 'Warhammer.RuntimeData.MissingSessionFails', 'Warhammer.RuntimeData.CorruptSessionFails', 'Warhammer.RuntimeData.StartupResources')
-} else { @('Warhammer.LiveCore.Integration.RealSessionAction') }
+} elseif ($CoreVersion -eq '44.3.33') { @('Warhammer.LiveCore.Integration.RealSessionAction') }
+else { @('Warhammer.LiveCore.Integration.RealSessionAction', 'Warhammer.LiveCore.Integration.ReopenSessionAction') }
 $hostInfo = $null; $native = $null; $started = $false; $outFile = $null; $errFile = $null; $outReader = $null; $errReader = $null
 $timer = $null; $stage = 'INPUTS'; $validated = $false
 try {
@@ -168,7 +169,7 @@ try {
         $record.host = @{ mode = $CoreMode; owned = $hostInfo.owned; status = $hostInfo.status; receipt = (File-Descriptor $hostInfo.receiptPath) }
     }
     $stage = 'NATIVE_START'
-    $selector = if ($Mode -eq 'Resources') { 'Warhammer.RuntimeData' } else { $expected[0] }
+    $selector = if ($Mode -eq 'Resources') { 'Warhammer.RuntimeData' } elseif ($expected.Count -eq 1) { $expected[0] } else { 'Warhammer.LiveCore.Integration' }
     $arguments = @('-NullRHI', '-RenderOffScreen', '-unattended', '-nosplash', '-nosound', '-nowrite', '-stdout', '-FullStdOutLogOutput', '-NoCrashDialog', '-NoLiveCoding',
         ('-UserDir=' + (Join-Path $run 'user')), ('-abslog=' + $nativeLog), ('-ReportExportPath=' + $reportRoot),
         ('-ExecCmds=Automation RunTests ' + $selector), '-TestExit=Automation Test Queue Empty')

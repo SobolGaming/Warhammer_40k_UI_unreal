@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 1,
+  "milestone": "P2a known active session reopen",
+  "status": "P2A_V1_V2_PASS_WITH_LIMITS",
+  "recordedUtc": "2026-10-24T20:17:53.704088+00:00",
+  "runtimeSourceHead": "20600a5b37ab2cf443d884fe8e2f86b71388d534",
+  "launchCheckpoint": "e24fe52da7d5878a93dba951c61ab89c6418bab8",
+  "sourceBinding": "Runtime source/build/tests frozen at20600a5; launch checkpoint e24fe52 contains only subsequent documentation/evidence changes.",
+  "tester": "Codex coordinator using supported Sky computer-use APIs",
+  "platform": "Native Windows x64, Development Game PCD3D_SM5, existing development workstation",
+  "core": {
+    "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "contractVersion": "44.5.0",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba",
+    "runtimeResourceCount": 3130
+  },
+  "executable": {
+    "path": "WarhammerClient/Binaries/Win64/WarhammerClient.exe",
+    "bytes": 332502528,
+    "sha256": "14c955951ad7dcd0d833f994251c485e14a0275d0dce5de803f160a18a71a521"
+  },
+  "method": {
+    "oneGameWindowAtATime": true,
+    "tenMinuteBudgetPerLaunch": true,
+    "actualUiClicksAndKeyChords": true,
+    "syntheticFixture": false,
+    "sharedSeparatelyOwnedCore": true,
+    "normalLaunchRoute": "scripts/Start-Client.ps1 -CoreMode Attach",
+    "clipboard": "Actual read-only field Ctrl+A/C followed by Ctrl+V into fresh client; no OS clipboard helper.",
+    "physicalHeldButtonsTested": false,
+    "windowCapturePixels": [
+      2882,
+      1668
+    ]
+  },
+  "criteria": {
+    "P2A-V1": {
+      "status": "PASS",
+      "windows": [
+        1,
+        2
+      ],
+      "actual": [
+        "Window1 created/started one real session at revision1, player-a, local accepted count0; four secondary-mission choices and framed board displayed.",
+        "Selected and copied the displayed ID with Ctrl+A/C; normal close left the same separately owned Core healthy.",
+        "Fresh Window2 pasted with Ctrl+V and Open restored the same ID/revision1/player-a, same four choices and local count0, with no prior local command receipt.",
+        "Submitted fixed assassination/bring_it_down once; Core reported command_committed, accepted=true, committed=true; revision2/local count1.",
+        "Explicit Refresh retained revision2 and own missions while the opposing pending decision stayed hidden; normal client close left Core healthy."
+      ],
+      "noMutationEvidence": "Real native ReopenSessionAction transport observer: exactly two player GET attempts, no mutation/admin/catalog/create/start; authoritative revision and request/option identities unchanged while reopening. The UI screenshots alone do not prove request counts."
+    },
+    "P2A-V2": {
+      "status": "PASS",
+      "windows": [
+        3
+      ],
+      "actual": [
+        "Focused the editable ID field, typed ../bad, pressed actual f (field became ../badf), and scrolled over the field; input stayed in the panel.",
+        "Open showed local ID validation and no attached session/board/options; zero HTTP is independently established by the native invalid-input controls.",
+        "Replaced with a validly formatted nonexistent ID and Open displayed HTTP404, session_not_found, Session was not found.; no invented board/options or automatic create.",
+        "Corrected the field to the previously observed active ID and reopened successfully at revision2/player-a/local count0; own missions restored, old error/receipt cleared, opposing decision hidden.",
+        "Board-focused wheel visibly zoomed; focusing the read-only ID then actual f and panel wheel preserved that zoom and removed board-focus guidance. Frame board restored full framing.",
+        "Normal client close left the external Core healthy; its separate owner then stopped it normally."
+      ]
+    }
+  },
+  "launches": [
+    {
+      "startedUtc": "2026-10-24T20:11:35.3000741Z",
+      "finishedUtc": "2026-10-24T20:13:51.6016708Z",
+      "sourceHead": "e24fe52da7d5878a93dba951c61ab89c6418bab8",
+      "mode": "Attach",
+      "gameLifetimeSeconds": 133.5007413,
+      "maximumVisibleSeconds": 600,
+      "gameExit": 0,
+      "launcherExit": 0,
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "attachedOwnedServerSurvived": true,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "cleanupErrors": [],
+      "rawResult": {
+        "privatePath": ".local/development/p2a-visible-20261024T201135Z-9113526066fc47a78301f4de247c6af8/result.json",
+        "bytes": 6355,
+        "sha256": "9cc69654a62ac1ad78bb58b54180b701bbc45ddb075e9160f4138de318cc012f"
+      },
+      "nativeLog": {
+        "privatePath": ".local/development/p2a-visible-20261024T201135Z-9113526066fc47a78301f4de247c6af8/native.log",
+        "bytes": 90504,
+        "sha256": "6cd96394804d46c1568096e35766b6df6e32e12b7c4b6b06300420a32492910d"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 0,
+        "Fatal": 0
+      },
+      "attachedStopNoOp": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false,
+        "endpoint": "http://127.0.0.1:19105/"
+      },
+      "supervisor": {
+        "leaf": "Invoke-P2aVisible.ps1",
+        "bytes": 29571,
+        "sha256": "D3039AA97F76209333AD2E212C98EC554264C5EA951C0B198AD4D06AA2E0DA0C"
+      }
+    },
+    {
+      "startedUtc": "2026-10-24T20:13:59.5066634Z",
+      "finishedUtc": "2026-10-24T20:14:49.6616114Z",
+      "sourceHead": "e24fe52da7d5878a93dba951c61ab89c6418bab8",
+      "mode": "Attach",
+      "gameLifetimeSeconds": 47.3087839,
+      "maximumVisibleSeconds": 600,
+      "gameExit": 0,
+      "launcherExit": 0,
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "attachedOwnedServerSurvived": true,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "cleanupErrors": [],
+      "rawResult": {
+        "privatePath": ".local/development/p2a-visible-20261024T201359Z-1674a798630e487fb1b387e9cb8f69b5/result.json",
+        "bytes": 6354,
+        "sha256": "ba147345603aee0318735e3b37bf0db6794e7c204669c163775e58e83f221ef4"
+      },
+      "nativeLog": {
+        "privatePath": ".local/development/p2a-visible-20261024T201359Z-1674a798630e487fb1b387e9cb8f69b5/native.log",
+        "bytes": 90504,
+        "sha256": "b0a2a4e10a9306fd64e0e38a9ee04f0f30f2788b04fd9caea8673116dff4ee46"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 0,
+        "Fatal": 0
+      },
+      "attachedStopNoOp": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false,
+        "endpoint": "http://127.0.0.1:19105/"
+      },
+      "supervisor": {
+        "leaf": "Invoke-P2aVisible.ps1",
+        "bytes": 29571,
+        "sha256": "D3039AA97F76209333AD2E212C98EC554264C5EA951C0B198AD4D06AA2E0DA0C"
+      }
+    },
+    {
+      "startedUtc": "2026-10-24T20:14:56.9577921Z",
+      "finishedUtc": "2026-10-24T20:16:39.0498200Z",
+      "sourceHead": "e24fe52da7d5878a93dba951c61ab89c6418bab8",
+      "mode": "Attach",
+      "gameLifetimeSeconds": 99.2700402,
+      "maximumVisibleSeconds": 600,
+      "gameExit": 0,
+      "launcherExit": 0,
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "attachedOwnedServerSurvived": true,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "cleanupErrors": [],
+      "rawResult": {
+        "privatePath": ".local/development/p2a-visible-20261024T201456Z-e15d429d5a164cf6a1e299e54ee0caa7/result.json",
+        "bytes": 6353,
+        "sha256": "a727cd50afb824e8e228a4ae9acd1c0bc09a49dfd366cea0257434cff027b02a"
+      },
+      "nativeLog": {
+        "privatePath": ".local/development/p2a-visible-20261024T201456Z-e15d429d5a164cf6a1e299e54ee0caa7/native.log",
+        "bytes": 90503,
+        "sha256": "d70c36cdf1116bff4a2140775ec37bf4f6c7026eec78053b236efcf617cd2e3b"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 0,
+        "Fatal": 0
+      },
+      "attachedStopNoOp": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false,
+        "endpoint": "http://127.0.0.1:19105/"
+      },
+      "supervisor": {
+        "leaf": "Invoke-P2aVisible.ps1",
+        "bytes": 29571,
+        "sha256": "D3039AA97F76209333AD2E212C98EC554264C5EA951C0B198AD4D06AA2E0DA0C"
+      }
+    }
+  ],
+  "separateOwnerStop": {
+    "status": "STOPPED",
+    "owned": true,
+    "forcedTermination": false,
+    "rawResult": {
+      "privatePath": ".local/development/p2a-visible-outer-stop.json",
+      "bytes": 242,
+      "sha256": "63a239b9b9009ac27bb3e1ed523b81466e98f370232a2e20138293292babc659"
+    }
+  },
+  "privateCaptures": [
+    {
+      "label": "01-startup",
+      "utc": "2026-10-24T20:12:01.162Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/01-startup.png",
+      "bytes": 161509,
+      "sha256": "38bf30fd831a95b22192dad98766163858faea128d9793d46e4f735901c85b4d"
+    },
+    {
+      "label": "02-created-revision1",
+      "utc": "2026-10-24T20:12:18.668Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/02-created-revision1.png",
+      "bytes": 243925,
+      "sha256": "c34811d27e44d2b5f111b76bf9b5d188c0acf0563f58f34daf66769d403ba3c7"
+    },
+    {
+      "label": "03-selected-id-copied",
+      "utc": "2026-10-24T20:13:49.436Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/03-selected-id-copied.png",
+      "bytes": 245900,
+      "sha256": "2065bd3757bdf8b568a9852975dfc3bf65000ff1a45f4a39866f2786ee8f6042"
+    },
+    {
+      "label": "04-fresh-client-pasted-id",
+      "utc": "2026-10-24T20:14:20.354Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/04-fresh-client-pasted-id.png",
+      "bytes": 166200,
+      "sha256": "2182a09baa2c6c9ba9f77b2182074ec8a0e1018c8f1c71498db750fac199182e"
+    },
+    {
+      "label": "05-reopened-same-session-revision1",
+      "utc": "2026-10-24T20:14:25.939Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/05-reopened-same-session-revision1.png",
+      "bytes": 239023,
+      "sha256": "9dc644799e0c6c4ebd9cce9884bfe9c18772892cc05de5d53822314dcbf6f60c"
+    },
+    {
+      "label": "06-action-committed-revision2",
+      "utc": "2026-10-24T20:14:40.473Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/06-action-committed-revision2.png",
+      "bytes": 230259,
+      "sha256": "1d847677f8226cd92a5ed62b079cc9f6288f1c4356aea49ed8fb40fe6c10041e"
+    },
+    {
+      "label": "07-refreshed-revision2-hidden-opponent",
+      "utc": "2026-10-24T20:14:47.242Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/07-refreshed-revision2-hidden-opponent.png",
+      "bytes": 230539,
+      "sha256": "57fb4ef1f26deffda1d65fa8015f6de83eb99c6b4a933dbe98eb36eb7289cc1d"
+    },
+    {
+      "label": "08-id-field-f-and-wheel-isolation",
+      "utc": "2026-10-24T20:15:27.109Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/08-id-field-f-and-wheel-isolation.png",
+      "bytes": 163105,
+      "sha256": "cc8727a66725a744dcd81a21e9e249a650a1d9f0c51795ef0782fe2a24d0715b"
+    },
+    {
+      "label": "09-invalid-id-local-validation",
+      "utc": "2026-10-24T20:15:31.476Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/09-invalid-id-local-validation.png",
+      "bytes": 165883,
+      "sha256": "aac49b254ad133b4d0d7d9fdd7a81ddeb636fa504938fd57eb5f64dd4ccae278"
+    },
+    {
+      "label": "10-real-http404-no-board",
+      "utc": "2026-10-24T20:15:46.556Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/10-real-http404-no-board.png",
+      "bytes": 164025,
+      "sha256": "1a7eb931b26c3aa84e2d84f3a72486fda1598a114059bef9eb62308e6ae91a58"
+    },
+    {
+      "label": "11-corrected-reopen-revision2",
+      "utc": "2026-10-24T20:16:06.617Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/11-corrected-reopen-revision2.png",
+      "bytes": 225381,
+      "sha256": "60681a9e8f8692ef4a6f90a33ac9ac8bca38c8046b1e9303cd78c82b0303820d"
+    },
+    {
+      "label": "12-board-zoom-comparison",
+      "utc": "2026-10-24T20:16:14.800Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/12-board-zoom-comparison.png",
+      "bytes": 256294,
+      "sha256": "01182998bbede6d3e8baa732971baa3a203d53a122c1069159136e53cb4ee5a7"
+    },
+    {
+      "label": "13-field-f-wheel-preserved-board-zoom",
+      "utc": "2026-10-24T20:16:31.757Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/13-field-f-wheel-preserved-board-zoom.png",
+      "bytes": 257593,
+      "sha256": "6b0f94f20ba8e2021029edb42d8f35f87519b40c0cdc8269171da418ca2559bd"
+    },
+    {
+      "label": "14-full-framing-restored",
+      "utc": "2026-10-24T20:16:37.136Z",
+      "privatePath": ".local/development/p2a-ui-captures-1792872721159/14-full-framing-restored.png",
+      "bytes": 225623,
+      "sha256": "a23008eb4d73a21cab3e987b0880bd41e3e7429000bbb14170f0e3d2f361e4d8"
+    }
+  ],
+  "privateCaptureManifest": {
+    "privatePath": ".local/development/p2a-ui-captures-1792872721159/manifest.json",
+    "bytes": 3883,
+    "sha256": "1d2e0026fefde9ef3957a6296b0023d84d2704bc4cc1d5459e29c036fdcaf102"
+  },
+  "cleanup": {
+    "allThreeClientsAndLaunchersExit0": true,
+    "noTestedGameWindowRemained": true,
+    "attachedHostSurvivedEveryClient": true,
+    "ownerThenStoppedCoreNormally": true,
+    "noForcedCleanup": true,
+    "configFourAndExecutableUnchanged": true,
+    "environmentLimit": "Process values compare equal using PowerShell string semantics; original absent variables become equivalent empty strings in the child supervisor. This does not claim exact null-versus-empty presence preservation."
+  },
+  "limits": [
+    "Finite player-a known active session reopening and error correction only; not session listing/new-principal join/local handoff/remote/spectator/general editor/durable or uncertain-command restart recovery.",
+    "Current44.5 Windows rendering was observed for these workflows. Historical44.3 visible evidence remains separate.",
+    "No actual held RMB/MMB, OS switching during drag, teardown during drag, clean-machine or Linux result; HV-01 through HV-06 stay unchecked in their broader scopes.",
+    "UI appearance is combined with separate native transport controls; no request-count claim is inferred from a screenshot or normal process exit."
+  ]
+}

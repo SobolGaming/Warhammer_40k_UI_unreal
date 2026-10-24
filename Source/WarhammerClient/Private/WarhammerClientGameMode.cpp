@@ -169,7 +169,7 @@ public:
                     .Font(FCoreStyle::GetDefaultFontStyle(TEXT("Bold"), 20))]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 6)
                 [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(
-                    TEXT("Start the checked-out Core development server, then create a session. No game state is invented locally.")))]
+                    TEXT("Connect to the selected Core. Create a session or open a known active session as player-a. Keep Core running with Attach when reopening across client launches.")))]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
                 [SAssignNew(EndpointBox, SEditableTextBox).Text(FText::FromString(Scene->Endpoint))
                     .IsEnabled_Lambda([this]() { return !State().bBusy && !State().bHasSession && !State().bUnknown; })]
@@ -181,6 +181,22 @@ public:
                         if (!Scene || !Scene->Session.IsValid()) { return FReply::Handled(); }
                         Scene->Endpoint = EndpointBox->GetText().ToString();
                         Scene->Session->CreateAndStart(Scene->Endpoint);
+                        return FReply::Handled();
+                    })]
+                + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 4)
+                [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(TEXT("Existing session ID (player-a)")))]
+                + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
+                [SAssignNew(SessionIdBox, SEditableTextBox)
+                    .HintText(FText::FromString(TEXT("Paste a known active session ID")))
+                    .IsReadOnly_Lambda([this]() { return State().bBusy || State().bHasSession || State().bUnknown; })]
+                + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
+                [SNew(SButton).Text(FText::FromString(TEXT("Open existing session")))
+                    .IsEnabled_Lambda([this]() { return !State().bBusy && !State().bHasSession && !State().bUnknown; })
+                    .OnClicked_Lambda([this]()
+                    {
+                        if (!Scene || !Scene->Session.IsValid() || !SessionIdBox.IsValid()) { return FReply::Handled(); }
+                        Scene->Endpoint = EndpointBox->GetText().ToString();
+                        Scene->Session->OpenExistingSession(Scene->Endpoint, SessionIdBox->GetText().ToString());
                         return FReply::Handled();
                     })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
@@ -204,7 +220,7 @@ public:
                             FString::Printf(TEXT("Revision: %lld"), static_cast<long long>(Value.SessionRevision)) :
                             FString::Printf(TEXT("Session revision: %lld; displayed projection: %lld (refresh pending)"),
                                 static_cast<long long>(Value.SessionRevision), static_cast<long long>(Value.ProjectionRevision));
-                        return FText::FromString(FString::Printf(TEXT("Session: %s\n%s\nPhase: %s\nViewer: %s\nAccepted actions: %d\nLast HTTP: %d"),
+                        return FText::FromString(FString::Printf(TEXT("Session: %s\n%s\nPhase: %s\nViewer: %s\nAccepted actions in this client: %d\nLast HTTP: %d"),
                             *Value.SessionId, *RevisionText, *Value.Phase, *Value.ViewerPlayerId,
                             Value.AcceptedActionCount, Value.LastHttpStatus));
                     })]
@@ -283,6 +299,10 @@ public:
 
     void RefreshOptions()
     {
+        // Keep the attached identity available for ordinary select/copy without
+        // replacing an editable draft after a failed read.
+        if (SessionIdBox.IsValid() && State().bHasSession)
+        { SessionIdBox->SetText(FText::FromString(State().SessionId)); }
         if (!Options.IsValid()) { return; }
         Options->ClearChildren();
         for (const auto& Option : State().Options)
@@ -310,6 +330,7 @@ public:
         // Slate can retain this widget after it leaves the viewport (for example, focus).
         // Its callbacks must outlive the scene without retaining or dereferencing it.
         Scene = nullptr;
+        if (SessionIdBox.IsValid()) { SessionIdBox->SetText(FText::GetEmpty()); }
         if (Options.IsValid()) { Options->ClearChildren(); }
     }
 
@@ -328,6 +349,7 @@ private:
     }
     FLiveCoreScene* Scene = nullptr;
     TSharedPtr<SEditableTextBox> EndpointBox;
+    TSharedPtr<SEditableTextBox> SessionIdBox;
     TSharedPtr<SVerticalBox> Options;
 };
 
