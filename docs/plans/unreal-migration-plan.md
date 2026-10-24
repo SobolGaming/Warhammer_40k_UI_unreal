@@ -42,13 +42,13 @@ The owner wants to launch the existing client/server personally on Windows and L
 - [ ] Cover managed Windows startup, separately started Core plus client attachment, endpoint/auth environment names without secret values, shutdown, expected scene/actions and troubleshooting.
 - [ ] Give native Linux preparation/build and foreground server/client recipes, explicitly UNTESTED and using a native runtime; do not suggest the Windows-only launcher works there.
 - [ ] Label the current Unreal Editor development route and distinguish packaged/final-client delivery still pending.
-- [ ] Add board-only right-drag orbit, middle-drag pan, wheel zoom and a frame-board control, consistent with the existing E02 input conventions.
-- [ ] Keep UI choice clicks/text/scroll separate from camera input; cancel captures safely on release, focus/capture loss, deactivation and teardown. Camera changes never submit Core commands.
-- [ ] Fit the full board in the available world area beside the panel, accounting for viewport aspect/resize and sensible finite camera/pan/zoom bounds.
+- [x] Author board-only right-drag orbit, middle-drag pan, wheel zoom and F/Frame board control using the unchanged E02 input reducer. Wheel/F require board keyboard focus.
+- [x] Author separate panel/board input regions and user/pointer-owned capture cancellation on release, focus/capture loss, Escape, deactivation, resize and teardown. New camera handlers have no Core submission path.
+- [x] Author aspect/geometry-based corner fitting, finite navigation bounds and focused camera tests. Ordinary same-bounds refresh preserves navigation; resize reframes. Actual build/runtime/graphical checks remain separate below.
 
 ### Verification
 
-- [ ] Publish this plan checkpoint before source implementation; push and verify the exact GitHub ref.
+- [x] Publish plan checkpoint `d0af1a8a036d074eca32014dc44c58005efa6f84` before source implementation; push and verify the exact GitHub ref.
 - [ ] Build the affected Windows Editor target and run focused camera geometry/input checks plus the retained live-Core tests where relevant.
 - [ ] Validate documented commands/paths and syntax without installing tools or claiming Linux execution.
 - [ ] Obtain fresh independent CODE and distinct requirements review of the affected source/documentation.

@@ -1,20 +1,28 @@
 #include "WarhammerClientGameMode.h"
 
 #include "LiveCore/LiveCoreSession.h"
+#include "LiveCore/LiveCoreCamera.h"
+#include "Migration/E02InputPolicy.h"
 #include "Camera/CameraActor.h"
 #include "Camera/CameraComponent.h"
 #include "Components/DirectionalLightComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/DirectionalLight.h"
 #include "Engine/GameViewportClient.h"
+#include "Engine/LocalPlayer.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
+#include "Framework/Application/SlateApplication.h"
+#include "Framework/Application/SlateUser.h"
+#include "InputCoreTypes.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
 #include "Styling/CoreStyle.h"
+#include "Rendering/DrawElementTypes.h"
+#include "SceneView.h"
 #include "UObject/StrongObjectPtr.h"
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Input/SEditableTextBox.h"
@@ -24,11 +32,13 @@
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/SOverlay.h"
+#include "Widgets/SLeafWidget.h"
 #include "Widgets/Text/STextBlock.h"
 
 namespace
 {
 constexpr double CmPerInch = 2.54;
+constexpr double CameraHelpHeight = 32.0;
 
 // Display transform only: Core inches, +Y up-table -> Unreal centimetres, -Y.
 FVector DisplayPoint(const FVector& Inches, const FVector2D& Centre)
@@ -39,6 +49,7 @@ FVector DisplayPoint(const FVector& Inches, const FVector2D& Centre)
 }
 
 class SLiveCorePanel;
+class SLiveCoreCameraSurface;
 
 struct FLiveCoreScene
 {
@@ -52,6 +63,7 @@ struct FLiveCoreScene
     TWeakObjectPtr<AWarhammerClientGameMode> Owner;
     TSharedPtr<FLiveCoreSession> Session;
     TSharedPtr<SLiveCorePanel> Panel;
+    TSharedPtr<SLiveCoreCameraSurface> CameraSurface;
     TSharedPtr<SWidget> Overlay;
     TWeakObjectPtr<ACameraActor> Camera;
     TWeakObjectPtr<ADirectionalLight> Light;
@@ -61,9 +73,12 @@ struct FLiveCoreScene
     TArray<TWeakObjectPtr<AActor>> BoardActors;
     FString Endpoint = TEXT("http://127.0.0.1:8765");
     FString SceneError;
+    FString CameraError;
     FString RenderedSession;
     uint64 RenderedProjectionVersion = 0;
     bool bAttached = false;
+    FDelegateHandle ActivationHandle;
+    Warhammer::LiveCore::FTabletopCamera CameraNavigation;
 
     UWorld* World() const { return Owner.IsValid() ? Owner->GetWorld() : nullptr; }
     UGameViewportClient* Viewport() const { return World() ? World()->GetGameViewport() : nullptr; }
@@ -72,6 +87,9 @@ struct FLiveCoreScene
     void Changed();
     void RebuildBoard();
     void Shutdown();
+    void UpdateCameraLayout(const FGeometry& Geometry);
+    void UpdateCamera();
+    void FrameBoard();
 
     void ClearBoard()
     {
@@ -166,7 +184,8 @@ public:
                     {
                         if (!Scene) { return FText::GetEmpty(); }
                         return FText::FromString(State().Error +
-                            (Scene->SceneError.IsEmpty() ? FString() : TEXT("\n") + Scene->SceneError));
+                            (Scene->SceneError.IsEmpty() ? FString() : TEXT("\n") + Scene->SceneError) +
+                            (Scene->CameraError.IsEmpty() ? FString() : TEXT("\n") + Scene->CameraError));
                     })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
                 [SNew(STextBlock).AutoWrapText(true).Text_Lambda([this]()
@@ -195,6 +214,14 @@ public:
                             : FString());
                     })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
+                [SNew(SButton).Text(FText::FromString(TEXT("Frame board")))
+                    .IsEnabled_Lambda([this]() { return Scene && Scene->CameraNavigation.IsReady(); })
+                    .OnClicked_Lambda([this]()
+                    {
+                        if (Scene) { Scene->FrameBoard(); }
+                        return FReply::Handled();
+                    })]
+                + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
                 [SNew(SButton).Text(FText::FromString(TEXT("Refresh viewer state")))
                     .IsEnabled_Lambda([this]() { return State().bHasSession && !State().bBusy && !State().bUnknown; })
                     .OnClicked_Lambda([this]()
@@ -221,7 +248,7 @@ public:
                 [SAssignNew(Options, SVerticalBox)]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 12, 0, 0)
                 [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(
-                    TEXT("Terrain outlines and token appearance are advisory. Unplaced models are not drawn. Camera is fixed; UI clicks submit only the selected Core option.")))
+                    TEXT("Terrain outlines and tokens are advisory. Unplaced models are not drawn. Click the board to focus; RMB drag orbits, MMB drag pans, wheel zooms, F frames. Window resizing reframes.")))
                     .ColorAndOpacity(FLinearColor(0.65f, 0.72f, 0.8f))]
                 ]
             ]
@@ -275,6 +302,135 @@ private:
     TSharedPtr<SVerticalBox> Options;
 };
 
+/** Only this arranged right-hand Slate region owns camera gestures. */
+class SLiveCoreCameraSurface : public SLeafWidget
+{
+public:
+    SLATE_BEGIN_ARGS(SLiveCoreCameraSurface) {} SLATE_END_ARGS()
+    void Construct(const FArguments&, FLiveCoreScene* InScene) { Scene = InScene; SetCanTick(true); }
+    virtual bool SupportsKeyboardFocus() const override { return true; }
+    virtual FVector2D ComputeDesiredSize(float) const override { return FVector2D(100, 100); }
+    virtual void Tick(const FGeometry& G, double, float) override { if (Scene) { Scene->UpdateCameraLayout(G); } }
+    virtual int32 OnPaint(const FPaintArgs&, const FGeometry& G, const FSlateRect&,
+        FSlateWindowElementList& Elements, int32 Layer, const FWidgetStyle&, bool) const override
+    {
+        FSlateDrawElement::MakeText(Elements, Layer, G.ToPaintGeometry(FVector2D(G.GetLocalSize().X, CameraHelpHeight),
+            FSlateLayoutTransform(FVector2D(8, 8))), TEXT("Click board: focus  |  RMB: orbit  MMB: pan  Wheel: zoom  F: frame"),
+            FCoreStyle::GetDefaultFontStyle(TEXT("Regular"), 11), ESlateDrawEffect::None, FLinearColor::White);
+        return Layer + 1;
+    }
+    void Cancel(bool bDeactivate = true)
+    {
+        if (bDeactivate) { Policy.FocusChanged(false); } else { Policy.CaptureLost(); }
+        if (FSlateApplication::IsInitialized() && HasMouseCaptureByUser(CaptureUser, CapturePointer))
+        {
+            const auto User = FSlateApplication::Get().GetUser(CaptureUser);
+            if (User.IsValid()) { User->ReleaseCapture(CapturePointer); }
+        }
+    }
+    void ApplicationActive(bool bActive)
+    {
+        if (!bActive) { Cancel(); }
+        else { Policy.FocusChanged(HasKeyboardFocus()); }
+    }
+    void Detach() { Cancel(); Scene = nullptr; }
+    virtual FReply OnMouseButtonDown(const FGeometry& G, const FPointerEvent& E) override
+    {
+        using namespace Warhammer::Migration::E02;
+        const FKey Button = E.GetEffectingButton();
+        if (Button != EKeys::LeftMouseButton && Button != EKeys::RightMouseButton && Button != EKeys::MiddleMouseButton)
+        { return FReply::Unhandled(); }
+        if (Policy.Snapshot().Capture.IsSet() && !MatchesCapture(E)) { return FReply::Unhandled(); }
+        if (!Scene) { return FReply::Handled(); }
+        Policy.FocusChanged(true);
+        FReply Reply = FReply::Handled().SetUserFocus(SharedThis(this));
+        // Primary click only focuses the camera surface. It never picks, captures or submits.
+        if (Button == EKeys::LeftMouseButton || !Scene->CameraNavigation.IsReady()) { return Reply; }
+        const auto Effect = Policy.Press(Sample(G, E), Button == EKeys::RightMouseButton ? EPointerButton::Secondary : EPointerButton::Middle, {});
+        if (Effect.bAcquireCapture)
+        {
+            CaptureUser = static_cast<int32>(E.GetUserIndex());
+            CapturePointer = static_cast<int32>(E.GetPointerIndex());
+            Reply.CaptureMouse(SharedThis(this));
+        }
+        return Reply;
+    }
+    virtual FReply OnMouseMove(const FGeometry& G, const FPointerEvent& E) override
+    {
+        if (!Scene || !Policy.Snapshot().Capture.IsSet()) { return FReply::Unhandled(); }
+        if (!MatchesCapture(E)) { return FReply::Unhandled(); }
+        if (!HasMouseCaptureByUser(CaptureUser, CapturePointer)) { Policy.FocusChanged(false); return FReply::Handled(); }
+        Apply(Policy.Move(Sample(G, E)));
+        return FReply::Handled();
+    }
+    virtual FReply OnMouseButtonUp(const FGeometry& G, const FPointerEvent& E) override
+    {
+        using namespace Warhammer::Migration::E02;
+        if (Policy.Snapshot().Capture.IsSet() && !MatchesCapture(E)) { return FReply::Unhandled(); }
+        if (E.GetEffectingButton() != EKeys::RightMouseButton && E.GetEffectingButton() != EKeys::MiddleMouseButton)
+        { return FReply::Handled(); }
+        const auto Effect = Policy.Release(Sample(G, E), E.GetEffectingButton() == EKeys::RightMouseButton ? EPointerButton::Secondary : EPointerButton::Middle, {});
+        FReply Reply = FReply::Handled();
+        if (Effect.bReleaseCapture) { Reply.ReleaseMouseCapture(); }
+        return Reply;
+    }
+    virtual FReply OnMouseWheel(const FGeometry& G, const FPointerEvent& E) override
+    {
+        // Editing the endpoint does not silently hand keyboard ownership to the board.
+        if (!Scene || !HasKeyboardFocus()) { return FReply::Unhandled(); }
+        if (Policy.Snapshot().Capture.IsSet() && !MatchesCapture(E)) { return FReply::Unhandled(); }
+        Apply(Policy.Wheel(Sample(G, E), {}, E.GetWheelDelta()));
+        return FReply::Handled();
+    }
+    virtual FReply OnKeyDown(const FGeometry&, const FKeyEvent& E) override
+    {
+        using namespace Warhammer::Migration::E02;
+        if (E.GetKey() == EKeys::Escape)
+        {
+            const auto Effect = Policy.Escape(); FReply Reply = FReply::Handled();
+            if (Effect.bReleaseCapture) { Reply.ReleaseMouseCapture(); }
+            return Reply;
+        }
+        if (Scene && E.GetKey() == EKeys::F && !E.IsControlDown() && !E.IsAltDown() && !E.IsShiftDown() && !E.IsCommandDown())
+        { Apply(Policy.KeyCamera(ECameraAction::FrameBoard)); return FReply::Handled(); }
+        return FReply::Unhandled();
+    }
+    virtual FReply OnFocusReceived(const FGeometry&, const FFocusEvent&) override
+    { Policy.FocusChanged(true); return FReply::Handled(); }
+    virtual void OnFocusLost(const FFocusEvent&) override { Cancel(); }
+    virtual void OnMouseCaptureLost(const FCaptureLostEvent&) override
+    { if (Policy.Snapshot().Capture.IsSet()) { Policy.FocusChanged(false); } }
+private:
+    bool MatchesCapture(const FPointerEvent& E) const
+    { return CaptureUser == static_cast<int32>(E.GetUserIndex()) && CapturePointer == static_cast<int32>(E.GetPointerIndex()); }
+    Warhammer::Migration::E02::FPointerSample Sample(const FGeometry& G, const FPointerEvent& E) const
+    {
+        const FVector2D P = G.AbsoluteToLocal(E.GetScreenSpacePosition());
+        Warhammer::Migration::E02::FPointerSample Value;
+        Value.ScreenPhysical = E.GetScreenSpacePosition(); Value.ViewportPhysical = P; Value.Logical = P;
+        Value.bInsideViewport = P.X >= 0 && P.Y >= CameraHelpHeight && P.X < G.GetLocalSize().X && P.Y < G.GetLocalSize().Y;
+        return Value;
+    }
+    void Apply(const Warhammer::Migration::E02::FInputEffects& Effect)
+    {
+        using namespace Warhammer::Migration::E02;
+        if (!Scene) { return; }
+        switch (Effect.CameraAction)
+        {
+        case ECameraAction::Orbit: Scene->CameraNavigation.Orbit(Effect.LogicalDelta); break;
+        case ECameraAction::Pan: Scene->CameraNavigation.Pan(Effect.LogicalDelta); break;
+        case ECameraAction::Dolly: Scene->CameraNavigation.Zoom(Effect.DollyDelta); break;
+        case ECameraAction::FrameBoard: Scene->FrameBoard(); return;
+        default: return;
+        }
+        Scene->UpdateCamera();
+    }
+    FLiveCoreScene* Scene = nullptr;
+    Warhammer::Migration::E02::FInputPolicy Policy;
+    int32 CaptureUser = 0;
+    int32 CapturePointer = 0;
+};
+
 void FLiveCoreScene::Initialize()
 {
     Cube.Reset(LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube")));
@@ -303,6 +459,8 @@ void FLiveCoreScene::Initialize()
         Component->ProjectionMode = ECameraProjectionMode::Perspective;
         Component->SetFieldOfView(55.0f);
         Component->SetConstraintAspectRatio(false);
+        Component->bOverrideAspectRatioAxisConstraint = true;
+        Component->SetAspectRatioAxisConstraint(AspectRatio_MaintainXFOV);
         auto& Exposure = Component->PostProcessSettings;
         Exposure.bOverride_AutoExposureMethod = true;
         Exposure.AutoExposureMethod = AEM_Manual;
@@ -347,13 +505,17 @@ void FLiveCoreScene::Attach()
     Controller->SetIgnoreLookInput(true);
     if (Camera.IsValid()) { Controller->SetViewTarget(Camera.Get()); }
     Panel = SNew(SLiveCorePanel, this);
-    Overlay = SNew(SOverlay)
-        + SOverlay::Slot().HAlign(HAlign_Left).VAlign(VAlign_Fill)
-        [SNew(SBox).WidthOverride(410)[Panel.ToSharedRef()]];
+    CameraSurface = SNew(SLiveCoreCameraSurface, this);
+    Overlay = SNew(SHorizontalBox)
+        + SHorizontalBox::Slot().AutoWidth()[SNew(SBox).WidthOverride(410)[Panel.ToSharedRef()]]
+        + SHorizontalBox::Slot().FillWidth(1)[CameraSurface.ToSharedRef()];
     Viewport()->AddViewportWidgetContent(Overlay.ToSharedRef(), 10);
     FInputModeUIOnly Input;
     Input.SetWidgetToFocus(Panel);
     Controller->SetInputMode(Input);
+    const TWeakPtr<SLiveCoreCameraSurface> WeakSurface = CameraSurface;
+    ActivationHandle = FSlateApplication::Get().OnApplicationActivationStateChanged().AddLambda([WeakSurface](bool bActive)
+    { if (const auto Surface = WeakSurface.Pin()) { Surface->ApplicationActive(bActive); } });
     bAttached = true;
 }
 
@@ -399,14 +561,11 @@ void FLiveCoreScene::RebuildBoard()
         Disc(DisplayPoint(Model.PositionInches, Centre) + FVector(0, 0, 0.7),
             Model.RadiusInches, 1.4, FLinearColor(0.20f, 0.65f, 0.90f));
     }
-    if (Camera.IsValid())
-    {
-        const double Span = FMath::Max(Size.X, Size.Y) * CmPerInch;
-        // The camera looks up +Y, so a +X aim offset leaves the board beside the left UI.
-        const FVector Target(Span * 0.15, 0, 0);
-        Camera->SetActorLocation(Target + FVector(0, -Span * 0.78, Span * 0.90));
-        Camera->SetActorRotation((Target - Camera->GetActorLocation()).Rotation());
-    }
+    FBox DisplayBounds(FVector(-Size.X * CmPerInch * 0.5, -Size.Y * CmPerInch * 0.5, -2),
+        FVector(Size.X * CmPerInch * 0.5, Size.Y * CmPerInch * 0.5, 2));
+    for (const auto& Actor : BoardActors) { if (Actor.IsValid()) { DisplayBounds += Actor->GetComponentsBoundingBox(true); } }
+    CameraNavigation.SetBounds(DisplayBounds);
+    UpdateCamera();
     RenderedSession = State.SessionId;
     RenderedProjectionVersion = State.ProjectionVersion;
 }
@@ -415,13 +574,58 @@ void FLiveCoreScene::Shutdown()
 {
     Session->OnChanged.Unbind();
     Session->Shutdown();
+    if (FSlateApplication::IsInitialized()) { FSlateApplication::Get().OnApplicationActivationStateChanged().Remove(ActivationHandle); }
+    if (CameraSurface.IsValid()) { CameraSurface->Detach(); }
     if (Panel.IsValid()) { Panel->Detach(); }
     if (Overlay.IsValid() && Viewport()) { Viewport()->RemoveViewportWidgetContent(Overlay.ToSharedRef()); }
     Overlay.Reset();
     Panel.Reset();
+    CameraSurface.Reset();
     ClearBoard();
     if (Camera.IsValid()) { Camera->Destroy(); }
     if (Light.IsValid()) { Light->Destroy(); }
+}
+
+void FLiveCoreScene::UpdateCameraLayout(const FGeometry& G)
+{
+    if (!Viewport() || !Viewport()->Viewport || !Camera.IsValid() || !World()->GetFirstPlayerController()) { return; }
+    const auto ViewportWidget = Viewport()->GetGameViewportWidget();
+    if (!ViewportWidget.IsValid()) { return; }
+    const FGeometry& Root = ViewportWidget->GetCachedGeometry();
+    const FVector2D Logical = Root.GetLocalSize();
+    const FIntPoint Pixels = Viewport()->Viewport->GetSizeXY();
+    if (Logical.X <= 0 || Logical.Y <= 0 || Pixels.X <= 0 || Pixels.Y <= 0) { return; }
+    const FVector2D Scale(Pixels.X / Logical.X, Pixels.Y / Logical.Y);
+    const FVector2D Min = Root.AbsoluteToLocal(G.LocalToAbsolute(FVector2D(0, CameraHelpHeight)));
+    const FVector2D Max = Root.AbsoluteToLocal(G.LocalToAbsolute(G.GetLocalSize()));
+    FSceneViewProjectionData Data;
+    ULocalPlayer* Player = World()->GetFirstPlayerController()->GetLocalPlayer();
+    if (!Player || !Player->GetProjectionData(Viewport()->Viewport, Data) || !Data.IsValidViewRectangle()) { return; }
+    if (!Data.IsPerspectiveProjection() || Data.GetConstrainedViewRect().Min != FIntPoint::ZeroValue || Data.GetConstrainedViewRect().Size() != Pixels)
+    { CameraError = TEXT("Camera: a full single-player perspective viewport is required."); return; }
+    Warhammer::LiveCore::FCameraLayout Layout;
+    Layout.ViewportPixels = FVector2D(Pixels); Layout.PixelsPerLogicalUnit = Scale.Y;
+    Layout.SurfacePixels = FBox2D(Min * Scale, Max * Scale);
+    Layout.NearClipCm = Data.GetNearPlaneFromProjectionMatrix();
+    const auto& Previous = CameraNavigation.GetLayout();
+    if (CameraSurface.IsValid() && (!Previous.ViewportPixels.Equals(Layout.ViewportPixels, 0.1) ||
+        !Previous.SurfacePixels.Min.Equals(Layout.SurfacePixels.Min, 0.1) || !Previous.SurfacePixels.Max.Equals(Layout.SurfacePixels.Max, 0.1) ||
+        !FMath::IsNearlyEqual(Previous.PixelsPerLogicalUnit, Layout.PixelsPerLogicalUnit, 1.e-6)))
+    { CameraSurface->Cancel(false); }
+    CameraNavigation.SetLayout(Layout);
+    CameraError = CameraNavigation.GetError(); UpdateCamera();
+}
+
+void FLiveCoreScene::UpdateCamera()
+{
+    if (Camera.IsValid() && CameraNavigation.IsReady())
+    { Camera->SetActorLocationAndRotation(CameraNavigation.GetLocation(), CameraNavigation.GetRotation()); }
+}
+
+void FLiveCoreScene::FrameBoard()
+{
+    if (CameraNavigation.FrameBoard()) { UpdateCamera(); }
+    CameraError = CameraNavigation.GetError();
 }
 
 AWarhammerClientGameMode::AWarhammerClientGameMode()
