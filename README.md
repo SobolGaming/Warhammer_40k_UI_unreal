@@ -8,20 +8,20 @@ Read [architecture.md](architecture.md) for the source-tree map, component bound
 
 The current preview can connect/create a real Core session, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. It remains player-a/setup-choice only; full deployment, movement, turns and complete gameplay are still being developed. Arcade parity is the initial useful milestone. The ultimate goal is all capabilities supported by the latest explicitly selected Core, including public/editor/data/service features beyond Arcade and faithful presentation of automatic rules.
 
-The tested runtime remains Core `5f509724da25a2f6ded0c2739a8e7c84bdf59c91` / **44.3.33**. Fetched development source `4f9bef0df2fb974d1285232a1009b8781926361d` / **44.5.0**, from open unmerged Core PR #591, is a planning/adoption candidate. It has not replaced this runtime or inherited its test results. See the [source capability inventory](docs/plans/research/2026-10-24-latest-core-capabilities.md).
+P1c explicitly adopts Core `4f9bef0df2fb974d1285232a1009b8781926361d` / **44.5.0**, from open, unmerged [Core PR #591](https://github.com/SobolGaming/Warhammer_40k_AI/pull/591). Runtime preparation, current client checks and exact limits are tracked separately in the [canonical plan](docs/plans/unreal-migration-plan.md). The previous44.3.33 environment/preview remain available through explicit `-CoreVersion 44.3.33` with the old executable. See the [source capability inventory](docs/plans/research/2026-10-24-latest-core-capabilities.md).
 
 Run every command below from the `Warhammer_40k_UI_unreal` repository root. Complete [first-time setup and build](#first-time-setup-and-build) once before using the routine launch commands.
 
 ### Windows: routine launch
 
-On this workstation, the prepared Core environment already exists. Keep the complete runnable Windows folder together outside the source checkout. In **PowerShell 7**, replace this absolute example with your copied folder's nested executable:
+Prepare the separate44.5 Core environment once using the [setup command](docs/development/core-startup.md#prepare-a-fresh-native-windows-core-environment). Keep the complete runnable Windows folder together outside the source checkout. In **PowerShell 7**, replace this absolute example with your copied folder's nested executable:
 
 ```powershell
 $taskExe = 'C:\path\to\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
 & ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $taskExe
 ```
 
-This starts the existing checked-out development Core hidden, waits for authenticated readiness, then opens the client. Close the client window normally to stop that exact managed Core. It does not build or install anything.
+This starts the separately prepared exact-source development Core hidden, waits for authenticated readiness, then opens the client. Close the client window normally to stop that exact managed Core. It does not build or install anything.
 
 For an already running Core, keep it running and use:
 
@@ -29,7 +29,7 @@ For an already running Core, keep it running and use:
 & ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe
 ```
 
-**Fresh Windows machines:** a new pip-installed environment does not create the prepared Managed provenance. Use the [foreground Core + Attach route](docs/development/core-startup.md#windows-foreground-core-and-attach) after setting up your own native environment.
+**Fresh Windows machines:** use `Prepare-CoreDevelopmentRuntime.ps1` with an installed native Python3.14 interpreter and the selected source object. A plain pip install instead uses the [foreground Core + Attach route](docs/development/core-startup.md#windows-foreground-core-and-attach); it does not create Managed provenance.
 
 For Editor development, omit `-ClientExecutable`:
 
@@ -44,11 +44,11 @@ $env:UE_ROOT = 'D:\Unreal\UE_5.8'
 & ./scripts/Start-Client.ps1 -CoreMode Managed -EngineRoot $env:UE_ROOT
 ```
 
-The PowerShell launcher does not automatically read `UE_ROOT`. Its other options are `-CoreRoot` (default sibling `../Warhammer_40k_AI`), `-Port` (default 8765), `-Endpoint` for Attach, and `-ReadinessSeconds` (default 60, maximum 120) for Managed startup. These examples use the **Editor route**; add `-ClientExecutable $taskExe` to select your packaged executable instead:
+The PowerShell launcher does not automatically read `UE_ROOT`. Its other options are `-CoreVersion` (default44.5.0, retained44.3.33), `-CoreRoot` (default `.local/core-source-44.5.0` for44.5), `-Port` (default 8765), `-Endpoint` for Attach, and `-ReadinessSeconds` (default 60, maximum 120) for Managed startup. These examples use the **Editor route**; add `-ClientExecutable $taskExe` to select your packaged executable instead:
 
 ```powershell
-& ./scripts/Start-Client.ps1 -CoreMode Managed -CoreRoot '../Warhammer_40k_AI' -Port 8766 -ReadinessSeconds 120
-& ./scripts/Start-Client.ps1 -CoreMode Attach -CoreRoot '../Warhammer_40k_AI' -Endpoint 'http://127.0.0.1:8766/'
+& ./scripts/Start-Client.ps1 -CoreMode Managed -CoreRoot '.local/core-source-44.5.0' -Port 8766 -ReadinessSeconds 120
+& ./scripts/Start-Client.ps1 -CoreMode Attach -CoreRoot '.local/core-source-44.5.0' -Endpoint 'http://127.0.0.1:8766/'
 ```
 
 Current client endpoints must be **`http://127.0.0.1:<port>`**, optionally with a trailing slash. HTTPS, IPv6, hostnames, other addresses, URL paths and credentials in URLs are unsupported by the current client.
@@ -118,7 +118,7 @@ All Linux setup, compilation, Core startup, client input/rendering and packaging
 After the native Linux setup/build below, open two terminals in this repository. In terminal 1, run the existing Core in the foreground:
 
 ```bash
-task_core="$(realpath ../Warhammer_40k_AI)"
+task_core="$PWD/.local/core-source-44.5.0"
 task_python="$PWD/.local/core-dev-linux/bin/python"
 "$task_python" -I -B "$task_core/scripts/run_phase18m_reference_server.py" \
   --host 127.0.0.1 --port 8765
@@ -129,7 +129,7 @@ Wait for that process's own `Serving Phase 18M reference contract at http://127.
 ```bash
 export UE_ROOT=/absolute/path/to/native/UE_5.8
 "$PWD/.local/core-dev-linux/bin/python" -I -B ./scripts/Start-Client.py \
-  --engine-root "$UE_ROOT" --core-root ../Warhammer_40k_AI \
+  --engine-root "$UE_ROOT" --core-root .local/core-source-44.5.0 \
   --endpoint http://127.0.0.1:8765
 ```
 
@@ -198,7 +198,7 @@ Additional startup/authentication details and **Python Core installation** recip
 
 ## Related projects
 
-- [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Tested runtime `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract 44.3.33, Python package `warhammer40k-core-v2`. Development 44.5.0 is an unmerged source planning target, not the checked-out/tested runtime.
+- [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Python package `warhammer40k-core-v2`. P1c selects unmerged4f9 /44.5.0 in a separate source/runtime; the reference checkout and preserved preview remain5f509 /44.3.33.
 - [Warhammer_40k_UI_arcade](../Warhammer_40k_UI_arcade/README.md): existing Arcade client and behavioral/configuration reference; [original migration plan](../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md).
 - `Warhammer_40k_UI` is the owner's reference name mapped to that local Arcade checkout. [Import provenance](docs/plans/unreal-migration-plan-through-r146.md#repository-routes-and-provenance) records the mapping.
 

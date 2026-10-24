@@ -44,7 +44,7 @@ function Invoke-LauncherCase([hashtable]$Arguments, [hashtable]$Faults = @{}, [s
     $global:WarhammerStartClientTestProbe = [pscustomobject]@{
         HostCalls = 0; StopCalls = 0; LaunchCalls = 0; WaitCalls = 0; DisposeCalls = 0
         HostFails = $false; LaunchFails = $false; WaitFails = $false; DisposeFails = $false; StopFails = $false; ExitCode = 0
-        Mode = ''; Port = 0; Endpoint = ''; CoreRoot = ''; ReadinessSeconds = 0
+        Mode = ''; Port = 0; Endpoint = ''; CoreRoot = ''; CoreVersion = ''; ReadinessSeconds = 0
         FilePath = ''; Arguments = ''; WorkingDirectory = ''; WindowStyle = ''; StoppedReceipt = ''
     }
     foreach ($name in $Faults.Keys) { $global:WarhammerStartClientTestProbe.$name = $Faults[$name] }
@@ -73,10 +73,10 @@ try {
     $launchCommands = @($ast.FindAll({ param($node) $node -is [Management.Automation.Language.CommandAst] -and $node.GetCommandName() -eq 'Start-Process' }, $true))
     Assert-True ($parseErrors.Count -eq 0 -and $launchCommands.Count -eq 1) 'Unexpected launcher process seam'
     $startStub = @'
-param($Mode, $Port, $Endpoint, $CoreRoot, $ReadinessSeconds)
+param($Mode, $Port, $Endpoint, $CoreRoot, $CoreVersion, $ReadinessSeconds)
 $probe = $global:WarhammerStartClientTestProbe
 $probe.HostCalls++; $probe.Mode = $Mode; $probe.Port = $Port
-$probe.Endpoint = $Endpoint; $probe.CoreRoot = $CoreRoot; $probe.ReadinessSeconds = $ReadinessSeconds
+$probe.Endpoint = $Endpoint; $probe.CoreRoot = $CoreRoot; $probe.CoreVersion = $CoreVersion; $probe.ReadinessSeconds = $ReadinessSeconds
 # The actual helper can initialize credentials before either success or failure.
 foreach ($name in @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')) {
     [Environment]::SetEnvironmentVariable($name, ('stub-helper-' + $name), 'Process')
@@ -110,6 +110,7 @@ if ($global:WarhammerStartClientTestProbe.StopFails) { throw 'Synthetic Core sto
     Assert-True ($probe.FilePath -ceq $editor -and $probe.WorkingDirectory -ceq $sourceRoot) 'Editor selection or CWD changed'
     Assert-True ($probe.Arguments -ceq ('"' + $project + '" "-game" "-windowed" "-CoreUrl=http://127.0.0.1:8765/"')) 'Editor argument vector changed'
     Assert-True ($probe.HostCalls -eq 1 -and $probe.Mode -eq 'Managed' -and $probe.ReadinessSeconds -eq 30 -and $probe.CoreRoot -ceq 'synthetic Core with spaces') 'Core startup arguments changed'
+    Assert-True ($probe.CoreVersion -ceq '44.5.0') 'Default launcher must explicitly select the new Core profile'
     Assert-True ($probe.WaitCalls -eq 1 -and $probe.DisposeCalls -eq 1 -and $probe.StopCalls -eq 1 -and $probe.StoppedReceipt -ceq 'synthetic-owned-receipt') 'Owned Editor lifecycle changed'
 
     # Packaged selection works without either Editor or project files.
@@ -119,6 +120,9 @@ if ($global:WarhammerStartClientTestProbe.StopFails) { throw 'Synthetic Core sto
     Assert-True ($probe.FilePath -ceq $packaged -and $probe.WorkingDirectory -ceq (Split-Path $packaged -Parent)) 'Packaged path or CWD is wrong'
     Assert-True ($probe.Arguments -ceq '"-windowed" "-CoreUrl=http://127.0.0.1:8765/"') 'Packaged arguments include Editor-only values'
     Assert-True ($probe.StopCalls -eq 1 -and $probe.StoppedReceipt -ceq 'synthetic-owned-receipt') 'Packaged Managed Core was not stopped'
+
+    $probe = Invoke-LauncherCase @{ ClientExecutable = $packaged; CoreVersion = '44.3.33' }
+    Assert-True ($probe.CoreVersion -ceq '44.3.33' -and $probe.StopCalls -eq 1) 'Retained preview profile was not propagated'
 
     $probe = Invoke-LauncherCase @{ ClientExecutable = $nested; CoreMode = 'Attach'; Endpoint = [uri]'http://127.0.0.1:8765/' }
     Assert-True ($probe.FilePath -ceq $nested -and $probe.WorkingDirectory -ceq (Split-Path $nested -Parent)) 'Nested packaged binary path or CWD is wrong'

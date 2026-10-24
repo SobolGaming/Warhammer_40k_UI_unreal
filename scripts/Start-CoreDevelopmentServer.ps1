@@ -4,7 +4,8 @@ param(
     [ValidateSet('Managed', 'Attach')][string]$Mode = 'Managed',
     [ValidateRange(1024, 65535)][int]$Port = 8765,
     [uri]$Endpoint,
-    [string]$CoreRoot = (Join-Path $PSScriptRoot '../../Warhammer_40k_AI'),
+    [ValidateSet('44.5.0', '44.3.33')][string]$CoreVersion = '44.5.0',
+    [string]$CoreRoot,
     [ValidateRange(5, 120)][int]$ReadinessSeconds = 60
 )
 
@@ -13,8 +14,11 @@ $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $hostRoot = Join-Path $repo '.local/development/core-host'
-$expectedCommit = '5f509724da25a2f6ded0c2739a8e7c84bdf59c91'
-$expectedBuild = 'warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a'
+. (Join-Path $PSScriptRoot 'CoreRuntimeProfile.ps1')
+$runtimeProfile = Get-CoreRuntimeProfile $CoreVersion
+$expectedCommit = $runtimeProfile.commit
+$expectedBuild = $runtimeProfile.build
+if (!$CoreRoot) { $CoreRoot = $runtimeProfile.sourceRoot }
 $utf8 = [Text.UTF8Encoding]::new($false, $true)
 
 function Resolve-CoreEndpoint([uri]$Requested, [string]$RequestedMode, [int]$RequestedPort) {
@@ -136,7 +140,7 @@ if ($Mode -eq 'Managed' -and !$IsWindows) { throw 'The prepared managed runtime 
 $git = (Get-Command git -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
 $gitOptions = @('--no-optional-locks', '-c', 'core.fsmonitor=false', '-c', 'core.untrackedCache=false', '-c', 'core.hooksPath=NUL', '-C', $CoreRoot)
 $head = @(& $git @gitOptions rev-parse HEAD 2>&1)
-if ($LASTEXITCODE -ne 0 -or $head.Count -ne 1 -or $head[0] -cne $expectedCommit) { throw 'Core checkout must be at the selected 5f509724 commit.' }
+if ($LASTEXITCODE -ne 0 -or $head.Count -ne 1 -or $head[0] -cne $expectedCommit) { throw ('Core checkout must be at selected ' + $CoreVersion + ' commit ' + $expectedCommit + '. Prepare its separate source or pass a matching CoreRoot.') }
 $changes = @(& $git @gitOptions status --porcelain=v1 --untracked-files=normal 2>&1)
 if ($LASTEXITCODE -ne 0 -or $changes.Count) { throw 'Core checkout must be clean; this helper never resets or changes it.' }
 
@@ -176,17 +180,20 @@ try {
         $old = Get-Content -LiteralPath $previous.receiptPath -Raw | ConvertFrom-Json -AsHashtable
         if ($old.status -cnotin @('STOPPED', 'START_FAILED_CLEANED')) { throw 'A managed receipt is still active or uncertain. Stop it explicitly before starting another server.' }
     }
-    $runtime = Join-Path $repo '.local/core-44.3.33'
+    $runtime = $runtimeProfile.runtimeRoot
     Assert-PlainPath $runtime
     $python = Join-Path $runtime 'Scripts/python.exe'
-    if ((Get-FileHash -LiteralPath $python -Algorithm SHA256).Hash -cne '8E0C2B85DAD09707B0DC6A9561F8E7AF0C303A59F9C00A6C0FE6E5829B48018E') { throw 'Prepared runtime Python identity differs; no runtime is installed automatically.' }
-    $provenance = Get-Content -LiteralPath (Join-Path $runtime '.e01-provenance.json') -Raw | ConvertFrom-Json -AsHashtable -Depth 100
+    $provenance = Get-Content -LiteralPath (Join-Path $runtime $runtimeProfile.provenanceLeaf) -Raw | ConvertFrom-Json -AsHashtable -Depth 100
     if ($provenance.status -cne 'INSTALLED_RUNTIME_PASS' -or $provenance.coreCommit -cne $expectedCommit -or $provenance.runtimeBuildId -cne $expectedBuild) { throw 'Prepared Core runtime provenance differs.' }
+    $expectedPythonHash = if ($runtimeProfile.legacyProvenance) { '8E0C2B85DAD09707B0DC6A9561F8E7AF0C303A59F9C00A6C0FE6E5829B48018E' } else { $provenance.pythonSha256 }
+    if ((Get-FileHash -LiteralPath $python -Algorithm SHA256).Hash -cne $expectedPythonHash) { throw 'Prepared runtime Python identity differs; no runtime is installed automatically.' }
     $config = [IO.File]::ReadAllText((Join-Path $runtime 'pyvenv.cfg'))
     $baseHome = [regex]::Match($config, '(?m)^home = (.+)\r?$')
     if (!$baseHome.Success) { throw 'Prepared runtime base interpreter is not recorded.' }
     $basePython = Join-Path ($baseHome.Groups[1].Value.Trim()) 'python.exe'
-    if ((Get-FileHash -LiteralPath $basePython -Algorithm SHA256).Hash -cne '5556F2048A17B14693FFADEB25DC0ADD537933873CEE2CA623CF981CA65A6168') { throw 'Prepared runtime base interpreter changed.' }
+    $expectedBaseHash = if ($runtimeProfile.legacyProvenance) { '5556F2048A17B14693FFADEB25DC0ADD537933873CEE2CA623CF981CA65A6168' } else { $provenance.basePythonSha256 }
+    if ((Get-FileHash -LiteralPath $basePython -Algorithm SHA256).Hash -cne $expectedBaseHash) { throw 'Prepared runtime base interpreter changed.' }
+    if (!$runtimeProfile.legacyProvenance -and ($provenance.runtimeResourceCount -ne $runtimeProfile.resourceCount -or !$provenance.referenceUnchanged -or $provenance.runtimeRoot -ine $runtime)) { throw 'Prepared runtime resource/path provenance differs.' }
     # Availability probe only; Core #589 still limits late Windows co-bind exclusivity.
     $probe = [Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, $Port)
     try { $probe.Server.ExclusiveAddressUse = $true; $probe.Start() } finally { $probe.Stop() }
@@ -199,27 +206,27 @@ try {
     $bootstrapPath = Join-Path $runRoot 'bootstrap.py'
     $bootstrap = @'
 import json, os, pathlib, runpy, sys
-runtime, launcher, build, port, shutdown, nonce = sys.argv[1:]
+runtime, launcher, build, count, version, port, shutdown, nonce = sys.argv[1:]
 print('WH_CORE_HOST_IDENTITY ' + json.dumps({'nonce': nonce, 'pid': os.getpid(), 'parentPid': os.getppid(), 'baseExecutable': sys._base_executable}), flush=True)
-if sys.version_info[:3] != (3, 14, 5) or pathlib.Path(sys.prefix).resolve() != pathlib.Path(runtime).resolve():
+if sys.version_info[:2] != (3, 14) or (version == '44.3.33' and sys.version_info[:3] != (3, 14, 5)) or pathlib.Path(sys.prefix).resolve() != pathlib.Path(runtime).resolve():
     raise RuntimeError('Prepared interpreter identity differs')
 import warhammer40k_core
 if not pathlib.Path(warhammer40k_core.__file__).resolve().is_relative_to(pathlib.Path(runtime).resolve()):
     raise RuntimeError('Core resolved outside prepared runtime')
 from warhammer40k_core.build_identity import verified_engine_build_identity
 identity = verified_engine_build_identity()
-if identity.build_id != build or identity.resource_count != 3116:
+if identity.build_id != build or identity.resource_count != int(count):
     raise RuntimeError('Prepared Core build identity differs')
 print('WH_CORE_RUNTIME_VERIFIED ' + build, flush=True)
 sys.argv = [launcher, '--host', '127.0.0.1', '--port', port, '--shutdown-file', shutdown]
 runpy.run_path(launcher, run_name='__main__')
 '@
     [IO.File]::WriteAllText($bootstrapPath, $bootstrap + "`n", $utf8)
-    $arguments = @('-I', '-B', '-u', $bootstrapPath, $runtime, (Join-Path $CoreRoot 'scripts/run_phase18m_reference_server.py'), $expectedBuild, [string]$Port, $shutdown, $nonce)
+    $arguments = @('-I', '-B', '-u', $bootstrapPath, $runtime, (Join-Path $CoreRoot 'scripts/run_phase18m_reference_server.py'), $expectedBuild, [string]$runtimeProfile.resourceCount, $CoreVersion, [string]$Port, $shutdown, $nonce)
     $quoted = @($arguments | ForEach-Object { if ($_.Contains('"') -or $_.EndsWith('\')) { throw 'Unsupported quote/trailing separator in launch argument.' }; '"' + $_ + '"' }) -join ' '
     $launcher = Start-Process -FilePath $python -ArgumentList $quoted -WorkingDirectory $runRoot -WindowStyle Hidden -RedirectStandardOutput $stdout -RedirectStandardError $stderr -PassThru
     $null = $launcher.SafeHandle
-    $receipt = [ordered]@{ recordKind = 'WARHAMMER_CORE_DEVELOPMENT_HOST'; mode = 'Managed'; owned = $true; status = 'STARTING'; endpoint = $Endpoint.AbsoluteUri; coreCommit = $expectedCommit; contractVersion = '44.3.33'; runtimeBuildId = $expectedBuild; runRoot = $runRoot; nonce = $nonce; launcher = (Get-OwnedIdentity $launcher); server = $null; expectedServerExecutable = $basePython; shutdownFile = $shutdown; stdout = $stdout; stderr = $stderr; createdUtc = [DateTime]::UtcNow.ToString('o'); portExclusivity = 'Prelaunch availability probe only; Core #589 remains.' }
+    $receipt = [ordered]@{ recordKind = 'WARHAMMER_CORE_DEVELOPMENT_HOST'; mode = 'Managed'; owned = $true; status = 'STARTING'; endpoint = $Endpoint.AbsoluteUri; coreCommit = $expectedCommit; contractVersion = $CoreVersion; runtimeBuildId = $expectedBuild; runtimeResourceCount = $runtimeProfile.resourceCount; runRoot = $runRoot; nonce = $nonce; launcher = (Get-OwnedIdentity $launcher); server = $null; expectedServerExecutable = $basePython; shutdownFile = $shutdown; stdout = $stdout; stderr = $stderr; createdUtc = [DateTime]::UtcNow.ToString('o'); portExclusivity = 'Prelaunch availability probe only; Core #589 remains.' }
     Write-Receipt $receiptPath $receipt
     Write-Receipt $current ([ordered]@{ receiptPath = $receiptPath })
     $clock = [Diagnostics.Stopwatch]::StartNew()

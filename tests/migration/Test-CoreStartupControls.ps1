@@ -110,6 +110,7 @@ try {
         $receipt = $null; $receiptPath = Join-Path $scratch 'inert-receipt.json'
         $shutdown = Join-Path $scratch ('shutdown-' + [guid]::NewGuid().ToString('N'))
         $Endpoint = [uri]'http://127.0.0.1:8765/'; $expectedCommit = 'synthetic'; $expectedBuild = 'synthetic'
+        $CoreVersion = 'synthetic'; $runtimeProfile = [pscustomobject]@{ resourceCount = 0 }
         $runRoot = $scratch; $nonce = 'synthetic'; $basePython = 'inert-python.exe'; $stdout = 'inert'; $stderr = 'inert'
         $caught = $null
         try {

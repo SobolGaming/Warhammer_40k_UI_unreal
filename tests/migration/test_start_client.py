@@ -19,6 +19,17 @@ SPEC.loader.exec_module(launcher)
 
 
 class ManualClientTests(unittest.TestCase):
+    def test_runtime_profiles_remain_distinct_exact_snapshots(self):
+        self.assertEqual(launcher.CORE_COMMIT, "4f9bef0df2fb974d1285232a1009b8781926361d")
+        self.assertEqual(launcher.CORE_PROFILES["44.5.0"][2], 3130)
+        self.assertEqual(launcher.CORE_PROFILES["44.3.33"][0], "5f509724da25a2f6ded0c2739a8e7c84bdf59c91")
+        self.assertNotEqual(launcher.CORE_PROFILES["44.3.33"][1], launcher.CORE_BUILD)
+
+    def test_explicit_older_profile_reaches_runtime_check_before_launch(self):
+        with patch.object(launcher, "packaged_path", return_value=Path("synthetic.exe")), patch.object(launcher, "verify_installed_core") as check, patch.object(launcher, "development_environment", return_value={}), patch.object(launcher.subprocess, "run", return_value=subprocess.CompletedProcess([], 0)), contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(launcher.main(["--client-executable", "synthetic.exe", "--endpoint", "http://127.0.0.1:8765", "--core-version", "44.3.33"]), 0)
+        check.assert_called_once_with("44.3.33")
+
     def test_origin_validation_refuses_remote_and_embedded_values(self):
         self.assertEqual(launcher.local_endpoint("http://127.0.0.1:8765/"), "http://127.0.0.1:8765")
         self.assertEqual(launcher.local_endpoint("http://127.0.0.1:08765/"), "http://127.0.0.1:8765")
@@ -59,7 +70,8 @@ class ManualClientTests(unittest.TestCase):
             editor.touch()
             events = []
             environment = {"WH_CORE_ADMIN_TOKEN": "synthetic_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_player"}
-            def checked():
+            def checked(version):
+                self.assertEqual(version, "44.5.0")
                 events.append("runtime")
             def prepared(endpoint):
                 self.assertEqual(events, ["runtime"])
@@ -89,7 +101,8 @@ class ManualClientTests(unittest.TestCase):
             executable.touch()
             environment = {"WH_CORE_ADMIN_TOKEN": "synthetic_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_player"}
             events = []
-            def checked():
+            def checked(version):
+                self.assertEqual(version, "44.5.0")
                 events.append("runtime")
             def prepared(endpoint):
                 self.assertEqual(events, ["runtime"])

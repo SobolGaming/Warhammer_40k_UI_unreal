@@ -8,7 +8,7 @@ This document owns scope, priorities, baselines, milestone checklists and featur
 
 ## Current bounded increment: P1c Core 44.5 adoption
 
-Branch: `codex/p1c-core-44-5-adoption`, from verified PR #5 merge `062863c1a13b6fb5597ec360b1e2f4510f5a0860` (2026-10-24T18:43:15Z). The owner authorized that normal-gates merge and a separate next-milestone PR. GitHub reported MERGEABLE/CLEAN before merging, with no remote checks/formal reviews; retained independent local reviews and actual bounded results remain scoped to P1b.
+Branch: `codex/p1c-core-44-5-adoption`, [PR #6](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/6), from verified PR #5 merge `062863c1a13b6fb5597ec360b1e2f4510f5a0860` (2026-10-24T18:43:15Z). The owner authorized that normal-gates merge and a separate next-milestone PR. GitHub reported MERGEABLE/CLEAN before merging, with no remote checks/formal reviews; retained independent local reviews and actual bounded results remain scoped to P1b.
 
 This PR adopts exact Core `4f9bef0df2fb974d1285232a1009b8781926361d`, contract44.5.0, from `codex/static-successor48` / [Core PR #591](https://github.com/SobolGaming/Warhammer_40k_AI/pull/591). A fresh fetch on 2026-10-24 confirmed this selection, upstream PR still OPEN/unmerged and main/reference checkout still clean at5f509. Runtime build ID ends `0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba`, resource count3130. The [source-delta inventory](research/2026-10-24-latest-core-capabilities.md) supplies the adaptation inputs. This is an explicit development-source adoption, not a release/Core-merge claim.
 
@@ -19,7 +19,7 @@ Implementation:
 - [x] Merge PR #5 at its verified head and start a separate branch from the exact merge.
 - [x] Fetch/freeze the selected Core branch/SHA/contract/unmerged status without changing the reference checkout.
 - [ ] Prepare a separate exact-source Python runtime, canonical data and explicit launch selection; preserve the old runtime/preview.
-- [ ] Adapt selected client identity/resources and optional public-roster projection, retaining viewer disclosure and physical IDs.
+- [x] Adapt selected client identity/resources and optional public-roster projection, retaining viewer disclosure and physical IDs. The narrow typed DTO keeps original selection/bearer IDs and nullable attachment/cargo disclosure; points/options/composition/roster rendering and physical-instance joins remain later work. Native checks and independent review are separate below.
 
 Verification:
 
