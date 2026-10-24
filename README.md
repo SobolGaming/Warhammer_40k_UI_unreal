@@ -1,77 +1,160 @@
 # Warhammer 40k Unreal client
 
-C++ first 3D Unreal client for the external Python rules Core. The active goal is a board connected to a real Core session, one player action and its authoritative visible result. Follow the [migration checklist](docs/plans/unreal-migration-plan.md).
+A C++ first 3D client for the separate authoritative Python Core. This is a personal/internal development preview, launched through **UnrealEditor**, not a packaged game.
 
-The default GameMode has a live HTTP session adapter, board and offered-choice UI. The [bounded visible setup check](docs/plans/evidence/2026-10-23-live-core-visible.md) at `4dacce3` (runtime `ca315fb`) created a real session, displayed player-a's board, submitted a mouse-selected offered secondary-mission choice and showed Core's accepted/committed result at revision 2. The Windows build, ten focused native checks and affected independent CODE/requirements reviews had passed. The visible run also exposed a startup-focus error and cropped board edge. [Focus repair `d2c242d`](docs/plans/evidence/2026-10-23-live-core-focus-repair.json) passed compile/link, fresh affected CODE/requirements reviews and non-graphical GameMode startup; rendered navigation has not been repeated. This is personal/internal development and one local setup interaction. Linux x86-64 builds/rendering/packages remain **UNTESTED**.
+## Get started playing
 
-The owner-approved single visible test is complete. Future agent desktop tests need applicable approval; the owner permits relaying approvals from another chat until revoked, with their original bounds preserved. Every checkpoint is committed, pushed and exact-ref verified in [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3), which stays open without merge.
+The current preview can connect/create a real Core session, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. Full deployment, movement, turns and complete gameplay are still being developed.
 
-## Related projects
+Run every command below from the `Warhammer_40k_UI_unreal` repository root. Complete [first-time setup and build](#first-time-setup-and-build) once before using the routine launch commands.
 
-- [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Selected commit `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract44.3.33.
-- [Warhammer_40k_UI_arcade](../Warhammer_40k_UI_arcade/README.md): existing Arcade client and semantic reference; [original migration plan](../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md).
-- `Warhammer_40k_UI`: the owner request's UI reference name, mapped by the original import to the local Arcade client above; no separate checkout here. See [historical provenance](docs/plans/unreal-migration-plan-through-r146.md#repository-routes-and-provenance).
+### Windows: routine launch
 
-## Start the client
-
-Run in PowerShell 7 from this repository:
+On this workstation, the prepared Core environment and Editor build already exist. In **PowerShell 7**:
 
 ```powershell
 & ./scripts/Start-Client.ps1 -CoreMode Managed
-# Or attach to the already running development service:
-& ./scripts/Start-Client.ps1 -CoreMode Attach
 ```
 
-The managed route launches the existing checked-out Core server hidden, verifies its own readiness, supplies development credentials only through process environment and opens the client. Closing the client stops only that owned server. Attach leaves the existing service running. See [startup and runtime details](docs/development/core-startup.md).
+This starts the existing checked-out development Core hidden, waits for authenticated readiness, then opens the client. Close the client window normally to stop that exact managed Core. It does not build or install anything.
 
-The client starts disconnected with a black viewport. Activate **Connect / create session**, then choose a Core-offered secondary-mission option and use **Refresh** to reread the result. In the observed run, Tab/Space activated Connect after the endpoint field received focus; the offered choice and Refresh were clicked with the mouse. The panel showed revision 2, the selected missions and accepted/committed outcome while the next player's private options stayed hidden. The logged non-focusable-widget error prompted the separate focus repair above. Camera is fixed, the near board edge was cropped at 3840×2160, terrain uses advisory outlines and undeployed models are omitted. Full deployment/movement and responsive camera framing remain later work.
-
-If a command response is lost or unusable, the client blocks new actions and offers **Reconcile unknown command**, sending the same retained envelope/ID. This retained state is in memory only; restart recovery and actual response-loss injection remain unverified. Unknown session creation cannot be retried safely. Actual HTTP codes/messages and diagnostic fidelity gaps are shown explicitly.
-
-## Windows build
-
-Existing toolchain: UE5.8.3/CL58210709 at `C:\Program Files\Epic Games\UE_5.8`, VS2022 17.14, MSVC14.44.35229 (folder14.44.35207), Windows SDK10.0.22621.0, Unreal bundled .NET10.0.203. VS Code is the chosen editor. No new installation is needed.
-
-Run in PowerShell from this repository:
+For an already running Core, keep it running and use:
 
 ```powershell
-$taskUeRoot = 'C:\Program Files\Epic Games\UE_5.8'
+& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/'
+```
+
+**Fresh Windows machines:** a new pip-installed environment does not create the prepared Managed provenance. Use the [foreground Core + Attach route](docs/development/core-startup.md#windows-foreground-core-and-attach) after setting up your own native environment.
+
+The default engine location is `C:\Program Files\Epic Games\UE_5.8`. To use another installation, optionally set its location once in your shell and explicitly pass it to the PowerShell launcher:
+
+```powershell
+$env:UE_ROOT = 'D:\Unreal\UE_5.8'
+& ./scripts/Start-Client.ps1 -CoreMode Managed -EngineRoot $env:UE_ROOT
+```
+
+The PowerShell launcher does not automatically read `UE_ROOT`. Its other options are `-CoreRoot` (default sibling `../Warhammer_40k_AI`), `-Port` (default 8765), `-Endpoint` for Attach, and `-ReadinessSeconds` (default 60, maximum 120) for Managed startup. For example:
+
+```powershell
+& ./scripts/Start-Client.ps1 -CoreMode Managed -CoreRoot '../Warhammer_40k_AI' -Port 8766 -ReadinessSeconds 120
+& ./scripts/Start-Client.ps1 -CoreMode Attach -CoreRoot '../Warhammer_40k_AI' -Endpoint 'http://127.0.0.1:8766/'
+```
+
+Current client endpoints must be **`http://127.0.0.1:<port>`**, optionally with a trailing slash. HTTPS, IPv6, hostnames, other addresses, URL paths and credentials in URLs are unsupported by the current client.
+
+### In the window
+
+1. A black viewport before connection is expected. Click **Connect / create session**.
+2. Once the Core projection arrives, select one of the **Core-offered secondary-mission options**.
+3. Use **Refresh** to reread the state and inspect the accepted/committed result, revision and selected missions. Only the current viewer's private options should be visible.
+
+The board's advisory terrain outlines and omission of undeployed models are intentional current limits. A full playable battle is not available yet.
+
+The camera controls are implemented and compiled. Their new rendered/input check is pending the screen HOLD; the earlier fixed-camera run did not verify them. Click the board to give it keyboard focus, then use:
+
+| Control | Effect |
+|---|---|
+| Right-drag over the board | Orbit, with elevation limited to 20–85 degrees. |
+| Middle-drag over the board | Pan within the board's vicinity. |
+| Wheel over the focused board | Zoom within extent-based limits. After editing a UI field, click the board again first. |
+| **F** with board focus, or **Frame board** in the panel | Fit the full board into the available area beside the panel. |
+| **Escape**, focus loss or application deactivation | Cancel the current camera drag. |
+
+UI clicks, text entry and panel scrolling retain their own input. Camera gestures do not submit game actions. Resizing deliberately reframes the board; a normal state Refresh preserves your view. See the [current verification checklist](docs/plans/unreal-migration-plan.md).
+
+### Linux x86-64: routine launch — UNTESTED
+
+All Linux setup, compilation, Core startup, client input/rendering and packaging remain **UNTESTED** until a native host is arranged. The PowerShell `Start-Client.ps1` launcher is Windows-only; there is no Linux Managed mode.
+
+After the native Linux setup/build below, open two terminals in this repository. In terminal 1, run the existing Core in the foreground:
+
+```bash
+task_core="$(realpath ../Warhammer_40k_AI)"
+task_python="$PWD/.local/core-dev-linux/bin/python"
+"$task_python" -I -B "$task_core/scripts/run_phase18m_reference_server.py" \
+  --host 127.0.0.1 --port 8765
+```
+
+Wait for that process's own `Serving Phase 18M reference contract at http://127.0.0.1:8765` message. In terminal 2:
+
+```bash
+export UE_ROOT=/absolute/path/to/native/UE_5.8
+"$PWD/.local/core-dev-linux/bin/python" -I -B ./scripts/Start-Client.py \
+  --engine-root "$UE_ROOT" --core-root ../Warhammer_40k_AI \
+  --endpoint http://127.0.0.1:8765
+```
+
+The manual Python launcher checks the installed Core identity, supplies missing development credentials silently through the client process environment and launches native `UnrealEditor -game -windowed -CoreUrl=...`. It does not start, health-check, own or stop Core. Close the client normally, then use Ctrl+C in terminal 1 when finished. See [manual startup details](docs/development/core-startup.md#linux-native-manual-route--untested).
+
+## First-time setup and build
+
+### Windows prerequisites and Editor build
+
+Use UE 5.8.3, PowerShell 7, Git, Visual Studio 2022 with C++ build tools/Windows SDK, and VS Code. The existing workstation uses VS2022 17.14, MSVC 14.44.35229 (folder 14.44.35207), Windows SDK 10.0.22621.0 and Unreal's bundled .NET 10.0.203. The current prepared Core uses Python 3.14.5. Do not replace working tools or copy a Windows virtual environment to another host.
+
+For a fresh Core environment, follow [native Windows Core preparation](docs/development/core-startup.md#prepare-a-fresh-native-windows-core-environment). For the existing prepared Managed runtime, no reinstall is needed.
+
+Build the existing **Editor** target; do not rerun the project-creation script:
+
+```powershell
+$taskUeRoot = if ($env:UE_ROOT) { $env:UE_ROOT } else { 'C:\Program Files\Epic Games\UE_5.8' }
 $taskProject = Join-Path (Get-Location).Path 'WarhammerClient.uproject'
 $taskBuild = Join-Path $taskUeRoot 'Engine\Build\BatchFiles\Build.bat'
 $taskLogs = Join-Path (Get-Location).Path '.local\development'
 New-Item -ItemType Directory -Force -Path $taskLogs | Out-Null
 & $taskBuild WarhammerClientEditor Win64 Development "-Project=$taskProject" -WaitMutex -NoUBA "-UBARootDir=$taskLogs\uba" "-Log=$taskLogs\editor-build.log"
 if ($LASTEXITCODE -ne 0) { throw "Editor build failed: $LASTEXITCODE" }
+```
+
+Rebuild after source changes. Generating the VS Code workspace is a separate optional development step:
+
+```powershell
 & $taskBuild -ProjectFiles "-Project=$taskProject" -Game -VSCode -2022 -Automated "-Log=$taskLogs\ide-generation.log"
 if ($LASTEXITCODE -ne 0) { throw "IDE generation failed: $LASTEXITCODE" }
 ```
 
-Open generated `WarhammerClient.code-workspace` in VS Code. Do not rerun `New-UnrealCppProject.ps1` over the existing project. Normal Unreal per-user build caches apply; local build outputs are ignored. UE5.8 still uses local UBA storage with `-NoUBA`; its root is explicitly routed above. Linux requires a native UE5.8/toolchain host, still to be arranged.
+Open `WarhammerClient.code-workspace`. Normal Unreal per-user build caches apply; local outputs are ignored. UE 5.8 may use local UBA storage even with `-NoUBA`, so the command routes its root explicitly.
 
-## Existing Core development server
+### Linux native prerequisites and Editor build — UNTESTED
 
-Prepared Windows environment: `.local/core-44.3.33`. From this repository, the checked-out host can run without changing the Core checkout:
+Use a native x86-64 Linux machine with a supported Vulkan GPU/driver and a native UE 5.8 installed build or source build. Epic lists Ubuntu 22.04/Rocky 8 and the v26 clang 20.1.8 native toolchain for UE 5.7–5.8. Follow the matching engine's setup/toolchain instructions, rather than substituting an unrelated system compiler: [Linux quickstart](https://dev.epicgames.com/documentation/unreal-engine/linux-development-quickstart-for-unreal-engine), [versioned requirements](https://dev.epicgames.com/documentation/unreal-engine/linux-development-requirements-for-unreal-engine?lang=en-US).
 
-```powershell
-$taskCore = [IO.Path]::GetFullPath('..\Warhammer_40k_AI')
-$taskCorePython = [IO.Path]::GetFullPath('.local\core-44.3.33\Scripts\python.exe')
-if ((git -C $taskCore rev-parse HEAD) -ne '5f509724da25a2f6ded0c2739a8e7c84bdf59c91') { throw 'Core revision mismatch' }
-if (git -C $taskCore status --porcelain=v1 --untracked-files=all) { throw 'Core checkout must be clean' }
-& $taskCorePython -I -B (Join-Path $taskCore 'scripts\run_phase18m_reference_server.py') --host 127.0.0.1 --port 8765
+Prepare a separate native Python 3.14 environment as described in [Core startup](docs/development/core-startup.md#prepare-native-linux-core--untested). The Windows prepared environment/provenance cannot be reused. The project's Linux renderer selects Vulkan SM6.
+
+Once the native engine/toolchain is installed, the proposed native Editor build is:
+
+```bash
+export UE_ROOT=/absolute/path/to/native/UE_5.8
+task_project="$PWD/WarhammerClient.uproject"
+"$UE_ROOT/Engine/Build/BatchFiles/Linux/Build.sh" \
+  WarhammerClientEditor Linux Development "-Project=$task_project" -WaitMutex -NoUBA
 ```
 
-Use a dedicated free loopback port and wait for this process's own `Serving Phase 18M reference contract at http://127.0.0.1:8765` message. Stop a manually attached service with Ctrl+C. The host has fixed development credentials, no durable persistence and a known Windows port-exclusivity gap ([Core #589](https://github.com/SobolGaming/Warhammer_40k_AI/issues/589)); it is the owner-selected internal development service.
+This command is documented for the future native host; it has not been executed here. Do not use the Windows engine directory or Windows compiled project modules on Linux. After a successful native build, use the two-terminal Linux routine above.
 
-The [previous README](README-through-r146.md#run-the-python-rules-core-from-its-checkout) retains detailed pinned-source/environment installation and package recipes, build identity checks and caveats. Core supports installing as the Python package `warhammer40k-core-v2`. In a separately created Python3.14 environment, the pinned Git recipe is:
+## Troubleshooting
 
-```powershell
-& $taskCorePython -I -B -m pip install 'git+https://github.com/SobolGaming/Warhammer_40k_AI.git@5f509724da25a2f6ded0c2739a8e7c84bdf59c91'
-```
+| Symptom | What to check |
+|---|---|
+| UnrealEditor missing, missing modules or a request to rebuild | Set the correct native engine location and build `WarhammerClientEditor` for your platform. The launcher does not build it. |
+| Black viewport | Before Connect this is expected. After Connect, inspect the displayed connection/HTTP error and the Core terminal or managed logs; do not assume a sample game loaded. |
+| Login or HTTP 401/403 | Use the selected local development Core and matching process credentials. Helpers preserve existing `WH_CORE_ADMIN_TOKEN`/`WH_CORE_PLAYER_TOKEN`; a stale value is not silently replaced. Do not print them or put them in a URL. |
+| Endpoint rejected or HTTP 4xx | Use `http://127.0.0.1:<port>` without a path. Preserve the actual status/message: a timeout is not a rejection and missing diagnostic detail is not an invented rules violation. |
+| Managed startup exceeds 60 seconds | Inspect `.local/development/core-host/<run>/stdout.log`, `stderr.log` and its receipt. The budget includes installed-runtime verification; use `-ReadinessSeconds 120` only for startup diagnosis. This is not a gameplay-latency guarantee. |
+| Port busy or uncertain managed receipt | Stop the exact owned server with `./scripts/Stop-CoreDevelopmentServer.ps1`, or choose a dedicated different port. Never kill processes by port/name; Attach never stops the existing service. |
+| Sessions disappear after Core restarts | This development server has in-memory state. Confirm the restart and begin a fresh client/session; durable save/resume is not provided. |
+| **Reconcile unknown command** appears | The client retains one uncertain command envelope/ID in memory and blocks new actions. Reconcile that same command; do not submit a replacement/new ID. Restart recovery and injected response loss remain unverified. Unknown session creation cannot be retried safely. |
 
-This is an alternative environment-preparation recipe, not a request to reinstall the working environment. Private Git authentication is required; never embed credentials in URLs. The development host script remains a checkout/source-artifact entry point; package installation alone does not promise an installed host console command.
+Additional startup/authentication details and package recipes are in [Core development startup](docs/development/core-startup.md).
+
+## Related projects
+
+- [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Selected commit `5f509724da25a2f6ded0c2739a8e7c84bdf59c91`, contract 44.3.33, Python package `warhammer40k-core-v2`.
+- [Warhammer_40k_UI_arcade](../Warhammer_40k_UI_arcade/README.md): existing Arcade client and behavioral/configuration reference; [original migration plan](../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md).
+- `Warhammer_40k_UI` is the owner's reference name mapped to that local Arcade checkout. [Import provenance](docs/plans/unreal-migration-plan-through-r146.md#repository-routes-and-provenance) records the mapping.
 
 ## Status and evidence
 
-[Active checklist](docs/plans/unreal-migration-plan.md) separates implemented code from verified behavior. [Visible evidence](docs/plans/evidence/2026-10-23-live-core-visible.md) records the bounded local setup workflow and its limits; the [evidence index](docs/plans/README.md) retains earlier results. BOOT01, the separately labelled 120-second E01 diagnostic, synthetic E02 and bounded parser/P0 proofs keep their original scopes.
+The [active migration checklist](docs/plans/unreal-migration-plan.md) separates source implementation, checks, independent reviews and rendered behavior. The [bounded visible Windows setup check](docs/plans/evidence/2026-10-23-live-core-visible.md) at `4dacce3` (runtime `ca315fb`) created a real session and accepted/committed an offered mission choice at revision 2. It exposed a startup-focus error and cropped board edge. [Focus repair `d2c242d`](docs/plans/evidence/2026-10-23-live-core-focus-repair.json) passed compile/link, fresh affected reviews and non-graphical startup; this does not verify the new ergonomics camera or Linux. New launcher/navigation changes need their own checks and reviews. Full gameplay, profile/HUD migration, remote participant/spectator completion, production hosting and exhaustive compatibility remain later work.
 
-Profile/HUD migration, full gameplay, remote participant/spectator completion, production hosting and exhaustive compatibility proof follow usable local feedback. The [full prior README](README-through-r146.md) preserves original commands, failed attempts and detailed evidence; its former current-status sequencing is historical.
+Agent desktop work is on **HOLD from 10:15 p.m. EDT on 2026-10-23 (02:15 UTC on 2026-10-24)** under the latest owner instruction; until new approval, work remains in the background. Development continues in [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3), without merge. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts; their former current-status sequencing is historical.

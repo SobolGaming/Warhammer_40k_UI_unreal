@@ -38,10 +38,10 @@ The owner wants to launch the existing client/server personally on Windows and L
 
 ### Implementation
 
-- [ ] Add a comprehensive README **Get started playing** section, with separate Windows/Linux prerequisites/build and routine run/play instructions.
-- [ ] Cover managed Windows startup, separately started Core plus client attachment, endpoint/auth environment names without secret values, shutdown, expected scene/actions and troubleshooting.
-- [ ] Give native Linux preparation/build and foreground server/client recipes, explicitly UNTESTED and using a native runtime; do not suggest the Windows-only launcher works there.
-- [ ] Label the current Unreal Editor development route and distinguish packaged/final-client delivery still pending.
+- [x] Add a comprehensive README **Get started playing** section, with separate Windows/Linux prerequisites/build and routine run/play instructions.
+- [x] Cover managed Windows startup, separately started Core plus client attachment, endpoint/auth environment names without secret values, shutdown, expected scene/actions and troubleshooting.
+- [x] Give native Linux preparation/build and foreground server/client recipes, explicitly UNTESTED and using a native runtime. Add a manual credential-to-client Python launcher; the Windows-only PowerShell launcher remains clearly separate.
+- [x] Label the current Unreal Editor development route and distinguish packaged/final-client delivery still pending.
 - [x] Author board-only right-drag orbit, middle-drag pan, wheel zoom and F/Frame board control using the unchanged E02 input reducer. Wheel/F require board keyboard focus.
 - [x] Author separate panel/board input regions and user/pointer-owned capture cancellation on release, focus/capture loss, Escape, deactivation, resize and teardown. New camera handlers have no Core submission path.
 - [x] Author aspect/geometry-based corner fitting, finite navigation bounds and focused camera tests. Ordinary same-bounds refresh preserves navigation; resize reframes. Actual build/runtime/graphical checks remain separate below.
@@ -49,7 +49,7 @@ The owner wants to launch the existing client/server personally on Windows and L
 ### Verification
 
 - [x] Publish plan checkpoint `d0af1a8a036d074eca32014dc44c58005efa6f84` before source implementation; push and verify the exact GitHub ref.
-- [ ] Build the affected Windows Editor target and run focused camera geometry/input checks plus the retained live-Core tests where relevant.
+- [x] Build camera source `1193cb6`: Windows Editor compile/link passed (six actions, 11.54 seconds; UBA retried a compile after memory pressure). Thirteen native checks passed, including three camera geometry/shared-input cases and the retained real-Core action; Config remained unchanged. Actual Slate input/rendering remains unverified.
 - [ ] Validate documented commands/paths and syntax without installing tools or claiming Linux execution.
 - [ ] Obtain fresh independent CODE and distinct requirements review of the affected source/documentation.
 - [ ] Observe camera controls, framing/resize, UI isolation and repaired startup focus in an applicable approved visible workflow. **Pending HOLD resumption; no new visible run is being started now.**
