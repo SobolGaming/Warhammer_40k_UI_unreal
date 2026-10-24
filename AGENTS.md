@@ -4,11 +4,11 @@
 
 Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md`, and [active migration plan](docs/plans/unreal-migration-plan.md) before work.
 
-The owner's latest increment is comprehensive Windows/Linux **Get started playing** documentation plus tabletop mouse orbit, pan, zoom and corrected board framing. Keep prerequisites/build separate from routine play; label Editor development delivery and untested Linux recipes honestly. Preserve the bounded real-Core setup workflow. The active plan supersedes the exhaustive historical proof sequence; do not reopen deferred profile/727/transitive-certification campaigns.
+The owner's latest increment is to finish the bounded visible active-drag cancellation checks, complete `docs/plans/unreal-development-plan.md` as a forward feature-parity roadmap, then commit, push and merge existing PR #3 after affected checks and independent reviews pass. This direct October 24 instruction supersedes the earlier leave-open/no-merge direction. Keep the working client usable; do not implement the entire future parity roadmap in this closing increment. Preserve the bounded real-Core setup workflow and all historical failures.
 
 **The owner directly resumed bounded visible testing on 2026-10-24**, approving camera controls, board framing, UI isolation, startup focus and the manual launcher. This supersedes the October 23 screen HOLD for those tests. Use one game window at a time, at most ten minutes per launch, with owned-process cleanup and private screenshots/logs. Close each run normally when possible; no blanket unrelated desktop authority is implied. Private-source review consent remains separate from desktop authority. The earlier [visible setup workflow](docs/plans/evidence/2026-10-23-live-core-visible.md) remains a closed historical run.
 
-The resumed [manual launcher check](docs/plans/evidence/2026-10-24-live-core-camera-visible.md) and separate [native camera input check](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) are closed with no game window remaining. Preserve the manual F failure with cause unestablished; the native synthetic-bound F route passed separately. Linux and active-drag cancellation coverage remain unverified. Proceed from the active plan's owner-feedback step; do not imply broader acceptance.
+The resumed [manual launcher check](docs/plans/evidence/2026-10-24-live-core-camera-visible.md) and separate [native camera input check](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) are closed. The owner now directly approves the remaining visible cancellation checks while the screen is free. Keep one game window at a time, at most ten minutes per launch, with owned-process cleanup. Preserve the earlier manual F failure with cause unestablished; the native synthetic-bound F route passed separately. Linux remains unverified. Distinguish actual Slate/window events from deliberately delivered application events; do not imply broader acceptance.
 
 ## Repository boundaries
 
@@ -48,7 +48,7 @@ Keep review scope proportionate: changed code, directly used contracts and slice
 - Commit **and push every coherent checkpoint**, including plan, implementation, fixes and actual verification records. Record actual tests and pending reviews; checkpoints are not acceptance.
 - Verify exact GitHub branch ref equals the committed SHA after each push.
 - Use `gh` for normal GitHub actions and PR updates, with process-only `GH_TOKEN` loaded from `../github-full-access`. Keep `github_token` separate. Never display/log/commit either credential.
-- Continue branch `codex/e02-world-input-proof` and existing [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3). Verify its identity; no duplicate PR and **no merge**.
+- Continue branch `codex/e02-world-input-proof` and existing [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3). Verify its identity; no duplicate PR. The owner authorizes merging after this closing increment's checks, reviews and evidence are complete; preserve the branch and history.
 - No force push/history rewrite/new remote/unrelated branch mutation. Exclude ignored/private evidence, generated binaries/caches and tokens.
 - Workspace-root AGENTS is local guidance, not a file for this repository's PR.
 

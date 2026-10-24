@@ -1,8 +1,16 @@
 # Unreal client migration plan
 
-**Revision 154 — bounded Windows manual-launcher and native camera checks completed; earlier manual F failure retained, Linux UNTESTED, 2026-10-24 UTC / EDT.**
+**Revision 155 — close visible cancellation coverage, establish the full feature-parity roadmap, then merge PR #3; checks pending, 2026-10-24 UTC / EDT.**
 
-The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. Deliver a 3D board, real session/state, one meaningful player action sent to Core, and the authoritative result. Push this revised-plan checkpoint before implementation; commit, push and verify every subsequent coherent checkpoint. Use [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3); do not merge.
+The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. The latest request is to finish the remaining bounded visible active-drag cancellation tests, complete `docs/plans/unreal-development-plan.md` as the forward feature-parity roadmap, then commit, push and merge [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) after affected verification and independent reviews pass. This direct request supersedes the earlier no-merge direction. Future feature parity is to be planned here, not falsely claimed implemented by this increment.
+
+### Current closing increment
+
+- [x] Record the owner's direct visible-test and merge authorization; retain one game window and a 600-second limit per launch.
+- [ ] Extend the existing native camera regression to cover cancellation during held orbit/pan; build and independently review the affected source before visible execution.
+- [ ] Execute the bounded visible check, record actual events, assertions, restoration/closure and remaining limits; preserve prior failed or unverified results.
+- [ ] Inventory the Python UI baseline and publish a complete, ordered development roadmap with concrete parity criteria, source/test pointers, Core dependencies, packaging and Windows/Linux verification.
+- [ ] Commit/push/exact-ref-verify coherent checkpoints; update and merge existing PR #3 after required checks pass.
 
 ## Section 0 — settled scope and current decisions
 
