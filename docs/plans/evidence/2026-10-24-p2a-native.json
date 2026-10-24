@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "milestone": "P2a known active session reopen",
-  "status": "NATIVE_AND_SOURCE_PASS_VISIBLE_PENDING",
+  "status": "NATIVE_AND_SOURCE_PASS_VISIBLE_RECORDED_SEPARATELY",
   "sourceHead": "20600a5b37ab2cf443d884fe8e2f86b71388d534",
   "core": {
     "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
@@ -331,13 +331,14 @@
     }
   ],
   "manualCriteria": {
-    "P2A-V1": "NOT_RUN",
-    "P2A-V2": "NOT_RUN"
+    "P2A-V1": "PASS_SEE_VISIBLE_RECORD",
+    "P2A-V2": "PASS_SEE_VISIBLE_RECORD"
   },
   "limits": [
     "Player-a known-ID active-session read/reattach only; no listing/newprincipal/hotseat/general editor/durable or uncertain-command restart recovery.",
     "Real integration uses fresh client objects in one non-visible process; separate-process UI copy/paste/reopen is a distinct required visible criterion.",
-    "No new rendered/input, Linux, clean-machine or full P2 acceptance yet."
+    "Native checks do not establish rendered/input behavior; see the separate dated P2A-V1/V2 visible result. Linux, clean-machine, physical held gestures and full P2 remain unverified."
   ],
-  "sourceReviews": "2026-10-24-p2a-source-reviews.json"
+  "sourceReviews": "2026-10-24-p2a-source-reviews.json",
+  "visibleResults": "2026-10-24-p2a-visible.json"
 }
