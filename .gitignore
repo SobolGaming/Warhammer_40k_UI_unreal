@@ -3,6 +3,7 @@ Binaries/
 Intermediate/
 Saved/
 DerivedDataCache/
+/Build/*/FileOpenOrder/
 **/Binaries/
 **/Intermediate/
 **/Saved/

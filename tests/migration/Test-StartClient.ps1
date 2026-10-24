@@ -11,6 +11,9 @@ $scratchParent = [IO.Path]::GetFullPath((Join-Path $repo '.local/tests/start-cli
 $fixtureRoot = Join-Path $scratchParent ([guid]::NewGuid().ToString('N'))
 $previousProbe = Get-Variable -Name WarhammerStartClientTestProbe -Scope Global -ErrorAction SilentlyContinue
 $caseCount = 0
+$environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
+$originalEnvironment = @{}
+foreach ($name in $environmentNames) { $originalEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 
 function Assert-True([bool]$Condition, [string]$Message) { if (!$Condition) { throw $Message } }
 function Start-Process {
@@ -31,16 +34,25 @@ function Start-Process {
     }
     return $client
 }
-function Invoke-LauncherCase([hashtable]$Arguments, [hashtable]$Faults = @{}, [string]$ExpectedError = '') {
+function Invoke-LauncherCase([hashtable]$Arguments, [hashtable]$Faults = @{}, [string]$ExpectedError = '',
+    [hashtable]$InitialEnvironment = @{ WH_CORE_ADMIN_TOKEN = 'stub-parent-admin'; WH_CORE_PLAYER_TOKEN = 'stub-parent-player'; WH_CORE_BASE_URL = 'http://stub.invalid/'; WH_LIVE_CORE_TEST_URL = 'http://stub.invalid/test' }) {
+    $expectedEnvironment = @{}
+    foreach ($name in $environmentNames) {
+        [Environment]::SetEnvironmentVariable($name, $InitialEnvironment[$name], 'Process')
+        $expectedEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process')
+    }
     $global:WarhammerStartClientTestProbe = [pscustomobject]@{
         HostCalls = 0; StopCalls = 0; LaunchCalls = 0; WaitCalls = 0; DisposeCalls = 0
-        HostFails = $false; LaunchFails = $false; WaitFails = $false; DisposeFails = $false; ExitCode = 0
+        HostFails = $false; LaunchFails = $false; WaitFails = $false; DisposeFails = $false; StopFails = $false; ExitCode = 0
         Mode = ''; Port = 0; Endpoint = ''; CoreRoot = ''; ReadinessSeconds = 0
         FilePath = ''; Arguments = ''; WorkingDirectory = ''; WindowStyle = ''; StoppedReceipt = ''
     }
     foreach ($name in $Faults.Keys) { $global:WarhammerStartClientTestProbe.$name = $Faults[$name] }
     $failure = $null
     try { & $script:fixtureLauncher @Arguments 6>$null } catch { $failure = $_ }
+    foreach ($name in $environmentNames) {
+        Assert-True ([string]::Equals([Environment]::GetEnvironmentVariable($name, 'Process'), $expectedEnvironment[$name], [StringComparison]::Ordinal)) 'Launcher changed the parent Core environment'
+    }
     if ($ExpectedError) {
         Assert-True ($null -ne $failure) 'Expected synthetic launcher failure did not occur'
         Assert-True ($failure.Exception.Message -like ('*' + $ExpectedError + '*')) 'Unexpected launcher error'
@@ -65,6 +77,10 @@ param($Mode, $Port, $Endpoint, $CoreRoot, $ReadinessSeconds)
 $probe = $global:WarhammerStartClientTestProbe
 $probe.HostCalls++; $probe.Mode = $Mode; $probe.Port = $Port
 $probe.Endpoint = $Endpoint; $probe.CoreRoot = $CoreRoot; $probe.ReadinessSeconds = $ReadinessSeconds
+# The actual helper can initialize credentials before either success or failure.
+foreach ($name in @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')) {
+    [Environment]::SetEnvironmentVariable($name, ('stub-helper-' + $name), 'Process')
+}
 if ($probe.HostFails) { throw 'Synthetic Core startup failure' }
 [pscustomobject]@{ owned = ($Mode -eq 'Managed'); endpoint = 'http://127.0.0.1:8765/'; receiptPath = 'synthetic-owned-receipt' }
 '@
@@ -72,6 +88,7 @@ if ($probe.HostFails) { throw 'Synthetic Core startup failure' }
 param($ReceiptPath)
 $global:WarhammerStartClientTestProbe.StopCalls++
 $global:WarhammerStartClientTestProbe.StoppedReceipt = $ReceiptPath
+if ($global:WarhammerStartClientTestProbe.StopFails) { throw 'Synthetic Core stop failure' }
 '@
     [IO.File]::WriteAllText((Join-Path $scripts 'Start-CoreDevelopmentServer.ps1'), $startStub)
     [IO.File]::WriteAllText((Join-Path $scripts 'Stop-CoreDevelopmentServer.ps1'), $stopStub)
@@ -122,9 +139,18 @@ $global:WarhammerStartClientTestProbe.StoppedReceipt = $ReceiptPath
     Assert-True ($probe.DisposeCalls -eq 1 -and $probe.StopCalls -eq 1) 'Client wait failure skipped owned cleanup'
     $probe = Invoke-LauncherCase @{ ClientExecutable = $packaged } @{ DisposeFails = $true } 'Synthetic client dispose failure'
     Assert-True ($probe.StopCalls -eq 1) 'Client disposal failure skipped owned Core cleanup'
+    $probe = Invoke-LauncherCase @{ ClientExecutable = $packaged } @{ StopFails = $true } 'Synthetic Core stop failure'
+    Assert-True ($probe.StopCalls -eq 1 -and $probe.DisposeCalls -eq 1) 'Owned Core stop failure skipped client cleanup'
+    $probe = Invoke-LauncherCase @{ ClientExecutable = $packaged } @{ DisposeFails = $true; StopFails = $true } 'Synthetic client dispose failure'
+    Assert-True ($probe.StopCalls -eq 1 -and $probe.DisposeCalls -eq 1) 'Combined cleanup failures skipped a cleanup attempt'
+    $probe = Invoke-LauncherCase @{ ClientExecutable = $packaged } @{} '' @{}
+    Assert-True ($probe.StopCalls -eq 1) 'Initially absent environment affected managed cleanup'
+    $probe = Invoke-LauncherCase @{ ClientExecutable = $packaged } @{ HostFails = $true } 'Synthetic Core startup failure' @{}
+    Assert-True ($probe.LaunchCalls -eq 0 -and $probe.StopCalls -eq 0) 'Failed initialization with absent environment launched or stopped a process'
 
     [pscustomobject]@{ status = 'PASS_STUB_ONLY'; cases = $caseCount; nativeProcessesLaunched = 0; coreProcessesLaunched = 0; guiLaunched = $false; linuxRuntimeEstablished = $false } | ConvertTo-Json
 } finally {
+    foreach ($name in $environmentNames) { [Environment]::SetEnvironmentVariable($name, $originalEnvironment[$name], 'Process') }
     if ($previousProbe) { Set-Variable -Name WarhammerStartClientTestProbe -Scope Global -Value $previousProbe.Value }
     else { Remove-Variable -Name WarhammerStartClientTestProbe -Scope Global -ErrorAction SilentlyContinue }
     # One shell performs cleanup, after checking the resolved target remains in

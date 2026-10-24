@@ -31,6 +31,9 @@ if ($PSCmdlet.ParameterSetName -eq 'Packaged') {
 foreach ($path in $requiredFiles) { if (!(Test-Path -LiteralPath $path -PathType Leaf)) { throw ('Required client file is missing: ' + $path) } }
 $hostArguments = @{ Mode = $CoreMode; Port = $Port; CoreRoot = $CoreRoot; ReadinessSeconds = $ReadinessSeconds }
 if ($Endpoint) { $hostArguments.Endpoint = $Endpoint }
+$environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
+$savedEnvironment = @{}
+foreach ($name in $environmentNames) { $savedEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 $hostInfo = $null; $client = $null
 try {
     $hostInfo = & (Join-Path $PSScriptRoot 'Start-CoreDevelopmentServer.ps1') @hostArguments
@@ -42,11 +45,18 @@ try {
     $client.WaitForExit()
     if ($client.ExitCode -ne 0) { throw ('Unreal client exited with code ' + $client.ExitCode + '.') }
 } finally {
+    $cleanupFailure = $null
     try {
         if ($client) { $client.Dispose() }
-    } finally {
+    } catch { $cleanupFailure = $_ }
+    try {
         if ($hostInfo -and $hostInfo.owned -eq $true) {
             & (Join-Path $PSScriptRoot 'Stop-CoreDevelopmentServer.ps1') -ReceiptPath $hostInfo.receiptPath | Out-Null
         }
+    } catch { if ($null -eq $cleanupFailure) { $cleanupFailure = $_ } }
+    foreach ($name in $environmentNames) {
+        try { [Environment]::SetEnvironmentVariable($name, $savedEnvironment[$name], 'Process') }
+        catch { if ($null -eq $cleanupFailure) { $cleanupFailure = $_ } }
     }
+    if ($null -ne $cleanupFailure) { throw $cleanupFailure }
 }

@@ -19,11 +19,15 @@ Implementation:
 - [x] Document package contents, first build versus launch and retained runtime/Core prerequisites.
 - [x] Add a source-grounded root architecture guide with useful Mermaid diagrams, source links, implemented/planned distinctions and a durable same-change maintenance rule in AGENTS.md.
 
-Implementation above is authored, not runtime acceptance. The launcher-only stub checks passed 19 Python tests and ten PowerShell cases; no client/Core/GUI was launched by those tests. Native build/package/runtime and independent source reviews remain pending below.
+Implementation above is separate from runtime acceptance. The launcher-only stub checks passed 19 Python tests; the repaired PowerShell launcher passed 14 cases and the outside-checkout runner guard passed 14 focused controls. Those tests launch no client/Core/GUI. Native results and independent review dispositions are recorded separately below.
 
 Initial package attempt at `8f8c010` failed in 4.19 seconds before compilation/cooking because the ordinary and historical proof Editor targets were ambiguous. Preserve that failure. `DefaultEngine.ini` now explicitly selects the ordinary Game/Editor targets; the next package attempt must validate the repair. No game or cooker window was launched.
 
-Package creation at `9233bb6` succeeded in 199.16 seconds (36 Game/Editor build actions, 144.25 seconds), validating the target-default repair. The runnable folder contains 50 files / 975,120,505 bytes. Runtime remains unverified. Suppress two incidental PowerShell task-result objects before validating the build wrapper's single result interface again; this does not change the compiled client. The new offscreen test runner is authored with exact report acceptance; 23 isolated quoting/stream/report checks passed, without launching a native client/Core.
+Package creation at `9233bb6` succeeded in 199.16 seconds (36 Game/Editor build actions, 144.25 seconds), validating the target-default repair. The runnable folder contains 50 files / 975,120,505 bytes. At `43bb097`, a second build completed in 26.20 seconds and returned exactly one result object, repairing two incidental PowerShell task-result objects. An exact 50-file copy outside this checkout passed four resource/data checks and one real-Core create/action/refresh test in each Managed and Attach mode: six executions / five distinct names. The attached service remained HTTP200 after client exit; its separate owner then stopped it. These runs preserve two native startup warnings and one missing HTML-report-template error per run; structured JSON reports were generated with zero per-test warnings/errors. They establish no visible rendering or clean-machine result.
+
+Both independent source reviews at `43bb097` requested repairs before acceptance: endpoint validation before credential transmission, receipt-independent failed-start cleanup, build descendants after parent exit, restoration of caller credentials, and enforcement of the outside-checkout test boundary. Preserve those verdicts. The repairs and focused controls remain subject to fresh source review and affected non-visible checks; the runtime-data loader itself had no actionable finding. Installed UE's `bUsesSlate=true` default will be supplied as a finite source excerpt for font-staging review.
+
+The repaired Core-startup controls passed 24 offline AST/inert-process cases. Three real hidden-CLI job controls passed, including a parent that exited with live descendants followed by confirmed empty-job cleanup. An actual runner invocation against an inside-checkout path failed at INPUTS before client/Core startup, as intended, and restored its environment. The initial job-test attempt failed a test-only output-inheritance assumption; explicit child stdout/stderr inheritance repaired that test before the three-case PASS. No Core, Unreal or GUI was launched by these job controls.
 
 Non-visible verification and PR exit criteria:
 
@@ -54,9 +58,9 @@ The owner explicitly confirmed on 2026-10-24 that the Python UI parity baseline 
 
 ## What exists today
 
-The current Windows development preview runs through UnrealEditor. It creates/starts one canonical development session, displays player-a's projection, offers nonparameterized finite choices, submits one offered setup choice and refreshes the authoritative result. Its current world DTO and fixed panel are deliberately small. It has basic 3D board rendering, managed/attached Core startup and camera controls. See the [migration evidence index](README.md) for exact revisions and bounded results.
+The current Windows development preview has Editor and standalone Development Game routes. It creates/starts one canonical development session, displays player-a's projection, offers nonparameterized finite choices, submits one offered setup choice and refreshes the authoritative result. Its current world DTO and fixed panel are deliberately small. It has basic 3D board rendering, managed/attached Core startup and camera controls. Package checks are non-visible only. See the [migration evidence index](README.md) for exact revisions and bounded results.
 
-It does not yet provide general parameterized gameplay editors, complete roster/world/HUD synchronization, configurable live HUD/profile parity, other viewer modes, durable recovery or a packaged current-client executable. The cooked Game parser/caller proof is narrower than a packaged live gameplay client. Authored profile roundtrip source at `0719125` remains deferred, unreviewed and unexecuted; earlier parser/P0 passes do not establish live profile parity.
+It does not yet provide general parameterized gameplay editors, complete roster/world/HUD synchronization, configurable live HUD/profile parity, other viewer modes or durable recovery. The Development folder is not clean-machine or release delivery. The older cooked Game parser/caller proof is narrower than the current package checks. Authored profile roundtrip source at `0719125` remains deferred, unreviewed and unexecuted; earlier parser/P0 passes do not establish live profile parity.
 
 ## Parity ledger and completion rules
 
@@ -85,10 +89,10 @@ Verification:
 
 Implementation:
 
-- [ ] Build the existing `WarhammerClient` Game target and create a repeatable Windows Development build/cook/stage/package command. Keep the Editor development route available.
-- [ ] Make the canonical session-create JSON explicit runtime data: it currently loads from `tests/migration/fixtures/...` in [LiveCoreSession.cpp](../../Source/WarhammerClient/Private/LiveCore/LiveCoreSession.cpp). Retain its selected-Core identity/checksum and avoid an accidental source-checkout dependency.
-- [ ] Include and verify the configured startup map/GameMode and dynamically loaded Cube, Cylinder and material in [GameMode](../../Source/WarhammerClient/Private/WarhammerClientGameMode.cpp). Keep required fonts/shaders/config/runtime prerequisites in the runnable bundle.
-- [ ] Extend [Windows launcher](../../scripts/Start-Client.ps1) and [manual Python launcher](../../scripts/Start-Client.py) to select the packaged executable while preserving endpoint, credentials, managed/attached ownership and shutdown behavior. The Python Core may remain separately installed/checked out for this internal milestone.
+- [x] Build the existing `WarhammerClient` Game target and create a repeatable Windows Development build/cook/stage/package command. Keep the Editor development route available. P1a source-review repairs remain under the bounded increment above.
+- [x] Make the canonical session-create JSON explicit runtime data through [LiveCoreRuntimeData](../../Source/WarhammerClient/Private/LiveCore/LiveCoreRuntimeData.cpp), consumed by [LiveCoreSession.cpp](../../Source/WarhammerClient/Private/LiveCore/LiveCoreSession.cpp). Retain its selected-Core identity/checksum and avoid an accidental source-test-tree dependency.
+- [x] Include the configured startup map/GameMode and dynamically loaded Cube, Cylinder and material in [GameMode](../../Source/WarhammerClient/Private/WarhammerClientGameMode.cpp). Resource checks cover byte availability; rendered fonts/shaders and fresh-machine prerequisites remain open verification.
+- [x] Extend [Windows launcher](../../scripts/Start-Client.ps1) and [manual Python launcher](../../scripts/Start-Client.py) to select the packaged executable while preserving endpoint, credentials, managed/attached ownership and shutdown behavior. The Python Core remains separately installed/checked out for this internal milestone.
 - [ ] Document first build separately from routine launch and refresh the pinned-runtime/package instructions; lay out matching native Linux packaging commands without claiming execution.
 
 Verification:

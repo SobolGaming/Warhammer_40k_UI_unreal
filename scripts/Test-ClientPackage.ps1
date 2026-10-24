@@ -30,6 +30,16 @@ function Assert-PlainPath([string]$Path) {
         $cursor = if ($parent) { $parent.FullName } else { $null }
     }
 }
+function Assert-OutsideCheckoutPath([string]$Path, [string]$CheckoutRoot) {
+    $resolved = [IO.Path]::GetFullPath($Path)
+    $checkout = [IO.Path]::GetFullPath($CheckoutRoot).TrimEnd('\', '/')
+    Assert-PlainPath $resolved
+    if ($resolved.Equals($checkout, [StringComparison]::OrdinalIgnoreCase) -or
+        $resolved.StartsWith($checkout + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'Copy the complete Windows runnable folder outside the UI checkout before testing its nested executable.'
+    }
+    return $resolved
+}
 function File-Descriptor([string]$Path) {
     if (![IO.File]::Exists($Path)) { return $null }
     [ordered]@{ leaf = [IO.Path]::GetFileName($Path); bytes = [IO.FileInfo]::new($Path).Length; sha256 = (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash }
@@ -106,7 +116,7 @@ $resultPath = Join-Path $run 'result.json'
 $record = [ordered]@{
     kind = 'WINDOWS_NONVISIBLE_PACKAGE_TEST'; status = 'FAILED'; mode = $Mode; coreMode = if ($Mode -eq 'Core') { $CoreMode } else { $null }
     startedUtc = [DateTime]::UtcNow.ToString('o'); finishedUtc = $null; sourceHead = $null; runner = (File-Descriptor $PSCommandPath)
-    binaryBefore = $null; binaryAfter = $null; arguments = @(); rawArguments = $null; nonVisibleFlagsRequired = $true; renderingVerified = $false
+    selectedExecutable = $null; binaryBefore = $null; binaryAfter = $null; arguments = @(); rawArguments = $null; nonVisibleFlagsRequired = $true; renderingVerified = $false
     timeoutSeconds = if ($Mode -eq 'Resources') { 120 } else { 240 }; streamLimitBytes = 64MB
     processStarted = $false; nativeExitCode = $null; elapsedSeconds = $null; forcedTermination = $false
     stdoutComplete = $false; stderrComplete = $false; streamsCapped = $false
@@ -121,7 +131,8 @@ $hostInfo = $null; $native = $null; $started = $false; $outFile = $null; $errFil
 $timer = $null; $stage = 'INPUTS'; $validated = $false
 try {
     $binary = [IO.Path]::GetFullPath($ClientExecutable)
-    Assert-PlainPath $binary
+    $record.selectedExecutable = $binary
+    $binary = Assert-OutsideCheckoutPath $binary $repo
     if ($binary.Replace('\', '/') -inotmatch '/WarhammerClient/Binaries/Win64/WarhammerClient\.exe$' -or ![IO.File]::Exists($binary)) {
         throw 'Select the actual nested WarhammerClient/Binaries/Win64/WarhammerClient.exe, not the bootstrap executable.'
     }

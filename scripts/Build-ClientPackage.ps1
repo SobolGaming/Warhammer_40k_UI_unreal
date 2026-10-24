@@ -53,24 +53,27 @@ $record = [ordered]@{ kind = 'WINDOWS_DEVELOPMENT_CLIENT_PACKAGE'; startedUtc = 
     sourceHead = (git -C $repo rev-parse HEAD).Trim(); status = 'STARTED'; timeoutMinutes = $TimeoutMinutes;
     outputRoot = $run; archive = $archive; stage = $stage; executable = $dotnet; arguments = $arguments;
     nonVisibleCook = $true; gameLaunched = $false; prerequisiteInstallerExecuted = $false; cleanupErrors = @() }
-$process = [Diagnostics.Process]::new(); $process.StartInfo = $info; $started = $false
-$outStream = $null; $errStream = $null
+$helper = Join-Path $PSScriptRoot 'OwnedBuildProcess.cs'
+if (-not ('Warhammer.Tools.OwnedBuildProcess' -as [type])) { Add-Type -Path $helper }
+$process = $null
+$stdoutPath = Join-Path $run 'uat-stdout.log'
+$stderrPath = Join-Path $run 'uat-stderr.log'
+$record.processOwnership = 'Windows job; suspended creation, assignment before resume, kill on job close'
+$record.ownedBuildTreeTerminated = $false
+$record.ownedJobEmpty = $false
 try {
-    $outStream = [IO.File]::Create((Join-Path $run 'uat-stdout.log'))
-    $errStream = [IO.File]::Create((Join-Path $run 'uat-stderr.log'))
-    if (!$process.Start()) { throw 'AutomationTool did not start.' }; $started = $true
-    $null = $process.SafeHandle
-    $stdout = $process.StandardOutput.BaseStream.CopyToAsync($outStream)
-    $stderr = $process.StandardError.BaseStream.CopyToAsync($errStream)
+    $process = [Warhammer.Tools.OwnedBuildProcess]::Start($info, $stdoutPath, $stderrPath, 10000)
     $timer = [Diagnostics.Stopwatch]::StartNew()
     while (!$process.WaitForExit(500)) {
         if ($timer.Elapsed.TotalMinutes -gt $TimeoutMinutes) { throw 'Package build exceeded its time budget.' }
-        if ($outStream.Length -gt 64MB -or $errStream.Length -gt 64MB) { throw 'Package output exceeded its 64 MiB per-stream budget.' }
+        if ([IO.FileInfo]::new($stdoutPath).Length -gt 64MB -or [IO.FileInfo]::new($stderrPath).Length -gt 64MB) { throw 'Package output exceeded its 64 MiB per-stream budget.' }
     }
     $record.elapsedSeconds = $timer.Elapsed.TotalSeconds; $record.exitCode = $process.ExitCode
-    if (!$stdout.Wait(10000) -or !$stderr.Wait(10000)) { throw 'Package output did not drain within ten seconds.' }
-    $null = $stdout.GetAwaiter().GetResult(); $null = $stderr.GetAwaiter().GetResult()
-    if ($timer.Elapsed.TotalMinutes -gt $TimeoutMinutes -or $outStream.Length -gt 64MB -or $errStream.Length -gt 64MB) { throw 'Package exceeded its time or output budget.' }
+    # Parent exit is not descendant exit. The job remains owned until every child
+    # exits; cleanup below also handles a failed UAT parent with surviving cookers.
+    if (!$process.WaitJobEmpty(10000)) { throw 'Owned build descendants survived the parent beyond ten seconds.' }
+    $record.ownedJobEmpty = $true
+    if ($timer.Elapsed.TotalMinutes -gt $TimeoutMinutes -or [IO.FileInfo]::new($stdoutPath).Length -gt 64MB -or [IO.FileInfo]::new($stderrPath).Length -gt 64MB) { throw 'Package exceeded its time or output budget.' }
     if ($process.ExitCode -ne 0) { throw ('AutomationTool failed with exit code ' + $process.ExitCode + '; inspect the retained logs.') }
     $binary = Join-Path $archive 'Windows/WarhammerClient/Binaries/Win64/WarhammerClient.exe'
     $bootstrap = Join-Path $archive 'Windows/WarhammerClient.exe'
@@ -83,15 +86,20 @@ try {
     $record.status = 'FAILED'; $record.error = $_.Exception.Message
 } finally {
     try {
-        if ($started -and !$process.HasExited) {
-            $process.Kill($true); $record.ownedBuildTreeTerminated = $true
-            if (!$process.WaitForExit(10000)) { throw 'Owned build tree did not stop in ten seconds.' }
+        if ($null -ne $process) {
+            # Dispose always supervises the retained job, even after UAT exited.
+            # Native logs remain open until bounded job cleanup finishes.
+            try {
+                $record.ownedBuildTreeTerminated = $process.ActiveProcessCount -gt 0
+                $record.ownedJobTotalProcesses = $process.TotalProcessCount
+            } finally {
+                try { $process.Dispose() } finally {
+                    $record.ownedJobEmpty = $process.CleanupConfirmed
+                }
+            }
+            if (!$record.ownedJobEmpty) { throw 'Owned job cleanup could not be confirmed.' }
         }
     } catch { $record.cleanupErrors += $_.Exception.GetType().Name; $record.status = 'CLEANUP_FAILED' }
-    foreach ($stream in @($outStream, $errStream)) {
-        try { if ($stream) { $stream.Dispose() } } catch { $record.cleanupErrors += $_.Exception.GetType().Name; $record.status = 'CLEANUP_FAILED' }
-    }
-    try { $process.Dispose() } catch { $record.cleanupErrors += $_.Exception.GetType().Name; $record.status = 'CLEANUP_FAILED' }
     $record.finishedUtc = [DateTime]::UtcNow.ToString('o')
     $record | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $run 'package-result.json') -Encoding utf8
 }

@@ -1,6 +1,6 @@
 # Warhammer 40k Unreal client
 
-A C++ first 3D client for the separate authoritative Python Core. This is a personal/internal development preview, launched through **UnrealEditor**, not a packaged game.
+A C++ first 3D client for the separate authoritative Python Core. This personal/internal development preview supports the Editor route and a Windows Development Game folder. The packaged client has non-visible startup/Core checks; visible package testing and clean-machine delivery remain open.
 
 Read [architecture.md](architecture.md) for the source-tree map, component boundaries and runtime/session flows. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns all milestone scope and acceptance.
 
@@ -67,7 +67,7 @@ UI clicks, text entry and panel scrolling retain their own input. Camera gesture
 
 ### Windows standalone Development package (P1a)
 
-The packaging source is authored; its initial build/runtime verification is tracked in [P1a of the canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client, not full gameplay. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
+The packaging source and its bounded verification are tracked in [P1a of the canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
 
 ```powershell
 $package = & ./scripts/Build-ClientPackage.ps1
@@ -87,14 +87,17 @@ The manual Python launcher supports `--client-executable /absolute/path/to/Warha
 
 P1a's allowed verification is non-visible only. Rendered package controls/fonts/shaders, a machine without an Unreal installation and native Linux remain separate unverified acceptance work.
 
-For the fixed offscreen checks, use the actual nested executable (not the root bootstrap):
+For the fixed offscreen checks, first copy the **entire** runnable Windows folder outside this repository. Use a fresh destination and select its actual nested executable (not the root bootstrap):
 
 ```powershell
-& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $package.clientExecutable -Mode Resources
-& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $package.clientExecutable -Mode Core -CoreMode Managed -Port 19084
+$taskCopy = Join-Path (Split-Path (Get-Location).Path -Parent) ('p1-runtime-' + [guid]::NewGuid().ToString('N'))
+Copy-Item -LiteralPath (Join-Path $package.archive 'Windows') -Destination $taskCopy -Recurse -ErrorAction Stop
+$taskCopiedExe = Join-Path $taskCopy 'WarhammerClient/Binaries/Win64/WarhammerClient.exe'
+& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $taskCopiedExe -Mode Resources
+& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $taskCopiedExe -Mode Core -CoreMode Managed -Port 19084
 ```
 
-Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects exactly one real session/action/refresh check and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. They do not establish visible rendering or controls. The runner's source checkout hosts the tooling; P1a runtime independence is checked by copying the runnable Windows folder outside that checkout before execution.
+Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects exactly one real session/action/refresh check and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. They reject executables inside the checkout and paths through reparse points, and record the selected absolute path. They do not establish visible rendering or controls. The source checkout hosts only the test tooling.
 
 ### Linux x86-64: routine launch — UNTESTED
 
