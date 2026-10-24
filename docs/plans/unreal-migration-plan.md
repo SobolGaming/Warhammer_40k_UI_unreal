@@ -1,10 +1,47 @@
 # Unreal client migration and development plan
 
-**Revision 169, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 170, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
 **Product goal:** support all capabilities supported by the latest selected Core source, including capabilities beyond the Arcade client. Arcade parity is the initial useful milestone and reuse/reference baseline, not the feature ceiling. A useful rendering client that connects to and drives Core comes before exhaustive coverage; close small working slices, then let observed gameplay priorities guide the next slice. Do not postpone that client behind an exhaustive proof campaign.
+
+## Current bounded increment: P2b local two-player handoff
+
+Branch: `codex/p2b-local-player-handoff`, from verified PR #7 merge `f490bf05a99f0621e59e4cba16a429d22aa6c825` (2026-10-24T20:19:59Z), exact head `8e1246725577b7d68c9685e832dd87f227aadb8e`. This PR is limited to the two existing development principals on one selected Core session. Core remains exact `4f9bef0df2fb974d1285232a1009b8781926361d` /44.5.0; no runtime upgrade or sibling edit is included.
+
+Finite deliverable: let player-a select an offered secondary mission, explicitly hide the current viewer's display for handoff, then let player-b click Ready to read their own projection and make their offered choice. Support handing back through the same privacy-cleared path. Handoff itself sends no mutation or lifecycle request. Only the selected player's credential authenticates metadata/projection/commands, and every returned viewer must match the fixed expected player. This is local development convenience on a trusted workstation; the privacy screen is not account authentication or protection against a person who can inspect the process.
+
+Scope excludes session listing/new-principal joining, remote/spectator UI, arbitrary viewer/role entry, general decision editors, complete setup/battle progression, persistence and recovery of an uncertain command after restart. Existing creation/reopen remains player-a by default. Preserve earlier evidence and the old44.3 preview; full P2 and deferred HV-01–HV-06 stay open.
+
+Implementation:
+
+- [x] Verify PR #7/main and start a separate bounded branch; preserve its completed evidence and record the actual merge.
+- [ ] Bind protocol/session reads, outcomes, decision actor and own-mission display to explicit supported player-a/player-b identities; reject wrong viewer/scope atomically without administrator fallback.
+- [ ] Add two-phase handoff: Begin clears old viewer state, credentials, board actors, rosters, decisions/options, mission/outcome/error text and camera capture; Ready reads only the target player's metadata/projection. Block busy/UNKNOWN/pending-command switching and stale callbacks; keep failed target reads private and retryable.
+- [ ] Supply separate player-b development credentials through existing native launch routes with override validation, redaction and environment restoration; retain current Managed/Attach ownership and Linux seams.
+- [ ] Add clear Hand off/Ready controls and target/viewer/local-count labels; update README, architecture and the PR body with the actual workflow, limits and manual instructions.
+
+Verification:
+
+- [ ] Run focused protocol/state/launcher regressions for wrong viewer/credential, malformed identity, all unsafe handoff states, empty privacy state, stale callbacks and failed-read retry. Observe zero HTTP at Begin, exactly player metadata/projection GETs at Ready, and no create/start/admin/mutation during handoff.
+- [ ] Build the affected Windows Development package, check Unit/resources and real Core a-choice → hide → b-read/choice → hide → a-read in Managed and Attach modes. Record exact source/package/Core, original IDs/revisions, per-viewer privacy and normal owned/attached cleanup. Existing create/reopen checks remain regressions.
+- [ ] Obtain fresh independent CODE and separate requirements SOURCE reviews of the frozen candidate, publish actual results/limits, and commit/push/verify every coherent checkpoint. SOURCE/native results do not satisfy the visible criteria below.
+
+### Required P2b manual verification
+
+These criteria **block this PR's user-workflow acceptance**. A human or supported computer use may perform them under the standing visible-test authorization. Before launching, record the exact frozen source, complete outside-checkout package/executable SHA256 and selected4f9/44.5 Core build/resources. Prerequisites: passing affected build/native/SOURCE checks, native Windows x64 and a fresh disposable session. One owned game window at a time, at most ten minutes per launch; retain private screenshots/logs and no real session IDs/credentials in tracked evidence. Use `$taskExe` for the copied nested `WarhammerClient/Binaries/Win64/WarhammerClient.exe`:
+
+```powershell
+& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $taskExe
+# For a separately running matching Core, use its dedicated loopback URL:
+& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe
+```
+
+- [ ] **P2B-V1 — Two-player workflow and privacy screen.** (1) In a normal Managed launch, Connect/create as player-a; submit one offered mission and Refresh. Record revision, viewer, own mission and hidden opposing decision privately. (2) Click Hand off; before Ready, confirm the old board, mission, offered controls, roster/receipt/error and session-ID field are cleared, the target is player-b, and nothing automatically reveals the next view. (3) Click Ready; confirm same session, unchanged revision, viewer player-b, fresh local count0, only their own offered decision and no player-a private mission. Submit one player-b option and Refresh; confirm Core's actual committed outcome/revision. (4) Hand back, inspect the empty screen again, click Ready as player-a, and confirm only player-a's permitted mission/projection, no player-b private details and local count0. (5) Close normally and confirm Managed stops only its owned host. Native transport checks supply no-mutation/request-count assertions; pixels alone are insufficient.
+- [ ] **P2B-V2 — Read failure, UI isolation and Attach cleanup.** (1) Launch with a separately owned selected Core in Attach mode, using the approved child-only invalid player-b credential diagnostic (never publish credential values). Create/choose as player-a, then Hand off and Ready. Expect the actual HTTP401/code/message and a still-empty privacy display, with old board/options/missions/receipts absent and no automatic new session. Close normally and confirm the attached host survives. (2) Relaunch with ordinary credentials against that same retained host, open the known ID as player-a and perform handoff/Ready to player-b successfully. Confirm panel clicks, scrolling and focused-field F stay with UI, readable target/viewer/status text and no camera action while the display is hidden. (3) Close normally; confirm the attached service remains healthy before its separate owner stops it. Busy/UNKNOWN/pending switch denial and stale callback rejection are independently required native controls; do not manufacture an uncertain live command solely for a screenshot.
+
+For each checked result publish tester, UTC date, exact identities, ordered actions/actual observations, private evidence locations and limitations. Failed/blocked/not-run boxes remain unchecked. Physical RMB/MMB, actual OS switching/teardown, clean-host Windows and native Linux remain deferred HV criteria, not silently passed by this slice.
 
 ## Completed bounded increment: P2a reopen an existing active session
 
@@ -34,7 +71,7 @@ Manual/visible verification required for this PR (human **or** supported compute
 
 **Actual visible result:** [P2a packaged workflow](evidence/2026-10-24-p2a-visible.md), [identities/private evidence hashes](evidence/2026-10-24-p2a-visible.json). On 2026-10-24 the coordinator used supported Sky computer use on native Windows x64 with source/package20600a5, executable SHA256 `14c955951ad7dcd0d833f994251c485e14a0275d0dce5de803f160a18a71a521` and exact4f9/44.5 Core. Three sequential ordinary Attach launches passed: actual ID copy/paste across processes restored revision1/player-a/local0; one offered mission committed at revision2/local1; explicit Refresh kept opposing choices hidden. A fresh client rejected a path-style ID, displayed actual HTTP404 `session_not_found`, then reopened the corrected ID at revision2/local0. Field-focused F and panel wheel preserved board zoom; Frame board restored framing. All clients/launchers exited0 normally, attached Core survived each and its separate owner stopped it normally. Fourteen private captures and raw logs/results are retained. No physical held-button, OS-switch/teardown, clean-machine or Linux claim is added.
 
-**P2a implementation and verification are complete within this finite boundary; PR #7 awaits its normal merge.** No manual P2a gate remains. Stop this PR's feature scope here; broader P2 and the later milestones remain open. The next separate slice should bring an actual second-player/local-handoff workflow forward only through the selected public Core API, with its own bounded criteria and viewer-isolation checks.
+**P2a implementation and verification are complete within this finite boundary; PR #7 merged normally as `f490bf05a99f0621e59e4cba16a429d22aa6c825` on 2026-10-24T20:19:59Z.** No manual P2a gate remains. Stop this PR's feature scope here; broader P2 and the later milestones remain open. The next separate slice should bring an actual second-player/local-handoff workflow forward only through the selected public Core API, with its own bounded criteria and viewer-isolation checks.
 
 The deferred HV-01–HV-06 checks below retain their broader P1/P3/P8 scope and do not become owner-only blockers for P2a. Required physical-input and native-host capabilities remain explicit.
 
