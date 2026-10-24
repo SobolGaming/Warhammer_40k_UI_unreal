@@ -34,6 +34,16 @@ function Assert-FreshPreparationDestination([string]$Destination, [string]$Repos
     if (Test-Path -LiteralPath $resolvedDestination) { throw 'Preparation requires fresh source and runtime directories. Inspect existing output; this command never replaces or deletes it.' }
 }
 foreach ($destination in @($runtimeProfile.sourceRoot, $runtimeProfile.runtimeRoot)) { Assert-FreshPreparationDestination $destination $repo }
+function Set-CoreCheckoutBytePolicy([string]$SourceRoot) {
+    # The disposable clone must materialize literal committed bytes. Some Core
+    # JSON blobs contain CRLF despite *.json text eol=lf in its tracked attributes.
+    # A clone-local override avoids rewriting source or falsely dirtying checkout.
+    Assert-PlainPath $SourceRoot
+    $privateGit = Join-Path $SourceRoot '.git'
+    if (![IO.Directory]::Exists($privateGit)) { throw 'Exact-byte preparation requires its own ordinary Git clone.' }
+    [IO.Directory]::CreateDirectory((Join-Path $privateGit 'info')) | Out-Null
+    [IO.File]::WriteAllText((Join-Path $privateGit 'info/attributes'), "* -text -filter -ident -working-tree-encoding`n", $utf8)
+}
 $run = Join-Path $repo ('.local/development/core-prepare/' + [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssZ') + '-' + [guid]::NewGuid().ToString('N'))
 Assert-PlainPath $run
 [IO.Directory]::CreateDirectory($run) | Out-Null
@@ -75,8 +85,11 @@ try {
     if (![IO.Path]::GetFullPath($version).Equals($python, [StringComparison]::OrdinalIgnoreCase)) { throw 'Selected interpreter path differs.' }
     $null = Invoke-PreparationTool $git ($gitOptions + @('cat-file', '-e', ($runtimeProfile.commit + '^{commit}'))) 'selected-source' 30
     $null = Invoke-PreparationTool $git @('-c', 'core.hooksPath=NUL', 'clone', '--config', 'core.autocrlf=false', '--config', 'core.hooksPath=NUL', '--no-hardlinks', '--no-checkout', '--', $reference, $runtimeProfile.sourceRoot) 'clone' 180
+    Set-CoreCheckoutBytePolicy $runtimeProfile.sourceRoot
     $sourceGit = @('--no-optional-locks', '-c', 'core.autocrlf=false', '-c', 'core.hooksPath=NUL', '-C', $runtimeProfile.sourceRoot)
     $null = Invoke-PreparationTool $git ($sourceGit + @('checkout', '--detach', $runtimeProfile.commit)) 'checkout' 180
+    $initialChanges = Invoke-PreparationTool $git ($sourceGit + @('status', '--porcelain=v1', '--untracked-files=normal')) 'source-initial-clean' 30
+    if ($initialChanges) { throw 'Prepared source is dirty immediately after checkout; dependency installation was not started.' }
     $null = Invoke-PreparationTool $uv @('venv', '--python', $python, $runtimeProfile.runtimeRoot) 'venv' 120
     $installedPython = Join-Path $runtimeProfile.runtimeRoot 'Scripts/python.exe'
     $requirements = Join-Path $run 'requirements.txt'
@@ -100,6 +113,8 @@ print(json.dumps({'buildId': i.build_id, 'resourceCount': i.resource_count, 'bas
     $record['basePythonSha256'] = (Get-FileHash -LiteralPath $identity.baseExecutable -Algorithm SHA256).Hash
     $record['basePython'] = $identity.baseExecutable
     $record['lockSha256'] = (Get-FileHash -LiteralPath (Join-Path $runtimeProfile.sourceRoot 'uv.lock') -Algorithm SHA256).Hash
+    $record['sourceCheckoutPolicy'] = 'RAW_GIT_BLOBS'
+    $record['sourceCheckoutAttributesSha256'] = (Get-FileHash -LiteralPath (Join-Path $runtimeProfile.sourceRoot '.git/info/attributes') -Algorithm SHA256).Hash
     $record['requirementsSha256'] = (Get-FileHash -LiteralPath $requirements -Algorithm SHA256).Hash
     $record['preparationRun'] = $run
     $record.status = 'INSTALLED_RUNTIME_PASS'

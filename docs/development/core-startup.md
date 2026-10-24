@@ -18,11 +18,11 @@ A new 44.5 client requires44.5 Core. Selecting an old launcher profile does not 
 Prerequisites: installed native Python 3.14 (workspace 3.14.5), PowerShell 7, Git, `uv`, and the selected Git object available in the reference repository. Safe-fetch that branch if necessary using normal private Git authentication; never reset the reference checkout. The preparation script requires fresh destinations and never deletes/replaces an existing environment:
 
 ```powershell
-$taskPython = 'C:\path\to\native-python-3.14\python.exe'
+$taskPython = 'C:\path\to\physical-native-python-3.14\python.exe'
 & ./scripts/Prepare-CoreDevelopmentRuntime.ps1 -PythonExecutable $taskPython
 ```
 
-[Preparation](../../scripts/Prepare-CoreDevelopmentRuntime.ps1) independently clones committed Git objects without hardlinks, checks out the exact pin under `.local/core-source-44.5.0`, creates `.local/core-44.5.0`, installs dependencies from that source's frozen `uv.lock` with hashes, installs the Core package, verifies its exact build/resource identity and writes fresh `.development-provenance.json`. It records reference HEAD/status before/after and refuses changed source or mismatched identity. No historical E01 receipt is needed for 44.5. Failed output is retained under `.local/development/core-prepare/<run>` for inspection; choose a reviewed repair rather than deleting it blindly.
+Use the interpreter's physical directory; version-alias junctions are rejected by the path guard. [Preparation](../../scripts/Prepare-CoreDevelopmentRuntime.ps1) independently clones committed Git objects without hardlinks, uses clone-local literal-byte attributes (Core contains CRLF blobs under conflicting LF attributes), checks out the exact pin under `.local/core-source-44.5.0`, creates `.local/core-44.5.0`, installs dependencies from that source's frozen `uv.lock` with hashes, installs the Core package, verifies its exact build/resource identity and writes fresh `.development-provenance.json`. It records reference HEAD/status before/after and refuses changed source or mismatched identity. No historical E01 receipt is needed for 44.5. Failed output is retained under `.local/development/core-prepare/<run>` for inspection; choose a reviewed repair rather than deleting it blindly.
 
 [Runtime profiles](../../scripts/CoreRuntimeProfile.ps1) contain exact source/build/resource identities and default paths.44.5 uses build `warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba`,3130 resources.44.3.33 retains its previous build,3116 resources, sibling source and `.e01-provenance.json`; preparation does not modify it.
 
