@@ -4,7 +4,7 @@
 
 Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md` and the [single canonical migration plan](docs/plans/unreal-migration-plan.md) before work. It alone owns scope, priorities, milestone checklists and parity acceptance. `unreal-development-plan.md` is a compatibility pointer, and other plans/research/evidence are supporting documents. The owner explicitly confirmed Arcade as the Python UI baseline; `_python` was a naming mistake.
 
-Current bounded increment: **P1a Windows standalone package and non-visible checks**, on `codex/p1-windows-standalone` from main after merged PR #3. Its complete scope/exit criteria and exclusions are in the canonical plan. Package the existing client, preserve its runtime data/assets, add explicit packaged launcher selection, run focused offscreen and real-Core checks, and publish one new bounded PR. Do not extend that PR into later gameplay, profiles, viewer modes, Linux, release distribution or the remaining visible/clean-machine P1 acceptance.
+Completed bounded increment: **P1a Windows standalone package and non-visible checks**, on `codex/p1-windows-standalone` from main after merged PR #3, in open [PR #4](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4). Its scope, source-review/repair history, exact native results and exclusions are in the canonical plan and [P1a evidence](docs/plans/evidence/2026-10-24-p1a-windows-package.md). Stop this increment here. Later gameplay, profiles, viewer modes, Linux, release distribution and remaining visible/clean-machine P1 acceptance need separate bounded work; do not add them to PR #4.
 
 **SCREEN HOLD: the owner is using the computer. No visible launches, rendered/input tests, focus changes or GUI automation.** Builds/cooking and explicitly NullRHI/RenderOffScreen checks may proceed. Private-source/API review consent remains valid and is separate from desktop authority. Never reuse consumed visible approvals.
 
@@ -52,7 +52,7 @@ Keep review scope proportionate: changed code, directly used contracts and slice
 - Commit **and push every coherent checkpoint**, including plan, implementation, fixes and actual verification records. Record actual tests and pending reviews; checkpoints are not acceptance.
 - Verify exact GitHub branch ref equals the committed SHA after each push.
 - Use `gh` for normal GitHub actions and PR updates, with process-only `GH_TOKEN` loaded from `../github-full-access`. Keep `github_token` separate. Never display/log/commit either credential.
-- PR #3 is merged and closed. Use `codex/p1-windows-standalone` for a new P1a PR with explicit deliverables, acceptance evidence and exclusions. Close the increment at its defined boundary rather than adding later milestones. The current owner instruction requests this new PR; prior PR #3 merge authority does not automatically merge a different PR.
+- PR #3 is merged and closed. PR #4 on `codex/p1-windows-standalone` contains the bounded P1a deliverable and is prepared for review. Preserve its defined boundary and evidence. The current owner instruction requests this new PR; prior PR #3 merge authority does not automatically merge a different PR.
 - No force push/history rewrite/new remote/unrelated branch mutation. Exclude ignored/private evidence, generated binaries/caches and tokens.
 - Workspace-root AGENTS is local guidance, not a file for this repository's PR.
 
