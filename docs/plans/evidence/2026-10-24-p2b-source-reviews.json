@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "milestone": "P2b local two-player handoff",
+  "recordedUtc": "2026-10-24T23:53:59.565254+00:00",
+  "status": "FROZEN_RUNTIME_SOURCE_REVIEWS_PASS_LAUNCHER_DELTA_PENDING",
+  "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+  "destination": "configured OpenAI Codex service",
+  "consent": "Standing private-source/API review consent until explicitly revoked",
+  "independence": "Distinct fresh ephemeral CLI contexts; implementer notes/peer verdicts excluded from inputs",
+  "packets": [
+    {
+      "sourceHead": "efef9d0ca5909181afd517bb75cbfffad8a01319",
+      "manifest": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/manifest.json",
+        "bytes": 43133,
+        "sha256": "b09cc559b14bea626892274d78a39fbdc97a2d5a7e96c2bc6a14e9de9144558a"
+      },
+      "inputCount": 49,
+      "inputBytes": 688275,
+      "allDeclaredInputAndControlHashesMatched": true,
+      "manifestTransport": {
+        "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/development/Invoke-LiveCoreReview.ps1",
+        "bytes": 1821,
+        "sha256": "AF26868325FD105FD47A2263CB7B2F591589C38CF13501759CE6556E46E02668",
+        "roles": [
+          "CODE",
+          "REQ"
+        ],
+        "timeoutSeconds": 600,
+        "sandbox": "read-only",
+        "approval": "never",
+        "memoryDisabledRequested": true,
+        "ephemeral": true,
+        "modelOverride": false,
+        "resumeOrFork": false
+      },
+      "transportBindingLimit": "Actual invocation/completion records bind execution. Initial manifest references the prior wrapper; its actual invocation used the updated P2b wrapper with the recorded isolation settings."
+    },
+    {
+      "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "manifest": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/manifest.json",
+        "bytes": 43128,
+        "sha256": "898ad4a5e362ea943b659f2f4915bd6daf6b413922e6ec9c9becb71f8c83291d"
+      },
+      "inputCount": 49,
+      "inputBytes": 688713,
+      "allDeclaredInputAndControlHashesMatched": true,
+      "manifestTransport": {
+        "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/development/Invoke-P2bReview.ps1",
+        "bytes": 1821,
+        "sha256": "B9A6DDC29D51AB47E9810283BED84F654C7CBF1C275939CD66C02D06A3D14583",
+        "roles": [
+          "CODE",
+          "REQ"
+        ],
+        "timeoutSeconds": 600,
+        "sandbox": "read-only",
+        "approval": "never",
+        "memoryDisabledRequested": true,
+        "ephemeral": true,
+        "modelOverride": false,
+        "resumeOrFork": false
+      },
+      "transportBindingLimit": "Manifest transport and actual invocation recorded separately."
+    }
+  ],
+  "reviews": [
+    {
+      "sourceHead": "efef9d0ca5909181afd517bb75cbfffad8a01319",
+      "role": "CODE",
+      "verdict": "CHANGES_REQUESTED",
+      "scope": "Finite P2b SOURCE only",
+      "thread": "01a1704d-19fe-74c2-bca7-77199c18a208",
+      "startedUtc": "2026-10-24T23:44:23.0058087Z",
+      "finishedUtc": "2026-10-24T23:47:44.3254501Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "requestedSettings": {
+        "approval": "never",
+        "sandbox": "read-only",
+        "ephemeral": true,
+        "memoryDisabledRequested": true,
+        "timeoutSeconds": 600
+      },
+      "actualExecutable": "C:\\Users\\Rabid\\AppData\\Local\\OpenAI\\Codex\\bin\\8925276705115dea\\codex.exe",
+      "actualArguments": "exec --cd \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bLocalPlayerHandoff\\efef9d0-20261024T234410Z-db8fff9e\\CODE\" --skip-git-repo-check --sandbox read-only -c \"approval_policy=never\" -c \"memories.use_memories=false\" --ephemeral --json --color never -o \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bLocalPlayerHandoff\\efef9d0-20261024T234410Z-db8fff9e\\CODE\\report.txt\" -",
+      "shellCommandCount": 24,
+      "nonzeroShellExitCount": 0,
+      "mcpCallCount": 0,
+      "potentialMutatingShellPatternCount": 0,
+      "potentialMcpWritePatternCount": 0,
+      "conductPatternInspectionRequired": false,
+      "invocation": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/CODE/invocation.json",
+        "bytes": 994,
+        "sha256": "895a7ac52d0bf5a246813f4d7eccb0f528ec1c57c2115680b2c0a7d4a6527a12"
+      },
+      "completion": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/CODE/completion.json",
+        "bytes": 156,
+        "sha256": "fe44fd60a6129e06fd32af38a0a46aa58bf65b2fa433b51ff39a62d12eb11d1d"
+      },
+      "report": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/CODE/report.txt",
+        "bytes": 2138,
+        "sha256": "63af1c8338bffe7e35861e4d08c1e4b8d5dfe361b4570e7875869c0a18abe338"
+      },
+      "events": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/CODE/events.jsonl",
+        "bytes": 967875,
+        "sha256": "d3c6e860539d5fb9fad791eda5f376b1528226dde827d66b5aa2440e92c0eb74"
+      },
+      "stderr": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/CODE/stderr.log",
+        "bytes": 2652,
+        "sha256": "3e9fe5399cbc049eaa3529faf8c22150930ba2efeb32247958abf623f0f04641"
+      }
+    },
+    {
+      "sourceHead": "efef9d0ca5909181afd517bb75cbfffad8a01319",
+      "role": "REQ",
+      "verdict": "PASS",
+      "scope": "Finite P2b SOURCE only",
+      "thread": "01a1704d-15db-7911-b210-72549f9b866b",
+      "startedUtc": "2026-10-24T23:44:22.2513726Z",
+      "finishedUtc": "2026-10-24T23:47:34.9929202Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "requestedSettings": {
+        "approval": "never",
+        "sandbox": "read-only",
+        "ephemeral": true,
+        "memoryDisabledRequested": true,
+        "timeoutSeconds": 600
+      },
+      "actualExecutable": "C:\\Users\\Rabid\\AppData\\Local\\OpenAI\\Codex\\bin\\8925276705115dea\\codex.exe",
+      "actualArguments": "exec --cd \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bLocalPlayerHandoff\\efef9d0-20261024T234410Z-db8fff9e\\REQ\" --skip-git-repo-check --sandbox read-only -c \"approval_policy=never\" -c \"memories.use_memories=false\" --ephemeral --json --color never -o \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bLocalPlayerHandoff\\efef9d0-20261024T234410Z-db8fff9e\\REQ\\report.txt\" -",
+      "shellCommandCount": 24,
+      "nonzeroShellExitCount": 0,
+      "mcpCallCount": 0,
+      "potentialMutatingShellPatternCount": 0,
+      "potentialMcpWritePatternCount": 0,
+      "conductPatternInspectionRequired": false,
+      "invocation": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/REQ/invocation.json",
+        "bytes": 991,
+        "sha256": "973b67c235540b5da820c8c7a503cfd8d954cd74af6dc8513cd408e827d76510"
+      },
+      "completion": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/REQ/completion.json",
+        "bytes": 155,
+        "sha256": "85cf8da3cbb810739717565953fbe556e790c3bfd5a626b4621c5c4173ec1b1f"
+      },
+      "report": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/REQ/report.txt",
+        "bytes": 3751,
+        "sha256": "b5cbe6f826638d98a876e0e2302c2d42d2d92617cb1053eb5550faa8eddca3f6"
+      },
+      "events": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/REQ/events.jsonl",
+        "bytes": 927614,
+        "sha256": "db0eefa8a818b637b798363b0a22b64d4845c026d4fa8013ea22912faf21ea05"
+      },
+      "stderr": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/efef9d0-20261024T234410Z-db8fff9e/REQ/stderr.log",
+        "bytes": 734,
+        "sha256": "243eb4da12e24da3852b3ef1bc59d062feb94c5ffdadc437e7f78fdeeceba3cc"
+      }
+    },
+    {
+      "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "role": "CODE",
+      "verdict": "PASS",
+      "scope": "Finite P2b SOURCE only",
+      "thread": "01a17051-0561-7cf0-b311-e4ab924d645d",
+      "startedUtc": "2026-10-24T23:48:40.1551964Z",
+      "finishedUtc": "2026-10-24T23:53:24.7947382Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "requestedSettings": {
+        "approval": "never",
+        "sandbox": "read-only",
+        "ephemeral": true,
+        "memoryDisabledRequested": true,
+        "timeoutSeconds": 600
+      },
+      "actualExecutable": "C:\\Users\\Rabid\\AppData\\Local\\OpenAI\\Codex\\bin\\8925276705115dea\\codex.exe",
+      "actualArguments": "exec --cd \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bLocalPlayerHandoff\\a6dbb1c-20261024T234828Z-d93baba4\\CODE\" --skip-git-repo-check --sandbox read-only -c \"approval_policy=never\" -c \"memories.use_memories=false\" --ephemeral --json --color never -o \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bLocalPlayerHandoff\\a6dbb1c-20261024T234828Z-d93baba4\\CODE\\report.txt\" -",
+      "shellCommandCount": 32,
+      "nonzeroShellExitCount": 0,
+      "mcpCallCount": 0,
+      "potentialMutatingShellPatternCount": 0,
+      "potentialMcpWritePatternCount": 0,
+      "conductPatternInspectionRequired": false,
+      "invocation": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/CODE/invocation.json",
+        "bytes": 994,
+        "sha256": "682faaa9dcc60f4a66e5467c8ff0a89dd66eef440425fd8c829bf728b9cb3beb"
+      },
+      "completion": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/CODE/completion.json",
+        "bytes": 155,
+        "sha256": "358ea31101de8701600c6ac694cb024008b9d1cb512f7080ef5e37b9907dd2ae"
+      },
+      "report": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/CODE/report.txt",
+        "bytes": 1968,
+        "sha256": "61bae3deb7b4ddc0280a63b04a70cb3efc533b8e85c936394619b1eb81c9992f"
+      },
+      "events": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/CODE/events.jsonl",
+        "bytes": 951016,
+        "sha256": "7099ccd665330ac78c6c9c26a3f6908cb370ec1993edd8cb677cc097df8816da"
+      },
+      "stderr": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/CODE/stderr.log",
+        "bytes": 734,
+        "sha256": "19c1a4b4580291d62ebbe0a9cad86094292c0ec90031d22f5d844c324b38eb00"
+      }
+    },
+    {
+      "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "role": "REQ",
+      "verdict": "PASS",
+      "scope": "Finite P2b SOURCE only",
+      "thread": "01a17051-05f4-75c3-b413-2506e2bfee25",
+      "startedUtc": "2026-10-24T23:48:40.2977423Z",
+      "finishedUtc": "2026-10-24T23:51:56.8174210Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "requestedSettings": {
+        "approval": "never",
+        "sandbox": "read-only",
+        "ephemeral": true,
+        "memoryDisabledRequested": true,
+        "timeoutSeconds": 600
+      },
+      "actualExecutable": "C:\\Users\\Rabid\\AppData\\Local\\OpenAI\\Codex\\bin\\8925276705115dea\\codex.exe",
+      "actualArguments": "exec --cd \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bLocalPlayerHandoff\\a6dbb1c-20261024T234828Z-d93baba4\\REQ\" --skip-git-repo-check --sandbox read-only -c \"approval_policy=never\" -c \"memories.use_memories=false\" --ephemeral --json --color never -o \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bLocalPlayerHandoff\\a6dbb1c-20261024T234828Z-d93baba4\\REQ\\report.txt\" -",
+      "shellCommandCount": 31,
+      "nonzeroShellExitCount": 0,
+      "mcpCallCount": 0,
+      "potentialMutatingShellPatternCount": 0,
+      "potentialMcpWritePatternCount": 0,
+      "conductPatternInspectionRequired": false,
+      "invocation": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/REQ/invocation.json",
+        "bytes": 991,
+        "sha256": "7488d012a44885b0e3bfb3971cedb31cf28f34f95a2e5fdb0e5e360664bfc768"
+      },
+      "completion": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/REQ/completion.json",
+        "bytes": 155,
+        "sha256": "dbb7cd7755569ec682a80f6de3a4a0d7451124702832edaa8017be189aad29d1"
+      },
+      "report": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/REQ/report.txt",
+        "bytes": 3340,
+        "sha256": "1d644f2a229bf348a8d65685146faecc0fdbf1efdab12535f76d3c5d004c1229"
+      },
+      "events": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/REQ/events.jsonl",
+        "bytes": 940915,
+        "sha256": "fe9d3afc7b1be7c835b498253d14e4916b60382d7d522a9daf584326bc5be8cc"
+      },
+      "stderr": {
+        "privatePath": ".local/reviews/P2bLocalPlayerHandoff/a6dbb1c-20261024T234828Z-d93baba4/REQ/stderr.log",
+        "bytes": 734,
+        "sha256": "b7994fce4eb1416cae43c1cedf29ffe67fde40890205b4f0c6f66494fe76f372"
+      }
+    }
+  ],
+  "limits": [
+    "Requested read-only/approval-never/no-memory/ephemeral settings are recorded. Lower-level memory enforcement is not independently verified.",
+    "SOURCE verdicts cover only frozen affected source/contracts/authored tests. They do not establish build/native/GUI/Linux execution.",
+    "Observed event pattern counts are a limited conduct check; flagged patterns require explicit inspection, not an invented no-mutation certificate.",
+    "Initial CODE CHANGES_REQUESTED and initial18/19 Unit failure remain distinct; repaired candidate needs its own checks."
+  ],
+  "latestCandidateHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+  "resolvedFindings": [
+    {
+      "kind": "P2 synthetic receipt checkpoint mismatch",
+      "repairHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "result": "19/19 Unit and both fresh full SOURCE roles passed; production parser unchanged."
+    },
+    {
+      "kind": "P3 stale player-a-only architecture sentence",
+      "repairHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+      "result": "Clarified current expected development player; documentation only."
+    },
+    {
+      "kind": "P3 launcher regex accepted trailing LF",
+      "repairHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+      "result": "Strict absolute anchors and LF/CRLF/embedded-LF regression cases;12 offline credential cases pass. Fresh delta SOURCE review pending."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 170, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 171, 2026-10-24. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -17,16 +17,18 @@ Scope excludes session listing/new-principal joining, remote/spectator UI, arbit
 Implementation:
 
 - [x] Verify PR #7/main and start a separate bounded branch; preserve its completed evidence and record the actual merge.
-- [ ] Bind protocol/session reads, outcomes, decision actor and own-mission display to explicit supported player-a/player-b identities; reject wrong viewer/scope atomically without administrator fallback.
-- [ ] Add two-phase handoff: Begin clears old viewer state, credentials, board actors, rosters, decisions/options, mission/outcome/error text and camera capture; Ready reads only the target player's metadata/projection. Block busy/UNKNOWN/pending-command switching and stale callbacks; keep failed target reads private and retryable.
-- [ ] Supply separate player-b development credentials through existing native launch routes with override validation, redaction and environment restoration; retain current Managed/Attach ownership and Linux seams.
-- [ ] Add clear Hand off/Ready controls and target/viewer/local-count labels; update README, architecture and the PR body with the actual workflow, limits and manual instructions.
+- [x] Bind protocol/session reads, outcomes, decision actor and own-mission display to explicit supported player-a/player-b identities; reject wrong viewer/scope atomically without administrator fallback.
+- [x] Add two-phase handoff: Begin clears old viewer state, credentials, board actors, rosters, decisions/options, mission/outcome/error text and camera capture; Ready reads only the target player's metadata/projection. Block busy/UNKNOWN/pending-command switching and stale callbacks; keep failed target reads private and retryable.
+- [x] Supply separate player-b development credentials through existing native launch routes with override validation, redaction and environment restoration; retain current Managed/Attach ownership and Linux seams.
+- [x] Add clear Hand off/Ready controls and target/viewer/local-count labels; update README, architecture and the PR body with the actual workflow, limits and manual instructions.
 
 Verification:
 
-- [ ] Run focused protocol/state/launcher regressions for wrong viewer/credential, malformed identity, all unsafe handoff states, empty privacy state, stale callbacks and failed-read retry. Observe zero HTTP at Begin, exactly player metadata/projection GETs at Ready, and no create/start/admin/mutation during handoff.
-- [ ] Build the affected Windows Development package, check Unit/resources and real Core a-choice → hide → b-read/choice → hide → a-read in Managed and Attach modes. Record exact source/package/Core, original IDs/revisions, per-viewer privacy and normal owned/attached cleanup. Existing create/reopen checks remain regressions.
+- [x] Run focused protocol/state/launcher regressions for wrong viewer/credential, malformed identity, all unsafe handoff states, empty privacy state, stale callbacks and failed-read retry. Observe zero HTTP at Begin, exactly player metadata/projection GETs at Ready, and no create/start/admin/mutation during handoff.
+- [x] Build the affected Windows Development package, check Unit/resources and real Core a-choice → hide → b-read/choice → hide → a-read in Managed and Attach modes. Record exact source/package/Core, original IDs/revisions, per-viewer privacy and normal owned/attached cleanup. Existing create/reopen checks remain regressions.
 - [ ] Obtain fresh independent CODE and separate requirements SOURCE reviews of the frozen candidate, publish actual results/limits, and commit/push/verify every coherent checkpoint. SOURCE/native results do not satisfy the visible criteria below.
+
+**Actual non-visible results:** [native/launcher provenance](evidence/2026-10-24-p2b-native.json), [independent SOURCE records](evidence/2026-10-24-p2b-source-reviews.json). Runtime source `a6dbb1ca4ca34be2aaeef767286a9738145a439a` passed the35.506-second Windows Game/Editor package build,19 Unit,4 resource and three real Core workflows in each mode:29 executions/26 distinct names across four native launches. Attach remained HTTP200 after client exit and its separate owner stopped it normally; Managed stopped normally. CODE and separate REQ passed their finite source scope. The original18/19 Unit failure and CODE request for changes remain preserved; the synthetic receipt fixture was repaired without weakening production validation. A later launcher-only absolute-anchor fix and architecture wording correction at `a1d9013b62336997b838c21c3e4860e20cd9cb7e` passed12 credential controls; separate source delta review and required visible checks remain pending. No C++ or Config changed after a6dbb1c.
 
 ### Required P2b manual verification
 
