@@ -299,8 +299,9 @@ private:
         {
             FLiveCoreCameraInputObservation O;
             if (Read(O))
-            { Check(SamePose(O, Baseline) && O.bReady == Baseline.bReady && O.Focus.Equals(Baseline.Focus, 1.e-3) &&
-                FMath::IsNearlyEqual(O.Distance, Baseline.Distance, 1.e-3), TEXT("Original navigation and actor pose restored")); }
+            { Check(SameNavigation(O, Baseline) && O.bReady == Baseline.bReady &&
+                FMath::IsNearlyEqual(O.MinimumDistance, Baseline.MinimumDistance, 1.e-3) &&
+                FMath::IsNearlyEqual(O.MaximumDistance, Baseline.MaximumDistance, 1.e-3), TEXT("Original navigation, zoom bounds and actor pose restored")); }
         }
         if (bVerifyDriver && FSlateApplication::IsInitialized())
         {
