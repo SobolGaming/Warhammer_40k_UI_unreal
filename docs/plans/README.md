@@ -2,7 +2,7 @@
 
 [unreal-migration-plan.md](unreal-migration-plan.md) is the **single canonical root plan** for current scope, all feature-parity milestones and implementation/verification status. `unreal-development-plan.md` preserves old links as a pointer only. The owner has confirmed `Warhammer_40k_UI_arcade` as the Python UI baseline.
 
-Current finite increment: **P2a reopen an existing active session**, [PR #7](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/7), on `codex/p2a-reopen-session` from PR #6 merge `dbe186ff`. Implementation and bounded verification are complete at source20600a5, pending normal merge. It adds player-a known-ID reads/Open controls; P2A-V1/V2 passed actual visible verification. The deferred human/platform checklist HV-01–HV-06 remains unchecked with its own instructions and milestone ownership. PR #6/P1c is merged; its [native results](evidence/2026-10-24-p1c-core-adoption.md), [identities](evidence/2026-10-24-p1c-core-adoption.json) and [source reviews](evidence/2026-10-24-p1c-source-reviews.json) retain their exact scope.
+Current finite increment: **P2b local two-player handoff**, [PR #8](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/8), branch `codex/p2b-local-player-handoff` from PR #7 merge `f490bf05`. It adds explicit privacy-cleared Hand off/Ready between existing development players on one session. Implementation/native/SOURCE/visible status belongs to the canonical plan; P2B-V1/V2 have separate required manual steps mirrored in the PR body. Full gameplay, remote/spectator, durability and deferred HV-01–HV-06 remain outside this PR. P2a/PR #7 is merged; its native, SOURCE and visible evidence below retains its exact scope.
 
 P2a supporting evidence:
 

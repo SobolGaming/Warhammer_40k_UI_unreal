@@ -8,7 +8,7 @@ This document owns scope, priorities, baselines, milestone checklists and featur
 
 ## Current bounded increment: P2b local two-player handoff
 
-Branch: `codex/p2b-local-player-handoff`, from verified PR #7 merge `f490bf05a99f0621e59e4cba16a429d22aa6c825` (2026-10-24T20:19:59Z), exact head `8e1246725577b7d68c9685e832dd87f227aadb8e`. This PR is limited to the two existing development principals on one selected Core session. Core remains exact `4f9bef0df2fb974d1285232a1009b8781926361d` /44.5.0; no runtime upgrade or sibling edit is included.
+Branch: `codex/p2b-local-player-handoff`, [PR #8](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/8), from verified PR #7 merge `f490bf05a99f0621e59e4cba16a429d22aa6c825` (2026-10-24T20:19:59Z), exact head `8e1246725577b7d68c9685e832dd87f227aadb8e`. This PR is limited to the two existing development principals on one selected Core session. Core remains exact `4f9bef0df2fb974d1285232a1009b8781926361d` /44.5.0; no runtime upgrade or sibling edit is included.
 
 Finite deliverable: let player-a select an offered secondary mission, explicitly hide the current viewer's display for handoff, then let player-b click Ready to read their own projection and make their offered choice. Support handing back through the same privacy-cleared path. Handoff itself sends no mutation or lifecycle request. Only the selected player's credential authenticates metadata/projection/commands, and every returned viewer must match the fixed expected player. This is local development convenience on a trusted workstation; the privacy screen is not account authentication or protection against a person who can inspect the process.
 

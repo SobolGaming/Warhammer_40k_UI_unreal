@@ -523,4 +523,71 @@ bool FLiveCorePublicRosterTest::RunTest(const FString& Parameters)
     return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreExplicitPlayerScopeTest,
+    "Warhammer.LiveCore.Unit.Handoff.ExpectedPlayerScope", Flags)
+bool FLiveCoreExplicitPlayerScopeTest::RunTest(const FString& Parameters)
+{
+    FString MetadataText, ProjectionText, ReceiptText, Error;
+    if (!LoadSelected(*this, TEXT("contracts/examples/sessions/session-metadata-created.json"), MetadataText) ||
+        !Load(*this, TEXT("wire/view_initial/playerA.json"), ProjectionText) ||
+        !LoadReceiptControl(*this, TEXT("wire/finite_accepted/playerA.json"), ReceiptText)) { return false; }
+    AddInfo(TEXT("Derived two-player parser controls retain committed shapes; these are not real handoff observations."));
+    E01::FReadError ReadError; TSharedPtr<FJsonObject> Metadata, Projection, Receipt;
+    if (!E01::ParseObject(MetadataText, Metadata, ReadError) || !E01::ParseObject(ProjectionText, Projection, ReadError) ||
+        !E01::ParseObject(ReceiptText, Receipt, ReadError)) { AddError(TEXT("Committed parser controls are invalid.")); return false; }
+    const FString SessionId = Metadata->GetStringField(TEXT("session_id"));
+    Metadata->SetStringField(TEXT("session_state"), TEXT("active")); Metadata->SetNumberField(TEXT("session_revision"), 1);
+    const auto Visibility = Metadata->GetObjectField(TEXT("visibility"));
+    Visibility->SetStringField(TEXT("role"), TEXT("player")); Visibility->SetStringField(TEXT("player_id"), TEXT("player-b"));
+    Visibility->SetNumberField(TEXT("delay_revisions"), 0); Visibility->SetBoolField(TEXT("may_mutate_lifecycle"), false);
+    Visibility->SetBoolField(TEXT("may_submit_decision"), true); Visibility->SetBoolField(TEXT("omniscient"), false);
+    LiveCoreProtocol::FMetadata ParsedMetadata;
+    TestTrue(TEXT("Metadata accepts only explicitly expected player-b"), LiveCoreProtocol::ReadExistingSession(
+        Serialize(Metadata.ToSharedRef()), SessionId, ParsedMetadata, Error, TEXT("player-b")));
+    TestFalse(TEXT("Default player-a read rejects player-b metadata"), LiveCoreProtocol::ReadExistingSession(
+        Serialize(Metadata.ToSharedRef()), SessionId, ParsedMetadata, Error));
+    TestFalse(TEXT("Arbitrary expected player cannot authorize a read"), LiveCoreProtocol::ReadExistingSession(
+        Serialize(Metadata.ToSharedRef()), SessionId, ParsedMetadata, Error, TEXT("player-c")));
+
+    Projection->SetStringField(TEXT("session_id"), SessionId);
+    const auto View = Projection->GetObjectField(TEXT("projection"));
+    View->SetStringField(TEXT("viewer_player_id"), TEXT("player-b"));
+    View->GetObjectField(TEXT("pending_decision"))->SetStringField(TEXT("actor_id"), TEXT("player-b"));
+    TArray<TSharedPtr<FJsonValue>> Choices;
+    for (const TCHAR* Player : {TEXT("player-a"), TEXT("player-b")})
+    {
+        const auto Choice = MakeShared<FJsonObject>(); Choice->SetStringField(TEXT("player_id"), Player);
+        Choice->SetBoolField(TEXT("hidden"), false); Choice->SetStringField(TEXT("mode"), Player);
+        Choice->SetArrayField(TEXT("fixed_mission_ids"), TArray<TSharedPtr<FJsonValue>>());
+        Choices.Add(MakeShared<FJsonValueObject>(Choice));
+    }
+    View->SetArrayField(TEXT("public_secondary_mission_choices"), Choices);
+    FLiveCoreState State;
+    TestTrue(TEXT("Expected player-b projection is independently accepted"), LiveCoreProtocol::ReadProjection(
+        Serialize(Projection.ToSharedRef()), SessionId, State, Error, TEXT("player-b")));
+    TestEqual(TEXT("Viewer identity derives from the bound expected player"), State.ViewerPlayerId, FString(TEXT("player-b")));
+    TestEqual(TEXT("Only expected player's own mission summary is selected"), State.MissionSummary, FString(TEXT("player-b")));
+    TestTrue(TEXT("Expected player's finite request is actionable"), State.DecisionPresentation == ELiveCoreDecisionPresentation::FiniteOptions && !State.Options.IsEmpty());
+    const uint64 Version = State.ProjectionVersion;
+    View->SetStringField(TEXT("viewer_player_id"), TEXT("player-a"));
+    TestFalse(TEXT("Old viewer projection cannot replace new viewer state"), LiveCoreProtocol::ReadProjection(
+        Serialize(Projection.ToSharedRef()), SessionId, State, Error, TEXT("player-b")));
+    TestEqual(TEXT("Wrong-viewer rejection remains atomic"), State.ProjectionVersion, Version);
+    TestEqual(TEXT("Wrong-viewer rejection preserves validated new viewer"), State.ViewerPlayerId, FString(TEXT("player-b")));
+
+    const FString CommandId = Receipt->GetStringField(TEXT("command_id"));
+    const auto ReceiptMetadata = Receipt->GetObjectField(TEXT("session"));
+    const FString ReceiptSessionId = ReceiptMetadata->GetStringField(TEXT("session_id"));
+    ReceiptMetadata->GetObjectField(TEXT("visibility"))->SetStringField(TEXT("player_id"), TEXT("player-b"));
+    LiveCoreProtocol::FOutcome Outcome;
+    TestTrue(TEXT("Receipt is bound to retained player-b command scope"), LiveCoreProtocol::ReadOutcome(Serialize(Receipt.ToSharedRef()),
+        200, CommandId, ReceiptSessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error, TEXT("player-b")));
+    TestFalse(TEXT("Player-b receipt is refused for retained player-a scope"), LiveCoreProtocol::ReadOutcome(Serialize(Receipt.ToSharedRef()),
+        200, CommandId, ReceiptSessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
+    ReceiptMetadata->GetObjectField(TEXT("visibility"))->SetStringField(TEXT("player_id"), TEXT("player-a"));
+    TestFalse(TEXT("Old player's valid receipt cannot satisfy new player's command"), LiveCoreProtocol::ReadOutcome(Serialize(Receipt.ToSharedRef()),
+        200, CommandId, ReceiptSessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error, TEXT("player-b")));
+    return true;
+}
+
 #endif

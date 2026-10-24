@@ -32,7 +32,7 @@ if ($PSCmdlet.ParameterSetName -eq 'Packaged') {
 foreach ($path in $requiredFiles) { if (!(Test-Path -LiteralPath $path -PathType Leaf)) { throw ('Required client file is missing: ' + $path) } }
 $hostArguments = @{ Mode = $CoreMode; Port = $Port; CoreVersion = $CoreVersion; CoreRoot = $CoreRoot; ReadinessSeconds = $ReadinessSeconds }
 if ($Endpoint) { $hostArguments.Endpoint = $Endpoint }
-$environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
+$environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_PLAYER_B_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
 $savedEnvironment = @{}
 foreach ($name in $environmentNames) { $savedEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 $hostInfo = $null; $client = $null

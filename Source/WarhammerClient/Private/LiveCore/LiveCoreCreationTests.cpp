@@ -6,6 +6,8 @@
 #include "Migration/CoreBoundaryEvidence.h"
 #include "Dom/JsonObject.h"
 #include "HAL/PlatformMisc.h"
+#include "HttpModule.h"
+#include "Interfaces/IHttpRequest.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Serialization/JsonSerializer.h"
@@ -55,6 +57,35 @@ struct FLiveCoreSessionCreationTestAccess
     {
         Client.HandleCreateReply(Status, Body);
     }
+    static void ProjectionReply(FLiveCoreSession& Client, int32 Status, const FString& Body)
+    { Client.HandleProjectionReply(Status, Body); }
+    static void SeedPrivateDisplay(FLiveCoreSession& Client)
+    {
+        auto& State = Client.State; State.Endpoint = TEXT("http://127.0.0.1:8765");
+        State.bHasSession = true; State.SessionId = TEXT("session-synthetic-handoff"); State.SessionRevision = 2;
+        State.ProjectionRevision = 2; State.ProjectionVersion = 7; State.ViewerPlayerId = TEXT("player-a");
+        State.Phase = TEXT("old-private-phase"); State.RequestId = TEXT("old-private-request");
+        State.RequestType = TEXT("old-private-type"); State.MissionSummary = TEXT("old-private-missions");
+        State.Error = TEXT("old-private-error"); State.RecordedCommandError = State.Error;
+        State.bLastCommandHasOutcome = true; State.bLastCommandAccepted = true; State.bLastCommandCommitted = true;
+        State.LastOutcomeCode = TEXT("old-private-outcome"); State.AcceptedActionCount = 9;
+        State.LastHttpStatus = 200; State.BoardBoundsInches = FBox2D(FVector2D(0, 0), FVector2D(44, 60));
+        State.Terrain.AddDefaulted(); State.Objectives.AddDefaulted(); State.Models.AddDefaulted(); State.Options.AddDefaulted();
+        State.bHasPublicArmyRosters = true; State.PublicArmyRosters.AddDefaulted();
+        Client.AdministratorToken = TEXT("synthetic-admin"); Client.PlayerToken = TEXT("synthetic-player");
+    }
+    static bool CredentialsCleared(const FLiveCoreSession& Client)
+    { return Client.AdministratorToken.IsEmpty() && Client.PlayerToken.IsEmpty(); }
+    static bool UsesPlayerBCredential(const FLiveCoreSession& Client)
+    { return Client.PlayerToken == FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_B_TOKEN")) && Client.AdministratorToken.IsEmpty(); }
+    static uint64 CurrentGeneration(const FLiveCoreSession& Client) { return Client.Generation; }
+    static bool ReplyMatchesGeneration(FLiveCoreSession& Client, uint64 Generation)
+    {
+        auto Request = FHttpModule::Get().CreateRequest(); Client.ActiveRequest = Request;
+        const bool Accepted = Client.IsCurrentReply(Generation, Request); Client.ActiveRequest.Reset(); return Accepted;
+    }
+    static void SetUnsentActiveRequest(FLiveCoreSession& Client)
+    { Client.ActiveRequest = FHttpModule::Get().CreateRequest(); }
 };
 
 namespace
@@ -66,20 +97,36 @@ class FScopedOpenCredentials
 public:
     FScopedOpenCredentials()
         : Administrator(FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_ADMIN_TOKEN"))),
-          Player(FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN")))
+          Player(FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN"))),
+          PlayerB(FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_B_TOKEN")))
     {
         FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_ADMIN_TOKEN"), TEXT("synthetic-unused-admin"));
         FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_PLAYER_TOKEN"), TEXT("synthetic-open-player"));
+        FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_PLAYER_B_TOKEN"), TEXT("synthetic-handoff-player-b"));
     }
     ~FScopedOpenCredentials()
     {
         FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_ADMIN_TOKEN"), *Administrator);
         FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_PLAYER_TOKEN"), *Player);
+        FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_PLAYER_B_TOKEN"), *PlayerB);
     }
 private:
     FString Administrator;
     FString Player;
+    FString PlayerB;
 };
+
+bool DisplayClearedForHandoff(const FLiveCoreState& Value)
+{
+    return Value.bHandoffPending && !Value.bHasSession && Value.SessionId.IsEmpty() && Value.ViewerPlayerId.IsEmpty() &&
+        Value.Endpoint.IsEmpty() && Value.Phase.IsEmpty() && Value.RequestId.IsEmpty() && Value.RequestType.IsEmpty() &&
+        Value.MissionSummary.IsEmpty() && Value.RecordedCommandError.IsEmpty() && Value.LastOutcomeCode.IsEmpty() &&
+        !Value.bLastCommandHasOutcome && !Value.bLastCommandAccepted && !Value.bLastCommandCommitted && Value.AcceptedActionCount == 0 &&
+        Value.SessionRevision == -1 && Value.ProjectionRevision == -1 && Value.ProjectionVersion == 0 &&
+        !Value.BoardBoundsInches.bIsValid && Value.Terrain.IsEmpty() && Value.Objectives.IsEmpty() && Value.Models.IsEmpty() &&
+        Value.Options.IsEmpty() && !Value.bHasPublicArmyRosters && Value.PublicArmyRosters.IsEmpty() &&
+        Value.DecisionPresentation == ELiveCoreDecisionPresentation::Unavailable;
+}
 
 bool LoadActivePlayerMetadata(FAutomationTestBase& Test, FString& Out, FString& SessionId)
 {
@@ -260,6 +307,114 @@ bool FLiveCoreOpenGuardTest::RunTest(const FString& Parameters)
         Client->Shutdown();
     }
     return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreHandoffClearAndGuardTest,
+    "Warhammer.LiveCore.Unit.Handoff.ClearAndGuards", CreationFlags)
+bool FLiveCoreHandoffClearAndGuardTest::RunTest(const FString& Parameters)
+{
+    for (int32 Case = 0; Case < 8; ++Case)
+    {
+        int32 Requests = 0; const auto Client = FLiveCoreSession::Create();
+        FLiveCoreSessionCreationTestAccess::SeedPrivateDisplay(Client.Get());
+        FLiveCoreSessionCreationTestAccess::BlockRequests(Client.Get(), Requests);
+        auto& Value = FLiveCoreSessionCreationTestAccess::MutableState(Client.Get());
+        if (Case == 0) { Value.bBusy = true; }
+        if (Case == 1) { Value.bUnknown = true; }
+        if (Case == 2) { FLiveCoreSessionCreationTestAccess::RetainPending(Client.Get()); }
+        if (Case == 3) { Client->Shutdown(); }
+        if (Case == 4) { Value.ProjectionVersion = 0; }
+        if (Case == 5) { Value.ViewerPlayerId = TEXT("player-c"); }
+        if (Case == 6) { Value.bHasSession = false; }
+        if (Case == 7) { FLiveCoreSessionCreationTestAccess::SetUnsentActiveRequest(Client.Get()); }
+        TestFalse(TEXT("Unsafe or unverified state cannot begin handoff"), Client->CanBeginPlayerHandoff());
+        TestFalse(TEXT("Blocked handoff returns no transition"), Client->BeginPlayerHandoff());
+        Client->ContinuePlayerHandoff();
+        TestEqual(TEXT("Blocked handoff/Ready sends no request"), Requests, 0);
+        TestEqual(TEXT("Blocked handoff retains prior private display rather than discarding command context"), Value.MissionSummary, FString(TEXT("old-private-missions")));
+        if (Case == 2) { TestTrue(TEXT("Retained uncertain-command bytes survive blocked switching"), FLiveCoreSessionCreationTestAccess::HasExactRetainedCommand(Client.Get())); }
+        Client->Shutdown();
+    }
+    int32 Requests = 0; const auto Client = FLiveCoreSession::Create();
+    FLiveCoreSessionCreationTestAccess::SeedPrivateDisplay(Client.Get());
+    FLiveCoreSessionCreationTestAccess::BlockRequests(Client.Get(), Requests);
+    const uint64 OldGeneration = FLiveCoreSessionCreationTestAccess::CurrentGeneration(Client.Get());
+    bool bChangedSawClearedState = false;
+    Client->OnChanged.BindLambda([&]() { bChangedSawClearedState = DisplayClearedForHandoff(Client->GetState()); });
+    TestTrue(TEXT("Verified idle player can begin handoff"), Client->CanBeginPlayerHandoff());
+    TestTrue(TEXT("Begin performs local handoff transition"), Client->BeginPlayerHandoff());
+    TestTrue(TEXT("Change notification exposes only the cleared privacy state"), bChangedSawClearedState);
+    TestTrue(TEXT("Entire former player snapshot is cleared before Ready"), DisplayClearedForHandoff(Client->GetState()));
+    TestEqual(TEXT("Only intended next development player is identified"), Client->GetState().HandoffTargetPlayerId, FString(TEXT("player-b")));
+    TestTrue(TEXT("Old player/admin credentials are dropped"), FLiveCoreSessionCreationTestAccess::CredentialsCleared(Client.Get()));
+    TestFalse(TEXT("Obsolete callback generation is rejected by actual HTTP completion gate"), FLiveCoreSessionCreationTestAccess::ReplyMatchesGeneration(Client.Get(), OldGeneration));
+    TestTrue(TEXT("Current generation/request still matches completion gate"), FLiveCoreSessionCreationTestAccess::ReplyMatchesGeneration(Client.Get(), FLiveCoreSessionCreationTestAccess::CurrentGeneration(Client.Get())));
+    Client->CreateAndStart(TEXT("http://127.0.0.1:8765")); Client->NewSession();
+    Client->OpenExistingSession(TEXT("http://127.0.0.1:8765"), TEXT("session-other"));
+    Client->Refresh(); Client->SubmitOption(TEXT("old-private-option")); Client->ReconcileUnknown();
+    TestEqual(TEXT("Begin and all non-Ready actions during curtain send no request"), Requests, 0);
+    TestTrue(TEXT("Blocked creation/open/refresh cannot restore prior viewer snapshot"), DisplayClearedForHandoff(Client->GetState()));
+    Client->Shutdown(); return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreHandoffRetryTest,
+    "Warhammer.LiveCore.Unit.Handoff.ReadFailuresKeepPrivacy", CreationFlags)
+bool FLiveCoreHandoffRetryTest::RunTest(const FString& Parameters)
+{
+    FScopedOpenCredentials Credentials;
+    FString MetadataA, SessionId;
+    if (!LoadActivePlayerMetadata(*this, MetadataA, SessionId)) { return false; }
+    const FString MetadataB = MetadataA.Replace(TEXT("player-a"), TEXT("player-b"));
+    FString ProjectionA;
+    const FString ProjectionPath = FPaths::Combine(FPaths::ProjectDir(),
+        TEXT("tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/wire/view_initial/playerA.json"));
+    if (!FFileHelper::LoadFileToString(ProjectionA, *ProjectionPath)) { AddError(TEXT("Projection parser control is unavailable.")); return false; }
+    Warhammer::Migration::E01::FReadError Error; TSharedPtr<FJsonObject> Projection;
+    if (!Warhammer::Migration::E01::ParseObject(ProjectionA, Projection, Error)) { AddError(TEXT("Projection parser control is invalid.")); return false; }
+    Projection->SetStringField(TEXT("session_id"), SessionId);
+    ProjectionA.Reset();
+    { const auto Writer = TJsonWriterFactory<>::Create(&ProjectionA); FJsonSerializer::Serialize(Projection.ToSharedRef(), Writer); }
+    // These are synthetic callback controls, not a claim about live Core's private fields.
+    const FString ProjectionB = ProjectionA.Replace(TEXT("player-a"), TEXT("player-b"));
+    TArray<FOpenRequestAttempt> Attempts; const auto Client = FLiveCoreSession::Create();
+    FLiveCoreSessionCreationTestAccess::SeedPrivateDisplay(Client.Get());
+    FLiveCoreSessionCreationTestAccess::MutableState(Client.Get()).SessionId = SessionId;
+    FLiveCoreSessionCreationTestAccess::MutableState(Client.Get()).SessionRevision = 1;
+    FLiveCoreSessionCreationTestAccess::MutableState(Client.Get()).ProjectionRevision = 1;
+    FLiveCoreSessionCreationTestAccess::RecordAndBlockRequests(Client.Get(), Attempts);
+    if (!TestTrue(TEXT("Seeded viewer begins privacy transition"), Client->BeginPlayerHandoff())) { return false; }
+    FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_PLAYER_B_TOKEN"), TEXT(""));
+    Client->ContinuePlayerHandoff();
+    TestEqual(TEXT("Missing player-b credential causes zero HTTP; player-a/admin are no fallback"), Attempts.Num(), 0);
+    TestTrue(TEXT("Missing credential keeps every prior private value absent"), DisplayClearedForHandoff(Client->GetState()));
+    TestTrue(TEXT("Missing credential is named without its value"), Client->GetState().Error.Contains(TEXT("WH_CORE_PLAYER_B_TOKEN")));
+    FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_PLAYER_B_TOKEN"), TEXT("synthetic-handoff-player-b"));
+    const FString HttpError(TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"authentication_required\",\"message\":\"Authentication is required.\"}}"));
+    Client->ContinuePlayerHandoff();
+    TestTrue(TEXT("Ready retains only player-b credential"), FLiveCoreSessionCreationTestAccess::UsesPlayerBCredential(Client.Get()));
+    FLiveCoreSessionCreationTestAccess::ExistingReply(Client.Get(), 401, HttpError, SessionId);
+    TestTrue(TEXT("Real-shaped HTTP failure keeps privacy curtain retryable"), DisplayClearedForHandoff(Client->GetState()));
+    TestTrue(TEXT("Actual status/code remains visible"), Client->GetState().Error.Contains(TEXT("HTTP 401")) && Client->GetState().Error.Contains(TEXT("authentication_required")));
+    Client->ContinuePlayerHandoff();
+    FLiveCoreSessionCreationTestAccess::ExistingReply(Client.Get(), 200, MetadataA, SessionId);
+    TestTrue(TEXT("Wrong-player metadata cannot publish any prior/new partial state"), DisplayClearedForHandoff(Client->GetState()));
+    Attempts.Reset(); Client->ContinuePlayerHandoff();
+    FLiveCoreSessionCreationTestAccess::ExistingReply(Client.Get(), 200, MetadataB, SessionId);
+    TestTrue(TEXT("Metadata success does not uncover the screen before a validated projection"), DisplayClearedForHandoff(Client->GetState()));
+    TestEqual(TEXT("Ready metadata/projection path is exactly two requests"), Attempts.Num(), 2);
+    FLiveCoreSessionCreationTestAccess::ProjectionReply(Client.Get(), 200, ProjectionA);
+    TestTrue(TEXT("Wrong-player projection leaves the entire display cleared"), DisplayClearedForHandoff(Client->GetState()));
+    Attempts.Reset(); Client->ContinuePlayerHandoff();
+    FLiveCoreSessionCreationTestAccess::ExistingReply(Client.Get(), 200, MetadataB, SessionId);
+    FLiveCoreSessionCreationTestAccess::ProjectionReply(Client.Get(), 200, ProjectionB);
+    TestFalse(TEXT("Validated current-player projection releases curtain"), Client->GetState().bHandoffPending);
+    TestTrue(TEXT("Recovered snapshot is attached to exactly intended session/viewer"), Client->GetState().bHasSession && Client->GetState().SessionId == SessionId && Client->GetState().ViewerPlayerId == TEXT("player-b"));
+    TestEqual(TEXT("Recovered view starts a fresh local count"), Client->GetState().AcceptedActionCount, 0);
+    TestEqual(TEXT("Recovered view begins with one new projection delivery"), Client->GetState().ProjectionVersion, uint64(1));
+    TestTrue(TEXT("No former command receipt/error is replayed"), !Client->GetState().bLastCommandHasOutcome && Client->GetState().Error.IsEmpty());
+    for (const auto& Attempt : Attempts)
+    { TestTrue(TEXT("Ready uses only non-admin read attempts"), Attempt.Verb == TEXT("GET") && !Attempt.bMutation && !Attempt.bAdministrator); }
+    Client->Shutdown(); return true;
 }
 
 #endif

@@ -46,7 +46,7 @@ $info.Environment['DOTNET_ROLL_FORWARD'] = 'LatestMajor'
 $info.Environment['UE_DOTNET_VERSION'] = '10.0'
 $info.Environment['UE_DOTNET_DIR'] = $dotnetRoot
 foreach ($name in @('VisualStudioDir', 'VSSKUEDITION', 'PkgDefApplicationConfigFile', 'VSAPPIDDIR', 'VisualStudioEdition', 'VisualStudioVersion',
-    'GH_TOKEN', 'GITHUB_TOKEN', 'WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')) {
+    'GH_TOKEN', 'GITHUB_TOKEN', 'WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_PLAYER_B_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')) {
     $null = $info.Environment.Remove($name)
 }
 $record = [ordered]@{ kind = 'WINDOWS_DEVELOPMENT_CLIENT_PACKAGE'; startedUtc = [DateTime]::UtcNow.ToString('o');
