@@ -1,0 +1,12 @@
+{
+  "purpose": "Canonical development session-create input; Core alone validates and creates authoritative state.",
+  "core_repository": "https://github.com/SobolGaming/Warhammer_40k_AI",
+  "core_revision": "5f509724da25a2f6ded0c2739a8e7c84bdf59c91",
+  "contract_version": "44.3.33",
+  "source": "tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/contracts/examples/sessions/session-create.json",
+  "file": "session-create.json",
+  "bytes": 222673,
+  "sha256": "2b1db622c7c09f8a982b515a8be932afa38af8a9383cf491996c2cb26a9627b0",
+  "runtime_consistency_sha1": "cca84a52a0388fbc80f0e62b3279d82d1a663cd5",
+  "runtime_change": "The client replaces only config.game_id with a fresh development game identity before the existing public create request."
+}

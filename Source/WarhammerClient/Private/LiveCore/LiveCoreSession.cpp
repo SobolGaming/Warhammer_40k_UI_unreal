@@ -1,4 +1,5 @@
 #include "LiveCore/LiveCoreSession.h"
+#include "LiveCore/LiveCoreRuntimeData.h"
 
 #include "Migration/CoreBoundaryEvidence.h"
 #include "Dom/JsonObject.h"
@@ -6,9 +7,6 @@
 #include "HttpModule.h"
 #include "Interfaces/IHttpRequest.h"
 #include "Interfaces/IHttpResponse.h"
-#include "Misc/FileHelper.h"
-#include "Misc/Paths.h"
-#include "Misc/SecureHash.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
 
@@ -503,20 +501,9 @@ void FLiveCoreSession::Request(const FString& Verb, const FString& Path, ECreden
 }
 void FLiveCoreSession::CreateCanonicalSession()
 {
-    const FString Path = FPaths::Combine(FPaths::ProjectDir(), TEXT("tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91/contracts/examples/sessions/session-create.json"));
-    TArray<uint8> Bytes; FString Text;
-    if (!FFileHelper::LoadFileToArray(Bytes, *Path) || !DecodeUtf8(Bytes, Text)) { Fail(TEXT("The canonical development session-create fixture is unavailable or invalid.")); return; }
-    // Portable Core checksum for this committed development fixture. The platform
-    // SHA256 hook asserts on this installed Windows build; it is not a usable API.
-    // Fixture provenance retains its independent SHA256; this is a consistency check,
-    // not an authentication mechanism. Session/runtime identities are checked separately.
-    const FSHAHash Signature = FSHA1::HashBuffer(Bytes.GetData(), Bytes.Num());
-    if (Bytes.Num() != 222673 ||
-        !Signature.ToString().Equals(TEXT("CCA84A52A0388FBC80F0E62B3279D82D1A663CD5"), ESearchCase::IgnoreCase))
-    { Fail(TEXT("Canonical session-create fixture checksum differs from the selected Core fixture.")); return; }
     TSharedPtr<FJsonObject> Payload; FString Error;
-    if (!Parse(Text, Payload, Error) || !IsString(Payload, TEXT("schema_version"), TEXT("session-create-v4")) || !Object(Payload, TEXT("config")).IsValid())
-    { Fail(TEXT("Invalid canonical session-create payload.")); return; }
+    if (!LiveCoreRuntimeData::ReadCanonicalSessionCreate(LiveCoreRuntimeData::CanonicalSessionCreatePath(), Payload, Error))
+    { Fail(Error); return; }
     CreatingGameId = TEXT("unreal-live-") + FGuid::NewGuid().ToString(EGuidFormats::Digits);
     Object(Payload, TEXT("config"))->SetStringField(TEXT("game_id"), CreatingGameId);
     State.Status = TEXT("Creating one canonical development session…");

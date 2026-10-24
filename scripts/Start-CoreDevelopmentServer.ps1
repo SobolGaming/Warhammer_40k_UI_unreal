@@ -17,6 +17,18 @@ $expectedCommit = '5f509724da25a2f6ded0c2739a8e7c84bdf59c91'
 $expectedBuild = 'warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a'
 $utf8 = [Text.UTF8Encoding]::new($false, $true)
 
+function Resolve-CoreEndpoint([uri]$Requested, [string]$RequestedMode, [int]$RequestedPort) {
+    if (!$Requested) { $Requested = [uri]("http://127.0.0.1:$RequestedPort/") }
+    # OriginalString rejects URI normalization of alternative hosts, escaped paths
+    # and dot segments. No credential or network access precedes this guard.
+    $match = [regex]::Match($Requested.OriginalString, '\Ahttp://127\.0\.0\.1:([0-9]{1,5})/?\z')
+    if (!$Requested.IsAbsoluteUri -or !$match.Success) { throw 'Endpoint must be http://127.0.0.1:<1024-65535>/ with no credentials, path, query or fragment.' }
+    $endpointPort = [int]$match.Groups[1].Value
+    if ($endpointPort -lt 1024 -or $endpointPort -gt 65535) { throw 'Endpoint port must be 1024-65535.' }
+    if ($RequestedMode -eq 'Managed' -and $endpointPort -ne $RequestedPort) { throw 'Managed endpoint must match the selected dedicated port.' }
+    return [uri]("http://127.0.0.1:$endpointPort/")
+}
+
 function Assert-PlainPath([string]$Path) {
     $cursor = [IO.Path]::GetFullPath($Path)
     while ($cursor) {
@@ -33,6 +45,57 @@ function Write-Receipt([string]$Path, $Value) {
 function Get-OwnedIdentity([Diagnostics.Process]$Process) {
     $null = $Process.SafeHandle # Retain the actual process handle before observing identity.
     [ordered]@{ pid = $Process.Id; startTimeUtcTicks = $Process.StartTime.ToUniversalTime().Ticks; executable = $Process.MainModule.FileName }
+}
+function Stop-StartedCoreProcesses($Launcher, $VerifiedServer, [string]$ShutdownFile) {
+    # These are actual retained objects from this launch, not receipt/PID lookups.
+    # Kill(true) is limited to that owned launcher tree or a verified retained server.
+    $result = [ordered]@{ attempted = ($null -ne $Launcher); graceSeconds = 5; forcedExitSeconds = 3;
+        shutdownRequested = $false; forcedTermination = $false; allExited = $true; errors = @() }
+    if (!$Launcher) { return [pscustomobject]$result }
+    $processes = @($Launcher)
+    if ($VerifiedServer -and $VerifiedServer.Id -ne $Launcher.Id) { $processes += $VerifiedServer }
+    try {
+        [IO.File]::WriteAllText($ShutdownFile, [DateTime]::UtcNow.ToString('o') + "`n", $utf8)
+        $result.shutdownRequested = $true
+    } catch { $result.errors += 'SHUTDOWN_MARKER:' + $_.Exception.GetType().FullName }
+    $clock = [Diagnostics.Stopwatch]::StartNew()
+    if ($result.shutdownRequested) {
+        foreach ($process in $processes) {
+            try {
+                $remaining = [Math]::Max(0, 5000 - [int]$clock.ElapsedMilliseconds)
+                if (!$process.HasExited -and $remaining -gt 0) { $null = $process.WaitForExit($remaining) }
+            } catch { $result.errors += 'GRACE_WAIT:' + $_.Exception.GetType().FullName }
+        }
+    }
+    foreach ($process in $processes) {
+        try { if (!$process.HasExited) { $process.Kill($true); $result.forcedTermination = $true } }
+        catch { $result.errors += 'OWNED_STOP:' + $_.Exception.GetType().FullName }
+    }
+    $exitClock = [Diagnostics.Stopwatch]::StartNew()
+    foreach ($process in $processes) {
+        try {
+            $remaining = [Math]::Max(0, 3000 - [int]$exitClock.ElapsedMilliseconds)
+            if (!$process.HasExited -and $remaining -gt 0) { $null = $process.WaitForExit($remaining) }
+            if (!$process.HasExited) { $result.allExited = $false; $result.errors += 'OWNED_PROCESS_STILL_RUNNING' }
+        } catch { $result.allExited = $false; $result.errors += 'EXIT_CHECK:' + $_.Exception.GetType().FullName }
+    }
+    return [pscustomobject]$result
+}
+function Complete-FailedCoreStartup($Launcher, $VerifiedServer, [string]$ShutdownFile, $Receipt, [string]$ReceiptPath, $Failure) {
+    try { $cleanup = Stop-StartedCoreProcesses $Launcher $VerifiedServer $ShutdownFile }
+    catch { $cleanup = [pscustomobject]@{ attempted = ($null -ne $Launcher); graceSeconds = 5; forcedExitSeconds = 3;
+        shutdownRequested = $false; forcedTermination = $false; allExited = $false; errors = @('CLEANUP:' + $_.Exception.GetType().FullName) } }
+    # Persistence is deliberately last and best-effort. Even a permanently full
+    # receipt volume cannot bypass retained-process cleanup or mask the first error.
+    if ($Receipt -and $ReceiptPath) {
+        $Receipt.status = if ($cleanup.allExited) { 'START_FAILED_CLEANED' } else { 'START_FAILED_CLEANUP_FAILED' }
+        $Receipt['startupFailureType'] = $Failure.Exception.GetType().FullName
+        $Receipt['startupCleanup'] = $cleanup
+        try { Write-Receipt $ReceiptPath $Receipt }
+        catch { $cleanup.errors += 'RECEIPT_UPDATE:' + $_.Exception.GetType().FullName }
+    }
+    $Failure.Exception.Data['CoreStartupCleanup'] = $cleanup
+    return $cleanup
 }
 function Read-StartupLog([string]$Path) {
     if (!(Test-Path -LiteralPath $Path)) { return '' }
@@ -64,12 +127,10 @@ function Test-Catalog([uri]$Base, [double]$TimeoutSeconds) {
     }
 }
 
+$Endpoint = Resolve-CoreEndpoint $Endpoint $Mode $Port
 $CoreRoot = [IO.Path]::GetFullPath($CoreRoot)
 Assert-PlainPath $CoreRoot
 Assert-PlainPath $hostRoot
-if (!$Endpoint) { $Endpoint = [uri]("http://127.0.0.1:$Port/") }
-if ($Endpoint.Scheme -cnotin @('http', 'https') -or $Endpoint.UserInfo -or $Endpoint.Query -or $Endpoint.Fragment -or $Endpoint.AbsolutePath -cne '/') { throw 'Endpoint must be an HTTP(S) origin, without credentials, query or path.' }
-if ($Mode -eq 'Managed' -and $Endpoint.AbsoluteUri -cne "http://127.0.0.1:$Port/") { throw 'Managed mode uses only 127.0.0.1 and the selected dedicated port.' }
 if ($Mode -eq 'Managed' -and !$IsWindows) { throw 'The prepared managed runtime is Windows-only. Use the documented native Linux recipe or Attach.' }
 
 $git = (Get-Command git -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
@@ -98,7 +159,7 @@ foreach ($credentialName in @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN')) {
 $env:WH_CORE_BASE_URL = $Endpoint.AbsoluteUri.TrimEnd('/')
 [IO.Directory]::CreateDirectory($hostRoot) | Out-Null
 $controlLock = [IO.File]::Open((Join-Path $hostRoot 'control.lock'), [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)
-$receiptPath = $null; $receipt = $null; $launcher = $null
+$receiptPath = $null; $receipt = $null; $launcher = $null; $server = $null; $shutdown = $null; $startupFailure = $null
 try {
     if ($Mode -eq 'Attach') {
         $health = Test-Catalog $Endpoint 3
@@ -157,6 +218,7 @@ runpy.run_path(launcher, run_name='__main__')
     $arguments = @('-I', '-B', '-u', $bootstrapPath, $runtime, (Join-Path $CoreRoot 'scripts/run_phase18m_reference_server.py'), $expectedBuild, [string]$Port, $shutdown, $nonce)
     $quoted = @($arguments | ForEach-Object { if ($_.Contains('"') -or $_.EndsWith('\')) { throw 'Unsupported quote/trailing separator in launch argument.' }; '"' + $_ + '"' }) -join ' '
     $launcher = Start-Process -FilePath $python -ArgumentList $quoted -WorkingDirectory $runRoot -WindowStyle Hidden -RedirectStandardOutput $stdout -RedirectStandardError $stderr -PassThru
+    $null = $launcher.SafeHandle
     $receipt = [ordered]@{ recordKind = 'WARHAMMER_CORE_DEVELOPMENT_HOST'; mode = 'Managed'; owned = $true; status = 'STARTING'; endpoint = $Endpoint.AbsoluteUri; coreCommit = $expectedCommit; contractVersion = '44.3.33'; runtimeBuildId = $expectedBuild; runRoot = $runRoot; nonce = $nonce; launcher = (Get-OwnedIdentity $launcher); server = $null; expectedServerExecutable = $basePython; shutdownFile = $shutdown; stdout = $stdout; stderr = $stderr; createdUtc = [DateTime]::UtcNow.ToString('o'); portExclusivity = 'Prelaunch availability probe only; Core #589 remains.' }
     Write-Receipt $receiptPath $receipt
     Write-Receipt $current ([ordered]@{ receiptPath = $receiptPath })
@@ -172,34 +234,51 @@ runpy.run_path(launcher, run_name='__main__')
             if ($identityLines.Count -eq 1) {
                 $identity = $identityLines[0].Substring(22) | ConvertFrom-Json -AsHashtable
                 if ($identity.nonce -cne $nonce -or ($identity.pid -ne $launcher.Id -and $identity.parentPid -ne $launcher.Id) -or $identity.baseExecutable -ine $basePython) { throw 'Owned Core process identity marker differs.' }
-                $server = [Diagnostics.Process]::GetProcessById([int]$identity.pid)
-                try { $receipt.server = Get-OwnedIdentity $server } finally { $server.Dispose() }
-                if ($receipt.server.executable -ine $basePython -and $receipt.server.executable -ine $python) { throw 'Owned Core process executable differs.' }
+                $observedServer = [Diagnostics.Process]::GetProcessById([int]$identity.pid)
+                try {
+                    $serverIdentity = Get-OwnedIdentity $observedServer
+                    if ($serverIdentity.executable -ine $basePython -and $serverIdentity.executable -ine $python) { throw 'Owned Core process executable differs.' }
+                    $receipt.server = $serverIdentity
+                    $server = $observedServer; $observedServer = $null
+                } finally { if ($observedServer) { $observedServer.Dispose() } }
                 Write-Receipt $receiptPath $receipt
             }
         }
         if ($receipt.server -and ('WH_CORE_RUNTIME_VERIFIED ' + $expectedBuild) -cin $lines -and ("Serving Phase 18M reference contract at http://127.0.0.1:$Port") -cin $lines) {
             try {
                 $health = Test-Catalog $Endpoint ([Math]::Min(3, [Math]::Max(0.1, $ReadinessSeconds - $clock.Elapsed.TotalSeconds)))
+            } catch { $healthFailure = $_.Exception.Message; $health = $null }
+            if ($health) {
                 if ($launcher.HasExited) { throw 'Core launcher exited during readiness.' }
                 $receipt.status = 'READY'; $receipt['health'] = $health; $receipt['readyUtc'] = [DateTime]::UtcNow.ToString('o')
                 Write-Receipt $receiptPath $receipt
                 [pscustomobject]@{ mode = 'Managed'; status = 'READY'; owned = $true; endpoint = $Endpoint.AbsoluteUri; pid = $receipt.server.pid; receiptPath = $receiptPath }
                 return
-            } catch { $healthFailure = $_.Exception.Message }
+            }
         }
         Start-Sleep -Milliseconds 100
     }
     throw ('Core readiness exceeded ' + $ReadinessSeconds + ' seconds. ' + $healthFailure)
 } catch {
-    if ($receipt -and $receiptPath) {
-        $receipt.status = 'START_FAILED'; Write-Receipt $receiptPath $receipt
-        # Release the control lock before the stop helper acquires it.
-        $controlLock.Dispose(); $controlLock = $null
-        & (Join-Path $PSScriptRoot 'Stop-CoreDevelopmentServer.ps1') -ReceiptPath $receiptPath | Out-Null
+    $startupFailure = $_
+    if ($launcher) {
+        try { $null = Complete-FailedCoreStartup $launcher $server $shutdown $receipt $receiptPath $startupFailure }
+        catch {
+            $startupFailure.Exception.Data['CoreStartupCleanupFailure'] = $_.Exception.GetType().FullName
+            try { $startupFailure.Exception.Data['CoreStartupCleanup'] = Stop-StartedCoreProcesses $launcher $server $shutdown }
+            catch { $startupFailure.Exception.Data['CoreStartupFallbackFailure'] = $_.Exception.GetType().FullName }
+        }
     }
-    throw
+    throw $startupFailure
 } finally {
-    if ($controlLock) { $controlLock.Dispose() }
-    if ($launcher) { $launcher.Dispose() }
+    $disposeFailure = $null
+    foreach ($resource in @($server, $launcher, $controlLock)) {
+        if (!$resource) { continue }
+        try { $resource.Dispose() }
+        catch {
+            if (!$disposeFailure) { $disposeFailure = $_ }
+            if ($startupFailure) { $startupFailure.Exception.Data['CoreStartupDisposeFailure'] = $disposeFailure.Exception.GetType().FullName }
+        }
+    }
+    if ($disposeFailure -and !$startupFailure) { throw $disposeFailure }
 }

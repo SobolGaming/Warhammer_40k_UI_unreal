@@ -1,0 +1,2330 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "P1A_WINDOWS_STANDALONE_NONVISIBLE",
+  "status": "BOUNDED_CHECKS_PASS_WITH_RECORDED_LOG_DIAGNOSTICS",
+  "sourceHead": "f725e75739496fe21ad9c5c2161a8d87733b21cc",
+  "pr": "https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4",
+  "branch": "codex/p1-windows-standalone",
+  "canonicalPlan": "../unreal-migration-plan.md",
+  "architecture": "../../../architecture.md",
+  "pythonBaseline": "Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73",
+  "coreTarget": "Warhammer_40k_AI@5f509724da25a2f6ded0c2739a8e7c84bdf59c91 / Contract44.3.33",
+  "initialEvidence": {
+    "attachLifecycle": {
+      "descriptor": {
+        "leaf": "p1-attach-lifecycle.json",
+        "bytes": 775,
+        "sha256": "7F955363F926AE37F9F8B3E35E5BF1C0911E2EEE7EA3DC8BA9CC8D3144E77DDC"
+      },
+      "status": "PASS",
+      "ownedHostStarted": true,
+      "attachedHostRemainedHealthy": true,
+      "postClientAuthenticatedHealthHttpStatus": 200,
+      "ownedStop": {
+        "forcedTermination": false,
+        "owned": true,
+        "status": "STOPPED"
+      },
+      "environmentRestored": true,
+      "cleanupErrors": []
+    },
+    "reconciliation": {
+      "leaf": "package-provenance.PRIVATE_PROPOSED.json",
+      "sha256": "03CCE9296FAAE777230DB18D61CE6C0E1FEA415AF7EDE02687DEED7C771CC86D",
+      "bytes": 21957
+    },
+    "outsideCopy": {
+      "receipt": {
+        "leaf": "p1-outside-copy.json",
+        "bytes": 10388,
+        "sha256": "54F6A06F327FD917F5DBB5F33344AAFE8283A5CE7BB778999231CA980CD6BF21"
+      },
+      "manifestRows": 50,
+      "declaredVerifiedFiles": 50,
+      "declaredBytes": 975120505,
+      "independentlySummedManifestBytes": 975120505,
+      "actualSourceFileCount": 50,
+      "actualDestinationFileCount": 50,
+      "independentSourceByteAndShaMatches": 50,
+      "independentDestinationByteAndShaMatches": 50,
+      "outsideSourceCheckout": true,
+      "binary": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332397568,
+        "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+      },
+      "scope": "All 50 source and copied files were independently rehashed and matched the exact receipt rows; package membership stayed 50 files in both roots."
+    },
+    "builds": [
+      {
+        "label": "InitialFailure",
+        "sourceHead": "8f8c01061464ad0412ead78a5e73ee54475b2874",
+        "status": "FAILED",
+        "exitCode": 1,
+        "elapsedSeconds": 4.1891985,
+        "timeoutMinutes": 60,
+        "startedUtc": "2026-10-24T14:55:41.3955077Z",
+        "finishedUtc": "2026-10-24T14:55:45.6916697Z",
+        "nonVisibleCook": true,
+        "gameLaunched": false,
+        "prerequisiteInstallerExecuted": false,
+        "cleanupErrors": [],
+        "retainedFailureCause": "Multiple Editor targets without DefaultEditorTarget; original failure remains FAILED.",
+        "successLogMarker": false,
+        "loggedCookHasNullRhiAndRenderOffscreen": false,
+        "raw": [
+          {
+            "leaf": "package-result.json",
+            "bytes": 2028,
+            "sha256": "294E4532702429624E55264E9AA7DC4AA893CD8005FDEB153DC6C9E92E4604D1"
+          },
+          {
+            "leaf": "uat-stdout.log",
+            "bytes": 1507,
+            "sha256": "CFC47AC5D4B1CB5F9564421ED984FFE2955B4BDD532A018FDB6C20992340D99C"
+          },
+          {
+            "leaf": "uat-stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          }
+        ]
+      },
+      {
+        "label": "FirstPackage",
+        "sourceHead": "9233bb60353083e0ab2b90a6c023b53d0cba72d8",
+        "status": "PACKAGE_CREATED_RUNTIME_UNVERIFIED",
+        "exitCode": 0,
+        "elapsedSeconds": 199.1550355,
+        "timeoutMinutes": 60,
+        "startedUtc": "2026-10-24T14:56:19.9828925Z",
+        "finishedUtc": "2026-10-24T14:59:39.233909Z",
+        "nonVisibleCook": true,
+        "gameLaunched": false,
+        "prerequisiteInstallerExecuted": false,
+        "cleanupErrors": [],
+        "retainedFailureCause": null,
+        "successLogMarker": true,
+        "loggedCookHasNullRhiAndRenderOffscreen": true,
+        "raw": [
+          {
+            "leaf": "package-result.json",
+            "bytes": 2325,
+            "sha256": "73A17D19CAACCDDA9D14562C09952582FD0D14FAC295A5A31067AFCDD7DCA98A"
+          },
+          {
+            "leaf": "uat-stdout.log",
+            "bytes": 92605,
+            "sha256": "9DF1EAC068D3F76E6B1EBC1B88622F3C334C2E925758ABED262C68658B756A10"
+          },
+          {
+            "leaf": "uat-stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          }
+        ]
+      },
+      {
+        "label": "CurrentPackage",
+        "sourceHead": "43bb0977ffd291d8217f831f39edbfe2716b3a43",
+        "status": "PACKAGE_CREATED_RUNTIME_UNVERIFIED",
+        "exitCode": 0,
+        "elapsedSeconds": 26.1983568,
+        "timeoutMinutes": 60,
+        "startedUtc": "2026-10-24T15:03:07.2102598Z",
+        "finishedUtc": "2026-10-24T15:03:33.508352Z",
+        "nonVisibleCook": true,
+        "gameLaunched": false,
+        "prerequisiteInstallerExecuted": false,
+        "cleanupErrors": [],
+        "retainedFailureCause": null,
+        "successLogMarker": true,
+        "loggedCookHasNullRhiAndRenderOffscreen": true,
+        "raw": [
+          {
+            "leaf": "package-result.json",
+            "bytes": 2324,
+            "sha256": "D7C42AFBB50027806550DBA2F0E1ACAB5C50899BB4485FFE2291675FE48A0A00"
+          },
+          {
+            "leaf": "uat-stdout.log",
+            "bytes": 64917,
+            "sha256": "EF8FABB56CCAA4D611734B7F5D89F2E2B4B114319E63618BE6A7578E61B76A00"
+          },
+          {
+            "leaf": "uat-stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          }
+        ]
+      }
+    ],
+    "nativeRuns": [
+      {
+        "label": "Resources",
+        "sourceHead": "43bb0977ffd291d8217f831f39edbfe2716b3a43",
+        "status": "PASS",
+        "mode": "Resources",
+        "coreMode": null,
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 6.3477431,
+        "overallRecordWallSeconds": 7.6558546,
+        "startedUtc": "2026-10-24T15:04:39.2203482Z",
+        "finishedUtc": "2026-10-24T15:04:46.8762028Z",
+        "nativeTimeoutSeconds": 120,
+        "streamLimitBytes": 67108864,
+        "processStarted": true,
+        "forcedTermination": false,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryRecordedUnchanged": true,
+        "parentEnvironmentRestored": true,
+        "restoredEnvironmentNameCount": 4,
+        "configUnchanged": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchesReportedAfter": 4,
+        "automation": {
+          "succeeded": 4,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "totalDurationSeconds": 0.03312480449676514,
+          "tests": [
+            {
+              "name": "Warhammer.RuntimeData.CanonicalSession",
+              "state": "Success",
+              "durationSeconds": 0.012505300343036652
+            },
+            {
+              "name": "Warhammer.RuntimeData.CorruptSessionFails",
+              "state": "Success",
+              "durationSeconds": 0.014311201870441437
+            },
+            {
+              "name": "Warhammer.RuntimeData.MissingSessionFails",
+              "state": "Success",
+              "durationSeconds": 0.0005814023315906525
+            },
+            {
+              "name": "Warhammer.RuntimeData.StartupResources",
+              "state": "Success",
+              "durationSeconds": 0.005726899951696396
+            }
+          ]
+        },
+        "nativeLogDiagnostics": {
+          "spawnNoClassWarnings": 1,
+          "lightMobilityWarnings": 1,
+          "missingHtmlReportTemplateErrors": 1,
+          "qualification": "Per-test structured report warnings/errors are zero; native logs are not diagnostically clean. The missing HTML template did not prevent retained JSON index generation."
+        },
+        "host": {
+          "mode": null,
+          "owned": null,
+          "status": null,
+          "recordedPreStopReceipt": null
+        },
+        "hostStop": null,
+        "cleanupErrors": [],
+        "failureStage": null,
+        "errorType": null,
+        "rawDescriptorChecks": [
+          {
+            "kind": "nativeLog",
+            "matches": true
+          },
+          {
+            "kind": "automationIndex",
+            "matches": true
+          },
+          {
+            "kind": "stderr",
+            "matches": true
+          },
+          {
+            "kind": "stdout",
+            "matches": true
+          }
+        ],
+        "raw": [
+          {
+            "leaf": "result.json",
+            "bytes": 5122,
+            "sha256": "B1A52DC9E97B62606F46639BFE11DDF588E0CB9241CD9C24E43093901C6A0FD4"
+          },
+          {
+            "leaf": "index.json",
+            "bytes": 2664,
+            "sha256": "DAD6C3B5307AA99ADB52B065C87FF1E87CC05521931D80CFAA874EB7CAAA55CA"
+          },
+          {
+            "leaf": "native.log",
+            "bytes": 71188,
+            "sha256": "3BB0853DF05212B2A027308F5BFDA277B46F6D3929B572729E224AEBDDB746B0"
+          },
+          {
+            "leaf": "stdout.log",
+            "bytes": 71153,
+            "sha256": "0D73D47FE66E9D259DBAA21ECC70D93D6F30F265ADB2F0773DA295416C4DB759"
+          },
+          {
+            "leaf": "stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          }
+        ]
+      },
+      {
+        "label": "ManagedCore",
+        "sourceHead": "43bb0977ffd291d8217f831f39edbfe2716b3a43",
+        "status": "PASS",
+        "mode": "Core",
+        "coreMode": "Managed",
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 21.8368457,
+        "overallRecordWallSeconds": 66.4890196,
+        "startedUtc": "2026-10-24T15:04:55.7854179Z",
+        "finishedUtc": "2026-10-24T15:06:02.2744375Z",
+        "nativeTimeoutSeconds": 240,
+        "streamLimitBytes": 67108864,
+        "processStarted": true,
+        "forcedTermination": false,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryRecordedUnchanged": true,
+        "parentEnvironmentRestored": true,
+        "restoredEnvironmentNameCount": 4,
+        "configUnchanged": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchesReportedAfter": 4,
+        "automation": {
+          "succeeded": 1,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "totalDurationSeconds": 15.564449310302734,
+          "tests": [
+            {
+              "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+              "state": "Success",
+              "durationSeconds": 15.564449310302734
+            }
+          ]
+        },
+        "nativeLogDiagnostics": {
+          "spawnNoClassWarnings": 1,
+          "lightMobilityWarnings": 1,
+          "missingHtmlReportTemplateErrors": 1,
+          "qualification": "Per-test structured report warnings/errors are zero; native logs are not diagnostically clean. The missing HTML template did not prevent retained JSON index generation."
+        },
+        "host": {
+          "mode": "Managed",
+          "owned": true,
+          "status": "READY",
+          "recordedPreStopReceipt": {
+            "leaf": "receipt.json",
+            "bytes": 1920,
+            "sha256": "B2BB0092657BFE2ABFC6D729742F2B23D099B6F5530245DFC8B7F7E45316F4B4"
+          }
+        },
+        "hostStop": {
+          "status": "STOPPED",
+          "forcedTermination": false,
+          "owned": true
+        },
+        "cleanupErrors": [],
+        "failureStage": null,
+        "errorType": null,
+        "rawDescriptorChecks": [
+          {
+            "kind": "nativeLog",
+            "matches": true
+          },
+          {
+            "kind": "stdout",
+            "matches": true
+          },
+          {
+            "kind": "stderr",
+            "matches": true
+          },
+          {
+            "kind": "automationIndex",
+            "matches": true
+          }
+        ],
+        "raw": [
+          {
+            "leaf": "result.json",
+            "bytes": 5037,
+            "sha256": "B5F94B4FA8555C707D6068170CD53F7AA503348F0F29CAF7006F634CB6294D92"
+          },
+          {
+            "leaf": "index.json",
+            "bytes": 1109,
+            "sha256": "2D4D0A33136534AD449DC94B2D7A0A633101D0E895374F141FC47987947E39E4"
+          },
+          {
+            "leaf": "native.log",
+            "bytes": 68402,
+            "sha256": "A237B40B14EC3B20A6F6840730C00B4C1426374B672F99EFADC7A7931DF283BC"
+          },
+          {
+            "leaf": "stdout.log",
+            "bytes": 68367,
+            "sha256": "895E783BA80A72651375E361E2C78E0B11163FB9B1A7FD0AB6938E1667837B7E"
+          },
+          {
+            "leaf": "stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          }
+        ]
+      },
+      {
+        "label": "AttachCore",
+        "sourceHead": "43bb0977ffd291d8217f831f39edbfe2716b3a43",
+        "status": "PASS",
+        "mode": "Core",
+        "coreMode": "Attach",
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 22.040512,
+        "overallRecordWallSeconds": 23.5215533,
+        "startedUtc": "2026-10-24T15:08:02.4606206Z",
+        "finishedUtc": "2026-10-24T15:08:25.9821739Z",
+        "nativeTimeoutSeconds": 240,
+        "streamLimitBytes": 67108864,
+        "processStarted": true,
+        "forcedTermination": false,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryRecordedUnchanged": true,
+        "parentEnvironmentRestored": true,
+        "restoredEnvironmentNameCount": 4,
+        "configUnchanged": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchesReportedAfter": 4,
+        "automation": {
+          "succeeded": 1,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "totalDurationSeconds": 15.837503433227539,
+          "tests": [
+            {
+              "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+              "state": "Success",
+              "durationSeconds": 15.837503433227539
+            }
+          ]
+        },
+        "nativeLogDiagnostics": {
+          "spawnNoClassWarnings": 1,
+          "lightMobilityWarnings": 1,
+          "missingHtmlReportTemplateErrors": 1,
+          "qualification": "Per-test structured report warnings/errors are zero; native logs are not diagnostically clean. The missing HTML template did not prevent retained JSON index generation."
+        },
+        "host": {
+          "mode": "Attach",
+          "owned": false,
+          "status": "ATTACHED_HEALTHY",
+          "recordedPreStopReceipt": {
+            "leaf": "receipt.json",
+            "bytes": 427,
+            "sha256": "85AF9F986EA1CD5AC86C3F22E0225EB747B6B04AE95B68090B20276EF57646C9"
+          }
+        },
+        "hostStop": {
+          "owned": false,
+          "status": "ATTACHED_NOT_STOPPED"
+        },
+        "cleanupErrors": [],
+        "failureStage": null,
+        "errorType": null,
+        "rawDescriptorChecks": [
+          {
+            "kind": "automationIndex",
+            "matches": true
+          },
+          {
+            "kind": "nativeLog",
+            "matches": true
+          },
+          {
+            "kind": "stdout",
+            "matches": true
+          },
+          {
+            "kind": "stderr",
+            "matches": true
+          }
+        ],
+        "raw": [
+          {
+            "leaf": "result.json",
+            "bytes": 5026,
+            "sha256": "1C94136A7AF87A38352B652FA5ABF2D7F8319057A45B1FB1D71268AF6008ED78"
+          },
+          {
+            "leaf": "index.json",
+            "bytes": 1109,
+            "sha256": "9EF336DBA3694B63CED7D4FD821BA1553E8EA3A1FFF1E45F2F4D54C04A899E77"
+          },
+          {
+            "leaf": "native.log",
+            "bytes": 68457,
+            "sha256": "2FA0DAEEE055FE04B7DD834FE8334A77CC3AE38F0A81417BFCD6E26E4125D4FC"
+          },
+          {
+            "leaf": "stdout.log",
+            "bytes": 68392,
+            "sha256": "02A01BA90FE28C5B9BFE1648CA1B5AED98C32D3BA86EE54DB78EB7D629AC4754"
+          },
+          {
+            "leaf": "stderr.log",
+            "bytes": 0,
+            "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+          }
+        ]
+      }
+    ],
+    "temporalReceiptQualification": "Managed test records a pre-stop READY receipt descriptor (1920 bytes/B2BB0092657BFE2ABFC6D729742F2B23D099B6F5530245DFC8B7F7E45316F4B4). The mutable receipt later became STOPPED (2060 bytes/36A4779EAEA8A7EE0CCD6BB618C89741B01CEE036A96AE20A4AE7AC61C597B23). Both facts are preserved; the pre-stop body is not claimed to match current bytes. Attachment does not establish service process identity.",
+    "automationTotals": {
+      "runs": 3,
+      "testResults": 6,
+      "distinctTestNames": 5,
+      "errorsInTestReports": 0,
+      "warningsInTestReports": 0,
+      "assertionCount": "NOT_INFERRED",
+      "nativeLogErrorFree": false
+    }
+  },
+  "repairedEvidence": {
+    "schemaVersion": 1,
+    "recordKind": "P1A_FINAL_EVIDENCE_AUTHOR_AUX_RECONCILIATION",
+    "status": "FACTUAL_RECONCILIATION_NOT_INDEPENDENT_ACCEPTANCE",
+    "auditUtc": "2026-10-24T15:44:08.0789527Z",
+    "finalHelperSourceHead": "2cad5f41c26430daaec4da982964b5b979cb9266",
+    "nativeBuildSourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+    "buildReuseBasis": [
+      {
+        "path": "Source",
+        "buildObject": "61f60baa72a7e81fc0506f943443327621a74422",
+        "finalObject": "61f60baa72a7e81fc0506f943443327621a74422",
+        "identical": true
+      },
+      {
+        "path": "Config",
+        "buildObject": "afc60f9d440b4d76cc229ebf234698934fedbf85",
+        "finalObject": "afc60f9d440b4d76cc229ebf234698934fedbf85",
+        "identical": true
+      },
+      {
+        "path": "Content",
+        "buildObject": "fe73f486a2be0219f20bef5225ddbcf770e4982e",
+        "finalObject": "fe73f486a2be0219f20bef5225ddbcf770e4982e",
+        "identical": true
+      },
+      {
+        "path": "WarhammerClient.uproject",
+        "buildObject": "fe47d0ce8c847bea68dba533bf23eb46a49bdc09",
+        "finalObject": "fe47d0ce8c847bea68dba533bf23eb46a49bdc09",
+        "identical": true
+      }
+    ],
+    "build": {
+      "result": {
+        "leaf": "p1-job-build-result.json",
+        "bytes": 2524,
+        "sha256": "5CF6DC50F16ACCAA06247E06B5650F651087EE96AAB8781F2E67835C558A8ED2"
+      },
+      "actualResult": {
+        "leaf": "package-result.json",
+        "bytes": 2524,
+        "sha256": "5CF6DC50F16ACCAA06247E06B5650F651087EE96AAB8781F2E67835C558A8ED2"
+      },
+      "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+      "status": "PACKAGE_CREATED_RUNTIME_UNVERIFIED",
+      "exitCode": 0,
+      "elapsedSeconds": 25.2274696,
+      "timeoutMinutes": 60,
+      "processOwnership": "Windows job; suspended creation, assignment before resume, kill on job close",
+      "ownedJobEmpty": true,
+      "ownedJobTotalProcesses": 24,
+      "ownedBuildTreeTerminated": false,
+      "cleanupErrors": [],
+      "gameLaunched": false,
+      "prerequisiteInstallerExecuted": false,
+      "raw": [
+        {
+          "leaf": "uat-stdout.log",
+          "bytes": 64862,
+          "sha256": "916E60720C484B6AF4389BBCA36366F6A804EC330DD31C4D4863DA60F4F85390"
+        },
+        {
+          "leaf": "uat-stderr.log",
+          "bytes": 0,
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        }
+      ]
+    },
+    "copy": {
+      "receipt": {
+        "leaf": "p1-outside-copy-repaired.json",
+        "bytes": 10675,
+        "sha256": "FEE35D2FDFD2018966EFB728A909324A846FE87EB0806E6DFC5930214B71AA35"
+      },
+      "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+      "manifestRows": 50,
+      "sourceFiles": 50,
+      "destinationFiles": 50,
+      "sourceMembershipExact": true,
+      "destinationMembershipExact": true,
+      "sourceByteAndShaMatches": 50,
+      "destinationByteAndShaMatches": 50,
+      "declaredBytes": 975120505,
+      "independentlySummedBytes": 975120505,
+      "failures": [],
+      "binary": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332397568,
+        "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+      }
+    },
+    "nativeRuns": [
+      {
+        "label": "Resources",
+        "wrapper": {
+          "leaf": "p1-final-resources-result.json",
+          "bytes": 375,
+          "sha256": "58DBCBFB3332A05CC8A7B9CA62B922705A7750994FE3432BACA7EC2D4FBEB58D"
+        },
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5289,
+          "sha256": "1575C37CE2D0B90C6A03112B60E8A59A9763E235D9B469BF4809648595F1FE26"
+        },
+        "sourceHead": "2cad5f41c26430daaec4da982964b5b979cb9266",
+        "sourceMatchesFinal": true,
+        "status": "PASS",
+        "mode": "Resources",
+        "coreMode": null,
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 6.2195537,
+        "overallRecordWallSeconds": 7.2545679,
+        "startedUtc": "2026-10-24T15:41:20.6576793Z",
+        "finishedUtc": "2026-10-24T15:41:27.9122472Z",
+        "nativeTimeoutSeconds": 120,
+        "withinNativeBudget": true,
+        "forcedTermination": false,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "streamLimitBytes": 67108864,
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryBeforeAfterAndActualCopyMatch": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchCount": 4,
+        "parentEnvironmentRestored": true,
+        "host": {
+          "mode": null,
+          "owned": null,
+          "status": null,
+          "earlierReceipt": null
+        },
+        "hostStop": null,
+        "cleanupErrors": [],
+        "automation": {
+          "succeeded": 4,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "tests": [
+            {
+              "name": "Warhammer.RuntimeData.CanonicalSession",
+              "state": "Success",
+              "errors": 0,
+              "warnings": 0,
+              "durationSeconds": 0.010902602225542068
+            },
+            {
+              "name": "Warhammer.RuntimeData.CorruptSessionFails",
+              "state": "Success",
+              "errors": 0,
+              "warnings": 0,
+              "durationSeconds": 0.012781798839569092
+            },
+            {
+              "name": "Warhammer.RuntimeData.MissingSessionFails",
+              "state": "Success",
+              "errors": 0,
+              "warnings": 0,
+              "durationSeconds": 0.0006029009819030762
+            },
+            {
+              "name": "Warhammer.RuntimeData.StartupResources",
+              "state": "Success",
+              "errors": 0,
+              "warnings": 0,
+              "durationSeconds": 0.0050893984735012054
+            }
+          ]
+        },
+        "nativeDiagnostics": {
+          "warnings": 2,
+          "errors": 1,
+          "fatals": 0,
+          "noClassSpawnWarning": 1,
+          "lightMobilityWarning": 1,
+          "missingHtmlReportTemplateError": 1
+        },
+        "raw": [
+          {
+            "kind": "stdout",
+            "descriptor": {
+              "leaf": "stdout.log",
+              "bytes": 71154,
+              "sha256": "71FAE96EB98AD506221CA96A8EE9D2C8E892D348F61F254A522BB5380D8C2EC8"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "nativeLog",
+            "descriptor": {
+              "leaf": "native.log",
+              "bytes": 71189,
+              "sha256": "74CDE2C4BD859014B5A062484732D6AB9F28C39963041371BB18225D0365B787"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "automationIndex",
+            "descriptor": {
+              "leaf": "index.json",
+              "bytes": 2665,
+              "sha256": "DBECF92970842FDF058BB09A1635C9175EA049546F833FA38C77C253BFAD73D7"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "stderr",
+            "descriptor": {
+              "leaf": "stderr.log",
+              "bytes": 0,
+              "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+            },
+            "matchesRecorded": true
+          }
+        ]
+      },
+      {
+        "label": "ManagedCore",
+        "wrapper": {
+          "leaf": "p1-final-managed-result.json",
+          "bytes": 370,
+          "sha256": "2E3A21E639A7C33F9A6756F10B9A1376BB0C61D12C1D7FCF087D8E3986755107"
+        },
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5204,
+          "sha256": "731446773261C90A7AD748AE33F85C36D5BBB74F980D167BD5C4DB2CD0062E93"
+        },
+        "sourceHead": "2cad5f41c26430daaec4da982964b5b979cb9266",
+        "sourceMatchesFinal": true,
+        "status": "PASS",
+        "mode": "Core",
+        "coreMode": "Managed",
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 20.6429893,
+        "overallRecordWallSeconds": 34.8873495,
+        "startedUtc": "2026-10-24T15:41:36.2122605Z",
+        "finishedUtc": "2026-10-24T15:42:11.09961Z",
+        "nativeTimeoutSeconds": 240,
+        "withinNativeBudget": true,
+        "forcedTermination": false,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "streamLimitBytes": 67108864,
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryBeforeAfterAndActualCopyMatch": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchCount": 4,
+        "parentEnvironmentRestored": true,
+        "host": {
+          "mode": "Managed",
+          "owned": true,
+          "status": "READY",
+          "earlierReceipt": {
+            "leaf": "receipt.json",
+            "bytes": 1921,
+            "sha256": "5A09F3CBC99BB4A1093717CDEABD5EE852AC073C525DF3A1104CD887A9598D22"
+          }
+        },
+        "hostStop": {
+          "status": "STOPPED",
+          "forcedTermination": false,
+          "owned": true
+        },
+        "cleanupErrors": [],
+        "automation": {
+          "succeeded": 1,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "tests": [
+            {
+              "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+              "state": "Success",
+              "errors": 0,
+              "warnings": 0,
+              "durationSeconds": 14.462336540222168
+            }
+          ]
+        },
+        "nativeDiagnostics": {
+          "warnings": 2,
+          "errors": 1,
+          "fatals": 0,
+          "noClassSpawnWarning": 1,
+          "lightMobilityWarning": 1,
+          "missingHtmlReportTemplateError": 1
+        },
+        "raw": [
+          {
+            "kind": "automationIndex",
+            "descriptor": {
+              "leaf": "index.json",
+              "bytes": 1109,
+              "sha256": "1B7DBF1AA1986BD59B692A4E6CFD0404357B5C8F3D1D7F09614BC675010F6F39"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "stdout",
+            "descriptor": {
+              "leaf": "stdout.log",
+              "bytes": 68392,
+              "sha256": "D7E3973FA6699534BACE71AD75AC4BCA73F6A5429C6AA4C79881B0E1C24C952E"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "stderr",
+            "descriptor": {
+              "leaf": "stderr.log",
+              "bytes": 0,
+              "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "nativeLog",
+            "descriptor": {
+              "leaf": "native.log",
+              "bytes": 68457,
+              "sha256": "EBE25C3EB8EEC45907486457561DE3C5ECEBF72F4D08897984C4DB21D2B46C67"
+            },
+            "matchesRecorded": true
+          }
+        ]
+      },
+      {
+        "label": "AttachCore",
+        "wrapper": {
+          "leaf": "p1-attach-lifecycle-final.json",
+          "bytes": 775,
+          "sha256": "3C8F78C42F2B0556E9BE7D7BD6E0B6B9061BFE941B1BD46C1F165AB0331EC954"
+        },
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5194,
+          "sha256": "8B8FA7E970607707817779D0B056C08B7FC376575A863BB565B592CDA48989E5"
+        },
+        "sourceHead": "2cad5f41c26430daaec4da982964b5b979cb9266",
+        "sourceMatchesFinal": true,
+        "status": "PASS",
+        "mode": "Core",
+        "coreMode": "Attach",
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 20.6648817,
+        "overallRecordWallSeconds": 22.0434446,
+        "startedUtc": "2026-10-24T15:42:35.9819173Z",
+        "finishedUtc": "2026-10-24T15:42:58.0253619Z",
+        "nativeTimeoutSeconds": 240,
+        "withinNativeBudget": true,
+        "forcedTermination": false,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "streamLimitBytes": 67108864,
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryBeforeAfterAndActualCopyMatch": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchCount": 4,
+        "parentEnvironmentRestored": true,
+        "host": {
+          "mode": "Attach",
+          "owned": false,
+          "status": "ATTACHED_HEALTHY",
+          "earlierReceipt": {
+            "leaf": "receipt.json",
+            "bytes": 427,
+            "sha256": "E112A77F64045007A224916790F97BC52439BAAAB0CD19744D8F0DEC9988FE82"
+          }
+        },
+        "hostStop": {
+          "status": "ATTACHED_NOT_STOPPED",
+          "owned": false
+        },
+        "cleanupErrors": [],
+        "automation": {
+          "succeeded": 1,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "tests": [
+            {
+              "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+              "state": "Success",
+              "errors": 0,
+              "warnings": 0,
+              "durationSeconds": 14.575081825256348
+            }
+          ]
+        },
+        "nativeDiagnostics": {
+          "warnings": 2,
+          "errors": 1,
+          "fatals": 0,
+          "noClassSpawnWarning": 1,
+          "lightMobilityWarning": 1,
+          "missingHtmlReportTemplateError": 1
+        },
+        "raw": [
+          {
+            "kind": "automationIndex",
+            "descriptor": {
+              "leaf": "index.json",
+              "bytes": 1109,
+              "sha256": "2AF60F4135CB080E3BEB7D622F882EC042ECBC4E0F9A34A093DC633BA72C4DF8"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "nativeLog",
+            "descriptor": {
+              "leaf": "native.log",
+              "bytes": 68787,
+              "sha256": "EF47AC34CA92C6F57D0C62114961CB1C0094340D89403B5D3341DC710184A0AC"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "stdout",
+            "descriptor": {
+              "leaf": "stdout.log",
+              "bytes": 68722,
+              "sha256": "A664BC3753A7CE60752C37D3BC32B48DD414B92BDB770110F2A5B446C4AE6C3E"
+            },
+            "matchesRecorded": true
+          },
+          {
+            "kind": "stderr",
+            "descriptor": {
+              "leaf": "stderr.log",
+              "bytes": 0,
+              "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+            },
+            "matchesRecorded": true
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "runs": 3,
+      "successfulTestExecutions": 6,
+      "distinctTestNames": 5,
+      "assertionCount": "NOT_INFERRED",
+      "nativeLogsClean": false
+    },
+    "hostReceipts": [
+      {
+        "label": "ManagedFinal",
+        "descriptor": {
+          "leaf": "receipt.json",
+          "bytes": 2329,
+          "sha256": "8581F6D687514751A59E51BB157F5C4B447A98417A6183B8C684CBC8D9572E54"
+        },
+        "mode": "Managed",
+        "owned": true,
+        "status": "STOPPED",
+        "healthHttpStatus": 200,
+        "healthAuthenticated": true,
+        "forcedTermination": false,
+        "serviceIdentity": null,
+        "readyUtc": "2026-10-24T15:41:49.0380688Z",
+        "shutdownRequestedUtc": "2026-10-24T15:42:09.8225693Z",
+        "stoppedUtc": "2026-10-24T15:42:10.6490557Z"
+      },
+      {
+        "label": "AttachOuterOwnerFinal",
+        "descriptor": {
+          "leaf": "receipt.json",
+          "bytes": 2329,
+          "sha256": "654BBB1EB6052A1B2014E0F50A2064C22AA2137AA4241A6AF666134C6077A56F"
+        },
+        "mode": "Managed",
+        "owned": true,
+        "status": "STOPPED",
+        "healthHttpStatus": 200,
+        "healthAuthenticated": true,
+        "forcedTermination": false,
+        "serviceIdentity": null,
+        "readyUtc": "2026-10-24T15:42:35.9332259Z",
+        "shutdownRequestedUtc": "2026-10-24T15:42:58.2832979Z",
+        "stoppedUtc": "2026-10-24T15:42:59.1171478Z"
+      },
+      {
+        "label": "AttachedFinal",
+        "descriptor": {
+          "leaf": "receipt.json",
+          "bytes": 427,
+          "sha256": "E112A77F64045007A224916790F97BC52439BAAAB0CD19744D8F0DEC9988FE82"
+        },
+        "mode": "Attach",
+        "owned": false,
+        "status": "ATTACHED_HEALTHY",
+        "healthHttpStatus": 200,
+        "healthAuthenticated": true,
+        "forcedTermination": null,
+        "serviceIdentity": "NOT_VERIFIED_BY_ATTACHMENT",
+        "readyUtc": null,
+        "shutdownRequestedUtc": null,
+        "stoppedUtc": null
+      }
+    ],
+    "attachLifecycle": {
+      "descriptor": {
+        "leaf": "p1-attach-lifecycle-final.json",
+        "bytes": 775,
+        "sha256": "3C8F78C42F2B0556E9BE7D7BD6E0B6B9061BFE941B1BD46C1F165AB0331EC954"
+      },
+      "status": "PASS",
+      "ownedHostStarted": true,
+      "attachedHostRemainedHealthy": true,
+      "postClientHealthHttpStatus": 200,
+      "ownedStop": {
+        "forcedTermination": false,
+        "owned": true,
+        "status": "STOPPED"
+      },
+      "environmentRestored": true,
+      "cleanupErrors": []
+    },
+    "namespaceAliasControl": {
+      "wrapper": {
+        "leaf": "p1-final-alias-control.json",
+        "bytes": 322,
+        "sha256": "A942DBE3C21D609F86F88662DAA16B6060794C50C3377C4CE0775C7AE3281AEC"
+      },
+      "actualResult": {
+        "leaf": "result.json",
+        "bytes": 1896,
+        "sha256": "393C008363B7960A675B1DC096F4302FA499DE15984FC3A31941F779CA45A130"
+      },
+      "wrapperExpectedDisposition": "PASS_EXPECTED_ALIAS_REJECTION",
+      "actualRunnerStatus": "FAILED",
+      "failureStage": "INPUTS",
+      "errorType": "System.Management.Automation.RuntimeException",
+      "processStarted": false,
+      "coreStartedAsRecordedByControl": false,
+      "hostReceiptPresent": false,
+      "nativeExitCode": null,
+      "parentEnvironmentRestored": true,
+      "cleanupErrors": [],
+      "qualification": "Expected input rejection is a PASS control disposition; the underlying runner FAILED at INPUTS before native/Core launch. Its sourceHead is unset because validation stopped before that field was populated."
+    },
+    "qualifications": [
+      "Retained Game package was built at71f5ced; final launcher/Stop/path-guard/docs source is2cad5f4. Source/Config/Content/project Git object identities match across these revisions. This is not a claim that a new native binary was rebuilt at2cad5f4.",
+      "Six final JSON test executions passed with no per-test errors/warnings; all three native logs retain two startup warnings and a missing HTML template error, not diagnostically clean logs.",
+      "Managed result retains the earlier1921B READY receipt descriptor; its current same-path STOPPED receipt has different bytes/hash. The metadata preserves both temporal identities without declaring a current match to earlier bytes.",
+      "Attach records ATTACHED_NOT_STOPPED; authenticated HTTP200 after client exit precedes outer separate owned normalStop. Attachment is not proof of service process identity.",
+      "Native elapsed timings are distinct from whole-helper wall durations including host setup/cleanup.",
+      "All environment restoration and lifecycle values are retained recorded observations, not new live process/environment probes by this audit.",
+      "No assertion count, rendered pixels/fonts/shaders/input, clean-machine, Linux, gameplay parity or independent SOURCE/CODE/REQ acceptance is inferred.",
+      "Only private safe metadata created. Credentials, raw arguments, absolute private paths, raw log bodies and process/session/thread/window IDs are excluded from this output. No source bodies or current review material were read. Prior71audit and all older evidence remain untouched."
+    ]
+  },
+  "firstRepairEvidence": {
+    "schemaVersion": 1,
+    "recordKind": "P1A_REPAIRED_EVIDENCE_AUTHOR_AUX_RECONCILIATION",
+    "status": "FACTUAL_RECONCILIATION_NOT_INDEPENDENT_ACCEPTANCE",
+    "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+    "auditedUtc": "2026-10-24T15:33:42.5130134Z",
+    "scope": "Inert retained-evidence/hash audit only. No source bodies, review directories, live processes, network, GUI, builds or tests accessed/executed; no tracked/Git mutations.",
+    "build": {
+      "wrapper": {
+        "leaf": "p1-job-build-result.json",
+        "bytes": 2524,
+        "sha256": "5CF6DC50F16ACCAA06247E06B5650F651087EE96AAB8781F2E67835C558A8ED2"
+      },
+      "actualResult": {
+        "leaf": "package-result.json",
+        "bytes": 2524,
+        "sha256": "5CF6DC50F16ACCAA06247E06B5650F651087EE96AAB8781F2E67835C558A8ED2"
+      },
+      "wrapperEqualsActualResult": true,
+      "status": "PACKAGE_CREATED_RUNTIME_UNVERIFIED",
+      "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+      "exitCode": 0,
+      "elapsedSeconds": 25.2274696,
+      "timeoutMinutes": 60,
+      "processOwnership": "Windows job; suspended creation, assignment before resume, kill on job close",
+      "ownedJobEmpty": true,
+      "ownedJobTotalProcesses": 24,
+      "ownedBuildTreeTerminated": false,
+      "cleanupErrors": [],
+      "nonVisibleCook": true,
+      "gameLaunched": false,
+      "prerequisiteInstallerExecuted": false,
+      "logSaysSuccessful": true,
+      "loggedCookHasNullRhiAndRenderOffscreen": true,
+      "raw": [
+        {
+          "leaf": "uat-stdout.log",
+          "bytes": 64862,
+          "sha256": "916E60720C484B6AF4389BBCA36366F6A804EC330DD31C4D4863DA60F4F85390"
+        },
+        {
+          "leaf": "uat-stderr.log",
+          "bytes": 0,
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        }
+      ],
+      "ownershipLimit": "TotalProcesses is the recorded OS job accounting value, not an attributed list. No new live job/process query was performed by this audit."
+    },
+    "copy": {
+      "receipt": {
+        "leaf": "p1-outside-copy-repaired.json",
+        "bytes": 10675,
+        "sha256": "FEE35D2FDFD2018966EFB728A909324A846FE87EB0806E6DFC5930214B71AA35"
+      },
+      "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+      "manifestRows": 50,
+      "sourceFiles": 50,
+      "destinationFiles": 50,
+      "sourceMembershipExact": true,
+      "destinationMembershipExact": true,
+      "sourceByteAndShaMatches": 50,
+      "destinationByteAndShaMatches": 50,
+      "declaredBytes": 975120505,
+      "independentlySummedBytes": 975120505,
+      "failures": [],
+      "binary": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332397568,
+        "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+      }
+    },
+    "runtimeData": {
+      "gitObjectIdentityComparisons": [
+        {
+          "leaf": "LiveCoreRuntimeData.cpp",
+          "priorBlob": "4a98ced6c43a3d6b239fe3333ade5c9474bfa1f6",
+          "repairedBlob": "4a98ced6c43a3d6b239fe3333ade5c9474bfa1f6",
+          "unchanged": true
+        },
+        {
+          "leaf": "LiveCoreRuntimeData.h",
+          "priorBlob": "58682440cb6f6a12137dcf74cf35ba6be94225ce",
+          "repairedBlob": "58682440cb6f6a12137dcf74cf35ba6be94225ce",
+          "unchanged": true
+        },
+        {
+          "leaf": "session-create.json",
+          "priorBlob": "64c926d0be627f07230b3fdf0de68c2ba378d6b4",
+          "repairedBlob": "64c926d0be627f07230b3fdf0de68c2ba378d6b4",
+          "unchanged": true
+        }
+      ],
+      "contentDescriptor": {
+        "leaf": "session-create.json",
+        "bytes": 222673,
+        "sha256": "2B1DB622C7C09F8A982B515A8BE932AFA38AF8A9383CF491996C2CB26A9627B0"
+      },
+      "bodyRead": false
+    },
+    "nativeRuns": [
+      {
+        "label": "Resources",
+        "wrapper": {
+          "leaf": "p1-repaired-resources-result.json",
+          "bytes": 375,
+          "sha256": "49D30BB78D234AF78ADF41C9BD4CC0FB64456BB978F7475E398E7F0F9FDD4921"
+        },
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5289,
+          "sha256": "4755C29320BCD50EFBF42CF9645159362C0CF72F2EABB87D91EEF11A84C0F43B"
+        },
+        "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+        "sourceMatches": true,
+        "status": "PASS",
+        "mode": "Resources",
+        "coreMode": null,
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 6.2686638,
+        "overallRecordWallSeconds": 7.565784,
+        "nativeTimeoutSeconds": 120,
+        "withinNativeBudget": true,
+        "startedUtc": "2026-10-24T15:29:17.5944169Z",
+        "finishedUtc": "2026-10-24T15:29:25.1602009Z",
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "forcedTermination": false,
+        "streamLimitBytes": 67108864,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryRecordedUnchanged": true,
+        "binaryMatchesRehashedCopy": true,
+        "parentEnvironmentRestored": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchCount": 4,
+        "configBefore": {
+          "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+          "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+          "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+          "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404"
+        },
+        "configAfter": {
+          "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+          "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+          "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1",
+          "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404"
+        },
+        "automation": {
+          "succeeded": 4,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "totalDurationSeconds": 0.033194102346897125,
+          "tests": [
+            {
+              "name": "Warhammer.RuntimeData.CanonicalSession",
+              "state": "Success",
+              "durationSeconds": 0.01141349971294403,
+              "errors": 0,
+              "warnings": 0
+            },
+            {
+              "name": "Warhammer.RuntimeData.CorruptSessionFails",
+              "state": "Success",
+              "durationSeconds": 0.013128500431776047,
+              "errors": 0,
+              "warnings": 0
+            },
+            {
+              "name": "Warhammer.RuntimeData.MissingSessionFails",
+              "state": "Success",
+              "durationSeconds": 0.00045900046825408936,
+              "errors": 0,
+              "warnings": 0
+            },
+            {
+              "name": "Warhammer.RuntimeData.StartupResources",
+              "state": "Success",
+              "durationSeconds": 0.008193101733922958,
+              "errors": 0,
+              "warnings": 0
+            }
+          ]
+        },
+        "nativeLogDiagnostics": {
+          "warningMarkers": 2,
+          "errorMarkers": 1,
+          "fatalMarkers": 0,
+          "noClassSpawnWarning": 1,
+          "lightMobilityWarning": 1,
+          "missingHtmlReportTemplateError": 1
+        },
+        "host": {
+          "mode": null,
+          "owned": null,
+          "status": null,
+          "recordedEarlierReceipt": null
+        },
+        "hostStop": null,
+        "cleanupErrors": [],
+        "failureStage": null,
+        "errorType": null,
+        "rawChecks": [
+          {
+            "kind": "stderr",
+            "descriptor": {
+              "leaf": "stderr.log",
+              "bytes": 0,
+              "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "automationIndex",
+            "descriptor": {
+              "leaf": "index.json",
+              "bytes": 2665,
+              "sha256": "62477B71FA43F12B65F76BF2059FAD1F834D55B1DFC6AF0E1293EF69041845C7"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "stdout",
+            "descriptor": {
+              "leaf": "stdout.log",
+              "bytes": 71424,
+              "sha256": "90BD2EAA8E3804D9F47E05234297D56DBE40BE5E9E442052891678B7BFF7DFE9"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "nativeLog",
+            "descriptor": {
+              "leaf": "native.log",
+              "bytes": 71489,
+              "sha256": "A6A858C58CF760DEC0E633323511DFA6E4B9F237C0AAC1BE777FD4DCEAAF6551"
+            },
+            "recordedDescriptorMatches": true
+          }
+        ]
+      },
+      {
+        "label": "ManagedCore",
+        "wrapper": {
+          "leaf": "p1-repaired-managed-result.json",
+          "bytes": 370,
+          "sha256": "008D77639705BA33E4FB6B76623B497FF6D3DEE4886F5705DF7248743BD1A963"
+        },
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5204,
+          "sha256": "ED4A1A0891D30B8EE10D7D95B6269C3736B3E812831B152F7F2212E5D1DF42AE"
+        },
+        "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+        "sourceMatches": true,
+        "status": "PASS",
+        "mode": "Core",
+        "coreMode": "Managed",
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 21.9379845,
+        "overallRecordWallSeconds": 36.4989604,
+        "nativeTimeoutSeconds": 240,
+        "withinNativeBudget": true,
+        "startedUtc": "2026-10-24T15:29:36.1012816Z",
+        "finishedUtc": "2026-10-24T15:30:12.600242Z",
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "forcedTermination": false,
+        "streamLimitBytes": 67108864,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryRecordedUnchanged": true,
+        "binaryMatchesRehashedCopy": true,
+        "parentEnvironmentRestored": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchCount": 4,
+        "configBefore": {
+          "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+          "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+          "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+          "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1"
+        },
+        "configAfter": {
+          "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+          "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+          "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+          "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1"
+        },
+        "automation": {
+          "succeeded": 1,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "totalDurationSeconds": 15.733503341674805,
+          "tests": [
+            {
+              "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+              "state": "Success",
+              "durationSeconds": 15.733503341674805,
+              "errors": 0,
+              "warnings": 0
+            }
+          ]
+        },
+        "nativeLogDiagnostics": {
+          "warningMarkers": 2,
+          "errorMarkers": 1,
+          "fatalMarkers": 0,
+          "noClassSpawnWarning": 1,
+          "lightMobilityWarning": 1,
+          "missingHtmlReportTemplateError": 1
+        },
+        "host": {
+          "mode": "Managed",
+          "owned": true,
+          "status": "READY",
+          "recordedEarlierReceipt": {
+            "leaf": "receipt.json",
+            "bytes": 1921,
+            "sha256": "387170BA751C0583C70837E32E5E599452571310245F59E011D683719BD2481E"
+          }
+        },
+        "hostStop": {
+          "forcedTermination": false,
+          "status": "STOPPED",
+          "owned": true
+        },
+        "cleanupErrors": [],
+        "failureStage": null,
+        "errorType": null,
+        "rawChecks": [
+          {
+            "kind": "stderr",
+            "descriptor": {
+              "leaf": "stderr.log",
+              "bytes": 0,
+              "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "automationIndex",
+            "descriptor": {
+              "leaf": "index.json",
+              "bytes": 1109,
+              "sha256": "7510D6A0DF3AD23DF4716DE75E28B2AA96DA72A11305AD561D716D9F10287218"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "stdout",
+            "descriptor": {
+              "leaf": "stdout.log",
+              "bytes": 68602,
+              "sha256": "14F1F718933CC22946AFFC0C9CA3ACD95FD5809AA71FEE12D4697088B93BE897"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "nativeLog",
+            "descriptor": {
+              "leaf": "native.log",
+              "bytes": 68667,
+              "sha256": "7BBB5C24D39AC078935E03B226F71A43715F6A2B328E2A556C170C2114CA4D2C"
+            },
+            "recordedDescriptorMatches": true
+          }
+        ]
+      },
+      {
+        "label": "AttachCore",
+        "wrapper": {
+          "leaf": "p1-attach-lifecycle-repaired.json",
+          "bytes": 775,
+          "sha256": "BBFB2ED98642396E16796837DA47DD05C90C7FD4DE97DA95503817B27FE5C953"
+        },
+        "result": {
+          "leaf": "result.json",
+          "bytes": 5194,
+          "sha256": "488AF6C0877548A79F1DD871370E06555DB7CC85E29BEC0375A1047B340C241B"
+        },
+        "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+        "sourceMatches": true,
+        "status": "PASS",
+        "mode": "Core",
+        "coreMode": "Attach",
+        "nativeExitCode": 0,
+        "nativeElapsedSeconds": 20.8440059,
+        "overallRecordWallSeconds": 22.313921,
+        "nativeTimeoutSeconds": 240,
+        "withinNativeBudget": true,
+        "startedUtc": "2026-10-24T15:30:40.922808Z",
+        "finishedUtc": "2026-10-24T15:31:03.236729Z",
+        "nonVisibleFlagsRequired": true,
+        "renderingVerified": false,
+        "forcedTermination": false,
+        "streamLimitBytes": 67108864,
+        "stdoutComplete": true,
+        "stderrComplete": true,
+        "streamsCapped": false,
+        "binaryBefore": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryAfter": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332397568,
+          "sha256": "9C153546F6208CED7C41F8A7AE4BE53F318A7FE7D2C427D0ED81769D7B33B8E4"
+        },
+        "binaryRecordedUnchanged": true,
+        "binaryMatchesRehashedCopy": true,
+        "parentEnvironmentRestored": true,
+        "configBeforeAfterFourExact": true,
+        "currentConfigMatchCount": 4,
+        "configBefore": {
+          "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+          "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+          "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+          "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1"
+        },
+        "configAfter": {
+          "DefaultGame.ini": "63D5DD86DD4E40EA4D397CA8584FF89E53914AB7F1078446207663C973E70934",
+          "DefaultEditorSettings.ini": "52E28525A0B283949E94652E2C60353C55337EC15CC125F5FA2089D1C509A07D",
+          "DefaultEngine.ini": "C7A4B362E674911679806941F2B77CACBD3E60F5EED06B685C6F4294188FE404",
+          "DefaultInput.ini": "ADCA861B023B36F1E72F192379D61617F059D91D79A11949A98C071D4FB4B9D1"
+        },
+        "automation": {
+          "succeeded": 1,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "totalDurationSeconds": 14.640838623046875,
+          "tests": [
+            {
+              "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+              "state": "Success",
+              "durationSeconds": 14.640838623046875,
+              "errors": 0,
+              "warnings": 0
+            }
+          ]
+        },
+        "nativeLogDiagnostics": {
+          "warningMarkers": 2,
+          "errorMarkers": 1,
+          "fatalMarkers": 0,
+          "noClassSpawnWarning": 1,
+          "lightMobilityWarning": 1,
+          "missingHtmlReportTemplateError": 1
+        },
+        "host": {
+          "mode": "Attach",
+          "owned": false,
+          "status": "ATTACHED_HEALTHY",
+          "recordedEarlierReceipt": {
+            "leaf": "receipt.json",
+            "bytes": 427,
+            "sha256": "6AD75861EB077765B225BFA33B666BB7387D2B5DA4852DAEF1B1AB2437548897"
+          }
+        },
+        "hostStop": {
+          "status": "ATTACHED_NOT_STOPPED",
+          "owned": false
+        },
+        "cleanupErrors": [],
+        "failureStage": null,
+        "errorType": null,
+        "rawChecks": [
+          {
+            "kind": "stderr",
+            "descriptor": {
+              "leaf": "stderr.log",
+              "bytes": 0,
+              "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "stdout",
+            "descriptor": {
+              "leaf": "stdout.log",
+              "bytes": 68602,
+              "sha256": "A2D92158928E52BB6F688B05DC905436A67DA08EF8A737F7FD9F91AAEBE79A29"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "automationIndex",
+            "descriptor": {
+              "leaf": "index.json",
+              "bytes": 1109,
+              "sha256": "197700211C552DE6DB1D97985C1F1B834CBD5FBCFE543C129D63FBC7C125CFE2"
+            },
+            "recordedDescriptorMatches": true
+          },
+          {
+            "kind": "nativeLog",
+            "descriptor": {
+              "leaf": "native.log",
+              "bytes": 68667,
+              "sha256": "BAE3B266C606CF14AE81B441466B8A27660B880D343343CB8C1B25525D87FC41"
+            },
+            "recordedDescriptorMatches": true
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "nativeRuns": 3,
+      "successfulTestExecutions": 6,
+      "distinctTestNames": 5,
+      "assertionCount": "NOT_INFERRED",
+      "recordedPerTestWarnings": 0,
+      "recordedPerTestErrors": 0,
+      "nativeLogsWarningAndErrorFree": false
+    },
+    "hostReceipts": [
+      {
+        "label": "ManagedRunFinal",
+        "descriptor": {
+          "leaf": "receipt.json",
+          "bytes": 2062,
+          "sha256": "1F97E2F81B4C4DF4DD70CCD6B835735B517FEE2D1CBB43E613481E87B9C5DDAB"
+        },
+        "mode": "Managed",
+        "owned": true,
+        "status": "STOPPED",
+        "healthHttpStatus": 200,
+        "healthAuthenticated": true,
+        "forcedTermination": false,
+        "readyUtc": "2026-10-24T15:29:49.1848391Z",
+        "shutdownRequestedUtc": "2026-10-24T15:30:11.2487909Z",
+        "stoppedUtc": "2026-10-24T15:30:12.1568275Z",
+        "serviceIdentity": null
+      },
+      {
+        "label": "AttachOuterOwnerFinal",
+        "descriptor": {
+          "leaf": "receipt.json",
+          "bytes": 2062,
+          "sha256": "22DAF136F33AE6E61A7682F930BDC6A09F62ACDE2DC95C75D62D5C45831C93EB"
+        },
+        "mode": "Managed",
+        "owned": true,
+        "status": "STOPPED",
+        "healthHttpStatus": 200,
+        "healthAuthenticated": true,
+        "forcedTermination": false,
+        "readyUtc": "2026-10-24T15:30:40.8614614Z",
+        "shutdownRequestedUtc": "2026-10-24T15:31:03.5129309Z",
+        "stoppedUtc": "2026-10-24T15:31:04.397964Z",
+        "serviceIdentity": null
+      },
+      {
+        "label": "AttachReceipt",
+        "descriptor": {
+          "leaf": "receipt.json",
+          "bytes": 427,
+          "sha256": "6AD75861EB077765B225BFA33B666BB7387D2B5DA4852DAEF1B1AB2437548897"
+        },
+        "mode": "Attach",
+        "owned": false,
+        "status": "ATTACHED_HEALTHY",
+        "healthHttpStatus": 200,
+        "healthAuthenticated": true,
+        "forcedTermination": null,
+        "readyUtc": null,
+        "shutdownRequestedUtc": null,
+        "stoppedUtc": null,
+        "serviceIdentity": "NOT_VERIFIED_BY_ATTACHMENT"
+      }
+    ],
+    "attachLifecycle": {
+      "descriptor": {
+        "leaf": "p1-attach-lifecycle-repaired.json",
+        "bytes": 775,
+        "sha256": "BBFB2ED98642396E16796837DA47DD05C90C7FD4DE97DA95503817B27FE5C953"
+      },
+      "status": "PASS",
+      "ownedHostStarted": true,
+      "attachedHostRemainedHealthy": true,
+      "postClientHealthHttpStatus": 200,
+      "ownedStop": {
+        "forcedTermination": false,
+        "owned": true,
+        "status": "STOPPED"
+      },
+      "environmentRestored": true,
+      "cleanupErrors": []
+    },
+    "qualifications": [
+      "Native JSON reports succeeded4/1/1 with clean test result counts, but every native log retains two startup warnings and one missing HTML report-template error. JSON reports were still generated.",
+      "Managed run retained an earlier READY descriptor1921B/387170BA751C0583C70837E32E5E599452571310245F59E011D683719BD2481E. The same mutable receipt is now STOPPED2062B/1F97E2F81B4C4DF4DD70CCD6B835735B517FEE2D1CBB43E613481E87B9C5DDAB. This temporal change is not called a current-byte match to the earlier digest.",
+      "Attachment records ATTACHED_NOT_STOPPED and does not verify service process identity; outer lifecycle records authenticated HTTP200 after client exit then a separate normal owned Stop.",
+      "Native elapsed timings exclude some host startup/cleanup/evidence work; overall lexical record timestamps are retained separately.",
+      "Environment restoration and process/job lifecycle are retained observations, not new live measurements by this audit.",
+      "No current review outputs were accessed; no independent SOURCE/CODE/REQ or acceptance verdict is made.",
+      "NullRHI results do not establish pixels, font/shader rendering, physical input, clean-machine portability, Linux or full parity.",
+      "No credentials, raw argument strings, process/session/thread/window IDs, full private paths or raw log bodies are copied into this safe metadata.",
+      "Root separately reports source-binding37 normalized Git matches:29 raw working-byte matches and8 CRLF-to-LF equivalents. This audit does not reinterpret that as37 raw matches."
+    ]
+  },
+  "architectureValidation": {
+    "localLinkOccurrences": 43,
+    "mermaidBlocks": 2,
+    "diagramCheck": "Actual mermaid.parse11.12.0 under jsdom26.1.0/Node24.19.0; originalsequenceerrorreproduced, bothrepairedblockspassed; no visualrender",
+    "bytes": 22949,
+    "sha256": "801DADA88EF07186FA3C17A537E9C3CF5131A7CB75912B7828200997CBD991D0",
+    "parserEvidence": "2026-10-24-architecture-mermaid.json"
+  },
+  "closingRepair": {
+    "nativeRerun": false,
+    "startupOfflineControls": {
+      "status": "PASS",
+      "cases": 28,
+      "scope": "OFFLINE_AST_AND_INERT_PROCESS_CONTROLS",
+      "serviceOrClientStarted": false,
+      "networkRequested": false
+    },
+    "changedBehavior": "Managed port equality uses case-insensitive comparison consistently with mode dispatch; guide documents existing5+3-second shutdown bounds",
+    "sourceHead": "f725e75739496fe21ad9c5c2161a8d87733b21cc",
+    "nativeTestHead": "2cad5f41c26430daaec4da982964b5b979cb9266",
+    "basis": "Prior native workflows used Managed with matching ports, whose behavior is unchanged. New endpoint-case rejection/default cases are covered by28 focused controls; native Source/Config/Content/.uproject inputs are unchanged."
+  },
+  "focusedControls": {
+    "pythonLauncherStubTests": 19,
+    "coreStartupOfflineControls": 28,
+    "hiddenOwnedJobCases": 3,
+    "actualInsideCheckoutRejection": {
+      "nativeStarted": false,
+      "stage": "INPUTS",
+      "coreStarted": false,
+      "parentEnvironmentRestored": true,
+      "status": "PASS_EXPECTED_REJECTION"
+    },
+    "powerShellLauncherStubCases": 14,
+    "jobTestInitialFailure": "Test-only child output inheritance assumption failed; explicit stdout/stderr inheritance repaired the test before three cases passed.",
+    "retainedFocusedResult": {
+      "leaf": "p1-final-focused-controls.json",
+      "sha256": "BAA4D14303D2EE46597EAFAB243A62F6B73EF0236442C963DC7200E4FEF05185",
+      "bytes": 2227
+    },
+    "coreStopOfflineControls": 10,
+    "outsidePathFunctionAndWiringControls": 32
+  },
+  "actualUnsupportedNamespaceControl": {
+    "status": "PASS_EXPECTED_ALIAS_REJECTION",
+    "failureStage": "INPUTS",
+    "processStarted": false,
+    "coreStarted": false,
+    "parentEnvironmentRestored": true
+  },
+  "sourceReviews": {
+    "requestedSettings": {
+      "memoryDisabled": true,
+      "freshExec": true,
+      "ephemeral": true,
+      "approval": "never",
+      "sandbox": "read-only",
+      "timeoutSeconds": 600
+    },
+    "limits": "Full affected2cad assessments retained their actual CHANGES_REQUESTED verdicts for endpoint casing and guide budgets. Closing reviews cover those affected corrections and direct interfaces, not fresh certification of unchanged code. Source-only reviewers received no native results. Root observed runtime; metadata reconciliation is author-adjacent and inert. Requested memory/persistence and OS/network isolation are not independently attested. No signed reproducible binary/source attestation is claimed.",
+    "fullAffectedBinding": {
+      "sourceHead": "2cad5f41c26430daaec4da982964b5b979cb9266",
+      "gitOriginCount": 39,
+      "gitBlobsMatched": 39,
+      "workingFilteredGitBlobsMatched": 39,
+      "workingRawShaMatched": 31,
+      "workingCrLfToLfOnly": 8,
+      "checkedUtc": "2026-10-24T15:44:18.0457192Z"
+    },
+    "firstRepairNotAccepted": {
+      "roles": [
+        {
+          "timedOut": false,
+          "startedUtc": "2026-10-24T15:31:30.6447209Z",
+          "freshContexts": 1,
+          "exitCode": 0,
+          "commandsCompleted": 24,
+          "verdict": "BLOCKED",
+          "role": "CODE",
+          "failedCommands": 0,
+          "nativeEvidenceSupplied": false,
+          "rawOriginalDigests": [
+            {
+              "leaf": "report.txt",
+              "sha256": "055A3AC13EC7CA6E8BF29E9AFB3DB6CB2A10AF5E709AB1DFE186F2794D2A0EBC",
+              "bytes": 3720
+            },
+            {
+              "leaf": "events.jsonl",
+              "sha256": "4856FA57943F75BFE505507508C3A99F02E8B65DF193058EC04241943F97C068",
+              "bytes": 501173
+            },
+            {
+              "leaf": "stderr.log",
+              "sha256": "DD74915AF28409AB130E6335F122F3A7B0012A22FDF171E24AA3468F79A93721",
+              "bytes": 2119
+            },
+            {
+              "leaf": "invocation.json",
+              "sha256": "908465D4C1BE87DFA3BDF861E0FFA1B4C074FDCB9E8DF758A6D016229CB8018C",
+              "bytes": 908
+            },
+            {
+              "leaf": "completion.json",
+              "sha256": "4A70AB287FD0320A51566D52265466FE9F913646A4AFA3B5A7978EFEDE05A1ED",
+              "bytes": 156
+            },
+            {
+              "leaf": "prompt.txt",
+              "sha256": "E9742584F1B592FEBE8443B74CF97E9829FA38940B41D3A1B5342435B3EA94CD",
+              "bytes": 1658
+            },
+            {
+              "leaf": "AGENTS.md",
+              "sha256": "32425CDB845DA14D771E9CE5FC5D8779C1509FEAE2D799B4E0C575BEFFFAE8EF",
+              "bytes": 1170
+            }
+          ],
+          "completedTurns": 1,
+          "scope": "P1A_SOURCE_ONLY",
+          "finishedUtc": "2026-10-24T15:36:21.7646806Z"
+        },
+        {
+          "timedOut": false,
+          "startedUtc": "2026-10-24T15:31:29.0741679Z",
+          "freshContexts": 1,
+          "exitCode": 0,
+          "commandsCompleted": 21,
+          "verdict": "CHANGES_REQUESTED",
+          "role": "REQ",
+          "failedCommands": 0,
+          "nativeEvidenceSupplied": false,
+          "rawOriginalDigests": [
+            {
+              "leaf": "report.txt",
+              "sha256": "12CE49F788F04A350D4FCA96E840F00E9CC751CAFDAD73072CC3B267A2D17FE7",
+              "bytes": 3814
+            },
+            {
+              "leaf": "events.jsonl",
+              "sha256": "56DE3EE79D1F875CFD39E8D437A16D6C9F65B924681FF7B849D20923D73EF5D4",
+              "bytes": 505620
+            },
+            {
+              "leaf": "stderr.log",
+              "sha256": "26C50FDDE0E78064695DA85DD38EAB4A01914853FBACA459A8F9CCABAFB436D7",
+              "bytes": 1842
+            },
+            {
+              "leaf": "invocation.json",
+              "sha256": "266315E853A1948CD937FB0D9C0A3EDA8C8B4554EA8020ACF3197FAB6714C0C1",
+              "bytes": 905
+            },
+            {
+              "leaf": "completion.json",
+              "sha256": "2A9A141A10C59B0F015AC46137EC2EA74C5299C5D394060FF3200952B3DE841B",
+              "bytes": 155
+            },
+            {
+              "leaf": "prompt.txt",
+              "sha256": "CF300E4E28A6B81CB7AC2D600F855E6A56FEDE6318C563C343050CEAC9A759A1",
+              "bytes": 1622
+            },
+            {
+              "leaf": "AGENTS.md",
+              "sha256": "32425CDB845DA14D771E9CE5FC5D8779C1509FEAE2D799B4E0C575BEFFFAE8EF",
+              "bytes": 1170
+            }
+          ],
+          "completedTurns": 1,
+          "scope": "P1A_SOURCE_ONLY",
+          "finishedUtc": "2026-10-24T15:35:30.0506099Z"
+        }
+      ],
+      "inputCount": 61,
+      "selectedApiLines": 826,
+      "manifest": {
+        "leaf": "manifest.json",
+        "sha256": "35A0B733133A8E9C6A4548E21CDDC52BFD944D0823EC6FB7DF35BF101CD15B1D",
+        "bytes": 48745
+      },
+      "installedApiExcerpts": 23,
+      "sourceHead": "71f5cedb6f3a548f4d9f68c57123f84821477b9c",
+      "inputBytes": 610657
+    },
+    "binding": {
+      "sourceHead": "f725e75739496fe21ad9c5c2161a8d87733b21cc",
+      "gitOrigins": 6,
+      "gitBlobsMatched": 6,
+      "workingRawShaMatched": 6,
+      "workingCrLfToLfOnly": 0,
+      "inputCount": 13,
+      "allInputsAndControlsMatched": 17
+    },
+    "latestFullAffectedAssessment": {
+      "roles": [
+        {
+          "timedOut": false,
+          "startedUtc": "2026-10-24T15:43:53.1822666Z",
+          "freshContexts": 1,
+          "exitCode": 0,
+          "commandsCompleted": 12,
+          "verdict": "CHANGES_REQUESTED",
+          "role": "CODE",
+          "failedCommands": 0,
+          "nativeEvidenceSupplied": false,
+          "rawOriginalDigests": [
+            {
+              "leaf": "report.txt",
+              "sha256": "FA69B9CEDC51BFE48B583F008998E677D1A3BAE136B01D0B7DA95DCE78E83DDB",
+              "bytes": 3055
+            },
+            {
+              "leaf": "events.jsonl",
+              "sha256": "9007DEDE9E0B2C320A5C213FD5EF5CCA1F22324006E03AB9BC74271ACBE7A6BF",
+              "bytes": 503703
+            },
+            {
+              "leaf": "stderr.log",
+              "sha256": "C5576B261CA3AA67BD4827B6AABBC30E3D1FC29DC285ED5E169E8C232F4D1E0E",
+              "bytes": 1842
+            },
+            {
+              "leaf": "invocation.json",
+              "sha256": "07E760D5450C9572A7A3DD890FB3A6BFE5C4F6B24A5489C036066E9112DB9432",
+              "bytes": 908
+            },
+            {
+              "leaf": "completion.json",
+              "sha256": "57E028A95EA5FB0A57FA4957510842F85D66D0197985B923B05FA06B6107448D",
+              "bytes": 156
+            },
+            {
+              "leaf": "prompt.txt",
+              "sha256": "2DD4BA199A7C5AC2E71D3A8B9AB2708D95ACD43424E0D8A96915686BCC8696EB",
+              "bytes": 2504
+            },
+            {
+              "leaf": "AGENTS.md",
+              "sha256": "32425CDB845DA14D771E9CE5FC5D8779C1509FEAE2D799B4E0C575BEFFFAE8EF",
+              "bytes": 1170
+            }
+          ],
+          "completedTurns": 1,
+          "scope": "P1A_SOURCE_ONLY",
+          "finishedUtc": "2026-10-24T15:48:01.8206299Z"
+        },
+        {
+          "timedOut": false,
+          "startedUtc": "2026-10-24T15:43:53.8123151Z",
+          "freshContexts": 1,
+          "exitCode": 0,
+          "commandsCompleted": 16,
+          "verdict": "CHANGES_REQUESTED",
+          "role": "REQ",
+          "failedCommands": 0,
+          "nativeEvidenceSupplied": false,
+          "rawOriginalDigests": [
+            {
+              "leaf": "report.txt",
+              "sha256": "28796AEF89FC09DC207D98BBE4827B5E57725CF12343B8DCE15A193B798AEA81",
+              "bytes": 2864
+            },
+            {
+              "leaf": "events.jsonl",
+              "sha256": "12AF30D90D4F4C20DEB1384793F80F1CC2D12689BF6BF88E5E1257B06485FC80",
+              "bytes": 334747
+            },
+            {
+              "leaf": "stderr.log",
+              "sha256": "74F0DD980597E2AD4C660595B8EF7F33071AB29B9790FD8AB768B897295FA393",
+              "bytes": 1842
+            },
+            {
+              "leaf": "invocation.json",
+              "sha256": "E542168F0CBCBC29E383ECF2C09D0D2FF7441C1DE57FA10A894459DD88C909D8",
+              "bytes": 905
+            },
+            {
+              "leaf": "completion.json",
+              "sha256": "77B19E564567C73BDBFD1D0F88FF020E3A89F1D4383596C3705E739B4F742E9A",
+              "bytes": 155
+            },
+            {
+              "leaf": "prompt.txt",
+              "sha256": "7D4D7086C3C236039BD55C43E6CB9A914722556E244F242A7AB443FE973F0A37",
+              "bytes": 2459
+            },
+            {
+              "leaf": "AGENTS.md",
+              "sha256": "32425CDB845DA14D771E9CE5FC5D8779C1509FEAE2D799B4E0C575BEFFFAE8EF",
+              "bytes": 1170
+            }
+          ],
+          "completedTurns": 1,
+          "scope": "P1A_SOURCE_ONLY",
+          "finishedUtc": "2026-10-24T15:47:45.6873385Z"
+        }
+      ],
+      "inputCount": 76,
+      "selectedApiLines": 1014,
+      "manifest": {
+        "leaf": "manifest.json",
+        "sha256": "9D2E00D089FE31670E0309D166FF993014B67655B43BDDD8AF738405D4CA2B3E",
+        "bytes": 66367
+      },
+      "installedApiExcerpts": 31,
+      "sourceHead": "2cad5f41c26430daaec4da982964b5b979cb9266",
+      "inputBytes": 662167
+    },
+    "originalChangesRequested": {
+      "roles": [
+        {
+          "timedOut": false,
+          "startedUtc": "2026-10-24T15:11:31.9670994Z",
+          "freshContexts": 1,
+          "exitCode": 0,
+          "commandsCompleted": 20,
+          "verdict": "CHANGES_REQUESTED",
+          "role": "CODE",
+          "failedCommands": 0,
+          "nativeEvidenceSupplied": false,
+          "rawOriginalDigests": [
+            {
+              "leaf": "report.txt",
+              "sha256": "398097CEAF02D042FF79BDECF6109EA653CB841722DA478F305236D4E8426569",
+              "bytes": 4455
+            },
+            {
+              "leaf": "events.jsonl",
+              "sha256": "43AF16BF8EB84BECB6500869536229013AE24FC17483D6FA2761A824E9F38647",
+              "bytes": 473175
+            },
+            {
+              "leaf": "stderr.log",
+              "sha256": "413C7D03B854861B5F09B81B0056A1CEF57B5691D2AC629AA12EE8CF6BA51BC2",
+              "bytes": 1842
+            },
+            {
+              "leaf": "invocation.json",
+              "sha256": "C6BBE18351791A6169D9539798F86FD8027E56FE644192091470D26DAD975BED",
+              "bytes": 888
+            },
+            {
+              "leaf": "completion.json",
+              "sha256": "217963EDD7BC053BC98433D3EB6B08EEAA123B6B690DE7788CE139CC7AA14DC6",
+              "bytes": 155
+            },
+            {
+              "leaf": "prompt.txt",
+              "sha256": "64C94EE669AD598034D53272E840BF7B8228CD0C2BAB1A2A821AD45B39C049CC",
+              "bytes": 1596
+            },
+            {
+              "leaf": "AGENTS.md",
+              "sha256": "32425CDB845DA14D771E9CE5FC5D8779C1509FEAE2D799B4E0C575BEFFFAE8EF",
+              "bytes": 1170
+            }
+          ],
+          "completedTurns": 1,
+          "scope": "P1A_SOURCE_ONLY",
+          "finishedUtc": "2026-10-24T15:16:51.486569Z"
+        },
+        {
+          "timedOut": false,
+          "startedUtc": "2026-10-24T15:11:28.4080895Z",
+          "freshContexts": 1,
+          "exitCode": 0,
+          "commandsCompleted": 21,
+          "verdict": "CHANGES_REQUESTED",
+          "role": "REQ",
+          "failedCommands": 0,
+          "nativeEvidenceSupplied": false,
+          "rawOriginalDigests": [
+            {
+              "leaf": "report.txt",
+              "sha256": "D0E68FE597A7E7C9BED1EF475198B252179ECF89FB9165C12E3426DBAF76DF1D",
+              "bytes": 3576
+            },
+            {
+              "leaf": "events.jsonl",
+              "sha256": "EA77BFF05B87E224406D2857A1B30F55DD89BEBE0F4A9FD71A2024C9EEFAABD1",
+              "bytes": 436457
+            },
+            {
+              "leaf": "stderr.log",
+              "sha256": "984F104AF7DEA09E5B9CD065E9790CF0213846E92A5FF5AC3CF062023F77A9E9",
+              "bytes": 2119
+            },
+            {
+              "leaf": "invocation.json",
+              "sha256": "4214E50EE1E5CE22BAD5F210FC73EC2748F6929770B18610A86AE92B336E790E",
+              "bytes": 885
+            },
+            {
+              "leaf": "completion.json",
+              "sha256": "D3B92E254771496F4414926FE3B768F7A7F7586536982753C792BFEDB2BA60C0",
+              "bytes": 155
+            },
+            {
+              "leaf": "prompt.txt",
+              "sha256": "D9AD1342ECB64D92712BD899F701CD1FE1DD50C880FE2ED69C8B2695C0F2C70D",
+              "bytes": 1622
+            },
+            {
+              "leaf": "AGENTS.md",
+              "sha256": "32425CDB845DA14D771E9CE5FC5D8779C1509FEAE2D799B4E0C575BEFFFAE8EF",
+              "bytes": 1170
+            }
+          ],
+          "completedTurns": 1,
+          "scope": "P1A_SOURCE_ONLY",
+          "finishedUtc": "2026-10-24T15:16:25.7650545Z"
+        }
+      ],
+      "inputCount": 48,
+      "selectedApiLines": 629,
+      "manifest": {
+        "leaf": "manifest.json",
+        "sha256": "71C99C8DB9A69B577E724A3BDBF7BFB34105D3930BC163209B9844992B7FFAC3",
+        "bytes": 37754
+      },
+      "installedApiExcerpts": 14,
+      "sourceHead": "43bb0977ffd291d8217f831f39edbfe2716b3a43",
+      "inputBytes": 546333
+    },
+    "focusedClosingReview": {
+      "roles": [
+        {
+          "timedOut": false,
+          "startedUtc": "2026-10-24T15:53:05.7595537Z",
+          "freshContexts": 1,
+          "exitCode": 0,
+          "commandsCompleted": 10,
+          "verdict": "PASS",
+          "role": "CODE",
+          "failedCommands": 0,
+          "nativeEvidenceSupplied": false,
+          "rawOriginalDigests": [
+            {
+              "leaf": "report.txt",
+              "sha256": "320C1C854896701C4C650CB0E07AABE55D942E52041DC0D5D50BCB1B41CB6D65",
+              "bytes": 5263
+            },
+            {
+              "leaf": "events.jsonl",
+              "sha256": "4B42AED27B0F5DB53D84931669A3E6C35D650BB886F1F79E2F3986EFC2A5E3A9",
+              "bytes": 150183
+            },
+            {
+              "leaf": "stderr.log",
+              "sha256": "6CA7FFF1621BC59BE5C5B80847C3AEB4D54952A50D74C79C57E1E51405BFC0E0",
+              "bytes": 1288
+            },
+            {
+              "leaf": "invocation.json",
+              "sha256": "B9A5BFDAEFFCDFFF0A9248D5FAE51E4A5C945F0B6BA1FF5EEE304ED148E574F8",
+              "bytes": 904
+            },
+            {
+              "leaf": "completion.json",
+              "sha256": "B6A5D6F963B86F785003BD659B171CBF880AE45E1E66169F6ECAF6AC2FE63616",
+              "bytes": 156
+            },
+            {
+              "leaf": "prompt.txt",
+              "sha256": "AD496B94D21FE92F5C5B2AE5839B96B322167B675A78FF13833236A2ABD1557B",
+              "bytes": 1797
+            },
+            {
+              "leaf": "AGENTS.md",
+              "sha256": "68E89F8A59D0C58B64572657AFDD326F9E9572881452512FC0B0F13ABD609C80",
+              "bytes": 1058
+            }
+          ],
+          "completedTurns": 1,
+          "scope": "P1A_FOCUSED_CLOSING_SOURCE_ONLY",
+          "finishedUtc": "2026-10-24T15:56:00.0527574Z"
+        },
+        {
+          "timedOut": false,
+          "startedUtc": "2026-10-24T15:53:06.4189076Z",
+          "freshContexts": 1,
+          "exitCode": 0,
+          "commandsCompleted": 10,
+          "verdict": "PASS",
+          "role": "REQ",
+          "failedCommands": 0,
+          "nativeEvidenceSupplied": false,
+          "rawOriginalDigests": [
+            {
+              "leaf": "report.txt",
+              "sha256": "904F814B118496A8D87887B42C181A4BABFD9D25F497C493EA2C3AD03573849C",
+              "bytes": 5959
+            },
+            {
+              "leaf": "events.jsonl",
+              "sha256": "35B0E0CED57D9799F547329F79287572F13CA28A6D174C992ECDF1D6BCB713BC",
+              "bytes": 175709
+            },
+            {
+              "leaf": "stderr.log",
+              "sha256": "3D0D514D52389C1B05D05A8DE39D0A854B3D469BD2B44EF42B7E5F8B085466C9",
+              "bytes": 734
+            },
+            {
+              "leaf": "invocation.json",
+              "sha256": "57C5C38E4DF220206AF5C2F15FA2A9C5748F7AFC302A3E680482916E9B7D4424",
+              "bytes": 901
+            },
+            {
+              "leaf": "completion.json",
+              "sha256": "779499F913250F0BDD828A3573376AF34F7A0AD8E9EC752C46375DCC192C3F30",
+              "bytes": 155
+            },
+            {
+              "leaf": "prompt.txt",
+              "sha256": "1347F20EEA9515A8C673B800FA702D73D772B4601ECBE96834F4CC6316D91981",
+              "bytes": 1758
+            },
+            {
+              "leaf": "AGENTS.md",
+              "sha256": "68E89F8A59D0C58B64572657AFDD326F9E9572881452512FC0B0F13ABD609C80",
+              "bytes": 1058
+            }
+          ],
+          "completedTurns": 1,
+          "scope": "P1A_FOCUSED_CLOSING_SOURCE_ONLY",
+          "finishedUtc": "2026-10-24T15:55:50.421918Z"
+        }
+      ],
+      "inputCount": 13,
+      "selectedApiLines": null,
+      "manifest": {
+        "leaf": "manifest.json",
+        "sha256": "ECE4A657B02622F3F64F9F7F4C3870BE69F2494E3C2BF6D3DDA9E267BB57B93E",
+        "bytes": 15632
+      },
+      "installedApiExcerpts": 0,
+      "sourceHead": "f725e75739496fe21ad9c5c2161a8d87733b21cc",
+      "inputBytes": 89670
+    }
+  },
+  "knownDiagnostics": {
+    "scope": "Exact JSON tests passed. Native logs are not clean; no HTML report rendering or visible rendering is claimed.",
+    "perNativeRunWarnings": 2,
+    "perNativeRunHtmlTemplateErrors": 1,
+    "structuredJsonReportsGenerated": true,
+    "messages": [
+      "SpawnActor failed because no class was specified",
+      "DirectionalLight mobility warning",
+      "AutomationController failed to load HTML report template"
+    ],
+    "perTestWarningsAndErrors": 0
+  },
+  "remainingUnverified": [
+    "Visible packaged rendering/camera/UI/input, displayed fonts and shaders",
+    "Windows host without Unreal installed and fresh-machine prerequisites",
+    "Native Linux build/render/package",
+    "Full feature parity and full P1 acceptance",
+    "Bundled Python and production hosting/distribution",
+    "Real Windows Core startup-fault injection and native package watchdog paths",
+    "Earlier manual F framing failure remains unresolved"
+  ],
+  "publication": "Private sessions, process/thread/window identities, credentials and raw log/review bodies are excluded. Original private evidence and earlier failed attempts are retained. Documentation closure after this source checkpoint adds results, not new runtime behavior."
+}

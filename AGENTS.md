@@ -2,13 +2,13 @@
 
 ## Active work
 
-Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md`, the [forward development plan](docs/plans/unreal-development-plan.md) and the [migration/closing record](docs/plans/unreal-migration-plan.md) before work. The development plan owns future feature-parity sequencing; the migration record preserves this increment and historical evidence.
+Read `../AGENTS.md`, the legacy `../Warhammer_40k_UI_arcade/AGENTS.md` and the [single canonical migration plan](docs/plans/unreal-migration-plan.md) before work. It alone owns scope, priorities, milestone checklists and parity acceptance. `unreal-development-plan.md` is a compatibility pointer, and other plans/research/evidence are supporting documents. The owner explicitly confirmed Arcade as the Python UI baseline; `_python` was a naming mistake.
 
-The owner's latest increment is to finish the bounded visible active-drag cancellation checks, complete `docs/plans/unreal-development-plan.md` as a forward feature-parity roadmap, then commit, push and merge existing PR #3 after affected checks and independent reviews pass. This direct October 24 instruction supersedes the earlier leave-open/no-merge direction. Keep the working client usable; do not implement the entire future parity roadmap in this closing increment. Preserve the bounded real-Core setup workflow and all historical failures.
+Completed bounded increment: **P1a Windows standalone package and non-visible checks**, on `codex/p1-windows-standalone` from main after merged PR #3, in open [PR #4](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4). Its scope, source-review/repair history, exact native results and exclusions are in the canonical plan and [P1a evidence](docs/plans/evidence/2026-10-24-p1a-windows-package.md). Stop this increment here. Later gameplay, profiles, viewer modes, Linux, release distribution and remaining visible/clean-machine P1 acceptance need separate bounded work; do not add them to PR #4.
 
-**The owner directly resumed bounded visible testing on 2026-10-24**, approving camera controls, board framing, UI isolation, startup focus and the manual launcher. This supersedes the October 23 screen HOLD for those tests. Use one game window at a time, at most ten minutes per launch, with owned-process cleanup and private screenshots/logs. Close each run normally when possible; no blanket unrelated desktop authority is implied. Private-source review consent remains separate from desktop authority. The earlier [visible setup workflow](docs/plans/evidence/2026-10-23-live-core-visible.md) remains a closed historical run.
+**SCREEN HOLD: the owner is using the computer. No visible launches, rendered/input tests, focus changes or GUI automation.** Builds/cooking and explicitly NullRHI/RenderOffScreen checks may proceed. Private-source/API review consent remains valid and is separate from desktop authority. Never reuse consumed visible approvals.
 
-The resumed [manual launcher check](docs/plans/evidence/2026-10-24-live-core-camera-visible.md), separate [native camera input check](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) and later [cancellation check](docs/plans/evidence/2026-10-24-live-core-cancellation.md) are closed; no game window remains. The cancellation run at `76297e2` passed 386 assertions: eight actual Escape/focus/capture/resize cases and two deliberately delivered application-event cases. Actual OS app switching, teardown and Linux remain unverified. Preserve the earlier manual F failure with cause unestablished; native synthetic-bound F passed separately. The consumed visible run does not grant unrelated desktop authority.
+The [manual launcher](docs/plans/evidence/2026-10-24-live-core-camera-visible.md), [native input](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) and [cancellation](docs/plans/evidence/2026-10-24-live-core-cancellation.md) runs are closed. Preserve the earlier manual F failure with cause unestablished and the bounded native successes. Actual OS app switching, teardown and Linux remain unverified. Historical evidence is not a new launch authorization.
 
 ## Repository boundaries
 
@@ -33,6 +33,10 @@ The resumed [manual launcher check](docs/plans/evidence/2026-10-24-live-core-cam
 - Preserve E02 synthetic modes/proofs and their zero-Core-command assertions.
 - Retain Linux-capable seams/targets; Linux execution remains UNTESTED until a native host is arranged.
 
+## Architecture maintenance
+
+Read [architecture.md](architecture.md) before changing code. Assess the architecture impact of every code change and update that guide in the same change whenever directories/components, responsibilities, interfaces/dependencies, startup or data flow, or deployment shape changes. Keep its diagrams and source links consistent with the implementation. Architecture-neutral changes need no cosmetic edit. Clearly distinguish implemented behavior from planned/deferred features, development/proof tooling from the client, and tested platforms from unverified ones.
+
 ## Verification and reviews
 
 Run commands in this repository. For docs, check whitespace and referenced paths/commands. For behavior, build the affected target and run focused functional/regression checks covering changed seams and concrete risks. Use actual Core for integration evidence where possible; mocked/synthetic results must be labelled.
@@ -48,12 +52,12 @@ Keep review scope proportionate: changed code, directly used contracts and slice
 - Commit **and push every coherent checkpoint**, including plan, implementation, fixes and actual verification records. Record actual tests and pending reviews; checkpoints are not acceptance.
 - Verify exact GitHub branch ref equals the committed SHA after each push.
 - Use `gh` for normal GitHub actions and PR updates, with process-only `GH_TOKEN` loaded from `../github-full-access`. Keep `github_token` separate. Never display/log/commit either credential.
-- Finish branch `codex/e02-world-input-proof` and existing [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3). Verify its identity; no duplicate PR. The owner authorizes merging after this closing increment's checks, reviews and evidence are complete; preserve the branch and history. Once GitHub records it merged, begin subsequent feature work from current main on a fresh scoped branch and follow the forward development plan.
+- PR #3 is merged and closed. PR #4 on `codex/p1-windows-standalone` contains the bounded P1a deliverable and is prepared for review. Preserve its defined boundary and evidence. The current owner instruction requests this new PR; prior PR #3 merge authority does not automatically merge a different PR.
 - No force push/history rewrite/new remote/unrelated branch mutation. Exclude ignored/private evidence, generated binaries/caches and tokens.
 - Workspace-root AGENTS is local guidance, not a file for this repository's PR.
 
 ## History
 
-[Through-r146 guidance](AGENTS-through-r146.md) and [through-r146 plan](docs/plans/unreal-migration-plan-through-r146.md) preserve original evidence/constraints in context. They are historical references, not active sequencing instructions. Keep accepted BOOT01/E01-SLOW120/bounded E02/A1E/A1G/P0 records and all failures intact.
+[Through-r146 guidance](AGENTS-through-r146.md), [through-r146 plan](docs/plans/unreal-migration-plan-through-r146.md) and [closed history through r156](docs/plans/unreal-migration-plan-through-r156.md) preserve original evidence/constraints in context. They are historical references, not active sequencing instructions. Keep accepted BOOT01/E01-SLOW120/bounded E02/A1E/A1G/P0 records and all failures intact.
 
 Canonical profile-roundtrip source at0719125 and its review preparation are DEFERRED, unreviewed/unexecuted. No new profile review/runtime should be launched for the current slice. Personal/internal development first; production hosting, external distribution and full compatibility remain later work.

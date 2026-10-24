@@ -1,6 +1,8 @@
 # Warhammer 40k Unreal client
 
-A C++ first 3D client for the separate authoritative Python Core. This is a personal/internal development preview, launched through **UnrealEditor**, not a packaged game.
+A C++ first 3D client for the separate authoritative Python Core. This personal/internal development preview supports the Editor route and a Windows Development Game folder. The packaged client has non-visible startup/Core checks; visible package testing and clean-machine delivery remain open.
+
+Read [architecture.md](architecture.md) for the source-tree map, component boundaries and runtime/session flows. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns all milestone scope and acceptance.
 
 ## Get started playing
 
@@ -62,6 +64,40 @@ The bounded Windows manual run verified wheel zoom, the Frame board button, full
 | **Escape**, focus loss or application deactivation | Cancel the current camera drag. |
 
 UI clicks, text entry and panel scrolling retain their own input. Camera gestures do not submit game actions. Resizing deliberately reframes the board; a normal state Refresh preserves your view. See the [current verification checklist](docs/plans/unreal-migration-plan.md).
+
+### Windows standalone Development package (P1a)
+
+The packaging source and its bounded verification are tracked in [P1a of the canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
+
+```powershell
+$package = & ./scripts/Build-ClientPackage.ps1
+```
+
+The command builds the Game and required Editor/cook targets, cooks the startup resources and runtime input, stages a runnable Windows folder and archives it under a fresh `.local/packages/<run>/archive/Windows`. It never opens a game window or runs the staged prerequisite installer. Its default time limit is 60 minutes (`-TimeoutMinutes`, range5–120); `-EngineRoot` selects another matching native installation. Inspect `package-result.json` and `uat-stdout.log`/`uat-stderr.log` in the returned output root on failure. A successful build is separate from startup or rendering verification.
+
+The folder contains a root bootstrap executable, `WarhammerClient/Binaries/Win64/WarhammerClient.exe`, cooked content/engine dependencies and a separate prerequisite installer. Keep the entire folder together. Python Core remains separately installed/checked out; it is not embedded in this package. From this checkout, use the existing prepared Managed route with explicit packaged selection:
+
+```powershell
+& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $package.clientExecutable
+# Or attach to an existing matching development Core:
+& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $package.clientExecutable
+```
+
+The manual Python launcher supports `--client-executable /absolute/path/to/WarhammerClient.exe` instead of `--engine-root`, with the same `--endpoint` and selected installed Core runtime requirements. Packaged launches omit the Editor `.uproject -game` arguments, use the executable's directory and retain process-only credentials. PowerShell still supervises only an owned Managed Core; Python remains Attach and leaves the server running. These interactive commands must not be executed during the owner screen HOLD.
+
+P1a's allowed verification is non-visible only. Rendered package controls/fonts/shaders, a machine without an Unreal installation and native Linux remain separate unverified acceptance work.
+
+For the fixed offscreen checks, first copy the **entire** runnable Windows folder outside this repository. Use a fresh destination and select its actual nested executable (not the root bootstrap):
+
+```powershell
+$taskCopy = Join-Path (Split-Path (Get-Location).Path -Parent) ('p1-runtime-' + [guid]::NewGuid().ToString('N'))
+Copy-Item -LiteralPath (Join-Path $package.archive 'Windows') -Destination $taskCopy -Recurse -ErrorAction Stop
+$taskCopiedExe = Join-Path $taskCopy 'WarhammerClient/Binaries/Win64/WarhammerClient.exe'
+& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $taskCopiedExe -Mode Resources
+& ./scripts/Test-ClientPackage.ps1 -ClientExecutable $taskCopiedExe -Mode Core -CoreMode Managed -Port 19084
+```
+
+Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects exactly one real session/action/refresh check and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. Use ordinary absolute local-drive paths; extended/device/UNC namespaces, short-name aliases, paths through reparse points and executables inside the checkout are rejected. The result records the accepted absolute path. These checks do not establish visible rendering or controls. The source checkout hosts only the test tooling.
 
 ### Linux x86-64: routine launch — UNTESTED
 
@@ -146,7 +182,7 @@ This command is documented for the future native host; it has not been executed 
 | Sessions disappear after Core restarts | This development server has in-memory state. Confirm the restart and begin a fresh client/session; durable save/resume is not provided. |
 | **Reconcile unknown command** appears | The client retains one uncertain command envelope/ID in memory and blocks new actions. Reconcile that same command; do not submit a replacement/new ID. Restart recovery and injected response loss remain unverified. Unknown session creation cannot be retried safely. |
 
-Additional startup/authentication details and package recipes are in [Core development startup](docs/development/core-startup.md).
+Additional startup/authentication details and **Python Core installation** recipes are in [Core development startup](docs/development/core-startup.md). Windows Game packaging is documented above. Native Linux Game packaging commands and execution remain future P1/P8 work.
 
 ## Related projects
 
@@ -156,8 +192,10 @@ Additional startup/authentication details and package recipes are in [Core devel
 
 ## Status and evidence
 
-The [Unreal development plan](docs/plans/unreal-development-plan.md) is the forward roadmap to Python UI feature parity, using the checked-out Arcade client as the explicit baseline. It covers standalone packaging, the full supported interaction families, geometry/selection, profiles/HUD, viewer modes, recovery, native Linux and release criteria. Its unchecked milestones remain future work; this preview is not full parity.
+The [Unreal migration plan](docs/plans/unreal-migration-plan.md) is the single canonical root roadmap and milestone checklist, using the owner-confirmed Arcade client as the Python UI baseline. The former development-plan filename is only a compatibility pointer. It covers standalone packaging, the full supported interaction families, geometry/selection, profiles/HUD, viewer modes, recovery, native Linux and release criteria. Its unchecked milestones remain future work; this preview is not full parity.
 
 The [active migration checklist](docs/plans/unreal-migration-plan.md) separates source implementation, checks, independent reviews and rendered behavior. The [earlier visible Windows setup check](docs/plans/evidence/2026-10-23-live-core-visible.md) exposed the startup-focus error and cropped board edge. The [camera/startup increment](docs/plans/evidence/2026-10-23-live-core-ergonomics.json) then passed the Windows Editor build, 13 native checks, ten stubbed launcher tests, non-graphical startup and fresh independent CODE/requirements reviews. The resumed [actual manual-launcher check](docs/plans/evidence/2026-10-24-live-core-camera-visible.md) observed repaired keyboard navigation, real-board fit across window sizes, wheel zoom, Frame board, UI wheel isolation, refresh preservation and an accepted/committed mission choice at revision 2. The separate [native camera input check](docs/plans/evidence/2026-10-24-live-core-native-camera-input.md) passed 92 assertions for held orbit/pan, release, zoom clamps, F routing and UI isolation with synthetic bounds; its owned process closed normally. The earlier manual F failure remains recorded. The later [cancellation check](docs/plans/evidence/2026-10-24-live-core-cancellation.md) passed 386 assertions covering Escape, focus/capture loss and actual resize; application deactivation was deliberate event entry only. Actual OS app switching, teardown and fresh-install execution remain unverified. All native Linux execution is UNTESTED. Full gameplay, profile/HUD migration, remote participant/spectator completion, production hosting and exhaustive compatibility remain later work.
 
-The owner directly resumed bounded camera/UI/startup/manual-launcher testing on 2026-10-24 and subsequently requested cancellation closure, the complete parity roadmap and a merge of [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) after affected checks pass. Each visible test uses one game window, a ten-minute limit and owned-process cleanup. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts; their former current-status sequencing is historical.
+[PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) is merged. Open [PR #4](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4) completes the bounded P1a Windows package increment: [six non-visible resource/Core test executions, lifecycle controls and source-review history](docs/plans/evidence/2026-10-24-p1a-windows-package.md). Native logs retain two startup warnings and a missing HTML-report-template error per run, while the exact JSON tests passed. Full P1, visible package/clean-machine testing and native Linux remain open. Both architecture diagrams passed actual Mermaid 11.12.0 parsing after the [sequence-label correction](docs/plans/evidence/2026-10-24-architecture-mermaid.json).
+
+The owner is using the screen: visible launches/input/focus changes remain on HOLD. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts; their former current-status sequencing is historical. Later features require separate bounded work.
