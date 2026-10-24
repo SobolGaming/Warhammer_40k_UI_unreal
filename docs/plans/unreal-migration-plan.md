@@ -1,17 +1,18 @@
 # Unreal client migration plan
 
-**Revision 155 — close visible cancellation coverage, establish the full feature-parity roadmap, then merge PR #3; checks pending, 2026-10-24 UTC / EDT.**
+**Revision 156 — bounded cancellation verification and the reviewed feature-parity roadmap are complete; publish closing evidence and merge PR #3, 2026-10-24 UTC / EDT.**
 
 The owner prioritizes a useful client driving the existing Core over exhaustive compatibility proof. The latest request is to finish the remaining bounded visible active-drag cancellation tests, complete the [forward feature-parity roadmap](unreal-development-plan.md), then commit, push and merge [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) after affected verification and independent reviews pass. This direct request supersedes the earlier no-merge direction. The development plan owns future implementation sequencing; this record owns closing verification/history. Full parity is not claimed by this increment.
 
 ### Current closing increment
 
 - [x] Record the owner's direct visible-test and merge authorization; retain one game window and a 600-second limit per launch.
-- [x] Extend the existing native camera regression with ten cancellation cases: RMB/MMB × Escape, focus transfer, captured-pointer release, deliberate application event entry and actual owned-window resize. Windows Editor build passed six actions in 13.51 seconds, with unchanged three source hashes. Independent reviews and visible execution remain pending.
-- [x] Preserve `1c61324` CODE/REQ CHANGES_REQUESTED. CODE required gesture-specific actual CameraActor movement before cancellation/recovery; both required an endpoint-text restoration assertion. The roadmap had no material coverage finding. Repair those assertions without logging field contents; repaired Windows Editor build passed six actions in 12.46 seconds, with unchanged three source hashes. Fresh reviews and visible execution remain pending; no visible run occurred at the rejected candidate.
-- [ ] Execute the bounded visible check, record actual events, assertions, restoration/closure and remaining limits; preserve prior failed or unverified results.
-- [x] Inventory the Python UI baseline and author a complete, ordered development roadmap with concrete parity criteria, source/test pointers, Core dependencies, packaging and Windows/Linux verification. The 33 feature families and all CAP01–CAP36 rows are represented; fresh requirements review is pending.
-- [ ] Commit/push/exact-ref-verify coherent checkpoints; update and merge existing PR #3 after required checks pass.
+- [x] Extend the existing native camera regression with ten cancellation cases: RMB/MMB × Escape, focus transfer, captured-pointer release, deliberate application event entry and actual owned-window resize. Initial Windows Editor build passed six actions in 13.51 seconds, with unchanged three source hashes.
+- [x] Preserve `1c61324` CODE/REQ CHANGES_REQUESTED. CODE required gesture-specific actual CameraActor movement before cancellation/recovery; both required an endpoint-text restoration assertion. Repair those assertions without logging field contents; repaired `76297e2` Windows Editor build passed six actions in 12.46 seconds, with unchanged three source hashes. No visible run occurred at the rejected candidate.
+- [x] Preserve full `76297e2` CODE CHANGES_REQUESTED / REQ PASS. The remaining CODE finding concerned private-supervisor startup failure only; repair that helper, pass the no-GUI startup-failure control and obtain fresh CODE/REQ PASS for the supervisor-only change. Do not relabel the original full CODE report. Neither round found a material roadmap coverage gap.
+- [x] Execute the [bounded visible cancellation check](evidence/2026-10-24-live-core-cancellation.md): one test, 386 reported assertions, zero failures/warnings, ten case markers. Eight cases cover actual Slate/window operations; two cover deliberate application-event entry only. Native process exited 0 in 23.898 seconds without force, Config4 unchanged, final game-window count zero. Preserve OS-switch/teardown/Linux gaps and the earlier manual F failure.
+- [x] Inventory the Python UI baseline and author a complete, ordered development roadmap with concrete parity criteria, source/test pointers, Core dependencies, packaging and Windows/Linux verification. The 33 feature families and all CAP01–CAP36 rows are represented; fresh requirements review passed the authored roadmap. Full product parity remains future work.
+- [x] Prepare the closing evidence and reviewed roadmap as the final coherent checkpoint; commit/push/exact-ref-verify it and update existing PR #3 under the owner's merge instruction. The [GitHub PR record](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) records actual publication and merge disposition; no future parity milestone is closed by this checkpoint.
 
 ## Section 0 — settled scope and current decisions
 
@@ -125,7 +126,7 @@ Implementation and verification remain separate. The observed visible result bel
 2. **Connection/state:** implement native transport, board and viewer-state UI. Push source with actual checks and pending verification clearly recorded.
 3. **Action/result:** wire a real offered setup choice, authoritative refresh, explicit errors and same-command reconciliation. Add easy managed-launch/attach instructions; push.
 4. **Focused validation:** build, execute protocol checks and independent reviews. Push findings/fixes and evidence at coherent checkpoints.
-5. **Rendered feedback:** the resumed manual-launcher workflow observes repaired startup navigation, real-Core framing/zoom/UI isolation and lifecycle behavior. The separately reviewed native Slate regression passed held orbit/pan, release, zoom clamps, F routing and UI isolation with synthetic bounds. Obtain owner ergonomics feedback; retain the earlier manual F failure and unverified active-drag cancellation cases. Linux still needs a native host.
+5. **Rendered feedback:** the resumed manual-launcher workflow observes repaired startup navigation, real-Core framing/zoom/UI isolation and lifecycle behavior. The separately reviewed native Slate regression passed held orbit/pan, release, zoom clamps, F routing and UI isolation with synthetic bounds. The later bounded cancellation run adds Escape, focus/capture loss, actual resize and deliberate application-event checks. Obtain owner ergonomics feedback; retain the earlier manual F failure and unverified real OS-switch/teardown cases. Linux still needs a native host. Continue product development through the [forward roadmap](unreal-development-plan.md), beginning with a packaged internal client.
 
 Combine adjacent implementation steps when they form one coherent runnable increment. Do not create bureaucratic checkpoints for individual lines; every actual checkpoint must be pushed and exact-ref verified. Never force push or upload credentials, private sessions, generated outputs or ignored evidence.
 
@@ -155,6 +156,7 @@ Selected host: checked-out `Warhammer_40k_AI/scripts/run_phase18m_reference_serv
 - Linux x86-64 build/render/package remains **UNTESTED**. Windows success cannot stand in for it.
 - External distribution, content provenance/clearance, runtime redistribution and production hosting remain later gates.
 - Existing reference evidence retains its original bounds. The resumed manual observations at `a3ededb` and separate synthetic native input check at `4e6518b` cover only their stated workflows. Neither proves full gameplay, exhaustive DPI/readability, active-drag cancellation on Escape/deactivation/focus loss/resize, mismatched user/pointer events, failure/watchdog paths, later source repairs or native Linux behavior. Native F routing passed; the manual F failure remains historical and unresolved.
+- The later cancellation run at `76297e2` adds its ten bounded cases and restoration assertions, with actual OS app switching, teardown, mismatched user/pointer events and ordinary assertion-failure/watchdog paths still open. The separate supervisor startup-failure control passed without a GUI; it is not a native assertion-failure test.
 
 ## Evidence and history
 
@@ -163,6 +165,7 @@ Selected host: checked-out `Warhammer_40k_AI/scripts/run_phase18m_reference_serv
 - [Owner startup/camera checks and independent review provenance](evidence/2026-10-23-live-core-ergonomics.json); source/background checks at their recorded revision.
 - [Resumed camera/manual-launcher observations](evidence/2026-10-24-live-core-camera-visible.md), [structured result](evidence/2026-10-24-live-core-camera-visible.json); manual F unresolved, Linux UNTESTED.
 - [Bounded native camera input check](evidence/2026-10-24-live-core-native-camera-input.md), [structured result and source-review history](evidence/2026-10-24-live-core-native-camera-input.json); 92 assertions passed on actual Slate/CameraActor with synthetic bounds, no Core/rendered-board/Linux claim.
+- [Bounded active-drag cancellation check](evidence/2026-10-24-live-core-cancellation.md), [structured result and composite review provenance](evidence/2026-10-24-live-core-cancellation.json); 386 assertions, eight actual interaction/resize cases plus two deliberate application-event cases; no real OS-switch, Core or Linux claim.
 
 - [BOOT01](evidence/2026-10-16-boot01.md).
 - [Original E01 boundary](evidence/2026-10-16-e01-boundary.md), [SLOW120 provenance](evidence/2026-10-17-e01-slow120-final-review-provenance.json).

@@ -1,0 +1,688 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "BOUNDED_VISIBLE_ACTIVE_DRAG_CANCELLATION",
+  "status": "PASS_FINITE_WINDOWS_SCOPE_WITH_EVENT_ENTRY_LIMIT",
+  "sourceHead": "76297e2627b650418572ecfa661809f2493c8ca8",
+  "platform": "Windows x64 D3D12",
+  "timing": {
+    "startedUtc": "2026-10-24T13:31:45.1509775Z",
+    "automationSeconds": 3.654000997543335,
+    "finishedUtc": "2026-10-24T13:32:09.8809097Z",
+    "maximumSeconds": 600,
+    "processSeconds": 23.8980725
+  },
+  "automation": {
+    "legacyInputFramingAndUiSequenceRetained": true,
+    "caseCount": 10,
+    "warnings": 0,
+    "failed": 0,
+    "cases": [
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Escape",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "RMB",
+        "status": "PASS"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Slate keyboard focus transfer",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "RMB",
+        "status": "PASS"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Exact Slate user/pointer capture loss",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "RMB",
+        "status": "PASS"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Application activation event entry",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "RMB",
+        "status": "EVENT_ENTRY_ONLY"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Actual owned SWindow resize",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "RMB",
+        "status": "PASS"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Escape",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "MMB",
+        "status": "PASS"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Slate keyboard focus transfer",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "MMB",
+        "status": "PASS"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Exact Slate user/pointer capture loss",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "MMB",
+        "status": "PASS"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Application activation event entry",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "MMB",
+        "status": "EVENT_ENTRY_ONLY"
+      },
+      {
+        "osFocusSwitchEstablished": false,
+        "resultBasis": "Marker plus exact whole-test Success; individual assertion PASS rows are not exported",
+        "trigger": "Actual owned SWindow resize",
+        "sourceDefinedAssertions": "Actual held actor movement, capture cancellation, post-cancel move/release stability and fresh-gesture actor recovery",
+        "handlerAssertions": "PASS",
+        "button": "MMB",
+        "status": "PASS"
+      }
+    ],
+    "succeeded": 1,
+    "notRun": 0,
+    "assertionCountBasis": "Reported test summary; not individually enumerated successful assertion rows",
+    "reportedAssertions": 386,
+    "testPath": "Warhammer.Rendered.LiveCoreCamera.Input",
+    "state": "Success",
+    "infoEntries": 197
+  },
+  "lifecycle": {
+    "restoration": "Source-defined original window client size/cached layout, navigation/pose/limits, endpoint text/camera diagnostic, activation/focus and owned-driver assertions passed under whole-test Success; values not logged",
+    "finalWindowObservationUtc": "2026-10-24T13:32:14.994Z",
+    "configFileCount": 4,
+    "exitCode": 0,
+    "nativeErrorFatalCount": 0,
+    "configFilesExactAfterRun": true,
+    "forcedTerminationRecorded": false,
+    "finalGameWindowCount": 0,
+    "stderrBytes": 0,
+    "failureAndWatchdogPathsExercised": false
+  },
+  "scope": {
+    "coreCredentialsSupplied": false,
+    "zeroHttpAttemptProof": false,
+    "activation": "Deliberate public Slate application/window event entry; no actual OS application switch",
+    "bounds": "Synthetic advisory presentation bounds",
+    "resize": "Actual owned SWindow resize with observed changed cached geometry and original-layout restoration",
+    "camera": "Actual ordinary live GameMode Slate and CameraActor",
+    "coreServiceLaunched": false,
+    "renderedBoardFidelityProof": false
+  },
+  "roadmap": {
+    "coreTarget": "Warhammer_40k_AI@5f509724da25a2f6ded0c2739a8e7c84bdf59c91 / Contract44.3.33",
+    "path": "../unreal-development-plan.md",
+    "featureFamilies": 33,
+    "requestedPythonNameMapping": "Explicit assumption: no separate local or accessible exact-name UI_python repository",
+    "pythonBaseline": "Warhammer_40k_UI_arcade@5088c1c49dcaff29eb59fb64b3063d30214dde73",
+    "futureMilestonesRemainOpen": true,
+    "status": "Authored forward plan; independent source/document review, not implemented full parity",
+    "capabilityIds": 36
+  },
+  "sourceReviews": {
+    "rounds": [
+      {
+        "inputCount": 55,
+        "sourceHead": "1c61324e5c93308b1867ce21fe4ed2b751a4f09f",
+        "nativeCandidateUsedInCompositeRun": false,
+        "postReviewByteAndSha256Matches": 55,
+        "roles": [
+          {
+            "role": "CODE",
+            "commandsCompleted": 27,
+            "scope": "Affected source and roadmap readiness only",
+            "rawOriginalDigests": [
+              {
+                "sha256": "CA0BC381B6D6EFB17E1D23304ED3D99665D8AE3751632DD09463F9B6E097EFF7",
+                "bytes": 3789,
+                "leaf": "report.txt"
+              },
+              {
+                "sha256": "4A9C261AC9F6547825D00FCC43BC4D1265D47D55D98B52023C1A86B22684AFDB",
+                "bytes": 588975,
+                "leaf": "events.jsonl"
+              },
+              {
+                "sha256": "B3A71864FB41E242933C0B07A637DA6C7848B0D9FFFDF93E8050AFC42C246D13",
+                "bytes": 734,
+                "leaf": "stderr.log"
+              },
+              {
+                "sha256": "124C856D96570FDE526E17B4773E1610ABEB26EA8F185B6B08E8371CBC115FAF",
+                "bytes": 890,
+                "leaf": "invocation.json"
+              },
+              {
+                "sha256": "6AF9A22B8C00044378F52966AD61B3CEC4688306A130074F45CE21B488D2AF88",
+                "bytes": 156,
+                "leaf": "completion.json"
+              },
+              {
+                "sha256": "FD5B0FF2DEF2D292D66B2168E93BE456EA775C8AEBE79AC20461D1581FA08BBA",
+                "bytes": 2562,
+                "leaf": "prompt.txt"
+              },
+              {
+                "sha256": "5FDFBD1E6F588C6CDB8E2BB825CB1C7A1309839B8D409E6D101C1E671FFBB6B0",
+                "bytes": 283,
+                "leaf": "AGENTS.md"
+              }
+            ],
+            "timedOut": false,
+            "startedUtc": "2026-10-24T13:11:18.919498Z",
+            "completedTurns": 1,
+            "failedCommands": 0,
+            "processExitCode": 0,
+            "verdict": "CHANGES_REQUESTED",
+            "freshContextsObserved": 1,
+            "finishedUtc": "2026-10-24T13:16:30.910716Z"
+          },
+          {
+            "role": "REQ",
+            "commandsCompleted": 30,
+            "scope": "Affected source and roadmap readiness only",
+            "rawOriginalDigests": [
+              {
+                "sha256": "82ECF6B8103907895ECE42DC37254DA8C6C1090E7FE0ADF7D897C36C4264C0F3",
+                "bytes": 5966,
+                "leaf": "report.txt"
+              },
+              {
+                "sha256": "7428DAFDD150E39E8B6F763E4059AA11CC5EFD6A30E36B4D2F3F3D87127E1268",
+                "bytes": 584603,
+                "leaf": "events.jsonl"
+              },
+              {
+                "sha256": "572B03B50693A0644BBCA227BBBE4DAB2CC7BA97F891944E817DA58A5CEC9F7C",
+                "bytes": 1022,
+                "leaf": "stderr.log"
+              },
+              {
+                "sha256": "7DF4BE9E3555D288A918054A2BAE15AF84BAE5FE67839F621BA36796CB212506",
+                "bytes": 887,
+                "leaf": "invocation.json"
+              },
+              {
+                "sha256": "59E6BF972768CD6357AC34930AE90445905A5D60BA509DE703A3E1BF96826ED0",
+                "bytes": 155,
+                "leaf": "completion.json"
+              },
+              {
+                "sha256": "FDCCF07628C14E81ADB98E144964C00374F2C54E65033AC5A053155D55DFDF8C",
+                "bytes": 2674,
+                "leaf": "prompt.txt"
+              },
+              {
+                "sha256": "EE5483989AD38BFB66EE3002CDD01135B46DD08E470362BA80197730FEAE6B86",
+                "bytes": 282,
+                "leaf": "AGENTS.md"
+              }
+            ],
+            "timedOut": false,
+            "startedUtc": "2026-10-24T13:11:21.9312801Z",
+            "completedTurns": 1,
+            "failedCommands": 0,
+            "processExitCode": 0,
+            "verdict": "CHANGES_REQUESTED",
+            "freshContextsObserved": 1,
+            "finishedUtc": "2026-10-24T13:15:15.7467026Z"
+          }
+        ],
+        "gitBlobMatches": 20,
+        "manifest": {
+          "sha256": "40F506A6FE651310BDAD916F9BCCB37A4B95BA331D0BD85D115D5C95B79474AD",
+          "bytes": 11510,
+          "leaf": "manifest.json"
+        },
+        "nativeVisibleRunPerformedByReviewers": false,
+        "reviewLayer": "INITIAL_FULL_SOURCE"
+      },
+      {
+        "inputCount": 55,
+        "sourceHead": "76297e2627b650418572ecfa661809f2493c8ca8",
+        "nativeCandidateUsedInCompositeRun": true,
+        "postReviewByteAndSha256Matches": 55,
+        "roles": [
+          {
+            "role": "CODE",
+            "commandsCompleted": 27,
+            "scope": "Affected source and roadmap readiness only",
+            "rawOriginalDigests": [
+              {
+                "sha256": "8CE508BC0F76656E95F8B74BFA44D773C8BB3898ADD7F2D9F55664DC14139DE8",
+                "bytes": 3472,
+                "leaf": "report.txt"
+              },
+              {
+                "sha256": "454C652837D2E2AC463CD3E29540AEE6CADE4024FC7A6453DB9A7BB84CA9BCC0",
+                "bytes": 608453,
+                "leaf": "events.jsonl"
+              },
+              {
+                "sha256": "8B60CE7E3D2A52220B1533DD15201C0AA39F45DBD85C24B8892C10492EDD09B7",
+                "bytes": 734,
+                "leaf": "stderr.log"
+              },
+              {
+                "sha256": "38F516467311DAE315C03E9AF417A4FCD672E1D81C39C5CCEF61C58FC6F23710",
+                "bytes": 890,
+                "leaf": "invocation.json"
+              },
+              {
+                "sha256": "2D7566738C256AA5A7D487C0013D1D48467FD09E54CA356F27E78569DEB53B66",
+                "bytes": 156,
+                "leaf": "completion.json"
+              },
+              {
+                "sha256": "7F5C50299BCF7C013E21A8406FCD826AE830E5A5B6A729232A74F2D2CD34DC4F",
+                "bytes": 2562,
+                "leaf": "prompt.txt"
+              },
+              {
+                "sha256": "5FDFBD1E6F588C6CDB8E2BB825CB1C7A1309839B8D409E6D101C1E671FFBB6B0",
+                "bytes": 283,
+                "leaf": "AGENTS.md"
+              }
+            ],
+            "timedOut": false,
+            "startedUtc": "2026-10-24T13:18:20.6917994Z",
+            "completedTurns": 1,
+            "failedCommands": 0,
+            "processExitCode": 0,
+            "verdict": "CHANGES_REQUESTED",
+            "freshContextsObserved": 1,
+            "finishedUtc": "2026-10-24T13:23:57.3702714Z"
+          },
+          {
+            "role": "REQ",
+            "commandsCompleted": 29,
+            "scope": "Affected source and roadmap readiness only",
+            "rawOriginalDigests": [
+              {
+                "sha256": "A04B5BD51A428BEE7522F8F81ED0FBBE53384E89A458A6175D4E7A3DF96C08AE",
+                "bytes": 5691,
+                "leaf": "report.txt"
+              },
+              {
+                "sha256": "412BE14DFA5FD4F2E41E00D62F1F6342257E9347649701E1C22CA1DECAAFB12F",
+                "bytes": 681352,
+                "leaf": "events.jsonl"
+              },
+              {
+                "sha256": "F70AFEFC6693862B40E68D9DD252129219BE7BDF6B04F694A82B752B367FE961",
+                "bytes": 734,
+                "leaf": "stderr.log"
+              },
+              {
+                "sha256": "707E2E258290C3AE90487372AE7ECDB5FF563791EC608921389D4EF291DF540A",
+                "bytes": 887,
+                "leaf": "invocation.json"
+              },
+              {
+                "sha256": "78694098319DF8C347570B9BCEFCDA134D4CC2DB4F29B6DA0E97F5D9CD56B974",
+                "bytes": 155,
+                "leaf": "completion.json"
+              },
+              {
+                "sha256": "7CF37107EA6150C617CA59839839A37B9CF8A0870B280AECBD36F1E3D4B5FC6F",
+                "bytes": 2674,
+                "leaf": "prompt.txt"
+              },
+              {
+                "sha256": "EE5483989AD38BFB66EE3002CDD01135B46DD08E470362BA80197730FEAE6B86",
+                "bytes": 282,
+                "leaf": "AGENTS.md"
+              }
+            ],
+            "timedOut": false,
+            "startedUtc": "2026-10-24T13:18:19.7405932Z",
+            "completedTurns": 1,
+            "failedCommands": 0,
+            "processExitCode": 0,
+            "verdict": "PASS",
+            "freshContextsObserved": 1,
+            "finishedUtc": "2026-10-24T13:22:05.9808189Z"
+          }
+        ],
+        "gitBlobMatches": 20,
+        "manifest": {
+          "sha256": "469EA913C702A9AD2E16A1970DAA948E0A2D7B3267D6C60BBD68D826B74895E5",
+          "bytes": 11510,
+          "leaf": "manifest.json"
+        },
+        "nativeVisibleRunPerformedByReviewers": false,
+        "reviewLayer": "FULL_NATIVE_BASE"
+      },
+      {
+        "inputCount": 5,
+        "sourceHead": "76297e2627b650418572ecfa661809f2493c8ca8",
+        "nativeCandidateUsedInCompositeRun": false,
+        "postReviewByteAndSha256Matches": 5,
+        "roles": [
+          {
+            "role": "CODE",
+            "commandsCompleted": 14,
+            "scope": "Affected SUPERVISOR SOURCE only; native C++ and roadmap outside overlay scope",
+            "rawOriginalDigests": [
+              {
+                "sha256": "61D423451E6CA4983CC0B6A8C968B3A5E87B3BD722232BD6D2F8E39E1CD26B17",
+                "bytes": 2154,
+                "leaf": "report.txt"
+              },
+              {
+                "sha256": "F86B93BF71992AE2439B9B3BECF76DFB4DD97D36B167BC9495ED89F9FF452FBD",
+                "bytes": 44580,
+                "leaf": "events.jsonl"
+              },
+              {
+                "sha256": "65F1C31642B9114D664FF7460A79A71393DED2EFE5D4FC68F4F38391EBA0946F",
+                "bytes": 734,
+                "leaf": "stderr.log"
+              },
+              {
+                "sha256": "F1A607BDFA45E8EBE911FAF6B1E230ECB701B027A6AAA962839F35BF3741B7BC",
+                "bytes": 918,
+                "leaf": "invocation.json"
+              },
+              {
+                "sha256": "658EBF150E8FF9ED4544C169E2AAAE39EEC095C4D93326E6654C5B44ACE094B8",
+                "bytes": 156,
+                "leaf": "completion.json"
+              },
+              {
+                "sha256": "3D2DD76849DA9D0D2B9C56A2B79E69769BC8277F31C033379D77631915711C22",
+                "bytes": 1282,
+                "leaf": "prompt.txt"
+              },
+              {
+                "sha256": "A4D3F86BC2ADDB0A0E534AEF30B9EA590F2BDD690CAD458655DD41E79FEE2DC6",
+                "bytes": 249,
+                "leaf": "AGENTS.md"
+              }
+            ],
+            "timedOut": false,
+            "startedUtc": "2026-10-24T13:27:58.2920672Z",
+            "completedTurns": 1,
+            "failedCommands": 1,
+            "processExitCode": 0,
+            "verdict": "PASS",
+            "freshContextsObserved": 1,
+            "finishedUtc": "2026-10-24T13:30:44.6420043Z"
+          },
+          {
+            "role": "REQ",
+            "commandsCompleted": 6,
+            "scope": "Affected SUPERVISOR SOURCE only; native C++ and roadmap outside overlay scope",
+            "rawOriginalDigests": [
+              {
+                "sha256": "4A6D2680C310A7E4187AD2BF066B3927916AD19465ADB77CE5B81DEB8AA2BB6B",
+                "bytes": 3107,
+                "leaf": "report.txt"
+              },
+              {
+                "sha256": "CB40D84435C8DF96C090140BA7E754D363F9D02A8C333AE39337933C226AE4F9",
+                "bytes": 39188,
+                "leaf": "events.jsonl"
+              },
+              {
+                "sha256": "445E3C7A1647D92C2D56955DA30CC237E7F53F295988444B9A8E825CED9E549C",
+                "bytes": 734,
+                "leaf": "stderr.log"
+              },
+              {
+                "sha256": "FB9873C0A5C49D1BF30E1547C501A1EDE4A49E151C6CB6CEBEAC60BF41D8EC5A",
+                "bytes": 915,
+                "leaf": "invocation.json"
+              },
+              {
+                "sha256": "A8EB16EC2A38ACAD914CBBDD11E00DA231C83510F208F6A5971D89D59C39A1AA",
+                "bytes": 155,
+                "leaf": "completion.json"
+              },
+              {
+                "sha256": "7DD0BDD3CECE9FB5770BBD0F6CF2191234CCE8823992B099A7B07638747E9923",
+                "bytes": 1281,
+                "leaf": "prompt.txt"
+              },
+              {
+                "sha256": "E1368F3E9CF9211F04B7CD83A14F0E95B5563E723AD970FC9D1F36F08CBDB795",
+                "bytes": 248,
+                "leaf": "AGENTS.md"
+              }
+            ],
+            "timedOut": false,
+            "startedUtc": "2026-10-24T13:27:57.4363301Z",
+            "completedTurns": 1,
+            "failedCommands": 0,
+            "processExitCode": 0,
+            "verdict": "PASS",
+            "freshContextsObserved": 1,
+            "finishedUtc": "2026-10-24T13:29:53.2713046Z"
+          }
+        ],
+        "gitBlobMatches": 0,
+        "manifest": {
+          "sha256": "3C8EB5DCFBB98153D5E58FF7F182FA5100177D60F914615DD4097050878E5FA4",
+          "bytes": 789,
+          "leaf": "manifest.json"
+        },
+        "nativeVisibleRunPerformedByReviewers": false,
+        "reviewLayer": "SUPERVISOR_ONLY_REPAIR"
+      }
+    ],
+    "requested": {
+      "approval": "never",
+      "freshExec": true,
+      "memoryDisabled": true,
+      "sandbox": "read-only",
+      "ephemeral": true,
+      "timeoutSeconds": 600
+    },
+    "limits": "Observed packet read/hash/display and metadata commands do not independently attest OS/network isolation, memory/retention internals, source-tree membership or binary identity. Native result metadata does not embed a supervisor digest; the current helper is matched to the reviewed overlay here. Source readiness is separate from native execution.",
+    "initialFindings": "Require gesture-specific actual CameraActor movement before cancellation/recovery and endpoint-text restoration equality; repaired before visible execution. Both initial reviews found no material roadmap coverage gap.",
+    "compositeNativeReadiness": {
+      "metadataCommandFailuresRetained": true,
+      "status": "READY_AFTER_SEPARATE_SUPERVISOR_REPAIR",
+      "supervisorCodeVerdict": "PASS",
+      "nativeSourceHead": "76297e2627b650418572ecfa661809f2493c8ca8",
+      "supervisorRequirementsVerdict": "PASS",
+      "baseBlockingFinding": "Frozen CODE report identifies only process-start supervisor cleanup; no additional blocking native C++/hook/roadmap defect",
+      "fullBaseCodePassClaimed": false,
+      "supervisorScope": "Affected supervisor source only; unchanged native C++ and roadmap are outside the overlay",
+      "rawReportsPreserved": true,
+      "baseCodeRawVerdict": "CHANGES_REQUESTED",
+      "baseRequirementsRawVerdict": "PASS"
+    }
+  },
+  "startupFaultProbe": {
+    "status": "PASS_EXPECTED_STARTUP_FAILURE",
+    "scope": "Expected startup failure with a nonexistent executable; no native or visible process launched. This negative-control result is separate from the successful native cancellation run.",
+    "sourceHead": "76297e2627b650418572ecfa661809f2493c8ca8",
+    "configUnchanged": true,
+    "supervisor": {
+      "sha256": "894A48205DA6683B6AB055785CD8EB45C89CD3D06A0A81D3F616AA6C4B042776",
+      "bytes": 6191,
+      "leaf": "Invoke-LiveCoreCancellationVisible.ps1"
+    },
+    "cleanupErrors": 0,
+    "faultClone": {
+      "sha256": "671A18AB22FD343D83BE2EEEB8F0F27FC768F0612970224C71ED91F2A7609587",
+      "bytes": 6222,
+      "leaf": "Invoke-LiveCoreCancellationStartupFault.ps1"
+    },
+    "originalFailureReceipt": {
+      "bytes": 3865,
+      "sha256": "4144FE26FA39FEE9CA1380B7051E7CDC9378B9057010C8C40688A1ACD5B8A406",
+      "leaf": "result.json"
+    },
+    "fourEnvironmentVariablesRestored": true,
+    "failureReceiptWritten": true,
+    "nativeProcessStarted": false,
+    "summary": {
+      "sha256": "16FF5ABCD1A84F60CD81B07260BE29373A21E390CAB96F99DF08F99043D75B24",
+      "bytes": 765,
+      "leaf": "cancellation-startup-fault-summary.json"
+    }
+  },
+  "reviewMetadataQualifications": [
+    "Full-base CODE retained a nonterminating prompt Get-FileHash sharing violation with command exit0 and reviewer-time PromptSha null. The later writer prompt/invocation hash comparison is a separate audit, not a replacement of that observation.",
+    "Supervisor-overlay CODE retained one corrected metadata parser-command failure; completed-command exit counts do not assert that all commands were diagnostically clean."
+  ],
+  "remainingUnverified": [
+    "Actual OS application deactivation/focus switch during a physical drag",
+    "World teardown during capture and mismatched user/pointer events",
+    "Ordinary assertion-failure and watchdog termination execution",
+    "Linux native build/render/package",
+    "Real-Core or full rendered-board fidelity from this synthetic test",
+    "Earlier manual F workflow failure remains unresolved despite native F-route PASS",
+    "Full gameplay/profile/viewer/recovery parity and packaged current client remain future milestones"
+  ],
+  "rawOriginalDigests": [
+    {
+      "sha256": "2F6D330DDA2CEB9B8E4F2F270AE00A63289B0C9A64FE683B37D4C41989D4C7A3",
+      "bytes": 3737,
+      "leaf": "result.json"
+    },
+    {
+      "sha256": "9D6AB0DD8957D46734E63C5C4B733365AC015251EDFF0E54F178FD5BE1517CA8",
+      "bytes": 60408,
+      "leaf": "index.json"
+    },
+    {
+      "sha256": "06DCE48194FC0D83EFB43BAC9E1B4B756F407E3065B6DCAADB1E991FD4700A03",
+      "bytes": 214418,
+      "leaf": "native.log"
+    },
+    {
+      "sha256": "67E69BE0104CF218185EE8C7F3611769AB623ECC77AB1D517FE7134D8533F67E",
+      "bytes": 214387,
+      "leaf": "stdout.log"
+    },
+    {
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bytes": 0,
+      "leaf": "stderr.log"
+    },
+    {
+      "sha256": "B4D5F17AF9F8B94620BBA263204AA64D62EC87F29C2ABE23CFA50021796B3E31",
+      "bytes": 102,
+      "leaf": "final-window-count.json"
+    },
+    {
+      "sha256": "5BA2D7434F8E1EF80E6DC0A17609D375072C108D21CE062CB5A80B7C16CE0050",
+      "bytes": 197,
+      "leaf": "passive-startup-observation.json"
+    }
+  ],
+  "publication": "Root-owned supervision and native-result inspection. Credentials, private session/process/thread/window IDs, screenshots and raw report/log bodies excluded. Private originals retained.",
+  "builds": [
+    {
+      "binaryAttestation": false,
+      "result": "Succeeded",
+      "rawOriginalDigests": [
+        {
+          "sha256": "80745EDE48C2FC2E7C2C158C88AE398C8B0CBAD09B30363CE8E70059EE380DA6",
+          "bytes": 2574,
+          "leaf": "editor-build-console.log"
+        },
+        {
+          "sha256": "793988C202E410D6EAB1E95F12672EA29F34B927235BB73E1E1E6C60130DE453",
+          "bytes": 12009,
+          "leaf": "editor-build.log"
+        },
+        {
+          "sha256": "7268776FFCB7D6F90443D2BE259BAE881C9628FB34D655F5E8FF8269D0C9578C",
+          "bytes": 38999,
+          "leaf": "editor-build.json"
+        },
+        {
+          "sha256": "15F29269526689C4B2E8B44E05CA835E298D4ED6CF0CC34C3005AE72F00225E4",
+          "bytes": 745,
+          "leaf": "source-before.json"
+        }
+      ],
+      "actions": 6,
+      "seconds": 13.51,
+      "target": "WarhammerClientEditor Win64 Development",
+      "sourceFilesUnchanged": 3,
+      "automaticRetryObserved": false,
+      "sourceHead": "1c61324e5c93308b1867ce21fe4ed2b751a4f09f"
+    },
+    {
+      "binaryAttestation": false,
+      "result": "Succeeded",
+      "rawOriginalDigests": [
+        {
+          "sha256": "9165A91B01F5ED4394D112C4B785EF0113317C68C1B9F151B87FFB755D6587AF",
+          "bytes": 2598,
+          "leaf": "editor-build-console.log"
+        },
+        {
+          "sha256": "3CF5EBAB8EAA1BDA78139D2BC49A8A3CED47499EB4EF62DF6BAFBF79586D81D3",
+          "bytes": 11371,
+          "leaf": "editor-build.log"
+        },
+        {
+          "sha256": "3EE3F5AA43879793C54FBBB67BAC8399994C71B436F86F869E2D5399F4B02306",
+          "bytes": 37240,
+          "leaf": "editor-build.json"
+        },
+        {
+          "sha256": "7B24E76326DF50FC568AA70E02A2B45E6F522E75351AC4EAAB1B7D5DC7228339",
+          "bytes": 745,
+          "leaf": "source-before.json"
+        }
+      ],
+      "actions": 6,
+      "seconds": 12.46,
+      "target": "WarhammerClientEditor Win64 Development",
+      "sourceFilesUnchanged": 3,
+      "automaticRetryObserved": false,
+      "sourceHead": "76297e2627b650418572ecfa661809f2493c8ca8"
+    }
+  ],
+  "reviewProvenanceSupplement": {
+    "runtimeEvidenceAudit": {
+      "sha256": "FABA7BB65CDDD55D80C3880F0B53FBC5507716B22673B109FEE4F6C5A35A6F5C",
+      "bytes": 6142
+    },
+    "limit": "Separate private evidence reconciliation; preserves raw verdicts and narrow supervisor scope, not a replacement independent source review or binary attestation.",
+    "fullSourceAudit": {
+      "sha256": "15FD520314761607808E18D76128EBF8B78BF76B8A886151E6B183368731753D",
+      "bytes": 29949
+    },
+    "supervisorOverlayAudit": {
+      "sha256": "362B89E5633FDA1F8D8674D1A07E3D3F39A3ED00454D48758A41AB2EC6940F1E",
+      "bytes": 14097
+    }
+  }
+}

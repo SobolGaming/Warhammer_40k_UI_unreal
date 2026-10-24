@@ -1,6 +1,6 @@
 # Unreal development plan: Python UI feature parity
 
-**Revision 1, 2026-10-24. Status: forward development roadmap; full parity is not implemented or accepted.**
+**Revision 2, 2026-10-24. Status: reviewed forward development roadmap; full parity is not implemented or accepted.**
 
 This is the primary forward plan for developing the Unreal client to feature parity with the Python UI. The [migration record](unreal-migration-plan.md) retains current closing work, prior implementation/checklists and dated evidence; the [through-r146 plan](unreal-migration-plan-through-r146.md) preserves the original research and decisions. Historical proof campaigns do not replace delivery of usable client features.
 
@@ -42,14 +42,14 @@ Every milestone has separate implementation and verification checklists. Before 
 
 Implementation:
 
-- [x] Extend the existing native camera regression for cancellation during held RMB orbit/MMB pan, retaining existing camera/F/UI checks and owned-process cleanup. The Windows Editor build passed; source review and visible verification remain separate below.
+- [x] Extend the existing native camera regression for cancellation during held RMB orbit/MMB pan, retaining existing camera/F/UI checks and owned-process cleanup. The Windows Editor build passed; source review and visible verification are recorded separately below.
 - [x] Establish this forward roadmap and preserve the narrower migration/evidence records.
 
 Verification:
 
-- [ ] Build and independently review the cancellation source; run one bounded visible game process at a time, at most 600 seconds per launch. Record actual event delivery, movement/capture observations, restoration, Config and process/window closure.
-- [ ] Preserve the earlier manual F failure separately from the passed native F route. Explicitly distinguish actual window/Slate operations from delivered application events and leave untested teardown/OS scenarios visible.
-- [ ] Publish the results, update existing PR #3, inspect checks and merge under the owner's direct instruction. Do not create a duplicate PR or erase historical failures.
+- [x] Build and independently review the cancellation source and affected supervisor repair; execute the bounded visible run at `76297e2`. One test passed 386 assertions, including ten cancellation cases. The process exited 0 in 23.898 seconds; all four Config files stayed unchanged and no game window remained. [Results and review dispositions](evidence/2026-10-24-live-core-cancellation.md).
+- [x] Preserve the earlier manual F failure separately from the passed native F route. Eight cases cover actual Escape/focus/capture/resize operations; the two application-deactivation cases cover deliberately delivered events only. Real OS app switching and teardown remain unverified.
+- [x] Record this increment's closing implementation, verification and review dispositions for the owner's authorized PR #3 merge. The [PR's GitHub merge disposition](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) is the final merge record; this milestone does not close P1–P9.
 
 ### P1 — Deliver a standalone internal client early
 
