@@ -45,6 +45,7 @@ The owner wants to launch the existing client/server personally on Windows and L
 - [x] Author board-only right-drag orbit, middle-drag pan, wheel zoom and F/Frame board control using the unchanged E02 input reducer. Wheel/F require board keyboard focus.
 - [x] Author separate panel/board input regions and user/pointer-owned capture cancellation on release, focus/capture loss, Escape, deactivation, resize and teardown. New camera handlers have no Core submission path.
 - [x] Author aspect/geometry-based corner fitting, finite navigation bounds and focused camera tests. Ordinary same-bounds refresh preserves navigation; resize reframes. Actual build/runtime/graphical checks remain separate below.
+- [x] Author opt-in `Warhammer.Rendered.LiveCoreCamera.Input` with actual AutomationDriver press/move/release and F events on the ordinary live widgets/CameraActor. Test-only synthetic camera bounds and UI/navigation/driver state are restored; available session-state invariance does not prove zero attempted HTTP. Build, independent reviews and execution remain separate.
 
 ### Verification
 
@@ -55,6 +56,7 @@ The owner wants to launch the existing client/server personally on Windows and L
 - [x] Pass non-graphical default-GameMode startup at `721d229` / camera source `1193cb6`: exit 0 in 8.24 seconds, intended GameMode and normal benchmark exit, no original focus error or Error/Fatal lines, unchanged Config. This is not positive focus/input proof.
 - [x] Obtain fresh independent CODE and distinct requirements review of frozen `721d229`: both PASS for affected source/documentation; all 43 inputs matched after review. [Evidence and provenance](evidence/2026-10-23-live-core-ergonomics.json).
 - [x] Observe a [bounded actual Python manual-launcher workflow](evidence/2026-10-24-live-core-camera-visible.md) at `a3ededb`: keyboard startup navigation, real Core board, wheel zoom, Frame board, full-board fit across four observed window sizes, UI wheel isolation, refresh preservation and one accepted choice. Client/launcher exited 0; Core remained healthy after client close, then owned Stop completed without force; four Config files stayed unchanged.
+- [x] Build the new opt-in native input regression and guarded observation hooks: six Windows Editor actions passed in 21.94 seconds, including an automatic UBA retry after memory pressure. Independent source review and native input execution are still pending at this checkpoint.
 - [ ] Finish held RMB orbit/MMB pan and F verification. The desktop helper has no held-button drag API; F attempts in the manual run did not restore framing. Add a focused opt-in Unreal AutomationDriver regression using the actual live widgets/CameraActor and labelled synthetic camera bounds, then build, independently review and execute it within the approved bounds. Synthetic results must not claim live-Core or full rendered-board fidelity.
 - [x] Record actual results/limits and push/exact-ref-verify plan `d0af1a8`, camera `1193cb6` and startup guide/manual launcher `721d229`. Publish the final evidence checkpoint and update existing PR #3 without merging.
 - [ ] Execute native Linux build/render/package when a host is arranged (**UNTESTED**).
@@ -142,7 +144,7 @@ Selected host: checked-out `Warhammer_40k_AI/scripts/run_phase18m_reference_serv
 ## Evidence and history
 
 - [Bounded live-Core visible setup](evidence/2026-10-23-live-core-visible.md), [structured result](evidence/2026-10-23-live-core-visible.json), and [chronological slice progress](evidence/2026-10-23-live-core-slice.md).
-- [Startup-focus repair checks and independent review provenance](evidence/2026-10-23-live-core-focus-repair.json); affected source only, repaired rendering untested.
+- [Startup-focus repair checks and independent review provenance](evidence/2026-10-23-live-core-focus-repair.json); affected source/background scope at that date, followed by the resumed visible observations below.
 - [Owner startup/camera checks and independent review provenance](evidence/2026-10-23-live-core-ergonomics.json); source/background checks at their recorded revision.
 - [Resumed camera/manual-launcher observations](evidence/2026-10-24-live-core-camera-visible.md), [structured result](evidence/2026-10-24-live-core-camera-visible.json); F unresolved, held-button native input follow-up pending, Linux UNTESTED.
 

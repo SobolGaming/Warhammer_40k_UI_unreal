@@ -15,6 +15,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Framework/Application/SlateApplication.h"
 #include "Framework/Application/SlateUser.h"
+#include "HAL/PlatformMisc.h"
 #include "InputCoreTypes.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
@@ -33,6 +34,7 @@
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/SOverlay.h"
 #include "Widgets/SLeafWidget.h"
+#include "Widgets/SViewport.h"
 #include "Widgets/Text/STextBlock.h"
 
 namespace
@@ -79,6 +81,12 @@ struct FLiveCoreScene
     bool bAttached = false;
     FDelegateHandle ActivationHandle;
     Warhammer::LiveCore::FTabletopCamera CameraNavigation;
+#if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
+    TOptional<Warhammer::LiveCore::FTabletopCamera> NavigationBeforeInputProof;
+    FTransform CameraBeforeInputProof;
+    FText EndpointBeforeInputProof;
+    FString CameraErrorBeforeInputProof;
+#endif
 
     UWorld* World() const { return Owner.IsValid() ? Owner->GetWorld() : nullptr; }
     UGameViewportClient* Viewport() const { return World() ? World()->GetGameViewport() : nullptr; }
@@ -276,6 +284,10 @@ public:
         }
     }
 
+#if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
+    TWeakPtr<SEditableTextBox> EndpointForInputProof() const { return EndpointBox; }
+#endif
+
     void Detach()
     {
         // Slate can retain this widget after it leaves the viewport (for example, focus).
@@ -392,7 +404,12 @@ public:
             return Reply;
         }
         if (Scene && E.GetKey() == EKeys::F && !E.IsControlDown() && !E.IsAltDown() && !E.IsShiftDown() && !E.IsCommandDown())
-        { Apply(Policy.KeyCamera(ECameraAction::FrameBoard)); return FReply::Handled(); }
+        {
+#if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
+            ++FrameKeyEventsForTests;
+#endif
+            Apply(Policy.KeyCamera(ECameraAction::FrameBoard)); return FReply::Handled();
+        }
         return FReply::Unhandled();
     }
     virtual FReply OnFocusReceived(const FGeometry&, const FFocusEvent&) override
@@ -400,6 +417,23 @@ public:
     virtual void OnFocusLost(const FFocusEvent&) override { Cancel(); }
     virtual void OnMouseCaptureLost(const FCaptureLostEvent&) override
     { if (Policy.Snapshot().Capture.IsSet()) { Policy.FocusChanged(false); } }
+#if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
+    void BeginInputProof() { PolicyBeforeInputProof = Policy; }
+    void EndInputProof()
+    {
+        Cancel();
+        if (PolicyBeforeInputProof.IsSet()) { Policy = PolicyBeforeInputProof.GetValue(); PolicyBeforeInputProof.Reset(); }
+    }
+    void ObserveInputProof(FLiveCoreCameraInputObservation& Out) const
+    {
+        const auto& State = Policy.Snapshot();
+        Out.bFocused = HasKeyboardFocus(); Out.bPolicyActive = State.bActive;
+        Out.bPolicyCapture = State.Capture.IsSet();
+        Out.bSlateCapture = HasMouseCaptureByUser(CaptureUser, CapturePointer);
+        Out.CaptureOwner = State.Capture.IsSet() ? static_cast<int32>(State.Capture->Owner) : -1;
+        Out.FrameKeyEvents = FrameKeyEventsForTests; Out.ConfirmAttempts = State.ConfirmAttempts;
+    }
+#endif
 private:
     bool MatchesCapture(const FPointerEvent& E) const
     { return CaptureUser == static_cast<int32>(E.GetUserIndex()) && CapturePointer == static_cast<int32>(E.GetPointerIndex()); }
@@ -429,6 +463,10 @@ private:
     Warhammer::Migration::E02::FInputPolicy Policy;
     int32 CaptureUser = 0;
     int32 CapturePointer = 0;
+#if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
+    uint64 FrameKeyEventsForTests = 0;
+    TOptional<Warhammer::Migration::E02::FInputPolicy> PolicyBeforeInputProof;
+#endif
 };
 
 void FLiveCoreScene::Initialize()
@@ -627,6 +665,84 @@ void FLiveCoreScene::FrameBoard()
     if (CameraNavigation.FrameBoard()) { UpdateCamera(); }
     CameraError = CameraNavigation.GetError();
 }
+
+#if WITH_DEV_AUTOMATION_TESTS && WITH_E02_AUTOMATION_DRIVER
+bool AWarhammerClientGameMode::BeginCameraInputProofForTests(FString& OutError)
+{
+    check(IsInGameThread());
+    FString SuppliedCoreUrl;
+    if (!FParse::Param(FCommandLine::Get(), TEXT("LiveCoreCameraInputProof")) ||
+        FParse::Value(FCommandLine::Get(), TEXT("CoreUrl="), SuppliedCoreUrl) ||
+        !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_ADMIN_TOKEN")).IsEmpty() ||
+        !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN")).IsEmpty())
+    { OutError = TEXT("Camera input proof requires explicit opt-in, no CoreUrl and no Core credentials."); return false; }
+    if (!Scene || !Scene->bAttached || !Scene->Camera.IsValid() || !Scene->CameraSurface.IsValid() ||
+        !Scene->Panel.IsValid() || Scene->NavigationBeforeInputProof.IsSet())
+    { OutError = TEXT("Live camera surface is unavailable or already owned by an input proof."); return false; }
+    const auto& State = Scene->Session->GetState();
+    if (State.bHasSession || State.bBusy || State.bUnknown || !State.SessionId.IsEmpty() ||
+        !State.RequestId.IsEmpty() || State.AcceptedActionCount != 0)
+    { OutError = TEXT("Camera input proof refuses a real, busy or uncertain Core session."); return false; }
+    FLiveCoreCameraInputObservation Input;
+    Scene->CameraSurface->ObserveInputProof(Input);
+    if (Input.bPolicyCapture || Input.bSlateCapture)
+    { OutError = TEXT("Camera input proof refuses pre-existing camera capture."); return false; }
+    const auto Endpoint = Scene->Panel->EndpointForInputProof().Pin();
+    if (!Endpoint.IsValid()) { OutError = TEXT("Endpoint widget is unavailable."); return false; }
+    Scene->NavigationBeforeInputProof = Scene->CameraNavigation;
+    Scene->CameraBeforeInputProof = Scene->Camera->GetActorTransform();
+    Scene->EndpointBeforeInputProof = Endpoint->GetText();
+    Scene->CameraErrorBeforeInputProof = Scene->CameraError;
+    Scene->CameraSurface->BeginInputProof();
+    // Synthetic/advisory presentation bounds only. No Session/DTO/command is created.
+    if (!Scene->CameraNavigation.SetBounds(FBox(FVector(-90, -60, -2), FVector(90, 60, 2))) ||
+        !Scene->CameraNavigation.IsReady())
+    { OutError = TEXT("Synthetic camera layout is not ready."); EndCameraInputProofForTests(); return false; }
+    Scene->UpdateCamera(); OutError.Reset(); return true;
+}
+
+void AWarhammerClientGameMode::EndCameraInputProofForTests()
+{
+    check(IsInGameThread());
+    if (!Scene || !Scene->NavigationBeforeInputProof.IsSet()) { return; }
+    if (Scene->CameraSurface.IsValid()) { Scene->CameraSurface->EndInputProof(); }
+    if (Scene->Panel.IsValid())
+    {
+        if (const auto Endpoint = Scene->Panel->EndpointForInputProof().Pin())
+        { Endpoint->SetText(Scene->EndpointBeforeInputProof); }
+    }
+    Scene->CameraNavigation = Scene->NavigationBeforeInputProof.GetValue();
+    Scene->NavigationBeforeInputProof.Reset();
+    if (Scene->Camera.IsValid()) { Scene->Camera->SetActorTransform(Scene->CameraBeforeInputProof); }
+    Scene->CameraError = Scene->CameraErrorBeforeInputProof;
+}
+
+bool AWarhammerClientGameMode::ObserveCameraInputProofForTests(FLiveCoreCameraInputObservation& Out) const
+{
+    check(IsInGameThread());
+    if (!Scene || !Scene->bAttached || !Scene->Camera.IsValid() || !Scene->CameraSurface.IsValid() || !Scene->Panel.IsValid())
+    { return false; }
+    Out = FLiveCoreCameraInputObservation();
+    Out.Surface = Scene->CameraSurface; Out.Endpoint = Scene->Panel->EndpointForInputProof();
+    Out.Viewport = Scene->Viewport() ? Scene->Viewport()->GetGameViewportWidget() : TSharedPtr<SViewport>();
+    Out.ActorLocation = Scene->Camera->GetActorLocation(); Out.ActorRotation = Scene->Camera->GetActorRotation();
+    const auto* Controller = Scene->World()->GetFirstPlayerController();
+    Out.bViewTarget = Controller && Controller->GetViewTarget() == Scene->Camera.Get();
+    if (const auto Endpoint = Scene->Panel->EndpointForInputProof().Pin()) { Out.bEndpointFocused = Endpoint->HasKeyboardFocus(); }
+    Out.Focus = Scene->CameraNavigation.GetFocus(); Out.Distance = Scene->CameraNavigation.GetDistance();
+    Out.Azimuth = Scene->CameraNavigation.GetAzimuth(); Out.Elevation = Scene->CameraNavigation.GetElevation();
+    Out.bReady = Scene->CameraNavigation.IsReady(); Scene->CameraSurface->ObserveInputProof(Out);
+    const auto& State = Scene->Session->GetState();
+    Out.bBusy = State.bBusy; Out.bHasSession = State.bHasSession; Out.bUnknown = State.bUnknown;
+    Out.bHasCommandOutcome = State.bLastCommandHasOutcome; Out.bCommandAccepted = State.bLastCommandAccepted;
+    Out.bCommandCommitted = State.bLastCommandCommitted; Out.LastHttpStatus = State.LastHttpStatus;
+    Out.SessionId = State.SessionId; Out.RequestId = State.RequestId;
+    Out.SessionStatus = State.Status; Out.SessionError = State.Error; Out.LastOutcomeCode = State.LastOutcomeCode;
+    Out.SessionRevision = State.SessionRevision; Out.ProjectionRevision = State.ProjectionRevision;
+    Out.ProjectionVersion = State.ProjectionVersion; Out.AcceptedActionCount = State.AcceptedActionCount;
+    return true;
+}
+#endif
 
 AWarhammerClientGameMode::AWarhammerClientGameMode()
 {
