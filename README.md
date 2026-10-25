@@ -72,6 +72,8 @@ The [P2a visible check](docs/plans/evidence/2026-10-24-p2a-visible.md) used thre
 
 This slice supports the two existing development principals on one session. Its implementation and verification are tracked in [PR #8](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/8) and the [canonical plan](docs/plans/unreal-migration-plan.md); do not read pending checkboxes as acceptance.
 
+The bounded implementation, Windows package, native workflows and independent source reviews pass. P2B-V1/V2 remain unchecked: the visible attempt encountered a locked desktop before game interaction. Their reproducible manual steps are in the canonical plan and PR body; rendered handoff acceptance is still pending.
+
 1. Start normally in Managed or Attach mode and Connect/create (or Open a known active session) as player-a. Make an offered choice and Refresh.
 2. Click **Hand off to the other local player**. The previous player's board, mission, decision, outcome and ID display are cleared. Pass the workstation to the named next player while the privacy screen remains visible.
 3. The next player clicks **Ready: show player-b**. The client reads only that player's authenticated metadata and projection. It displays their own offered choices and starts **Accepted actions in this view** at0. Submit only Core-offered choices.

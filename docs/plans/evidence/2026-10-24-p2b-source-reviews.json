@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "milestone": "P2b local two-player handoff",
-  "recordedUtc": "2026-10-24T23:53:59.565254+00:00",
-  "status": "FROZEN_RUNTIME_SOURCE_REVIEWS_PASS_LAUNCHER_DELTA_PENDING",
+  "recordedUtc": "2026-10-25T00:00:19.441345+00:00",
+  "status": "FROZEN_RUNTIME_AND_SCOPED_LAUNCHER_DELTA_SOURCE_REVIEWS_PASS",
   "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
   "destination": "configured OpenAI Codex service",
   "consent": "Standing private-source/API review consent until explicitly revoked",
@@ -63,6 +63,44 @@
         "resumeOrFork": false
       },
       "transportBindingLimit": "Manifest transport and actual invocation recorded separately."
+    },
+    {
+      "sourceHead": "71a6389467b6a33a9d3f1083cdf7fcb308330151",
+      "manifest": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/manifest.json",
+        "bytes": 9625,
+        "sha256": "01a6f67cfad2eb71ab0629ac93c26a680d40ff17740249d0e42e0d15f2e2d253"
+      },
+      "inputCount": 9,
+      "inputBytes": 41927,
+      "allDeclaredInputAndControlHashesMatched": true,
+      "manifestTransport": {
+        "path": "C:/SWDev/warhammer/Warhammer_40k_UI_unreal/.local/development/Invoke-P2bReview.ps1",
+        "bytes": 1821,
+        "sha256": "B9A6DDC29D51AB47E9810283BED84F654C7CBF1C275939CD66C02D06A3D14583",
+        "roles": [
+          "CODE",
+          "REQ"
+        ],
+        "timeoutSeconds": 600,
+        "sandbox": "read-only",
+        "approval": "never",
+        "memoryDisabledRequested": true,
+        "ephemeral": true,
+        "modelOverride": false,
+        "resumeOrFork": false
+      },
+      "transportBindingLimit": "Manifest transport and actual invocation recorded separately.",
+      "scope": "P2B_CREDENTIAL_DOCUMENTATION_DELTA_SOURCE_ONLY",
+      "comparisonBase": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "launcherChangeCommit": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+      "documentCheckpoint": "71a6389467b6a33a9d3f1083cdf7fcb308330151",
+      "selectedChangedPaths": [
+        "architecture.md",
+        "scripts/Start-CoreDevelopmentServer.ps1",
+        "tests/migration/Test-CoreDevelopmentCredentials.ps1"
+      ],
+      "scopeLimit": "Nine declared inputs/41,927 bytes. Later public result/status bodies and previous peer reports excluded. No GUI, runtime or whole-feature acceptance inferred."
     }
   ],
   "reviews": [
@@ -269,15 +307,126 @@
         "bytes": 734,
         "sha256": "b7994fce4eb1416cae43c1cedf29ffe67fde40890205b4f0c6f66494fe76f372"
       }
+    },
+    {
+      "sourceHead": "71a6389467b6a33a9d3f1083cdf7fcb308330151",
+      "role": "CODE",
+      "verdict": "PASS",
+      "scope": "DELTA SOURCE only: PowerShell credential whole-string boundary, authored regression definitions and current-player architecture wording",
+      "thread": "01a17058-71d5-7d71-9c9d-1c8e908e2e65",
+      "startedUtc": "2026-10-24T23:56:46.6911491Z",
+      "finishedUtc": "2026-10-24T23:58:19.2772892Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "requestedSettings": {
+        "approval": "never",
+        "sandbox": "read-only",
+        "ephemeral": true,
+        "memoryDisabledRequested": true,
+        "timeoutSeconds": 600
+      },
+      "actualExecutable": "C:\\Users\\Rabid\\AppData\\Local\\OpenAI\\Codex\\bin\\8925276705115dea\\codex.exe",
+      "actualArguments": "exec --cd \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bCredentialDelta\\71a6389-20261024T235615Z-a196ff38\\CODE\" --skip-git-repo-check --sandbox read-only -c \"approval_policy=never\" -c \"memories.use_memories=false\" --ephemeral --json --color never -o \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bCredentialDelta\\71a6389-20261024T235615Z-a196ff38\\CODE\\report.txt\" -",
+      "shellCommandCount": 8,
+      "nonzeroShellExitCount": 0,
+      "mcpCallCount": 0,
+      "potentialMutatingShellPatternCount": 0,
+      "potentialMcpWritePatternCount": 0,
+      "conductPatternInspectionRequired": false,
+      "invocation": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/CODE/invocation.json",
+        "bytes": 988,
+        "sha256": "f2bf8383df5c1acbeb3133b593b9d52c148a9305f3af6043dea3b86e618b47e4"
+      },
+      "completion": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/CODE/completion.json",
+        "bytes": 156,
+        "sha256": "ef11d00ab5b94086504208fbed941b81f352ba0a3e4f1cb7cfc025ec294864d3"
+      },
+      "report": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/CODE/report.txt",
+        "bytes": 2038,
+        "sha256": "86ffefa7ea72ac93d82f199a98fd63e5bd845c55433df7b284500cdd37b57344"
+      },
+      "events": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/CODE/events.jsonl",
+        "bytes": 89186,
+        "sha256": "f1fc102ddf60ccc6aa173f8e7e218f9ae500930a7c49906aeb2ff26e37c3704b"
+      },
+      "stderr": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/CODE/stderr.log",
+        "bytes": 734,
+        "sha256": "76d64c085d808d0fdae42a3e0293ac9a4fe8d48f6fff55c79a175dbfb02c32cb"
+      },
+      "comparisonBase": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "launcherChangeCommit": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+      "documentCheckpoint": "71a6389467b6a33a9d3f1083cdf7fcb308330151"
+    },
+    {
+      "sourceHead": "71a6389467b6a33a9d3f1083cdf7fcb308330151",
+      "role": "REQ",
+      "verdict": "PASS",
+      "scope": "DELTA SOURCE only: PowerShell credential whole-string boundary, authored regression definitions and current-player architecture wording",
+      "thread": "01a17058-7a62-7c80-ab92-bfc86fb95834",
+      "startedUtc": "2026-10-24T23:56:48.8862171Z",
+      "finishedUtc": "2026-10-24T23:58:16.3888092Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "requestedSettings": {
+        "approval": "never",
+        "sandbox": "read-only",
+        "ephemeral": true,
+        "memoryDisabledRequested": true,
+        "timeoutSeconds": 600
+      },
+      "actualExecutable": "C:\\Users\\Rabid\\AppData\\Local\\OpenAI\\Codex\\bin\\8925276705115dea\\codex.exe",
+      "actualArguments": "exec --cd \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bCredentialDelta\\71a6389-20261024T235615Z-a196ff38\\REQ\" --skip-git-repo-check --sandbox read-only -c \"approval_policy=never\" -c \"memories.use_memories=false\" --ephemeral --json --color never -o \"C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2bCredentialDelta\\71a6389-20261024T235615Z-a196ff38\\REQ\\report.txt\" -",
+      "shellCommandCount": 5,
+      "nonzeroShellExitCount": 0,
+      "mcpCallCount": 0,
+      "potentialMutatingShellPatternCount": 0,
+      "potentialMcpWritePatternCount": 0,
+      "conductPatternInspectionRequired": false,
+      "invocation": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/REQ/invocation.json",
+        "bytes": 985,
+        "sha256": "f341248fa409111040164f7bcbbcbb7184830ab50c95c802d7dd0b7854a62c11"
+      },
+      "completion": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/REQ/completion.json",
+        "bytes": 155,
+        "sha256": "bd06d03e8fc8cd62c8ac2271f43070059547fa3a2e4aabf15fc39d2dfd9ede56"
+      },
+      "report": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/REQ/report.txt",
+        "bytes": 3655,
+        "sha256": "de7e33c5baf8ea74814c823390871f2adc69adc86dd1d2ffa6b9e87237ac9c99"
+      },
+      "events": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/REQ/events.jsonl",
+        "bytes": 82078,
+        "sha256": "19f4b51c9f39691cf6014bc3c06a982a219050d6c180d58acec045e460881720"
+      },
+      "stderr": {
+        "privatePath": ".local/reviews/P2bCredentialDelta/71a6389-20261024T235615Z-a196ff38/REQ/stderr.log",
+        "bytes": 734,
+        "sha256": "26c9d73f276cc3451ecc7c3b2fa33bb96721996794907f68d7ee7af4d6741be5"
+      },
+      "comparisonBase": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "launcherChangeCommit": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+      "documentCheckpoint": "71a6389467b6a33a9d3f1083cdf7fcb308330151"
     }
   ],
   "limits": [
     "Requested read-only/approval-never/no-memory/ephemeral settings are recorded. Lower-level memory enforcement is not independently verified.",
     "SOURCE verdicts cover only frozen affected source/contracts/authored tests. They do not establish build/native/GUI/Linux execution.",
     "Observed event pattern counts are a limited conduct check; flagged patterns require explicit inspection, not an invented no-mutation certificate.",
-    "Initial CODE CHANGES_REQUESTED and initial18/19 Unit failure remain distinct; repaired candidate needs its own checks."
+    "Initial CODE CHANGES_REQUESTED and initial18/19 Unit failure remain distinct; repaired candidate needs its own checks.",
+    "Delta SOURCE reviewers did not execute candidate tests, builds, GUI or runtime. Their PASS supplements the earlier full finite review; it is not a new whole-product certificate.",
+    "Delta CODE notes no explicit executed positive256-character or punctuation/padding boundary case; source guard behavior was inspected. Existing positive/default/override and negative12-case control evidence remains separately scoped.",
+    "Required visible P2B-V1/V2 remain separate; this source record does not check their boxes."
   ],
-  "latestCandidateHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+  "latestCandidateHead": "71a6389467b6a33a9d3f1083cdf7fcb308330151",
   "resolvedFindings": [
     {
       "kind": "P2 synthetic receipt checkpoint mismatch",
@@ -287,12 +436,41 @@
     {
       "kind": "P3 stale player-a-only architecture sentence",
       "repairHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
-      "result": "Clarified current expected development player; documentation only."
+      "result": "Clarified current expected development player; both fresh DELTA SOURCE roles passed the selected documentation wording at71a6389."
     },
     {
       "kind": "P3 launcher regex accepted trailing LF",
       "repairHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
-      "result": "Strict absolute anchors and LF/CRLF/embedded-LF regression cases;12 offline credential cases pass. Fresh delta SOURCE review pending."
+      "result": "Strict absolute anchors and LF/CRLF/embedded-LF regression cases;12 offline credential cases pass. Fresh distinct CODE/REQ DELTA SOURCE reviews passed at71a6389 with no actionable findings."
     }
-  ]
+  ],
+  "runtimeSourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+  "launcherSourceHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+  "sourceBinding": "Full finite P2b SOURCE reviews bind runtime source a6dbb1c. Fresh separate CODE/REQ delta reviews bind the three launcher/documentation files at document checkpoint71a6389, whose selected blobs are identical to launcher change a1d9013. No C++/Config change is inferred or newly accepted by this delta.",
+  "deltaCredentialControls": {
+    "status": "PASS_SYNTHETIC_CREDENTIAL_FUNCTION_ONLY",
+    "cases": 12,
+    "rawResult": {
+      "privatePath": ".local/development/p2b-credential-lf-controls.json",
+      "bytes": 140,
+      "sha256": "f078c8b648804bc32a897f58ff0037898e65f32f7240cd384e595e73cc3d6168"
+    },
+    "limits": "Offline authored credential-function execution only; no Core/client/network started."
+  },
+  "coreUpstreamObservation": {
+    "observedUtc": "2026-10-24T23:57:15.4684816Z",
+    "pullRequest": {
+      "headRefOid": "c86a37fa95dff95347cf3f7a9c6b14178fd8acde",
+      "mergeCommit": null,
+      "state": "OPEN",
+      "url": "https://github.com/SobolGaming/Warhammer_40k_AI/pull/591"
+    },
+    "selectedRuntimeCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "decision": "Retain the exact selected runtime for bounded P2b. Upstream movement requires a separate adoption review.",
+    "rawResult": {
+      "privatePath": ".local/development/p2b-core-upstream-observation.json",
+      "bytes": 459,
+      "sha256": "4a968e1430ba1516fd9bfbc67a49b27a65e1553c503a24ff38790e03221f3a31"
+    }
+  }
 }

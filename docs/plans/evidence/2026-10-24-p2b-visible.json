@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "milestone": "P2b local two-player handoff",
+  "status": "VISIBLE_VERIFICATION_BLOCKED_LOCKED_DESKTOP",
+  "recordedUtc": "2026-10-25T00:01:53.097743+00:00",
+  "runtimeSourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+  "launcherSourceHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+  "launchCheckpoint": "71a6389467b6a33a9d3f1083cdf7fcb308330151",
+  "sourceBinding": "Packaged C++/Config/runtime source is a6dbb1c; later launcher regex/documentation delta is a1d9013; owned launch observed checkpoint71a6389. Existing native/SOURCE evidence retains its own scope.",
+  "platform": "Native Windows x64 Development Game, existing workstation, interactive desktop locked",
+  "tester": "Codex root coordinator using supported computer-use API; evidence author reconciles retained process/cleanup records",
+  "core": {
+    "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "contractVersion": "44.5.0",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba",
+    "runtimeResourceCount": 3130
+  },
+  "executable": {
+    "leaf": "WarhammerClient.exe",
+    "bytes": 332550656,
+    "sha256": "95E6B03A53292E353458A554696E0351E71CAAB96C6804744BBFF8FC3DD501B2"
+  },
+  "criteria": {
+    "P2B-V1": {
+      "status": "BLOCKED",
+      "reason": "Supported computer-use snapshots showed the Windows lock screen, activation failed, and a recovered snapshot confirmed the lock. No Game workflow clicks or keys were sent."
+    },
+    "P2B-V2": {
+      "status": "NOT_RUN",
+      "reason": "The initial normal Managed visible workflow could not be observed; no Attach or invalid-player-b visible workflow was attempted."
+    }
+  },
+  "computerUseObservation": {
+    "reportedBy": "Root coordinator",
+    "source": "Current computer-use tool transcript and root cleanup sidecar",
+    "sequence": [
+      "Snapshot showed Windows lock screen.",
+      "Target activation failed.",
+      "Recovered snapshot confirmed locked desktop.",
+      "Stopped Game input; requested user unlock asynchronously.",
+      "Identity-verified owned Game was terminated externally, then owned Core stopped normally."
+    ],
+    "gameClicksOrKeysSent": false,
+    "screenshotsPersisted": false,
+    "screenshotHashes": [],
+    "limit": "No persisted capture artifact or Game-screen observation is available; this record relies on coordinator tool-transcript observations, not a fabricated screenshot or rendered acceptance."
+  },
+  "attempts": [
+    {
+      "status": "FAILED_PRESERVE_PRIVATE_EVIDENCE",
+      "sourceHead": null,
+      "startedUtc": "2026-10-24T23:59:35.8452102Z",
+      "finishedUtc": "2026-10-24T23:59:36.7024347Z",
+      "mode": "Managed",
+      "launcherExit": null,
+      "gameExit": null,
+      "gameLifetimeSeconds": null,
+      "maximumVisibleSeconds": 600,
+      "maximumStartupSeconds": 120,
+      "binaryBefore": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332550656,
+        "sha256": "95E6B03A53292E353458A554696E0351E71CAAB96C6804744BBFF8FC3DD501B2"
+      },
+      "binaryAfter": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332550656,
+        "sha256": "95E6B03A53292E353458A554696E0351E71CAAB96C6804744BBFF8FC3DD501B2"
+      },
+      "binaryUnchanged": true,
+      "configFourUnchanged": false,
+      "parentEnvironmentRestored": true,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "failureStage": "INPUTS",
+      "errorType": "Microsoft.Management.Infrastructure.CimException",
+      "coreCleanupConfirmed": false,
+      "cleanupErrors": [],
+      "supervisor": {
+        "leaf": "Invoke-P2bVisible.ps1",
+        "bytes": 29627,
+        "sha256": "55D90979E24D1A047B904B6618C02D34669B888CBA1507EF0FD5777A51F05F95"
+      },
+      "launcherScript": null,
+      "label": "Sandbox CIM failure before owned host/launcher/Game startup",
+      "rawResult": {
+        "privatePath": ".local/development/p2b-visible-20261024T235935Z-d1aa0f3da849418ab1fea42f39d87fef/result.json",
+        "bytes": 4456,
+        "sha256": "56e8e9db056ff1895f25411f803e219ce82a9da9f9135892dfaf49f6bac333c0"
+      },
+      "semanticOutcome": "PRELAUNCH_FAILED",
+      "clientStarted": false,
+      "ownedCoreStarted": false,
+      "configComparison": "Unavailable: no before snapshot was captured. False does not prove a Config mutation.",
+      "failureSummary": "CIM process-discovery access was unavailable in the sandbox at INPUTS; no visible workflow ran."
+    },
+    {
+      "status": "FAILED_PRESERVE_PRIVATE_EVIDENCE",
+      "sourceHead": "71a6389467b6a33a9d3f1083cdf7fcb308330151",
+      "startedUtc": "2026-10-24T23:59:46.1443196Z",
+      "finishedUtc": "2026-10-25T00:00:39.4292811Z",
+      "mode": "Managed",
+      "launcherExit": 1,
+      "gameExit": -1,
+      "gameLifetimeSeconds": 40.932399,
+      "maximumVisibleSeconds": 600,
+      "maximumStartupSeconds": 120,
+      "binaryBefore": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332550656,
+        "sha256": "95E6B03A53292E353458A554696E0351E71CAAB96C6804744BBFF8FC3DD501B2"
+      },
+      "binaryAfter": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332550656,
+        "sha256": "95E6B03A53292E353458A554696E0351E71CAAB96C6804744BBFF8FC3DD501B2"
+      },
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "failureStage": "OWNED_GAME_OBSERVATION",
+      "errorType": "System.Management.Automation.RuntimeException",
+      "coreCleanupConfirmed": true,
+      "cleanupErrors": [],
+      "supervisor": {
+        "leaf": "Invoke-P2bVisible.ps1",
+        "bytes": 29627,
+        "sha256": "55D90979E24D1A047B904B6618C02D34669B888CBA1507EF0FD5777A51F05F95"
+      },
+      "launcherScript": {
+        "leaf": "Start-Client.ps1",
+        "bytes": 3796,
+        "sha256": "044D08C944D2EE49A854F1953D3B2DE433668B0EAC2BA6BB28BB73E26FDE4F90"
+      },
+      "label": "Managed launch blocked by Windows lock screen",
+      "rawResult": {
+        "privatePath": ".local/development/p2b-visible-20261024T235946Z-bfe883a4e888465ca51484b33f52df1c/result.json",
+        "bytes": 6525,
+        "sha256": "c7605e5934ab5679832b53f5890c64ae65e969e7d96a8bc97c4a135024d65099"
+      },
+      "semanticOutcome": "VISIBLE_BLOCKED_EXTERNAL_ROOT_GAME_TERMINATION",
+      "clientStarted": true,
+      "ownedCoreStarted": true,
+      "game": {
+        "pid": 36052,
+        "startTimeUtcTicks": 639284831969017301
+      },
+      "launcher": {
+        "pid": 17844,
+        "startTimeUtcTicks": 639284831867605392
+      },
+      "externalRootForcedGameCleanup": true,
+      "normalGameUiClose": false,
+      "supervisorFlagLimit": "forcedGameCleanup=false records only cleanup performed inside the supervisor. Root separately verified the recorded Game identity and requested Process.Kill; that external termination caused Game exit-1 and launcher exit1. It was not a normal close or GUI PASS.",
+      "rootCleanup": {
+        "reason": "LOCKED_DESKTOP_NO_GAME_INPUT",
+        "observedUtc": "2026-10-25T00:00:37.7445694Z",
+        "gameIdentityVerified": true,
+        "processTerminationRequested": true,
+        "normalUiClose": false,
+        "screenshotOutcome": "Lock screen appeared; no game UI actions performed",
+        "visibleCriterion": "P2B-V1_BLOCKED_P2B-V2_NOT_RUN",
+        "gameExited": true,
+        "rawResult": {
+          "privatePath": ".local/development/p2b-visible-20261024T235946Z-bfe883a4e888465ca51484b33f52df1c/root-locked-desktop-cleanup.json",
+          "bytes": 357,
+          "sha256": "867495727ce4c38fac2e04cec0118445555137ea61fc724c6c93cb76acad5458"
+        }
+      },
+      "nativeLog": {
+        "privatePath": ".local/development/p2b-visible-20261024T235946Z-bfe883a4e888465ca51484b33f52df1c/native.log",
+        "bytes": 86641,
+        "sha256": "7c55341b89685fef8894813f1d9ca23c278e8f7b7fa8d3d3e46c2e93dee365cf"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 0,
+        "Fatal": 0
+      },
+      "launcherStdout": {
+        "privatePath": ".local/development/p2b-visible-20261024T235946Z-bfe883a4e888465ca51484b33f52df1c/launcher.stdout.log",
+        "bytes": 97,
+        "sha256": "8fe3d5b9d3e7b0b15c6d07e69dee326b1a46d59996d80c41ebedd441664b8db5"
+      },
+      "launcherStderr": {
+        "privatePath": ".local/development/p2b-visible-20261024T235946Z-bfe883a4e888465ca51484b33f52df1c/launcher.stderr.log",
+        "bytes": 298,
+        "sha256": "105c1476741ba2ac9ed8a0fd38f4d98c8088c2847e5e3cdbb8671bf974b410ea"
+      },
+      "runningReceipt": {
+        "privatePath": ".local/development/p2b-visible-20261024T235946Z-bfe883a4e888465ca51484b33f52df1c/running.json",
+        "bytes": 3502,
+        "sha256": "011f050d7d99074fc245d2679ebb59557eb0234b0e315cb8358060a06ee71261"
+      }
+    }
+  ],
+  "ownedCoreCleanup": {
+    "mode": "Managed",
+    "owned": true,
+    "status": "STOPPED",
+    "createdUtc": "2026-10-24T23:59:47.3670117Z",
+    "readyUtc": "2026-10-24T23:59:56.8523389Z",
+    "shutdownRequestedUtc": "2026-10-25T00:00:38.0375111Z",
+    "stoppedUtc": "2026-10-25T00:00:38.5825705Z",
+    "forcedTermination": false,
+    "health": {
+      "path": "/rules-catalog",
+      "httpStatus": 200,
+      "authenticated": true,
+      "observedUtc": "2026-10-24T23:59:56.8488826Z"
+    },
+    "stopCleanup": {
+      "status": "STOPPED",
+      "graceSeconds": 5,
+      "forcedExitSeconds": 3,
+      "shutdownRequested": true,
+      "forcedTermination": false,
+      "allExited": true,
+      "errors": []
+    },
+    "exactReceipt": {
+      "privatePath": ".local/development/core-host/20261024T235947Z-3df4f933e6554810af3f7588c7247162/receipt.json",
+      "bytes": 2360,
+      "sha256": "aefd3e0b45f617e0698399f82ac281c315c658ee1fd519f737355d2bcd019e79"
+    },
+    "copiedReceipt": {
+      "privatePath": ".local/development/p2b-visible-20261024T235946Z-bfe883a4e888465ca51484b33f52df1c/managedCoreReceipt.json",
+      "bytes": 2360,
+      "sha256": "aefd3e0b45f617e0698399f82ac281c315c658ee1fd519f737355d2bcd019e79"
+    },
+    "receiptBytesMatch": true,
+    "supervisorFinalStop": {
+      "status": "ALREADY_STOPPED",
+      "owned": true,
+      "receiptPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\core-host\\20261024T235947Z-3df4f933e6554810af3f7588c7247162\\receipt.json"
+    },
+    "limit": "Core STOPPED/normal shutdown establishes owned-host cleanup only, not normal Game closure or visible workflow acceptance."
+  },
+  "limits": [
+    "P2B-V1 remains unchecked/BLOCKED and P2B-V2 unchecked/NOT_RUN; no rendered handoff/privacy/Ready/input/401 workflow is accepted.",
+    "The initial prelaunch sandbox failure remains failed. Its absent Config before snapshot cannot establish unchanged Config.",
+    "The later Game ended by external identity-checked root termination, not a UI close; supervisor-local false forced-cleanup flags do not negate that external action.",
+    "Executable hashes and Config snapshots match for the later launch; environment restoration is a PowerShell value comparison, not exact null-versus-empty presence preservation.",
+    "Native/SOURCE passes do not satisfy visible criteria. Physical input, OS-switch/teardown, clean-machine Windows, Linux and full P2 remain unverified."
+  ]
+}

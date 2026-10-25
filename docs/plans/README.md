@@ -4,6 +4,12 @@
 
 Current finite increment: **P2b local two-player handoff**, [PR #8](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/8), branch `codex/p2b-local-player-handoff` from PR #7 merge `f490bf05`. It adds explicit privacy-cleared Hand off/Ready between existing development players on one session. Implementation/native/SOURCE/visible status belongs to the canonical plan; P2B-V1/V2 have separate required manual steps mirrored in the PR body. Full gameplay, remote/spectator, durability and deferred HV-01–HV-06 remain outside this PR. P2a/PR #7 is merged; its native, SOURCE and visible evidence below retains its exact scope.
 
+P2b supporting evidence:
+
+- [Native/launcher results](evidence/2026-10-24-p2b-native.json): Windows Development package,19 Unit,4 resources and3 real workflows in each Managed/Attach mode passed;29 executions/26 distinct names. Initial fixture failure and its repair remain recorded.
+- [Independent SOURCE reviews](evidence/2026-10-24-p2b-source-reviews.json): full finite CODE/REQ PASS at runtime source a6dbb1c, then separate fresh delta roles PASS for the launcher/documentation repair at71a6389; no GUI acceptance inferred.
+- [Visible attempt](evidence/2026-10-24-p2b-visible.md), [machine-readable results](evidence/2026-10-24-p2b-visible.json): Windows lock screen prevented game interaction. P2B-V1 BLOCKED, P2B-V2 NOT_RUN; owned game cleanup and normal owned-Core stop are recorded. PR #8 remains draft pending these explicit manual criteria.
+
 P2a supporting evidence:
 
 - [Native results](evidence/2026-10-24-p2a-native.json):45.439-second package build;16 Unit,4 resources and two real integration workflows in each Managed/Attach mode, totaling24 executions/22 names. Native request instrumentation verifies exactly two player GETs and no reopening mutation/admin request. Initial compilation and overlapping Core-start failures remain recorded.
