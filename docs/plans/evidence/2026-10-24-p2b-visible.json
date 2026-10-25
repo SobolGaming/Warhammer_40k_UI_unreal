@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "milestone": "P2b local two-player handoff",
-  "status": "VISIBLE_VERIFICATION_BLOCKED_LOCKED_DESKTOP",
-  "recordedUtc": "2026-10-25T00:01:53.097743+00:00",
+  "status": "BOUNDED_P2B_VISIBLE_PASS_WITH_PRESERVED_BLOCKED_HISTORY",
+  "recordedUtc": "2026-10-25T03:48:35.967345+00:00",
   "runtimeSourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
   "launcherSourceHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
-  "launchCheckpoint": "71a6389467b6a33a9d3f1083cdf7fcb308330151",
-  "sourceBinding": "Packaged C++/Config/runtime source is a6dbb1c; later launcher regex/documentation delta is a1d9013; owned launch observed checkpoint71a6389. Existing native/SOURCE evidence retains its own scope.",
-  "platform": "Native Windows x64 Development Game, existing workstation, interactive desktop locked",
+  "launchCheckpoint": "f8470c387e2b16abfdf89e8cc34f6615ead10bf3",
+  "sourceBinding": "Packaged runtime source remains a6dbb1c and launcher delta a1d9013; resumed launches use the coordinator-supplied exact checkpoint. Earlier checkpoint/lock/cleanup facts remain in preserved history.",
+  "platform": "Native Windows x64 Development Game, existing workstation; resumed desktop/UI observations recorded separately",
   "tester": "Codex root coordinator using supported computer-use API; evidence author reconciles retained process/cleanup records",
   "core": {
     "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
@@ -22,28 +22,97 @@
   },
   "criteria": {
     "P2B-V1": {
-      "status": "BLOCKED",
-      "reason": "Supported computer-use snapshots showed the Windows lock screen, activation failed, and a recovered snapshot confirmed the lock. No Game workflow clicks or keys were sent."
+      "status": "PASS",
+      "tester": "Root coordinator using supported Sky computer-use tools",
+      "observedUtc": "2026-10-25T03:42:26.8450708Z",
+      "orderedActionsAndActualResults": [
+        "Normal Managed launch created player-a at Core revision 1/local count 0 with own offered options. Choosing fixed assassination plus bring_it_down committed revision 2/local count 1; explicit Refresh retained only the permitted own fixed mission and hid the opposing decision.",
+        "Hand off cleared the old board, session-ID field, mission, offered controls and receipt/error display. The opaque target-player-b curtain waited for explicit Ready and did not automatically reveal another view. Native controls complement the rendered evidence for outgoing state/roster invalidation.",
+        "Ready opened the same session at unchanged Core revision 2 as player-b/local count 0, with only player-b own offered options and no player-a private mission. Choosing tactical committed revision 3/local count 1; explicit Refresh retained the permitted player-b state.",
+        "Handing back cleared the display again. Ready restored player-a on the same session at Core revision 3/local count 0 with only player-a own fixed mission, no player-b tactical details, and the next own reserve options.",
+        "Alt+F4 closed the Game normally. Game and launcher exited 0 without forced cleanup; the Managed-owned Core receipt records STOPPED with forcedTermination false."
+      ],
+      "assertions": {
+        "playerACreatedChoseAndRefreshed": true,
+        "beginClearedOldBoardMissionOptionsRosterReceiptErrorAndId": true,
+        "targetPlayerBWaitedForReady": true,
+        "readySameSessionUnchangedRevisionPlayerBLocal0OwnChoiceOnly": true,
+        "playerBChoiceCommittedAndRefreshed": true,
+        "handBackClearedThenRestoredOnlyPlayerAPermittedStateLocal0": true,
+        "normalManagedCloseOwnedCoreStopped": true
+      },
+      "runResultPaths": [
+        ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/result.json"
+      ],
+      "captureLabels": [
+        "managed-startup",
+        "managed-a-revision1-options",
+        "managed-a-choice-committed",
+        "managed-a-refreshed-before-handoff",
+        "managed-handoff-to-b-hidden",
+        "managed-b-revision2-own-options",
+        "managed-b-tactical-committed-revision3",
+        "managed-b-refreshed",
+        "managed-handoff-back-to-a-hidden",
+        "managed-a-return-revision3-own-mission-local0"
+      ],
+      "limits": [
+        "Screenshots demonstrate the rendered display and root-observed ordered actions. Internal request counts, no mutation during handoff, current-viewer authorization and hidden state invalidation additionally rely on the native instrumentation and reviewed source; pixels alone do not establish those properties.",
+        "This is the bounded existing-workstation Windows Development Game workflow, not complete battle progression, clean-host Windows or Linux acceptance.",
+        "Roster DTO invalidation is covered by native/source evidence; this slice has no populated roster widget to visibly exercise."
+      ]
     },
     "P2B-V2": {
-      "status": "NOT_RUN",
-      "reason": "The initial normal Managed visible workflow could not be observed; no Attach or invalid-player-b visible workflow was attempted."
+      "status": "PASS",
+      "tester": "Root coordinator using supported Sky computer-use tools",
+      "observedUtc": "2026-10-25T03:47:08Z",
+      "orderedActionsAndActualResults": [
+        "First Attach launch used the child-only invalid-player-b diagnostic against the separately owned selected Core. Player-a created and chose fixed assassination plus cleanse at revision 2. The same session ID was copied privately with Ctrl+A/C before handoff; no private ID is published.",
+        "Hand off hid the old display. Ready for player-b showed the actual HTTP 401 authentication_required message: A valid bearer credential is required. Board, offered options, mission, ID and receipt remained absent; Ready retry stayed enabled and no automatic session was created. The client then closed normally with Game/launcher exit 0; the attached Core remained healthy at HTTP 200.",
+        "A fresh ordinary-credential Attach launch pasted the same privately copied ID with Ctrl+V and Open restored player-a at revision 2/local count 0, own fixed mission visible and opposing information hidden.",
+        "Clicking the board and sending wheel -240 visibly zoomed the board. Clicking the read-only ID field and Ctrl+A visibly selected its text; F retained the zoom. Wheel 600 over the panel also retained board zoom. The panel content fitted the window, so this verifies wheel isolation and does not claim actual overflow scrolling or persisted UIA field semantics.",
+        "Hand off restored the opaque curtain. A curtain click, wheel -240 and F kept it hidden, did not trigger Ready and did not give visible board focus. Ready for player-b then restored the same session at revision 2/local count 0, only own offered options and no player-a mission, with a fresh framed board.",
+        "Alt+F4 closed the second Attach client normally; Game and launcher exited 0 without forced cleanup. The separately owned Core again returned HTTP 200 before its owner stopped it normally with STOPPED/forcedTermination false. A final Sky list_windows observation found no Game window. The final read-only process check at 2026-10-25T03:47:42.5700495Z independently recorded zero Game processes and the shared owned Core STOPPED."
+      ],
+      "assertions": {
+        "invalidBReadyShowedActual401AndKeptOldDisplayEmpty": true,
+        "firstAttachCloseLeftCoreHealthy": true,
+        "freshOrdinaryAttachOpenedKnownIdAndHandedToB": true,
+        "panelInputAndHiddenCameraIsolationObserved": true,
+        "normalAttachCloseLeftCoreHealthyThenSeparateOwnerStopped": true
+      },
+      "runResultPaths": [
+        ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/result.json",
+        ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/result.json"
+      ],
+      "captureLabels": [
+        "attach-diagnostic-startup",
+        "attach-diagnostic-a-revision1",
+        "attach-diagnostic-a-mission-revision2",
+        "attach-diagnostic-id-copied",
+        "attach-diagnostic-private-display-cleared",
+        "attach-invalid-b-http401-private-view-stays-hidden",
+        "attach-recovery-startup",
+        "attach-recovery-id-pasted",
+        "attach-recovery-opened-same-session-revision2-local0",
+        "attach-recovery-board-zoom-reference",
+        "attach-recovery-field-focused-f-keeps-zoom",
+        "attach-recovery-panel-wheel-keeps-board-zoom",
+        "attach-recovery-handoff-hidden",
+        "attach-recovery-hidden-click-wheel-f-stays-private",
+        "attach-recovery-b-ready-revision2-own-options-no-a-mission"
+      ],
+      "limits": [
+        "The exact HTTP error is a root-observed UI result. Screenshots alone cannot establish the internal HTTP exchange or hidden camera internals; the matching native controls and source review provide complementary evidence.",
+        "The panel fitted the window: no overflow-scroll claim is made. Text selection proves the observed focus interaction only; no persisted UIA field semantics claim is made.",
+        "No physical RMB/MMB, actual OS switching/teardown, native Linux, clean-host Windows, complete P2 progression or additional unobserved action is accepted by these runs."
+      ]
     }
   },
   "computerUseObservation": {
-    "reportedBy": "Root coordinator",
-    "source": "Current computer-use tool transcript and root cleanup sidecar",
-    "sequence": [
-      "Snapshot showed Windows lock screen.",
-      "Target activation failed.",
-      "Recovered snapshot confirmed locked desktop.",
-      "Stopped Game input; requested user unlock asynchronously.",
-      "Identity-verified owned Game was terminated externally, then owned Core stopped normally."
-    ],
-    "gameClicksOrKeysSent": false,
-    "screenshotsPersisted": false,
-    "screenshotHashes": [],
-    "limit": "No persisted capture artifact or Game-screen observation is available; this record relies on coordinator tool-transcript observations, not a fabricated screenshot or rendered acceptance."
+    "reportedBy": "Root coordinator using supported Sky computer-use tools",
+    "observedUtc": "2026-10-25T03:47:08Z",
+    "source": "Coordinator-supplied actual resumed observations and referenced private captures; earlier lock-screen observations preserved under historicalComputerUseObservations."
   },
   "attempts": [
     {
@@ -194,6 +263,259 @@
         "bytes": 3502,
         "sha256": "011f050d7d99074fc245d2679ebb59557eb0234b0e315cb8358060a06ee71261"
       }
+    },
+    {
+      "status": "NORMAL_MANUAL_LAUNCHER_ROUTE_CLOSED_UI_RESULTS_SEPARATE",
+      "sourceHead": "f8470c387e2b16abfdf89e8cc34f6615ead10bf3",
+      "mode": "Managed",
+      "startedUtc": "2026-10-25T03:39:44.8024613Z",
+      "finishedUtc": "2026-10-25T03:42:26.8450708Z",
+      "gameLifetimeSeconds": 134.435659,
+      "maximumVisibleSeconds": 600,
+      "maximumStartupSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "launcherExit": 0,
+      "gameExit": 0,
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "coreCleanupConfirmed": true,
+      "attachedOwnedServerSurvived": null,
+      "attachedHealthAfterClientClose": null,
+      "attachedStopNoOp": null,
+      "ownedStop": {
+        "status": "ALREADY_STOPPED",
+        "owned": true,
+        "receiptPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\core-host\\20261025T033946Z-38015edcc33a407c87fb1eb1d3051762\\receipt.json"
+      },
+      "managedStopObserved": {
+        "status": "STOPPED",
+        "owned": true,
+        "forcedTermination": false
+      },
+      "httpDiagnostic": {
+        "requested": false,
+        "childVariable": null,
+        "valueRetained": false,
+        "actualHttpStatus": "ROOT_UI_OBSERVATION_REQUIRED"
+      },
+      "failureStage": null,
+      "errorType": null,
+      "cleanupErrors": [],
+      "supervisor": {
+        "leaf": "Invoke-P2bVisible.ps1",
+        "bytes": 29627,
+        "sha256": "55D90979E24D1A047B904B6618C02D34669B888CBA1507EF0FD5777A51F05F95"
+      },
+      "launcherScript": {
+        "leaf": "Start-Client.ps1",
+        "bytes": 3796,
+        "sha256": "044D08C944D2EE49A854F1953D3B2DE433668B0EAC2BA6BB28BB73E26FDE4F90"
+      },
+      "rawResult": {
+        "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/result.json",
+        "bytes": 6232,
+        "sha256": "3c02cd505b9bd0eb4f441c182e20bb3585eb3c5dfa856f966a8f8837d1d75b8d"
+      },
+      "evidenceOrigin": "Resumed visible run; UI observations recorded separately",
+      "externalRootTerminationSidecarPresent": false,
+      "nativeLog": {
+        "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/native.log",
+        "bytes": 90505,
+        "sha256": "cdcc6c975e2c8e6ae97eff4894862892aaaa3620ec0f4bb5d19aaef4952859cc"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 0,
+        "Fatal": 0
+      },
+      "runningReceipt": {
+        "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/running.json",
+        "bytes": 3502,
+        "sha256": "80f1ecad2a7ca74163ce53e76bad62728aeaade17ee83bc346db836cf8f4b54e"
+      },
+      "stdout": {
+        "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/launcher.stdout.log",
+        "bytes": 97,
+        "sha256": "8fe3d5b9d3e7b0b15c6d07e69dee326b1a46d59996d80c41ebedd441664b8db5"
+      },
+      "stderr": {
+        "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/launcher.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "status": "NORMAL_MANUAL_LAUNCHER_ROUTE_CLOSED_UI_RESULTS_SEPARATE",
+      "sourceHead": "f8470c387e2b16abfdf89e8cc34f6615ead10bf3",
+      "mode": "Attach",
+      "startedUtc": "2026-10-25T03:42:51.8803013Z",
+      "finishedUtc": "2026-10-25T03:44:32.9376599Z",
+      "gameLifetimeSeconds": 98.3067953,
+      "maximumVisibleSeconds": 600,
+      "maximumStartupSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "launcherExit": 0,
+      "gameExit": 0,
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "coreCleanupConfirmed": true,
+      "attachedOwnedServerSurvived": true,
+      "attachedHealthAfterClientClose": {
+        "mode": "Attach",
+        "status": "ATTACHED_HEALTHY",
+        "owned": false,
+        "endpoint": "http://127.0.0.1:19126/",
+        "receiptPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\core-host\\attach-20261025T034432Z-b587790d372d45d4bc5439a3e39d4463\\receipt.json"
+      },
+      "attachedStopNoOp": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false,
+        "endpoint": "http://127.0.0.1:19126/"
+      },
+      "ownedStop": null,
+      "managedStopObserved": null,
+      "httpDiagnostic": {
+        "requested": true,
+        "childVariable": "WH_CORE_PLAYER_B_TOKEN",
+        "valueRetained": false,
+        "actualHttpStatus": "ROOT_UI_OBSERVATION_REQUIRED"
+      },
+      "failureStage": null,
+      "errorType": null,
+      "cleanupErrors": [],
+      "supervisor": {
+        "leaf": "Invoke-P2bVisible.ps1",
+        "bytes": 29627,
+        "sha256": "55D90979E24D1A047B904B6618C02D34669B888CBA1507EF0FD5777A51F05F95"
+      },
+      "launcherScript": {
+        "leaf": "Start-Client.ps1",
+        "bytes": 3796,
+        "sha256": "044D08C944D2EE49A854F1953D3B2DE433668B0EAC2BA6BB28BB73E26FDE4F90"
+      },
+      "rawResult": {
+        "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/result.json",
+        "bytes": 6574,
+        "sha256": "be09ae40814889093ed6aa92d721fbe4b8b33495556473e89b2aa2ae59d2017d"
+      },
+      "evidenceOrigin": "Resumed visible run; UI observations recorded separately",
+      "externalRootTerminationSidecarPresent": false,
+      "nativeLog": {
+        "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/native.log",
+        "bytes": 90505,
+        "sha256": "c70adfd73b490a33b22be3c1f05e164d49ac29a123a4712d453a8ee4ca309eca"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 0,
+        "Fatal": 0
+      },
+      "runningReceipt": {
+        "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/running.json",
+        "bytes": 3741,
+        "sha256": "4bb49e6e8707f78cd2486b1d1979327aaa864ec0d0fab6b203af26ade6100c27"
+      },
+      "stdout": {
+        "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/launcher.stdout.log",
+        "bytes": 96,
+        "sha256": "6f9fdb127d58302bf1c62a0b8943cca46ad12b85632aff89763fce8cf80d437f"
+      },
+      "stderr": {
+        "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/launcher.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "status": "NORMAL_MANUAL_LAUNCHER_ROUTE_CLOSED_UI_RESULTS_SEPARATE",
+      "sourceHead": "f8470c387e2b16abfdf89e8cc34f6615ead10bf3",
+      "mode": "Attach",
+      "startedUtc": "2026-10-25T03:44:39.1306233Z",
+      "finishedUtc": "2026-10-25T03:47:04.1024585Z",
+      "gameLifetimeSeconds": 142.2934147,
+      "maximumVisibleSeconds": 600,
+      "maximumStartupSeconds": 120,
+      "streamLimitBytes": 67108864,
+      "launcherExit": 0,
+      "gameExit": 0,
+      "binaryUnchanged": true,
+      "configFourUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "forcedGameCleanup": false,
+      "forcedLauncherCleanup": false,
+      "coreCleanupConfirmed": true,
+      "attachedOwnedServerSurvived": true,
+      "attachedHealthAfterClientClose": {
+        "mode": "Attach",
+        "status": "ATTACHED_HEALTHY",
+        "owned": false,
+        "endpoint": "http://127.0.0.1:19126/",
+        "receiptPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\core-host\\attach-20261025T034703Z-ab77c99ad75f471eb5306c16593cbfbf\\receipt.json"
+      },
+      "attachedStopNoOp": {
+        "status": "ATTACHED_NOT_STOPPED",
+        "owned": false,
+        "endpoint": "http://127.0.0.1:19126/"
+      },
+      "ownedStop": null,
+      "managedStopObserved": null,
+      "httpDiagnostic": {
+        "requested": false,
+        "childVariable": null,
+        "valueRetained": false,
+        "actualHttpStatus": "ROOT_UI_OBSERVATION_REQUIRED"
+      },
+      "failureStage": null,
+      "errorType": null,
+      "cleanupErrors": [],
+      "supervisor": {
+        "leaf": "Invoke-P2bVisible.ps1",
+        "bytes": 29627,
+        "sha256": "55D90979E24D1A047B904B6618C02D34669B888CBA1507EF0FD5777A51F05F95"
+      },
+      "launcherScript": {
+        "leaf": "Start-Client.ps1",
+        "bytes": 3796,
+        "sha256": "044D08C944D2EE49A854F1953D3B2DE433668B0EAC2BA6BB28BB73E26FDE4F90"
+      },
+      "rawResult": {
+        "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/result.json",
+        "bytes": 6556,
+        "sha256": "dc6fb094fdff262cdbf7fda1a5c73e188659bdf4d002e8c1acd7e51c5db957a6"
+      },
+      "evidenceOrigin": "Resumed visible run; UI observations recorded separately",
+      "externalRootTerminationSidecarPresent": false,
+      "nativeLog": {
+        "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/native.log",
+        "bytes": 90505,
+        "sha256": "787b8bc6b9ec50e021088fecd9fc6c11175335fc5d9e6a20c9731458c3f7eabc"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 0,
+        "Fatal": 0
+      },
+      "runningReceipt": {
+        "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/running.json",
+        "bytes": 3722,
+        "sha256": "0d245f151bcfbbe5fb89233a57f827150293f7ad681f965de81a6bac6975f09a"
+      },
+      "stdout": {
+        "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/launcher.stdout.log",
+        "bytes": 96,
+        "sha256": "6f9fdb127d58302bf1c62a0b8943cca46ad12b85632aff89763fce8cf80d437f"
+      },
+      "stderr": {
+        "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/launcher.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
     }
   ],
   "ownedCoreCleanup": {
@@ -239,10 +561,510 @@
     "limit": "Core STOPPED/normal shutdown establishes owned-host cleanup only, not normal Game closure or visible workflow acceptance."
   },
   "limits": [
-    "P2B-V1 remains unchecked/BLOCKED and P2B-V2 unchecked/NOT_RUN; no rendered handoff/privacy/Ready/input/401 workflow is accepted.",
-    "The initial prelaunch sandbox failure remains failed. Its absent Config before snapshot cannot establish unchanged Config.",
-    "The later Game ended by external identity-checked root termination, not a UI close; supervisor-local false forced-cleanup flags do not negate that external action.",
-    "Executable hashes and Config snapshots match for the later launch; environment restoration is a PowerShell value comparison, not exact null-versus-empty presence preservation.",
-    "Native/SOURCE passes do not satisfy visible criteria. Physical input, OS-switch/teardown, clean-machine Windows, Linux and full P2 remain unverified."
-  ]
+    "Both P2B-V1 and P2B-V2 passed on the existing Windows workstation from actual root-observed Sky interactions plus the independent native/SOURCE evidence; this does not accept full P2 or general feature parity.",
+    "All three resumed launches used the same frozen package, runtime source a6dbb1c, launcher source a1d9013 and launch checkpoint f8470c3. Each was bounded to one window and at most 600 visible seconds, with 120 startup seconds.",
+    "Screenshots establish visible display only. Internal HTTP, authorization, hidden camera state, request counts and stale callback/UNKNOWN controls require the matching native instrumentation and source evidence.",
+    "Panel wheel isolation was observed while content fitted the window; actual overflow scrolling was not exercised. Focus was observed through ID text selection and F behavior, not persisted UIA field semantics.",
+    "Physical RMB/MMB, actual OS switching/teardown, clean-host Windows, native Linux and complete P2 remain deferred verification gates.",
+    "Parent environment restoration is a PowerShell value comparison, not proof of exact null-versus-empty presence preservation.",
+    "Roster DTO invalidation is native/source evidence; no populated roster widget exists in this slice for rendered verification.",
+    "Resumed criterion results come only from the coordinator-supplied dated observations and referenced raw runs/captures. Historical blocked observations, external Game termination, prelaunch failure and their original limits remain preserved above and in the exact prior snapshot."
+  ],
+  "criteriaHistory": [
+    {
+      "recordedUtc": "2026-10-25T00:01:53.097743+00:00",
+      "status": "VISIBLE_VERIFICATION_BLOCKED_LOCKED_DESKTOP",
+      "criteria": {
+        "P2B-V1": {
+          "status": "BLOCKED",
+          "reason": "Supported computer-use snapshots showed the Windows lock screen, activation failed, and a recovered snapshot confirmed the lock. No Game workflow clicks or keys were sent."
+        },
+        "P2B-V2": {
+          "status": "NOT_RUN",
+          "reason": "The initial normal Managed visible workflow could not be observed; no Attach or invalid-player-b visible workflow was attempted."
+        }
+      },
+      "snapshot": {
+        "privatePath": ".local/development/p2b-visible-closeout-draft/preserved-before-append-visible-de6de9f46fcf.json",
+        "bytes": 11613,
+        "sha256": "de6de9f46fcf90743811291763039ed33b4ce72738801769c84e13fac7cf52a4"
+      }
+    }
+  ],
+  "historicalComputerUseObservations": [
+    {
+      "reportedBy": "Root coordinator",
+      "source": "Current computer-use tool transcript and root cleanup sidecar",
+      "sequence": [
+        "Snapshot showed Windows lock screen.",
+        "Target activation failed.",
+        "Recovered snapshot confirmed locked desktop.",
+        "Stopped Game input; requested user unlock asynchronously.",
+        "Identity-verified owned Game was terminated externally, then owned Core stopped normally."
+      ],
+      "gameClicksOrKeysSent": false,
+      "screenshotsPersisted": false,
+      "screenshotHashes": [],
+      "limit": "No persisted capture artifact or Game-screen observation is available; this record relies on coordinator tool-transcript observations, not a fabricated screenshot or rendered acceptance."
+    }
+  ],
+  "historicalOwnedCoreCleanup": [
+    {
+      "mode": "Managed",
+      "owned": true,
+      "status": "STOPPED",
+      "createdUtc": "2026-10-24T23:59:47.3670117Z",
+      "readyUtc": "2026-10-24T23:59:56.8523389Z",
+      "shutdownRequestedUtc": "2026-10-25T00:00:38.0375111Z",
+      "stoppedUtc": "2026-10-25T00:00:38.5825705Z",
+      "forcedTermination": false,
+      "health": {
+        "path": "/rules-catalog",
+        "httpStatus": 200,
+        "authenticated": true,
+        "observedUtc": "2026-10-24T23:59:56.8488826Z"
+      },
+      "stopCleanup": {
+        "status": "STOPPED",
+        "graceSeconds": 5,
+        "forcedExitSeconds": 3,
+        "shutdownRequested": true,
+        "forcedTermination": false,
+        "allExited": true,
+        "errors": []
+      },
+      "exactReceipt": {
+        "privatePath": ".local/development/core-host/20261024T235947Z-3df4f933e6554810af3f7588c7247162/receipt.json",
+        "bytes": 2360,
+        "sha256": "aefd3e0b45f617e0698399f82ac281c315c658ee1fd519f737355d2bcd019e79"
+      },
+      "copiedReceipt": {
+        "privatePath": ".local/development/p2b-visible-20261024T235946Z-bfe883a4e888465ca51484b33f52df1c/managedCoreReceipt.json",
+        "bytes": 2360,
+        "sha256": "aefd3e0b45f617e0698399f82ac281c315c658ee1fd519f737355d2bcd019e79"
+      },
+      "receiptBytesMatch": true,
+      "supervisorFinalStop": {
+        "status": "ALREADY_STOPPED",
+        "owned": true,
+        "receiptPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\core-host\\20261024T235947Z-3df4f933e6554810af3f7588c7247162\\receipt.json"
+      },
+      "limit": "Core STOPPED/normal shutdown establishes owned-host cleanup only, not normal Game closure or visible workflow acceptance."
+    }
+  ],
+  "historicalLimits": [
+    {
+      "recordedUtc": "2026-10-25T00:01:53.097743+00:00",
+      "limits": [
+        "P2B-V1 remains unchecked/BLOCKED and P2B-V2 unchecked/NOT_RUN; no rendered handoff/privacy/Ready/input/401 workflow is accepted.",
+        "The initial prelaunch sandbox failure remains failed. Its absent Config before snapshot cannot establish unchanged Config.",
+        "The later Game ended by external identity-checked root termination, not a UI close; supervisor-local false forced-cleanup flags do not negate that external action.",
+        "Executable hashes and Config snapshots match for the later launch; environment restoration is a PowerShell value comparison, not exact null-versus-empty presence preservation.",
+        "Native/SOURCE passes do not satisfy visible criteria. Physical input, OS-switch/teardown, clean-machine Windows, Linux and full P2 remain unverified."
+      ]
+    }
+  ],
+  "latestLaunchCheckpoint": "f8470c387e2b16abfdf89e8cc34f6615ead10bf3",
+  "resumedUiObservations": {
+    "reportedBy": "Root coordinator using supported Sky computer-use tools",
+    "observedUtc": "2026-10-25T03:47:08Z",
+    "criteria": {
+      "P2B-V1": {
+        "status": "PASS",
+        "tester": "Root coordinator using supported Sky computer-use tools",
+        "observedUtc": "2026-10-25T03:42:26.8450708Z",
+        "orderedActionsAndActualResults": [
+          "Normal Managed launch created player-a at Core revision 1/local count 0 with own offered options. Choosing fixed assassination plus bring_it_down committed revision 2/local count 1; explicit Refresh retained only the permitted own fixed mission and hid the opposing decision.",
+          "Hand off cleared the old board, session-ID field, mission, offered controls and receipt/error display. The opaque target-player-b curtain waited for explicit Ready and did not automatically reveal another view. Native controls complement the rendered evidence for outgoing state/roster invalidation.",
+          "Ready opened the same session at unchanged Core revision 2 as player-b/local count 0, with only player-b own offered options and no player-a private mission. Choosing tactical committed revision 3/local count 1; explicit Refresh retained the permitted player-b state.",
+          "Handing back cleared the display again. Ready restored player-a on the same session at Core revision 3/local count 0 with only player-a own fixed mission, no player-b tactical details, and the next own reserve options.",
+          "Alt+F4 closed the Game normally. Game and launcher exited 0 without forced cleanup; the Managed-owned Core receipt records STOPPED with forcedTermination false."
+        ],
+        "assertions": {
+          "playerACreatedChoseAndRefreshed": true,
+          "beginClearedOldBoardMissionOptionsRosterReceiptErrorAndId": true,
+          "targetPlayerBWaitedForReady": true,
+          "readySameSessionUnchangedRevisionPlayerBLocal0OwnChoiceOnly": true,
+          "playerBChoiceCommittedAndRefreshed": true,
+          "handBackClearedThenRestoredOnlyPlayerAPermittedStateLocal0": true,
+          "normalManagedCloseOwnedCoreStopped": true
+        },
+        "runResultPaths": [
+          ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/result.json"
+        ],
+        "captureLabels": [
+          "managed-startup",
+          "managed-a-revision1-options",
+          "managed-a-choice-committed",
+          "managed-a-refreshed-before-handoff",
+          "managed-handoff-to-b-hidden",
+          "managed-b-revision2-own-options",
+          "managed-b-tactical-committed-revision3",
+          "managed-b-refreshed",
+          "managed-handoff-back-to-a-hidden",
+          "managed-a-return-revision3-own-mission-local0"
+        ],
+        "limits": [
+          "Screenshots demonstrate the rendered display and root-observed ordered actions. Internal request counts, no mutation during handoff, current-viewer authorization and hidden state invalidation additionally rely on the native instrumentation and reviewed source; pixels alone do not establish those properties.",
+          "This is the bounded existing-workstation Windows Development Game workflow, not complete battle progression, clean-host Windows or Linux acceptance.",
+          "Roster DTO invalidation is covered by native/source evidence; this slice has no populated roster widget to visibly exercise."
+        ]
+      },
+      "P2B-V2": {
+        "status": "PASS",
+        "tester": "Root coordinator using supported Sky computer-use tools",
+        "observedUtc": "2026-10-25T03:47:08Z",
+        "orderedActionsAndActualResults": [
+          "First Attach launch used the child-only invalid-player-b diagnostic against the separately owned selected Core. Player-a created and chose fixed assassination plus cleanse at revision 2. The same session ID was copied privately with Ctrl+A/C before handoff; no private ID is published.",
+          "Hand off hid the old display. Ready for player-b showed the actual HTTP 401 authentication_required message: A valid bearer credential is required. Board, offered options, mission, ID and receipt remained absent; Ready retry stayed enabled and no automatic session was created. The client then closed normally with Game/launcher exit 0; the attached Core remained healthy at HTTP 200.",
+          "A fresh ordinary-credential Attach launch pasted the same privately copied ID with Ctrl+V and Open restored player-a at revision 2/local count 0, own fixed mission visible and opposing information hidden.",
+          "Clicking the board and sending wheel -240 visibly zoomed the board. Clicking the read-only ID field and Ctrl+A visibly selected its text; F retained the zoom. Wheel 600 over the panel also retained board zoom. The panel content fitted the window, so this verifies wheel isolation and does not claim actual overflow scrolling or persisted UIA field semantics.",
+          "Hand off restored the opaque curtain. A curtain click, wheel -240 and F kept it hidden, did not trigger Ready and did not give visible board focus. Ready for player-b then restored the same session at revision 2/local count 0, only own offered options and no player-a mission, with a fresh framed board.",
+          "Alt+F4 closed the second Attach client normally; Game and launcher exited 0 without forced cleanup. The separately owned Core again returned HTTP 200 before its owner stopped it normally with STOPPED/forcedTermination false. A final Sky list_windows observation found no Game window. The final read-only process check at 2026-10-25T03:47:42.5700495Z independently recorded zero Game processes and the shared owned Core STOPPED."
+        ],
+        "assertions": {
+          "invalidBReadyShowedActual401AndKeptOldDisplayEmpty": true,
+          "firstAttachCloseLeftCoreHealthy": true,
+          "freshOrdinaryAttachOpenedKnownIdAndHandedToB": true,
+          "panelInputAndHiddenCameraIsolationObserved": true,
+          "normalAttachCloseLeftCoreHealthyThenSeparateOwnerStopped": true
+        },
+        "runResultPaths": [
+          ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/result.json",
+          ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/result.json"
+        ],
+        "captureLabels": [
+          "attach-diagnostic-startup",
+          "attach-diagnostic-a-revision1",
+          "attach-diagnostic-a-mission-revision2",
+          "attach-diagnostic-id-copied",
+          "attach-diagnostic-private-display-cleared",
+          "attach-invalid-b-http401-private-view-stays-hidden",
+          "attach-recovery-startup",
+          "attach-recovery-id-pasted",
+          "attach-recovery-opened-same-session-revision2-local0",
+          "attach-recovery-board-zoom-reference",
+          "attach-recovery-field-focused-f-keeps-zoom",
+          "attach-recovery-panel-wheel-keeps-board-zoom",
+          "attach-recovery-handoff-hidden",
+          "attach-recovery-hidden-click-wheel-f-stays-private",
+          "attach-recovery-b-ready-revision2-own-options-no-a-mission"
+        ],
+        "limits": [
+          "The exact HTTP error is a root-observed UI result. Screenshots alone cannot establish the internal HTTP exchange or hidden camera internals; the matching native controls and source review provide complementary evidence.",
+          "The panel fitted the window: no overflow-scroll claim is made. Text selection proves the observed focus interaction only; no persisted UIA field semantics claim is made.",
+          "No physical RMB/MMB, actual OS switching/teardown, native Linux, clean-host Windows, complete P2 progression or additional unobserved action is accepted by these runs."
+        ]
+      }
+    },
+    "actualObservationSource": {
+      "privatePath": ".local/development/p2b-visible-closeout-draft/actual-observations.json",
+      "bytes": 18293,
+      "sha256": "ff9190a3a486bad113c1f8acd108c365164f61462ade39b8e96d481780dcf00d"
+    }
+  },
+  "resumedPrivateCaptures": [
+    {
+      "label": "managed-startup",
+      "observedUtc": "2026-10-25T03:40:38.309Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/01-managed-startup.png",
+      "bytes": 164943,
+      "sha256": "ef4b9ee805cfbbd867dbb14213ca15d531569ba0dce78e778b264271ae609bd2"
+    },
+    {
+      "label": "managed-a-revision1-options",
+      "observedUtc": "2026-10-25T03:41:02.170Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/02-managed-a-revision1-options.png",
+      "bytes": 248171,
+      "sha256": "9c48c47b504e8ff130d4ef8849a58737d0d7f89f939cc9f7d2bd66c8637c0c16"
+    },
+    {
+      "label": "managed-a-choice-committed",
+      "observedUtc": "2026-10-25T03:41:14.038Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/03-managed-a-choice-committed.png",
+      "bytes": 235517,
+      "sha256": "d74af4a878375195f0a982efd90079c9b7c0b3c3b0e46f95e68e4eeac3e5e042"
+    },
+    {
+      "label": "managed-a-refreshed-before-handoff",
+      "observedUtc": "2026-10-25T03:41:20.121Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/04-managed-a-refreshed-before-handoff.png",
+      "bytes": 235983,
+      "sha256": "d600682a1093f8cf6aba7a2d510f97ce65a056d90060f6be900fee8eb1da25f9"
+    },
+    {
+      "label": "managed-handoff-to-b-hidden",
+      "observedUtc": "2026-10-25T03:41:26.044Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/05-managed-handoff-to-b-hidden.png",
+      "bytes": 165737,
+      "sha256": "55323df3a780f93c31a7df73b5915bf1a7f7da211d58bdaadb472c0e02f25ae1"
+    },
+    {
+      "label": "managed-b-revision2-own-options",
+      "observedUtc": "2026-10-25T03:41:39.276Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/06-managed-b-revision2-own-options.png",
+      "bytes": 243007,
+      "sha256": "4f2dbad3cdcc24d75104d52770d9a76e258dc470cbaacea08b7cb3a7fc6a7d39"
+    },
+    {
+      "label": "managed-b-tactical-committed-revision3",
+      "observedUtc": "2026-10-25T03:41:52.867Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/07-managed-b-tactical-committed-revision3.png",
+      "bytes": 234546,
+      "sha256": "2e6ffdd0e3a9ed49687775ab988b639e642962002f98c18fbfcaae63b4c56b00"
+    },
+    {
+      "label": "managed-b-refreshed",
+      "observedUtc": "2026-10-25T03:41:59.326Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/08-managed-b-refreshed.png",
+      "bytes": 234450,
+      "sha256": "dda9f43779aec5648e30f8ae61d66387320634392dfd6e735e2078ec5a7488a2"
+    },
+    {
+      "label": "managed-handoff-back-to-a-hidden",
+      "observedUtc": "2026-10-25T03:42:08.866Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/09-managed-handoff-back-to-a-hidden.png",
+      "bytes": 165688,
+      "sha256": "d568298b4576ef8cc48295f24544ff039e85a2cf1dfade2d1267b99fbc316bb0"
+    },
+    {
+      "label": "managed-a-return-revision3-own-mission-local0",
+      "observedUtc": "2026-10-25T03:42:23.983Z",
+      "criterionIds": [
+        "P2B-V1"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/10-managed-a-return-revision3-own-mission-local0.png",
+      "bytes": 245509,
+      "sha256": "e8b72b6c4150878792ca19b1d29a51de3494b1d65b7b5b02355e67ce2fa27535"
+    },
+    {
+      "label": "attach-diagnostic-startup",
+      "observedUtc": "2026-10-25T03:43:17.609Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/gui/01-attach-diagnostic-startup.png",
+      "bytes": 165053,
+      "sha256": "55fbef99c7dcc3af0ab675e1204cf8333d6b57b4f2fe430b4c6d0d3474ed5cc4"
+    },
+    {
+      "label": "attach-diagnostic-a-revision1",
+      "observedUtc": "2026-10-25T03:43:34.889Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/gui/02-attach-diagnostic-a-revision1.png",
+      "bytes": 248207,
+      "sha256": "4c42915a1acd1cc9eeca01632bbe642a40395b3cd3e3d17662c1f8c17a2be828"
+    },
+    {
+      "label": "attach-diagnostic-a-mission-revision2",
+      "observedUtc": "2026-10-25T03:43:51.273Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/gui/03-attach-diagnostic-a-mission-revision2.png",
+      "bytes": 235272,
+      "sha256": "c70952c303ff1feec47fc543ff59717a57abffda5c62950392115c231693e724"
+    },
+    {
+      "label": "attach-diagnostic-id-copied",
+      "observedUtc": "2026-10-25T03:44:07.277Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/gui/04-attach-diagnostic-id-copied.png",
+      "bytes": 237160,
+      "sha256": "2c738ba4c1ce6047bfe3e28795c502f5a64f403ad55b51e483470a23c9a8f011"
+    },
+    {
+      "label": "attach-diagnostic-private-display-cleared",
+      "observedUtc": "2026-10-25T03:44:16.577Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/gui/05-attach-diagnostic-private-display-cleared.png",
+      "bytes": 165504,
+      "sha256": "41c1017b2ca90b0e8d033f2243bfce45fd36035be22e999aa517679f16a514c7"
+    },
+    {
+      "label": "attach-invalid-b-http401-private-view-stays-hidden",
+      "observedUtc": "2026-10-25T03:44:30.521Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/gui/06-attach-invalid-b-http401-private-view-stays-hidden.png",
+      "bytes": 166905,
+      "sha256": "ad215b66505b3f655b6f03224cc960895e34901334d31875c53fbdc85fbebcfe"
+    },
+    {
+      "label": "attach-recovery-startup",
+      "observedUtc": "2026-10-25T03:45:03.208Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/01-attach-recovery-startup.png",
+      "bytes": 165123,
+      "sha256": "004243c382fdd3789f55e89d0bb893d7706eb54586193c5c19833325d37f6860"
+    },
+    {
+      "label": "attach-recovery-id-pasted",
+      "observedUtc": "2026-10-25T03:45:10.223Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/02-attach-recovery-id-pasted.png",
+      "bytes": 168933,
+      "sha256": "7e5940aad5828b12b01e1c27e3c080431009b0b4cfcdb9bdd6da253025d7f79f"
+    },
+    {
+      "label": "attach-recovery-opened-same-session-revision2-local0",
+      "observedUtc": "2026-10-25T03:45:35.290Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/03-attach-recovery-opened-same-session-revision2-local0.png",
+      "bytes": 228401,
+      "sha256": "1d55658a4746b090bcd67d72e57bb16cc6464d8cb308ee3e9de3dbfff9632858"
+    },
+    {
+      "label": "attach-recovery-board-zoom-reference",
+      "observedUtc": "2026-10-25T03:45:43.639Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/04-attach-recovery-board-zoom-reference.png",
+      "bytes": 250757,
+      "sha256": "cc3e0208ca12b95bc58f0413754d7c6fbbbbabba6bcfb289b86ade163db80941"
+    },
+    {
+      "label": "attach-recovery-field-focused-f-keeps-zoom",
+      "observedUtc": "2026-10-25T03:46:06.827Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/05-attach-recovery-field-focused-f-keeps-zoom.png",
+      "bytes": 253120,
+      "sha256": "b45d985905e984bc514a504fa9349fff67456855b69909284910733993dcdd27"
+    },
+    {
+      "label": "attach-recovery-panel-wheel-keeps-board-zoom",
+      "observedUtc": "2026-10-25T03:46:15.022Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/06-attach-recovery-panel-wheel-keeps-board-zoom.png",
+      "bytes": 253528,
+      "sha256": "7ffc19e6860b20478bc5e92f78cc9cb6daceae018842d3738919e8137ba35cab"
+    },
+    {
+      "label": "attach-recovery-handoff-hidden",
+      "observedUtc": "2026-10-25T03:46:24.393Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/07-attach-recovery-handoff-hidden.png",
+      "bytes": 165709,
+      "sha256": "878ae0e8437322c3c7c423ef590382c08b3670df14e2429a3f9f34b64f8d39e9"
+    },
+    {
+      "label": "attach-recovery-hidden-click-wheel-f-stays-private",
+      "observedUtc": "2026-10-25T03:46:46.661Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/08-attach-recovery-hidden-click-wheel-f-stays-private.png",
+      "bytes": 166065,
+      "sha256": "6d44f58a431823c9181d4c0428aabdf79a48e28418f0a901e470f3934ab87d12"
+    },
+    {
+      "label": "attach-recovery-b-ready-revision2-own-options-no-a-mission",
+      "observedUtc": "2026-10-25T03:47:02.351Z",
+      "criterionIds": [
+        "P2B-V2"
+      ],
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/09-attach-recovery-b-ready-revision2-own-options-no-a-mission.png",
+      "bytes": 243075,
+      "sha256": "a7eb665434101601b7df1b340a91e8e67cf39adf37583d8abc79db0727646c1c"
+    }
+  ],
+  "resumedAdditionalEvidence": [
+    {
+      "privatePath": ".local/development/p2b-visible-20261025T033944Z-e1e87a4f2e6442edbb59884576bf41b6/gui/captures.json",
+      "bytes": 2491,
+      "sha256": "3e3b5857f8749f7ec6f281c0bfa9a17f691e64b5625900a9a5e3ffd7098c1d69"
+    },
+    {
+      "privatePath": ".local/development/p2b-visible-20261025T034251Z-783f84b4b6b84e3db0e9fa2d76546159/gui/captures.json",
+      "bytes": 1561,
+      "sha256": "ca38366417bf560121b0fc6854b9b88454e4b9a07acc844228935684d5934e54"
+    },
+    {
+      "privatePath": ".local/development/p2b-visible-20261025T034439Z-bfc607ad697a42eb9eac5fea157c4ee9/gui/captures.json",
+      "bytes": 2433,
+      "sha256": "e06481a7cb3f64626c20542da408d54d0427a4bbdb0ba3eba20bee503a61fcf5"
+    },
+    {
+      "privatePath": ".local/development/core-host/20261025T033946Z-38015edcc33a407c87fb1eb1d3051762/receipt.json",
+      "bytes": 2359,
+      "sha256": "9be6e3f40bfce10433392711a3c0d869e78a92bd6873273d74e161dfad1137a1"
+    },
+    {
+      "privatePath": ".local/development/core-host/20261025T034235Z-dc3efabb2bcc4f46b08c372a8524235f/receipt.json",
+      "bytes": 2360,
+      "sha256": "9d981a90e4cc3c3a7be51a1237831f6ba2f8adaff93236f8ea82898f001d02be"
+    },
+    {
+      "privatePath": ".local/development/p2b-visible-outer-core-stop.json",
+      "bytes": 242,
+      "sha256": "2c9b6980fa773dda7039157253f751e660a820941bff89f040aca2bce4c88ede"
+    },
+    {
+      "privatePath": ".local/development/p2b-visible-final-process-check.json",
+      "bytes": 120,
+      "sha256": "32470d30468af24fcb86c42025ddfbb1a2097d72c2c1d7d091a4e71532d37bcf"
+    }
+  ],
+  "resumedFinalCleanup": {
+    "separateCoreOwnerStop": {
+      "status": "STOPPED",
+      "owned": true,
+      "forcedTermination": false,
+      "rawResult": {
+        "privatePath": ".local/development/p2b-visible-outer-core-stop.json",
+        "bytes": 242,
+        "sha256": "2c9b6980fa773dda7039157253f751e660a820941bff89f040aca2bce4c88ede"
+      }
+    },
+    "noTestedGameWindowsRemain": true,
+    "limit": "Normal run/host cleanup is combined with explicit coordinator observations; process exit alone does not establish GUI behavior."
+  },
+  "ownedCoreCleanupAppliesToHistoricalBlockedAttempt": true
 }

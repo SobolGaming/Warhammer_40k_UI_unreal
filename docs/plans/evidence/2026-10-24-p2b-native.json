@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "milestone": "P2b local two-player handoff",
   "recordedUtc": "2026-10-24T23:53:59.565254+00:00",
-  "status": "RUNTIME_NATIVE_AND_SCOPED_SOURCE_PASS_VISIBLE_BLOCKED",
+  "status": "RUNTIME_NATIVE_AND_SCOPED_SOURCE_PASS_VISIBLE_ACCEPTED_SEPARATELY",
   "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
   "core": {
     "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
@@ -734,8 +734,8 @@
     ]
   },
   "manualCriteria": {
-    "P2B-V1": "BLOCKED_LOCKED_DESKTOP_NO_GAME_INPUT",
-    "P2B-V2": "NOT_RUN"
+    "P2B-V1": "PASS_SEPARATE_VISIBLE_RECORD",
+    "P2B-V2": "PASS_SEPARATE_VISIBLE_RECORD"
   },
   "limits": [
     "Two existing development players and one selected local session only; no new principals/listing/remote/spectator/general editors/durability.",
@@ -744,10 +744,11 @@
   ],
   "runtimeSourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
   "launcherHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
-  "sourceBinding": "Built/native-tested C++ and Config remain exactly a6dbb1c. Later a1d9013 changes only launcher credential regex/test and one architecture sentence;12 credential controls and two fresh scoped SOURCE delta roles pass at document checkpoint71a6389. Required visible acceptance remains separate and blocked by the locked desktop.",
+  "sourceBinding": "Built/native-tested C++ and Config remain exactly a6dbb1c. Later a1d9013 changes only launcher credential regex/test and one architecture sentence;12 credential controls and two fresh scoped SOURCE delta roles pass at document checkpoint71a6389. P2B-V1/V2 passed separately in the recorded visible runs at launch checkpointf8470c3; this native record does not substitute for those observations.",
   "launcherCredentialDeltaControls": {
     "cases": 12,
     "status": "PASS_SYNTHETIC_CREDENTIAL_FUNCTION_ONLY",
     "privatePath": ".local/development/p2b-credential-lf-controls.json"
-  }
+  },
+  "visibleEvidence": "2026-10-24-p2b-visible.json"
 }

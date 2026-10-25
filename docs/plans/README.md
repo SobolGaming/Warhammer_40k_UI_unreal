@@ -8,7 +8,7 @@ P2b supporting evidence:
 
 - [Native/launcher results](evidence/2026-10-24-p2b-native.json): Windows Development package,19 Unit,4 resources and3 real workflows in each Managed/Attach mode passed;29 executions/26 distinct names. Initial fixture failure and its repair remain recorded.
 - [Independent SOURCE reviews](evidence/2026-10-24-p2b-source-reviews.json): full finite CODE/REQ PASS at runtime source a6dbb1c, then separate fresh delta roles PASS for the launcher/documentation repair at71a6389; no GUI acceptance inferred.
-- [Visible attempt](evidence/2026-10-24-p2b-visible.md), [machine-readable results](evidence/2026-10-24-p2b-visible.json): Windows lock screen prevented game interaction. P2B-V1 BLOCKED, P2B-V2 NOT_RUN; owned game cleanup and normal owned-Core stop are recorded. PR #8 remains draft pending these explicit manual criteria.
+- [Visible handoff and recovery](evidence/2026-10-24-p2b-visible.md), [machine-readable results](evidence/2026-10-24-p2b-visible.json): P2B-V1/V2 passed on 2026-10-25 UTC in three sequential packaged launches. Both player choices committed through Core; handoffs cleared the outgoing view, the invalid-B read showed actual HTTP401 while staying private, and a fresh ordinary Attach client recovered the same session. Field/panel input isolation and normal ownership cleanup were observed, with25 private captures retained. The initial sandbox/locked-desktop attempts remain preserved. PR #8 is ready for review, unmerged.
 
 P2a supporting evidence:
 
