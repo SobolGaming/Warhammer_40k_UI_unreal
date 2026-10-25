@@ -21,6 +21,25 @@ $expectedBuild = $runtimeProfile.build
 if (!$CoreRoot) { $CoreRoot = $runtimeProfile.sourceRoot }
 $utf8 = [Text.UTF8Encoding]::new($false, $true)
 
+function Initialize-DevelopmentCredentials([string]$Registry) {
+    # Resolve each development principal independently, then validate all values
+    # before changing the caller's environment. No value enters command lines or receipts.
+    $credentials = @{}
+    foreach ($entry in @(@('WH_CORE_ADMIN_TOKEN', 'DEV_ADMIN_TOKEN'), @('WH_CORE_PLAYER_TOKEN', 'DEV_PLAYER_A_TOKEN'), @('WH_CORE_PLAYER_B_TOKEN', 'DEV_PLAYER_B_TOKEN'))) {
+        $value = [Environment]::GetEnvironmentVariable($entry[0], 'Process')
+        if ([string]::IsNullOrWhiteSpace($value)) {
+            $credentialMatches = [regex]::Matches($Registry, ('(?m)^' + $entry[1] + ' = "([^"\\\r\n]+)"\r?$'))
+            if ($credentialMatches.Count -ne 1) { throw 'Pinned development credential declaration was not found in the expected form.' }
+            $value = $credentialMatches[0].Groups[1].Value
+        }
+        if ($value.Length -gt 256 -or $value -cnotmatch '\A[A-Za-z0-9._~+/\-]+=*\z') {
+            throw ($entry[0] + ' must contain a valid bearer token of at most 256 ASCII characters; its value is not displayed.')
+        }
+        $credentials[$entry[0]] = $value
+    }
+    foreach ($name in $credentials.Keys) { [Environment]::SetEnvironmentVariable($name, $credentials[$name], 'Process') }
+}
+
 function Resolve-CoreEndpoint([uri]$Requested, [string]$RequestedMode, [int]$RequestedPort) {
     if (!$Requested) { $Requested = [uri]("http://127.0.0.1:$RequestedPort/") }
     # OriginalString rejects URI normalization of alternative hosts, escaped paths
@@ -144,22 +163,10 @@ if ($LASTEXITCODE -ne 0 -or $head.Count -ne 1 -or $head[0] -cne $expectedCommit)
 $changes = @(& $git @gitOptions status --porcelain=v1 --untracked-files=normal 2>&1)
 if ($LASTEXITCODE -ne 0 -or $changes.Count) { throw 'Core checkout must be clean; this helper never resets or changes it.' }
 
-# Read only the two named simple literals from this pinned development registry.
+# Read only the three named simple literals from this pinned development registry.
 # They stay in process environment/memory, never in a receipt or command line.
 $registry = [IO.File]::ReadAllText((Join-Path $CoreRoot 'src/warhammer40k_core/adapters/access_control.py'))
-foreach ($entry in @(@('WH_CORE_ADMIN_TOKEN', 'DEV_ADMIN_TOKEN'), @('WH_CORE_PLAYER_TOKEN', 'DEV_PLAYER_A_TOKEN'))) {
-    if ([string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($entry[0], 'Process'))) {
-        $credentialMatches = [regex]::Matches($registry, ('(?m)^' + $entry[1] + ' = "([^"\\\r\n]+)"\r?$'))
-        if ($credentialMatches.Count -ne 1) { throw 'Pinned development credential declaration was not found in the expected form.' }
-        [Environment]::SetEnvironmentVariable($entry[0], $credentialMatches[0].Groups[1].Value, 'Process')
-    }
-}
-foreach ($credentialName in @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN')) {
-    $credentialValue = [Environment]::GetEnvironmentVariable($credentialName, 'Process')
-    if ($credentialValue.Length -gt 256 -or $credentialValue -cnotmatch '^[A-Za-z0-9._~+/\-]+=*$') {
-        throw ($credentialName + ' must contain a valid bearer token of at most 256 ASCII characters; its value is not displayed.')
-    }
-}
+Initialize-DevelopmentCredentials $registry
 $env:WH_CORE_BASE_URL = $Endpoint.AbsoluteUri.TrimEnd('/')
 [IO.Directory]::CreateDirectory($hostRoot) | Out-Null
 $controlLock = [IO.File]::Open((Join-Path $hostRoot 'control.lock'), [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)

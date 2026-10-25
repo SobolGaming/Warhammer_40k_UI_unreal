@@ -81,10 +81,15 @@ bool Identity(const TSharedPtr<FJsonObject>& O)
     return IsString(O, TEXT("schema_version"), TEXT("session-metadata-v44-contract")) &&
         IsString(O, TEXT("engine_build_id"), CoreBuild) && IsString(O, TEXT("server_contract_version"), Contract);
 }
-bool Scope(const TSharedPtr<FJsonObject>& Visibility, bool bAdministrator)
+bool KnownPlayer(const FString& Player)
+{
+    return Exact(Player, TEXT("player-a")) || Exact(Player, TEXT("player-b"));
+}
+bool Scope(const TSharedPtr<FJsonObject>& Visibility, bool bAdministrator, const FString& ExpectedPlayer = TEXT("player-a"))
 {
     return bAdministrator ? IsString(Visibility, TEXT("role"), TEXT("administrator")) && Null(Visibility, TEXT("player_id")) :
-        IsString(Visibility, TEXT("role"), TEXT("player")) && IsString(Visibility, TEXT("player_id"), TEXT("player-a"));
+        KnownPlayer(ExpectedPlayer) && IsString(Visibility, TEXT("role"), TEXT("player")) &&
+        IsString(Visibility, TEXT("player_id"), *ExpectedPlayer);
 }
 bool Position(const TSharedPtr<FJsonObject>& O, FVector& Out)
 {
@@ -283,8 +288,10 @@ bool ReadCreatedSession(const FString& Text, FMetadata& OutMetadata, FString& Ou
     OutMetadata = MoveTemp(Candidate); OutError.Reset(); return true;
 }
 
-bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, FMetadata& OutMetadata, FString& OutError)
+bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, FMetadata& OutMetadata, FString& OutError,
+    const FString& ExpectedViewerPlayerId)
 {
+    if (!KnownPlayer(ExpectedViewerPlayerId)) { OutError = TEXT("Unsupported expected player identity."); return false; }
     if (!ValidateSessionId(ExpectedSessionId, OutError)) { return false; }
     TSharedPtr<FJsonObject> O; FMetadata Candidate;
     if (!Parse(Text, O, OutError)) { return false; }
@@ -293,12 +300,12 @@ bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, 
     int64 DelayRevisions;
     if (!Identity(O) || !String(O, TEXT("session_id"), Candidate.SessionId) || !Exact(Candidate.SessionId, ExpectedSessionId) ||
         !String(O, TEXT("game_id"), Candidate.GameId) || !Revision(O, TEXT("session_revision"), Candidate.Revision) ||
-        !Scope(Visibility, false) || !Revision(Visibility, TEXT("delay_revisions"), DelayRevisions) || DelayRevisions != 0 ||
+        !Scope(Visibility, false, ExpectedViewerPlayerId) || !Revision(Visibility, TEXT("delay_revisions"), DelayRevisions) || DelayRevisions != 0 ||
         !Boolean(Visibility, TEXT("may_mutate_lifecycle"), bMayMutateLifecycle) || bMayMutateLifecycle ||
         !Boolean(Visibility, TEXT("may_submit_decision"), bMaySubmitDecision) || !bMaySubmitDecision ||
         !Boolean(Visibility, TEXT("omniscient"), bOmniscient) || bOmniscient)
     {
-        OutError = TEXT("Existing session identity, revision or authenticated player-a scope differs from the selected Core 44.5.0 build.");
+        OutError = TEXT("Existing session identity, revision or expected authenticated player scope differs from the selected Core 44.5.0 build.");
         return false;
     }
     FString Lifecycle;
@@ -314,8 +321,10 @@ bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, 
     OutMetadata = MoveTemp(Candidate); OutError.Reset(); return true;
 }
 
-bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreState& OutState, FString& OutError)
+bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreState& OutState, FString& OutError,
+    const FString& ExpectedViewerPlayerId)
 {
+    if (!KnownPlayer(ExpectedViewerPlayerId)) { OutError = TEXT("Unsupported expected player identity."); return false; }
     TSharedPtr<FJsonObject> O;
     if (!Parse(Text, O, OutError)) { return false; }
     FString ReturnedSession;
@@ -324,15 +333,16 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     if (!IsString(O, TEXT("schema_version"), TEXT("session-projection-v9-random-profiles")) ||
         !String(O, TEXT("session_id"), ReturnedSession) || !Exact(ReturnedSession, SessionId) ||
         !IsString(O, TEXT("visibility_role"), TEXT("player")) || !Revision(O, TEXT("session_revision"), NewRevision) ||
-        NewRevision < OutState.SessionRevision || OutState.ProjectionVersion == MAX_uint64 || !IsString(P, TEXT("viewer_player_id"), TEXT("player-a")) ||
+        NewRevision < OutState.SessionRevision || OutState.ProjectionVersion == MAX_uint64 || !IsString(P, TEXT("viewer_player_id"), *ExpectedViewerPlayerId) ||
         !IsString(P, TEXT("viewer_role"), TEXT("player")))
     {
-        OutError = TEXT("Projection session, revision or authenticated player-a scope mismatch."); return false;
+        OutError = TEXT("Projection session, revision or expected authenticated player scope mismatch."); return false;
     }
     FString OuterHash, InnerHash;
     if (!String(O, TEXT("projection_state_hash"), OuterHash) || !String(P, TEXT("projection_state_hash"), InnerHash) || !Exact(OuterHash, InnerHash))
     { OutError = TEXT("Projection checkpoint hash mismatch."); return false; }
     FLiveCoreState Candidate = OutState;
+    Candidate.ViewerPlayerId = ExpectedViewerPlayerId;
     Candidate.SessionRevision = NewRevision; Candidate.ProjectionRevision = NewRevision;
     Candidate.ProjectionVersion = OutState.ProjectionVersion + 1;
     Candidate.Terrain.Reset(); Candidate.Objectives.Reset(); Candidate.Models.Reset();
@@ -413,7 +423,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
         const auto Choice = V->Type == EJson::Object ? V->AsObject() : nullptr;
         FString Player;
         if (!String(Choice, TEXT("player_id"), Player)) { OutError = TEXT("Invalid scoped mission choice."); return false; }
-        if (!Exact(Player, TEXT("player-a"))) { continue; }
+        if (!Exact(Player, ExpectedViewerPlayerId)) { continue; }
         bool Hidden = true; FString Mode;
         const TArray<TSharedPtr<FJsonValue>>* Missions = nullptr;
         if (!Boolean(Choice, TEXT("hidden"), Hidden) || Hidden || !String(Choice, TEXT("mode"), Mode) || !Array(Choice, TEXT("fixed_mission_ids"), Missions))
@@ -441,7 +451,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
             if (!String(Pending, TEXT("request_id"), Candidate.RequestId) || (!bHasActor && !Null(Pending, TEXT("actor_id"))) || !Boolean(Pending, TEXT("is_parameterized"), Parameterized))
             { OutError = TEXT("Incomplete offered DecisionRequest."); return false; }
             if (!bHasActor) { Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::UnsupportedActor; }
-            else if (!Exact(Actor, TEXT("player-a"))) { Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::OtherActor; }
+            else if (!Exact(Actor, ExpectedViewerPlayerId)) { Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::OtherActor; }
             else if (Parameterized) { Candidate.DecisionPresentation = ELiveCoreDecisionPresentation::ParameterizedUnsupported; }
             else
             {
@@ -479,8 +489,10 @@ void InvalidateProjectionPresentation(FLiveCoreState& State)
 }
 
 bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId, const FString& SessionId,
-    int64 ExpectedRevision, bool bAdministrator, const FString& Operation, FOutcome& OutOutcome, FString& OutError)
+    int64 ExpectedRevision, bool bAdministrator, const FString& Operation, FOutcome& OutOutcome, FString& OutError,
+    const FString& ExpectedViewerPlayerId)
 {
+    if (!KnownPlayer(ExpectedViewerPlayerId)) { OutError = TEXT("Unsupported expected player identity."); return false; }
     E01::FOutcome Parsed; E01::FReadError Error;
     if (!E01::ReadOutcome(HttpStatus, Text, Parsed, Error)) { OutError = TEXT("Unusable command receipt: ") + Error.Code; return false; }
     FOutcome Candidate; Candidate.bError = !Parsed.bCommandOutcome; Candidate.bRequiresReconciliation = Candidate.bError;
@@ -492,7 +504,7 @@ bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId
         FString ActualSession, ActualOperation;
         if (!Exact(Parsed.CommandId, CommandId) || !String(Metadata, TEXT("session_id"), ActualSession) || !Exact(ActualSession, SessionId) ||
             !String(Parsed.Json, TEXT("operation"), ActualOperation) || !Exact(ActualOperation, Operation) || !Identity(Metadata) ||
-            !Scope(Object(Metadata, TEXT("visibility")), bAdministrator) || !Parsed.SessionRevision.IsSet() ||
+            !Scope(Object(Metadata, TEXT("visibility")), bAdministrator, ExpectedViewerPlayerId) || !Parsed.SessionRevision.IsSet() ||
             ExpectedRevision >= E01::MaximumExactRevision || Parsed.SessionRevision.GetValue() != ExpectedRevision + (Parsed.bCommitted ? 1 : 0))
         { OutError = TEXT("Command receipt identity, viewer, Core build or revision does not match the retained command."); return false; }
         Candidate.bAccepted = Parsed.bAccepted; Candidate.bCommitted = Parsed.bCommitted; Candidate.Revision = Parsed.SessionRevision.GetValue();
@@ -568,7 +580,20 @@ FString MakeFiniteCommand(const FString& SessionId, const FString& CommandId, in
 TSharedRef<FLiveCoreSession> FLiveCoreSession::Create() { return MakeShared<FLiveCoreSession>(); }
 FLiveCoreSession::~FLiveCoreSession() { Shutdown(); }
 void FLiveCoreSession::Changed() { check(IsInGameThread()); OnChanged.ExecuteIfBound(); }
-void FLiveCoreSession::Fail(const FString& Message) { State.bBusy = false; State.Error = Message; State.Status = TEXT("Core operation stopped."); Changed(); }
+void FLiveCoreSession::Fail(const FString& Message)
+{
+    // A failed handoff read must not publish even partially validated next-viewer
+    // metadata, or resurrect any previous viewer snapshot. Ready remains retryable.
+    if (State.bHandoffPending)
+    {
+        const FString Target = State.HandoffTargetPlayerId;
+        const int32 Status = State.LastHttpStatus;
+        State = FLiveCoreState(); State.ViewerPlayerId.Reset();
+        State.bHandoffPending = true; State.HandoffTargetPlayerId = Target; State.LastHttpStatus = Status;
+        PlayerToken.Reset(); AdministratorToken.Reset();
+    }
+    State.bBusy = false; State.Error = Message; State.Status = TEXT("Core operation stopped."); Changed();
+}
 void FLiveCoreSession::MarkUnknown(const FString& Message, bool bCreation)
 {
     State.bBusy = false; State.bUnknown = true; State.bCanReconcile = !bCreation && PendingCommand.IsSet();
@@ -581,7 +606,7 @@ void FLiveCoreSession::InitializeEndpoint(const FString& Endpoint)
 {
     check(IsInGameThread()); if (bStopped) { return; }
     FString Valid, Error;
-    if (State.bBusy || State.bUnknown) { return; }
+    if (State.bBusy || State.bUnknown || State.bHandoffPending) { return; }
     if (State.bHasSession && !Exact(Endpoint, State.Endpoint))
     { Fail(TEXT("Finish or reconcile the current session before changing its endpoint.")); return; }
     if (!LiveCoreProtocol::ValidateEndpoint(Endpoint, Valid, Error)) { Fail(Error); return; }
@@ -590,7 +615,7 @@ void FLiveCoreSession::InitializeEndpoint(const FString& Endpoint)
 void FLiveCoreSession::CreateAndStart(const FString& Endpoint)
 {
     check(IsInGameThread());
-    if (bStopped || State.bBusy || State.bUnknown || State.bHasSession) { return; }
+    if (bStopped || State.bBusy || State.bUnknown || State.bHasSession || State.bHandoffPending) { return; }
     FString Valid, Error;
     if (!LiveCoreProtocol::ValidateEndpoint(Endpoint, Valid, Error)) { Fail(Error); return; }
     InitializeEndpoint(Valid); NewSession();
@@ -598,20 +623,55 @@ void FLiveCoreSession::CreateAndStart(const FString& Endpoint)
 void FLiveCoreSession::OpenExistingSession(const FString& Endpoint, const FString& SessionId)
 {
     check(IsInGameThread());
-    if (bStopped || State.bBusy || State.bUnknown || State.bHasSession || PendingCommand.IsSet()) { return; }
+    if (bStopped || State.bBusy || State.bUnknown || State.bHasSession || State.bHandoffPending || PendingCommand.IsSet()) { return; }
     FString Valid, Error;
     // Validate both inputs before reading credentials or touching the prior endpoint.
     if (!LiveCoreProtocol::ValidateEndpoint(Endpoint, Valid, Error) || !LiveCoreProtocol::ValidateSessionId(SessionId, Error))
     { Fail(Error); return; }
-    const FString Player = FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN"));
+    OpenPlayerSession(Valid, SessionId, TEXT("player-a"));
+}
+bool FLiveCoreSession::CanBeginPlayerHandoff() const
+{
+    check(IsInGameThread());
+    return !bStopped && !State.bBusy && !State.bUnknown && !State.bHandoffPending && State.bHasSession &&
+        State.ProjectionVersion > 0 && State.ProjectionRevision >= 0 && KnownPlayer(State.ViewerPlayerId) &&
+        State.ViewerPlayerId == ExpectedViewerPlayerId && !PendingCommand.IsSet() && !ActiveRequest.IsValid();
+}
+bool FLiveCoreSession::BeginPlayerHandoff()
+{
+    check(IsInGameThread());
+    if (!CanBeginPlayerHandoff()) { return false; }
+    HandoffEndpoint = State.Endpoint; HandoffSessionId = State.SessionId; HandoffMinimumRevision = State.SessionRevision;
+    const FString Target = Exact(State.ViewerPlayerId, TEXT("player-a")) ? TEXT("player-b") : TEXT("player-a");
+    ++Generation;
+    State = FLiveCoreState(); State.ViewerPlayerId.Reset();
+    State.bHandoffPending = true; State.HandoffTargetPlayerId = Target;
+    State.Status = TEXT("Private display cleared. Pass the computer to ") + Target + TEXT("; select Ready to show that player's state.");
+    AdministratorToken.Reset(); PlayerToken.Reset(); CreatingGameId.Reset();
+    ExpectedViewerPlayerId = Target;
+    Changed(); return true;
+}
+void FLiveCoreSession::ContinuePlayerHandoff()
+{
+    check(IsInGameThread());
+    if (bStopped || !State.bHandoffPending || State.bBusy || State.bUnknown || PendingCommand.IsSet() || ActiveRequest.IsValid()) { return; }
+    OpenPlayerSession(HandoffEndpoint, HandoffSessionId, State.HandoffTargetPlayerId);
+}
+void FLiveCoreSession::OpenPlayerSession(const FString& Endpoint, const FString& SessionId, const FString& ViewerPlayerId)
+{
+    if (!KnownPlayer(ViewerPlayerId)) { Fail(TEXT("Unsupported handoff player identity.")); return; }
+    const TCHAR* Variable = Exact(ViewerPlayerId, TEXT("player-a")) ? TEXT("WH_CORE_PLAYER_TOKEN") : TEXT("WH_CORE_PLAYER_B_TOKEN");
+    const FString Player = FPlatformMisc::GetEnvironmentVariable(Variable);
     if (!CredentialValid(Player))
-    { Fail(TEXT("Set WH_CORE_PLAYER_TOKEN for the approved development registry before opening a session. Its value is never logged.")); return; }
+    { Fail(FString(TEXT("Set ")) + Variable + TEXT(" for the approved development registry before opening a session. Its value is never logged.")); return; }
     // No administrator credential or catalog/start operation is needed for these reads.
-    PlayerToken = Player; AdministratorToken.Reset();
-    State = FLiveCoreState(); State.Endpoint = Valid; PendingCommand.Reset(); CreatingGameId.Reset();
-    State.Status = TEXT("Reading the existing active session as player-a…");
+    const bool bHandoff = State.bHandoffPending;
+    PlayerToken = Player; AdministratorToken.Reset(); ExpectedViewerPlayerId = ViewerPlayerId;
+    if (!bHandoff) { State = FLiveCoreState(); State.Endpoint = Endpoint; HandoffMinimumRevision = -1; }
+    PendingCommand.Reset(); CreatingGameId.Reset();
+    State.Status = TEXT("Reading the existing active session as ") + ViewerPlayerId + TEXT("…");
     const TWeakPtr<FLiveCoreSession> Weak = AsShared();
-    Request(TEXT("GET"), TEXT("/sessions/") + SessionId, ECredential::PlayerA, FString(), false,
+    Request(TEXT("GET"), TEXT("/sessions/") + SessionId, ECredential::Player, FString(), false,
         [Weak, SessionId](int32 Status, const FString& Text)
         {
             if (const auto Self = Weak.Pin()) { Self->HandleExistingReply(Status, Text, SessionId); }
@@ -629,9 +689,14 @@ void FLiveCoreSession::HandleExistingReply(int32 Status, const FString& Response
         return;
     }
     LiveCoreProtocol::FMetadata Metadata; FString Error;
-    if (!LiveCoreProtocol::ReadExistingSession(Response, ExpectedSessionId, Metadata, Error)) { Fail(Error); return; }
-    State.SessionId = Metadata.SessionId; State.SessionRevision = Metadata.Revision; State.bHasSession = true;
-    State.Status = TEXT("Existing session verified. Reading its current player-a projection…");
+    if (!LiveCoreProtocol::ReadExistingSession(Response, ExpectedSessionId, Metadata, Error, ExpectedViewerPlayerId)) { Fail(Error); return; }
+    if (State.bHandoffPending)
+    {
+        if (Metadata.Revision < HandoffMinimumRevision) { Fail(TEXT("Handoff metadata regressed the last verified session revision.")); return; }
+        HandoffMinimumRevision = Metadata.Revision;
+    }
+    else { State.SessionId = Metadata.SessionId; State.SessionRevision = Metadata.Revision; State.bHasSession = true; }
+    State.Status = TEXT("Existing session verified. Reading the expected player's current projection…");
     // The service may advance between the two reads. ReadProjection accepts only
     // a matching session/viewer at this metadata revision or a later revision.
     FetchProjection();
@@ -640,7 +705,7 @@ void FLiveCoreSession::HandleExistingReply(int32 Status, const FString& Response
 void FLiveCoreSession::NewSession()
 {
     check(IsInGameThread()); if (bStopped) { return; }
-    if (State.bBusy || State.bUnknown) { return; }
+    if (State.bBusy || State.bUnknown || State.bHandoffPending) { return; }
     if (State.bHasSession) { Fail(TEXT("This client already owns an attached session. It will not silently replace or recreate it.")); return; }
     FString Valid, Error;
     if (!LiveCoreProtocol::ValidateEndpoint(State.Endpoint, Valid, Error)) { Fail(Error); return; }
@@ -649,7 +714,7 @@ void FLiveCoreSession::NewSession()
     if (!CredentialValid(Admin) || !CredentialValid(Player))
     { Fail(TEXT("Set WH_CORE_ADMIN_TOKEN and WH_CORE_PLAYER_TOKEN for the approved development registry before starting the client. Values are never logged.")); return; }
     // Preserve exact credentials in memory for this session and any same-command reconciliation.
-    AdministratorToken = Admin; PlayerToken = Player;
+    AdministratorToken = Admin; PlayerToken = Player; ExpectedViewerPlayerId = TEXT("player-a");
     State = FLiveCoreState(); State.Endpoint = Valid; PendingCommand.Reset(); CreatingGameId.Reset();
     State.Status = TEXT("Checking the existing loopback Core service…");
     const TWeakPtr<FLiveCoreSession> Weak = AsShared();
@@ -682,7 +747,7 @@ void FLiveCoreSession::Request(const FString& Verb, const FString& Path, ECreden
     const FString& Token = Credential == ECredential::Administrator ? AdministratorToken : PlayerToken;
     if (!CredentialValid(Token)) { Fail(TEXT("The required development credential is unavailable.")); return; }
     auto Http = FHttpModule::Get().CreateRequest();
-    Http->SetURL(State.Endpoint + Path); Http->SetVerb(Verb); Http->SetHeader(TEXT("Accept"), TEXT("application/json"));
+    Http->SetURL((State.bHandoffPending ? HandoffEndpoint : State.Endpoint) + Path); Http->SetVerb(Verb); Http->SetHeader(TEXT("Accept"), TEXT("application/json"));
     Http->SetHeader(TEXT("Authorization"), TEXT("Bearer ") + Token);
     if (!Body.IsEmpty()) { Http->SetHeader(TEXT("Content-Type"), TEXT("application/json")); Http->SetContentAsString(Body); }
     Http->SetTimeout(bMutation ? 120.0f : 30.0f);
@@ -693,7 +758,7 @@ void FLiveCoreSession::Request(const FString& Verb, const FString& Path, ECreden
         (FHttpRequestPtr CompletedRequest, FHttpResponsePtr Response, bool bSucceeded) mutable
         {
             const auto Self = Weak.Pin();
-            if (!Self.IsValid() || Self->bStopped || Self->Generation != ExpectedGeneration || Self->ActiveRequest != CompletedRequest) { return; }
+            if (!Self.IsValid() || !Self->IsCurrentReply(ExpectedGeneration, CompletedRequest)) { return; }
             check(IsInGameThread()); Self->ActiveRequest.Reset(); Self->State.bBusy = false;
             Self->State.LastHttpStatus = Response.IsValid() ? Response->GetResponseCode() : 0;
             FString Text;
@@ -716,6 +781,10 @@ void FLiveCoreSession::Request(const FString& Verb, const FString& Path, ECreden
         if (bMutation) { MarkUnknown(TEXT("Core submission could not complete. Its outcome is UNKNOWN."), !PendingCommand.IsSet()); }
         else { Fail(TEXT("Could not send the Core HTTP request. Check the loopback service.")); }
     }
+}
+bool FLiveCoreSession::IsCurrentReply(uint64 ExpectedGeneration, const TSharedPtr<IHttpRequest, ESPMode::ThreadSafe>& Request) const
+{
+    return !bStopped && Request.IsValid() && Generation == ExpectedGeneration && ActiveRequest == Request;
 }
 void FLiveCoreSession::CreateCanonicalSession()
 {
@@ -765,6 +834,7 @@ void FLiveCoreSession::SelectOfferedOption(const FString& OptionId)
     if (State.SessionRevision < 0 || State.SessionRevision >= E01::MaximumExactRevision) { Fail(TEXT("Session revision cannot be represented safely.")); return; }
     FPendingCommand Command; Command.Id = TEXT("unreal-choice-") + FGuid::NewGuid().ToString(EGuidFormats::Digits);
     Command.ExpectedRevision = State.SessionRevision; Command.Operation = TEXT("submit_finite_decision"); Command.bFiniteAction = true;
+    Command.ViewerPlayerId = ExpectedViewerPlayerId;
     Command.Body = LiveCoreProtocol::MakeFiniteCommand(State.SessionId, Command.Id, State.SessionRevision, State.RequestId, OptionId);
     PendingCommand = MoveTemp(Command); LiveCoreProtocol::InvalidateProjectionPresentation(State); State.Error.Reset(); State.RecordedCommandError.Reset(); State.bLastCommandHasOutcome = false;
     SendPendingCommand();
@@ -782,7 +852,7 @@ void FLiveCoreSession::SendPendingCommand()
             {
                 LiveCoreProtocol::FOutcome Outcome; FString Error;
                 if (!LiveCoreProtocol::ReadOutcome(Text, Status, Retained.Id, Self->State.SessionId, Retained.ExpectedRevision,
-                    Retained.Credential == ECredential::Administrator, Retained.Operation, Outcome, Error))
+                    Retained.Credential == ECredential::Administrator, Retained.Operation, Outcome, Error, Retained.ViewerPlayerId))
                 { Self->MarkUnknown(ErrorText(Status, TEXT("unusable_receipt"), Error), false); return; }
                 if (Outcome.bError)
                 {
@@ -803,26 +873,39 @@ void FLiveCoreSession::FetchProjection()
     // No old offered action or roster disclosure survives a pending/failed refresh.
     LiveCoreProtocol::InvalidateProjectionPresentation(State);
     const TWeakPtr<FLiveCoreSession> Weak = AsShared();
-    Request(TEXT("GET"), TEXT("/sessions/") + State.SessionId + TEXT("/projection"), ECredential::PlayerA, FString(), false,
+    Request(TEXT("GET"), TEXT("/sessions/") + (State.bHandoffPending ? HandoffSessionId : State.SessionId) + TEXT("/projection"), ECredential::Player, FString(), false,
         [Weak](int32 Status, const FString& Text)
         {
-            if (const auto Self = Weak.Pin())
-            {
-                if (Status != 200)
-                {
-                    LiveCoreProtocol::FOutcome Error; FString ParseError;
-                    if (LiveCoreProtocol::ReadOutcome(Text, Status, FString(), FString(), 0, false, FString(), Error, ParseError) && Error.bError)
-                    { Self->Fail(ErrorText(Status, Error.Code, Error.Message)); }
-                    else { Self->Fail(ErrorText(Status, TEXT("projection_failed"), TEXT("No usable authenticated projection was supplied."))); }
-                    return;
-                }
-                FString Error;
-                if (!LiveCoreProtocol::ReadProjection(Text, Self->State.SessionId, Self->State, Error)) { LiveCoreProtocol::InvalidateProjectionPresentation(Self->State); Self->Fail(Error); return; }
-                Self->State.Status = !Self->State.RecordedCommandError.IsEmpty() ? TEXT("Core recorded a rejected command; authoritative state refreshed.") :
-                    Self->State.AcceptedActionCount > 0 ? TEXT("Core accepted the player action; authoritative state refreshed.") : TEXT("Connected. Choose an option offered by Core.");
-                Self->Changed();
-            }
+            if (const auto Self = Weak.Pin()) { Self->HandleProjectionReply(Status, Text); }
         });
+}
+void FLiveCoreSession::HandleProjectionReply(int32 Status, const FString& Text)
+{
+    check(IsInGameThread()); State.LastHttpStatus = Status;
+    if (Status != 200)
+    {
+        LiveCoreProtocol::FOutcome Error; FString ParseError;
+        if (LiveCoreProtocol::ReadOutcome(Text, Status, FString(), FString(), 0, false, FString(), Error, ParseError) && Error.bError)
+        { Fail(ErrorText(Status, Error.Code, Error.Message)); }
+        else { Fail(ErrorText(Status, TEXT("projection_failed"), TEXT("No usable authenticated projection was supplied."))); }
+        return;
+    }
+    FString Error;
+    FLiveCoreState Candidate = State;
+    const bool bHandoff = State.bHandoffPending;
+    if (bHandoff)
+    {
+        Candidate.Endpoint = HandoffEndpoint; Candidate.SessionId = HandoffSessionId;
+        Candidate.SessionRevision = HandoffMinimumRevision; Candidate.bHasSession = true;
+    }
+    if (!LiveCoreProtocol::ReadProjection(Text, Candidate.SessionId, Candidate, Error, ExpectedViewerPlayerId))
+    { LiveCoreProtocol::InvalidateProjectionPresentation(State); Fail(Error); return; }
+    Candidate.bHandoffPending = false; Candidate.HandoffTargetPlayerId.Reset();
+    State = MoveTemp(Candidate);
+    if (bHandoff) { HandoffEndpoint.Reset(); HandoffSessionId.Reset(); HandoffMinimumRevision = -1; }
+    State.Status = !State.RecordedCommandError.IsEmpty() ? TEXT("Core recorded a rejected command; authoritative state refreshed.") :
+        State.AcceptedActionCount > 0 ? TEXT("Core accepted the player action; authoritative state refreshed.") : TEXT("Connected. Choose an option offered by Core.");
+    Changed();
 }
 void FLiveCoreSession::Refresh()
 {
@@ -838,5 +921,6 @@ void FLiveCoreSession::Shutdown()
     bStopped = true; ++Generation;
     if (ActiveRequest.IsValid()) { ActiveRequest->OnProcessRequestComplete().Unbind(); ActiveRequest->CancelRequest(); ActiveRequest.Reset(); }
     OnChanged.Unbind(); PendingCommand.Reset(); AdministratorToken.Reset(); PlayerToken.Reset(); State.bBusy = false;
+    HandoffEndpoint.Reset(); HandoffSessionId.Reset(); HandoffMinimumRevision = -1;
     // This client attaches to a service. It never stops a host or closes its sessions on teardown.
 }

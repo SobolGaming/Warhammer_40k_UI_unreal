@@ -17,7 +17,7 @@ $PSNativeCommandUseErrorActionPreference = $false
 if (!$IsWindows) { throw 'This runner requires native Windows; Linux remains untested.' }
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $utf8 = [Text.UTF8Encoding]::new($false, $true)
-$environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
+$environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_PLAYER_B_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
 $savedEnvironment = @{}
 foreach ($name in $environmentNames) { $savedEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 
@@ -139,7 +139,7 @@ $record = [ordered]@{
 [string[]]$expected = if ($Mode -eq 'Resources') {
     @('Warhammer.RuntimeData.CanonicalSession', 'Warhammer.RuntimeData.MissingSessionFails', 'Warhammer.RuntimeData.CorruptSessionFails', 'Warhammer.RuntimeData.StartupResources')
 } elseif ($CoreVersion -eq '44.3.33') { @('Warhammer.LiveCore.Integration.RealSessionAction') }
-else { @('Warhammer.LiveCore.Integration.RealSessionAction', 'Warhammer.LiveCore.Integration.ReopenSessionAction') }
+else { @('Warhammer.LiveCore.Integration.RealSessionAction', 'Warhammer.LiveCore.Integration.ReopenSessionAction', 'Warhammer.LiveCore.Integration.LocalPlayerHandoffAction') }
 $hostInfo = $null; $native = $null; $started = $false; $outFile = $null; $errFile = $null; $outReader = $null; $errReader = $null
 $timer = $null; $stage = 'INPUTS'; $validated = $false
 try {

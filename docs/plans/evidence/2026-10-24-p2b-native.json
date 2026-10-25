@@ -1,0 +1,754 @@
+{
+  "schemaVersion": 1,
+  "milestone": "P2b local two-player handoff",
+  "recordedUtc": "2026-10-24T23:53:59.565254+00:00",
+  "status": "RUNTIME_NATIVE_AND_SCOPED_SOURCE_PASS_VISIBLE_ACCEPTED_SEPARATELY",
+  "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+  "core": {
+    "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "contractVersion": "44.5.0",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba",
+    "runtimeResourceCount": 3130
+  },
+  "build": {
+    "status": "PACKAGE_CREATED_RUNTIME_UNVERIFIED",
+    "elapsedSeconds": 35.5056491,
+    "exitCode": 0,
+    "ownedJobEmpty": true,
+    "ownedBuildTreeTerminated": false,
+    "ownedJobTotalProcesses": 43,
+    "rawResult": {
+      "privatePath": ".local/packages/20261024T234840Z-547ccc34/package-result.json",
+      "bytes": 2524,
+      "sha256": "955863a70805864b6e499d48d0ecac9b62a1b8e8a7b73495d993b560b65b6e23"
+    }
+  },
+  "outsideCopy": {
+    "files": 50,
+    "bytes": 975978105,
+    "exactMembershipAndHashes": true,
+    "executable": {
+      "path": "WarhammerClient/Binaries/Win64/WarhammerClient.exe",
+      "bytes": 332550656,
+      "sha256": "95e6b03a53292e353458a554696e0351e71caab96c6804744bbff8fc3dd501b2"
+    },
+    "privateManifest": {
+      "privatePath": ".local/development/p2b-outside-copy.json",
+      "bytes": 10470,
+      "sha256": "7b7a4845e01276258d0b4acd125eb04653ad44afd0a1cae4858ef1c7ba58eea2"
+    }
+  },
+  "unit": {
+    "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+    "startedUtc": "2026-10-24T23:49:38.8566913Z",
+    "finishedUtc": "2026-10-24T23:49:59.3060278Z",
+    "status": "PASS",
+    "elapsedSeconds": 16.657893,
+    "exitCode": 0,
+    "ownedJobEmpty": true,
+    "forcedTermination": false,
+    "tests": [
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Creation.ErrorEnvelopeRemainsUnknown",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Creation.InvalidEndpointDoesNotRequest",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Handoff.ClearAndGuards",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Handoff.ExpectedPlayerScope",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Handoff.ReadFailuresKeepPrivacy",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Open.InvalidInputDoesNotRequest",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Open.PreservesCurrentOrUnknownSession",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Open.ReadOnlyFlowAndErrors",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.CreatedIdentity",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.DecisionPresentationInvalidation",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.DecisionPresentationTransitions",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Endpoint",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.Envelope",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ExistingSessionIdentity",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.OutcomeAndUncertainErrors",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ProjectionPrivacyAndGeometry",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ProjectionVersionAndReadRecovery",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.PublicRosterDisclosure",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "fullTestPath": "Warhammer.LiveCore.Unit.ReturnedRejectionDiagnostics",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      }
+    ],
+    "rawResult": {
+      "privatePath": ".local/development/p2b-unit-20261024T234938Z/result.json",
+      "bytes": 3518,
+      "sha256": "46102f7573fa3ee424bcb3b1bc7267fb61759809f12a5168a692f6edc4b59847"
+    },
+    "automationReport": {
+      "privatePath": ".local/development/p2b-unit-20261024T234938Z/report/index.json",
+      "bytes": 12050,
+      "sha256": "ca73d0e7d820624e408e5a8764e36519087aa3d247e0fb3b03144554820452b4"
+    },
+    "logSeverityLines": {
+      "Warning": 0,
+      "Error": 0,
+      "Fatal": 0
+    }
+  },
+  "packageChecks": [
+    {
+      "status": "PASS",
+      "mode": "Resources",
+      "coreMode": null,
+      "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "startedUtc": "2026-10-24T23:49:59.7697946Z",
+      "finishedUtc": "2026-10-24T23:50:06.6610612Z",
+      "elapsedSeconds": 5.9013574,
+      "nativeExitCode": 0,
+      "forcedTermination": false,
+      "configUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "hostStop": null,
+      "automation": {
+        "expectedCount": 4,
+        "succeeded": 4,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.CanonicalSession",
+            "errors": 0,
+            "state": "Success"
+          },
+          {
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.MissingSessionFails",
+            "errors": 0,
+            "state": "Success"
+          },
+          {
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.CorruptSessionFails",
+            "errors": 0,
+            "state": "Success"
+          },
+          {
+            "warnings": 0,
+            "name": "Warhammer.RuntimeData.StartupResources",
+            "errors": 0,
+            "state": "Success"
+          }
+        ]
+      },
+      "label": "Resources",
+      "binaryUnchanged": true,
+      "binary": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332550656,
+        "sha256": "95E6B03A53292E353458A554696E0351E71CAAB96C6804744BBFF8FC3DD501B2"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 1,
+        "Fatal": 0
+      },
+      "rawResult": {
+        "privatePath": ".local/testpackage/20261024T234959Z-969d1602bffe4eec8920560e4bcb5131/result.json",
+        "bytes": 5281,
+        "sha256": "0226b475104fc4837ff91ed8725c7e21f7534a8bcd7cb4244e8acfb2c9094de8"
+      },
+      "nativeLog": {
+        "privatePath": ".local/testpackage/20261024T234959Z-969d1602bffe4eec8920560e4bcb5131/native.log",
+        "bytes": 71183,
+        "sha256": "74d408085d9f240ac3885416591f927e4b5794f3a65407fcd8362e00e2ba090f"
+      }
+    },
+    {
+      "status": "PASS",
+      "mode": "Core",
+      "coreMode": "Managed",
+      "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "startedUtc": "2026-10-24T23:50:20.7989390Z",
+      "finishedUtc": "2026-10-24T23:51:22.2428963Z",
+      "elapsedSeconds": 50.2774792,
+      "nativeExitCode": 0,
+      "forcedTermination": false,
+      "configUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "hostStop": {
+        "status": "STOPPED",
+        "owned": true,
+        "forcedTermination": false
+      },
+      "automation": {
+        "expectedCount": 3,
+        "succeeded": 3,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+            "state": "Success",
+            "warnings": 0,
+            "errors": 0
+          },
+          {
+            "name": "Warhammer.LiveCore.Integration.ReopenSessionAction",
+            "state": "Success",
+            "warnings": 0,
+            "errors": 0
+          },
+          {
+            "name": "Warhammer.LiveCore.Integration.LocalPlayerHandoffAction",
+            "state": "Success",
+            "warnings": 0,
+            "errors": 0
+          }
+        ]
+      },
+      "label": "Managed",
+      "binaryUnchanged": true,
+      "binary": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332550656,
+        "sha256": "95E6B03A53292E353458A554696E0351E71CAAB96C6804744BBFF8FC3DD501B2"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 1,
+        "Fatal": 0
+      },
+      "rawResult": {
+        "privatePath": ".local/testpackage/20261024T235020Z-28a233c527f74fd8832c9b65f6907de1/result.json",
+        "bytes": 5493,
+        "sha256": "88576c2301e944212082fd98cee969130f88db2b1165982fb77c51872e4e15d5"
+      },
+      "nativeLog": {
+        "privatePath": ".local/testpackage/20261024T235020Z-28a233c527f74fd8832c9b65f6907de1/native.log",
+        "bytes": 70196,
+        "sha256": "0c2e75d8bb813bebcaf09eef564c4e5c12590c29ccbd62e2a9ebc5d81778968c"
+      }
+    },
+    {
+      "status": "PASS",
+      "mode": "Core",
+      "coreMode": "Attach",
+      "sourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+      "startedUtc": "2026-10-24T23:52:01.9691544Z",
+      "finishedUtc": "2026-10-24T23:52:53.0786268Z",
+      "elapsedSeconds": 49.9304269,
+      "nativeExitCode": 0,
+      "forcedTermination": false,
+      "configUnchanged": true,
+      "parentEnvironmentRestored": true,
+      "hostStop": {
+        "owned": false,
+        "status": "ATTACHED_NOT_STOPPED"
+      },
+      "automation": {
+        "expectedCount": 3,
+        "succeeded": 3,
+        "succeededWithWarnings": 0,
+        "failed": 0,
+        "notRun": 0,
+        "inProcess": 0,
+        "tests": [
+          {
+            "errors": 0,
+            "warnings": 0,
+            "name": "Warhammer.LiveCore.Integration.RealSessionAction",
+            "state": "Success"
+          },
+          {
+            "errors": 0,
+            "warnings": 0,
+            "name": "Warhammer.LiveCore.Integration.ReopenSessionAction",
+            "state": "Success"
+          },
+          {
+            "errors": 0,
+            "warnings": 0,
+            "name": "Warhammer.LiveCore.Integration.LocalPlayerHandoffAction",
+            "state": "Success"
+          }
+        ]
+      },
+      "label": "Attach",
+      "binaryUnchanged": true,
+      "binary": {
+        "leaf": "WarhammerClient.exe",
+        "bytes": 332550656,
+        "sha256": "95E6B03A53292E353458A554696E0351E71CAAB96C6804744BBFF8FC3DD501B2"
+      },
+      "logSeverityLines": {
+        "Warning": 2,
+        "Error": 1,
+        "Fatal": 0
+      },
+      "rawResult": {
+        "privatePath": ".local/testpackage/20261024T235201Z-bb37b4ed4b094049a36daebf991133f9/result.json",
+        "bytes": 5483,
+        "sha256": "49acd2a75f6582eb76fb790ceb661c63365fef34387a10d107c603cd01723d83"
+      },
+      "nativeLog": {
+        "privatePath": ".local/testpackage/20261024T235201Z-bb37b4ed4b094049a36daebf991133f9/native.log",
+        "bytes": 70342,
+        "sha256": "bd19a089721ca9008113acb5e0aba1604c81ae1b97356b29d8a546f616bd68d5"
+      }
+    }
+  ],
+  "nativeTestExecutions": 29,
+  "nativeDistinctTestNames": 26,
+  "nativeLaunches": 4,
+  "attachLifecycle": {
+    "status": "PASS",
+    "attachedHostRemainedHealthy": true,
+    "healthHttpStatus": 200,
+    "ownedStop": {
+      "forcedTermination": false,
+      "owned": true,
+      "status": "STOPPED"
+    },
+    "environmentRestored": true,
+    "rawResult": {
+      "privatePath": ".local/development/p2b-attach-lifecycle.json",
+      "bytes": 775,
+      "sha256": "2c0b806ee8c492679714856559a89d2a6d51a1138453ef8a4758a0dca365e5ce"
+    }
+  },
+  "launcherControls": {
+    "cases": 84,
+    "status": "PASS_WITH_PRESERVED_ENVIRONMENT_FAILURE",
+    "checks": [
+      {
+        "command": "python -B -c <set tempfile.tempdir to .local/tests/p2b-launcher-python-temp and unittest discover tests/migration/test_start_client.py>",
+        "cases": 24,
+        "result": "PASS"
+      },
+      {
+        "command": "tests/migration/Test-CoreDevelopmentCredentials.ps1",
+        "cases": 9,
+        "result": "PASS_SYNTHETIC_CREDENTIAL_FUNCTION_ONLY"
+      },
+      {
+        "command": "tests/migration/Test-StartClient.ps1",
+        "cases": 15,
+        "result": "PASS_STUB_ONLY"
+      },
+      {
+        "command": "tests/migration/Test-CoreStartupControls.ps1",
+        "cases": 28,
+        "result": "PASS_OFFLINE_AST_AND_INERT_PROCESS_CONTROLS"
+      },
+      {
+        "command": "tests/migration/Test-CoreRuntimeProfiles.ps1",
+        "cases": 8,
+        "result": "PASS_OFFLINE"
+      }
+    ],
+    "initialFailure": {
+      "command": "python -B -m unittest discover -s tests/migration -p test_start_client.py",
+      "tests": 24,
+      "errors": 3,
+      "reason": "PermissionError creating/cleaning default sandbox Temp fixtures; same tests passed with workspace-local tempfile root. No test assertion failure."
+    },
+    "inputComparisons": [
+      {
+        "path": "scripts/Build-ClientPackage.ps1",
+        "recordedBytes": 7117,
+        "recordedSha256": "C9A1505E6039111946BA78114D58DFB437F4B44B248A983B73D82835C8B44A89",
+        "currentWorktreeBytesMatchRecorded": true,
+        "frozenCandidateSha256": "74C0C50679165BA16C2ADB30DECC48322257BD2CF1AC6218C99A17CEB9663BC8",
+        "frozenBytesDirectlyMatchRecorded": false,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      },
+      {
+        "path": "scripts/Start-Client.ps1",
+        "recordedBytes": 3796,
+        "recordedSha256": "044D08C944D2EE49A854F1953D3B2DE433668B0EAC2BA6BB28BB73E26FDE4F90",
+        "currentWorktreeBytesMatchRecorded": true,
+        "frozenCandidateSha256": "5DEF2052764DA2E327534ABE9532DAF1B0E6932772287745702CC772D5C4CF52",
+        "frozenBytesDirectlyMatchRecorded": false,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      },
+      {
+        "path": "scripts/Start-Client.py",
+        "recordedBytes": 9174,
+        "recordedSha256": "62085AFADB177BBC8FFE2BBD6ED26F7533B669647AE9CF5044798FC970820129",
+        "currentWorktreeBytesMatchRecorded": true,
+        "frozenCandidateSha256": "28C60995C6B840651AEC4F8770AA3C3C998D523E97AE2FBA0EFA17C37EF6375F",
+        "frozenBytesDirectlyMatchRecorded": false,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      },
+      {
+        "path": "scripts/Start-CoreDevelopmentServer.ps1",
+        "recordedBytes": 21258,
+        "recordedSha256": "7C3B782E01A9F541797EBE354589DF32EAF984B210F6370E3D552BFECD8ED0E6",
+        "currentWorktreeBytesMatchRecorded": true,
+        "frozenCandidateSha256": "1A9C5FDFACEE50CB7860AE000FF67F74045ABEA8FCA26B7E998CFA908E850AA9",
+        "frozenBytesDirectlyMatchRecorded": false,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      },
+      {
+        "path": "scripts/Test-ClientPackage.ps1",
+        "recordedBytes": 20216,
+        "recordedSha256": "688BBB7BFFAAFD8A88915F474417768633E7F3936621DE4A3E747C454A8D97AD",
+        "currentWorktreeBytesMatchRecorded": false,
+        "frozenCandidateSha256": "38191B66D67921E131DB54590275913893E8DD92E42AFF6CB0D997CAAA9BC317",
+        "frozenBytesDirectlyMatchRecorded": false,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      },
+      {
+        "path": "tests/migration/Test-StartClient.ps1",
+        "recordedBytes": 13250,
+        "recordedSha256": "69CBBC768F88C6D8A204039CB078EA623E4D5102B23F26D2F63B725D2FEB4B9D",
+        "currentWorktreeBytesMatchRecorded": true,
+        "frozenCandidateSha256": "56749266BA990D4C11CE4AD829EB7E291060F043E2EA7247ABC364F99AEBE4AB",
+        "frozenBytesDirectlyMatchRecorded": false,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      },
+      {
+        "path": "tests/migration/test_start_client.py",
+        "recordedBytes": 19085,
+        "recordedSha256": "907EFA33E60B442BE96A055D92A4277C1ED1F305D4C0B33381BCF279D3ECB8A3",
+        "currentWorktreeBytesMatchRecorded": true,
+        "frozenCandidateSha256": "A4E27D085FA8235B1794F10F1FD6D74C7A07C10990562F8AA02573BC8CA4AE43",
+        "frozenBytesDirectlyMatchRecorded": false,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      },
+      {
+        "path": "tests/migration/Test-CoreDevelopmentCredentials.ps1",
+        "recordedBytes": 5141,
+        "recordedSha256": "1353FDCB5A2CBE0EE2307410DB19EAF55B64C92F91BD0DC830174E1BBC9C9F73",
+        "currentWorktreeBytesMatchRecorded": true,
+        "frozenCandidateSha256": "1353FDCB5A2CBE0EE2307410DB19EAF55B64C92F91BD0DC830174E1BBC9C9F73",
+        "frozenBytesDirectlyMatchRecorded": true,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      },
+      {
+        "path": "docs/development/core-startup.md",
+        "recordedBytes": 14525,
+        "recordedSha256": "8B30DBFE17CCCBE006E869A70BCB58BAE1F520F1C4A19D2D138BF1B5A48A6E32",
+        "currentWorktreeBytesMatchRecorded": true,
+        "frozenCandidateSha256": null,
+        "frozenBytesDirectlyMatchRecorded": false,
+        "limit": "Keep controls bound to recorded inputs; false does not prove candidate source coverage. Line-ending differences are not normalized into an invented equivalence."
+      }
+    ],
+    "rawResult": {
+      "privatePath": ".local/development/p2b-launcher-controls.json",
+      "bytes": 3249,
+      "sha256": "2273250be23f49177efcc45011a1959ac24a558c026b3ed15df24f346a44a995"
+    },
+    "limits": "Offline launcher logic only; native startup, actual identity, rendered handoff and Linux execution are separate verification."
+  },
+  "packagePathControls": {
+    "status": "PASS_PATH_FUNCTIONS_ONLY",
+    "cases": 32,
+    "functionDefinitionsExtracted": 2,
+    "runnerTopLevelExecuted": false,
+    "nativeProcessesLaunched": 0,
+    "coreProcessesLaunched": 0,
+    "guiLaunched": false,
+    "actualReparsePointCreated": false,
+    "linuxRuntimeEstablished": false,
+    "rawResult": {
+      "privatePath": ".local/development/p2b-package-path-controls.json",
+      "bytes": 301,
+      "sha256": "1d5bb4368a19a95dcbb8568b705f09a669b53afffb0fd10097ba685e2662fb59"
+    },
+    "preservedWrapperAttempt": {
+      "privatePath": ".local/development/p2b-package-path-controls-wrapper-attempt.json",
+      "bytes": 343,
+      "sha256": "94f83acd7bcc4994e7d7030e0b36a43fdb00b1f12f6fc9f3457b5ce98aec0141"
+    },
+    "wrapperLimit": "Initial wrapper treated inherited LASTEXITCODE as failure after path-function checks actually passed; preserve wrapper attempt separately from actual32-case result."
+  },
+  "initialCandidate": {
+    "sourceHead": "efef9d0ca5909181afd517bb75cbfffad8a01319",
+    "build": {
+      "status": "PACKAGE_CREATED_RUNTIME_UNVERIFIED",
+      "elapsedSeconds": 129.35185,
+      "exitCode": 0,
+      "ownedJobEmpty": true,
+      "ownedBuildTreeTerminated": false,
+      "ownedJobTotalProcesses": 113,
+      "rawResult": {
+        "privatePath": ".local/packages/20261024T234422Z-ed9efbe5/package-result.json",
+        "bytes": 2524,
+        "sha256": "a7de5e1d0649d757c6b5871ca477023fd48ba563b1151c28d433d038016e8368"
+      }
+    },
+    "failedUnit": {
+      "status": "FAILED_18_OF_19",
+      "succeeded": 18,
+      "failed": 1,
+      "failedTests": [
+        {
+          "fullTestPath": "Warhammer.LiveCore.Unit.Handoff.ExpectedPlayerScope",
+          "state": "Fail",
+          "errors": 1,
+          "warnings": 0
+        }
+      ],
+      "rawResult": {
+        "privatePath": ".local/development/p2b-unit-20261024T234648Z/result.json",
+        "bytes": 496,
+        "sha256": "44cc11753c5374efc8d21af75a5e32a18c553ff9df14ca643e8f992d9dfebe62"
+      },
+      "automationReport": {
+        "privatePath": ".local/development/p2b-unit-20261024T234648Z/report/index.json",
+        "bytes": 12493,
+        "sha256": "551d50190b2432c76dbbdb1c73e8e6910b8d6c569795ba4ed0ee57bcf4d3ca41"
+      },
+      "cause": "ExpectedPlayerScope positive player-b receipt fixture changed metadata player_id but retained player-a checkpoint identity; production context parser correctly rejected it at line583. Two fixture replacements were repaired; initial failure remains failed."
+    },
+    "passedPackageChecks": [
+      {
+        "status": "PASS",
+        "mode": "Resources",
+        "coreMode": null,
+        "sourceHead": "efef9d0ca5909181afd517bb75cbfffad8a01319",
+        "startedUtc": "2026-10-24T23:47:04.1025016Z",
+        "finishedUtc": "2026-10-24T23:47:11.0985001Z",
+        "elapsedSeconds": 5.9575762,
+        "nativeExitCode": 0,
+        "forcedTermination": false,
+        "configUnchanged": true,
+        "parentEnvironmentRestored": true,
+        "hostStop": null,
+        "automation": {
+          "expectedCount": 4,
+          "succeeded": 4,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "tests": [
+            {
+              "state": "Success",
+              "name": "Warhammer.RuntimeData.CanonicalSession",
+              "errors": 0,
+              "warnings": 0
+            },
+            {
+              "state": "Success",
+              "name": "Warhammer.RuntimeData.MissingSessionFails",
+              "errors": 0,
+              "warnings": 0
+            },
+            {
+              "state": "Success",
+              "name": "Warhammer.RuntimeData.CorruptSessionFails",
+              "errors": 0,
+              "warnings": 0
+            },
+            {
+              "state": "Success",
+              "name": "Warhammer.RuntimeData.StartupResources",
+              "errors": 0,
+              "warnings": 0
+            }
+          ]
+        },
+        "label": "Initial Resources",
+        "binaryUnchanged": true,
+        "binary": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332549120,
+          "sha256": "DAE4E4917855183991F26A69BB6A3800D377662388B9468AF04A33FC2E70FFB9"
+        },
+        "logSeverityLines": {
+          "Warning": 2,
+          "Error": 1,
+          "Fatal": 0
+        },
+        "rawResult": {
+          "privatePath": ".local/testpackage/20261024T234704Z-47f7bb0dda56442ebd774ad2d4146595/result.json",
+          "bytes": 5281,
+          "sha256": "ea894da9f5fd24c5f4d1ea930144684fc4985a4c49ed44ccd4b92d50b0ef3486"
+        },
+        "nativeLog": {
+          "privatePath": ".local/testpackage/20261024T234704Z-47f7bb0dda56442ebd774ad2d4146595/native.log",
+          "bytes": 71482,
+          "sha256": "b1c4ec71c2db86ad39565b87ffc66c237e7291b0f59501ef66ef2d7d54caca9f"
+        }
+      },
+      {
+        "status": "PASS",
+        "mode": "Core",
+        "coreMode": "Managed",
+        "sourceHead": "efef9d0ca5909181afd517bb75cbfffad8a01319",
+        "startedUtc": "2026-10-24T23:47:27.2954050Z",
+        "finishedUtc": "2026-10-24T23:48:28.2821445Z",
+        "elapsedSeconds": 49.8190499,
+        "nativeExitCode": 0,
+        "forcedTermination": false,
+        "configUnchanged": true,
+        "parentEnvironmentRestored": true,
+        "hostStop": {
+          "owned": true,
+          "status": "STOPPED",
+          "forcedTermination": false
+        },
+        "automation": {
+          "expectedCount": 3,
+          "succeeded": 3,
+          "succeededWithWarnings": 0,
+          "failed": 0,
+          "notRun": 0,
+          "inProcess": 0,
+          "tests": [
+            {
+              "warnings": 0,
+              "state": "Success",
+              "errors": 0,
+              "name": "Warhammer.LiveCore.Integration.RealSessionAction"
+            },
+            {
+              "warnings": 0,
+              "state": "Success",
+              "errors": 0,
+              "name": "Warhammer.LiveCore.Integration.ReopenSessionAction"
+            },
+            {
+              "warnings": 0,
+              "state": "Success",
+              "errors": 0,
+              "name": "Warhammer.LiveCore.Integration.LocalPlayerHandoffAction"
+            }
+          ]
+        },
+        "label": "Initial Managed",
+        "binaryUnchanged": true,
+        "binary": {
+          "leaf": "WarhammerClient.exe",
+          "bytes": 332549120,
+          "sha256": "DAE4E4917855183991F26A69BB6A3800D377662388B9468AF04A33FC2E70FFB9"
+        },
+        "logSeverityLines": {
+          "Warning": 2,
+          "Error": 1,
+          "Fatal": 0
+        },
+        "rawResult": {
+          "privatePath": ".local/testpackage/20261024T234727Z-1e4a2f64b26248f3b9b01917c72df595/result.json",
+          "bytes": 5493,
+          "sha256": "dd6b3a16551d958c558f8d769039203a25e62bc47c641b4967de7d63811a62f0"
+        },
+        "nativeLog": {
+          "privatePath": ".local/testpackage/20261024T234727Z-1e4a2f64b26248f3b9b01917c72df595/native.log",
+          "bytes": 70497,
+          "sha256": "16cbbeee70a7fe074ab4dc47d1a28ac27398a8f33dcd61ad85630aecc92b7767"
+        }
+      }
+    ]
+  },
+  "manualCriteria": {
+    "P2B-V1": "PASS_SEPARATE_VISIBLE_RECORD",
+    "P2B-V2": "PASS_SEPARATE_VISIBLE_RECORD"
+  },
+  "limits": [
+    "Two existing development players and one selected local session only; no new principals/listing/remote/spectator/general editors/durability.",
+    "Native handoff runs non-visible HTTP/session code; rendered privacy clearing, actual Ready controls, UI isolation and child-only HTTP401 diagnostic require separate P2B-V1/V2 visible evidence.",
+    "Linux, clean-machine Windows, physical RMB/MMB, actual OS switching/teardown and broader P2 remain unverified."
+  ],
+  "runtimeSourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+  "launcherHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+  "sourceBinding": "Built/native-tested C++ and Config remain exactly a6dbb1c. Later a1d9013 changes only launcher credential regex/test and one architecture sentence;12 credential controls and two fresh scoped SOURCE delta roles pass at document checkpoint71a6389. P2B-V1/V2 passed separately in the recorded visible runs at launch checkpointf8470c3; this native record does not substitute for those observations.",
+  "launcherCredentialDeltaControls": {
+    "cases": 12,
+    "status": "PASS_SYNTHETIC_CREDENTIAL_FUNCTION_ONLY",
+    "privatePath": ".local/development/p2b-credential-lf-controls.json"
+  },
+  "visibleEvidence": "2026-10-24-p2b-visible.json"
+}
