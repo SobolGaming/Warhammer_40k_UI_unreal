@@ -20,6 +20,8 @@ The [source-backed46 delta](research/2026-11-16-core-46-reference.md) binds exac
 
 The first Windows package build at `e9a495eb852d97f9fcaf77eac5cce142d438f220` failed because the random-result enum needs the explicit installed `PlatformCryptoTypes.h` definition, rather than its forward declaration. Retained private output: `.local/packages/20261116T221542Z-c76b0651/package-result.json` and UBT logs. The include repair and exact-byte attribute for the new committed reference fixtures are separate source changes; affected build, native tests and fresh independent reviews must pass before rendered acceptance. The direct Python HTTP smoke verified46 schemas, null activity and actual player counters9→11 and9→13; it is not Unreal integration or visible acceptance.
 
+The repaired310fabe build compiled the affected code and linked Game, but failed Editor linking: the response file contained only `PlatformCrypto.lib`, while `CreateRandomBytes` is exported by `PlatformCryptoContext`. Retain `.local/packages/20261116T221818Z-fcd3f7cd/package-result.json`. The module now declares that direct private dependency; successful Game linking alone did not satisfy the affected Editor/Game package gate. Fresh build/reviews follow the new candidate.
+
 Original implementation criteria (freeze before code changes):
 
 - [x] Prepare a separate clean exact-source46 Python runtime, verify installed build/resources and launch selection, and preserve sibling HEAD/worktree and older runtimes. New source defaults select46 explicitly; old packages require their explicit older `-CoreVersion`. Installed identity verified as recorded above; launcher checks are separate from the real workflow tests.
