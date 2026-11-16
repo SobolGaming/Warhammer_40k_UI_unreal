@@ -92,5 +92,15 @@
       }
     }
   ],
-  "limits": "Existing MainModule.FileName host-startup failures remain failures. Separate fresh Attach retries passed. No Core host source change or new backend. Native tests do not establish rendered, clean-host, physical-input/OS-switch, native Linux or full gameplay acceptance. Nonempty bearers/declarations are synthetic DTO unit coverage where canonical live example supplies none."
+  "limits": "Existing MainModule.FileName host-startup failures remain failures. Separate fresh Attach retries passed. No Core host source change or new backend. Native tests do not establish rendered, clean-host, physical-input/OS-switch, native Linux or full gameplay acceptance. Nonempty bearers/declarations are synthetic DTO unit coverage where canonical live example supplies none.",
+  "documentedUnitReproduction": {
+    "count": 28,
+    "status": "PASS",
+    "actualDocumentedBlockExecuted": true,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-documented-unit-result.json",
+      "bytes": 571,
+      "sha256": "3874c47a02dbdb0f80bfe4c90e8c768d72af20bd204e47879b3be2ff5a8561e9"
+    }
+  }
 }

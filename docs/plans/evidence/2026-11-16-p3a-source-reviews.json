@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "dateUtc": "2026-11-16",
+  "scope": "P3A_FINITE_SOURCE_AND_NORMATIVE_DOCUMENTATION_ONLY",
+  "status": "PASS",
+  "runtimeSource": "ae423d02a723bae1f408e83420bafed3d4048cae",
+  "originalCriteria": "7e6f92a4c28de7e7089b1be148dd476ddbd43fa9",
+  "comparisonBase": "11280a1130bca250a0d8938066e4e12df94b1cea",
+  "coreCommit": "fc52e9166ff6380b606269ce362f4f1cbc6a2835",
+  "primaryPacket": {
+    "manifest": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P3aPublicRoster\\ae423d0-20261116T231143Z-3578b448\\manifest.json",
+      "bytes": 8909,
+      "sha256": "236c24ed93b462462820f74335aab563c4e799b82d1fb53536e41f747febd5e2"
+    },
+    "inputs": 18,
+    "inputBytes": 372891
+  },
+  "reviewers": [
+    {
+      "role": "CODE",
+      "agent": "p3a_focus_code_review",
+      "freshForkNone": true,
+      "verdict": "PASS",
+      "report": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-code-ae423d0-report.md",
+        "bytes": 3358,
+        "sha256": "8b5cb9de0b00e9cfea8629dcfc1a338e872eba8294b703a091814b98edf3ee0c"
+      }
+    },
+    {
+      "role": "REQ",
+      "agent": "p3a_focus_req_review",
+      "freshForkNone": true,
+      "verdict": "PASS_BOUNDED_SOURCE",
+      "report": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-req-ae423d0-report.md",
+        "bytes": 3672,
+        "sha256": "e48039541bd3360b053df58e2fef3d1dbf1feb6dfdf7d0c88485d486162aab6b"
+      },
+      "normativeDocumentationAddendum": {
+        "verdict": "PASS",
+        "sameReviewerOwnContextRefresh": true,
+        "firstManifest": {
+          "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P3aPublicRoster\\ae423d0-20261116T231143Z-3578b448\\requirements-supplement.json",
+          "bytes": 2133,
+          "sha256": "f53596451380f240559aa42863ec1d0b28935bd28be1bb732e003bd059cccb92"
+        },
+        "firstReport": {
+          "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-req-docs-first-report.md",
+          "bytes": 1609,
+          "sha256": "986f4bb928c7bfaffa3da592c20b9029994764466f6217143b09531786cfbf49"
+        },
+        "repairManifest": {
+          "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P3aPublicRoster\\ae423d0-20261116T231143Z-3578b448\\requirements-supplement-v2.json",
+          "bytes": 1328,
+          "sha256": "cf966c5b3d385fb2df52e5f2662630000504f29e49d98bc45c604f229b82cbd5"
+        },
+        "repairReport": {
+          "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-req-docs-v2-report.md",
+          "bytes": 1289,
+          "sha256": "c98caa92ea414324047d87bda3d1bcb7b9f6c633dbd9533d4331ef4b9495e8ad"
+        },
+        "documentationCommit": "f71a886dda19ed7eb8dfa2cce0c02d74fe8eb015",
+        "repairedGap": "Explicit supported Unit invocation, result checks and mirrored full manual"
+      }
+    }
+  ],
+  "actualControls": {
+    "host": "workspace-write / auto_review",
+    "readOnlyRestrictions": "behavioral instructions, not independently enforced CLI sandbox",
+    "noCandidateExecution": true,
+    "noNetworkOrGui": true,
+    "noMutationOrEscalation": true,
+    "noMemoryToolsOrModelOverride": true,
+    "noDelegation": true,
+    "noPeerVerdictsRead": true,
+    "limits": "Provider ephemerality/retention and independent host-enforced read-only isolation not attested. Reports copied verbatim from role final tool messages into private files."
+  },
+  "preferredCliAttempts": {
+    "candidate": "7c5e5561ba8262526ff1dde2d06f9721c6dfff38",
+    "status": "BLOCKED_BEFORE_FILE_READS",
+    "code": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P3aPublicRoster\\7c5e556-20261116T230739Z-c5f8261c\\CODE\\report.txt",
+      "bytes": 892,
+      "sha256": "a9e38fc9b336212cd49e5fd419b751047a3a518d17673492b3b64fd888bc6aa6"
+    },
+    "requirements": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P3aPublicRoster\\7c5e556-20261116T230739Z-c5f8261c\\REQ\\report.txt",
+      "bytes": 1386,
+      "sha256": "427e61644e80d6b60e31747998e9f7006b526fba0a6f0103876fd47fd29bb759"
+    },
+    "cause": "Registered Core launch requires installed app; Node reader exited unexpectedly. Not source findings or CLI PASS."
+  },
+  "limits": "Finite changed DTO formatter, panel wiring/input focus, test design and requested normative documents only. No executed native, rendered, Linux, clean-host, physical-input or full-P3 certification; omitted unchanged fixture bodies/transitive dependencies are not certified."
+}
