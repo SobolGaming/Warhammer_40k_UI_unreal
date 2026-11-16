@@ -2,6 +2,8 @@
 
 P2c adapts the existing workflow to exact Core `fc52e9166ff6380b606269ce362f4f1cbc6a2835` /46.0.0. The [canonical plan](../plans/unreal-migration-plan.md) owns P2C-V1/V2 and their actual status. These are required workflow checks, not a claim that Linux, clean-machine installation or full gameplay is verified. Run visible checks only after the affected build/native/SOURCE gates pass.
 
+P2C-V1/V2 passed on2026-11-16 through supported computer use in three sequential bounded launches; [exact results](../plans/evidence/2026-11-16-p2c-visible.json) retain source/package/Core identities, actual observations and private-evidence hashes. These steps remain reproducible checks, not a new owner-only blocker.
+
 ## Prepared workstation command
 
 This workstation now has the separate verified46 runtime and a complete verified outside-checkout package from source `7ee4a4fac6f3cb04aa1f255135000036f270d77b`:50 files /976,189,105 bytes, nested executable SHA256 `133d18325ac773e960401645b09b5bb2eca15c3d3247e09d9bc6abffe9c283e8`. The32.102-second package build,23 Unit,4 resources and3 real workflows in each Managed/Attach mode passed. Source reviews and visible results are recorded separately in the plan. No compilation or undefined shell variable is needed to launch this prepared copy:

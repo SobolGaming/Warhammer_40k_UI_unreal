@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "dateUtc": "2026-11-16",
-  "status": "NON_VISIBLE_PASS_VISIBLE_PENDING",
+  "status": "BOUNDED_WINDOWS_WORKFLOW_PASS",
   "sourceHead": "7ee4a4fac6f3cb04aa1f255135000036f270d77b",
   "coreCommit": "fc52e9166ff6380b606269ce362f4f1cbc6a2835",
   "contractVersion": "46.0.0",
@@ -115,8 +115,9 @@
     }
   ],
   "manualCriteria": {
-    "P2C-V1": "NOT_RUN",
-    "P2C-V2": "NOT_RUN"
+    "P2C-V1": "PASS",
+    "P2C-V2": "PASS"
   },
-  "limits": "Windows x64 non-visible evidence only. No rendering/physical-input/Linux/clean-host/full-gameplay acceptance."
+  "limits": "Windows x64 non-visible evidence only. No rendering/physical-input/Linux/clean-host/full-gameplay acceptance.",
+  "visibleEvidence": "2026-11-16-p2c-visible.json"
 }
