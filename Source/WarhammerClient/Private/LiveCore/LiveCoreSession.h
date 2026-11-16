@@ -98,6 +98,9 @@ struct FLiveCoreState
     bool bHasSession = false;
     bool bUnknown = false;
     bool bCanReconcile = false;
+    // The former viewer's entire snapshot is absent until the next player is ready.
+    bool bHandoffPending = false;
+    FString HandoffTargetPlayerId;
     bool bLastCommandHasOutcome = false;
     bool bLastCommandAccepted = false;
     bool bLastCommandCommitted = false;
@@ -169,9 +172,11 @@ bool ValidateEndpoint(const FString& Input, FString& OutEndpoint, FString& OutEr
 // User-entered identifiers are used as one literal URL path segment, never normalized.
 bool ValidateSessionId(const FString& Input, FString& OutError);
 bool ReadCreatedSession(const FString& Text, FMetadata& OutMetadata, FString& OutError);
-// Reopening reads the current player-a metadata; it never starts a created session.
-bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, FMetadata& OutMetadata, FString& OutError);
-bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreState& OutState, FString& OutError);
+// Reopening is bound to the explicitly expected development player.
+bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, FMetadata& OutMetadata, FString& OutError,
+    const FString& ExpectedViewerPlayerId = TEXT("player-a"));
+bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreState& OutState, FString& OutError,
+    const FString& ExpectedViewerPlayerId = TEXT("player-a"));
 // Clear local decision controls while a fresh projection or command outcome is unavailable.
 // The separately retained command envelope and authoritative revision are unchanged.
 void InvalidateDecisionPresentation(FLiveCoreState& State);
@@ -180,7 +185,8 @@ void InvalidateDecisionPresentation(FLiveCoreState& State);
 void InvalidateProjectionPresentation(FLiveCoreState& State);
 bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId,
     const FString& SessionId, int64 ExpectedRevision, bool bAdministrator,
-    const FString& Operation, FOutcome& OutOutcome, FString& OutError);
+    const FString& Operation, FOutcome& OutOutcome, FString& OutError,
+    const FString& ExpectedViewerPlayerId = TEXT("player-a"));
 // Applies a validated known receipt without advancing the applied projection identity.
 bool ApplyKnownCommandOutcome(const FOutcome& Outcome, int32 HttpStatus, bool bFiniteAction, FLiveCoreState& State);
 FString MakeStartCommand(const FString& SessionId, const FString& CommandId);
@@ -200,6 +206,11 @@ public:
     void CreateAndStart(const FString& Endpoint);
     // Attach a fresh client to a known active session using player-scoped GETs only.
     void OpenExistingSession(const FString& Endpoint, const FString& SessionId);
+    // No HTTP or state mutation in Core: first clear the old viewer's display,
+    // then wait for an explicit Ready action before authenticated player reads.
+    bool CanBeginPlayerHandoff() const;
+    bool BeginPlayerHandoff();
+    void ContinuePlayerHandoff();
     void SelectOfferedOption(const FString& OptionId);
     void SubmitOption(const FString& OptionId) { SelectOfferedOption(OptionId); }
     void Refresh();
@@ -211,14 +222,15 @@ public:
     FSimpleDelegate OnChanged;
 
 private:
-    enum class ECredential { Administrator, PlayerA };
+    enum class ECredential { Administrator, Player };
     struct FPendingCommand
     {
         FString Body;
         FString Id;
         FString Operation;
         int64 ExpectedRevision = -1;
-        ECredential Credential = ECredential::PlayerA;
+        ECredential Credential = ECredential::Player;
+        FString ViewerPlayerId = TEXT("player-a");
         bool bFiniteAction = false;
     };
     using FReadReply = TFunction<void(int32, const FString&)>;
@@ -230,6 +242,10 @@ private:
     FString AdministratorToken;
     FString PlayerToken;
     FString CreatingGameId;
+    FString ExpectedViewerPlayerId = TEXT("player-a");
+    FString HandoffSessionId;
+    FString HandoffEndpoint;
+    int64 HandoffMinimumRevision = -1;
 #if WITH_DEV_AUTOMATION_TESTS
     friend struct FLiveCoreSessionCreationTestAccess;
     friend struct FLiveCoreSessionIntegrationTestAccess;
@@ -249,4 +265,7 @@ private:
     void HandleExistingReply(int32 Status, const FString& Response, const FString& ExpectedSessionId);
     void SendPendingCommand();
     void FetchProjection();
+    void HandleProjectionReply(int32 Status, const FString& Text);
+    void OpenPlayerSession(const FString& Endpoint, const FString& SessionId, const FString& ViewerPlayerId);
+    bool IsCurrentReply(uint64 ExpectedGeneration, const TSharedPtr<IHttpRequest, ESPMode::ThreadSafe>& Request) const;
 };

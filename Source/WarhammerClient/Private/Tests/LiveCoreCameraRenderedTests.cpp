@@ -540,7 +540,8 @@ bool FLiveCoreCameraRenderedInputTest::RunTest(const FString&)
         !TestExit.Equals(TEXT("Automation Test Queue Empty"), ESearchCase::CaseSensitive) ||
         FParse::Value(FCommandLine::Get(), TEXT("CoreUrl="), CoreUrl) ||
         !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_ADMIN_TOKEN")).IsEmpty() ||
-        !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN")).IsEmpty())
+        !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN")).IsEmpty() ||
+        !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_B_TOKEN")).IsEmpty())
     { AddError(TEXT("Requires both camera-proof opt-ins, -game -unattended -TestExit=\"Automation Test Queue Empty\", no CoreUrl and no Core credentials.")); return false; }
     // This invocation authorizes failure termination of its dedicated supervised
     // proof process. It is not a security/authentication or process-ownership proof.

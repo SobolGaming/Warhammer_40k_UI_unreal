@@ -70,14 +70,14 @@ def verify_installed_core(version: str = "44.5.0") -> None:
 
 def development_environment(endpoint: str, source: dict[str, str] | None = None) -> dict[str, str]:
     environment = dict(os.environ if source is None else source)
-    names = ("WH_CORE_ADMIN_TOKEN", "WH_CORE_PLAYER_TOKEN")
+    names = ("WH_CORE_ADMIN_TOKEN", "WH_CORE_PLAYER_TOKEN", "WH_CORE_PLAYER_B_TOKEN")
     if any(not environment.get(name, "").strip() for name in names):
         try:
-            from warhammer40k_core.adapters.access_control import DEV_ADMIN_TOKEN, DEV_PLAYER_A_TOKEN
+            from warhammer40k_core.adapters.access_control import DEV_ADMIN_TOKEN, DEV_PLAYER_A_TOKEN, DEV_PLAYER_B_TOKEN
         except (ImportError, OSError, ValueError, RuntimeError) as error:
             raise StartupError("The selected Core development credential registry is unavailable.") from error
 
-        defaults = dict(zip(names, (DEV_ADMIN_TOKEN, DEV_PLAYER_A_TOKEN), strict=True))
+        defaults = dict(zip(names, (DEV_ADMIN_TOKEN, DEV_PLAYER_A_TOKEN, DEV_PLAYER_B_TOKEN), strict=True))
         for name in names:
             if not environment.get(name, "").strip():
                 environment[name] = defaults[name]

@@ -169,13 +169,13 @@ public:
                     .Font(FCoreStyle::GetDefaultFontStyle(TEXT("Bold"), 20))]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 6)
                 [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(
-                    TEXT("Connect to the selected Core. Create a session or open a known active session as player-a. Keep Core running with Attach when reopening across client launches.")))]
+                    TEXT("Create or open a known active session as player-a. Hand off hides this view until the other local player selects Ready. Keep Core running with Attach when reopening across launches.")))]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
                 [SAssignNew(EndpointBox, SEditableTextBox).Text(FText::FromString(Scene->Endpoint))
-                    .IsEnabled_Lambda([this]() { return !State().bBusy && !State().bHasSession && !State().bUnknown; })]
+                    .IsEnabled_Lambda([this]() { return !State().bBusy && !State().bHasSession && !State().bUnknown && !State().bHandoffPending; })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
                 [SNew(SButton).Text(FText::FromString(TEXT("Connect / create session")))
-                    .IsEnabled_Lambda([this]() { return !State().bBusy && !State().bHasSession && !State().bUnknown; })
+                    .IsEnabled_Lambda([this]() { return !State().bBusy && !State().bHasSession && !State().bUnknown && !State().bHandoffPending; })
                     .OnClicked_Lambda([this]()
                     {
                         if (!Scene || !Scene->Session.IsValid()) { return FReply::Handled(); }
@@ -184,19 +184,37 @@ public:
                         return FReply::Handled();
                     })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 4)
-                [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(TEXT("Existing session ID (player-a)")))]
+                [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(TEXT("Session ID (opens as player-a)")))]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
                 [SAssignNew(SessionIdBox, SEditableTextBox)
                     .HintText(FText::FromString(TEXT("Paste a known active session ID")))
-                    .IsReadOnly_Lambda([this]() { return State().bBusy || State().bHasSession || State().bUnknown; })]
+                    .IsReadOnly_Lambda([this]() { return State().bBusy || State().bHasSession || State().bUnknown || State().bHandoffPending; })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
                 [SNew(SButton).Text(FText::FromString(TEXT("Open existing session")))
-                    .IsEnabled_Lambda([this]() { return !State().bBusy && !State().bHasSession && !State().bUnknown; })
+                    .IsEnabled_Lambda([this]() { return !State().bBusy && !State().bHasSession && !State().bUnknown && !State().bHandoffPending; })
                     .OnClicked_Lambda([this]()
                     {
                         if (!Scene || !Scene->Session.IsValid() || !SessionIdBox.IsValid()) { return FReply::Handled(); }
                         Scene->Endpoint = EndpointBox->GetText().ToString();
                         Scene->Session->OpenExistingSession(Scene->Endpoint, SessionIdBox->GetText().ToString());
+                        return FReply::Handled();
+                    })]
+                + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
+                [SNew(SButton).Text(FText::FromString(TEXT("Hand off to the other local player")))
+                    .IsEnabled_Lambda([this]() { return Scene && Scene->Session.IsValid() && Scene->Session->CanBeginPlayerHandoff(); })
+                    .OnClicked_Lambda([this]()
+                    {
+                        if (Scene && Scene->Session.IsValid()) { Scene->Session->BeginPlayerHandoff(); }
+                        return FReply::Handled();
+                    })]
+                + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
+                [SNew(SButton)
+                    .Visibility_Lambda([this]() { return State().bHandoffPending ? EVisibility::Visible : EVisibility::Collapsed; })
+                    .Text_Lambda([this]() { return FText::FromString(TEXT("Ready: show ") + State().HandoffTargetPlayerId); })
+                    .IsEnabled_Lambda([this]() { return State().bHandoffPending && !State().bBusy && !State().bUnknown; })
+                    .OnClicked_Lambda([this]()
+                    {
+                        if (Scene && Scene->Session.IsValid()) { Scene->Session->ContinuePlayerHandoff(); }
                         return FReply::Handled();
                     })]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
@@ -220,7 +238,7 @@ public:
                             FString::Printf(TEXT("Revision: %lld"), static_cast<long long>(Value.SessionRevision)) :
                             FString::Printf(TEXT("Session revision: %lld; displayed projection: %lld (refresh pending)"),
                                 static_cast<long long>(Value.SessionRevision), static_cast<long long>(Value.ProjectionRevision));
-                        return FText::FromString(FString::Printf(TEXT("Session: %s\n%s\nPhase: %s\nViewer: %s\nAccepted actions in this client: %d\nLast HTTP: %d"),
+                        return FText::FromString(FString::Printf(TEXT("Session: %s\n%s\nPhase: %s\nViewer: %s\nAccepted actions in this view: %d\nLast HTTP: %d"),
                             *Value.SessionId, *RevisionText, *Value.Phase, *Value.ViewerPlayerId,
                             Value.AcceptedActionCount, Value.LastHttpStatus));
                     })]
@@ -303,6 +321,8 @@ public:
         // replacing an editable draft after a failed read.
         if (SessionIdBox.IsValid() && State().bHasSession)
         { SessionIdBox->SetText(FText::FromString(State().SessionId)); }
+        if (SessionIdBox.IsValid() && State().bHandoffPending)
+        { SessionIdBox->SetText(FText::GetEmpty()); }
         if (!Options.IsValid()) { return; }
         Options->ClearChildren();
         for (const auto& Option : State().Options)
@@ -586,10 +606,31 @@ void FLiveCoreScene::Attach()
     Controller->SetIgnoreLookInput(true);
     if (Camera.IsValid()) { Controller->SetViewTarget(Camera.Get()); }
     Panel = SNew(SLiveCorePanel, this);
-    CameraSurface = SNew(SLiveCoreCameraSurface, this);
+    const TWeakPtr<FLiveCoreSession> WeakSession = Session;
+    CameraSurface = SNew(SLiveCoreCameraSurface, this)
+        .Visibility_Lambda([WeakSession]()
+        {
+            const auto Current = WeakSession.Pin();
+            return Current.IsValid() && !Current->GetState().bHandoffPending ? EVisibility::Visible : EVisibility::Hidden;
+        });
     Overlay = SNew(SHorizontalBox)
         + SHorizontalBox::Slot().AutoWidth()[SNew(SBox).WidthOverride(410)[Panel.ToSharedRef()]]
-        + SHorizontalBox::Slot().FillWidth(1)[CameraSurface.ToSharedRef()];
+        + SHorizontalBox::Slot().FillWidth(1)
+        [SNew(SOverlay)
+            + SOverlay::Slot()[CameraSurface.ToSharedRef()]
+            + SOverlay::Slot()
+            [SNew(SBorder)
+                .BorderImage(FCoreStyle::Get().GetBrush(TEXT("WhiteBrush")))
+                .BorderBackgroundColor(FLinearColor(0.025f, 0.035f, 0.055f, 1.0f))
+                .HAlign(HAlign_Center).VAlign(VAlign_Center).Padding(24)
+                .Visibility_Lambda([WeakSession]()
+                {
+                    const auto Current = WeakSession.Pin();
+                    return Current.IsValid() && Current->GetState().bHandoffPending ? EVisibility::Visible : EVisibility::Collapsed;
+                })
+                [SNew(STextBlock).AutoWrapText(true)
+                    .Font(FCoreStyle::GetDefaultFontStyle(TEXT("Bold"), 20))
+                    .Text(FText::FromString(TEXT("Private view hidden\nPass control to the next player, then select Ready.")))]]];
     Viewport()->AddViewportWidgetContent(Overlay.ToSharedRef(), 10);
     FInputModeUIOnly Input;
     Input.SetWidgetToFocus(Panel);
@@ -604,6 +645,16 @@ void FLiveCoreScene::Changed()
 {
     if (Panel.IsValid()) { Panel->RefreshOptions(); }
     const auto& State = Session->GetState();
+    if (State.bHandoffPending)
+    {
+        // Privacy is physical presentation teardown as well as an opaque curtain.
+        // No old viewer actor, navigation state or capture can survive a handoff.
+        if (CameraSurface.IsValid()) { CameraSurface->Cancel(); }
+        ClearBoard();
+        RenderedSession.Reset(); RenderedProjectionVersion = 0;
+        CameraNavigation = Warhammer::LiveCore::FTabletopCamera(); CameraError.Reset();
+        return;
+    }
     if (State.bHasSession && State.ProjectionVersion > 0 && (RenderedSession != State.SessionId || RenderedProjectionVersion != State.ProjectionVersion))
     {
         RebuildBoard();
@@ -669,6 +720,7 @@ void FLiveCoreScene::Shutdown()
 
 void FLiveCoreScene::UpdateCameraLayout(const FGeometry& G)
 {
+    if (Session->GetState().bHandoffPending) { return; }
     if (!Viewport() || !Viewport()->Viewport || !Camera.IsValid() || !World()->GetFirstPlayerController()) { return; }
     const auto ViewportWidget = Viewport()->GetGameViewportWidget();
     if (!ViewportWidget.IsValid()) { return; }
@@ -721,7 +773,8 @@ bool AWarhammerClientGameMode::BeginCameraInputProofForTests(FString& OutError)
         !TestExit.Equals(TEXT("Automation Test Queue Empty"), ESearchCase::CaseSensitive) ||
         FParse::Value(FCommandLine::Get(), TEXT("CoreUrl="), SuppliedCoreUrl) ||
         !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_ADMIN_TOKEN")).IsEmpty() ||
-        !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN")).IsEmpty())
+        !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_TOKEN")).IsEmpty() ||
+        !FPlatformMisc::GetEnvironmentVariable(TEXT("WH_CORE_PLAYER_B_TOKEN")).IsEmpty())
     { OutError = TEXT("Camera input proof requires both dedicated-process opt-ins, -game -unattended, exact TestExit, no CoreUrl and no Core credentials."); return false; }
     if (!Scene || !Scene->bAttached || !Scene->Camera.IsValid() || !Scene->CameraSurface.IsValid() ||
         !Scene->Panel.IsValid() || Scene->NavigationBeforeInputProof.IsSet())

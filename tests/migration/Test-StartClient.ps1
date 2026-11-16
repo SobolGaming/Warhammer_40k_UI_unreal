@@ -11,7 +11,7 @@ $scratchParent = [IO.Path]::GetFullPath((Join-Path $repo '.local/tests/start-cli
 $fixtureRoot = Join-Path $scratchParent ([guid]::NewGuid().ToString('N'))
 $previousProbe = Get-Variable -Name WarhammerStartClientTestProbe -Scope Global -ErrorAction SilentlyContinue
 $caseCount = 0
-$environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
+$environmentNames = @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_PLAYER_B_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')
 $originalEnvironment = @{}
 foreach ($name in $environmentNames) { $originalEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 
@@ -20,6 +20,7 @@ function Start-Process {
     param([string]$FilePath, [string]$ArgumentList, [string]$WorkingDirectory, [string]$WindowStyle, [switch]$PassThru)
     $probe = $global:WarhammerStartClientTestProbe
     $probe.LaunchCalls++
+    if ($env:WH_CORE_PLAYER_B_TOKEN -cne 'stub-helper-WH_CORE_PLAYER_B_TOKEN') { throw 'Player-b child credential environment was not supplied' }
     $probe.FilePath = $FilePath; $probe.Arguments = $ArgumentList
     $probe.WorkingDirectory = $WorkingDirectory; $probe.WindowStyle = $WindowStyle
     if ($probe.LaunchFails) { throw 'Synthetic client launch failure' }
@@ -35,7 +36,7 @@ function Start-Process {
     return $client
 }
 function Invoke-LauncherCase([hashtable]$Arguments, [hashtable]$Faults = @{}, [string]$ExpectedError = '',
-    [hashtable]$InitialEnvironment = @{ WH_CORE_ADMIN_TOKEN = 'stub-parent-admin'; WH_CORE_PLAYER_TOKEN = 'stub-parent-player'; WH_CORE_BASE_URL = 'http://stub.invalid/'; WH_LIVE_CORE_TEST_URL = 'http://stub.invalid/test' }) {
+    [hashtable]$InitialEnvironment = @{ WH_CORE_ADMIN_TOKEN = 'stub-parent-admin'; WH_CORE_PLAYER_TOKEN = 'stub-parent-player'; WH_CORE_PLAYER_B_TOKEN = 'stub-parent-player-b'; WH_CORE_BASE_URL = 'http://stub.invalid/'; WH_LIVE_CORE_TEST_URL = 'http://stub.invalid/test' }) {
     $expectedEnvironment = @{}
     foreach ($name in $environmentNames) {
         [Environment]::SetEnvironmentVariable($name, $InitialEnvironment[$name], 'Process')
@@ -78,7 +79,7 @@ $probe = $global:WarhammerStartClientTestProbe
 $probe.HostCalls++; $probe.Mode = $Mode; $probe.Port = $Port
 $probe.Endpoint = $Endpoint; $probe.CoreRoot = $CoreRoot; $probe.CoreVersion = $CoreVersion; $probe.ReadinessSeconds = $ReadinessSeconds
 # The actual helper can initialize credentials before either success or failure.
-foreach ($name in @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')) {
+foreach ($name in @('WH_CORE_ADMIN_TOKEN', 'WH_CORE_PLAYER_TOKEN', 'WH_CORE_PLAYER_B_TOKEN', 'WH_CORE_BASE_URL', 'WH_LIVE_CORE_TEST_URL')) {
     [Environment]::SetEnvironmentVariable($name, ('stub-helper-' + $name), 'Process')
 }
 if ($probe.HostFails) { throw 'Synthetic Core startup failure' }

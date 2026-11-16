@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "observedUtc": "2026-11-16T12:14:56.083639+00:00",
+  "kind": "P2B_MANUAL_TEST_SETUP",
+  "status": "PREPARED_NONVISIBLE_CHECKS_PASS_OWNER_VISIBLE_RUN_NOT_OBSERVED",
+  "runtimeSourceHead": "a6dbb1ca4ca34be2aaeef767286a9738145a439a",
+  "launcherSourceHead": "a1d9013b62336997b838c21c3e4860e20cd9cb7e",
+  "sourceCheckpoint": "bf88a4c1a78642c25bc3529e58e2bd053043d0cf",
+  "sourceBinding": "Current Source/Config/Content match the built runtime candidate; scripts/tests match the reviewed launcher. Documentation-only corrections do not change the executable. Reused the exact preserved archive; compilation was not rerun.",
+  "manualExecutable": "C:\\SWDev\\warhammer\\.local\\manual-client\\p2b\\Windows\\WarhammerClient\\Binaries\\Win64\\WarhammerClient.exe",
+  "executableBytes": 332550656,
+  "executableSha256": "95e6b03a53292e353458a554696e0351e71caab96c6804744bbff8fc3dd501b2",
+  "completePackageFiles": 50,
+  "completePackageBytes": 975978105,
+  "allOriginalPackageHashesVerifiedBeforeAndAfterCopy": true,
+  "core": {
+    "coreCommit": "4f9bef0df2fb974d1285232a1009b8781926361d",
+    "contractVersion": "44.5.0",
+    "runtimeBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba",
+    "runtimeResourceCount": 3130
+  },
+  "runs": [
+    {
+      "mode": "Resources",
+      "status": "PASS",
+      "startedUtc": "2026-11-16T12:10:53.8288784Z",
+      "finishedUtc": "2026-11-16T12:11:00.7588880Z",
+      "nativeExitCode": 0,
+      "parentEnvironmentRestored": true,
+      "configUnchanged": true,
+      "forcedTermination": false,
+      "cleanupErrors": [],
+      "tests": 4,
+      "testNames": [
+        "Warhammer.RuntimeData.CanonicalSession",
+        "Warhammer.RuntimeData.CorruptSessionFails",
+        "Warhammer.RuntimeData.MissingSessionFails",
+        "Warhammer.RuntimeData.StartupResources"
+      ],
+      "rawResult": {
+        "privatePath": ".local/testpackage/20261116T121053Z-87d9dda540384f91967f6d6566e47a33/result.json",
+        "bytes": 5263,
+        "sha256": "eea5a580dd2a7afe189f9b0944c6698f0d637caeeec752a26cba646f14368019"
+      },
+      "hostStop": null,
+      "binaryUnchanged": true
+    },
+    {
+      "mode": "Core",
+      "status": "PASS",
+      "startedUtc": "2026-11-16T12:11:09.8165027Z",
+      "finishedUtc": "2026-11-16T12:12:24.8120375Z",
+      "nativeExitCode": 0,
+      "parentEnvironmentRestored": true,
+      "configUnchanged": true,
+      "forcedTermination": false,
+      "cleanupErrors": [],
+      "tests": 3,
+      "testNames": [
+        "Warhammer.LiveCore.Integration.LocalPlayerHandoffAction",
+        "Warhammer.LiveCore.Integration.RealSessionAction",
+        "Warhammer.LiveCore.Integration.ReopenSessionAction"
+      ],
+      "rawResult": {
+        "privatePath": ".local/testpackage/20261116T121109Z-a9cca42aa3f048548d15df0ee425d877/result.json",
+        "bytes": 5475,
+        "sha256": "4c4ffab7fd1a5b541ffc3cf2cfcdb06ebc9474469831553cd1add83d30b14435"
+      },
+      "hostStop": {
+        "owned": true,
+        "status": "STOPPED",
+        "forcedTermination": false
+      },
+      "binaryUnchanged": true
+    }
+  ],
+  "privateCopyManifest": {
+    "privatePath": ".local/development/p2b-manual-setup.json",
+    "bytes": 10647,
+    "sha256": "f0d326c57dc0c0840f695de50a50f9f658e0b3fbce48d45adc8a4f7e698e193f"
+  },
+  "manualGuide": "../../development/manual-testing.md",
+  "limits": [
+    "No new visible game window was launched; the owner can now run the complete command.",
+    "Earlier P2B-V1/V2 visible results retain their October scope. These seven non-visible test executions do not record the owner's later manual result.",
+    "Prepared local binaries/Core environments are ignored workstation artifacts; fresh checkouts require the documented build/copy/Core preparation.",
+    "No native Linux, clean-host Windows, physical held-button or OS-switch verification was added."
+  ]
+}

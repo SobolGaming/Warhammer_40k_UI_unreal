@@ -38,9 +38,11 @@ class ManualClientTests(unittest.TestCase):
                 launcher.local_endpoint(endpoint)
 
     def test_existing_environment_is_preserved_without_importing_defaults(self):
-        original = {"WH_CORE_ADMIN_TOKEN": "synthetic_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_player", "KEEP": "yes"}
+        original = {"WH_CORE_ADMIN_TOKEN": "synthetic_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_player", "WH_CORE_PLAYER_B_TOKEN": "synthetic_player_b", "KEEP": "yes"}
         result = launcher.development_environment("http://127.0.0.1:8765", original)
         self.assertEqual(result["WH_CORE_ADMIN_TOKEN"], original["WH_CORE_ADMIN_TOKEN"])
+        self.assertEqual(result["WH_CORE_PLAYER_B_TOKEN"], original["WH_CORE_PLAYER_B_TOKEN"])
+        self.assertIsNot(result, original)
         self.assertEqual(result["WH_CORE_BASE_URL"], "http://127.0.0.1:8765")
         self.assertNotIn("WH_CORE_BASE_URL", original)
 
@@ -48,17 +50,54 @@ class ManualClientTests(unittest.TestCase):
         registry = types.ModuleType("warhammer40k_core.adapters.access_control")
         registry.DEV_ADMIN_TOKEN = "synthetic_default_admin"
         registry.DEV_PLAYER_A_TOKEN = "synthetic_default_player"
+        registry.DEV_PLAYER_B_TOKEN = "synthetic_default_player_b"
         captured = io.StringIO()
         with patch.dict(sys.modules, {registry.__name__: registry}), contextlib.redirect_stdout(captured), contextlib.redirect_stderr(captured):
             result = launcher.development_environment("http://127.0.0.1:8765", {})
         self.assertEqual(result["WH_CORE_ADMIN_TOKEN"], registry.DEV_ADMIN_TOKEN)
         self.assertEqual(result["WH_CORE_PLAYER_TOKEN"], registry.DEV_PLAYER_A_TOKEN)
+        self.assertEqual(result["WH_CORE_PLAYER_B_TOKEN"], registry.DEV_PLAYER_B_TOKEN)
         self.assertEqual(captured.getvalue(), "")
 
     def test_invalid_token_is_rejected_without_disclosing_it(self):
         with self.assertRaises(launcher.StartupError) as failure:
-            launcher.development_environment("http://127.0.0.1:8765", {"WH_CORE_ADMIN_TOKEN": "synthetic invalid value", "WH_CORE_PLAYER_TOKEN": "synthetic_player"})
+            launcher.development_environment("http://127.0.0.1:8765", {"WH_CORE_ADMIN_TOKEN": "synthetic invalid value", "WH_CORE_PLAYER_TOKEN": "synthetic_player", "WH_CORE_PLAYER_B_TOKEN": "synthetic_player_b"})
         self.assertNotIn("synthetic invalid value", str(failure.exception))
+
+    def test_partial_defaults_keep_existing_principals_and_input_mapping(self):
+        registry = types.ModuleType("warhammer40k_core.adapters.access_control")
+        registry.DEV_ADMIN_TOKEN = "synthetic_default_admin"
+        registry.DEV_PLAYER_A_TOKEN = "synthetic_default_player_a"
+        registry.DEV_PLAYER_B_TOKEN = "synthetic_default_player_b"
+        original = {"WH_CORE_ADMIN_TOKEN": "synthetic_override_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_override_player_a"}
+        with patch.dict(sys.modules, {registry.__name__: registry}):
+            result = launcher.development_environment("http://127.0.0.1:8765", original)
+        self.assertEqual(result["WH_CORE_ADMIN_TOKEN"], original["WH_CORE_ADMIN_TOKEN"])
+        self.assertEqual(result["WH_CORE_PLAYER_TOKEN"], original["WH_CORE_PLAYER_TOKEN"])
+        self.assertEqual(result["WH_CORE_PLAYER_B_TOKEN"], registry.DEV_PLAYER_B_TOKEN)
+        self.assertNotIn("WH_CORE_PLAYER_B_TOKEN", original)
+        self.assertNotIn("WH_CORE_BASE_URL", original)
+
+    def test_invalid_player_b_never_falls_back_to_another_credential(self):
+        for bad in ("synthetic private value", "x" * 257, "non_ascii_é"):
+            original = {"WH_CORE_ADMIN_TOKEN": "synthetic_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_player_a", "WH_CORE_PLAYER_B_TOKEN": bad}
+            captured = io.StringIO()
+            with self.subTest(kind="invalid player-b"), contextlib.redirect_stdout(captured), contextlib.redirect_stderr(captured), self.assertRaises(launcher.StartupError) as failure:
+                launcher.development_environment("http://127.0.0.1:8765", original)
+            self.assertIn("WH_CORE_PLAYER_B_TOKEN", str(failure.exception))
+            self.assertNotIn(bad, str(failure.exception))
+            self.assertEqual(captured.getvalue(), "")
+            self.assertEqual(original["WH_CORE_PLAYER_B_TOKEN"], bad)
+
+    def test_missing_player_b_default_fails_without_borrowing_admin_or_player_a(self):
+        registry = types.ModuleType("warhammer40k_core.adapters.access_control")
+        registry.DEV_ADMIN_TOKEN = "synthetic_default_admin"
+        registry.DEV_PLAYER_A_TOKEN = "synthetic_default_player_a"
+        original = {"WH_CORE_ADMIN_TOKEN": "synthetic_override_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_override_player_a"}
+        with patch.dict(sys.modules, {registry.__name__: registry}), self.assertRaises(launcher.StartupError) as failure:
+            launcher.development_environment("http://127.0.0.1:8765", original)
+        self.assertEqual(str(failure.exception), "The selected Core development credential registry is unavailable.")
+        self.assertNotIn("WH_CORE_PLAYER_B_TOKEN", original)
 
     def test_main_checks_runtime_before_environment_and_launches_client_only(self):
         with tempfile.TemporaryDirectory() as directory:
