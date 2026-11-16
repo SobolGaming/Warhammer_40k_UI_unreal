@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "sourceHead": "7ee4a4fac6f3cb04aa1f255135000036f270d77b",
+  "originalCriteriaCommit": "c46f6ad554ab688a13b98043ed64f060b509f09d",
+  "scope": "Finite SOURCE only; no execution or manual acceptance",
+  "currentPacket": {
+    "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2cCore46Adoption\\7ee4a4f-20261116T222656Z-68d6701a\\manifest.json",
+    "bytes": 63622,
+    "sha256": "4f60823a1411f1f5c7b985dc12185b6466a3898871090ddb2f4524a366f43378"
+  },
+  "roles": [
+    {
+      "role": "CODE",
+      "agent": "p2c_repaired_code_review",
+      "verdict": "PASS",
+      "raw": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-code-7ee4a4f-report.md",
+        "bytes": 1828,
+        "sha256": "391a76f2802e98599a04fb2a77212cb9ef2c8849aaeeab7c3e884c55d81f7eb4"
+      }
+    },
+    {
+      "role": "REQ",
+      "agent": "p2c_repaired_req_review",
+      "verdict": "PASS",
+      "raw": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-req-7ee4a4f-report.md",
+        "bytes": 2713,
+        "sha256": "15bb9a16d31fbfd3e472ae270980138279c21c80fbeadba2f8c8e3bd105a7c2e"
+      }
+    }
+  ],
+  "actualControls": {
+    "initialForkTurns": "none for both independent roles",
+    "modelOverride": false,
+    "candidateSourceRefresh": "Same independent contexts refreshed f37\u21927ee for the two-line test syntax repair; production/script/config hashes unchanged. Not new CLI sessions.",
+    "hostSandbox": "workspace-write / auto_review; read-only/no-escalation/no-memory/network/mutation/delegation restrictions were instruction-enforced, not CLI-attested"
+  },
+  "history": [
+    {
+      "candidate": "3cea474",
+      "cli": "BLOCKED before file reading: registered Core launch requires installed app",
+      "raw": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\reviews\\P2cCore46Adoption\\3cea474-20261116T222011Z-9fe70386\\CODE\\report.txt",
+        "bytes": 986,
+        "sha256": "79bc8cfb61b93a36c1abe3762c7d8f69febaf1e2ecd740a61bc4e73ee5cb1357"
+      },
+      "reqWrapper": "Stopped before launch due exclusive CODE prompt file lock"
+    },
+    {
+      "candidate": "3cea474",
+      "roles": [
+        "p2c_fresh_code_review",
+        "p2c_fresh_req_review"
+      ],
+      "verdict": "CHANGES_REQUESTED",
+      "finding": "P1 LiveCoreSession.cpp:440 selected46 pending requests requirev6; historical nestedv5 gate blocks create/choice/reopen/handoff. Both raw role final responses retained in team/tool transcript; current repair/negative/source-example regression are explicit."
+    }
+  ]
+}

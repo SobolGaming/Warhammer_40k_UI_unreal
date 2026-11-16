@@ -6,6 +6,8 @@ Current finite increment: **P2c Core 46 adoption of the existing session workflo
 
 P2b / PR #8 merged as `6e76f4a44ab84eca8ae343db27631f3ccbc55d6c` after the owner reported the manual tests passed. Its prepared package and Core44.5 runtime remain separate. P2a/PR #7 is also merged. Full gameplay, remote/spectator, durability and deferred HV-01–HV-06 remain open.
 
+P2c supporting results: [native/launch provenance](evidence/2026-11-16-p2c-core-adoption.json), [actual independent SOURCE settings/results](evidence/2026-11-16-p2c-source-reviews.json). Runtime7ee4a4f passed the package,23 Unit,4 resources and3 real workflows in each Managed/Attach mode. P2C-V1/V2 remain separate rendered criteria; preserve the recorded failed builds, first real integration failure and blocked CLI review.
+
 P2b supporting evidence:
 
 - [Manual testing and complete setup commands](../development/manual-testing.md), [2026-11-16 preparation/results](evidence/2026-11-16-p2b-manual-setup.json): prepared a verified complete Windows copy at a usable absolute path; four resources and three real-Core checks pass. Includes compilation/copy/Core preparation and both Attach terminals. The owner subsequently reported these manual tests passed before PR #8 merged; this does not verify the46 candidate.

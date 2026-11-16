@@ -1,6 +1,16 @@
 # P2c Core 46 manual verification
 
-P2c adapts the existing workflow to exact Core `fc52e9166ff6380b606269ce362f4f1cbc6a2835` /46.0.0. The [canonical plan](../plans/unreal-migration-plan.md) owns P2C-V1/V2 and their actual status. These are required workflow checks, not a claim that Linux, clean-machine installation or full gameplay is verified. At this original-criteria checkpoint the46 implementation/package/runtime is **not yet prepared**; run these commands only after its build/native/SOURCE gates pass. A prepared absolute workstation command will be recorded after the copy is verified.
+P2c adapts the existing workflow to exact Core `fc52e9166ff6380b606269ce362f4f1cbc6a2835` /46.0.0. The [canonical plan](../plans/unreal-migration-plan.md) owns P2C-V1/V2 and their actual status. These are required workflow checks, not a claim that Linux, clean-machine installation or full gameplay is verified. Run visible checks only after the affected build/native/SOURCE gates pass.
+
+## Prepared workstation command
+
+This workstation now has the separate verified46 runtime and a complete verified outside-checkout package from source `7ee4a4fac6f3cb04aa1f255135000036f270d77b`:50 files /976,189,105 bytes, nested executable SHA256 `133d18325ac773e960401645b09b5bb2eca15c3d3247e09d9bc6abffe9c283e8`. The32.102-second package build,23 Unit,4 resources and3 real workflows in each Managed/Attach mode passed. Source reviews and visible results are recorded separately in the plan. No compilation or undefined shell variable is needed to launch this prepared copy:
+
+```powershell
+& 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal\scripts\Start-Client.ps1' -CoreMode Managed -CoreVersion '46.0.0' -Port 19138 -ClientExecutable 'C:\SWDev\warhammer\.local\manual-client\p2c\7ee4a4f\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
+```
+
+The same executable path is saved in this checkout's `.local/p2c-client-executable.txt` for the full blocks below. It is a workstation artifact, not a source-tree or distributable dependency. Keep the entire Windows folder together. On another checkout use the complete preparation/build/copy instructions below; do not copy a Windows Python environment to another host.
 
 ## Prepare and compile
 

@@ -16,7 +16,7 @@ Run every command below from the `Warhammer_40k_UI_unreal` repository root. Comp
 
 ### Windows: routine launch
 
-Use the [complete P2c manual-testing guide](docs/development/p2c-manual-testing.md) for current Core 46 preparation, compilation, whole-folder copy, fresh-shell commands and identified verification criteria. A current 46 prepared copy has not yet been established by this documentation update; do not use the old P2b executable with the new default profile. The launcher opens an existing built executable and does not compile or install anything.
+Use the [complete P2c manual-testing guide](docs/development/p2c-manual-testing.md) for the verified current Core46 workstation package's absolute launch command, preparation, compilation, whole-folder copy, fresh-shell commands and identified verification criteria. The prepared package is source7ee4a4f; its native checks passed and visible/source acceptance is recorded separately in the plan. The launcher opens an existing built executable and does not compile or install anything. Retained P2b executables require their explicit44.5 profile below.
 
 For Editor development, first complete [first-time setup and build](#first-time-setup-and-build), prepare the separate Core 46 runtime, then run this whole block in PowerShell 7:
 
