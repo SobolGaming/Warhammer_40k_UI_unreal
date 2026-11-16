@@ -10,7 +10,7 @@ On a fresh checkout only, create the separate46 source/runtime. This command ref
 
 ```powershell
 Set-Location -LiteralPath 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal'
-$taskNativePython = 'C:\Users\Rabid\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\python.exe'
+$taskNativePython = 'C:\Users\Rabid\AppData\Roaming\uv\python\cpython-3.14.5-windows-x86_64-none\python.exe'
 & ./scripts/Prepare-CoreDevelopmentRuntime.ps1 -CoreVersion '46.0.0' -PythonExecutable $taskNativePython
 ```
 
@@ -55,7 +55,7 @@ Start the separate host in terminal1; keep it running through the clients, then 
 
 ```powershell
 Set-Location -LiteralPath 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal'
-& ./scripts/Start-CoreDevelopmentServer.ps1 -CoreVersion '46.0.0' -Port 19139
+& ./.local/core-46.0.0/Scripts/python.exe -I -B ./.local/core-source-46.0.0/scripts/run_phase18m_reference_server.py --host 127.0.0.1 --port 19139
 ```
 
 Terminal2, fresh shell. This diagnostic changes only the client's player-b credential and restores it afterwards; the host retains its ordinary development credentials. Never publish real credentials, seeds or session IDs:
@@ -70,13 +70,13 @@ try {
 } finally {
     [Environment]::SetEnvironmentVariable('WH_CORE_PLAYER_B_TOKEN', $taskSavedPlayerB, 'Process')
 }
-Invoke-RestMethod -Uri 'http://127.0.0.1:19139/health' | Select-Object status
+& ./scripts/Start-CoreDevelopmentServer.ps1 -Mode Attach -CoreVersion '46.0.0' -Endpoint 'http://127.0.0.1:19139/' | Select-Object status
 & ./scripts/Start-Client.ps1 -CoreMode Attach -CoreVersion '46.0.0' -Endpoint 'http://127.0.0.1:19139/' -ClientExecutable $taskExe
-Invoke-RestMethod -Uri 'http://127.0.0.1:19139/health' | Select-Object status
+& ./scripts/Start-CoreDevelopmentServer.ps1 -Mode Attach -CoreVersion '46.0.0' -Endpoint 'http://127.0.0.1:19139/' | Select-Object status
 ```
 
 1. In the first client create/choose as player-a and copy the session ID privately. Hand off/Ready; expect actual HTTP401 and an empty privacy display. No automatic create/retry or old player's data may reappear. Close normally; the host must survive.
 2. In the second, ordinary client paste that ID and Open existing session. Confirm current player-a projection and local count0; submit an offered choice if still available, otherwise retain the current known result. Hand off/Ready to player-b successfully, confirming current disclosure only. Close normally.
-3. Both health calls must succeed. Stop the separately owned host from terminal1; the client must never stop it.
+3. Both authenticated Attach readiness checks must succeed. Stop the separately owned host from terminal1; the client must never stop it.
 
 For each criterion record tester, UTC date, source/package executable SHA256, exact Core SHA/build/resources, ordered observations and private screenshot/log locations. Native request instrumentation supplies zero-mutation/read-count proof. Keep failed/blocked/not-run boxes unchecked in the plan and PR body; rendered/native results do not certify physical held-button/OS-switch behavior or native Linux.

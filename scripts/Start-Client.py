@@ -14,10 +14,11 @@ from urllib.parse import urlsplit, urlunsplit
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CORE_PROFILES = {
+    "46.0.0": ("fc52e9166ff6380b606269ce362f4f1cbc6a2835", "warhammer40k-core-v2:runtime-tree-sha256-v1:ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19", 3256),
     "44.5.0": ("4f9bef0df2fb974d1285232a1009b8781926361d", "warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba", 3130),
     "44.3.33": ("5f509724da25a2f6ded0c2739a8e7c84bdf59c91", "warhammer40k-core-v2:runtime-tree-sha256-v1:65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a", 3116),
 }
-CORE_COMMIT, CORE_BUILD, CORE_RESOURCE_COUNT = CORE_PROFILES["44.5.0"]
+CORE_COMMIT, CORE_BUILD, CORE_RESOURCE_COUNT = CORE_PROFILES["46.0.0"]
 
 
 class StartupError(RuntimeError):
@@ -38,7 +39,7 @@ def local_endpoint(value: str) -> str:
     return urlunsplit(("http", f"127.0.0.1:{port}", "", "", ""))
 
 
-def verify_core_reference(root: Path, version: str = "44.5.0") -> None:
+def verify_core_reference(root: Path, version: str = "46.0.0") -> None:
     if not (root / "scripts/run_phase18m_reference_server.py").is_file():
         raise StartupError("CoreRoot must contain the selected development-server checkout.")
     options = ["git", "--no-optional-locks", "-c", "core.fsmonitor=false", "-c", "core.untrackedCache=false", "-c", "core.hooksPath=" + ("NUL" if sys.platform == "win32" else "/dev/null"), "-C", str(root)]
@@ -51,7 +52,7 @@ def verify_core_reference(root: Path, version: str = "44.5.0") -> None:
         raise StartupError("Core checkout must be clean at the selected revision; this launcher never resets it.")
 
 
-def verify_installed_core(version: str = "44.5.0") -> None:
+def verify_installed_core(version: str = "46.0.0") -> None:
     if sys.version_info[:2] != (3, 14) or not sys.flags.isolated or not sys.dont_write_bytecode:
         raise StartupError("Use the native Core Python 3.14 environment with -I -B.")
     try:
@@ -120,7 +121,7 @@ def main(argv: list[str] | None = None) -> int:
     selection.add_argument("--client-executable", type=Path, help="Explicit packaged native client executable; ignores UE_ROOT and runs from its containing folder.")
     parser.add_argument("--endpoint", required=True, type=local_endpoint, help="Already running http://127.0.0.1:<port> origin; no credentials in URLs.")
     parser.add_argument("--core-root", type=Path, help="Optional pinned clean checkout to verify as the manual server's script reference.")
-    parser.add_argument("--core-version", choices=tuple(CORE_PROFILES), default="44.5.0", help="Exact development runtime profile. Use 44.3.33 only with the retained older preview executable.")
+    parser.add_argument("--core-version", choices=tuple(CORE_PROFILES), default="46.0.0", help="Exact development runtime profile. Older profiles require their matching older preview executable.")
     args = parser.parse_args(argv)
     try:
         if args.client_executable is not None:

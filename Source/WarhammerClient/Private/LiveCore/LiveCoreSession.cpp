@@ -15,8 +15,8 @@ namespace
 namespace E01 = Warhammer::Migration::E01;
 constexpr int32 MaximumResponseBytes = 4 * 1024 * 1024;
 constexpr int32 MaximumEntities = 4096;
-const TCHAR* CoreBuild = TEXT("warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba");
-const TCHAR* Contract = TEXT("44.5.0");
+const TCHAR* CoreBuild = TEXT("warhammer40k-core-v2:runtime-tree-sha256-v1:ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19");
+const TCHAR* Contract = TEXT("46.0.0");
 
 bool Exact(const FString& A, const FString& B) { return A.Equals(B, ESearchCase::CaseSensitive); }
 TSharedPtr<FJsonValue> Field(const TSharedPtr<FJsonObject>& O, const TCHAR* Name)
@@ -78,7 +78,7 @@ bool Parse(const FString& Text, TSharedPtr<FJsonObject>& Out, FString& Error)
 }
 bool Identity(const TSharedPtr<FJsonObject>& O)
 {
-    return IsString(O, TEXT("schema_version"), TEXT("session-metadata-v44-contract")) &&
+    return IsString(O, TEXT("schema_version"), TEXT("session-metadata-v46-contract")) &&
         IsString(O, TEXT("engine_build_id"), CoreBuild) && IsString(O, TEXT("server_contract_version"), Contract);
 }
 bool KnownPlayer(const FString& Player)
@@ -115,7 +115,7 @@ FString Command(const FString& Session, const FString& Id, int64 RevisionValue,
     const FString* Request, const FString* Option)
 {
     auto O = MakeShared<FJsonObject>();
-    O->SetStringField(TEXT("schema_version"), TEXT("session-command-envelope-v2-weapon-instances"));
+    O->SetStringField(TEXT("schema_version"), TEXT("session-command-envelope-v3-viewer-identities"));
     O->SetStringField(TEXT("command_id"), Id); O->SetStringField(TEXT("session_id"), Session);
     O->SetNumberField(TEXT("expected_session_revision"), static_cast<double>(RevisionValue));
     auto Submission = MakeShared<FJsonObject>();
@@ -283,7 +283,7 @@ bool ReadCreatedSession(const FString& Text, FMetadata& OutMetadata, FString& Ou
         !String(O, TEXT("game_id"), Candidate.GameId) || !Revision(O, TEXT("session_revision"), Candidate.Revision) ||
         Candidate.Revision != 0 || !IsString(O, TEXT("session_state"), TEXT("created")) || !Scope(Object(O, TEXT("visibility")), true))
     {
-        OutError = TEXT("Created session identity, revision or administrator scope differs from the selected Core 44.5.0 build."); return false;
+        OutError = TEXT("Created session identity, revision or administrator scope differs from the selected Core 46.0.0 build."); return false;
     }
     OutMetadata = MoveTemp(Candidate); OutError.Reset(); return true;
 }
@@ -303,9 +303,9 @@ bool ReadExistingSession(const FString& Text, const FString& ExpectedSessionId, 
         !Scope(Visibility, false, ExpectedViewerPlayerId) || !Revision(Visibility, TEXT("delay_revisions"), DelayRevisions) || DelayRevisions != 0 ||
         !Boolean(Visibility, TEXT("may_mutate_lifecycle"), bMayMutateLifecycle) || bMayMutateLifecycle ||
         !Boolean(Visibility, TEXT("may_submit_decision"), bMaySubmitDecision) || !bMaySubmitDecision ||
-        !Boolean(Visibility, TEXT("omniscient"), bOmniscient) || bOmniscient)
+        !Boolean(Visibility, TEXT("omniscient"), bOmniscient) || bOmniscient || !Null(O, TEXT("last_activity_at")))
     {
-        OutError = TEXT("Existing session identity, revision or expected authenticated player scope differs from the selected Core 44.5.0 build.");
+        OutError = TEXT("Existing session identity, revision or expected authenticated player scope differs from the selected Core 46.0.0 build.");
         return false;
     }
     FString Lifecycle;
@@ -330,11 +330,11 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     FString ReturnedSession;
     int64 NewRevision;
     const auto P = Object(O, TEXT("projection"));
-    if (!IsString(O, TEXT("schema_version"), TEXT("session-projection-v9-random-profiles")) ||
+    if (!IsString(O, TEXT("schema_version"), TEXT("session-projection-v10-viewer-identities")) ||
         !String(O, TEXT("session_id"), ReturnedSession) || !Exact(ReturnedSession, SessionId) ||
         !IsString(O, TEXT("visibility_role"), TEXT("player")) || !Revision(O, TEXT("session_revision"), NewRevision) ||
         NewRevision < OutState.SessionRevision || OutState.ProjectionVersion == MAX_uint64 || !IsString(P, TEXT("viewer_player_id"), *ExpectedViewerPlayerId) ||
-        !IsString(P, TEXT("viewer_role"), TEXT("player")))
+        !IsString(P, TEXT("viewer_role"), TEXT("player")) || !IsString(P, TEXT("projection_schema"), TEXT("game-view-v14-viewer-identities")))
     {
         OutError = TEXT("Projection session, revision or expected authenticated player scope mismatch."); return false;
     }
@@ -494,10 +494,41 @@ bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId
 {
     if (!KnownPlayer(ExpectedViewerPlayerId)) { OutError = TEXT("Unsupported expected player identity."); return false; }
     E01::FOutcome Parsed; E01::FReadError Error;
-    if (!E01::ReadOutcome(HttpStatus, Text, Parsed, Error)) { OutError = TEXT("Unusable command receipt: ") + Error.Code; return false; }
+    if (!E01::ReadOutcome(HttpStatus, Text, Parsed, Error, E01::EWireProfile::Contract46))
+    { OutError = TEXT("Unusable command receipt: ") + Error.Code; return false; }
     FOutcome Candidate; Candidate.bError = !Parsed.bCommandOutcome; Candidate.bRequiresReconciliation = Candidate.bError;
     Candidate.Code = Parsed.Code; Candidate.Message = Parsed.Message;
     if (!Parsed.FidelityGap.IsEmpty()) { Candidate.Message += TEXT(" ") + Parsed.FidelityGap; }
+    if (Candidate.bError)
+    {
+        // Typed diagnostics are supplied by Core, never inferred from local rules.
+        const auto Diagnostics = Object(Object(Parsed.Json, TEXT("error")), TEXT("diagnostics"));
+        if (Diagnostics.IsValid())
+        {
+            FString Kind;
+            if (!String(Diagnostics, TEXT("kind"), Kind)) { OutError = TEXT("Invalid returned diagnostic kind."); return false; }
+            if (Exact(Kind, TEXT("unsupported_reason")))
+            {
+                FString Reason;
+                if (!String(Diagnostics, TEXT("reason_code"), Reason)) { OutError = TEXT("Invalid returned reason code."); return false; }
+                Candidate.Message += TEXT("\nReturned reason code: ") + Reason;
+            }
+            else
+            {
+                const TArray<TSharedPtr<FJsonValue>>* Violations = nullptr;
+                if (!Array(Diagnostics, TEXT("violations"), Violations)) { OutError = TEXT("Invalid returned violations."); return false; }
+                for (const auto& Value : *Violations)
+                {
+                    const auto Violation = Value->AsObject(); FString Code, DiagnosticField;
+                    if (!String(Violation, TEXT("violation_code"), Code) ||
+                        (!Null(Violation, TEXT("field")) && !String(Violation, TEXT("field"), DiagnosticField)))
+                    { OutError = TEXT("Invalid returned violation fields."); return false; }
+                    Candidate.Message += TEXT("\nReturned violation: ") + Code +
+                        (DiagnosticField.IsEmpty() ? FString() : TEXT(" [") + DiagnosticField + TEXT("]"));
+                }
+            }
+        }
+    }
     if (Parsed.bCommandOutcome)
     {
         const auto Metadata = Object(Parsed.Json, TEXT("session"));
@@ -505,7 +536,10 @@ bool ReadOutcome(const FString& Text, int32 HttpStatus, const FString& CommandId
         if (!Exact(Parsed.CommandId, CommandId) || !String(Metadata, TEXT("session_id"), ActualSession) || !Exact(ActualSession, SessionId) ||
             !String(Parsed.Json, TEXT("operation"), ActualOperation) || !Exact(ActualOperation, Operation) || !Identity(Metadata) ||
             !Scope(Object(Metadata, TEXT("visibility")), bAdministrator, ExpectedViewerPlayerId) || !Parsed.SessionRevision.IsSet() ||
-            ExpectedRevision >= E01::MaximumExactRevision || Parsed.SessionRevision.GetValue() != ExpectedRevision + (Parsed.bCommitted ? 1 : 0))
+            (!bAdministrator && !Null(Metadata, TEXT("last_activity_at"))) ||
+            ExpectedRevision < 0 || ExpectedRevision >= E01::MaximumExactRevision ||
+            (bAdministrator ? Parsed.SessionRevision.GetValue() != ExpectedRevision + (Parsed.bCommitted ? 1 : 0) :
+                (Parsed.bCommitted ? Parsed.SessionRevision.GetValue() < ExpectedRevision : Parsed.SessionRevision.GetValue() != ExpectedRevision)))
         { OutError = TEXT("Command receipt identity, viewer, Core build or revision does not match the retained command."); return false; }
         Candidate.bAccepted = Parsed.bAccepted; Candidate.bCommitted = Parsed.bCommitted; Candidate.Revision = Parsed.SessionRevision.GetValue();
         // Only inspect supplied diagnostics after all receipt identity/scope gates.
@@ -641,7 +675,10 @@ bool FLiveCoreSession::BeginPlayerHandoff()
 {
     check(IsInGameThread());
     if (!CanBeginPlayerHandoff()) { return false; }
-    HandoffEndpoint = State.Endpoint; HandoffSessionId = State.SessionId; HandoffMinimumRevision = State.SessionRevision;
+    HandoffEndpoint = State.Endpoint; HandoffSessionId = State.SessionId;
+    // Each player's visible-event counter is a separate namespace. The next
+    // viewer's metadata establishes its own minimum; never carry this counter.
+    HandoffMinimumRevision = -1;
     const FString Target = Exact(State.ViewerPlayerId, TEXT("player-a")) ? TEXT("player-b") : TEXT("player-a");
     ++Generation;
     State = FLiveCoreState(); State.ViewerPlayerId.Reset();
@@ -692,7 +729,7 @@ void FLiveCoreSession::HandleExistingReply(int32 Status, const FString& Response
     if (!LiveCoreProtocol::ReadExistingSession(Response, ExpectedSessionId, Metadata, Error, ExpectedViewerPlayerId)) { Fail(Error); return; }
     if (State.bHandoffPending)
     {
-        if (Metadata.Revision < HandoffMinimumRevision) { Fail(TEXT("Handoff metadata regressed the last verified session revision.")); return; }
+        if (Metadata.Revision < HandoffMinimumRevision) { Fail(TEXT("Handoff metadata regressed this target viewer's verified revision.")); return; }
         HandoffMinimumRevision = Metadata.Revision;
     }
     else { State.SessionId = Metadata.SessionId; State.SessionRevision = Metadata.Revision; State.bHasSession = true; }
@@ -864,6 +901,12 @@ void FLiveCoreSession::SendPendingCommand()
                 if (!LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, Status, Retained.bFiniteAction, Self->State))
                 { Self->MarkUnknown(TEXT("Known command receipt could not be applied without regressing session state."), false); return; }
                 Self->PendingCommand.Reset(); Self->State.bUnknown = false; Self->State.bCanReconcile = false;
+                if (Retained.Credential == ECredential::Administrator)
+                {
+                    // Start was authenticated in the administrator namespace.
+                    // The first player projection supplies its own visible count.
+                    Self->State.SessionRevision = -1;
+                }
                 Self->FetchProjection();
             }
         });

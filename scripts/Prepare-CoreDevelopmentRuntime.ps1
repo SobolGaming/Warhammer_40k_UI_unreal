@@ -3,13 +3,14 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][ValidateNotNullOrEmpty()][string]$PythonExecutable,
+    [ValidateSet('46.0.0', '44.5.0')][string]$CoreVersion = '46.0.0',
     [string]$ReferenceCoreRoot = (Join-Path $PSScriptRoot '../../Warhammer_40k_AI')
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 if (!$IsWindows) { throw 'This preparation command requires native Windows; use the documented Linux Attach route (UNTESTED).' }
 . (Join-Path $PSScriptRoot 'CoreRuntimeProfile.ps1')
-$runtimeProfile = Get-CoreRuntimeProfile '44.5.0'
+$runtimeProfile = Get-CoreRuntimeProfile $CoreVersion
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $reference = [IO.Path]::GetFullPath($ReferenceCoreRoot)
 $python = [IO.Path]::GetFullPath($PythonExecutable)

@@ -18,7 +18,7 @@ FString FixturePath(const TCHAR* Relative)
 {
     return FPaths::Combine(FPaths::ProjectDir(), TEXT("tests/migration/fixtures/5f509724da25a2f6ded0c2739a8e7c84bdf59c91"), Relative);
 }
-bool Load(FAutomationTestBase& Test, const TCHAR* Relative, FString& Out)
+bool LoadHistorical(FAutomationTestBase& Test, const TCHAR* Relative, FString& Out)
 {
     if (!FFileHelper::LoadFileToString(Out, *FixturePath(Relative)))
     { Test.AddError(TEXT("Required committed Core fixture could not be read.")); return false; }
@@ -28,10 +28,30 @@ FString Serialize(const TSharedRef<FJsonObject>& Object)
 {
     FString Out; const auto Writer = TJsonWriterFactory<>::Create(&Out); FJsonSerializer::Serialize(Object, Writer); return Out;
 }
+bool Load(FAutomationTestBase& Test, const TCHAR* Relative, FString& Out)
+{
+    if (!LoadHistorical(Test, Relative, Out)) { return false; }
+    // Preserve historical bytes on disk. Only derived parser controls opt into
+    // the46 schemas; these are not observations from the selected runtime.
+    if (FString(Relative).StartsWith(TEXT("wire/")))
+    {
+        E01::FReadError Error; TSharedPtr<FJsonObject> Root;
+        if (!E01::ParseObject(Out, Root, Error)) { Test.AddError(TEXT("Historical control is invalid.")); return false; }
+        const TSharedPtr<FJsonObject>* Projection = nullptr;
+        if (Root->TryGetObjectField(TEXT("projection"), Projection))
+        {
+            Root->SetStringField(TEXT("schema_version"), TEXT("session-projection-v10-viewer-identities"));
+            (*Projection)->SetStringField(TEXT("projection_schema"), TEXT("game-view-v14-viewer-identities"));
+            Out = Serialize(Root.ToSharedRef());
+            Test.AddInfo(TEXT("Synthetic46 projection parser control derived from historical wire; not a46 runtime result."));
+        }
+    }
+    return true;
+}
 bool LoadSelected(FAutomationTestBase& Test, const TCHAR* Relative, FString& Out)
 {
     const FString Path = FPaths::Combine(FPaths::ProjectDir(),
-        TEXT("tests/migration/fixtures/4f9bef0df2fb974d1285232a1009b8781926361d"), Relative);
+        TEXT("tests/migration/fixtures/fc52e9166ff6380b606269ce362f4f1cbc6a2835"), Relative);
     if (!FFileHelper::LoadFileToString(Out, *Path))
     { Test.AddError(TEXT("Required selected Core example could not be read.")); return false; }
     return true;
@@ -39,16 +59,19 @@ bool LoadSelected(FAutomationTestBase& Test, const TCHAR* Relative, FString& Out
 bool LoadReceiptControl(FAutomationTestBase& Test, const TCHAR* Relative, FString& Out)
 {
     // Historical wire bytes remain unchanged on disk. These are derived parser
-    // controls only: replacing metadata identity does not create 44.5 wire proof.
+    // controls only: replacing metadata identity does not create46 wire proof.
     FString Historical;
-    if (!Load(Test, Relative, Historical)) { return false; }
+    if (!LoadHistorical(Test, Relative, Historical)) { return false; }
     E01::FReadError Error; TSharedPtr<FJsonObject> Root;
     if (!E01::ParseObject(Historical, Root, Error)) { Test.AddError(TEXT("Historical receipt control is invalid.")); return false; }
     const auto Metadata = Root->GetObjectField(TEXT("session"));
-    Metadata->SetStringField(TEXT("server_contract_version"), TEXT("44.5.0"));
-    Metadata->SetStringField(TEXT("engine_build_id"), TEXT("warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba"));
+    Root->SetStringField(TEXT("schema_version"), TEXT("session-command-outcome-v46-contract"));
+    Metadata->SetStringField(TEXT("schema_version"), TEXT("session-metadata-v46-contract"));
+    Metadata->SetStringField(TEXT("server_contract_version"), TEXT("46.0.0"));
+    Metadata->SetStringField(TEXT("engine_build_id"), TEXT("warhammer40k-core-v2:runtime-tree-sha256-v1:ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19"));
+    Metadata->SetField(TEXT("last_activity_at"), MakeShared<FJsonValueNull>());
     Out = Serialize(Root.ToSharedRef());
-    Test.AddInfo(TEXT("Synthetic parser control derived from historical 44.3.33 wire fields; this is not a 44.5 runtime observation."));
+    Test.AddInfo(TEXT("Synthetic parser control derived from historical44.3.33 wire fields; this is not a46 runtime observation."));
     return true;
 }
 }
@@ -70,13 +93,16 @@ bool FLiveCoreEnvelopeTest::RunTest(const FString& Parameters)
 {
     E01::FCommandEnvelope Envelope; E01::FReadError Error;
     const FString Start = LiveCoreProtocol::MakeStartCommand(TEXT("session-test"), TEXT("start-test"));
-    TestTrue(TEXT("Canonical start envelope accepted by existing strict contract reader"), E01::ReadCommandEnvelope(Start, Envelope, Error));
+    TestTrue(TEXT("Canonical46 start envelope accepted by opt-in strict reader"), E01::ReadCommandEnvelope(Start, Envelope, Error, E01::EWireProfile::Contract46));
+    TestFalse(TEXT("Historical envelope reader does not silently adopt46"), E01::ReadCommandEnvelope(Start, Envelope, Error));
+    TestTrue(TEXT("Historical start envelope remains valid in historical proof mode"), E01::ReadCommandEnvelope(
+        Start.Replace(TEXT("session-command-envelope-v3-viewer-identities"), TEXT("session-command-envelope-v2-weapon-instances")), Envelope, Error));
     TestEqual(TEXT("Start submission"), Envelope.SubmissionKind, FString(TEXT("start_session")));
     TestFalse(TEXT("Lifecycle request ID remains null"), Envelope.RequestId.IsSet());
     TestFalse(TEXT("Lifecycle result ID remains null"), Envelope.ResultId.IsSet());
     const FString Option(TEXT("offered:\"quoted\\identifier"));
     const FString Finite = LiveCoreProtocol::MakeFiniteCommand(TEXT("session-test"), TEXT("choice-test"), 7, TEXT("request-test"), Option);
-    TestTrue(TEXT("Finite envelope is contract-shaped JSON"), E01::ReadCommandEnvelope(Finite, Envelope, Error));
+    TestTrue(TEXT("Finite envelope is contract-shaped46 JSON"), E01::ReadCommandEnvelope(Finite, Envelope, Error, E01::EWireProfile::Contract46));
     TestEqual(TEXT("Exact revision"), Envelope.ExpectedSessionRevision, int64(7));
     TestEqual(TEXT("Original request identity"), Envelope.RequestId.GetValue(), FString(TEXT("request-test")));
     TestEqual(TEXT("Stable result identity"), Envelope.ResultId.GetValue(), FString(TEXT("choice-test-result")));
@@ -92,9 +118,9 @@ bool FLiveCoreCreatedIdentityTest::RunTest(const FString& Parameters)
     LiveCoreProtocol::FMetadata Metadata;
     TestTrue(TEXT("Exact selected Core metadata"), LiveCoreProtocol::ReadCreatedSession(Text, Metadata, Error));
     TestEqual(TEXT("Created revision"), Metadata.Revision, int64(0));
-    FString Wrong = Text.Replace(TEXT("44.5.0"), TEXT("44.3.33"));
+    FString Wrong = Text.Replace(TEXT("46.0.0"), TEXT("44.5.0"));
     TestFalse(TEXT("Different contract refused"), LiveCoreProtocol::ReadCreatedSession(Wrong, Metadata, Error));
-    Wrong = Text.Replace(TEXT("0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba"), TEXT("65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a"));
+    Wrong = Text.Replace(TEXT("ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19"), TEXT("0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba"));
     TestFalse(TEXT("Different runtime build refused"), LiveCoreProtocol::ReadCreatedSession(Wrong, Metadata, Error));
     Wrong = Text.Replace(TEXT("\"session_revision\": 0"), TEXT("\"session_revision\": 0, \"Session_Revision\": 0"));
     TestFalse(TEXT("Case-colliding JSON fields refused before map loss"), LiveCoreProtocol::ReadCreatedSession(Wrong, Metadata, Error));
@@ -113,6 +139,7 @@ bool FLiveCoreExistingIdentityTest::RunTest(const FString& Parameters)
     AddInfo(TEXT("Synthetic active-player parser controls derive from the selected committed metadata example; no runtime transition is claimed."));
     const FString SessionId = Root->GetStringField(TEXT("session_id"));
     Root->SetStringField(TEXT("session_state"), TEXT("active")); Root->SetNumberField(TEXT("session_revision"), 7);
+    Root->SetField(TEXT("last_activity_at"), MakeShared<FJsonValueNull>());
     const auto Visibility = Root->GetObjectField(TEXT("visibility"));
     Visibility->SetStringField(TEXT("role"), TEXT("player")); Visibility->SetStringField(TEXT("player_id"), TEXT("player-a"));
     Visibility->SetNumberField(TEXT("delay_revisions"), 0); Visibility->SetBoolField(TEXT("may_mutate_lifecycle"), false);
@@ -125,9 +152,12 @@ bool FLiveCoreExistingIdentityTest::RunTest(const FString& Parameters)
     TestFalse(TEXT("Created-session parser is not relaxed for opening"), LiveCoreProtocol::ReadCreatedSession(Valid, Metadata, Error));
     TestFalse(TEXT("Metadata must match the requested session"), LiveCoreProtocol::ReadExistingSession(Valid, TEXT("different-session"), Metadata, Error));
     TestFalse(TEXT("Wrong build is not accepted because envelopes overlap"), LiveCoreProtocol::ReadExistingSession(
-        Valid.Replace(TEXT("0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba"), TEXT("65fc8414407ae5d6a8ea779c8e737a22733459094db679a160c60f6e2129f96a")), SessionId, Metadata, Error));
-    TestFalse(TEXT("Wrong contract is rejected"), LiveCoreProtocol::ReadExistingSession(Valid.Replace(TEXT("44.5.0"), TEXT("44.3.33")), SessionId, Metadata, Error));
-    TestFalse(TEXT("Wrong metadata schema is rejected"), LiveCoreProtocol::ReadExistingSession(Valid.Replace(TEXT("session-metadata-v44-contract"), TEXT("session-metadata-v43-contract")), SessionId, Metadata, Error));
+        Valid.Replace(TEXT("ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19"), TEXT("0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba")), SessionId, Metadata, Error));
+    TestFalse(TEXT("Wrong contract is rejected"), LiveCoreProtocol::ReadExistingSession(Valid.Replace(TEXT("46.0.0"), TEXT("44.5.0")), SessionId, Metadata, Error));
+    TestFalse(TEXT("Wrong metadata schema is rejected"), LiveCoreProtocol::ReadExistingSession(Valid.Replace(TEXT("session-metadata-v46-contract"), TEXT("session-metadata-v44-contract")), SessionId, Metadata, Error));
+    Root->SetStringField(TEXT("last_activity_at"), TEXT("2026-11-16T00:00:00Z"));
+    TestFalse(TEXT("Player activity timestamp must remain redacted null"), LiveCoreProtocol::ReadExistingSession(Serialize(Root.ToSharedRef()), SessionId, Metadata, Error));
+    Root->SetField(TEXT("last_activity_at"), MakeShared<FJsonValueNull>());
     for (const TCHAR* State : {TEXT("created"), TEXT("terminal"), TEXT("closed"), TEXT("unknown")})
     {
         Root->SetStringField(TEXT("session_state"), State);
@@ -301,19 +331,19 @@ bool FLiveCoreOutcomeTest::RunTest(const FString& Parameters)
 {
     FString Text, Error; if (!LoadReceiptControl(*this, TEXT("wire/finite_accepted/playerA.json"), Text)) { return false; }
     E01::FOutcome Base; E01::FReadError ReadError;
-    if (!E01::ReadOutcome(200, Text, Base, ReadError)) { AddError(TEXT("Committed outcome fixture could not be read.")); return false; }
+    if (!E01::ReadOutcome(200, Text, Base, ReadError, E01::EWireProfile::Contract46)) { AddError(TEXT("Committed outcome fixture could not be read.")); return false; }
     const FString Session = Base.Json->GetObjectField(TEXT("session"))->GetStringField(TEXT("session_id"));
     LiveCoreProtocol::FOutcome Outcome;
     TestTrue(TEXT("Derived receipt control binds original command/viewer/revision"), LiveCoreProtocol::ReadOutcome(Text, 200, Base.CommandId, Session, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
     TestTrue(TEXT("Accepted and committed"), Outcome.bAccepted && Outcome.bCommitted && !Outcome.bRequiresReconciliation);
-    TestEqual(TEXT("Exactly one committed revision"), Outcome.Revision, int64(2));
+    TestEqual(TEXT("Returned synthetic visible-event count"), Outcome.Revision, int64(2));
     TestFalse(TEXT("Wrong command receipt refused"), LiveCoreProtocol::ReadOutcome(Text, 200, TEXT("wrong-command"), Session, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
-    TestFalse(TEXT("Wrong expected revision refused"), LiveCoreProtocol::ReadOutcome(Text, 200, Base.CommandId, Session, 2, false, TEXT("submit_finite_decision"), Outcome, Error));
+    TestFalse(TEXT("Receipt cannot regress its retained viewer revision"), LiveCoreProtocol::ReadOutcome(Text, 200, Base.CommandId, Session, 3, false, TEXT("submit_finite_decision"), Outcome, Error));
     TestFalse(TEXT("Player receipt cannot stand in for administrator scope"), LiveCoreProtocol::ReadOutcome(Text, 200, Base.CommandId, Session, 1, true, TEXT("submit_finite_decision"), Outcome, Error));
     FString PreviousReceipt;
     if (!Load(*this, TEXT("wire/finite_accepted/playerA.json"), PreviousReceipt)) { return false; }
     TestFalse(TEXT("Original previous-Core receipt cannot be applied to the selected runtime"), LiveCoreProtocol::ReadOutcome(PreviousReceipt, 200, Base.CommandId, Session, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
-    const FString ErrorEnvelope(TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"proposal_invalid\",\"message\":\"Actual engine message\"}}"));
+    const FString ErrorEnvelope(TEXT("{\"schema_version\":\"error-envelope-v2-diagnostics\",\"error\":{\"code\":\"proposal_invalid\",\"message\":\"Actual engine message\"}}"));
     TestTrue(TEXT("Actual 422 error envelope retained"), LiveCoreProtocol::ReadOutcome(ErrorEnvelope, 422, Base.CommandId, Session, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
     TestTrue(TEXT("422 without commit flags requires reconciliation, not assumed rollback"), Outcome.bError && Outcome.bRequiresReconciliation);
     TestTrue(TEXT("Actual supplied message preserved"), Outcome.Message.StartsWith(TEXT("Actual engine message")));
@@ -329,7 +359,7 @@ bool FLiveCoreProjectionVersionTest::RunTest(const FString& Parameters)
     if (!Load(*this, TEXT("wire/movement_before/playerA.json"), Before) || !Load(*this, TEXT("wire/movement_after/playerA.json"), After) ||
         !LoadReceiptControl(*this, TEXT("wire/movement_accepted/playerA.json"), Receipt) || !LoadReceiptControl(*this, TEXT("wire/movement_recorded_invalid/playerA.json"), Rejection)) { return false; }
     E01::FOutcome Original; E01::FReadError ReadError;
-    if (!E01::ReadOutcome(200, Receipt, Original, ReadError)) { AddError(TEXT("Committed movement receipt fixture is invalid.")); return false; }
+    if (!E01::ReadOutcome(200, Receipt, Original, ReadError, E01::EWireProfile::Contract46)) { AddError(TEXT("Committed movement receipt fixture is invalid.")); return false; }
     const FString Session = Original.Json->GetObjectField(TEXT("session"))->GetStringField(TEXT("session_id"));
     FLiveCoreState State;
     if (!TestTrue(TEXT("Actual pre-move DTO snapshot applied"), LiveCoreProtocol::ReadProjection(Before, Session, State, Error))) { return false; }
@@ -358,7 +388,7 @@ bool FLiveCoreProjectionVersionTest::RunTest(const FString& Parameters)
     }
     TestTrue(TEXT("Regression fixture includes actual authoritative model movement"), bActualModelChanged);
     E01::FOutcome RejectedOriginal;
-    if (!E01::ReadOutcome(422, Rejection, RejectedOriginal, ReadError)) { AddError(TEXT("Recorded rejection fixture is invalid.")); return false; }
+    if (!E01::ReadOutcome(422, Rejection, RejectedOriginal, ReadError, E01::EWireProfile::Contract46)) { AddError(TEXT("Recorded rejection fixture is invalid.")); return false; }
     LiveCoreProtocol::FOutcome Rejected;
     TestTrue(TEXT("Derived recorded-rejection control parsed"), LiveCoreProtocol::ReadOutcome(Rejection, 422, RejectedOriginal.CommandId, Session,
         RejectedOriginal.SessionRevision.GetValue() - 1, false, TEXT("submit_parameterized_decision"), Rejected, Error));
@@ -377,7 +407,7 @@ bool FLiveCoreReturnedDiagnosticsTest::RunTest(const FString& Parameters)
     FString Text, Error;
     if (!LoadReceiptControl(*this, TEXT("wire/movement_recorded_invalid/playerA.json"), Text)) { return false; }
     E01::FOutcome Original; E01::FReadError ReadError;
-    if (!E01::ReadOutcome(422, Text, Original, ReadError)) { AddError(TEXT("Recorded rejection fixture could not be read.")); return false; }
+    if (!E01::ReadOutcome(422, Text, Original, ReadError, E01::EWireProfile::Contract46)) { AddError(TEXT("Recorded rejection fixture could not be read.")); return false; }
     const FString Session = Original.Json->GetObjectField(TEXT("session"))->GetStringField(TEXT("session_id"));
     const int64 ExpectedRevision = Original.SessionRevision.GetValue() - 1;
     LiveCoreProtocol::FOutcome Outcome;
@@ -405,12 +435,105 @@ bool FLiveCoreReturnedDiagnosticsTest::RunTest(const FString& Parameters)
         Original.CommandId, Session, ExpectedRevision, false, TEXT("submit_parameterized_decision"), Outcome, Error));
     TestTrue(TEXT("Known detail-free rejection still applied"), LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, 422, true, State));
     TestTrue(TEXT("Missing detail explicitly stated only when absent"), State.Error.Contains(TEXT("Detailed engine reasons were not supplied")));
-    const FString ErrorEnvelope(TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"proposal_invalid\",\"message\":\"Actual error message\"}}"));
+    const FString ErrorEnvelope(TEXT("{\"schema_version\":\"error-envelope-v2-diagnostics\",\"error\":{\"code\":\"proposal_invalid\",\"message\":\"Actual error message\"}}"));
     TestTrue(TEXT("Flagless 422 still requires same-command reconciliation"), LiveCoreProtocol::ReadOutcome(ErrorEnvelope, 422, Original.CommandId,
         Session, ExpectedRevision, false, TEXT("submit_parameterized_decision"), Outcome, Error) && Outcome.bRequiresReconciliation);
     const FString PreservedError = State.Error;
     TestFalse(TEXT("Flagless error cannot be promoted to a known recorded rejection"), LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, 422, true, State));
     TestEqual(TEXT("Unknown receipt does not overwrite recorded diagnostics"), State.Error, PreservedError);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreVisibleCounterTest, "Warhammer.LiveCore.Unit.Core46.VisibleEventCounters", Flags)
+bool FLiveCoreVisibleCounterTest::RunTest(const FString& Parameters)
+{
+    FString Text, Historical, Error;
+    if (!LoadReceiptControl(*this, TEXT("wire/finite_accepted/playerA.json"), Text) ||
+        !LoadHistorical(*this, TEXT("wire/finite_accepted/playerA.json"), Historical)) { return false; }
+    E01::FOutcome Parsed; E01::FReadError ReadError;
+    TestTrue(TEXT("Historical proof reader still accepts original44 receipt"), E01::ReadOutcome(200, Historical, Parsed, ReadError));
+    TestFalse(TEXT("Historical proof reader does not silently adopt46"), E01::ReadOutcome(200, Text, Parsed, ReadError));
+    if (!E01::ReadOutcome(200, Text, Parsed, ReadError, E01::EWireProfile::Contract46)) { AddError(TEXT("Synthetic46 receipt is invalid.")); return false; }
+    const auto Metadata = Parsed.Json->GetObjectField(TEXT("session"));
+    const auto Checkpoint = Parsed.Json->GetObjectField(TEXT("checkpoint"));
+    const FString SessionId = Metadata->GetStringField(TEXT("session_id"));
+    for (int64 Returned : {int64(1), int64(7)})
+    {
+        Metadata->SetNumberField(TEXT("session_revision"), static_cast<double>(Returned));
+        Checkpoint->SetNumberField(TEXT("session_revision"), static_cast<double>(Returned));
+        LiveCoreProtocol::FOutcome Outcome;
+        TestTrue(TEXT("Committed player outcome can retain count or add multiple visible events"), LiveCoreProtocol::ReadOutcome(
+            Serialize(Parsed.Json.ToSharedRef()), 200, Parsed.CommandId, SessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
+        TestEqual(TEXT("Returned count is preserved without local arithmetic"), Outcome.Revision, Returned);
+        FLiveCoreState State; State.SessionRevision = 1; State.ProjectionRevision = 1; State.ProjectionVersion = 9;
+        TestTrue(TEXT("Known returned count applies in the same viewer namespace"), LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, 200, true, State));
+        TestEqual(TEXT("Receipt cannot fabricate a delivered projection"), State.ProjectionVersion, uint64(9));
+        TestEqual(TEXT("Only returned session counter advances"), State.SessionRevision, Returned);
+        State.SessionRevision = Returned + 1;
+        TestFalse(TEXT("Historical retained receipt cannot roll back a newer same-viewer state"), LiveCoreProtocol::ApplyKnownCommandOutcome(Outcome, 200, true, State));
+    }
+    Metadata->SetNumberField(TEXT("session_revision"), 0); Checkpoint->SetNumberField(TEXT("session_revision"), 0);
+    LiveCoreProtocol::FOutcome Outcome;
+    TestFalse(TEXT("Receipt cannot regress its retained viewer's expected count"), LiveCoreProtocol::ReadOutcome(
+        Serialize(Parsed.Json.ToSharedRef()), 200, Parsed.CommandId, SessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
+    Metadata->SetNumberField(TEXT("session_revision"), 1); Checkpoint->SetNumberField(TEXT("session_revision"), 1);
+    Parsed.Json->SetBoolField(TEXT("accepted"), false); Parsed.Json->SetBoolField(TEXT("committed"), false);
+    Parsed.Json->SetStringField(TEXT("outcome_code"), TEXT("proposal_invalid"));
+    TestTrue(TEXT("Uncommitted player rejection preserves its expected viewer count"), LiveCoreProtocol::ReadOutcome(
+        Serialize(Parsed.Json.ToSharedRef()), 422, Parsed.CommandId, SessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
+    Metadata->SetNumberField(TEXT("session_revision"), 2); Checkpoint->SetNumberField(TEXT("session_revision"), 2);
+    TestFalse(TEXT("Uncommitted receipt cannot claim new committed work"), LiveCoreProtocol::ReadOutcome(
+        Serialize(Parsed.Json.ToSharedRef()), 422, Parsed.CommandId, SessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreViewerAliasTest, "Warhammer.LiveCore.Unit.Core46.ViewerAliases", Flags)
+bool FLiveCoreViewerAliasTest::RunTest(const FString& Parameters)
+{
+    FString Text, Error;
+    if (!Load(*this, TEXT("wire/view_initial/playerA.json"), Text)) { return false; }
+    E01::FReadError ReadError; TSharedPtr<FJsonObject> Root;
+    if (!E01::ParseObject(Text, Root, ReadError)) { return false; }
+    const auto Projection = Root->GetObjectField(TEXT("projection"));
+    const auto Request = Projection->GetObjectField(TEXT("pending_decision"));
+    const FString RequestAlias(TEXT("viewer-issued-request:opaque_009"));
+    const FString OptionAlias(TEXT("viewer-issued-option:opaque_321"));
+    Request->SetStringField(TEXT("request_id"), RequestAlias);
+    Request->GetArrayField(TEXT("options"))[0]->AsObject()->SetStringField(TEXT("option_id"), OptionAlias);
+    FLiveCoreState State;
+    if (!TestTrue(TEXT("Viewer-issued request and option aliases parse without reconstruction"), LiveCoreProtocol::ReadProjection(
+        Serialize(Root.ToSharedRef()), Root->GetStringField(TEXT("session_id")), State, Error))) { return false; }
+    if (!TestTrue(TEXT("The synthetic current request has a supplied option"), !State.Options.IsEmpty())) { return false; }
+    E01::FCommandEnvelope Envelope;
+    if (!TestTrue(TEXT("Finite command retains JSON-safe aliases"), E01::ReadCommandEnvelope(LiveCoreProtocol::MakeFiniteCommand(
+        Root->GetStringField(TEXT("session_id")), TEXT("alias-roundtrip-command"), State.SessionRevision, State.RequestId, State.Options[0].Id), Envelope, ReadError, E01::EWireProfile::Contract46))) { return false; }
+    TestEqual(TEXT("Exact issued request reaches command unchanged"), Envelope.RequestId.GetValue(), RequestAlias);
+    TestEqual(TEXT("Exact issued option reaches command unchanged"), Envelope.Json->GetObjectField(TEXT("submission"))->GetStringField(TEXT("option_id")), OptionAlias);
+    Projection->SetStringField(TEXT("projection_schema"), TEXT("game-view-v13-phase17n-step4"));
+    TestFalse(TEXT("Old inner projection family is not silently accepted"), LiveCoreProtocol::ReadProjection(
+        Serialize(Root.ToSharedRef()), Root->GetStringField(TEXT("session_id")), State, Error));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreErrorDiagnosticsTest, "Warhammer.LiveCore.Unit.Core46.ErrorDiagnostics", Flags)
+bool FLiveCoreErrorDiagnosticsTest::RunTest(const FString& Parameters)
+{
+    const FString Proposal(TEXT("{\"schema_version\":\"error-envelope-v2-diagnostics\",\"error\":{\"code\":\"proposal_invalid\",\"message\":\"Core rejected supplied proposal\",\"diagnostics\":{\"kind\":\"proposal_validation\",\"violations\":[{\"violation_code\":\"movement_distance_exceeded\",\"field\":\"witness\"},{\"violation_code\":\"another_supplied_code\",\"field\":null}]}}}"));
+    FString Error; LiveCoreProtocol::FOutcome Outcome;
+    TestTrue(TEXT("Actual typed proposal diagnostics parse with their HTTP error"), LiveCoreProtocol::ReadOutcome(
+        Proposal, 422, TEXT("retained-command"), TEXT("synthetic-session"), 7, false, TEXT("submit_parameterized_decision"), Outcome, Error));
+    TestTrue(TEXT("Flagless diagnostics still require exact-command reconciliation"), Outcome.bError && Outcome.bRequiresReconciliation);
+    TestTrue(TEXT("Supplied violation codes and nullable fields are displayed"), Outcome.Message.Contains(TEXT("movement_distance_exceeded [witness]")) && Outcome.Message.Contains(TEXT("another_supplied_code")));
+    TestFalse(TEXT("Typed diagnostic detail is not mislabeled absent"), Outcome.Message.Contains(TEXT("not supplied")));
+    TestFalse(TEXT("An error envelope cannot become an HTTP200 success"), LiveCoreProtocol::ReadOutcome(
+        Proposal, 200, TEXT("retained-command"), TEXT("synthetic-session"), 7, false, TEXT("submit_parameterized_decision"), Outcome, Error));
+    TestFalse(TEXT("Wrong diagnostic kind is rejected"), LiveCoreProtocol::ReadOutcome(Proposal.Replace(TEXT("proposal_validation"), TEXT("unsupported_reason")),
+        422, TEXT("retained-command"), TEXT("synthetic-session"), 7, false, TEXT("submit_parameterized_decision"), Outcome, Error));
+    TestFalse(TEXT("Malformed diagnostic field is rejected"), LiveCoreProtocol::ReadOutcome(Proposal.Replace(TEXT("\"field\":null"), TEXT("\"field\":3")),
+        422, TEXT("retained-command"), TEXT("synthetic-session"), 7, false, TEXT("submit_parameterized_decision"), Outcome, Error));
+    const FString Unsupported(TEXT("{\"schema_version\":\"error-envelope-v2-diagnostics\",\"error\":{\"code\":\"rule_path_unsupported\",\"message\":\"Core cannot resolve this path\",\"diagnostics\":{\"kind\":\"unsupported_reason\",\"reason_code\":\"supplied_unsupported_path\"}}}"));
+    TestTrue(TEXT("Supplied unsupported reason is retained"), LiveCoreProtocol::ReadOutcome(Unsupported, 422, TEXT("retained-command"),
+        TEXT("synthetic-session"), 7, false, TEXT("submit_parameterized_decision"), Outcome, Error) && Outcome.Message.Contains(TEXT("supplied_unsupported_path")));
     return true;
 }
 
@@ -430,7 +553,7 @@ bool FLiveCorePublicRosterTest::RunTest(const FString& Parameters)
     if (!TestEqual(TEXT("Selected public example has both scoped roster rows"), Rosters.Num(), 2)) { return false; }
     const auto Own = Rosters[0]->AsObject();
     FLiveCoreState State;
-    if (!TestTrue(TEXT("An older projection family without optional roster data remains valid"), LiveCoreProtocol::ReadProjection(HistoricalProjection, Session, State, Error))) { return false; }
+    if (!TestTrue(TEXT("A synthetic current projection without optional roster data remains valid"), LiveCoreProtocol::ReadProjection(HistoricalProjection, Session, State, Error))) { return false; }
     TestFalse(TEXT("Absent optional roster inventory is unavailable"), State.bHasPublicArmyRosters);
     Projection->SetArrayField(TEXT("public_army_rosters"), Rosters);
     if (!TestTrue(TEXT("Selected public roster rows parse in the authenticated scope"), LiveCoreProtocol::ReadProjection(Serialize(Root.ToSharedRef()), Session, State, Error))) { return false; }
@@ -537,6 +660,7 @@ bool FLiveCoreExplicitPlayerScopeTest::RunTest(const FString& Parameters)
         !E01::ParseObject(ReceiptText, Receipt, ReadError)) { AddError(TEXT("Committed parser controls are invalid.")); return false; }
     const FString SessionId = Metadata->GetStringField(TEXT("session_id"));
     Metadata->SetStringField(TEXT("session_state"), TEXT("active")); Metadata->SetNumberField(TEXT("session_revision"), 1);
+    Metadata->SetField(TEXT("last_activity_at"), MakeShared<FJsonValueNull>());
     const auto Visibility = Metadata->GetObjectField(TEXT("visibility"));
     Visibility->SetStringField(TEXT("role"), TEXT("player")); Visibility->SetStringField(TEXT("player_id"), TEXT("player-b"));
     Visibility->SetNumberField(TEXT("delay_revisions"), 0); Visibility->SetBoolField(TEXT("may_mutate_lifecycle"), false);

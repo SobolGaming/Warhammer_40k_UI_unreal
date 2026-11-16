@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "coreCommit": "fc52e9166ff6380b606269ce362f4f1cbc6a2835",
+  "contractVersion": "46.0.0",
+  "sourcePath": "contracts/examples/sessions/session-create.json",
+  "bytes": 224844,
+  "sha256": "8342a7f645c17dd6e3686f1cad723d904b7fb2fa0c4bb2fa81384539c21e816c",
+  "sha1": "fce4782b539f7f5121d7b9cf74c30659c161a46e",
+  "purpose": "Exact published development example. Its public example seed MUST be replaced with independent secure random bytes in memory before every create request. Never use this example seed for a real session."
+}

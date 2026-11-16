@@ -15,6 +15,8 @@
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
 #include "Misc/ScopeExit.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonSerializer.h"
 #include "UObject/Package.h"
 
 namespace
@@ -31,8 +33,23 @@ bool FLiveCoreRuntimeFixtureTest::RunTest(const FString&)
     if (!TestTrue(TEXT("Pinned session-create bytes load through UFS without a tests directory"),
         LiveCoreRuntimeData::ReadCanonicalSessionCreate(Path, Payload, Error))) { return false; }
     TestTrue(TEXT("Successful load clears diagnostic"), Error.IsEmpty());
-    TestEqual(TEXT("Canonical payload schema"), Payload->GetStringField(TEXT("schema_version")), FString(TEXT("session-create-v4")));
+    TestEqual(TEXT("Canonical payload schema"), Payload->GetStringField(TEXT("schema_version")), FString(TEXT("session-create-v5-private-rng")));
     TestTrue(TEXT("Canonical payload retains its Core config"), Payload->GetObjectField(TEXT("config")).IsValid());
+    const FString Seed = Payload->GetObjectField(TEXT("config"))->GetStringField(TEXT("private_rng_seed"));
+    bool bLowerHex = Seed.Len() == 64;
+    for (TCHAR C : Seed) { bLowerHex &= (C >= '0' && C <= '9') || (C >= 'a' && C <= 'f'); }
+    TestTrue(TEXT("Private seed is exactly 32 lower-case hexadecimal bytes without displaying its value"), bLowerHex);
+    TSharedPtr<FJsonObject> Second;
+    if (!TestTrue(TEXT("A second creation independently obtains secure randomness"),
+        LiveCoreRuntimeData::ReadCanonicalSessionCreate(Path, Second, Error))) { return false; }
+    TestTrue(TEXT("Separate creates never reuse the first private seed"),
+        Seed != Second->GetObjectField(TEXT("config"))->GetStringField(TEXT("private_rng_seed")));
+    FString PublishedText; TSharedPtr<FJsonObject> Published;
+    if (!TestTrue(TEXT("The published example remains readable"), FFileHelper::LoadFileToString(PublishedText, *Path))) { return false; }
+    const auto Reader = TJsonReaderFactory<>::Create(PublishedText);
+    if (!TestTrue(TEXT("The exact public example parses independently"), FJsonSerializer::Deserialize(Reader, Published))) { return false; }
+    TestTrue(TEXT("The known public example seed is never used for the private create"),
+        Seed != Published->GetObjectField(TEXT("config"))->GetStringField(TEXT("private_rng_seed")));
     return true;
 }
 

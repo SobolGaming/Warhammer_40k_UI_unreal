@@ -132,12 +132,13 @@ bool LoadActivePlayerMetadata(FAutomationTestBase& Test, FString& Out, FString& 
 {
     FString Text;
     const FString Path = FPaths::Combine(FPaths::ProjectDir(),
-        TEXT("tests/migration/fixtures/4f9bef0df2fb974d1285232a1009b8781926361d/contracts/examples/sessions/session-metadata-created.json"));
+        TEXT("tests/migration/fixtures/fc52e9166ff6380b606269ce362f4f1cbc6a2835/contracts/examples/sessions/session-metadata-created.json"));
     if (!FFileHelper::LoadFileToString(Text, *Path)) { Test.AddError(TEXT("Selected metadata control is unavailable.")); return false; }
     Warhammer::Migration::E01::FReadError Error; TSharedPtr<FJsonObject> Root;
     if (!Warhammer::Migration::E01::ParseObject(Text, Root, Error)) { Test.AddError(TEXT("Selected metadata control is invalid.")); return false; }
     SessionId = Root->GetStringField(TEXT("session_id"));
     Root->SetStringField(TEXT("session_state"), TEXT("active")); Root->SetNumberField(TEXT("session_revision"), 1);
+    Root->SetField(TEXT("last_activity_at"), MakeShared<FJsonValueNull>());
     const auto Visibility = Root->GetObjectField(TEXT("visibility"));
     Visibility->SetStringField(TEXT("role"), TEXT("player")); Visibility->SetStringField(TEXT("player_id"), TEXT("player-a"));
     Visibility->SetNumberField(TEXT("delay_revisions"), 0); Visibility->SetBoolField(TEXT("may_mutate_lifecycle"), false);
@@ -178,7 +179,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreCreationErrorUnknownTest,
     "Warhammer.LiveCore.Unit.Creation.ErrorEnvelopeRemainsUnknown", CreationFlags)
 bool FLiveCoreCreationErrorUnknownTest::RunTest(const FString& Parameters)
 {
-    const FString Body(TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"creation_transport_error\",\"message\":\"Actual Core creation diagnostic\"}}"));
+    const FString Body(TEXT("{\"schema_version\":\"error-envelope-v2-diagnostics\",\"error\":{\"code\":\"creation_transport_error\",\"message\":\"Actual Core creation diagnostic\"}}"));
     for (int32 Status : {400, 401, 403, 409, 422, 500, 503})
     {
         int32 Requests = 0;
@@ -246,7 +247,7 @@ bool FLiveCoreOpenReadOnlyFlowTest::RunTest(const FString& Parameters)
     TArray<FOpenRequestAttempt> Attempts;
     const auto Client = FLiveCoreSession::Create();
     FLiveCoreSessionCreationTestAccess::RecordAndBlockRequests(Client.Get(), Attempts);
-    const FString ErrorBody(TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"session_not_found\",\"message\":\"Session was not found.\"}}"));
+    const FString ErrorBody(TEXT("{\"schema_version\":\"error-envelope-v2-diagnostics\",\"error\":{\"code\":\"session_not_found\",\"message\":\"Session was not found.\"}}"));
     for (int32 Status : {401, 403, 404, 500})
     {
         Client->OpenExistingSession(TEXT("http://127.0.0.1:8765"), SessionId);
@@ -372,6 +373,8 @@ bool FLiveCoreHandoffRetryTest::RunTest(const FString& Parameters)
     Warhammer::Migration::E01::FReadError Error; TSharedPtr<FJsonObject> Projection;
     if (!Warhammer::Migration::E01::ParseObject(ProjectionA, Projection, Error)) { AddError(TEXT("Projection parser control is invalid.")); return false; }
     Projection->SetStringField(TEXT("session_id"), SessionId);
+    Projection->SetStringField(TEXT("schema_version"), TEXT("session-projection-v10-viewer-identities"));
+    Projection->GetObjectField(TEXT("projection"))->SetStringField(TEXT("projection_schema"), TEXT("game-view-v14-viewer-identities"));
     ProjectionA.Reset();
     { const auto Writer = TJsonWriterFactory<>::Create(&ProjectionA); FJsonSerializer::Serialize(Projection.ToSharedRef(), Writer); }
     // These are synthetic callback controls, not a claim about live Core's private fields.
@@ -379,8 +382,8 @@ bool FLiveCoreHandoffRetryTest::RunTest(const FString& Parameters)
     TArray<FOpenRequestAttempt> Attempts; const auto Client = FLiveCoreSession::Create();
     FLiveCoreSessionCreationTestAccess::SeedPrivateDisplay(Client.Get());
     FLiveCoreSessionCreationTestAccess::MutableState(Client.Get()).SessionId = SessionId;
-    FLiveCoreSessionCreationTestAccess::MutableState(Client.Get()).SessionRevision = 1;
-    FLiveCoreSessionCreationTestAccess::MutableState(Client.Get()).ProjectionRevision = 1;
+    FLiveCoreSessionCreationTestAccess::MutableState(Client.Get()).SessionRevision = 87;
+    FLiveCoreSessionCreationTestAccess::MutableState(Client.Get()).ProjectionRevision = 87;
     FLiveCoreSessionCreationTestAccess::RecordAndBlockRequests(Client.Get(), Attempts);
     if (!TestTrue(TEXT("Seeded viewer begins privacy transition"), Client->BeginPlayerHandoff())) { return false; }
     FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_PLAYER_B_TOKEN"), TEXT(""));
@@ -389,7 +392,7 @@ bool FLiveCoreHandoffRetryTest::RunTest(const FString& Parameters)
     TestTrue(TEXT("Missing credential keeps every prior private value absent"), DisplayClearedForHandoff(Client->GetState()));
     TestTrue(TEXT("Missing credential is named without its value"), Client->GetState().Error.Contains(TEXT("WH_CORE_PLAYER_B_TOKEN")));
     FPlatformMisc::SetEnvironmentVar(TEXT("WH_CORE_PLAYER_B_TOKEN"), TEXT("synthetic-handoff-player-b"));
-    const FString HttpError(TEXT("{\"schema_version\":\"error-envelope-v1\",\"error\":{\"code\":\"authentication_required\",\"message\":\"Authentication is required.\"}}"));
+    const FString HttpError(TEXT("{\"schema_version\":\"error-envelope-v2-diagnostics\",\"error\":{\"code\":\"authentication_required\",\"message\":\"Authentication is required.\"}}"));
     Client->ContinuePlayerHandoff();
     TestTrue(TEXT("Ready retains only player-b credential"), FLiveCoreSessionCreationTestAccess::UsesPlayerBCredential(Client.Get()));
     FLiveCoreSessionCreationTestAccess::ExistingReply(Client.Get(), 401, HttpError, SessionId);
@@ -406,11 +409,17 @@ bool FLiveCoreHandoffRetryTest::RunTest(const FString& Parameters)
     TestTrue(TEXT("Wrong-player projection leaves the entire display cleared"), DisplayClearedForHandoff(Client->GetState()));
     Attempts.Reset(); Client->ContinuePlayerHandoff();
     FLiveCoreSessionCreationTestAccess::ExistingReply(Client.Get(), 200, MetadataB, SessionId);
+    const FString RegressedB = ProjectionB.Replace(TEXT("\"session_revision\": 1"), TEXT("\"session_revision\": 0"));
+    FLiveCoreSessionCreationTestAccess::ProjectionReply(Client.Get(), 200, RegressedB);
+    TestTrue(TEXT("Projection cannot regress the new viewer's own metadata minimum"), DisplayClearedForHandoff(Client->GetState()));
+    Attempts.Reset(); Client->ContinuePlayerHandoff();
+    FLiveCoreSessionCreationTestAccess::ExistingReply(Client.Get(), 200, MetadataB, SessionId);
     FLiveCoreSessionCreationTestAccess::ProjectionReply(Client.Get(), 200, ProjectionB);
     TestFalse(TEXT("Validated current-player projection releases curtain"), Client->GetState().bHandoffPending);
     TestTrue(TEXT("Recovered snapshot is attached to exactly intended session/viewer"), Client->GetState().bHasSession && Client->GetState().SessionId == SessionId && Client->GetState().ViewerPlayerId == TEXT("player-b"));
     TestEqual(TEXT("Recovered view starts a fresh local count"), Client->GetState().AcceptedActionCount, 0);
     TestEqual(TEXT("Recovered view begins with one new projection delivery"), Client->GetState().ProjectionVersion, uint64(1));
+    TestEqual(TEXT("New viewer counter is independent of the old viewer's87 events"), Client->GetState().SessionRevision, int64(1));
     TestTrue(TEXT("No former command receipt/error is replayed"), !Client->GetState().bLastCommandHasOutcome && Client->GetState().Error.IsEmpty());
     for (const auto& Attempt : Attempts)
     { TestTrue(TEXT("Ready uses only non-admin read attempts"), Attempt.Verb == TEXT("GET") && !Attempt.bMutation && !Attempt.bAdministrator); }
