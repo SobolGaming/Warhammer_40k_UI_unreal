@@ -1,6 +1,6 @@
 # P3a public roster verification
 
-The [canonical plan](../plans/unreal-migration-plan.md) owns P3A-V1/V2. The coordinator performs functional pass/fail checks, including the actual screen; the owner only needs to decide visual style when a later first-class interface introduces that choice. This preview reuses the current style. Build/native/SOURCE gates precede rendered acceptance. Source implementation and Windows native checks are recorded separately in the canonical plan; required P3A-V1/V2 remain pending until actually observed. Do not reuse an old package as P3a evidence.
+The [canonical plan](../plans/unreal-migration-plan.md) owns P3A-V1/V2. The coordinator performs functional pass/fail checks, including the actual screen; the owner only needs to decide visual style when a later first-class interface introduces that choice. This preview reuses the current style. Build/native/SOURCE gates precede rendered acceptance. Source implementation and Windows native checks are recorded separately in the canonical plan; P3A-V1/V2 passed through supported computer use on2026-11-16; [actual observations/identities](../plans/evidence/2026-11-16-p3a-visible.json) remain separate from native/source results. These are reproducible instructions, not a new owner-only blocker. Do not reuse an old package as P3a evidence.
 
 ## Prepared workstation command
 

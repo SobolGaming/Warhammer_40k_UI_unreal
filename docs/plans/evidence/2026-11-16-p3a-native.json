@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "dateUtc": "2026-11-16",
-  "status": "NATIVE_PASS_SOURCE_VISIBLE_SEPARATE",
+  "status": "BOUNDED_WINDOWS_WORKFLOW_PASS",
   "sourceHead": "ae423d02a723bae1f408e83420bafed3d4048cae",
   "coreCommit": "fc52e9166ff6380b606269ce362f4f1cbc6a2835",
   "coreContract": "46.0.0",
@@ -68,8 +68,8 @@
   "nativeExecutions": 38,
   "distinctNativeNames": 35,
   "manualCriteria": {
-    "P3A-V1": "NOT_RUN",
-    "P3A-V2": "NOT_RUN"
+    "P3A-V1": "PASS",
+    "P3A-V2": "PASS"
   },
   "failures": [
     {
@@ -102,5 +102,6 @@
       "bytes": 571,
       "sha256": "3874c47a02dbdb0f80bfe4c90e8c768d72af20bd204e47879b3be2ff5a8561e9"
     }
-  }
+  },
+  "visibleEvidence": "2026-11-16-p3a-visible.json"
 }

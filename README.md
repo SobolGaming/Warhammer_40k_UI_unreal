@@ -6,7 +6,7 @@ P2a added known-ID player-a reopening on its then-selected 44.5 Core. Its [nativ
 
 Read [architecture.md](architecture.md) for the source-tree map, component boundaries and runtime/session flows. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns all milestone scope and acceptance.
 
-Current work: **P3a read-only public roster summary**, on `codex/p3a-public-roster`, from merged PR #9. It presents only the existing authenticated Core46 roster subset with explicit unavailable/empty/undisclosed states. It adds no editing, battlefield selection, rules, HTTP route or Core upgrade. Implementation and required native/SOURCE/graphical checks are in progress in the [canonical plan](docs/plans/unreal-migration-plan.md); [complete P3a test instructions](docs/development/p3a-manual-testing.md) include fresh-shell build/copy/launch commands. The coordinator performs functional and screen checks; owner input is reserved for future first-class interface style choices.
+Current work: **P3a read-only public roster summary**, on `codex/p3a-public-roster`, from merged PR #9. It presents only the existing authenticated Core46 roster subset with explicit unavailable/empty/undisclosed states. It adds no editing, battlefield selection, rules, HTTP route or Core upgrade. **P3a / [PR #10](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/10) completed its bounded implementation, native/SOURCE and graphical checks and is ready for review, unmerged**, with separate results in the [canonical plan](docs/plans/unreal-migration-plan.md); [complete P3a test instructions](docs/development/p3a-manual-testing.md) include fresh-shell build/copy/launch commands. The coordinator performs functional and screen checks; owner input is reserved for future first-class interface style choices.
 
 ## Get started playing
 
@@ -18,7 +18,7 @@ Run every command below from the `Warhammer_40k_UI_unreal` repository root. Comp
 
 ### Windows: routine launch
 
-Use the [complete P2c manual-testing guide](docs/development/p2c-manual-testing.md) for the verified current Core46 workstation package's absolute launch command, preparation, compilation, whole-folder copy, fresh-shell commands and identified verification criteria. The prepared package is source7ee4a4f; its native checks passed and visible/source acceptance is recorded separately in the plan. The launcher opens an existing built executable and does not compile or install anything. Retained P2b executables require their explicit44.5 profile below.
+Use the [complete P3a manual-testing guide](docs/development/p3a-manual-testing.md) for the verified current Core46 package's absolute launch command, preparation, compilation, whole-folder copy, explicit Unit checks and graphical criteria. The prepared package is sourceae423d0; native/SOURCE and required graphical checks passed within their separately recorded scopes. Its public roster is a read-only summary of original selections, not an editor or current battlefield formation. The launcher opens an existing built executable and does not compile or install anything. Retained P2b executables require their explicit44.5 profile below.
 
 For Editor development, first complete [first-time setup and build](#first-time-setup-and-build), prepare the separate Core 46 runtime, then run this whole block in PowerShell 7:
 
