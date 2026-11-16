@@ -513,7 +513,7 @@ bool FLiveCoreSelectedPublicExampleTest::RunTest(const FString& Parameters)
     Envelope->SetObjectField(TEXT("projection"), View);
     FLiveCoreState State; State.SessionId = SessionId;
     if (!TestTrue(TEXT("Whole selected46 GameView parses without schema or field rewriting"), LiveCoreProtocol::ReadProjection(
-        Serialize(Envelope.ToSharedRef()), SessionId, State, Error, View->GetStringField(TEXT("viewer_player_id")))))
+        Serialize(Envelope), SessionId, State, Error, View->GetStringField(TEXT("viewer_player_id")))))
     { AddError(TEXT("Selected public example parse failed: ") + Error); return false; }
     const auto Pending = View->GetObjectField(TEXT("pending_decision"));
     const auto& Options = Pending->GetArrayField(TEXT("options"));
@@ -530,7 +530,7 @@ bool FLiveCoreSelectedPublicExampleTest::RunTest(const FString& Parameters)
     TestTrue(TEXT("Selected public rosters and actual battlefield bounds are available"), State.bHasPublicArmyRosters && State.PublicArmyRosters.Num() == View->GetArrayField(TEXT("public_army_rosters")).Num() && State.BoardBoundsInches.bIsValid);
     Pending->SetStringField(TEXT("schema_version"), TEXT("decision-request-view-v5-phase17n-step4"));
     TestFalse(TEXT("Historical pending-request family is rejected in the46 reader"), LiveCoreProtocol::ReadProjection(
-        Serialize(Envelope.ToSharedRef()), SessionId, State, Error));
+        Serialize(Envelope), SessionId, State, Error));
     return true;
 }
 

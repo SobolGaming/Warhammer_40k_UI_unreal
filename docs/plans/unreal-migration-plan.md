@@ -26,6 +26,8 @@ Candidate `3cea474ed6db06f1bd92a6799fb44519cc8b4797` passed the23.216-second Win
 
 The first independent CLI SOURCE attempt was BLOCKED before reading files: its configured read-only sandbox could not start a local reader (`registered Core launch requires an installed app`). A parallel REQ wrapper also stopped before launch on a temporary exclusive prompt-file lock. Private packet `3cea474-20261116T222011Z-9fe70386` retains the CLI blocked report. Fresh distinct subagents with no inherited history reviewed the equivalent new frozen packet `3cea474-20261116T222206Z-2a80feb7`; their read-only/no-escalation/no-memory behavior is instruction-enforced within the workspace-write host, not an independently enforced read-only CLI sandbox. Actual report settings/limits must be published; do not turn the infrastructure block into a CLI PASS.
 
+The first f37b703 rebuild failed compiling the new regression only: its `MakeShared` envelope is already a `TSharedRef`, so calling `ToSharedRef()` is invalid. Retain `.local/packages/20261116T222455Z-c67a7d9d/package-result.json`. The test now passes that reference directly to `Serialize`; production behavior is unchanged by this compile repair. Native and source acceptance still require actual results for the repaired test.
+
 Original implementation criteria (freeze before code changes):
 
 - [x] Prepare a separate clean exact-source46 Python runtime, verify installed build/resources and launch selection, and preserve sibling HEAD/worktree and older runtimes. New source defaults select46 explicitly; old packages require their explicit older `-CoreVersion`. Installed identity verified as recorded above; launcher checks are separate from the real workflow tests.
