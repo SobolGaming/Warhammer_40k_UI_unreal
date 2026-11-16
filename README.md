@@ -8,7 +8,7 @@ Read [architecture.md](architecture.md) for the source-tree map, component bound
 
 ## Get started playing
 
-The current preview can connect/create a real Core session, reopen a known active session on a retained service, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. It remains player-a/setup-choice only; full deployment, movement, turns and complete gameplay are still being developed. Arcade parity is the initial useful milestone. The ultimate goal is all capabilities supported by the latest explicitly selected Core, including public/editor/data/service features beyond Arcade and faithful presentation of automatic rules.
+The current preview can connect/create a real Core session, reopen a known active session on a retained service, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. P2b adds explicit local handoff between the two existing development players. Full deployment, movement, turns and complete gameplay are still being developed. Arcade parity is the initial useful milestone. The ultimate goal is all capabilities supported by the latest explicitly selected Core, including public/editor/data/service features beyond Arcade and faithful presentation of automatic rules.
 
 P1c explicitly adopts Core `4f9bef0df2fb974d1285232a1009b8781926361d` / **44.5.0**, from open, unmerged [Core PR #591](https://github.com/SobolGaming/Warhammer_40k_AI/pull/591). Runtime preparation, current client checks and exact limits are tracked separately in the [canonical plan](docs/plans/unreal-migration-plan.md). The previous44.3.33 environment/preview remain available through explicit `-CoreVersion 44.3.33` with the old executable. See the [source capability inventory](docs/plans/research/2026-10-24-latest-core-capabilities.md).
 
@@ -16,19 +16,21 @@ Run every command below from the `Warhammer_40k_UI_unreal` repository root. Comp
 
 ### Windows: routine launch
 
-Prepare the separate44.5 Core environment once using the [setup command](docs/development/core-startup.md#prepare-a-fresh-native-windows-core-environment). Keep the complete runnable Windows folder together outside the source checkout. In **PowerShell 7**, replace this absolute example with your copied folder's nested executable:
+For complete P2B-V1/V2 manual steps, compilation commands, two-terminal Attach testing and troubleshooting, use [Manual testing the Windows client](docs/development/manual-testing.md). The P2b package and matching Core are already prepared on this workstation. In **PowerShell 7**, this complete command needs no variables or rebuild:
 
 ```powershell
-$taskExe = 'C:\path\to\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
-& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $taskExe
+& 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal\scripts\Start-Client.ps1' -CoreMode Managed -Port 19128 -ClientExecutable 'C:\SWDev\warhammer\.local\manual-client\p2b\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
 ```
 
 This starts the separately prepared exact-source development Core hidden, waits for authenticated readiness, then opens the client. Close the client window normally to stop that exact managed Core. It does not build or install anything.
 
-For an already running Core, keep it running and use:
+The prepared copy is local to this workstation. On another checkout or after runtime source changes, follow the guide's complete [build/copy commands](docs/development/manual-testing.md#build-a-new-standalone-package-from-this-checkout) and [Core preparation](docs/development/manual-testing.md#prepare-core-on-a-fresh-checkout-only). `WarhammerClient/Binaries/...` is relative to the packaged Windows folder, not this repository. `$taskExe` must be assigned in every new shell that uses it.
+
+For an already running Core, keep it running and use this full block from the repository root (the [manual guide](docs/development/manual-testing.md#p2b-v2-failed-read-and-recovery-with-attach) starts a retained host on port 19129):
 
 ```powershell
-& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe
+$taskExe = 'C:\SWDev\warhammer\.local\manual-client\p2b\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
+& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:19129/' -ClientExecutable $taskExe
 ```
 
 **Fresh Windows machines:** use `Prepare-CoreDevelopmentRuntime.ps1` with an installed native Python3.14 interpreter and the selected source object. A plain pip install instead uses the [foreground Core + Attach route](docs/development/core-startup.md#windows-foreground-core-and-attach); it does not create Managed provenance.
@@ -108,7 +110,7 @@ UI clicks, text entry and panel scrolling retain their own input. Camera gesture
 
 ### Build a Windows standalone Development package
 
-The packaging source and its bounded verification are tracked in the [canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
+The packaging source and its bounded verification are tracked in the [canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client. The [complete build/copy/launch recipe](docs/development/manual-testing.md#build-a-new-standalone-package-from-this-checkout) initializes all variables and saves the executable path for later shells. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
 
 ```powershell
 $package = & ./scripts/Build-ClientPackage.ps1
@@ -139,7 +141,7 @@ $taskCopiedExe = Join-Path $taskCopy 'WarhammerClient/Binaries/Win64/WarhammerCl
 & ./scripts/Test-ClientPackage.ps1 -ClientExecutable $taskCopiedExe -Mode Core -CoreMode Managed -Port 19084
 ```
 
-Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects two real integration checks (retained create/action/refresh and fresh-client reopen/action/refresh) and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. Use ordinary absolute local-drive paths; extended/device/UNC namespaces, short-name aliases, paths through reparse points and executables inside the checkout are rejected. The result records the accepted absolute path. These checks do not establish visible rendering or controls. The source checkout hosts only the test tooling.
+Resources selects exactly four runtime-data/startup checks, including missing/corrupt-data controls. Core selects three real integration checks (create/action/refresh, fresh-client reopen/action/refresh and local-player handoff/action) and stops its owned development host afterward; `-CoreMode Attach -Endpoint 'http://127.0.0.1:19084/'` instead leaves an existing service running. These commands enforce NullRHI/RenderOffScreen, use 120/240-second native limits and retain reports under `.local/testpackage`. Use ordinary absolute local-drive paths; extended/device/UNC namespaces, short-name aliases, paths through reparse points and executables inside the checkout are rejected. The result records the accepted absolute path. These checks do not establish visible rendering or controls. The source checkout hosts only the test tooling.
 
 ### Linux x86-64: routine launch — UNTESTED
 

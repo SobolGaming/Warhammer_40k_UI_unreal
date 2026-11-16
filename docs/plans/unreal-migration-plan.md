@@ -1,6 +1,6 @@
 # Unreal client migration and development plan
 
-**Revision 173, 2026-10-25. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
+**Revision 174, 2026-11-16. This is the single canonical root plan. Full feature coverage is not implemented or accepted.**
 
 This document owns scope, priorities, baselines, milestone checklists and feature-parity acceptance. Supporting research/evidence documents supply detail; they do not define a second root roadmap. The previous `unreal-development-plan.md` is a compatibility pointer only. [Closed history through r156](unreal-migration-plan-through-r156.md) preserves PR #3 and [earlier history through r146](unreal-migration-plan-through-r146.md) preserves the imported research and decisions. The [plan/evidence index](README.md) is navigation only.
 
@@ -32,14 +32,18 @@ Verification:
 
 **Upstream observation, not adoption:** at `2026-10-24T23:57:15.4684816Z`, [Core PR #591](https://github.com/SobolGaming/Warhammer_40k_AI/pull/591) remained OPEN and its head was `c86a37fa95dff95347cf3f7a9c6b14178fd8acde`. P2b retains exact selected Core `4f9bef0df2fb974d1285232a1009b8781926361d` /44.5.0. The [source evidence](evidence/2026-10-24-p2b-source-reviews.json) binds this dated observation and the independent review scopes; a newer upstream head requires a separate adoption review. This does not upgrade the runtime or relabel prior evidence.
 
+### Manual-test setup correction, 2026-11-16
+
+The owner reported a missing source-relative executable and an unset `$taskExe`. The [complete manual-testing guide](../development/manual-testing.md) now defines every path and shell variable, supplies the actual prepared workstation command, includes the full compilation/whole-folder-copy recipe and explains Core preparation and both Attach terminals. This is a documentation/environment follow-up within P2b, with no runtime source changes. The preserved package (50 files / 975,978,105 bytes) was verified and copied to `C:\SWDev\warhammer\.local\manual-client\p2b\Windows`. Four resource and three real-Core checks passed on that copy; its owned test Core stopped normally. [Preparation and exact results](evidence/2026-11-16-p2b-manual-setup.json) record the current scope. Compilation was not rerun because runtime inputs still match the tested package; no new visible or owner-run result is claimed. The checked October criteria below retain their original evidence.
+
 ### Required P2b manual verification
 
-These criteria **block this PR's user-workflow acceptance**. A human or supported computer use may perform them under the standing visible-test authorization. Before launching, record the exact frozen source, complete outside-checkout package/executable SHA256 and selected4f9/44.5 Core build/resources. Prerequisites: passing affected build/native/SOURCE checks, native Windows x64 and a fresh disposable session. One owned game window at a time, at most ten minutes per launch; retain private screenshots/logs and no real session IDs/credentials in tracked evidence. Use `$taskExe` for the copied nested `WarhammerClient/Binaries/Win64/WarhammerClient.exe`:
+These criteria **block this PR's user-workflow acceptance** and passed for the recorded October candidate below. A human or supported computer use may repeat them under the standing visible-test authorization. Use the complete [manual-testing guide](../development/manual-testing.md) for the prepared workstation command, compilation/copy instructions and two-terminal Attach test. The nested executable path is inside a packaged Windows folder, not this repository; `$taskExe` must be assigned in each shell that uses it. Before launching, record the exact frozen source, complete outside-checkout executable SHA256 and selected4f9/44.5 Core build/resources. Prerequisites: passing affected build/native/SOURCE checks, native Windows x64 and a fresh disposable session. One owned game window at a time, at most ten minutes per launch; retain private screenshots/logs and no real session IDs/credentials in tracked evidence. This full block defines the prepared path:
 
 ```powershell
-& ./scripts/Start-Client.ps1 -CoreMode Managed -ClientExecutable $taskExe
-# For a separately running matching Core, use its dedicated loopback URL:
-& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe
+Set-Location -LiteralPath 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal'
+$taskExe = 'C:\SWDev\warhammer\.local\manual-client\p2b\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
+& ./scripts/Start-Client.ps1 -CoreMode Managed -Port 19128 -ClientExecutable $taskExe
 ```
 
 - [x] **P2B-V1 — Two-player workflow and privacy screen.** (1) In a normal Managed launch, Connect/create as player-a; submit one offered mission and Refresh. Record revision, viewer, own mission and hidden opposing decision privately. (2) Click Hand off; before Ready, confirm the old board, mission, offered controls, roster/receipt/error and session-ID field are cleared, the target is player-b, and nothing automatically reveals the next view. (3) Click Ready; confirm same session, unchanged revision, viewer player-b, fresh local count0, only their own offered decision and no player-a private mission. Submit one player-b option and Refresh; confirm Core's actual committed outcome/revision. (4) Hand back, inspect the empty screen again, click Ready as player-a, and confirm only player-a's permitted mission/projection, no player-b private details and local count0. (5) Close normally and confirm Managed stops only its owned host. Native transport checks supply no-mutation/request-count assertions; pixels alone are insufficient.
@@ -47,17 +51,19 @@ These criteria **block this PR's user-workflow acceptance**. A human or supporte
 
 For each checked result publish tester, UTC date, exact identities, ordered actions/actual observations, private evidence locations and limitations. Failed/blocked/not-run boxes remain unchecked. Physical RMB/MMB, actual OS switching/teardown, clean-host Windows and native Linux remain deferred HV criteria, not silently passed by this slice.
 
-For P2B-V2, keep Core running in its separate owner shell using the [foreground/Attach instructions](../development/core-startup.md#windows-foreground-core-and-attach). In the client shell only, run the first Attach client with this deliberately invalid, nonsecret player-b value. The existing Core process keeps its ordinary credentials. After closing that client, the `finally` restores the client shell; launch the second Attach client normally against the same endpoint and retained session. Record/copy the session ID privately before handing off in the first client.
+For P2B-V2, first start Core on port 19129 in terminal 1 using the complete [two-terminal instructions](../development/manual-testing.md#p2b-v2-failed-read-and-recovery-with-attach). In terminal 2 only, run this full block with a deliberately invalid, nonsecret player-b value. The existing Core process keeps its ordinary credentials. After closing that client, the `finally` restores the client shell and the next command opens the second Attach client with ordinary credentials against the same endpoint/session. Record/copy the session ID privately before handing off in the first client.
 
 ```powershell
+Set-Location -LiteralPath 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal'
+$taskExe = 'C:\SWDev\warhammer\.local\manual-client\p2b\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
 $taskSavedPlayerB = [Environment]::GetEnvironmentVariable('WH_CORE_PLAYER_B_TOKEN', 'Process')
 try {
     $env:WH_CORE_PLAYER_B_TOKEN = 'diagnostic-invalid-player-b'
-    & ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe
+    & ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:19129/' -ClientExecutable $taskExe
 } finally {
     [Environment]::SetEnvironmentVariable('WH_CORE_PLAYER_B_TOKEN', $taskSavedPlayerB, 'Process')
 }
-& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe
+& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:19129/' -ClientExecutable $taskExe
 ```
 
 **Actual visible result:** [observed workflow and preserved blocked history](evidence/2026-10-24-p2b-visible.md), [identities and private evidence hashes](evidence/2026-10-24-p2b-visible.json). On 2026-10-25 UTC the coordinator used supported Sky computer use on native Windows x64 at launch checkpoint `f8470c387e2b16abfdf89e8cc34f6615ead10bf3`, unchanged runtime source a6dbb1c/launcher delta a1d9013, executable SHA256 `95e6b03a53292e353458a554696e0351e71caab96c6804744bbff8fc3dd501b2` and exact selected4f9/44.5 Core. Three sequential launches passed within their ten-minute budgets. Managed player-a chose a fixed mission at revision2, the empty privacy screen held until Ready, player-b entered that same revision with local count0 and only their own choices, then committed Tactical at revision3. Handing back cleared the view again and restored only player-a's own mission with local count0. The invalid-B Attach client showed actual HTTP401 `authentication_required` / "A valid bearer credential is required." while the old view stayed absent. A fresh ordinary Attach client pasted the copied ID, reopened that same revision2 session and successfully handed to player-b. Field-focused F and panel wheel kept a zoomed board unchanged; hidden-screen click/wheel/F kept the curtain visible until Ready. Panel content fit the observed window, so no overflow-scroll layout claim is made. All clients/launchers exited0 normally, with Config/binary/environment value comparisons preserved. Managed stopped its owned Core; both Attach clients left the shared Core healthy before its separate owner stopped it normally. No test Game remained. Native checks supply transport counts and unsafe-state guards; screenshots alone do not establish internal HTTP or hidden camera state. The initial sandbox failure and locked-desktop attempt retain their original failed/blocked status.
