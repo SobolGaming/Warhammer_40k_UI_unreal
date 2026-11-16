@@ -1,4 +1,5 @@
 #include "LiveCore/LiveCoreSession.h"
+#include "LiveCore/LiveCoreRosterPresentation.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 #include "HAL/PlatformMisc.h"
@@ -13,6 +14,85 @@ struct FLiveCoreSessionIntegrationTestAccess
 
 namespace
 {
+TArray<FString> ArmyIds(const FLiveCoreState& State)
+{
+    TArray<FString> Ids;
+    for (const auto& Roster : State.PublicArmyRosters) { Ids.Add(Roster.ArmyId); }
+    return Ids;
+}
+
+void CheckRosterSummaryCleared(FAutomationTestBase& Test, const FLiveCoreState& State, const TArray<FString>& FormerArmyIds)
+{
+    const FString Summary = LiveCorePresentation::BuildPublicRosterSummary(State);
+    for (const auto& Id : FormerArmyIds)
+    {
+        // Private runtime aliases stay in memory, including on assertion failure.
+        Test.TestFalse(TEXT("Pending read or handoff summary contains no former army identity"), Summary.Contains(Id, ESearchCase::CaseSensitive));
+    }
+    Test.TestFalse(TEXT("Pending read or handoff summary publishes no army row"), Summary.Contains(TEXT("Army ID:"), ESearchCase::CaseSensitive));
+}
+
+FString CheckPublicRosterSummary(FAutomationTestBase& Test, const FLiveCoreState& State)
+{
+    const FString Summary = LiveCorePresentation::BuildPublicRosterSummary(State);
+    Test.TestTrue(TEXT("Actual Core46 projection supplies a public roster inventory"), State.bHasPublicArmyRosters && !State.PublicArmyRosters.IsEmpty());
+    bool bHasCurrentViewerArmy = false;
+    for (const auto& Roster : State.PublicArmyRosters)
+    {
+        const bool bCurrentViewer = Roster.PlayerId.Equals(State.ViewerPlayerId, ESearchCase::CaseSensitive);
+        bHasCurrentViewerArmy |= bCurrentViewer;
+        const FString ArmyLine = TEXT("Army ID: ") + Roster.ArmyId +
+            (bCurrentViewer ? TEXT(" (current viewer's army)") : TEXT(" (other public army)"));
+        const int32 Start = Summary.Find(ArmyLine, ESearchCase::CaseSensitive);
+        if (!Test.TestTrue(TEXT("Summary preserves each supplied army ID and its current-viewer label"), Start != INDEX_NONE)) { continue; }
+        const int32 End = Summary.Find(TEXT("Army ID: "), ESearchCase::CaseSensitive, ESearchDir::FromStart, Start + ArmyLine.Len());
+        const FString Section = End == INDEX_NONE ? Summary.Mid(Start) : Summary.Mid(Start, End - Start);
+        const auto ContainsId = [&Test, &Section](const FString& Id)
+        { Test.TestTrue(TEXT("Army section preserves a supplied public roster reference"), Section.Contains(Id, ESearchCase::CaseSensitive)); };
+        ContainsId(Roster.PlayerId); ContainsId(Roster.FactionId);
+        for (const auto& Id : Roster.DetachmentIds) { ContainsId(Id); }
+        for (const auto& Id : Roster.UnitSelectionIds) { ContainsId(Id); }
+        const auto ContainsBearer = [&ContainsId](const FLiveCoreRosterBearer& Bearer)
+        { ContainsId(Bearer.UnitSelectionId); ContainsId(Bearer.ModelProfileId); ContainsId(Bearer.SourceId); };
+        if (Roster.Warlord.IsSet()) { ContainsBearer(Roster.Warlord.GetValue()); }
+        for (const auto& Enhancement : Roster.Enhancements)
+        { ContainsId(Enhancement.EnhancementId); ContainsBearer(Enhancement.Bearer); }
+        if (Roster.bAttachmentsDisclosed)
+        { Test.TestFalse(TEXT("Actual disclosed attachments are not labelled undisclosed"), Section.Contains(TEXT("Attachment declarations: Not disclosed."), ESearchCase::CaseSensitive)); }
+        if (!Roster.bAttachmentsDisclosed)
+        {
+            Test.TestTrue(TEXT("Actual undisclosed attachments stay explicitly undisclosed"), Section.Contains(TEXT("Attachment declarations: Not disclosed."), ESearchCase::CaseSensitive));
+            Test.TestFalse(TEXT("Undisclosed attachments are not labelled empty"), Section.Contains(TEXT("Attachment declarations: None listed."), ESearchCase::CaseSensitive));
+        }
+        else if (Roster.Attachments.IsEmpty())
+        { Test.TestTrue(TEXT("Actual disclosed-empty attachments stay distinct from redaction"), Section.Contains(TEXT("Attachment declarations: None listed."), ESearchCase::CaseSensitive)); }
+        else
+        {
+            for (const auto& Attachment : Roster.Attachments)
+            { ContainsId(Attachment.SourceUnitSelectionId); ContainsId(Attachment.BodyguardUnitSelectionId); }
+        }
+        if (Roster.bStartingCargoDisclosed)
+        { Test.TestFalse(TEXT("Actual disclosed cargo is not labelled undisclosed"), Section.Contains(TEXT("Starting cargo manifests: Not disclosed."), ESearchCase::CaseSensitive)); }
+        if (!Roster.bStartingCargoDisclosed)
+        {
+            Test.TestTrue(TEXT("Actual undisclosed cargo stays explicitly undisclosed"), Section.Contains(TEXT("Starting cargo manifests: Not disclosed."), ESearchCase::CaseSensitive));
+            Test.TestFalse(TEXT("Undisclosed cargo is not labelled empty"), Section.Contains(TEXT("Starting cargo manifests: None listed."), ESearchCase::CaseSensitive));
+        }
+        else if (Roster.StartingCargo.IsEmpty())
+        { Test.TestTrue(TEXT("Actual disclosed-empty cargo stays distinct from redaction"), Section.Contains(TEXT("Starting cargo manifests: None listed."), ESearchCase::CaseSensitive)); }
+        else
+        {
+            for (const auto& Cargo : Roster.StartingCargo)
+            {
+                ContainsId(Cargo.TransportUnitSelectionId);
+                for (const auto& Id : Cargo.EmbarkedUnitSelectionIds) { ContainsId(Id); }
+            }
+        }
+    }
+    Test.TestTrue(TEXT("Supplied roster membership identifies the current viewer's army"), bHasCurrentViewerArmy);
+    return Summary;
+}
+
 // Explicit opt-in: this test creates one disposable session on an existing development
 // service. It never starts a host or a rendered world and never logs credentials/state.
 class FLiveSessionActionCheck final : public IAutomationLatentCommand
@@ -55,6 +135,7 @@ public:
                 Session->Shutdown();
                 return true;
             }
+            const FString RosterSummary = CheckPublicRosterSummary(*Test, State);
             if (bReopenAfterCreate && !bReopened)
             {
                 // Keep the separately managed service alive; shutting this client
@@ -64,6 +145,7 @@ public:
                 ExistingBounds = State.BoardBoundsInches;
                 ExistingTerrainCount = State.Terrain.Num(); ExistingObjectiveCount = State.Objectives.Num();
                 ExistingRosterCount = State.PublicArmyRosters.Num(); bExistingRostersAvailable = State.bHasPublicArmyRosters;
+                ExistingRosterSummary = RosterSummary;
                 Session->Shutdown(); Session = FLiveCoreSession::Create(); bReopened = true; bObserveOpening = true;
                 FLiveCoreSessionIntegrationTestAccess::ObserveRequests(*Session,
                     [this](const FString& Verb, const FString& Path, bool bMutation, bool bAdministrator)
@@ -80,7 +162,6 @@ public:
             }
             if (bReopened)
             {
-                bObserveOpening = false;
                 // Private IDs remain in memory; boolean comparisons avoid writing
                 // their values into a failed automation assertion/log.
                 Test->TestTrue(TEXT("Fresh client reopens the original exact session identity"), State.SessionId == ExistingSessionId);
@@ -93,12 +174,14 @@ public:
                 Test->TestEqual(TEXT("Reopen restores actual objective rows"), State.Objectives.Num(), ExistingObjectiveCount);
                 Test->TestEqual(TEXT("Reopen restores current roster availability"), State.bHasPublicArmyRosters, bExistingRostersAvailable);
                 Test->TestEqual(TEXT("Reopen restores only supplied roster rows"), State.PublicArmyRosters.Num(), ExistingRosterCount);
+                Test->TestTrue(TEXT("Read-only reopen preserves the complete source-backed roster summary"), RosterSummary == ExistingRosterSummary);
                 Test->TestEqual(TEXT("Accepted action count starts at zero in the fresh client"), State.AcceptedActionCount, 0);
                 Test->TestFalse(TEXT("Reopen fabricates no previous command receipt"), State.bLastCommandHasOutcome);
                 Test->TestEqual(TEXT("Exactly two HTTP attempts open the existing session"), OpenRequestAttempts, 2);
                 Test->TestEqual(TEXT("One metadata attempt"), OpenMetadataAttempts, 1);
                 Test->TestEqual(TEXT("One projection attempt"), OpenProjectionAttempts, 1);
                 Test->TestFalse(TEXT("Opening attempted no POST, catalog or administrator request"), bUnexpectedOpenRequest);
+                bObserveOpening = false;
             }
             Test->TestEqual(TEXT("Viewer is player-a"), State.ViewerPlayerId, FString(TEXT("player-a")));
             Test->TestTrue(TEXT("Core board has positive dimensions"), State.BoardBoundsInches.bIsValid
@@ -121,12 +204,15 @@ public:
             BeforeRevision = State.SessionRevision;
             BeforeRequest = State.RequestId;
             const FString OptionId = State.Options[0].Id;
+            const TArray<FString> PreviousArmyIds = ArmyIds(State);
             Step = 1;
             Session->SubmitOption(OptionId);
+            CheckRosterSummaryCleared(*Test, Session->GetState(), PreviousArmyIds);
             return false;
         }
         if (Step == 1)
         {
+            CheckPublicRosterSummary(*Test, State);
             Test->TestTrue(TEXT("Actual async receipt observed before matching projection"), bObservedReceiptBeforeProjection);
             Test->TestEqual(TEXT("New DTO revision catches up to accepted receipt"), State.ProjectionRevision, State.SessionRevision);
             Test->TestTrue(TEXT("Actual applied projection changes render cache version"), State.ProjectionVersion > BeforeProjectionVersion);
@@ -139,14 +225,27 @@ public:
             Test->TestEqual(TEXT("Opposing private options remain absent"), State.Options.Num(), 0);
             AfterProjectionVersion = State.ProjectionVersion;
             AfterRevision = State.SessionRevision;
+            const TArray<FString> PreviousArmyIds = ArmyIds(State);
+            const FString RefreshSessionId = State.SessionId;
+            FLiveCoreSessionIntegrationTestAccess::ObserveRequests(*Session,
+                [this, RefreshSessionId](const FString& Verb, const FString& Path, bool bMutation, bool bAdministrator)
+                {
+                    ++RefreshRequestAttempts;
+                    bUnexpectedRefreshRequest |= Verb != TEXT("GET") || bMutation || bAdministrator ||
+                        Path != TEXT("/sessions/") + RefreshSessionId + TEXT("/projection");
+                });
             Step = 2;
             Session->Refresh();
+            CheckRosterSummaryCleared(*Test, Session->GetState(), PreviousArmyIds);
             return false;
         }
+        CheckPublicRosterSummary(*Test, State);
         Test->TestEqual(TEXT("Refresh does not submit another action"), State.AcceptedActionCount, 1);
         Test->TestEqual(TEXT("Refresh retains authoritative revision"), State.SessionRevision, AfterRevision);
         Test->TestEqual(TEXT("Refresh keeps DTO/session revisions aligned"), State.ProjectionRevision, State.SessionRevision);
         Test->TestTrue(TEXT("Successful refresh advances only the applied DTO delivery version"), State.ProjectionVersion > AfterProjectionVersion);
+        Test->TestEqual(TEXT("Refresh and roster presentation use exactly one real HTTP attempt"), RefreshRequestAttempts, 1);
+        Test->TestFalse(TEXT("Refresh and roster presentation send only the player projection read"), bUnexpectedRefreshRequest);
         Session->Shutdown();
         return true;
     }
@@ -179,6 +278,9 @@ private:
     int32 ExistingObjectiveCount = 0;
     int32 ExistingRosterCount = 0;
     bool bExistingRostersAvailable = false;
+    FString ExistingRosterSummary;
+    int32 RefreshRequestAttempts = 0;
+    bool bUnexpectedRefreshRequest = false;
 };
 }
 
@@ -257,16 +359,21 @@ public:
         {
             if (!Test->TestTrue(TEXT("Real player-a setup choice is offered"), State.bHasSession && State.ViewerPlayerId == TEXT("player-a") &&
                 State.RequestType == TEXT("select_secondary_missions") && !State.Options.IsEmpty())) { Session->Shutdown(); return true; }
+            CheckPublicRosterSummary(*Test, State);
             SessionId = State.SessionId; InitialRevision = State.SessionRevision;
-            const FString Offered = State.Options[0].Id; Step = 1; Session->SubmitOption(Offered); return false;
+            FormerArmyIds = ArmyIds(State);
+            const FString Offered = State.Options[0].Id; Step = 1; Session->SubmitOption(Offered);
+            CheckRosterSummaryCleared(*Test, Session->GetState(), FormerArmyIds); return false;
         }
         if (Step == 1)
         {
+            CheckPublicRosterSummary(*Test, State);
             Test->TestTrue(TEXT("Player-a choice is authoritatively accepted/committed"), State.bLastCommandAccepted && State.bLastCommandCommitted);
             Test->TestTrue(TEXT("Player-a visible-event revision never regresses"), State.SessionRevision >= InitialRevision);
             Test->TestEqual(TEXT("Player-a local action count"), State.AcceptedActionCount, 1);
             Test->TestTrue(TEXT("Player-a sees own missions and no opposing choice controls"), !State.MissionSummary.IsEmpty() && State.Options.IsEmpty());
             PlayerAMissions = State.MissionSummary; LastPlayerARevision = State.SessionRevision;
+            FormerArmyIds = ArmyIds(State);
             StartObserving();
             if (!Test->TestTrue(TEXT("Idle verified player-a begins handoff"), Session->BeginPlayerHandoff())) { Session->Shutdown(); return true; }
             CheckCurtain(TEXT("player-b")); Step = 2; return false;
@@ -276,12 +383,13 @@ public:
             CheckCurtain(Step == 2 ? TEXT("player-b") : TEXT("player-a"));
             Test->TestEqual(TEXT("Waiting for Ready sends zero HTTP attempts"), ReadAttempts, 0);
             Session->ContinuePlayerHandoff();
+            CheckRosterSummaryCleared(*Test, Session->GetState(), FormerArmyIds);
             Test->TestFalse(TEXT("In-flight Ready cannot begin another switch"), Session->CanBeginPlayerHandoff());
             ++Step; return false;
         }
         if (Step == 3 || Step == 6)
         {
-            bObserveHandoff = false;
+            CheckPublicRosterSummary(*Test, State);
             const bool bPlayerB = Step == 3;
             Test->TestTrue(TEXT("Ready reopens exactly the same session identity"), State.SessionId == SessionId);
             Test->TestTrue(TEXT("Ready supplies a nonnegative counter for this viewer"), State.SessionRevision >= 0);
@@ -289,6 +397,7 @@ public:
             Test->TestEqual(TEXT("Ready metadata read"), MetadataAttempts, 1);
             Test->TestEqual(TEXT("Ready projection read"), ProjectionAttempts, 1);
             Test->TestFalse(TEXT("No administrator/catalog/create/start/gameplay request during handoff"), bUnexpectedRead);
+            bObserveHandoff = false;
             Test->TestEqual(TEXT("Expected authenticated viewer is restored"), State.ViewerPlayerId, FString(bPlayerB ? TEXT("player-b") : TEXT("player-a")));
             Test->TestEqual(TEXT("Each fresh local view begins at zero accepted actions"), State.AcceptedActionCount, 0);
             Test->TestFalse(TEXT("Old viewer command receipt is absent"), State.bLastCommandHasOutcome);
@@ -305,15 +414,19 @@ public:
                 State.MissionSummary.IsEmpty() && State.RequestType == TEXT("select_secondary_missions") && !State.Options.IsEmpty()))
             { Session->Shutdown(); return true; }
             BeforePlayerBRevision = State.SessionRevision;
-            const FString Offered = State.Options.Last().Id; Step = 4; Session->SubmitOption(Offered); return false;
+            FormerArmyIds = ArmyIds(State);
+            const FString Offered = State.Options.Last().Id; Step = 4; Session->SubmitOption(Offered);
+            CheckRosterSummaryCleared(*Test, Session->GetState(), FormerArmyIds); return false;
         }
         if (Step == 4)
         {
+            CheckPublicRosterSummary(*Test, State);
             Test->TestTrue(TEXT("Player-b own option is authoritatively accepted/committed"), State.bLastCommandAccepted && State.bLastCommandCommitted);
             Test->TestTrue(TEXT("Player-b visible-event revision never regresses"), State.SessionRevision >= BeforePlayerBRevision);
             Test->TestEqual(TEXT("Player-b local action count"), State.AcceptedActionCount, 1);
             Test->TestTrue(TEXT("Player-b mission summary is independently projected"), !State.MissionSummary.IsEmpty() && State.MissionSummary != PlayerAMissions);
             PlayerBMissions = State.MissionSummary;
+            FormerArmyIds = ArmyIds(State);
             StartObserving();
             if (!Test->TestTrue(TEXT("Idle verified player-b begins handback"), Session->BeginPlayerHandoff())) { Session->Shutdown(); return true; }
             CheckCurtain(TEXT("player-a")); Step = 5; return false;
@@ -326,6 +439,7 @@ private:
     void CheckCurtain(const TCHAR* Target)
     {
         const auto& State = Session->GetState();
+        CheckRosterSummaryCleared(*Test, State, FormerArmyIds);
         Test->TestTrue(TEXT("Privacy curtain names only intended next player"), State.bHandoffPending && State.HandoffTargetPlayerId == Target);
         Test->TestTrue(TEXT("Former viewer's entire presentation is absent before Ready"), !State.bHasSession && State.SessionId.IsEmpty() &&
             State.ViewerPlayerId.IsEmpty() && State.Phase.IsEmpty() && State.RequestId.IsEmpty() && State.RequestType.IsEmpty() &&
@@ -336,6 +450,7 @@ private:
     }
     FAutomationTestBase* Test;
     FString Endpoint, SessionId, PlayerAMissions, PlayerBMissions;
+    TArray<FString> FormerArmyIds;
     TSharedPtr<FLiveCoreSession> Session;
     double Started;
     int32 Step = 0, ReadAttempts = 0, MetadataAttempts = 0, ProjectionAttempts = 0;

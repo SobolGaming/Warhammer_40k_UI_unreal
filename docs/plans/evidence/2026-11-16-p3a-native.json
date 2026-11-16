@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "dateUtc": "2026-11-16",
+  "status": "BOUNDED_WINDOWS_WORKFLOW_PASS",
+  "sourceHead": "ae423d02a723bae1f408e83420bafed3d4048cae",
+  "coreCommit": "fc52e9166ff6380b606269ce362f4f1cbc6a2835",
+  "coreContract": "46.0.0",
+  "coreBuildSuffix": "ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19",
+  "coreResources": 3256,
+  "package": {
+    "elapsedSeconds": 33.3017404,
+    "files": 50,
+    "bytes": 976478897,
+    "outsideRoot": "C:\\SWDev\\warhammer\\.local\\manual-client\\p3a\\ae423d0\\Windows",
+    "clientExecutable": "C:\\SWDev\\warhammer\\.local\\manual-client\\p3a\\ae423d0\\Windows\\WarhammerClient\\Binaries\\Win64\\WarhammerClient.exe",
+    "executableSha256": "87d62f0920b4daf2c7b42b3eeb5fa3e4a09135f70a150ae39058de501c7ff441",
+    "exactMembershipAndHashes": true,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-package-result.json",
+      "bytes": 2524,
+      "sha256": "f2bd5b948b558da61848fca6281936f19ce1d5f332844fc6b769858c38f62476"
+    },
+    "inventory": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-outside-copy.json",
+      "bytes": 10455,
+      "sha256": "d042eda5301fed8363c24276a1fee1f4beccbfec217c9117d9d39559602e54bc"
+    }
+  },
+  "unit": {
+    "count": 28,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-unit-summary.json",
+      "bytes": 5009,
+      "sha256": "a7e1481c4b3cb4e3e8b95f058bebc2bcb98305136d6e17fe4b1d5cc110d70882"
+    }
+  },
+  "resources": {
+    "count": 4,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T231305Z-0a35e6d53aa2491f8bcc6cbc7dd67d20\\result.json",
+      "bytes": 5272,
+      "sha256": "73f7d44eca8ef7ddaf46ab7404d4571e5ac7ec736ddfa38ed2462fc12b41b110"
+    }
+  },
+  "managed": {
+    "count": 3,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T231311Z-ac2a3431fb5b4e258f9adf13779dfe2b\\result.json",
+      "bytes": 5484,
+      "sha256": "5dea5ec6811625b66cb445f44ce87a50a9a7eb9415e1c4794806283a1c66cb4f"
+    }
+  },
+  "attach": {
+    "count": 3,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T231514Z-115abfc3f292467bb9fdf78517950aa6\\result.json",
+      "bytes": 5473,
+      "sha256": "4044548867de73a8a8b4604273e6f359b209b304546a130eabbc5629f5db12a4"
+    },
+    "outer": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-attach-result.json",
+      "bytes": 1192,
+      "sha256": "5d0983bc34482d30ba4b44ca061f945f6832aab0ab829b2e49c2802174ad9a5a"
+    },
+    "healthAfterClient": "ATTACHED_HEALTHY",
+    "separateOwnerStop": "STOPPED_NORMAL"
+  },
+  "nativeExecutions": 38,
+  "distinctNativeNames": 35,
+  "manualCriteria": {
+    "P3A-V1": "PASS",
+    "P3A-V2": "PASS"
+  },
+  "failures": [
+    {
+      "candidate": "7c5e556",
+      "stage": "separate Attach host startup before client",
+      "result": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-7c5e556-attach-first-failure.json",
+        "bytes": 735,
+        "sha256": "04ae5f655b4400cba5aff7869a7aa371a19cb23dce69cfca595c4307c9a36a4b"
+      },
+      "provenance": "coordinator transcript reconstruction explicitly identified inside; original host logs/shutdown retained"
+    },
+    {
+      "candidate": "ae423d02a723bae1f408e83420bafed3d4048cae",
+      "stage": "separate Attach host startup before client",
+      "result": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-ae423d0-attach-first-failure.json",
+        "bytes": 347,
+        "sha256": "bb07d3227449c356fbee3a8257635a82ec797c782b4a1a8d3e168726e38f0b29"
+      }
+    }
+  ],
+  "limits": "Existing MainModule.FileName host-startup failures remain failures. Separate fresh Attach retries passed. No Core host source change or new backend. Native tests do not establish rendered, clean-host, physical-input/OS-switch, native Linux or full gameplay acceptance. Nonempty bearers/declarations are synthetic DTO unit coverage where canonical live example supplies none.",
+  "documentedUnitReproduction": {
+    "count": 28,
+    "status": "PASS",
+    "actualDocumentedBlockExecuted": true,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p3a-documented-unit-result.json",
+      "bytes": 571,
+      "sha256": "3874c47a02dbdb0f80bfe4c90e8c768d72af20bd204e47879b3be2ff5a8561e9"
+    }
+  },
+  "visibleEvidence": "2026-11-16-p3a-visible.json"
+}

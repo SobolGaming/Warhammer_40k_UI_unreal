@@ -2,6 +2,7 @@
 
 #include "LiveCore/LiveCoreSession.h"
 #include "LiveCore/LiveCoreCamera.h"
+#include "LiveCore/LiveCoreRosterPresentation.h"
 #include "Migration/E02InputPolicy.h"
 #include "Camera/CameraActor.h"
 #include "Camera/CameraComponent.h"
@@ -149,6 +150,14 @@ class SLiveCorePanel : public SCompoundWidget
 public:
     SLATE_BEGIN_ARGS(SLiveCorePanel) {} SLATE_END_ARGS()
     virtual bool SupportsKeyboardFocus() const override { return true; }
+    virtual FReply OnMouseButtonDown(const FGeometry& Geometry, const FPointerEvent& Event) override
+    {
+        // Read-only roster/background clicks must take focus from the board too.
+        // Interactive children still handle their own clicks before bubbling here.
+        return Event.GetEffectingButton() == EKeys::LeftMouseButton
+            ? FReply::Handled().SetUserFocus(AsShared(), EFocusCause::Mouse)
+            : SCompoundWidget::OnMouseButtonDown(Geometry, Event);
+    }
 
     void Construct(const FArguments&, FLiveCoreScene* InScene)
     {
@@ -305,6 +314,21 @@ public:
                     })]
                 + SVerticalBox::Slot().AutoHeight()
                 [SAssignNew(Options, SVerticalBox)]
+                + SVerticalBox::Slot().AutoHeight().Padding(0, 12, 0, 0)
+                [SNew(SBorder)
+                    .BorderImage(FCoreStyle::Get().GetBrush(TEXT("WhiteBrush")))
+                    .BorderBackgroundColor(FLinearColor(0.045f, 0.065f, 0.09f))
+                    .Padding(10)
+                    [SNew(SVerticalBox)
+                        + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 6)
+                        [SNew(STextBlock).Text(FText::FromString(TEXT("Public roster (read-only)")))
+                            .Font(FCoreStyle::GetDefaultFontStyle(TEXT("Bold"), 12))]
+                        + SVerticalBox::Slot().AutoHeight()
+                        [SNew(STextBlock).AutoWrapText(true).Text_Lambda([this]()
+                        {
+                            // Invalidation can clear disclosure without a new version.
+                            return FText::FromString(LiveCorePresentation::BuildPublicRosterSummary(State()));
+                        })]]]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 12, 0, 0)
                 [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(
                     TEXT("Terrain outlines and tokens are advisory. Unplaced models are not drawn. Click the board to focus; RMB drag orbits, MMB drag pans, wheel zooms, F frames. Window resizing reframes.")))
