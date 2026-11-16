@@ -1,6 +1,16 @@
 # P3a public roster verification
 
-The [canonical plan](../plans/unreal-migration-plan.md) owns P3A-V1/V2. The coordinator performs functional pass/fail checks, including the actual screen; the owner only needs to decide visual style when a later first-class interface introduces that choice. This preview reuses the current style. Build/native/SOURCE gates precede rendered acceptance. Current implementation/results are pending; do not reuse the old package as P3a evidence.
+The [canonical plan](../plans/unreal-migration-plan.md) owns P3A-V1/V2. The coordinator performs functional pass/fail checks, including the actual screen; the owner only needs to decide visual style when a later first-class interface introduces that choice. This preview reuses the current style. Build/native/SOURCE gates precede rendered acceptance. Source implementation and Windows native checks are recorded separately in the canonical plan; required P3A-V1/V2 remain pending until actually observed. Do not reuse an old package as P3a evidence.
+
+## Prepared workstation command
+
+A complete verified source `ae423d02a723bae1f408e83420bafed3d4048cae` package is prepared outside the checkout:50 files /976,478,897 bytes; executable SHA256 `87d62f0920b4daf2c7b42b3eeb5fa3e4a09135f70a150ae39058de501c7ff441`. The separate exact46 runtime is already installed. No compilation or undefined shell variable is needed for this prepared copy:
+
+```powershell
+& 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal\scripts\Start-Client.ps1' -CoreMode Managed -CoreVersion '46.0.0' -Port 19148 -ClientExecutable 'C:\SWDev\warhammer\.local\manual-client\p3a\ae423d0\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
+```
+
+The actual path is also saved in `.local/p3a-client-executable.txt`. Keep the whole Windows folder together. Other checkouts must prepare their own matching runtime and follow the complete build/copy steps below. The prepared package is a workstation artifact, not a source-tree executable.
 
 ## Prepare and compile
 
@@ -32,6 +42,20 @@ Get-FileHash -LiteralPath $taskExe -Algorithm SHA256
 ```
 
 Keep failures and package logs. The two tests above are non-visible and do not satisfy P3A-V1/V2. Independent SOURCE results are also required before visible acceptance.
+
+Run the required non-visible Unit gate against the just-built Editor module. This block defines its own report path and checks the structured result; preserve any failure. The coordinator uses a bounded owned-process runner for the same command. If this reproduction command does not exit within three minutes, stop this owned command and retain its logs rather than reporting a pass.
+
+```powershell
+Set-Location -LiteralPath 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal'
+$ErrorActionPreference = 'Stop'
+$taskUnitReport = Join-Path (Get-Location).Path ('.local/unit-reproduction-' + [guid]::NewGuid().ToString('N'))
+& 'C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor-Cmd.exe' (Join-Path (Get-Location).Path 'WarhammerClient.uproject') -NullRHI -RenderOffScreen -unattended -nosplash -nosound -NoCrashDialog -NoLiveCoding "-ReportExportPath=$taskUnitReport" '-ExecCmds=Automation RunTests Warhammer.LiveCore.Unit' '-TestExit=Automation Test Queue Empty'
+if ($LASTEXITCODE -ne 0) { throw 'Native Unit process failed; preserve its report/logs.' }
+$taskUnitResult = Get-Content -LiteralPath (Join-Path $taskUnitReport 'index.json') -Raw | ConvertFrom-Json
+if ($taskUnitResult.succeeded -ne 28 -or $taskUnitResult.tests.Count -ne 28 -or $taskUnitResult.failed -ne 0 -or $taskUnitResult.succeededWithWarnings -ne 0 -or $taskUnitResult.notRun -ne 0 -or $taskUnitResult.inProcess -ne 0) { throw 'Expected 28 successful Unit tests for this exact P3a source.' }
+if (@($taskUnitResult.tests | Where-Object { $_.state -cne 'Success' -or $_.errors -ne 0 -or $_.warnings -ne 0 }).Count -gt 0) { throw 'A Unit test failed or emitted a warning.' }
+$taskUnitResult | Select-Object succeeded, failed, notRun
+```
 
 ## P3A-V1: Managed roster and handoff
 
