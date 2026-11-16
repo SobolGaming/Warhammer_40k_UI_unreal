@@ -1,6 +1,6 @@
 # Exact development snapshots, not a claim of interchangeable sessions.
 function Get-CoreRuntimeProfile {
-    param([ValidateSet('44.5.0', '44.3.33')][string]$Version = '44.5.0')
+    param([ValidateSet('46.0.0', '44.5.0', '44.3.33')][string]$Version = '46.0.0')
     $repository = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
     if ($Version -eq '44.3.33') {
         return [pscustomobject]@{
@@ -14,13 +14,25 @@ function Get-CoreRuntimeProfile {
             legacyProvenance = $true
         }
     }
+    if ($Version -eq '44.5.0') {
+        return [pscustomobject]@{
+            version = $Version
+            commit = '4f9bef0df2fb974d1285232a1009b8781926361d'
+            build = 'warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba'
+            resourceCount = 3130
+            sourceRoot = Join-Path $repository '.local/core-source-44.5.0'
+            runtimeRoot = Join-Path $repository '.local/core-44.5.0'
+            provenanceLeaf = '.development-provenance.json'
+            legacyProvenance = $false
+        }
+    }
     return [pscustomobject]@{
         version = $Version
-        commit = '4f9bef0df2fb974d1285232a1009b8781926361d'
-        build = 'warhammer40k-core-v2:runtime-tree-sha256-v1:0443ce4bc405aad1737ec9a396948775010df933bd75144f6ab9ff54152118ba'
-        resourceCount = 3130
-        sourceRoot = Join-Path $repository '.local/core-source-44.5.0'
-        runtimeRoot = Join-Path $repository '.local/core-44.5.0'
+        commit = 'fc52e9166ff6380b606269ce362f4f1cbc6a2835'
+        build = 'warhammer40k-core-v2:runtime-tree-sha256-v1:ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19'
+        resourceCount = 3256
+        sourceRoot = Join-Path $repository '.local/core-source-46.0.0'
+        runtimeRoot = Join-Path $repository '.local/core-46.0.0'
         provenanceLeaf = '.development-provenance.json'
         legacyProvenance = $false
     }

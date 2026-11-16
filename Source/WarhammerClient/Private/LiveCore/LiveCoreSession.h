@@ -117,7 +117,8 @@ struct FLiveCoreState
     ELiveCoreDecisionPresentation DecisionPresentation = ELiveCoreDecisionPresentation::Unavailable;
     FString MissionSummary;
     FString LastOutcomeCode;
-    // Latest verified command/session revision; also the minimum acceptable projection.
+    // Current player's returned visible-event count; also the minimum acceptable
+    // projection in that viewer namespace. Administrator start is separate.
     int64 SessionRevision = -1;
     // These identify only a successfully parsed/applied DTO snapshot, never a receipt.
     int64 ProjectionRevision = -1;
@@ -130,7 +131,7 @@ struct FLiveCoreState
     TArray<FLiveCoreObjective> Objectives;
     // Only actual placed models with supplied poses; undeployed/reserve models stay absent.
     TArray<FLiveCoreModel> Models;
-    // Optional in the unchanged v13 GameView family. Absence is unavailable,
+    // Optional public inventory in the selected v14 GameView. Absence is unavailable,
     // distinct from a supported empty inventory. Only the player projection feeds it.
     bool bHasPublicArmyRosters = false;
     TArray<FLiveCorePublicArmyRoster> PublicArmyRosters;
@@ -245,6 +246,7 @@ private:
     FString ExpectedViewerPlayerId = TEXT("player-a");
     FString HandoffSessionId;
     FString HandoffEndpoint;
+    // Only the target viewer's metadata/projection may establish this minimum.
     int64 HandoffMinimumRevision = -1;
 #if WITH_DEV_AUTOMATION_TESTS
     friend struct FLiveCoreSessionCreationTestAccess;

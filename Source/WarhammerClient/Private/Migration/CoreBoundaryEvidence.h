@@ -54,7 +54,12 @@ struct FOutcome
 // explicitly before deserialization instead of silently dropping a member.
 bool ParseObject(const FString& Text, TSharedPtr<FJsonObject>& OutObject, FReadError& OutError);
 bool ReadExactRevision(const TSharedPtr<FJsonValue>& Value, int64& OutRevision, FReadError& OutError);
-bool ReadCommandEnvelope(const FString& Text, FCommandEnvelope& OutEnvelope, FReadError& OutError);
-bool ReadOutcome(int32 HttpStatus, const FString& Text, FOutcome& OutOutcome, FReadError& OutError);
+// Historical proof readers keep their original schema by default. The live
+// client explicitly opts into the selected46 envelope/metadata/outcome family.
+enum class EWireProfile : uint8 { Historical44, Contract46 };
+bool ReadCommandEnvelope(const FString& Text, FCommandEnvelope& OutEnvelope, FReadError& OutError,
+    EWireProfile Profile = EWireProfile::Historical44);
+bool ReadOutcome(int32 HttpStatus, const FString& Text, FOutcome& OutOutcome, FReadError& OutError,
+    EWireProfile Profile = EWireProfile::Historical44);
 const TCHAR* OutcomeName(EOutcomeKind Kind);
 }

@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "status": "P2C_V1_V2_PASS",
+  "dateUtc": "2026-11-16",
+  "tester": "Codex coordinator using supported @oai/sky computer use",
+  "platform": "native Windows x64; UE5.8.3 D3D development Game",
+  "runtimeSource": "7ee4a4fac6f3cb04aa1f255135000036f270d77b",
+  "launchCheckpoint": "18718eba9646e26ab76f234b531dd0b3f2471269",
+  "executableSha256": "133d18325ac773e960401645b09b5bb2eca15c3d3247e09d9bc6abffe9c283e8",
+  "coreCommit": "fc52e9166ff6380b606269ce362f4f1cbc6a2835",
+  "coreContract": "46.0.0",
+  "coreBuildSuffix": "ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19",
+  "coreResources": 3256,
+  "manualCriteria": {
+    "P2C-V1": "PASS",
+    "P2C-V2": "PASS"
+  },
+  "observed": {
+    "managed": "Player-a initial9\u2192fixed mission11; explicit Refresh; board wheel zoom, field-focusedF/panelwheel kept zoom unchanged, Frame board restored fit. Begin cleared display/ID/mission/options/receipt; Ready player-b read own9/local0 with no player-a mission. Tactical choice committed13, Refresh. Second privacy screen then Ready restored player-a14/local0 and its own fixed mission only.",
+    "attachDiagnostic": "Player-a fixed choice committed11. Actual UI Ctrl+A/C copied ID privately. Begin hid outgoing view; Ready showed HTTP401 authentication_required: A valid bearer credential is required. No old scene/options/mission/receipt returned and no automatic creation occurred. Normal close left separate host healthy.",
+    "attachRecovery": "Fresh ordinary client pasted copied ID with actual Ctrl+V and Open. Same player-a11, own fixed mission, hidden opposing decision, local0; no own choice available so retained known result. Handoff privacy then Ready restored player-b9/local0 and its own offered secondary choices without prior player-a mission. Normal close left host healthy; separate owner stopped host normally."
+  },
+  "launches": [
+    {
+      "mode": "Managed",
+      "httpDiagnostic": false,
+      "startedUtc": "2026-11-16T22:33:06.2133113Z",
+      "finishedUtc": "2026-11-16T22:35:50.7594141Z",
+      "gameLifetimeSeconds": 153.2421599,
+      "launcherExit": 0,
+      "gameExit": 0,
+      "normalCleanup": true,
+      "binaryConfigEnvironmentUnchanged": true,
+      "raw": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-20261116T223306Z-584840db81a34d9381ec9b6122b40a4b\\result.json",
+        "bytes": 6258,
+        "sha256": "0cd6947fc69c7c54bfd437b4c1aba2779c0b8f83ee7d3eba9da7489f744139bb"
+      }
+    },
+    {
+      "mode": "Attach",
+      "httpDiagnostic": true,
+      "startedUtc": "2026-11-16T22:36:36.2131258Z",
+      "finishedUtc": "2026-11-16T22:37:52.9599326Z",
+      "gameLifetimeSeconds": 74.0689884,
+      "launcherExit": 0,
+      "gameExit": 0,
+      "normalCleanup": true,
+      "binaryConfigEnvironmentUnchanged": true,
+      "raw": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-20261116T223636Z-9a4c91a82536471fa0d482a1e6edbf61\\result.json",
+        "bytes": 6599,
+        "sha256": "f22d99274e177a8fd4eecbb9f9747fdf77a08c59050614c9d1a110750e8c6355"
+      }
+    },
+    {
+      "mode": "Attach",
+      "httpDiagnostic": false,
+      "startedUtc": "2026-11-16T22:38:03.5139696Z",
+      "finishedUtc": "2026-11-16T22:39:15.2142115Z",
+      "gameLifetimeSeconds": 69.0892898,
+      "launcherExit": 0,
+      "gameExit": 0,
+      "normalCleanup": true,
+      "binaryConfigEnvironmentUnchanged": true,
+      "raw": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-20261116T223803Z-d6067230687246b4a503322e0cd5d5d6\\result.json",
+        "bytes": 6580,
+        "sha256": "3648567db1203c96d0220c62460088dc301c7b0db7e72db2343144f62224bc1e"
+      }
+    }
+  ],
+  "captures": [
+    {
+      "label": "managed-start",
+      "utc": "2026-11-16T22:33:38.549Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\01-managed-start.png",
+        "bytes": 164521,
+        "sha256": "b6e0b292e688a590fb004bc0ab1f889f5cc82617ba62a542174a4d286a8f4612"
+      }
+    },
+    {
+      "label": "managed-player-a-initial",
+      "utc": "2026-11-16T22:33:43.785Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\02-managed-player-a-initial.png",
+        "bytes": 247713,
+        "sha256": "daafbecbfc81d38a7fab907fc9173c5fab565b4fe09b47b13eb7f2d4fc128218"
+      }
+    },
+    {
+      "label": "managed-player-a-choice",
+      "utc": "2026-11-16T22:33:53.520Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\03-managed-player-a-choice.png",
+        "bytes": 234974,
+        "sha256": "8801fb56e981deb3a5f414832ef2ce5f01b69b9954a0232f8b66861d5e2356b2"
+      }
+    },
+    {
+      "label": "managed-board-zoom",
+      "utc": "2026-11-16T22:34:16.562Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\04-managed-board-zoom.png",
+        "bytes": 274732,
+        "sha256": "141c26e5fb2b0444a4dcadd7cd63ca49b9898644117cb8e166af4e7896600db5"
+      }
+    },
+    {
+      "label": "managed-ui-focused-f",
+      "utc": "2026-11-16T22:34:27.616Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\05-managed-ui-focused-f.png",
+        "bytes": 275175,
+        "sha256": "61e62fd8176454b92b65087c091cac254d58118d60fe182eb9ddb96e911474cc"
+      }
+    },
+    {
+      "label": "managed-panel-wheel-isolation",
+      "utc": "2026-11-16T22:34:35.157Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\06-managed-panel-wheel-isolation.png",
+        "bytes": 275390,
+        "sha256": "352b2bf846cc7a1376697174fb424d7dd692b8208c87a3a918c9bbbc7b90a941"
+      }
+    },
+    {
+      "label": "managed-frame-board",
+      "utc": "2026-11-16T22:34:40.597Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\07-managed-frame-board.png",
+        "bytes": 235126,
+        "sha256": "9121c9e1c3e936af6b9cab1192cd6184fdb54da9837ab3b68ff9ac0dd27c31a5"
+      }
+    },
+    {
+      "label": "managed-privacy-before-player-b",
+      "utc": "2026-11-16T22:34:46.176Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\08-managed-privacy-before-player-b.png",
+        "bytes": 164088,
+        "sha256": "59188befb822f471d27bfaaa5c2c8fac1abde949ac2eee5b06aa89542f34c4e9"
+      }
+    },
+    {
+      "label": "managed-player-b-initial",
+      "utc": "2026-11-16T22:34:56.358Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\09-managed-player-b-initial.png",
+        "bytes": 243278,
+        "sha256": "ddd6deedeba13cb2819aac51e4e7a79bef87ea86da4653171fda2b17ac03c46c"
+      }
+    },
+    {
+      "label": "managed-player-b-choice",
+      "utc": "2026-11-16T22:35:09.826Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\10-managed-player-b-choice.png",
+        "bytes": 233929,
+        "sha256": "a27d97e895b90afa0e4ca6946924eb8dcb6ce24e7c6642c77ad56b75a6d00b16"
+      }
+    },
+    {
+      "label": "managed-player-b-refreshed",
+      "utc": "2026-11-16T22:35:26.855Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\11-managed-player-b-refreshed.png",
+        "bytes": 233904,
+        "sha256": "ecba3ecc3d2f0c20e3a5fe447df3ddebe2d387075cea5ebc479482cb49c13755"
+      }
+    },
+    {
+      "label": "managed-privacy-before-player-a",
+      "utc": "2026-11-16T22:35:32.213Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\12-managed-privacy-before-player-a.png",
+        "bytes": 164202,
+        "sha256": "b50b355c9f3cde3b46766e8872e2bbb8936d4ca05423691dd465be4329537cc2"
+      }
+    },
+    {
+      "label": "managed-player-a-return",
+      "utc": "2026-11-16T22:35:42.104Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\13-managed-player-a-return.png",
+        "bytes": 245846,
+        "sha256": "b3a5d79dfb0306d64fa3c1bf350e4795c53d4eca279420e479ffad68d16c6f2c"
+      }
+    },
+    {
+      "label": "attach-player-a-initial",
+      "utc": "2026-11-16T22:37:02.165Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\14-attach-player-a-initial.png",
+        "bytes": 247874,
+        "sha256": "29f2214e28b2b3f1e81d284525e21eb99357b0ff3cee0415efd76b7e0c5703b3"
+      }
+    },
+    {
+      "label": "attach-player-a-choice",
+      "utc": "2026-11-16T22:37:13.832Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\15-attach-player-a-choice.png",
+        "bytes": 234947,
+        "sha256": "94fee3bc57161b964e2d20913ea50fda5a0be64f7401a8df3955c1cdf66b8fe4"
+      }
+    },
+    {
+      "label": "attach-session-copied-in-ui",
+      "utc": "2026-11-16T22:37:31.452Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\16-attach-session-copied-in-ui.png",
+        "bytes": 236725,
+        "sha256": "83d1ebfae705279b898267481d5c02405576f9237fec7538bf6d4f42211e96b9"
+      }
+    },
+    {
+      "label": "attach-invalid-b-privacy",
+      "utc": "2026-11-16T22:37:39.419Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\17-attach-invalid-b-privacy.png",
+        "bytes": 164089,
+        "sha256": "090269a1916a15f89150019808b7e15a9e9db022367df8a186a4078eee379219"
+      }
+    },
+    {
+      "label": "attach-invalid-b-http401",
+      "utc": "2026-11-16T22:37:50.761Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\18-attach-invalid-b-http401.png",
+        "bytes": 165511,
+        "sha256": "5c243c85b2b296dfdc2044c338cb1c80446c0c202d9e80dae46f230b04d27daa"
+      }
+    },
+    {
+      "label": "attach-reopen-id-pasted",
+      "utc": "2026-11-16T22:38:30.993Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\19-attach-reopen-id-pasted.png",
+        "bytes": 168536,
+        "sha256": "6c15cd5213610e75315894bb38e5d657091cd573c187004cf77ecda9b9bff8b1"
+      }
+    },
+    {
+      "label": "attach-player-a-reopened",
+      "utc": "2026-11-16T22:38:43.333Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\20-attach-player-a-reopened.png",
+        "bytes": 229257,
+        "sha256": "6d4c009459a26b97e6341d2744b9000b0793705c6e8af213d0a72699b0ad2c43"
+      }
+    },
+    {
+      "label": "attach-recovery-privacy",
+      "utc": "2026-11-16T22:38:53.944Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\21-attach-recovery-privacy.png",
+        "bytes": 165103,
+        "sha256": "b875b834ba72f857e76b77766d769b3899bead7b00fc3d82411977431b718996"
+      }
+    },
+    {
+      "label": "attach-player-b-recovered",
+      "utc": "2026-11-16T22:39:04.356Z",
+      "file": {
+        "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\22-attach-player-b-recovered.png",
+        "bytes": 244233,
+        "sha256": "cf5d310fad75036458bbc5565c80f8dcc3d0df4db0bc99d84afe85570b4a411a"
+      }
+    }
+  ],
+  "separateCoreStop": {
+    "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-outer-stop.json",
+    "bytes": 242,
+    "sha256": "3f9bc289409c10041d0ba5e7ac3c7d8699d8ca626a6d9f17deea615599bce722"
+  },
+  "desktopClose": {
+    "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-visible-captures\\desktop-close.json",
+    "bytes": 72,
+    "sha256": "9d1d132c47f0adce37ce6fe3578e6e8b7fbd4e708df1c9964647d203c80e72eb"
+  },
+  "limits": "Screenshots/observations cover only the finite setup-choice, privacy, reopen and normal cleanup workflows. Native controls supply HTTP counts and busy/UNKNOWN/alias guards. No physical held-button/OS-switch/teardown, resizing, clean-host, Linux, full battle, roster editor or universal diagnostics acceptance. Panel fit this window; no overflow-scroll claim."
+}

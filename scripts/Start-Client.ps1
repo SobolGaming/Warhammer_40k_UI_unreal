@@ -7,7 +7,7 @@ param(
     [uri]$Endpoint,
     [Parameter(ParameterSetName = 'Editor')][string]$EngineRoot = 'C:/Program Files/Epic Games/UE_5.8',
     [Parameter(Mandatory, ParameterSetName = 'Packaged')][ValidateNotNullOrEmpty()][string]$ClientExecutable,
-    [ValidateSet('44.5.0', '44.3.33')][string]$CoreVersion = '44.5.0',
+    [ValidateSet('46.0.0', '44.5.0', '44.3.33')][string]$CoreVersion = '46.0.0',
     [string]$CoreRoot,
     [ValidateRange(5, 120)][int]$ReadinessSeconds = 60
 )

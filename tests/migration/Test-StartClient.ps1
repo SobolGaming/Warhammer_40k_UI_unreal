@@ -111,7 +111,7 @@ if ($global:WarhammerStartClientTestProbe.StopFails) { throw 'Synthetic Core sto
     Assert-True ($probe.FilePath -ceq $editor -and $probe.WorkingDirectory -ceq $sourceRoot) 'Editor selection or CWD changed'
     Assert-True ($probe.Arguments -ceq ('"' + $project + '" "-game" "-windowed" "-CoreUrl=http://127.0.0.1:8765/"')) 'Editor argument vector changed'
     Assert-True ($probe.HostCalls -eq 1 -and $probe.Mode -eq 'Managed' -and $probe.ReadinessSeconds -eq 30 -and $probe.CoreRoot -ceq 'synthetic Core with spaces') 'Core startup arguments changed'
-    Assert-True ($probe.CoreVersion -ceq '44.5.0') 'Default launcher must explicitly select the new Core profile'
+    Assert-True ($probe.CoreVersion -ceq '46.0.0') 'Default launcher must explicitly select the new Core profile'
     Assert-True ($probe.WaitCalls -eq 1 -and $probe.DisposeCalls -eq 1 -and $probe.StopCalls -eq 1 -and $probe.StoppedReceipt -ceq 'synthetic-owned-receipt') 'Owned Editor lifecycle changed'
 
     # Packaged selection works without either Editor or project files.
@@ -122,8 +122,10 @@ if ($global:WarhammerStartClientTestProbe.StopFails) { throw 'Synthetic Core sto
     Assert-True ($probe.Arguments -ceq '"-windowed" "-CoreUrl=http://127.0.0.1:8765/"') 'Packaged arguments include Editor-only values'
     Assert-True ($probe.StopCalls -eq 1 -and $probe.StoppedReceipt -ceq 'synthetic-owned-receipt') 'Packaged Managed Core was not stopped'
 
-    $probe = Invoke-LauncherCase @{ ClientExecutable = $packaged; CoreVersion = '44.3.33' }
-    Assert-True ($probe.CoreVersion -ceq '44.3.33' -and $probe.StopCalls -eq 1) 'Retained preview profile was not propagated'
+    foreach ($version in @('44.5.0', '44.3.33')) {
+        $probe = Invoke-LauncherCase @{ ClientExecutable = $packaged; CoreVersion = $version }
+        Assert-True ($probe.CoreVersion -ceq $version -and $probe.StopCalls -eq 1) 'Retained preview profile was not propagated'
+    }
 
     $probe = Invoke-LauncherCase @{ ClientExecutable = $nested; CoreMode = 'Attach'; Endpoint = [uri]'http://127.0.0.1:8765/' }
     Assert-True ($probe.FilePath -ceq $nested -and $probe.WorkingDirectory -ceq (Split-Path $nested -Parent)) 'Nested packaged binary path or CWD is wrong'

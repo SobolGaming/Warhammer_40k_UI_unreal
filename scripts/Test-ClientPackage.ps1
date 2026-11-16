@@ -7,7 +7,7 @@ param(
     [ValidateSet('Managed', 'Attach')][string]$CoreMode = 'Managed',
     [ValidateRange(1024, 65535)][int]$Port = 19084,
     [string]$Endpoint,
-    [ValidateSet('44.5.0', '44.3.33')][string]$CoreVersion = '44.5.0',
+    [ValidateSet('46.0.0', '44.5.0', '44.3.33')][string]$CoreVersion = '46.0.0',
     [string]$CoreRoot
 )
 

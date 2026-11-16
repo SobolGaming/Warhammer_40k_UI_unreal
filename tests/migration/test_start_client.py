@@ -20,15 +20,36 @@ SPEC.loader.exec_module(launcher)
 
 class ManualClientTests(unittest.TestCase):
     def test_runtime_profiles_remain_distinct_exact_snapshots(self):
-        self.assertEqual(launcher.CORE_COMMIT, "4f9bef0df2fb974d1285232a1009b8781926361d")
+        self.assertEqual(launcher.CORE_COMMIT, "fc52e9166ff6380b606269ce362f4f1cbc6a2835")
+        self.assertEqual(launcher.CORE_BUILD, "warhammer40k-core-v2:runtime-tree-sha256-v1:ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19")
+        self.assertEqual(launcher.CORE_RESOURCE_COUNT, 3256)
+        self.assertEqual(launcher.CORE_PROFILES["44.5.0"][0], "4f9bef0df2fb974d1285232a1009b8781926361d")
         self.assertEqual(launcher.CORE_PROFILES["44.5.0"][2], 3130)
         self.assertEqual(launcher.CORE_PROFILES["44.3.33"][0], "5f509724da25a2f6ded0c2739a8e7c84bdf59c91")
         self.assertNotEqual(launcher.CORE_PROFILES["44.3.33"][1], launcher.CORE_BUILD)
 
     def test_explicit_older_profile_reaches_runtime_check_before_launch(self):
-        with patch.object(launcher, "packaged_path", return_value=Path("synthetic.exe")), patch.object(launcher, "verify_installed_core") as check, patch.object(launcher, "development_environment", return_value={}), patch.object(launcher.subprocess, "run", return_value=subprocess.CompletedProcess([], 0)), contextlib.redirect_stdout(io.StringIO()):
-            self.assertEqual(launcher.main(["--client-executable", "synthetic.exe", "--endpoint", "http://127.0.0.1:8765", "--core-version", "44.3.33"]), 0)
-        check.assert_called_once_with("44.3.33")
+        for version in ("44.5.0", "44.3.33"):
+            with self.subTest(version=version), patch.object(launcher, "packaged_path", return_value=Path("synthetic.exe")), patch.object(launcher, "verify_installed_core") as check, patch.object(launcher, "development_environment", return_value={}), patch.object(launcher.subprocess, "run", return_value=subprocess.CompletedProcess([], 0)), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(launcher.main(["--client-executable", "synthetic.exe", "--endpoint", "http://127.0.0.1:8765", "--core-version", version]), 0)
+            check.assert_called_once_with(version)
+
+    def test_installed_identity_default_rejects_an_older_or_wrong_resource_runtime(self):
+        core = types.ModuleType("warhammer40k_core")
+        core.__file__ = str(Path(sys.prefix) / "synthetic-core" / "__init__.py")
+        identity_module = types.ModuleType("warhammer40k_core.build_identity")
+        for build, count, accepted in (
+            (launcher.CORE_BUILD, 3256, True),
+            (launcher.CORE_PROFILES["44.5.0"][1], 3130, False),
+            (launcher.CORE_BUILD, 3255, False),
+        ):
+            identity_module.verified_engine_build_identity = lambda: types.SimpleNamespace(build_id=build, resource_count=count)
+            with self.subTest(build=build, count=count), patch.dict(sys.modules, {core.__name__: core, identity_module.__name__: identity_module}), patch.object(launcher.sys, "version_info", (3, 14, 5)), patch.object(launcher.sys, "flags", types.SimpleNamespace(isolated=1)), patch.object(launcher.sys, "dont_write_bytecode", True):
+                if accepted:
+                    launcher.verify_installed_core()
+                else:
+                    with self.assertRaisesRegex(launcher.StartupError, "differs from selected contract 46.0.0"):
+                        launcher.verify_installed_core()
 
     def test_origin_validation_refuses_remote_and_embedded_values(self):
         self.assertEqual(launcher.local_endpoint("http://127.0.0.1:8765/"), "http://127.0.0.1:8765")
@@ -110,7 +131,7 @@ class ManualClientTests(unittest.TestCase):
             events = []
             environment = {"WH_CORE_ADMIN_TOKEN": "synthetic_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_player"}
             def checked(version):
-                self.assertEqual(version, "44.5.0")
+                self.assertEqual(version, "46.0.0")
                 events.append("runtime")
             def prepared(endpoint):
                 self.assertEqual(events, ["runtime"])
@@ -141,7 +162,7 @@ class ManualClientTests(unittest.TestCase):
             environment = {"WH_CORE_ADMIN_TOKEN": "synthetic_admin", "WH_CORE_PLAYER_TOKEN": "synthetic_player"}
             events = []
             def checked(version):
-                self.assertEqual(version, "44.5.0")
+                self.assertEqual(version, "46.0.0")
                 events.append("runtime")
             def prepared(endpoint):
                 self.assertEqual(events, ["runtime"])

@@ -2,7 +2,7 @@
 
 A C++ first 3D client for the separate authoritative Python Core. This personal/internal development preview supports the Editor route and a Windows Development Game folder. P1b completed bounded Windows build, source-review, non-visible and visible packaged checks for clearer decision status, immediate-submission labels and keyboard-focus help. It remains a setup-choice preview, not a complete game.
 
-P2a adds known-ID player-a session reopening on the selected44.5 Core. Its [native checks](docs/plans/evidence/2026-10-24-p2a-native.json), [independent source reviews](docs/plans/evidence/2026-10-24-p2a-source-reviews.json) and [visible workflow checks](docs/plans/evidence/2026-10-24-p2a-visible.md) passed at source `20600a5b37ab2cf443d884fe8e2f86b71388d534`. P2a merged as [PR #7](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/7). P1c's [runtime-adoption results](docs/plans/evidence/2026-10-24-p1c-core-adoption.md) and earlier44.3 visible results retain their original scopes.
+P2a added known-ID player-a reopening on its then-selected 44.5 Core. Its [native checks](docs/plans/evidence/2026-10-24-p2a-native.json), [independent source reviews](docs/plans/evidence/2026-10-24-p2a-source-reviews.json) and [visible workflow checks](docs/plans/evidence/2026-10-24-p2a-visible.md) passed at source `20600a5b37ab2cf443d884fe8e2f86b71388d534`. P2a merged as [PR #7](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/7). P1c's [runtime-adoption results](docs/plans/evidence/2026-10-24-p1c-core-adoption.md) and earlier44.3 visible results retain their original scopes.
 
 Read [architecture.md](architecture.md) for the source-tree map, component boundaries and runtime/session flows. The [canonical migration plan](docs/plans/unreal-migration-plan.md) owns all milestone scope and acceptance.
 
@@ -10,71 +10,53 @@ Read [architecture.md](architecture.md) for the source-tree map, component bound
 
 The current preview can connect/create a real Core session, reopen a known active session on a retained service, display the current viewer's board, submit an offered secondary-mission choice and refresh its authoritative result. P2b adds explicit local handoff between the two existing development players. Full deployment, movement, turns and complete gameplay are still being developed. Arcade parity is the initial useful milestone. The ultimate goal is all capabilities supported by the latest explicitly selected Core, including public/editor/data/service features beyond Arcade and faithful presentation of automatic rules.
 
-P1c explicitly adopts Core `4f9bef0df2fb974d1285232a1009b8781926361d` / **44.5.0**, from open, unmerged [Core PR #591](https://github.com/SobolGaming/Warhammer_40k_AI/pull/591). Runtime preparation, current client checks and exact limits are tracked separately in the [canonical plan](docs/plans/unreal-migration-plan.md). The previous44.3.33 environment/preview remain available through explicit `-CoreVersion 44.3.33` with the old executable. See the [source capability inventory](docs/plans/research/2026-10-24-latest-core-capabilities.md).
+P2b / [PR #8](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/8) merged as `6e76f4a44ab84eca8ae343db27631f3ccbc55d6c` after the owner reported the manual tests passed. **P2c / [PR #9](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/9) completed its bounded verification and is ready for review, unmerged:** it adopts Core main `fc52e9166ff6380b606269ce362f4f1cbc6a2835` / **46.0.0** for the existing create, finite-choice, reopen and two-player handoff workflow. It adds no roster/editor/gameplay feature. Implementation, builds, source reviews and [visible workflow results](docs/plans/evidence/2026-11-16-p2c-visible.json) have separate records in the [canonical plan](docs/plans/unreal-migration-plan.md). The [Core 46 source delta](docs/plans/research/2026-11-16-core-46-reference.md) explains the new private randomness, viewer identity/revision and diagnostics contracts. Old 44.5/44.3.33 runtimes and matching executables remain separate; launch-profile selection does not make binaries or sessions interchangeable.
 
 Run every command below from the `Warhammer_40k_UI_unreal` repository root. Complete [first-time setup and build](#first-time-setup-and-build) once before using the routine launch commands.
 
 ### Windows: routine launch
 
-For complete P2B-V1/V2 manual steps, compilation commands, two-terminal Attach testing and troubleshooting, use [Manual testing the Windows client](docs/development/manual-testing.md). The P2b package and matching Core are already prepared on this workstation. In **PowerShell 7**, this complete command needs no variables or rebuild:
+Use the [complete P2c manual-testing guide](docs/development/p2c-manual-testing.md) for the verified current Core46 workstation package's absolute launch command, preparation, compilation, whole-folder copy, fresh-shell commands and identified verification criteria. The prepared package is source7ee4a4f; its native checks passed and visible/source acceptance is recorded separately in the plan. The launcher opens an existing built executable and does not compile or install anything. Retained P2b executables require their explicit44.5 profile below.
+
+For Editor development, first complete [first-time setup and build](#first-time-setup-and-build), prepare the separate Core 46 runtime, then run this whole block in PowerShell 7:
 
 ```powershell
-& 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal\scripts\Start-Client.ps1' -CoreMode Managed -Port 19128 -ClientExecutable 'C:\SWDev\warhammer\.local\manual-client\p2b\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
+Set-Location -LiteralPath 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal'
+& ./scripts/Start-Client.ps1 -CoreVersion 46.0.0 -CoreMode Managed
 ```
 
-This starts the separately prepared exact-source development Core hidden, waits for authenticated readiness, then opens the client. Close the client window normally to stop that exact managed Core. It does not build or install anything.
+Managed starts the prepared development Core hidden, waits for authenticated readiness and then opens the client. Close the client normally to stop only that owned host. For a packaged executable or a retained Attach host, use the current guide's complete commands, which define the actual executable path and both terminals. `WarhammerClient/Binaries/...` is inside the packaged Windows folder; it is not a source-tree executable, and a fresh shell has no `$taskExe` value until assigned.
 
-The prepared copy is local to this workstation. On another checkout or after runtime source changes, follow the guide's complete [build/copy commands](docs/development/manual-testing.md#build-a-new-standalone-package-from-this-checkout) and [Core preparation](docs/development/manual-testing.md#prepare-core-on-a-fresh-checkout-only). `WarhammerClient/Binaries/...` is relative to the packaged Windows folder, not this repository. `$taskExe` must be assigned in every new shell that uses it.
-
-For an already running Core, keep it running and use this full block from the repository root (the [manual guide](docs/development/manual-testing.md#p2b-v2-failed-read-and-recovery-with-attach) starts a retained host on port 19129):
+The preserved P2b 44.5 package is already prepared on this workstation. To repeat that **old** workflow without rebuilding, explicitly select its matching old profile:
 
 ```powershell
-$taskExe = 'C:\SWDev\warhammer\.local\manual-client\p2b\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
-& ./scripts/Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:19129/' -ClientExecutable $taskExe
+& 'C:\SWDev\warhammer\Warhammer_40k_UI_unreal\scripts\Start-Client.ps1' -CoreVersion 44.5.0 -CoreMode Managed -Port 19128 -ClientExecutable 'C:\SWDev\warhammer\.local\manual-client\p2b\Windows\WarhammerClient\Binaries\Win64\WarhammerClient.exe'
 ```
 
-**Fresh Windows machines:** use `Prepare-CoreDevelopmentRuntime.ps1` with an installed native Python3.14 interpreter and the selected source object. A plain pip install instead uses the [foreground Core + Attach route](docs/development/core-startup.md#windows-foreground-core-and-attach); it does not create Managed provenance.
+The [retained P2b manual guide](docs/development/manual-testing.md) supplies its exact historical actions and Attach route. Those results and revision numbers are specific to44.5, not Core 46 acceptance.
 
-For Editor development, omit `-ClientExecutable`:
+The Editor route defaults to `C:\Program Files\Epic Games\UE_5.8`. For another installed matching native engine, pass `-EngineRoot 'D:\Unreal\UE_5.8'`; PowerShell does not automatically read `UE_ROOT`. `-CoreVersion` defaults to46.0.0 and retains44.5.0/44.3.33. Its default source is `.local/core-source-46.0.0`; the separate prepared runtime is `.local/core-46.0.0`. `-CoreRoot` may select a clean source at that exact pin. The current package guide writes `.local/p2c-client-executable.txt` after build/copy. `-Port` defaults to8765 and `-ReadinessSeconds` to60 (maximum120). [Core startup](docs/development/core-startup.md) explains fresh installation and the optional pip/foreground Attach route.
 
-```powershell
-& ./scripts/Start-Client.ps1 -CoreMode Managed
-```
-
-The Editor route defaults to `C:\Program Files\Epic Games\UE_5.8`. To use another installation, optionally set its location once in your shell and explicitly pass it to the PowerShell launcher:
-
-```powershell
-$env:UE_ROOT = 'D:\Unreal\UE_5.8'
-& ./scripts/Start-Client.ps1 -CoreMode Managed -EngineRoot $env:UE_ROOT
-```
-
-The PowerShell launcher does not automatically read `UE_ROOT`. Its other options are `-CoreVersion` (default44.5.0, retained44.3.33), `-CoreRoot` (default `.local/core-source-44.5.0` for44.5), `-Port` (default 8765), `-Endpoint` for Attach, and `-ReadinessSeconds` (default 60, maximum 120) for Managed startup. These examples use the **Editor route**; add `-ClientExecutable $taskExe` to select your packaged executable instead:
-
-```powershell
-& ./scripts/Start-Client.ps1 -CoreMode Managed -CoreRoot '.local/core-source-44.5.0' -Port 8766 -ReadinessSeconds 120
-& ./scripts/Start-Client.ps1 -CoreMode Attach -CoreRoot '.local/core-source-44.5.0' -Endpoint 'http://127.0.0.1:8766/'
-```
-
-Current client endpoints must be **`http://127.0.0.1:<port>`**, optionally with a trailing slash. HTTPS, IPv6, hostnames, other addresses, URL paths and credentials in URLs are unsupported by the current client.
+Current client endpoints must be **`http://127.0.0.1:<port>`**, optionally with a trailing slash. Other URL forms remain unsupported.
 
 ### Reopen a known active session (P2a)
 
 Keep the same selected Core process alive and use the client in **Attach** mode. Managed stops its owned in-memory Core when the client closes, so it cannot preserve sessions between launches. To reopen:
 
 1. Create/start a session, select and copy its current ID from the session-ID field, then close the client normally with no uncertain command outstanding.
-2. Launch a fresh client against that still-running Core using `Start-Client.ps1 -CoreMode Attach -Endpoint 'http://127.0.0.1:8765/' -ClientExecutable $taskExe`.
+2. Launch a fresh matching client against that still-running Core using the [P2c guide's complete Attach block](docs/development/p2c-manual-testing.md). The retained 44.5 workflow instead uses its [own guide](docs/development/manual-testing.md) with explicit `-CoreVersion 44.5.0`.
 3. Paste the ID and press **Open existing session**. The client reads player-a metadata/projection with the player credential; it sends no create/start/gameplay command. The current ID remains selectable/copyable after opening.
 4. Check the same session, authoritative revision and offered state. **Accepted actions in this client** starts at0 because it is a local counter, not the session's historical total. Submit an offered option and Refresh normally.
 
-Only known active sessions on exact selected44.5 Core are supported. IDs must be bounded ASCII path tokens; invalid paths/escaped IDs are rejected before HTTP. A missing ID shows the actual HTTP404 error without invented scene/options or automatic creation. Created/terminal/closed sessions get an explicit unsupported-lifecycle message. Metadata/projection reads may update Core's activity timestamp; they do not advance the game revision. This is not session listing, new-user joining, hotseat or durable/unknown-command restart recovery. Do not close a client with an UNKNOWN outcome to bypass its same-command reconciliation.
+Only known active sessions on the exact selected Core 46 build are supported by the current candidate. IDs must be bounded ASCII path tokens; invalid paths/escaped IDs are rejected before HTTP. A missing ID shows the actual HTTP404 error without invented scene/options or automatic creation. Created/terminal/closed sessions get an explicit unsupported-lifecycle message. Player revisions are visible-event counts, and `last_activity_at` is null. Copy Core's current revision for that viewer; do not assume one increment per command or compare revisions across players. This is not session listing, new-user joining or durable/unknown-command restart recovery. Do not close a client with an UNKNOWN outcome to bypass its same-command reconciliation.
 
-The [P2a visible check](docs/plans/evidence/2026-10-24-p2a-visible.md) used three sequential packaged Attach clients against one retained44.5 Core. Copy/paste reopened the same session at revision1 with a fresh local action count0; one offered mission choice committed at revision2 and Refresh showed the hidden opposing decision. A separate client displayed local path-ID rejection and actual HTTP404 `session_not_found` / “Session was not found.”, then reopened the known session at revision2 with its own mission state and local count0. All three clients closed normally and left Core healthy until its owner stopped it. Native instrumentation separately verifies that reopening uses only two player GETs.
+The [P2a visible check](docs/plans/evidence/2026-10-24-p2a-visible.md) used three sequential packaged Attach clients against one retained 44.5 Core. Copy/paste reopened the same session at revision1 with a fresh local action count0; one offered mission choice committed at revision2 and Refresh showed the hidden opposing decision. A separate client displayed local path-ID rejection and actual HTTP404 `session_not_found` / “Session was not found.”, then reopened the known session at revision2 with its own mission state and local count0. All three clients closed normally and left Core healthy until its owner stopped it. Native instrumentation separately verifies that reopening uses only two player GETs.
 
 ### Local two-player handoff (P2b)
 
-This slice supports the two existing development principals on one session. Its implementation and verification are tracked in [PR #8](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/8) and the [canonical plan](docs/plans/unreal-migration-plan.md); do not read pending checkboxes as acceptance.
+The merged P2b slice supports the two existing development principals on one session. P2c preserves that workflow while adopting Core 46 in [PR #9](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/9). The [canonical plan](docs/plans/unreal-migration-plan.md) separates completed Core 46 verification from historical44.5 evidence and broader deferred checks.
 
-The bounded implementation, Windows package, native workflows, independent source reviews and required P2B-V1/V2 visible checks pass. Three sequential packaged launches verified two-player handoff, a real player-b HTTP401 with the outgoing view still hidden, and recovery through a fresh Attach client. Reproducible manual steps and exact results are in the canonical plan and PR body. The earlier locked-desktop attempt remains preserved separately; broader gameplay and physical-input verification stay open.
+The P2b 44.5 implementation, Windows package, native workflows, independent source reviews and required P2B-V1/V2 visible checks passed; the owner also reported the manual tests passed before PR #8 merged. These results do not verify the Core 46 candidate. Three sequential packaged launches verified two-player handoff, a real player-b HTTP401 with the outgoing view still hidden, and recovery through a fresh Attach client. Reproducible manual steps and exact results are in the canonical plan and PR body. The earlier locked-desktop attempt remains preserved separately; broader gameplay and physical-input verification stay open.
 
 1. Start normally in Managed or Attach mode and Connect/create (or Open a known active session) as player-a. Make an offered choice and Refresh.
 2. Click **Hand off to the other local player**. The previous player's board, mission, decision, outcome and ID display are cleared. Pass the workstation to the named next player while the privacy screen remains visible.
@@ -110,7 +92,7 @@ UI clicks, text entry and panel scrolling retain their own input. Camera gesture
 
 ### Build a Windows standalone Development package
 
-The packaging source and its bounded verification are tracked in the [canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client. The [complete build/copy/launch recipe](docs/development/manual-testing.md#build-a-new-standalone-package-from-this-checkout) initializes all variables and saves the executable path for later shells. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
+The packaging source and its bounded verification are tracked in the [canonical plan](docs/plans/unreal-migration-plan.md). It packages the existing limited client. The [complete build/copy/launch recipe](docs/development/p2c-manual-testing.md) initializes all variables and saves the executable path for later shells. Using the installed UE 5.8 Windows toolchain from PowerShell 7:
 
 ```powershell
 $package = & ./scripts/Build-ClientPackage.ps1
@@ -150,7 +132,7 @@ All Linux setup, compilation, Core startup, client input/rendering and packaging
 After the native Linux setup/build below, open two terminals in this repository. In terminal 1, run the existing Core in the foreground:
 
 ```bash
-task_core="$PWD/.local/core-source-44.5.0"
+task_core="$PWD/.local/core-source-46.0.0"
 task_python="$PWD/.local/core-dev-linux/bin/python"
 "$task_python" -I -B "$task_core/scripts/run_phase18m_reference_server.py" \
   --host 127.0.0.1 --port 8765
@@ -161,7 +143,7 @@ Wait for that process's own `Serving Phase 18M reference contract at http://127.
 ```bash
 export UE_ROOT=/absolute/path/to/native/UE_5.8
 "$PWD/.local/core-dev-linux/bin/python" -I -B ./scripts/Start-Client.py \
-  --engine-root "$UE_ROOT" --core-root .local/core-source-44.5.0 \
+  --engine-root "$UE_ROOT" --core-root .local/core-source-46.0.0 \
   --endpoint http://127.0.0.1:8765
 ```
 
@@ -171,9 +153,9 @@ The manual Python launcher checks the installed Core identity, supplies missing 
 
 ### Windows prerequisites and Editor build
 
-Use UE 5.8.3, PowerShell 7, Git, Visual Studio 2022 with C++ build tools/Windows SDK, and VS Code. The existing workstation uses VS2022 17.14, MSVC 14.44.35229 (folder 14.44.35207), Windows SDK 10.0.22621.0 and Unreal's bundled .NET 10.0.203. The current prepared Core uses Python 3.14.5. Do not replace working tools or copy a Windows virtual environment to another host.
+Use UE 5.8.3, PowerShell 7, Git, Visual Studio 2022 with C++ build tools/Windows SDK, and VS Code. The existing workstation uses VS2022 17.14, MSVC 14.44.35229 (folder 14.44.35207), Windows SDK 10.0.22621.0 and Unreal's bundled .NET 10.0.203. The Core preparation route requires native Python 3.14; this workstation uses 3.14.5. Do not replace working tools or copy a Windows virtual environment to another host.
 
-For a fresh Core environment, follow [native Windows Core preparation](docs/development/core-startup.md#prepare-a-fresh-native-windows-core-environment). For the existing prepared Managed runtime, no reinstall is needed.
+For a fresh Core environment, follow [native Windows Core preparation](docs/development/core-startup.md#prepare-a-fresh-native-windows-core-environment). Keep existing44.5/44.3 environments intact; Core 46 preparation uses separate fresh destinations.
 
 Build the existing **Editor** target; do not rerun the project-creation script:
 
@@ -230,7 +212,7 @@ Additional startup/authentication details and **Python Core installation** recip
 
 ## Related projects
 
-- [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Python package `warhammer40k-core-v2`. P1c selects unmerged4f9 /44.5.0 in a separate source/runtime; the reference checkout and preserved preview remain5f509 /44.3.33.
+- [Warhammer_40k_AI](../Warhammer_40k_AI/README.md): separate authoritative Core, reference-only sibling. Python package `warhammer40k-core-v2`. P2c selects main fc52 /46.0.0 in a separate source/runtime; retained 44.5/44.3 environments and the reference checkout remain unchanged.
 - [Warhammer_40k_UI_arcade](../Warhammer_40k_UI_arcade/README.md): existing Arcade client and behavioral/configuration reference; [original migration plan](../Warhammer_40k_UI_arcade/docs/plans/migration/unreal-migration-plan.md).
 - `Warhammer_40k_UI` is the owner's reference name mapped to that local Arcade checkout. [Import provenance](docs/plans/unreal-migration-plan-through-r146.md#repository-routes-and-provenance) records the mapping.
 
@@ -246,4 +228,4 @@ The [older manual-camera record](docs/plans/evidence/2026-10-24-live-core-camera
 
 [PR #3](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/3) [PR #4](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/4) and [PR #5](https://github.com/SobolGaming/Warhammer_40k_UI_unreal/pull/5) are merged. PR #4's [bounded P1a evidence](docs/plans/evidence/2026-10-24-p1a-windows-package.md) remains historical. P1b's completed checks do not close full P1, clean-machine or Linux requirements. The [earlier sequence-label correction](docs/plans/evidence/2026-10-24-architecture-mermaid.json) retains its original Mermaid parser evidence.
 
-The owner's standing visible-testing authorization is active until explicitly revoked; previous HOLD statements and consumed run scopes remain historical. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts. P1c/PR #6 is merged. P2a/PR #7 merged with the bounded known-session reopen workflow; general gameplay remains later work. Required later human/platform checks have individual instructions and unchecked criteria HV-01–HV-06 in the canonical plan.
+The owner's standing visible-testing authorization is active until explicitly revoked; previous HOLD statements and consumed run scopes remain historical. The [evidence index](docs/plans/README.md), [prior README](README-through-r146.md) and historical plan preserve earlier accepted scopes and all failed attempts. P1c/PR #6, P2a/PR #7 and P2b/PR #8 are merged. P2c/PR #9 completed its bounded Core 46 verification and is ready for review, unmerged; its results remain separate from those historical results. General gameplay remains later work. Required later human/platform checks have individual instructions and unchecked criteria HV-01–HV-06 in the canonical plan.

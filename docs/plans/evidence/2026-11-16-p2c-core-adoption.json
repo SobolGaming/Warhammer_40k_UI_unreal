@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "dateUtc": "2026-11-16",
+  "status": "BOUNDED_WINDOWS_WORKFLOW_PASS",
+  "sourceHead": "7ee4a4fac6f3cb04aa1f255135000036f270d77b",
+  "coreCommit": "fc52e9166ff6380b606269ce362f4f1cbc6a2835",
+  "contractVersion": "46.0.0",
+  "coreBuildId": "warhammer40k-core-v2:runtime-tree-sha256-v1:ae914a56833e43a3bbf086730b354c7a18673ccc15ca93e4b474347b95380f19",
+  "coreResources": 3256,
+  "package": {
+    "elapsedSeconds": 32.1022691,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\packages\\20261116T222645Z-a3b97e66\\package-result.json",
+      "bytes": 2524,
+      "sha256": "d517b0a179b645e9cddc62b7cee56818133ddd923fe97095b30a593f08a00dcf"
+    },
+    "outsideCopy": {
+      "outsideRoot": "C:\\SWDev\\warhammer\\.local\\manual-client\\p2c\\7ee4a4f\\Windows",
+      "clientExecutable": "C:\\SWDev\\warhammer\\.local\\manual-client\\p2c\\7ee4a4f\\Windows\\WarhammerClient\\Binaries\\Win64\\WarhammerClient.exe",
+      "files": 50,
+      "bytes": 976189105,
+      "exactMembershipAndHashes": true
+    },
+    "executable": {
+      "path": "WarhammerClient/Binaries/Win64/WarhammerClient.exe",
+      "bytes": 332589568,
+      "sha256": "133d18325ac773e960401645b09b5bb2eca15c3d3247e09d9bc6abffe9c283e8"
+    }
+  },
+  "unit": {
+    "count": 23,
+    "status": "PASS",
+    "ownedJobEmpty": true,
+    "result": {
+      "privatePath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\p2c-unit-summary.json",
+      "bytes": 4151,
+      "sha256": "7429de65ca0aecfdfba2c7143a5269b01b21da279f8e6fef849f20972dd687f5"
+    }
+  },
+  "resources": {
+    "status": "PASS",
+    "mode": "Resources",
+    "runRoot": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T222822Z-1fbf490efa464afbafc061a3aa50df51",
+    "resultPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T222822Z-1fbf490efa464afbafc061a3aa50df51\\result.json",
+    "tests": 4,
+    "nativeExitCode": 0
+  },
+  "managed": {
+    "status": "PASS",
+    "mode": "Core",
+    "runRoot": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T222832Z-fccbc362a1514a29b07a047a245bb2ca",
+    "resultPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T222832Z-fccbc362a1514a29b07a047a245bb2ca\\result.json",
+    "tests": 3,
+    "nativeExitCode": 0
+  },
+  "attach": {
+    "status": "PASS",
+    "sourceHead": "7ee4a4fac6f3cb04aa1f255135000036f270d77b",
+    "startedUtc": "2026-11-16T22:29:33.4342310Z",
+    "clientResult": {
+      "status": "PASS",
+      "mode": "Core",
+      "runRoot": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T222942Z-f865cf314a414a9ba041a4399d5cc4d6",
+      "resultPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\testpackage\\20261116T222942Z-f865cf314a414a9ba041a4399d5cc4d6\\result.json",
+      "tests": 3,
+      "nativeExitCode": 0
+    },
+    "healthAfterClient": {
+      "mode": "Attach",
+      "status": "ATTACHED_HEALTHY",
+      "owned": false,
+      "endpoint": "http://127.0.0.1:19139/",
+      "receiptPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\core-host\\attach-20261116T223006Z-983f5017eec44fffa7337c3dfac106bf\\receipt.json"
+    },
+    "separateOwnerStop": {
+      "status": "STOPPED",
+      "owned": true,
+      "forcedTermination": false,
+      "receiptPath": "C:\\SWDev\\warhammer\\Warhammer_40k_UI_unreal\\.local\\development\\core-host\\20261116T222933Z-3be44c5c39794e84a81eaa0fc4ab4d80\\receipt.json"
+    },
+    "finishedUtc": "2026-11-16T22:30:07.2544479Z"
+  },
+  "nativeExecutions": 33,
+  "distinctNativeNames": 30,
+  "offlineControls": {
+    "reportedBy": "next_slice_assessment agent tool transcript",
+    "approximateUtc": "2026-11-16 around22:11 UTC; individual times not instrumented",
+    "profile": 15,
+    "powershellLauncher": 16,
+    "pythonLauncher": 25,
+    "credentials": 12,
+    "rawOutput": "tool transcript only; no invented file receipt",
+    "initialPythonAttempt": "Three existing filesystem controls hit sandbox default-temp permission failures; rerun with workspace-local TEMP/TMP passed25."
+  },
+  "preservedFailures": [
+    {
+      "source": "e9a495e",
+      "result": ".local/packages/20261116T221542Z-c76b0651/package-result.json",
+      "cause": "Missing PlatformCryptoTypes.h enum definition."
+    },
+    {
+      "source": "310fabe",
+      "result": ".local/packages/20261116T221818Z-fcd3f7cd/package-result.json",
+      "cause": "Editor link response lacked direct PlatformCryptoContext dependency."
+    },
+    {
+      "source": "3cea474",
+      "result": ".local/testpackage/20261116T222129Z-2e60c69377894b3cac60a6443f979cb6/result.json",
+      "cause": "Three real workflows rejected selected46 nested pending-decision v6 because client requiredv5."
+    },
+    {
+      "source": "f37b703",
+      "result": ".local/packages/20261116T222455Z-c67a7d9d/package-result.json",
+      "cause": "New test called ToSharedRef on an existing TSharedRef."
+    }
+  ],
+  "manualCriteria": {
+    "P2C-V1": "PASS",
+    "P2C-V2": "PASS"
+  },
+  "limits": "Windows x64 non-visible evidence only. No rendering/physical-input/Linux/clean-host/full-gameplay acceptance.",
+  "visibleEvidence": "2026-11-16-p2c-visible.json"
+}

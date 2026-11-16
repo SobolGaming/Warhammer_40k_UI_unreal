@@ -347,7 +347,7 @@ bool StringArray(const TSharedPtr<FJsonValue>& Value)
     return true;
 }
 
-bool Session(const TSharedPtr<FJsonObject>& Object, int64& Revision, FReadError& Error)
+bool Session(const TSharedPtr<FJsonObject>& Object, int64& Revision, FReadError& Error, EWireProfile Profile)
 {
     if (!ExactKeys(Object, {TEXT("schema_version"), TEXT("session_id"), TEXT("game_id"),
         TEXT("session_state"), TEXT("session_revision"), TEXT("ruleset_id"), TEXT("ruleset_descriptor_hash"),
@@ -355,14 +355,14 @@ bool Session(const TSharedPtr<FJsonObject>& Object, int64& Revision, FReadError&
         TEXT("projection_state_hash"), TEXT("event_cursor"), TEXT("lifecycle_status"), TEXT("terminal_reason"),
         TEXT("created_at"), TEXT("last_activity_at"), TEXT("visibility"), TEXT("server_contract_version"),
         TEXT("engine_version"), TEXT("engine_build_id")}) ||
-        !Schema(Object, TEXT("session-metadata-v44-contract")))
+        !Schema(Object, Profile == EWireProfile::Contract46 ? TEXT("session-metadata-v46-contract") : TEXT("session-metadata-v44-contract")))
     {
         return false;
     }
     FString Text;
     for (const TCHAR* Key : {TEXT("session_id"), TEXT("game_id"), TEXT("ruleset_descriptor_hash"),
         TEXT("catalog_id"), TEXT("source_package_id"), TEXT("source_hash"), TEXT("projection_state_hash"),
-        TEXT("event_cursor"), TEXT("created_at"), TEXT("last_activity_at"), TEXT("server_contract_version"),
+        TEXT("event_cursor"), TEXT("created_at"), TEXT("server_contract_version"),
         TEXT("engine_version"), TEXT("engine_build_id")})
     {
         if (!StringField(Object, Key, Text))
@@ -370,6 +370,15 @@ bool Session(const TSharedPtr<FJsonObject>& Object, int64& Revision, FReadError&
             return false;
         }
     }
+    const TSharedPtr<FJsonValue> Activity = Field(Object, TEXT("last_activity_at"));
+    if (Profile == EWireProfile::Contract46)
+    {
+        const TSharedPtr<FJsonObject> Visibility = ObjectField(Object, TEXT("visibility"));
+        bool bOmniscient = false;
+        if (!BoolField(Visibility, TEXT("omniscient"), bOmniscient) ||
+            (bOmniscient ? !StringField(Object, TEXT("last_activity_at"), Text) : !Type(Activity, EJson::Null))) { return false; }
+    }
+    else if (!StringField(Object, TEXT("last_activity_at"), Text)) { return false; }
     if (!StringField(Object, TEXT("session_state"), Text) ||
         !IsOneOf(Text, {TEXT("created"), TEXT("active"), TEXT("terminal"), TEXT("closed")}) ||
         !ReadExactRevision(Field(Object, TEXT("session_revision")), Revision, Error) ||
@@ -504,7 +513,7 @@ bool ReadExactRevision(const TSharedPtr<FJsonValue>& Value, int64& OutRevision, 
     return true;
 }
 
-bool ReadCommandEnvelope(const FString& Text, FCommandEnvelope& OutEnvelope, FReadError& OutError)
+bool ReadCommandEnvelope(const FString& Text, FCommandEnvelope& OutEnvelope, FReadError& OutError, EWireProfile Profile)
 {
     OutEnvelope = {};
     FCommandEnvelope Candidate;
@@ -515,7 +524,7 @@ bool ReadCommandEnvelope(const FString& Text, FCommandEnvelope& OutEnvelope, FRe
     const TSharedPtr<FJsonObject>& Object = Candidate.Json;
     if (!ExactKeys(Object, {TEXT("schema_version"), TEXT("command_id"), TEXT("session_id"),
         TEXT("expected_session_revision"), TEXT("request_id"), TEXT("result_id"), TEXT("submission")}) ||
-        !Schema(Object, TEXT("session-command-envelope-v2-weapon-instances")) ||
+        !Schema(Object, Profile == EWireProfile::Contract46 ? TEXT("session-command-envelope-v3-viewer-identities") : TEXT("session-command-envelope-v2-weapon-instances")) ||
         !StringField(Object, TEXT("command_id"), Candidate.CommandId) ||
         !StringField(Object, TEXT("session_id"), Candidate.SessionId) ||
         !NullableString(Field(Object, TEXT("request_id")), Candidate.RequestId) ||
@@ -565,7 +574,7 @@ bool ReadCommandEnvelope(const FString& Text, FCommandEnvelope& OutEnvelope, FRe
     return true;
 }
 
-bool ReadOutcome(int32 HttpStatus, const FString& Text, FOutcome& OutOutcome, FReadError& OutError)
+bool ReadOutcome(int32 HttpStatus, const FString& Text, FOutcome& OutOutcome, FReadError& OutError, EWireProfile Profile)
 {
     OutOutcome = {};
     FOutcome Candidate;
@@ -575,25 +584,61 @@ bool ReadOutcome(int32 HttpStatus, const FString& Text, FOutcome& OutOutcome, FR
         return false;
     }
     const TSharedPtr<FJsonObject>& Object = Candidate.Json;
-    if (Schema(Object, TEXT("error-envelope-v1")))
+    const bool bContract46 = Profile == EWireProfile::Contract46;
+    if (Schema(Object, bContract46 ? TEXT("error-envelope-v2-diagnostics") : TEXT("error-envelope-v1")))
     {
         const TSharedPtr<FJsonObject> Error = ObjectField(Object, TEXT("error"));
         if (HttpStatus < 400 || HttpStatus > 599 || !ExactKeys(Object, {TEXT("schema_version"), TEXT("error")}) ||
-            !ExactKeys(Error, {TEXT("code"), TEXT("message")}) ||
+            !(ExactKeys(Error, {TEXT("code"), TEXT("message")}) ||
+                (bContract46 && ExactKeys(Error, {TEXT("code"), TEXT("message"), TEXT("diagnostics")}))) ||
             !StringField(Error, TEXT("code"), Candidate.Code) || !StringField(Error, TEXT("message"), Candidate.Message))
         {
             return Fail(OutError, TEXT("invalid_error"), TEXT("Error envelope requires its actual error HTTP status and string code/message."));
         }
+        const TSharedPtr<FJsonValue> DiagnosticValue = Field(Error, TEXT("diagnostics"));
+        if (DiagnosticValue.IsValid())
+        {
+            const TSharedPtr<FJsonObject> Diagnostics = ObjectField(Error, TEXT("diagnostics"));
+            FString Kind;
+            if (!StringField(Diagnostics, TEXT("kind"), Kind))
+            { return Fail(OutError, TEXT("invalid_error_diagnostics"), TEXT("Error diagnostics must have their declared typed kind.")); }
+            if (Candidate.Code.Equals(TEXT("proposal_invalid"), ESearchCase::CaseSensitive) && Kind.Equals(TEXT("proposal_validation"), ESearchCase::CaseSensitive))
+            {
+                const TSharedPtr<FJsonValue> Violations = Field(Diagnostics, TEXT("violations"));
+                if (!ExactKeys(Diagnostics, {TEXT("kind"), TEXT("violations")}) || !Type(Violations, EJson::Array) ||
+                    Violations->AsArray().IsEmpty() || Violations->AsArray().Num() > 4096)
+                { return Fail(OutError, TEXT("invalid_error_diagnostics"), TEXT("Proposal diagnostics require bounded supplied violations.")); }
+                for (const TSharedPtr<FJsonValue>& Item : Violations->AsArray())
+                {
+                    const TSharedPtr<FJsonObject> Violation = Type(Item, EJson::Object) ? Item->AsObject() : nullptr;
+                    FString Code; TOptional<FString> DiagnosticField;
+                    if (!ExactKeys(Violation, {TEXT("violation_code"), TEXT("field")}) ||
+                        !StringField(Violation, TEXT("violation_code"), Code) || Code.IsEmpty() ||
+                        !NullableString(Field(Violation, TEXT("field")), DiagnosticField) ||
+                        (DiagnosticField.IsSet() && DiagnosticField->IsEmpty()))
+                    { return Fail(OutError, TEXT("invalid_error_diagnostics"), TEXT("Proposal violation fields are invalid.")); }
+                }
+            }
+            else if (Candidate.Code.Equals(TEXT("rule_path_unsupported"), ESearchCase::CaseSensitive) && Kind.Equals(TEXT("unsupported_reason"), ESearchCase::CaseSensitive))
+            {
+                FString Reason;
+                if (!ExactKeys(Diagnostics, {TEXT("kind"), TEXT("reason_code")}) ||
+                    !StringField(Diagnostics, TEXT("reason_code"), Reason) || Reason.IsEmpty())
+                { return Fail(OutError, TEXT("invalid_error_diagnostics"), TEXT("Unsupported diagnostics require the supplied reason code.")); }
+            }
+            else { return Fail(OutError, TEXT("invalid_error_diagnostics"), TEXT("Error code and diagnostic kind do not match.")); }
+        }
         if (HttpStatus == 422 && IsOneOf(Candidate.Code, {TEXT("proposal_invalid"), TEXT("rule_path_unsupported")}))
         {
             Candidate.Kind = EOutcomeKind::UncommittedInvalid;
-            Candidate.FidelityGap = TEXT("Detailed engine reasons were not supplied by this HTTP response. Core issue #588.");
+            if (!DiagnosticValue.IsValid())
+            { Candidate.FidelityGap = TEXT("Detailed engine reasons were not supplied by this HTTP response. Core issue #588."); }
         }
         OutOutcome = MoveTemp(Candidate);
         return true;
     }
     FString Operation;
-    if (!Schema(Object, TEXT("session-command-outcome-v44-contract")) ||
+    if (!Schema(Object, bContract46 ? TEXT("session-command-outcome-v46-contract") : TEXT("session-command-outcome-v44-contract")) ||
         !ExactKeys(Object, {TEXT("schema_version"), TEXT("command_id"), TEXT("outcome_code"), TEXT("operation"),
             TEXT("committed"), TEXT("accepted"), TEXT("session"), TEXT("checkpoint"), TEXT("event_range")}) ||
         !StringField(Object, TEXT("command_id"), Candidate.CommandId) ||
@@ -630,7 +675,7 @@ bool ReadOutcome(int32 HttpStatus, const FString& Text, FOutcome& OutOutcome, FR
     FString Hash;
     FString Cursor;
     FString RangeCursor;
-    if (!Session(Metadata, Revision, OutError) ||
+    if (!Session(Metadata, Revision, OutError, Profile) ||
         !ExactKeys(Checkpoint, {TEXT("visibility_role"), TEXT("viewer_player_id"), TEXT("session_revision"),
             TEXT("projection_state_hash"), TEXT("event_cursor")}) ||
         !ReadExactRevision(Field(Checkpoint, TEXT("session_revision")), CheckpointRevision, OutError) ||
