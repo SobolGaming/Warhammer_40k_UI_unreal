@@ -3,6 +3,7 @@
 #include "Migration/CoreBoundaryEvidence.h"
 #include "Dom/JsonObject.h"
 #include "IPlatformCrypto.h"
+#include "PlatformCryptoTypes.h"
 #include "HAL/FileManager.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"

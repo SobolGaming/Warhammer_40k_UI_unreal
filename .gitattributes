@@ -136,3 +136,4 @@ docs/plans/evidence/2026-10-21-e04a-game-source-adoption.json -text whitespace=c
 # Core canonical runtime/fixture bytes are checksum-bound across platforms.
 Content/RuntimeData/Core/*/session-create.json -text
 tests/migration/fixtures/4f9bef0df2fb974d1285232a1009b8781926361d/** -text
+tests/migration/fixtures/fc52e9166ff6380b606269ce362f4f1cbc6a2835/** -text

@@ -18,6 +18,8 @@ The [source-backed46 delta](research/2026-11-16-core-46-reference.md) binds exac
 
 **Preparation result:** a separate exact46 installed runtime verified the expected build and3256 resources on2026-11-16; reference HEAD/status stayed unchanged. Private receipt: `.local/development/core-prepare/20261116T221203Z-fc20e2bad8e34cf2a969386b2f12a38d/result.json`. The earlier alias-path refusal and sandbox clone failure remain failures; the successful run used the physical Python3.14.5 directory and normal authorized execution. No client/native/rendered acceptance follows from installation.
 
+The first Windows package build at `e9a495eb852d97f9fcaf77eac5cce142d438f220` failed because the random-result enum needs the explicit installed `PlatformCryptoTypes.h` definition, rather than its forward declaration. Retained private output: `.local/packages/20261116T221542Z-c76b0651/package-result.json` and UBT logs. The include repair and exact-byte attribute for the new committed reference fixtures are separate source changes; affected build, native tests and fresh independent reviews must pass before rendered acceptance. The direct Python HTTP smoke verified46 schemas, null activity and actual player counters9→11 and9→13; it is not Unreal integration or visible acceptance.
+
 Original implementation criteria (freeze before code changes):
 
 - [x] Prepare a separate clean exact-source46 Python runtime, verify installed build/resources and launch selection, and preserve sibling HEAD/worktree and older runtimes. New source defaults select46 explicitly; old packages require their explicit older `-CoreVersion`. Installed identity verified as recorded above; launcher checks are separate from the real workflow tests.
