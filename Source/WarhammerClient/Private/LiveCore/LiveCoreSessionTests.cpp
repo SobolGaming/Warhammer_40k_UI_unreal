@@ -42,6 +42,9 @@ bool Load(FAutomationTestBase& Test, const TCHAR* Relative, FString& Out)
         {
             Root->SetStringField(TEXT("schema_version"), TEXT("session-projection-v10-viewer-identities"));
             (*Projection)->SetStringField(TEXT("projection_schema"), TEXT("game-view-v14-viewer-identities"));
+            const TSharedPtr<FJsonObject>* Pending = nullptr;
+            if ((*Projection)->TryGetObjectField(TEXT("pending_decision"), Pending))
+            { (*Pending)->SetStringField(TEXT("schema_version"), TEXT("decision-request-view-v6-viewer-identities")); }
             Out = Serialize(Root.ToSharedRef());
             Test.AddInfo(TEXT("Synthetic46 projection parser control derived from historical wire; not a46 runtime result."));
         }
@@ -484,6 +487,50 @@ bool FLiveCoreVisibleCounterTest::RunTest(const FString& Parameters)
     Metadata->SetNumberField(TEXT("session_revision"), 2); Checkpoint->SetNumberField(TEXT("session_revision"), 2);
     TestFalse(TEXT("Uncommitted receipt cannot claim new committed work"), LiveCoreProtocol::ReadOutcome(
         Serialize(Parsed.Json.ToSharedRef()), 422, Parsed.CommandId, SessionId, 1, false, TEXT("submit_finite_decision"), Outcome, Error));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLiveCoreSelectedPublicExampleTest, "Warhammer.LiveCore.Unit.Core46.SelectedPublicExample", Flags)
+bool FLiveCoreSelectedPublicExampleTest::RunTest(const FString& Parameters)
+{
+    FString Text, Error;
+    if (!LoadSelected(*this, TEXT("contracts/examples/projections/initial_setup_view_player1.json"), Text)) { return false; }
+    E01::FReadError ReadError; TSharedPtr<FJsonObject> View;
+    if (!E01::ParseObject(Text, View, ReadError)) { AddError(TEXT("Selected public GameView example is invalid.")); return false; }
+    AddInfo(TEXT("The entire exact selected public46 GameView is parsed unchanged inside a synthetic session envelope; this is a source-example regression, not live HTTP evidence."));
+    const FString Before = Serialize(View.ToSharedRef());
+    const FString SessionId(TEXT("session-selected-public-example"));
+    const auto Envelope = MakeShared<FJsonObject>();
+    Envelope->SetStringField(TEXT("schema_version"), TEXT("session-projection-v10-viewer-identities"));
+    Envelope->SetStringField(TEXT("session_id"), SessionId);
+    Envelope->SetStringField(TEXT("game_id"), View->GetStringField(TEXT("game_id")));
+    Envelope->SetNumberField(TEXT("session_revision"), 7);
+    Envelope->SetStringField(TEXT("visibility_role"), View->GetStringField(TEXT("viewer_role")));
+    Envelope->SetStringField(TEXT("projection_state_hash"), View->GetStringField(TEXT("projection_state_hash")));
+    Envelope->SetStringField(TEXT("event_cursor"), TEXT("synthetic-opaque-cursor"));
+    Envelope->SetNumberField(TEXT("retention_limit"), 4096);
+    Envelope->SetNumberField(TEXT("revision_retention_limit"), 128);
+    Envelope->SetObjectField(TEXT("projection"), View);
+    FLiveCoreState State; State.SessionId = SessionId;
+    if (!TestTrue(TEXT("Whole selected46 GameView parses without schema or field rewriting"), LiveCoreProtocol::ReadProjection(
+        Serialize(Envelope.ToSharedRef()), SessionId, State, Error, View->GetStringField(TEXT("viewer_player_id")))))
+    { AddError(TEXT("Selected public example parse failed: ") + Error); return false; }
+    const auto Pending = View->GetObjectField(TEXT("pending_decision"));
+    const auto& Options = Pending->GetArrayField(TEXT("options"));
+    TestEqual(TEXT("Selected example is the actual46 request family"), Pending->GetStringField(TEXT("schema_version")), FString(TEXT("decision-request-view-v6-viewer-identities")));
+    TestEqual(TEXT("Issued request alias remains byte-for-byte text"), State.RequestId, Pending->GetStringField(TEXT("request_id")));
+    TestEqual(TEXT("Only the selected example's offered options are retained"), State.Options.Num(), Options.Num());
+    for (int32 Index = 0; Index < State.Options.Num() && Index < Options.Num(); ++Index)
+    {
+        const auto Option = Options[Index]->AsObject();
+        TestEqual(TEXT("Every issued option ID remains unchanged"), State.Options[Index].Id, Option->GetStringField(TEXT("option_id")));
+        TestEqual(TEXT("Every supplied option label remains unchanged"), State.Options[Index].Label, Option->GetStringField(TEXT("label")));
+    }
+    TestTrue(TEXT("The complete public example object was not changed by parsing"), Serialize(View.ToSharedRef()).Equals(Before, ESearchCase::CaseSensitive));
+    TestTrue(TEXT("Selected public rosters and actual battlefield bounds are available"), State.bHasPublicArmyRosters && State.PublicArmyRosters.Num() == View->GetArrayField(TEXT("public_army_rosters")).Num() && State.BoardBoundsInches.bIsValid);
+    Pending->SetStringField(TEXT("schema_version"), TEXT("decision-request-view-v5-phase17n-step4"));
+    TestFalse(TEXT("Historical pending-request family is rejected in the46 reader"), LiveCoreProtocol::ReadProjection(
+        Serialize(Envelope.ToSharedRef()), SessionId, State, Error));
     return true;
 }
 

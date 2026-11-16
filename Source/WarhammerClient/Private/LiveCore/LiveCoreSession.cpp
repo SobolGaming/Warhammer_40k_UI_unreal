@@ -437,7 +437,7 @@ bool ReadProjection(const FString& Text, const FString& SessionId, FLiveCoreStat
     if (PendingValue->Type != EJson::Null)
     {
         const auto Pending = PendingValue->Type == EJson::Object ? PendingValue->AsObject() : nullptr;
-        if (!IsString(Pending, TEXT("schema_version"), TEXT("decision-request-view-v5-phase17n-step4")) || !String(Pending, TEXT("decision_type"), Candidate.RequestType))
+        if (!IsString(Pending, TEXT("schema_version"), TEXT("decision-request-view-v6-viewer-identities")) || !String(Pending, TEXT("decision_type"), Candidate.RequestType))
         { OutError = TEXT("Invalid current DecisionRequest schema/type."); return false; }
         if (Exact(Candidate.RequestType, TEXT("hidden_decision")))
         {

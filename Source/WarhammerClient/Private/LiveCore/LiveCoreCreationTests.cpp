@@ -375,6 +375,8 @@ bool FLiveCoreHandoffRetryTest::RunTest(const FString& Parameters)
     Projection->SetStringField(TEXT("session_id"), SessionId);
     Projection->SetStringField(TEXT("schema_version"), TEXT("session-projection-v10-viewer-identities"));
     Projection->GetObjectField(TEXT("projection"))->SetStringField(TEXT("projection_schema"), TEXT("game-view-v14-viewer-identities"));
+    Projection->GetObjectField(TEXT("projection"))->GetObjectField(TEXT("pending_decision"))->SetStringField(
+        TEXT("schema_version"), TEXT("decision-request-view-v6-viewer-identities"));
     ProjectionA.Reset();
     { const auto Writer = TJsonWriterFactory<>::Create(&ProjectionA); FJsonSerializer::Serialize(Projection.ToSharedRef(), Writer); }
     // These are synthetic callback controls, not a claim about live Core's private fields.
