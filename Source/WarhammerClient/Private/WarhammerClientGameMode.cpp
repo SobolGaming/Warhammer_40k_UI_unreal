@@ -150,6 +150,14 @@ class SLiveCorePanel : public SCompoundWidget
 public:
     SLATE_BEGIN_ARGS(SLiveCorePanel) {} SLATE_END_ARGS()
     virtual bool SupportsKeyboardFocus() const override { return true; }
+    virtual FReply OnMouseButtonDown(const FGeometry& Geometry, const FPointerEvent& Event) override
+    {
+        // Read-only roster/background clicks must take focus from the board too.
+        // Interactive children still handle their own clicks before bubbling here.
+        return Event.GetEffectingButton() == EKeys::LeftMouseButton
+            ? FReply::Handled().SetUserFocus(AsShared(), EFocusCause::Mouse)
+            : SCompoundWidget::OnMouseButtonDown(Geometry, Event);
+    }
 
     void Construct(const FArguments&, FLiveCoreScene* InScene)
     {

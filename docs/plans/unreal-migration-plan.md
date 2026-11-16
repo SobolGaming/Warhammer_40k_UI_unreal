@@ -14,6 +14,8 @@ Finite deliverable: show the **existing typed, viewer-scoped public army-roster 
 
 No roster editing, battlefield picking/highlighting, physical-instance joins, new decision editor, new HTTP route, rule calculation, Core upgrade, styling redesign or Linux acceptance belongs in this PR. The panel uses existing scrolling and camera/UI ownership. A later first-class interface can replace this preview presentation; owner involvement is for visual style preference, not routine functional pass/fail testing.
 
+Initial candidate7c5e556 passed the48.219-second Windows Editor/Game package,28 Unit,4 resources and3 real Managed workflows. The first separate Attach host startup failed before any client at `Get-OwnedIdentity` (`MainModule.FileName` unavailable); raw host logs/shutdown marker remain private. A separate retry passed all3 Attach workflows, authenticated health and normal separate-owner stop. Both CLI SOURCE roles were infrastructure-BLOCKED before file reads; their reports remain preserved. A fresh CODE fallback passed7c SOURCE within its documented behavioral read-only limits. Source inspection then added explicit panel focus for read-only background/roster clicks; the changed candidate needs its own affected build/review/input checks before visible acceptance. No failed attempt is relabelled PASS.
+
 Original implementation criteria (freeze before code):
 
 - [ ] Add a pure read-only presentation builder over the existing roster DTO; no Core/HTTP/catalog access. Preserve all issued IDs and one-based bearer indices. Distinguish unavailable inventory, available-empty inventory, absent Warlord, undisclosed declarations and disclosed-empty declarations.
